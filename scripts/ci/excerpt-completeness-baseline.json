@@ -1,0 +1,4029 @@
+{
+  "version": 2,
+  "initialEntries": [
+    {
+      "file": "content/blog-meta-canton-fr-de.ts",
+      "locale": "de",
+      "id": "disoccupazione-friburgo-settembre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-fr-de.ts",
+      "locale": "de",
+      "id": "fribourg-modifica-licd",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-fr-en.ts",
+      "locale": "en",
+      "id": "disoccupazione-friburgo-settembre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-fr-en.ts",
+      "locale": "en",
+      "id": "fribourg-modifica-licd",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ge-de.ts",
+      "locale": "de",
+      "id": "accordo-cure-oncologiche-ginevra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ge-en.ts",
+      "locale": "en",
+      "id": "accordo-cure-oncologiche-ginevra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-gr-de.ts",
+      "locale": "de",
+      "id": "grigioni-valanghe-scuola-rossa-roveredo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-gr-en.ts",
+      "locale": "en",
+      "id": "grigioni-valanghe-scuola-rossa-roveredo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-gr-en.ts",
+      "locale": "en",
+      "id": "strada-calanca-chiusura-preventiva",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-gr-it.ts",
+      "locale": "it",
+      "id": "strada-calanca-chiusura-preventiva",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ju-de.ts",
+      "locale": "de",
+      "id": "fondo-clima-giura-2028",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ju-en.ts",
+      "locale": "en",
+      "id": "fondo-clima-giura-2028",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-lu-de.ts",
+      "locale": "de",
+      "id": "lucerna-salute-mentale-banchi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-lu-en.ts",
+      "locale": "en",
+      "id": "lucerna-salute-mentale-banchi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-de.ts",
+      "locale": "de",
+      "id": "aldi-chiude-centro-neuchatel",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-de.ts",
+      "locale": "de",
+      "id": "disoccupazione-stabile-4-4-neuchatel-settembre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-de.ts",
+      "locale": "de",
+      "id": "neuchatel-referendum-salari-minimi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-de.ts",
+      "locale": "de",
+      "id": "neuchatel-rinnova-politica-abitativa-con-24-milioni",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-en.ts",
+      "locale": "en",
+      "id": "aldi-chiude-centro-neuchatel",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-en.ts",
+      "locale": "en",
+      "id": "disoccupazione-stabile-4-4-neuchatel-settembre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-en.ts",
+      "locale": "en",
+      "id": "neuchatel-referendum-salari-minimi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-en.ts",
+      "locale": "en",
+      "id": "neuchatel-rinnova-politica-abitativa-con-24-milioni",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-sg-de.ts",
+      "locale": "de",
+      "id": "canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-sg-de.ts",
+      "locale": "de",
+      "id": "incidente-a13-widnau-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-sg-en.ts",
+      "locale": "en",
+      "id": "canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-sg-en.ts",
+      "locale": "en",
+      "id": "incidente-a13-widnau-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-so-de.ts",
+      "locale": "de",
+      "id": "soletta-progetti-trasporto-governo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-so-en.ts",
+      "locale": "en",
+      "id": "soletta-progetti-trasporto-governo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-de.ts",
+      "locale": "de",
+      "id": "a2-mendrisio-melano-risanamento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-de.ts",
+      "locale": "de",
+      "id": "capitale-lpp-rimborso-imposta-fonte",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-de.ts",
+      "locale": "de",
+      "id": "decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-de.ts",
+      "locale": "de",
+      "id": "scambio-dati-salariali-2027",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-en.ts",
+      "locale": "en",
+      "id": "a2-mendrisio-melano-risanamento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-en.ts",
+      "locale": "en",
+      "id": "capitale-lpp-rimborso-imposta-fonte",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-en.ts",
+      "locale": "en",
+      "id": "decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-en.ts",
+      "locale": "en",
+      "id": "scambio-dati-salariali-2027",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vd-de.ts",
+      "locale": "de",
+      "id": "cdhr-frontalieri-vaud-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vd-de.ts",
+      "locale": "de",
+      "id": "morges-mobilita-consultazione-2045",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vd-de.ts",
+      "locale": "de",
+      "id": "vaud-budget-2027-revisione-12percento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vd-en.ts",
+      "locale": "en",
+      "id": "cdhr-frontalieri-vaud-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vd-en.ts",
+      "locale": "en",
+      "id": "morges-mobilita-consultazione-2045",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vd-en.ts",
+      "locale": "en",
+      "id": "vaud-budget-2027-revisione-12percento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vs-de.ts",
+      "locale": "de",
+      "id": "allerta-botulismo-terrina-vallese",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vs-de.ts",
+      "locale": "de",
+      "id": "disoccupazione-vallese-fine-estate",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vs-en.ts",
+      "locale": "en",
+      "id": "allerta-botulismo-terrina-vallese",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vs-en.ts",
+      "locale": "en",
+      "id": "disoccupazione-vallese-fine-estate",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "cancro-prostata-assistenza-svizzera",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "carriere-politica-economica",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "crescita-lavoro-intelligenza-artificiale",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "grigioni-preventivo-contributi-terzi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "hacker-frigoriferi-connessi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "incentivi-energetici-lucerna-requisiti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "intelligenza-artificiale-diritti-umani",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "lavaggio-denaro-avvocatura",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "lenu-referendum-firme-valide",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "lista-sanzioni-sesam-svizzera",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "marcel-salathe-ia-commento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "mercato-lavoro-ia-svizzera",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "motore-filo-epfl",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "parmelin-avs-ue",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "raffineria-cressier-carburanti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "raiffeisen-pil-inflazione-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "riserve-valutarie-settembre-stabili",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "salari-svizzera-talenti-stranieri",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "sostenibilita-abitativa-svizzera",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "svizzera-india-accordi-bilaterali",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "svizzera-leader-nella-robotica-217-aziende-e-7-000-posti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "tamedia-41-licenziamenti-13-a-losanna-e-ginevra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "tf-nega-sconto-cassa-malati-padre-affidamento-alternato",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "violazione-dati-publica-indagine",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "auto-elettrica-come-risparmiare-fino-al-50",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "cancro-prostata-assistenza-svizzera",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "carriere-politica-economica",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "crescita-lavoro-intelligenza-artificiale",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "ffs-sportelli-chiusi-stazioni",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "g-bewilligung-antrag-2026-step",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "grigioni-preventivo-contributi-terzi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "incentivi-energetici-lucerna-requisiti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "indennita-covid-abusi-aziende",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "intelligenza-artificiale-diritti-umani",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "lavaggio-denaro-avvocatura",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "lista-sanzioni-sesam-svizzera",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "marcel-salathe-ia-commento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "mercato-lavoro-ia-svizzera",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "motore-filo-epfl",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "parmelin-avs-ue",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "raffineria-cressier-carburanti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "raiffeisen-pil-inflazione-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "riserve-valutarie-settembre-stabili",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "salari-svizzera-talenti-stranieri",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "svizzera-india-accordi-bilaterali",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "svizzera-leader-nella-robotica-217-aziende-e-7-000-posti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "tamedia-41-licenziamenti-13-a-losanna-e-ginevra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "tf-nega-sconto-cassa-malati-padre-affidamento-alternato",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "violazione-dati-publica-indagine",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-fr.ts",
+      "locale": "fr",
+      "id": "hacker-frigoriferi-connessi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-fr.ts",
+      "locale": "fr",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-it.ts",
+      "locale": "it",
+      "id": "g-bewilligung-antrag-2026-step",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-it.ts",
+      "locale": "it",
+      "id": "grigioni-preventivo-contributi-terzi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-it.ts",
+      "locale": "it",
+      "id": "ia-pubblica-amministrazione-ticino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-it.ts",
+      "locale": "it",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "aggressione-van-villa-olmo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "agrivarese-angera-ottobre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "aperitivo-solidale-giubiasco",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "bellinzona-nord-svincolo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "biasca-17enne-arrestato-accoltellamento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "caduta-scala-locate-varesino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "cantello-teatro-dialettale-ottobre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "domodossola-arresto-hashish-stazione",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "ferrovia-albate-molteno-elettrificazione",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "festival-racconto-varese-ottobre",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "fischiava-treno-gorla",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "incidente-via-albisetti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "indennita-giornaliere-stop-cosa-fare",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "lifestyle-innovation-hub-chiasso",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "lugano-lucerna-partita-traffico",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "luvinate-progetto-motorio-materna",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "mcdonalds-pulizia-malnate-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "mendrisiotto-aziende-conciliabilita",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "monte-olimpino-treni-weekend",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "neutralizzazione-valori-stima-ticino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "openjobmetis-trieste-vittoria-kastritis",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "pedemontana-falso-pedaggio-sms",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "pedemontana-truffa-sms-frontalieri",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "petizione-recupero-carovita-ticino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "pro-patria-varese-5-2-coppa-italia",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "salute-lavoro-progetti-ticino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "scambio-portieri-lugano-ginevra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "tifosi-lucerna-lugano-traffico",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "treno-foliage-locarno-domodossola",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "vendemmia-mendrisiotto-lavoratori-terra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "aggressione-van-villa-olmo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "agrivarese-angera-ottobre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "aperitivo-solidale-giubiasco",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "bellinzona-nord-svincolo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "biasca-17enne-arrestato-accoltellamento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "caduta-scala-locate-varesino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "cantello-teatro-dialettale-ottobre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "domodossola-arresto-hashish-stazione",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "ferrovia-albate-molteno-elettrificazione",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "festival-racconto-varese-ottobre",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "fischiava-treno-gorla",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "furto-van-cernobbio-21enne",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "incidente-via-albisetti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "lifestyle-innovation-hub-chiasso",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "lugano-lucerna-partita-traffico",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "luvinate-progetto-motorio-materna",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "mcdonalds-pulizia-malnate-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "mendrisiotto-aziende-conciliabilita",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "monte-olimpino-treni-weekend",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "operazione-hermes-frodi-iva-450-mln-sequestri-11-mln",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "pedemontana-falso-pedaggio-sms",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "pedemontana-truffa-sms-frontalieri",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "petizione-recupero-carovita-ticino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "pro-patria-varese-5-2-coppa-italia",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "salute-lavoro-progetti-ticino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "scambio-portieri-lugano-ginevra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "tifosi-lucerna-lugano-traffico",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "treno-foliage-locarno-domodossola",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "vendemmia-mendrisiotto-lavoratori-terra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-fr.ts",
+      "locale": "fr",
+      "id": "raffica-scontri-varesotto",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-it.ts",
+      "locale": "it",
+      "id": "cantello-teatro-dialettale-ottobre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-it.ts",
+      "locale": "it",
+      "id": "cassano-indagine-schianto",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-it.ts",
+      "locale": "it",
+      "id": "lavori-autolaghi-ottobre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-it.ts",
+      "locale": "it",
+      "id": "openjobmetis-trieste-vittoria-kastritis",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/cantons/canton-gl/seo.ts",
+      "locale": "it",
+      "id": "glarona-detrazioni-energia-2029",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-gl/seo.ts",
+      "locale": "it",
+      "id": "glarona-detrazioni-energia-2029",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-gr/seo.ts",
+      "locale": "it",
+      "id": "strada-calanca-chiusura-preventiva",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-gr/seo.ts",
+      "locale": "it",
+      "id": "strada-calanca-chiusura-preventiva",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/cantons/canton-gr/seo.ts",
+      "locale": "it",
+      "id": "strada-calanca-chiusura-preventiva",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-ne/seo.ts",
+      "locale": "it",
+      "id": "consiglio-stato-21-ottobre-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-ne/seo.ts",
+      "locale": "it",
+      "id": "consiglio-stato-21-ottobre-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-sh/seo.ts",
+      "locale": "it",
+      "id": "pil-cantonale-2026-crescita",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-sh/seo.ts",
+      "locale": "it",
+      "id": "pil-cantonale-2026-crescita",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-tg/seo.ts",
+      "locale": "it",
+      "id": "pbv-rpg2-turgovia-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-tg/seo.ts",
+      "locale": "it",
+      "id": "pbv-rpg2-turgovia-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-ti/seo.ts",
+      "locale": "it",
+      "id": "gottardo-quadri-cupra-berna",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-ti/seo.ts",
+      "locale": "it",
+      "id": "gottardo-quadri-cupra-berna",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-ti/seo.ts",
+      "locale": "it",
+      "id": "rapporto-consiglio-federale-schengen",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-ti/seo.ts",
+      "locale": "it",
+      "id": "rapporto-consiglio-federale-schengen",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-vd/seo.ts",
+      "locale": "it",
+      "id": "hopital-nounours-chuv-lausanne",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-vd/seo.ts",
+      "locale": "it",
+      "id": "hopital-nounours-chuv-lausanne",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-zh/seo.ts",
+      "locale": "it",
+      "id": "vbz-tram-50-51-cambio",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-zh/seo.ts",
+      "locale": "it",
+      "id": "vbz-tram-50-51-cambio",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-2.ts",
+      "locale": "it",
+      "id": "iran-tajani-non-tratta-navi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-2.ts",
+      "locale": "it",
+      "id": "iran-tajani-non-tratta-navi",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-2.ts",
+      "locale": "it",
+      "id": "swissminiatur-miniera-sessa-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-2.ts",
+      "locale": "it",
+      "id": "swissminiatur-miniera-sessa-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-2.ts",
+      "locale": "it",
+      "id": "swissminiatur-miniera-sessa-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-4.ts",
+      "locale": "it",
+      "id": "salari-minimi-ccl-ticino-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-4.ts",
+      "locale": "it",
+      "id": "salari-minimi-ccl-ticino-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "aggressioni-notte-lugano",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "aggressioni-notte-lugano",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "assemblea-ccti-rotta-economia",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "assemblea-ccti-rotta-economia",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ata-critica-progetto-a2-mendrisio",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ata-critica-progetto-a2-mendrisio",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "bissone-torneo-scacchi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "bissone-torneo-scacchi",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cantello-teatro-dialettale-ottobre-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cantello-teatro-dialettale-ottobre-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cardano-al-campo-minorenne-arresto",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cardano-al-campo-minorenne-arresto",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "carne-vino-dogana-mendrisiotto",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "carne-vino-dogana-mendrisiotto",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cassano-indagine-schianto",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cassano-indagine-schianto",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cassano-indagine-schianto",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "como-manifestazioni-24-ottobre",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "como-manifestazioni-24-ottobre",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "controlli-polizia-cuvio-cuveglio",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "controlli-polizia-cuvio-cuveglio",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cotonificio-liuc-industrial-quest",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cotonificio-liuc-industrial-quest",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "dividenti-italiani-stop-alle-discriminazioni-fiscali-per-gli-enti-esteri",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "dividenti-italiani-stop-alle-discriminazioni-fiscali-per-gli-enti-esteri",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "evento-for-matching-varese-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "evento-for-matching-varese-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "fedeli-chiedono-chiarezza-diocesi-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "fedeli-chiedono-chiarezza-diocesi-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "fedeli-chiedono-chiarezza-diocesi-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "film-festival-diritti-umani-lugano-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "film-festival-diritti-umani-lugano-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "giovani-lavoro-futuro-ticino",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "giovani-lavoro-futuro-ticino",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "inchiesta-medico-locarnese",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "inchiesta-medico-locarnese",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "indagine-disparita-salariali-frontalieri",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "indagine-disparita-salariali-frontalieri",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "infermieri-osc-sindacati-stipendi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "infermieri-osc-sindacati-stipendi",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ispezione-edile-lurate",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ispezione-edile-lurate",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "kick-cocaine-gazzada-evento",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "kick-cocaine-gazzada-evento",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lavori-autolaghi-ottobre-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lavori-autolaghi-ottobre-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lavori-autolaghi-ottobre-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lavori-barriere-antirumore-a8",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lavori-barriere-antirumore-a8",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lite-stradale-castronno-traffico",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lite-stradale-castronno-traffico",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "littizzetto-critica-svizzera-crans-montana",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "littizzetto-critica-svizzera-crans-montana",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lombardia-partenza-ritardo",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lombardia-partenza-ritardo",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "montegrino-valtravaglia-aggressione-condanna",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "montegrino-valtravaglia-aggressione-condanna",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "openjobmetis-trieste-vittoria-kastritis",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "openjobmetis-trieste-vittoria-kastritis",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "openjobmetis-trieste-vittoria-kastritis",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "raffica-scontri-varesotto",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "raffica-scontri-varesotto",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ridurre-tempi-ripristino-a2-mezzovico",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "schianto-camerlata-quattro-feriti",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "schianto-camerlata-quattro-feriti",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "sospenda-riversamento-allitalia-della-quota-dellimposta-alla-fonte-prelevata-ai-frontalieri",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "sospenda-riversamento-allitalia-della-quota-dellimposta-alla-fonte-prelevata-ai-frontalieri",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ville-ponti-frontalieri-confronto",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ville-ponti-frontalieri-confronto",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "vivere-como-lavorare-ticino-frontaliere",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "vivere-como-lavorare-ticino-frontaliere",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "voto-cinque-temi-28-febbraio",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "voto-cinque-temi-28-febbraio",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "vpod-direttiva-canicola-scuole",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "vpod-direttiva-canicola-scuole",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "cybersicurezza-industriale-ticino-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "cybersicurezza-industriale-ticino-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "cybersicurezza-industriale-ticino-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "rinascita-praterie-sommerse-laghi-ticino",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "rinascita-praterie-sommerse-laghi-ticino",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "rinascita-praterie-sommerse-laghi-ticino",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "trasparenza-iniziative-popolari-ticino-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "trasparenza-iniziative-popolari-ticino-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "trasparenza-iniziative-popolari-ticino-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-7.ts",
+      "locale": "it",
+      "id": "iniziativa-democrazia-respinta-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-7.ts",
+      "locale": "it",
+      "id": "iniziativa-democrazia-respinta-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-7.ts",
+      "locale": "it",
+      "id": "iniziativa-democrazia-respinta-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "accordo-ue-sovranita-fiscale",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "accordo-ue-sovranita-fiscale",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "aerodromo-kaegiswil-sospensione-voli",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "aerodromo-kaegiswil-sospensione-voli",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "borse-studio-canton-zugo-requisiti-importi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "borse-studio-canton-zugo-requisiti-importi",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "di-molto-swiss-nuovo-ccl-per-personale-di-terra-settimana-scende-a-40-ore",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "di-molto-swiss-nuovo-ccl-per-personale-di-terra-settimana-scende-a-40-ore",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "di-molto-swiss-nuovo-ccl-per-personale-di-terra-settimana-scende-a-40-ore",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "disagi-treni-vaud-eclepens",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "disagi-treni-vaud-eclepens",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "g-bewilligung-antrag-2026-step",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "grigioni-preventivo-contributi-terzi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "grigioni-preventivo-contributi-terzi",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "grigioni-preventivo-contributi-terzi",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "guerra-medio-oriente-benzina-svizzera",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "guerra-medio-oriente-benzina-svizzera",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "hacker-frigoriferi-connessi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "hacker-frigoriferi-connessi",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "hacker-frigoriferi-connessi",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "ia-pubblica-amministrazione-ticino",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "ia-pubblica-amministrazione-ticino",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "ia-pubblica-amministrazione-ticino",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "lex-netflix-cinema-svizzero-2025",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "lex-netflix-cinema-svizzero-2025",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "manager-ffs-denaro-pubblico",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "manager-ffs-denaro-pubblico",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "mercato-affitti-san-gallo-canoni-diritto",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "mercato-affitti-san-gallo-canoni-diritto",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "orologio-lingotto-trump-seco",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "orologio-lingotto-trump-seco",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "parlamento-svizzera-cripto-centrali",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "parlamento-svizzera-cripto-centrali",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "seco-fmi-partenariato-economia",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "seco-fmi-partenariato-economia",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "sem-rinnovo-simic-paralisi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "sem-rinnovo-simic-paralisi",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "svizzera-attualita-istituzioni-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "svizzera-attualita-istituzioni-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "voto-matrimonio-tassazione-coppie",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "voto-matrimonio-tassazione-coppie",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "water-summit-zurich-2024",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "water-summit-zurich-2024",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog.ts",
+      "locale": "it",
+      "id": "autostrada-a9-chiude-de-notti-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog.ts",
+      "locale": "it",
+      "id": "autostrada-a9-chiude-de-notti-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog.ts",
+      "locale": "it",
+      "id": "autostrada-a9-chiude-de-notti-2026",
+      "field": "structuredData.description"
+    }
+  ],
+  "resolvedEntries": [
+    {
+      "file": "content/blog-meta-canton-gr-it.ts",
+      "locale": "it",
+      "id": "strada-calanca-chiusura-preventiva",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-fr.ts",
+      "locale": "fr",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-it.ts",
+      "locale": "it",
+      "id": "g-bewilligung-antrag-2026-step",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-it.ts",
+      "locale": "it",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-it.ts",
+      "locale": "it",
+      "id": "cantello-teatro-dialettale-ottobre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/cantons/canton-gr/seo.ts",
+      "locale": "it",
+      "id": "strada-calanca-chiusura-preventiva",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-gr/seo.ts",
+      "locale": "it",
+      "id": "strada-calanca-chiusura-preventiva",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/cantons/canton-gr/seo.ts",
+      "locale": "it",
+      "id": "strada-calanca-chiusura-preventiva",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-ti/seo.ts",
+      "locale": "it",
+      "id": "gottardo-quadri-cupra-berna",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-ti/seo.ts",
+      "locale": "it",
+      "id": "gottardo-quadri-cupra-berna",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-2.ts",
+      "locale": "it",
+      "id": "swissminiatur-miniera-sessa-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "aggressioni-notte-lugano",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "aggressioni-notte-lugano",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "bissone-torneo-scacchi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "bissone-torneo-scacchi",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cantello-teatro-dialettale-ottobre-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cantello-teatro-dialettale-ottobre-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cardano-al-campo-minorenne-arresto",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cardano-al-campo-minorenne-arresto",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "fedeli-chiedono-chiarezza-diocesi-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "fedeli-chiedono-chiarezza-diocesi-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "fedeli-chiedono-chiarezza-diocesi-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "littizzetto-critica-svizzera-crans-montana",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "littizzetto-critica-svizzera-crans-montana",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ridurre-tempi-ripristino-a2-mezzovico",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "vivere-como-lavorare-ticino-frontaliere",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "vivere-como-lavorare-ticino-frontaliere",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "cybersicurezza-industriale-ticino-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "rinascita-praterie-sommerse-laghi-ticino",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "trasparenza-iniziative-popolari-ticino-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-7.ts",
+      "locale": "it",
+      "id": "iniziativa-democrazia-respinta-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-7.ts",
+      "locale": "it",
+      "id": "iniziativa-democrazia-respinta-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-7.ts",
+      "locale": "it",
+      "id": "iniziativa-democrazia-respinta-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "accordo-ue-sovranita-fiscale",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "accordo-ue-sovranita-fiscale",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "di-molto-swiss-nuovo-ccl-per-personale-di-terra-settimana-scende-a-40-ore",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "di-molto-swiss-nuovo-ccl-per-personale-di-terra-settimana-scende-a-40-ore",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "di-molto-swiss-nuovo-ccl-per-personale-di-terra-settimana-scende-a-40-ore",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "g-bewilligung-antrag-2026-step",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "hacker-frigoriferi-connessi",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "parlamento-svizzera-cripto-centrali",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "parlamento-svizzera-cripto-centrali",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "seco-fmi-partenariato-economia",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "seco-fmi-partenariato-economia",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "svizzera-attualita-istituzioni-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "svizzera-attualita-istituzioni-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog.ts",
+      "locale": "it",
+      "id": "autostrada-a9-chiude-de-notti-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "infermieri-osc-sindacati-stipendi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "infermieri-osc-sindacati-stipendi",
+      "field": "structuredData.description"
+    }
+  ],
+  "entries": [
+    {
+      "file": "content/blog-meta-canton-fr-de.ts",
+      "locale": "de",
+      "id": "disoccupazione-friburgo-settembre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-fr-de.ts",
+      "locale": "de",
+      "id": "fribourg-modifica-licd",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-fr-en.ts",
+      "locale": "en",
+      "id": "disoccupazione-friburgo-settembre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-fr-en.ts",
+      "locale": "en",
+      "id": "fribourg-modifica-licd",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ge-de.ts",
+      "locale": "de",
+      "id": "accordo-cure-oncologiche-ginevra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ge-en.ts",
+      "locale": "en",
+      "id": "accordo-cure-oncologiche-ginevra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-gr-de.ts",
+      "locale": "de",
+      "id": "grigioni-valanghe-scuola-rossa-roveredo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-gr-en.ts",
+      "locale": "en",
+      "id": "grigioni-valanghe-scuola-rossa-roveredo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-gr-en.ts",
+      "locale": "en",
+      "id": "strada-calanca-chiusura-preventiva",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ju-de.ts",
+      "locale": "de",
+      "id": "fondo-clima-giura-2028",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ju-en.ts",
+      "locale": "en",
+      "id": "fondo-clima-giura-2028",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-lu-de.ts",
+      "locale": "de",
+      "id": "lucerna-salute-mentale-banchi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-lu-en.ts",
+      "locale": "en",
+      "id": "lucerna-salute-mentale-banchi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-de.ts",
+      "locale": "de",
+      "id": "aldi-chiude-centro-neuchatel",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-de.ts",
+      "locale": "de",
+      "id": "disoccupazione-stabile-4-4-neuchatel-settembre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-de.ts",
+      "locale": "de",
+      "id": "neuchatel-referendum-salari-minimi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-de.ts",
+      "locale": "de",
+      "id": "neuchatel-rinnova-politica-abitativa-con-24-milioni",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-en.ts",
+      "locale": "en",
+      "id": "aldi-chiude-centro-neuchatel",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-en.ts",
+      "locale": "en",
+      "id": "disoccupazione-stabile-4-4-neuchatel-settembre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-en.ts",
+      "locale": "en",
+      "id": "neuchatel-referendum-salari-minimi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ne-en.ts",
+      "locale": "en",
+      "id": "neuchatel-rinnova-politica-abitativa-con-24-milioni",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-sg-de.ts",
+      "locale": "de",
+      "id": "canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-sg-de.ts",
+      "locale": "de",
+      "id": "incidente-a13-widnau-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-sg-en.ts",
+      "locale": "en",
+      "id": "canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-sg-en.ts",
+      "locale": "en",
+      "id": "incidente-a13-widnau-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-so-de.ts",
+      "locale": "de",
+      "id": "soletta-progetti-trasporto-governo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-so-en.ts",
+      "locale": "en",
+      "id": "soletta-progetti-trasporto-governo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-de.ts",
+      "locale": "de",
+      "id": "a2-mendrisio-melano-risanamento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-de.ts",
+      "locale": "de",
+      "id": "capitale-lpp-rimborso-imposta-fonte",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-de.ts",
+      "locale": "de",
+      "id": "decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-de.ts",
+      "locale": "de",
+      "id": "scambio-dati-salariali-2027",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-en.ts",
+      "locale": "en",
+      "id": "a2-mendrisio-melano-risanamento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-en.ts",
+      "locale": "en",
+      "id": "capitale-lpp-rimborso-imposta-fonte",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-en.ts",
+      "locale": "en",
+      "id": "decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-ti-en.ts",
+      "locale": "en",
+      "id": "scambio-dati-salariali-2027",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vd-de.ts",
+      "locale": "de",
+      "id": "cdhr-frontalieri-vaud-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vd-de.ts",
+      "locale": "de",
+      "id": "morges-mobilita-consultazione-2045",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vd-de.ts",
+      "locale": "de",
+      "id": "vaud-budget-2027-revisione-12percento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vd-en.ts",
+      "locale": "en",
+      "id": "cdhr-frontalieri-vaud-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vd-en.ts",
+      "locale": "en",
+      "id": "morges-mobilita-consultazione-2045",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vd-en.ts",
+      "locale": "en",
+      "id": "vaud-budget-2027-revisione-12percento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vs-de.ts",
+      "locale": "de",
+      "id": "allerta-botulismo-terrina-vallese",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vs-de.ts",
+      "locale": "de",
+      "id": "disoccupazione-vallese-fine-estate",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vs-en.ts",
+      "locale": "en",
+      "id": "allerta-botulismo-terrina-vallese",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-canton-vs-en.ts",
+      "locale": "en",
+      "id": "disoccupazione-vallese-fine-estate",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "cancro-prostata-assistenza-svizzera",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "carriere-politica-economica",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "crescita-lavoro-intelligenza-artificiale",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "grigioni-preventivo-contributi-terzi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "hacker-frigoriferi-connessi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "incentivi-energetici-lucerna-requisiti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "intelligenza-artificiale-diritti-umani",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "lavaggio-denaro-avvocatura",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "lenu-referendum-firme-valide",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "lista-sanzioni-sesam-svizzera",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "marcel-salathe-ia-commento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "mercato-lavoro-ia-svizzera",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "motore-filo-epfl",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "parmelin-avs-ue",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "raffineria-cressier-carburanti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "raiffeisen-pil-inflazione-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "riserve-valutarie-settembre-stabili",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "salari-svizzera-talenti-stranieri",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "sostenibilita-abitativa-svizzera",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "svizzera-india-accordi-bilaterali",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "svizzera-leader-nella-robotica-217-aziende-e-7-000-posti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "tamedia-41-licenziamenti-13-a-losanna-e-ginevra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "tf-nega-sconto-cassa-malati-padre-affidamento-alternato",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "violazione-dati-publica-indagine",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "auto-elettrica-come-risparmiare-fino-al-50",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "cancro-prostata-assistenza-svizzera",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "carriere-politica-economica",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "crescita-lavoro-intelligenza-artificiale",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "ffs-sportelli-chiusi-stazioni",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "g-bewilligung-antrag-2026-step",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "grigioni-preventivo-contributi-terzi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "incentivi-energetici-lucerna-requisiti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "indennita-covid-abusi-aziende",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "intelligenza-artificiale-diritti-umani",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "lavaggio-denaro-avvocatura",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "lista-sanzioni-sesam-svizzera",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "marcel-salathe-ia-commento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "mercato-lavoro-ia-svizzera",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "motore-filo-epfl",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "parmelin-avs-ue",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "raffineria-cressier-carburanti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "raiffeisen-pil-inflazione-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "riserve-valutarie-settembre-stabili",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "salari-svizzera-talenti-stranieri",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "svizzera-india-accordi-bilaterali",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "svizzera-leader-nella-robotica-217-aziende-e-7-000-posti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "tamedia-41-licenziamenti-13-a-losanna-e-ginevra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "tf-nega-sconto-cassa-malati-padre-affidamento-alternato",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "violazione-dati-publica-indagine",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-fr.ts",
+      "locale": "fr",
+      "id": "hacker-frigoriferi-connessi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-it.ts",
+      "locale": "it",
+      "id": "grigioni-preventivo-contributi-terzi",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-it.ts",
+      "locale": "it",
+      "id": "ia-pubblica-amministrazione-ticino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "aggressione-van-villa-olmo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "agrivarese-angera-ottobre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "aperitivo-solidale-giubiasco",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "bellinzona-nord-svincolo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "biasca-17enne-arrestato-accoltellamento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "caduta-scala-locate-varesino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "cantello-teatro-dialettale-ottobre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "domodossola-arresto-hashish-stazione",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "ferrovia-albate-molteno-elettrificazione",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "festival-racconto-varese-ottobre",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "fischiava-treno-gorla",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "incidente-via-albisetti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "indennita-giornaliere-stop-cosa-fare",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "lifestyle-innovation-hub-chiasso",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "lugano-lucerna-partita-traffico",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "luvinate-progetto-motorio-materna",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "mcdonalds-pulizia-malnate-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "mendrisiotto-aziende-conciliabilita",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "monte-olimpino-treni-weekend",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "neutralizzazione-valori-stima-ticino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "openjobmetis-trieste-vittoria-kastritis",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "pedemontana-falso-pedaggio-sms",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "pedemontana-truffa-sms-frontalieri",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "petizione-recupero-carovita-ticino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "pro-patria-varese-5-2-coppa-italia",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "salute-lavoro-progetti-ticino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "scambio-portieri-lugano-ginevra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "tifosi-lucerna-lugano-traffico",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "treno-foliage-locarno-domodossola",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-de.ts",
+      "locale": "de",
+      "id": "vendemmia-mendrisiotto-lavoratori-terra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "aggressione-van-villa-olmo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "agrivarese-angera-ottobre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "aperitivo-solidale-giubiasco",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "bellinzona-nord-svincolo",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "biasca-17enne-arrestato-accoltellamento",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "caduta-scala-locate-varesino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "cantello-teatro-dialettale-ottobre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "domodossola-arresto-hashish-stazione",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "ferrovia-albate-molteno-elettrificazione",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "festival-racconto-varese-ottobre",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "fischiava-treno-gorla",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "furto-van-cernobbio-21enne",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "incidente-via-albisetti",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "lifestyle-innovation-hub-chiasso",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "lugano-lucerna-partita-traffico",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "luvinate-progetto-motorio-materna",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "mcdonalds-pulizia-malnate-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "mendrisiotto-aziende-conciliabilita",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "monte-olimpino-treni-weekend",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "operazione-hermes-frodi-iva-450-mln-sequestri-11-mln",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "pedemontana-falso-pedaggio-sms",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "pedemontana-truffa-sms-frontalieri",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "petizione-recupero-carovita-ticino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "pro-patria-varese-5-2-coppa-italia",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "salute-lavoro-progetti-ticino",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "scambio-portieri-lugano-ginevra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "tifosi-lucerna-lugano-traffico",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "treno-foliage-locarno-domodossola",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-en.ts",
+      "locale": "en",
+      "id": "vendemmia-mendrisiotto-lavoratori-terra",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-fr.ts",
+      "locale": "fr",
+      "id": "raffica-scontri-varesotto",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-it.ts",
+      "locale": "it",
+      "id": "cassano-indagine-schianto",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-it.ts",
+      "locale": "it",
+      "id": "lavori-autolaghi-ottobre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-it.ts",
+      "locale": "it",
+      "id": "openjobmetis-trieste-vittoria-kastritis",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/cantons/canton-gl/seo.ts",
+      "locale": "it",
+      "id": "glarona-detrazioni-energia-2029",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-gl/seo.ts",
+      "locale": "it",
+      "id": "glarona-detrazioni-energia-2029",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-ne/seo.ts",
+      "locale": "it",
+      "id": "consiglio-stato-21-ottobre-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-ne/seo.ts",
+      "locale": "it",
+      "id": "consiglio-stato-21-ottobre-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-sh/seo.ts",
+      "locale": "it",
+      "id": "pil-cantonale-2026-crescita",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-sh/seo.ts",
+      "locale": "it",
+      "id": "pil-cantonale-2026-crescita",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-tg/seo.ts",
+      "locale": "it",
+      "id": "pbv-rpg2-turgovia-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-tg/seo.ts",
+      "locale": "it",
+      "id": "pbv-rpg2-turgovia-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-ti/seo.ts",
+      "locale": "it",
+      "id": "rapporto-consiglio-federale-schengen",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-ti/seo.ts",
+      "locale": "it",
+      "id": "rapporto-consiglio-federale-schengen",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-vd/seo.ts",
+      "locale": "it",
+      "id": "hopital-nounours-chuv-lausanne",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-vd/seo.ts",
+      "locale": "it",
+      "id": "hopital-nounours-chuv-lausanne",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/cantons/canton-zh/seo.ts",
+      "locale": "it",
+      "id": "vbz-tram-50-51-cambio",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-zh/seo.ts",
+      "locale": "it",
+      "id": "vbz-tram-50-51-cambio",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-2.ts",
+      "locale": "it",
+      "id": "iran-tajani-non-tratta-navi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-2.ts",
+      "locale": "it",
+      "id": "iran-tajani-non-tratta-navi",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-2.ts",
+      "locale": "it",
+      "id": "swissminiatur-miniera-sessa-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-2.ts",
+      "locale": "it",
+      "id": "swissminiatur-miniera-sessa-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-4.ts",
+      "locale": "it",
+      "id": "salari-minimi-ccl-ticino-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-4.ts",
+      "locale": "it",
+      "id": "salari-minimi-ccl-ticino-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "assemblea-ccti-rotta-economia",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "assemblea-ccti-rotta-economia",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ata-critica-progetto-a2-mendrisio",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ata-critica-progetto-a2-mendrisio",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "carne-vino-dogana-mendrisiotto",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "carne-vino-dogana-mendrisiotto",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cassano-indagine-schianto",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cassano-indagine-schianto",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cassano-indagine-schianto",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "como-manifestazioni-24-ottobre",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "como-manifestazioni-24-ottobre",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "controlli-polizia-cuvio-cuveglio",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "controlli-polizia-cuvio-cuveglio",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cotonificio-liuc-industrial-quest",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cotonificio-liuc-industrial-quest",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "dividenti-italiani-stop-alle-discriminazioni-fiscali-per-gli-enti-esteri",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "dividenti-italiani-stop-alle-discriminazioni-fiscali-per-gli-enti-esteri",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "evento-for-matching-varese-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "evento-for-matching-varese-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "film-festival-diritti-umani-lugano-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "film-festival-diritti-umani-lugano-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "giovani-lavoro-futuro-ticino",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "giovani-lavoro-futuro-ticino",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "inchiesta-medico-locarnese",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "inchiesta-medico-locarnese",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "indagine-disparita-salariali-frontalieri",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "indagine-disparita-salariali-frontalieri",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ispezione-edile-lurate",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ispezione-edile-lurate",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "kick-cocaine-gazzada-evento",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "kick-cocaine-gazzada-evento",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lavori-autolaghi-ottobre-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lavori-autolaghi-ottobre-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lavori-autolaghi-ottobre-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lavori-barriere-antirumore-a8",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lavori-barriere-antirumore-a8",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lite-stradale-castronno-traffico",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lite-stradale-castronno-traffico",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lombardia-partenza-ritardo",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "lombardia-partenza-ritardo",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "montegrino-valtravaglia-aggressione-condanna",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "montegrino-valtravaglia-aggressione-condanna",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "openjobmetis-trieste-vittoria-kastritis",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "openjobmetis-trieste-vittoria-kastritis",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "openjobmetis-trieste-vittoria-kastritis",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "raffica-scontri-varesotto",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "raffica-scontri-varesotto",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "schianto-camerlata-quattro-feriti",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "schianto-camerlata-quattro-feriti",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "sospenda-riversamento-allitalia-della-quota-dellimposta-alla-fonte-prelevata-ai-frontalieri",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "sospenda-riversamento-allitalia-della-quota-dellimposta-alla-fonte-prelevata-ai-frontalieri",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ville-ponti-frontalieri-confronto",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ville-ponti-frontalieri-confronto",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "voto-cinque-temi-28-febbraio",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "voto-cinque-temi-28-febbraio",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "vpod-direttiva-canicola-scuole",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "vpod-direttiva-canicola-scuole",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "cybersicurezza-industriale-ticino-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "cybersicurezza-industriale-ticino-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "rinascita-praterie-sommerse-laghi-ticino",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "rinascita-praterie-sommerse-laghi-ticino",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "trasparenza-iniziative-popolari-ticino-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "trasparenza-iniziative-popolari-ticino-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "aerodromo-kaegiswil-sospensione-voli",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "aerodromo-kaegiswil-sospensione-voli",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "borse-studio-canton-zugo-requisiti-importi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "borse-studio-canton-zugo-requisiti-importi",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "disagi-treni-vaud-eclepens",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "disagi-treni-vaud-eclepens",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "grigioni-preventivo-contributi-terzi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "grigioni-preventivo-contributi-terzi",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "grigioni-preventivo-contributi-terzi",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "guerra-medio-oriente-benzina-svizzera",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "guerra-medio-oriente-benzina-svizzera",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "hacker-frigoriferi-connessi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "hacker-frigoriferi-connessi",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "ia-pubblica-amministrazione-ticino",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "ia-pubblica-amministrazione-ticino",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "ia-pubblica-amministrazione-ticino",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "lex-netflix-cinema-svizzero-2025",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "lex-netflix-cinema-svizzero-2025",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "manager-ffs-denaro-pubblico",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "manager-ffs-denaro-pubblico",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "mercato-affitti-san-gallo-canoni-diritto",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "mercato-affitti-san-gallo-canoni-diritto",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "orologio-lingotto-trump-seco",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "orologio-lingotto-trump-seco",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "sem-rinnovo-simic-paralisi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "sem-rinnovo-simic-paralisi",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "voto-matrimonio-tassazione-coppie",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "voto-matrimonio-tassazione-coppie",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "water-summit-zurich-2024",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "water-summit-zurich-2024",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog.ts",
+      "locale": "it",
+      "id": "autostrada-a9-chiude-de-notti-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog.ts",
+      "locale": "it",
+      "id": "autostrada-a9-chiude-de-notti-2026",
+      "field": "structuredData.description"
+    }
+  ]
+}

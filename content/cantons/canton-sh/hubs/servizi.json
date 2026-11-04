@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T14:36:40.036Z",
-  "contentHash": "c4519222e0d303a5a13ea0d8f4479f480ebf7b73634fbcc79a9527f93d2f684d",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "ae069787b8c12112039912ba72c1c60cf140415f27c1b1fd45393d9542ddce34",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-03T00:59:08.019Z",
+      "updatedAt": "2026-11-03T14:10:08.795Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -92,7 +97,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "5 °C",
+              "detail": "oggi da 4 a 6 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -105,7 +124,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/neuzentrum+klinikum+singen"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -185,7 +204,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "SH",
@@ -255,7 +274,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "5 °C",
+              "detail": "today from 4 to 6 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -268,7 +301,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/neuzentrum+klinikum+singen"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -344,7 +377,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "SH",
@@ -414,7 +447,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "5 °C",
+              "detail": "heute 4 bis 6 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -427,7 +474,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/neuzentrum+klinikum+singen"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -446,7 +493,7 @@
         {
           "title": "Schaffhausen übernimmt integratives Schulmodell mit PGA",
           "url": "/de/schaffhausen-artikel/schaffhausen-schulmodell-inklusiv/",
-          "excerpt": "Entscheid vom 22.",
+          "excerpt": "Am 22. Januar 2026 hat der Stadtschulrat Schaffhausen den Übergang zu einem inklusiven Schulsystem beschlossen; das Pädagogische Grundangebot soll jährlich bis zu CHF 3 Millionen umfassen.",
           "date": "2026-10-27T13:12:22.684Z"
         },
         {
@@ -503,7 +550,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "SH",
@@ -573,7 +620,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "5 °C",
+              "detail": "aujourd’hui de 4 à 6 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -586,7 +647,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/neuzentrum+klinikum+singen"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -658,7 +719,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

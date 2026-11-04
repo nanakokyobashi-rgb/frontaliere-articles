@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "pensioni",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "0ccac9cb68d0a44247ee03a8922c67d8ff5551dbf054b6feb3d2ee468aef35c3",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "5d4810766c9cdfffa663395483eb425892666dc8fcdf6c65490c6d402a2ac1b4",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Améliorer l'accessibilité des courriers administratifs",
+              "date": "2026-10-28",
+              "url": "https://www.ecasfr.ch/fr/Actualites/Ameliorer-l-accessibilite-des-courriers-administratifs.html"
+            },
+            {
               "label": "Journées d’action pour les droits des personnes handicapées 2027",
               "date": "2026-10-25T16:25:20.000Z",
               "url": "https://www.fr.ch/sante/invalidite-et-handicap/journees-daction-pour-les-droits-des-personnes-handicapees-2027"
@@ -156,7 +161,7 @@
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -192,7 +197,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "FR",
@@ -301,6 +306,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Améliorer l'accessibilité des courriers administratifs",
+              "date": "2026-10-28",
+              "url": "https://www.ecasfr.ch/fr/Actualites/Ameliorer-l-accessibilite-des-courriers-administratifs.html"
+            },
+            {
               "label": "Journées d’action pour les droits des personnes handicapées 2027",
               "date": "2026-10-25T16:25:20.000Z",
               "url": "https://www.fr.ch/sante/invalidite-et-handicap/journees-daction-pour-les-droits-des-personnes-handicapees-2027"
@@ -321,7 +331,7 @@
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -357,7 +367,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "FR",
@@ -466,6 +476,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Améliorer l'accessibilité des courriers administratifs",
+              "date": "2026-10-28",
+              "url": "https://www.ecasfr.ch/fr/Actualites/Ameliorer-l-accessibilite-des-courriers-administratifs.html"
+            },
+            {
               "label": "Journées d’action pour les droits des personnes handicapées 2027",
               "date": "2026-10-25T16:25:20.000Z",
               "url": "https://www.fr.ch/sante/invalidite-et-handicap/journees-daction-pour-les-droits-des-personnes-handicapees-2027"
@@ -486,7 +501,7 @@
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -522,7 +537,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "FR",
@@ -631,6 +646,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Améliorer l'accessibilité des courriers administratifs",
+              "date": "2026-10-28",
+              "url": "https://www.ecasfr.ch/fr/Actualites/Ameliorer-l-accessibilite-des-courriers-administratifs.html"
+            },
+            {
               "label": "Journées d’action pour les droits des personnes handicapées 2027",
               "date": "2026-10-25T16:25:20.000Z",
               "url": "https://www.fr.ch/sante/invalidite-et-handicap/journees-daction-pour-les-droits-des-personnes-handicapees-2027"
@@ -651,7 +671,7 @@
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -687,7 +707,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

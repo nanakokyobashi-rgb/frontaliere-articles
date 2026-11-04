@@ -4,17 +4,17 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T10:06:57.473Z",
-  "contentHash": "89fd72be2a4e7fae087f30d98042a27d99864c5700811c5fe23e7a2f28593acd",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "6185000884a7849491c6e1a66fe83aa45c7978ee6d084647a5fbf939ce0fca23",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-03T03:07:39.455Z",
+      "updatedAt": "2026-11-03T20:00:07.431Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,7 +115,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -128,7 +128,7 @@
         {
           "title": "Cambio d'ora e rischio incidenti stradali nel Canton Soletta",
           "url": "/articoli-soletta/cambio-ora-incidenti-stradali-soletta/",
-          "excerpt": "24-25 ottobre 2026: orologi indietro di un'ora Il traffico del mattino coincide con il crepuscolo Caprioli, cervi nobili e cinghiali sono attivi presto",
+          "excerpt": "Il Cantone di Soletta avverte che il cambio d'ora aumenta il rischio di incidenti con animali selvatici sulle strade, perché il traffico del mattino legato agli spostamenti per lavoro coincide con il crepuscolo.",
           "date": "2026-10-23T00:45:27.261Z"
         },
         {
@@ -140,7 +140,7 @@
         {
           "title": "Abbonamenti trasporti pubblici Canton Soletta zone e tariffe",
           "url": "/articoli-svizzera/trasporti-pubblici-canton-soletta-abbonamenti/",
-          "excerpt": "Informazioni sui tarifferi e le zone dei trasporti pubblici nel Canton Soletta",
+          "excerpt": "Informazioni sui tarifferi e le zone dei trasporti pubblici nel Canton Soletta.",
           "date": "2026-08-18T03:49:17.861Z"
         },
         {
@@ -161,7 +161,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "SO",
@@ -236,7 +236,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -259,7 +259,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -271,7 +271,7 @@
         {
           "title": "Time change and risk of road accidents in the Canton of Solothurn",
           "url": "/en/solothurn-articles/time-change-road-accidents-solothurn/",
-          "excerpt": "October 24–25, 2026: clocks go back by one hour Morning traffic coincides with twilight Roe deer, red deer and wild boar are active early Caution",
+          "excerpt": "On the night of October 24–25, 2026, the clocks will be set back by one hour. The Canton of Solothurn warns that the time change increases the risk of accidents involving wild animals on the roads, because morning…",
           "date": "2026-10-23T00:45:27.261Z"
         },
         {
@@ -283,7 +283,7 @@
         {
           "title": "Public transport subscriptions Canton Solothurn zones and fares",
           "url": "/en/swiss-articles/public-transport-canton-solothurn-tickets/",
-          "excerpt": "Information on fares and public transport zones in the canton of Solothurn",
+          "excerpt": "Information on fares and public transport zones in the canton of Solothurn.",
           "date": "2026-08-18T03:49:17.861Z"
         },
         {
@@ -304,7 +304,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "SO",
@@ -379,7 +379,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -402,7 +402,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -414,7 +414,7 @@
         {
           "title": "Zeitumstellung und Verkehrsunfallrisiko im Kanton Solothurn",
           "url": "/de/solothurn-artikel/zeitumstellung-strassenunfaelle-solothurn/",
-          "excerpt": "24.–25. Oktober 2026: Uhren um eine Stunde zurückgestellt Der morgendliche Verkehr fällt mit der Dämmerung zusammen Rehe, Rothirsche und Wildschweine sind früh",
+          "excerpt": "Die Uhren werden in der Nacht vom 24. auf den 25. Oktober 2026 um eine Stunde zurückgestellt. Nach Angaben des Kantons Solothurn erhöht sich dadurch das Risiko von Wildtierunfällen auf den Straßen, weil der…",
           "date": "2026-10-23T00:45:27.261Z"
         },
         {
@@ -426,7 +426,7 @@
         {
           "title": "Abonnements für öffentliche Verkehrsmittel Kanton Solothurn Zonen und Tarife",
           "url": "/de/schweiz-artikel/oeffentliche-verkehrsmittel-kanton-solothurn-fahrkarten/",
-          "excerpt": "Informationen zu Tarifen und Zonen des öffentlichen Verkehrs im Kanton Solothurn",
+          "excerpt": "Informationen zu Tarifen und Zonen des öffentlichen Verkehrs im Kanton Solothurn.",
           "date": "2026-08-18T03:49:17.861Z"
         },
         {
@@ -447,7 +447,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "SO",
@@ -522,7 +522,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -545,7 +545,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -558,7 +558,7 @@
         {
           "title": "Changement d’heure et risque d’accidents de la route dans le canton de Soleure",
           "url": "/fr/articles-soleure/changement-heure-accidents-route-soleure/",
-          "excerpt": "24-25 octobre 2026 : horloges reculées d’une heure La circulation matinale coïncide avec le crépuscule Les chevreuils, les cerfs élaphes et les sangliers sont",
+          "excerpt": "Le premier concerne la nuit du 24 au 25 octobre 2026 : le changement d'heure fait coïncider la circulation du matin avec le crépuscule et, selon le canton, augmente le risque d'accidents avec la faune.",
           "date": "2026-10-23T00:45:27.261Z"
         },
         {
@@ -570,7 +570,7 @@
         {
           "title": "Abonnements transports publics Canton Soleure zones et tarifs",
           "url": "/fr/articles-suisse/transports-publics-canton-de-soleure-abonnements/",
-          "excerpt": "Informations sur les tarifs et les zones des transports publics dans le canton de Soleure",
+          "excerpt": "Informations sur les tarifs et les zones des transports publics dans le canton de Soleure.",
           "date": "2026-08-18T03:49:17.861Z"
         },
         {
@@ -591,7 +591,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

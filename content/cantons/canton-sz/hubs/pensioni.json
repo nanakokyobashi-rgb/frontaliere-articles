@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "pensioni",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "bb6cb8a9817ec2cfdfbd63e0a06c80aa113d3a628987fe85e83e55ebf4feb19b",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "5f8c7db7b0bd0b55307cbaf092772cacf69db150e89b652d1f37ef5bfe8655ef",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -128,6 +128,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "SP Uri: no di misura al finanziamento della 13ª AVS",
+          "url": "/articoli-svitto/sp-uri-no-finanziamento-avs/",
+          "excerpt": "SP Uri: no di misura al finanziamento della 13ª AVS dopo una discussione vivace.",
+          "date": "2026-11-03T23:23:55.230Z"
+        },
+        {
           "title": "Prestazioni complementari Svitto: AVS e minimo vitale",
           "url": "/articoli-svizzera/calcolo-rendita-avs-svitto/",
           "excerpt": "Guida al calcolo della rendita AVS, lacune contributive e prestazioni complementari nel Canton Svitto. Ruolo della cassa di compensazione cantonale e procedure pratiche per garantire il minimo vitale.",
@@ -159,7 +165,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "SZ",
@@ -265,6 +271,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "SP Uri: no to the measure to finance the 13th AVS",
+          "url": "/en/schwyz-articles/uri-sp-rejects-avs-funding/",
+          "excerpt": "SP Uri: no to the measure to finance the 13th AHV pension after a lively discussion.",
+          "date": "2026-11-03T23:23:55.230Z"
+        },
+        {
           "title": "Complementary services Unscrewed: AVS and vital minimum",
           "url": "/en/swiss-articles/calculate-avs-pension-schwyz/",
           "excerpt": "Guide to the calculation of the AVS annuity, contribution gaps and supplementary benefits in the Canton of Schwyz. Role of the cantonal clearing house and practical procedures to ensure minimum viability.",
@@ -296,7 +308,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "SZ",
@@ -402,6 +414,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "SP Uri: Nein zur Massnahme zur Finanzierung der 13. AHV-Rente",
+          "url": "/de/schwyz-artikel/uri-sp-lehnt-ahv-finanzierung-ab/",
+          "excerpt": "Die Quelle berichtet, dass die SP Uri die Finanzierung der 13. AHV-Rente abgelehnt hat.",
+          "date": "2026-11-03T23:23:55.230Z"
+        },
+        {
           "title": "Ergänzungsleistungen Schwyz: AHV und Lebensminimum",
           "url": "/de/schweiz-artikel/avs-rente-berechnung-schwyz/",
           "excerpt": "Leitfaden zur Berechnung der AHV-Rente, Beitragslücken und Ergänzungsleistungen im Kanton Schwyz. Rolle der kantonalen Ausgleichskasse und praktische Verfahren zur Sicherstellung des Existenzminimums.",
@@ -433,7 +451,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "SZ",
@@ -539,6 +557,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "SP Uri : un non de justesse au financement de la 13e AVS",
+          "url": "/fr/articles-schwytz/uri-sp-refuse-financement-avs/",
+          "excerpt": "SP Uri : un non de justesse au financement de la 13e AVS après une discussion animée.",
+          "date": "2026-11-03T23:23:55.230Z"
+        },
+        {
           "title": "Prestations complémentaires Schwytz : AVS et minimum vital",
           "url": "/fr/articles-suisse/calcul-rente-avs-schwytz/",
           "excerpt": "Guide de calcul de la rente AVS, des écarts de cotisations et des prestations complémentaires dans le canton de Schwytz. Rôle de la caisse de compensation cantonale et procédures pratiques pour assurer le minimum vital.",
@@ -570,7 +594,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

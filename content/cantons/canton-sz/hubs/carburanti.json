@@ -4,19 +4,73 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "carburanti",
-  "updatedAt": "2026-11-03T01:04:10.290Z",
-  "contentHash": "bf04628d57bdbb5372d932ac7ddbf6cf14ac2290161fc5cae04ad46b8b913125",
-  "blocks": [],
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "c9fa7148538de8a29a86c37148e09fa5c9144d57c7186e6e55f68298506db33b",
+  "blocks": [
+    {
+      "id": "prezzi-carburanti",
+      "updatedAt": "2026-11-03T14:41:22.679Z",
+      "keyFacts": 2,
+      "carryUntilAt": "2026-12-02T00:00:00.000Z"
+    }
+  ],
   "locales": {
     "it": {
       "canton": "SZ",
       "topic": "carburanti",
       "locale": "it",
       "intro": "Nel Canton Svitto, benzina e diesel sono una voce fissa nel bilancio di chi usa l’auto per andare al lavoro. Questa pagina riunisce i prezzi medi rilevati alla pompa, il confronto con le aree oltreconfine quando esiste un dato pubblico e gli articoli della redazione su carburanti ed energia.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Benzina 95 — Svizzera",
+          "value": "2,120 CHF/l",
+          "note": "media nazionale ufficiale, 1 ottobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Svizzera",
+          "value": "2,410 CHF/l",
+          "note": "media nazionale ufficiale, 1 ottobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Prezzi dei carburanti",
+          "description": "Prezzi medi alla pompa rilevati sul territorio e, dove esiste un dato pubblico, nelle aree oltreconfine. Ogni riga riporta la valuta della rilevazione: i prezzi non sono convertiti.",
+          "items": [
+            {
+              "label": "Benzina 95 — Svizzera",
+              "value": "2,120 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Svizzera",
+              "value": "2,410 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-10-01T00:00:00.000Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
+        }
+      ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Riarmo dell’esercito: il Nazionale evita l’aumento IVA",
+          "url": "/articoli-svitto/finanziamento-riarmo-esercito/",
+          "excerpt": "Riarmo da CHF 24 miliardi: il Nazionale punta a CHF 1,3 miliardi annui dal 2028 al 2045 senza aumentare l’IVA; la SP minaccia il referendum.",
+          "date": "2026-11-04T00:12:21.103Z"
+        },
+        {
+          "title": "SP Uri: no di misura al finanziamento della 13ª AVS",
+          "url": "/articoli-svitto/sp-uri-no-finanziamento-avs/",
+          "excerpt": "SP Uri: no di misura al finanziamento della 13ª AVS dopo una discussione vivace.",
+          "date": "2026-11-03T23:23:55.230Z"
+        },
         {
           "title": "Schübelbach conferma le aliquote fiscali per il 2027",
           "url": "/articoli-svitto/schuebelbach-aliquote-2027/",
@@ -34,18 +88,6 @@
           "url": "/articoli-svitto/kantonsrat-biberbrugg-chaltenboden/",
           "excerpt": "Il Kantonsrat approva 64-28 la spesa di 36 milioni per la mobilità lenta tra Biberbrugg e Chaltenboden.",
           "date": "2026-10-21T13:31:24.335Z"
-        },
-        {
-          "title": "Unteriberg, budget 2027: avanzo di 13.500 franchi",
-          "url": "/articoli-svitto/unteriberg-budget-2027/",
-          "excerpt": "La Kirchgemeinde Unteriberg prevede 525.743 franchi di entrate e 512.245 di uscite nel 2027; l'avanzo indicato è di 13.500 franchi.",
-          "date": "2026-10-18T07:01:31.505Z"
-        },
-        {
-          "title": "Eventi del weekend nel Canton Svitto: cosa fare sabato e domenica",
-          "url": "/articoli-svitto/eventi-weekend-svitto/",
-          "excerpt": "Eventi nel Canton Svitto ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
-          "date": "2026-10-17T11:31:03.638Z"
         }
       ],
       "links": [
@@ -58,17 +100,64 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-03T01:04:10.290Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "SZ",
       "topic": "carburanti",
       "locale": "en",
       "intro": "In the canton of Schwyz, petrol and diesel are a fixed item in the budget of anyone who drives to work. This page brings together the average pump prices on record, the comparison with the other side of the border where public data exists, and our articles on fuel and energy.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Petrol 95 — Switzerland",
+          "value": "2.120 CHF/l",
+          "note": "official national average, 1 October 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Switzerland",
+          "value": "2.410 CHF/l",
+          "note": "official national average, 1 October 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Fuel prices",
+          "description": "Average pump prices recorded locally and, where public data exists, across the border. Each row keeps the currency of the survey: prices are not converted.",
+          "items": [
+            {
+              "label": "Petrol 95 — Switzerland",
+              "value": "2.120 CHF/l",
+              "detail": "official national average",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Switzerland",
+              "value": "2.410 CHF/l",
+              "detail": "official national average",
+              "date": "2026-10-01T00:00:00.000Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
+        }
+      ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Army rearmament: the National Council avoids the VAT increase",
+          "url": "/en/schwyz-articles/army-rearmament-funding/",
+          "excerpt": "Rearmament of CHF 24 billion: the National Council aims for CHF 1.3 billion annually from 2028 to 2045 without increasing VAT; the SP threatens a referendum.",
+          "date": "2026-11-04T00:12:21.103Z"
+        },
+        {
+          "title": "SP Uri: no to the measure to finance the 13th AVS",
+          "url": "/en/schwyz-articles/uri-sp-rejects-avs-funding/",
+          "excerpt": "SP Uri: no to the measure to finance the 13th AHV pension after a lively discussion.",
+          "date": "2026-11-03T23:23:55.230Z"
+        },
         {
           "title": "Schübelbach confirms tax rates for 2027",
           "url": "/en/schwyz-articles/schuebelbach-tax-rates-2027/",
@@ -86,18 +175,6 @@
           "url": "/en/schwyz-articles/cantonal-council-biberbrugg-chaltenboden/",
           "excerpt": "The Cantonal Council approved 64-28 spending 36 million on active mobility between Biberbrugg and Chaltenboden.",
           "date": "2026-10-21T13:31:24.335Z"
-        },
-        {
-          "title": "Unteriberg, budget 2027: surplus of 13.500 francs",
-          "url": "/en/schwyz-articles/unteriberg-2027-budget/",
-          "excerpt": "Kirchgemeinde Unteriberg forecasts revenues of 525.743 francs and expenditures of 512.245 in 2027; the indicated surplus is 13.500 francs.",
-          "date": "2026-10-18T07:01:31.505Z"
-        },
-        {
-          "title": "Weekend events in the canton of Schwyz: what to do Saturday & Sunday",
-          "url": "/en/schwyz-articles/weekend-events-schwyz/",
-          "excerpt": "Events in the canton of Schwyz every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
-          "date": "2026-10-17T11:31:03.638Z"
         }
       ],
       "links": [
@@ -110,17 +187,64 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-03T01:04:10.290Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "SZ",
       "topic": "carburanti",
       "locale": "de",
       "intro": "Im Kanton Schwyz sind Benzin und Diesel ein fester Posten im Budget aller, die mit dem Auto zur Arbeit fahren. Diese Seite bündelt die erhobenen Durchschnittspreise an der Zapfsäule, den Vergleich mit dem Gebiet jenseits der Grenze, sofern öffentliche Daten vorliegen, und die Artikel der Redaktion zu Treibstoff und Energie.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Benzin 95 — Schweiz",
+          "value": "2.120 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. Oktober 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Schweiz",
+          "value": "2.410 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. Oktober 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Treibstoffpreise",
+          "description": "Durchschnittliche Preise an der Zapfsäule im Gebiet und, wo öffentliche Daten vorliegen, jenseits der Grenze. Jede Zeile nennt die Währung der Erhebung: Die Preise werden nicht umgerechnet.",
+          "items": [
+            {
+              "label": "Benzin 95 — Schweiz",
+              "value": "2.120 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Schweiz",
+              "value": "2.410 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-10-01T00:00:00.000Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
+        }
+      ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Aufrüstung der Armee: Der Nationalrat vermeidet eine Mehrwertsteuererhöhung",
+          "url": "/de/schwyz-artikel/finanzierung-aufruestung-armee/",
+          "excerpt": "Aufrüstung im Umfang von CHF 24 Milliarden: Der Nationalrat setzt von 2028 bis 2045 auf jährlich CHF 1,3 Milliarden, ohne die Mehrwertsteuer zu erhöhen; die SP droht mit einem Referendum.",
+          "date": "2026-11-04T00:12:21.103Z"
+        },
+        {
+          "title": "SP Uri: Nein zur Massnahme zur Finanzierung der 13. AHV-Rente",
+          "url": "/de/schwyz-artikel/uri-sp-lehnt-ahv-finanzierung-ab/",
+          "excerpt": "Die Quelle berichtet, dass die SP Uri die Finanzierung der 13. AHV-Rente abgelehnt hat.",
+          "date": "2026-11-03T23:23:55.230Z"
+        },
         {
           "title": "Schübelbach bestätigt die Steuersätze für 2027",
           "url": "/de/schwyz-artikel/schuebelbach-steuerfuss-2027/",
@@ -138,18 +262,6 @@
           "url": "/de/schwyz-artikel/kantonsrat-ja-zu-36-millionen-zwischen-biberbrugg-und-chaltenboden/",
           "excerpt": "Der Kantonsrat genehmigt mit 64-28 die Ausgabe von 36 Millionen für den Langsamverkehr zwischen Biberbrugg und Chaltenboden.",
           "date": "2026-10-21T13:31:24.335Z"
-        },
-        {
-          "title": "Unteriberg, Budget 2027: Überschuss von 13.500 Franken",
-          "url": "/de/schwyz-artikel/unteriberg-budget-2027-uberschuss-von-13-500-franken/",
-          "excerpt": "Die Kirchgemeinde Unteriberg erwartet für 2027 Einnahmen von 525.743 Franken und Ausgaben von 512.245 Franken; der ausgewiesene Überschuss beträgt 13.500 Franken.",
-          "date": "2026-10-18T07:01:31.505Z"
-        },
-        {
-          "title": "Veranstaltungen am Wochenende im Kanton Schwyz: was tun Sa & So",
-          "url": "/de/schwyz-artikel/wochenend-veranstaltungen-schwyz/",
-          "excerpt": "Veranstaltungen im Kanton Schwyz an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
-          "date": "2026-10-17T11:31:03.638Z"
         }
       ],
       "links": [
@@ -162,17 +274,64 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-03T01:04:10.290Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "SZ",
       "topic": "carburanti",
       "locale": "fr",
       "intro": "Dans le canton de Schwytz, l’essence et le diesel sont un poste fixe du budget de celles et ceux qui prennent la voiture pour aller travailler. Cette page réunit les prix moyens relevés à la pompe, la comparaison avec l’autre côté de la frontière lorsqu’une donnée publique existe et les articles de la rédaction sur les carburants et l’énergie.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Essence 95 — Suisse",
+          "value": "2,120 CHF/l",
+          "note": "moyenne nationale officielle, 1er octobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Suisse",
+          "value": "2,410 CHF/l",
+          "note": "moyenne nationale officielle, 1er octobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Prix des carburants",
+          "description": "Prix moyens à la pompe relevés sur le territoire et, lorsqu’une donnée publique existe, de l’autre côté de la frontière. Chaque ligne conserve la monnaie du relevé : les prix ne sont pas convertis.",
+          "items": [
+            {
+              "label": "Essence 95 — Suisse",
+              "value": "2,120 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Suisse",
+              "value": "2,410 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-10-01T00:00:00.000Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
+        }
+      ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Réarmement de l’armée : le National évite la hausse de la TVA",
+          "url": "/fr/articles-schwytz/financement-rearmement-armee/",
+          "excerpt": "Réarmement de CHF 24 milliards : le National vise CHF 1,3 milliard par an de 2028 à 2045 sans augmenter la TVA ; le PS menace de lancer un référendum.",
+          "date": "2026-11-04T00:12:21.103Z"
+        },
+        {
+          "title": "SP Uri : un non de justesse au financement de la 13e AVS",
+          "url": "/fr/articles-schwytz/uri-sp-refuse-financement-avs/",
+          "excerpt": "SP Uri : un non de justesse au financement de la 13e AVS après une discussion animée.",
+          "date": "2026-11-03T23:23:55.230Z"
+        },
         {
           "title": "Schübelbach confirme les taux d’imposition pour 2027",
           "url": "/fr/articles-schwytz/schuebelbach-taux-fiscal-2027/",
@@ -190,18 +349,6 @@
           "url": "/fr/articles-schwytz/conseil-biberbrugg-chaltenboden/",
           "excerpt": "Le Kantonsrat approuve par 64 voix contre 28 la dépense de 36 millions pour la mobilité douce entre Biberbrugg et Chaltenboden.",
           "date": "2026-10-21T13:31:24.335Z"
-        },
-        {
-          "title": "Unteriberg, budget 2027 : excédent de 13.500 francs",
-          "url": "/fr/articles-schwytz/budget-2027-unteriberg/",
-          "excerpt": "La Kirchgemeinde Unteriberg prévoit 525.743 francs de recettes et 512.245 de dépenses en 2027 ; l'excédent indiqué est de 13.500 francs.",
-          "date": "2026-10-18T07:01:31.505Z"
-        },
-        {
-          "title": "Événements du week-end dans le canton de Schwytz : que faire samedi & dimanche",
-          "url": "/fr/articles-schwytz/evenements-week-end-schwytz/",
-          "excerpt": "Événements dans le canton de Schwytz chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
-          "date": "2026-10-17T11:31:03.638Z"
         }
       ],
       "links": [
@@ -214,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-03T01:04:10.290Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

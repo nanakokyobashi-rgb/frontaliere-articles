@@ -4,17 +4,17 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T10:06:57.473Z",
-  "contentHash": "2844c9d135744cf42e81024ca0ba8bb1e9b52bbdfc25ecf6ff48a4e5ccb14df5",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "c5deace6b8b9e7b06beab0fb9379301cccc87a806320fa7f7abb2c77d9fe0070",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-03T03:07:39.455Z",
+      "updatedAt": "2026-11-03T20:00:07.431Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -86,7 +86,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -124,7 +124,7 @@
               "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -149,7 +149,7 @@
         {
           "title": "Sistema scolastico Canton Nidvaldo: iscrizione e cicli",
           "url": "/articoli-svizzera/sistema-scolastico-canton-nidvaldo-iscrizione-e-cicli/",
-          "excerpt": "I cicli scolastici e le scadenze per l'iscrizione nel Canton Nidvaldo",
+          "excerpt": "I cicli scolastici e le scadenze per l'iscrizione nel Canton Nidvaldo.",
           "date": "2026-08-16T20:51:37.781Z"
         }
       ],
@@ -164,7 +164,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "NW",
@@ -233,7 +233,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -296,7 +296,7 @@
         {
           "title": "Canton Nidwalden school system: enrolment and cycles",
           "url": "/en/swiss-articles/canton-nidwalden-school-system-enrolment-and-cycles/",
-          "excerpt": "School curricula and deadlines for enrolment in the Canton of Nidwalden",
+          "excerpt": "School curricula and deadlines for enrolment in the Canton of Nidwalden.",
           "date": "2026-08-16T20:51:37.781Z"
         }
       ],
@@ -311,7 +311,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "NW",
@@ -380,7 +380,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -418,20 +418,20 @@
               "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Brücke über den Scheidgraben in Ennetbürgen gesperrt",
           "url": "/de/nidwalden-artikel/sperrung-scheidgraben-bruecke/",
-          "excerpt": "Die Brücke zwischen Alpenstrasse und Seefeld wird wegen Sanierungsarbeiten vom 3.",
+          "excerpt": "Dokumentiert sind die Brücke über den Scheidgraben, die Lage zwischen Alpenstrasse und Seefeld, der Grund der Sanierungsarbeiten und die Führung über die Hauptstrasse für Fußgänger und Radfahrer.",
           "date": "2026-10-30T20:11:37.696Z"
         },
         {
           "title": "Hergiswil: Bergstrasse 4 am 25.11.2026 gesperrt",
           "url": "/de/nidwalden-artikel/hergiswil-bergstrasse-kran/",
-          "excerpt": "In Hergiswil wird der betroffene Abschnitt der Bergstrasse am 25.",
+          "excerpt": "Im betroffenen Abschnitt wird die Bergstrasse während des Abbaus des Krans als vollständig gesperrt angegeben.",
           "date": "2026-11-03T00:08:28.441Z"
         },
         {
@@ -443,7 +443,7 @@
         {
           "title": "Schulsystem Kanton Nidwalden: Einschreibung und Zyklen",
           "url": "/de/schweiz-artikel/schulsystem-kanton-nidwalden-einschreibung-und-zyklen/",
-          "excerpt": "Die Schulzyklen und Anmeldefristen im Kanton Nidwalden",
+          "excerpt": "Die Schulzyklen und Anmeldefristen im Kanton Nidwalden.",
           "date": "2026-08-16T20:51:37.781Z"
         }
       ],
@@ -458,7 +458,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "NW",
@@ -527,7 +527,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -565,7 +565,7 @@
               "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -590,7 +590,7 @@
         {
           "title": "Système scolaire canton de Nidwald : inscription et cycles",
           "url": "/fr/articles-suisse/systeme-scolaire-canton-de-nidwald-inscription-et-cycles/",
-          "excerpt": "Les cycles scolaires et les délais d'inscription dans le canton de Nidwald",
+          "excerpt": "Les cycles scolaires et les délais d'inscription dans le canton de Nidwald.",
           "date": "2026-08-16T20:51:37.781Z"
         }
       ],
@@ -605,7 +605,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

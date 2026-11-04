@@ -4,7 +4,7 @@
  */
 const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.strada-calanca-chiusura-preventiva.title': 'Strada della Calanca: chiusura totale tra Molina e Arvigo',
-    'blog.article.strada-calanca-chiusura-preventiva.excerpt': 'Chiusura totale da mercoledì alle 21',
+    'blog.article.strada-calanca-chiusura-preventiva.excerpt': 'Chiusura totale da mercoledì alle 21.',
     'blog.article.strada-calanca-chiusura-preventiva.imageAlt': 'Strada della Calanca chiusa per maltempo tra Molina Nord e Arvigo.',
     'blog.article.benzina-grigioni-deviazione.title': 'Prezzi benzina in Grigioni: quando conviene deviare',
     'blog.article.benzina-grigioni-deviazione.excerpt': 'Prezzi della benzina a livelli record anche in Grigioni: il calcolatore valuta prezzo e distanza della deviazione verso una stazione più economica.',
@@ -25,7 +25,7 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.parco-solare-nalps-tujetsch.excerpt': 'Il progetto per un parco solare alpino a Nalps, nella località di Tujetsch, sta facendo progressi, come riportato in un servizio di Telesguard su Play RTR.',
     'blog.article.parco-solare-nalps-tujetsch.imageAlt': 'Paesaggio alpino della regione di Tujetsch nel Canton Grigioni',
     'blog.article.lido-grono-estate-2027.title': 'Lido Grono, apertura confermata per l\'estate 2027',
-    'blog.article.lido-grono-estate-2027.excerpt': 'Apertura del Lido Grono confermata per l\'estate 2027 Cantiere della nuova piscina comunale ancora in corso Costi previsti: circa 5 milioni Annuncio del sindaco',
+    'blog.article.lido-grono-estate-2027.excerpt': 'Lido Grono aprirà nell\'estate 2027. La conferma riguarda la nuova piscina comunale e arriva mentre il cantiere prosegue.',
     'blog.article.lido-grono-estate-2027.imageAlt': 'Cantiere della nuova piscina comunale di Grono per l\'apertura confermata nell\'estate 2027.',
     'blog.article.acqua-domleschg-feldis-scheid.title': 'Domleschg: camion cisterna per l\'acqua a Feldis e Scheid',
     'blog.article.acqua-domleschg-feldis-scheid.excerpt': 'Domleschg intende portare acqua potabile a Feldis e Scheid.',
@@ -43,10 +43,10 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.cuira-alloggi-acqua-sursaissa.excerpt': 'La popolazione di Cuira voterà il 29 novembre su «abitar pajabel a Cuira» e una controproposta; a Sursaissa Mundaun si chiede di risparmiare acqua.',
     'blog.article.cuira-alloggi-acqua-sursaissa.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.cantiere-caraa-guera-interrogazione.title': 'Interrogazione Cantiere Caraa de Guèra: chiarezza su lavori e costi',
-    'blog.article.cantiere-caraa-guera-interrogazione.excerpt': 'Cantiere sulla Caraa de Guèra, tra Maron e Ai Tecc Rifacimento di reti e posa di acciottolato di fiume Sette domande al Municipio su approvazioni e costi',
+    'blog.article.cantiere-caraa-guera-interrogazione.excerpt': 'Da alcune settimane è aperto un importante cantiere sulla strada di quartiere Caraa de Guèra.',
     'blog.article.cantiere-caraa-guera-interrogazione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.val-calanca-strada-chiusa.title': 'Val Calanca: chiusura strada per due settimane, chiede sostegno per isolamento',
-    'blog.article.val-calanca-strada-chiusa.excerpt': 'Val Calanca: strada chiusa per due settimane dopo smottamenti Censi chiede strumenti permanenti al governo retico Fondo ipotizzato dal terzo giorno',
+    'blog.article.val-calanca-strada-chiusa.excerpt': 'La strada della Val Calanca è rimasta chiusa per due settimane dopo diversi smottamenti.',
     'blog.article.val-calanca-strada-chiusa.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.brigels-sette-milioni-impianti.title': 'Brigels approva 7 milioni di CHF per risanare gli impianti',
     'blog.article.brigels-sette-milioni-impianti.excerpt': 'Brigels approva 7 milioni di CHF per il risanamento degli impianti di risalita.',
@@ -61,7 +61,7 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.innhub-la-punt-rinvio-apertura.excerpt': 'Apertura nell\'estate 2029, sei mesi dopo il piano iniziale.',
     'blog.article.innhub-la-punt-rinvio-apertura.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.vallo-protezione-sorte-lostallo.title': 'Lostallo, al via il vallo di protezione a Sorte',
-    'blog.article.vallo-protezione-sorte-lostallo.excerpt': 'Nei prossimi giorni parte il vallo di protezione Credito comunale: 6,2 milioni di franchi Lavori principali previsti nell\'autunno 2027 L\'alluvione del 21 giugno',
+    'blog.article.vallo-protezione-sorte-lostallo.excerpt': 'Nei prossimi giorni, a Sorte, inizieranno i lavori per il vallo di protezione sulla sponda destra della frazione di Lostallo.',
     'blog.article.vallo-protezione-sorte-lostallo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 

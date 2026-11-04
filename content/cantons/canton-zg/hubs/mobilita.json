@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T10:06:57.473Z",
-  "contentHash": "cbf4b923189b280be4c72c09ceee8e918010d3f9e13967776f5f888c941cbc5b",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "0ba6c57c942e8cb6285166b993bd168148588a3bd4f2a49293ddb05ff6a79078",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-03T03:07:39.455Z",
+      "updatedAt": "2026-11-03T20:00:07.431Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "14",
+          "value": "18",
           "note": "segnalazioni aggiornate: 3 novembre 2026"
         }
       ],
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,21 +115,15 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Zugo: multa di CHF 900 per mancata dichiarazione fiscale",
           "url": "/articoli-zugo/zugo-multa-mancata-dichiarazione-fiscale/",
-          "excerpt": "Tribunale di Zugo: multa di CHF 900 Cancellata l'imposta effettiva di CHF 41.15 Restano CHF 105 di spese per ritardo La dichiarazione 2023 non è stata",
+          "excerpt": "Nel Canton Zugo, una titolare di impresa individuale dovrà pagare una multa di CHF 900 e CHF 105 di spese per ritardo, nonostante l'amministrazione fiscale abbia rinunciato a riscuotere l'imposta effettiva di CHF 41.15.",
           "date": "2026-10-22T11:31:01.636Z"
-        },
-        {
-          "title": "Zugo: assegnate le direzioni per il periodo 2027-2030",
-          "url": "/articoli-zugo/zugo-assegnazione-mandato-2030/",
-          "excerpt": "Il Consiglio di Stato di Zugo ha assegnato le direzioni per il periodo 2027-2030 e regolato le supplenze dal 1° gennaio 2027.",
-          "date": "2026-10-20T23:44:17.371Z"
         },
         {
           "title": "Adeguamento piano direttore 26/1: «zone bianche» per l'edilizia a Zugo",
@@ -138,9 +132,15 @@
           "date": "2026-10-22T02:39:48.543Z"
         },
         {
+          "title": "Zugo: assegnate le direzioni per il periodo 2027-2030",
+          "url": "/articoli-zugo/zugo-assegnazione-mandato-2030/",
+          "excerpt": "Il Consiglio di Stato di Zugo ha assegnato le direzioni per il periodo 2027-2030 e regolato le supplenze dal 1° gennaio 2027.",
+          "date": "2026-10-20T23:44:17.371Z"
+        },
+        {
           "title": "Abbonamenti trasporti pubblici Canton Zugo zone e tariffe",
           "url": "/articoli-svizzera/trasporti-pubblici-zugo-abbonamenti/",
-          "excerpt": "I principali dati sull'abbonamento dei trasporti pubblici nel Cantone di Zurigo",
+          "excerpt": "I principali dati sull'abbonamento dei trasporti pubblici nel Cantone di Zurigo.",
           "date": "2026-08-17T16:02:49.928Z"
         },
         {
@@ -179,7 +179,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "ZG",
@@ -194,7 +194,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "14",
+          "value": "18",
           "note": "reports as of 3 November 2026"
         }
       ],
@@ -254,7 +254,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -277,21 +277,15 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Zug: CHF 900 fine for failure to file a tax return",
           "url": "/en/zug-articles/zug-tax-fine-missing-return/",
-          "excerpt": "Zug Court: CHF 900 fine Actual tax of CHF 41.15 cancelled CHF 105 in late fees remain The 2023 tax return was not filed Authority → Administrative Court of Zug",
+          "excerpt": "In the Canton of Zug, a sole proprietor will have to pay a fine of CHF 900 and CHF 105 in late fees, even though the tax authority waived collection of the actual tax of CHF 41.15.",
           "date": "2026-10-22T11:31:01.636Z"
-        },
-        {
-          "title": "Zug: departments assigned for the 2027–2030 period",
-          "url": "/en/zug-articles/zug-directorates-term-2030/",
-          "excerpt": "The State Council of Zug has assigned the departments for the 2027–2030 term and regulated deputizing arrangements from January 1, 2027.",
-          "date": "2026-10-20T23:44:17.371Z"
         },
         {
           "title": "Amendment to structure plan 26/1: “white zones” for construction in Zug",
@@ -300,9 +294,15 @@
           "date": "2026-10-22T02:39:48.543Z"
         },
         {
+          "title": "Zug: departments assigned for the 2027–2030 period",
+          "url": "/en/zug-articles/zug-directorates-term-2030/",
+          "excerpt": "The State Council of Zug has assigned the departments for the 2027–2030 term and regulated deputizing arrangements from January 1, 2027.",
+          "date": "2026-10-20T23:44:17.371Z"
+        },
+        {
           "title": "Public transport passes Canton Zug zones and fares",
           "url": "/en/swiss-articles/public-transport-zug-subscriptions/",
-          "excerpt": "The main data on public transport subscription in the Canton of Zurich",
+          "excerpt": "The main data on public transport subscription in the Canton of Zurich.",
           "date": "2026-08-17T16:02:49.928Z"
         },
         {
@@ -341,7 +341,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "ZG",
@@ -356,7 +356,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "14",
+          "value": "18",
           "note": "Meldungen vom 3. November 2026"
         }
       ],
@@ -416,7 +416,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -439,21 +439,15 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Zug: Busse von CHF 900 wegen Nichtabgabe der Steuererklärung",
           "url": "/de/zug-artikel/zug-steuerstrafe-fehlende-erklarung/",
-          "excerpt": "Gericht Zug: Busse von 900 CHF Effektive Steuer von 41,15 CHF gestrichen 105 CHF Verzugskosten bleiben bestehen Die Steuererklärung 2023 wurde nicht eingereicht",
+          "excerpt": "Gericht Zug: Busse von 900 CHF Effektive Steuer von 41,15 CHF gestrichen 105 CHF Verzugskosten bleiben bestehen Die Steuererklärung 2023 wurde nicht eingereicht.",
           "date": "2026-10-22T11:31:01.636Z"
-        },
-        {
-          "title": "Zug: Direktionen für den Zeitraum 2027-2030 zugewiesen",
-          "url": "/de/zug-artikel/zug-direktionen-amtsperiode-2030/",
-          "excerpt": "Der Regierungsrat des Kantons Zug hat die Direktionen für den Zeitraum 2027-2030 zugewiesen und die Stellvertretungen ab dem 1.",
-          "date": "2026-10-20T23:44:17.371Z"
         },
         {
           "title": "Anpassung des Richtplans 26/1: «weiße Zonen» für das Bauen in Zug",
@@ -462,9 +456,15 @@
           "date": "2026-10-22T02:39:48.543Z"
         },
         {
+          "title": "Zug: Direktionen für den Zeitraum 2027-2030 zugewiesen",
+          "url": "/de/zug-artikel/zug-direktionen-amtsperiode-2030/",
+          "excerpt": "Ab dem 1. Januar 2027 setzt der Regierungsrat des Kantons Zug die für den Zeitraum 2027-2030 festgelegte Zuteilung der Direktionen um.",
+          "date": "2026-10-20T23:44:17.371Z"
+        },
+        {
           "title": "Fahrkarten für öffentliche Verkehrsmittel Kanton Zug Zonen und Tarife",
           "url": "/de/schweiz-artikel/offentliche-verkehrsmittel-zug-abos/",
-          "excerpt": "Die wichtigsten Fakten zum ÖV-Abo im Kanton Zürich",
+          "excerpt": "Die wichtigsten Fakten zum ÖV-Abo im Kanton Zürich.",
           "date": "2026-08-17T16:02:49.928Z"
         },
         {
@@ -503,7 +503,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "ZG",
@@ -518,7 +518,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "14",
+          "value": "18",
           "note": "signalements au 3 novembre 2026"
         }
       ],
@@ -578,7 +578,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -601,21 +601,15 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Zoug : amende de CHF 900 pour non-déclaration fiscale",
           "url": "/fr/articles-zoug/zoug-amende-declaration-fiscale-manquante/",
-          "excerpt": "Tribunal de Zoug : amende de 900 CHF Impôt effectif de 41,15 CHF annulé Frais de retard de 105 CHF restant La déclaration 2023 n'a pas été déposée Autorité →",
+          "excerpt": "Dans le canton de Zoug, une propriétaire d'entreprise individuelle devra payer une amende de 900 CHF et 105 CHF de frais de retard, bien que l'administration fiscale ait renoncé à percevoir l'impôt effectif de 41,15 CHF.",
           "date": "2026-10-22T11:31:01.636Z"
-        },
-        {
-          "title": "Zoug : attributions des directions pour la période 2027-2030",
-          "url": "/fr/articles-zoug/zoug-directions-mandat-2030/",
-          "excerpt": "Le Conseil d'État de Zoug a attribué les directions pour la période 2027-2030 et réglé les suppléances à compter du 1er janvier 2027.",
-          "date": "2026-10-20T23:44:17.371Z"
         },
         {
           "title": "«Zones blanches» pour construire à Zoug Plan 26/1 adapté",
@@ -624,9 +618,15 @@
           "date": "2026-10-22T02:39:48.543Z"
         },
         {
+          "title": "Zoug : attributions des directions pour la période 2027-2030",
+          "url": "/fr/articles-zoug/zoug-directions-mandat-2030/",
+          "excerpt": "Le Conseil d'État de Zoug a attribué les directions pour la période 2027-2030 et réglé les suppléances à compter du 1er janvier 2027.",
+          "date": "2026-10-20T23:44:17.371Z"
+        },
+        {
           "title": "Abonnements transports publics Canton Zoug zones et tarifs",
           "url": "/fr/articles-suisse/transports-publics-zoug-abonnements/",
-          "excerpt": "Les principales données sur l'abonnement aux transports publics dans le canton de Zurich",
+          "excerpt": "Les principales données sur l'abonnement aux transports publics dans le canton de Zurich.",
           "date": "2026-08-17T16:02:49.928Z"
         },
         {
@@ -665,7 +665,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

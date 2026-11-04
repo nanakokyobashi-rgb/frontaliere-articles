@@ -4,7 +4,7 @@
  */
 const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.baugesuch-juchstrasse-frauenfeld.title': 'Domanda edilizia a Frauenfeld: Juchstrasse 22-22b',
-    'blog.article.baugesuch-juchstrasse-frauenfeld.excerpt': 'Domanda edilizia per Juchstrasse 22, 22a e 22b: dal 7 al 26 ottobre 2026 gli atti sono consultabili al Bankplatz 3.',
+    'blog.article.baugesuch-juchstrasse-frauenfeld.excerpt': 'Il 7 ottobre 2026 prende avvio la pubblicazione del Baugesuch relativo a Juchstrasse 22, 22a e 22b.',
     'blog.article.baugesuch-juchstrasse-frauenfeld.imageAlt': 'Edificio commerciale e strada urbana a Frauenfeld, tema di una domanda edilizia pubblica',
     'blog.article.rapporti-thurmed-turgovia.title': 'Rapporti 2025 thurmed e Spital Thurgau',
     'blog.article.rapporti-thurmed-turgovia.excerpt': 'La pagina elenca il rapporto 2025 di thurmed e Spital Thurgau AG, il rapporto di sostenibilità e le statistiche dal 2021 al 2025.',
@@ -34,7 +34,7 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.turgovia-sicurezza-lavoro-orari.excerpt': 'Guida alla sicurezza sul lavoro, tutela della salute, orari e periodi di riposo nel Canton Turgovia secondo le normative e l\'Ispettorato del lavoro.',
     'blog.article.turgovia-sicurezza-lavoro-orari.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.tredicesima-rendita-avs-2026.title': '13ª rendita AVS pagata con la pensione di dicembre 2026',
-    'blog.article.tredicesima-rendita-avs-2026.excerpt': 'La 13ª rendita AVS arriva con la rendita di dicembre 2026 Non serve presentare domande o svolgere pratiche Spetta a chi riceve una rendita AVS di vecchiaia',
+    'blog.article.tredicesima-rendita-avs-2026.excerpt': 'La 13ª rendita AVS sarà pagata insieme alla rendita di dicembre 2026.',
     'blog.article.tredicesima-rendita-avs-2026.imageAlt': 'Persona anziana in Turgovia controlla la rendita AVS di dicembre',
     'blog.article.eventi-weekend-turgovia.title': 'Eventi del weekend in Turgovia: cosa fare sabato e domenica',
     'blog.article.eventi-weekend-turgovia.excerpt': 'Eventi in Turgovia ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
@@ -46,10 +46,10 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.supporto-imprese-turgovia.excerpt': 'Il Canton Turgovia offre alle imprese informazioni, consulenza e sostegno per condizioni quadro, immobili, autorizzazioni e contatti con uffici e autorità.',
     'blog.article.supporto-imprese-turgovia.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.turgovia-servizi-datori-lavoro.title': 'Turgovia: servizi di ricerca personale e tutela lari',
-    'blog.article.turgovia-servizi-datori-lavoro.excerpt': 'Il Canton Turgovia mette a disposizione dei datori di lavoro le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen e il portale arbeit.swiss per vacancy vacancy',
+    'blog.article.turgovia-servizi-datori-lavoro.excerpt': 'La pagina dedicata al servizio spiega che queste strutture sostengono la ricerca di lavoratrici e lavoratori adatti.',
     'blog.article.turgovia-servizi-datori-lavoro.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.pbv-rpg2-turgovia-2026.title': 'Turgovia: approvata PBV revisionata per RPG2',
-    'blog.article.pbv-rpg2-turgovia-2026.excerpt': 'Il Governo ha approvato la PBV revisionata RPG2 riguarda le costruzioni fuori dalle zone edificabili L\'obiettivo è limitare la crescita a un massimo del 2%',
+    'blog.article.pbv-rpg2-turgovia-2026.excerpt': 'La PBV revisionata raccoglie in un nuovo capitolo le disposizioni necessarie per RPG2 insieme alle norme già esistenti sulle costruzioni e sugli impianti fuori dalla zona edificabile.',
     'blog.article.pbv-rpg2-turgovia-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.turgovia-modifica-piano-direttore-2027.title': 'Turgovia: modifica piano direttore per sedi economiche',
     'blog.article.turgovia-modifica-piano-direttore-2027.excerpt': 'Il Canton Turgovia avvia la consultazione sulla revisione del piano direttore per lo sviluppo di commercio e industria.',
@@ -78,6 +78,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.turgovia-piano-risparmio-60-milioni.title': 'Turgovia: piano di risparmio da 60 milioni entro il 2030',
     'blog.article.turgovia-piano-risparmio-60-milioni.excerpt': 'Il Governo propone 37 misure per stabilizzare le finanze cantonali.',
     'blog.article.turgovia-piano-risparmio-60-milioni.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.economia-imprese-cantone-turgovia.title': 'Supporto imprese Canton Turgovia: condizioni quadro e insediamento',
+    'blog.article.economia-imprese-cantone-turgovia.excerpt': 'L\'amministrazione offre accompagnamento, informazione e consulenza alle imprese esistenti e a chi desidera insediarsi nel Cantone Turgovia.',
+    'blog.article.economia-imprese-cantone-turgovia.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;

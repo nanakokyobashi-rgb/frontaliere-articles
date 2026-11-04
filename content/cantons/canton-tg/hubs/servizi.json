@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T14:36:40.036Z",
-  "contentHash": "8a1591b40722892976b82180e85a200c32c49c516aeefa234b181698306df48b",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "33114ae770e6b5498dd36a88f5002066efc3d0982a85418387e06b7ee01a0565",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-03T00:59:08.019Z",
+      "updatedAt": "2026-11-03T14:10:08.795Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -38,7 +43,7 @@
         },
         {
           "label": "Aste di targhe in corso",
-          "value": "56",
+          "value": "55",
           "note": "offerta mediana 600 CHF"
         }
       ],
@@ -71,23 +76,37 @@
               "url": "https://auktion.tg.ch/de/auction/109734"
             },
             {
-              "label": "TG455555",
-              "value": "1320 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-04T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109874"
-            },
-            {
               "label": "TG23238",
               "value": "900 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://auktion.tg.ch/de/auction/109867"
+            },
+            {
+              "label": "TG21075",
+              "value": "630 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-04T18:00:00.000Z",
+              "url": "https://auktion.tg.ch/de/auction/109728"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "5 °C",
+              "detail": "oggi da 5 a 6 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -125,7 +144,7 @@
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -166,16 +185,16 @@
           "date": "2026-10-31T11:54:22.387Z"
         },
         {
-          "title": "Domanda edilizia a Frauenfeld: Juchstrasse 22-22b",
-          "url": "/articoli-turgovia/baugesuch-juchstrasse-frauenfeld/",
-          "excerpt": "Domanda edilizia per Juchstrasse 22, 22a e 22b: dal 7 al 26 ottobre 2026 gli atti sono consultabili al Bankplatz 3.",
-          "date": "2026-10-07T10:39:32.215Z"
-        },
-        {
           "title": "Permesso di dimora B nel Cantone di Turgovia: requisiti e rinnovo",
           "url": "/articoli-svizzera/permesso-dimora-b-canton-turgovia-requisiti-rinnovo/",
           "excerpt": "Scopri i requisiti e la procedura per il rinnovo del permesso di dimora B nel Cantone di Turgovia.",
           "date": "2026-09-07T03:40:46.786Z"
+        },
+        {
+          "title": "Permesso L breve durata Turgovia: proroga e rinnovo",
+          "url": "/articoli-svizzera/permesso-l-breve-durata-turgovia/",
+          "excerpt": "Il permesso L consente di lavorare in Svizzera per periodi fino a un anno. Scopri come funziona in Turgovia, le condizioni di proroga e il passaggio al permesso B.",
+          "date": "2026-09-07T03:58:39.449Z"
         }
       ],
       "latestCantonArticles": [],
@@ -205,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "TG",
@@ -221,7 +240,7 @@
         },
         {
           "label": "Plate auctions running",
-          "value": "56",
+          "value": "55",
           "note": "typical bid 600 CHF"
         }
       ],
@@ -254,23 +273,37 @@
               "url": "https://auktion.tg.ch/de/auction/109734"
             },
             {
-              "label": "TG455555",
-              "value": "1,320 CHF",
-              "detail": "current bid",
-              "date": "2026-11-04T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109874"
-            },
-            {
               "label": "TG23238",
               "value": "900 CHF",
               "detail": "current bid",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://auktion.tg.ch/de/auction/109867"
+            },
+            {
+              "label": "TG21075",
+              "value": "630 CHF",
+              "detail": "current bid",
+              "date": "2026-11-04T18:00:00.000Z",
+              "url": "https://auktion.tg.ch/de/auction/109728"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "5 °C",
+              "detail": "today from 5 to 6 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -308,7 +341,7 @@
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -349,16 +382,16 @@
           "date": "2026-10-31T11:54:22.387Z"
         },
         {
-          "title": "Building application in Frauenfeld: Juchstrasse 22-22b",
-          "url": "/en/thurgau-articles/frauenfeld-building-application-juchstrasse/",
-          "excerpt": "Building application for Juchstrasse 22, 22a and 22b: from October 7 to 26, 2026, the documents can be consulted at Bankplatz 3.",
-          "date": "2026-10-07T10:39:32.215Z"
-        },
-        {
           "title": "Residence permit B in the Canton of Thurgau: requirements and renewal",
           "url": "/en/swiss-articles/residence-permit-b-canton-thurgau-requirements-renewal/",
           "excerpt": "Learn about the requirements and procedure for renewing a B residence permit in the Canton of Thurgau.",
           "date": "2026-09-07T03:40:46.786Z"
+        },
+        {
+          "title": "Permit L short duration Thurgau: extension and renewal",
+          "url": "/en/swiss-articles/permit-l-short-term-thurgau/",
+          "excerpt": "The L permit allows you to work in Switzerland for periods of up to one year. Find out how it works in Thurgau, the extension conditions and the switch to the B permit.",
+          "date": "2026-09-07T03:58:39.449Z"
         }
       ],
       "latestCantonArticles": [],
@@ -384,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "TG",
@@ -400,7 +433,7 @@
         },
         {
           "label": "Laufende Kontrollschild-Auktionen",
-          "value": "56",
+          "value": "55",
           "note": "mittleres Gebot 600 CHF"
         }
       ],
@@ -433,23 +466,37 @@
               "url": "https://auktion.tg.ch/de/auction/109734"
             },
             {
-              "label": "TG455555",
-              "value": "1’320 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-04T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109874"
-            },
-            {
               "label": "TG23238",
               "value": "900 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://auktion.tg.ch/de/auction/109867"
+            },
+            {
+              "label": "TG21075",
+              "value": "630 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-04T18:00:00.000Z",
+              "url": "https://auktion.tg.ch/de/auction/109728"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "5 °C",
+              "detail": "heute 5 bis 6 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +534,7 @@
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -524,20 +571,20 @@
         {
           "title": "Thurgau: Neuer Tarif für die Angehörigenpflege festgelegt",
           "url": "/de/thurgau-artikel/turgau-tarif-pflegende-angehoerige-2026/",
-          "excerpt": "Die Thurgauer Kantonsregierung setzt den Tarif für Leistungen der Angehörigenpflege mit rückwirkender Geltung ab dem 1.",
+          "excerpt": "Im Dezember 2025 hatte die Kantonsregierung den Tarif für diese Leistungen ab dem 1. Januar 2026 festgelegt und den Beschluss in die Änderung der Verordnung aufgenommen.",
           "date": "2026-10-31T11:54:22.387Z"
-        },
-        {
-          "title": "Baugesuch in Frauenfeld: Juchstrasse 22-22b",
-          "url": "/de/thurgau-artikel/baugesuch-frauenfeld-juchstrasse/",
-          "excerpt": "Baugesuch für Juchstrasse 22, 22a und 22b: Vom 7. bis 26. Oktober 2026 können die Unterlagen am Bankplatz 3 eingesehen werden.",
-          "date": "2026-10-07T10:39:32.215Z"
         },
         {
           "title": "Aufenthaltsbewilligung B im Kanton Thurgau: Voraussetzungen und Verlängerung",
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-kanton-thurgau-voraussetzungen-verlaengerung/",
           "excerpt": "Erfahren Sie mehr über die Voraussetzungen und das Verfahren zur Verlängerung der Aufenthaltsbewilligung B im Kanton Thurgau.",
           "date": "2026-09-07T03:40:46.786Z"
+        },
+        {
+          "title": "Kurzzeitbewilligung Thurgau: Verlängerung und Erneuerung",
+          "url": "/de/schweiz-artikel/arbeitsgenehmigung-l-kurzfristig-thurgau/",
+          "excerpt": "Mit der Bewilligung L können Sie bis zu einem Jahr in der Schweiz arbeiten. Erfahren Sie, wie es im Thurgau funktioniert, die Verlängerungsbedingungen und den Übergang zur B-Bewilligung.",
+          "date": "2026-09-07T03:58:39.449Z"
         }
       ],
       "latestCantonArticles": [],
@@ -563,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "TG",
@@ -579,7 +626,7 @@
         },
         {
           "label": "Enchères de plaques en cours",
-          "value": "56",
+          "value": "55",
           "note": "offre centrale 600 CHF"
         }
       ],
@@ -612,23 +659,37 @@
               "url": "https://auktion.tg.ch/de/auction/109734"
             },
             {
-              "label": "TG455555",
-              "value": "1 320 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-04T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109874"
-            },
-            {
               "label": "TG23238",
               "value": "900 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://auktion.tg.ch/de/auction/109867"
+            },
+            {
+              "label": "TG21075",
+              "value": "630 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-04T18:00:00.000Z",
+              "url": "https://auktion.tg.ch/de/auction/109728"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "5 °C",
+              "detail": "aujourd’hui de 5 à 6 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -666,7 +727,7 @@
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -707,16 +768,16 @@
           "date": "2026-10-31T11:54:22.387Z"
         },
         {
-          "title": "Demande de permis de construire à Frauenfeld : Juchstrasse 22-22b",
-          "url": "/fr/articles-thurgovie/demande-construction-frauenfeld-juchstrasse/",
-          "excerpt": "Demande de permis de construire pour Juchstrasse 22, 22a et 22b : du 7 au 26 octobre 2026, les documents peuvent être consultés au Bankplatz 3.",
-          "date": "2026-10-07T10:39:32.215Z"
-        },
-        {
           "title": "Permis de séjour B dans le canton de Thurgovie : exigences et renouvellement",
           "url": "/fr/articles-suisse/permis-de-sejour-b-canton-de-thurgovie-exigences-renouvellement/",
           "excerpt": "Découvrez les conditions et la procédure de renouvellement du permis de séjour B dans le canton de Thurgovie.",
           "date": "2026-09-07T03:40:46.786Z"
+        },
+        {
+          "title": "Permis L courte durée Thurgovie : prorogation et renouvellement",
+          "url": "/fr/articles-suisse/permis-l-courte-duree-thurgovie/",
+          "excerpt": "Le permis L permet de travailler en Suisse pour des périodes allant jusqu'à un an. Découvrez comment cela fonctionne en Thurgovie, les conditions de prolongation et le passage au permis B.",
+          "date": "2026-09-07T03:58:39.449Z"
         }
       ],
       "latestCantonArticles": [],
@@ -738,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

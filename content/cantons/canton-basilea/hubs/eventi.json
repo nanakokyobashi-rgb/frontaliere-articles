@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-11-03T00:06:00.232Z",
-  "contentHash": "2743d73d204767356456de38360fc89cd8c53ca15947c65cd2fabea8c0aa0228",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "b910c29253c374e5b7273965618b82fd2f6740335c936bdfb53a0b236a90b25b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T13:10:19.053Z",
+      "updatedAt": "2026-11-03T20:20:58.923Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "69",
+          "value": "72",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,30 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Porrum Pub Quiz – hosted by Silvan",
-              "detail": "Porrum Cocktailbar @ Markthalle, Basel",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
-            },
-            {
-              "label": "Baloise Session: JOE BONAMASSA | BRANDY CLARK",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/evenements/musique/bale/baloise-session-joe-bonamassa-brandy-clark_A2wU1ZU"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
-              "detail": "Basilea, Basel — in corso, ultimo giorno: 25 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — in corso, ultimo giorno: 5 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
             {
               "label": "Aroma-Massage",
               "detail": "Bio-Medica Fachschule, Basel",
@@ -87,15 +63,39 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lara-stoll-volume-5-die-rueckkehr/"
             },
             {
+              "label": "Porrum Pub Quiz – hosted by Silvan",
+              "detail": "Porrum Cocktailbar @ Markthalle, Basel — in corso, ultimo giorno: 4 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
+              "detail": "Basilea, Basel — in corso, ultimo giorno: 25 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — in corso, ultimo giorno: 5 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
               "label": "Inaugurazione della mostra “Figure per l’eternità” di Peter Moilliet",
               "detail": "Allschwil",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/inaugurazione-della-mostra-figure-per-leternita-di-peter-moilliet/"
+            },
+            {
+              "label": "KOPFKIND Lesung mit Christine Johanna Keller",
+              "detail": "Allschwil",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kopfkind-lesung-mit-christine-johanna-keller/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "69",
+          "value": "72",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,30 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Porrum Pub Quiz – hosted by Silvan",
-              "detail": "Porrum Cocktailbar @ Markthalle, Basel",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
-            },
-            {
-              "label": "Baloise Session: JOE BONAMASSA | BRANDY CLARK",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/evenements/musique/bale/baloise-session-joe-bonamassa-brandy-clark_A2wU1ZU"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — ongoing, last day: 25 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — ongoing, last day: 5 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
             {
               "label": "Aroma-Massage",
               "detail": "Bio-Medica Fachschule, Basel",
@@ -192,15 +168,39 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lara-stoll-volume-5-die-rueckkehr/"
             },
             {
+              "label": "Porrum Pub Quiz – hosted by Silvan",
+              "detail": "Porrum Cocktailbar @ Markthalle, Basel — ongoing, last day: 4 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — ongoing, last day: 25 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — ongoing, last day: 5 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
               "label": "Opening of the exhibition ‘Figures for Eternity’ by Peter Moilliet",
               "detail": "Allschwil",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/inaugurazione-della-mostra-figure-per-leternita-di-peter-moilliet/"
+            },
+            {
+              "label": "KOPFKIND Lesung mit Christine Johanna Keller",
+              "detail": "Allschwil",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kopfkind-lesung-mit-christine-johanna-keller/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "69",
+          "value": "72",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,30 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Porrum Pub Quiz – hosted by Silvan",
-              "detail": "Porrum Cocktailbar @ Markthalle, Basel",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
-            },
-            {
-              "label": "Baloise Session: JOE BONAMASSA | BRANDY CLARK",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/evenements/musique/bale/baloise-session-joe-bonamassa-brandy-clark_A2wU1ZU"
-            },
-            {
-              "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — läuft, letzter Tag: 25. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — läuft, letzter Tag: 5. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
             {
               "label": "Aroma-Massage",
               "detail": "Bio-Medica Fachschule, Basel",
@@ -297,15 +273,39 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lara-stoll-volume-5-die-rueckkehr/"
             },
             {
+              "label": "Porrum Pub Quiz – hosted by Silvan",
+              "detail": "Porrum Cocktailbar @ Markthalle, Basel — läuft, letzter Tag: 4. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
+            },
+            {
+              "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — läuft, letzter Tag: 25. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — läuft, letzter Tag: 5. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
               "label": "Vernissage \"Figuren für die Ewigkeit\" Peter Moilliet",
               "detail": "Allschwil",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/inaugurazione-della-mostra-figure-per-leternita-di-peter-moilliet/"
+            },
+            {
+              "label": "KOPFKIND Lesung mit Christine Johanna Keller",
+              "detail": "Allschwil",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kopfkind-lesung-mit-christine-johanna-keller/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "69",
+          "value": "72",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,30 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Porrum Pub Quiz – hosted by Silvan",
-              "detail": "Porrum Cocktailbar @ Markthalle, Basel",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
-            },
-            {
-              "label": "Baloise Session: JOE BONAMASSA | BRANDY CLARK",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/evenements/musique/bale/baloise-session-joe-bonamassa-brandy-clark_A2wU1ZU"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — en cours, dernier jour : 25 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — en cours, dernier jour : 5 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
             {
               "label": "Aroma-Massage",
               "detail": "Bio-Medica Fachschule, Basel",
@@ -402,15 +378,39 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lara-stoll-volume-5-die-rueckkehr/"
             },
             {
+              "label": "Porrum Pub Quiz – hosted by Silvan",
+              "detail": "Porrum Cocktailbar @ Markthalle, Basel — en cours, dernier jour : 4 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — en cours, dernier jour : 25 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — en cours, dernier jour : 5 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
               "label": "Vernissage « Des figures pour l'éternité » de Peter Moilliet",
               "detail": "Allschwil",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/inaugurazione-della-mostra-figure-per-leternita-di-peter-moilliet/"
+            },
+            {
+              "label": "KOPFKIND Lesung mit Christine Johanna Keller",
+              "detail": "Allschwil",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kopfkind-lesung-mit-christine-johanna-keller/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

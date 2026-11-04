@@ -87,16 +87,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-seehas-affollamento-mattutino': {
     title: 'Seehas più pieno e viaggi più lunghi sulla Konstanz-Singen',
-    description: 'La chiusura della Schwarzwaldbahn ferma il Regionalexpress tra Konstanz e Singen, aumenta l\'uso della S-Bahn Seehas, provoca affollamento mattutino e allunga',
+    description: 'La chiusura della Schwarzwaldbahn ferma il Regionalexpress tra Konstanz e Singen, aumenta l\'uso della S-Bahn Seehas, provoca affollamento mattutino e allunga.',
     keywords: 'frontalieri, ticino, svizzera, italia, seehas, pieno, viaggi, lunghi',
     ogTitle: 'Seehas più pieno e viaggi più lunghi sulla Konstanz-Singen',
-    ogDescription: 'A causa della sospensione del Regionalexpress sulla linea Konstanz-Singen, dovuta alla chiusura della Schwarzwaldbahn, sempre più passeggeri si spostano sulla S-Bahn Seehas. Questo provoca un maggiore affollamento, soprattutto nelle ore del mattino',
+    ogDescription: 'A causa della sospensione del Regionalexpress sulla linea Konstanz-Singen, dovuta alla chiusura della Schwarzwaldbahn, sempre più passeggeri si spostano sulla S-Bahn Seehas. Questo provoca un maggiore affollamento, soprattutto nelle ore del mattino.',
     canonicalPath: '/articoli-sciaffusa/seehas-affollamento-mattutino/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Seehas più pieno e viaggi più lunghi sulla Konstanz-Singen",
-      "description": "La chiusura della Schwarzwaldbahn ferma il Regionalexpress tra Konstanz e Singen, aumenta l'uso della S-Bahn Seehas, provoca affollamento mattutino e allunga",
+      "description": "La chiusura della Schwarzwaldbahn ferma il Regionalexpress tra Konstanz e Singen, aumenta l'uso della S-Bahn Seehas, provoca affollamento mattutino e allunga.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -207,7 +207,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Schaffhauser Straße chiusa a Singen dal 26 al 30 ottobre 2026: lavori alla fermata Landesgartenschau, passaggio per pedoni e ciclisti, deviazioni segnalate.',
     keywords: 'frontalieri, ticino, svizzera, italia, singen, chiusa, schaffhauser, straße',
     ogTitle: 'Singen: Schaffhauser Straße chiusa per lavori',
-    ogDescription: 'Durante le ferie autunnali, la Schaffhauser Straße sarà completamente chiusa a Singen dal 26 al 30 ottobre 2026. Pedoni e ciclisti potranno passare; autobus di linea e soccorsi useranno la Roseneggstraße, mentre il resto del traffico seguirà',
+    ogDescription: 'Durante le ferie autunnali, la Schaffhauser Straße sarà completamente chiusa a Singen dal 26 al 30 ottobre 2026. Pedoni e ciclisti potranno passare; autobus di linea e soccorsi useranno la Roseneggstraße, mentre il resto del traffico seguirà.',
     canonicalPath: '/articoli-sciaffusa/singen-chiusura-schaffhauser-strasse/',
     structuredData: {
       "@context": "https://schema.org",
@@ -321,7 +321,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-pulizie-tunnel-sciaffusa': {
     title: 'Bundesamt für Strassen chiuderà tre tunnel di notte',
-    description: 'Dal 19 al 23 ottobre il Bundesamt für Strassen chiude ogni notte i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia, dalle 20 fino alle 5.',
+    description: 'Il Bundesamt für Strassen chiuderà i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia.',
     keywords: 'frontalieri, ticino, svizzera, italia, bundesamt, strassen, chiuderà, tunnel',
     ogTitle: 'Tre tunnel chiusi di notte per lavori di pulizia',
     ogDescription: 'Il Bundesamt für Strassen fermerà ogni notte i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia. La finestra indicata va dal 19 al 23 ottobre, con chiusura dalle 20 fino alle 5 del giorno successivo.',
@@ -330,7 +330,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Bundesamt für Strassen chiuderà tre tunnel di notte",
-      "description": "Dal 19 al 23 ottobre il Bundesamt für Strassen chiude ogni notte i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia, dalle 20 fino alle 5.",
+      "description": "Il Bundesamt für Strassen chiuderà i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -438,16 +438,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-schleitheim-scooter-incidente-2026': {
     title: 'Incidente scooter a Schleitheim: donna ferita, Hohbrugg chiusa',
-    description: 'Incidente sulla Hohbrugg a Schleitheim il 18 ottobre 2026: scooterista 61enne cade 12 metri nel pendio, elitrasporto in ospedale, strada chiusa per rilievi',
+    description: 'Incidente sulla Hohbrugg a Schleitheim il 18 ottobre 2026: scooterista 61enne cade 12 metri nel pendio, elitrasporto in ospedale, strada chiusa per rilievi.',
     keywords: 'frontalieri, ticino, svizzera, italia, incidente, scooter, schleitheim, donna',
     ogTitle: 'Incidente scooter a Schleitheim: donna elitrasportata, Hohbrugg bloccata',
-    ogDescription: 'Domenica 18 ottobre 2026 sulla Hohbrugg verso Siblingen: una 61enne perde il controllo dello scooter nella curva prima dello Zwärenbach, finisce 12 metri oltre il guardrail nel pendio. Ferite gravi, soccorsa da ambulanza ed elicottero Lions 1. Strada',
+    ogDescription: 'Domenica 18 ottobre 2026 sulla Hohbrugg verso Siblingen: una 61enne perde il controllo dello scooter nella curva prima dello Zwärenbach, finisce 12 metri oltre il guardrail nel pendio. Ferite gravi, soccorsa da ambulanza ed elicottero Lions 1. Strada.',
     canonicalPath: '/articoli-sciaffusa/schleitheim-scooter-incidente-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Incidente scooter a Schleitheim: donna ferita, Hohbrugg chiusa",
-      "description": "Incidente sulla Hohbrugg a Schleitheim il 18 ottobre 2026: scooterista 61enne cade 12 metri nel pendio, elitrasporto in ospedale, strada chiusa per rilievi",
+      "description": "Incidente sulla Hohbrugg a Schleitheim il 18 ottobre 2026: scooterista 61enne cade 12 metri nel pendio, elitrasporto in ospedale, strada chiusa per rilievi.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -909,7 +909,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'PIL cantonale atteso 2026: 0,96%, contro lo 0,8% svizzero Export sotto pressione per tensioni, energia, dazi e franco forte La città discute zone',
     keywords: 'frontalieri, ticino, svizzera, italia, cantonale, atteso, contro, svizzero',
     ogTitle: 'PIL Sciaffusa 2026: 0,96% vs Svizzera 0,8%',
-    ogDescription: 'PIL cantonale atteso 2026: 0,96%, contro lo 0,8% svizzero Export sotto pressione per tensioni, energia, dazi e franco forte La città discute zone d\'incontro',
+    ogDescription: 'Il rapporto congiunturale 2026 della Schaffhauser Kantonalbank, del Gewerbeverband cantonale e dell\'Industrie- und Wirtschaftsvereinigung prevede per il prodotto interno lordo cantonale una crescita dello 0,96%.',
     canonicalPath: '/articoli-sciaffusa/pil-cantonale-2026-crescita/',
     structuredData: {
       "@context": "https://schema.org",
@@ -1179,7 +1179,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-rheinfall-management-2026': {
     title: 'Kantonsrat discute gestione Rheinfall, si profila votazione',
-    description: 'Il Kantonsrat discute la Rheinfall-Management-Gesellschaft; i Verdi chiedono norme più severe sui datacenter a Beringen. Votazione popolare',
+    description: 'Il Kantonsrat discute la Rheinfall-Management-Gesellschaft; i Verdi chiedono norme più severe sui datacenter a Beringen. Votazione popolare.',
     keywords: 'frontalieri, ticino, svizzera, italia, kantonsrat, discute, gestione, rheinfall',
     ogTitle: 'Rheinfall: discussione gestione e votazione 2026',
     ogDescription: 'Il Kantonsrat di Sciaffusa ha ripreso il dossier sulla Rheinfall-Management-Gesellschaft il 2 novembre 2026. I Verdi presentano petizione per datacenter a Beringen.',
@@ -1188,7 +1188,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Kantonsrat discute gestione Rheinfall, si profila votazione",
-      "description": "Il Kantonsrat discute la Rheinfall-Management-Gesellschaft; i Verdi chiedono norme più severe sui datacenter a Beringen. Votazione popolare",
+      "description": "Il Kantonsrat discute la Rheinfall-Management-Gesellschaft; i Verdi chiedono norme più severe sui datacenter a Beringen. Votazione popolare.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

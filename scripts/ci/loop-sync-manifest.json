@@ -2127,9 +2127,9 @@
       "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; resta sorvegliato, ma le decisioni di pubblicazione delle copertine vivono nel corpus: le nuove immagini passano dal motore mirrorato con scope `article-hero`, se il motore fallisce, il fallback usa un record reader-facing del catalogo o la cover statica governata e accoda la rigenerazione senza rigettare l'articolo; la generazione del testo applica la guardia anti-copia. Il gemello del sito e' il generatore legacy disabilitato (`confirm_corpus_write=yes`) e non va aggiornato per questa pipeline corpus-only; i registri pubblici vengono esposti via JSON HTTP. RIALLINEATO 2026-11-04 (corpus-ahead): il writer controlla la mappa completa e il candidato con article-slug-uniqueness.mjs; il controllo resta qui perche' il generatore legacy del sito e' disabilitato e il corpus pubblica i dati via JSON HTTP. Baseline corpus aggiornata.",
       "baseline": {
         "site": "86c5e5304ccd0ac1",
-        "corpus": "2130f16f8a54ba75",
+        "corpus": "06fb52e200025123",
         "alignedAt": "2026-11-04",
-        "forcedAt": "2026-11-04T04:44:56.907Z"
+        "forcedAt": "2026-11-04T05:36:08.000Z"
       }
     },
     {
@@ -2702,11 +2702,12 @@
     },
     {
       "path": "scripts/lib/shard-git-helpers.sh",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il layout ticino-hash-v1 e' usato dal publisher del sito e dipende dal fan-out Ticino, assente nel corpus. Il corpus non ha caller che passino quel layout e mantiene la verifica canonica; il sito mantiene il mapper specifico per i propri shard.",
       "baseline": {
-        "site": "e2cbdcdee8c16e5d",
+        "site": "a25aa5b1d0d46bc5",
         "corpus": "e2cbdcdee8c16e5d",
-        "alignedAt": "2026-11-03"
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -2867,11 +2868,12 @@
     {
       "path": "generator/scripts/lib/article-excerpt.mjs",
       "mode": "corpus-only",
-      "reason": "Validatore e normalizzatore degli excerpt plain usato dal generatore del corpus per impedire Markdown nelle card e nei campi SEO derivati. Non esiste un gemello operativo sul sito: la difesa lato card vive nel repository del sito e resta una protezione distinta.",
+      "reason": "Validatore, normalizzatore e riparatore deterministico di excerpt e descrizioni SEO plain. Rileva code incomplete e terminatori mancanti; riconosce N. come ordinale solo nel tedesco e nei contesti data. I candidati delle strategie a/b passano il validatore condiviso per abbreviazioni, parole funzionali e lunghezza minima; il writer rifiuta campi vuoti senza fallback sicuro e accetta un sibling completo solo quando è semanticamente compatibile con il campo, il titolo o il body dello stesso articolo. Nello sweep storico la strategia d conserva il testo completo aggiungendo il terminatore e la b sostituisce solo elenchi appiattiti con una frase del body nella stessa lingua e pertinente al titolo. Il writer controlla prima della registrazione e il publisher esegue il preflight prima di cancellare dist/api. Non esiste un gemello operativo sul sito: la difesa lato card resta distinta.",
       "baseline": {
         "site": null,
-        "corpus": "5655fc21c1a5546b",
-        "alignedAt": "2026-10-08"
+        "corpus": "4e024da6ba2b6c03",
+        "alignedAt": "2026-11-04",
+        "forcedAt": "2026-11-04T05:36:08.000Z"
       }
     },
     {
@@ -3356,9 +3358,9 @@
       "sitePath": "scripts/lib/discovery/discoveryPool.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d5c5bada873c3bab",
-        "corpus": "d5c5bada873c3bab",
-        "alignedAt": "2026-08-09"
+        "site": "6138d9b387163803",
+        "corpus": "6138d9b387163803",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -3406,9 +3408,9 @@
       "sitePath": "scripts/lib/discovery/sources/googleNewsRssSource.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "fc66db1ec0a2e698",
-        "corpus": "fc66db1ec0a2e698",
-        "alignedAt": "2026-08-09"
+        "site": "f55d14d95a523a5d",
+        "corpus": "f55d14d95a523a5d",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -3416,9 +3418,9 @@
       "sitePath": "scripts/lib/discovery/sources/googleSuggestSource.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "be18f36169abce51",
-        "corpus": "be18f36169abce51",
-        "alignedAt": "2026-09-13"
+        "site": "4eaf4567ed06e763",
+        "corpus": "4eaf4567ed06e763",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -3426,9 +3428,9 @@
       "sitePath": "scripts/lib/discovery/sources/googleTrendsSource.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "483ebda89271b78b",
-        "corpus": "483ebda89271b78b",
-        "alignedAt": "2026-08-09"
+        "site": "6cb0a4164b7ad8d8",
+        "corpus": "6cb0a4164b7ad8d8",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -3790,8 +3792,8 @@
       "reason": "L'emettitore del blocco meta per-locale, estratto da generator/scripts/create-article.mjs (dove era `buildMetaBlock` + `escapeForSingleQuoteTS`). E' il punto in cui il corpus decide QUALI campi per-locale diventano superficie pubblica: build-api.mjs serializza il default export di blog-meta-<locale>.ts senza filtrare, quindi un campo che non passa di qui non esiste per nessun consumatore. `corpus-only` e non `identical`: il sito ha la sua copia inline dentro scripts/create-article.mjs, che e' gia' registrato `adapted` — un gemello di FILE qui non esiste. La meta' lettrice (metaFieldRegex, la voce qui sotto) e' invece `identical`, ed e' voluto: il lettore e' condiviso, lo scrittore no.",
       "baseline": {
         "site": null,
-        "corpus": "b32967d7a7470176",
-        "alignedAt": "2026-08-09"
+        "corpus": "0691485f60084168",
+        "alignedAt": "2026-11-03"
       }
     },
     {
@@ -4013,9 +4015,9 @@
       "sitePath": "scripts/lib/topic-sources/googleNewsRss.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "2f6071da573a674e",
-        "corpus": "2f6071da573a674e",
-        "alignedAt": "2026-10-12"
+        "site": "e332928f38368842",
+        "corpus": "e332928f38368842",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -4025,9 +4027,9 @@
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3504",
       "reason": "Il gemello site-ahead importa `gscOrphans.mjs`, che qui e' adapted per i path corpus di Search Console. Trasportarlo come file identical isolato lascerebbe il consumer con una dipendenza non identical e metterebbe rossa la PR di trasporto; la divergenza e' intenzionale e resta governata da #3504.",
       "baseline": {
-        "site": "e8feb18da552b05c",
-        "corpus": "e8feb18da552b05c",
-        "alignedAt": "2026-10-12"
+        "site": "3e9a7b803b222e6c",
+        "corpus": "3e9a7b803b222e6c",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -4037,9 +4039,9 @@
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3504",
       "reason": "Il gemello site-ahead importa `gscOrphans.mjs`, che qui e' adapted per i path corpus di Search Console. Trasportarlo come file identical isolato lascerebbe il consumer con una dipendenza non identical e metterebbe rossa la PR di trasporto; la divergenza e' intenzionale e resta governata da #3504.",
       "baseline": {
-        "site": "6ea8f840c723c78f",
-        "corpus": "6ea8f840c723c78f",
-        "alignedAt": "2026-10-12"
+        "site": "55fad7d36db60902",
+        "corpus": "55fad7d36db60902",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -4162,17 +4164,17 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura. scalarFingerprint confronta i 23 scalari authoritative; il digest f556dd1f… include lo snippet Meta Pixel content-addressed, il cui loader contatta Meta solo dopo consenso pubblicitario esplicito e si blocca sui documenti sensibili, senza fallback noscript. AD_RECOVERY_FILENAME resta allineato al sorgente; sono preservati gli altri comportamenti di recovery, CMP, analytics e SEO gia' trasportati. Gli slot statici avvolgono l'elemento Google in un host first-party per il fallback creativo Firebase, senza cambiare il nodo AdSense o Auto Ads.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura. scalarFingerprint confronta i 23 scalari authoritative; il digest 74d545ee… include lo snippet Meta Pixel content-addressed, il cui loader contatta Meta solo dopo consenso pubblicitario esplicito e si blocca sui documenti sensibili, senza fallback noscript. AD_RECOVERY_FILENAME resta allineato al sorgente versionato; sono preservati gli altri comportamenti di recovery, CMP, analytics e SEO gia' trasportati. Gli slot statici avvolgono l'elemento Google in un host first-party per il fallback creativo Firebase, senza cambiare il nodo AdSense o Auto Ads.",
       "baseline": {
-        "site": "c9f803f4645a9ab0",
-        "corpus": "598612b34529c6c5",
-        "alignedAt": "2026-10-31"
+        "site": "16992ff4a6cade1d",
+        "corpus": "6171f472be3cc614",
+        "alignedAt": "2026-11-04"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 23,
-        "sha256": "f556dd1f680e7bfe6ea40f5b1d586108ea8673a74ef9d2eab824bf41188e21e9"
+        "sha256": "74d545ee4b72354f66108d6fc4cba44680450ff6e583f2b97f0c658d9897209b"
       }
     },
     {
@@ -4389,9 +4391,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
       "baseline": {
-        "site": "18e683c9406ca2e8",
-        "corpus": "18e683c9406ca2e8",
-        "alignedAt": "2026-10-31"
+        "site": "2fa53536d7a6f4a7",
+        "corpus": "2fa53536d7a6f4a7",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -5005,8 +5007,8 @@
       "mode": "identical",
       "reason": "La baseline registra lo stesso digest SHA-256 raw sui due lati; `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "e3f6068f4979c2de",
-        "corpus": "e3f6068f4979c2de",
+        "site": "3d627ef16150fe15",
+        "corpus": "3d627ef16150fe15",
         "alignedAt": "2026-11-04"
       }
     },
@@ -5943,8 +5945,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-24.yml",
       "mode": "identical",
       "baseline": {
-        "site": "8d972ad03766da12",
-        "corpus": "8d972ad03766da12",
+        "site": "42bda1ba630af324",
+        "corpus": "42bda1ba630af324",
         "alignedAt": "2026-11-04"
       }
     },
@@ -6852,9 +6854,9 @@
       "mode": "identical",
       "reason": "Fingerprint di recovery, Ads, Partnerize e Meta Pixel che lega gli snapshot byte-exact alle sorgenti. La proiezione esclude i contenuti ma verifica nomi e SHA-256; i test host confrontano i byte trasportati e il contratto prima della pubblicazione.",
       "baseline": {
-        "site": "85e0a9bf6b629f74",
-        "corpus": "85e0a9bf6b629f74",
-        "alignedAt": "2026-11-03"
+        "site": "cc5086bbe13e48f6",
+        "corpus": "cc5086bbe13e48f6",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -6863,9 +6865,29 @@
       "mode": "adapted",
       "reason": "Snapshot byte-exact delle risorse pubbliche e del guard inline derivate dall'exporter del sito, inclusi i byte del loader Meta Pixel consent-gated; hostShellFiles pubblica questi byte senza import fra repository.",
       "baseline": {
-        "site": "b18653746619d369",
-        "corpus": "30ee6bcb409a26f3",
-        "alignedAt": "2026-10-30"
+        "site": "56aaef2cbbea74f8",
+        "corpus": "4e7c0f6b5a3b02be",
+        "alignedAt": "2026-11-04"
+      }
+    },
+    {
+      "path": "scripts/ci/excerpt-completeness-baseline.json",
+      "mode": "corpus-only",
+      "reason": "Baseline monotona per superficie (file|locale|id|field) dei casi storici ancora incompleti dopo le riparazioni sicure: prefisso esistente, frase del body solo per liste appiattite, o terminatore aggiunto ai riassunti completi. I casi c restano invariati; le chiavi distinte separano le occorrenze meta e SEO dello stesso campo. Il producer blocca nuove regressioni e rimuove dal baseline le voci riparate. Il sito consuma l’API JSON e non esegue questo gate.",
+      "baseline": {
+        "site": null,
+        "corpus": "ca540598969b9f98",
+        "alignedAt": "2026-11-04"
+      }
+    },
+    {
+      "path": "scripts/lib/excerpt-completeness-gate.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate preflight del producer API che confronta ogni excerpt con il contratto di completezza e una baseline a chiavi file|locale|id|field. Le occorrenze dello stesso campo su superfici diverse restano indipendenti; il sito consuma la superficie JSON pubblicata e non valida i sorgenti del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "d21de5ef15e50746",
+        "alignedAt": "2026-11-04"
       }
     }
   ]

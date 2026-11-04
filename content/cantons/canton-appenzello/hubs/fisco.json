@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "fisco",
-  "updatedAt": "2026-10-28T19:36:02.653Z",
-  "contentHash": "95bd3e19c2cd21225781d84aabb2da9ee99a9e09664f809e86efe21329ff4039",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "a4bff3e67d2ec49a48264b7d9337bef459ac214c6114f77c8e9e24cbbad35194",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T11:41:09.250Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -155,7 +155,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/steigende-gesundheitskosten-und-weniger-steuereinnahmen-belasten-voranschlag/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -231,7 +231,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-28T19:36:02.653Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -364,7 +364,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/steigende-gesundheitskosten-und-weniger-steuereinnahmen-belasten-voranschlag/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -440,7 +440,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-28T19:36:02.653Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -573,7 +573,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/steigende-gesundheitskosten-und-weniger-steuereinnahmen-belasten-voranschlag/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -592,7 +592,7 @@
         {
           "title": "Appenzell Ausserrhoden steuert auf ein Defizit von 11,5 Millionen zu",
           "url": "/de/appenzell-artikel/appenzell-budget-defizit/",
-          "excerpt": "Die Mitteilung vom 28.",
+          "excerpt": "Die Meldung weist für die Kantonsfinanzen ein Defizit von 11,5 Millionen aus.",
           "date": "2026-10-28T18:13:37.671Z"
         },
         {
@@ -649,7 +649,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-28T19:36:02.653Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -782,7 +782,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/steigende-gesundheitskosten-und-weniger-steuereinnahmen-belasten-voranschlag/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -858,7 +858,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-28T19:36:02.653Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

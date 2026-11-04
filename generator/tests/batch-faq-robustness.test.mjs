@@ -54,6 +54,9 @@ test('FAQ: i control escape non vengono accettati per poi essere cancellati dal 
   assert.equal(batch.rejectRawFaqControlEscape(String.raw`\u000a`), false);
   assert.equal(batch.rejectRawFaqControlEscape('testo valido'), false);
   assert.equal(batch.rejectRawFaqControlEscape(`testo${String.fromCharCode(8)}`), true);
+  assert.equal(batch.rejectRawFaqControlEscape('&amp;#8;'), true);
+  assert.equal(batch.rejectRawFaqControlEscape('&amp;amp;#x8;'), true);
+  assert.equal(batch.rejectRawFaqControlEscape('&#038;#8;'), true);
 });
 
 test('FAQ IT qualityReject diventa un fallimento per-articolo, gli altri errori risalgono', () => {

@@ -43,16 +43,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-scambio-dati-salariali-2027': {
     title: 'Frontalieri, dal 2027 lo scambio dati sugli stipendi',
-    description: 'Dal 1 gennaio 2027 entra in vigore la nuova LSADS',
+    description: 'Dal 1 gennaio 2027 entra in vigore la nuova LSADS.',
     keywords: 'frontalieri, ticino, svizzera, italia, scambio, dati, sugli, stipendi',
     ogTitle: 'Frontalieri, dal 2027 scambio automatico dati stipendi',
-    ogDescription: 'Dal 1 gennaio 2027 entra in vigore la nuova LSADS',
+    ogDescription: 'Dal 1 gennaio 2027 entra in vigore la nuova LSADS.',
     canonicalPath: '/articoli-ticino/scambio-dati-salariali-2027/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontalieri, dal 2027 lo scambio dati sugli stipendi",
-      "description": "Dal 1 gennaio 2027 entra in vigore la nuova LSADS",
+      "description": "Dal 1 gennaio 2027 entra in vigore la nuova LSADS.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-scambio-dati-salariali-2027.webp`,
@@ -77,16 +77,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni': {
     title: 'Decreto tassa salute frontalieri pubblicato: via libera regioni',
-    description: 'Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività',
+    description: 'Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività.',
     keywords: 'frontalieri, ticino, svizzera, italia, decreto, tassa, salute, pubblicato',
     ogTitle: 'Decreto tassa salute frontalieri pubblicato: via libera',
-    ogDescription: 'Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività',
+    ogDescription: 'Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività.',
     canonicalPath: '/articoli-ticino/decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
-      "description": "Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività",
+      "description": "Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -116,16 +116,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-capitale-lpp-rimborso-imposta-fonte': {
     title: 'Capitale LPP: Ticino nega rimborso imposta alla fonte',
-    description: 'Dal 2024 il Ticino nega il rimborso dell\'imposta alla fonte',
+    description: 'Dal 2024 il Ticino nega il rimborso dell\'imposta alla fonte.',
     keywords: 'frontalieri, ticino, svizzera, italia, capitale, nega, rimborso, imposta',
     ogTitle: 'Capitale LPP: Ticino nega rimborso imposta alla fonte',
-    ogDescription: 'Dal 2024 il Ticino nega il rimborso dell\'imposta alla fonte',
+    ogDescription: 'Dal 2024 il Ticino nega il rimborso dell\'imposta alla fonte.',
     canonicalPath: '/articoli-ticino/capitale-lpp-rimborso-imposta-fonte/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Capitale LPP: Ticino nega rimborso imposta alla fonte",
-      "description": "Dal 2024 il Ticino nega il rimborso dell'imposta alla fonte",
+      "description": "Dal 2024 il Ticino nega il rimborso dell'imposta alla fonte.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -155,16 +155,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-autobus-elettrici-mendrisiotto-amsa': {
     title: 'Mendrisiotto: al via i primi quattro bus elettrici AMSA',
-    description: 'Quattro autobus elettrici AMSA entrano in servizio Coinvolte le linee 2, 3 e 4 nel Mendrisiotto Il progetto di elettrificazione è partito nel 2022',
+    description: 'AMSA ha una storia che risale al 1907, quando nacque con il nome di Società Tram Elettrici Mendrisiensi, TEM.',
     keywords: 'frontalieri, ticino, svizzera, italia, mendrisiotto, primi, quattro, elettrici',
     ogTitle: 'Mendrisiotto: al via i primi quattro bus elettrici AMSA',
-    ogDescription: 'Quattro autobus elettrici AMSA entrano in servizio Coinvolte le linee 2, 3 e 4 nel Mendrisiotto Il progetto di elettrificazione è partito nel 2022',
+    ogDescription: 'AMSA ha una storia che risale al 1907, quando nacque con il nome di Società Tram Elettrici Mendrisiensi, TEM.',
     canonicalPath: '/articoli-ticino/autobus-elettrici-mendrisiotto-amsa/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Mendrisiotto: al via i primi quattro bus elettrici AMSA",
-      "description": "Quattro autobus elettrici AMSA entrano in servizio Coinvolte le linee 2, 3 e 4 nel Mendrisiotto Il progetto di elettrificazione è partito nel 2022",
+      "description": "AMSA ha una storia che risale al 1907, quando nacque con il nome di Società Tram Elettrici Mendrisiensi, TEM.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -194,16 +194,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-nuovi-spazi-ambulatoriali-bellinzona': {
     title: 'Inaugurati nuovi spazi ambulatoriali a San Giovanni',
-    description: 'Oggi inaugurati nuovi spazi all\'Ospedale San Giovanni Poliambulatorio Turrita e Dermatologia nella sede di Bellinzona Ambienti pensati per pazienti',
+    description: 'L\'apertura dei nuovi spazi ha una ricaduta concreta soprattutto sul modo in cui viene organizzata la presa a carico.',
     keywords: 'frontalieri, ticino, svizzera, italia, inaugurati, nuovi, spazi, ambulatoriali',
     ogTitle: 'Nuovi spazi ambulatoriali a San Giovanni, Bellinzona',
-    ogDescription: 'Oggi inaugurati nuovi spazi all\'Ospedale San Giovanni Poliambulatorio Turrita e Dermatologia nella sede di Bellinzona Ambienti pensati per pazienti',
+    ogDescription: 'L\'8 ottobre 2026, l\'Ente Ospedaliero Cantonale (EOC) ha inaugurato i nuovi spazi del Poliambulatorio Turrita e dell\'Ambulatorio di Dermatologia presso la sede San Giovanni dell\'Ospedale Regionale di Bellinzona e Valli.',
     canonicalPath: '/articoli-ticino/nuovi-spazi-ambulatoriali-bellinzona/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Inaugurati nuovi spazi ambulatoriali a San Giovanni",
-      "description": "Oggi inaugurati nuovi spazi all'Ospedale San Giovanni Poliambulatorio Turrita e Dermatologia nella sede di Bellinzona Ambienti pensati per pazienti",
+      "description": "L'apertura dei nuovi spazi ha una ricaduta concreta soprattutto sul modo in cui viene organizzata la presa a carico.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -233,16 +233,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-frontalieri-disoccupazione-criterio-lavoro': {
     title: 'Frontalieri e disoccupazione: UE cambia regole, criterio Stato lavoro',
-    description: 'L\'UE ha approvato nuove regole sulla disoccupazione dei frontalieri Il criterio futuro sarebbe lo Stato in cui si lavora Per la Svizzera l\'entrata non è',
+    description: 'È la tempistica oggi più realistica indicata dalla fonte, ma non equivale a una data di entrata in vigore già fissata per chi lavora in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, cambia, regole, criterio',
     ogTitle: 'Frontalieri e disoccupazione: UE sposta criterio allo Stato di lavoro',
-    ogDescription: 'L\'UE ha approvato nuove regole sulla disoccupazione dei frontalieri Il criterio futuro sarebbe lo Stato in cui si lavora Per la Svizzera l\'entrata non è',
+    ogDescription: 'L\'intervento riguarda soprattutto le norme sul diritto all\'indennità di disoccupazione: in futuro, per i frontalieri l\'indennità dovrebbe essere erogata dal Paese di lavoro, anziché da quello di residenza.',
     canonicalPath: '/articoli-ticino/frontalieri-disoccupazione-criterio-lavoro/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontalieri e disoccupazione: UE cambia regole, criterio Stato lavoro",
-      "description": "L'UE ha approvato nuove regole sulla disoccupazione dei frontalieri Il criterio futuro sarebbe lo Stato in cui si lavora Per la Svizzera l'entrata non è",
+      "description": "È la tempistica oggi più realistica indicata dalla fonte, ma non equivale a una data di entrata in vigore già fissata per chi lavora in Svizzera.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -272,16 +272,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-uscita-svizzera-schengen-controlli': {
     title: 'Schengen: possibili controlli sistematici ai confini',
-    description: 'Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Fino a 422.000 ore al giorno perse negli ingorghi',
+    description: 'Secondo: separare il controllo della persona da quello delle merci. Oggi il primo non è sistematico, mentre i controlli sulle merci restano possibili.',
     keywords: 'frontalieri, ticino, svizzera, italia, schengen, possibili, controlli, sistematici',
     ogTitle: 'Schengen: possibili controlli sistematici ai confini',
-    ogDescription: 'Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Fino a 422.000 ore al giorno perse negli ingorghi',
+    ogDescription: 'Schengen, precisa il testo, non ha però eliminato ogni verifica: poiché la Svizzera resta fuori dall’Unione doganale europea, i controlli sulle merci possono ancora essere effettuati.',
     canonicalPath: '/articoli-ticino/uscita-svizzera-schengen-controlli/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Schengen: possibili controlli sistematici ai confini",
-      "description": "Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Fino a 422.000 ore al giorno perse negli ingorghi",
+      "description": "Secondo: separare il controllo della persona da quello delle merci. Oggi il primo non è sistematico, mentre i controlli sulle merci restano possibili.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -311,16 +311,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-sala-risveglio-bellinzona': {
     title: 'Blocco operatorio san giovanni a Bellinzona | Frontaliere Ticino',
-    description: 'Sala risveglio: 6 posti adulti e 3 pediatrici Percorso dalla chirurgia generale alla robotica Ambienti moderni, funzionali e tecnologicamente avanzati Flussi',
+    description: 'Il blocco operatorio viene inoltre descritto attraverso ambienti moderni, funzionali e tecnologicamente avanzati.',
     keywords: 'frontalieri, ticino, svizzera, italia, blocco, operatorio, giovanni, bellinzona',
     ogTitle: 'Blocco operatorio San Giovanni a Bellinzona',
-    ogDescription: 'Sala risveglio: 6 posti adulti e 3 pediatrici Percorso dalla chirurgia generale alla robotica Ambienti moderni, funzionali e tecnologicamente avanzati Flussi',
+    ogDescription: 'La scheda datata 12 ottobre 2026 sul blocco operatorio dell\'Ospedale San Giovanni di Bellinzona descrive un\'organizzazione costruita attorno al paziente.',
     canonicalPath: '/articoli-ticino/sala-risveglio-bellinzona/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Blocco operatorio san giovanni a Bellinzona",
-      "description": "Sala risveglio: 6 posti adulti e 3 pediatrici Percorso dalla chirurgia generale alla robotica Ambienti moderni, funzionali e tecnologicamente avanzati Flussi",
+      "description": "Il blocco operatorio viene inoltre descritto attraverso ambienti moderni, funzionali e tecnologicamente avanzati.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -350,16 +350,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-commissione-scuola-ticino': {
     title: 'Scuola media, audizione in Ticino sui corsi attitudinali',
-    description: 'Audizione a Bellinzona sui corsi attitudinali e base DECS e SIT tra i rappresentanti ascoltati Rapporto firmato sull\'iniziativa IP158 Prossima riunione: 19',
+    description: 'Il primo percorso riguarda il tema scolastico dei corsi attitudinali e base e la sperimentazione collegata.',
     keywords: 'frontalieri, ticino, svizzera, italia, scuola, media, audizione, corsi',
     ogTitle: 'Scuola media, audizione in Ticino sui corsi attitudinali',
-    ogDescription: 'Audizione a Bellinzona sui corsi attitudinali e base DECS e SIT tra i rappresentanti ascoltati Rapporto firmato sull\'iniziativa IP158 Prossima riunione: 19',
+    ogDescription: 'La seduta è servita a un nuovo approfondimento e a una discussione sul superamento dei corsi attitudinali e base nella scuola media, insieme alla relativa sperimentazione, con riferimento al messaggio n. 8666 del 18 marzo 2026.',
     canonicalPath: '/articoli-ticino/commissione-scuola-ticino/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Scuola media, audizione in Ticino sui corsi attitudinali",
-      "description": "Audizione a Bellinzona sui corsi attitudinali e base DECS e SIT tra i rappresentanti ascoltati Rapporto firmato sull'iniziativa IP158 Prossima riunione: 19",
+      "description": "Il primo percorso riguarda il tema scolastico dei corsi attitudinali e base e la sperimentazione collegata.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -389,16 +389,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-gottardo-quadri-cupra-berna': {
     title: 'Gottardo: quadri interroga Berna sulla CUPRA | Frontaliere Ticino',
-    description: 'Le code del San Gottardo ricadono sull\'Alta Leventina Quadri interroga il Consiglio federale sulla corsia CUPRA La CUPRA è definitiva dal 2026 e ha gestione',
+    description: 'La congestione del San Gottardo continua a ripercuotersi sulla viabilità dell’Alta Leventina.',
     keywords: 'frontalieri, ticino, svizzera, italia, gottardo, quadri, interroga, berna',
     ogTitle: 'Gottardo: Quadri interroga Berna sulla CUPRA',
-    ogDescription: 'Le code del San Gottardo ricadono sull\'Alta Leventina Quadri interroga il Consiglio federale sulla corsia CUPRA La CUPRA è definitiva dal 2026 e ha gestione',
+    ogDescription: 'Con un’interpellanza sulla gestione della corsia CUPRA, il consigliere nazionale della Lega dei Ticinesi Lorenzo Quadri sottopone la questione al Consiglio federale.',
     canonicalPath: '/articoli-ticino/gottardo-quadri-cupra-berna/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Gottardo: quadri interroga Berna sulla CUPRA",
-      "description": "Le code del San Gottardo ricadono sull'Alta Leventina Quadri interroga il Consiglio federale sulla corsia CUPRA La CUPRA è definitiva dal 2026 e ha gestione",
+      "description": "La congestione del San Gottardo continua a ripercuotersi sulla viabilità dell’Alta Leventina.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -428,16 +428,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-sovranita-fiscale-accordo-ue': {
     title: 'Accordo UE: rischio perdita sovranità fiscale per Svizzera',
-    description: 'Il 6 ottobre la NZZ lancia l\'allarme fiscale Gli aiuti di Stato possono includere agevolazioni fiscali Coinvolti Confederazione, Cantoni e Comuni Prevista',
+    description: 'Una decisione fiscale adottata democraticamente in Svizzera potrebbe quindi essere invalidata sulla base di regole dell\'UE.',
     keywords: 'frontalieri, ticino, svizzera, italia, accordo, rischio, perdita, sovranità',
     ogTitle: 'Accordo UE: rischio perdita sovranità fiscale per Svizzera',
-    ogDescription: 'Il 6 ottobre la NZZ lancia l\'allarme fiscale Gli aiuti di Stato possono includere agevolazioni fiscali Coinvolti Confederazione, Cantoni e Comuni Prevista',
+    ogDescription: 'Il 6 ottobre la NZZ ha rilanciato un allarme sul nuovo accordo con l\'Unione europea: secondo due professori di diritto fiscale, Peter Hongler e Ralf Imstepf, la Svizzera rischierebbe di perdere margini di sovranità anche nel campo delle imposte.',
     canonicalPath: '/articoli-ticino/sovranita-fiscale-accordo-ue/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Accordo UE: rischio perdita sovranità fiscale per Svizzera",
-      "description": "Il 6 ottobre la NZZ lancia l'allarme fiscale Gli aiuti di Stato possono includere agevolazioni fiscali Coinvolti Confederazione, Cantoni e Comuni Prevista",
+      "description": "Una decisione fiscale adottata democraticamente in Svizzera potrebbe quindi essere invalidata sulla base di regole dell'UE.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -467,16 +467,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-frontalieri-tassa-salute-omnibus-giugno-2026': {
     title: 'Frontalieri: tassa salute e decreto omnibus al 100%',
-    description: 'Nessun lavoratore è stato chiamato a pagare la tassa sulla salute Il contributo previsto va dal 3% al 6% del reddito netto Dal gennaio 2026 i lavoratori',
+    description: 'Con la Legge di Bilancio 2024, il Parlamento italiano ha previsto la tassa per i cosiddetti «vecchi frontalieri».',
     keywords: 'frontalieri, ticino, svizzera, italia, tassa, salute, decreto, omnibus',
     ogTitle: 'Frontalieri: tassa salute e decreto omnibus 2026',
-    ogDescription: 'Nessun lavoratore è stato chiamato a pagare la tassa sulla salute Il contributo previsto va dal 3% al 6% del reddito netto Dal gennaio 2026 i lavoratori',
+    ogDescription: 'Secondo quanto comunicato nel giugno 2026 da OCST, due dossier fiscali restano al centro dell\'attenzione dei lavoratori frontalieri: la cosiddetta «tassa sulla salute» e il regime del Decreto Omnibus.',
     canonicalPath: '/articoli-ticino/frontalieri-tassa-salute-omnibus-giugno-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontalieri: tassa salute e decreto omnibus al 100%",
-      "description": "Nessun lavoratore è stato chiamato a pagare la tassa sulla salute Il contributo previsto va dal 3% al 6% del reddito netto Dal gennaio 2026 i lavoratori",
+      "description": "Con la Legge di Bilancio 2024, il Parlamento italiano ha previsto la tassa per i cosiddetti «vecchi frontalieri».",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -545,16 +545,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-radar-ticino-ottobre-2026': {
     title: 'Radar in Canton Ticino dal 19 al 25 ottobre 2026',
-    description: 'Controlli dal 19 al 25 ottobre 2026 Radar mobili e semi-stazionari in Ticino Coinvolte Polizia cantonale e polizie comunali Possibili anche controlli',
+    description: 'Da lunedì 19 a domenica 25 ottobre 2026, sulle strade del Canton Ticino, è prevista una nuova settimana di controlli della velocità.',
     keywords: 'frontalieri, ticino, svizzera, italia, radar, canton, ottobre, controlli',
     ogTitle: 'Radar in Canton Ticino dal 19 al 25 ottobre 2026',
-    ogDescription: 'Controlli dal 19 al 25 ottobre 2026 Radar mobili e semi-stazionari in Ticino Coinvolte Polizia cantonale e polizie comunali Possibili anche controlli',
+    ogDescription: 'Da lunedì 19 a domenica 25 ottobre 2026, sulle strade del Canton Ticino, è prevista una nuova settimana di controlli della velocità.',
     canonicalPath: '/articoli-ticino/radar-ticino-ottobre-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Radar in Canton Ticino dal 19 al 25 ottobre 2026",
-      "description": "Controlli dal 19 al 25 ottobre 2026 Radar mobili e semi-stazionari in Ticino Coinvolte Polizia cantonale e polizie comunali Possibili anche controlli",
+      "description": "Da lunedì 19 a domenica 25 ottobre 2026, sulle strade del Canton Ticino, è prevista una nuova settimana di controlli della velocità.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -584,16 +584,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-mozione-gran-consiglio-tassa-salute': {
     title: 'Mozione in Gran Consiglio contro la tassa sulla salute',
-    description: 'Una mozione interpartitica è stata presentata in Gran Consiglio La richiesta riguarda il blocco dei ristorni verso l’Italia OCST indica la via diplomatica',
+    description: 'Negli scorsi giorni, la cosiddetta «tassa sulla salute» è tornata al centro del dibattito pubblico in Canton Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, mozione, gran, consiglio, contro',
     ogTitle: 'Mozione in Gran Consiglio contro la tassa sulla salute',
-    ogDescription: 'Una mozione interpartitica è stata presentata in Gran Consiglio La richiesta riguarda il blocco dei ristorni verso l’Italia OCST indica la via diplomatica',
+    ogDescription: 'Negli scorsi giorni, la cosiddetta «tassa sulla salute» è tornata al centro del dibattito pubblico in Canton Ticino.',
     canonicalPath: '/articoli-ticino/mozione-gran-consiglio-tassa-salute/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Mozione in Gran Consiglio contro la tassa sulla salute",
-      "description": "Una mozione interpartitica è stata presentata in Gran Consiglio La richiesta riguarda il blocco dei ristorni verso l’Italia OCST indica la via diplomatica",
+      "description": "Negli scorsi giorni, la cosiddetta «tassa sulla salute» è tornata al centro del dibattito pubblico in Canton Ticino.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -626,7 +626,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Ticino tra le regioni più esposte nello scenario Fino',
     keywords: 'frontalieri, ticino, svizzera, italia, cosa, succederebbe, senza, schengen',
     ogTitle: 'Frontalieri e Schengen: cosa succederebbe senza gli accordi',
-    ogDescription: 'Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Ticino tra le regioni più esposte nello scenario Fino',
+    ogDescription: 'Il testo descrive uno scenario condizionato all\'eventuale uscita della Svizzera da Schengen e Dublino; non presenta un modulo, un documento o una scadenza per i frontalieri.',
     canonicalPath: '/articoli-ticino/rapporto-consiglio-federale-schengen/',
     structuredData: {
       "@context": "https://schema.org",
@@ -662,16 +662,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-ustat-manutenzione-chiusura': {
     title: 'Avvisi Ustat: manutenzione e chiusura amministrazione',
-    description: 'Manutenzione: martedì 2 dicembre, 20.00-22.00 circa Possibili brevi interruzioni sul sito Ustat Chiusura dei servizi: pomeriggio del 31 dicembre 2025 Ustat',
+    description: 'Non dice che la chiusura di fine anno dipenda dalla manutenzione, né che l\'intervento riguardi tutti i servizi cantonali.',
     keywords: 'frontalieri, ticino, svizzera, italia, avvisi, ustat, manutenzione, chiusura',
     ogTitle: 'Avvisi Ustat e Chiusura Servizi Amministrazione Cantonale Ticino',
-    ogDescription: 'Manutenzione: martedì 2 dicembre, 20.00-22.00 circa Possibili brevi interruzioni sul sito Ustat Chiusura dei servizi: pomeriggio del 31 dicembre 2025 Ustat',
+    ogDescription: 'Per la chiusura, usa rimarranno chiusi: la comunicazione presenta la chiusura dei servizi dell\'Amministrazione cantonale come prevista per il pomeriggio indicato.',
     canonicalPath: '/articoli-ticino/ustat-manutenzione-chiusura/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Avvisi Ustat: manutenzione e chiusura amministrazione",
-      "description": "Manutenzione: martedì 2 dicembre, 20.00-22.00 circa Possibili brevi interruzioni sul sito Ustat Chiusura dei servizi: pomeriggio del 31 dicembre 2025 Ustat",
+      "description": "Non dice che la chiusura di fine anno dipenda dalla manutenzione, né che l'intervento riguardi tutti i servizi cantonali.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -701,16 +701,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-frontalieri-ticino-indagine-salari-2026': {
     title: 'Indagine frontalieri Ticino: 55,6% si sente pagato meno degli svizzeri',
-    description: '1.542 lavoratori hanno risposto all\'indagine nel maggio 2026 Il 55,6% si sente pagato meno a parità di mansioni Dalle province di Como e Varese: oltre 60mila',
+    description: 'Dalla provincia di Como partono quasi 32 mila frontalieri, pari al 41% degli italiani occupati in Ticino; da Varese ne partono altri 31 mila.',
     keywords: 'frontalieri, ticino, svizzera, italia, indagine, sente, pagato, meno',
     ogTitle: 'Frontalieri Ticino: indagine su salari, disparità e condizioni lavoro',
-    ogDescription: '1.542 lavoratori hanno risposto all\'indagine nel maggio 2026 Il 55,6% si sente pagato meno a parità di mansioni Dalle province di Como e Varese: oltre 60mila',
+    ogDescription: 'La dimensione territoriale riguarda in modo diretto il Ticino. Dalla provincia di Como partono quasi 32 mila frontalieri, pari al 41% degli italiani occupati in Ticino; da Varese ne partono altri 31 mila.',
     canonicalPath: '/articoli-ticino/frontalieri-ticino-indagine-salari-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Indagine frontalieri Ticino: 55,6% si sente pagato meno degli svizzeri",
-      "description": "1.542 lavoratori hanno risposto all'indagine nel maggio 2026 Il 55,6% si sente pagato meno a parità di mansioni Dalle province di Como e Varese: oltre 60mila",
+      "description": "Dalla provincia di Como partono quasi 32 mila frontalieri, pari al 41% degli italiani occupati in Ticino; da Varese ne partono altri 31 mila.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -818,16 +818,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-tassa-salute-decreto-omnibus-scenari': {
     title: 'Frontalieri: tassa salute e decreto omnibus aggiornamento',
-    description: 'Nessun lavoratore è stato chiamato al pagamento La tassa riguarda i «vecchi frontalieri» Per alcuni frontalieri Omnibus: tassazione al 100% Nuovo',
+    description: 'Per i frontalieri interessati, la distinzione tra norma e attuazione è il punto concreto emerso dall\'aggiornamento.',
     keywords: 'frontalieri, ticino, svizzera, italia, tassa, salute, decreto, omnibus',
     ogTitle: 'Tassa salute frontalieri e Decreto Omnibus aggiornamento',
-    ogDescription: 'Nessun lavoratore è stato chiamato al pagamento La tassa riguarda i «vecchi frontalieri» Per alcuni frontalieri Omnibus: tassazione al 100% Nuovo incontro',
+    ogDescription: 'Nel dicembre 2025, il Decreto Ministeriale ha formalmente autorizzato le Regioni di confine a disciplinare l\'applicazione della cosiddetta tassa sulla salute.',
     canonicalPath: '/articoli-ticino/tassa-salute-decreto-omnibus-scenari/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontalieri: tassa salute e decreto omnibus aggiornamento",
-      "description": "Nessun lavoratore è stato chiamato al pagamento La tassa riguarda i «vecchi frontalieri» Per alcuni frontalieri Omnibus: tassazione al 100% Nuovo",
+      "description": "Per i frontalieri interessati, la distinzione tra norma e attuazione è il punto concreto emerso dall'aggiornamento.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -857,16 +857,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-sistema-ferroviario-accordo-ue': {
     title: 'Accordo UE: apertura del mercato ferroviario a rischio',
-    description: 'L\'accordo UE coinvolgerà anche i trasporti Oggi gli operatori esteri collaborano con le FFS Un\'apertura del mercato del 20% potrebbe mettere a rischio',
+    description: 'La fonte aggiunge che l\'accordo di sottomissione all\'UE avrebbe un\'apertura più ampia, ma non quantifica quale sarebbe la quota.',
     keywords: 'frontalieri, ticino, svizzera, italia, accordo, apertura, mercato, ferroviario',
     ogTitle: 'Accordo UE: rischio orario cadenzato ferroviario',
-    ogDescription: 'L\'accordo UE coinvolgerà anche i trasporti Oggi gli operatori esteri collaborano con le FFS Un\'apertura del mercato del 20% potrebbe mettere a rischio l\'orario',
+    ogDescription: 'Secondo il testo, l\'accordo riguarderebbe anche i trasporti. Nel comparto ferroviario, il trattato consentirebbe alle compagnie straniere di utilizzare le rotaie svizzere, finanziate con risorse dei contribuenti.',
     canonicalPath: '/articoli-ticino/sistema-ferroviario-accordo-ue/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Accordo UE: apertura del mercato ferroviario a rischio",
-      "description": "L'accordo UE coinvolgerà anche i trasporti Oggi gli operatori esteri collaborano con le FFS Un'apertura del mercato del 20% potrebbe mettere a rischio",
+      "description": "La fonte aggiunge che l'accordo di sottomissione all'UE avrebbe un'apertura più ampia, ma non quantifica quale sarebbe la quota.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -896,16 +896,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-attrattivita-economica-zurigo-ticino': {
     title: 'Attrattività economica: il dibattito zurighese interpella anche il Ticino',
-    description: 'Vontobel prevede un campus a Baar nel 2030 Cembra sposterà la sede da Zurigo-Altstetten a Baden nel 2027 655 imprese hanno trasferito la sede',
+    description: 'Vontobel prevede un campus a Baar nel 2030 Cembra sposterà la sede da Zurigo-Altstetten a Baden nel 2027 655 imprese hanno trasferito la sede.',
     keywords: 'frontalieri, ticino, svizzera, italia, attrattività, economica, dibattito, zurighese',
     ogTitle: 'Attrattività economica: il dibattito zurighese interpella il Ticino',
-    ogDescription: 'Vontobel prevede un campus a Baar nel 2030 Cembra sposterà la sede da Zurigo-Altstetten a Baden nel 2027 655 imprese hanno trasferito la sede da Zurigo a Zugo',
+    ogDescription: 'Vontobel prevede un campus a Baar nel 2030 Cembra sposterà la sede da Zurigo-Altstetten a Baden nel 2027 655 imprese hanno trasferito la sede da Zurigo a Zugo.',
     canonicalPath: '/articoli-ticino/attrattivita-economica-zurigo-ticino/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Attrattività economica: il dibattito zurighese interpella anche il Ticino",
-      "description": "Vontobel prevede un campus a Baar nel 2030 Cembra sposterà la sede da Zurigo-Altstetten a Baden nel 2027 655 imprese hanno trasferito la sede",
+      "description": "Vontobel prevede un campus a Baar nel 2030 Cembra sposterà la sede da Zurigo-Altstetten a Baden nel 2027 655 imprese hanno trasferito la sede.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -935,16 +935,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-frontalieri-riforma-disoccupazione-ue': {
     title: 'Frontalieri e disoccupazione: l\'UE cambia le regole',
-    description: 'Bruxelles approva la riforma della disoccupazione Il criterio passa dalla residenza allo Stato di lavoro Per la Svizzera l\'orizzonte è attorno al 2029',
+    description: 'L\'intervento riguarda in particolare il diritto all\'indennità di disoccupazione e cambia il criterio per individuare lo Stato tenuto a erogarla.',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, cambia, regole, bruxelles',
     ogTitle: 'Frontalieri: riforma disoccupazione UE cambia regole',
-    ogDescription: 'Bruxelles approva la riforma della disoccupazione Il criterio passa dalla residenza allo Stato di lavoro Per la Svizzera l\'orizzonte è attorno al 2029 Berna',
+    ogDescription: 'L\'intervento riguarda in particolare il diritto all\'indennità di disoccupazione e cambia il criterio per individuare lo Stato tenuto a erogarla.',
     canonicalPath: '/articoli-ticino/frontalieri-riforma-disoccupazione-ue/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontalieri e disoccupazione: l'UE cambia le regole",
-      "description": "Bruxelles approva la riforma della disoccupazione Il criterio passa dalla residenza allo Stato di lavoro Per la Svizzera l'orizzonte è attorno al 2029",
+      "description": "L'intervento riguarda in particolare il diritto all'indennità di disoccupazione e cambia il criterio per individuare lo Stato tenuto a erogarla.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -1013,16 +1013,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-svizzera-uscita-schengen-controlli': {
     title: 'Uscita Svizzera da Schengen: rischio controlli e attese ai confini',
-    description: 'Rapporto federale pubblicato il 18 settembre 2026 Ipotesi: uscita della Svizzera da Schengen e Dublino Controlli sistematici e attese più lunghe',
+    description: 'Per chi attraversa ogni giorno il confine dall\'Italia per lavorare in Svizzera, gli effetti di Schengen si riflettono direttamente sul pendolarismo.',
     keywords: 'frontalieri, ticino, svizzera, italia, uscita, schengen, rischio, controlli',
     ogTitle: 'Svizzera uscita Schengen: più controlli ai confini',
-    ogDescription: 'Rapporto federale pubblicato il 18 settembre 2026 Ipotesi: uscita della Svizzera da Schengen e Dublino Controlli sistematici e attese più lunghe ai confini',
+    ogDescription: 'Un rapporto del Consiglio federale, pubblicato nel settembre 2026, esamina lo scenario di un\'eventuale uscita della Svizzera dagli accordi di Schengen e Dublino.',
     canonicalPath: '/articoli-ticino/svizzera-uscita-schengen-controlli/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Uscita Svizzera da Schengen: rischio controlli e attese ai confini",
-      "description": "Rapporto federale pubblicato il 18 settembre 2026 Ipotesi: uscita della Svizzera da Schengen e Dublino Controlli sistematici e attese più lunghe",
+      "description": "Per chi attraversa ogni giorno il confine dall'Italia per lavorare in Svizzera, gli effetti di Schengen si riflettono direttamente sul pendolarismo.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

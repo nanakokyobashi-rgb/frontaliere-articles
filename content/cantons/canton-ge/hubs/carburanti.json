@@ -4,14 +4,14 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "carburanti",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "e2542351ce7f4efd8bef827fb828243b1c93374534221293c14986b81c334013",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "8df85f10cbccf733c7cdacfc62c384d0b1f93506fd0920a78a0400d763d9929e",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-01T13:48:39.198Z",
+      "updatedAt": "2026-11-03T14:41:22.679Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-08T11:13:57.000Z"
+      "carryUntilAt": "2026-11-10T14:26:01.000Z"
     }
   ],
   "locales": {
@@ -22,16 +22,16 @@
       "intro": "Nel Canton Ginevra, benzina e diesel sono una voce fissa nel bilancio di chi usa l’auto per andare al lavoro. Questa pagina riunisce i prezzi medi rilevati alla pompa, il confronto con le aree oltreconfine quando esiste un dato pubblico e gli articoli della redazione su carburanti ed energia.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
       "keyFacts": [
         {
-          "label": "Benzina 95 — Francia",
-          "value": "2,140 EUR/l",
-          "note": "media regionale, 1 novembre 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Benzina 95 — Svizzera",
+          "value": "2,120 CHF/l",
+          "note": "media nazionale ufficiale, 1 ottobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — Francia",
-          "value": "2,377 EUR/l",
-          "note": "media regionale, 1 novembre 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Diesel — Svizzera",
+          "value": "2,410 CHF/l",
+          "note": "media nazionale ufficiale, 1 ottobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -41,20 +41,32 @@
           "description": "Prezzi medi alla pompa rilevati sul territorio e, dove esiste un dato pubblico, nelle aree oltreconfine. Ogni riga riporta la valuta della rilevazione: i prezzi non sono convertiti.",
           "items": [
             {
+              "label": "Benzina 95 — Svizzera",
+              "value": "2,120 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Svizzera",
+              "value": "2,410 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
               "label": "Benzina 95 — Francia",
-              "value": "2,140 EUR/l",
-              "detail": "media regionale: minimo 1,990 EUR/l, 191 stazioni rilevate",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2,112 EUR/l",
+              "detail": "media regionale: minimo 1,990 EUR/l, 205 stazioni rilevate",
+              "date": "2026-11-03T14:26:01.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,377 EUR/l",
-              "detail": "media regionale: minimo 2,129 EUR/l, 192 stazioni rilevate",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2,263 EUR/l",
+              "detail": "media regionale: minimo 2,129 EUR/l, 213 stazioni rilevate",
+              "date": "2026-11-03T14:26:01.000Z"
             }
           ],
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-01T13:48:39.198Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
         }
       ],
       "curatedArticles": [],
@@ -62,13 +74,13 @@
         {
           "title": "Furti con effrazione nel Canton Ginevra: 3'410 nel 2025",
           "url": "/articoli-ginevra/furti-cantone-ginevra-2025/",
-          "excerpt": "3'410 furti nel 2025, contro 3'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti",
+          "excerpt": "3'410 furti nel 2025, contro 3'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti.",
           "date": "2026-10-26T11:28:00.433Z"
         },
         {
           "title": "HUG primo ospedale svizzero nel ranking Smart Hospitals 2027",
           "url": "/articoli-ginevra/hug-primo-ospedale-svizzero-2027/",
-          "excerpt": "Gli HUG sono 31° al mondo nel 2027 Primo ospedale svizzero della graduatoria 37 posizioni guadagnate rispetto al 2026 410 ospedali in 33 Paesi Classifica →",
+          "excerpt": "Il salto che caratterizza il risultato degli HUG è quantificato dalla stessa graduatoria: 37 posizioni guadagnate rispetto all’edizione 2026. Nel ranking 2027 di Newsweek e Statista, gli HUG occupano il 31° posto…",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
@@ -80,7 +92,7 @@
         {
           "title": "Aeroporto di Ginevra: il TAF approva il regolamento",
           "url": "/articoli-ginevra/taf-regolamento-aeroporto-ginevra/",
-          "excerpt": "Il TAF approva il regolamento dell’aeroporto di Ginevra Le misure contestate rispettano le norme ambientali Respinti i ricorsi contro la decisione DETEC del 17",
+          "excerpt": "Il Tribunale amministrativo federale ha dato il via libera al regolamento di esercizio dell’aeroporto di Ginevra.",
           "date": "2026-10-19T06:20:16.297Z"
         },
         {
@@ -100,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "GE",
@@ -109,16 +121,16 @@
       "intro": "In the canton of Geneva, petrol and diesel are a fixed item in the budget of anyone who drives to work. This page brings together the average pump prices on record, the comparison with the other side of the border where public data exists, and our articles on fuel and energy.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French; data, notices and articles are collected here and updated when they change.",
       "keyFacts": [
         {
-          "label": "Petrol 95 — France",
-          "value": "2.140 EUR/l",
-          "note": "regional average, 1 November 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Petrol 95 — Switzerland",
+          "value": "2.120 CHF/l",
+          "note": "official national average, 1 October 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — France",
-          "value": "2.377 EUR/l",
-          "note": "regional average, 1 November 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Diesel — Switzerland",
+          "value": "2.410 CHF/l",
+          "note": "official national average, 1 October 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -128,20 +140,32 @@
           "description": "Average pump prices recorded locally and, where public data exists, across the border. Each row keeps the currency of the survey: prices are not converted.",
           "items": [
             {
+              "label": "Petrol 95 — Switzerland",
+              "value": "2.120 CHF/l",
+              "detail": "official national average",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Switzerland",
+              "value": "2.410 CHF/l",
+              "detail": "official national average",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
               "label": "Petrol 95 — France",
-              "value": "2.140 EUR/l",
-              "detail": "regional average: lowest 1.990 EUR/l, 191 stations surveyed",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2.112 EUR/l",
+              "detail": "regional average: lowest 1.990 EUR/l, 205 stations surveyed",
+              "date": "2026-11-03T14:26:01.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.377 EUR/l",
-              "detail": "regional average: lowest 2.129 EUR/l, 192 stations surveyed",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2.263 EUR/l",
+              "detail": "regional average: lowest 2.129 EUR/l, 213 stations surveyed",
+              "date": "2026-11-03T14:26:01.000Z"
             }
           ],
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-01T13:48:39.198Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
         }
       ],
       "curatedArticles": [],
@@ -149,13 +173,13 @@
         {
           "title": "Burglaries in the Canton of Geneva: 3'410 in 2025",
           "url": "/en/geneva-articles/geneva-canton-burglary-2025/",
-          "excerpt": "3'410 thefts in 2025, compared with 3'196 in 2024 6,7% growth between 2024 and 2025 Police meetings: Wednesday, 28 October Term Value What Burglaries involving",
+          "excerpt": "3'410 thefts in 2025, compared with 3'196 in 2024 6,7% growth between 2024 and 2025 Police meetings: Wednesday, 28 October Term Value What Burglaries involving.",
           "date": "2026-10-26T11:28:00.433Z"
         },
         {
           "title": "HUG first Swiss hospital in the Smart Hospitals 2027 ranking",
           "url": "/en/geneva-articles/hug-first-swiss-hospital-2027/",
-          "excerpt": "HUG rank 31st in the world in 2027 First Swiss hospital in the ranking 37 positions gained compared with 2026 410 hospitals in 33 countries Ranking → Newsweek",
+          "excerpt": "The leap that characterizes HUG’s result is quantified by the same ranking: 37 places gained compared with the 2026 edition.",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
@@ -167,7 +191,7 @@
         {
           "title": "Geneva Airport: the TAF approves the regulation",
           "url": "/en/geneva-articles/geneva-airport-taf-ruling/",
-          "excerpt": "The TAF approves Geneva Airport's operating regulations The contested measures comply with environmental regulations Appeals against DETEC's decision",
+          "excerpt": "The Federal Administrative Court has given the green light to Geneva Airport’s operating regulations.",
           "date": "2026-10-19T06:20:16.297Z"
         },
         {
@@ -187,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "GE",
@@ -196,16 +220,16 @@
       "intro": "Im Kanton Genf sind Benzin und Diesel ein fester Posten im Budget aller, die mit dem Auto zur Arbeit fahren. Diese Seite bündelt die erhobenen Durchschnittspreise an der Zapfsäule, den Vergleich mit dem Gebiet jenseits der Grenze, sofern öffentliche Daten vorliegen, und die Artikel der Redaktion zu Treibstoff und Energie.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
       "keyFacts": [
         {
-          "label": "Benzin 95 — Frankreich",
-          "value": "2.140 EUR/l",
-          "note": "regionaler Durchschnitt, 1. November 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Benzin 95 — Schweiz",
+          "value": "2.120 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. Oktober 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — Frankreich",
-          "value": "2.377 EUR/l",
-          "note": "regionaler Durchschnitt, 1. November 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Diesel — Schweiz",
+          "value": "2.410 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. Oktober 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -215,20 +239,32 @@
           "description": "Durchschnittliche Preise an der Zapfsäule im Gebiet und, wo öffentliche Daten vorliegen, jenseits der Grenze. Jede Zeile nennt die Währung der Erhebung: Die Preise werden nicht umgerechnet.",
           "items": [
             {
+              "label": "Benzin 95 — Schweiz",
+              "value": "2.120 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Schweiz",
+              "value": "2.410 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.140 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 191 erfasste Tankstellen",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2.112 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 205 erfasste Tankstellen",
+              "date": "2026-11-03T14:26:01.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.377 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.129 EUR/l, 192 erfasste Tankstellen",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2.263 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.129 EUR/l, 213 erfasste Tankstellen",
+              "date": "2026-11-03T14:26:01.000Z"
             }
           ],
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-01T13:48:39.198Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
         }
       ],
       "curatedArticles": [],
@@ -236,13 +272,13 @@
         {
           "title": "Einbruchdiebstähle im Kanton Genf: 3'410 im Jahr 2025",
           "url": "/de/genf-artikel/einbrueche-kanton-genf-2025/",
-          "excerpt": "3'410 Diebstähle im Jahr 2025 gegenüber 3'196 im Jahr 2024 Anstieg von 6,7% zwischen 2024 und 2025 Treffen der Polizei: Mittwoch, 28.",
+          "excerpt": "Im Kanton Genf wurden 2025 3'410 Einbruch- oder Einschleichdiebstähle registriert. Insgesamt waren es 3'196 Fälle im Jahr 2024 und 2'986 im Jahr 2023.",
           "date": "2026-10-26T11:28:00.433Z"
         },
         {
           "title": "HUG erstes Schweizer Spital im Ranking Smart Hospitals 2027",
           "url": "/de/genf-artikel/hug-erster-schweizer-krankenhaus-2027/",
-          "excerpt": "Die HUG liegen 2027 weltweit auf Rang 31° Erstes Schweizer Spital der Rangliste Gegenüber 2026 um 37 Plätze verbessert 410 Spitäler in 33 Ländern Rangliste →",
+          "excerpt": "Im Ranking 2027 von Newsweek und Statista belegen die HUG weltweit den 31. Platz und sind damit das bestplatzierte Krankenhaus der Schweiz.",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
@@ -254,7 +290,7 @@
         {
           "title": "Flughafen Genf: Das TAF genehmigt das Betriebsreglement",
           "url": "/de/genf-artikel/genfer-flughafen-taf-urteil/",
-          "excerpt": "Das TAF genehmigt das Betriebsreglement des Flughafens Genf Die beanstandeten Maßnahmen entsprechen den Umweltvorschriften Die Beschwerden gegen",
+          "excerpt": "Das Bundesverwaltungsgericht hat grünes Licht für das Betriebsreglement des Flughafens Genf gegeben.",
           "date": "2026-10-19T06:20:16.297Z"
         },
         {
@@ -274,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "GE",
@@ -283,16 +319,16 @@
       "intro": "Dans le canton de Genève, l’essence et le diesel sont un poste fixe du budget de celles et ceux qui prennent la voiture pour aller travailler. Cette page réunit les prix moyens relevés à la pompe, la comparaison avec l’autre côté de la frontière lorsqu’une donnée publique existe et les articles de la rédaction sur les carburants et l’énergie.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
       "keyFacts": [
         {
-          "label": "Essence 95 — France",
-          "value": "2,140 EUR/l",
-          "note": "moyenne régionale, 1er novembre 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Essence 95 — Suisse",
+          "value": "2,120 CHF/l",
+          "note": "moyenne nationale officielle, 1er octobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — France",
-          "value": "2,377 EUR/l",
-          "note": "moyenne régionale, 1er novembre 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Diesel — Suisse",
+          "value": "2,410 CHF/l",
+          "note": "moyenne nationale officielle, 1er octobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -302,20 +338,32 @@
           "description": "Prix moyens à la pompe relevés sur le territoire et, lorsqu’une donnée publique existe, de l’autre côté de la frontière. Chaque ligne conserve la monnaie du relevé : les prix ne sont pas convertis.",
           "items": [
             {
+              "label": "Essence 95 — Suisse",
+              "value": "2,120 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Suisse",
+              "value": "2,410 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
               "label": "Essence 95 — France",
-              "value": "2,140 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 191 stations relevées",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2,112 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 205 stations relevées",
+              "date": "2026-11-03T14:26:01.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,377 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,129 EUR/l, 192 stations relevées",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2,263 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,129 EUR/l, 213 stations relevées",
+              "date": "2026-11-03T14:26:01.000Z"
             }
           ],
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-01T13:48:39.198Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
         }
       ],
       "curatedArticles": [],
@@ -323,13 +371,13 @@
         {
           "title": "Vols par effraction dans le canton de Genève : 3'410 en 2025",
           "url": "/fr/articles-geneve/cambriolages-canton-geneve-2025/",
-          "excerpt": "3'410 vols en 2025, contre 3'196 en 2024 Hausse de 6,7% entre 2024 et 2025 Rencontres de la police : mercredi 28 octobre Terme Valeur Quoi Vols avec effraction",
+          "excerpt": "3'410 vols en 2025, contre 3'196 en 2024 Hausse de 6,7% entre 2024 et 2025 Rencontres de la police : mercredi 28 octobre Terme Valeur Quoi Vols avec effraction.",
           "date": "2026-10-26T11:28:00.433Z"
         },
         {
           "title": "HUG, premier hôpital suisse du classement Smart Hospitals 2027",
           "url": "/fr/articles-geneve/hug-premier-hopital-suisse-2027/",
-          "excerpt": "Les HUG sont 31e au monde en 2027 Premier hôpital suisse du classement 37 places gagnées par rapport à 2026 410 hôpitaux dans 33 pays Classement → Newsweek",
+          "excerpt": "Le bond qui caractérise le résultat des HUG est quantifié par le même classement : 37 places gagnées par rapport à l’édition 2026.",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
@@ -341,7 +389,7 @@
         {
           "title": "Aéroport de Genève : le TAF approuve le règlement",
           "url": "/fr/articles-geneve/aeroport-geneve-arret-taf/",
-          "excerpt": "Le TAF approuve le règlement de l’aéroport de Genève Les mesures contestées respectent les normes environnementales Les recours contre la décision du DETEC",
+          "excerpt": "Le règlement d’exploitation de l’aéroport de Genève a été validé par le Tribunal administratif fédéral.",
           "date": "2026-10-19T06:20:16.297Z"
         },
         {
@@ -361,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

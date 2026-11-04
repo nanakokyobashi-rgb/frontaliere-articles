@@ -283,4 +283,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'economia-imprese-cantone-turgovia',
+ category: 'novita',
+ date: '2026-11-04T04:02:52.006Z',
+ image: '/images/blog/article-economia-imprese-cantone-turgovia.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

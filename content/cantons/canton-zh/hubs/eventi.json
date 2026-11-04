@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-03T00:06:00.232Z",
-  "contentHash": "d716d3c11bfbca6c974bedaa53c3c04a3dc874f45a492d4615ea52c38dc3168b",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "0e21f4164ab4cb8389dc69d49288fca459cb807de193646727d2cbed5a194048",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T13:10:19.053Z",
+      "updatedAt": "2026-11-03T20:20:58.923Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "345",
+          "value": "347",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "FONDUE- & RACLETTE SPECIALS",
-              "detail": "Restaurant & Bar Tschadun, Kloten",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-raclette-specials/"
+              "label": "Treffnachmittage zu Vielfalt und Respekt im KJAV",
+              "detail": "KJAV, Volketswil",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/treffnachmittage-zu-vielfalt-und-respekt-im-kjav/"
             },
             {
-              "label": "30° Festival internazionale del cortometraggio di Winterthur",
-              "detail": "blue Cinema Maxx, Winterthur",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/events/winterthur/26th-winterthur-international-short-film-festival_AJdd68h"
+              "label": "State of Asia Address 2026",
+              "detail": "Universität Zürich, Zürich",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/state-of-asia-address-2026_AASjBiG"
             },
             {
-              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
-              "detail": "Neue Reformierte Kirche, Urdorf",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-25/"
+              "label": "Kehrichtverwertung und Klimaschutz",
+              "detail": "Kehrichtverwertungsanlage Zürcher Oberland KEZO, Hinwil",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/hinwil/kehrichtverwertung-und-klimaschutz_ApiwC3y"
             },
             {
-              "label": "VZK-Tagung 2026",
-              "detail": "Careum Auditorium, Zürich",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vzk-tagung-2026/"
+              "label": "Tüftelwerkstatt «Wir bauen einen Seifenblasen-Automaten»",
+              "detail": "Wildberg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tueftelwerkstatt-wir-bauen-einen-seifenblasen-automaten/"
             },
             {
-              "label": "Workshop «Licence to Tell»",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-licence-to-tell/"
-            },
-            {
-              "label": "Computeria Urdorf",
+              "label": "Kindercoiffeur",
               "detail": "Urdorf",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/computeria-urdorf-6/"
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindercoiffeur-3/"
             },
             {
-              "label": "Energie- und Klima-Zukunft in Volketswil",
-              "detail": "KUSPO-Foyer, Volketswil",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/energie-und-klima-zukunft-in-volketswil_ALNPZdm"
+              "label": "Klanglabor",
+              "detail": "Gemeinschaftszentrum Oerlikon, Zürich",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/klanglabor/"
             },
             {
-              "label": "Filmabend \"Radical - Eine Klasse für sich\"",
-              "detail": "Hinwil",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/filmabend-radical-eine-klasse-fuer-sich/"
+              "label": "Lego-Nachmittag",
+              "detail": "Aesch ZH",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lego-nachmittag/"
             },
             {
-              "label": "Esgui - Leif Kaner-Lidström",
-              "detail": "Dynamo, Werk 21",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/esgui-leif-kaner-lidstroem_Amv3mUH"
+              "label": "Lempen Puppet Theatre - Karneval der Tiere",
+              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schlieren/lempen-puppet-theatre-karneval-der-tiere_AQHyaLh"
             },
             {
-              "label": "NO CIGAR",
-              "detail": "Albani Music Club, Winterthur",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/winterthur/no-cigar_AMUuK9r"
+              "label": "English Stories für Kinder",
+              "detail": "Gemeindebibliothek Pfäffikon, Pfäffikon",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/english-stories-fuer-kinder/"
+            },
+            {
+              "label": "Paavo Järvi & Hayato Sumino",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/paavo-jaervi-hayato-sumino-3/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "345",
+          "value": "347",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "FONDUE- & RACLETTE SPECIALS",
-              "detail": "Restaurant & Bar Tschadun, Kloten",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-raclette-specials/"
+              "label": "Treffnachmittage zu Vielfalt und Respekt im KJAV",
+              "detail": "KJAV, Volketswil",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/treffnachmittage-zu-vielfalt-und-respekt-im-kjav/"
             },
             {
-              "label": "30th Winterthur International Short Film Festival",
-              "detail": "blue Cinema Maxx, Winterthur",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/events/winterthur/26th-winterthur-international-short-film-festival_AJdd68h"
+              "label": "State of Asia Address 2026",
+              "detail": "Universität Zürich, Zürich",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/state-of-asia-address-2026_AASjBiG"
             },
             {
-              "label": "Gymnastics for Seniors/Seniors / Organization of the Frauenverein",
-              "detail": "Neue Reformierte Kirche, Urdorf",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-25/"
+              "label": "Kehrichtverwertung und Klimaschutz",
+              "detail": "Kehrichtverwertungsanlage Zürcher Oberland KEZO, Hinwil",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/hinwil/kehrichtverwertung-und-klimaschutz_ApiwC3y"
             },
             {
-              "label": "VZK-Tagung 2026",
-              "detail": "Careum Auditorium, Zürich",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vzk-tagung-2026/"
+              "label": "Tüftelwerkstatt «Wir bauen einen Seifenblasen-Automaten»",
+              "detail": "Wildberg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tueftelwerkstatt-wir-bauen-einen-seifenblasen-automaten/"
             },
             {
-              "label": "Workshop «Licence to Tell»",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-licence-to-tell/"
-            },
-            {
-              "label": "Computeria Urdorf",
+              "label": "Kindercoiffeur",
               "detail": "Urdorf",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/computeria-urdorf-6/"
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindercoiffeur-3/"
             },
             {
-              "label": "Energie- und Klima-Zukunft in Volketswil",
-              "detail": "KUSPO-Foyer, Volketswil",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/energie-und-klima-zukunft-in-volketswil_ALNPZdm"
+              "label": "Klanglabor",
+              "detail": "Gemeinschaftszentrum Oerlikon, Zürich",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/klanglabor/"
             },
             {
-              "label": "Filmabend \"Radical - Eine Klasse für sich\"",
-              "detail": "Hinwil",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/filmabend-radical-eine-klasse-fuer-sich/"
+              "label": "Lego-Nachmittag",
+              "detail": "Aesch ZH",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lego-nachmittag/"
             },
             {
-              "label": "Esgui - Leif Kaner-Lidström",
-              "detail": "Dynamo, Werk 21",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/esgui-leif-kaner-lidstroem_Amv3mUH"
+              "label": "Lempen Puppet Theatre - Karneval der Tiere",
+              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schlieren/lempen-puppet-theatre-karneval-der-tiere_AQHyaLh"
             },
             {
-              "label": "NO CIGAR",
-              "detail": "Albani Music Club, Winterthur",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/winterthur/no-cigar_AMUuK9r"
+              "label": "English Stories für Kinder",
+              "detail": "Gemeindebibliothek Pfäffikon, Pfäffikon",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/english-stories-fuer-kinder/"
+            },
+            {
+              "label": "Paavo Järvi & Hayato Sumino",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/paavo-jaervi-hayato-sumino-3/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "345",
+          "value": "347",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "FONDUE- & RACLETTE SPECIALS",
-              "detail": "Restaurant & Bar Tschadun, Kloten",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-raclette-specials/"
+              "label": "Treffnachmittage zu Vielfalt und Respekt im KJAV",
+              "detail": "KJAV, Volketswil",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/treffnachmittage-zu-vielfalt-und-respekt-im-kjav/"
             },
             {
-              "label": "30. Internationale Kurzfilmtage Winterthur",
-              "detail": "blue Cinema Maxx, Winterthur",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/events/winterthur/26th-winterthur-international-short-film-festival_AJdd68h"
+              "label": "State of Asia Address 2026",
+              "detail": "Universität Zürich, Zürich",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/state-of-asia-address-2026_AASjBiG"
             },
             {
-              "label": "Turnen für Senioren/Senioren / Organisation des Frauenvereins",
-              "detail": "Neue Reformierte Kirche, Urdorf",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-25/"
+              "label": "Kehrichtverwertung und Klimaschutz",
+              "detail": "Kehrichtverwertungsanlage Zürcher Oberland KEZO, Hinwil",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/hinwil/kehrichtverwertung-und-klimaschutz_ApiwC3y"
             },
             {
-              "label": "VZK-Tagung 2026",
-              "detail": "Careum Auditorium, Zürich",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vzk-tagung-2026/"
+              "label": "Tüftelwerkstatt «Wir bauen einen Seifenblasen-Automaten»",
+              "detail": "Wildberg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tueftelwerkstatt-wir-bauen-einen-seifenblasen-automaten/"
             },
             {
-              "label": "Workshop «Licence to Tell»",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-licence-to-tell/"
-            },
-            {
-              "label": "Computeria Urdorf",
+              "label": "Kindercoiffeur",
               "detail": "Urdorf",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/computeria-urdorf-6/"
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindercoiffeur-3/"
             },
             {
-              "label": "Energie- und Klima-Zukunft in Volketswil",
-              "detail": "KUSPO-Foyer, Volketswil",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/energie-und-klima-zukunft-in-volketswil_ALNPZdm"
+              "label": "Klanglabor",
+              "detail": "Gemeinschaftszentrum Oerlikon, Zürich",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/klanglabor/"
             },
             {
-              "label": "Filmabend \"Radical - Eine Klasse für sich\"",
-              "detail": "Hinwil",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/filmabend-radical-eine-klasse-fuer-sich/"
+              "label": "Lego-Nachmittag",
+              "detail": "Aesch ZH",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lego-nachmittag/"
             },
             {
-              "label": "Esgui - Leif Kaner-Lidström",
-              "detail": "Dynamo, Werk 21",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/esgui-leif-kaner-lidstroem_Amv3mUH"
+              "label": "Lempen Puppet Theatre - Karneval der Tiere",
+              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schlieren/lempen-puppet-theatre-karneval-der-tiere_AQHyaLh"
             },
             {
-              "label": "NO CIGAR",
-              "detail": "Albani Music Club, Winterthur",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/winterthur/no-cigar_AMUuK9r"
+              "label": "English Stories für Kinder",
+              "detail": "Gemeindebibliothek Pfäffikon, Pfäffikon",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/english-stories-fuer-kinder/"
+            },
+            {
+              "label": "Paavo Järvi & Hayato Sumino",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/paavo-jaervi-hayato-sumino-3/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "345",
+          "value": "347",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "FONDUE- & RACLETTE SPECIALS",
-              "detail": "Restaurant & Bar Tschadun, Kloten",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-raclette-specials/"
+              "label": "Treffnachmittage zu Vielfalt und Respekt im KJAV",
+              "detail": "KJAV, Volketswil",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/treffnachmittage-zu-vielfalt-und-respekt-im-kjav/"
             },
             {
-              "label": "30e Festival international du court métrage de Winterthur",
-              "detail": "blue Cinema Maxx, Winterthur",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/events/winterthur/26th-winterthur-international-short-film-festival_AJdd68h"
+              "label": "State of Asia Address 2026",
+              "detail": "Universität Zürich, Zürich",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/state-of-asia-address-2026_AASjBiG"
             },
             {
-              "label": "Gymnastique pour seniors/Seniors / Organisation du Frauenverein",
-              "detail": "Neue Reformierte Kirche, Urdorf",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-25/"
+              "label": "Kehrichtverwertung und Klimaschutz",
+              "detail": "Kehrichtverwertungsanlage Zürcher Oberland KEZO, Hinwil",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/hinwil/kehrichtverwertung-und-klimaschutz_ApiwC3y"
             },
             {
-              "label": "VZK-Tagung 2026",
-              "detail": "Careum Auditorium, Zürich",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vzk-tagung-2026/"
+              "label": "Tüftelwerkstatt «Wir bauen einen Seifenblasen-Automaten»",
+              "detail": "Wildberg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tueftelwerkstatt-wir-bauen-einen-seifenblasen-automaten/"
             },
             {
-              "label": "Workshop «Licence to Tell»",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-licence-to-tell/"
-            },
-            {
-              "label": "Computeria Urdorf",
+              "label": "Kindercoiffeur",
               "detail": "Urdorf",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/computeria-urdorf-6/"
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindercoiffeur-3/"
             },
             {
-              "label": "Energie- und Klima-Zukunft in Volketswil",
-              "detail": "KUSPO-Foyer, Volketswil",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/energie-und-klima-zukunft-in-volketswil_ALNPZdm"
+              "label": "Klanglabor",
+              "detail": "Gemeinschaftszentrum Oerlikon, Zürich",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/klanglabor/"
             },
             {
-              "label": "Filmabend \"Radical - Eine Klasse für sich\"",
-              "detail": "Hinwil",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/filmabend-radical-eine-klasse-fuer-sich/"
+              "label": "Lego-Nachmittag",
+              "detail": "Aesch ZH",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lego-nachmittag/"
             },
             {
-              "label": "Esgui - Leif Kaner-Lidström",
-              "detail": "Dynamo, Werk 21",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/esgui-leif-kaner-lidstroem_Amv3mUH"
+              "label": "Lempen Puppet Theatre - Karneval der Tiere",
+              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schlieren/lempen-puppet-theatre-karneval-der-tiere_AQHyaLh"
             },
             {
-              "label": "NO CIGAR",
-              "detail": "Albani Music Club, Winterthur",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/winterthur/no-cigar_AMUuK9r"
+              "label": "English Stories für Kinder",
+              "detail": "Gemeindebibliothek Pfäffikon, Pfäffikon",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/english-stories-fuer-kinder/"
+            },
+            {
+              "label": "Paavo Järvi & Hayato Sumino",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/paavo-jaervi-hayato-sumino-3/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

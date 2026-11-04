@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "fisco",
-  "updatedAt": "2026-10-30T21:11:42.274Z",
-  "contentHash": "48961707632721560f51c953c5f9e7e44df8026eff975d0c6f9abd2a048103be",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "3232ef7d9d755d018480db400c135bcbe751d49471c165ee21e71a110e644cca",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -173,7 +173,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-30T21:11:42.274Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "BE",
@@ -329,7 +329,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-30T21:11:42.274Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "BE",
@@ -422,7 +422,7 @@
         {
           "title": "Steuerverwaltung Bern: Schließung vom 23. Oktober bis zum 1. November 2026",
           "url": "/de/bern-artikel/steuerverwaltung-bern-schliessung-2026/",
-          "excerpt": "Die Steuerverwaltung des Kantons Bern setzt die Dienstleistungen vom 23.",
+          "excerpt": "Ab Freitag, 23. Oktober 2026, um 16 Uhr und bis einschließlich Sonntag, 1. November, ist die Steuerverwaltung des Kantons Bern von einer geplanten Unterbrechung betroffen.",
           "date": "2026-10-19T06:59:44.908Z"
         },
         {
@@ -485,7 +485,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-30T21:11:42.274Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "BE",
@@ -641,7 +641,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-30T21:11:42.274Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

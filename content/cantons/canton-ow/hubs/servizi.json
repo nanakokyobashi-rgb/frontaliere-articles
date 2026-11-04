@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T14:36:40.036Z",
-  "contentHash": "fcdc007d1e2d889f80d4eff81b572ea15df8da4be036a5fb17fd44bc37ce8d56",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "8d90323624f5eaadfadcbb799d94a72de4428e1ed50cf442cec987262c66fc5a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -49,6 +54,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Sarnen",
+              "value": "5 °C",
+              "detail": "oggi da 5 a 6 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -64,7 +83,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -83,7 +102,7 @@
         {
           "title": "Il permesso di domicilio C nel Cantone di Obvaldo",
           "url": "/articoli-svizzera/permesso-di-domicilio-c-canton-obvaldo/",
-          "excerpt": "Requisiti e procedura per ottenere il permesso di domicilio C nel Cantone di Obvaldo",
+          "excerpt": "Requisiti e procedura per ottenere il permesso di domicilio C nel Cantone di Obvaldo.",
           "date": "2026-08-16T16:06:32.147Z"
         },
         {
@@ -144,7 +163,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "OW",
@@ -176,6 +195,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Sarnen",
+              "value": "5 °C",
+              "detail": "today from 5 to 6 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -191,7 +224,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -210,7 +243,7 @@
         {
           "title": "Residence permit C in the Canton of Obwalden",
           "url": "/en/swiss-articles/residence-permit-c-in-the-canton-of-obwalden/",
-          "excerpt": "Requirements and procedure for obtaining residence permit C in the Canton of Obwalden",
+          "excerpt": "Requirements and procedure for obtaining residence permit C in the Canton of Obwalden.",
           "date": "2026-08-16T16:06:32.147Z"
         },
         {
@@ -267,7 +300,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "OW",
@@ -299,6 +332,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Sarnen",
+              "value": "5 °C",
+              "detail": "heute 5 bis 6 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -314,7 +361,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -333,7 +380,7 @@
         {
           "title": "Die Niederlassungsbewilligung C im Kanton Obwalden",
           "url": "/de/schweiz-artikel/die-niederlassungsbewilligung-c-im-kanton-obwalden/",
-          "excerpt": "Voraussetzungen und Verfahren zur Erlangung der Niederlassungsbewilligung C im Kanton Obwalden",
+          "excerpt": "Voraussetzungen und Verfahren zur Erlangung der Niederlassungsbewilligung C im Kanton Obwalden.",
           "date": "2026-08-16T16:06:32.147Z"
         },
         {
@@ -390,7 +437,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "OW",
@@ -422,6 +469,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Sarnen",
+              "value": "5 °C",
+              "detail": "aujourd’hui de 5 à 6 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -437,7 +498,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -450,13 +511,13 @@
         {
           "title": "Permis de séjour en Suisse : le permis L à Obwald",
           "url": "/fr/articles-suisse/permesso-l-objectif-obwald/",
-          "excerpt": "Le permis L de courte durée est un permis de séjour qui peut être accordé pour une durée maximale d'un an.",
+          "excerpt": "Le permis L de courte durée est accordé pour le canton d'Obwald.",
           "date": "2026-08-16T16:18:18.990Z"
         },
         {
           "title": "Le permis de domicile C dans le canton d'Obwald",
           "url": "/fr/articles-suisse/le-permis-de-domicile-c-dans-le-canton-d-obwald/",
-          "excerpt": "Conditions et procédure pour obtenir le permis d'établissement C dans le canton d'Obwald",
+          "excerpt": "Conditions et procédure pour obtenir le permis d'établissement C dans le canton d'Obwald.",
           "date": "2026-08-16T16:06:32.147Z"
         },
         {
@@ -480,7 +541,7 @@
         {
           "title": "Permis L de courte durée dans le canton d'Obwald : validité et prolongation",
           "url": "/fr/articles-suisse/permesso-l-de-breve-duree-obwald/",
-          "excerpt": "Le permis L de courte durée dans le canton d'Obwald est valable pour une durée maximale d'un an.",
+          "excerpt": "Le permis L de courte durée est valable pour une durée maximale de 1 an, à compter de la date d'émission.",
           "date": "2026-08-16T16:31:23.659Z"
         },
         {
@@ -509,7 +570,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

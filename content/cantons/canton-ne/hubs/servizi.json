@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T14:36:40.036Z",
-  "contentHash": "1de5fcad6b06c02606adcf70b7ee97cef2923849a946640aa2092921bafa916f",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "0d886decb6a5d174422b08afb9daad561c9903f69bfd35c9b03ac91d3a4d0d52",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -49,6 +54,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "5 °C",
+              "detail": "oggi da 5 a 6 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -74,20 +93,20 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Mese salute mentale 2026: attività per rafforzare autostima",
           "url": "/articoli-neuchatel/mese-salute-mentale-2026/",
-          "excerpt": "Dal 10 settembre al 10 ottobre 2026 Seconda edizione nel Canton Neuchâtel Attività gratuite e accessibili per ogni età Una ventina di organizzazioni partner",
+          "excerpt": "Dal 10 settembre al 10 ottobre 2026, il Canton Neuchâtel concentrerà in un programma comune la seconda edizione locale del Mese della salute mentale.",
           "date": "2026-10-26T08:52:52.668Z"
         },
         {
           "title": "Nuovo centro accoglienza asilo a Couvet: parte il progetto",
           "url": "/articoli-neuchatel/nuovo-centro-asilo-couvet/",
-          "excerpt": "Nuova struttura prevista in rue du 1er Mars 11, a Couvet Sostituirà il sito attuale di Chemin des Prises 8 Progetto elaborato con il Comune di Val-de-Travers",
+          "excerpt": "A Couvet, il Consiglio di Stato del Cantone di Neuchâtel ha lanciato il progetto di una nuova struttura destinata all'alloggio delle persone rientranti nell'ambito dell'asilo.",
           "date": "2026-10-10T19:55:31.284Z"
         },
         {
@@ -136,7 +155,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "NE",
@@ -168,6 +187,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "5 °C",
+              "detail": "today from 5 to 6 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -193,20 +226,20 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Mental Health Month 2026: activities to strengthen self-esteem",
           "url": "/en/neuchatel-articles/mental-health-month-2026/",
-          "excerpt": "From September 10 to October 10, 2026 Second edition in the Canton of Neuchâtel Free and accessible activities for all ages Around twenty partner organizations",
+          "excerpt": "From September 10 to October 10, 2026, the Canton of Neuchâtel will bring together the second local edition of Mental Health Month in a common program.",
           "date": "2026-10-26T08:52:52.668Z"
         },
         {
           "title": "New asylum reception centre in Couvet: the project starts",
           "url": "/en/neuchatel-articles/new-asylum-center-couvet/",
-          "excerpt": "New structure planned in rue du 1er Mars 11, in Couvet It will replace the current site of Chemin des Prises 8 Project developed with the Municipality",
+          "excerpt": "In Couvet, the Council of State of the Canton of Neuchâtel has launched the project for a new structure intended for the accommodation of people returning to asylum.",
           "date": "2026-10-10T19:55:31.284Z"
         },
         {
@@ -251,7 +284,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "NE",
@@ -283,6 +316,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "5 °C",
+              "detail": "heute 5 bis 6 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -308,20 +355,20 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Monat der psychischen Gesundheit 2026: Selbstwert stärken",
           "url": "/de/neuenburg-artikel/mens-gesundheits-2026/",
-          "excerpt": "Vom 10. September bis zum 10. Oktober 2026 Zweite Ausgabe im Kanton Neuenburg Kostenlose und zugängliche Aktivitäten für jedes Alter Rund zwanzig",
+          "excerpt": "Oktober 2026 wird der Kanton Neuenburg die zweite lokale Ausgabe des Monats der psychischen Gesundheit in einem gemeinsamen Programm zusammenfassen.",
           "date": "2026-10-26T08:52:52.668Z"
         },
         {
           "title": "Neue Kindertagesstätte in Couvet: Das Projekt beginnt",
           "url": "/de/neuenburg-artikel/neues-asylzentrum-couvet/",
-          "excerpt": "Neue Struktur in der Rue du 1er Mars 11 in Couvet geplant Ersetzt den aktuellen Standort von Chemin des Prises 8 Mit der Gemeinde Val-de-Travers ausgearbeitetes",
+          "excerpt": "Neue Struktur in der Rue du 1er Mars 11 in Couvet geplant Ersetzt den aktuellen Standort von Chemin des Prises 8 Mit der Gemeinde Val-de-Travers ausgearbeitetes.",
           "date": "2026-10-10T19:55:31.284Z"
         },
         {
@@ -366,7 +413,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "NE",
@@ -398,6 +445,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "5 °C",
+              "detail": "aujourd’hui de 5 à 6 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -423,20 +484,20 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Mois de la santé mentale 2026 : activités pour renforcer l’estime de soi",
           "url": "/fr/articles-neuchatel/mois-sante-mentale-2026/",
-          "excerpt": "Du 10 septembre au 10 octobre 2026 Deuxième édition dans le canton de Neuchâtel Activités gratuites et accessibles pour tous les âges Une vingtaine",
+          "excerpt": "Du 10 septembre au 10 octobre 2026, le canton de Neuchâtel concentrera dans un programme commun la deuxième édition locale du Mois de la santé mentale.",
           "date": "2026-10-26T08:52:52.668Z"
         },
         {
           "title": "Nouveau centre d'accueil asile à Couvet : le projet commence",
           "url": "/fr/articles-neuchatel/nouveau-centre-asile-couvet/",
-          "excerpt": "Nouvelle structure prévue rue du 1er Mars 11, à Couvet Remplacera le site actuel du Chemin des Prises 8 Projet élaboré avec la commune de Val-de-Travers Séance",
+          "excerpt": "À Couvet, le Conseil d’État du canton de Neuchâtel a engagé la mise en place d’un nouveau lieu d’hébergement pour les personnes relevant de l’asile.",
           "date": "2026-10-10T19:55:31.284Z"
         },
         {
@@ -477,7 +538,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

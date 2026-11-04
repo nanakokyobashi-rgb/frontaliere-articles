@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-03T03:26:00.822Z",
-  "contentHash": "d878faa69449cb309826c4230cd32941a1b6cf0b24bb0f9c311a9d13d596aaac",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "fd1ac5788ea68dd0149e33367277ca32319d6aef9a0bed6a4e06818eb6321295",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T13:10:19.053Z",
+      "updatedAt": "2026-11-03T20:20:58.923Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "79",
+          "value": "77",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Schöne Dinge",
-              "detail": "Theater Chur, Chur",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
+              "label": "Geschichten-Kiste: Jakob muss kämpfen",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
             },
             {
-              "label": "Tanz- und Singnachmittag im Center da Sanadad",
-              "detail": "Center da Sanadad Savognin",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/savognin/tanz-und-singnachmittag-im-center-da-sanadad_A6QxCMu"
-            },
-            {
-              "label": "BIUTIFUL",
+              "label": "Kasperlitheater",
               "detail": "Chur",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biutiful/"
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kasperlitheater-2/"
+            },
+            {
+              "label": "Kraft der Stille - Sitzen im Schweigen",
+              "detail": "Kapelle Bodmer in Chur, Felsberg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kraft-der-stille-sitzen-im-schweigen-7/"
+            },
+            {
+              "label": "Spieleabend in der libraria",
+              "detail": "Scuol",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-2/"
+            },
+            {
+              "label": "Sternstunde Regula - Glaube und Gehirn",
+              "detail": "Regulakirche, Chur",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sternstunde-regula-glaube-und-gehirn/"
+            },
+            {
+              "label": "Wild Hogs HC Arosa vs. EHC Flims",
+              "detail": "Arosa",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-hogs-hc-arosa-vs-ehc-flims/"
+            },
+            {
+              "label": "Schöne Dinge",
+              "detail": "Theater Chur, Chur — in corso, ultimo giorno: 4 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
             },
             {
               "label": "Alphorn holiday course for beginners",
               "detail": "Walserhuus Sertig, Davos — in corso, ultimo giorno: 4 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Waldbaden Alpin",
-              "detail": "Scuol — in corso, ultimo giorno: 6 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Caffè Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "Geschichten-Kiste: Jakob muss kämpfen",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
               "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -108,7 +108,7 @@
         {
           "title": "Lido Grono, apertura confermata per l'estate 2027",
           "url": "/articoli-grigioni/lido-grono-estate-2027/",
-          "excerpt": "Apertura del Lido Grono confermata per l'estate 2027 Cantiere della nuova piscina comunale ancora in corso Costi previsti: circa 5 milioni Annuncio del sindaco",
+          "excerpt": "Lido Grono aprirà nell'estate 2027. La conferma riguarda la nuova piscina comunale e arriva mentre il cantiere prosegue.",
           "date": "2026-10-10T18:56:18.018Z"
         },
         {
@@ -120,19 +120,19 @@
         {
           "title": "Laboratorio estivo al Museo Moesano: archeologia per ragazzi",
           "url": "/articoli-frontaliere/laboratorio-estivo-museo-moesano-2026/",
-          "excerpt": "Dal 3 al 7 agosto 2026, bambini e ragazzi di 7-12 anni scoprono i massi cuppellari con un laboratorio teatrale al Museo Moesano di San Vittore",
+          "excerpt": "Dal 3 al 7 agosto 2026, bambini e ragazzi di 7-12 anni scoprono i massi cuppellari con un laboratorio teatrale al Museo Moesano di San Vittore.",
           "date": "2026-05-03T19:00:09.428Z"
         },
         {
           "title": "MisoXperience 2024: il festival degli sport all'aperto in Mesolcina",
           "url": "/articoli-frontaliere/misoexperience-festival-sport-2024/",
-          "excerpt": "Dal 9 al 17 maggio, la valle Mesolcina ospita il MisoXperience Festival con kayak, bouldering e parapendio. Ecco il programma completo",
+          "excerpt": "Giunto ormai alla sua sesta edizione, il MisoXperience Festival si prepara a trasformare la valle Mesolcina in un vivace punto d’incontro per gli appassionati di sport all’aria aperta provenienti da tutta la Svizzera.",
           "date": "2026-05-05T19:17:57.904Z"
         },
         {
           "title": "Roveredo, iniziativa popolare per un Carnevale accessibile a tutti",
           "url": "/articoli-frontaliere/roveredo-carnevale-tutti-2026/",
-          "excerpt": "Un gruppo di cittadini di Roveredo lancia un'iniziativa per rendere il Carnevale Lingera più inclusivo e trasparente",
+          "excerpt": "Un gruppo di cittadini di Roveredo lancia un'iniziativa per rendere il Carnevale Lingera più inclusivo e trasparente.",
           "date": "2026-05-06T09:32:17.339Z"
         },
         {
@@ -153,7 +153,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T03:26:00.822Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "GR",
@@ -163,7 +163,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "79",
+          "value": "77",
           "note": "from the site’s events calendar"
         }
       ],
@@ -174,69 +174,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Schöne Dinge",
-              "detail": "Theater Chur, Chur",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
+              "label": "Geschichten-Kiste: Jakob muss kämpfen",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
             },
             {
-              "label": "Tanz- und Singnachmittag im Center da Sanadad",
-              "detail": "Center da Sanadad Savognin",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/savognin/tanz-und-singnachmittag-im-center-da-sanadad_A6QxCMu"
-            },
-            {
-              "label": "BIUTIFUL",
+              "label": "Kasperlitheater",
               "detail": "Chur",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biutiful/"
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kasperlitheater-2/"
+            },
+            {
+              "label": "Kraft der Stille - Sitzen im Schweigen",
+              "detail": "Kapelle Bodmer in Chur, Felsberg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kraft-der-stille-sitzen-im-schweigen-7/"
+            },
+            {
+              "label": "Spieleabend in der libraria",
+              "detail": "Scuol",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-2/"
+            },
+            {
+              "label": "Sternstunde Regula - Glaube und Gehirn",
+              "detail": "Regulakirche, Chur",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sternstunde-regula-glaube-und-gehirn/"
+            },
+            {
+              "label": "Wild Hogs HC Arosa vs. EHC Flims",
+              "detail": "Arosa",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-hogs-hc-arosa-vs-ehc-flims/"
+            },
+            {
+              "label": "Schöne Dinge",
+              "detail": "Theater Chur, Chur — ongoing, last day: 4 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
             },
             {
               "label": "Alphorn holiday course for beginners",
               "detail": "Walserhuus Sertig, Davos — ongoing, last day: 4 November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — ongoing, last day: 7 November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — ongoing, last day: 14 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Forest Bathing Alpin",
-              "detail": "Scuol — ongoing, last day: 6 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Café Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — ongoing, last day: 11 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — ongoing, last day: 7 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "Geschichten-Kiste: Jakob muss kämpfen",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
               "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -249,7 +249,7 @@
         {
           "title": "Lido Grono, opening confirmed for summer 2027",
           "url": "/en/graubunden-articles/grono-pool-opening-2027/",
-          "excerpt": "Opening of Lido Grono confirmed for summer 2027 Construction of the new municipal swimming pool still ongoing Expected costs: approximately 5 million Mayor's announcement",
+          "excerpt": "Lido Grono will open in the summer of 2027. The confirmation concerns the new municipal pool and arrives while the construction site continues.",
           "date": "2026-10-10T18:56:18.018Z"
         },
         {
@@ -261,7 +261,7 @@
         {
           "title": "Summer lab at Moesano Museum: archaeology for kids",
           "url": "/en/cross-border-articles/summer-workshop-moesano-museum-2026/",
-          "excerpt": "From 3 to 7 August 2026, children and young people aged 7-12 discover the cup-marked stones with a theatrical workshop at the Moesano Museum in San Vittore",
+          "excerpt": "From 3 to 7 August 2026, children and young people aged 7-12 discover the cup-marked stones with a theatrical workshop at the Moesano Museum in San Vittore.",
           "date": "2026-05-03T19:00:09.428Z"
         },
         {
@@ -273,7 +273,7 @@
         {
           "title": "Roveredo, initiative for an inclusive Carnival",
           "url": "/en/cross-border-articles/roveredo-carnival-for-all-2026/",
-          "excerpt": "A group of citizens from Roveredo launches an initiative to make the Lingera Carnival more inclusive and transparent",
+          "excerpt": "A group of citizens from Roveredo launches an initiative to make the Lingera Carnival more inclusive and transparent.",
           "date": "2026-05-06T09:32:17.339Z"
         },
         {
@@ -294,7 +294,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T03:26:00.822Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "GR",
@@ -304,7 +304,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "79",
+          "value": "77",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -315,69 +315,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Schöne Dinge",
-              "detail": "Theater Chur, Chur",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
+              "label": "Geschichten-Kiste: Jakob muss kämpfen",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
             },
             {
-              "label": "Tanz- und Singnachmittag im Center da Sanadad",
-              "detail": "Center da Sanadad Savognin",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/savognin/tanz-und-singnachmittag-im-center-da-sanadad_A6QxCMu"
-            },
-            {
-              "label": "BIUTIFUL",
+              "label": "Kasperlitheater",
               "detail": "Chur",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biutiful/"
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kasperlitheater-2/"
+            },
+            {
+              "label": "Kraft der Stille - Sitzen im Schweigen",
+              "detail": "Kapelle Bodmer in Chur, Felsberg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kraft-der-stille-sitzen-im-schweigen-7/"
+            },
+            {
+              "label": "Spieleabend in der libraria",
+              "detail": "Scuol",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-2/"
+            },
+            {
+              "label": "Sternstunde Regula - Glaube und Gehirn",
+              "detail": "Regulakirche, Chur",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sternstunde-regula-glaube-und-gehirn/"
+            },
+            {
+              "label": "Wild Hogs HC Arosa vs. EHC Flims",
+              "detail": "Arosa",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-hogs-hc-arosa-vs-ehc-flims/"
+            },
+            {
+              "label": "Schöne Dinge",
+              "detail": "Theater Chur, Chur — läuft, letzter Tag: 4. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
             },
             {
               "label": "Alphorn-Ferienkurs für Anfänger und Anfängerinnen",
               "detail": "Walserhuus Sertig, Davos — läuft, letzter Tag: 4. November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Waldbaden Alpin",
-              "detail": "Scuol — läuft, letzter Tag: 6. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Cafè Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "Geschichten-Kiste: Jakob muss kämpfen",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
               "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -390,7 +390,7 @@
         {
           "title": "Lido Grono, Eröffnung für den Sommer 2027 bestätigt",
           "url": "/de/graubunden-artikel/grono-schwimmbad-2027/",
-          "excerpt": "Eröffnung des Lido Grono für den Sommer 2027 bestätigt Baustelle des neuen kommunalen Schwimmbads weiterhin im Gange Vorgesehene Kosten: etwa 5 Millionen Ankündigung des Bürgermeisters",
+          "excerpt": "Lido Grono wird im Sommer 2027 eröffnet. Die Bestätigung betrifft das neue städtische Schwimmbad und kommt, während die Baustelle fortgesetzt wird.",
           "date": "2026-10-10T18:56:18.018Z"
         },
         {
@@ -408,13 +408,13 @@
         {
           "title": "MisoXperience 2024: Abenteuer in der Mesolcina",
           "url": "/de/grenzgaenger-artikel/misoexperience-sportfestival-2024/",
-          "excerpt": "Vom 9. bis 17. Mai gastiert das MisoXperience Festival in der Mesolcina mit Kayak, Bouldern und Paragliding. Hier ist das umfassende Programm",
+          "excerpt": "Vom 9. bis 17. Mai gastiert das MisoXperience Festival in der Mesolcina mit Kayak, Bouldern und Paragliding. Hier ist das umfassende Programm.",
           "date": "2026-05-05T19:17:57.904Z"
         },
         {
           "title": "Roveredo: Initiative für einen inklusiven Karneval",
           "url": "/de/grenzgaenger-artikel/roveredo-fasching-fur-alle-2026/",
-          "excerpt": "Eine Gruppe von Bürgern aus Roveredo startet eine Initiative, um den Lingera-Karneval inklusiver und transparenter zu gestalten",
+          "excerpt": "Eine Gruppe von Bürgern aus Roveredo startet eine Initiative, um den Lingera-Karneval inklusiver und transparenter zu gestalten.",
           "date": "2026-05-06T09:32:17.339Z"
         },
         {
@@ -435,7 +435,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-03T03:26:00.822Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "GR",
@@ -445,7 +445,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "79",
+          "value": "77",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -456,69 +456,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Schöne Dinge",
-              "detail": "Theater Chur, Chur",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
+              "label": "Geschichten-Kiste: Jakob muss kämpfen",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
             },
             {
-              "label": "Tanz- und Singnachmittag im Center da Sanadad",
-              "detail": "Center da Sanadad Savognin",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/savognin/tanz-und-singnachmittag-im-center-da-sanadad_A6QxCMu"
-            },
-            {
-              "label": "BIUTIFUL",
+              "label": "Kasperlitheater",
               "detail": "Chur",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biutiful/"
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kasperlitheater-2/"
+            },
+            {
+              "label": "Kraft der Stille - Sitzen im Schweigen",
+              "detail": "Kapelle Bodmer in Chur, Felsberg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kraft-der-stille-sitzen-im-schweigen-7/"
+            },
+            {
+              "label": "Spieleabend in der libraria",
+              "detail": "Scuol",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-2/"
+            },
+            {
+              "label": "Sternstunde Regula - Glaube und Gehirn",
+              "detail": "Regulakirche, Chur",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sternstunde-regula-glaube-und-gehirn/"
+            },
+            {
+              "label": "Hogs Sauvages HC Arosa contre EHC Flims",
+              "detail": "Arosa",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-hogs-hc-arosa-vs-ehc-flims/"
+            },
+            {
+              "label": "Schöne Dinge",
+              "detail": "Theater Chur, Chur — en cours, dernier jour : 4 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
             },
             {
               "label": "Alphorn holiday course for beginners",
               "detail": "Walserhuus Sertig, Davos — en cours, dernier jour : 4 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Waldbaden Alpin",
-              "detail": "Scuol — en cours, dernier jour : 6 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Café Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "Geschichten-Kiste: Jakob muss kämpfen",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
               "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -531,7 +531,7 @@
         {
           "title": "Lido Grono, ouverture confirmée pour l'été 2027",
           "url": "/fr/articles-grisons/piscine-grono-ete-2027/",
-          "excerpt": "Ouverture du Lido Grono confirmée pour l'été 2027 Chantier de la nouvelle piscine communale encore en cours Coûts prévus : environ 5 millions Annonce du maire",
+          "excerpt": "Lido Grono ouvrira ses portes à l'été 2027. La confirmation concerne la nouvelle piscine municipale et arrive alors que le chantier se poursuit.",
           "date": "2026-10-10T18:56:18.018Z"
         },
         {
@@ -543,19 +543,19 @@
         {
           "title": "Atelier estival au Musée Moesano: archéologie pour enfants",
           "url": "/fr/articles-frontalier/atelier-dete-musee-moesano-2026/",
-          "excerpt": "Du 3 au 7 août 2026, les enfants de 7 à 12 ans découvrent les pierres cupellaires avec un atelier théâtral au Musée Moesano de San Vittore",
+          "excerpt": "Du 3 au 7 août 2026, les enfants de 7 à 12 ans découvrent les pierres cupellaires avec un atelier théâtral au Musée Moesano de San Vittore.",
           "date": "2026-05-03T19:00:09.428Z"
         },
         {
           "title": "MisoXperience 2024: le festival des sports à l'air libre en Mesolcina",
           "url": "/fr/articles-frontalier/festival-des-sports-misoexperience-2024/",
-          "excerpt": "Du 9 au 17 mai, la vallée de Mesolcina accueille le MisoXperience Festival avec kayak, escalade sur blocs et parapente. Voici le programme complet",
+          "excerpt": "Du 9 au 17 mai, la vallée de Mesolcina accueille le MisoXperience Festival avec kayak, escalade sur blocs et parapente. Voici le programme complet.",
           "date": "2026-05-05T19:17:57.904Z"
         },
         {
           "title": "Roveredo, initiative pour un carnaval accessible à tous",
           "url": "/fr/articles-frontalier/roveredo-carnaval-pour-tous-2026/",
-          "excerpt": "Un groupe de citoyens de Roveredo lance une initiative pour rendre le Carnaval Lingera plus inclusif et transparent",
+          "excerpt": "Un groupe de citoyens de Roveredo lance une initiative pour rendre le Carnaval Lingera plus inclusif et transparent.",
           "date": "2026-05-06T09:32:17.339Z"
         },
         {
@@ -576,7 +576,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-03T03:26:00.822Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T10:06:57.473Z",
-  "contentHash": "aec9db1d2d4268dc36f8d5d2831596a000a109719efd0c0671427cb07f27abf1",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "41f626e552ad712b455a33a0c13f8629ab7a23e4cc970dece30be31b908596e4",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-03T03:07:39.455Z",
+      "updatedAt": "2026-11-03T20:00:07.431Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -27,12 +27,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "14",
+          "value": "16",
           "note": "segnalazioni aggiornate: 3 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "9",
+          "value": "10",
           "note": "segnalazioni aggiornate: 3 novembre 2026"
         }
       ],
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,26 +130,14 @@
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Friburgo: Consiglio di Stato rigetta linea ferroviaria diretta Friburgo-Bulle",
-          "url": "/articoli-friburgo/friburgo-no-linea-diretta/",
-          "excerpt": "Friburgo non vuole una linea ferroviaria diretta per Bulle Il postulato è stato approvato nel maggio 2022: 87 voti contro 3 Il progetto è giudicato costoso",
-          "date": "2026-10-26T15:03:53.947Z"
-        },
-        {
-          "title": "24 nuovi autobus elettrici TPF per linee urbane e regionali",
-          "url": "/articoli-friburgo/tpf-nuovi-bus-elettrici-friburgo/",
-          "excerpt": "L'inserimento progressivo di 24 nuovi autobus elettrici TPF inizierà con il cambio d'orario di dicembre prossimo sulle linee urbane e regionali.",
-          "date": "2026-10-30T18:03:17.846Z"
-        },
-        {
           "title": "Friburgo prepara 24 nuovi bus elettrici per dicembre",
           "url": "/articoli-friburgo/tpf-bus-elettrici-friburgo/",
-          "excerpt": "24 nuovi bus elettrici per i TPF Investimento: 20 milioni di franchi Sei bus da 12 metri, 18 articolati da 18 In servizio dal cambio d'orario di dicembre",
+          "excerpt": "Ventiquattro nuovi autobus elettrici si apprestano a circolare sulla rete dei Transports publics fribourgeois (TPF) nel Canton Friburgo.",
           "date": "2026-10-28T17:54:37.229Z"
         },
         {
@@ -159,15 +147,27 @@
           "date": "2026-10-27T01:51:04.787Z"
         },
         {
+          "title": "Friburgo: Consiglio di Stato rigetta linea ferroviaria diretta Friburgo-Bulle",
+          "url": "/articoli-friburgo/friburgo-no-linea-diretta/",
+          "excerpt": "Il Consiglio di Stato del Canton Friburgo non vuole una linea ferroviaria diretta tra Friburgo e Bulle.",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
+          "title": "24 nuovi autobus elettrici TPF per linee urbane e regionali",
+          "url": "/articoli-friburgo/tpf-nuovi-bus-elettrici-friburgo/",
+          "excerpt": "L'inserimento progressivo di 24 nuovi autobus elettrici TPF inizierà con il cambio d'orario di dicembre prossimo sulle linee urbane e regionali.",
+          "date": "2026-10-30T18:03:17.846Z"
+        },
+        {
           "title": "Friburgo: approvato il nuovo piano della rete ciclabile",
           "url": "/articoli-friburgo/nuovo-piano-ciclabile-friburgo/",
-          "excerpt": "RIMU approva il nuovo piano ciclabile cantonale Consultazione: 80 pareri e quasi 270 osservazioni Obiettivo: più bici nella vita quotidiana entro il 2042",
+          "excerpt": "La comunicazione sul nuovo piano è stata pubblicata il 7 ottobre 2026 alle 15.45.",
           "date": "2026-10-08T15:33:51.044Z"
         },
         {
           "title": "Ginevra-Friburgo, una tratta ferroviaria sotto pressione",
           "url": "/articoli-svizzera/linea-ginevra-friburgo-pressione/",
-          "excerpt": "Tredici interruzioni sulla linea dall'inizio dell'anno Oltre 150’000 passeggeri e più di 700 treni ogni giorno Cavi incendiati, binari danneggiati e un volatile",
+          "excerpt": "Tredici interruzioni dall'inizio dell'anno hanno interessato la linea ferroviaria tra Ginevra e Friburgo.",
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "FR",
@@ -204,12 +204,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "14",
+          "value": "16",
           "note": "reports as of 3 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "9",
+          "value": "10",
           "note": "reports as of 3 November 2026"
         }
       ],
@@ -269,7 +269,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -307,26 +307,14 @@
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Fribourg: State Council rejects direct Fribourg-Bulle railway line",
-          "url": "/en/fribourg-articles/fribourg-no-direct-line/",
-          "excerpt": "Fribourg does not want a direct railway line to Bulle The postulate was approved in May 2022: 87 votes to 3 The project is considered costly and technically",
-          "date": "2026-10-26T15:03:53.947Z"
-        },
-        {
-          "title": "24 new TPF electric buses for urban and regional routes",
-          "url": "/en/fribourg-articles/tpf-new-electric-buses-fribourg/",
-          "excerpt": "The phased introduction of 24 new TPF electric buses will begin with next December’s timetable change on urban and regional routes.",
-          "date": "2026-10-30T18:03:17.846Z"
-        },
-        {
           "title": "Fribourg prepares 24 new electric buses for December",
           "url": "/en/fribourg-articles/fribourg-24-new-electric-buses/",
-          "excerpt": "24 new electric buses for TPF Investment: 20 million francs Six 12-metre buses, 18 articulated buses measuring 18 metres In service from the December timetable",
+          "excerpt": "Twenty-four new electric buses are set to operate on the network of the Transports publics fribourgeois (TPF) in the Canton of Fribourg.",
           "date": "2026-10-28T17:54:37.229Z"
         },
         {
@@ -336,15 +324,27 @@
           "date": "2026-10-27T01:51:04.787Z"
         },
         {
+          "title": "Fribourg: State Council rejects direct Fribourg-Bulle railway line",
+          "url": "/en/fribourg-articles/fribourg-no-direct-line/",
+          "excerpt": "The Council of State of the Canton of Fribourg does not want a direct railway line between Fribourg and Bulle.",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
+          "title": "24 new TPF electric buses for urban and regional routes",
+          "url": "/en/fribourg-articles/tpf-new-electric-buses-fribourg/",
+          "excerpt": "The phased introduction of 24 new TPF electric buses will begin with next December’s timetable change on urban and regional routes.",
+          "date": "2026-10-30T18:03:17.846Z"
+        },
+        {
           "title": "Fribourg: new cycle network plan approved",
           "url": "/en/fribourg-articles/fribourg-new-bicycle-network-plan/",
-          "excerpt": "RIMU approves the new cantonal cycle plan Consultation: 80 opinions and almost 270 observations Goal: more bikes in daily life by 2042 The plan covers network",
+          "excerpt": "The communication on the new plan was published on 7 October 2026 at 3.45 pm.",
           "date": "2026-10-08T15:33:51.044Z"
         },
         {
           "title": "Geneva–Fribourg, a railway route under pressure",
           "url": "/en/swiss-articles/geneva-fribourg-rail-line-pressure/",
-          "excerpt": "Thirteen disruptions on the line since the beginning of the year More than 150’000 passengers and over 700 trains every day Burnt cables, damaged tracks and a bird",
+          "excerpt": "Thirteen disruptions since the beginning of the year have affected the railway line between Geneva and Fribourg.",
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "FR",
@@ -381,12 +381,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "14",
+          "value": "16",
           "note": "Meldungen vom 3. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "9",
+          "value": "10",
           "note": "Meldungen vom 3. November 2026"
         }
       ],
@@ -446,7 +446,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -484,26 +484,14 @@
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Freiburg: Staatsrat lehnt direkte Bahnlinie Freiburg-Bulle ab",
-          "url": "/de/freiburg-artikel/friburg-keine-direktstrecke/",
-          "excerpt": "Freiburg will keine direkte Bahnlinie nach Bulle Das Postulat wurde im Mai 2022 angenommen: 87 Stimmen gegen 3 Das Projekt wird als kostspielig und technisch",
-          "date": "2026-10-26T15:03:53.947Z"
-        },
-        {
-          "title": "24 neue TPF-Elektrobusse für städtische und regionale Linien",
-          "url": "/de/freiburg-artikel/tpf-neue-elektrobusse-friburg/",
-          "excerpt": "Die schrittweise Einführung von 24 neuen TPF-Elektrobussen wird mit dem Fahrplanwechsel im kommenden Dezember auf den städtischen und regionalen Linien beginnen.",
-          "date": "2026-10-30T18:03:17.846Z"
-        },
-        {
           "title": "Freiburg bereitet 24 neue Elektrobusse für Dezember vor",
           "url": "/de/freiburg-artikel/freiburg-24-neue-elektrobusse/",
-          "excerpt": "24 neue Elektrobusse für die TPF Investition: 20 Millionen Franken Sechs Busse mit einer Länge von 12 Metern, 18 Gelenkbusse mit einer Länge von 18 Metern Ab",
+          "excerpt": "24 neue Elektrobusse für die TPF Investition: 20 Millionen Franken Sechs Busse mit einer Länge von 12 Metern, 18 Gelenkbusse mit einer Länge von 18 Metern Ab.",
           "date": "2026-10-28T17:54:37.229Z"
         },
         {
@@ -513,15 +501,27 @@
           "date": "2026-10-27T01:51:04.787Z"
         },
         {
+          "title": "Freiburg: Staatsrat lehnt direkte Bahnlinie Freiburg-Bulle ab",
+          "url": "/de/freiburg-artikel/friburg-keine-direktstrecke/",
+          "excerpt": "Freiburg will keine direkte Bahnlinie nach Bulle Das Postulat wurde im Mai 2022 angenommen: 87 Stimmen gegen 3 Das Projekt wird als kostspielig und technisch.",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
+          "title": "24 neue TPF-Elektrobusse für städtische und regionale Linien",
+          "url": "/de/freiburg-artikel/tpf-neue-elektrobusse-friburg/",
+          "excerpt": "Die schrittweise Einführung von 24 neuen TPF-Elektrobussen wird mit dem Fahrplanwechsel im kommenden Dezember auf den städtischen und regionalen Linien beginnen.",
+          "date": "2026-10-30T18:03:17.846Z"
+        },
+        {
           "title": "Freiburg: Neuer Radnetzplan genehmigt",
           "url": "/de/freiburg-artikel/freiburg-neuer-velowegnetzplan/",
-          "excerpt": "RIMU genehmigt den neuen kantonalen Radfahrplan Befassung: 80 Stellungnahmen und fast 270 Bemerkungen Ziel: Mehr Fahrräder im Alltag bis 2042 Der Plan deckt",
+          "excerpt": "Die Mitteilung zum neuen Plan wurde am 7. Oktober 2026 um 15.45 Uhr veröffentlicht. Der Kanton Freiburg verfügt nun über einen neuen kantonalen Velonetzplan für den täglichen Verkehr.",
           "date": "2026-10-08T15:33:51.044Z"
         },
         {
           "title": "Genf-Freiburg, eine unter Druck stehende Bahnstrecke",
           "url": "/de/schweiz-artikel/bahnstrecke-genf-freiburg-unter-druck/",
-          "excerpt": "Dreizehn Unterbrechungen auf der Strecke seit Jahresbeginn Über 150’000 Fahrgäste und mehr als 700 Züge täglich Verbrannte Kabel, beschädigte Gleise und ein Vogel",
+          "excerpt": "Seit Jahresbeginn kam es auf der Bahnstrecke zwischen Genf und Freiburg zu dreizehn Unterbrechungen.",
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,12 +558,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "14",
+          "value": "16",
           "note": "signalements au 3 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "9",
+          "value": "10",
           "note": "signalements au 3 novembre 2026"
         }
       ],
@@ -623,7 +623,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -661,26 +661,14 @@
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Fribourg : le Conseil d’État rejette la ligne ferroviaire directe Fribourg-Bulle",
-          "url": "/fr/articles-fribourg/fribourg-pas-de-liaison-directe/",
-          "excerpt": "Fribourg ne veut pas d’une ligne ferroviaire directe vers Bulle Le postulat a été approuvé en mai 2022 : 87 voix contre 3 Le projet est jugé coûteux",
-          "date": "2026-10-26T15:03:53.947Z"
-        },
-        {
-          "title": "24 nouveaux autobus électriques TPF pour les lignes urbaines et régionales",
-          "url": "/fr/articles-fribourg/tpf-nouveaux-bus-electriques-fribourg/",
-          "excerpt": "La mise en service progressive de 24 nouveaux autobus électriques TPF commencera lors du changement d'horaire de décembre prochain sur les lignes urbaines et régionales.",
-          "date": "2026-10-30T18:03:17.846Z"
-        },
-        {
           "title": "Fribourg prépare 24 nouveaux bus électriques pour décembre",
           "url": "/fr/articles-fribourg/fribourg-24-nouveaux-bus-electriques/",
-          "excerpt": "24 nouveaux bus électriques pour les TPF Investissement : 20 millions de francs Six bus de 12 mètres, 18 articulés de 18 En service à partir du changement",
+          "excerpt": "Vingt-quatre nouveaux autobus électriques s’apprêtent à circuler sur le réseau des Transports publics fribourgeois (TPF) dans le canton de Fribourg.",
           "date": "2026-10-28T17:54:37.229Z"
         },
         {
@@ -690,15 +678,27 @@
           "date": "2026-10-27T01:51:04.787Z"
         },
         {
+          "title": "Fribourg : le Conseil d’État rejette la ligne ferroviaire directe Fribourg-Bulle",
+          "url": "/fr/articles-fribourg/fribourg-pas-de-liaison-directe/",
+          "excerpt": "Le Conseil d’État du canton de Fribourg ne souhaite pas de ligne ferroviaire directe entre Fribourg et Bulle.",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
+          "title": "24 nouveaux autobus électriques TPF pour les lignes urbaines et régionales",
+          "url": "/fr/articles-fribourg/tpf-nouveaux-bus-electriques-fribourg/",
+          "excerpt": "La mise en service progressive de 24 nouveaux autobus électriques TPF commencera lors du changement d'horaire de décembre prochain sur les lignes urbaines et régionales.",
+          "date": "2026-10-30T18:03:17.846Z"
+        },
+        {
           "title": "Fribourg : le nouveau plan du réseau cyclable approuvé",
           "url": "/fr/articles-fribourg/fribourg-nouveau-plan-reseau-cyclable/",
-          "excerpt": "RIMU approuve le nouveau plan cyclable cantonal Consultation : 80 avis et près de 270 observations Objectif : plus de vélos dans la vie quotidienne d'ici 2042",
+          "excerpt": "La communication sur le nouveau plan a été publiée le 7 octobre 2026 à 15h45.",
           "date": "2026-10-08T15:33:51.044Z"
         },
         {
           "title": "Genève-Fribourg, une ligne ferroviaire sous pression",
           "url": "/fr/articles-suisse/ligne-geneve-fribourg-sous-pression/",
-          "excerpt": "Treize interruptions sur la ligne depuis le début de l’année Plus de 150’000 passagers et plus de 700 trains chaque jour Des câbles incendiés, des voies endommagées et un volatile",
+          "excerpt": "Treize interruptions depuis le début de l’année ont touché la ligne ferroviaire entre Genève et Fribourg.",
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

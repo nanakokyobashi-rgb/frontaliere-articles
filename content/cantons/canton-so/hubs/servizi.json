@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T14:36:40.036Z",
-  "contentHash": "9e5a8b7b48489398b042724c2b98ab524a52a44d0f00ac0df4053b5b66883864",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "b5e6079e8e621ce30a5e775722164c57c5601c4609229294d31ac0634e9da1d3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-03T01:41:41.208Z",
+      "updatedAt": "2026-11-03T16:44:05.264Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-03T00:59:08.019Z",
+      "updatedAt": "2026-11-03T14:10:08.795Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "6",
-          "note": "offerta mediana 1060 CHF"
+          "note": "offerta mediana 1090 CHF"
         }
       ],
       "dataBlocks": [
@@ -86,7 +91,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-03T01:41:41.208Z"
+          "updatedAt": "2026-11-03T16:44:05.264Z"
         },
         {
           "id": "aste-targhe",
@@ -117,7 +122,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "5 °C",
+              "detail": "oggi da 5 a 6 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -145,14 +164,14 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Proposta riduzione premi assicurazione malattia 2027 Canton Soletta",
           "url": "/articoli-soletta/proposta-premi-assicurazione-2027/",
-          "excerpt": "Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9 milioni (+4,3%)",
+          "excerpt": "Il Governo cantonale di Soletta ha trasmesso al Parlamento cantonale la proposta per la riduzione dei premi dell'assicurazione malattia relativa al 2027.",
           "date": "2026-10-27T12:21:54.555Z"
         },
         {
@@ -194,7 +213,7 @@
         {
           "title": "Premi cassa malati canton Soletta e riduzione premi",
           "url": "/articoli-svizzera/premi-cassa-malati-canton-soletta-riduzione/",
-          "excerpt": "Fatti chiave sulla riduzione dei premi cassa malati nel Cantone di Soletta",
+          "excerpt": "Fatti chiave sulla riduzione dei premi cassa malati nel Cantone di Soletta.",
           "date": "2026-08-18T01:51:08.948Z"
         }
       ],
@@ -225,7 +244,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "SO",
@@ -242,7 +261,7 @@
         {
           "label": "Plate auctions running",
           "value": "6",
-          "note": "typical bid 1,060 CHF"
+          "note": "typical bid 1,090 CHF"
         }
       ],
       "dataBlocks": [
@@ -284,7 +303,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-03T01:41:41.208Z"
+          "updatedAt": "2026-11-03T16:44:05.264Z"
         },
         {
           "id": "aste-targhe",
@@ -315,7 +334,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "5 °C",
+              "detail": "today from 5 to 6 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -343,14 +376,14 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Proposal to reduce health insurance premiums in 2027, Canton of Solothurn",
           "url": "/en/solothurn-articles/2027-insurance-premium-proposal/",
-          "excerpt": "2027 proposal submitted to the Cantonal Parliament Approximately 221 million francs to reduce premiums Cantonal contribution of 98 million Increase of 9 million",
+          "excerpt": "The cantonal government of Solothurn has submitted to the cantonal parliament the proposal for the reduction of health insurance premiums for 2027.",
           "date": "2026-10-27T12:21:54.555Z"
         },
         {
@@ -392,7 +425,7 @@
         {
           "title": "Canton health insurance premiums Slab and premium reduction",
           "url": "/en/swiss-articles/canton-health-insurance-premiums-slab-and-premium-reduction/",
-          "excerpt": "Key facts about the reduction of sick pay premiums in the Canton of Solothurn",
+          "excerpt": "Key facts about the reduction of sick pay premiums in the Canton of Solothurn.",
           "date": "2026-08-18T01:51:08.948Z"
         }
       ],
@@ -419,7 +452,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "SO",
@@ -436,7 +469,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "6",
-          "note": "mittleres Gebot 1’060 CHF"
+          "note": "mittleres Gebot 1’090 CHF"
         }
       ],
       "dataBlocks": [
@@ -478,7 +511,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-03T01:41:41.208Z"
+          "updatedAt": "2026-11-03T16:44:05.264Z"
         },
         {
           "id": "aste-targhe",
@@ -509,7 +542,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "5 °C",
+              "detail": "heute 5 bis 6 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -537,14 +584,14 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Vorschlag: Prämienverbilligung 2027 im Kanton Solothurn",
           "url": "/de/solothurn-artikel/praemienverbilligung-2027/",
-          "excerpt": "Vorschlag 2027 dem Kantonsparlament übermittelt Rund 221 Millionen Franken zur Senkung der Prämien Kantonsbeitrag von 98 Millionen Erhöhung um 9 Millionen",
+          "excerpt": "Die Kantonsregierung von Solothurn hat dem Kantonsparlament die Vorlage zur Prämienverbilligung bei der Krankenversicherung für 2027 übermittelt.",
           "date": "2026-10-27T12:21:54.555Z"
         },
         {
@@ -556,7 +603,7 @@
         {
           "title": "Solothurn: Die Ratsleitung gegen die PUK zu den Spitälern",
           "url": "/de/solothurn-artikel/solothurn-spitaeler-puk-abgelehnt/",
-          "excerpt": "Die Ratsleitung von Solothurn hält eine PUK zu den Spitälern nicht für sinnvoll; der Kantonsrat wird am 11.",
+          "excerpt": "Gemäss Mitteilung der Ratsleitung wäre eine PUK nicht der richtige Weg und würde dem Zweck nicht dienen.",
           "date": "2026-10-29T10:41:25.882Z"
         },
         {
@@ -586,7 +633,7 @@
         {
           "title": "Krankenkassenprämien Kanton Solothurn und Prämienverbilligung",
           "url": "/de/schweiz-artikel/krankenkassenpramien-kanton-solothurn-und-pramienverbilligung/",
-          "excerpt": "Wichtige Fakten zur Reduzierung der Krankenversicherungsprämien im Kanton Solothurn",
+          "excerpt": "Wichtige Fakten zur Reduzierung der Krankenversicherungsprämien im Kanton Solothurn.",
           "date": "2026-08-18T01:51:08.948Z"
         }
       ],
@@ -613,7 +660,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "SO",
@@ -630,7 +677,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "6",
-          "note": "offre centrale 1 060 CHF"
+          "note": "offre centrale 1 090 CHF"
         }
       ],
       "dataBlocks": [
@@ -672,7 +719,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-03T01:41:41.208Z"
+          "updatedAt": "2026-11-03T16:44:05.264Z"
         },
         {
           "id": "aste-targhe",
@@ -703,7 +750,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "5 °C",
+              "detail": "aujourd’hui de 5 à 6 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -731,14 +792,14 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Proposition de réduction des primes maladie 2027 à Soleure",
           "url": "/fr/articles-soleure/proposition-primes-2027/",
-          "excerpt": "Proposition 2027 transmise au Parlement cantonal Environ 221 millions de francs pour réduire les primes Contribution cantonale de 98 millions Augmentation de 9",
+          "excerpt": "Le Gouvernement cantonal de Soleure a transmis au Parlement cantonal la proposition relative à la réduction des primes de l'assurance-maladie pour 2027.",
           "date": "2026-10-27T12:21:54.555Z"
         },
         {
@@ -780,7 +841,7 @@
         {
           "title": "Primes d'assurance maladie dans le canton de Soleure et réductions de primes",
           "url": "/fr/articles-suisse/primes-d-assurance-maladie-dans-le-canton-de-soleure-et-reductions-de-primes/",
-          "excerpt": "Faits clés sur la réduction des primes de caisse-maladie dans le canton de Soleure",
+          "excerpt": "Faits clés sur la réduction des primes de caisse-maladie dans le canton de Soleure.",
           "date": "2026-08-18T01:51:08.948Z"
         }
       ],
@@ -803,7 +864,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

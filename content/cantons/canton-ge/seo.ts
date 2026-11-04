@@ -43,16 +43,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-accordo-cure-oncologiche-ginevra': {
     title: 'Accordo Ginevra-Francia per cure oncologiche pediatriche',
-    description: 'Accordo tra autorità ginevrine e francesi',
+    description: 'Accordo tra autorità ginevrine e francesi.',
     keywords: 'frontalieri, ticino, svizzera, italia, accordo, ginevra-francia, cure, oncologiche',
     ogTitle: 'Accordo Ginevra-Francia per cure pediatriche HUG',
-    ogDescription: 'Accordo tra autorità ginevrine e francesi',
+    ogDescription: 'Accordo tra autorità ginevrine e francesi.',
     canonicalPath: '/articoli-ginevra/accordo-cure-oncologiche-ginevra/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Accordo Ginevra-Francia per cure oncologiche pediatriche",
-      "description": "Accordo tra autorità ginevrine e francesi",
+      "description": "Accordo tra autorità ginevrine e francesi.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-accordo-cure-oncologiche-ginevra.webp`,
@@ -77,16 +77,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-salario-minimo-ginevra-2027': {
     title: 'Ginevra: salario minimo a 24,73 CHF l\'ora dal 2027',
-    description: 'Dal 1° gennaio 2027 il minimo sale a 24,73 CHF l\'ora Agricoltura e floricoltura: 18,17 CHF l\'ora L\'indicizzazione annuale segue il costo della vita Il minimo',
+    description: 'Dal 1° gennaio 2027 il salario minimo applicabile nel Cantone di Ginevra salirà a 24,73 CHF l\'ora.',
     keywords: 'frontalieri, ticino, svizzera, italia, ginevra, salario, minimo, gennaio',
     ogTitle: 'Ginevra: salario minimo a 24,73 CHF l\'ora dal 2027',
-    ogDescription: 'Dal 1° gennaio 2027 il minimo sale a 24,73 CHF l\'ora Agricoltura e floricoltura: 18,17 CHF l\'ora L\'indicizzazione annuale segue il costo della vita Il minimo',
+    ogDescription: 'Dal 1° gennaio 2027 il salario minimo applicabile nel Cantone di Ginevra salirà a 24,73 CHF l\'ora.',
     canonicalPath: '/articoli-ginevra/salario-minimo-ginevra-2027/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Ginevra: salario minimo a 24,73 CHF l'ora dal 2027",
-      "description": "Dal 1° gennaio 2027 il minimo sale a 24,73 CHF l'ora Agricoltura e floricoltura: 18,17 CHF l'ora L'indicizzazione annuale segue il costo della vita Il minimo",
+      "description": "Dal 1° gennaio 2027 il salario minimo applicabile nel Cantone di Ginevra salirà a 24,73 CHF l'ora.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -116,16 +116,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-ginevra-stop-autostrada-a412': {
     title: 'Ginevra chiede lo stop dei lavori per l\'autostrada A412',
-    description: 'La Ville de Genève chiede di fermare i lavori della A412 Sei comuni ginevrini aderiscono alla procedura La Cour d\'appel de Lyon decide il 14 ottobre Nel mirino',
+    description: 'La Ville de Genève ha avviato una procedura giudiziaria per chiedere lo stop dei lavori dell\'autostrada A412 nella vicina Francia.',
     keywords: 'frontalieri, ticino, svizzera, italia, ginevra, chiede, stop, lavori',
     ogTitle: 'Ginevra chiede lo stop immediato dei lavori dell\'A412',
-    ogDescription: 'La Ville de Genève chiede di fermare i lavori della A412 Sei comuni ginevrini aderiscono alla procedura La Cour d\'appel de Lyon decide il 14 ottobre Nel mirino',
+    ogDescription: 'La Ville de Genève ha avviato una procedura giudiziaria per chiedere lo stop dei lavori dell\'autostrada A412 nella vicina Francia.',
     canonicalPath: '/articoli-ginevra/ginevra-stop-autostrada-a412/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Ginevra chiede lo stop dei lavori per l'autostrada A412",
-      "description": "La Ville de Genève chiede di fermare i lavori della A412 Sei comuni ginevrini aderiscono alla procedura La Cour d'appel de Lyon decide il 14 ottobre Nel mirino",
+      "description": "La Ville de Genève ha avviato una procedura giudiziaria per chiedere lo stop dei lavori dell'autostrada A412 nella vicina Francia.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -311,16 +311,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-taf-regolamento-aeroporto-ginevra': {
     title: 'Aeroporto di Ginevra: il TAF approva il regolamento',
-    description: 'Il TAF approva il regolamento dell’aeroporto di Ginevra Le misure contestate rispettano le norme ambientali Respinti i ricorsi contro la decisione DETEC del 17',
+    description: 'Il Tribunale amministrativo federale ha dato il via libera al regolamento di esercizio dell’aeroporto di Ginevra.',
     keywords: 'frontalieri, ticino, svizzera, italia, aeroporto, ginevra, approva, regolamento',
     ogTitle: 'TAF: regolamento dell’aeroporto di Ginevra approvato',
-    ogDescription: 'Il TAF approva il regolamento dell’aeroporto di Ginevra Le misure contestate rispettano le norme ambientali Respinti i ricorsi contro la decisione DETEC del 17',
+    ogDescription: 'Il Tribunale amministrativo federale ha dato il via libera al regolamento di esercizio dell’aeroporto di Ginevra.',
     canonicalPath: '/articoli-ginevra/taf-regolamento-aeroporto-ginevra/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Aeroporto di Ginevra: il TAF approva il regolamento",
-      "description": "Il TAF approva il regolamento dell’aeroporto di Ginevra Le misure contestate rispettano le norme ambientali Respinti i ricorsi contro la decisione DETEC del 17",
+      "description": "Il Tribunale amministrativo federale ha dato il via libera al regolamento di esercizio dell’aeroporto di Ginevra.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -350,7 +350,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-skyguide-ginevra-capacita-ottobre': {
     title: 'Guasto tecnico dimezza la capacità a Ginevra e Zurigo',
-    description: 'Skyguide ha ridotto del 50% la capacità dello spazio aereo svizzero. Il guasto è avvenuto martedì 20 ottobre. Decolli e atterraggi a Ginevra e Zurigo',
+    description: 'Skyguide ha ridotto del 50% la capacità dello spazio aereo svizzero. Il guasto è avvenuto martedì 20 ottobre. Decolli e atterraggi a Ginevra e Zurigo.',
     keywords: 'frontalieri, ticino, svizzera, italia, guasto, tecnico, dimezza, capacità',
     ogTitle: 'Guasto tecnico: -50% a Ginevra e Zurigo',
     ogDescription: 'Skyguide ha ridotto del 50% la capacità dello spazio aereo svizzero.',
@@ -359,7 +359,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Guasto tecnico dimezza la capacità a Ginevra e Zurigo",
-      "description": "Skyguide ha ridotto del 50% la capacità dello spazio aereo svizzero. Il guasto è avvenuto martedì 20 ottobre. Decolli e atterraggi a Ginevra e Zurigo",
+      "description": "Skyguide ha ridotto del 50% la capacità dello spazio aereo svizzero. Il guasto è avvenuto martedì 20 ottobre. Decolli e atterraggi a Ginevra e Zurigo.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -389,16 +389,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-hug-primo-ospedale-svizzero-2027': {
     title: 'HUG primo ospedale svizzero nel ranking Smart Hospitals 2027',
-    description: 'Gli HUG sono 31° al mondo nel 2027 Primo ospedale svizzero della graduatoria 37 posizioni guadagnate rispetto al 2026 410 ospedali in 33 Paesi',
+    description: 'Gli HUG sono 31° al mondo nel 2027 Primo ospedale svizzero della graduatoria 37 posizioni guadagnate rispetto al 2026 410 ospedali in 33 Paesi.',
     keywords: 'frontalieri, ticino, svizzera, italia, primo, ospedale, svizzero, ranking',
     ogTitle: 'HUG 1° ospedale svizzero Smart Hospitals 2027',
-    ogDescription: 'Gli HUG sono 31° al mondo nel 2027 Primo ospedale svizzero della graduatoria 37 posizioni guadagnate rispetto al 2026 410 ospedali in 33 Paesi Classifica →',
+    ogDescription: 'Nel ranking 2027 di Newsweek e Statista, gli HUG occupano il 31° posto mondiale e diventano il primo ospedale della Svizzera.',
     canonicalPath: '/articoli-ginevra/hug-primo-ospedale-svizzero-2027/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "HUG primo ospedale svizzero nel ranking Smart Hospitals 2027",
-      "description": "Gli HUG sono 31° al mondo nel 2027 Primo ospedale svizzero della graduatoria 37 posizioni guadagnate rispetto al 2026 410 ospedali in 33 Paesi",
+      "description": "Gli HUG sono 31° al mondo nel 2027 Primo ospedale svizzero della graduatoria 37 posizioni guadagnate rispetto al 2026 410 ospedali in 33 Paesi.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -428,16 +428,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-furti-cantone-ginevra-2025': {
     title: 'Furti con effrazione nel Canton Ginevra: 3\'410 nel 2025',
-    description: '3\'410 furti nel 2025, contro 3\'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti',
+    description: '3\'410 furti nel 2025, contro 3\'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti.',
     keywords: 'frontalieri, ticino, svizzera, italia, furti, effrazione, canton, ginevra',
     ogTitle: 'Furti Canton Ginevra: 3\'410 nel 2025',
-    ogDescription: '3\'410 furti nel 2025, contro 3\'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti',
+    ogDescription: '3\'410 furti nel 2025, contro 3\'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti.',
     canonicalPath: '/articoli-ginevra/furti-cantone-ginevra-2025/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Furti con effrazione nel Canton Ginevra: 3'410 nel 2025",
-      "description": "3'410 furti nel 2025, contro 3'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti",
+      "description": "3'410 furti nel 2025, contro 3'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

@@ -4,17 +4,59 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "carburanti",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "b09b080b99d9f6a0395127f50c36cf346784b56ba3409549d275d8f53aca99da",
-  "blocks": [],
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "28050d0865bc1b6108eab3f22bd48aea386776774bd001883e1db634020ca3fd",
+  "blocks": [
+    {
+      "id": "prezzi-carburanti",
+      "updatedAt": "2026-11-03T14:41:22.679Z",
+      "keyFacts": 2,
+      "carryUntilAt": "2026-12-02T00:00:00.000Z"
+    }
+  ],
   "locales": {
     "it": {
       "canton": "TI",
       "topic": "carburanti",
       "locale": "it",
       "intro": "In Ticino, benzina e diesel sono una voce fissa nel bilancio di chi usa l’auto per andare al lavoro. Questa pagina riunisce i prezzi medi rilevati alla pompa, il confronto con le aree oltreconfine quando esiste un dato pubblico e gli articoli della redazione su carburanti ed energia.\n\nIl territorio confina con l’Italia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in italiano; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Benzina 95 — Svizzera",
+          "value": "2,120 CHF/l",
+          "note": "media nazionale ufficiale, 1 ottobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Svizzera",
+          "value": "2,410 CHF/l",
+          "note": "media nazionale ufficiale, 1 ottobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Prezzi dei carburanti",
+          "description": "Prezzi medi alla pompa rilevati sul territorio e, dove esiste un dato pubblico, nelle aree oltreconfine. Ogni riga riporta la valuta della rilevazione: i prezzi non sono convertiti.",
+          "items": [
+            {
+              "label": "Benzina 95 — Svizzera",
+              "value": "2,120 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Svizzera",
+              "value": "2,410 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-10-01T00:00:00.000Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
+        }
+      ],
       "curatedArticles": [
         {
           "title": "Caro prezzi carburanti in Ticino: chiesta riduzione fiscale",
@@ -43,7 +85,7 @@
         {
           "title": "Nuove accise sui carburanti: come cambiano i prezzi in Ticino",
           "url": "/articoli-frontaliere/nuove-accise-carburanti-2026/",
-          "excerpt": "Dai 2 maggio 2026 le accise sulla benzina e sul GPL sono aumentate, mentre il diesel è in lieve calo. Ecco come cambia il costo del carburante per i frontalieri",
+          "excerpt": "Dai 2 maggio 2026 le accise sulla benzina e sul GPL sono aumentate, mentre il diesel è in lieve calo. Ecco come cambia il costo del carburante per i frontalieri.",
           "date": "2026-05-04T09:11:32.268Z"
         },
         {
@@ -55,13 +97,13 @@
         {
           "title": "Caro-carburanti: dove fare il pieno in Ticino",
           "url": "/articoli-frontaliere/carburanti-ticino-confronto-2024/",
-          "excerpt": "Confronta i prezzi della benzina e del diesel in Ticino e risparmia con i nostri consigli pratici",
+          "excerpt": "Confronta i prezzi della benzina e del diesel in Ticino e risparmia con i nostri consigli pratici.",
           "date": "2026-04-27T09:12:47.619Z"
         },
         {
           "title": "Costo benzina in Ticino: perché i frontalieri pagano di più",
           "url": "/articoli-frontaliere/costo-benzina-ticino-frontalieri-2026/",
-          "excerpt": "I prezzi della benzina in Ticino rimangono elevati, con differenze di oltre 20 centesimi al litro tra le diverse zone. Ecco cosa cambia per i frontalieri",
+          "excerpt": "I prezzi della benzina in Ticino rimangono elevati, con differenze di oltre 20 centesimi al litro tra le diverse zone. Ecco cosa cambia per i frontalieri.",
           "date": "2026-05-16T02:47:05.638Z"
         }
       ],
@@ -92,15 +134,50 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "TI",
       "topic": "carburanti",
       "locale": "en",
       "intro": "In Ticino, petrol and diesel are a fixed item in the budget of anyone who drives to work. This page brings together the average pump prices on record, the comparison with the other side of the border where public data exists, and our articles on fuel and energy.\n\nThe area borders Italy: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in Italian; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Petrol 95 — Switzerland",
+          "value": "2.120 CHF/l",
+          "note": "official national average, 1 October 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Switzerland",
+          "value": "2.410 CHF/l",
+          "note": "official national average, 1 October 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Fuel prices",
+          "description": "Average pump prices recorded locally and, where public data exists, across the border. Each row keeps the currency of the survey: prices are not converted.",
+          "items": [
+            {
+              "label": "Petrol 95 — Switzerland",
+              "value": "2.120 CHF/l",
+              "detail": "official national average",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Switzerland",
+              "value": "2.410 CHF/l",
+              "detail": "official national average",
+              "date": "2026-10-01T00:00:00.000Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
+        }
+      ],
       "curatedArticles": [
         {
           "title": "Expensive fuel prices in Ticino: tax reduction request",
@@ -129,7 +206,7 @@
         {
           "title": "New fuel excise duties: price changes in Ticino",
           "url": "/en/cross-border-articles/new-fuel-taxes-2026/",
-          "excerpt": "As of May 2, 2026, excise duties on gasoline and LPG have increased, while diesel has slightly decreased. Here's how fuel costs change for cross-border workers",
+          "excerpt": "As of May 2, 2026, excise duties on gasoline and LPG have increased, while diesel has slightly decreased. Here's how fuel costs change for cross-border workers.",
           "date": "2026-05-04T09:11:32.268Z"
         },
         {
@@ -141,13 +218,13 @@
         {
           "title": "Fuel price hike: where to fill up in Ticino",
           "url": "/en/cross-border-articles/fuel-comparison-ticino-2024/",
-          "excerpt": "Compare gasoline and diesel prices in Ticino and save with our practical tips",
+          "excerpt": "Compare gasoline and diesel prices in Ticino and save with our practical tips.",
           "date": "2026-04-27T09:12:47.619Z"
         },
         {
           "title": "Why cross-border workers pay more for fuel in Ticino",
           "url": "/en/cross-border-articles/gas-price-ticino-cross-border-workers-2026/",
-          "excerpt": "Fuel prices in Ticino remain high, with differences of over 20 cents per litre between different areas. Here's what changes for cross-border workers",
+          "excerpt": "Fuel prices in Ticino remain high, with differences of over 20 cents per litre between different areas. Here's what changes for cross-border workers.",
           "date": "2026-05-16T02:47:05.638Z"
         }
       ],
@@ -178,15 +255,50 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "TI",
       "topic": "carburanti",
       "locale": "de",
       "intro": "Im Tessin sind Benzin und Diesel ein fester Posten im Budget aller, die mit dem Auto zur Arbeit fahren. Diese Seite bündelt die erhobenen Durchschnittspreise an der Zapfsäule, den Vergleich mit dem Gebiet jenseits der Grenze, sofern öffentliche Daten vorliegen, und die Artikel der Redaktion zu Treibstoff und Energie.\n\nDas Gebiet grenzt an Italien: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Italienisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Benzin 95 — Schweiz",
+          "value": "2.120 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. Oktober 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Schweiz",
+          "value": "2.410 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. Oktober 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Treibstoffpreise",
+          "description": "Durchschnittliche Preise an der Zapfsäule im Gebiet und, wo öffentliche Daten vorliegen, jenseits der Grenze. Jede Zeile nennt die Währung der Erhebung: Die Preise werden nicht umgerechnet.",
+          "items": [
+            {
+              "label": "Benzin 95 — Schweiz",
+              "value": "2.120 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Schweiz",
+              "value": "2.410 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-10-01T00:00:00.000Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
+        }
+      ],
       "curatedArticles": [
         {
           "title": "Teure Kraftstoffpreise im Tessin: Steuerermäßigung beantragt",
@@ -227,7 +339,7 @@
         {
           "title": "Hohe Kraftstoffpreise: Wo tanken in der Schweiz?",
           "url": "/de/grenzgaenger-artikel/kraftstoffvergleich-tessin-2024/",
-          "excerpt": "Vergleichen Sie die Preise für Benzin und Diesel in der Schweiz und sparen Sie mit unseren praktischen Tipps",
+          "excerpt": "Vergleichen Sie die Preise für Benzin und Diesel in der Schweiz und sparen Sie mit unseren praktischen Tipps.",
           "date": "2026-04-27T09:12:47.619Z"
         },
         {
@@ -260,15 +372,50 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "TI",
       "topic": "carburanti",
       "locale": "fr",
       "intro": "Au Tessin, l’essence et le diesel sont un poste fixe du budget de celles et ceux qui prennent la voiture pour aller travailler. Cette page réunit les prix moyens relevés à la pompe, la comparaison avec l’autre côté de la frontière lorsqu’une donnée publique existe et les articles de la rédaction sur les carburants et l’énergie.\n\nLe territoire a une frontière avec l’Italie : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en italien ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Essence 95 — Suisse",
+          "value": "2,120 CHF/l",
+          "note": "moyenne nationale officielle, 1er octobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Suisse",
+          "value": "2,410 CHF/l",
+          "note": "moyenne nationale officielle, 1er octobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Prix des carburants",
+          "description": "Prix moyens à la pompe relevés sur le territoire et, lorsqu’une donnée publique existe, de l’autre côté de la frontière. Chaque ligne conserve la monnaie du relevé : les prix ne sont pas convertis.",
+          "items": [
+            {
+              "label": "Essence 95 — Suisse",
+              "value": "2,120 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Suisse",
+              "value": "2,410 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-10-01T00:00:00.000Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
+        }
+      ],
       "curatedArticles": [
         {
           "title": "Cher prix des carburants au Tessin : demande de réduction d'impôt",
@@ -309,13 +456,13 @@
         {
           "title": "Coût des carburants : où faire le plein en Tessin",
           "url": "/fr/articles-frontalier/comparaison-carburants-tessin-2024/",
-          "excerpt": "Comparez les prix de l'essence et du diesel en Tessin et économisez avec nos conseils pratiques",
+          "excerpt": "Comparez les prix de l'essence et du diesel en Tessin et économisez avec nos conseils pratiques.",
           "date": "2026-04-27T09:12:47.619Z"
         },
         {
           "title": "Prix de l'essence au Tessin: pourquoi les frontaliers paient plus cher",
           "url": "/fr/articles-frontalier/prix-essence-tessin-travailleurs-frontaliers-2026/",
-          "excerpt": "Les prix de l'essence au Tessin restent élevés, avec des différences de plus de 20 centimes par litre entre les différentes zones. Voici ce qui change pour les frontaliers",
+          "excerpt": "Les prix de l'essence au Tessin restent élevés, avec des différences de plus de 20 centimes par litre entre les différentes zones. Voici ce qui change pour les frontaliers.",
           "date": "2026-05-16T02:47:05.638Z"
         }
       ],
@@ -346,7 +493,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

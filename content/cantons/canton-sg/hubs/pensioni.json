@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "pensioni",
-  "updatedAt": "2026-10-28T01:14:28.455Z",
-  "contentHash": "adcaaea98454f2619dc265498f9a96f929ae1a20499a20e2eb629623429efb6d",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "5694963be7698067e07207435758161002a97c2776b301dc5a2623ce42213d46",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T21:31:39.250Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -137,7 +137,7 @@
           "items": [
             {
               "label": "Wartungsarbeiten auf der Webseite aufgrund Sicherheitsupdates",
-              "date": "2026-10-27",
+              "date": "2026-11-03",
               "url": "https://www.svasg.ch/news/meldungen/wartungsarbeiten.php"
             },
             {
@@ -161,7 +161,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +209,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "SG",
@@ -319,7 +319,7 @@
           "items": [
             {
               "label": "Wartungsarbeiten auf der Webseite aufgrund Sicherheitsupdates",
-              "date": "2026-10-27",
+              "date": "2026-11-03",
               "url": "https://www.svasg.ch/news/meldungen/wartungsarbeiten.php"
             },
             {
@@ -343,7 +343,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +391,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "SG",
@@ -501,7 +501,7 @@
           "items": [
             {
               "label": "Wartungsarbeiten auf der Webseite aufgrund Sicherheitsupdates",
-              "date": "2026-10-27",
+              "date": "2026-11-03",
               "url": "https://www.svasg.ch/news/meldungen/wartungsarbeiten.php"
             },
             {
@@ -525,7 +525,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +573,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "SG",
@@ -683,7 +683,7 @@
           "items": [
             {
               "label": "Wartungsarbeiten auf der Webseite aufgrund Sicherheitsupdates",
-              "date": "2026-10-27",
+              "date": "2026-11-03",
               "url": "https://www.svasg.ch/news/meldungen/wartungsarbeiten.php"
             },
             {
@@ -707,7 +707,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -755,7 +755,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

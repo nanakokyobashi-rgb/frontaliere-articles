@@ -4,7 +4,7 @@
  */
 const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.baugesuch-juchstrasse-frauenfeld.title': 'Building application in Frauenfeld: Juchstrasse 22-22b',
-    'blog.article.baugesuch-juchstrasse-frauenfeld.excerpt': 'Building application for Juchstrasse 22, 22a and 22b: from October 7 to 26, 2026, the documents can be consulted at Bankplatz 3.',
+    'blog.article.baugesuch-juchstrasse-frauenfeld.excerpt': 'On October 7, 2026, publication of the building application for Juchstrasse 22, 22a and 22b begins.',
     'blog.article.baugesuch-juchstrasse-frauenfeld.imageAlt': 'Commercial building and urban street in Frauenfeld, subject of a public building application',
     'blog.article.rapporti-thurmed-turgovia.title': '2025 Reports thurmed and Spital Thurgau',
     'blog.article.rapporti-thurmed-turgovia.excerpt': 'The page lists the 2025 report of thurmed and Spital Thurgau AG, the sustainability report, and statistics from 2021 to 2025.',
@@ -34,7 +34,7 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.turgovia-sicurezza-lavoro-orari.excerpt': 'Guide to occupational safety, health protection, working hours and rest periods in the Canton of Thurgau in accordance with regulations and the Labour Inspectorate.',
     'blog.article.turgovia-sicurezza-lavoro-orari.imageAlt': 'Illustration generated for this article',
     'blog.article.tredicesima-rendita-avs-2026.title': '13th AVS pension paid with the December 2026 pension',
-    'blog.article.tredicesima-rendita-avs-2026.excerpt': 'The 13th AHV pension is paid with the December 2026 pension No applications or formalities are required It is due to anyone receiving an AHV old-age pension',
+    'blog.article.tredicesima-rendita-avs-2026.excerpt': 'The 13th AVS pension will be paid together with the December pension in 2026.',
     'blog.article.tredicesima-rendita-avs-2026.imageAlt': 'Older person in Thurgau checks the December AHV pension payment',
     'blog.article.eventi-weekend-turgovia.title': 'Weekend events in Thurgau: what to do Saturday & Sunday',
     'blog.article.eventi-weekend-turgovia.excerpt': 'Events in Thurgau every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
@@ -46,10 +46,10 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.supporto-imprese-turgovia.excerpt': 'The Canton of Thurgau offers businesses information, advice and support regarding framework conditions, real estate, permits, and contacts with offices and authorities.',
     'blog.article.supporto-imprese-turgovia.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.turgovia-servizi-datori-lavoro.title': 'Thurgau: personnel search and lari protection services',
-    'blog.article.turgovia-servizi-datori-lavoro.excerpt': 'The Canton of Thurgau makes the RAV offices in Amriswil, Frauenfeld and Kreuzlingen and the arbeit.swiss portal available to employers for vacancy vacancy',
+    'blog.article.turgovia-servizi-datori-lavoro.excerpt': 'The page dedicated to the service explains that these offices support the search for suitable workers.',
     'blog.article.turgovia-servizi-datori-lavoro.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.pbv-rpg2-turgovia-2026.title': 'Thurgau: revised PBV approved for RPG2',
-    'blog.article.pbv-rpg2-turgovia-2026.excerpt': 'The Government approved the revised PBV RPG2 concerns construction outside building zones The objective is to limit growth to a maximum of 2% The PBV brings',
+    'blog.article.pbv-rpg2-turgovia-2026.excerpt': 'The Thurgau Cantonal Government approved the revised version of the ordinance related to the Planning and Building Act and the Intercantonal Agreement on the Harmonization of Building Definitions.',
     'blog.article.pbv-rpg2-turgovia-2026.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.turgovia-modifica-piano-direttore-2027.title': 'Thurgau: amendment to the structure plan for business locations',
     'blog.article.turgovia-modifica-piano-direttore-2027.excerpt': 'The Canton of Thurgau launches the consultation on the revision of the structure plan for the development of commerce and industry.',
@@ -78,6 +78,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.turgovia-piano-risparmio-60-milioni.title': 'Thurgau: savings plan of 60 million by 2030',
     'blog.article.turgovia-piano-risparmio-60-milioni.excerpt': 'The Government proposes 37 measures to stabilize cantonal finances.',
     'blog.article.turgovia-piano-risparmio-60-milioni.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.economia-imprese-cantone-turgovia.title': 'Business support in Thurgau: conditions and establishment',
+    'blog.article.economia-imprese-cantone-turgovia.excerpt': 'The administration provides support, information and advice to existing businesses and to those wishing to establish themselves in the Canton of Thurgau.',
+    'blog.article.economia-imprese-cantone-turgovia.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTgEn;

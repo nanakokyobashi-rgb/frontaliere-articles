@@ -4,14 +4,14 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-11-03T10:06:57.473Z",
-  "contentHash": "1718c48c8c28fdbef69ab3fce772a5d3769a338bd061265d581bc67439e41e8d",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "99d47fb4f997c3d261ab5cd05e7e439177bed869dba4105136e3b85902a1efe6",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-01T13:48:39.198Z",
+      "updatedAt": "2026-11-03T14:41:22.679Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-08T11:13:57.000Z"
+      "carryUntilAt": "2026-11-10T13:39:20.000Z"
     }
   ],
   "locales": {
@@ -22,16 +22,16 @@
       "intro": "In Vallese, benzina e diesel sono una voce fissa nel bilancio di chi usa l’auto per andare al lavoro. Questa pagina riunisce i prezzi medi rilevati alla pompa, il confronto con le aree oltreconfine quando esiste un dato pubblico e gli articoli della redazione su carburanti ed energia.\n\nIl territorio confina con l’Italia e la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese e tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
       "keyFacts": [
         {
-          "label": "Benzina 95 — Francia",
-          "value": "2,154 EUR/l",
-          "note": "media regionale, 1 novembre 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Benzina 95 — Svizzera",
+          "value": "2,120 CHF/l",
+          "note": "media nazionale ufficiale, 1 ottobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — Francia",
-          "value": "2,381 EUR/l",
-          "note": "media regionale, 1 novembre 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Diesel — Svizzera",
+          "value": "2,410 CHF/l",
+          "note": "media nazionale ufficiale, 1 ottobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -41,34 +41,52 @@
           "description": "Prezzi medi alla pompa rilevati sul territorio e, dove esiste un dato pubblico, nelle aree oltreconfine. Ogni riga riporta la valuta della rilevazione: i prezzi non sono convertiti.",
           "items": [
             {
+              "label": "Benzina 95 — Svizzera",
+              "value": "2,120 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Svizzera",
+              "value": "2,410 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
               "label": "Benzina 95 — Francia",
-              "value": "2,154 EUR/l",
-              "detail": "media regionale: minimo 1,990 EUR/l, 97 stazioni rilevate",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2,125 EUR/l",
+              "detail": "media regionale: minimo 1,990 EUR/l, 102 stazioni rilevate",
+              "date": "2026-11-03T13:39:20.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,381 EUR/l",
-              "detail": "media regionale: minimo 2,179 EUR/l, 95 stazioni rilevate",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2,271 EUR/l",
+              "detail": "media regionale: minimo 2,149 EUR/l, 106 stazioni rilevate",
+              "date": "2026-11-03T14:00:45.000Z"
             }
           ],
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-01T13:48:39.198Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Vionnaz: revoca divieti acqua potabile dopo 41 giorni",
+          "url": "/articoli-vallese/vionnaz-revoca-divieti-acqua/",
+          "excerpt": "La municipalità di Vionnaz ha dichiarato soddisfacente la situazione delle fonti, ripristinando prati, piscine e veicoli, ma mantenendo le raccomandazioni di risparmio.",
+          "date": "2026-11-03T23:46:43.546Z"
+        },
+        {
           "title": "Val de Bagnes: 175 persone per settimana sostenibilità",
           "url": "/articoli-vallese/val-de-bagnes-sostenibilita-2024/",
-          "excerpt": "175 persone a Val de Bagnes Sei appuntamenti dal 24 al 31 ottobre Presentato il primo Piano climatico del comune Il piano comprende 26 misure e 75 azioni Luogo",
+          "excerpt": "Dal 24 al 31 ottobre, 175 persone hanno partecipato alla Settimana della sostenibilità a Val de Bagnes.",
           "date": "2026-11-03T09:11:19.910Z"
         },
         {
           "title": "Bains d'Ovronnaz: sursis concordatario fino al 31 marzo 2027",
           "url": "/articoli-vallese/bains-ovronnaz-nuovo-sursis/",
-          "excerpt": "Il tribunale di Martigny prolunga il sursis fino al 31 marzo 2027 I dipendenti conservano il posto per tutta la stagione invernale Le presenze aumentano",
+          "excerpt": "Il tribunale del distretto di Martigny ha concesso ai Bains d'Ovronnaz un nuovo sursis concordatario fino al 31 marzo 2027.",
           "date": "2026-10-28T15:29:18.560Z"
         },
         {
@@ -80,14 +98,8 @@
         {
           "title": "Rapporto OVS: 83% vallesani in buona salute, obesità al 13% e rischi psicosociali al 44%",
           "url": "/articoli-vallese/salute-vallese-2026-ovs/",
-          "excerpt": "83% degli adulti vallesani si sente in buona salute nel 2022 Speranza di vita: 85,9 anni per le donne, 82,4 per gli uomini Gli over 65 sono il 21%",
+          "excerpt": "Nel 2022, l'83% degli adulti in Vallese dichiarava di essere in buona o ottima salute, contro l'85% in Svizzera.",
           "date": "2026-10-18T08:16:12.890Z"
-        },
-        {
-          "title": "Iselle, parcheggio frontalieri a pagamento: 50 euro",
-          "url": "/articoli-vallese/iselle-parcheggio-frontalieri/",
-          "excerpt": "Il parcheggio di Iselle per frontalieri diventa a pagamento: l'abbonamento mensile è di 50 euro.",
-          "date": "2026-10-18T06:55:42.164Z"
         }
       ],
       "links": [
@@ -116,7 +128,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "VS",
@@ -125,16 +137,16 @@
       "intro": "In Valais, petrol and diesel are a fixed item in the budget of anyone who drives to work. This page brings together the average pump prices on record, the comparison with the other side of the border where public data exists, and our articles on fuel and energy.\n\nThe area borders Italy and France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French and German; data, notices and articles are collected here and updated when they change.",
       "keyFacts": [
         {
-          "label": "Petrol 95 — France",
-          "value": "2.154 EUR/l",
-          "note": "regional average, 1 November 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Petrol 95 — Switzerland",
+          "value": "2.120 CHF/l",
+          "note": "official national average, 1 October 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — France",
-          "value": "2.381 EUR/l",
-          "note": "regional average, 1 November 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Diesel — Switzerland",
+          "value": "2.410 CHF/l",
+          "note": "official national average, 1 October 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -144,34 +156,52 @@
           "description": "Average pump prices recorded locally and, where public data exists, across the border. Each row keeps the currency of the survey: prices are not converted.",
           "items": [
             {
+              "label": "Petrol 95 — Switzerland",
+              "value": "2.120 CHF/l",
+              "detail": "official national average",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Switzerland",
+              "value": "2.410 CHF/l",
+              "detail": "official national average",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
               "label": "Petrol 95 — France",
-              "value": "2.154 EUR/l",
-              "detail": "regional average: lowest 1.990 EUR/l, 97 stations surveyed",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2.125 EUR/l",
+              "detail": "regional average: lowest 1.990 EUR/l, 102 stations surveyed",
+              "date": "2026-11-03T13:39:20.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.381 EUR/l",
-              "detail": "regional average: lowest 2.179 EUR/l, 95 stations surveyed",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2.271 EUR/l",
+              "detail": "regional average: lowest 2.149 EUR/l, 106 stations surveyed",
+              "date": "2026-11-03T14:00:45.000Z"
             }
           ],
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-01T13:48:39.198Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Vionnaz: drinking water bans lifted after 41 days",
+          "url": "/en/valais-articles/vionnaz-revokes-water-restrictions/",
+          "excerpt": "The municipality of Vionnaz has declared the situation regarding water sources satisfactory, reinstating the watering of lawns, the filling of swimming pools and the washing of vehicles, while maintaining water-saving…",
+          "date": "2026-11-03T23:46:43.546Z"
+        },
+        {
           "title": "Val de Bagnes: 175 people for Sustainability Week",
           "url": "/en/valais-articles/val-de-bagnes-sustainability/",
-          "excerpt": "175 people in Val de Bagnes Six events from October 24 to 31 The municipality's first Climate Plan was presented The plan comprises 26 measures and 75 actions",
+          "excerpt": "From October 24 to 31, 175 people participated in Sustainability Week in Val de Bagnes.",
           "date": "2026-11-03T09:11:19.910Z"
         },
         {
           "title": "Bains d'Ovronnaz: composition moratorium until March 31, 2027",
           "url": "/en/valais-articles/bains-ovronnaz-new-sursis/",
-          "excerpt": "The Martigny court extends the moratorium until March 31, 2027 Employees retain their jobs throughout the winter season Visitor numbers increase by 20-30%",
+          "excerpt": "The Martigny district court has granted Bains d'Ovronnaz a new composition moratorium until March 31, 2027.",
           "date": "2026-10-28T15:29:18.560Z"
         },
         {
@@ -183,14 +213,8 @@
         {
           "title": "OVS report: 83% of Valais residents in good health",
           "url": "/en/valais-articles/valais-health-2026-ovs/",
-          "excerpt": "83% of Valais adults feel in good health in 2022 Life expectancy: 85,9 years for women, 82,4 for men People over 65 account for 21% of the population in 2024",
+          "excerpt": "In 2022, 83% of adults in Valais reported being in good or very good health, compared with 85% in Switzerland.",
           "date": "2026-10-18T08:16:12.890Z"
-        },
-        {
-          "title": "Iselle, paid parking for cross-border commuters: 50 euro",
-          "url": "/en/valais-articles/iselle-frontier-parking/",
-          "excerpt": "The Iselle car park for cross-border commuters is becoming paid parking: the monthly subscription is 50 euros.",
-          "date": "2026-10-18T06:55:42.164Z"
         }
       ],
       "links": [
@@ -219,7 +243,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "VS",
@@ -228,16 +252,16 @@
       "intro": "Im Wallis sind Benzin und Diesel ein fester Posten im Budget aller, die mit dem Auto zur Arbeit fahren. Diese Seite bündelt die erhobenen Durchschnittspreise an der Zapfsäule, den Vergleich mit dem Gebiet jenseits der Grenze, sofern öffentliche Daten vorliegen, und die Artikel der Redaktion zu Treibstoff und Energie.\n\nDas Gebiet grenzt an Italien und Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch und Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
       "keyFacts": [
         {
-          "label": "Benzin 95 — Frankreich",
-          "value": "2.154 EUR/l",
-          "note": "regionaler Durchschnitt, 1. November 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Benzin 95 — Schweiz",
+          "value": "2.120 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. Oktober 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — Frankreich",
-          "value": "2.381 EUR/l",
-          "note": "regionaler Durchschnitt, 1. November 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Diesel — Schweiz",
+          "value": "2.410 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. Oktober 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -247,34 +271,52 @@
           "description": "Durchschnittliche Preise an der Zapfsäule im Gebiet und, wo öffentliche Daten vorliegen, jenseits der Grenze. Jede Zeile nennt die Währung der Erhebung: Die Preise werden nicht umgerechnet.",
           "items": [
             {
+              "label": "Benzin 95 — Schweiz",
+              "value": "2.120 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Schweiz",
+              "value": "2.410 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.154 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 97 erfasste Tankstellen",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2.125 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 102 erfasste Tankstellen",
+              "date": "2026-11-03T13:39:20.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.381 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.179 EUR/l, 95 erfasste Tankstellen",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2.271 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.149 EUR/l, 106 erfasste Tankstellen",
+              "date": "2026-11-03T14:00:45.000Z"
             }
           ],
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-01T13:48:39.198Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Vionnaz: Aufhebung der Trinkwasserverbote nach 41 Tagen",
+          "url": "/de/wallis-artikel/vionnaz-wasserbeschrankungen-aufhebung/",
+          "excerpt": "Die Gemeinde Vionnaz hat die Lage der Quellen als zufriedenstellend bezeichnet und die Nutzung von Rasenflächen, Schwimmbädern und Fahrzeugen wieder ermöglicht, die Empfehlungen zum Wassersparen jedoch beibehalten.",
+          "date": "2026-11-03T23:46:43.546Z"
+        },
+        {
           "title": "Val de Bagnes: 175 Personen für die Nachhaltigkeitswoche",
           "url": "/de/wallis-artikel/val-de-bagnes-nachhaltigkeit/",
-          "excerpt": "175 Personen in Val de Bagnes Sechs Veranstaltungen vom 24.",
+          "excerpt": "Vom 24. bis 31. Oktober nahmen 175 Personen an der Nachhaltigkeitswoche in Val de Bagnes teil.",
           "date": "2026-11-03T09:11:19.910Z"
         },
         {
           "title": "Bains d'Ovronnaz: Nachlassstundung bis zum 31. März 2027",
           "url": "/de/wallis-artikel/bains-ovronnaz-neuer-sursis/",
-          "excerpt": "Das Gericht von Martigny verlängert die Nachlassstundung bis zum 31.",
+          "excerpt": "Das Bezirksgericht Martigny hat den Bains d'Ovronnaz eine neue Nachlassstundung bis zum 31. März 2027 gewährt.",
           "date": "2026-10-28T15:29:18.560Z"
         },
         {
@@ -286,14 +328,8 @@
         {
           "title": "OVS-Bericht: 83% Walliser fit, 13% adipös, 44% Psychorisiken",
           "url": "/de/wallis-artikel/wallis-gesundheit-2026-ovs/",
-          "excerpt": "83% der erwachsenen Walliser fühlen sich 2022 bei guter Gesundheit Lebenserwartung: 85,9 Jahre für Frauen, 82,4 für Männer Die über 65-Jährigen machen 2024 21%",
+          "excerpt": "Im Jahr 2022 gaben 83% der Erwachsenen im Wallis an, bei guter oder sehr guter Gesundheit zu sein, gegenüber 85% in der Schweiz.",
           "date": "2026-10-18T08:16:12.890Z"
-        },
-        {
-          "title": "Iselle, kostenpflichtiger Parkplatz für Grenzgänger: 50 euro",
-          "url": "/de/wallis-artikel/iselle-grenzgaengerparkplatz/",
-          "excerpt": "Der Parkplatz für Grenzgänger in Iselle wird kostenpflichtig: Das Monatsabonnement beträgt 50 euro.",
-          "date": "2026-10-18T06:55:42.164Z"
         }
       ],
       "links": [
@@ -318,7 +354,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "VS",
@@ -327,16 +363,16 @@
       "intro": "En Valais, l’essence et le diesel sont un poste fixe du budget de celles et ceux qui prennent la voiture pour aller travailler. Cette page réunit les prix moyens relevés à la pompe, la comparaison avec l’autre côté de la frontière lorsqu’une donnée publique existe et les articles de la rédaction sur les carburants et l’énergie.\n\nLe territoire a une frontière avec l’Italie et la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français et allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
       "keyFacts": [
         {
-          "label": "Essence 95 — France",
-          "value": "2,154 EUR/l",
-          "note": "moyenne régionale, 1er novembre 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Essence 95 — Suisse",
+          "value": "2,120 CHF/l",
+          "note": "moyenne nationale officielle, 1er octobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — France",
-          "value": "2,381 EUR/l",
-          "note": "moyenne régionale, 1er novembre 2026",
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)"
+          "label": "Diesel — Suisse",
+          "value": "2,410 CHF/l",
+          "note": "moyenne nationale officielle, 1er octobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -346,34 +382,52 @@
           "description": "Prix moyens à la pompe relevés sur le territoire et, lorsqu’une donnée publique existe, de l’autre côté de la frontière. Chaque ligne conserve la monnaie du relevé : les prix ne sont pas convertis.",
           "items": [
             {
+              "label": "Essence 95 — Suisse",
+              "value": "2,120 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Suisse",
+              "value": "2,410 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
               "label": "Essence 95 — France",
-              "value": "2,154 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 97 stations relevées",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2,125 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 102 stations relevées",
+              "date": "2026-11-03T13:39:20.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,381 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,179 EUR/l, 95 stations relevées",
-              "date": "2026-11-01T11:13:57.000Z"
+              "value": "2,271 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,149 EUR/l, 106 stations relevées",
+              "date": "2026-11-03T14:00:45.000Z"
             }
           ],
-          "sourceName": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-01T13:48:39.198Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Vionnaz : levée des interdictions liées à l’eau potable après 41 jours",
+          "url": "/fr/articles-valais/vionnaz-levee-restrictions-eau/",
+          "excerpt": "La municipalité de Vionnaz a déclaré satisfaisante la situation des sources, réautorisant l’arrosage des pelouses, le remplissage des piscines et le lavage des véhicules, tout en maintenant les recommandations…",
+          "date": "2026-11-03T23:46:43.546Z"
+        },
+        {
           "title": "Val de Bagnes : 175 personnes pour la semaine de la durabilité",
           "url": "/fr/articles-valais/val-de-bagnes-durable/",
-          "excerpt": "175 personnes à Val de Bagnes Six rendez-vous du 24 au 31 octobre Présentation du premier Plan climatique de la commune Le plan comprend 26 mesures et 75",
+          "excerpt": "Du 24 au 31 octobre, 175 personnes ont participé à la Semaine de la durabilité à Val de Bagnes.",
           "date": "2026-11-03T09:11:19.910Z"
         },
         {
           "title": "Bains d'Ovronnaz : sursis concordataire jusqu'au 31 mars 2027",
           "url": "/fr/articles-valais/bains-ovronnaz-nouveau-sursis/",
-          "excerpt": "Le tribunal de Martigny prolonge le sursis jusqu'au 31 mars 2027 Les employés conservent leur emploi pendant toute la saison hivernale La fréquentation augmente",
+          "excerpt": "Le tribunal de district de Martigny a accordé aux Bains d'Ovronnaz un nouveau sursis concordataire jusqu'au 31 mars 2027.",
           "date": "2026-10-28T15:29:18.560Z"
         },
         {
@@ -385,14 +439,8 @@
         {
           "title": "Rapport OVS : 83% des Valaisans en bonne santé, 13% obèses",
           "url": "/fr/articles-valais/valais-sante-2026-ovs/",
-          "excerpt": "83% des adultes valaisans se sentent en bonne santé en 2022 Espérance de vie : 85,9 ans pour les femmes, 82,4 pour les hommes Les plus de 65 ans représentent",
+          "excerpt": "En 2022, 83% des adultes en Valais déclaraient être en bonne ou excellente santé, contre 85% en Suisse.",
           "date": "2026-10-18T08:16:12.890Z"
-        },
-        {
-          "title": "Iselle, parking pour frontaliers payant : 50 euro",
-          "url": "/fr/articles-valais/iselle-parking-frontaliers/",
-          "excerpt": "Le parking d'Iselle pour frontaliers devient payant : l'abonnement mensuel est de 50 euro.",
-          "date": "2026-10-18T06:55:42.164Z"
         }
       ],
       "links": [
@@ -421,7 +469,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

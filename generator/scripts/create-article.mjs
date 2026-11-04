@@ -221,10 +221,12 @@ import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord } from './lib/i
 import { countLocalNewsHits, isLocalNews } from './lib/local-news.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import {
+  firstCompleteBodyExcerpt,
   normalizeExcerpt,
   stripExcerptMarkdown,
   assertPlainExcerpt,
   assertPlainDescriptionFields,
+  repairGeneratedArticleDescriptions,
 } from './lib/article-excerpt.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics, repairLlmJson } from './lib/llm-json-repair.mjs';
@@ -472,7 +474,10 @@ import {
 // dal classificatore deterministico (nessun LLM, nessun gate).
 import { defaultCantonClassifier, registryCantonsForArticle } from './lib/canton-classifier.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
-import { assertFaqPairsHaveNoRejectedControls } from '../../scripts/lib/faq-control-contract.mjs';
+import {
+  assertFaqPairsHaveNoRejectedControls,
+  rejectRawFaqControlEscape,
+} from '../../scripts/lib/faq-control-contract.mjs';
 import {
   decodeStaticStringLiteral,
   findIdListLiteralSpan,
@@ -4866,7 +4871,7 @@ function applyMicrocopyGuard(content, locale) {
   for (const field of ['title', 'excerpt']) {
     if (typeof content[field] !== 'string' || !content[field].trim()) continue;
     if (field === 'excerpt') {
-      const normalized = normalizeExcerpt(content[field]);
+      const normalized = normalizeExcerpt(content[field], { locale });
       if (normalized !== content[field]) {
         console.warn(`  🧹 [excerpt-plain] ${locale.toUpperCase()} excerpt normalizzato`);
         content[field] = normalized;
@@ -4896,20 +4901,22 @@ function applyMicrocopyGuard(content, locale) {
  * blocked on this step (issue #3174 follow-up — auto-generated excerpt).
  */
 async function generateExcerpt(title, body1, body2, body3) {
-  const bodyText = [body1, body2, body3].filter(Boolean).join('\n\n');
+  const body = [body1, body2, body3].filter(Boolean);
+  const bodyText = body.join('\n\n');
   try {
     const messages = [
       {
         role: 'system',
         content:
-          'Sei un redattore SEO italiano. Scrivi un riassunto breve (1-2 frasi, massimo 160 caratteri) ' +
+          'Sei un redattore SEO italiano. Scrivi una frase completa con terminatore finale (massimo 160 caratteri). ' +
+          'Non concatenare bullet o key facts: scegli un solo fatto pertinente e formulalo come frase. ' +
           'per un articolo di blog, adatto come meta-description. Rispondi SOLO con il testo del riassunto, ' +
           'senza virgolette né markdown.',
       },
       { role: 'user', content: `Titolo: ${title}\n\nCorpo dell'articolo:\n${bodyText.slice(0, 4000)}` },
     ];
     const raw = await _aiCallLLM(messages, { temperature: 0.5, maxTokens: 200, timeout: 30_000 });
-    const excerpt = normalizeExcerpt(String(raw || '').replace(/^["'“”]+|["'“”]+$/g, '').trim());
+    const excerpt = normalizeExcerpt(String(raw || '').replace(/^["'“”]+|["'“”]+$/g, '').trim(), { locale: 'it' });
     // Il non-vuoto non basta (#798): questa e' la sola sorgente dell'`excerpt`
     // della pipeline giornalista, che non passa da `validateItalianPayload`.
     // Un `...` finirebbe in `content/`, in `meta-<locale>.json` e nei feed.
@@ -4923,7 +4930,13 @@ async function generateExcerpt(title, body1, body2, body3) {
   } catch (err) {
     console.warn(`  ⚠️  generateExcerpt fallito, uso fallback troncato: ${err.message}`);
   }
-  return capBlogDescription(normalizeExcerpt(bodyText)).value;
+  const bodyFallback = firstCompleteBodyExcerpt(body, {
+    locale: 'it',
+    field: 'excerpt',
+    maxLength: 160,
+  });
+  if (bodyFallback) return capBlogDescription(bodyFallback).value;
+  return capBlogDescription(normalizeExcerpt(bodyText, { locale: 'it' })).value;
 }
 
 /** Char-based thirds over an ordered list of chunks (paragraphs or sentences),
@@ -14008,10 +14021,36 @@ function isRealTranslationTruncation(issues) {
   return issues.some((i) => !(i.code === 'translation-semantic-truncation' && i.rule === 'paragraph-drop'));
 }
 
+/** Drop FAQ pairs whose decoded source would contain an unpublishable C0 byte. */
+function removeFaqPairsWithRejectedControls(content, locale) {
+  if (!content || !Array.isArray(content.faq)) return 0;
+  const safeFaq = [];
+  let rejectedCount = 0;
+  for (const [index, pair] of content.faq.entries()) {
+    const rejectedField = ['q', 'a'].find((field) => {
+      const value = pair?.[field];
+      return typeof value === 'string'
+        && rejectRawFaqControlEscape(normalizeLocalizedToponymText(value));
+    });
+    if (rejectedField) {
+      rejectedCount += 1;
+      console.warn(`  ⚠️  FAQ ${locale}[${index}] omessa: ${rejectedField} contiene un carattere di controllo non pubblicabile`);
+      continue;
+    }
+    safeFaq.push(pair);
+  }
+  if (rejectedCount > 0) {
+    if (safeFaq.length >= 2) content.faq = safeFaq;
+    else delete content.faq;
+  }
+  return rejectedCount;
+}
+
 async function translateArticle(data) {
   // Il report di recovery è una quota PER ARTICOLO. RUN_REPORT vive più a
   // lungo del funnel: senza reset, un secondo articolo erediterebbe i campi
   // rifiutati e i claim già spesi dal primo (issue #1244).
+  removeFaqPairsWithRejectedControls(data?.content?.it, 'it');
   const faqCount = Array.isArray(data?.content?.it?.faq) ? data.content.it.faq.length : 0;
   const bodyFieldCount = Object.keys(collectBodySections(data?.content?.it)).length;
   RUN_REPORT.translation = createFreeMtRecoveryReport({ faqCount, bodyFieldCount });
@@ -14290,14 +14329,41 @@ ${localizedToponymInstruction(targetLang)}`;
       return { [bodyKey]: sanitizeBodyText(joined) };
     }
 
-    // Translate FAQ if present (small payload, single call)
-    const faqTranslation = sourceContent.faq && Array.isArray(sourceContent.faq) && sourceContent.faq.length > 0
+    // Translate FAQ if present (small payload, single call). Keep an explicit
+    // source index in the prompt and require a one-to-one response mapping:
+    // array position alone cannot prove that a model's reordered/extra pair
+    // still belongs to the same Italian source FAQ.
+    const sourceFaq = Array.isArray(sourceContent.faq) ? sourceContent.faq : [];
+    const faqTranslation = sourceFaq.length > 0
       ? callWithRetry(makePrompt(
-          `CONTENUTO ITALIANO DA TRADURRE:\n- faq: ${JSON.stringify(sourceContent.faq)}`,
-          '{"faq": [{"q": "...", "a": "..."}]}',
-        ), 1500, `${targetLang}:faq`, { translation: true }).catch(err => {
-          console.error(`  ⚠️  FAQ translation failed for ${targetLang}: ${err.message}`);
-          return { faq: sourceContent.faq }; // Fallback to Italian
+          `CONTENUTO ITALIANO DA TRADURRE:\n- faq: ${JSON.stringify(sourceFaq.map((pair, sourceFaqIndex) => ({ ...pair, sourceFaqIndex })))}`,
+          '{"faq": [{"sourceFaqIndex": 0, "q": "...", "a": "..."}]}',
+        ), 1500, `${targetLang}:faq`, { translation: true }).then((result) => {
+          const translatedFaq = result?.faq;
+          if (!Array.isArray(translatedFaq) || translatedFaq.length !== sourceFaq.length) {
+            console.error(`  ⚠️  FAQ translation for ${targetLang} has no complete source-index mapping — per-index recovery`);
+            return { faq: [] };
+          }
+          const aligned = Array(sourceFaq.length);
+          for (const pair of translatedFaq) {
+            const sourceFaqIndex = pair?.sourceFaqIndex;
+            if (!Number.isInteger(sourceFaqIndex)
+                || sourceFaqIndex < 0
+                || sourceFaqIndex >= sourceFaq.length
+                || aligned[sourceFaqIndex] !== undefined) {
+              console.error(`  ⚠️  FAQ translation for ${targetLang} has invalid/duplicate source indexes — per-index recovery`);
+              return { faq: [] };
+            }
+            aligned[sourceFaqIndex] = { q: pair?.q, a: pair?.a };
+          }
+          if (aligned.some((pair) => pair === undefined)) {
+            console.error(`  ⚠️  FAQ translation for ${targetLang} has missing source indexes — per-index recovery`);
+            return { faq: [] };
+          }
+          return { faq: aligned };
+        }).catch(err => {
+          console.error(`  ⚠️  FAQ translation failed for ${targetLang}: ${err.message} — per-index recovery`);
+          return { faq: [] };
         })
       : Promise.resolve({});
 
@@ -14393,6 +14459,40 @@ ${localizedToponymInstruction(targetLang)}`;
   // upstream defect we cannot paper over).
   for (const locale of ['en', 'de', 'fr']) {
     const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
+    // The source FAQ defines the public cardinality. Do this before the
+    // per-index recovery below: an extra model pair is not source-backed and
+    // must not reach the final writer, where a rejected control would abort
+    // the whole article instead of being discarded with the excess pair.
+    const sourceFaqCount = Array.isArray(itContent?.faq) ? itContent.faq.length : 0;
+    let translatedFaq = data.content?.[locale]?.faq;
+    if (Array.isArray(translatedFaq)) {
+      // The bulk translator above has already checked sourceFaqIndex and put
+      // every source-backed pair back at its source position. Keep those pairs
+      // intact so the field-level recovery below can retry only an unsafe q/a
+      // and retain its valid sibling. A control-bearing pair beyond the source
+      // count is provably extra and can be removed before the cardinality gate.
+      const safeTranslatedFaq = translatedFaq.filter((pair, index) => {
+        if (index < sourceFaqCount) return true;
+        return !['q', 'a'].some((fieldName) => {
+          const value = pair?.[fieldName];
+          return typeof value === 'string'
+            && rejectRawFaqControlEscape(normalizeLocalizedToponymText(value));
+        });
+      });
+      if (safeTranslatedFaq.length !== translatedFaq.length) {
+        console.error(
+          `  ⚠️  FAQ ${locale}: scartate ${translatedFaq.length - safeTranslatedFaq.length} coppie con controlli non pubblicabili prima della recovery`,
+        );
+        data.content[locale].faq = safeTranslatedFaq;
+        translatedFaq = safeTranslatedFaq;
+      }
+    }
+    if (Array.isArray(translatedFaq) && translatedFaq.length !== sourceFaqCount) {
+      console.error(
+        `  ⚠️  FAQ ${locale}: cardinalità ${translatedFaq.length} diversa dalle ${sourceFaqCount} coppie italiane — intero batch scartato, recupero per-indice`,
+      );
+      data.content[locale].faq = [];
+    }
     for (const field of [
       'title',
       'excerpt',
@@ -14424,9 +14524,18 @@ ${localizedToponymInstruction(targetLang)}`;
           if (!content.faq[faqIndex] || typeof content.faq[faqIndex] !== 'object') content.faq[faqIndex] = {};
           content.faq[faqIndex][faqPart] = value;
         };
-        const readRetryValue = (parsed) => faqPart
-          ? parsed?.faq?.[0]?.[faqPart] ?? parsed?.faq?.[faqIndex]?.[faqPart] ?? parsed?.[field]
-          : parsed?.[field];
+        const readRetryValue = (parsed) => {
+          if (!faqPart) return parsed?.[field];
+          // This prompt asks for one indexed source field. Accepting faq[0]
+          // from a multi-pair retry would silently reuse that value for every
+          // later source index, so reject non-singleton arrays. Some model
+          // responses use the older direct { q } / { a } shape instead.
+          if (Array.isArray(parsed?.faq)) {
+            if (parsed.faq.length !== 1) return null;
+            return parsed.faq[0]?.[faqPart];
+          }
+          return parsed?.[faqPart] ?? parsed?.[field];
+        };
         const retryFieldLabel = faqPart ? `faq[${faqIndex}].${faqPart}` : field;
       // Truthiness nuda: la stringa `"null"` (serializzazione letterale del
       // null, la forma misurata su `haiku` in #799) la supera, quindi il campo
@@ -14456,8 +14565,19 @@ ${localizedToponymInstruction(targetLang)}`;
       // Stesso floor del percorso IT, IMPORTATO e non ricopiato (AGENTS.md #6):
       // il floor e' sulla forma del campo, non sulla lingua.
       const valoreTradotto = readField(data.content[locale]);
+      const itValue = readField(itContent);
       const traduzioneUsabile = hasUsableTranslatedText(valoreTradotto, locale);
-      const floorMiss = traduzioneUsabile ? metaFieldPlausibilityMiss(field, valoreTradotto) : null;
+      // A C0 byte can survive JSON.parse as an ordinary, non-empty string. An
+      // HTML numeric reference can do the same one step later: the final
+      // decodeArticleEntities() pass expands it through this normalizer before
+      // buildBodyFile() runs. Normalize here too, so both spellings enter the
+      // focused retry/fallback path instead of aborting at the final writer.
+      const faqControlRejected = Boolean(
+        faqPart && rejectRawFaqControlEscape(normalizeLocalizedToponymText(valoreTradotto)),
+      );
+      const floorMiss = traduzioneUsabile && !faqControlRejected
+        ? metaFieldPlausibilityMiss(field, valoreTradotto)
+        : null;
       const freeMtRejected = ARTICLE_TRANSLATE_FREE_MT
         && wasFreeMtUnusable(RUN_REPORT.translation, locale, recoveryField);
       // Un `bodyN` tradotto che e' l'italiano ricopiato non e' usabile, da
@@ -14466,7 +14586,7 @@ ${localizedToponymInstruction(targetLang)}`;
       // copia identica ha gia' il suo retry dedicato piu' sotto.
       const bodyPassthrough = !faqPart && /^body\d+$/.test(field)
         && isSourcePassthrough(valoreTradotto, readField(itContent));
-      if (traduzioneUsabile && !floorMiss && !freeMtRejected && !bodyPassthrough) continue;
+      if (traduzioneUsabile && !floorMiss && !freeMtRejected && !bodyPassthrough && !faqControlRejected) continue;
       // ULTIMA RISORSA ASIMMETRICA. Un campo implausibile e' comunque prosa
       // NELLA LINGUA GIUSTA: se il retry non produce di meglio si tiene quello,
       // MAI il fallback IT, che pubblicherebbe italiano sotto `/de/` (#831).
@@ -14483,8 +14603,7 @@ ${localizedToponymInstruction(targetLang)}`;
         : isBodyField
           ? 'body lasciato NON tradotto, niente fallback IT (#1875)'
           : 'fallback al valore italiano';
-      let pendingReason = 'retry-unusable';
-      const itValue = readField(itContent);
+      let pendingReason = faqControlRejected ? 'invalid-control' : 'retry-unusable';
       // `itValue` composto di solo whitespace (es. ' ') è truthy: senza
       // `.trim()` bypassa questo guard e viene comunque assegnato sotto come
       // fallback, pubblicando un campo quasi-vuoto invece di far scattare
@@ -14497,7 +14616,9 @@ ${localizedToponymInstruction(targetLang)}`;
         throw new Error(`Campo ${field} mancante nella traduzione ${locale} (e assente anche nella sorgente IT)`);
       }
       console.error(
-        floorMiss
+        faqControlRejected
+          ? `  ⚠️  Campo ${field} nella traduzione ${locale} contiene un carattere di controllo non pubblicabile — retry traduzione mirata...`
+          : floorMiss
           ? `  ⚠️  Campo ${field} nella traduzione ${locale} troppo corto per essere un ${field} (${floorMiss}) — retry traduzione mirata...`
           : bodyPassthrough
             ? `  ⚠️  Campo ${field} nella traduzione ${locale} identico all'italiano — retry traduzione mirata...`
@@ -14557,17 +14678,25 @@ ${localizedToponymInstruction(targetLang)}`;
           // real string so a non-string retry falls through to the no-translation
           // outcome below (pending body, or IT fallback for title/excerpt/FAQ).
           const retried = translatedStringOrNull(readRetryValue(parsed), locale);
+          const retriedControlRejected = Boolean(
+            faqPart && rejectRawFaqControlEscape(normalizeLocalizedToponymText(retried)),
+          );
           // Il floor vale anche sull'ESITO del retry: un retry che risponde `...`
           // e' la stessa degenerazione, solo un turno piu' tardi.
           const retriedMiss = retried ? metaFieldPlausibilityMiss(field, retried) : null;
           const retriedPassthrough = isSourcePassthrough(retried, itValue);
           if (retriedPassthrough) pendingReason = 'retry-passthrough';
-          if (retried && !retriedMiss && !retriedPassthrough) {
+          if (retriedControlRejected) pendingReason = 'invalid-control';
+          if (retried && !retriedMiss && !retriedPassthrough && !retriedControlRejected) {
             writeField(data.content[locale], retried);
             console.error(`  ✅ Campo ${field} (${locale}) ritradotto con successo dopo missing-field retry`);
             continue;
           }
-          console.error(`  ⚠️  Retry ${field} (${locale}) non ha prodotto una traduzione valida${retriedMiss ? ` (${retriedMiss})` : ''} — ${esitoSenzaTraduzione}`);
+          console.error(
+            `  ⚠️  Retry ${field} (${locale}) non ha prodotto una traduzione valida`
+            + `${retriedControlRejected ? ' (carattere di controllo non pubblicabile)' : retriedMiss ? ` (${retriedMiss})` : ''}`
+            + ` — ${esitoSenzaTraduzione}`,
+          );
         } catch (retryErr) {
           pendingReason = 'retry-error';
           console.error(`  ⚠️  Retry ${field} (${locale}) fallito: ${retryErr.message} — ${esitoSenzaTraduzione}`);
@@ -15696,12 +15825,12 @@ function extractArticleCity(slug) {
   return '';
 }
 
-function optimizeSeoMetadata(data) {
+function optimizeSeoMetadata(data, { onDescriptionRepairs } = {}) {
   const it = data.content?.it || {};
   if (!data.seo) data.seo = {};
 
   if (typeof it.excerpt === 'string' && it.excerpt.trim()) {
-    it.excerpt = normalizeExcerpt(it.excerpt);
+    it.excerpt = normalizeExcerpt(it.excerpt, { locale: 'it' });
   }
 
   // ── Collision prevention (mirror og-pages runtime disambiguator) ──
@@ -15773,6 +15902,10 @@ function optimizeSeoMetadata(data) {
     stripExcerptMarkdown(data.seo.ogDescription || data.seo.description),
     SEO_OG_DESCRIPTION_MAX,
   );
+  const postCapDescriptionRepairs = repairGeneratedArticleDescriptions(data);
+  if (postCapDescriptionRepairs.length > 0 && typeof onDescriptionRepairs === 'function') {
+    onDescriptionRepairs(postCapDescriptionRepairs);
+  }
   assertPlainExcerpt(data.seo.description, { field: 'seo.description', id: data.id, locale: 'it' });
   assertPlainExcerpt(data.seo.ogDescription, { field: 'seo.ogDescription', id: data.id, locale: 'it' });
 
@@ -15809,7 +15942,7 @@ export function refreshSourceCopyDerivedMetadata(data) {
     if (!content || typeof content !== 'object') continue;
     const body = bodyTextForQuality(content);
     if (!body.trim()) continue;
-    const excerpt = capBlogDescription(normalizeExcerpt(body)).value;
+    const excerpt = capBlogDescription(normalizeExcerpt(body, { locale })).value;
     if (!excerpt) continue;
     content.excerpt = excerpt;
     applyMicrocopyGuard(content, locale);
@@ -15818,11 +15951,7 @@ export function refreshSourceCopyDerivedMetadata(data) {
       if (seoDescription.length < SEO_DESCRIPTION_MIN) {
         seoDescription = truncateToClauseNonEmpty(stripExcerptMarkdown(body), SEO_DESCRIPTION_MAX);
       }
-      content.seoDescription = stripExcerptMarkdown(assertSeoDescriptionMinimum(seoDescription, {
-        id: `${data?.id || 'unknown'}:${locale}`,
-        sourceDescriptionLength: excerpt.length,
-        sourceExcerptLength: excerpt.length,
-      }));
+      content.seoDescription = stripExcerptMarkdown(seoDescription);
     }
     if (typeof content.ogDescription === 'string') {
       content.ogDescription = stripExcerptMarkdown(capBlogDescription(excerpt, SEO_OG_DESCRIPTION_MAX).value);
@@ -15838,6 +15967,18 @@ export function refreshSourceCopyDerivedMetadata(data) {
     if (!data.seo || typeof data.seo !== 'object') data.seo = {};
     data.seo.description = stripExcerptMarkdown(itExcerpt);
     data.seo.ogDescription = stripExcerptMarkdown(itExcerpt);
+    // Body-derived caps can end mid-sentence; repair all locale and shared SEO
+    // fields before optimizeSeoMetadata runs its completeness and length gates.
+    repairGeneratedArticleDescriptions(data);
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      const content = data?.content?.[locale];
+      if (typeof content?.seoDescription !== 'string') continue;
+      assertSeoDescriptionMinimum(content.seoDescription, {
+        id: `${data?.id || 'unknown'}:${locale}`,
+        sourceDescriptionLength: content.seoDescription.length,
+        sourceExcerptLength: typeof content.excerpt === 'string' ? content.excerpt.length : undefined,
+      });
+    }
     optimizeSeoMetadata(data);
   }
   return data;
@@ -16764,6 +16905,12 @@ function decodeLocaleContentEntities(data, locale) {
     // decodificato qui arriverebbe letterale in una SERP.
     for (const field of ['title', 'excerpt', ...META_SEO_FIELDS, ...bodyFields]) {
       if (typeof c[field] === 'string') c[field] = normalizeLocalizedToponymText(c[field]);
+    }
+    if (Array.isArray(c.faq)) {
+      // Defense in depth for non-primary producers: reject a source or
+      // translated pair before entity decoding turns `&#8;` into a C0 byte
+      // that would make buildBodyFile() abort the entire article.
+      removeFaqPairsWithRejectedControls(c, locale);
     }
     if (Array.isArray(c.faq)) {
       c.faq = c.faq.map((item) => (item && typeof item === 'object'
@@ -19369,13 +19516,23 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         { retries: sourceCopyResult.passes },
       );
     }
+    // Repair generated descriptions before optimizeSeoMetadata applies its
+    // completion and minimum-length assertions. The source-copy refresh path
+    // performs the same repair after deriving its replacement metadata.
+    let preTranslationExcerptRepairs = [];
+    if (sourceCopyResult.changed) {
+      refreshSourceCopyDerivedMetadata(data);
+    } else {
+      preTranslationExcerptRepairs = repairGeneratedArticleDescriptions(data);
+      optimizeSeoMetadata(data, {
+        onDescriptionRepairs: (repairs) => preTranslationExcerptRepairs.push(...repairs),
+      });
+    }
     // Step 3a.0-specificity: reject/repair vacuous key facts and reject a
     // cross-canton guide before spending translation, image or write budget.
     // The same helper is called again after translations below because this
     // primary path does not enter registerArticleFiles().
     assertGeneratedArticleQuality(data);
-    if (sourceCopyResult.changed) refreshSourceCopyDerivedMetadata(data);
-    else optimizeSeoMetadata(data);
     // Step 3a.0-dup: i gate deterministici dei duplicati, gli stessi di Step
     // 3a.2 e 3a.4, gia' qui, prima del fact-check e dell'espansione. Id e
     // titolo IT sono stabili da questo punto: il fact-check e l'espansione
@@ -20279,8 +20436,8 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   appendSourceCitation(data, url);
 
   // The repair can change the text from which locale metadata was derived;
-  // restore the shared SEO fields after all body replacements, then keep the
-  // municipality postcondition last on the metadata surfaces.
+  // restore the shared SEO fields after all body replacements. Municipality
+  // names are restored again after the final excerpt repair below.
   if (sourceCopyFinalChanged) refreshSourceCopyDerivedMetadata(data);
   preserveMunicipalityNamesInMetadata(data);
 
@@ -20306,18 +20463,6 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     label: 'Body post-riparazione anti-copia',
   });
 
-  // Metadata refresh can change the excerpt used by both lexical and semantic
-  // duplicate admission. Re-run the same gates on the final candidate instead
-  // of publishing a repaired excerpt that was never admitted.
-  if (sourceCopyFinalChanged) {
-    console.error('🔍 Verifica duplicati post-riparazione:');
-    checkForDuplicates(data);
-    await checkSemanticNearDuplicate(data, {
-      store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
-      meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
-    });
-  }
-
   console.error(`\n📝 Articolo generato: "${data.content.it.title}"`);
   console.error(`   ID: ${data.id}`);
   console.error(`   Categoria: ${data.category}`);
@@ -20338,6 +20483,25 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // `Zürich` to the localized-exonym detector and can be published in place
   // of the required English `Zurich`.
   decodeArticleEntities(data);
+  const excerptRepairs = repairGeneratedArticleDescriptions(data);
+  preserveMunicipalityNamesInMetadata(data);
+  assertArticleDescriptionsArePlain(data);
+  if (sourceCopyResult.changed || preTranslationExcerptRepairs.length > 0 || excerptRepairs.length > 0) {
+    assertGeneratedArticleQuality(data, {
+      cantonBody: bodyTextForCantonPostcondition(data),
+    });
+  }
+  // Metadata repairs can change duplicate admission; check the exact values
+  // that will be published after all final metadata normalization.
+  if (sourceCopyResult.changed || sourceCopyFinalChanged
+    || preTranslationExcerptRepairs.length > 0 || excerptRepairs.length > 0) {
+    console.error('🔍 Verifica duplicati post-riparazione:');
+    checkForDuplicates(data);
+    await checkSemanticNearDuplicate(data, {
+      store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
+      meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
+    });
+  }
   // Entity decoding is the last content normalization before the write path.
   // Re-run the fiscal guard on every locale here: the earlier check ran before
   // the final source-copy repair and deterministic postconditions.
@@ -21496,8 +21660,11 @@ export async function registerArticleFiles(data, opts = {}) {
   // perdere un comune dall'excerpt, e l'imageAlt del giornalista non passa dal
   // percorso AI primario.
   preserveMunicipalityNamesInMetadata(data);
+  repairGeneratedArticleDescriptions(data);
   clampSeoDescriptions(data);
   ensureSeoDescriptionMinimum(data);
+  repairGeneratedArticleDescriptions(data);
+  preserveMunicipalityNamesInMetadata(data);
   assertArticleDescriptionsArePlain(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
   assertSlugFallbackRunBudget();
@@ -21506,6 +21673,15 @@ export async function registerArticleFiles(data, opts = {}) {
   // in the primary AI path: `deriveAndSanitizeArticleSlugs()` can intentionally
   // retain an Italian fallback when a translated candidate is unusable.
   checkTranslatedSlugCollisions(data);
+  // Secondary producers do not pass the primary path's Step 3a.2. Recheck
+  // lexical and semantic duplicates here against the final repaired excerpt,
+  // before the shared writer touches any published file.
+  console.error('🔍 Verifica duplicati post-riparazione nel writer condiviso:');
+  checkForDuplicates(data);
+  await checkSemanticNearDuplicate(data, {
+    store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
+    meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
+  });
   // Stessa ragione, stesso percorso condiviso: i quattro produttori secondari
   // (daily-brief, events-digest, border-wait-ranking, journalist) importano
   // registerArticleFiles() direttamente e non passano mai dallo Step 3a.2 del

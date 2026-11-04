@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "pensioni",
-  "updatedAt": "2026-10-27T17:42:56.215Z",
-  "contentHash": "ada7601545aaa0d37c8f93b5e613d93cc4d58c57f2825e364d77a56d0544eaab",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "51d6c9c1dc94522ca1bb0e62ba112413211a0c9f728e26565561abf46be83208",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T11:01:59.897Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Neue Grenzbeträge per 1.1.2027",
+              "date": "2026-11-03",
+              "url": "https://www.lupk.ch/de/aktuell/16122024-aenderung-grenzbetraege-112025-2"
+            },
+            {
               "label": "Kennzahlen 3. Quartal 2026",
               "date": "2026-10-27",
               "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2-2"
@@ -159,14 +164,9 @@
               "label": "Anordnung Gesamterneuerungswahlen Arbeitnehmervertretung 2027 - 2031",
               "date": "2026-08-28",
               "url": "https://www.lupk.ch/de/aktuell/publikation-wahltag-ersatzwahl-wk-1-2-2"
-            },
-            {
-              "label": "Kennzahlen 2. Quartal 2026",
-              "date": "2026-08-04",
-              "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -208,7 +208,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "LU",
@@ -317,6 +317,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Neue Grenzbeträge per 1.1.2027",
+              "date": "2026-11-03",
+              "url": "https://www.lupk.ch/de/aktuell/16122024-aenderung-grenzbetraege-112025-2"
+            },
+            {
               "label": "Kennzahlen 3. Quartal 2026",
               "date": "2026-10-27",
               "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2-2"
@@ -340,14 +345,9 @@
               "label": "Anordnung Gesamterneuerungswahlen Arbeitnehmervertretung 2027 - 2031",
               "date": "2026-08-28",
               "url": "https://www.lupk.ch/de/aktuell/publikation-wahltag-ersatzwahl-wk-1-2-2"
-            },
-            {
-              "label": "Kennzahlen 2. Quartal 2026",
-              "date": "2026-08-04",
-              "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -389,7 +389,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "LU",
@@ -498,6 +498,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Neue Grenzbeträge per 1.1.2027",
+              "date": "2026-11-03",
+              "url": "https://www.lupk.ch/de/aktuell/16122024-aenderung-grenzbetraege-112025-2"
+            },
+            {
               "label": "Kennzahlen 3. Quartal 2026",
               "date": "2026-10-27",
               "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2-2"
@@ -521,14 +526,9 @@
               "label": "Anordnung Gesamterneuerungswahlen Arbeitnehmervertretung 2027 - 2031",
               "date": "2026-08-28",
               "url": "https://www.lupk.ch/de/aktuell/publikation-wahltag-ersatzwahl-wk-1-2-2"
-            },
-            {
-              "label": "Kennzahlen 2. Quartal 2026",
-              "date": "2026-08-04",
-              "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -570,7 +570,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "LU",
@@ -679,6 +679,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Neue Grenzbeträge per 1.1.2027",
+              "date": "2026-11-03",
+              "url": "https://www.lupk.ch/de/aktuell/16122024-aenderung-grenzbetraege-112025-2"
+            },
+            {
               "label": "Kennzahlen 3. Quartal 2026",
               "date": "2026-10-27",
               "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2-2"
@@ -702,14 +707,9 @@
               "label": "Anordnung Gesamterneuerungswahlen Arbeitnehmervertretung 2027 - 2031",
               "date": "2026-08-28",
               "url": "https://www.lupk.ch/de/aktuell/publikation-wahltag-ersatzwahl-wk-1-2-2"
-            },
-            {
-              "label": "Kennzahlen 2. Quartal 2026",
-              "date": "2026-08-04",
-              "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -751,7 +751,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

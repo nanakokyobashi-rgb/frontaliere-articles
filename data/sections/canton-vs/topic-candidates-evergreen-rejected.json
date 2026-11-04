@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
-      "section": "canton-vs",
-      "ts": 1793587654878
-    },
     "canton-vs::https://www.pomona.ch/story/820899/darum-ruht-die-baustelle-beim-fuxji-in-visp": {
       "section": "canton-vs",
       "ts": 1793633354889
@@ -59,6 +55,54 @@
     "canton-vs::https://www.pomona.ch/story/822168/so-stimmen-sie-richtig-ab-kanton-wallis-lanciert-neue-hilfsmittel": {
       "section": "canton-vs",
       "ts": 1793750400472
+    },
+    "canton-vs::https://canal9.ch/fr/votations-du-29-novembre-nouvelle-reforme-sur-la-table-pour-la-fiscalite-des-couples": {
+      "section": "canton-vs",
+      "ts": 1793765034253
+    },
+    "canton-vs::https://www.pomona.ch/story/822320/auf-die-13-ahv-verzichten-unm%c3%b6glich-und-alle-weiteren-fragen-zur-ersten-auszahlung": {
+      "section": "canton-vs",
+      "ts": 1793765038220
+    },
+    "canton-vs::https://www.pomona.ch/story/822445/so-will-der-nationalrat-die-aufr%c3%bcstung-finanzieren%c2%a0-sp-droht-mit-referendum": {
+      "section": "canton-vs",
+      "ts": 1793765041908
+    },
+    "canton-vs::https://www.pomona.ch/story/821809/vom-spital-zum-wohnquartier-gemeinde-visp-lanciert-studienauftrag": {
+      "section": "canton-vs",
+      "ts": 1793769077621
+    },
+    "canton-vs::https://www.pomona.ch/story/821627/fdpchefin-zur-ahvvorlage-die-linke-hat-unser-land-in-diese-misere-gef%c3%bchrt": {
+      "section": "canton-vs",
+      "ts": 1793769436951
+    },
+    "canton-vs::https://www.pomona.ch/story/820458/ruffiner-reisen-verdr%c3%a4ngt-postauto": {
+      "section": "canton-vs",
+      "ts": 1793775627176
+    },
+    "canton-vs::https://canal9.ch/de/komfortzona-niklaus-borter-ist-neuer-rektor-des-kollegiums-spiritus-sanctus-in-brig-ein-gesprach-uber-seinen-weg-und-seine-ideen-fur-die-schule": {
+      "section": "canton-vs",
+      "ts": 1793778540780
+    },
+    "canton-vs::https://www.pomona.ch/story/822565/hohe-kriminelle-energie-und-ki-cyberangriffe-treffen-vermehrt-kmu-ein-experte-gibt-tipps": {
+      "section": "canton-vs",
+      "ts": 1793778542954
+    },
+    "canton-vs::https://www.pomona.ch/story/822425/ruffiner-reisen-schnappt-postauto-millionenauftrag-weg": {
+      "section": "canton-vs",
+      "ts": 1793778544655
+    },
+    "canton-vs::https://www.pomona.ch/story/822798/verkehrsunfall-am-mittwochmittag-im-bildackerkreisel-in-gamsen": {
+      "section": "canton-vs",
+      "ts": 1793798369253
+    },
+    "canton-vs::https://www.pomona.ch/story/819661/steuerinitiative-schafft-wirrwarr-und-ist-ungerecht-und-teuer": {
+      "section": "canton-vs",
+      "ts": 1793798370781
+    },
+    "canton-vs::https://www.pomona.ch/story/822770/sabotage-im-supermarkt-was-hinter-den-cyberangriffen-steckt": {
+      "section": "canton-vs",
+      "ts": 1793798372397
     }
   }
 }

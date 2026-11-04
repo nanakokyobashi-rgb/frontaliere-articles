@@ -12,7 +12,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il Governo di Berna propone di allentare le regole sull\'uso esclusivo e di introdurre il rimborso entro 4 anni. Franchigia di 800.000 CHF confermata.',
     keywords: 'frontalieri, ticino, svizzera, italia, imposta, trasferimenti, berna, franchigia',
     ogTitle: 'Imposta trasferimenti Berna: franchigia 800k',
-    ogDescription: 'Il Governo cantonale di Berna propone una revisione della legge sull\'imposta di trasferimento. La franchigia resta a 800.000 CHF, ma l\'uso esclusivo non è più obbligatorio. Scopri i nuovi termini per il rimborso e le scadenze della consultazione',
+    ogDescription: 'Il Governo cantonale di Berna propone una revisione della legge sull\'imposta di trasferimento. La franchigia resta a 800.000 CHF, ma l\'uso esclusivo non è più obbligatorio. Scopri i nuovi termini per il rimborso e le scadenze della consultazione.',
     canonicalPath: '/articoli-berna/simplificazione-imposta-trasferimento-berna/',
     structuredData: {
       "@context": "https://schema.org",
@@ -428,16 +428,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-voto-comunale-stranieri-berna': {
     title: 'Commissione Berna: voto comunale facoltativo per stranieri',
-    description: 'La SAK bernese appoggia il voto comunale volontario per stranieri con permesso di domicilio e lunga residenza. Decidono i comuni. Anche nuova regola',
+    description: 'La SAK bernese appoggia il voto comunale volontario per stranieri con permesso di domicilio e lunga residenza. Decidono i comuni. Anche nuova regola.',
     keywords: 'frontalieri, ticino, svizzera, italia, commissione, berna, voto, comunale',
     ogTitle: 'Berna: commissione per voto comunale facoltativo agli stranieri integrati',
-    ogDescription: 'La maggioranza della commissione cantonale propone ai comuni di Berna la facoltà di concedere il voto locale a stranieri con permesso di domicilio residenti da 10 anni in Svizzera, 5 nel Cantone e 3 mesi nel comune. Il diritto varrebbe solo',
+    ogDescription: 'La maggioranza della commissione cantonale propone ai comuni di Berna la facoltà di concedere il voto locale a stranieri con permesso di domicilio residenti da 10 anni in Svizzera, 5 nel Cantone e 3 mesi nel comune. Il diritto varrebbe solo.',
     canonicalPath: '/articoli-berna/voto-comunale-stranieri-berna/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Commissione Berna: voto comunale facoltativo per stranieri",
-      "description": "La SAK bernese appoggia il voto comunale volontario per stranieri con permesso di domicilio e lunga residenza. Decidono i comuni. Anche nuova regola",
+      "description": "La SAK bernese appoggia il voto comunale volontario per stranieri con permesso di domicilio e lunga residenza. Decidono i comuni. Anche nuova regola.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -506,7 +506,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-berna-stato-pagina-non-disponibile': {
     title: 'Stato della pagina dell\'amministrazione bernese',
-    description: 'Il contenuto della pagina web indicata non è disponibile. Non sono verificabili date o modalità operative per i servizi dell\'amministrazione',
+    description: 'Il contenuto della pagina web indicata non è disponibile. Non sono verificabili date o modalità operative per i servizi dell\'amministrazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, stato, pagina, dell, amministrazione',
     ogTitle: 'Stato della pagina dell\'amministrazione bernese',
     ogDescription: 'Il contenuto della pagina web indicata non è disponibile. Non sono verificabili date o modalità operative per i servizi dell\'amministrazione cantonale nel 2026.',
@@ -515,7 +515,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Stato della pagina dell'amministrazione bernese",
-      "description": "Il contenuto della pagina web indicata non è disponibile. Non sono verificabili date o modalità operative per i servizi dell'amministrazione",
+      "description": "Il contenuto della pagina web indicata non è disponibile. Non sono verificabili date o modalità operative per i servizi dell'amministrazione.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -545,7 +545,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-kurzarbeit-regole-ordinarie': {
     title: 'Consiglio federale: Kurzarbeit verso il regime ordinario',
-    description: 'Il Consiglio federale prepara il ritorno graduale al regime ordinario: Kurzarbeit da 24 a 12 mesi e Karenzzeit da un giorno a un massimo di tre',
+    description: 'Il Consiglio federale prepara un ritorno graduale al regime ordinario. La durata massima è oggi di 24 mesi, contro 12 mesi ordinari.',
     keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, kurzarbeit, verso',
     ogTitle: 'Kurzarbeit verso il regime ordinario',
     ogDescription: 'Il Consiglio federale collega il ritorno graduale alle migliori prospettive economiche. Oggi la Kurzarbeit può durare 24 mesi e la Karenzzeit è di un giorno; il regime ordinario prevede 12 mesi e fino a tre giorni.',
@@ -554,7 +554,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Consiglio federale: Kurzarbeit verso il regime ordinario",
-      "description": "Il Consiglio federale prepara il ritorno graduale al regime ordinario: Kurzarbeit da 24 a 12 mesi e Karenzzeit da un giorno a un massimo di tre",
+      "description": "Il Consiglio federale prepara un ritorno graduale al regime ordinario. La durata massima è oggi di 24 mesi, contro 12 mesi ordinari.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -626,7 +626,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Energy annuncia fino a 15 tagli in Svizzera: il numero sarà deciso dopo la consultazione, mentre programma e organizzazione saranno adeguati.',
     keywords: 'frontalieri, ticino, svizzera, italia, gruppo, radiofonico, annunciati, fino',
     ogTitle: 'Energy: fino a 15 tagli, decisione dopo la consultazione',
-    ogDescription: 'Energy, con sedi a Basilea, Berna e Zurigo, ha annunciato fino a 15 tagli. La consultazione è in corso: il numero definitivo dipenderà dalle proposte dei dipendenti. Il gruppo segnala ricavi pubblicitari sotto pressione nonostante ascolti elevati',
+    ogDescription: 'Energy, con sedi a Basilea, Berna e Zurigo, ha annunciato fino a 15 tagli. La consultazione è in corso: il numero definitivo dipenderà dalle proposte dei dipendenti. Il gruppo segnala ricavi pubblicitari sotto pressione nonostante ascolti elevati.',
     canonicalPath: '/articoli-berna/energy-tagli-radio-svizzera/',
     structuredData: {
       "@context": "https://schema.org",
@@ -701,16 +701,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-nuove-funzioni-piano-digitale': {
     title: 'Nuove funzioni nel piano digitale della città di Berna',
-    description: 'Dal 26 ottobre 2026 nuovi contenuti nel piano digitale Nomi ufficiali visibili sotto «Nomenclatura» Download gratuito dal Geoportale della città',
+    description: 'Il 26 ottobre 2026 la città di Berna ha reso consultabili nel proprio piano digitale i nomi ufficiali dei terreni, delle località e dei corsi d’acqua.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuove, funzioni, piano, digitale',
     ogTitle: 'Nuove funzioni piano digitale Berna',
-    ogDescription: 'Dal 26 ottobre 2026 nuovi contenuti nel piano digitale Nomi ufficiali visibili sotto «Nomenclatura» Download gratuito dal Geoportale della città Aggiornati nomi',
+    ogDescription: 'Il 26 ottobre 2026 la città di Berna ha reso consultabili nel proprio piano digitale i nomi ufficiali dei terreni, delle località e dei corsi d’acqua.',
     canonicalPath: '/articoli-berna/nuove-funzioni-piano-digitale/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Nuove funzioni nel piano digitale della città di Berna",
-      "description": "Dal 26 ottobre 2026 nuovi contenuti nel piano digitale Nomi ufficiali visibili sotto «Nomenclatura» Download gratuito dal Geoportale della città",
+      "description": "Il 26 ottobre 2026 la città di Berna ha reso consultabili nel proprio piano digitale i nomi ufficiali dei terreni, delle località e dei corsi d’acqua.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -930,7 +930,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-procedure-impianti-solari-eolici': {
     title: 'Revisione legge edilizia Berna per impianti solari ed eolici',
-    description: 'Berna adegua la legge edilizia per l\'obbligo federale dal 1° aprile 2026 su impianti solari ed eolici di interesse nazionale. Procedure ordinarie',
+    description: 'Berna adegua la legge edilizia per l\'obbligo federale dal 1° aprile 2026 su impianti solari ed eolici di interesse nazionale. Procedure ordinarie.',
     keywords: 'frontalieri, ticino, svizzera, italia, revisione, legge, edilizia, berna',
     ogTitle: 'Revisione legge edilizia Berna impianti solari e eolici',
     ogDescription: 'Il Canton Berna adegua la legge edilizia per rispettare l\'obbligo federale dal 1° aprile 2026 per impianti solari ed eolici di interesse nazionale. Le procedure ordinarie restano valide fino alla riforma.',
@@ -939,7 +939,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Revisione legge edilizia Berna per impianti solari ed eolici",
-      "description": "Berna adegua la legge edilizia per l'obbligo federale dal 1° aprile 2026 su impianti solari ed eolici di interesse nazionale. Procedure ordinarie",
+      "description": "Berna adegua la legge edilizia per l'obbligo federale dal 1° aprile 2026 su impianti solari ed eolici di interesse nazionale. Procedure ordinarie.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

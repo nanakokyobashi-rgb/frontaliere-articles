@@ -4,14 +4,14 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-03T07:44:37.207Z",
-  "contentHash": "980078ddb1bf95ae055895877072acfa058aec989e6cd8c59811e9c02c032324",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "4fbd55243e6fb814bef804ba9a5a1f81bc6d811151e2868c8d5a8479429d2889",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-01T13:48:39.198Z",
+      "updatedAt": "2026-11-03T14:41:22.679Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-08T13:48:39.198Z"
+      "carryUntilAt": "2026-11-10T14:41:22.679Z"
     }
   ],
   "locales": {
@@ -22,16 +22,16 @@
       "intro": "In Turgovia, benzina e diesel sono una voce fissa nel bilancio di chi usa l’auto per andare al lavoro. Questa pagina riunisce i prezzi medi rilevati alla pompa, il confronto con le aree oltreconfine quando esiste un dato pubblico e gli articoli della redazione su carburanti ed energia.\n\nIl territorio confina con la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
       "keyFacts": [
         {
-          "label": "Benzina 95 — Germania",
-          "value": "2,259 EUR/l",
-          "note": "media regionale, 1 novembre 2026",
-          "sourceName": "Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)"
+          "label": "Benzina 95 — Svizzera",
+          "value": "2,120 CHF/l",
+          "note": "media nazionale ufficiale, 1 ottobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — Germania",
-          "value": "2,442 EUR/l",
-          "note": "media regionale, 1 novembre 2026",
-          "sourceName": "Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)"
+          "label": "Diesel — Svizzera",
+          "value": "2,410 CHF/l",
+          "note": "media nazionale ufficiale, 1 ottobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -41,24 +41,42 @@
           "description": "Prezzi medi alla pompa rilevati sul territorio e, dove esiste un dato pubblico, nelle aree oltreconfine. Ogni riga riporta la valuta della rilevazione: i prezzi non sono convertiti.",
           "items": [
             {
+              "label": "Benzina 95 — Svizzera",
+              "value": "2,120 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Svizzera",
+              "value": "2,410 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
               "label": "Benzina 95 — Germania",
-              "value": "2,259 EUR/l",
-              "detail": "media regionale: minimo 2,249 EUR/l, 3 stazioni rilevate",
-              "date": "2026-11-01T13:48:39.198Z"
+              "value": "2,226 EUR/l",
+              "detail": "media regionale: minimo 2,219 EUR/l, 3 stazioni rilevate",
+              "date": "2026-11-03T14:41:22.679Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,442 EUR/l",
+              "value": "2,446 EUR/l",
               "detail": "media regionale: minimo 2,439 EUR/l, 3 stazioni rilevate",
-              "date": "2026-11-01T13:48:39.198Z"
+              "date": "2026-11-03T14:41:22.679Z"
             }
           ],
-          "sourceName": "Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-01T13:48:39.198Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Supporto imprese Canton Turgovia: condizioni quadro e insediamento",
+          "url": "/articoli-turgovia/economia-imprese-cantone-turgovia/",
+          "excerpt": "L'amministrazione offre accompagnamento, informazione e consulenza alle imprese esistenti e a chi desidera insediarsi nel Cantone Turgovia.",
+          "date": "2026-11-04T04:02:52.006Z"
+        },
         {
           "title": "Turgovia: piano di risparmio da 60 milioni entro il 2030",
           "url": "/articoli-turgovia/turgovia-piano-risparmio-60-milioni/",
@@ -82,12 +100,6 @@
           "url": "/articoli-turgovia/turgovia-tariffa-cure-familiare-2026/",
           "excerpt": "Il Governo cantonale del Turgovia fissa la tariffa a CHF 52,60 all'ora per le prestazioni di cura familiare con decorrenza retroattiva dal 1° gennaio 2026.",
           "date": "2026-10-31T11:54:22.387Z"
-        },
-        {
-          "title": "Governo Turgovia approva messaggio per modifica legge strade e vie",
-          "url": "/articoli-turgovia/messaggio-modifica-legge-strade/",
-          "excerpt": "Il Governo del Canton Turgovia ha approvato il messaggio al Gran Consiglio per disciplinare i manifesti di elezioni e votazioni, subordinando l'eccezione alla sicurezza stradale.",
-          "date": "2026-10-31T11:15:56.284Z"
         }
       ],
       "links": [
@@ -100,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "TG",
@@ -109,16 +121,16 @@
       "intro": "In Thurgau, petrol and diesel are a fixed item in the budget of anyone who drives to work. This page brings together the average pump prices on record, the comparison with the other side of the border where public data exists, and our articles on fuel and energy.\n\nThe area borders Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
       "keyFacts": [
         {
-          "label": "Petrol 95 — Germany",
-          "value": "2.259 EUR/l",
-          "note": "regional average, 1 November 2026",
-          "sourceName": "Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)"
+          "label": "Petrol 95 — Switzerland",
+          "value": "2.120 CHF/l",
+          "note": "official national average, 1 October 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — Germany",
-          "value": "2.442 EUR/l",
-          "note": "regional average, 1 November 2026",
-          "sourceName": "Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)"
+          "label": "Diesel — Switzerland",
+          "value": "2.410 CHF/l",
+          "note": "official national average, 1 October 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -128,24 +140,42 @@
           "description": "Average pump prices recorded locally and, where public data exists, across the border. Each row keeps the currency of the survey: prices are not converted.",
           "items": [
             {
+              "label": "Petrol 95 — Switzerland",
+              "value": "2.120 CHF/l",
+              "detail": "official national average",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Switzerland",
+              "value": "2.410 CHF/l",
+              "detail": "official national average",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
               "label": "Petrol 95 — Germany",
-              "value": "2.259 EUR/l",
-              "detail": "regional average: lowest 2.249 EUR/l, 3 stations surveyed",
-              "date": "2026-11-01T13:48:39.198Z"
+              "value": "2.226 EUR/l",
+              "detail": "regional average: lowest 2.219 EUR/l, 3 stations surveyed",
+              "date": "2026-11-03T14:41:22.679Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.442 EUR/l",
+              "value": "2.446 EUR/l",
               "detail": "regional average: lowest 2.439 EUR/l, 3 stations surveyed",
-              "date": "2026-11-01T13:48:39.198Z"
+              "date": "2026-11-03T14:41:22.679Z"
             }
           ],
-          "sourceName": "Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-01T13:48:39.198Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Business support in Thurgau: conditions and establishment",
+          "url": "/en/thurgau-articles/thurgau-business-canton-economy/",
+          "excerpt": "The administration provides support, information and advice to existing businesses and to those wishing to establish themselves in the Canton of Thurgau.",
+          "date": "2026-11-04T04:02:52.006Z"
+        },
         {
           "title": "Thurgau: savings plan of 60 million by 2030",
           "url": "/en/thurgau-articles/thurgau-savings-plan-60-million/",
@@ -169,12 +199,6 @@
           "url": "/en/thurgau-articles/thurgau-family-care-tariff-2026/",
           "excerpt": "The Government of the Canton of Thurgau sets the rate at CHF 52,60 per hour for family care services, with retroactive effect from 1 January 2026.",
           "date": "2026-10-31T11:54:22.387Z"
-        },
-        {
-          "title": "Thurgau government approves proposal to amend the Roads and Paths Act",
-          "url": "/en/thurgau-articles/law-amendment-roads-thurgau/",
-          "excerpt": "The Government of the Canton of Thurgau approved the submission to the Grand Council to regulate election and voting posters, making the exception conditional on road safety.",
-          "date": "2026-10-31T11:15:56.284Z"
         }
       ],
       "links": [
@@ -187,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "TG",
@@ -196,16 +220,16 @@
       "intro": "Im Thurgau sind Benzin und Diesel ein fester Posten im Budget aller, die mit dem Auto zur Arbeit fahren. Diese Seite bündelt die erhobenen Durchschnittspreise an der Zapfsäule, den Vergleich mit dem Gebiet jenseits der Grenze, sofern öffentliche Daten vorliegen, und die Artikel der Redaktion zu Treibstoff und Energie.\n\nDas Gebiet grenzt an Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
       "keyFacts": [
         {
-          "label": "Benzin 95 — Deutschland",
-          "value": "2.259 EUR/l",
-          "note": "regionaler Durchschnitt, 1. November 2026",
-          "sourceName": "Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)"
+          "label": "Benzin 95 — Schweiz",
+          "value": "2.120 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. Oktober 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — Deutschland",
-          "value": "2.442 EUR/l",
-          "note": "regionaler Durchschnitt, 1. November 2026",
-          "sourceName": "Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)"
+          "label": "Diesel — Schweiz",
+          "value": "2.410 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. Oktober 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -215,24 +239,42 @@
           "description": "Durchschnittliche Preise an der Zapfsäule im Gebiet und, wo öffentliche Daten vorliegen, jenseits der Grenze. Jede Zeile nennt die Währung der Erhebung: Die Preise werden nicht umgerechnet.",
           "items": [
             {
+              "label": "Benzin 95 — Schweiz",
+              "value": "2.120 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Schweiz",
+              "value": "2.410 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.259 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.249 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-11-01T13:48:39.198Z"
+              "value": "2.226 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.219 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-11-03T14:41:22.679Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.442 EUR/l",
+              "value": "2.446 EUR/l",
               "detail": "regionaler Durchschnitt: tiefster Preis 2.439 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-11-01T13:48:39.198Z"
+              "date": "2026-11-03T14:41:22.679Z"
             }
           ],
-          "sourceName": "Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-01T13:48:39.198Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Unterstützung für Unternehmen im Kanton Thurgau: Rahmenbedingungen und Ansiedlung",
+          "url": "/de/thurgau-artikel/wirtschaft-firmen-kanton-thurgau/",
+          "excerpt": "Die Verwaltung bietet bestehenden Unternehmen und allen, die sich im Kanton Thurgau ansiedeln möchten, Begleitung, Information und Beratung.",
+          "date": "2026-11-04T04:02:52.006Z"
+        },
         {
           "title": "Thurgau: Sparplan über 60 Millionen bis 2030",
           "url": "/de/thurgau-artikel/thurgau-sparpaket-60-millionen/",
@@ -254,14 +296,8 @@
         {
           "title": "Thurgau: Neuer Tarif für die Angehörigenpflege festgelegt",
           "url": "/de/thurgau-artikel/turgau-tarif-pflegende-angehoerige-2026/",
-          "excerpt": "Die Thurgauer Kantonsregierung setzt den Tarif für Leistungen der Angehörigenpflege mit rückwirkender Geltung ab dem 1.",
+          "excerpt": "Im Dezember 2025 hatte die Kantonsregierung den Tarif für diese Leistungen ab dem 1. Januar 2026 festgelegt und den Beschluss in die Änderung der Verordnung aufgenommen.",
           "date": "2026-10-31T11:54:22.387Z"
-        },
-        {
-          "title": "Thurgau genehmigt Botschaft zur Strassengesetz-Änderung",
-          "url": "/de/thurgau-artikel/gesetz-aenderung-strassen-turgau/",
-          "excerpt": "Die Regierung des Kantons Thurgau hat die Botschaft an den Grossen Rat zur Regelung der Plakate für Wahlen und Abstimmungen genehmigt und die Ausnahme von der Verkehrssicherheit abhängig gemacht.",
-          "date": "2026-10-31T11:15:56.284Z"
         }
       ],
       "links": [
@@ -274,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "TG",
@@ -283,16 +319,16 @@
       "intro": "En Thurgovie, l’essence et le diesel sont un poste fixe du budget de celles et ceux qui prennent la voiture pour aller travailler. Cette page réunit les prix moyens relevés à la pompe, la comparaison avec l’autre côté de la frontière lorsqu’une donnée publique existe et les articles de la rédaction sur les carburants et l’énergie.\n\nLe territoire a une frontière avec l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
       "keyFacts": [
         {
-          "label": "Essence 95 — Allemagne",
-          "value": "2,259 EUR/l",
-          "note": "moyenne régionale, 1er novembre 2026",
-          "sourceName": "Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)"
+          "label": "Essence 95 — Suisse",
+          "value": "2,120 CHF/l",
+          "note": "moyenne nationale officielle, 1er octobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — Allemagne",
-          "value": "2,442 EUR/l",
-          "note": "moyenne régionale, 1er novembre 2026",
-          "sourceName": "Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)"
+          "label": "Diesel — Suisse",
+          "value": "2,410 CHF/l",
+          "note": "moyenne nationale officielle, 1er octobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -302,24 +338,42 @@
           "description": "Prix moyens à la pompe relevés sur le territoire et, lorsqu’une donnée publique existe, de l’autre côté de la frontière. Chaque ligne conserve la monnaie du relevé : les prix ne sont pas convertis.",
           "items": [
             {
+              "label": "Essence 95 — Suisse",
+              "value": "2,120 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Suisse",
+              "value": "2,410 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
               "label": "Essence 95 — Allemagne",
-              "value": "2,259 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,249 EUR/l, 3 stations relevées",
-              "date": "2026-11-01T13:48:39.198Z"
+              "value": "2,226 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,219 EUR/l, 3 stations relevées",
+              "date": "2026-11-03T14:41:22.679Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,442 EUR/l",
+              "value": "2,446 EUR/l",
               "detail": "moyenne régionale : prix le plus bas 2,439 EUR/l, 3 stations relevées",
-              "date": "2026-11-01T13:48:39.198Z"
+              "date": "2026-11-03T14:41:22.679Z"
             }
           ],
-          "sourceName": "Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-01T13:48:39.198Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Soutien entreprises Thurgovie : cadres et implantation",
+          "url": "/fr/articles-thurgovie/economie-entreprises-canton-thurgovie/",
+          "excerpt": "L’administration propose un accompagnement, des informations et des conseils aux entreprises existantes ainsi qu’aux personnes qui souhaitent s’implanter dans le canton de Thurgovie.",
+          "date": "2026-11-04T04:02:52.006Z"
+        },
         {
           "title": "Thurgovie : plan d’économies de 60 millions d’ici 2030",
           "url": "/fr/articles-thurgovie/thurgovie-plan-economies-60-millions/",
@@ -343,12 +397,6 @@
           "url": "/fr/articles-thurgovie/thurgovie-tarif-soins-proches-aidants-2026/",
           "excerpt": "Le Gouvernement cantonal de Thurgovie fixe le tarif à CHF 52,60 de l'heure pour les prestations de soins prodigués par des proches, avec effet rétroactif au 1er janvier 2026.",
           "date": "2026-10-31T11:54:22.387Z"
-        },
-        {
-          "title": "Le gouvernement thurgovien approuve la réforme routière",
-          "url": "/fr/articles-thurgovie/modification-loi-routes-thurgovie/",
-          "excerpt": "Le Gouvernement du canton de Thurgovie a approuvé le message destiné au Grand Conseil visant à réglementer les affiches électorales et de votation, en subordonnant l’exception à la sécurité routière.",
-          "date": "2026-10-31T11:15:56.284Z"
         }
       ],
       "links": [
@@ -361,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

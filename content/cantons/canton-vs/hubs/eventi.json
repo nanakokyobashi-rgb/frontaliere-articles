@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-11-03T00:06:00.232Z",
-  "contentHash": "d3e4e495caa295aca12dea36d3692c151b21f9fec71012826ae67167996ac67e",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "14fe61717dc296b445bc8950f8fffcbaab3fe212f2b4dfc063ea0cddd72c7f79",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T13:10:19.053Z",
+      "updatedAt": "2026-11-03T20:20:58.923Z",
       "keyFacts": 1
     }
   ],
@@ -33,24 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Schellen-Ursli",
-              "detail": "Kultur- und Kongresszentrum La Poste, Visp — in corso, ultimo giorno: 3 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/schellen-ursli/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Theater: Aufführungen in Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
-            },
-            {
               "label": "martigny expo : Braderie d'automne [EN]",
               "detail": "Martigny",
               "date": "2026-11-04",
@@ -61,6 +43,18 @@
               "detail": "Sierre",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/artmini/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             },
             {
               "label": "Théâtre - École Alambics : Prodiges / les Symphonistes d'Octodure [EN]",
@@ -91,11 +85,17 @@
               "detail": "Sion / Sitten, Sion",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-sansfiltre/"
+            },
+            {
+              "label": "Schubertiade Sion",
+              "detail": "Clinique romande de réadaptation CRR-Suva, Sion",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/evenements/classique/sion/schubertiade-sion_AnEgGKQ"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "VS",
@@ -138,24 +138,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Schellen-Ursli",
-              "detail": "Kultur- und Kongresszentrum La Poste, Visp — ongoing, last day: 3 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/schellen-ursli/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Theater: Aufführungen in Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald — ongoing, last day: 8 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
-            },
-            {
               "label": "martigny expo : Braderie d'automne [EN]",
               "detail": "Martigny",
               "date": "2026-11-04",
@@ -166,6 +148,18 @@
               "detail": "Sierre",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/artmini/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — ongoing, last day: 8 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             },
             {
               "label": "Théâtre - École Alambics : Prodiges / les Symphonistes d'Octodure [EN]",
@@ -196,11 +190,17 @@
               "detail": "Sion / Sitten, Sion",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-sansfiltre/"
+            },
+            {
+              "label": "Schubertiade Sion",
+              "detail": "Clinique romande de réadaptation CRR-Suva, Sion",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/evenements/classique/sion/schubertiade-sion_AnEgGKQ"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "VS",
@@ -243,24 +243,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Schellen-Ursli",
-              "detail": "Kultur- und Kongresszentrum La Poste, Visp — läuft, letzter Tag: 3. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/schellen-ursli/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Theater: Aufführungen in Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
-            },
-            {
               "label": "martigny expo : Braderie d'automne [DE]",
               "detail": "Martigny",
               "date": "2026-11-04",
@@ -271,6 +253,18 @@
               "detail": "Sierre",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/artmini/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             },
             {
               "label": "Théâtre - École Alambics : Prodiges / les Symphonistes d'Octodure [DE]",
@@ -301,11 +295,17 @@
               "detail": "Sion / Sitten, Sion",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-sansfiltre/"
+            },
+            {
+              "label": "Schubertiade Sion",
+              "detail": "Clinique romande de réadaptation CRR-Suva, Sion",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/evenements/classique/sion/schubertiade-sion_AnEgGKQ"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "VS",
@@ -348,24 +348,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Schellen-Ursli",
-              "detail": "Kultur- und Kongresszentrum La Poste, Visp — en cours, dernier jour : 3 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/schellen-ursli/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Théâtre : représentations à Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
-            },
-            {
               "label": "martigny expo : Braderie d'automne",
               "detail": "Martigny",
               "date": "2026-11-04",
@@ -376,6 +358,18 @@
               "detail": "Sierre",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/artmini/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
+              "label": "Théâtre : représentations à Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             },
             {
               "label": "Théâtre - École Alambics : Prodiges / les Symphonistes d'Octodure",
@@ -406,11 +400,17 @@
               "detail": "Sion / Sitten, Sion",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-sansfiltre/"
+            },
+            {
+              "label": "Schubertiade Sion",
+              "detail": "Clinique romande de réadaptation CRR-Suva, Sion",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/evenements/classique/sion/schubertiade-sion_AnEgGKQ"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

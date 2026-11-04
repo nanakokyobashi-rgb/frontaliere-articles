@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-11-03T00:06:00.232Z",
-  "contentHash": "c9c28c56249951aaf1c3c3daef49e3123f69c9d8d9d181109cfa1102c2b89dcb",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "2052ce48b2ba47327271bd196cca3ae1f579f31cc4cc1032069cf49be92fab56",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T13:10:19.053Z",
+      "updatedAt": "2026-11-03T20:20:58.923Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-02T13:52:53.767Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "51",
+          "value": "53",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,30 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Schulden- und Budgetberatungen Caritas",
-              "detail": "Haus Weisser, Kreuzlingen",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schulden-und-budgetberatungen-caritas-16/"
-            },
-            {
-              "label": "30 Minuten Orgelmusik",
-              "detail": "Evang.-ref. Kirche Weinfelden, Weinfelden",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/30-minuten-orgelmusik-12/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — in corso, ultimo giorno: 13 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Metropolis",
               "detail": "Kulturhaus APOLLO, Kreuzlingen",
@@ -80,6 +56,18 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/wohnzimmerkonzert-mit-mainact-the-great-stoyan-duo-supportact-tba_AnHmv3m"
             },
             {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — in corso, ultimo giorno: 13 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
               "label": "Inbalanceleben am Bodensee QiGong - Meditation - Achtsamkeit",
               "detail": "See & Park Hotel Feldbach, Steckborn",
               "date": "2026-11-05",
@@ -96,11 +84,23 @@
               "detail": "Familienzentrum Region Weinfelden, Weinfelden",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laternenbasteln-und-laternenumzug-im-familienzentrum/"
+            },
+            {
+              "label": "YES/NO",
+              "detail": "Phönix Theater, Steckborn",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yesno/"
+            },
+            {
+              "label": "Tag der offenen Tür",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-offenen-tuer-4/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "51",
+          "value": "53",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,30 +171,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Schulden- und Budgetberatungen Caritas",
-              "detail": "Haus Weisser, Kreuzlingen",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schulden-und-budgetberatungen-caritas-16/"
-            },
-            {
-              "label": "30 Minuten Orgelmusik",
-              "detail": "Evang.-ref. Kirche Weinfelden, Weinfelden",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/30-minuten-orgelmusik-12/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — ongoing, last day: 13 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — ongoing, last day: 24 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Metropolis",
               "detail": "Kulturhaus APOLLO, Kreuzlingen",
@@ -214,6 +190,18 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/wohnzimmerkonzert-mit-mainact-the-great-stoyan-duo-supportact-tba_AnHmv3m"
             },
             {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — ongoing, last day: 13 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — ongoing, last day: 24 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
               "label": "Inbalanceleben am Bodensee QiGong-Meditation-Achtsamkeit",
               "detail": "See & Park Hotel Feldbach, Steckborn",
               "date": "2026-11-05",
@@ -230,11 +218,23 @@
               "detail": "Familienzentrum Region Weinfelden, Weinfelden",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laternenbasteln-und-laternenumzug-im-familienzentrum/"
+            },
+            {
+              "label": "YES/NO",
+              "detail": "Phönix Theater, Steckborn",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yesno/"
+            },
+            {
+              "label": "Tag der offenen Tür",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-offenen-tuer-4/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "51",
+          "value": "53",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -305,30 +305,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Schulden- und Budgetberatungen Caritas",
-              "detail": "Haus Weisser, Kreuzlingen",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schulden-und-budgetberatungen-caritas-16/"
-            },
-            {
-              "label": "30 Minuten Orgelmusik",
-              "detail": "Evang.-ref. Kirche Weinfelden, Weinfelden",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/30-minuten-orgelmusik-12/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — läuft, letzter Tag: 13. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Metropolis",
               "detail": "Kulturhaus APOLLO, Kreuzlingen",
@@ -348,6 +324,18 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/wohnzimmerkonzert-mit-mainact-the-great-stoyan-duo-supportact-tba_AnHmv3m"
             },
             {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — läuft, letzter Tag: 13. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
               "label": "Inbalanceleben am Bodensee QiGong-Meditation-Achtsamkeit",
               "detail": "See & Park Hotel Feldbach, Steckborn",
               "date": "2026-11-05",
@@ -364,11 +352,23 @@
               "detail": "Familienzentrum Region Weinfelden, Weinfelden",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laternenbasteln-und-laternenumzug-im-familienzentrum/"
+            },
+            {
+              "label": "YES/NO",
+              "detail": "Phönix Theater, Steckborn",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yesno/"
+            },
+            {
+              "label": "Tag der offenen Tür",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-offenen-tuer-4/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -404,7 +404,7 @@
         {
           "title": "Kreuzlingen: Bärenplatz wegen Messe geschlossen",
           "url": "/de/thurgau-artikel/kreuzlingen-barenplatz-wegen-messe-geschlossen/",
-          "excerpt": "In Kreuzlingen werden die Busse vom 25.",
+          "excerpt": "Ab Sonntag, 25. Oktober, ab Reisebeginn werden die Kreuzlinger Busse bis Dienstag, 27. Oktober, 09.00 Uhr umgeleitet. Die Haltestelle Bärenplatz wird an den Hauptbahnhof verlegt.",
           "date": "2026-10-17T00:40:57.671Z"
         }
       ],
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "51",
+          "value": "53",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -439,30 +439,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Schulden- und Budgetberatungen Caritas",
-              "detail": "Haus Weisser, Kreuzlingen",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schulden-und-budgetberatungen-caritas-16/"
-            },
-            {
-              "label": "30 Minuten Orgelmusik",
-              "detail": "Evang.-ref. Kirche Weinfelden, Weinfelden",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/30-minuten-orgelmusik-12/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — en cours, dernier jour : 13 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Metropolis",
               "detail": "Kulturhaus APOLLO, Kreuzlingen",
@@ -482,6 +458,18 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/wohnzimmerkonzert-mit-mainact-the-great-stoyan-duo-supportact-tba_AnHmv3m"
             },
             {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — en cours, dernier jour : 13 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
               "label": "Inbalanceleben am Bodensee QiGong - Méditation - Achtsamkeit",
               "detail": "See & Park Hotel Feldbach, Steckborn",
               "date": "2026-11-05",
@@ -498,11 +486,23 @@
               "detail": "Familienzentrum Region Weinfelden, Weinfelden",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laternenbasteln-und-laternenumzug-im-familienzentrum/"
+            },
+            {
+              "label": "YES/NO",
+              "detail": "Phönix Theater, Steckborn",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yesno/"
+            },
+            {
+              "label": "Tag der offenen Tür",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-offenen-tuer-4/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

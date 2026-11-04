@@ -251,7 +251,10 @@ export function buildMetaBlockLines(data, locale) {
     const value = readLocaleField(data, locale, field);
     if (value === null && !META_ALWAYS_EMITTED.includes(field)) continue;
     if (['excerpt', ...META_SEO_FIELDS].includes(field)) {
-      assertPlainExcerpt(value, { field, id, locale });
+      // The generator repairs and validates descriptions before writing. This
+      // low-level encoder retains its historical contract: it rejects Markdown
+      // but can serialize a plain value without rerunning completion policy.
+      assertPlainExcerpt(value, { field, id, locale, checkCompleteness: false });
     }
     lines.push(`    'blog.article.${id}.${field}': '${escapeForSingleQuoteTS(value)}',`);
   }

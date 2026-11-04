@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T10:06:57.473Z",
-  "contentHash": "084747f9bbf2980baaf85eb208713a26ef97f8ec8b214391a2c1e662ab34f0ba",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "e90648526478b5823947d1b875d32783f7e6b2f40e28dcac35edc83355ba510e",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-03T03:07:39.455Z",
+      "updatedAt": "2026-11-03T20:00:07.431Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -40,7 +40,7 @@
             {
               "label": "Haslen - Selbstunfall mit Personenwagen",
               "value": "Traffico",
-              "date": "2026-11-03T03:07:39.455Z",
+              "date": "2026-11-03T20:00:07.431Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
             },
             {
@@ -51,13 +51,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
+              "date": "2026-11-03",
+              "url": "https://appenzellerbahnen.ch/de/unternehmen/medien/detail/bauauftrag-fuer-die-modernisierung-der-linie-rheineck-walzenhausen-vergeben.html"
+            },
             {
               "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
               "date": "2026-10-21",
@@ -82,14 +87,9 @@
               "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
               "date": "2026-09-29",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
-            },
-            {
-              "label": "Instandsetzung der Oberen Bruderbachbrücke",
-              "date": "2026-09-14",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -98,12 +98,6 @@
           "url": "/articoli-svizzera/abbonamenti-trasporti-appenzello-interno/",
           "excerpt": "Trasporti pubblici ad Appenzello Interno: comunità tariffaria, zone, abbonamenti annuali e mensili, metà-prezzo, GA, sconti per studenti e apprendisti.",
           "date": "2026-09-03T05:33:21.516Z"
-        },
-        {
-          "title": "Wagner chiude a Waldstatt: 69 posti persi",
-          "url": "/articoli-svizzera/wagner-chiude-waldstatt-69-licenziamenti/",
-          "excerpt": "Wagner chiude a Waldstatt, nel cantone di Appenzello Esterno La chiusura riguarda 69 posti di lavoro Le attività passano gradualmente a partner esterni",
-          "date": "2026-10-13T04:32:01.538Z"
         }
       ],
       "latestCantonArticles": [],
@@ -117,7 +111,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -140,7 +134,7 @@
             {
               "label": "Haslen - Selbstunfall mit Personenwagen",
               "value": "Traffic",
-              "date": "2026-11-03T03:07:39.455Z",
+              "date": "2026-11-03T20:00:07.431Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
             },
             {
@@ -151,13 +145,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
+              "date": "2026-11-03",
+              "url": "https://appenzellerbahnen.ch/de/unternehmen/medien/detail/bauauftrag-fuer-die-modernisierung-der-linie-rheineck-walzenhausen-vergeben.html"
+            },
             {
               "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
               "date": "2026-10-21",
@@ -182,14 +181,9 @@
               "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
               "date": "2026-09-29",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
-            },
-            {
-              "label": "Instandsetzung der Oberen Bruderbachbrücke",
-              "date": "2026-09-14",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -198,12 +192,6 @@
           "url": "/en/swiss-articles/public-transit-passes-appenzell-canton/",
           "excerpt": "Public transport in Appenzell Innerrhoden: fare community, zones, annual and monthly subscriptions, half-price, GA, discounts for students and apprentices.",
           "date": "2026-09-03T05:33:21.516Z"
-        },
-        {
-          "title": "Wagner closes in Waldstatt: 69 jobs lost",
-          "url": "/en/swiss-articles/wagner-closes-waldstatt-69-layoffs/",
-          "excerpt": "Wagner is closing in Waldstatt, in the canton of Appenzell Ausserrhoden The closure affects 69 jobs Operations are gradually being transferred to external partners",
-          "date": "2026-10-13T04:32:01.538Z"
         }
       ],
       "latestCantonArticles": [],
@@ -217,7 +205,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -240,7 +228,7 @@
             {
               "label": "Haslen - Selbstunfall mit Personenwagen",
               "value": "Verkehr",
-              "date": "2026-11-03T03:07:39.455Z",
+              "date": "2026-11-03T20:00:07.431Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
             },
             {
@@ -251,13 +239,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
+              "date": "2026-11-03",
+              "url": "https://appenzellerbahnen.ch/de/unternehmen/medien/detail/bauauftrag-fuer-die-modernisierung-der-linie-rheineck-walzenhausen-vergeben.html"
+            },
             {
               "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
               "date": "2026-10-21",
@@ -282,14 +275,9 @@
               "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
               "date": "2026-09-29",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
-            },
-            {
-              "label": "Instandsetzung der Oberen Bruderbachbrücke",
-              "date": "2026-09-14",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -298,12 +286,6 @@
           "url": "/de/schweiz-artikel/fahrkarten-appenzell-innerrhoden/",
           "excerpt": "Öffentlicher Verkehr in Appenzell Innerrhoden: Tarifgemeinschaft, Zonen, Jahres- und Monatsabonnements, Halbtax, GA, Studenten- und Lehrlingsrabatte.",
           "date": "2026-09-03T05:33:21.516Z"
-        },
-        {
-          "title": "Wagner schließt in Waldstatt: 69 Arbeitsplätze gehen verloren",
-          "url": "/de/schweiz-artikel/wagner-schliesst-waldstatt-69-kundigungen/",
-          "excerpt": "Wagner schließt in Waldstatt, im Kanton Appenzell Ausserrhoden Die Schließung betrifft 69 Arbeitsplätze Die Aktivitäten werden schrittweise an externe Partner übertragen",
-          "date": "2026-10-13T04:32:01.538Z"
         }
       ],
       "latestCantonArticles": [],
@@ -317,7 +299,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -340,7 +322,7 @@
             {
               "label": "Haslen - Selbstunfall mit Personenwagen",
               "value": "Trafic",
-              "date": "2026-11-03T03:07:39.455Z",
+              "date": "2026-11-03T20:00:07.431Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
             },
             {
@@ -351,13 +333,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
+              "date": "2026-11-03",
+              "url": "https://appenzellerbahnen.ch/de/unternehmen/medien/detail/bauauftrag-fuer-die-modernisierung-der-linie-rheineck-walzenhausen-vergeben.html"
+            },
             {
               "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
               "date": "2026-10-21",
@@ -382,14 +369,9 @@
               "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
               "date": "2026-09-29",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
-            },
-            {
-              "label": "Instandsetzung der Oberen Bruderbachbrücke",
-              "date": "2026-09-14",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -398,12 +380,6 @@
           "url": "/fr/articles-suisse/abonnements-transports-appenzell-rhodes-interieures/",
           "excerpt": "Transports publics à Appenzell Interne : communauté tarifaire, zones, abonnements annuels et mensuels, demi-tarif, GA, réductions pour étudiants et apprentis.",
           "date": "2026-09-03T05:33:21.516Z"
-        },
-        {
-          "title": "Wagner ferme à Waldstatt : 69 emplois perdus",
-          "url": "/fr/articles-suisse/wagner-ferme-waldstatt-69-licenciements/",
-          "excerpt": "Wagner ferme à Waldstatt, dans le canton d’Appenzell Rhodes-Extérieures La fermeture concerne 69 emplois Les activités sont progressivement confiées à des partenaires externes",
-          "date": "2026-10-13T04:32:01.538Z"
         }
       ],
       "latestCantonArticles": [],
@@ -417,7 +393,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

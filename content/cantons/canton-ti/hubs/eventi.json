@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-03T00:06:00.232Z",
-  "contentHash": "ac61ee97b5f2ee193c9facea27f67904accb601c89fd382be2384550854313bc",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "d6e29a67e7d4d31bfb48b4ecee4148e46f17463de2d11eb48f513de7d7aa7ad0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T13:10:19.053Z",
+      "updatedAt": "2026-11-03T20:20:58.923Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "154",
+          "value": "159",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,77 +33,89 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Donazione di sangue",
-              "detail": "Centro La Torre, Losone",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64759"
+              "label": "Il gatto con gli stivali",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261104/63715"
             },
             {
-              "label": "Presente e futuro della diplomazia",
-              "detail": "Auditorium, Campus ovest USI, Lugano, Lugano",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64779"
+              "label": "Lea Lechler – Di che colore è la voglia?",
+              "detail": "Osteria La Fabbrica, Losone",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261104/63632"
             },
             {
-              "label": "Conversazione con l’artista Riccardo Benassi",
-              "detail": "Museo d’arte della Svizzera italiana, Lugano",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64299"
-            },
-            {
-              "label": "Election Night USA",
-              "detail": "Auditorium, Campus ovest USI, Lugano",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64521"
+              "label": "La folle storia del calendario",
+              "detail": "La Filanda, Mendrisio",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261104/63852"
             },
             {
               "label": "International Classic Jazz Workshop",
               "detail": "Hotel Ascona, Ascona — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.guidle.com/it/musei/bambini/eventi/ascona/international-classic-jazz-workshop_ANs5bHs"
             },
             {
               "label": "Jazz Workshop 2026",
               "detail": "Bar La Grotta dell’Hotel Ascona, Ascona — in corso, ultimo giorno: 4 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261102/64562"
             },
             {
               "label": "Gyotaku - Tracce di pesci",
               "detail": "Museo della pesca, Caslano — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261101/61721"
             },
             {
               "label": "Morestalgia di Riccardo Benassi",
               "detail": "Hall del LAC, Lugano — in corso, ultimo giorno: 6 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261101/64298"
             },
             {
               "label": "Il Regno delle Zucche",
               "detail": "Serfontana, Mendrisio — in corso, ultimo giorno: 4 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261031/64546"
             },
             {
               "label": "Autunno alle Isole",
               "detail": "Isole di Brissago, Brissago — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261031/64514"
+            },
+            {
+              "label": "Aline d'Auria - Mai più, tra poco, spesso, un tempo.",
+              "detail": "Casa Rotonda — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261031/64617"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Accordo UE: apertura del mercato ferroviario a rischio",
           "url": "/articoli-ticino/sistema-ferroviario-accordo-ue/",
-          "excerpt": "L'accordo UE coinvolgerà anche i trasporti Oggi gli operatori esteri collaborano con le FFS Un'apertura del mercato del 20% potrebbe mettere a rischio l'orario",
+          "excerpt": "Secondo il testo, l'accordo riguarderebbe anche i trasporti. Nel comparto ferroviario, il trattato consentirebbe alle compagnie straniere di utilizzare le rotaie svizzere, finanziate con risorse dei contribuenti.",
           "date": "2026-10-28T01:31:55.792Z"
+        },
+        {
+          "title": "Film festival diritti umani Lugano: il miglior film è promised spaces",
+          "url": "/articoli-frontaliere/film-festival-diritti-umani-lugano-2026/",
+          "excerpt": "Si è svolta la premiazione del Film Festival Diritti Umani Lugano, un appuntamento culturale di rilievo che ha visto trionfare pellicole impegnate sui temi sociali, geopolitici e ambientali.",
+          "date": "2026-10-17T03:41:57.400Z"
+        },
+        {
+          "title": "Scacchi a Bissone: i vincitori del VI Festival",
+          "url": "/articoli-frontaliere/bissone-torneo-scacchi/",
+          "excerpt": "Domenica 11 ottobre Bissone ha ospitato la sesta edizione del Festival scacchistico, una giornata all'insegna degli scacchi con giovani promesse e giocatori esperti.",
+          "date": "2026-10-13T08:19:26.782Z"
         },
         {
           "title": "Museo storico a Palazzo Civico: mozione interpartitica a Lugano",
@@ -112,34 +124,22 @@
           "date": "2026-10-03T17:47:01.448Z"
         },
         {
-          "title": "Scacchi a Bissone: i vincitori del VI Festival",
-          "url": "/articoli-frontaliere/bissone-torneo-scacchi/",
-          "excerpt": "Domenica 11 ottobre si è svolta la sesta edizione Christian De Lucia ha vinto il Trofeo Borromini Under 16 Vladimir Paleologu ha conquistato il titolo Semilampo",
-          "date": "2026-10-13T08:19:26.782Z"
-        },
-        {
           "title": "Mendrisiotto: tre eventi e strade chiuse nel fine settimana",
           "url": "/articoli-frontaliere/mendrisiotto-strade-chiuse-weekend/",
           "excerpt": "Dal 18 al 20 settembre Rally del Ticino, Penziamo e Chiasso-Pedrinate causano chiusure stradali, limitazioni per pedoni e bus deviati nel Mendrisiotto.",
           "date": "2026-09-16T01:17:21.635Z"
         },
         {
-          "title": "Film festival diritti umani Lugano: il miglior film è promised spaces",
-          "url": "/articoli-frontaliere/film-festival-diritti-umani-lugano-2026/",
-          "excerpt": "Vincitore Miglior film: Promised Spaces di Ivan Markovic Premio ONG assegnato a Effondrement di Anat Even Premio del Pubblico a Trop c'est trop di Elisé",
-          "date": "2026-10-17T03:41:57.400Z"
+          "title": "Teatro di Locarno: chiesti più fondi agli enti pubblici",
+          "url": "/articoli-frontaliere/teatro-locarno-fondi-pubblici/",
+          "excerpt": "A Locarno, l’assemblea annuale dell’Associazione «Amici del Teatro di Locarno» ha riunito giovedì sera oltre cento soci nel teatro cittadino.",
+          "date": "2026-10-09T23:43:17.647Z"
         },
         {
           "title": "Sagra dell'uva a Mendrisio: bilancio positivo",
           "url": "/articoli-frontaliere/sagra-uva-mendrisio-bilancio/",
           "excerpt": "Bilancio positivo per la 70ª Sagra dell'uva di Mendrisio: stimate 20-25mila persone e nessun intervento di rilievo per la sicurezza.",
           "date": "2026-09-27T18:44:48.773Z"
-        },
-        {
-          "title": "Trame d'Oriente: mini kimono in mostra a Chiasso",
-          "url": "/articoli-frontaliere/trame-oriente-chiasso/",
-          "excerpt": "A Chiasso, dall'8 al 22 ottobre, la mostra Trame d'Oriente presenta dieci mini kimono in sete vintage, tra cultura giapponese e sartoria locale, firmata SAMS.",
-          "date": "2026-10-06T11:41:53.257Z"
         },
         {
           "title": "Locarno Film Festival: la cultura come legame",
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "154",
+          "value": "159",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,77 +184,89 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Blood donation",
-              "detail": "Centro La Torre, Losone",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64759"
+              "label": "Puss in Boots",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261104/63715"
             },
             {
-              "label": "The Present and Future of Diplomacy",
-              "detail": "Auditorium, Campus ovest USI, Lugano, Lugano",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64779"
+              "label": "Lea Lechler – What color is the desire?",
+              "detail": "Osteria La Fabbrica, Losone",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261104/63632"
             },
             {
-              "label": "Conversation with artist Riccardo Benassi",
-              "detail": "Museo d’arte della Svizzera italiana, Lugano",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64299"
-            },
-            {
-              "label": "U.S. Election Night",
-              "detail": "Auditorium, Campus ovest USI, Lugano",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64521"
+              "label": "The crazy history of the calendar",
+              "detail": "La Filanda, Mendrisio",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261104/63852"
             },
             {
               "label": "International Classic Jazz Workshop",
               "detail": "Hotel Ascona, Ascona — ongoing, last day: 8 November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.guidle.com/it/musei/bambini/eventi/ascona/international-classic-jazz-workshop_ANs5bHs"
             },
             {
               "label": "J",
               "detail": "Bar La Grotta dell’Hotel Ascona, Ascona — ongoing, last day: 4 November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261102/64562"
             },
             {
               "label": "Gyotaku - Fish Trails",
               "detail": "Museo della pesca, Caslano — ongoing, last day: 8 November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261101/61721"
             },
             {
               "label": "Morestalgia by Riccardo Benassi",
               "detail": "Hall del LAC, Lugano — ongoing, last day: 6 November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261101/64298"
             },
             {
               "label": "The Kingdom of Pumpkins",
               "detail": "Serfontana, Mendrisio — ongoing, last day: 4 November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261031/64546"
             },
             {
               "label": "Autumn in the Islands",
               "detail": "Isole di Brissago, Brissago — ongoing, last day: 8 November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261031/64514"
+            },
+            {
+              "label": "Aline d 'Auria - Never again, soon, often, once.",
+              "detail": "Casa Rotonda — ongoing, last day: 15 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261031/64617"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "EU agreement: opening the railway market at risk",
           "url": "/en/ticino-articles/railway-system-eu-agreement/",
-          "excerpt": "The EU agreement will also affect transport Today, foreign operators collaborate with FFS A 20% opening of the market could put the timetable at risk",
+          "excerpt": "This restriction is the starting point for the analysis written by Lorenzo Quadri, a member of the National Council of the Lega dei Ticinesi, on the agreement to submit to the EU and its consequences for the railway…",
           "date": "2026-10-28T01:31:55.792Z"
+        },
+        {
+          "title": "Lugano human rights film festival: the best film is promised spaces",
+          "url": "/en/cross-border-articles/lugano-human-rights-film-festival-the-best-film-is-promised-spaces/",
+          "excerpt": "The award ceremony of the Human Rights Film Festival Lugano has taken place, a prominent cultural event that saw the triumph of films committed to social, geopolitical and environmental themes.",
+          "date": "2026-10-17T03:41:57.400Z"
+        },
+        {
+          "title": "Chess in Bissone: the winners of the VI Festival",
+          "url": "/en/cross-border-articles/bissone-chess-festival-winners/",
+          "excerpt": "Sunday, October 11, Bissone hosted the sixth edition of the Chess Festival, a day of chess with young promises and experienced players.",
+          "date": "2026-10-13T08:19:26.782Z"
         },
         {
           "title": "Historical Museum at Palazzo Civico: cross-party motion in Lugano",
@@ -263,34 +275,22 @@
           "date": "2026-10-03T17:47:01.448Z"
         },
         {
-          "title": "Chess in Bissone: the winners of the VI Festival",
-          "url": "/en/cross-border-articles/bissone-chess-festival-winners/",
-          "excerpt": "On Sunday, October 11, the sixth edition took place Christian De Lucia won the Borromini Under 16 Trophy Vladimir Paleologu won the Rapid title",
-          "date": "2026-10-13T08:19:26.782Z"
-        },
-        {
           "title": "Mendrisiotto: three events and roads closed at the weekend",
           "url": "/en/cross-border-articles/mendrisiotto-road-closures-weekend/",
           "excerpt": "From 18 to 20 September Rally del Ticino, Penziamo and Chiasso-Pedrinate cause road closures, limitations for pedestrians and diverted buses in Mendrisiotto.",
           "date": "2026-09-16T01:17:21.635Z"
         },
         {
-          "title": "Lugano human rights film festival: the best film is promised spaces",
-          "url": "/en/cross-border-articles/lugano-human-rights-film-festival-the-best-film-is-promised-spaces/",
-          "excerpt": "Best Film Winner: Ivan Markovic's Promised Spaces NGO Award for Effondrement of Anat Even Audience Award for Trop c 'est trop by Elisé",
-          "date": "2026-10-17T03:41:57.400Z"
+          "title": "Teatro di Locarno: more funding sought from public authorities",
+          "url": "/en/cross-border-articles/locarno-theatre-public-funding/",
+          "excerpt": "After the artistic presentation, the discussion focused on the prospects for the programming of Teatro di Locarno.",
+          "date": "2026-10-09T23:43:17.647Z"
         },
         {
           "title": "Grape Festival in Mendrisio: positive outcome",
           "url": "/en/cross-border-articles/mendrisio-grape-festival-results/",
           "excerpt": "Positive outcome for the 70th Mendrisio Grape Festival: an estimated 20,000–25,000 people and no major security interventions.",
           "date": "2026-09-27T18:44:48.773Z"
-        },
-        {
-          "title": "Threads of the East: mini kimonos on display in Chiasso",
-          "url": "/en/cross-border-articles/japanese-mini-kimonos-chiasso/",
-          "excerpt": "In Chiasso, from October 8 to 22, the exhibition Threads of the East by SAMS presents ten mini kimonos made from vintage silks, at the intersection of Japanese culture and local tailoring.",
-          "date": "2026-10-06T11:41:53.257Z"
         },
         {
           "title": "Locarno Film Festival: culture as a link",
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "154",
+          "value": "159",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,77 +335,89 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Blutspende",
-              "detail": "Centro La Torre, Losone",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64759"
+              "label": "Die gestiefelte Katze",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261104/63715"
             },
             {
-              "label": "Gegenwart und Zukunft der Diplomatie",
-              "detail": "Auditorium, Campus ovest USI, Lugano, Lugano",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64779"
+              "label": "Lea Lechler – Welche Farbe hat das Muttermal?",
+              "detail": "Osteria La Fabbrica, Losone",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261104/63632"
             },
             {
-              "label": "Gespräch mit dem Künstler Riccardo Benassi",
-              "detail": "Museo d’arte della Svizzera italiana, Lugano",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64299"
-            },
-            {
-              "label": "Wahlnacht USA",
-              "detail": "Auditorium, Campus ovest USI, Lugano",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64521"
+              "label": "Die verrückte Geschichte des Kalenders",
+              "detail": "La Filanda, Mendrisio",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261104/63852"
             },
             {
               "label": "International Classic Jazz Workshop",
               "detail": "Hotel Ascona, Ascona — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.guidle.com/it/musei/bambini/eventi/ascona/international-classic-jazz-workshop_ANs5bHs"
             },
             {
               "label": "Jazz-Workshop 2026",
               "detail": "Bar La Grotta dell’Hotel Ascona, Ascona — läuft, letzter Tag: 4. November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261102/64562"
             },
             {
               "label": "Gyotaku - Spuren von Fischen",
               "detail": "Museo della pesca, Caslano — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261101/61721"
             },
             {
               "label": "Morestalgie von Riccardo Benassi",
               "detail": "Hall del LAC, Lugano — läuft, letzter Tag: 6. November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261101/64298"
             },
             {
               "label": "Das Königreich der Kürbisse",
               "detail": "Serfontana, Mendrisio — läuft, letzter Tag: 4. November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261031/64546"
             },
             {
               "label": "Herbst auf den Inseln",
               "detail": "Isole di Brissago, Brissago — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261031/64514"
+            },
+            {
+              "label": "Aline d 'Auria - Nie wieder, bald, oft, einst.",
+              "detail": "Casa Rotonda — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261031/64617"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "EU-Abkommen: Öffnung des Eisenbahnmarktes in Gefahr",
           "url": "/de/tessin-artikel/schienennetz-eu-abkommen/",
-          "excerpt": "Das EU-Abkommen wird auch den Verkehr betreffen Heute arbeiten ausländische Betreiber mit den FFS zusammen Eine Öffnung des Marktes um 20% könnte den Fahrplan gefährden",
+          "excerpt": "Der CEO der FFS hatte bereits gewarnt, dass selbst eine auf 20 % begrenzte Marktöffnung das Schweizer Taktfahrplansystem hätte gefährden können. Mit dem Abkommen wäre die Öffnung, so der Artikel, sicherlich…",
           "date": "2026-10-28T01:31:55.792Z"
+        },
+        {
+          "title": "Filmfestival Menschenrechte Lugano: Der beste Film ist promised spaces",
+          "url": "/de/grenzgaenger-artikel/filmfestival-menschenrechte-lugano-der-beste-film-ist-promised-spaces/",
+          "excerpt": "Die Preisverleihung des Filmfestivals Menschenrechte Lugano hat stattgefunden, ein bedeutendes Kulturereignis, bei dem engagierte Filme zu sozialen, geopolitischen und ökologischen Themen triumphierten.",
+          "date": "2026-10-17T03:41:57.400Z"
+        },
+        {
+          "title": "Schach in Bissone: die Gewinner des VI Festivals",
+          "url": "/de/grenzgaenger-artikel/schachfestival-bissone-sieger/",
+          "excerpt": "Am Sonntag, den 11. Oktober, fand in Bissone die sechste Ausgabe des Schachfestivals statt, ein Schachtag mit vielversprechenden jungen und erfahrenen Spielern.",
+          "date": "2026-10-13T08:19:26.782Z"
         },
         {
           "title": "Historisches Museum im Palazzo Civico: parteiübergreifender Antrag in Lugano",
@@ -414,34 +426,22 @@
           "date": "2026-10-03T17:47:01.448Z"
         },
         {
-          "title": "Schach in Bissone: die Gewinner des VI Festivals",
-          "url": "/de/grenzgaenger-artikel/schachfestival-bissone-sieger/",
-          "excerpt": "Am Sonntag, dem 11.",
-          "date": "2026-10-13T08:19:26.782Z"
-        },
-        {
           "title": "Mendrisiotto: Drei Veranstaltungen und gesperrte Straßen am Wochenende",
           "url": "/de/grenzgaenger-artikel/mendrisiotto-strassensperrungen-wochenende/",
           "excerpt": "Vom 18. bis 20. September verursachen die Rally del Tessin, Peniamo und Chiasso-Pedrinate Straßensperrungen, Einschränkungen für Fußgänger und umgeleitete Busse im Mendrisiotto.",
           "date": "2026-09-16T01:17:21.635Z"
         },
         {
-          "title": "Filmfestival Menschenrechte Lugano: Der beste Film ist promised spaces",
-          "url": "/de/grenzgaenger-artikel/filmfestival-menschenrechte-lugano-der-beste-film-ist-promised-spaces/",
-          "excerpt": "Bester Film: Promised Spaces von Ivan Markovic NGO Award für Effondrement von Anat Even Publikumspreis für Trop c 'est trop von Elisé",
-          "date": "2026-10-17T03:41:57.400Z"
+          "title": "Teatro di Locarno: Mehr Mittel von den öffentlichen Stellen gefordert",
+          "url": "/de/grenzgaenger-artikel/theater-locarno-oeffentliche-gelder/",
+          "excerpt": "Nach der künstlerischen Präsentation konzentrierte sich die Diskussion auf die Perspektiven der Programmgestaltung des Teatro di Locarno.",
+          "date": "2026-10-09T23:43:17.647Z"
         },
         {
           "title": "Traubenfest in Mendrisio: positive Bilanz",
           "url": "/de/grenzgaenger-artikel/traubenfest-mendrisio-bilanz/",
           "excerpt": "Positive Bilanz für das 70. Traubenfest von Mendrisio: schätzungsweise 20-25 Tausend Personen und kein nennenswerter Sicherheitseinsatz.",
           "date": "2026-09-27T18:44:48.773Z"
-        },
-        {
-          "title": "Muster des Orients: Mini-Kimonos in Chiasso zu sehen",
-          "url": "/de/grenzgaenger-artikel/japanische-mini-kimonos-chiasso/",
-          "excerpt": "In Chiasso präsentiert die Ausstellung Trame d'Oriente von SAMS vom 8. bis 22. Oktober zehn Mini-Kimonos aus Vintage-Seidenstoffen zwischen japanischer Kultur und lokaler Schneiderei.",
-          "date": "2026-10-06T11:41:53.257Z"
         },
         {
           "title": "Locarno Film Festival: Kultur als Verbindung",
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "154",
+          "value": "159",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,77 +486,89 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Don de sang",
-              "detail": "Centro La Torre, Losone",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64759"
+              "label": "Chat botté",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261104/63715"
             },
             {
-              "label": "Le présent et l'avenir de la diplomatie",
-              "detail": "Auditorium, Campus ovest USI, Lugano, Lugano",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64779"
+              "label": "Lea Lechler – De quelle couleur avez-vous envie ?",
+              "detail": "Osteria La Fabbrica, Losone",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261104/63632"
             },
             {
-              "label": "Conversation avec l’artiste Riccardo Benassi",
-              "detail": "Museo d’arte della Svizzera italiana, Lugano",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64299"
-            },
-            {
-              "label": "Nuit électorale aux États-Unis",
-              "detail": "Auditorium, Campus ovest USI, Lugano",
-              "date": "2026-11-03",
-              "url": "https://www.tio.ch/agenda/day/20261103/64521"
+              "label": "La folle histoire du calendrier",
+              "detail": "La Filanda, Mendrisio",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261104/63852"
             },
             {
               "label": "International Classic Jazz Workshop",
               "detail": "Hotel Ascona, Ascona — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.guidle.com/it/musei/bambini/eventi/ascona/international-classic-jazz-workshop_ANs5bHs"
             },
             {
               "label": "Atelier de Jazz 2026",
               "detail": "Bar La Grotta dell’Hotel Ascona, Ascona — en cours, dernier jour : 4 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261102/64562"
             },
             {
               "label": "Gyotaku - Traces de poissons",
               "detail": "Museo della pesca, Caslano — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261101/61721"
             },
             {
               "label": "Morestalgia de Riccardo Benassi",
               "detail": "Hall del LAC, Lugano — en cours, dernier jour : 6 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261101/64298"
             },
             {
               "label": "Le Royaume des Citrouilles",
               "detail": "Serfontana, Mendrisio — en cours, dernier jour : 4 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261031/64546"
             },
             {
               "label": "Automne aux îles",
               "detail": "Isole di Brissago, Brissago — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.tio.ch/agenda/day/20261031/64514"
+            },
+            {
+              "label": "Aline d'Auria - Plus jamais, bientôt, souvent, depuis longtemps.",
+              "detail": "Casa Rotonda — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.tio.ch/agenda/day/20261031/64617"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Accord UE : l’ouverture du marché ferroviaire menacée",
           "url": "/fr/articles-tessin/systeme-ferroviaire-accord-ue/",
-          "excerpt": "L'accord UE concernera également les transports Aujourd'hui, les opérateurs étrangers collaborent avec les FFS Une ouverture du marché de 20% pourrait mettre en danger l'horaire cadencé",
+          "excerpt": "Cette contrainte constitue le point de départ de l'analyse signée par Lorenzo Quadri, conseiller national de la Lega dei Ticinesi, sur l'accord de soumission à l'UE et ses conséquences pour le réseau ferroviaire.",
           "date": "2026-10-28T01:31:55.792Z"
+        },
+        {
+          "title": "Film festival droits humains Lugano : le meilleur film est promise spaces",
+          "url": "/fr/articles-frontalier/film-festival-droits-humains-lugano-le-meilleur-film-est-promise-spaces/",
+          "excerpt": "La cérémonie de remise des prix du Film Festival Diritti Umani Lugano a eu lieu, un événement culturel majeur qui a vu triompher des films engagés sur les thèmes sociaux, géopolitiques et environnementaux.",
+          "date": "2026-10-17T03:41:57.400Z"
+        },
+        {
+          "title": "Échecs à Bissone : les vainqueurs du VI Festival",
+          "url": "/fr/articles-frontalier/festival-echecs-bissone-gagnants/",
+          "excerpt": "Dimanche 11 octobre, Bissone a accueilli la sixième édition du Festival d'échecs, une journée placée sous le signe des échecs avec de jeunes espoirs et des joueurs expérimentés.",
+          "date": "2026-10-13T08:19:26.782Z"
         },
         {
           "title": "Musée historique au Palazzo Civico : motion interpartisane à Lugano",
@@ -565,34 +577,22 @@
           "date": "2026-10-03T17:47:01.448Z"
         },
         {
-          "title": "Échecs à Bissone : les vainqueurs du VI Festival",
-          "url": "/fr/articles-frontalier/festival-echecs-bissone-gagnants/",
-          "excerpt": "Dimanche 11 octobre s’est déroulée la sixième édition Christian De Lucia a remporté le Trophée Borromini Under 16 Vladimir Paleologu a conquis le titre Semilampo",
-          "date": "2026-10-13T08:19:26.782Z"
-        },
-        {
           "title": "Mendrisiotto : trois événements et des routes fermées le week-end",
           "url": "/fr/articles-frontalier/mendrisiotto-routes-fermees-week-end/",
           "excerpt": "Du 18 au 20 septembre, le Rallye du Tessin, Penziamo et Chiasso-Pedrinate provoquent des fermetures de routes, des restrictions pour les piétons et les bus déviés dans le Mendrisiotto.",
           "date": "2026-09-16T01:17:21.635Z"
         },
         {
-          "title": "Film festival droits humains Lugano : le meilleur film est promise spaces",
-          "url": "/fr/articles-frontalier/film-festival-droits-humains-lugano-le-meilleur-film-est-promise-spaces/",
-          "excerpt": "Gagnant du meilleur film : Promised Spaces d'Ivan Markovic Prix ONG décerné à Effondrement d'Anat Even Prix du Public à Trop c'est trop d'Elisé",
-          "date": "2026-10-17T03:41:57.400Z"
+          "title": "Théâtre de Locarno : vous avez demandé plus de fonds aux organismes publics",
+          "url": "/fr/articles-frontalier/theatre-locarno-fonds-publics/",
+          "excerpt": "A Locarno, la réunion annuelle de l'association «Amis du Théâtre de Locarno» a réuni jeudi soir plus d'une centaine de membres au théâtre municipal.",
+          "date": "2026-10-09T23:43:17.647Z"
         },
         {
           "title": "Fête du raisin à Mendrisio : bilan positif",
           "url": "/fr/articles-frontalier/fete-raisin-mendrisio-bilan/",
           "excerpt": "Bilan positif pour la 70e Fête du raisin de Mendrisio : 20-25 mille personnes estimées et aucune intervention notable pour la sécurité.",
           "date": "2026-09-27T18:44:48.773Z"
-        },
-        {
-          "title": "Trames d’Orient : mini-kimonos exposés à Chiasso",
-          "url": "/fr/articles-frontalier/mini-kimonos-japonais-chiasso/",
-          "excerpt": "À Chiasso, du 8 au 22 octobre, l'exposition Trame d'Oriente présente dix mini kimono en soie vintage, entre culture japonaise et couture locale, signée SAMS.",
-          "date": "2026-10-06T11:41:53.257Z"
         },
         {
           "title": "Festival du film de Locarno : la culture comme lien",
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

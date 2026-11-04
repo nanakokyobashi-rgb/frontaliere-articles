@@ -4,19 +4,67 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "7e44be2421bef3f0c794621c9b6f20c0d3f700ac631ef772d2ef0bcb42cdf5c2",
-  "blocks": [],
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "c447dc42fb78ace0a1d441e87f52d6b3e330b88de5032769bb68fe55a5aef74b",
+  "blocks": [
+    {
+      "id": "prezzi-carburanti",
+      "updatedAt": "2026-11-03T14:41:22.679Z",
+      "keyFacts": 2,
+      "carryUntilAt": "2026-12-02T00:00:00.000Z"
+    }
+  ],
   "locales": {
     "it": {
       "canton": "ZG",
       "topic": "carburanti",
       "locale": "it",
       "intro": "Nel Canton Zugo, benzina e diesel sono una voce fissa nel bilancio di chi usa l’auto per andare al lavoro. Questa pagina riunisce i prezzi medi rilevati alla pompa, il confronto con le aree oltreconfine quando esiste un dato pubblico e gli articoli della redazione su carburanti ed energia.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco e inglese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Benzina 95 — Svizzera",
+          "value": "2,120 CHF/l",
+          "note": "media nazionale ufficiale, 1 ottobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Svizzera",
+          "value": "2,410 CHF/l",
+          "note": "media nazionale ufficiale, 1 ottobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Prezzi dei carburanti",
+          "description": "Prezzi medi alla pompa rilevati sul territorio e, dove esiste un dato pubblico, nelle aree oltreconfine. Ogni riga riporta la valuta della rilevazione: i prezzi non sono convertiti.",
+          "items": [
+            {
+              "label": "Benzina 95 — Svizzera",
+              "value": "2,120 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Svizzera",
+              "value": "2,410 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-10-01T00:00:00.000Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
+        }
+      ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zugo pubblica l'adeguamento del Piano direttore 26/1",
+          "url": "/articoli-zugo/consultazione-piano-zugo/",
+          "excerpt": "Il Canton Zugo mette in consultazione il Piano direttore 26/1: zone speciali per più abitazioni e strategia di stabilizzazione nell'area non edificabile.",
+          "date": "2026-11-03T23:42:19.361Z"
+        },
         {
           "title": "Cham: moltiplicatore fiscale al 53% nel 2027",
           "url": "/articoli-zugo/cham-moltiplicatore-fiscale-2027/",
@@ -26,7 +74,7 @@
         {
           "title": "Robatech rileva Balti AG a Baar: niente tagli previsti",
           "url": "/articoli-zugo/balti-zug-robatech-acquisizione/",
-          "excerpt": "Robatech ha rilevato Balti AG a fine settembre Balti AG ha sede a Baar, nel Canton Zugo Non sono previsti tagli o ristrutturazioni Acquirente: Robatech AG",
+          "excerpt": "A fine settembre Robatech AG, con sede a Muri nel Canton Argovia, ha rilevato Balti AG, azienda basata a Baar, nel Canton Zugo.",
           "date": "2026-10-28T01:30:31.021Z"
         },
         {
@@ -40,12 +88,6 @@
           "url": "/articoli-zugo/zugo-agenda-kantonsrat-ottobre/",
           "excerpt": "La fonte del Canton Zugo rende disponibile l'ordine del giorno della seduta del Kantonsrat del 29 ottobre 2026.",
           "date": "2026-10-27T01:58:14.398Z"
-        },
-        {
-          "title": "Zugo: assegnate le direzioni dal 1° gennaio 2027",
-          "url": "/articoli-zugo/esecutivo-zugo-mandato-2030/",
-          "excerpt": "Il Regierungsrat di Zugo ha definito direzioni e supplenze per il periodo 2027-2030, confermando le direzioni dei membri già in carica.",
-          "date": "2026-10-26T12:22:22.628Z"
         }
       ],
       "links": [
@@ -58,17 +100,58 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "ZG",
       "topic": "carburanti",
       "locale": "en",
       "intro": "In the canton of Zug, petrol and diesel are a fixed item in the budget of anyone who drives to work. This page brings together the average pump prices on record, the comparison with the other side of the border where public data exists, and our articles on fuel and energy.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German and English; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Petrol 95 — Switzerland",
+          "value": "2.120 CHF/l",
+          "note": "official national average, 1 October 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Switzerland",
+          "value": "2.410 CHF/l",
+          "note": "official national average, 1 October 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Fuel prices",
+          "description": "Average pump prices recorded locally and, where public data exists, across the border. Each row keeps the currency of the survey: prices are not converted.",
+          "items": [
+            {
+              "label": "Petrol 95 — Switzerland",
+              "value": "2.120 CHF/l",
+              "detail": "official national average",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Switzerland",
+              "value": "2.410 CHF/l",
+              "detail": "official national average",
+              "date": "2026-10-01T00:00:00.000Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
+        }
+      ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zug publishes the adjustment to the 26/1 Structure Plan",
+          "url": "/en/zug-articles/zug-directive-plan-consultation/",
+          "excerpt": "The Canton of Zug is putting the 26/1 Structure Plan out for consultation: special zones for multiple dwellings and a stabilization strategy in the non-building area.",
+          "date": "2026-11-03T23:42:19.361Z"
+        },
         {
           "title": "Cham: fiscal multiplier at 53% in 2027",
           "url": "/en/zug-articles/cham-tax-rate-2027/",
@@ -78,7 +161,7 @@
         {
           "title": "Robatech acquires Balti AG in Baar: no cuts expected",
           "url": "/en/zug-articles/robatech-takes-over-balti-baar/",
-          "excerpt": "Robatech acquired Balti AG at the end of September Balti AG is based in Baar, in the Canton of Zug No cuts or restructuring are planned Buyer: Robatech AG",
+          "excerpt": "At the end of September, Robatech AG, based in Muri in the Canton of Aargau, acquired Balti AG, a company based in Baar, in the Canton of Zug.",
           "date": "2026-10-28T01:30:31.021Z"
         },
         {
@@ -92,12 +175,6 @@
           "url": "/en/zug-articles/zug-cantonal-council-agenda-october-2026/",
           "excerpt": "The source from the Canton of Zug makes available the agenda for the Kantonsrat session on October 29, 2026.",
           "date": "2026-10-27T01:58:14.398Z"
-        },
-        {
-          "title": "Zug: departments assigned from January 1, 2027",
-          "url": "/en/zug-articles/zug-government-term-2030/",
-          "excerpt": "The Government Council of Zug has defined the portfolios and deputy arrangements for the 2027-2030 period, confirming the portfolios of the incumbent members.",
-          "date": "2026-10-26T12:22:22.628Z"
         }
       ],
       "links": [
@@ -110,17 +187,58 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "ZG",
       "topic": "carburanti",
       "locale": "de",
       "intro": "Im Kanton Zug sind Benzin und Diesel ein fester Posten im Budget aller, die mit dem Auto zur Arbeit fahren. Diese Seite bündelt die erhobenen Durchschnittspreise an der Zapfsäule, den Vergleich mit dem Gebiet jenseits der Grenze, sofern öffentliche Daten vorliegen, und die Artikel der Redaktion zu Treibstoff und Energie.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch und Englisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Benzin 95 — Schweiz",
+          "value": "2.120 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. Oktober 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Schweiz",
+          "value": "2.410 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. Oktober 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Treibstoffpreise",
+          "description": "Durchschnittliche Preise an der Zapfsäule im Gebiet und, wo öffentliche Daten vorliegen, jenseits der Grenze. Jede Zeile nennt die Währung der Erhebung: Die Preise werden nicht umgerechnet.",
+          "items": [
+            {
+              "label": "Benzin 95 — Schweiz",
+              "value": "2.120 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Schweiz",
+              "value": "2.410 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-10-01T00:00:00.000Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
+        }
+      ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zug veröffentlicht die Anpassung des Richtplans 26/1",
+          "url": "/de/zug-artikel/zug-richtplan-mitwirkung-26-1/",
+          "excerpt": "Der Kanton Zug legt den Richtplan 26/1 zur Vernehmlassung vor: Sonderbauzonen für mehr Wohnungen und eine Stabilisierungsstrategie im Nichtbaugebiet.",
+          "date": "2026-11-03T23:42:19.361Z"
+        },
         {
           "title": "Cham: Steuerfuss von 53% im Jahr 2027",
           "url": "/de/zug-artikel/cham-steuerfuss-2027/",
@@ -130,7 +248,7 @@
         {
           "title": "Robatech übernimmt Balti AG in Baar: keine Stellenkürzungen vorgesehen",
           "url": "/de/zug-artikel/robatech-uebernimmt-balti-baar/",
-          "excerpt": "Robatech hat Balti AG Ende September übernommen Balti AG hat ihren Sitz in Baar, Kanton Zug Es sind keine Kürzungen oder Umstrukturierungen geplant Käufer",
+          "excerpt": "Ende September hat die Robatech AG mit Sitz in Muri im Kanton Aargau die Balti AG übernommen, ein Unternehmen mit Sitz in Baar im Kanton Zug.",
           "date": "2026-10-28T01:30:31.021Z"
         },
         {
@@ -142,14 +260,8 @@
         {
           "title": "Zug stellt die Traktandenliste des Kantonsrats zur Verfügung",
           "url": "/de/zug-artikel/zug-traktandenliste-kantonsrat-oktober-2026/",
-          "excerpt": "Die Quelle des Kantons Zug stellt die Traktandenliste der Sitzung des Kantonsrats vom 29.",
+          "excerpt": "Der 29. Oktober 2026 ist das angegebene Datum für die Sitzung des Kantonsrats von Zug. Die zugehörige Traktandenliste, also die Liste der Tagesordnungspunkte, ist verfügbar: Dies ist die zentrale Aussage der Quelle.",
           "date": "2026-10-27T01:58:14.398Z"
-        },
-        {
-          "title": "Zug: Zuteilung der Direktionen ab dem 1. Januar 2027",
-          "url": "/de/zug-artikel/zug-regierungsrat-amtsperiode-2030/",
-          "excerpt": "Der Regierungsrat von Zug hat die Direktionen und Stellvertretungen für die Amtsperiode 2027-2030 festgelegt und die Direktionen der bereits amtierenden Mitglieder bestätigt.",
-          "date": "2026-10-26T12:22:22.628Z"
         }
       ],
       "links": [
@@ -162,17 +274,58 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "ZG",
       "topic": "carburanti",
       "locale": "fr",
       "intro": "Dans le canton de Zoug, l’essence et le diesel sont un poste fixe du budget de celles et ceux qui prennent la voiture pour aller travailler. Cette page réunit les prix moyens relevés à la pompe, la comparaison avec l’autre côté de la frontière lorsqu’une donnée publique existe et les articles de la rédaction sur les carburants et l’énergie.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand et anglais ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Essence 95 — Suisse",
+          "value": "2,120 CHF/l",
+          "note": "moyenne nationale officielle, 1er octobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Suisse",
+          "value": "2,410 CHF/l",
+          "note": "moyenne nationale officielle, 1er octobre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Prix des carburants",
+          "description": "Prix moyens à la pompe relevés sur le territoire et, lorsqu’une donnée publique existe, de l’autre côté de la frontière. Chaque ligne conserve la monnaie du relevé : les prix ne sont pas convertis.",
+          "items": [
+            {
+              "label": "Essence 95 — Suisse",
+              "value": "2,120 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-10-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Suisse",
+              "value": "2,410 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-10-01T00:00:00.000Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
+          "updatedAt": "2026-11-03T14:41:22.679Z"
+        }
+      ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zoug publie l’adaptation du Plan directeur 26/1",
+          "url": "/fr/articles-zoug/plan-directeur-zoug-consultation/",
+          "excerpt": "Le canton de Zoug met en consultation le Plan directeur 26/1 : zones spéciales pour davantage de logements et stratégie de stabilisation dans la zone non constructible.",
+          "date": "2026-11-03T23:42:19.361Z"
+        },
         {
           "title": "Cham : coefficient fiscal à 53 % en 2027",
           "url": "/fr/articles-zoug/cham-taux-fiscal-2027/",
@@ -182,7 +335,7 @@
         {
           "title": "Robatech acquiert Balti AG à Baar : aucune suppression de postes prévue",
           "url": "/fr/articles-zoug/robatech-reprend-balti-baar/",
-          "excerpt": "Robatech a repris Balti AG fin septembre Balti AG est basée à Baar, dans le canton de Zoug Aucun licenciement ou réorganisation n'est prévu Acquéreur : Robatech",
+          "excerpt": "Fin septembre, Robatech AG, basée à Muri dans le canton d'Argovie, a repris Balti AG, une entreprise basée à Baar dans le canton de Zoug.",
           "date": "2026-10-28T01:30:31.021Z"
         },
         {
@@ -196,12 +349,6 @@
           "url": "/fr/articles-zoug/zoug-ordre-du-jour-conseil-octobre-2026/",
           "excerpt": "La source du canton de Zoug met à disposition l’ordre du jour de la séance du Kantonsrat du 29 octobre 2026.",
           "date": "2026-10-27T01:58:14.398Z"
-        },
-        {
-          "title": "Zoug : attribution des départements à partir du 1er janvier 2027",
-          "url": "/fr/articles-zoug/gouvernement-zoug-mandat-2030/",
-          "excerpt": "Le Conseil d'État de Zoug a défini les départements et les suppléances pour la période 2027-2030, confirmant les départements des membres déjà en fonction.",
-          "date": "2026-10-26T12:22:22.628Z"
         }
       ],
       "links": [
@@ -214,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

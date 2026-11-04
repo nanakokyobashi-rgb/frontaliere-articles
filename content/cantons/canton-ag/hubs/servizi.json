@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T14:36:40.036Z",
-  "contentHash": "bbeda014fba496776a62d31633ecbf5cb3a84e2610a2b2c1d35357858af1dc46",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "1586b4c53ee872ae105153e9efd553ef44ea713fc7740b14f0b9631922a7fc68",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-03T00:59:08.019Z",
+      "updatedAt": "2026-11-03T14:10:08.795Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -39,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "18",
-          "note": "offerta mediana 1570 CHF"
+          "note": "offerta mediana 1580 CHF"
         }
       ],
       "dataBlocks": [
@@ -87,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "6 °C",
+              "detail": "oggi da 5 a 6 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -125,7 +144,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +169,7 @@
         {
           "title": "Sistema sanitario svizzero LAMal: guida 2026 Canton Argovia",
           "url": "/articoli-svizzera/lamal-guida-2026-canton-argovia/",
-          "excerpt": "Chi risiede in Svizzera deve avere un'assicurazione LAMal La polizza va stipulata entro tre mesi dall'arrivo Per gli adulti sono previste franchigie di CHF 300",
+          "excerpt": "La guida 2026 al sistema sanitario svizzero parte da una distinzione concreta: la LAMal/KVG è obbligatoria per i residenti, ma il premio non è un tributo e non segue il modello dei contributi sul salario.",
           "date": "2026-10-18T02:46:20.782Z"
         },
         {
@@ -205,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "AG",
@@ -222,7 +241,7 @@
         {
           "label": "Plate auctions running",
           "value": "18",
-          "note": "typical bid 1,570 CHF"
+          "note": "typical bid 1,580 CHF"
         }
       ],
       "dataBlocks": [
@@ -270,7 +289,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "6 °C",
+              "detail": "today from 5 to 6 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -308,7 +341,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -333,7 +366,7 @@
         {
           "title": "Swiss LAMal healthcare system: 2026 guide to the Canton of Aargau",
           "url": "/en/swiss-articles/lamal-guide-2026-canton-aargau/",
-          "excerpt": "Anyone residing in Switzerland must have LAMal insurance The policy must be taken out within three months of arrival For adults, deductibles of CHF 300 apply",
+          "excerpt": "The 2026 guide to the Swiss healthcare system starts with a practical distinction: LAMal/KVG is mandatory for residents, but the premium is not a levy and does not follow the model of payroll contributions.",
           "date": "2026-10-18T02:46:20.782Z"
         },
         {
@@ -384,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "AG",
@@ -401,7 +434,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "18",
-          "note": "mittleres Gebot 1’570 CHF"
+          "note": "mittleres Gebot 1’580 CHF"
         }
       ],
       "dataBlocks": [
@@ -449,7 +482,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "6 °C",
+              "detail": "heute 5 bis 6 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,14 +534,14 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Fislisbach: Am 5. November Treffen zur Schule Leematten",
           "url": "/de/aargau-artikel/fislisbach-leematten-umfrage/",
-          "excerpt": "Die Gemeinde Fislisbach stellt am 5.",
+          "excerpt": "Die überprüfbaren Informationen betreffen somit das Treffen am 5. November um 19.30 Uhr im Mehrzwecksaal der Schule Leematten, die Präsentation der Ergebnisse durch Sotomo und die Erläuterung des weiteren Vorgehens…",
           "date": "2026-10-31T12:27:23.904Z"
         },
         {
@@ -563,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "AG",
@@ -580,7 +627,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "18",
-          "note": "offre centrale 1 570 CHF"
+          "note": "offre centrale 1 580 CHF"
         }
       ],
       "dataBlocks": [
@@ -628,7 +675,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 5 à 6 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -666,7 +727,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -691,7 +752,7 @@
         {
           "title": "Système de santé suisse LAMal : guide 2026 du canton d'Argovie",
           "url": "/fr/articles-suisse/guide-lamal-2026-canton-argovie/",
-          "excerpt": "Toute personne résidant en Suisse doit avoir une assurance LAMal La police doit être souscrite dans les trois mois suivant l'arrivée Pour les adultes, des franchises de CHF 300 sont prévues",
+          "excerpt": "Le guide 2026 du système de santé suisse part d'une distinction concrète : la LAMal/KVG est obligatoire pour les résidents, mais la prime n'est pas un prélèvement et ne suit pas le modèle des cotisations salariales.",
           "date": "2026-10-18T02:46:20.782Z"
         },
         {
@@ -738,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

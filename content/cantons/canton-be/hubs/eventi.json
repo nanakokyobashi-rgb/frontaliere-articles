@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-03T00:06:00.232Z",
-  "contentHash": "b1879385efc46a7ab0cb3952e6465e42dc9a9cc15586a9891647c903fa0d3cd7",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "a0b6a753086d637c937d2e57d430346323072af5edf868c9b264aa81bcd97ea0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T13:10:19.053Z",
+      "updatedAt": "2026-11-03T20:20:58.923Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "ZYSCHTIG - ZMORGE",
-              "detail": "Ref. Kirchgemeindehaus Spiez, Spiez",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zyschtig-zmorge-2/"
+              "label": "Mercato delle carote",
+              "detail": "Graben",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/carrot-market/"
             },
             {
-              "label": "Besuch Sternwarte Gurten",
-              "detail": "Gurten-Park im Grünen",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/besuch-sternwarte-gurten/"
+              "label": "LANGNAU MÄRIT im Chüechlihus",
+              "detail": "Langnau i.E.",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/langnau-maerit-im-chueechlihus-6/"
+            },
+            {
+              "label": "MITTENDRIN: Oli Kehrli \"Zwänzg Jahr unbedingt\"",
+              "detail": "Der Burgerspittel im Viererfeld",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mittendrin-oli-kehrli-zwaenzg-jahr-unbedingt_Av3UEpM"
+            },
+            {
+              "label": "Führungen hinter die Kulissen: Die schönsten Fossilien",
+              "detail": "Naturhistorisches Museum Bern, Bern",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fuehrungen-hinter-die-kulissen-die-schoensten-fossilien/"
+            },
+            {
+              "label": "Aynsley Lister - Special Guest: Nina Attal",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/aynsley-lister-special-guest-nina-attal_Amq6ay7"
+            },
+            {
+              "label": "ANIMITTWOCH: VAMPIRE HUNTER D: BLOODLUST",
+              "detail": "CineCamera",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/animittwoch-vampire-hunter-d-bloodlust_AU7nFGT"
             },
             {
               "label": "SULLIVAN FORTNER TRIO",
-              "detail": "Marians Jazzroom",
-              "date": "2026-11-03",
+              "detail": "Marians Jazzroom — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-04",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sullivan-fortner-trio_Aypbp8X"
-            },
-            {
-              "label": "Shirley Grimes - Plattentaufe",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/shirley-grimes-plattentaufe_A7eXCHK"
             },
             {
               "label": "Escort Trips on the DS “Spiez” & MS “Schilthorn”—Noon Departure from Thun",
               "detail": "Thunersee, Spiez — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
             },
             {
               "label": "moving moments",
               "detail": "Sporthalle Ebnit, Saanen — in corso, ultimo giorno: 29 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
               "label": "Im Härz",
               "detail": "Bern — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
-            },
-            {
-              "label": "Lake Thun Play Ship",
-              "detail": "Thunersee, Thun — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
-            },
-            {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
-            },
-            {
-              "label": "Selbstplanerkurs PV-Anlage e-wende",
-              "detail": "Bern — in corso, ultimo giorno: 5 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "BE",
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "ZYSCHTIG - ZMORGE",
-              "detail": "Ref. Kirchgemeindehaus Spiez, Spiez",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zyschtig-zmorge-2/"
+              "label": "Carrot Market",
+              "detail": "Graben",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/carrot-market/"
             },
             {
-              "label": "Besuch Sternwarte Gurten",
-              "detail": "Gurten-Park im Grünen",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/besuch-sternwarte-gurten/"
+              "label": "LANGNAU MÄRIT im Chüechlihus",
+              "detail": "Langnau i.E.",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/langnau-maerit-im-chueechlihus-6/"
+            },
+            {
+              "label": "MITTENDRIN: Oli Kehrli \"Zwänzg Jahr unbedingt\"",
+              "detail": "Der Burgerspittel im Viererfeld",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mittendrin-oli-kehrli-zwaenzg-jahr-unbedingt_Av3UEpM"
+            },
+            {
+              "label": "Führungen hinter die Kulissen: Die schönsten Fossilien",
+              "detail": "Naturhistorisches Museum Bern, Bern",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fuehrungen-hinter-die-kulissen-die-schoensten-fossilien/"
+            },
+            {
+              "label": "Aynsley Lister - Special Guest: Nina Attal",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/aynsley-lister-special-guest-nina-attal_Amq6ay7"
+            },
+            {
+              "label": "ANIMITTWOCH: VAMPIRE HUNTER D: BLOODLUST",
+              "detail": "CineCamera",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/animittwoch-vampire-hunter-d-bloodlust_AU7nFGT"
             },
             {
               "label": "SULLIVAN FORTNER TRIO",
-              "detail": "Marians Jazzroom",
-              "date": "2026-11-03",
+              "detail": "Marians Jazzroom — ongoing, last day: 7 November 2026",
+              "date": "2026-11-04",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sullivan-fortner-trio_Aypbp8X"
-            },
-            {
-              "label": "Shirley Grimes - Plattentaufe",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/shirley-grimes-plattentaufe_A7eXCHK"
             },
             {
               "label": "Escort Trips on the DS “Spiez” & MS “Schilthorn”—Noon Departure from Thun",
               "detail": "Thunersee, Spiez — ongoing, last day: 8 November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
             },
             {
               "label": "moving moments",
               "detail": "Sporthalle Ebnit, Saanen — ongoing, last day: 29 November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
               "label": "Im Härz",
               "detail": "Bern — ongoing, last day: 8 November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
-            },
-            {
-              "label": "Lake Thun Play Ship",
-              "detail": "Thunersee, Thun — ongoing, last day: 14 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
-            },
-            {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne — ongoing, last day: 27 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
-            },
-            {
-              "label": "Selbstplanerkurs PV-Anlage e-wende",
-              "detail": "Bern — ongoing, last day: 5 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "BE",
@@ -279,76 +279,76 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "ZYSCHTIG - ZMORGE",
-              "detail": "Ref. Kirchgemeindehaus Spiez, Spiez",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zyschtig-zmorge-2/"
+              "label": "Rüeblimärt Aarau",
+              "detail": "Graben",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/carrot-market/"
             },
             {
-              "label": "Besuch Sternwarte Gurten",
-              "detail": "Gurten-Park im Grünen",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/besuch-sternwarte-gurten/"
+              "label": "LANGNAU MÄRIT im Chüechlihus",
+              "detail": "Langnau i.E.",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/langnau-maerit-im-chueechlihus-6/"
+            },
+            {
+              "label": "MITTENDRIN: Oli Kehrli \"Zwänzg Jahr unbedingt\"",
+              "detail": "Der Burgerspittel im Viererfeld",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mittendrin-oli-kehrli-zwaenzg-jahr-unbedingt_Av3UEpM"
+            },
+            {
+              "label": "Führungen hinter die Kulissen: Die schönsten Fossilien",
+              "detail": "Naturhistorisches Museum Bern, Bern",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fuehrungen-hinter-die-kulissen-die-schoensten-fossilien/"
+            },
+            {
+              "label": "Aynsley Lister - Special Guest: Nina Attal",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/aynsley-lister-special-guest-nina-attal_Amq6ay7"
+            },
+            {
+              "label": "ANIMITTWOCH: VAMPIRE HUNTER D: BLOODLUST",
+              "detail": "CineCamera",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/animittwoch-vampire-hunter-d-bloodlust_AU7nFGT"
             },
             {
               "label": "SULLIVAN FORTNER TRIO",
-              "detail": "Marians Jazzroom",
-              "date": "2026-11-03",
+              "detail": "Marians Jazzroom — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-04",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sullivan-fortner-trio_Aypbp8X"
-            },
-            {
-              "label": "Shirley Grimes - Plattentaufe",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/shirley-grimes-plattentaufe_A7eXCHK"
             },
             {
               "label": "Begleitfahrten DS «Spiez» & MS «Schilthorn» Mittagsfahrt ab Thun",
               "detail": "Thunersee, Spiez — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
             },
             {
               "label": "BeMo - Bewegte Momente",
               "detail": "Sporthalle Ebnit, Saanen — läuft, letzter Tag: 29. November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
               "label": "Im Härz",
               "detail": "Bern — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
-            },
-            {
-              "label": "Spieleschiff Thunersee",
-              "detail": "Thunersee, Thun — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
-            },
-            {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
-            },
-            {
-              "label": "Selbstplanerkurs PV-Anlage e-wende",
-              "detail": "Bern — läuft, letzter Tag: 5. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Bern: Nicht genehmigte Demonstrationen können zu Störungen führen.",
           "url": "/de/bern-artikel/bern-verkehr-kundgebung/",
-          "excerpt": "Bern meldet mögliche Straßensperrungen und Behinderungen am Sonntag, den 11.",
+          "excerpt": "Für Sonntag sind daher nicht einzelne Straßensperrungen als nützliche Information zu nennen, sondern vielmehr mögliche Änderungen im Stadtverkehr und im öffentlichen Nahverkehr.",
           "date": "2026-10-10T07:15:47.682Z"
         },
         {
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "BE",
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "ZYSCHTIG - ZMORGE",
-              "detail": "Ref. Kirchgemeindehaus Spiez, Spiez",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zyschtig-zmorge-2/"
+              "label": "Marché des carottes",
+              "detail": "Graben",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/carrot-market/"
             },
             {
-              "label": "Besuch Sternwarte Gurten",
-              "detail": "Gurten-Park im Grünen",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/besuch-sternwarte-gurten/"
+              "label": "LANGNAU MÄRIT im Chüechlihus",
+              "detail": "Langnau i.E.",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/langnau-maerit-im-chueechlihus-6/"
+            },
+            {
+              "label": "MITTENDRIN: Oli Kehrli \"Zwänzg Jahr unbedingt\"",
+              "detail": "Der Burgerspittel im Viererfeld",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mittendrin-oli-kehrli-zwaenzg-jahr-unbedingt_Av3UEpM"
+            },
+            {
+              "label": "Führungen hinter die Kulissen: Die schönsten Fossilien",
+              "detail": "Naturhistorisches Museum Bern, Bern",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fuehrungen-hinter-die-kulissen-die-schoensten-fossilien/"
+            },
+            {
+              "label": "Aynsley Lister - Special Guest: Nina Attal",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/aynsley-lister-special-guest-nina-attal_Amq6ay7"
+            },
+            {
+              "label": "ANIMITTWOCH: VAMPIRE HUNTER D: BLOODLUST",
+              "detail": "CineCamera",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/animittwoch-vampire-hunter-d-bloodlust_AU7nFGT"
             },
             {
               "label": "SULLIVAN FORTNER TRIO",
-              "detail": "Marians Jazzroom",
-              "date": "2026-11-03",
+              "detail": "Marians Jazzroom — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-04",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sullivan-fortner-trio_Aypbp8X"
-            },
-            {
-              "label": "Shirley Grimes - Plattentaufe",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/shirley-grimes-plattentaufe_A7eXCHK"
             },
             {
               "label": "Trajets d'accompagnement en train « Spiez » et en bateau « Schilthorn » : trajet de midi au départ de Thoune",
               "detail": "Thunersee, Spiez — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
             },
             {
               "label": "des moments mouvementés",
               "detail": "Sporthalle Ebnit, Saanen — en cours, dernier jour : 29 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
               "label": "Im Härz",
               "detail": "Bern — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
-            },
-            {
-              "label": "Bateau ludique du lac de Thoune",
-              "detail": "Thunersee, Thun — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
-            },
-            {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
-            },
-            {
-              "label": "Selbstplanerkurs PV-Anlage e-wende",
-              "detail": "Bern — en cours, dernier jour : 5 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

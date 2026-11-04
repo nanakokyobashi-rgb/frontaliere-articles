@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T14:36:40.036Z",
-  "contentHash": "55e908342ac2639c973b3fa092f21facd2f5efd77ee6510a2bb3e12cab7701fd",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "f79f67f22b8130baae2b909c14cdbc4bca0dc7ae637b8e0caa686f071a01642c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-03T01:41:39.720Z",
+      "updatedAt": "2026-11-03T16:44:04.086Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-03T19:43:34.090Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -61,16 +66,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-02T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-03T07:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-03T23:00:00.000Z"
             },
             {
@@ -87,17 +82,51 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-11-05T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-05T23:00:00.000Z"
+            },
+            {
+              "label": "Pharmacie du Museum",
+              "detail": "Genève, Genève",
+              "date": "2026-11-06T07:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-03T01:41:39.720Z"
+          "updatedAt": "2026-11-03T16:44:04.086Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "6 °C",
+              "detail": "oggi da 5 a 7 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
+              "date": "2026-11-03",
+              "url": "https://www.ge.ch/node/45272"
+            },
+            {
+              "label": "La licence portail santé remplacera les PASS/LAS dès la rentrée 2027",
+              "date": "2026-11-03",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18890"
+            },
             {
               "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
               "date": "2026-11-02",
@@ -117,26 +146,16 @@
               "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
               "date": "2026-10-30",
               "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
-            },
-            {
-              "label": "Le guichet de la capitainerie cantonale déménage !",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45379"
-            },
-            {
-              "label": "Appel à projets - Santé mentale des jeunes",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45359"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "HUG primo ospedale svizzero nel ranking Smart Hospitals 2027",
           "url": "/articoli-ginevra/hug-primo-ospedale-svizzero-2027/",
-          "excerpt": "Gli HUG sono 31° al mondo nel 2027 Primo ospedale svizzero della graduatoria 37 posizioni guadagnate rispetto al 2026 410 ospedali in 33 Paesi Classifica →",
+          "excerpt": "Il salto che caratterizza il risultato degli HUG è quantificato dalla stessa graduatoria: 37 posizioni guadagnate rispetto all’edizione 2026. Nel ranking 2027 di Newsweek e Statista, gli HUG occupano il 31° posto…",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
@@ -148,7 +167,7 @@
         {
           "title": "Accordo Ginevra-Francia per cure oncologiche pediatriche",
           "url": "/articoli-ginevra/accordo-cure-oncologiche-ginevra/",
-          "excerpt": "Accordo tra autorità ginevrine e francesi",
+          "excerpt": "Accordo tra autorità ginevrine e francesi.",
           "date": "2026-10-07T08:57:01.058Z"
         },
         {
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "GE",
@@ -248,16 +267,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-02T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-03T07:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-03T23:00:00.000Z"
             },
             {
@@ -274,17 +283,51 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-11-05T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-05T23:00:00.000Z"
+            },
+            {
+              "label": "Pharmacie du Museum",
+              "detail": "Genève, Genève",
+              "date": "2026-11-06T07:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-03T01:41:39.720Z"
+          "updatedAt": "2026-11-03T16:44:04.086Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "6 °C",
+              "detail": "today from 5 to 7 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
+              "date": "2026-11-03",
+              "url": "https://www.ge.ch/node/45272"
+            },
+            {
+              "label": "La licence portail santé remplacera les PASS/LAS dès la rentrée 2027",
+              "date": "2026-11-03",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18890"
+            },
             {
               "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
               "date": "2026-11-02",
@@ -304,32 +347,22 @@
               "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
               "date": "2026-10-30",
               "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
-            },
-            {
-              "label": "Le guichet de la capitainerie cantonale déménage !",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45379"
-            },
-            {
-              "label": "Appel à projets - Santé mentale des jeunes",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45359"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "HUG first Swiss hospital in the Smart Hospitals 2027 ranking",
           "url": "/en/geneva-articles/hug-first-swiss-hospital-2027/",
-          "excerpt": "HUG rank 31st in the world in 2027 First Swiss hospital in the ranking 37 positions gained compared with 2026 410 hospitals in 33 countries Ranking → Newsweek",
+          "excerpt": "The leap that characterizes HUG’s result is quantified by the same ranking: 37 places gained compared with the 2026 edition.",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
           "title": "UNIGE: mental health, October 5-10, 2026",
           "url": "/en/geneva-articles/unige-nature-mental-wellbeing/",
-          "excerpt": "Mental Health Week 2026 runs from October 5 to 10.",
+          "excerpt": "From October 5 to 10, 2026, UNIGE's Mental Health Week places the role of the body, movement and connection to oneself at the center of psychological balance.",
           "date": "2026-10-09T16:43:09.560Z"
         },
         {
@@ -391,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "GE",
@@ -430,16 +463,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-02T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-03T07:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-03T23:00:00.000Z"
             },
             {
@@ -456,17 +479,51 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-11-05T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-05T23:00:00.000Z"
+            },
+            {
+              "label": "Pharmacie du Museum",
+              "detail": "Genève, Genève",
+              "date": "2026-11-06T07:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-03T01:41:39.720Z"
+          "updatedAt": "2026-11-03T16:44:04.086Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "6 °C",
+              "detail": "heute 5 bis 7 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
+              "date": "2026-11-03",
+              "url": "https://www.ge.ch/node/45272"
+            },
+            {
+              "label": "La licence portail santé remplacera les PASS/LAS dès la rentrée 2027",
+              "date": "2026-11-03",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18890"
+            },
             {
               "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
               "date": "2026-11-02",
@@ -486,32 +543,22 @@
               "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
               "date": "2026-10-30",
               "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
-            },
-            {
-              "label": "Le guichet de la capitainerie cantonale déménage !",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45379"
-            },
-            {
-              "label": "Appel à projets - Santé mentale des jeunes",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45359"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "HUG erstes Schweizer Spital im Ranking Smart Hospitals 2027",
           "url": "/de/genf-artikel/hug-erster-schweizer-krankenhaus-2027/",
-          "excerpt": "Die HUG liegen 2027 weltweit auf Rang 31° Erstes Schweizer Spital der Rangliste Gegenüber 2026 um 37 Plätze verbessert 410 Spitäler in 33 Ländern Rangliste →",
+          "excerpt": "Im Ranking 2027 von Newsweek und Statista belegen die HUG weltweit den 31. Platz und sind damit das bestplatzierte Krankenhaus der Schweiz.",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
           "title": "UNIGE: psychische Gesundheit, 5.–10. Oktober 2026",
           "url": "/de/genf-artikel/unige-natur-psychisches-wohlbefinden/",
-          "excerpt": "Die Woche der psychischen Gesundheit 2026 findet vom 5.",
+          "excerpt": "Vom 5. bis 10. Oktober 2026 stellt die Woche der psychischen Gesundheit von UNIGE die Rolle des Körpers, der Bewegung und der Verbindung zu sich selbst für das psychische Gleichgewicht in den Mittelpunkt.",
           "date": "2026-10-09T16:43:09.560Z"
         },
         {
@@ -573,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "GE",
@@ -612,16 +659,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-02T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-03T07:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-03T23:00:00.000Z"
             },
             {
@@ -638,17 +675,51 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-11-05T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-05T23:00:00.000Z"
+            },
+            {
+              "label": "Pharmacie du Museum",
+              "detail": "Genève, Genève",
+              "date": "2026-11-06T07:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-03T01:41:39.720Z"
+          "updatedAt": "2026-11-03T16:44:04.086Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 5 à 7 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
+              "date": "2026-11-03",
+              "url": "https://www.ge.ch/node/45272"
+            },
+            {
+              "label": "La licence portail santé remplacera les PASS/LAS dès la rentrée 2027",
+              "date": "2026-11-03",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18890"
+            },
             {
               "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
               "date": "2026-11-02",
@@ -668,26 +739,16 @@
               "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
               "date": "2026-10-30",
               "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
-            },
-            {
-              "label": "Le guichet de la capitainerie cantonale déménage !",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45379"
-            },
-            {
-              "label": "Appel à projets - Santé mentale des jeunes",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45359"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "HUG, premier hôpital suisse du classement Smart Hospitals 2027",
           "url": "/fr/articles-geneve/hug-premier-hopital-suisse-2027/",
-          "excerpt": "Les HUG sont 31e au monde en 2027 Premier hôpital suisse du classement 37 places gagnées par rapport à 2026 410 hôpitaux dans 33 pays Classement → Newsweek",
+          "excerpt": "Le bond qui caractérise le résultat des HUG est quantifié par le même classement : 37 places gagnées par rapport à l’édition 2026.",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
@@ -699,7 +760,7 @@
         {
           "title": "Accord Genève-France pour les soins oncologiques pédiatriques",
           "url": "/fr/articles-geneve/cooperation-transfrontaliere-cancer-geneve/",
-          "excerpt": "Accord entre les autorités genevoises et françaises",
+          "excerpt": "Accord entre les autorités genevoises et françaises.",
           "date": "2026-10-07T08:57:01.058Z"
         },
         {
@@ -752,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

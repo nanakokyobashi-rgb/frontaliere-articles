@@ -4,25 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vd::https://www.ledauphine.com/economie/2026/10/31/pendant-une-annee-le-col-de-la-croisette-va-se-refaire-une-beaute": {
-      "section": "canton-vd",
-      "ts": 1793499164268
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
-      "section": "canton-vd",
-      "ts": 1793586735156
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/declaration-dris-tou-couple-frontalier": {
-      "section": "canton-vd",
-      "ts": 1793586743156
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/retraite-frontalier-polypensionne": {
-      "section": "canton-vd",
-      "ts": 1793586977991
-    },
     "canton-vd::https://www.rts.ch/info/regions/vaud/2026/article/vaud-et-neuchatel-lancent-un-numero-unique-pour-la-sante-29402837.html?rts_source=rss_t": {
       "section": "canton-vd",
       "ts": 1793661790249
+    },
+    "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
+      "section": "canton-vd",
+      "ts": 1793770243578
     }
   }
 }

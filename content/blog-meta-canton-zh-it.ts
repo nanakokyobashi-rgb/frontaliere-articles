@@ -34,7 +34,7 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.crisi-resilienza-zurigo.excerpt': 'Le settimane della resilienza di Zurigo affrontano due scenari: informazioni senza elettricità e internet e 9 litri d\'acqua per tre giorni.',
     'blog.article.crisi-resilienza-zurigo.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.vbz-tram-50-51-cambio.title': 'Dal 13 dicembre soppressi i tram 50 e 51',
-    'blog.article.vbz-tram-50-51-cambio.excerpt': 'Dal 13 dicembre spariscono le linee 50 e 51 I tram 4, 11, 13, 14 e 17 tornano sul Bahnhofquai La linea 83 viaggia ogni giorno fino alle 22 La linea notturna N8',
+    'blog.article.vbz-tram-50-51-cambio.excerpt': 'Il 13 dicembre è previsto il cambio d\'orario delle VBZ. Come riferisce tsri.ch, con la conclusione dei lavori al Bahnhofquai le linee tram 50 e 51 saranno soppresse e saranno aboliti anche i cambi di linea intorno alla stazione centrale.',
     'blog.article.vbz-tram-50-51-cambio.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.title': 'Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi',
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.excerpt': 'Il Canton Zurigo non presenterà la Standesinitiative sul congedo parentale: sinistra e partiti di centro, inizialmente favorevoli, non hanno trovato un accordo.',
@@ -70,7 +70,7 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.forchstrasse-sicurezza-zollikon.excerpt': 'Il Canton Zurigo pianifica quasi 1,7 km tra Zumikon e Zollikerberg: CHF 24,2 milioni, tre sottopassi senza barriere e avvio a fine 2028 se il Kantonsrat approva.',
     'blog.article.forchstrasse-sicurezza-zollikon.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.zurigo-strategia-energetica-2026.title': 'Zurigo adotta la Strategia energetica 2026',
-    'blog.article.zurigo-strategia-energetica-2026.excerpt': 'Strategia e pianificazione energetica 2026 adottate dal Regierungsrat Calore: possibile rinuncia completa ai fossili entro il 2050 Estate 2050: oltre l\'80%',
+    'blog.article.zurigo-strategia-energetica-2026.excerpt': 'Il Regierungsrat del Cantone di Zurigo ha adottato la strategia energetica e la pianificazione energetica 2026.',
     'blog.article.zurigo-strategia-energetica-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 

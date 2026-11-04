@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "fisco",
-  "updatedAt": "2026-10-27T18:13:24.736Z",
-  "contentHash": "d417eef76f11a842cde27493635779f252c089656fd17ac9fe683a0841906acc",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "499b88d16b390cce9b933c4342096d6ae4f597f11adcf2aaba80c3622b0a8234",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T11:01:59.897Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -140,7 +140,7 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -220,7 +220,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-27T18:13:24.736Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "SG",
@@ -338,7 +338,7 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -418,7 +418,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-27T18:13:24.736Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "SG",
@@ -536,7 +536,7 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -555,7 +555,7 @@
         {
           "title": "Aufhebung des Reglements Stadtfonds und Genehmigung des Steuerfusses 2026 in Wil",
           "url": "/de/st-gallen-artikel/aufhebung-des-reglements-stadtfonds-und-genehmigung-des-steuerfusses-2026-in-wil/",
-          "excerpt": "Das Stadtparlament hat das Reglement Stadtfonds am 27.",
+          "excerpt": "Am 27. August 2026 beschloss das Stadtparlament von Wil, das Reglement über den Stadtfonds, den städtischen Fonds zur Stärkung der Attraktivität von Wil als Standort, aufzuheben.",
           "date": "2026-10-24T08:43:34.169Z"
         },
         {
@@ -616,7 +616,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-27T18:13:24.736Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "SG",
@@ -734,7 +734,7 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -814,7 +814,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-27T18:13:24.736Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }
