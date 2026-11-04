@@ -6843,8 +6843,8 @@
       "mode": "identical",
       "reason": "Fingerprint di recovery, Ads, Partnerize e Meta Pixel che lega gli snapshot byte-exact alle sorgenti. La proiezione esclude i contenuti ma verifica nomi e SHA-256; i test host confrontano i byte trasportati e il contratto prima della pubblicazione.",
       "baseline": {
-        "site": "0b557777cff8a62c",
-        "corpus": "0b557777cff8a62c",
+        "site": "cc5086bbe13e48f6",
+        "corpus": "cc5086bbe13e48f6",
         "alignedAt": "2026-11-04"
       }
     },
