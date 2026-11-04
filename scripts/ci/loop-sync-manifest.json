@@ -4161,7 +4161,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura. scalarFingerprint confronta i 23 scalari authoritative; il digest adb1a692… include lo snippet Meta Pixel content-addressed, il cui loader contatta Meta solo dopo consenso pubblicitario esplicito e si blocca sui documenti sensibili, senza fallback noscript. AD_RECOVERY_FILENAME resta allineato al sorgente; sono preservati gli altri comportamenti di recovery, CMP, analytics e SEO gia' trasportati. Gli slot statici avvolgono l'elemento Google in un host first-party per il fallback creativo Firebase, senza cambiare il nodo AdSense o Auto Ads.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura. scalarFingerprint confronta i 23 scalari authoritative; il digest f556dd1f… include lo snippet Meta Pixel content-addressed, il cui loader contatta Meta solo dopo consenso pubblicitario esplicito e si blocca sui documenti sensibili, senza fallback noscript. AD_RECOVERY_FILENAME resta allineato al sorgente; sono preservati gli altri comportamenti di recovery, CMP, analytics e SEO gia' trasportati. Gli slot statici avvolgono l'elemento Google in un host first-party per il fallback creativo Firebase, senza cambiare il nodo AdSense o Auto Ads.",
       "baseline": {
         "site": "c9f803f4645a9ab0",
         "corpus": "598612b34529c6c5",
@@ -4171,7 +4171,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 23,
-        "sha256": "adb1a6923bea1285c19969b8acb6678d728b68147b20439b51bc3c83b1e39354"
+        "sha256": "f556dd1f680e7bfe6ea40f5b1d586108ea8673a74ef9d2eab824bf41188e21e9"
       }
     },
     {
