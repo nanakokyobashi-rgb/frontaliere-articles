@@ -3449,7 +3449,7 @@
       "reason": "Adattatore del contratto Trends-to-News usato dal generatore di articoli nel corpus; il sito non ha l'entrypoint create-article e non necessita di questo helper.",
       "baseline": {
         "site": null,
-        "corpus": "b26251e4849203a7",
+        "corpus": "57afbc499b2bb741",
         "alignedAt": "2026-11-04"
       }
     },
