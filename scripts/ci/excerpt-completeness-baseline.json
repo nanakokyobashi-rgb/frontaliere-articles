@@ -2324,6 +2324,18 @@
       "locale": "it",
       "id": "autostrada-a9-chiude-de-notti-2026",
       "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "infermieri-osc-sindacati-stipendi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "infermieri-osc-sindacati-stipendi",
+      "field": "structuredData.description"
     }
   ],
   "entries": [
@@ -3603,18 +3615,6 @@
       "file": "content/seo/seo-blog-5.ts",
       "locale": "it",
       "id": "indagine-disparita-salariali-frontalieri",
-      "field": "structuredData.description"
-    },
-    {
-      "file": "content/seo/seo-blog-5.ts",
-      "locale": "it",
-      "id": "infermieri-osc-sindacati-stipendi",
-      "field": "description"
-    },
-    {
-      "file": "content/seo/seo-blog-5.ts",
-      "locale": "it",
-      "id": "infermieri-osc-sindacati-stipendi",
       "field": "structuredData.description"
     },
     {

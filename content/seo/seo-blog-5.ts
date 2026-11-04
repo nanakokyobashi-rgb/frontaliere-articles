@@ -113876,7 +113876,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-infermieri-osc-sindacati-stipendi': {
     title: 'Infermieri Osc e sindacati chiedono sblocco stipendi',
-    description: 'La riclassificazione Osc è ferma da anni 2019: classe 4→5 per infermieri, 5→6 per specialità Aumenti annui da 5\'159 a 8\'941 franchi Assemblea il 10',
+    description: 'Riclassificazione Osc ferma dal 2019: classe 4→5 per gli infermieri, 5→6 per le specialità, aumenti annui da 5\'159 a 8\'941 franchi.',
     keywords: 'frontalieri, ticino, svizzera, italia, infermieri, sindacati, chiedono, sblocco',
     ogTitle: 'Infermieri Osc chiedono sblocco stipendi',
     ogDescription: 'Di fronte al blocco della riclassificazione e all\'ennesimo rifiuto, i sindacati e la Commissione del personale hanno dato appuntamento al personale Osc a Mendrisio, alle 14.30 di martedì 10 novembre, per un\'assemblea.',
@@ -113885,7 +113885,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Infermieri Osc e sindacati chiedono sblocco stipendi",
-      "description": "La riclassificazione Osc è ferma da anni 2019: classe 4→5 per infermieri, 5→6 per specialità Aumenti annui da 5'159 a 8'941 franchi Assemblea il 10",
+      "description": "Riclassificazione Osc ferma dal 2019: classe 4→5 per gli infermieri, 5→6 per le specialità, aumenti annui da 5'159 a 8'941 franchi.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
