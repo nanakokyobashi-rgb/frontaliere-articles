@@ -2084,9 +2084,12 @@ const RUN_REPORT = {
   poolSize: 0,
   // Phase 3 — proven/discovery pool dispatch.
   // _pool ∈ {'proven','discovery','evergreen-fallback'}; _pool_source is the
-  // discovery sub-source ('orphan'|'suggest'|'news') or news-scan domain.
+  // discovery sub-source ('orphan'|'suggest'|'news'|'trends') or news-scan domain.
   pool: null,
   poolSource: null,
+  // Durable source attribution for signal-led discovery articles. Trends is a
+  // demand signal; the separate evidence fields identify the article source.
+  discoveryAttribution: null,
   poolSlotKind: null,
   poolCounterValue: null,
   poolCurrentQuota: null,
@@ -18129,7 +18132,7 @@ async function main() {
         const pool = await _buildDiscoveryPool(evidenceForDiscovery, {
           provenHeadlines: provenStrings,
         });
-        console.error(`DISCOVERY_POOL_BUILD orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} postDedup=${pool.postDedupCount}`);
+        console.error(`DISCOVERY_POOL_BUILD orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${pool.perSource.trends} trendSignals=${pool.perSource.trendSignals} postDedup=${pool.postDedupCount}`);
         _discoveryHeadlines = _discoveryCandidatesToHeadlines(pool.candidates);
       } catch (err) {
         console.error(`⚠️  Discovery pool build failed: ${err?.message || err}`);
@@ -18515,6 +18518,24 @@ async function main() {
               : (chosen?.source || 'news-scan');
             RUN_REPORT.pool = _pickedPool;
             RUN_REPORT.poolSource = _pickedPoolSource;
+            RUN_REPORT.discoveryAttribution = null;
+            if (chosen?._discoveryCandidate?.meta?.signalProvider) {
+              const candidate = chosen._discoveryCandidate;
+              const meta = candidate.meta || {};
+              RUN_REPORT.discoveryAttribution = {
+                candidateId: chosen._discoveryId || null,
+                source: candidate.source || null,
+                signalProvider: meta.signalProvider,
+                signalHeadline: meta.signalHeadline || candidate.headline || null,
+                signalCollectedAt: meta.signalCollectedAt || null,
+                evidenceProvider: meta.evidenceProvider || null,
+                evidenceUrl: meta.evidenceUrl || candidate.url || null,
+                resolvedSourceUrl: null,
+                evidenceHeadline: meta.evidenceHeadline || null,
+                evidencePublisher: meta.evidencePublisher || null,
+                evidencePublishedAt: meta.evidencePublishedAt || null,
+              };
+            }
             _persistRankerStateOnSuccess = () => {
               try {
                 if (_pickedCluster && _todayPicksState.picksByCluster) {
@@ -18559,6 +18580,7 @@ async function main() {
                       cluster: _pickedCluster || null,
                       _pool: _pickedPool,
                       _pool_source: _pickedPoolSource,
+                      _discovery_attribution: RUN_REPORT.discoveryAttribution,
                       _score_breakdown: _pickedScore || null,
                     };
                     write(sidecarPath, `${JSON.stringify(payload, null, 2)}\n`);
@@ -18623,6 +18645,32 @@ async function main() {
               console.error(`   🔓 Google News decodificata → fonte reale: ${realUrl.slice(0, 80)}`);
               url = realUrl;
               chosen = { ...chosen, url: realUrl, _resolvedFromGoogleNewsRss: chosen.url };
+            }
+
+            // Trend-backed candidates require a secure publisher URL after
+            // Google News wrapper resolution. The RSS wrapper itself being
+            // HTTPS is not sufficient evidence that its destination is.
+            if (chosen?._discoveryCandidate?.meta?.signalProvider === 'google-trends') {
+              let resolvedPublisherUrlIsHttps = false;
+              try {
+                const resolvedPublisherUrl = new URL(url);
+                resolvedPublisherUrlIsHttps = resolvedPublisherUrl.protocol === 'https:'
+                  && Boolean(resolvedPublisherUrl.hostname)
+                  && !resolvedPublisherUrl.username
+                  && !resolvedPublisherUrl.password;
+              } catch {
+                resolvedPublisherUrlIsHttps = false;
+              }
+              if (!resolvedPublisherUrlIsHttps) {
+                RUN_REPORT.notes.push('Trend-backed source rejected: resolved publisher URL is not HTTPS');
+                console.error('   ⏭️  Fonte Trends ignorata: URL dell’editore non HTTPS dopo la risoluzione Google News');
+                attempt--;
+                continue;
+              }
+              if (RUN_REPORT.discoveryAttribution?.candidateId === chosen._discoveryId) {
+                RUN_REPORT.discoveryAttribution.resolvedSourceUrl = url;
+              }
+              RUN_REPORT.selectedUrl = url;
             }
 
             // Attempt the full article generation + duplicate check
@@ -18930,6 +18978,7 @@ async function main() {
             : PRIORITY_EVERGREEN_TOPICS_SVIZZERA.includes(topic);
           RUN_REPORT.selectedArticleType = isStaticTopic ? 'evergreen_static' : 'evergreen_dynamic';
           RUN_REPORT.selectedSource = 'evergreen';
+          RUN_REPORT.discoveryAttribution = null;
           RUN_REPORT.selectedUrl = `evergreen://${encodeURIComponent(topic.keyword)}`;
           console.error(`📚 Evergreen tentativo ${attempt}: keyword "${topic.keyword}"`);
           console.error(`   Angolo: ${topic.angle}\n`);
