@@ -4566,7 +4566,7 @@ const BLOG_SEO_METADATA_2: Record<string, SEOMetadata> = {
  description: 'Il parco di Melide inaugura la stagione con una novità assoluta: il tunnel centrale diventa una galleria mineraria immersiva dedicata alla storia dell\'oro del M',
  keywords: 'frontalieri, ticino, svizzera, italia, swissminiatur, nasce, miniera, sessa',
  ogTitle: 'Swissminiatur 2026: nasce la miniera d\'oro di Sessa',
- ogDescription: 'Il parco di Melide inaugura la stagione con una novità assoluta: il tunnel centrale diventa una galleria mineraria immersiva dedicata alla storia dell\'oro del M',
+ ogDescription: 'Il parco di Melide inaugura la stagione con una novità assoluta: il tunnel centrale diventa una galleria mineraria immersiva dedicata alla storia dell\'oro del Malcantone.',
  canonicalPath: '/articoli-frontaliere/swissminiatur-miniera-sessa-2026/',
  structuredData: {
  "@context": "https://schema.org",

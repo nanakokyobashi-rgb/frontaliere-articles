@@ -193,6 +193,10 @@ export function buildSeoEntry(data, {
     fieldPrefix: 'seo.',
     id: data.id,
     locale: 'it',
+    // This builder is also used to compare and re-emit legacy corpus entries;
+    // newly generated records pass through repairGeneratedArticleDescriptions.
+    requireTerminalPunctuation: false,
+    requireNonEmpty: false,
   });
   assertSeoDescriptionMinimum(data.seo.description, {
     id: data.id,

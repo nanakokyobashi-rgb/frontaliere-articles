@@ -353,6 +353,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sp-uri-no-finanziamento-avs': {
+    title: 'SP Uri: no di misura al finanziamento della 13ª AVS',
+    description: 'SP Uri: no di misura al finanziamento della 13ª AVS dopo una discussione vivace. Il riferimento AVS 2026 indica gli importi mensili.',
+    keywords: 'frontalieri, ticino, svizzera, italia, misura, finanziamento, dopo, discussione',
+    ogTitle: 'SP Uri: no di misura al finanziamento della 13ª AVS',
+    ogDescription: 'Il voto della SP Uri sulla 13ª rendita AVS si è chiuso con un no di misura dopo una discussione vivace. La tabella AVS 2026 indica rendite mensili tra CHF 1\'260 e CHF 2\'520, offrendo un riferimento numerico.',
+    canonicalPath: '/articoli-svitto/sp-uri-no-finanziamento-avs/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "SP Uri: no di misura al finanziamento della 13ª AVS",
+      "description": "SP Uri: no di misura al finanziamento della 13ª AVS dopo una discussione vivace. Il riferimento AVS 2026 indica gli importi mensili.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sp-uri-no-finanziamento-avs.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T23:23:55+00:00",
+      "dateModified": "2026-11-03T23:23:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svitto/sp-uri-no-finanziamento-avs/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

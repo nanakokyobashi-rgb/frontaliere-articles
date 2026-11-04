@@ -389,7 +389,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-gottardo-quadri-cupra-berna': {
     title: 'Gottardo: quadri interroga Berna sulla CUPRA | Frontaliere Ticino',
-    description: 'Le code del San Gottardo ricadono sull\'Alta Leventina Quadri interroga il Consiglio federale sulla corsia CUPRA La CUPRA è definitiva dal 2026 e ha gestione',
+    description: 'La congestione del San Gottardo continua a ripercuotersi sulla viabilità dell’Alta Leventina.',
     keywords: 'frontalieri, ticino, svizzera, italia, gottardo, quadri, interroga, berna',
     ogTitle: 'Gottardo: Quadri interroga Berna sulla CUPRA',
     ogDescription: 'Con un’interpellanza sulla gestione della corsia CUPRA, il consigliere nazionale della Lega dei Ticinesi Lorenzo Quadri sottopone la questione al Consiglio federale.',
@@ -398,7 +398,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Gottardo: quadri interroga Berna sulla CUPRA",
-      "description": "Le code del San Gottardo ricadono sull'Alta Leventina Quadri interroga il Consiglio federale sulla corsia CUPRA La CUPRA è definitiva dal 2026 e ha gestione",
+      "description": "La congestione del San Gottardo continua a ripercuotersi sulla viabilità dell’Alta Leventina.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

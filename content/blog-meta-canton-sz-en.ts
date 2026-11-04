@@ -30,6 +30,9 @@ const blogMetaCantonSzEn: Record<string, string> = {
     'blog.article.schuebelbach-aliquote-2027.title': 'Schübelbach confirms tax rates for 2027',
     'blog.article.schuebelbach-aliquote-2027.excerpt': 'Schübelbach\'s 2027 budget provides for 42,97 million in expenditure, 42,69 million in revenue and a deficit of 285.200 francs.',
     'blog.article.schuebelbach-aliquote-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sp-uri-no-finanziamento-avs.title': 'SP Uri: no to the measure to finance the 13th AVS',
+    'blog.article.sp-uri-no-finanziamento-avs.excerpt': 'SP Uri: no to the measure to finance the 13th AHV pension after a lively discussion.',
+    'blog.article.sp-uri-no-finanziamento-avs.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSzEn;

@@ -16371,7 +16371,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-littizzetto-critica-svizzera-crans-montana': {
     title: 'Littizzetto critica fatture Svizzera a feriti | Frontaliere Ticino',
-    description: 'La comica italiana Luciana Littizzetto critica la Svizzera per le fatture ospedaliere ai feriti dell\'incendio di Crans Montana, sollevando polemiche e luoghi',
+    description: 'La comica italiana critica la Svizzera per le fatture ospedaliere ai feriti dell\'incendio di Crans Montana, sollevando polemiche e luoghi comuni.',
     keywords: 'frontalieri, ticino, svizzera, italia, littizzetto, critica, fatture, feriti',
     ogTitle: 'Littizzetto critica la Svizzera per le fatture ai feriti di Crans Montana',
     ogDescription: 'La polemica sollevata da Luciana Littizzetto contro la Svizzera per le fatture ospedaliere inviate alle famiglie dei giovani ustionati nell\'incendio di Crans Montana ha suscitato numerose reazioni.',
@@ -16380,7 +16380,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Littizzetto critica fatture Svizzera a feriti",
-      "description": "La comica italiana Luciana Littizzetto critica la Svizzera per le fatture ospedaliere ai feriti dell'incendio di Crans Montana, sollevando polemiche e luoghi",
+      "description": "La comica italiana critica la Svizzera per le fatture ospedaliere ai feriti dell'incendio di Crans Montana, sollevando polemiche e luoghi comuni.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/littizzetto-critica-svizzera-crans-montana.webp`,
         "width": 1200,
@@ -34856,16 +34856,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-fedeli-chiedono-chiarezza-diocesi-2026': {
     title: 'Fedeli chiedono chiarezza alla Diocesi di Lugano',
-    description: 'Il gruppo promotore della petizione 2025 chiede all\'Amministratore Apostolico di intervenire sull\'Azione Cattolica Ticinese per chiarezza sulla veglia del 22',
+    description: 'Il gruppo promotore della petizione 2025 chiede all\'Amministratore Apostolico di intervenire sull\'Azione Cattolica Ticinese.',
     keywords: 'frontalieri, ticino, svizzera, italia, fedeli, chiedono, chiarezza, alla',
     ogTitle: 'Fedeli chiedono chiarezza alla Diocesi di Lugano',
-    ogDescription: 'Il gruppo promotore della petizione 2025 chiede all\'Amministratore Apostolico di intervenire sull\'Azione Cattolica Ticinese per chiarezza sulla veglia del 22',
+    ogDescription: 'Il gruppo promotore della petizione 2025 chiede all\'Amministratore Apostolico di intervenire sull\'Azione Cattolica Ticinese.',
     canonicalPath: '/articoli-frontaliere/fedeli-chiedono-chiarezza-diocesi-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Fedeli chiedono chiarezza alla Diocesi di Lugano",
-      "description": "Il gruppo promotore della petizione 2025 chiede all'Amministratore Apostolico di intervenire sull'Azione Cattolica Ticinese per chiarezza sulla veglia del 22",
+      "description": "Il gruppo promotore della petizione 2025 chiede all'Amministratore Apostolico di intervenire sull'Azione Cattolica Ticinese.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -51086,7 +51086,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-vivere-como-lavorare-ticino-frontaliere': {
     title: 'Vivere a Como e lavorare in Ticino: guida pratica per frontalieri',
-    description: 'Guida completa per frontalieri Como-Ticino: tempi di percorrenza reali, confronto stipendi/costo della vita, quartieri ottimali e scelta treno vs auto. Calcola',
+    description: 'Tempi di percorrenza, costo della vita a confronto, quartieri strategici e pro/contro di treno vs auto.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, como, lavorare, pratica',
     ogTitle: 'Vivere a Como e lavorare in Ticino: la guida definitiva 2024',
     ogDescription: 'Tempi di percorrenza, costi nascosti, tassazione e quartieri strategici. Tutto ciò che devi sapere prima di diventare frontaliere Como-Ticino.',
@@ -51095,7 +51095,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Vivere a Como e lavorare in Ticino: guida pratica per frontalieri",
-      "description": "Guida completa per frontalieri Como-Ticino: tempi di percorrenza reali, confronto stipendi/costo della vita, quartieri ottimali e scelta treno vs auto. Calcola",
+      "description": "Tempi di percorrenza, costo della vita a confronto, quartieri strategici e pro/contro di treno vs auto.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -92838,7 +92838,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Lorenzo Quadri presenta una mozione al Consiglio federale per ridurre i tempi di ripristino dopo incidenti sulla A2 a Mezzovico, dove la chiusura è durata oltre.',
     keywords: 'frontalieri, ticino, svizzera, italia, ridurre, tempi, ripristino, dopo',
     ogTitle: 'Ridurre i tempi di ripristino dopo incidente A2 Mezzovico',
-    ogDescription: 'La mozione di Lorenzo Quadri sollecita il Consiglio federale a esaminare e accorciare i tempi di ripristino della viabilità dopo incidenti autostradali, citando il caso della A2 a Mezzovico con chiusura oltre cinque ore e colonne fino a 13',
+    ogDescription: 'Lorenzo Quadri (Lega) presenta mozione per ridurre i tempi di ripristino dopo l\'incidente sulla A2 a Mezzovico: chiusura oltre 5 ore, code fino a 13 km.',
     canonicalPath: '/articoli-frontaliere/ridurre-tempi-ripristino-a2-mezzovico',
     structuredData: {
       "@context": "https://schema.org",
@@ -93644,7 +93644,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-aggressioni-notte-lugano': {
     title: 'Aggressioni e notti violente: giovani ticinesi raccontano',
-    description: 'Il 1° agosto 2025 un 19enne è stato pestato sotto la pensilina di Mario Botta a Lugano; nel 2024 la magistratura minorile ha aperto 912 incarti (+18%); Taha, 24',
+    description: 'A Lugano, la notte del 1° agosto 2025 ha visto un diciannovenne bellinzonese vittima di un brutale pestaggio sotto la pensilina di Mario Botta.',
     keywords: 'frontalieri, ticino, svizzera, italia, aggressioni, notti, violente, giovani',
     ogTitle: 'Aggressioni e notti violente: giovani ticinesi raccontano',
     ogDescription: 'A Lugano, la notte del 1° agosto 2025 ha visto un diciannovenne bellinzonese vittima di un brutale pestaggio sotto la pensilina di Mario Botta. Il episodio si inserisce in un contesto di crescente violenza giovanile: nel 2024 la magistratura minorile.',
@@ -93653,7 +93653,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Aggressioni e notti violente: giovani ticinesi raccontano",
-      "description": "Il 1° agosto 2025 un 19enne è stato pestato sotto la pensilina di Mario Botta a Lugano; nel 2024 la magistratura minorile ha aperto 912 incarti (+18%); Taha, 24",
+      "description": "A Lugano, la notte del 1° agosto 2025 ha visto un diciannovenne bellinzonese vittima di un brutale pestaggio sotto la pensilina di Mario Botta.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -102491,13 +102491,13 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'A Cantello la compagnia Tutti in Scena porta in dialetto Quei giargianes da giappunes, con spettacoli il 10 e il 18 ottobre e ingresso gratuito.',
     keywords: 'frontalieri, ticino, svizzera, italia, cantello, torna, teatro, dialettale',
     ogTitle: 'Cantello torna il teatro dialettale “Quei giargianes da giappunes”',
-    ogDescription: 'Due date: 10 ottobre alle 21 e 18 ottobre alle 15',
+    ogDescription: 'A Cantello la compagnia Tutti in Scena porta in dialetto Quei giargianes da giappunes, con spettacoli il 10 e il 18 ottobre e ingresso gratuito.',
     canonicalPath: '/articoli-frontaliere/cantello-teatro-dialettale-ottobre-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Cantello torna il teatro dialettale “Quei giargianes da giappunes”",
-"description": "Due date: 10 ottobre alle 21 e 18 ottobre alle 15",
+"description": "A Cantello la compagnia Tutti in Scena porta in dialetto Quei giargianes da giappunes, con spettacoli il 10 e il 18 ottobre e ingresso gratuito.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -103580,7 +103580,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-cardano-al-campo-minorenne-arresto': {
     title: 'Cardano al Campo: minorenne arrestato con hashish',
-    description: 'Fermato a Cardano al Campo un minorenne in scooter Aveva sette dosi di hashish, per poco più di 11 grammi In casa trovati altri 88,3 grammi di hashish',
+    description: 'Dopo il fermo e la perquisizione, i militari hanno svolto una ricerca nella casa del minorenne.',
     keywords: 'frontalieri, ticino, svizzera, italia, cardano, campo, minorenne, arrestato',
     ogTitle: 'Cardano al Campo: minorenne arrestato con hashish',
     ogDescription: 'Dopo il fermo e la perquisizione, i militari hanno svolto una ricerca nella casa del minorenne. Qui hanno trovato e sequestrato altri 88,3 grammi di hashish, una quantità distinta da quella rinvenuta addosso al giovane durante il posto di blocco.',
@@ -103589,7 +103589,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Cardano al Campo: minorenne arrestato con hashish",
-      "description": "Fermato a Cardano al Campo un minorenne in scooter Aveva sette dosi di hashish, per poco più di 11 grammi In casa trovati altri 88,3 grammi di hashish",
+      "description": "Dopo il fermo e la perquisizione, i militari hanno svolto una ricerca nella casa del minorenne.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

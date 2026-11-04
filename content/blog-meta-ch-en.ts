@@ -8675,6 +8675,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.voto-iva-13esima-avs-novembre.title': '13th AVS pension: VAT increase put to a vote on November 29',
     'blog.article.voto-iva-13esima-avs-novembre.excerpt': 'On November 29, voters will vote on the implementation of the measure introducing the 13th AVS pension payment.',
     'blog.article.voto-iva-13esima-avs-novembre.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cdf-critica-armasuisse-immobili.title': 'CDF criticizes Armasuisse Immobili for delays in renovations',
+    'blog.article.cdf-critica-armasuisse-immobili.excerpt': 'Armasuisse Immobili is in fact unable to determine either the troops’ actual needs or the necessary investment with sufficient precision.',
+    'blog.article.cdf-critica-armasuisse-immobili.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

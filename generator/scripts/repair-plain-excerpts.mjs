@@ -25,6 +25,7 @@ import {
   maximumDescriptionLength,
   minimumDescriptionLength,
   repairExcerptFromOriginal,
+  selectCompleteExcerptSource,
 } from './lib/article-excerpt.mjs';
 import {
   decodeTypeScriptString,
@@ -176,6 +177,22 @@ function repairValue(value, context, recordSources = []) {
       ? 'article-body'
       : strategy === 'd' ? 'terminal-punctuation' : null;
 
+  if (strategy === 'c') {
+    for (const recordSource of recordSources) {
+      if (recordSource.file === context.file && recordSource.field === context.field) continue;
+      const candidate = selectCompleteExcerptSource(recordSource.value, {
+        locale: context.locale,
+        maxLength,
+        minLength,
+        body,
+      });
+      if (candidate === null) continue;
+      repaired = candidate;
+      strategy = 'b';
+      source = 'sibling-field';
+      break;
+    }
+  }
   const changed = repaired !== value;
   if (changed) {
     assertPlainExcerpt(repaired, { ...context, body });

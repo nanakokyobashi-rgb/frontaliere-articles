@@ -8575,7 +8575,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Guida pratica al permesso G 2026: come presentare domanda, costi 65 CHF, documenti, validità 5 anni e rinnovo presso Migrationsamt.',
     keywords: 'frontalieri, ticino, svizzera, italia, g-bewilligung, antrag, completa, costi',
     ogTitle: 'G-Bewilligung Antrag 2026: costi, rinnovo, documenti',
-    ogDescription: '',
+    ogDescription: 'Guida pratica al permesso G 2026: come presentare domanda, costi 65 CHF, documenti, validità 5 anni e rinnovo presso Migrationsamt.',
     canonicalPath: '/articoli-svizzera/g-bewilligung-antrag-2026-step/',
     structuredData: {
       "@context": "https://schema.org",
@@ -18450,7 +18450,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il personale di terra della Swiss approva il nuovo contratto collettivo di lavoro (CCL) che prevede una riduzione dell\'orario di lavoro settimanale da 42 a 40',
     keywords: 'frontalieri, ticino, svizzera, italia, swiss, nuovo, personale, terra',
     ogTitle: 'Di più Swiss: nuovo CCL per personale di terra, settimana scende a 40 ore',
-    ogDescription: 'Il personale di terra della Swiss approva il nuovo contratto collettivo di lavoro (CCL) che prevede una riduzione dell\'orario di lavoro settimanale da 42 a 40',
+    ogDescription: 'Il personale di terra della Swiss approva il nuovo contratto collettivo di lavoro (CCL) che prevede una riduzione dell\'orario di lavoro settimanale da 42 a 40 ore.',
     canonicalPath: '/articoli-svizzera/di-molto-swiss-nuovo-ccl-per-personale-di-terra-settimana-scende-a-40-ore/',
     structuredData: {
       "@context": "https://schema.org",
@@ -55877,7 +55877,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-seco-fmi-partenariato-economia': {
     title: 'Consiglio federale approva partenariato SECO-FMI per economia',
-    description: 'Il 26 agosto 2026 il Consiglio federale ha stanziato CHF 40 milioni per un nuovo partenariato SECO-FMI 2026-2030, rafforzando le istituzioni economiche globali',
+    description: 'Il Governo svizzero approva CHF 40 milioni per il nuovo programma SECO-FMI 2026-2030.',
     keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, approva, partenariato',
     ogTitle: 'Consiglio federale approva partenariato SECO-FMI per economia',
     ogDescription: 'Il Governo svizzero approva CHF 40 milioni per il nuovo programma SECO-FMI 2026-2030. L\'investimento rafforza istituzioni economiche nei paesi partner del FMI e beneficia imprese svizzere tramite mercati stabili, accesso commerciale facilitato.',
@@ -55886,7 +55886,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Consiglio federale approva partenariato SECO-FMI per economia",
-      "description": "Il 26 agosto 2026 il Consiglio federale ha stanziato CHF 40 milioni per un nuovo partenariato SECO-FMI 2026-2030, rafforzando le istituzioni economiche globali",
+      "description": "Il Governo svizzero approva CHF 40 milioni per il nuovo programma SECO-FMI 2026-2030.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -87712,7 +87712,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-parlamento-svizzera-cripto-centrali': {
     title: 'Parlamento svizzero approva credito centrali e norma cripto',
-    description: 'Il Parlamento svizzero ha votato il credito di 131,3 milioni per le centrali di riserva, approvato il decreto sulle cripto-attività con 126 voti contro 61',
+    description: '131,3 milioni di franchi per le centrali di riserva, 126 voti contro 61 sulle cripto-attività e IVA alberghiera al 3,8% fino al 31 dicembre 2031.',
     keywords: 'frontalieri, ticino, svizzera, italia, parlamento, svizzero, approva, credito',
     ogTitle: 'Parlamento svizzero approva credito centrali e norma cripto',
     ogDescription: 'Durante la sessione parlamentare a Berna, il Consiglio nazionale ha autorizzato 131,3 milioni di franchi per le future centrali elettriche di riserva, con 100 milioni per la pianificazione e 31,3 milioni per la centrale transitoria di Monthey fino.',
@@ -87721,7 +87721,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Parlamento svizzero approva credito centrali e norma cripto",
-      "description": "Il Parlamento svizzero ha votato il credito di 131,3 milioni per le centrali di riserva, approvato il decreto sulle cripto-attività con 126 voti contro 61",
+      "description": "131,3 milioni di franchi per le centrali di riserva, 126 voti contro 61 sulle cripto-attività e IVA alberghiera al 3,8% fino al 31 dicembre 2031.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -101627,7 +101627,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-accordo-ue-sovranita-fiscale': {
     title: 'Accordo con l’UE: addio anche alla sovranità fiscale?',
-    description: 'La NZZ ha lanciato l\'allarme il 6 ottobre Hongler e Imstepf indicano un rischio sulle regole fiscali UE Nel 2024 la Corte UE impose ad Apple 13 miliardi',
+    description: 'La loro tesi, riportata da Quadri, è che l\'intesa possa aprire la porta alle normative europee in materia fiscale.',
     keywords: 'frontalieri, ticino, svizzera, italia, accordo, addio, anche, alla',
     ogTitle: 'Accordo UE e sovranità fiscale: rischi per la Svizzera',
     ogDescription: 'La loro tesi, riportata da Quadri, è che l\'intesa possa aprire la porta alle normative europee in materia fiscale. Nel testo, l\'ipotesi viene presentata come una possibile perdita di sovranità in un ambito ritenuto determinante.',
@@ -101636,7 +101636,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Accordo con l’UE: addio anche alla sovranità fiscale?",
-      "description": "La NZZ ha lanciato l'allarme il 6 ottobre Hongler e Imstepf indicano un rischio sulle regole fiscali UE Nel 2024 la Corte UE impose ad Apple 13 miliardi",
+      "description": "La loro tesi, riportata da Quadri, è che l'intesa possa aprire la porta alle normative europee in materia fiscale.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -104672,7 +104672,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Attacco a centinaia di supermercati francesi Refrigerazione manipolata a distanza Danni per milioni di euro Coop e Migros: nessun attacco simile registrato',
     keywords: 'frontalieri, ticino, svizzera, italia, hacker, manipolano, refrigerazione, rischio',
     ogTitle: 'Hacker manipolano la refrigerazione: rischio per le case',
-    ogDescription: 'Attacco a centinaia di supermercati francesi Refrigerazione manipolata a distanza Danni per milioni di euro Coop e Migros: nessun attacco simile registrato',
+    ogDescription: 'Questa estensione dal commercio alle case è il punto nazionale della vicenda.',
     canonicalPath: '/articoli-svizzera/hacker-frigoriferi-connessi/',
     structuredData: {
       "@context": "https://schema.org",
@@ -106933,7 +106933,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-svizzera-attualita-istituzioni-2026': {
     title: 'Svizzera, istruzioni per l\'uso: politica, istituzioni e ambiente',
-    description: 'UDC quasi al 30% a un anno dalle elezioni federali Il 29 novembre si vota sulla legge sul materiale bellico Adula e Grauhorn non sono più uniti Solar Express',
+    description: 'Per chi vive o lavora in Svizzera, la rassegna va letta separando i dossier ancora aperti dalle situazioni già descritte.',
     keywords: 'frontalieri, ticino, svizzera, italia, istruzioni, politica, istituzioni, ambiente',
     ogTitle: 'Svizzera, istruzioni per l\'uso: politica, armi e ghiacciai',
     ogDescription: 'Le notizie della settimana non formano una sola decisione nazionale: mettono insieme politica, istituzioni, sicurezza, rapporti con l\'UE, energia e ambiente.',
@@ -106942,7 +106942,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Svizzera, istruzioni per l'uso: politica, istituzioni e ambiente",
-      "description": "UDC quasi al 30% a un anno dalle elezioni federali Il 29 novembre si vota sulla legge sul materiale bellico Adula e Grauhorn non sono più uniti Solar Express",
+      "description": "Per chi vive o lavora in Svizzera, la rassegna va letta separando i dossier ancora aperti dalle situazioni già descritte.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -109657,6 +109657,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/voto-iva-13esima-avs-novembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-cdf-critica-armasuisse-immobili': {
+    title: 'CDF critica Armasuisse Immobili per ritardi nei risanamenti',
+    description: 'Secondo il CDF, il controllo di gestione di Armasuisse Immobili si fonda su fogli Excel che presentano contraddizioni e vizi metodologici.',
+    keywords: 'frontalieri, ticino, svizzera, italia, critica, armasuisse, immobili, ritardi',
+    ogTitle: 'CDF critica gestione immobiliare Armasuisse Immobili',
+    ogDescription: 'Il documento pubblicato lunedì dal Controllo federale delle finanze (CDF) rimprovera ad Armasuisse Immobili ritardi nel risanamento delle infrastrutture militari e lacune nella pianificazione strategica.',
+    canonicalPath: '/articoli-svizzera/cdf-critica-armasuisse-immobili/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "CDF critica Armasuisse Immobili per ritardi nei risanamenti",
+      "description": "Secondo il CDF, il controllo di gestione di Armasuisse Immobili si fonda su fogli Excel che presentano contraddizioni e vizi metodologici.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cdf-critica-armasuisse-immobili.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T20:13:29+00:00",
+      "dateModified": "2026-11-03T20:13:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cdf-critica-armasuisse-immobili/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

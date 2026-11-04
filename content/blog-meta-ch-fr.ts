@@ -8675,6 +8675,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.voto-iva-13esima-avs-novembre.title': '13e rente AVS : le 29 novembre, on vote sur la hausse de la TVA',
     'blog.article.voto-iva-13esima-avs-novembre.excerpt': 'Le 29 novembre, on vote sur le financement de la 13e rente AVS La TVA ordinaire passerait de 8,1% à 8,5% Le taux hôtelier passerait de 3,8% à 4%.',
     'blog.article.voto-iva-13esima-avs-novembre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.cdf-critica-armasuisse-immobili.title': 'Le CDF critique Armasuisse Immobili pour ses retards dans les assainissements',
+    'blog.article.cdf-critica-armasuisse-immobili.excerpt': 'La critique intervient alors que de nouveaux besoins pour renforcer l’armée suisse exercent une pression sur la gestion des actifs immobiliers.',
+    'blog.article.cdf-critica-armasuisse-immobili.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

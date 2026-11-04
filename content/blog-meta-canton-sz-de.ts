@@ -30,6 +30,9 @@ const blogMetaCantonSzDe: Record<string, string> = {
     'blog.article.schuebelbach-aliquote-2027.title': 'Schübelbach bestätigt die Steuersätze für 2027',
     'blog.article.schuebelbach-aliquote-2027.excerpt': 'Der Voranschlag 2027 von Schübelbach sieht Ausgaben von 42,97 Millionen, Einnahmen von 42,69 Millionen und ein Defizit von 285.200 Franken vor.',
     'blog.article.schuebelbach-aliquote-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sp-uri-no-finanziamento-avs.title': 'SP Uri: Nein zur Massnahme zur Finanzierung der 13. AHV-Rente',
+    'blog.article.sp-uri-no-finanziamento-avs.excerpt': 'Die Quelle berichtet, dass die SP Uri die Finanzierung der 13. AHV-Rente abgelehnt hat.',
+    'blog.article.sp-uri-no-finanziamento-avs.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSzDe;

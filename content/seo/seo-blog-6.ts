@@ -123,7 +123,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
     description: 'Il progetto Interreg Echo (2025-2027) sperimenta il restauro delle praterie sommerse con biochar per combattere il cambiamento climatico nei laghi di Lugano e C',
     keywords: 'frontalieri, ticino, svizzera, italia, progetto, echo, praterie, sommerse',
     ogTitle: 'Progetto Echo: praterie sommerse per salvare i laghi',
-    ogDescription: 'Il progetto Interreg Echo (2025-2027) sperimenta il restauro delle praterie sommerse con biochar per combattere il cambiamento climatico nei laghi di Lugano e C',
+    ogDescription: 'Il progetto Interreg Echo (2025-2027) sperimenta il restauro delle praterie sommerse con biochar per combattere il cambiamento climatico nei laghi di Lugano e Como. Due siti sperimentali da 500 mq ciascuno.',
     canonicalPath: '/articoli-frontaliere/rinascita-praterie-sommerse-laghi-ticino/',
     structuredData: {
       "@context": "https://schema.org",
@@ -3631,7 +3631,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
     description: 'Le imprese del Canton Ticino devono adottare un approccio integrato per la sicurezza informatica industriale, secondo un webinar promosso da ANIMA C',
     keywords: 'frontalieri, ticino, svizzera, italia, cybersicurezza, industriale, proteggere, produzione',
     ogTitle: 'Cybersicurezza industriale: proteggere produzione',
-    ogDescription: 'Le imprese del Canton Ticino devono adottare un approccio integrato per la sicurezza informatica industriale, secondo un webinar promosso da ANIMA C',
+    ogDescription: 'Le imprese del Canton Ticino devono adottare un approccio integrato per la sicurezza informatica industriale, secondo un webinar promosso da ANIMA Confindustria.',
     canonicalPath: '/articoli-frontaliere/cybersicurezza-industriale-ticino-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -8307,7 +8307,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
     description: 'Una nuova iniziativa parlamentare mira a rafforzare la trasparenza finanziaria nelle iniziative popolari in Ticino, con soglie ben definite per la s',
     keywords: 'frontalieri, ticino, svizzera, italia, trasparenza, nelle, iniziative, popolari',
     ogTitle: 'Trasparenza iniziative popolari Ticino 2026',
-    ogDescription: 'Una nuova iniziativa parlamentare mira a rafforzare la trasparenza finanziaria nelle iniziative popolari in Ticino, con soglie ben definite per la s',
+    ogDescription: 'Una nuova iniziativa parlamentare mira a rafforzare la trasparenza finanziaria nelle iniziative popolari in Ticino, con soglie ben definite per la sostenibilità.',
     canonicalPath: '/articoli-frontaliere/trasparenza-iniziative-popolari-ticino-2026/',
     structuredData: {
       "@context": "https://schema.org",

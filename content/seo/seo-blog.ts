@@ -6543,7 +6543,7 @@ const BLOG_SEO_METADATA: Record<string, SEOMetadata> = {
  description: 'Tratto Como Centro-Chiasso dell\'A9 bloccato dalle 22 alle 5 per pavimentazione, sostituzione cavo alta tensione e transito mezzi speciali dal 13 al 15 aprile 20',
  keywords: 'frontalieri, ticino, svizzera, italia, autostrada, verso, chiasso, chiusa',
  ogTitle: 'Autostrada A9 verso Chiasso chiusa di notte: ecco',
- ogDescription: 'Tratto Como Centro-Chiasso dell\'A9 bloccato dalle 22 alle 5 per pavimentazione, sostituzione cavo alta tensione e transito mezzi speciali dal 13 al 15 aprile 20',
+ ogDescription: 'Tratto Como Centro-Chiasso dell\'A9 bloccato dalle 22 alle 5 per pavimentazione, sostituzione cavo alta tensione e transito mezzi speciali dal 13 al 15 aprile 2026.',
  canonicalPath: '/articoli-frontaliere/autostrada-a9-chiude-de-notti-2026/',
  structuredData: {
  "@context": "https://schema.org",

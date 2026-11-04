@@ -677,7 +677,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.quellensteuer-tarife-svizzera-2026.excerpt': 'Quellensteuer Svizzera 2026: tariffe, abbuoni, soglie NOV 120k CHF per Ticino, Grigioni, Vallese, Berna. Guida al calcolo e ai principali abbuoni.',
     'blog.article.quellensteuer-tarife-svizzera-2026.imageAlt': 'Ufficio fiscale svizzero moderno con documenti e calcolatrici, Ticino.',
     'blog.article.g-bewilligung-antrag-2026-step.title': 'G-Bewilligung Antrag 2026: guida completa, costi e rinnovo',
-    'blog.article.g-bewilligung-antrag-2026-step.excerpt': '',
+    'blog.article.g-bewilligung-antrag-2026-step.excerpt': 'Guida pratica al permesso G 2026: come presentare domanda, costi 65 CHF, documenti, validità 5 anni e rinnovo presso Migrationsamt.',
     'blog.article.g-bewilligung-antrag-2026-step.imageAlt': 'Sportello di un ufficio migrazione svizzero con documenti ufficiali.',
     'blog.article.cambio-commando-volontari-lugano.title': 'Cambio di comando ai Volontari Luganesi',
     'blog.article.cambio-commando-volontari-lugano.excerpt': 'Sergio Romaneschi ha guidato il corpo per 13 anni. Il nuovo comandante è Paolo Baiardi. Cerimonia a Palazzo Civico.',
@@ -8675,6 +8675,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.voto-iva-13esima-avs-novembre.title': '13esima AVS: il 29 novembre si vota sull\'aumento IVA',
     'blog.article.voto-iva-13esima-avs-novembre.excerpt': 'Il 29 novembre si vota sul finanziamento della 13esima AVS L\'IVA ordinaria salirebbe dall\'8,1% all\'8,5% L\'aliquota alberghiera passerebbe dal 3,8% al 4%.',
     'blog.article.voto-iva-13esima-avs-novembre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.cdf-critica-armasuisse-immobili.title': 'CDF critica Armasuisse Immobili per ritardi nei risanamenti',
+    'blog.article.cdf-critica-armasuisse-immobili.excerpt': 'Il documento pubblicato lunedì dal Controllo federale delle finanze (CDF) rimprovera ad Armasuisse Immobili ritardi nel risanamento delle infrastrutture militari e lacune nella pianificazione strategica.',
+    'blog.article.cdf-critica-armasuisse-immobili.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

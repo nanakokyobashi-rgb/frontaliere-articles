@@ -90,6 +90,11 @@ test('la guardia condivisa controlla anche i campi SEO fuori dal meta builder', 
     ),
     /excerpt-plain.*seo\.description.*reference-link/,
   );
+  assert.throws(
+    () => assertPlainDescriptionFields({ excerpt: '' }, { id: 'excerpt-vuoto', locale: 'it' }),
+    /\[excerpt-complete\].*empty-value/u,
+  );
+  assert.doesNotThrow(() => assertPlainDescriptionFields({ description: '' }));
 });
 
 test('la codifica dei meta distingue il testo plain dal preflight di completezza', () => {
@@ -115,6 +120,15 @@ test('la completezza rileva code sintattiche aperte, parentesi e label orfane', 
   assert.deepEqual(findExcerptCompletenessDefects('The deadline is expected by mid-'), ['unfinished-hyphenated-word', 'missing-final-terminator']);
   assert.deepEqual(findExcerptCompletenessDefects('A complete value without punctuation'), ['missing-final-terminator']);
   assert.deepEqual(findExcerptCompletenessDefects(''), ['empty-value']);
+  assert.deepEqual(findExcerptCompletenessDefects('A complete value without punctuation', {
+    requireTerminalPunctuation: false,
+  }), []);
+  assert.deepEqual(findExcerptCompletenessDefects('', { requireNonEmpty: false }), []);
+  assert.deepEqual(findExcerptCompletenessDefects('Guida pratica al Permesso G.'), []);
+  assert.throws(() => assertPlainExcerpt(''), /\[excerpt-complete\]/u);
+  assert.doesNotThrow(() => assertPlainExcerpt('A complete value without punctuation', {
+    requireTerminalPunctuation: false,
+  }));
   assert.deepEqual(
     findExcerptCompletenessDefects('Der Gerichtshof verweist auf Art.', { locale: 'de' }),
     ['unfinished-abbreviation'],
@@ -132,6 +146,7 @@ test('la completezza rileva code sintattiche aperte, parentesi e label orfane', 
   assert.deepEqual(findExcerptCompletenessDefects('Eine vollständige Aussage. gegenstand'), ['orphaned-label', 'missing-final-terminator']);
   assert.deepEqual(findExcerptCompletenessDefects('Une phrase complète. objet'), ['orphaned-label', 'missing-final-terminator']);
   assert.deepEqual(findExcerptCompletenessDefects('Guida pratica al Permesso G'), ['missing-final-terminator']);
+  assert.deepEqual(findExcerptCompletenessDefects('Guida pratica al Permesso G.'), []);
 });
 
 test('le abbreviazioni non chiudono una frase e una coda breve resta da riparare', () => {
@@ -192,12 +207,28 @@ test('le iniziali finali dipendono dal contesto di etichetta', () => {
     'Die Klasse A.',
     'La categoria A.',
     'La fase A.',
+    'PLAN A.',
+    'La ligue A.',
+    'Die Liga A.',
+    'Divisione A.',
   ]) {
     assert.equal(endsWithSentenceAbbreviation(value), false, value);
     assert.deepEqual(findExcerptCompletenessDefects(value), [], value);
   }
   assert.equal(endsWithSentenceAbbreviation('La norma cita A.'), true);
   assert.ok(findExcerptCompletenessDefects('La norma si applica a.').includes('dangling-clause'));
+
+  const mixedHeadersAndBullet = normalizeExcerpt([
+    '## In breve',
+    '## EN BREF',
+    '- La série A. reste en vigueur dans le canton et les équipes suivent les résultats chaque semaine.',
+  ].join('\n'));
+  assert.equal(
+    mixedHeadersAndBullet,
+    'La série A. reste en vigueur dans le canton et les équipes suivent les résultats chaque semaine.',
+  );
+  assert.equal(endsWithSentenceAbbreviation(mixedHeadersAndBullet), false);
+  assert.deepEqual(findExcerptCompletenessDefects(mixedHeadersAndBullet), []);
 });
 
 test('un item completo non è un inizio a metà frase, mentre un ordinal date sì', () => {

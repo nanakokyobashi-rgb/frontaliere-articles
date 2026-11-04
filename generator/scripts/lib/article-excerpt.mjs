@@ -28,7 +28,8 @@ export const SENTENCE_ABBREVIATIONS = Object.freeze([
 ]);
 const SENTENCE_ABBREVIATION_SET = new Set(SENTENCE_ABBREVIATIONS.map((value) => value.toLocaleLowerCase()));
 const PERMIT_CODE_CONTEXT_RE = /\b(?:ausweis|bewilligung|permit|permis|permesso)\b[^.!?]{0,64}$/iu;
-const TERMINAL_LABEL_INITIAL_CONTEXT_RE = /\b(?:serie|series|série|piano|plan|gruppo|gruppe|groupe|group|punkt|point|tipo|typ|type|classe|klasse|class|categoria|catégorie|category|fase|phase|girone|pool|league|lega|versione|version|livello|level|grado|grade|section|sezione)\s*$/iu;
+const TERMINAL_LABEL_INITIAL_CONTEXT_RE = /\b(?:serie|series|série|piano|plan|gruppo|gruppe|groupe|group|punkt|point|tipo|typ|type|classe|klasse|class|categoria|catégorie|category|fase|phase|girone|pool|league|liga|ligue|lega|divisione|division|versione|version|livello|level|grado|grade|section|sezione)\s*$/iu;
+const TERMINAL_SENTENCE_PUNCTUATION_RE = /[.!?…]["'’”»)}\]]*$/u;
 const PUBLISHING_KEYWORD_EQUIVALENTS = new Set([
   'pubblicato', 'pubblicata', 'pubblicati', 'pubblicate', 'pubblicare', 'pubblicazione',
   'published', 'publish', 'publishes', 'publishing', 'publication',
@@ -336,10 +337,16 @@ export function maximumDescriptionLength(field = 'excerpt') {
 }
 
 /** Combine plain-text, completion, and field-specific minimum-length checks. */
-export function findDescriptionDefects(value, { locale = '', field = 'excerpt', body = [] } = {}) {
+export function findDescriptionDefects(value, {
+  locale = '',
+  field = 'excerpt',
+  body = [],
+  requireTerminalPunctuation = true,
+  requireNonEmpty = true,
+} = {}) {
   const defects = [
     ...findExcerptMarkdownDefects(value),
-    ...findExcerptCompletenessDefects(value, { locale }),
+    ...findExcerptCompletenessDefects(value, { locale, requireTerminalPunctuation, requireNonEmpty }),
   ];
   if (startsAfterNonSentenceBoundary(value, body)) defects.push('split-sentence-start');
   return [...new Set(defects)];
@@ -560,9 +567,13 @@ export function endsWithFunctionWordBeforePeriod(value, { locale = '' } = {}) {
 }
 
 /** Detect incomplete tails, including short clauses hidden by an added period. */
-export function findExcerptCompletenessDefects(value, { locale = '' } = {}) {
+export function findExcerptCompletenessDefects(value, {
+  locale = '',
+  requireTerminalPunctuation = true,
+  requireNonEmpty = true,
+} = {}) {
   const text = String(value ?? '').replace(/\s+/g, ' ').trim();
-  if (!text) return ['empty-value'];
+  if (!text) return requireNonEmpty ? ['empty-value'] : [];
   const defects = [];
   const parentheses = findUnmatchedParentheses(text);
   if (parentheses.openings.length > 0) defects.push('unclosed-parenthesis');
@@ -578,7 +589,9 @@ export function findExcerptCompletenessDefects(value, { locale = '' } = {}) {
     && INCOMPLETE_SHORT_SENTENCE_VERBS.has(terminalWord(text))) {
     defects.push('short-final-sentence');
   }
-  if (!/[.!?…]["'’”»)}\]]*$/u.test(text)) defects.push('missing-final-terminator');
+  if (requireTerminalPunctuation && !TERMINAL_SENTENCE_PUNCTUATION_RE.test(text)) {
+    defects.push('missing-final-terminator');
+  }
   return defects;
 }
 
@@ -730,6 +743,14 @@ function sharedDescriptionKeywordCount(candidate, sources) {
   return sharedDescriptionKeywordCountFromSets(candidateWords, sourceWords);
 }
 
+function overlapScore(candidate, sources) {
+  const candidateWords = descriptionKeywords(candidate);
+  const sourceWords = new Set(sources.flatMap((source) => [...descriptionKeywords(source)]));
+  if (candidateWords.size === 0 || sourceWords.size === 0) return 0;
+  return sharedDescriptionKeywordCountFromSets(candidateWords, sourceWords)
+    / Math.sqrt(candidateWords.size * sourceWords.size);
+}
+
 function unpunctuatedCapitalTransitions(value) {
   const text = String(value ?? '');
   const words = [...text.matchAll(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)?/gu)];
@@ -801,11 +822,17 @@ export function repairExcerptFromOriginal(value, {
   maxLength = 280,
   minLength = minimumDescriptionLength(field),
   listOnlyBody = false,
+  requireTerminalPunctuation = true,
+  requireNonEmpty = true,
 } = {}) {
   const original = String(value ?? '');
   const defects = [
     ...findExcerptMarkdownDefects(original),
-    ...findExcerptCompletenessDefects(original, { locale }),
+    ...findExcerptCompletenessDefects(original, {
+      locale,
+      requireTerminalPunctuation,
+      requireNonEmpty,
+    }),
   ];
   if (startsAfterNonSentenceBoundary(original, body)) defects.push('split-sentence-start');
   if (defects.length === 0) return { value: original, strategy: null, defects };
@@ -821,14 +848,19 @@ export function repairExcerptFromOriginal(value, {
     }
     const candidates = sentenceCandidatesFromBody(body, locale, field)
       .filter((candidate) => candidate.length <= maxLength && candidate.length >= minLength)
-      .filter((candidate) => findExcerptCompletenessDefects(candidate, { locale }).length === 0)
+      .filter((candidate) => findExcerptCompletenessDefects(candidate, {
+        locale,
+        requireTerminalPunctuation,
+        requireNonEmpty,
+      }).length === 0)
       .map((candidate, index) => ({
         candidate,
         index,
         sharedKeywords: sharedDescriptionKeywordCount(candidate, relevanceSources),
+        score: overlapScore(candidate, relevanceSources),
       }))
       .filter(({ sharedKeywords }) => sharedKeywords >= 2)
-      .sort((left, right) => left.index - right.index);
+      .sort((left, right) => right.score - left.score || left.index - right.index);
     if (listOnlyBody && relevanceSources.length === 1 && Array.isArray(body)) {
       cachedByTitle ??= new Map();
       cachedByTitle.set(cacheKey, candidates);
@@ -853,7 +885,7 @@ export function repairExcerptFromOriginal(value, {
   for (const prefix of sentencePrefixes(original)) {
     if (prefix.length > maxLength || prefix === original) continue;
     if (findExcerptMarkdownDefects(prefix).length > 0) continue;
-    if (findExcerptCompletenessDefects(prefix, { locale }).length > 0) continue;
+    if (findExcerptCompletenessDefects(prefix, { locale, requireTerminalPunctuation, requireNonEmpty }).length > 0) continue;
     if (startsAfterNonSentenceBoundary(prefix, body)) continue;
     if (prefix.length < minLength) continue;
     return { value: prefix, strategy: 'a', defects };
@@ -910,12 +942,23 @@ function hasFlattenedBodyListExcerpt(value, body, locale = '') {
   return matchingTransitions >= (language === 'de' ? 2 : 1);
 }
 
-function isCompleteSourceCandidate(value, { locale, maxLength, minLength, body = [] }) {
+function isCompleteSourceCandidate(value, {
+  locale,
+  maxLength,
+  minLength,
+  body = [],
+  requireTerminalPunctuation = true,
+  requireNonEmpty = true,
+}) {
   return typeof value === 'string'
     && value.length <= maxLength
     && value.trim().length >= minLength
     && findExcerptMarkdownDefects(value).length === 0
-    && findExcerptCompletenessDefects(value, { locale }).length === 0
+    && findExcerptCompletenessDefects(value, {
+      locale,
+      requireTerminalPunctuation,
+      requireNonEmpty,
+    }).length === 0
     && !startsAfterNonSentenceBoundary(value, body);
 }
 
@@ -925,9 +968,11 @@ export function selectCompleteExcerptSource(value, {
   maxLength = EXCERPT_MAX_LENGTH,
   minLength = EXCERPT_MIN_LENGTH,
   body = [],
+  requireTerminalPunctuation = true,
+  requireNonEmpty = true,
 } = {}) {
   const text = String(value ?? '').trim();
-  const options = { locale, maxLength, minLength, body };
+  const options = { locale, maxLength, minLength, body, requireTerminalPunctuation, requireNonEmpty };
   if (isCompleteSourceCandidate(text, options)) return text;
   return sentencePrefixes(text).find((prefix) => isCompleteSourceCandidate(prefix, options)) ?? null;
 }
@@ -938,8 +983,10 @@ export function firstCompleteBodyExcerpt(body, {
   field = 'excerpt',
   maxLength = EXCERPT_MAX_LENGTH,
   minLength = EXCERPT_MIN_LENGTH,
+  requireTerminalPunctuation = true,
+  requireNonEmpty = true,
 } = {}) {
-  const options = { locale, maxLength, minLength, body };
+  const options = { locale, maxLength, minLength, body, requireTerminalPunctuation, requireNonEmpty };
   return sentenceCandidatesFromBody(body, locale, field)
     .find((candidate) => isCompleteSourceCandidate(candidate, options)) ?? null;
 }
@@ -1157,20 +1204,31 @@ export function normalizeExcerpt(value) {
   const plain = stripExcerptMarkdown(value);
   if (!plain) return '';
 
-  const sentence = sentencePrefixes(plain)
-    .reverse()
+  const sentenceCandidates = sentencePrefixes(plain).reverse();
+  const sentence = sentenceCandidates
     .find((candidate) => candidate.length >= EXCERPT_MIN_LENGTH && isUsefulSentence(candidate));
   if (sentence) return sentence;
+
+  const shortSentence = sentenceCandidates
+    .find((candidate) => isUsefulSentence(candidate) && !endsWithSentenceAbbreviation(candidate));
+  // Some valid generated summaries are shorter than the historical 60-char
+  // repair floor. Keep a complete sentence instead of normalizing it to empty.
+  if (shortSentence) return shortSentence;
 
   const fragments = plain
     .split(/\s+[-–—]\s+/)
     .map((fragment) => fragment.trim())
     .filter((fragment) => fragment.length >= EXCERPT_MIN_LENGTH
       && isUsefulSentence(fragment)
+      && TERMINAL_SENTENCE_PUNCTUATION_RE.test(fragment)
       && !endsWithSentenceAbbreviation(fragment));
   const firstUseful = fragments[0];
   if (firstUseful) return firstUseful;
-  return plain;
+  return plain.length >= EXCERPT_MIN_LENGTH
+    && TERMINAL_SENTENCE_PUNCTUATION_RE.test(plain)
+    && !endsWithSentenceAbbreviation(plain)
+    ? plain
+    : '';
 }
 
 /** Throw the publication gate for Markdown and, by default, incomplete descriptions. */
@@ -1180,13 +1238,21 @@ export function assertPlainExcerpt(value, {
   locale = 'unknown',
   body = [],
   checkCompleteness = true,
+  requireTerminalPunctuation = true,
+  requireNonEmpty = true,
 } = {}) {
   const markdownDefects = findExcerptMarkdownDefects(value);
   if (markdownDefects.length > 0) {
     throw new Error(`[excerpt-plain] ${locale}/${id}/${field} contiene Markdown (${markdownDefects.join(', ')})`);
   }
   if (!checkCompleteness) return value;
-  const completionDefects = findDescriptionDefects(value, { locale, field, body })
+  const completionDefects = findDescriptionDefects(value, {
+    locale,
+    field,
+    body,
+    requireTerminalPunctuation,
+    requireNonEmpty,
+  })
     .filter((defect) => !markdownDefects.includes(defect));
   if (completionDefects.length > 0) {
     throw new Error(`[excerpt-complete] ${locale}/${id}/${field} non rispetta il contratto (${completionDefects.join(', ')})`);
@@ -1203,6 +1269,8 @@ export function assertPlainDescriptionFields(fields, {
   fieldPrefix = '',
   id = 'unknown',
   locale = 'unknown',
+  requireTerminalPunctuation = true,
+  requireNonEmpty = true,
 } = {}) {
   const body = Object.entries(fields ?? {})
     .filter(([name, bodyValue]) => /^body\d+$/u.test(name) && typeof bodyValue === 'string')
@@ -1210,8 +1278,16 @@ export function assertPlainDescriptionFields(fields, {
     .map(([, bodyValue]) => bodyValue);
   for (const field of PLAIN_DESCRIPTION_FIELDS) {
     const value = fields?.[field];
-    if (typeof value !== 'string' || value.trim() === '') continue;
-    assertPlainExcerpt(value, { field: `${fieldPrefix}${field}`, id, locale, body });
+    if (typeof value !== 'string') continue;
+    if (value.trim() === '' && !(field === 'excerpt' && requireNonEmpty)) continue;
+    assertPlainExcerpt(value, {
+      field: `${fieldPrefix}${field}`,
+      id,
+      locale,
+      body,
+      requireTerminalPunctuation,
+      requireNonEmpty,
+    });
   }
   return fields;
 }

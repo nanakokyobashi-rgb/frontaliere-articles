@@ -12747,7 +12747,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.caduta-scala-locate-varesino.excerpt': 'Caduta da una scala in via Madonnetta.',
     'blog.article.caduta-scala-locate-varesino.imageAlt': 'Contesto rurale di un\'azienda agricola',
     'blog.article.cantello-teatro-dialettale-ottobre-2026.title': 'Cantello torna il teatro dialettale “Quei giargianes da giappunes”',
-    'blog.article.cantello-teatro-dialettale-ottobre-2026.excerpt': 'Due date: 10 ottobre alle 21 e 18 ottobre alle 15',
+    'blog.article.cantello-teatro-dialettale-ottobre-2026.excerpt': 'A Cantello la compagnia Tutti in Scena porta in dialetto Quei giargianes da giappunes, con spettacoli il 10 e il 18 ottobre e ingresso gratuito.',
     'blog.article.cantello-teatro-dialettale-ottobre-2026.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.vendemmia-mendrisiotto-lavoratori-terra.title': 'Frontalieri della vendemmia: 15 franchi l\'ora',
     'blog.article.vendemmia-mendrisiotto-lavoratori-terra.excerpt': 'Circa 50 frontalieri animano la vendemmia nel Mendrisiotto.',

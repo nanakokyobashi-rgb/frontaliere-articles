@@ -904,16 +904,16 @@ const BLOG_SEO_METADATA_7: Record<string, SEOMetadata> = {
 
   'blog-iniziativa-democrazia-respinta-2026': {
     title: 'Iniziativa per la democrazia respinta dal Consiglio nazionale',
-    description: 'Il Consiglio nazionale ha respinto l\'iniziativa per la democrazia con 130 voti a 62. Scopri le implicazioni per i frontalieri e i requisiti per la n',
+    description: 'In conclusione, la bocciatura dell\'iniziativa per la democrazia non cambia i requisiti attuali per la naturalizzazione in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, iniziativa, democrazia, respinta, consiglio',
     ogTitle: 'Iniziativa per la democrazia respinta dal Consiglio nazionale',
-    ogDescription: 'Il Consiglio nazionale ha respinto l\'iniziativa per la democrazia con 130 voti a 62. Scopri le implicazioni per i frontalieri e i requisiti per la n',
+    ogDescription: 'In conclusione, la bocciatura dell\'iniziativa per la democrazia non cambia i requisiti attuali per la naturalizzazione in Svizzera.',
     canonicalPath: '/articoli-frontaliere/iniziativa-democrazia-respinta-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Iniziativa per la democrazia respinta dal Consiglio nazionale",
-      "description": "Il Consiglio nazionale ha respinto l'iniziativa per la democrazia con 130 voti a 62. Scopri le implicazioni per i frontalieri e i requisiti per la n",
+      "description": "In conclusione, la bocciatura dell'iniziativa per la democrazia non cambia i requisiti attuali per la naturalizzazione in Svizzera.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/iniziativa-democrazia-respinta-2026.webp`,
         "width": 1200,

@@ -84,6 +84,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.siccita-fislisbach-forniture.title': 'Fislisbach : Baden doit encore fournir de l’eau potable',
     'blog.article.siccita-fislisbach-forniture.excerpt': 'À la mi-octobre 2026, le prélèvement hebdomadaire est descendu à 7\'136 m3, mais les approvisionnements de Regionalwerke Baden AG restent nécessaires.',
     'blog.article.siccita-fislisbach-forniture.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.aarau-rinnovo-tigli-zollrain.title': 'Aarau remplacera les tilleuls restants au Zollrain',
+    'blog.article.aarau-rinnovo-tigli-zollrain.excerpt': 'Aarau remplacera les tilleuls restants au Zollrain et rénovera l’espace vert.',
+    'blog.article.aarau-rinnovo-tigli-zollrain.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAgFr;

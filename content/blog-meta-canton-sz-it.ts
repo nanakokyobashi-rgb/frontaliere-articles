@@ -30,6 +30,9 @@ const blogMetaCantonSzIt: Record<string, string> = {
     'blog.article.schuebelbach-aliquote-2027.title': 'Schübelbach conferma le aliquote fiscali per il 2027',
     'blog.article.schuebelbach-aliquote-2027.excerpt': 'Il preventivo 2027 di Schübelbach prevede 42,97 milioni di spese, 42,69 milioni di entrate e un disavanzo di 285.200 franchi.',
     'blog.article.schuebelbach-aliquote-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sp-uri-no-finanziamento-avs.title': 'SP Uri: no di misura al finanziamento della 13ª AVS',
+    'blog.article.sp-uri-no-finanziamento-avs.excerpt': 'SP Uri: no di misura al finanziamento della 13ª AVS dopo una discussione vivace.',
+    'blog.article.sp-uri-no-finanziamento-avs.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSzIt;
