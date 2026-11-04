@@ -2891,9 +2891,9 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "aa7ecbc362947d51",
-        "corpus": "aa7ecbc362947d51",
-        "alignedAt": "2026-11-02"
+        "site": "6e6a33dcc7d0b5ce",
+        "corpus": "6e6a33dcc7d0b5ce",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -6894,8 +6894,8 @@
       "mode": "identical",
       "reason": "Fingerprint di recovery, Ads, Partnerize e Meta Pixel che lega gli snapshot byte-exact alle sorgenti. La proiezione esclude i contenuti ma verifica nomi e SHA-256; i test host confrontano i byte trasportati e il contratto prima della pubblicazione.",
       "baseline": {
-        "site": "cc5086bbe13e48f6",
-        "corpus": "cc5086bbe13e48f6",
+        "site": "25e5cccc269ba6e5",
+        "corpus": "25e5cccc269ba6e5",
         "alignedAt": "2026-11-04"
       }
     },
