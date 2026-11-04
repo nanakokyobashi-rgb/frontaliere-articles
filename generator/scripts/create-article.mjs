@@ -14459,16 +14459,19 @@ ${localizedToponymInstruction(targetLang)}`;
     const sourceFaqCount = Array.isArray(itContent?.faq) ? itContent.faq.length : 0;
     let translatedFaq = data.content?.[locale]?.faq;
     if (Array.isArray(translatedFaq)) {
-      // A malformed extra pair can be provably rejected before the cardinality
-      // guard. Keep the entries that remain; otherwise the guard would turn
-      // the whole array into `[]` and make the recovery retry valid pairs that
-      // were never missing. Do not trim by position: any other cardinality
-      // mismatch remains fail-closed below.
-      const safeTranslatedFaq = translatedFaq.filter((pair) => !['q', 'a'].some((fieldName) => {
-        const value = pair?.[fieldName];
-        return typeof value === 'string'
-          && rejectRawFaqControlEscape(normalizeLocalizedToponymText(value));
-      }));
+      // The bulk translator above has already checked sourceFaqIndex and put
+      // every source-backed pair back at its source position. Keep those pairs
+      // intact so the field-level recovery below can retry only an unsafe q/a
+      // and retain its valid sibling. A control-bearing pair beyond the source
+      // count is provably extra and can be removed before the cardinality gate.
+      const safeTranslatedFaq = translatedFaq.filter((pair, index) => {
+        if (index < sourceFaqCount) return true;
+        return !['q', 'a'].some((fieldName) => {
+          const value = pair?.[fieldName];
+          return typeof value === 'string'
+            && rejectRawFaqControlEscape(normalizeLocalizedToponymText(value));
+        });
+      });
       if (safeTranslatedFaq.length !== translatedFaq.length) {
         console.error(
           `  ⚠️  FAQ ${locale}: scartate ${translatedFaq.length - safeTranslatedFaq.length} coppie con controlli non pubblicabili prima della recovery`,
