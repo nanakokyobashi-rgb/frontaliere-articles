@@ -14474,6 +14474,7 @@ ${localizedToponymInstruction(targetLang)}`;
       // Stesso floor del percorso IT, IMPORTATO e non ricopiato (AGENTS.md #6):
       // il floor e' sulla forma del campo, non sulla lingua.
       const valoreTradotto = readField(data.content[locale]);
+      const itValue = readField(itContent);
       const traduzioneUsabile = hasUsableTranslatedText(valoreTradotto, locale);
       // A C0 byte can survive JSON.parse as an ordinary, non-empty string. An
       // HTML numeric reference can do the same one step later: the final
@@ -14482,6 +14483,9 @@ ${localizedToponymInstruction(targetLang)}`;
       // focused retry/fallback path instead of aborting at the final writer.
       const faqControlRejected = Boolean(
         faqPart && rejectRawFaqControlEscape(normalizeLocalizedToponymText(valoreTradotto)),
+      );
+      const sourceFaqControlRejected = Boolean(
+        faqPart && rejectRawFaqControlEscape(normalizeLocalizedToponymText(itValue)),
       );
       const floorMiss = traduzioneUsabile && !faqControlRejected
         ? metaFieldPlausibilityMiss(field, valoreTradotto)
@@ -14512,7 +14516,6 @@ ${localizedToponymInstruction(targetLang)}`;
           ? 'body lasciato NON tradotto, niente fallback IT (#1875)'
           : 'fallback al valore italiano';
       let pendingReason = faqControlRejected ? 'invalid-control' : 'retry-unusable';
-      const itValue = readField(itContent);
       // `itValue` composto di solo whitespace (es. ' ') è truthy: senza
       // `.trim()` bypassa questo guard e viene comunque assegnato sotto come
       // fallback, pubblicando un campo quasi-vuoto invece di far scattare
@@ -14627,6 +14630,18 @@ ${localizedToponymInstruction(targetLang)}`;
       if (isBodyField) {
         markBodyTranslationPending(data, { locale, field, reason: pendingReason, report: RUN_REPORT.translation });
         console.warn(`  🔴 ${field} (${locale}): nessuna traduzione utilizzabile (${pendingReason}) — campo lasciato NON tradotto, niente fallback IT (#1875)`);
+        continue;
+      }
+      // A source FAQ can itself contain a numeric HTML reference such as
+      // `&#8;`. Do not copy that raw value into a locale when translation and
+      // retry both fail: decodeArticleEntities() would turn it into a C0 byte
+      // and the final writer would reject the whole article. Drop the pair in
+      // this locale; the structural validation below removes the incomplete
+      // pair while preserving any other valid FAQ pairs.
+      if (faqPart && sourceFaqControlRejected) {
+        const faq = data.content[locale]?.faq;
+        if (Array.isArray(faq) && faqIndex < faq.length) faq[faqIndex] = null;
+        console.warn(`  ⚠️  FAQ ${locale}[${faqIndex}] omessa: la sorgente italiana contiene un carattere di controllo non pubblicabile`);
         continue;
       }
       // itValue non è mai ri-verificato con detectTruncation() prima di
