@@ -18,6 +18,7 @@ test('il matcher dei meta include la chiusura della chiave prima dei due punti',
   assert.match(source, /if \(\['a', 'b', 'd'\]\.includes\(strategy\) && !isCompleteSourceCandidate\(repaired,/u);
   assert.doesNotMatch(source, /strategy !== 'd' && \['description', 'structuredData\.description', 'seoDescription'\]/u);
   assert.match(source, /SIBLING_DESCRIPTION_FIELDS\.has\(recordSource\.field\)/u);
+  assert.match(source, /isSemanticallyCompatibleSibling\(candidate,\s*\{\s*target:\s*value/u);
   assert.ok(
     source.indexOf('isCompleteSourceCandidate(repaired') < source.indexOf('assertPlainExcerpt(repaired'),
     'i candidati testuali vanno scartati prima dell’assert finale e della scrittura',

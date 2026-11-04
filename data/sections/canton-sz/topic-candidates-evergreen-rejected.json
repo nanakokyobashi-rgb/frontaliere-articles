@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/der-obwaldner-arbeitsmarkt-verliert-jaehrlich-200-erwerbstaetige-art-1729754": {
-      "section": "canton-sz",
-      "ts": 1793583962943
-    },
     "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/fdp-greift-sp-im-streit-um-die-13-ahv-an-art-1729938": {
       "section": "canton-sz",
       "ts": 1793638265619
@@ -59,6 +55,14 @@
     "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/milliarden-fuer-armee-immobilien-finanzkontrolle-warnt-vor-luecken-art-1730104": {
       "section": "canton-sz",
       "ts": 1793750210765
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/cyberangriffe-treffen-vermehrt-kmu-ein-experte-gibt-tipps-art-1730299": {
+      "section": "canton-sz",
+      "ts": 1793777737809
+    },
+    "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4563": {
+      "section": "canton-sz",
+      "ts": 1793778087339
     }
   }
 }
