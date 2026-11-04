@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "ffb9cd6592acf4e89764b0280cd6053494838aed54febabf38007bcaf315e95f",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "e9e3baf76d691acbc11d045f0a816d63a2fd44824d90df8e1af63cf635540c7d",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -134,7 +134,7 @@
         {
           "title": "Tifosi Lucerna a Lugano: strade chiuse e traffico",
           "url": "/articoli-frontaliere/tifosi-lucerna-lugano-traffico/",
-          "excerpt": "Partita alle 18 allo stadio di Cornaredo",
+          "excerpt": "Partita alle 18 allo stadio di Cornaredo.",
           "date": "2026-10-08T11:31:48.408Z"
         },
         {
@@ -146,13 +146,13 @@
         {
           "title": "Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato",
           "url": "/articoli-frontaliere/lugano-lucerna-partita-traffico/",
-          "excerpt": "Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo",
+          "excerpt": "Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo.",
           "date": "2026-10-08T11:18:04.293Z"
         },
         {
           "title": "Sistema scolastico cantonale di Lucerna: iscrizione e cicli",
           "url": "/articoli-svizzera/sistema-scolastico-canton-lucerna-iscrizione-e-cicli/",
-          "excerpt": "Informati sui cicli di scuola, età di iscrizione e calendario scolastico per il Cantone di Lucerna",
+          "excerpt": "Informati sui cicli di scuola, età di iscrizione e calendario scolastico per il Cantone di Lucerna.",
           "date": "2026-08-14T02:37:30.479Z"
         },
         {
@@ -173,7 +173,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "LU",
@@ -306,7 +306,7 @@
         {
           "title": "Lucerne cantonal school system: enrolment and cycles",
           "url": "/en/swiss-articles/lucerne-school-system-enrollment-and-cycles/",
-          "excerpt": "Find out about the school cycles, enrolment age and school calendar for the Canton of Lucerne",
+          "excerpt": "Find out about the school cycles, enrolment age and school calendar for the Canton of Lucerne.",
           "date": "2026-08-14T02:37:30.479Z"
         },
         {
@@ -327,7 +327,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "LU",
@@ -438,7 +438,7 @@
         {
           "title": "Tunnel Sonnenberg wegen struktureller Inspektion gesperrt",
           "url": "/de/luzern-artikel/sonnenberg-tunnel-nachtschliessung/",
-          "excerpt": "Vollständige Sperrung des Tunnels Sonnenberg in beiden Richtungen ab der Nacht vom 4.",
+          "excerpt": "Laut der Quelle wird der Sonnenberg-Tunnel in Luzern in der Nacht von Mittwoch, dem 4. November, auf Donnerstag, den 5. November 2026, in beiden Richtungen vollständig gesperrt.",
           "date": "2026-10-31T11:51:39.474Z"
         },
         {
@@ -460,7 +460,7 @@
         {
           "title": "Kantonales Schulsystem Luzern: Einschreibung und Zyklen",
           "url": "/de/schweiz-artikel/kantonales-schulsystem-luzern-einschreibung-und-zyklen/",
-          "excerpt": "Informieren Sie sich über die Schulzyklen, das Einschreibealter und den Schulkalender für den Kanton Luzern",
+          "excerpt": "Informieren Sie sich über die Schulzyklen, das Einschreibealter und den Schulkalender für den Kanton Luzern.",
           "date": "2026-08-14T02:37:30.479Z"
         },
         {
@@ -481,7 +481,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "LU",
@@ -598,7 +598,7 @@
         {
           "title": "Supporters de Lucerne à Lugano : routes fermées et trafic",
           "url": "/fr/articles-frontalier/supporters-de-lucerne-a-lugano-routes-fermees-et-trafic/",
-          "excerpt": "Match à 18 h au stade de Cornaredo",
+          "excerpt": "Match à 18 h au stade de Cornaredo.",
           "date": "2026-10-08T11:31:48.408Z"
         },
         {
@@ -610,13 +610,13 @@
         {
           "title": "Supporters de Lucerne à Lugano : fermetures de routes, retards de circulation",
           "url": "/fr/articles-frontalier/supporters-de-lucerne-a-lugano-fermetures-de-routes-retards-de-circulation/",
-          "excerpt": "Samedi : FC Lugano-FC Lucerne à 18 h à Cornaredo",
+          "excerpt": "Samedi : FC Lugano-FC Lucerne à 18 h à Cornaredo.",
           "date": "2026-10-08T11:18:04.293Z"
         },
         {
           "title": "Système scolaire cantonal de Lucerne : inscription et cycles",
           "url": "/fr/articles-suisse/systeme-scolaire-canton-lucerne-inscription-et-cycles/",
-          "excerpt": "Renseignez-vous sur les cycles scolaires, l'âge d'inscription et le calendrier scolaire pour le canton de Lucerne",
+          "excerpt": "Renseignez-vous sur les cycles scolaires, l'âge d'inscription et le calendrier scolaire pour le canton de Lucerne.",
           "date": "2026-08-14T02:37:30.479Z"
         },
         {
@@ -637,7 +637,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "e0ddd7c78d6c3874f62b7e0ec35e48fca5f84d553f4cbb72b9ade5ae4e16cb4d",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "027b8373fc5b9ac2275e4399622bf670c291d6ec2f25887cd5fda9a99ef7f373",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -86,7 +86,7 @@
         {
           "title": "Appenzello Esterno: più giorni caldi nel 2026",
           "url": "/articoli-appenzello/caldo-appenzello-esterno-2026/",
-          "excerpt": "Estate 2026: più giorni caldi nei siti esaminati Nel 2026 sono state rilevate più notti tropicali Altitudine e raffrescamento notturno riducono il caldo",
+          "excerpt": "Il confronto degli anni dal 2022 al 2026 mostra che, nell'estate 2026, nei siti esaminati del Canton Appenzello Esterno sono stati registrati sia più giorni caldi sia più notti tropicali.",
           "date": "2026-11-03T08:54:47.590Z"
         },
         {
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -185,7 +185,7 @@
         {
           "title": "Appenzell Ausserrhoden: more hot days in 2026",
           "url": "/en/appenzell-articles/heat-appenzell-ausserrhoden-2026/",
-          "excerpt": "Summer 2026: more hot days at the sites examined More tropical nights were recorded in 2026 Altitude and nighttime cooling reduce prolonged heat The Health",
+          "excerpt": "The comparison of the years from 2022 to 2026 shows that, in summer 2026, both more hot days and more tropical nights were recorded at the sites examined in the Canton of Appenzell Ausserrhoden.",
           "date": "2026-11-03T08:54:47.590Z"
         },
         {
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -278,25 +278,25 @@
         {
           "title": "Appenzell: Medizinische Tarife für 2026 genehmigt",
           "url": "/de/appenzell-artikel/arzttarife-appenzell-2026/",
-          "excerpt": "Die Standeskommission legt den Wert des Tarifpunktes für ambulante Leistungen rückwirkend ab dem 1.",
+          "excerpt": "Die Vereinbarungen betreffen die Vergütung ambulanter medizinischer Leistungen im Rahmen der Pflichtkrankenversicherung. Für die drei Verträge gilt das angegebene Inkrafttredungsdatum rückwirkend zum 1. Januar 2026 und…",
           "date": "2026-11-03T10:02:49.152Z"
         },
         {
           "title": "Appenzell Ausserrhoden: mehr heiße Tage im Jahr 2026",
           "url": "/de/appenzell-artikel/hitzebelastung-appenzell-ausserrhoden-2026/",
-          "excerpt": "Sommer 2026: mehr heiße Tage an den untersuchten Standorten Im Jahr 2026 wurden mehr Tropennächte festgestellt Höhenlage und nächtliche Abkühlung verringern",
+          "excerpt": "Aus der Gegenüberstellung der Jahre 2022 bis 2026 geht hervor, dass die untersuchten Standorte im Kanton Appenzell Ausserrhoden im Sommer 2026 sowohl eine höhere Zahl heisser Tage als auch mehr Tropennächte aufwiesen.",
           "date": "2026-11-03T08:54:47.590Z"
         },
         {
           "title": "Zehnte Lehrstellenmesse Appenzell 7. November 2026",
           "url": "/de/appenzell-artikel/zehnte-lehrstellenmesse-innerrhoden/",
-          "excerpt": "62 Unternehmen aus Innerrhoden präsentieren am Samstag, 7.",
+          "excerpt": "Am Samstag, 7. November 2026 findet in der Aula Gringel die zehnte Lehrstellen-Tischmesse Appenzell statt.",
           "date": "2026-11-03T07:41:05.610Z"
         },
         {
           "title": "45 Anwohner fordern Maßnahmen gegen den Lärm auf der Langgasse",
           "url": "/de/appenzell-artikel/45-einwohner-laerm-forderung/",
-          "excerpt": "45 Anwohner haben am Mittwoch, dem 28.",
+          "excerpt": "Am Mittwoch, 28. Oktober, haben 45 Anwohner bei der Gemeinde einen Antrag zum Verkehrslärm und zum Verkehr entlang der Langgasse eingereicht.",
           "date": "2026-10-31T13:30:50.111Z"
         }
       ],
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -383,7 +383,7 @@
         {
           "title": "Appenzell Rhodes-Extérieures : davantage de jours chauds en 2026",
           "url": "/fr/articles-appenzell/chaleur-appenzell-rhodes-exterieures-2026/",
-          "excerpt": "Été 2026 : davantage de jours chauds sur les sites examinés En 2026, davantage de nuits tropicales ont été relevées L’altitude et le rafraîchissement nocturne",
+          "excerpt": "La comparaison des années 2022 à 2026 montre qu'au cours de l'été 2026, à la fois davantage de jours chauds et davantage de nuits tropicales ont été enregistrés sur les sites examinés du canton d'Appenzell…",
           "date": "2026-11-03T08:54:47.590Z"
         },
         {
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

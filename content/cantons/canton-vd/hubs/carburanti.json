@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "feea55f16a0585941e0426c2557259ff681f5ed61549d644ca5cb03af5301527",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "5ffe7d2ec6fce922ff2ec8f50d31df19d5317ba88c7fdf6d59a621eb175826d5",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -73,7 +73,7 @@
         {
           "title": "Morges ottiene il label Cité de l'energia Gold per cinque anni",
           "url": "/articoli-vaud/morges-label-energia-gold-2026/",
-          "excerpt": "Morges ottiene il label Gold per cinque anni Il punteggio della valutazione è dell'80,5% Il riconoscimento copre sei ambiti delle politiche comunali Il Plan",
+          "excerpt": "La Ville de Morges, già titolare del label Cité de l'énergie, è stata nuovamente distinta per i suoi sforzi climatici.",
           "date": "2026-10-22T10:54:11.908Z"
         }
       ],
@@ -88,7 +88,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "VD",
@@ -148,7 +148,7 @@
         {
           "title": "Morges receives the Cité de l'energia Gold label for five years",
           "url": "/en/vaud-articles/morges-energy-city-gold-label-2026/",
-          "excerpt": "Morges receives the Gold label for five years The assessment score is 80,5% The recognition covers six areas of municipal policies The Plan climat brings",
+          "excerpt": "Ville de Morges, already holder of the Cité de l'énergie label, has once again been recognized for its climate efforts.",
           "date": "2026-10-22T10:54:11.908Z"
         }
       ],
@@ -163,7 +163,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "VD",
@@ -223,7 +223,7 @@
         {
           "title": "Morges erhält das Label Cité de l'energia Gold für fünf Jahre",
           "url": "/de/waadt-artikel/morges-energiestadt-gold-label-2026/",
-          "excerpt": "Morges erhält das Label Gold für fünf Jahre Die Punktzahl der Bewertung beträgt 80,5% Die Auszeichnung umfasst sechs Bereiche der kommunalen Politik Der Plan",
+          "excerpt": "Die Ville de Morges, die bereits Trägerin des Labels Cité de l'énergie ist, wurde erneut für ihre Klimaschutzbemühungen ausgezeichnet.",
           "date": "2026-10-22T10:54:11.908Z"
         }
       ],
@@ -238,7 +238,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "VD",
@@ -298,7 +298,7 @@
         {
           "title": "Morges obtient le label Cité de l'énergie Gold pour cinq ans",
           "url": "/fr/articles-vaud/morges-cite-energie-gold-2026/",
-          "excerpt": "Morges obtient le label Gold pour cinq ans Le score de l'évaluation est de 80,5% La distinction couvre six domaines des politiques communales Le Plan climat",
+          "excerpt": "La Ville de Morges, déjà titulaire du label Cité de l'énergie, a de nouveau été distinguée pour ses efforts climatiques.",
           "date": "2026-10-22T10:54:11.908Z"
         }
       ],
@@ -313,7 +313,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

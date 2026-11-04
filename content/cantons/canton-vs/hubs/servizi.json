@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "dff9c77db5b37662540f1e8936b0583cbed137e1f4eafd5c966e58f9bda10ce7",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "425f19f7d21ed67550ba54c48c8a0809b7a33423224f6aef384dc78e28ceeec9",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -156,13 +156,13 @@
         {
           "title": "Rapporto OVS: 83% vallesani in buona salute, obesità al 13% e rischi psicosociali al 44%",
           "url": "/articoli-vallese/salute-vallese-2026-ovs/",
-          "excerpt": "83% degli adulti vallesani si sente in buona salute nel 2022 Speranza di vita: 85,9 anni per le donne, 82,4 per gli uomini Gli over 65 sono il 21%",
+          "excerpt": "Nel 2022, l'83% degli adulti in Vallese dichiarava di essere in buona o ottima salute, contro l'85% in Svizzera.",
           "date": "2026-10-18T08:16:12.890Z"
         },
         {
           "title": "Sion: apre la Maison de la garde per le urgenze",
           "url": "/articoli-vallese/maison-garde-ospedale-sion/",
-          "excerpt": "Dal 1° settembre l'ospedale di Sion ha attivato un nuovo presidio per i casi non vitali, attivo ogni giorno dalle 18 alle 22.",
+          "excerpt": "Dal 1° settembre l’ospedale di Sion ha aperto una Maison de la garde per alleggerire le urgenze, descritte come sature. Il nuovo presidio è destinato ai casi non vitali e opera ogni giorno dalle 18 alle 22, la fascia…",
           "date": "2026-10-08T17:03:41.241Z"
         },
         {
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "VS",
@@ -358,13 +358,13 @@
         {
           "title": "OVS report: 83% of Valais residents in good health",
           "url": "/en/valais-articles/valais-health-2026-ovs/",
-          "excerpt": "83% of Valais adults feel in good health in 2022 Life expectancy: 85,9 years for women, 82,4 for men People over 65 account for 21% of the population in 2024",
+          "excerpt": "In 2022, 83% of adults in Valais reported being in good or very good health, compared with 85% in Switzerland.",
           "date": "2026-10-18T08:16:12.890Z"
         },
         {
           "title": "Sion: the Maison de la garde opens for emergencies",
           "url": "/en/valais-articles/maison-garde-sion-hospital/",
-          "excerpt": "As of September 1st, Sion Hospital has opened a new facility for non-life-threatening cases, open every day from 18 to 22.",
+          "excerpt": "Since September 1, Sion Hospital has opened a Maison de la garde to relieve pressure on the emergency department, described as overcrowded. The new facility is intended for non-life-threatening cases and operates every…",
           "date": "2026-10-08T17:03:41.241Z"
         },
         {
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "VS",
@@ -556,7 +556,7 @@
         {
           "title": "OVS-Bericht: 83% Walliser fit, 13% adipös, 44% Psychorisiken",
           "url": "/de/wallis-artikel/wallis-gesundheit-2026-ovs/",
-          "excerpt": "83% der erwachsenen Walliser fühlen sich 2022 bei guter Gesundheit Lebenserwartung: 85,9 Jahre für Frauen, 82,4 für Männer Die über 65-Jährigen machen 2024 21%",
+          "excerpt": "Im Jahr 2022 gaben 83% der Erwachsenen im Wallis an, bei guter oder sehr guter Gesundheit zu sein, gegenüber 85% in der Schweiz.",
           "date": "2026-10-18T08:16:12.890Z"
         },
         {
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "VS",
@@ -754,7 +754,7 @@
         {
           "title": "Rapport OVS : 83% des Valaisans en bonne santé, 13% obèses",
           "url": "/fr/articles-valais/valais-sante-2026-ovs/",
-          "excerpt": "83% des adultes valaisans se sentent en bonne santé en 2022 Espérance de vie : 85,9 ans pour les femmes, 82,4 pour les hommes Les plus de 65 ans représentent",
+          "excerpt": "En 2022, 83% des adultes en Valais déclaraient être en bonne ou excellente santé, contre 85% en Suisse.",
           "date": "2026-10-18T08:16:12.890Z"
         },
         {
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

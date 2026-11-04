@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "a7a41ecfb8e087284279caecf6aa0b8b8eb8cd8dd41a6ce0fd18d8d0f5b94789",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "eb82f7707a9c624796bc94d3c3b8d852e6e8c8c97fc82e712caacfcb04b7d7e7",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -205,7 +205,7 @@
         {
           "title": "Parlamento di Basilea: mozione per iniziare i cantieri alle 6",
           "url": "/articoli-basilea/basilea-cantieri-alle-sei/",
-          "excerpt": "Il Gran Consiglio di Basilea ha trasmesso una mozione per consentire lavori edili alle 6 da giugno ad agosto; quelli rumorosi resterebbero dalle 7.",
+          "excerpt": "Mercoledì il Gran Consiglio di Basilea ha trasmesso per la prima volta al governo una mozione di Luca Urgese (FDP) sull'orario di lavoro nei cantieri.",
           "date": "2026-10-23T02:22:16.813Z"
         },
         {
@@ -276,7 +276,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -530,7 +530,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -707,7 +707,7 @@
         {
           "title": "BVB: Mähen in Straßenbahnen, dokumentierte Reinigung",
           "url": "/de/basel-artikel/bvb-tram-rasurungsfall/",
-          "excerpt": "Die Basler Verkehrsbetriebe (BVB) veröffentlichten auf Facebook ein Foto von zwei blauen Rasierern und Haaren auf dem Boden einer Straßenbahn; es ist der erste bekannte Vorfall dieser Art.",
+          "excerpt": "Am Montag veröffentlichten die Basler Verkehrsbetriebe (BVB) auf Facebook ein Foto, das das Unternehmen selbst überraschte.",
           "date": "2026-10-27T00:34:47.659Z"
         },
         {
@@ -784,7 +784,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -1038,7 +1038,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

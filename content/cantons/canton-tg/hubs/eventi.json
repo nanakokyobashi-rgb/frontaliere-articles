@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "2784fa19748c6a5d1fbfffbfde0e53c6fc0275a161319e5bc1f19df207cadeeb",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "2052ce48b2ba47327271bd196cca3ae1f579f31cc4cc1032069cf49be92fab56",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "TG",
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "TG",
@@ -404,7 +404,7 @@
         {
           "title": "Kreuzlingen: Bärenplatz wegen Messe geschlossen",
           "url": "/de/thurgau-artikel/kreuzlingen-barenplatz-wegen-messe-geschlossen/",
-          "excerpt": "In Kreuzlingen werden die Busse vom 25.",
+          "excerpt": "Ab Sonntag, 25. Oktober, ab Reisebeginn werden die Kreuzlinger Busse bis Dienstag, 27. Oktober, 09.00 Uhr umgeleitet. Die Haltestelle Bärenplatz wird an den Hauptbahnhof verlegt.",
           "date": "2026-10-17T00:40:57.671Z"
         }
       ],
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "TG",
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

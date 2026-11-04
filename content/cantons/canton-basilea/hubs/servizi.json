@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "73823a21e4c79465d384d182755d9c3ab77c947f1484c7e5ee7cf92cc0394eda",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "44975eefbbc3e098515085a117611f4410532a3d06549e9813dbeffa248c3343",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -249,7 +249,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -463,7 +463,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -604,7 +604,7 @@
         {
           "title": "BVB: Mähen in Straßenbahnen, dokumentierte Reinigung",
           "url": "/de/basel-artikel/bvb-tram-rasurungsfall/",
-          "excerpt": "Die Basler Verkehrsbetriebe (BVB) veröffentlichten auf Facebook ein Foto von zwei blauen Rasierern und Haaren auf dem Boden einer Straßenbahn; es ist der erste bekannte Vorfall dieser Art.",
+          "excerpt": "Am Montag veröffentlichten die Basler Verkehrsbetriebe (BVB) auf Facebook ein Foto, das das Unternehmen selbst überraschte.",
           "date": "2026-10-27T00:34:47.659Z"
         },
         {
@@ -677,7 +677,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -883,7 +883,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "30b144d05ff62a2841813563bb39e05b3199349c590654c716f0dc60f709edd9",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "ce9a81e585717566dcbb4654f6cb994164b00179bf29193f761085ba0d11fc76",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -264,7 +264,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "AG",
@@ -506,7 +506,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "AG",
@@ -713,7 +713,7 @@
         {
           "title": "Obermumpf: Bauarbeiten an der K491 bis Herbst 2027",
           "url": "/de/aargau-artikel/obermumpf-bauarbeiten-an-der-k491-bis-herbst-2027/",
-          "excerpt": "Am Montag, 12.",
+          "excerpt": "Am Montag, 12. Oktober, beginnen die Arbeiten, die bis Herbst 2027 dauern sollen.",
           "date": "2026-10-09T06:35:59.639Z"
         }
       ],
@@ -748,7 +748,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "AG",
@@ -990,7 +990,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

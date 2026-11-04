@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "80d7edcb9fb6c2f22dee6198470666ce81ff165e99ea6b1d2929af315c6bccf5",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "3eca5f2c253000dba5824796f9493b892ecddc98283a667381b2e5ade386045a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -73,7 +73,7 @@
         {
           "title": "Permesso di domicilio C Canton Glarona: requisiti e domanda",
           "url": "/articoli-svizzera/permesso-c-glarona-requisiti/",
-          "excerpt": "Guida ai requisiti per il permesso C a Glarona: anni di residenza, integrazione linguistica e procedura di rilascio per cittadini UE/AELS e terzi stati.",
+          "excerpt": "L'ottenimento del permesso di domicilio C nel Canton Glarona non dipende esclusivamente dal tempo trascorso nel territorio, ma anche dal grado di integrazione del richiedente.",
           "date": "2026-09-18T04:16:44.938Z"
         },
         {
@@ -91,7 +91,7 @@
         {
           "title": "Premi cassa malati Cantone Glarona e riduzione premi",
           "url": "/articoli-svizzera/premi-cassa-malati-glarona-riduzione/",
-          "excerpt": "Il sistema di premi cassa malati nel Cantone di Glarona con fasce di premio e franchigie",
+          "excerpt": "Il sistema di premi cassa malati nel Cantone di Glarona con fasce di premio e franchigie.",
           "date": "2026-08-17T03:12:35.438Z"
         },
         {
@@ -140,7 +140,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "GL",
@@ -214,7 +214,7 @@
         {
           "title": "Health insurance premiums Canton Glarus and premium reductions",
           "url": "/en/swiss-articles/healthcare-insurance-premiums-glarus/",
-          "excerpt": "The sick pay premium system in the Canton of Glarus with premium bands and deductibles",
+          "excerpt": "The sick pay premium system in the Canton of Glarus with premium bands and deductibles.",
           "date": "2026-08-17T03:12:35.438Z"
         },
         {
@@ -259,7 +259,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "GL",
@@ -333,7 +333,7 @@
         {
           "title": "Krankenkassenprämien Kanton Glarus und Prämienverbilligung",
           "url": "/de/schweiz-artikel/gesundheitsversicherungspramien-glarus/",
-          "excerpt": "Das Krankenkassen-Prämiensystem im Kanton Glarus mit Prämienbändern und Franchisen",
+          "excerpt": "Das Krankenkassen-Prämiensystem im Kanton Glarus mit Prämienbändern und Franchisen.",
           "date": "2026-08-17T03:12:35.438Z"
         },
         {
@@ -378,7 +378,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "GL",
@@ -452,7 +452,7 @@
         {
           "title": "Primes caisse-maladie canton de Glaris et réduction des primes",
           "url": "/fr/articles-suisse/systeme-de-primes-dassurance-maladie-glaris/",
-          "excerpt": "Le système de primes caisse-maladie dans le canton de Glaris avec fourchettes de primes et franchises",
+          "excerpt": "Le système de primes caisse-maladie dans le canton de Glaris avec fourchettes de primes et franchises.",
           "date": "2026-08-17T03:12:35.438Z"
         },
         {
@@ -493,7 +493,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

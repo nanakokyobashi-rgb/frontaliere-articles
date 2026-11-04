@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "39d70c40117c2fde8164c8a1bdb16c00b18a0b5a80274e4bd6ab876c65b19116",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "f79f67f22b8130baae2b909c14cdbc4bca0dc7ae637b8e0caa686f071a01642c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -155,7 +155,7 @@
         {
           "title": "HUG primo ospedale svizzero nel ranking Smart Hospitals 2027",
           "url": "/articoli-ginevra/hug-primo-ospedale-svizzero-2027/",
-          "excerpt": "Gli HUG sono 31° al mondo nel 2027 Primo ospedale svizzero della graduatoria 37 posizioni guadagnate rispetto al 2026 410 ospedali in 33 Paesi Classifica →",
+          "excerpt": "Il salto che caratterizza il risultato degli HUG è quantificato dalla stessa graduatoria: 37 posizioni guadagnate rispetto all’edizione 2026. Nel ranking 2027 di Newsweek e Statista, gli HUG occupano il 31° posto…",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
@@ -167,7 +167,7 @@
         {
           "title": "Accordo Ginevra-Francia per cure oncologiche pediatriche",
           "url": "/articoli-ginevra/accordo-cure-oncologiche-ginevra/",
-          "excerpt": "Accordo tra autorità ginevrine e francesi",
+          "excerpt": "Accordo tra autorità ginevrine e francesi.",
           "date": "2026-10-07T08:57:01.058Z"
         },
         {
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "GE",
@@ -356,13 +356,13 @@
         {
           "title": "HUG first Swiss hospital in the Smart Hospitals 2027 ranking",
           "url": "/en/geneva-articles/hug-first-swiss-hospital-2027/",
-          "excerpt": "HUG rank 31st in the world in 2027 First Swiss hospital in the ranking 37 positions gained compared with 2026 410 hospitals in 33 countries Ranking → Newsweek",
+          "excerpt": "The leap that characterizes HUG’s result is quantified by the same ranking: 37 places gained compared with the 2026 edition.",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
           "title": "UNIGE: mental health, October 5-10, 2026",
           "url": "/en/geneva-articles/unige-nature-mental-wellbeing/",
-          "excerpt": "Mental Health Week 2026 runs from October 5 to 10.",
+          "excerpt": "From October 5 to 10, 2026, UNIGE's Mental Health Week places the role of the body, movement and connection to oneself at the center of psychological balance.",
           "date": "2026-10-09T16:43:09.560Z"
         },
         {
@@ -424,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "GE",
@@ -552,13 +552,13 @@
         {
           "title": "HUG erstes Schweizer Spital im Ranking Smart Hospitals 2027",
           "url": "/de/genf-artikel/hug-erster-schweizer-krankenhaus-2027/",
-          "excerpt": "Die HUG liegen 2027 weltweit auf Rang 31° Erstes Schweizer Spital der Rangliste Gegenüber 2026 um 37 Plätze verbessert 410 Spitäler in 33 Ländern Rangliste →",
+          "excerpt": "Im Ranking 2027 von Newsweek und Statista belegen die HUG weltweit den 31. Platz und sind damit das bestplatzierte Krankenhaus der Schweiz.",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
           "title": "UNIGE: psychische Gesundheit, 5.–10. Oktober 2026",
           "url": "/de/genf-artikel/unige-natur-psychisches-wohlbefinden/",
-          "excerpt": "Die Woche der psychischen Gesundheit 2026 findet vom 5.",
+          "excerpt": "Vom 5. bis 10. Oktober 2026 stellt die Woche der psychischen Gesundheit von UNIGE die Rolle des Körpers, der Bewegung und der Verbindung zu sich selbst für das psychische Gleichgewicht in den Mittelpunkt.",
           "date": "2026-10-09T16:43:09.560Z"
         },
         {
@@ -620,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "GE",
@@ -748,7 +748,7 @@
         {
           "title": "HUG, premier hôpital suisse du classement Smart Hospitals 2027",
           "url": "/fr/articles-geneve/hug-premier-hopital-suisse-2027/",
-          "excerpt": "Les HUG sont 31e au monde en 2027 Premier hôpital suisse du classement 37 places gagnées par rapport à 2026 410 hôpitaux dans 33 pays Classement → Newsweek",
+          "excerpt": "Le bond qui caractérise le résultat des HUG est quantifié par le même classement : 37 places gagnées par rapport à l’édition 2026.",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
@@ -760,7 +760,7 @@
         {
           "title": "Accord Genève-France pour les soins oncologiques pédiatriques",
           "url": "/fr/articles-geneve/cooperation-transfrontaliere-cancer-geneve/",
-          "excerpt": "Accord entre les autorités genevoises et françaises",
+          "excerpt": "Accord entre les autorités genevoises et françaises.",
           "date": "2026-10-07T08:57:01.058Z"
         },
         {
@@ -813,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

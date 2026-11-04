@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "5ea50bc2e3e7f08215e433732f4c82a49fabfa18bc90bb92b3bf25b3885bfae5",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "30ab2a83cb2b73cabedb715223043b6309e120c3ba0ab1dd3d6f45501eb9b76b",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -73,7 +73,7 @@
         {
           "title": "Benzina cara: Sciaffusa vuole più ricariche elettriche",
           "url": "/articoli-sciaffusa/sciaffusa-ricarica-elettrica/",
-          "excerpt": "Prezzi della benzina elevati e obiettivo del Cantone: più stazioni di ricarica per auto elettriche, come quelle già installate a St.",
+          "excerpt": "Il titolo della fonte segnala prezzi elevati della benzina e indica che il Cantone di Sciaffusa vuole più «Anschlüsse» per le auto elettriche. Il lead pubblico rende l'obiettivo in termini di «Ladestationen»: il…",
           "date": "2026-10-30T21:05:24.930Z"
         },
         {
@@ -94,7 +94,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "SH",
@@ -154,7 +154,7 @@
         {
           "title": "Expensive petrol: Schaffhausen wants more electric charging stations",
           "url": "/en/schaffhausen-articles/schaffhausen-electric-charging/",
-          "excerpt": "High petrol prices and the canton’s goal: more charging stations for electric cars, like those already installed in St.",
+          "excerpt": "The source's headline points to high petrol prices and indicates that the Canton of Schaffhausen wants more “connections” for electric cars. The public lead expresses the goal in terms of “charging stations”: the…",
           "date": "2026-10-30T21:05:24.930Z"
         },
         {
@@ -175,7 +175,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "SH",
@@ -235,7 +235,7 @@
         {
           "title": "Teures Benzin: Schaffhausen will mehr Lademöglichkeiten",
           "url": "/de/schaffhausen-artikel/schaffhausen-ladestationen-e-autos/",
-          "excerpt": "Hohe Benzinpreise und Ziel des Kantons: mehr Ladestationen für Elektroautos, wie die bereits in St.",
+          "excerpt": "Die Beziehung zwischen den drei Elementen lässt sich ausdrücken, ohne Szenarien hinzuzufügen: Hohe Benzinpreise sind der Aufhänger des Titels; mehr Stationen für Elektroautos sind das Ziel des Kantons; St. Johann ist…",
           "date": "2026-10-30T21:05:24.930Z"
         },
         {
@@ -256,7 +256,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "SH",
@@ -316,7 +316,7 @@
         {
           "title": "Essence chère : Schaffhouse veut davantage de bornes de recharge électrique",
           "url": "/fr/articles-schaffhouse/schaffhouse-bornes-recharge-electrique/",
-          "excerpt": "Prix de l’essence élevés et objectif du canton : davantage de stations de recharge pour voitures électriques, comme celles déjà installées à St.",
+          "excerpt": "Le titre de la source signale des prix élevés de l'essence et indique que le canton de Schaffhouse veut davantage d'«Anschlüsse» pour les voitures électriques. Le chapô public formule l'objectif en termes de…",
           "date": "2026-10-30T21:05:24.930Z"
         },
         {
@@ -337,7 +337,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

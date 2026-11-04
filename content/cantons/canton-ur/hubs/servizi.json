@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "7fc448a0dea633e109bcbf9e096105030de3e6fa8dd292adb9a4ffbfc899e4b2",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "910d0c05692f779c014842a6e6c1fd37c7758c8f21635494e2e44f70919eb430",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -109,7 +109,7 @@
         {
           "title": "Permesso di dimora B in Uri: requisiti e procedura",
           "url": "/articoli-svizzera/permesso-dimora-b-ur-requisiti-rinnovo/",
-          "excerpt": "Cosa serve per ottenere il permesso di dimora B nel Cantone di Uri e come procedere con il rinnovo",
+          "excerpt": "Cosa serve per ottenere il permesso di dimora B nel Cantone di Uri e come procedere con il rinnovo.",
           "date": "2026-08-16T00:13:35.081Z"
         },
         {
@@ -158,7 +158,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "UR",
@@ -245,7 +245,7 @@
         {
           "title": "Residence permit B in Uri: requirements and procedure",
           "url": "/en/swiss-articles/permesso-di-dimora-b-canton-uri-requisiti-e-rinnovo/",
-          "excerpt": "What is needed to obtain the residence permit B in the Canton of Uri and how to proceed with the renewal",
+          "excerpt": "What is needed to obtain the residence permit B in the Canton of Uri and how to proceed with the renewal.",
           "date": "2026-08-16T00:13:35.081Z"
         },
         {
@@ -290,7 +290,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "UR",
@@ -377,7 +377,7 @@
         {
           "title": "Aufenthaltsbewilligung B in Uri: Voraussetzungen und Verfahren",
           "url": "/de/schweiz-artikel/ermesse-b-kanton-ur-anforderungen-und-verlangerung/",
-          "excerpt": "Was es braucht, um die Aufenthaltsbewilligung B im Kanton Uri zu erhalten und wie man mit der Erneuerung fortfährt",
+          "excerpt": "Was es braucht, um die Aufenthaltsbewilligung B im Kanton Uri zu erhalten und wie man mit der Erneuerung fortfährt.",
           "date": "2026-08-16T00:13:35.081Z"
         },
         {
@@ -422,7 +422,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "UR",
@@ -509,7 +509,7 @@
         {
           "title": "Permis de séjour B à Uri : exigences et procédure",
           "url": "/fr/articles-suisse/permis-de-sejour-b-canton-d-uri-exigences-et-renouvellement/",
-          "excerpt": "Ce qu'il faut pour obtenir le permis de séjour B dans le canton d'Uri et comment procéder au renouvellement",
+          "excerpt": "Ce qu'il faut pour obtenir le permis de séjour B dans le canton d'Uri et comment procéder au renouvellement.",
           "date": "2026-08-16T00:13:35.081Z"
         },
         {
@@ -550,7 +550,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

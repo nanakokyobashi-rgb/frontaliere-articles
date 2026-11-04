@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "d4fee73f1768d1c6035a5567bd663e7ec90ab5a1f65f6c47a6dba9e8236d358f",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "1ce4eb85295ec9d21b6d37bccd819492ae8b0df02e86ff57216e6d60c33228f4",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -173,7 +173,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "NW",
@@ -320,7 +320,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "NW",
@@ -467,7 +467,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "NW",
@@ -587,7 +587,7 @@
         {
           "title": "Permis L de courte durée dans le canton de Nidwald : validité et prolongation",
           "url": "/fr/articles-suisse/permis-l-breve-duree-nidwald-canton/",
-          "excerpt": "Le permis L de courte durée dans le canton de Nidwald est valable pour une durée maximale d'un an.",
+          "excerpt": "Le permis L de courte durée dans le canton de Nidwald est valable pour une durée déterminée, qui peut varier en fonction des conditions.",
           "date": "2026-08-16T19:30:43.489Z"
         }
       ],
@@ -610,7 +610,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

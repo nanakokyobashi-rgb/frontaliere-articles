@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "6661e3ec76da3b3641a8e7886df76243c6d479ccaf653456d014b8b7528337c9",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "c447dc42fb78ace0a1d441e87f52d6b3e330b88de5032769bb68fe55a5aef74b",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -74,7 +74,7 @@
         {
           "title": "Robatech rileva Balti AG a Baar: niente tagli previsti",
           "url": "/articoli-zugo/balti-zug-robatech-acquisizione/",
-          "excerpt": "Robatech ha rilevato Balti AG a fine settembre Balti AG ha sede a Baar, nel Canton Zugo Non sono previsti tagli o ristrutturazioni Acquirente: Robatech AG",
+          "excerpt": "A fine settembre Robatech AG, con sede a Muri nel Canton Argovia, ha rilevato Balti AG, azienda basata a Baar, nel Canton Zugo.",
           "date": "2026-10-28T01:30:31.021Z"
         },
         {
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "ZG",
@@ -161,7 +161,7 @@
         {
           "title": "Robatech acquires Balti AG in Baar: no cuts expected",
           "url": "/en/zug-articles/robatech-takes-over-balti-baar/",
-          "excerpt": "Robatech acquired Balti AG at the end of September Balti AG is based in Baar, in the Canton of Zug No cuts or restructuring are planned Buyer: Robatech AG",
+          "excerpt": "At the end of September, Robatech AG, based in Muri in the Canton of Aargau, acquired Balti AG, a company based in Baar, in the Canton of Zug.",
           "date": "2026-10-28T01:30:31.021Z"
         },
         {
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "ZG",
@@ -248,7 +248,7 @@
         {
           "title": "Robatech übernimmt Balti AG in Baar: keine Stellenkürzungen vorgesehen",
           "url": "/de/zug-artikel/robatech-uebernimmt-balti-baar/",
-          "excerpt": "Robatech hat Balti AG Ende September übernommen Balti AG hat ihren Sitz in Baar, Kanton Zug Es sind keine Kürzungen oder Umstrukturierungen geplant Käufer",
+          "excerpt": "Ende September hat die Robatech AG mit Sitz in Muri im Kanton Aargau die Balti AG übernommen, ein Unternehmen mit Sitz in Baar im Kanton Zug.",
           "date": "2026-10-28T01:30:31.021Z"
         },
         {
@@ -260,7 +260,7 @@
         {
           "title": "Zug stellt die Traktandenliste des Kantonsrats zur Verfügung",
           "url": "/de/zug-artikel/zug-traktandenliste-kantonsrat-oktober-2026/",
-          "excerpt": "Die Quelle des Kantons Zug stellt die Traktandenliste der Sitzung des Kantonsrats vom 29.",
+          "excerpt": "Der 29. Oktober 2026 ist das angegebene Datum für die Sitzung des Kantonsrats von Zug. Die zugehörige Traktandenliste, also die Liste der Tagesordnungspunkte, ist verfügbar: Dies ist die zentrale Aussage der Quelle.",
           "date": "2026-10-27T01:58:14.398Z"
         }
       ],
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "ZG",
@@ -335,7 +335,7 @@
         {
           "title": "Robatech acquiert Balti AG à Baar : aucune suppression de postes prévue",
           "url": "/fr/articles-zoug/robatech-reprend-balti-baar/",
-          "excerpt": "Robatech a repris Balti AG fin septembre Balti AG est basée à Baar, dans le canton de Zoug Aucun licenciement ou réorganisation n'est prévu Acquéreur : Robatech",
+          "excerpt": "Fin septembre, Robatech AG, basée à Muri dans le canton d'Argovie, a repris Balti AG, une entreprise basée à Baar dans le canton de Zoug.",
           "date": "2026-10-28T01:30:31.021Z"
         },
         {
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

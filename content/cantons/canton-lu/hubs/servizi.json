@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "b015e54b6741c4b5a21fc5d05bc3516c2cf068905ad222560e562f178f769275",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "0e731db9982f2025f8ac057142c736a05e893a081511a185f6993e3881a2d6af",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -138,7 +138,7 @@
         {
           "title": "Lucerna: giornata sulla salute mentale il 10 ottobre",
           "url": "/articoli-lucerna/lucerna-salute-mentale-banchi/",
-          "excerpt": "10 ottobre 2026: giornata cantonale a Lucerna",
+          "excerpt": "10 ottobre 2026: giornata cantonale a Lucerna.",
           "date": "2026-10-07T17:52:11.678Z"
         },
         {
@@ -193,7 +193,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "LU",
@@ -359,7 +359,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "LU",
@@ -525,7 +525,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "LU",
@@ -641,7 +641,7 @@
         {
           "title": "Lucerne : journée sur la santé mentale le 10 octobre",
           "url": "/fr/articles-lucerne/lucerne-sante-mentale-bancs/",
-          "excerpt": "10 octobre 2026 : journée cantonale à Lucerne",
+          "excerpt": "10 octobre 2026 : journée cantonale à Lucerne.",
           "date": "2026-10-07T17:52:11.678Z"
         },
         {
@@ -688,7 +688,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

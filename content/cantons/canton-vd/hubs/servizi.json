@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "168825799733439f527d9225eb544e17851cb54214cb7ee14afadb712cd7dca1",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "0c5d87f2e2d99bdd6e2a4036021a34b6ee210bf1d00a04892295c35f759177c6",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -115,7 +115,7 @@
         {
           "title": "Otto scuole vaudesi colpite da furti notturni",
           "url": "/articoli-vaud/scuole-vaud-furti-inchieste/",
-          "excerpt": "Otto scuole vaudesi colpite in dieci giorni Tutti gli episodi sono avvenuti di notte Orbe stima danni per migliaia di franchi La polizia cantonale ha aperto più",
+          "excerpt": "Otto scuole del Canton Vaud hanno subito un furto con scasso o un tentativo di effrazione in dieci giorni.",
           "date": "2026-10-17T01:27:48.756Z"
         },
         {
@@ -188,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "VD",
@@ -281,7 +281,7 @@
         {
           "title": "Eight schools in Vaud hit by overnight burglaries",
           "url": "/en/vaud-articles/vaud-schools-break-ins-investigations/",
-          "excerpt": "Eight Vaud schools hit in ten days All incidents occurred at night Orbe estimates damage amounting to thousands of francs The cantonal police have opened",
+          "excerpt": "Eight schools in the Canton of Vaud suffered a burglary or attempted break-in over ten days.",
           "date": "2026-10-17T01:27:48.756Z"
         },
         {
@@ -305,7 +305,7 @@
         {
           "title": "Permit L short duration Vaud: duration, extension and rights",
           "url": "/en/swiss-articles/work-permit-l-short-term-vaud/",
-          "excerpt": "The L permit allows you to work in Switzerland for up to 1 year and is renewable. Learn how to apply for the extension, move to permit B, and what your tax obligations are.",
+          "excerpt": "The L permit allows you to work in Switzerland for up to 1 year and is renewable.",
           "date": "2026-09-04T08:00:51.242Z"
         },
         {
@@ -350,7 +350,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "VD",
@@ -443,7 +443,7 @@
         {
           "title": "Acht Waadtländer Schulen von nächtlichen Einbrüchen betroffen",
           "url": "/de/waadt-artikel/waadt-schulen-einbrueche-ermittlungen/",
-          "excerpt": "Acht Waadtländer Schulen in zehn Tagen betroffen Alle Vorfälle ereigneten sich nachts Orbe schätzt die Schäden auf mehrere Tausend Franken Die Kantonspolizei",
+          "excerpt": "In zehn Tagen wurden acht Schulen im Kanton Waadt Opfer eines Einbruchs oder eines Einbruchsversuchs.",
           "date": "2026-10-17T01:27:48.756Z"
         },
         {
@@ -512,7 +512,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "VD",
@@ -605,7 +605,7 @@
         {
           "title": "Huit écoles vaudoises touchées par des vols nocturnes",
           "url": "/fr/articles-vaud/ecoles-vaud-cambriolages-enquetes/",
-          "excerpt": "Huit écoles vaudoises touchées en dix jours Tous les incidents ont eu lieu la nuit Orbe estime les dommages à plusieurs milliers de francs La police cantonale",
+          "excerpt": "Huit écoles du canton de Vaud ont subi un cambriolage ou une tentative d'effraction en dix jours.",
           "date": "2026-10-17T01:27:48.756Z"
         },
         {
@@ -670,7 +670,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

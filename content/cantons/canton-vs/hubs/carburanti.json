@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "c890fcec96cbefdf55abe720259e1baa7984359c1d5e53fea152d5e3ec03f2f3",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "99d47fb4f997c3d261ab5cd05e7e439177bed869dba4105136e3b85902a1efe6",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -80,13 +80,13 @@
         {
           "title": "Val de Bagnes: 175 persone per settimana sostenibilità",
           "url": "/articoli-vallese/val-de-bagnes-sostenibilita-2024/",
-          "excerpt": "175 persone a Val de Bagnes Sei appuntamenti dal 24 al 31 ottobre Presentato il primo Piano climatico del comune Il piano comprende 26 misure e 75 azioni Luogo",
+          "excerpt": "Dal 24 al 31 ottobre, 175 persone hanno partecipato alla Settimana della sostenibilità a Val de Bagnes.",
           "date": "2026-11-03T09:11:19.910Z"
         },
         {
           "title": "Bains d'Ovronnaz: sursis concordatario fino al 31 marzo 2027",
           "url": "/articoli-vallese/bains-ovronnaz-nuovo-sursis/",
-          "excerpt": "Il tribunale di Martigny prolunga il sursis fino al 31 marzo 2027 I dipendenti conservano il posto per tutta la stagione invernale Le presenze aumentano",
+          "excerpt": "Il tribunale del distretto di Martigny ha concesso ai Bains d'Ovronnaz un nuovo sursis concordatario fino al 31 marzo 2027.",
           "date": "2026-10-28T15:29:18.560Z"
         },
         {
@@ -98,7 +98,7 @@
         {
           "title": "Rapporto OVS: 83% vallesani in buona salute, obesità al 13% e rischi psicosociali al 44%",
           "url": "/articoli-vallese/salute-vallese-2026-ovs/",
-          "excerpt": "83% degli adulti vallesani si sente in buona salute nel 2022 Speranza di vita: 85,9 anni per le donne, 82,4 per gli uomini Gli over 65 sono il 21%",
+          "excerpt": "Nel 2022, l'83% degli adulti in Vallese dichiarava di essere in buona o ottima salute, contro l'85% in Svizzera.",
           "date": "2026-10-18T08:16:12.890Z"
         }
       ],
@@ -128,7 +128,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "VS",
@@ -195,13 +195,13 @@
         {
           "title": "Val de Bagnes: 175 people for Sustainability Week",
           "url": "/en/valais-articles/val-de-bagnes-sustainability/",
-          "excerpt": "175 people in Val de Bagnes Six events from October 24 to 31 The municipality's first Climate Plan was presented The plan comprises 26 measures and 75 actions",
+          "excerpt": "From October 24 to 31, 175 people participated in Sustainability Week in Val de Bagnes.",
           "date": "2026-11-03T09:11:19.910Z"
         },
         {
           "title": "Bains d'Ovronnaz: composition moratorium until March 31, 2027",
           "url": "/en/valais-articles/bains-ovronnaz-new-sursis/",
-          "excerpt": "The Martigny court extends the moratorium until March 31, 2027 Employees retain their jobs throughout the winter season Visitor numbers increase by 20-30%",
+          "excerpt": "The Martigny district court has granted Bains d'Ovronnaz a new composition moratorium until March 31, 2027.",
           "date": "2026-10-28T15:29:18.560Z"
         },
         {
@@ -213,7 +213,7 @@
         {
           "title": "OVS report: 83% of Valais residents in good health",
           "url": "/en/valais-articles/valais-health-2026-ovs/",
-          "excerpt": "83% of Valais adults feel in good health in 2022 Life expectancy: 85,9 years for women, 82,4 for men People over 65 account for 21% of the population in 2024",
+          "excerpt": "In 2022, 83% of adults in Valais reported being in good or very good health, compared with 85% in Switzerland.",
           "date": "2026-10-18T08:16:12.890Z"
         }
       ],
@@ -243,7 +243,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "VS",
@@ -310,13 +310,13 @@
         {
           "title": "Val de Bagnes: 175 Personen für die Nachhaltigkeitswoche",
           "url": "/de/wallis-artikel/val-de-bagnes-nachhaltigkeit/",
-          "excerpt": "175 Personen in Val de Bagnes Sechs Veranstaltungen vom 24.",
+          "excerpt": "Vom 24. bis 31. Oktober nahmen 175 Personen an der Nachhaltigkeitswoche in Val de Bagnes teil.",
           "date": "2026-11-03T09:11:19.910Z"
         },
         {
           "title": "Bains d'Ovronnaz: Nachlassstundung bis zum 31. März 2027",
           "url": "/de/wallis-artikel/bains-ovronnaz-neuer-sursis/",
-          "excerpt": "Das Gericht von Martigny verlängert die Nachlassstundung bis zum 31.",
+          "excerpt": "Das Bezirksgericht Martigny hat den Bains d'Ovronnaz eine neue Nachlassstundung bis zum 31. März 2027 gewährt.",
           "date": "2026-10-28T15:29:18.560Z"
         },
         {
@@ -328,7 +328,7 @@
         {
           "title": "OVS-Bericht: 83% Walliser fit, 13% adipös, 44% Psychorisiken",
           "url": "/de/wallis-artikel/wallis-gesundheit-2026-ovs/",
-          "excerpt": "83% der erwachsenen Walliser fühlen sich 2022 bei guter Gesundheit Lebenserwartung: 85,9 Jahre für Frauen, 82,4 für Männer Die über 65-Jährigen machen 2024 21%",
+          "excerpt": "Im Jahr 2022 gaben 83% der Erwachsenen im Wallis an, bei guter oder sehr guter Gesundheit zu sein, gegenüber 85% in der Schweiz.",
           "date": "2026-10-18T08:16:12.890Z"
         }
       ],
@@ -354,7 +354,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "VS",
@@ -421,13 +421,13 @@
         {
           "title": "Val de Bagnes : 175 personnes pour la semaine de la durabilité",
           "url": "/fr/articles-valais/val-de-bagnes-durable/",
-          "excerpt": "175 personnes à Val de Bagnes Six rendez-vous du 24 au 31 octobre Présentation du premier Plan climatique de la commune Le plan comprend 26 mesures et 75",
+          "excerpt": "Du 24 au 31 octobre, 175 personnes ont participé à la Semaine de la durabilité à Val de Bagnes.",
           "date": "2026-11-03T09:11:19.910Z"
         },
         {
           "title": "Bains d'Ovronnaz : sursis concordataire jusqu'au 31 mars 2027",
           "url": "/fr/articles-valais/bains-ovronnaz-nouveau-sursis/",
-          "excerpt": "Le tribunal de Martigny prolonge le sursis jusqu'au 31 mars 2027 Les employés conservent leur emploi pendant toute la saison hivernale La fréquentation augmente",
+          "excerpt": "Le tribunal de district de Martigny a accordé aux Bains d'Ovronnaz un nouveau sursis concordataire jusqu'au 31 mars 2027.",
           "date": "2026-10-28T15:29:18.560Z"
         },
         {
@@ -439,7 +439,7 @@
         {
           "title": "Rapport OVS : 83% des Valaisans en bonne santé, 13% obèses",
           "url": "/fr/articles-valais/valais-sante-2026-ovs/",
-          "excerpt": "83% des adultes valaisans se sentent en bonne santé en 2022 Espérance de vie : 85,9 ans pour les femmes, 82,4 pour les hommes Les plus de 65 ans représentent",
+          "excerpt": "En 2022, 83% des adultes en Valais déclaraient être en bonne ou excellente santé, contre 85% en Suisse.",
           "date": "2026-10-18T08:16:12.890Z"
         }
       ],
@@ -469,7 +469,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

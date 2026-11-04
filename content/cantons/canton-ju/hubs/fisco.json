@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "fisco",
-  "updatedAt": "2026-10-27T00:21:44.857Z",
-  "contentHash": "9c106e7ffd2c3059cbcc72daef39035761bba949375434f701ffb3c2b7a6527f",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "c28cfb21b814028f67673e55cd588c0b4de0b5a3b0d72d8c22291dfc52ec9e5a",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -104,7 +104,7 @@
         {
           "title": "Imposizione dei coniugi: voto il 29 novembre",
           "url": "/articoli-giura/fiscalita-coppie-marite-voto/",
-          "excerpt": "L'8 marzo l'imposizione individuale è passata con il 54% Il 29 novembre si vota sull'iniziativa del Centro Il testo propone l'imposizione comune dei coniugi",
+          "excerpt": "Secondo la ricostruzione di RFJ, il sistema prevede che ogni contribuente sia tassato separatamente, indipendentemente dallo stato civile. Il 29 novembre, la questione torna alle urne: gli svizzeri dovranno esprimersi…",
           "date": "2026-10-27T00:08:19.325Z"
         },
         {
@@ -147,7 +147,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-27T00:21:44.857Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "JU",
@@ -234,7 +234,7 @@
         {
           "title": "Taxation of spouses: vote on 29 November",
           "url": "/en/jura-articles/marital-couple-tax-vote/",
-          "excerpt": "On 8 March, individual taxation passed with 54% On November 29, the vote will be held on the Center's initiative The text proposes the common taxation",
+          "excerpt": "According to RFJ's reconstruction, the system provides that each taxpayer is taxed separately, regardless of marital status. On November 29, the issue returns to the polls: the Swiss will have to express their opinion…",
           "date": "2026-10-27T00:08:19.325Z"
         },
         {
@@ -277,7 +277,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-27T00:21:44.857Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "JU",
@@ -364,7 +364,7 @@
         {
           "title": "Besteuerung der Ehepartner: Abstimmung am 29. November",
           "url": "/de/jura-artikel/ehepaare-steuer-abstimmung/",
-          "excerpt": "Am 8. März wurde die Einzelbesteuerung mit 54 % verabschiedet. Am 29. November findet die Abstimmung über die Initiative des Zentrums statt Der Text schlägt",
+          "excerpt": "Am 8. März wurde die Einzelbesteuerung mit 54 % verabschiedet. Am 29. November findet die Abstimmung über die Initiative des Zentrums statt Der Text schlägt.",
           "date": "2026-10-27T00:08:19.325Z"
         },
         {
@@ -407,7 +407,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-27T00:21:44.857Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "JU",
@@ -494,7 +494,7 @@
         {
           "title": "Fiscalité des conjoints : votez le 29 novembre",
           "url": "/fr/articles-jura/fiscalite-couples-maries-vote/",
-          "excerpt": "Le 8 mars, la fiscalité individuelle a été adoptée avec 54 % Le 29 novembre, le vote aura lieu sur l'initiative du Centre Le texte propose la taxation commune",
+          "excerpt": "Selon la reconstitution de RFJ, le système prévoit que chaque contribuable est imposé séparément, quelle que soit sa situation familiale. Le 29 novembre, la question revient aux urnes: les Suisses devront se prononcer…",
           "date": "2026-10-27T00:08:19.325Z"
         },
         {
@@ -537,7 +537,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-27T00:21:44.857Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

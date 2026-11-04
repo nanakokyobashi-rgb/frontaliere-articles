@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "05c574966780c35098705daed278fde4eb0de38a6eccdd9200028261c913808e",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "fe0eb454bf63ab2bb4d087e3c4596be7358e0362e144ce9988842b02a6b37159",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -211,7 +211,7 @@
         {
           "title": "Dal 13 dicembre soppressi i tram 50 e 51",
           "url": "/articoli-zurigo/vbz-tram-50-51-cambio/",
-          "excerpt": "Dal 13 dicembre spariscono le linee 50 e 51 I tram 4, 11, 13, 14 e 17 tornano sul Bahnhofquai La linea 83 viaggia ogni giorno fino alle 22 La linea notturna N8",
+          "excerpt": "Il 13 dicembre è previsto il cambio d'orario delle VBZ. Come riferisce tsri.ch, con la conclusione dei lavori al Bahnhofquai le linee tram 50 e 51 saranno soppresse e saranno aboliti anche i cambi di linea intorno alla…",
           "date": "2026-10-21T10:20:51.886Z"
         },
         {
@@ -235,7 +235,7 @@
         {
           "title": "Treno Lugano-Zurigo in panne: passeggeri a piedi da Bellinzona",
           "url": "/articoli-frontaliere/treno-guasto-bellinzona-2026/",
-          "excerpt": "Guasto tecnico sopprime il treno delle 19:00, nessun sostitutivo. Passeggeri in attesa alla stazione di Bellinzona",
+          "excerpt": "Guasto tecnico sopprime il treno delle 19:00, nessun sostitutivo. Passeggeri in attesa alla stazione di Bellinzona.",
           "date": "2026-04-27T04:40:54.725Z"
         },
         {
@@ -282,7 +282,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "ZH",
@@ -471,7 +471,7 @@
         {
           "title": "Trams 50 and 51 discontinued from December 13",
           "url": "/en/zurich-articles/vbz-tram-50-51-timetable-change/",
-          "excerpt": "From December 13, lines 50 and 51 will disappear Trams 4, 11, 13, 14 and 17 return to Bahnhofquai Line 83 runs every day until 22 Night line N8 becomes N80 Date",
+          "excerpt": "The VBZ timetable change is scheduled for December 13. As tsri.ch reports, with the completion of the work at Bahnhofquai, tram lines 50 and 51 will be discontinued, and line changes around the central station will…",
           "date": "2026-10-21T10:20:51.886Z"
         },
         {
@@ -495,7 +495,7 @@
         {
           "title": "Lugano-Zurich Train Breakdown: Passengers Walk from Bellinzona",
           "url": "/en/cross-border-articles/train-breakdown-bellinzona-2026/",
-          "excerpt": "Technical fault cancels the 19:00 train, no replacement. Passengers waiting at Bellinzona station",
+          "excerpt": "Technical fault cancels the 19:00 train, no replacement. Passengers waiting at Bellinzona station.",
           "date": "2026-04-27T04:40:54.725Z"
         },
         {
@@ -542,7 +542,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "ZH",
@@ -731,7 +731,7 @@
         {
           "title": "Ab dem 13. Dezember entfallen die Trams 50 und 51",
           "url": "/de/zurich-artikel/vbz-tram-50-51-fahrplanwechsel/",
-          "excerpt": "Ab dem 13. Dezember entfallen die Linien 50 und 51 Die Trams 4, 11, 13, 14 und 17 fahren wieder über den Bahnhofquai Die Linie 83 fährt täglich bis 22 Uhr",
+          "excerpt": "Am 13. Dezember ist der Fahrplanwechsel der VBZ vorgesehen. Wie tsri.ch berichtet, werden mit Abschluss der Arbeiten am Bahnhofquai die Tramlinien 50 und 51 eingestellt, und auch die Linienänderungen rund um den…",
           "date": "2026-10-21T10:20:51.886Z"
         },
         {
@@ -755,7 +755,7 @@
         {
           "title": "Zug Lugano-Zürich ausgefallen: Fahrgäste laufen von Bellinzona aus",
           "url": "/de/grenzgaenger-artikel/zugausfall-bellinzona-2026/",
-          "excerpt": "Technischer Defekt legt den Zug um 19:00 Uhr lahm, kein Ersatzverkehr. Fahrgäste warten am Bahnhof Bellinzona",
+          "excerpt": "Der Zug, der um 19:00 Uhr in Lugano abgefahren ist, wurde aufgrund eines technischen Defekts ausgefallen, wie ein Reisender berichtete.",
           "date": "2026-04-27T04:40:54.725Z"
         },
         {
@@ -802,7 +802,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "ZH",
@@ -991,7 +991,7 @@
         {
           "title": "Dès le 13 décembre, suppression des tramways 50 et 51",
           "url": "/fr/articles-zurich/vbz-tram-50-51-changement-horaire/",
-          "excerpt": "Dès le 13 décembre, les lignes 50 et 51 disparaissent Les tramways 4, 11, 13, 14 et 17 reprennent leur parcours sur le Bahnhofquai La ligne 83 circule tous",
+          "excerpt": "Le 13 décembre, le changement d'horaire des VBZ est prévu. Comme le rapporte tsri.ch, avec l'achèvement des travaux au Bahnhofquai, les lignes de tram 50 et 51 seront supprimées et les changements de ligne autour de la…",
           "date": "2026-10-21T10:20:51.886Z"
         },
         {
@@ -1015,7 +1015,7 @@
         {
           "title": "Train Lugano-Zurich en panne : passagers à pied depuis Bellinzone",
           "url": "/fr/articles-frontalier/panne-de-train-bellinzone-2026/",
-          "excerpt": "Une panne technique supprime le train de 19h00, aucun remplacement. Les passagers attendent à la gare de Bellinzone",
+          "excerpt": "Une panne technique supprime le train de 19h00, aucun remplacement. Les passagers attendent à la gare de Bellinzone.",
           "date": "2026-04-27T04:40:54.725Z"
         },
         {
@@ -1062,7 +1062,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

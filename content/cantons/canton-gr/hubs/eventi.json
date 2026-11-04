@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "2dcd50ed6c6da1cc62259d6905b010c50bf6e43283e3dd4458187f2de634fec8",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "fd1ac5788ea68dd0149e33367277ca32319d6aef9a0bed6a4e06818eb6321295",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -108,7 +108,7 @@
         {
           "title": "Lido Grono, apertura confermata per l'estate 2027",
           "url": "/articoli-grigioni/lido-grono-estate-2027/",
-          "excerpt": "Apertura del Lido Grono confermata per l'estate 2027 Cantiere della nuova piscina comunale ancora in corso Costi previsti: circa 5 milioni Annuncio del sindaco",
+          "excerpt": "Lido Grono aprirà nell'estate 2027. La conferma riguarda la nuova piscina comunale e arriva mentre il cantiere prosegue.",
           "date": "2026-10-10T18:56:18.018Z"
         },
         {
@@ -120,19 +120,19 @@
         {
           "title": "Laboratorio estivo al Museo Moesano: archeologia per ragazzi",
           "url": "/articoli-frontaliere/laboratorio-estivo-museo-moesano-2026/",
-          "excerpt": "Dal 3 al 7 agosto 2026, bambini e ragazzi di 7-12 anni scoprono i massi cuppellari con un laboratorio teatrale al Museo Moesano di San Vittore",
+          "excerpt": "Dal 3 al 7 agosto 2026, bambini e ragazzi di 7-12 anni scoprono i massi cuppellari con un laboratorio teatrale al Museo Moesano di San Vittore.",
           "date": "2026-05-03T19:00:09.428Z"
         },
         {
           "title": "MisoXperience 2024: il festival degli sport all'aperto in Mesolcina",
           "url": "/articoli-frontaliere/misoexperience-festival-sport-2024/",
-          "excerpt": "Dal 9 al 17 maggio, la valle Mesolcina ospita il MisoXperience Festival con kayak, bouldering e parapendio. Ecco il programma completo",
+          "excerpt": "Giunto ormai alla sua sesta edizione, il MisoXperience Festival si prepara a trasformare la valle Mesolcina in un vivace punto d’incontro per gli appassionati di sport all’aria aperta provenienti da tutta la Svizzera.",
           "date": "2026-05-05T19:17:57.904Z"
         },
         {
           "title": "Roveredo, iniziativa popolare per un Carnevale accessibile a tutti",
           "url": "/articoli-frontaliere/roveredo-carnevale-tutti-2026/",
-          "excerpt": "Un gruppo di cittadini di Roveredo lancia un'iniziativa per rendere il Carnevale Lingera più inclusivo e trasparente",
+          "excerpt": "Un gruppo di cittadini di Roveredo lancia un'iniziativa per rendere il Carnevale Lingera più inclusivo e trasparente.",
           "date": "2026-05-06T09:32:17.339Z"
         },
         {
@@ -153,7 +153,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "GR",
@@ -249,7 +249,7 @@
         {
           "title": "Lido Grono, opening confirmed for summer 2027",
           "url": "/en/graubunden-articles/grono-pool-opening-2027/",
-          "excerpt": "Opening of Lido Grono confirmed for summer 2027 Construction of the new municipal swimming pool still ongoing Expected costs: approximately 5 million Mayor's announcement",
+          "excerpt": "Lido Grono will open in the summer of 2027. The confirmation concerns the new municipal pool and arrives while the construction site continues.",
           "date": "2026-10-10T18:56:18.018Z"
         },
         {
@@ -261,7 +261,7 @@
         {
           "title": "Summer lab at Moesano Museum: archaeology for kids",
           "url": "/en/cross-border-articles/summer-workshop-moesano-museum-2026/",
-          "excerpt": "From 3 to 7 August 2026, children and young people aged 7-12 discover the cup-marked stones with a theatrical workshop at the Moesano Museum in San Vittore",
+          "excerpt": "From 3 to 7 August 2026, children and young people aged 7-12 discover the cup-marked stones with a theatrical workshop at the Moesano Museum in San Vittore.",
           "date": "2026-05-03T19:00:09.428Z"
         },
         {
@@ -273,7 +273,7 @@
         {
           "title": "Roveredo, initiative for an inclusive Carnival",
           "url": "/en/cross-border-articles/roveredo-carnival-for-all-2026/",
-          "excerpt": "A group of citizens from Roveredo launches an initiative to make the Lingera Carnival more inclusive and transparent",
+          "excerpt": "A group of citizens from Roveredo launches an initiative to make the Lingera Carnival more inclusive and transparent.",
           "date": "2026-05-06T09:32:17.339Z"
         },
         {
@@ -294,7 +294,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "GR",
@@ -390,7 +390,7 @@
         {
           "title": "Lido Grono, Eröffnung für den Sommer 2027 bestätigt",
           "url": "/de/graubunden-artikel/grono-schwimmbad-2027/",
-          "excerpt": "Eröffnung des Lido Grono für den Sommer 2027 bestätigt Baustelle des neuen kommunalen Schwimmbads weiterhin im Gange Vorgesehene Kosten: etwa 5 Millionen Ankündigung des Bürgermeisters",
+          "excerpt": "Lido Grono wird im Sommer 2027 eröffnet. Die Bestätigung betrifft das neue städtische Schwimmbad und kommt, während die Baustelle fortgesetzt wird.",
           "date": "2026-10-10T18:56:18.018Z"
         },
         {
@@ -408,13 +408,13 @@
         {
           "title": "MisoXperience 2024: Abenteuer in der Mesolcina",
           "url": "/de/grenzgaenger-artikel/misoexperience-sportfestival-2024/",
-          "excerpt": "Vom 9. bis 17. Mai gastiert das MisoXperience Festival in der Mesolcina mit Kayak, Bouldern und Paragliding. Hier ist das umfassende Programm",
+          "excerpt": "Vom 9. bis 17. Mai gastiert das MisoXperience Festival in der Mesolcina mit Kayak, Bouldern und Paragliding. Hier ist das umfassende Programm.",
           "date": "2026-05-05T19:17:57.904Z"
         },
         {
           "title": "Roveredo: Initiative für einen inklusiven Karneval",
           "url": "/de/grenzgaenger-artikel/roveredo-fasching-fur-alle-2026/",
-          "excerpt": "Eine Gruppe von Bürgern aus Roveredo startet eine Initiative, um den Lingera-Karneval inklusiver und transparenter zu gestalten",
+          "excerpt": "Eine Gruppe von Bürgern aus Roveredo startet eine Initiative, um den Lingera-Karneval inklusiver und transparenter zu gestalten.",
           "date": "2026-05-06T09:32:17.339Z"
         },
         {
@@ -435,7 +435,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "GR",
@@ -531,7 +531,7 @@
         {
           "title": "Lido Grono, ouverture confirmée pour l'été 2027",
           "url": "/fr/articles-grisons/piscine-grono-ete-2027/",
-          "excerpt": "Ouverture du Lido Grono confirmée pour l'été 2027 Chantier de la nouvelle piscine communale encore en cours Coûts prévus : environ 5 millions Annonce du maire",
+          "excerpt": "Lido Grono ouvrira ses portes à l'été 2027. La confirmation concerne la nouvelle piscine municipale et arrive alors que le chantier se poursuit.",
           "date": "2026-10-10T18:56:18.018Z"
         },
         {
@@ -543,19 +543,19 @@
         {
           "title": "Atelier estival au Musée Moesano: archéologie pour enfants",
           "url": "/fr/articles-frontalier/atelier-dete-musee-moesano-2026/",
-          "excerpt": "Du 3 au 7 août 2026, les enfants de 7 à 12 ans découvrent les pierres cupellaires avec un atelier théâtral au Musée Moesano de San Vittore",
+          "excerpt": "Du 3 au 7 août 2026, les enfants de 7 à 12 ans découvrent les pierres cupellaires avec un atelier théâtral au Musée Moesano de San Vittore.",
           "date": "2026-05-03T19:00:09.428Z"
         },
         {
           "title": "MisoXperience 2024: le festival des sports à l'air libre en Mesolcina",
           "url": "/fr/articles-frontalier/festival-des-sports-misoexperience-2024/",
-          "excerpt": "Du 9 au 17 mai, la vallée de Mesolcina accueille le MisoXperience Festival avec kayak, escalade sur blocs et parapente. Voici le programme complet",
+          "excerpt": "Du 9 au 17 mai, la vallée de Mesolcina accueille le MisoXperience Festival avec kayak, escalade sur blocs et parapente. Voici le programme complet.",
           "date": "2026-05-05T19:17:57.904Z"
         },
         {
           "title": "Roveredo, initiative pour un carnaval accessible à tous",
           "url": "/fr/articles-frontalier/roveredo-carnaval-pour-tous-2026/",
-          "excerpt": "Un groupe de citoyens de Roveredo lance une initiative pour rendre le Carnaval Lingera plus inclusif et transparent",
+          "excerpt": "Un groupe de citoyens de Roveredo lance une initiative pour rendre le Carnaval Lingera plus inclusif et transparent.",
           "date": "2026-05-06T09:32:17.339Z"
         },
         {
@@ -576,7 +576,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

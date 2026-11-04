@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "fisco",
-  "updatedAt": "2026-10-31T09:03:35.366Z",
-  "contentHash": "85c03ae964daa0025fe53d939b87346b487bb7236877859579a461f9e54c2e3e",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "65eefe9573fc49c478f25743abea72bd48ba01b574a2f5656db8e5a7ef8921f2",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,39 +102,39 @@
       ],
       "curatedArticles": [
         {
-          "title": "Accordo UE: rischio perdita sovranità fiscale per Svizzera",
-          "url": "/articoli-ticino/sovranita-fiscale-accordo-ue/",
-          "excerpt": "Il 6 ottobre la NZZ lancia l'allarme fiscale Gli aiuti di Stato possono includere agevolazioni fiscali Coinvolti Confederazione, Cantoni e Comuni Prevista",
-          "date": "2026-10-15T10:45:34.670Z"
-        },
-        {
           "title": "Capitale LPP: Ticino nega rimborso imposta alla fonte",
           "url": "/articoli-ticino/capitale-lpp-rimborso-imposta-fonte/",
-          "excerpt": "Dal 2024 il Ticino nega il rimborso dell'imposta alla fonte",
+          "excerpt": "Dal 2024 il Ticino nega il rimborso dell'imposta alla fonte.",
           "date": "2026-10-08T12:15:50.666Z"
+        },
+        {
+          "title": "Accordo UE: rischio perdita sovranità fiscale per Svizzera",
+          "url": "/articoli-ticino/sovranita-fiscale-accordo-ue/",
+          "excerpt": "Il 6 ottobre la NZZ ha rilanciato un allarme sul nuovo accordo con l'Unione europea: secondo due professori di diritto fiscale, Peter Hongler e Ralf Imstepf, la Svizzera rischierebbe di perdere margini di sovranità…",
+          "date": "2026-10-15T10:45:34.670Z"
         },
         {
           "title": "Frontalieri: tassa salute e decreto omnibus aggiornamento",
           "url": "/articoli-ticino/tassa-salute-decreto-omnibus-scenari/",
-          "excerpt": "Nessun lavoratore è stato chiamato al pagamento La tassa riguarda i «vecchi frontalieri» Per alcuni frontalieri Omnibus: tassazione al 100% Nuovo incontro",
+          "excerpt": "Nel dicembre 2025, il Decreto Ministeriale ha formalmente autorizzato le Regioni di confine a disciplinare l'applicazione della cosiddetta tassa sulla salute.",
           "date": "2026-10-27T03:10:46.721Z"
         },
         {
           "title": "Frontalieri: tassa salute e decreto omnibus al 100%",
           "url": "/articoli-ticino/frontalieri-tassa-salute-omnibus-giugno-2026/",
-          "excerpt": "Nessun lavoratore è stato chiamato a pagare la tassa sulla salute Il contributo previsto va dal 3% al 6% del reddito netto Dal gennaio 2026 i lavoratori",
+          "excerpt": "Secondo quanto comunicato nel giugno 2026 da OCST, due dossier fiscali restano al centro dell'attenzione dei lavoratori frontalieri: la cosiddetta «tassa sulla salute» e il regime del Decreto Omnibus.",
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
           "title": "Mozione in Gran Consiglio contro la tassa sulla salute",
           "url": "/articoli-ticino/mozione-gran-consiglio-tassa-salute/",
-          "excerpt": "Una mozione interpartitica è stata presentata in Gran Consiglio La richiesta riguarda il blocco dei ristorni verso l’Italia OCST indica la via diplomatica",
+          "excerpt": "Negli scorsi giorni, la cosiddetta «tassa sulla salute» è tornata al centro del dibattito pubblico in Canton Ticino.",
           "date": "2026-10-18T01:16:12.242Z"
         },
         {
           "title": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
           "url": "/articoli-ticino/decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni/",
-          "excerpt": "Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività",
+          "excerpt": "Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività.",
           "date": "2026-10-08T11:44:40.237Z"
         },
         {
@@ -177,7 +177,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-31T09:03:35.366Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "TI",
@@ -262,32 +262,32 @@
       ],
       "curatedArticles": [
         {
-          "title": "EU agreement: risk of loss of tax sovereignty for Switzerland",
-          "url": "/en/ticino-articles/fiscal-sovereignty-eu-agreement/",
-          "excerpt": "On October 6, NZZ raises the tax alarm State aid can include tax breaks Confederation, cantons and municipalities involved Planned",
-          "date": "2026-10-15T10:45:34.670Z"
-        },
-        {
           "title": "LPP capital: Ticino denies withholding tax refund",
           "url": "/en/ticino-articles/lpp-capital-withholding-tax-refund/",
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
+          "title": "EU agreement: risk of loss of tax sovereignty for Switzerland",
+          "url": "/en/ticino-articles/fiscal-sovereignty-eu-agreement/",
+          "excerpt": "On October 6, the NZZ renewed a warning about the new agreement with the European Union: according to two tax law professors, Peter Hongler and Ralf Imstepf, Switzerland could risk losing room for sovereignty in the…",
+          "date": "2026-10-15T10:45:34.670Z"
+        },
+        {
           "title": "Cross-border workers: health tax and omnibus decree update",
           "url": "/en/ticino-articles/health-tax-omnibus-scenarios/",
-          "excerpt": "No worker has been called upon to pay The tax concerns the “old cross-border workers” For some cross-border workers Omnibus: 100% taxation New meeting",
+          "excerpt": "In December 2025, the Ministerial Decree formally authorized the border regions to regulate the application of the so-called health tax.",
           "date": "2026-10-27T03:10:46.721Z"
         },
         {
           "title": "Cross-border workers: health tax and omnibus decree at 100%",
           "url": "/en/ticino-articles/commuters-health-tax-omnibus-june-2026/",
-          "excerpt": "No worker has been asked to pay the health tax The expected contribution ranges from 3% to 6% of net income From January 2026, workers",
+          "excerpt": "According to information communicated by OCST in June 2026, two tax dossiers remain at the center of attention for cross-border workers: the so-called “health tax” and the Omnibus Decree regime.",
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
           "title": "Motion in the Grand Council against the health tax",
           "url": "/en/ticino-articles/grand-council-motion-health-tax/",
-          "excerpt": "A cross-party motion has been submitted to the Grand Council The request concerns blocking the tax rebates to Italy OCST points to the diplomatic route",
+          "excerpt": "In recent days, the so-called “health tax” has once again returned to the center of public debate in Canton Ticino.",
           "date": "2026-10-18T01:16:12.242Z"
         },
         {
@@ -335,7 +335,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-31T09:03:35.366Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "TI",
@@ -420,32 +420,32 @@
       ],
       "curatedArticles": [
         {
-          "title": "EU-Abkommen: Risiko des Verlusts der Steuerhoheit für die Schweiz",
-          "url": "/de/tessin-artikel/steuerhoheit-eu-abkommen/",
-          "excerpt": "Am 6. Oktober schlägt die NZZ steuerlichen Alarm Staatliche Beihilfen können Steuervergünstigungen umfassen Bund, Kantone und Gemeinden betroffen Vorgesehen",
-          "date": "2026-10-15T10:45:34.670Z"
-        },
-        {
           "title": "BVG-Kapital: Tessin verweigert Rückerstattung der Quellensteuer",
           "url": "/de/tessin-artikel/lpp-kapital-quellensteuer-rueckerstattung/",
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
+          "title": "EU-Abkommen: Risiko des Verlusts der Steuerhoheit für die Schweiz",
+          "url": "/de/tessin-artikel/steuerhoheit-eu-abkommen/",
+          "excerpt": "Oktober schlug die NZZ erneut Alarm zum neuen Abkommen mit der Europäischen Union: Laut den beiden Steuerrechtsprofessoren Peter Hongler und Ralf Imstepf droht der Schweiz ein Verlust von Souveränitätsspielräumen auch…",
+          "date": "2026-10-15T10:45:34.670Z"
+        },
+        {
           "title": "Grenzgänger: Gesundheitssteuer und Omnibus-Dekret – Aktualisierung",
           "url": "/de/tessin-artikel/krankenversicherungssteuer-omnibus-szenarien/",
-          "excerpt": "Kein Arbeitnehmer wurde zur Zahlung aufgefordert Die Abgabe betrifft die «alten Grenzgänger» Für einige Grenzgänger Omnibus: Besteuerung zu 100% Neues Treffen",
+          "excerpt": "Die von OCST veröffentlichte Aktualisierung weist jedoch darauf hin, dass die entsprechenden regionalen Dekrete von der Lombardei, dem Piemont und dem Aostatal noch nicht erlassen worden sind.",
           "date": "2026-10-27T03:10:46.721Z"
         },
         {
           "title": "Grenzgänger: Gesundheitssteuer und Omnibus-Dekret zu 100%",
           "url": "/de/tessin-artikel/grenzganger-gesundheit-steuer-omnibus-juni-2026/",
-          "excerpt": "Kein Arbeitnehmer wurde zur Zahlung der Gesundheitssteuer aufgefordert Der vorgesehene Beitrag reicht von 3% bis 6% des Nettoeinkommens Ab Januar 2026 die Arbeitnehmer",
+          "excerpt": "Nach Angaben des OCST im Juni 2026 stehen zwei Steuerdossiers weiterhin im Mittelpunkt der Aufmerksamkeit für Grenzgänger: die sogenannte „Gesundheitssteuer“ und das Omnibus-Dekret.",
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
           "title": "Motion im Grossen Rat gegen die Gesundheitssteuer",
           "url": "/de/tessin-artikel/grossrat-moeglicherweise-gesundheitssteuer/",
-          "excerpt": "Eine überparteiliche Motion wurde im Grossen Rat eingereicht Die Forderung betrifft die Sperrung der Rückerstattungen an Italien OCST weist auf den diplomatischen Weg hin",
+          "excerpt": "Im Grossen Rat wurde eine überparteiliche Motion eingereicht, die die italienische Massnahme beanstandet und geltend macht, dass sie im Widerspruch zu Artikel 9 des Abkommens über die Besteuerung der Grenzgänger stehe.",
           "date": "2026-10-18T01:16:12.242Z"
         },
         {
@@ -493,7 +493,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-31T09:03:35.366Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "TI",
@@ -578,39 +578,39 @@
       ],
       "curatedArticles": [
         {
-          "title": "Accord UE : risque de perte de souveraineté fiscale pour la Suisse",
-          "url": "/fr/articles-tessin/souverainete-fiscale-accord-ue/",
-          "excerpt": "Le 6 octobre, la NZZ tire la sonnette d’alarme fiscale Les aides d’État peuvent inclure des allègements fiscaux La Confédération, les cantons et les communes sont concernés Prévue",
-          "date": "2026-10-15T10:45:34.670Z"
-        },
-        {
           "title": "Capital LPP : le Tessin refuse le remboursement de l'impôt à la source",
           "url": "/fr/articles-tessin/capital-lpp-remboursement-impot-source/",
-          "excerpt": "Depuis 2024, le Tessin refuse le remboursement de l'impôt à la source",
+          "excerpt": "Depuis 2024, le Tessin refuse le remboursement de l'impôt à la source.",
           "date": "2026-10-08T12:15:50.666Z"
+        },
+        {
+          "title": "Accord UE : risque de perte de souveraineté fiscale pour la Suisse",
+          "url": "/fr/articles-tessin/souverainete-fiscale-accord-ue/",
+          "excerpt": "Le 6 octobre, la NZZ a de nouveau tiré la sonnette d'alarme sur le nouvel accord avec l'Union européenne : selon deux professeurs de droit fiscal Peter Hongler et Ralf Imstepf, la Suisse risquerait de perdre des marges…",
+          "date": "2026-10-15T10:45:34.670Z"
         },
         {
           "title": "Frontaliers : taxe santé et décret omnibus, mise à jour",
           "url": "/fr/articles-tessin/taxe-sante-omnibus-scenarii/",
-          "excerpt": "Aucun travailleur n'a été appelé à payer La taxe concerne les « anciens frontaliers » Pour certains frontaliers Omnibus : imposition à 100% Nouvelle rencontre",
+          "excerpt": "En décembre 2025, le décret ministériel a formellement autorisé les régions frontalières à réglementer l'application de ce que l'on appelle la taxe sur la santé.",
           "date": "2026-10-27T03:10:46.721Z"
         },
         {
           "title": "Frontaliers : taxe santé et décret omnibus à 100%",
           "url": "/fr/articles-tessin/frontaliers-taxe-sante-omnibus-juin-2026/",
-          "excerpt": "Aucun travailleur n’a été appelé à payer la taxe sur la santé La contribution prévue va de 3% à 6% du revenu net À partir de janvier 2026 les travailleurs",
+          "excerpt": "Selon ce qui a été communiqué en juin 2026 par l'OCST, deux dossiers fiscaux restent au centre de l'attention des travailleurs frontaliers : la dite « taxe santé » et le régime du décret omnibus.",
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
           "title": "Motion au Grand Conseil contre la taxe sur la santé",
           "url": "/fr/articles-tessin/motion-grand-conseil-taxe-sante/",
-          "excerpt": "Une motion interpartis a été présentée au Grand Conseil La demande concerne le blocage des ristournes vers l’Italie L’OCST indique la voie diplomatique",
+          "excerpt": "Ces derniers jours, la soi-disant « taxe sur la santé » est revenue au cœur du débat public dans le canton du Tessin.",
           "date": "2026-10-18T01:16:12.242Z"
         },
         {
           "title": "Décret sur la taxe santé des frontaliers publié : feu vert des régions",
           "url": "/fr/articles-tessin/decret-sur-la-taxe-sante-des-frontaliers-publie-feu-vert-des-regions/",
-          "excerpt": "Décret publié au Journal officiel à l'approche des fêtes",
+          "excerpt": "Décret publié au Journal officiel à l'approche des fêtes.",
           "date": "2026-10-08T11:44:40.237Z"
         },
         {
@@ -653,7 +653,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-31T09:03:35.366Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

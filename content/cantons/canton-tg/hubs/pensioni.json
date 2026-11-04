@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "pensioni",
-  "updatedAt": "2026-10-17T09:25:57.838Z",
-  "contentHash": "8e7ed3b1af76d7a08c8ba5c7f64664086eb5376815d1a820bf0963379efb5eea",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "f77f57106c6833baef799704d130918beab0da7901ff861d875031071402e01f",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -130,7 +130,7 @@
         {
           "title": "13ª rendita AVS pagata con la pensione di dicembre 2026",
           "url": "/articoli-turgovia/tredicesima-rendita-avs-2026/",
-          "excerpt": "La 13ª rendita AVS arriva con la rendita di dicembre 2026 Non serve presentare domande o svolgere pratiche Spetta a chi riceve una rendita AVS di vecchiaia",
+          "excerpt": "La 13ª rendita AVS sarà pagata insieme alla rendita di dicembre 2026.",
           "date": "2026-10-17T09:16:03.959Z"
         }
       ],
@@ -153,7 +153,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-17T09:25:57.838Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "TG",
@@ -261,7 +261,7 @@
         {
           "title": "13th AVS pension paid with the December 2026 pension",
           "url": "/en/thurgau-articles/thirteenth-ahv-pension-2026/",
-          "excerpt": "The 13th AHV pension is paid with the December 2026 pension No applications or formalities are required It is due to anyone receiving an AHV old-age pension",
+          "excerpt": "The 13th AVS pension will be paid together with the December pension in 2026.",
           "date": "2026-10-17T09:16:03.959Z"
         }
       ],
@@ -284,7 +284,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-17T09:25:57.838Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "TG",
@@ -392,7 +392,7 @@
         {
           "title": "13 ① AHV-Rente mit Rente vom Dezember 2026 bezahlt",
           "url": "/de/thurgau-artikel/dreizehnte-ahv-rente-2026/",
-          "excerpt": "Die 13. AHV-Rente wird zusammen mit der Dezemberrente 2026 ausbezahlt Es ist nicht nötig, einen Antrag zu stellen oder Formalitäten zu erledigen Begünstigt sind",
+          "excerpt": "Die 13. Rente wird zusammen mit der Rente für Dezember 2026 ausbezahlt.",
           "date": "2026-10-17T09:16:03.959Z"
         }
       ],
@@ -415,7 +415,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-17T09:25:57.838Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "TG",
@@ -523,7 +523,7 @@
         {
           "title": "13e rente AVS versée avec la rente de décembre 2026",
           "url": "/fr/articles-thurgovie/treizieme-rente-avs-2026/",
-          "excerpt": "La 13e rente AVS est versée avec la rente de décembre 2026 Il n’est pas nécessaire de présenter une demande ou d’effectuer des démarches Elle est due",
+          "excerpt": "La 13e rente AVS sera versée avec la rente de décembre 2026.",
           "date": "2026-10-17T09:16:03.959Z"
         }
       ],
@@ -546,7 +546,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-17T09:25:57.838Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

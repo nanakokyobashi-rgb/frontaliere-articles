@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "094d46d04f549cf907e6759829471e163dc4b0359a9d7b0b503e91946d7a8daa",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "a0b6a753086d637c937d2e57d430346323072af5edf868c9b264aa81bcd97ea0",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "BE",
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "BE",
@@ -348,7 +348,7 @@
         {
           "title": "Bern: Nicht genehmigte Demonstrationen können zu Störungen führen.",
           "url": "/de/bern-artikel/bern-verkehr-kundgebung/",
-          "excerpt": "Bern meldet mögliche Straßensperrungen und Behinderungen am Sonntag, den 11.",
+          "excerpt": "Für Sonntag sind daher nicht einzelne Straßensperrungen als nützliche Information zu nennen, sondern vielmehr mögliche Änderungen im Stadtverkehr und im öffentlichen Nahverkehr.",
           "date": "2026-10-10T07:15:47.682Z"
         },
         {
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "BE",
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

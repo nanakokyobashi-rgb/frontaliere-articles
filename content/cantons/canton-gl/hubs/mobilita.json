@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T10:06:57.473Z",
-  "contentHash": "b63a81d3c5299afc0301e527ce749020e40f36b64628b1687b0bdcca1ff3582f",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "b9a9e25cec6a6a674fe3429ce57252f0bcdb14e6c27c7886a244642da613974a",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-03T03:07:39.455Z",
+      "updatedAt": "2026-11-03T20:00:07.431Z",
       "keyFacts": 2
     }
   ],
@@ -51,7 +51,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         }
       ],
       "curatedArticles": [
@@ -68,16 +68,16 @@
           "date": "2026-10-17T00:33:53.716Z"
         },
         {
-          "title": "Klöntalerstrasse: chiusura temporanea Staldengarten–Bützi",
-          "url": "/articoli-glarona/kloentalerstrasse-cantiere-2026/",
-          "excerpt": "Sono previsti lavori sulla Klöntalerstrasse dal 21 ottobre al 4 dicembre 2026: attese brevi, chiusura per l'asfalto e deviazione via Sackberg.",
-          "date": "2026-10-19T12:11:05.452Z"
-        },
-        {
           "title": "Mühlehorn: Alte Kerenzerstrasse chiusa dal 19 ottobre",
           "url": "/articoli-glarona/muehlehorn-strada-chiusa-ottobre/",
           "excerpt": "Mühlehorn: chiusura totale di Alte Kerenzerstrasse tra Hanenchilchli e Rüteggli fino al 23 ottobre 2026, ore 17.00.",
           "date": "2026-10-18T03:25:08.301Z"
+        },
+        {
+          "title": "Klöntalerstrasse: chiusura temporanea Staldengarten–Bützi",
+          "url": "/articoli-glarona/kloentalerstrasse-cantiere-2026/",
+          "excerpt": "Sono previsti lavori sulla Klöntalerstrasse dal 21 ottobre al 4 dicembre 2026: attese brevi, chiusura per l'asfalto e deviazione via Sackberg.",
+          "date": "2026-10-19T12:11:05.452Z"
         },
         {
           "title": "Abbonamenti trasporti Glarona: zone, tariffe e sconti",
@@ -88,13 +88,13 @@
         {
           "title": "Abbonamenti trasporti pubblici nel Cantone Glarona: zone, tariffe e combinazioni",
           "url": "/articoli-svizzera/trasporti-pubblici-glarona/",
-          "excerpt": "Scopri i dettagli sui abbonamenti trasporti pubblici nel Cantone Glarona, incluse le zone, le tariffe e le combinazioni con metà-prezzo e AG",
+          "excerpt": "Scopri i dettagli sui abbonamenti trasporti pubblici nel Cantone Glarona, incluse le zone, le tariffe e le combinazioni con metà-prezzo e AG.",
           "date": "2026-08-17T05:40:06.559Z"
         },
         {
           "title": "Sistema scolastico Canton Glarona: iscrizione e cicli",
           "url": "/articoli-svizzera/sistema-scolastico-canton-glarona-iscrizione-e-cicli/",
-          "excerpt": "Scegli la scuola giusta per i tuoi figli in Canton Glarona",
+          "excerpt": "Scegli la scuola giusta per i tuoi figli in Canton Glarona.",
           "date": "2026-08-17T03:31:47.206Z"
         }
       ],
@@ -109,7 +109,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "GL",
@@ -148,7 +148,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         }
       ],
       "curatedArticles": [
@@ -165,16 +165,16 @@
           "date": "2026-10-17T00:33:53.716Z"
         },
         {
-          "title": "Klöntalerstrasse: temporary closure of Staldengarten–Bützi",
-          "url": "/en/glarus-articles/kloentalerstrasse-roadworks-2026/",
-          "excerpt": "Construction work is planned on Klöntalerstrasse from October 21 to December 4, 2026: brief waits, closure for asphalting, and a detour via Sackberg.",
-          "date": "2026-10-19T12:11:05.452Z"
-        },
-        {
           "title": "Mühlehorn: Alte Kerenzerstrasse closed from October 19",
           "url": "/en/glarus-articles/muehlehorn-road-closure-october/",
           "excerpt": "Mühlehorn: full closure of Alte Kerenzerstrasse between Hanenchilchli and Rüteggli until October 23, 2026, at 5:00 p.m.",
           "date": "2026-10-18T03:25:08.301Z"
+        },
+        {
+          "title": "Klöntalerstrasse: temporary closure of Staldengarten–Bützi",
+          "url": "/en/glarus-articles/kloentalerstrasse-roadworks-2026/",
+          "excerpt": "Construction work is planned on Klöntalerstrasse from October 21 to December 4, 2026: brief waits, closure for asphalting, and a detour via Sackberg.",
+          "date": "2026-10-19T12:11:05.452Z"
         },
         {
           "title": "Glarus transport subscriptions: zones, rates and discounts",
@@ -185,13 +185,13 @@
         {
           "title": "Public transport passes in the canton of Glarus: zones, fares and combinations",
           "url": "/en/swiss-articles/public-transport-glaurus/",
-          "excerpt": "Find out details about public transport passes in the Canton of Glarus, including zones, fares and half-price and AG combinations",
+          "excerpt": "Find out details about public transport passes in the Canton of Glarus, including zones, fares and half-price and AG combinations.",
           "date": "2026-08-17T05:40:06.559Z"
         },
         {
           "title": "Canton of Glarus school system: enrolment and cycles",
           "url": "/en/swiss-articles/education-system-canton-glarus-enrollment-and-cycles/",
-          "excerpt": "Choose the right school for your children in Canton Glarus",
+          "excerpt": "Choose the right school for your children in Canton Glarus.",
           "date": "2026-08-17T03:31:47.206Z"
         }
       ],
@@ -206,7 +206,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "GL",
@@ -245,7 +245,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         }
       ],
       "curatedArticles": [
@@ -262,16 +262,16 @@
           "date": "2026-10-17T00:33:53.716Z"
         },
         {
-          "title": "Klöntalerstrasse: vorübergehende Sperrung Staldengarten–Bützi",
-          "url": "/de/glarus-artikel/kloentalerstrasse-bauarbeiten-2026/",
-          "excerpt": "An der Klöntalerstrasse sind vom 21.",
-          "date": "2026-10-19T12:11:05.452Z"
-        },
-        {
           "title": "Mühlehorn: Alte Kerenzerstrasse ab dem 19. Oktober gesperrt",
           "url": "/de/glarus-artikel/muehlehorn-strassensperrung-oktober/",
-          "excerpt": "Mühlehorn: Vollsperrung der Strasse Alte Kerenzerstrasse zwischen Hanenchilchli und Rüteggli bis zum 23.",
+          "excerpt": "Ab Montag, 19. Oktober 2026, wird die Alte Kerenzerstrasse im Abschnitt zwischen Hanenchilchli und Rüteggli in Mühlehorn vollständig für den Verkehr gesperrt.",
           "date": "2026-10-18T03:25:08.301Z"
+        },
+        {
+          "title": "Klöntalerstrasse: vorübergehende Sperrung Staldengarten–Bützi",
+          "url": "/de/glarus-artikel/kloentalerstrasse-bauarbeiten-2026/",
+          "excerpt": "Ab dem 21. Oktober 2026 finden auf der Klöntalerstrasse zwischen Staldengarten und Bützi Bauarbeiten statt.",
+          "date": "2026-10-19T12:11:05.452Z"
         },
         {
           "title": "Fahrkarten Glarus: Zonen, Tarife und Rabatte",
@@ -282,13 +282,13 @@
         {
           "title": "ÖV-Abos im Kanton Glarus: Zonen, Tarife und Kombinationen",
           "url": "/de/schweiz-artikel/oeffentlicher-verkehr-glauis/",
-          "excerpt": "Erfahren Sie mehr über die ÖV-Abos im Kanton Glarus inklusive Zonen, Tarife und Kombinationen mit Halbtax und GA",
+          "excerpt": "Erfahren Sie mehr über die ÖV-Abos im Kanton Glarus inklusive Zonen, Tarife und Kombinationen mit Halbtax und GA.",
           "date": "2026-08-17T05:40:06.559Z"
         },
         {
           "title": "Schulsystem des Kantons Glarus: Einschreibung und Zyklen",
           "url": "/de/schweiz-artikel/bildungssystem-kanton-glarus-anmeldung-und-lehrjahre/",
-          "excerpt": "Wählen Sie die richtige Schule für Ihre Kinder im Kanton Glarus",
+          "excerpt": "Wählen Sie die richtige Schule für Ihre Kinder im Kanton Glarus.",
           "date": "2026-08-17T03:31:47.206Z"
         }
       ],
@@ -303,7 +303,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "GL",
@@ -342,7 +342,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         }
       ],
       "curatedArticles": [
@@ -359,16 +359,16 @@
           "date": "2026-10-17T00:33:53.716Z"
         },
         {
-          "title": "Klöntalerstrasse : fermeture temporaire Staldengarten–Bützi",
-          "url": "/fr/articles-glaris/kloentalerstrasse-travaux-2026/",
-          "excerpt": "Des travaux sont prévus sur la Klöntalerstrasse du 21 octobre au 4 décembre 2026 : courtes attentes, fermeture pour l’asphaltage et déviation via Sackberg.",
-          "date": "2026-10-19T12:11:05.452Z"
-        },
-        {
           "title": "Mühlehorn : Alte Kerenzerstrasse fermée à partir du 19 octobre",
           "url": "/fr/articles-glaris/muehlehorn-route-fermee-octobre/",
           "excerpt": "Mühlehorn : fermeture totale de Alte Kerenzerstrasse entre Hanenchilchli et Rüteggli jusqu’au 23 octobre 2026, à 17.00.",
           "date": "2026-10-18T03:25:08.301Z"
+        },
+        {
+          "title": "Klöntalerstrasse : fermeture temporaire Staldengarten–Bützi",
+          "url": "/fr/articles-glaris/kloentalerstrasse-travaux-2026/",
+          "excerpt": "Des travaux sont prévus sur la Klöntalerstrasse du 21 octobre au 4 décembre 2026 : courtes attentes, fermeture pour l’asphaltage et déviation via Sackberg.",
+          "date": "2026-10-19T12:11:05.452Z"
         },
         {
           "title": "Abonnements transports Glaris : zones, tarifs et réductions",
@@ -379,13 +379,13 @@
         {
           "title": "Abbonamenti Glaris: zone, tarifs",
           "url": "/fr/articles-suisse/transport-en-commun-glauis/",
-          "excerpt": "Découvrez les détails sur les abonnements transports publics dans le canton de Glaris, y compris les zones, les tarifs et les combinaisons avec demi-tarif et AG",
+          "excerpt": "Découvrez les détails sur les abonnements transports publics dans le canton de Glaris, y compris les zones, les tarifs et les combinaisons avec demi-tarif et AG.",
           "date": "2026-08-17T05:40:06.559Z"
         },
         {
           "title": "Système scolaire canton de Glaris : inscription et cycles",
           "url": "/fr/articles-suisse/systeme-educatif-canton-de-glaris-inscription-et-cycles/",
-          "excerpt": "Choisissez la bonne école pour vos enfants à Canton de Glaris",
+          "excerpt": "Choisissez la bonne école pour vos enfants à Canton de Glaris.",
           "date": "2026-08-17T03:31:47.206Z"
         }
       ],
@@ -400,7 +400,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

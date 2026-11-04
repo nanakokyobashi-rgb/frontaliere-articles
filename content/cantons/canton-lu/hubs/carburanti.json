@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "71f0116779fed36eba8a2fd2244ad3e7a635e2f443517a1f4e68c3bdd5249ffa",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "48c070735bc2a2fced1eb55a73231c344663c9de1997ca3e754505a804cfa578",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "LU",
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "LU",
@@ -260,7 +260,7 @@
         {
           "title": "Tunnel Sonnenberg wegen struktureller Inspektion gesperrt",
           "url": "/de/luzern-artikel/sonnenberg-tunnel-nachtschliessung/",
-          "excerpt": "Vollständige Sperrung des Tunnels Sonnenberg in beiden Richtungen ab der Nacht vom 4.",
+          "excerpt": "Laut der Quelle wird der Sonnenberg-Tunnel in Luzern in der Nacht von Mittwoch, dem 4. November, auf Donnerstag, den 5. November 2026, in beiden Richtungen vollständig gesperrt.",
           "date": "2026-10-31T11:51:39.474Z"
         }
       ],
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "LU",
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

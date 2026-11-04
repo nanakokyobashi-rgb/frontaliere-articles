@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "c7b8db32500cdc8f9ed0d345ffc57b926b7ba404d5d20b00dc4f9d11acd2d7fb",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "16f88da8f6324ce8c01554c4e79d0ed96efedbbe30a210c47c6165e6d146e7d2",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -183,7 +183,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "ZG",
@@ -340,7 +340,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "ZG",
@@ -464,7 +464,7 @@
         {
           "title": "Bewilligung L (Zug): Gültigkeit, Verlängerung, Übergang zu B",
           "url": "/de/schweiz-artikel/kurzfristige-aufenthaltsbewilligung-l-kanton-zug-gultigkeit-verlangerung/",
-          "excerpt": "Maximale Dauer der Bewilligung L im Kanton Zug, Bedingungen für die Verlängerung, Bindungen an den Arbeitgeber und Voraussetzungen für den Übergang zur Aufenthaltsbewilligung B.",
+          "excerpt": "⚠️ Wichtig: Die Bewilligung L ist eng mit dem Arbeitgeber verbunden.",
           "date": "2026-08-17T09:55:05.441Z"
         },
         {
@@ -497,7 +497,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "ZG",
@@ -650,7 +650,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

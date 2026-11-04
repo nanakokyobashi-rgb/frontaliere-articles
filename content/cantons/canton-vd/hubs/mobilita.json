@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "50c7f831454ff67f43f45e2db639e863bad8f2b391ba32ddd8e3d14c763965ff",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "dca09c88f8d199df98ff6aca29d5567af48d2fc43d8d8d215684dac096a91867",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -191,52 +191,52 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lausanne Marathon 2026: chiusure strade cantonali e vie cittadine il 25 ottobre",
+          "url": "/articoli-vaud/lausanne-marathon-2026-chiusure-strade/",
+          "excerpt": "Il Lausanne Marathon si svolgerà domenica 25 ottobre 2026. L'avviso pubblicato sul sito vd.ch indica limitazioni al traffico su due strade cantonali: la 777-B-P, associata al percorso Av.",
+          "date": "2026-10-21T20:50:06.586Z"
+        },
+        {
           "title": "Treni CFF tra Yverdon-les-Bains e Losanna: traffico ripreso",
           "url": "/articoli-vaud/cff-eclepens-treni-ripresa/",
-          "excerpt": "Traffico ripreso alle 05:40 di domenica Linea Yverdon-les-Bains–Losanna tornata normale Incendio doloso a Eclépens: disagi da venerdì CFF mobilitati: circa 100",
+          "excerpt": "Domenica alle 05:40 il traffico ferroviario tra Yverdon-les-Bains e Losanna è ripreso normalmente.",
           "date": "2026-10-12T03:05:29.472Z"
         },
         {
           "title": "Morges: le richieste sulla mobilità al 2045",
           "url": "/articoli-vaud/morges-mobilita-consultazione-2045/",
-          "excerpt": "Morges interviene nella consultazione federale «Transports ’45»",
+          "excerpt": "Morges interviene nella consultazione federale «Transports ’45».",
           "date": "2026-10-08T11:29:50.102Z"
         },
         {
           "title": "Cantiere nuovo edificio viaggiatori stazione di Morges da dicembre 2026",
           "url": "/articoli-vaud/cantiere-stazione-morges-2026/",
-          "excerpt": "A dicembre 2026 partono i lavori dei CFF Il cantiere occuperà gran parte della piazza Fermate bus regionali e posti taxi restano L'accesso ai marciapiedi resta",
+          "excerpt": "A dicembre 2026 i CFF inizieranno la costruzione del nuovo edificio viaggiatori della stazione di Morges.",
           "date": "2026-10-25T11:58:21.529Z"
-        },
-        {
-          "title": "Lausanne Marathon 2026: chiusure strade cantonali e vie cittadine il 25 ottobre",
-          "url": "/articoli-vaud/lausanne-marathon-2026-chiusure-strade/",
-          "excerpt": "Domenica 25 ottobre 2026 si corre il Lausanne Marathon Strade cantonali interessate: 777-B-P e 780-B-P Chiusure totali o parziali circa dalle 07:30 alle 17:30",
-          "date": "2026-10-21T20:50:06.586Z"
         },
         {
           "title": "Traffico Yverdon-Losanna: treni di nuovo regolari",
           "url": "/articoli-svizzera/linea-yverdon-losanna-riaperta/",
-          "excerpt": "Traffico normale tra Yverdon e Losanna dalle 05:40 Incendio doloso scoperto venerdì verso le 03:00 Interrotta la circolazione tra Cossonay-Penthalaz e Chavornay",
+          "excerpt": "Traffico normale tra Yverdon e Losanna dalle 05:40 Incendio doloso scoperto venerdì verso le 03:00 Interrotta la circolazione tra Cossonay-Penthalaz e Chavornay.",
           "date": "2026-10-11T13:01:23.198Z"
-        },
-        {
-          "title": "Ferrovia Yverdon-Losanna: ritorno alle 05.40",
-          "url": "/articoli-svizzera/treni-vd-ritorno-normale/",
-          "excerpt": "Tra Yverdon-les-Bains e Losanna si torna alla normalità alle 05.40 Oggi due treni a lunga percorrenza l'ora, con forti rallentamenti Il traffico regionale è",
-          "date": "2026-10-10T17:52:43.456Z"
-        },
-        {
-          "title": "Ferrovia: ancora disagi tra Yverdon e Losanna",
-          "url": "/articoli-svizzera/disagi-treni-vaud-eclepens/",
-          "excerpt": "La linea Yverdon-les-Bains-Losanna resta interrotta Due treni a lunga percorrenza all'ora, con rallentamenti Regionali e aeroporto di Ginevra: autobus Problemi",
-          "date": "2026-10-10T13:48:28.714Z"
         },
         {
           "title": "Abbonamenti trasporti canton Vaud: zone e tariffe",
           "url": "/articoli-svizzera/abbonamenti-trasporti-vaud-zone/",
           "excerpt": "Abbonamenti mensili, annuali, metà-prezzo e Generale Abonnement nei trasporti pubblici svizzeri. Come funzionano le zone tariffarie e gli sconti per studenti.",
           "date": "2026-09-05T05:50:23.197Z"
+        },
+        {
+          "title": "Ferrovia Yverdon-Losanna: ritorno alle 05.40",
+          "url": "/articoli-svizzera/treni-vd-ritorno-normale/",
+          "excerpt": "Il collegamento tra Losanna e Yverdon-les-Bains è assicurato, sino alla tarda serata odierna, da due convogli a lunga percorrenza ogni ora per ciascuna direzione. La circolazione resta però caratterizzata da forti…",
+          "date": "2026-10-10T17:52:43.456Z"
+        },
+        {
+          "title": "Ferrovia: ancora disagi tra Yverdon e Losanna",
+          "url": "/articoli-svizzera/disagi-treni-vaud-eclepens/",
+          "excerpt": "Restano sospesi i collegamenti ferroviari sulla tratta fra Yverdon-les-Bains e Losanna in seguito all'incendio scoppiato ieri vicino ai binari di Eclépens (VD).",
+          "date": "2026-10-10T13:48:28.714Z"
         }
       ],
       "latestCantonArticles": [],
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "VD",
@@ -439,9 +439,15 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lausanne Marathon 2026: road and street closures Oct 25",
+          "url": "/en/vaud-articles/lausanne-marathon-2026-road-closures/",
+          "excerpt": "The Lausanne Marathon will take place on Sunday, October 25, 2026.",
+          "date": "2026-10-21T20:50:06.586Z"
+        },
+        {
           "title": "CFF trains between Yverdon-les-Bains and Lausanne: service resumed",
           "url": "/en/vaud-articles/sbb-eclepens-train-service-resumed/",
-          "excerpt": "Traffic resumed at 05:40 on Sunday Yverdon-les-Bains–Lausanne line back to normal Arson in Eclépens: disruptions since Friday CFF mobilized: approximately 100",
+          "excerpt": "Sunday at 05:40, rail traffic between Yverdon-les-Bains and Lausanne resumed normally.",
           "date": "2026-10-12T03:05:29.472Z"
         },
         {
@@ -452,38 +458,32 @@
         {
           "title": "Construction of the new passenger building at Morges station from December 2026",
           "url": "/en/vaud-articles/morges-station-construction-2026/",
-          "excerpt": "CFF construction work begins in December 2026 The construction site will occupy much of the square Regional bus stops and taxi spaces remain Access",
+          "excerpt": "In December 2026, SBB will begin construction of the new passenger building at Morges station.",
           "date": "2026-10-25T11:58:21.529Z"
-        },
-        {
-          "title": "Lausanne Marathon 2026: road and street closures Oct 25",
-          "url": "/en/vaud-articles/lausanne-marathon-2026-road-closures/",
-          "excerpt": "On Sunday, October 25, 2026, the Lausanne Marathon will be held Affected cantonal roads: 777-B-P and 780-B-P Full or partial closures from approximately 07:30",
-          "date": "2026-10-21T20:50:06.586Z"
         },
         {
           "title": "Yverdon-Lausanne traffic: trains running regularly again",
           "url": "/en/swiss-articles/yverdon-lausanne-rail-service-restored/",
-          "excerpt": "Normal traffic between Yverdon and Lausanne from 05:40 Arson discovered on Friday at around 03:00 Traffic interrupted between Cossonay-Penthalaz and Chavornay",
+          "excerpt": "Normal traffic between Yverdon and Lausanne from 05:40 Arson discovered on Friday at around 03:00 Traffic interrupted between Cossonay-Penthalaz and Chavornay.",
           "date": "2026-10-11T13:01:23.198Z"
-        },
-        {
-          "title": "Yverdon-Lausanne railway: return at 05.40",
-          "url": "/en/swiss-articles/vd-trains-normal-service/",
-          "excerpt": "Between Yverdon-les-Bains and Lausanne, service returns to normal at 05.40 Today, two long-distance trains per hour, with major delays Regional traffic is",
-          "date": "2026-10-10T17:52:43.456Z"
-        },
-        {
-          "title": "Railway: disruptions continue between Yverdon and Lausanne",
-          "url": "/en/swiss-articles/rail-delays-vaud-eclepens/",
-          "excerpt": "The Yverdon-les-Bains-Lausanne line remains disrupted Two long-distance trains per hour, with delays Regional trains and Geneva airport: buses Problems",
-          "date": "2026-10-10T13:48:28.714Z"
         },
         {
           "title": "Vaud canton transport subscriptions: zones and rates",
           "url": "/en/swiss-articles/public-transport-subscriptions-vaud-zones/",
           "excerpt": "Monthly, annual, half-price and General Subscriptions in Swiss public transport. How fare zones and student discounts work.",
           "date": "2026-09-05T05:50:23.197Z"
+        },
+        {
+          "title": "Yverdon-Lausanne railway: return at 05.40",
+          "url": "/en/swiss-articles/vd-trains-normal-service/",
+          "excerpt": "The connection between Lausanne and Yverdon-les-Bains is ensured, until late this evening, by two long-distance trains per hour in each direction. However, service remains affected by severe delays.",
+          "date": "2026-10-10T17:52:43.456Z"
+        },
+        {
+          "title": "Railway: disruptions continue between Yverdon and Lausanne",
+          "url": "/en/swiss-articles/rail-delays-vaud-eclepens/",
+          "excerpt": "Rail services remain suspended on the route between Yverdon-les-Bains and Lausanne following the fire that broke out yesterday near the tracks in Eclépens (VD).",
+          "date": "2026-10-10T13:48:28.714Z"
         }
       ],
       "latestCantonArticles": [],
@@ -517,7 +517,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "VD",
@@ -686,9 +686,15 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lausanne Marathon 2026: Strassensperren am 25. Oktober",
+          "url": "/de/waadt-artikel/lausanne-marathon-2026-strassensperrungen/",
+          "excerpt": "Der Lausanne Marathon findet am Sonntag, dem 25. Oktober 2026, statt.",
+          "date": "2026-10-21T20:50:06.586Z"
+        },
+        {
           "title": "CFF-Züge zwischen Yverdon-les-Bains und Lausanne: Verkehr wieder aufgenommen",
           "url": "/de/waadt-artikel/sbb-eclepens-zugverkehr-wieder-normal/",
-          "excerpt": "Verkehr am Sonntag um 05:40 Uhr wieder aufgenommen Bahnlinie Yverdon-les-Bains–Lausanne wieder im Normalbetrieb Brandstiftung in Eclépens: Beeinträchtigungen",
+          "excerpt": "Am Sonntag um 05:40 Uhr wurde der Bahnverkehr zwischen Yverdon-les-Bains und Lausanne wieder normal aufgenommen.",
           "date": "2026-10-12T03:05:29.472Z"
         },
         {
@@ -699,38 +705,32 @@
         {
           "title": "Baustelle für das neue Empfangsgebäude des Bahnhofs Morges ab Dezember 2026",
           "url": "/de/waadt-artikel/morges-bahnhof-bau-2026/",
-          "excerpt": "Im Dezember 2026 beginnen die Arbeiten der CFF Die Baustelle wird einen grossen Teil des Platzes beanspruchen Haltestellen der Regionalbusse und Taxistandplätze",
+          "excerpt": "Im Dezember 2026 beginnen die Arbeiten der CFF Die Baustelle wird einen grossen Teil des Platzes beanspruchen Haltestellen der Regionalbusse und Taxistandplätze.",
           "date": "2026-10-25T11:58:21.529Z"
-        },
-        {
-          "title": "Lausanne Marathon 2026: Strassensperren am 25. Oktober",
-          "url": "/de/waadt-artikel/lausanne-marathon-2026-strassensperrungen/",
-          "excerpt": "Am Sonntag, dem 25.",
-          "date": "2026-10-21T20:50:06.586Z"
         },
         {
           "title": "Zugverkehr Yverdon-Lausanne: Züge wieder regulär",
           "url": "/de/schweiz-artikel/bahnverkehr-yverdon-lausanne-wieder-normal/",
-          "excerpt": "Normaler Verkehr zwischen Yverdon und Lausanne ab 05:40 Brandstiftung am Freitag gegen 03:00 Uhr entdeckt Zugverkehr zwischen Cossonay-Penthalaz und Chavornay unterbrochen",
+          "excerpt": "Normaler Verkehr zwischen Yverdon und Lausanne ab 05:40 Brandstiftung am Freitag gegen 03:00 Uhr entdeckt Zugverkehr zwischen Cossonay-Penthalaz und Chavornay unterbrochen.",
           "date": "2026-10-11T13:01:23.198Z"
-        },
-        {
-          "title": "Bahnstrecke Yverdon-Lausanne: Rückkehr zum Normalbetrieb um 05.40 Uhr",
-          "url": "/de/schweiz-artikel/vd-zugverkehr-wieder-normal/",
-          "excerpt": "Zwischen Yverdon-les-Bains und Lausanne kehrt um 05.40 Uhr der Normalbetrieb zurück Heute zwei Fernverkehrszüge pro Stunde, mit starken Verspätungen Der Regionalverkehr ist",
-          "date": "2026-10-10T17:52:43.456Z"
-        },
-        {
-          "title": "Bahnverkehr: weiterhin Beeinträchtigungen zwischen Yverdon und Lausanne",
-          "url": "/de/schweiz-artikel/bahnstoerung-waadt-eclepens/",
-          "excerpt": "Die Strecke Yverdon-les-Bains-Lausanne bleibt unterbrochen Zwei Fernverkehrszüge pro Stunde, mit Verzögerungen Regionalverkehr und Flughafen Genf: Busse Probleme",
-          "date": "2026-10-10T13:48:28.714Z"
         },
         {
           "title": "Verkehrstickets Kanton Waadt: Zonen und Tarife",
           "url": "/de/schweiz-artikel/abos-oepnv-waadt-zonen/",
           "excerpt": "Monats-, Jahres-, Halbtax- und General Abonnement-Abonnements im öffentlichen Verkehr der Schweiz. Wie Tarifzonen und Studentenrabatte funktionieren.",
           "date": "2026-09-05T05:50:23.197Z"
+        },
+        {
+          "title": "Bahnstrecke Yverdon-Lausanne: Rückkehr zum Normalbetrieb um 05.40 Uhr",
+          "url": "/de/schweiz-artikel/vd-zugverkehr-wieder-normal/",
+          "excerpt": "Die Verbindung zwischen Lausanne und Yverdon-les-Bains wird bis in den späten Abend des heutigen Tages in jeder Richtung durch zwei Fernverkehrszüge pro Stunde gewährleistet.",
+          "date": "2026-10-10T17:52:43.456Z"
+        },
+        {
+          "title": "Bahnverkehr: weiterhin Beeinträchtigungen zwischen Yverdon und Lausanne",
+          "url": "/de/schweiz-artikel/bahnstoerung-waadt-eclepens/",
+          "excerpt": "Die Zugverbindungen auf der Strecke zwischen Yverdon-les-Bains und Lausanne bleiben infolge des gestern in der Nähe der Gleise bei Eclépens (VD) ausgebrochenen Brandes eingestellt.",
+          "date": "2026-10-10T13:48:28.714Z"
         }
       ],
       "latestCantonArticles": [],
@@ -764,7 +764,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "VD",
@@ -933,52 +933,52 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lausanne Marathon 2026 : routes fermées le 25 octobre",
+          "url": "/fr/articles-vaud/marathon-lausanne-2026-fermetures-routes/",
+          "excerpt": "Le Lausanne Marathon se déroulera dimanche 25 octobre 2026. L'avis publié sur le site vd.ch indique des restrictions de circulation sur deux routes cantonales : la 777-B-P, associée au parcours Av.",
+          "date": "2026-10-21T20:50:06.586Z"
+        },
+        {
           "title": "Trains CFF entre Yverdon-les-Bains et Lausanne : trafic rétabli",
           "url": "/fr/articles-vaud/cff-eclepens-trafic-repris/",
-          "excerpt": "Trafic rétabli à 05:40 dimanche Ligne Yverdon-les-Bains–Lausanne revenue à la normale Incendie criminel à Eclépens : perturbations depuis vendredi CFF mobilisés",
+          "excerpt": "Les liaisons ferroviaires entre Yverdon-les-Bains et Lausanne fonctionnaient de nouveau normalement dimanche dès 05:40, selon une information transmise par les CFF à Keystone-ATS.",
           "date": "2026-10-12T03:05:29.472Z"
         },
         {
           "title": "Morges : les demandes en matière de mobilité à l’horizon 2045",
           "url": "/fr/articles-vaud/morges-mobilite-consultation-2045/",
-          "excerpt": "Morges intervient dans la consultation fédérale « Transports ’45 »",
+          "excerpt": "Morges intervient dans la consultation fédérale « Transports ’45 ».",
           "date": "2026-10-08T11:29:50.102Z"
         },
         {
           "title": "Chantier du nouveau bâtiment voyageurs de la gare de Morges dès décembre 2026",
           "url": "/fr/articles-vaud/chantier-gare-morges-2026/",
-          "excerpt": "En décembre 2026, les travaux des CFF commenceront Le chantier occupera une grande partie de la place Les arrêts de bus régionaux et les places de taxi restent",
+          "excerpt": "En décembre 2026, les CFF commenceront la construction du nouveau bâtiment voyageurs de la gare de Morges.",
           "date": "2026-10-25T11:58:21.529Z"
-        },
-        {
-          "title": "Lausanne Marathon 2026 : routes fermées le 25 octobre",
-          "url": "/fr/articles-vaud/marathon-lausanne-2026-fermetures-routes/",
-          "excerpt": "Dimanche 25 octobre 2026 a lieu le Lausanne Marathon Routes cantonales concernées : 777-B-P et 780-B-P Fermetures totales ou partielles approximativement",
-          "date": "2026-10-21T20:50:06.586Z"
         },
         {
           "title": "Trafic Yverdon-Lausanne : trains à nouveau réguliers",
           "url": "/fr/articles-suisse/trafic-ferroviaire-yverdon-lausanne-retabli/",
-          "excerpt": "Trafic normal entre Yverdon et Lausanne dès 05:40 Incendie criminel découvert vendredi vers 03:00 Circulation interrompue entre Cossonay-Penthalaz et Chavornay",
+          "excerpt": "Trafic normal entre Yverdon et Lausanne dès 05:40 Incendie criminel découvert vendredi vers 03:00 Circulation interrompue entre Cossonay-Penthalaz et Chavornay.",
           "date": "2026-10-11T13:01:23.198Z"
-        },
-        {
-          "title": "Ligne ferroviaire Yverdon-Lausanne : retour à la normale à 05.40",
-          "url": "/fr/articles-suisse/trains-vd-retour-normal/",
-          "excerpt": "Entre Yverdon-les-Bains et Lausanne retour à la normale à 05.40 Aujourd’hui deux trains longue distance par heure avec de forts ralentissements Le trafic régional est",
-          "date": "2026-10-10T17:52:43.456Z"
-        },
-        {
-          "title": "Chemin de fer : encore des perturbations entre Yverdon et Lausanne",
-          "url": "/fr/articles-suisse/retards-trains-vaud-eclepens/",
-          "excerpt": "La ligne Yverdon-les-Bains-Lausanne reste interrompue Deux trains longue distance par heure, avec des ralentissements Trains régionaux et aéroport de Genève : bus Problèmes",
-          "date": "2026-10-10T13:48:28.714Z"
         },
         {
           "title": "Abonnements transports canton de Vaud : zones et tarifs",
           "url": "/fr/articles-suisse/abonnements-transports-vaud-zones/",
           "excerpt": "Abonnements mensuels, annuels, demi-tarif et Général Abonnement dans les transports publics suisses. Comment fonctionnent les zones tarifaires et les réductions pour les étudiants.",
           "date": "2026-09-05T05:50:23.197Z"
+        },
+        {
+          "title": "Ligne ferroviaire Yverdon-Lausanne : retour à la normale à 05.40",
+          "url": "/fr/articles-suisse/trains-vd-retour-normal/",
+          "excerpt": "La liaison entre Lausanne et Yverdon-les-Bains est assurée, jusqu'en fin de soirée aujourd'hui, par deux trains longue distance par heure dans chaque direction. La circulation reste toutefois marquée par de forts…",
+          "date": "2026-10-10T17:52:43.456Z"
+        },
+        {
+          "title": "Chemin de fer : encore des perturbations entre Yverdon et Lausanne",
+          "url": "/fr/articles-suisse/retards-trains-vaud-eclepens/",
+          "excerpt": "Les liaisons ferroviaires sur le tronçon entre Yverdon-les-Bains et Lausanne restent suspendues à la suite de l'incendie qui s'est déclaré hier près des voies d'Eclépens (VD).",
+          "date": "2026-10-10T13:48:28.714Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1012,7 +1012,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

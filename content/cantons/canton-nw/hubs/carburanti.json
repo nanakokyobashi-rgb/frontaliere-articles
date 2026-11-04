@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "ecb1effd0712abf4d7a0c77d344e1fadb3e032631ac9c00b57a5860c1419053e",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "3ec21c43880dc44226da968c6ae9964a7bc39aeb6ec59c97c55911ac77f391bd",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "NW",
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "NW",
@@ -236,13 +236,13 @@
         {
           "title": "Hergiswil: Bergstrasse 4 am 25.11.2026 gesperrt",
           "url": "/de/nidwalden-artikel/hergiswil-bergstrasse-kran/",
-          "excerpt": "In Hergiswil wird der betroffene Abschnitt der Bergstrasse am 25.",
+          "excerpt": "Im betroffenen Abschnitt wird die Bergstrasse während des Abbaus des Krans als vollständig gesperrt angegeben.",
           "date": "2026-11-03T00:08:28.441Z"
         },
         {
           "title": "Brücke über den Scheidgraben in Ennetbürgen gesperrt",
           "url": "/de/nidwalden-artikel/sperrung-scheidgraben-bruecke/",
-          "excerpt": "Die Brücke zwischen Alpenstrasse und Seefeld wird wegen Sanierungsarbeiten vom 3.",
+          "excerpt": "Dokumentiert sind die Brücke über den Scheidgraben, die Lage zwischen Alpenstrasse und Seefeld, der Grund der Sanierungsarbeiten und die Führung über die Hauptstrasse für Fußgänger und Radfahrer.",
           "date": "2026-10-30T20:11:37.696Z"
         },
         {
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "NW",
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

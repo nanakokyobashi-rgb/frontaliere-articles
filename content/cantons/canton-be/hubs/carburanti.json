@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "ffbcab7d22c6eb43019a491eb976603bc54af9239d36417ca961de28faf605c1",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "fd1bf0292ecebcc963617d0f9e115357a42b6d6e7afdc68c3b4fa8333f68f0f9",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "BE",
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "BE",
@@ -236,7 +236,7 @@
         {
           "title": "Revision des Berner Baugesetzes für Solar- und Windenergieanlagen",
           "url": "/de/bern-artikel/verfahren-solare-windanlagen/",
-          "excerpt": "Ab dem 1. April 2026 ist die Bundespflicht für Solar- und Windenergieanlagen von nationalem Interesse in Kraft; Bern passt das Baugesetz an.",
+          "excerpt": "Am 1. April 2026 ist der sogenannte Beschleunigungserlass des Bundes in Kraft getreten, der die Kantone verpflichtet, die Verfahren für den Bau, den Ausbau und die Erneuerung von Solar- und Windenergieanlagen von…",
           "date": "2026-10-30T22:00:04.865Z"
         },
         {
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "BE",
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

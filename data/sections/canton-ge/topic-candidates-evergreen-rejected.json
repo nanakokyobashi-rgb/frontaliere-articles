@@ -11,6 +11,14 @@
     "canton-ge::https://lecourrier.ch/2026/11/02/parc-immobilier-pas-de-boussole-claire": {
       "section": "canton-ge",
       "ts": 1793662987119
+    },
+    "canton-ge::https://www.ge.ch/node/41839": {
+      "section": "canton-ge",
+      "ts": 1793771351550
+    },
+    "canton-ge::https://lecourrier.ch/2026/11/03/amelioration-fiscale-au-gout-dinacheve": {
+      "section": "canton-ge",
+      "ts": 1793771779825
     }
   }
 }

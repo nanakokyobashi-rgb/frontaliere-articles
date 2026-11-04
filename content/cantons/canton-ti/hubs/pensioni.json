@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "pensioni",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "6c0e33e6845ea4be2d6a48d049101c7826a31c7dbe3562e0a6aa619e4f3fc27d",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "28874e0bca7d474210e356ed17c35966472e62576a47f8e7a30ecc3d3fa7ed36",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -136,7 +136,7 @@
         {
           "title": "Capitale LPP: Ticino nega rimborso imposta alla fonte",
           "url": "/articoli-ticino/capitale-lpp-rimborso-imposta-fonte/",
-          "excerpt": "Dal 2024 il Ticino nega il rimborso dell'imposta alla fonte",
+          "excerpt": "Dal 2024 il Ticino nega il rimborso dell'imposta alla fonte.",
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
@@ -148,13 +148,13 @@
         {
           "title": "Totalizzazione contributi AVS e INPS per i frontalieri ticinesi",
           "url": "/articoli-frontaliere/totalizzazione-contributi-avs-inps-frontalieri-ticino/",
-          "excerpt": "La totalizzazione dei contributi AVS e INPS per i frontalieri ticinesi è un processo complesso che richiede la presentazione di una domanda agli uffici di competenza",
+          "excerpt": "La totalizzazione dei contributi AVS e INPS per i frontalieri ticinesi è un processo complesso che richiede la presentazione di una domanda agli uffici di competenza.",
           "date": "2026-08-12T02:47:34.595Z"
         },
         {
           "title": "Aumento beneficiari rendite AVS in Ticino: +40.400 nel 2025",
           "url": "/articoli-frontaliere/aumento-beneficiari-rendite-avs-ticino/",
-          "excerpt": "L'AVS ha erogato 2,64 milioni di rendite nel 2025, con +1,6% rispetto al 2024",
+          "excerpt": "L'AVS ha erogato 2,64 milioni di rendite nel 2025, con +1,6% rispetto al 2024.",
           "date": "2026-05-27T02:33:06.970Z"
         },
         {
@@ -195,7 +195,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "TI",
@@ -320,19 +320,19 @@
         {
           "title": "Totalisation of AVS and INPS contributions for Ticino border crossers",
           "url": "/en/cross-border-articles/totalization-contributions-avs-inps-frontaliers-ticino/",
-          "excerpt": "The aggregation of AVS and INPS contributions for Ticino border workers is a complex process that requires the submission of an application to the competent offices",
+          "excerpt": "The aggregation of AVS and INPS contributions for Ticino border workers is a complex process that requires the submission of an application to the competent offices.",
           "date": "2026-08-12T02:47:34.595Z"
         },
         {
           "title": "Increase in AVS pension recipients in Ticino: +40,400 in 2025",
           "url": "/en/cross-border-articles/increase-avs-pension-beneficiaries-ticino/",
-          "excerpt": "The AVS disbursed 2.64 million pensions in 2025, a +1.6% increase from 2024",
+          "excerpt": "In 2025, Ticino saw a 20% increase in the number of pensioners residing abroad, bringing the total to 80,000 Ticino pensioners abroad.",
           "date": "2026-05-27T02:33:06.970Z"
         },
         {
           "title": "A solidarity 13th AVS payment for young people from Ticino",
           "url": "/en/cross-border-articles/generational-pact-avs-ticino/",
-          "excerpt": "The Fondo Patto Generazionale invites AVS beneficiaries to donate part or all of their thirteenth payment to support young people from Ticino aged between 0 and 30.",
+          "excerpt": "The first aspect is solidarity: AVS beneficiaries are invited to choose whether to donate part or the entire amount of the thirteenth payment. The second is the destination: the resources should support young people in…",
           "date": "2026-10-04T00:02:46.900Z"
         },
         {
@@ -367,7 +367,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "TI",
@@ -475,7 +475,7 @@
         {
           "title": "Grenzgänger, zweite Säule: Nein zu Rückerstattungen",
           "url": "/de/tessin-artikel/grenzgaenger-lpp-rueckerstattung/",
-          "excerpt": "Die Quelle bringt die Grenzgänger mit der zweiten Säule in Verbindung und berichtet von einem Nein zu Rückerstattungen; die BVG-Referenz 2026 führt die Vorsorgeparameter auf.",
+          "excerpt": "«Grenzgänger, ein weiterer Knackpunkt. Rebus zweite Säule, die Schweiz: Nein zu Rückerstattungen» lautet der Titel der Quelle von Il Giorno.",
           "date": "2026-10-23T15:42:17.176Z"
         },
         {
@@ -492,13 +492,13 @@
         {
           "title": "AHV- und NISF-Beiträge für Tessiner Grenzgänger summieren",
           "url": "/de/grenzgaenger-artikel/totalisierung-beitrage-avs-inps-frontaliers-tessin/",
-          "excerpt": "Die Zusammenrechnung der AHV- und INPS-Beiträge für Tessiner Grenzgänger ist ein komplexer Prozess, der die Einreichung eines Gesuchs bei den zuständigen Stellen erfordert",
+          "excerpt": "Die Zusammenrechnung der AHV- und INPS-Beiträge für Tessiner Grenzgänger ist ein komplexer Prozess, der die Einreichung eines Gesuchs bei den zuständigen Stellen erfordert.",
           "date": "2026-08-12T02:47:34.595Z"
         },
         {
           "title": "Steigerung der AVS-Rentenempfänger im Tessin: +40.400 im Jahr 2025",
           "url": "/de/grenzgaenger-artikel/zunahme-avs-rentenempfaenger-tessin/",
-          "excerpt": "Die AVS hat im Jahr 2025 2,64 Millionen Renten ausgezahlt, mit +1,6% im Vergleich zum Jahr 2024",
+          "excerpt": "Die AVS hat im Jahr 2025 2,64 Millionen Renten ausgezahlt, mit +1,6% im Vergleich zum Jahr 2024.",
           "date": "2026-05-27T02:33:06.970Z"
         },
         {
@@ -539,7 +539,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "TI",
@@ -653,7 +653,7 @@
         {
           "title": "Capital LPP : le Tessin refuse le remboursement de l'impôt à la source",
           "url": "/fr/articles-tessin/capital-lpp-remboursement-impot-source/",
-          "excerpt": "Depuis 2024, le Tessin refuse le remboursement de l'impôt à la source",
+          "excerpt": "Depuis 2024, le Tessin refuse le remboursement de l'impôt à la source.",
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
@@ -665,13 +665,13 @@
         {
           "title": "Totalisation des cotisations AVS et INPS pour les frontaliers tessinois",
           "url": "/fr/articles-frontalier/totalisation-contributions-avs-inps-frontaliers-tessin/",
-          "excerpt": "La totalisation des cotisations AVS et INPS pour les frontaliers tessinois est un processus complexe qui nécessite le dépôt d'une demande auprès des bureaux compétents",
+          "excerpt": "La totalisation des cotisations AVS et INPS pour les frontaliers tessinois est un processus complexe qui nécessite le dépôt d'une demande auprès des bureaux compétents.",
           "date": "2026-08-12T02:47:34.595Z"
         },
         {
           "title": "Augmentation des bénéficiaires de rentes AVS au Tessin: +40.400 en 2025",
           "url": "/fr/articles-frontalier/augmentation-beneficiaires-rentes-avs-tessin/",
-          "excerpt": "L'AVS a versé 2,64 millions de rentes en 2025, avec +1,6% par rapport à 2024",
+          "excerpt": "L'AVS a versé 2,64 millions de rentes en 2025, avec +1,6% par rapport à 2024.",
           "date": "2026-05-27T02:33:06.970Z"
         },
         {
@@ -712,7 +712,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }
