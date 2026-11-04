@@ -394,7 +394,7 @@
       "reason": "Ricontrollo post-rebase di id globale, slug localizzato, fonte, copertura topic e contenuto, eseguito da generate-article.yml e generate-article-core.yml prima del push. Il controllo slug intercetta anche due run che partono dalla stessa mappa e scelgono la stessa traduzione prima di unirsi col rebase. Esiste solo qui perche' il push con rebase degli articoli generati vive solo nel corpus: il sito non genera articoli. Le sezioni vengono dal core, i ledger da article-surfaces.mjs.",
       "baseline": {
         "site": null,
-        "corpus": "eab2a45730aa779b",
+        "corpus": "62674c6e39e9c622",
         "alignedAt": "2026-11-04"
       }
     },
