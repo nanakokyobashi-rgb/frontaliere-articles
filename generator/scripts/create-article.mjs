@@ -2422,6 +2422,9 @@ function finalizeRunReport(status, extra = {}) {
   RUN_REPORT.status = status || 'unknown';
   RUN_REPORT.endedAt = new Date().toISOString();
   Object.assign(RUN_REPORT, extra || {});
+  if (RUN_REPORT.status !== 'generated' || !RUN_REPORT.article?.id) {
+    RUN_REPORT.discoveryAttribution = null;
+  }
 
   // ── Pre-spend gate disposition (issue #113) ────────────────────────
   // Emitted from every terminal path, so `emptied=1 recovered=none` is the
@@ -3988,6 +3991,29 @@ function headlineSimilarity(a, b) {
   const bTokens = filterDistinctive(tokenizeIt(stripNewsSourceSuffix(b)));
   if (aTokens.length === 0 || bTokens.length === 0) return 0;
   return Math.max(jaccardSim(aTokens, bTokens), containmentSim(aTokens, bTokens), containmentSim(bTokens, aTokens));
+}
+
+function isTrendBackedDiscoveryCandidate(candidate) {
+  return candidate?.source === 'trends' || candidate?.meta?.signalProvider === 'google-trends';
+}
+
+function isSecureHttpsUrl(rawUrl) {
+  if (typeof rawUrl !== 'string' || !rawUrl.trim()) return false;
+  try {
+    const parsed = new URL(rawUrl);
+    return parsed.protocol === 'https:'
+      && Boolean(parsed.hostname)
+      && !parsed.username
+      && !parsed.password;
+  } catch {
+    return false;
+  }
+}
+
+function normalizeOptionalIsoTimestamp(value) {
+  if (typeof value !== 'string' || !value.trim()) return null;
+  const timeMs = Date.parse(value);
+  return Number.isFinite(timeMs) ? new Date(timeMs).toISOString() : null;
 }
 
 function resolveGoogleNewsHeadline(candidate, provenHeadlines) {
@@ -18132,7 +18158,8 @@ async function main() {
         const pool = await _buildDiscoveryPool(evidenceForDiscovery, {
           provenHeadlines: provenStrings,
         });
-        console.error(`DISCOVERY_POOL_BUILD orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${pool.perSource.trends} trendSignals=${pool.perSource.trendSignals} postDedup=${pool.postDedupCount}`);
+        const trendSignals = Number(pool.perSource?.trendSignals) || 0;
+        console.error(`DISCOVERY_POOL_BUILD orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${pool.perSource.trends} trendSignals=${trendSignals} postDedup=${pool.postDedupCount}`);
         _discoveryHeadlines = _discoveryCandidatesToHeadlines(pool.candidates);
       } catch (err) {
         console.error(`⚠️  Discovery pool build failed: ${err?.message || err}`);
@@ -18489,6 +18516,19 @@ async function main() {
               }
             }
 
+            const discoveryCandidate = chosen?._discoveryCandidate;
+            if (
+              isTrendBackedDiscoveryCandidate(discoveryCandidate)
+              && !isSecureHttpsUrl(discoveryCandidate?.url)
+            ) {
+              if (typeof chosen?.url === 'string') triedUrls.add(chosen.url);
+              RUN_REPORT.discoveryAttribution = null;
+              RUN_REPORT.notes.push('Trend signal skipped: no secure Google News evidence URL');
+              console.error('   ⏭️  Segnale Trends ignorato: manca un URL HTTPS di evidenza Google News');
+              attempt--;
+              continue;
+            }
+
             RUN_REPORT.selectionUsage.attemptsTotal += 1;
             if (chosen?._undatedFallback) RUN_REPORT.selectionUsage.attemptsUndated += 1;
             else RUN_REPORT.selectionUsage.attemptsRecent += 1;
@@ -18519,21 +18559,34 @@ async function main() {
             RUN_REPORT.pool = _pickedPool;
             RUN_REPORT.poolSource = _pickedPoolSource;
             RUN_REPORT.discoveryAttribution = null;
-            if (chosen?._discoveryCandidate?.meta?.signalProvider) {
-              const candidate = chosen._discoveryCandidate;
-              const meta = candidate.meta || {};
+            if (isTrendBackedDiscoveryCandidate(discoveryCandidate)) {
+              const candidate = discoveryCandidate;
+              const meta = candidate.meta && typeof candidate.meta === 'object' ? candidate.meta : {};
+              const evidenceUrl = isSecureHttpsUrl(meta.evidenceUrl)
+                ? meta.evidenceUrl
+                : candidate.url;
+              const signalHeadline = typeof meta.signalHeadline === 'string' && meta.signalHeadline.trim()
+                ? meta.signalHeadline.trim()
+                : candidate.headline;
+              const evidenceHeadline = typeof meta.evidenceHeadline === 'string' && meta.evidenceHeadline.trim()
+                ? meta.evidenceHeadline.trim()
+                : candidate.headline;
+              const evidencePublisher = [meta.evidencePublisher, meta.publisherHost, meta.sourceName]
+                .find((value) => typeof value === 'string' && value.trim()) || null;
               RUN_REPORT.discoveryAttribution = {
                 candidateId: chosen._discoveryId || null,
-                source: candidate.source || null,
-                signalProvider: meta.signalProvider,
-                signalHeadline: meta.signalHeadline || candidate.headline || null,
-                signalCollectedAt: meta.signalCollectedAt || null,
-                evidenceProvider: meta.evidenceProvider || null,
-                evidenceUrl: meta.evidenceUrl || candidate.url || null,
+                source: typeof candidate.source === 'string' ? candidate.source : null,
+                signalProvider: meta.signalProvider === 'google-trends' ? meta.signalProvider : 'google-trends',
+                signalHeadline: typeof signalHeadline === 'string' ? signalHeadline : null,
+                signalCollectedAt: normalizeOptionalIsoTimestamp(meta.signalCollectedAt),
+                evidenceProvider: typeof meta.evidenceProvider === 'string'
+                  ? meta.evidenceProvider
+                  : 'google-news-rss',
+                evidenceUrl: evidenceUrl || null,
                 resolvedSourceUrl: null,
-                evidenceHeadline: meta.evidenceHeadline || null,
-                evidencePublisher: meta.evidencePublisher || null,
-                evidencePublishedAt: meta.evidencePublishedAt || null,
+                evidenceHeadline: typeof evidenceHeadline === 'string' ? evidenceHeadline : null,
+                evidencePublisher,
+                evidencePublishedAt: normalizeOptionalIsoTimestamp(meta.evidencePublishedAt || meta.pubDate),
               };
             }
             _persistRankerStateOnSuccess = () => {
@@ -18650,18 +18703,8 @@ async function main() {
             // Trend-backed candidates require a secure publisher URL after
             // Google News wrapper resolution. The RSS wrapper itself being
             // HTTPS is not sufficient evidence that its destination is.
-            if (chosen?._discoveryCandidate?.meta?.signalProvider === 'google-trends') {
-              let resolvedPublisherUrlIsHttps = false;
-              try {
-                const resolvedPublisherUrl = new URL(url);
-                resolvedPublisherUrlIsHttps = resolvedPublisherUrl.protocol === 'https:'
-                  && Boolean(resolvedPublisherUrl.hostname)
-                  && !resolvedPublisherUrl.username
-                  && !resolvedPublisherUrl.password;
-              } catch {
-                resolvedPublisherUrlIsHttps = false;
-              }
-              if (!resolvedPublisherUrlIsHttps) {
+            if (isTrendBackedDiscoveryCandidate(chosen?._discoveryCandidate)) {
+              if (!isSecureHttpsUrl(url)) {
                 RUN_REPORT.notes.push('Trend-backed source rejected: resolved publisher URL is not HTTPS');
                 console.error('   ⏭️  Fonte Trends ignorata: URL dell’editore non HTTPS dopo la risoluzione Google News');
                 attempt--;
@@ -18755,7 +18798,8 @@ async function main() {
           const provenStrings = atlas.map((h) => String(h.headline || ''));
           _provenHeadlinesForDiscovery = atlas;
           const pool = await _buildDiscoveryPool(evidenceForDiscovery, { provenHeadlines: provenStrings });
-          console.error(`DISCOVERY_POOL_BUILD_FALLBACK orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} postDedup=${pool.postDedupCount}`);
+          const trendSignals = Number(pool.perSource?.trendSignals) || 0;
+          console.error(`DISCOVERY_POOL_BUILD_FALLBACK orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${pool.perSource.trends} trendSignals=${trendSignals} postDedup=${pool.postDedupCount}`);
           const fbHeadlines = _discoveryCandidatesToHeadlines(pool.candidates);
           if (fbHeadlines.length > 0) {
             chosenPool = 'discovery';
