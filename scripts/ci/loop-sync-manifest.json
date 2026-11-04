@@ -2126,10 +2126,10 @@
       "mode": "adapted",
       "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; resta sorvegliato, ma le decisioni di pubblicazione delle copertine vivono nel corpus: le nuove immagini passano dal motore mirrorato con scope `article-hero`, se il motore fallisce, il fallback usa un record reader-facing del catalogo o la cover statica governata e accoda la rigenerazione senza rigettare l'articolo; la generazione del testo applica la guardia anti-copia. Il gemello del sito e' il generatore legacy disabilitato (`confirm_corpus_write=yes`) e non va aggiornato per questa pipeline corpus-only; i registri pubblici vengono esposti via JSON HTTP. RIALLINEATO 2026-11-04 (corpus-ahead): il writer controlla la mappa completa e il candidato con article-slug-uniqueness.mjs; il controllo resta qui perche' il generatore legacy del sito e' disabilitato e il corpus pubblica i dati via JSON HTTP. Baseline corpus aggiornata.",
       "baseline": {
-        "site": "86c5e5304ccd0ac1",
-        "corpus": "06fb52e200025123",
+        "site": "4b24d798b3ca92c8",
+        "corpus": "3b77f5d4bd8449e3",
         "alignedAt": "2026-11-04",
-        "forcedAt": "2026-11-04T05:36:08.000Z"
+        "forcedAt": "2026-11-04T18:19:09.272Z"
       }
     },
     {
@@ -2941,6 +2941,36 @@
       }
     },
     {
+      "path": "generator/scripts/lib/topic-candidate-attribution.mjs",
+      "mode": "corpus-only",
+      "reason": "Costruisce l'attribuzione interna privacy-safe dei candidati sperimentali scelti dal generatore. Il sito pubblica soltanto una proiezione del feed via CDN e non esegue il generatore del corpus, quindi il modulo non ha un gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "a1a2769e52f5dbe9",
+        "alignedAt": "2026-11-04"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/topic-candidates-feed.mjs",
+      "mode": "corpus-only",
+      "reason": "Scarica e valida il feed HTTP del sito con limiti e comportamento fail-safe per il generatore. Il sito è il produttore del JSON pubblico; il corpus lo consuma e non deve duplicare downloader o dipendenze di trasporto.",
+      "baseline": {
+        "site": null,
+        "corpus": "7d5a00e23bb01015",
+        "alignedAt": "2026-11-04"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/topic-candidates-path.mjs",
+      "mode": "corpus-only",
+      "reason": "Risoluzione del path temporaneo del feed selezionato dal workflow di generazione. Il sito non esegue quel workflow né ha un equivalente del consumer, quindi il modulo resta specifico del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "93791e06655a7786",
+        "alignedAt": "2026-11-04"
+      }
+    },
+    {
       "path": "generator/scripts/lib/atomic-write-file.mjs",
       "mode": "corpus-only",
       "reason": "Punto comune di scrittura atomica per i producer del corpus: usa un temporaneo fratello e `renameSync` per evitare file troncati dopo un'interruzione. Non esiste un gemello sul sito, che non esegue questi writer del generatore, quindi resta corpus-only per costruzione.",
@@ -3441,6 +3471,16 @@
         "site": "7e128ec7373134b8",
         "corpus": "7e128ec7373134b8",
         "alignedAt": "2026-09-06"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/discovery/trend-evidence-attribution.mjs",
+      "mode": "corpus-only",
+      "reason": "Adattatore del contratto Trends-to-News usato dal generatore di articoli nel corpus; il sito non ha l'entrypoint create-article e non necessita di questo helper.",
+      "baseline": {
+        "site": null,
+        "corpus": "57afbc499b2bb741",
+        "alignedAt": "2026-11-04"
       }
     },
     {

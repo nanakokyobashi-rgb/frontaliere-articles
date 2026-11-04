@@ -991,6 +991,24 @@ jobs:
           git config user.name "Valerie Linc"
           git config user.email "valerielinc@gmail.com"
 
+      - name: Load fresh Reddit topic candidates
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          feed_path="${RUNNER_TEMP}/experimental-candidate-feed-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.json"
+          report_path="${RUNNER_TEMP}/topic-candidate-feed-report.json"
+          node generator/scripts/lib/topic-candidates-feed.mjs "$feed_path" "$report_path"
+          printf 'EXPERIMENTAL_CANDIDATES_PATH=%s\n' "$feed_path" >> "$GITHUB_ENV"
+
+      - name: Upload topic candidate feed report
+        if: always() && steps.mode.outputs.dry != 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: topic-candidate-feed-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/topic-candidate-feed-report.json
+          if-no-files-found: warn
+          retention-days: 14
+
       # Hard-killed out of process, like the site repo's copy: a model provider
       # that accepts the connection and then stalls would otherwise hold the job
       # to its 60-minute timeout and take the slot with it.

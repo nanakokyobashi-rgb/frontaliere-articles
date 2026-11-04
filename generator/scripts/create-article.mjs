@@ -305,6 +305,8 @@ import {
   incrementCounter as _incrementCounter,
 } from './lib/scheduler/quotaController.mjs';
 import { buildDiscoveryPool as _buildDiscoveryPool } from './lib/discovery/discoveryPool.mjs';
+import { attachTrendEvidenceToCandidates, isSecureHttpsUrl } from './lib/discovery/trend-evidence-attribution.mjs';
+import { projectTopicCandidateAttribution } from './lib/topic-candidate-attribution.mjs';
 import { decodeGoogleNewsUrl } from './lib/discovery/googleNewsUrlResolver.mjs';
 import { isNearDuplicate as _isNearDuplicateHeadline } from './lib/scheduler/slugSimilarity.mjs';
 import { fetchWordpressSearchHeadlines } from './lib/topic-sources/wordpressSearch.mjs';
@@ -2084,9 +2086,13 @@ const RUN_REPORT = {
   poolSize: 0,
   // Phase 3 — proven/discovery pool dispatch.
   // _pool ∈ {'proven','discovery','evergreen-fallback'}; _pool_source is the
-  // discovery sub-source ('orphan'|'suggest'|'news') or news-scan domain.
+  // discovery sub-source ('orphan'|'suggest'|'news'|'trends') or news-scan domain.
   pool: null,
   poolSource: null,
+  // Durable source attribution for signal-led discovery articles. Trends is a
+  // demand signal; the separate evidence fields identify the article source.
+  discoveryAttribution: null,
+  topicCandidateAttribution: null,
   poolSlotKind: null,
   poolCounterValue: null,
   poolCurrentQuota: null,
@@ -2419,6 +2425,10 @@ function finalizeRunReport(status, extra = {}) {
   RUN_REPORT.status = status || 'unknown';
   RUN_REPORT.endedAt = new Date().toISOString();
   Object.assign(RUN_REPORT, extra || {});
+  if (RUN_REPORT.status !== 'generated' || !RUN_REPORT.article?.id) {
+    RUN_REPORT.discoveryAttribution = null;
+    RUN_REPORT.topicCandidateAttribution = null;
+  }
 
   // ── Pre-spend gate disposition (issue #113) ────────────────────────
   // Emitted from every terminal path, so `emptied=1 recovered=none` is the
@@ -3985,6 +3995,16 @@ function headlineSimilarity(a, b) {
   const bTokens = filterDistinctive(tokenizeIt(stripNewsSourceSuffix(b)));
   if (aTokens.length === 0 || bTokens.length === 0) return 0;
   return Math.max(jaccardSim(aTokens, bTokens), containmentSim(aTokens, bTokens), containmentSim(bTokens, aTokens));
+}
+
+function isTrendBackedDiscoveryCandidate(candidate) {
+  return candidate?.source === 'trends' || candidate?.meta?.signalProvider === 'google-trends';
+}
+
+function normalizeOptionalIsoTimestamp(value) {
+  if (typeof value !== 'string' || !value.trim()) return null;
+  const timeMs = Date.parse(value);
+  return Number.isFinite(timeMs) ? new Date(timeMs).toISOString() : null;
 }
 
 function resolveGoogleNewsHeadline(candidate, provenHeadlines) {
@@ -18080,9 +18100,10 @@ async function main() {
     // Helper — convert discovery candidates into headline-shaped objects
     // compatible with rankAndSelectHeadlines (field `headline`, optional `url`).
     const _discoveryCandidatesToHeadlines = (candidates) => {
+      const candidatesWithEvidence = attachTrendEvidenceToCandidates(candidates, headlineSimilarity);
       _discoveryCandidatesById = new Map();
       const out = [];
-      for (const c of candidates) {
+      for (const c of candidatesWithEvidence) {
         const id = `discovery::${c.source}::${String(c.headline).toLowerCase()}`;
         _discoveryCandidatesById.set(id, c);
         const headline = {
@@ -18128,8 +18149,11 @@ async function main() {
       try {
         const pool = await _buildDiscoveryPool(evidenceForDiscovery, {
           provenHeadlines: provenStrings,
+          deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
+          deadlineReserveMs: MIN_VIABLE_ATTEMPT_MS,
         });
-        console.error(`DISCOVERY_POOL_BUILD orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} postDedup=${pool.postDedupCount}`);
+        const trendSignals = Number(pool.perSource?.trends) || 0;
+        console.error(`DISCOVERY_POOL_BUILD orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${pool.perSource.trends} trendSignals=${trendSignals} postDedup=${pool.postDedupCount}`);
         _discoveryHeadlines = _discoveryCandidatesToHeadlines(pool.candidates);
       } catch (err) {
         console.error(`⚠️  Discovery pool build failed: ${err?.message || err}`);
@@ -18202,7 +18226,11 @@ async function main() {
         try {
           _provenHeadlinesForDiscovery = headlines.slice();
           const provenStrings = headlines.map((h) => String(h.headline || ''));
-          const gnPool = await _buildDiscoveryPool(evidenceForDiscovery, { provenHeadlines: provenStrings });
+          const gnPool = await _buildDiscoveryPool(evidenceForDiscovery, {
+            provenHeadlines: provenStrings,
+            deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
+            deadlineReserveMs: MIN_VIABLE_ATTEMPT_MS,
+          });
           const newsOnly = (gnPool.candidates || []).filter((c) => c && c.source === 'news');
           const gnHeadlines = _discoveryCandidatesToHeadlines(newsOnly).slice(0, GOOGLE_NEWS_INJECT_MAX);
           if (gnHeadlines.length > 0) {
@@ -18486,6 +18514,20 @@ async function main() {
               }
             }
 
+            const discoveryCandidate = chosen?._discoveryCandidate;
+            if (
+              isTrendBackedDiscoveryCandidate(discoveryCandidate)
+              && !isSecureHttpsUrl(discoveryCandidate?.url)
+            ) {
+              if (typeof chosen?.url === 'string') triedUrls.add(chosen.url);
+              RUN_REPORT.discoveryAttribution = null;
+              RUN_REPORT.topicCandidateAttribution = null;
+              RUN_REPORT.notes.push('Trend signal skipped: no secure Google News evidence URL');
+              console.error('   ⏭️  Segnale Trends ignorato: manca un URL HTTPS di evidenza Google News');
+              attempt--;
+              continue;
+            }
+
             RUN_REPORT.selectionUsage.attemptsTotal += 1;
             if (chosen?._undatedFallback) RUN_REPORT.selectionUsage.attemptsUndated += 1;
             else RUN_REPORT.selectionUsage.attemptsRecent += 1;
@@ -18515,6 +18557,44 @@ async function main() {
               : (chosen?.source || 'news-scan');
             RUN_REPORT.pool = _pickedPool;
             RUN_REPORT.poolSource = _pickedPoolSource;
+            RUN_REPORT.discoveryAttribution = null;
+            RUN_REPORT.topicCandidateAttribution = null;
+            if (isTrendBackedDiscoveryCandidate(discoveryCandidate)) {
+              const candidate = discoveryCandidate;
+              const meta = candidate.meta && typeof candidate.meta === 'object' ? candidate.meta : {};
+              const evidenceUrl = isSecureHttpsUrl(meta.evidenceUrl)
+                ? meta.evidenceUrl
+                : candidate.url;
+              const signalHeadline = typeof meta.signalHeadline === 'string' && meta.signalHeadline.trim()
+                ? meta.signalHeadline.trim()
+                : candidate.headline;
+              const evidenceHeadline = typeof meta.evidenceHeadline === 'string' && meta.evidenceHeadline.trim()
+                ? meta.evidenceHeadline.trim()
+                : candidate.headline;
+              const evidencePublisher = [meta.evidencePublisher, meta.publisherHost, meta.sourceName]
+                .find((value) => typeof value === 'string' && value.trim()) || null;
+              RUN_REPORT.discoveryAttribution = {
+                candidateId: chosen._discoveryId || null,
+                source: typeof candidate.source === 'string' ? candidate.source : null,
+                signalProvider: meta.signalProvider === 'google-trends' ? meta.signalProvider : 'google-trends',
+                signalHeadline: typeof signalHeadline === 'string' ? signalHeadline : null,
+                signalCollectedAt: normalizeOptionalIsoTimestamp(meta.signalCollectedAt),
+                evidenceProvider: typeof meta.evidenceProvider === 'string'
+                  ? meta.evidenceProvider
+                  : 'google-news-rss',
+                evidenceUrl: evidenceUrl || null,
+                resolvedSourceUrl: null,
+                evidenceHeadline: typeof evidenceHeadline === 'string' ? evidenceHeadline : null,
+                evidencePublisher,
+                evidencePublishedAt: normalizeOptionalIsoTimestamp(meta.evidencePublishedAt || meta.pubDate),
+              };
+            }
+            if (_pickedTier === 'experimental' && _picked?._experimentalCandidate) {
+              RUN_REPORT.topicCandidateAttribution = projectTopicCandidateAttribution(
+                _picked._experimentalCandidate,
+                _experimentalCandidates?.generatedAt,
+              );
+            }
             _persistRankerStateOnSuccess = () => {
               try {
                 if (_pickedCluster && _todayPicksState.picksByCluster) {
@@ -18559,6 +18639,8 @@ async function main() {
                       cluster: _pickedCluster || null,
                       _pool: _pickedPool,
                       _pool_source: _pickedPoolSource,
+                      _discovery_attribution: RUN_REPORT.discoveryAttribution,
+                      _topic_candidate_attribution: RUN_REPORT.topicCandidateAttribution,
                       _score_breakdown: _pickedScore || null,
                     };
                     write(sidecarPath, `${JSON.stringify(payload, null, 2)}\n`);
@@ -18623,6 +18705,22 @@ async function main() {
               console.error(`   🔓 Google News decodificata → fonte reale: ${realUrl.slice(0, 80)}`);
               url = realUrl;
               chosen = { ...chosen, url: realUrl, _resolvedFromGoogleNewsRss: chosen.url };
+            }
+
+            // Trend-backed candidates require a secure publisher URL after
+            // Google News wrapper resolution. The RSS wrapper itself being
+            // HTTPS is not sufficient evidence that its destination is.
+            if (isTrendBackedDiscoveryCandidate(chosen?._discoveryCandidate)) {
+              if (!isSecureHttpsUrl(url)) {
+                RUN_REPORT.notes.push('Trend-backed source rejected: resolved publisher URL is not HTTPS');
+                console.error('   ⏭️  Fonte Trends ignorata: URL dell’editore non HTTPS dopo la risoluzione Google News');
+                attempt--;
+                continue;
+              }
+              if (RUN_REPORT.discoveryAttribution?.candidateId === chosen._discoveryId) {
+                RUN_REPORT.discoveryAttribution.resolvedSourceUrl = url;
+              }
+              RUN_REPORT.selectedUrl = url;
             }
 
             // Attempt the full article generation + duplicate check
@@ -18706,8 +18804,13 @@ async function main() {
             : (headlines || []);
           const provenStrings = atlas.map((h) => String(h.headline || ''));
           _provenHeadlinesForDiscovery = atlas;
-          const pool = await _buildDiscoveryPool(evidenceForDiscovery, { provenHeadlines: provenStrings });
-          console.error(`DISCOVERY_POOL_BUILD_FALLBACK orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} postDedup=${pool.postDedupCount}`);
+          const pool = await _buildDiscoveryPool(evidenceForDiscovery, {
+            provenHeadlines: provenStrings,
+            deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
+            deadlineReserveMs: MIN_VIABLE_ATTEMPT_MS,
+          });
+          const trendSignals = Number(pool.perSource?.trends) || 0;
+          console.error(`DISCOVERY_POOL_BUILD_FALLBACK orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${pool.perSource.trends} trendSignals=${trendSignals} postDedup=${pool.postDedupCount}`);
           const fbHeadlines = _discoveryCandidatesToHeadlines(pool.candidates);
           if (fbHeadlines.length > 0) {
             chosenPool = 'discovery';
@@ -18931,6 +19034,8 @@ async function main() {
           RUN_REPORT.selectedArticleType = isStaticTopic ? 'evergreen_static' : 'evergreen_dynamic';
           RUN_REPORT.selectedSource = 'evergreen';
           RUN_REPORT.selectedUrl = `evergreen://${encodeURIComponent(topic.keyword)}`;
+          RUN_REPORT.discoveryAttribution = null;
+          RUN_REPORT.topicCandidateAttribution = null;
           console.error(`📚 Evergreen tentativo ${attempt}: keyword "${topic.keyword}"`);
           console.error(`   Angolo: ${topic.angle}\n`);
           url = `evergreen://${encodeURIComponent(topic.keyword)}`;
