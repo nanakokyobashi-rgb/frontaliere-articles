@@ -14043,8 +14043,6 @@ async function translateArticle(data) {
   // Il report di recovery è una quota PER ARTICOLO. RUN_REPORT vive più a
   // lungo del funnel: senza reset, un secondo articolo erediterebbe i campi
   // rifiutati e i claim già spesi dal primo (issue #1244).
-  // Reject numeric HTML C0 references in the Italian source before the FAQ is
-  // sent to translation or copied into a locale fallback.
   removeFaqPairsWithRejectedControls(data?.content?.it, 'it');
   const faqCount = Array.isArray(data?.content?.it?.faq) ? data.content.it.faq.length : 0;
   const bodyFieldCount = Object.keys(collectBodySections(data?.content?.it)).length;
