@@ -6862,7 +6862,7 @@
       "reason": "Baseline monotona per superficie (file|locale|id|field) dei casi storici ancora incompleti dopo le riparazioni sicure: prefisso esistente, frase del body solo per liste appiattite, o terminatore aggiunto ai riassunti completi. I casi c restano invariati; le chiavi distinte separano le occorrenze meta e SEO dello stesso campo. Il producer blocca nuove regressioni e rimuove dal baseline le voci riparate. Il sito consuma l’API JSON e non esegue questo gate.",
       "baseline": {
         "site": null,
-        "corpus": "7b79dda6452e83b3",
+        "corpus": "ca540598969b9f98",
         "alignedAt": "2026-11-04"
       }
     },
