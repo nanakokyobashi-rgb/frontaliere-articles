@@ -14014,10 +14014,38 @@ function isRealTranslationTruncation(issues) {
   return issues.some((i) => !(i.code === 'translation-semantic-truncation' && i.rule === 'paragraph-drop'));
 }
 
+/** Drop FAQ pairs whose decoded source would contain an unpublishable C0 byte. */
+function removeFaqPairsWithRejectedControls(content, locale) {
+  if (!content || !Array.isArray(content.faq)) return 0;
+  const safeFaq = [];
+  let rejectedCount = 0;
+  for (const [index, pair] of content.faq.entries()) {
+    const rejectedField = ['q', 'a'].find((field) => {
+      const value = pair?.[field];
+      return typeof value === 'string'
+        && rejectRawFaqControlEscape(normalizeLocalizedToponymText(value));
+    });
+    if (rejectedField) {
+      rejectedCount += 1;
+      console.warn(`  ⚠️  FAQ ${locale}[${index}] omessa: ${rejectedField} contiene un carattere di controllo non pubblicabile`);
+      continue;
+    }
+    safeFaq.push(pair);
+  }
+  if (rejectedCount > 0) {
+    if (safeFaq.length >= 2) content.faq = safeFaq;
+    else delete content.faq;
+  }
+  return rejectedCount;
+}
+
 async function translateArticle(data) {
   // Il report di recovery è una quota PER ARTICOLO. RUN_REPORT vive più a
   // lungo del funnel: senza reset, un secondo articolo erediterebbe i campi
   // rifiutati e i claim già spesi dal primo (issue #1244).
+  // Reject numeric HTML C0 references in the Italian source before the FAQ is
+  // sent to translation or copied into a locale fallback.
+  removeFaqPairsWithRejectedControls(data?.content?.it, 'it');
   const faqCount = Array.isArray(data?.content?.it?.faq) ? data.content.it.faq.length : 0;
   const bodyFieldCount = Object.keys(collectBodySections(data?.content?.it)).length;
   RUN_REPORT.translation = createFreeMtRecoveryReport({ faqCount, bodyFieldCount });
@@ -14484,9 +14512,6 @@ ${localizedToponymInstruction(targetLang)}`;
       const faqControlRejected = Boolean(
         faqPart && rejectRawFaqControlEscape(normalizeLocalizedToponymText(valoreTradotto)),
       );
-      const sourceFaqControlRejected = Boolean(
-        faqPart && rejectRawFaqControlEscape(normalizeLocalizedToponymText(itValue)),
-      );
       const floorMiss = traduzioneUsabile && !faqControlRejected
         ? metaFieldPlausibilityMiss(field, valoreTradotto)
         : null;
@@ -14630,18 +14655,6 @@ ${localizedToponymInstruction(targetLang)}`;
       if (isBodyField) {
         markBodyTranslationPending(data, { locale, field, reason: pendingReason, report: RUN_REPORT.translation });
         console.warn(`  🔴 ${field} (${locale}): nessuna traduzione utilizzabile (${pendingReason}) — campo lasciato NON tradotto, niente fallback IT (#1875)`);
-        continue;
-      }
-      // A source FAQ can itself contain a numeric HTML reference such as
-      // `&#8;`. Do not copy that raw value into a locale when translation and
-      // retry both fail: decodeArticleEntities() would turn it into a C0 byte
-      // and the final writer would reject the whole article. Drop the pair in
-      // this locale; the structural validation below removes the incomplete
-      // pair while preserving any other valid FAQ pairs.
-      if (faqPart && sourceFaqControlRejected) {
-        const faq = data.content[locale]?.faq;
-        if (Array.isArray(faq) && faqIndex < faq.length) faq[faqIndex] = null;
-        console.warn(`  ⚠️  FAQ ${locale}[${faqIndex}] omessa: la sorgente italiana contiene un carattere di controllo non pubblicabile`);
         continue;
       }
       // itValue non è mai ri-verificato con detectTruncation() prima di
@@ -16816,6 +16829,12 @@ function decodeLocaleContentEntities(data, locale) {
     // decodificato qui arriverebbe letterale in una SERP.
     for (const field of ['title', 'excerpt', ...META_SEO_FIELDS, ...bodyFields]) {
       if (typeof c[field] === 'string') c[field] = normalizeLocalizedToponymText(c[field]);
+    }
+    if (Array.isArray(c.faq)) {
+      // Defense in depth for non-primary producers: reject a source or
+      // translated pair before entity decoding turns `&#8;` into a C0 byte
+      // that would make buildBodyFile() abort the entire article.
+      removeFaqPairsWithRejectedControls(c, locale);
     }
     if (Array.isArray(c.faq)) {
       c.faq = c.faq.map((item) => (item && typeof item === 'object'

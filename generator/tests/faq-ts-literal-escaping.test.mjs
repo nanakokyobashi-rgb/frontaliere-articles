@@ -247,16 +247,19 @@ test('create-article valida la FAQ con il decoder TS canonico, senza rieseguire 
   assert.doesNotMatch(src, /escaped\.replace\(\/\\\\'/u);
 });
 
-test('il fallback FAQ non ripubblica una sorgente italiana con controlli C0 codificati', () => {
+test('le FAQ con controlli C0 codificati vengono rimosse prima della traduzione e del decode finale', () => {
   const src = fs.readFileSync(CREATE_ARTICLE, 'utf8');
-  const sourceGuard = src.indexOf('const sourceFaqControlRejected = Boolean(');
-  const fallbackGuard = src.indexOf('if (faqPart && sourceFaqControlRejected)', sourceGuard);
-  const fallbackWrite = src.indexOf('writeField(data.content[locale], itValue);', fallbackGuard);
+  const translationStart = src.indexOf('async function translateArticle(data) {');
+  const sourceFilter = src.indexOf("removeFaqPairsWithRejectedControls(data?.content?.it, 'it');", translationStart);
+  const faqCount = src.indexOf('const faqCount =', translationStart);
+  const decoderStart = src.indexOf('function decodeLocaleContentEntities(data, locale) {');
+  const finalFilter = src.indexOf('removeFaqPairsWithRejectedControls(c, locale);', decoderStart);
 
-  assert.ok(sourceGuard >= 0, 'la sorgente FAQ italiana deve passare dal normalizer prima del fallback');
-  assert.ok(fallbackGuard > sourceGuard, 'il fallback deve controllare il risultato normalizzato');
-  assert.ok(fallbackWrite > fallbackGuard, 'il guard deve precedere la scrittura del fallback');
-  assert.match(src.slice(fallbackGuard, fallbackWrite), /faq\[faqIndex\] = null/u);
+  assert.ok(translationStart >= 0, 'la recovery FAQ deve esistere');
+  assert.ok(sourceFilter > translationStart && sourceFilter < faqCount, 'la FAQ italiana va filtrata prima della traduzione');
+  assert.ok(decoderStart > faqCount, 'il decode finale deve stare dopo la traduzione');
+  assert.ok(finalFilter > decoderStart, 'anche i writer secondari devono filtrare prima del decode');
+  assert.match(src.slice(finalFilter, finalFilter + 240), /c\.faq = c\.faq\.map/u);
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
