@@ -2956,7 +2956,7 @@
       "reason": "Scarica e valida il feed HTTP del sito con limiti e comportamento fail-safe per il generatore. Il sito è il produttore del JSON pubblico; il corpus lo consuma e non deve duplicare downloader o dipendenze di trasporto.",
       "baseline": {
         "site": null,
-        "corpus": "faf1b8f8ed151336",
+        "corpus": "7d5a00e23bb01015",
         "alignedAt": "2026-11-04"
       }
     },

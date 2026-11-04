@@ -5,6 +5,7 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const TOPIC_CANDIDATES_FEED_URL = 'https://cdn.frontaliereticino.ch/data/experimental-candidate-feed.json';
+export const TOPIC_CANDIDATES_FEED_CACHE_BUCKET_MS = 5 * 60 * 1000;
 export const TOPIC_CANDIDATES_FEED_MAX_BYTES = 1024 * 1024;
 export const TOPIC_CANDIDATES_FEED_MAX_AGE_MS = 8 * 24 * 60 * 60 * 1000;
 export const TOPIC_CANDIDATES_FEED_MAX_FUTURE_SKEW_MS = 5 * 60 * 1000;
@@ -16,6 +17,12 @@ export const EMPTY_TOPIC_CANDIDATES_FEED = Object.freeze({
   generatedAt: null,
   candidates: [],
 });
+
+function topicCandidatesFeedRequestUrl(nowMs) {
+  const url = new URL(TOPIC_CANDIDATES_FEED_URL);
+  url.searchParams.set('v', String(Math.floor(nowMs / TOPIC_CANDIDATES_FEED_CACHE_BUCKET_MS)));
+  return url.toString();
+}
 
 export class TopicCandidatesFeedError extends Error {
   constructor(code) {
@@ -216,7 +223,7 @@ export async function fetchTopicCandidatesFeed({
   if (!Number.isInteger(timeoutMs) || timeoutMs < 1) throw new TypeError('timeoutMs must be a positive integer');
 
   try {
-    const response = await fetchImpl(TOPIC_CANDIDATES_FEED_URL, {
+    const response = await fetchImpl(topicCandidatesFeedRequestUrl(nowMs), {
       headers: { accept: 'application/json' },
       redirect: 'error',
       signal: AbortSignal.timeout(timeoutMs),

@@ -6,6 +6,7 @@ import test from 'node:test';
 
 import {
   EMPTY_TOPIC_CANDIDATES_FEED,
+  TOPIC_CANDIDATES_FEED_CACHE_BUCKET_MS,
   TOPIC_CANDIDATES_FEED_URL,
   TopicCandidatesFeedError,
   buildTopicCandidatesFeedReport,
@@ -131,7 +132,7 @@ test('rejects stale, future, and invalid Reddit permalink data', () => {
   }
 });
 
-test('fetch uses the fixed HTTPS CDN endpoint and bounds a successful response', async () => {
+test('fetch uses a five-minute versioned HTTPS CDN endpoint and bounds a successful response', async () => {
   let requestedUrl = null;
   let options = null;
   const result = await fetchTopicCandidatesFeed({
@@ -144,11 +145,25 @@ test('fetch uses the fixed HTTPS CDN endpoint and bounds a successful response',
   });
   assert.equal(result.ok, true);
   assert.equal(result.feed.candidates.length, 1);
-  assert.equal(requestedUrl, TOPIC_CANDIDATES_FEED_URL);
+  assert.equal(new URL(requestedUrl).origin + new URL(requestedUrl).pathname, TOPIC_CANDIDATES_FEED_URL);
+  assert.equal(
+    new URL(requestedUrl).searchParams.get('v'),
+    String(Math.floor(NOW_MS / TOPIC_CANDIDATES_FEED_CACHE_BUCKET_MS)),
+  );
   assert.equal(new URL(requestedUrl).protocol, 'https:');
   assert.equal(options.redirect, 'error');
   assert.equal(options.headers.accept, 'application/json');
   assert.ok(options.signal instanceof AbortSignal);
+
+  let nextBucketUrl = null;
+  await fetchTopicCandidatesFeed({
+    nowMs: NOW_MS + TOPIC_CANDIDATES_FEED_CACHE_BUCKET_MS,
+    fetchImpl: async (url) => {
+      nextBucketUrl = url;
+      return responseFor(makeFeed());
+    },
+  });
+  assert.notEqual(nextBucketUrl, requestedUrl);
 });
 
 test('404, malformed JSON, stale payload, and oversized bodies degrade to an empty pool', async () => {
