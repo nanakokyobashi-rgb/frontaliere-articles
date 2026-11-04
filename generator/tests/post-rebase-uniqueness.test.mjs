@@ -90,10 +90,11 @@ function metaSrc(ids, articles = {}) {
 
 /** Stato di una sezione: ids (registro + slug) e ledger URL→voce. */
 function sectionFiles(surface, { ids = [], ledger = {}, articles = {}, localizedSlugs = {} } = {}) {
+  const metaFiles = surface.metaFiles ?? [surface.metaFile];
   return {
     [surface.registryFile]: registrySrc(ids),
     [surface.slugDataFile]: slugSrc(ids, surface.slugConst, localizedSlugs),
-    [surface.metaFile]: metaSrc(ids, articles),
+    ...Object.fromEntries(metaFiles.map((file) => [file, metaSrc(ids, articles)])),
     [surface.sourceLedger]: ledgerSrc(ledger),
   };
 }
@@ -170,9 +171,12 @@ test('una sezione nel core senza ledger dichiarato e\' un errore, non una sezion
 test('il meta IT mancante con ID su registro/slug e\' un errore fail-closed', () => {
   const files = sectionFiles(FIRST, { ids: ['esistente'] });
   const readAt = (file) => file === FIRST.metaFile ? null : files[file] ?? null;
+  const expected = FIRST.kind === 'canton'
+    ? /superfici sorgente cantonali parziali.*registro, slug e meta locali/
+    : /meta IT assente o incoerente.*esistente/;
   assert.throws(
     () => snapshotSections([FIRST], readAt, 'against'),
-    /meta IT assente o incoerente.*esistente/,
+    expected,
   );
 });
 
@@ -743,17 +747,16 @@ test('CLI meta IT incompleto: exit 2 con POST_REBASE_UNIQUENESS_ERROR, mai un fa
     ids: [candidate],
     articles: { [candidate]: candidateArticle },
   });
-  // L'upstream porta un record, ma il suo meta IT resta vuoto nel tree
-  // rigiocato: e' proprio il contro-corpus parziale che deve fermare il gate.
-  const upstream = {
-    [FIRST.registryFile]: registrySrc([old]),
-    [FIRST.slugDataFile]: slugSrc([old], FIRST.slugConst),
-  };
-  const rebased = {
-    [FIRST.registryFile]: registrySrc([candidate, old]),
-    [FIRST.slugDataFile]: slugSrc([candidate, old], FIRST.slugConst),
-    [FIRST.metaFile]: metaSrc([candidate], { [candidate]: candidateArticle }),
-  };
+  // Le quattro superfici locali esistono, ma il meta IT omette il record
+  // upstream: il gate deve distinguere una copertura incompleta da una
+  // famiglia locale materializzata solo in parte.
+  const upstream = sectionFiles(FIRST, { ids: [old] });
+  upstream[FIRST.metaFile] = metaSrc([]);
+  const rebased = sectionFiles(FIRST, {
+    ids: [candidate, old],
+    articles: { [candidate]: candidateArticle },
+  });
+  rebased[FIRST.metaFile] = metaSrc([candidate], { [candidate]: candidateArticle });
   const w = world({ upstream, mine, rebased });
   try {
     const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
@@ -857,7 +860,8 @@ test('CLI: una superficie presente ma vuota e\' un errore, non «nessuna voce»'
   // fermato la stessa URL registrata da upstream un attimo prima.
   for (const surface of ['sourceLedger', 'slugDataFile', 'registryFile']) {
     const mine = sectionFiles(SECOND, { ids: ['mio'], ledger: { [URL_A]: entry('mio') } });
-    const w = world({ upstream: { [FIRST[surface]]: '' }, mine, rebased: mine });
+    const upstream = { ...sectionFiles(FIRST), [FIRST[surface]]: '' };
+    const w = world({ upstream, mine, rebased: mine });
     try {
       const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
       assert.equal(code, 2, `${surface}: ${out}`);
