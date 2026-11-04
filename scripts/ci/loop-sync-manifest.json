@@ -394,7 +394,7 @@
       "reason": "Ricontrollo post-rebase di id globale, slug localizzato, fonte, copertura topic e contenuto, eseguito da generate-article.yml e generate-article-core.yml prima del push. Il controllo slug intercetta anche due run che partono dalla stessa mappa e scelgono la stessa traduzione prima di unirsi col rebase. Esiste solo qui perche' il push con rebase degli articoli generati vive solo nel corpus: il sito non genera articoli. Le sezioni vengono dal core, i ledger da article-surfaces.mjs.",
       "baseline": {
         "site": null,
-        "corpus": "0d94ca80b217feb7",
+        "corpus": "eab2a45730aa779b",
         "alignedAt": "2026-11-04"
       }
     },
@@ -2126,9 +2126,10 @@
       "mode": "adapted",
       "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; resta sorvegliato, ma le decisioni di pubblicazione delle copertine vivono nel corpus: le nuove immagini passano dal motore mirrorato con scope `article-hero`, se il motore fallisce, il fallback usa un record reader-facing del catalogo o la cover statica governata e accoda la rigenerazione senza rigettare l'articolo; la generazione del testo applica la guardia anti-copia. Il gemello del sito e' il generatore legacy disabilitato (`confirm_corpus_write=yes`) e non va aggiornato per questa pipeline corpus-only; i registri pubblici vengono esposti via JSON HTTP. RIALLINEATO 2026-11-04 (corpus-ahead): il writer controlla la mappa completa e il candidato con article-slug-uniqueness.mjs; il controllo resta qui perche' il generatore legacy del sito e' disabilitato e il corpus pubblica i dati via JSON HTTP. Baseline corpus aggiornata.",
       "baseline": {
-        "site": "09254622b320cf9a",
-        "corpus": "8e919d1ecbb0d0bc",
-        "alignedAt": "2026-11-04"
+        "site": "86c5e5304ccd0ac1",
+        "corpus": "eb9791e12128ca77",
+        "alignedAt": "2026-11-04",
+        "forcedAt": "2026-11-04T04:44:56.907Z"
       }
     },
     {
@@ -4562,9 +4563,10 @@
       "mode": "adapted",
       "reason": "IL PUNTO CIECO CHE HA PERMESSO LA #5457. L'intestazione della copia di QUESTO repo dichiara «This repo is a SEPARATE COPY of the site's scripts/publish-article-fast.mjs» e chiede «If either copy is touched, touch both» — ma la dichiarazione esiste solo da questo lato, il file non era nel manifest, e nessun meccanismo la faceva rispettare. Cosi' la #65 ha cablato sanitizeHtmlDocument nei writeFileSync di questa copia (righe 292-293) e la copia del sito e' rimasta senza, agli stessi identici punti di scrittura, per giorni. E' la stessa classe gia' misurata sull'ordine render/offload, dove l'archivio live alternava sano e rotto a seconda di chi aveva pubblicato. `adapted` e non `identical` perche' divergono davvero e per costruzione (445 righe qui contro 333 la', 298 righe di diff): percorsi di render diversi, dipendenze diverse, e ora anche politiche diverse sui control character — qui si sanifica, la' si rifiuta (scripts/lib/control-char-publish-gate.mjs). Sorvegliato proprio perche' adattato: e' sui file adattati che una modifica di un lato si perde, «tanto e' diverso apposta». `baseline.site` ricalcolata da #148 dopo il merge di valerielinc-ops#5518, che ha toccato questo file sul sito. RIALLINEATO 2026-09-03 (corpus-ahead, issue #756): il movimento locale non dichiarato e' #139, che ha cablato `reportStrippedControlChars` (generator/scripts/lib/control-char-write-report.mjs) sui tre punti di scrittura HTML — index, bridge piatto e le pagine archivio dell'article-hub — perche' uno strip silenzioso sui byte che vanno live e' esattamente il caso che non fallisce. NON e' proponibile al sito: quel modulo e' `corpus-only` per costruzione (i choke point di scrittura li ha il generatore) e la' la politica sui control character e' il RIFIUTO, non lo strip, quindi non c'e' niente da riportare. Con l'aggiunta la copia locale passa da 445 a 451 righe e le due chiamate a `sanitizeHtmlDocument` citate sopra stanno ora alle righe 293 e 296. RIALLINEATO 2026-09-25 (corpus-ahead post-cutover valerielinc-ops/frontaliere-si-o-no#4974 item 3, issue #1816, figlia di valerielinc-ops/frontaliere-si-o-no#7483): il sito e' fermo alla baseline del 2026-09-03 (`d301f81c84506ca8`), qui `2c426a08e15b2d6f`. Il delta e' uno solo, lo Step 7b dopo l'offload, in tre commit: `f9632aaa6` (#788/#790) la verifica di esistenza sul CDN degli `/assets/` riscritti (`scripts/lib/cdn-asset-existence.mjs`), `636489388` (#817/#839) la discriminante fra offload fallito e «niente da riscrivere» (`hasSameOriginAssetRef`, `formatOffloadCoverageReport`), `97526cbe8` (#1219/#1221) il margine misurato con l'orologio vero. Verificato che NON cambia i byte HTML renderizzati: lo Step 7b legge l'HTML gia' scritto (`readdirSync`/`readFileSync`), fa HEAD/GET verso il CDN e stampa, senza nessuna scrittura su `distDir`, e `cdn-asset-existence.mjs` non importa `node:fs`. Quindi `check-article-byte-identity.mjs`, che ogni settimana (`audit-article-corpus-drift.yml` del sito) rende con la copia del SITO e confronta con la produzione, non vede differenze da questo delta; il fingerprint deterministico di #788 vive in `host/` (contratto shell), non in questo file. Niente da portare, per scelta: sul sito la stessa guardia sta gia' in `scripts/offload-generated-images-cdn.mjs` (sito #7493), che la copia del sito esegue come offload, e il `fast-publish-article.yml` del sito e' solo `workflow_dispatch` con `dry_run: true` di default e `human_approval`; qui `fast-publish-article.yml` parte a ogni push di `content/**` su main. Baseline corpus rigenerata sull'hash di oggi, baseline sito invariata. Oggi 502 righe qui contro 440 la', 470 righe di diff; le due chiamate a `sanitizeHtmlDocument` citate sopra restano alle righe 293 e 296. RIALLINEATO 2026-11-04 (corpus-ahead): il bridge di uno slug rinominato viene saltato se lo slug precedente e' ancora assegnato a un altro articolo; altrimenti il push incrementale potrebbe sovrascrivere la pagina che mantiene quell'URL. Divergenza corpus-only: il fast-publisher del corpus parte a ogni push di content/**, mentre il gemello del sito resta workflow_dispatch con dry_run e human_approval; portare il guard prima di riarmare il publisher del sito. Baseline corpus aggiornata; baseline site invariata.",
       "baseline": {
-        "site": "4c0bceed153bb6e1",
-        "corpus": "83fe32b19b7331cf",
-        "alignedAt": "2026-11-04"
+        "site": "53e711cf3cd67c8d",
+        "corpus": "4915d9fcdbcdf885",
+        "alignedAt": "2026-11-04",
+        "forcedAt": "2026-11-04T04:44:57.779Z"
       }
     },
     {
@@ -5603,7 +5605,7 @@
       "reason": "Parser statico e controllo fail-closed della mappa degli slug localizzati, riusati dal writer, dal repair degli esonimi, dal gate post-rebase, dal fast-publisher per preservare il proprietario corrente delle URL e dai test del corpus. La mappa e' mutata solo dalla pipeline del corpus; il sito consuma i JSON HTTP e non esegue questi writer. Modulo builtin-Node per mantenere i gate eseguibili senza npm ci.",
       "baseline": {
         "site": null,
-        "corpus": "757add1995287277",
+        "corpus": "9b61003d228e4f6a",
         "alignedAt": "2026-11-04"
       }
     },
