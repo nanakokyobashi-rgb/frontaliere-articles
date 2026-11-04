@@ -168,6 +168,26 @@ function calendarDay(value) {
   return Number.isNaN(ms) ? null : new Date(ms).toISOString().slice(0, 10);
 }
 
+function candidateTimestamp(candidate) {
+  if (typeof candidate?.committedAt === 'string') return candidate.committedAt;
+  if (Number.isFinite(candidate?.changedAt)) return new Date(candidate.changedAt).toISOString();
+  return '';
+}
+
+/**
+ * Derive the freshness day for one body change. The observer receives epoch
+ * milliseconds while the history reader receives ISO timestamps; accepting
+ * both here keeps the eligibility rule shared by diagnostics and renderers.
+ */
+export function deriveUpdatedAtFromBodyChange({ candidate, publishedAt, currentUpdatedAt } = {}) {
+  const normalized = candidate
+    ? { ...candidate, committedAt: candidateTimestamp(candidate) }
+    : null;
+  if (!normalized || !isPublishedBefore(normalized, publishedAt)) return null;
+  const updatedAt = calendarDay(normalized.committedAt);
+  return updatedAt && shouldReplace(currentUpdatedAt, updatedAt) ? updatedAt : null;
+}
+
 /**
  * Enrich loaded registry arrays without mutating the TypeScript module values.
  * A candidate is accepted only when the body commit is strictly after the
@@ -183,9 +203,12 @@ export function enrichRegistriesFromHistory(registriesBySection, sections, histo
     const sectionUpdates = latest.get(id) ?? new Map();
     enriched[id] = registry.map((article) => {
       const candidate = sectionUpdates.get(article?.id);
-      if (!candidate || !isPublishedBefore(candidate, article?.date)) return article;
-      const updatedAt = calendarDay(candidate.committedAt);
-      if (!updatedAt || !shouldReplace(article?.updatedAt, updatedAt)) return article;
+      const updatedAt = deriveUpdatedAtFromBodyChange({
+        candidate,
+        publishedAt: article?.date,
+        currentUpdatedAt: article?.updatedAt,
+      });
+      if (!updatedAt) return article;
       changed.push({ section: id, id: article.id, updatedAt });
       return { ...article, updatedAt };
     });
@@ -341,4 +364,63 @@ export function readRegistrySources(root, sections) {
     }
   }
   return sources;
+}
+
+function selectedArticleIds(articleIdsBySection, id) {
+  if (articleIdsBySection == null) return null;
+  const raw = articleIdsBySection instanceof Map
+    ? articleIdsBySection.get(id)
+    : articleIdsBySection[id];
+  if (raw == null) return new Set();
+  const values = raw instanceof Set ? [...raw] : Array.isArray(raw) ? raw : [];
+  return new Set(values.map((value) => String(value)));
+}
+
+/**
+ * Reproduce the API freshness backfill in a source overlay for renderers that
+ * read the TypeScript registry directly. The returned sources are applied by
+ * the caller only for the duration of a render; the working tree is never
+ * changed permanently.
+ */
+export function deriveRegistryUpdatedAtSources({ root, sections, articleIdsBySection = null, runGit } = {}) {
+  const sourceRoot = root ?? process.cwd();
+  const descriptors = sections ?? [];
+  if (descriptors.length === 0) return { sources: {}, changed: [], history: new Map() };
+  const sources = readRegistrySources(sourceRoot, descriptors);
+  const registries = Object.fromEntries(descriptors.map((section) => {
+    const id = sectionId(section);
+    const source = sources[id];
+    const rows = typeof source === 'string'
+      ? scanTopLevelArticleRecords(source).map((record) => {
+        const updatedAt = readTopLevelString(record, 'updatedAt');
+        return {
+          id: record.id,
+          date: readTopLevelString(record, 'date'),
+          ...(updatedAt ? { updatedAt } : {}),
+        };
+      })
+      : [];
+    return [id, rows];
+  }));
+  const history = readContentHistory({ root: sourceRoot, sections: descriptors, runGit });
+  const enriched = enrichRegistriesFromHistory(registries, descriptors, history);
+  const changed = [];
+  for (const section of descriptors) {
+    const id = sectionId(section);
+    const source = sources[id];
+    if (typeof source !== 'string') continue;
+    const selected = selectedArticleIds(articleIdsBySection, id);
+    const values = new Map(
+      enriched.changed
+        .filter((item) => item.section === id && (selected === null || selected.has(item.id)))
+        .map((item) => [item.id, item.updatedAt]),
+    );
+    if (values.size === 0) continue;
+    const applied = applyRegistryUpdatedAt(source, values);
+    sources[id] = applied.source;
+    for (const articleId of applied.changedIds) {
+      changed.push({ section: id, id: articleId, updatedAt: values.get(articleId) });
+    }
+  }
+  return { sources, changed, history };
 }

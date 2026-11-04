@@ -61,6 +61,7 @@ jobs:
             /generator/scripts/lib/source-copy-guard.mjs
             /scripts/ci/article-publication-observer.mjs
             /scripts/lib/article-registry-reader.mjs
+            /scripts/lib/content-updated-at.mjs
             /scripts/lib/article-meta-ids.mjs
             /scripts/lib/ts-literals.mjs
             /engine/shared/ts-literals.mjs

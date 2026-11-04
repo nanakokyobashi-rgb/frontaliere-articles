@@ -4,8 +4,9 @@
  *
  * It samples only Italian article pages whose body changed recently on corpus
  * main. Publication lag is measured with dateModified versus the registry's
- * updatedAt (or the publication day when updatedAt is absent); Event pages
- * are exempt because their renderer intentionally omits dateModified. Image
+ * updatedAt, deriving that value from the body history when the registry has
+ * no stamp, and falling back to the publication day otherwise. Event pages are
+ * exempt because their renderer intentionally omits dateModified. Image
  * degradation is a separate signal based on og:image versus the registry
  * image. The network loop is deliberately sequential and rate-limited because
  * this is a courtesy check, not a crawler. Degraded articles are kept in the
@@ -25,6 +26,7 @@ import { readTopLevelString, scanTopLevelArticleRecords } from '../lib/article-r
 import { declaredImageIsOwn, extractOgImage, isGenericOgImage, normalizeImagePath } from '../lib/article-image-postcondition.mjs';
 import { fetchDeclaredImage } from '../lib/declared-image-fetch.mjs';
 import { parseArticleMetaIds } from '../lib/article-meta-ids.mjs';
+import { deriveUpdatedAtFromBodyChange } from '../lib/content-updated-at.mjs';
 import {
   DEFAULT_REPAIR_CAP,
   applyDispatchOutcomes,
@@ -180,7 +182,7 @@ export function bodyPathInfo(rel) {
   };
 }
 
-/** Parse `git log --format="commit <sha> <epoch>" --name-only` output. */
+/** Parse `git log --format="commit <sha> <epoch>" --name-status` output. */
 export function parseChangedBodyLog(log) {
   const latest = new Map();
   let current = null;
@@ -190,12 +192,17 @@ export function parseChangedBodyLog(log) {
       current = { commit: commit[1], changedAt: Number(commit[2]) * 1000 };
       continue;
     }
-    const info = bodyPathInfo(line.trim());
+    const status = line.trim().match(/^([AM])\t(.+)$/u);
+    const info = bodyPathInfo(status?.[2] ?? line.trim());
     // The observer fetches the Italian page for each article. A translation-only
     // change does not mean that page needs a new publication, even though the
     // localized files share the same article id.
     if (!current || !info || info.locale !== 'it' || latest.has(`${info.section}:${info.articleId}`)) continue;
-    latest.set(`${info.section}:${info.articleId}`, { ...info, ...current });
+    latest.set(`${info.section}:${info.articleId}`, {
+      ...info,
+      ...current,
+      ...(status ? { changeType: status[1] } : {}),
+    });
   }
   // Most recent first: the page cap must cut the oldest changes, not the end of
   // the alphabet (an alphabetical order would read the same pages every day).
@@ -335,7 +342,11 @@ export function buildObserverTargets({
         : {}),
       url: `${String(baseUrl).replace(/\/+$/, '')}/${change.section === 'svizzera' ? 'articoli-svizzera' : 'articoli-frontaliere'}/${slug}/`,
       sourceCommit: change.commit,
-      sourceUpdatedAt: registry.updatedAt,
+      sourceUpdatedAt: registry.updatedAt || deriveUpdatedAtFromBodyChange({
+        candidate: change,
+        publishedAt: registry.date,
+        currentUpdatedAt: registry.updatedAt,
+      }),
       registryDate: registry.date,
       registryImage: registry.image,
       durable: Boolean(change.durable),
@@ -914,7 +925,7 @@ export async function runObserver({
   const effectiveLagRepairCap = normalizeRepairCap(lagRepairCap);
   const since = new Date(nowMs - days * 24 * 60 * 60 * 1000).toISOString();
   const log = gitLogImpl([
-    'log', '--first-parent', `--since=${since}`, '--format=commit %H %ct', '--name-only', '--diff-filter=AM', '--',
+    'log', '--first-parent', `--since=${since}`, '--format=commit %H %ct', '--name-status', '--diff-filter=AM', '--',
     'content/blog-body', 'content/blog-body-ch',
   ], rootDir);
   const changedBodies = parseChangedBodyLog(log);
