@@ -467,7 +467,10 @@ import {
 // dal classificatore deterministico (nessun LLM, nessun gate).
 import { defaultCantonClassifier, registryCantonsForArticle } from './lib/canton-classifier.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
-import { assertFaqPairsHaveNoRejectedControls } from '../../scripts/lib/faq-control-contract.mjs';
+import {
+  assertFaqPairsHaveNoRejectedControls,
+  rejectRawFaqControlEscape,
+} from '../../scripts/lib/faq-control-contract.mjs';
 import {
   decodeStaticStringLiteral,
   findIdListLiteralSpan,
@@ -14451,6 +14454,12 @@ ${localizedToponymInstruction(targetLang)}`;
       const valoreTradotto = readField(data.content[locale]);
       const traduzioneUsabile = hasUsableTranslatedText(valoreTradotto, locale);
       const floorMiss = traduzioneUsabile ? metaFieldPlausibilityMiss(field, valoreTradotto) : null;
+      // A C0 byte can survive JSON.parse as an ordinary, non-empty string. It
+      // is still not publishable: buildBodyFile() correctly rejects it, but
+      // waiting for that final guard aborts an otherwise valid article. Treat
+      // the affected translated FAQ field like any other unusable translation
+      // so the focused retry/fallback path can repair it before writing.
+      const faqControlRejected = Boolean(faqPart && rejectRawFaqControlEscape(valoreTradotto));
       const freeMtRejected = ARTICLE_TRANSLATE_FREE_MT
         && wasFreeMtUnusable(RUN_REPORT.translation, locale, recoveryField);
       // Un `bodyN` tradotto che e' l'italiano ricopiato non e' usabile, da
@@ -14459,7 +14468,7 @@ ${localizedToponymInstruction(targetLang)}`;
       // copia identica ha gia' il suo retry dedicato piu' sotto.
       const bodyPassthrough = !faqPart && /^body\d+$/.test(field)
         && isSourcePassthrough(valoreTradotto, readField(itContent));
-      if (traduzioneUsabile && !floorMiss && !freeMtRejected && !bodyPassthrough) continue;
+      if (traduzioneUsabile && !floorMiss && !freeMtRejected && !bodyPassthrough && !faqControlRejected) continue;
       // ULTIMA RISORSA ASIMMETRICA. Un campo implausibile e' comunque prosa
       // NELLA LINGUA GIUSTA: se il retry non produce di meglio si tiene quello,
       // MAI il fallback IT, che pubblicherebbe italiano sotto `/de/` (#831).
@@ -14476,7 +14485,7 @@ ${localizedToponymInstruction(targetLang)}`;
         : isBodyField
           ? 'body lasciato NON tradotto, niente fallback IT (#1875)'
           : 'fallback al valore italiano';
-      let pendingReason = 'retry-unusable';
+      let pendingReason = faqControlRejected ? 'invalid-control' : 'retry-unusable';
       const itValue = readField(itContent);
       // `itValue` composto di solo whitespace (es. ' ') è truthy: senza
       // `.trim()` bypassa questo guard e viene comunque assegnato sotto come
@@ -14490,7 +14499,9 @@ ${localizedToponymInstruction(targetLang)}`;
         throw new Error(`Campo ${field} mancante nella traduzione ${locale} (e assente anche nella sorgente IT)`);
       }
       console.error(
-        floorMiss
+        faqControlRejected
+          ? `  ⚠️  Campo ${field} nella traduzione ${locale} contiene un carattere di controllo non pubblicabile — retry traduzione mirata...`
+          : floorMiss
           ? `  ⚠️  Campo ${field} nella traduzione ${locale} troppo corto per essere un ${field} (${floorMiss}) — retry traduzione mirata...`
           : bodyPassthrough
             ? `  ⚠️  Campo ${field} nella traduzione ${locale} identico all'italiano — retry traduzione mirata...`
@@ -14550,17 +14561,23 @@ ${localizedToponymInstruction(targetLang)}`;
           // real string so a non-string retry falls through to the no-translation
           // outcome below (pending body, or IT fallback for title/excerpt/FAQ).
           const retried = translatedStringOrNull(readRetryValue(parsed), locale);
+          const retriedControlRejected = Boolean(faqPart && rejectRawFaqControlEscape(retried));
           // Il floor vale anche sull'ESITO del retry: un retry che risponde `...`
           // e' la stessa degenerazione, solo un turno piu' tardi.
           const retriedMiss = retried ? metaFieldPlausibilityMiss(field, retried) : null;
           const retriedPassthrough = isSourcePassthrough(retried, itValue);
           if (retriedPassthrough) pendingReason = 'retry-passthrough';
-          if (retried && !retriedMiss && !retriedPassthrough) {
+          if (retriedControlRejected) pendingReason = 'invalid-control';
+          if (retried && !retriedMiss && !retriedPassthrough && !retriedControlRejected) {
             writeField(data.content[locale], retried);
             console.error(`  ✅ Campo ${field} (${locale}) ritradotto con successo dopo missing-field retry`);
             continue;
           }
-          console.error(`  ⚠️  Retry ${field} (${locale}) non ha prodotto una traduzione valida${retriedMiss ? ` (${retriedMiss})` : ''} — ${esitoSenzaTraduzione}`);
+          console.error(
+            `  ⚠️  Retry ${field} (${locale}) non ha prodotto una traduzione valida`
+            + `${retriedControlRejected ? ' (carattere di controllo non pubblicabile)' : retriedMiss ? ` (${retriedMiss})` : ''}`
+            + ` — ${esitoSenzaTraduzione}`,
+          );
         } catch (retryErr) {
           pendingReason = 'retry-error';
           console.error(`  ⚠️  Retry ${field} (${locale}) fallito: ${retryErr.message} — ${esitoSenzaTraduzione}`);
