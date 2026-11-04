@@ -111,6 +111,22 @@ function prepareFreshnessOverlay({ rootDir, section, ids, logPrefix }) {
 export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', persistentReleasedArticles = [], beforeOffload, probeOnlineImage }) {
   const freshnessOverlay = prepareFreshnessOverlay({ rootDir, section, ids, logPrefix });
   try {
+    return await renderSectionArticlePipelineBody({
+      rootDir,
+      distDir,
+      section,
+      ids,
+      logPrefix,
+      persistentReleasedArticles,
+      beforeOffload,
+      probeOnlineImage,
+    });
+  } finally {
+    freshnessOverlay.restore();
+  }
+}
+
+async function renderSectionArticlePipelineBody({ rootDir, distDir, section, ids, logPrefix, persistentReleasedArticles, beforeOffload, probeOnlineImage }) {
   // Use the same source-backed CDN base as image offload. The host bootstrap
   // resolves its preconnect origin when the engine reads the contract, so the
   // value does not depend on when host/constants.ts was imported.
@@ -462,9 +478,6 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     genericFallbackArticles,
     aggregatePagesAllowed,
   };
-  } finally {
-    freshnessOverlay.restore();
-  }
 }
 
 export function registryPathForSection(rootDir, section) {
