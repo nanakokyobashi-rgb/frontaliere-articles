@@ -71,7 +71,7 @@ function safeCandidate(candidate) {
     || !candidate.keyword.trim()
     || candidate.keyword.trim() !== candidate.keyword
     || /[\u0000-\u001f\u007f]/.test(candidate.keyword)
-    || candidate.keyword.length > 180) {
+    || Array.from(candidate.keyword).length > 180) {
     throw new TopicCandidatesFeedError('candidate_keyword_invalid');
   }
   if (!Object.hasOwn(candidate, 'angle')) {
@@ -81,7 +81,7 @@ function safeCandidate(candidate) {
     && (typeof candidate.angle !== 'string'
       || candidate.angle.trim() !== candidate.angle
       || /[\u0000-\u001f\u007f]/.test(candidate.angle)
-      || candidate.angle.length > 180)) {
+      || Array.from(candidate.angle).length > 180)) {
     throw new TopicCandidatesFeedError('candidate_angle_invalid');
   }
   if (!['it', 'en', 'de', 'fr'].includes(candidate.locale)) {

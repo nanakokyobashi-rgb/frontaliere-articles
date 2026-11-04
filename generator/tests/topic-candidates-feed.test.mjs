@@ -85,6 +85,16 @@ test('rejects unsupported schema, unsafe provider labels, and raw extra fields',
   );
 });
 
+test('measures v1 keyword and angle limits in Unicode code points like the producer', () => {
+  const keyword = '💼'.repeat(180);
+  const angle = '⚙️'.repeat(90);
+  const feed = validateTopicCandidatesFeed(makeFeed({
+    candidates: [{ ...makeFeed().candidates[0], keyword, angle }],
+  }), { nowMs: NOW_MS });
+  assert.equal(Array.from(feed.candidates[0].keyword).length, 180);
+  assert.equal(Array.from(feed.candidates[0].angle).length, 180);
+});
+
 test('rejects stale, future, and invalid Reddit permalink data', () => {
   const stale = makeFeed({ generatedAt: new Date(NOW_MS - 9 * 24 * 60 * 60 * 1000).toISOString() });
   assert.throws(
