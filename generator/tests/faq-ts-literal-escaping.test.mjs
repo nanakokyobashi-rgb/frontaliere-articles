@@ -262,11 +262,28 @@ test('le FAQ con controlli C0 codificati vengono rimosse prima della traduzione 
   assert.match(src.slice(finalFilter, finalFilter + 240), /c\.faq = c\.faq\.map/u);
 });
 
+test('la traduzione FAQ conserva l indice sorgente e scarta batch non allineati', () => {
+  const src = fs.readFileSync(CREATE_ARTICLE, 'utf8');
+  const faqTranslationStart = src.indexOf('// Translate FAQ if present');
+  const faqTranslationEnd = src.indexOf('// Per-call resilience', faqTranslationStart);
+  assert.ok(faqTranslationStart >= 0 && faqTranslationEnd > faqTranslationStart);
+  const faqTranslation = src.slice(faqTranslationStart, faqTranslationEnd);
+
+  assert.match(faqTranslation, /sourceFaq\.map\(\(pair, sourceFaqIndex\)/u);
+  assert.match(faqTranslation, /aligned\[sourceFaqIndex\]/u);
+  assert.match(faqTranslation, /translatedFaq\.length !== sourceFaq\.length/u);
+  assert.match(faqTranslation, /aligned\.some\(\(pair\) => pair === undefined\)/u);
+  assert.match(src, /translatedFaq\.length !== sourceFaqCount/u);
+  assert.match(src, /data\.content\[locale\]\.faq = \[\]/u);
+  assert.doesNotMatch(src, /translatedFaq\.slice\(0,\s*sourceFaqCount\)/u);
+});
+
 test('tutti i writer FAQ secondari applicano il contratto C0 condiviso', () => {
   const batchPath = path.join(SCRIPTS, 'batch-add-faq-to-articles.mjs');
   const fixPath = path.join(SCRIPTS, 'fix-faq-locales.mjs');
   const batch = fs.readFileSync(batchPath, 'utf8');
   const fix = fs.readFileSync(fixPath, 'utf8');
+  const repairPrompt = fs.readFileSync(path.join(SCRIPTS, 'repair-prompt-placeholders.mjs'), 'utf8');
 
   const functionSource = (source, startMarker, endMarker, label) => {
     const start = source.indexOf(startMarker);
@@ -319,6 +336,12 @@ test('tutti i writer FAQ secondari applicano il contratto C0 condiviso', () => {
   );
   assert.match(reescape, /pairs\.findIndex\(faqPairContainsRejectedControl\)/u);
   assert.match(reescape, /if \(rejectedPair >= 0\)/u);
+
+  const repairedFaqStart = repairPrompt.indexOf('const { pairs: kept, repaired, dropped } = cleanFaqPairs');
+  const repairedFaqGuard = repairPrompt.indexOf('assertFaqPairsHaveNoRejectedControls(kept', repairedFaqStart);
+  const repairedFaqSerialize = repairPrompt.indexOf('JSON.stringify(kept)', repairedFaqStart);
+  assert.ok(repairedFaqStart >= 0 && repairedFaqGuard > repairedFaqStart, 'repair-prompt FAQ: manca il gate C0');
+  assert.ok(repairedFaqSerialize > repairedFaqGuard, 'repair-prompt FAQ: serializza prima del gate C0');
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
