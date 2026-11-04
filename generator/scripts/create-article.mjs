@@ -395,7 +395,12 @@ import { editorialHeadlineGuidance } from './lib/editorial-headline-guidance.mjs
 import { enrichArticleInternalLinks } from './lib/contextual-article-links.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
+import {
+  ARTICLE_SLUG_LOCALES,
+  assertLocalizedSlugCandidateUnique,
+} from '../../scripts/lib/article-slug-uniqueness.mjs';
 import { activeCorpusCoreMap } from '../../scripts/lib/corpus-sections.mjs';
+import { familySourceTransitionState } from '../../scripts/lib/section-registry.mjs';
 import { NEWS_SITEMAP_WHITELIST } from '../data/news-sitemap-whitelist.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
 import { findContentDuplicate } from './lib/article-content-duplicate.mjs';
@@ -3772,8 +3777,10 @@ function readSectionSlugData() {
 /**
  * Un file sorgente della sezione attiva. Una sezione cantonale che non ha
  * ancora pubblicato non ha ancora i suoi file (li crea la prima registrazione,
- * `ensureCantonSectionFiles`): per lei «assente» vuol dire «vuota», non un
- * errore. Per le sezioni storiche il file assente resta un errore, come prima.
+ * `ensureCantonSectionFiles`): per lei «assente» vuol dire «vuota» solo quando
+ * tutte le sorgenti canoniche sono assenti; il controllo al confine di
+ * scrittura rifiuta una sezione parziale. Per le sezioni storiche il file
+ * assente resta un errore, come prima.
  */
 function readSectionSourceFile(rel) {
   if (IS_CANTON && !existsSync(resolve(rel))) return '';
@@ -16330,7 +16337,9 @@ function checkForDuplicates(data, { localizedSlugs = true } = {}) {
   // `localizedSlugs: false` (the early gate of Step 3a.0-dup) checks only the
   // IT slot: EN/DE/FR slugs are still provisional there, and the full check
   // runs at Step 3a.2 and again after relocalizeSlugsAfterTranslation().
-  checkTranslatedSlugCollisions(data, { locales: localizedSlugs ? ['it', 'en', 'de', 'fr'] : ['it'] });
+  checkTranslatedSlugCollisions(data, {
+    locales: localizedSlugs ? ARTICLE_SLUG_LOCALES : [ARTICLE_SLUG_LOCALES[0]],
+  });
 
   console.error('  ✅ Nessun duplicato rilevato');
   return data;
@@ -16344,44 +16353,50 @@ function checkForDuplicates(data, { localizedSlugs = true } = {}) {
  * it: '…', en: '…', de: '…', fr: '…' }`) and REVERSE_SWISS/REVERSE_BLOG are
  * last-write-wins: two articles sharing the same EN/DE/FR slug make the
  * earlier one unreachable in that locale (its buildPath → parsePath
- * round-trip resolves to the sibling). The IT slug is human-authored (or, for
- * the journalist path, fixed to the article id) and typically already
- * unique; the EN/DE/FR slugs are auto-translated and historically went
- * UNCHECKED here — that is exactly how the svizzera pairs collided (de-duped
- * by data fix #3000) and how 36 frontaliere pairs still collide. Guard each
- * locale against its OWN slot so a colliding translation fails generation
- * loudly instead of poisoning the registry and surfacing later as main-red
- * on the routing round-trip test.
+ * round-trip resolves to the sibling). Translated slugs were historically
+ * unchecked at this boundary, which let concurrent writers and direct slug
+ * repair paths create the same class of collision. The shared check now
+ * parses the complete current map, rejects legacy collisions, and checks the
+ * candidate in its own locale slot; the post-rebase gate covers writers that
+ * passed this preflight against the same older snapshot.
  */
-function checkTranslatedSlugCollisions(data, { locales = ['it', 'en', 'de', 'fr'] } = {}) {
-  // `routerSrc` here was previously a dangling reference left by the section
-  // refactor (it was a local of modifyRouterTs), which threw "routerSrc is
-  // not defined" and broke EVERY generation run.
-  const sectionSlugSrc = readSectionSlugData();
-  for (const locale of locales) {
-    const newSlug = data.slugs[locale];
-    // A nullish slug builds a degenerate regex (`escapeRegex(undefined)` → '')
-    // that never matches a populated slot → the overlap check silently passes
-    // and a real duplicate slips through (two articles, same URL, canonical
-    // confusion). Fail loud instead of false-negative.
-    if (!newSlug) {
-      throw new Error(`❌ Slug "${locale}" mancante prima del controllo duplicati (data.slugs.${locale}=${newSlug}).`);
-    }
-    // Anchor on the matching locale slot, not any quoted token: the slug-data
-    // file stores all four locales as strings per entry, either on a single line
-    // (`'id': { it: '…', en: '…', de: '…', fr: '…' }`) or expanded across
-    // lines — both formats appear in routerSwissData.ts. `\s*` covers both.
-    // Double-quote variant (`it: "…"`) is also matched: a formatter or manual
-    // edit could switch quote style and a single-quote-only regex would silently
-    // miss the collision (silent zero-check). Both cases share the backreference
-    // guard so `it: 'slug"` (mixed quotes) never false-positives.
-    // Scoping to `${locale}:` checks it-vs-it, en-vs-en, … so cross-locale
-    // coincidences don't false-trip while genuine same-locale collisions are caught.
-    const slugPattern = new RegExp(`\\b${locale}:\\s*(['"])${escapeRegex(newSlug)}\\1`, 'g');
-    if (slugPattern.test(sectionSlugSrc)) {
-      throw new Error(`❌ DUPLICATO: Lo slug ${locale} "${newSlug}" esiste già in ${corpusPath(SECTION_SLUG_DATA_FILE)}!`);
-    }
+function checkTranslatedSlugCollisions(data, { locales = ARTICLE_SLUG_LOCALES } = {}) {
+  const sourceState = cantonSectionSourceState();
+  const slugFile = resolve(corpusPath(SECTION_SLUG_DATA_FILE));
+  const sectionSlugSrc = existsSync(slugFile) ? readSectionSlugData() : null;
+  assertLocalizedSlugCandidateUnique(
+    sectionSlugSrc,
+    SECTION.slugsConstName,
+    data,
+    {
+      candidateLocales: locales,
+      allowMissing: sourceState === 'new',
+      sourceLabel: corpusPath(SECTION_SLUG_DATA_FILE),
+    },
+  );
+}
+
+/**
+ * A section family is either entirely unmaterialized or has all canonical
+ * sources. Treating only the missing slug file as an empty map would let the
+ * first writer recreate it and discard the routes already present in the
+ * registry/meta surfaces.
+ */
+function cantonSectionSourceState() {
+  if (!IS_CANTON) return 'ready';
+  const state = familySourceTransitionState({
+    registryPresent: existsSync(resolve(SECTION.registryFile)),
+    slugPresent: existsSync(resolve(SECTION.slugDataFile)),
+    metaPresent: ARTICLE_SLUG_LOCALES.every((locale) =>
+      existsSync(resolve(`services/locales/${SECTION.metaPrefix}-${locale}.ts`))),
+  });
+  if (state === 'partial') {
+    throw new Error(
+      `${SECTION_NAME}: superfici sorgente cantonali parziali — registro, slug e meta locali `
+      + 'devono essere tutti presenti o tutti assenti prima della scrittura',
+    );
   }
+  return state;
 }
 
 // ── Governed image generation ───────────────────────────────────────────────
@@ -16589,6 +16604,11 @@ function modifyRouterTs(data) {
     title: data.content?.it?.title,
     source: 'modifyRouterTs',
   });
+  // This is the last shared boundary before modifyRouterUnion() or any other
+  // corpus file is written. Recheck the complete existing map plus the final
+  // candidate so a stale caller cannot append into a registry that already
+  // contains a localized route collision.
+  checkTranslatedSlugCollisions(data);
   // The svizzera section does NOT maintain the BlogArticleId union in
   // router.ts (ids are loose strings, validated at runtime via REVERSE_SWISS).
   // Only the frontaliere section touches router.ts.

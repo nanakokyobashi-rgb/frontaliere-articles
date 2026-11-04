@@ -2,9 +2,9 @@
  * scripts/ci/check-post-rebase-uniqueness.mjs — il ricontrollo di id, fonte e contenuto
  * DOPO il rebase e prima del push (D18).
  *
- * Le tre invarianti — id unico in tutte le sezioni, una fonte = una sezione e
- * nessun contenuto quasi duplicato — il generatore le verifica sul tree di
- * inizio run, quindi reggono solo con scrittori seriali. Questi test
+ * Le invarianti di id, slug localizzato, fonte, argomento e contenuto che il
+ * generatore verifica sul tree di inizio run reggono solo con scrittori
+ * seriali. Questi test
  * costruiscono lo stato post-rebase che il rebase produce quando due
  * scrittori partono dalla stessa base, e chiedono allo script di accorgersene.
  * Le sezioni sono quelle del core: niente qui elenca «frontaliere» e
@@ -33,7 +33,6 @@ import {
   registryIdsOf,
   sectionSurfaces,
   snapshotSections,
-  slugIdsOf,
 } from '../../scripts/ci/check-post-rebase-uniqueness.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -53,6 +52,7 @@ const GIT_ENV = {
 
 const SURFACES = sectionSurfaces();
 const [FIRST, SECOND] = SURFACES;
+const CANTON = SURFACES.find((surface) => surface.kind === 'canton');
 
 // ── Fixture: le superfici nella forma reale ────────────────────────────────
 
@@ -61,9 +61,14 @@ function registrySrc(ids) {
   return `export interface Article {\n id: string;\n}\n\nconst RAW = [\n${entries}];\n`;
 }
 
-function slugSrc(ids) {
-  const rows = ids.map((id) => ` '${id}': { it: '${id}-it', en: '${id}-en', de: '${id}-de', fr: '${id}-fr' },\n`).join('');
-  return `export const SLUGS: Record<string, Record<string, string>> = {\n${rows}};\n`;
+function slugSrc(ids, slugConst = 'SLUGS', localizedSlugs = {}) {
+  const rows = ids.map((id) => {
+    const slugs = localizedSlugs[id] ?? {
+      it: `${id}-it`, en: `${id}-en`, de: `${id}-de`, fr: `${id}-fr`,
+    };
+    return ` '${id}': { it: '${slugs.it}', en: '${slugs.en}', de: '${slugs.de}', fr: '${slugs.fr}' },\n`;
+  }).join('');
+  return `export const ${slugConst}: Record<string, Record<string, string>> = {\n${rows}};\n`;
 }
 
 function ledgerSrc(map) {
@@ -84,11 +89,12 @@ function metaSrc(ids, articles = {}) {
 }
 
 /** Stato di una sezione: ids (registro + slug) e ledger URL→voce. */
-function sectionFiles(surface, { ids = [], ledger = {}, articles = {} } = {}) {
+function sectionFiles(surface, { ids = [], ledger = {}, articles = {}, localizedSlugs = {} } = {}) {
+  const metaFiles = surface.metaFiles ?? [surface.metaFile];
   return {
     [surface.registryFile]: registrySrc(ids),
-    [surface.slugDataFile]: slugSrc(ids),
-    [surface.metaFile]: metaSrc(ids, articles),
+    [surface.slugDataFile]: slugSrc(ids, surface.slugConst, localizedSlugs),
+    ...Object.fromEntries(metaFiles.map((file) => [file, metaSrc(ids, articles)])),
     [surface.sourceLedger]: ledgerSrc(ledger),
   };
 }
@@ -98,8 +104,12 @@ function snapshot(stateBySection) {
   const out = {};
   for (const s of SURFACES) {
     const st = stateBySection[s.section] ?? {};
+    const localizedSlugs = Object.fromEntries((st.ids ?? []).map((id) => [id, st.localizedSlugs?.[id] ?? {
+      it: `${id}-it`, en: `${id}-en`, de: `${id}-de`, fr: `${id}-fr`,
+    }]));
     out[s.section] = {
-      slugIds: slugIdsOf(slugSrc(st.ids ?? [])),
+      slugIds: Object.keys(localizedSlugs),
+      localizedSlugs,
       registryIds: registryIdsOf(registrySrc(st.registryIds ?? st.ids ?? [])),
       ledger: st.ledger ?? {},
     };
@@ -116,6 +126,7 @@ const URL_A = 'https://www.tio.ch/ticino/attualita/1999999/stessa-fonte';
 test('le superfici controllate sono TUTTE le sezioni del core, ognuna col suo ledger', () => {
   assert.ok(SURFACES.length >= 2, 'servono almeno due sezioni perche\' «cross-sezione» significhi qualcosa');
   assert.deepEqual(SURFACES.map((s) => s.section), ARTICLE_SECTION_CORE_LIST.map((c) => c.section));
+  assert.deepEqual(SURFACES.map((s) => s.slugConst), ARTICLE_SECTION_CORE_LIST.map((c) => c.slugConst));
   for (const s of SURFACES) {
     assert.ok(s.registryFile.startsWith('content/'), `${s.section}: registro fuori dal corpus (${s.registryFile})`);
     assert.ok(s.slugDataFile.startsWith('content/'), `${s.section}: mappa slug fuori dal corpus (${s.slugDataFile})`);
@@ -160,10 +171,43 @@ test('una sezione nel core senza ledger dichiarato e\' un errore, non una sezion
 test('il meta IT mancante con ID su registro/slug e\' un errore fail-closed', () => {
   const files = sectionFiles(FIRST, { ids: ['esistente'] });
   const readAt = (file) => file === FIRST.metaFile ? null : files[file] ?? null;
+  const expected = FIRST.kind === 'canton'
+    ? /superfici sorgente cantonali parziali.*registro, slug e meta locali/
+    : /meta IT assente o incoerente.*esistente/;
   assert.throws(
     () => snapshotSections([FIRST], readAt, 'against'),
-    /meta IT assente o incoerente.*esistente/,
+    expected,
   );
+});
+
+test('una sezione cantonale parziale non viene ridotta a mappa slug vuota', () => {
+  assert.ok(CANTON, 'il core attivo deve esporre una sezione cantonale');
+  const surface = {
+    ...CANTON,
+    registryFile: 'fixture/canton-registry.ts',
+    slugDataFile: 'fixture/canton-slugs.ts',
+    metaFile: 'fixture/canton-meta-it.ts',
+    metaFiles: [
+      'fixture/canton-meta-it.ts',
+      'fixture/canton-meta-en.ts',
+      'fixture/canton-meta-de.ts',
+      'fixture/canton-meta-fr.ts',
+    ],
+    sourceLedger: 'fixture/canton-ledger.json',
+  };
+  const files = {
+    [surface.registryFile]: registrySrc(['esistente']),
+    [surface.metaFiles[0]]: metaSrc(['esistente']),
+    [surface.metaFiles[1]]: metaSrc(['esistente']),
+    [surface.metaFiles[2]]: metaSrc(['esistente']),
+    [surface.metaFiles[3]]: metaSrc(['esistente']),
+    [surface.sourceLedger]: ledgerSrc({}),
+  };
+  assert.throws(
+    () => snapshotSections([surface], (file) => files[file] ?? null, 'against'),
+    /superfici sorgente cantonali parziali.*registro, slug e meta locali/,
+  );
+  assert.doesNotThrow(() => snapshotSections([surface], () => null, 'empty-canton'));
 });
 
 test('un record meta con formato non riconosciuto non puo\' ridurre il contro-corpus', () => {
@@ -224,6 +268,45 @@ test('ok: id nuovo e fonte nuova, nessuna collisione nello stato post-rebase', (
   assert.deepEqual(r.violations, []);
   assert.deepEqual(r.newIds, [{ section: FIRST.section, id: 'nuovo' }]);
   assert.equal(r.newSourceUrls.length, 1);
+});
+
+test('uno slug localizzato che collide dopo il rebase blocca il candidato', () => {
+  const old = {
+    it: 'articolo-precedente',
+    en: 'previous-article',
+    de: 'quellensteuer-tessin-rechner',
+    fr: 'article-precedent',
+  };
+  const candidate = {
+    it: 'articolo-nuovo',
+    en: 'new-article',
+    de: 'quellensteuer-tessin-rechner',
+    fr: 'article-nouveau',
+  };
+  const producedBase = snapshot({ [FIRST.section]: { ids: ['articolo-precedente'], localizedSlugs: { 'articolo-precedente': old } } });
+  const produced = snapshot({
+    [FIRST.section]: {
+      ids: ['articolo-precedente', 'articolo-nuovo'],
+      localizedSlugs: { 'articolo-precedente': old, 'articolo-nuovo': candidate },
+    },
+  });
+  const against = snapshot({
+    [FIRST.section]: {
+      ids: ['articolo-precedente', 'articolo-nuovo'],
+      localizedSlugs: { 'articolo-precedente': old, 'articolo-nuovo': candidate },
+    },
+  });
+
+  const { violations } = findPostRebaseViolations({ producedBase, produced, against });
+  assert.deepEqual(violations, [{
+    kind: 'duplicate-localized-slug',
+    section: FIRST.section,
+    id: 'articolo-nuovo',
+    otherId: 'articolo-precedente',
+    locale: 'de',
+    slug: 'quellensteuer-tessin-rechner',
+  }]);
+  assert.match(formatViolation(violations[0]), /locale=de slug=quellensteuer-tessin-rechner/);
 });
 
 test('titolo quasi identico introdotto dal run viene bloccato dopo il rebase', () => {
@@ -664,17 +747,16 @@ test('CLI meta IT incompleto: exit 2 con POST_REBASE_UNIQUENESS_ERROR, mai un fa
     ids: [candidate],
     articles: { [candidate]: candidateArticle },
   });
-  // L'upstream porta un record, ma il suo meta IT resta vuoto nel tree
-  // rigiocato: e' proprio il contro-corpus parziale che deve fermare il gate.
-  const upstream = {
-    [FIRST.registryFile]: registrySrc([old]),
-    [FIRST.slugDataFile]: slugSrc([old]),
-  };
-  const rebased = {
-    [FIRST.registryFile]: registrySrc([candidate, old]),
-    [FIRST.slugDataFile]: slugSrc([candidate, old]),
-    [FIRST.metaFile]: metaSrc([candidate], { [candidate]: candidateArticle }),
-  };
+  // Le quattro superfici locali esistono, ma il meta IT omette il record
+  // upstream: il gate deve distinguere una copertura incompleta da una
+  // famiglia locale materializzata solo in parte.
+  const upstream = sectionFiles(FIRST, { ids: [old] });
+  upstream[FIRST.metaFile] = metaSrc([]);
+  const rebased = sectionFiles(FIRST, {
+    ids: [candidate, old],
+    articles: { [candidate]: candidateArticle },
+  });
+  rebased[FIRST.metaFile] = metaSrc([candidate], { [candidate]: candidateArticle });
   const w = world({ upstream, mine, rebased });
   try {
     const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
@@ -778,7 +860,8 @@ test('CLI: una superficie presente ma vuota e\' un errore, non «nessuna voce»'
   // fermato la stessa URL registrata da upstream un attimo prima.
   for (const surface of ['sourceLedger', 'slugDataFile', 'registryFile']) {
     const mine = sectionFiles(SECOND, { ids: ['mio'], ledger: { [URL_A]: entry('mio') } });
-    const w = world({ upstream: { [FIRST[surface]]: '' }, mine, rebased: mine });
+    const upstream = { ...sectionFiles(FIRST), [FIRST[surface]]: '' };
+    const w = world({ upstream, mine, rebased: mine });
     try {
       const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
       assert.equal(code, 2, `${surface}: ${out}`);

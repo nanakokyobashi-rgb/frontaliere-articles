@@ -141,8 +141,10 @@ test('create-article controlla i duplicati prima del fact-check, oltre che dopo'
   // Gli slug EN/DE/FR sono ancora provvisori prima della traduzione: il gate
   // anticipato controlla solo lo slot IT, Step 3a.2 e la rilocalizzazione il resto.
   assert.match(early, /checkForDuplicates\(data, \{ localizedSlugs: false \}\);/);
-  assert.match(src, /function checkTranslatedSlugCollisions\(data, \{ locales = \['it', 'en', 'de', 'fr'\] \} = \{\}\)/);
-  assert.match(src, /checkTranslatedSlugCollisions\(data, \{ locales: localizedSlugs \? \['it', 'en', 'de', 'fr'\] : \['it'\] \}\);/);
+  assert.match(src, /function checkTranslatedSlugCollisions\(data, \{ locales = ARTICLE_SLUG_LOCALES \} = \{\}\)/);
+  assert.match(src, /checkTranslatedSlugCollisions\(data, \{\s*locales: localizedSlugs \? ARTICLE_SLUG_LOCALES : \[ARTICLE_SLUG_LOCALES\[0\]\],\s*\}\);/);
+  assert.match(src, /checkTranslatedSlugCollisions\(data\);[\s\S]*?modifyRouterUnion\(data\);/);
+  assert.match(src, /assertLocalizedSlugCandidateUnique\(/);
   assert.match(fn.slice(lateDup), /checkForDuplicates\(data\);/, 'Step 3a.2 resta completo');
   assert.match(early, /assertTopicNotRecentlyCovered\(data, loadExistingArticleSummariesWithDates\(\)\);/);
 });

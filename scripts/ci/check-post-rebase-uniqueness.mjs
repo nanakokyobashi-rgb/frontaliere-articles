@@ -2,7 +2,7 @@
 /**
  * check-post-rebase-uniqueness.mjs — dopo il rebase e PRIMA del push, ricontrolla
  * che l'articolo appena generato resti unico nel corpus su cui sta per atterrare
- * per id, fonte, argomento e contenuto.
+ * per id, slug localizzato, fonte, argomento e contenuto.
  *
  * Uso (dalla radice del repo, a rebase concluso):
  *   node scripts/ci/check-post-rebase-uniqueness.mjs --produced <sha> [--against <rev>] [--run-report <path>]
@@ -21,7 +21,7 @@
  *
  * ── Perche' dopo il rebase (D18, rischio (e).2 di architecture.md) ──────────
  *
- * Il generatore garantisce quattro invarianti leggendo il working tree A INIZIO run:
+ * Il generatore verifica cinque invarianti leggendo il working tree A INIZIO run:
  *
  *   1. un id e' unico in TUTTE le sezioni (`getAllArticleIds` in
  *      create-article.mjs): i namespace `blog-{id}` e `blog.article.{id}.*` sono
@@ -38,6 +38,9 @@
  *      un altro writer ha pubblicato nel frattempo. Qui viene richiamato il
  *      detector multi-segnale di `create-article.mjs`, non una copia delle sue
  *      soglie.
+ *   5. ciascuno slug localizzato del nuovo articolo resta unico nella sezione.
+ *      Due run partiti dalla stessa mappa possono scegliere la stessa
+ *      traduzione, superare entrambi il preflight seriale e unirsi al rebase.
  *
  * Tutte reggono solo in modo seriale. Con piu' scrittori paralleli (le
  * sezioni cantonali, una concurrency per sezione) due run partono dalla stessa
@@ -45,7 +48,7 @@
  * `--merge-registry` unisce due record con lo stesso id se stanno in registri
  * DIVERSI, e il ledger URL→id e' bookkeeping (si prende upstream), quindi la
  * voce di questo run puo' sparire proprio mentre la stessa URL e' appena stata
- * registrata dall'altra sezione. Questo script rifà le quattro domande sullo
+ * registrata dall'altra sezione. Questo script rifà le cinque domande sullo
  * stato post-rebase, usando anche le date del registro per la finestra topic.
  *
  * ── Cosa considera «nuovo» ─────────────────────────────────────────────────
@@ -102,12 +105,17 @@ import { fileURLToPath } from 'node:url';
 
 import { activeCorpusCoreEntries } from '../lib/corpus-sections.mjs';
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
+import {
+  ARTICLE_SLUG_LOCALES,
+  parseLocalizedArticleSlugMap,
+} from '../lib/article-slug-uniqueness.mjs';
 import { findCrossSectionSourceDuplicate } from '../../generator/scripts/lib/cross-section-dedup.mjs';
 import { findContentDuplicate } from '../../generator/scripts/lib/article-content-duplicate.mjs';
 import { metaFieldRegex, unescapeTsValue } from '../../generator/scripts/lib/meta-field-regex.mjs';
 import { itemIdentityOf, ledgerArticleIds, legacyNewsUrlKey, readLedgerEntry, SOURCE_URL_TTL_DAYS } from '../../generator/scripts/lib/source-url-ledger.mjs';
 import { findRecentTopicCoverage, topicCoverageKey } from '../../generator/scripts/lib/topic-coverage-guard.mjs';
 import { readTopLevelString, scanTopLevelArticleRecords } from '../../scripts/lib/article-registry-reader.mjs';
+import { familySourceTransitionState } from '../lib/section-registry.mjs';
 import { SECTIONS as SECTION_SURFACES } from '../lib/article-surfaces.mjs';
 
 export const VIOLATION_MARKER = 'POST_REBASE_UNIQUENESS_VIOLATION';
@@ -134,7 +142,7 @@ export function registryIdsOf(src) {
  *
  * @param {Array<{section: string, registryFile: string, slugDataFile: string}>} [coreList]
  * @param {Record<string, {metaFiles?: string[], sourceLedger?: string}>} [surfaces]
- * @returns {Array<{section: string, registryFile: string, slugDataFile: string, metaFile: string, sourceLedger: string}>}
+ * @returns {Array<{section: string, registryFile: string, slugDataFile: string, metaFile: string, metaFiles: string[], sourceLedger: string}>}
  */
 export function sectionSurfaces(coreList = activeCorpusCoreEntries(), surfaces = SECTION_SURFACES) {
   if (!Array.isArray(coreList) || coreList.length === 0) {
@@ -148,7 +156,14 @@ export function sectionSurfaces(coreList = activeCorpusCoreEntries(), surfaces =
         + 'senza, il dedup della fonte fra sezioni non e\' verificabile',
       );
     }
-    const metaFile = surfaces?.[core.section]?.metaFiles?.find((file) => file.endsWith('-it.ts'));
+    const metaFiles = surfaces?.[core.section]?.metaFiles;
+    const metaFile = metaFiles?.find((file) => file.endsWith('-it.ts'));
+    if (!Array.isArray(metaFiles) || metaFiles.length === 0) {
+      throw new Error(
+        `la sezione '${core.section}' non ha i file meta locali in article-surfaces.mjs: `
+        + 'senza la famiglia completa non e\' possibile verificare il corpus',
+      );
+    }
     if (typeof metaFile !== 'string' || !metaFile) {
       throw new Error(
         `la sezione '${core.section}' e' nel core ma non ha il meta IT in article-surfaces.mjs (SECTIONS.${core.section}.metaFiles): `
@@ -159,7 +174,10 @@ export function sectionSurfaces(coreList = activeCorpusCoreEntries(), surfaces =
       section: core.section,
       registryFile: corpusPath(core.registryFile),
       slugDataFile: corpusPath(core.slugDataFile),
+      slugConst: core.slugConst,
+      kind: core.kind,
       metaFile,
+      metaFiles,
       sourceLedger,
     };
   });
@@ -251,12 +269,13 @@ function assertArticleMetaCoverage({ slugIds, registryIds, articles, titleIds, e
  * Lo stato di tutte le sezioni a una revisione.
  *
  * @param {(path: string) => string|null} readAt lettore del file a quella revisione; null = assente.
- * @returns {Record<string, {slugIds: string[], registryIds: string[], articles: Record<string, {id: string, title: string, excerpt: string, date: string|null}>, ledger: Record<string, unknown>}>}
+ * @returns {Record<string, {slugIds: string[], localizedSlugs: object, registryIds: string[], articles: Record<string, {id: string, title: string, excerpt: string, date: string|null}>, ledger: Record<string, unknown>}>}
  */
 export function snapshotSections(surfaces, readAt, label) {
-  // `null` = il path non c'e' (sezione ancora vuota): legittimo. Un file che
-  // c'e' ma e' vuoto non lo e': letto come «nessun id / nessuna voce» toglierebbe
-  // quella sezione dal confronto proprio mentre dovrebbe fermare un duplicato.
+  // `null` = il path non c'e'. Per una sezione cantonale e' una sezione vuota
+  // solo se registro, slug e tutti i meta locali sono assenti insieme; una
+  // transizione parziale deve fermare il confronto invece di ridurre il
+  // contro-corpus.
   const read = (path) => {
     const text = readAt(path);
     if (text != null && text.trim() === '') {
@@ -266,11 +285,34 @@ export function snapshotSections(surfaces, readAt, label) {
   };
   const out = {};
   for (const s of surfaces) {
-    const slugIds = slugIdsOf(read(s.slugDataFile));
+    const slugSource = read(s.slugDataFile);
     const registrySource = read(s.registryFile);
+    const metaSource = read(s.metaFile);
+    const metaSources = s.kind === 'canton'
+      ? s.metaFiles.map((file) => file === s.metaFile ? metaSource : read(file))
+      : [];
+    const sourceState = s.kind === 'canton'
+      ? familySourceTransitionState({
+        registryPresent: registrySource !== null,
+        slugPresent: slugSource !== null,
+        metaPresent: metaSources.every((source) => source !== null),
+      })
+      : 'ready';
+    if (sourceState === 'partial') {
+      throw new Error(
+        `${label}:${s.section}: superfici sorgente cantonali parziali — registro, slug e meta locali `
+        + 'devono essere tutti presenti o tutti assenti',
+      );
+    }
+    const localizedSlugs = parseLocalizedArticleSlugMap(
+      slugSource,
+      s.slugConst,
+      { allowMissing: sourceState === 'new', sourceLabel: `${label}:${s.slugDataFile}` },
+    );
+    const slugIds = Object.keys(localizedSlugs);
     const registryIds = registryIdsOf(registrySource);
     const dates = registryDatesById(registrySource);
-    const parsedMeta = parseArticleMeta(read(s.metaFile), `${label}:${s.metaFile}`);
+    const parsedMeta = parseArticleMeta(metaSource, `${label}:${s.metaFile}`);
     assertArticleMetaCoverage({ slugIds, registryIds, ...parsedMeta }, `${label}:${s.metaFile}`);
     const articles = Object.fromEntries(Object.entries(parsedMeta.articles).map(([id, article]) => [
       id,
@@ -278,6 +320,7 @@ export function snapshotSections(surfaces, readAt, label) {
     ]));
     out[s.section] = {
       slugIds,
+      localizedSlugs,
       registryIds,
       articles,
       ledger: parseLedger(read(s.sourceLedger), `${label}:${s.sourceLedger}`),
@@ -365,6 +408,29 @@ export function findPostRebaseViolations(
       const elsewhere = sections.filter((other) => other !== section && idsOf(against?.[other]).has(id));
       for (const other of elsewhere) {
         violations.push({ kind: 'duplicate-id-cross-section', section, id, other });
+      }
+
+      const candidateSlugs = against?.[section]?.localizedSlugs?.[id];
+      if (!candidateSlugs) {
+        violations.push({ kind: 'localized-slugs-missing', section, id });
+      } else {
+        const againstSlugs = against?.[section]?.localizedSlugs ?? {};
+        for (const locale of ARTICLE_SLUG_LOCALES) {
+          const slug = candidateSlugs[locale];
+          const owner = Object.entries(againstSlugs).find(([otherId, localized]) =>
+            otherId !== id && localized?.[locale] === slug,
+          );
+          if (owner) {
+            violations.push({
+              kind: 'duplicate-localized-slug',
+              section,
+              id,
+              otherId: owner[0],
+              locale,
+              slug,
+            });
+          }
+        }
       }
 
       const occurrences = sections.reduce(
@@ -487,6 +553,8 @@ export function formatViolation(v) {
   if (v.other) parts.push(`other=${v.other}`);
   if (v.otherId) parts.push(`otherId=${v.otherId}`);
   if (v.occurrences) parts.push(`occurrences=${v.occurrences}`);
+  if (v.locale) parts.push(`locale=${v.locale}`);
+  if (v.slug) parts.push(`slug=${v.slug}`);
   if (v.url) parts.push(`url=${v.url}`);
   if (v.signals) parts.push(`signals=${v.signals.replace(/\s+/g, '_')}`);
   if (v.topicKind && v.topicValue) parts.push(`topic=${v.topicKind}:${v.topicValue}`);
