@@ -2,7 +2,7 @@
 /**
  * check-post-rebase-uniqueness.mjs — dopo il rebase e PRIMA del push, ricontrolla
  * che l'articolo appena generato resti unico nel corpus su cui sta per atterrare
- * per id, fonte, argomento e contenuto.
+ * per id, slug localizzato, fonte, argomento e contenuto.
  *
  * Uso (dalla radice del repo, a rebase concluso):
  *   node scripts/ci/check-post-rebase-uniqueness.mjs --produced <sha> [--against <rev>] [--run-report <path>]
@@ -21,7 +21,7 @@
  *
  * ── Perche' dopo il rebase (D18, rischio (e).2 di architecture.md) ──────────
  *
- * Il generatore garantisce quattro invarianti leggendo il working tree A INIZIO run:
+ * Il generatore verifica cinque invarianti leggendo il working tree A INIZIO run:
  *
  *   1. un id e' unico in TUTTE le sezioni (`getAllArticleIds` in
  *      create-article.mjs): i namespace `blog-{id}` e `blog.article.{id}.*` sono
@@ -38,6 +38,9 @@
  *      un altro writer ha pubblicato nel frattempo. Qui viene richiamato il
  *      detector multi-segnale di `create-article.mjs`, non una copia delle sue
  *      soglie.
+ *   5. ciascuno slug localizzato del nuovo articolo resta unico nella sezione.
+ *      Due run partiti dalla stessa mappa possono scegliere la stessa
+ *      traduzione, superare entrambi il preflight seriale e unirsi al rebase.
  *
  * Tutte reggono solo in modo seriale. Con piu' scrittori paralleli (le
  * sezioni cantonali, una concurrency per sezione) due run partono dalla stessa
@@ -45,7 +48,7 @@
  * `--merge-registry` unisce due record con lo stesso id se stanno in registri
  * DIVERSI, e il ledger URL→id e' bookkeeping (si prende upstream), quindi la
  * voce di questo run puo' sparire proprio mentre la stessa URL e' appena stata
- * registrata dall'altra sezione. Questo script rifà le quattro domande sullo
+ * registrata dall'altra sezione. Questo script rifà le cinque domande sullo
  * stato post-rebase, usando anche le date del registro per la finestra topic.
  *
  * ── Cosa considera «nuovo» ─────────────────────────────────────────────────
@@ -102,6 +105,10 @@ import { fileURLToPath } from 'node:url';
 
 import { activeCorpusCoreEntries } from '../lib/corpus-sections.mjs';
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
+import {
+  ARTICLE_SLUG_LOCALES,
+  parseLocalizedArticleSlugMap,
+} from '../lib/article-slug-uniqueness.mjs';
 import { findCrossSectionSourceDuplicate } from '../../generator/scripts/lib/cross-section-dedup.mjs';
 import { findContentDuplicate } from '../../generator/scripts/lib/article-content-duplicate.mjs';
 import { metaFieldRegex, unescapeTsValue } from '../../generator/scripts/lib/meta-field-regex.mjs';
@@ -159,6 +166,8 @@ export function sectionSurfaces(coreList = activeCorpusCoreEntries(), surfaces =
       section: core.section,
       registryFile: corpusPath(core.registryFile),
       slugDataFile: corpusPath(core.slugDataFile),
+      slugConst: core.slugConst,
+      kind: core.kind,
       metaFile,
       sourceLedger,
     };
@@ -251,7 +260,7 @@ function assertArticleMetaCoverage({ slugIds, registryIds, articles, titleIds, e
  * Lo stato di tutte le sezioni a una revisione.
  *
  * @param {(path: string) => string|null} readAt lettore del file a quella revisione; null = assente.
- * @returns {Record<string, {slugIds: string[], registryIds: string[], articles: Record<string, {id: string, title: string, excerpt: string, date: string|null}>, ledger: Record<string, unknown>}>}
+ * @returns {Record<string, {slugIds: string[], localizedSlugs: object, registryIds: string[], articles: Record<string, {id: string, title: string, excerpt: string, date: string|null}>, ledger: Record<string, unknown>}>}
  */
 export function snapshotSections(surfaces, readAt, label) {
   // `null` = il path non c'e' (sezione ancora vuota): legittimo. Un file che
@@ -266,7 +275,13 @@ export function snapshotSections(surfaces, readAt, label) {
   };
   const out = {};
   for (const s of surfaces) {
-    const slugIds = slugIdsOf(read(s.slugDataFile));
+    const slugSource = read(s.slugDataFile);
+    const localizedSlugs = parseLocalizedArticleSlugMap(
+      slugSource,
+      s.slugConst,
+      { allowMissing: s.kind === 'canton', sourceLabel: `${label}:${s.slugDataFile}` },
+    );
+    const slugIds = Object.keys(localizedSlugs);
     const registrySource = read(s.registryFile);
     const registryIds = registryIdsOf(registrySource);
     const dates = registryDatesById(registrySource);
@@ -278,6 +293,7 @@ export function snapshotSections(surfaces, readAt, label) {
     ]));
     out[s.section] = {
       slugIds,
+      localizedSlugs,
       registryIds,
       articles,
       ledger: parseLedger(read(s.sourceLedger), `${label}:${s.sourceLedger}`),
@@ -365,6 +381,29 @@ export function findPostRebaseViolations(
       const elsewhere = sections.filter((other) => other !== section && idsOf(against?.[other]).has(id));
       for (const other of elsewhere) {
         violations.push({ kind: 'duplicate-id-cross-section', section, id, other });
+      }
+
+      const candidateSlugs = against?.[section]?.localizedSlugs?.[id];
+      if (!candidateSlugs) {
+        violations.push({ kind: 'localized-slugs-missing', section, id });
+      } else {
+        const againstSlugs = against?.[section]?.localizedSlugs ?? {};
+        for (const locale of ARTICLE_SLUG_LOCALES) {
+          const slug = candidateSlugs[locale];
+          const owner = Object.entries(againstSlugs).find(([otherId, localized]) =>
+            otherId !== id && localized?.[locale] === slug,
+          );
+          if (owner) {
+            violations.push({
+              kind: 'duplicate-localized-slug',
+              section,
+              id,
+              otherId: owner[0],
+              locale,
+              slug,
+            });
+          }
+        }
       }
 
       const occurrences = sections.reduce(
@@ -487,6 +526,8 @@ export function formatViolation(v) {
   if (v.other) parts.push(`other=${v.other}`);
   if (v.otherId) parts.push(`otherId=${v.otherId}`);
   if (v.occurrences) parts.push(`occurrences=${v.occurrences}`);
+  if (v.locale) parts.push(`locale=${v.locale}`);
+  if (v.slug) parts.push(`slug=${v.slug}`);
   if (v.url) parts.push(`url=${v.url}`);
   if (v.signals) parts.push(`signals=${v.signals.replace(/\s+/g, '_')}`);
   if (v.topicKind && v.topicValue) parts.push(`topic=${v.topicKind}:${v.topicValue}`);

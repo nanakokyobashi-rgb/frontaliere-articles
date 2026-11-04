@@ -83,7 +83,9 @@
 //        03:55:58Z  corpus push  10 same-origin /assets refs,  0 CDN
 //        03:42:32Z  site   push   1 same-origin /assets ref,   9 CDN
 //
-//      If either copy is touched, touch both.
+//      Shared rendering changes still need both copies. The slug-route owner
+//      guard below is corpus-only while the site's publisher remains manual
+//      and dry by default; port that guard before the site publisher is rearmed.
 //
 //      De-dup status: blocked, not actionable from this repo. Both remedies
 //      (teach mirror-articles-engine.yml to also carry scripts/, or move this
@@ -133,6 +135,7 @@ import { fileURLToPath } from 'node:url';
 // that would swallow them.
 import { heroCdnUploads, renderSectionArticlePipeline } from './lib/article-render-pipeline.mjs';
 import { sectionSourceSurfaces } from './lib/corpus-sections.mjs';
+import { findLocalizedSlugOwner } from './lib/article-slug-uniqueness.mjs';
 import { parseArticleUrlSlugs } from '../engine/shared/articleReaderSource.mjs';
 import { buildFlatBridgeFromSibling } from '../engine/flatHtmlRedirect.ts';
 // Sezioni valide e shard Pages vengono dal core (lista ATTIVA), come in
@@ -235,6 +238,10 @@ function writeLegacySlugRedirects({ section, entries, hubResult, distDir }) {
       const oldSlug = oldSlugs[locale];
       const newSlug = newSlugs[locale];
       if (!oldSlug || !newSlug || oldSlug === newSlug) continue;
+      // A formerly ambiguous slug may now remain canonical for another
+      // article. A bridge would overwrite that article's live page on the
+      // incremental shard, so keep the current owner and emit no redirect.
+      if (findLocalizedSlugOwner(current, locale, oldSlug, entry.articleId)) continue;
       assertSlugPathSegment(oldSlug, `${entry.articleId}/${locale}/old`);
       assertSlugPathSegment(newSlug, `${entry.articleId}/${locale}/new`);
 

@@ -47,10 +47,25 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateSlugAtWordBoundary } from '../scripts/lib/slug-truncate.mjs';
 import { metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
+import {
+  assertLocalizedSlugCandidateUnique,
+  assertLocalizedSlugMapUnique,
+  findLocalizedSlugCollisions,
+  findLocalizedSlugOwner,
+  parseLocalizedArticleSlugMap,
+} from '../../scripts/lib/article-slug-uniqueness.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
 const SRC = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
+const REPAIR_LOCALIZED_TOPONYMS = fs.readFileSync(
+  path.join(ROOT, 'generator', 'scripts', 'repair-localized-toponyms.mjs'),
+  'utf-8',
+);
+const POST_REBASE_UNIQUENESS = fs.readFileSync(
+  path.join(ROOT, 'scripts', 'ci', 'check-post-rebase-uniqueness.mjs'),
+  'utf-8',
+);
 
 // ── Estrazione in sandbox ──────────────────────────────────────────────────
 
@@ -297,6 +312,85 @@ describe('relocalizeSlugsAfterTranslation — lo slug di un locale non e’ l’
   });
 });
 
+describe('unicita degli slug localizzati', () => {
+  const source = `export const SWISS_SLUGS: Record<string, { it: string; en: string; de: string; fr: string }> = {
+  'articolo-guida': { it: 'articolo-guida', en: 'guide-article', de: 'quellensteuer-tessin-rechner', fr: 'article-guide' },
+  "articolo-calcolatore": {
+    fr: "article-calculateur",
+    de: "quellensteuer-tessin-rechner",
+    en: "calculator-article",
+    it: "articolo-calcolatore",
+  },
+};
+`;
+
+  it('legge le mappe monoriga e multilinea con apici diversi e ordine locale diverso', () => {
+    const parsed = parseLocalizedArticleSlugMap(source, 'SWISS_SLUGS', { sourceLabel: 'fixture.ts' });
+    assert.deepEqual(parsed['articolo-guida'], {
+      it: 'articolo-guida',
+      en: 'guide-article',
+      de: 'quellensteuer-tessin-rechner',
+      fr: 'article-guide',
+    });
+    assert.equal(parsed['articolo-calcolatore'].fr, 'article-calculateur');
+  });
+
+  it('rileva una collisione nella mappa completa e nomina locale, slug e proprietari', () => {
+    const parsed = parseLocalizedArticleSlugMap(source, 'SWISS_SLUGS', { sourceLabel: 'fixture.ts' });
+    assert.deepEqual(findLocalizedSlugCollisions(parsed, { locales: ['en', 'de', 'fr'] }), [{
+      locale: 'de',
+      slug: 'quellensteuer-tessin-rechner',
+      articleIds: ['articolo-guida', 'articolo-calcolatore'],
+    }]);
+    assert.throws(
+      () => assertLocalizedSlugMapUnique(parsed, { sourceLabel: 'fixture.ts' }),
+      /fixture\.ts: localized slug duplicati: DE "quellensteuer-tessin-rechner" maps to "articolo-guida" e "articolo-calcolatore"/,
+    );
+  });
+
+  it('blocca la collisione del candidato prima della scrittura e non confronta locale diversi', () => {
+    const unique = source.replace('de: "quellensteuer-tessin-rechner"', 'de: "quellensteuer-tessin-leitfaden"');
+    assert.doesNotThrow(() => assertLocalizedSlugCandidateUnique(
+      unique,
+      'SWISS_SLUGS',
+      { id: 'nuovo', slugs: { de: 'nuovo-slug-de', fr: 'article-guide' } },
+      { candidateLocales: ['de'], sourceLabel: 'content/routerSwissData.ts' },
+    ));
+    assert.throws(
+      () => assertLocalizedSlugCandidateUnique(
+        unique,
+        'SWISS_SLUGS',
+        { id: 'nuovo', slugs: { de: 'quellensteuer-tessin-leitfaden' } },
+        { candidateLocales: ['de'], sourceLabel: 'content/routerSwissData.ts' },
+      ),
+      /duplicate DE slug "quellensteuer-tessin-leitfaden" maps to both "articolo-calcolatore" and "nuovo"/,
+    );
+  });
+
+  it('trova il proprietario corrente dello slug escludendo l’articolo rinominato', () => {
+    const current = {
+      calcolatore: { it: 'calcolatore', en: 'calculator', de: 'quellensteuer-tessin-rechner', fr: 'calculateur' },
+      guida: { it: 'guida', en: 'guide', de: 'quellensteuer-tessin-leitfaden', fr: 'guide' },
+    };
+    assert.equal(findLocalizedSlugOwner(current, 'de', 'quellensteuer-tessin-rechner', 'guida'), 'calcolatore');
+    assert.equal(findLocalizedSlugOwner(current, 'de', 'quellensteuer-tessin-leitfaden', 'guida'), null);
+    assert.equal(findLocalizedSlugOwner(current, 'it', 'calcolatore', 'calcolatore'), null);
+  });
+
+  it('il writer condiviso valida prima della union e il repair valida il buffer prima dei write', () => {
+    const routerStart = SRC.indexOf('function modifyRouterTs(data) {');
+    const firstRouterWrite = SRC.indexOf('modifyRouterUnion(data);', routerStart);
+    assert.ok(routerStart >= 0 && firstRouterWrite > routerStart);
+    assert.ok(SRC.slice(routerStart, firstRouterWrite).includes('checkTranslatedSlugCollisions(data);'));
+    assert.match(SRC, /assertLocalizedSlugCandidateUnique\(/);
+
+    const repairGate = REPAIR_LOCALIZED_TOPONYMS.indexOf('assertLocalizedSlugMapUnique(slugMap');
+    const repairWrite = REPAIR_LOCALIZED_TOPONYMS.indexOf('if (WRITE)', repairGate);
+    assert.ok(repairGate >= 0 && repairWrite > repairGate, 'il repair deve rifiutare collisioni prima di ogni write');
+    assert.match(POST_REBASE_UNIQUENESS, /kind: 'duplicate-localized-slug'/);
+  });
+});
+
 describe('slugifySlugPart — il cap non spezza l’ultima parola', () => {
   it('arretra al trattino invece di troncare a meta’ token', () => {
     const long = 'vivre a tronzano lago maggiore et travailler en ticino en tant que travailleur frontalier';
@@ -375,21 +469,15 @@ describe('cablaggio in create-article.mjs', () => {
 
 // ── 3. RATCHET sul corpus pubblicato ───────────────────────────────────────
 
-// Registro slug delle due sezioni. `,?` finale non e' pedanteria: 2 delle 686
-// voci svizzere hanno la virgola dopo `fr` e senza di essa sfuggivano al conteggio.
-const SLUG_ENTRY_RE =
-  /(['"])([A-Za-z0-9._-]+)\1\s*:\s*\{\s*it\s*:\s*(['"])([^'"]*)\3\s*,\s*en\s*:\s*(['"])([^'"]*)\5\s*,\s*de\s*:\s*(['"])([^'"]*)\7\s*,\s*fr\s*:\s*(['"])([^'"]*)\9\s*,?\s*\}/g;
-
 function readSlugRegistries() {
   const out = [];
-  for (const file of ['routerBlogData.ts', 'routerSwissData.ts']) {
+  for (const [file, constName] of [['routerBlogData.ts', 'BLOG_SLUGS'], ['routerSwissData.ts', 'SWISS_SLUGS']]) {
     const full = path.join(ROOT, 'content', file);
     if (!fs.existsSync(full)) continue;
     const src = fs.readFileSync(full, 'utf-8');
-    SLUG_ENTRY_RE.lastIndex = 0;
-    let m;
-    while ((m = SLUG_ENTRY_RE.exec(src)) !== null) {
-      out.push({ file, id: m[2], it: m[4], en: m[6], de: m[8], fr: m[10] });
+    const slugMap = parseLocalizedArticleSlugMap(src, constName, { sourceLabel: `content/${file}` });
+    for (const [id, slugs] of Object.entries(slugMap)) {
+      out.push({ file, id, ...slugs });
     }
   }
   return out;
@@ -471,6 +559,18 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
     // Un worktree sparse non materializza content/: un gate che passa su zero
     // voci scandite e' un falso verde, non un successo.
     assert.ok(entries.length > 3000, `solo ${entries.length} voci di slug lette dai due registri`);
+  });
+
+  it('EN/DE/FR non hanno collisioni in nessuna delle due sezioni', () => {
+    const collisions = [];
+    for (const file of ['routerBlogData.ts', 'routerSwissData.ts']) {
+      const slugMap = Object.fromEntries(
+        entries.filter((entry) => entry.file === file).map(({ id, ...slugs }) => [id, slugs]),
+      );
+      collisions.push(...findLocalizedSlugCollisions(slugMap, { locales: ['en', 'de', 'fr'] })
+        .map((collision) => ({ file, ...collision })));
+    }
+    assert.deepEqual(collisions, []);
   });
 
   // Rimisurato il 2026-09-08 su 5.876 voci: 217 articoli con almeno un locale

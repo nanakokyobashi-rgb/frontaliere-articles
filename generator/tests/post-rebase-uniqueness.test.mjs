@@ -2,9 +2,9 @@
  * scripts/ci/check-post-rebase-uniqueness.mjs — il ricontrollo di id, fonte e contenuto
  * DOPO il rebase e prima del push (D18).
  *
- * Le tre invarianti — id unico in tutte le sezioni, una fonte = una sezione e
- * nessun contenuto quasi duplicato — il generatore le verifica sul tree di
- * inizio run, quindi reggono solo con scrittori seriali. Questi test
+ * Le invarianti di id, slug localizzato, fonte, argomento e contenuto che il
+ * generatore verifica sul tree di inizio run reggono solo con scrittori
+ * seriali. Questi test
  * costruiscono lo stato post-rebase che il rebase produce quando due
  * scrittori partono dalla stessa base, e chiedono allo script di accorgersene.
  * Le sezioni sono quelle del core: niente qui elenca «frontaliere» e
@@ -33,7 +33,6 @@ import {
   registryIdsOf,
   sectionSurfaces,
   snapshotSections,
-  slugIdsOf,
 } from '../../scripts/ci/check-post-rebase-uniqueness.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -61,9 +60,14 @@ function registrySrc(ids) {
   return `export interface Article {\n id: string;\n}\n\nconst RAW = [\n${entries}];\n`;
 }
 
-function slugSrc(ids) {
-  const rows = ids.map((id) => ` '${id}': { it: '${id}-it', en: '${id}-en', de: '${id}-de', fr: '${id}-fr' },\n`).join('');
-  return `export const SLUGS: Record<string, Record<string, string>> = {\n${rows}};\n`;
+function slugSrc(ids, slugConst = 'SLUGS', localizedSlugs = {}) {
+  const rows = ids.map((id) => {
+    const slugs = localizedSlugs[id] ?? {
+      it: `${id}-it`, en: `${id}-en`, de: `${id}-de`, fr: `${id}-fr`,
+    };
+    return ` '${id}': { it: '${slugs.it}', en: '${slugs.en}', de: '${slugs.de}', fr: '${slugs.fr}' },\n`;
+  }).join('');
+  return `export const ${slugConst}: Record<string, Record<string, string>> = {\n${rows}};\n`;
 }
 
 function ledgerSrc(map) {
@@ -84,10 +88,10 @@ function metaSrc(ids, articles = {}) {
 }
 
 /** Stato di una sezione: ids (registro + slug) e ledger URL→voce. */
-function sectionFiles(surface, { ids = [], ledger = {}, articles = {} } = {}) {
+function sectionFiles(surface, { ids = [], ledger = {}, articles = {}, localizedSlugs = {} } = {}) {
   return {
     [surface.registryFile]: registrySrc(ids),
-    [surface.slugDataFile]: slugSrc(ids),
+    [surface.slugDataFile]: slugSrc(ids, surface.slugConst, localizedSlugs),
     [surface.metaFile]: metaSrc(ids, articles),
     [surface.sourceLedger]: ledgerSrc(ledger),
   };
@@ -98,8 +102,12 @@ function snapshot(stateBySection) {
   const out = {};
   for (const s of SURFACES) {
     const st = stateBySection[s.section] ?? {};
+    const localizedSlugs = Object.fromEntries((st.ids ?? []).map((id) => [id, st.localizedSlugs?.[id] ?? {
+      it: `${id}-it`, en: `${id}-en`, de: `${id}-de`, fr: `${id}-fr`,
+    }]));
     out[s.section] = {
-      slugIds: slugIdsOf(slugSrc(st.ids ?? [])),
+      slugIds: Object.keys(localizedSlugs),
+      localizedSlugs,
       registryIds: registryIdsOf(registrySrc(st.registryIds ?? st.ids ?? [])),
       ledger: st.ledger ?? {},
     };
@@ -116,6 +124,7 @@ const URL_A = 'https://www.tio.ch/ticino/attualita/1999999/stessa-fonte';
 test('le superfici controllate sono TUTTE le sezioni del core, ognuna col suo ledger', () => {
   assert.ok(SURFACES.length >= 2, 'servono almeno due sezioni perche\' «cross-sezione» significhi qualcosa');
   assert.deepEqual(SURFACES.map((s) => s.section), ARTICLE_SECTION_CORE_LIST.map((c) => c.section));
+  assert.deepEqual(SURFACES.map((s) => s.slugConst), ARTICLE_SECTION_CORE_LIST.map((c) => c.slugConst));
   for (const s of SURFACES) {
     assert.ok(s.registryFile.startsWith('content/'), `${s.section}: registro fuori dal corpus (${s.registryFile})`);
     assert.ok(s.slugDataFile.startsWith('content/'), `${s.section}: mappa slug fuori dal corpus (${s.slugDataFile})`);
@@ -224,6 +233,45 @@ test('ok: id nuovo e fonte nuova, nessuna collisione nello stato post-rebase', (
   assert.deepEqual(r.violations, []);
   assert.deepEqual(r.newIds, [{ section: FIRST.section, id: 'nuovo' }]);
   assert.equal(r.newSourceUrls.length, 1);
+});
+
+test('uno slug localizzato che collide dopo il rebase blocca il candidato', () => {
+  const old = {
+    it: 'articolo-precedente',
+    en: 'previous-article',
+    de: 'quellensteuer-tessin-rechner',
+    fr: 'article-precedent',
+  };
+  const candidate = {
+    it: 'articolo-nuovo',
+    en: 'new-article',
+    de: 'quellensteuer-tessin-rechner',
+    fr: 'article-nouveau',
+  };
+  const producedBase = snapshot({ [FIRST.section]: { ids: ['articolo-precedente'], localizedSlugs: { 'articolo-precedente': old } } });
+  const produced = snapshot({
+    [FIRST.section]: {
+      ids: ['articolo-precedente', 'articolo-nuovo'],
+      localizedSlugs: { 'articolo-precedente': old, 'articolo-nuovo': candidate },
+    },
+  });
+  const against = snapshot({
+    [FIRST.section]: {
+      ids: ['articolo-precedente', 'articolo-nuovo'],
+      localizedSlugs: { 'articolo-precedente': old, 'articolo-nuovo': candidate },
+    },
+  });
+
+  const { violations } = findPostRebaseViolations({ producedBase, produced, against });
+  assert.deepEqual(violations, [{
+    kind: 'duplicate-localized-slug',
+    section: FIRST.section,
+    id: 'articolo-nuovo',
+    otherId: 'articolo-precedente',
+    locale: 'de',
+    slug: 'quellensteuer-tessin-rechner',
+  }]);
+  assert.match(formatViolation(violations[0]), /locale=de slug=quellensteuer-tessin-rechner/);
 });
 
 test('titolo quasi identico introdotto dal run viene bloccato dopo il rebase', () => {
@@ -668,11 +716,11 @@ test('CLI meta IT incompleto: exit 2 con POST_REBASE_UNIQUENESS_ERROR, mai un fa
   // rigiocato: e' proprio il contro-corpus parziale che deve fermare il gate.
   const upstream = {
     [FIRST.registryFile]: registrySrc([old]),
-    [FIRST.slugDataFile]: slugSrc([old]),
+    [FIRST.slugDataFile]: slugSrc([old], FIRST.slugConst),
   };
   const rebased = {
     [FIRST.registryFile]: registrySrc([candidate, old]),
-    [FIRST.slugDataFile]: slugSrc([candidate, old]),
+    [FIRST.slugDataFile]: slugSrc([candidate, old], FIRST.slugConst),
     [FIRST.metaFile]: metaSrc([candidate], { [candidate]: candidateArticle }),
   };
   const w = world({ upstream, mine, rebased });

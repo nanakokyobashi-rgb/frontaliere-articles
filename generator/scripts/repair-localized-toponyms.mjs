@@ -26,6 +26,10 @@ import {
   encodeStaticArticleFieldValue,
   scanStaticArticleFieldEntries,
 } from './lib/static-article-field-scanner.mjs';
+import {
+  assertLocalizedSlugMapUnique,
+  parseLocalizedArticleSlugMap,
+} from '../../scripts/lib/article-slug-uniqueness.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const CONTENT_ROOT = path.join(ROOT, 'content');
@@ -54,6 +58,14 @@ function isSlugFile(file) {
   return relative === 'content/routerBlogData.ts'
     || relative === 'content/routerSwissData.ts'
     || /^content\/cantons\/[^/]+\/slugs\.ts$/u.test(relative);
+}
+
+function slugConstNameForFile(file) {
+  const relative = path.relative(ROOT, file);
+  if (relative === 'content/routerBlogData.ts') return 'BLOG_SLUGS';
+  if (relative === 'content/routerSwissData.ts') return 'SWISS_SLUGS';
+  if (/^content\/cantons\/[^/]+\/slugs\.ts$/u.test(relative)) return 'CANTON_SLUGS';
+  throw new Error(`mappa slug senza export noto: ${relative}`);
 }
 
 function localeForFile(file) {
@@ -190,12 +202,22 @@ for (const target of targets) {
   fieldsChanged += 1;
 }
 
+const rewrittenSources = new Map();
+for (const [file, edits] of editsByFile) {
+  let source = fileSources.get(file);
+  for (const edit of edits.sort((left, right) => right.start - left.start)) {
+    source = `${source.slice(0, edit.start)}${edit.value}${source.slice(edit.end)}`;
+  }
+  if (isSlugFile(file)) {
+    const sourceLabel = path.relative(ROOT, file);
+    const slugMap = parseLocalizedArticleSlugMap(source, slugConstNameForFile(file), { sourceLabel });
+    assertLocalizedSlugMapUnique(slugMap, { sourceLabel });
+  }
+  rewrittenSources.set(file, source);
+}
+
 if (WRITE) {
-  for (const [file, edits] of editsByFile) {
-    let source = fileSources.get(file);
-    for (const edit of edits.sort((left, right) => right.start - left.start)) {
-      source = `${source.slice(0, edit.start)}${edit.value}${source.slice(edit.end)}`;
-    }
+  for (const [file, source] of rewrittenSources) {
     const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
     try {
       writeFileSync(tmp, source, 'utf8');

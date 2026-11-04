@@ -520,6 +520,8 @@ test('il dry gate usa il piano delle superfici e il publisher porta i redirect d
   assert.match(workflow, /PUBLISH_BEFORE: \$\{\{ github\.event\.before \}\}/);
   assert.match(publisher, /redirectPaths/);
   assert.match(publisher, /writeLegacySlugRedirects/);
+  assert.match(publisher, /findLocalizedSlugOwner\(current, locale, oldSlug, entry\.articleId\)/);
+  assert.match(publisher, /if \(findLocalizedSlugOwner\(current, locale, oldSlug, entry\.articleId\)\) continue;/);
 });
 
 test('i body orfani non bloccano gli articoli registrati dello stesso push', () => {
