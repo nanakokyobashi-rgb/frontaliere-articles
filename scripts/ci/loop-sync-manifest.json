@@ -4164,17 +4164,17 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura. scalarFingerprint confronta i 23 scalari authoritative; il digest f556dd1f… include lo snippet Meta Pixel content-addressed, il cui loader contatta Meta solo dopo consenso pubblicitario esplicito e si blocca sui documenti sensibili, senza fallback noscript. AD_RECOVERY_FILENAME resta allineato al sorgente; sono preservati gli altri comportamenti di recovery, CMP, analytics e SEO gia' trasportati. Gli slot statici avvolgono l'elemento Google in un host first-party per il fallback creativo Firebase, senza cambiare il nodo AdSense o Auto Ads.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura. scalarFingerprint confronta i 23 scalari authoritative; il digest 74d545ee… include lo snippet Meta Pixel content-addressed, il cui loader contatta Meta solo dopo consenso pubblicitario esplicito e si blocca sui documenti sensibili, senza fallback noscript. AD_RECOVERY_FILENAME resta allineato al sorgente versionato; sono preservati gli altri comportamenti di recovery, CMP, analytics e SEO gia' trasportati. Gli slot statici avvolgono l'elemento Google in un host first-party per il fallback creativo Firebase, senza cambiare il nodo AdSense o Auto Ads.",
       "baseline": {
-        "site": "c9f803f4645a9ab0",
-        "corpus": "598612b34529c6c5",
-        "alignedAt": "2026-10-31"
+        "site": "16992ff4a6cade1d",
+        "corpus": "6171f472be3cc614",
+        "alignedAt": "2026-11-04"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 23,
-        "sha256": "f556dd1f680e7bfe6ea40f5b1d586108ea8673a74ef9d2eab824bf41188e21e9"
+        "sha256": "74d545ee4b72354f66108d6fc4cba44680450ff6e583f2b97f0c658d9897209b"
       }
     },
     {
@@ -4391,9 +4391,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
       "baseline": {
-        "site": "18e683c9406ca2e8",
-        "corpus": "18e683c9406ca2e8",
-        "alignedAt": "2026-10-31"
+        "site": "2fa53536d7a6f4a7",
+        "corpus": "2fa53536d7a6f4a7",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -6843,8 +6843,8 @@
       "mode": "identical",
       "reason": "Fingerprint di recovery, Ads, Partnerize e Meta Pixel che lega gli snapshot byte-exact alle sorgenti. La proiezione esclude i contenuti ma verifica nomi e SHA-256; i test host confrontano i byte trasportati e il contratto prima della pubblicazione.",
       "baseline": {
-        "site": "0b557777cff8a62c",
-        "corpus": "0b557777cff8a62c",
+        "site": "cc5086bbe13e48f6",
+        "corpus": "cc5086bbe13e48f6",
         "alignedAt": "2026-11-04"
       }
     },
@@ -6854,9 +6854,9 @@
       "mode": "adapted",
       "reason": "Snapshot byte-exact delle risorse pubbliche e del guard inline derivate dall'exporter del sito, inclusi i byte del loader Meta Pixel consent-gated; hostShellFiles pubblica questi byte senza import fra repository.",
       "baseline": {
-        "site": "b18653746619d369",
-        "corpus": "30ee6bcb409a26f3",
-        "alignedAt": "2026-10-30"
+        "site": "56aaef2cbbea74f8",
+        "corpus": "4e7c0f6b5a3b02be",
+        "alignedAt": "2026-11-04"
       }
     },
     {
