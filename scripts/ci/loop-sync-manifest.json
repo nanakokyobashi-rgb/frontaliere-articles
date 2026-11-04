@@ -3444,6 +3444,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/discovery/trend-evidence-attribution.mjs",
+      "mode": "corpus-only",
+      "reason": "Adattatore del contratto Trends-to-News usato dal generatore di articoli nel corpus; il sito non ha l'entrypoint create-article e non necessita di questo helper.",
+      "baseline": {
+        "site": null,
+        "corpus": "b26251e4849203a7",
+        "alignedAt": "2026-11-04"
+      }
+    },
+    {
       "path": "generator/scripts/lib/drain-stdio.mjs",
       "mode": "corpus-only",
       "reason": "Helper dependency-free del generatore per `drainStdio()`/`exitAfterDrain()`: attende le write gia' accodate su stdout e stderr prima di `process.exit()`, con timeout bounded e contratto best-effort. Il log del generatore vive nel corpus; il gemello del sito non produce articoli e non ha questo exit path operativo, quindi non esiste un modulo da portare e `corpus-only` e' corretto.",
