@@ -11,6 +11,7 @@ import {
   firstCompleteBodyExcerpt,
   findDescriptionDefects,
   isCompleteSourceCandidate,
+  isSemanticallyCompatibleSibling,
   maximumDescriptionLength,
   minimumDescriptionLength,
   normalizeExcerpt,
@@ -505,7 +506,13 @@ test('un campo descrittivo vuoto usa un sibling valido quando il body non offre 
   const sibling = 'L’accordo aggiorna le regole applicate ai lavoratori frontalieri dal prossimo anno.';
   const article = {
     id: 'descrizione-vuota-sibling',
-    content: { it: { ogDescription: '', seoDescription: sibling } },
+    content: {
+      it: {
+        title: 'Regole per i lavoratori frontalieri dal prossimo anno',
+        ogDescription: '',
+        seoDescription: sibling,
+      },
+    },
   };
 
   const repairs = repairGeneratedArticleDescriptions(article);
@@ -514,6 +521,92 @@ test('un campo descrittivo vuoto usa un sibling valido quando il body non offre 
   assert.deepEqual(
     repairs.map(({ field, source }) => ({ field, source })),
     [{ field: 'ogDescription', source: 'sibling-description' }],
+  );
+});
+
+test('un sibling completo deve essere semanticamente compatibile col campo difettoso', () => {
+  const compatible = 'L’accordo aggiorna le regole applicate ai lavoratori frontalieri dal prossimo anno.';
+  const divergent = 'La squadra di calcio ha vinto la partita casalinga davanti ai suoi tifosi.';
+  const target = 'La proposta aggiorna le regole per i lavoratori frontalieri perché';
+
+  assert.equal(
+    isSemanticallyCompatibleSibling(compatible, { target }),
+    true,
+  );
+  assert.equal(
+    isSemanticallyCompatibleSibling(divergent, { target }),
+    false,
+  );
+  assert.equal(
+    isSemanticallyCompatibleSibling('L’ACCORDO aggiorna le regole per i lavoratori frontalieri.', {
+      target: '',
+      title: 'Regole per i lavoratori frontalieri',
+    }),
+    true,
+    'il confronto normalizza maiuscole e apostrofi Unicode tramite le parole chiave',
+  );
+  assert.equal(
+    isSemanticallyCompatibleSibling(compatible, { target: '', title: '', body: [] }),
+    false,
+    'senza contesto il fallback sibling deve fallire chiuso',
+  );
+});
+
+test('la guardia semantica non fonde fonti, paragrafi o sole date', () => {
+  assert.equal(
+    isSemanticallyCompatibleSibling('L’accordo riguarda i frontalieri.', {
+      target: 'L’accordo sarà attuato nel 2026.',
+      title: 'Regole per i frontalieri.',
+    }),
+    false,
+    'un match dal target e uno dal titolo non devono formare un quorum sintetico',
+  );
+  assert.equal(
+    isSemanticallyCompatibleSibling('La misura vale nel 2026 e 2027.', {
+      body: 'Il periodo comprende 2026 e 2027.',
+    }),
+    false,
+    'due anni condivisi non sono una prova semantica sufficiente',
+  );
+  assert.equal(
+    isSemanticallyCompatibleSibling('L’accordo riguarda i frontalieri.', {
+      body: ['L’accordo sarà firmato.', 'I frontalieri sono interessati.'],
+    }),
+    false,
+    'paragrafi distinti non devono contribuire allo stesso quorum',
+  );
+});
+
+test('il quorum semantico non riusa una sola parola sorgente per due match', () => {
+  assert.equal(
+    isSemanticallyCompatibleSibling('The regulation regulations.', {
+      target: 'The regulation.',
+    }),
+    false,
+    'singolare e plurale del candidato valgono una sola keyword sorgente',
+  );
+  assert.equal(
+    isSemanticallyCompatibleSibling('The taxi taxicab.', {
+      target: 'The taxi.',
+    }),
+    false,
+    'una substring e il suo contenitore valgono una sola keyword sorgente',
+  );
+});
+
+test('un sibling completo ma divergente non ripara il campo e rifiuta il record', () => {
+  assert.throws(
+    () => repairGeneratedArticleDescriptions({
+      id: 'sibling-semantica-divergente',
+      content: {
+        it: {
+          title: 'Regole per i lavoratori frontalieri',
+          excerpt: 'La proposta aggiorna le regole per i lavoratori frontalieri perché',
+          seoDescription: 'La squadra di calcio ha vinto la partita casalinga davanti ai suoi tifosi.',
+        },
+      },
+    }),
+    (error) => error.qualityReject === true && /cannot be repaired safely/u.test(error.message),
   );
 });
 

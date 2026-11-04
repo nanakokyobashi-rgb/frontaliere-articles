@@ -733,21 +733,45 @@ function singularPluralKeywordMatch(left, right) {
   return shorter.length >= 3 && (longer === shorter + 's' || longer === shorter + 'es');
 }
 
-function hasSharedDescriptionKeyword(word, sourceWords) {
-  if (sourceWords.has(word)) return true;
-  for (const sourceWord of sourceWords) {
-    if (singularPluralKeywordMatch(word, sourceWord)
-      || (Math.min(word.length, sourceWord.length) >= 4
-        && (word.includes(sourceWord) || sourceWord.includes(word)))
-      || (PUBLISHING_KEYWORD_EQUIVALENTS.has(word) && PUBLISHING_KEYWORD_EQUIVALENTS.has(sourceWord))) return true;
-  }
-  return false;
+function descriptionKeywordMatches(left, right) {
+  return left === right
+    || singularPluralKeywordMatch(left, right)
+    || (Math.min(left.length, right.length) >= 4
+      && (left.includes(right) || right.includes(left)))
+    || (PUBLISHING_KEYWORD_EQUIVALENTS.has(left) && PUBLISHING_KEYWORD_EQUIVALENTS.has(right));
+}
+
+/** Match candidate keywords to distinct source keywords, maximizing the match count. */
+function sharedDescriptionKeywordMatches(candidateWords, sourceWords) {
+  const candidates = [...candidateWords];
+  const sources = [...sourceWords];
+  const sourceByCandidate = new Map();
+  const candidateBySource = new Map();
+
+  const assign = (candidate, visitedSources) => {
+    for (const source of sources) {
+      if (visitedSources.has(source) || !descriptionKeywordMatches(candidate, source)) continue;
+      visitedSources.add(source);
+      const previousCandidate = candidateBySource.get(source);
+      if (previousCandidate !== undefined && !assign(previousCandidate, visitedSources)) continue;
+
+      const previousSource = sourceByCandidate.get(candidate);
+      if (previousSource !== undefined) candidateBySource.delete(previousSource);
+      sourceByCandidate.set(candidate, source);
+      candidateBySource.set(source, candidate);
+      return true;
+    }
+    return false;
+  };
+
+  for (const candidate of candidates) assign(candidate, new Set());
+  return candidates
+    .filter((candidate) => sourceByCandidate.has(candidate))
+    .map((candidate) => ({ candidate, source: sourceByCandidate.get(candidate) }));
 }
 
 function sharedDescriptionKeywordCountFromSets(candidateWords, sourceWords) {
-  let shared = 0;
-  for (const word of candidateWords) if (hasSharedDescriptionKeyword(word, sourceWords)) shared += 1;
-  return shared;
+  return sharedDescriptionKeywordMatches(candidateWords, sourceWords).length;
 }
 
 function sharedDescriptionKeywordCount(candidate, sources) {
@@ -756,12 +780,67 @@ function sharedDescriptionKeywordCount(candidate, sources) {
   return sharedDescriptionKeywordCountFromSets(candidateWords, sourceWords);
 }
 
+function sharedDescriptionKeywordStats(candidate, source) {
+  const candidateWords = descriptionKeywords(candidate);
+  const sourceWords = descriptionKeywords(source);
+  const matches = sharedDescriptionKeywordMatches(candidateWords, sourceWords);
+  return {
+    shared: matches.length,
+    alphabetic: matches.filter(({ candidate: word }) => /\p{L}/u.test(word)).length,
+  };
+}
+
 function overlapScore(candidate, sources) {
   const candidateWords = descriptionKeywords(candidate);
   const sourceWords = new Set(sources.flatMap((source) => [...descriptionKeywords(source)]));
   if (candidateWords.size === 0 || sourceWords.size === 0) return 0;
   return sharedDescriptionKeywordCountFromSets(candidateWords, sourceWords)
     / Math.sqrt(candidateWords.size * sourceWords.size);
+}
+
+const MIN_SEMANTIC_SIBLING_KEYWORDS = 2;
+const MIN_SEMANTIC_SIBLING_ALPHABETIC_KEYWORDS = 1;
+
+function hasMinimumSemanticSiblingOverlap(candidate, source) {
+  const { shared, alphabetic } = sharedDescriptionKeywordStats(candidate, source);
+  return shared >= MIN_SEMANTIC_SIBLING_KEYWORDS
+    && alphabetic >= MIN_SEMANTIC_SIBLING_ALPHABETIC_KEYWORDS;
+}
+
+/**
+ * Check that a complete sibling still describes the field being repaired.
+ *
+ * Completeness is not evidence of relevance: a sibling can be a valid
+ * sentence about a different topic. Prefer the damaged field and title as
+ * the direct context; when the field is empty, or too short to carry useful
+ * context, the article body is the remaining same-article source. Every
+ * source is checked independently: the field and title are never fused, and
+ * body paragraphs cannot contribute keywords to one another. A match needs
+ * two shared keywords in one source, including at least one alphabetic
+ * content keyword, so dates and numbers cannot establish relevance alone.
+ * Missing context is fail-closed so a sibling is never accepted merely
+ * because it is syntactically complete.
+ *
+ * The second argument also accepts the target string directly for small
+ * callers: `isSemanticallyCompatibleSibling(candidate, target, options)`.
+ */
+export function isSemanticallyCompatibleSibling(candidate, targetOrContext = {}, options = {}) {
+  const context = typeof targetOrContext === 'string'
+    ? { ...options, target: targetOrContext }
+    : (targetOrContext ?? {});
+  const candidateText = String(candidate ?? '').trim();
+  if (!candidateText) return false;
+
+  const target = String(context.target ?? '').trim();
+  const title = String(context.title ?? '').trim();
+  const bodySources = (Array.isArray(context.body) ? context.body : [context.body])
+    .map((source) => String(source ?? '').trim())
+    .flatMap((source) => source.split(/\r?\n\s*\r?\n/u))
+    .map((source) => source.trim())
+    .filter(Boolean);
+  return [target, title, ...bodySources]
+    .filter(Boolean)
+    .some((source) => hasMinimumSemanticSiblingOverlap(candidateText, source));
 }
 
 function unpunctuatedCapitalTransitions(value) {
@@ -1037,6 +1116,7 @@ export function repairGeneratedArticleDescriptions(article) {
       for (const sibling of siblingValues) {
         const candidate = selectCompleteExcerptSource(sibling, { ...options, body });
         if (candidate === null) continue;
+        if (!isSemanticallyCompatibleSibling(candidate, { target: original, title, body })) continue;
         fields[field] = candidate;
         repairs.push({ locale, field, source: 'sibling-description', before: original, after: candidate });
         return true;

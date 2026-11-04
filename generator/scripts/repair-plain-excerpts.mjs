@@ -23,6 +23,7 @@ import {
   findDescriptionDefects,
   isCompleteSourceCandidate,
   isFinalTerminatorOnlyChange,
+  isSemanticallyCompatibleSibling,
   maximumDescriptionLength,
   minimumDescriptionLength,
   repairExcerptFromOriginal,
@@ -207,6 +208,11 @@ function repairValue(value, context, recordSources = []) {
         body,
       });
       if (candidate === null) continue;
+      if (!isSemanticallyCompatibleSibling(candidate, {
+        target: value,
+        title,
+        body,
+      })) continue;
       repaired = candidate;
       strategy = 'b';
       source = 'sibling-field';
