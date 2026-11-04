@@ -78,6 +78,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.turgovia-piano-risparmio-60-milioni.title': 'Thurgovie : plan d’économies de 60 millions d’ici 2030',
     'blog.article.turgovia-piano-risparmio-60-milioni.excerpt': 'Le Gouvernement propose 37 mesures pour stabiliser les finances cantonales.',
     'blog.article.turgovia-piano-risparmio-60-milioni.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.economia-imprese-cantone-turgovia.title': 'Soutien entreprises Thurgovie : cadres et implantation',
+    'blog.article.economia-imprese-cantone-turgovia.excerpt': 'L’administration propose un accompagnement, des informations et des conseils aux entreprises existantes ainsi qu’aux personnes qui souhaitent s’implanter dans le canton de Thurgovie.',
+    'blog.article.economia-imprese-cantone-turgovia.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;

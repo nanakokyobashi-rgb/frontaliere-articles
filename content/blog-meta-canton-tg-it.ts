@@ -78,6 +78,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.turgovia-piano-risparmio-60-milioni.title': 'Turgovia: piano di risparmio da 60 milioni entro il 2030',
     'blog.article.turgovia-piano-risparmio-60-milioni.excerpt': 'Il Governo propone 37 misure per stabilizzare le finanze cantonali.',
     'blog.article.turgovia-piano-risparmio-60-milioni.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.economia-imprese-cantone-turgovia.title': 'Supporto imprese Canton Turgovia: condizioni quadro e insediamento',
+    'blog.article.economia-imprese-cantone-turgovia.excerpt': 'L\'amministrazione offre accompagnamento, informazione e consulenza alle imprese esistenti e a chi desidera insediarsi nel Cantone Turgovia.',
+    'blog.article.economia-imprese-cantone-turgovia.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;

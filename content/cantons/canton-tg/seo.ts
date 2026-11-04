@@ -972,6 +972,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-economia-imprese-cantone-turgovia': {
+    title: 'Supporto imprese Canton Turgovia: condizioni quadro e insediamento',
+    description: 'Informazioni su come il Canton Turgovia supporta imprese esistenti e nuovi insediamenti attraverso accompagnamento, informazione e consulenza.',
+    keywords: 'frontalieri, ticino, svizzera, italia, supporto, imprese, canton, turgovia',
+    ogTitle: 'Supporto imprese Canton Turgovia: condizioni e insediamento',
+    ogDescription: 'Scopri come il Canton Turgovia supporta le imprese, offrendo accompagnamento, informazione e consulenza sia a chi è già presente che a chi vuole insediarsi nel Cantone.',
+    canonicalPath: '/articoli-turgovia/economia-imprese-cantone-turgovia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Supporto imprese Canton Turgovia: condizioni quadro e insediamento",
+      "description": "Informazioni su come il Canton Turgovia supporta imprese esistenti e nuovi insediamenti attraverso accompagnamento, informazione e consulenza.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-economia-imprese-cantone-turgovia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-04T04:02:52+00:00",
+      "dateModified": "2026-11-04T04:02:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/economia-imprese-cantone-turgovia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

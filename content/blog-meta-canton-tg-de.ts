@@ -78,6 +78,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.turgovia-piano-risparmio-60-milioni.title': 'Thurgau: Sparplan über 60 Millionen bis 2030',
     'blog.article.turgovia-piano-risparmio-60-milioni.excerpt': 'Die Regierung schlägt 37 Massnahmen zur Stabilisierung der Kantonsfinanzen vor.',
     'blog.article.turgovia-piano-risparmio-60-milioni.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.economia-imprese-cantone-turgovia.title': 'Unterstützung für Unternehmen im Kanton Thurgau: Rahmenbedingungen und Ansiedlung',
+    'blog.article.economia-imprese-cantone-turgovia.excerpt': 'Die Verwaltung bietet bestehenden Unternehmen und allen, die sich im Kanton Thurgau ansiedeln möchten, Begleitung, Information und Beratung.',
+    'blog.article.economia-imprese-cantone-turgovia.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTgDe;

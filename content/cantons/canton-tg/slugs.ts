@@ -28,6 +28,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'ufficio-imposte-frauenfeld-orari': { it: 'ufficio-imposte-frauenfeld-orari', en: 'frauenfeld-tax-office-hours', de: 'steueramt-frauenfeld-zeiten', fr: 'bureau-impots-frauenfeld-horaires' },
  'supporto-datori-lavoro-turgovia': { it: 'supporto-datori-lavoro-turgovia', en: 'employer-support-thurgau', de: 'arbeitgeber-unterstuetzung-thurgau', fr: 'soutien-employeurs-thurgovie' },
  'turgovia-piano-risparmio-60-milioni': { it: 'turgovia-piano-risparmio-60-milioni', en: 'thurgau-savings-plan-60-million', de: 'thurgau-sparpaket-60-millionen', fr: 'thurgovie-plan-economies-60-millions' },
+ 'economia-imprese-cantone-turgovia': { it: 'economia-imprese-cantone-turgovia', en: 'thurgau-business-canton-economy', de: 'wirtschaft-firmen-kanton-thurgau', fr: 'economie-entreprises-canton-thurgovie' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

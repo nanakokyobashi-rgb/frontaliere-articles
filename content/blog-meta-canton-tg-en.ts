@@ -78,6 +78,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.turgovia-piano-risparmio-60-milioni.title': 'Thurgau: savings plan of 60 million by 2030',
     'blog.article.turgovia-piano-risparmio-60-milioni.excerpt': 'The Government proposes 37 measures to stabilize cantonal finances.',
     'blog.article.turgovia-piano-risparmio-60-milioni.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.economia-imprese-cantone-turgovia.title': 'Business support in Thurgau: conditions and establishment',
+    'blog.article.economia-imprese-cantone-turgovia.excerpt': 'The administration provides support, information and advice to existing businesses and to those wishing to establish themselves in the Canton of Thurgau.',
+    'blog.article.economia-imprese-cantone-turgovia.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTgEn;
