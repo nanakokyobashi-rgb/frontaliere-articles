@@ -764,6 +764,43 @@ function overlapScore(candidate, sources) {
     / Math.sqrt(candidateWords.size * sourceWords.size);
 }
 
+const MIN_SEMANTIC_SIBLING_KEYWORDS = 2;
+
+/**
+ * Check that a complete sibling still describes the field being repaired.
+ *
+ * Completeness is not evidence of relevance: a sibling can be a valid
+ * sentence about a different topic. Prefer the damaged field and title as
+ * the direct context; when the field is empty, or too short to carry useful
+ * context, the article body is the remaining same-article source. A missing
+ * context is fail-closed so a sibling is never accepted merely because it is
+ * syntactically complete.
+ *
+ * The second argument also accepts the target string directly for small
+ * callers: `isSemanticallyCompatibleSibling(candidate, target, options)`.
+ */
+export function isSemanticallyCompatibleSibling(candidate, targetOrContext = {}, options = {}) {
+  const context = typeof targetOrContext === 'string'
+    ? { ...options, target: targetOrContext }
+    : (targetOrContext ?? {});
+  const candidateText = String(candidate ?? '').trim();
+  if (!candidateText) return false;
+
+  const target = String(context.target ?? '').trim();
+  const title = String(context.title ?? '').trim();
+  const bodySources = (Array.isArray(context.body) ? context.body : [context.body])
+    .map((source) => String(source ?? '').trim())
+    .filter(Boolean);
+  const directSources = [target, title].filter(Boolean);
+
+  if (directSources.length > 0
+    && sharedDescriptionKeywordCount(candidateText, directSources) >= MIN_SEMANTIC_SIBLING_KEYWORDS) {
+    return true;
+  }
+  return bodySources.length > 0
+    && sharedDescriptionKeywordCount(candidateText, bodySources) >= MIN_SEMANTIC_SIBLING_KEYWORDS;
+}
+
 function unpunctuatedCapitalTransitions(value) {
   const text = String(value ?? '');
   const words = [...text.matchAll(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)?/gu)];
@@ -1037,6 +1074,7 @@ export function repairGeneratedArticleDescriptions(article) {
       for (const sibling of siblingValues) {
         const candidate = selectCompleteExcerptSource(sibling, { ...options, body });
         if (candidate === null) continue;
+        if (!isSemanticallyCompatibleSibling(candidate, { target: original, title, body })) continue;
         fields[field] = candidate;
         repairs.push({ locale, field, source: 'sibling-description', before: original, after: candidate });
         return true;
