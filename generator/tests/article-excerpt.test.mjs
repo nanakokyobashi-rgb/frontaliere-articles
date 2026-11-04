@@ -577,6 +577,23 @@ test('la guardia semantica non fonde fonti, paragrafi o sole date', () => {
   );
 });
 
+test('il quorum semantico non riusa una sola parola sorgente per due match', () => {
+  assert.equal(
+    isSemanticallyCompatibleSibling('The regulation regulations.', {
+      target: 'The regulation.',
+    }),
+    false,
+    'singolare e plurale del candidato valgono una sola keyword sorgente',
+  );
+  assert.equal(
+    isSemanticallyCompatibleSibling('The taxi taxicab.', {
+      target: 'The taxi.',
+    }),
+    false,
+    'una substring e il suo contenitore valgono una sola keyword sorgente',
+  );
+});
+
 test('un sibling completo ma divergente non ripara il campo e rifiuta il record', () => {
   assert.throws(
     () => repairGeneratedArticleDescriptions({

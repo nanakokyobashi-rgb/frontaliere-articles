@@ -733,21 +733,45 @@ function singularPluralKeywordMatch(left, right) {
   return shorter.length >= 3 && (longer === shorter + 's' || longer === shorter + 'es');
 }
 
-function hasSharedDescriptionKeyword(word, sourceWords) {
-  if (sourceWords.has(word)) return true;
-  for (const sourceWord of sourceWords) {
-    if (singularPluralKeywordMatch(word, sourceWord)
-      || (Math.min(word.length, sourceWord.length) >= 4
-        && (word.includes(sourceWord) || sourceWord.includes(word)))
-      || (PUBLISHING_KEYWORD_EQUIVALENTS.has(word) && PUBLISHING_KEYWORD_EQUIVALENTS.has(sourceWord))) return true;
-  }
-  return false;
+function descriptionKeywordMatches(left, right) {
+  return left === right
+    || singularPluralKeywordMatch(left, right)
+    || (Math.min(left.length, right.length) >= 4
+      && (left.includes(right) || right.includes(left)))
+    || (PUBLISHING_KEYWORD_EQUIVALENTS.has(left) && PUBLISHING_KEYWORD_EQUIVALENTS.has(right));
+}
+
+/** Match candidate keywords to distinct source keywords, maximizing the match count. */
+function sharedDescriptionKeywordMatches(candidateWords, sourceWords) {
+  const candidates = [...candidateWords];
+  const sources = [...sourceWords];
+  const sourceByCandidate = new Map();
+  const candidateBySource = new Map();
+
+  const assign = (candidate, visitedSources) => {
+    for (const source of sources) {
+      if (visitedSources.has(source) || !descriptionKeywordMatches(candidate, source)) continue;
+      visitedSources.add(source);
+      const previousCandidate = candidateBySource.get(source);
+      if (previousCandidate !== undefined && !assign(previousCandidate, visitedSources)) continue;
+
+      const previousSource = sourceByCandidate.get(candidate);
+      if (previousSource !== undefined) candidateBySource.delete(previousSource);
+      sourceByCandidate.set(candidate, source);
+      candidateBySource.set(source, candidate);
+      return true;
+    }
+    return false;
+  };
+
+  for (const candidate of candidates) assign(candidate, new Set());
+  return candidates
+    .filter((candidate) => sourceByCandidate.has(candidate))
+    .map((candidate) => ({ candidate, source: sourceByCandidate.get(candidate) }));
 }
 
 function sharedDescriptionKeywordCountFromSets(candidateWords, sourceWords) {
-  let shared = 0;
-  for (const word of candidateWords) if (hasSharedDescriptionKeyword(word, sourceWords)) shared += 1;
-  return shared;
+  return sharedDescriptionKeywordMatches(candidateWords, sourceWords).length;
 }
 
 function sharedDescriptionKeywordCount(candidate, sources) {
@@ -759,14 +783,11 @@ function sharedDescriptionKeywordCount(candidate, sources) {
 function sharedDescriptionKeywordStats(candidate, source) {
   const candidateWords = descriptionKeywords(candidate);
   const sourceWords = descriptionKeywords(source);
-  let shared = 0;
-  let alphabetic = 0;
-  for (const word of candidateWords) {
-    if (!hasSharedDescriptionKeyword(word, sourceWords)) continue;
-    shared += 1;
-    if (/\p{L}/u.test(word)) alphabetic += 1;
-  }
-  return { shared, alphabetic };
+  const matches = sharedDescriptionKeywordMatches(candidateWords, sourceWords);
+  return {
+    shared: matches.length,
+    alphabetic: matches.filter(({ candidate: word }) => /\p{L}/u.test(word)).length,
+  };
 }
 
 function overlapScore(candidate, sources) {
