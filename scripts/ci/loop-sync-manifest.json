@@ -3358,8 +3358,8 @@
       "sitePath": "scripts/lib/discovery/discoveryPool.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "aaf73966087d3bd3",
-        "corpus": "aaf73966087d3bd3",
+        "site": "9d0111253d04d3d1",
+        "corpus": "9d0111253d04d3d1",
         "alignedAt": "2026-11-04"
       }
     },
@@ -3408,9 +3408,9 @@
       "sitePath": "scripts/lib/discovery/sources/googleNewsRssSource.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "fc66db1ec0a2e698",
-        "corpus": "fc66db1ec0a2e698",
-        "alignedAt": "2026-08-09"
+        "site": "f55d14d95a523a5d",
+        "corpus": "f55d14d95a523a5d",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -4015,9 +4015,9 @@
       "sitePath": "scripts/lib/topic-sources/googleNewsRss.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "2f6071da573a674e",
-        "corpus": "2f6071da573a674e",
-        "alignedAt": "2026-10-12"
+        "site": "1a39f9eb54cea2fd",
+        "corpus": "1a39f9eb54cea2fd",
+        "alignedAt": "2026-11-04"
       }
     },
     {
