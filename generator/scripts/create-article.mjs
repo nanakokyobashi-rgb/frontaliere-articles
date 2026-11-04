@@ -14521,9 +14521,13 @@ ${localizedToponymInstruction(targetLang)}`;
           if (!faqPart) return parsed?.[field];
           // This prompt asks for one indexed source field. Accepting faq[0]
           // from a multi-pair retry would silently reuse that value for every
-          // later source index, so any non-singleton response is unusable.
-          if (!Array.isArray(parsed?.faq) || parsed.faq.length !== 1) return null;
-          return parsed.faq[0]?.[faqPart];
+          // later source index, so reject non-singleton arrays. Some model
+          // responses use the older direct { q } / { a } shape instead.
+          if (Array.isArray(parsed?.faq)) {
+            if (parsed.faq.length !== 1) return null;
+            return parsed.faq[0]?.[faqPart];
+          }
+          return parsed?.[faqPart] ?? parsed?.[field];
         };
         const retryFieldLabel = faqPart ? `faq[${faqIndex}].${faqPart}` : field;
       // Truthiness nuda: la stringa `"null"` (serializzazione letterale del
