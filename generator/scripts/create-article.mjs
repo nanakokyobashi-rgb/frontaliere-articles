@@ -14389,6 +14389,18 @@ ${localizedToponymInstruction(targetLang)}`;
   // upstream defect we cannot paper over).
   for (const locale of ['en', 'de', 'fr']) {
     const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
+    // The source FAQ defines the public cardinality. Do this before the
+    // per-index recovery below: an extra model pair is not source-backed and
+    // must not reach the final writer, where a rejected control would abort
+    // the whole article instead of being discarded with the excess pair.
+    const sourceFaqCount = Array.isArray(itContent?.faq) ? itContent.faq.length : 0;
+    const translatedFaq = data.content?.[locale]?.faq;
+    if (Array.isArray(translatedFaq) && translatedFaq.length > sourceFaqCount) {
+      console.error(
+        `  ⚠️  FAQ ${locale}: scartate ${translatedFaq.length - sourceFaqCount} coppie oltre la cardinalità della FAQ italiana`,
+      );
+      data.content[locale].faq = translatedFaq.slice(0, sourceFaqCount);
+    }
     for (const field of [
       'title',
       'excerpt',
@@ -14453,12 +14465,14 @@ ${localizedToponymInstruction(targetLang)}`;
       // il floor e' sulla forma del campo, non sulla lingua.
       const valoreTradotto = readField(data.content[locale]);
       const traduzioneUsabile = hasUsableTranslatedText(valoreTradotto, locale);
-      // A C0 byte can survive JSON.parse as an ordinary, non-empty string. It
-      // is still not publishable: buildBodyFile() correctly rejects it, but
-      // waiting for that final guard aborts an otherwise valid article. Treat
-      // the affected translated FAQ field like any other unusable translation
-      // so the focused retry/fallback path can repair it before writing.
-      const faqControlRejected = Boolean(faqPart && rejectRawFaqControlEscape(valoreTradotto));
+      // A C0 byte can survive JSON.parse as an ordinary, non-empty string. An
+      // HTML numeric reference can do the same one step later: the final
+      // decodeArticleEntities() pass expands it through this normalizer before
+      // buildBodyFile() runs. Normalize here too, so both spellings enter the
+      // focused retry/fallback path instead of aborting at the final writer.
+      const faqControlRejected = Boolean(
+        faqPart && rejectRawFaqControlEscape(normalizeLocalizedToponymText(valoreTradotto)),
+      );
       const floorMiss = traduzioneUsabile && !faqControlRejected
         ? metaFieldPlausibilityMiss(field, valoreTradotto)
         : null;
@@ -14563,7 +14577,9 @@ ${localizedToponymInstruction(targetLang)}`;
           // real string so a non-string retry falls through to the no-translation
           // outcome below (pending body, or IT fallback for title/excerpt/FAQ).
           const retried = translatedStringOrNull(readRetryValue(parsed), locale);
-          const retriedControlRejected = Boolean(faqPart && rejectRawFaqControlEscape(retried));
+          const retriedControlRejected = Boolean(
+            faqPart && rejectRawFaqControlEscape(normalizeLocalizedToponymText(retried)),
+          );
           // Il floor vale anche sull'ESITO del retry: un retry che risponde `...`
           // e' la stessa degenerazione, solo un turno piu' tardi.
           const retriedMiss = retried ? metaFieldPlausibilityMiss(field, retried) : null;

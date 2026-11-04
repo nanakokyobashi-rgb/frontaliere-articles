@@ -124,6 +124,7 @@ function extractMissingFieldLoop() {
   assert.ok(block.includes('mancante nella traduzione'), 'il ritaglio non contiene il ramo missing-field: anchor sbagliata');
   assert.ok(block.includes('if (!itValue?.trim()) {'), 'il ritaglio non contiene la guardia del fix (#691): anchor sbagliata');
   assert.ok(block.includes('rejectRawFaqControlEscape'), 'il ritaglio non protegge le FAQ da controlli C0 tradotti');
+  assert.ok(block.includes('normalizeLocalizedToponymText'), 'il ritaglio non controlla le entità HTML C0 dopo la normalizzazione');
   return block;
 }
 
@@ -144,13 +145,13 @@ async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTrunc
   const fn = new Function(
     'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableTranslatedText', 'metaFieldPlausibilityMiss', 'detectTruncation', 'console',
     'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'wasFreeMtUnusable', 'maxFreeMtLlmFallbacksPerLocale', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN', 'MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE',
-    'markBodyTranslationPending', 'isSourcePassthrough', 'rejectRawFaqControlEscape',
+    'markBodyTranslationPending', 'isSourcePassthrough', 'rejectRawFaqControlEscape', 'normalizeLocalizedToponymText',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
   // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
   // IT, e un mock qui non proverebbe quel comportamento.
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, freeMt, claimFreeMtLlmFallback, wasFreeMtUnusable, maxFreeMtLlmFallbacksPerLocale, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, markBodyTranslationPending, isSourcePassthrough, rejectRawFaqControlEscape);
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, freeMt, claimFreeMtLlmFallback, wasFreeMtUnusable, maxFreeMtLlmFallbacksPerLocale, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, markBodyTranslationPending, isSourcePassthrough, rejectRawFaqControlEscape, normalizeLocalizedToponymText);
   return RUN_REPORT;
 }
 
@@ -654,6 +655,39 @@ test('ramo missing-field: un controllo C0 nella FAQ tradotta entra nel retry mir
   assert.equal(rejectRawFaqControlEscape(data.content.fr.faq[0].q), false);
 });
 
+test('ramo missing-field: riferimenti HTML numerici C0 nella FAQ entrano nel retry mirato', async () => {
+  const faqIt = {
+    q: 'Domanda italiana abbastanza lunga per il test.',
+    a: 'Risposta italiana abbastanza lunga per il test.',
+  };
+  const data = {
+    content: {
+      en: { ...META_PLAUSIBILI, faq: [{ ...faqIt }] },
+      de: { ...META_PLAUSIBILI, faq: [{ ...faqIt }] },
+      fr: {
+        ...META_PLAUSIBILI,
+        faq: [{
+          q: 'Question française corrompue &#8;.',
+          a: 'Réponse française corrompue &#x08;.',
+        }],
+      },
+    },
+  };
+  const itContent = { ...META_PLAUSIBILI, faq: [{ ...faqIt }] };
+  const calls = [];
+  const callWithRetry = async (_prompt, _tokens, label) => {
+    calls.push(label);
+    const part = label.includes('.q[') ? 'q' : 'a';
+    return { faq: [{ [part]: part === 'q' ? 'Question française réparée.' : 'Réponse française réparée.' }] };
+  };
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry, freeMt: false });
+
+  assert.deepEqual(calls, ['fr:faq.q[0]-missing-retry', 'fr:faq.a[0]-missing-retry']);
+  assert.equal(data.content.fr.faq[0].q, 'Question française réparée.');
+  assert.equal(data.content.fr.faq[0].a, 'Réponse française réparée.');
+});
+
 test('ramo missing-field: un retry FAQ ancora corrotto ricade sul testo italiano pulito', async () => {
   const faqIt = {
     q: 'Domanda italiana abbastanza lunga per il test.',
@@ -676,7 +710,7 @@ test('ramo missing-field: un retry FAQ ancora corrotto ricade sul testo italiano
   const calls = [];
   const callWithRetry = async (_prompt, _tokens, label) => {
     calls.push(label);
-    return { faq: [{ q: String.raw`Question française encore corrompue\u0008.` }] };
+    return { faq: [{ q: 'Question française encore corrompue &#x08;.' }] };
   };
 
   await runMissingFieldLoop({ data, itContent, callWithRetry, freeMt: false });
@@ -684,6 +718,41 @@ test('ramo missing-field: un retry FAQ ancora corrotto ricade sul testo italiano
   assert.deepEqual(calls, ['fr:faq.q[0]-missing-retry']);
   assert.equal(data.content.fr.faq[0].q, faqIt.q);
   assert.equal(rejectRawFaqControlEscape(data.content.fr.faq[0].q), false);
+});
+
+test('ramo missing-field: una coppia FAQ extra con C0 viene scartata prima della recovery', async () => {
+  const faqIt = {
+    q: 'Domanda italiana abbastanza lunga per il test.',
+    a: 'Risposta italiana abbastanza lunga per il test.',
+  };
+  const data = {
+    content: {
+      en: {
+        ...META_PLAUSIBILI,
+        faq: [
+          { ...faqIt },
+          {
+            q: `Coppia extra corrotta${String.fromCharCode(8)}.`,
+            a: 'Risposta extra non presente nella sorgente italiana.',
+          },
+        ],
+      },
+      de: { ...META_PLAUSIBILI, faq: [{ ...faqIt }] },
+      fr: { ...META_PLAUSIBILI, faq: [{ ...faqIt }] },
+    },
+  };
+  const itContent = { ...META_PLAUSIBILI, faq: [{ ...faqIt }] };
+  const calls = [];
+  const callWithRetry = async (_prompt, _tokens, label) => {
+    calls.push(label);
+    return { faq: [{ q: 'Retry inatteso.', a: 'Retry inatteso.' }] };
+  };
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry, freeMt: false });
+
+  assert.deepEqual(calls, []);
+  assert.deepEqual(data.content.en.faq, [{ ...faqIt }]);
+  assert.equal(rejectRawFaqControlEscape(data.content.en.faq[0].q), false);
 });
 
 test('il report di recovery si resetta per articolo e separa gli addebiti del cap', () => {
