@@ -443,7 +443,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tassazione-frontalieri-oltre-20km-confine.excerpt': 'Tax analysis for border workers working in Switzerland: details on personal income tax, tax credit and procedures for correct tax reporting.',
     'blog.article.tassazione-frontalieri-oltre-20km-confine.imageAlt': 'Panoramic view of a Swiss border area with mountains',
     'blog.article.mc-27-mostra-lugano-2026.title': 'MC\'27 Brings Art Wear to Lugano at La Posta',
-    'blog.article.mc-27-mostra-lugano-2026.excerpt': 'From 25 June to 9 July 2026 in Lugano, MC’27 presents Art Wear in a unique exhibition at La Posta di Lugano 1',
+    'blog.article.mc-27-mostra-lugano-2026.excerpt': 'From 25 June to 9 July 2026 in Lugano, MC’27 presents Art Wear in a unique exhibition at La Posta di Lugano 1.',
     'blog.article.mc-27-mostra-lugano-2026.imageAlt': 'Exhibition view of contemporary art wear in a Swiss post office',
     'blog.article.parmelin-missione-economica-nordamerica.title': 'Parmelin on an economic mission in North America',
     'blog.article.parmelin-missione-economica-nordamerica.excerpt': 'Confederation President Guy Parmelin visits the US, Canada and Mexico. Delicate economic relations with the United States.',

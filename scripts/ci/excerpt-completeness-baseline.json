@@ -2014,9 +2014,39 @@
   ],
   "resolvedEntries": [
     {
+      "file": "content/blog-meta-canton-gr-it.ts",
+      "locale": "it",
+      "id": "strada-calanca-chiusura-preventiva",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-de.ts",
+      "locale": "de",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-en.ts",
+      "locale": "en",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-fr.ts",
+      "locale": "fr",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "excerpt"
+    },
+    {
       "file": "content/blog-meta-ch-it.ts",
       "locale": "it",
       "id": "g-bewilligung-antrag-2026-step",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-ch-it.ts",
+      "locale": "it",
+      "id": "mc-27-mostra-lugano-2026",
       "field": "excerpt"
     },
     {
@@ -2024,6 +2054,24 @@
       "locale": "it",
       "id": "cantello-teatro-dialettale-ottobre-2026",
       "field": "excerpt"
+    },
+    {
+      "file": "content/cantons/canton-gr/seo.ts",
+      "locale": "it",
+      "id": "strada-calanca-chiusura-preventiva",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-gr/seo.ts",
+      "locale": "it",
+      "id": "strada-calanca-chiusura-preventiva",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/cantons/canton-gr/seo.ts",
+      "locale": "it",
+      "id": "strada-calanca-chiusura-preventiva",
+      "field": "structuredData.description"
     },
     {
       "file": "content/cantons/canton-ti/seo.ts",
@@ -2053,6 +2101,18 @@
       "file": "content/seo/seo-blog-5.ts",
       "locale": "it",
       "id": "aggressioni-notte-lugano",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "bissone-torneo-scacchi",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "bissone-torneo-scacchi",
       "field": "structuredData.description"
     },
     {
@@ -2179,7 +2239,19 @@
       "file": "content/seo/seo-blog-ch.ts",
       "locale": "it",
       "id": "di-molto-swiss-nuovo-ccl-per-personale-di-terra-settimana-scende-a-40-ore",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "di-molto-swiss-nuovo-ccl-per-personale-di-terra-settimana-scende-a-40-ore",
       "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "di-molto-swiss-nuovo-ccl-per-personale-di-terra-settimana-scende-a-40-ore",
+      "field": "structuredData.description"
     },
     {
       "file": "content/seo/seo-blog-ch.ts",
@@ -2192,6 +2264,24 @@
       "locale": "it",
       "id": "hacker-frigoriferi-connessi",
       "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "mc-27-mostra-lugano-2026",
+      "field": "structuredData.description"
     },
     {
       "file": "content/seo/seo-blog-ch.ts",
@@ -2288,12 +2378,6 @@
     {
       "file": "content/blog-meta-canton-gr-en.ts",
       "locale": "en",
-      "id": "strada-calanca-chiusura-preventiva",
-      "field": "excerpt"
-    },
-    {
-      "file": "content/blog-meta-canton-gr-it.ts",
-      "locale": "it",
       "id": "strada-calanca-chiusura-preventiva",
       "field": "excerpt"
     },
@@ -2588,12 +2672,6 @@
     {
       "file": "content/blog-meta-ch-de.ts",
       "locale": "de",
-      "id": "mc-27-mostra-lugano-2026",
-      "field": "excerpt"
-    },
-    {
-      "file": "content/blog-meta-ch-de.ts",
-      "locale": "de",
       "id": "mercato-lavoro-ia-svizzera",
       "field": "excerpt"
     },
@@ -2762,12 +2840,6 @@
     {
       "file": "content/blog-meta-ch-en.ts",
       "locale": "en",
-      "id": "mc-27-mostra-lugano-2026",
-      "field": "excerpt"
-    },
-    {
-      "file": "content/blog-meta-ch-en.ts",
-      "locale": "en",
       "id": "mercato-lavoro-ia-svizzera",
       "field": "excerpt"
     },
@@ -2850,12 +2922,6 @@
       "field": "excerpt"
     },
     {
-      "file": "content/blog-meta-ch-fr.ts",
-      "locale": "fr",
-      "id": "mc-27-mostra-lugano-2026",
-      "field": "excerpt"
-    },
-    {
       "file": "content/blog-meta-ch-it.ts",
       "locale": "it",
       "id": "grigioni-preventivo-contributi-terzi",
@@ -2865,12 +2931,6 @@
       "file": "content/blog-meta-ch-it.ts",
       "locale": "it",
       "id": "ia-pubblica-amministrazione-ticino",
-      "field": "excerpt"
-    },
-    {
-      "file": "content/blog-meta-ch-it.ts",
-      "locale": "it",
-      "id": "mc-27-mostra-lugano-2026",
       "field": "excerpt"
     },
     {
@@ -3276,24 +3336,6 @@
       "field": "structuredData.description"
     },
     {
-      "file": "content/cantons/canton-gr/seo.ts",
-      "locale": "it",
-      "id": "strada-calanca-chiusura-preventiva",
-      "field": "description"
-    },
-    {
-      "file": "content/cantons/canton-gr/seo.ts",
-      "locale": "it",
-      "id": "strada-calanca-chiusura-preventiva",
-      "field": "ogDescription"
-    },
-    {
-      "file": "content/cantons/canton-gr/seo.ts",
-      "locale": "it",
-      "id": "strada-calanca-chiusura-preventiva",
-      "field": "structuredData.description"
-    },
-    {
       "file": "content/cantons/canton-ne/seo.ts",
       "locale": "it",
       "id": "consiglio-stato-21-ottobre-2026",
@@ -3423,18 +3465,6 @@
       "file": "content/seo/seo-blog-5.ts",
       "locale": "it",
       "id": "ata-critica-progetto-a2-mendrisio",
-      "field": "structuredData.description"
-    },
-    {
-      "file": "content/seo/seo-blog-5.ts",
-      "locale": "it",
-      "id": "bissone-torneo-scacchi",
-      "field": "description"
-    },
-    {
-      "file": "content/seo/seo-blog-5.ts",
-      "locale": "it",
-      "id": "bissone-torneo-scacchi",
       "field": "structuredData.description"
     },
     {
@@ -3830,18 +3860,6 @@
     {
       "file": "content/seo/seo-blog-ch.ts",
       "locale": "it",
-      "id": "di-molto-swiss-nuovo-ccl-per-personale-di-terra-settimana-scende-a-40-ore",
-      "field": "description"
-    },
-    {
-      "file": "content/seo/seo-blog-ch.ts",
-      "locale": "it",
-      "id": "di-molto-swiss-nuovo-ccl-per-personale-di-terra-settimana-scende-a-40-ore",
-      "field": "structuredData.description"
-    },
-    {
-      "file": "content/seo/seo-blog-ch.ts",
-      "locale": "it",
       "id": "disagi-treni-vaud-eclepens",
       "field": "description"
     },
@@ -3933,24 +3951,6 @@
       "file": "content/seo/seo-blog-ch.ts",
       "locale": "it",
       "id": "manager-ffs-denaro-pubblico",
-      "field": "structuredData.description"
-    },
-    {
-      "file": "content/seo/seo-blog-ch.ts",
-      "locale": "it",
-      "id": "mc-27-mostra-lugano-2026",
-      "field": "description"
-    },
-    {
-      "file": "content/seo/seo-blog-ch.ts",
-      "locale": "it",
-      "id": "mc-27-mostra-lugano-2026",
-      "field": "ogDescription"
-    },
-    {
-      "file": "content/seo/seo-blog-ch.ts",
-      "locale": "it",
-      "id": "mc-27-mostra-lugano-2026",
       "field": "structuredData.description"
     },
     {

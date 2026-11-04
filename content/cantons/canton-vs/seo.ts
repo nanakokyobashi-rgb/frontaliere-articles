@@ -540,7 +540,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-vionnaz-revoca-divieti-acqua': {
     title: 'Vionnaz: revoca divieti acqua potabile dopo 41 giorni',
-    description: 'A Vionnaz, i divieti sull\'acqua potabile sono revocati dopo 41 giorni; prati, piscine e veicoli sono nuovamente possibili, ma restano raccomandazioni.',
+    description: 'A Vionnaz, i divieti sull\'acqua potabile sono revocati dopo 41 giorni. Prati, piscine e veicoli sono nuovamente utilizzabili, ma restano le raccomandazioni per risparmiare acqua.',
     keywords: 'frontalieri, ticino, svizzera, italia, vionnaz, revoca, divieti, acqua',
     ogTitle: 'Vionnaz: revoca divieti acqua potabile dopo 41 giorni',
     ogDescription: 'La municipalità di Vionnaz ha annunciato martedì che la situazione delle sue fonti è soddisfacente, permettendo il ripristino di prati, piscine e veicoli, pur mantenendo raccomandazioni di risparmio.',
@@ -549,7 +549,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Vionnaz: revoca divieti acqua potabile dopo 41 giorni",
-      "description": "A Vionnaz, i divieti sull'acqua potabile sono revocati dopo 41 giorni; prati, piscine e veicoli sono nuovamente possibili, ma restano raccomandazioni.",
+      "description": "A Vionnaz, i divieti sull'acqua potabile sono revocati dopo 41 giorni. Prati, piscine e veicoli sono nuovamente utilizzabili, ma restano le raccomandazioni per risparmiare acqua.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

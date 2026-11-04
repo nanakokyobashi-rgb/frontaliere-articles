@@ -41,6 +41,11 @@ test('il corpus applica le riparazioni a/b/d e lascia invariati i soli casi c', 
   assert.equal(report.functionWordPeriodViolations, 0);
   assert.equal(report.minimumLengthViolations, 0);
   assert.equal(report.abbreviationEndingViolations, 0);
+  assert.equal(report.details.some((item) => (
+    item.file === 'content/seo/seo-blog-5.ts'
+    && item.id === 'cavalcavia-boesio-chiusura-lavori-2026'
+    && item.field === 'ogDescription'
+  )), false, 'il numero civico italiano terminale è una frase completa');
   assert.equal(report.dPunctuationOnlyViolations, 0);
   assert.ok(report.details.filter((item) => item.strategy === 'd').every((item) => (
     item.defects.length === 1
@@ -56,7 +61,7 @@ test('le sostituzioni testuali rispettano la soglia e i valori non terminano con
     const repairedFromText = item.strategy === 'a' || item.strategy === 'b';
     const repaired = repairedFromText || item.strategy === 'd';
     return (repairedFromText && value.length < minimumDescriptionLength(item.field))
-      || (repaired && endsWithSentenceAbbreviation(value));
+      || (repaired && endsWithSentenceAbbreviation(value, { locale: item.locale }));
   });
   assert.deepEqual(invalid.map(({ file, id, field, after }) => ({ file, id, field, after })), []);
 });

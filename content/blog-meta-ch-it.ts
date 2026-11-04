@@ -443,7 +443,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tassazione-frontalieri-oltre-20km-confine.excerpt': 'Analisi sulla tassazione per i frontalieri che lavorano in Svizzera: dettagli su IRPEF, credito d\'imposta e procedure per la corretta dichiarazione dei redditi.',
     'blog.article.tassazione-frontalieri-oltre-20km-confine.imageAlt': 'Vista panoramica di un confine svizzero con montagne',
     'blog.article.mc-27-mostra-lugano-2026.title': 'MC\'27 porta l\'art wear nel cuore di Lugano: l\'esposizione esclusiva a La Posta',
-    'blog.article.mc-27-mostra-lugano-2026.excerpt': 'Dal 25 giugno al 9 luglio 2026 a Lugano, MC’27 presenta l’Art Wear in un\'esposizione unica presso La Posta di Lugano 1',
+    'blog.article.mc-27-mostra-lugano-2026.excerpt': 'Dal 25 giugno al 9 luglio 2026 a Lugano, MC’27 presenta l’Art Wear in un\'esposizione unica presso La Posta di Lugano 1.',
     'blog.article.mc-27-mostra-lugano-2026.imageAlt': 'Vista della mostra di abbigliamento artistico contemporaneo presso un ufficio postale svizzero',
     'blog.article.parmelin-missione-economica-nordamerica.title': 'Parmelin in missione economica in Nordamerica',
     'blog.article.parmelin-missione-economica-nordamerica.excerpt': 'Il presidente della Confederazione Guy Parmelin visita USA, Canada e Messico. Relazioni economiche delicate con gli Stati Uniti.',

@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-strada-calanca-chiusura-preventiva': {
     title: 'Strada della Calanca: chiusura totale tra Molina e Arvigo',
-    description: 'Chiusura totale da mercoledì alle 21',
+    description: 'Chiusura totale da mercoledì alle 21.',
     keywords: 'frontalieri, ticino, svizzera, italia, strada, calanca, chiusura, totale',
     ogTitle: 'Strada della Calanca: chiusura totale tra Molina e Arvigo',
-    ogDescription: 'Chiusura totale da mercoledì alle 21',
+    ogDescription: 'Chiusura totale da mercoledì alle 21.',
     canonicalPath: '/articoli-grigioni/strada-calanca-chiusura-preventiva/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Strada della Calanca: chiusura totale tra Molina e Arvigo",
-      "description": "Chiusura totale da mercoledì alle 21",
+      "description": "Chiusura totale da mercoledì alle 21.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-strada-calanca-chiusura-preventiva.webp`,

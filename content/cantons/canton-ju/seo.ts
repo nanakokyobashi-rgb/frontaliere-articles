@@ -12,7 +12,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Disoccupazione in Giura al 4,2% a settembre 2026, con 2.573 iscritti all\'ORP e un calo di 0,1 punti rispetto ad agosto. Confronto nazionale e dati distrettuali.',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, giura, scende, settembre',
     ogTitle: 'Disoccupazione in Giura scende al 4,2% a settembre 2026',
-    ogDescription: 'Il bollettino ufficiale dell\'ORP del Giura segnala a fine settembre 2026 un tasso di disoccupazione del 4,2%, in lieve calo rispetto ad agosto (-0,1 punti) e su base annua (-0,9 punti). Sono 2.573 gli iscritti, di cui 1.663 disoccupati e 910.',
+    ogDescription: 'Il bollettino ufficiale dell\'ORP del Giura segnala a fine settembre 2026 un tasso di disoccupazione del 4,2%, in lieve calo rispetto ad agosto (-0,1 punti) e su base annua (-0,9 punti).',
     canonicalPath: '/articoli-giura/disoccupazione-giura-settembre-2026/',
     structuredData: {
       "@context": "https://schema.org",

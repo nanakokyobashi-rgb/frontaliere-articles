@@ -21,6 +21,7 @@ import {
   endsWithFunctionWordBeforePeriod,
   endsWithSentenceAbbreviation,
   findDescriptionDefects,
+  isCompleteSourceCandidate,
   isFinalTerminatorOnlyChange,
   maximumDescriptionLength,
   minimumDescriptionLength,
@@ -192,6 +193,17 @@ function repairValue(value, context, recordSources = []) {
       source = 'sibling-field';
       break;
     }
+  }
+  if (['a', 'b'].includes(strategy) && !isCompleteSourceCandidate(repaired, {
+    locale: context.locale,
+    field: context.field,
+    maxLength,
+    minLength,
+    body,
+  })) {
+    repaired = value;
+    strategy = 'c';
+    source = null;
   }
   const changed = repaired !== value;
   if (changed) {
@@ -382,7 +394,10 @@ function summarize(results, mode) {
     dPunctuationOnlyViolations: changedRepairs.filter((item) => item.strategy === 'd'
       && !isFinalTerminatorOnlyChange(item.before, item.after)).length,
     functionWordPeriodViolations: changedRepairs.filter((item) => endsWithFunctionWordBeforePeriod(item.after, { locale: item.locale })).length,
-    abbreviationEndingViolations: changedRepairs.filter((item) => endsWithSentenceAbbreviation(item.after)).length,
+    abbreviationEndingViolations: changedRepairs.filter((item) => endsWithSentenceAbbreviation(
+      item.after,
+      { locale: item.locale },
+    )).length,
     minimumLengthViolations: changedRepairs.filter((item) => item.strategy !== 'd'
       && item.after.trim().length < minimumDescriptionLength(item.field)).length,
     dBelowMinimumLength: changedRepairs.filter((item) => item.strategy === 'd'

@@ -5555,16 +5555,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-mc-27-mostra-lugano-2026': {
     title: 'MC\'27 porta l\'art wear nel cuore di Lugano: l\'esposizione esclusiva a La Posta',
-    description: 'Scopri l\'esposizione di MC\'27 a Lugano. Arte e moda dal 25 giugno al 9 luglio 2026 presso la Filiale postale di Lugano 1. Dati aggiornati 2026 per frontalieri',
+    description: 'Scopri l\'esposizione di MC\'27 a Lugano. Arte e moda dal 25 giugno al 9 luglio 2026 presso la Filiale postale di Lugano 1.',
     keywords: 'frontalieri, ticino, svizzera, italia, porta, wear, cuore, lugano',
     ogTitle: 'Esposizione MC\'27 Lugano 2026',
-    ogDescription: 'Scopri l\'esposizione di MC\'27 a Lugano. Arte e moda dal 25 giugno al 9 luglio 2026 presso la Filiale postale di Lugano 1',
+    ogDescription: 'Scopri l\'esposizione di MC\'27 a Lugano. Arte e moda dal 25 giugno al 9 luglio 2026 presso la Filiale postale di Lugano 1.',
     canonicalPath: '/articoli-svizzera/mc-27-mostra-lugano-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "MC'27 porta l'art wear nel cuore di Lugano: l'esposizione esclusiva a La Posta",
-      "description": "Scopri l'esposizione di MC'27 a Lugano. Arte e moda dal 25 giugno al 9 luglio 2026 presso la Filiale postale di Lugano 1. Dati aggiornati 2026 per frontalieri",
+      "description": "Scopri l'esposizione di MC'27 a Lugano. Arte e moda dal 25 giugno al 9 luglio 2026 presso la Filiale postale di Lugano 1.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -18447,7 +18447,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-di-molto-swiss-nuovo-ccl-per-personale-di-terra-settimana-scende-a-40-ore': {
     title: 'Di più Swiss: nuovo CCL per personale di terra, settimana scende a 40 ore',
-    description: 'Il personale di terra della Swiss approva il nuovo contratto collettivo di lavoro (CCL) che prevede una riduzione dell\'orario di lavoro settimanale da 42 a 40',
+    description: 'Il personale di terra della Swiss approva il nuovo contratto collettivo di lavoro (CCL) che prevede una riduzione dell\'orario di lavoro settimanale da 42 a 40.',
     keywords: 'frontalieri, ticino, svizzera, italia, swiss, nuovo, personale, terra',
     ogTitle: 'Di più Swiss: nuovo CCL per personale di terra, settimana scende a 40 ore',
     ogDescription: 'Il personale di terra della Swiss approva il nuovo contratto collettivo di lavoro (CCL) che prevede una riduzione dell\'orario di lavoro settimanale da 42 a 40 ore.',
@@ -18456,7 +18456,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Di più Swiss: nuovo CCL per personale di terra, settimana scende a 40 ore",
-      "description": "Il personale di terra della Swiss approva il nuovo contratto collettivo di lavoro (CCL) che prevede una riduzione dell'orario di lavoro settimanale da 42 a 40",
+      "description": "Il personale di terra della Swiss approva il nuovo contratto collettivo di lavoro (CCL) che prevede una riduzione dell'orario di lavoro settimanale da 42 a 40.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -37787,7 +37787,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il Cantone di Nidvaldo offre opportunità di formazione professionale ai giovani e agli adulti. Scopri come si trova un posto di tirocinio, come si negozia.',
     keywords: 'frontalieri, ticino, svizzera, italia, apprendistato, formazione, cantone, nidvaldo',
     ogTitle: 'Apprendistato e formazione professionale nel Cantone di Nidvaldo: come si trova un posto di tirocinio, contratto di tirocinio, retribuzione dell\'apprendista e maturità professionale.',
-    ogDescription: 'Il Cantone di Nidvaldo offre opportunità di formazione professionale ai giovani e agli adulti. Scopri come si trova un posto di tirocinio, come si negozia il contratto di tirocinio, come si calcola la retribuzione dell\'apprendista e come si raggiunge.',
+    ogDescription: 'Il Cantone di Nidvaldo offre opportunità di formazione professionale a giovani e adulti. La guida spiega come trovare un tirocinio, negoziarne il contratto, calcolare la retribuzione e raggiungere il luogo di formazione.',
     canonicalPath: '/articoli-svizzera/apprendistato-nidvaldo-fatti/',
     structuredData: {
       "@context": "https://schema.org",
@@ -44760,7 +44760,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Le compagnie assicurative svizzera registrano 24,4 miliardi CHF di utili nel 2025 (+136%). FINMA certifica solidità finanziaria rafforzata e solvibilità elevata.',
     keywords: 'frontalieri, ticino, svizzera, italia, assicurazioni, svizzere, utili, compagnie',
     ogTitle: 'Assicurazioni svizzere: utili +136% nel 2025',
-    ogDescription: 'Nel 2025, le compagnie assicurative svizzere hanno registrato risultati straordinari: 24,4 miliardi di franchi di utili (in rialzo del 136%), rafforzando la solidità finanziaria del settore. FINMA conferma solvibilità elevata e investimenti redditizi.',
+    ogDescription: 'Nel 2025, le compagnie assicurative svizzere hanno registrato utili per 24,4 miliardi di franchi, in rialzo del 136%. FINMA conferma la solidità del settore e investimenti redditizi.',
     canonicalPath: '/articoli-svizzera/assicurazioni-svizzera-risultati-2025/',
     structuredData: {
       "@context": "https://schema.org",
@@ -46329,7 +46329,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il primo sondaggio gfs.bern sulle votazioni del 27 settembre: neutralità verso il rifiuto (54%), alimentazione in bilico (49% vs 47%). Analisi regionale.',
     keywords: 'frontalieri, ticino, svizzera, italia, sondaggio, neutralità, vicina, alimentazione',
     ogTitle: 'Sondaggio gfs: neutralità no, alimentazione 50-50',
-    ogDescription: 'Primo sondaggio gfs.bern per le votazioni federali del 27 settembre: l\'iniziativa sulla neutralità rischia il rifiuto con il 54% contrario, mentre quella sull\'alimentazione è in perfetto equilibrio (49% no, 47% sì). Divergenze regionali e per partiti.',
+    ogDescription: 'Un sondaggio gfs.bern sulle votazioni federali del 27 settembre rileva il 54% contrario all\'iniziativa sulla neutralità e un equilibrio sull\'alimentazione: 49% no, 47% sì. Le opinioni variano per regione e partito.',
     canonicalPath: '/articoli-svizzera/votazioni-settembre-neutralita-alimentazione/',
     structuredData: {
       "@context": "https://schema.org",
@@ -47177,7 +47177,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Guida completa al primo pilastro AVS nel Canton Zurigo: cassa di compensazione cantonale, calcolo della rendita, lacune contributive e prestazioni complementari.',
     keywords: 'frontalieri, ticino, svizzera, italia, prestazioni, complementari, canton, zurigo',
     ogTitle: 'AVS e prestazioni complementari nel Canton Zurigo',
-    ogDescription: 'Scopri come funziona il primo pilastro della previdenza nel Canton Zurigo: ruolo della cassa di compensazione cantonale, calcolo della rendita AVS, colmamento delle lacune contributive e prestazioni complementari per garantire il minimo vitale. Guida.',
+    ogDescription: 'Scopri il primo pilastro della previdenza nel Canton Zurigo: ruolo della cassa cantonale, rendita AVS, lacune contributive e prestazioni complementari per il minimo vitale.',
     canonicalPath: '/articoli-svizzera/avs-prestazioni-complementari-zurigo-cassa/',
     structuredData: {
       "@context": "https://schema.org",
@@ -51680,7 +51680,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Programma federale 2021–2025: risanate 2\'413 abitazioni di utilità pubblica in Svizzera con 119 milioni CHF. Consumi energetici ridotti del 75%, 95% raggiunge.',
     keywords: 'frontalieri, ticino, svizzera, italia, risanamento, abitazioni, tonnellate, risparmiate',
     ogTitle: 'Risanamento abitazioni: 2\'650 tonnellate CO2 risparmiate',
-    ogDescription: 'Nel 2021–2025 il programma federale della Confederazione ha risanato 2\'413 abitazioni di utilità pubblica in tutta la Svizzera, abbattendo i consumi energetici del 75% e risparmiando 2\'650 tonnellate di CO2 all\'anno. Il 95% raggiunge lo standard CECE.',
+    ogDescription: 'Dal 2021 al 2025 il programma federale ha risanato 2.413 abitazioni di utilità pubblica in Svizzera, ridotto i consumi energetici del 75% e risparmiato 2.650 tonnellate di CO2 l\'anno. Il 95% raggiunge lo standard CECE.',
     canonicalPath: '/articoli-svizzera/risanamento-abitazioni-co2-berna/',
     structuredData: {
       "@context": "https://schema.org",
@@ -53907,7 +53907,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Baris Oran lascia Amrize dopo 5 mesi da CFO. Samuel Poletti nuovo responsabile finanze. Titolo perde il 2% a Zurigo, -20% da gennaio. Dati aggiornati 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, amrize, lascia, sorpresa, borsa',
     ogTitle: 'Amrize: il CFO lascia a sorpresa, giù in borsa',
-    ogDescription: 'Sorpresa ai vertici di Amrize: il CFO Baris Oran se ne va dopo appena 5 mesi. Samuel Poletti nominato nuovo responsabile finanze. La borsa di Zurigo reagisce: titolo perde il 2% in prima seduta, proseguendo un calo del 20% da gennaio. L\'azienda conta.',
+    ogDescription: 'Il CFO Baris Oran lascia Amrize dopo cinque mesi e Samuel Poletti assume la direzione finanziaria. Il titolo a Zurigo perde il 2% nella prima seduta, proseguendo un calo del 20% da gennaio.',
     canonicalPath: '/articoli-svizzera/amrize-cfo-lascia-sorpresa-borsa/',
     structuredData: {
       "@context": "https://schema.org",
@@ -54769,7 +54769,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Aprire un\'attività a Berna: forme giuridiche, registro commercio, imposte a tre livelli e obblighi assicurativi per dipendenti. Guida step-by-step e procedure.',
     keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, berna, procedure',
     ogTitle: 'Aprire un\'attività a Berna: procedure e costi',
-    ogDescription: 'Guida completa all\'apertura di un\'attività nel Cantone di Berna: scelta della forma giuridica (ditta individuale, Sàrl, SA), iscrizione al registro commercio, imposte a tre livelli e obblighi assicurativi per datori (AVS, LPP, LAMal, SUVA). Procedura.',
+    ogDescription: 'Guida all\'apertura di un\'attività nel Cantone di Berna: forme giuridiche (ditta individuale, Sàrl, SA), registro di commercio, imposte e assicurazioni obbligatorie per i datori di lavoro.',
     canonicalPath: '/articoli-svizzera/avviare-ditta-berna-registrazione/',
     structuredData: {
       "@context": "https://schema.org",
@@ -55003,7 +55003,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Forme giuridiche SA, Sarl, ditta, capitale minimo, iscrizione registro commercio, fisco 3 livelli, contributi AVS/AI, IVA, SUVA, LAMal in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, appenzello, interno',
     ogTitle: 'Aprire un\'attività in Appenzello Interno: guida pratica',
-    ogDescription: 'Procedura passo-passo per avviare un\'attività commerciale nel canton Appenzello Interno: forme giuridiche, capitali minimi (SA CHF 100.000, Sarl CHF 20.000), iscrizione registro commercio, fisco 3 livelli (federale + cantonale + comunale), contributi.',
+    ogDescription: 'Guida passo-passo per avviare un\'attività nel Cantone di Appenzello Interno: forme giuridiche, capitali minimi, registro di commercio, imposte federali, cantonali e comunali, contributi.',
     canonicalPath: '/articoli-svizzera/aprire-attivita-appenzello-interno/',
     structuredData: {
       "@context": "https://schema.org",
@@ -55393,7 +55393,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il Consiglio federale approva la riforma IPG: dal 2027 genitori avranno accesso a prestazioni finora riservate ai militari. Armonizzazione legge indemnità.',
     keywords: 'frontalieri, ticino, svizzera, italia, indennità, parentali, nuovi, diritti',
     ogTitle: 'Indennità parentali: nuovi diritti dal 1° luglio 2027',
-    ogDescription: 'Il Consiglio federale pone in vigore le modifiche alla legge sulle indemnità di perdita di guadagno (IPG) dal 1° luglio 2027. Genitori, lavoratori indipendenti e famiglie accederanno a prestazioni finora riservate a militari e civili. Ecco le quattro.',
+    ogDescription: 'Dal 1° luglio 2027 entreranno in vigore le modifiche alla legge sulle indennità di perdita di guadagno (IPG). Genitori, indipendenti e famiglie accederanno a prestazioni finora riservate a militari e civili.',
     canonicalPath: '/articoli-svizzera/indennita-parentali-2027/',
     structuredData: {
       "@context": "https://schema.org",
@@ -59360,7 +59360,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Borse di studio e prestiti agli studi nel Cantone di San Gallo: ufficio competente, requisiti di accesso, importi disponibili e come presentare domanda. Guida.',
     keywords: 'frontalieri, ticino, svizzera, italia, borse, studio, gallo, requisiti',
     ogTitle: 'Borse di studio San Gallo: requisiti e importi',
-    ogDescription: 'Il Cantone di San Gallo prevede borse di studio e prestiti agli studi gestiti dall\'ufficio cantonale. La fonte analizza requisiti, importi, termini di presentazione e differenze tra borse e prestiti, rinviando al sito ufficiale del cantone per i dati.',
+    ogDescription: 'Il Cantone di San Gallo prevede borse di studio e prestiti gestiti dall\'ufficio cantonale. La guida riassume requisiti, importi, termini e differenze tra borse e prestiti; per i dettagli rinvia al sito ufficiale.',
     canonicalPath: '/articoli-svizzera/borse-studio-san-gallo-requisiti-importi/',
     structuredData: {
       "@context": "https://schema.org",
@@ -64746,7 +64746,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Come funziona il primo pilastro (AVS): rendita, cassa di compensazione, lacune contributive e prestazioni complementari per il minimo vitale. Guida pratica.',
     keywords: 'frontalieri, ticino, svizzera, italia, prestazioni, complementari, canton, argovia',
     ogTitle: 'AVS e prestazioni complementari nel canton Argovia',
-    ogDescription: 'Scopri come funziona il primo pilastro della previdenza svizzera: calcolo della rendita AVS, ruolo della cassa di compensazione cantonale, lacune contributive e prestazioni complementari per coprire il minimo vitale. Informazioni complete e procedure.',
+    ogDescription: 'Scopri il primo pilastro della previdenza svizzera: rendita AVS, cassa cantonale di compensazione, lacune contributive e prestazioni complementari per il minimo vitale.',
     canonicalPath: '/articoli-svizzera/avs-prestazioni-complementari-argovia/',
     structuredData: {
       "@context": "https://schema.org",
@@ -72807,7 +72807,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Guida alle borse di studio nel Cantone di Neuchâtel: criteri di assegnazione, requisiti di residenza e merito, importi massimi, procedura di candidatura e bandi.',
     keywords: 'frontalieri, ticino, svizzera, italia, borse, studio, neuch, requisiti',
     ogTitle: 'Borse di studio Neuchâtel: requisiti e importi',
-    ogDescription: 'Accedi alle borse di studio nel Cantone di Neuchâtel. Scopri i criteri di valutazione, i requisiti di residenza e merito accademico, gli importi disponibili, la procedura di candidatura e le scadenze annuali. Guida completa con link alle informazioni.',
+    ogDescription: 'Accedi alle borse di studio nel Cantone di Neuchâtel. Scopri i requisiti di residenza e merito, gli importi, la procedura di candidatura e le scadenze annuali.',
     canonicalPath: '/articoli-svizzera/borse-studio-neuchatel/',
     structuredData: {
       "@context": "https://schema.org",
@@ -78361,7 +78361,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Casse pensioni svizzere in positivo: rendimento di +0,7% ad agosto 2026, trainato da azioni estere a +14%. Analisi UBS e performance storica dal 2006.',
     keywords: 'frontalieri, ticino, svizzera, italia, casse, pensioni, svizzere, agosto',
     ogTitle: 'Casse pensioni svizzere: +0,7% ad agosto',
-    ogDescription: 'Le casse pensioni svizzere hanno chiuso agosto in territorio positivo con rendimento dello 0,7% netto spese. Azioni estere brillano a +14%, supportate da utili societari e investimenti nell\'IA. Scopri come il tuo portafoglio pensionistico è impattato.',
+    ogDescription: 'Le casse pensioni svizzere hanno chiuso agosto con un rendimento netto dello 0,7%. Le azioni estere brillano a +14%, sostenute da utili societari e investimenti nell\'IA.',
     canonicalPath: '/articoli-svizzera/previdenza-agosto-rendimenti-positivi/',
     structuredData: {
       "@context": "https://schema.org",
@@ -78824,7 +78824,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'CdG: Amherd sapeva dei rischi costi F-35 mesi prima. Prescrizione triennale in scadenza, Wyssmann (UDC) chiede interruzione. Possibile danno erariale.',
     keywords: 'frontalieri, ticino, svizzera, italia, f-35, amherd, rischia, responsabilità',
     ogTitle: 'F-35: Amherd rischia responsabilità per costi extra non comunicati',
-    ogDescription: 'La Commissione della gestione accerta che l\'ex consigliera federale Viola Amherd conosceva i rischi di costi aggiuntivi sugli F-35 prima di informare il Consiglio federale. Il consigliere nazionale UDC Rémy Wyssmann chiede di bloccare la prescrizione.',
+    ogDescription: 'La Commissione della gestione ha accertato che Viola Amherd conosceva i rischi di costi extra sugli F-35 prima di informare il Consiglio federale. Il consigliere UDC Rémy Wyssmann chiede di bloccare la prescrizione.',
     canonicalPath: '/articoli-svizzera/f-35-amherd-prescrizione-responsabilita/',
     structuredData: {
       "@context": "https://schema.org",
@@ -84164,7 +84164,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il 24 settembre 2026 a Zurigo il diesel raggiunge 2,46 CHF/l, la benzina 95 2,14 CHF/l e il petrolio supera i 100 USD/barile. Scopri le prospettive di rialzo.',
     keywords: 'frontalieri, ticino, svizzera, italia, salasso, alla, pompa, diesel',
     ogTitle: 'Salasso alla pompa: diesel caro, benzina in rialzo',
-    ogDescription: 'A Zurigo, il 24 settembre 2026, il diesel costa in media 2,46 franchi al litro con picchi oltre 2,50, mentre la benzina senza piombo 95 è a 2,14 franchi di mediana. Il petrolio supera i 100 dollari al barile e le prospettive di Goldman Sachs indicano.',
+    ogDescription: 'A Zurigo, il 24 settembre 2026 il diesel costa in media 2,46 franchi al litro, con punte oltre 2,50; la benzina senza piombo 95 ha una mediana di 2,14 franchi.',
     canonicalPath: '/articoli-svizzera/salasso-alla-pompa-benzina/',
     structuredData: {
       "@context": "https://schema.org",
@@ -84461,7 +84461,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il 25 settembre 2026 il Consiglio federale ha approvato il rapporto sul finanziamento equo delle scuole universitarie, fissando al 20% e 30% i massimi.',
     keywords: 'frontalieri, ticino, svizzera, italia, finanziamento, federale, università, cantonali',
     ogTitle: 'Finanziamento federale università cantonali e SUP',
-    ogDescription: 'Il Consiglio federale ha confermato il 25 settembre 2026 le quote massime di finanziamento diretto: 20% per le università cantonali e 30% per le SUP, valori in vigore dal 1° gennaio 2027. Il rapporto, basato sulla valutazione BSS Volkswirtschaftliche.',
+    ogDescription: 'Il Consiglio federale ha confermato per il 2027 le quote massime di finanziamento diretto: 20% per le università cantonali e 30% per le SUP.',
     canonicalPath: '/articoli-svizzera/finanziamento-federale-universita-sup/',
     structuredData: {
       "@context": "https://schema.org",
@@ -92608,7 +92608,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il Consiglio degli Stati approva l\'accordo sulla sicurezza alimentare Svizzera-UE: oltre il 50% delle esportazioni e oltre il 70% delle importazioni riguardano.',
     keywords: 'frontalieri, ticino, svizzera, italia, accordo, sicurezza, alimentare, svizzera-ue',
     ogTitle: 'Accordo sicurezza alimentare Svizzera-UE approvato',
-    ogDescription: 'Il Consiglio degli Stati ha dato il via libera al nuovo accordo sulla sicurezza alimentare tra Svizzera e Unione europea, che punta a creare uno spazio comune per tutelare la salute di persone, animali e piante. Oltre metà delle esportazioni svizzere.',
+    ogDescription: 'Il Consiglio degli Stati ha approvato l\'accordo Svizzera-UE sulla sicurezza alimentare, che mira a creare uno spazio comune per tutelare la salute di persone, animali e piante.',
     canonicalPath: '/articoli-svizzera/bilaterali-iii-sicurezza-alimentare/',
     structuredData: {
       "@context": "https://schema.org",
@@ -93490,7 +93490,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Tre arresti, otto perquisizioni e cinque server sequestrati contro KillSec: recuperati almeno 110 terabyte di dati rubati. L\'inchiesta riguarda società.',
     keywords: 'frontalieri, ticino, svizzera, italia, killsec, arresti, terabyte, dati',
     ogTitle: 'KillSec: tre arresti e 110 terabyte rubati',
-    ogDescription: 'L\'operazione internazionale ha smantellato la struttura informatica di KillSec: tre arresti, otto perquisizioni, cinque server sequestrati e almeno 110 terabyte recuperati. Fedpol e MPC indagano su attacchi a diverse società svizzere tra ottobre 2023.',
+    ogDescription: 'L\'operazione internazionale ha smantellato l\'infrastruttura informatica di KillSec: tre arresti, otto perquisizioni, cinque server sequestrati e almeno 110 terabyte recuperati. Fedpol e MPC indagano sugli attacchi a società svizzere.',
     canonicalPath: '/articoli-svizzera/operazione-ransomware-dati-sottratti/',
     structuredData: {
       "@context": "https://schema.org",
@@ -94811,7 +94811,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'La Svizzera ha avviato il 2 ottobre 2026 la consultazione sul terzo protocollo CEAG, che si chiuderà il 19 gennaio 2027, dopo la firma a Malta il 19 settembre.',
     keywords: 'frontalieri, ticino, svizzera, italia, avvia, consulta, terzo, protocollo',
     ogTitle: 'Svizzera avvia consulta sul terzo protocollo CEAG',
-    ogDescription: 'Il Consiglio federale ha aperto la procedura di consultazione sul terzo protocollo alla Convenzione europea di assistenza giudiziaria in materia penale il 2 ottobre 2026, con scadenza fissata al 19 gennaio 2027. La Svizzera aveva già firmato il testo.',
+    ogDescription: 'Il 2 ottobre 2026 il Consiglio federale ha avviato la consultazione sul terzo protocollo alla Convenzione europea di assistenza giudiziaria in materia penale. Il termine è il 19 gennaio 2027; la Svizzera aveva già firmato il testo.',
     canonicalPath: '/articoli-svizzera/moderniz-perseguimento-penale/',
     structuredData: {
       "@context": "https://schema.org",
@@ -98782,7 +98782,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il Gran Consiglio di Bellinzona ha respinto le due iniziative MPS sulla giustizia: nessuna modifica all\'età pensionamento dei magistrati (70 anni rimane) né.',
     keywords: 'frontalieri, ticino, svizzera, italia, iniziative, sulla, giustizia, bocciate',
     ogTitle: 'Iniziative MPS sulla giustizia bocciate dal Gran Consiglio',
-    ogDescription: 'A Bellinzona, il Gran Consiglio ha bocciato entrambe le proposte degli esponenti MPS Matteo Pronzini e Pino Sergi. La prima voleva ridurre l\'età di pensionamento dei giudici da 70 a 65 anni, ricevendo 41 voti contrari; la seconda intendeva attribuire.',
+    ogDescription: 'A Bellinzona, il Gran Consiglio ha bocciato entrambe le proposte MPS di Matteo Pronzini e Pino Sergi. La prima voleva ridurre da 70 a 65 anni l\'età pensionabile dei giudici ed è stata respinta con 41 voti contrari.',
     canonicalPath: '/articoli-svizzera/iniziative-mps-giustizia-respinte/',
     structuredData: {
       "@context": "https://schema.org",

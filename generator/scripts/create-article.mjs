@@ -4861,7 +4861,7 @@ function applyMicrocopyGuard(content, locale) {
   for (const field of ['title', 'excerpt']) {
     if (typeof content[field] !== 'string' || !content[field].trim()) continue;
     if (field === 'excerpt') {
-      const normalized = normalizeExcerpt(content[field]);
+      const normalized = normalizeExcerpt(content[field], { locale });
       if (normalized !== content[field]) {
         console.warn(`  🧹 [excerpt-plain] ${locale.toUpperCase()} excerpt normalizzato`);
         content[field] = normalized;
@@ -4906,7 +4906,7 @@ async function generateExcerpt(title, body1, body2, body3) {
       { role: 'user', content: `Titolo: ${title}\n\nCorpo dell'articolo:\n${bodyText.slice(0, 4000)}` },
     ];
     const raw = await _aiCallLLM(messages, { temperature: 0.5, maxTokens: 200, timeout: 30_000 });
-    const excerpt = normalizeExcerpt(String(raw || '').replace(/^["'“”]+|["'“”]+$/g, '').trim());
+    const excerpt = normalizeExcerpt(String(raw || '').replace(/^["'“”]+|["'“”]+$/g, '').trim(), { locale: 'it' });
     // Il non-vuoto non basta (#798): questa e' la sola sorgente dell'`excerpt`
     // della pipeline giornalista, che non passa da `validateItalianPayload`.
     // Un `...` finirebbe in `content/`, in `meta-<locale>.json` e nei feed.
@@ -4926,7 +4926,7 @@ async function generateExcerpt(title, body1, body2, body3) {
     maxLength: 160,
   });
   if (bodyFallback) return capBlogDescription(bodyFallback).value;
-  return capBlogDescription(normalizeExcerpt(bodyText)).value;
+  return capBlogDescription(normalizeExcerpt(bodyText, { locale: 'it' })).value;
 }
 
 /** Char-based thirds over an ordered list of chunks (paragraphs or sentences),
@@ -15704,7 +15704,7 @@ function optimizeSeoMetadata(data) {
   if (!data.seo) data.seo = {};
 
   if (typeof it.excerpt === 'string' && it.excerpt.trim()) {
-    it.excerpt = normalizeExcerpt(it.excerpt);
+    it.excerpt = normalizeExcerpt(it.excerpt, { locale: 'it' });
   }
 
   // ── Collision prevention (mirror og-pages runtime disambiguator) ──
@@ -15812,7 +15812,7 @@ export function refreshSourceCopyDerivedMetadata(data) {
     if (!content || typeof content !== 'object') continue;
     const body = bodyTextForQuality(content);
     if (!body.trim()) continue;
-    const excerpt = capBlogDescription(normalizeExcerpt(body)).value;
+    const excerpt = capBlogDescription(normalizeExcerpt(body, { locale })).value;
     if (!excerpt) continue;
     content.excerpt = excerpt;
     applyMicrocopyGuard(content, locale);

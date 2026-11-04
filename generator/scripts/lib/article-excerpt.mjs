@@ -27,6 +27,11 @@ export const SENTENCE_ABBREVIATIONS = Object.freeze([
   'etc.', 'e.g.', 'i.e.', 'no.', 'vs.', 'M.', 'Mme.',
 ]);
 const SENTENCE_ABBREVIATION_SET = new Set(SENTENCE_ABBREVIATIONS.map((value) => value.toLocaleLowerCase()));
+const MULTI_INITIAL_ABBREVIATION_RE = /^(?:[A-ZÀ-ÖØ-Þ]\.){2,}$/u;
+const GERMAN_DATE_ORDINAL_PREFIX_RE = /(?:^|\s)(?:am|ab dem|seit dem|dem|den|zum|bis zum|vom)\s+\d{1,2}$/iu;
+const TERMINAL_DATE_FRAGMENT_RE = /(?:^|\s)(?:am|ab dem|seit dem|dem|den|zum|bis zum|vom|on|from|until|le|du|au|dal|al|il|per il|entro(?: il)?|da|scadenza|deadline)\s+\d{1,2}$/iu;
+const TERMINAL_DATE_RANGE_YEAR_FRAGMENT_RE = /\b(?:dal|da|from|du|de|vom)\s+\d{1,2}\s+(?:al|au|to|bis)\s+\d{1,2}\s+(?:gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre|january|february|march|april|may|june|july|august|september|october|november|december|januar|februar|märz|mai|juni|juli|oktober|dezember|janvier|février|juin|juillet|août|septembre|octobre|décembre)\s+\d{1,2}$/iu;
+const TERMINAL_NUMBER_AFTER_LIST_CONNECTOR_RE = /\d[\d.,%]*\s+(?:\p{L}[\p{L}'’.-]*\s+){1,5}(?:e|ed|and|or|und|oder|et|ou)\s+\d{1,4}$/iu;
 const PERMIT_CODE_CONTEXT_RE = /\b(?:ausweis|bewilligung|permit|permis|permesso)\b[^.!?]{0,64}$/iu;
 const TERMINAL_LABEL_INITIAL_CONTEXT_RE = /\b(?:serie|series|série|piano|plan|gruppo|gruppe|groupe|group|punkt|point|tipo|typ|type|classe|klasse|class|categoria|catégorie|category|fase|phase|girone|pool|league|liga|ligue|lega|divisione|division|versione|version|livello|level|grado|grade|section|sezione)\s*$/iu;
 const TERMINAL_SENTENCE_PUNCTUATION_RE = /[.!?…]["'’”»)}\]]*$/u;
@@ -249,7 +254,7 @@ function isContextualTerminalInitial(text, tokenStart, token) {
   return TERMINAL_LABEL_INITIAL_CONTEXT_RE.test(String(text ?? '').slice(0, tokenStart));
 }
 
-function isNonSentencePeriod(text, periodIndex) {
+function isNonSentencePeriod(text, periodIndex, locale = '') {
   if (periodIndex < 0 || text[periodIndex] !== '.') return false;
   const previous = text[periodIndex - 1] ?? '';
   const next = text[periodIndex + 1] ?? '';
@@ -261,19 +266,20 @@ function isNonSentencePeriod(text, periodIndex) {
   while (end < text.length && /[\p{L}\p{N}.]/u.test(text[end])) end += 1;
   const token = text.slice(start, end);
   const lowerToken = token.toLocaleLowerCase();
-  if (SENTENCE_ABBREVIATION_SET.has(lowerToken)) return true;
+  if (SENTENCE_ABBREVIATION_SET.has(lowerToken) || MULTI_INITIAL_ABBREVIATION_RE.test(token)) return true;
   if (/^[BCG]\.$/u.test(token) && isTerminalPermitCodeOrCelsiusUnit(text, start, token)) return false;
   if (/^[A-ZÀ-ÖØ-Þ]\.$/u.test(token)) return !isContextualTerminalInitial(text, start, token);
 
   // German date ordinals continue into the following word (for example,
-  // "am 17. Mai"). A terminal ordinal is handled as an incomplete value.
-  if (/(?:^|\s)\d{1,2}$/u.test(text.slice(0, periodIndex))
+  // "am 17. Mai"). A terminal ordinal is handled as an incomplete date.
+  if (String(locale ?? '').toLowerCase().split('-')[0] === 'de'
+    && /(?:^|\s)\d{1,2}$/u.test(text.slice(0, periodIndex))
     && /^\s+[\p{L}]/u.test(text.slice(periodIndex + 1))) return true;
   return false;
 }
 
 /** Detect a value that starts mid-sentence after an abbreviation or ordinal in its source body. */
-export function startsAfterNonSentenceBoundary(value, body = []) {
+export function startsAfterNonSentenceBoundary(value, body = [], locale = '') {
   const needle = String(value ?? '').trim();
   if (!needle) return false;
   for (const source of Array.isArray(body) ? body : [body]) {
@@ -294,7 +300,7 @@ export function startsAfterNonSentenceBoundary(value, body = []) {
       if (startsListItem || previous < 0 || /\n/u.test(gap)) {
         sentenceOccurrence = true;
       } else if (/[.!?…]/u.test(text[previous])) {
-        if (text[previous] === '.' && isNonSentencePeriod(text, previous)) splitOccurrence = true;
+        if (text[previous] === '.' && isNonSentencePeriod(text, previous, locale)) splitOccurrence = true;
         else sentenceOccurrence = true;
       } else if (/[-*+>:]/u.test(text[previous]) && /\n/u.test(before.slice(before.lastIndexOf('\n') + 1))) {
         sentenceOccurrence = true;
@@ -307,19 +313,22 @@ export function startsAfterNonSentenceBoundary(value, body = []) {
 }
 
 /** True when a value ends in a known abbreviation, initial, or ordinal. */
-export function endsWithSentenceAbbreviation(value) {
+export function endsWithSentenceAbbreviation(value, { locale = '' } = {}) {
   const text = String(value ?? '').trim().replace(/["'’”»)}\]]+$/u, '');
   if (!text.endsWith('.')) return false;
   if (/\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\s+\d{1,2}\.$/iu.test(text)) return false;
   let start = text.length - 1;
   while (start > 0 && /[\p{L}\p{N}.]/u.test(text[start - 1])) start -= 1;
-  const token = text.slice(start).toLocaleLowerCase();
+  const rawToken = text.slice(start);
+  const token = rawToken.toLocaleLowerCase();
   if (/^[bcg]\.$/u.test(token) && isTerminalPermitCodeOrCelsiusUnit(text, start, text.slice(start))) return false;
   if (/^[A-ZÀ-ÖØ-Þ]\.$/u.test(text.slice(start))
     && isContextualTerminalInitial(text, start, text.slice(start))) return false;
+  const language = String(locale ?? '').toLowerCase().split('-')[0];
   return SENTENCE_ABBREVIATION_SET.has(token)
+    || MULTI_INITIAL_ABBREVIATION_RE.test(rawToken)
     || /^[A-ZÀ-ÖØ-Þ]\.$/u.test(text.slice(start))
-    || (/(?:^|\s)\d{1,2}\.$/u.test(text) && !/\d+\.\d+\.$/u.test(text));
+    || (language === 'de' && GERMAN_DATE_ORDINAL_PREFIX_RE.test(text.replace(/\.$/u, '')));
 }
 
 /** Minimum source length shared by repairs, generator validation, and the corpus gate. */
@@ -348,16 +357,16 @@ export function findDescriptionDefects(value, {
     ...findExcerptMarkdownDefects(value),
     ...findExcerptCompletenessDefects(value, { locale, requireTerminalPunctuation, requireNonEmpty }),
   ];
-  if (startsAfterNonSentenceBoundary(value, body)) defects.push('split-sentence-start');
+  if (startsAfterNonSentenceBoundary(value, body, locale)) defects.push('split-sentence-start');
   return [...new Set(defects)];
 }
 
-function finalSentence(text) {
+function finalSentence(text, locale = '') {
   const content = String(text ?? '')
     .replace(/[\s"'’”»)}\]]+$/u, '')
     .replace(/[.!?…]+$/u, '');
   const boundaries = [...content.matchAll(/[.!?…](?=[\s"'’”»)}\]]|$)/gu)]
-    .filter((match) => !(match[0] === '.' && isNonSentencePeriod(content, match.index)));
+    .filter((match) => !(match[0] === '.' && isNonSentencePeriod(content, match.index, locale)));
   const lastBoundary = boundaries.at(-1);
   return content.slice(lastBoundary ? lastBoundary.index + 1 : 0).trim();
 }
@@ -516,7 +525,7 @@ function hasCompleteSubordinatePredicate(clause, terminal, language, allowGerman
 }
 
 function hasDanglingDegreePredicateTail(value, language) {
-  const sentence = finalSentence(value);
+  const sentence = finalSentence(value, language);
   const text = sentence.toLocaleLowerCase();
   const terminal = terminalWord(sentence);
   const languages = language === 'en' || language === 'de' ? [language] : ['en', 'de'];
@@ -529,7 +538,7 @@ function hasDanglingDegreePredicateTail(value, language) {
 
 function hasDanglingTerminalFunctionWord(text, locale = '') {
   const terminal = terminalWord(text);
-  const finalText = finalSentence(text);
+  const finalText = finalSentence(text, locale);
   const final = finalText.toLocaleLowerCase();
   const language = String(locale ?? '').toLowerCase().split('-')[0];
   if (language === 'de' && GERMAN_SEPARABLE_PARTICLE_PATTERNS[terminal]?.test(final)) return false;
@@ -579,13 +588,16 @@ export function findExcerptCompletenessDefects(value, {
   if (parentheses.openings.length > 0) defects.push('unclosed-parenthesis');
   if (parentheses.unmatchedClosing) defects.push('unmatched-parenthesis');
   if (/[\p{L}\p{N}]-[.!?…]?$/u.test(text)) defects.push('unfinished-hyphenated-word');
-  if (endsWithSentenceAbbreviation(text)) defects.push('unfinished-abbreviation');
-  if (/\b(?:am|ab dem|seit dem|dem|den|zum|bis zum|on|the|from|until|le|du|au|dal|al|il|per il)\s+\d{1,2}\.$/iu.test(text)) {
+  if (endsWithSentenceAbbreviation(text, { locale })) defects.push('unfinished-abbreviation');
+  const terminalNumberContext = text.replace(/\.$/u, '');
+  if (TERMINAL_DATE_FRAGMENT_RE.test(terminalNumberContext)
+    || TERMINAL_DATE_RANGE_YEAR_FRAGMENT_RE.test(terminalNumberContext)) {
     defects.push('unfinished-date');
   }
+  if (TERMINAL_NUMBER_AFTER_LIST_CONNECTOR_RE.test(terminalNumberContext)) defects.push('dangling-clause');
   if (hasDanglingTerminalFunctionWord(text, locale)) defects.push('dangling-clause');
   if (ORPHANED_DESCRIPTION_LABEL_RE.test(text)) defects.push('orphaned-label');
-  if (text.length >= 60 && wordCount(finalSentence(text)) < 4
+  if (text.length >= 60 && wordCount(finalSentence(text, locale)) < 4
     && INCOMPLETE_SHORT_SENTENCE_VERBS.has(terminalWord(text))) {
     defects.push('short-final-sentence');
   }
@@ -595,11 +607,11 @@ export function findExcerptCompletenessDefects(value, {
   return defects;
 }
 
-function sentencePrefixes(value) {
+function sentencePrefixes(value, locale = '') {
   const candidates = [];
   const re = /[.!?](?:["'’”»)}\]]*)(?=\s|$)/gu;
   for (const match of value.matchAll(re)) {
-    if (match[0].startsWith('.') && isNonSentencePeriod(value, match.index)) continue;
+    if (match[0].startsWith('.') && isNonSentencePeriod(value, match.index, locale)) continue;
     const end = match.index + match[0].length;
     candidates.push(value.slice(0, end).trimEnd());
   }
@@ -634,7 +646,7 @@ function hasUnpunctuatedSentenceJoin(text, locale) {
   });
 }
 
-function crossesBodyLineOrListItem(text) {
+function crossesBodyLineOrListItem(text, locale = '') {
   const value = String(text ?? '');
   const lines = value.split(/\r?\n/u);
   const hasSentenceTerminator = (fragment) => {
@@ -642,7 +654,8 @@ function crossesBodyLineOrListItem(text) {
     if (!/[.!?…]$/u.test(ending)) return false;
     const period = ending.length - 1;
     return ending[period] !== '.'
-      || (!isNonSentencePeriod(ending, period) && !endsWithSentenceAbbreviation(ending));
+      || (!isNonSentencePeriod(ending, period, locale)
+        && !endsWithSentenceAbbreviation(ending, { locale }));
   };
   if (lines.length > 1 && lines.slice(0, -1).some((line) => line.trim() && !hasSentenceTerminator(line))) return true;
   const listItems = [...value.matchAll(/(?:^|[ \t])[-*+][ \t]+\S/gu)];
@@ -671,7 +684,7 @@ function sentenceCandidatesFromBody(body, locale, field = 'excerpt') {
       const previousPeriod = previous
         ? previous.index + previous.segment.trimEnd().length - 1
         : -1;
-      if (previous && isNonSentencePeriod(text, previousPeriod)) {
+      if (previous && isNonSentencePeriod(text, previousPeriod, locale)) {
         segments.pop();
         const end = segment.index + segment.segment.length;
         segments.push({ index: previous.index, segment: text.slice(previous.index, end) });
@@ -685,8 +698,8 @@ function sentenceCandidatesFromBody(body, locale, field = 'excerpt') {
         const last = segments[start + count - 1];
         const candidate = text.slice(first.index, last.index + last.segment.length).trim();
         const end = last.index + last.segment.length;
-        if (isNonSentencePeriod(text, end - 1)) continue;
-        if (crossesBodyLineOrListItem(candidate)) continue;
+        if (isNonSentencePeriod(text, end - 1, locale)) continue;
+        if (crossesBodyLineOrListItem(candidate, locale)) continue;
         const plainCandidate = stripExcerptMarkdown(candidate);
         if (!plainCandidate || plainCandidate.length > 280) continue;
         if (detectWrongLatinLanguageInField(plainCandidate, locale, field) !== null) continue;
@@ -834,7 +847,7 @@ export function repairExcerptFromOriginal(value, {
       requireNonEmpty,
     }),
   ];
-  if (startsAfterNonSentenceBoundary(original, body)) defects.push('split-sentence-start');
+  if (startsAfterNonSentenceBoundary(original, body, locale)) defects.push('split-sentence-start');
   if (defects.length === 0) return { value: original, strategy: null, defects };
 
   const flattenedList = hasFlattenedBodyListExcerpt(original, body, locale);
@@ -847,12 +860,14 @@ export function repairExcerptFromOriginal(value, {
       if (cached) return cached;
     }
     const candidates = sentenceCandidatesFromBody(body, locale, field)
-      .filter((candidate) => candidate.length <= maxLength && candidate.length >= minLength)
-      .filter((candidate) => findExcerptCompletenessDefects(candidate, {
+      .filter((candidate) => isCompleteSourceCandidate(candidate, {
         locale,
+        maxLength,
+        minLength,
+        body,
         requireTerminalPunctuation,
         requireNonEmpty,
-      }).length === 0)
+      }))
       .map((candidate, index) => ({
         candidate,
         index,
@@ -882,12 +897,16 @@ export function repairExcerptFromOriginal(value, {
     if (terminated !== null) return { value: terminated, strategy: 'd', defects };
   }
 
-  for (const prefix of sentencePrefixes(original)) {
-    if (prefix.length > maxLength || prefix === original) continue;
-    if (findExcerptMarkdownDefects(prefix).length > 0) continue;
-    if (findExcerptCompletenessDefects(prefix, { locale, requireTerminalPunctuation, requireNonEmpty }).length > 0) continue;
-    if (startsAfterNonSentenceBoundary(prefix, body)) continue;
-    if (prefix.length < minLength) continue;
+  for (const prefix of sentencePrefixes(original, locale)) {
+    if (prefix === original) continue;
+    if (!isCompleteSourceCandidate(prefix, {
+      locale,
+      maxLength,
+      minLength,
+      body,
+      requireTerminalPunctuation,
+      requireNonEmpty,
+    })) continue;
     return { value: prefix, strategy: 'a', defects };
   }
 
@@ -942,10 +961,10 @@ function hasFlattenedBodyListExcerpt(value, body, locale = '') {
   return matchingTransitions >= (language === 'de' ? 2 : 1);
 }
 
-function isCompleteSourceCandidate(value, {
+export function isCompleteSourceCandidate(value, {
   locale,
-  maxLength,
-  minLength,
+  maxLength = EXCERPT_MAX_LENGTH,
+  minLength = EXCERPT_MIN_LENGTH,
   body = [],
   requireTerminalPunctuation = true,
   requireNonEmpty = true,
@@ -959,7 +978,7 @@ function isCompleteSourceCandidate(value, {
       requireTerminalPunctuation,
       requireNonEmpty,
     }).length === 0
-    && !startsAfterNonSentenceBoundary(value, body);
+    && !startsAfterNonSentenceBoundary(value, body, locale);
 }
 
 /** Select only text already present as a complete sentence within a field's budget. */
@@ -974,7 +993,7 @@ export function selectCompleteExcerptSource(value, {
   const text = String(value ?? '').trim();
   const options = { locale, maxLength, minLength, body, requireTerminalPunctuation, requireNonEmpty };
   if (isCompleteSourceCandidate(text, options)) return text;
-  return sentencePrefixes(text).find((prefix) => isCompleteSourceCandidate(prefix, options)) ?? null;
+  return sentencePrefixes(text, locale).find((prefix) => isCompleteSourceCandidate(prefix, options)) ?? null;
 }
 
 /** Return the first complete one- or two-sentence excerpt copied from the body. */
@@ -1200,17 +1219,17 @@ function isUsefulSentence(value) {
  * body fallback.  If punctuation is absent, a dash-separated bullet summary
  * supplies the next-best sentence boundary.
  */
-export function normalizeExcerpt(value) {
+export function normalizeExcerpt(value, { locale = '' } = {}) {
   const plain = stripExcerptMarkdown(value);
   if (!plain) return '';
 
-  const sentenceCandidates = sentencePrefixes(plain).reverse();
+  const sentenceCandidates = sentencePrefixes(plain, locale).reverse();
   const sentence = sentenceCandidates
     .find((candidate) => candidate.length >= EXCERPT_MIN_LENGTH && isUsefulSentence(candidate));
   if (sentence) return sentence;
 
   const shortSentence = sentenceCandidates
-    .find((candidate) => isUsefulSentence(candidate) && !endsWithSentenceAbbreviation(candidate));
+    .find((candidate) => isUsefulSentence(candidate) && !endsWithSentenceAbbreviation(candidate, { locale }));
   // Some valid generated summaries are shorter than the historical 60-char
   // repair floor. Keep a complete sentence instead of normalizing it to empty.
   if (shortSentence) return shortSentence;
@@ -1221,12 +1240,12 @@ export function normalizeExcerpt(value) {
     .filter((fragment) => fragment.length >= EXCERPT_MIN_LENGTH
       && isUsefulSentence(fragment)
       && TERMINAL_SENTENCE_PUNCTUATION_RE.test(fragment)
-      && !endsWithSentenceAbbreviation(fragment));
+      && !endsWithSentenceAbbreviation(fragment, { locale }));
   const firstUseful = fragments[0];
   if (firstUseful) return firstUseful;
   return plain.length >= EXCERPT_MIN_LENGTH
     && TERMINAL_SENTENCE_PUNCTUATION_RE.test(plain)
-    && !endsWithSentenceAbbreviation(plain)
+    && !endsWithSentenceAbbreviation(plain, { locale })
     ? plain
     : '';
 }

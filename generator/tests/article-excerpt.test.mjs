@@ -10,6 +10,7 @@ import {
   findExcerptMarkdownDefects,
   firstCompleteBodyExcerpt,
   findDescriptionDefects,
+  isCompleteSourceCandidate,
   maximumDescriptionLength,
   minimumDescriptionLength,
   normalizeExcerpt,
@@ -167,7 +168,19 @@ test('le abbreviazioni non chiudono una frase e una coda breve resta da riparare
   });
   assert.equal(endsWithSentenceAbbreviation('Die Temperatur steigt auf 25°C.'), false);
   assert.deepEqual(findExcerptCompletenessDefects('Die Temperatur steigt auf 25°C.', { locale: 'de' }), []);
-  assert.equal(endsWithSentenceAbbreviation('Parmelin am 17.'), true);
+  assert.equal(endsWithSentenceAbbreviation('Parmelin am 17.', { locale: 'de' }), true);
+  assert.equal(endsWithSentenceAbbreviation('Route 66.', { locale: 'en' }), false);
+  assert.equal(endsWithSentenceAbbreviation('Sulle S.P. 69.', { locale: 'it' }), false);
+  assert.deepEqual(
+    findExcerptCompletenessDefects(
+      'Il 25 settembre 2026, dalle 9 alle 17, il Cavalcavia Boesio a Laveno Mombello sarà chiuso per installare tre portali limitatori di sagoma sulle S.P. 32 e S.P. 69.',
+      { locale: 'it' },
+    ),
+    [],
+  );
+  assert.deepEqual(findExcerptCompletenessDefects('The route ends at Route 66.', { locale: 'en' }), []);
+  assert.ok(findExcerptCompletenessDefects('Die Bewerbung endet am 17.', { locale: 'de' }).includes('unfinished-abbreviation'));
+  assert.ok(findExcerptCompletenessDefects('Die Bewerbung endet am 17.', { locale: 'de' }).includes('unfinished-date'));
   assert.equal(endsWithSentenceAbbreviation('Applications close on October 23.'), false);
   assert.equal(endsWithSentenceAbbreviation('La quota è 3.5.'), false);
   assert.ok(findExcerptCompletenessDefects('La sentenza n.').includes('unfinished-abbreviation'));
@@ -180,6 +193,7 @@ test('le abbreviazioni non chiudono una frase e una coda breve resta da riparare
 
   const germanSentence = 'Parmelin am 17. Mai 2027 wurde vom Bundesrat über die nächsten Schritte zur Umsetzung der Vereinbarung informiert.';
   assert.equal(firstCompleteBodyExcerpt([germanSentence], { locale: 'de', minLength: 60 }), germanSentence);
+  assert.equal(normalizeExcerpt(germanSentence, { locale: 'de' }), germanSentence);
 
   const clippedMonth = 'Dezember 2020 unterzeichnet und ist seit dem 1. Januar 2024 in Kraft.';
   const completeDateSentence = 'Die Neue Grenzgängervereinbarung wurde am 23. Dezember 2020 unterzeichnet und ist seit dem 1. Januar 2024 in Kraft.';
@@ -194,6 +208,19 @@ test('le abbreviazioni non chiudono una frase e una coda breve resta da riparare
   const tooShort = repairExcerptFromOriginal('Una frase intera ma inferiore alla soglia.', { minLength: 60 });
   assert.equal(tooShort.strategy, null);
   assert.equal(tooShort.value, 'Una frase intera ma inferiore alla soglia.');
+});
+
+test('un candidato di riparazione a supera la validazione condivisa prima di essere accettato', () => {
+  const abbreviationCandidate = 'La chiusura del cavalcavia modifica i collegamenti tra i comuni e impone deviazioni ai residenti che percorrono la S.P.';
+  const functionWordCandidate = 'La nuova regola disciplina i contributi per i lavoratori frontalieri residenti in Italia e le imprese interessate per.';
+  assert.equal(isCompleteSourceCandidate(abbreviationCandidate, { locale: 'it', minLength: 60 }), false);
+  assert.equal(isCompleteSourceCandidate('Una frase completa.', { locale: 'it', minLength: 60 }), false);
+  assert.equal(isCompleteSourceCandidate(functionWordCandidate, { locale: 'it', minLength: 60 }), false);
+
+  const original = 'La chiusura del cavalcavia modifica i collegamenti tra i comuni e impone deviazioni ai residenti che percorrono la S.P. e';
+  const result = repairExcerptFromOriginal(original, { locale: 'it', minLength: 60 });
+  assert.equal(result.strategy, 'c');
+  assert.equal(result.value, original);
 });
 
 test('le iniziali finali dipendono dal contesto di etichetta', () => {
@@ -239,7 +266,7 @@ test('un item completo non è un inizio a metà frase, mentre un ordinal date s�
   assert.equal(startsAfterNonSentenceBoundary(orderedItem, [`1. ${orderedItem}`]), false);
   assert.equal(startsAfterNonSentenceBoundary(bulletItem, [`- **${bulletItem}**`]), false);
   assert.equal(
-    startsAfterNonSentenceBoundary(dateContinuation, ['Am 22. Januar 2026 hat der Stadtschulrat Schaffhausen das Modell beschlossen.']),
+    startsAfterNonSentenceBoundary(dateContinuation, ['Am 22. Januar 2026 hat der Stadtschulrat Schaffhausen das Modell beschlossen.'], 'de'),
     true,
   );
   assert.deepEqual(findDescriptionDefects(orderedItem, { locale: 'de', body: [`1. ${orderedItem}`] }), []);
@@ -647,7 +674,7 @@ test('la riparazione usa solo un prefisso con punteggiatura originaria, una fras
   assert.ok(original.startsWith(strategyA.value));
   assert.equal(strategyA.value.endsWith('.'), true);
   const dateTail = 'Die SVA Aargau versendet die Codes für die Prämienverbilligung. Für 2027 muss der Antrag bis Donnerstag, 31. Dezember, eingereicht werden und';
-  assert.equal(repairExcerptFromOriginal(dateTail).value, 'Die SVA Aargau versendet die Codes für die Prämienverbilligung.');
+  assert.equal(repairExcerptFromOriginal(dateTail, { locale: 'de' }).value, 'Die SVA Aargau versendet die Codes für die Prämienverbilligung.');
 
   const bodySentence = 'Gli enti esteri che perseguono finalità analoghe a quelle di fondazioni o enti non commerciali italiani non possono subire un trattamento fiscale più gravoso sui dividendi di fonte italiana per il solo fatto di essere costituiti secondo un diverso ordinamento.';
   const originalWithoutBoundary = 'La Corte afferma che gli enti non possono subire un trattamento fiscale più gravoso per il solo fatto di essere costituiti secondo un';
