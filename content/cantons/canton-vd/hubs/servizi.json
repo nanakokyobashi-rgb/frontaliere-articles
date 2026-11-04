@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T14:36:40.036Z",
-  "contentHash": "d522e082136dce8da81b18dc3920e98bd7cd539eda6aa30b8bab990d1dbd44ef",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "168825799733439f527d9225eb544e17851cb54214cb7ee14afadb712cd7dca1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -54,6 +59,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "6 °C",
+              "detail": "oggi da 5 a 7 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -62,6 +81,11 @@
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
               "date": "2026-11-02T16:26:27.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26756-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante-et-repond-au-058-6-116-116"
+            },
+            {
+              "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé",
+              "date": "2026-11-02T16:26:27.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26756-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante"
             },
             {
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
@@ -82,14 +106,9 @@
               "label": "Forum des clubs sportifs lausannois: la santé des jeunes au cœur de la performance",
               "date": "2026-10-02T16:30:00.000Z",
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
-            },
-            {
-              "label": "Les primes d’assurance-maladie vont augmenter de 3.5% en moyenne en 2027",
-              "date": "2026-09-29T13:02:12.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26662-les-primes-dassurance-maladie-vont-augmenter-de-35-en-moyenne-en-2027"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -124,16 +143,16 @@
           "date": "2026-09-04T08:00:51.242Z"
         },
         {
-          "title": "Permesso L in Vaud: validità max 1 anno e proroga",
-          "url": "/articoli-svizzera/permesso-l-vaud-proroga/",
-          "excerpt": "Validità fino a 1 anno, vincolo al datore di lavoro e gestione SEM. Le regole per la proroga o il passaggio al permesso B.",
-          "date": "2026-09-18T04:49:19.725Z"
-        },
-        {
           "title": "Sistema sanitario svizzero LAMal nel Canton Vaud",
           "url": "/articoli-svizzera/sistema-sanitario-lamal-2026-vaud/",
           "excerpt": "Guida completa al sistema sanitario svizzero nel Canton Vaud: obbligo LAMal, scelta della cassa malati, franchigie e sussidi cantonali.",
           "date": "2026-08-20T02:15:48.837Z"
+        },
+        {
+          "title": "Permesso L in Vaud: validità max 1 anno e proroga",
+          "url": "/articoli-svizzera/permesso-l-vaud-proroga/",
+          "excerpt": "Validità fino a 1 anno, vincolo al datore di lavoro e gestione SEM. Le regole per la proroga o il passaggio al permesso B.",
+          "date": "2026-09-18T04:49:19.725Z"
         },
         {
           "title": "Patente di guida nel Cantone di Vaud: conversione, esami e corsi obbligatori",
@@ -169,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "VD",
@@ -206,6 +225,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "6 °C",
+              "detail": "today from 5 to 7 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -214,6 +247,11 @@
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
               "date": "2026-11-02T16:26:27.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26756-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante-et-repond-au-058-6-116-116"
+            },
+            {
+              "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé",
+              "date": "2026-11-02T16:26:27.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26756-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante"
             },
             {
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
@@ -234,14 +272,9 @@
               "label": "Forum des clubs sportifs lausannois: la santé des jeunes au cœur de la performance",
               "date": "2026-10-02T16:30:00.000Z",
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
-            },
-            {
-              "label": "Les primes d’assurance-maladie vont augmenter de 3.5% en moyenne en 2027",
-              "date": "2026-09-29T13:02:12.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26662-les-primes-dassurance-maladie-vont-augmenter-de-35-en-moyenne-en-2027"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -276,16 +309,16 @@
           "date": "2026-09-04T08:00:51.242Z"
         },
         {
-          "title": "Permit L in Vaud: validity max 1 year and extension",
-          "url": "/en/swiss-articles/l-permit-vaud-extension/",
-          "excerpt": "Validity up to 1 year, employer constraint and SEM management. The rules for the extension or transition to permit B.",
-          "date": "2026-09-18T04:49:19.725Z"
-        },
-        {
           "title": "Swiss health system LAMal in the Canton of Vaud",
           "url": "/en/swiss-articles/switzerland-healthcare-lamal-vaud/",
           "excerpt": "Complete guide to the Swiss health system in the Canton of Vaud: LAMal obligation, choice of the sick fund, deductibles and cantonal subsidies.",
           "date": "2026-08-20T02:15:48.837Z"
+        },
+        {
+          "title": "Permit L in Vaud: validity max 1 year and extension",
+          "url": "/en/swiss-articles/l-permit-vaud-extension/",
+          "excerpt": "Validity up to 1 year, employer constraint and SEM management. The rules for the extension or transition to permit B.",
+          "date": "2026-09-18T04:49:19.725Z"
         },
         {
           "title": "Driver's license in the Canton of Vaud: conversion, exams and compulsory courses",
@@ -317,7 +350,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "VD",
@@ -354,6 +387,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "6 °C",
+              "detail": "heute 5 bis 7 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -362,6 +409,11 @@
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
               "date": "2026-11-02T16:26:27.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26756-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante-et-repond-au-058-6-116-116"
+            },
+            {
+              "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé",
+              "date": "2026-11-02T16:26:27.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26756-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante"
             },
             {
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
@@ -382,14 +434,9 @@
               "label": "Forum des clubs sportifs lausannois: la santé des jeunes au cœur de la performance",
               "date": "2026-10-02T16:30:00.000Z",
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
-            },
-            {
-              "label": "Les primes d’assurance-maladie vont augmenter de 3.5% en moyenne en 2027",
-              "date": "2026-09-29T13:02:12.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26662-les-primes-dassurance-maladie-vont-augmenter-de-35-en-moyenne-en-2027"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -424,16 +471,16 @@
           "date": "2026-09-04T08:00:51.242Z"
         },
         {
-          "title": "Ausweis L in der Waadt: Gültigkeit max. 1 Jahr und Verlängerung",
-          "url": "/de/schweiz-artikel/l-ausweis-waadt-verlaengerung/",
-          "excerpt": "Gültigkeit bis zu 1 Jahr, Bindung an den Arbeitgeber und SEM-Verwaltung. Die Regeln für die Verlängerung oder den Übergang zur B-Bewilligung.",
-          "date": "2026-09-18T04:49:19.725Z"
-        },
-        {
           "title": "Schweizerisches Gesundheitssystem KVG im Kanton Waadt",
           "url": "/de/schweiz-artikel/schweizer-gesundheitssystem-lamal-waadt/",
           "excerpt": "Vollständiger Leitfaden zum Schweizer Gesundheitssystem im Kanton Waadt: KVG-Pflicht, Krankenkassenwahl, Franchisen und Kantonsbeiträge.",
           "date": "2026-08-20T02:15:48.837Z"
+        },
+        {
+          "title": "Ausweis L in der Waadt: Gültigkeit max. 1 Jahr und Verlängerung",
+          "url": "/de/schweiz-artikel/l-ausweis-waadt-verlaengerung/",
+          "excerpt": "Gültigkeit bis zu 1 Jahr, Bindung an den Arbeitgeber und SEM-Verwaltung. Die Regeln für die Verlängerung oder den Übergang zur B-Bewilligung.",
+          "date": "2026-09-18T04:49:19.725Z"
         },
         {
           "title": "Führerschein im Kanton Waadt: Umschulung, Prüfungen und Pflichtkurse",
@@ -465,7 +512,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "VD",
@@ -502,6 +549,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 5 à 7 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -510,6 +571,11 @@
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
               "date": "2026-11-02T16:26:27.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26756-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante-et-repond-au-058-6-116-116"
+            },
+            {
+              "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé",
+              "date": "2026-11-02T16:26:27.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26756-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante"
             },
             {
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
@@ -530,14 +596,9 @@
               "label": "Forum des clubs sportifs lausannois: la santé des jeunes au cœur de la performance",
               "date": "2026-10-02T16:30:00.000Z",
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
-            },
-            {
-              "label": "Les primes d’assurance-maladie vont augmenter de 3.5% en moyenne en 2027",
-              "date": "2026-09-29T13:02:12.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26662-les-primes-dassurance-maladie-vont-augmenter-de-35-en-moyenne-en-2027"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -572,16 +633,16 @@
           "date": "2026-09-04T08:00:51.242Z"
         },
         {
-          "title": "Permis L en Vaud : validité max 1 an et prolongation",
-          "url": "/fr/articles-suisse/permis-l-vaud-prolongation/",
-          "excerpt": "Validité jusqu'à 1 an, obligation à l'employeur et gestion SEM. Les règles pour la prolongation ou le passage au permis B.",
-          "date": "2026-09-18T04:49:19.725Z"
-        },
-        {
           "title": "Système de santé suisse LAMal dans le canton de Vaud",
           "url": "/fr/articles-suisse/systeme-sante-suisse-lamal-vaud/",
           "excerpt": "Guide complet du système de santé suisse dans le canton de Vaud : obligation LAMal, choix de la caisse-maladie, franchises et allocations cantonales.",
           "date": "2026-08-20T02:15:48.837Z"
+        },
+        {
+          "title": "Permis L en Vaud : validité max 1 an et prolongation",
+          "url": "/fr/articles-suisse/permis-l-vaud-prolongation/",
+          "excerpt": "Validité jusqu'à 1 an, obligation à l'employeur et gestion SEM. Les règles pour la prolongation ou le passage au permis B.",
+          "date": "2026-09-18T04:49:19.725Z"
         },
         {
           "title": "Permis de conduire dans le canton de Vaud : conversion, examens et cours",
@@ -609,7 +670,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

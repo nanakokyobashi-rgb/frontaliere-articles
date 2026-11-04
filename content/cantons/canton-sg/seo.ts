@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione': {
     title: 'Canton San Gallo: stabile ricerca lavoro, cala disoccupazione',
-    description: '11\'251 persone cercavano lavoro a fine settembre',
+    description: '11\'251 persone cercavano lavoro a fine settembre.',
     keywords: 'frontalieri, ticino, svizzera, italia, canton, gallo, stabile, ricerca',
     ogTitle: 'Canton San Gallo: stabile ricerca lavoro, cala',
-    ogDescription: '11\'251 persone cercavano lavoro a fine settembre',
+    ogDescription: '11\'251 persone cercavano lavoro a fine settembre.',
     canonicalPath: '/articoli-san-gallo/canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Canton San Gallo: stabile ricerca lavoro, cala disoccupazione",
-      "description": "11'251 persone cercavano lavoro a fine settembre",
+      "description": "11'251 persone cercavano lavoro a fine settembre.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp`,
@@ -43,16 +43,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-incidente-a13-widnau-2026': {
     title: 'Incidente A13 Widnau 2026: danni e impatto sul traffico',
-    description: 'Incidente sulla A13 a Widnau il 5 ottobre 2026',
+    description: 'Incidente sulla A13 a Widnau il 5 ottobre 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, incidente, widnau, danni, impatto',
     ogTitle: 'Incidente A13 Widnau 2026: danni e impatto sul traffico',
-    ogDescription: 'Incidente sulla A13 a Widnau il 5 ottobre 2026',
+    ogDescription: 'Incidente sulla A13 a Widnau il 5 ottobre 2026.',
     canonicalPath: '/articoli-san-gallo/incidente-a13-widnau-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Incidente A13 Widnau 2026: danni e impatto sul traffico",
-      "description": "Incidente sulla A13 a Widnau il 5 ottobre 2026",
+      "description": "Incidente sulla A13 a Widnau il 5 ottobre 2026.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-incidente-a13-widnau-2026.webp`,
@@ -77,16 +77,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-casse-malati-amministrazione-costi-2025': {
     title: 'Casse malati: amministrazione varia da 103 a 445 franchi',
-    description: 'Nel 2025 i costi amministrativi medi delle casse malati svizzere sono stati 191,15 CHF per persona, con un minimo di 103,35 CHF e un massimo di 445,20 CHF',
+    description: 'Nel 2025 i costi amministrativi medi delle casse malati svizzere sono stati 191,15 CHF per persona, con un minimo di 103,35 CHF e un massimo di 445,20 CHF.',
     keywords: 'frontalieri, ticino, svizzera, italia, casse, malati, amministrazione, varia',
     ogTitle: 'Casse malati: amministrazione varia da 103 a 445 franchi',
-    ogDescription: 'L\'analisi Comparis per l\'Effizienzpreis 2026 mostra che nel 2025 le casse malati svizzere hanno speso tra 103,35 e 445,20 CHF per persona per la gestione amministrativa. La media è stata di 191,15 CHF, in calo del 3,3% dal 2021. La soglia',
+    ogDescription: 'L\'analisi Comparis per l\'Effizienzpreis 2026 mostra che nel 2025 le casse malati svizzere hanno speso tra 103,35 e 445,20 CHF per persona per la gestione amministrativa. La media è stata di 191,15 CHF, in calo del 3,3% dal 2021. La soglia.',
     canonicalPath: '/articoli-san-gallo/casse-malati-amministrazione-costi-2025/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Casse malati: amministrazione varia da 103 a 445 franchi",
-      "description": "Nel 2025 i costi amministrativi medi delle casse malati svizzere sono stati 191,15 CHF per persona, con un minimo di 103,35 CHF e un massimo di 445,20 CHF",
+      "description": "Nel 2025 i costi amministrativi medi delle casse malati svizzere sono stati 191,15 CHF per persona, con un minimo di 103,35 CHF e un massimo di 445,20 CHF.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -197,7 +197,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'La HSG sostiene attivamente gli studenti che fondano imprese e presenta alcuni degli oltre 170 spin-off ufficiali nel focus Entrepreneurship di San Gallo.',
     keywords: 'frontalieri, ticino, svizzera, italia, gallo, oltre, spin-off, ufficiali',
     ogTitle: 'HSG a San Gallo: oltre 170 spin-off ufficiali',
-    ogDescription: 'Il focus HSG Entrepreneurship presenta il sostegno agli studenti che fondano imprese e alcuni degli oltre 170 spin-off ufficiali HSG. Per il Canton San Gallo è una lettura locale dell\'imprenditorialità, separata dalle informazioni su programmi',
+    ogDescription: 'Oltre 170 spin-off ufficiali HSG sono il dato centrale del focus HSG Entrepreneurship.',
     canonicalPath: '/articoli-san-gallo/hsg-spin-off-ufficiali/',
     structuredData: {
       "@context": "https://schema.org",
@@ -233,16 +233,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-rheineck-mels-aquaplaning': {
     title: 'Rheineck e Mels: due incidenti per aquaplaning',
-    description: 'Due auto hanno urtato i guardrail il 10 ottobre 2026 Incidenti distinti su A1 e N13 I due conducenti non hanno riportato ferite Danni: circa CHF 35\'000 e CHF',
+    description: 'La segnalazione intitolata Rheineck e Mels descrive due incidenti autonomi avvenuti sabato 10 ottobre 2026: uno sull\'autostrada A1 e uno sulla N13.',
     keywords: 'frontalieri, ticino, svizzera, italia, rheineck, mels, incidenti, aquaplaning',
     ogTitle: 'Rheineck e Mels: due incidenti per aquaplaning',
-    ogDescription: 'Due auto hanno urtato i guardrail il 10 ottobre 2026 Incidenti distinti su A1 e N13 I due conducenti non hanno riportato ferite Danni: circa CHF 35\'000 e CHF',
+    ogDescription: 'La segnalazione intitolata Rheineck e Mels descrive due incidenti autonomi avvenuti sabato 10 ottobre 2026: uno sull\'autostrada A1 e uno sulla N13.',
     canonicalPath: '/articoli-san-gallo/rheineck-mels-aquaplaning/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Rheineck e Mels: due incidenti per aquaplaning",
-      "description": "Due auto hanno urtato i guardrail il 10 ottobre 2026 Incidenti distinti su A1 e N13 I due conducenti non hanno riportato ferite Danni: circa CHF 35'000 e CHF",
+      "description": "La segnalazione intitolata Rheineck e Mels descrive due incidenti autonomi avvenuti sabato 10 ottobre 2026: uno sull'autostrada A1 e uno sulla N13.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -389,7 +389,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-status-s-san-gallo-assistenza': {
     title: 'San Gallo: assistenza ridotta per titolari di Status S',
-    description: 'La commissione propone assistenza ridotta anche dopo il permesso. La scelta del domicilio resterebbe limitata per lo Status S. Per le persone ucraine',
+    description: 'La commissione propone assistenza ridotta anche dopo il permesso. La scelta del domicilio resterebbe limitata per lo Status S. Per le persone ucraine.',
     keywords: 'frontalieri, ticino, svizzera, italia, gallo, assistenza, ridotta, titolari',
     ogTitle: 'San Gallo: assistenza ridotta per titolari di Status S',
     ogDescription: 'La commissione propone assistenza ridotta anche dopo il permesso.',
@@ -398,7 +398,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "San Gallo: assistenza ridotta per titolari di Status S",
-      "description": "La commissione propone assistenza ridotta anche dopo il permesso. La scelta del domicilio resterebbe limitata per lo Status S. Per le persone ucraine",
+      "description": "La commissione propone assistenza ridotta anche dopo il permesso. La scelta del domicilio resterebbe limitata per lo Status S. Per le persone ucraine.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -428,7 +428,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-voto-rete-gas-wil-2026': {
     title: 'Wil: voto il 29 novembre 2026 sulla rete del gas',
-    description: 'Voto sul fondo: 29 novembre 2026. Regolamento approvato il 2 luglio 2026: 25 sì, 11 no. Rete TBW: 570 km, di cui 442 nei comuni vicini. Costo previsto: circa',
+    description: 'Voto sul fondo: 29 novembre 2026. Regolamento approvato il 2 luglio 2026: 25 sì, 11 no. Rete TBW: 570 km, di cui 442 nei comuni vicini. Costo previsto: circa.',
     keywords: 'frontalieri, ticino, svizzera, italia, voto, novembre, sulla, rete',
     ogTitle: 'Wil: voto il 29 novembre 2026 sulla rete del gas',
     ogDescription: 'Voto sul fondo: 29 novembre 2026.',
@@ -437,7 +437,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Wil: voto il 29 novembre 2026 sulla rete del gas",
-      "description": "Voto sul fondo: 29 novembre 2026. Regolamento approvato il 2 luglio 2026: 25 sì, 11 no. Rete TBW: 570 km, di cui 442 nei comuni vicini. Costo previsto: circa",
+      "description": "Voto sul fondo: 29 novembre 2026. Regolamento approvato il 2 luglio 2026: 25 sì, 11 no. Rete TBW: 570 km, di cui 442 nei comuni vicini. Costo previsto: circa.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -506,16 +506,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-san-gallo-protezione-infrastrutture-critiche': {
     title: 'San Gallo rafforza protezione infrastrutture critiche',
-    description: 'Il Governo di San Gallo rafforza la protezione delle infrastrutture critiche La strategia copre infrastrutture, processi e servizi La resilienza',
+    description: 'La sigla SKIPD identifica la strategia cantonale per la protezione delle infrastrutture, dei processi e dei servizi critici.',
     keywords: 'frontalieri, ticino, svizzera, italia, gallo, rafforza, protezione, infrastrutture',
     ogTitle: 'San Gallo: protezione infrastrutture critiche 2025-2035',
-    ogDescription: 'Il Governo di San Gallo rafforza la protezione delle infrastrutture critiche La strategia copre infrastrutture, processi e servizi La resilienza include',
+    ogDescription: 'La fonte cantonale riferisce che il Governo del Canton San Gallo ha approvato una strategia complessiva per proteggere le infrastrutture critiche, i processi e i servizi.',
     canonicalPath: '/articoli-san-gallo/san-gallo-protezione-infrastrutture-critiche/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "San Gallo rafforza protezione infrastrutture critiche",
-      "description": "Il Governo di San Gallo rafforza la protezione delle infrastrutture critiche La strategia copre infrastrutture, processi e servizi La resilienza",
+      "description": "La sigla SKIPD identifica la strategia cantonale per la protezione delle infrastrutture, dei processi e dei servizi critici.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -545,16 +545,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-san-gallo-autostrada-rosenberg-terza-canna': {
     title: 'San Gallo: terza canna Rosenberg e cifre contestate',
-    description: 'Ampliamento autostradale a San Gallo: sostenitori chiedono terza canna sotto il Rosenberg e collegamento al Güterbahnhof. Pianificatore critica',
+    description: 'Ampliamento autostradale a San Gallo: sostenitori chiedono terza canna sotto il Rosenberg e collegamento al Güterbahnhof. Pianificatore critica.',
     keywords: 'frontalieri, ticino, svizzera, italia, gallo, terza, canna, rosenberg',
     ogTitle: 'San Gallo: terza canna autostradale Rosenberg e cifre discutibili',
-    ogDescription: 'A San Gallo i favorevoli chiedono una terza canna sotto il Rosenberg e un collegamento parziale alla stazione merci. Il pianificatore Thomas Hug-Di Lena giudica discutibili le cifre alla base della richiesta. La visualizzazione ufficiale mostra',
+    ogDescription: 'Il giudizio riguarda dunque i numeri che sostengono la domanda di costruire la terza canna e il collegamento, non una decisione amministrativa già descritta come definitiva.',
     canonicalPath: '/articoli-san-gallo/san-gallo-autostrada-rosenberg-terza-canna/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "San Gallo: terza canna Rosenberg e cifre contestate",
-      "description": "Ampliamento autostradale a San Gallo: sostenitori chiedono terza canna sotto il Rosenberg e collegamento al Güterbahnhof. Pianificatore critica",
+      "description": "Ampliamento autostradale a San Gallo: sostenitori chiedono terza canna sotto il Rosenberg e collegamento al Güterbahnhof. Pianificatore critica.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -662,7 +662,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-kolumbanstrasse-nuova-velostrasse': {
     title: 'Kolumbanstrasse ridisegnata: più verde e fermate bus senza barriere',
-    description: 'Il 23 ottobre 2026 è stata ridisegnata la Kolumbanstrasse (tra Splügenstrasse e Heiligkreuzstrasse), aggiungendo 700 metri all\'itinerario ciclabile',
+    description: 'Il 23 ottobre 2026 è stata ridisegnata la Kolumbanstrasse (tra Splügenstrasse e Heiligkreuzstrasse), aggiungendo 700 metri all\'itinerario ciclabile.',
     keywords: 'frontalieri, ticino, svizzera, italia, kolumbanstrasse, ridisegnata, verde, fermate',
     ogTitle: 'Kolumbanstrasse ridisegnata: più verde e fermate bus senza barriere',
     ogDescription: 'La Kolumbanstrasse è stata ridisegnata il 23 ottobre 2026, integrando 700 metri all\'itinerario ciclabile prioritario con nuove aree verdi e fermate bus accessibili.',
@@ -671,7 +671,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Kolumbanstrasse ridisegnata: più verde e fermate bus senza barriere",
-      "description": "Il 23 ottobre 2026 è stata ridisegnata la Kolumbanstrasse (tra Splügenstrasse e Heiligkreuzstrasse), aggiungendo 700 metri all'itinerario ciclabile",
+      "description": "Il 23 ottobre 2026 è stata ridisegnata la Kolumbanstrasse (tra Splügenstrasse e Heiligkreuzstrasse), aggiungendo 700 metri all'itinerario ciclabile.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -779,16 +779,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-unfall-a13-sevelen-2026': {
     title: 'Tamponamento A13 a Sevelen: due feriti il 25 ottobre 2026',
-    description: 'Il 25 ottobre due auto si sono tamponate sulla A13 a Sevelen Feriti un conducente di 79 anni e la passeggera di 86 Il conducente della seconda auto',
+    description: 'All’altezza di Sevelen si è verificata una collisione posteriore tra i due veicoli.',
     keywords: 'frontalieri, ticino, svizzera, italia, tamponamento, sevelen, feriti, ottobre',
     ogTitle: 'Tamponamento A13 Sevelen due feriti 25/10/2026',
-    ogDescription: 'Il 25 ottobre due auto si sono tamponate sulla A13 a Sevelen Feriti un conducente di 79 anni e la passeggera di 86 Il conducente della seconda auto, 53 anni, è',
+    ogDescription: 'Il 79enne è indicato come considerevolmente ferito, l’86enne come gravemente ferita e il conducente della seconda auto come illeso. Il servizio di soccorso ha effettuato il trattamento iniziale sul posto e ha poi trasferito i due feriti in ospedale.',
     canonicalPath: '/articoli-san-gallo/unfall-a13-sevelen-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Tamponamento A13 a Sevelen: due feriti il 25 ottobre 2026",
-      "description": "Il 25 ottobre due auto si sono tamponate sulla A13 a Sevelen Feriti un conducente di 79 anni e la passeggera di 86 Il conducente della seconda auto",
+      "description": "All’altezza di Sevelen si è verificata una collisione posteriore tra i due veicoli.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -818,7 +818,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-positive-chiusure-2025-sg': {
     title: '40 comuni del Canton San Gallo chiudono il 2025 in positivo',
-    description: '40 dei 75 comuni politici del Canton San Gallo hanno chiuso il 2025 in positivo, con un avanzo aggregato di circa CHF 28 milioni. Debito netto medio',
+    description: '40 dei 75 comuni politici del Canton San Gallo hanno chiuso il 2025 in positivo, con un avanzo aggregato di circa CHF 28 milioni. Debito netto medio.',
     keywords: 'frontalieri, ticino, svizzera, italia, comuni, canton, gallo, chiudono',
     ogTitle: '40 comuni SG chiudono 2025 in positivo',
     ogDescription: 'Statistiche finanziarie comunali 2025: 40 su 75 comuni hanno chiuso in positivo con un avanzo di circa CHF 28 milioni. Il debito netto medio è circa CHF 828 per abitante.',
@@ -827,7 +827,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "40 comuni del Canton San Gallo chiudono il 2025 in positivo",
-      "description": "40 dei 75 comuni politici del Canton San Gallo hanno chiuso il 2025 in positivo, con un avanzo aggregato di circa CHF 28 milioni. Debito netto medio",
+      "description": "40 dei 75 comuni politici del Canton San Gallo hanno chiuso il 2025 in positivo, con un avanzo aggregato di circa CHF 28 milioni. Debito netto medio.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -857,16 +857,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-controllo-traffico-san-gallo-ottobre': {
     title: 'Controllo traffico San Gallo: 105 violazioni accertate il 24 ottobre 2026',
-    description: '105 violazioni accertate nella notte del 24 ottobre Circa 150 veicoli e occupanti controllati 70 veicoli oltre 80 km/h sulla A13 Cosa: controllo',
+    description: 'Il bilancio complessivo comunicato dalla polizia cantonale è di 105 violazioni della legge.',
     keywords: 'frontalieri, ticino, svizzera, italia, controllo, traffico, gallo, violazioni',
     ogTitle: 'Controllo traffico San Gallo 24 ottobre 2026 105 violazioni',
-    ogDescription: '105 violazioni accertate nella notte del 24 ottobre Circa 150 veicoli e occupanti controllati 70 veicoli oltre 80 km/h sulla A13 Cosa: controllo mirato',
+    ogDescription: 'Il bilancio complessivo comunicato dalla polizia cantonale è di 105 violazioni della legge.',
     canonicalPath: '/articoli-san-gallo/controllo-traffico-san-gallo-ottobre/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Controllo traffico San Gallo: 105 violazioni accertate il 24 ottobre 2026",
-      "description": "105 violazioni accertate nella notte del 24 ottobre Circa 150 veicoli e occupanti controllati 70 veicoli oltre 80 km/h sulla A13 Cosa: controllo",
+      "description": "Il bilancio complessivo comunicato dalla polizia cantonale è di 105 violazioni della legge.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -935,7 +935,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-wil-budget-nachtrag-2027-115': {
     title: 'Wil approva supplemento al preventivo 2027 con moltiplicatore fiscale al 115%',
-    description: 'Il supplemento al preventivo 2027 di Wil fissa il moltiplicatore fiscale al 115%, prevedendo minori entrate di circa CHF 3,8 milioni e un deficit',
+    description: 'Il supplemento al preventivo 2027 di Wil fissa il moltiplicatore fiscale al 115%, prevedendo minori entrate di circa CHF 3,8 milioni e un deficit.',
     keywords: 'frontalieri, ticino, svizzera, italia, approva, supplemento, preventivo, moltiplicatore',
     ogTitle: 'Wil: preventivo 2027 con moltiplicatore 115%',
     ogDescription: 'Il supplemento al preventivo 2027 di Wil fissa il moltiplicatore fiscale al 115%, con minori entrate di circa CHF 3,8 milioni e un deficit stimato di circa CHF 5,78 milioni. Discussione al 3 dicembre 2026.',
@@ -944,7 +944,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Wil approva supplemento al preventivo 2027 con moltiplicatore fiscale al 115%",
-      "description": "Il supplemento al preventivo 2027 di Wil fissa il moltiplicatore fiscale al 115%, prevedendo minori entrate di circa CHF 3,8 milioni e un deficit",
+      "description": "Il supplemento al preventivo 2027 di Wil fissa il moltiplicatore fiscale al 115%, prevedendo minori entrate di circa CHF 3,8 milioni e un deficit.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -1013,7 +1013,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-cambiamento-orari-st-gallen': {
     title: 'Cambiamenti orari bus St.Gallen: interessate Rosenberg, Schuppis e Winkeln',
-    description: 'Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln. Dierauerstrasse: la città ne chiede la soppressione per risparmiare. La linea 9 termina',
+    description: 'Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln. Dierauerstrasse: la città ne chiede la soppressione per risparmiare.',
     keywords: 'frontalieri, ticino, svizzera, italia, cambiamenti, orari, gallen, interessate',
     ogTitle: 'Cambiamenti orari bus St.Gallen progetto 2027',
     ogDescription: 'Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln.',
@@ -1022,7 +1022,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Cambiamenti orari bus St.Gallen: interessate Rosenberg, Schuppis e Winkeln",
-      "description": "Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln. Dierauerstrasse: la città ne chiede la soppressione per risparmiare. La linea 9 termina",
+      "description": "Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln. Dierauerstrasse: la città ne chiede la soppressione per risparmiare.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

@@ -537,6 +537,14 @@ jobs:
             scripts/lib/ts-literals.mjs
             generator/scripts/lib/article-meta-block.mjs
             generator/scripts/lib/article-excerpt.mjs
+            generator/scripts/repair-plain-excerpts.mjs
+            generator/scripts/lib/itLanguageCheck.mjs
+            generator/scripts/lib/seo-description-contract.mjs
+            generator/scripts/lib/ts-string-map.mjs
+            generator/scripts/lib/unescape-ts-string.mjs
+            scripts/ci/excerpt-completeness-baseline.json
+            scripts/lib/excerpt-completeness-gate.mjs
+            scripts/lib/write-file-pair-atomically.mjs
             generator/scripts/lib/daily-brief-content.mjs
             generator/scripts/lib/daily-brief-data.mjs
             generator/scripts/lib/daily-brief-insights.mjs

@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-disoccupazione-friburgo-settembre-2026': {
     title: 'Disoccupazione a Friburgo scende al 2,5% in settembre 2026',
-    description: 'Disoccupazione friburghese al 2,5% a settembre 2026',
+    description: 'Disoccupazione friburghese al 2,5% a settembre 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, friburgo, scende, settembre',
     ogTitle: 'Disoccupazione a Friburgo scende al 2,5% in settembre 2026',
-    ogDescription: 'Disoccupazione friburghese al 2,5% a settembre 2026',
+    ogDescription: 'Disoccupazione friburghese al 2,5% a settembre 2026.',
     canonicalPath: '/articoli-friburgo/disoccupazione-friburgo-settembre-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Disoccupazione a Friburgo scende al 2,5% in settembre 2026",
-      "description": "Disoccupazione friburghese al 2,5% a settembre 2026",
+      "description": "Disoccupazione friburghese al 2,5% a settembre 2026.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-disoccupazione-friburgo-settembre-2026.webp`,
@@ -43,16 +43,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-fribourg-modifica-licd': {
     title: 'Fribourg adegua imposte dirette alla progressione a freddo',
-    description: 'Voto: 97 favorevoli, 1 contrario, nessuna astensione',
+    description: 'Voto: 97 favorevoli, 1 contrario, nessuna astensione.',
     keywords: 'frontalieri, ticino, svizzera, italia, fribourg, adegua, imposte, dirette',
     ogTitle: 'Fribourg adegua imposte dirette alla progressione a freddo',
-    ogDescription: 'Voto: 97 favorevoli, 1 contrario, nessuna astensione',
+    ogDescription: 'Voto: 97 favorevoli, 1 contrario, nessuna astensione.',
     canonicalPath: '/articoli-friburgo/fribourg-modifica-licd/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Fribourg adegua imposte dirette alla progressione a freddo",
-      "description": "Voto: 97 favorevoli, 1 contrario, nessuna astensione",
+      "description": "Voto: 97 favorevoli, 1 contrario, nessuna astensione.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-fribourg-modifica-licd.webp`,
@@ -77,16 +77,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-nuovo-piano-ciclabile-friburgo': {
     title: 'Friburgo: approvato il nuovo piano della rete ciclabile',
-    description: 'RIMU approva il nuovo piano ciclabile cantonale Consultazione: 80 pareri e quasi 270 osservazioni Obiettivo: più bici nella vita quotidiana entro il 2042',
+    description: 'La comunicazione sul nuovo piano è stata pubblicata il 7 ottobre 2026 alle 15.45.',
     keywords: 'frontalieri, ticino, svizzera, italia, friburgo, approvato, nuovo, piano',
     ogTitle: 'Friburgo: nuovo piano per la rete ciclabile quotidiana',
-    ogDescription: 'RIMU approva il nuovo piano ciclabile cantonale Consultazione: 80 pareri e quasi 270 osservazioni Obiettivo: più bici nella vita quotidiana entro il 2042',
+    ogDescription: 'La comunicazione sul nuovo piano è stata pubblicata il 7 ottobre 2026 alle 15.45.',
     canonicalPath: '/articoli-friburgo/nuovo-piano-ciclabile-friburgo/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Friburgo: approvato il nuovo piano della rete ciclabile",
-      "description": "RIMU approva il nuovo piano ciclabile cantonale Consultazione: 80 pareri e quasi 270 osservazioni Obiettivo: più bici nella vita quotidiana entro il 2042",
+      "description": "La comunicazione sul nuovo piano è stata pubblicata il 7 ottobre 2026 alle 15.45.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -116,16 +116,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-friburgo-legge-lingue-ufficiali': {
     title: 'Friburgo approva la legge sulle lingue ufficiali',
-    description: 'I deputati hanno votato giovedì Friburgo ha la sua prima legge sulle lingue ufficiali Il testo promuove il bilinguismo Decisione → voto dei deputati del Canton',
+    description: 'Con il voto di giovedì, il Canton Friburgo ha la sua prima legge sulle lingue ufficiali e sulla promozione del bilinguismo.',
     keywords: 'frontalieri, ticino, svizzera, italia, friburgo, approva, legge, sulle',
     ogTitle: 'Friburgo: legge sulle lingue ufficiali',
-    ogDescription: 'I deputati hanno votato giovedì Friburgo ha la sua prima legge sulle lingue ufficiali Il testo promuove il bilinguismo Decisione → voto dei deputati del Canton',
+    ogDescription: 'Con il voto di giovedì, il Canton Friburgo ha la sua prima legge sulle lingue ufficiali e sulla promozione del bilinguismo.',
     canonicalPath: '/articoli-friburgo/friburgo-legge-lingue-ufficiali/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Friburgo approva la legge sulle lingue ufficiali",
-      "description": "I deputati hanno votato giovedì Friburgo ha la sua prima legge sulle lingue ufficiali Il testo promuove il bilinguismo Decisione → voto dei deputati del Canton",
+      "description": "Con il voto di giovedì, il Canton Friburgo ha la sua prima legge sulle lingue ufficiali e sulla promozione del bilinguismo.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -155,16 +155,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-garanzia-hib-payerne': {
     title: 'Friburgo: garanzia da CHF 44,8 milioni per l\'ospedale HIB',
-    description: 'CHF 44,8 milioni per il finanziamento dell\'HIB 103 voti espressi, tutti favorevoli Lavori previsti tra il 2028 e il 2032 Il Vaud deve ancora approvare CHF 67,2',
+    description: 'Venerdì i deputati friburghesi hanno votato la concessione di una garanzia di CHF 44,8 milioni a favore dell\'Hôpital intercantonal de la Broye, l\'HIB.',
     keywords: 'frontalieri, ticino, svizzera, italia, friburgo, garanzia, milioni, ospedale',
     ogTitle: 'Friburgo: garanzia da CHF 44,8 milioni per l\'ospedale HIB',
-    ogDescription: 'CHF 44,8 milioni per il finanziamento dell\'HIB 103 voti espressi, tutti favorevoli Lavori previsti tra il 2028 e il 2032 Il Vaud deve ancora approvare CHF 67,2',
+    ogDescription: 'Venerdì i deputati friburghesi hanno votato la concessione di una garanzia di CHF 44,8 milioni a favore dell\'Hôpital intercantonal de la Broye, l\'HIB.',
     canonicalPath: '/articoli-friburgo/garanzia-hib-payerne/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Friburgo: garanzia da CHF 44,8 milioni per l'ospedale HIB",
-      "description": "CHF 44,8 milioni per il finanziamento dell'HIB 103 voti espressi, tutti favorevoli Lavori previsti tra il 2028 e il 2032 Il Vaud deve ancora approvare CHF 67,2",
+      "description": "Venerdì i deputati friburghesi hanno votato la concessione di una garanzia di CHF 44,8 milioni a favore dell'Hôpital intercantonal de la Broye, l'HIB.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -233,7 +233,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-friburgo-deduzioni-carburante': {
     title: 'Carburanti: il Cantone non vuole aumentare le deduzioni',
-    description: 'Il diesel supera CHF 2,40 al litro. Il forfait è di CHF 0,65 per km fino a 10\'000 km. Il Cantone non prevede oggi un adeguamento. +5 centesimi per km',
+    description: 'Il diesel supera CHF 2,40 al litro. Il forfait è di CHF 0,65 per km fino a 10\'000 km. Il Cantone non prevede oggi un adeguamento. +5 centesimi per km.',
     keywords: 'frontalieri, ticino, svizzera, italia, carburanti, cantone, vuole, aumentare',
     ogTitle: 'Carburanti nel Canton Friburgo: nessun aumento per le deduzioni fiscali',
     ogDescription: 'Il diesel supera CHF 2,40 al litro.',
@@ -242,7 +242,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Carburanti: il Cantone non vuole aumentare le deduzioni",
-      "description": "Il diesel supera CHF 2,40 al litro. Il forfait è di CHF 0,65 per km fino a 10'000 km. Il Cantone non prevede oggi un adeguamento. +5 centesimi per km",
+      "description": "Il diesel supera CHF 2,40 al litro. Il forfait è di CHF 0,65 per km fino a 10'000 km. Il Cantone non prevede oggi un adeguamento. +5 centesimi per km.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -314,7 +314,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il progetto di copertura dell\'autostrada A12 indica tre anni di lavori. Durante la messa all\'inchiesta, circa 20 opposizioni sono state depositate sul progetto.',
     keywords: 'frontalieri, ticino, svizzera, italia, copertura, anni, lavori, ventina',
     ogTitle: 'A12: tre anni di lavori e circa 20 opposizioni',
-    ogDescription: 'La messa all\'inchiesta del progetto di copertura dell\'autostrada A12 ha raccolto circa una ventina di opposizioni. Il titolo indica tre anni di lavori; il materiale pubblico disponibile non aggiunge dettagli sul calendario o sull\'esito',
+    ogDescription: 'La messa all\'inchiesta del progetto di copertura dell\'autostrada A12 ha raccolto circa una ventina di opposizioni. Il titolo indica tre anni di lavori; il materiale pubblico disponibile non aggiunge dettagli sul calendario o sull\'esito.',
     canonicalPath: '/articoli-friburgo/copertura-a12-opposizioni/',
     structuredData: {
       "@context": "https://schema.org",
@@ -509,7 +509,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Markus Julmy è uno dei due candidati del Centro nella lista dell\'Intesa di destra: il deputato singinese mette in evidenza il suo profilo imprenditoriale.',
     keywords: 'frontalieri, ticino, svizzera, italia, markus, julmy, candidato, centro',
     ogTitle: 'Markus Julmy, garagista verso il Consiglio di Stato',
-    ogDescription: 'Il materiale pubblico presenta Julmy come deputato singinese, garagista e uno dei due candidati del Centro sulla lista dell\'Intesa di destra. Il titolo richiama la possibilità di avere meno burocrazia; il lead evidenzia il suo profilo',
+    ogDescription: 'Il materiale pubblico presenta Julmy come deputato singinese, garagista e uno dei due candidati del Centro sulla lista dell\'Intesa di destra. Il titolo richiama la possibilità di avere meno burocrazia; il lead evidenzia il suo profilo.',
     canonicalPath: '/articoli-friburgo/julmy-corsa-consiglio-stato/',
     structuredData: {
       "@context": "https://schema.org",
@@ -548,7 +548,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il Consiglio di Stato friburghese abbandona la linea diretta: oggi Bulle-Friburgo dura circa 37 minuti, obiettivo 25 entro il 2050 via Romont.',
     keywords: 'frontalieri, ticino, svizzera, italia, friburgo, rinuncia, alla, linea',
     ogTitle: 'Bulle-Friburgo: abbandonato il progetto diretto',
-    ogDescription: 'Il progetto di un collegamento diretto Bulle-Friburgo è stato abbandonato per i costi elevati, le difficoltà tecniche e l\'impatto sul paesaggio. L\'alternativa punta a modernizzare la linea via Romont, con un obiettivo di circa 25 minuti entro',
+    ogDescription: 'Il progetto di un collegamento diretto Bulle-Friburgo è stato abbandonato per i costi elevati, le difficoltà tecniche e l\'impatto sul paesaggio. L\'alternativa punta a modernizzare la linea via Romont, con un obiettivo di circa 25 minuti entro.',
     canonicalPath: '/articoli-friburgo/bulle-friburgo-linea-diretta/',
     structuredData: {
       "@context": "https://schema.org",
@@ -584,7 +584,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-rolex-acquisisce-cpautomation': {
     title: 'Rolex acquisisce la società industriale CPAutomation SA',
-    description: 'Il gruppo Rolex acquisisce la società industriale CPAutomation SA di Villaz-Saint-Pierre nel Canton Friburgo, partner di lunga data con circa 120',
+    description: 'Il lead pubblico de La Liberté riferisce l\'acquisizione di CPAutomation SA da parte del gruppo orologiero di lusso Rolex.',
     keywords: 'frontalieri, ticino, svizzera, italia, rolex, acquisisce, società, industriale',
     ogTitle: 'Rolex acquisisce CPAutomation a Villaz-Saint-Pierre',
     ogDescription: 'Il gruppo orologiero Rolex ha rilevato la società industriale CPAutomation SA di Villaz-Saint-Pierre nel Canton Friburgo. L\'azienda, fondata nel 1999, conta circa 120 dipendenti nella Glâne.',
@@ -593,7 +593,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Rolex acquisisce la società industriale CPAutomation SA",
-      "description": "Il gruppo Rolex acquisisce la società industriale CPAutomation SA di Villaz-Saint-Pierre nel Canton Friburgo, partner di lunga data con circa 120",
+      "description": "Il lead pubblico de La Liberté riferisce l'acquisizione di CPAutomation SA da parte del gruppo orologiero di lusso Rolex.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -623,16 +623,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-friburgo-no-linea-diretta': {
     title: 'Friburgo: Consiglio di Stato rigetta linea ferroviaria diretta Friburgo-Bulle',
-    description: 'Friburgo non vuole una linea ferroviaria diretta per Bulle Il postulato è stato approvato nel maggio 2022: 87 voti contro 3 Il progetto è giudicato',
+    description: 'Il Consiglio di Stato del Canton Friburgo non vuole una linea ferroviaria diretta tra Friburgo e Bulle.',
     keywords: 'frontalieri, ticino, svizzera, italia, friburgo, consiglio, stato, rigetta',
     ogTitle: 'Friburgo rigetta linea diretta Friburgo-Bulle',
-    ogDescription: 'Friburgo non vuole una linea ferroviaria diretta per Bulle Il postulato è stato approvato nel maggio 2022: 87 voti contro 3 Il progetto è giudicato costoso',
+    ogDescription: 'Il Consiglio di Stato del Canton Friburgo non vuole una linea ferroviaria diretta tra Friburgo e Bulle.',
     canonicalPath: '/articoli-friburgo/friburgo-no-linea-diretta/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Friburgo: Consiglio di Stato rigetta linea ferroviaria diretta Friburgo-Bulle",
-      "description": "Friburgo non vuole una linea ferroviaria diretta per Bulle Il postulato è stato approvato nel maggio 2022: 87 voti contro 3 Il progetto è giudicato",
+      "description": "Il Consiglio di Stato del Canton Friburgo non vuole una linea ferroviaria diretta tra Friburgo e Bulle.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -662,16 +662,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-elezioni-friburgo-8-novembre': {
     title: 'Elezione Cantonale Friburgo: Unica lista per Consiglio di Stato l\'8 novembre',
-    description: 'Lista unica per il Consiglio di Stato 14 candidature, massimo 7 nomi Materiale nelle cassette entro giovedì Una busta per tre elezioni Data → 8',
+    description: 'Entro giovedì il materiale di voto per le elezioni cantonali dell\'8 novembre arriverà nelle cassette postali di chi vota nel Canton Friburgo.',
     keywords: 'frontalieri, ticino, svizzera, italia, elezione, cantonale, friburgo, unica',
     ogTitle: 'Elezioni Friburgo: Unica lista per Consiglio di Stato 8 novembre',
-    ogDescription: 'Lista unica per il Consiglio di Stato 14 candidature, massimo 7 nomi Materiale nelle cassette entro giovedì Una busta per tre elezioni Data → 8 novembre',
+    ogDescription: 'Entro giovedì il materiale di voto per le elezioni cantonali dell\'8 novembre arriverà nelle cassette postali di chi vota nel Canton Friburgo.',
     canonicalPath: '/articoli-friburgo/elezioni-friburgo-8-novembre/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Elezione Cantonale Friburgo: Unica lista per Consiglio di Stato l'8 novembre",
-      "description": "Lista unica per il Consiglio di Stato 14 candidature, massimo 7 nomi Materiale nelle cassette entro giovedì Una busta per tre elezioni Data → 8",
+      "description": "Entro giovedì il materiale di voto per le elezioni cantonali dell'8 novembre arriverà nelle cassette postali di chi vota nel Canton Friburgo.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -740,7 +740,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-elezione-consiglio-prefetture-lista-unica': {
     title: 'Elezione Consiglio di Stato e prefetture su lista unica',
-    description: 'Il materiale di voto è attualmente in distribuzione. Il nuovo sistema riguarda Consiglio di Stato e prefetture. Va spuntato il nome dei candidati',
+    description: 'Il materiale di voto è attualmente in distribuzione. Il nuovo sistema riguarda Consiglio di Stato e prefetture. Va spuntato il nome dei candidati.',
     keywords: 'frontalieri, ticino, svizzera, italia, elezione, consiglio, stato, prefetture',
     ogTitle: 'Elezione Consiglio di Stato e prefetture lista unica',
     ogDescription: 'Il materiale di voto è attualmente in distribuzione.',
@@ -749,7 +749,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Elezione Consiglio di Stato e prefetture su lista unica",
-      "description": "Il materiale di voto è attualmente in distribuzione. Il nuovo sistema riguarda Consiglio di Stato e prefetture. Va spuntato il nome dei candidati",
+      "description": "Il materiale di voto è attualmente in distribuzione. Il nuovo sistema riguarda Consiglio di Stato e prefetture. Va spuntato il nome dei candidati.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -779,16 +779,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-tpf-bus-elettrici-friburgo': {
     title: 'Friburgo prepara 24 nuovi bus elettrici per dicembre',
-    description: '24 nuovi bus elettrici per i TPF Investimento: 20 milioni di franchi Sei bus da 12 metri, 18 articolati da 18 In servizio dal cambio d\'orario',
+    description: 'Ventiquattro nuovi autobus elettrici si apprestano a circolare sulla rete dei Transports publics fribourgeois (TPF) nel Canton Friburgo.',
     keywords: 'frontalieri, ticino, svizzera, italia, friburgo, prepara, nuovi, elettrici',
     ogTitle: 'Friburgo: 24 bus elettrici TPF per dicembre',
-    ogDescription: '24 nuovi bus elettrici per i TPF Investimento: 20 milioni di franchi Sei bus da 12 metri, 18 articolati da 18 In servizio dal cambio d\'orario di dicembre',
+    ogDescription: 'Ventiquattro nuovi autobus elettrici si apprestano a circolare sulla rete dei Transports publics fribourgeois (TPF) nel Canton Friburgo.',
     canonicalPath: '/articoli-friburgo/tpf-bus-elettrici-friburgo/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Friburgo prepara 24 nuovi bus elettrici per dicembre",
-      "description": "24 nuovi bus elettrici per i TPF Investimento: 20 milioni di franchi Sei bus da 12 metri, 18 articolati da 18 In servizio dal cambio d'orario",
+      "description": "Ventiquattro nuovi autobus elettrici si apprestano a circolare sulla rete dei Transports publics fribourgeois (TPF) nel Canton Friburgo.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -857,16 +857,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-berra-2030-progetto-canton': {
     title: 'Cantone propone 3,54 milioni per stazione intermedia Berra 2030',
-    description: 'Il Cantone propone CHF 3,54 milioni per Berra 2030 I deputati voteranno nella sessione di novembre Il decreto prevede CHF 9,06 milioni per il Lac-Noir',
+    description: 'Il Cantone propone di sostenere con 3,54 milioni di franchi la creazione di una stazione intermedia sul télémixte, nell’ambito di Berra 2030.',
     keywords: 'frontalieri, ticino, svizzera, italia, cantone, propone, milioni, stazione',
     ogTitle: 'Cantone propone 3,54 milioni per Berra 2030',
-    ogDescription: 'Il Cantone propone CHF 3,54 milioni per Berra 2030 I deputati voteranno nella sessione di novembre Il decreto prevede CHF 9,06 milioni per il Lac-Noir Berra',
+    ogDescription: 'Il Cantone propone di sostenere con 3,54 milioni di franchi la creazione di una stazione intermedia sul télémixte, nell’ambito di Berra 2030.',
     canonicalPath: '/articoli-friburgo/berra-2030-progetto-canton/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Cantone propone 3,54 milioni per stazione intermedia Berra 2030",
-      "description": "Il Cantone propone CHF 3,54 milioni per Berra 2030 I deputati voteranno nella sessione di novembre Il decreto prevede CHF 9,06 milioni per il Lac-Noir",
+      "description": "Il Cantone propone di sostenere con 3,54 milioni di franchi la creazione di una stazione intermedia sul télémixte, nell’ambito di Berra 2030.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

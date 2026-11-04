@@ -391,7 +391,7 @@ describe('ensureSeoDescriptionMinimum', () => {
 describe('wiring', () => {
   it('the primary optimizer uses the source-backed minimum, not generic padding', () => {
     const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
-    const optimizer = sliceFn(src, 'function optimizeSeoMetadata(data) {');
+    const optimizer = sliceFn(src, 'function optimizeSeoMetadata(data,');
     expect(optimizer.includes('ensureSeoDescriptionMinimum(data);')).toBe(true);
     expect(optimizer.includes('Dati aggiornati 2026 per frontalieri in Ticino.')).toBe(false);
   });

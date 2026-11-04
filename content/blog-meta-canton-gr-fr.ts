@@ -4,7 +4,7 @@
  */
 const blogMetaCantonGrFr: Record<string, string> = {
     'blog.article.strada-calanca-chiusura-preventiva.title': 'Route de la Calanca : fermeture totale entre Molina et Arvigo',
-    'blog.article.strada-calanca-chiusura-preventiva.excerpt': 'Fermeture totale à partir de mercredi à 21 h',
+    'blog.article.strada-calanca-chiusura-preventiva.excerpt': 'Fermeture totale à partir de mercredi à 21 h.',
     'blog.article.strada-calanca-chiusura-preventiva.imageAlt': 'Route de la Calanca fermée en raison du mauvais temps entre Molina Nord et Arvigo.',
     'blog.article.benzina-grigioni-deviazione.title': 'Prix de l’essence dans les Grisons : quand vaut-il la peine de faire un détour',
     'blog.article.benzina-grigioni-deviazione.excerpt': 'Prix de l’essence à des niveaux records également dans les Grisons : le calculateur évalue le prix et la distance du détour vers une station moins chère.',
@@ -25,7 +25,7 @@ const blogMetaCantonGrFr: Record<string, string> = {
     'blog.article.parco-solare-nalps-tujetsch.excerpt': 'Le projet d’un parc solaire alpin à Nalps, dans la localité de Tujetsch, progresse, comme le rapporte un sujet de Telesguard sur Play RTR.',
     'blog.article.parco-solare-nalps-tujetsch.imageAlt': 'Paysage alpin de la région de Tujetsch dans le canton des Grisons',
     'blog.article.lido-grono-estate-2027.title': 'Lido Grono, ouverture confirmée pour l\'été 2027',
-    'blog.article.lido-grono-estate-2027.excerpt': 'Ouverture du Lido Grono confirmée pour l\'été 2027 Chantier de la nouvelle piscine communale encore en cours Coûts prévus : environ 5 millions Annonce du maire',
+    'blog.article.lido-grono-estate-2027.excerpt': 'Lido Grono ouvrira ses portes à l\'été 2027. La confirmation concerne la nouvelle piscine municipale et arrive alors que le chantier se poursuit.',
     'blog.article.lido-grono-estate-2027.imageAlt': 'Chantier de la nouvelle piscine communale de Grono avant l\'ouverture confirmée à l\'été 2027.',
     'blog.article.acqua-domleschg-feldis-scheid.title': 'Domleschg : camion-citerne pour l\'eau à Feldis et Scheid',
     'blog.article.acqua-domleschg-feldis-scheid.excerpt': 'Domleschg prévoit d\'acheminer de l\'eau potable à Feldis et Scheid.',
@@ -46,7 +46,7 @@ const blogMetaCantonGrFr: Record<string, string> = {
     'blog.article.cantiere-caraa-guera-interrogazione.excerpt': 'Chantier sur la Caraa de Guèra, entre Maron et Ai Tecc.',
     'blog.article.cantiere-caraa-guera-interrogazione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.val-calanca-strada-chiusa.title': 'Val Calanca : route fermée 2 semaines, demande soutien face à l\'isolement',
-    'blog.article.val-calanca-strada-chiusa.excerpt': 'Val Calanca : route fermée pendant deux semaines après des glissements de terrain Censi demande des instruments permanents au gouvernement rhétique Fonds envisagé dès le troisième jour',
+    'blog.article.val-calanca-strada-chiusa.excerpt': 'La route du Val Calanca est restée fermée pendant deux semaines après plusieurs glissements de terrain.',
     'blog.article.val-calanca-strada-chiusa.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.brigels-sette-milioni-impianti.title': 'Brigels approuve 7 millions de CHF pour assainir les installations',
     'blog.article.brigels-sette-milioni-impianti.excerpt': 'Brigels approuve 7 millions de CHF pour l\'assainissement des remontées mécaniques.',
@@ -61,7 +61,7 @@ const blogMetaCantonGrFr: Record<string, string> = {
     'blog.article.innhub-la-punt-rinvio-apertura.excerpt': 'Ouverture à l’été 2029, six mois plus tard que prévu initialement.',
     'blog.article.innhub-la-punt-rinvio-apertura.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.vallo-protezione-sorte-lostallo.title': 'Lostallo, le mur protecteur de Sorte est en cours',
-    'blog.article.vallo-protezione-sorte-lostallo.excerpt': 'Le mur de protection débutera dans les prochains jours Crédit municipal : 6,2 millions de francs Principaux travaux prévus pour l’automne 2027 L’inondation du 21 juin',
+    'blog.article.vallo-protezione-sorte-lostallo.excerpt': 'Dans les prochains jours, les travaux débuteront à Sorte sur le barrage de protection situé sur la rive droite du hameau de Lostallo.',
     'blog.article.vallo-protezione-sorte-lostallo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 

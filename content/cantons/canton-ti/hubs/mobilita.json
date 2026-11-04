@@ -4,22 +4,22 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T11:09:08.199Z",
-  "contentHash": "71a28b36ae2c76bc06507fc6784aae21442e2ee9082a9cb0f5b8636c4f90e456",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "6f717a456aacc0bebb280515ee34837f23071ff7291c517934262868a1ae64ae",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-01T23:59:59.000Z",
+      "updatedAt": "2026-11-02T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-03T03:07:39.455Z",
+      "updatedAt": "2026-11-03T20:00:07.431Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Biegno-Indemini, settimana conclusa: 1 novembre 2026"
+          "note": "Biegno-Indemini, settimana conclusa: 2 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "26",
+          "value": "23",
           "note": "segnalazioni aggiornate: 3 novembre 2026"
         }
       ],
@@ -50,7 +50,7 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 26 ottobre 2026 – 1 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 27 ottobre 2026 – 2 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -71,39 +71,39 @@
               "url": "/traffico-dogane/campione-d-italia-bissone/oggi/"
             },
             {
-              "label": "Chiasso Centro (Ponte Chiasso)",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/chiasso-centro/oggi/"
-            },
-            {
-              "label": "Clivio-Ligornetto",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/clivio-ligornetto/oggi/"
-            },
-            {
               "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/cremenaga-ponte-cremenaga/oggi/"
             },
             {
-              "label": "Crociale dei Mulini",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/crociale-dei-mulini/oggi/"
-            },
-            {
               "label": "Drezzo-Pedrinate",
               "value": "0 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/drezzo-pedrinate/oggi/"
+            },
+            {
+              "label": "Dumenza-Cassinone",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/dumenza-cassinone/oggi/"
+            },
+            {
+              "label": "Luino-Fornasette",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/luino-fornasette/oggi/"
+            },
+            {
+              "label": "Piaggio Valmara (Cannobio-Brissago)",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/piaggio-valmara/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-01T23:59:59.000Z"
+          "updatedAt": "2026-11-02T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -159,7 +159,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -197,7 +197,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-03T11:09:08.199Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "TI",
@@ -304,7 +304,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Biegno-Indemini, week ending 1 November 2026"
+          "note": "Biegno-Indemini, week ending 2 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -313,7 +313,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "26",
+          "value": "23",
           "note": "reports as of 3 November 2026"
         }
       ],
@@ -321,7 +321,7 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 26 October 2026 to 1 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 27 October 2026 to 2 November 2026, fastest first.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -342,39 +342,39 @@
               "url": "/en/border-wait/campione-d-italia-bissone/today/"
             },
             {
-              "label": "Chiasso Centro (Ponte Chiasso)",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/chiasso-centro/today/"
-            },
-            {
-              "label": "Clivio-Ligornetto",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/clivio-ligornetto/today/"
-            },
-            {
               "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 min",
               "detail": "48 readings",
               "url": "/en/border-wait/cremenaga-ponte-cremenaga/today/"
             },
             {
-              "label": "Crociale dei Mulini",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/crociale-dei-mulini/today/"
-            },
-            {
               "label": "Drezzo-Pedrinate",
               "value": "0 min",
               "detail": "48 readings",
               "url": "/en/border-wait/drezzo-pedrinate/today/"
+            },
+            {
+              "label": "Dumenza-Cassinone",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/dumenza-cassinone/today/"
+            },
+            {
+              "label": "Luino-Fornasette",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/luino-fornasette/today/"
+            },
+            {
+              "label": "Piaggio Valmara (Cannobio-Brissago)",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/piaggio-valmara/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-01T23:59:59.000Z"
+          "updatedAt": "2026-11-02T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -430,7 +430,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -468,7 +468,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -563,7 +563,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-03T11:09:08.199Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "TI",
@@ -574,7 +574,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Biegno-Indemini, Woche bis 1. November 2026"
+          "note": "Biegno-Indemini, Woche bis 2. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -583,7 +583,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "26",
+          "value": "23",
           "note": "Meldungen vom 3. November 2026"
         }
       ],
@@ -591,7 +591,7 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 26. Oktober 2026 bis 1. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 27. Oktober 2026 bis 2. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -612,39 +612,39 @@
               "url": "/de/wartezeit-grenze/campione-d-italia-bissone/heute/"
             },
             {
-              "label": "Chiasso Centro (Ponte Chiasso)",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/chiasso-centro/heute/"
-            },
-            {
-              "label": "Clivio-Ligornetto",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/clivio-ligornetto/heute/"
-            },
-            {
               "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/cremenaga-ponte-cremenaga/heute/"
             },
             {
-              "label": "Crociale dei Mulini",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/crociale-dei-mulini/heute/"
-            },
-            {
               "label": "Drezzo-Pedrinate",
               "value": "0 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/drezzo-pedrinate/heute/"
+            },
+            {
+              "label": "Dumenza-Cassinone",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/dumenza-cassinone/heute/"
+            },
+            {
+              "label": "Luino-Fornasette",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/luino-fornasette/heute/"
+            },
+            {
+              "label": "Piaggio Valmara (Cannobio-Brissago)",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/piaggio-valmara/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-01T23:59:59.000Z"
+          "updatedAt": "2026-11-02T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -700,7 +700,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -738,7 +738,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -833,7 +833,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-03T11:09:08.199Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "TI",
@@ -844,7 +844,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Biegno-Indemini, semaine jusqu’au 1er novembre 2026"
+          "note": "Biegno-Indemini, semaine jusqu’au 2 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -853,7 +853,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "26",
+          "value": "23",
           "note": "signalements au 3 novembre 2026"
         }
       ],
@@ -861,7 +861,7 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 26 octobre 2026 au 1er novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 27 octobre 2026 au 2 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -882,39 +882,39 @@
               "url": "/fr/temps-attente-douane/campione-d-italia-bissone/aujourd-hui/"
             },
             {
-              "label": "Chiasso Centro (Ponte Chiasso)",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/chiasso-centro/aujourd-hui/"
-            },
-            {
-              "label": "Clivio-Ligornetto",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/clivio-ligornetto/aujourd-hui/"
-            },
-            {
               "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/cremenaga-ponte-cremenaga/aujourd-hui/"
             },
             {
-              "label": "Crociale dei Mulini",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/crociale-dei-mulini/aujourd-hui/"
-            },
-            {
               "label": "Drezzo-Pedrinate",
               "value": "0 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/drezzo-pedrinate/aujourd-hui/"
+            },
+            {
+              "label": "Dumenza-Cassinone",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/dumenza-cassinone/aujourd-hui/"
+            },
+            {
+              "label": "Luino-Fornasette",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/luino-fornasette/aujourd-hui/"
+            },
+            {
+              "label": "Piaggio Valmara (Cannobio-Brissago)",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/piaggio-valmara/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-01T23:59:59.000Z"
+          "updatedAt": "2026-11-02T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -970,7 +970,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1008,7 +1008,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -1104,7 +1104,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-03T11:09:08.199Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

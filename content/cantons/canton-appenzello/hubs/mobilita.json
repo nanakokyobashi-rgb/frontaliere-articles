@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T10:06:57.473Z",
-  "contentHash": "084747f9bbf2980baaf85eb208713a26ef97f8ec8b214391a2c1e662ab34f0ba",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "d5760b1b53ae94a56ce254558a58353423b52f3a1dbc200f20e76899439d63e3",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-03T03:07:39.455Z",
+      "updatedAt": "2026-11-03T20:00:07.431Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -40,7 +40,7 @@
             {
               "label": "Haslen - Selbstunfall mit Personenwagen",
               "value": "Traffico",
-              "date": "2026-11-03T03:07:39.455Z",
+              "date": "2026-11-03T20:00:07.431Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
             },
             {
@@ -51,13 +51,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
+              "date": "2026-11-03",
+              "url": "https://appenzellerbahnen.ch/de/unternehmen/medien/detail/bauauftrag-fuer-die-modernisierung-der-linie-rheineck-walzenhausen-vergeben.html"
+            },
             {
               "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
               "date": "2026-10-21",
@@ -82,14 +87,9 @@
               "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
               "date": "2026-09-29",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
-            },
-            {
-              "label": "Instandsetzung der Oberen Bruderbachbrücke",
-              "date": "2026-09-14",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -140,7 +140,7 @@
             {
               "label": "Haslen - Selbstunfall mit Personenwagen",
               "value": "Traffic",
-              "date": "2026-11-03T03:07:39.455Z",
+              "date": "2026-11-03T20:00:07.431Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
             },
             {
@@ -151,13 +151,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
+              "date": "2026-11-03",
+              "url": "https://appenzellerbahnen.ch/de/unternehmen/medien/detail/bauauftrag-fuer-die-modernisierung-der-linie-rheineck-walzenhausen-vergeben.html"
+            },
             {
               "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
               "date": "2026-10-21",
@@ -182,14 +187,9 @@
               "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
               "date": "2026-09-29",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
-            },
-            {
-              "label": "Instandsetzung der Oberen Bruderbachbrücke",
-              "date": "2026-09-14",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -217,7 +217,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -240,7 +240,7 @@
             {
               "label": "Haslen - Selbstunfall mit Personenwagen",
               "value": "Verkehr",
-              "date": "2026-11-03T03:07:39.455Z",
+              "date": "2026-11-03T20:00:07.431Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
             },
             {
@@ -251,13 +251,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
+              "date": "2026-11-03",
+              "url": "https://appenzellerbahnen.ch/de/unternehmen/medien/detail/bauauftrag-fuer-die-modernisierung-der-linie-rheineck-walzenhausen-vergeben.html"
+            },
             {
               "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
               "date": "2026-10-21",
@@ -282,14 +287,9 @@
               "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
               "date": "2026-09-29",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
-            },
-            {
-              "label": "Instandsetzung der Oberen Bruderbachbrücke",
-              "date": "2026-09-14",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -317,7 +317,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -340,7 +340,7 @@
             {
               "label": "Haslen - Selbstunfall mit Personenwagen",
               "value": "Trafic",
-              "date": "2026-11-03T03:07:39.455Z",
+              "date": "2026-11-03T20:00:07.431Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
             },
             {
@@ -351,13 +351,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-03T03:07:39.455Z"
+          "updatedAt": "2026-11-03T20:00:07.431Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
+              "date": "2026-11-03",
+              "url": "https://appenzellerbahnen.ch/de/unternehmen/medien/detail/bauauftrag-fuer-die-modernisierung-der-linie-rheineck-walzenhausen-vergeben.html"
+            },
             {
               "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
               "date": "2026-10-21",
@@ -382,14 +387,9 @@
               "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
               "date": "2026-09-29",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
-            },
-            {
-              "label": "Instandsetzung der Oberen Bruderbachbrücke",
-              "date": "2026-09-14",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

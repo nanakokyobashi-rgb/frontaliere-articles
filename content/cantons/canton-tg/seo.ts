@@ -12,7 +12,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'A Frauenfeld il Baugesuch per Juchstrasse 22, 22a e 22b è consultabile al Bankplatz 3 dal 7 al 26 ottobre 2026. Opposizioni scritte motivate allo Stadtrat.',
     keywords: 'frontalieri, ticino, svizzera, italia, domanda, edilizia, frauenfeld, juchstrasse',
     ogTitle: 'Domanda edilizia a Frauenfeld: Juchstrasse 22-22b',
-    ogDescription: 'Il progetto per Juchstrasse 22, 22a e 22b prevede l\'allestimento del primo e secondo piano, il cambio d\'uso di garage e locali commerciali e nuove strutture per biciclette e carrelli. Atti al Bankplatz 3.',
+    ogDescription: 'Il progetto per Juchstrasse 22, 22a e 22b prevede l\'allestimento del primo e secondo piano, il cambio d\'uso di garage e locali commerciali e nuove strutture per biciclette e carrelli.',
     canonicalPath: '/articoli-turgovia/baugesuch-juchstrasse-frauenfeld/',
     structuredData: {
       "@context": "https://schema.org",
@@ -389,16 +389,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-tredicesima-rendita-avs-2026': {
     title: '13ª rendita AVS pagata con la pensione di dicembre 2026',
-    description: 'La 13ª rendita AVS arriva con la rendita di dicembre 2026 Non serve presentare domande o svolgere pratiche Spetta a chi riceve una rendita AVS di vecchiaia',
+    description: 'Hanno diritto alla 13ª rendita tutte le persone che nel mese di dicembre ricevono una rendita AVS di vecchiaia.',
     keywords: 'frontalieri, ticino, svizzera, italia, rendita, pagata, pensione, dicembre',
     ogTitle: '13ª rendita AVS: pagamento con la rendita di dicembre',
-    ogDescription: 'La 13ª rendita AVS arriva con la rendita di dicembre 2026 Non serve presentare domande o svolgere pratiche Spetta a chi riceve una rendita AVS di vecchiaia',
+    ogDescription: 'La 13ª rendita AVS sarà pagata insieme alla rendita di dicembre 2026.',
     canonicalPath: '/articoli-turgovia/tredicesima-rendita-avs-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "13ª rendita AVS pagata con la pensione di dicembre 2026",
-      "description": "La 13ª rendita AVS arriva con la rendita di dicembre 2026 Non serve presentare domande o svolgere pratiche Spetta a chi riceve una rendita AVS di vecchiaia",
+      "description": "Hanno diritto alla 13ª rendita tutte le persone che nel mese di dicembre ricevono una rendita AVS di vecchiaia.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -470,7 +470,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'A Felben-Wellhausen, dal 19 ottobre 2026 a metà luglio 2027, la Hauptstrasse sarà risanata: Römerstrasse chiusa a tratti, Römerhof spostata o soppressa.',
     keywords: 'frontalieri, ticino, svizzera, italia, strada, principale, felben-wellhausen, risanamento',
     ogTitle: 'Risanamento della strada principale a Felben-Wellhausen',
-    ogDescription: 'Il progetto del Canton Turgovia unisce risanamento e sicurezza: piste ciclabili su entrambi i lati, innesto Römerstrasse ottimizzato, fermata Römerhof senza barriere e attraversamento pedonale. Durante i lavori, l\'uscita Römerstrasse sarà chiusa',
+    ogDescription: 'Il progetto del Canton Turgovia unisce risanamento e sicurezza: piste ciclabili su entrambi i lati, innesto Römerstrasse ottimizzato, fermata Römerhof senza barriere e attraversamento pedonale. Durante i lavori, l\'uscita Römerstrasse sarà chiusa.',
     canonicalPath: '/articoli-turgovia/felben-wellhausen-cantiere/',
     structuredData: {
       "@context": "https://schema.org",
@@ -548,7 +548,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Scopri i servizi di ricerca personale tramite RAV Amriswil, Frauenfeld e Kreuzlingen e arbeit.swiss, permessi stranieri e indennità lavoro ridotto in Turgovia.',
     keywords: 'frontalieri, ticino, svizzera, italia, turgovia, servizi, ricerca, personale',
     ogTitle: 'Turgovia: servizi RAV e supporto datori di lavoro',
-    ogDescription: 'Il Canton Turgovia offre supporto ai datori di lavoro tramite le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen, pubblicazioni gratuite su arbeit.swiss e consulenza su permessi e tutela lari',
+    ogDescription: 'La pagina dedicata al servizio spiega che queste strutture sostengono la ricerca di lavoratrici e lavoratori adatti.',
     canonicalPath: '/articoli-turgovia/turgovia-servizi-datori-lavoro/',
     structuredData: {
       "@context": "https://schema.org",
@@ -587,7 +587,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il Governo ha approvato la PBV revisionata RPG2 riguarda le costruzioni fuori dalle zone edificabili L\'obiettivo è limitare la crescita a un massimo',
     keywords: 'frontalieri, ticino, svizzera, italia, turgovia, approvata, revisionata, rpg2',
     ogTitle: 'Turgovia: approvata PBV revisionata per RPG2',
-    ogDescription: 'Il Governo ha approvato la PBV revisionata RPG2 riguarda le costruzioni fuori dalle zone edificabili L\'obiettivo è limitare la crescita a un massimo del 2%',
+    ogDescription: 'La PBV revisionata raccoglie in un nuovo capitolo le disposizioni necessarie per RPG2 insieme alle norme già esistenti sulle costruzioni e sugli impianti fuori dalla zona edificabile.',
     canonicalPath: '/articoli-turgovia/pbv-rpg2-turgovia-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -662,7 +662,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-sedi-rav-lavoratori-tg': {
     title: 'Sedi RAV e servizi per datori di lavoro in Canton Turgovia',
-    description: 'Informazioni sulle sedi RAV (Amriswil, Frauenfeld, Kreuzlingen), pubblicazione gratuita vacancy su arbeit.swiss e consulenza per datori di lavoro',
+    description: 'Informazioni sulle sedi RAV (Amriswil, Frauenfeld, Kreuzlingen), pubblicazione gratuita vacancy su arbeit.swiss e consulenza per datori di lavoro.',
     keywords: 'frontalieri, ticino, svizzera, italia, sedi, servizi, datori, lavoro',
     ogTitle: 'Sedi RAV e servizi datori di lavoro Turgovia',
     ogDescription: 'Scopri le sedi RAV ad Amriswil, Frauenfeld e Kreuzlingen e come pubblicare offerte di lavoro gratuitamente su arbeit.swiss per le imprese del Canton Turgovia.',
@@ -671,7 +671,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Sedi RAV e servizi per datori di lavoro in Canton Turgovia",
-      "description": "Informazioni sulle sedi RAV (Amriswil, Frauenfeld, Kreuzlingen), pubblicazione gratuita vacancy su arbeit.swiss e consulenza per datori di lavoro",
+      "description": "Informazioni sulle sedi RAV (Amriswil, Frauenfeld, Kreuzlingen), pubblicazione gratuita vacancy su arbeit.swiss e consulenza per datori di lavoro.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -701,7 +701,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-imprenditori-cantone-turgovia-sostegno': {
     title: 'Imprenditori nel Canton Turgovia: condizioni quadro attrattive',
-    description: 'Informazioni sul supporto per imprenditrici e imprenditori nel Canton Turgovia: condizioni quadro attrattive, permessi, immobili e collaborazione',
+    description: 'Informazioni sul supporto per imprenditrici e imprenditori nel Canton Turgovia: condizioni quadro attrattive, permessi, immobili e collaborazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, imprenditori, canton, turgovia, condizioni',
     ogTitle: 'Imprenditori Canton Turgovia: condizioni quadro attrattive',
     ogDescription: 'Il Canton Turgovia supporta imprenditrici e imprenditori con accompagnamento, informazioni e consulenza per un insediamento attrattivo, coprendo immobili e permessi.',
@@ -710,7 +710,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Imprenditori nel Canton Turgovia: condizioni quadro attrattive",
-      "description": "Informazioni sul supporto per imprenditrici e imprenditori nel Canton Turgovia: condizioni quadro attrattive, permessi, immobili e collaborazione",
+      "description": "Informazioni sul supporto per imprenditrici e imprenditori nel Canton Turgovia: condizioni quadro attrattive, permessi, immobili e collaborazione.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -779,7 +779,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-messaggio-modifica-legge-strade': {
     title: 'Governo Turgovia approva messaggio per modifica legge strade e vie',
-    description: 'Il Governo del Canton Turgovia ha approvato il messaggio per modificare la legge su strade e vie, introducendo un\'eccezione per i manifesti',
+    description: 'Il Governo del Canton Turgovia ha approvato il messaggio per modificare la legge su strade e vie, introducendo un\'eccezione per i manifesti.',
     keywords: 'frontalieri, ticino, svizzera, italia, governo, turgovia, approva, messaggio',
     ogTitle: 'Governo Turgovia approva modifica legge strade',
     ogDescription: 'Il Governo del Canton Turgovia ha approvato il messaggio al Gran Consiglio per uniformare la disciplina dei manifesti di elezioni e votazioni, garantendo il rispetto della sicurezza stradale.',
@@ -788,7 +788,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Governo Turgovia approva messaggio per modifica legge strade e vie",
-      "description": "Il Governo del Canton Turgovia ha approvato il messaggio per modificare la legge su strade e vie, introducendo un'eccezione per i manifesti",
+      "description": "Il Governo del Canton Turgovia ha approvato il messaggio per modificare la legge su strade e vie, introducendo un'eccezione per i manifesti.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -857,7 +857,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-ufficio-imposte-frauenfeld-orari': {
     title: 'Ufficio imposte Frauenfeld modifica orari dal 2 novembre 2026',
-    description: 'L\'Ufficio imposte della città di Frauenfeld riduce gli orari lunedì e mercoledì pomeriggio a causa dell\'elevato volume di lavoro. Nuovi orari',
+    description: 'L\'Ufficio imposte della città di Frauenfeld riduce gli orari lunedì e mercoledì pomeriggio a causa dell\'elevato volume di lavoro. Nuovi orari.',
     keywords: 'frontalieri, ticino, svizzera, italia, ufficio, imposte, frauenfeld, modifica',
     ogTitle: 'Orari Ufficio Imposte Frauenfeld dal 2/11/2026',
     ogDescription: 'L\'Ufficio imposte della città di Frauenfeld riduce gli orari lunedì e mercoledì pomeriggio a causa dell\'elevato volume di lavoro. Controlla il nuovo calendario dal 2 novembre 2026.',
@@ -866,7 +866,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Ufficio imposte Frauenfeld modifica orari dal 2 novembre 2026",
-      "description": "L'Ufficio imposte della città di Frauenfeld riduce gli orari lunedì e mercoledì pomeriggio a causa dell'elevato volume di lavoro. Nuovi orari",
+      "description": "L'Ufficio imposte della città di Frauenfeld riduce gli orari lunedì e mercoledì pomeriggio a causa dell'elevato volume di lavoro. Nuovi orari.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -968,6 +968,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/turgovia-piano-risparmio-60-milioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-economia-imprese-cantone-turgovia': {
+    title: 'Supporto imprese Canton Turgovia: condizioni quadro e insediamento',
+    description: 'Informazioni su come il Canton Turgovia supporta imprese esistenti e nuovi insediamenti attraverso accompagnamento, informazione e consulenza.',
+    keywords: 'frontalieri, ticino, svizzera, italia, supporto, imprese, canton, turgovia',
+    ogTitle: 'Supporto imprese Canton Turgovia: condizioni e insediamento',
+    ogDescription: 'Scopri come il Canton Turgovia supporta le imprese, offrendo accompagnamento, informazione e consulenza sia a chi è già presente che a chi vuole insediarsi nel Cantone.',
+    canonicalPath: '/articoli-turgovia/economia-imprese-cantone-turgovia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Supporto imprese Canton Turgovia: condizioni quadro e insediamento",
+      "description": "Informazioni su come il Canton Turgovia supporta imprese esistenti e nuovi insediamenti attraverso accompagnamento, informazione e consulenza.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-economia-imprese-cantone-turgovia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-04T04:02:52+00:00",
+      "dateModified": "2026-11-04T04:02:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/economia-imprese-cantone-turgovia/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-lucerna-salute-mentale-banchi': {
     title: 'Lucerna: giornata sulla salute mentale il 10 ottobre',
-    description: '10 ottobre 2026: giornata cantonale a Lucerna',
+    description: '10 ottobre 2026: giornata cantonale a Lucerna.',
     keywords: 'frontalieri, ticino, svizzera, italia, lucerna, giornata, sulla, salute',
     ogTitle: 'Salute mentale: evento gratuito a Lucerna il 10 ottobre',
-    ogDescription: '10 ottobre 2026: giornata cantonale a Lucerna',
+    ogDescription: '10 ottobre 2026: giornata cantonale a Lucerna.',
     canonicalPath: '/articoli-lucerna/lucerna-salute-mentale-banchi/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Lucerna: giornata sulla salute mentale il 10 ottobre",
-      "description": "10 ottobre 2026: giornata cantonale a Lucerna",
+      "description": "10 ottobre 2026: giornata cantonale a Lucerna.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -90,7 +90,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Kriens torna in deficit dopo surplus milionari: cosa indica il titolo e perché non è ancora possibile stimare effetti su imposte, budget e servizi locali.',
     keywords: 'frontalieri, ticino, svizzera, italia, kriens, torna, rosso, dopo',
     ogTitle: 'Kriens torna in rosso dopo surplus milionari',
-    ogDescription: 'Il caso di Kriens torna in rosso dopo precedenti surplus milionari. Il titolo segnala il cambio di segno, ma senza cifra, periodo o causa non consente ancora di calcolare effetti su imposte, spese e bilanci familiari, né di stabilire se esista già',
+    ogDescription: 'Il caso di Kriens torna in rosso dopo precedenti surplus milionari. Il titolo segnala il cambio di segno, ma senza cifra, periodo o causa non consente ancora di calcolare effetti su imposte, spese e bilanci familiari, né di stabilire se esista già.',
     canonicalPath: '/articoli-lucerna/kriens-torna-in-deficit/',
     structuredData: {
       "@context": "https://schema.org",
@@ -126,7 +126,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-progetto-latte-climatico': {
     title: 'Progetto latte: Nestlé ed Emmi puntano all\'estensione',
-    description: 'Il progetto svizzero di Nestlé, Emmi e partner riduce mangimi ed emissioni per kg di latte. A fine 2025 coinvolgeva 219 aziende. Dati aggiornati 2026',
+    description: 'Il progetto svizzero di Nestlé, Emmi e partner riduce mangimi ed emissioni per kg di latte. A fine 2025 coinvolgeva 219 aziende. Dati aggiornati 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, progetto, latte, nestlé, emmi',
     ogTitle: 'Progetto latte: Nestlé ed Emmi puntano all\'estensione',
     ogDescription: 'Il bilancio dopo quattro anni mostra -23% nei mangimi utilizzabili dall\'uomo, -15% nel fabbisogno di superficie e -8% nelle emissioni per kg di latte. Il calcolatore climatico è aperto a tutti i produttori da luglio.',
@@ -135,7 +135,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Progetto latte: Nestlé ed Emmi puntano all'estensione",
-      "description": "Il progetto svizzero di Nestlé, Emmi e partner riduce mangimi ed emissioni per kg di latte. A fine 2025 coinvolgeva 219 aziende. Dati aggiornati 2026",
+      "description": "Il progetto svizzero di Nestlé, Emmi e partner riduce mangimi ed emissioni per kg di latte. A fine 2025 coinvolgeva 219 aziende. Dati aggiornati 2026.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -165,16 +165,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-riduzione-premi-padre-divorziato-lucerna': {
     title: 'Riduzione premi negata a padre divorziato a Lucerna',
-    description: 'Il Tribunale federale conferma il diniego della riduzione premi a un padre divorziato lucernese: la deduzione forfettaria di 9.000 CHF/figlio è esclusa se già',
+    description: 'Il Tribunale federale conferma il diniego della riduzione premi a un padre divorziato lucernese: la deduzione forfettaria di 9.000 CHF/figlio è esclusa se già.',
     keywords: 'frontalieri, ticino, svizzera, italia, riduzione, premi, negata, padre',
     ogTitle: 'Niente riduzione premi per padre divorziato a Lucerna',
-    ogDescription: 'Il Tribunale federale respinge il ricorso di un padre divorziato lucernese: la deduzione forfettaria di 9.000 CHF per figlio per la riduzione dei premi non spetta se i contributi di mantenimento sono già stati detratti dal reddito. La custodia',
+    ogDescription: 'Il Tribunale federale respinge il ricorso di un padre divorziato lucernese: la deduzione forfettaria di 9.000 CHF per figlio per la riduzione dei premi non spetta se i contributi di mantenimento sono già stati detratti dal reddito. La custodia.',
     canonicalPath: '/articoli-lucerna/riduzione-premi-padre-divorziato-lucerna/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Riduzione premi negata a padre divorziato a Lucerna",
-      "description": "Il Tribunale federale conferma il diniego della riduzione premi a un padre divorziato lucernese: la deduzione forfettaria di 9.000 CHF/figlio è esclusa se già",
+      "description": "Il Tribunale federale conferma il diniego della riduzione premi a un padre divorziato lucernese: la deduzione forfettaria di 9.000 CHF/figlio è esclusa se già.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -204,7 +204,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-juso-lucerna-humbel-governo': {
     title: 'Juso Lucerna: Valentin Humbel candidato al governo',
-    description: 'Valentin Humbel è il candidato Juso al governo lucernese. La nomina è avvenuta all\'assemblea di venerdì sera. Casa, salari, istruzione e mobilità sono i temi',
+    description: 'Valentin Humbel è il candidato Juso al governo lucernese. La nomina è avvenuta all\'assemblea di venerdì sera. Casa, salari, istruzione e mobilità sono i temi.',
     keywords: 'frontalieri, ticino, svizzera, italia, juso, lucerna, valentin, humbel',
     ogTitle: 'Valentin Humbel candidato Juso al governo lucernese',
     ogDescription: 'Valentin Humbel è il candidato Juso al governo lucernese.',
@@ -213,7 +213,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Juso Lucerna: Valentin Humbel candidato al governo",
-      "description": "Valentin Humbel è il candidato Juso al governo lucernese. La nomina è avvenuta all'assemblea di venerdì sera. Casa, salari, istruzione e mobilità sono i temi",
+      "description": "Valentin Humbel è il candidato Juso al governo lucernese. La nomina è avvenuta all'assemblea di venerdì sera. Casa, salari, istruzione e mobilità sono i temi.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -243,16 +243,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-prioswiss-ricorso-luks': {
     title: 'Prio Swiss ricorre al Tribunale per mandato esofago Luks',
-    description: 'Prio Swiss ha presentato un ricorso al Tribunale amministrativo federale contro il mandato per le operazioni all’esofago affidato al Luzerner Kantonsspital',
+    description: 'Prio Swiss ha presentato un ricorso al Tribunale amministrativo federale contro il mandato per le operazioni all’esofago affidato al Luzerner Kantonsspital.',
     keywords: 'frontalieri, ticino, svizzera, italia, prio, swiss, ricorre, tribunale',
     ogTitle: 'Prio Swiss ricorre al Tribunale per mandato esofago al Luks',
-    ogDescription: 'L’associazione degli assicuratori malattia svizzeri, Prio Swiss, ha chiesto al Tribunale amministrativo federale di annullare il mandato di prestazioni per le operazioni all’esofago attribuito al Luzerner Kantonsspital. L’organo HSM aveva concesso',
+    ogDescription: 'L’associazione degli assicuratori malattia svizzeri, Prio Swiss, ha chiesto al Tribunale amministrativo federale di annullare il mandato di prestazioni per le operazioni all’esofago attribuito al Luzerner Kantonsspital. L’organo HSM aveva concesso.',
     canonicalPath: '/articoli-lucerna/prioswiss-ricorso-luks/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Prio Swiss ricorre al Tribunale per mandato esofago Luks",
-      "description": "Prio Swiss ha presentato un ricorso al Tribunale amministrativo federale contro il mandato per le operazioni all’esofago affidato al Luzerner Kantonsspital",
+      "description": "Prio Swiss ha presentato un ricorso al Tribunale amministrativo federale contro il mandato per le operazioni all’esofago affidato al Luzerner Kantonsspital.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -711,16 +711,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-einwohnerrat-budget-bahnhof-ost': {
     title: 'Einwohnerrat decide budget 2027 e credito Bahnhof Ost',
-    description: 'Il 17 novembre 2026 si riunisce l\'Einwohnerrat di Ebikon Il budget 2027 prevede un avanzo di CHF 2,14 milioni Il moltiplicatore resta a 2,05 unità',
+    description: 'Al centro ci sono il piano delle attività e finanziario AFP 2027–2030 e il budget 2027.',
     keywords: 'frontalieri, ticino, svizzera, italia, einwohnerrat, decide, budget, credito',
     ogTitle: 'Einwohnerrat decide budget 2027 e credito Bahnhof Ost',
-    ogDescription: 'Il 17 novembre 2026 si riunisce l\'Einwohnerrat di Ebikon Il budget 2027 prevede un avanzo di CHF 2,14 milioni Il moltiplicatore resta a 2,05 unità Bahnhof Ost',
+    ogDescription: 'L\'incontro inizierà alle 14 nell\'Aula Wydenhof e prevede sei dossier. Al centro ci sono il piano delle attività e finanziario AFP 2027–2030 e il budget 2027.',
     canonicalPath: '/articoli-lucerna/einwohnerrat-budget-bahnhof-ost/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Einwohnerrat decide budget 2027 e credito Bahnhof Ost",
-      "description": "Il 17 novembre 2026 si riunisce l'Einwohnerrat di Ebikon Il budget 2027 prevede un avanzo di CHF 2,14 milioni Il moltiplicatore resta a 2,05 unità",
+      "description": "Al centro ci sono il piano delle attività e finanziario AFP 2027–2030 e il budget 2027.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -789,7 +789,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-tunnel-sonnenberg-chiusura-notte': {
     title: 'Tunnel Sonnenberg chiuso per ispezione strutturale',
-    description: 'Il tunnel Sonnenberg di Lucerna sarà chiuso in entrambe le direzioni tra il 4 e il 5 novembre 2026 per ispezione strutturale del pozzo',
+    description: 'La chiusura è legata all\'ispezione strutturale del pozzo di ventilazione, svolta dall\'Ufficio federale delle strade ASTRA.',
     keywords: 'frontalieri, ticino, svizzera, italia, tunnel, sonnenberg, chiuso, ispezione',
     ogTitle: 'Tunnel Sonnenberg chiuso notte 4-5 novembre 2026',
     ogDescription: 'Informazioni sulla chiusura completa del tunnel Sonnenberg in entrambe le direzioni tra il 4 e il 5 novembre 2026 per ispezione strutturale del pozzo di ventilazione da ASTRA.',
@@ -798,7 +798,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Tunnel Sonnenberg chiuso per ispezione strutturale",
-      "description": "Il tunnel Sonnenberg di Lucerna sarà chiuso in entrambe le direzioni tra il 4 e il 5 novembre 2026 per ispezione strutturale del pozzo",
+      "description": "La chiusura è legata all'ispezione strutturale del pozzo di ventilazione, svolta dall'Ufficio federale delle strade ASTRA.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

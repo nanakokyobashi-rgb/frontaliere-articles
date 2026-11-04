@@ -93,10 +93,10 @@ const articleWith = (extra = {}) => ({
   id: 'demo-articolo',
   imageAlt: { it: 'Alt IT', en: 'Alt EN', de: 'Alt DE', fr: 'Alt FR' },
   content: {
-    it: { title: 'Titolo IT', excerpt: 'Estratto IT', ...(extra.it || {}) },
-    en: { title: 'Title EN', excerpt: 'Excerpt EN', ...(extra.en || {}) },
-    de: { title: 'Titel DE', excerpt: 'Auszug DE', ...(extra.de || {}) },
-    fr: { title: 'Titre FR', excerpt: 'Extrait FR', ...(extra.fr || {}) },
+    it: { title: 'Titolo IT', excerpt: 'Questo è un estratto completo.', ...(extra.it || {}) },
+    en: { title: 'Title EN', excerpt: 'This is a complete English excerpt.', ...(extra.en || {}) },
+    de: { title: 'Titel DE', excerpt: 'Dies ist ein vollständiger Auszug.', ...(extra.de || {}) },
+    fr: { title: 'Titre FR', excerpt: 'Ceci est un extrait complet.', ...(extra.fr || {}) },
   },
 });
 
@@ -105,7 +105,7 @@ test('emettitore: senza i campi SEO l\'output resta byte-identico a prima', () =
   assert.equal(
     block,
     "    'blog.article.demo-articolo.title': 'Title EN',\n" +
-      "    'blog.article.demo-articolo.excerpt': 'Excerpt EN',\n" +
+      "    'blog.article.demo-articolo.excerpt': 'This is a complete English excerpt.',\n" +
       "    'blog.article.demo-articolo.imageAlt': 'Alt EN',",
     'il blocco meta di un articolo senza campi SEO per-locale deve essere ' +
       'IDENTICO a quello della versione precedente: e\' cio\' che rende il cambio ' +
@@ -116,7 +116,10 @@ test('emettitore: senza i campi SEO l\'output resta byte-identico a prima', () =
 test('emettitore: i campi SEO escono per TUTTE le locali, in coda ai tre storici', () => {
   const seo = {};
   for (const loc of LOCALES) {
-    seo[loc] = { seoDescription: `SERP ${loc}`, ogDescription: `SOCIAL ${loc}` };
+    seo[loc] = {
+      seoDescription: `SERP ${loc} describes the demo article.`,
+      ogDescription: `SOCIAL ${loc} describes the demo article.`,
+    };
   }
   for (const loc of LOCALES) {
     const lines = buildMetaBlockLines(articleWith(seo), loc);
@@ -128,8 +131,16 @@ test('emettitore: i campi SEO escono per TUTTE le locali, in coda ai tre storici
         `${loc}: riga ${i} non e' \`${META_FIELDS[i]}\` — l'ordine dei campi e' parte del contratto`,
       );
     }
-    assert.ok(lines[3].includes(`'SERP ${loc}'`), `${loc}: seoDescription non e' quella della locale`);
-    assert.ok(lines[4].includes(`'SOCIAL ${loc}'`), `${loc}: ogDescription non e' quella della locale`);
+    assert.equal(
+      lines[3],
+      `    'blog.article.demo-articolo.seoDescription': '${escapeForSingleQuoteTS(seo[loc].seoDescription)}',`,
+      `${loc}: seoDescription non e' quella della locale`,
+    );
+    assert.equal(
+      lines[4],
+      `    'blog.article.demo-articolo.ogDescription': '${escapeForSingleQuoteTS(seo[loc].ogDescription)}',`,
+      `${loc}: ogDescription non e' quella della locale`,
+    );
   }
 });
 

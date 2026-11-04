@@ -34,7 +34,7 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.crisi-resilienza-zurigo.excerpt': 'Die Zürcher Resilienzwochen befassen sich mit zwei Szenarien: Informationen ohne Strom und Internet sowie 9 Liter Wasser für drei Tage.',
     'blog.article.crisi-resilienza-zurigo.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.vbz-tram-50-51-cambio.title': 'Ab dem 13. Dezember entfallen die Trams 50 und 51',
-    'blog.article.vbz-tram-50-51-cambio.excerpt': 'Ab dem 13. Dezember entfallen die Linien 50 und 51 Die Trams 4, 11, 13, 14 und 17 fahren wieder über den Bahnhofquai Die Linie 83 fährt täglich bis 22 Uhr',
+    'blog.article.vbz-tram-50-51-cambio.excerpt': 'Am 13. Dezember ist der Fahrplanwechsel der VBZ vorgesehen. Wie tsri.ch berichtet, werden mit Abschluss der Arbeiten am Bahnhofquai die Tramlinien 50 und 51 eingestellt, und auch die Linienänderungen rund um den Hauptbahnhof werden aufgehoben.',
     'blog.article.vbz-tram-50-51-cambio.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.title': 'Zürich: Keine Initiative zum Elternurlaub, Linke und Mitte gespalten',
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.excerpt': 'Der Kanton Zürich wird die Standesinitiative zum Elternurlaub nicht einreichen: Die Linke und die Parteien der Mitte, die zunächst dafür waren, haben keine Einigung gefunden.',
@@ -46,7 +46,7 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.zurigo-incentivi-e-cargo-velo.excerpt': 'Die Stadt Zürich stellt Hunderttausende Franken zur Verfügung, um den Kauf von E-Cargovelo zu unterstützen, und bietet Fahrkurse zum halben Preis an.',
     'blog.article.zurigo-incentivi-e-cargo-velo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.controlli-distrazione-zurigo.title': 'Zürich, über 100 Verstösse bei Ablenkungskontrollen',
-    'blog.article.controlli-distrazione-zurigo.excerpt': 'Die Kantonspolizei Zürich stellte am 20.',
+    'blog.article.controlli-distrazione-zurigo.excerpt': 'In rund drei Stunden stellten die Einsatzkräfte insgesamt über 100 Verstösse gegen das Strassenverkehrsgesetz fest.',
     'blog.article.controlli-distrazione-zurigo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.zurigo-budget-sans-papiers.title': 'Zürich genehmigt 260.000 Franken für Sans-Papiers',
     'blog.article.zurigo-budget-sans-papiers.excerpt': 'Der Zürcher Gemeinderat genehmigt mehr Mittel und erhöht das Budget der Anlaufstelle per Sans-Papiers auf 260.000 Franken.',
@@ -70,7 +70,7 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.forchstrasse-sicurezza-zollikon.excerpt': 'Der Kanton Zürich plant knapp 1,7 km zwischen Zumikon und Zollikerberg: CHF 24,2 Millionen, drei barrierefreie Unterführungen und einen Baubeginn Ende 2028, wenn der Kantonsrat zustimmt.',
     'blog.article.forchstrasse-sicurezza-zollikon.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.zurigo-strategia-energetica-2026.title': 'Zürich verabschiedet die Energiestrategie 2026',
-    'blog.article.zurigo-strategia-energetica-2026.excerpt': 'Energiestrategie und Energieplanung 2026 vom Regierungsrat verabschiedet Wärme: Vollständiger Verzicht auf fossile Energieträger bis 2050 möglich Sommer 2050',
+    'blog.article.zurigo-strategia-energetica-2026.excerpt': 'Der Regierungsrat des Kantons Zürich hat die Energiestrategie und die Energieplanung 2026 verabschiedet.',
     'blog.article.zurigo-strategia-energetica-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 

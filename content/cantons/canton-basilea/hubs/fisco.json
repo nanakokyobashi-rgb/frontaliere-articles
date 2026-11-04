@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "fisco",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "feba2d4e99d529d016ee77c24e3c41a66347c414b46849013691f5a04da08ab2",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "8c2a580fe314c8bfb74392b420a3f34d7c90b6381e1b5f15153907a6feaf8def",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T10:37:42.748Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -150,6 +150,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Der Finanzhaushalt des Kantons Basel-Stadt erhält erneut die höchste Ratingnote",
+              "date": "2026-11-03",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-der-finanzhaushalt-des-kantons-basel-stadt-erhaelt-erneut-die-hoechste-ratingnote"
+            },
+            {
               "label": "Kanton Basel-Stadt platziert zum zweiten Mal einen Social Bond am Markt",
               "date": "2026-10-21",
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-kanton-basel-stadt-platziert-zum-zweiten-mal-einen-social-bond-am-markt"
@@ -165,7 +170,7 @@
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -245,7 +250,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -373,6 +378,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Der Finanzhaushalt des Kantons Basel-Stadt erhält erneut die höchste Ratingnote",
+              "date": "2026-11-03",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-der-finanzhaushalt-des-kantons-basel-stadt-erhaelt-erneut-die-hoechste-ratingnote"
+            },
+            {
               "label": "Kanton Basel-Stadt platziert zum zweiten Mal einen Social Bond am Markt",
               "date": "2026-10-21",
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-kanton-basel-stadt-platziert-zum-zweiten-mal-einen-social-bond-am-markt"
@@ -388,7 +398,7 @@
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -468,7 +478,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -596,6 +606,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Der Finanzhaushalt des Kantons Basel-Stadt erhält erneut die höchste Ratingnote",
+              "date": "2026-11-03",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-der-finanzhaushalt-des-kantons-basel-stadt-erhaelt-erneut-die-hoechste-ratingnote"
+            },
+            {
               "label": "Kanton Basel-Stadt platziert zum zweiten Mal einen Social Bond am Markt",
               "date": "2026-10-21",
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-kanton-basel-stadt-platziert-zum-zweiten-mal-einen-social-bond-am-markt"
@@ -611,7 +626,7 @@
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -691,7 +706,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -819,6 +834,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Der Finanzhaushalt des Kantons Basel-Stadt erhält erneut die höchste Ratingnote",
+              "date": "2026-11-03",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-der-finanzhaushalt-des-kantons-basel-stadt-erhaelt-erneut-die-hoechste-ratingnote"
+            },
+            {
               "label": "Kanton Basel-Stadt platziert zum zweiten Mal einen Social Bond am Markt",
               "date": "2026-10-21",
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-kanton-basel-stadt-platziert-zum-zweiten-mal-einen-social-bond-am-markt"
@@ -834,7 +854,7 @@
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -914,7 +934,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

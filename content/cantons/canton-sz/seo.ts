@@ -82,16 +82,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-esercitazione-militare-sihlsee-ottobre-2026': {
     title: 'Esercitazione militare a Egg e diga Sihlsee dal 9 al 12 ottobre 2026',
-    description: 'Avviso ufficiale: esercitazione \'Schweizer Militär\' a Egg e diga Sihlsee dal 9 al 12 ottobre 2026. Possibile aumento rumore (anche notturno), veicoli',
+    description: 'Avviso ufficiale: esercitazione \'Schweizer Militär\' a Egg e diga Sihlsee dal 9 al 12 ottobre 2026. Possibile aumento rumore (anche notturno), veicoli.',
     keywords: 'frontalieri, ticino, svizzera, italia, esercitazione, militare, diga, sihlsee',
     ogTitle: 'Esercitazione militare a Egg e diga Sihlsee: 9-12 ottobre 2026',
-    ogDescription: 'Il Comune di Einsiedeln comunica un\'esercitazione del \'Schweizer Militär\' nell\'area di Egg e della diga del Sihlsee dal 9 al 12 ottobre 2026. Sono possibili aumento del rumore (anche notturno), movimenti di veicoli militari, elicotteri e truppe',
+    ogDescription: 'Il Comune di Einsiedeln comunica un\'esercitazione del \'Schweizer Militär\' nell\'area di Egg e della diga del Sihlsee dal 9 al 12 ottobre 2026. Sono possibili aumento del rumore (anche notturno), movimenti di veicoli militari, elicotteri e truppe.',
     canonicalPath: '/articoli-svitto/esercitazione-militare-sihlsee-ottobre-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Esercitazione militare a Egg e diga Sihlsee dal 9 al 12 ottobre 2026",
-      "description": "Avviso ufficiale: esercitazione 'Schweizer Militär' a Egg e diga Sihlsee dal 9 al 12 ottobre 2026. Possibile aumento rumore (anche notturno), veicoli",
+      "description": "Avviso ufficiale: esercitazione 'Schweizer Militär' a Egg e diga Sihlsee dal 9 al 12 ottobre 2026. Possibile aumento rumore (anche notturno), veicoli.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -124,7 +124,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Küssnacht punta all\'uscita dalle fonti fossili: piano comunale e rete di teleriscaldamento verso Immensee, Fänn e Adligenswil per il futuro climatico.',
     keywords: 'frontalieri, ticino, svizzera, italia, küssnacht, amplia, rete, verso',
     ogTitle: 'Küssnacht: teleriscaldamento verso tre aree',
-    ogDescription: 'Il distretto di Küssnacht punta all\'uscita dalle fonti energetiche fossili. La pianificazione energetica comunale e l\'ampliamento del teleriscaldamento verso Immensee, Fänn e Adligenswil orientano il distretto verso un futuro compatibile',
+    ogDescription: 'Il distretto di Küssnacht punta all\'uscita dalle fonti energetiche fossili. La pianificazione energetica comunale e l\'ampliamento del teleriscaldamento verso Immensee, Fänn e Adligenswil orientano il distretto verso un futuro compatibile.',
     canonicalPath: '/articoli-svitto/kuessnacht-rete-teleriscaldamento/',
     structuredData: {
       "@context": "https://schema.org",
@@ -397,7 +397,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il Consiglio nazionale propone CHF 1,3 miliardi l’anno per il riarmo dal 2028 al 2045 senza aumentare l’IVA. La SP minaccia il referendum.',
     keywords: 'frontalieri, ticino, svizzera, italia, riarmo, dell, esercito, nazionale',
     ogTitle: 'Riarmo dell’esercito: il Nazionale evita l’aumento IVA',
-    ogDescription: 'Il piano del Nazionale finanzia il riarmo con risparmi IZA, minori entrate dei Cantoni, crediti federali inutilizzati e IVA vincolata. Gli Stati propongono più IVA e un rimborso Covid più lento; resta il limite di debito del fondo, mentre la SP',
+    ogDescription: 'Il piano del Nazionale finanzia il riarmo con risparmi IZA, minori entrate dei Cantoni, crediti federali inutilizzati e IVA vincolata. Gli Stati propongono più IVA e un rimborso Covid più lento; la SP minaccia il referendum.',
     canonicalPath: '/articoli-svitto/finanziamento-riarmo-esercito/',
     structuredData: {
       "@context": "https://schema.org",

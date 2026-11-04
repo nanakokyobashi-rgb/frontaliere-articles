@@ -155,7 +155,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-zurigo-velostrade-scuole': {
     title: 'Zurigo: no al divieto delle velostrade davanti alle scuole',
-    description: 'Zurigo: il governo cantonale è contro il divieto delle velostrade davanti alle scuole. La posizione segue obiezioni provenienti da Wollishofen nel Canton',
+    description: 'Zurigo: il governo cantonale è contro il divieto delle velostrade davanti alle scuole. La posizione segue obiezioni provenienti da Wollishofen nel Canton.',
     keywords: 'frontalieri, ticino, svizzera, italia, zurigo, divieto, velostrade, davanti',
     ogTitle: 'Zurigo: no al divieto delle velostrade davanti alle scuole',
     ogDescription: 'Nel Canton Zurigo, il governo cantonale si oppone al divieto delle velostrade davanti alle scuole dopo le obiezioni provenienti da Wollishofen. Il punto è la posizione sul divieto: il titolo non indica percorsi, date o modalità operative.',
@@ -164,7 +164,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Zurigo: no al divieto delle velostrade davanti alle scuole",
-      "description": "Zurigo: il governo cantonale è contro il divieto delle velostrade davanti alle scuole. La posizione segue obiezioni provenienti da Wollishofen nel Canton",
+      "description": "Zurigo: il governo cantonale è contro il divieto delle velostrade davanti alle scuole. La posizione segue obiezioni provenienti da Wollishofen nel Canton.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -197,7 +197,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Quasi metà dell\'elettricità eolica del Canton Zurigo arriverebbe dal Weinland: la notizia segnala lo scetticismo di una consigliera di sinistra nel cantone.',
     keywords: 'frontalieri, ticino, svizzera, italia, eolico, canton, zurigo, scetticismo',
     ogTitle: 'Eolico a Zurigo: il ruolo del Weinland',
-    ogDescription: 'Nel Canton Zurigo, il Weinland avrebbe un ruolo centrale nell\'energia eolica: quasi metà dell\'elettricità eolica arriverebbe da quest\'area. La stessa notizia segnala lo scetticismo di una consigliera cantonale di sinistra, senza indicare un esito',
+    ogDescription: 'Nel Canton Zurigo, il Weinland avrebbe un ruolo centrale nell\'energia eolica: quasi metà dell\'elettricità eolica arriverebbe da quest\'area. La stessa notizia segnala lo scetticismo di una consigliera cantonale di sinistra, senza indicare un esito.',
     canonicalPath: '/articoli-zurigo/eolico-weinland-zurigo/',
     structuredData: {
       "@context": "https://schema.org",
@@ -392,7 +392,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Dal 13 dicembre spariscono le linee 50 e 51 I tram 4, 11, 13, 14 e 17 tornano sul Bahnhofquai La linea 83 viaggia ogni giorno fino alle 22 La linea',
     keywords: 'frontalieri, ticino, svizzera, italia, dicembre, soppressi, tram, spariscono',
     ogTitle: 'Tram 50 e 51 soppressi dal 13 dicembre',
-    ogDescription: 'Dal 13 dicembre spariscono le linee 50 e 51 I tram 4, 11, 13, 14 e 17 tornano sul Bahnhofquai La linea 83 viaggia ogni giorno fino alle 22 La linea notturna N8',
+    ogDescription: 'Il 13 dicembre è previsto il cambio d\'orario delle VBZ. Come riferisce tsri.ch, con la conclusione dei lavori al Bahnhofquai le linee tram 50 e 51 saranno soppresse e saranno aboliti anche i cambi di linea intorno alla stazione centrale.',
     canonicalPath: '/articoli-zurigo/vbz-tram-50-51-cambio/',
     structuredData: {
       "@context": "https://schema.org",
@@ -428,16 +428,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-zurigo-niente-iniziativa-congedo-parentale': {
     title: 'Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi',
-    description: 'Il Canton Zurigo non presenterà la Standesinitiative sul congedo parentale. Inizialmente sostenuta da sinistra e centro, la proposta è stata',
+    description: 'Secondo il titolo e il lead pubblico dell\'articolo della NZZ, il Canton Zurigo non presenterà un\'iniziativa sul congedo parentale.',
     keywords: 'frontalieri, ticino, svizzera, italia, zurigo, niente, iniziativa, congedo',
     ogTitle: 'Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi',
-    ogDescription: 'Il Canton Zurigo ha deciso di non presentare la Standesinitiative per un congedo parentale. Dopo un iniziale sostegno congiunto di sinistra e partiti di centro, le parti non hanno raggiunto un accordo. La proposta non andrà avanti a livello',
+    ogDescription: 'Il Canton Zurigo ha deciso di non presentare la Standesinitiative per un congedo parentale. Dopo un iniziale sostegno congiunto di sinistra e partiti di centro, le parti non hanno raggiunto un accordo. La proposta non andrà avanti a livello.',
     canonicalPath: '/articoli-zurigo/zurigo-niente-iniziativa-congedo-parentale/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi",
-      "description": "Il Canton Zurigo non presenterà la Standesinitiative sul congedo parentale. Inizialmente sostenuta da sinistra e centro, la proposta è stata",
+      "description": "Secondo il titolo e il lead pubblico dell'articolo della NZZ, il Canton Zurigo non presenterà un'iniziativa sul congedo parentale.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -857,16 +857,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-zurigo-strategia-energetica-2026': {
     title: 'Zurigo adotta la Strategia energetica 2026 | Frontaliere Ticino',
-    description: 'Strategia e pianificazione energetica 2026 adottate dal Regierungsrat Calore: possibile rinuncia completa ai fossili entro il 2050 Estate 2050: oltre',
+    description: 'Il Regierungsrat del Cantone di Zurigo ha adottato la strategia energetica e la pianificazione energetica 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, zurigo, adotta, strategia, energetica',
     ogTitle: 'Zurigo adotta la Strategia energetica 2026',
-    ogDescription: 'Strategia e pianificazione energetica 2026 adottate dal Regierungsrat Calore: possibile rinuncia completa ai fossili entro il 2050 Estate 2050: oltre l\'80%',
+    ogDescription: 'Il Regierungsrat del Cantone di Zurigo ha adottato la strategia energetica e la pianificazione energetica 2026.',
     canonicalPath: '/articoli-zurigo/zurigo-strategia-energetica-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Zurigo adotta la Strategia energetica 2026",
-      "description": "Strategia e pianificazione energetica 2026 adottate dal Regierungsrat Calore: possibile rinuncia completa ai fossili entro il 2050 Estate 2050: oltre",
+      "description": "Il Regierungsrat del Cantone di Zurigo ha adottato la strategia energetica e la pianificazione energetica 2026.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

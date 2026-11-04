@@ -19,10 +19,10 @@ const blogMetaCantonNwDe: Record<string, string> = {
     'blog.article.hergiswil-fattura-fiscale-online.excerpt': 'In Hergiswil können provisorische Steuerrechnungen online angefordert werden: Über das Formular können Änderungen übermittelt werden, die anschließend in der Rechnung berücksichtigt werden.',
     'blog.article.hergiswil-fattura-fiscale-online.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.chiusura-ponte-scheidgraben.title': 'Brücke über den Scheidgraben in Ennetbürgen gesperrt',
-    'blog.article.chiusura-ponte-scheidgraben.excerpt': 'Die Brücke zwischen Alpenstrasse und Seefeld wird wegen Sanierungsarbeiten vom 3.',
+    'blog.article.chiusura-ponte-scheidgraben.excerpt': 'Dokumentiert sind die Brücke über den Scheidgraben, die Lage zwischen Alpenstrasse und Seefeld, der Grund der Sanierungsarbeiten und die Führung über die Hauptstrasse für Fußgänger und Radfahrer.',
     'blog.article.chiusura-ponte-scheidgraben.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.hergiswil-bergstrasse-gru.title': 'Hergiswil: Bergstrasse 4 am 25.11.2026 gesperrt',
-    'blog.article.hergiswil-bergstrasse-gru.excerpt': 'In Hergiswil wird der betroffene Abschnitt der Bergstrasse am 25.',
+    'blog.article.hergiswil-bergstrasse-gru.excerpt': 'Im betroffenen Abschnitt wird die Bergstrasse während des Abbaus des Krans als vollständig gesperrt angegeben.',
     'blog.article.hergiswil-bergstrasse-gru.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 

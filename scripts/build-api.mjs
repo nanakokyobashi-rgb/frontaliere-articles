@@ -42,6 +42,8 @@ import { fileURLToPath } from 'node:url';
 import os from 'node:os';
 import { execSync } from 'node:child_process';
 import { buildSectionFeeds, RSS_SECTIONS } from './lib/rss-feed-body-adapter.mjs';
+import { inspectCorpusExcerptCompleteness } from '../generator/scripts/repair-plain-excerpts.mjs';
+import { assertNoExcerptCompletenessRegression } from './lib/excerpt-completeness-gate.mjs';
 // repairSerpSnippet vive in clauseTail.mjs (un .mjs) proprio perche' questo file
 // non puo' importare un .ts: e' la sorgente unica che il layer TS riesporta.
 // Senza passarla, rssFeeds.mjs spedirebbe le description verbatim (#5453).
@@ -228,6 +230,34 @@ if (!siteDescriptionBudget || Number(siteDescriptionBudget[1]) !== RSS_DESCRIPTI
 }
 const OUT = path.join(ROOT, 'dist', 'api');
 const LOCALES = ['it', 'en', 'de', 'fr'];
+
+const excerptCompleteness = inspectCorpusExcerptCompleteness();
+const excerptCompletenessBaseline = JSON.parse(
+  fs.readFileSync(path.join(ROOT, 'scripts', 'ci', 'excerpt-completeness-baseline.json'), 'utf8'),
+);
+const excerptCompletenessGate = assertNoExcerptCompletenessRegression(
+  excerptCompleteness.details,
+  excerptCompletenessBaseline,
+  { requireCompleteLedger: true },
+);
+if (excerptCompletenessGate.resolved.length > 0) {
+  throw new Error(
+    'build-api: ' + excerptCompletenessGate.resolved.length +
+      ' approved incomplete field(s) are now complete. Remove them from entries and record them in resolvedEntries before publishing. Examples: ' +
+      excerptCompletenessGate.resolved.slice(0, 5).join('; '),
+  );
+}
+if (excerptCompletenessGate.known.length > 0) {
+  const examples = excerptCompletenessGate.known
+    .slice(0, 5)
+    .map(({ id, field, locale, defects }) => locale + '/' + id + '/' + field + ' (' + (defects ?? []).join(', ') + ')')
+    .join('; ');
+  console.warn(
+    'build-api: warning: ' + excerptCompletenessGate.known.length +
+      ' known incomplete excerpt/SEO field(s) remain in scripts/ci/excerpt-completeness-baseline.json. ' +
+      'Examples: ' + examples,
+  );
+}
 
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
