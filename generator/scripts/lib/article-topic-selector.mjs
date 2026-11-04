@@ -53,6 +53,7 @@ import { cascadedScore } from './scoring/cascadedScore.mjs';
 import { computeAdaptiveTopicCandidateDupJaccard } from './scoring/constants.mjs';
 import { corpusPath } from './corpus-paths.mjs';
 import { unescapeTsValue } from './meta-field-regex.mjs';
+import { resolveExperimentalCandidatesPath } from './topic-candidates-path.mjs';
 
 // ── Paths (overridable via opts for tests) ─────────────────────
 export const PERFORMANCE_PATH = 'data/article-performance.json';
@@ -409,7 +410,12 @@ export function loadDemandVocabulary(opts = {}) {
  * @returns {object|null}
  */
 export function loadExperimentalCandidates(opts = {}) {
-  const path = (opts && opts.path) || EXPERIMENTAL_CANDIDATES_PATH;
+  const path = (typeof opts?.path === 'string' && opts.path.trim())
+    ? opts.path
+    : resolveExperimentalCandidatesPath(
+      process.env.EXPERIMENTAL_CANDIDATES_PATH,
+      EXPERIMENTAL_CANDIDATES_PATH,
+    );
   return loadJsonSafe(path);
 }
 

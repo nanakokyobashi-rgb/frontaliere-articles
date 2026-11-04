@@ -306,6 +306,7 @@ import {
 } from './lib/scheduler/quotaController.mjs';
 import { buildDiscoveryPool as _buildDiscoveryPool } from './lib/discovery/discoveryPool.mjs';
 import { attachTrendEvidenceToCandidates, isSecureHttpsUrl } from './lib/discovery/trend-evidence-attribution.mjs';
+import { projectTopicCandidateAttribution } from './lib/topic-candidate-attribution.mjs';
 import { decodeGoogleNewsUrl } from './lib/discovery/googleNewsUrlResolver.mjs';
 import { isNearDuplicate as _isNearDuplicateHeadline } from './lib/scheduler/slugSimilarity.mjs';
 import { fetchWordpressSearchHeadlines } from './lib/topic-sources/wordpressSearch.mjs';
@@ -2091,6 +2092,7 @@ const RUN_REPORT = {
   // Durable source attribution for signal-led discovery articles. Trends is a
   // demand signal; the separate evidence fields identify the article source.
   discoveryAttribution: null,
+  topicCandidateAttribution: null,
   poolSlotKind: null,
   poolCounterValue: null,
   poolCurrentQuota: null,
@@ -2425,6 +2427,7 @@ function finalizeRunReport(status, extra = {}) {
   Object.assign(RUN_REPORT, extra || {});
   if (RUN_REPORT.status !== 'generated' || !RUN_REPORT.article?.id) {
     RUN_REPORT.discoveryAttribution = null;
+    RUN_REPORT.topicCandidateAttribution = null;
   }
 
   // ── Pre-spend gate disposition (issue #113) ────────────────────────
@@ -18518,6 +18521,7 @@ async function main() {
             ) {
               if (typeof chosen?.url === 'string') triedUrls.add(chosen.url);
               RUN_REPORT.discoveryAttribution = null;
+              RUN_REPORT.topicCandidateAttribution = null;
               RUN_REPORT.notes.push('Trend signal skipped: no secure Google News evidence URL');
               console.error('   ⏭️  Segnale Trends ignorato: manca un URL HTTPS di evidenza Google News');
               attempt--;
@@ -18554,6 +18558,7 @@ async function main() {
             RUN_REPORT.pool = _pickedPool;
             RUN_REPORT.poolSource = _pickedPoolSource;
             RUN_REPORT.discoveryAttribution = null;
+            RUN_REPORT.topicCandidateAttribution = null;
             if (isTrendBackedDiscoveryCandidate(discoveryCandidate)) {
               const candidate = discoveryCandidate;
               const meta = candidate.meta && typeof candidate.meta === 'object' ? candidate.meta : {};
@@ -18583,6 +18588,12 @@ async function main() {
                 evidencePublisher,
                 evidencePublishedAt: normalizeOptionalIsoTimestamp(meta.evidencePublishedAt || meta.pubDate),
               };
+            }
+            if (_pickedTier === 'experimental' && _picked?._experimentalCandidate) {
+              RUN_REPORT.topicCandidateAttribution = projectTopicCandidateAttribution(
+                _picked._experimentalCandidate,
+                _experimentalCandidates?.generatedAt,
+              );
             }
             _persistRankerStateOnSuccess = () => {
               try {
@@ -18629,6 +18640,7 @@ async function main() {
                       _pool: _pickedPool,
                       _pool_source: _pickedPoolSource,
                       _discovery_attribution: RUN_REPORT.discoveryAttribution,
+                      _topic_candidate_attribution: RUN_REPORT.topicCandidateAttribution,
                       _score_breakdown: _pickedScore || null,
                     };
                     write(sidecarPath, `${JSON.stringify(payload, null, 2)}\n`);
@@ -19022,6 +19034,7 @@ async function main() {
           RUN_REPORT.selectedArticleType = isStaticTopic ? 'evergreen_static' : 'evergreen_dynamic';
           RUN_REPORT.selectedSource = 'evergreen';
           RUN_REPORT.discoveryAttribution = null;
+          RUN_REPORT.topicCandidateAttribution = null;
           RUN_REPORT.selectedUrl = `evergreen://${encodeURIComponent(topic.keyword)}`;
           console.error(`📚 Evergreen tentativo ${attempt}: keyword "${topic.keyword}"`);
           console.error(`   Angolo: ${topic.angle}\n`);

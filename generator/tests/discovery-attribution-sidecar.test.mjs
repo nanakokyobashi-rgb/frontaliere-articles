@@ -9,7 +9,9 @@ const createArticleSource = readFileSync(
 
 test('selected signal-led discovery attribution reaches the run report and article sidecar', () => {
   assert.match(createArticleSource, /discoveryAttribution: null/);
+  assert.match(createArticleSource, /topicCandidateAttribution: null/);
   assert.match(createArticleSource, /RUN_REPORT\.discoveryAttribution = null;/);
+  assert.match(createArticleSource, /RUN_REPORT\.topicCandidateAttribution = null;/);
   assert.match(createArticleSource, /function isTrendBackedDiscoveryCandidate\(candidate\)/);
   assert.match(createArticleSource, /candidate\?\.source === 'trends'/);
   assert.match(createArticleSource, /attachTrendEvidenceToCandidates\(candidates, headlineSimilarity\)/);
@@ -25,6 +27,8 @@ test('selected signal-led discovery attribution reaches the run report and artic
   assert.match(createArticleSource, /evidencePublishedAt: normalizeOptionalIsoTimestamp\(/);
   assert.match(createArticleSource, /resolvedSourceUrl: null/);
   assert.match(createArticleSource, /_discovery_attribution: RUN_REPORT\.discoveryAttribution/);
+  assert.match(createArticleSource, /projectTopicCandidateAttribution\(\s*_picked\._experimentalCandidate,\s*_experimentalCandidates\?\.generatedAt,/);
+  assert.match(createArticleSource, /_topic_candidate_attribution: RUN_REPORT\.topicCandidateAttribution/);
   assert.match(createArticleSource, /RUN_REPORT\.discoveryAttribution\.resolvedSourceUrl = url/);
   assert.match(createArticleSource, /RUN_REPORT\.selectedSource = 'evergreen';\s+RUN_REPORT\.discoveryAttribution = null;/);
   assert.match(createArticleSource, /RUN_REPORT\.status !== 'generated' \|\| !RUN_REPORT\.article\?\.id/);
