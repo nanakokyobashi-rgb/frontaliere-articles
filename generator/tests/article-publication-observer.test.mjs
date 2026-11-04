@@ -96,6 +96,32 @@ test('deriva un target per corpo cambiato e conserva il commit più recente', ()
   assert.equal(prepared.targets[0].registryImage, '/images/blog/costo.webp');
 });
 
+test('l’observer conserva il tipo di modifica e deriva updatedAt per un body esistente', () => {
+  const log = [
+    `commit ${sha} 1791158400`,
+    'M\tcontent/blog-body/it/article.ts',
+  ].join('\n');
+  const changes = parseChangedBodyLog(log);
+  assert.equal(changes[0].changeType, 'M');
+  const prepared = buildObserverTargets({
+    changedBodies: changes,
+    registrySources: {
+      frontaliere: "{ id: 'article', updatedAt: '2026-10-04', date: '2026-02-21T10:57:40.158Z', image: '/images/blog/article.webp' },",
+    },
+    slugSources: { frontaliere: "'article': { it: 'article' }," },
+  });
+  assert.equal(prepared.targets[0].sourceUpdatedAt, '2026-10-05');
+
+  const firstPublication = buildObserverTargets({
+    changedBodies: [{ ...changes[0], changeType: 'A' }],
+    registrySources: {
+      frontaliere: "{ id: 'article', date: '2026-02-21T10:57:40.158Z', image: '/images/blog/article.webp' },",
+    },
+    slugSources: { frontaliere: "'article': { it: 'article' }," },
+  });
+  assert.equal(firstPublication.targets[0].sourceUpdatedAt, null);
+});
+
 test('risolve lo slug italiano del body all id canonico del registry', () => {
   const prepared = buildObserverTargets({
     changedBodies: [{

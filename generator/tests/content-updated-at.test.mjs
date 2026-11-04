@@ -6,6 +6,8 @@ import { fileURLToPath } from 'node:url';
 
 import {
   applyRegistryUpdatedAt,
+  deriveRegistryUpdatedAtSources,
+  deriveUpdatedAtFromBodyChange,
   enrichRegistriesFromHistory,
   parseChangedBodyPaths,
   parseContentHistory,
@@ -72,6 +74,51 @@ test('il backfill esclude la prima pubblicazione e confronta le modifiche per is
   assert.deepEqual(result.changed.map(({ id }) => id), ['old', 'same-day']);
 });
 
+test('la regola di freshness è condivisa tra history ISO e timestamp dell’observer', () => {
+  assert.equal(deriveUpdatedAtFromBodyChange({
+    candidate: { committedAt: '2026-11-01T14:08:00Z', changeType: 'M' },
+    publishedAt: '2026-02-21T10:57:40.158Z',
+  }), '2026-11-01');
+  assert.equal(deriveUpdatedAtFromBodyChange({
+    candidate: { changedAt: Date.parse('2026-11-01T14:08:00Z'), changeType: 'M' },
+    publishedAt: '2026-02-21T10:57:40.158Z',
+  }), '2026-11-01');
+  assert.equal(deriveUpdatedAtFromBodyChange({
+    candidate: { committedAt: '2026-11-01T14:08:00Z', changeType: 'A' },
+    publishedAt: '2026-02-21T10:57:40.158Z',
+  }), null);
+  assert.equal(deriveUpdatedAtFromBodyChange({
+    candidate: { committedAt: '2026-11-01T14:08:00Z', changeType: 'M' },
+    publishedAt: '2026-02-21T10:57:40.158Z',
+    currentUpdatedAt: '2026-11-02',
+  }), null);
+});
+
+test('il backfill del renderer restituisce un overlay limitato agli id richiesti', () => {
+  const result = deriveRegistryUpdatedAtSources({
+    root: ROOT,
+    sections: [{ section: 'frontaliere', registryFile: 'content/blog-articles-data.ts', bodyDir: 'content/blog-body' }],
+    articleIdsBySection: new Map([['frontaliere', ['conti-federali-aumento-iva-ticino']]]),
+    runGit: () => [
+      '59496c5244fb28d8c57f97183623d6c2a9788a\t2026-11-01T14:08:00Z',
+      '',
+      'M\tcontent/blog-body/it/conti-federali-aumento-iva-ticino.ts',
+    ].join('\n'),
+  });
+
+  assert.deepEqual(result.changed, [{
+    section: 'frontaliere',
+    id: 'conti-federali-aumento-iva-ticino',
+    updatedAt: '2026-11-01',
+  }]);
+  assert.match(
+    result.sources.frontaliere,
+    /id: 'conti-federali-aumento-iva-ticino',[\s\S]*?updatedAt: '2026-11-01'/u,
+  );
+  const records = new Map(scanTopLevelArticleRecords(result.sources.frontaliere).map((record) => [record.id, record]));
+  assert.notEqual(readTopLevelString(records.get('tredicesima-avs-stipendi-iva'), 'updatedAt'), '2026-11-01');
+});
+
 test('lo stamp workflow aggiorna solo body esistenti e inserisce il campo nel registry', () => {
   const source = `const ARTICLES = [
   {
@@ -117,6 +164,20 @@ test('il backfill storico e i writer sono cablati a tutte le pipeline che modifi
   const publish = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
   assert.match(publish, /fetch-depth:\s*0/u);
   assert.match(publish, /scripts\/lib\/content-updated-at\.mjs/u);
+
+  for (const file of [
+    '.github/workflows/fast-publish-article.yml',
+    '.github/workflows/fast-publish-section.yml',
+    '.github/workflows/article-publication-observer.yml',
+  ]) {
+    const workflow = readFileSync(path.join(ROOT, file), 'utf8');
+    assert.match(workflow, /scripts\/lib\/content-updated-at\.mjs/u, `${file}: freshness helper mancante`);
+  }
+  const fastPublish = readFileSync(path.join(ROOT, '.github/workflows/fast-publish-article.yml'), 'utf8');
+  const publishCheckoutStart = fastPublish.indexOf('      - name: Checkout\n');
+  const fetchPushBaseStart = fastPublish.indexOf('      - name: Fetch push base (publish)');
+  assert.ok(publishCheckoutStart >= 0 && fetchPushBaseStart > publishCheckoutStart, 'checkout publish non trovato');
+  assert.match(fastPublish.slice(publishCheckoutStart, fetchPushBaseStart), /fetch-depth:\s*0/u);
 
   for (const file of [
     '.github/workflows/batch-faq-articles.yml',

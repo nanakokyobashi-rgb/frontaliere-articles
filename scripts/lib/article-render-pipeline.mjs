@@ -32,6 +32,8 @@ import { reportStrippedControlChars } from '../../generator/scripts/lib/control-
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { STATIC_FALLBACK_IMAGE } from '../../generator/scripts/lib/blog-image-registry.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+import { sectionSourceSurfaces } from './corpus-sections.mjs';
+import { deriveRegistryUpdatedAtSources } from './content-updated-at.mjs';
 import { filterEntriesByImagePostcondition } from './article-image-postcondition.mjs';
 import { heldArticlesWithoutOnlinePage, releaseArticlesWithNothingToProtect } from './article-online-image-probe.mjs';
 import { CDN_BASE, fetchDeclaredImage } from './declared-image-fetch.mjs';
@@ -55,6 +57,43 @@ function mergeGenericFallbacks(...groups) {
   return [...byImage.values()].sort((a, b) => String(a.articleId).localeCompare(String(b.articleId)));
 }
 
+function sourceRootForRender(rootDir) {
+  try {
+    // The canton publisher renders through a temporary symlink view. Resolve
+    // the corpus directory so Git history and the temporary registry write
+    // address the checkout behind that view, not the view's missing .git.
+    return path.dirname(fs.realpathSync(path.join(rootDir, 'content')));
+  } catch {
+    return rootDir;
+  }
+}
+
+function prepareFreshnessOverlay({ rootDir, section, ids, logPrefix }) {
+  const articleIds = [...new Set((Array.isArray(ids) ? ids : []).map((id) => String(id)))];
+  if (articleIds.length === 0) return { changed: [], restore: () => {} };
+
+  const sourceRoot = sourceRootForRender(rootDir);
+  const surfaces = sectionSourceSurfaces(section);
+  const registryPath = path.join(sourceRoot, surfaces.registryFile);
+  if (!fs.existsSync(registryPath)) return { changed: [], restore: () => {} };
+  const original = fs.readFileSync(registryPath, 'utf8');
+  const derived = deriveRegistryUpdatedAtSources({
+    root: sourceRoot,
+    sections: [surfaces],
+    articleIdsBySection: new Map([[section, articleIds]]),
+  });
+  const next = derived.sources[section];
+  if (typeof next !== 'string' || next === original || derived.changed.length === 0) {
+    return { changed: [], restore: () => {} };
+  }
+  fs.writeFileSync(registryPath, next, 'utf8');
+  console.log(`[${logPrefix}] freshness overlay: updatedAt derivato per ${derived.changed.length} articolo/i`);
+  return {
+    changed: derived.changed,
+    restore: () => fs.writeFileSync(registryPath, original, 'utf8'),
+  };
+}
+
 /**
  * @param {object} opts
  * @param {string} opts.rootDir radice del repo
@@ -70,6 +109,24 @@ function mergeGenericFallbacks(...groups) {
  * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[], declaredImages: object, downloadedImageKeys: string[], imageFetchFailures: any[], imagePostcondition: object, genericFallbackArticles: any[], aggregatePagesAllowed: boolean }>}
  */
 export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', persistentReleasedArticles = [], beforeOffload, probeOnlineImage }) {
+  const freshnessOverlay = prepareFreshnessOverlay({ rootDir, section, ids, logPrefix });
+  try {
+    return await renderSectionArticlePipelineBody({
+      rootDir,
+      distDir,
+      section,
+      ids,
+      logPrefix,
+      persistentReleasedArticles,
+      beforeOffload,
+      probeOnlineImage,
+    });
+  } finally {
+    freshnessOverlay.restore();
+  }
+}
+
+async function renderSectionArticlePipelineBody({ rootDir, distDir, section, ids, logPrefix, persistentReleasedArticles, beforeOffload, probeOnlineImage }) {
   // Use the same source-backed CDN base as image offload. The host bootstrap
   // resolves its preconnect origin when the engine reads the contract, so the
   // value does not depend on when host/constants.ts was imported.
