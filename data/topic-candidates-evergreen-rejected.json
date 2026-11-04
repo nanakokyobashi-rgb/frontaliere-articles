@@ -4128,6 +4128,102 @@
       "firstSeenAt": "2026-11-04T00:57:14.792Z",
       "lastValidatedAt": "2026-11-04T00:57:14.792Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Laveno-Mombello e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-04T02:03:01.932Z",
+      "lastValidatedAt": "2026-11-04T02:03:01.932Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Gurro e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-04T02:05:05.626Z",
+      "lastValidatedAt": "2026-11-04T02:05:05.626Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Appiano Gentile e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-04T02:05:05.638Z",
+      "lastValidatedAt": "2026-11-04T02:05:05.638Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Cadorago e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-04T02:05:05.650Z",
+      "lastValidatedAt": "2026-11-04T02:05:05.650Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Corrido e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-04T02:05:05.661Z",
+      "lastValidatedAt": "2026-11-04T02:05:05.661Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Cucciago e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-04T02:05:05.672Z",
+      "lastValidatedAt": "2026-11-04T02:05:05.672Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Guanzate e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-04T02:05:05.685Z",
+      "lastValidatedAt": "2026-11-04T02:05:05.685Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Pognana Lario e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-04T02:05:05.697Z",
+      "lastValidatedAt": "2026-11-04T02:05:05.697Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -4390,10 +4486,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-03T23:48:51.395Z",
-      "lastStrikeAt": "2026-11-04T00:50:23.207Z",
-      "expiresAt": "2026-12-04T00:50:23.207Z"
+      "lastStrikeAt": "2026-11-04T02:02:24.814Z",
+      "expiresAt": "2026-12-04T02:02:24.814Z"
     },
     {
       "keyword": "vivere a Rancio Valcuvia e lavorare in Ticino da frontaliere",
@@ -4402,10 +4498,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-03T23:49:10.320Z",
-      "lastStrikeAt": "2026-11-04T00:54:45.619Z",
-      "expiresAt": "2026-12-04T00:54:45.619Z"
+      "lastStrikeAt": "2026-11-04T02:02:34.215Z",
+      "expiresAt": "2026-12-04T02:02:34.215Z"
     },
     {
       "keyword": "vivere a Oltrona di San Mamette e lavorare in Ticino da frontaliere",
@@ -4414,10 +4510,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-04T00:56:42.844Z",
-      "lastStrikeAt": "2026-11-04T00:56:42.844Z",
-      "expiresAt": "2026-12-04T00:56:42.844Z"
+      "lastStrikeAt": "2026-11-04T02:02:42.312Z",
+      "expiresAt": "2026-12-04T02:02:42.312Z"
     },
     {
       "keyword": "vivere a Tremezzina e lavorare in Ticino da frontaliere",
@@ -4426,10 +4522,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-04T00:56:57.903Z",
-      "lastStrikeAt": "2026-11-04T00:56:57.903Z",
-      "expiresAt": "2026-12-04T00:56:57.903Z"
+      "lastStrikeAt": "2026-11-04T02:02:51.183Z",
+      "expiresAt": "2026-12-04T02:02:51.183Z"
     },
     {
       "keyword": "vivere a Laveno-Mombello e lavorare in Ticino da frontaliere",
@@ -4442,6 +4538,42 @@
       "firstStrikeAt": "2026-11-04T00:57:14.714Z",
       "lastStrikeAt": "2026-11-04T00:57:14.714Z",
       "expiresAt": "2026-12-04T00:57:14.714Z"
+    },
+    {
+      "keyword": "vivere a Val Rezzo e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-04T02:04:53.226Z",
+      "lastStrikeAt": "2026-11-04T02:04:53.226Z",
+      "expiresAt": "2026-12-04T02:04:53.226Z"
+    },
+    {
+      "keyword": "vivere a Duno e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-04T02:05:05.613Z",
+      "lastStrikeAt": "2026-11-04T02:05:05.613Z",
+      "expiresAt": "2026-12-04T02:05:05.613Z"
+    },
+    {
+      "keyword": "vivere a Vertemate con Minoprio e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-04T02:05:17.964Z",
+      "lastStrikeAt": "2026-11-04T02:05:17.964Z",
+      "expiresAt": "2026-12-04T02:05:17.964Z"
     }
   ],
   "legacy": [
