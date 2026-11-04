@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4563": {
-      "section": "canton-sz",
-      "ts": 1793548771113
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/immobilien-zinsanstieg-wird-gefahr-fuer-hausbesitzer-oder-kommt-alles-anders-art-1729703": {
-      "section": "canton-sz",
-      "ts": 1793564045213
-    },
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/der-obwaldner-arbeitsmarkt-verliert-jaehrlich-200-erwerbstaetige-art-1729754": {
       "section": "canton-sz",
       "ts": 1793583962943
@@ -59,6 +51,14 @@
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/rothenburg-haelt-den-steuerfuss-bei-165-einheiten-art-1730148": {
       "section": "canton-sz",
       "ts": 1793720063609
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/13-ahv-erste-auszahlung-im-dezember-steht-fest-art-1730163": {
+      "section": "canton-sz",
+      "ts": 1793749681048
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/milliarden-fuer-armee-immobilien-finanzkontrolle-warnt-vor-luecken-art-1730104": {
+      "section": "canton-sz",
+      "ts": 1793750210765
     }
   }
 }

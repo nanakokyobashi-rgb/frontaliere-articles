@@ -63,6 +63,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.cham-moltiplicatore-fiscale-2027.title': 'Cham: moltiplicatore fiscale al 53% nel 2027',
     'blog.article.cham-moltiplicatore-fiscale-2027.excerpt': 'Il Comune di Cham vuole ridurre dal 54% al 53% il moltiplicatore fiscale nel 2027, con un deficit previsto di circa CHF 568\'000.',
     'blog.article.cham-moltiplicatore-fiscale-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.consultazione-piano-zugo.title': 'Zugo pubblica l\'adeguamento del Piano direttore 26/1',
+    'blog.article.consultazione-piano-zugo.excerpt': 'Il Canton Zugo mette in consultazione il Piano direttore 26/1: zone speciali per più abitazioni e strategia di stabilizzazione nell\'area non edificabile.',
+    'blog.article.consultazione-piano-zugo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZgIt;

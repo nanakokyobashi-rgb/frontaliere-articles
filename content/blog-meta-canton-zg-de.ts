@@ -63,6 +63,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.cham-moltiplicatore-fiscale-2027.title': 'Cham: Steuerfuss von 53% im Jahr 2027',
     'blog.article.cham-moltiplicatore-fiscale-2027.excerpt': 'Die Gemeinde Cham will den Steuerfuss im Jahr 2027 von 54% auf 53% senken, bei einem erwarteten Defizit von rund CHF 568\'000.',
     'blog.article.cham-moltiplicatore-fiscale-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.consultazione-piano-zugo.title': 'Zug veröffentlicht die Anpassung des Richtplans 26/1',
+    'blog.article.consultazione-piano-zugo.excerpt': 'Der Kanton Zug legt den Richtplan 26/1 zur Vernehmlassung vor: Sonderbauzonen für mehr Wohnungen und eine Stabilisierungsstrategie im Nichtbaugebiet.',
+    'blog.article.consultazione-piano-zugo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZgDe;

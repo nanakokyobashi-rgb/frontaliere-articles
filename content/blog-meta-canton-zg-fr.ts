@@ -63,6 +63,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.cham-moltiplicatore-fiscale-2027.title': 'Cham : coefficient fiscal à 53 % en 2027',
     'blog.article.cham-moltiplicatore-fiscale-2027.excerpt': 'La commune de Cham souhaite réduire le coefficient fiscal de 54 % à 53 % en 2027, avec un déficit prévu d\'environ CHF 568\'000.',
     'blog.article.cham-moltiplicatore-fiscale-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.consultazione-piano-zugo.title': 'Zoug publie l’adaptation du Plan directeur 26/1',
+    'blog.article.consultazione-piano-zugo.excerpt': 'Le canton de Zoug met en consultation le Plan directeur 26/1 : zones spéciales pour davantage de logements et stratégie de stabilisation dans la zone non constructible.',
+    'blog.article.consultazione-piano-zugo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZgFr;

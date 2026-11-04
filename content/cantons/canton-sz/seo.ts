@@ -392,6 +392,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-finanziamento-riarmo-esercito': {
+    title: 'Riarmo dell’esercito: il Nazionale evita l’aumento IVA',
+    description: 'Il Consiglio nazionale propone CHF 1,3 miliardi l’anno per il riarmo dal 2028 al 2045 senza aumentare l’IVA. La SP minaccia il referendum.',
+    keywords: 'frontalieri, ticino, svizzera, italia, riarmo, dell, esercito, nazionale',
+    ogTitle: 'Riarmo dell’esercito: il Nazionale evita l’aumento IVA',
+    ogDescription: 'Il piano del Nazionale finanzia il riarmo con risparmi IZA, minori entrate dei Cantoni, crediti federali inutilizzati e IVA vincolata. Gli Stati propongono più IVA e un rimborso Covid più lento; resta il limite di debito del fondo, mentre la SP',
+    canonicalPath: '/articoli-svitto/finanziamento-riarmo-esercito/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Riarmo dell’esercito: il Nazionale evita l’aumento IVA",
+      "description": "Il Consiglio nazionale propone CHF 1,3 miliardi l’anno per il riarmo dal 2028 al 2045 senza aumentare l’IVA. La SP minaccia il referendum.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-finanziamento-riarmo-esercito.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-04T00:12:21+00:00",
+      "dateModified": "2026-11-04T00:12:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svitto/finanziamento-riarmo-esercito/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

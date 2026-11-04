@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'finanziamento-riarmo-esercito',
+ category: 'novita',
+ date: '2026-11-04T00:12:21.103Z',
+ image: '/images/blog/article-finanziamento-riarmo-esercito.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SZ'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
