@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-neuchatel-rinnova-politica-abitativa-con-24-milioni': {
     title: 'Neuchâtel rinnova politica abitativa con 24 milioni',
-    description: 'Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto',
+    description: 'Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto.',
     keywords: 'frontalieri, ticino, svizzera, italia, neuch, rinnova, politica, abitativa',
     ogTitle: 'Neuchâtel rinnova politica abitativa con 24 milioni',
-    ogDescription: 'Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto',
+    ogDescription: 'Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto.',
     canonicalPath: '/articoli-neuchatel/neuchatel-rinnova-politica-abitativa-con-24-milioni/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Neuchâtel rinnova politica abitativa con 24 milioni",
-      "description": "Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto",
+      "description": "Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-neuchatel-rinnova-politica-abitativa-con-24-milioni.webp`,
@@ -43,16 +43,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-disoccupazione-stabile-4-4-neuchatel-settembre-2026': {
     title: 'Disoccupazione stabile 4,4% Neuchâtel settembre 2026',
-    description: '3.945 disoccupati in settembre 2026',
+    description: '3.945 disoccupati in settembre 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, stabile, neuch, settembre',
     ogTitle: 'Disoccupazione stabile 4,4% Neuchâtel settembre 2026',
-    ogDescription: '3.945 disoccupati in settembre 2026',
+    ogDescription: '3.945 disoccupati in settembre 2026.',
     canonicalPath: '/articoli-neuchatel/disoccupazione-stabile-4-4-neuchatel-settembre-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Disoccupazione stabile 4,4% Neuchâtel settembre 2026",
-      "description": "3.945 disoccupati in settembre 2026",
+      "description": "3.945 disoccupati in settembre 2026.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-disoccupazione-stabile-4-4-neuchatel-settembre-2026.webp`,
@@ -77,16 +77,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-neuchatel-referendum-salari-minimi': {
     title: 'Neuchâtel: referendum per salari minimi cantonali e CCT',
-    description: 'Oltre 100.000 firme contro la riforma del Parlamento',
+    description: 'Oltre 100.000 firme contro la riforma del Parlamento.',
     keywords: 'frontalieri, ticino, svizzera, italia, neuch, referendum, salari, minimi',
     ogTitle: 'Neuchâtel: referendum sui salari minimi e le CCT svizzere',
-    ogDescription: 'Oltre 100.000 firme contro la riforma del Parlamento',
+    ogDescription: 'Oltre 100.000 firme contro la riforma del Parlamento.',
     canonicalPath: '/articoli-neuchatel/neuchatel-referendum-salari-minimi/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Neuchâtel: referendum per salari minimi cantonali e CCT",
-      "description": "Oltre 100.000 firme contro la riforma del Parlamento",
+      "description": "Oltre 100.000 firme contro la riforma del Parlamento.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -155,16 +155,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-nuovo-centro-asilo-couvet': {
     title: 'Nuovo centro accoglienza asilo a Couvet: parte il progetto',
-    description: 'Nuova struttura prevista in rue du 1er Mars 11, a Couvet Sostituirà il sito attuale di Chemin des Prises 8 Progetto elaborato con il Comune di Val-de-Travers',
+    description: 'Il significato pratico del progetto emerge guardando alla rete cantonale di primo accoglienza, non soltanto all\'edificio scelto a Couvet.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuovo, centro, accoglienza, asilo',
     ogTitle: 'Nuovo centro accoglienza asilo a Couvet',
-    ogDescription: 'Nuova struttura prevista in rue du 1er Mars 11, a Couvet Sostituirà il sito attuale di Chemin des Prises 8 Progetto elaborato con il Comune di Val-de-Travers',
+    ogDescription: 'A Couvet, il Consiglio di Stato del Cantone di Neuchâtel ha lanciato il progetto di una nuova struttura destinata all\'alloggio delle persone rientranti nell\'ambito dell\'asilo.',
     canonicalPath: '/articoli-neuchatel/nuovo-centro-asilo-couvet/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Nuovo centro accoglienza asilo a Couvet: parte il progetto",
-      "description": "Nuova struttura prevista in rue du 1er Mars 11, a Couvet Sostituirà il sito attuale di Chemin des Prises 8 Progetto elaborato con il Comune di Val-de-Travers",
+      "description": "Il significato pratico del progetto emerge guardando alla rete cantonale di primo accoglienza, non soltanto all'edificio scelto a Couvet.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -194,16 +194,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-cpcn-rendimento-2025-copertura': {
     title: 'CPCN registra +5,6% nel 2025: copertura 84,8% | Frontaliere Ticino',
-    description: '+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%',
+    description: '+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%.',
     keywords: 'frontalieri, ticino, svizzera, italia, cpcn, registra, copertura, performance',
     ogTitle: 'CPCN 2025: performance 5,6% e copertura 84,8%',
-    ogDescription: '+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%',
+    ogDescription: '+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%.',
     canonicalPath: '/articoli-neuchatel/cpcn-rendimento-2025-copertura/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "CPCN registra +5,6% nel 2025: copertura 84,8%",
-      "description": "+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%",
+      "description": "+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -233,7 +233,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-cpcn-tasso-grado-copertura': {
     title: 'CPCN: la differenza tra tasso e grado di copertura',
-    description: 'Il tasso esclude la RFV dal calcolo. Il grado include la RFV. La LCPFPub è stata modificata nel 2014. Il piano punta all\'80% entro il 2052. Tasso di copertura →',
+    description: 'Il tasso esclude la RFV dal calcolo. Il grado include la RFV. La LCPFPub è stata modificata nel 2014. Il piano punta all\'80% entro il 2052. Tasso di copertura →.',
     keywords: 'frontalieri, ticino, svizzera, italia, cpcn, differenza, tasso, grado',
     ogTitle: 'CPCN: la differenza tra tasso e grado di copertura nella previdenza',
     ogDescription: 'Il tasso esclude la RFV dal calcolo.',
@@ -242,7 +242,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "CPCN: la differenza tra tasso e grado di copertura",
-      "description": "Il tasso esclude la RFV dal calcolo. Il grado include la RFV. La LCPFPub è stata modificata nel 2014. Il piano punta all'80% entro il 2052. Tasso di copertura →",
+      "description": "Il tasso esclude la RFV dal calcolo. Il grado include la RFV. La LCPFPub è stata modificata nel 2014. Il piano punta all'80% entro il 2052. Tasso di copertura →.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -428,16 +428,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-stazione-le-locle-accessibilita': {
     title: 'Stazione di Le Locle: lavori di accessibilità per 8 milioni',
-    description: 'Cantiere alla stazione di Le Locle: 8 milioni di franchi La banchina 1 concentra quasi il 90% del traffico passeggeri Primi treni svizzeri',
+    description: 'Per la stazione di Le Locle, il quadro resta scandito da una scadenza operativa e da una fase successiva.',
     keywords: 'frontalieri, ticino, svizzera, italia, stazione, locle, lavori, accessibilità',
     ogTitle: 'Stazione di Le Locle: modernizzazione e accessibilità',
-    ogDescription: 'Cantiere alla stazione di Le Locle: 8 milioni di franchi La banchina 1 concentra quasi il 90% del traffico passeggeri Primi treni svizzeri sulla banchina 1',
+    ogDescription: 'Il 22 ottobre 2026 il Cantone di Neuchâtel, i CFF e la Città di Le Locle hanno presentato lo stato di avanzamento dei lavori alla stazione di Le Locle.',
     canonicalPath: '/articoli-neuchatel/stazione-le-locle-accessibilita/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Stazione di Le Locle: lavori di accessibilità per 8 milioni",
-      "description": "Cantiere alla stazione di Le Locle: 8 milioni di franchi La banchina 1 concentra quasi il 90% del traffico passeggeri Primi treni svizzeri",
+      "description": "Per la stazione di Le Locle, il quadro resta scandito da una scadenza operativa e da una fase successiva.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -470,7 +470,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il Consiglio di Stato ha risposto a due consultazioni federali Autorizzazioni per lavori pesanti nelle zone montane II e III Votazione cantonale',
     keywords: 'frontalieri, ticino, svizzera, italia, consiglio, stato, risponde, consultazioni',
     ogTitle: 'Consiglio di Stato risponde consultazioni 21 ottobre 2026',
-    ogDescription: 'Il Consiglio di Stato ha risposto a due consultazioni federali Autorizzazioni per lavori pesanti nelle zone montane II e III Votazione cantonale fissata',
+    ogDescription: 'Il 21 ottobre 2026 il Consiglio di Stato della Repubblica e Cantone di Neuchâtel ha risposto a due procedure di consultazione federale e ha modificato la regolamentazione sulle operazioni meccaniche pesanti negli ambienti naturali.',
     canonicalPath: '/articoli-neuchatel/consiglio-stato-21-ottobre-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -506,16 +506,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-zenith-soppressione-locle': {
     title: 'Zenith annuncia circa cento soppressioni al Locle',
-    description: 'Zenith annuncia circa cento soppressioni al Locle La manifattura conta 196 collaboratori Aperta la consultazione per il licenziamento collettivo',
+    description: 'La fonte cita circa cento posti nella manifattura del Locle e, in un altro passaggio, circa cento posti minacciati fuori dalla Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, zenith, annuncia, circa, cento',
     ogTitle: 'Zenith soppressione posti al Locle',
-    ogDescription: 'Zenith annuncia circa cento soppressioni al Locle La manifattura conta 196 collaboratori Aperta la consultazione per il licenziamento collettivo Annuncio',
+    ogDescription: 'Giovedì mattina 22 ottobre la direzione di Zenith ha comunicato al personale la soppressione prossima di circa cento posti nella manifattura del Locle, nel Canton Neuchâtel.',
     canonicalPath: '/articoli-neuchatel/zenith-soppressione-locle/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Zenith annuncia circa cento soppressioni al Locle",
-      "description": "Zenith annuncia circa cento soppressioni al Locle La manifattura conta 196 collaboratori Aperta la consultazione per il licenziamento collettivo",
+      "description": "La fonte cita circa cento posti nella manifattura del Locle e, in un altro passaggio, circa cento posti minacciati fuori dalla Svizzera.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -545,16 +545,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-mese-salute-mentale-2026': {
     title: 'Mese salute mentale 2026: attività per rafforzare autostima',
-    description: 'Dal 10 settembre al 10 ottobre 2026 Seconda edizione nel Canton Neuchâtel Attività gratuite e accessibili per ogni età Una ventina di organizzazioni',
+    description: 'Dal 10 settembre al 10 ottobre 2026, il Canton Neuchâtel concentrerà in un programma comune la seconda edizione locale del Mese della salute mentale.',
     keywords: 'frontalieri, ticino, svizzera, italia, mese, salute, mentale, attività',
     ogTitle: 'Mese salute mentale 2026: attività per autostima',
-    ogDescription: 'Dal 10 settembre al 10 ottobre 2026 Seconda edizione nel Canton Neuchâtel Attività gratuite e accessibili per ogni età Una ventina di organizzazioni partner',
+    ogDescription: 'Dal 10 settembre al 10 ottobre 2026, il Canton Neuchâtel concentrerà in un programma comune la seconda edizione locale del Mese della salute mentale.',
     canonicalPath: '/articoli-neuchatel/mese-salute-mentale-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Mese salute mentale 2026: attività per rafforzare autostima",
-      "description": "Dal 10 settembre al 10 ottobre 2026 Seconda edizione nel Canton Neuchâtel Attività gratuite e accessibili per ogni età Una ventina di organizzazioni",
+      "description": "Dal 10 settembre al 10 ottobre 2026, il Canton Neuchâtel concentrerà in un programma comune la seconda edizione locale del Mese della salute mentale.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-mese-salute-mentale-2026.webp`,
@@ -618,7 +618,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-successo-abbonamenti-trasporti-ridotti': {
     title: 'Successo abbonamenti trasporto pubblico a prezzo ridotto',
-    description: '66% di sconto agli under 25 dal 1° luglio 2026 Oltre 15\'000 buoni di riduzione già utilizzati Quasi 2\'300 abbonamenti annuali in più',
+    description: 'L\'indagine di monitoraggio condotta tra le persone dai 18 ai 25 anni prova a misurare se il ribasso abbia allargato l\'uso del trasporto pubblico.',
     keywords: 'frontalieri, ticino, svizzera, italia, successo, abbonamenti, trasporto, pubblico',
     ogTitle: 'Sconto 66% abbonamenti giovani Neuchâtel',
     ogDescription: 'Da allora, secondo il bilancio del Cantone, sono stati utilizzati più di 15\'000 buoni di riduzione.',
@@ -627,7 +627,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Successo abbonamenti trasporto pubblico a prezzo ridotto",
-      "description": "66% di sconto agli under 25 dal 1° luglio 2026 Oltre 15'000 buoni di riduzione già utilizzati Quasi 2'300 abbonamenti annuali in più",
+      "description": "L'indagine di monitoraggio condotta tra le persone dai 18 ai 25 anni prova a misurare se il ribasso abbia allargato l'uso del trasporto pubblico.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -696,7 +696,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-rht-ritorno-normale-orologeria': {
     title: 'RHT: orologeria accetta ritorno alla normale previsto a Berna',
-    description: 'Zenith ha avviato un licenziamento collettivo a Le Locle. La RHT massima passerà gradualmente da 24 a 12 mesi. Il regime attuale è prorogato fino',
+    description: 'Zenith ha avviato un licenziamento collettivo a Le Locle. La RHT massima passerà gradualmente da 24 a 12 mesi. Il regime attuale è prorogato fino.',
     keywords: 'frontalieri, ticino, svizzera, italia, orologeria, accetta, ritorno, alla',
     ogTitle: 'RHT orologeria ritorno normale 12 mesi',
     ogDescription: 'Zenith ha avviato un licenziamento collettivo a Le Locle.',
@@ -705,7 +705,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "RHT: orologeria accetta ritorno alla normale previsto a Berna",
-      "description": "Zenith ha avviato un licenziamento collettivo a Le Locle. La RHT massima passerà gradualmente da 24 a 12 mesi. Il regime attuale è prorogato fino",
+      "description": "Zenith ha avviato un licenziamento collettivo a Le Locle. La RHT massima passerà gradualmente da 24 a 12 mesi. Il regime attuale è prorogato fino.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -774,16 +774,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-economia-neuchateloise-incertezza': {
     title: 'Economia neuchâteloise: dinamica ma volatile | Frontaliere Ticino',
-    description: 'PIL romando stimato: 198 miliardi di franchi nel 2025 Crescita 2025: 2,2% contro 1,8% in Svizzera Proiezioni: 1,9% nel 2026 e 1,5% l\'anno prossimo',
+    description: 'Invitato mercoledì, ha riportato il discorso sul caso locale: l\'economia neuchâteloise ricava gran parte della propria prosperità dalle esportazioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, economia, neuch, teloise, dinamica',
     ogTitle: 'PIL romando 198 miliardi franchi 2025',
-    ogDescription: 'PIL romando stimato: 198 miliardi di franchi nel 2025 Crescita 2025: 2,2% contro 1,8% in Svizzera Proiezioni: 1,9% nel 2026 e 1,5% l\'anno prossimo Neuchâtel',
+    ogDescription: 'Il rapporto 2026 sul PIL romando descrive la piazza economica di Neuchâtel come dinamica, ma volatile di fronte agli imprevisti geopolitici internazionali.',
     canonicalPath: '/articoli-neuchatel/economia-neuchateloise-incertezza/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Economia neuchâteloise: dinamica ma volatile",
-      "description": "PIL romando stimato: 198 miliardi di franchi nel 2025 Crescita 2025: 2,2% contro 1,8% in Svizzera Proiezioni: 1,9% nel 2026 e 1,5% l'anno prossimo",
+      "description": "Invitato mercoledì, ha riportato il discorso sul caso locale: l'economia neuchâteloise ricava gran parte della propria prosperità dalle esportazioni.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

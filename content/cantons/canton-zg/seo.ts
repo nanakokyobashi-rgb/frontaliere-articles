@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52': {
     title: 'Zugo prevede avanzo 15,6 milioni nel 2027 con tasso al 52%',
-    description: 'Il Comune di Zugo prevede per il 2027 un avanzo di CHF 15,6 milioni, mantiene il tasso fiscale al 52% e pianifica investimenti netti per CHF 86,4 milioni',
+    description: 'Il Comune di Zugo prevede per il 2027 un avanzo di CHF 15,6 milioni, mantiene il tasso fiscale al 52% e pianifica investimenti netti per CHF 86,4 milioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, zugo, prevede, avanzo, milioni',
     ogTitle: 'Zugo prevede avanzo 15,6 milioni nel 2027 con tasso al 52%',
-    ogDescription: 'Il preventivo 2027 del Comune di Zugo indica un avanzo di CHF 15,6 milioni, entrate per CHF 446,6 milioni e uscite per CHF 431,1 milioni. Il tasso fiscale richiesto è confermato al 52 per cento. Gli investimenti netti ammontano a CHF 86,4 milioni',
+    ogDescription: 'Il preventivo 2027 del Comune di Zugo indica un avanzo di CHF 15,6 milioni, entrate per CHF 446,6 milioni e uscite per CHF 431,1 milioni. Il tasso fiscale richiesto è confermato al 52 per cento. Gli investimenti netti ammontano a CHF 86,4 milioni.',
     canonicalPath: '/articoli-zugo/zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Zugo prevede avanzo 15,6 milioni nel 2027 con tasso al 52%",
-      "description": "Il Comune di Zugo prevede per il 2027 un avanzo di CHF 15,6 milioni, mantiene il tasso fiscale al 52% e pianifica investimenti netti per CHF 86,4 milioni",
+      "description": "Il Comune di Zugo prevede per il 2027 un avanzo di CHF 15,6 milioni, mantiene il tasso fiscale al 52% e pianifica investimenti netti per CHF 86,4 milioni.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52.webp`,
@@ -77,7 +77,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-baar-rinnovo-comunale-2027': {
     title: 'Baar: rinnovo del Gemeinderat per il 2027–2030',
-    description: 'A Baarer Zytig il rinnovo del Gemeinderat di Baar: elezione del 4 ottobre 2026, sette membri e mandato 2027–2030. Dati aggiornati 2026 per frontalieri',
+    description: 'A Baarer Zytig il rinnovo del Gemeinderat di Baar: elezione del 4 ottobre 2026, sette membri e mandato 2027–2030.',
     keywords: 'frontalieri, ticino, svizzera, italia, baar, rinnovo, gemeinderat, baarer',
     ogTitle: 'Baar: rinnovo del Gemeinderat 2027–2030',
     ogDescription: 'La sezione Wahlen/Abstimmungen della Baarer Zytig presenta i risultati delle votazioni del 27.9. a Baar e il rinnovo del Gemeinderat del 4 ottobre 2026. Il mandato indicato copre il periodo 2027–2030 e riguarda sette membri.',
@@ -86,7 +86,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Baar: rinnovo del Gemeinderat per il 2027–2030",
-      "description": "A Baarer Zytig il rinnovo del Gemeinderat di Baar: elezione del 4 ottobre 2026, sette membri e mandato 2027–2030. Dati aggiornati 2026 per frontalieri",
+      "description": "A Baarer Zytig il rinnovo del Gemeinderat di Baar: elezione del 4 ottobre 2026, sette membri e mandato 2027–2030.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -116,7 +116,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-scuola-sternmatt-ia-2026': {
     title: 'Scuola Sternmatt 1: l\'IA segna il 2026/27 | Frontaliere Ticino',
-    description: 'La scuola Sternmatt 1 presenta il nuovo orientamento per il 2026/27: l\'intelligenza artificiale sarà centrale, con un uso responsabile della tecnologia',
+    description: 'La scuola Sternmatt 1 si presenta in una nuova forma all\'avvio dell\'anno scolastico 2026/27.',
     keywords: 'frontalieri, ticino, svizzera, italia, scuola, sternmatt, segna, affronta',
     ogTitle: 'Scuola Sternmatt 1: l\'IA segna il 2026/27',
     ogDescription: 'La scuola Sternmatt 1 si presenta in una nuova forma all\'inizio dell\'anno scolastico 2026/27. L\'IA non viene descritta come un semplice ingresso nelle aule: la nuova tecnologia va accompagnata dalla trasmissione di un uso responsabile.',
@@ -125,7 +125,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Scuola Sternmatt 1: l'IA segna il 2026/27",
-      "description": "La scuola Sternmatt 1 presenta il nuovo orientamento per il 2026/27: l'intelligenza artificiale sarà centrale, con un uso responsabile della tecnologia",
+      "description": "La scuola Sternmatt 1 si presenta in una nuova forma all'avvio dell'anno scolastico 2026/27.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -194,7 +194,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-zugo-revisione-legge-edilizia-2026': {
     title: 'Revisione parziale del PBG a Zugo: consultazione dal 17 settembre 2026',
-    description: 'Scopri la revisione parziale del PBG nel Cantone di Zugo dal 17 settembre 2026: nuove regole edilizie, alloggi accessibili, zone bianche e procedure',
+    description: 'Scopri la revisione parziale del PBG nel Cantone di Zugo dal 17 settembre 2026: nuove regole edilizie, alloggi accessibili, zone bianche e procedure.',
     keywords: 'frontalieri, ticino, svizzera, italia, revisione, parziale, zugo, consultazione',
     ogTitle: 'Revisione parziale del PBG a Zugo in consultazione dal 17 settembre 2026',
     ogDescription: 'Il Cantone di Zugo presenta la revisione parziale della legge sulla pianificazione e l\'edilizia. Misure per aumentare gli alloggi a prezzi accessibili, nuove zone bianche e procedure edilizie semplificate.',
@@ -203,7 +203,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Revisione parziale del PBG a Zugo: consultazione dal 17 settembre 2026",
-      "description": "Scopri la revisione parziale del PBG nel Cantone di Zugo dal 17 settembre 2026: nuove regole edilizie, alloggi accessibili, zone bianche e procedure",
+      "description": "Scopri la revisione parziale del PBG nel Cantone di Zugo dal 17 settembre 2026: nuove regole edilizie, alloggi accessibili, zone bianche e procedure.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -311,7 +311,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-ricorso-federale-espulsione-zugo': {
     title: 'Zugo: ricorso espulsione respinto dal Tribunale federale',
-    description: 'Maggio 2026: Zugo non rinnova il permesso breve. Il ricorso cantonale non supera l’anticipo spese. Il Tribunale federale nega l’esame del ricorso. Costi',
+    description: 'Maggio 2026: Zugo non rinnova il permesso breve. Il ricorso cantonale non supera l’anticipo spese. Il Tribunale federale nega l’esame del ricorso. Costi.',
     keywords: 'frontalieri, ticino, svizzera, italia, zugo, ricorso, espulsione, respinto',
     ogTitle: 'Ricorso espulsione Zugo respinto dal Tribunale federale',
     ogDescription: 'Maggio 2026: Zugo non rinnova il permesso breve.',
@@ -320,7 +320,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Zugo: ricorso espulsione respinto dal Tribunale federale",
-      "description": "Maggio 2026: Zugo non rinnova il permesso breve. Il ricorso cantonale non supera l’anticipo spese. Il Tribunale federale nega l’esame del ricorso. Costi",
+      "description": "Maggio 2026: Zugo non rinnova il permesso breve. Il ricorso cantonale non supera l’anticipo spese. Il Tribunale federale nega l’esame del ricorso. Costi.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -467,7 +467,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-adeguamento-piano-direttore-zone-bianche-2026': {
     title: 'Adeguamento piano direttore 26/1: «zone bianche» per l\'edilizia a Zugo',
-    description: 'Canton Zugo: adeguamento piano direttore 26/1 introduce zone bianche per l\'edilizia e strategia di stabilizzazione. Partecipazione fino al 16 novembre',
+    description: 'Canton Zugo: adeguamento piano direttore 26/1 introduce zone bianche per l\'edilizia e strategia di stabilizzazione. Partecipazione fino al 16 novembre.',
     keywords: 'frontalieri, ticino, svizzera, italia, adeguamento, piano, direttore, zone',
     ogTitle: 'Adeguamento piano direttore Zugo: cosa cambia con le zone bianche',
     ogDescription: 'Il Canton Zugo adegua il piano direttore con «zone bianche» per l\'edilizia e una strategia di stabilizzazione. Partecipazione pubblica fino al 16 novembre 2026 prima del passaggio al Gran Consiglio.',
@@ -476,7 +476,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Adeguamento piano direttore 26/1: «zone bianche» per l'edilizia a Zugo",
-      "description": "Canton Zugo: adeguamento piano direttore 26/1 introduce zone bianche per l'edilizia e strategia di stabilizzazione. Partecipazione fino al 16 novembre",
+      "description": "Canton Zugo: adeguamento piano direttore 26/1 introduce zone bianche per l'edilizia e strategia di stabilizzazione. Partecipazione fino al 16 novembre.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -701,16 +701,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-balti-zug-robatech-acquisizione': {
     title: 'Robatech rileva Balti AG a Baar: niente tagli previsti',
-    description: 'Robatech ha rilevato Balti AG a fine settembre Balti AG ha sede a Baar, nel Canton Zugo Non sono previsti tagli o ristrutturazioni Acquirente',
+    description: 'A fine settembre Robatech AG, con sede a Muri nel Canton Argovia, ha rilevato Balti AG, azienda basata a Baar, nel Canton Zugo.',
     keywords: 'frontalieri, ticino, svizzera, italia, robatech, rileva, balti, baar',
     ogTitle: 'Robatech rileva Balti AG a Baar',
-    ogDescription: 'Robatech ha rilevato Balti AG a fine settembre Balti AG ha sede a Baar, nel Canton Zugo Non sono previsti tagli o ristrutturazioni Acquirente: Robatech AG',
+    ogDescription: 'A fine settembre Robatech AG, con sede a Muri nel Canton Argovia, ha rilevato Balti AG, azienda basata a Baar, nel Canton Zugo.',
     canonicalPath: '/articoli-zugo/balti-zug-robatech-acquisizione/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Robatech rileva Balti AG a Baar: niente tagli previsti",
-      "description": "Robatech ha rilevato Balti AG a fine settembre Balti AG ha sede a Baar, nel Canton Zugo Non sono previsti tagli o ristrutturazioni Acquirente",
+      "description": "A fine settembre Robatech AG, con sede a Muri nel Canton Argovia, ha rilevato Balti AG, azienda basata a Baar, nel Canton Zugo.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

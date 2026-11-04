@@ -8,7 +8,7 @@ const BASE_URL = 'https://frontaliereticino.ch';
 const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  'blog-walter-bonatti-in-capo-al-mondo': {
  title: 'Walter Bonatti \'In capo al mondo\': il Teatro Sociale',
- description: 'Scopri \'In capo al mondo. In viaggio con Walter Bonatti\' al Teatro Sociale di Montegrino Valtravaglia il 21 marzo. Un evento che rivive le avventure dell\'ultimo',
+ description: 'Il 21 marzo alle ore 21.00, presso il Teatro Sociale di Montegrino Valtravaglia, si terrà \'In capo al mondo.',
  keywords: 'frontalieri, ticino, svizzera, italia, walter, bonatti, capo, mondo',
  ogTitle: 'Walter Bonatti \'In capo al mondo\': il Teatro Sociale',
     ogDescription: 'Il 21 marzo alle ore 21.00, al Teatro Sociale di Montegrino Valtravaglia, si terrà \'In capo al mondo. In viaggio con Walter Bonatti\'.',
@@ -17,7 +17,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "Event",
  "name": "'In capo al mondo. In viaggio con Walter Bonatti' al Teatro Sociale",
- "description": "Scopri 'In capo al mondo. In viaggio con Walter Bonatti' al Teatro Sociale di Montegrino Valtravaglia il 21 marzo. Un evento che rivive le avventure dell'ultimo",
+ "description": "Il 21 marzo alle ore 21.00, presso il Teatro Sociale di Montegrino Valtravaglia, si terrà 'In capo al mondo.",
  "startDate": "2026-03-21T21:00:00+01:00",
  "eventStatus": "https://schema.org/EventScheduled",
  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
@@ -94,7 +94,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-com-aziende-lavoro-como': {
  title: 'Provincia di Como: 4 aziende e 2 agenzie cercano lavoratori',
- description: 'Quattro aziende e due agenzie di Como cercano nuovi lavoratori. Scopri come candidarti e le scadenze, con dettagli su normative e procedure. Dati aggiornati',
+ description: 'Quattro aziende e due agenzie di Como cercano nuovi lavoratori. Scopri come candidarti e le scadenze, con dettagli su normative e procedure. Dati aggiornati.',
  keywords: 'frontalieri, ticino, svizzera, italia, provincia, como, aziende, agenzie',
  ogTitle: 'Opportunità di lavoro in Como: aziende e agenzie cercano',
  ogDescription: 'Scopri le opportunità di lavoro a Como: aziende e agenzie cercano candidati. Partecipazione al Job Day Asso e supporto alle candidature.',
@@ -103,7 +103,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Opportunità di lavoro Como",
- "description": "Quattro aziende e due agenzie di Como cercano nuovi lavoratori. Scopri come candidarti e le scadenze, con dettagli su normative e procedure. Dati aggiornati",
+ "description": "Quattro aziende e due agenzie di Como cercano nuovi lavoratori. Scopri come candidarti e le scadenze, con dettagli su normative e procedure. Dati aggiornati.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/com-aziende-lavoro-como.webp`,
  "width": 1344,
@@ -152,16 +152,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-gadda-incalza-governo-frontalieri': {
  title: 'Frontalieri, Gadda: subito il tavolo | Frontaliere Ticino',
- description: 'L\'onorevole Maria Chiara Gadda chiede la convocazione immediata del tavolo interministeriale sui frontalieri per affrontare criticità su fisco, tassa sanitaria',
+ description: 'La questione dei frontalieri italiani in Svizzera è tornata a essere al centro dell\'attenzione politica.',
  keywords: 'frontalieri, ticino, svizzera, italia, gadda, subito, tavolo, italia-svizzera',
  ogTitle: 'Frontalieri, Gadda: subito il tavolo Italia-Svizzera',
- ogDescription: 'L\'onorevole Maria Chiara Gadda chiede la convocazione immediata del tavolo interministeriale sui frontalieri per affrontare criticità su fisco, tassa sanitaria',
+ ogDescription: 'La questione dei frontalieri italiani in Svizzera è tornata a essere al centro dell\'attenzione politica.',
  canonicalPath: '/articoli-frontaliere/gadda-incalza-governo-frontalieri/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Frontalieri, Gadda incalza il governo: subito il tavolo Italia-Svizzera",
- "description": "L'onorevole Maria Chiara Gadda chiede la convocazione immediata del tavolo interministeriale sui frontalieri per affrontare criticità su fisco, tassa sanitaria",
+ "description": "La questione dei frontalieri italiani in Svizzera è tornata a essere al centro dell'attenzione politica.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/gadda-incalza-governo-frontalieri.webp`,
  "width": 1344,
@@ -184,7 +184,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
     description: 'Dal 19 marzo 2026, la tratta ferroviaria tra Camedo e Domodossola sarà riaperta e il servizio internazionale riprenderà normalmente.',
  keywords: 'frontalieri, ticino, svizzera, italia, centovallina, torna, circolare, camedo',
  ogTitle: 'La Centovallina torna a circolare tra Camedo e Domodossola',
- ogDescription: 'Riapertura della Centovallina tra Camedo e Domodossola dal 19 marzo 2026',
+ ogDescription: 'Riapertura della Centovallina tra Camedo e Domodossola dal 19 marzo 2026.',
  canonicalPath: '/articoli-frontaliere/centovallina-riapertura-treni/',
  structuredData: {
  "@context": "https://schema.org",
@@ -326,7 +326,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-visita-ticinese-coira-criminalita-organizzata': {
  title: 'Visita ticinese a Coira, sul tavolo | Frontaliere Ticino',
- description: 'Il governo ticinese e quello grigionese si sono incontrati a Coira per discutere di collaborazione e lotta alla criminalità organizzata. Dati aggiornati 2026',
+ description: 'Il governo ticinese e quello grigionese si sono incontrati a Coira per discutere di collaborazione e lotta alla criminalità organizzata. Dati aggiornati 2026.',
  keywords: 'frontalieri, ticino, svizzera, italia, visita, ticinese, coira, tavolo',
  ogTitle: 'Visita ticinese a Coira, sul tavolo pure la criminalità',
  ogDescription: 'Il governo ticinese e quello grigionese si sono incontrati a Coira per discutere di collaborazione e lotta alla criminalità organizzata.',
@@ -335,7 +335,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Visita ticinese a Coira, sul tavolo pure la criminalità organizzata",
- "description": "Il governo ticinese e quello grigionese si sono incontrati a Coira per discutere di collaborazione e lotta alla criminalità organizzata. Dati aggiornati 2026",
+ "description": "Il governo ticinese e quello grigionese si sono incontrati a Coira per discutere di collaborazione e lotta alla criminalità organizzata. Dati aggiornati 2026.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/visita-ticinese-coira-criminalita-organizzata.webp`,
  "width": 1344,
@@ -384,7 +384,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-controlli-cantieri-mendrisio': {
  title: 'Controlli cantieri: Ticino perfetto | Frontaliere Ticino',
- description: '66 lavoratori controllati nel Mendrisiotto: nessuna sanzione. In Como 42.500 € di multe. Le regole per i frontalieri edili. Dati aggiornati 2026 per frontalieri',
+ description: '66 lavoratori controllati nel Mendrisiotto: nessuna sanzione. In Como 42.500 € di multe. Le regole per i frontalieri edili.',
  keywords: 'frontalieri, ticino, svizzera, italia, controlli, cantieri, perfetto, como',
  ogTitle: 'Controlli cantieri: Ticino perfetto, Como nel caos',
  ogDescription: '66 lavoratori ispezionati nel Mendrisiotto: zero irregolarità. Dall’altra parte del confine, 42.500 € di multe e 3 denunce.',
@@ -393,7 +393,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Controlli cantieri: Ticino zero irregolarità, Como multe e denunce",
- "description": "66 lavoratori controllati nel Mendrisiotto: nessuna sanzione. In Como 42.500 € di multe. Le regole per i frontalieri edili. Dati aggiornati 2026 per frontalieri",
+ "description": "66 lavoratori controllati nel Mendrisiotto: nessuna sanzione. In Como 42.500 € di multe. Le regole per i frontalieri edili.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/controlli-cantieri-mendrisio.webp`,
  "width": 1344,
@@ -503,7 +503,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
     description: '"La soluzione mista è un compromesso ragionevole che protegge i lavoratori e garantisce la stabilità finanziaria del sistema previdenziale".',
  keywords: 'frontalieri, ticino, svizzera, italia, consiglio, stati, approva, soluzione',
  ogTitle: 'Il Consiglio degli Stati approva la soluzione mista',
- ogDescription: 'La Camera alta ribadisce la necessità di un aumento sia dell\'IVA che dei contributi salariali per finanziare la tredicesima mensilità dell\'AVS, stimando i costi',
+ ogDescription: 'La Camera alta ribadisce la necessità di un aumento sia dell\'IVA che dei contributi salariali per finanziare la tredicesima mensilità dell\'AVS, stimando i costi.',
  canonicalPath: '/articoli-frontaliere/consiglio-stati-soluzione-mista-13esima-avs/',
  structuredData: {
  "@context": "https://schema.org",
@@ -529,7 +529,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-frode-cassa-compensazione-avs-ticino': {
  title: 'Frode da 2,7 milioni alla cassa di compensazione AVS',
- description: 'Scopri come la frode da 2,7 milioni di franchi alla cassa di compensazione AVS ha colpito il Canton Ticino e come tutelarti da frodi e abusi. Dati aggiornati',
+ description: 'Scopri come la frode da 2,7 milioni di franchi alla cassa di compensazione AVS ha colpito il Canton Ticino e come tutelarti da frodi e abusi. Dati aggiornati.',
  keywords: 'frontalieri, ticino, svizzera, italia, frode, milioni, alla, cassa',
  ogTitle: 'Frode da 2,7 milioni alla cassa di compensazione AVS',
  ogDescription: 'La frode da 2,7 milioni di franchi alla cassa di compensazione AVS ha colpito il Canton Ticino. Scopri come tutelarti da frodi e abusi.',
@@ -538,7 +538,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Frode da 2,7 milioni alla cassa di compensazione AVS: come tutelarsi",
- "description": "Scopri come la frode da 2,7 milioni di franchi alla cassa di compensazione AVS ha colpito il Canton Ticino e come tutelarti da frodi e abusi. Dati aggiornati",
+ "description": "Scopri come la frode da 2,7 milioni di franchi alla cassa di compensazione AVS ha colpito il Canton Ticino e come tutelarti da frodi e abusi. Dati aggiornati.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/frode-cassa-compensazione-avs-ticino.webp`,
  "width": 1344,
@@ -559,16 +559,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-deputazione-ticinese-italofoni-2024': {
  title: 'La deputazione ticinese: «Abbiamo | Frontaliere Ticino',
- description: 'La deputazione ticinese ha tenuto un incontro con i responsabili delle risorse umane di un Dipartimento federale per discutere la rappresentanza degli italofoni',
+ description: 'La deputazione ticinese ha tenuto un incontro con i responsabili delle risorse umane di un Dipartimento federale per discutere la rappresentanza degli italofoni.',
  keywords: 'frontalieri, ticino, svizzera, italia, deputazione, ticinese, abbiamo, discusso',
  ogTitle: 'La deputazione ticinese: «Abbiamo discusso degli italofoni',
- ogDescription: 'La deputazione ticinese ha tenuto un incontro con i responsabili delle risorse umane di un Dipartimento federale per discutere la rappresentanza degli italofoni',
+ ogDescription: 'La deputazione ticinese ha tenuto un incontro con i responsabili delle risorse umane di un Dipartimento federale per discutere la rappresentanza degli italofoni.',
  canonicalPath: '/articoli-frontaliere/deputazione-ticinese-italofoni-2024/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "La deputazione ticinese: «Abbiamo discusso degli italofoni nell'Amministrazione federale»",
- "description": "La deputazione ticinese ha tenuto un incontro con i responsabili delle risorse umane di un Dipartimento federale per discutere la rappresentanza degli italofoni",
+ "description": "La deputazione ticinese ha tenuto un incontro con i responsabili delle risorse umane di un Dipartimento federale per discutere la rappresentanza degli italofoni.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/deputazione-ticinese-italofoni-2024.webp`,
  "width": 1344,
@@ -646,7 +646,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-incidente-stradale-laghi': {
  title: 'Lunghe code sulla strada del lago tra la Schiranna',
- description: 'Un incidente stradale si verifica lungo la strada del lago tra la Schiranna e Calcinate del Pesce, in Varese, coinvolgendo un\'auto e una moto. Dati aggiornati',
+ description: 'Un incidente stradale si verifica lungo la strada del lago tra la Schiranna e Calcinate del Pesce, in Varese, coinvolgendo un\'auto e una moto. Dati aggiornati.',
  keywords: 'frontalieri, ticino, svizzera, italia, lunghe, code, sulla, strada',
  ogTitle: 'Lunghe code sulla strada del lago tra la Schiranna',
  ogDescription: 'Un incidente stradale si verifica lungo la strada del lago tra la Schiranna e Calcinate del Pesce, in Varese, coinvolgendo un\'auto e una moto.',
@@ -655,7 +655,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Lunghe code sulla strada del lago tra la Schiranna e Calcinate del Pesce per uno scontro tra auto e moto",
- "description": "Un incidente stradale si verifica lungo la strada del lago tra la Schiranna e Calcinate del Pesce, in Varese, coinvolgendo un'auto e una moto. Dati aggiornati",
+ "description": "Un incidente stradale si verifica lungo la strada del lago tra la Schiranna e Calcinate del Pesce, in Varese, coinvolgendo un'auto e una moto. Dati aggiornati.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/incidente-stradale-laghi.webp`,
  "width": 1344,
@@ -733,16 +733,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-ampliamento-parco-eolico-san-gottardo-digital-2026': {
  title: 'Ampliamento del Parco eolico del San | Frontaliere Ticino',
- description: 'Dopo cinque anni dalla sua entrata in funzione, il Parco eolico del San Gottardo può essere ampliato grazie alla consultazione digitale in corso. Dati',
+ description: 'Dopo cinque anni dalla sua entrata in funzione, il Parco eolico del San Gottardo può essere ampliato grazie alla consultazione digitale in corso. Dati.',
  keywords: 'frontalieri, ticino, svizzera, italia, ampliamento, parco, eolico, gottardo',
  ogTitle: 'Ampliamento del Parco eolico del San Gottardo: al via',
- ogDescription: 'Dopo cinque anni dalla sua entrata in funzione, il Parco eolico del San Gottardo può essere ampliato grazie alla consultazione digitale in corso',
+ ogDescription: 'Dopo cinque anni dalla sua entrata in funzione, il Parco eolico del San Gottardo può essere ampliato grazie alla consultazione digitale in corso.',
  canonicalPath: '/articoli-frontaliere/ampliamento-parco-eolico-san-gottardo-digital-2026/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Ampliamento del Parco eolico del San Gottardo: al via la consultazione",
- "description": "Dopo cinque anni dalla sua entrata in funzione, il Parco eolico del San Gottardo può essere ampliato grazie alla consultazione digitale in corso. Dati",
+ "description": "Dopo cinque anni dalla sua entrata in funzione, il Parco eolico del San Gottardo può essere ampliato grazie alla consultazione digitale in corso. Dati.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/ampliamento-parco-eolico-san-gottardo-digital-2026.webp`,
  "width": 1344,
@@ -820,7 +820,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-salute-prevenzione-burocrazia-svizzera': {
  title: 'Bertolaso a Varese: fare presto tra prevenzione e burocrazia',
- description: 'Analisi delle strategie di Bertolaso per migliorare prevenzione, screening e snellire procedure in Ticino e frontiera svizzera nel 2026. Dati aggiornati 2026',
+ description: 'Analisi delle strategie di Bertolaso per migliorare prevenzione, screening e snellire procedure in Ticino e frontiera svizzera nel 2026. Dati aggiornati 2026.',
  keywords: 'frontalieri, ticino, svizzera, italia, bertolaso, varese, fare, presto',
  ogTitle: 'Salute Ticino: prevenzione e burocrazia 2026',
  ogDescription: 'Focus sulle strategie di Bertolaso per migliorare i servizi sanitari e snellire le procedure in Canton Ticino e regione di frontiera nel 2026.',
@@ -829,7 +829,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Salute Ticino: prevenzione e burocrazia 2026",
- "description": "Analisi delle strategie di Bertolaso per migliorare prevenzione, screening e snellire procedure in Ticino e frontiera svizzera nel 2026. Dati aggiornati 2026",
+ "description": "Analisi delle strategie di Bertolaso per migliorare prevenzione, screening e snellire procedure in Ticino e frontiera svizzera nel 2026. Dati aggiornati 2026.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/salute-prevenzione-burocrazia-svizzera.webp`,
  "width": 1344,
@@ -878,16 +878,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-ubs-fusione-credit-suisse-ticino': {
  title: 'Il cantiere di UBS a tre anni dal salvataggio di Credit',
- description: 'A tre anni dal salvataggio di Credit Suisse, UBS completa la migrazione di 1,2 milioni di clienti e annuncia 3.000 licenziamenti in Svizzera. Cresce l’attesa pe',
+ description: 'A tre anni dal salvataggio di Credit Suisse, UBS completa la migrazione di 1,2 milioni di clienti e annuncia 3.000 licenziamenti in Svizzera. Cresce l’attesa pe.',
  keywords: 'frontalieri, ticino, svizzera, italia, cantiere, anni, salvataggio, credit',
  ogTitle: 'Il cantiere di UBS a tre anni dal salvataggio di Credit',
- ogDescription: 'A tre anni dal salvataggio di Credit Suisse, UBS completa la migrazione di 1,2 milioni di clienti e annuncia 3.000 licenziamenti in Svizzera. Cresce l’attesa pe',
+ ogDescription: 'A tre anni dal salvataggio di Credit Suisse, UBS completa la migrazione di 1,2 milioni di clienti e annuncia 3.000 licenziamenti in Svizzera. Cresce l’attesa pe.',
  canonicalPath: '/articoli-frontaliere/ubs-fusione-credit-suisse-ticino/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Il cantiere di UBS a tre anni dal salvataggio di Credit Suisse",
- "description": "A tre anni dal salvataggio di Credit Suisse, UBS completa la migrazione di 1,2 milioni di clienti e annuncia 3.000 licenziamenti in Svizzera. Cresce l’attesa pe",
+ "description": "A tre anni dal salvataggio di Credit Suisse, UBS completa la migrazione di 1,2 milioni di clienti e annuncia 3.000 licenziamenti in Svizzera. Cresce l’attesa pe.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/ubs-fusione-credit-suisse-ticino.webp`,
  "width": 1344,
@@ -910,7 +910,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  description: 'Il Consiglio degli Stati approva il progetto di legge sui contratti collettivi di lavoro, con priorità sui salari minimi e il ruolo dei CCL dichiarati di obblig',
  keywords: 'frontalieri, ticino, svizzera, italia, salari, minimi, nuove, direttive',
  ogTitle: 'Salari Minimi e CCL in Ticino: Nuove Direttive per il 2026',
- ogDescription: 'Il Consiglio degli Stati approva il progetto di legge sui contratti collettivi di lavoro, con priorità sui salari minimi e il ruolo dei CCL dichiarati di obblig',
+ ogDescription: 'Nel panorama lavorativo svizzero, il tema dei salari minimi e dei contratti collettivi di lavoro (CCL) sta assumendo un ruolo centrale nel dibattito politico e sociale.',
  canonicalPath: '/articoli-frontaliere/salari-minimi-ccl-ticino-2026/',
  structuredData: {
  "@context": "https://schema.org",
@@ -965,16 +965,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-contratti-collettivi-salari-ticino': {
  title: 'Contratti collettivi di lavoro in Ticino: prevalenza sui salari minimi cantonali',
- description: 'Il Consiglio degli Stati svizzero ha approvato il prioritario ruolo dei CCL rispetto ai salari minimi cantonali, con implicazioni concrete per frontalieri e azi',
+ description: 'La capacità di adattamento delle imprese e dei sindacati sarà determinante per il futuro delle condizioni di impiego nel Canton Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, contratti, collettivi, lavoro, prevalenza',
  ogTitle: 'Contratti collettivi di lavoro in Ticino: prevalenza',
- ogDescription: 'Il Consiglio degli Stati svizzero ha approvato il prioritario ruolo dei CCL rispetto ai salari minimi cantonali, con implicazioni concrete per frontalieri e azi',
+ ogDescription: 'Nel panorama lavorativo del Canton Ticino, un cambiamento di rilievo sta emergendo a seguito della recente decisione del Consiglio degli Stati svizzero, avvenuta il 17 marzo 2026.',
  canonicalPath: '/articoli-frontaliere/contratti-collettivi-salari-ticino/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Contratti collettivi di lavoro in Ticino: prevalenza sui salari minimi cantonali",
- "description": "Il Consiglio degli Stati svizzero ha approvato il prioritario ruolo dei CCL rispetto ai salari minimi cantonali, con implicazioni concrete per frontalieri e azi",
+ "description": "La capacità di adattamento delle imprese e dei sindacati sarà determinante per il futuro delle condizioni di impiego nel Canton Ticino.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/contratti-collettivi-salari-ticino.webp`,
  "width": 1344,
@@ -994,16 +994,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-tutela-sovranita-dati-sanitari': {
  title: 'Sanità in Ticino: la tutela della sovranità dei dati',
- description: 'Il Canton Ticino si prepara a fronteggiare le sfide della sicurezza digitale e della protezione dei dati sanitari, seguendo le recenti dichiarazioni del senator',
+ description: 'Normativa: La Svizzera ha rafforzato le normative sulla protezione dei dati sanitari nel 2024.',
  keywords: 'frontalieri, ticino, svizzera, italia, sanità, tutela, sovranità, dati',
  ogTitle: 'Sanità in Ticino: la tutela della sovranità dei dati',
- ogDescription: 'Il Canton Ticino si prepara a fronteggiare le sfide della sicurezza digitale e della protezione dei dati sanitari, seguendo le recenti dichiarazioni del senator',
+ ogDescription: 'Normativa: La Svizzera ha rafforzato le normative sulla protezione dei dati sanitari nel 2024.',
  canonicalPath: '/articoli-frontaliere/tutela-sovranita-dati-sanitari/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Sanità in Ticino: la tutela della sovranità dei dati sanitari",
- "description": "Il Canton Ticino si prepara a fronteggiare le sfide della sicurezza digitale e della protezione dei dati sanitari, seguendo le recenti dichiarazioni del senator",
+ "description": "Normativa: La Svizzera ha rafforzato le normative sulla protezione dei dati sanitari nel 2024.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/consiglio-nazionale-cartella-sanitaria.webp`,
  "width": 1200,
@@ -1023,16 +1023,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-nomine-annullate-sims-tram': {
  title: 'Nomine alla SIMS annullate: il Consiglio di Stato si arrende',
- description: 'Il Tribunale amministrativo ha dichiarato illegittime le nomine dei direttori della SIMS. Il Consiglio di Stato ha deciso di non ricorrere al Tribunale federale',
+ description: 'La decisione del Consiglio di Stato di non ricorrere si traduce in una sorta di resa, riconoscendo la validità delle sentenze emesse contro le nomine.',
  keywords: 'frontalieri, ticino, svizzera, italia, nomine, alla, sims, annullate',
  ogTitle: 'Nomine alla SIMS annullate: il Consiglio di Stato si arrende',
- ogDescription: 'Il Tribunale amministrativo ha dichiarato illegittime le nomine dei direttori della SIMS. Il Consiglio di Stato ha deciso di non ricorrere al Tribunale federale',
+ ogDescription: 'La vicenda delle nomine alla Sezione dell\'insegnamento medio superiore (SIMS) del Canton Ticino segna un importante punto di svolta nella gestione delle cariche istituzionali di area educativa.',
  canonicalPath: '/articoli-frontaliere/nomine-annullate-sims-tram/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Nomine alla SIMS annullate: il Consiglio di Stato si arrende al TRAM",
- "description": "Il Tribunale amministrativo ha dichiarato illegittime le nomine dei direttori della SIMS. Il Consiglio di Stato ha deciso di non ricorrere al Tribunale federale",
+ "description": "La decisione del Consiglio di Stato di non ricorrere si traduce in una sorta di resa, riconoscendo la validità delle sentenze emesse contro le nomine.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/nomine-annullate-sims-tram.webp`,
  "width": 1344,
@@ -1255,16 +1255,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-nubifragio-coira-mesolcina-ristoro': {
  title: 'Nubifragio Giugno 2024: Ristoro | Frontaliere Ticino',
- description: 'Il nubifragio di giugno 2024 ha causato danni ingenti in Coira e Mesolcina. La risposta dello Stato include interventi di sostegno economico per le aree colpite',
+ description: 'Il nubifragio di giugno 2024 ha causato danni ingenti in Coira e Mesolcina. La risposta dello Stato include interventi di sostegno economico per le aree colpite.',
  keywords: 'frontalieri, ticino, svizzera, italia, nubifragio, giugno, 2024, ristoro',
  ogTitle: 'Nubifragio Giugno 2024: Ristoro Finanziario in Ticino',
- ogDescription: 'Il nubifragio di giugno 2024 ha causato danni ingenti in Coira e Mesolcina. La risposta dello Stato include interventi di sostegno economico per le aree colpite',
+ ogDescription: 'Il nubifragio di giugno 2024 ha causato danni ingenti in Coira e Mesolcina. La risposta dello Stato include interventi di sostegno economico per le aree colpite.',
  canonicalPath: '/articoli-frontaliere/nubifragio-coira-mesolcina-ristoro/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Nubifragio Giugno 2024: Ristoro Finanziario in Ticino",
- "description": "Il nubifragio di giugno 2024 ha causato danni ingenti in Coira e Mesolcina. La risposta dello Stato include interventi di sostegno economico per le aree colpite",
+ "description": "Il nubifragio di giugno 2024 ha causato danni ingenti in Coira e Mesolcina. La risposta dello Stato include interventi di sostegno economico per le aree colpite.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/nubifragio-coira-mesolcina-ristoro.webp`,
  "width": 1344,
@@ -1545,7 +1545,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-kebab-case-ticino-nubifragio-grigioni': {
  title: 'Ticino: contributo cantonale per ripristino strutture',
- description: 'Il governo grigionese concede 511\'000 franchi per ripristino strutture agricole danneggiate dal nubifragio del 2024 nella regione Grigioni. Dati aggiornati 2026',
+ description: 'Il governo grigionese concede 511\'000 franchi per ripristino strutture agricole danneggiate dal nubifragio del 2024 nella regione Grigioni. Dati aggiornati 2026.',
  keywords: 'frontalieri, ticino, svizzera, italia, contributo, cantonale, ripristino, strutture',
  ogTitle: 'Ticino: contributo cantonale per ripristino strutture',
  ogDescription: 'Il governo grigionese concede 511\'000 franchi per ripristino strutture agricole danneggiate dal nubifragio del 2024 nella regione Grigioni.',
@@ -1554,7 +1554,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Ticino: contributo cantonale per ripristino strutture agricole danneggiate dal nubifragio del 2024",
- "description": "Il governo grigionese concede 511'000 franchi per ripristino strutture agricole danneggiate dal nubifragio del 2024 nella regione Grigioni. Dati aggiornati 2026",
+ "description": "Il governo grigionese concede 511'000 franchi per ripristino strutture agricole danneggiate dal nubifragio del 2024 nella regione Grigioni. Dati aggiornati 2026.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/kebab-case-ticino-nubifragio-grigioni.webp`,
  "width": 1344,
@@ -1690,7 +1690,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-tassa-transito-ticino-pedemontana': {
  title: 'L\'imposta di transito potrebbe | Frontaliere Ticino',
- description: 'La tassa di transito potrebbe essere un modo efficace per ridurre il traffico in Svizzera e per disincentivare la guida in orari di punta. Dati aggiornati 2026',
+ description: 'La tassa di transito potrebbe essere un modo efficace per ridurre il traffico in Svizzera e per disincentivare la guida in orari di punta. Dati aggiornati 2026.',
  keywords: 'frontalieri, ticino, svizzera, italia, imposta, transito, potrebbe, funzionare',
  ogTitle: 'Tassa di transito in Svizzera: come funziona e cosa c\'è da sapere',
  ogDescription: 'La tassa di transito potrebbe essere un modo efficace per ridurre il traffico in Svizzera e per disincentivare la guida in orari di punta.',
@@ -1699,7 +1699,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Tassa di transito in Svizzera: come funziona e cosa c'è da sapere",
- "description": "La tassa di transito potrebbe essere un modo efficace per ridurre il traffico in Svizzera e per disincentivare la guida in orari di punta. Dati aggiornati 2026",
+ "description": "La tassa di transito potrebbe essere un modo efficace per ridurre il traffico in Svizzera e per disincentivare la guida in orari di punta. Dati aggiornati 2026.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/tassa-transito-ticino-pedemontana.webp`,
  "width": 1344,
@@ -1777,16 +1777,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-farmaci-competitiva-europa': {
  title: 'L\'industria farmaceutica: per essere | Frontaliere Ticino',
- description: 'L\'industria farmaceutica è un settore strategico per l\'economia italiana e europea. È un settore che crea posti di lavoro, innova e contribuisce alla crescita',
+ description: 'L\'industria farmaceutica è un settore strategico per l\'economia italiana e europea. È un settore che crea posti di lavoro, innova e contribuisce alla crescita.',
  keywords: 'frontalieri, ticino, svizzera, italia, industria, farmaceutica, essere, competitiva',
  ogTitle: 'L\'industria farmaceutica: per essere competitiva l\'Europa',
- ogDescription: 'L\'industria farmaceutica è un settore strategico per l\'economia italiana e europea. È un settore che crea posti di lavoro, innova e contribuisce alla crescita',
+ ogDescription: 'L\'industria farmaceutica è un settore strategico per l\'economia italiana e europea. È un settore che crea posti di lavoro, innova e contribuisce alla crescita.',
  canonicalPath: '/articoli-frontaliere/farmaci-competitiva-europa/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "L'industria farmaceutica: per essere competitiva l'Europa deve avere regole chiare e prevedibili",
- "description": "L'industria farmaceutica è un settore strategico per l'economia italiana e europea. È un settore che crea posti di lavoro, innova e contribuisce alla crescita",
+ "description": "L'industria farmaceutica è un settore strategico per l'economia italiana e europea. È un settore che crea posti di lavoro, innova e contribuisce alla crescita.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/farmaci-competitiva-europa.webp`,
  "width": 1344,
@@ -2050,7 +2050,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-la-navigazione-rafforza-offerta-2026': {
  title: 'Navigazione Ticino: Offerte potenziate | Frontaliere Ticino',
- description: 'La Navigazione Lago di Lugano si prepara per una nuova stagione con offerte potenziate, mirando a diventare un vettore turistico di riferimento. Dati aggiornati',
+ description: 'La Navigazione Lago di Lugano si prepara per una nuova stagione con offerte potenziate, mirando a diventare un vettore turistico di riferimento. Dati aggiornati.',
  keywords: 'frontalieri, ticino, svizzera, italia, navigazione, offerte, potenziate, lago',
  ogTitle: 'Navigazione Ticino: Offerte potenziate per il 2026',
  ogDescription: 'La Navigazione Lago di Lugano si prepara per una nuova stagione con offerte potenziate, mirando a diventare un vettore turistico di riferimento.',
@@ -2059,7 +2059,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Navigazione Ticino: Offerte potenziate per il 2026",
- "description": "La Navigazione Lago di Lugano si prepara per una nuova stagione con offerte potenziate, mirando a diventare un vettore turistico di riferimento. Dati aggiornati",
+ "description": "La Navigazione Lago di Lugano si prepara per una nuova stagione con offerte potenziate, mirando a diventare un vettore turistico di riferimento. Dati aggiornati.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/la-navigazione-rafforza-offerta-2026.webp`,
  "width": 1344,
@@ -2166,7 +2166,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-violenza-donne-consiglio-europa-ticino': {
  title: 'Il Consiglio d’Europa Valuta i Progressi della Svizzera',
- description: 'Scopri come il Consiglio d’Europa valuta i progressi della Svizzera e del Ticino nella lotta contro la violenza di genere. Dati aggiornati 2026 per frontalieri',
+ description: 'Scopri come il Consiglio d’Europa valuta i progressi della Svizzera e del Ticino nella lotta contro la violenza di genere.',
  keywords: 'frontalieri, ticino, svizzera, italia, consiglio, europa, valuta, progressi',
  ogTitle: 'Consiglio d’Europa e Lotta alla Violenza in Ticino',
  ogDescription: 'Il 11 marzo, il Consiglio d\'Europa ha monitorato i progressi della Svizzera e del Ticino nella lotta alla violenza di genere.',
@@ -2175,7 +2175,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Violenza contro le donne, il Consiglio d’Europa valuta i progressi di Svizzera e Ticino",
- "description": "Scopri come il Consiglio d’Europa valuta i progressi della Svizzera e del Ticino nella lotta contro la violenza di genere. Dati aggiornati 2026 per frontalieri",
+ "description": "Scopri come il Consiglio d’Europa valuta i progressi della Svizzera e del Ticino nella lotta contro la violenza di genere.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/violenza-donne-consiglio-europa-ticino.webp`,
  "width": 1344,
@@ -2195,16 +2195,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-trojani-capo-servizi-esercito-ticino': {
  title: 'Un ticinese a capo di due importanti | Frontaliere Ticino',
- description: 'Il colonnello SMG Stefano Trojani assumerà il comando del Servizio informazioni militare e del Servizio di protezione preventiva dell\'esercito dal 1° giugno',
+ description: 'Attualmente, Trojani ricopre la funzione di sostituto capo del Servizio informazioni militare e del Servizio di protezione preventiva dell\'esercito.',
  keywords: 'frontalieri, ticino, svizzera, italia, ticinese, capo, importanti, servizi',
  ogTitle: 'Un ticinese a capo di due importanti servizi dell\'esercito',
- ogDescription: 'Il colonnello SMG Stefano Trojani assumerà il comando del Servizio informazioni militare e del Servizio di protezione preventiva dell\'esercito dal 1° giugno',
+ ogDescription: 'Il Dipartimento delle istituzioni del Canton Ticino ha espresso la sua soddisfazione per la nomina del colonnello SMG Stefano Trojani a capo del Servizio informazioni militare e del Servizio di protezione preventiva dell\'esercito.',
  canonicalPath: '/articoli-frontaliere/trojani-capo-servizi-esercito-ticino/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Un ticinese a capo di due importanti servizi dell'esercito",
- "description": "Il colonnello SMG Stefano Trojani assumerà il comando del Servizio informazioni militare e del Servizio di protezione preventiva dell'esercito dal 1° giugno",
+ "description": "Attualmente, Trojani ricopre la funzione di sostituto capo del Servizio informazioni militare e del Servizio di protezione preventiva dell'esercito.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/trojani-capo-servizi-esercito-ticino.webp`,
  "width": 1344,
@@ -2253,7 +2253,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-ricchi-fuga-medio-oriente-ticino': {
  title: 'Ricchi in fuga dal Medio Oriente: il Ticino rischia',
- description: 'Il Ticino rischia di perdere l’occasione di attrarre contribuenti facoltosi in fuga dal Medio Oriente. Strategie e punti di forza del Cantone per intercettare',
+ description: 'Scadenza: Nessuna scadenza specificata, ma urgenza per evitare di perdere opportunità.',
  keywords: 'frontalieri, ticino, svizzera, italia, ricchi, fuga, medio, oriente',
  ogTitle: 'Ricchi in fuga dal Medio Oriente: opportunità per Ticino',
  ogDescription: 'Il Canton Ticino deve agire per attrarre capitali e contribuenti facoltosi in fuga dal Medio Oriente, sfruttando punti di forza e posizione strategica.',
@@ -2262,7 +2262,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Ricchi in fuga dal Medio Oriente, «Il Ticino vuole lasciarsi sfuggire l’opportunità?»",
- "description": "Il Ticino rischia di perdere l’occasione di attrarre contribuenti facoltosi in fuga dal Medio Oriente. Strategie e punti di forza del Cantone per intercettare",
+ "description": "Scadenza: Nessuna scadenza specificata, ma urgenza per evitare di perdere opportunità.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/ricchi-fuga-medio-oriente-ticino.webp`,
  "width": 1344,
@@ -2311,7 +2311,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-sindacati-contro-snl-ticino-2026': {
  title: 'Sindacati contro SNL: salari | Frontaliere Ticino',
- description: 'Angelo Stroppini (SEV) denuncia salari iniqui e mancanza di trasparenza alla Società Navigazione Lago di Lugano nel 2026. Dati aggiornati 2026 per frontalieri',
+ description: 'Angelo Stroppini (SEV) denuncia salari iniqui e mancanza di trasparenza alla Società Navigazione Lago di Lugano nel 2026.',
  keywords: 'frontalieri, ticino, svizzera, italia, sindacati, contro, salari, trasparenza',
  ogTitle: 'Sindacati contro SNL: salari e trasparenza in Ticino 2026',
  ogDescription: 'Critiche sindacali alla Società Navigazione Lago di Lugano per infrazioni e condizioni salariali inique nel 2026.',
@@ -2320,7 +2320,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "I sindacati (ancora) contro SNL: «Tout va très bien Madame la Marquise»",
- "description": "Angelo Stroppini (SEV) denuncia salari iniqui e mancanza di trasparenza alla Società Navigazione Lago di Lugano nel 2026. Dati aggiornati 2026 per frontalieri",
+ "description": "Angelo Stroppini (SEV) denuncia salari iniqui e mancanza di trasparenza alla Società Navigazione Lago di Lugano nel 2026.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/sindacati-contro-snl-ticino-2026.webp`,
  "width": 1344,
@@ -2514,7 +2514,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-ticino-confine-droga': {
  title: 'Gallarate: pendolare in e-bike | Frontaliere Ticino',
- description: 'Un uomo di 47 anni è stato arrestato a Gallarate per spaccio di droga. Utilizzava una bicicletta elettrica per spostarsi. Dati aggiornati 2026 per frontalieri',
+ description: 'Un uomo di 47 anni è stato arrestato a Gallarate per spaccio di droga. Utilizzava una bicicletta elettrica per spostarsi.',
  keywords: 'frontalieri, ticino, svizzera, italia, gallarate, pendolare, e-bike, arrestato',
  ogTitle: 'Gallarate: pendolare in e-bike arrestato per spaccio di droga',
  ogDescription: 'Un uomo di 47 anni è stato arrestato a Gallarate per spaccio di droga. Utilizzava una bicicletta elettrica per spostarsi.',
@@ -2523,7 +2523,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Gallarate: pendolare in e-bike arrestato per spaccio di droga",
- "description": "Un uomo di 47 anni è stato arrestato a Gallarate per spaccio di droga. Utilizzava una bicicletta elettrica per spostarsi. Dati aggiornati 2026 per frontalieri",
+ "description": "Un uomo di 47 anni è stato arrestato a Gallarate per spaccio di droga. Utilizzava una bicicletta elettrica per spostarsi.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/ticino-confine-droga.webp`,
  "width": 1200,
@@ -2543,7 +2543,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-franco-svizzero-minimi-euro': {
  title: 'Il franco svizzero ai minimi da gennaio | Frontaliere Ticino',
- description: 'Il franco svizzero ha raggiunto i minimi da gennaio sull\'euro sfiorando 0,92 franchi. Questo trend potrebbe continuare, ma è importante monitorare il cambio',
+ description: 'Il franco svizzero ha raggiunto i minimi da gennaio sull\'euro sfiorando 0,92 franchi. Questo trend potrebbe continuare, ma è importante monitorare il cambio.',
  keywords: 'frontalieri, ticino, svizzera, italia, franco, svizzero, minimi, gennaio',
  ogTitle: 'Il franco svizzero ai minimi da gennaio sull\'euro',
  ogDescription: 'Il franco svizzero ha raggiunto i minimi da gennaio sull\'euro sfiorando 0,92 franchi.',
@@ -2552,7 +2552,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Il franco svizzero ai minimi da gennaio sull'euro",
- "description": "Il franco svizzero ha raggiunto i minimi da gennaio sull'euro sfiorando 0,92 franchi. Questo trend potrebbe continuare, ma è importante monitorare il cambio",
+ "description": "Il franco svizzero ha raggiunto i minimi da gennaio sull'euro sfiorando 0,92 franchi. Questo trend potrebbe continuare, ma è importante monitorare il cambio.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/franco-svizzero-minimi-euro.webp`,
  "width": 1200,
@@ -2601,7 +2601,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-piu-interventi-soccorso-meno-vittime-montagna-ticino-2025': {
  title: 'Più interventi di soccorso, ma meno | Frontaliere Ticino',
- description: 'Nel 2025, il Club Alpino Svizzero (CAS) ha registrato un aumento degli interventi di soccorso, ma una diminuzione delle vittime in montagna. Dati aggiornati',
+ description: 'Nel 2025, il Club Alpino Svizzero (CAS) ha registrato un aumento degli interventi di soccorso, ma una diminuzione delle vittime in montagna. Dati aggiornati.',
  keywords: 'frontalieri, ticino, svizzera, italia, interventi, soccorso, meno, vittime',
  ogTitle: 'Più interventi di soccorso, ma meno vittime in montagna nel 2025',
  ogDescription: 'Nel 2025, il Club Alpino Svizzero (CAS) ha registrato un aumento degli interventi di soccorso, ma una diminuzione delle vittime in montagna.',
@@ -2610,7 +2610,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "{\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"mainEntityOfPage\":{\"@type\":\"WebPage\"",
- "description": "Nel 2025, il Club Alpino Svizzero (CAS) ha registrato un aumento degli interventi di soccorso, ma una diminuzione delle vittime in montagna. Dati aggiornati",
+ "description": "Nel 2025, il Club Alpino Svizzero (CAS) ha registrato un aumento degli interventi di soccorso, ma una diminuzione delle vittime in montagna. Dati aggiornati.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/piu-interventi-soccorso-meno-vittime-montagna-ticino-2025.webp`,
  "width": 1200,
@@ -2633,7 +2633,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  description: 'La Svizzera non ha effettuato test sui neonati ticinesi per la contaminazione nel latte: cosa fare subito. Dati aggiornati 2026 per frontalieri in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, test, neonati, escluso, controlli',
  ogTitle: 'Test neonati Ticino: cosa fare',
- ogDescription: 'La Svizzera non ha effettuato screening sui lattanti ticinesi per la contaminazione: guida per i frontalieri',
+ ogDescription: 'La Svizzera non ha effettuato screening sui lattanti ticinesi per la contaminazione: guida per i frontalieri.',
  canonicalPath: '/articoli-frontaliere/nei-test-neonati-ticinesi/',
  structuredData: {
  "@context": "https://schema.org",
@@ -2688,7 +2688,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-congresso-svizzera-italia-varese-2026': {
  title: 'Congresso Svizzera‑Italia a Varese | Frontaliere Ticino',
- description: 'Scopri le novità fiscali, previdenziali e normative presentate il 16 aprile 2026 a Varese, pensate per i frontalieri tra Italia e Svizzera. Dati aggiornati 2026',
+ description: 'Scopri le novità fiscali, previdenziali e normative presentate il 16 aprile 2026 a Varese, pensate per i frontalieri tra Italia e Svizzera. Dati aggiornati 2026.',
  keywords: 'frontalieri, ticino, svizzera, italia, congresso, varese, aggiornamenti, fiscali',
  ogTitle: 'Congresso Svizzera‑Italia a Varese: aggiornamenti per i frontalieri ticinesi',
  ogDescription: 'Il 16 aprile 2026 a Villa Andrea, esperti illustrano le evoluzioni fiscali e previdenziali per chi vive e lavora tra Italia e Svizzera.',
@@ -2697,7 +2697,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Congresso Svizzera‑Italia a Varese: aggiornamenti fiscali per i frontalieri ticinesi",
- "description": "Scopri le novità fiscali, previdenziali e normative presentate il 16 aprile 2026 a Varese, pensate per i frontalieri tra Italia e Svizzera. Dati aggiornati 2026",
+ "description": "Scopri le novità fiscali, previdenziali e normative presentate il 16 aprile 2026 a Varese, pensate per i frontalieri tra Italia e Svizzera. Dati aggiornati 2026.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/congresso-svizzera-italia-varese-2026.webp`,
  "width": 1200,
@@ -2717,7 +2717,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-processo-mendrisio-19-capit': {
  title: 'Processo a Mendrisio: 19 capi | Frontaliere Ticino',
- description: 'Un 37enne rischia l\'espulsione dopo processo con 19 capi d\'imputazione a Mendrisio. Cosa rischiano i frontalieri e come proteggersi legalmente. Dati aggiornati',
+ description: 'Un 37enne rischia l\'espulsione dopo processo con 19 capi d\'imputazione a Mendrisio. Cosa rischiano i frontalieri e come proteggersi legalmente. Dati aggiornati.',
  keywords: 'frontalieri, ticino, svizzera, italia, processo, mendrisio, capi, imputazione',
  ogTitle: 'Processo Mendrisio: 19 capi d\'imputazione e espulsione',
  ogDescription: 'Il caso del 37enne condannato con espulsione dopo 19 capi d\'imputazione. Guida pratica per i frontalieri su rischi e protezione legale.',
@@ -2726,7 +2726,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Processo Mendrisio: 19 capi d'imputazione portano all'espulsione",
- "description": "Un 37enne rischia l'espulsione dopo processo con 19 capi d'imputazione a Mendrisio. Cosa rischiano i frontalieri e come proteggersi legalmente. Dati aggiornati",
+ "description": "Un 37enne rischia l'espulsione dopo processo con 19 capi d'imputazione a Mendrisio. Cosa rischiano i frontalieri e come proteggersi legalmente. Dati aggiornati.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/processo-mendrisio-19-capit.webp`,
  "width": 1200,
@@ -2778,7 +2778,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
     description: 'Il cammino della Via Francisca del Lucomagno è partito da Lavena Ponte Tresa per celebrare i 10 anni del percorso.',
  keywords: 'frontalieri, ticino, svizzera, italia, cammino, francisca, lavena, ponte',
  ogTitle: 'Cammino Via Francisca del Lucomagno',
- ogDescription: 'Il cammino della Via Francisca del Lucomagno è partito da Lavena Ponte Tresa',
+ ogDescription: 'Il cammino della Via Francisca del Lucomagno è partito da Lavena Ponte Tresa.',
  canonicalPath: '/articoli-frontaliere/via-francisca-cammino/',
  structuredData: {
  "@context": "https://schema.org",
@@ -2804,7 +2804,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-lavoro-sommerso-varesotto': {
  title: 'Lavoro ‘sommerso’ nel Varesotto, 46 | Frontaliere Ticino',
- description: 'Il lavoro ‘sommerso’ è un fenomeno che sta diventando sempre più evidente nel Varesotto. Secondo quanto riportato da Il Giornale del Ticino, in pochi mesi sono',
+ description: 'Il lavoro ‘sommerso’ è un fenomeno che sta diventando sempre più evidente nel Varesotto. Secondo quanto riportato da Il Giornale del Ticino, in pochi mesi sono.',
  keywords: 'frontalieri, ticino, svizzera, italia, lavoro, sommerso, varesotto, casi',
  ogTitle: 'Lavoro ‘sommerso’ nel Varesotto, 46 casi scovati in pochi mesi',
  ogDescription: 'Il lavoro ‘sommerso’ è un fenomeno che sta diventando sempre più evidente nel Varesotto.',
@@ -2813,7 +2813,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Lavoro ‘sommerso’ nel Varesotto, 46 casi scovati in pochi mesi",
- "description": "Il lavoro ‘sommerso’ è un fenomeno che sta diventando sempre più evidente nel Varesotto. Secondo quanto riportato da Il Giornale del Ticino, in pochi mesi sono",
+ "description": "Il lavoro ‘sommerso’ è un fenomeno che sta diventando sempre più evidente nel Varesotto. Secondo quanto riportato da Il Giornale del Ticino, in pochi mesi sono.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/lavoro-sommerso-varesotto.webp`,
  "width": 1200,
@@ -2836,7 +2836,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  description: 'Una rissa notturna a Lavena Ponte Tresa ha lasciato due stranieri in ospedale. La polizia indaga sull\'accaduto. Dati aggiornati 2026 per frontalieri in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, rissa, nella, notte, lavena',
  ogTitle: 'Rissa notturna a Lavena Ponte Tresa',
- ogDescription: 'Due stranieri in ospedale dopo una rissa notturna a Lavena Ponte Tresa',
+ ogDescription: 'Due stranieri in ospedale dopo una rissa notturna a Lavena Ponte Tresa.',
  canonicalPath: '/articoli-frontaliere/rissa-lavena-ponte-tres/',
  structuredData: {
  "@context": "https://schema.org",
@@ -2891,16 +2891,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-cassa-malati-leghista-applicata-subito': {
  title: 'Cassa malati: l\'iniziativa leghista va | Frontaliere Ticino',
- description: 'La Lega dei Ticinesi chiede la deducibilità fiscale integrale dei premi di cassa malati. Il Consiglio di Stato annuncia il proprio piano: applicazione parziale',
+ description: 'La Lega dei Ticinesi chiede la deducibilità fiscale integrale dei premi di cassa malati. Il Consiglio di Stato annuncia il proprio piano: applicazione parziale.',
  keywords: 'frontalieri, ticino, svizzera, italia, cassa, malati, iniziativa, leghista',
  ogTitle: 'Cassa malati: l\'iniziativa leghista va applicata subito',
- ogDescription: 'La Lega dei Ticinesi chiede la deducibilità fiscale integrale dei premi di cassa malati. Il Consiglio di Stato annuncia il proprio piano: applicazione parziale',
+ ogDescription: 'La Lega dei Ticinesi chiede la deducibilità fiscale integrale dei premi di cassa malati. Il Consiglio di Stato annuncia il proprio piano: applicazione parziale.',
  canonicalPath: '/articoli-frontaliere/cassa-malati-leghista-applicata-subito/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Cassa malati: l'iniziativa leghista va applicata subito",
- "description": "La Lega dei Ticinesi chiede la deducibilità fiscale integrale dei premi di cassa malati. Il Consiglio di Stato annuncia il proprio piano: applicazione parziale",
+ "description": "La Lega dei Ticinesi chiede la deducibilità fiscale integrale dei premi di cassa malati. Il Consiglio di Stato annuncia il proprio piano: applicazione parziale.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/cassa-malati-leghista-applicata-subito.webp`,
  "width": 1200,
@@ -2949,16 +2949,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-a9-chiasso-como-chiusure-frontalieri': {
  title: 'A9: chiusure tra Chiasso e Como | Frontaliere Ticino',
- description: 'Tutte le info sulle chiusure programmate sull\'A9 tra Chiasso e Como dal 30 marzo al 2 aprile 2026 e le alternative per i frontalieri ticinesi. Dati aggiornati',
+ description: 'Tutte le info sulle chiusure programmate sull\'A9 tra Chiasso e Como dal 30 marzo al 2 aprile 2026 e le alternative per i frontalieri ticinesi. Dati aggiornati.',
  keywords: 'frontalieri, ticino, svizzera, italia, chiusure, chiasso, como, impatto',
  ogTitle: 'Chiusure A9 Chiasso-Como: impatto sui frontalieri',
- ogDescription: 'Guida pratica alle chiusure A9 marzo 2026 per chi lavora tra Ticino e Lombardia',
+ ogDescription: 'Guida pratica alle chiusure A9 marzo 2026 per chi lavora tra Ticino e Lombardia.',
  canonicalPath: '/articoli-frontaliere/a9-chiasso-como-chiusure-frontalieri/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Autostrada A9: nuove chiusure tra Chiasso e Como impattano i frontalieri ticinesi",
- "description": "Tutte le info sulle chiusure programmate sull'A9 tra Chiasso e Como dal 30 marzo al 2 aprile 2026 e le alternative per i frontalieri ticinesi. Dati aggiornati",
+ "description": "Tutte le info sulle chiusure programmate sull'A9 tra Chiasso e Como dal 30 marzo al 2 aprile 2026 e le alternative per i frontalieri ticinesi. Dati aggiornati.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/a9-chiasso-como-chiusure-frontalieri.webp`,
  "width": 1200,
@@ -2981,7 +2981,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
     description: 'Dieci chilometri di coda al portale nord del San Gottardo, tempi di attesa fino a un\'ora e trenta minuti.',
  keywords: 'frontalieri, ticino, svizzera, italia, code, gottardo, dieci, chilometri',
  ogTitle: 'Code al San Gottardo',
- ogDescription: 'Dieci chilometri di coda al portale nord del San Gottardo, tempi di attesa fino a un\'ora e trenta minuti',
+ ogDescription: 'Dieci chilometri di coda al portale nord del San Gottardo, tempi di attesa fino a un\'ora e trenta minuti.',
  canonicalPath: '/articoli-frontaliere/code-nord-san-gottardo/',
  structuredData: {
  "@context": "https://schema.org",
@@ -3007,7 +3007,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-trattative-acordo-usa-oltre-31-marzo': {
  title: 'Parmelin: trattative con Usa oltre il 31 marzo per l\'accordo',
- description: 'La Svizzera continuerà a negoziare un accordo commerciale con gli Stati Uniti anche dopo il termine previsto del 31 marzo. Dati aggiornati 2026 per frontalieri',
+ description: 'La Svizzera continuerà a negoziare un accordo commerciale con gli Stati Uniti anche dopo il termine previsto del 31 marzo.',
  keywords: 'frontalieri, ticino, svizzera, italia, parmelin, trattative, oltre, marzo',
  ogTitle: 'Trattative commercio Usa Svizzera: oltre 31 marzo - Frontaliere Ticino',
  ogDescription: 'La Svizzera continuerà a negoziare un accordo commerciale con gli Stati Uniti anche dopo il termine previsto del 31 marzo.',
@@ -3016,7 +3016,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Trattative commercio Usa Svizzera: oltre 31 marzo",
- "description": "La Svizzera continuerà a negoziare un accordo commerciale con gli Stati Uniti anche dopo il termine previsto del 31 marzo. Dati aggiornati 2026 per frontalieri",
+ "description": "La Svizzera continuerà a negoziare un accordo commerciale con gli Stati Uniti anche dopo il termine previsto del 31 marzo.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/trattative-acordo-usa-oltre-31-marzo.webp`,
  "width": 1200,
@@ -3065,16 +3065,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-trattative-dazi-non-valido-31-marzo': {
  title: 'Trattative sui dazi: "Il termine del 31 | Frontaliere Ticino',
- description: 'La Confederazione svizzera ha annunciato che il termine del 31 marzo per trovare un accordo sui dazi tra la Svizzera e gli Stati Uniti non è più valido. Lo ha',
+ description: 'La Confederazione svizzera ha annunciato che il termine del 31 marzo per trovare un accordo sui dazi tra la Svizzera e gli Stati Uniti non è più valido. Lo ha.',
  keywords: 'frontalieri, ticino, svizzera, italia, trattative, dazi, termine, marzo',
  ogTitle: 'Trattative sui dazi: "Il termine del 31 marzo non è più valido" | Frontaliere Ticino',
- ogDescription: 'La Confederazione svizzera ha annunciato che il termine del 31 marzo per trovare un accordo sui dazi tra la Svizzera e gli Stati Uniti non è più valido. Lo ha',
+ ogDescription: 'La Confederazione svizzera ha annunciato che il termine del 31 marzo per trovare un accordo sui dazi tra la Svizzera e gli Stati Uniti non è più valido. Lo ha.',
  canonicalPath: '/articoli-frontaliere/trattative-dazi-non-valido-31-marzo/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Trattative sui dazi: \"Il termine del 31 marzo non è più valido\" | Frontaliere Ticino",
- "description": "La Confederazione svizzera ha annunciato che il termine del 31 marzo per trovare un accordo sui dazi tra la Svizzera e gli Stati Uniti non è più valido. Lo ha",
+ "description": "La Confederazione svizzera ha annunciato che il termine del 31 marzo per trovare un accordo sui dazi tra la Svizzera e gli Stati Uniti non è più valido. Lo ha.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/trattative-dazi-non-valido-31-marzo.webp`,
  "width": 1200,
@@ -3123,16 +3123,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-lavori-rete-ferroviaria-tilo': {
  title: 'Lavori sulla rete ferroviaria italiana | Frontaliere Ticino',
- description: 'Dal 3 aprile i collegamenti TILO S30 subiscono importanti modifiche alla circolazione a causa di lavori infrastrutturali alla linea ferroviaria tra Pino Tronzan',
+ description: 'Dal 3 aprile i collegamenti TILO S30 subiscono importanti modifiche alla circolazione a causa di lavori infrastrutturali alla linea ferroviaria tra Pino Tronzan.',
  keywords: 'frontalieri, ticino, svizzera, italia, lavori, sulla, rete, ferroviaria',
  ogTitle: 'Lavori sulla rete ferroviaria italiana, ecco cosa cambia',
- ogDescription: 'Dal 3 aprile i collegamenti TILO S30 subiscono importanti modifiche alla circolazione a causa di lavori infrastrutturali alla linea ferroviaria tra Pino Tronzan',
+ ogDescription: 'Dal 3 aprile i collegamenti TILO S30 subiscono importanti modifiche alla circolazione a causa di lavori infrastrutturali alla linea ferroviaria tra Pino Tronzan.',
  canonicalPath: '/articoli-frontaliere/lavori-rete-ferroviaria-tilo/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Lavori sulla rete ferroviaria italiana, ecco cosa cambia per i TILO",
- "description": "Dal 3 aprile i collegamenti TILO S30 subiscono importanti modifiche alla circolazione a causa di lavori infrastrutturali alla linea ferroviaria tra Pino Tronzan",
+ "description": "Dal 3 aprile i collegamenti TILO S30 subiscono importanti modifiche alla circolazione a causa di lavori infrastrutturali alla linea ferroviaria tra Pino Tronzan.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/lavori-rete-ferroviaria-tilo.webp`,
  "width": 1200,
@@ -3239,16 +3239,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-ict-reatto-commissione-tri': {
  title: 'Lavoro TIC in Ticino: ATED chiede | Frontaliere Ticino',
- description: 'Il settore ICT ticinese, con oltre 14.000 professionisti e un peso economico di circa 1,4 miliardi di franchi, richiede un ruolo diretto nel processo decisional',
+ description: 'Il settore ICT ticinese, con oltre 14.000 professionisti e un peso economico di circa 1,4 miliardi di franchi, richiede un ruolo diretto nel processo decisional.',
  keywords: 'frontalieri, ticino, svizzera, italia, lavoro, ated, chiede, rappresentanza',
  ogTitle: 'Lavoro TIC in Ticino: ATED chiede rappresentanza',
- ogDescription: 'Il settore ICT ticinese, con oltre 14.000 professionisti e un peso economico di circa 1,4 miliardi di franchi, richiede un ruolo diretto nel processo decisional',
+ ogDescription: 'Il settore ICT ticinese, con oltre 14.000 professionisti e un peso economico di circa 1,4 miliardi di franchi, richiede un ruolo diretto nel processo decisional.',
  canonicalPath: '/articoli-frontaliere/ict-reatto-commissione-tri/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Lavoro TIC in Ticino: ATED chiede rappresentanza nella Commissione tripartita",
- "description": "Il settore ICT ticinese, con oltre 14.000 professionisti e un peso economico di circa 1,4 miliardi di franchi, richiede un ruolo diretto nel processo decisional",
+ "description": "Il settore ICT ticinese, con oltre 14.000 professionisti e un peso economico di circa 1,4 miliardi di franchi, richiede un ruolo diretto nel processo decisional.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/ict-reatto-commissione-tri.webp`,
  "width": 1200,
@@ -3271,7 +3271,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
     description: 'Cittadino italiano fermato al valico di Ponte Chiasso con 7 kg di rare monete d\'argento nascoste nel bagagliaio di una Ford Mustang.',
  keywords: 'frontalieri, ticino, svizzera, italia, tenta, furbata, dogana, como',
  ogTitle: 'Tenta la furbata in dogana tra Como e Svizzera',
- ogDescription: 'Cittadino italiano fermato al valico di Ponte Chiasso con 7 kg di rare monete d\'argento nascoste nel bagagliaio di una Ford Mustang',
+ ogDescription: 'Cittadino italiano fermato al valico di Ponte Chiasso con 7 kg di rare monete d\'argento nascoste nel bagagliaio di una Ford Mustang.',
  canonicalPath: '/articoli-frontaliere/furbata-dogana-argento/',
  structuredData: {
  "@context": "https://schema.org",
@@ -3297,16 +3297,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-ambasciatore-italiano-ritorno-berna': {
  title: 'Rientro dell\'ambasciatore italiano a Berna dopo polemiche',
- description: 'Gian Lorenzo Cornado si prepara a partecipare a una commemorazione a Crans-Montana, segnando un passo importante nel disgelo tra Italia e Svizzera. La cooperazi',
+ description: 'Gian Lorenzo Cornado si prepara a partecipare a una commemorazione a Crans-Montana, segnando un passo importante nel disgelo tra Italia e Svizzera. La cooperazi.',
  keywords: 'frontalieri, ticino, svizzera, italia, rientro, dell, ambasciatore, italiano',
  ogTitle: 'Rientro dell\'ambasciatore italiano a Berna dopo polemiche',
- ogDescription: 'Gian Lorenzo Cornado si prepara a partecipare a una commemorazione a Crans-Montana, segnando un passo importante nel disgelo tra Italia e Svizzera. La cooperazi',
+ ogDescription: 'Gian Lorenzo Cornado si prepara a partecipare a una commemorazione a Crans-Montana, segnando un passo importante nel disgelo tra Italia e Svizzera. La cooperazi.',
  canonicalPath: '/articoli-frontaliere/ambasciatore-italiano-ritorno-berna/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Rientro dell'ambasciatore italiano a Berna dopo polemiche sul caso Crans-Montana",
- "description": "Gian Lorenzo Cornado si prepara a partecipare a una commemorazione a Crans-Montana, segnando un passo importante nel disgelo tra Italia e Svizzera. La cooperazi",
+ "description": "Gian Lorenzo Cornado si prepara a partecipare a una commemorazione a Crans-Montana, segnando un passo importante nel disgelo tra Italia e Svizzera. La cooperazi.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/ambasciatore-italiano-ritorno-berna.webp`,
  "width": 1200,
@@ -3355,7 +3355,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-lavori-notturni-via-lavizzari': {
  title: 'Lavori notturni di pavimentazione in Via Lavizzari a Chiasso',
- description: 'Lavori di pavimentazione notturni in Via Lavizzari a Chiasso dal 7 al 18 aprile 2026. Informazioni su orari, tratte interessate e viabilità. Dati aggiornati',
+ description: 'Lavori di pavimentazione notturni in Via Lavizzari a Chiasso dal 7 al 18 aprile 2026. Informazioni su orari, tratte interessate e viabilità. Dati aggiornati.',
  keywords: 'frontalieri, ticino, svizzera, italia, lavori, notturni, pavimentazione, lavizzari',
  ogTitle: 'Lavori notturni di pavimentazione in Via Lavizzari a Chiasso',
  ogDescription: 'Informazioni sui lavori notturni di pavimentazione in Via Lavizzari a Chiasso dal 7 al 18 aprile 2026.',
@@ -3364,7 +3364,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Lavori notturni di pavimentazione in Via Lavizzari a Chiasso",
- "description": "Lavori di pavimentazione notturni in Via Lavizzari a Chiasso dal 7 al 18 aprile 2026. Informazioni su orari, tratte interessate e viabilità. Dati aggiornati",
+ "description": "Lavori di pavimentazione notturni in Via Lavizzari a Chiasso dal 7 al 18 aprile 2026. Informazioni su orari, tratte interessate e viabilità. Dati aggiornati.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/lavori-notturni-via-lavizzari.webp`,
  "width": 1200,
@@ -3383,16 +3383,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-limite-popolazione-10-milioni-ticino': {
  title: 'Limitare la popolazione in Ticino a 10 milioni: sfide',
- description: 'L\'iniziativa dell\'UDC mira a fissare un tetto di 10 milioni di abitanti in Svizzera entro il 2050, con ripercussioni dirette sul Canton Ticino e sui frontalieri',
+ description: 'La gestione del saldo migratorio, che si aggira intorno alle 70.000 unità all\'anno, comprende anche i frontalieri italiani che lavorano in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, limitare, popolazione, milioni, sfide',
  ogTitle: 'Limitare la popolazione in Ticino a 10 milioni: sfide',
- ogDescription: 'L\'iniziativa dell\'UDC mira a fissare un tetto di 10 milioni di abitanti in Svizzera entro il 2050, con ripercussioni dirette sul Canton Ticino e sui frontalieri',
+ ogDescription: 'L\'iniziativa dell\'Unione democratica di centro (UDC) in Svizzera, che mira a limitare la popolazione totale a 10 milioni di abitanti entro il 2050, rappresenta una sfida complessa, soprattutto per il Canton Ticino, frontiera naturale con l’Italia.',
  canonicalPath: '/articoli-frontaliere/limite-popolazione-10-milioni-ticino/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Limitare la popolazione in Ticino a 10 milioni: sfide e opportunità",
- "description": "L'iniziativa dell'UDC mira a fissare un tetto di 10 milioni di abitanti in Svizzera entro il 2050, con ripercussioni dirette sul Canton Ticino e sui frontalieri",
+ "description": "La gestione del saldo migratorio, che si aggira intorno alle 70.000 unità all'anno, comprende anche i frontalieri italiani che lavorano in Ticino.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/limite-popolazione-10-milioni-ticino.webp`,
  "width": 1200,
@@ -3412,7 +3412,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-settanta-chili-di-mozzarella': {
  title: 'Settanta chili di mozzarella nel bagagliaio del SUV. Doppio',
- description: 'Due distinti casi di contrabbando di generi alimentari sono stati intercettati nello stesso giorno dalle forze dell’ordine. Dati aggiornati 2026 per frontalieri',
+ description: 'Due distinti casi di contrabbando di generi alimentari sono stati intercettati nello stesso giorno dalle forze dell’ordine.',
  keywords: 'frontalieri, ticino, svizzera, italia, settanta, chili, mozzarella, bagagliaio',
  ogTitle: 'Settanta chili di mozzarella nel bagagliaio del SUV. Doppio',
  ogDescription: 'Due distinti casi di contrabbando di generi alimentari sono stati intercettati nello stesso giorno dalle forze dell’ordine.',
@@ -3421,7 +3421,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Settanta chili di mozzarella nel bagagliaio del SUV. Doppio sequestro della dogana in Ticino",
- "description": "Due distinti casi di contrabbando di generi alimentari sono stati intercettati nello stesso giorno dalle forze dell’ordine. Dati aggiornati 2026 per frontalieri",
+ "description": "Due distinti casi di contrabbando di generi alimentari sono stati intercettati nello stesso giorno dalle forze dell’ordine.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/settanta-chili-di-mozzarella.webp`,
  "width": 1200,
@@ -3468,16 +3468,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-mobilita-infermieri-ticino': {
  title: 'Aumenta la mobilità internazionale del personale',
- description: 'Il sindacato Nursing Up denuncia la fuga di infermieri e infermiere dall\'Italia verso la Svizzera. Scopri di più sul fenomeno e sulle opportunità di lavoro',
+ description: 'Il sindacato Nursing Up denuncia la fuga di infermieri e infermiere dall\'Italia verso la Svizzera. Scopri di più sul fenomeno e sulle opportunità di lavoro.',
  keywords: 'frontalieri, ticino, svizzera, italia, aumenta, mobilità, internazionale, personale',
  ogTitle: 'Mobilità internazionale del personale infermieristico',
- ogDescription: 'Il sindacato Nursing Up denuncia la fuga di infermieri e infermiere dall\'Italia verso la Svizzera',
+ ogDescription: 'Il sindacato Nursing Up denuncia la fuga di infermieri e infermiere dall\'Italia verso la Svizzera.',
  canonicalPath: '/articoli-frontaliere/mobilita-infermieri-ticino/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Mobilità internazionale del personale infermieristico",
- "description": "Il sindacato Nursing Up denuncia la fuga di infermieri e infermiere dall'Italia verso la Svizzera. Scopri di più sul fenomeno e sulle opportunità di lavoro",
+ "description": "Il sindacato Nursing Up denuncia la fuga di infermieri e infermiere dall'Italia verso la Svizzera. Scopri di più sul fenomeno e sulle opportunità di lavoro.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/mobilita-infermieri-ticino.webp`,
  "width": 1200,
@@ -3499,7 +3499,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  description: 'Il San Gottardo autostradale in alta stagione: rallentamenti e code in direzione Ticino e Italia. Dati aggiornati 2026 per frontalieri in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, gottardo, code, giovedì, santo',
  ogTitle: 'San Gottardo, code da Giovedì Santo: niente sorpresa, tanta pazienza',
- ogDescription: 'Il San Gottardo autostradale in alta stagione: rallentamenti e code in direzione Ticino e Italia',
+ ogDescription: 'Il San Gottardo autostradale in alta stagione: rallentamenti e code in direzione Ticino e Italia.',
  canonicalPath: '/articoli-frontaliere/san-gottardo-code-giovedi-santo/',
  structuredData: {
  "@context": "https://schema.org",
@@ -3608,7 +3608,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-dogana-chiasso-centro-tecnologico': {
  title: 'La dogana di Chiasso si prepara a diventare un moderno',
- description: 'Scopri come la dogana di Chiasso si evolve in un moderno centro tecnologico con progetti innovativi e tecnologie avanzate. Dati aggiornati 2026 per frontalieri',
+ description: 'Scopri come la dogana di Chiasso si evolve in un moderno centro tecnologico con progetti innovativi e tecnologie avanzate.',
  keywords: 'frontalieri, ticino, svizzera, italia, dogana, chiasso, prepara, diventare',
  ogTitle: 'La dogana di Chiasso si prepara a diventare un moderno centro tecnologico',
  ogDescription: 'La dogana di Chiasso, punto di incontro tra merci e persone, si evolve con progetti innovativi e tecnologie avanzate.',
@@ -3617,7 +3617,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "La dogana di Chiasso diventa un centro tecnologico",
- "description": "Scopri come la dogana di Chiasso si evolve in un moderno centro tecnologico con progetti innovativi e tecnologie avanzate. Dati aggiornati 2026 per frontalieri",
+ "description": "Scopri come la dogana di Chiasso si evolve in un moderno centro tecnologico con progetti innovativi e tecnologie avanzate.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/dogana-chiasso-centro-tecnologico.webp`,
  "width": 1200,
@@ -3720,16 +3720,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-trasferimento-ufficio-postale-chiasso': {
  title: 'Trasferimento Ufficio Postale Chiasso | Frontaliere Ticino',
- description: 'Il trasferimento dell\'Ufficio postale di Chiasso potrebbe essere un\'opportunità per il territorio. Scopri di più sulle novità e sui servizi offerti dalla Posta',
+ description: 'Il trasferimento dell\'Ufficio postale di Chiasso potrebbe essere un\'opportunità per il territorio. Scopri di più sulle novità e sui servizi offerti dalla Posta.',
  keywords: 'frontalieri, ticino, svizzera, italia, trasferimento, ufficio, postale, chiasso',
  ogTitle: 'Trasferimento Ufficio Postale Chiasso',
- ogDescription: 'Il trasferimento dell\'Ufficio postale di Chiasso potrebbe essere un\'opportunità per il territorio. Scopri di più sulle novità e sui servizi offerti dalla Posta',
+ ogDescription: 'Il trasferimento dell\'Ufficio postale di Chiasso potrebbe essere un\'opportunità per il territorio. Scopri di più sulle novità e sui servizi offerti dalla Posta.',
  canonicalPath: '/articoli-frontaliere/trasferimento-ufficio-postale-chiasso/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Trasferimento Ufficio Postale Chiasso",
- "description": "Il trasferimento dell'Ufficio postale di Chiasso potrebbe essere un'opportunità per il territorio. Scopri di più sulle novità e sui servizi offerti dalla Posta",
+ "description": "Il trasferimento dell'Ufficio postale di Chiasso potrebbe essere un'opportunità per il territorio. Scopri di più sulle novità e sui servizi offerti dalla Posta.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/trasferimento-ufficio-postale-chiasso.webp`,
  "width": 1200,
@@ -3748,16 +3748,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-esame-complementare-passerella-aperte-pre-iscrizioni': {
  title: 'Esame complementare passerella: aperte | Frontaliere Ticino',
- description: 'Il Dipartimento dell’educazione, della cultura e dello sport comunica che sono aperte le pre-iscrizioni al corso di preparazione all’esame complementare passer',
+ description: 'Il Dipartimento dell’educazione, della cultura e dello sport comunica che sono aperte le pre-iscrizioni al corso di preparazione all’esame complementare passer.',
  keywords: 'frontalieri, ticino, svizzera, italia, esame, complementare, passerella, aperte',
  ogTitle: 'Esame complementare passerella: aperte le pre-iscrizioni',
- ogDescription: 'Il Dipartimento dell’educazione, della cultura e dello sport comunica che sono aperte le pre-iscrizioni al corso di preparazione all’esame complementare passer',
+ ogDescription: 'Il Dipartimento dell’educazione, della cultura e dello sport comunica che sono aperte le pre-iscrizioni al corso di preparazione all’esame complementare passer.',
  canonicalPath: '/articoli-frontaliere/esame-complementare-passerella-aperte-pre-iscrizioni/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Esame complementare passerella: aperte le pre-iscrizioni",
- "description": "Il Dipartimento dell’educazione, della cultura e dello sport comunica che sono aperte le pre-iscrizioni al corso di preparazione all’esame complementare passer",
+ "description": "Il Dipartimento dell’educazione, della cultura e dello sport comunica che sono aperte le pre-iscrizioni al corso di preparazione all’esame complementare passer.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/esame-complementare-passerella-aperte-pre-iscrizioni.webp`,
  "width": 1200,
@@ -3889,16 +3889,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-vacanze-di-pasqua-san-gottardo': {
  title: 'Vacanze di Pasqua: colonna al San | Frontaliere Ticino',
- description: 'Automobilisti in coda per le vacanze di Pasqua al San Gottardo: 21 chilometri di traffico bloccato. Come percorso alternativo, il TCS consiglia di utilizzare',
+ description: 'Tuttavia, il passo del San Gottardo rimane chiuso fino a giugno a causa delle condizioni invernali.',
  keywords: 'frontalieri, ticino, svizzera, italia, vacanze, pasqua, colonna, gottardo',
  ogTitle: 'Vacanze di Pasqua: colonna al San Gottardo tocca i 21 chilometri',
- ogDescription: 'Automobilisti in coda per le vacanze di Pasqua al San Gottardo: 21 chilometri di traffico bloccato. Come percorso alternativo, il TCS consiglia di utilizzare',
+ ogDescription: 'Venerdì Santo da incubo per i vacanzieri diretti verso sud: al portale nord della galleria autostradale del San Gottardo, la colonna ha raggiunto 21 chilometri nel primo pomeriggio.',
  canonicalPath: '/articoli-frontaliere/vacanze-di-pasqua-san-gottardo/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Vacanze di Pasqua: colonna al San Gottardo tocca i 21 chilometri",
- "description": "Automobilisti in coda per le vacanze di Pasqua al San Gottardo: 21 chilometri di traffico bloccato. Come percorso alternativo, il TCS consiglia di utilizzare",
+ "description": "Tuttavia, il passo del San Gottardo rimane chiuso fino a giugno a causa delle condizioni invernali.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/vacanze-di-pasqua-san-gottardo.webp`,
  "width": 1200,
@@ -3976,7 +3976,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  description: 'I Verdi chiedono una riduzione del 25% dei costi dell\'abbonamento Arcobaleno. Dati aggiornati 2026 per frontalieri in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, contro, aumento, prezzi, mezzi',
  ogTitle: 'Contro l\'aumento dei prezzi dei mezzi pubblici in Ticino',
- ogDescription: 'I Verdi chiedono una riduzione del 25% dei costi dell\'abbonamento Arcobaleno',
+ ogDescription: 'I Verdi chiedono una riduzione del 25% dei costi dell\'abbonamento Arcobaleno.',
  canonicalPath: '/articoli-frontaliere/aumento-mezzi-pubblici-ticino/',
  structuredData: {
  "@context": "https://schema.org",
@@ -4006,7 +4006,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  description: 'Due adolescenti hanno forzato la porta di un garage svizzero e sono fuggiti con una Skoda e 40 chiavi. Dati aggiornati 2026 per frontalieri in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, ladri, auto, scappano, chiavi',
  ogTitle: 'Ladri di auto scappano con 40 chiavi e una Skoda in Ticino',
- ogDescription: 'Due adolescenti hanno forzato la porta di un garage svizzero e sono fuggiti con una Skoda e 40 chiavi',
+ ogDescription: 'Due adolescenti hanno forzato la porta di un garage svizzero e sono fuggiti con una Skoda e 40 chiavi.',
  canonicalPath: '/articoli-frontaliere/ladri-di-auto-scappano-con-40-chiavi-e-una-skoda/',
  structuredData: {
  "@context": "https://schema.org",
@@ -4115,7 +4115,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-contrabbando-pokemon-ticino': {
  title: 'Svizzero fermato con 900 pacchetti di figurine Pokèmon',
- description: 'Un uomo di 33 anni è stato fermato alla dogana con un carico di 900 pacchetti di figurine Pokémon del valore di 6.900 euro. Dati aggiornati 2026 per frontalieri',
+ description: 'Un uomo di 33 anni è stato fermato alla dogana con un carico di 900 pacchetti di figurine Pokémon del valore di 6.900 euro.',
  keywords: 'frontalieri, ticino, svizzera, italia, svizzero, fermato, pacchetti, figurine',
  ogTitle: 'Contrabbando di Pokémon: Svizzero fermato alla dogana',
  ogDescription: 'Un uomo di 33 anni è stato fermato alla dogana con un carico di 900 pacchetti di figurine Pokémon del valore di 6.900 euro.',
@@ -4124,7 +4124,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Contrabbando di Pokémon: Svizzero fermato alla dogana",
- "description": "Un uomo di 33 anni è stato fermato alla dogana con un carico di 900 pacchetti di figurine Pokémon del valore di 6.900 euro. Dati aggiornati 2026 per frontalieri",
+ "description": "Un uomo di 33 anni è stato fermato alla dogana con un carico di 900 pacchetti di figurine Pokémon del valore di 6.900 euro.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/contrabbando-pokemon-ticino.webp`,
  "width": 1200,
@@ -4143,16 +4143,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-sconto-benzina-ticino': {
  title: 'Sconto benzina: Italia allunga lo sconto | Frontaliere Ticino',
- description: 'Il governo Meloni estende il taglio delle accise sulla benzina fino al 1° maggio. Impatto sulla Svizzera e sui frontalieri. Dati aggiornati 2026 per frontalieri',
+ description: 'Il governo Meloni estende il taglio delle accise sulla benzina fino al 1° maggio. Impatto sulla Svizzera e sui frontalieri.',
  keywords: 'frontalieri, ticino, svizzera, italia, sconto, benzina, allunga, governo',
  ogTitle: 'Sconto benzina: Italia allunga lo sconto',
- ogDescription: 'Il governo Meloni estende il taglio delle accise sulla benzina fino al 1° maggio. Impatto sulla Svizzera e sui frontalieri',
+ ogDescription: 'Il governo Meloni estende il taglio delle accise sulla benzina fino al 1° maggio. Impatto sulla Svizzera e sui frontalieri.',
  canonicalPath: '/articoli-frontaliere/sconto-benzina-ticino/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Sconto benzina: Italia allunga lo sconto",
- "description": "Il governo Meloni estende il taglio delle accise sulla benzina fino al 1° maggio. Impatto sulla Svizzera e sui frontalieri. Dati aggiornati 2026 per frontalieri",
+ "description": "Il governo Meloni estende il taglio delle accise sulla benzina fino al 1° maggio. Impatto sulla Svizzera e sui frontalieri.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/sconto-benzina-ticino.webp`,
  "width": 1200,
@@ -4174,7 +4174,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
     description: 'Un\'anziana signora di 88 anni si è difesa da un tentativo di scippo a Muttenz, in Svizzera, e ha fatto arrestare la malvivente.',
  keywords: 'frontalieri, ticino, svizzera, italia, anziana, anni, difende, scippatrice',
  ogTitle: 'Anziana di 88 anni si difende da una scippatrice e la fa arrestare',
- ogDescription: 'Un\'anziana signora di 88 anni si è difesa da un tentativo di scippo a Muttenz, in Svizzera, e ha fatto arrestare la malvivente',
+ ogDescription: 'Un\'anziana signora di 88 anni si è difesa da un tentativo di scippo a Muttenz, in Svizzera, e ha fatto arrestare la malvivente.',
  canonicalPath: '/articoli-frontaliere/anziana-si-difende-da-una-scippatrice-e-la-fa-arrestare/',
  structuredData: {
  "@context": "https://schema.org",
@@ -4202,7 +4202,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
     description: 'La SUPSI lancia un nuovo bachelor in Sostenibilità nel 2027: costi, requisiti e opportunità per frontalieri e residenti in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, supsi, lancia, bachelor, sostenibilità',
  ogTitle: 'SUPSI lancia bachelor in Sostenibilità: dettagli 2027',
- ogDescription: 'Tutte le informazioni sul nuovo corso SUPSI per professionisti della transizione ecologica in Ticino',
+ ogDescription: 'Tutte le informazioni sul nuovo corso SUPSI per professionisti della transizione ecologica in Ticino.',
  canonicalPath: '/articoli-frontaliere/supsi-bachelor-sostenibilita-2027/',
  structuredData: {
  "@context": "https://schema.org",
@@ -4227,7 +4227,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-lavena-ponte-tresa-bicicletta-grave': {
  title: 'Lavena Ponte Tresa: bambino sbalzato | Frontaliere Ticino',
- description: 'Un bambino di 2 anni e 9 mesi è stato soccorso dall\'eliambulanza a Lavena Ponte Tresa dopo essere stato sbalzato dal sellino della bicicletta. Dati aggiornati',
+ description: 'Un bambino di 2 anni e 9 mesi è stato soccorso dall\'eliambulanza a Lavena Ponte Tresa dopo essere stato sbalzato dal sellino della bicicletta. Dati aggiornati.',
  keywords: 'frontalieri, ticino, svizzera, italia, lavena, ponte, tresa, bambino',
  ogTitle: 'Lavena Ponte Tresa: bambino sbalzato dal sellino della bicicletta è grave',
  ogDescription: 'Un bambino di 2 anni e 9 mesi è stato soccorso dall\'eliambulanza a Lavena Ponte Tresa dopo essere stato sbalzato dal sellino della bicicletta.',
@@ -4236,7 +4236,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Lavena Ponte Tresa: bambino sbalzato dal sellino della bicicletta è grave",
- "description": "Un bambino di 2 anni e 9 mesi è stato soccorso dall'eliambulanza a Lavena Ponte Tresa dopo essere stato sbalzato dal sellino della bicicletta. Dati aggiornati",
+ "description": "Un bambino di 2 anni e 9 mesi è stato soccorso dall'eliambulanza a Lavena Ponte Tresa dopo essere stato sbalzato dal sellino della bicicletta. Dati aggiornati.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/lavena-ponte-tresa-bicicletta-grave.webp`,
  "width": 1200,
@@ -4255,16 +4255,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-roveredo-permessi-anticrimine': {
  title: 'Roveredo denuncia: i permessi non sono | Frontaliere Ticino',
- description: 'Il Municipio di Roveredo si oppone alla versione del Governo grigionese sul rilascio dei permessi di dimora, evidenziando rischi e criticità nel controllo inter',
+ description: 'Il Municipio di Roveredo si oppone alla versione del Governo grigionese sul rilascio dei permessi di dimora, evidenziando rischi e criticità nel controllo inter.',
  keywords: 'frontalieri, ticino, svizzera, italia, roveredo, denuncia, permessi, sono',
  ogTitle: 'Roveredo denuncia: i permessi non sono un incidente',
- ogDescription: 'Il Municipio di Roveredo si oppone alla versione del Governo grigionese sul rilascio dei permessi di dimora, evidenziando rischi e criticità nel controllo inter',
+ ogDescription: 'Il Municipio di Roveredo si oppone alla versione del Governo grigionese sul rilascio dei permessi di dimora, evidenziando rischi e criticità nel controllo inter.',
  canonicalPath: '/articoli-frontaliere/roveredo-permessi-anticrimine/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Roveredo denuncia: i permessi non sono un incidente",
- "description": "Il Municipio di Roveredo si oppone alla versione del Governo grigionese sul rilascio dei permessi di dimora, evidenziando rischi e criticità nel controllo inter",
+ "description": "Il Municipio di Roveredo si oppone alla versione del Governo grigionese sul rilascio dei permessi di dimora, evidenziando rischi e criticità nel controllo inter.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/roveredo-permessi-anticrimine.webp`,
  "width": 1200,
@@ -4283,7 +4283,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-pasqua-messaggio-di-avvenire': {
  title: 'Alain de Raemy: «Il significato della Pasqua? Un messaggio',
- description: 'L\'amministratore apostolico della diocesi di Lugano riflette sulle sofferenze cui è confrontato il mondo e sul senso della croce per i giovani. Dati aggiornati',
+ description: 'L\'amministratore apostolico della diocesi di Lugano riflette sulle sofferenze cui è confrontato il mondo e sul senso della croce per i giovani. Dati aggiornati.',
  keywords: 'frontalieri, ticino, svizzera, italia, alain, raemy, significato, pasqua',
  ogTitle: 'Alain de Raemy: il significato della Pasqua',
  ogDescription: 'L\'amministratore apostolico della diocesi di Lugano riflette sulle sofferenze cui è confrontato il mondo e sul senso della croce per i giovani.',
@@ -4292,7 +4292,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Alain de Raemy: «Il significato della Pasqua? Un messaggio di avvenire»",
- "description": "L'amministratore apostolico della diocesi di Lugano riflette sulle sofferenze cui è confrontato il mondo e sul senso della croce per i giovani. Dati aggiornati",
+ "description": "L'amministratore apostolico della diocesi di Lugano riflette sulle sofferenze cui è confrontato il mondo e sul senso della croce per i giovani. Dati aggiornati.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/pasqua-messaggio-di-avvenire.webp`,
  "width": 1200,
@@ -4314,7 +4314,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  description: 'Un incidente stradale a Cadenazzo ha causato la morte di un vigilante. Dati aggiornati 2026 per frontalieri in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, tramonto, cadenazzo, morto, vigilante',
  ogTitle: 'Tramonto a Cadenazzo: morto il vigilante travolto da un\'auto',
- ogDescription: 'Un incidente stradale a Cadenazzo ha causato la morte di un vigilante',
+ ogDescription: 'Un incidente stradale a Cadenazzo ha causato la morte di un vigilante.',
  canonicalPath: '/articoli-frontaliere/tramonto-a-cadenazzo/',
  structuredData: {
  "@context": "https://schema.org",
@@ -4339,16 +4339,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-traffico-san-gottardo-2026': {
  title: 'Traffico paralizzato al San Gottardo | Frontaliere Ticino',
- description: 'La colonna di auto ferme al portale nord della galleria del San Gottardo ha raggiunto i 21 chilometri con picchi di oltre 3 ore e mezza di attesa',
+ description: 'La colonna di auto ferme al portale nord della galleria del San Gottardo ha raggiunto i 21 chilometri con picchi di oltre 3 ore e mezza di attesa.',
  keywords: 'frontalieri, ticino, svizzera, italia, traffico, paralizzato, gottardo, qualcuno',
  ogTitle: 'Traffico paralizzato al San Gottardo: "Qualcuno sa',
- ogDescription: 'La colonna di auto ferme al portale nord della galleria del San Gottardo ha raggiunto i 21 chilometri con picchi di oltre 3 ore e mezza di attesa',
+ ogDescription: 'La colonna di auto ferme al portale nord della galleria del San Gottardo ha raggiunto i 21 chilometri con picchi di oltre 3 ore e mezza di attesa.',
  canonicalPath: '/articoli-frontaliere/traffico-san-gottardo-2026/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Traffico paralizzato al San Gottardo: \"Qualcuno sa come arrivare in Italia?\"",
- "description": "La colonna di auto ferme al portale nord della galleria del San Gottardo ha raggiunto i 21 chilometri con picchi di oltre 3 ore e mezza di attesa",
+ "description": "La colonna di auto ferme al portale nord della galleria del San Gottardo ha raggiunto i 21 chilometri con picchi di oltre 3 ore e mezza di attesa.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/traffico-san-gottardo-2026.webp`,
  "width": 1200,
@@ -4398,7 +4398,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
     description: 'Nestle ha annunciato l\'apertura di una nuova sede in Lombardia e offre 200 posti di lavoro: ecco i profili ricercati.',
  keywords: 'frontalieri, ticino, svizzera, italia, nestle, apre, sede, lombardia',
  ogTitle: 'Nestle apre sede in Lombardia e offre 200 posti di lavoro',
- ogDescription: 'Nestle ha annunciato l\'apertura di una nuova sede in Lombardia e offre 200 posti di lavoro: ecco i profili ricercati',
+ ogDescription: 'Nestle ha annunciato l\'apertura di una nuova sede in Lombardia e offre 200 posti di lavoro: ecco i profili ricercati.',
  canonicalPath: '/articoli-frontaliere/nestle-200-posti-lombardia/',
  structuredData: {
  "@context": "https://schema.org",
@@ -4510,7 +4510,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  description: 'La galleria del Monte Ceneri è stata chiusa per problemi tecnici sulla A2 in direzione del Ticino. Dati aggiornati 2026 per frontalieri in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, galleria, monte, ceneri, stata',
  ogTitle: 'Galleria del Ceneri chiusa per problemi tecnici',
- ogDescription: 'La galleria del Monte Ceneri è stata chiusa per problemi tecnici sulla A2 in direzione del Ticino',
+ ogDescription: 'La galleria del Monte Ceneri è stata chiusa per problemi tecnici sulla A2 in direzione del Ticino.',
  canonicalPath: '/articoli-frontaliere/galleria-del-ceneri-chiusa-per-problemi-tecnici/',
  structuredData: {
  "@context": "https://schema.org",
@@ -4535,7 +4535,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-corso-pastori-ticino': {
  title: 'Corso per pastori in Ticino | Frontaliere Ticino',
- description: 'Un nuovo corso per pastori in Ticino, per rispondere alla crescente richiesta di professionisti qualificati. Scopri di più. Dati aggiornati 2026 per frontalieri',
+ description: 'Un nuovo corso per pastori in Ticino, per rispondere alla crescente richiesta di professionisti qualificati. Scopri di più.',
  keywords: 'frontalieri, ticino, svizzera, italia, corso, pastori, nuovo, sviluppato',
  ogTitle: 'Corso per pastori in Ticino',
  ogDescription: 'Un nuovo corso per pastori in Ticino, per rispondere alla crescente richiesta di professionisti qualificati.',
@@ -4544,7 +4544,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Corso per pastori in Ticino",
- "description": "Un nuovo corso per pastori in Ticino, per rispondere alla crescente richiesta di professionisti qualificati. Scopri di più. Dati aggiornati 2026 per frontalieri",
+ "description": "Un nuovo corso per pastori in Ticino, per rispondere alla crescente richiesta di professionisti qualificati. Scopri di più.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/corso-pastori-ticino.webp`,
  "width": 1200,
@@ -4594,7 +4594,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  description: 'Trump annuncia un ultimatum alla Cina durante la Pasqua in Ticino. Dati aggiornati 2026 per frontalieri in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, trump, intesa, inferno, giallo',
  ogTitle: 'Trump: "Intesa o sarò l\'inferno". Il giallo dell\'ultimatum spostato a martedì',
- ogDescription: 'Trump annuncia un ultimatum alla Cina durante la Pasqua in Ticino',
+ ogDescription: 'Trump annuncia un ultimatum alla Cina durante la Pasqua in Ticino.',
  canonicalPath: '/articoli-frontaliere/trump-intesa-o-inferno/',
  structuredData: {
  "@context": "https://schema.org",
@@ -4734,7 +4734,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  description: 'Federica Giudici è stata nominata nuova direttrice dei Servizi sociali di Bellinzona. Dati aggiornati 2026 per frontalieri in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, nuova, direttrice, servizi, sociali',
  ogTitle: 'Nuova direttrice per i Servizi sociali di Bellinzona',
- ogDescription: 'Federica Giudici è stata nominata nuova direttrice dei Servizi sociali di Bellinzona',
+ ogDescription: 'Federica Giudici è stata nominata nuova direttrice dei Servizi sociali di Bellinzona.',
  canonicalPath: '/articoli-frontaliere/nuova-direttrice-servizi-sociali-bellinzona/',
  structuredData: {
  "@context": "https://schema.org",
@@ -4768,7 +4768,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Riaperta la galleria del Monte Ceneri: tornata alla normalità la circolazione",
- "description": "La galleria del Monte Ceneri è stata riaperta dopo la chiusura temporanea causata da un infortunio Tecnico. La circolazione è tornata alla normalità",
+ "description": "La galleria del Monte Ceneri è stata riaperta dopo la chiusura temporanea causata da un infortunio Tecnico. La circolazione è tornata alla normalità.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/riaperta-galleria-monte-ceneri.webp`,
  "width": 1200,
@@ -4790,7 +4790,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
     description: 'Il Permesso S è stato concesso a circa 70.000 persone in Svizzera, mentre il Ticino ospita circa 3000 profughi ucraini.',
  keywords: 'frontalieri, ticino, svizzera, italia, ucraini, permesso, aiuti, incognite',
  ogTitle: 'Ucraini in Ticino, il permesso S tra aiuti e incognite',
- ogDescription: 'Il Permesso S è stato concesso a circa 70.000 persone in Svizzera, mentre il Ticino ospita circa 3000 profughi ucraini',
+ ogDescription: 'Ad oggi, la Confederazione ha concesso il Permesso S a circa 70.000 persone in Svizzera, mentre il Ticino ospita circa 3.000 profughi ucraini.',
  canonicalPath: '/articoli-frontaliere/ucraini-in-ticino-aiuti-incognite/',
  structuredData: {
  "@context": "https://schema.org",
@@ -4818,7 +4818,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  description: 'Il conflitto in Medio Oriente spinge imprenditori lontano dal Golfo persico, in cerca di nuove destinazioni. Dati aggiornati 2026 per frontalieri in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, fuga, dubai, alternativa, conflitto',
  ogTitle: 'Fuga da Dubai, il Ticino come alternativa?',
- ogDescription: 'Il conflitto in Medio Oriente spinge imprenditori lontano dal Golfo persico, in cerca di nuove destinazioni',
+ ogDescription: 'Il conflitto in Medio Oriente spinge imprenditori lontano dal Golfo persico, in cerca di nuove destinazioni.',
  canonicalPath: '/articoli-frontaliere/fuga-da-dubai-ticino-alternativa/',
  structuredData: {
  "@context": "https://schema.org",
@@ -4874,7 +4874,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
     description: 'Disagi record al San Gottardo: 10 km di coda e 2 ore di ritardo per i frontalieri nel rientro da Pasquetta 2026. Consigli pratici.',
  keywords: 'frontalieri, ticino, svizzera, italia, coda, gottardo, disagi, record',
  ogTitle: '10 km di coda al San Gottardo: disagi record 2026',
- ogDescription: 'Analisi e soluzioni per i frontalieri bloccati nel rientro pasquale al confine svizzero',
+ ogDescription: 'Analisi e soluzioni per i frontalieri bloccati nel rientro pasquale al confine svizzero.',
  canonicalPath: '/articoli-frontaliere/traffico-san-gottardo-pasquetta-2026/',
  structuredData: {
  "@context": "https://schema.org",
@@ -4927,7 +4927,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-locarno-magadino-trasporto': {
  title: 'Locarno-Magadino via lago: o cambiamo | Frontaliere Ticino',
- description: 'Il servizio di trasporto lacustre tra Locarno e Magadino rischia di essere sospeso. Scopri cosa sta succedendo e come risolvere il problema. Dati aggiornati',
+ description: 'Il servizio di trasporto lacustre tra Locarno e Magadino rischia di essere sospeso. Scopri cosa sta succedendo e come risolvere il problema. Dati aggiornati.',
  keywords: 'frontalieri, ticino, svizzera, italia, locarno-magadino, lago, cambiamo, nave',
  ogTitle: 'Trasporto lacustre Locarno-Magadino | Frontaliere Ticino',
  ogDescription: 'Il servizio di trasporto lacustre tra Locarno e Magadino rischia di essere sospeso. Scopri cosa sta succedendo e come risolvere il problema.',
@@ -4936,7 +4936,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Trasporto lacustre Locarno-Magadino",
- "description": "Il servizio di trasporto lacustre tra Locarno e Magadino rischia di essere sospeso. Scopri cosa sta succedendo e come risolvere il problema. Dati aggiornati",
+ "description": "Il servizio di trasporto lacustre tra Locarno e Magadino rischia di essere sospeso. Scopri cosa sta succedendo e come risolvere il problema. Dati aggiornati.",
  "image": {
  "@type": "ImageObject", "url": `${BASE_URL}/images/blog/locarno-magadino-trasporto-2.webp`,
  "width": 1200,
@@ -4986,7 +4986,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  description: 'La rete idrica di Lavizzara è stata colpita da problemi, causando la mancanza di acqua potabile in varie zone. Dati aggiornati 2026 per frontalieri in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, lavizzara, problemi, alla, rete',
  ogTitle: 'Lavizzara: problemi alla rete idrica, niente acqua potabile',
- ogDescription: 'La rete idrica di Lavizzara è stata colpita da problemi, causando la mancanza di acqua potabile in varie zone',
+ ogDescription: 'La rete idrica di Lavizzara è stata colpita da problemi, causando la mancanza di acqua potabile in varie zone.',
  canonicalPath: '/articoli-frontaliere/lavizzara-problemi-alla-rete-idrica-niente-acqua-potabile-in-varie-zone/',
  structuredData: {
  "@context": "https://schema.org",
@@ -5014,7 +5014,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  description: 'Nuova settimana e subito raffica di chiusure e deviazioni sulla A9. Dati aggiornati 2026 per frontalieri in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, chiusure, deviazioni, sulla, cosa',
  ogTitle: 'Chiusure e deviazioni sulla A9: cosa fare durante la raffica',
- ogDescription: 'Nuova settimana e subito raffica di chiusure e deviazioni sulla A9',
+ ogDescription: 'Nuova settimana e subito raffica di chiusure e deviazioni sulla A9.',
  canonicalPath: '/articoli-frontaliere/raffica-chiusure-a9-2026/',
  structuredData: {
  "@context": "https://schema.org",
@@ -5124,16 +5124,16 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-controlli-varese-esposto-espulsione': {
  title: 'Controlli nel cuore di Varese: denuncia | Frontaliere Ticino',
- description: 'Nel pomeriggio del 23 marzo, controlli estesi nel centro di Varese hanno portato a una denuncia penale e all\'espulsione di un uomo. I dettagli delle operazioni',
+ description: 'Nel pomeriggio del 23 marzo, controlli estesi nel centro di Varese hanno portato a una denuncia penale e all\'espulsione di un uomo. I dettagli delle operazioni.',
  keywords: 'frontalieri, ticino, svizzera, italia, controlli, cuore, varese, denuncia',
  ogTitle: 'Controlli nel cuore di Varese: denuncia e espulsione',
- ogDescription: 'Nel pomeriggio del 23 marzo, controlli estesi nel centro di Varese hanno portato a una denuncia penale e all\'espulsione di un uomo. I dettagli delle operazioni',
+ ogDescription: 'Nel pomeriggio del 23 marzo, controlli estesi nel centro di Varese hanno portato a una denuncia penale e all\'espulsione di un uomo. I dettagli delle operazioni.',
  canonicalPath: '/articoli-frontaliere/controlli-varese-esposto-espulsione/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Controlli nel cuore di Varese: denuncia e espulsione",
- "description": "Nel pomeriggio del 23 marzo, controlli estesi nel centro di Varese hanno portato a una denuncia penale e all'espulsione di un uomo. I dettagli delle operazioni",
+ "description": "Nel pomeriggio del 23 marzo, controlli estesi nel centro di Varese hanno portato a una denuncia penale e all'espulsione di un uomo. I dettagli delle operazioni.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/controlli-varese-esposto-espulsione.webp`,
  "width": 1200,
@@ -5152,7 +5152,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
 
  'blog-incidente-arogno-31enne-gravi-condizioni': {
  title: 'Incidente ad Arogno: 31enne in gravi | Frontaliere Ticino',
- description: 'Un uomo di 31 anni è precipitato in una scarpata durante una festa ad Arogno. Scopri i dettagli dell\'incidente e i consigli per la sicurezza. Dati aggiornati',
+ description: 'Un uomo di 31 anni è precipitato in una scarpata durante una festa ad Arogno. Scopri i dettagli dell\'incidente e i consigli per la sicurezza. Dati aggiornati.',
  keywords: 'frontalieri, ticino, svizzera, italia, incidente, arogno, 31enne, gravi',
  ogTitle: 'Incidente ad Arogno: 31enne in gravi condizioni | Frontaliere Ticino',
  ogDescription: 'Un uomo di 31 anni è precipitato in una scarpata durante una festa ad Arogno. Scopri i dettagli dell\'incidente e i consigli per la sicurezza.',
@@ -5161,7 +5161,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Incidente ad Arogno: 31enne in gravi condizioni dopo una caduta durante una festa",
- "description": "Un uomo di 31 anni è precipitato in una scarpata durante una festa ad Arogno. Scopri i dettagli dell'incidente e i consigli per la sicurezza. Dati aggiornati",
+ "description": "Un uomo di 31 anni è precipitato in una scarpata durante una festa ad Arogno. Scopri i dettagli dell'incidente e i consigli per la sicurezza. Dati aggiornati.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/incidente-arogno-31enne-gravi-condizioni.webp`,
  "width": 1200,
@@ -5336,7 +5336,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  description: 'Bellinzona, 7 aprile 2026 - Un italiano arrestato per incendi nel Luganese. Dati aggiornati 2026 per frontalieri in Ticino.',
  keywords: 'frontalieri, ticino, svizzera, italia, incendi, luganese, arrestato, piromane',
  ogTitle: 'Incendi nel Luganese: arrestato un piromane italiano',
- ogDescription: 'Bellinzona, 7 aprile 2026 - Un italiano arrestato per incendi nel Luganese',
+ ogDescription: 'Bellinzona, 7 aprile 2026 - Un italiano arrestato per incendi nel Luganese.',
  canonicalPath: '/articoli-frontaliere/incendi-nel-luganese-arrestato-un-piromane/',
  structuredData: {
  "@context": "https://schema.org",

@@ -64,7 +64,7 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.abstimmung-bahnhof-wil-allee.excerpt': 'Der Bruttokredit beträgt 63,662 Millionen Franken; die Arbeiten sind von 2029 bis 2033 vorgesehen.',
     'blog.article.abstimmung-bahnhof-wil-allee.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.unfall-a13-sevelen-2026.title': 'Auffahrunfall auf der A13 bei Sevelen: zwei Verletzte am 25. Oktober 2026',
-    'blog.article.unfall-a13-sevelen-2026.excerpt': 'Am 25. Oktober fuhren auf der A13 bei Sevelen zwei Autos aufeinander auf Ein 79-jähriger Fahrer und die 86-jährige Beifahrerin wurden verletzt Der 53-jährige',
+    'blog.article.unfall-a13-sevelen-2026.excerpt': 'Hinter ihnen fuhr in derselben Richtung ein 53-jähriger Mann am Steuer eines zweiten Autos. Auf der Höhe von Sevelen kam es zu einer Auffahrkollision zwischen den beiden Fahrzeugen.',
     'blog.article.unfall-a13-sevelen-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.positive-chiusure-2025-sg.title': '40 Gemeinden des Kantons St. Gallen schliessen das Jahr 2025 positiv ab',
     'blog.article.positive-chiusure-2025-sg.excerpt': 'Von 75 politischen Gemeinden schlossen 40 das Jahr 2025 mit einem Überschuss ab; der kumulierte Überschuss beträgt rund CHF 28 Millionen.',

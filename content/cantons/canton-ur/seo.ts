@@ -199,16 +199,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-silenen-muri-secco': {
     title: 'Silenen: Landrat approva CHF 207.000 per muri a secco',
-    description: 'Il Landrat approva CHF 207.000 senza voti contrari 3,6 km di muri storici nell\'area di Silenen Circa il 60% presenta un rischio per la sicurezza I lavori',
+    description: 'Nella stessa seduta il Landrat ha esaminato anche una seconda richiesta, distinta dal progetto di Silenen.',
     keywords: 'frontalieri, ticino, svizzera, italia, silenen, landrat, approva, muri',
     ogTitle: 'Silenen: CHF 207.000 per i muri a secco storici',
-    ogDescription: 'Il Landrat approva CHF 207.000 senza voti contrari 3,6 km di muri storici nell\'area di Silenen Circa il 60% presenta un rischio per la sicurezza I lavori',
+    ogDescription: 'Il Parlamento cantonale di Uri ha approvato mercoledì, senza voti contrari, un contributo cantonale di CHF 207.000 per risanare le storiche murature a secco di Silenen.',
     canonicalPath: '/articoli-uri/silenen-muri-secco/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Silenen: Landrat approva CHF 207.000 per muri a secco",
-      "description": "Il Landrat approva CHF 207.000 senza voti contrari 3,6 km di muri storici nell'area di Silenen Circa il 60% presenta un rischio per la sicurezza I lavori",
+      "description": "Nella stessa seduta il Landrat ha esaminato anche una seconda richiesta, distinta dal progetto di Silenen.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -509,7 +509,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il Flüeler Tunnel è rimasto chiuso per circa un\'ora e mezza giovedì 29 ottobre dopo un incendio di un veicolo. Nessun ferito.',
     keywords: 'frontalieri, ticino, svizzera, italia, incendio, veicolo, chiuso, tunnel',
     ogTitle: 'Incendio di un veicolo, chiuso il tunnel di Flüelen',
-    ogDescription: 'Il lead pubblico dell\'Urner Wochenblatt riferisce un incendio di un veicolo nel Flüeler Tunnel. La chiusura è durata circa un\'ora e mezza giovedì 29 ottobre; nessuno è rimasto ferito. Il testo accessibile non aggiunge dettagli su cause, danni',
+    ogDescription: 'Il lead pubblico dell\'Urner Wochenblatt riferisce un incendio di un veicolo nel Flüeler Tunnel. La chiusura è durata circa un\'ora e mezza giovedì 29 ottobre; nessuno è rimasto ferito. Il testo accessibile non aggiunge dettagli su cause, danni.',
     canonicalPath: '/articoli-uri/incendio-tunnel-fluelen/',
     structuredData: {
       "@context": "https://schema.org",

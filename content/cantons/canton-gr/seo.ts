@@ -85,7 +85,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'A settembre 2026 i Grigioni hanno registrato 1.237 disoccupati, pari all\'1,1%. Le persone in cerca di lavoro sono 2.267, contro 2.180 nel mese precedente.',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, grigioni, settembre, hanno',
     ogTitle: 'Disoccupazione nei Grigioni: 1,1% a settembre 2026',
-    ogDescription: 'Il comunicato del 6 ottobre 2026 fotografa il mercato del lavoro dei Grigioni: 1.237 disoccupati, 1.030 persone in cerca di lavoro non disoccupate e 2.267 cercatori complessivi. L\'Amt für Industrie, Gewerbe und Arbeit pubblica la statistica',
+    ogDescription: 'Il comunicato del 6 ottobre 2026 fotografa il mercato del lavoro dei Grigioni: 1.237 disoccupati, 1.030 persone in cerca di lavoro non disoccupate e 2.267 cercatori complessivi. L\'Amt für Industrie, Gewerbe und Arbeit pubblica la statistica.',
     canonicalPath: '/articoli-grigioni/lavoro-grigioni-settembre-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -277,16 +277,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-lido-grono-estate-2027': {
     title: 'Lido Grono, apertura confermata per l\'estate 2027',
-    description: 'Apertura del Lido Grono confermata per l\'estate 2027 Cantiere della nuova piscina comunale ancora in corso Costi previsti: circa 5 milioni Annuncio del sindaco',
+    description: 'Lido Grono aprirà nell\'estate 2027. La conferma riguarda la nuova piscina comunale e arriva mentre il cantiere prosegue.',
     keywords: 'frontalieri, ticino, svizzera, italia, lido, grono, apertura, confermata',
     ogTitle: 'Lido Grono: apertura confermata nell\'estate 2027',
-    ogDescription: 'Apertura del Lido Grono confermata per l\'estate 2027 Cantiere della nuova piscina comunale ancora in corso Costi previsti: circa 5 milioni Annuncio del sindaco',
+    ogDescription: 'Lido Grono aprirà nell\'estate 2027. La conferma riguarda la nuova piscina comunale e arriva mentre il cantiere prosegue.',
     canonicalPath: '/articoli-grigioni/lido-grono-estate-2027/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Lido Grono, apertura confermata per l'estate 2027",
-      "description": "Apertura del Lido Grono confermata per l'estate 2027 Cantiere della nuova piscina comunale ancora in corso Costi previsti: circa 5 milioni Annuncio del sindaco",
+      "description": "Lido Grono aprirà nell'estate 2027. La conferma riguarda la nuova piscina comunale e arriva mentre il cantiere prosegue.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -316,7 +316,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-acqua-domleschg-feldis-scheid': {
     title: 'Domleschg: camion cisterna per l\'acqua a Feldis e Scheid',
-    description: 'Domleschg intende portare acqua potabile a Feldis e Scheid. La carenza idrica è segnalata già da giugno. A Feldis il problema potrebbe presentarsi a inizio',
+    description: 'Domleschg intende portare acqua potabile a Feldis e Scheid. La carenza idrica è segnalata già da giugno. A Feldis il problema potrebbe presentarsi a inizio.',
     keywords: 'frontalieri, ticino, svizzera, italia, domleschg, camion, cisterna, acqua',
     ogTitle: 'Domleschg: camion cisterna per l\'acqua a Feldis e Scheid',
     ogDescription: 'Domleschg intende portare acqua potabile a Feldis e Scheid.',
@@ -325,7 +325,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Domleschg: camion cisterna per l'acqua a Feldis e Scheid",
-      "description": "Domleschg intende portare acqua potabile a Feldis e Scheid. La carenza idrica è segnalata già da giugno. A Feldis il problema potrebbe presentarsi a inizio",
+      "description": "Domleschg intende portare acqua potabile a Feldis e Scheid. La carenza idrica è segnalata già da giugno. A Feldis il problema potrebbe presentarsi a inizio.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -394,16 +394,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-a13-code-grigioni-vacanze-zurighesi': {
     title: 'A13: code tra Rothenbrunnen e Reichenau per vacanze zurighesi',
-    description: 'Il traffico sulla A13 in Grigioni ha visto code quotidiane tra Rothenbrunnen e Reichenau, con il tunnel Isla-Bella come collo di bottiglia',
+    description: 'Il traffico sulla A13 in Grigioni ha visto code quotidiane tra Rothenbrunnen e Reichenau, con il tunnel Isla-Bella come collo di bottiglia.',
     keywords: 'frontalieri, ticino, svizzera, italia, code, rothenbrunnen, reichenau, vacanze',
     ogTitle: 'A13 Grigioni: code tra Rothenbrunnen e Reichenau, Isla-Bella',
-    ogDescription: 'Il fine settimana ha registrato un significativo accumulo di traffico sulla A13 in Grigioni, con code quotidiane tra Rothenbrunnen e Reichenau. Il tunnel Isla-Bella è stato identificato come il principale collo di bottiglia, un fenomeno legato',
+    ogDescription: 'Il fine settimana ha registrato un significativo accumulo di traffico sulla A13 in Grigioni, con code quotidiane tra Rothenbrunnen e Reichenau. Il tunnel Isla-Bella è stato identificato come il principale collo di bottiglia, un fenomeno legato.',
     canonicalPath: '/articoli-grigioni/a13-code-grigioni-vacanze-zurighesi/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "A13: code tra Rothenbrunnen e Reichenau per vacanze zurighesi",
-      "description": "Il traffico sulla A13 in Grigioni ha visto code quotidiane tra Rothenbrunnen e Reichenau, con il tunnel Isla-Bella come collo di bottiglia",
+      "description": "Il traffico sulla A13 in Grigioni ha visto code quotidiane tra Rothenbrunnen e Reichenau, con il tunnel Isla-Bella come collo di bottiglia.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -511,16 +511,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-cantiere-caraa-guera-interrogazione': {
     title: 'Interrogazione Cantiere Caraa de Guèra: chiarezza su lavori e costi',
-    description: 'Cantiere sulla Caraa de Guèra, tra Maron e Ai Tecc Rifacimento di reti e posa di acciottolato di fiume Sette domande al Municipio su approvazioni',
+    description: 'Da alcune settimane è aperto un importante cantiere sulla strada di quartiere Caraa de Guèra.',
     keywords: 'frontalieri, ticino, svizzera, italia, interrogazione, cantiere, caraa, guèra',
     ogTitle: 'Cantiere Caraa de Guèra: chiarezza su lavori e costi',
-    ogDescription: 'Cantiere sulla Caraa de Guèra, tra Maron e Ai Tecc Rifacimento di reti e posa di acciottolato di fiume Sette domande al Municipio su approvazioni e costi',
+    ogDescription: 'Da alcune settimane è aperto un importante cantiere sulla strada di quartiere Caraa de Guèra.',
     canonicalPath: '/articoli-grigioni/cantiere-caraa-guera-interrogazione/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Interrogazione Cantiere Caraa de Guèra: chiarezza su lavori e costi",
-      "description": "Cantiere sulla Caraa de Guèra, tra Maron e Ai Tecc Rifacimento di reti e posa di acciottolato di fiume Sette domande al Municipio su approvazioni",
+      "description": "Da alcune settimane è aperto un importante cantiere sulla strada di quartiere Caraa de Guèra.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -550,16 +550,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-val-calanca-strada-chiusa': {
     title: 'Val Calanca: chiusura strada per due settimane, chiede sostegno per isolamento',
-    description: 'Val Calanca: strada chiusa per due settimane dopo smottamenti Censi chiede strumenti permanenti al governo retico Fondo ipotizzato dal terzo giorno',
+    description: 'La strada della Val Calanca è rimasta chiusa per due settimane dopo diversi smottamenti.',
     keywords: 'frontalieri, ticino, svizzera, italia, calanca, chiusura, strada, settimane',
     ogTitle: 'Val Calanca: chiusura strada e richiesta sostegno',
-    ogDescription: 'Val Calanca: strada chiusa per due settimane dopo smottamenti Censi chiede strumenti permanenti al governo retico Fondo ipotizzato dal terzo giorno',
+    ogDescription: 'La strada della Val Calanca è rimasta chiusa per due settimane dopo diversi smottamenti.',
     canonicalPath: '/articoli-grigioni/val-calanca-strada-chiusa/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Val Calanca: chiusura strada per due settimane, chiede sostegno per isolamento",
-      "description": "Val Calanca: strada chiusa per due settimane dopo smottamenti Censi chiede strumenti permanenti al governo retico Fondo ipotizzato dal terzo giorno",
+      "description": "La strada della Val Calanca è rimasta chiusa per due settimane dopo diversi smottamenti.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -706,7 +706,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-innhub-la-punt-rinvio-apertura': {
     title: 'Innhub La Punt: apertura rimandata all\'estate 2029',
-    description: 'Apertura nell\'estate 2029, sei mesi dopo il piano iniziale. Investimenti inizialmente stimati in CHF 117,5 milioni. La prima di tredici cupole',
+    description: 'Apertura nell\'estate 2029, sei mesi dopo il piano iniziale. Investimenti inizialmente stimati in CHF 117,5 milioni. La prima di tredici cupole.',
     keywords: 'frontalieri, ticino, svizzera, italia, innhub, punt, apertura, rimandata',
     ogTitle: 'Innhub La Punt: apertura rimandata all\'estate 2029',
     ogDescription: 'Apertura nell\'estate 2029, sei mesi dopo il piano iniziale.',
@@ -715,7 +715,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Innhub La Punt: apertura rimandata all'estate 2029",
-      "description": "Apertura nell'estate 2029, sei mesi dopo il piano iniziale. Investimenti inizialmente stimati in CHF 117,5 milioni. La prima di tredici cupole",
+      "description": "Apertura nell'estate 2029, sei mesi dopo il piano iniziale. Investimenti inizialmente stimati in CHF 117,5 milioni. La prima di tredici cupole.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -745,16 +745,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-vallo-protezione-sorte-lostallo': {
     title: 'Lostallo, al via il vallo di protezione a Sorte',
-    description: 'Nei prossimi giorni parte il vallo di protezione Credito comunale: 6,2 milioni di franchi Lavori principali previsti nell\'autunno 2027 L\'alluvione',
+    description: 'Nei prossimi giorni, a Sorte, inizieranno i lavori per il vallo di protezione sulla sponda destra della frazione di Lostallo.',
     keywords: 'frontalieri, ticino, svizzera, italia, lostallo, vallo, protezione, sorte',
     ogTitle: 'Lostallo: al via il vallo di protezione a Sorte',
-    ogDescription: 'Nei prossimi giorni parte il vallo di protezione Credito comunale: 6,2 milioni di franchi Lavori principali previsti nell\'autunno 2027 L\'alluvione del 21 giugno',
+    ogDescription: 'Nei prossimi giorni, a Sorte, inizieranno i lavori per il vallo di protezione sulla sponda destra della frazione di Lostallo.',
     canonicalPath: '/articoli-grigioni/vallo-protezione-sorte-lostallo/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Lostallo, al via il vallo di protezione a Sorte",
-      "description": "Nei prossimi giorni parte il vallo di protezione Credito comunale: 6,2 milioni di franchi Lavori principali previsti nell'autunno 2027 L'alluvione",
+      "description": "Nei prossimi giorni, a Sorte, inizieranno i lavori per il vallo di protezione sulla sponda destra della frazione di Lostallo.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

@@ -36,6 +36,7 @@ test('normalizza l intestazione In breve in una sola frase utile', () => {
     '- Ulteriori dettagli sono disponibili nella decisione completa.',
   ].join('\n');
   assert.equal(normalizeExcerpt(duplicateMixedHeaders), sentence);
+  assert.equal(normalizeExcerpt('Frase completa breve.'), 'Frase completa breve.');
 });
 
 test('strip deterministico rimuove heading, elenco, grassetto, link e tabella', () => {
@@ -109,9 +110,11 @@ test('la codifica dei meta distingue il testo plain dal preflight di completezza
 });
 
 test('la completezza rileva code sintattiche aperte, parentesi e label orfane', () => {
-  assert.deepEqual(findExcerptCompletenessDefects('The vote is'), ['dangling-clause']);
-  assert.deepEqual(findExcerptCompletenessDefects('A rate applies (starting at'), ['unclosed-parenthesis', 'dangling-clause']);
-  assert.deepEqual(findExcerptCompletenessDefects('The deadline is expected by mid-'), ['unfinished-hyphenated-word']);
+  assert.deepEqual(findExcerptCompletenessDefects('The vote is'), ['dangling-clause', 'missing-final-terminator']);
+  assert.deepEqual(findExcerptCompletenessDefects('A rate applies (starting at'), ['unclosed-parenthesis', 'dangling-clause', 'missing-final-terminator']);
+  assert.deepEqual(findExcerptCompletenessDefects('The deadline is expected by mid-'), ['unfinished-hyphenated-word', 'missing-final-terminator']);
+  assert.deepEqual(findExcerptCompletenessDefects('A complete value without punctuation'), ['missing-final-terminator']);
+  assert.deepEqual(findExcerptCompletenessDefects(''), ['empty-value']);
   assert.deepEqual(
     findExcerptCompletenessDefects('Der Gerichtshof verweist auf Art.', { locale: 'de' }),
     ['unfinished-abbreviation'],
@@ -124,11 +127,11 @@ test('la completezza rileva code sintattiche aperte, parentesi e label orfane', 
     findExcerptCompletenessDefects('Die Vernehmlassung ist bis zum 7.', { locale: 'de' }),
     ['unfinished-abbreviation', 'unfinished-date'],
   );
-  assert.deepEqual(findExcerptCompletenessDefects('A complete sentence. Subject'), ['orphaned-label']);
-  assert.deepEqual(findExcerptCompletenessDefects('Sunday work would remain subject'), ['orphaned-label']);
-  assert.deepEqual(findExcerptCompletenessDefects('Eine vollständige Aussage. gegenstand'), ['orphaned-label']);
-  assert.deepEqual(findExcerptCompletenessDefects('Une phrase complète. objet'), ['orphaned-label']);
-  assert.deepEqual(findExcerptCompletenessDefects('Guida pratica al Permesso G'), []);
+  assert.deepEqual(findExcerptCompletenessDefects('A complete sentence. Subject'), ['orphaned-label', 'missing-final-terminator']);
+  assert.deepEqual(findExcerptCompletenessDefects('Sunday work would remain subject'), ['orphaned-label', 'missing-final-terminator']);
+  assert.deepEqual(findExcerptCompletenessDefects('Eine vollständige Aussage. gegenstand'), ['orphaned-label', 'missing-final-terminator']);
+  assert.deepEqual(findExcerptCompletenessDefects('Une phrase complète. objet'), ['orphaned-label', 'missing-final-terminator']);
+  assert.deepEqual(findExcerptCompletenessDefects('Guida pratica al Permesso G'), ['missing-final-terminator']);
 });
 
 test('le abbreviazioni non chiudono una frase e una coda breve resta da riparare', () => {
@@ -178,6 +181,25 @@ test('le abbreviazioni non chiudono una frase e una coda breve resta da riparare
   assert.equal(tooShort.value, 'Una frase intera ma inferiore alla soglia.');
 });
 
+test('le iniziali finali dipendono dal contesto di etichetta', () => {
+  for (const value of [
+    'La Serie A.',
+    'Il piano B.',
+    'Plan A.',
+    'Die Gruppe A.',
+    'Der Punkt A.',
+    'Der Typ A.',
+    'Die Klasse A.',
+    'La categoria A.',
+    'La fase A.',
+  ]) {
+    assert.equal(endsWithSentenceAbbreviation(value), false, value);
+    assert.deepEqual(findExcerptCompletenessDefects(value), [], value);
+  }
+  assert.equal(endsWithSentenceAbbreviation('La norma cita A.'), true);
+  assert.ok(findExcerptCompletenessDefects('La norma si applica a.').includes('dangling-clause'));
+});
+
 test('un item completo non è un inizio a metà frase, mentre un ordinal date sì', () => {
   const orderedItem = 'Den aktuellen Stand festhalten: Das Bundesverwaltungsgericht hat die Busse aufgehoben.';
   const bulletItem = 'Distinguere il dato certo dalle conseguenze ancora da definire.';
@@ -190,6 +212,139 @@ test('un item completo non è un inizio a metà frase, mentre un ordinal date s�
     true,
   );
   assert.deepEqual(findDescriptionDefects(orderedItem, { locale: 'de', body: [`1. ${orderedItem}`] }), []);
+});
+
+test('un prefisso a non può iniziare dopo un’abbreviazione nel body', () => {
+  const body = [
+    "La legge disciplina il caso ai sensi dell'art. 5 del decreto: il credito si applica ai frontalieri residenti in Italia e alle loro famiglie.",
+  ];
+  const clipped = '5 del decreto: il credito si applica ai frontalieri residenti in Italia e alle loro famiglie. Testo troncato perché';
+  const result = repairExcerptFromOriginal(clipped, {
+    body,
+    title: 'Il credito per i frontalieri residenti in Italia',
+    locale: 'it',
+    minLength: 60,
+  });
+  assert.equal(result.strategy, 'b');
+  assert.equal(result.value, body[0]);
+  assert.equal(startsAfterNonSentenceBoundary(result.value, body), false);
+});
+
+test('un excerpt vuoto usa una frase completa del body con due parole chiave del titolo', () => {
+  const body = ['Die Veröffentlichung des Ministerialdekrets leitet die regionale Phase ein, ersetzt diesen Schritt jedoch nicht.'];
+  const result = repairExcerptFromOriginal('', {
+    body,
+    title: 'Gesundheitsabgabe für Grenzgänger: Dekret publiziert',
+    locale: 'de',
+    minLength: 60,
+  });
+  assert.equal(result.strategy, 'b');
+  assert.equal(result.value, body[0]);
+
+  const englishBody = ['For electric cars, there is no fixed formula analogous to the “3x5” rule for conventional fuels.'];
+  const englishResult = repairExcerptFromOriginal('', {
+    body: englishBody,
+    title: 'Electric car: how to save up to 50%',
+    locale: 'en',
+    minLength: 60,
+  });
+  assert.equal(englishResult.strategy, 'b');
+  assert.equal(englishResult.value, englishBody[0]);
+});
+
+test('un excerpt che appiattisce più bullet preferisce la prima frase pertinente del body', () => {
+  const body = [
+    '## In breve\n- Prima 13esima AVS a dicembre\n- Pensione dal 1° luglio: metà rendita\n- Quasi 2,7 milioni di beneficiari\n\nLa 13esima AVS sarà versata per la prima volta a dicembre, ma non avrà lo stesso valore per tutti i beneficiari.',
+  ];
+  const flattened = 'Prima 13esima AVS a dicembre Pensione dal 1° luglio: metà rendita Quasi 2,7 milioni di beneficiari';
+  const result = repairExcerptFromOriginal(flattened, {
+    body,
+    title: 'La 13esima rendita AVS sarà versata per la prima volta a dicembre',
+    locale: 'it',
+    minLength: 60,
+  });
+  assert.equal(result.strategy, 'b');
+  assert.equal(result.value, 'La 13esima AVS sarà versata per la prima volta a dicembre, ma non avrà lo stesso valore per tutti i beneficiari.');
+});
+
+test('la strategia d conserva i riassunti completi aggiungendo solo il terminatore', () => {
+  const french = 'Conditions et procédure pour obtenir le permis d’établissement C dans le canton d’Obwald';
+  const german = 'Offizielle BfS/BfS-Daten zum durchschnittlichen Lohn in der Schweiz nach Branche und Beruf';
+  const english = 'Targeted interventions to improve safety and traffic flow along the SS 340 Regina, with ANAS funding and provincial coordination';
+
+  const frenchBody = [
+    '- Avoir un revenu mensuel d’au moins 5 000 CHF',
+    '- Dépôt de la demande de permis C au canton d’Obwald',
+    '- Évaluation finale et décision sur la validation du permis de séjour C',
+  ].join('\n');
+  const frenchRepair = repairExcerptFromOriginal(french, {
+    body: [frenchBody],
+    locale: 'fr',
+    listOnlyBody: true,
+  });
+  assert.equal(frenchRepair.strategy, 'd');
+  assert.equal(frenchRepair.value, french + '.');
+
+  for (const [value, locale] of [[german, 'de'], [english, 'en']]) {
+    const repaired = repairExcerptFromOriginal(value, { locale, listOnlyBody: true });
+    assert.equal(repaired.strategy, 'd');
+    assert.equal(repaired.value, value + '.');
+  }
+
+  const emojiValue = 'The event opens for residents and visitors in the surrounding municipalities 📊💡⚠️';
+  const emojiRepair = repairExcerptFromOriginal(emojiValue, { locale: 'en', listOnlyBody: true });
+  assert.equal(emojiRepair.strategy, 'd');
+  assert.equal(emojiRepair.value, 'The event opens for residents and visitors in the surrounding municipalities.');
+
+  const germanNounTransitions = 'Der Lohn für Grenzgänger im Kanton Aargau nach Branche und Beruf';
+  const germanBulletBody = [
+    '- Kanton Aargau: Lohn für Grenzgänger',
+    '- Beruf und Branche in der Schweiz',
+  ].join('\n');
+  const germanNounRepair = repairExcerptFromOriginal(germanNounTransitions, {
+    body: [germanBulletBody],
+    locale: 'de',
+    listOnlyBody: true,
+  });
+  assert.equal(germanNounRepair.strategy, 'd');
+  assert.equal(germanNounRepair.value, germanNounTransitions + '.');
+});
+
+test('la strategia b è riservata agli elenchi appiattiti e usa una frase del body pertinente al titolo', () => {
+  const body = [
+    '## TL;DR\n- Val Calanca: road closed for two weeks after landslides\n- Censi asks the Graubünden government for permanent instruments\n- Fund envisaged from the third day of inactivity\n\nThe Val Calanca road was closed for two weeks after several landslides.',
+  ];
+  const flattened = 'Calanca Valley: road closed for two weeks after landslides Censi calls on the Rhaetian government for permanent tools Fund envisaged from the third day';
+  const listed = repairExcerptFromOriginal(flattened, {
+    body,
+    title: 'Val Calanca: road closure for two weeks, seeks support over isolation',
+    locale: 'en',
+    listOnlyBody: true,
+  });
+  assert.equal(listed.strategy, 'b');
+  assert.equal(listed.value, 'The Val Calanca road was closed for two weeks after several landslides.');
+
+  const unrelated = repairExcerptFromOriginal('The report describes permits in Switzerland for', {
+    body: ['A complete sentence about a separate local election and its results.'],
+    title: 'Swiss work permit changes for cross-border commuters',
+    locale: 'en',
+    listOnlyBody: true,
+  });
+  assert.equal(unrelated.strategy, 'c');
+  assert.equal(unrelated.value, 'The report describes permits in Switzerland for');
+});
+
+test('la strategia d esclude code Dati aggiornati 2026 per e applica a al prefisso esistente', () => {
+  const original = 'Le azioni di Amazon salgono dopo i risultati del trimestre e il gruppo dei cinque giganti si rafforza. Dati aggiornati 2026 per frontalieri';
+  const repaired = repairExcerptFromOriginal(original, { locale: 'it', listOnlyBody: true });
+  assert.equal(repaired.strategy, 'a');
+  assert.equal(repaired.value, 'Le azioni di Amazon salgono dopo i risultati del trimestre e il gruppo dei cinque giganti si rafforza.');
+
+  const onlyTail = repairExcerptFromOriginal('Dati aggiornati 2026 per frontalieri', {
+    locale: 'it',
+    listOnlyBody: true,
+  });
+  assert.equal(onlyTail.strategy, 'c');
 });
 
 test('la lunghezza non rende difettosa una frase completa, breve o oltre il massimo', () => {
@@ -273,6 +428,18 @@ test('un articolo senza una fonte completa fallisce prima di essere registrato',
       seo: { description: 'La proposta riguarda i lavoratori perché' },
     }),
     (error) => error.qualityReject === true && /cannot be repaired safely/u.test(error.message),
+  );
+});
+
+test('un excerpt vuoto prende una frase completa dal body oppure rifiuta l’articolo', () => {
+  const body = 'Il Consiglio federale ha pubblicato i nuovi dati sui lavoratori frontalieri e sulle misure fiscali applicate in Svizzera.';
+  const article = { id: 'excerpt-vuoto', content: { it: { excerpt: '', body1: body } } };
+  const repairs = repairGeneratedArticleDescriptions(article);
+  assert.equal(article.content.it.excerpt, body);
+  assert.deepEqual(repairs.map(({ field, source }) => ({ field, source })), [{ field: 'excerpt', source: 'article-body' }]);
+  assert.throws(
+    () => repairGeneratedArticleDescriptions({ id: 'excerpt-vuoto-senza-body', content: { it: { excerpt: '' } } }),
+    (error) => error.qualityReject === true && /is empty and has no safe body excerpt/u.test(error.message),
   );
 });
 

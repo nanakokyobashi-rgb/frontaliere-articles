@@ -43,7 +43,7 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.iniziativa-parita-salariale-ag.excerpt': 'ArbeitAargau and an alliance of women’s organizations and political parties are calling for pay analyses for companies with 50 or more employees, sanctions, and the restoration of the Fachstelle.',
     'blog.article.iniziativa-parita-salariale-ag.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.sezione-medicina-nucleare.title': 'Nuklearforum creates the Swiss Nuclear Medicine section',
-    'blog.article.sezione-medicina-nucleare.excerpt': 'Nuklearforum Schweiz creates a new section Founding assembly on October 12 in Olten KSB, PSI and Molecular Partners among the founders Focus on radionuclides',
+    'blog.article.sezione-medicina-nucleare.excerpt': 'On October 12, in Olten (SO), Nuklearforum Schweiz held the constituent assembly of the Sektion Nuklearmedizin Schweiz. The new structure is organized as an association and brings together stakeholders from medicine, industry, research and associations.',
     'blog.article.sezione-medicina-nucleare.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.murales-pediatria-ksb-baden.title': 'KSB Baden: murals in pediatrics and the emergency department',
     'blog.article.murales-pediatria-ksb-baden.excerpt': 'Ten artists from Paint a Smile painted approximately 200 square meters at KSB Baden.',

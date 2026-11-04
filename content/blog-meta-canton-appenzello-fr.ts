@@ -76,7 +76,7 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.decima-fiera-apprendistati-innerrhoden.excerpt': '62 entreprises de l\'Innerrhoden présenteront des offres d\'apprentissage le samedi 7 novembre 2026 à l\'Aula Gringel, entrée gratuite de 9.00 à 15.00.',
     'blog.article.decima-fiera-apprendistati-innerrhoden.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.caldo-appenzello-esterno-2026.title': 'Appenzell Rhodes-Extérieures : davantage de jours chauds en 2026',
-    'blog.article.caldo-appenzello-esterno-2026.excerpt': 'Été 2026 : davantage de jours chauds sur les sites examinés En 2026, davantage de nuits tropicales ont été relevées L’altitude et le rafraîchissement nocturne',
+    'blog.article.caldo-appenzello-esterno-2026.excerpt': 'La comparaison des années 2022 à 2026 montre qu\'au cours de l\'été 2026, à la fois davantage de jours chauds et davantage de nuits tropicales ont été enregistrés sur les sites examinés du canton d\'Appenzell Rhodes-Extérieures.',
     'blog.article.caldo-appenzello-esterno-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.tariffe-mediche-appenzello-2026.title': 'Appenzell : tarifs médicaux approuvés pour 2026',
     'blog.article.tariffe-mediche-appenzello-2026.excerpt': 'La Standeskommission fixe la valeur en points tarifaires à 0,86 CHF pour les services ambulatoires avec effet rétroactif à compter du 1er janvier 2026.',

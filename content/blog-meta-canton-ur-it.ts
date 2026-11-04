@@ -19,7 +19,7 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.eventi-weekend-uri.excerpt': 'Eventi nel Canton Uri ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
     'blog.article.eventi-weekend-uri.imageAlt': 'Eventi del weekend nel Canton Uri',
     'blog.article.silenen-muri-secco.title': 'Silenen: Landrat approva CHF 207.000 per muri a secco',
-    'blog.article.silenen-muri-secco.excerpt': 'Il Landrat approva CHF 207.000 senza voti contrari 3,6 km di muri storici nell\'area di Silenen Circa il 60% presenta un rischio per la sicurezza I lavori',
+    'blog.article.silenen-muri-secco.excerpt': 'Il Parlamento cantonale di Uri ha approvato mercoledì, senza voti contrari, un contributo cantonale di CHF 207.000 per risanare le storiche murature a secco di Silenen.',
     'blog.article.silenen-muri-secco.imageAlt': 'Muri a secco storici nell\'area di Hinter- e Vorderried a Silenen, nel Canton Uri',
     'blog.article.axenstrasse-chiusa-quattro-notti.title': 'Axenstrasse chiusa per quattro notti dal 2 al 6 novembre',
     'blog.article.axenstrasse-chiusa-quattro-notti.excerpt': 'La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, ogni notte dalle 22 alle 5, per lavori di manutenzione.',

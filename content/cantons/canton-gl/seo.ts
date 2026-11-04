@@ -9,7 +9,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-revisione-fiscale-canton-glarona': {
     title: 'Glarona: dieci anni per compensare le perdite fiscali',
-    description: 'Il Governo cantonale di Glarona ha approvato una revisione della legge fiscale che estende a dieci anni la compensazione delle perdite, divide a metà',
+    description: 'Il Governo cantonale di Glarona ha approvato una revisione della legge fiscale che estende a dieci anni la compensazione delle perdite, divide a metà.',
     keywords: 'frontalieri, ticino, svizzera, italia, glarona, dieci, anni, compensare',
     ogTitle: 'Glarona: dieci anni per compensare le perdite fiscali',
     ogDescription: 'Il 29 settembre 2026 il Governo di Glarona ha adottato una proposta di modifica della legge fiscale da sottoporre alla Landsgemeinde.',
@@ -18,7 +18,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Glarona: dieci anni per compensare le perdite fiscali",
-      "description": "Il Governo cantonale di Glarona ha approvato una revisione della legge fiscale che estende a dieci anni la compensazione delle perdite, divide a metà",
+      "description": "Il Governo cantonale di Glarona ha approvato una revisione della legge fiscale che estende a dieci anni la compensazione delle perdite, divide a metà.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-revisione-fiscale-canton-glarona.webp`,
@@ -43,7 +43,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-premi-standard-glarona': {
     title: 'Glarona: di nuovo i premi standard più bassi | Frontaliere Ticino',
-    description: 'La Glarner Krankenversicherung torna ai premi standard più bassi. In passato, lo stesso primato aveva portato la cassa in serie difficoltà. Dati aggiornati 2026',
+    description: 'La Glarner Krankenversicherung torna ai premi standard più bassi. In passato, lo stesso primato aveva portato la cassa in serie difficoltà. Dati aggiornati 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, glarona, nuovo, premi, standard',
     ogTitle: 'Glarona: di nuovo i premi standard più bassi',
     ogDescription: 'La Glarner Krankenversicherung torna ai premi standard più bassi. Lo stesso risultato si era già verificato e aveva portato la cassa in serie difficoltà. La fonte segnala però una differenza importante questa volta.',
@@ -52,7 +52,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Glarona: di nuovo i premi standard più bassi",
-      "description": "La Glarner Krankenversicherung torna ai premi standard più bassi. In passato, lo stesso primato aveva portato la cassa in serie difficoltà. Dati aggiornati 2026",
+      "description": "La Glarner Krankenversicherung torna ai premi standard più bassi. In passato, lo stesso primato aveva portato la cassa in serie difficoltà. Dati aggiornati 2026.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -82,7 +82,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-imposta-seconde-case-glarona': {
     title: 'Imposta immobiliare seconde case Glarona: via libera dal Governo',
-    description: 'La mozione è stata depositata il 10 settembre 2026. Dal 2029 i Comuni possono scegliere l\'imposta sulle seconde case. La decisione spetta ai singoli Comuni',
+    description: 'La mozione è stata depositata il 10 settembre 2026. Dal 2029 i Comuni possono scegliere l\'imposta sulle seconde case. La decisione spetta ai singoli Comuni.',
     keywords: 'frontalieri, ticino, svizzera, italia, imposta, immobiliare, seconde, case',
     ogTitle: 'Imposta immobiliare sulle seconde case nel Canton Glarona',
     ogDescription: 'La mozione è stata depositata il 10 settembre 2026.',
@@ -91,7 +91,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Imposta immobiliare seconde case Glarona: via libera dal Governo",
-      "description": "La mozione è stata depositata il 10 settembre 2026. Dal 2029 i Comuni possono scegliere l'imposta sulle seconde case. La decisione spetta ai singoli Comuni",
+      "description": "La mozione è stata depositata il 10 settembre 2026. Dal 2029 i Comuni possono scegliere l'imposta sulle seconde case. La decisione spetta ai singoli Comuni.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -121,7 +121,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-klontalstrasse-staldengarten-butzi': {
     title: 'Klöntalerstrasse: limitazione staldengarten–bützi',
-    description: 'La Klöntalerstrasse è interessata da una limitazione al traffico nel tratto Staldengarten–Bützi, nel Canton Glarona: la comunicazione riguarda la viabilità',
+    description: 'La Klöntalerstrasse è interessata da una limitazione al traffico nel tratto Staldengarten–Bützi, nel Canton Glarona: la comunicazione riguarda la viabilità.',
     keywords: 'frontalieri, ticino, svizzera, italia, klöntalerstrasse, limitazione, staldengarten, bützi',
     ogTitle: 'Klöntalerstrasse: limitazione Staldengarten–Bützi',
     ogDescription: 'Il titolo segnala una limitazione al traffico sulla Klöntalerstrasse e individua il tratto Staldengarten–Bützi. Per chi deve percorrere quella sezione, la comunicazione completa è il riferimento per verificare portata, tempi e istruzioni applicabili.',
@@ -130,7 +130,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Klöntalerstrasse: limitazione staldengarten–bützi",
-      "description": "La Klöntalerstrasse è interessata da una limitazione al traffico nel tratto Staldengarten–Bützi, nel Canton Glarona: la comunicazione riguarda la viabilità",
+      "description": "La Klöntalerstrasse è interessata da una limitazione al traffico nel tratto Staldengarten–Bützi, nel Canton Glarona: la comunicazione riguarda la viabilità.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -277,16 +277,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-glarona-mercato-immobiliare-2026': {
     title: 'Mercato immobiliare a Glarona: prezzi in crescita nel 2026',
-    description: 'La domanda immobiliare resta alta nel Canton Glarona L\'offerta limitata sostiene l\'aumento dei prezzi Condomini +4,4% tra il 2° trimestre 2025 e il 2°',
+    description: 'Il 20 ottobre 2026 la Glarner Kantonalbank ha pubblicato il rapporto sul mercato immobiliare del Canton Glarona, elaborato insieme a Wüest Partner AG.',
     keywords: 'frontalieri, ticino, svizzera, italia, mercato, immobiliare, glarona, prezzi',
     ogTitle: 'Mercato immobiliare nel Canton Glarona: i dati del 2026',
-    ogDescription: 'La domanda immobiliare resta alta nel Canton Glarona L\'offerta limitata sostiene l\'aumento dei prezzi Condomini +4,4% tra il 2° trimestre 2025 e il 2° 2026',
+    ogDescription: 'Il 20 ottobre 2026 la Glarner Kantonalbank ha pubblicato il rapporto sul mercato immobiliare del Canton Glarona, elaborato insieme a Wüest Partner AG.',
     canonicalPath: '/articoli-glarona/glarona-mercato-immobiliare-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Mercato immobiliare a Glarona: prezzi in crescita nel 2026",
-      "description": "La domanda immobiliare resta alta nel Canton Glarona L'offerta limitata sostiene l'aumento dei prezzi Condomini +4,4% tra il 2° trimestre 2025 e il 2°",
+      "description": "Il 20 ottobre 2026 la Glarner Kantonalbank ha pubblicato il rapporto sul mercato immobiliare del Canton Glarona, elaborato insieme a Wüest Partner AG.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -514,7 +514,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il Governo glaronese raccomanda di respingere il postulato Markus Schnyder (SVP) chiede di mantenere le detrazioni La riforma entra in vigore il 1°',
     keywords: 'frontalieri, ticino, svizzera, italia, glarona, governo, contro, detrazioni',
     ogTitle: 'Glarona: Governo contro le detrazioni per risparmio energetico',
-    ogDescription: 'Il Governo glaronese raccomanda di respingere il postulato Markus Schnyder (SVP) chiede di mantenere le detrazioni La riforma entra in vigore il 1° gennaio 2029',
+    ogDescription: 'Il Governo glaronese raccomanda al Landrat di respingere il postulato che chiede di mantenere le detrazioni fiscali per le misure di risparmio energetico nelle abitazioni di proprietà.',
     canonicalPath: '/articoli-glarona/glarona-detrazioni-energia-2029/',
     structuredData: {
       "@context": "https://schema.org",

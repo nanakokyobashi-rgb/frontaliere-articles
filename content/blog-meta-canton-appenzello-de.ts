@@ -76,7 +76,7 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.decima-fiera-apprendistati-innerrhoden.excerpt': 'Am Samstag, 7. November 2026 findet in der Aula Gringel die zehnte Lehrstellen-Tischmesse Appenzell statt.',
     'blog.article.decima-fiera-apprendistati-innerrhoden.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.caldo-appenzello-esterno-2026.title': 'Appenzell Ausserrhoden: mehr heiße Tage im Jahr 2026',
-    'blog.article.caldo-appenzello-esterno-2026.excerpt': 'Sommer 2026: mehr heiße Tage an den untersuchten Standorten Im Jahr 2026 wurden mehr Tropennächte festgestellt Höhenlage und nächtliche Abkühlung verringern',
+    'blog.article.caldo-appenzello-esterno-2026.excerpt': 'Aus der Gegenüberstellung der Jahre 2022 bis 2026 geht hervor, dass die untersuchten Standorte im Kanton Appenzell Ausserrhoden im Sommer 2026 sowohl eine höhere Zahl heisser Tage als auch mehr Tropennächte aufwiesen.',
     'blog.article.caldo-appenzello-esterno-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.tariffe-mediche-appenzello-2026.title': 'Appenzell: Medizinische Tarife für 2026 genehmigt',
     'blog.article.tariffe-mediche-appenzello-2026.excerpt': 'Die Vereinbarungen betreffen die Vergütung ambulanter medizinischer Leistungen im Rahmen der Pflichtkrankenversicherung. Für die drei Verträge gilt das angegebene Inkrafttredungsdatum rückwirkend zum 1. Januar 2026 und der Wert des angegebenen Tarifpunkts beträgt 0,86 CHF.',

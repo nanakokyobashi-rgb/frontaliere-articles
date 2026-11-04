@@ -73,7 +73,7 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.sp-no-legge-ospedale.excerpt': 'On November 29, the Canton of Schaffhausen will vote on the amendment to the Hospitals Act, opposed by the SP after parliamentary approval 43-0.',
     'blog.article.sp-no-legge-ospedale.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.pil-cantonale-2026-crescita.title': 'Cantonal GDP for 2026 expected at 0,96% versus 0,8% in Switzerland',
-    'blog.article.pil-cantonale-2026-crescita.excerpt': 'Expected cantonal GDP in 2026: 0,96%, compared with 0,8% for Switzerland Exports under pressure from tensions, energy, tariffs and the strong franc The city',
+    'blog.article.pil-cantonale-2026-crescita.excerpt': 'On October 27, 2026, in Radio Munot\'s 11:30 regional news bulletin, the main economic figure concerns the Canton of Schaffhausen: its economy is expected to grow more than the Swiss average over the course of the year.',
     'blog.article.pil-cantonale-2026-crescita.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.schaffhausen-modello-scolastico-inclusivo.title': 'Schaffhausen adopts inclusive school model with PGA',
     'blog.article.schaffhausen-modello-scolastico-inclusivo.excerpt': 'Decision of January 22, 2026 on the transition to the ISF; PGA provides for a maximum annual cap of CHF 3 million and a one-time credit of CHF 270\'000.',

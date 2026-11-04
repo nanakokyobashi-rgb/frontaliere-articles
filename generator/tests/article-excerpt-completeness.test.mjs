@@ -5,7 +5,11 @@ import test from 'node:test';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { endsWithSentenceAbbreviation, minimumDescriptionLength } from '../scripts/lib/article-excerpt.mjs';
+import {
+  endsWithSentenceAbbreviation,
+  isFinalTerminatorOnlyChange,
+  minimumDescriptionLength,
+} from '../scripts/lib/article-excerpt.mjs';
 import { inspectCorpusExcerptCompleteness } from '../scripts/repair-plain-excerpts.mjs';
 import {
   assertNoExcerptCompletenessRegression,
@@ -15,7 +19,7 @@ import {
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const BASELINE_PATH = path.join(ROOT, 'scripts/ci/excerpt-completeness-baseline.json');
-const INITIAL_BASELINE_SHA256 = 'd1b0b8ea568ecb5db8c1e881da55cfb65aa49a386e58de59fc1e8c5a22f80da1';
+const INITIAL_BASELINE_SHA256 = 'fa922020f7e521d063f40199b992eef07fe2d9431ba4080c621793d678c91249';
 
 function readBaseline() {
   return JSON.parse(readFileSync(BASELINE_PATH, 'utf8'));
@@ -27,26 +31,32 @@ function corpusReport() {
   return cachedCorpusReport;
 }
 
-test('il corpus applica tutte le riparazioni a/b e lascia invariati i soli casi c', () => {
+test('il corpus applica le riparazioni a/b/d e lascia invariati i soli casi c', () => {
   const report = corpusReport();
   assert.ok(report.files >= 100, `il controllo deve coprire i chunk meta e SEO: ${report.files}`);
   assert.equal(report.changedValues, 0, JSON.stringify(report.details.slice(0, 20), null, 2));
   assert.equal(report.needsRepairValues, report.byStrategy.c);
   assert.ok(report.nonRepairable.every((item) => item.before === item.after));
+  assert.ok(report.randomSamples.every((item) => item.strategy === 'c'));
   assert.equal(report.functionWordPeriodViolations, 0);
   assert.equal(report.minimumLengthViolations, 0);
   assert.equal(report.abbreviationEndingViolations, 0);
+  assert.equal(report.dPunctuationOnlyViolations, 0);
+  assert.ok(report.details.filter((item) => item.strategy === 'd').every((item) => (
+    item.defects.length === 1
+    && item.defects[0] === 'missing-final-terminator'
+    && isFinalTerminatorOnlyChange(item.before, item.after)
+  )));
 });
 
-test('le riparazioni rispettano la soglia e i valori non terminano con un’abbreviazione', () => {
+test('le sostituzioni testuali rispettano la soglia e i valori non terminano con un’abbreviazione', () => {
   const report = corpusReport();
   const invalid = report.details.filter((item) => {
     const value = item.after.trim();
-    const repaired = item.strategy === 'a' || item.strategy === 'b';
-    return repaired && (
-      value.length < minimumDescriptionLength(item.field)
-      || endsWithSentenceAbbreviation(value)
-    );
+    const repairedFromText = item.strategy === 'a' || item.strategy === 'b';
+    const repaired = repairedFromText || item.strategy === 'd';
+    return (repairedFromText && value.length < minimumDescriptionLength(item.field))
+      || (repaired && endsWithSentenceAbbreviation(value));
   });
   assert.deepEqual(invalid.map(({ file, id, field, after }) => ({ file, id, field, after })), []);
 });
@@ -73,13 +83,24 @@ test('build-api controlla la completezza prima di cancellare la superficie pubbl
   assert.ok(primaryWrite > primaryRepair, 'il controllo deve precedere anche la prima scrittura del percorso principale');
 });
 
+test('il prompt excerpt richiede una frase completa e il fallback pesca dal body', () => {
+  const generator = readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
+  const start = generator.indexOf('async function generateExcerpt(');
+  const end = generator.indexOf('\n}\n', start);
+  const source = generator.slice(start, end);
+  assert.match(source, /una frase completa con terminatore finale/u);
+  assert.match(source, /Non concatenare bullet o key facts/u);
+  assert.match(source, /firstCompleteBodyExcerpt\(body/u);
+});
+
 test('build-api accetta i casi nel baseline e rifiuta un nuovo campo incompleto', () => {
   const report = corpusReport();
   const result = assertNoExcerptCompletenessRegression(report.details, readBaseline());
-  assert.equal(result.known.length, 6);
+  assert.equal(result.known.length, readBaseline().entries.length);
   assert.deepEqual(result.regressions, []);
 
   const regression = {
+    file: 'content/blog-meta-it.ts',
     locale: 'it',
     id: 'nuovo-articolo-test',
     field: 'excerpt',
@@ -92,12 +113,25 @@ test('build-api accetta i casi nel baseline e rifiuta un nuovo campo incompleto'
   );
 });
 
+test('la chiave baseline distingue occorrenze dello stesso campo su superfici diverse', () => {
+  const meta = { file: 'content/blog-meta-it.ts', locale: 'it', id: 'stesso-articolo', field: 'description' };
+  const seo = { file: 'content/seo/seo-blog.ts', locale: 'it', id: 'stesso-articolo', field: 'description' };
+  assert.notEqual(excerptCompletenessKey(meta), excerptCompletenessKey(seo));
+  const result = evaluateExcerptCompleteness([
+    { ...meta, strategy: 'c' },
+    { ...seo, strategy: 'c' },
+  ], { entries: [meta, seo] });
+  assert.equal(result.known.length, 2);
+  assert.deepEqual(result.regressions, []);
+});
+
 test('il baseline è monotono: ogni chiave attiva appartiene al tetto iniziale e i casi riparati si rimuovono', () => {
   const baseline = readBaseline();
   const report = corpusReport();
   const initialHash = createHash('sha256').update(JSON.stringify(baseline.initialEntries)).digest('hex');
-  assert.equal(baseline.initialEntries.length, 7, 'il tetto iniziale parte dai sette casi c attuali');
+  assert.equal(baseline.version, 2, 'il formato versionato distingue le chiavi per superficie');
   assert.equal(initialHash, INITIAL_BASELINE_SHA256, 'il tetto iniziale non si può ampliare');
+  assert.ok(baseline.initialEntries.every((entry) => typeof entry.file === 'string'), 'il baseline usa chiavi per superficie');
 
   const initialKeys = new Set(baseline.initialEntries.map(excerptCompletenessKey));
   const activeKeys = new Set(baseline.entries.map(excerptCompletenessKey));

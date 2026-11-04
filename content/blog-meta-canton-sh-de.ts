@@ -73,7 +73,7 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.sp-no-legge-ospedale.excerpt': 'Am 29. November stimmt der Kanton Schaffhausen über die Änderung des Spitalgesetzes ab, gegen die sich die SP nach der parlamentarischen Zustimmung mit 43-0 stellt.',
     'blog.article.sp-no-legge-ospedale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.pil-cantonale-2026-crescita.title': 'Kantonales BIP 2026 bei erwarteten 0,96% gegenüber 0,8% in der Schweiz',
-    'blog.article.pil-cantonale-2026-crescita.excerpt': 'Für 2026 erwartetes kantonales BIP: 0,96% gegenüber 0,8% in der Schweiz Export unter Druck aufgrund von Spannungen, Energiepreisen, Zöllen und dem starken',
+    'blog.article.pil-cantonale-2026-crescita.excerpt': 'Für 2026 erwartetes kantonales BIP: 0,96% gegenüber 0,8% in der Schweiz Export unter Druck aufgrund von Spannungen, Energiepreisen, Zöllen und dem starken.',
     'blog.article.pil-cantonale-2026-crescita.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.schaffhausen-modello-scolastico-inclusivo.title': 'Schaffhausen übernimmt integratives Schulmodell mit PGA',
     'blog.article.schaffhausen-modello-scolastico-inclusivo.excerpt': 'Am 22. Januar 2026 hat der Stadtschulrat Schaffhausen den Übergang zu einem inklusiven Schulsystem beschlossen; das Pädagogische Grundangebot soll jährlich bis zu CHF 3 Millionen umfassen.',

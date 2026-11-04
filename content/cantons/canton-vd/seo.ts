@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-cdhr-frontalieri-vaud-2026': {
     title: 'CDHR: quando i frontalieri francesi pagano l\'acconto del 95%',
-    description: 'La CDHR mira a un\'imposizione minima del 20%',
+    description: 'La CDHR mira a un\'imposizione minima del 20%.',
     keywords: 'frontalieri, ticino, svizzera, italia, cdhr, quando, francesi, pagano',
     ogTitle: 'CDHR frontalieri francesi: soglie 250‑500k€ e acconto 95%',
-    ogDescription: 'La CDHR mira a un\'imposizione minima del 20%',
+    ogDescription: 'La CDHR mira a un\'imposizione minima del 20%.',
     canonicalPath: '/articoli-vaud/cdhr-frontalieri-vaud-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "CDHR: quando i frontalieri francesi pagano l'acconto del 95%",
-      "description": "La CDHR mira a un'imposizione minima del 20%",
+      "description": "La CDHR mira a un'imposizione minima del 20%.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-cdhr-frontalieri-vaud-2026.webp`,
@@ -43,7 +43,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-vaud-revision-bouclier-fiscal-2024': {
     title: 'Vaud: la destra rilancia il bouclier fiscal | Frontaliere Ticino',
-    description: 'Il Gran Consiglio di Vaud approva la mozione per ripristinare la revisione 2024 dello scudo fiscale. La sinistra annuncia il referendum. Scopri tutti',
+    description: 'Il Gran Consiglio di Vaud approva la mozione per ripristinare la revisione 2024 dello scudo fiscale. La sinistra annuncia il referendum. Scopri tutti.',
     keywords: 'frontalieri, ticino, svizzera, italia, vaud, destra, rilancia, bouclier',
     ogTitle: 'Vaud: la destra rilancia il bouclier fiscal',
     ogDescription: 'Dopo il voto popolare del 27 settembre, il Gran Consiglio di Vaud riapre il dossier dello scudo fiscale. La destra chiede di recuperare la revisione 2024 per evitare la fuga di 3000 grandi contribuenti. La sinistra annuncia battaglia politica.',
@@ -52,7 +52,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Vaud: la destra rilancia il bouclier fiscal",
-      "description": "Il Gran Consiglio di Vaud approva la mozione per ripristinare la revisione 2024 dello scudo fiscale. La sinistra annuncia il referendum. Scopri tutti",
+      "description": "Il Gran Consiglio di Vaud approva la mozione per ripristinare la revisione 2024 dello scudo fiscale. La sinistra annuncia il referendum. Scopri tutti.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-vaud-revision-bouclier-fiscal-2024.webp`,
@@ -116,16 +116,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-morges-mobilita-consultazione-2045': {
     title: 'Morges: le richieste sulla mobilità al 2045 | Frontaliere Ticino',
-    description: 'Morges interviene nella consultazione federale «Transports ’45»',
+    description: 'Morges interviene nella consultazione federale «Transports ’45».',
     keywords: 'frontalieri, ticino, svizzera, italia, morges, richieste, sulla, mobilità',
     ogTitle: 'Morges: le richieste sulla mobilità al 2045',
-    ogDescription: 'Morges interviene nella consultazione federale «Transports ’45»',
+    ogDescription: 'Morges interviene nella consultazione federale «Transports ’45».',
     canonicalPath: '/articoli-vaud/morges-mobilita-consultazione-2045/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Morges: le richieste sulla mobilità al 2045",
-      "description": "Morges interviene nella consultazione federale «Transports ’45»",
+      "description": "Morges interviene nella consultazione federale «Transports ’45».",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -155,16 +155,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-vaud-budget-2027-revisione-12percento': {
     title: 'Vaud rivede il budget 2027 per coprire il buco dei 12%',
-    description: 'Minori entrate fiscali: 272 milioni di franchi',
+    description: 'Minori entrate fiscali: 272 milioni di franchi.',
     keywords: 'frontalieri, ticino, svizzera, italia, vaud, rivede, budget, coprire',
     ogTitle: 'Vaud rivede il budget 2027 per coprire il buco dei 12%',
-    ogDescription: 'Minori entrate fiscali: 272 milioni di franchi',
+    ogDescription: 'Minori entrate fiscali: 272 milioni di franchi.',
     canonicalPath: '/articoli-vaud/vaud-budget-2027-revisione-12percento/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Vaud rivede il budget 2027 per coprire il buco dei 12%",
-      "description": "Minori entrate fiscali: 272 milioni di franchi",
+      "description": "Minori entrate fiscali: 272 milioni di franchi.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -194,16 +194,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-sussidi-malattia-lavoro-vaud': {
     title: 'Vaud: lavora di più per i sussidi LAMal | Frontaliere Ticino',
-    description: 'Persona sola: soglia dal 70% all\'80% Coppie senza figli: soglia dal 140% al 160% Coppie con figli: soglia confermata al 100% Risparmio previsto: 30 milioni',
+    description: 'Persona sola: soglia dal 70% all\'80% Coppie senza figli: soglia dal 140% al 160% Coppie con figli: soglia confermata al 100% Risparmio previsto: 30 milioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, vaud, lavora, sussidi, lamal',
     ogTitle: 'Sussidi LAMal nel Canton Vaud: cambiano le soglie di lavoro',
-    ogDescription: 'Persona sola: soglia dal 70% all\'80% Coppie senza figli: soglia dal 140% al 160% Coppie con figli: soglia confermata al 100% Risparmio previsto: 30 milioni',
+    ogDescription: 'Persona sola: soglia dal 70% all\'80% Coppie senza figli: soglia dal 140% al 160% Coppie con figli: soglia confermata al 100% Risparmio previsto: 30 milioni.',
     canonicalPath: '/articoli-vaud/sussidi-malattia-lavoro-vaud/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Vaud: lavora di più per i sussidi LAMal",
-      "description": "Persona sola: soglia dal 70% all'80% Coppie senza figli: soglia dal 140% al 160% Coppie con figli: soglia confermata al 100% Risparmio previsto: 30 milioni",
+      "description": "Persona sola: soglia dal 70% all'80% Coppie senza figli: soglia dal 140% al 160% Coppie con figli: soglia confermata al 100% Risparmio previsto: 30 milioni.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -233,7 +233,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-perdite-agricole-canton-vaud-caldo': {
     title: 'Perdite agricole nel Canton Vaud: oltre 100 milioni',
-    description: 'Le stime nel Canton Vaud indicano perdite superiori a 100 milioni di franchi per il 2026-2027 a causa del calore. Scopri aiuti e anticipi. Dati aggiornati 2026',
+    description: 'Le stime nel Canton Vaud indicano perdite superiori a 100 milioni di franchi per il 2026-2027 a causa del calore. Scopri aiuti e anticipi. Dati aggiornati 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, perdite, agricole, canton, vaud',
     ogTitle: 'Perdite agricole nel Canton Vaud oltre 100 milioni',
     ogDescription: 'Le ondate di calore e la siccità estiva nel Canton Vaud causano perdite stimate oltre i 100 milioni di franchi per il biennio 2026-2027. Ecco i dettagli sulle misure e sui sostegni anticipati dal Cantone.',
@@ -242,7 +242,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Perdite agricole nel Canton Vaud: oltre 100 milioni",
-      "description": "Le stime nel Canton Vaud indicano perdite superiori a 100 milioni di franchi per il 2026-2027 a causa del calore. Scopri aiuti e anticipi. Dati aggiornati 2026",
+      "description": "Le stime nel Canton Vaud indicano perdite superiori a 100 milioni di franchi per il 2026-2027 a causa del calore. Scopri aiuti e anticipi. Dati aggiornati 2026.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -272,16 +272,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-incendio-cavi-cff-eclepens': {
     title: 'Incendio a Eclépens: ipotesi di atto criminale',
-    description: 'Incendio vicino ai binari CFF a Eclépens il 9 ottobre Cavi per i segnali luminosi bruciati e fuori uso Traffico interrotto tra Lausanne e Yverdon/Vallorbe',
+    description: 'Venerdì 9 ottobre 2026, verso le 03.15, la polizia è stata avvisata di un incendio a Eclépens, vicino ai binari CFF e all\'altezza di Eclépens.',
     keywords: 'frontalieri, ticino, svizzera, italia, incendio, eclépens, ipotesi, atto',
     ogTitle: 'Eclépens, incendio vicino ai binari CFF',
-    ogDescription: 'Incendio vicino ai binari CFF a Eclépens il 9 ottobre Cavi per i segnali luminosi bruciati e fuori uso Traffico interrotto tra Lausanne e Yverdon/Vallorbe',
+    ogDescription: 'Venerdì 9 ottobre 2026, verso le 03.15, la polizia è stata avvisata di un incendio a Eclépens, vicino ai binari CFF e all\'altezza di Eclépens.',
     canonicalPath: '/articoli-vaud/incendio-cavi-cff-eclepens/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Incendio a Eclépens: ipotesi di atto criminale",
-      "description": "Incendio vicino ai binari CFF a Eclépens il 9 ottobre Cavi per i segnali luminosi bruciati e fuori uso Traffico interrotto tra Lausanne e Yverdon/Vallorbe",
+      "description": "Venerdì 9 ottobre 2026, verso le 03.15, la polizia è stata avvisata di un incendio a Eclépens, vicino ai binari CFF e all'altezza di Eclépens.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -389,16 +389,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-cff-eclepens-treni-ripresa': {
     title: 'Treni CFF tra Yverdon-les-Bains e Losanna: traffico ripreso',
-    description: 'Traffico ripreso alle 05:40 di domenica Linea Yverdon-les-Bains–Losanna tornata normale Incendio doloso a Eclépens: disagi da venerdì CFF mobilitati: circa 100',
+    description: 'Domenica alle 05:40 il traffico ferroviario tra Yverdon-les-Bains e Losanna è ripreso normalmente.',
     keywords: 'frontalieri, ticino, svizzera, italia, treni, yverdon-les-bains, losanna, traffico',
     ogTitle: 'Treni CFF tra Yverdon e Losanna: traffico ripreso',
-    ogDescription: 'Traffico ripreso alle 05:40 di domenica Linea Yverdon-les-Bains–Losanna tornata normale Incendio doloso a Eclépens: disagi da venerdì CFF mobilitati: circa 100',
+    ogDescription: 'Domenica alle 05:40 il traffico ferroviario tra Yverdon-les-Bains e Losanna è ripreso normalmente.',
     canonicalPath: '/articoli-vaud/cff-eclepens-treni-ripresa/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Treni CFF tra Yverdon-les-Bains e Losanna: traffico ripreso",
-      "description": "Traffico ripreso alle 05:40 di domenica Linea Yverdon-les-Bains–Losanna tornata normale Incendio doloso a Eclépens: disagi da venerdì CFF mobilitati: circa 100",
+      "description": "Domenica alle 05:40 il traffico ferroviario tra Yverdon-les-Bains e Losanna è ripreso normalmente.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -428,16 +428,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-scuole-vaud-furti-inchieste': {
     title: 'Otto scuole vaudesi colpite da furti notturni | Frontaliere Ticino',
-    description: 'Otto scuole vaudesi colpite in dieci giorni Tutti gli episodi sono avvenuti di notte Orbe stima danni per migliaia di franchi La polizia cantonale ha aperto più',
+    description: 'Otto scuole del Canton Vaud hanno subito un furto con scasso o un tentativo di effrazione in dieci giorni.',
     keywords: 'frontalieri, ticino, svizzera, italia, otto, scuole, vaudesi, colpite',
     ogTitle: 'Furti in otto scuole vaudesi: aperte le inchieste',
-    ogDescription: 'Otto scuole vaudesi colpite in dieci giorni Tutti gli episodi sono avvenuti di notte Orbe stima danni per migliaia di franchi La polizia cantonale ha aperto più',
+    ogDescription: 'Otto scuole del Canton Vaud hanno subito un furto con scasso o un tentativo di effrazione in dieci giorni.',
     canonicalPath: '/articoli-vaud/scuole-vaud-furti-inchieste/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Otto scuole vaudesi colpite da furti notturni",
-      "description": "Otto scuole vaudesi colpite in dieci giorni Tutti gli episodi sono avvenuti di notte Orbe stima danni per migliaia di franchi La polizia cantonale ha aperto più",
+      "description": "Otto scuole del Canton Vaud hanno subito un furto con scasso o un tentativo di effrazione in dieci giorni.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -467,16 +467,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-tuffe-falsi-poliziotti-vaud': {
     title: 'Truffe falsi poliziotti e banchieri nel Vaud: 100 interpellati',
-    description: 'Oltre cento persone interpellate nel Vaud nel 2026 Sedici interpellazioni dall\'inizio di ottobre Quasi 2.300 casi e 900 truffe riuscite Danno cumulato: circa',
+    description: 'Da inizio 2026, quasi 270 autrici e autori risultano coinvolti in truffe di questo tipo nel Canton Vaud.',
     keywords: 'frontalieri, ticino, svizzera, italia, truffe, falsi, poliziotti, banchieri',
     ogTitle: 'Truffe dei falsi poliziotti e banchieri nel Canton Vaud',
-    ogDescription: 'Oltre cento persone interpellate nel Vaud nel 2026 Sedici interpellazioni dall\'inizio di ottobre Quasi 2.300 casi e 900 truffe riuscite Danno cumulato: circa',
+    ogDescription: 'Il 15 ottobre 2026 un aggiornamento del Canton Vaud ha segnalato che Losanna e il cantone restano fortemente colpiti dalle truffe dei falsi poliziotti e dei falsi banchieri.',
     canonicalPath: '/articoli-vaud/tuffe-falsi-poliziotti-vaud/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Truffe falsi poliziotti e banchieri nel Vaud: 100 interpellati",
-      "description": "Oltre cento persone interpellate nel Vaud nel 2026 Sedici interpellazioni dall'inizio di ottobre Quasi 2.300 casi e 900 truffe riuscite Danno cumulato: circa",
+      "description": "Da inizio 2026, quasi 270 autrici e autori risultano coinvolti in truffe di questo tipo nel Canton Vaud.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -548,7 +548,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Nuova edizione al CHUV il 14 e 15 novembre Iscrizioni dal 24 ottobre alle 8 Partecipazione gratuita su iscrizione Attività per bambini nella zona degli auditori',
     keywords: 'frontalieri, ticino, svizzera, italia, losanna, pital, nounours, chuv',
     ogTitle: 'Losanna, Hôpital des Nounours: iscrizioni dal 24 ottobre',
-    ogDescription: 'Nuova edizione al CHUV il 14 e 15 novembre Iscrizioni dal 24 ottobre alle 8 Partecipazione gratuita su iscrizione Attività per bambini nella zona degli auditori',
+    ogDescription: 'Il 14 e 15 novembre il CHUV di Losanna ospiterà una nuova edizione dell\'Hôpital des Nounours, progetto della Swiss Medical Students Association (SWIMSA).',
     canonicalPath: '/articoli-vaud/hopital-nounours-chuv-lausanne/',
     structuredData: {
       "@context": "https://schema.org",
@@ -584,16 +584,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-truffe-falsi-banchieri-lausanna': {
     title: 'Falsi poliziotti: oltre 100 interpellati nel Vaud',
-    description: 'Oltre cento persone interpellate nel Vaud dall\'inizio del 2026 Sedici persone interpellate dall\'inizio di ottobre Coinvolte polizia cantonale, Lausanne',
+    description: 'Il dato riguarda il fenomeno delle truffe ai falsi poliziotti e ai falsi banchieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, falsi, poliziotti, oltre, interpellati',
     ogTitle: 'Falsi poliziotti: oltre 100 interpellati nel Vaud',
-    ogDescription: 'Oltre cento persone interpellate nel Vaud dall\'inizio del 2026 Sedici persone interpellate dall\'inizio di ottobre Coinvolte polizia cantonale, Lausanne',
+    ogDescription: 'Dall\'inizio del 2026, oltre cento persone sono state interpellate dalla Police cantonale vaudoise, dalla Police municipale de Lausanne e dalle polizie comunali.',
     canonicalPath: '/articoli-vaud/truffe-falsi-banchieri-lausanna/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Falsi poliziotti: oltre 100 interpellati nel Vaud",
-      "description": "Oltre cento persone interpellate nel Vaud dall'inizio del 2026 Sedici persone interpellate dall'inizio di ottobre Coinvolte polizia cantonale, Lausanne",
+      "description": "Il dato riguarda il fenomeno delle truffe ai falsi poliziotti e ai falsi banchieri.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -623,16 +623,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-truffa-falsi-poliziotti-vaud': {
     title: 'Sette milioni truffati nel Vaud da falsi agenti',
-    description: 'Quasi 2.300 casi dall\'inizio dell\'anno Danno complessivo: CHF 7 milioni Oltre 100 interpellati, 19 in detenzione 16 interpellazioni a inizio ottobre, 5',
+    description: 'Quasi 2.300 casi di truffe con falsi poliziotti e un danno di CHF 7 milioni: il canton Vaud ha registrato questo bilancio dall\'inizio dell\'anno.',
     keywords: 'frontalieri, ticino, svizzera, italia, sette, milioni, truffati, vaud',
     ogTitle: 'Sette milioni truffati nel Vaud da falsi agenti',
-    ogDescription: 'Quasi 2.300 casi dall\'inizio dell\'anno Danno complessivo: CHF 7 milioni Oltre 100 interpellati, 19 in detenzione 16 interpellazioni a inizio ottobre, 5',
+    ogDescription: 'Quasi 2.300 casi di truffe con falsi poliziotti e un danno di CHF 7 milioni: il canton Vaud ha registrato questo bilancio dall\'inizio dell\'anno.',
     canonicalPath: '/articoli-vaud/truffa-falsi-poliziotti-vaud/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Sette milioni truffati nel Vaud da falsi agenti",
-      "description": "Quasi 2.300 casi dall'inizio dell'anno Danno complessivo: CHF 7 milioni Oltre 100 interpellati, 19 in detenzione 16 interpellazioni a inizio ottobre, 5",
+      "description": "Quasi 2.300 casi di truffe con falsi poliziotti e un danno di CHF 7 milioni: il canton Vaud ha registrato questo bilancio dall'inizio dell'anno.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -662,7 +662,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-cdhr-contributo-differenziale-2025': {
     title: 'CDHR 2025: soglie 250.000/500.000 € per frontalieri in Francia',
-    description: 'La CDHR 2025 colpisce i redditi elevati dei frontalieri residenti in Francia: soglie a 250.000/500.000 €, verifica al 20%, acconto 95% a dicembre. Guida',
+    description: 'La CDHR 2025 colpisce i redditi elevati dei frontalieri residenti in Francia: soglie a 250.000/500.000 €, verifica al 20%, acconto 95% a dicembre. Guida.',
     keywords: 'frontalieri, ticino, svizzera, italia, cdhr, soglie, francia, contribution',
     ogTitle: 'CDHR 2025: come funziona per i frontalieri in Francia',
     ogDescription: 'Scopri le soglie (250.000 e 500.000 €), la verifica del 20% e l\'acconto del 95% della contribution différentielle sur les hauts revenus per i lavoratori transfrontalieri residenti in Francia nel 2025.',
@@ -671,7 +671,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "CDHR 2025: soglie 250.000/500.000 € per frontalieri in Francia",
-      "description": "La CDHR 2025 colpisce i redditi elevati dei frontalieri residenti in Francia: soglie a 250.000/500.000 €, verifica al 20%, acconto 95% a dicembre. Guida",
+      "description": "La CDHR 2025 colpisce i redditi elevati dei frontalieri residenti in Francia: soglie a 250.000/500.000 €, verifica al 20%, acconto 95% a dicembre. Guida.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -701,16 +701,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-chuv-ostetriche-salari-classi': {
     title: 'CHUV: ostetriche chiedono salari equi, classe 10 per tutte',
-    description: 'CHUV: classe 9 o 10 per lo stesso lavoro Solo un terzo delle ostetriche è in classe 10 Scarto medio: CHF 8\'000 l\'anno La richiesta risale al 2018',
+    description: 'La classe 10 è quella meglio remunerata e lo scarto medio fra i due livelli è di CHF 8\'000 all\'anno.',
     keywords: 'frontalieri, ticino, svizzera, italia, chuv, ostetriche, chiedono, salari',
     ogTitle: 'CHUV: ostetriche in lotta per salari equi – Classe 10 per tutte',
-    ogDescription: 'CHUV: classe 9 o 10 per lo stesso lavoro Solo un terzo delle ostetriche è in classe 10 Scarto medio: CHF 8\'000 l\'anno La richiesta risale al 2018 Dove → CHUV',
+    ogDescription: 'Al CHUV, un\'ostetrica può essere retribuita in classe 9 mentre una collega che svolge lo stesso lavoro è in classe 10. La classe assegnata dipende dal servizio nel quale lavora, secondo il resoconto di RTS.',
     canonicalPath: '/articoli-vaud/chuv-ostetriche-salari-classi/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "CHUV: ostetriche chiedono salari equi, classe 10 per tutte",
-      "description": "CHUV: classe 9 o 10 per lo stesso lavoro Solo un terzo delle ostetriche è in classe 10 Scarto medio: CHF 8'000 l'anno La richiesta risale al 2018",
+      "description": "La classe 10 è quella meglio remunerata e lo scarto medio fra i due livelli è di CHF 8'000 all'anno.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -740,16 +740,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-fisco-vaud-indennita-abuso-imposte': {
     title: 'Fisco Vaud: imposte su indennità abusi, ricorso in vista',
-    description: 'A Pully: abusi al Collège de Champittet alla fine degli anni \'70 Indennità della Chiesa: CHF 220\'000, divisa in due parti Dopo l\'opposizione: CHF',
+    description: 'La RTS riferisce che una vittima di abusi sessuali commessi a Pully deve pagare imposte su una parte dei CHF 220\'000 versati dalla Chiesa cattolica.',
     keywords: 'frontalieri, ticino, svizzera, italia, fisco, vaud, imposte, indennità',
     ogTitle: 'Fisco Vaud: imposte su indennità per abusi, ricorso in vista',
-    ogDescription: 'A Pully: abusi al Collège de Champittet alla fine degli anni \'70 Indennità della Chiesa: CHF 220\'000, divisa in due parti Dopo l\'opposizione: CHF 120\'000 ancora',
+    ogDescription: 'La RTS riferisce che una vittima di abusi sessuali commessi a Pully deve pagare imposte su una parte dei CHF 220\'000 versati dalla Chiesa cattolica.',
     canonicalPath: '/articoli-vaud/fisco-vaud-indennita-abuso-imposte/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Fisco Vaud: imposte su indennità abusi, ricorso in vista",
-      "description": "A Pully: abusi al Collège de Champittet alla fine degli anni '70 Indennità della Chiesa: CHF 220'000, divisa in due parti Dopo l'opposizione: CHF",
+      "description": "La RTS riferisce che una vittima di abusi sessuali commessi a Pully deve pagare imposte su una parte dei CHF 220'000 versati dalla Chiesa cattolica.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -779,16 +779,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-lausanne-marathon-2026-chiusure-strade': {
     title: 'Lausanne Marathon 2026: chiusure strade cantonali e vie cittadine il 25 ottobre',
-    description: 'Domenica 25 ottobre 2026 si corre il Lausanne Marathon Strade cantonali interessate: 777-B-P e 780-B-P Chiusure totali o parziali circa dalle 07:30',
+    description: 'L\'avviso pubblicato sul sito vd.ch indica limitazioni al traffico su due strade cantonali: la 777-B-P, associata al percorso Av.',
     keywords: 'frontalieri, ticino, svizzera, italia, lausanne, marathon, chiusure, strade',
     ogTitle: 'Lausanne Marathon 2026: chiusure strade e parcheggi il 25 ottobre',
-    ogDescription: 'Domenica 25 ottobre 2026 si corre il Lausanne Marathon Strade cantonali interessate: 777-B-P e 780-B-P Chiusure totali o parziali circa dalle 07:30 alle 17:30',
+    ogDescription: 'Il Lausanne Marathon si svolgerà domenica 25 ottobre 2026. L\'avviso pubblicato sul sito vd.ch indica limitazioni al traffico su due strade cantonali: la 777-B-P, associata al percorso Av.',
     canonicalPath: '/articoli-vaud/lausanne-marathon-2026-chiusure-strade/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Lausanne Marathon 2026: chiusure strade cantonali e vie cittadine il 25 ottobre",
-      "description": "Domenica 25 ottobre 2026 si corre il Lausanne Marathon Strade cantonali interessate: 777-B-P e 780-B-P Chiusure totali o parziali circa dalle 07:30",
+      "description": "L'avviso pubblicato sul sito vd.ch indica limitazioni al traffico su due strade cantonali: la 777-B-P, associata al percorso Av.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -857,16 +857,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-morges-label-energia-gold-2026': {
     title: 'Morges ottiene il label Cité de l\'energia Gold per cinque anni',
-    description: 'Morges ottiene il label Gold per cinque anni Il punteggio della valutazione è dell\'80,5% Il riconoscimento copre sei ambiti delle politiche comunali',
+    description: 'La Ville de Morges, già titolare del label Cité de l\'énergie, è stata nuovamente distinta per i suoi sforzi climatici.',
     keywords: 'frontalieri, ticino, svizzera, italia, morges, ottiene, label, cité',
     ogTitle: 'Morges ottiene il label Cité de l\'energia Gold per cinque anni',
-    ogDescription: 'Morges ottiene il label Gold per cinque anni Il punteggio della valutazione è dell\'80,5% Il riconoscimento copre sei ambiti delle politiche comunali Il Plan',
+    ogDescription: 'La Ville de Morges, già titolare del label Cité de l\'énergie, è stata nuovamente distinta per i suoi sforzi climatici.',
     canonicalPath: '/articoli-vaud/morges-label-energia-gold-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Morges ottiene il label Cité de l'energia Gold per cinque anni",
-      "description": "Morges ottiene il label Gold per cinque anni Il punteggio della valutazione è dell'80,5% Il riconoscimento copre sei ambiti delle politiche comunali",
+      "description": "La Ville de Morges, già titolare del label Cité de l'énergie, è stata nuovamente distinta per i suoi sforzi climatici.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -935,16 +935,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-grand-conseil-27-ottobre': {
     title: 'Ordine del giorno Grand Conseil 27 ottobre su LRIPP e CHUV',
-    description: 'Seduta del Grand Conseil prevista per il 27 ottobre Il punto 8 riguarda la riduzione dell\'imposta cantonale sul reddito Il punto 7 riguarda i ritardi',
+    description: 'La fonte consente di confrontare non soltanto gli argomenti, ma anche le forme con cui sono presentati al Grand Conseil.',
     keywords: 'frontalieri, ticino, svizzera, italia, ordine, giorno, grand, conseil',
     ogTitle: 'Grand Conseil Vaud 27 ottobre LRIPP CHUV',
-    ogDescription: 'Seduta del Grand Conseil prevista per il 27 ottobre Il punto 8 riguarda la riduzione dell\'imposta cantonale sul reddito Il punto 7 riguarda i ritardi',
+    ogDescription: 'Per la seduta del 27 ottobre, il Grand Conseil del Canton Vaud riporta all\'ordine del giorno una sequenza di atti che riguarda l\'imposizione cantonale, il CHUV, l\'espropriazione, le startup e l\'informazione locale.',
     canonicalPath: '/articoli-vaud/grand-conseil-27-ottobre/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Ordine del giorno Grand Conseil 27 ottobre su LRIPP e CHUV",
-      "description": "Seduta del Grand Conseil prevista per il 27 ottobre Il punto 8 riguarda la riduzione dell'imposta cantonale sul reddito Il punto 7 riguarda i ritardi",
+      "description": "La fonte consente di confrontare non soltanto gli argomenti, ma anche le forme con cui sono presentati al Grand Conseil.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -974,16 +974,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-cantiere-stazione-morges-2026': {
     title: 'Cantiere nuovo edificio viaggiatori stazione di Morges da dicembre 2026',
-    description: 'A dicembre 2026 partono i lavori dei CFF Il cantiere occuperà gran parte della piazza Fermate bus regionali e posti taxi restano L\'accesso',
+    description: 'A dicembre 2026 i CFF inizieranno la costruzione del nuovo edificio viaggiatori della stazione di Morges.',
     keywords: 'frontalieri, ticino, svizzera, italia, cantiere, nuovo, edificio, viaggiatori',
     ogTitle: 'Cantiere stazione Morges da dicembre 2026',
-    ogDescription: 'A dicembre 2026 partono i lavori dei CFF Il cantiere occuperà gran parte della piazza Fermate bus regionali e posti taxi restano L\'accesso ai marciapiedi resta',
+    ogDescription: 'A dicembre 2026 i CFF inizieranno la costruzione del nuovo edificio viaggiatori della stazione di Morges.',
     canonicalPath: '/articoli-vaud/cantiere-stazione-morges-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Cantiere nuovo edificio viaggiatori stazione di Morges da dicembre 2026",
-      "description": "A dicembre 2026 partono i lavori dei CFF Il cantiere occuperà gran parte della piazza Fermate bus regionali e posti taxi restano L'accesso",
+      "description": "A dicembre 2026 i CFF inizieranno la costruzione del nuovo edificio viaggiatori della stazione di Morges.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

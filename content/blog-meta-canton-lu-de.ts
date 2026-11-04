@@ -58,7 +58,7 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.fluhli-tassa-seconde-case.excerpt': 'Mit 70 zu 41 Stimmen hat das Luzerner Kantonsparlament die Motion von Hella Schnider für eine Sondersteuer auf Zweitwohnungen angenommen.',
     'blog.article.fluhli-tassa-seconde-case.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.einwohnerrat-budget-bahnhof-ost.title': 'Einwohnerrat entscheidet über Budget 2027 und Kredit für Bahnhof Ost',
-    'blog.article.einwohnerrat-budget-bahnhof-ost.excerpt': 'Am 17. November 2026 tagt der Einwohnerrat von Ebikon Das Budget 2027 sieht einen Überschuss von CHF 2,14 Millionen vor Der Steuerfuss bleibt bei 2,05 Einheiten',
+    'blog.article.einwohnerrat-budget-bahnhof-ost.excerpt': 'November 2026 wird der Einwohnerrat von Ebikon, also der Rat der Einwohnerinnen und Einwohner, in einer öffentlichen Sitzung zum Budget zusammentreten.',
     'blog.article.einwohnerrat-budget-bahnhof-ost.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.passepartout-trasporto-centrale.title': 'Passepartout: Einfacherer Zugang zum öffentlichen Verkehr',
     'blog.article.passepartout-trasporto-centrale.excerpt': 'Vor 1986 waren für eine Fahrt im ÖV mehrere Billette nötig.',

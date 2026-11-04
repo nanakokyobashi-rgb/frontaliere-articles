@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-disoccupazione-vallese-fine-estate': {
     title: 'Disoccupazione Vallese: 5’755 iscritti a settembre 2026',
-    description: '5’755 disoccupati iscritti agli ORP a fine settembre',
+    description: '5’755 disoccupati iscritti agli ORP a fine settembre.',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, vallese, iscritti, settembre',
     ogTitle: 'Vallese: disoccupazione al 3,1% a settembre',
-    ogDescription: '5’755 disoccupati iscritti agli ORP a fine settembre',
+    ogDescription: '5’755 disoccupati iscritti agli ORP a fine settembre.',
     canonicalPath: '/articoli-vallese/disoccupazione-vallese-fine-estate/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Disoccupazione Vallese: 5’755 iscritti a settembre 2026",
-      "description": "5’755 disoccupati iscritti agli ORP a fine settembre",
+      "description": "5’755 disoccupati iscritti agli ORP a fine settembre.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-disoccupazione-vallese-fine-estate.webp`,
@@ -43,16 +43,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-allerta-botulismo-terrina-vallese': {
     title: 'Due casi di botulismo in Vallese: terrina ritirata',
-    description: 'Due casi di botulismo segnalati in Vallese',
+    description: 'Due casi di botulismo segnalati in Vallese.',
     keywords: 'frontalieri, ticino, svizzera, italia, casi, botulismo, vallese, terrina',
     ogTitle: 'Botulismo in Vallese: terrina ritirata',
-    ogDescription: 'Due casi di botulismo segnalati in Vallese',
+    ogDescription: 'Due casi di botulismo segnalati in Vallese.',
     canonicalPath: '/articoli-vallese/allerta-botulismo-terrina-vallese/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Due casi di botulismo in Vallese: terrina ritirata",
-      "description": "Due casi di botulismo segnalati in Vallese",
+      "description": "Due casi di botulismo segnalati in Vallese.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -82,16 +82,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-a9-chiusure-notturne-sion-sierre': {
     title: 'A9 Sion-Sierre: tre settimane di chiusure notturne',
-    description: 'Tre settimane di chiusure: dal 12 al 30 ottobre Lavori fermi d\'inverno, ripresa a marzo 2027 Chiusure notturne dalle 20 alle 5 Tratta → A9 tra Sion e Sierre',
+    description: 'Dal 12 al 30 ottobre l\'autostrada A9 tra Sion e Sierre sarà interessata da tre settimane di chiusure notturne.',
     keywords: 'frontalieri, ticino, svizzera, italia, sion-sierre, settimane, chiusure, notturne',
     ogTitle: 'A9 Sion-Sierre: tre settimane di chiusure notturne',
-    ogDescription: 'Tre settimane di chiusure: dal 12 al 30 ottobre Lavori fermi d\'inverno, ripresa a marzo 2027 Chiusure notturne dalle 20 alle 5 Tratta → A9 tra Sion e Sierre',
+    ogDescription: 'Dal 12 al 30 ottobre l\'autostrada A9 tra Sion e Sierre sarà interessata da tre settimane di chiusure notturne.',
     canonicalPath: '/articoli-vallese/a9-chiusure-notturne-sion-sierre/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "A9 Sion-Sierre: tre settimane di chiusure notturne",
-      "description": "Tre settimane di chiusure: dal 12 al 30 ottobre Lavori fermi d'inverno, ripresa a marzo 2027 Chiusure notturne dalle 20 alle 5 Tratta → A9 tra Sion e Sierre",
+      "description": "Dal 12 al 30 ottobre l'autostrada A9 tra Sion e Sierre sarà interessata da tre settimane di chiusure notturne.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -121,7 +121,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-maison-garde-ospedale-sion': {
     title: 'Sion: apre la Maison de la garde per le urgenze',
-    description: 'L\'ospedale di Sion ha aperto la Maison de la garde: un presidio per casi non vitali attivo ogni giorno dalle 18 e 22 per alleggerire le urgenze. Dati aggiornati',
+    description: 'L\'ospedale di Sion ha aperto la Maison de la garde: un presidio per casi non vitali attivo ogni giorno dalle 18 e 22 per alleggerire le urgenze. Dati aggiornati.',
     keywords: 'frontalieri, ticino, svizzera, italia, sion, apre, maison, garde',
     ogTitle: 'Sion: apre la Maison de la garde per le urgenze',
     ogDescription: 'Per alleggerire il pronto soccorso, l\'ospedale di Sion ha introdotto la Maison de la garde: un presidio per casi non vitali attivo ogni giorno dalle 18 alle 22, coinvolgendo 80 medici generalisti.',
@@ -130,7 +130,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Sion: apre la Maison de la garde per le urgenze",
-      "description": "L'ospedale di Sion ha aperto la Maison de la garde: un presidio per casi non vitali attivo ogni giorno dalle 18 e 22 per alleggerire le urgenze. Dati aggiornati",
+      "description": "L'ospedale di Sion ha aperto la Maison de la garde: un presidio per casi non vitali attivo ogni giorno dalle 18 e 22 per alleggerire le urgenze. Dati aggiornati.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -160,16 +160,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-vallese-piano-acqua-2035': {
     title: 'Vallese: approvato il Piano d\'azione acqua 2035',
-    description: 'Il Consiglio di Stato adotta il Piano d\'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione',
+    description: 'Il Consiglio di Stato del Vallese ha adottato il Piano d\'azione 2035 per aggiornare la componente operativa della Strategia acqua cantonale.',
     keywords: 'frontalieri, ticino, svizzera, italia, vallese, approvato, piano, azione',
     ogTitle: 'Vallese: approvato il Piano d\'azione acqua 2035',
-    ogDescription: 'Il Consiglio di Stato adotta il Piano d\'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione',
+    ogDescription: 'Il Consiglio di Stato del Vallese ha adottato il Piano d\'azione 2035 per aggiornare la componente operativa della Strategia acqua cantonale.',
     canonicalPath: '/articoli-vallese/vallese-piano-acqua-2035/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Vallese: approvato il Piano d'azione acqua 2035",
-      "description": "Il Consiglio di Stato adotta il Piano d'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione",
+      "description": "Il Consiglio di Stato del Vallese ha adottato il Piano d'azione 2035 per aggiornare la componente operativa della Strategia acqua cantonale.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -277,16 +277,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-valais-salario-minimo-2026': {
     title: 'Salario minimo in Vallese: voto il 29 novembre sui CHF 22',
-    description: '15\'000 salariati a tempo pieno non vivono del salario Il voto sul salario minimo è fissato al 29 novembre La proposta prevede CHF 22 lordi l\'ora Il Parlamento',
+    description: 'Il 29 novembre la popolazione vallesana si pronuncerà sull\'iniziativa popolare cantonale per un salario minimo legale.',
     keywords: 'frontalieri, ticino, svizzera, italia, salario, minimo, vallese, voto',
     ogTitle: 'Salario minimo in Vallese: voto il 29 novembre sui 22 franchi',
-    ogDescription: '15\'000 salariati a tempo pieno non vivono del salario Il voto sul salario minimo è fissato al 29 novembre La proposta prevede CHF 22 lordi l\'ora Il Parlamento',
+    ogDescription: 'Il 29 novembre la popolazione vallesana si pronuncerà sull\'iniziativa popolare cantonale per un salario minimo legale.',
     canonicalPath: '/articoli-vallese/valais-salario-minimo-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Salario minimo in Vallese: voto il 29 novembre sui CHF 22",
-      "description": "15'000 salariati a tempo pieno non vivono del salario Il voto sul salario minimo è fissato al 29 novembre La proposta prevede CHF 22 lordi l'ora Il Parlamento",
+      "description": "Il 29 novembre la popolazione vallesana si pronuncerà sull'iniziativa popolare cantonale per un salario minimo legale.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-valais-salario-minimo-2026.webp`,
@@ -389,16 +389,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-salute-vallese-2026-ovs': {
     title: 'Rapporto OVS: 83% vallesani in buona salute, obesità al 13% e rischi psicosociali al 44%',
-    description: '83% degli adulti vallesani si sente in buona salute nel 2022 Speranza di vita: 85,9 anni per le donne, 82,4 per gli uomini Gli over 65 sono il 21%',
+    description: 'Nel 2022, l\'83% degli adulti in Vallese dichiarava di essere in buona o ottima salute, contro l\'85% in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, rapporto, vallesani, buona, salute',
     ogTitle: 'Salute in Vallese 2026: dati OVS su popolazione, comportamenti e rischi',
-    ogDescription: '83% degli adulti vallesani si sente in buona salute nel 2022 Speranza di vita: 85,9 anni per le donne, 82,4 per gli uomini Gli over 65 sono il 21%',
+    ogDescription: 'Nel 2022, l\'83% degli adulti in Vallese dichiarava di essere in buona o ottima salute, contro l\'85% in Svizzera.',
     canonicalPath: '/articoli-vallese/salute-vallese-2026-ovs/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Rapporto OVS: 83% vallesani in buona salute, obesità al 13% e rischi psicosociali al 44%",
-      "description": "83% degli adulti vallesani si sente in buona salute nel 2022 Speranza di vita: 85,9 anni per le donne, 82,4 per gli uomini Gli over 65 sono il 21%",
+      "description": "Nel 2022, l'83% degli adulti in Vallese dichiarava di essere in buona o ottima salute, contro l'85% in Svizzera.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -428,7 +428,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-salario-minimo-valese-voto': {
     title: 'Destra e economia vallesana contro salario minimo a CHF 22',
-    description: 'La destra e l\'economia vallesana dicono no a CHF 22 l\'ora. Il voto popolare è previsto per il 29 novembre. Il Gran Consiglio ha respinto il testo: 93',
+    description: 'La destra e l\'economia vallesana dicono no a CHF 22 l\'ora. Il voto popolare è previsto per il 29 novembre.',
     keywords: 'frontalieri, ticino, svizzera, italia, destra, economia, vallesana, contro',
     ogTitle: 'Salario minimo Vallese: voto 29 novembre',
     ogDescription: 'La destra e l\'economia vallesana dicono no a CHF 22 l\'ora.',
@@ -437,7 +437,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Destra e economia vallesana contro salario minimo a CHF 22",
-      "description": "La destra e l'economia vallesana dicono no a CHF 22 l'ora. Il voto popolare è previsto per il 29 novembre. Il Gran Consiglio ha respinto il testo: 93",
+      "description": "La destra e l'economia vallesana dicono no a CHF 22 l'ora. Il voto popolare è previsto per il 29 novembre.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-salario-minimo-valese-voto.webp`,
@@ -462,16 +462,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-bains-ovronnaz-nuovo-sursis': {
     title: 'Bains d\'Ovronnaz: sursis concordatario fino al 31 marzo 2027',
-    description: 'Il tribunale di Martigny prolunga il sursis fino al 31 marzo 2027 I dipendenti conservano il posto per tutta la stagione invernale Le presenze',
+    description: 'Il tribunale di Martigny prolunga il sursis fino al 31 marzo 2027 I dipendenti conservano il posto per tutta la stagione invernale Le presenze.',
     keywords: 'frontalieri, ticino, svizzera, italia, bains, ovronnaz, sursis, concordatario',
     ogTitle: 'Bains d\'Ovronnaz: sursis fino a marzo 2027',
-    ogDescription: 'Il tribunale di Martigny prolunga il sursis fino al 31 marzo 2027 I dipendenti conservano il posto per tutta la stagione invernale Le presenze aumentano',
+    ogDescription: 'Il tribunale del distretto di Martigny ha concesso ai Bains d\'Ovronnaz un nuovo sursis concordatario fino al 31 marzo 2027.',
     canonicalPath: '/articoli-vallese/bains-ovronnaz-nuovo-sursis/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Bains d'Ovronnaz: sursis concordatario fino al 31 marzo 2027",
-      "description": "Il tribunale di Martigny prolunga il sursis fino al 31 marzo 2027 I dipendenti conservano il posto per tutta la stagione invernale Le presenze",
+      "description": "Il tribunale di Martigny prolunga il sursis fino al 31 marzo 2027 I dipendenti conservano il posto per tutta la stagione invernale Le presenze.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -501,16 +501,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-val-de-bagnes-sostenibilita-2024': {
     title: 'Val de Bagnes: 175 persone per settimana sostenibilità',
-    description: '175 persone a Val de Bagnes Sei appuntamenti dal 24 al 31 ottobre Presentato il primo Piano climatico del comune Il piano comprende 26 misure e 75',
+    description: 'Dal 24 al 31 ottobre, 175 persone hanno partecipato alla Settimana della sostenibilità a Val de Bagnes.',
     keywords: 'frontalieri, ticino, svizzera, italia, bagnes, persone, settimana, sostenibilità',
     ogTitle: 'Val de Bagnes: 175 persone per sostenibilità',
-    ogDescription: '175 persone a Val de Bagnes Sei appuntamenti dal 24 al 31 ottobre Presentato il primo Piano climatico del comune Il piano comprende 26 misure e 75 azioni Luogo',
+    ogDescription: 'Dal 24 al 31 ottobre, 175 persone hanno partecipato alla Settimana della sostenibilità a Val de Bagnes.',
     canonicalPath: '/articoli-vallese/val-de-bagnes-sostenibilita-2024/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Val de Bagnes: 175 persone per settimana sostenibilità",
-      "description": "175 persone a Val de Bagnes Sei appuntamenti dal 24 al 31 ottobre Presentato il primo Piano climatico del comune Il piano comprende 26 misure e 75",
+      "description": "Dal 24 al 31 ottobre, 175 persone hanno partecipato alla Settimana della sostenibilità a Val de Bagnes.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

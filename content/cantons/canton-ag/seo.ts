@@ -9,7 +9,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-argovia-disoccupazione-settembre': {
     title: 'Argovia: disoccupazione al 3,2% a settembre 2026',
-    description: 'A settembre 2026 i sette RAV dell\'Argovia hanno registrato 12.451 disoccupati: tasso fermo al 3,2%, 3.735 posti vacanti e ricerca media di 261 giorni',
+    description: 'A settembre 2026 i sette RAV dell\'Argovia hanno registrato 12.451 disoccupati: tasso fermo al 3,2%, 3.735 posti vacanti e ricerca media di 261 giorni.',
     keywords: 'frontalieri, ticino, svizzera, italia, argovia, disoccupazione, settembre, contava',
     ogTitle: 'Argovia: disoccupati al 3,2% nel settembre 2026',
     ogDescription: 'A settembre 2026 i sette RAV dell\'Argovia hanno registrato 12.451 disoccupati e 19.319 persone in cerca di lavoro. I posti vacanti segnalati sono scesi a 3.735, mentre la ricerca media è durata 261 giorni.',
@@ -18,7 +18,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Argovia: disoccupazione al 3,2% a settembre 2026",
-      "description": "A settembre 2026 i sette RAV dell'Argovia hanno registrato 12.451 disoccupati: tasso fermo al 3,2%, 3.735 posti vacanti e ricerca media di 261 giorni",
+      "description": "A settembre 2026 i sette RAV dell'Argovia hanno registrato 12.451 disoccupati: tasso fermo al 3,2%, 3.735 posti vacanti e ricerca media di 261 giorni.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-argovia-disoccupazione-settembre.webp`,
@@ -155,16 +155,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-obermumpf-strada-sanificazione-2024': {
     title: 'Obermumpf: lavori sulla K491 fino all\'autunno 2027',
-    description: 'Lunedì 12 ottobre iniziano i lavori di risanamento della Hauptstrasse K491 a Obermumpf: 1.250 metri di strada, fermate bus accessibili con bordi a 22 cm e nuova',
+    description: 'Lunedì 12 ottobre iniziano i lavori di risanamento della Hauptstrasse K491 a Obermumpf: 1.250 metri di strada, fermate bus accessibili con bordi a 22 cm e nuova.',
     keywords: 'frontalieri, ticino, svizzera, italia, obermumpf, lavori, sulla, k491',
     ogTitle: 'Obermumpf: lavori sulla K491 fino all\'autunno 2027',
-    ogDescription: 'Il cantiere sulla Hauptstrasse K491 a Obermumpf partirà lunedì 12 ottobre e proseguirà fino all\'autunno 2027. Interesserà 1.250 metri di strada, renderà accessibili le fermate Bündtenmatt, Alte Post e Ausserdorf con bordi a 22 cm e realizzerà',
+    ogDescription: 'Il cantiere sulla Hauptstrasse K491 a Obermumpf partirà lunedì 12 ottobre e proseguirà fino all\'autunno 2027. Interesserà 1.250 metri di strada, renderà accessibili le fermate Bündtenmatt, Alte Post e Ausserdorf con bordi a 22 cm e realizzerà.',
     canonicalPath: '/articoli-argovia/obermumpf-strada-sanificazione-2024/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Obermumpf: lavori sulla K491 fino all'autunno 2027",
-      "description": "Lunedì 12 ottobre iniziano i lavori di risanamento della Hauptstrasse K491 a Obermumpf: 1.250 metri di strada, fermate bus accessibili con bordi a 22 cm e nuova",
+      "description": "Lunedì 12 ottobre iniziano i lavori di risanamento della Hauptstrasse K491 a Obermumpf: 1.250 metri di strada, fermate bus accessibili con bordi a 22 cm e nuova.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -194,7 +194,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-buchs-deficit-2027-budget': {
     title: 'Buchs prevede disavanzo 3,1 milioni nel budget 2027',
-    description: 'Buchs prevede un disavanzo di 3,1 milioni di franchi nel budget 2027, moltiplicatore fiscale al 118%, aumento dei costi di cura di 600\'000 franchi',
+    description: 'Buchs prevede un disavanzo di 3,1 milioni di franchi nel budget 2027, moltiplicatore fiscale al 118%, aumento dei costi di cura di 600\'000 franchi.',
     keywords: 'frontalieri, ticino, svizzera, italia, buchs, prevede, disavanzo, milioni',
     ogTitle: 'Buchs prevede disavanzo 3,1 milioni nel budget 2027',
     ogDescription: 'Il Comune di Buchs ha approvato il budget 2027 con un disavanzo previsto di circa 3,1 milioni di franchi, mantenendo il moltiplicatore fiscale al 118%.',
@@ -203,7 +203,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Buchs prevede disavanzo 3,1 milioni nel budget 2027",
-      "description": "Buchs prevede un disavanzo di 3,1 milioni di franchi nel budget 2027, moltiplicatore fiscale al 118%, aumento dei costi di cura di 600'000 franchi",
+      "description": "Buchs prevede un disavanzo di 3,1 milioni di franchi nel budget 2027, moltiplicatore fiscale al 118%, aumento dei costi di cura di 600'000 franchi.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -506,16 +506,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-sezione-medicina-nucleare': {
     title: 'Nuklearforum crea la sezione Medicina nucleare svizzera',
-    description: 'Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi',
+    description: 'La medicina nucleare, secondo la fonte, consente di diagnosticare e trattare con precisione malattie come il cancro.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuklearforum, crea, sezione, medicina',
     ogTitle: 'Medicina nucleare: nuova sezione del Nuklearforum',
-    ogDescription: 'Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi',
+    ogDescription: 'La sezione nasce per migliorare le condizioni quadro della diagnostica e della terapia di medicina nucleare, rafforzare l\'approvvigionamento di radionuclidi e facilitare l\'accesso a nuovi procedimenti.',
     canonicalPath: '/articoli-argovia/sezione-medicina-nucleare/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Nuklearforum crea la sezione Medicina nucleare svizzera",
-      "description": "Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi",
+      "description": "La medicina nucleare, secondo la fonte, consente di diagnosticare e trattare con precisione malattie come il cancro.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -584,7 +584,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-maja-riniker-eletta-governo-argovia': {
     title: 'Maja Riniker eletta in Consiglio di Stato argoviese con 70.137 voti',
-    description: 'Risultati elezioni suppletive Argovia: Maja Riniker (FDP) entra in Consiglio di Stato con 70.137 voti, partecipazione 21,01%. Dettagli per distretto',
+    description: 'Risultati elezioni suppletive Argovia: Maja Riniker (FDP) entra in Consiglio di Stato con 70.137 voti, partecipazione 21,01%. Dettagli per distretto.',
     keywords: 'frontalieri, ticino, svizzera, italia, maja, riniker, eletta, consiglio',
     ogTitle: 'Maja Riniker nuova consigliera di Stato argoviese con ampio margine',
     ogDescription: 'La deputata nazionale FDP di Suhr, 48 anni, vince l\'elezione suppletiva per il seggio di Stephan Attiger con 70.137 voti su maggioranza di 45.217. Partecipazione cantonale al 21,01%; dettagli voti per distretto e successione al Consiglio nazionale.',
@@ -593,7 +593,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Maja Riniker eletta in Consiglio di Stato argoviese con 70.137 voti",
-      "description": "Risultati elezioni suppletive Argovia: Maja Riniker (FDP) entra in Consiglio di Stato con 70.137 voti, partecipazione 21,01%. Dettagli per distretto",
+      "description": "Risultati elezioni suppletive Argovia: Maja Riniker (FDP) entra in Consiglio di Stato con 70.137 voti, partecipazione 21,01%. Dettagli per distretto.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -740,7 +740,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-mobilita-aargovia-sistema-unico': {
     title: 'Mobilità Argovia: sistema unico e potenziamento trasporti',
-    description: 'Cinque esperti del Canton Argovia hanno discusso la revisione di mobilitätAargau, prevedendo frequenze bus ogni 30 minuti e ferrovia ogni 15 minuti',
+    description: 'Cinque esperti del Canton Argovia hanno discusso la revisione di mobilitätAargau, prevedendo frequenze bus ogni 30 minuti e ferrovia ogni 15 minuti.',
     keywords: 'frontalieri, ticino, svizzera, italia, mobilità, argovia, sistema, unico',
     ogTitle: 'Mobilità Argovia: sistema unico e potenziamento trasporti',
     ogDescription: 'Cinque esperti del Canton Argovia hanno presentato la pianificazione futura della mobilità, mirando a un sistema unico e miglioramenti nel trasporto pubblico regionale.',
@@ -749,7 +749,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Mobilità Argovia: sistema unico e potenziamento trasporti",
-      "description": "Cinque esperti del Canton Argovia hanno discusso la revisione di mobilitätAargau, prevedendo frequenze bus ogni 30 minuti e ferrovia ogni 15 minuti",
+      "description": "Cinque esperti del Canton Argovia hanno discusso la revisione di mobilitätAargau, prevedendo frequenze bus ogni 30 minuti e ferrovia ogni 15 minuti.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -896,7 +896,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-saphir-idrogeno-verde-axpo': {
     title: 'MS Saphir: passaggio previsto all\'idrogeno verde nel 2027',
-    description: 'SGV prevede la riconversione della MS Saphir: motori elettrici, cella a combustibile e idrogeno verde per le corse nel bacino di Lucerna dal 26 marzo',
+    description: 'SGV prevede la riconversione della MS Saphir: motori elettrici, cella a combustibile e idrogeno verde per le corse nel bacino di Lucerna dal 26 marzo.',
     keywords: 'frontalieri, ticino, svizzera, italia, saphir, passaggio, previsto, idrogeno',
     ogTitle: 'MS Saphir passa all\'idrogeno verde dal 2027',
     ogDescription: 'La MS Saphir, progettata per 300 persone, dovrebbe sostituire i vecchi generatori diesel con motori elettrici, cella a combustibile e serbatoio di idrogeno. Il rientro nel bacino di Lucerna è previsto per il 26 marzo 2027.',
@@ -905,7 +905,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "MS Saphir: passaggio previsto all'idrogeno verde nel 2027",
-      "description": "SGV prevede la riconversione della MS Saphir: motori elettrici, cella a combustibile e idrogeno verde per le corse nel bacino di Lucerna dal 26 marzo",
+      "description": "SGV prevede la riconversione della MS Saphir: motori elettrici, cella a combustibile e idrogeno verde per le corse nel bacino di Lucerna dal 26 marzo.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

@@ -433,16 +433,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-salario-minimo-basilea-2027': {
     title: 'Salario minimo Basilea aumenta a 22.50 CHF lordi dal 2027',
-    description: 'Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →',
+    description: 'Dal 1° gennaio 2027 il salario minimo cantonale di Basilea-Città aumenterà da 22,20 a 22,50 CHF lordi per ogni ora di lavoro.',
     keywords: 'frontalieri, ticino, svizzera, italia, salario, minimo, basilea, aumenta',
     ogTitle: 'Salario minimo Basilea 2027: 22.50 CHF all\'ora',
-    ogDescription: 'Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →',
+    ogDescription: 'Dal 1° gennaio 2027 il salario minimo cantonale di Basilea-Città aumenterà da 22,20 a 22,50 CHF lordi per ogni ora di lavoro.',
     canonicalPath: '/articoli-basilea/salario-minimo-basilea-2027/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Salario minimo Basilea aumenta a 22.50 CHF lordi dal 2027",
-      "description": "Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →",
+      "description": "Dal 1° gennaio 2027 il salario minimo cantonale di Basilea-Città aumenterà da 22,20 a 22,50 CHF lordi per ogni ora di lavoro.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -631,7 +631,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Polmonite enzootica in un allevamento di Baselland: 750 maiali abbattuti. Ordinati pulizia, disinfezione e risanamento totale, con controllo ALV.',
     keywords: 'frontalieri, ticino, svizzera, italia, baselland, maiali, abbattuti, polmonite',
     ogTitle: 'Baselland: 750 maiali abbattuti per polmonite enzootica',
-    ogDescription: 'La polmonite enzootica è innocua per l\'uomo, ma nei suini può manifestarsi con tosse, difficoltà respiratorie e crescita ridotta. Dopo pulizia e disinfezione, l\'ALV controllerà l\'allevamento: il ritorno richiede almeno dieci giorni di vuoto e il via',
+    ogDescription: 'La polmonite enzootica è innocua per l\'uomo, ma nei suini può manifestarsi con tosse, difficoltà respiratorie e crescita ridotta. Dopo pulizia e disinfezione, l\'ALV controllerà l\'allevamento: il ritorno richiede almeno dieci giorni di vuoto e il via.',
     canonicalPath: '/articoli-basilea/baselland-maiali-enzootica/',
     structuredData: {
       "@context": "https://schema.org",

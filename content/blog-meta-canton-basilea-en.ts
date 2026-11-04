@@ -37,7 +37,7 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.basel-stadt-siti-online-di-nuoto.excerpt': 'The reopening of the Canton of Basel-Stadt\'s websites and applications has been gradual since Wednesday night; no significant security incident was recorded on Thursday.',
     'blog.article.basel-stadt-siti-online-di-nuoto.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.salario-minimo-basilea-2027.title': 'Basel minimum wage increases to 22.50 CHF gross from 2027',
-    'blog.article.salario-minimo-basilea-2027.excerpt': 'From January 1st, 2027, the minimum wage will be 22,50 CHF gross The planned increase is 30 cents per hour The adjustment follows the Swiss mixed index Canton →',
+    'blog.article.salario-minimo-basilea-2027.excerpt': 'From January 1, 2027, Basel-Stadt’s cantonal minimum wage will increase from 22,20 to 22,50 CHF gross per hour of work.',
     'blog.article.salario-minimo-basilea-2027.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.sissach-parco-giochi-fasce-quiete.title': 'Sissach: new quiet hours for the playground',
     'blog.article.sissach-parco-giochi-fasce-quiete.excerpt': 'On weekdays, quiet hours from 12-13 and silence from 20 onward are required; on Saturdays, quiet from 18 onward is required, and on Sundays, noisy activities are prohibited.',

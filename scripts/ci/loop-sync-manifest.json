@@ -2127,8 +2127,8 @@
       "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; resta sorvegliato, ma le decisioni di pubblicazione delle copertine vivono nel corpus: le nuove immagini passano dal motore mirrorato con scope `article-hero`, se il motore fallisce, il fallback usa un record reader-facing del catalogo o la cover statica governata e accoda la rigenerazione senza rigettare l'articolo; la generazione del testo applica la guardia anti-copia. Il gemello del sito e' il generatore legacy disabilitato (`confirm_corpus_write=yes`) e non va aggiornato per questa pipeline corpus-only; i registri pubblici vengono esposti via JSON HTTP.",
       "baseline": {
         "site": "09254622b320cf9a",
-        "corpus": "ecaefe8d4353363f",
-        "alignedAt": "2026-10-19"
+        "corpus": "7ac4d7335f49ba28",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -2866,11 +2866,11 @@
     {
       "path": "generator/scripts/lib/article-excerpt.mjs",
       "mode": "corpus-only",
-      "reason": "Validatore, normalizzatore e riparatore deterministico di excerpt e descrizioni SEO plain; il writer lo usa prima della registrazione e il publisher prima di cancellare dist/api. Non esiste un gemello operativo sul sito: la difesa lato card vive nel repository del sito e resta una protezione distinta.",
+      "reason": "Validatore, normalizzatore e riparatore deterministico di excerpt e descrizioni SEO plain. Rileva code incomplete e terminatori mancanti; il writer rifiuta campi vuoti senza fallback sicuro. Nello sweep storico la strategia d conserva il testo completo aggiungendo il terminatore e la b sostituisce solo elenchi appiattiti con una frase del body nella stessa lingua e pertinente al titolo. Il writer controlla prima della registrazione e il publisher esegue il preflight prima di cancellare dist/api. Non esiste un gemello operativo sul sito: la difesa lato card resta distinta.",
       "baseline": {
         "site": null,
-        "corpus": "46e9fa64a1c87d81",
-        "alignedAt": "2026-11-03"
+        "corpus": "4271e7294f16c72d",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -6859,21 +6859,21 @@
     {
       "path": "scripts/ci/excerpt-completeness-baseline.json",
       "mode": "corpus-only",
-      "reason": "Baseline monotona dei soli excerpt storici incompleti senza una fonte completa recuperabile. Il producer corpus la usa per bloccare nuove regressioni senza inventare testo; il sito consuma l'API JSON e non esegue questo gate.",
+      "reason": "Baseline monotona per superficie (file|locale|id|field) dei casi storici ancora incompleti dopo le riparazioni sicure: prefisso esistente, frase del body solo per liste appiattite, o terminatore aggiunto ai riassunti completi. I casi c restano invariati; le chiavi distinte separano le occorrenze meta e SEO dello stesso campo. Il producer blocca nuove regressioni e rimuove dal baseline le voci riparate. Il sito consuma l’API JSON e non esegue questo gate.",
       "baseline": {
         "site": null,
-        "corpus": "c70e7863ef2029e8",
-        "alignedAt": "2026-11-03"
+        "corpus": "87da8baef6eb7002",
+        "alignedAt": "2026-11-04"
       }
     },
     {
       "path": "scripts/lib/excerpt-completeness-gate.mjs",
       "mode": "corpus-only",
-      "reason": "Gate preflight del producer API che confronta ogni excerpt con il contratto di completezza e la baseline storica. Il sito consuma la superficie JSON pubblicata e non valida i sorgenti del corpus.",
+      "reason": "Gate preflight del producer API che confronta ogni excerpt con il contratto di completezza e una baseline a chiavi file|locale|id|field. Le occorrenze dello stesso campo su superfici diverse restano indipendenti; il sito consuma la superficie JSON pubblicata e non valida i sorgenti del corpus.",
       "baseline": {
         "site": null,
-        "corpus": "24cacdf09a2448e5",
-        "alignedAt": "2026-11-03"
+        "corpus": "4d0a26cd2bc2f87e",
+        "alignedAt": "2026-11-04"
       }
     }
   ]

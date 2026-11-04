@@ -1,9 +1,9 @@
 /** Compare current excerpt defects with the finite set accepted by the publisher. */
-export function excerptCompletenessKey({ locale, id, field } = {}) {
-  if (![locale, id, field].every((value) => typeof value === 'string' && value.length > 0)) {
-    throw new TypeError('Excerpt completeness entries require locale, id, and field strings');
+export function excerptCompletenessKey({ file, locale, id, field } = {}) {
+  if (![file, locale, id, field].every((value) => typeof value === 'string' && value.length > 0)) {
+    throw new TypeError('Excerpt completeness entries require file, locale, id, and field strings');
   }
-  return locale + '/' + id + '/' + field;
+  return file + '|' + locale + '|' + id + '|' + field;
 }
 
 function baselineEntries(baseline) {

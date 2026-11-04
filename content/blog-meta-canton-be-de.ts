@@ -58,7 +58,7 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.contributi-rotbach-saanen.excerpt': 'Die Kantonsregierung genehmigt rund CHF 590\'000 für den Rotbach und CHF 720\'000 für den Hochwasserschutz in Saanen im Kanton Bern.',
     'blog.article.contributi-rotbach-saanen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.nuove-funzioni-piano-digitale.title': 'Neue Funktionen im digitalen Plan der Stadt Bern',
-    'blog.article.nuove-funzioni-piano-digitale.excerpt': 'Ab dem 26. Oktober 2026 neue Inhalte im digitalen Plan Offizielle Namen unter «Nomenklatur» sichtbar Kostenloser Download über das Geoportal der Stadt',
+    'blog.article.nuove-funzioni-piano-digitale.excerpt': 'Am 26. Oktober 2026 stellte die Stadt Bern die offiziellen Flur-, Orts- und Gewässernamen in ihrem digitalen Stadtplan zur Einsicht bereit.',
     'blog.article.nuove-funzioni-piano-digitale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.ramsei-taglio-sicurezza-strada.title': 'Lützelflüh: Sicherheitsholzerei, Verkehr auf einer Fahrspur',
     'blog.article.ramsei-taglio-sicurezza-strada.excerpt': 'Sie nennt den Ramseibergwald, den Ort Ramsei, die Gemeinde Lützelflüh und die Sumiswaldstrasse in Richtung Sumiswald.',

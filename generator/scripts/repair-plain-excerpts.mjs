@@ -21,10 +21,10 @@ import {
   endsWithFunctionWordBeforePeriod,
   endsWithSentenceAbbreviation,
   findDescriptionDefects,
+  isFinalTerminatorOnlyChange,
   maximumDescriptionLength,
   minimumDescriptionLength,
   repairExcerptFromOriginal,
-  selectCompleteExcerptSource,
 } from './lib/article-excerpt.mjs';
 import {
   decodeTypeScriptString,
@@ -166,31 +166,21 @@ function repairValue(value, context, recordSources = []) {
     title,
     maxLength,
     minLength,
+    listOnlyBody: true,
   });
   let repaired = result.value;
   let strategy = result.strategy;
-  let source = strategy === 'a' ? 'existing-sentence' : strategy === 'b' ? 'article-body' : null;
+  let source = strategy === 'a'
+    ? 'existing-sentence'
+    : strategy === 'b'
+      ? 'article-body'
+      : strategy === 'd' ? 'terminal-punctuation' : null;
 
-  if (strategy === 'c') {
-    for (const recordSource of recordSources) {
-      if (recordSource.file === context.file && recordSource.field === context.field) continue;
-      const candidate = selectCompleteExcerptSource(recordSource.value, {
-        locale: context.locale,
-        maxLength,
-        minLength,
-        body,
-      });
-      if (candidate === null) continue;
-      repaired = candidate;
-      strategy = 'b';
-      source = 'sibling-field';
-      break;
-    }
-  }
   const changed = repaired !== value;
   if (changed) {
-    assertPlainExcerpt(repaired, context);
-    if (['description', 'structuredData.description', 'seoDescription'].includes(context.field)) {
+    assertPlainExcerpt(repaired, { ...context, body });
+    // Strategy d preserves the existing SEO text and only changes terminal punctuation.
+    if (strategy !== 'd' && ['description', 'structuredData.description', 'seoDescription'].includes(context.field)) {
       assertSeoDescriptionMinimum(repaired, { id: context.id, sourceDescriptionLength: value.length });
     }
   }
@@ -317,24 +307,52 @@ function corpusSourceFiles() {
 
 function summarize(results, mode) {
   const details = results.flatMap((result) => result.details);
-  const repaired = details.filter((item) => item.strategy === 'a' || item.strategy === 'b');
+  const repaired = details.filter((item) => ['a', 'b', 'd'].includes(item.strategy));
   const changedRepairs = repaired.filter((item) => item.before !== item.after);
-  const samplePool = [...changedRepairs];
+  const samplePool = [...details];
   let randomState = 0x434f5250;
   const random = () => {
     randomState = (Math.imul(randomState, 1664525) + 1013904223) >>> 0;
     return randomState / 0x100000000;
   };
-  for (let index = samplePool.length - 1; index > 0; index -= 1) {
-    const other = Math.floor(random() * (index + 1));
-    [samplePool[index], samplePool[other]] = [samplePool[other], samplePool[index]];
+  const sampleGroups = new Map();
+  for (const item of samplePool) {
+    const key = `${item.strategy}\0${item.locale}`;
+    sampleGroups.set(key, [...(sampleGroups.get(key) ?? []), item]);
+  }
+  for (const group of sampleGroups.values()) {
+    for (let index = group.length - 1; index > 0; index -= 1) {
+      const other = Math.floor(random() * (index + 1));
+      [group[index], group[other]] = [group[other], group[index]];
+    }
+  }
+  const randomSamples = [];
+  const strategies = ['a', 'b', 'c', 'd'];
+  const locales = ['it', 'en', 'de', 'fr'];
+  for (const strategy of strategies) {
+    for (const locale of locales) {
+      const group = sampleGroups.get(`${strategy}\0${locale}`);
+      if (group?.length) randomSamples.push(group.shift());
+    }
+  }
+  const fillOrder = strategies.flatMap((strategy) => locales.map((locale) => `${strategy}\0${locale}`));
+  while (randomSamples.length < 20) {
+    let added = false;
+    for (const key of fillOrder) {
+      const group = sampleGroups.get(key);
+      if (!group?.length) continue;
+      randomSamples.push(group.shift());
+      added = true;
+      if (randomSamples.length === 20) break;
+    }
+    if (!added) break;
   }
   return {
     mode,
     files: results.length,
     changedValues: changedRepairs.length,
     needsRepairValues: details.length,
-    byStrategy: Object.fromEntries(['a', 'b', 'c'].map((strategy) => [
+    byStrategy: Object.fromEntries(['a', 'b', 'c', 'd'].map((strategy) => [
       strategy,
       details.filter((item) => item.strategy === strategy).length,
     ])),
@@ -344,9 +362,14 @@ function summarize(results, mode) {
     ])),
     removedChars: details.reduce((total, item) => total + item.removedChars, 0),
     addedChars: details.reduce((total, item) => total + item.addedChars, 0),
+    dPunctuationOnlyViolations: changedRepairs.filter((item) => item.strategy === 'd'
+      && !isFinalTerminatorOnlyChange(item.before, item.after)).length,
     functionWordPeriodViolations: changedRepairs.filter((item) => endsWithFunctionWordBeforePeriod(item.after, { locale: item.locale })).length,
     abbreviationEndingViolations: changedRepairs.filter((item) => endsWithSentenceAbbreviation(item.after)).length,
-    minimumLengthViolations: changedRepairs.filter((item) => item.after.trim().length < minimumDescriptionLength(item.field)).length,
+    minimumLengthViolations: changedRepairs.filter((item) => item.strategy !== 'd'
+      && item.after.trim().length < minimumDescriptionLength(item.field)).length,
+    dBelowMinimumLength: changedRepairs.filter((item) => item.strategy === 'd'
+      && item.after.trim().length < minimumDescriptionLength(item.field)).length,
     repairedLengthStats: (() => {
       const lengths = changedRepairs.map((item) => item.after.trim().length).sort((left, right) => left - right);
       return {
@@ -356,7 +379,7 @@ function summarize(results, mode) {
       };
     })(),
     nonRepairable: details.filter((item) => item.strategy === 'c'),
-    randomSamples: samplePool.slice(0, 15).map(({ file, section, locale, id, field, strategy, before, after }) => ({
+    randomSamples: randomSamples.map(({ file, section, locale, id, field, strategy, before, after }) => ({
       file, section, locale, id, field, strategy, before, after,
     })),
     bySection: Object.fromEntries(['frontaliere', 'svizzera', 'cantonale'].map((section) => [

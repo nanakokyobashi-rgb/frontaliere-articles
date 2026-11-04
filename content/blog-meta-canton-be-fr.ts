@@ -58,7 +58,7 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.contributi-rotbach-saanen.excerpt': 'Le gouvernement cantonal approuve environ CHF 590\'000 pour le Rotbach et CHF 720\'000 pour la protection contre les crues à Saanen, dans le canton de Berne.',
     'blog.article.contributi-rotbach-saanen.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.nuove-funzioni-piano-digitale.title': 'Nouvelles fonctions dans le plan numérique de la ville de Berne',
-    'blog.article.nuove-funzioni-piano-digitale.excerpt': 'À partir du 26 octobre 2026, nouveaux contenus dans le plan numérique Noms officiels visibles sous « Nomenclature » Téléchargement gratuit depuis le géoportail',
+    'blog.article.nuove-funzioni-piano-digitale.excerpt': 'Le 26 octobre 2026, la ville de Berne a rendu consultables dans son plan numérique les noms officiels des terrains, des localités et des cours d’eau.',
     'blog.article.nuove-funzioni-piano-digitale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.ramsei-taglio-sicurezza-strada.title': 'Lützelflüh : coupe de sécurité, circulation sur une voie',
     'blog.article.ramsei-taglio-sicurezza-strada.excerpt': 'À Ramsei, dans la commune de Lützelflüh, la Sumiswaldstrasse en direction de Sumiswald sera gérée sur une voie du 2 au 13 novembre 2026, avec des feux de signalisation.',

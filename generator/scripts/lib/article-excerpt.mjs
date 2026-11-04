@@ -28,6 +28,13 @@ export const SENTENCE_ABBREVIATIONS = Object.freeze([
 ]);
 const SENTENCE_ABBREVIATION_SET = new Set(SENTENCE_ABBREVIATIONS.map((value) => value.toLocaleLowerCase()));
 const PERMIT_CODE_CONTEXT_RE = /\b(?:ausweis|bewilligung|permit|permis|permesso)\b[^.!?]{0,64}$/iu;
+const TERMINAL_LABEL_INITIAL_CONTEXT_RE = /\b(?:serie|series|série|piano|plan|gruppo|gruppe|groupe|group|punkt|point|tipo|typ|type|classe|klasse|class|categoria|catégorie|category|fase|phase|girone|pool|league|lega|versione|version|livello|level|grado|grade|section|sezione)\s*$/iu;
+const PUBLISHING_KEYWORD_EQUIVALENTS = new Set([
+  'pubblicato', 'pubblicata', 'pubblicati', 'pubblicate', 'pubblicare', 'pubblicazione',
+  'published', 'publish', 'publishes', 'publishing', 'publication',
+  'publié', 'publiée', 'publiés', 'publiées', 'publier', 'publication',
+  'publiziert', 'publizierte', 'publizierten', 'publizieren', 'veröffentlicht', 'veröffentlichung', 'veröffentlichen',
+]);
 
 const LABEL_RE = /^(?:In breve|In short|Kurz gesagt|En bref)\b/i;
 const LABEL_START_RE = /^(?:#{1,6}\s*)?(?:In breve|In short|Kurz gesagt|En bref)\b/i;
@@ -236,6 +243,11 @@ function isTerminalPermitCodeOrCelsiusUnit(text, tokenStart, token) {
     && PERMIT_CODE_CONTEXT_RE.test(text.slice(Math.max(0, tokenStart - 64), tokenStart));
 }
 
+function isContextualTerminalInitial(text, tokenStart, token) {
+  if (!/^[A-ZÀ-ÖØ-Þ]\.$/u.test(String(token ?? ''))) return false;
+  return TERMINAL_LABEL_INITIAL_CONTEXT_RE.test(String(text ?? '').slice(0, tokenStart));
+}
+
 function isNonSentencePeriod(text, periodIndex) {
   if (periodIndex < 0 || text[periodIndex] !== '.') return false;
   const previous = text[periodIndex - 1] ?? '';
@@ -250,7 +262,7 @@ function isNonSentencePeriod(text, periodIndex) {
   const lowerToken = token.toLocaleLowerCase();
   if (SENTENCE_ABBREVIATION_SET.has(lowerToken)) return true;
   if (/^[BCG]\.$/u.test(token) && isTerminalPermitCodeOrCelsiusUnit(text, start, token)) return false;
-  if (/^[A-ZÀ-ÖØ-Þ]\.$/u.test(token)) return true;
+  if (/^[A-ZÀ-ÖØ-Þ]\.$/u.test(token)) return !isContextualTerminalInitial(text, start, token);
 
   // German date ordinals continue into the following word (for example,
   // "am 17. Mai"). A terminal ordinal is handled as an incomplete value.
@@ -302,6 +314,8 @@ export function endsWithSentenceAbbreviation(value) {
   while (start > 0 && /[\p{L}\p{N}.]/u.test(text[start - 1])) start -= 1;
   const token = text.slice(start).toLocaleLowerCase();
   if (/^[bcg]\.$/u.test(token) && isTerminalPermitCodeOrCelsiusUnit(text, start, text.slice(start))) return false;
+  if (/^[A-ZÀ-ÖØ-Þ]\.$/u.test(text.slice(start))
+    && isContextualTerminalInitial(text, start, text.slice(start))) return false;
   return SENTENCE_ABBREVIATION_SET.has(token)
     || /^[A-ZÀ-ÖØ-Þ]\.$/u.test(text.slice(start))
     || (/(?:^|\s)\d{1,2}\.$/u.test(text) && !/\d+\.\d+\.$/u.test(text));
@@ -514,6 +528,7 @@ function hasDanglingTerminalFunctionWord(text, locale = '') {
   if (language === 'de' && GERMAN_SEPARABLE_PARTICLE_PATTERNS[terminal]?.test(final)) return false;
   if (language === 'it' && /\becco perché$/iu.test(final)) return false;
   const rawTerminal = rawTerminalWord(text);
+  if (/^[A-ZÀ-ÖØ-Þ]$/u.test(rawTerminal)) return false;
   if (rawTerminal === 'AI' || rawTerminal === 'Stati') return false;
   if (AUXILIARY_ENDINGS.has(terminal)) {
     const clauses = finalText.split(',').map((clause) => clause.trim());
@@ -547,7 +562,7 @@ export function endsWithFunctionWordBeforePeriod(value, { locale = '' } = {}) {
 /** Detect incomplete tails, including short clauses hidden by an added period. */
 export function findExcerptCompletenessDefects(value, { locale = '' } = {}) {
   const text = String(value ?? '').replace(/\s+/g, ' ').trim();
-  if (!text) return [];
+  if (!text) return ['empty-value'];
   const defects = [];
   const parentheses = findUnmatchedParentheses(text);
   if (parentheses.openings.length > 0) defects.push('unclosed-parenthesis');
@@ -563,6 +578,7 @@ export function findExcerptCompletenessDefects(value, { locale = '' } = {}) {
     && INCOMPLETE_SHORT_SENTENCE_VERBS.has(terminalWord(text))) {
     defects.push('short-final-sentence');
   }
+  if (!/[.!?…]["'’”»)}\]]*$/u.test(text)) defects.push('missing-final-terminator');
   return defects;
 }
 
@@ -578,6 +594,9 @@ function sentencePrefixes(value) {
 }
 
 const sentenceSegmenters = new Map();
+const bodySentenceCandidateCache = new WeakMap();
+const rankedBodyCandidateCache = new WeakMap();
+const bodyListItemCache = new WeakMap();
 
 const AMBIGUOUS_ITALIAN_ARTICLE_STARTERS = new Set(['Il', 'Lo', 'La', 'I', 'Gli', 'Le', 'Un', 'Uno', 'Una']);
 
@@ -618,6 +637,13 @@ function crossesBodyLineOrListItem(text) {
 }
 
 function sentenceCandidatesFromBody(body, locale, field = 'excerpt') {
+  const cacheKey = `${locale}\0${field}`;
+  let cachedByLocaleField;
+  if (Array.isArray(body)) {
+    cachedByLocaleField = bodySentenceCandidateCache.get(body);
+    const cached = cachedByLocaleField?.get(cacheKey);
+    if (cached) return cached;
+  }
   if (!sentenceSegmenters.has(locale)) {
     sentenceSegmenters.set(locale, new Intl.Segmenter(locale, { granularity: 'sentence' }));
   }
@@ -659,38 +685,113 @@ function sentenceCandidatesFromBody(body, locale, field = 'excerpt') {
       }
     }
   }
+  if (Array.isArray(body)) {
+    cachedByLocaleField ??= new Map();
+    cachedByLocaleField.set(cacheKey, candidates);
+    bodySentenceCandidateCache.set(body, cachedByLocaleField);
+  }
   return candidates;
 }
 
 function descriptionKeywords(text) {
   return new Set(
-    [...String(text).toLocaleLowerCase().matchAll(/[\p{L}\p{N}]{3,}/gu)]
+    [...String(text).toLocaleLowerCase().matchAll(/[\p{L}\p{N}]{3,}|\p{N}{2,}/gu)]
       .map((match) => match[0])
       .filter(isContentWord),
   );
 }
 
-function sharedDescriptionKeywordCount(candidate, sources) {
-  const candidateWords = descriptionKeywords(candidate);
-  const sourceWords = new Set(sources.flatMap((source) => [...descriptionKeywords(source)]));
+function singularPluralKeywordMatch(left, right) {
+  const shorter = left.length <= right.length ? left : right;
+  const longer = shorter === left ? right : left;
+  return shorter.length >= 3 && (longer === shorter + 's' || longer === shorter + 'es');
+}
+
+function hasSharedDescriptionKeyword(word, sourceWords) {
+  if (sourceWords.has(word)) return true;
+  for (const sourceWord of sourceWords) {
+    if (singularPluralKeywordMatch(word, sourceWord)
+      || (Math.min(word.length, sourceWord.length) >= 4
+        && (word.includes(sourceWord) || sourceWord.includes(word)))
+      || (PUBLISHING_KEYWORD_EQUIVALENTS.has(word) && PUBLISHING_KEYWORD_EQUIVALENTS.has(sourceWord))) return true;
+  }
+  return false;
+}
+
+function sharedDescriptionKeywordCountFromSets(candidateWords, sourceWords) {
   let shared = 0;
-  for (const word of candidateWords) if (sourceWords.has(word)) shared += 1;
+  for (const word of candidateWords) if (hasSharedDescriptionKeyword(word, sourceWords)) shared += 1;
   return shared;
 }
 
-function overlapScore(candidate, sources) {
-  const left = descriptionKeywords(candidate);
-  const right = new Set(sources.flatMap((source) => [...descriptionKeywords(source)]));
-  if (left.size === 0 || right.size === 0) return 0;
-  let overlap = 0;
-  for (const word of left) if (right.has(word)) overlap += 1;
-  return overlap / Math.sqrt(left.size * right.size);
+function sharedDescriptionKeywordCount(candidate, sources) {
+  const candidateWords = descriptionKeywords(candidate);
+  const sourceWords = new Set(sources.flatMap((source) => [...descriptionKeywords(source)]));
+  return sharedDescriptionKeywordCountFromSets(candidateWords, sourceWords);
+}
+
+function unpunctuatedCapitalTransitions(value) {
+  const text = String(value ?? '');
+  const words = [...text.matchAll(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)?/gu)];
+  const transitions = [];
+  for (let index = 1; index < words.length; index += 1) {
+    const previous = words[index - 1];
+    const current = words[index];
+    const gap = text.slice(previous.index + previous[0].length, current.index);
+    if (!/^\s+$/u.test(gap) || !/\p{Ll}$/u.test(previous[0]) || !/^\p{Lu}/u.test(current[0])) continue;
+    if (LIST_TRANSITION_CONNECTORS.has(previous[0].toLocaleLowerCase())) continue;
+    transitions.push(current[0].toLocaleLowerCase());
+  }
+  return transitions;
+}
+
+const TRAILING_EMOJI_SEGMENTER = new Intl.Segmenter('en', { granularity: 'grapheme' });
+const EMOJI_GRAPHEME_RE = /(?:\p{Extended_Pictographic}|\p{Regional_Indicator}{2}|[#*0-9]\uFE0F?\u20E3)/u;
+const LIST_TRANSITION_CONNECTORS = new Set([
+  'a', 'an', 'and', 'as', 'at', 'by', 'de', 'del', 'della', 'delle', 'dello', 'di', 'do', 'du', 'en', 'et', 'for',
+  'from', 'für', 'in', 'im', 'into', 'la', 'le', 'les', 'lo', 'nel', 'nella', 'nelle', 'nello', 'of', 'on', 'or',
+  'per', 'pour', 'sul', 'sulla', 'sulle', 'sullo', 'to', 'tra', 'und', 'until', 'von', 'with', 'zur', 'zum', 'zu',
+]);
+
+function stripTrailingEmoji(value) {
+  let text = String(value ?? '').trimEnd();
+  if (!/[\p{Extended_Pictographic}\p{Regional_Indicator}\u20E3]/u.test(text)) return text;
+  while (text) {
+    const last = [...TRAILING_EMOJI_SEGMENTER.segment(text)].at(-1);
+    if (!last || !EMOJI_GRAPHEME_RE.test(last.segment)) break;
+    text = text.slice(0, last.index).trimEnd();
+  }
+  return text;
+}
+
+function hasTruncatedUpdatedDataTail(value) {
+  return /\bDati aggiornati 2026 per(?:\s+[\p{L}\p{N}'’.-]+)*\s*$/iu.test(String(value ?? ''));
+}
+
+function addFinalTerminator(value, locale) {
+  const withoutEmoji = stripTrailingEmoji(value);
+  const candidate = /[.!?…]["'’”»)}\]]*$/u.test(withoutEmoji)
+    ? withoutEmoji
+    : withoutEmoji + '.';
+  return findExcerptCompletenessDefects(candidate, { locale }).length === 0
+    && findExcerptMarkdownDefects(candidate).length === 0
+    ? candidate
+    : null;
+}
+
+/** True when a d repair removes terminal emoji and adds no content beyond punctuation. */
+export function isFinalTerminatorOnlyChange(original, repaired) {
+  const withoutEmoji = stripTrailingEmoji(original);
+  const expected = /[.!?…]["'’”»)}\]]*$/u.test(withoutEmoji)
+    ? withoutEmoji
+    : withoutEmoji + '.';
+  return expected === repaired;
 }
 
 /**
- * Apply the historical repair policy without inventing punctuation or text:
- * use an existing sentence boundary (a), exact body prose (b), or retain the
- * source value and report it as non-repairable (c).
+ * Repair a value from its own complete prefix, its final terminator, or exact
+ * body prose. Historical sweeps can restrict body replacement to flattened
+ * lists so complete existing summaries are preserved.
  */
 export function repairExcerptFromOriginal(value, {
   body = [],
@@ -699,6 +800,7 @@ export function repairExcerptFromOriginal(value, {
   title = '',
   maxLength = 280,
   minLength = minimumDescriptionLength(field),
+  listOnlyBody = false,
 } = {}) {
   const original = String(value ?? '');
   const defects = [
@@ -708,30 +810,104 @@ export function repairExcerptFromOriginal(value, {
   if (startsAfterNonSentenceBoundary(original, body)) defects.push('split-sentence-start');
   if (defects.length === 0) return { value: original, strategy: null, defects };
 
+  const flattenedList = hasFlattenedBodyListExcerpt(original, body, locale);
+  const bodyCandidatesFor = (relevanceSources) => {
+    const cacheKey = `${locale}\0${field}\0${maxLength}\0${minLength}\0${title}`;
+    let cachedByTitle;
+    if (listOnlyBody && relevanceSources.length === 1 && Array.isArray(body)) {
+      cachedByTitle = rankedBodyCandidateCache.get(body);
+      const cached = cachedByTitle?.get(cacheKey);
+      if (cached) return cached;
+    }
+    const candidates = sentenceCandidatesFromBody(body, locale, field)
+      .filter((candidate) => candidate.length <= maxLength && candidate.length >= minLength)
+      .filter((candidate) => findExcerptCompletenessDefects(candidate, { locale }).length === 0)
+      .map((candidate, index) => ({
+        candidate,
+        index,
+        sharedKeywords: sharedDescriptionKeywordCount(candidate, relevanceSources),
+      }))
+      .filter(({ sharedKeywords }) => sharedKeywords >= 2)
+      .sort((left, right) => left.index - right.index);
+    if (listOnlyBody && relevanceSources.length === 1 && Array.isArray(body)) {
+      cachedByTitle ??= new Map();
+      cachedByTitle.set(cacheKey, candidates);
+      rankedBodyCandidateCache.set(body, cachedByTitle);
+    }
+    return candidates;
+  };
+
+  if (flattenedList) {
+    const bodyCandidates = bodyCandidatesFor(listOnlyBody ? [title] : [title, original]);
+    if (bodyCandidates.length > 0) return { value: bodyCandidates[0].candidate, strategy: 'b', defects };
+  }
+
+  if (defects.length === 1
+    && defects[0] === 'missing-final-terminator'
+    && !flattenedList
+    && !hasTruncatedUpdatedDataTail(original)) {
+    const terminated = addFinalTerminator(original, locale);
+    if (terminated !== null) return { value: terminated, strategy: 'd', defects };
+  }
+
   for (const prefix of sentencePrefixes(original)) {
     if (prefix.length > maxLength || prefix === original) continue;
     if (findExcerptMarkdownDefects(prefix).length > 0) continue;
     if (findExcerptCompletenessDefects(prefix, { locale }).length > 0) continue;
+    if (startsAfterNonSentenceBoundary(prefix, body)) continue;
     if (prefix.length < minLength) continue;
     return { value: prefix, strategy: 'a', defects };
   }
 
-  const bodyCandidates = sentenceCandidatesFromBody(body, locale, field)
-    .filter((candidate) => candidate.length <= maxLength && candidate.length >= minLength)
-    .filter((candidate) => findExcerptCompletenessDefects(candidate, { locale }).length === 0)
-    .map((candidate, index) => ({
-      candidate,
-      index,
-      sharedKeywords: sharedDescriptionKeywordCount(candidate, [title, original]),
-      score: overlapScore(candidate, [title, original]),
-    }))
-    .filter(({ sharedKeywords }) => sharedKeywords >= 2)
-    .sort((left, right) => right.score - left.score || left.index - right.index);
-  if (bodyCandidates.length > 0) {
-    return { value: bodyCandidates[0].candidate, strategy: 'b', defects };
+  if (!listOnlyBody) {
+    const bodyCandidates = bodyCandidatesFor([title, original]);
+    if (bodyCandidates.length > 0) return { value: bodyCandidates[0].candidate, strategy: 'b', defects };
   }
 
   return { value: original, strategy: 'c', defects };
+}
+
+function hasFlattenedBodyListExcerpt(value, body, locale = '') {
+  const original = String(value ?? '');
+  const originalWords = descriptionKeywords(original);
+  if (originalWords.size === 0) return false;
+  let listItems;
+  if (Array.isArray(body)) {
+    listItems = bodyListItemCache.get(body);
+    if (!listItems) {
+      listItems = [];
+      for (const source of body) {
+        for (const line of String(source ?? '').split(/\r?\n/u)) {
+          if (!/^\s{0,3}(?:[-*+]\s+|\d{1,3}\.\s+)/u.test(line)) continue;
+          const item = stripExcerptMarkdown(line).replace(/[.!?…]+$/u, '').trim();
+          const firstWord = item.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)?/u)?.[0]?.toLocaleLowerCase();
+          if (item.length >= 12) listItems.push({ words: descriptionKeywords(item), firstWord });
+        }
+      }
+      bodyListItemCache.set(body, listItems);
+    }
+  } else {
+    listItems = String(body ?? '').split(/\r?\n/u)
+      .filter((line) => /^\s{0,3}(?:[-*+]\s+|\d{1,3}\.\s+)/u.test(line))
+      .map((line) => stripExcerptMarkdown(line).replace(/[.!?…]+$/u, '').trim())
+      .filter((item) => item.length >= 12)
+      .map((item) => ({
+        words: descriptionKeywords(item),
+        firstWord: item.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)?/u)?.[0]?.toLocaleLowerCase(),
+      }));
+  }
+  const matchingItems = [];
+  for (const { words, firstWord } of listItems) {
+    if (sharedDescriptionKeywordCountFromSets(words, originalWords) < 2) continue;
+    matchingItems.push(firstWord);
+  }
+  if (matchingItems.length < 2) return false;
+  const transitions = unpunctuatedCapitalTransitions(original);
+  if (transitions.length === 0) return false;
+  const matchingTransitions = transitions.filter((transition) => matchingItems.includes(transition)).length;
+  // German nouns are capitalized by default; require two matching list starts there.
+  const language = String(locale ?? '').toLowerCase().split('-')[0];
+  return matchingTransitions >= (language === 'de' ? 2 : 1);
 }
 
 function isCompleteSourceCandidate(value, { locale, maxLength, minLength, body = [] }) {
@@ -787,10 +963,21 @@ export function repairGeneratedArticleDescriptions(article) {
 
   const repairField = ({ fields, field, locale, title, body, siblingValues, maxLength, minLength }) => {
     const original = fields?.[field];
-    if (typeof original !== 'string' || original.trim() === '') return;
+    if (typeof original !== 'string') return;
     const defects = findDescriptionDefects(original, { locale, field, body });
     if (defects.length === 0) return;
     const options = { locale, maxLength, minLength, body };
+    if (original.trim() === '') {
+      const bodyExcerpt = firstCompleteBodyExcerpt(body, { locale, field, maxLength, minLength });
+      if (bodyExcerpt !== null) {
+        fields[field] = bodyExcerpt;
+        repairs.push({ locale, field, source: 'article-body', before: original, after: bodyExcerpt });
+        return;
+      }
+      const error = new Error(`[excerpt-complete] ${locale}/${article?.id ?? 'unknown'}/${field} is empty and has no safe body excerpt`);
+      error.qualityReject = true;
+      throw error;
+    }
     const selected = selectCompleteExcerptSource(original, { ...options, body });
     if (selected !== null) {
       if (selected !== original) {
@@ -983,7 +1170,7 @@ export function normalizeExcerpt(value) {
       && !endsWithSentenceAbbreviation(fragment));
   const firstUseful = fragments[0];
   if (firstUseful) return firstUseful;
-  return plain.length >= EXCERPT_MIN_LENGTH && !endsWithSentenceAbbreviation(plain) ? plain : '';
+  return plain;
 }
 
 /** Throw the publication gate for Markdown and, by default, incomplete descriptions. */

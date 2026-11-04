@@ -221,6 +221,7 @@ import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord } from './lib/i
 import { countLocalNewsHits, isLocalNews } from './lib/local-news.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import {
+  firstCompleteBodyExcerpt,
   normalizeExcerpt,
   stripExcerptMarkdown,
   assertPlainExcerpt,
@@ -4890,13 +4891,15 @@ function applyMicrocopyGuard(content, locale) {
  * blocked on this step (issue #3174 follow-up — auto-generated excerpt).
  */
 async function generateExcerpt(title, body1, body2, body3) {
-  const bodyText = [body1, body2, body3].filter(Boolean).join('\n\n');
+  const body = [body1, body2, body3].filter(Boolean);
+  const bodyText = body.join('\n\n');
   try {
     const messages = [
       {
         role: 'system',
         content:
-          'Sei un redattore SEO italiano. Scrivi un riassunto breve (1-2 frasi, massimo 160 caratteri) ' +
+          'Sei un redattore SEO italiano. Scrivi una frase completa con terminatore finale (massimo 160 caratteri). ' +
+          'Non concatenare bullet o key facts: scegli un solo fatto pertinente e formulalo come frase. ' +
           'per un articolo di blog, adatto come meta-description. Rispondi SOLO con il testo del riassunto, ' +
           'senza virgolette né markdown.',
       },
@@ -4917,6 +4920,12 @@ async function generateExcerpt(title, body1, body2, body3) {
   } catch (err) {
     console.warn(`  ⚠️  generateExcerpt fallito, uso fallback troncato: ${err.message}`);
   }
+  const bodyFallback = firstCompleteBodyExcerpt(body, {
+    locale: 'it',
+    field: 'excerpt',
+    maxLength: 160,
+  });
+  if (bodyFallback) return capBlogDescription(bodyFallback).value;
   return capBlogDescription(normalizeExcerpt(bodyText)).value;
 }
 

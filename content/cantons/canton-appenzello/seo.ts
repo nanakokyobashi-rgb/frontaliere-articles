@@ -85,7 +85,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Durante la consultazione su «Verkehr \'45», Appenzello Esterno critica la proposta e chiede una revisione di fondo, soprattutto per la parte ferroviaria.',
     keywords: 'frontalieri, ticino, svizzera, italia, herisau, appenzello, chiedono, rapidità',
     ogTitle: 'Herisau: i due Appenzello chiedono più rapidità',
-    ogDescription: 'Durante la consultazione su «Verkehr \'45», Appenzello Esterno chiede una revisione di fondo della proposta e contesta l\'orientamento della parte ferroviaria. Il titolo della notizia richiama la Umfahrung Herisau e la richiesta di più rapidità dei due',
+    ogDescription: 'Durante la consultazione su «Verkehr \'45», Appenzello Esterno chiede una revisione di fondo della proposta e contesta l\'orientamento della parte ferroviaria. Il titolo della notizia richiama la Umfahrung Herisau e la richiesta di più rapidità dei due.',
     canonicalPath: '/articoli-appenzello/herisau-verkehr-appenzello/',
     structuredData: {
       "@context": "https://schema.org",
@@ -163,7 +163,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Preventivo 2027: spese CHF 9\'459\'640, entrate CHF 9\'135\'970, disavanzo CHF 323\'670. Tasso fiscale previsto a 3,90 unità nel 2027; risparmi senza risultato.',
     keywords: 'frontalieri, ticino, svizzera, italia, appenzello, tasso, fiscale, previsto',
     ogTitle: 'Appenzello: tasso fiscale previsto a 3,90 unità',
-    ogDescription: 'Il Consiglio comunale segnala risparmi senza il risultato desiderato. Il preventivo 2027 mostra un disavanzo di CHF 323\'670; il tasso fiscale dovrebbe salire a 3,90 unità nel quadro delle pressioni di Confederazione e Cantone, soprattutto',
+    ogDescription: 'Il Consiglio comunale segnala risparmi senza il risultato desiderato. Il preventivo 2027 mostra un disavanzo di CHF 323\'670; il tasso fiscale dovrebbe salire a 3,90 unità nel quadro delle pressioni di Confederazione e Cantone, soprattutto.',
     canonicalPath: '/articoli-appenzello/appenzello-tasso-fiscale-390/',
     structuredData: {
       "@context": "https://schema.org",
@@ -277,16 +277,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-gais-alterszentrum-rotewies-rette-aumento': {
     title: 'Rotenwies di Gais alza le rette di pensione e assistenza',
-    description: 'Il centro per anziani Rotenwies di Gais aumenterà le rette di pensione e assistenza, motivato da un deficit finanziario persistente e dall’aumento dei costi',
+    description: 'Il centro per anziani Rotenwies di Gais aumenterà le rette di pensione e assistenza, motivato da un deficit finanziario persistente e dall’aumento dei costi.',
     keywords: 'frontalieri, ticino, svizzera, italia, rotenwies, gais, alza, rette',
     ogTitle: 'Rotenwies di Gais alza le rette di pensione e assistenza',
-    ogDescription: 'L’Alterszentrum Rotenwies di Gais, che da anni registra un deficit, ha comunicato l’aumento delle rette di pensione e assistenza. L’incremento è attribuito all’aumento dei costi operativi e comporterà una spesa più alta per i residenti, senza fornire',
+    ogDescription: 'L’Alterszentrum Rotenwies di Gais, che da anni registra un deficit, ha comunicato l’aumento delle rette di pensione e assistenza. L’incremento è attribuito all’aumento dei costi operativi e comporterà una spesa più alta per i residenti, senza fornire.',
     canonicalPath: '/articoli-appenzello/gais-alterszentrum-rotewies-rette-aumento/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Rotenwies di Gais alza le rette di pensione e assistenza",
-      "description": "Il centro per anziani Rotenwies di Gais aumenterà le rette di pensione e assistenza, motivato da un deficit finanziario persistente e dall’aumento dei costi",
+      "description": "Il centro per anziani Rotenwies di Gais aumenterà le rette di pensione e assistenza, motivato da un deficit finanziario persistente e dall’aumento dei costi.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -397,7 +397,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Seduta del Gran Consiglio di Appenzello Interno il 19 ottobre: agenda lunga, discussioni e revisione della legge sugli esercizi pubblici, approvata nel 1994.',
     keywords: 'frontalieri, ticino, svizzera, italia, appenzello, interno, proporz, passa',
     ogTitle: 'Appenzello Interno: Proporz e legge sugli esercizi pubblici',
-    ogDescription: 'Il titolo di appenzell24.ch segnala che il Proporz non ha chance nel Gran Consiglio innerrhodese. Il lead descrive la sessione del 19 ottobre come un Lupf per governo e parlamento: agenda lunga e lavoro di dettaglio sulla legge sugli esercizi',
+    ogDescription: 'Il titolo di appenzell24.ch segnala che il Proporz non ha chance nel Gran Consiglio innerrhodese. Il lead descrive la sessione del 19 ottobre come un Lupf per governo e parlamento: agenda lunga e lavoro di dettaglio sulla legge sugli esercizi.',
     canonicalPath: '/articoli-appenzello/proporz-gran-consiglio-appenzello/',
     structuredData: {
       "@context": "https://schema.org",
@@ -433,16 +433,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-driessen-oncologia-herisau-2026': {
     title: 'Driessen rafforza oncologia ed ematologia a Herisau dal 1° ottobre 2026',
-    description: 'Dal 1° ottobre 2026 il prof. Driessen aggiunge una consultazione settimanale a Herisau; insieme alle due della dr.ssa Lips sono tre giorni di visite',
+    description: 'Dal 1° ottobre 2026 il prof. Driessen aggiunge una consultazione settimanale a Herisau; insieme alle due della dr.ssa Lips sono tre giorni di visite.',
     keywords: 'frontalieri, ticino, svizzera, italia, driessen, rafforza, oncologia, ematologia',
     ogTitle: 'Driessen rafforza oncologia ed ematologia a Herisau dal 1° ottobre 2026',
-    ogDescription: 'Il prof. Christoph Driessen porta la sua esperienza ventennale allo Spital Herisau via il Tumor- und BrustZentrum Ostschweiz. Dal 1° ottobre 2026 una consultazione settimanale si aggiunge alle due della dr.ssa Lips: tre giorni di visite',
+    ogDescription: 'Dal 1° ottobre 2026 Driessen è al Tumor- und BrustZentrum Ostschweiz.',
     canonicalPath: '/articoli-appenzello/driessen-oncologia-herisau-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Driessen rafforza oncologia ed ematologia a Herisau dal 1° ottobre 2026",
-      "description": "Dal 1° ottobre 2026 il prof. Driessen aggiunge una consultazione settimanale a Herisau; insieme alle due della dr.ssa Lips sono tre giorni di visite",
+      "description": "Dal 1° ottobre 2026 il prof. Driessen aggiunge una consultazione settimanale a Herisau; insieme alle due della dr.ssa Lips sono tre giorni di visite.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -553,7 +553,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il preventivo 2027 di Heiden indica entrate per CHF 35,308 milioni, uscite per CHF 35,512 milioni e un deficit di CHF 204\'200.',
     keywords: 'frontalieri, ticino, svizzera, italia, heiden, prosegue, risparmi, deficit',
     ogTitle: 'Heiden prosegue i risparmi nel 2027',
-    ogDescription: 'A Heiden, la situazione finanziaria è descritta come meno tesa grazie all\'aumento fiscale e alle misure del programma di risparmio 2024. Il preventivo 2027 indica entrate per CHF 35,308 milioni, uscite per CHF 35,512 milioni e un deficit di CHF',
+    ogDescription: 'A Heiden, la situazione finanziaria è descritta come meno tesa grazie all\'aumento fiscale e alle misure del programma di risparmio 2024. Il preventivo 2027 indica entrate per CHF 35,308 milioni, uscite per CHF 35,512 milioni e un deficit di CHF.',
     canonicalPath: '/articoli-appenzello/heiden-risparmi-preventivo-2027/',
     structuredData: {
       "@context": "https://schema.org",
@@ -589,7 +589,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-investimenti-tetto-fotovoltaico-2027': {
     title: 'Spese nette 2027: CHF 802\'767; eccedenza quasi CHF 580\'000',
-    description: 'Per il 2027 sono pianificate spese nette di CHF 802\'767 per infrastrutture comunali; previsto il risanamento del tetto della palestra',
+    description: 'Per il 2027 sono pianificate spese nette di CHF 802\'767 per infrastrutture comunali; previsto il risanamento del tetto della palestra.',
     keywords: 'frontalieri, ticino, svizzera, italia, spese, nette, eccedenza, quasi',
     ogTitle: 'Spese nette 2027: CHF 802\'767; eccedenza quasi CHF 580\'000',
     ogDescription: 'L\'estratto pubblico indica quasi CHF 580\'000 di eccedenza delle spese e un programma 2027 da CHF 802\'767. Tra gli interventi previsti, il risanamento del tetto della palestra con installazione simultanea di un impianto fotovoltaico.',
@@ -598,7 +598,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Spese nette 2027: CHF 802'767; eccedenza quasi CHF 580'000",
-      "description": "Per il 2027 sono pianificate spese nette di CHF 802'767 per infrastrutture comunali; previsto il risanamento del tetto della palestra",
+      "description": "Per il 2027 sono pianificate spese nette di CHF 802'767 per infrastrutture comunali; previsto il risanamento del tetto della palestra.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -901,7 +901,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-decima-fiera-apprendistati-innerrhoden': {
     title: 'Decima fiera posti apprendistato Appenzell 7 novembre 2026',
-    description: 'La decima fiera dei posti di apprendistato di Appenzell riunisce 62 aziende dell\'Innerrhoden il 7 novembre 2026. Ingresso gratuito dalle 9.00',
+    description: 'La decima fiera dei posti di apprendistato di Appenzell riunisce 62 aziende dell\'Innerrhoden il 7 novembre 2026. Ingresso gratuito dalle 9.00.',
     keywords: 'frontalieri, ticino, svizzera, italia, decima, fiera, posti, apprendistato',
     ogTitle: 'Fiera apprendistato Appenzell 7 novembre 2026',
     ogDescription: 'Sabato 7 novembre 2026, l\'Aula Gringel ospiterà la decima Lehrstellen-Tischmesse Appenzell con 62 aziende dell\'Innerrhoden. Un\'opportunità gratuita per studenti e genitori.',
@@ -910,7 +910,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Decima fiera posti apprendistato Appenzell 7 novembre 2026",
-      "description": "La decima fiera dei posti di apprendistato di Appenzell riunisce 62 aziende dell'Innerrhoden il 7 novembre 2026. Ingresso gratuito dalle 9.00",
+      "description": "La decima fiera dei posti di apprendistato di Appenzell riunisce 62 aziende dell'Innerrhoden il 7 novembre 2026. Ingresso gratuito dalle 9.00.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -940,16 +940,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-caldo-appenzello-esterno-2026': {
     title: 'Appenzello Esterno: più giorni caldi nel 2026 | Frontaliere Ticino',
-    description: 'Estate 2026: più giorni caldi nei siti esaminati Nel 2026 sono state rilevate più notti tropicali Altitudine e raffrescamento notturno riducono',
+    description: 'Da una parte, il confronto 2022-2026 segnala per l\'estate 2026 più giorni caldi e più notti tropicali nei siti esaminati.',
     keywords: 'frontalieri, ticino, svizzera, italia, appenzello, esterno, giorni, caldi',
     ogTitle: 'Appenzello Esterno: più giorni caldi nel 2026',
-    ogDescription: 'Estate 2026: più giorni caldi nei siti esaminati Nel 2026 sono state rilevate più notti tropicali Altitudine e raffrescamento notturno riducono il caldo',
+    ogDescription: 'Il confronto degli anni dal 2022 al 2026 mostra che, nell\'estate 2026, nei siti esaminati del Canton Appenzello Esterno sono stati registrati sia più giorni caldi sia più notti tropicali.',
     canonicalPath: '/articoli-appenzello/caldo-appenzello-esterno-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Appenzello Esterno: più giorni caldi nel 2026",
-      "description": "Estate 2026: più giorni caldi nei siti esaminati Nel 2026 sono state rilevate più notti tropicali Altitudine e raffrescamento notturno riducono",
+      "description": "Da una parte, il confronto 2022-2026 segnala per l'estate 2026 più giorni caldi e più notti tropicali nei siti esaminati.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

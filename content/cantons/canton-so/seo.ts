@@ -202,7 +202,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Nel Canton Soletta, circa dieci furti con raggiro negli ultimi giorni: la Polizia cantonale invita alla prudenza e indica il 117 per le segnalazioni immediate.',
     keywords: 'frontalieri, ticino, svizzera, italia, furti, raggiro, soletta, polizia',
     ogTitle: 'Soletta: circa dieci furti con raggiro negli ultimi giorni',
-    ogDescription: 'Secondo i primi accertamenti, le autrici e gli autori si avvicinano a piedi o con un veicolo e fanno indossare gioielli economici. Nella distrazione, sottraggono i gioielli delle vittime: la Polizia cantonale di Soletta chiede prudenza e segnala',
+    ogDescription: 'Secondo i primi accertamenti, le autrici e gli autori si avvicinano a piedi o con un veicolo e fanno indossare gioielli economici. Nella distrazione, sottraggono i gioielli delle vittime: la Polizia cantonale di Soletta chiede prudenza e segnala.',
     canonicalPath: '/articoli-soletta/furti-raggiro-soletta/',
     structuredData: {
       "@context": "https://schema.org",
@@ -241,7 +241,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Governo approva budget 2027 con Globalbudget; Parlamento in sessione 1-9 settembre con 51 oggetti; GPK pubblica rapporto su irregolarità alla soH.',
     keywords: 'frontalieri, ticino, svizzera, italia, soletta, governo, approva, preventivo',
     ogTitle: 'Soletta: Governo approva preventivo 2027 e Parlamento in sessione',
-    ogDescription: 'Il Regierungsrat ha approvato il Voranschlag 2027 con Globalbudget e pianificazione pluriennale. Il Kantonsrat si riunisce a settembre con 51 affari, mentre la GPK ha pubblicato l\'inchiesta su irregolarità finanziarie e di personale alla Solothurner',
+    ogDescription: 'Il Regierungsrat ha approvato il Voranschlag 2027 con Globalbudget e pianificazione pluriennale. Il Kantonsrat si riunisce a settembre con 51 affari, mentre la GPK ha pubblicato l\'inchiesta su irregolarità finanziarie e di personale alla Solothurner.',
     canonicalPath: '/articoli-soletta/soletta-parlamento-budget-2027-inchiesta-soh/',
     structuredData: {
       "@context": "https://schema.org",
@@ -316,16 +316,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-soletta-regierungsrat-attiparlamentari-2026': {
     title: 'Soletta: 15 risposte a iniziative parlamentari e progetto diritti voto',
-    description: 'Il 20 ottobre 2026 il Regierungsrat solettese ha reso noti 15 risposte a iniziative parlamentari, 5 prese di posizione su soH e il messaggio per abolire',
+    description: 'Il 20 ottobre 2026 il Regierungsrat solettese ha reso noti 15 risposte a iniziative parlamentari, 5 prese di posizione su soH e il messaggio per abolire.',
     keywords: 'frontalieri, ticino, svizzera, italia, soletta, risposte, iniziative, parlamentari',
     ogTitle: 'Soletta: 15 risposte parlamentari e progetto abolizione esclusione voto',
-    ogDescription: 'Il Governo solettese ha pubblicato i documenti della 34ª seduta 2026: 15 iniziative parlamentari evase, cinque incarichi urgenti sull\'ospedale cantonale soH (governance, consiglio d\'amministrazione, remunerazioni, risparmi personale) e messaggio',
+    ogDescription: 'Il Governo solettese ha pubblicato i documenti della 34ª seduta 2026: 15 iniziative parlamentari evase, cinque incarichi urgenti sull\'ospedale cantonale soH (governance, consiglio d\'amministrazione, remunerazioni, risparmi personale) e messaggio.',
     canonicalPath: '/articoli-soletta/soletta-regierungsrat-attiparlamentari-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Soletta: 15 risposte a iniziative parlamentari e progetto diritti voto",
-      "description": "Il 20 ottobre 2026 il Regierungsrat solettese ha reso noti 15 risposte a iniziative parlamentari, 5 prese di posizione su soH e il messaggio per abolire",
+      "description": "Il 20 ottobre 2026 il Regierungsrat solettese ha reso noti 15 risposte a iniziative parlamentari, 5 prese di posizione su soH e il messaggio per abolire.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -394,16 +394,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-cambio-ora-incidenti-stradali-soletta': {
     title: 'Cambio d\'ora e rischio incidenti stradali nel Canton Soletta',
-    description: '24-25 ottobre 2026: orologi indietro di un\'ora Il traffico del mattino coincide con il crepuscolo Caprioli, cervi nobili e cinghiali sono attivi',
+    description: 'Non viene inoltre fornito un numero di collisioni riferito esattamente alla notte del cambio d\'ora.',
     keywords: 'frontalieri, ticino, svizzera, italia, cambio, rischio, incidenti, stradali',
     ogTitle: 'Cambio d\'ora e rischio incidenti stradali nel Canton Soletta',
-    ogDescription: '24-25 ottobre 2026: orologi indietro di un\'ora Il traffico del mattino coincide con il crepuscolo Caprioli, cervi nobili e cinghiali sono attivi presto',
+    ogDescription: 'Il Cantone di Soletta avverte che il cambio d\'ora aumenta il rischio di incidenti con animali selvatici sulle strade, perché il traffico del mattino legato agli spostamenti per lavoro coincide con il crepuscolo.',
     canonicalPath: '/articoli-soletta/cambio-ora-incidenti-stradali-soletta/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Cambio d'ora e rischio incidenti stradali nel Canton Soletta",
-      "description": "24-25 ottobre 2026: orologi indietro di un'ora Il traffico del mattino coincide con il crepuscolo Caprioli, cervi nobili e cinghiali sono attivi",
+      "description": "Non viene inoltre fornito un numero di collisioni riferito esattamente alla notte del cambio d'ora.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -433,16 +433,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-polizia-soletta-comunicazione-media-droni': {
     title: 'Polizia Soletta: comunicazione 365 giorni e divieto droni 300 m',
-    description: 'Il servizio media opera 365 giorni all\'anno Il team gestisce X, Facebook e Instagram Nei grandi eventi un membro è presente sul posto Il divieto',
+    description: 'Il servizio è in impiego 365 giorni all\'anno. In occasione di grandi eventi, un collaboratore è presente anche sul posto.',
     keywords: 'frontalieri, ticino, svizzera, italia, polizia, soletta, comunicazione, giorni',
     ogTitle: 'Polizia Soletta: media 365 giorni, divieto droni 300 m e netiquette',
-    ogDescription: 'Il servizio media opera 365 giorni all\'anno Il team gestisce X, Facebook e Instagram Nei grandi eventi un membro è presente sul posto Il divieto di droni vale',
+    ogDescription: 'La pagina della Polizia cantonale di Soletta dedicata alla Comunicazione e ai media descrive un settore incaricato sia dell\'informazione esterna sia di quella interna.',
     canonicalPath: '/articoli-soletta/polizia-soletta-comunicazione-media-droni/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Polizia Soletta: comunicazione 365 giorni e divieto droni 300 m",
-      "description": "Il servizio media opera 365 giorni all'anno Il team gestisce X, Facebook e Instagram Nei grandi eventi un membro è presente sul posto Il divieto",
+      "description": "Il servizio è in impiego 365 giorni all'anno. In occasione di grandi eventi, un collaboratore è presente anche sul posto.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -545,16 +545,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-batterie-sodio-soletta': {
     title: 'Batterie agli ioni di sodio: montaggio a Soletta',
-    description: 'Batterie agli ioni di sodio senza litio Software sviluppato in Svizzera, montaggio a Soletta Oltre 600 batterie vendute entro fine settembre 2026',
+    description: 'Il montaggio e il cablaggio sono affidati alla Genossenschaft VEBO, che cura anche la consegna delle batterie ai clienti.',
     keywords: 'frontalieri, ticino, svizzera, italia, batterie, agli, ioni, sodio',
     ogTitle: 'Batterie sodio Soletta accumulo solare',
-    ogDescription: 'Batterie agli ioni di sodio senza litio Software sviluppato in Svizzera, montaggio a Soletta Oltre 600 batterie vendute entro fine settembre 2026 Primo sistema',
+    ogDescription: 'Il montaggio e il cablaggio sono affidati alla Genossenschaft VEBO, che cura anche la consegna delle batterie ai clienti.',
     canonicalPath: '/articoli-soletta/batterie-sodio-soletta/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Batterie agli ioni di sodio: montaggio a Soletta",
-      "description": "Batterie agli ioni di sodio senza litio Software sviluppato in Svizzera, montaggio a Soletta Oltre 600 batterie vendute entro fine settembre 2026",
+      "description": "Il montaggio e il cablaggio sono affidati alla Genossenschaft VEBO, che cura anche la consegna delle batterie ai clienti.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -623,16 +623,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-proposta-premi-assicurazione-2027': {
     title: 'Proposta riduzione premi assicurazione malattia 2027 Canton Soletta',
-    description: 'Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9',
+    description: 'Per Soletta, a fronte di un contributo federale di circa 123 milioni di franchi, il Governo propone quindi un contributo cantonale di 98 milioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, proposta, riduzione, premi, assicurazione',
     ogTitle: 'Riduzione premi assicurazione malattia 2027 Soletta',
-    ogDescription: 'Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9 milioni (+4,3%)',
+    ogDescription: 'Il Governo cantonale di Soletta ha trasmesso al Parlamento cantonale la proposta per la riduzione dei premi dell\'assicurazione malattia relativa al 2027.',
     canonicalPath: '/articoli-soletta/proposta-premi-assicurazione-2027/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Proposta riduzione premi assicurazione malattia 2027 Canton Soletta",
-      "description": "Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9",
+      "description": "Per Soletta, a fronte di un contributo federale di circa 123 milioni di franchi, il Governo propone quindi un contributo cantonale di 98 milioni.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -701,7 +701,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-aumento-salari-statale-2027': {
     title: 'Aumento salariale del 1,0% per personale statale del Canton Soletta dal 2027',
-    description: 'L\'accordo tra Regierungsrat e associazioni del personale prevede un aumento dell\'1,0% per personale statale, docenti e dipendenti ospedalieri',
+    description: 'L\'accordo tra Regierungsrat e associazioni del personale prevede un aumento dell\'1,0% per personale statale, docenti e dipendenti ospedalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, aumento, salariale, personale, statale',
     ogTitle: 'Aumento salariale del 1,0% per personale statale del Canton Soletta dal 2027',
     ogDescription: 'L\'accordo tra Regierungsrat e associazioni del personale prevede un aumento dell\'1,0% per personale statale, docenti e dipendenti ospedalieri a partire dal 2027.',
@@ -710,7 +710,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Aumento salariale del 1,0% per personale statale del Canton Soletta dal 2027",
-      "description": "L'accordo tra Regierungsrat e associazioni del personale prevede un aumento dell'1,0% per personale statale, docenti e dipendenti ospedalieri",
+      "description": "L'accordo tra Regierungsrat e associazioni del personale prevede un aumento dell'1,0% per personale statale, docenti e dipendenti ospedalieri.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -740,16 +740,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-solothurn-sussidi-premi-2027': {
     title: '221 milioni di franchi per premi assicurativi più bassi nel Canton Soletta',
-    description: 'Nel 2027 previsti circa CHF 221 milioni per l\'IPV La dotazione cresce di CHF 9 milioni, pari al 4,3% Circa CHF 123 milioni arrivano',
+    description: 'Nel 2027 previsti circa CHF 221 milioni per l\'IPV La dotazione cresce di CHF 9 milioni, pari al 4,3% Circa CHF 123 milioni arrivano.',
     keywords: 'frontalieri, ticino, svizzera, italia, milioni, franchi, premi, assicurativi',
     ogTitle: '221 milioni per premi bassi Canton Soletta 2027',
-    ogDescription: 'Nel 2027 previsti circa CHF 221 milioni per l\'IPV La dotazione cresce di CHF 9 milioni, pari al 4,3% Circa CHF 123 milioni arrivano dalla Confederazione',
+    ogDescription: 'Nel 2027 previsti circa CHF 221 milioni per l\'IPV La dotazione cresce di CHF 9 milioni, pari al 4,3% Circa CHF 123 milioni arrivano dalla Confederazione.',
     canonicalPath: '/articoli-soletta/solothurn-sussidi-premi-2027/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "221 milioni di franchi per premi assicurativi più bassi nel Canton Soletta",
-      "description": "Nel 2027 previsti circa CHF 221 milioni per l'IPV La dotazione cresce di CHF 9 milioni, pari al 4,3% Circa CHF 123 milioni arrivano",
+      "description": "Nel 2027 previsti circa CHF 221 milioni per l'IPV La dotazione cresce di CHF 9 milioni, pari al 4,3% Circa CHF 123 milioni arrivano.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -896,7 +896,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-solothurn-riduzione-premi-2027': {
     title: 'Riduzione premi assicurativi 2027: CHF 221 milioni a Soletta',
-    description: 'Nel 2027 a Soletta sono previsti circa CHF 221 milioni. Il contributo federale stimato è di circa CHF 123 milioni. Il contributo cantonale è di CHF 98',
+    description: 'Nel 2027 a Soletta sono previsti circa CHF 221 milioni. Il contributo federale stimato è di circa CHF 123 milioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, riduzione, premi, assicurativi, milioni',
     ogTitle: 'Riduzione premi assicurativi 2027 Soletta',
     ogDescription: 'Nel 2027 a Soletta sono previsti circa CHF 221 milioni.',
@@ -905,7 +905,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Riduzione premi assicurativi 2027: CHF 221 milioni a Soletta",
-      "description": "Nel 2027 a Soletta sono previsti circa CHF 221 milioni. Il contributo federale stimato è di circa CHF 123 milioni. Il contributo cantonale è di CHF 98",
+      "description": "Nel 2027 a Soletta sono previsti circa CHF 221 milioni. Il contributo federale stimato è di circa CHF 123 milioni.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
