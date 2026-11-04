@@ -342,11 +342,11 @@ export function buildObserverTargets({
         : {}),
       url: `${String(baseUrl).replace(/\/+$/, '')}/${change.section === 'svizzera' ? 'articoli-svizzera' : 'articoli-frontaliere'}/${slug}/`,
       sourceCommit: change.commit,
-      sourceUpdatedAt: registry.updatedAt || deriveUpdatedAtFromBodyChange({
+      sourceUpdatedAt: deriveUpdatedAtFromBodyChange({
         candidate: change,
         publishedAt: registry.date,
         currentUpdatedAt: registry.updatedAt,
-      }),
+      }) || registry.updatedAt,
       registryDate: registry.date,
       registryImage: registry.image,
       durable: Boolean(change.durable),

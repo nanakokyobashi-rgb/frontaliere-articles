@@ -106,7 +106,7 @@ test('l’observer conserva il tipo di modifica e deriva updatedAt per un body e
   const prepared = buildObserverTargets({
     changedBodies: changes,
     registrySources: {
-      frontaliere: "{ id: 'article', date: '2026-02-21T10:57:40.158Z', image: '/images/blog/article.webp' },",
+      frontaliere: "{ id: 'article', updatedAt: '2026-10-04', date: '2026-02-21T10:57:40.158Z', image: '/images/blog/article.webp' },",
     },
     slugSources: { frontaliere: "'article': { it: 'article' }," },
   });
