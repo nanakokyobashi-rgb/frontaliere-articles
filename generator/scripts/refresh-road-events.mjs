@@ -72,7 +72,6 @@ const fail = (msg) => {
 // Date.parse happens to accept: a locale date would otherwise reach the cache.
 const ISO_INSTANT_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,9})?)?(?:Z|[+-]\d{2}:\d{2})$/;
 const isIso = (v) => typeof v === 'string' && ISO_INSTANT_RE.test(v) && Number.isFinite(Date.parse(v));
-
 const RAW_HTTPS_URL_RE = /^https:\/\/[^\s"<>]+$/;
 
 function isHttpsUrlOrNull(value) {
@@ -86,7 +85,6 @@ function isHttpsUrlOrNull(value) {
   const authorityEnd = remainder.search(/[\/?#]/u);
   const authority = remainder.slice(0, authorityEnd === -1 ? remainder.length : authorityEnd);
   if (authority.includes('@')) return false;
-
   try {
     const url = new URL(value);
     return url.protocol === 'https:' && Boolean(url.hostname) && !url.username && !url.password;

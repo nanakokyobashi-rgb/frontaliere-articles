@@ -292,19 +292,22 @@ test('[road-events] un 200 rifiutato resta hard-fail se la source successiva è 
   const payload = structuredClone(servable(contract('road-events')));
   payload.generatedAt = new Date(now).toISOString();
   payload.events[0].url = 'https://@example.org/event';
+  const calls = [];
 
-  const result = await fetchFirstValidRoadEvents(['primary', 'fallback'], {
+  const result = await fetchFirstValidRoadEvents(['primary', 'unreachable'], {
     now,
     getBody: async (url) => {
+      calls.push(url);
       if (url === 'primary') return JSON.stringify(payload);
       throw new Error('publisher offline');
     },
   });
 
+  assert.deepEqual(calls, ['primary', 'unreachable']);
   assert.equal(result.ok, false);
   assert.equal(result.sawResponse, true);
   assert.match(result.errors[0], /events\[0\]\.url is not https or null — refusing/);
-  assert.match(result.errors[1], /fallback: publisher offline/);
+  assert.match(result.errors[1], /unreachable: publisher offline/);
 });
 
 test('[road-events] la finestra dei 48h usa l’orologio dopo il fetch', async () => {
