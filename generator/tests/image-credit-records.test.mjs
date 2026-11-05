@@ -380,6 +380,15 @@ function blogIndexTree() {
   writeRaw(root, 'generator/data/canton-sections.json', fs.readFileSync(path.join(REPO, 'generator/data/canton-sections.json'), 'utf8'));
   writeRaw(root, 'generator/data/localized-toponyms.json', fs.readFileSync(path.join(REPO, 'generator/data/localized-toponyms.json'), 'utf8'));
   writeRaw(root, 'generator/data/canton-url-slugs.json', fs.readFileSync(path.join(REPO, 'generator/data/canton-url-slugs.json'), 'utf8'));
+  // Discovery projection also validates the declared section registry and
+  // reads the canonical-shadow maps; these data inputs are outside the import closure.
+  for (const file of [
+    'sections/registry.json',
+    'engine/shared/frontaliere-article-canonical-overrides.json',
+    'content/swiss-article-canonical-overrides.json',
+  ]) {
+    writeRaw(root, file, fs.readFileSync(path.join(REPO, file), 'utf8'));
+  }
   writeRaw(root, 'content/blog-body/it/uno.ts', 'export const uno = true;\n');
   writeRaw(root, 'content/blog-body-ch/it/due.ts', 'export const due = true;\n');
   writeRaw(root, 'content/blog-articles-data.ts', "export const RAW_ARTICLES = [{ id: 'uno', category: 'news', date: '2026-10-01', image: '/images/blog/uno.webp' }];\n");
@@ -395,7 +404,11 @@ function blogIndexTree() {
 test('build-blog-index publishes image-credits-<section>.json beside the index, declared in the manifest', () => {
   const root = blogIndexTree();
   try {
-    writeRaw(root, 'dist/api/manifest.json', JSON.stringify({ schema: 1, commit: 'f00dfeed', counts: {}, files: {} }));
+    const releaseCommit = 'f00dfeed';
+    writeRaw(root, 'dist/api/manifest.json', JSON.stringify({ schema: 1, commit: releaseCommit, counts: {}, files: {} }));
+    writeRaw(root, 'dist/api/slugs.json', JSON.stringify({ commit: releaseCommit, blog: {}, swiss: {} }));
+    writeRaw(root, 'dist/api/articles.json', '[]');
+    writeRaw(root, 'dist/api/swiss-articles.json', '[]');
     const result = spawnSync(process.execPath, [path.join(root, 'scripts/build-blog-index.mjs')], { cwd: root, encoding: 'utf8' });
     assert.equal(result.status, 0, result.stdout + result.stderr);
     const sectionNames = CORPUS_SECTIONS.map(({ section }) => section);
@@ -446,11 +459,11 @@ test('build-blog-index still publishes when two covers credit one file different
   }
 });
 
-test('publish-api.yml uploads and purges the credits like the blog index, and republishes when their builder changes', () => {
+test('publish-api.yml uploads and purges credits and discovery index, and republishes when their builders change', () => {
   const wf = fs.readFileSync(path.join(REPO, '.github/workflows/publish-api.yml'), 'utf-8');
-  assert.match(wf, /for f in dist\/api\/data\/blog-index-\*\.json dist\/api\/data\/image-credits-\*\.json; do\n\s+\[ -s "\$f" \] \|\| continue\n\s+bash scripts\/lib\/upload-cdn-file\.sh "\$f" "data\/\$\(basename "\$f"\)" "public,max-age=600"\n\s+urls\+=\("https:\/\/cdn\.frontaliereticino\.ch\/data\/\$\(basename "\$f"\)"\)/);
+  assert.match(wf, /for f in dist\/api\/data\/blog-index-\*\.json dist\/api\/data\/image-credits-\*\.json dist\/api\/data\/discovery-articles\.json; do\n\s+\[ -s "\$f" \] \|\| continue\n\s+bash scripts\/lib\/upload-cdn-file\.sh "\$f" "data\/\$\(basename "\$f"\)" "public,max-age=600"\n\s+urls\+=\("https:\/\/cdn\.frontaliereticino\.ch\/data\/\$\(basename "\$f"\)"\)/);
   const paths = wf.slice(wf.indexOf('paths:'), wf.indexOf('schedule:'));
-  for (const trigger of ["'content/**'", "'engine/**'", "'public/images/blog/**'", "'public/images/generated/**'", "'scripts/build-blog-index.mjs'", "'scripts/lib/image-credit-records.mjs'", "'generator/scripts/lib/blog-image-registry.mjs'"]) {
+  for (const trigger of ["'content/**'", "'engine/**'", "'public/images/blog/**'", "'public/images/generated/**'", "'scripts/build-blog-index.mjs'", "'scripts/lib/image-credit-records.mjs'", "'scripts/lib/discovery-articles-index.mjs'", "'generator/scripts/lib/blog-image-registry.mjs'"]) {
     assert.ok(paths.includes(trigger), `publish-api.yml does not republish on ${trigger}`);
   }
 });
