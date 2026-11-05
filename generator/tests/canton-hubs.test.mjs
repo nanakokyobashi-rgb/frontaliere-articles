@@ -1053,16 +1053,18 @@ test('eventi: canonicalEventUrl deduplica equivalenti e conserva query, porta e 
 
   const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
   assert.equal(block.available, true);
-  const urls = block.render('it').items.map((item) => item.url);
-  assert.equal(urls.length, 8, 'due coppie canoniche collassano; query, porte e path significativi restano distinti');
+  const items = block.render('it').items;
+  const urls = items.map((item) => item.url).filter(Boolean);
+  assert.equal(items.length, 9, 'le coppie canoniche collassano e il record con URL non ammessa resta senza link');
+  assert.equal(urls.length, 8, 'solo gli otto link validi entrano nella superficie pubblicata');
   assert.equal(urls.filter((url) => url.includes('/event/query?')).length, 1, 'l’ordine delle coppie query e il fragment non cambiano identità');
   assert.ok(urls.includes('https://events.example.ch/event/query?z=2&tag=second&tag=first#programma'), 'il deep link mantiene la URL sorgente completa');
   assert.equal(urls.filter((url) => /\/event\/(?:Gra|Gr%C3)/.test(url)).length, 1, 'www, slash finale e Unicode NFC del path si canonicalizzano');
   assert.ok(urls.includes('https://www.events.example.ch/event/Gra%CC%88del/#dettaglio'), 'il deep link mantiene host, path e fragment originali');
   assert.ok(urls.some((url) => url.endsWith('/event/semantic?id=one')));
   assert.ok(urls.some((url) => url.endsWith('/event/semantic?id=two')));
-  assert.equal(urls.filter((url) => url.includes('/event/port')).length, 2, 'la porta HTTPS predefinita si normalizza e la porta non standard resta distinta');
-  assert.ok(urls.includes('https://events.example.ch:443/event/port'), 'la forma URL sorgente resta pubblicata dopo la deduplica canonica');
+  assert.equal(urls.filter((url) => url.includes('/event/port')).length, 2, 'la forma implicita e la porta non standard restano distinte');
+  assert.ok(!urls.some((url) => url.includes(':443/event/port')), 'la porta HTTPS esplicita predefinita non viene pubblicata');
   assert.ok(urls.some((url) => url.includes(':8443/event/port')));
   assert.ok(urls.some((url) => url.endsWith('/event/path-one')));
   assert.ok(urls.some((url) => url.endsWith('/event/path-two')));
