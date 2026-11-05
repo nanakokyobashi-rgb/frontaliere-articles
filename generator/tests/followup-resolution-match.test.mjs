@@ -20,8 +20,10 @@ import {
   dedupeDailyItems,
   detectAlreadyResolved,
   dailyBucketTargetRepository,
+  dailyBucketSourcePrNumbers,
   dailyBucketTitle,
   hasDailyBucketRepositoryConsistency,
+  mergeDailyItemSources,
   hasEnumeratedItems,
   normalizeRepositoryFieldValue,
   parseFollowupItems,
@@ -155,6 +157,7 @@ test('un separatore letterale backslash-n non ingloba il successivo item FU stab
   ].join('\n');
 
   const items = parseFollowupItems(body);
+  assert.equal(items[0].raw.endsWith(serializedBreak), true);
   assert.deepEqual(
     items.map((item) => [item.id, item.state, item.text.includes('Sources: PR #8101')]),
     [
@@ -163,6 +166,29 @@ test('un separatore letterale backslash-n non ingloba il successivo item FU stab
     ],
   );
   assert.equal(stripEscapedDailyItemBoundary(items[0].raw).includes(serializedBreak), false);
+});
+
+test('il boundary serializzato non contamina Sources né quote o fence dell’item finale', () => {
+  const serializedBreak = String.raw`\n\n`;
+  const body = [
+    '### FU-2026-10-07-001 — primo item',
+    '- State: open',
+    `- Sources: PR #8102${serializedBreak}### FU-2026-10-07-002 — secondo item`,
+    '- State: done',
+    '- Sources: PR #8101',
+    '```md',
+    '- Sources: PR #9999',
+    '```',
+    '> - Sources: PR #9998',
+  ].join('\n');
+
+  const items = parseFollowupItems(body);
+  assert.deepEqual(
+    items.map((item) => item.text.match(/^\s*-\s+Sources?\s*:\s*(.*?)\s*$/im)?.[1]),
+    ['PR #8102', 'PR #8101'],
+  );
+  assert.deepEqual(dailyBucketSourcePrNumbers(body), [8102, 8101]);
+  assert.equal(mergeDailyItemSources(items[0], items[1]).sources, 'PR #8102; PR #8101');
 });
 
 test('la deduplica conserva il done in qualunque ordine e unisce le Sources', () => {

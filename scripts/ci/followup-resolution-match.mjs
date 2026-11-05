@@ -887,6 +887,7 @@ function itemHeadingRecords(text) {
         ...record,
         line,
         start: record.start + offset,
+        serializedBoundary: true,
       });
     }
   }
@@ -970,7 +971,8 @@ function replaceFirstUnprotectedField(text, field, value) {
 /**
  * Parse both legacy numbered items and stable `FU-YYYY-MM-DD-NNN` items.
  * `text` intentionally preserves the old split semantics: it starts immediately after
- * the heading, so existing acceptance/matcher callers and tests remain unchanged.
+ * the heading. A recognized serialized boundary is removed only from `text`; `raw`
+ * remains byte-exact so lossless rewrites and generated content keep their offsets.
  *
  * @param {string} body
  * @returns {Array<{id:string|null, number:number|null, title:string, heading:string,
@@ -984,7 +986,13 @@ export function parseFollowupItems(body) {
   for (const record of itemHeadingRecords(source)) {
     if (record.protected) continue;
     const match = FOLLOWUP_ITEM_HEADING_LINE_RE.exec(record.line);
-    if (match && (match[1] === '###' || match[2])) matches.push({ ...match, index: record.start });
+    if (match && (match[1] === '###' || match[2])) {
+      matches.push({
+        ...match,
+        index: record.start,
+        serializedBoundary: record.serializedBoundary === true,
+      });
+    }
   }
   const parsed = matches.map((match, index) => {
     const heading = match[0];
@@ -996,7 +1004,11 @@ export function parseFollowupItems(body) {
     const contentStart = match[4]
       ? start + heading.indexOf('.') + 1
       : start + heading.length;
-    const text = source.slice(contentStart, end);
+    const raw = source.slice(start, end);
+    const itemText = source.slice(contentStart, end);
+    const text = matches[index + 1]?.serializedBoundary
+      ? stripEscapedDailyItemBoundary(itemText)
+      : itemText;
     const id = match[2] || null;
     const number = match[4] ? Number(match[4]) : null;
     const title = (match[3] ?? match[5] ?? '').trim();
@@ -1008,7 +1020,7 @@ export function parseFollowupItems(body) {
       start,
       end,
       text,
-      raw: source.slice(start, end),
+      raw,
       state: itemStateFromText(text),
       targetRepository: itemFieldFromText(text, 'Target repository'),
       targetFile: itemFieldFromText(text, 'Target file'),
