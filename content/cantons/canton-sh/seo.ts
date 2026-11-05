@@ -1333,6 +1333,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-mercato-immobiliare-sciaffusa-crescita': {
+    title: 'Prezzi abitazioni Sciaffusa in crescita secondo Eigenheim-Index',
+    description: 'L\'Eigenheim-Index della Schaffhauser Kantonalbank mostra aumenti nel Canton Sciaffusa: appartamenti +4,0% annuo e case unifamiliari +3,7% annuo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prezzi, abitazioni, sciaffusa, crescita',
+    ogTitle: 'Prezzi immobili Sciaffusa in crescita',
+    ogDescription: 'Secondo l\'Eigenheim-Index, il mercato immobiliare del Canton Sciaffusa è in crescita: appartamenti +4,0% annuo e case unifamiliari +3,7% annuo. Scopri i valori di riferimento.',
+    canonicalPath: '/articoli-sciaffusa/mercato-immobiliare-sciaffusa-crescita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prezzi abitazioni Sciaffusa in crescita secondo Eigenheim-Index",
+      "description": "L'Eigenheim-Index della Schaffhauser Kantonalbank mostra aumenti nel Canton Sciaffusa: appartamenti +4,0% annuo e case unifamiliari +3,7% annuo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-mercato-immobiliare-sciaffusa-crescita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-05T22:54:26+00:00",
+      "dateModified": "2026-11-05T22:54:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/mercato-immobiliare-sciaffusa-crescita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

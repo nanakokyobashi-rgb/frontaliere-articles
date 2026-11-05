@@ -105,6 +105,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.quartierplan-ebnat-west-pubblico.title': 'Ebnat West district plan on display from November 7 to 26',
     'blog.article.quartierplan-ebnat-west-pubblico.excerpt': 'Ebnat West will be developed gradually with mixed uses. At least 40% of the area will be for activities and services.',
     'blog.article.quartierplan-ebnat-west-pubblico.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.mercato-immobiliare-sciaffusa-crescita.title': 'Schaffhausen housing prices rising according to Eigenheim-Index',
+    'blog.article.mercato-immobiliare-sciaffusa-crescita.excerpt': 'Apartments +4,0% year-on-year and single-family homes +3,7% year-on-year in the Canton of Schaffhausen; a typical apartment costs CHF 770\'000.',
+    'blog.article.mercato-immobiliare-sciaffusa-crescita.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

@@ -105,6 +105,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.quartierplan-ebnat-west-pubblico.title': 'Quartierplan Ebnat West vom 7. bis 26. November ausgestellt.',
     'blog.article.quartierplan-ebnat-west-pubblico.excerpt': 'Ebnat West wird schrittweise mit gemischten Nutzungen ausgebaut.',
     'blog.article.quartierplan-ebnat-west-pubblico.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.mercato-immobiliare-sciaffusa-crescita.title': 'Preise für Wohnimmobilien in Schaffhausen steigen laut Eigenheim-Index',
+    'blog.article.mercato-immobiliare-sciaffusa-crescita.excerpt': 'Eigentumswohnungen +4,0% im Jahresvergleich und Einfamilienhäuser +3,7% im Jahresvergleich im Kanton Schaffhausen; eine typische Eigentumswohnung kostet CHF 770\'000.',
+    'blog.article.mercato-immobiliare-sciaffusa-crescita.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;
