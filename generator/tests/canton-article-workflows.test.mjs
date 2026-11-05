@@ -197,7 +197,20 @@ test('gli step che le sostituzioni non toccano sono identici alla sorgente, comm
     return lines.slice(at, next === -1 ? undefined : next).join('\n').replace(/\n+$/, '');
   };
   const strippedSource = stripComments(SOURCE.slice(SOURCE.indexOf('\njobs:\n')));
-  const touched = ['Skip when a generation is already in flight', 'Resolve run mode and section', 'Generate the article', 'Chain — dispatch the next link'];
+  const touched = ['Skip when a generation is already in flight', 'Resolve run mode and section', 'Generate the article', 'Commit and push', 'Chain — dispatch the next link'];
+  const discoveryCounterArgs = [
+    '              --merge-counter data/discovery-attempt-state.json:frontaliereProvenAttempts \\\n',
+    '              --merge-counter data/discovery-attempt-state.json:frontaliereDiscoveryResetAt \\\n',
+    '              --merge-counter data/discovery-attempt-state.json:svizzeraProvenAttempts \\\n',
+    '              --merge-counter data/discovery-attempt-state.json:svizzeraDiscoveryResetAt \\\n',
+  ].join('');
+  const sourceCommitAndPush = stepBlock(strippedSource, 'Commit and push');
+  assert.equal(sourceCommitAndPush.split(discoveryCounterArgs).length - 1, 1, 'la sorgente deve dichiarare una sola volta i quattro contatori discovery storici');
+  assert.equal(
+    stepBlock(CORE, 'Commit and push'),
+    sourceCommitAndPush.replace(discoveryCounterArgs, ''),
+    'il core differisce dalla sorgente nel rebase solo per i contatori discovery non applicabili ai cantoni',
+  );
   for (const name of sourceSteps) {
     if (touched.includes(name)) assert.notEqual(stepBlock(CORE, name), stepBlock(strippedSource, name), `${name}: atteso diverso`);
     else assert.equal(stepBlock(CORE, name), stepBlock(strippedSource, name), name);
@@ -256,6 +269,10 @@ function runGenerate(workflow, { env, plan }) {
     sleep: '#!/usr/bin/env bash\nexit 0\n',
     node: `#!/usr/bin/env bash
 trap '' USR1 USR2
+case "$*" in
+  *generator/scripts/create-article.mjs*) ;;
+  *) exit 0 ;;
+esac
 echo "[stub] create-article"
 n=0; [ -f "${dir}/calls" ] && n=$(cat "${dir}/calls")
 n=$((n + 1)); echo "$n" > "${dir}/calls"
@@ -276,8 +293,10 @@ exit 0
     writeFileSync(path.join(dir, 'step.sh'), extractRun(workflow, 'Generate the article'));
     const res = spawnSync('bash', [path.join(dir, 'step.sh')], {
       encoding: 'utf8',
+      timeout: 15_000,
       env: {
         PATH: `${bin}:${process.env.PATH}`, HOME: dir, RUNNER_TEMP: dir, GITHUB_OUTPUT: path.join(dir, 'out'),
+        GENERATE_STALL_S: '86400',
         SOURCE_URL: '', ...env,
       },
     });
@@ -296,6 +315,7 @@ exit 0
 function runAdmit(workflow, { caller, changed }) {
   return withBin((dir) => ({
     timeout: '#!/usr/bin/env bash\nwhile [[ "$1" == --* ]]; do shift; done\nshift\nexec "$@"\n',
+    date: '#!/usr/bin/env bash\nprintf "%s\\n" "2026-01-01T00:00:00Z"\n',
 gh: `#!/usr/bin/env bash
 case "$*" in
   *compare*) cat "${dir}/changed" ;;
@@ -388,7 +408,7 @@ test('Generate the article: con gli input della coppia storica il core si compor
       { status: source.status, outputs: source.outputs, sections: source.sections, outcome: source.outcome },
       s.name,
     );
-    assert.ok(source.sections.length >= 1, `${s.name}: la sorgente non ha tentato niente`);
+    assert.ok(source.sections.length >= 1, `${s.name}: la sorgente non ha tentato niente\n${source.stdout}`);
   }
 });
 
@@ -398,7 +418,11 @@ test('Generate the article: un cantone tenta SOLO la propria sezione e riconosce
 
   const produced = runGenerate(CORE, { env, plan: ['0 content/blog-body-canton-ti/it/nuovo.ts'] });
   assert.equal(produced.status, 0);
-  assert.deepEqual(produced.sections, ['canton-ti']);
+  assert.deepEqual(
+    produced.sections,
+    ['canton-ti'],
+    `un cantone non ha una gemella su cui ripiegare\n${produced.stdout}`,
+  );
   assert.equal(produced.outputs.article, 'true');
   assert.equal(produced.outputs.section, 'canton-ti');
   assert.match(produced.outcome, /kind=generated reason=article section=canton-ti/);

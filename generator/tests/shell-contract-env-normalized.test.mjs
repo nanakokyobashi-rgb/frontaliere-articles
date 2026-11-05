@@ -2,7 +2,7 @@
  * Il fingerprint del contratto non deve dipendere dall'ambiente. Run with `node --test`.
  *
  * IL DIFETTO (follow-up di #764, issue #788). `host/shell-contract-fingerprint.json`
- * registra lo SHA-256 dei 22 scalari di `SiteShellContract`, e uno di quei
+ * registra lo SHA-256 dei 23 scalari di `SiteShellContract`, e uno di quei
  * scalari — `cdnPreconnectHint` — `host/constants.ts` lo deriva da
  * `process.env.ASSET_CDN` quando il bootstrap legge il campo. Il digest
  * risultava quindi funzione della sorgente E dell'ambiente del runner:

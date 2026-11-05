@@ -172,4 +172,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vallese-piano-risparmi-2030',
+ category: 'fiscale',
+ date: '2026-11-05T04:21:02.956Z',
+ image: '/images/blog/article-vallese-piano-risparmi-2030.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

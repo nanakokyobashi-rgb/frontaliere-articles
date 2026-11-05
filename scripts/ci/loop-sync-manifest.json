@@ -1608,11 +1608,11 @@
     {
       "path": "scripts/ci/ensure-host-shell-assets.mjs",
       "mode": "corpus-only",
-      "reason": "Passo dei workflow di pubblicazione che garantisce sulla CDN i file della shell i cui byte sono trasportati in host/, inclusi GA4, recovery, Ads, Partnerize e Meta Pixel. Il loader Pixel contatta Meta solo dopo consenso esplicito; lo script host-only usa la libreria identical scripts/lib/cdn-shell-assets.mjs.",
+      "reason": "Passo dei workflow di pubblicazione: prima di rendere e pubblicare, garantisce sulla CDN il producer GA4 e i quattro asset host trasportati: site-support, AdSense, Partnerize e Meta Pixel. La lista e i byte arrivano da host/third-party-shell-assets.json; la logica CDN condivisa resta scripts/lib/cdn-shell-assets.mjs.",
       "baseline": {
         "site": null,
-        "corpus": "376823114717a68d",
-        "alignedAt": "2026-10-31"
+        "corpus": "050effc698c90d45",
+        "alignedAt": "2026-11-05"
       }
     },
     {
@@ -2124,7 +2124,7 @@
       "path": "generator/scripts/create-article.mjs",
       "sitePath": "scripts/create-article.mjs",
       "mode": "adapted",
-      "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; resta sorvegliato, ma le decisioni di pubblicazione delle copertine vivono nel corpus: le nuove immagini passano dal motore mirrorato con scope `article-hero`, se il motore fallisce, il fallback usa un record reader-facing del catalogo o la cover statica governata e accoda la rigenerazione senza rigettare l'articolo; la generazione del testo applica la guardia anti-copia. Il gemello del sito e' il generatore legacy disabilitato (`confirm_corpus_write=yes`) e non va aggiornato per questa pipeline corpus-only; i registri pubblici vengono esposti via JSON HTTP. RIALLINEATO 2026-11-04 (corpus-ahead): il writer controlla la mappa completa e il candidato con article-slug-uniqueness.mjs; il controllo resta qui perche' il generatore legacy del sito e' disabilitato e il corpus pubblica i dati via JSON HTTP. Baseline corpus aggiornata.",
+      "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; resta sorvegliato, ma le decisioni di pubblicazione delle copertine vivono nel corpus: le nuove immagini passano dal motore mirrorato con scope `article-hero`, se il motore fallisce, il fallback usa un record reader-facing del catalogo o la cover statica governata e accoda la rigenerazione senza rigettare l'articolo; la generazione del testo applica la guardia anti-copia. Il gemello del sito e' il generatore legacy disabilitato (`confirm_corpus_write=yes`) e non va aggiornato per questa pipeline corpus-only; i registri pubblici vengono esposti via JSON HTTP. RIALLINEATO 2026-11-04 (corpus-ahead): il writer controlla la mappa completa e il candidato con article-slug-uniqueness.mjs; il controllo resta qui perche' il generatore legacy del sito e' disabilitato e il corpus pubblica i dati via JSON HTTP. RIALLINEATO 2026-11-05 (corpus-ahead): il recovery monotono forza uno slot discovery dopo tre tentativi proven senza pubblicazione; la selezione resta confinata al publisher attivo del corpus. ",
       "baseline": {
         "site": "4b24d798b3ca92c8",
         "corpus": "3b77f5d4bd8449e3",
@@ -3971,6 +3971,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/scheduler/discoveryAttemptState.mjs",
+      "mode": "corpus-only",
+      "reason": "Stato monotono del recupero discovery per il generatore del corpus: forza uno slot discovery dopo tentativi proven consecutivi senza pubblicare e il sito non importa questo scheduler del publisher.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-05"
+      }
+    },
+    {
       "path": "generator/scripts/lib/scheduler/slugSimilarity.mjs",
       "sitePath": "scripts/lib/scheduler/slugSimilarity.mjs",
       "mode": "identical",
@@ -4204,17 +4214,17 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura. scalarFingerprint confronta i 23 scalari authoritative; il digest f86656f5… include lo snippet Meta Pixel content-addressed, il cui loader contatta Meta solo dopo consenso pubblicitario esplicito e si blocca sui documenti sensibili, senza fallback noscript. AD_RECOVERY_FILENAME resta allineato al sorgente versionato; sono preservati gli altri comportamenti di recovery, CMP, analytics e SEO gia' trasportati. Gli slot statici avvolgono l'elemento Google in un host first-party per il fallback creativo Firebase, senza cambiare il nodo AdSense o Auto Ads.",
+      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest 9393a80d… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel e gli snippet correnti; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
       "baseline": {
         "site": "16992ff4a6cade1d",
-        "corpus": "6171f472be3cc614",
-        "alignedAt": "2026-11-04"
+        "corpus": "62cb647a4be6f519",
+        "alignedAt": "2026-11-05"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 23,
-        "sha256": "f86656f555c2f9980d6d343bdc84f8ce8c61a4205ab4cf61dacb519ab7e6b08a"
+        "sha256": "9393a80d5bb4807b1d142cb24ba10afa0feb15c9acf34206b44d78d9a006b822"
       }
     },
     {
@@ -4431,19 +4441,19 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
       "baseline": {
-        "site": "2fa53536d7a6f4a7",
-        "corpus": "2fa53536d7a6f4a7",
-        "alignedAt": "2026-11-04"
+        "site": "c7c366b329e09f66",
+        "corpus": "c7c366b329e09f66",
+        "alignedAt": "2026-11-05"
       }
     },
     {
       "path": "host/siteShellBootstrap.ts",
       "mode": "corpus-only",
-      "reason": "Il bootstrap che costruisce SiteShellContract da `host/`. E' la meta' che sul sito e' fornita da `build-plugins/` e `services/`: qui e' un file solo, e non ha omonimo la'.",
+      "reason": "Bootstrap host che costruisce SiteShellContract dalle costanti del publisher, compresi lo snippet Meta Pixel e gli URL hashati di site-support/AdSense.",
       "baseline": {
         "site": null,
-        "corpus": "e8b2194a9da23407",
-        "alignedAt": "2026-08-09"
+        "corpus": "8d5bed4e9ac29ed2",
+        "alignedAt": "2026-11-05"
       }
     },
     {
@@ -4482,8 +4492,8 @@
       "reason": "Test node:test della garanzia sugli asset trasportati: ogni riferimento content-addressed del contratto, incluso il loader Meta Pixel gated dal consenso, deve avere i byte in host/; il publisher verifica hash e set esatto prima della pubblicazione.",
       "baseline": {
         "site": null,
-        "corpus": "434d61541d4037c6",
-        "alignedAt": "2026-10-31"
+        "corpus": "e6c5a477fa936c9f",
+        "alignedAt": "2026-11-05"
       }
     },
     {
@@ -4512,8 +4522,8 @@
       "reason": "Normalizzazione dell'ambiente per i due gate che pinnano SiteShellContract (issue #788): il getter di `host/siteShellBootstrap.ts` risolve `cdnPreconnectHint` da `process.env.ASSET_CDN` quando l'engine legge il contratto, quindi i test azzerano l'ambiente prima di leggere gli scalari per mantenere il digest cross-repo indipendente dal runner. Artefatto di questo lato: nessun omonimo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "940356862207405b",
-        "alignedAt": "2026-09-11"
+        "corpus": "186ad265107da70d",
+        "alignedAt": "2026-11-05"
       }
     },
     {
@@ -4538,8 +4548,8 @@
       "reason": "Confronto del contratto contro il golden `host/tests/shell-contract-functions.golden.json`. Nessun omonimo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "1dcc96439e77feb6",
-        "alignedAt": "2026-08-09"
+        "corpus": "52c3c5ce9d64f11e",
+        "alignedAt": "2026-11-05"
       }
     },
     {
@@ -6892,22 +6902,22 @@
       "path": "host/third-party-shell-assets-fingerprint.json",
       "sitePath": "tests/third-party-shell-assets-fingerprint.json",
       "mode": "identical",
-      "reason": "Fingerprint di recovery, Ads, Partnerize e Meta Pixel che lega gli snapshot byte-exact alle sorgenti. La proiezione esclude i contenuti ma verifica nomi e SHA-256; i test host confrontano i byte trasportati e il contratto prima della pubblicazione.",
+      "reason": "Fingerprint byte-exact dei producer site-support, AdSense, Partnerize, Meta Pixel e helper canonici; lega gli snapshot trasportati ai byte sorgente e ne verifica l’insieme prima della pubblicazione.",
       "baseline": {
-        "site": "25e5cccc269ba6e5",
-        "corpus": "25e5cccc269ba6e5",
-        "alignedAt": "2026-11-04"
+        "site": "d92b7fc0243d29d9",
+        "corpus": "d92b7fc0243d29d9",
+        "alignedAt": "2026-11-05"
       }
     },
     {
       "path": "host/third-party-shell-assets.json",
       "sitePath": "scripts/ci/export-third-party-shell-assets.ts",
       "mode": "adapted",
-      "reason": "Snapshot byte-exact delle risorse pubbliche e del guard inline derivate dall'exporter del sito, inclusi i byte del loader Meta Pixel consent-gated; hostShellFiles pubblica questi byte senza import fra repository.",
+      "reason": "Snapshot byte-exact di site-support, AdSense, Partnerize, Meta Pixel e guardia inline canonica, generato dall’exporter del sito. hostShellFiles verifica nomi e SHA senza import fra repository; i fingerprint identici e quello scalare del contratto bloccano la pubblicazione se gli asset divergono.",
       "baseline": {
         "site": "56aaef2cbbea74f8",
-        "corpus": "4e7c0f6b5a3b02be",
-        "alignedAt": "2026-11-04"
+        "corpus": "07c2c137ef074670",
+        "alignedAt": "2026-11-05"
       }
     },
     {

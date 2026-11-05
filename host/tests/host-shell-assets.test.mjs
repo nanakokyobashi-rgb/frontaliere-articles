@@ -92,18 +92,19 @@ test('ogni file della shell che host/ porta ha il nome derivato dal proprio cont
 
 test('the publisher rejects incomplete, renamed, duplicate or malformed snapshots before ensure', async () => {
   const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
-  const [recovery, ads, partnerize, pixel] = snapshot.assets;
+  const [siteSupport, ads, partnerize, metaPixel] = snapshot.assets;
   const invalid = [
     null, {}, { ...snapshot, assets: null }, { ...snapshot, assets: {} },
     { ...snapshot, assets: [] },
-    { ...snapshot, assets: [recovery] }, { ...snapshot, assets: [ads] },
-    { ...snapshot, assets: [partnerize] }, { ...snapshot, assets: [pixel] },
-    { ...snapshot, assets: [ads, ads] }, { ...snapshot, assets: [ads, partnerize, ads] },
-    { ...snapshot, assets: [null, partnerize] },
-    { ...snapshot, assets: [{ ...ads, name: 'wrong-' + ads.sha256.slice(0, 12) + '.js' }, partnerize] },
-    { ...snapshot, assets: [{ ...ads, content: ads.content + ' ' }, partnerize] },
-    { ...snapshot, assets: [{ ...ads, sha256: 'invalid' }, partnerize] },
-    { ...snapshot, assets: [{ ...ads, content: null }, partnerize] },
+    { ...snapshot, assets: [ads] }, { ...snapshot, assets: [partnerize] },
+    { ...snapshot, assets: [siteSupport, ads, partnerize] },
+    { ...snapshot, assets: [siteSupport, ads, partnerize, ads] },
+    { ...snapshot, assets: [siteSupport, ads, partnerize, metaPixel, ads] },
+    { ...snapshot, assets: [null, ads, partnerize, metaPixel] },
+    { ...snapshot, assets: [siteSupport, { ...ads, name: 'wrong-' + ads.sha256.slice(0, 12) + '.js' }, partnerize, metaPixel] },
+    { ...snapshot, assets: [siteSupport, { ...ads, content: ads.content + ' ' }, partnerize, metaPixel] },
+    { ...snapshot, assets: [siteSupport, { ...ads, sha256: 'invalid' }, partnerize, metaPixel] },
+    { ...snapshot, assets: [siteSupport, { ...ads, content: null }, partnerize, metaPixel] },
   ];
   let ensures = 0;
   for (const supplied of invalid) {
@@ -115,7 +116,7 @@ test('the publisher rejects incomplete, renamed, duplicate or malformed snapshot
   assert.equal(ensures, 0, 'invalid input must stop before network availability/upload checks');
 });
 
-test('the exact four required assets are accepted in either order', () => {
+test('the exact four required assets are accepted in any order', () => {
   const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
   const expected = hostShellFiles().map(([name]) => name).sort();
   for (const assets of [snapshot.assets, [...snapshot.assets].reverse()]) {
@@ -352,7 +353,7 @@ test('ogni job che rende pagine carica i secret di Remote Config prima del passo
 });
 
 // The implicit producer/helper dependency must invalidate the transported bytes.
-test('recovery/Ads/Partnerize/Meta Pixel snapshots match the shared source fingerprint and reject signed startup', () => {
+test('shell asset snapshots match the shared source fingerprint and reject signed startup', () => {
   const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
   const fingerprint = JSON.parse(read('host/third-party-shell-assets-fingerprint.json'));
   assert.deepEqual({ ...snapshot, initialDocumentGuard: { sha256: snapshot.initialDocumentGuard.sha256 }, assets: snapshot.assets.map(({ content: _content, ...asset }) => asset) }, fingerprint);

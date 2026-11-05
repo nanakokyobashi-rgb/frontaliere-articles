@@ -48,6 +48,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.vionnaz-revoca-divieti-acqua.title': 'Vionnaz: revoca divieti acqua potabile dopo 41 giorni',
     'blog.article.vionnaz-revoca-divieti-acqua.excerpt': 'La municipalità di Vionnaz ha dichiarato soddisfacente la situazione delle fonti, ripristinando prati, piscine e veicoli, ma mantenendo le raccomandazioni di risparmio.',
     'blog.article.vionnaz-revoca-divieti-acqua.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.vallese-piano-risparmi-2030.title': 'Vallese: il Consiglio di Stato punta a 180 milioni di risparmi',
+    'blog.article.vallese-piano-risparmi-2030.excerpt': 'L\'articolo di RTS riferisce che il Consiglio di Stato del Vallese deve individuare CHF 180 milioni di risparmi entro il 2030 per mantenere l\'equilibrio del bilancio cantonale.',
+    'blog.article.vallese-piano-risparmi-2030.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVsIt;

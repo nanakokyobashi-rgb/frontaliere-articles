@@ -304,6 +304,12 @@ import {
   decideSlot as _decideSlot,
   incrementCounter as _incrementCounter,
 } from './lib/scheduler/quotaController.mjs';
+import {
+  loadDiscoveryAttemptState as _loadDiscoveryAttemptState,
+  discoveryRecoveryDecision as _discoveryRecoveryDecision,
+  recordDiscoveryAttempt as _recordDiscoveryAttempt,
+  saveDiscoveryAttemptState as _saveDiscoveryAttemptState,
+} from './lib/scheduler/discoveryAttemptState.mjs';
 import { buildDiscoveryPool as _buildDiscoveryPool } from './lib/discovery/discoveryPool.mjs';
 import { attachTrendEvidenceToCandidates, isSecureHttpsUrl } from './lib/discovery/trend-evidence-attribution.mjs';
 import { projectTopicCandidateAttribution } from './lib/topic-candidate-attribution.mjs';
@@ -2096,6 +2102,9 @@ const RUN_REPORT = {
   poolSlotKind: null,
   poolCounterValue: null,
   poolCurrentQuota: null,
+  poolRecoveryEligible: false,
+  poolRecoveryDecision: null,
+  poolRecoveryOutcome: null,
   poolFallbacks: [],
   sources: {
     configured: 0,
@@ -2418,6 +2427,56 @@ function resolveRunRecovery() {
   return registryArticleType(RUN_REPORT.selectedArticleType);
 }
 
+function persistDiscoveryAttemptOutcome(status) {
+  if (RUN_REPORT?.poolRecoveryEligible !== true) return;
+  const poolKind = RUN_REPORT.poolSlotKind;
+  if (!['proven', 'discovery'].includes(poolKind)) return;
+  const generated = status === 'generated' && Boolean(RUN_REPORT.article?.id);
+  if (!generated && !['deferred', 'skipped'].includes(status)) return;
+
+  const state = _loadDiscoveryAttemptState();
+  const next = _recordDiscoveryAttempt(state, {
+    section: RUN_REPORT.section || SECTION_NAME,
+    poolKind,
+    generated,
+  });
+  if (!_saveDiscoveryAttemptState(next)) {
+    RUN_REPORT.poolRecoveryOutcome = { persisted: false, poolKind, generated };
+    console.warn('[discovery-attempt] state write failed; next scheduled run will retry from persisted state');
+    return;
+  }
+  const decision = _discoveryRecoveryDecision(next, { section: RUN_REPORT.section || SECTION_NAME });
+  RUN_REPORT.poolRecoveryOutcome = {
+    persisted: true,
+    poolKind,
+    generated,
+    provenAttempts: decision.provenAttempts,
+    outstandingProvenFailures: decision.outstandingProvenFailures,
+  };
+  console.error(
+    `DISCOVERY_ATTEMPT_STATE section=${RUN_REPORT.section || SECTION_NAME}`
+    + ` pool=${poolKind} generated=${generated ? 1 : 0}`
+    + ` provenAttempts=${decision.provenAttempts}`
+    + ` outstandingProvenFailures=${decision.outstandingProvenFailures}`,
+  );
+}
+
+function writeDiscoveryAttemptMarker({ section, poolKind, recoveryEligible }) {
+  const markerPath = process.env.DISCOVERY_ATTEMPT_MARKER;
+  if (!markerPath || recoveryEligible !== true) return;
+  try {
+    mkdirSync(path.dirname(markerPath), { recursive: true });
+    writeFileSync(markerPath, `${JSON.stringify({
+      schemaVersion: 1,
+      section,
+      poolKind,
+      recoveryEligible: true,
+    })}\n`, 'utf8');
+  } catch (err) {
+    console.warn(`[discovery-attempt] selection marker write failed: ${err?.message || err}`);
+  }
+}
+
 function finalizeRunReport(status, extra = {}) {
   if (REPORT_FINALIZED) return;
   REPORT_FINALIZED = true;
@@ -2425,6 +2484,12 @@ function finalizeRunReport(status, extra = {}) {
   RUN_REPORT.status = status || 'unknown';
   RUN_REPORT.endedAt = new Date().toISOString();
   Object.assign(RUN_REPORT, extra || {});
+  try {
+    persistDiscoveryAttemptOutcome(RUN_REPORT.status);
+  } catch (err) {
+    // Recovery telemetry cannot turn a valid article result into a failed run.
+    console.warn(`[discovery-attempt] outcome recording failed: ${err?.message || err}`);
+  }
   if (RUN_REPORT.status !== 'generated' || !RUN_REPORT.article?.id) {
     RUN_REPORT.discoveryAttribution = null;
     RUN_REPORT.topicCandidateAttribution = null;
@@ -18081,9 +18146,22 @@ async function main() {
     const quotaState = _loadQuotaState();
     const evidenceForDiscovery = _evidenceIndex; // alias — already loaded above
     const slotDecision = _decideSlot(quotaState);
+    const recoveryState = _loadDiscoveryAttemptState();
+    const recoveryDecision = _discoveryRecoveryDecision(recoveryState, { section: SECTION_NAME });
+    const discoveryQuotaOverride = Number(process.env.DISCOVERY_QUOTA_OVERRIDE);
+    const recoveryDisabled = Number.isFinite(discoveryQuotaOverride) && discoveryQuotaOverride === 100;
+    const recoveryEligible = !forceEvergreen
+      && !recoveryDisabled
+      && Boolean(SECTION_PROFILE.discoveryPool)
+      && Boolean(evidenceForDiscovery);
+    const forceRecoveryDiscovery = recoveryDecision.shouldForceDiscovery && recoveryEligible;
     // Sezione cantonale: sempre `proven` (le sue fonti), il pool discovery e'
     // costruito sulla domanda GSC delle sezioni storiche (SECTION_PROFILE).
-    const slotKind = forceEvergreen || !SECTION_PROFILE.discoveryPool ? 'proven' : slotDecision.slotKind;
+    const slotKind = forceEvergreen || !SECTION_PROFILE.discoveryPool || !evidenceForDiscovery
+      ? 'proven'
+      : forceRecoveryDiscovery
+        ? 'discovery'
+        : slotDecision.slotKind;
     let chosenPool = slotKind;
     let _discoveryHeadlines = null;
     let _discoveryCandidatesById = new Map();
@@ -18093,10 +18171,35 @@ async function main() {
     // pool (run 26440805420). The fuzzy matcher in resolveGoogleNewsHeadline
     // needs the FULL proven scan, not the post-gate residue.
     let _provenHeadlinesPreGate = [];
-    RUN_REPORT.poolSlotKind = slotKind;
     RUN_REPORT.poolCounterValue = slotDecision.counterValue;
     RUN_REPORT.poolCurrentQuota = slotDecision.currentQuota;
+    RUN_REPORT.poolRecoveryEligible = recoveryEligible;
+    RUN_REPORT.poolRecoveryDecision = {
+      section: SECTION_NAME,
+      provenAttempts: recoveryDecision.provenAttempts,
+      outstandingProvenFailures: recoveryDecision.outstandingProvenFailures,
+      threshold: recoveryDecision.threshold,
+      forcedDiscovery: forceRecoveryDiscovery,
+      reason: forceRecoveryDiscovery ? 'proven_no_article_recovery' : 'quota_or_counter',
+    };
+    const setAttemptPoolKind = (poolKind) => {
+      chosenPool = poolKind;
+      RUN_REPORT.poolSlotKind = poolKind;
+      writeDiscoveryAttemptMarker({
+        section: SECTION_NAME,
+        poolKind,
+        recoveryEligible: RUN_REPORT.poolRecoveryEligible,
+      });
+    };
+    setAttemptPoolKind(slotKind);
     console.error(`SLOT_DECISION pool=${slotKind} counter=${slotDecision.counterValue} quota=${slotDecision.currentQuota}`);
+    if (forceRecoveryDiscovery) {
+      console.error(
+        `DISCOVERY_RECOVERY_DECISION section=${SECTION_NAME}`
+        + ` outstandingProvenFailures=${recoveryDecision.outstandingProvenFailures}`
+        + ` threshold=${recoveryDecision.threshold} forced=1`,
+      );
+    }
 
     // Helper — convert discovery candidates into headline-shaped objects
     // compatible with rankAndSelectHeadlines (field `headline`, optional `url`).
@@ -18163,7 +18266,7 @@ async function main() {
       if (_discoveryHeadlines.length === 0) {
         console.error('POOL_FALLBACK from=discovery to=proven reason=empty');
         RUN_REPORT.poolFallbacks.push({ from: 'discovery', to: 'proven', reason: 'empty' });
-        chosenPool = 'proven';
+        setAttemptPoolKind('proven');
         headlines = provenHeadlinesForDedup;
       } else {
         headlines = _discoveryHeadlines;
@@ -19363,6 +19466,11 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // selectMinWordsRetryModel()'s back-to-back-duplicate skip below.
   let previousMinWordsModel = null;
   const sourceCopyMode = getSourceCopyMode();
+  // These values are consumed again by the final pre-write gates, after the
+  // retry loop. Keep the state outside the per-attempt block so a successful
+  // generation cannot leave those gates reading a block-scoped binding.
+  let sourceCopyChanged = false;
+  let preTranslationExcerptRepairs = [];
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     // Cost accounting for the rejection ledger. Counted here — at the top of
@@ -19614,6 +19722,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       { articleId: data.id, locale: 'it', mode: sourceCopyMode },
     );
     data.content.it = sourceCopyResult.article;
+    sourceCopyChanged = sourceCopyResult.changed;
     if (sourceCopyResult.rejected) {
       throw new SourceCopyError(
         `Anti-copia strutturale: overlap massimo ${sourceCopyResult.verdict.maxWords} parole consecutive `
@@ -19625,8 +19734,8 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     // Repair generated descriptions before optimizeSeoMetadata applies its
     // completion and minimum-length assertions. The source-copy refresh path
     // performs the same repair after deriving its replacement metadata.
-    let preTranslationExcerptRepairs = [];
-    if (sourceCopyResult.changed) {
+    preTranslationExcerptRepairs = [];
+    if (sourceCopyChanged) {
       refreshSourceCopyDerivedMetadata(data);
     } else {
       preTranslationExcerptRepairs = repairGeneratedArticleDescriptions(data);
@@ -20592,14 +20701,14 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   const excerptRepairs = repairGeneratedArticleDescriptions(data);
   preserveMunicipalityNamesInMetadata(data);
   assertArticleDescriptionsArePlain(data);
-  if (sourceCopyResult.changed || preTranslationExcerptRepairs.length > 0 || excerptRepairs.length > 0) {
+  if (sourceCopyChanged || preTranslationExcerptRepairs.length > 0 || excerptRepairs.length > 0) {
     assertGeneratedArticleQuality(data, {
       cantonBody: bodyTextForCantonPostcondition(data),
     });
   }
   // Metadata repairs can change duplicate admission; check the exact values
   // that will be published after all final metadata normalization.
-  if (sourceCopyResult.changed || sourceCopyFinalChanged
+  if (sourceCopyChanged || sourceCopyFinalChanged
     || preTranslationExcerptRepairs.length > 0 || excerptRepairs.length > 0) {
     console.error('🔍 Verifica duplicati post-riparazione:');
     checkForDuplicates(data);

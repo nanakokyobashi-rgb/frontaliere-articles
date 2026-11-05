@@ -833,6 +833,7 @@ jobs:
             export CREATE_ARTICLE_MAX_WALL_MS=$(( (cap - 60) * 1000 ))
 
             attempt_report="$diag_dir/create-article-run-report-$tried.json"
+            attempt_pool_marker="$diag_dir/discovery-attempt-$sec.json"
             if ! rm -f .tmp/create-article-run-report.json "$attempt_report"; then
               all_declared=false
               outcome_kind="error"
@@ -843,6 +844,8 @@ jobs:
               break
             fi
             export CREATE_ARTICLE_REPORT_FILE="$attempt_report"
+            rm -f "$attempt_pool_marker"
+            export DISCOVERY_ATTEMPT_MARKER="$attempt_pool_marker"
 
             export RUN_CARD_FILE="$diag_dir/run-card-$sec.json"
             if ! rm -f "$RUN_CARD_FILE"; then
@@ -1182,8 +1185,12 @@ jobs:
           set -euo pipefail
           git add -A
           if git diff --cached --quiet; then
-            echo "no article generated this run"
-            exit 0
+            if [ "${{ steps.generate.outputs.cooperative_stop }}" = "true" ] && [ "${{ steps.generate.outputs.article }}" != "true" ]; then
+              echo "no staged article changes; checking cooperative-stop pool markers"
+            else
+              echo "no article generated this run"
+              exit 0
+            fi
           fi
           RUN_REPORT="$RUNNER_TEMP/create-article-run-report.json"
           has_run_report=false
@@ -1191,9 +1198,28 @@ jobs:
             cp .tmp/create-article-run-report.json "$RUN_REPORT"
             has_run_report=true
           elif [ "${{ steps.generate.outputs.cooperative_stop }}" = "true" ] && [ "${{ steps.generate.outputs.article }}" != "true" ]; then
-            echo "::warning::create-article run report is missing after a proven cooperative stop; discarding unreported staged changes and deferring the run"
+            echo "::warning::create-article run report is missing after a proven cooperative stop; discarding unreported changes and preserving only the pool-attempt counters"
             git reset --mixed HEAD
-            exit 0
+            recovery_state='data/discovery-attempt-state.json'
+            if git ls-files --error-unmatch -- "$recovery_state" >/dev/null 2>&1; then
+              git restore --source=HEAD --worktree -- "$recovery_state"
+            else
+              rm -f "$recovery_state"
+            fi
+            shopt -s nullglob
+            recovery_markers=( "${RUNNER_TEMP:-/tmp}/generate-diagnostics/discovery-attempt-"*.json )
+            shopt -u nullglob
+            if [ "${#recovery_markers[@]}" -gt 0 ]; then
+              node generator/scripts/record-discovery-attempt.mjs "${recovery_markers[@]}"
+              git add -- "$recovery_state"
+              if git diff --cached --quiet; then
+                echo "no new discovery recovery counter to commit"
+                exit 0
+              fi
+            else
+              echo "no eligible discovery pool was selected; no recovery counter to commit"
+              exit 0
+            fi
           elif [ "${{ steps.generate.outputs.article }}" != "true" ] && [ "${{ steps.generate.outputs.declared }}" = "true" ]; then
             staged_content="$(git diff --cached --name-only -- content/ || true)"
             if [ -n "$staged_content" ]; then
