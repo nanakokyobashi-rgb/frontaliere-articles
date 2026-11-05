@@ -13,6 +13,7 @@ import {
 import {
   decideDailyMintGate,
   normalizeDailyItemIdsForKey,
+  rebuildDailyBody,
 } from '../../scripts/ci/gate-minted-followups.mjs';
 import {
   dailyBucketCloseGate,
@@ -101,6 +102,26 @@ test('la preflight di recovery può estrarre le Sources dopo la normalizzazione'
 
   assert.equal(hasDailyBucketRepositoryConsistency(recoveredBody, 'owner/repo'), true);
   assert.deepEqual(dailyBucketSourcePrNumbers(recoveredBody), [1398]);
+});
+
+test('il rebuild del gate normalizza i separatori letterali fra item FU', () => {
+  const serializedBreak = String.raw`\n\n`;
+  const body = [
+    `### FU-${DAY}-001 — primo item`,
+    '- State: open',
+    `- Sources: PR #1398${serializedBreak}### FU-${DAY}-002 — secondo item`,
+    '- State: blocked',
+    '- Sources: PR #1399',
+  ].join('\n');
+  const items = parseFollowupItems(body);
+
+  const rebuilt = rebuildDailyBody('State: collecting', items);
+  assert.equal(rebuilt.includes(serializedBreak), false);
+  assert.match(rebuilt, new RegExp(`\\n\\n### FU-${DAY}-002`));
+  assert.deepEqual(
+    parseFollowupItems(rebuilt).map((item) => `${item.id}:${item.state}`),
+    [`FU-${DAY}-001:open`, `FU-${DAY}-002:blocked`],
+  );
 });
 
 test('il reconciler usa l acceptance token strutturale del daily item', () => {

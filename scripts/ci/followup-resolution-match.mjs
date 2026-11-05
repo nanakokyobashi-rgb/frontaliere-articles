@@ -817,7 +817,21 @@ export function hasFalsifiableAcceptance(itemText) {
  * gli item stabili possono vivere a H2, mentre quelli numerati restano a H3.
  * un blocco fenced resta materia per il controllo lossless del mint gate.
  */
-const FOLLOWUP_ITEM_HEADING_LINE_RE = /^(#{2,3})\s+(?:(FU-\d{4}-\d{2}-\d{2}-\d{3})\s*[—–-]\s*(.*?)|(\d+)\.\s*(.*))\s*$/i;
+// Il titolo dopo un ID FU è facoltativo: alcuni bucket storici hanno emesso
+// `### FU-YYYY-MM-DD-NNN` senza il separatore e il titolo.
+const FOLLOWUP_ITEM_HEADING_LINE_RE = /^(#{2,3})\s+(?:(FU-\d{4}-\d{2}-\d{2}-\d{3})(?:\s*[—–-]\s*(.*?))?|(\d+)\.\s*(.*))\s*$/i;
+
+// Alcuni body storici hanno serializzato il separatore fra due item come i
+// caratteri letterali `\\n\\n`, invece di due newline Markdown. Accettarlo in
+// modo generico trasformerebbe testo o codice in struttura; il caso sicuro è
+// solo la sequenza immediatamente seguita da un heading FU stabile.
+const ESCAPED_DAILY_ITEM_BOUNDARY_RE = /(?:\\n)+[ \t]*(?=#{2,3}\s+FU-\d{4}-\d{2}-\d{2}-\d{3}\b)/giu;
+const ESCAPED_DAILY_ITEM_SUFFIX_RE = /(?:\\n)+[ \t]*$/u;
+
+/** Rimuove il separatore serializzato dalla coda di un item già riconosciuto. */
+export function stripEscapedDailyItemBoundary(value) {
+  return String(value || '').replace(ESCAPED_DAILY_ITEM_SUFFIX_RE, '');
+}
 
 /**
  * Split Markdown into lines while marking fenced/quoted lines as protected.
@@ -852,6 +866,32 @@ function markdownRecords(text) {
     enumerable: false,
   });
   return records;
+}
+
+/**
+ * Aggiunge record virtuali solo per heading FU stabili preceduti da `\\n`.
+ * Gli offset restano quelli del body originale, così gli aggiornamenti di stato
+ * continuano a sostituire il campo giusto senza riscrivere il resto dell'item.
+ */
+function itemHeadingRecords(text) {
+  const records = markdownRecords(text);
+  const expanded = [];
+  for (const record of records) {
+    expanded.push(record);
+    if (record.protected) continue;
+    for (const boundary of record.line.matchAll(ESCAPED_DAILY_ITEM_BOUNDARY_RE)) {
+      const offset = boundary.index + boundary[0].length;
+      const line = record.line.slice(offset);
+      if (!FOLLOWUP_ITEM_HEADING_LINE_RE.test(line)) continue;
+      expanded.push({
+        ...record,
+        line,
+        start: record.start + offset,
+        serializedBoundary: true,
+      });
+    }
+  }
+  return expanded;
 }
 
 /** True when Markdown opens a fenced block and never closes it. */
@@ -931,7 +971,8 @@ function replaceFirstUnprotectedField(text, field, value) {
 /**
  * Parse both legacy numbered items and stable `FU-YYYY-MM-DD-NNN` items.
  * `text` intentionally preserves the old split semantics: it starts immediately after
- * the heading, so existing acceptance/matcher callers and tests remain unchanged.
+ * the heading. A recognized serialized boundary is removed only from `text`; `raw`
+ * remains byte-exact so lossless rewrites and generated content keep their offsets.
  *
  * @param {string} body
  * @returns {Array<{id:string|null, number:number|null, title:string, heading:string,
@@ -942,10 +983,16 @@ export function parseFollowupItems(body) {
   const source = String(body || '');
   const unterminatedFence = hasUnterminatedMarkdownFence(source);
   const matches = [];
-  for (const record of markdownRecords(source)) {
+  for (const record of itemHeadingRecords(source)) {
     if (record.protected) continue;
     const match = FOLLOWUP_ITEM_HEADING_LINE_RE.exec(record.line);
-    if (match && (match[1] === '###' || match[2])) matches.push({ ...match, index: record.start });
+    if (match && (match[1] === '###' || match[2])) {
+      matches.push({
+        ...match,
+        index: record.start,
+        serializedBoundary: record.serializedBoundary === true,
+      });
+    }
   }
   const parsed = matches.map((match, index) => {
     const heading = match[0];
@@ -957,7 +1004,11 @@ export function parseFollowupItems(body) {
     const contentStart = match[4]
       ? start + heading.indexOf('.') + 1
       : start + heading.length;
-    const text = source.slice(contentStart, end);
+    const raw = source.slice(start, end);
+    const itemText = source.slice(contentStart, end);
+    const text = matches[index + 1]?.serializedBoundary
+      ? stripEscapedDailyItemBoundary(itemText)
+      : itemText;
     const id = match[2] || null;
     const number = match[4] ? Number(match[4]) : null;
     const title = (match[3] ?? match[5] ?? '').trim();
@@ -969,7 +1020,7 @@ export function parseFollowupItems(body) {
       start,
       end,
       text,
-      raw: source.slice(start, end),
+      raw,
       state: itemStateFromText(text),
       targetRepository: itemFieldFromText(text, 'Target repository'),
       targetFile: itemFieldFromText(text, 'Target file'),

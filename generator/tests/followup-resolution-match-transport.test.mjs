@@ -28,8 +28,8 @@ const FIRST_ALIGNED_AT = '2026-09-13';
 const DIGEST_RE = /^[0-9a-f]{16}$/;
 
 /**
- * The export surface shared with the site twin (50 names on both sides when
- * site PRs 8570, 8632, 8686, 10829 and 11232 were ported). A site change that
+ * The export surface shared with the site twin (51 names on both sides when
+ * site PRs 8570, 8632, 8686, 10829, 11232 and 15901 were ported). A site change that
  * adds an export is ported here together with this list; dropping one of
  * these from the corpus twin breaks a consumer that the site contract feeds.
  */
@@ -46,7 +46,8 @@ const SITE_CONTRACT_EXPORTS = [
   'hasUnterminatedMarkdownFence', 'isDailyBucketTitle', 'isDistinctiveToken',
   'maskInlineCodeSpans', 'mergeDailyItemSources', 'metricAlreadyGreen', 'mostSpecificToken',
   'normalizeAcceptanceToken', 'normalizeFingerprintPart', 'parseFollowupItems', 'schedaCommand',
-  'selectFirstOpenItem', 'splitFollowupItems', 'stripFencedBlocks', 'suggestedActionText',
+  'selectFirstOpenItem', 'splitFollowupItems', 'stripEscapedDailyItemBoundary', 'stripFencedBlocks',
+  'suggestedActionText',
   'updateFollowupItemState',
 ];
 
@@ -74,9 +75,9 @@ test('the corpus twin keeps every export of the site locator contract', async ()
   const twin = await import(pathToFileURL(path.join(ROOT, RELATIVE_PATH)).href);
   const missing = SITE_CONTRACT_EXPORTS.filter((name) => !(name in twin));
 
-  assert.equal(SITE_CONTRACT_EXPORTS.length, 50);
+  assert.equal(SITE_CONTRACT_EXPORTS.length, 51);
   assert.deepEqual(missing, []);
-  for (const name of ['stripFencedBlocks', 'countAggregateHeadingItems', 'dedupeDailyItems', 'parseFollowupItems']) {
+  for (const name of ['stripEscapedDailyItemBoundary', 'stripFencedBlocks', 'countAggregateHeadingItems', 'dedupeDailyItems', 'parseFollowupItems']) {
     assert.equal(typeof twin[name], 'function', name);
   }
 });

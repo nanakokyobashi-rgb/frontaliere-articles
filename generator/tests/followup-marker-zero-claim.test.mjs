@@ -644,6 +644,25 @@ test('la prova diretta nel bucket non dipende dagli istanti', () => {
   assert.equal(verifyTriageMarkerPersistence(MINT_GATE_MARKER, 1535, () => bucket), true);
 });
 
+test('la persistenza riconosce Sources dopo un boundary serializzato e ignora le fence', () => {
+  const serializedBreak = String.raw`\n\n`;
+  const bucket = {
+    number: 9210,
+    title: 'follow-up(daily:2026-10-07): 2 items — owner/repo',
+    body: [
+      '### FU-2026-10-07-001 — primo item',
+      `- Sources: PR #8102${serializedBreak}### FU-2026-10-07-002 — secondo item`,
+      '- Sources: PR #8101',
+      '```md',
+      '- Sources: PR #9999',
+      '```',
+    ].join('\n'),
+  };
+
+  assert.equal(persistedBucketIssueMatches(bucket, 8101), true);
+  assert.equal(persistedBucketIssueMatches(bucket, 9999), false);
+});
+
 test('la prova del gate resta fail-closed per bucket o PR diversi', () => {
   const comments = JSON.stringify({ comments: [{ body: [
     '<!-- followup-mint-gate -->',
