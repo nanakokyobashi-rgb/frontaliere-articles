@@ -4,29 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261030-en-france-le-pib-recule-et-l-economie-francaise-est-a-l-arret.html": {
+    "canton-ne::https://www.rts.ch/info/regions/vaud/2026/article/vaud-et-neuchatel-lancent-un-numero-unique-pour-la-sante-29402837.html": {
       "section": "canton-ne",
-      "ts": 1793472761563
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261030-les-perspectives-de-l-economie-suisse-restent-solides.html": {
-      "section": "canton-ne",
-      "ts": 1793472770879
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261030-benefice-net-de-19-07-milliards-pour-la-bns-au-3e-trimestre.html": {
-      "section": "canton-ne",
-      "ts": 1793472779232
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261030-le-patron-de-micasa-demissionne.html": {
-      "section": "canton-ne",
-      "ts": 1793527522712
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261101-bhoutan-40-000-volontaires-batissent-108-stupas-pour-une-cite.html": {
-      "section": "canton-ne",
-      "ts": 1793527528686
-    },
-    "canton-ne::https://www.letemps.ch/suisse/neuchatel/comment-le-canton-de-neuchatel-a-transforme-l-echec-du-transrun-en-strategie-multimodale-plebiscitee-par-la-confederation": {
-      "section": "canton-ne",
-      "ts": 1793547082890
+      "ts": 1793890484041
     }
   }
 }

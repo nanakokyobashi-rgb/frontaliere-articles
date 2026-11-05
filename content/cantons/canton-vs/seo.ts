@@ -616,6 +616,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-aumento-tasso-disoccupazione-ottobre': {
+    title: 'Aumento tasso disoccupazione ottobre in Canton Vallese',
+    description: 'A fine ottobre 6\'082 disoccupati in Vallese; tasso al 3,3% (+0,2 punti). Aumento guidato da alberghiero-ristorazione e agricoltura.',
+    keywords: 'frontalieri, ticino, svizzera, italia, aumento, tasso, disoccupazione, ottobre',
+    ogTitle: 'Tasso disoccupazione Vallese ottobre 3,3%',
+    ogDescription: 'A fine ottobre 6\'082 disoccupati iscritti in Vallese. Il tasso è al 3,3%, con un aumento di 0,2 punti, concentrato nei settori alberghiero-ristorazione e agricoltura.',
+    canonicalPath: '/articoli-vallese/aumento-tasso-disoccupazione-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aumento tasso disoccupazione ottobre in Canton Vallese",
+      "description": "A fine ottobre 6'082 disoccupati in Vallese; tasso al 3,3% (+0,2 punti). Aumento guidato da alberghiero-ristorazione e agricoltura.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-aumento-tasso-disoccupazione-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-05T14:49:33+00:00",
+      "dateModified": "2026-11-05T14:49:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/aumento-tasso-disoccupazione-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

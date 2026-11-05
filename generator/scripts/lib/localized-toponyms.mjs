@@ -567,13 +567,52 @@ export function createLocalizedToponymSourceProfile(sourceText = '') {
   };
 }
 
-export function createLocalizedToponymSourceProfileCache() {
+export const LOCALIZED_TOPONYM_SOURCE_PROFILE_CACHE_LIMIT = 128;
+const SOURCE_PROFILE_CACHE_REFERENCES = new Set();
+
+export function clearLocalizedToponymSourceProfiles() {
+  let cleared = 0;
+  for (const reference of SOURCE_PROFILE_CACHE_REFERENCES) {
+    const profiles = reference.deref();
+    if (!profiles) {
+      SOURCE_PROFILE_CACHE_REFERENCES.delete(reference);
+      continue;
+    }
+    cleared += profiles.size;
+    profiles.clear();
+  }
+  return cleared;
+}
+
+export function createLocalizedToponymSourceProfileCache({
+  maxEntries = LOCALIZED_TOPONYM_SOURCE_PROFILE_CACHE_LIMIT,
+} = {}) {
+  if (!Number.isSafeInteger(maxEntries) || maxEntries < 1) {
+    throw new RangeError('maxEntries della cache toponimi deve essere un intero positivo.');
+  }
   const profiles = new Map();
-  return (sourceText = '') => {
+  SOURCE_PROFILE_CACHE_REFERENCES.add(new WeakRef(profiles));
+  const getProfile = (sourceText = '') => {
     const text = String(sourceText ?? '');
-    if (!profiles.has(text)) profiles.set(text, createLocalizedToponymSourceProfile(text));
-    return profiles.get(text);
+    const cached = profiles.get(text);
+    if (cached) {
+      // Keep frequently reused source projections alive while retaining the
+      // hard bound during a complete corpus repair.
+      profiles.delete(text);
+      profiles.set(text, cached);
+      return cached;
+    }
+    if (profiles.size >= maxEntries) profiles.delete(profiles.keys().next().value);
+    const profile = createLocalizedToponymSourceProfile(text);
+    profiles.set(text, profile);
+    return profile;
   };
+  Object.defineProperties(getProfile, {
+    size: { get: () => profiles.size },
+    maxEntries: { value: maxEntries },
+    clear: { value: () => profiles.clear() },
+  });
+  return getProfile;
 }
 
 /**

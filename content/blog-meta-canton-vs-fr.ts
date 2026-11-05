@@ -51,6 +51,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.vallese-piano-risparmi-2030.title': 'Valais : Conseil d’État vise 180 millions d’économies',
     'blog.article.vallese-piano-risparmi-2030.excerpt': 'L’article de la RTS rapporte que le Conseil d’État du Valais doit prévoir 180 millions de CHF d’économies d’ici 2030 pour maintenir le solde du budget cantonal.',
     'blog.article.vallese-piano-risparmi-2030.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.aumento-tasso-disoccupazione-ottobre.title': 'Hausse du taux de chômage en octobre dans le canton du Valais',
+    'blog.article.aumento-tasso-disoccupazione-ottobre.excerpt': 'Fin octobre, 6 082 chômeurs étaient enregistrés auprès des Bureaux régionaux de l’emploi du Valais, soit 327 de plus que le mois précédent.',
+    'blog.article.aumento-tasso-disoccupazione-ottobre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVsFr;

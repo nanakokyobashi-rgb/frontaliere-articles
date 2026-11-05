@@ -28,6 +28,10 @@ export const SENTENCE_ABBREVIATIONS = Object.freeze([
 ]);
 const SENTENCE_ABBREVIATION_SET = new Set(SENTENCE_ABBREVIATIONS.map((value) => value.toLocaleLowerCase()));
 const MULTI_INITIAL_ABBREVIATION_RE = /^(?:[A-ZÀ-ÖØ-Þ]\.){2,}$/u;
+const GERMAN_FALLBACK_ABBREVIATION_SET = new Set([
+  ...SENTENCE_ABBREVIATION_SET,
+  'abk.', 'bez.', 'd.h.', 'gem.', 'inkl.', 'insb.', 'kant.', 'kt.', 'reg.', 'str.', 'vgl.',
+]);
 const GERMAN_DATE_ORDINAL_PREFIX_RE = /(?:^|\s)(?:am|ab dem|seit dem|dem|den|zum|bis zum|vom)\s+\d{1,2}$/iu;
 const TERMINAL_DATE_FRAGMENT_RE = /(?:^|\s)(?:am|ab dem|seit dem|dem|den|zum|bis zum|vom|on|from|until|le|du|au|dal|al|il|per il|entro(?: il)?|da|scadenza|deadline)\s+\d{1,2}$/iu;
 const TERMINAL_DATE_RANGE_YEAR_FRAGMENT_RE = /\b(?:dal|da|from|du|de|vom)\s+\d{1,2}\s+(?:al|au|to|bis)\s+\d{1,2}\s+(?:gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre|january|february|march|april|may|june|july|august|september|october|november|december|januar|februar|märz|mai|juni|juli|oktober|dezember|janvier|février|juin|juillet|août|septembre|octobre|décembre)\s+\d{1,2}$/iu;
@@ -254,11 +258,39 @@ function isContextualTerminalInitial(text, tokenStart, token) {
   return TERMINAL_LABEL_INITIAL_CONTEXT_RE.test(String(text ?? '').slice(0, tokenStart));
 }
 
+/**
+ * Keep German body fallback segments together when Intl.Segmenter splits on
+ * an ordinal, an abbreviation, or a Swiss regional toponym such as St. Gallen.
+ */
+export function germanFallbackBoundary(text, periodIndex) {
+  const content = String(text ?? '');
+  if (periodIndex < 0 || content[periodIndex] !== '.') return false;
+  const previous = content[periodIndex - 1] ?? '';
+  const next = content[periodIndex + 1] ?? '';
+  if (/\d/u.test(previous) && /\d/u.test(next)) return true;
+
+  let start = periodIndex;
+  while (start > 0 && /[\p{L}\p{N}.]/u.test(content[start - 1])) start -= 1;
+  let end = periodIndex + 1;
+  while (end < content.length && /[\p{L}\p{N}.]/u.test(content[end])) end += 1;
+  const token = content.slice(start, end);
+  const lowerToken = token.toLocaleLowerCase();
+  if (/^[BCG]\.$/u.test(token) && isTerminalPermitCodeOrCelsiusUnit(content, start, token)) return false;
+  if (GERMAN_FALLBACK_ABBREVIATION_SET.has(lowerToken) || MULTI_INITIAL_ABBREVIATION_RE.test(token)) return true;
+  if (/^[A-ZÀ-ÖØ-Þ]\.$/u.test(token)) return !isContextualTerminalInitial(content, start, token);
+
+  // The next word may be wrapped in inline Markdown in a generated body.
+  return /(?:^|\s)\d{1,2}$/u.test(content.slice(0, periodIndex))
+    && /^\s+(?:(?:[*_~`]+\s*)?[\p{L}])/u.test(content.slice(periodIndex + 1));
+}
+
 function isNonSentencePeriod(text, periodIndex, locale = '') {
   if (periodIndex < 0 || text[periodIndex] !== '.') return false;
   const previous = text[periodIndex - 1] ?? '';
   const next = text[periodIndex + 1] ?? '';
   if (/\d/u.test(previous) && /\d/u.test(next)) return true;
+  if (String(locale ?? '').toLowerCase().split('-')[0] === 'de'
+    && germanFallbackBoundary(text, periodIndex)) return true;
 
   let start = periodIndex;
   while (start > 0 && /[\p{L}\p{N}.]/u.test(text[start - 1])) start -= 1;
@@ -270,11 +302,6 @@ function isNonSentencePeriod(text, periodIndex, locale = '') {
   if (/^[BCG]\.$/u.test(token) && isTerminalPermitCodeOrCelsiusUnit(text, start, token)) return false;
   if (/^[A-ZÀ-ÖØ-Þ]\.$/u.test(token)) return !isContextualTerminalInitial(text, start, token);
 
-  // German date ordinals continue into the following word (for example,
-  // "am 17. Mai"). A terminal ordinal is handled as an incomplete date.
-  if (String(locale ?? '').toLowerCase().split('-')[0] === 'de'
-    && /(?:^|\s)\d{1,2}$/u.test(text.slice(0, periodIndex))
-    && /^\s+[\p{L}]/u.test(text.slice(periodIndex + 1))) return true;
   return false;
 }
 
@@ -325,7 +352,8 @@ export function endsWithSentenceAbbreviation(value, { locale = '' } = {}) {
   if (/^[A-ZÀ-ÖØ-Þ]\.$/u.test(text.slice(start))
     && isContextualTerminalInitial(text, start, text.slice(start))) return false;
   const language = String(locale ?? '').toLowerCase().split('-')[0];
-  return SENTENCE_ABBREVIATION_SET.has(token)
+  const abbreviations = language === 'de' ? GERMAN_FALLBACK_ABBREVIATION_SET : SENTENCE_ABBREVIATION_SET;
+  return abbreviations.has(token)
     || MULTI_INITIAL_ABBREVIATION_RE.test(rawToken)
     || /^[A-ZÀ-ÖØ-Þ]\.$/u.test(text.slice(start))
     || (language === 'de' && GERMAN_DATE_ORDINAL_PREFIX_RE.test(text.replace(/\.$/u, '')));
