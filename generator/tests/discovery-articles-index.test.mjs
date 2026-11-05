@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import {
   buildDiscoveryArticleShadow,
   buildDiscoveryArticlesIndex,
+  isSafeId,
   normalizeDiscoveryProvider,
   parseDiscoverySidecar,
 } from '../../scripts/lib/discovery-articles-index.mjs';
@@ -178,6 +179,40 @@ describe('discovery article index projection', () => {
     assert.equal(payload.articles.some(({ id }) => id === 'not-published'), false);
   });
 
+  test('accepts every non-empty registry id, including Unicode ids', () => {
+    const id = 'articolo-é🚲';
+    const section = publishedSection();
+    section.registry.push({ id, date: '2026-11-02' });
+    section.slugMap[id] = {
+      it: 'articolo-e-bici',
+      en: 'article-e-bike',
+      de: 'artikel-e-fahrrad',
+      fr: 'article-e-velo',
+    };
+    for (const [locale, title, excerpt] of [
+      ['it', 'Titolo Unicode', 'Sintesi Unicode'],
+      ['en', 'Unicode title', 'Unicode summary'],
+      ['de', 'Unicode-Titel', 'Unicode-Zusammenfassung'],
+      ['fr', 'Titre Unicode', 'Résumé Unicode'],
+    ]) {
+      section.metaByLocale[locale].set(id, { title, excerpt });
+    }
+    section.sidecars.set(id, {
+      id,
+      publishedAt: '2026-11-02T09:15:00.000Z',
+      _discovery_attribution: { candidateId: 'trend-unicode', signalProvider: 'google-trends' },
+    });
+
+    assert.equal(isSafeId(id), true);
+    assert.equal(isSafeId(''), false);
+    const payload = buildDiscoveryArticlesIndex({
+      commit: 'u'.repeat(40),
+      generatedAt: '2026-11-05T10:00:00.000Z',
+      sections: [section],
+    });
+    assert.equal(payload.articles.some((article) => article.id === id), true);
+  });
+
   test('excludes canonical shadows, retired editions, registry withdrawals and ledger rows', () => {
     const shadowed = buildDiscoveryArticleShadow({
       canonicalSlugs: ['trend-article-it'],
@@ -256,5 +291,6 @@ describe('discovery article index projection', () => {
     assert.match(builder, /canonicalOverrides:\s*section\.canonicalOverrides/);
     assert.match(builder, /retiredDailyEditions:\s*section\.retiredDailyEditions/);
     assert.match(builder, /buildDiscoveryArticleShadow\(/);
+    assert.match(builder, /isSafeId\(id\)/);
   });
 });

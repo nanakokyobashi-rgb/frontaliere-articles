@@ -15,9 +15,17 @@ function isRecord(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
-function isSafeId(value) {
-  return typeof value === 'string'
-    && /^[A-Za-z0-9][A-Za-z0-9._-]{0,180}$/u.test(value);
+/**
+ * The registry contract accepts any non-empty string as an article id.
+ * Keep this predicate shared with the on-disk sidecar reader so a valid
+ * registry row cannot disappear from the discovery projection at either
+ * boundary.
+ *
+ * @param {unknown} value
+ * @returns {value is string}
+ */
+export function isSafeId(value) {
+  return typeof value === 'string' && value.length > 0;
 }
 
 function isNonEmptyString(value) {

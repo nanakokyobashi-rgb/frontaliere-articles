@@ -98,6 +98,7 @@ import { loadDeclaredRegistry, registryRetiredSlugs } from './lib/section-regist
 import {
   buildDiscoveryArticleShadow,
   buildDiscoveryArticlesIndex,
+  isSafeId,
   parseDiscoverySidecar,
 } from './lib/discovery-articles-index.mjs';
 import { selectRetiredDailyEditions } from '../generator/scripts/lib/daily-brief-content.mjs';
@@ -327,7 +328,7 @@ function readDiscoverySidecars(section, registry) {
 
   for (const article of registry) {
     const id = article?.id;
-    if (typeof id !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,180}$/u.test(id)) continue;
+    if (!isSafeId(id)) continue;
     const file = path.join(sidecarDir, `${id}.json`);
     if (!fs.existsSync(file)) continue;
     try {
