@@ -70,9 +70,10 @@ import path from 'node:path';
 // small bootstrap fallback so a missing sibling is reported by the collector
 // itself rather than preventing any output before the watermark guard runs.
 let dailyBucketInfo;
+let dailyBucketSourcePrNumbers;
 let dailyKeyZurich;
 try {
-  ({ dailyBucketInfo, dailyKeyZurich } = await import('./followup-resolution-match.mjs'));
+  ({ dailyBucketInfo, dailyBucketSourcePrNumbers, dailyKeyZurich } = await import('./followup-resolution-match.mjs'));
 } catch {
   dailyKeyZurich = (nowMs = Date.now()) => new Intl.DateTimeFormat('en-CA', {
     timeZone: 'Europe/Zurich', year: 'numeric', month: '2-digit', day: '2-digit',
@@ -81,6 +82,7 @@ try {
     const m = /^follow-up\(daily:(\d{4}-\d{2}-\d{2})\):\s+(\d+)\s+items?\b/i.exec(String(title));
     return m ? { dailyKey: m[1], count: Number(m[2]) } : null;
   };
+  dailyBucketSourcePrNumbers = () => [];
 }
 
 const TRIAGE_COMMENT_PREFIX = '## Post-merge follow-up triage';
@@ -811,10 +813,8 @@ export function gatePreservedFollowupMatches(commentsJson, bucketNumber, prNumbe
 export function persistedBucketIssueMatches(issue, prNumber, prComments = '', markerCreatedAt = undefined) {
   const info = dailyBucketInfo(issue?.title || '');
   const body = String(issue?.body || '');
-  const pr = String(Number(prNumber));
   if (!info) return false;
-  const directEvidence = /^###\s+FU-\d{4}-\d{2}-\d{2}-\d{3}\b/m.test(body)
-    && new RegExp('^\\s*-\\s+Sources?\\s*:[^\\n]*\\bPR\\s+#' + pr + '\\b', 'im').test(body);
+  const directEvidence = dailyBucketSourcePrNumbers(body).includes(Number(prNumber));
   return directEvidence || gatePreservedFollowupMatches(prComments, issue.number, prNumber, markerCreatedAt);
 }
 
