@@ -6939,6 +6939,16 @@
         "corpus": "d21de5ef15e50746",
         "alignedAt": "2026-11-04"
       }
+    },
+    {
+      "path": "scripts/lib/discovery-articles-index.mjs",
+      "mode": "corpus-only",
+      "reason": "Proiezione publisher che legge registry e sidecar del corpus e pubblica l’indice localizzato degli articoli discovery. Il sito consuma l’artefatto HTTP e non importa questo modulo.",
+      "baseline": {
+        "site": null,
+        "corpus": "79d274c6bff74fb9",
+        "alignedAt": "2026-11-05"
+      }
     }
   ]
 }

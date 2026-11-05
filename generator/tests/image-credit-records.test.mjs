@@ -395,7 +395,11 @@ function blogIndexTree() {
 test('build-blog-index publishes image-credits-<section>.json beside the index, declared in the manifest', () => {
   const root = blogIndexTree();
   try {
-    writeRaw(root, 'dist/api/manifest.json', JSON.stringify({ schema: 1, commit: 'f00dfeed', counts: {}, files: {} }));
+    const releaseCommit = 'f00dfeed';
+    writeRaw(root, 'dist/api/manifest.json', JSON.stringify({ schema: 1, commit: releaseCommit, counts: {}, files: {} }));
+    writeRaw(root, 'dist/api/slugs.json', JSON.stringify({ commit: releaseCommit, blog: {}, swiss: {} }));
+    writeRaw(root, 'dist/api/articles.json', '[]');
+    writeRaw(root, 'dist/api/swiss-articles.json', '[]');
     const result = spawnSync(process.execPath, [path.join(root, 'scripts/build-blog-index.mjs')], { cwd: root, encoding: 'utf8' });
     assert.equal(result.status, 0, result.stdout + result.stderr);
     const sectionNames = CORPUS_SECTIONS.map(({ section }) => section);
