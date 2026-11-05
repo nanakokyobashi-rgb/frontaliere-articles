@@ -410,6 +410,25 @@ export function publisherStatusIsComplete(status) {
 }
 
 const PUBLISHER_STATUSES = new Set(['success', 'failed', 'in-progress', 'not-started']);
+const PUBLISHER_DEFERRED_STATUSES = new Set(['in-progress', 'not-started']);
+
+/**
+ * A terminal publisher failure tied to an observed run is durable evidence
+ * that its run is no longer active. Keep that failure visible, but do not let
+ * it starve unrelated cover generation; an active, not-yet-started, or
+ * dispatch-ambiguous publisher blocks generation.
+ */
+export function publisherStatusDisposition(status) {
+  const sections = Array.isArray(status?.sections) ? status.sections : [];
+  const publisherDeferred = sections.some((section) => PUBLISHER_DEFERRED_STATUSES.has(section?.status)
+    || (section?.status === 'failed' && !String(section?.runId || '').trim()));
+  return {
+    publisherComplete: publisherStatusIsComplete(status),
+    publisherFailed: sections.some((section) => section?.status === 'failed'),
+    publisherDeferred,
+    generationAllowed: !publisherDeferred,
+  };
+}
 
 export function validatePublisherStatus(outbox, status) {
   validateOutbox(outbox);
