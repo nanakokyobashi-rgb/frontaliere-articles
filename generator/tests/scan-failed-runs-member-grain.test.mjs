@@ -285,6 +285,9 @@ test('log vero, 2 membri falliti su 23 senza guasto condiviso → 2 report per m
   assert.match(capri.description, /Workday Versace Switzerland search returned a malformed page at offset 0/);
   assert.match(capri.description, /##\[error\]capri-holdings: crawler exited with status 1/);
   assert.doesNotMatch(capri.description, /Fust crawler failed|fust: crawler exited/);
+  // Se l'API non ha restituito il path, il reporter conserva l'unknown invece
+  // di derivare un workflow da nome del gruppo o dalla convenzione dei file.
+  assert.doesNotMatch(fust.description, /Workflow file:/);
   // Il contesto dell'ondata resta: ogni membro nomina gli altri falliti.
   assert.match(fust.description, /Altri membri falliti nella stessa run: `capri-holdings`/);
   assert.match(capri.description, /Altri membri falliti nella stessa run: `fust`/);
@@ -293,6 +296,31 @@ test('log vero, 2 membri falliti su 23 senza guasto condiviso → 2 report per m
     assert.ok(report.description.includes(REAL_RUN.url));
     assert.match(report.description, new RegExp(`step \`Run ${report.slug}\``));
   }
+});
+
+test('il path del workflow verificato arriva a ogni report per-membro e al report aggregato', () => {
+  const workflowPath = '.github/workflows/crawler-group-23.yml';
+  const memberReports = buildCrawlerFailureReports({
+    log: REAL_LOG,
+    run: REAL_RUN,
+    workflowName: GROUP,
+    workflowPath,
+    jobLines: JOB_LINES,
+  });
+  assert.equal(memberReports.length, 2);
+  for (const report of memberReports) {
+    assert.match(report.description, /- Workflow file: `\.github\/workflows\/crawler-group-23\.yml`/);
+  }
+
+  const [groupReport] = buildCrawlerFailureReports({
+    log: withoutVerdict(REAL_LOG),
+    run: REAL_RUN,
+    workflowName: GROUP,
+    workflowPath,
+    jobLines: JOB_LINES,
+  });
+  assert.equal(groupReport.groupLevel, true);
+  assert.match(groupReport.description, /- Workflow file: `\.github\/workflows\/crawler-group-23\.yml`/);
 });
 
 test('una causa che non si sa attribuire a un membro resta nel report di tutti', () => {

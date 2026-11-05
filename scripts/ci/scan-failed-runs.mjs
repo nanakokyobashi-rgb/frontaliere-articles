@@ -1739,8 +1739,22 @@ export function crawlerReportGrain({ failures = [], hasSharedFailure = false, ve
   return { grain: 'member', reason: 'minority-failed' };
 }
 
-function buildCrawlerGroupReport({ failures, diagnostics, hasSharedFailure, run, workflowName, grainReason }) {
+function crawlerWorkflowPathBullet(workflowPath) {
+  const path = typeof workflowPath === 'string' ? workflowPath.trim() : '';
+  return path ? `- Workflow file: \`${path}\`` : '';
+}
+
+function buildCrawlerGroupReport({
+  failures,
+  diagnostics,
+  hasSharedFailure,
+  run,
+  workflowName,
+  workflowPath,
+  grainReason,
+}) {
   const group = workflowName || 'crawler group';
+  const workflowPathLine = crawlerWorkflowPathBullet(workflowPath);
   const evidence = diagnostics.length
     ? diagnostics
     : failures.flatMap(({ lines }) => lines);
@@ -1755,6 +1769,7 @@ function buildCrawlerGroupReport({ failures, diagnostics, hasSharedFailure, run,
     `- Run: ${run?.url || '?'}`,
     `- Branch: \`${run?.headBranch || '?'}\``,
     `- Evento: \`${run?.event || '?'}\``,
+    ...(workflowPathLine ? [workflowPathLine] : []),
     `- Concluso: ${run?.updatedAt || run?.createdAt || '?'}`,
     '',
     '**Esiti membro individuati**',
@@ -1797,9 +1812,18 @@ function crawlerFailedLineSlug(line) {
     .replace(/^-+|-+$/g, '');
 }
 
-function buildCrawlerMemberReport({ failure, otherSlugs, log, run, workflowName, jobLines }) {
+function buildCrawlerMemberReport({
+  failure,
+  otherSlugs,
+  log,
+  run,
+  workflowName,
+  workflowPath,
+  jobLines,
+}) {
   const { slug, exitCode, lines } = failure;
   const group = workflowName || 'crawler group';
+  const workflowPathLine = crawlerWorkflowPathBullet(workflowPath);
   const ownExitRe = new RegExp(
     `(?:^|[^a-z0-9-])${slug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}:\\s*crawler exited with status\\s+\\d+\\b`,
     'i',
@@ -1823,6 +1847,7 @@ function buildCrawlerMemberReport({ failure, otherSlugs, log, run, workflowName,
     `- Run: ${run?.url || '?'}`,
     `- Branch: \`${run?.headBranch || '?'}\``,
     `- Evento: \`${run?.event || '?'}\``,
+    ...(workflowPathLine ? [workflowPathLine] : []),
     `- Concluso: ${run?.updatedAt || run?.createdAt || '?'}`,
     `- Exit del crawler: \`${exitCode}\``,
     // Solo con piu' membri falliti: chi fa il triage di un membro deve sapere
@@ -1869,7 +1894,7 @@ function buildCrawlerMemberReport({ failure, otherSlugs, log, run, workflowName,
  * attribuire una causa a uno slug che i log non collegano con certezza.
  * Elenco vuoto quando il workflow non è un gruppo o il log non dice niente.
  */
-export function buildCrawlerFailureReports({ log, run, workflowName, jobLines } = {}) {
+export function buildCrawlerFailureReports({ log, run, workflowName, workflowPath, jobLines } = {}) {
   if (!isCrawlerGroupWorkflow(workflowName)) return [];
   const failures = crawlerFailuresFromLog(log);
   const diagnostics = crawlerGroupDiagnosticLines(log);
@@ -1892,7 +1917,7 @@ export function buildCrawlerFailureReports({ log, run, workflowName, jobLines } 
   });
   if (grain === 'group') {
     return [buildCrawlerGroupReport({
-      failures, diagnostics, hasSharedFailure, run, workflowName, grainReason: reason,
+      failures, diagnostics, hasSharedFailure, run, workflowName, workflowPath, grainReason: reason,
     })];
   }
 
@@ -1903,6 +1928,7 @@ export function buildCrawlerFailureReports({ log, run, workflowName, jobLines } 
     log,
     run,
     workflowName,
+    workflowPath,
     jobLines,
   }));
 }
@@ -2318,6 +2344,7 @@ async function main() {
       log: failureLog,
       run,
       workflowName: name,
+      workflowPath,
       jobLines,
     });
     if (crawlerReports.length > 0) {
