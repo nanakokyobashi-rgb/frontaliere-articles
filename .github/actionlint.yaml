@@ -1,8 +1,7 @@
 # GitHub Actions supports `concurrency.queue` (`single` or `max`), but the
-# actionlint version used by the repository action predates that schema field.
-# Ignore only its stale unknown-key diagnostic for the workflow that uses the
-# documented queue policy; all other syntax, expression and shell diagnostics
-# remain enabled.
+# required actionlint v1.7.12 check does not model that schema field yet.
+# Ignore only that diagnostic on the three workflows that use the documented
+# queue policy; all other syntax, expression and shell diagnostics stay enabled.
 paths:
   .github/workflows/translate-queue-recovery-watchdog.yml:
     ignore:

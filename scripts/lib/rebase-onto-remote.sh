@@ -114,6 +114,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MERGE_RESOLVER="$SCRIPT_DIR/merge-content-registry-conflict.mjs"
 QUEUE_RESOLVER="$SCRIPT_DIR/merge-image-regeneration-queue.mjs"
 COUNTER_RESOLVER="$SCRIPT_DIR/merge-counter-conflict.mjs"
+COUNTER_RECONCILE_FAILURE_STATUS=42
 
 # FIVE categories, deliberately not one list: they mean different things about
 # the file, and collapsing any two of them resolves a conflict the wrong way.
@@ -381,7 +382,7 @@ stage_conflict_paths() {
 
 if git pull --rebase "$REMOTE" "$TARGET" >"$rebase_log" 2>&1; then
   echo "git pull --rebase completed"
-  reconcile_counters || exit 1
+  reconcile_counters || exit "$COUNTER_RECONCILE_FAILURE_STATUS"
   exit 0
 fi
 
@@ -409,7 +410,7 @@ progress_marker=""
 for _pass in $(seq 1 20); do
   rebase_in_progress || {
     echo "rebase completed"
-    reconcile_counters || exit 1
+    reconcile_counters || exit "$COUNTER_RECONCILE_FAILURE_STATUS"
     exit 0
   }
 

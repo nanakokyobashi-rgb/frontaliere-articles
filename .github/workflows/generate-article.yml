@@ -2180,7 +2180,7 @@ jobs:
 
       - name: Commit and push
         id: commit
-        if: ${{ steps.mode.outputs.dry != 'true' && (success() || (failure() && steps.generate.outcome == 'failure' && steps.generate.outputs.cooperative_stop == 'true' && steps.generate.outputs.article != 'true')) }}
+        if: ${{ !cancelled() && steps.mode.outputs.dry != 'true' && (success() || (failure() && steps.generate.outcome == 'failure' && steps.generate.outputs.cooperative_stop == 'true' && steps.generate.outputs.article != 'true')) }}
         # Note del comando fuori dallo scalar run: mantenere il comando sotto 21.000 caratteri.
         # `.tmp` is inside the checkout and the rebase helper can remove or
         # replace it while replaying the generated commit. Preserve the
@@ -2525,7 +2525,7 @@ jobs:
             fi
             sleep $((attempt * 3))
             rebased=1
-            bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
+            if bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
               data/generated-image-registry.json \
               data/editorial-image-registry.json \
               data/topic-candidates-evergreen-rejected.json \
@@ -2544,7 +2544,32 @@ jobs:
               --merge-counter data/topic-candidates-evergreen-counter.json:count \
               --section-surfaces \
               --take-theirs content/image-credits/blog/ \
-              --take-theirs public/images/blog/ || rebased=0
+              --take-theirs public/images/blog/; then
+              :
+            else
+              rebase_status=$?
+              if [ "$rebase_status" -eq 42 ]; then
+                echo "::error::counter reconciliation failed; refusing to retry push"
+                exit 1
+              fi
+              rebased=0
+            fi
+            # ── Ricontrollo dopo il rebase (D18) ──
+            #
+            # L'unicita' dell'id (namespace globale `blog-{id}`), il dedup della
+            # fonte, la chiave di argomento-guida e la duplicazione multi-segnale
+            # di titolo / excerpt il generatore li verifica sul tree di INIZIO run: reggono
+            # solo finche' gli scrittori sono seriali. Il rebase appena fatto ha
+            # fuso lo stato di altri run senza guardarli — `--merge-registry`
+            # unisce record di registri diversi anche con lo stesso id, il ledger
+            # URL->id prende upstream e il meta può contenere una notizia quasi
+            # identica — quindi le quattro domande si rifanno qui, sullo stato che si
+            # sta per pushare. Una violazione non si risolve riprovando: niente
+            # push, exit 1, e la run porta POST_REBASE_UNIQUENESS_VIOLATION nel
+            # log (POST_REBASE_UNIQUENESS_ERROR se il controllo non e' eseguibile:
+            # una garanzia non verificabile non si da' per verificata).
+            # Le sezioni vengono da ARTICLE_SECTION_CORE_LIST, non da un elenco
+            # qui: una sezione nuova e' coperta senza toccare questo step.
             if [ "$rebased" -eq 1 ]; then
               node scripts/ci/merge-generated-image-registry.mjs \
                 data/generated-image-registry.json "$registry_base" "$registry_snapshot"

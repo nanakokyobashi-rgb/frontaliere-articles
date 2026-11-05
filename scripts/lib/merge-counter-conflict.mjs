@@ -10,7 +10,9 @@
  *          chiamante puo' fare `git add`). Exit 1 = fusione non dimostrabile:
  *          il file NON e' stato toccato e il chiamante decide (in
  *          `rebase-onto-remote.sh` ricade su «prendi upstream», cioe' sul
- *          comportamento che questi file avevano prima). Exit 2 = uso errato.
+ *          comportamento che questi file avevano prima). In `--reconcile`,
+ *          exit 1 invece blocca il commit quando una spec non e' dimostrabile.
+ *          Exit 2 = uso errato.
  *
  * ── Perche' una quarta categoria (D18, PR «P1» delle sezioni cantonali) ─────
  *
@@ -55,7 +57,7 @@
  * stage 3 (`--theirs`) e' il commit RIGIOCATO, l'inverso di un merge.
  */
 import { execFileSync } from 'node:child_process';
-import { readFileSync, realpathSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 function parseCounterDoc(text, field, label) {
@@ -134,14 +136,16 @@ function git(args) {
   return execFileSync('git', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
 }
 
-/** Il blob di `path` a `rev`; null se il path non c'e' o la revisione non si legge. */
+/** Il blob di `path` a `rev`; null solo se il path non c'e'. */
 function readAt(rev, path) {
-  try {
-    if (!git(['ls-tree', '--name-only', rev, '--', path]).trim()) return null;
-    return git(['show', `${rev}:${path}`]);
-  } catch {
-    return null;
-  }
+  if (!git(['ls-tree', '--name-only', rev, '--', path]).trim()) return null;
+  return git(['show', `${rev}:${path}`]);
+}
+
+function reconciliationFailure(category) {
+  const error = new Error(category);
+  error.reconciliationCategory = category;
+  return error;
 }
 
 /**
@@ -153,51 +157,101 @@ function readAt(rev, path) {
  * e si riscrive in working tree quello che differisce. Stampa su stdout un
  * path per riga, uno per file riscritto; il chiamante fa `git add` + amend.
  *
- * Tutto cio' che non si sa dimostrare (file assente o illeggibile su un lato,
- * decremento) si lascia com'e', con un avviso: e' il comportamento di prima.
+ * Tutte le spec si verificano prima di scrivere. Una spec non dimostrabile
+ * rende l'intero comando non-zero, cosi' il chiamante non puo' committare una
+ * riconciliazione parziale. Una spec assente da base, upstream, commit rigiocato
+ * e working tree e' un no-op verificato: nessun contatore esiste da fondere.
+ * Se invece il contatore esisteva nella base, la sua assenza da un lato e'
+ * un errore.
  */
 export function reconcileCounters(preRebase, upstream, specs, { log = console.log, warn = console.error } = {}) {
-  let base = null;
+  let base;
   try {
-    base = git(['merge-base', preRebase, upstream]).trim() || null;
+    base = git(['merge-base', preRebase, upstream]).trim();
   } catch {
-    base = null;
+    throw reconciliationFailure('merge-base');
   }
-  const rewritten = [];
+  if (!base) throw reconciliationFailure('merge-base');
+
+  const currentDocs = new Map();
+  const originalTexts = new Map();
+  const rewritten = new Set();
   for (const raw of specs) {
     const spec = parseCounterSpec(raw);
-    if (!spec) {
-      warn(`::warning::riconciliazione contatori: spec non valida '${raw}'`);
+    if (!spec) throw reconciliationFailure('invalid-spec');
+
+    let mine;
+    let up;
+    let baseText;
+    try {
+      mine = readAt(preRebase, spec.path);
+      up = readAt(upstream, spec.path);
+      baseText = readAt(base, spec.path);
+    } catch {
+      throw reconciliationFailure('revision-read');
+    }
+
+    if (baseText == null && mine == null && up == null) {
+      if (existsSync(spec.path)) throw reconciliationFailure('working-tree-counter-without-history');
       continue;
     }
-    const mine = readAt(preRebase, spec.path);
-    const up = readAt(upstream, spec.path);
-    if (mine == null || up == null) continue;
+    if (baseText == null && mine == null) mine = up;
+    if (baseText == null && up == null) up = mine;
+    if (baseText != null && (mine == null || up == null)) {
+      throw reconciliationFailure('missing-revision-file');
+    }
+
     const result = mergeCounterDocuments({
-      base: base ? readAt(base, spec.path) : null,
+      base: baseText,
       upstream: up,
       replayed: mine,
       field: spec.field,
     });
-    if (!result.ok) {
-      warn(`::warning::${spec.path}: riconciliazione del contatore non dimostrabile — ${result.reason}`);
-      continue;
+    if (!result.ok) throw reconciliationFailure('counter-not-reconcilable');
+
+    let current = currentDocs.get(spec.path);
+    if (!current) {
+      let text;
+      try {
+        text = readFileSync(spec.path, 'utf8');
+      } catch {
+        throw reconciliationFailure('working-tree-read');
+      }
+      const parsed = parseCounterDoc(text, spec.field, 'working tree');
+      if (parsed.error) throw reconciliationFailure('working-tree-counter');
+      current = parsed.doc;
+      currentDocs.set(spec.path, current);
+      originalTexts.set(spec.path, text);
+    } else if (parseCounterDoc(JSON.stringify(current), spec.field, 'working tree').error) {
+      throw reconciliationFailure('working-tree-counter');
     }
-    let current;
-    try {
-      current = JSON.parse(readFileSync(spec.path, 'utf8'));
-    } catch {
-      warn(`::warning::${spec.path}: contatore assente o illeggibile dopo il rebase — non lo riconcilio`);
-      continue;
+
+    if (current[spec.field] !== result.value) {
+      current[spec.field] = result.value;
+      rewritten.add(spec.path);
     }
-    if (!current || typeof current !== 'object' || Array.isArray(current)) continue;
-    if (current[spec.field] === result.value) continue;
-    writeFileSync(spec.path, `${JSON.stringify({ ...current, [spec.field]: result.value }, null, 2)}\n`);
-    warn(`riconciliazione contatore: ${spec.path} ${spec.field} ${current[spec.field]} → ${result.value} (${result.rule})`);
-    rewritten.push(spec.path);
   }
-  for (const p of rewritten) log(p);
-  return rewritten;
+
+  try {
+    for (const p of rewritten) {
+      writeFileSync(p, `${JSON.stringify(currentDocs.get(p), null, 2)}\n`);
+    }
+  } catch {
+    for (const p of [...rewritten].reverse()) {
+      try {
+        writeFileSync(p, originalTexts.get(p));
+      } catch {
+        // The caller still fails closed; it never commits after this error.
+      }
+    }
+    throw reconciliationFailure('working-tree-write');
+  }
+
+  for (const p of rewritten) {
+    warn(`riconciliazione contatore completata: ${p} (dettagli numerici omessi)`);
+    log(p);
+  }
+  return [...rewritten];
 }
 
 function main(argv) {
@@ -207,8 +261,13 @@ function main(argv) {
       console.error('uso: merge-counter-conflict.mjs --reconcile <pre-rebase> <upstream> <path>:<campo>...');
       return 2;
     }
-    reconcileCounters(preRebase, upstream, specs);
-    return 0;
+    try {
+      reconcileCounters(preRebase, upstream, specs);
+      return 0;
+    } catch (error) {
+      console.error(`::error::counter reconciliation failed; category=${error.reconciliationCategory || 'counter-data'}`);
+      return 1;
+    }
   }
   if (argv.length !== 1) {
     console.error('uso: merge-counter-conflict.mjs <path>:<campo>');
