@@ -18150,11 +18150,14 @@ async function main() {
     const recoveryDecision = _discoveryRecoveryDecision(recoveryState, { section: SECTION_NAME });
     const discoveryQuotaOverride = Number(process.env.DISCOVERY_QUOTA_OVERRIDE);
     const recoveryDisabled = Number.isFinite(discoveryQuotaOverride) && discoveryQuotaOverride === 100;
-    const recoveryEligible = !forceEvergreen && !recoveryDisabled && Boolean(SECTION_PROFILE.discoveryPool);
+    const recoveryEligible = !forceEvergreen
+      && !recoveryDisabled
+      && Boolean(SECTION_PROFILE.discoveryPool)
+      && Boolean(evidenceForDiscovery);
     const forceRecoveryDiscovery = recoveryDecision.shouldForceDiscovery && recoveryEligible;
     // Sezione cantonale: sempre `proven` (le sue fonti), il pool discovery e'
     // costruito sulla domanda GSC delle sezioni storiche (SECTION_PROFILE).
-    const slotKind = forceEvergreen || !SECTION_PROFILE.discoveryPool
+    const slotKind = forceEvergreen || !SECTION_PROFILE.discoveryPool || !evidenceForDiscovery
       ? 'proven'
       : forceRecoveryDiscovery
         ? 'discovery'
@@ -18168,7 +18171,6 @@ async function main() {
     // pool (run 26440805420). The fuzzy matcher in resolveGoogleNewsHeadline
     // needs the FULL proven scan, not the post-gate residue.
     let _provenHeadlinesPreGate = [];
-    RUN_REPORT.poolSlotKind = slotKind;
     RUN_REPORT.poolCounterValue = slotDecision.counterValue;
     RUN_REPORT.poolCurrentQuota = slotDecision.currentQuota;
     RUN_REPORT.poolRecoveryEligible = recoveryEligible;
@@ -18180,11 +18182,16 @@ async function main() {
       forcedDiscovery: forceRecoveryDiscovery,
       reason: forceRecoveryDiscovery ? 'proven_no_article_recovery' : 'quota_or_counter',
     };
-    writeDiscoveryAttemptMarker({
-      section: SECTION_NAME,
-      poolKind: slotKind,
-      recoveryEligible: RUN_REPORT.poolRecoveryEligible,
-    });
+    const setAttemptPoolKind = (poolKind) => {
+      chosenPool = poolKind;
+      RUN_REPORT.poolSlotKind = poolKind;
+      writeDiscoveryAttemptMarker({
+        section: SECTION_NAME,
+        poolKind,
+        recoveryEligible: RUN_REPORT.poolRecoveryEligible,
+      });
+    };
+    setAttemptPoolKind(slotKind);
     console.error(`SLOT_DECISION pool=${slotKind} counter=${slotDecision.counterValue} quota=${slotDecision.currentQuota}`);
     if (forceRecoveryDiscovery) {
       console.error(
@@ -18259,7 +18266,7 @@ async function main() {
       if (_discoveryHeadlines.length === 0) {
         console.error('POOL_FALLBACK from=discovery to=proven reason=empty');
         RUN_REPORT.poolFallbacks.push({ from: 'discovery', to: 'proven', reason: 'empty' });
-        chosenPool = 'proven';
+        setAttemptPoolKind('proven');
         headlines = provenHeadlinesForDedup;
       } else {
         headlines = _discoveryHeadlines;
