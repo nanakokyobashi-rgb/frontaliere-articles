@@ -214,6 +214,16 @@ export function validateTopicCandidatesFeed(payload, options = {}) {
   return validateTopicCandidatesFeedWithDiagnostics(payload, options).feed;
 }
 
+function responseUsesIdentityEncoding(response) {
+  const contentEncoding = response.headers?.get?.('content-encoding');
+  if (contentEncoding === null || contentEncoding === undefined) return true;
+  const codings = String(contentEncoding)
+    .split(',')
+    .map((coding) => coding.trim().toLowerCase())
+    .filter(Boolean);
+  return codings.length === 0 || codings.every((coding) => coding === 'identity');
+}
+
 function declaredResponseBytes(response, maxBytes) {
   const contentLength = response.headers?.get?.('content-length');
   if (contentLength === null || contentLength === undefined || !String(contentLength).trim()) return null;
@@ -222,7 +232,9 @@ function declaredResponseBytes(response, maxBytes) {
     throw new TopicCandidatesFeedError('content_length_invalid');
   }
   if (parsed > maxBytes) throw new TopicCandidatesFeedError('response_too_large');
-  return parsed;
+  // Fetch exposes the decoded body, while Content-Length describes the wire
+  // representation whenever a non-identity Content-Encoding is present.
+  return responseUsesIdentityEncoding(response) ? parsed : null;
 }
 
 /** Reject a body whose declared byte count does not match what was received. */
@@ -256,16 +268,49 @@ async function readBodyBounded(response, maxBytes) {
   const reader = response.body.getReader();
   const chunks = [];
   let totalBytes = 0;
+
+  async function cancelReader() {
+    try {
+      await reader.cancel?.();
+    } catch {
+      // Cancellation is cleanup; preserve the fail-closed response verdict.
+    }
+  }
+
   try {
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
-      totalBytes += value.byteLength;
-      if (totalBytes > maxBytes) {
-        await reader.cancel().catch(() => {});
+
+      const chunkBytes = value?.byteLength;
+      if (!Number.isSafeInteger(chunkBytes) || chunkBytes < 0) {
+        await cancelReader();
+        throw new TopicCandidatesFeedError('response_body_invalid');
+      }
+      if (totalBytes > maxBytes - chunkBytes) {
+        await cancelReader();
         throw new TopicCandidatesFeedError('response_too_large');
       }
-      chunks.push(Buffer.from(value));
+
+      let chunk;
+      try {
+        const bytes = value instanceof ArrayBuffer
+          ? new Uint8Array(value)
+          : ArrayBuffer.isView(value)
+            ? new Uint8Array(value.buffer, value.byteOffset, chunkBytes)
+            : null;
+        if (!bytes) throw new TypeError('response body chunk is not binary');
+        chunk = Buffer.from(bytes);
+      } catch {
+        await cancelReader();
+        throw new TopicCandidatesFeedError('response_body_invalid');
+      }
+      if (chunk.byteLength !== chunkBytes) {
+        await cancelReader();
+        throw new TopicCandidatesFeedError('response_body_invalid');
+      }
+      chunks.push(chunk);
+      totalBytes += chunkBytes;
     }
   } finally {
     reader.releaseLock?.();
