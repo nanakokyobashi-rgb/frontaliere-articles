@@ -99,6 +99,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.gpk-modifiche-budget-2027.title': 'GPK propone modifiche al budget 2027 di Sciaffusa',
     'blog.article.gpk-modifiche-budget-2027.excerpt': 'Il deficit previsto scenderebbe a circa 5 milioni di CHF; la crescita della massa salariale passerebbe allo 0,5%.',
     'blog.article.gpk-modifiche-budget-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sciaffusa-mercato-lavoro-ottobre.title': 'Canton Sciaffusa: 1375 disoccupati iscritti al RAV a fine ottobre',
+    'blog.article.sciaffusa-mercato-lavoro-ottobre.excerpt': 'A fine ottobre, nel Canton Sciaffusa, il RAV contava 1375 disoccupati; 2310 persone erano in cerca d\'impiego.',
+    'blog.article.sciaffusa-mercato-lavoro-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

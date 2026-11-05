@@ -99,6 +99,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.gpk-modifiche-budget-2027.title': 'GPK proposes changes to Schaffhausen\'s 2027 budget',
     'blog.article.gpk-modifiche-budget-2027.excerpt': 'The projected deficit would fall to approximately CHF 5 million; growth in the wage bill would drop to 0.5%.',
     'blog.article.gpk-modifiche-budget-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sciaffusa-mercato-lavoro-ottobre.title': 'Canton Schaffhausen: RAV had 1,375 unemployed at end-Oct',
+    'blog.article.sciaffusa-mercato-lavoro-ottobre.excerpt': 'At the end of October, in the Canton of Schaffhausen, the RAV counted 1375 unemployed people; 2310 people were looking for work.',
+    'blog.article.sciaffusa-mercato-lavoro-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

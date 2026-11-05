@@ -359,4 +359,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'sciaffusa-mercato-lavoro-ottobre',
+ category: 'pratico',
+ date: '2026-11-05T12:20:12.097Z',
+ image: '/images/blog/article-sciaffusa-mercato-lavoro-ottobre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

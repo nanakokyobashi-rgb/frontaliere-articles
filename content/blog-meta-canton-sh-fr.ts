@@ -99,6 +99,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.gpk-modifiche-budget-2027.title': 'GPK propose des modifications au budget 2027 de Schaffhouse',
     'blog.article.gpk-modifiche-budget-2027.excerpt': 'Le déficit prévu passerait à environ 5 millions de CHF ; la croissance de la masse salariale passerait à 0,5%.',
     'blog.article.gpk-modifiche-budget-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sciaffusa-mercato-lavoro-ottobre.title': 'Canton de Schaffhouse : 1375 chômeurs inscrits au RAV fin octobre',
+    'blog.article.sciaffusa-mercato-lavoro-ottobre.excerpt': 'Fin octobre, dans le canton de Schaffhouse, le RAV comptait 1375 chômeurs ; 2310 personnes étaient à la recherche d’un emploi.',
+    'blog.article.sciaffusa-mercato-lavoro-ottobre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

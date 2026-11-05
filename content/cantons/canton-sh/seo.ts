@@ -1255,6 +1255,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sciaffusa-mercato-lavoro-ottobre': {
+    title: 'Canton Sciaffusa: 1375 disoccupati iscritti al RAV a fine ottobre',
+    description: 'Dati del mercato del lavoro nel Canton Sciaffusa a fine ottobre: 1375 disoccupati al RAV, 2310 in cerca d\'impiego e 477 posti vacanti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, canton, sciaffusa, 1375, disoccupati',
+    ogTitle: 'Sciaffusa: 1375 disoccupati al RAV a ottobre',
+    ogDescription: 'Rapporto sul mercato del lavoro del Canton Sciaffusa a fine ottobre: 1375 disoccupati al RAV, 2310 persone in cerca d\'impiego e 477 posti vacanti. Confronti mensili e annuali.',
+    canonicalPath: '/articoli-sciaffusa/sciaffusa-mercato-lavoro-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Canton Sciaffusa: 1375 disoccupati iscritti al RAV a fine ottobre",
+      "description": "Dati del mercato del lavoro nel Canton Sciaffusa a fine ottobre: 1375 disoccupati al RAV, 2310 in cerca d'impiego e 477 posti vacanti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sciaffusa-mercato-lavoro-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-05T12:20:12+00:00",
+      "dateModified": "2026-11-05T12:20:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/sciaffusa-mercato-lavoro-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
