@@ -131,6 +131,30 @@ test('le superfici articolo oltre il body producono solo gli ID realmente cambia
 
 });
 
+test('le dipendenze condivise di rendering risvegliano tutti gli articoli registrati dello shard', () => {
+  const registered = new Map([
+    ['frontaliere', new Set(['alpha', 'beta'])],
+    ['svizzera', new Set(['sigma'])],
+  ]);
+
+  for (const rel of [
+    'scripts/lib/article-render-pipeline.mjs',
+    'scripts/lib/content-updated-at.mjs',
+  ]) {
+    assert.deepEqual(
+      articlePublishPlan([rel], ARTICLE_SECTION_CORE_LIST, {
+        served: 'shard',
+        articleIdsForSection: (section) => registered.get(section.section) ?? new Set(),
+      }),
+      [
+        { section: 'frontaliere', ids: ['alpha', 'beta'], bootstrap: false },
+        { section: 'svizzera', ids: ['sigma'], bootstrap: false },
+      ],
+      rel,
+    );
+  }
+});
+
 test('un nuovo record del registry risveglia solo il record aggiunto', () => {
   const registered = new Set(['alpha', 'beta', 'gamma']);
   const previousRegistry = "export const ARTICLES = [{ id: 'alpha', image: '/images/blog/alpha.webp' }, { id: 'beta', image: '/images/blog/beta.webp' }];\n";

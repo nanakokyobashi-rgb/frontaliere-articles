@@ -66,6 +66,20 @@ test('il workflow cantonale parte quando cambia il ledger', () => {
   assert.match(workflow, /- 'content\/article-index-exclusions\.json'/);
 });
 
+test('le dipendenze condivise di rendering fanno bootstrap di tutte le sezioni R2', () => {
+  const canton = [ARTICLE_SECTION_CORE_ALL['canton-gr']];
+  for (const rel of [
+    'scripts/lib/article-render-pipeline.mjs',
+    'scripts/lib/content-updated-at.mjs',
+  ]) {
+    assert.deepEqual(
+      r2PublishPlan([rel], canton),
+      [{ section: 'canton-gr', ids: [], bootstrap: true }],
+      rel,
+    );
+  }
+});
+
 test('il publisher rifiuta una riga senza articolo, non la ignora', () => {
   const known = new Set(['frontaliere', 'svizzera', 'canton-gr']);
   const published = new Set(['frontaliere', 'svizzera']);
