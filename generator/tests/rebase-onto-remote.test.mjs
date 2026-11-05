@@ -446,8 +446,11 @@ function parseHelperArgs(yamlText) {
       const pattern = clean.split(/\s+/)[1];
       if (pattern) registryPatterns.push(pattern.replace(/^(['"])(.*)\1$/, '$2'));
     } else if (clean.startsWith('--take-theirs')) {
-      const prefix = clean.split(/\s+/)[1]?.replace(/^(['"])(.*)\1$/, '$2');
-      if (prefix) takeTheirs.push(prefix.replace(/\s*\|\|\s*true$/, ''));
+      const prefix = clean.split(/\s+/)[1]
+        ?.replace(/;$/, '')
+        .replace(/^(['"])(.*)\1$/, '$2')
+        .replace(/\s*\|\|\s*true$/, '');
+      if (prefix) takeTheirs.push(prefix);
     } else if (clean.startsWith('--merge-counter')) {
       const spec = clean.split(/\s+/)[1];
       if (spec) counters.push(spec);

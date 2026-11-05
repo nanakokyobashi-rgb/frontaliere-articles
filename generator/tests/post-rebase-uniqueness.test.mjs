@@ -992,7 +992,13 @@ function assertWorkflowRebaseGate(workflow) {
   assert.ok(rebaseAt > loopAt && checkAt > rebaseAt && doneAt > checkAt,
     'il controllo sta nel loop, dopo il rebase e prima del prossimo push');
   const rebaseCall = active.slice(rebaseAt, checkAt);
-  assert.match(rebaseCall, /\|\| rebased=0\n/, 'l\'esito del rebase deve essere registrato, non buttato con `|| true`');
+  assert.match(rebaseCall, /bash scripts\/lib\/rebase-onto-remote\.sh[\s\S]*?; then\n\s+:\n\s+else\n\s+rebase_status=\$\?/,
+    'il codice di uscita dedicato deve essere intercettato dal chiamante');
+  assert.match(
+    rebaseCall,
+    /if \[ "\$rebase_status" -eq 42 \]; then[\s\S]*?counter reconciliation failed; refusing to retry push[\s\S]*?\n\s+exit 1\n\s+fi\n\s+rebased=0\n\s+fi/,
+    'exit 42 ferma la generazione; solo gli altri errori impostano rebased=0 e restano ritentabili',
+  );
   assert.ok(successGuardAt > rebaseAt && successGuardAt < checkAt,
     'il controllo gira solo dopo un rebase riuscito');
   const gate = active.slice(successGuardAt, doneAt);
