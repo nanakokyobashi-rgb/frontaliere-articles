@@ -6690,12 +6690,13 @@
     },
     {
       "path": "scripts/ci/old-history-guard.mjs",
-      "mode": "identical",
-      "reason": "Guardia fail-closed del retry helper: verifica che il candidato discenda dalla ref remota gia' acquisita, anche nei checkout shallow, prima di consentire il push. Portata insieme alla dipendenza condivisa `scripts/lib/is-invoked-directly.mjs` e sorvegliata perche' un writer basato su storia vecchia non deve entrare ne' nel push ne' nel soft-fail.",
+      "sitePath": "scripts/lib/old-history-guard.mjs",
+      "mode": "adapted",
+      "reason": "Il gemello del sito e' stato spostato da `scripts/ci/old-history-guard.mjs` a `scripts/lib/old-history-guard.mjs` e riscritto per la prova bounded della storia riscritta. Il corpus mantiene il proprio guard fail-closed piu' piccolo perche' `scripts/lib/git-push-with-retry.sh`, i workflow sparse e i test del corpus lo consumano dal path `scripts/ci/`; copiare il guard del sito introdurrebbe dipendenze e un contratto di riscrittura che qui non esistono. `sitePath` rende osservabile il gemello spostato e `adapted` impedisce un trasporto byte-identico distruttivo. Riattestato il 2026-11-06 per la issue #339.",
       "baseline": {
-        "site": "eaa660a9d1474ce7",
+        "site": "32f3a2ebdacdce90",
         "corpus": "eaa660a9d1474ce7",
-        "alignedAt": "2026-10-20"
+        "alignedAt": "2026-11-06"
       }
     },
     {
