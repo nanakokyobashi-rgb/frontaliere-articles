@@ -72,6 +72,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.zurigo-strategia-energetica-2026.title': 'Zurich adopts the 2026 Energy Strategy',
     'blog.article.zurigo-strategia-energetica-2026.excerpt': 'The Regierungsrat of the Canton of Zurich has adopted the energy strategy and energy planning 2026.',
     'blog.article.zurigo-strategia-energetica-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.adeguamento-merkblatt-beteiligungen-zrh.title': 'Update to Merkblatt Beteiligungen and other documents in Zurich\'s Steuerbuch',
+    'blog.article.adeguamento-merkblatt-beteiligungen-zrh.excerpt': 'Judgment of May 12, 2026 (ST.2025.64) allows even short-term loans to be considered under § 81a StG, immediately applicable to periods from 2020.',
+    'blog.article.adeguamento-merkblatt-beteiligungen-zrh.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;

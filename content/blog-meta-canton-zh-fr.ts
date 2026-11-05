@@ -72,6 +72,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.zurigo-strategia-energetica-2026.title': 'Zurich adopte la Stratégie énergétique 2026',
     'blog.article.zurigo-strategia-energetica-2026.excerpt': 'Le Conseil d\'État du canton de Zurich a adopté la stratégie énergétique et la planification énergétique 2026.',
     'blog.article.zurigo-strategia-energetica-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.adeguamento-merkblatt-beteiligungen-zrh.title': 'Mise à jour fiche participations et actes fiscaux Zurich',
+    'blog.article.adeguamento-merkblatt-beteiligungen-zrh.excerpt': 'L’arrêt du 12 mai 2026 (ST.2025.64) permet de considérer également les prêts à court terme au sens du § 81a StG, avec effet immédiat pour les périodes à partir de 2020.',
+    'blog.article.adeguamento-merkblatt-beteiligungen-zrh.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;

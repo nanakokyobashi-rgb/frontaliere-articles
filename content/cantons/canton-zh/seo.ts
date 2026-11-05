@@ -894,6 +894,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-adeguamento-merkblatt-beteiligungen-zrh': {
+    title: 'Adeguamento Merkblatt Beteiligungen e altri atti nel Steuerbuch di Zurigo',
+    description: 'Nuova prassi fiscale del Canton Zurigo (12 maggio 2026): crediti a breve considerati prestiti ai sensi del § 81a StG.',
+    keywords: 'frontalieri, ticino, svizzera, italia, adeguamento, merkblatt, beteiligungen, altri',
+    ogTitle: 'Adeguamento Merkblatt Beteiligungen Zurigo',
+    ogDescription: 'La sentenza del 12 maggio 2026 (ST.2025.64) modifica la qualificazione dei crediti a breve come prestiti ai fini della riduzione dell\'imposta sul capitale nel Canton Zurigo.',
+    canonicalPath: '/articoli-zurigo/adeguamento-merkblatt-beteiligungen-zrh/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Adeguamento Merkblatt Beteiligungen e altri atti nel Steuerbuch di Zurigo",
+      "description": "Nuova prassi fiscale del Canton Zurigo (12 maggio 2026): crediti a breve considerati prestiti ai sensi del § 81a StG.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-adeguamento-merkblatt-beteiligungen-zrh.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-05T22:54:21+00:00",
+      "dateModified": "2026-11-05T22:54:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/adeguamento-merkblatt-beteiligungen-zrh/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
