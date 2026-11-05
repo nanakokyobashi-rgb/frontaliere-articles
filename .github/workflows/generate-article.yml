@@ -1274,7 +1274,6 @@ jobs:
           stall_log="$diag_dir/attempt.log"
           tee_pid=""
           attempt_pipe=""
-          stop_marker=""
           # Il client sta FUORI dalla cartella caricata: se ci stesse dentro,
           # `if-no-files-found: ignore` non scatterebbe mai e ogni run
           # caricherebbe un artifact con dentro solo lo strumento.
@@ -1438,7 +1437,7 @@ jobs:
           # Il watchdog non sopravvive mai allo step: muore col tentativo (qui
           # sotto) e comunque all'uscita, qualunque ramo la produca.
           # The EXIT trap invokes this function indirectly.
-          # shellcheck disable=SC2329
+          # shellcheck disable=SC2317 # chiamata dal trap EXIT, indiretta per ShellCheck.
           stall_atexit() {
             kill_tree KILL "${watch_pid:-}"
             kill_tree KILL "${tee_pid:-}"
@@ -2332,6 +2331,9 @@ jobs:
 
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          # La stessa costante e' letta dal rebase helper: un reconcile fallito
+          # non puo' diventare un retry del push.
+          source scripts/lib/rebase-onto-remote-status.sh
           push_target() {
             if [ "$TARGET" = 'main' ]; then
               node scripts/ci/guard-main-tree-shrink.mjs --push-main --remote "$REMOTE" --target main --after HEAD
@@ -2459,11 +2461,10 @@ jobs:
             # incremento: due run da N che scrivono entrambi N+1 danno lo STESSO
             # blob e nessun conflitto, quindi a rebase riuscito l'helper riconcilia
             # comunque ogni contatore dichiarato (upstream + incremento pre-rebase).
-            # data/discovery-attempt-state.json conserva contatori monotoni
-            # per sezione: i fallimenti proven incrementano `*ProvenAttempts`;
-            # una discovery o una pubblicazione avanza `*DiscoveryResetAt`.
-            # La differenza forza uno slot discovery dopo tre fallimenti proven
-            # senza ridurre contatori, quindi usa la stessa fusione a tre vie.
+            # data/discovery-attempt-state.json conserva per sezione una coppia
+            # atomica: `*ProvenAttempts` e' additivo, mentre `*DiscoveryResetAt`
+            # e' un watermark monotono che non si somma. La differenza forza uno
+            # slot discovery dopo tre fallimenti proven senza ridurre contatori.
             #
             # data/topic-candidates-today-picks.json (TODAY_PICKS_BY_CLUSTER_PATH,
             # persistTodayPicksByCluster) e' la stessa classe del consumed tracker:
@@ -2518,10 +2519,8 @@ jobs:
               data/generated-image-registry.json \
               --merge-queue data/image-regeneration-queue.json \
               --merge-counter data/quota-state.json:runCounter \
-              --merge-counter data/discovery-attempt-state.json:frontaliereProvenAttempts \
-              --merge-counter data/discovery-attempt-state.json:frontaliereDiscoveryResetAt \
-              --merge-counter data/discovery-attempt-state.json:svizzeraProvenAttempts \
-              --merge-counter data/discovery-attempt-state.json:svizzeraDiscoveryResetAt \
+              --merge-counter data/discovery-attempt-state.json:frontaliereProvenAttempts,frontaliereDiscoveryResetAt \
+              --merge-counter data/discovery-attempt-state.json:svizzeraProvenAttempts,svizzeraDiscoveryResetAt \
               --merge-counter data/topic-candidates-experimental-counter.json:count \
               --merge-counter data/topic-candidates-evergreen-counter.json:count \
               --section-surfaces \
@@ -2530,7 +2529,7 @@ jobs:
               :
             else
               rebase_status=$?
-              if [ "$rebase_status" -eq 42 ]; then
+              if [ "$rebase_status" -eq "$COUNTER_RECONCILE_FAILURE_STATUS" ]; then
                 echo "::error::counter reconciliation failed; refusing to retry push"
                 exit 1
               fi

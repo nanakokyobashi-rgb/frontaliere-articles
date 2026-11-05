@@ -991,13 +991,15 @@ function assertWorkflowRebaseGate(workflow) {
     'un report assente per un articolo o un esito non dichiarato deve fermare il push prima del rebase');
   assert.ok(rebaseAt > loopAt && checkAt > rebaseAt && doneAt > checkAt,
     'il controllo sta nel loop, dopo il rebase e prima del prossimo push');
+  assert.ok(active.includes('source scripts/lib/rebase-onto-remote-status.sh'),
+    'il chiamante carica il codice di uscita condiviso con il rebase helper');
   const rebaseCall = active.slice(rebaseAt, checkAt);
   assert.match(rebaseCall, /bash scripts\/lib\/rebase-onto-remote\.sh[\s\S]*?; then\n\s+:\n\s+else\n\s+rebase_status=\$\?/,
     'il codice di uscita dedicato deve essere intercettato dal chiamante');
   assert.match(
     rebaseCall,
-    /if \[ "\$rebase_status" -eq 42 \]; then[\s\S]*?counter reconciliation failed; refusing to retry push[\s\S]*?\n\s+exit 1\n\s+fi\n\s+rebased=0\n\s+fi/,
-    'exit 42 ferma la generazione; solo gli altri errori impostano rebased=0 e restano ritentabili',
+    /if \[ "\$rebase_status" -eq "\$COUNTER_RECONCILE_FAILURE_STATUS" \]; then[\s\S]*?counter reconciliation failed; refusing to retry push[\s\S]*?\n\s+exit 1\n\s+fi\n\s+rebased=0\n\s+fi/,
+    'il codice di uscita condiviso ferma la generazione; solo gli altri errori restano ritentabili',
   );
   assert.ok(successGuardAt > rebaseAt && successGuardAt < checkAt,
     'il controllo gira solo dopo un rebase riuscito');

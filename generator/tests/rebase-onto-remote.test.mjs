@@ -2284,6 +2284,46 @@ test('un conflitto sui contatori somma gli incrementi dei due lati, e l\'articol
   }
 });
 
+test('un conflitto sulla coppia discovery fonde tentativi e watermark nello stesso file', () => {
+  const w = makeWorld();
+  const statePath = 'data/discovery-attempt-state.json';
+  const pair = 'frontaliereProvenAttempts,frontaliereDiscoveryResetAt';
+  const state = (proven, resetAt) => `${JSON.stringify({
+    version: 1,
+    frontaliereProvenAttempts: proven,
+    frontaliereDiscoveryResetAt: resetAt,
+    svizzeraProvenAttempts: 2,
+    svizzeraDiscoveryResetAt: 1,
+  }, null, 2)}\n`;
+  try {
+    write(w.work, statePath, state(5, 3));
+    commitAll(w.work, 'seed discovery attempt state');
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+
+    landUpstream(w, [[statePath, state(6, 6), 'upstream proven publication reset']]);
+    write(w.work, statePath, state(6, 5));
+    write(w.work, 'content/blog-body/it/articolo-discovery.ts', 'export const d = 1\n');
+    commitAll(w.work, 'Generate article after discovery reset (frontaliere)');
+
+    const { code, out } = runHelper(w.work, w.upstream, '--merge-counter', `${statePath}:${pair}`);
+    assert.equal(code, 0, `il conflitto sulla coppia deve essere risolto in modo atomico:\n${out}`);
+    assert.match(out, /resolved counter conflict by summing both sides/);
+
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    const merged = JSON.parse(git(w.work, 'show', `HEAD:${statePath}`));
+    assert.equal(merged.frontaliereProvenAttempts, 7);
+    assert.equal(merged.frontaliereDiscoveryResetAt, 6);
+    assert.ok(merged.frontaliereDiscoveryResetAt <= merged.frontaliereProvenAttempts);
+    assert.equal(
+      git(w.work, 'show', 'HEAD:content/blog-body/it/articolo-discovery.ts'),
+      'export const d = 1\n',
+      'l’articolo deve essere incluso nel commit realmente pushato, non solo nel working tree',
+    );
+  } finally {
+    w.cleanup();
+  }
+});
+
 test('due run che scrivono lo STESSO valore (nessun conflitto) non perdono un incremento', () => {
   // Base 10, upstream 11, questo run 11: blob identici, git non vede conflitto
   // e il rebase finirebbe su 11. La riconciliazione a rebase riuscito porta 12.
@@ -2350,7 +2390,7 @@ test('--merge-counter senza campo e\' un errore del chiamante', () => {
   try {
     const { code, out } = runHelper(w.work, w.upstream, '--merge-counter', EVERGREEN_COUNTER_PATH);
     assert.equal(code, 2, out);
-    assert.match(out, /--merge-counter requires <path>:<field>/);
+    assert.match(out, /--merge-counter requires <path>:<field\[,field\]>/);
   } finally {
     w.cleanup();
   }
