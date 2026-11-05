@@ -46,22 +46,21 @@
       "articleId": "infermieri-osc-sindacati-stipendi",
       "title": "Infermieri Osc e sindacati chiedono sblocco stipendi",
       "fallbackImage": "/images/blog/article-assemblea-ccti-rotta-economia.webp",
-      "reason": "All image providers failed for article-infermieri-osc-sindacati-stipendi: openai-codex (vision gate rejected image: Synthetic editorial street scene relevant to healthcare workers",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-infermieri-osc-sindacati-stipendi: openai-codex (vision gate rejected image: Generic synthetic editorial scene of a nurse at a train station; no text, logos, or identifiable face, but a recognizable fo",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-31T09:38:46.360Z",
-      "lastFailureAt": "2026-10-31T09:38:46.360Z",
-      "retryHint": "no-text"
+      "lastFailureAt": "2026-11-05T22:02:01.909Z"
     },
     {
       "articleId": "versamento-avs-dicembre-importi",
       "title": "Tredicesima AVS, per alcuni sarà inferiore",
       "fallbackImage": "/images/blog/article-referendum-iva-2026-aumento-per-la-tredicesima-pensione.webp",
-      "reason": "All image providers failed for article-versamento-avs-dicembre-importi: openai-codex (vision gate rejected image: Generic synthetic editorial scene with no text, logos, or visible",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-versamento-avs-dicembre-importi: openai-codex (image vision fallback deadline exceeded)",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-11-03T13:45:07.056Z",
-      "lastFailureAt": "2026-11-03T13:45:07.056Z"
+      "lastFailureAt": "2026-11-05T22:04:02.271Z"
     }
   ]
 }
