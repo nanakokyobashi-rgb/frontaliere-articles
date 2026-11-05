@@ -64,7 +64,6 @@ export function instagramInsightsEnvContract() {
 // that scripts expect.  One RC param may map to multiple env vars.
 
 export const RC_TO_ENV = {
-  HOUSE_AD_CREATIVE_VARIANT: ['HOUSE_AD_CREATIVE_VARIANT'],
   // Client-visible keys
   GEMINI_API_KEY:                 ['GEMINI_API_KEY', 'VITE_GEMINI_API_KEY'],
   BING_API_KEY:                   ['BING_API_KEY'],
