@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-aumento-tasso-disoccupazione-ottobre.webp",
-      "sha256": "c34289a5ba9a90a7a878549e3440bb963c0ddc11999d4cedacaac387cf958fbe"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-aumento-tasso-disoccupazione-ottobre-480w.webp",
-      "sha256": "0c403889b733bd8078f8b07d2c44ee34de7197dc2501d92f079071d3e650afde"
-    }
-  ]
+  "items": []
 }
