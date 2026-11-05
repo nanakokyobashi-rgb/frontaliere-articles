@@ -1,5 +1,7 @@
 import { readFileSync } from 'node:fs';
 
+export const LOCALIZED_TOPONYM_ENTITY_TYPES = Object.freeze(['canton', 'capital']);
+
 /** Check the JSON shape before consumers spread/map its nested fields.
  * Semantic checks (26 cantons, exonyms, normalized aliases) remain in
  * localized-toponyms.mjs; this reader can run even when the fixture is absent.
@@ -15,7 +17,7 @@ export function readLocalizedToponymTable(file) {
     if (!entity || typeof entity.code !== 'string' || !entity.code.trim()) {
       throw new Error('codice cantonale mancante');
     }
-    for (const type of ['canton', 'capital']) {
+    for (const type of LOCALIZED_TOPONYM_ENTITY_TYPES) {
       for (const locale of table.locales) {
         const forms = entity[type]?.[locale];
         if (!Array.isArray(forms) || forms.length === 0
