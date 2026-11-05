@@ -9,6 +9,7 @@ import {
   findExcerptCompletenessDefects,
   findExcerptMarkdownDefects,
   firstCompleteBodyExcerpt,
+  germanFallbackBoundary,
   findDescriptionDefects,
   isCompleteSourceCandidate,
   isSemanticallyCompatibleSibling,
@@ -271,6 +272,38 @@ test('un item completo non è un inizio a metà frase, mentre un ordinal date s�
     true,
   );
   assert.deepEqual(findDescriptionDefects(orderedItem, { locale: 'de', body: [`1. ${orderedItem}`] }), []);
+});
+
+test('il fallback tedesco conserva ordinali, abbreviazioni regionali e toponimi', () => {
+  const body = [
+    'Die Regel betrifft z.B. die Gem. St. Gallen und gilt ab dem 1. Januar 2027 im Kt. Zürich.',
+  ];
+  const source = body[0];
+
+  for (const token of ['z.B.', 'Gem.', 'St.', '1.', 'Kt.']) {
+    assert.equal(
+      germanFallbackBoundary(source, source.indexOf(token) + token.length - 1),
+      true,
+      `${token} deve restare nello stesso segmento tedesco`,
+    );
+  }
+  assert.equal(
+    firstCompleteBodyExcerpt(body, { locale: 'de', minLength: 60 }),
+    source,
+  );
+  assert.ok(
+    findExcerptCompletenessDefects('Die Regel gilt im Kt.', { locale: 'de' }).includes('unfinished-abbreviation'),
+    'un’abbreviazione regionale terminale resta non completa se manca il toponimo',
+  );
+
+  const repair = repairExcerptFromOriginal('', {
+    body,
+    title: 'Neue Regel für St. Gallen',
+    locale: 'de',
+    minLength: 60,
+  });
+  assert.equal(repair.strategy, 'b');
+  assert.equal(repair.value, source);
 });
 
 test('un prefisso a non può iniziare dopo un’abbreviazione nel body', () => {
