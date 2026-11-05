@@ -6320,6 +6320,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/canton-hubs/https-url.mjs",
+      "mode": "corpus-only",
+      "reason": "Predicato URL usato dal producer degli hub tematici cantonali (P10, D17): applica al refresh, agli emitter e al carry della cache la stessa policy raw HTTPS senza userinfo o normalizzazioni WHATWG pubblicabili. Il sito non possiede questo producer; il contratto resta nel corpus e la superficie pubblicata riceve solo i dati via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "06eb8630c4ae5ac7",
+        "alignedAt": "2026-11-05"
+      }
+    },
+    {
       "path": "generator/scripts/lib/canton-hubs/links.mjs",
       "mode": "corpus-only",
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Link a strumenti e pagine di categoria per (cantone, tema, locale), dal catalogo verificato sulle sitemap e dai file slug.",

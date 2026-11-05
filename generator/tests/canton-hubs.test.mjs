@@ -533,6 +533,68 @@ test('chiusure e cantieri: oltre il tetto restano le limitazioni in corso e le p
   assert.deepEqual(block.render('it').keyFacts.map((f) => f.value), ['10', '1']);
 });
 
+test('chiusure e cantieri: l’emitter applica la policy raw+authority anche alla cache legacy', () => {
+  const at = (hours) => new Date(NOW + hours * HOUR_MS).toISOString();
+  const invalidUrls = [
+    'https://@example.org/event',
+    'https://:@example.org/event',
+    'https://example.org:443/event',
+    'https://example.org/a/../b',
+    'https://example.org\\path',
+  ];
+  for (const url of invalidUrls) {
+    const block = shapeRoadEventsBlock({
+      schemaVersion: 1,
+      generatedAt: at(0),
+      events: [{
+        id: `invalid-url-${url}`,
+        canton: 'TI',
+        type: 'chiusura',
+        title: 'Chiusura di prova',
+        url,
+        validFrom: at(-1),
+        validTo: at(1),
+        source: 'fixture',
+        observedAt: at(0),
+      }],
+    }, { canton: 'TI', nowMs: NOW });
+    assert.equal(block.render('it').items[0].url, undefined, url);
+  }
+
+  const valid = shapeRoadEventsBlock({
+    schemaVersion: 1,
+    generatedAt: at(0),
+    events: [{
+      id: 'valid-url',
+      canton: 'TI',
+      type: 'chiusura',
+      title: 'Chiusura di prova',
+      url: 'https://example.org/path@marker',
+      validFrom: at(-1),
+      validTo: at(1),
+      source: 'fixture',
+      observedAt: at(0),
+    }],
+  }, { canton: 'TI', nowMs: NOW });
+  assert.equal(valid.render('it').items[0].url, 'https://example.org/path@marker');
+
+  const first = buildOne('canton-ti', 'mobilita');
+  for (const locale of HUB_LOCALES) {
+    const roadBlock = first.file.locales[locale].dataBlocks.find((item) => item.id === 'chiusure-cantieri');
+    assert.ok(roadBlock?.items?.length, `${locale}: blocco road-events presente nella fixture`);
+    roadBlock.items[0] = { ...roadBlock.items[0], url: 'https://@example.org/event' };
+  }
+  const carried = buildOne('canton-ti', 'mobilita', {
+    datasets: { ...fixtureDatasets(), roadEvents: null },
+    previous: first.file,
+    nowMs: NOW + HOUR_MS,
+  });
+  for (const locale of HUB_LOCALES) {
+    const roadBlock = carried.file.locales[locale].dataBlocks.find((item) => item.id === 'chiusure-cantieri');
+    assert.ok(!roadBlock?.items?.some((item) => item.url === 'https://@example.org/event'), `${locale}: URL legacy non deve essere carried`);
+  }
+});
+
 test('qualita\' del sidecar: scala dichiarata, nessuna saturazione a 1', () => {
   assert.equal(sidecarQuality(null), null);
   assert.equal(sidecarQuality({ _score_breakdown: null }), null);
@@ -991,16 +1053,18 @@ test('eventi: canonicalEventUrl deduplica equivalenti e conserva query, porta e 
 
   const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
   assert.equal(block.available, true);
-  const urls = block.render('it').items.map((item) => item.url);
-  assert.equal(urls.length, 8, 'due coppie canoniche collassano; query, porte e path significativi restano distinti');
+  const items = block.render('it').items;
+  const urls = items.map((item) => item.url).filter(Boolean);
+  assert.equal(items.length, 9, 'le coppie canoniche collassano e il record con URL non ammessa resta senza link');
+  assert.equal(urls.length, 8, 'solo gli otto link validi entrano nella superficie pubblicata');
   assert.equal(urls.filter((url) => url.includes('/event/query?')).length, 1, 'l’ordine delle coppie query e il fragment non cambiano identità');
   assert.ok(urls.includes('https://events.example.ch/event/query?z=2&tag=second&tag=first#programma'), 'il deep link mantiene la URL sorgente completa');
   assert.equal(urls.filter((url) => /\/event\/(?:Gra|Gr%C3)/.test(url)).length, 1, 'www, slash finale e Unicode NFC del path si canonicalizzano');
   assert.ok(urls.includes('https://www.events.example.ch/event/Gra%CC%88del/#dettaglio'), 'il deep link mantiene host, path e fragment originali');
   assert.ok(urls.some((url) => url.endsWith('/event/semantic?id=one')));
   assert.ok(urls.some((url) => url.endsWith('/event/semantic?id=two')));
-  assert.equal(urls.filter((url) => url.includes('/event/port')).length, 2, 'la porta HTTPS predefinita si normalizza e la porta non standard resta distinta');
-  assert.ok(urls.includes('https://events.example.ch:443/event/port'), 'la forma URL sorgente resta pubblicata dopo la deduplica canonica');
+  assert.equal(urls.filter((url) => url.includes('/event/port')).length, 2, 'la forma implicita e la porta non standard restano distinte');
+  assert.ok(!urls.some((url) => url.includes(':443/event/port')), 'la porta HTTPS esplicita predefinita non viene pubblicata');
   assert.ok(urls.some((url) => url.includes(':8443/event/port')));
   assert.ok(urls.some((url) => url.endsWith('/event/path-one')));
   assert.ok(urls.some((url) => url.endsWith('/event/path-two')));
@@ -1389,6 +1453,13 @@ test('formattazione hub: input malformati non producono dati invalidi o crash ge
 
   assert.equal(httpsUrlOrNull('https://user:pass@example.org/source'), null);
   assert.equal(httpsUrlOrNull('https://%75ser:pass@example.org/source'), null);
+  assert.equal(httpsUrlOrNull('https://@example.org/source'), null);
+  assert.equal(httpsUrlOrNull('https://:@example.org/source'), null);
+  assert.equal(httpsUrlOrNull('https://example.org:443/source'), null);
+  assert.equal(httpsUrlOrNull('https://example.org/a/../source'), null);
+  assert.equal(httpsUrlOrNull('https://example.org\\source'), null);
+  assert.equal(httpsUrlOrNull('https://example.org'), 'https://example.org');
+  assert.equal(httpsUrlOrNull('https://www.watson.ch/api/2.0/rss/index.xml?tag=Zürich'), 'https://www.watson.ch/api/2.0/rss/index.xml?tag=Zürich');
   assert.equal(httpsUrlOrNull('https://example.org/source'), 'https://example.org/source');
 });
 
@@ -1452,6 +1523,9 @@ test('il producer rifiuta cio\' che il renderer rifiuterebbe o scarterebbe in si
   bad((i) => { i.links[0].url = 'http://example.org/'; }, /URL non ammesso/);
   bad((i) => { i.links[0].url = 'https://user:pass@example.org/'; }, /URL non ammesso/);
   bad((i) => { i.links[0].url = 'https://%75ser:pass@example.org/'; }, /URL non ammesso/);
+  for (const url of ['https://@example.org/', 'https://:@example.org/', 'https://example.org:443/', 'https://example.org/a/../b', 'https://example.org\\path']) {
+    bad((i) => { i.links[0].url = url; }, /URL non ammesso/);
+  }
   bad((i) => { i.links[0].url = '/senza-slash'; }, /senza slash finale/);
   bad((i) => { i.links.push({ ...i.links[0] }); }, /link duplicato/);
   bad((i) => { i.dataBlocks[0].id = 'Non Valido'; }, /id non valido/);

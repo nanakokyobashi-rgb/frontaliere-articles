@@ -29,6 +29,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fetchFirstOk } from './lib/rewire-fetch.mjs';
+import { isHttpsUrlOrNull } from './lib/canton-hubs/https-url.mjs';
 // The 24 canton URL groups are the one source of truth for `canton`: a code
 // outside them (CH, DE, a typo) would reach no hub. Imported, not copied, so
 // the set cannot drift; the contract test copies relative imports with the script.
@@ -90,7 +91,7 @@ export function validateRoadEventsRecord(e, index, { seenIds = new Set() } = {})
   if (!CANTON_GROUPS.has(e.canton)) return `${at}.canton ${JSON.stringify(e.canton)} is not one of the 24 canton URL groups — refusing`;
   if (!TYPES.has(e.type)) return `${at}.type ${JSON.stringify(e.type)} is not one of ${[...TYPES].join('|')} — refusing`;
   if (typeof e.title !== 'string' || !e.title.trim()) return `${at}.title is empty — refusing`;
-  if (e.url !== null && !/^https:\/\//.test(String(e.url))) return `${at}.url is not https or null — refusing`;
+  if (!isHttpsUrlOrNull(e.url)) return `${at}.url is not https or null — refusing`;
   for (const k of ['validFrom', 'validTo']) {
     if (e[k] !== null && !isIso(e[k])) return `${at}.${k} is not an ISO date or null — refusing`;
   }
