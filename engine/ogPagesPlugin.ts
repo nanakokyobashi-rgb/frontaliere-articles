@@ -11,6 +11,7 @@ import path from 'path';
 import { readArticleRegistryMetadata } from './shared/articleRegistryMetadata';
 import { decodeHtmlText } from './shared/htmlEntities';
 import { buildRelatedArticlesIndex } from './relatedArticlesIndex';
+import { hasCompleteGoogleEventData } from './shared/googleEventDataQuality.mjs';
 import type { Plugin } from 'vite';
 import { getSiteShell, type ArticleAuthor, type SiteShellContract } from './siteShell';
 import { buildArticleSeoSections, cleanupArticleBodySections, articleBodySectionLabel, renderArticleDerivedSectionsHtml, renderArticleInlineMarkup } from './articleSeoFallback';
@@ -31,7 +32,10 @@ import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from '
 import {
   hasInterpolatedStaticProperty,
   lastStaticPropertyValue,
+  readStaticBooleanProperty,
+  readStaticCompositeProperty,
   readStaticObjectProperty,
+  readStaticStringOrStringArrayProperty,
   readStructuredSeoDescriptionState,
   readStructuredSeoObjectBlocks,
   staticPropertyState,
@@ -849,9 +853,9 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  // A dynamic assignment cannot be represented by this static renderer. The
  // Event branch below consumes these fields directly, so discover the Event
  // object first and guard every field it reads. BASE_URL templates are safe
- // only in the URL-bearing nested fields resolved by parseNestedObj.
+ // only in the URL-bearing nested fields resolved by parseNestedValue.
  const eventFields = sdType === 'Event'
- ? ['name', 'startDate', 'endDate', 'eventStatus', 'eventAttendanceMode', 'location', 'organizer', 'offers', 'performer']
+ ? ['name', 'startDate', 'endDate', 'previousStartDate', 'eventStatus', 'eventAttendanceMode', 'isAccessibleForFree', 'location', 'organizer', 'offers', 'performer']
  : [];
  const eventBaseUrlFields = new Set(['location', 'organizer', 'offers', 'performer']);
  const dynamicField = [...dynamicFields, ...eventFields]
@@ -1669,18 +1673,27 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const value = lastStaticPropertyValue(sd, field);
  return typeof value === 'string' ? value : '';
  };
- // Parse nested objects like location, organizer, offers, performer.
+ // Parse nested objects or arrays like location, organizer, offers, performer.
  // Source keys are already double-quoted (JSON-LD style), so we only need
  // to resolve `${BASE_URL}` template literals and strip trailing commas.
- const parseNestedObj = (field: string): Record<string, unknown> | null => {
- const raw = readStaticObjectProperty(sd, field);
+ const parseNestedValue = (field: string): Record<string, unknown> | unknown[] | null => {
+ const raw = readStaticCompositeProperty(sd, field);
  if (!raw) return null;
  try {
  const jsonStr = raw
- .replace(/`\$\{BASE_URL\}([^`]*)`/g, `"${BASE_URL}$1"`)
+ .replace(/`\$\{BASE_URL\}([^`]*)`/g, (_match: string, suffix: string) => JSON.stringify(`${BASE_URL}${suffix}`))
  .replace(/,\s*([\]}])/g, '$1'); // strip trailing commas
  return JSON.parse(jsonStr);
  } catch { return null; }
+ };
+ const normalizeOfferPrice = (offer: unknown): unknown => {
+ if (!offer || typeof offer !== 'object' || Array.isArray(offer)) return offer;
+ const record = offer as Record<string, unknown>;
+ if (typeof record.price !== 'string') return offer;
+ const rawPrice = record.price.trim();
+ if (!/^\d+(?:\.\d+)?$/u.test(rawPrice)) return offer;
+ const price = Number(rawPrice);
+ return Number.isFinite(price) ? { ...record, price } : offer;
  };
 
  ldObj = {
@@ -1706,37 +1719,54 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  '@type': 'SpeakableSpecification',
  cssSelector: ['article h1', 'article h2', 'article p'],
  },
- isAccessibleForFree: true,
  };
 
  // Add Event-specific fields from source
  const startDate = sdStr('startDate');
  const endDate = sdStr('endDate');
- const eventStatus = sdStr('eventStatus');
- const eventAttendanceMode = sdStr('eventAttendanceMode');
+ const eventStatus = readStaticStringOrStringArrayProperty(sd, 'eventStatus');
+ const eventAttendanceMode = readStaticStringOrStringArrayProperty(sd, 'eventAttendanceMode');
+ const previousStartDate = readStaticStringOrStringArrayProperty(sd, 'previousStartDate');
+ const isAccessibleForFree = readStaticBooleanProperty(sd, 'isAccessibleForFree');
  if (startDate) ldObj.startDate = startDate;
  if (endDate) ldObj.endDate = endDate;
- if (eventStatus) ldObj.eventStatus = eventStatus;
- if (eventAttendanceMode) ldObj.eventAttendanceMode = eventAttendanceMode;
+ if (previousStartDate !== undefined) ldObj.previousStartDate = previousStartDate;
+ if (eventStatus !== undefined) ldObj.eventStatus = eventStatus;
+ if (eventAttendanceMode !== undefined) ldObj.eventAttendanceMode = eventAttendanceMode;
+ if (isAccessibleForFree !== undefined) ldObj.isAccessibleForFree = isAccessibleForFree;
 
- const location = parseNestedObj('location');
+ const location = parseNestedValue('location');
  if (location) ldObj.location = location;
- const organizer = parseNestedObj('organizer');
+ const organizer = parseNestedValue('organizer');
  if (organizer) ldObj.organizer = organizer;
- const offers = parseNestedObj('offers');
- if (offers) {
- // Ensure validFrom is always present (Google recommended field)
- if (!offers.validFrom && startDate) {
- try {
- const sd = new Date(startDate as string);
- sd.setDate(sd.getDate() - 30);
- offers.validFrom = sd.toISOString().replace('Z', '+01:00').replace(/\.\d{3}/, '');
- } catch { /* skip */ }
- }
- ldObj.offers = offers;
- }
- const performer = parseNestedObj('performer');
+ const offers = parseNestedValue('offers');
+ if (Array.isArray(offers)) ldObj.offers = offers.map(normalizeOfferPrice);
+ else if (offers) ldObj.offers = normalizeOfferPrice(offers);
+ const performer = parseNestedValue('performer');
  if (performer) ldObj.performer = performer;
+ if (!hasCompleteGoogleEventData(ldObj)) {
+ // The source has not supplied enough facts for Google's Event report. Keep
+ // the public article page discoverable as a WebPage without asserting an
+ // incomplete Event or inventing a ticket date/free-admission claim.
+ ldObj = {
+ '@context': 'https://schema.org',
+ '@type': 'WebPage',
+ '@id': `${full}#webpage`,
+ name: localizedTitle,
+ description: localizedDesc,
+ image: imageObjectLd({
+ url: imgU,
+ ...(imageCredit ? imageObjectCreditFields(imageCredit) : {}),
+ width: en.imgW,
+ height: en.imgH,
+ }),
+ url: full,
+ inLanguage: locale,
+ author: authorObj,
+ publisher: ORGANIZATION_LD,
+ isPartOf: { '@type': 'WebSite', '@id': `${BASE_URL}/#website`, name: 'Frontaliere Ticino' },
+ };
+ }
  } else {
  // NewsArticle — Google News eligibility (Publisher Center answer/9607104)
  ldObj = {
