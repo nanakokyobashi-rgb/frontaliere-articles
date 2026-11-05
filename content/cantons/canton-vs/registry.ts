@@ -183,4 +183,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'aumento-tasso-disoccupazione-ottobre',
+ category: 'novita',
+ date: '2026-11-05T14:49:33.548Z',
+ image: '/images/blog/article-aumento-tasso-disoccupazione-ottobre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

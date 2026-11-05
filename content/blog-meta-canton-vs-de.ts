@@ -51,6 +51,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.vallese-piano-risparmi-2030.title': 'Wallis: Der Staatsrat strebt Einsparungen von 180 Millionen an',
     'blog.article.vallese-piano-risparmi-2030.excerpt': 'Der Artikel von RTS berichtet, dass der Staatsrat des Wallis bis 2030 Einsparungen von CHF 180 Millionen ermitteln muss, um das Gleichgewicht des kantonalen Haushalts zu wahren.',
     'blog.article.vallese-piano-risparmi-2030.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.aumento-tasso-disoccupazione-ottobre.title': 'Im Oktober steigt die Arbeitslosenquote im Kanton Wallis',
+    'blog.article.aumento-tasso-disoccupazione-ottobre.excerpt': 'Ende Oktober waren 6.082 Arbeitslose bei den Regionalen Arbeitsämtern des Wallis registriert, 327 mehr als im Vormonat.',
+    'blog.article.aumento-tasso-disoccupazione-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVsDe;
