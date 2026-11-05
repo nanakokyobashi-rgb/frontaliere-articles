@@ -65,6 +65,7 @@ import {
   REQUIRED_IT_BODY_FIELDS,
 } from '../scripts/lib/body2-payload-verdict.mjs';
 import { describePayloadRejection } from '../scripts/lib/llm-payload-diagnostics.mjs';
+import { ARTICLE_SIGNAL_LOG_HELPERS } from './lib/article-signal-log-harness.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.join(HERE, '..', 'scripts', 'create-article.mjs');
@@ -183,6 +184,7 @@ function costruisciCallLLM({ risposte, wallBudgetExceeded = () => false }) {
     isNonItalianScript: () => false,
     nonItalianScriptRatio: () => 0,
     RUN_REPORT: {},
+    safeSignalDiagnosticTextForLog: ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog,
   };
 
   const factory = new Function(

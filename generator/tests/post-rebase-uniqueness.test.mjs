@@ -88,6 +88,17 @@ function metaSrc(ids, articles = {}) {
   return `export const META = {\n${entries}};\n`;
 }
 
+function assertRedactedMetaError(fn, detailPatterns, fixtureValues) {
+  let caught;
+  assert.throws(fn, (error) => {
+    caught = error;
+    return error instanceof Error;
+  });
+  assert.match(caught.message, /meta IT assente o incoerente/);
+  for (const pattern of detailPatterns) assert.match(caught.message, pattern);
+  for (const value of fixtureValues) assert.ok(!caught.message.includes(value), 'diagnostica redatta');
+}
+
 /** Stato di una sezione: ids (registro + slug) e ledger URL→voce. */
 function sectionFiles(surface, { ids = [], ledger = {}, articles = {}, localizedSlugs = {} } = {}) {
   const metaFiles = surface.metaFiles ?? [surface.metaFile];
@@ -171,13 +182,18 @@ test('una sezione nel core senza ledger dichiarato e\' un errore, non una sezion
 test('il meta IT mancante con ID su registro/slug e\' un errore fail-closed', () => {
   const files = sectionFiles(FIRST, { ids: ['esistente'] });
   const readAt = (file) => file === FIRST.metaFile ? null : files[file] ?? null;
-  const expected = FIRST.kind === 'canton'
-    ? /superfici sorgente cantonali parziali.*registro, slug e meta locali/
-    : /meta IT assente o incoerente.*esistente/;
-  assert.throws(
-    () => snapshotSections([FIRST], readAt, 'against'),
-    expected,
-  );
+  if (FIRST.kind === 'canton') {
+    assert.throws(
+      () => snapshotSections([FIRST], readAt, 'against'),
+      /superfici sorgente cantonali parziali.*registro, slug e meta locali/,
+    );
+  } else {
+    assertRedactedMetaError(
+      () => snapshotSections([FIRST], readAt, 'against'),
+      [/mancano 1 ID/],
+      ['esistente'],
+    );
+  }
 });
 
 test('una sezione cantonale parziale non viene ridotta a mappa slug vuota', () => {
@@ -213,18 +229,20 @@ test('una sezione cantonale parziale non viene ridotta a mappa slug vuota', () =
 test('un record meta con formato non riconosciuto non puo\' ridurre il contro-corpus', () => {
   const files = sectionFiles(FIRST, { ids: ['esistente'] });
   files[FIRST.metaFile] = "export const META = {\n  'blog.article.esistente.title': \"Titolo non letto\",\n};\n";
-  assert.throws(
+  assertRedactedMetaError(
     () => snapshotSections([FIRST], (file) => files[file] ?? null, 'against'),
-    /meta IT assente o incoerente.*esistente/,
+    [/mancano 1 excerpt/],
+    ['esistente', 'Titolo non letto'],
   );
 });
 
 test('un titolo senza il suo excerpt viene rifiutato in modo fail-closed', () => {
   const files = sectionFiles(FIRST, { ids: ['esistente'] });
   files[FIRST.metaFile] = "export const META = {\n  'blog.article.esistente.title': 'Titolo letto',\n};\n";
-  assert.throws(
+  assertRedactedMetaError(
     () => snapshotSections([FIRST], (file) => files[file] ?? null, 'against'),
-    /meta IT assente o incoerente.*mancano excerpt per esistente/,
+    [/mancano 1 excerpt/],
+    ['esistente', 'Titolo letto'],
   );
 });
 
@@ -234,9 +252,10 @@ test('un excerpt orfano o duplicato non puo\' ridurre il contro-corpus', () => {
     + "  'blog.article.esistente.title': 'Titolo letto',\n"
     + "  'blog.article.orfano.excerpt': 'Estratto orfano',\n"
     + "};\n";
-  assert.throws(
+  assertRedactedMetaError(
     () => snapshotSections([FIRST], (file) => orphanFiles[file] ?? null, 'against'),
-    /meta IT assente o incoerente.*excerpt orfani.*orfano/,
+    [/mancano 1 excerpt/, /excerpt orfani: 1/],
+    ['esistente', 'orfano', 'Titolo letto', 'Estratto orfano'],
   );
 
   const duplicateFiles = sectionFiles(FIRST, { ids: ['esistente'] });
@@ -245,9 +264,10 @@ test('un excerpt orfano o duplicato non puo\' ridurre il contro-corpus', () => {
     + "  'blog.article.esistente.excerpt': 'Primo estratto',\n"
     + "  'blog.article.esistente.excerpt': 'Secondo estratto',\n"
     + "};\n";
-  assert.throws(
+  assertRedactedMetaError(
     () => snapshotSections([FIRST], (file) => duplicateFiles[file] ?? null, 'against'),
-    /meta IT assente o incoerente.*excerpt duplicati.*esistente/,
+    [/excerpt duplicati: 1/],
+    ['esistente', 'Titolo letto', 'Primo estratto', 'Secondo estratto'],
   );
 });
 
@@ -747,6 +767,7 @@ test('CLI titolo quasi identico: exit 1 e violazione di contenuto dopo il rebase
     const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
     assert.equal(code, 1, out);
     assert.match(out, new RegExp(`${VIOLATION_MARKER} kind=duplicate-content section=${FIRST.section} id=\\[redacted\\] otherId=\\[redacted\\]`));
+    assert.doesNotMatch(out, /pedemontana-truffa-sms-frontalieri|pedemontana-falso-pedaggio-sms|tio\.ch|Pedemontana/);
   } finally {
     w.cleanup();
   }
@@ -778,7 +799,8 @@ test('CLI meta IT incompleto: exit 2 con POST_REBASE_UNIQUENESS_ERROR, mai un fa
   try {
     const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
     assert.equal(code, 2, out);
-    assert.match(out, new RegExp(`${ERROR_MARKER}: .*meta IT assente o incoerente.*${old}`));
+    assert.match(out, new RegExp(`${ERROR_MARKER}: .*meta IT assente o incoerente.*mancano 1 ID`));
+    assert.doesNotMatch(out, new RegExp(old));
     assert.doesNotMatch(out, new RegExp(OK_MARKER));
     assert.doesNotMatch(out, new RegExp(VIOLATION_MARKER));
   } finally {
@@ -910,6 +932,26 @@ test('CLI: una superficie presente ma vuota e\' un errore, non «nessuna voce»'
     } finally {
       w.cleanup();
     }
+  }
+});
+
+test('CLI: gli errori della mappa slug redigono id e slug dal parser', () => {
+  const privateId = 'private-article-id-must-not-reach-the-log';
+  const mine = sectionFiles(SECOND, { ids: ['mio'] });
+  const malformed = slugSrc([privateId, privateId], FIRST.slugConst);
+  const rebased = {
+    ...mine,
+    [FIRST.slugDataFile]: malformed,
+  };
+  const w = world({ upstream: {}, mine, rebased });
+  try {
+    const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
+    assert.equal(code, 2, out);
+    assert.match(out, new RegExp(`${ERROR_MARKER}: .*${FIRST.section}: mappa slug non valida \\(dettagli redatti\\)`));
+    assert.doesNotMatch(out, /private-article-id-must-not-reach-the-log/);
+    assert.doesNotMatch(out, /id articolo duplicato/);
+  } finally {
+    w.cleanup();
   }
 });
 

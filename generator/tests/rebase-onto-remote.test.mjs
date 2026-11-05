@@ -22,7 +22,7 @@ import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { copyFileSync, mkdtempSync, writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
+import { copyFileSync, mkdtempSync, writeFileSync, mkdirSync, existsSync, readFileSync, chmodSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 // Non `rmSync` diretta: git scrive in `.git/` dopo l'uscita del comando e la
 // rimozione alza ENOTEMPTY. Il perche' e la misura stanno nel modulo.
@@ -95,11 +95,11 @@ function commitAll(root, message) {
 }
 
 /** Runs the helper. Returns { code, out } — never throws on a non-zero exit. */
-function runHelper(cwd, upstreamPath, ...allowlist) {
+function runHelperWithOptions(cwd, upstreamPath, { target = 'main', allowlist = [], env = GIT_ENV } = {}) {
   try {
-    const out = execFileSync('bash', [SCRIPT, upstreamPath, 'main', ...allowlist], {
+    const out = execFileSync('bash', [SCRIPT, upstreamPath, target, ...allowlist], {
       cwd,
-      env: GIT_ENV,
+      env,
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'pipe'],
     });
@@ -107,6 +107,40 @@ function runHelper(cwd, upstreamPath, ...allowlist) {
   } catch (err) {
     return { code: err.status ?? 1, out: `${err.stdout ?? ''}${err.stderr ?? ''}` };
   }
+}
+
+function runHelper(cwd, upstreamPath, ...allowlist) {
+  return runHelperWithOptions(cwd, upstreamPath, { allowlist });
+}
+
+/** Injects deterministic pull/commit failures while delegating every other git command. */
+function gitShimEnv(root) {
+  const shimDir = path.join(root, 'git-shim');
+  mkdirSync(shimDir, { recursive: true });
+  const realGit = execFileSync('which', ['git'], { encoding: 'utf8' }).trim();
+  const shim = path.join(shimDir, 'git');
+  writeFileSync(shim, [
+    '#!/bin/sh',
+    'if [ "$1" = pull ] && [ -n "${FAKE_GIT_PULL_ERROR:-}" ]; then',
+    '  printf \'%s\\n\' "$FAKE_GIT_PULL_ERROR" >&2',
+    '  exit 1',
+    'fi',
+    'if [ "$1" = add ] && [ "${FAIL_GIT_ADD:-0}" = 1 ]; then',
+    '  printf \'%s\\n\' "fatal: injected add failure" >&2',
+    '  exit 1',
+    'fi',
+    'if [ "$1" = commit ] && [ "${FAIL_GIT_AMEND:-0}" = 1 ] && [ "$3" = --amend ]; then',
+    '  printf \'%s\\n\' "fatal: injected amend failure" >&2',
+    '  exit 1',
+    'fi',
+    'exec "$REAL_GIT" "$@"',
+    '',
+  ].join('\n'));
+  chmodSync(shim, 0o755);
+  return {
+    REAL_GIT: realGit,
+    PATH: `${shimDir}:${GIT_ENV.PATH}`,
+  };
 }
 
 /**
@@ -185,6 +219,31 @@ test('an article survives a conflict confined to the bookkeeping cache', () => {
   }
 });
 
+test('un git add fallito durante la risoluzione abortisce il rebase e ripristina il tree', () => {
+  const w = makeWorld();
+  try {
+    landUpstream(w, [[BOOKKEEPING, '{"other":true}\n', 'concurrent run rewrites the cache']]);
+    write(w.work, BOOKKEEPING, '{"mine":true}\n');
+    write(w.work, 'content/blog-body/it/nuovo-articolo.ts', 'export const x = 1\n');
+    commitAll(w.work, 'Generate blog article (frontaliere)');
+    const beforeRebase = headSha(w.work);
+    const shimEnv = gitShimEnv(w.root);
+
+    const { code, out } = runHelperWithOptions(w.work, w.upstream, {
+      allowlist: [BOOKKEEPING],
+      env: { ...GIT_ENV, ...shimEnv, FAIL_GIT_ADD: '1' },
+    });
+
+    assert.equal(code, 1, out);
+    assert.match(out, /failed to stage resolved rebase conflict path\(s\); paths redacted/);
+    assert.equal(headSha(w.work), beforeRebase, 'il rebase fallito deve ripristinare il commit precedente');
+    assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'l\'abort deve lasciare il tree pulito');
+    assert.equal(rebaseInProgress(w.work), false, 'non devono restare metadati di rebase');
+  } finally {
+    w.cleanup();
+  }
+});
+
 test('multiple conflicting commits all replay, and the article is not dropped', () => {
   // The regression. Two local commits both conflict on the cache; the first
   // becomes empty once upstream's copy is taken, the second carries the article.
@@ -252,7 +311,11 @@ test('a conflict outside the allowlist aborts and leaves the tree untouched', ()
 
     const { code, out } = runHelper(w.work, w.upstream, BOOKKEEPING);
     assert.equal(code, 1, 'a non-bookkeeping conflict must still fail, exactly as before the fix');
-    assert.match(out, /rebase conflict on an undeclared path; aborting/);
+    assert.match(
+      out,
+      /rebase conflict path is not a whole-file bookkeeping cache or declared content registry \(count=1, paths redacted\)/,
+    );
+    assert.doesNotMatch(out, /README\.md/, 'the conflicted path must stay redacted');
     assert.equal(headSha(w.work), before, 'HEAD must be untouched after the abort');
     assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'the working tree must be left clean');
     assert.ok(!rebaseInProgress(w.work), 'no rebase may be left in progress');
@@ -308,7 +371,8 @@ test('a per-article path with neither a --theirs nor an --ours copy aborts on th
       'must not claim to have resolved a file it never staged — that false claim is the bug: ' +
         `it hid the fact that nothing was resolved. Output:\n${out}`,
     );
-    assert.match(out, /rebase conflict has neither side available to take/);
+    assert.match(out, /per-article rebase conflict has neither a --theirs nor an --ours copy to take \(path redacted\)/);
+    assert.equal(out.includes(PER_ARTICLE), false, 'the per-article path must stay redacted');
     assert.equal(headSha(w.work), before, 'HEAD must be untouched after the abort');
     assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'the working tree must be left clean');
     assert.ok(!rebaseInProgress(w.work), 'no rebase may be left in progress');
@@ -717,7 +781,7 @@ test('a conflict on the journalist image catalog resolves instead of aborting', 
 
     const { code, out } = runHelper(w.work, w.upstream, ...allowlist);
     assert.equal(code, 0, `the helper must resolve this conflict, not abort. Got:\n${out}`);
-    assert.match(out, /resolved bookkeeping conflict by taking upstream/);
+    assert.match(out, /resolved bookkeeping conflict by taking upstream \(path redacted\)/);
 
     git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
     assert.ok(
@@ -1387,7 +1451,11 @@ test('un path letterale non classifica un altro file come registro wildcard', ()
 
     const { code, out } = runHelper(w.work, w.upstream, '--merge-registry', GLOB_LITERAL_REGISTRY);
     assert.equal(code, 1, 'un path non dichiarato non deve essere inviato al resolver dei registri');
-    assert.match(out, /rebase conflict on an undeclared path; aborting/);
+    assert.match(
+      out,
+      /rebase conflict path is not a whole-file bookkeeping cache or declared content registry \(count=1, paths redacted\)/,
+    );
+    assert.equal(out.includes(GLOB_DECOY_REGISTRY), false, 'the undeclared registry path must stay redacted');
     assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'il rebase deve essere abortito pulitamente');
   } finally {
     w.cleanup();
@@ -1738,8 +1806,9 @@ test('un conflitto anche FUORI dai record fa abortire, e non riscrive niente', (
 
     const { code, out } = runHelper(w.work, w.upstream, ...helperArgsFromWorkflow());
     assert.equal(code, 1, `un conflitto fuori dai record DEVE abortire, non committare. Output:\n${out}`);
-    assert.match(out, /FUORI dai contenitori di record|perderebbe una modifica/,
-      `l'abort deve dire PERCHE', altrimenti il prossimo caso e' indistinguibile. Output:\n${out}`);
+    assert.match(out, /content registry merge failed \(path details redacted\)/,
+      `l'abort deve riportare una categoria safe. Output:\n${out}`);
+    assert.equal(out.includes(REGISTRY), false, 'il path del registro deve restare redatto');
     assert.equal(headSha(w.work), before, 'HEAD deve restare intatto dopo l\'abort');
     assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'l\'albero deve restare pulito');
     assert.ok(!rebaseInProgress(w.work), 'nessun rebase puo\' restare in corso');
@@ -2112,6 +2181,68 @@ function counterWorld({ experimental = 10, evergreen = 10, runCounter = 10 } = {
 
 const countOf = (w, rel, field = 'count') => JSON.parse(git(w.work, 'show', `HEAD:${rel}`))[field];
 
+for (const { label, raw, category, secrets } of [
+  {
+    label: 'authentication',
+    raw: "fatal: Authentication failed for 'https://user:token-should-not-leak@example.invalid/private-repo.git'",
+    category: 'authentication',
+    secrets: ['token-should-not-leak', 'private-repo'],
+  },
+  {
+    label: 'network',
+    raw: "fatal: unable to access 'https://network-host-should-not-leak.invalid/private-repo.git': Could not resolve host: host-secret",
+    category: 'network',
+    secrets: ['network-host-should-not-leak', 'host-secret', 'private-repo'],
+  },
+  {
+    label: 'target-ref',
+    raw: "fatal: couldn't find remote ref private-target-should-not-leak",
+    category: 'target-ref',
+    secrets: ['private-target-should-not-leak'],
+  },
+]) {
+  test(`il fallimento del pull conserva solo la categoria safe ${label}`, () => {
+    const w = makeWorld();
+    try {
+      const shimEnv = gitShimEnv(w.root);
+      const { code, out } = runHelperWithOptions(w.work, w.upstream, {
+        allowlist: [BOOKKEEPING],
+        env: { ...GIT_ENV, ...shimEnv, FAKE_GIT_PULL_ERROR: raw },
+      });
+      assert.equal(code, 1, out);
+      assert.match(out, new RegExp(`category=${category}`));
+      for (const secret of secrets) assert.doesNotMatch(out, new RegExp(secret));
+    } finally {
+      w.cleanup();
+    }
+  });
+}
+
+test('il commit di riconciliazione contatori fallito blocca il successo e ripristina il tree rebased', () => {
+  const w = counterWorld();
+  const articlePath = 'content/blog-body/it/private-article-path.ts';
+  try {
+    landUpstream(w, [[EVERGREEN_COUNTER_PATH, `${JSON.stringify({ count: 11 }, null, 2)}\n`, 'u ever']]);
+    write(w.work, EVERGREEN_COUNTER_PATH, `${JSON.stringify({ count: 11 }, null, 2)}\n`);
+    write(w.work, articlePath, 'export const p = 1\n');
+    commitAll(w.work, 'Generate blog article (frontaliere)');
+
+    const shimEnv = gitShimEnv(w.root);
+    const { code, out } = runHelperWithOptions(w.work, w.upstream, {
+      allowlist: ['--merge-counter', `${EVERGREEN_COUNTER_PATH}:count`],
+      env: { ...GIT_ENV, ...shimEnv, FAIL_GIT_AMEND: '1' },
+    });
+    assert.equal(code, 1, out);
+    assert.match(out, /counter reconciliation failed; stage=commit category=git-amend/);
+    assert.doesNotMatch(out, /private-article-path|topic-candidates-evergreen-counter/);
+    assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 11, 'il dato resta nello stato prodotto dal rebase');
+    assert.ok(existsSync(path.join(w.work, articlePath)), 'l’articolo resta nel commit rebased');
+    assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'il rollback elimina staged e working changes del tentativo');
+  } finally {
+    w.cleanup();
+  }
+});
+
 test('un conflitto sui contatori somma gli incrementi dei due lati, e l\'articolo sopravvive', () => {
   const w = counterWorld();
   try {
@@ -2201,7 +2332,7 @@ test('un contatore che non si sa fondere ricade su «prendi upstream», non abor
 
     const { code, out } = runHelper(w.work, w.upstream, ...helperArgsFromWorkflow());
     assert.equal(code, 0, `il ripiego deve risolvere:\n${out}`);
-    assert.match(out, /counter merge refused — resolved by taking upstream, as for a bookkeeping cache/);
+    assert.match(out, /counter merge refused \(path redacted\)/);
     git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
     assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/articolo-ripiego.ts')));
     assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 12, 'ripiego = copia upstream');

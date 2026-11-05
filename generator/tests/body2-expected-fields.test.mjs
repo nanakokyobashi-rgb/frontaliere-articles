@@ -167,7 +167,7 @@ const RISPOSTA_META_CONFORME = JSON.stringify({
 // ── L'istanziazione del `callLLM` vero ────────────────────────────────────
 
 const CALL_LLM_DEPS = [
-  '_aiCallLLM', 'AI_MODELS', 'RUN_START_MS', 'RUN_WALL_BUDGET_MS', 'repairLlmJson',
+  '_aiCallLLM', 'AI_MODELS', 'RUN_START_MS', 'RUN_WALL_BUDGET_MS', 'RUN_REPORT', 'repairLlmJson',
   'classifyBody2Payload', 'resolveBody2Validation', 'describePayloadRejection',
   'describeJsonParseError', 'describeRawForDiagnostics', 'recordModelContentFailure',
   'recordModelContentSuccess', 'wallBudgetExceeded', 'console',
@@ -203,6 +203,7 @@ function makeCallLLM({ risposte, modello = 'gpt-4.1' }) {
     AI_MODELS: { GEMINI_FLASH: 'gemini-flash', LOCAL_FALLBACK: 'local/fallback' },
     RUN_START_MS: Date.now(),
     RUN_WALL_BUDGET_MS: 60 * 60 * 1000,
+    RUN_REPORT: {},
     repairLlmJson,
     classifyBody2Payload,
     resolveBody2Validation,

@@ -873,11 +873,13 @@ describe('corpus pubblicato — nessun mobilio della fonte nei corpi', () => {
 
   it('zero file portano un marcatore di eco della fonte', () => {
     const offenders = scanCorpusForSourceEcho(ROOT);
-    assert.deepEqual(
-      offenders.map((o) => `${o.file} → ${o.markers.join(', ')}`),
-      [],
-      'un corpo pubblicato contiene mobilio della pagina sorgente: bonifica con ' +
-        '`node generator/scripts/repair-source-echo.mjs --apply` e verifica che la causa a monte regga',
+    const markerCount = offenders.reduce((total, offender) => total + offender.markers.length, 0);
+    assert.equal(
+      offenders.length,
+      0,
+      `il gate source-echo ha trovato ${offenders.length} file e ${markerCount} marcatori; ` +
+        'identità e path omessi. Bonifica con `node generator/scripts/repair-source-echo.mjs --apply` ' +
+        'e verifica che la causa a monte regga.',
     );
   });
 });
