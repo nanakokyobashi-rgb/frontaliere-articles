@@ -4213,17 +4213,17 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest bbc908ae… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel e gli snippet correnti; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
+      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest e7c60f48… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
       "baseline": {
         "site": "18668c902915dd43",
-        "corpus": "0335e090efc6007c",
+        "corpus": "02d366e3879d4a7a",
         "alignedAt": "2026-11-05"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 23,
-        "sha256": "bbc908ae705c3d806e631dde07c16ade2c7f8f1029fad434cf850b60840aeb8b"
+        "sha256": "e7c60f4821b9826525b8faba1039ff79c9d49880cf661d41c0452ff3de6e7293"
       }
     },
     {
@@ -4440,8 +4440,8 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
       "baseline": {
-        "site": "09115acccba7dded",
-        "corpus": "09115acccba7dded",
+        "site": "699fe7e20f015dc6",
+        "corpus": "699fe7e20f015dc6",
         "alignedAt": "2026-11-05"
       }
     },
@@ -6903,8 +6903,8 @@
       "mode": "identical",
       "reason": "Fingerprint byte-exact dei producer site-support, AdSense, Partnerize, Meta Pixel e helper canonici; lega gli snapshot trasportati ai byte sorgente e ne verifica l’insieme prima della pubblicazione.",
       "baseline": {
-        "site": "616045a255853208",
-        "corpus": "616045a255853208",
+        "site": "95d8d04585133d65",
+        "corpus": "95d8d04585133d65",
         "alignedAt": "2026-11-05"
       }
     },
@@ -6915,7 +6915,7 @@
       "reason": "Snapshot byte-exact di site-support, AdSense, Partnerize, Meta Pixel e guardia inline canonica, generato dall’exporter del sito. hostShellFiles verifica nomi e SHA senza import fra repository; i fingerprint identici e quello scalare del contratto bloccano la pubblicazione se gli asset divergono.",
       "baseline": {
         "site": "56aaef2cbbea74f8",
-        "corpus": "7e35e47c9feed9ec",
+        "corpus": "3876c4b713add420",
         "alignedAt": "2026-11-05"
       }
     },
