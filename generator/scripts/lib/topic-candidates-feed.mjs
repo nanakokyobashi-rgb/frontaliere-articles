@@ -3,6 +3,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { isArrayBuffer as isArrayBufferValue } from 'node:util/types';
 
 export const TOPIC_CANDIDATES_FEED_URL = 'https://cdn.frontaliereticino.ch/data/experimental-candidate-feed.json';
 export const TOPIC_CANDIDATES_FEED_CACHE_BUCKET_MS = 5 * 60 * 1000;
@@ -224,13 +225,21 @@ function responseUsesIdentityEncoding(response) {
   return codings.length === 0 || codings.every((coding) => coding === 'identity');
 }
 
-function declaredResponseBytes(response, maxBytes) {
-  const contentLength = response.headers?.get?.('content-length');
-  if (contentLength === null || contentLength === undefined || !String(contentLength).trim()) return null;
-  const parsed = Number(contentLength);
-  if (!Number.isSafeInteger(parsed) || parsed < 0) {
+/** Accept comma-joined duplicate lengths only when every decimal value agrees. */
+function parseContentLengthHeader(contentLength) {
+  if (contentLength === null || contentLength === undefined) return null;
+  const values = String(contentLength).split(',').map((value) => value.replace(/^[ \t]+|[ \t]+$/g, ''));
+  if (values.length === 1 && values[0] === '') return null;
+  const lengths = values.map((value) => /^[0-9]+$/.test(value) ? Number(value) : NaN);
+  if (lengths.some((value) => !Number.isSafeInteger(value) || value < 0 || value !== lengths[0])) {
     throw new TopicCandidatesFeedError('content_length_invalid');
   }
+  return lengths[0];
+}
+
+function declaredResponseBytes(response, maxBytes) {
+  const parsed = parseContentLengthHeader(response.headers?.get?.('content-length'));
+  if (parsed === null) return null;
   if (parsed > maxBytes) throw new TopicCandidatesFeedError('response_too_large');
   // Fetch exposes the decoded body, while Content-Length describes the wire
   // representation whenever a non-identity Content-Encoding is present.
@@ -294,7 +303,7 @@ async function readBodyBounded(response, maxBytes) {
 
       let chunk;
       try {
-        const bytes = value instanceof ArrayBuffer
+        const bytes = isArrayBufferValue(value)
           ? new Uint8Array(value)
           : ArrayBuffer.isView(value)
             ? new Uint8Array(value.buffer, value.byteOffset, chunkBytes)
