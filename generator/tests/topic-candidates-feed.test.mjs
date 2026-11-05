@@ -246,6 +246,31 @@ test('404, malformed JSON, stale payload, and oversized bodies degrade to an emp
   assert.equal(buildTopicCandidatesFeedReport(aging).feedAgeHours, 168);
 });
 
+test('rejects a truncated CDN body before writing candidate data', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'topic-feed-truncated-'));
+  try {
+    const outputPath = join(root, 'feed.json');
+    const body = JSON.stringify(makeFeed());
+    const result = await writeTopicCandidatesFeed(outputPath, {
+      nowMs: NOW_MS,
+      redditDataApiApproved: true,
+      fetchImpl: async () => new Response(body, {
+        status: 200,
+        headers: {
+          'content-type': 'application/json',
+          'content-length': String(Buffer.byteLength(body, 'utf8') + 1),
+        },
+      }),
+    });
+
+    assert.equal(result.ok, false);
+    assert.equal(result.reason, 'response_truncated');
+    assert.deepEqual(JSON.parse(readFileSync(outputPath, 'utf8')), { ...EMPTY_TOPIC_CANDIDATES_FEED });
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('writes an empty feed and a privacy-safe report when the CDN is unavailable', async () => {
   const root = mkdtempSync(join(tmpdir(), 'topic-feed-'));
   try {

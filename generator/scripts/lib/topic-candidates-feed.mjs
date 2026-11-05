@@ -214,18 +214,42 @@ export function validateTopicCandidatesFeed(payload, options = {}) {
   return validateTopicCandidatesFeedWithDiagnostics(payload, options).feed;
 }
 
-async function readBodyBounded(response, maxBytes) {
+function declaredResponseBytes(response, maxBytes) {
   const contentLength = response.headers?.get?.('content-length');
-  if (contentLength !== null && contentLength !== undefined) {
-    const parsed = Number(contentLength);
-    if (Number.isFinite(parsed) && parsed > maxBytes) {
-      throw new TopicCandidatesFeedError('response_too_large');
-    }
+  if (contentLength === null || contentLength === undefined || !String(contentLength).trim()) return null;
+  const parsed = Number(contentLength);
+  if (!Number.isSafeInteger(parsed) || parsed < 0) {
+    throw new TopicCandidatesFeedError('content_length_invalid');
   }
+  if (parsed > maxBytes) throw new TopicCandidatesFeedError('response_too_large');
+  return parsed;
+}
+
+/** Reject a body whose declared byte count does not match what was received. */
+export function rejectTruncatedTopicFeed({ declaredBytes = null, receivedBytes, maxBytes = TOPIC_CANDIDATES_FEED_MAX_BYTES } = {}) {
+  if (!Number.isSafeInteger(receivedBytes) || receivedBytes < 0) {
+    throw new TypeError('receivedBytes must be a non-negative integer');
+  }
+  if (!Number.isSafeInteger(maxBytes) || maxBytes < 1) {
+    throw new TypeError('maxBytes must be a positive integer');
+  }
+  if (receivedBytes > maxBytes) throw new TopicCandidatesFeedError('response_too_large');
+  if (declaredBytes !== null && declaredBytes !== undefined && receivedBytes !== declaredBytes) {
+    throw new TopicCandidatesFeedError('response_truncated');
+  }
+  return receivedBytes;
+}
+
+async function readBodyBounded(response, maxBytes) {
+  const declaredBytes = declaredResponseBytes(response, maxBytes);
 
   if (!response.body?.getReader) {
     const text = await response.text();
-    if (Buffer.byteLength(text, 'utf8') > maxBytes) throw new TopicCandidatesFeedError('response_too_large');
+    rejectTruncatedTopicFeed({
+      declaredBytes,
+      receivedBytes: Buffer.byteLength(text, 'utf8'),
+      maxBytes,
+    });
     return text;
   }
 
@@ -246,6 +270,7 @@ async function readBodyBounded(response, maxBytes) {
   } finally {
     reader.releaseLock?.();
   }
+  rejectTruncatedTopicFeed({ declaredBytes, receivedBytes: totalBytes, maxBytes });
   return Buffer.concat(chunks, totalBytes).toString('utf8');
 }
 
