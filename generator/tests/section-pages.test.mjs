@@ -3357,6 +3357,7 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     'generator/scripts/lib/corpus-paths.mjs',
     'scripts/ci/fast-publish-section.mjs',
     'scripts/lib/article-render-pipeline.mjs',
+    'scripts/lib/content-updated-at.mjs',
     'scripts/lib/declared-image-fetch.mjs',
     'scripts/lib/cf-analytics.mjs',
     'scripts/lib/canton-hub-data.mjs',

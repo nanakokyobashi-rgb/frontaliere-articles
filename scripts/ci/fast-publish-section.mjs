@@ -61,6 +61,14 @@ import { decodeStaticStringLiteral, matchingDelimiter, readStaticStringLiteral, 
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+// Queste dipendenze cambiano il risultato del render di ogni articolo, non di
+// un solo id: il planner deve quindi risvegliare tutti gli articoli registrati
+// della superficie coinvolta.
+const SHARED_RENDER_REFRESH_PATHS = new Set([
+  'scripts/lib/article-render-pipeline.mjs',
+  'scripts/lib/content-updated-at.mjs',
+]);
+
 // Cambiare uno di questi moduli cambia il risultato di ogni publisher R2,
 // non una sola sezione: il workflow deve quindi rifare il bootstrap di tutte
 // le sezioni cantonali R2 attive, invece di produrre una matrice vuota.
@@ -70,7 +78,7 @@ const SHARED_R2_REFRESH_PATHS = new Set([
   'generator/scripts/lib/control-char-write-report.mjs',
   'scripts/ci/fast-publish-section.mjs',
   'scripts/cf-purge-cache.mjs',
-  'scripts/lib/article-render-pipeline.mjs',
+  ...SHARED_RENDER_REFRESH_PATHS,
   'scripts/lib/declared-image-fetch.mjs',
   'scripts/lib/cf-analytics.mjs',
   'scripts/lib/canton-hub-data.mjs',
@@ -103,6 +111,8 @@ const SHARED_R2_REFRESH_PREFIXES = Object.freeze(['engine/', 'host/']);
 
 const isSharedR2RefreshPath = (rel) =>
   SHARED_R2_REFRESH_PATHS.has(rel) || SHARED_R2_REFRESH_PREFIXES.some((prefix) => rel.startsWith(prefix));
+
+const isSharedRenderRefreshPath = (rel) => SHARED_RENDER_REFRESH_PATHS.has(rel);
 
 function changedFileRecords(files) {
   const changedFiles = [];
@@ -700,6 +710,14 @@ export function articlePublishPlan(
       for (const section of sections) {
         for (const id of registeredBySection.get(section.section)) {
           if (changed.includes(articleIndexExclusionKey(section.section, id))) targets.get(section.section).add(id);
+        }
+      }
+      continue;
+    }
+    if (isSharedRenderRefreshPath(rel)) {
+      for (const section of sections) {
+        for (const id of registeredBySection.get(section.section)) {
+          targets.get(section.section).add(id);
         }
       }
       continue;
