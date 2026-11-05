@@ -73,6 +73,17 @@ const fail = (msg) => {
 const ISO_INSTANT_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,9})?)?(?:Z|[+-]\d{2}:\d{2})$/;
 const isIso = (v) => typeof v === 'string' && ISO_INSTANT_RE.test(v) && Number.isFinite(Date.parse(v));
 
+function isHttpsUrlOrNull(value) {
+  if (value === null) return true;
+  if (typeof value !== 'string' || value.length === 0 || value.trim() !== value) return false;
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' && Boolean(url.hostname) && !url.username && !url.password;
+  } catch {
+    return false;
+  }
+}
+
 /** Inclusive age window: exactly 48 hours old and exactly one hour ahead are valid. */
 export function isRoadEventsTimestampInWindow(value, now = Date.now()) {
   if (!isIso(value)) return false;
@@ -90,7 +101,7 @@ export function validateRoadEventsRecord(e, index, { seenIds = new Set() } = {})
   if (!CANTON_GROUPS.has(e.canton)) return `${at}.canton ${JSON.stringify(e.canton)} is not one of the 24 canton URL groups — refusing`;
   if (!TYPES.has(e.type)) return `${at}.type ${JSON.stringify(e.type)} is not one of ${[...TYPES].join('|')} — refusing`;
   if (typeof e.title !== 'string' || !e.title.trim()) return `${at}.title is empty — refusing`;
-  if (e.url !== null && !/^https:\/\//.test(String(e.url))) return `${at}.url is not https or null — refusing`;
+  if (!isHttpsUrlOrNull(e.url)) return `${at}.url is not https or null — refusing`;
   for (const k of ['validFrom', 'validTo']) {
     if (e[k] !== null && !isIso(e[k])) return `${at}.${k} is not an ISO date or null — refusing`;
   }

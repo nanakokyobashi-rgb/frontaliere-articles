@@ -381,6 +381,25 @@ test('[road-events] la validazione combinata rifiuta duplicato, semicantone e in
   assert.match(validateRoadEventsPayload(payload), /is duplicated — refusing/);
 });
 
+test('[road-events] il payload rifiuta URL HTTPS senza host o con userinfo', () => {
+  const now = Date.UTC(2026, 9, 10, 12);
+  const base = structuredClone(readFixture(contract('road-events')));
+  base.generatedAt = new Date(now).toISOString();
+
+  for (const url of ['https://', 'https://user:pass@example.org/event']) {
+    const payload = structuredClone(base);
+    payload.events[0].url = url;
+    assert.equal(isValidRoadEventsPayload(payload, { now }), false, url);
+    assert.match(validateRoadEventsPayload(payload, { now }), /events\[0\]\.url is not https or null — refusing/);
+  }
+
+  const valid = structuredClone(base);
+  valid.events[0].url = 'https://example.org/event';
+  assert.equal(isValidRoadEventsPayload(valid, { now }), true);
+  valid.events[0].url = null;
+  assert.equal(isValidRoadEventsPayload(valid, { now }), true);
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 // 1. Il registro non deve poter marcire
 // ─────────────────────────────────────────────────────────────────────────────
