@@ -27,3 +27,19 @@ test('malformed article-list payloads normalize to empty arrays', () => {
   assert.doesNotThrow(() => countCantonHubContentWords(input));
   assert.equal(countCantonHubContentWords(input), 0);
 });
+
+test('all countable list payloads normalize before reduction', () => {
+  const input = {
+    intro: '',
+    keyFacts: { length: 1 },
+    dataBlocks: [{
+      title: 'ignored block',
+      items: { length: 1 },
+    }],
+    curatedArticles: [],
+    latestCantonArticles: [],
+  };
+
+  assert.doesNotThrow(() => countCantonHubContentWords(input));
+  assert.equal(countCantonHubContentWords(input), 2, 'il blocco resta conteggiabile ma i suoi item non-array sono ignorati');
+});
