@@ -533,6 +533,50 @@ test('chiusure e cantieri: oltre il tetto restano le limitazioni in corso e le p
   assert.deepEqual(block.render('it').keyFacts.map((f) => f.value), ['10', '1']);
 });
 
+test('chiusure e cantieri: l’emitter scarta gli URL che il predicate HTTPS raw non ammette', () => {
+  const at = (days) => new Date(NOW + days * DAY_MS).toISOString();
+  const invalidUrls = [
+    'HTTPS://example.org/event',
+    'https://example.org/a b',
+    'https:example.org/event',
+  ];
+  for (const url of invalidUrls) {
+    const block = shapeRoadEventsBlock({
+      schemaVersion: 1,
+      generatedAt: at(0),
+      events: [{
+        id: `invalid-url-${url}`,
+        canton: 'TI',
+        type: 'chiusura',
+        title: 'Chiusura di prova',
+        url,
+        validFrom: at(-1),
+        validTo: at(1),
+        source: 'fixture',
+        observedAt: at(0),
+      }],
+    }, { canton: 'TI', nowMs: NOW });
+    assert.equal(block.render('it').items[0].url, undefined, url);
+  }
+
+  const block = shapeRoadEventsBlock({
+    schemaVersion: 1,
+    generatedAt: at(0),
+    events: [{
+      id: 'valid-url',
+      canton: 'TI',
+      type: 'chiusura',
+      title: 'Chiusura di prova',
+      url: 'https://example.org/event',
+      validFrom: at(-1),
+      validTo: at(1),
+      source: 'fixture',
+      observedAt: at(0),
+    }],
+  }, { canton: 'TI', nowMs: NOW });
+  assert.equal(block.render('it').items[0].url, 'https://example.org/event');
+});
+
 test('qualita\' del sidecar: scala dichiarata, nessuna saturazione a 1', () => {
   assert.equal(sidecarQuality(null), null);
   assert.equal(sidecarQuality({ _score_breakdown: null }), null);

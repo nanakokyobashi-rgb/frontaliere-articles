@@ -287,6 +287,28 @@ test('[road-events] un payload JSON non valido continua sul fallback e non viene
   assert.match(rejected.errors[0], /schemaVersion is 2, expected 1/);
 });
 
+test('[road-events] una risposta 200 con URL non emettibile resta hard-fail se il fallback non risponde', async () => {
+  const now = Date.UTC(2026, 9, 10, 12);
+  const payload = structuredClone(servable(contract('road-events')));
+  payload.generatedAt = new Date(now).toISOString();
+  payload.events[0].url = 'HTTPS://example.org/event';
+  const calls = [];
+  const rejected = await fetchFirstValidRoadEvents(['primary', 'unreachable'], {
+    now,
+    getBody: async (url) => {
+      calls.push(url);
+      if (url === 'primary') return JSON.stringify(payload);
+      throw new Error('network down');
+    },
+  });
+
+  assert.deepEqual(calls, ['primary', 'unreachable']);
+  assert.equal(rejected.ok, false);
+  assert.equal(rejected.sawResponse, true);
+  assert.match(rejected.errors[0], /events\[0\]\.url is not https or null — refusing/);
+  assert.match(rejected.errors[1], /unreachable: network down/);
+});
+
 test('[road-events] la finestra dei 48h usa l’orologio dopo il fetch', async () => {
   const startedAt = Date.UTC(2026, 9, 10, 12);
   const originalNow = Date.now;
@@ -381,12 +403,20 @@ test('[road-events] la validazione combinata rifiuta duplicato, semicantone e in
   assert.match(validateRoadEventsPayload(payload), /is duplicated — refusing/);
 });
 
-test('[road-events] il payload rifiuta URL HTTPS senza host o con userinfo', () => {
+test('[road-events] il payload rifiuta URL fuori dal predicate raw HTTPS o con userinfo esplicito', () => {
   const now = Date.UTC(2026, 9, 10, 12);
   const base = structuredClone(readFixture(contract('road-events')));
   base.generatedAt = new Date(now).toISOString();
 
-  for (const url of ['https://', 'https://user:pass@example.org/event']) {
+  for (const url of [
+    'https://',
+    'https://user:pass@example.org/event',
+    'https://@example.org/event',
+    'https://:@example.org/event',
+    'HTTPS://example.org/event',
+    'https://example.org/a b',
+    'https:example.org/event',
+  ]) {
     const payload = structuredClone(base);
     payload.events[0].url = url;
     assert.equal(isValidRoadEventsPayload(payload, { now }), false, url);
