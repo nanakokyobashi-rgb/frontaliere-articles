@@ -380,6 +380,15 @@ function blogIndexTree() {
   writeRaw(root, 'generator/data/canton-sections.json', fs.readFileSync(path.join(REPO, 'generator/data/canton-sections.json'), 'utf8'));
   writeRaw(root, 'generator/data/localized-toponyms.json', fs.readFileSync(path.join(REPO, 'generator/data/localized-toponyms.json'), 'utf8'));
   writeRaw(root, 'generator/data/canton-url-slugs.json', fs.readFileSync(path.join(REPO, 'generator/data/canton-url-slugs.json'), 'utf8'));
+  // Discovery projection also validates the declared section registry and
+  // reads the canonical-shadow maps; these data inputs are outside the import closure.
+  for (const file of [
+    'sections/registry.json',
+    'engine/shared/frontaliere-article-canonical-overrides.json',
+    'content/swiss-article-canonical-overrides.json',
+  ]) {
+    writeRaw(root, file, fs.readFileSync(path.join(REPO, file), 'utf8'));
+  }
   writeRaw(root, 'content/blog-body/it/uno.ts', 'export const uno = true;\n');
   writeRaw(root, 'content/blog-body-ch/it/due.ts', 'export const due = true;\n');
   writeRaw(root, 'content/blog-articles-data.ts', "export const RAW_ARTICLES = [{ id: 'uno', category: 'news', date: '2026-10-01', image: '/images/blog/uno.webp' }];\n");
