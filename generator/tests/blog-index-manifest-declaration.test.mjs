@@ -132,7 +132,7 @@ test('senza manifest.json rifiuta invece di inventarne uno', () => {
 
 test('build-blog-index dichiara i suoi shard e rifiuta un set parziale', () => {
   const src = readFileSync(resolve(ROOT, 'scripts/build-blog-index.mjs'), 'utf-8');
-  assert.match(src, /declareApiArtifacts\(API_ROOT, writtenShards, \{ blogIndexShards: actual \}\)/);
+  assert.match(src, /declareApiArtifacts\(\s*API_ROOT,\s*\{\s*\.\.\.writtenShards,\s*\.\.\.writtenCredits,\s*\.\.\.writtenDiscoveryIndex/);
   // I byte dichiarati sono quelli del testo scritto, newline finale compreso.
   assert.match(src, /writtenShards\[path\.relative\(API_ROOT, file\)\] = byteSize\(text\)/);
   assert.match(src, /writtenShards\[path\.relative\(API_ROOT, fullFile\)\] = byteSize\(fullText\)/);
@@ -156,9 +156,9 @@ test('build-blog-index prepara discovery prima delle scritture e committa il man
   assert.ok(discoveryPreparation < phaseTwo, 'un errore discovery non deve seguire le scritture della fase 2');
 
   assert.match(src, /function commitDiscoveryIndexArtifacts\(\)/);
-  assert.match(src, /\{\.\.\.writtenShards, \.\.\.writtenCredits, \.\.\.writtenDiscoveryIndex\}/);
+  assert.match(src, /\{\s*\.\.\.writtenShards,\s*\.\.\.writtenCredits,\s*\.\.\.writtenDiscoveryIndex\s*\}/);
   assert.equal(
-    [...src.matchAll(/declareApiArtifacts\(API_ROOT/g)].length,
+    [...src.matchAll(/declareApiArtifacts\(\s*API_ROOT/g)].length,
     1,
     'il manifest deve ricevere tutte le dichiarazioni in un solo commit',
   );
