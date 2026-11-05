@@ -4219,8 +4219,22 @@ function isTrendBackedDiscoveryCandidate(candidate) {
   return candidate?.source === 'trends' || candidate?.meta?.signalProvider === 'google-trends';
 }
 
+function normalizeDiscoveryPublisherUrl(candidate, url, baseUrl = BASE_URL) {
+  if (typeof url !== 'string') return null;
+  // GSC orphan candidates intentionally store topLandingPage as a root-relative
+  // path. Match fetchPageContent's canonical-domain resolution, but do not
+  // turn arbitrary topic-only relative strings into internal publisher URLs.
+  if (candidate?.source === 'orphan' && url.startsWith('/') && !url.startsWith('//')) {
+    return `${baseUrl}${url}`;
+  }
+  return url;
+}
+
 function hasSecureDiscoveryPublisherUrl(chosen, url) {
-  return !chosen?._discoveryCandidate || isSecureHttpsUrl(url);
+  if (!chosen?._discoveryCandidate) return true;
+  return isSecureHttpsUrl(
+    normalizeDiscoveryPublisherUrl(chosen._discoveryCandidate, url),
+  );
 }
 
 function isSignalDrivenTopicCandidate(candidate) {
@@ -18494,12 +18508,15 @@ async function main() {
     // Helper — convert discovery candidates into headline-shaped objects
     // compatible with rankAndSelectHeadlines (field `headline`, optional `url`).
     const _discoveryCandidatesToHeadlines = (candidates) => {
-      // The pool may also contain topic-only Suggest/orphan rows. Keep them
-      // as search seeds, but only send candidates with a real secure source
-      // URL to article generation; a synthetic discovery:// URL would make
-      // fetchPageContent return an empty body and could disguise a news run as
-      // an evergreen article.
+      // GSC orphan landing pages are deliberately root-relative, while topic-
+      // only Suggest rows have no source. Normalize only the former against
+      // BASE_URL, then require a secure URL before article generation; a
+      // synthetic discovery:// URL would yield an empty source body.
       const candidatesWithEvidence = attachTrendEvidenceToCandidates(candidates, headlineSimilarity)
+        .map((candidate) => {
+          const url = normalizeDiscoveryPublisherUrl(candidate, candidate?.url);
+          return url === candidate?.url ? candidate : { ...candidate, url };
+        })
         .filter((candidate) => isSecureHttpsUrl(candidate?.url));
       _discoveryCandidatesById = new Map();
       const out = [];

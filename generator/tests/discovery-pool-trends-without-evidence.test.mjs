@@ -8,6 +8,22 @@ import {
 } from '../scripts/lib/discovery/trend-evidence-attribution.mjs';
 
 const CREATE_ARTICLE = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
+const BASE_URL = CREATE_ARTICLE.match(/^const BASE_URL = '([^']+)';$/m)?.[1];
+assert.ok(BASE_URL, 'canonical BASE_URL missing from create-article.mjs');
+
+function cutFunction(name) {
+  const anchor = `function ${name}(`;
+  const start = CREATE_ARTICLE.indexOf(anchor);
+  assert.notEqual(start, -1, `${anchor} missing from create-article.mjs`);
+  const end = CREATE_ARTICLE.indexOf('\n}\n', start);
+  assert.ok(end > start, `closing brace for ${name} not found`);
+  return CREATE_ARTICLE.slice(start, end + 2);
+}
+
+const normalizeDiscoveryPublisherUrl = new Function(
+  'BASE_URL',
+  `${cutFunction('normalizeDiscoveryPublisherUrl')}\nreturn normalizeDiscoveryPublisherUrl;`,
+)(BASE_URL);
 
 function makeDiscoveryHeadlineConverter(resolveHeadline = (headline) => headline) {
   const start = CREATE_ARTICLE.indexOf('const _discoveryCandidatesToHeadlines = (candidates) => {');
@@ -21,6 +37,7 @@ function makeDiscoveryHeadlineConverter(resolveHeadline = (headline) => headline
     'headlineSimilarity',
     'resolveGoogleNewsHeadline',
     'isSecureHttpsUrl',
+    'normalizeDiscoveryPublisherUrl',
     'safeSignalSourceUrlForLog',
     'console',
     `let _discoveryCandidatesById = new Map();\n`
@@ -31,19 +48,18 @@ function makeDiscoveryHeadlineConverter(resolveHeadline = (headline) => headline
     (left, right) => (left === right ? 1 : 0),
     resolveHeadline,
     isSecureHttpsUrl,
+    normalizeDiscoveryPublisherUrl,
     (url) => url,
     { error() {} },
   );
 }
 
 function makeSecureDiscoveryPublisherUrlCheck() {
-  const anchor = 'function hasSecureDiscoveryPublisherUrl(';
-  const start = CREATE_ARTICLE.indexOf(anchor);
-  assert.notEqual(start, -1, 'secure discovery publisher URL check missing');
-  const end = CREATE_ARTICLE.indexOf('\n}\n', start);
-  assert.ok(end > start, 'secure discovery publisher URL check closure not found');
-  const source = CREATE_ARTICLE.slice(start, end + 2);
-  return new Function('isSecureHttpsUrl', `${source}\nreturn hasSecureDiscoveryPublisherUrl;`)(isSecureHttpsUrl);
+  return new Function(
+    'isSecureHttpsUrl',
+    'normalizeDiscoveryPublisherUrl',
+    `${cutFunction('hasSecureDiscoveryPublisherUrl')}\nreturn hasSecureDiscoveryPublisherUrl;`,
+  )(isSecureHttpsUrl, normalizeDiscoveryPublisherUrl);
 }
 
 test('Google Trends discovery can build a sourced candidate without evidence-index context', async () => {
@@ -100,13 +116,16 @@ test('article discovery drops topic-only candidates and keeps secure Trends evid
       url: null,
       meta: { evidenceUrl: sourceUrl, signalProvider: 'google-trends' },
     },
+    { headline: 'Permessi frontalieri (landing GSC)', source: 'orphan', url: '/guide/permessi-frontaliere', meta: {} },
     { headline: 'Suggest topic with no publisher', source: 'suggest', url: null, meta: {} },
     { headline: 'Insecure source', source: 'news', url: 'http://news.example.test/story', meta: {} },
   ]);
 
-  assert.equal(converted.length, 1);
-  assert.equal(converted[0].source, 'trends');
-  assert.equal(converted[0].url, sourceUrl);
+  assert.equal(converted.length, 2);
+  const trendHeadline = converted.find((candidate) => candidate.source === 'trends');
+  const orphanHeadline = converted.find((candidate) => candidate.source === 'orphan');
+  assert.equal(trendHeadline?.url, sourceUrl);
+  assert.equal(orphanHeadline?.url, `${BASE_URL}/guide/permessi-frontaliere`);
   assert.ok(converted.every((candidate) => isSecureHttpsUrl(candidate.url)));
   assert.deepEqual(
     convert([{ headline: 'Unsourced signal', source: 'suggest', url: null, meta: {} }]),
@@ -147,6 +166,13 @@ test('a decoded HTTP publisher URL blocks discovery generation but preserves pro
     hasSecurePublisherUrl(chosenDiscovery, 'http://publisher.example.test/article'),
     false,
     'the URL returned by lazy Google News decoding must be HTTPS',
+  );
+  assert.equal(
+    hasSecurePublisherUrl({
+      _discoveryCandidate: { source: 'orphan', url: '/guide/permessi-frontaliere' },
+    }, '/guide/permessi-frontaliere'),
+    true,
+    'the final gate must apply the same BASE_URL normalization to GSC orphan paths',
   );
   assert.equal(
     hasSecurePublisherUrl({ source: 'news' }, 'http://legacy.example.test/article'),
