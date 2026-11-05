@@ -2208,12 +2208,11 @@
       "path": "generator/scripts/load-rc-env.mjs",
       "sitePath": "scripts/load-rc-env.mjs",
       "mode": "adapted",
-      "reason": "Ponte Remote Config -> env, e l'UNICO: un parametro fuori dalla sua mappa RC_TO_ENV resta `undefined` per chiunque lo legga da process.env, per quanto sia impostato in Remote Config. Era `identical`, non lo e' piu' dal 2026-08-14 (nanako#318 punto 1): la #5809 del sito dichiara la divergenza VOLUTA, e la byte-identita' e' quindi irraggiungibile. Il sito ha in piu' (a) `export const RC_TO_ENV` invece di `const`, per il suo `tests/rc-to-env-secrets-coverage.test.ts` (#5737), che qui non esiste, e (b) sei parametri di soli suoi: NEWSLETTER_AC_{SCHEME,TTL_DAYS,LEGACY_SUNSET} (#5685) e NEWSLETTER_TOKEN_{SCHEME,CONFIRM_TTL_DAYS,LEGACY_SUNSET} (#5704) — la meta' MINTING di credenziali verificate da `functions/`, che qui non c'e'. Il delta FUNZIONALE invece e' stato portato: il catch AbortError/TimeoutError attorno alla fetch di Remote Config (senza, AbortSignal.timeout rigetta la fetch e il budget RC_FETCH_ATTEMPTS/~63s non viene mai speso) e il JSDoc di `fetchTemplateViaRest`, che l'inserimento di #200 aveva staccato dalla sua funzione. Resta il caso in cui una divergenza silenziosa costa di piu' — un secret nuovo mappato solo di la' e' inerte qui, senza che niente fallisca — ed e' esattamente per questo che `adapted` NON e' un'esenzione: la sorveglianza sulla baseline resta accesa. Divergenza VOLUTA dal 2026-10-05: `EVENTFROG_ENABLED`, `EVENTFROG_PUBLIC_API_KEY` e `EVENTFROG_PUBLIC_API_KEY_EXPIRES_AT` sono mappati solo nel sito e non vanno portati qui: il corpus non deve poter leggere dati Eventfrog (AGB §17(3)/(6), decisione D5 del proprietario), e `generator/scripts/lib/private-event-records.mjs` ne scarta i record all'ingresso del dataset eventi.",
+      "reason": "Ponte Remote Config -> env, e l'UNICO: un parametro fuori dalla sua mappa RC_TO_ENV resta `undefined` per chiunque lo legga da process.env, per quanto sia impostato in Remote Config. Era `identical`, non lo e' piu' dal 2026-08-14 (nanako#318 punto 1): la #5809 del sito dichiara la divergenza VOLUTA, e la byte-identita' e' quindi irraggiungibile. Il sito ha in piu' (a) `export const RC_TO_ENV` invece di `const`, per il suo `tests/rc-to-env-secrets-coverage.test.ts` (#5737), che qui non esiste, e (b) sei parametri di soli suoi: NEWSLETTER_AC_{SCHEME,TTL_DAYS,LEGACY_SUNSET} (#5685) e NEWSLETTER_TOKEN_{SCHEME,CONFIRM_TTL_DAYS,LEGACY_SUNSET} (#5704) — la meta' MINTING di credenziali verificate da `functions/`, che qui non c'e'. Il delta FUNZIONALE invece e' stato portato: il catch AbortError/TimeoutError attorno alla fetch di Remote Config (senza, AbortSignal.timeout rigetta la fetch e il budget RC_FETCH_ATTEMPTS/~63s non viene mai speso) e il JSDoc di `fetchTemplateViaRest`, che l'inserimento di #200 aveva staccato dalla sua funzione. Resta il caso in cui una divergenza silenziosa costa di piu' — un secret nuovo mappato solo di la' e' inerte qui, senza che niente fallisca — ed e' esattamente per questo che `adapted` NON e' un'esenzione: la sorveglianza sulla baseline resta accesa. Divergenza VOLUTA dal 2026-10-05: `EVENTFROG_ENABLED`, `EVENTFROG_PUBLIC_API_KEY` e `EVENTFROG_PUBLIC_API_KEY_EXPIRES_AT` sono mappati solo nel sito e non vanno portati qui: il corpus non deve poter leggere dati Eventfrog (AGB §17(3)/(6), decisione D5 del proprietario), e `generator/scripts/lib/private-event-records.mjs` ne scarta i record all'ingresso del dataset eventi. Il mapping legacy HOUSE_AD_CREATIVE_VARIANT e' stato rimosso il 2026-11-05: l'assegnazione delle creativita' passa ora dall'endpoint Functions con Firebase Server Remote Config e il loader del corpus non ha consumer per quella variabile. Il loader del sito resta invariato in questa PR.",
       "baseline": {
-        "site": "012cba47e5ee15ed",
-        "corpus": "b2aaee493ca929af",
-        "alignedAt": "2026-10-19",
-        "forcedAt": "2026-10-19T05:27:31.817Z"
+        "site": "b1327a065b2bb888",
+        "corpus": "9842c0a46c783008",
+        "alignedAt": "2026-11-05"
       }
     },
     {
@@ -4214,17 +4213,17 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest 9393a80d… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel e gli snippet correnti; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
+      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest bbc908ae… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel e gli snippet correnti; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
       "baseline": {
-        "site": "16992ff4a6cade1d",
-        "corpus": "62cb647a4be6f519",
+        "site": "18668c902915dd43",
+        "corpus": "0335e090efc6007c",
         "alignedAt": "2026-11-05"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 23,
-        "sha256": "9393a80d5bb4807b1d142cb24ba10afa0feb15c9acf34206b44d78d9a006b822"
+        "sha256": "bbc908ae705c3d806e631dde07c16ade2c7f8f1029fad434cf850b60840aeb8b"
       }
     },
     {
@@ -4441,8 +4440,8 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
       "baseline": {
-        "site": "c7c366b329e09f66",
-        "corpus": "c7c366b329e09f66",
+        "site": "09115acccba7dded",
+        "corpus": "09115acccba7dded",
         "alignedAt": "2026-11-05"
       }
     },
@@ -6904,8 +6903,8 @@
       "mode": "identical",
       "reason": "Fingerprint byte-exact dei producer site-support, AdSense, Partnerize, Meta Pixel e helper canonici; lega gli snapshot trasportati ai byte sorgente e ne verifica l’insieme prima della pubblicazione.",
       "baseline": {
-        "site": "d92b7fc0243d29d9",
-        "corpus": "d92b7fc0243d29d9",
+        "site": "616045a255853208",
+        "corpus": "616045a255853208",
         "alignedAt": "2026-11-05"
       }
     },
@@ -6916,7 +6915,7 @@
       "reason": "Snapshot byte-exact di site-support, AdSense, Partnerize, Meta Pixel e guardia inline canonica, generato dall’exporter del sito. hostShellFiles verifica nomi e SHA senza import fra repository; i fingerprint identici e quello scalare del contratto bloccano la pubblicazione se gli asset divergono.",
       "baseline": {
         "site": "56aaef2cbbea74f8",
-        "corpus": "07c2c137ef074670",
+        "corpus": "7e35e47c9feed9ec",
         "alignedAt": "2026-11-05"
       }
     },
