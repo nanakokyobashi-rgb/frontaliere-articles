@@ -320,13 +320,35 @@ describe('content-gates-main: niente falso verde', () => {
       );
 
       fs.mkdirSync(path.dirname(fixture), { recursive: true });
-      fs.writeFileSync(fixture, '{}\n');
+      fs.copyFileSync(path.join(ROOT, ARTICLE_BODY_API_SOURCE_FIXTURE), fixture);
       const present = preflight(dir, { previousRevision: null });
       assert.equal(
         present.violations.some((message) => message.startsWith(`${ARTICLE_BODY_API_SOURCE_FIXTURE}:`)),
         false,
-        'un fixture materializzato deve superare il controllo di presenza',
+        'il fixture tracciato deve superare il preflight senza essere rigenerato',
       );
+
+      const canonical = JSON.parse(read(ARTICLE_BODY_API_SOURCE_FIXTURE));
+      const missingCapital = structuredClone(canonical);
+      delete missingCapital.entities[0].capital.de;
+      const stringForms = structuredClone(canonical);
+      stringForms.entities[0].canton.it = 'Argovia';
+      const nonTextForm = structuredClone(canonical);
+      nonTextForm.entities[0].capital.fr = [null];
+      for (const invalid of ['', '{', 'null', '{}',
+        JSON.stringify({ locales: canonical.locales, entities: [] }),
+        JSON.stringify(missingCapital), JSON.stringify(stringForms), JSON.stringify(nonTextForm)]) {
+        fs.writeFileSync(fixture, invalid);
+        const result = preflight(dir, { previousRevision: null });
+        assert.ok(result.violations.some((message) => message.startsWith(
+          `${ARTICLE_BODY_API_SOURCE_FIXTURE}: fixture non utilizzabile`,
+        )), `fixture incompleto accettato: ${invalid.slice(0, 100)}`);
+      }
+      fs.rmSync(fixture);
+      fs.mkdirSync(fixture);
+      assert.ok(preflight(dir, { previousRevision: null }).violations.some(
+        (message) => message.startsWith(`${ARTICLE_BODY_API_SOURCE_FIXTURE}:`),
+      ), 'una directory non deve soddisfare la materializzazione del fixture');
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }

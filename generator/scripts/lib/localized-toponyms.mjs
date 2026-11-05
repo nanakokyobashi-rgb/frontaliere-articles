@@ -1,11 +1,10 @@
 import { readFileSync } from 'node:fs';
+import { readLocalizedToponymTable } from './localized-toponym-table.mjs';
 import { decodeHtmlEntities } from './decode-html-entities.mjs';
 import { DIGEST_EVENT_MARKER_PATTERN } from './events-digest-marker.mjs';
 import { scanStaticArticleFieldEntries } from './static-article-field-scanner.mjs';
 
-const TABLE = JSON.parse(
-  readFileSync(new URL('../../data/localized-toponyms.json', import.meta.url), 'utf8'),
-);
+const TABLE = readLocalizedToponymTable(new URL('../../data/localized-toponyms.json', import.meta.url));
 
 export const LOCALIZED_TOPONYM_LOCALES = Object.freeze([...TABLE.locales]);
 export const LOCALIZED_TOPONYMS = Object.freeze(
