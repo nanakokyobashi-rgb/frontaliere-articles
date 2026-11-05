@@ -109,3 +109,34 @@ test('runtime ad slot guard rejects names inherited from a registry prototype', 
   assert.equal(isStaticAdSlotKey(inheritedSlot), false);
   assert.equal(staticAdSlotHtml(inheritedSlot), '');
 });
+
+test('malformed ad options fail closed without coercing fields or invoking accessors', () => {
+  const hostile = { toString() { throw new Error('must not coerce'); } };
+  const accessor = Object.defineProperty({}, 'placement', {
+    get() { throw new Error('must not invoke'); },
+  });
+  const invalid = [null, false, 1, 'placement', [], accessor,
+    Object.create({ placement: 'inherited' })];
+  for (const field of ['placement', 'experimentId', 'experimentVariant']) {
+    for (const value of [null, true, 42, [], hostile, Symbol('invalid')]) {
+      invalid.push({ [field]: value });
+    }
+  }
+  for (const value of ['false', 1, null, hostile]) {
+    invalid.push({ collapseWhenUnfilled: value });
+  }
+  for (const options of invalid) {
+    assert.equal(staticAdSlotHtml('article-atf', options), '');
+  }
+});
+
+test('valid ad options preserve defaults, false flags and attribute escaping', () => {
+  assert.equal(staticAdSlotHtml('article-atf', {}), staticAdSlotHtml('article-atf'));
+  const markup = staticAdSlotHtml('article-atf', {
+    placement: '" onclick="bad', experimentId: 'test', experimentVariant: 'v1',
+    collapseWhenUnfilled: false,
+  });
+  assert.match(markup, /data-ad-placement="--onclick--bad"/);
+  assert.doesNotMatch(markup, /data-ft-static-ad/);
+  assert.equal(staticAdSlotHtml('article-atf', { placement: undefined }), staticAdSlotHtml('article-atf'));
+});

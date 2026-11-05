@@ -76,12 +76,32 @@ export function isStaticAdSlotKey(value: unknown): value is StaticAdSlotKey {
   return typeof value === 'string' && Object.prototype.hasOwnProperty.call(STATIC_AD_SLOTS, value);
 }
 
+/** Validate runtime payloads before coercion or attribute rendering. */
+function validStaticAdOptions(options: unknown): options is StaticAdSlotHtmlOptions | undefined {
+  if (options === undefined) return true;
+  if (options === null || typeof options !== 'object' || Array.isArray(options)) return false;
+  for (const [field, type] of [
+    ['placement', 'string'],
+    ['experimentId', 'string'],
+    ['experimentVariant', 'string'],
+    ['collapseWhenUnfilled', 'boolean'],
+  ]) {
+    const descriptor = Object.getOwnPropertyDescriptor(options, field);
+    // Inherited fields and accessors are not data payloads. Do not invoke them.
+    if (!descriptor) {
+      if (field in options) return false;
+    } else if (!('value' in descriptor)
+      || (descriptor.value !== undefined && typeof descriptor.value !== type)) return false;
+  }
+  return true;
+}
+
 function safeDataValue(value: string): string {
   return String(value).replace(/[^a-zA-Z0-9_.:-]/g, '-').slice(0, 80);
 }
 
 export function staticAdSlotHtml(slot: StaticAdSlotKey, options?: StaticAdSlotHtmlOptions): string {
-  if (!isStaticAdSlotKey(slot)) return '';
+  if (!isStaticAdSlotKey(slot) || !validStaticAdOptions(options)) return '';
 
   const config = STATIC_AD_SLOTS[slot];
   const attrs = [
