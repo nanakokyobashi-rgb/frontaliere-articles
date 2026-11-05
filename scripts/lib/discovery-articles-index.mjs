@@ -24,6 +24,47 @@ function isNonEmptyString(value) {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
+/**
+ * Parse an on-disk attribution sidecar and fail closed if it is malformed or
+ * belongs to a different registry id.
+ *
+ * @param {string} raw
+ * @param {string} expectedId
+ * @returns {Record<string, unknown>}
+ */
+export function parseDiscoverySidecar(raw, expectedId) {
+  let sidecar;
+  try {
+    sidecar = JSON.parse(raw);
+  } catch (cause) {
+    throw new TypeError(`invalid JSON for discovery sidecar ${expectedId}`, { cause });
+  }
+  if (!isRecord(sidecar) || sidecar.id !== expectedId) {
+    throw new TypeError(`expected an object whose id is ${expectedId}`);
+  }
+  return sidecar;
+}
+
+/**
+ * Compose the same Italian-slug shadow set used by build-api's index surfaces.
+ *
+ * @param {{canonicalSlugs?:string[],retiredDailySlugs?:string[],retiredRegistrySlugs?:string[],excludedSlugs?:string[]}} input
+ * @returns {Set<string>}
+ */
+export function buildDiscoveryArticleShadow({
+  canonicalSlugs = [],
+  retiredDailySlugs = [],
+  retiredRegistrySlugs = [],
+  excludedSlugs = [],
+} = {}) {
+  return new Set([
+    ...canonicalSlugs,
+    ...retiredDailySlugs,
+    ...retiredRegistrySlugs,
+    ...excludedSlugs,
+  ]);
+}
+
 function timestamp(value) {
   if (!isNonEmptyString(value)) return null;
   const parsed = Date.parse(value);
@@ -85,7 +126,7 @@ function safeLocalizedFields(section, article, slugRows, localeRows) {
     article,
     section.paths,
     slugRows,
-    new Set(),
+    section.shadowed instanceof Set ? section.shadowed : new Set(),
     fallbackReasons,
   );
 

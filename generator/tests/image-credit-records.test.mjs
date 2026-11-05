@@ -450,11 +450,11 @@ test('build-blog-index still publishes when two covers credit one file different
   }
 });
 
-test('publish-api.yml uploads and purges the credits like the blog index, and republishes when their builder changes', () => {
+test('publish-api.yml uploads and purges credits and discovery index, and republishes when their builders change', () => {
   const wf = fs.readFileSync(path.join(REPO, '.github/workflows/publish-api.yml'), 'utf-8');
-  assert.match(wf, /for f in dist\/api\/data\/blog-index-\*\.json dist\/api\/data\/image-credits-\*\.json; do\n\s+\[ -s "\$f" \] \|\| continue\n\s+bash scripts\/lib\/upload-cdn-file\.sh "\$f" "data\/\$\(basename "\$f"\)" "public,max-age=600"\n\s+urls\+=\("https:\/\/cdn\.frontaliereticino\.ch\/data\/\$\(basename "\$f"\)"\)/);
+  assert.match(wf, /for f in dist\/api\/data\/blog-index-\*\.json dist\/api\/data\/image-credits-\*\.json dist\/api\/data\/discovery-articles\.json; do\n\s+\[ -s "\$f" \] \|\| continue\n\s+bash scripts\/lib\/upload-cdn-file\.sh "\$f" "data\/\$\(basename "\$f"\)" "public,max-age=600"\n\s+urls\+=\("https:\/\/cdn\.frontaliereticino\.ch\/data\/\$\(basename "\$f"\)"\)/);
   const paths = wf.slice(wf.indexOf('paths:'), wf.indexOf('schedule:'));
-  for (const trigger of ["'content/**'", "'engine/**'", "'public/images/blog/**'", "'public/images/generated/**'", "'scripts/build-blog-index.mjs'", "'scripts/lib/image-credit-records.mjs'", "'generator/scripts/lib/blog-image-registry.mjs'"]) {
+  for (const trigger of ["'content/**'", "'engine/**'", "'public/images/blog/**'", "'public/images/generated/**'", "'scripts/build-blog-index.mjs'", "'scripts/lib/image-credit-records.mjs'", "'scripts/lib/discovery-articles-index.mjs'", "'generator/scripts/lib/blog-image-registry.mjs'"]) {
     assert.ok(paths.includes(trigger), `publish-api.yml does not republish on ${trigger}`);
   }
 });

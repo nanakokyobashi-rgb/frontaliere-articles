@@ -1390,12 +1390,12 @@ jobs:
           # CF_API_TOKEN, a Cloudflare error, a variant nobody thought of. That
           # window was 24 hours. It is now 10 minutes.
           #
-          # The cover credits (data/image-credits-<section>.json and
-          # data/image-credits-blog.json, P14) are the
-          # same class — written by build-blog-index.mjs, rewritten on every
-          # publish, fetched by the SPA's article page from the URL
-          # cdnDataUrl() builds — so they take the same path, TTL and purge.
-          for f in dist/api/data/blog-index-*.json dist/api/data/image-credits-*.json; do
+          # Cover credits (data/image-credits-<section>.json and
+          # data/image-credits-blog.json, P14) are fetched by article pages;
+          # the discovery index is pulled by the newsletter sync. Both are
+          # rewritten by build-blog-index.mjs on each publish, so they share
+          # the CDN data prefix, TTL and purge path.
+          for f in dist/api/data/blog-index-*.json dist/api/data/image-credits-*.json dist/api/data/discovery-articles.json; do
             [ -s "$f" ] || continue
             bash scripts/lib/upload-cdn-file.sh "$f" "data/$(basename "$f")" "public,max-age=600"
             urls+=("https://cdn.frontaliereticino.ch/data/$(basename "$f")")
