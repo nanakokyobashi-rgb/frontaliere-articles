@@ -524,8 +524,14 @@ export function decodeHtmlEntities(value) {
   });
 }
 
+/** I payload JSON sono dati esterni: nessuna coercizione di oggetti in testo. */
+function firstString(...values) {
+  return values.find((value) => typeof value === 'string' && value.trim()) ?? '';
+}
+
 function stripTags(value) {
-  const source = String(value || '').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1');
+  if (typeof value !== 'string') return '';
+  const source = value.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1');
   let text = '';
   let cursor = 0;
   let tagStart = source.indexOf('<');
@@ -543,9 +549,15 @@ function stripTags(value) {
     .trim();
 }
 
+/** Sceglie il primo alias con testo visibile, conservando il valore originale. */
+function firstVisibleString(...values) {
+  return values.find((value) => typeof value === 'string' && stripTags(value)) ?? '';
+}
+
 function absoluteUrl(href, base) {
+  if (typeof href !== 'string' || !href.trim()) return null;
   try {
-    const u = new URL(String(href || '').trim(), base);
+    const u = new URL(href.trim(), base);
     return /^https?:$/.test(u.protocol) ? u.href : null;
   } catch {
     return null;
@@ -1077,9 +1089,9 @@ export function extractJsonEntitiesItems(html, pageUrl) {
     const rows = Array.isArray(parsed) ? parsed : Array.isArray(parsed?.data) ? parsed.data : [];
     for (const row of rows) {
       if (!row || typeof row !== 'object') continue;
-      const name = String(row.name ?? row.title ?? '');
+      const name = firstVisibleString(row.name, row.title);
       const hrefMatch = /href\s*=\s*["']([^"']+)["']/i.exec(name);
-      const url = absoluteUrl(hrefMatch?.[1] ?? row.url ?? row.link, pageUrl);
+      const url = absoluteUrl(firstString(hrefMatch?.[1], row.url, row.link), pageUrl);
       const headline = stripTags(name);
       if (!url || headline.length < 10) continue;
       const date = parseSqlDateTime(row._datum) || parseDottedDate(row.datum) || null;
@@ -1130,10 +1142,10 @@ export function extractJsonApiItems(text, apiUrl, { notes = [] } = {}) {
   const out = [];
   if (data && Array.isArray(data.articles)) {
     for (const article of data.articles) {
-      const url = absoluteUrl(article?.url ?? article?.link, apiUrl);
-      const headline = stripTags(article?.title);
+      const url = absoluteUrl(firstString(article?.url, article?.link), apiUrl);
+      const headline = stripTags(firstString(article?.title));
       if (!url || headline.length < 10) continue;
-      const lead = stripTags(article?.abstract ?? article?.lead ?? article?.description);
+      const lead = stripTags(firstVisibleString(article?.abstract, article?.lead, article?.description));
       const rawDate = article?.publication_date ?? article?.publicationDate ?? article?.date;
       const date = parseDottedDate(rawDate) || validDate(rawDate);
       // A `free: false` item may still expose a public title/abstract in the
@@ -1151,10 +1163,10 @@ export function extractJsonApiItems(text, apiUrl, { notes = [] } = {}) {
   }
   if (data && Array.isArray(data.news)) {
     for (const n of data.news) {
-      const url = absoluteUrl(n?.link, apiUrl);
-      const headline = stripTags(n?.title);
+      const url = absoluteUrl(firstString(n?.link), apiUrl);
+      const headline = stripTags(firstString(n?.title));
       if (!url || headline.length < 10) continue;
-      const lead = stripTags(n?.teaserText);
+      const lead = stripTags(firstString(n?.teaserText));
       out.push({ url, headline, date: parseDottedDate(n?.date), ...(lead ? { lead } : {}) });
     }
     return dedupByUrl(out);
@@ -1162,14 +1174,17 @@ export function extractJsonApiItems(text, apiUrl, { notes = [] } = {}) {
   if (Array.isArray(data) && data.some((n) => Array.isArray(n?.contentList))) {
     const origin = 'https://www.be.ch';
     for (const n of data) {
-      const content = Array.isArray(n?.contentList) ? n.contentList.find((c) => c && c.enabled !== false && c.title) : null;
-      if (!n?.id || !content) continue;
+      const content = Array.isArray(n?.contentList)
+        ? n.contentList.find((c) => c && c.enabled !== false && firstVisibleString(c.title))
+        : null;
+      const id = n?.id;
+      if (!id || typeof id === 'object' || typeof id === 'function' || !content) continue;
       const lang = /^[a-z]{2}$/.test(String(content.languageCode || '')) ? content.languageCode : 'de';
       const headline = stripTags(content.title);
       if (headline.length < 10) continue;
-      const lead = stripTags(content.lead);
+      const lead = stripTags(firstString(content.lead));
       out.push({
-        url: `${origin}/${lang}/start.html?newsID=${encodeURIComponent(n.id)}`,
+        url: `${origin}/${lang}/start.html?newsID=${encodeURIComponent(id)}`,
         headline,
         date: validDate(n.publishOn),
         ...(lead ? { lead } : {}),
@@ -1186,7 +1201,7 @@ export function extractJsonApiItems(text, apiUrl, { notes = [] } = {}) {
   // generatore, senza inventare una URL diversa o perdere il contenuto.
   if (Array.isArray(data) && data.some((n) => n && n.permalink && n.publication_date)) {
     for (const n of data) {
-      const url = absoluteUrl(n?.permalink, apiUrl);
+      const url = absoluteUrl(firstString(n?.permalink), apiUrl);
       const shape = cmsPayloadShape(n);
       if ((shape.mixed || shape.fallback) && Array.isArray(notes)) {
         const fields = shape.fields.join(', ') || 'nessun alias titolo';
@@ -1209,14 +1224,14 @@ export function extractJsonApiItems(text, apiUrl, { notes = [] } = {}) {
         || parseDottedDate(n?.publication_date)
         || validDate(n?.publication_date);
       if (!date) continue;
-      const lead = stripTags(n?.teaserText ?? n?.lead ?? n?.description);
-      const sourceContent = stripTags(
-        n?.post_content
-          ?? n?.post_content_areaPage
-          ?? n?.content
-          ?? n?.body
-          ?? n?.text,
-      );
+      const lead = stripTags(firstVisibleString(n?.teaserText, n?.lead, n?.description));
+      const sourceContent = stripTags(firstVisibleString(
+        n?.post_content,
+        n?.post_content_areaPage,
+        n?.content,
+        n?.body,
+        n?.text,
+      ));
       out.push({
         url,
         headline,
