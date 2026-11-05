@@ -4,74 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-la-propension-a-l-embauche-s-erode-en-fin-d-annee.html": {
-      "section": "canton-ju",
-      "ts": 1793634752857
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-les-perspectives-des-pme-se-sont-embrumees-en-octobre.html": {
-      "section": "canton-ju",
-      "ts": 1793635981232
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-les-revenus-dans-les-services-progressent-en-aout.html": {
-      "section": "canton-ju",
-      "ts": 1793635989044
-    },
-    "canton-ju::https://www.lejdj.ch/articles/incendie-dans-une-ferme-a-moutier-cinq-vehicules-mobilises-pour-maitriser-un-feu-de-cheminee-105414": {
-      "section": "canton-ju",
-      "ts": 1793635992573
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-echec-des-negociations-pour-la-cct-de-swissport-a-zurich.html": {
-      "section": "canton-ju",
-      "ts": 1793635999344
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-commerce-de-detail-les-stations-service-comme-moteurs-de-ventes.html": {
-      "section": "canton-ju",
-      "ts": 1793646803446
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-baux-resilies-a-carl-vogt-l-accord-trouve-se-veut-exemplaire.html": {
-      "section": "canton-ju",
-      "ts": 1793646812126
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-ryanair-resultats-et-perspectives-plombes-par-la-guerre.html": {
-      "section": "canton-ju",
-      "ts": 1793647335096
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-le-parc-immobilier-de-l-armee-gere-sans-boussole-claire-dit-le-cdf.html": {
-      "section": "canton-ju",
-      "ts": 1793665018411
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-apple-un-quatrieme-trimestre-superieur-aux-attentes.html": {
-      "section": "canton-ju",
-      "ts": 1793665025778
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-une-cyberattaque-frappe-des-refrigerateurs-a-travers-l-europe.html": {
-      "section": "canton-ju",
-      "ts": 1793675379553
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-anthropic-a-augmente-son-chiffre-d-affaires-au-troisieme-trimestre.html": {
-      "section": "canton-ju",
-      "ts": 1793675391660
-    },
-    "canton-ju::https://www.h-ju.ch/fr/a-propos/medias-presse/communiques-de-presse/la-sante-mentale-au-coeur-de-la-27eme-journee-scientifique-interjurassienne-de-la-sante.html": {
-      "section": "canton-ju",
-      "ts": 1793694445985
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-dependance-au-smartphone-les-romands-sont-plus-anxieux.html": {
-      "section": "canton-ju",
-      "ts": 1793695327403
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-geberit-affiche-une-croissance-solide-sur-les-neuf-premiers-mois.html": {
-      "section": "canton-ju",
-      "ts": 1793695338218
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-la-fda-approuve-la-version-generique-d-un-traitement-contre-le-vih.html": {
-      "section": "canton-ju",
-      "ts": 1793695346590
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-la-poste-de-saint-francois-rouvre-ses-portes-a-lausanne.html": {
-      "section": "canton-ju",
-      "ts": 1793695356093
-    },
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-l-inflation-s-emballe-a-1-5-en-octobre.html": {
       "section": "canton-ju",
       "ts": 1793702204695
@@ -95,6 +27,14 @@
     "canton-ju::https://www.rfj.ch/rfj/actualite/suisse/20261103-trafic-ferroviaire-interrompu-entre-lausanne-et-geneve.html": {
       "section": "canton-ju",
       "ts": 1793755800623
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261105-le-chomage-reste-stable-a-3-0-en-octobre.html": {
+      "section": "canton-ju",
+      "ts": 1793873147097
+    },
+    "canton-ju::https://www.h-ju.ch/fr/a-propos/medias-presse/communiques-de-presse/la-sante-mentale-au-coeur-de-la-27eme-journee-scientifique-interjurassienne-de-la-sante.html": {
+      "section": "canton-ju",
+      "ts": 1793874293073
     }
   }
 }
