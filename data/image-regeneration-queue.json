@@ -5,41 +5,42 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Generic synthetic commuting scene with a recognizable foreground person; it does not clearly match Arianna di Claudio at the Rome Film",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Synthetic photorealistic illustration with a recognizable foreground person seen from behind; no visible text or logo. The scene does ",
       "status": "failed",
-      "failureCount": 18,
+      "failureCount": 19,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-10-31T06:17:21.034Z"
+      "lastFailureAt": "2026-11-05T19:35:05.745Z"
     },
     {
       "articleId": "giovani-donne-stipendi-svizzera",
       "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to education and earnings disparity, but it contains a recognizable foreground pers",
+      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 16,
+      "failureCount": 17,
       "requestedAt": "2026-10-19T03:17:12.439Z",
-      "lastFailureAt": "2026-10-31T06:18:34.969Z"
+      "lastFailureAt": "2026-11-05T19:37:06.079Z"
     },
     {
       "articleId": "sanitari-italiani-fuga-svizzera",
       "title": "Operatori sanitari frontalieri: Como boccheggia",
       "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
-      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Synthetic commuter scene relevant to cross-border healthcare commuting, but it includes a clearly visible foreground person.);",
+      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Synthetic editorial-style scene relevant to Ticino rail commuting, but it contains a recognizable foreground person viewed fro",
       "status": "failed",
-      "failureCount": 15,
+      "failureCount": 16,
       "requestedAt": "2026-10-23T15:23:52.650Z",
-      "lastFailureAt": "2026-10-31T06:20:21.519Z"
+      "lastFailureAt": "2026-11-05T19:39:06.417Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic commuter scene with no readable text, logos, or identifiable face, but a recognizable foreground person is p",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Topic-relevant generic commuter rail scene, but a foreground person and station display/signage are visible.); gemini (Gemini ",
       "status": "failed",
-      "failureCount": 15,
+      "failureCount": 16,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-10-31T06:21:37.165Z"
+      "lastFailureAt": "2026-11-05T19:40:52.504Z",
+      "retryHint": "no-text"
     },
     {
       "articleId": "infermieri-osc-sindacati-stipendi",

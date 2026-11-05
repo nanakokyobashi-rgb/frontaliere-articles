@@ -61,10 +61,13 @@ import { decodeStaticStringLiteral, matchingDelimiter, readStaticStringLiteral, 
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-// Queste dipendenze cambiano il risultato del render di ogni articolo, non di
-// un solo id: il planner deve quindi risvegliare tutti gli articoli registrati
-// della superficie coinvolta.
+// Queste dipendenze cambiano il risultato del render di ogni articolo, oppure
+// il modo in cui il planner decide quali articoli risvegliare, non di un solo
+// id: il planner deve quindi risvegliare tutti gli articoli registrati della
+// superficie coinvolta. Il planner stesso è qui perché una modifica alla sua
+// logica può lasciare stale gli ID che la logica precedente non aveva selezionato.
 const SHARED_RENDER_REFRESH_PATHS = new Set([
+  'scripts/ci/fast-publish-section.mjs',
   'scripts/lib/article-render-pipeline.mjs',
   'scripts/lib/content-updated-at.mjs',
 ]);
@@ -76,7 +79,6 @@ const SHARED_R2_REFRESH_PATHS = new Set([
   'generator/scripts/lib/canton-hubs/paths.mjs',
   'generator/scripts/lib/corpus-paths.mjs',
   'generator/scripts/lib/control-char-write-report.mjs',
-  'scripts/ci/fast-publish-section.mjs',
   'scripts/cf-purge-cache.mjs',
   ...SHARED_RENDER_REFRESH_PATHS,
   'scripts/lib/declared-image-fetch.mjs',

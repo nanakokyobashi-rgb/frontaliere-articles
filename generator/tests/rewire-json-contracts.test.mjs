@@ -287,6 +287,29 @@ test('[road-events] un payload JSON non valido continua sul fallback e non viene
   assert.match(rejected.errors[0], /schemaVersion is 2, expected 1/);
 });
 
+test('[road-events] un 200 rifiutato resta hard-fail se la source successiva è irraggiungibile', async () => {
+  const now = Date.UTC(2026, 9, 10, 12);
+  const payload = structuredClone(servable(contract('road-events')));
+  payload.generatedAt = new Date(now).toISOString();
+  payload.events[0].url = 'https://@example.org/event';
+  const calls = [];
+
+  const result = await fetchFirstValidRoadEvents(['primary', 'unreachable'], {
+    now,
+    getBody: async (url) => {
+      calls.push(url);
+      if (url === 'primary') return JSON.stringify(payload);
+      throw new Error('publisher offline');
+    },
+  });
+
+  assert.deepEqual(calls, ['primary', 'unreachable']);
+  assert.equal(result.ok, false);
+  assert.equal(result.sawResponse, true);
+  assert.match(result.errors[0], /events\[0\]\.url is not https or null — refusing/);
+  assert.match(result.errors[1], /unreachable: publisher offline/);
+});
+
 test('[road-events] la finestra dei 48h usa l’orologio dopo il fetch', async () => {
   const startedAt = Date.UTC(2026, 9, 10, 12);
   const originalNow = Date.now;
@@ -379,6 +402,41 @@ test('[road-events] la validazione combinata rifiuta duplicato, semicantone e in
 
   assert.equal(isValidRoadEventsPayload(payload), false);
   assert.match(validateRoadEventsPayload(payload), /is duplicated — refusing/);
+});
+
+test('[road-events] il payload rifiuta URL non canoniche, senza host o con userinfo', () => {
+  const now = Date.UTC(2026, 9, 10, 12);
+  const base = structuredClone(readFixture(contract('road-events')));
+  base.generatedAt = new Date(now).toISOString();
+
+  for (const url of [
+    'https://',
+    'https://user:pass@example.org/event',
+    'https://@example.org/event',
+    'https://:@example.org/event',
+    'HTTPS://example.org/event',
+    'https://example.org/a b',
+    'https:example.org/event',
+    'https://example.org:443/event',
+    'https://example.org/a/../b',
+    'https://example.org\\path',
+    ' https://example.org/event',
+    'https://example.org/event ',
+    'https://example.org/event\n',
+  ]) {
+    const payload = structuredClone(base);
+    payload.events[0].url = url;
+    assert.equal(isValidRoadEventsPayload(payload, { now }), false, url);
+    assert.match(validateRoadEventsPayload(payload, { now }), /events\[0\]\.url is not https or null — refusing/);
+  }
+
+  const valid = structuredClone(base);
+  valid.events[0].url = 'https://example.org/event';
+  assert.equal(isValidRoadEventsPayload(valid, { now }), true);
+  valid.events[0].url = 'https://example.org/path@marker';
+  assert.equal(isValidRoadEventsPayload(valid, { now }), true);
+  valid.events[0].url = null;
+  assert.equal(isValidRoadEventsPayload(valid, { now }), true);
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
