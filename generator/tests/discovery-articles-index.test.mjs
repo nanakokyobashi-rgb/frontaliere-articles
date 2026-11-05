@@ -4,8 +4,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
+  buildDiscoveryArticleShadow,
   buildDiscoveryArticlesIndex,
   normalizeDiscoveryProvider,
+  parseDiscoverySidecar,
 } from '../../scripts/lib/discovery-articles-index.mjs';
 import { SECTION_PATHS } from '../../scripts/lib/build-sitemap.mjs';
 
@@ -176,6 +178,33 @@ describe('discovery article index projection', () => {
     assert.equal(payload.articles.some(({ id }) => id === 'not-published'), false);
   });
 
+  test('excludes canonical shadows, retired editions, registry withdrawals and ledger rows', () => {
+    const shadowed = buildDiscoveryArticleShadow({
+      canonicalSlugs: ['trend-article-it'],
+      retiredDailySlugs: ['reddit-article-it'],
+      retiredRegistrySlugs: ['reddit-only-article-it'],
+      excludedSlugs: ['news-only-article-it'],
+    });
+    const payload = buildDiscoveryArticlesIndex({
+      commit: 'd'.repeat(40),
+      generatedAt: '2026-11-05T10:00:00.000Z',
+      sections: [publishedSection({ shadowed })],
+    });
+
+    assert.deepEqual(payload.articles.map(({ id }) => id), ['fallback-locale', 'missing-excerpt']);
+  });
+
+  test('rejects a present sidecar with invalid JSON or a mismatched article id', () => {
+    assert.throws(() => parseDiscoverySidecar('{', 'trend-article'), /invalid JSON/);
+    assert.throws(
+      () => parseDiscoverySidecar('{"id":"other-article"}', 'trend-article'),
+      /expected an object whose id is trend-article/,
+    );
+    assert.deepEqual(parseDiscoverySidecar('{"id":"trend-article"}', 'trend-article'), {
+      id: 'trend-article',
+    });
+  });
+
   test('normalizes known attribution and rejects malformed or unknown providers', () => {
     assert.equal(normalizeDiscoveryProvider({
       _discovery_attribution: { candidateId: 'trend-1', signalProvider: 'google-trends' },
@@ -220,8 +249,12 @@ describe('discovery article index projection', () => {
 
   test('publisher watches sidecars and the projection helper', () => {
     const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
+    const builder = fs.readFileSync(path.join(ROOT, 'scripts/build-blog-index.mjs'), 'utf8');
     assert.match(workflow, /'scripts\/lib\/discovery-articles-index\.mjs'/);
     assert.match(workflow, /'data\/blog-articles\/\*\*'/);
     assert.match(workflow, /'data\/swiss-articles\/\*\*'/);
+    assert.match(builder, /canonicalOverrides:\s*section\.canonicalOverrides/);
+    assert.match(builder, /retiredDailyEditions:\s*section\.retiredDailyEditions/);
+    assert.match(builder, /buildDiscoveryArticleShadow\(/);
   });
 });

@@ -94,7 +94,19 @@ import { declareApiArtifacts, byteSize } from './lib/api-manifest.mjs';
 import { buildImageCreditsIndex, corpusCreditReader } from './lib/image-credit-records.mjs';
 import { CORPUS_SECTIONS, PUBLISHED_API_SECTIONS } from './lib/corpus-sections.mjs';
 import { SITE, SECTION_PATHS } from './lib/build-sitemap.mjs';
-import { buildDiscoveryArticlesIndex } from './lib/discovery-articles-index.mjs';
+import { loadDeclaredRegistry, registryRetiredSlugs } from './lib/section-registry.mjs';
+import {
+  buildDiscoveryArticleShadow,
+  buildDiscoveryArticlesIndex,
+  parseDiscoverySidecar,
+} from './lib/discovery-articles-index.mjs';
+import { selectRetiredDailyEditions } from '../generator/scripts/lib/daily-brief-content.mjs';
+import {
+  ARTICLE_INDEX_EXCLUSIONS_FILES,
+  assertArticleIndexExclusionsKnown,
+  articleIndexExclusionKey,
+  loadArticleIndexExclusions,
+} from '../engine/shared/articleIndexExclusions.mjs';
 import {
   BLOG_IMAGE_CREDITS_AGGREGATE,
   buildBlogImageCreditsAggregate,
@@ -128,6 +140,8 @@ const SECTIONS = CORPUS_SECTIONS.map((section) => ({
   name: section.section,
   registry: section.registryFile,
   metaPrefix: path.basename(section.metaPrefix),
+  canonicalOverrides: section.canonicalOverrides,
+  retiredDailyEditions: section.retiredDailyEditions,
   // Discovery attribution is currently written by the two non-canton article
   // generators; canton sidecars have a separate editorial pipeline.
   sidecarDir: DISCOVERY_SIDECAR_DIR_BY_KIND[section.kind] ?? null,
@@ -317,12 +331,12 @@ function readDiscoverySidecars(section, registry) {
     const file = path.join(sidecarDir, `${id}.json`);
     if (!fs.existsSync(file)) continue;
     try {
-      const sidecar = JSON.parse(fs.readFileSync(file, 'utf-8'));
-      if (sidecar && typeof sidecar === 'object' && !Array.isArray(sidecar) && sidecar.id === id) {
-        sidecars.set(id, sidecar);
-      }
+      sidecars.set(id, parseDiscoverySidecar(fs.readFileSync(file, 'utf-8'), id));
     } catch (err) {
-      console.warn(`[blog-index] discovery sidecar ${path.relative(ROOT, file)} unreadable: ${err.message}`);
+      throw new Error(
+        `[blog-index] discovery sidecar ${path.relative(ROOT, file)} is present but invalid — refusing to publish: ${err.message}`,
+        { cause: err },
+      );
     }
   }
   return sidecars;
@@ -341,6 +355,17 @@ function prepareDiscoveryIndexSections() {
   if (slugsDoc.commit !== manifest.commit) {
     throw new Error('[blog-index] slugs.json does not match the manifest commit — refusing discovery index');
   }
+
+  const registryBySection = new Map(preparedSections.map(({ section, registry }) => [section.name, registry]));
+  const articleIndexExclusions = loadArticleIndexExclusions(
+    fs,
+    ARTICLE_INDEX_EXCLUSIONS_FILES.map((candidate) => path.join(ROOT, candidate)),
+  );
+  const knownExclusionKeys = new Set(PUBLISHED_API_SECTIONS.flatMap((section) => (
+    registryBySection.get(section.section) ?? []
+  ).map((article) => articleIndexExclusionKey(section.section, article.id))));
+  assertArticleIndexExclusionsKnown(articleIndexExclusions, knownExclusionKeys);
+  const declaredSections = loadDeclaredRegistry(ROOT);
 
   return preparedSections.flatMap(({ section, registry, metaByLocale }) => {
     if (!section.sidecarDir) return [];
@@ -366,12 +391,41 @@ function prepareDiscoveryIndexSections() {
       throw new Error(`[blog-index] slugs.json has no ${api.slugsKey} map for ${section.name}`);
     }
 
+    // Keep this projection on the exact index eligibility rules used by
+    // build-api.mjs: canonical shadows, retired daily editions, family
+    // redirects/gone entries, and the article-index withdrawal ledger.
+    const canonicalOverrides = section.canonicalOverrides
+      ? JSON.parse(fs.readFileSync(path.join(ROOT, section.canonicalOverrides), 'utf-8')).overrides ?? {}
+      : {};
+    const excludedSlugs = registry
+      .filter((article) => articleIndexExclusions.has(articleIndexExclusionKey(section.name, article.id)))
+      .map((article) => sectionSlugRows?.[article.id]?.it)
+      .filter(Boolean);
+    const retiredDailySlugs = section.retiredDailyEditions
+      ? [...selectRetiredDailyEditions(registry.map((article) => article.id))]
+        .map((id) => sectionSlugRows?.[id]?.it ?? id)
+      : [];
+    const retiredRegistrySlugs = api.family !== null
+      ? registryRetiredSlugs(
+        declaredSections.sections[section.name],
+        sectionSlugRows,
+        SECTION_PATHS[section.name],
+      )
+      : [];
+    const shadowed = buildDiscoveryArticleShadow({
+      canonicalSlugs: Object.keys(canonicalOverrides),
+      retiredDailySlugs,
+      retiredRegistrySlugs,
+      excludedSlugs,
+    });
+
     return [{
       name: section.name,
       registry: publishedRegistry,
       sidecars: readDiscoverySidecars(section, publishedRegistry),
       paths: SECTION_PATHS[section.name],
       slugMap: sectionSlugRows,
+      shadowed,
       fallbackReasons: sectionFallbackReasons || {},
       metaByLocale,
     }];
