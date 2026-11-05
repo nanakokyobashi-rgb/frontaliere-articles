@@ -5,7 +5,7 @@ name: Crawler fleet stall watchdog
 #
 # Il razionale completo, la misura che ha scelto la soglia e perché la soglia
 # ovvia non funziona stanno in `scripts/ci/scan-crawler-fleet-stall.mjs`. In
-# breve: i 23 `crawler-group-NN.yml` scrivono la raccolta nel repo SITO, e
+# breve: i `crawler-group-NN.yml` scrivono la raccolta nel repo SITO, e
 # quando il commit non atterra la run NON diventa rossa — il percorso di commit
 # classifica il lease occupato e la contesa sul ref come "systemic class", esce
 # 0 con un `::warning::` e non stage niente.
