@@ -2186,7 +2186,7 @@ jobs:
 
       - name: Commit and push
         id: commit
-        if: ${{ !cancelled() && steps.mode.outputs.dry != 'true' && (success() || (failure() && steps.generate.outcome == 'failure' && steps.generate.outputs.cooperative_stop == 'true' && steps.generate.outputs.article != 'true')) }}
+        if: ${{ !cancelled() && steps.mode.outputs.dry != 'true' && (success() || (failure() && steps.generate.outcome == 'failure' && steps.generate.outputs.article != 'true')) }}
         # Note del comando fuori dallo scalar run: mantenere il comando sotto 21.000 caratteri.
         # `.tmp` is inside the checkout and the rebase helper can remove or
         # replace it while replaying the generated commit. Preserve the
@@ -2397,12 +2397,15 @@ jobs:
           set -euo pipefail
           discovery_recovery_only=false
           if [ "${{ steps.generate.outcome }}" = "failure" ]; then
-            if [ "${{ steps.generate.outputs.cooperative_stop }}" != "true" ] || [ "${{ steps.generate.outputs.article }}" = "true" ]; then
-              echo "::error::failed generation is not an eligible no-article cooperative stop"
+            if [ "${{ steps.generate.outputs.article }}" = "true" ]; then
+              echo "::error::failed generation reported an article; refusing to publish recovery-only state"
               exit 1
             fi
-            echo "::warning::generation failed after a cooperative no-article stop; discarding unverified changes and preserving only pool-attempt counters"
-            git reset --mixed HEAD
+            echo "::warning::generation failed without an article; discarding unverified changes and preserving only pool-attempt counters"
+            # Markers and diagnostics live under RUNNER_TEMP, outside this
+            # checkout; the earlier always-upload step has already preserved them.
+            git reset --hard HEAD
+            git clean -fd
             recovery_state='data/discovery-attempt-state.json'
             if git ls-files --error-unmatch -- "$recovery_state" >/dev/null 2>&1; then
               git restore --source=HEAD --worktree -- "$recovery_state"

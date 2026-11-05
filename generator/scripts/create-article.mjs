@@ -2454,7 +2454,8 @@ function persistDiscoveryAttemptOutcome(status) {
   const poolKind = RUN_REPORT.poolSlotKind;
   if (!['proven', 'discovery'].includes(poolKind)) return;
   const generated = status === 'generated' && Boolean(RUN_REPORT.article?.id);
-  if (!generated && !['deferred', 'skipped'].includes(status)) return;
+  const noArticleOutcome = ['deferred', 'skipped', 'error'].includes(status);
+  if (!generated && !noArticleOutcome) return;
 
   const state = _loadDiscoveryAttemptState();
   const next = _recordDiscoveryAttempt(state, {
@@ -2463,7 +2464,7 @@ function persistDiscoveryAttemptOutcome(status) {
     generated,
   });
   if (!_saveDiscoveryAttemptState(next)) {
-    RUN_REPORT.poolRecoveryOutcome = { persisted: false, poolKind, generated };
+    RUN_REPORT.poolRecoveryOutcome = { persisted: false, poolKind, generated, outcome: status };
     console.warn('[discovery-attempt] state write failed; next scheduled run will retry from persisted state');
     return;
   }
@@ -2472,12 +2473,14 @@ function persistDiscoveryAttemptOutcome(status) {
     persisted: true,
     poolKind,
     generated,
+    outcome: status,
     provenAttempts: decision.provenAttempts,
     outstandingProvenFailures: decision.outstandingProvenFailures,
   };
   console.error(
     `DISCOVERY_ATTEMPT_STATE section=${RUN_REPORT.section || SECTION_NAME}`
     + ` pool=${poolKind} generated=${generated ? 1 : 0}`
+    + ` outcome=${status}`
     + ` provenAttempts=${decision.provenAttempts}`
     + ` outstandingProvenFailures=${decision.outstandingProvenFailures}`,
   );
