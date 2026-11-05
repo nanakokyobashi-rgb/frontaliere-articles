@@ -25,7 +25,7 @@ import { BLOCK_THRESHOLDS, DAY_MS, dateMs, instantMs } from './blocks-common.mjs
 import { shapeFuelBlock } from './blocks-fuel.mjs';
 import { EVENTS_BLOCK_ID, shapeEventsBlock } from './blocks-events.mjs';
 import { shapeBorderWaitBlock } from './blocks-border-wait.mjs';
-import { shapeRoadEventsBlock } from './blocks-road-events.mjs';
+import { ROAD_EVENTS_BLOCK_ID, shapeRoadEventsBlock } from './blocks-road-events.mjs';
 import { shapeNoticesBlock } from './blocks-notices.mjs';
 import { shapePharmacyDutiesBlock, shapePlateAuctionsBlock, shapePremiumsBlock, shapeWeatherBlock } from './blocks-services.mjs';
 import { shapeTaxBurdenBlock, shapeWithholdingBlock } from './blocks-tax.mjs';
@@ -33,8 +33,7 @@ import { shapeCapitalTaxBlock, shapePensionFederalBlock, shapePensionFundsBlock 
 import { buildHubIntro, foreignToponymsInCopy } from './copy.mjs';
 import { curatedEntry } from './articles.mjs';
 import { buildHubLinks } from './links.mjs';
-import { HUB_LOCALES } from './format.mjs';
-import { httpsUrlOrNull } from '../../../../engine/shared/httpsUrl.mjs';
+import { HUB_LOCALES, httpsUrlOrNull } from './format.mjs';
 import { eventSourceUrl } from '../events-utils.mjs';
 import { hubFilePath, hubFilePaths } from './paths.mjs';
 
@@ -97,8 +96,9 @@ export const DATASET_KEYS = Object.freeze(['fuel', 'events', 'borderWait', 'road
 export { hubFilePath, hubFilePaths };
 
 function checkHref(url, what) {
-  const value = String(url ?? '').trim();
-  if (httpsUrlOrNull(value)) return;
+  const raw = String(url ?? '');
+  if (httpsUrlOrNull(raw)) return;
+  const value = raw.trim();
   if (/^\/(?!\/)[^\s"<>]*$/.test(value)) {
     if (!value.split(/[?#]/)[0].endsWith('/')) throw new Error(`${what}: link interno senza slash finale: ${value}`);
     return;
@@ -272,13 +272,18 @@ export function isRenderableCarriedEventItem(item) {
 }
 
 function normalizeCarriedBlock(block, blockId) {
-  if (blockId !== EVENTS_BLOCK_ID || !Array.isArray(block?.items)) return block;
+  const minRows = blockId === EVENTS_BLOCK_ID
+    ? BLOCK_THRESHOLDS.events.minRows
+    : blockId === ROAD_EVENTS_BLOCK_ID
+      ? BLOCK_THRESHOLDS.roadEvents.minRows
+      : null;
+  if (minRows === null || !Array.isArray(block?.items)) return block;
   const items = block.items.filter(isRenderableCarriedEventItem).map((item) => {
-    if (typeof item.url !== 'string') return item;
+    if (blockId !== EVENTS_BLOCK_ID || typeof item.url !== 'string') return item;
     const url = eventSourceUrl(item.url);
     return url === item.url ? item : { ...item, url };
   });
-  if (items.length < BLOCK_THRESHOLDS.events.minRows) return null;
+  if (items.length < minRows) return null;
   return {
     ...block,
     items,

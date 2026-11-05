@@ -29,6 +29,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fetchFirstOk } from './lib/rewire-fetch.mjs';
+import { isHttpsUrlOrNull } from './lib/canton-hubs/https-url.mjs';
 // The 24 canton URL groups are the one source of truth for `canton`: a code
 // outside them (CH, DE, a typo) would reach no hub. Imported, not copied, so
 // the set cannot drift; the contract test copies relative imports with the script.
@@ -72,26 +73,6 @@ const fail = (msg) => {
 // Date.parse happens to accept: a locale date would otherwise reach the cache.
 const ISO_INSTANT_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,9})?)?(?:Z|[+-]\d{2}:\d{2})$/;
 const isIso = (v) => typeof v === 'string' && ISO_INSTANT_RE.test(v) && Number.isFinite(Date.parse(v));
-const RAW_HTTPS_URL_RE = /^https:\/\/[^\s"<>]+$/;
-
-function isHttpsUrlOrNull(value) {
-  if (value === null) return true;
-  if (typeof value !== 'string' || value.trim() !== value || !RAW_HTTPS_URL_RE.test(value)) return false;
-
-  // WHATWG URL accepts empty userinfo (`https://@host`) and normalises several
-  // non-canonical forms. The cache must only contain the raw form the emitter
-  // can publish, and `@` is forbidden anywhere in the URL authority.
-  const remainder = value.slice('https://'.length);
-  const authorityEnd = remainder.search(/[\/?#]/u);
-  const authority = remainder.slice(0, authorityEnd === -1 ? remainder.length : authorityEnd);
-  if (authority.includes('@')) return false;
-  try {
-    const url = new URL(value);
-    return url.protocol === 'https:' && Boolean(url.hostname) && !url.username && !url.password;
-  } catch {
-    return false;
-  }
-}
 
 /** Inclusive age window: exactly 48 hours old and exactly one hour ahead are valid. */
 export function isRoadEventsTimestampInWindow(value, now = Date.now()) {

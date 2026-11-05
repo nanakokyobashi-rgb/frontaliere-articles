@@ -533,6 +533,68 @@ test('chiusure e cantieri: oltre il tetto restano le limitazioni in corso e le p
   assert.deepEqual(block.render('it').keyFacts.map((f) => f.value), ['10', '1']);
 });
 
+test('chiusure e cantieri: l’emitter applica la policy raw+authority anche alla cache legacy', () => {
+  const at = (hours) => new Date(NOW + hours * HOUR_MS).toISOString();
+  const invalidUrls = [
+    'https://@example.org/event',
+    'https://:@example.org/event',
+    'https://example.org:443/event',
+    'https://example.org/a/../b',
+    'https://example.org\\path',
+  ];
+  for (const url of invalidUrls) {
+    const block = shapeRoadEventsBlock({
+      schemaVersion: 1,
+      generatedAt: at(0),
+      events: [{
+        id: `invalid-url-${url}`,
+        canton: 'TI',
+        type: 'chiusura',
+        title: 'Chiusura di prova',
+        url,
+        validFrom: at(-1),
+        validTo: at(1),
+        source: 'fixture',
+        observedAt: at(0),
+      }],
+    }, { canton: 'TI', nowMs: NOW });
+    assert.equal(block.render('it').items[0].url, undefined, url);
+  }
+
+  const valid = shapeRoadEventsBlock({
+    schemaVersion: 1,
+    generatedAt: at(0),
+    events: [{
+      id: 'valid-url',
+      canton: 'TI',
+      type: 'chiusura',
+      title: 'Chiusura di prova',
+      url: 'https://example.org/path@marker',
+      validFrom: at(-1),
+      validTo: at(1),
+      source: 'fixture',
+      observedAt: at(0),
+    }],
+  }, { canton: 'TI', nowMs: NOW });
+  assert.equal(valid.render('it').items[0].url, 'https://example.org/path@marker');
+
+  const first = buildOne('canton-ti', 'mobilita');
+  for (const locale of HUB_LOCALES) {
+    const roadBlock = first.file.locales[locale].dataBlocks.find((item) => item.id === 'chiusure-cantieri');
+    assert.ok(roadBlock?.items?.length, `${locale}: blocco road-events presente nella fixture`);
+    roadBlock.items[0] = { ...roadBlock.items[0], url: 'https://@example.org/event' };
+  }
+  const carried = buildOne('canton-ti', 'mobilita', {
+    datasets: { ...fixtureDatasets(), roadEvents: null },
+    previous: first.file,
+    nowMs: NOW + HOUR_MS,
+  });
+  for (const locale of HUB_LOCALES) {
+    const roadBlock = carried.file.locales[locale].dataBlocks.find((item) => item.id === 'chiusure-cantieri');
+    assert.ok(!roadBlock?.items?.some((item) => item.url === 'https://@example.org/event'), `${locale}: URL legacy non deve essere carried`);
+  }
+});
+
 test('qualita\' del sidecar: scala dichiarata, nessuna saturazione a 1', () => {
   assert.equal(sidecarQuality(null), null);
   assert.equal(sidecarQuality({ _score_breakdown: null }), null);
@@ -1389,6 +1451,13 @@ test('formattazione hub: input malformati non producono dati invalidi o crash ge
 
   assert.equal(httpsUrlOrNull('https://user:pass@example.org/source'), null);
   assert.equal(httpsUrlOrNull('https://%75ser:pass@example.org/source'), null);
+  assert.equal(httpsUrlOrNull('https://@example.org/source'), null);
+  assert.equal(httpsUrlOrNull('https://:@example.org/source'), null);
+  assert.equal(httpsUrlOrNull('https://example.org:443/source'), null);
+  assert.equal(httpsUrlOrNull('https://example.org/a/../source'), null);
+  assert.equal(httpsUrlOrNull('https://example.org\\source'), null);
+  assert.equal(httpsUrlOrNull('https://example.org'), 'https://example.org');
+  assert.equal(httpsUrlOrNull('https://www.watson.ch/api/2.0/rss/index.xml?tag=Zürich'), 'https://www.watson.ch/api/2.0/rss/index.xml?tag=Zürich');
   assert.equal(httpsUrlOrNull('https://example.org/source'), 'https://example.org/source');
 });
 
@@ -1452,6 +1521,9 @@ test('il producer rifiuta cio\' che il renderer rifiuterebbe o scarterebbe in si
   bad((i) => { i.links[0].url = 'http://example.org/'; }, /URL non ammesso/);
   bad((i) => { i.links[0].url = 'https://user:pass@example.org/'; }, /URL non ammesso/);
   bad((i) => { i.links[0].url = 'https://%75ser:pass@example.org/'; }, /URL non ammesso/);
+  for (const url of ['https://@example.org/', 'https://:@example.org/', 'https://example.org:443/', 'https://example.org/a/../b', 'https://example.org\\path']) {
+    bad((i) => { i.links[0].url = url; }, /URL non ammesso/);
+  }
   bad((i) => { i.links[0].url = '/senza-slash'; }, /senza slash finale/);
   bad((i) => { i.links.push({ ...i.links[0] }); }, /link duplicato/);
   bad((i) => { i.dataBlocks[0].id = 'Non Valido'; }, /id non valido/);
