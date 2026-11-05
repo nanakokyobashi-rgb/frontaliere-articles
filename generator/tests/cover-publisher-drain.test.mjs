@@ -7,6 +7,7 @@ import {
   dispatchArguments,
   groupPublisherOutbox,
   publisherStatusIsComplete,
+  publisherStatusDisposition,
   normalizeWorkflowRunPages,
   selectActivePublisherRun,
   selectNewRunId,
@@ -138,6 +139,35 @@ test('un esito parziale resta non riuscito per il codice del drain, anche con ac
   assert.equal(publisherStatusIsComplete({ sections: [{ section: 'canton-ag', status: 'in-progress' }] }), false);
   assert.equal(publisherStatusIsComplete({ sections: [{ section: 'canton-ag', status: 'failed' }] }), false);
   assert.equal(publisherStatusIsComplete({ sections: [] }), false);
+});
+
+test('un fallimento terminale non blocca la generazione, ma uno stato attivo la differisce', () => {
+  assert.deepEqual(
+    publisherStatusDisposition({ sections: [{ section: 'frontaliere', status: 'failed', runId: 'publisher-1' }] }),
+    {
+      publisherComplete: false,
+      publisherFailed: true,
+      publisherDeferred: false,
+      generationAllowed: true,
+    },
+  );
+  assert.equal(
+    publisherStatusDisposition({
+      sections: [
+        { section: 'frontaliere', status: 'failed' },
+        { section: 'canton-ti', status: 'in-progress' },
+      ],
+    }).generationAllowed,
+    false,
+  );
+  assert.equal(
+    publisherStatusDisposition({ sections: [{ section: 'frontaliere', status: 'not-started' }] }).generationAllowed,
+    false,
+  );
+  assert.equal(
+    publisherStatusDisposition({ sections: [{ section: 'frontaliere', status: 'failed' }] }).generationAllowed,
+    false,
+  );
 });
 
 test('il contratto dello status rifiuta sezioni vuote, inattese, duplicate o con stato sconosciuto', () => {
