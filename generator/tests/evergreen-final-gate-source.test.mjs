@@ -41,6 +41,7 @@ import { runFactualityGates, formatIssues } from '../scripts/lib/article-factual
 import { checkCorpusFabricatedInstitutionNames } from '../scripts/lib/corpus-fabricated-institution-names.mjs';
 import { findArticleLocalizedToponymMismatches } from '../scripts/lib/localized-toponyms.mjs';
 import { assertNoFiscalErrorsInLocales } from '../scripts/lib/article-ymyl-gate.mjs';
+import { ARTICLE_SIGNAL_LOG_HELPERS } from './lib/article-signal-log-harness.mjs';
 import {
   CLAIM_LOCALES,
   HEALTH_TAX_SUMMARY,
@@ -120,6 +121,7 @@ function makeGate() {
     'assertYmylPublishable',
     'checkCorpusFabricatedInstitutionNames',
     'findArticleLocalizedToponymMismatches',
+    'safeSignalDiagnosticTextForLog',
     `${GATE_SRC}\nreturn assertArticlePassesFactualityGates;`,
   );
   const gate = factory(
@@ -141,6 +143,7 @@ function makeGate() {
     () => {},
     checkCorpusFabricatedInstitutionNames,
     findArticleLocalizedToponymMismatches,
+    ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog,
   );
   return { gate, translationCalls };
 }

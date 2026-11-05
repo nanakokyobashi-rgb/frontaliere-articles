@@ -1402,7 +1402,7 @@ describe('reviewer follow-ups (PR #4900)', () => {
       new URL('../scripts/create-article.mjs', import.meta.url),
       'utf-8',
     );
-    const fnStart = src.indexOf('async function fetchPageContent(url) {');
+    const fnStart = src.search(/async function fetchPageContent\(url(?:, sourceContext = null)?\) \{/);
     expect(fnStart).toBeGreaterThan(-1);
     const head = src.slice(fnStart, fnStart + 1400);
     const resetAt = head.indexOf("lastSourcePublishedAt = ''");

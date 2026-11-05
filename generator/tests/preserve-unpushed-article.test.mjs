@@ -487,6 +487,10 @@ test('i cinque producer del funnel hanno id, marker, conservazione condizionata 
       `${name}: la conservazione deve dipendere dal fallimento del solo commit`,
     );
     assert.match(preserve.text, /preserve-unpushed-commit\.sh/);
+    if (['generate-article.yml', 'generate-article-core.yml'].includes(name)) {
+      assert.match(preserve.text, /jq -e '\.signalDriven == false' "\$private_report"/);
+    }
+    assert.match(preserve.text, /preserved=false/);
     assert.match(preserve.text, /--worktree/);
     assert.match(preserve.text, /fallito dopo il commit/);
     assert.match(preserve.text, /fallito prima del commit/);

@@ -302,6 +302,15 @@ test('selectArticle costruisce ENTRAMBE le liste con il protocollo condiviso', (
   );
 });
 
+test('selectArticle abilita la redazione se contiene candidate signal-driven', () => {
+  assert.match(selectArticleCode, /trimmed\.some\(isSignalDrivenTopicCandidate\)/);
+  assert.equal(
+    (selectArticleCode.match(/HEADLINE_SELECTION_FALLBACK,\s*redactDiagnostics/g) ?? []).length,
+    2,
+    'i percorsi batch e finale devono entrambi redigere i dettagli del modello',
+  );
+});
+
 test('selectArticle non ha più nessun ripiego che sceglie in silenzio', () => {
   assert.ok(!/selectedIndex/.test(selectArticleCode), 'selectArticle legge ancora un indice nudo');
   assert.ok(!/clamp a 0/.test(selectArticleCode), 'il clamp è tornato');
@@ -452,6 +461,43 @@ test('callLLM che fallisce sempre: rigetto pulito a tentativi esauriti, mai un�
   assert.equal(RUN_REPORT.selectionUsage.rejectionReasons[SELECTION_REJECTION.INFRA_ERROR], 3);
 });
 
+test('una selezione signal-driven redige messaggi di errore e risposte grezze dai log', async () => {
+  const marker = 'private-trends-headline-marker';
+  for (const scenario of [
+    {
+      callLLM: async () => `risposta non valida ${marker}`,
+      rejection: SELECTION_REJECTION.UNPARSEABLE,
+      safeDetail: '[signal-related model response redacted]',
+    },
+    {
+      callLLM: async () => { throw new Error(`provider error ${marker}`); },
+      rejection: SELECTION_REJECTION.INFRA_ERROR,
+      safeDetail: '[signal-related infrastructure diagnostic redacted]',
+    },
+  ]) {
+    const RUN_REPORT = freshRunReport();
+    const requestHeadlineSelection = buildRequestHeadlineSelection({
+      callLLM: scenario.callLLM,
+      RUN_REPORT,
+    });
+    const { value: r, lines } = await captureStderr(
+      () => requestHeadlineSelection(
+        'PROMPT-BASE',
+        2,
+        'Selezione finale',
+        1,
+        undefined,
+        true,
+      ),
+    );
+
+    assert.equal(r.ok, false);
+    assert.equal(r.rejection, scenario.rejection);
+    assert.equal(r.detail, scenario.safeDetail);
+    assert.ok(!lines.join('\n').includes(marker), 'il log ha esposto il testo del tema o della risposta');
+  }
+});
+
 test('un ALL_MODELS_EXHAUSTED NON viene assorbito: risale intatto con i suoi campi di disposizione', async () => {
   // È il contrappeso al `catch`, e l'adattamento che questo file ha in più
   // rispetto al gemello del sito. `callLLM` lancia `ALL_MODELS_EXHAUSTED` solo
@@ -484,6 +530,39 @@ test('un ALL_MODELS_EXHAUSTED NON viene assorbito: risale intatto con i suoi cam
       'un roster a terra non è un rigetto della selezione e non va contato come tale',
     );
   }
+});
+
+test('ALL_MODELS_EXHAUSTED signal-driven redige il messaggio e conserva la classificazione', async () => {
+  const marker = 'private-trends-roster-error-marker';
+  const RUN_REPORT = freshRunReport();
+  const err = rosterExhausted({ transient: true });
+  err.message = `provider response echoed\n    at ${marker}`;
+  err.inputCapReport = { count: 2, maxSkippedReqLimit: 8000, estimatedRequestTokens: 9000 };
+  err.retryRequestTokenBudget = 8000;
+  const fallback = { models: ['codex-cli/modello-di-prova'], engaged: true };
+  const requestHeadlineSelection = buildRequestHeadlineSelection({
+    callLLM: async () => { throw err; },
+    RUN_REPORT,
+  });
+  const { value } = await captureStderr(
+    () => requestHeadlineSelection('PROMPT-BASE', 2, 'Selezione finale', 1, fallback, true).then(
+      (resolved) => ({ resolved }),
+      (thrown) => ({ err: thrown }),
+    ),
+  );
+
+  assert.equal(value.err, err, 'la classificazione deve propagarsi sullo stesso errore');
+  assert.equal(err.code, 'ALL_MODELS_EXHAUSTED');
+  assert.equal(err.transientExhaustion, true);
+  assert.deepEqual(err.inputCapReport, { count: 2, maxSkippedReqLimit: 8000, estimatedRequestTokens: 9000 });
+  assert.equal(err.retryRequestTokenBudget, 8000);
+  assert.deepEqual(err.exhaustionBreakdown, { transient: 53, persistent: 3 });
+  assert.equal(err.message, '[signal-related infrastructure diagnostic redacted]');
+  assert.ok(!err.stack.includes(marker), 'lo stack dell’errore ha conservato il messaggio grezzo');
+  assert.ok(
+    err.stack.split('\n').slice(1).every((line) => /^\s*at\s/.test(line)),
+    'lo stack redatto deve conservare solo frame, senza righe di testo libero',
+  );
 });
 
 test('un errore di callLLM NON viene mai scambiato per una risposta rigettata', async () => {

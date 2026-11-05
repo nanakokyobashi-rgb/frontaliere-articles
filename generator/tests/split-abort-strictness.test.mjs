@@ -77,6 +77,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { repairLlmJson } from '../scripts/lib/llm-json-repair.mjs';
+import { ARTICLE_SIGNAL_LOG_HELPERS } from './lib/article-signal-log-harness.mjs';
 import {
   normalizeItalianContentFromPayload,
   hasUsableContentText,
@@ -119,7 +120,7 @@ const DEPS = [
   // produce davvero, invece di lasciarglieli dedurre dal testo del prompt.
   'BODY_ONLY_FIELDS', 'META_ONLY_FIELDS',
   'primaryLocale', 'RUN_REPORT', '_buildHalf', '_splitMode', 'SECTION_NAME',
-  'generationAttempt', '_splitBudgetLog', 'console',
+  'generationAttempt', '_splitBudgetLog', 'console', 'safeSignalDiagnosticTextForLog', 'sourceContext',
 ];
 
 const makeSplit = new Function(
@@ -223,6 +224,8 @@ async function run({ risposte }) {
     generationAttempt: 1,
     _splitBudgetLog: 8000,
     console: fakeConsole,
+    sourceContext: null,
+    ...ARTICLE_SIGNAL_LOG_HELPERS,
   });
   const out = await _generateSplit();
   return { out, chiamate, righe, log: righe.join('\n'), RUN_REPORT };

@@ -10,12 +10,34 @@ import {
   TARGET_LOCALES,
   parseGitStatusPaths,
   extractBodyFields,
+  formatViolationForCli,
+  projectReportForCli,
   inspectBlogLocaleCompleteness,
 } from '../../scripts/ci/check-blog-locale-completeness.mjs';
 import { floorPolicyOf } from '../../scripts/lib/corpus-floors.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const HISTORICAL_BODY_ROOTS = BODY_ROOTS.filter(({ name }) => floorPolicyOf(name) !== 'family');
+
+test('la CLI può riportare violazioni senza path o ID del contenuto', () => {
+  const violation = {
+    code: 'missing-key',
+    section: 'frontaliere',
+    locale: 'de',
+    message: 'content/blog-body/de/private-trend-topic.ts: blog.article.private-trend-topic.body1 mancante',
+  };
+  assert.equal(
+    formatViolationForCli(violation, { redactPaths: true }),
+    '[missing-key] section=frontaliere locale=de: content check failed',
+  );
+  assert.equal(formatViolationForCli(violation), violation.message);
+  const report = projectReportForCli({
+    changedPaths: ['content/blog-body/de/private-trend-topic.ts'],
+    violations: [violation],
+  }, { redactPaths: true });
+  assert.equal(JSON.stringify(report).includes('private-trend-topic'), false);
+  assert.equal(report.changedPaths[0], '[path redacted]');
+});
 
 function fixtureRoot() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-locale-completeness-'));
@@ -247,6 +269,9 @@ test('i writer scansionano il delta dei body e publish-api conserva il gate glob
     const calls = workflow.match(/node scripts\/ci\/check-blog-locale-completeness\.mjs[^\n]*/g) ?? [];
     assert.ok(calls.length > 0, `${file}: manca la guardia FU-009`);
     assert.ok(calls.every((call) => call.includes('--changed-paths')), `${file}: guardia non scoped`);
+    if (file === 'generate-article.yml' || file === 'generate-article-core.yml') {
+      assert.ok(calls.every((call) => call.includes('--redact-paths')), `${file}: path non redatti nei log pubblici`);
+    }
   }
 
   const publishApi = fs.readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');

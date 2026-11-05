@@ -198,6 +198,12 @@ test('il backfill storico e i writer sono cablati a tutte le pipeline che modifi
   assert.match(bonifica, /updatedAt sono addizionali/u);
 });
 
+test('il log dello stamp espone solo conteggi e mai gli ID degli articoli', () => {
+  const script = readFileSync(path.join(ROOT, 'scripts/ci/stamp-content-updated-at.mjs'), 'utf8');
+  assert.match(script, /considered=\$\{result\.considered\} changed=\$\{result\.changed\.length\}/u);
+  assert.doesNotMatch(script, /change\.id|change\.section|change\.updatedAt/u);
+});
+
 test('gli esempi della issue hanno il giorno dell’ultima modifica nel registry', () => {
   const files = [
     path.join(ROOT, 'content/blog-articles-data.ts'),

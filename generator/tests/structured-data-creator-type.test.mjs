@@ -8,6 +8,7 @@ import {
   lastStaticPropertyValue,
   readStructuredSeoDescription,
 } from '../../engine/shared/seo-entry.mjs';
+import { ARTICLE_SIGNAL_LOG_HELPERS } from './lib/article-signal-log-harness.mjs';
 
 const source = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
 const start = source.indexOf('function validateStructuredData(data) {');
@@ -24,12 +25,12 @@ function validateCreator(type, id = 'https://frontaliereticino.ch/#organization'
   }`;
   const validate = new Function(
     'SECTION', 'BASE_URL', 'read', 'findSeoEntryMatches', 'readCanonicalPath', 'corpusPath', 'console',
-    'decodeStaticStringLiteral', 'lastStaticPropertyValue', 'readStructuredSeoDescription',
+    'decodeStaticStringLiteral', 'lastStaticPropertyValue', 'readStructuredSeoDescription', 'safeSignalTextForLog',
     `${source.slice(start, end)}\nreturn validateStructuredData;`,
   )(
     { seoFile: 'memory.ts' }, 'https://frontaliereticino.ch', () => entry,
     () => [{ index: 0, closeIdx: entry.length - 1 }], readCanonicalPath, (p) => p, { error() {} },
-    decodeStaticStringLiteral, lastStaticPropertyValue, readStructuredSeoDescription,
+    decodeStaticStringLiteral, lastStaticPropertyValue, readStructuredSeoDescription, ARTICLE_SIGNAL_LOG_HELPERS.safeSignalTextForLog,
   );
   return validate({ id: 'example', image: 'example.webp' });
 }

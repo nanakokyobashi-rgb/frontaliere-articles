@@ -822,7 +822,7 @@ describe('cablaggio in fetchPageContent', () => {
   it('la pagina viene isolata PRIMA di essere estratta', () => {
     // Una funzione corretta e non chiamata e' il modo in cui questo repo ha
     // gia' pubblicato un titolo tutto maiuscolo (vedi blog-title-casing).
-    const at = SRC.indexOf('async function fetchPageContent(url) {');
+    const at = SRC.search(/async function fetchPageContent\(url(?:, sourceContext = null)?\) \{/);
     assert.notEqual(at, -1);
     const end = SRC.indexOf('\n// ── Date filtering:', at);
     assert.ok(end > at, 'delimitatore di fetchPageContent non trovato');

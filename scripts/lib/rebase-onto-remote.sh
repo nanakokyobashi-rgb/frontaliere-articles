@@ -315,12 +315,13 @@ reconcile_counters() {
     # incremento no: serve un commit che lo porti.
     git commit -q -m "Reconcile counters after rebase" || { git reset -q -- $changed; git checkout -- $changed 2>/dev/null || true; return 0; }
   fi
-  echo "reconciled counters after the rebase: $(echo $changed)"
+  changed_count="$(printf '%s\n' "$changed" | awk 'NF { count += 1 } END { print count + 0 }')"
+  echo "reconciled counters after the rebase: paths=$changed_count"
 }
 
 PRE_REBASE="$(git rev-parse HEAD)"
 
-if git pull --rebase "$REMOTE" "$TARGET"; then
+if git pull --rebase "$REMOTE" "$TARGET" >/dev/null 2>&1; then
   reconcile_counters
   exit 0
 fi
@@ -386,7 +387,7 @@ for _pass in $(seq 1 20); do
       case "$ALLOWED" in
         *" $f "*) ;;
         *)
-          echo "::warning::rebase conflict on '$f', which is not a whole-file bookkeeping cache and not a declared content registry — aborting, as before"
+          echo "::warning::rebase conflict on an undeclared path; aborting, as before"
           abort_and_fail || exit 1
           ;;
       esac
@@ -399,7 +400,7 @@ EOF
     # still conflicted and the tree exactly as we found it.
     if [ "${#registry_set[@]}" -gt 0 ]; then
       if node "$MERGE_RESOLVER" "${registry_set[@]}"; then
-        git add -- "${registry_set[@]}"
+        git add -- "${registry_set[@]}" 2>/dev/null
       else
         echo "::warning::the content registries could not be merged per record — aborting rather than committing a fused registry"
         abort_and_fail || exit 1
@@ -413,7 +414,7 @@ EOF
       # shellcheck disable=SC2086
       if node "$QUEUE_RESOLVER" $queue_set; then
         # shellcheck disable=SC2086
-        git add -- $queue_set
+        git add -- $queue_set 2>/dev/null
       else
         echo "::warning::the cover-regeneration queue could not be merged by articleId — aborting rather than dropping a request"
         abort_and_fail || exit 1
@@ -428,13 +429,13 @@ EOF
       [ -n "$f" ] || continue
       is_per_article "$f" || continue
       if git checkout --theirs -- "$f" 2>/dev/null; then
-        git add -- "$f"
-        echo "resolved per-article conflict by taking the rebased commit: $f"
+        git add -- "$f" 2>/dev/null
+        echo "resolved per-article conflict by taking the rebased commit"
       elif git checkout --ours -- "$f" 2>/dev/null; then
         # Nessuna copia dal lato rigiocato (upstream lo ha aggiunto e noi no):
         # tenere quella di upstream e' la stessa decisione vista dall'altro lato.
-        git add -- "$f"
-        echo "resolved per-article conflict by taking the rebased commit: $f"
+        git add -- "$f" 2>/dev/null
+        echo "resolved per-article conflict by taking the rebased commit"
       else
         # Ne' --theirs ne' --ours ha una copia da prendere: una forma degenere
         # di conflitto (es. "entrambi cancellato"), non un vero add/add. Prima
@@ -445,7 +446,7 @@ EOF
         # innesca errexit. Il file restava non risolto ma lo script continuava,
         # stampando comunque "resolved" — e solo il controllo progress_marker
         # al giro successivo lo intercettava, dopo un pass sprecato.
-        echo "::warning::rebase conflict on '$f' has neither a --theirs nor an --ours copy to take — aborting rather than leaving it unresolved"
+        echo "::warning::rebase conflict has neither side available to take — aborting rather than leaving it unresolved"
         abort_and_fail || exit 1
       fi
     done <<EOF
@@ -460,14 +461,14 @@ EOF
       [ -n "$f" ] || continue
       spec="$(counter_spec_of "$f")" || continue
       if node "$COUNTER_RESOLVER" "$spec"; then
-        git add -- "$f"
-        echo "resolved counter conflict by summing both sides: $f"
+        git add -- "$f" 2>/dev/null
+        echo "resolved counter conflict by summing both sides"
       elif git checkout --ours -- "$f" 2>/dev/null; then
-        git add -- "$f"
-        echo "::warning::counter merge refused on '$f' — resolved by taking upstream, as for a bookkeeping cache"
+        git add -- "$f" 2>/dev/null
+        echo "::warning::counter merge refused — resolved by taking upstream, as for a bookkeeping cache"
       else
         git rm -q -f -- "$f" 2>/dev/null || true
-        echo "::warning::counter merge refused on '$f' and upstream has no copy — dropped, as for a bookkeeping cache"
+        echo "::warning::counter merge refused and upstream has no copy — dropped, as for a bookkeeping cache"
       fi
     done <<EOF
 $conflicted
@@ -491,7 +492,7 @@ EOF
       else
         git rm -q -f -- "$f" 2>/dev/null || true
       fi
-      echo "resolved bookkeeping conflict by taking upstream: $f"
+      echo "resolved bookkeeping conflict by taking upstream"
     done <<EOF
 $conflicted
 EOF

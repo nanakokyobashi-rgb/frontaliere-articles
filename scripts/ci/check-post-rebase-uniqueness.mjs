@@ -549,15 +549,17 @@ export function findPostRebaseViolations(
 }
 
 export function formatViolation(v) {
-  const parts = [`kind=${v.kind}`, `section=${v.section}`, `id=${v.id}`];
+  const parts = [`kind=${v.kind}`, `section=${v.section}`, `id=${v.id ? '[redacted]' : '[none]'}`];
   if (v.other) parts.push(`other=${v.other}`);
-  if (v.otherId) parts.push(`otherId=${v.otherId}`);
+  if (v.otherId) parts.push('otherId=[redacted]');
   if (v.occurrences) parts.push(`occurrences=${v.occurrences}`);
   if (v.locale) parts.push(`locale=${v.locale}`);
-  if (v.slug) parts.push(`slug=${v.slug}`);
-  if (v.url) parts.push(`url=${v.url}`);
-  if (v.signals) parts.push(`signals=${v.signals.replace(/\s+/g, '_')}`);
-  if (v.topicKind && v.topicValue) parts.push(`topic=${v.topicKind}:${v.topicValue}`);
+  if (v.slug) parts.push('slug=[redacted]');
+  if (v.url) parts.push('url=[redacted]');
+  if (v.signals) parts.push('signals=[redacted]');
+  // topicValue may originate from a signal-driven discovery keyword; keep the
+  // structural kind in CI logs without publishing the topic text.
+  if (v.topicKind) parts.push(`topicKind=${v.topicKind}`);
   return `${VIOLATION_MARKER} ${parts.join(' ')}`;
 }
 
@@ -623,8 +625,19 @@ function parseArgs(argv) {
 }
 
 export function main(argv, { cwd = process.cwd(), log = console.log, error = console.error } = {}) {
+  let signalDrivenRun = false;
   try {
     const args = parseArgs(argv);
+    let report = null;
+    let candidateTopicKeysById = {};
+    if (args.runReport) {
+      const reportPath = resolvePath(cwd, args.runReport);
+      report = JSON.parse(readFileSync(reportPath, 'utf8'));
+      signalDrivenRun = report?.signalDriven === true;
+      if (process.env.GITHUB_RUN_ID && report.runId !== process.env.GITHUB_RUN_ID) {
+        throw new Error(`run report stantio: runId '${report.runId ?? '(assente)'}' diverso dal run corrente`);
+      }
+    }
     const produced = resolveRev(cwd, args.produced);
     if (!produced) throw new Error(`--produced '${args.produced}' non e' un commit`);
     const against = resolveRev(cwd, args.against);
@@ -639,13 +652,7 @@ export function main(argv, { cwd = process.cwd(), log = console.log, error = con
       produced: snapshotSections(surfaces, gitReader(cwd, produced), 'produced'),
       against: snapshotSections(surfaces, gitReader(cwd, against), 'against'),
     };
-    let candidateTopicKeysById = {};
-    if (args.runReport) {
-      const reportPath = resolvePath(cwd, args.runReport);
-      const report = JSON.parse(readFileSync(reportPath, 'utf8'));
-      if (process.env.GITHUB_RUN_ID && report.runId !== process.env.GITHUB_RUN_ID) {
-        throw new Error(`run report stantio: runId '${report.runId ?? '(assente)'}' diverso dal run corrente`);
-      }
+    if (report) {
       candidateTopicKeysById = candidateTopicKeysFromRunReport(report, introducedIdsOf(snapshots));
     }
     const { violations, newIds, newSourceUrls, contentChecks } = findPostRebaseViolations(
@@ -663,12 +670,13 @@ export function main(argv, { cwd = process.cwd(), log = console.log, error = con
     }
     log(
       `${OK_MARKER} sections=${surfaces.map((s) => s.section).join(',')} `
-      + `new_ids=${newIds.map((n) => `${n.section}/${n.id}`).join(',') || '-'} `
+      + `new_ids=${newIds.length} `
       + `new_source_urls=${newSourceUrls.length} content_checks=${contentChecks} against=${against.slice(0, 12)}`,
     );
     return 0;
   } catch (e) {
-    error(`::error::${ERROR_MARKER}: ${e.message}`);
+    const detail = signalDrivenRun ? 'details withheld' : e.message;
+    error(`::error::${ERROR_MARKER}: ${detail}`);
     return 2;
   }
 }

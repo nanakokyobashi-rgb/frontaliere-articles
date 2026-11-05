@@ -128,7 +128,9 @@ test('a failed generation falls back without a quality rejection', () => {
   assert.match(imageStep, /findCatalogImages: findBestFallbackImages/);
   assert.match(imageStep, /verifiedCatalogImage/);
   assert.doesNotMatch(imageStep, /findCatalogImage: findBestFallbackImage/);
-  assert.match(imageStep, /reason: data\._imageGenerationFailureReason/);
+  assert.match(imageStep, /const fallbackReason = data\._imageGenerationFailureReason \|\| 'engine-failed'/);
+  assert.match(imageStep, /reason: fallbackReason/);
+  assert.match(imageStep, /logReason: safeSignalDiagnosticTextForLog\(fallbackReason\)/);
   assert.doesNotMatch(imageStep, /imagePolicyReject|qualityReject/);
 });
 

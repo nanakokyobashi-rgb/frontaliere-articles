@@ -310,7 +310,10 @@ import {
   recordDiscoveryAttempt as _recordDiscoveryAttempt,
   saveDiscoveryAttemptState as _saveDiscoveryAttemptState,
 } from './lib/scheduler/discoveryAttemptState.mjs';
-import { buildDiscoveryPool as _buildDiscoveryPool } from './lib/discovery/discoveryPool.mjs';
+import {
+  buildDiscoveryPool as _buildDiscoveryPool,
+  safeDiscoveryErrorType,
+} from './lib/discovery/discoveryPool.mjs';
 import { attachTrendEvidenceToCandidates, isSecureHttpsUrl } from './lib/discovery/trend-evidence-attribution.mjs';
 import { projectTopicCandidateAttribution } from './lib/topic-candidate-attribution.mjs';
 import { decodeGoogleNewsUrl } from './lib/discovery/googleNewsUrlResolver.mjs';
@@ -1376,14 +1379,25 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
       continue;
     }
     if (p.kind === 'drop') {
-      filtered.push({ headline: p.headlineText.slice(0, 80), reason: p.reason, rawHeadline: p.headlineText });
+      filtered.push({
+        headline: p.headlineText.slice(0, 80),
+        reason: p.reason,
+        rawHeadline: p.headlineText,
+        signalDriven: isSignalDrivenTopicCandidate(p.h),
+      });
       continue;
     }
     const verdict = p.verdict;
     if (verdict.relevant) {
       kept.push(p.h);
     } else {
-      filtered.push({ headline: p.headlineText.slice(0, 80), reason: verdict.reason, rawHeadline: p.headlineText });
+      const signalDriven = isSignalDrivenTopicCandidate(p.h);
+      filtered.push({
+        headline: p.headlineText.slice(0, 80),
+        reason: verdict.reason,
+        rawHeadline: p.headlineText,
+        signalDriven,
+      });
       // Per-candidate rejection marker (#346, follow-up to #337) — before this,
       // a classifier "no" was only visible as part of the per-run aggregate
       // (`PRESPEND_GATE_TOTAL_REJECTION`, counts only) or truncated to the
@@ -1396,8 +1410,8 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
       // keeps headline/reason `\S+`-safe despite spaces and punctuation.
       console.error(
         `PRESPEND_GATE_REJECTED section=${SECTION_NAME}`
-        + ` headline=${encodeURIComponent(p.headlineText.slice(0, 160))}`
-        + ` reason=${encodeURIComponent(verdict.reason || '')}`,
+        + ` headline=${signalDriven ? '[signal_topic_redacted]' : encodeURIComponent(p.headlineText.slice(0, 160))}`
+        + ` reason=${signalDriven ? '[signal_reason_redacted]' : encodeURIComponent(verdict.reason || '')}`,
       );
     }
   }
@@ -1443,8 +1457,8 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     for (const { h, anchor } of restore) {
       kept.push(h);
       restoredByBackstop += 1;
-      const ht = String(h?.headline || '').slice(0, 80);
-      console.error(`  🛟 Pre-spend gate backstop: ripristinato headline anchor-matched (anchor="${anchor}"): "${ht}…"`);
+      const ht = safeTopicSelectionLogLabel(h);
+      console.error(`  🛟 Pre-spend gate backstop: ripristinato headline anchor-matched (anchor="${anchor}"): ${ht}`);
     }
     filtered = filtered.filter(f => !restoreSet.has(f.rawHeadline));
     backstopKind = 'anchor';
@@ -1514,8 +1528,8 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     for (const { h, hits } of ranked) {
       kept.push(h);
       restoredByBackstop += 1;
-      const ht = String(h?.headline || '').slice(0, 80);
-      console.error(`  🛟 Pre-spend gate backstop di sezione (${SECTION_NAME}): ripristinato headline (topical-hits=${hits}): "${ht}…"`);
+      const ht = safeTopicSelectionLogLabel(h);
+      console.error(`  🛟 Pre-spend gate backstop di sezione (${SECTION_NAME}): ripristinato headline (topical-hits=${hits}): ${ht}`);
     }
     filtered = filtered.filter(f => !restoreSet.has(f.rawHeadline));
     backstopKind = 'topical';
@@ -1566,7 +1580,9 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
 
   const dropped = headlines.length - kept.length;
   if (classifierCalls > 0 || dropped > 0 || unambiguousBypasses > 0) {
-    const reasonsSummary = filtered.slice(0, 3).map(f => f.reason).join(' | ');
+    const reasonsSummary = filtered.slice(0, 3)
+      .map(f => f.signalDriven ? '[signal reason redacted]' : f.reason)
+      .join(' | ');
     // "frontaliere-relevant" is what the classifier decided only on the
     // frontaliere section; on svizzera it answered a national prompt, and a
     // log line claiming otherwise is how a section-blind gate hides.
@@ -1577,7 +1593,9 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     );
     if (filtered.length > 0) {
       for (const f of filtered.slice(0, 5)) {
-        console.error(`     ↪ filtrato: "${f.headline}…" — ${f.reason}`);
+        const headlineLabel = f.signalDriven ? '[signal topic redacted]' : `"${f.headline}…"`;
+        const reasonLabel = f.signalDriven ? '[signal reason redacted]' : f.reason;
+        console.error(`     ↪ filtrato: ${headlineLabel} — ${reasonLabel}`);
       }
     }
   }
@@ -1586,6 +1604,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
       reason: 'not_frontaliere_relevant',
       headline: f.rawHeadline,
       classifierReason: f.reason,
+      signalDriven: f.signalDriven === true,
     });
   }
   if (typeof RUN_REPORT === 'object' && RUN_REPORT?.headlines) {
@@ -2320,6 +2339,7 @@ const RUN_REPORT = {
   },
   notes: [],
 };
+const SIGNAL_TOPIC_TERMS = new Set();
 
 /**
  * Cap on institutionObservations. A pathological run retries ~6 times and each
@@ -2581,9 +2601,22 @@ function finalizeRunReport(status, extra = {}) {
   try {
     const dir = path.dirname(resolve(CREATE_ARTICLE_REPORT_FILE));
     mkdirSync(dir, { recursive: true });
-    write(CREATE_ARTICLE_REPORT_FILE, `${JSON.stringify(RUN_REPORT, null, 2)}\n`);
+    write(CREATE_ARTICLE_REPORT_FILE, `${JSON.stringify(projectRunReportForDiagnostics(RUN_REPORT), null, 2)}\n`);
   } catch (e) {
     console.error(`  ⚠️  Impossibile scrivere ${CREATE_ARTICLE_REPORT_FILE}: ${e.message}`);
+  }
+
+  // The post-rebase uniqueness gate needs the synthetic evergreen topic key,
+  // but this minimal handoff lives in RUNNER_TEMP and is never uploaded.
+  const privateHandoffFile = process.env.CREATE_ARTICLE_POST_REBASE_REPORT_FILE;
+  if (privateHandoffFile) {
+    try {
+      const privateHandoffPath = resolve(privateHandoffFile);
+      mkdirSync(path.dirname(privateHandoffPath), { recursive: true });
+      write(privateHandoffPath, `${JSON.stringify(projectRunReportForPostRebaseUniqueness(RUN_REPORT), null, 2)}\n`);
+    } catch (e) {
+      console.error(`  ⚠️  Impossibile scrivere il post-rebase handoff: ${e.message}`);
+    }
   }
 
   // ── LA CARD, E PERCHE' NON E' IL REPORT INTERO ──────────────────────────
@@ -2615,6 +2648,115 @@ function finalizeRunReport(status, extra = {}) {
       console.error(`  ⚠️  Impossibile scrivere la run card ${cardFile}: ${e.message}`);
     }
   }
+}
+
+/** Remove signal text and source URLs from the report artifact; sidecars keep the private attribution. */
+function projectRunReportForDiagnostics(report) {
+  const discoveryAttribution = report?.discoveryAttribution;
+  const topicCandidateAttribution = report?.topicCandidateAttribution;
+  const selectedFromSignalPool = isSignalDrivenRunReport(report);
+  return {
+    ...report,
+    selectedUrl: selectedFromSignalPool ? null : report?.selectedUrl ?? null,
+    article: selectedFromSignalPool && report?.article && typeof report.article === 'object'
+      ? {
+        ...report.article,
+        id: null,
+        url: null,
+        sourceDomain: null,
+        title: null,
+      }
+      : report?.article,
+    selectedSource: selectedFromSignalPool ? null : report?.selectedSource ?? null,
+    selectedCluster: selectedFromSignalPool ? null : report?.selectedCluster ?? null,
+    lastTopicGateAbortReason: selectedFromSignalPool
+      ? '[signal reason redacted]'
+      : report?.lastTopicGateAbortReason ?? null,
+    notes: Array.isArray(report?.notes)
+      ? report.notes.map((note) => (selectedFromSignalPool || SIGNAL_TOPIC_TERMS.size > 0)
+        ? '[signal-related diagnostic redacted]'
+        : redactSignalDrivenReportNote(note))
+      : report?.notes,
+    slugs: selectedFromSignalPool && report?.slugs && typeof report.slugs === 'object'
+      ? { ...report.slugs, itFallbackDetail: [], itFallbackRecords: [] }
+      : report?.slugs,
+    factuality: selectedFromSignalPool && report?.factuality && typeof report.factuality === 'object'
+      ? {
+        ...report.factuality,
+        institutionObservations: Array.isArray(report.factuality.institutionObservations)
+          ? report.factuality.institutionObservations.map((observation) => (
+            observation && typeof observation === 'object'
+              ? { support: observation.support ?? null, attempt: observation.attempt ?? null }
+              : observation
+          ))
+          : report.factuality.institutionObservations,
+      }
+      : report?.factuality,
+    discardedHeadlineSamples: Array.isArray(report?.discardedHeadlineSamples)
+      ? report.discardedHeadlineSamples.map((sample) => projectDiscardedHeadlineSample(sample, selectedFromSignalPool))
+      : report?.discardedHeadlineSamples,
+    discoveryAttribution: discoveryAttribution && typeof discoveryAttribution === 'object'
+      ? {
+        ...discoveryAttribution,
+        candidateId: null,
+        signalHeadline: null,
+        evidenceUrl: null,
+        resolvedSourceUrl: null,
+        evidenceHeadline: null,
+      }
+      : discoveryAttribution ?? null,
+    topicCandidateAttribution: topicCandidateAttribution && typeof topicCandidateAttribution === 'object'
+      ? { ...topicCandidateAttribution, redditPermalink: null }
+      : topicCandidateAttribution ?? null,
+  };
+}
+
+function projectDiscardedHeadlineSample(sample, redactExistingId = false) {
+  if (!sample || typeof sample !== 'object') return sample;
+  const shouldRedactExistingId = redactExistingId || sample.signalDriven === true;
+  const projected = { headline: '[signal headline redacted]' };
+  for (const key of ['reason', 'existingSection', 'signal', 'sim']) {
+    if (sample[key] !== undefined) projected[key] = sample[key];
+  }
+  if (!shouldRedactExistingId && sample.existingId !== undefined) projected.existingId = sample.existingId;
+  if (typeof sample.classifierReason === 'string' && sample.classifierReason.trim()) {
+    projected.classifierReason = '[classifier reason redacted]';
+  }
+  return projected;
+}
+
+function redactSignalDrivenReportNote(note) {
+  if (typeof note !== 'string') return note;
+  let safe = note;
+  for (const term of [...SIGNAL_TOPIC_TERMS].sort((a, b) => b.length - a.length)) {
+    safe = safe.replace(new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'giu'), '[signal topic redacted]');
+  }
+  return safe.replace(/[a-z][a-z0-9+.-]*:\/\/[^\s]+/giu, '[signal URL redacted]');
+}
+
+/** Keep only the fields needed by check-post-rebase-uniqueness in a private runner-temp handoff. */
+function projectRunReportForPostRebaseUniqueness(report) {
+  const selectedUrl = typeof report?.selectedUrl === 'string' && report.selectedUrl.startsWith('evergreen://')
+    ? report.selectedUrl
+    : null;
+  return {
+    runId: report?.runId ?? null,
+    runAttempt: report?.runAttempt ?? null,
+    section: report?.section ?? null,
+    status: report?.status ?? null,
+    signalDriven: isSignalDrivenRunReport(report),
+    selectedUrl,
+    article: { id: report?.article?.id ?? null },
+  };
+}
+
+function isSignalDrivenRunReport(report) {
+  return Boolean(
+    report?.discoveryAttribution
+    || report?.topicCandidateAttribution
+    || report?.pool === 'discovery'
+    || report?.selectedTier === 'experimental'
+  );
 }
 
 /**
@@ -3680,8 +3822,10 @@ const DRY_RUN_SCAN = process.argv.slice(2).includes('--dry-run-scan');
 const DRY_RUN_STAGES = {};
 
 async function exitDryRunScan({ chosen, tier, pool, poolSize }) {
+  if (chosen) rememberSignalTopicCandidate(chosen);
   const h = RUN_REPORT.headlines || {};
   const src = RUN_REPORT.sources || {};
+  const signalSelectionRedacted = isSignalDrivenTopicCandidate(chosen);
   const summary = {
     section: SECTION_NAME,
     kind: SECTION_PROFILE.kind,
@@ -3706,11 +3850,20 @@ async function exitDryRunScan({ chosen, tier, pool, poolSize }) {
       selectionPool: poolSize,
       selected: chosen ? 1 : 0,
     },
-    selected: chosen ? { headline: chosen.headline || '', url: chosen.url || '', source: chosen.source || '', tier, pool } : null,
+    selected: chosen ? {
+      headline: signalSelectionRedacted ? '[signal topic redacted]' : chosen.headline || '',
+      url: signalSelectionRedacted ? null : chosen.url || '',
+      source: chosen.source || '',
+      tier,
+      pool,
+    } : null,
     cantonSources: src.canton || undefined,
   };
   console.error(`DRY_RUN_SCAN_SUMMARY ${JSON.stringify({ section: summary.section, sources: summary.sources, stages: summary.stages })}`);
-  if (chosen) console.error(`DRY_RUN_SCAN_SELECTED section=${SECTION_NAME} tier=${tier} "${String(chosen.headline || '').slice(0, 120)}" ${chosen.url || ''}`);
+  if (chosen) {
+    const selectedUrl = signalSelectionRedacted ? '[url redacted]' : chosen.url || '';
+    console.error(`DRY_RUN_SCAN_SELECTED section=${SECTION_NAME} tier=${tier} ${safeTopicSelectionLogLabel(chosen)} ${selectedUrl}`);
+  }
   process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
   finalizeRunReport('dry-run', { notes: [...RUN_REPORT.notes, 'dry-run-scan: nessuna generazione'] });
   // NON exitAfterFlush: il flush scriverebbe nel ledger condiviso dei modelli
@@ -4066,6 +4219,68 @@ function isTrendBackedDiscoveryCandidate(candidate) {
   return candidate?.source === 'trends' || candidate?.meta?.signalProvider === 'google-trends';
 }
 
+function normalizeDiscoveryPublisherUrl(candidate, url, baseUrl = BASE_URL) {
+  if (typeof url !== 'string') return null;
+  // GSC orphan candidates intentionally store topLandingPage as a root-relative
+  // path. Match fetchPageContent's canonical-domain resolution, but do not
+  // turn arbitrary topic-only relative strings into internal publisher URLs.
+  if (candidate?.source === 'orphan' && url.startsWith('/') && !url.startsWith('//')) {
+    return `${baseUrl}${url}`;
+  }
+  return url;
+}
+
+function hasSecureDiscoveryPublisherUrl(chosen, url) {
+  if (!chosen?._discoveryCandidate) return true;
+  return isSecureHttpsUrl(
+    normalizeDiscoveryPublisherUrl(chosen._discoveryCandidate, url),
+  );
+}
+
+function isSignalDrivenTopicCandidate(candidate) {
+  return Boolean(candidate?._experimentalCandidate || candidate?._discoveryCandidate);
+}
+
+function isSignalDrivenRunSelection(candidate) {
+  return Boolean(
+    isSignalDrivenTopicCandidate(candidate)
+    || isSignalDrivenRunReport(RUN_REPORT)
+  );
+}
+
+function safeTopicSelectionLogLabel(candidate) {
+  if (isSignalDrivenRunSelection(candidate)) return '[signal topic redacted]';
+  return `"${(candidate?.headline || candidate?.keyword || '').slice(0, 80)}"`;
+}
+
+function safeSignalSourceUrlForLog(url, candidate) {
+  return isSignalDrivenRunSelection(candidate) ? '[signal URL redacted]' : url;
+}
+
+function safeSignalTextForLog(value, candidate, placeholder = '[signal text redacted]') {
+  return isSignalDrivenRunSelection(candidate) ? placeholder : value;
+}
+
+function safeSignalDiagnosticTextForLog(value, candidate) {
+  const text = String(value ?? '');
+  if (isSignalDrivenRunSelection(candidate)) return '[signal-related diagnostic redacted]';
+  if (SIGNAL_TOPIC_TERMS.size === 0) return text;
+  return redactSignalDrivenReportNote(text);
+}
+
+function rememberSignalTopicCandidate(candidate) {
+  if (!isSignalDrivenTopicCandidate(candidate)) return;
+  for (const value of [
+    candidate?.headline,
+    candidate?.keyword,
+    candidate?._experimentalCandidate?.keyword,
+    candidate?._discoveryCandidate?.headline,
+    candidate?._discoveryCandidate?.meta?.signalHeadline,
+  ]) {
+    if (typeof value === 'string' && value.trim()) SIGNAL_TOPIC_TERMS.add(value.trim());
+  }
+}
+
 function normalizeOptionalIsoTimestamp(value) {
   if (typeof value !== 'string' || !value.trim()) return null;
   const timeMs = Date.parse(value);
@@ -4220,7 +4435,10 @@ function recordSourceUrl(sourceUrl, articleId) {
   // restano permanenti — vedi `source-url-ledger.mjs`.
   map[normalized] = makeLedgerEntry(articleId);
   saveSourceUrls(map);
-  console.error(`  📎 Source URL registrata: ${normalized} → ${articleId}`);
+    console.error(
+      `  📎 Source URL registrata: ${safeSignalSourceUrlForLog(normalized, null)} → `
+      + `${safeSignalTextForLog(articleId, null, '[signal article id redacted]')}`,
+    );
 }
 
 function loadSourceQuotaState() {
@@ -6061,7 +6279,7 @@ function assertItalianArticlePassesFactualityGates(data, { sourceUrl = '', sourc
     });
     if (result.issues.length > 0) {
       console.error(`  🔍 Gate fattualita' [it]: ${result.issues.length} rilievi, ${result.blocking.length} bloccanti`);
-      console.error(formatIssues(result.issues));
+      console.error(safeSignalDiagnosticTextForLog(formatIssues(result.issues)));
     }
     if (!result.passed) {
       const err = new Error(`Articolo rigettato dai gate deterministici: ${formatIssues(result.blocking)}`);
@@ -6314,7 +6532,7 @@ function assertTranslationsPassFactualityGates(data) {
     });
     if (result.issues.length > 0) {
       console.error(`  🔍 Gate fattualita' [${locale}]: ${result.issues.length} rilievi, ${result.blocking.length} bloccanti`);
-      console.error(formatIssues(result.issues));
+      console.error(safeSignalDiagnosticTextForLog(formatIssues(result.issues)));
     }
     blocking.push(...result.blocking);
   }
@@ -6958,7 +7176,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
         else fcHadNonOutageResult = true;
         const reason = error?.message || 'no result';
         fcLastRejectMsgs.push(reason || '');
-        console.error(`  ⚠️  LLM fact-check (${modelsToQuery[i]}): fallito — ${reason}`);
+        console.error(`  ⚠️  LLM fact-check (${modelsToQuery[i]}): fallito — ${safeSignalDiagnosticTextForLog(reason)}`);
       }
     }
 
@@ -6979,7 +7197,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       } catch (err) {
         fcProviderErrors.push(err);
         fcLastRejectMsgs.push(err.message || '');
-        console.error(`  ⚠️  LLM fact-check secondo parere (${next}): ${err.message}`);
+        console.error(`  ⚠️  LLM fact-check secondo parere (${next}): ${safeSignalDiagnosticTextForLog(err.message)}`);
       }
       if (modelResults.length < 2) {
         missingSecondOpinion = true;
@@ -6996,7 +7214,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       } catch (err) {
         fcProviderErrors.push(err);
         fcLastRejectMsgs.push(err.message || '');
-        console.error(`  ⚠️  LLM fact-check fallback (${verificationModels[2]}): ${err.message}`);
+        console.error(`  ⚠️  LLM fact-check fallback (${verificationModels[2]}): ${safeSignalDiagnosticTextForLog(err.message)}`);
       }
     }
   }
@@ -7038,7 +7256,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     } catch (err) {
       fcProviderErrors.push(err);
       fcLastRejectMsgs.push(err.message || '');
-      console.error(`  ⚠️  LLM fact-check (${codex}): ${err.message}`);
+      console.error(`  ⚠️  LLM fact-check (${codex}): ${safeSignalDiagnosticTextForLog(err.message)}`);
     }
   }
 
@@ -7107,7 +7325,10 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       if (!uniqueFailures.has(key)) uniqueFailures.set(key, { result, assessment });
     }
     const originalityIssues = [...uniqueFailures.values()].map(({ result, assessment }) => {
-      console.error(`  🚫 Originalità editoriale (${result.model}): ${assessment.classification} — ${assessment.reason}`);
+      console.error(
+        `  🚫 Originalità editoriale (${result.model}): ${assessment.classification} — `
+        + `${safeSignalDiagnosticTextForLog(assessment.reason)}`,
+      );
       return editorialOriginalityIssue(assessment);
     });
     const factualIssues = modelResults.flatMap(result => result.issues)
@@ -7208,7 +7429,11 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   for (const r of modelResults) {
     console.error(`  🔍 LLM fact-check (${r.model}): verdict=${r.verdict} confidence=${r.confidence.toFixed(2)} issues=${r.issues.length} (critical=${r.issues.filter(i => i.severity === 'critical').length}, major=${r.issues.filter(i => i.severity === 'major').length})`);
     for (const issue of r.issues) {
-      console.error(`     ${issue.severity === 'critical' ? '🚨' : '⚠️'}  [${issue.category || '?'}] "${(issue.claim || '').slice(0, 80)}" — ${(issue.reason || '').slice(0, 100)}`);
+      console.error(
+        `     ${issue.severity === 'critical' ? '🚨' : '⚠️'}  [${issue.category || '?'}] `
+        + `"${safeSignalDiagnosticTextForLog((issue.claim || '').slice(0, 80))}" — `
+        + `${safeSignalDiagnosticTextForLog((issue.reason || '').slice(0, 100))}`,
+      );
     }
   }
 
@@ -7377,7 +7602,7 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
       'no-verdict': 'JSON senza verdetto PASS/FAIL',
       ambiguous: 'più verdetti nella stessa risposta, nessuno scelto',
     }[error] || 'JSON non valido';
-    console.error(`  ⚠️  LLM fact-check (${model}${via}): ${label} — ${factCheckRawSnippet(raw)}`);
+    console.error(`  ⚠️  LLM fact-check (${model}${via}): ${label} — ${safeSignalDiagnosticTextForLog(factCheckRawSnippet(raw))}`);
     return null;
   }
 
@@ -7387,7 +7612,7 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
   const editorialAssessment = validateEditorialAssessment(result.editorialAssessment, opts.editorialContext);
   if (!editorialAssessment.verifiable) {
     console.error(`  ⚠️  LLM fact-check (${model}${servedBy && servedBy !== model ? ` via ${servedBy}` : ''}): `
-      + `valutazione editoriale senza prove leggibili (${editorialAssessment.reason}) — voto scartato`);
+      + `valutazione editoriale senza prove leggibili (${safeSignalDiagnosticTextForLog(editorialAssessment.reason)}) — voto scartato`);
     return null;
   }
 
@@ -7525,7 +7750,7 @@ async function callLLM(messages, opts = {}) {
         if (parseErr) {
           console.error(`  🔎 JSON parse fallito (${modelUsedRef.model || 'unknown'}): ${parseErr.message} — ${describeJsonParseError(repaired, parseErr)}`);
         }
-        console.error(`  📄 ${describeRawForDiagnostics(result)}`);
+        console.error(`  📄 ${safeSignalDiagnosticTextForLog(describeRawForDiagnostics(result))}`);
       }
 
       if (missing.length > 0) {
@@ -9382,7 +9607,7 @@ function sourcePageFetchHeaders() {
   };
 }
 
-async function fetchPageContent(url) {
+async function fetchPageContent(url, sourceContext = null) {
   // Clear per-call state before every synthetic or fetched-source early return.
   lastSourcePublishedAt = '';
   lastSourcePageTitle = '';
@@ -9435,7 +9660,7 @@ async function fetchPageContent(url) {
   if (url.startsWith('evergreen://')) {
     const keyword = process.env._EVERGREEN_KEYWORD || decodeURIComponent(url.replace('evergreen://', ''));
     const angle = process.env._EVERGREEN_ANGLE || '';
-    console.error(`📚 Articolo evergreen: "${keyword}"`);
+    console.error(`📚 Articolo evergreen: "${safeSignalTextForLog(keyword, sourceContext, '[signal topic redacted]')}"`);
     // Section-aware (#96). Il dominio dichiarato al writer e il ground truth
     // che riceve devono essere LO STESSO dominio: dire «sezione svizzera
     // nazionale» e poi allegare i fatti frontalieri e' la contraddizione che
@@ -9466,7 +9691,7 @@ async function fetchPageContent(url) {
   // silently degrading to a sourceless generation. Resolve against the
   // canonical domain before fetching.
   const absoluteUrl = url.startsWith('/') ? `${BASE_URL}${url}` : url;
-  console.error(`📰 Fetching: ${absoluteUrl}`);
+  console.error(`📰 Fetching: ${safeSignalSourceUrlForLog(absoluteUrl, sourceContext)}`);
   try {
     const res = await fetchWithRefTimeout(absoluteUrl, {
       headers: sourcePageFetchHeaders(),
@@ -9518,7 +9743,7 @@ async function fetchPageContent(url) {
     console.error(`   📄 Estratto via ${method}: ${text.length} chars, ${paragraphCount} blocchi${ageNote}`);
     return text;
   } catch (e) {
-    console.error(`⚠️  Impossibile scaricare la pagina: ${e.message}`);
+    console.error(`⚠️  Impossibile scaricare la pagina: ${safeSignalDiagnosticTextForLog(e.message, sourceContext)}`);
     if (suppliedCantonSourceContent.length >= 200) {
       lastSourcePublishedAt = suppliedCantonSourcePublishedAt;
       lastSourcePageTitle = suppliedCantonSourceTitle;
@@ -11107,13 +11332,13 @@ function prioritizeFrontalieriHeadlines(headlines) {
 
   if (boosted.length >= MIN_BOOSTED && !keepNonBoosted) {
     console.error(`  🎯 Pre-filtro frontalieri: ${boosted.length} articoli direttamente rilevanti (drop ${rest.length} non-boosted, soglia=${MIN_BOOSTED})`);
-    console.error(`     Keyword trovate negli headline: ${boosted.map(h => `"${h.headline.slice(0, 60)}…"`).slice(0, 5).join(', ')}`);
+    console.error(`     Keyword trovate negli headline: ${boosted.slice(0, 5).map(safeTopicSelectionLogLabel).join(', ')}`);
     return boosted;
   }
 
   if (boosted.length > 0) {
     console.error(`  🎯 Pre-filtro frontalieri: ${boosted.length} articoli direttamente rilevanti (su ${headlines.length} totali, sotto soglia ${MIN_BOOSTED} → mantengo non-boosted come fallback)`);
-    console.error(`     Keyword trovate negli headline: ${boosted.map(h => `"${h.headline.slice(0, 60)}…"`).slice(0, 5).join(', ')}`);
+    console.error(`     Keyword trovate negli headline: ${boosted.slice(0, 5).map(safeTopicSelectionLogLabel).join(', ')}`);
     // Return boosted first, then the rest — Gemini will see the most relevant ones at the top
     return [...boosted, ...rest];
   }
@@ -11159,7 +11384,7 @@ const HEADLINE_SELECTION_FALLBACK = {
   engaged: false,
 };
 
-async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAttempts, fallback = { models: [], engaged: false }) {
+async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAttempts, fallback = { models: [], engaged: false }, redactDiagnostics = false) {
   let last = null;
   // I modelli la cui risposta HTTP 200 il protocollo ha RIGETTATO in questa
   // selezione. Per la cascata quella era una chiamata riuscita (+2): nella run
@@ -11228,16 +11453,39 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
       // `prefer` non lo mette in testa. Il roster intero e' a terra solo dopo
       // che anche Codex ha fallito, e allora l'errore risale intatto.
       if (err?.code === 'ALL_MODELS_EXHAUSTED') {
+        if (redactDiagnostics) {
+          // Preserve the structured disposition fields and error identity used
+          // by main().catch, but do not propagate provider text that can echo
+          // a signal-driven headline into its diagnostics.
+          const stack = typeof err.stack === 'string' ? err.stack : '';
+          const originalStackPrefix = `${err.name || 'Error'}: ${String(err.message ?? '')}\n`;
+          const stackFrames = stack.startsWith(originalStackPrefix)
+            ? stack.slice(originalStackPrefix.length).split('\n').filter((line) => /^\s*at\s/.test(line))
+            : [];
+          err.message = '[signal-related infrastructure diagnostic redacted]';
+          err.stack = `${err.name || 'Error'}: ${err.message}`
+            + (stackFrames.length ? `\n${stackFrames.join('\n')}` : '');
+        }
         if (useFallback || fallback.models.length === 0 || attempt === maxAttempts) throw err;
         fallback.engaged = true;
-        last = { rejection: SELECTION_REJECTION.INFRA_ERROR, detail: String(err?.message ?? err) };
+        last = {
+          rejection: SELECTION_REJECTION.INFRA_ERROR,
+          detail: redactDiagnostics
+            ? '[signal-related infrastructure diagnostic redacted]'
+            : String(err?.message ?? err),
+        };
         console.error(
           `  ⚠️  ${label}: cascata free esaurita — tentativo ${attempt}/${maxAttempts}, il prossimo passa a ${fallback.models.join(', ')}`,
         );
         continue;
       }
       if (fallback.models.length > 0) fallback.engaged = true;
-      last = { rejection: SELECTION_REJECTION.INFRA_ERROR, detail: String(err?.message ?? err) };
+      last = {
+        rejection: SELECTION_REJECTION.INFRA_ERROR,
+        detail: redactDiagnostics
+          ? '[signal-related infrastructure diagnostic redacted]'
+          : String(err?.message ?? err),
+      };
       console.error(
         `  ⚠️  ${label}: errore infrastrutturale (${last.detail}) — tentativo ${attempt}/${maxAttempts}`,
       );
@@ -11261,9 +11509,11 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
     recordModelContentFailure(modelUsedRef.model, { recordScore: callOpts.recordScore });
     if (modelUsedRef.model && !rejectedModels.includes(modelUsedRef.model)) rejectedModels.push(modelUsedRef.model);
     if (fallback.models.length > 0) fallback.engaged = true;
-    last = parsed;
+    last = redactDiagnostics
+      ? { ...parsed, detail: '[signal-related model response redacted]' }
+      : parsed;
     console.error(
-      `  ⚠️  ${label}: risposta RIGETTATA (${parsed.rejection}: ${parsed.detail}) — tentativo ${attempt}/${maxAttempts}`,
+      `  ⚠️  ${label}: risposta RIGETTATA (${last.rejection}: ${last.detail}) — tentativo ${attempt}/${maxAttempts}`,
     );
     RUN_REPORT.selectionUsage.responsesRejected += 1;
     RUN_REPORT.selectionUsage.rejectionReasons[parsed.rejection] =
@@ -11304,6 +11554,8 @@ async function selectArticle(headlines) {
   // Chunking: if too many headlines, split into batches to avoid token overflow
   const MAX_HEADLINES_PER_BATCH = 50;
   let trimmed = headlines.slice(0, 500);
+  const redactDiagnostics = trimmed.some(isSignalDrivenTopicCandidate)
+    || isSignalDrivenRunReport(RUN_REPORT);
   let batchWinners = [];
   if (trimmed.length > MAX_HEADLINES_PER_BATCH) {
     // Split into batches
@@ -11322,6 +11574,7 @@ async function selectArticle(headlines) {
         `Batch ${batchIdx + 1}`,
         HEADLINE_SELECTION_MAX_ATTEMPTS_BATCH,
         HEADLINE_SELECTION_FALLBACK,
+        redactDiagnostics,
       );
       if (!picked.ok) {
         // Niente clamp: un batch senza una scelta valida si SALTA. Prendere la
@@ -11352,6 +11605,7 @@ async function selectArticle(headlines) {
     'Selezione finale',
     HEADLINE_SELECTION_MAX_ATTEMPTS_FINAL,
     HEADLINE_SELECTION_FALLBACK,
+    redactDiagnostics,
   );
   if (!picked.ok) {
     // Qui stava «fallback a indice 0». Ripiegare sulla prima headline pubblica
@@ -11391,13 +11645,14 @@ async function selectArticle(headlines) {
     .map(({ headline, source, url }) => ({ headline, source, url }));
 
   chosen.relatedHeadlines = relatedHeadlines;
-  console.error(`🎯 Articolo selezionato: "${chosen.headline}"`);
+  const signalSelectionRedacted = isSignalDrivenTopicCandidate(chosen);
+  console.error(`🎯 Articolo selezionato: ${safeTopicSelectionLogLabel(chosen)}`);
   console.error(`   Fonte: ${chosen.source}`);
-  console.error(`   URL: ${chosen.url}`);
+  console.error(`   URL: ${signalSelectionRedacted ? '[url redacted]' : chosen.url}`);
   if (relatedHeadlines.length > 0) {
     console.error(`   Contesto extra: ${relatedHeadlines.length} headline correlate incluse per arricchire il contenuto.`);
   }
-  console.error(`   Motivo: ${selection.reason}`);
+  console.error(`   Motivo: ${signalSelectionRedacted ? '[signal selection]' : selection.reason}`);
   return chosen;
 }
 
@@ -12810,7 +13065,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     try {
       bodyData = JSON.parse(repairLlmJson(rawBody));
     } catch (e) {
-      console.error(`  ⚠️ [prompt-split] chiamata 1/2 senza JSON valido (${e.message}): ricado sulla chiamata unica.`);
+      console.error(`  ⚠️ [prompt-split] chiamata 1/2 senza JSON valido (${safeSignalDiagnosticTextForLog(e.message, sourceContext)}): ricado sulla chiamata unica.`);
       return null;
     }
     // ── L'ABORT PER RILEVANZA TOPICA, E PERCHE' ORA SI DECIDE DOPO ───────
@@ -12964,7 +13219,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       console.error(
         `  ⏭️  [prompt-split] chiamata 1/2 ha dichiarato abort_topical_relevance=true con `
         + `${articolo.length}ch di corpo: abort terminale, nessuna chiamata 2/2 `
-        + `(reason: "${String(bodyData.reason || '').slice(0, 200)}").`,
+        + `(reason: "${safeSignalDiagnosticTextForLog(String(bodyData.reason || '').slice(0, 200), sourceContext)}").`,
       );
       return JSON.stringify(bodyData);
     }
@@ -12983,7 +13238,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
         `  ⚠️  [prompt-split] chiamata 1/2 ha dichiarato abort_topical_relevance=true MA porta `
         + `contenuto su ${_evidenzaNonLetta}, forma che il normalizzatore non legge: NON e' un abort `
         + `terminale, ricado sulla chiamata unica e rigenero `
-        + `(reason: "${String(bodyData.reason || '').slice(0, 200)}").`,
+        + `(reason: "${safeSignalDiagnosticTextForLog(String(bodyData.reason || '').slice(0, 200), sourceContext)}").`,
       );
     }
     // Auto-contraddizione VERA: il corpo c'e' ed e' leggibile. La forma non
@@ -13005,7 +13260,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       console.error(
         `  ⚠️  [prompt-split] chiamata 1/2 ha dichiarato abort_topical_relevance=true MA ha `
         + `anche reso ${articolo.length}ch di corpo — contract violation, trusting content `
-        + `over the flag (reason given: "${String(bodyData.reason || '').slice(0, 200)}").`,
+        + `over the flag (reason given: "${safeSignalDiagnosticTextForLog(String(bodyData.reason || '').slice(0, 200), sourceContext)}").`,
       );
       if (RUN_REPORT && typeof RUN_REPORT === 'object') {
         RUN_REPORT.topicGateSelfContradictions = (RUN_REPORT.topicGateSelfContradictions || 0) + 1;
@@ -13320,7 +13575,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       try {
         _out = await _eseguiRibracket(_rb, _optsUnica);
       } catch (e2) {
-        console.error(`  ↩️ [prompt-rebracket] anche il piano ha fallito (${e2.message}): propago l'errore originale.`);
+        console.error(`  ↩️ [prompt-rebracket] anche il piano ha fallito (${safeSignalDiagnosticTextForLog(e2.message, sourceContext)}): propago l'errore originale.`);
         throw e;
       }
       // `null` = nemmeno il piano ha prodotto qualcosa di spedibile: si
@@ -13340,8 +13595,8 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // hit) gets 2× tokens; structural corruption keeps the same budget so
     // we don't pay double for a transient `***`-between-properties glitch.
     console.error(`❌ JSON parse error: ${parseErr.message}`);
-    console.error(`   ${describeJsonParseError(itRepaired, parseErr)}`);
-    console.error(`   ${describeRawForDiagnostics(itRaw)}`);
+    console.error(`   ${safeSignalDiagnosticTextForLog(describeJsonParseError(itRepaired, parseErr), sourceContext)}`);
+    console.error(`   ${safeSignalDiagnosticTextForLog(describeRawForDiagnostics(itRaw), sourceContext)}`);
     const isTruncation = /Unterminated|Unexpected end/i.test(parseErr.message);
     // Il ramo non-troncamento riusa lo stesso budget del primo tentativo (era
     // un 8000 letterale sganciato dalla chiamata che stava ripetendo): una
@@ -13430,18 +13685,21 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     : null;
   if (itData?.abort_topical_relevance === true && _abortSenzaCorpo) {
     const reason = String(itData.reason || '').slice(0, 500) || '(no reason)';
-    console.error(`  ⏭️  [topic-gate] Generation aborted by REGOLA #0 — source lacks real frontaliere angle.`);
-    console.error(`     Reason: ${reason}`);
+    console.error('  ⏭️  [topic-gate] Generation aborted by REGOLA #0 — source lacks real frontaliere angle.');
+    console.error(`     Reason: ${safeSignalDiagnosticTextForLog(reason, sourceContext)}`);
     if (RUN_REPORT && typeof RUN_REPORT === 'object') {
       RUN_REPORT.topicGateAborts = (RUN_REPORT.topicGateAborts || 0) + 1;
       RUN_REPORT.lastTopicGateAbortReason = reason;
     }
-    const err = new Error(`Topic-gate abort: ${reason}`);
+    const err = new Error(`Topic-gate abort: ${safeSignalDiagnosticTextForLog(reason, sourceContext)}`);
     err.topicGateAbort = true;
     throw err;
   }
   if (itContentPreAbortCheck) {
-    console.error(`  ⚠️  [topic-gate] Model set abort_topical_relevance=true but ALSO returned full content.it — contract violation, trusting content over the flag (reason given: "${String(itData.reason || '').slice(0, 200)}").`);
+    console.error(
+      `  ⚠️  [topic-gate] Model set abort_topical_relevance=true but ALSO returned full content.it — `
+      + `contract violation, trusting content over the flag (reason given: "${safeSignalDiagnosticTextForLog(String(itData.reason || '').slice(0, 200), sourceContext)}").`,
+    );
     if (RUN_REPORT && typeof RUN_REPORT === 'object') {
       RUN_REPORT.topicGateSelfContradictions = (RUN_REPORT.topicGateSelfContradictions || 0) + 1;
     }
@@ -13460,7 +13718,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       console.error(
         `  ⚠️  [topic-gate] abort_topical_relevance=true MA il payload porta contenuto su `
         + `${_evidenzaNonLetta}, forma che il normalizzatore non legge: rigetto rigenerabile, `
-        + `non abort terminale (reason: "${String(itData.reason || '').slice(0, 200)}").`,
+        + `non abort terminale (reason: "${safeSignalDiagnosticTextForLog(String(itData.reason || '').slice(0, 200), sourceContext)}").`,
       );
     }
     // qualityReject=true: same content-quality class as the JSON-parse and
@@ -13513,7 +13771,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
           console.warn(`  ⚠️ [title-cap] IT title del retry sotto il floor (${capRetryMiss}) — scartato, resta il titolo validato`);
         }
       } catch (retryErr) {
-        console.warn(`  ⚠️ [title-cap] Retry titolo IT fallito: ${retryErr.message} — applico hard cap`);
+        console.warn(`  ⚠️ [title-cap] Retry titolo IT fallito: ${safeSignalDiagnosticTextForLog(retryErr.message)} — applico hard cap`);
       }
     }
     const finalCap = capBlogTitle(itContent.title);
@@ -13528,7 +13786,11 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // never wired into this AI-generation path — closing that gap here.
     const casedTitle = normalizeTitleCasing(itContent.title);
     if (casedTitle !== itContent.title) {
-      console.warn(`  🔡 [title-case] IT title normalizzato: "${itContent.title}" → "${casedTitle}"`);
+      console.warn(
+        `  🔡 [title-case] IT title normalizzato: `
+        + `"${safeSignalTextForLog(itContent.title, null, '[signal title redacted]')}" → `
+        + `"${safeSignalTextForLog(casedTitle, null, '[signal title redacted]')}"`,
+      );
       itContent.title = casedTitle;
     }
   }
@@ -14239,8 +14501,8 @@ async function translateArticle(data) {
       return JSON.parse(repaired);
     } catch (parseErr) {
       console.error(`  ⚠️  JSON parse error (${label}): ${parseErr.message}`);
-      console.error(`     ${describeJsonParseError(repaired, parseErr)}`);
-      console.error(`     ${describeRawForDiagnostics(raw)}`);
+      console.error(`     ${safeSignalDiagnosticTextForLog(describeJsonParseError(repaired, parseErr))}`);
+      console.error(`     ${safeSignalDiagnosticTextForLog(describeRawForDiagnostics(raw))}`);
       // Detect truncation (model hit output cap): use 3× tokens on retry
       const isTruncation = parseErr.message.includes('Unterminated') || parseErr.message.includes('Unexpected end');
       const retry1Tokens = isTruncation ? Math.max(maxTokens * 3, 12000) : maxTokens + 4000;
@@ -15043,7 +15305,7 @@ ${localizedToponymInstruction(targetLang)}`;
           console.warn(`  ⚠️ [title-cap] ${locale.toUpperCase()} title del retry sotto il floor (${capRetryMiss}) — scartato, resta il titolo precedente`);
         }
       } catch (retryErr) {
-        console.warn(`  ⚠️ [title-cap] Retry titolo ${locale} fallito: ${retryErr.message} — applico hard cap`);
+        console.warn(`  ⚠️ [title-cap] Retry titolo ${locale} fallito: ${safeSignalDiagnosticTextForLog(retryErr.message)} — applico hard cap`);
       }
     }
     const finalCap = capBlogTitle(localeContent.title);
@@ -15053,7 +15315,11 @@ ${localizedToponymInstruction(targetLang)}`;
     localeContent.title = finalCap.value;
     const uncappedTitle = collapseShoutingTitle(localeContent.title);
     if (uncappedTitle !== localeContent.title) {
-      console.warn(`  🔡 [title-case] ${locale.toUpperCase()} title normalizzato: "${localeContent.title}" → "${uncappedTitle}"`);
+      console.warn(
+        `  🔡 [title-case] ${locale.toUpperCase()} title normalizzato: `
+        + `"${safeSignalTextForLog(localeContent.title, null, '[signal title redacted]')}" → `
+        + `"${safeSignalTextForLog(uncappedTitle, null, '[signal title redacted]')}"`,
+      );
       localeContent.title = uncappedTitle;
     }
     // Toponym casing is locale-agnostic: Ticino stays Ticino in EN/DE/FR, and
@@ -15092,7 +15358,7 @@ function validateTitle(title) {
   if (!title) return { valid: false, reason: 'empty' };
   for (const re of A5_CLICKBAIT_PATTERNS) {
     if (re.test(title)) {
-      console.warn(`  ⚠️ [anti-clickbait] Titolo sospetto: "${title}"`);
+      console.warn(`  ⚠️ [anti-clickbait] Titolo sospetto: "${safeSignalTextForLog(title, null, '[signal title redacted]')}"`);
       return { valid: false, reason: 'clickbait_pattern' };
     }
   }
@@ -15270,7 +15536,7 @@ function validate(data, opts = {}) {
       err.qualityReject = true;
       throw err;
     }
-    console.error(`⚠️  Campo "id" mancante — sintetizzato dal titolo IT: "${generatedId}"`);
+    console.error(`⚠️  Campo "id" mancante — sintetizzato dal titolo IT: "${safeSignalTextForLog(generatedId, null, '[signal article id redacted]')}"`);
     data.id = generatedId;
   }
 
@@ -15293,7 +15559,10 @@ function validate(data, opts = {}) {
       err.identityRejected = true;
       throw err;
     }
-    console.warn(`  ⚠️  [slug-placeholder] id ripulito: "${data.id}" → "${recoveredId}"`);
+    console.warn(
+      `  ⚠️  [slug-placeholder] id ripulito: "${safeSignalTextForLog(data.id, null, '[signal article id redacted]')}" `
+      + `→ "${safeSignalTextForLog(recoveredId, null, '[signal article id redacted]')}"`,
+    );
     data.id = recoveredId;
   }
 
@@ -15377,7 +15646,7 @@ function validate(data, opts = {}) {
         const generated = slugifySlugPart(title);
         if (generated) {
           data.slugs[locale] = generated;
-          console.warn(`  ⚠️  Slug ${locale} mancante, generato dal titolo: "${generated}"`);
+    console.warn(`  ⚠️  Slug ${locale} mancante, generato dal titolo: "${safeSignalTextForLog(generated, null, '[signal slug redacted]')}"`);
         } else {
           const err = new Error(`Slug mancante per ${locale} e titolo non utilizzabile per fallback`);
           err.qualityReject = true;
@@ -15404,7 +15673,7 @@ function validate(data, opts = {}) {
   const itTitle = (data.content.it || data.content)?.title || '';
   const titleCheck = validateTitle(itTitle);
   if (!titleCheck.valid) {
-    console.warn(`  ⚠️ [anti-clickbait] Titolo IT non conforme: "${itTitle}" (${titleCheck.reason})`);
+    console.warn(`  ⚠️ [anti-clickbait] Titolo IT non conforme: "${safeSignalTextForLog(itTitle, null, '[signal title redacted]')}" (${titleCheck.reason})`);
     // Non-blocking: log warning but don't reject the article outright,
     // as false positives are possible. The warning is visible in GH Actions.
   }
@@ -15564,7 +15833,7 @@ function validate(data, opts = {}) {
         ? parseArticleIdentityField(data.slugs[locale], { field: 'slug', locale })
         : rawVerdict;
       if (!verdict.ok) {
-        console.warn(`  ❌ [slug-identity] Slug ${locale} RIGETTATO (${verdict.rejection}): ${verdict.detail}`);
+        console.warn(`  ❌ [slug-identity] Slug ${locale} RIGETTATO (${verdict.rejection}): ${safeSignalDiagnosticTextForLog(verdict.detail)}`);
       }
       // ISSUE #138 PUNTO 3 — il vecchio codice assumeva che il testo incollato
       // fosse la scelta del modello. Ora `stripSlugPromptLeak()` decide in un
@@ -15586,7 +15855,11 @@ function validate(data, opts = {}) {
         markProvisionalItSlug(data, locale);
       }
       if (data.slugs[locale] !== original) {
-        console.warn(`  ⚠️  Slug ${locale} sanitizzato: "${original}" → "${data.slugs[locale]}"`);
+        console.warn(
+          `  ⚠️  Slug ${locale} sanitizzato: `
+          + `"${safeSignalTextForLog(original, null, '[signal slug redacted]')}" → `
+          + `"${safeSignalTextForLog(data.slugs[locale], null, '[signal slug redacted]')}"`,
+        );
       }
     }
   }
@@ -15935,10 +16208,10 @@ function optimizeSeoMetadata(data, { onDescriptionRepairs } = {}) {
     let mutated = initialItTitle;
     if (year && !mutated.includes(year)) {
       mutated = `${mutated} (${year})`;
-      console.error(`  🪪 Collisione titolo IT — aggiunto anno: "${mutated}"`);
+      console.error(`  🪪 Collisione titolo IT — aggiunto anno: "${safeSignalTextForLog(mutated, null, '[signal title redacted]')}"`);
     } else if (city && !mutated.toLowerCase().includes(city.toLowerCase())) {
       mutated = `${mutated} — ${city}`;
-      console.error(`  🪪 Collisione titolo IT — aggiunta città: "${mutated}"`);
+      console.error(`  🪪 Collisione titolo IT — aggiunta città: "${safeSignalTextForLog(mutated, null, '[signal title redacted]')}"`);
     }
     if (mutated !== initialItTitle && !existingTitles.has(mutated.toLowerCase())) {
       it.title = mutated;
@@ -15947,7 +16220,7 @@ function optimizeSeoMetadata(data, { onDescriptionRepairs } = {}) {
       // così il retry loop in main() ripesca un altro headline invece di
       // killare il workflow. Rule #1 (zero tolleranza) resta rispettata:
       // l'articolo duplicato non viene pubblicato.
-      console.error(`  ❌ Titolo IT "${initialItTitle}" collide con un articolo esistente.`);
+      console.error(`  ❌ Titolo IT "${safeSignalTextForLog(initialItTitle, null, '[signal title redacted]')}" collide con un articolo esistente.`);
       console.error(`     Anno (${year || 'n/a'}) e città (${city || 'n/a'}) non bastano a disambiguare — provo un altro headline.`);
       throw new Error(`DUPLICATO: titolo IT "${initialItTitle}" collide con un articolo esistente`);
     }
@@ -15972,7 +16245,11 @@ function optimizeSeoMetadata(data, { onDescriptionRepairs } = {}) {
   // Repair only that provable shape, using the shared clause helper; unrelated
   // model output remains visible for the existing quality gates to reject.
   for (const { field, before, after } of repairSeoTitleFields(data.seo, seoTitleCore)) {
-    console.error(`  🔧 SEO ${field} ⇐ content.it.title ("${before}" → "${after}")`);
+    console.error(
+      `  🔧 SEO ${field} ⇐ content.it.title `
+      + `("${safeSignalTextForLog(before, null, '[signal title redacted]')}" → `
+      + `"${safeSignalTextForLog(after, null, '[signal title redacted]')}")`,
+    );
   }
   // Non-vuota per la stessa ragione del `title` sopra: il breadcrumb finisce
   // nel JSON-LD `BreadcrumbList`, dove una `name` vuota e' un item invalido, e
@@ -16544,7 +16821,7 @@ async function generateArticleImage(data, { deadlineAt = getArticleImageDeadline
   if (Date.now() >= imageDeadline) {
     console.error('  ⏱️  Budget fase immagini esaurito prima del motore governato.');
     data._imageGenerationFailureReason = 'image-budget-expired';
-    console.error(`[cover] article=${data.id} source=engine reason=image-budget-expired`);
+    console.error(`[cover] article=${safeSignalTextForLog(data.id, null, '[signal_article_id_redacted]')} source=engine reason=image-budget-expired`);
     if (_articleRunDeadlineMs !== null && Date.now() >= _articleRunDeadlineMs) {
       const unavailable = new Error('Article cover generation budget expired before the governed image engine');
       unavailable.code = ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE;
@@ -16569,7 +16846,7 @@ async function generateArticleImage(data, { deadlineAt = getArticleImageDeadline
   } catch (error) {
     const stagingDir = result?.stagingDir || (result?.filePath ? path.dirname(result.filePath) : null);
     if (stagingDir && existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
-    console.error(`  ⚠️  Motore immagini governato fallito: ${error.message}`);
+    console.error(`  ⚠️  Motore immagini governato fallito: ${safeSignalDiagnosticTextForLog(error.message)}`);
     if (error?.sharedProviderUnavailable === true) {
       const unavailable = new Error(`Article cover verification is blocked by a shared provider outage: ${error.message}`);
       unavailable.code = ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE;
@@ -16581,7 +16858,10 @@ async function generateArticleImage(data, { deadlineAt = getArticleImageDeadline
     data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(error);
     data._imageGenerationFailureReason = String(error.message || 'engine-failed')
       .replace(/\s+/g, ' ').trim().slice(0, 180) || 'engine-failed';
-    console.error(`[cover] article=${data.id} source=engine reason=${data._imageGenerationFailureReason}`);
+    console.error(
+      `[cover] article=${safeSignalTextForLog(data.id, null, '[signal_article_id_redacted]')} source=engine `
+      + `reason=${safeSignalDiagnosticTextForLog(data._imageGenerationFailureReason)}`,
+    );
     return null;
   }
 
@@ -16591,11 +16871,16 @@ async function generateArticleImage(data, { deadlineAt = getArticleImageDeadline
     appendGeneratedImageRecord(PROJECT_ROOT, result.record);
   } catch (error) {
     if (materialized?.destination && existsSync(materialized.destination)) unlinkSync(materialized.destination);
-    console.error(`  ⚠️  Provenienza immagine governata rifiutata: ${error.message}`);
+    console.error(
+      `  ⚠️  Provenienza immagine governata rifiutata: ${safeSignalDiagnosticTextForLog(error.message, null)}`,
+    );
     data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(error);
     data._imageGenerationFailureReason = String(error.message || 'provenance-rejected')
       .replace(/\s+/g, ' ').trim().slice(0, 180) || 'provenance-rejected';
-    console.error(`[cover] article=${data.id} source=engine reason=${data._imageGenerationFailureReason}`);
+    console.error(
+      `[cover] article=${safeSignalTextForLog(data.id, null, '[signal_article_id_redacted]')} source=engine `
+      + `reason=${safeSignalDiagnosticTextForLog(data._imageGenerationFailureReason)}`,
+    );
     return null;
   } finally {
     const cleanupDir = materialized?.stagingDir
@@ -16610,7 +16895,12 @@ async function generateArticleImage(data, { deadlineAt = getArticleImageDeadline
   data._generatedImagePath = result.record.imageUrl;
   const finalProvenance = imageRecordForPath(PROJECT_ROOT, data._generatedImagePath, { strict: true });
   applyGeneratedHeroAlt(data, finalProvenance);
-  console.error(`  ✅ Copertina governata: ${result.record.imageUrl} (${result.record.provider}/${result.record.model})`);
+  const imageUrlLabel = safeSignalTextForLog(
+    result.record.imageUrl,
+    null,
+    '[signal image path redacted]',
+  );
+  console.error(`  ✅ Copertina governata: ${imageUrlLabel} (${result.record.provider}/${result.record.model})`);
   return result.record.imageUrl;
 }
 
@@ -16935,7 +17225,10 @@ function buildBodyFile(data, locale) {
   // Build FAQ line if present — validate JSON roundtrip to catch malformed AI output
   let faqLine = '';
   if (c.faq && Array.isArray(c.faq) && c.faq.length > 0) {
-    assertFaqPairsHaveNoRejectedControls(c.faq, `FAQ ${locale}/${id}`);
+      assertFaqPairsHaveNoRejectedControls(
+        c.faq,
+        `FAQ ${locale}/${safeSignalTextForLog(id, null, '[signal article id redacted]')}`,
+      );
     try {
       const normalizedFaq = c.faq.map((item) => (item && typeof item === 'object'
         ? {
@@ -16954,7 +17247,10 @@ function buildBodyFile(data, locale) {
       JSON.parse(unescaped);
       faqLine = `\n    'blog.article.${id}.faq': '${escaped}',`;
     } catch (e) {
-      console.error(`  ⚠️ FAQ for ${locale}/${id} dropped — malformed JSON: ${e.message}`);
+      console.error(
+        `  ⚠️ FAQ for ${locale}/${safeSignalTextForLog(id, null, '[signal article id redacted]')} dropped — malformed JSON: `
+        + safeSignalDiagnosticTextForLog(e.message),
+      );
     }
   }
 
@@ -17400,7 +17696,7 @@ function validateStructuredData(data) {
     throw new Error(`[validate-ld] JSON-LD roundtrip failed for ${entryKey}: ${e.message}\n  JSON: ${jsonStr.substring(0, 300)}`);
   }
 
-  console.error(`  ✅ Dati strutturati validi (headline: "${ogT.substring(0, 50)}...")`);
+    console.error(`  ✅ Dati strutturati validi (headline: "${safeSignalTextForLog(ogT.substring(0, 50), null, '[signal title redacted]')}")`);
 }
 
 /**
@@ -18029,8 +18325,10 @@ async function main() {
     resolveRegisterLockAtStartup();
   }
 
-  // Positional <url> = first non-flag argv (so `--section=` can precede it).
-  let url = process.argv.slice(2).find((a) => !a.startsWith('--'));
+  // Positional <url> remains supported for local/manual runs. Scheduled and
+  // workflow runs pass it through SOURCE_URL so diagnostic report argv cannot
+  // retain the source URL.
+  let url = process.argv.slice(2).find((a) => !a.startsWith('--')) || process.env.SOURCE_URL || null;
   let headlines = null;
 
   // `--dry-run-scan` misura la SCANSIONE delle fonti: con una URL esplicita
@@ -18144,7 +18442,14 @@ async function main() {
     // INCREMENTED at the end of a successful publish — a stuck/failed run
     // does not burn quota counters. See spec § 6.6.
     const quotaState = _loadQuotaState();
-    const evidenceForDiscovery = _evidenceIndex; // alias — already loaded above
+    const evidenceForDiscovery = _evidenceIndex; // optional GSC/GA4 context for scoring
+    // Direct discovery sources (Google Trends, News, Suggest) do not require
+    // the site-owned evidence index. Keep the optional shape they consume so
+    // the scheduled corpus generator can reach those sources on its own.
+    const discoverySourceContext = evidenceForDiscovery || {
+      gsc: { queries: {} },
+      winnerFingerprint: null,
+    };
     const slotDecision = _decideSlot(quotaState);
     const recoveryState = _loadDiscoveryAttemptState();
     const recoveryDecision = _discoveryRecoveryDecision(recoveryState, { section: SECTION_NAME });
@@ -18152,12 +18457,11 @@ async function main() {
     const recoveryDisabled = Number.isFinite(discoveryQuotaOverride) && discoveryQuotaOverride === 100;
     const recoveryEligible = !forceEvergreen
       && !recoveryDisabled
-      && Boolean(SECTION_PROFILE.discoveryPool)
-      && Boolean(evidenceForDiscovery);
+      && Boolean(SECTION_PROFILE.discoveryPool);
     const forceRecoveryDiscovery = recoveryDecision.shouldForceDiscovery && recoveryEligible;
     // Sezione cantonale: sempre `proven` (le sue fonti), il pool discovery e'
     // costruito sulla domanda GSC delle sezioni storiche (SECTION_PROFILE).
-    const slotKind = forceEvergreen || !SECTION_PROFILE.discoveryPool || !evidenceForDiscovery
+    const slotKind = forceEvergreen || !SECTION_PROFILE.discoveryPool
       ? 'proven'
       : forceRecoveryDiscovery
         ? 'discovery'
@@ -18204,15 +18508,23 @@ async function main() {
     // Helper — convert discovery candidates into headline-shaped objects
     // compatible with rankAndSelectHeadlines (field `headline`, optional `url`).
     const _discoveryCandidatesToHeadlines = (candidates) => {
-      const candidatesWithEvidence = attachTrendEvidenceToCandidates(candidates, headlineSimilarity);
+      // GSC orphan landing pages are deliberately root-relative, while topic-
+      // only Suggest rows have no source. Normalize only the former against
+      // BASE_URL, then require a secure URL before article generation; a
+      // synthetic discovery:// URL would yield an empty source body.
+      const candidatesWithEvidence = attachTrendEvidenceToCandidates(candidates, headlineSimilarity)
+        .map((candidate) => {
+          const url = normalizeDiscoveryPublisherUrl(candidate, candidate?.url);
+          return url === candidate?.url ? candidate : { ...candidate, url };
+        })
+        .filter((candidate) => isSecureHttpsUrl(candidate?.url));
       _discoveryCandidatesById = new Map();
       const out = [];
       for (const c of candidatesWithEvidence) {
         const id = `discovery::${c.source}::${String(c.headline).toLowerCase()}`;
-        _discoveryCandidatesById.set(id, c);
         const headline = {
           headline: c.headline,
-          url: c.url || `discovery://${encodeURIComponent(c.source)}/${encodeURIComponent(c.headline)}`,
+          url: c.url,
           source: c.source,
           relatedHeadlines: [],
           _discoveryId: id,
@@ -18230,9 +18542,15 @@ async function main() {
         // exact behaviour that discarded ~219 real news/run and is gone. Keep a
         // defensive falsy-guard only (should not fire for a valid candidate).
         const resolved = resolveGoogleNewsHeadline(headline, _provenHeadlinesForDiscovery);
-        if (!resolved) continue;
+        // A resolver may replace a secure Google News wrapper with a publisher
+        // URL, so validate the final URL too before admitting it to generation.
+        if (!resolved || !isSecureHttpsUrl(resolved.url)) continue;
+        _discoveryCandidatesById.set(id, c);
         if (resolved._resolvedFromGoogleNewsRss) {
-          console.error(`   🔗 Google News RSS risolto a fonte diretta (${resolved._resolvedGoogleNewsScore.toFixed(2)}): ${resolved.url}`);
+          console.error(
+            `   🔗 Google News RSS risolto a fonte diretta (${resolved._resolvedGoogleNewsScore.toFixed(2)}): `
+            + safeSignalSourceUrlForLog(resolved.url, resolved),
+          );
         }
         out.push(resolved);
       }
@@ -18242,7 +18560,7 @@ async function main() {
     // ── Phase 1: Scan external news sources (skipped only on explicit FORCE_EVERGREEN=1) ──
     if (forceEvergreen) {
       console.error('📚 Forced evergreen — FORCE_EVERGREEN=1 (env override). Salto scan news.\n');
-    } else if (slotKind === 'discovery' && evidenceForDiscovery) {
+    } else if (slotKind === 'discovery') {
       // Discovery slot — build the discovery pool. Cross-pool dedup runs
       // against the proven news-scan headlines (so a discovery candidate
       // already covered by today's news pool is dropped). Spec § 6.5.
@@ -18251,7 +18569,7 @@ async function main() {
       _provenHeadlinesForDiscovery = provenHeadlinesForDedup || [];
       const provenStrings = (provenHeadlinesForDedup || []).map((h) => String(h.headline || ''));
       try {
-        const pool = await _buildDiscoveryPool(evidenceForDiscovery, {
+        const pool = await _buildDiscoveryPool(discoverySourceContext, {
           provenHeadlines: provenStrings,
           deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
           deadlineReserveMs: MIN_VIABLE_ATTEMPT_MS,
@@ -18260,7 +18578,7 @@ async function main() {
         console.error(`DISCOVERY_POOL_BUILD orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${pool.perSource.trends} trendSignals=${trendSignals} postDedup=${pool.postDedupCount}`);
         _discoveryHeadlines = _discoveryCandidatesToHeadlines(pool.candidates);
       } catch (err) {
-        console.error(`⚠️  Discovery pool build failed: ${err?.message || err}`);
+        console.error(`⚠️  Discovery pool build failed error_type=${safeDiscoveryErrorType(err)}; falling back to proven`);
         _discoveryHeadlines = [];
       }
       if (_discoveryHeadlines.length === 0) {
@@ -18346,7 +18664,7 @@ async function main() {
             console.error(`GOOGLE_NEWS_INJECT news_candidates=${newsOnly.length} injected=${headlines.length - beforeInject} pool=${headlines.length}`);
           }
         } catch (err) {
-          console.error(`⚠️  Google-News injection into proven pool failed (non-blocking): ${err?.message || err}`);
+          console.error(`⚠️  Google-News injection into proven pool failed (non-blocking) error_type=${safeDiscoveryErrorType(err)}`);
         }
       }
     }
@@ -18360,7 +18678,8 @@ async function main() {
           // `check.section` esiste solo sul ramo esatto; il ramo fuzzy
           // (url_slug_match) non sa da quale sezione venga l'id che ha matchato.
           const where = check.crossSection ? ` — sezione ${check.section}` : '';
-          console.error(`  🔗 Headline scartata (URL già usata → ${check.articleId}${where}): ${h.headline.slice(0, 60)}…`);
+          const articleIdLabel = safeSignalTextForLog(check.articleId, h, '[signal existing article id redacted]');
+          console.error(`  🔗 Headline scartata (URL già usata → ${articleIdLabel}${where}): ${safeTopicSelectionLogLabel(h)}`);
           RUN_REPORT.preFilterDrops.urlAlreadyUsed += 1;
           if (check.crossSection) RUN_REPORT.preFilterDrops.urlUsedOtherSection += 1;
           recordDiscardedHeadline({
@@ -18369,6 +18688,7 @@ async function main() {
             existingId: check.articleId,
             existingSection: check.section ?? null,
             signal: check.signal,
+            signalDriven: isSignalDrivenTopicCandidate(h),
           });
           return false;
         }
@@ -18397,12 +18717,16 @@ async function main() {
           && typeof h._cantonSourceContent === 'string'
           && h._cantonSourceContent.trim().length >= 200;
         if (hasVerifiedCantonBody) {
-          console.error(`  ♻️ Memo topic-gate ignorato: corpo CMS verificato presente per "${h.headline.slice(0, 60)}…"`);
+          console.error(`  ♻️ Memo topic-gate ignorato: corpo CMS verificato presente per ${safeTopicSelectionLogLabel(h)}`);
           return true;
         }
-        console.error(`  🚫 Headline scartata (topic-gate REGOLA #0 su questa fonte nelle ultime 48 h): ${h.headline.slice(0, 60)}…`);
+        console.error(`  🚫 Headline scartata (topic-gate REGOLA #0 su questa fonte nelle ultime 48 h): ${safeTopicSelectionLogLabel(h)}`);
         RUN_REPORT.preFilterDrops.topicGateAbortedRecently = (RUN_REPORT.preFilterDrops.topicGateAbortedRecently || 0) + 1;
-        recordDiscardedHeadline({ reason: 'topic_gate_aborted_recently', headline: h.headline });
+        recordDiscardedHeadline({
+          reason: 'topic_gate_aborted_recently',
+          headline: h.headline,
+          signalDriven: isSignalDrivenTopicCandidate(h),
+        });
         return false;
       });
 
@@ -18415,7 +18739,8 @@ async function main() {
       headlines = headlines.filter(h => {
         const check = preFlightHeadlineCheck(h.headline);
         if (check.duplicate) {
-          console.error(`  📰 Headline scartata (topic già coperto → ${check.existingId}, ${check.signal}=${check.sim.toFixed(2)}): ${h.headline.slice(0, 60)}…`);
+          const existingIdLabel = safeSignalTextForLog(check.existingId, h, '[signal existing article id redacted]');
+          console.error(`  📰 Headline scartata (topic già coperto → ${existingIdLabel}, ${check.signal}=${check.sim.toFixed(2)}): ${safeTopicSelectionLogLabel(h)}`);
           RUN_REPORT.preFilterDrops.topicAlreadyCovered += 1;
           recordDiscardedHeadline({
             reason: 'topic_already_covered',
@@ -18424,6 +18749,7 @@ async function main() {
             existingTitle: check.existingTitle,
             signal: check.signal,
             sim: Number(check.sim.toFixed(3)),
+            signalDriven: isSignalDrivenTopicCandidate(h),
           });
           return false;
         }
@@ -18585,12 +18911,12 @@ async function main() {
                     }
                   }
                   console.error(`   ✅ Ranker pick: tier=${rankerTier} cluster=${rankerCluster || 'n/a'} ${scoreStr}`);
-                  console.error(`   📰 "${(chosen.headline || chosen.keyword || '').slice(0, 80)}"\n`);
+                  console.error(`   📰 ${safeTopicSelectionLogLabel(chosen)}\n`);
                 } else {
                   console.error('   ⏭️  Ranker: nessuna headline sopra min-score — fallback LLM selectArticle\n');
                 }
-              } catch (rankerErr) {
-                console.error(`   ⚠️  Ranker error (graceful fallback): ${rankerErr?.message || rankerErr}\n`);
+              } catch {
+                console.error('RANKER_ERROR fallback=llm_selector');
                 chosen = null;
               }
             }
@@ -18603,6 +18929,7 @@ async function main() {
             }
 
             // --dry-run-scan: la selezione e' l'ultimo stadio misurato.
+            if (chosen) rememberSignalTopicCandidate(chosen);
             if (DRY_RUN_SCAN) await exitDryRunScan({ chosen, tier: rankerTier, pool: pool.name, poolSize: availableHeadlines.length });
 
             if (chosen?.url?.startsWith('evergreen://')) {
@@ -18612,8 +18939,21 @@ async function main() {
                 angle: process.env._EVERGREEN_ANGLE || keyword,
               });
               if (check.duplicate) {
+                const duplicateLabel = isSignalDrivenTopicCandidate(chosen)
+                  ? '[signal topic redacted]'
+                  : `"${keyword}"`;
+                const existingTitleLabel = safeSignalTextForLog(
+                  check.existingTitle,
+                  chosen,
+                  '[signal existing title redacted]',
+                );
+                const existingIdLabel = safeSignalTextForLog(
+                  check.existingId,
+                  chosen,
+                  '[signal existing article id redacted]',
+                );
                 throw new Error(
-                  `❌ DUPLICATO PRE-GEN: "${keyword}" già coperto da "${check.existingTitle}" [${check.existingId}] (${check.signal}=${check.sim.toFixed(2)})`
+                  `❌ DUPLICATO PRE-GEN: ${duplicateLabel} già coperto da "${existingTitleLabel}" [${existingIdLabel}] (${check.signal}=${check.sim.toFixed(2)})`
                 );
               }
             }
@@ -18637,6 +18977,8 @@ async function main() {
             else RUN_REPORT.selectionUsage.attemptsRecent += 1;
             RUN_REPORT.selectedArticleType = rankerTier === 'experimental' ? 'experimental' : 'news';
             RUN_REPORT.selectedSource = normalizeSourceDomain(chosen?.source || '');
+            // Keep the internal URL for the private post-rebase topic handoff;
+            // projectRunReportForDiagnostics redacts it before artifact output.
             RUN_REPORT.selectedUrl = chosen?.url || null;
             RUN_REPORT.selectedTier = rankerTier;
             RUN_REPORT.selectedScore = rankerScoreObj ? rankerScoreObj.score : null;
@@ -18750,10 +19092,10 @@ async function main() {
                     write(sidecarPath, `${JSON.stringify(payload, null, 2)}\n`);
                   }
                 } catch (e) {
-                  console.warn(`[generator] could not write pool sidecar: ${e?.message || e}`);
+                  console.warn(`[generator] could not write pool sidecar: ${safeSignalDiagnosticTextForLog(e?.message || e)}`);
                 }
               } catch (e) {
-                console.warn(`[generator] could not persist ranker state: ${e?.message || e}`);
+                console.warn(`[generator] could not persist ranker state: ${safeSignalDiagnosticTextForLog(e?.message || e)}`);
               }
             };
 
@@ -18789,13 +19131,17 @@ async function main() {
             if (chosen?._needsGoogleNewsDecode || isGoogleNewsRssUrl(url)) {
               const realUrl = await decodeGoogleNewsUrl(url);
               if (!realUrl) {
-                console.error(`   ⏭️  Google News non decodificabile — provo un'altra headline (non conta come tentativo): "${String(chosen.headline || '').slice(0, 60)}"`);
+                console.error(`   ⏭️  Google News non decodificabile — provo un'altra headline (non conta come tentativo): ${safeTopicSelectionLogLabel(chosen)}`);
                 attempt--;
                 continue;
               }
               const used = isSourceUrlAlreadyUsed(realUrl);
               if (used.used) {
-                console.error(`   🔗 Google News decodificata ma URL già usata (→ ${used.articleId}) — provo un'altra headline (non conta come tentativo)`);
+                console.error(
+                  `   🔗 Google News decodificata ma URL già usata (→ `
+                  + `${safeSignalTextForLog(used.articleId, chosen, '[signal existing article id redacted]')}) `
+                  + '— provo un\'altra headline (non conta come tentativo)',
+                );
                 attempt--;
                 continue;
               }
@@ -18806,25 +19152,31 @@ async function main() {
                 attempt--;
                 continue;
               }
-              console.error(`   🔓 Google News decodificata → fonte reale: ${realUrl.slice(0, 80)}`);
+              console.error(`   🔓 Google News decodificata → fonte reale: ${safeSignalSourceUrlForLog(realUrl, chosen)}`);
               url = realUrl;
               chosen = { ...chosen, url: realUrl, _resolvedFromGoogleNewsRss: chosen.url };
             }
 
-            // Trend-backed candidates require a secure publisher URL after
-            // Google News wrapper resolution. The RSS wrapper itself being
+            // Discovery candidates require a secure publisher URL after
+            // Google News wrapper decoding. The RSS wrapper itself being
             // HTTPS is not sufficient evidence that its destination is.
+            if (!hasSecureDiscoveryPublisherUrl(chosen, url)) {
+              const trendBacked = isTrendBackedDiscoveryCandidate(chosen?._discoveryCandidate);
+              RUN_REPORT.notes.push(trendBacked
+                ? 'Trend-backed source rejected: resolved publisher URL is not HTTPS'
+                : 'Discovery source rejected: resolved publisher URL is not HTTPS');
+              console.error(trendBacked
+                ? '   ⏭️  Fonte Trends ignorata: URL dell’editore non HTTPS dopo la risoluzione Google News'
+                : '   ⏭️  Fonte discovery ignorata: URL dell’editore non HTTPS dopo la risoluzione Google News');
+              attempt--;
+              continue;
+            }
+
             if (isTrendBackedDiscoveryCandidate(chosen?._discoveryCandidate)) {
-              if (!isSecureHttpsUrl(url)) {
-                RUN_REPORT.notes.push('Trend-backed source rejected: resolved publisher URL is not HTTPS');
-                console.error('   ⏭️  Fonte Trends ignorata: URL dell’editore non HTTPS dopo la risoluzione Google News');
-                attempt--;
-                continue;
-              }
               if (RUN_REPORT.discoveryAttribution?.candidateId === chosen._discoveryId) {
                 RUN_REPORT.discoveryAttribution.resolvedSourceUrl = url;
               }
-              RUN_REPORT.selectedUrl = url;
+              RUN_REPORT.selectedUrl = null;
             }
 
             // Attempt the full article generation + duplicate check
@@ -18837,12 +19189,14 @@ async function main() {
             const isDuplicate = isDuplicateError(e);
             if (isDuplicate) captureDuplicateReasons(e.message);
             if (isDuplicate && attempt < MAX_DUPLICATE_RETRIES) {
-              console.error(`\n🔄 Duplicato rilevato (${duplicateReasonTag(e.message)}${duplicateCandidateDetail(e.message)}), riprovo con un altro articolo... (${attempt}/${MAX_DUPLICATE_RETRIES})\n`);
+              const safeDuplicateDetail = safeSignalDiagnosticTextForLog(duplicateCandidateDetail(e.message), chosen);
+              console.error(`\n🔄 Duplicato rilevato (${duplicateReasonTag(e.message)}${safeDuplicateDetail}), riprovo con un altro articolo... (${attempt}/${MAX_DUPLICATE_RETRIES})\n`);
               url = null; // Reset for next iteration
               continue;
             }
             if (isDuplicate && attempt >= MAX_DUPLICATE_RETRIES) {
-              console.error(`\n⚠️  ${MAX_DUPLICATE_RETRIES} tentativi ${pool.name} esauriti — tutti duplicati (ultimo: ${duplicateReasonTag(e.message)}${duplicateCandidateDetail(e.message)}).`);
+              const safeDuplicateDetail = safeSignalDiagnosticTextForLog(duplicateCandidateDetail(e.message), chosen);
+              console.error(`\n⚠️  ${MAX_DUPLICATE_RETRIES} tentativi ${pool.name} esauriti — tutti duplicati (ultimo: ${duplicateReasonTag(e.message)}${safeDuplicateDetail}).`);
               break; // try next pool, then evergreen
             }
             // Fact-check / quality failures → skip this article, try next.
@@ -18892,7 +19246,7 @@ async function main() {
     // If the assigned slot's pool produced no successful publish, try the
     // OTHER pool before falling to evergreen. Spec § 6.7. Counter still
     // increments only on successful publish (see _persistRankerStateOnSuccess).
-    if (!newsSuccess && !forceEvergreen && evidenceForDiscovery) {
+    if (!newsSuccess && !forceEvergreen && SECTION_PROFILE.discoveryPool) {
       if (slotKind === 'proven' && !_discoveryHeadlines) {
         console.error('POOL_FALLBACK from=proven to=discovery reason=empty');
         RUN_REPORT.poolFallbacks.push({ from: 'proven', to: 'discovery', reason: 'empty' });
@@ -18908,7 +19262,7 @@ async function main() {
             : (headlines || []);
           const provenStrings = atlas.map((h) => String(h.headline || ''));
           _provenHeadlinesForDiscovery = atlas;
-          const pool = await _buildDiscoveryPool(evidenceForDiscovery, {
+          const pool = await _buildDiscoveryPool(discoverySourceContext, {
             provenHeadlines: provenStrings,
             deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
             deadlineReserveMs: MIN_VIABLE_ATTEMPT_MS,
@@ -18930,7 +19284,7 @@ async function main() {
             console.error('   (fallback discovery pool surfaced; full re-entry deferred to evergreen safety net)');
           }
         } catch (err) {
-          console.error(`⚠️  Cross-pool fallback (proven→discovery) failed: ${err?.message || err}`);
+          console.error(`⚠️  Cross-pool fallback (proven→discovery) failed error_type=${safeDiscoveryErrorType(err)}`);
         }
       } else if (slotKind === 'discovery' && _discoveryHeadlines && _discoveryHeadlines.length > 0) {
         console.error('POOL_FALLBACK from=discovery to=proven reason=empty');
@@ -19081,7 +19435,12 @@ async function main() {
         if (check.duplicate) {
           rememberConfirmedEvergreenDuplicate(candidate.keyword);
           countEvergreenPreflightDrop(check.signal);
-          console.error(`   ⏭️  [${idx}] "${candidate.keyword}" → simile a "${check.existingTitle}" [${check.existingId}] (${(check.sim * 100).toFixed(0)}%) — skip`);
+          console.error(
+            `   ⏭️  [${idx}] "${safeSignalTextForLog(candidate.keyword, candidate, '[signal topic redacted]')}" `
+            + `→ simile a "${safeSignalTextForLog(check.existingTitle, candidate, '[signal existing title redacted]')}" `
+            + `[${safeSignalTextForLog(check.existingId, candidate, '[signal existing article id redacted]')}] `
+            + `(${(check.sim * 100).toFixed(0)}%) — skip`,
+          );
         } else {
           console.error(`   ✅ [${idx}] "${candidate.keyword}" → nessun conflitto — selezionato\n`);
           selectedTopic = candidate;
@@ -19140,8 +19499,8 @@ async function main() {
           RUN_REPORT.selectedUrl = `evergreen://${encodeURIComponent(topic.keyword)}`;
           RUN_REPORT.discoveryAttribution = null;
           RUN_REPORT.topicCandidateAttribution = null;
-          console.error(`📚 Evergreen tentativo ${attempt}: keyword "${topic.keyword}"`);
-          console.error(`   Angolo: ${topic.angle}\n`);
+          console.error(`📚 Evergreen tentativo ${attempt}: keyword "${safeSignalTextForLog(topic.keyword, null, '[signal topic redacted]')}"`);
+          console.error(`   Angolo: ${safeSignalTextForLog(topic.angle, null, '[signal angle redacted]')}\n`);
           url = `evergreen://${encodeURIComponent(topic.keyword)}`;
           process.env._EVERGREEN_ANGLE = topic.angle;
           process.env._EVERGREEN_KEYWORD = topic.keyword;
@@ -19218,7 +19577,8 @@ async function main() {
           } else if (isQualityReject) {
             console.error(`\n⚠️  Articolo evergreen rigettato per qualità — cerco prossima keyword...\n`);
           } else {
-            console.error(`\n🔄 Duplicato post-generazione (${duplicateReasonTag(e.message)}${duplicateCandidateDetail(e.message)}), cerco prossima keyword sicura...\n`);
+            const safeDuplicateDetail = safeSignalDiagnosticTextForLog(duplicateCandidateDetail(e.message), null);
+            console.error(`\n🔄 Duplicato post-generazione (${duplicateReasonTag(e.message)}${safeDuplicateDetail}), cerco prossima keyword sicura...\n`);
           }
 
           // Find next safe keyword we haven't tried yet
@@ -19320,7 +19680,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   pendingCantonSourcePaywall = sourceContext?._cantonSourcePaywall === 'title+lead'
     ? sourceContext._cantonSourcePaywall
     : '';
-  const pageContent = await fetchPageContent(url);
+  const pageContent = await fetchPageContent(url, sourceContext);
 
   // Step 1a: su un URL riusato la pagina deve essere ancora QUESTO item.
   // L'indirizzo porta la notizia del momento: se nel frattempo e' passata a
@@ -19337,7 +19697,11 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       { headline: sourceContext?.headline, date: sourceContext?.date },
     );
     if (!itemCheck.ok) {
-      console.error(`\n⏭️  URL riusato: la pagina non e' (piu') questo item [${itemCheck.reason}] («${String(sourceContext?.headline || '').slice(0, 70)}») (URL: ${url}). Provo un altro headline.`);
+      console.error(
+        `\n⏭️  URL riusato: la pagina non e' (piu') questo item [${itemCheck.reason}] `
+        + `(${safeTopicSelectionLogLabel(sourceContext)}) `
+        + `(URL: ${safeSignalSourceUrlForLog(url, sourceContext)}). Provo un altro headline.`,
+      );
       RUN_REPORT.notes.push(`Source skipped pre-LLM: reused URL is not this item, ${itemCheck.reason} (url=${url})`);
       const err = new Error(`topic-gate abort: la pagina di un URL riusato non e' l'item scelto, ${itemCheck.reason} (${url})`);
       err.topicGateAbort = true;
@@ -19363,7 +19727,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   if (dropOffTopicSource && typeof pageContent === 'string' && pageContent.length > 0) {
     const sourceHits = countAdmissionHits(pageContent);
     if (sourceHits === 0) {
-      console.error(`\n⏭️  Source non frontaliere-rilevante (pre-LLM): 0 topical hits sul testo sorgente (URL: ${url}). Provo un altro headline.`);
+      console.error(
+        `\n⏭️  Source non frontaliere-rilevante (pre-LLM): 0 topical hits sul testo sorgente `
+        + `(URL: ${safeSignalSourceUrlForLog(url, sourceContext)}). Provo un altro headline.`,
+      );
       RUN_REPORT.notes.push(`Source skipped pre-LLM: 0 topical hits (url=${url})`);
       // Same pattern as the post-LLM skip below: throw with topicGateAbort
       // so the outer ranker loop tries a different headline within this run
@@ -19551,7 +19918,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     try {
       rawData = await callGemini(pageContent, url, genContext);
     } catch (e) {
-      console.error(`  ⚠️  Tentativo ${attempt} fallito: ${e.message}`);
+      console.error(`  ⚠️  Tentativo ${attempt} fallito: ${safeSignalDiagnosticTextForLog(e.message, sourceContext)}`);
 
       // ── REGOLA #0: il verdetto e' sulla FONTE, non sul modello ───────────
       //
@@ -19702,7 +20069,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         });
       }
     } catch (validationErr) {
-      console.error(`  ⚠️  Validazione fallita: ${validationErr.message}`);
+      console.error(`  ⚠️  Validazione fallita: ${safeSignalDiagnosticTextForLog(validationErr.message)}`);
       // #330 item 2: feed the exact id/slug rejection reason (already includes
       // identityCorrectionNote()'s guidance, see validate()) into the next
       // attempt's prompt via genContext._identityRefinement, instead of
@@ -19784,7 +20151,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       const itBodyEarly = `${data.content?.it?.body1 || ''} ${data.content?.it?.body2 || ''} ${data.content?.it?.body3 || ''}`;
       const earlyDensity = checkFrontaliereDensity(itBodyEarly);
       if (earlyDensity.hits === 0 && earlyDensity.wordCount > 0) {
-        console.error(`\n⏭️  Topic non frontaliere-rilevante: 0 keyword density su ${earlyDensity.wordCount} parole (URL: ${url}). Provo un altro headline.`);
+        console.error(
+          `\n⏭️  Topic non frontaliere-rilevante: 0 keyword density su ${earlyDensity.wordCount} parole `
+          + `(URL: ${safeSignalSourceUrlForLog(url, sourceContext)}). Provo un altro headline.`,
+        );
         RUN_REPORT.notes.push(`Topic skipped: 0 frontaliere-density hits on attempt 1 (url=${url})`);
         // Throw with topicGateAbort so the outer ranker loop at line ~6588
         // catches it and picks a different headline within this same run.
@@ -19825,14 +20195,18 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       // Re-align headline → it.title before validating, so a single failure
       // surfaces both fields rather than two duplicate failures.
       if (data.seo && itTitle && seoHeadline !== itTitle) {
-        console.error(`  🔁 Sync seo.headline ⇐ content.it.title ("${seoHeadline}" → "${itTitle}")`);
+        console.error(
+          `  🔁 Sync seo.headline ⇐ content.it.title `
+          + `("${safeSignalTextForLog(seoHeadline, sourceContext, '[signal title redacted]')}" `
+          + `→ "${safeSignalTextForLog(itTitle, sourceContext, '[signal title redacted]')}")`,
+        );
         data.seo.headline = itTitle;
       }
 
       const headlineErrors = validateHeadline(itTitle);
       if (headlineErrors.length > 0) {
         const summary = headlineErrors.join('; ');
-        console.error(`  ⚠️  Headline non conforme: "${itTitle}" — ${summary}`);
+        console.error(`  ⚠️  Headline non conforme: "${safeSignalTextForLog(itTitle, sourceContext, '[signal title redacted]')}" — ${summary}`);
 
         if (headlineRetryBudget > 0 && attempt < maxAttempts) {
           headlineRetryBudget -= 1;
@@ -19883,7 +20257,11 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         const TITLE_MAX_CHARS = 66;
         const candidate = `${itTitle}${TITLE_SUFFIX}`;
         const newSeoTitle = candidate.length <= TITLE_MAX_CHARS ? candidate : itTitle;
-        console.error(`  🔁 Sync seo.title ⇐ content.it.title ("${seoTitleCore}" → "${itTitle}")`);
+        console.error(
+          `  🔁 Sync seo.title ⇐ content.it.title `
+          + `("${safeSignalTextForLog(seoTitleCore, sourceContext, '[signal title redacted]')}" `
+          + `→ "${safeSignalTextForLog(itTitle, sourceContext, '[signal title redacted]')}")`,
+        );
         if (!data.seo) data.seo = {};
         data.seo.title = newSeoTitle;
       }
@@ -20045,7 +20423,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       if (gateResult.issues.length) {
         console.error(`  🔎 Gate deterministici: ${gateResult.issues.length} problemi `
           + `(${gateResult.blocking.length} bloccanti)`);
-        console.error(formatIssues(gateResult.issues));
+        console.error(safeSignalDiagnosticTextForLog(formatIssues(gateResult.issues)));
       }
 
       if (!gateResult.passed) {
@@ -20193,7 +20571,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       // run so every headline does not repeat the same failed cascade.
       if (isFactCheckUnavailableError(fcErr)) throw fcErr;
       if (attempt < maxAttempts) {
-        console.error(`  🔄 Rigenero per fact-check: ${fcErr.message.slice(0, 120)} (${attempt}/${maxAttempts})...`);
+        console.error(`  🔄 Rigenero per fact-check: ${safeSignalDiagnosticTextForLog(fcErr.message).slice(0, 120)} (${attempt}/${maxAttempts})...`);
         continue;
       }
       throw fcErr;
@@ -20336,7 +20714,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
           }
         } catch (expandFcErr) {
           if (isFactCheckUnavailableError(expandFcErr)) throw expandFcErr;
-          console.error(`  ⚠️  Fact-check dell'espansione anticipata fallito: ${expandFcErr.message.slice(0, 120)}`);
+          console.error(`  ⚠️  Fact-check dell'espansione anticipata fallito: ${safeSignalDiagnosticTextForLog(expandFcErr.message).slice(0, 120)}`);
           expandFactOk = false;
         }
         if (!expandFactOk) {
@@ -20659,7 +21037,13 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   for (const locale of ['it', 'en', 'de', 'fr']) {
     if (!data.content[locale]) continue;
     const verdict = evaluateSourceCopy(sourceCopyFinalSource, data.content[locale], { locale });
-    logSourceCopyVerdict(data.id, verdict, console.error, sourceCopyMode, 'postconditions');
+    logSourceCopyVerdict(
+      safeSignalTextForLog(data.id, sourceContext, '[signal article id redacted]'),
+      verdict,
+      console.error,
+      sourceCopyMode,
+      'postconditions',
+    );
     if (sourceCopyMode !== 'warn' && (verdict.structural || (sourceCopyMode === 'enforce' && !verdict.safe))) {
       throw new SourceCopyError(
         `Anti-copia non conforme dopo le postcondizioni (${locale}): overlap massimo ${verdict.maxWords} parole consecutive`,
@@ -20678,10 +21062,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     label: 'Body post-riparazione anti-copia',
   });
 
-  console.error(`\n📝 Articolo generato: "${data.content.it.title}"`);
-  console.error(`   ID: ${data.id}`);
+  console.error(`\n📝 Articolo generato: "${safeSignalTextForLog(data.content.it.title, sourceContext, '[signal title redacted]')}"`);
+  console.error(`   ID: ${safeSignalTextForLog(data.id, sourceContext, '[signal article id redacted]')}`);
   console.error(`   Categoria: ${data.category}`);
-  console.error(`   Slug IT: ${data.slugs.it}`);
+  console.error(`   Slug IT: ${safeSignalTextForLog(data.slugs.it, sourceContext, '[signal slug redacted]')}`);
   console.error('');
 
   // Step 3a.2: gate deterministico sui body tradotti — BLOCCANTE (#5661).
@@ -20752,7 +21136,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     }
     if (!finalCantonFactResult.passed) {
       const issuesSummary = (finalCantonFactResult.issues || [])
-        .map((issue) => `[${issue.category || '?'}] "${String(issue.claim || '').slice(0, 60)}" — ${String(issue.reason || '').slice(0, 80)}`)
+        .map((issue) => `[${issue.category || '?'}] `
+          + `"${safeSignalDiagnosticTextForLog(String(issue.claim || '').slice(0, 60))}" — `
+          + `${safeSignalDiagnosticTextForLog(String(issue.reason || '').slice(0, 80))}`)
         .join('; ');
       const error = new Error(`Articolo cantonale evergreen rigettato dal gate finale: ${issuesSummary}`);
       error.qualityReject = true;
@@ -20767,8 +21153,8 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   const imagePath = await generateArticleImage(data, { area: imageArea, deadlineAt: imageDeadlineAt });
   if (imagePath) {
     data._generatedImagePath = imagePath;
-    console.error(`  ✅ Immagine generata: ${imagePath}`);
-    console.error(`[cover] article=${data.id} source=engine reason=generated`);
+    console.error('  ✅ Immagine generata');
+    console.error(`[cover] article=${safeSignalTextForLog(data.id, null, '[signal_article_id_redacted]')} source=engine reason=generated`);
   } else {
     // Filename relevance only ranks candidates. The shared verifier checks
     // each current binary against this article's actual hero context before
@@ -20778,11 +21164,15 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       findCatalogImages: findBestFallbackImages,
       area: imageArea,
       deadlineAt: imageDeadlineAt,
+      logArticleId: safeSignalTextForLog(data.id, null, '[signal_article_id_redacted]'),
     });
+    const fallbackReason = data._imageGenerationFailureReason || 'engine-failed';
     resolveArticleCoverFallback(data, {
       root: PROJECT_ROOT,
       verifiedCatalogImage,
-      reason: data._imageGenerationFailureReason || 'engine-failed',
+      reason: fallbackReason,
+      logArticleId: safeSignalTextForLog(data.id, null, '[signal_article_id_redacted]'),
+      logReason: safeSignalDiagnosticTextForLog(fallbackReason),
     });
   }
   delete data._imageGenerationFailureReason;
@@ -20855,8 +21245,8 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   gitAddAll(data);
 
   console.error('\n✅ Articolo creato! I test verificheranno la correttezza.');
-  console.error(`   Titolo: ${data.content.it.title}`);
-  console.error(`   URL: ${BASE_URL}/${SECTION.hubSlug.it}/${data.id}/`);
+  console.error(`   Titolo: ${safeSignalTextForLog(data.content.it.title, sourceContext, '[signal title redacted]')}`);
+  console.error(`   URL: ${safeSignalSourceUrlForLog(`${BASE_URL}/${SECTION.hubSlug.it}/${data.id}/`, sourceContext)}`);
   RUN_REPORT.article.id = data.id;
   RUN_REPORT.article.url = `${BASE_URL}/${SECTION.hubSlug.it}/${data.id}/`;
   RUN_REPORT.article.sourceDomain = sourceDomain || null;
@@ -21404,7 +21794,11 @@ const SLUG_FALLBACK_HEADROOM_REASON = 'title-below-plausibility-floor';
 function reportSlugI18nEvent(event) {
   if (event.kind === 'relocalized') {
     RUN_REPORT.slugs.relocalized += 1;
-    console.error(`  🌍 [slug-i18n] Slug ${event.locale} rilocalizzato: "${event.from}" → "${event.slug}"`);
+    console.error(
+      `  🌍 [slug-i18n] Slug ${event.locale} rilocalizzato: `
+      + `"${safeSignalTextForLog(event.from, null, '[signal slug redacted]')}" → `
+      + `"${safeSignalTextForLog(event.slug, null, '[signal slug redacted]')}"`,
+    );
     return;
   }
   RUN_REPORT.slugs.itFallback += 1;
@@ -21417,7 +21811,9 @@ function reportSlugI18nEvent(event) {
     reason: event.fallbackReason || 'unknown',
   });
   console.error(
-    `  ❌ [slug-i18n] Lo slug ${event.locale} resta l'URL ITALIANO ("${event.slug}") — ${event.reason}. ` +
+    `  ❌ [slug-i18n] Lo slug ${event.locale} resta l'URL ITALIANO `
+      + `("${safeSignalTextForLog(event.slug, null, '[signal slug redacted]')}") `
+      + `— ${safeSignalDiagnosticTextForLog(event.reason)}. ` +
       'Il locale servira\' lo stesso indirizzo dell\'italiano: e\' un ripiego, non una scelta. ' +
       'Se ricorre, il difetto e\' a monte (traduzione del titolo), non qui.',
   );
@@ -21549,11 +21945,11 @@ export function deriveAndSanitizeArticleSlugs(data) {
   const idCheck = inspectSlugForPromptPlaceholder(data.id);
   if (idCheck.leaked) {
     throw new Error(
-      `[slug-placeholder] l'id "${data.id}" e' un segnaposto del prompt (o ne conserva il prefisso). ` +
+      `[slug-placeholder] l'id "${safeSignalTextForLog(data.id, null, '[signal_article_id_redacted]')}" e' un segnaposto del prompt (o ne conserva il prefisso). ` +
         "L'id e' la chiave del registro, il nome del file body e lo slug italiano, e checkArticleIdExists() " +
         'e\' gia\' stato eseguito su questo valore: correggerlo qui pubblicherebbe l\'articolo sotto un id ' +
         `mai controllato per collisioni. Va corretto a monte — validate() lo ricostruisce dal titolo IT ` +
-        `("${data.content?.it?.title || ''}") — oppure dal produttore che lo ha passato.`,
+        `("${safeSignalTextForLog(data.content?.it?.title || '', null, '[signal_title_redacted]')}") — oppure dal produttore che lo ha passato.`,
     );
   }
 
@@ -21596,7 +21992,9 @@ export function deriveAndSanitizeArticleSlugs(data) {
     const replacement = cleaned || fromTitle || data.slugs.it;
     const source = cleaned ? 'residuo ripulito' : fromTitle ? `titolo ${locale}` : 'slug IT';
     console.error(
-      `❌ [slug-placeholder] lo slug ${locale} e' un segnaposto del prompt: "${raw}" → "${replacement}" (da: ${source}). ` +
+      `❌ [slug-placeholder] lo slug ${locale} e' un segnaposto del prompt: ` +
+        `"${safeSignalTextForLog(raw, null, '[signal_slug_redacted]')}" → ` +
+        `"${safeSignalTextForLog(replacement, null, '[signal_slug_redacted]')}" (da: ${source}). ` +
         'Il modello ha ricopiato lo schema invece di compilarlo — se ricorre, e\' il prompt a dover cambiare, ' +
         'non questa rete di sicurezza.',
     );
@@ -22063,6 +22461,7 @@ if (invokedDirectly) {
     console.error(`::error::no-article-undeclared-exit: status=${RUN_REPORT?.status ?? 'unfinalized'}`);
     await exitAfterFlush(1);
   }).catch(async (e) => {
+  const safeErrorMessage = safeSignalDiagnosticTextForLog(e?.message);
   // ── IL CAMPIONE SI PRENDE PRIMA DEI RAMI, NON DENTRO UNO DI ESSI (#924) ────
   //
   // #804 / #832 / #787 — il campione, preso qui e non dedotto dal log.
@@ -22113,27 +22512,27 @@ if (invokedDirectly) {
     finalizeRunReport('deferred', {
       exitCode: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
       exitDisposition: RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
-      notes: [...RUN_REPORT.notes, `Deferred (fact-check unavailable; article not published): ${e.message}`],
+      notes: [...RUN_REPORT.notes, `Deferred (fact-check unavailable; article not published): ${safeErrorMessage}`],
     });
-    console.error(`\n⚠️  Differito: fact-check indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${e.message}`);
+    console.error(`\n⚠️  Differito: fact-check indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${safeErrorMessage}`);
     // Il verifier condivide il pool fra le sezioni: non ripetere subito la
     // stessa cascata e lasciare al prossimo cron la rivalutazione.
     await exitAfterFlush(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE);
   }
   if (isFactCheckUnavailableError(e)) {
     finalizeRunReport('deferred', {
-      notes: [...RUN_REPORT.notes, `Deferred (fact-check returned no usable consensus; article not published): ${e.message}`],
+      notes: [...RUN_REPORT.notes, `Deferred (fact-check returned no usable consensus; article not published): ${safeErrorMessage}`],
     });
-    console.error(`\n⚠️  Differito: il fact-check non ha prodotto un consenso utilizzabile; articolo non pubblicato. ${e.message}`);
+    console.error(`\n⚠️  Differito: il fact-check non ha prodotto un consenso utilizzabile; articolo non pubblicato. ${safeErrorMessage}`);
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   if (isSharedArticleCoverVerifierUnavailableError(e)) {
     finalizeRunReport('deferred', {
       exitCode: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
       exitDisposition: RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
-      notes: [...RUN_REPORT.notes, `Deferred (article cover verifier unavailable; article not published): ${e.message}`],
+      notes: [...RUN_REPORT.notes, `Deferred (article cover verifier unavailable; article not published): ${safeErrorMessage}`],
     });
-    console.error(`\n⚠️  Differito: verifier della copertina indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${e.message}`);
+    console.error(`\n⚠️  Differito: verifier della copertina indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${safeErrorMessage}`);
     // Il verifier serve tutte le sezioni: non ripetere la stessa chiamata
     // sulla sezione gemella mentre il servizio condiviso non risponde.
     await exitAfterFlush(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE);
@@ -22144,9 +22543,9 @@ if (invokedDirectly) {
   // through the section-local path; provider outages were handled above.
   if (isRetryableArticleCoverError(e)) {
     finalizeRunReport('deferred', {
-      notes: [...RUN_REPORT.notes, 'Deferred (article cover unavailable; article not published): ' + e.message],
+      notes: [...RUN_REPORT.notes, 'Deferred (article cover unavailable; article not published): ' + safeErrorMessage],
     });
-    console.error('\n⚠️  Differito: copertina articolo non verificabile, articolo non pubblicato. Riprovo al prossimo run. ' + e.message);
+    console.error('\n⚠️  Differito: copertina articolo non verificabile, articolo non pubblicato. Riprovo al prossimo run. ' + safeErrorMessage);
     // Ragione legittima #10 di dieci — il verifier della copertina non ha prodotto
     // un verdetto utilizzabile: il run si differisce senza pubblicare l'articolo.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
@@ -22187,7 +22586,7 @@ if (invokedDirectly) {
       + ` ${f.attemptsSkipped} tentativi restanti della sezione ${f.section || '(ignota)'} erano insoddisfacibili per`
       + ' costruzione: usciti al tentativo ' + `${f.attempt}/${f.maxAttempts} invece di macinarli fino al kill di durata.`
       + ` NON e' un differimento: nessuna finestra di quota alza il cap di un modello. Alzare il cap piu' permissivo del`
-      + ` roster sopra ${f.floor}, oppure alleggerire l'impalcatura del prompt. ${e.message}`,
+      + ` roster sopra ${f.floor}, oppure alleggerire l'impalcatura del prompt. ${safeErrorMessage}`,
     );
     console.error(
       `::error::prompt-floor-irreducible: budget=${f.budget} floor=${f.floor} short=${f.short}`
@@ -22202,7 +22601,7 @@ if (invokedDirectly) {
     const { estimatedRequestTokens, maxSkippedReqLimit, over, refusals } = inputCapVetoSummary(e);
     const cap = { count: refusals, estimatedRequestTokens, maxSkippedReqLimit };
     finalizeRunReport('error', {
-      notes: [...RUN_REPORT.notes, `Roster cannot serve this prompt (input cap): ${e.message}`],
+      notes: [...RUN_REPORT.notes, `Roster cannot serve this prompt (input cap): ${safeErrorMessage}`],
     });
     console.error(
       `\n❌ Il roster non puo' servire questo prompt: ${cap.count} modelli hanno rifiutato ~${cap.estimatedRequestTokens} token`
@@ -22233,13 +22632,13 @@ if (invokedDirectly) {
     finalizeRunReport('error', {
       notes: [
         ...RUN_REPORT.notes,
-        `Roster down, not deferrable (${cause}; ${echoes}/${total} rows are cooldown echoes): ${e.message}`,
+        `Roster down, not deferrable (${cause}; ${echoes}/${total} rows are cooldown echoes): ${safeErrorMessage}`,
       ],
     });
     console.error(
       `\n❌ NON differibile: la cascata contiene solo ${echoes} echi di cooldown, senza prove indipendenti. `
       + `Causa=${cause}; transitori=${transientEchoes}, persistenti=${persistentEchoes}, non classificati=${unclassifiedEchoes}. `
-      + `Il prossimo run deve rivalutare il provider, non dichiarare una quota legittima. ${e.message}`,
+      + `Il prossimo run deve rivalutare il provider, non dichiarare una quota legittima. ${safeErrorMessage}`,
     );
     console.error(
       `::error::roster-down-not-deferrable: cause=${cause} echoes=${echoes} total=${total}`
@@ -22265,21 +22664,21 @@ if (invokedDirectly) {
       finalizeRunReport('deferred', {
         exitCode: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
         exitDisposition: RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
-        notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`],
+        notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${safeErrorMessage}`],
       });
-      console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera, ${share.transient}/${share.total} = ${pct}%). Riprovo al prossimo run. ${e.message}`);
+      console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera, ${share.transient}/${share.total} = ${pct}%). Riprovo al prossimo run. ${safeErrorMessage}`);
       // La quota riguarda il pool condiviso: cedere al prossimo cron senza
       // ritentare subito sulla sezione gemella.
       await exitAfterFlush(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE);
     }
     finalizeRunReport('error', {
-      notes: [...RUN_REPORT.notes, `Roster down, not deferrable (transient ${share.transient}/${share.total}): ${e.message}`],
+      notes: [...RUN_REPORT.notes, `Roster down, not deferrable (transient ${share.transient}/${share.total}): ${safeErrorMessage}`],
     });
     console.error(
       `\n❌ NON differibile: solo ${share.transient} fallimenti su ${share.total} (${pct}%) sono transitori`
       + ` — ne servono piu' del ${(share.required * 100).toFixed(0)}% perche' «riprovo al prossimo run» sia una descrizione vera.`
       + ` Persistenti: ${share.persistent} (prompt sopra il cap, chiavi assenti, modelli rimossi). Ambigui: ${share.ambiguous}.`
-      + ` Nessuna finestra di quota ripara quella meta' del roster, quindi il run successivo rifarebbe identico. ${e.message}`,
+      + ` Nessuna finestra di quota ripara quella meta' del roster, quindi il run successivo rifarebbe identico. ${safeErrorMessage}`,
     );
     console.error(`::error::roster-down-not-deferrable: transient=${share.transient} persistent=${share.persistent} ambiguous=${share.ambiguous} total=${share.total} share=${pct}%`);
     await exitAfterFlush(1);
@@ -22295,8 +22694,8 @@ if (invokedDirectly) {
   // percorso che non ha dichiarato niente, ed e' quella indistinguibilita' — non
   // questo ramo — che ha prodotto le dieci ore di verde.
   if (isQualityRejectError(e)) {
-    finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (content quality rejected, slop not published): ${e.message}`] });
-    console.error(`\n⚠️  Differito: nessun articolo conforme prodotto in questa run (rigetto qualità — slop non pubblicato). Riprovo al prossimo run. ${e.message}`);
+    finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (content quality rejected, slop not published): ${safeErrorMessage}`] });
+    console.error(`\n⚠️  Differito: nessun articolo conforme prodotto in questa run (rigetto qualità — slop non pubblicato). Riprovo al prossimo run. ${safeErrorMessage}`);
     // Ragione legittima #5 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
@@ -22305,13 +22704,13 @@ if (invokedDirectly) {
   // candidate) — see isDuplicateError above.
   if (isDuplicateError(e)) {
     captureDuplicateReasons(e.message);
-    finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (duplicate detected, not published): ${e.message}`] });
-    console.error(`\n⚠️  Differito: duplicato rilevato, articolo non pubblicato in questa run. Riprovo al prossimo run. ${e.message}`);
+    finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (duplicate detected, not published): ${safeErrorMessage}`] });
+    console.error(`\n⚠️  Differito: duplicato rilevato, articolo non pubblicato in questa run. Riprovo al prossimo run. ${safeErrorMessage}`);
     // Ragione legittima #4 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
-  finalizeRunReport('error', { notes: [...RUN_REPORT.notes, `Error: ${e.message}`] });
-  console.error(`\n❌ Errore: ${e.message}`);
+  finalizeRunReport('error', { notes: [...RUN_REPORT.notes, `Error: ${safeErrorMessage}`] });
+  console.error(`\n❌ Errore: ${safeErrorMessage}`);
   await exitAfterFlush(1);
 });
 }

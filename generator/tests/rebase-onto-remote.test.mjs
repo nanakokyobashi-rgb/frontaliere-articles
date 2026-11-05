@@ -252,7 +252,7 @@ test('a conflict outside the allowlist aborts and leaves the tree untouched', ()
 
     const { code, out } = runHelper(w.work, w.upstream, BOOKKEEPING);
     assert.equal(code, 1, 'a non-bookkeeping conflict must still fail, exactly as before the fix');
-    assert.match(out, /not a whole-file bookkeeping cache/);
+    assert.match(out, /rebase conflict on an undeclared path; aborting/);
     assert.equal(headSha(w.work), before, 'HEAD must be untouched after the abort');
     assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'the working tree must be left clean');
     assert.ok(!rebaseInProgress(w.work), 'no rebase may be left in progress');
@@ -308,7 +308,7 @@ test('a per-article path with neither a --theirs nor an --ours copy aborts on th
       'must not claim to have resolved a file it never staged — that false claim is the bug: ' +
         `it hid the fact that nothing was resolved. Output:\n${out}`,
     );
-    assert.match(out, /neither a --theirs nor an --ours copy/);
+    assert.match(out, /rebase conflict has neither side available to take/);
     assert.equal(headSha(w.work), before, 'HEAD must be untouched after the abort');
     assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'the working tree must be left clean');
     assert.ok(!rebaseInProgress(w.work), 'no rebase may be left in progress');
@@ -717,7 +717,7 @@ test('a conflict on the journalist image catalog resolves instead of aborting', 
 
     const { code, out } = runHelper(w.work, w.upstream, ...allowlist);
     assert.equal(code, 0, `the helper must resolve this conflict, not abort. Got:\n${out}`);
-    assert.match(out, /resolved bookkeeping conflict by taking upstream: public\/data\/journalist-image-catalog\.json/);
+    assert.match(out, /resolved bookkeeping conflict by taking upstream/);
 
     git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
     assert.ok(
@@ -930,7 +930,7 @@ function assertImageRegistryRebaseWiring(label, step) {
   );
   assert.match(
     step,
-    /if \[ "\$\(git rev-parse HEAD\)" = "\$\(git rev-parse FETCH_HEAD\)" \]; then\s+git commit -C "\$PRODUCED"\s+else\s+git commit --amend --no-edit/,
+    /if \[ "\$\(git rev-parse HEAD\)" = "\$\(git rev-parse FETCH_HEAD\)" \]; then\s+git commit (?:--quiet )?-C\s+"\$PRODUCED"\s+else\s+git commit (?:--quiet )?--amend --no-edit/,
   );
 }
 
@@ -986,8 +986,8 @@ test('i quattro writer del registry non fanno amend se il commit rigiocato e\' s
     assert.ok(mergeStart >= 0, `${filename}: manca il merge del registry`);
     const mergeBlock = source.slice(mergeStart, mergeStart + 1_000);
     assert.match(mergeBlock, /if \[ \"\$\(git rev-parse HEAD\)\" = \"\$\(git rev-parse FETCH_HEAD\)\" \]; then/);
-    assert.match(mergeBlock, /git commit -C \"\$PRODUCED\"/);
-    assert.match(mergeBlock, /git commit --amend --no-edit/);
+    assert.match(mergeBlock, /git commit (?:--quiet )?-C/);
+    assert.match(mergeBlock, /git commit (?:--quiet )?--amend --no-edit/);
   }
 });
 
@@ -1387,7 +1387,7 @@ test('un path letterale non classifica un altro file come registro wildcard', ()
 
     const { code, out } = runHelper(w.work, w.upstream, '--merge-registry', GLOB_LITERAL_REGISTRY);
     assert.equal(code, 1, 'un path non dichiarato non deve essere inviato al resolver dei registri');
-    assert.match(out, /not a whole-file bookkeeping cache/);
+    assert.match(out, /rebase conflict on an undeclared path; aborting/);
     assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'il rebase deve essere abortito pulitamente');
   } finally {
     w.cleanup();
@@ -2201,7 +2201,7 @@ test('un contatore che non si sa fondere ricade su «prendi upstream», non abor
 
     const { code, out } = runHelper(w.work, w.upstream, ...helperArgsFromWorkflow());
     assert.equal(code, 0, `il ripiego deve risolvere:\n${out}`);
-    assert.match(out, /counter merge refused on 'data\/topic-candidates-evergreen-counter\.json'/);
+    assert.match(out, /counter merge refused — resolved by taking upstream, as for a bookkeeping cache/);
     git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
     assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/articolo-ripiego.ts')));
     assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 12, 'ripiego = copia upstream');

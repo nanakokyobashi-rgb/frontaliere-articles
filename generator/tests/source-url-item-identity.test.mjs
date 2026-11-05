@@ -495,7 +495,7 @@ test('pageTitleEvidence chiude il percorso su un tag non terminato', () => {
 test('la generazione si ferma se la pagina di un URL riusato non e\' l\'item scelto', () => {
   const start = SRC.indexOf('async function generateAndValidateArticle(sourceUrl, sourceContext = null) {');
   const fn = SRC.slice(start, SRC.indexOf('\n}\n', start));
-  const fetchAt = fn.indexOf('const pageContent = await fetchPageContent(url);');
+  const fetchAt = fn.indexOf('const pageContent = await fetchPageContent(url, sourceContext);');
   const guardAt = fn.indexOf('if (itemIdentityOf(sourceUrl) !== null) {');
   const firstLlm = fn.indexOf('callGemini(');
   assert.ok(fetchAt !== -1 && guardAt > fetchAt, 'la guardia deve stare subito dopo la fetch della pagina');
@@ -506,7 +506,8 @@ test('la generazione si ferma se la pagina di un URL riusato non e\' l\'item sce
   assert.match(guard, /if \(!itemCheck\.ok\) \{/);
   assert.match(guard, /err\.topicGateAbort = true;/, 'un abort che il ciclo ricorda sull\'item e passa alla headline successiva');
   // I titoli della pagina vengono dalla stessa fetch del testo, e si azzerano con lei.
-  const fetchFn = SRC.slice(SRC.indexOf('async function fetchPageContent(url) {'), SRC.indexOf('\nconst MAX_ARTICLE_AGE_DAYS'));
+  const fetchStart = SRC.search(/async function fetchPageContent\(url(?:, sourceContext = null)?\) \{/);
+  const fetchFn = SRC.slice(fetchStart, SRC.indexOf('\nconst MAX_ARTICLE_AGE_DAYS'));
   assert.match(fetchFn, /lastSourcePageTitle = '';/);
   // Title evidence must come from the same isolated source passed to the
   // extractor; the full page can contain stale chrome titles outside the item.

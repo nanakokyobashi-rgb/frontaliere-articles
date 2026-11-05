@@ -76,6 +76,9 @@ export const RC_TO_ENV = {
   // exactly the trap the OMNIROUTE_PROVIDER_ALLOWLIST note below describes.
   // Absent from RC on any project that has not created it: simply skipped.
   GITHUB_PAT_NANAKO:              ['GITHUB_PAT_NANAKO'],
+  // Reddit candidates stay disabled in the corpus unless the owner explicitly
+  // approves Data API use. The consumer requires the exact string "true".
+  REDDIT_DATA_API_APPROVED:       ['REDDIT_DATA_API_APPROVED'],
   // Optional editorial switch. When absent, the guard's local default is the
   // targeted `repair` mode; `warn` remains an explicit rollback and `enforce`
   // an explicit strict setting.

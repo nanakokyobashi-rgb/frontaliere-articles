@@ -1268,6 +1268,8 @@ jobs:
           diag_dir="${RUNNER_TEMP:-/tmp}/generate-diagnostics"
           rm -rf "$diag_dir"
           mkdir -p "$diag_dir"
+          post_rebase_handoff="${RUNNER_TEMP:-/tmp}/create-article-post-rebase-run-report.json"
+          rm -f "$post_rebase_handoff"
           stall_flag="$diag_dir/stalled"
           stall_log="$diag_dir/attempt.log"
           tee_pid=""
@@ -1540,8 +1542,9 @@ jobs:
             # each producer write on a unique path so a killed process cannot
             # leave an apparently current report behind.
             attempt_report="$diag_dir/create-article-run-report-$tried.json"
+            attempt_post_rebase_handoff="${RUNNER_TEMP:-/tmp}/create-article-post-rebase-run-report-$tried.json"
             attempt_pool_marker="$diag_dir/discovery-attempt-$sec.json"
-            if ! rm -f .tmp/create-article-run-report.json "$attempt_report"; then
+            if ! rm -f .tmp/create-article-run-report.json "$attempt_report" "$attempt_post_rebase_handoff" "$post_rebase_handoff"; then
               all_declared=false
               outcome_kind="error"
               outcome_reason="undeclared"
@@ -1551,6 +1554,7 @@ jobs:
               break
             fi
             export CREATE_ARTICLE_REPORT_FILE="$attempt_report"
+            export CREATE_ARTICLE_POST_REBASE_REPORT_FILE="$attempt_post_rebase_handoff"
             rm -f "$attempt_pool_marker"
             export DISCOVERY_ATTEMPT_MARKER="$attempt_pool_marker"
 
@@ -1609,12 +1613,12 @@ jobs:
             tee_pid=$!
             if [ -n "${SOURCE_URL:-}" ]; then
               timeout --signal=TERM --kill-after=60s "${cap}s" \
-                node --report-on-signal --report-signal=SIGUSR2 --report-directory="$diag_dir" \
-                generator/scripts/create-article.mjs --section="$sec" "$SOURCE_URL" \
+                node --report-on-signal --report-exclude-env --report-signal=SIGUSR2 --report-directory="$diag_dir" \
+                generator/scripts/create-article.mjs --section="$sec" \
                 > "$attempt_pipe" 2>&1 &
             else
               timeout --signal=TERM --kill-after=60s "${cap}s" \
-                node --report-on-signal --report-signal=SIGUSR2 --report-directory="$diag_dir" \
+                node --report-on-signal --report-exclude-env --report-signal=SIGUSR2 --report-directory="$diag_dir" \
                 generator/scripts/create-article.mjs --section="$sec" \
                 > "$attempt_pipe" 2>&1 &
             fi
@@ -1661,7 +1665,20 @@ jobs:
                 echo "::error::run report non coerente per la sezione $sec (run=$run_id attempt=$run_attempt); rifiuto fail-closed"
                 break
               fi
-              if ! mkdir -p .tmp || ! cp "$attempt_report" .tmp/create-article-run-report.json; then
+              if ! jq -e --arg run_id "$run_id" --arg run_attempt "$run_attempt" --arg section "$sec" '
+                (.runId | tostring) == $run_id
+                and (.runAttempt | tostring) == $run_attempt
+                and .section == $section
+              ' "$attempt_post_rebase_handoff" >/dev/null; then
+                all_declared=false
+                outcome_kind="error"
+                outcome_reason="undeclared"
+                outcome_section="$sec"
+                [ -n "$undeclared_why" ] || undeclared_why="il post-rebase handoff della sezione $sec non identifica questa run/attempt: prova non attestabile"
+                echo "::error::post-rebase handoff non coerente per la sezione $sec (run=$run_id attempt=$run_attempt); rifiuto fail-closed"
+                break
+              fi
+              if ! mkdir -p .tmp || ! cp "$attempt_report" .tmp/create-article-run-report.json || ! cp "$attempt_post_rebase_handoff" "$post_rebase_handoff"; then
                 all_declared=false
                 outcome_kind="error"
                 outcome_reason="undeclared"
@@ -1782,7 +1799,7 @@ jobs:
               fi
               produced=true
               effective="$sec"
-              echo "article body added: $body"
+              echo "article body added"
               break
             fi
             echo "section $sec produced no article"
@@ -1792,11 +1809,11 @@ jobs:
               # Do not try the sibling section: its registration would share
               # the dirty union/router/meta files, and the final `git add -A`
               # must never publish them without a complete body transaction.
-              registration_dirty="${stagedContentPaths[0]}"
+              registration_dirty_count="${#stagedContentPaths[@]}"
               partial_failure=true
               all_declared=false
               [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs ha lasciato una transazione di registrazione dirty sulla sezione $sec senza un body (exit $rc): output parziale non pubblicabile"
-              echo "::error::create-article.mjs ha lasciato registrazione dirty sulla sezione $sec senza un body (exit $rc): $registration_dirty — output parziale non pubblicabile"
+              echo "::error::create-article.mjs ha lasciato registrazione dirty sulla sezione $sec senza un body (exit $rc): staged_paths=$registration_dirty_count — output parziale non pubblicabile"
               break
             fi
 
@@ -2039,7 +2056,7 @@ jobs:
       # articolo sono due probe che possono divergere, ed e' gia' costato una
       # volta (il summary diceva «Generated: true» sulla run il cui commit
       # diceva «no article generated»). Il file appena scritto e' gia' nel log,
-      # stampato da quella funzione come «article body added: …».
+      # segnalato dalla funzione come «article body added», senza path o slug.
       #
       # NIENTE RIPARAZIONE EURISTICA, sempre per la DoD di #267: se una cifra e'
       # inventata, riattribuirla a un ente vero fa passare il gate e PEGGIORA
@@ -2096,22 +2113,26 @@ jobs:
           SECTION: ${{ steps.generate.outputs.section }}
         run: |
           set -uo pipefail
+          test_output="$RUNNER_TEMP/article-content-gates.tap"
           if node --test \
             generator/tests/article-fabrication-guard.test.mjs \
             generator/tests/prompt-placeholder-guard.test.mjs \
             generator/tests/article-slug-i18n.test.mjs \
             generator/tests/article-source-echo.test.mjs \
             generator/tests/article-topic-coverage-guard.test.mjs \
-            generator/tests/wrong-latin-language-adoption.test.mjs; then
+            generator/tests/wrong-latin-language-adoption.test.mjs >"$test_output" 2>&1; then
             exit 0
           fi
+          failure_count="$(grep -c '^not ok ' "$test_output" || true)"
+          [ "$failure_count" -gt 0 ] || failure_count=unknown
+          echo "::error::article-content-gates failed; failed_tests=$failure_count; generated-content details are withheld"
           {
             echo "### ✖ Articolo RIFIUTATO prima del commit — sezione \`${SECTION:-?}\`"
             echo
             echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` / \`article-slug-i18n\` / \`article-source-echo\` / \`wrong-latin-language-adoption\` hanno trovato offender nel corpus dopo la generazione."
             echo "**Niente e' stato committato**: il corpo resta sul runner e sparisce con lui, \`main\` non lo vede."
             echo
-            echo "Gli offender sono elencati per path nel log di questo step. Confrontali con la riga \`article body added:\` dello step «Generate the article»:"
+            echo "Gli offender sono identificati per codice, sezione e lingua; i path sono omessi dai log pubblici. La riga \`article body added\` conferma che il run ha scritto un corpo."
             echo
             echo "- se coincidono, il difetto e' **dell'articolo appena generato** e il rimedio e' la rigenerazione (il run successivo), non una modifica al gate;"
             echo "- se NON coincidono, il difetto e' **preesistente nel corpus** e va riparato prima che la generazione possa ripartire — finche' resta li', ogni run che produce un articolo muore qui."
@@ -2128,7 +2149,7 @@ jobs:
         if: steps.mode.outputs.dry != 'true' && steps.generate.outputs.article == 'true'
         run: |
           set -uo pipefail
-          if node scripts/ci/check-blog-locale-completeness.mjs --changed-paths; then
+          if node scripts/ci/check-blog-locale-completeness.mjs --changed-paths --redact-paths; then
             exit 0
           fi
           {
@@ -2137,7 +2158,7 @@ jobs:
             echo "Il controllo confronta i campi body localizzati con quelli italiani."
             echo "**Niente e' stato committato**: correggere o rigenerare l'articolo prima del push."
             echo
-            echo "Gli offender sono elencati nel log dello step; confrontali con `article body added:` dello step «Generate the article»."
+            echo "Gli offender sono identificati per codice, sezione e lingua; i path sono omessi dai log pubblici."
           } >> "$GITHUB_STEP_SUMMARY"
           exit 1
 
@@ -2175,6 +2196,7 @@ jobs:
           # report before the first push attempt so the post-rebase gate still
           # has the run's topic evidence after a remote race.
           RUN_REPORT="$RUNNER_TEMP/create-article-run-report.json"
+          POST_REBASE_RUN_REPORT="$RUNNER_TEMP/create-article-post-rebase-run-report.json"
           has_run_report=false
           if [ -s .tmp/create-article-run-report.json ]; then
             cp .tmp/create-article-run-report.json "$RUN_REPORT"
@@ -2243,9 +2265,9 @@ jobs:
           # wrote — not the one the link was assigned, because the next link
           # alternates off this subject and must alternate off what exists.
           if [ "${{ steps.generate.outputs.article }}" = "true" ]; then
-            git commit -m "Generate blog article (${{ steps.generate.outputs.section }})"
+            git commit --quiet -m "Generate blog article (${{ steps.generate.outputs.section }})"
           else
-            git commit -m "Record rejected topic candidates (${{ steps.mode.outputs.section }} — no article generated)"
+            git commit --quiet -m "Record rejected topic candidates (${{ steps.mode.outputs.section }} — no article generated)"
           fi
           # Il commit di QUESTO run, preso prima di ogni rebase: e' da li' che
           # check-post-rebase-uniqueness.mjs legge cosa il run ha aggiunto (id,
@@ -2498,14 +2520,18 @@ jobs:
               fi
               if ! git diff --cached --quiet; then
                 if [ "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)" ]; then
-                  git commit -C "$PRODUCED"
+                  git commit --quiet -C "$PRODUCED"
                 else
-                  git commit --amend --no-edit
+                  git commit --quiet --amend --no-edit
                 fi
               fi
               if [ "$has_run_report" = "true" ]; then
+                if [ ! -s "$POST_REBASE_RUN_REPORT" ]; then
+                  echo "::error::post-rebase private topic handoff is missing; refusing to push"
+                  exit 1
+                fi
                 uniq_rc=0
-                node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD --run-report "$RUN_REPORT" || uniq_rc=$?
+                node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD --run-report "$POST_REBASE_RUN_REPORT" || uniq_rc=$?
                 if [ "$uniq_rc" -ne 0 ]; then
                   echo "::error::post-rebase uniqueness check exited $uniq_rc — not pushing (POST_REBASE_UNIQUENESS_VIOLATION: the article collides on id, source URL, topic, or content; POST_REBASE_UNIQUENESS_ERROR: the check could not run). See the lines above."
                   exit 1
@@ -2531,6 +2557,12 @@ jobs:
         if: ${{ failure() && steps.commit.outcome == 'failure' && steps.generate.outputs.article == 'true' && steps.mode.outputs.dry != 'true' }}
         run: |
           set -euo pipefail
+          private_report="$RUNNER_TEMP/create-article-post-rebase-run-report.json"
+          if ! jq -e '.signalDriven == false' "$private_report" >/dev/null 2>&1; then
+            echo "Bundle di recupero non caricato: articolo signal-driven o classificazione non attestabile." >> "$GITHUB_STEP_SUMMARY"
+            echo "preserved=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           produced_file="$RUNNER_TEMP/produced-article-commit"
           preserved_dir="$RUNNER_TEMP/unpushed-article"
           mkdir -p "$preserved_dir"

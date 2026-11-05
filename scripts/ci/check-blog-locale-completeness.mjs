@@ -25,6 +25,32 @@ import { extractBodyFields } from '../lib/article-body-api.mjs';
 
 export { extractBodyFields };
 
+export function formatViolationForCli(violation, { redactPaths = false } = {}) {
+  if (!redactPaths) return violation?.message ?? 'content completeness violation';
+  const code = typeof violation?.code === 'string' ? violation.code : 'content-violation';
+  const section = typeof violation?.section === 'string' ? violation.section : 'unknown';
+  const locale = typeof violation?.locale === 'string' ? violation.locale : 'unknown';
+  return `[${code}] section=${section} locale=${locale}: content check failed`;
+}
+
+export function projectReportForCli(report, { redactPaths = false } = {}) {
+  if (!redactPaths) return report;
+  return {
+    ...report,
+    changedPaths: Array.isArray(report?.changedPaths)
+      ? report.changedPaths.map(() => '[path redacted]')
+      : report?.changedPaths ?? null,
+    violations: Array.isArray(report?.violations)
+      ? report.violations.map((violation) => ({
+        code: violation?.code ?? 'content-violation',
+        section: violation?.section ?? 'unknown',
+        locale: violation?.locale ?? 'unknown',
+        message: formatViolationForCli(violation, { redactPaths: true }),
+      }))
+      : report?.violations,
+  };
+}
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 // Le radici dei corpi vengono dal core (sezioni ATTIVE), non da una coppia
 // scritta a mano: una sezione accesa nel core e' sorvegliata senza toccare qui.
@@ -478,6 +504,7 @@ export function inspectBlogLocaleCompleteness({
 
 function main() {
   const args = new Set(process.argv.slice(2));
+  const redactPaths = args.has('--redact-paths');
   let changedPaths = null;
   if (args.has('--changed-paths')) {
     try {
@@ -493,7 +520,7 @@ function main() {
     changedPaths,
   });
   if (args.has('--json')) {
-    console.log(JSON.stringify(report, null, 2));
+    console.log(JSON.stringify(projectReportForCli(report, { redactPaths }), null, 2));
   } else {
     if (report.scoped) {
       console.log(`Scope: ${report.changedPaths.length} path cambiati, solo body localizzati`);
@@ -504,7 +531,9 @@ function main() {
     }
     console.log(`Violazioni: ${report.totalViolations}`);
     for (const [code, count] of Object.entries(report.counts)) console.log(`  ${code}: ${count}`);
-    for (const violation of report.violations.slice(0, 80)) console.error(`::error::${violation.message}`);
+    for (const violation of report.violations.slice(0, 80)) {
+      console.error(`::error::${formatViolationForCli(violation, { redactPaths })}`);
+    }
     if (report.violations.length > 80) {
       console.error(`::error::altre ${report.violations.length - 80} violazioni non mostrate`);
     }

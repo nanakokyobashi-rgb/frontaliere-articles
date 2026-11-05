@@ -426,6 +426,7 @@ jobs:
         if: ${{ failure() && steps.commit.outcome == 'failure' && steps.mode.outputs.dry != 'true' }}
         run: |
           set -euo pipefail
+          echo "preserved=false" >> "$GITHUB_OUTPUT"
           produced_file="$RUNNER_TEMP/produced-article-commit"
           preserved_dir="$RUNNER_TEMP/unpushed-faq-articles"
           mkdir -p "$preserved_dir"
