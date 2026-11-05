@@ -21,6 +21,8 @@ function publishedSection(overrides = {}) {
   const registry = [
     { id: 'trend-article', date: '2026-11-01' },
     { id: 'reddit-article', date: '2026-10-31' },
+    { id: 'reddit-only-article', date: '2026-10-31' },
+    { id: 'reddit-and-trends-article', date: '2026-10-31' },
     { id: 'news-only-article', date: '2026-10-30' },
     { id: 'no-attribution', date: '2026-10-29' },
     { id: 'fallback-locale', date: '2026-10-28' },
@@ -72,6 +74,27 @@ function publishedSection(overrides = {}) {
           score: 0.91,
         },
       }],
+      ['reddit-only-article', {
+        id: 'reddit-only-article',
+        publishedAt: '2026-10-31T08:15:00.000Z',
+        _topic_candidate_attribution: {
+          candidateId: 'fedcba98',
+          providers: ['reddit'],
+          score: 0.92,
+        },
+      }],
+      ['reddit-and-trends-article', {
+        id: 'reddit-and-trends-article',
+        publishedAt: '2026-10-31T07:15:00.000Z',
+        _discovery_attribution: {
+          candidateId: 'trend-topic-3',
+          signalProvider: 'google-trends',
+        },
+        _topic_candidate_attribution: {
+          candidateId: 'abcdef12',
+          providers: ['reddit', 'google-news-rss'],
+        },
+      }],
       ['news-only-article', {
         id: 'news-only-article',
         publishedAt: '2026-10-30T09:15:00.000Z',
@@ -105,14 +128,18 @@ describe('discovery article index projection', () => {
 
     assert.equal(payload.schema, 1);
     assert.equal(payload.commit, 'a'.repeat(40));
-    assert.equal(payload.count, 5);
+    assert.equal(payload.count, 4);
     assert.deepEqual(payload.articles.map(({ id }) => id), [
       'trend-article',
-      'reddit-article',
       'news-only-article',
       'fallback-locale',
       'missing-excerpt',
     ]);
+    assert.equal(payload.articles.some(({ id }) => [
+      'reddit-article',
+      'reddit-only-article',
+      'reddit-and-trends-article',
+    ].includes(id)), false);
 
     const trend = payload.articles[0];
     assert.equal(trend.provider, 'google_trends');
@@ -121,12 +148,11 @@ describe('discovery article index projection', () => {
     assert.deepEqual(Object.keys(trend.excerpt), ['it', 'en', 'de', 'fr']);
     assert.deepEqual(Object.keys(trend.url), ['it', 'en', 'de', 'fr']);
     assert.equal(trend.url.it, 'https://frontaliereticino.ch/articoli-frontaliere/trend-article-it/');
-    assert.equal(payload.articles[1].provider, 'reddit');
-    assert.equal(payload.articles[2].provider, 'other');
+    assert.equal(payload.articles[1].provider, 'other');
     for (const field of ['title', 'excerpt', 'url']) {
-      assert.deepEqual(Object.keys(payload.articles[3][field]), ['it', 'en']);
+      assert.deepEqual(Object.keys(payload.articles[2][field]), ['it', 'en']);
     }
-    const missingExcerpt = payload.articles[4];
+    const missingExcerpt = payload.articles[3];
     for (const field of ['title', 'excerpt', 'url']) {
       assert.deepEqual(Object.keys(missingExcerpt[field]), ['it', 'en', 'de']);
     }
@@ -156,7 +182,14 @@ describe('discovery article index projection', () => {
     }), 'google_trends');
     assert.equal(normalizeDiscoveryProvider({
       _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['reddit'] },
-    }), 'reddit');
+    }), null);
+    assert.equal(normalizeDiscoveryProvider({
+      _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['reddit', 'google-news-rss'] },
+    }), null);
+    assert.equal(normalizeDiscoveryProvider({
+      _discovery_attribution: { candidateId: 'trend-1', signalProvider: 'google-trends' },
+      _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['reddit', 'google-news-rss'] },
+    }), null);
     assert.equal(normalizeDiscoveryProvider({
       _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['google-news-rss'] },
     }), 'other');

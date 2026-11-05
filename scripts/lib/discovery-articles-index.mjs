@@ -7,8 +7,8 @@
  */
 import { SITE, publishedArticleLocales } from './build-sitemap.mjs';
 
-const PUBLIC_PROVIDERS = new Set(['google_trends', 'reddit', 'other']);
-const TOPIC_PROVIDERS = new Set(['reddit', 'google-news-rss']);
+const PUBLIC_PROVIDERS = new Set(['google_trends', 'other']);
+const TOPIC_PROVIDERS = new Set(['google-news-rss']);
 const LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 
 function isRecord(value) {
@@ -34,10 +34,15 @@ function timestamp(value) {
  * Collapse private attribution to the small, stable public provider enum.
  *
  * @param {unknown} sidecar
- * @returns {'google_trends'|'reddit'|'other'|null}
+ * @returns {'google_trends'|'other'|null}
  */
 export function normalizeDiscoveryProvider(sidecar) {
   if (!isRecord(sidecar)) return null;
+
+  const topic = sidecar._topic_candidate_attribution;
+  if (isRecord(topic) && Array.isArray(topic.providers) && topic.providers.includes('reddit')) {
+    return null;
+  }
 
   const discovery = sidecar._discovery_attribution;
   if (
@@ -48,7 +53,6 @@ export function normalizeDiscoveryProvider(sidecar) {
     return 'google_trends';
   }
 
-  const topic = sidecar._topic_candidate_attribution;
   if (
     !isRecord(topic)
     || typeof topic.candidateId !== 'string'
@@ -57,9 +61,10 @@ export function normalizeDiscoveryProvider(sidecar) {
   ) {
     return null;
   }
+  if (topic.providers.includes('reddit')) return null;
   const providers = topic.providers.filter((provider) => TOPIC_PROVIDERS.has(provider));
   if (providers.length === 0) return null;
-  return providers.includes('reddit') ? 'reddit' : 'other';
+  return 'other';
 }
 
 function safeLocalizedText(value) {
