@@ -4,50 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/fdp-greift-sp-im-streit-um-die-13-ahv-an-art-1729938": {
-      "section": "canton-sz",
-      "ts": 1793638265619
-    },
-    "canton-sz::https://www.marchanzeiger.ch/tnad/vogt-sanitaer-heizung": {
-      "section": "canton-sz",
-      "ts": 1793638304966
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/uri-diskutiert-mobilitaet-und-die-zukunft-am-gotthard-art-1729937": {
-      "section": "canton-sz",
-      "ts": 1793676256662
-    },
-    "canton-sz::https://www.nau.ch/politik/bundeshaus/dominik-blunschy-mitte-schluss-mit-steuerlicher-diskriminierung-67191141": {
-      "section": "canton-sz",
-      "ts": 1793695716886
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/sicherheitszentrum-rothenburg-darum-geht-es-bei-der-abstimmung-ende-november-art-1730029": {
-      "section": "canton-sz",
-      "ts": 1793702142865
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/menzingen-haelt-die-steuern-tief-trotz-hoher-investitionen-art-1730136": {
-      "section": "canton-sz",
-      "ts": 1793705862081
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/ratgeber/bieterverfahren-nehmen-zu-so-erhoehen-sie-ihre-chance-die-immobilie-zu-kaufen-art-1730139": {
-      "section": "canton-sz",
-      "ts": 1793705909042
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/verkehrszaehlung-im-urner-talboden-soll-wov-auswirkungen-zeigen-art-1730121": {
-      "section": "canton-sz",
-      "ts": 1793706246555
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/neubau-spital-schenkon-liegt-oeffentlich-auf-art-1730117": {
-      "section": "canton-sz",
-      "ts": 1793706248918
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/ein-zug-zwei-ziele-darum-teilt-die-sbb-einen-intercity-auf-art-1729929": {
-      "section": "canton-sz",
-      "ts": 1793706257953
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/rothenburg-haelt-den-steuerfuss-bei-165-einheiten-art-1730148": {
-      "section": "canton-sz",
-      "ts": 1793720063609
-    },
     "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/13-ahv-erste-auszahlung-im-dezember-steht-fest-art-1730163": {
       "section": "canton-sz",
       "ts": 1793749681048
@@ -63,6 +19,10 @@
     "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4563": {
       "section": "canton-sz",
       "ts": 1793778087339
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/hoehere-mehrwertsteuer-soll-13-ahv-rente-finanzieren-ein-kommentar-art-1730590": {
+      "section": "canton-sz",
+      "ts": 1793917591011
     }
   }
 }
