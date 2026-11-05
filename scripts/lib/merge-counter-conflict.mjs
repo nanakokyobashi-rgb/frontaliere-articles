@@ -53,9 +53,10 @@
  *     cancellerebbe incrementi altrui, e il «prendi upstream» del ripiego e'
  *     la stessa decisione che si prendeva prima di questo file.
  *
- * Senza base (add/add: il file e' nato su entrambi i lati) l'incremento del
- * commit rigiocato non e' misurabile: si tiene il MASSIMO dei due lati, che
- * non conta mai due volte e perde al piu' gli incrementi del lato minore.
+ * Senza base (add/add: il file e' nato su entrambi i lati) un contatore
+ * singolo usa il massimo dei due lati. Per le coppie discovery, si conserva
+ * una sola copia se i valori sono identici; se divergono si rifiuta il merge,
+ * perche' senza base non si puo' sapere quali tentativi siano condivisi.
  *
  * Nota sui lati: durante un rebase lo stage 2 (`--ours`) e' UPSTREAM e lo
  * stage 3 (`--theirs`) e' il commit RIGIOCATO, l'inverso di un merge.
@@ -185,19 +186,31 @@ function mergeDiscoveryAttemptPairsDocuments({ base, upstream, replayed, fields 
   if (up.error) return { ok: false, reason: up.error };
   const mine = parseDiscoveryAttemptPairsDoc(replayed, fields.pairs, 'commit rigiocato');
   if (mine.error) return { ok: false, reason: mine.error };
-  const b = base == null
-    ? { doc: {}, pairs: fields.pairs.map((pair) => ({ ...pair, proven: 0, resetAt: 0 })) }
-    : parseDiscoveryAttemptPairsDoc(base, fields.pairs, 'base');
-  if (b.error) return { ok: false, reason: b.error };
+  const b = base == null ? null : parseDiscoveryAttemptPairsDoc(base, fields.pairs, 'base');
+  if (b?.error) return { ok: false, reason: b.error };
 
   const values = {};
   const rules = [];
   for (let i = 0; i < fields.pairs.length; i += 1) {
     const pair = fields.pairs[i];
-    const basePair = b.pairs[i];
     const upstreamPair = up.pairs[i];
     const replayedPair = mine.pairs[i];
     const section = pair.provenField.replace(/ProvenAttempts$/, '');
+
+    if (b == null) {
+      // Without a common base the two snapshots may describe the same history.
+      // Keep one identical snapshot; divergent values cannot be merged without
+      // either double-counting or discarding an unknown set of attempts.
+      if (upstreamPair.proven !== replayedPair.proven || upstreamPair.resetAt !== replayedPair.resetAt) {
+        return { ok: false, reason: `coppia discovery divergente senza base comune nella sezione ${section}` };
+      }
+      values[pair.provenField] = upstreamPair.proven;
+      values[pair.resetAtField] = upstreamPair.resetAt;
+      rules.push(`coppia discovery conservata una volta (${section}, nessuna base comune)`);
+      continue;
+    }
+
+    const basePair = b.pairs[i];
     const delta = replayedPair.proven - basePair.proven;
     if (delta < 0 || upstreamPair.proven < basePair.proven) {
       return { ok: false, reason: `ProvenAttempts non monotono nella sezione ${section}` };
