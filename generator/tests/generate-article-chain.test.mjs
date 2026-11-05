@@ -47,6 +47,10 @@ import { sliceBetween } from './lib/anchored-slice.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const WF_PATH = path.resolve(HERE, '../../.github/workflows/generate-article.yml');
 const WF = readFileSync(WF_PATH, 'utf8');
+const CORE_WF_PATH = path.resolve(HERE, '../../.github/workflows/generate-article-core.yml');
+const CORE_WF = readFileSync(CORE_WF_PATH, 'utf8');
+const GENERATOR_SOURCE_PATH = path.resolve(HERE, '../scripts/create-article.mjs');
+const GENERATOR_SOURCE = readFileSync(GENERATOR_SOURCE_PATH, 'utf8');
 const JOURNALIST_WF_PATH = path.resolve(HERE, '../../.github/workflows/publish-journalist-articles.yml');
 const JOURNALIST_WF = readFileSync(JOURNALIST_WF_PATH, 'utf8');
 const DAILY_BRIEF_WF_PATH = path.resolve(HERE, '../../.github/workflows/generate-daily-brief.yml');
@@ -122,6 +126,7 @@ function runGenerateStep({
     mkdirSync(bin, { recursive: true });
     const calls = path.join(dir, 'calls');
     const argv = path.join(dir, 'argv');
+    const sourceUrlFile = path.join(dir, 'source-url');
     const staged = path.join(dir, 'staged');
     const registrationDirty = path.join(dir, 'registration-dirty');
     const planFile = path.join(dir, 'plan');
@@ -154,6 +159,7 @@ exec "$@"
 trap '' USR1 USR2
 echo "[prompt-budget] stub in esecuzione"
 echo "\${CREATE_ARTICLE_MAX_WALL_MS:-}" >> "${wallMsFile}"
+printf '%s\\n' "\${SOURCE_URL:-}" >> "${sourceUrlFile}"
 n=0
 [ -f "${calls}" ] && n=$(cat "${calls}")
 n=$((n + 1))
@@ -272,6 +278,9 @@ exit 0
     const wallMs = existsSync(wallMsFile)
       ? readFileSync(wallMsFile, 'utf8').split('\n').filter((l) => l !== '')
       : [];
+    const sourceUrls = existsSync(sourceUrlFile)
+      ? readFileSync(sourceUrlFile, 'utf8').split('\n').filter((l) => l !== '')
+      : [];
     const diagFiles = existsSync(path.join(dir, 'generate-diagnostics'))
       ? readdirSync(path.join(dir, 'generate-diagnostics'))
       : [];
@@ -280,6 +289,7 @@ exit 0
       invocations,
       caps,
       wallMs,
+      sourceUrls,
       diagFiles,
       elapsedMs,
       stdout: spawned.stdout || '',
@@ -532,7 +542,8 @@ test('con un URL esplicito non c\'e\' fallback: l\'URL e\' legato alla sezione',
     plan: ['0 0'],
   });
   assert.equal(r.invocations.length, 1);
-  assert.match(r.invocations[0], /https:\/\/example\.invalid\/a/);
+  assert.doesNotMatch(r.invocations[0], /https:\/\/example\.invalid\/a/);
+  assert.deepEqual(r.sourceUrls, ['https://example.invalid/a']);
 });
 
 test('l\'orologio iniettato arriva davvero alla shell dello step', () => {
@@ -856,7 +867,19 @@ test('le diagnostiche del wedge si caricano sempre, e da fuori il workspace', ()
 
 test('il generatore gira con i flag di report diagnostico', () => {
   const gen = extractRun('Generate the article');
-  assert.match(gen, /--report-on-signal --report-signal=SIGUSR2 --report-directory="\$diag_dir"/);
+  assert.match(gen, /--report-on-signal --report-exclude-env --report-signal=SIGUSR2 --report-directory="\$diag_dir"/);
+  assert.doesNotMatch(gen, /generator\/scripts\/create-article\.mjs --section="\$sec" "\$SOURCE_URL"/);
+  const coreReportCommands = CORE_WF.split('\n').filter((line) => line.includes('node --report-on-signal'));
+  assert.equal(coreReportCommands.length, 2, 'generate-article-core deve mantenere entrambi i rami URL/no-URL');
+  for (const line of coreReportCommands) {
+    assert.match(line, /--report-exclude-env/);
+  }
+  assert.doesNotMatch(CORE_WF, /generator\/scripts\/create-article\.mjs --section="\$sec" "\$SOURCE_URL"/);
+  assert.match(
+    GENERATOR_SOURCE,
+    /let url = process\.argv\.slice\(2\)\.find\(\(a\) => !a\.startsWith\('--'\)\) \|\| process\.env\.SOURCE_URL \|\| null;/,
+    'la SOURCE_URL va letta dall’ambiente mantenendo il positional arg per uso manuale',
+  );
   // I flag vanno PRIMA del path dello script, o node li passerebbe allo script.
   const line = gen.split('\n').find((l) => l.includes('--report-on-signal'));
   assert.ok(

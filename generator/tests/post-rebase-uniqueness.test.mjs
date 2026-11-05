@@ -306,7 +306,7 @@ test('uno slug localizzato che collide dopo il rebase blocca il candidato', () =
     locale: 'de',
     slug: 'quellensteuer-tessin-rechner',
   }]);
-  assert.match(formatViolation(violations[0]), /locale=de slug=quellensteuer-tessin-rechner/);
+  assert.match(formatViolation(violations[0]), /locale=de slug=\[redacted\]/);
 });
 
 test('titolo quasi identico introdotto dal run viene bloccato dopo il rebase', () => {
@@ -409,7 +409,22 @@ test('#2428: una chiave argomento apparsa durante la generazione ferma il push d
     topicKind: 'profession-guide',
     topicValue: 'piastrellista',
   }]);
-  assert.match(formatViolation(violations[0]), /topic=profession-guide:piastrellista/);
+  assert.match(formatViolation(violations[0]), /topicKind=profession-guide/);
+  assert.doesNotMatch(formatViolation(violations[0]), /(?:^|\s)topic=profession-guide:piastrellista\b/);
+  const sourceUrl = 'https://news.example.test/temi/keyword-segreta';
+  const safeUrlViolation = formatViolation({
+    kind: 'source-url-cross-section',
+    section: 'frontaliere',
+    id: 'keyword-segreta',
+    otherId: 'altra-keyword',
+    slug: 'topic-segreto',
+    url: sourceUrl,
+  });
+  assert.match(safeUrlViolation, /id=\[redacted\] otherId=\[redacted\]/);
+  assert.match(safeUrlViolation, /slug=\[redacted\]/);
+  assert.match(safeUrlViolation, /url=\[redacted\]/);
+  assert.doesNotMatch(safeUrlViolation, /keyword-segreta|altra-keyword|topic-segreto/);
+  assert.doesNotMatch(safeUrlViolation, /news\.example\.test/);
 });
 
 test('#2428: il riuso dello stesso argomento oltre la finestra lascia passare il push', () => {
@@ -479,7 +494,8 @@ test('#2428: il run report ripristina la chiave evergreen persa nel titolo pubbl
       '--run-report', reportPath,
     );
     assert.equal(code, 1, out);
-    assert.match(out, /topic=profession-guide:piastrellista/);
+    assert.match(out, /topicKind=profession-guide/);
+    assert.doesNotMatch(out, /(?:^|\s)topic=profession-guide:piastrellista\b/);
   } finally {
     w.cleanup();
   }
@@ -690,7 +706,8 @@ test('CLI ok: exit 0 e marcatore OK quando lo stato post-rebase e\' pulito', () 
   try {
     const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
     assert.equal(code, 0, out);
-    assert.match(out, new RegExp(`${OK_MARKER} .*new_ids=${FIRST.section}/nuovo`));
+    assert.match(out, new RegExp(`${OK_MARKER} .*new_ids=1\\b`));
+    assert.doesNotMatch(out, /frontaliere\/nuovo/);
   } finally {
     w.cleanup();
   }
@@ -729,7 +746,7 @@ test('CLI titolo quasi identico: exit 1 e violazione di contenuto dopo il rebase
   try {
     const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
     assert.equal(code, 1, out);
-    assert.match(out, new RegExp(`${VIOLATION_MARKER} kind=duplicate-content section=${FIRST.section} id=${candidate.id} otherId=${old.id}`));
+    assert.match(out, new RegExp(`${VIOLATION_MARKER} kind=duplicate-content section=${FIRST.section} id=\\[redacted\\] otherId=\\[redacted\\]`));
   } finally {
     w.cleanup();
   }
@@ -776,7 +793,7 @@ test('CLI id duplicato: exit 1 e POST_REBASE_UNIQUENESS_VIOLATION nel log', () =
   try {
     const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
     assert.equal(code, 1, out);
-    assert.match(out, new RegExp(`::error::${VIOLATION_MARKER} kind=duplicate-id-cross-section section=${SECOND.section} id=stesso-id other=${FIRST.section}`));
+    assert.match(out, new RegExp(`::error::${VIOLATION_MARKER} kind=duplicate-id-cross-section section=${SECOND.section} id=\\[redacted\\] other=${FIRST.section}`));
   } finally {
     w.cleanup();
   }
@@ -792,7 +809,7 @@ test('CLI URL fonte in un\'altra sezione: exit 1 anche se il ledger post-rebase 
   try {
     const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
     assert.equal(code, 1, out);
-    assert.match(out, new RegExp(`${VIOLATION_MARKER} kind=source-url-cross-section section=${SECOND.section} id=mio other=${FIRST.section} otherId=suo`));
+    assert.match(out, new RegExp(`${VIOLATION_MARKER} kind=source-url-cross-section section=${SECOND.section} id=\\[redacted\\] other=${FIRST.section} otherId=\\[redacted\\]`));
   } finally {
     w.cleanup();
   }
@@ -809,7 +826,7 @@ test('CLI stessa fonte nella stessa sezione: exit 1 con la violazione same-secti
   try {
     const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
     assert.equal(code, 1, out);
-    assert.match(out, new RegExp(`${VIOLATION_MARKER} kind=source-url-same-section section=${FIRST.section} id=mio otherId=suo`));
+    assert.match(out, new RegExp(`${VIOLATION_MARKER} kind=source-url-same-section section=${FIRST.section} id=\\[redacted\\] otherId=\\[redacted\\]`));
   } finally {
     w.cleanup();
   }
@@ -826,6 +843,30 @@ test('CLI non eseguibile: exit 2 con il suo marcatore, mai un falso «ok»', () 
     const missing = runScript(w.root, '--produced', 'non-esiste');
     assert.equal(missing.code, 2, missing.out);
     assert.match(missing.out, new RegExp(ERROR_MARKER));
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('CLI signal-driven: i dettagli interni del controllo restano redatti', () => {
+  const mine = sectionFiles(SECOND, { ids: ['articolo-generato'] });
+  const upstream = { ...sectionFiles(FIRST), [FIRST.sourceLedger]: '{ rotto' };
+  const w = world({ upstream, mine, rebased: mine });
+  try {
+    const reportPath = path.join(w.root, 'signal-run-report.json');
+    writeFileSync(reportPath, `${JSON.stringify({
+      runId: process.env.GITHUB_RUN_ID || 'test',
+      signalDriven: true,
+    })}\n`);
+    const { code, out } = runScript(
+      w.root,
+      '--produced', w.produced,
+      '--against', w.against,
+      '--run-report', reportPath,
+    );
+    assert.equal(code, 2, out);
+    assert.match(out, new RegExp(`${ERROR_MARKER}: details withheld`));
+    assert.doesNotMatch(out, /JSON illeggibile|signal-run-report/);
   } finally {
     w.cleanup();
   }
@@ -880,12 +921,13 @@ function assertWorkflowRebaseGate(workflow) {
   const active = step.split('\n').filter((l) => !l.trim().startsWith('#')).join('\n');
 
   const producedAt = active.indexOf('PRODUCED="$(git rev-parse HEAD)"');
-  const commitAt = active.lastIndexOf('git commit -m', producedAt);
+  const commitAt = active.lastIndexOf('git commit', producedAt);
   const loopAt = active.indexOf('for attempt in');
   const rebaseAt = active.indexOf('bash scripts/lib/rebase-onto-remote.sh', loopAt);
   const reportPathAt = active.indexOf('RUN_REPORT="$RUNNER_TEMP/create-article-run-report.json"');
   const reportCopyAt = active.indexOf('cp .tmp/create-article-run-report.json "$RUN_REPORT"');
-  const checkAt = active.indexOf('node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD --run-report "$RUN_REPORT"');
+  const privateReportPathAt = active.indexOf('POST_REBASE_RUN_REPORT="$RUNNER_TEMP/create-article-post-rebase-run-report.json"');
+  const checkAt = active.indexOf('node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD --run-report "$POST_REBASE_RUN_REPORT"');
   const successGuardAt = active.lastIndexOf('if [ "$rebased" -eq 1 ]; then', checkAt);
   const doneMatch = /\n\s+done\n/.exec(active.slice(Math.max(0, checkAt)));
   const doneAt = doneMatch ? checkAt + doneMatch.index : -1;
@@ -894,6 +936,8 @@ function assertWorkflowRebaseGate(workflow) {
     'PRODUCED va preso dopo il commit e PRIMA di ogni rebase: dopo, la voce del ledger del run puo\' essere sparita');
   assert.ok(reportPathAt >= 0 && reportCopyAt > reportPathAt && reportCopyAt < loopAt,
     'il report del run va copiato fuori dal checkout prima del primo rebase');
+  assert.ok(privateReportPathAt > reportPathAt && privateReportPathAt < loopAt,
+    'il handoff privato con la chiave topic va conservato fuori dal checkout prima del rebase');
   const reportGuard = active.slice(reportPathAt, loopAt);
   assert.match(reportGuard, /if \[ -s \.tmp\/create-article-run-report\.json \]; then[\s\S]*?has_run_report=true/,
     'un report presente deve essere isolato prima del rebase');
@@ -911,6 +955,8 @@ function assertWorkflowRebaseGate(workflow) {
     'il controllo gira solo dopo un rebase riuscito');
   const gate = active.slice(successGuardAt, doneAt);
   assert.match(gate, /\|\| uniq_rc=\$\?/);
+  assert.match(gate, /if \[ ! -s "\$POST_REBASE_RUN_REPORT" \]; then[\s\S]*?refusing to push/,
+    'l’assenza del handoff privato deve fermare il push fail-closed');
   assert.match(gate, /if \[ "\$uniq_rc" -ne 0 \]; then[\s\S]*?exit 1/, 'un controllo fallito deve fermare il run SENZA pushare');
   assert.match(gate, /source URL, topic, or content/);
 }

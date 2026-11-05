@@ -633,8 +633,8 @@ async function classifyChunk(list, callLLM, opts = {}) {
       jsonMode: true,
       ...(opts.model ? { model: opts.model } : {}),
     });
-  } catch (e) {
-    console.warn(`[generator] cluster classifier LLM failed, regex fallback: ${e?.message || e}`);
+  } catch {
+    console.warn('[classifier] LLM call failed; regex fallback');
     const fallback = list.map((h) => classifyByRegex(String(h ?? '')));
     return { clusters: fallback, okCount: 0, fallbackCount: list.length };
   }
@@ -644,15 +644,14 @@ async function classifyChunk(list, callLLM, opts = {}) {
   const stripped = stripFenceAndPrefix(rawText);
   try {
     parsed = JSON.parse(stripped);
-  } catch (e) {
+  } catch {
     // 2026-05-07 graceful recovery: when JSON.parse fails (most often due
     // to a truncated array — the model ran out of tokens mid-string), try
     // to recover the array prefix up to the last complete entry. Falls
     // back to all-regex only when no prefix can be recovered.
     parsed = recoverTruncatedArray(stripped);
     if (!parsed) {
-      const preview = stripped.slice(0, 200).replace(/\s+/g, ' ');
-      console.warn(`[classifier] LLM returned malformed JSON (parse error: ${e?.message || e}), regex fallback. raw[0..200]: "${preview}"`);
+      console.warn('[classifier] LLM returned malformed JSON; regex fallback');
       const fallback = list.map((h) => classifyByRegex(String(h ?? '')));
       return { clusters: fallback, okCount: 0, fallbackCount: list.length };
     }
@@ -1836,7 +1835,8 @@ async function rankWithCascade(list, titles, clusters, opts) {
     try {
       breakdown = await cascadedScore(headlineText, evidence, cascadeOpts);
     } catch (err) {
-      console.warn(`[cascade] scoring failed for "${headlineText.slice(0, 60)}": ${err?.message || err}`);
+      const errorType = err instanceof Error ? err.constructor?.name || 'Error' : typeof err;
+      console.warn(`[cascade] scoring failed candidate_index=${i + 1} error_type=${errorType}; candidate skipped`);
       continue;
     }
     if (!breakdown) continue;

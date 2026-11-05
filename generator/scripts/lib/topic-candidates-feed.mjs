@@ -7,6 +7,7 @@ import { pathToFileURL } from 'node:url';
 export const TOPIC_CANDIDATES_FEED_URL = 'https://cdn.frontaliereticino.ch/data/experimental-candidate-feed.json';
 export const TOPIC_CANDIDATES_FEED_CACHE_BUCKET_MS = 5 * 60 * 1000;
 export const TOPIC_CANDIDATES_FEED_MAX_BYTES = 1024 * 1024;
+export const TOPIC_CANDIDATES_FEED_WARN_AGE_MS = 6 * 24 * 60 * 60 * 1000;
 export const TOPIC_CANDIDATES_FEED_MAX_AGE_MS = 8 * 24 * 60 * 60 * 1000;
 export const TOPIC_CANDIDATES_FEED_MAX_FUTURE_SKEW_MS = 5 * 60 * 1000;
 export const TOPIC_CANDIDATES_FEED_TIMEOUT_MS = 10_000;
@@ -126,11 +127,12 @@ function safeCandidate(candidate) {
   };
 }
 
-/** Validate freshness/shape and return a bounded projection for the ranker. */
-export function validateTopicCandidatesFeed(payload, {
+/** Validate freshness/shape and return a bounded projection plus aggregate counts. */
+export function validateTopicCandidatesFeedWithDiagnostics(payload, {
   nowMs = Date.now(),
   maxAgeMs = TOPIC_CANDIDATES_FEED_MAX_AGE_MS,
   maxCandidates = TOPIC_CANDIDATES_FEED_MAX_CANDIDATES,
+  redditDataApiApproved = false,
 } = {}) {
   if (!isRecord(payload)) throw new TopicCandidatesFeedError('payload_not_object');
   if (Object.keys(payload).some((key) => !['schemaVersion', 'generatedAt', 'candidates'].includes(key))) {
@@ -150,11 +152,66 @@ export function validateTopicCandidatesFeed(payload, {
     throw new TopicCandidatesFeedError('candidates_invalid');
   }
 
-  return {
+  const candidates = [];
+  const inputCandidateCountsBySource = { reddit: 0, 'google-news-rss': 0 };
+  const filteredCandidateCountsByReason = {};
+  let validatedCandidateCount = 0;
+
+  for (const rawCandidate of payload.candidates) {
+    const rawSources = Array.isArray(rawCandidate?.sources) ? new Set(rawCandidate.sources) : new Set();
+    for (const source of rawSources) {
+      if (Object.hasOwn(inputCandidateCountsBySource, source)) inputCandidateCountsBySource[source] += 1;
+    }
+
+    let candidate;
+    try {
+      candidate = safeCandidate(rawCandidate);
+      validatedCandidateCount += 1;
+    } catch (error) {
+      const reason = error instanceof TopicCandidatesFeedError
+        ? error.code
+        : 'candidate_invalid';
+      filteredCandidateCountsByReason[reason] = (filteredCandidateCountsByReason[reason] || 0) + 1;
+      continue;
+    }
+
+    // This collector is approved only through an explicit Remote Config gate.
+    // A mixed row has no source-specific evidence in schema v1, so News cannot
+    // independently justify it after Reddit is removed; drop the whole row.
+    if (redditDataApiApproved !== true && candidate.sources.includes('reddit')) {
+      const reason = candidate.sources.includes('google-news-rss')
+        ? 'mixed_reddit_unapproved'
+        : 'reddit_unapproved';
+      filteredCandidateCountsByReason[reason] = (filteredCandidateCountsByReason[reason] || 0) + 1;
+      continue;
+    }
+
+    candidates.push(candidate);
+  }
+
+  const feed = {
     schemaVersion: 1,
     generatedAt: new Date(generatedAtMs).toISOString(),
-    candidates: payload.candidates.map(safeCandidate),
+    candidates,
   };
+  return {
+    feed,
+    generatedAt: feed.generatedAt,
+    feedAgeMs: Math.max(0, nowMs - generatedAtMs),
+    diagnostics: {
+      inputCandidateCount: payload.candidates.length,
+      validatedCandidateCount,
+      eligibleCandidateCount: candidates.length,
+      filteredCandidateCount: payload.candidates.length - candidates.length,
+      inputCandidateCountsBySource,
+      filteredCandidateCountsByReason,
+    },
+  };
+}
+
+/** Validate freshness/shape and return a bounded projection for the ranker. */
+export function validateTopicCandidatesFeed(payload, options = {}) {
+  return validateTopicCandidatesFeedWithDiagnostics(payload, options).feed;
 }
 
 async function readBodyBounded(response, maxBytes) {
@@ -201,12 +258,60 @@ export function buildTopicCandidatesFeedReport(result) {
       if (Object.hasOwn(bySource, source)) bySource[source] += 1;
     }
   }
+  const diagnostics = result?.diagnostics && isRecord(result.diagnostics) ? result.diagnostics : {};
+  const ageMs = Number.isFinite(result?.feedAgeMs) ? Math.max(0, result.feedAgeMs) : null;
+  const isStale = result?.reason === 'feed_stale'
+    || (ageMs !== null && ageMs > TOPIC_CANDIDATES_FEED_MAX_AGE_MS);
+  const freshness = isStale
+    ? 'stale'
+    : ageMs !== null && ageMs > TOPIC_CANDIDATES_FEED_WARN_AGE_MS
+      ? 'aging'
+      : result?.ok === true
+        ? 'fresh'
+        : 'unavailable';
+  const inputCounts = diagnostics.inputCandidateCountsBySource
+    && isRecord(diagnostics.inputCandidateCountsBySource)
+    ? {
+      reddit: Number.isInteger(diagnostics.inputCandidateCountsBySource.reddit)
+        ? diagnostics.inputCandidateCountsBySource.reddit
+        : 0,
+      'google-news-rss': Number.isInteger(diagnostics.inputCandidateCountsBySource['google-news-rss'])
+        ? diagnostics.inputCandidateCountsBySource['google-news-rss']
+        : 0,
+    }
+    : { ...bySource };
+  const filteredCounts = diagnostics.filteredCandidateCountsByReason
+    && isRecord(diagnostics.filteredCandidateCountsByReason)
+    ? diagnostics.filteredCandidateCountsByReason
+    : {};
   return {
-    status: result?.ok === true ? 'fresh' : 'empty-fallback',
+    status: result?.ok === true ? freshness : (isStale ? 'stale' : 'empty-fallback'),
+    freshness,
     schemaVersion: Number.isInteger(feed.schemaVersion) ? feed.schemaVersion : 1,
-    generatedAt: typeof feed.generatedAt === 'string' ? feed.generatedAt : null,
+    generatedAt: typeof result?.generatedAt === 'string'
+      ? result.generatedAt
+      : typeof feed.generatedAt === 'string'
+        ? feed.generatedAt
+        : null,
+    feedAgeHours: ageMs === null ? null : Math.round((ageMs / (60 * 60 * 1000)) * 10) / 10,
+    inputCandidateCount: Number.isInteger(diagnostics.inputCandidateCount)
+      ? diagnostics.inputCandidateCount
+      : Number.isInteger(result?.inputCandidateCount)
+        ? result.inputCandidateCount
+        : candidates.length,
+    validatedCandidateCount: Number.isInteger(diagnostics.validatedCandidateCount)
+      ? diagnostics.validatedCandidateCount
+      : candidates.length,
     candidateCount: candidates.length,
+    eligibleCandidateCount: Number.isInteger(diagnostics.eligibleCandidateCount)
+      ? diagnostics.eligibleCandidateCount
+      : candidates.length,
+    filteredCandidateCount: Number.isInteger(diagnostics.filteredCandidateCount)
+      ? diagnostics.filteredCandidateCount
+      : 0,
+    inputCandidateCountsBySource: inputCounts,
     candidateCountsBySource: bySource,
+    filteredCandidateCountsByReason: filteredCounts,
     errorClass: result?.ok === true ? null : (typeof result?.reason === 'string' ? result.reason : 'request_failed'),
   };
 }
@@ -217,11 +322,15 @@ export async function fetchTopicCandidatesFeed({
   maxBytes = TOPIC_CANDIDATES_FEED_MAX_BYTES,
   maxAgeMs = TOPIC_CANDIDATES_FEED_MAX_AGE_MS,
   timeoutMs = TOPIC_CANDIDATES_FEED_TIMEOUT_MS,
+  redditDataApiApproved = process.env.REDDIT_DATA_API_APPROVED === 'true',
 } = {}) {
   if (typeof fetchImpl !== 'function') throw new TypeError('fetch implementation required');
   if (!Number.isInteger(maxBytes) || maxBytes < 1) throw new TypeError('maxBytes must be a positive integer');
   if (!Number.isInteger(timeoutMs) || timeoutMs < 1) throw new TypeError('timeoutMs must be a positive integer');
 
+  let generatedAt = null;
+  let feedAgeMs = null;
+  let inputCandidateCount = null;
   try {
     const response = await fetchImpl(topicCandidatesFeedRequestUrl(nowMs), {
       headers: { accept: 'application/json' },
@@ -247,15 +356,47 @@ export async function fetchTopicCandidatesFeed({
     } catch {
       throw new TopicCandidatesFeedError('json_invalid');
     }
-    const feed = validateTopicCandidatesFeed(payload, { nowMs, maxAgeMs });
-    return { ok: true, reason: null, feed };
+    inputCandidateCount = Array.isArray(payload?.candidates) ? payload.candidates.length : null;
+    if (typeof payload?.generatedAt === 'string') {
+      generatedAt = payload.generatedAt;
+      const parsedGeneratedAtMs = Date.parse(generatedAt);
+      if (Number.isFinite(parsedGeneratedAtMs)) feedAgeMs = Math.max(0, nowMs - parsedGeneratedAtMs);
+    }
+    const validated = validateTopicCandidatesFeedWithDiagnostics(payload, {
+      nowMs,
+      maxAgeMs,
+      redditDataApiApproved,
+    });
+    return {
+      ok: true,
+      reason: null,
+      feed: validated.feed,
+      generatedAt: validated.generatedAt,
+      feedAgeMs: validated.feedAgeMs,
+      diagnostics: validated.diagnostics,
+    };
   } catch (error) {
     const reason = error instanceof TopicCandidatesFeedError
       ? error.code
       : error?.name === 'TimeoutError' || error?.name === 'AbortError'
         ? 'request_timeout'
         : 'request_failed';
-    return { ok: false, reason, feed: { ...EMPTY_TOPIC_CANDIDATES_FEED } };
+    return {
+      ok: false,
+      reason,
+      feed: { ...EMPTY_TOPIC_CANDIDATES_FEED },
+      generatedAt,
+      feedAgeMs,
+      inputCandidateCount,
+      diagnostics: {
+        inputCandidateCount: Number.isInteger(inputCandidateCount) ? inputCandidateCount : 0,
+        validatedCandidateCount: 0,
+        eligibleCandidateCount: 0,
+        filteredCandidateCount: 0,
+        inputCandidateCountsBySource: { reddit: 0, 'google-news-rss': 0 },
+        filteredCandidateCountsByReason: {},
+      },
+    };
   }
 }
 
@@ -269,6 +410,9 @@ export async function writeTopicCandidatesFeed(outputPath, options = {}) {
   mkdirSync(dirname(target), { recursive: true });
   writeFileSync(target, `${JSON.stringify(result.feed, null, 2)}\n`, 'utf8');
   const report = buildTopicCandidatesFeedReport(result);
+  if (report.freshness === 'aging') {
+    console.warn(`::warning::[topic-feed] feed is aging (${report.feedAgeHours}h; warning threshold ${TOPIC_CANDIDATES_FEED_WARN_AGE_MS / (60 * 60 * 1000)}h)`);
+  }
   if (reportPath) {
     const reportTarget = resolve(reportPath);
     mkdirSync(dirname(reportTarget), { recursive: true });
@@ -287,9 +431,12 @@ async function main() {
   }
   const result = await writeTopicCandidatesFeed(outputPath, { reportPath });
   if (result.ok) {
-    console.log(`[topic-feed] fresh=${result.candidateCount} generatedAt=${result.feed.generatedAt}`);
+    console.log(`[topic-feed] status=${result.report.status} input=${result.report.inputCandidateCount} validated=${result.report.validatedCandidateCount} eligible=${result.report.eligibleCandidateCount} filtered=${result.report.filteredCandidateCount} generatedAt=${result.feed.generatedAt}`);
+    if (result.report.filteredCandidateCount > 0) {
+      console.log(`[topic-feed] filtered-by-reason=${JSON.stringify(result.report.filteredCandidateCountsByReason)}`);
+    }
   } else {
-    console.warn(`::warning::[topic-feed] using empty Reddit/News pool: ${result.reason}`);
+    console.warn(`::warning::[topic-feed] using empty Reddit/News pool: ${result.reason} status=${result.report.status} ageHours=${result.report.feedAgeHours ?? 'unknown'}`);
   }
 }
 

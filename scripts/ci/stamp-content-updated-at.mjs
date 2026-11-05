@@ -44,6 +44,3 @@ for (const section of allSections) {
 console.log(
   `[stamp-content-updated-at] considered=${result.considered} changed=${result.changed.length}`,
 );
-for (const change of result.changed) {
-  console.log(`[stamp-content-updated-at] ${change.section}/${change.id} -> ${change.updatedAt}`);
-}

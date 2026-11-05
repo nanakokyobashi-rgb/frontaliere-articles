@@ -79,13 +79,25 @@ function compactReason(value) {
   return String(value || 'engine-failed').replace(/\s+/g, ' ').trim().slice(0, 180) || 'engine-failed';
 }
 
-function readProvenance(root, imagePath) {
+function readProvenance(root, imagePath, {
+  logImagePath = imagePath,
+  redactError = false,
+} = {}) {
   try {
     return imageRecordForPath(root, imagePath, { strict: true });
   } catch (error) {
-    console.warn(`  ⚠️  Record copertina non leggibile (${imagePath}): ${compactReason(error.message)}`);
+    const reason = redactError ? 'details withheld' : compactReason(error.message);
+    console.warn(`  ⚠️  Record copertina non leggibile (${logImagePath}): ${reason}`);
     return null;
   }
+}
+
+function signalArticleLogRedacted(markerArticleId) {
+  return markerArticleId === '[signal_article_id_redacted]';
+}
+
+function catalogImageLogPath(imagePath, redactDetails) {
+  return redactDetails ? '[signal image path redacted]' : imagePath;
 }
 
 function articleHeroFilePath(root, imagePath) {
@@ -184,7 +196,13 @@ function normalizeCandidatePaths(options, data) {
     .slice(0, MAX_CATALOG_FALLBACK_CANDIDATES);
 }
 
-function noVerifiedFallbackError({ data, candidateCount, rejectedCount, transientErrors }) {
+function noVerifiedFallbackError({
+  data,
+  candidateCount,
+  rejectedCount,
+  transientErrors,
+  redactDetails = false,
+}) {
   // A shared deferral is valid only when every verifier exception carries the
   // producer-owned shared-provider marker. A mixed local/unclassified failure
   // must stay section-local even if another candidate also hit an outage.
@@ -194,14 +212,16 @@ function noVerifiedFallbackError({ data, candidateCount, rejectedCount, transien
   const transientError = sharedProviderUnavailable
     ? transientErrors[0]
     : transientErrors.find((error) => error?.sharedProviderUnavailable !== true) || transientErrors[0];
+  const articleLabel = redactDetails ? '[signal article redacted]' : data?.id || '<unknown>';
+  const reason = redactDetails ? 'details withheld' : compactReason(transientError?.message);
   const error = new Error(transientError
-    ? `Unable to verify a relevant catalog cover for ${data?.id || '<unknown>'}: ${compactReason(transientError.message)}`
-    : `No visually verified, topic-relevant catalog cover for ${data?.id || '<unknown>'}`);
+    ? `Unable to verify a relevant catalog cover for ${articleLabel}: ${reason}`
+    : `No visually verified, topic-relevant catalog cover for ${articleLabel}`);
   error.code = transientError
     ? ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE
     : ARTICLE_COVER_FALLBACK_ERROR_CODES.NO_RELEVANT_CANDIDATE;
   error.retryable = true;
-  if (transientError) error.cause = transientError;
+  if (transientError && !redactDetails) error.cause = transientError;
   if (sharedProviderUnavailable) error.sharedProviderUnavailable = true;
   if (!transientError && rejectedCount > 0) error.imageQualityFailure = true;
   error.candidateCount = candidateCount;
@@ -221,27 +241,34 @@ export async function verifyCatalogFallbackCandidates(data, {
   area = 'Ticino e pendolarismo transfrontaliero',
   deadlineAt = Date.now() + COVER_VERIFICATION_BUDGET_MS,
   verifyImage = defaultVerifyImage,
+  logArticleId,
 } = {}) {
   const candidates = normalizeCandidatePaths({ findCatalogImages, findCatalogImage }, data);
+  const markerArticleId = String(logArticleId ?? data?.id ?? '<unknown>').replace(/\s+/g, '_');
+  const redactDetails = signalArticleLogRedacted(markerArticleId);
   const context = verificationContext(data, area);
   const transientErrors = [];
   let rejectedCount = 0;
 
   for (const imagePath of candidates) {
+    const shownImagePath = catalogImageLogPath(imagePath, redactDetails);
     const filePath = articleHeroFilePath(root, imagePath);
     if (!filePath) continue;
-    const provenance = readProvenance(root, imagePath);
+    const provenance = readProvenance(root, imagePath, {
+      logImagePath: shownImagePath,
+      redactError: redactDetails,
+    });
     if (!provenance
       || provenance.record?.scope !== 'article-hero'
       || !['generated', 'licensed-photo'].includes(provenance.kind)
       || provenance.kind === DETERMINISTIC_CARD_KIND) {
-      console.warn(`  ⚠️  Fallback catalogato escluso senza prova di hero riutilizzabile: ${imagePath}`);
+      console.warn(`  ⚠️  Fallback catalogato escluso senza prova di hero riutilizzabile: ${shownImagePath}`);
       continue;
     }
 
     const recordHash = String(provenance.record.sha256 || '').toLowerCase();
     if (!/^[a-f0-9]{64}$/.test(recordHash)) {
-      console.warn(`  ⚠️  Fallback catalogato escluso senza SHA-256 verificabile: ${imagePath}`);
+      console.warn(`  ⚠️  Fallback catalogato escluso senza SHA-256 verificabile: ${shownImagePath}`);
       continue;
     }
 
@@ -249,11 +276,12 @@ export async function verifyCatalogFallbackCandidates(data, {
     try {
       actualHash = sha256File(filePath);
     } catch (error) {
-      console.warn(`  ⚠️  Binario fallback non leggibile (${imagePath}): ${compactReason(error.message)}`);
+      const reason = redactDetails ? 'details withheld' : compactReason(error.message);
+      console.warn(`  ⚠️  Binario fallback non leggibile (${shownImagePath}): ${reason}`);
       continue;
     }
     if (actualHash !== recordHash) {
-      console.warn(`  ⚠️  Fallback catalogato escluso: SHA-256 del binario diverso dal record (${imagePath})`);
+      console.warn(`  ⚠️  Fallback catalogato escluso: SHA-256 del binario diverso dal record (${shownImagePath})`);
       continue;
     }
 
@@ -276,7 +304,7 @@ export async function verifyCatalogFallbackCandidates(data, {
     } catch (error) {
       if (error?.code === 'IMAGE_VISION_REJECTED') {
         rejectedCount += 1;
-        console.warn(`  ⚠️  Fallback non pertinente per ${data?.id || '<unknown>'}: ${imagePath}`);
+        console.warn(`  ⚠️  Fallback non pertinente per ${markerArticleId}: ${shownImagePath}`);
         continue;
       }
       transientErrors.push(error);
@@ -289,6 +317,7 @@ export async function verifyCatalogFallbackCandidates(data, {
     candidateCount: candidates.length,
     rejectedCount,
     transientErrors,
+    redactDetails,
   });
 }
 
@@ -347,13 +376,30 @@ export function resolveArticleCoverFallback(data, {
   root,
   verifiedCatalogImage,
   reason = 'engine-failed',
+  logArticleId,
+  logReason,
 } = {}) {
   const engineReason = compactReason(reason);
+  // The regeneration queue keeps the real article identity and failure
+  // details. Callers handling signal-driven candidates can pass a redacted
+  // log projection without changing that operational record.
+  const markerArticleId = String(logArticleId ?? data?.id ?? '<unknown>').replace(/\s+/g, '_');
+  const redactDetails = signalArticleLogRedacted(markerArticleId);
+  const markerReason = compactReason(logReason ?? engineReason);
   if (verifiedCatalogImage?.[VERIFIED_CATALOG_IMAGE] !== true) {
-    throw noVerifiedFallbackError({ data, candidateCount: 0, rejectedCount: 0, transientErrors: [] });
+    throw noVerifiedFallbackError({
+      data,
+      candidateCount: 0,
+      rejectedCount: 0,
+      transientErrors: [],
+      redactDetails,
+    });
   }
 
-  const currentProvenance = readProvenance(root, verifiedCatalogImage.path);
+  const currentProvenance = readProvenance(root, verifiedCatalogImage.path, {
+    logImagePath: catalogImageLogPath(verifiedCatalogImage.path, redactDetails),
+    redactError: redactDetails,
+  });
   const filePath = articleHeroFilePath(root, verifiedCatalogImage.path);
   let currentHash = null;
   if (currentProvenance && filePath) {
@@ -377,7 +423,9 @@ export function resolveArticleCoverFallback(data, {
     || currentHash !== verifiedCatalogImage.sha256
     || currentProvenance.record.scope !== 'article-hero'
     || currentContextHash !== verifiedCatalogImage.contextHash) {
-    const error = new Error(`Verified fallback changed before publication for ${data?.id || '<unknown>'}`);
+    const error = new Error(redactDetails
+      ? 'Verified fallback changed before publication'
+      : `Verified fallback changed before publication for ${data?.id || '<unknown>'}`);
     error.code = ARTICLE_COVER_FALLBACK_ERROR_CODES.STALE_VERIFICATION;
     error.retryable = true;
     throw error;
@@ -400,7 +448,7 @@ export function resolveArticleCoverFallback(data, {
     configurable: true,
     writable: true,
   });
-  console.error(`[cover] article=${data.id} source=catalog-fallback reason=${engineReason}`);
+  console.error(`[cover] article=${markerArticleId} source=catalog-fallback reason=${markerReason}`);
   return {
     source: 'catalog-fallback',
     path: verifiedCatalogImage.path,

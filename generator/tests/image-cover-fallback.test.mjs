@@ -199,11 +199,24 @@ test('engine failure uses a freshly verified catalog hero and queues regeneratio
   try {
     const data = article('article-cover-fallback', 'Catalog fallback test');
     const { record, verifiedCatalogImage } = await addAndVerifyCandidate(root, data);
-    const result = resolveArticleCoverFallback(data, {
-      root,
-      verifiedCatalogImage,
-      reason: 'Gemini image request failed with HTTP 400',
-    });
+    const coverLogs = [];
+    const originalConsoleError = console.error;
+    console.error = (...parts) => coverLogs.push(parts.join(' '));
+    let result;
+    try {
+      result = resolveArticleCoverFallback(data, {
+        root,
+        verifiedCatalogImage,
+        reason: 'Gemini image request failed with HTTP 400',
+        logArticleId: '[signal_article_id_redacted]',
+        logReason: '[signal-related diagnostic redacted]',
+      });
+    } finally {
+      console.error = originalConsoleError;
+    }
+    assert.deepEqual(coverLogs, [
+      '[cover] article=[signal_article_id_redacted] source=catalog-fallback reason=[signal-related diagnostic redacted]',
+    ]);
 
     assert.equal(result.source, 'catalog-fallback');
     assert.equal(data._generatedImagePath, record.imageUrl);
@@ -748,6 +761,8 @@ test('un catalogo valido ma non pertinente non diventa la copertina finale', asy
   const root = tempRoot();
   try {
     const record = generatedCatalogRecord();
+    record.imageUrl = '/images/blog/private-trends-topic-sentinel.webp';
+    record.assetId = 'private-trends-topic-sentinel';
     const file = path.join(root, 'public', record.imageUrl.slice(1));
     fs.mkdirSync(path.dirname(file), { recursive: true });
     fs.writeFileSync(file, Buffer.alloc(record.bytes, 0x47));
@@ -755,12 +770,23 @@ test('un catalogo valido ma non pertinente non diventa la copertina finale', asy
     appendGeneratedImageRecord(root, record);
 
     const data = article('article-cover-irrelevant', 'Aggressione turisti Como');
-    await assert.rejects(verifyCatalogFallbackCandidates(data, {
-      root,
-      findCatalogImages: () => [record.imageUrl],
-      verifyImage: async () => ({ ...safeGeneratedVision, is_topic_relevant: false }),
-    }), (error) => error.code === 'ARTICLE_COVER_NO_RELEVANT_FALLBACK'
-      && error.imageQualityFailure === true);
+    const warnings = [];
+    const originalConsoleWarn = console.warn;
+    console.warn = (...parts) => warnings.push(parts.join(' '));
+    try {
+      await assert.rejects(verifyCatalogFallbackCandidates(data, {
+        root,
+        findCatalogImages: () => [record.imageUrl],
+        verifyImage: async () => ({ ...safeGeneratedVision, is_topic_relevant: false }),
+        logArticleId: '[signal_article_id_redacted]',
+      }), (error) => error.code === 'ARTICLE_COVER_NO_RELEVANT_FALLBACK'
+        && error.imageQualityFailure === true);
+    } finally {
+      console.warn = originalConsoleWarn;
+    }
+    assert.equal(warnings.length, 1);
+    assert.match(warnings[0], /\[signal_article_id_redacted\]/);
+    assert.doesNotMatch(warnings[0], /article-cover-irrelevant|private-trends-topic-sentinel/);
     assert.equal(data._generatedImagePath, undefined);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });

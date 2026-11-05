@@ -72,6 +72,13 @@ function extractFunctionSource(signature) {
 
 const GATE_SRC = extractFunctionSource('async function applyPreSpendTopicGate(headlines, opts = {}) {');
 const RECOVERY_SRC = extractFunctionSource('function resolveRunRecovery() {');
+const SIGNAL_CANDIDATE_SRC = extractFunctionSource('function isSignalDrivenTopicCandidate(candidate) {');
+const isSignalDrivenTopicCandidate = new Function(
+  `${SIGNAL_CANDIDATE_SRC}\nreturn isSignalDrivenTopicCandidate;`,
+)();
+const safeTopicSelectionLogLabel = (candidate) => isSignalDrivenTopicCandidate(candidate)
+  ? '[signal topic redacted]'
+  : `"${(candidate?.headline || candidate?.keyword || '').slice(0, 80)}"`;
 
 // 2026-08-18 — il gate non e' piu' un `for…await` seriale: le classificazioni
 // partono a gruppi via `mapWithConcurrency`, e il cap del classifier ha un
@@ -179,6 +186,8 @@ function makeGate({
     'classifyFrontaliereRelevance',
     'countTopicalHits',
     'recordDiscardedHeadline',
+    'isSignalDrivenTopicCandidate',
+    'safeTopicSelectionLogLabel',
     'RUN_REPORT',
     'console',
     'mapWithConcurrency',
@@ -201,6 +210,8 @@ function makeGate({
     },
     topicalHits,
     () => {},
+    isSignalDrivenTopicCandidate,
+    safeTopicSelectionLogLabel,
     runReport,
     fakeConsole,
     mapWithConcurrency,
@@ -505,6 +516,24 @@ test('a kept candidate emits no rejection record', async () => {
   await gate(hl('Ristorni, accordo vicino'));
 
   assert.equal(rejectedLines(logs).length, 0);
+});
+
+test('signal rejection redacts text and keeps marker fields as single tokens', async () => {
+  const { gate, logs } = makeGate({ relevant: () => false });
+  await gate([{
+    headline: 'private trend candidate headline',
+    url: 'https://example.test/private-trend-candidate',
+    _experimentalCandidate: { keyword: 'private trend candidate' },
+  }]);
+
+  const [line] = rejectedLines(logs);
+  assert.ok(line);
+  assert.match(line, /\bheadline=\[signal_topic_redacted\]/);
+  assert.match(line, /\breason=\[signal_reason_redacted\]/);
+  assert.doesNotMatch(line, /private trend candidate/i);
+  for (const match of line.matchAll(/([A-Za-z_]+)=(\S+)/g)) {
+    assert.doesNotMatch(match[2], /\s/, `field "${match[1]}" must be a single token`);
+  }
 });
 
 // ── No false positives: a gate that kept something is not a total rejection ─
