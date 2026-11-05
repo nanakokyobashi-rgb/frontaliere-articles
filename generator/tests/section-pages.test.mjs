@@ -3050,22 +3050,45 @@ test('publisher: la landing si carica per ultima', () => {
   assert.deepEqual(kinds.filter((p) => p.kind === 'hub').map((p) => p.n), [1, 2], 'stabile dentro il tipo');
 });
 
-test('publisher: la radice di render espone il corpus nel layout che l\'engine legge', () => {
-  const view = createRenderRoot(ROOT, mkdtempSync(path.join(tmpdir(), 'rr-')));
+test('publisher: la radice di render espone il corpus anche nel checkout sparse', () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-render-layout-'));
+  const sourceRoot = path.join(fixtureRoot, 'corpus');
+  // Exercise the real view builder without depending on content/ being checked
+  // out. The fixture includes both historical and canton-specific SEO paths.
+  const files = {
+    'content/blog-meta-ch-it.ts': 'export default {};',
+    'content/seo/seo-blog-ch.ts': 'export default {};',
+    'content/cantons/canton-ti/seo.ts': 'export default {};',
+    'services/routerSwissData.ts': 'export default {};',
+    'engine/reader.mjs': 'export default {};',
+    '.git/HEAD': 'ref: refs/heads/main',
+  };
   try {
-    const target = (rel) => path.relative(ROOT, readlinkSync(path.join(view, rel)));
+    for (const [relative, contents] of Object.entries(files)) {
+      const file = path.join(sourceRoot, relative);
+      mkdirSync(path.dirname(file), { recursive: true });
+      writeFileSync(file, contents);
+    }
+    const view = createRenderRoot(sourceRoot, fixtureRoot);
+    const target = (rel) => path.relative(sourceRoot, readlinkSync(path.join(view, rel)));
     assert.equal(target('services/locales'), 'content');
     assert.equal(target('packages/articles/content'), 'content');
-    assert.ok(lstatSync(path.join(view, 'engine')).isSymbolicLink());
+    assert.equal(target('engine'), 'engine');
+    assert.equal(target('packages/articles/engine'), 'engine');
     assert.ok(lstatSync(path.join(view, 'services/seo')).isDirectory(), 'la directory SEO deve poter contenere il bridge cantonale');
     assert.equal(target('services/seo/seo-blog-ch.ts'), path.join('content', 'seo', 'seo-blog-ch.ts'));
-    // I path dell'engine per una sezione cantonale cadono sui file veri del corpus.
-    assert.ok(existsSync(path.join(view, 'services/locales/blog-meta-ch-it.ts')));
-    assert.ok(existsSync(path.join(view, 'services/seo/seo-blog-ch.ts')));
-    assert.ok(existsSync(path.join(view, 'services/routerSwissData.ts')));
+    assert.equal(target('services/seo/seo-blog-canton-ti.ts'), path.join('content', 'cantons', 'canton-ti', 'seo.ts'));
+    for (const [alias, source] of [
+      ['services/locales/blog-meta-ch-it.ts', 'content/blog-meta-ch-it.ts'],
+      ['services/seo/seo-blog-ch.ts', 'content/seo/seo-blog-ch.ts'],
+      ['services/seo/seo-blog-canton-ti.ts', 'content/cantons/canton-ti/seo.ts'],
+      ['services/routerSwissData.ts', 'services/routerSwissData.ts'],
+    ]) {
+      assert.equal(readFileSync(path.join(view, alias), 'utf8'), files[source]);
+    }
     assert.ok(!existsSync(path.join(view, '.git')));
   } finally {
-    rmSync(view, { recursive: true, force: true });
+    rmSync(fixtureRoot, { recursive: true, force: true });
   }
 });
 
