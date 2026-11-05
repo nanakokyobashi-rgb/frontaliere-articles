@@ -1,0 +1,194 @@
+import { test, describe } from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import {
+  buildDiscoveryArticlesIndex,
+  normalizeDiscoveryProvider,
+} from '../../scripts/lib/discovery-articles-index.mjs';
+import { SECTION_PATHS } from '../../scripts/lib/build-sitemap.mjs';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+
+const paths = SECTION_PATHS.frontaliere;
+
+function localeRows(entries = {}) {
+  return Object.fromEntries(Object.entries(entries).map(([locale, rows]) => [locale, new Map(rows)]));
+}
+
+function publishedSection(overrides = {}) {
+  const registry = [
+    { id: 'trend-article', date: '2026-11-01' },
+    { id: 'reddit-article', date: '2026-10-31' },
+    { id: 'news-only-article', date: '2026-10-30' },
+    { id: 'no-attribution', date: '2026-10-29' },
+    { id: 'fallback-locale', date: '2026-10-28' },
+    { id: 'missing-excerpt', date: '2026-10-27' },
+  ];
+  const slugs = Object.fromEntries(registry.map(({ id }) => [id, {
+    it: `${id}-it`,
+    en: `${id}-en`,
+    de: `${id}-de`,
+    fr: `${id}-fr`,
+  }]));
+  const italian = new Map(registry.map(({ id }) => [id, { title: `Titolo ${id}`, excerpt: `Sintesi ${id}` }]));
+  const english = new Map(registry.map(({ id }) => [id, { title: `Title ${id}`, excerpt: `Summary ${id}` }]));
+  const german = new Map(registry.map(({ id }) => [id, { title: `Titel ${id}`, excerpt: `Zusammenfassung ${id}` }]));
+  const french = new Map(registry.map(({ id }) => [id, { title: `Titre ${id}`, excerpt: `Résumé ${id}` }]));
+  french.set('fallback-locale', {
+    title: 'Titre fallback-locale avec\ncaractère de contrôle',
+    excerpt: 'Résumé fallback-locale',
+  });
+  french.set('missing-excerpt', { title: 'Titre sans résumé' });
+
+  return {
+    name: 'frontaliere',
+    registry,
+    paths,
+    slugMap: slugs,
+    fallbackReasons: {
+      'fallback-locale': { de: 'provisional fallback' },
+    },
+    metaByLocale: { it: italian, en: english, de: german, fr: french },
+    sidecars: new Map([
+      ['trend-article', {
+        id: 'trend-article',
+        publishedAt: '2026-11-01T09:15:00.000Z',
+        _discovery_attribution: {
+          candidateId: 'trend-topic-1',
+          signalProvider: 'google-trends',
+          signalHeadline: 'private trend query',
+          evidenceUrl: 'https://publisher.example/private-story',
+        },
+      }],
+      ['reddit-article', {
+        id: 'reddit-article',
+        publishedAt: '2026-10-31T09:15:00.000Z',
+        _topic_candidate_attribution: {
+          candidateId: 'a1b2c3d4',
+          providers: ['reddit', 'google-news-rss'],
+          redditPermalink: 'https://www.reddit.com/r/example/comments/abc123/private-title/',
+          score: 0.91,
+        },
+      }],
+      ['news-only-article', {
+        id: 'news-only-article',
+        publishedAt: '2026-10-30T09:15:00.000Z',
+        _topic_candidate_attribution: {
+          candidateId: 'abcd1234',
+          providers: ['google-news-rss'],
+        },
+      }],
+      ['fallback-locale', {
+        id: 'fallback-locale',
+        publishedAt: '2026-10-28T09:15:00.000Z',
+        _discovery_attribution: { candidateId: 'trend-topic-2', signalProvider: 'google-trends' },
+      }],
+      ['missing-excerpt', {
+        id: 'missing-excerpt',
+        publishedAt: '2026-10-27T09:15:00.000Z',
+        _discovery_attribution: { candidateId: 'trend-topic-3', signalProvider: 'google-trends' },
+      }],
+    ]),
+    ...overrides,
+  };
+}
+
+describe('discovery article index projection', () => {
+  test('includes only published, attributed articles with genuinely localized fields', () => {
+    const payload = buildDiscoveryArticlesIndex({
+      commit: 'a'.repeat(40),
+      generatedAt: '2026-11-05T10:00:00.000Z',
+      sections: [publishedSection()],
+    });
+
+    assert.equal(payload.schema, 1);
+    assert.equal(payload.commit, 'a'.repeat(40));
+    assert.equal(payload.count, 5);
+    assert.deepEqual(payload.articles.map(({ id }) => id), [
+      'trend-article',
+      'reddit-article',
+      'news-only-article',
+      'fallback-locale',
+      'missing-excerpt',
+    ]);
+
+    const trend = payload.articles[0];
+    assert.equal(trend.provider, 'google_trends');
+    assert.deepEqual(Object.keys(trend).sort(), ['excerpt', 'id', 'provider', 'publishedAt', 'title', 'url']);
+    assert.deepEqual(Object.keys(trend.title), ['it', 'en', 'de', 'fr']);
+    assert.deepEqual(Object.keys(trend.excerpt), ['it', 'en', 'de', 'fr']);
+    assert.deepEqual(Object.keys(trend.url), ['it', 'en', 'de', 'fr']);
+    assert.equal(trend.url.it, 'https://frontaliereticino.ch/articoli-frontaliere/trend-article-it/');
+    assert.equal(payload.articles[1].provider, 'reddit');
+    assert.equal(payload.articles[2].provider, 'other');
+    for (const field of ['title', 'excerpt', 'url']) {
+      assert.deepEqual(Object.keys(payload.articles[3][field]), ['it', 'en']);
+    }
+    const missingExcerpt = payload.articles[4];
+    for (const field of ['title', 'excerpt', 'url']) {
+      assert.deepEqual(Object.keys(missingExcerpt[field]), ['it', 'en', 'de']);
+    }
+
+    const serialized = JSON.stringify(payload);
+    assert.doesNotMatch(serialized, /private trend query|publisher\.example|reddit\.com|private-title|0\.91/);
+  });
+
+  test('requires the sidecar to belong to an article in the published registry', () => {
+    const section = publishedSection();
+    section.sidecars.set('not-published', {
+      id: 'not-published',
+      publishedAt: '2026-11-04T09:15:00.000Z',
+      _discovery_attribution: { candidateId: 'trend-topic-4', signalProvider: 'google-trends' },
+    });
+    const payload = buildDiscoveryArticlesIndex({
+      commit: 'b'.repeat(40),
+      generatedAt: '2026-11-05T10:00:00.000Z',
+      sections: [section],
+    });
+    assert.equal(payload.articles.some(({ id }) => id === 'not-published'), false);
+  });
+
+  test('normalizes known attribution and rejects malformed or unknown providers', () => {
+    assert.equal(normalizeDiscoveryProvider({
+      _discovery_attribution: { candidateId: 'trend-1', signalProvider: 'google-trends' },
+    }), 'google_trends');
+    assert.equal(normalizeDiscoveryProvider({
+      _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['reddit'] },
+    }), 'reddit');
+    assert.equal(normalizeDiscoveryProvider({
+      _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['google-news-rss'] },
+    }), 'other');
+    assert.equal(normalizeDiscoveryProvider({
+      _topic_candidate_attribution: { candidateId: 'bad-id', providers: ['reddit'] },
+    }), null);
+    assert.equal(normalizeDiscoveryProvider({
+      _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['unknown'] },
+    }), null);
+    assert.equal(normalizeDiscoveryProvider(null), null);
+  });
+
+  test('emits a valid empty index when no sidecar is eligible', () => {
+    const section = publishedSection({ sidecars: new Map() });
+    const payload = buildDiscoveryArticlesIndex({
+      commit: 'c'.repeat(40),
+      generatedAt: '2026-11-05T10:00:00.000Z',
+      sections: [section],
+    });
+    assert.deepEqual(payload, {
+      schema: 1,
+      commit: 'c'.repeat(40),
+      generatedAt: '2026-11-05T10:00:00.000Z',
+      count: 0,
+      articles: [],
+    });
+  });
+
+  test('publisher watches sidecars and the projection helper', () => {
+    const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
+    assert.match(workflow, /'scripts\/lib\/discovery-articles-index\.mjs'/);
+    assert.match(workflow, /'data\/blog-articles\/\*\*'/);
+    assert.match(workflow, /'data\/swiss-articles\/\*\*'/);
+  });
+});
