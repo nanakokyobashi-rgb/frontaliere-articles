@@ -186,12 +186,38 @@ const PROVENANCE_HISTORY_CAP = parsePositiveNum(process.env.PROVENANCE_HISTORY_C
   tool: 'loop-drift-check',
   integer: true,
 });
-// Un walk storico puo' contenere decine di revisioni. Le letture dei blob
-// sono indipendenti, ma il ciclo deve restare bounded: una Promise.all su
-// tutta la storia trasformerebbe un refuso o una storia lunga in un burst
-// incontrollato verso GitHub. Il batch conserva l'ordine del verdetto e paga
-// al massimo una finestra oltre il primo match.
+// Le letture cross-repo sono indipendenti, ma il ciclo deve restare bounded:
+// una Promise.all su tutto il manifest trasformerebbe una passata ordinaria in
+// un burst incontrollato verso GitHub. Il limite vale sia per le entry del
+// report sia per le finestre della storia; i risultati vengono ricomposti
+// nell'ordine del manifest, così la concorrenza non rende il report flakey.
+const DRIFT_ENTRY_CONCURRENCY = 8;
 const PROVENANCE_FETCH_CONCURRENCY = 8;
+const PROVENANCE_ENTRY_CONCURRENCY = 4;
+
+/**
+ * Esegue una mappa asincrona con un numero bounded di worker e conserva
+ * l'ordine dell'input. Un checker cross-repo non deve scegliere fra il timeout
+ * della serializzazione e il rate-limit di una Promise.all senza limite.
+ */
+async function mapWithConcurrency(items, concurrency, worker) {
+  const output = new Array(items.length);
+  const limit = Number.isFinite(concurrency) ? Math.max(1, Math.floor(concurrency)) : 1;
+  let next = 0;
+
+  async function run() {
+    while (true) {
+      const index = next;
+      next += 1;
+      if (index >= items.length) return;
+      output[index] = await worker(items[index], index);
+    }
+  }
+
+  const workers = Array.from({ length: Math.min(limit, items.length) }, () => run());
+  await Promise.all(workers);
+  return output;
+}
 // Giorni dopo i quali un gemello `identical` fermo in `site-ahead` smette di
 // essere latenza e diventa un `stranded-twin` (issue #303). Vedi
 // `strandedVerdict` per la calibrazione del default.
@@ -692,6 +718,20 @@ async function siteFile(rel, ref = SITE_REF) {
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`GET ${rel} → HTTP ${res.status}`);
   return Buffer.from(await res.arrayBuffer());
+}
+
+/** Read the current bytes and hashes for one manifest entry. */
+async function readEntryNow(entry, { committed = false } = {}) {
+  const sitePath = entry.sitePath || entry.path;
+  const siteBytes = entry.mode === 'corpus-only' ? null : await siteFile(sitePath);
+  return {
+    siteBytes,
+    now: {
+      site: siteBytes === null ? null : sha256(siteBytes),
+      siteBlob: siteBytes === null ? null : gitBlobSha(siteBytes),
+      corpus: localHash(entry.path, { committed }),
+    },
+  };
 }
 
 /**
@@ -2103,6 +2143,56 @@ async function main() {
     return fresh;
   };
 
+  // La passata normale legge lo stesso ref del sito per molte entry. Le
+  // richieste sono indipendenti, quindi serializzarle lascia il job esposto a
+  // un timeout anche quando ogni singola risposta e' sana. `--init` resta
+  // seriale: aggiorna un inventario condiviso e deve mantenere l'ordine degli
+  // atti di attestazione.
+  const currentReads = new Map();
+  if (!INIT) {
+    const entries = manifest.files;
+    const observations = await mapWithConcurrency(entries, DRIFT_ENTRY_CONCURRENCY, async (entry) => {
+      try {
+        return { ok: true, ...(await readEntryNow(entry)) };
+      } catch (error) {
+        return { ok: false, error };
+      }
+    });
+    entries.forEach((entry, index) => currentReads.set(entry.path, observations[index]));
+  }
+
+  // La provenienza dipende solo dall'entry e dai suoi hash correnti, non dal
+  // verdetto sul drift. Prepararla con un secondo pool bounded evita che le
+  // 248 entry mosse dalla baseline paghino il walk storico una alla volta,
+  // mantenendo comunque il limite interno di `repoHistoryMatch()`.
+  const provenanceReads = new Map();
+  if (!INIT && !NO_PROVENANCE) {
+    const entries = manifest.files.filter((entry) => currentReads.get(entry.path)?.ok);
+    const observations = await mapWithConcurrency(entries, PROVENANCE_ENTRY_CONCURRENCY, async (entry) => {
+      if (provenancePass.rateLimited) {
+        return {
+          ghosts: [],
+          detail: '',
+          rateLimited: true,
+          rateLimitDetail: provenancePass.detail,
+          siteBaselineLastSeenAt: null,
+        };
+      }
+      try {
+        return await checkBaselineProvenance(entry, currentReads.get(entry.path).now, provenancePass);
+      } catch (error) {
+        return {
+          ghosts: [],
+          detail: `verifica di provenienza fallita: ${String(error.message || error).slice(0, 120)}`,
+          rateLimited: false,
+          rateLimitDetail: '',
+          siteBaselineLastSeenAt: null,
+        };
+      }
+    });
+    entries.forEach((entry, index) => provenanceReads.set(entry.path, observations[index]));
+  }
+
   for (const entry of manifest.files) {
     const rel = entry.path;
     const sitePath = entry.sitePath || rel;
@@ -2115,22 +2205,28 @@ async function main() {
 
     let now;
     // I BYTE, non solo l'hash: su `--init` servono per attestare la baseline
-    // contro l'inventario dell'albero del sito (`initAttestVerdict`).
+    // contro l'inventario dell'albero del sito (`initAttestVerdict`). Nella
+    // passata normale la lettura e' gia' stata eseguita dal pool bounded sopra.
     let siteBytes = null;
-    try {
-      siteBytes = entry.mode === 'corpus-only' ? null : await siteFile(sitePath);
-      now = {
-        site: siteBytes === null ? null : sha256(siteBytes),
-        siteBlob: siteBytes === null ? null : gitBlobSha(siteBytes),
-        corpus: localHash(rel, { committed: INIT }),
-      };
-    } catch (e) {
+    let observation;
+    if (INIT) {
+      try {
+        observation = await readEntryNow(entry, { committed: true });
+      } catch (e) {
+        observation = { error: e };
+      }
+    } else {
+      observation = currentReads.get(rel);
+    }
+    if (observation?.error || !observation?.now) {
+      const e = observation?.error || new Error(`lettura dell'entry ${rel} non disponibile`);
       // Una fetch fallita non deve rendere il report inutile: si segnala il
       // file come non verificato e si va avanti.
       results.push({ path: rel, mode: entry.mode, state: 'check-failed', actionable: false, headline: `verifica fallita: ${String(e.message).slice(0, 80)}`, detail: '' });
       if (INIT) initFailed.push({ path: rel, reason: String(e.message || e).slice(0, 120) });
       continue;
     }
+    ({ siteBytes, now } = observation);
 
     if (INIT) {
       // Il verdetto va calcolato PRIMA della riscrittura: dopo, `now` e' anche
@@ -2260,7 +2356,13 @@ async function main() {
     // fantasma, e qui la si scopre a prescindere dal `mode`.
     let provenance = { ghosts: [], detail: '', rateLimited: false, rateLimitDetail: '', siteBaselineLastSeenAt: null };
     if (!NO_PROVENANCE) {
-      if (provenancePass.rateLimited) {
+      if (!INIT) {
+        provenance = provenanceReads.get(rel) || {
+          ...provenance,
+          rateLimited: provenancePass.rateLimited,
+          rateLimitDetail: provenancePass.detail,
+        };
+      } else if (provenancePass.rateLimited) {
         provenance = { ...provenance, rateLimited: true, rateLimitDetail: provenancePass.detail };
       } else {
         try {
@@ -2601,5 +2703,5 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, sitePathBlobInventory, initInventoryVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, resolveRelativeImport, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance, siteReusablePins, reusablePinVerdict, reusablePinResults, localWorkflowSources, REUSABLE_PIN_STATE, identicalSectionsVerdict, withIdenticalSections, SECTION_DRIFT_STATE };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, sitePathBlobInventory, initInventoryVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, resolveRelativeImport, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance, siteReusablePins, reusablePinVerdict, reusablePinResults, localWorkflowSources, REUSABLE_PIN_STATE, identicalSectionsVerdict, withIdenticalSections, SECTION_DRIFT_STATE, mapWithConcurrency };
 export { countCheckFailedPins, noActionableSummary };
