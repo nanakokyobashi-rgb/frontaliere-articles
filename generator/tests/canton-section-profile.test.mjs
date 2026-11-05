@@ -456,7 +456,7 @@ test('create-article: i rami cantonali leggono il profilo, e le storiche restano
   assert.match(CREATE_ARTICLE, /else if \(!newsSuccess && !candidateSuccess && !SECTION_PROFILE\.evergreenPool\) \{/);
   assert.match(CREATE_ARTICLE, /const recoveryEligible = !forceEvergreen\s+&& !recoveryDisabled\s+&& Boolean\(SECTION_PROFILE\.discoveryPool\)\s+&& Boolean\(evidenceForDiscovery\);/);
   assert.match(CREATE_ARTICLE, /const forceRecoveryDiscovery = recoveryDecision\.shouldForceDiscovery && recoveryEligible;/);
-  assert.match(CREATE_ARTICLE, /const slotKind = forceEvergreen \|\| !SECTION_PROFILE\.discoveryPool\s+\? 'proven'\s+: forceRecoveryDiscovery\s+\? 'discovery'\s+: slotDecision\.slotKind;/);
+  assert.match(CREATE_ARTICLE, /const slotKind = forceEvergreen \|\| !SECTION_PROFILE\.discoveryPool \|\| !evidenceForDiscovery\s+\? 'proven'\s+: forceRecoveryDiscovery\s+\? 'discovery'\s+: slotDecision\.slotKind;/);
   assert.match(CREATE_ARTICLE, /if \(SECTION_PROFILE\.demandRanker && \(_demandVocabulary/);
 });
 
