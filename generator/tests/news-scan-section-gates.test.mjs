@@ -53,6 +53,7 @@ import { hasDomainAnchor } from '../scripts/lib/discovery/domainAnchor.mjs';
 import { countLocalNewsHits, isLocalNews } from '../scripts/lib/local-news.mjs';
 import { isOffTopicHeadline } from '../scripts/lib/article-relevance-gate.mjs';
 import { buildCantonProfile, cantonPromptLines } from '../scripts/lib/canton-section-profile.mjs';
+import { ARTICLE_SIGNAL_LOG_HELPERS } from './lib/article-signal-log-harness.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -117,6 +118,7 @@ function loadGates(section, cantonProfile = null) {
     'isLocalNews',
     'countLocalNewsHits',
     'isOffTopicHeadline',
+    'safeTopicSelectionLogLabel',
     `${LEXICON_SRC}\n${FILTER_SRC}\n${PRIORITIZE_SRC}\nreturn {
        TOPICAL_KEYWORDS, SVIZZERA_TOPICAL_KEYWORDS, FRONTALIERI_KEYWORDS,
        FRONTALIERE_ADMISSION_KEYWORDS, FRONTALIERE_EVENTS_CULTURE_KEYWORDS,
@@ -136,6 +138,7 @@ function loadGates(section, cantonProfile = null) {
     isLocalNews,
     countLocalNewsHits,
     isOffTopicHeadline,
+    ARTICLE_SIGNAL_LOG_HELPERS.safeTopicSelectionLogLabel,
   );
   return { ...api, logs, runReport };
 }

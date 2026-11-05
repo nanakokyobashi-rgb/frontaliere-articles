@@ -53,6 +53,7 @@ import { fileURLToPath } from 'node:url';
 
 import { runFactualityGates, formatIssues, detectTruncation } from '../scripts/lib/article-factuality-gates.mjs';
 import { markBodyTranslationPending, isBodyTranslationPending } from '../scripts/lib/free-mt-recovery.mjs';
+import { ARTICLE_SIGNAL_LOG_HELPERS } from './lib/article-signal-log-harness.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -110,6 +111,7 @@ function makeGate() {
     'runFactualityGates',
     'formatIssues',
     'isBodyTranslationPending',
+    'safeSignalDiagnosticTextForLog',
     'console',
     `${SECTIONS_SRC}\n${ADMISSION_CONSTANTS_SRC}\n${ADMISSION_SRC}\n${GATE_SRC}\nreturn assertTranslationsPassFactualityGates;`,
   );
@@ -118,6 +120,7 @@ function makeGate() {
     runFactualityGates,
     formatIssues,
     isBodyTranslationPending,
+    ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog,
     { error: () => {} },
   );
 }

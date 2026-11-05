@@ -129,7 +129,7 @@ test('un errore senza proprieta\' non fa esplodere la guardia (optional chaining
 // ── Strato 2: posizione (l'unico che difende la fix) ───────────────────────
 
 test('la guardia sta nel catch del ciclo dei MODELLI, prima del continue generico', () => {
-  const catchLog = SRC.indexOf('console.error(`  ⚠️  Tentativo ${attempt} fallito: ${e.message}`);');
+  const catchLog = SRC.indexOf('console.error(`  ⚠️  Tentativo ${attempt} fallito: ${safeSignalDiagnosticTextForLog(e.message, sourceContext)}`);');
   assert.notEqual(catchLog, -1, 'log del catch del ciclo interno assente — il sorgente e\' cambiato sotto il test');
 
   const guard = SRC.indexOf('      if (e?.topicGateAbort === true', catchLog);
@@ -149,7 +149,7 @@ test('la guardia precede anche il blocco del budget del prompt', () => {
   // Non e' estetica: `lastPromptTokenBudget` e' monotono (Math.min) e una
   // volta stretto non si riallarga. Un abort non dice NIENTE sulla dimensione
   // del prompt, quindi non deve poter contribuire a quel minimo.
-  const catchLog = SRC.indexOf('console.error(`  ⚠️  Tentativo ${attempt} fallito: ${e.message}`);');
+  const catchLog = SRC.indexOf('console.error(`  ⚠️  Tentativo ${attempt} fallito: ${safeSignalDiagnosticTextForLog(e.message, sourceContext)}`);');
   const guard = SRC.indexOf('      if (e?.topicGateAbort === true', catchLog);
   const budget = SRC.indexOf('const budgetDettato = Number(e?.retryRequestTokenBudget)', catchLog);
   assert.notEqual(budget, -1, 'blocco del budget assente');

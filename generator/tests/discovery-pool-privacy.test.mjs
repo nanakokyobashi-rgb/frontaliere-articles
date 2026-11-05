@@ -10,6 +10,7 @@ import {
 import { fetchNewsRssDiscoveryCandidates } from '../scripts/lib/discovery/sources/googleNewsRssSource.mjs';
 import { fetchSuggestDiscoveryCandidates } from '../scripts/lib/discovery/sources/googleSuggestSource.mjs';
 import { fetchTrendsDiscoveryCandidates } from '../scripts/lib/discovery/sources/googleTrendsSource.mjs';
+import { ARTICLE_SIGNAL_LOG_HELPERS } from './lib/article-signal-log-harness.mjs';
 
 const SENTINEL = 'private-trends-topic-sentinel';
 const FREE_FORM_ERROR = `provider failure echoed ${SENTINEL}`;
@@ -70,6 +71,22 @@ test('create-article discovery catches log only a safe error type', () => {
   assert.match(CREATE_ARTICLE, /safeSignalTextForLog\(check\.existingId, h, '\[signal existing article id redacted\]'\)/);
   assert.match(THUMBNAIL_GENERATOR, /GITHUB_ACTIONS === 'true'[\s\S]*?thumbnail failed; source details withheld/);
   assert.doesNotMatch(THUMBNAIL_GENERATOR, /::error file=\$\{shown\}/);
+});
+
+test('generator log helpers redact signal headlines and provider diagnostics', () => {
+  const candidate = { headline: SENTINEL, _discoveryCandidate: { source: 'trends' } };
+  assert.equal(
+    ARTICLE_SIGNAL_LOG_HELPERS.safeTopicSelectionLogLabel(candidate),
+    '[signal topic redacted]',
+  );
+  assert.equal(
+    ARTICLE_SIGNAL_LOG_HELPERS.safeSignalTextForLog(SENTINEL, candidate, '[signal topic redacted]'),
+    '[signal topic redacted]',
+  );
+  assert.equal(
+    ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog(FREE_FORM_ERROR, candidate),
+    '[signal-related diagnostic redacted]',
+  );
 });
 
 test('trend-seeded evidence-search failures do not log trend queries or free-form errors', async () => {

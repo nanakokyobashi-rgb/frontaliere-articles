@@ -84,6 +84,7 @@ import {
   META_ONLY_FIELDS,
 } from '../scripts/lib/body2-payload-verdict.mjs';
 import { describePayloadRejection } from '../scripts/lib/llm-payload-diagnostics.mjs';
+import { ARTICLE_SIGNAL_LOG_HELPERS } from './lib/article-signal-log-harness.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -170,6 +171,7 @@ const CALL_LLM_DEPS = [
   'classifyBody2Payload', 'resolveBody2Validation', 'describePayloadRejection',
   'describeJsonParseError', 'describeRawForDiagnostics', 'recordModelContentFailure',
   'recordModelContentSuccess', 'wallBudgetExceeded', 'console',
+  'safeSignalDiagnosticTextForLog',
 ];
 
 /**
@@ -211,6 +213,7 @@ function makeCallLLM({ risposte, modello = 'gpt-4.1' }) {
     recordModelContentSuccess: (m) => punteggi.success.push(m),
     wallBudgetExceeded: () => false,
     console: { error: (...a) => righe.push(a.join(' ')) },
+    ...ARTICLE_SIGNAL_LOG_HELPERS,
   });
   return { callLLM, provider, righe, punteggi };
 }
