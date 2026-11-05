@@ -3,6 +3,7 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
+import { brotliCompressSync, gzipSync } from 'node:zlib';
 
 import {
   EMPTY_TOPIC_CANDIDATES_FEED,
@@ -43,6 +44,21 @@ function responseFor(payload, headers = {}) {
     status: 200,
     headers: { 'content-type': 'application/json', ...headers },
   });
+}
+
+function streamingResponse(reader, headers = {}) {
+  const normalizedHeaders = new Map(Object.entries({
+    'content-type': 'application/json',
+    ...headers,
+  }).map(([name, value]) => [name.toLowerCase(), String(value)]));
+  return {
+    ok: true,
+    status: 200,
+    redirected: false,
+    url: TOPIC_CANDIDATES_FEED_URL,
+    headers: { get: (name) => normalizedHeaders.get(String(name).toLowerCase()) ?? null },
+    body: { getReader: () => reader },
+  };
 }
 
 test('validates and projects only the schema v1 topic-feed fields', () => {
@@ -214,6 +230,46 @@ test('fetch uses a five-minute versioned HTTPS CDN endpoint and bounds a success
   assert.notEqual(nextBucketUrl, requestedUrl);
 });
 
+test('compares identity lengths and skips wire-length equality for gzip and br bodies', async () => {
+  const body = JSON.stringify(makeFeed());
+  const decodedBytes = Buffer.byteLength(body, 'utf8');
+  const identity = await fetchTopicCandidatesFeed({
+    nowMs: NOW_MS,
+    redditDataApiApproved: true,
+    fetchImpl: async () => new Response(body, {
+      status: 200,
+      headers: {
+        'content-type': 'application/json',
+        'content-encoding': 'identity',
+        'content-length': String(decodedBytes),
+      },
+    }),
+  });
+  assert.equal(identity.ok, true);
+  assert.equal(identity.feed.candidates.length, 1);
+
+  for (const [encoding, compressed] of [
+    ['gzip', gzipSync(body)],
+    ['br', brotliCompressSync(body)],
+  ]) {
+    assert.ok(compressed.byteLength < decodedBytes, `${encoding} fixture must be smaller on the wire`);
+    const result = await fetchTopicCandidatesFeed({
+      nowMs: NOW_MS,
+      redditDataApiApproved: true,
+      fetchImpl: async () => new Response(body, {
+        status: 200,
+        headers: {
+          'content-type': 'application/json',
+          'content-encoding': encoding,
+          'content-length': String(compressed.byteLength),
+        },
+      }),
+    });
+    assert.equal(result.ok, true, encoding);
+    assert.equal(result.feed.candidates.length, 1, encoding);
+  }
+});
+
 test('404, malformed JSON, stale payload, and oversized bodies degrade to an empty pool', async () => {
   const cases = [
     [async () => new Response('missing', { status: 404 }), 'http_404'],
@@ -244,6 +300,58 @@ test('404, malformed JSON, stale payload, and oversized bodies degrade to an emp
   assert.equal(aging.ok, true);
   assert.equal(buildTopicCandidatesFeedReport(aging).status, 'aging');
   assert.equal(buildTopicCandidatesFeedReport(aging).feedAgeHours, 168);
+});
+
+test('rejects a truncated CDN body before writing candidate data', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'topic-feed-truncated-'));
+  try {
+    const outputPath = join(root, 'feed.json');
+    const body = JSON.stringify(makeFeed());
+    const result = await writeTopicCandidatesFeed(outputPath, {
+      nowMs: NOW_MS,
+      redditDataApiApproved: true,
+      fetchImpl: async () => new Response(body, {
+        status: 200,
+        headers: {
+          'content-type': 'application/json',
+          'content-encoding': 'identity',
+          'content-length': String(Buffer.byteLength(body, 'utf8') + 1),
+        },
+      }),
+    });
+
+    assert.equal(result.ok, false);
+    assert.equal(result.reason, 'response_truncated');
+    assert.deepEqual(JSON.parse(readFileSync(outputPath, 'utf8')), { ...EMPTY_TOPIC_CANDIDATES_FEED });
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('rejects a stream chunk without byteLength and cancels the malformed body', async () => {
+  let cancelled = false;
+  let released = false;
+  const reader = {
+    async read() {
+      return { done: false, value: {} };
+    },
+    async cancel() {
+      cancelled = true;
+    },
+    releaseLock() {
+      released = true;
+    },
+  };
+  const result = await fetchTopicCandidatesFeed({
+    nowMs: NOW_MS,
+    fetchImpl: async () => streamingResponse(reader),
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.reason, 'response_body_invalid');
+  assert.equal(cancelled, true);
+  assert.equal(released, true);
+  assert.deepEqual(result.feed, { ...EMPTY_TOPIC_CANDIDATES_FEED });
 });
 
 test('writes an empty feed and a privacy-safe report when the CDN is unavailable', async () => {

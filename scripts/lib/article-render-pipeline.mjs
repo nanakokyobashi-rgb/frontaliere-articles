@@ -70,12 +70,12 @@ function sourceRootForRender(rootDir) {
 
 function prepareFreshnessOverlay({ rootDir, section, ids, logPrefix }) {
   const articleIds = [...new Set((Array.isArray(ids) ? ids : []).map((id) => String(id)))];
-  if (articleIds.length === 0) return { changed: [], restore: () => {} };
+  if (articleIds.length === 0) return { changed: [], registryPath: null, original: null };
 
   const sourceRoot = sourceRootForRender(rootDir);
   const surfaces = sectionSourceSurfaces(section);
   const registryPath = path.join(sourceRoot, surfaces.registryFile);
-  if (!fs.existsSync(registryPath)) return { changed: [], restore: () => {} };
+  if (!fs.existsSync(registryPath)) return { changed: [], registryPath: null, original: null };
   const original = fs.readFileSync(registryPath, 'utf8');
   const derived = deriveRegistryUpdatedAtSources({
     root: sourceRoot,
@@ -84,14 +84,35 @@ function prepareFreshnessOverlay({ rootDir, section, ids, logPrefix }) {
   });
   const next = derived.sources[section];
   if (typeof next !== 'string' || next === original || derived.changed.length === 0) {
-    return { changed: [], restore: () => {} };
+    return { changed: [], registryPath: null, original: null };
   }
   fs.writeFileSync(registryPath, next, 'utf8');
   console.log(`[${logPrefix}] freshness overlay: updatedAt derivato per ${derived.changed.length} articolo/i`);
   return {
     changed: derived.changed,
-    restore: () => fs.writeFileSync(registryPath, original, 'utf8'),
+    registryPath,
+    original,
   };
+}
+
+/** Restore the source overlay while preserving a render failure as the primary error. */
+export function restoreRegistrySource({ registryPath, original, primaryError = null, logger = console } = {}) {
+  if (!registryPath || typeof original !== 'string') return;
+  try {
+    fs.writeFileSync(registryPath, original, 'utf8');
+  } catch (restoreError) {
+    if (!primaryError) throw restoreError;
+    try {
+      primaryError.restoreError = restoreError;
+    } catch {
+      // A frozen primary error still remains the error thrown by the render.
+    }
+    try {
+      logger.error(`[article-render-pipeline] registry restore failed: ${restoreError.message || restoreError}`);
+    } catch {
+      // Diagnostics must not replace the primary render error either.
+    }
+  }
 }
 
 /**
@@ -110,6 +131,7 @@ function prepareFreshnessOverlay({ rootDir, section, ids, logPrefix }) {
  */
 export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', persistentReleasedArticles = [], beforeOffload, probeOnlineImage }) {
   const freshnessOverlay = prepareFreshnessOverlay({ rootDir, section, ids, logPrefix });
+  let primaryError = null;
   try {
     return await renderSectionArticlePipelineBody({
       rootDir,
@@ -121,8 +143,11 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
       beforeOffload,
       probeOnlineImage,
     });
+  } catch (error) {
+    primaryError = error;
+    throw error;
   } finally {
-    freshnessOverlay.restore();
+    restoreRegistrySource({ ...freshnessOverlay, primaryError });
   }
 }
 
