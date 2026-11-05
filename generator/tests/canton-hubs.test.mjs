@@ -1429,6 +1429,7 @@ test('il conteggio della soglia usa solo la lista news visibile', () => {
     dataBlocks: [],
     curatedArticles: [{ title: 'Tema' }],
     latestCantonArticles: [{ title: 'Fallback ignorato ignorato' }],
+    links: [],
   };
   assert.equal(countCantonHubContentWords(withThematic), 3);
   assert.equal(countCantonHubContentWords({ ...withThematic, curatedArticles: [] }), 5);
@@ -1454,6 +1455,8 @@ test('il producer rifiuta cio\' che il renderer rifiuterebbe o scarterebbe in si
   bad((i) => { i.links[0].url = '/senza-slash'; }, /senza slash finale/);
   bad((i) => { i.links.push({ ...i.links[0] }); }, /link duplicato/);
   bad((i) => { i.dataBlocks[0].id = 'Non Valido'; }, /id non valido/);
+  bad((i) => { i.dataBlocks[0].items = { length: 1 }; }, /dataBlocks\[0\]\.items deve essere un array/);
+  bad((i) => { i.dataBlocks[0].items = [null]; }, /dataBlocks\[0\]\.items\[0\] deve essere un oggetto/);
   bad((i) => { i.dataBlocks[0].items = []; }, /blocco senza righe/);
   bad((i) => { i.dataBlocks[0].items[0].date = 'ieri'; }, /data non valida/);
   bad((i) => { i.intro = 'Troppo corta.'; }, /contenuto insufficiente|intro evergreen di/);

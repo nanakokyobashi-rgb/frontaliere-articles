@@ -20,7 +20,7 @@ import '../../../../host/cantonSectionsBootstrap.mjs';
 import { createHash } from 'node:crypto';
 import { ARTICLE_SECTION_CORE_ALL } from '../../../../engine/shared/articleSectionCore.mjs';
 import { CANTON_HUB_TOPIC_KEYS } from '../../../../engine/shared/cantonArticleSectionCore.generated.mjs';
-import { CANTON_HUB_MIN_CONTENT_WORDS, countCantonHubContentWords, countCantonHubIntroWords } from '../../../../scripts/lib/canton-hub-content.mjs';
+import { CANTON_HUB_MIN_CONTENT_WORDS, countCantonHubContentWords, countCantonHubIntroWords, normalizeCantonHubInput } from '../../../../scripts/lib/canton-hub-content.mjs';
 import { BLOCK_THRESHOLDS, DAY_MS, dateMs, instantMs } from './blocks-common.mjs';
 import { shapeFuelBlock } from './blocks-fuel.mjs';
 import { EVENTS_BLOCK_ID, shapeEventsBlock } from './blocks-events.mjs';
@@ -131,6 +131,7 @@ const text = (v, what) => {
  */
 export function validateHubInput(input) {
   const at = `hub ${input?.canton}/${input?.topic}/${input?.locale}`;
+  input = normalizeCantonHubInput(input, at);
   checkKeys(input, ['canton', 'topic', 'locale', 'intro', 'keyFacts', 'dataBlocks', 'curatedArticles', 'latestCantonArticles', 'links', 'updatedAt'], at);
   if (!HUB_LOCALES.includes(input.locale)) throw new Error(`${at}: locale non supportata`);
   if (!CANTON_HUB_TOPIC_KEYS.includes(input.topic)) throw new Error(`${at}: tema sconosciuto`);
@@ -138,10 +139,6 @@ export function validateHubInput(input) {
   checkDate(input.updatedAt, `${at}: updatedAt`);
   const paragraphs = String(input.intro ?? '').split(/\n\s*\n/).map((p) => p.replace(/\s+/g, ' ').trim()).filter(Boolean);
   if (paragraphs.length === 0) throw new Error(`${at}: intro evergreen mancante`);
-  for (const list of ['keyFacts', 'dataBlocks', 'curatedArticles', 'latestCantonArticles', 'links']) {
-    if (!Array.isArray(input[list])) throw new Error(`${at}: ${list} non e' una lista`);
-  }
-
   const withSource = (o, what) => {
     if (o.sourceUrl !== undefined) {
       checkHref(o.sourceUrl, `${what}.sourceUrl`);

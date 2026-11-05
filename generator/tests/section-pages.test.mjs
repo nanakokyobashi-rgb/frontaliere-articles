@@ -3189,10 +3189,43 @@ test('hub: un solo posto sa dove sta il file dati; assente = hub non pubblicato'
   const legacy = hubDocument('servizi');
   for (const entry of Object.values(legacy.locales)) delete entry.latestCantonArticles;
   const legacyRoot = hubRoot({ 'content/cantons/canton-ti/hubs/servizi.json': legacy });
-  assert.equal(readCantonHubData(legacyRoot, 'canton-ti', 'servizi').it.curatedArticles.length, 0, 'i documenti pre-fallback restano leggibili durante il refresh');
+  const legacyData = readCantonHubData(legacyRoot, 'canton-ti', 'servizi');
+  assert.equal(legacyData.it.curatedArticles.length, 0, 'i documenti pre-fallback restano leggibili durante il refresh');
+  assert.deepEqual(legacyData.it.latestCantonArticles, [], 'il confine canonico completa la lista fallback opzionale');
   assert.deepEqual(cantonHubCoverage(root, 'canton-ti'), { present: ['fisco', 'eventi'], missing: ['carburanti', 'mobilita', 'pensioni', 'servizi'] });
   assert.throws(() => readCantonHubData(root, 'canton-ti', 'boh'), /sconosciuto/);
   assert.throws(() => cantonHubTopics('svizzera'), /hub tematici/);
+});
+
+test('hub: items non-array fallisce chiuso al confine dati prima del renderer', () => {
+  const doc = hubDocument('fisco');
+  doc.locales.it.dataBlocks = [{ id: 'malformato', title: 'Blocco malformato', items: { length: 1 } }];
+  const root = hubRoot({ 'content/cantons/canton-ti/hubs/fisco.json': doc });
+  try {
+    assert.throws(
+      () => readCantonHubData(root, 'canton-ti', 'fisco'),
+      /dataBlocks\[0\]\.items deve essere un array/,
+    );
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('hub: blocchi e righe null falliscono chiusi al confine dati', () => {
+  const cases = [
+    { dataBlocks: [null], message: /dataBlocks\[0\] deve essere un oggetto/ },
+    { dataBlocks: [{ id: 'malformato', title: 'Blocco malformato', items: [null] }], message: /dataBlocks\[0\]\.items\[0\] deve essere un oggetto/ },
+  ];
+  for (const { dataBlocks, message } of cases) {
+    const doc = hubDocument('fisco');
+    doc.locales.it.dataBlocks = dataBlocks;
+    const root = hubRoot({ 'content/cantons/canton-ti/hubs/fisco.json': doc });
+    try {
+      assert.throws(() => readCantonHubData(root, 'canton-ti', 'fisco'), message);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  }
 });
 
 test('hub: un file presente ma incompleto e\' un errore, non un hub in tre lingue', () => {
