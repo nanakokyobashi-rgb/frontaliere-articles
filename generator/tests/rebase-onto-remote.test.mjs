@@ -2232,7 +2232,7 @@ test('il commit di riconciliazione contatori fallito blocca il successo e ripris
       allowlist: ['--merge-counter', `${EVERGREEN_COUNTER_PATH}:count`],
       env: { ...GIT_ENV, ...shimEnv, FAIL_GIT_AMEND: '1' },
     });
-    assert.equal(code, 1, out);
+    assert.equal(code, 42, out);
     assert.match(out, /counter reconciliation failed; stage=commit category=git-amend/);
     assert.doesNotMatch(out, /private-article-path|topic-candidates-evergreen-counter/);
     assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 11, 'il dato resta nello stato prodotto dal rebase');
@@ -2320,22 +2320,23 @@ test('un rebase senza contatori toccati da upstream lascia i contatori come sono
   }
 });
 
-test('un contatore che non si sa fondere ricade su «prendi upstream», non aborta', () => {
-  // Il ripiego e' il comportamento che quota-state.json aveva prima del ramo:
-  // un contatore sbagliato di uno costa meno di un articolo perso.
+test('una spec contatore non dimostrabile blocca il push anche dopo il fallback upstream del conflitto', () => {
   const w = counterWorld();
   try {
     landUpstream(w, [[EVERGREEN_COUNTER_PATH, `${JSON.stringify({ count: 12 }, null, 2)}\n`, 'u ever']]);
+    const upstreamHeadBefore = git(w.upstream, 'rev-parse', 'main').trim();
     write(w.work, EVERGREEN_COUNTER_PATH, '{"count": "rotto"}\n');
     write(w.work, 'content/blog-body/it/articolo-ripiego.ts', 'export const r = 1\n');
     commitAll(w.work, 'Generate blog article (frontaliere)');
 
     const { code, out } = runHelper(w.work, w.upstream, ...helperArgsFromWorkflow());
-    assert.equal(code, 0, `il ripiego deve risolvere:\n${out}`);
+    assert.equal(code, 42, out);
     assert.match(out, /counter merge refused \(path redacted\)/);
-    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    assert.match(out, /counter reconciliation failed; stage=resolve category=counter-resolver/);
     assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/articolo-ripiego.ts')));
-    assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 12, 'ripiego = copia upstream');
+    assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 12, 'il tree rebased conserva il valore upstream');
+    assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'il tree rebased resta pulito dopo il rifiuto');
+    assert.equal(git(w.upstream, 'rev-parse', 'main').trim(), upstreamHeadBefore, 'nessun push avviene dopo il rifiuto');
   } finally {
     w.cleanup();
   }
