@@ -761,7 +761,10 @@ rollback_serialized_publications() {
   fi
 
   # The rollback clone is intentionally shallow: walk the commits recorded by
-  # this invocation and compare each registered parent directly. This proves
+  # this invocation and compare each raw commit parent directly. Revision
+  # walkers (`show --format=%P`) hide parents at a shallow boundary even when
+  # the commit object records them. Read only its headers, keeping all parents
+  # so a merge cannot masquerade as a single-parent batch. This proves
   # the exact base -> batch chain without asking merge-base to cross the
   # shallow boundary at remote_head.
   expected_parent="$base_commit"
@@ -775,7 +778,7 @@ rollback_serialized_publications() {
       echo "::error::serialized-push rollback could not fetch batch commit $candidate" >&2
       return 1
     fi
-    candidate_parent="$(git -C "$rollback_stage" show -s --format='%P' "$candidate" 2>/dev/null)" || {
+    candidate_parent="$(git -C "$rollback_stage" cat-file -p "$candidate" 2>/dev/null | sed -n '1,/^$/s/^parent //p')" || {
       echo "::error::refusing serialized-push rollback: batch commit $candidate is unreadable" >&2
       return 1
     }
