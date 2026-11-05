@@ -1751,6 +1751,8 @@ jobs:
           EVENT_COUNTS=$(printf '%s' "$CLASSIFICATION_JSON" | jq -c '.eventCounts // {}')
           set_review_output review_abort_diagnostic "$DIAGNOSTIC_LINE"
           set_review_output review_event_counts "$EVENT_COUNTS"
+          # Markdown backticks in these single-quoted printf formats are literal, not shell substitutions.
+          # shellcheck disable=SC2016
           {
             printf '\n### Codex review failure diagnostics (non-secret)\n\n'
             printf '| metric | value |\n|---|---:|\n'
