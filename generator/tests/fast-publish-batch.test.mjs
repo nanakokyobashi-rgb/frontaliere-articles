@@ -138,6 +138,7 @@ test('le dipendenze condivise di rendering risvegliano tutti gli articoli regist
   ]);
 
   for (const rel of [
+    'scripts/ci/fast-publish-section.mjs',
     'scripts/lib/article-render-pipeline.mjs',
     'scripts/lib/content-updated-at.mjs',
   ]) {
