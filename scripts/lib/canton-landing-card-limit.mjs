@@ -33,7 +33,11 @@ function skipQuotedLiteral(source, start, quote) {
 
 const REGEX_PREFIX_KEYWORDS = new Set([
   'await',
+  'break',
   'case',
+  'continue',
+  'debugger',
+  'default',
   'delete',
   'do',
   'else',
