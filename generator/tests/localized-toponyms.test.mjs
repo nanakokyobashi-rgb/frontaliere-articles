@@ -7,9 +7,12 @@ import { fileURLToPath } from 'node:url';
 import {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYM_FIELD_SEPARATOR,
+  LOCALIZED_TOPONYM_SOURCE_PROFILE_CACHE_LIMIT,
   LOCALIZED_TOPONYMS,
   OFFICIAL_NAME_MARKERS,
+  clearLocalizedToponymSourceProfiles,
   createLocalizedToponymSourceProfile,
+  createLocalizedToponymSourceProfileCache,
   extractArticleProjectionText,
   findArticleLocalizedToponymMismatches,
   findLocalizedToponymMismatches,
@@ -287,6 +290,39 @@ test('il profilo della sorgente riusa l analisi senza cambiare il verdetto', () 
     }),
     /sourceProfile deve appartenere allo stesso sourceText/,
   );
+});
+
+test('la cache dei profili toponimici è bounded e pulibile', () => {
+  clearLocalizedToponymSourceProfiles();
+  assert.throws(
+    () => createLocalizedToponymSourceProfileCache({ maxEntries: 0 }),
+    /maxEntries della cache toponimi deve essere un intero positivo/,
+  );
+  const cache = createLocalizedToponymSourceProfileCache({ maxEntries: 2 });
+  const otherCache = createLocalizedToponymSourceProfileCache();
+  assert.equal(otherCache.maxEntries, LOCALIZED_TOPONYM_SOURCE_PROFILE_CACHE_LIMIT);
+
+  const firstProfile = cache('prima sorgente');
+  cache('seconda sorgente');
+  cache('terza sorgente');
+  otherCache('altra sorgente');
+  assert.equal(cache.size, 2);
+  assert.notStrictEqual(cache('prima sorgente'), firstProfile, 'la voce più vecchia deve essere espulsa');
+
+  const retainedProfile = cache('terza sorgente');
+  assert.ok(clearLocalizedToponymSourceProfiles() >= 2);
+  assert.equal(cache.size, 0);
+  assert.equal(otherCache.size, 0);
+  assert.notStrictEqual(cache('terza sorgente'), retainedProfile, 'clear deve invalidare i profili retenuti');
+  clearLocalizedToponymSourceProfiles();
+});
+
+test('il repair corpus pulisce la cache prima della riscrittura', () => {
+  const source = readFileSync(path.join(ROOT, 'generator/scripts/repair-localized-toponyms.mjs'), 'utf8');
+  const cleanup = source.indexOf('clearLocalizedToponymSourceProfiles();');
+  const rewrite = source.indexOf('const rewrittenSources = new Map();');
+  assert.ok(cleanup >= 0 && cleanup < rewrite, 'la cache va pulita prima di preparare le scritture');
+  assert.match(source.slice(0, cleanup), /finally\s*\{/u);
 });
 
 test('normalizza le entità HTML prima del gate e della riparazione', () => {
