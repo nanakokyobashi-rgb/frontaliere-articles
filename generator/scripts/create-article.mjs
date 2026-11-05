@@ -11441,10 +11441,10 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
           // by main().catch, but do not propagate provider text that can echo
           // a signal-driven headline into its diagnostics.
           const stack = typeof err.stack === 'string' ? err.stack : '';
-          const stackFrames = stack
-            .split('\n')
-            .slice(1)
-            .filter((line) => /^\s*at\s/.test(line));
+          const originalStackPrefix = `${err.name || 'Error'}: ${String(err.message ?? '')}\n`;
+          const stackFrames = stack.startsWith(originalStackPrefix)
+            ? stack.slice(originalStackPrefix.length).split('\n').filter((line) => /^\s*at\s/.test(line))
+            : [];
           err.message = '[signal-related infrastructure diagnostic redacted]';
           err.stack = `${err.name || 'Error'}: ${err.message}`
             + (stackFrames.length ? `\n${stackFrames.join('\n')}` : '');

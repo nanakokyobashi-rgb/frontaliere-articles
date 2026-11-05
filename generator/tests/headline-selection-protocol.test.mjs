@@ -536,7 +536,7 @@ test('ALL_MODELS_EXHAUSTED signal-driven redige il messaggio e conserva la class
   const marker = 'private-trends-roster-error-marker';
   const RUN_REPORT = freshRunReport();
   const err = rosterExhausted({ transient: true });
-  err.message = `provider response echoed\n${marker}`;
+  err.message = `provider response echoed\n    at ${marker}`;
   err.inputCapReport = { count: 2, maxSkippedReqLimit: 8000, estimatedRequestTokens: 9000 };
   err.retryRequestTokenBudget = 8000;
   const fallback = { models: ['codex-cli/modello-di-prova'], engaged: true };
