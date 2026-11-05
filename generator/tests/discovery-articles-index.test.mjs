@@ -9,6 +9,8 @@ import {
   isSafeId,
   normalizeDiscoveryProvider,
   parseDiscoverySidecar,
+  resolveExistingDiscoverySidecarPath,
+  resolveDiscoverySidecarPath,
 } from '../../scripts/lib/discovery-articles-index.mjs';
 import { SECTION_PATHS } from '../../scripts/lib/build-sitemap.mjs';
 
@@ -213,6 +215,61 @@ describe('discovery article index projection', () => {
     assert.equal(payload.articles.some((article) => article.id === id), true);
   });
 
+  test('keeps Unicode sidecar IDs and rejects traversal or unsafe path forms', () => {
+    const sidecarRoot = path.resolve('/tmp/discovery-sidecars');
+    assert.equal(resolveDiscoverySidecarPath(sidecarRoot, 'änderung-arbeitsmarkt'), path.join(sidecarRoot, 'änderung-arbeitsmarkt.json'));
+    assert.equal(resolveDiscoverySidecarPath(sidecarRoot, 'nested/änderung'), path.join(sidecarRoot, 'nested', 'änderung.json'));
+    assert.equal(resolveDiscoverySidecarPath(sidecarRoot, 'nested/..'), path.join(sidecarRoot, 'nested', '...json'));
+    assert.equal(resolveDiscoverySidecarPath(sidecarRoot, '../outside'), null);
+    assert.equal(resolveDiscoverySidecarPath(sidecarRoot, 'nested/../outside'), null);
+    assert.equal(resolveDiscoverySidecarPath(sidecarRoot, '..\\outside'), null);
+    assert.equal(resolveDiscoverySidecarPath(sidecarRoot, 'nul\u0000byte'), null);
+  });
+
+  test('rejects sidecar symlinks that escape the repository or sidecar directory', () => {
+    const tempRoot = fs.mkdtempSync(path.join('/tmp', 'discovery-sidecar-path-'));
+    const repository = path.join(tempRoot, 'repository');
+    const sidecarRoot = path.join(repository, 'content', 'discovery-attribution');
+    const outsideRoot = path.join(tempRoot, 'outside');
+    fs.mkdirSync(sidecarRoot, { recursive: true });
+    fs.mkdirSync(outsideRoot);
+    fs.writeFileSync(path.join(outsideRoot, 'article.json'), JSON.stringify({ id: 'nested/article' }));
+    fs.symlinkSync(outsideRoot, path.join(sidecarRoot, 'nested'), 'dir');
+    fs.symlinkSync(outsideRoot, path.join(repository, 'content', 'linked-sidecars'), 'dir');
+
+    try {
+      assert.throws(
+        () => resolveExistingDiscoverySidecarPath(sidecarRoot, 'nested/article', repository),
+        /resolves outside its directory/,
+      );
+      assert.throws(
+        () => resolveExistingDiscoverySidecarPath(path.join(repository, 'content', 'linked-sidecars'), 'missing', repository),
+        /resolves outside the repository/,
+      );
+    } finally {
+      fs.rmSync(tempRoot, { recursive: true, force: true });
+    }
+  });
+
+  test('rejects nested symlink escapes even when the sidecar file is absent', () => {
+    const tempRoot = fs.mkdtempSync(path.join('/tmp', 'discovery-sidecar-missing-'));
+    const repository = path.join(tempRoot, 'repository');
+    const sidecarRoot = path.join(repository, 'content', 'discovery-attribution');
+    const outsideRoot = path.join(tempRoot, 'outside');
+    fs.mkdirSync(sidecarRoot, { recursive: true });
+    fs.mkdirSync(outsideRoot);
+    fs.symlinkSync(outsideRoot, path.join(sidecarRoot, 'nested'), 'dir');
+
+    try {
+      assert.throws(
+        () => resolveExistingDiscoverySidecarPath(sidecarRoot, 'nested/missing', repository),
+        /resolves outside its directory/,
+      );
+    } finally {
+      fs.rmSync(tempRoot, { recursive: true, force: true });
+    }
+  });
+
   test('excludes canonical shadows, retired editions, registry withdrawals and ledger rows', () => {
     const shadowed = buildDiscoveryArticleShadow({
       canonicalSlugs: ['trend-article-it'],
@@ -291,6 +348,7 @@ describe('discovery article index projection', () => {
     assert.match(builder, /canonicalOverrides:\s*section\.canonicalOverrides/);
     assert.match(builder, /retiredDailyEditions:\s*section\.retiredDailyEditions/);
     assert.match(builder, /buildDiscoveryArticleShadow\(/);
-    assert.match(builder, /isSafeId\(id\)/);
+    assert.match(builder, /resolveDiscoverySidecarPath\(sidecarDir, id\)/);
+    assert.match(builder, /resolveExistingDiscoverySidecarPath\(sidecarDir, id\)/);
   });
 });

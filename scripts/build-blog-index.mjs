@@ -100,6 +100,8 @@ import {
   buildDiscoveryArticlesIndex,
   isSafeId,
   parseDiscoverySidecar,
+  resolveExistingDiscoverySidecarPath,
+  resolveDiscoverySidecarPath,
 } from './lib/discovery-articles-index.mjs';
 import { selectRetiredDailyEditions } from '../generator/scripts/lib/daily-brief-content.mjs';
 import {
@@ -329,8 +331,11 @@ function readDiscoverySidecars(section, registry) {
   for (const article of registry) {
     const id = article?.id;
     if (!isSafeId(id)) continue;
-    const file = path.join(sidecarDir, `${id}.json`);
-    if (!fs.existsSync(file)) continue;
+    if (!resolveDiscoverySidecarPath(sidecarDir, id)) {
+      throw new Error('[blog-index] published registry id cannot be represented as a safe discovery sidecar path — refusing');
+    }
+    const file = resolveExistingDiscoverySidecarPath(sidecarDir, id);
+    if (!file) continue;
     try {
       sidecars.set(id, parseDiscoverySidecar(fs.readFileSync(file, 'utf-8'), id));
     } catch (err) {

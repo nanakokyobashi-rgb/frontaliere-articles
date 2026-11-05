@@ -5,11 +5,15 @@
  * This projection intentionally emits only the article id, publication time,
  * normalized provider, and localized reader-facing fields needed by consumers.
  */
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { SITE, publishedArticleLocales } from './build-sitemap.mjs';
 
 const PUBLIC_PROVIDERS = new Set(['google_trends', 'other']);
 const TOPIC_PROVIDERS = new Set(['google-news-rss']);
 const LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
+const REPOSITORY_ROOT = fs.realpathSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..'));
 
 function isRecord(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -26,6 +30,87 @@ function isRecord(value) {
  */
 export function isSafeId(value) {
   return typeof value === 'string' && value.length > 0;
+}
+
+/**
+ * Resolve a registry ID to its sidecar path without allowing path traversal.
+ * The registry accepts arbitrary non-empty strings, so unsafe path forms must
+ * fail publication instead of silently dropping an otherwise valid article.
+ *
+ * @param {string} sidecarDir
+ * @param {unknown} id
+ * @returns {string|null}
+ */
+export function resolveDiscoverySidecarPath(sidecarDir, id) {
+  const segments = typeof id === 'string' ? id.split('/') : [];
+  if (typeof sidecarDir !== 'string'
+    || !isSafeId(id)
+    || id.includes('\\')
+    || id.includes('\u0000')
+    // A final `..` is part of the literal filename after appending `.json`.
+    || segments.slice(0, -1).includes('..')) return null;
+
+  const root = path.resolve(sidecarDir);
+  const file = path.resolve(root, `${id}.json`);
+  const relative = path.relative(root, file);
+  if (!relative || relative === '..' || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) {
+    return null;
+  }
+  return file;
+}
+
+/**
+ * Resolve an existing sidecar and reject symlinks escaping its trusted roots.
+ *
+ * @param {string} sidecarDir
+ * @param {unknown} id
+ * @param {string} [trustedRoot]
+ * @returns {string|null}
+ */
+export function resolveExistingDiscoverySidecarPath(sidecarDir, id, trustedRoot = REPOSITORY_ROOT) {
+  const candidate = resolveDiscoverySidecarPath(sidecarDir, id);
+  if (!candidate) return null;
+
+  let root;
+  let trusted;
+  try {
+    root = fs.realpathSync(sidecarDir);
+    trusted = fs.realpathSync(trustedRoot);
+  } catch (error) {
+    if (error?.code === 'ENOENT' || error?.code === 'ENOTDIR') return null;
+    throw error;
+  }
+
+  const rootRelative = path.relative(trusted, root);
+  if (!rootRelative || rootRelative === '..' || rootRelative.startsWith(`..${path.sep}`) || path.isAbsolute(rootRelative)) {
+    throw new TypeError('discovery sidecar directory resolves outside the repository');
+  }
+
+  let parent;
+  try {
+    parent = fs.realpathSync(path.dirname(candidate));
+  } catch (error) {
+    if (error?.code === 'ENOENT' || error?.code === 'ENOTDIR') return null;
+    throw error;
+  }
+  const parentRelative = path.relative(root, parent);
+  if (parentRelative === '..' || parentRelative.startsWith(`..${path.sep}`) || path.isAbsolute(parentRelative)) {
+    throw new TypeError('discovery sidecar resolves outside its directory');
+  }
+
+  let file;
+  try {
+    file = fs.realpathSync(candidate);
+  } catch (error) {
+    if (error?.code === 'ENOENT' || error?.code === 'ENOTDIR') return null;
+    throw error;
+  }
+
+  const relative = path.relative(root, file);
+  if (!relative || relative === '..' || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) {
+    throw new TypeError('discovery sidecar resolves outside its directory');
+  }
+  return file;
 }
 
 function isNonEmptyString(value) {
