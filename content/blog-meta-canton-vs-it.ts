@@ -51,6 +51,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.vallese-piano-risparmi-2030.title': 'Vallese: il Consiglio di Stato punta a 180 milioni di risparmi',
     'blog.article.vallese-piano-risparmi-2030.excerpt': 'L\'articolo di RTS riferisce che il Consiglio di Stato del Vallese deve individuare CHF 180 milioni di risparmi entro il 2030 per mantenere l\'equilibrio del bilancio cantonale.',
     'blog.article.vallese-piano-risparmi-2030.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.aumento-tasso-disoccupazione-ottobre.title': 'Aumento tasso disoccupazione ottobre in Canton Vallese',
+    'blog.article.aumento-tasso-disoccupazione-ottobre.excerpt': 'Alla fine di ottobre, 6\'082 disoccupati risultavano iscritti presso gli Uffici regionali di collocamento del Vallese, 327 in più rispetto al mese precedente.',
+    'blog.article.aumento-tasso-disoccupazione-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVsIt;

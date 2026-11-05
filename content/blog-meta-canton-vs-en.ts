@@ -51,6 +51,9 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.vallese-piano-risparmi-2030.title': 'Valais: the Council of State aims for 180 million in savings',
     'blog.article.vallese-piano-risparmi-2030.excerpt': 'The RTS article reports that the Valais Council of State must identify CHF 180 million in savings by 2030 to maintain the balance of the cantonal budget.',
     'blog.article.vallese-piano-risparmi-2030.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.aumento-tasso-disoccupazione-ottobre.title': 'Increase in unemployment rate in October in the Canton of Valais',
+    'blog.article.aumento-tasso-disoccupazione-ottobre.excerpt': 'At the end of October, 6,082 unemployed people were registered with the Valais Regional Employment Offices, 327 more than in the previous month.',
+    'blog.article.aumento-tasso-disoccupazione-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVsEn;
