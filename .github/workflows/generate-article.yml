@@ -1540,6 +1540,7 @@ jobs:
             # each producer write on a unique path so a killed process cannot
             # leave an apparently current report behind.
             attempt_report="$diag_dir/create-article-run-report-$tried.json"
+            attempt_pool_marker="$diag_dir/discovery-attempt-$sec.json"
             if ! rm -f .tmp/create-article-run-report.json "$attempt_report"; then
               all_declared=false
               outcome_kind="error"
@@ -1550,6 +1551,8 @@ jobs:
               break
             fi
             export CREATE_ARTICLE_REPORT_FILE="$attempt_report"
+            rm -f "$attempt_pool_marker"
+            export DISCOVERY_ATTEMPT_MARKER="$attempt_pool_marker"
 
             # ── LA CARD DI RUN, E PERCHE' NON SERVE UNO STEP NUOVO ───────
             # `finalizeRunReport` scrive gia' un report su ogni percorso
@@ -2160,8 +2163,12 @@ jobs:
           set -euo pipefail
           git add -A
           if git diff --cached --quiet; then
-            echo "no article generated this run"
-            exit 0
+            if [ "${{ steps.generate.outputs.cooperative_stop }}" = "true" ] && [ "${{ steps.generate.outputs.article }}" != "true" ]; then
+              echo "no staged article changes; checking cooperative-stop pool markers"
+            else
+              echo "no article generated this run"
+              exit 0
+            fi
           fi
           # `.tmp` is inside the checkout and the rebase helper can remove or
           # replace it while replaying the generated commit. Preserve the
@@ -2173,9 +2180,28 @@ jobs:
             cp .tmp/create-article-run-report.json "$RUN_REPORT"
             has_run_report=true
           elif [ "${{ steps.generate.outputs.cooperative_stop }}" = "true" ] && [ "${{ steps.generate.outputs.article }}" != "true" ]; then
-            echo "::warning::create-article run report is missing after a proven cooperative stop; discarding unreported staged changes and deferring the run"
+            echo "::warning::create-article run report is missing after a proven cooperative stop; discarding unreported changes and preserving only the pool-attempt counters"
             git reset --mixed HEAD
-            exit 0
+            recovery_state='data/discovery-attempt-state.json'
+            if git ls-files --error-unmatch -- "$recovery_state" >/dev/null 2>&1; then
+              git restore --source=HEAD --worktree -- "$recovery_state"
+            else
+              rm -f "$recovery_state"
+            fi
+            shopt -s nullglob
+            recovery_markers=( "${RUNNER_TEMP:-/tmp}/generate-diagnostics/discovery-attempt-"*.json )
+            shopt -u nullglob
+            if [ "${#recovery_markers[@]}" -gt 0 ]; then
+              node generator/scripts/record-discovery-attempt.mjs "${recovery_markers[@]}"
+              git add -- "$recovery_state"
+              if git diff --cached --quiet; then
+                echo "no new discovery recovery counter to commit"
+                exit 0
+              fi
+            else
+              echo "no eligible discovery pool was selected; no recovery counter to commit"
+              exit 0
+            fi
           elif [ "${{ steps.generate.outputs.article }}" != "true" ] && [ "${{ steps.generate.outputs.declared }}" = "true" ]; then
             # A declared no-article run can still have durable bookkeeping
             # (for example the rejected-topic ledger). It has no article
@@ -2377,6 +2403,11 @@ jobs:
             # incremento: due run da N che scrivono entrambi N+1 danno lo STESSO
             # blob e nessun conflitto, quindi a rebase riuscito l'helper riconcilia
             # comunque ogni contatore dichiarato (upstream + incremento pre-rebase).
+            # data/discovery-attempt-state.json conserva contatori monotoni
+            # per sezione: i fallimenti proven incrementano `*ProvenAttempts`;
+            # una discovery o una pubblicazione avanza `*DiscoveryResetAt`.
+            # La differenza forza uno slot discovery dopo tre fallimenti proven
+            # senza ridurre contatori, quindi usa la stessa fusione a tre vie.
             #
             # data/topic-candidates-today-picks.json (TODAY_PICKS_BY_CLUSTER_PATH,
             # persistTodayPicksByCluster) e' la stessa classe del consumed tracker:
@@ -2431,6 +2462,10 @@ jobs:
               data/generated-image-registry.json \
               --merge-queue data/image-regeneration-queue.json \
               --merge-counter data/quota-state.json:runCounter \
+              --merge-counter data/discovery-attempt-state.json:frontaliereProvenAttempts \
+              --merge-counter data/discovery-attempt-state.json:frontaliereDiscoveryResetAt \
+              --merge-counter data/discovery-attempt-state.json:svizzeraProvenAttempts \
+              --merge-counter data/discovery-attempt-state.json:svizzeraDiscoveryResetAt \
               --merge-counter data/topic-candidates-experimental-counter.json:count \
               --merge-counter data/topic-candidates-evergreen-counter.json:count \
               --section-surfaces \

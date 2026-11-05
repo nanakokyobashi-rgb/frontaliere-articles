@@ -339,6 +339,15 @@ export const CORE_REPLACEMENTS = [
     find: '"https://api.github.com/repos/$REPO/actions/workflows/generate-article.yml/dispatches"',
     replace: '"https://api.github.com/repos/$REPO/actions/workflows/$CALLER_WORKFLOW/dispatches"',
   },
+  {
+    id: 'rebase: i contatori discovery non si applicano al core cantonale',
+    count: 1,
+    find: '              --merge-counter data/discovery-attempt-state.json:frontaliereProvenAttempts \\\n'
+      + '              --merge-counter data/discovery-attempt-state.json:frontaliereDiscoveryResetAt \\\n'
+      + '              --merge-counter data/discovery-attempt-state.json:svizzeraProvenAttempts \\\n'
+      + '              --merge-counter data/discovery-attempt-state.json:svizzeraDiscoveryResetAt \\\n',
+    replace: '',
+  },
 ];
 
 /** Nomi che il core non deve piu' avere cablati nelle righe eseguibili. */
