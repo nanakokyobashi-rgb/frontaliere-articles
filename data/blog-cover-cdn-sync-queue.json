@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-quartierplan-ebnat-west-pubblico.webp",
-      "sha256": "0365a77a4e2547aa63068f75c2c7f554748c6e828a02bc7200b09a82937744d9"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-quartierplan-ebnat-west-pubblico-480w.webp",
-      "sha256": "ce30743907397527c247385a244db8d467b7f46ddfb7fabf5716aa4ed6a0d7be"
-    }
-  ]
+  "items": []
 }
