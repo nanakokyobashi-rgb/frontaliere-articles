@@ -217,7 +217,7 @@ function parseArticleMeta(text, label) {
   const titleIds = [];
   for (const match of titleMatches) {
     const id = match[1];
-    if (articles[id]) throw new Error(`${label}: id duplicato nel meta IT '${id}'`);
+    if (articles[id]) throw new Error(`${label}: id duplicato nel meta IT`);
     titleIds.push(id);
     articles[id] = {
       id,
@@ -257,11 +257,11 @@ function assertArticleMetaCoverage({ slugIds, registryIds, articles, titleIds, e
   ) return;
 
   const details = [];
-  if (missing.length) details.push(`mancano ${missing.length} ID (${missing.slice(0, 5).join(', ')})`);
-  if (extra.length) details.push(`ci sono ${extra.length} ID non presenti in slug/registro (${extra.slice(0, 5).join(', ')})`);
-  if (missingExcerpts.length) details.push(`mancano excerpt per ${missingExcerpts.slice(0, 5).join(', ')}`);
-  if (orphanExcerpts.length) details.push(`excerpt orfani (${orphanExcerpts.slice(0, 5).join(', ')})`);
-  if (duplicateExcerpts.length) details.push(`excerpt duplicati (${duplicateExcerpts.slice(0, 5).join(', ')})`);
+  if (missing.length) details.push(`mancano ${missing.length} ID`);
+  if (extra.length) details.push(`ci sono ${extra.length} ID non presenti in slug/registro`);
+  if (missingExcerpts.length) details.push(`mancano ${missingExcerpts.length} excerpt`);
+  if (orphanExcerpts.length) details.push(`excerpt orfani: ${orphanExcerpts.length}`);
+  if (duplicateExcerpts.length) details.push(`excerpt duplicati: ${duplicateExcerpts.length}`);
   throw new Error(`${label}: meta IT assente o incoerente — ${details.join('; ')}`);
 }
 
@@ -304,11 +304,18 @@ export function snapshotSections(surfaces, readAt, label) {
         + 'devono essere tutti presenti o tutti assenti',
       );
     }
-    const localizedSlugs = parseLocalizedArticleSlugMap(
-      slugSource,
-      s.slugConst,
-      { allowMissing: sourceState === 'new', sourceLabel: `${label}:${s.slugDataFile}` },
-    );
+    let localizedSlugs;
+    try {
+      localizedSlugs = parseLocalizedArticleSlugMap(
+        slugSource,
+        s.slugConst,
+        { allowMissing: sourceState === 'new', sourceLabel: `${label}:${s.slugDataFile}` },
+      );
+    } catch {
+      // The parser's detailed diagnostics can contain an article ID or slug.
+      // Keep the failed surface and error category useful without echoing data.
+      throw new Error(`${label}:${s.section}: mappa slug non valida (dettagli redatti)`);
+    }
     const slugIds = Object.keys(localizedSlugs);
     const registryIds = registryIdsOf(registrySource);
     const dates = registryDatesById(registrySource);
@@ -352,7 +359,7 @@ export function candidateTopicKeysFromRunReport(report, introducedIds) {
   }
   const matches = introducedIds.filter((entry) => entry.id === articleId);
   if (matches.length !== 1) {
-    throw new Error(`il report evergreen article.id '${articleId}' non corrisponde a un solo id introdotto dal commit prodotto`);
+    throw new Error('il report evergreen article.id non corrisponde a un solo id introdotto dal commit prodotto');
   }
 
   let keyword;

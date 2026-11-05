@@ -14,7 +14,6 @@ const generateArticleCoreWorkflow = readFileSync(
   new URL('../../.github/workflows/generate-article-core.yml', import.meta.url),
   'utf8',
 );
-
 function cutFunction(name) {
   const anchor = `function ${name}(`;
   const start = createArticleSource.indexOf(anchor);
@@ -96,7 +95,7 @@ test('selected signal-led discovery attribution reaches the run report and artic
   assert.match(createArticleSource, /JSON\.stringify\(projectRunReportForDiagnostics\(RUN_REPORT\), null, 2\)/);
   assert.match(createArticleSource, /report\?\.pool === 'discovery'[\s\S]*?report\?\.selectedTier === 'experimental'/);
   assert.match(createArticleSource, /article: selectedFromSignalPool && report\?\.article[\s\S]*?sourceDomain: null,[\s\S]*?title: null/);
-  assert.match(createArticleSource, /function projectDiscardedHeadlineSample\(sample, redactExistingId = false\)/);
+  assert.match(createArticleSource, /function projectDiscardedHeadlineSample\(sample, redactOptions = false\)/);
   assert.match(createArticleSource, /const shouldRedactExistingId = redactExistingId \|\| sample\.signalDriven === true;/);
   assert.match(createArticleSource, /projected\.classifierReason = '\[classifier reason redacted\]'/);
   assert.match(createArticleSource, /function redactSignalDrivenReportNote\(note\)/);

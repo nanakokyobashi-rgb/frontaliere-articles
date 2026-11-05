@@ -121,7 +121,9 @@ function makeGate() {
     'assertYmylPublishable',
     'checkCorpusFabricatedInstitutionNames',
     'findArticleLocalizedToponymMismatches',
+    'safeSignalTextForLog',
     'safeSignalDiagnosticTextForLog',
+    'RUN_REPORT',
     `${GATE_SRC}\nreturn assertArticlePassesFactualityGates;`,
   );
   const gate = factory(
@@ -143,7 +145,9 @@ function makeGate() {
     () => {},
     checkCorpusFabricatedInstitutionNames,
     findArticleLocalizedToponymMismatches,
+    ARTICLE_SIGNAL_LOG_HELPERS.safeSignalTextForLog,
     ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog,
+    {},
   );
   return { gate, translationCalls };
 }

@@ -476,6 +476,7 @@ for (const registrationDirtyPath of ['content/routerBlogData.ts']) {
     assert.equal(r.status, 1, 'una transazione di registrazione senza body deve lasciare la run rossa');
     assert.match(r.stdout, /registrazione dirty/);
     assert.match(r.stdout, /output parziale non pubblicabile/);
+    assert.ok(!r.stdout.includes(registrationDirtyPath), 'il log non deve esporre il path derivato dal titolo');
   });
 }
 

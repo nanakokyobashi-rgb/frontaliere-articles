@@ -578,7 +578,7 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
       collisions.push(...findLocalizedSlugCollisions(slugMap, { locales: ['en', 'de', 'fr'] })
         .map((collision) => ({ file, ...collision })));
     }
-    assert.deepEqual(collisions, []);
+    assert.equal(collisions.length, 0, `${collisions.length} collisioni di slug localizzati; identità omesse dal log`);
   });
 
   // Rimisurato il 2026-09-08 su 5.876 voci: 217 articoli con almeno un locale
@@ -607,16 +607,17 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
       'localized-slug-occupied',
       'fallback-slug-occupied',
     ]);
-    for (const record of fallbackRecords) {
+    for (const [recordIndex, record] of fallbackRecords.entries()) {
       const key = `${record.file}:${record.id}`;
       const slug = byKey.get(key);
-      assert.ok(slug, `provenienza per articolo assente dal registro slug: ${key}`);
-      assert.ok(['en', 'de', 'fr'].includes(record.locale), `locale fallback non ammesso: ${record.locale}`);
-      assert.equal(slug[record.locale], slug.it, `${key}/${record.locale} non serve davvero lo slug IT`);
-      assert.equal(record.source, 'it-slug', `${key}/${record.locale} ha una sorgente non tracciabile`);
-      assert.ok(allowedReasons.has(record.reason), `${key}/${record.locale} ha una causa sconosciuta: ${record.reason}`);
+      const label = `fallback provenance record ${recordIndex + 1}`;
+      assert.ok(slug, `${label} is absent from the slug registry`);
+      assert.ok(['en', 'de', 'fr'].includes(record.locale), `${label} has an unsupported locale`);
+      assert.equal(slug[record.locale], slug.it, `${label} does not use the Italian slug`);
+      assert.equal(record.source, 'it-slug', `${label} has an unsupported source`);
+      assert.ok(allowedReasons.has(record.reason), `${label} has an unsupported reason code`);
       const unique = `${key}:${record.locale}`;
-      assert.equal(seen.has(unique), false, `provenienza duplicata: ${unique}`);
+      assert.equal(seen.has(unique), false, 'duplicate fallback provenance record');
       seen.add(unique);
     }
   });
@@ -646,10 +647,10 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
   const LONG_SLUG_CAP = LONG_SLUG_BASELINE + floorLongLocaleCount;
 
   it('non concede headroom a cause diversa dal floor misurato', () => {
-    assert.deepEqual(
-      unratchetedReasons,
-      [],
-      'un fallback persistito senza causa di floor deve fermare il run, non allargare il ratchet',
+    assert.equal(
+      unratchetedReasons.length,
+      0,
+      `${unratchetedReasons.length} fallback non floor non devono allargare il ratchet; identità omesse dal log`,
     );
   });
 
@@ -661,7 +662,7 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
         `(baseline ${IT_URL_ACROSS_LOCALES_BASELINE} + ${floorArticleKeys.size} record di floor).\n` +
         `Nuovi rispetto alla baseline: ${offenders.length - IT_URL_ACROSS_LOCALES_BASELINE}; ` +
         `record di cause non ratchettabili: ${unratchetedReasons.length}.\n` +
-        `Primi dieci: ${offenders.slice(0, 10).map((e) => e.id).join(', ')}\n` +
+        'Identità degli articoli omesse dal log.\n' +
         'Se la fix di #191 e’ in piedi questo numero non puo’ salire: un articolo nuovo ricava lo slug dal titolo tradotto.\n' +
         'Solo un record persistito con causa `title-below-plausibility-floor` autorizza crescita: ' +
         'ogni altra causa deve fermare la pubblicazione.',
@@ -679,7 +680,7 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
       offenders.length <= ALL_THREE_IDENTICAL_CAP,
       `${offenders.length} articoli servono l'URL italiano su en, de E fr ` +
         `(baseline ${ALL_THREE_IDENTICAL_BASELINE} + ${floorAllThreeKeys.size} record di floor).\n` +
-        `Primi dieci: ${offenders.slice(0, 10).map((e) => e.id).join(', ')}`,
+        'Identità degli articoli omesse dal log.',
     );
   });
 
@@ -695,8 +696,8 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
     assert.ok(
       long.length <= LONG_SLUG_CAP,
       `${long.length} slug >= 80 caratteri ` +
-        `(baseline ${LONG_SLUG_BASELINE} + ${floorLongLocaleCount} record di floor): ` +
-        `${long.slice(0, 10).join(', ')}`,
+        `(baseline ${LONG_SLUG_BASELINE} + ${floorLongLocaleCount} record di floor); ` +
+        'identità degli articoli omesse dal log.',
     );
   });
 });

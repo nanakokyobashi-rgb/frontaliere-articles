@@ -120,11 +120,14 @@ test('the active generator records terminal attempts and workflow merges every c
   assert.match(workflow, /record-discovery-attempt\.mjs/);
   assert.match(workflow, /git restore --source=HEAD --worktree/);
   assert.match(workflow, /DISCOVERY_ATTEMPT_MARKER="\$attempt_pool_marker"/);
+  const commitStart = workflow.indexOf('      - name: Commit and push');
+  const reportStart = workflow.indexOf('RUN_REPORT="$RUNNER_TEMP/create-article-run-report.json"', commitStart);
   const noChangesGate = workflow.slice(
-    workflow.indexOf('git add -A\n          if git diff --cached --quiet; then'),
-    workflow.indexOf('RUN_REPORT="$RUNNER_TEMP/create-article-run-report.json"'),
+    workflow.indexOf('git add -A', commitStart),
+    reportStart,
   );
-  assert.match(noChangesGate, /cooperative_stop.*article/);
+  assert.ok(commitStart >= 0 && reportStart > commitStart, 'il commit step deve contenere un gate report delimitabile');
+  assert.match(noChangesGate, /if git diff --cached --quiet; then[\s\S]*cooperative_stop.*article/);
   assert.ok(
     noChangesGate.indexOf('cooperative_stop') < noChangesGate.indexOf('exit 0'),
     'the no-change exit must leave cooperative-stop runs for marker recovery',

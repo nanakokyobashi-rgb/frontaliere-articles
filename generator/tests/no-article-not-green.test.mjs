@@ -403,6 +403,36 @@ test('solo un arresto cooperativo provato può differire senza run report', () =
   );
 });
 
+test('un generate fallito salva solo i marker di recovery e lascia rossa la run', () => {
+  for (const file of [WORKFLOW, CORE_WORKFLOW]) {
+    const workflow = fs.readFileSync(file, 'utf8');
+    const commitStart = workflow.indexOf('      - name: Commit and push');
+    assert.ok(commitStart >= 0, `${path.basename(file)}: step Commit and push non trovato`);
+    const commitEnd = workflow.indexOf('\n      - name:', commitStart + 1);
+    const commit = workflow.slice(commitStart, commitEnd < 0 ? undefined : commitEnd);
+    const condition = commit.match(/^        if: (.+)$/m)?.[1] || '';
+    assert.match(condition, /success\(\)/, `${path.basename(file)}: il percorso normale deve restare attivo`);
+    assert.match(condition, /failure\(\)/, `${path.basename(file)}: il recupero deve poter partire dopo un errore`);
+    assert.match(condition, /steps\.generate\.outcome == 'failure'/);
+    assert.match(condition, /steps\.generate\.outputs\.cooperative_stop == 'true'/);
+    assert.match(condition, /steps\.generate\.outputs\.article != 'true'/);
+
+    const failureStart = commit.indexOf('if [ "${{ steps.generate.outcome }}" = "failure" ]; then');
+    const normalStage = commit.indexOf('            git add -A', failureStart);
+    const recoveryGate = commit.indexOf('if [ "$discovery_recovery_only" = "true" ]; then');
+    const reportGate = commit.indexOf('elif [ -s .tmp/create-article-run-report.json ]');
+    assert.ok(failureStart >= 0 && normalStage > failureStart, `${path.basename(file)}: il ramo di errore deve precedere lo staging generale`);
+    assert.ok(recoveryGate > failureStart && reportGate > recoveryGate, `${path.basename(file)}: il recupero deve precedere qualunque uso del report`);
+    const failedRecovery = commit.slice(failureStart, normalStage);
+    assert.match(failedRecovery, /git reset --mixed HEAD/);
+    assert.match(failedRecovery, /git restore --source=HEAD --worktree -- "\$recovery_state"/);
+    assert.match(failedRecovery, /record-discovery-attempt\.mjs/);
+    assert.match(failedRecovery, /git add -- "\$recovery_state"/);
+    assert.doesNotMatch(failedRecovery, /git add -A/);
+    assert.match(commit, /git commit --quiet -m "Record discovery attempt recovery"/);
+  }
+});
+
 test('un no-article dichiarato può salvare bookkeeping senza report, mai contenuto', () => {
   for (const file of [WORKFLOW, CORE_WORKFLOW]) {
     const workflow = fs.readFileSync(file, 'utf8');

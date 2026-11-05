@@ -112,7 +112,7 @@ test('ogni sezione supera la premessa del ricontrollo dopo il rebase', () => {
   );
 });
 
-test('una voce di meta senza registro ne\' slug fa cadere la premessa, e viene nominata', () => {
+test('una voce di meta senza registro o slug fa cadere la premessa con diagnostica redatta', () => {
   const [target] = surfaces
     .map((surface) => ({ surface, meta: readCorpusFile(surface.metaFile) }))
     .filter(({ meta }) => typeof meta === 'string' && meta.trim() !== '');
@@ -130,6 +130,9 @@ test('una voce di meta senza registro ne\' slug fa cadere la premessa, e viene n
   };
   assert.throws(
     () => snapshotSections([target.surface], withOrphan, 'corpus'),
-    (error) => error.message.includes('non presenti in slug/registro') && error.message.includes(orphan),
+    (error) => error.message.includes('ci sono 1 ID non presenti in slug/registro')
+      && !error.message.includes(orphan)
+      && !error.message.includes('Titolo rimasto')
+      && !error.message.includes('Estratto rimasto'),
   );
 });

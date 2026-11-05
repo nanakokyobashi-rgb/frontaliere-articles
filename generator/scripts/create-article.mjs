@@ -2358,7 +2358,9 @@ const DISCARDED_HEADLINE_SAMPLE_CAP = 20;
 
 function recordDiscardedHeadline(entry) {
   if (RUN_REPORT.discardedHeadlineSamples.length >= DISCARDED_HEADLINE_SAMPLE_CAP) return;
-  RUN_REPORT.discardedHeadlineSamples.push(entry);
+  const { candidate = null, ...sample } = entry;
+  const signalDriven = entry.signalDriven === true || isSignalDrivenTopicCandidate(candidate);
+  RUN_REPORT.discardedHeadlineSamples.push({ ...sample, signalDriven });
 }
 
 function addDuplicateReason(key) {
@@ -2693,7 +2695,9 @@ function projectRunReportForDiagnostics(report) {
       }
       : report?.factuality,
     discardedHeadlineSamples: Array.isArray(report?.discardedHeadlineSamples)
-      ? report.discardedHeadlineSamples.map((sample) => projectDiscardedHeadlineSample(sample, selectedFromSignalPool))
+      ? report.discardedHeadlineSamples.map((sample) => projectDiscardedHeadlineSample(sample, {
+        redactExistingId: sample?.signalDriven === true || selectedFromSignalPool || SIGNAL_TOPIC_TERMS.size > 0,
+      }))
       : report?.discardedHeadlineSamples,
     discoveryAttribution: discoveryAttribution && typeof discoveryAttribution === 'object'
       ? {
@@ -2706,13 +2710,16 @@ function projectRunReportForDiagnostics(report) {
       }
       : discoveryAttribution ?? null,
     topicCandidateAttribution: topicCandidateAttribution && typeof topicCandidateAttribution === 'object'
-      ? { ...topicCandidateAttribution, redditPermalink: null }
+      ? { ...topicCandidateAttribution, candidateId: null, redditPermalink: null }
       : topicCandidateAttribution ?? null,
   };
 }
 
-function projectDiscardedHeadlineSample(sample, redactExistingId = false) {
+function projectDiscardedHeadlineSample(sample, redactOptions = false) {
   if (!sample || typeof sample !== 'object') return sample;
+  const redactExistingId = typeof redactOptions === 'boolean'
+    ? redactOptions
+    : redactOptions?.redactExistingId === true;
   const shouldRedactExistingId = redactExistingId || sample.signalDriven === true;
   const projected = { headline: '[signal headline redacted]' };
   for (const key of ['reason', 'existingSection', 'signal', 'sim']) {
@@ -4236,7 +4243,6 @@ function hasSecureDiscoveryPublisherUrl(chosen, url) {
     normalizeDiscoveryPublisherUrl(chosen._discoveryCandidate, url),
   );
 }
-
 function isSignalDrivenTopicCandidate(candidate) {
   return Boolean(candidate?._experimentalCandidate || candidate?._discoveryCandidate);
 }
@@ -5232,7 +5238,7 @@ async function generateExcerpt(title, body1, body2, body3) {
       console.warn(`  ⚠️  generateExcerpt: riassunto sotto il floor (${excerptMiss}) — uso fallback troncato dal corpo`);
     }
   } catch (err) {
-    console.warn(`  ⚠️  generateExcerpt fallito, uso fallback troncato: ${err.message}`);
+    console.warn(`  ⚠️  generateExcerpt fallito, uso fallback troncato: ${safeSignalDiagnosticTextForLog(err?.message || err, RUN_REPORT)}`);
   }
   const bodyFallback = firstCompleteBodyExcerpt(body, {
     locale: 'it',
@@ -5355,7 +5361,7 @@ async function splitBodyIntoSections(fullBody, title) {
           if (body1 && body2.length >= 40 && body3) return { body1, body2, body3 };
         }
       } catch (err) {
-        console.warn(`  ⚠️  splitBodyIntoSections tentativo ${attempt} fallito: ${err.message}`);
+        console.warn(`  ⚠️  splitBodyIntoSections tentativo ${attempt} fallito: ${safeSignalDiagnosticTextForLog(err?.message || err, RUN_REPORT)}`);
       }
     }
     console.warn('  ⚠️  splitBodyIntoSections: nessun punto di taglio valido dopo 3 tentativi — uso fallback deterministico a paragrafi');
@@ -5732,7 +5738,7 @@ function repairArticleEditorialClaims(data) {
   }
   if (changes.length > 0) {
     console.error(
-      `  🧹 [editorial-claims] ${data?.id || '(id mancante)'}: `
+      `  🧹 [editorial-claims] ${safeSignalTextForLog(data?.id || '(id mancante)', RUN_REPORT, '[signal article id redacted]')}: `
         + `riparati ${changes.length} campo/i prima dei gate`,
     );
   }
@@ -5768,6 +5774,7 @@ function assertPublishedEditorialClaims(data) {
  * cantone fanno fallire l'headline corrente come qualityReject.
  */
 function assertGeneratedArticleQuality(data, { cantonBody = null } = {}) {
+  const logArticleId = safeSignalTextForLog(data?.id || '(id mancante)', RUN_REPORT, '[signal article id redacted]');
   repairArticleEditorialClaims(data);
   const content = data?.content;
   if (!content || typeof content !== 'object') return;
@@ -5779,8 +5786,8 @@ function assertGeneratedArticleQuality(data, { cantonBody = null } = {}) {
     const orphanedKeyFacts = findOrphanedKeyFactsList(localeContent.body1, locale);
     if (orphanedKeyFacts) {
       throw qualityRejectError(
-        `[key-facts-heading] ${data.id || '(id mancante)'} ${locale}: `
-        + `${orphanedKeyFacts.bulletCount} fatti chiave senza l'intestazione ${orphanedKeyFacts.heading}`,
+        `[key-facts-heading] ${logArticleId} ${locale}: `
+        + `${orphanedKeyFacts.bulletCount} fatti chiave senza l'intestazione ${safeSignalDiagnosticTextForLog(orphanedKeyFacts.heading, RUN_REPORT)}`,
       );
     }
 
@@ -5788,14 +5795,14 @@ function assertGeneratedArticleQuality(data, { cantonBody = null } = {}) {
     if (result.rejected) {
       const sections = result.rejectedSections.join(', ');
       throw qualityRejectError(
-        `[key-facts-specificity] ${data.id || '(id mancante)'} `
-        + `${locale}: sezione ${sections || 'Fatti chiave'} sotto la soglia di 3 fatti dopo la rimozione dei non-valori`,
+        `[key-facts-specificity] ${logArticleId} `
+        + `${locale}: sezione ${safeSignalDiagnosticTextForLog(sections || 'Fatti chiave', RUN_REPORT)} sotto la soglia di 3 fatti dopo la rimozione dei non-valori`,
       );
     }
     if (result.changed) {
       localeContent.body1 = result.value;
       console.error(
-        `  🧹 [key-facts-specificity] ${data.id || '(id mancante)'} ${locale}: `
+        `  🧹 [key-facts-specificity] ${logArticleId} ${locale}: `
         + `rimosse ${result.dropped.length} coppie senza valore`,
       );
     }
@@ -5823,8 +5830,8 @@ function assertGeneratedArticleQuality(data, { cantonBody = null } = {}) {
       .map((match) => `${match.toponym} (${match.canton})`)
       .join(', ');
     throw qualityRejectError(
-      `[canton-toponym] ${data.id || '(id mancante)'} dichiara ${cantonVerdict.declaredCanton} `
-      + `ma contiene toponimi di un altro cantone: ${details}`,
+      `[canton-toponym] ${logArticleId} dichiara ${cantonVerdict.declaredCanton} `
+      + `ma contiene toponimi di un altro cantone: ${safeSignalDiagnosticTextForLog(details, RUN_REPORT)}`,
     );
   }
 }
@@ -7351,7 +7358,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       if (dropped.length) {
         droppedTotal += dropped.length;
         for (const d of dropped) {
-          console.error(`  ✂️  Falso positivo scartato (${r.model}): "${(d.claim || '').slice(0, 70)}" `
+          console.error(`  ✂️  Falso positivo scartato (${r.model}): "${safeSignalDiagnosticTextForLog((d.claim || '').slice(0, 70), RUN_REPORT)}" `
             + '— il claim È presente nella fonte');
         }
       }
@@ -7746,11 +7753,19 @@ async function callLLM(messages, opts = {}) {
         // erano muti 4 rigetti su 4. La riga sotto e' INCONDIZIONATA apposta:
         // e' quella che distingue «troncato» da «forma sbagliata», e le due
         // vogliono rimedi opposti (tetto di uscita vs prompt/normalizzatore).
-        console.error(`  🧪 rigetto: ${describePayloadRejection({ raw: result, repaired, parsed, parseErr, model: modelUsedRef.model })}`);
+        console.error(
+          `  🧪 rigetto: ${safeSignalDiagnosticTextForLog(
+            describePayloadRejection({ raw: result, repaired, parsed, parseErr, model: modelUsedRef.model }), RUN_REPORT,
+          )}`,
+        );
         if (parseErr) {
-          console.error(`  🔎 JSON parse fallito (${modelUsedRef.model || 'unknown'}): ${parseErr.message} — ${describeJsonParseError(repaired, parseErr)}`);
+          console.error(
+            `  🔎 JSON parse fallito (${modelUsedRef.model || 'unknown'}): `
+            + `${safeSignalDiagnosticTextForLog(parseErr.message, RUN_REPORT)} — `
+            + safeSignalDiagnosticTextForLog(describeJsonParseError(repaired, parseErr), RUN_REPORT),
+          );
         }
-        console.error(`  📄 ${safeSignalDiagnosticTextForLog(describeRawForDiagnostics(result))}`);
+        console.error(`  📄 ${safeSignalDiagnosticTextForLog(describeRawForDiagnostics(result), RUN_REPORT)}`);
       }
 
       if (missing.length > 0) {
@@ -7764,7 +7779,9 @@ async function callLLM(messages, opts = {}) {
         // troncamento sia con un involucro di troppo — e in una run e' costato
         // 655 s. Stessa riga del ramo sopra, cosi' le due si contano insieme.
         if (itContent) {
-          console.error(`  🧪 rigetto: ${describePayloadRejection({ raw: result, repaired, parsed, parseErr, model: modelUsedRef.model })}`);
+          console.error(`  🧪 rigetto: ${safeSignalDiagnosticTextForLog(
+            describePayloadRejection({ raw: result, repaired, parsed, parseErr, model: modelUsedRef.model }), RUN_REPORT,
+          )}`);
         }
         // Penalize the model only for genuine content failures, not budget-induced
         // exits. When wallBudgetExceeded() is true the throw below is caused by
@@ -13303,7 +13320,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     try {
       metaData = JSON.parse(repairLlmJson(rawMeta));
     } catch (e) {
-      console.error(`  ⚠️ [prompt-split] chiamata 2/2 senza JSON valido (${e.message}): ricado sulla chiamata unica.`);
+      console.error(`  ⚠️ [prompt-split] chiamata 2/2 senza JSON valido (${safeSignalDiagnosticTextForLog(e.message, sourceContext)}): ricado sulla chiamata unica.`);
       return null;
     }
     // Il verdetto sopra (via `expectedFields: META_ONLY_FIELDS` dentro
@@ -13594,7 +13611,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // One repair-aware regenerate before giving up. Truncation (output cap
     // hit) gets 2× tokens; structural corruption keeps the same budget so
     // we don't pay double for a transient `***`-between-properties glitch.
-    console.error(`❌ JSON parse error: ${parseErr.message}`);
+    console.error(`❌ JSON parse error: ${safeSignalDiagnosticTextForLog(parseErr.message, sourceContext)}`);
     console.error(`   ${safeSignalDiagnosticTextForLog(describeJsonParseError(itRepaired, parseErr), sourceContext)}`);
     console.error(`   ${safeSignalDiagnosticTextForLog(describeRawForDiagnostics(itRaw), sourceContext)}`);
     const isTruncation = /Unterminated|Unexpected end/i.test(parseErr.message);
@@ -13629,12 +13646,12 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       itData = JSON.parse(repairLlmJson(itRaw2));
       console.error(`  ✅ Retry IT riuscito`);
     } catch (retryErr) {
-      console.error(`  ❌ Retry IT fallito: ${retryErr.message}`);
+      console.error(`  ❌ Retry IT fallito: ${safeSignalDiagnosticTextForLog(retryErr.message, sourceContext)}`);
       // qualityReject=true: malformed JSON after the repair-aware retry is a
       // content-quality failure, same class as callLLM's body2-validation
       // throws — isQualityRejectError() didn't match this message, so it
       // crashed the run instead of skipping to the next headline.
-      const err = new Error(`JSON non valido dalla generazione IT: ${parseErr.message}`);
+      const err = new Error(`JSON non valido dalla generazione IT: ${safeSignalDiagnosticTextForLog(parseErr.message, sourceContext)}`);
       err.qualityReject = true;
       throw err;
     }
@@ -13685,13 +13702,14 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     : null;
   if (itData?.abort_topical_relevance === true && _abortSenzaCorpo) {
     const reason = String(itData.reason || '').slice(0, 500) || '(no reason)';
+    const safeReason = safeSignalDiagnosticTextForLog(reason, sourceContext);
     console.error('  ⏭️  [topic-gate] Generation aborted by REGOLA #0 — source lacks real frontaliere angle.');
-    console.error(`     Reason: ${safeSignalDiagnosticTextForLog(reason, sourceContext)}`);
+    console.error(`     Reason: ${safeReason}`);
     if (RUN_REPORT && typeof RUN_REPORT === 'object') {
       RUN_REPORT.topicGateAborts = (RUN_REPORT.topicGateAborts || 0) + 1;
-      RUN_REPORT.lastTopicGateAbortReason = reason;
+      RUN_REPORT.lastTopicGateAbortReason = safeReason;
     }
-    const err = new Error(`Topic-gate abort: ${safeSignalDiagnosticTextForLog(reason, sourceContext)}`);
+    const err = new Error(`Topic-gate abort: ${safeReason}`);
     err.topicGateAbort = true;
     throw err;
   }
@@ -14077,7 +14095,7 @@ ${enrichmentLine}
         console.error(`    ⚠️  ${field}: espansione non ha aumentato le parole (${expandedWords} ≤ ${currentWords})`);
       }
     } catch (e) {
-      console.error(`    ⚠️  ${field}: espansione fallita: ${e.message}`);
+      console.error(`    ⚠️  ${field}: espansione fallita: ${safeSignalDiagnosticTextForLog(e?.message || e, RUN_REPORT)}`);
     }
   }
 
@@ -14190,7 +14208,7 @@ async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourc
         return { q: q || '', a: a || '' };
       }));
     } catch (err) {
-      console.error(`  ⚠️  free-MT ${targetLang}:faq fallita (${err?.message || err}) — fallback IT`);
+      console.error(`  ⚠️  free-MT ${targetLang}:faq fallita (${safeSignalDiagnosticTextForLog(err?.message || err, RUN_REPORT)}) — fallback IT`);
       faq = sourceContent.faq.map(() => ({ q: '', a: '' }));
     }
   }
@@ -14500,9 +14518,9 @@ async function translateArticle(data) {
     try {
       return JSON.parse(repaired);
     } catch (parseErr) {
-      console.error(`  ⚠️  JSON parse error (${label}): ${parseErr.message}`);
-      console.error(`     ${safeSignalDiagnosticTextForLog(describeJsonParseError(repaired, parseErr))}`);
-      console.error(`     ${safeSignalDiagnosticTextForLog(describeRawForDiagnostics(raw))}`);
+      console.error(`  ⚠️  JSON parse error (${label}): ${safeSignalDiagnosticTextForLog(parseErr.message, RUN_REPORT)}`);
+      console.error(`     ${safeSignalDiagnosticTextForLog(describeJsonParseError(repaired, parseErr), RUN_REPORT)}`);
+      console.error(`     ${safeSignalDiagnosticTextForLog(describeRawForDiagnostics(raw), RUN_REPORT)}`);
       // Detect truncation (model hit output cap): use 3× tokens on retry
       const isTruncation = parseErr.message.includes('Unterminated') || parseErr.message.includes('Unexpected end');
       const retry1Tokens = isTruncation ? Math.max(maxTokens * 3, 12000) : maxTokens + 4000;
@@ -14513,7 +14531,7 @@ async function translateArticle(data) {
         console.error(`  ✅ Retry riuscito per ${label}`);
         return result;
       } catch (retryErr) {
-        console.error(`  ⚠️  Retry 1 fallito (${label}): ${retryErr.message} — tentativo 2...`);
+        console.error(`  ⚠️  Retry 1 fallito (${label}): ${safeSignalDiagnosticTextForLog(retryErr.message, RUN_REPORT)} — tentativo 2...`);
         // Third attempt with maximum tokens
         const retry2Tokens = 16000;
         const raw3 = await call(retry2Tokens, 0.3);
@@ -14522,14 +14540,14 @@ async function translateArticle(data) {
           console.error(`  ✅ Retry 2 riuscito per ${label}`);
           return result3;
         } catch (retry2Err) {
-          console.error(`  ❌ Retry 2 fallito (${label}): ${retry2Err.message}`);
+          console.error(`  ❌ Retry 2 fallito (${label}): ${safeSignalDiagnosticTextForLog(retry2Err.message, RUN_REPORT)}`);
           // qualityReject=true: same content-quality class as the IT-generation
           // JSON-parse-exhausted throw above — malformed translation output,
           // not infrastructure. This propagates straight out of
           // generateAndValidateArticle (no local catch around translateArticle),
           // so an untagged message here crashes the whole run instead of
           // skipping to the next headline.
-          const err = new Error(`JSON non valido dalla traduzione ${label}: ${retry2Err.message}`);
+          const err = new Error(`JSON non valido dalla traduzione ${label}: ${safeSignalDiagnosticTextForLog(retry2Err.message, RUN_REPORT)}`);
           err.qualityReject = true;
           throw err;
         }
@@ -14710,7 +14728,7 @@ ${localizedToponymInstruction(targetLang)}`;
           }
           return { faq: aligned };
         }).catch(err => {
-          console.error(`  ⚠️  FAQ translation failed for ${targetLang}: ${err.message} — per-index recovery`);
+          console.error(`  ⚠️  FAQ translation failed for ${targetLang}: ${safeSignalDiagnosticTextForLog(err?.message || err, RUN_REPORT)} — per-index recovery`);
           return { faq: [] };
         })
       : Promise.resolve({});
@@ -14724,7 +14742,7 @@ ${localizedToponymInstruction(targetLang)}`;
     // the IT source and a body stays untranslated (#1875).
     const onTranslateFail = (label) => (err) => {
       if (err instanceof TypeError || err instanceof ReferenceError) throw err;
-      console.error(`  ⚠️  ${label} translation failed: ${err.message} — fallback al recupero per-campo`);
+      console.error(`  ⚠️  ${label} translation failed: ${safeSignalDiagnosticTextForLog(err?.message || err, RUN_REPORT)} — fallback al recupero per-campo`);
       return {};
     };
     const bodyFields = Object.keys(collectBodySections(sourceContent));
@@ -14771,7 +14789,7 @@ ${localizedToponymInstruction(targetLang)}`;
       // AI/network errors (quota, timeout, JSON parse) are expected transient
       // failures and should fall back to per-field recovery downstream (#1266).
       if (err instanceof TypeError || err instanceof ReferenceError) throw err;
-      console.error(`  ⚠️  ${target.toUpperCase()} translation aborted (${err?.message || err}) — recupero per-campo downstream (#1266)`);
+      console.error(`  ⚠️  ${target.toUpperCase()} translation aborted (${safeSignalDiagnosticTextForLog(err?.message || err, RUN_REPORT)}) — recupero per-campo downstream (#1266)`);
       return {};
     }
   };
@@ -15047,7 +15065,7 @@ ${localizedToponymInstruction(targetLang)}`;
           );
         } catch (retryErr) {
           pendingReason = 'retry-error';
-          console.error(`  ⚠️  Retry ${field} (${locale}) fallito: ${retryErr.message} — ${esitoSenzaTraduzione}`);
+          console.error(`  ⚠️  Retry ${field} (${locale}) fallito: ${safeSignalDiagnosticTextForLog(retryErr.message, RUN_REPORT)} — ${esitoSenzaTraduzione}`);
         }
       }
       // Vedi `ultimaRisorsa` sopra: sul solo floor-miss non si scende MAI sul
@@ -15161,7 +15179,7 @@ ${localizedToponymInstruction(targetLang)}`;
         console.error(`  ⚠️  Retry ${field} (${locale}) ancora troncato — body lasciato NON tradotto, niente fallback IT (#1875)`);
       } catch (retryErr) {
         pendingReason = 'truncation-retry-error';
-        console.error(`  ⚠️  Retry troncamento ${field} (${locale}) fallito: ${retryErr.message} — body lasciato NON tradotto, niente fallback IT (#1875)`);
+        console.error(`  ⚠️  Retry troncamento ${field} (${locale}) fallito: ${safeSignalDiagnosticTextForLog(retryErr.message, RUN_REPORT)} — body lasciato NON tradotto, niente fallback IT (#1875)`);
       }
       // Un fallback IT vuoto/assente non deve sovrascrivere il body tradotto
       // troncato: perderebbe anche il testo parziale già presente, peggiorando
@@ -15227,7 +15245,7 @@ ${localizedToponymInstruction(targetLang)}`;
             console.error(`  ⚠️  [translation-check] ${locale.toUpperCase()}.${field} ancora identico dopo retry${retryMiss ? ` o sotto il floor (${retryMiss})` : ''} — accettato con warning`);
           }
         } catch (retryErr) {
-          console.error(`  ⚠️  [translation-check] Retry fallito per ${locale}.${field}: ${retryErr.message}`);
+          console.error(`  ⚠️  [translation-check] Retry fallito per ${locale}.${field}: ${safeSignalDiagnosticTextForLog(retryErr.message, RUN_REPORT)}`);
         }
       }
     }
@@ -16871,9 +16889,7 @@ async function generateArticleImage(data, { deadlineAt = getArticleImageDeadline
     appendGeneratedImageRecord(PROJECT_ROOT, result.record);
   } catch (error) {
     if (materialized?.destination && existsSync(materialized.destination)) unlinkSync(materialized.destination);
-    console.error(
-      `  ⚠️  Provenienza immagine governata rifiutata: ${safeSignalDiagnosticTextForLog(error.message, null)}`,
-    );
+    console.error(`  ⚠️  Provenienza immagine governata rifiutata: ${safeSignalDiagnosticTextForLog(error?.message || error, RUN_REPORT)}`);
     data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(error);
     data._imageGenerationFailureReason = String(error.message || 'provenance-rejected')
       .replace(/\s+/g, ' ').trim().slice(0, 180) || 'provenance-rejected';
@@ -16895,12 +16911,10 @@ async function generateArticleImage(data, { deadlineAt = getArticleImageDeadline
   data._generatedImagePath = result.record.imageUrl;
   const finalProvenance = imageRecordForPath(PROJECT_ROOT, data._generatedImagePath, { strict: true });
   applyGeneratedHeroAlt(data, finalProvenance);
-  const imageUrlLabel = safeSignalTextForLog(
-    result.record.imageUrl,
-    null,
-    '[signal image path redacted]',
+  console.error(
+    `  ✅ Copertina governata: ${safeSignalTextForLog(result.record.imageUrl, RUN_REPORT, '[signal image path redacted]')} `
+    + `(${result.record.provider}/${result.record.model})`,
   );
-  console.error(`  ✅ Copertina governata: ${imageUrlLabel} (${result.record.provider}/${result.record.model})`);
   return result.record.imageUrl;
 }
 
@@ -17225,10 +17239,10 @@ function buildBodyFile(data, locale) {
   // Build FAQ line if present — validate JSON roundtrip to catch malformed AI output
   let faqLine = '';
   if (c.faq && Array.isArray(c.faq) && c.faq.length > 0) {
-      assertFaqPairsHaveNoRejectedControls(
-        c.faq,
-        `FAQ ${locale}/${safeSignalTextForLog(id, null, '[signal article id redacted]')}`,
-      );
+    assertFaqPairsHaveNoRejectedControls(
+      c.faq,
+      `FAQ ${locale}/${safeSignalTextForLog(id, RUN_REPORT, '[signal article id redacted]')}`,
+    );
     try {
       const normalizedFaq = c.faq.map((item) => (item && typeof item === 'object'
         ? {
@@ -17248,8 +17262,8 @@ function buildBodyFile(data, locale) {
       faqLine = `\n    'blog.article.${id}.faq': '${escaped}',`;
     } catch (e) {
       console.error(
-        `  ⚠️ FAQ for ${locale}/${safeSignalTextForLog(id, null, '[signal article id redacted]')} dropped — malformed JSON: `
-        + safeSignalDiagnosticTextForLog(e.message),
+        `  ⚠️ FAQ for ${locale}/${safeSignalTextForLog(id, RUN_REPORT, '[signal article id redacted]')} dropped — malformed JSON: `
+        + safeSignalDiagnosticTextForLog(e.message, RUN_REPORT),
       );
     }
   }
@@ -18678,8 +18692,10 @@ async function main() {
           // `check.section` esiste solo sul ramo esatto; il ramo fuzzy
           // (url_slug_match) non sa da quale sezione venga l'id che ha matchato.
           const where = check.crossSection ? ` — sezione ${check.section}` : '';
-          const articleIdLabel = safeSignalTextForLog(check.articleId, h, '[signal existing article id redacted]');
-          console.error(`  🔗 Headline scartata (URL già usata → ${articleIdLabel}${where}): ${safeTopicSelectionLogLabel(h)}`);
+          console.error(
+            `  🔗 Headline scartata (URL già usata → ${safeSignalTextForLog(check.articleId, h, '[signal existing article id redacted]')}${where}): `
+            + safeTopicSelectionLogLabel(h),
+          );
           RUN_REPORT.preFilterDrops.urlAlreadyUsed += 1;
           if (check.crossSection) RUN_REPORT.preFilterDrops.urlUsedOtherSection += 1;
           recordDiscardedHeadline({
@@ -18688,7 +18704,7 @@ async function main() {
             existingId: check.articleId,
             existingSection: check.section ?? null,
             signal: check.signal,
-            signalDriven: isSignalDrivenTopicCandidate(h),
+            candidate: h,
           });
           return false;
         }
@@ -18722,11 +18738,7 @@ async function main() {
         }
         console.error(`  🚫 Headline scartata (topic-gate REGOLA #0 su questa fonte nelle ultime 48 h): ${safeTopicSelectionLogLabel(h)}`);
         RUN_REPORT.preFilterDrops.topicGateAbortedRecently = (RUN_REPORT.preFilterDrops.topicGateAbortedRecently || 0) + 1;
-        recordDiscardedHeadline({
-          reason: 'topic_gate_aborted_recently',
-          headline: h.headline,
-          signalDriven: isSignalDrivenTopicCandidate(h),
-        });
+        recordDiscardedHeadline({ reason: 'topic_gate_aborted_recently', headline: h.headline, candidate: h });
         return false;
       });
 
@@ -18739,8 +18751,10 @@ async function main() {
       headlines = headlines.filter(h => {
         const check = preFlightHeadlineCheck(h.headline);
         if (check.duplicate) {
-          const existingIdLabel = safeSignalTextForLog(check.existingId, h, '[signal existing article id redacted]');
-          console.error(`  📰 Headline scartata (topic già coperto → ${existingIdLabel}, ${check.signal}=${check.sim.toFixed(2)}): ${safeTopicSelectionLogLabel(h)}`);
+          console.error(
+            `  📰 Headline scartata (topic già coperto → ${safeSignalTextForLog(check.existingId, h, '[signal existing article id redacted]')}, `
+            + `${check.signal}=${check.sim.toFixed(2)}): ${safeTopicSelectionLogLabel(h)}`,
+          );
           RUN_REPORT.preFilterDrops.topicAlreadyCovered += 1;
           recordDiscardedHeadline({
             reason: 'topic_already_covered',
@@ -18749,7 +18763,7 @@ async function main() {
             existingTitle: check.existingTitle,
             signal: check.signal,
             sim: Number(check.sim.toFixed(3)),
-            signalDriven: isSignalDrivenTopicCandidate(h),
+            candidate: h,
           });
           return false;
         }
@@ -19442,7 +19456,7 @@ async function main() {
             + `(${(check.sim * 100).toFixed(0)}%) — skip`,
           );
         } else {
-          console.error(`   ✅ [${idx}] "${candidate.keyword}" → nessun conflitto — selezionato\n`);
+          console.error(`   ✅ [${idx}] "${safeSignalTextForLog(candidate.keyword, candidate, '[signal topic redacted]')}" → nessun conflitto — selezionato\n`);
           selectedTopic = candidate;
           selectedOffset = offset;
           break;
@@ -20305,7 +20319,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     try {
       assertYmylPublishable(data, { sourceUrl: url });
     } catch (ymylErr) {
-      console.error(`  ⚠️  ${ymylErr.message}`);
+      console.error(`  ⚠️  ${safeSignalDiagnosticTextForLog(ymylErr?.message || ymylErr, RUN_REPORT)}`);
       if (attempt < maxAttempts) {
         console.error(`  🔄 Rigenero contenuto IT per il gate YMYL (${attempt}/${maxAttempts})...`);
         continue;
@@ -20317,7 +20331,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     try {
       assertNoFabricatedReferences(data.content.it);
     } catch (fabErr) {
-      console.error(`  ⚠️  ${fabErr.message}`);
+      console.error(`  ⚠️  ${safeSignalDiagnosticTextForLog(fabErr?.message || fabErr, RUN_REPORT)}`);
       if (attempt < maxAttempts) {
         console.error(`  🔄 Rigenero contenuto IT per riferimenti inventati (${attempt}/${maxAttempts})...`);
         continue;
@@ -20338,7 +20352,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     try {
       assertNoFabricatedNormAcronyms({ it: data.content.it });
     } catch (normErr) {
-      console.error(`  ⚠️  ${normErr.message}`);
+      console.error(`  ⚠️  ${safeSignalDiagnosticTextForLog(normErr?.message || normErr, RUN_REPORT)}`);
       if (attempt < maxAttempts) {
         console.error(`  🔄 Rigenero contenuto IT per sigla normativa fabbricata (${attempt}/${maxAttempts})...`);
         continue;
@@ -20757,7 +20771,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         break;
       }
     } catch (expandErr) {
-      console.error(`  ⚠️  Espansione fallita: ${expandErr.message}`);
+      console.error(`  ⚠️  Espansione fallita: ${safeSignalDiagnosticTextForLog(expandErr?.message || expandErr, RUN_REPORT)}`);
     }
     // Espansione anticipata che non ha raggiunto la soglia (o rigettata dai
     // gate / dal fact-check e riportata al testo pre-espansione): restano
@@ -20988,7 +21002,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     sourceCopyFinalVerdicts[0],
   );
   console.error(
-    `[source-copy] article=${data.id} max_overlap=${worstSourceCopy.maxWords}`
+    `[source-copy] article=${safeSignalTextForLog(data.id, RUN_REPORT, '[signal article id redacted]')} max_overlap=${worstSourceCopy.maxWords}`
       + ` threshold=${SOURCE_COPY_OVERLAP_THRESHOLD} mode=${sourceCopyMode} locales=it,en,de,fr`,
   );
 

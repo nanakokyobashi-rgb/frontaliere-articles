@@ -11,8 +11,10 @@
 #                            # da scripts/ci/rebase-section-args.mjs
 #
 # Exit 0 = HEAD is now rebased onto <target-branch> (the caller can retry its
-#          push). Exit 1 = the rebase could not be completed safely; the tree is
-#          left clean (rebase aborted) and the caller decides what to do.
+#          push). Exit 1 = the operation could not be completed safely. A failed
+#          rebase is aborted and leaves the tree clean; a post-rebase counter
+#          reconciliation failure keeps the clean rebased tree in place, and
+#          the caller must not push it.
 #
 # ── Why this exists (issue #76) ───────────────────────────────────────────────
 # The article workflows push to main with a retry loop: push, and on rejection
@@ -289,47 +291,105 @@ abort_and_fail() {
 # run partiti da N che scrivono entrambi N+1 producono lo STESSO blob, git non
 # segnala nessun conflitto e il rebase finisce su N+1 invece di N+2. Quindi, a
 # rebase riuscito, ogni contatore dichiarato si riporta a upstream + l'incremento
-# del commit pre-rebase (merge-counter-conflict.mjs --reconcile). Mai fatale:
-# se qualcosa non torna il rebase resta quello che git ha prodotto, cioe' il
-# comportamento di prima.
+# del commit pre-rebase (merge-counter-conflict.mjs --reconcile). Se la
+# riconciliazione non riesce il helper fallisce chiuso, senza pushare un valore
+# che potrebbe aver perso un incremento.
+counter_reconcile_failure() {
+  echo "::error::counter reconciliation failed; stage=$1 category=$2 (details redacted)"
+}
+
+restore_counter_reconciliation() {
+  local changed="$1" rollback_failed=0
+  # shellcheck disable=SC2086
+  git reset -q -- $changed >/dev/null 2>&1 || rollback_failed=1
+  # shellcheck disable=SC2086
+  git checkout -- $changed >/dev/null 2>&1 || rollback_failed=1
+  return "$rollback_failed"
+}
+
 reconcile_counters() {
   [ "$COUNTER_SPECS" != " " ] || return 0
-  local upstream_sha changed
-  upstream_sha="$(git rev-parse --verify --quiet FETCH_HEAD)" || return 0
+  local upstream_sha changed changed_count
+  if ! upstream_sha="$(git rev-parse --verify --quiet FETCH_HEAD 2>"$rebase_log")"; then
+    counter_reconcile_failure resolve upstream-ref
+    return 1
+  fi
   # shellcheck disable=SC2086
-  changed="$(node "$COUNTER_RESOLVER" --reconcile "$PRE_REBASE" "$upstream_sha" $COUNTER_SPECS)" || {
-    echo "::warning::counter reconciliation after the rebase did not run — counters left as the rebase produced them"
-    return 0
-  }
+  : >"$rebase_log"
+  if ! changed="$(node "$COUNTER_RESOLVER" --reconcile "$PRE_REBASE" "$upstream_sha" $COUNTER_SPECS 2>"$rebase_log")"; then
+    counter_reconcile_failure resolve counter-resolver
+    return 1
+  fi
   [ -n "$changed" ] || return 0
   # shellcheck disable=SC2086
-  if ! git add -- $changed; then
-    git checkout -- $changed 2>/dev/null || true
-    echo "::warning::counter reconciliation could not be staged — counters left as the rebase produced them"
-    return 0
+  if ! git add -- $changed > /dev/null 2>"$rebase_log"; then
+    if ! restore_counter_reconciliation "$changed"; then
+      counter_reconcile_failure rollback git-restore
+      return 1
+    fi
+    counter_reconcile_failure stage git-add
+    return 1
   fi
   if [ "$(git rev-parse HEAD)" != "$upstream_sha" ]; then
-    git commit -q --amend --no-edit || { git reset -q -- $changed; git checkout -- $changed 2>/dev/null || true; return 0; }
+    if ! git commit -q --amend --no-edit >/dev/null 2>"$rebase_log"; then
+      if ! restore_counter_reconciliation "$changed"; then
+        counter_reconcile_failure rollback git-restore
+        return 1
+      fi
+      counter_reconcile_failure commit git-amend
+      return 1
+    fi
   else
     # Il commit rigiocato e' sparito (vuoto dopo il rebase) ma il suo
     # incremento no: serve un commit che lo porti.
-    git commit -q -m "Reconcile counters after rebase" || { git reset -q -- $changed; git checkout -- $changed 2>/dev/null || true; return 0; }
+    if ! git commit -q -m "Reconcile counters after rebase" >/dev/null 2>"$rebase_log"; then
+      if ! restore_counter_reconciliation "$changed"; then
+        counter_reconcile_failure rollback git-restore
+        return 1
+      fi
+      counter_reconcile_failure commit git-commit
+      return 1
+    fi
   fi
-  changed_count="$(printf '%s\n' "$changed" | awk 'NF { count += 1 } END { print count + 0 }')"
-  echo "reconciled counters after the rebase: paths=$changed_count"
+  changed_count="$(printf '%s\n' "$changed" | awk 'NF { count += NF } END { print count + 0 }')"
+  echo "reconciled counters after the rebase: count=$changed_count, paths redacted"
+}
+
+pull_failure_category() {
+  if grep -Eiq '(authentication failed|could not read username|permission denied|access denied|http basic: access denied|repository not found|(^|[^0-9])401([^0-9]|$)|(^|[^0-9])403([^0-9]|$))' "$rebase_log"; then
+    echo authentication
+  elif grep -Eiq '(couldn.t find remote ref|could not find remote ref|unknown revision|invalid refspec|couldn.t find remote branch|no such ref)' "$rebase_log"; then
+    echo target-ref
+  elif grep -Eiq '(could not resolve|failed to connect|could not connect|connection timed out|operation timed out|network is unreachable|connection reset by peer|ssl_connect|tls.*(failed|error|terminated))' "$rebase_log"; then
+    echo network
+  else
+    echo git-pull
+  fi
 }
 
 PRE_REBASE="$(git rev-parse HEAD)"
+rebase_log="$(mktemp "${TMPDIR:-/tmp}/frontaliere-rebase.XXXXXX")"
+trap 'rm -f "$rebase_log"' EXIT
+stage_conflict_paths() {
+  if git add -- "$@" > /dev/null 2>"$rebase_log"; then
+    return 0
+  fi
+  echo "::error::failed to stage resolved rebase conflict path(s); paths redacted"
+  abort_and_fail || true
+  return 1
+}
 
-if git pull --rebase "$REMOTE" "$TARGET" >/dev/null 2>&1; then
-  reconcile_counters
+if git pull --rebase "$REMOTE" "$TARGET" >"$rebase_log" 2>&1; then
+  echo "git pull --rebase completed"
+  reconcile_counters || exit 1
   exit 0
 fi
 
 if ! rebase_in_progress; then
   # The pull failed before a rebase ever started (network, auth, unrelated
-  # refusal). Nothing to resolve and nothing to abort.
-  echo "rebase did not start — not a conflict"
+  # refusal). Nothing to resolve and nothing to abort. Git's raw output is
+  # captured because merge diagnostics can contain generated per-article paths.
+  echo "::error::git pull --rebase failed before a rebase started; category=$(pull_failure_category)"
   exit 1
 fi
 
@@ -347,9 +407,14 @@ fi
 # so a state that stops changing ends in an abort rather than a spin.
 progress_marker=""
 for _pass in $(seq 1 20); do
-  rebase_in_progress || { echo "rebase completed"; reconcile_counters; exit 0; }
+  rebase_in_progress || {
+    echo "rebase completed"
+    reconcile_counters || exit 1
+    exit 0
+  }
 
   conflicted="$(git diff --name-only --diff-filter=U)"
+  conflict_count="$(printf '%s\n' "$conflicted" | awk 'NF { count += 1 } END { print count + 0 }')"
 
   if [ -z "$conflicted" ]; then
     # Stopped without conflicts. Either the replayed commit became empty once
@@ -387,7 +452,7 @@ for _pass in $(seq 1 20); do
       case "$ALLOWED" in
         *" $f "*) ;;
         *)
-          echo "::warning::rebase conflict on an undeclared path; aborting, as before"
+          echo "::warning::rebase conflict path is not a whole-file bookkeeping cache or declared content registry (count=$conflict_count, paths redacted) — aborting, as before"
           abort_and_fail || exit 1
           ;;
       esac
@@ -399,10 +464,12 @@ EOF
     # file has passed its own backstop, so a refusal here leaves every registry
     # still conflicted and the tree exactly as we found it.
     if [ "${#registry_set[@]}" -gt 0 ]; then
-      if node "$MERGE_RESOLVER" "${registry_set[@]}"; then
-        git add -- "${registry_set[@]}" 2>/dev/null
+      : >"$rebase_log"
+      if node "$MERGE_RESOLVER" "${registry_set[@]}" >"$rebase_log" 2>&1; then
+        stage_conflict_paths "${registry_set[@]}"
+        echo "merge per-record: count=${#registry_set[@]} content registry path(s), details redacted"
       else
-        echo "::warning::the content registries could not be merged per record — aborting rather than committing a fused registry"
+        echo "::warning::content registry merge failed (path details redacted) — aborting rather than committing a fused registry"
         abort_and_fail || exit 1
       fi
     fi
@@ -412,11 +479,13 @@ EOF
     # otherwise keep upstream and silently lose this run's queue item.
     if [ -n "$queue_set" ]; then
       # shellcheck disable=SC2086
-      if node "$QUEUE_RESOLVER" $queue_set; then
+      : >"$rebase_log"
+      if node "$QUEUE_RESOLVER" $queue_set >"$rebase_log" 2>&1; then
         # shellcheck disable=SC2086
-        git add -- $queue_set 2>/dev/null
+        stage_conflict_paths $queue_set
+        echo "merged cover-regeneration queue; item details redacted"
       else
-        echo "::warning::the cover-regeneration queue could not be merged by articleId — aborting rather than dropping a request"
+        echo "::warning::cover-regeneration queue merge failed (item details redacted) — aborting rather than dropping a request"
         abort_and_fail || exit 1
       fi
     fi
@@ -425,17 +494,18 @@ EOF
     # copia del commit che si sta rigiocando (vedi la nota in testa: durante un
     # rebase i due sono invertiti rispetto a un merge), cioe' l'articolo appena
     # generato — lo stesso lato che vince nel merge dei registri.
+    per_article_resolved=0
     while IFS= read -r f; do
       [ -n "$f" ] || continue
       is_per_article "$f" || continue
       if git checkout --theirs -- "$f" 2>/dev/null; then
-        git add -- "$f" 2>/dev/null
-        echo "resolved per-article conflict by taking the rebased commit"
+        stage_conflict_paths "$f"
+        per_article_resolved=$((per_article_resolved + 1))
       elif git checkout --ours -- "$f" 2>/dev/null; then
         # Nessuna copia dal lato rigiocato (upstream lo ha aggiunto e noi no):
         # tenere quella di upstream e' la stessa decisione vista dall'altro lato.
-        git add -- "$f" 2>/dev/null
-        echo "resolved per-article conflict by taking the rebased commit"
+        stage_conflict_paths "$f"
+        per_article_resolved=$((per_article_resolved + 1))
       else
         # Ne' --theirs ne' --ours ha una copia da prendere: una forma degenere
         # di conflitto (es. "entrambi cancellato"), non un vero add/add. Prima
@@ -446,12 +516,15 @@ EOF
         # innesca errexit. Il file restava non risolto ma lo script continuava,
         # stampando comunque "resolved" — e solo il controllo progress_marker
         # al giro successivo lo intercettava, dopo un pass sprecato.
-        echo "::warning::rebase conflict has neither side available to take — aborting rather than leaving it unresolved"
+        echo "::warning::per-article rebase conflict has neither a --theirs nor an --ours copy to take (path redacted) — aborting rather than leaving it unresolved"
         abort_and_fail || exit 1
       fi
     done <<EOF
 $conflicted
 EOF
+    if [ "$per_article_resolved" -gt 0 ]; then
+      echo "resolved per-article conflict(s) by taking the rebased commit: count=$per_article_resolved, paths redacted"
+    fi
 
     # Ramo 5 — contatori: upstream + l'incremento del commit rigiocato. Il
     # resolver scrive solo se la fusione e' dimostrabile; altrimenti si prende
@@ -460,15 +533,16 @@ EOF
     while IFS= read -r f; do
       [ -n "$f" ] || continue
       spec="$(counter_spec_of "$f")" || continue
-      if node "$COUNTER_RESOLVER" "$spec"; then
-        git add -- "$f" 2>/dev/null
+      : >"$rebase_log"
+      if node "$COUNTER_RESOLVER" "$spec" >"$rebase_log" 2>&1; then
+        stage_conflict_paths "$f"
         echo "resolved counter conflict by summing both sides"
       elif git checkout --ours -- "$f" 2>/dev/null; then
-        git add -- "$f" 2>/dev/null
-        echo "::warning::counter merge refused — resolved by taking upstream, as for a bookkeeping cache"
+        stage_conflict_paths "$f"
+        echo "::warning::counter merge refused (path redacted) — resolved by taking upstream, as for a bookkeeping cache"
       else
         git rm -q -f -- "$f" 2>/dev/null || true
-        echo "::warning::counter merge refused and upstream has no copy — dropped, as for a bookkeeping cache"
+        echo "::warning::counter merge refused (path redacted) and upstream has no copy — dropped, as for a bookkeeping cache"
       fi
     done <<EOF
 $conflicted
@@ -488,11 +562,11 @@ EOF
       # not exist upstream at all the checkout fails, and dropping it is the
       # same decision: prefer upstream's view of a scratch cache.
       if git checkout --ours -- "$f" 2>/dev/null; then
-        git add -- "$f"
+        stage_conflict_paths "$f"
       else
         git rm -q -f -- "$f" 2>/dev/null || true
       fi
-      echo "resolved bookkeeping conflict by taking upstream"
+      echo "resolved bookkeeping conflict by taking upstream (path redacted)"
     done <<EOF
 $conflicted
 EOF

@@ -470,10 +470,11 @@ function scanCorpusIt(t, campo) {
     .map((valore) => [valore, detectWrongLatinLanguageInField(valore, 'it', campo)])
     .filter(([valore, esito]) => esito && !OFFENDER_GENUINI.includes(valore));
 
-  assert.deepEqual(
-    offender.map(([valore, esito]) => `${esito.lang}/${esito.reason} :: ${valore}`),
-    [],
-    `il rilevatore rigetta ${campo} italiani legittimi su ${valori.length} misurati`,
+  assert.equal(
+    offender.length,
+    0,
+    `il rilevatore ha trovato ${offender.length} adozioni di lingua sbagliata nei ${campo} IT `
+      + `(${valori.length} campi misurati); valori omessi dal log`,
   );
 }
 
@@ -539,10 +540,11 @@ function scanCorpusLocale(t, locale, campo) {
     .map((valore) => [valore, detectWrongLatinLanguageInField(valore, locale, campo)])
     .filter(([, esito]) => esito);
 
-  assert.deepEqual(
-    offender.map(([valore, esito]) => `${esito.lang}/${esito.reason} :: ${valore}`),
-    [],
-    `il rilevatore trova lingua sbagliata su ${campo} ${locale} (${valori.length} misurati)`,
+  assert.equal(
+    offender.length,
+    0,
+    `il rilevatore ha trovato ${offender.length} adozioni di lingua sbagliata su ${campo} ${locale} `
+      + `(${valori.length} misurati); valori omessi dal log`,
   );
 }
 
@@ -605,7 +607,7 @@ test('#1177 — la classe SEO IT resta coperta dalla scansione', (t) => {
   }
 
   const campi = [];
-  const scartate = [];
+  let scartate = 0;
   for (const file of SEO_FILES) {
     const source = readFileSync(path.join(ROOT, file), 'utf8');
     const entryKeys = [...source.matchAll(SEO_ENTRY_KEY_RE)];
@@ -616,18 +618,18 @@ test('#1177 — la classe SEO IT resta coperta dalla scansione', (t) => {
       `${file}: il parser SEO ha letto ${entries.length} entry su ${entryKeys.length} dichiarate`,
     );
     const campiDelFile = [];
-    for (const entry of entries) {
+    for (const [entryIndex, entry] of entries.entries()) {
       const blocco = entry[2];
       // I chunk possono contenere più superfici; `/articoli-` è il contratto
       // del canonical IT, quindi è il discriminante di lingua della scansione.
       const canonical = seoCampo(blocco, 'canonicalPath');
       if (!canonical?.startsWith('/articoli-')) {
-        scartate.push(`${file}:${entry[1]} canonical=${canonical ?? '<assente>'}`);
+        scartate += 1;
         continue;
       }
       for (const campo of SEO_FIELDS) {
         const value = seoCampo(blocco, campo);
-        assert.notEqual(value, null, `${file}:${entry[1]} manca ${campo}`);
+        assert.notEqual(value, null, `entry SEO IT ${entryIndex + 1} senza campo ${campo}`);
         campiDelFile.push({ file, id: entry[1], campo, value });
       }
     }
@@ -639,24 +641,29 @@ test('#1177 — la classe SEO IT resta coperta dalla scansione', (t) => {
     campi.push(...campiDelFile);
   }
 
-  assert.deepEqual(
-    scartate,
-    [],
-    `entry SEO IT escluse dal filtro canonical: ${scartate.join(', ')}`,
-  );
+  assert.equal(scartate, 0, `${scartate} entry SEO IT escluse dal filtro canonical`);
   assert.ok(campi.length >= MIN_SEO_CAMPI_IT, `letti solo ${campi.length} campi SEO IT: scansione troncata`);
   const offender = campi
     .map(({ value, campo, ...meta }) => ({ ...meta, campo, value, esito: detectWrongLatinLanguageInField(value, 'it', campo) }))
     .filter(({ esito }) => esito);
-  assert.deepEqual(
-    offender.map(({ file, id, campo, value, esito }) => `${file}:${id}.${campo} ${esito.lang}/${esito.reason} :: ${value}`),
-    [],
-    `il rilevatore trova lingua sbagliata in ${offender.length} campi SEO IT`,
+  assert.equal(
+    offender.length,
+    0,
+    `il rilevatore ha trovato ${offender.length} adozioni di lingua sbagliata nei campi SEO IT; `
+      + 'identità e valori omessi dal log',
   );
 });
 
 test('#1177 — il bullet del body IT e\' italiano', () => {
   const source = readFileSync(path.join(ROOT, 'content/blog-body/it/chiese-ticino-derubate-2026.ts'), 'utf8');
-  assert.doesNotMatch(source, /Bargeld, Silberbesteck und Einbruchswerkzeug sichergestellt/);
-  assert.match(source, /Contanti, posate d\\'argento e strumenti da scasso sequestrati/);
+  assert.equal(
+    /Bargeld, Silberbesteck und Einbruchswerkzeug sichergestellt/.test(source),
+    false,
+    'il body IT non deve contenere il bullet tedesco',
+  );
+  assert.equal(
+    /Contanti, posate d\\'argento e strumenti da scasso sequestrati/.test(source),
+    true,
+    'il bullet italiano deve restare presente',
+  );
 });
