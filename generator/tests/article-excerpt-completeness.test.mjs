@@ -111,6 +111,29 @@ test('build-api controlla la completezza prima di cancellare la superficie pubbl
   assert.ok(primaryWrite > primaryRepair, 'il controllo deve precedere anche la prima scrittura del percorso principale');
 });
 
+test('lo stato anti-copia e le riparazioni SEO sopravvivono al loop dei tentativi', () => {
+  const generator = readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
+  const generationStart = generator.indexOf('async function generateAndValidateArticle(');
+  const attempts = generator.indexOf('for (let attempt = 1;', generationStart);
+  const sourceCopyResult = generator.indexOf('const sourceCopyResult =', attempts);
+  const finalGate = generator.indexOf('const excerptRepairs = repairGeneratedArticleDescriptions(data);', sourceCopyResult);
+  assert.ok(generationStart >= 0 && attempts > generationStart, 'il loop dei tentativi deve essere presente');
+  assert.ok(sourceCopyResult > attempts && finalGate > sourceCopyResult, 'il percorso anti-copia deve precedere i gate finali');
+
+  const beforeAttempts = generator.slice(generationStart, attempts);
+  assert.match(beforeAttempts, /let sourceCopyChanged = false;/u);
+  assert.match(beforeAttempts, /let preTranslationExcerptRepairs = \[\];/u);
+
+  const attemptState = generator.slice(sourceCopyResult, finalGate);
+  assert.match(attemptState, /sourceCopyChanged = sourceCopyResult\.changed;/u);
+  assert.match(attemptState, /preTranslationExcerptRepairs = \[\];/u);
+
+  const finalChecks = generator.slice(finalGate, finalGate + 1600);
+  assert.doesNotMatch(finalChecks, /sourceCopyResult\.changed/u);
+  assert.match(finalChecks, /sourceCopyChanged/u);
+  assert.match(finalChecks, /preTranslationExcerptRepairs\.length/u);
+});
+
 test('il prompt excerpt richiede una frase completa e il fallback pesca dal body', () => {
   const generator = readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
   const start = generator.indexOf('async function generateExcerpt(');
