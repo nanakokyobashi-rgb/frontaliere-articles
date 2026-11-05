@@ -4,17 +4,17 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "c5deace6b8b9e7b06beab0fb9379301cccc87a806320fa7f7abb2c77d9fe0070",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "5fcb7488ab4a6ef60f37327cac4ccf08a61f6d21e8e57ab997cd7135f0bce4e6",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-03T20:00:07.431Z",
+      "updatedAt": "2026-11-05T01:51:30.468Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 3 novembre 2026"
+          "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "4",
-          "note": "segnalazioni aggiornate: 3 novembre 2026"
+          "value": "5",
+          "note": "segnalazioni aggiornate: 5 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -83,10 +83,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 13 novembre 2026",
               "date": "2026-11-02T08:00:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo <-> Luzern tra Svincolo autostradale Stans Nord E Svincolo autostradale Buochs Situazione: problemi di traffico cantiere, lunghezza [km] 3.2 Limitazione del traffico: nuova viabilità…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 12 novembre 2026",
+              "date": "2026-11-04T13:48:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -124,7 +130,7 @@
               "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -164,7 +170,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "NW",
@@ -175,12 +181,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "3",
-          "note": "reports as of 3 November 2026"
+          "note": "reports as of 5 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "4",
-          "note": "reports as of 3 November 2026"
+          "value": "5",
+          "note": "reports as of 5 November 2026"
         }
       ],
       "dataBlocks": [
@@ -230,10 +236,16 @@
               "value": "Roadworks",
               "detail": "until 13 November 2026",
               "date": "2026-11-02T08:00:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo <-> Luzern tra Svincolo autostradale Stans Nord E Svincolo autostradale Buochs Situazione: problemi di traffico cantiere, lunghezza [km] 3.2 Limitazione del traffico: nuova viabilità…",
+              "value": "Roadworks",
+              "detail": "until 12 November 2026",
+              "date": "2026-11-04T13:48:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +283,7 @@
               "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -311,7 +323,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "NW",
@@ -322,12 +334,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "3",
-          "note": "Meldungen vom 3. November 2026"
+          "note": "Meldungen vom 5. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "4",
-          "note": "Meldungen vom 3. November 2026"
+          "value": "5",
+          "note": "Meldungen vom 5. November 2026"
         }
       ],
       "dataBlocks": [
@@ -377,10 +389,16 @@
               "value": "Baustelle",
               "detail": "bis 13. November 2026",
               "date": "2026-11-02T08:00:00.000Z"
+            },
+            {
+              "label": "A2 Gotthard <-> Luzern zwischen Anschluss Stans-Nord und Anschluss Buochs Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 3.2 Verkehrsführung: veränderte Verkehrsführung auf einen Fahrstreifen…",
+              "value": "Baustelle",
+              "detail": "bis 12. November 2026",
+              "date": "2026-11-04T13:48:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -418,7 +436,7 @@
               "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -458,7 +476,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "NW",
@@ -469,12 +487,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "3",
-          "note": "signalements au 3 novembre 2026"
+          "note": "signalements au 5 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "4",
-          "note": "signalements au 3 novembre 2026"
+          "value": "5",
+          "note": "signalements au 5 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -524,10 +542,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 13 novembre 2026",
               "date": "2026-11-02T08:00:00.000Z"
+            },
+            {
+              "label": "A2 St-Gothard <-> Lucerne entre Jonction autoroutière Stans-Nord et Jonction autoroutière Buochs Situation: trafic perturbé travaux, longueur [km] 3.2 Gestion du trafic: nouveau plan de circulation…",
+              "value": "Chantier",
+              "detail": "jusqu’au 12 novembre 2026",
+              "date": "2026-11-04T13:48:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -565,7 +589,7 @@
               "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -605,7 +629,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

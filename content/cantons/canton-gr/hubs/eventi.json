@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "fd1ac5788ea68dd0149e33367277ca32319d6aef9a0bed6a4e06818eb6321295",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "593fa792c34681e6d7447fa54bf83dad5395f4946f0f1093c2dae0b136e63931",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-03T20:20:58.923Z",
+      "updatedAt": "2026-11-04T02:24:05.931Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "77",
+          "value": "76",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Geschichten-Kiste: Jakob muss kämpfen",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
+              "label": "Festival dello yoga di montagna",
+              "detail": "Schweizerhof Flims, Romantik Hotel & SPA, Flims",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/events/music/flims-waldhaus/mountain-yoga-festival_A86Gpwd"
             },
             {
-              "label": "Kasperlitheater",
-              "detail": "Chur",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kasperlitheater-2/"
+              "label": "Gemeinsames Mittagessen mit der Gruppa Cordial",
+              "detail": "La Scuntrada, Surses",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gemeinsames-mittagessen-mit-der-gruppa-cordial/"
             },
             {
-              "label": "Kraft der Stille - Sitzen im Schweigen",
-              "detail": "Kapelle Bodmer in Chur, Felsberg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kraft-der-stille-sitzen-im-schweigen-7/"
+              "label": "Senioren-Mittagstisch",
+              "detail": "Sternen, Domat/Ems",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/senioren-mittagstisch-18/"
             },
             {
-              "label": "Spieleabend in der libraria",
-              "detail": "Scuol",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-2/"
+              "label": "Seniorenessen im Bistro Fläsch",
+              "detail": "Evang.-ref. Kirche Fläsch, Fläsch",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/seniorenessen-im-bistro-flaesch-2/"
             },
             {
-              "label": "Sternstunde Regula - Glaube und Gehirn",
-              "detail": "Regulakirche, Chur",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sternstunde-regula-glaube-und-gehirn/"
+              "label": "Presentazione libro di Massimo Isotta - “Liberi H.”, fra politica e intrigo",
+              "detail": "Aula Riformata, Poschiavo",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/presentazione-libro-di-massimo-isotta-liberi-h-fra-politica-e-intrigo/"
             },
             {
-              "label": "Wild Hogs HC Arosa vs. EHC Flims",
-              "detail": "Arosa",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-hogs-hc-arosa-vs-ehc-flims/"
+              "label": "Bücherapéro - Herbstneuheiten",
+              "detail": "Gemeindebibliothek Domat/Ems, Domat/Ems",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/buecherapero-herbstneuheiten/"
             },
             {
-              "label": "Schöne Dinge",
-              "detail": "Theater Chur, Chur — in corso, ultimo giorno: 4 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
+              "label": "Musiktheater: La scoula chi svoula",
+              "detail": "Sala cumünala, Scuol",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/scuol/musiktheater-la-scoula-chi-svoula_AAZic7b"
             },
             {
-              "label": "Alphorn holiday course for beginners",
-              "detail": "Walserhuus Sertig, Davos — in corso, ultimo giorno: 4 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+              "label": "Lost Places - Reisen in eine verborgene Welt - Explora Live Show",
+              "detail": "Kirchgemeindehaus Titthof, Chur",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lost-places-reisen-in-eine-verborgene-welt-explora-live-show/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -153,7 +153,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "GR",
@@ -163,7 +163,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "77",
+          "value": "76",
           "note": "from the site’s events calendar"
         }
       ],
@@ -174,69 +174,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Geschichten-Kiste: Jakob muss kämpfen",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
+              "label": "Mountain Yoga Festival",
+              "detail": "Schweizerhof Flims, Romantik Hotel & SPA, Flims",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/events/music/flims-waldhaus/mountain-yoga-festival_A86Gpwd"
             },
             {
-              "label": "Kasperlitheater",
-              "detail": "Chur",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kasperlitheater-2/"
+              "label": "Gemeinsames Mittagessen mit der Gruppa Cordial",
+              "detail": "La Scuntrada, Surses",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gemeinsames-mittagessen-mit-der-gruppa-cordial/"
             },
             {
-              "label": "Kraft der Stille - Sitzen im Schweigen",
-              "detail": "Kapelle Bodmer in Chur, Felsberg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kraft-der-stille-sitzen-im-schweigen-7/"
+              "label": "Senioren-Mittagstisch",
+              "detail": "Sternen, Domat/Ems",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/senioren-mittagstisch-18/"
             },
             {
-              "label": "Spieleabend in der libraria",
-              "detail": "Scuol",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-2/"
+              "label": "Seniorenessen im Bistro Fläsch",
+              "detail": "Evang.-ref. Kirche Fläsch, Fläsch",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/seniorenessen-im-bistro-flaesch-2/"
             },
             {
-              "label": "Sternstunde Regula - Glaube und Gehirn",
-              "detail": "Regulakirche, Chur",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sternstunde-regula-glaube-und-gehirn/"
+              "label": "Presentazione libro di Massimo Isotta - “Liberi H.”, fra politica e intrigo",
+              "detail": "Aula Riformata, Poschiavo",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/presentazione-libro-di-massimo-isotta-liberi-h-fra-politica-e-intrigo/"
             },
             {
-              "label": "Wild Hogs HC Arosa vs. EHC Flims",
-              "detail": "Arosa",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-hogs-hc-arosa-vs-ehc-flims/"
+              "label": "Bücherapéro - Herbstneuheiten",
+              "detail": "Gemeindebibliothek Domat/Ems, Domat/Ems",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/buecherapero-herbstneuheiten/"
             },
             {
-              "label": "Schöne Dinge",
-              "detail": "Theater Chur, Chur — ongoing, last day: 4 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
+              "label": "Musiktheater: La scoula chi svoula",
+              "detail": "Sala cumünala, Scuol",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/scuol/musiktheater-la-scoula-chi-svoula_AAZic7b"
             },
             {
-              "label": "Alphorn holiday course for beginners",
-              "detail": "Walserhuus Sertig, Davos — ongoing, last day: 4 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+              "label": "Lost Places - Reisen in eine verborgene Welt - Explora Live Show",
+              "detail": "Kirchgemeindehaus Titthof, Chur",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lost-places-reisen-in-eine-verborgene-welt-explora-live-show/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — ongoing, last day: 7 November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — ongoing, last day: 14 November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -294,7 +294,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "GR",
@@ -304,7 +304,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "77",
+          "value": "76",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -315,69 +315,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Geschichten-Kiste: Jakob muss kämpfen",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
+              "label": "Mountain Yoga Festival",
+              "detail": "Schweizerhof Flims, Romantik Hotel & SPA, Flims",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/events/music/flims-waldhaus/mountain-yoga-festival_A86Gpwd"
             },
             {
-              "label": "Kasperlitheater",
-              "detail": "Chur",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kasperlitheater-2/"
+              "label": "Gemeinsames Mittagessen mit der Gruppa Cordial",
+              "detail": "La Scuntrada, Surses",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gemeinsames-mittagessen-mit-der-gruppa-cordial/"
             },
             {
-              "label": "Kraft der Stille - Sitzen im Schweigen",
-              "detail": "Kapelle Bodmer in Chur, Felsberg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kraft-der-stille-sitzen-im-schweigen-7/"
+              "label": "Senioren-Mittagstisch",
+              "detail": "Sternen, Domat/Ems",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/senioren-mittagstisch-18/"
             },
             {
-              "label": "Spieleabend in der libraria",
-              "detail": "Scuol",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-2/"
+              "label": "Seniorenessen im Bistro Fläsch",
+              "detail": "Evang.-ref. Kirche Fläsch, Fläsch",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/seniorenessen-im-bistro-flaesch-2/"
             },
             {
-              "label": "Sternstunde Regula - Glaube und Gehirn",
-              "detail": "Regulakirche, Chur",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sternstunde-regula-glaube-und-gehirn/"
+              "label": "Presentazione libro di Massimo Isotta - “Liberi H.”, fra politica e intrigo",
+              "detail": "Aula Riformata, Poschiavo",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/presentazione-libro-di-massimo-isotta-liberi-h-fra-politica-e-intrigo/"
             },
             {
-              "label": "Wild Hogs HC Arosa vs. EHC Flims",
-              "detail": "Arosa",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-hogs-hc-arosa-vs-ehc-flims/"
+              "label": "Bücherapéro - Herbstneuheiten",
+              "detail": "Gemeindebibliothek Domat/Ems, Domat/Ems",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/buecherapero-herbstneuheiten/"
             },
             {
-              "label": "Schöne Dinge",
-              "detail": "Theater Chur, Chur — läuft, letzter Tag: 4. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
+              "label": "Musiktheater: La scoula chi svoula",
+              "detail": "Sala cumünala, Scuol",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/scuol/musiktheater-la-scoula-chi-svoula_AAZic7b"
             },
             {
-              "label": "Alphorn-Ferienkurs für Anfänger und Anfängerinnen",
-              "detail": "Walserhuus Sertig, Davos — läuft, letzter Tag: 4. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+              "label": "Lost Places - Reisen in eine verborgene Welt - Explora Live Show",
+              "detail": "Kirchgemeindehaus Titthof, Chur",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lost-places-reisen-in-eine-verborgene-welt-explora-live-show/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -435,7 +435,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "GR",
@@ -445,7 +445,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "77",
+          "value": "76",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -456,69 +456,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Geschichten-Kiste: Jakob muss kämpfen",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
+              "label": "Festival de yoga en montagne",
+              "detail": "Schweizerhof Flims, Romantik Hotel & SPA, Flims",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/events/music/flims-waldhaus/mountain-yoga-festival_A86Gpwd"
             },
             {
-              "label": "Kasperlitheater",
-              "detail": "Chur",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kasperlitheater-2/"
+              "label": "Gemeinsames Mittagessen mit der Gruppa Cordial",
+              "detail": "La Scuntrada, Surses",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gemeinsames-mittagessen-mit-der-gruppa-cordial/"
             },
             {
-              "label": "Kraft der Stille - Sitzen im Schweigen",
-              "detail": "Kapelle Bodmer in Chur, Felsberg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kraft-der-stille-sitzen-im-schweigen-7/"
+              "label": "Senioren-Mittagstisch",
+              "detail": "Sternen, Domat/Ems",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/senioren-mittagstisch-18/"
             },
             {
-              "label": "Spieleabend in der libraria",
-              "detail": "Scuol",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-2/"
+              "label": "Seniorenessen im Bistro Fläsch",
+              "detail": "Evang.-ref. Kirche Fläsch, Fläsch",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/seniorenessen-im-bistro-flaesch-2/"
             },
             {
-              "label": "Sternstunde Regula - Glaube und Gehirn",
-              "detail": "Regulakirche, Chur",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sternstunde-regula-glaube-und-gehirn/"
+              "label": "Presentazione libro di Massimo Isotta - “Liberi H.”, fra politica e intrigo",
+              "detail": "Aula Riformata, Poschiavo",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/presentazione-libro-di-massimo-isotta-liberi-h-fra-politica-e-intrigo/"
             },
             {
-              "label": "Hogs Sauvages HC Arosa contre EHC Flims",
-              "detail": "Arosa",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-hogs-hc-arosa-vs-ehc-flims/"
+              "label": "Bücherapéro - Herbstneuheiten",
+              "detail": "Gemeindebibliothek Domat/Ems, Domat/Ems",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/buecherapero-herbstneuheiten/"
             },
             {
-              "label": "Schöne Dinge",
-              "detail": "Theater Chur, Chur — en cours, dernier jour : 4 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
+              "label": "Musiktheater: La scoula chi svoula",
+              "detail": "Sala cumünala, Scuol",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/scuol/musiktheater-la-scoula-chi-svoula_AAZic7b"
             },
             {
-              "label": "Alphorn holiday course for beginners",
-              "detail": "Walserhuus Sertig, Davos — en cours, dernier jour : 4 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+              "label": "Lost Places - Reisen in eine verborgene Welt - Explora Live Show",
+              "detail": "Kirchgemeindehaus Titthof, Chur",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lost-places-reisen-in-eine-verborgene-welt-explora-live-show/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -576,7 +576,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

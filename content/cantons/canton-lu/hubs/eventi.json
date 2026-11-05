@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "66730a7b924b11fea5d6d87f7ccab5ed6f7d227ff660fad8663c115ab294819d",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "b9cb4efa7f58ab706b848e18f1615c872d85fc895642e17382a1d0a256e19e82",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-03T20:20:58.923Z",
+      "updatedAt": "2026-11-04T02:24:05.931Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "56",
+          "value": "55",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,48 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Gletschergarten by Night",
-              "detail": "Gletschergarten Luzern, Luzern",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/gletschergarten-by-night_Ae2At5L"
-            },
-            {
-              "label": "Andreas Gabalier",
-              "detail": "KKL Luzern, Luzern",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/andreas-gabalier_AmX1iXJ"
-            },
-            {
-              "label": "Tay Oskee",
-              "detail": "Schüür",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/tay-oskee_AYE77m4"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — in corso, ultimo giorno: 25 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
             {
               "label": "FUKA KIOSK - Kultur zum Abholen",
               "detail": "Luzern",
@@ -96,11 +54,53 @@
               "detail": "Kriens",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/beziehungskosmos-6/"
+            },
+            {
+              "label": "TV Smith",
+              "detail": "Musikzentrum Sedel",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/emmenbruecke/tv-smith_A5Fu988"
+            },
+            {
+              "label": "Gletschergarten by Night",
+              "detail": "Gletschergarten Luzern, Luzern — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/gletschergarten-by-night_Ae2At5L"
+            },
+            {
+              "label": "Andreas Gabalier",
+              "detail": "KKL Luzern, Luzern — in corso, ultimo giorno: 5 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/andreas-gabalier_AmX1iXJ"
+            },
+            {
+              "label": "Schweizer Wohntage: Luzern",
+              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+            },
+            {
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — in corso, ultimo giorno: 25 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,7 +138,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "LU",
@@ -182,7 +182,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "56",
+          "value": "55",
           "note": "from the site’s events calendar"
         }
       ],
@@ -192,48 +192,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Gletschergarten by Night",
-              "detail": "Gletschergarten Luzern, Luzern",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/gletschergarten-by-night_Ae2At5L"
-            },
-            {
-              "label": "Andreas Gabalier",
-              "detail": "KKL Luzern, Luzern",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/andreas-gabalier_AmX1iXJ"
-            },
-            {
-              "label": "Tay Oskee",
-              "detail": "Schüür",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/tay-oskee_AYE77m4"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "detail": "Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — ongoing, last day: 25 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
             {
               "label": "FUKA KIOSK - Kultur zum Abholen",
               "detail": "Luzern",
@@ -251,11 +209,53 @@
               "detail": "Kriens",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/beziehungskosmos-6/"
+            },
+            {
+              "label": "TV Smith",
+              "detail": "Musikzentrum Sedel",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/emmenbruecke/tv-smith_A5Fu988"
+            },
+            {
+              "label": "Gletschergarten by Night",
+              "detail": "Gletschergarten Luzern, Luzern — ongoing, last day: 7 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/gletschergarten-by-night_Ae2At5L"
+            },
+            {
+              "label": "Andreas Gabalier",
+              "detail": "KKL Luzern, Luzern — ongoing, last day: 5 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/andreas-gabalier_AmX1iXJ"
+            },
+            {
+              "label": "Schweizer Wohntage: Luzern",
+              "detail": "Luzern — ongoing, last day: 15 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — ongoing, last day: 15 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+            },
+            {
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — ongoing, last day: 25 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -293,7 +293,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "LU",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "56",
+          "value": "55",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -347,48 +347,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Gletschergarten by Night",
-              "detail": "Gletschergarten Luzern, Luzern",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/gletschergarten-by-night_Ae2At5L"
-            },
-            {
-              "label": "Andreas Gabalier",
-              "detail": "KKL Luzern, Luzern",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/andreas-gabalier_AmX1iXJ"
-            },
-            {
-              "label": "Tay Oskee",
-              "detail": "Schüür",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/tay-oskee_AYE77m4"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — läuft, letzter Tag: 25. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
             {
               "label": "FUKA KIOSK - Kultur zum Abholen",
               "detail": "Luzern",
@@ -406,11 +364,53 @@
               "detail": "Kriens",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/beziehungskosmos-6/"
+            },
+            {
+              "label": "TV Smith",
+              "detail": "Musikzentrum Sedel",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/emmenbruecke/tv-smith_A5Fu988"
+            },
+            {
+              "label": "Gletschergarten by Night",
+              "detail": "Gletschergarten Luzern, Luzern — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/gletschergarten-by-night_Ae2At5L"
+            },
+            {
+              "label": "Andreas Gabalier",
+              "detail": "KKL Luzern, Luzern — läuft, letzter Tag: 5. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/andreas-gabalier_AmX1iXJ"
+            },
+            {
+              "label": "Schweizer Wohntage: Luzern",
+              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+            },
+            {
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — läuft, letzter Tag: 25. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -448,7 +448,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "LU",
@@ -492,7 +492,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "56",
+          "value": "55",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -502,48 +502,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Gletschergarten by Night",
-              "detail": "Gletschergarten Luzern, Luzern",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/gletschergarten-by-night_Ae2At5L"
-            },
-            {
-              "label": "Andreas Gabalier",
-              "detail": "KKL Luzern, Luzern",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/andreas-gabalier_AmX1iXJ"
-            },
-            {
-              "label": "Tay Oskee",
-              "detail": "Schüür",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/tay-oskee_AYE77m4"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — en cours, dernier jour : 25 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
             {
               "label": "FUKA KIOSK - Kultur zum Abholen",
               "detail": "Luzern",
@@ -561,11 +519,53 @@
               "detail": "Kriens",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/beziehungskosmos-6/"
+            },
+            {
+              "label": "TV Smith",
+              "detail": "Musikzentrum Sedel",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/emmenbruecke/tv-smith_A5Fu988"
+            },
+            {
+              "label": "Gletschergarten by Night",
+              "detail": "Gletschergarten Luzern, Luzern — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/gletschergarten-by-night_Ae2At5L"
+            },
+            {
+              "label": "Andreas Gabalier",
+              "detail": "KKL Luzern, Luzern — en cours, dernier jour : 5 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/andreas-gabalier_AmX1iXJ"
+            },
+            {
+              "label": "Schweizer Wohntage: Luzern",
+              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+            },
+            {
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — en cours, dernier jour : 25 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -603,7 +603,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

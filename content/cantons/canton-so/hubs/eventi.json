@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "65df17c44a8e65d5359ba01d5ee3d1731d4d66942fcdff37d30f2945942f3b05",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "cce2938ddeef3b63a3b1fe58481686e049278000bb690a558277e4bcd4a18787",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-03T20:20:58.923Z",
+      "updatedAt": "2026-11-04T02:24:05.931Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Meet the Winemaker: Bodegas Balbas",
-              "detail": "SCHULER Vinothek Seewen, Seewen",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/meet-the-winemaker-bodegas-balbas/"
-            },
-            {
-              "label": "Fermata Musica November 26",
-              "detail": "Röm.-kath. Jesuitenkirche",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/solothurn/fermata-musica-november-26_A2c7gM6"
-            },
-            {
-              "label": "Fermata Musica November 26",
+              "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fermata-musica-november-26/"
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
+            },
+            {
+              "label": "Leben im Zeitalter der Dauerkrise",
+              "detail": "Solothurn",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
+            },
+            {
+              "label": "Nicky B Fly",
+              "detail": "Kulturfabrik Kofmehl",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/solothurn/nicky-b-fly_AehD2jH"
+            },
+            {
+              "label": "Vom Kohlenstoff zur Biodiversität",
+              "detail": "Solothurn",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-kohlenstoff-zur-biodiversitaet/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
-              "detail": "Solothurn",
-              "date": "2026-11-04",
+              "detail": "Solothurn — in corso, ultimo giorno: 18 novembre 2026",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Schweizer Landwirtschaft: Entwicklung von der Eiszeit bis zum 1. Weltkrieg",
-              "detail": "Volkshochschule Solothurn, Solothurn",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schweizer-landwirtschaft-entwicklung-von-der-eiszeit-bis-zum-1-weltkrieg/"
-            },
-            {
-              "label": "The ones we love - Kino on Demand",
-              "detail": "Solothurn",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-ones-we-love-kino-on-demand-1/"
             },
             {
               "label": "Was ist Jazz?",
               "detail": "Solothurn — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             },
             {
               "label": "Dynamisch Zeichnen",
               "detail": "Solothurn — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
             },
             {
               "label": "Vom Urknall zum Leben",
               "detail": "Solothurn — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
             },
             {
               "label": "Il Centro Italiano è ospite dell'Hotel Roten Ochsen di Soletta.",
               "detail": "Hotel Roter Ochsen — in corso, ultimo giorno: 16 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
+            },
+            {
+              "label": "Computer Grundlagen",
+              "detail": "Volkshochschule Solothurn, Solothurn — in corso, ultimo giorno: 10 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/soletta/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "SO",
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Meet the Winemaker: Bodegas Balbas",
-              "detail": "SCHULER Vinothek Seewen, Seewen",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/meet-the-winemaker-bodegas-balbas/"
-            },
-            {
-              "label": "Fermata Musica November 26",
-              "detail": "Röm.-kath. Jesuitenkirche",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/solothurn/fermata-musica-november-26_A2c7gM6"
-            },
-            {
-              "label": "Fermata Musica November 26",
+              "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fermata-musica-november-26/"
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
+            },
+            {
+              "label": "Leben im Zeitalter der Dauerkrise",
+              "detail": "Solothurn",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
+            },
+            {
+              "label": "Nicky B Fly",
+              "detail": "Kulturfabrik Kofmehl",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/solothurn/nicky-b-fly_AehD2jH"
+            },
+            {
+              "label": "Vom Kohlenstoff zur Biodiversität",
+              "detail": "Solothurn",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-kohlenstoff-zur-biodiversitaet/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
-              "detail": "Solothurn",
-              "date": "2026-11-04",
+              "detail": "Solothurn — ongoing, last day: 18 November 2026",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Schweizer Landwirtschaft: Entwicklung von der Eiszeit bis zum 1. Weltkrieg",
-              "detail": "Volkshochschule Solothurn, Solothurn",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schweizer-landwirtschaft-entwicklung-von-der-eiszeit-bis-zum-1-weltkrieg/"
-            },
-            {
-              "label": "The ones we love - Kino on Demand",
-              "detail": "Solothurn",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-ones-we-love-kino-on-demand-1/"
             },
             {
               "label": "Was ist Jazz?",
               "detail": "Solothurn — ongoing, last day: 24 November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             },
             {
               "label": "Dynamisch Zeichnen",
               "detail": "Solothurn — ongoing, last day: 7 November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
             },
             {
               "label": "Vom Urknall zum Leben",
               "detail": "Solothurn — ongoing, last day: 18 November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
             },
             {
               "label": "Centro Italiano as guest at the Hotel Roten Ochsen, Solothurn",
               "detail": "Hotel Roter Ochsen — ongoing, last day: 16 November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
+            },
+            {
+              "label": "Computer Grundlagen",
+              "detail": "Volkshochschule Solothurn, Solothurn — ongoing, last day: 10 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/solothurn/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "SO",
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Meet the Winemaker: Bodegas Balbas",
-              "detail": "SCHULER Vinothek Seewen, Seewen",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/meet-the-winemaker-bodegas-balbas/"
-            },
-            {
-              "label": "Fermata Musica November 26",
-              "detail": "Röm.-kath. Jesuitenkirche",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/solothurn/fermata-musica-november-26_A2c7gM6"
-            },
-            {
-              "label": "Fermata Musica November 26",
+              "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fermata-musica-november-26/"
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
+            },
+            {
+              "label": "Leben im Zeitalter der Dauerkrise",
+              "detail": "Solothurn",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
+            },
+            {
+              "label": "Nicky B Fly",
+              "detail": "Kulturfabrik Kofmehl",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/solothurn/nicky-b-fly_AehD2jH"
+            },
+            {
+              "label": "Vom Kohlenstoff zur Biodiversität",
+              "detail": "Solothurn",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-kohlenstoff-zur-biodiversitaet/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
-              "detail": "Solothurn",
-              "date": "2026-11-04",
+              "detail": "Solothurn — läuft, letzter Tag: 18. November 2026",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Schweizer Landwirtschaft: Entwicklung von der Eiszeit bis zum 1. Weltkrieg",
-              "detail": "Volkshochschule Solothurn, Solothurn",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schweizer-landwirtschaft-entwicklung-von-der-eiszeit-bis-zum-1-weltkrieg/"
-            },
-            {
-              "label": "The ones we love - Kino on Demand",
-              "detail": "Solothurn",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-ones-we-love-kino-on-demand-1/"
             },
             {
               "label": "Was ist Jazz?",
               "detail": "Solothurn — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             },
             {
               "label": "Dynamisch Zeichnen",
               "detail": "Solothurn — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
             },
             {
               "label": "Vom Urknall zum Leben",
               "detail": "Solothurn — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
             },
             {
               "label": "Centro Italiano zu Gast im Hotel Roten Ochsen, Solothurn",
               "detail": "Hotel Roter Ochsen — läuft, letzter Tag: 16. November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
+            },
+            {
+              "label": "Computer Grundlagen",
+              "detail": "Volkshochschule Solothurn, Solothurn — läuft, letzter Tag: 10. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/solothurn/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "SO",
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Meet the Winemaker: Bodegas Balbas",
-              "detail": "SCHULER Vinothek Seewen, Seewen",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/meet-the-winemaker-bodegas-balbas/"
-            },
-            {
-              "label": "Fermata Musica November 26",
-              "detail": "Röm.-kath. Jesuitenkirche",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/solothurn/fermata-musica-november-26_A2c7gM6"
-            },
-            {
-              "label": "Fermata Musica November 26",
+              "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fermata-musica-november-26/"
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
+            },
+            {
+              "label": "Leben im Zeitalter der Dauerkrise",
+              "detail": "Solothurn",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
+            },
+            {
+              "label": "Nicky B Fly",
+              "detail": "Kulturfabrik Kofmehl",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/solothurn/nicky-b-fly_AehD2jH"
+            },
+            {
+              "label": "Vom Kohlenstoff zur Biodiversität",
+              "detail": "Solothurn",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-kohlenstoff-zur-biodiversitaet/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
-              "detail": "Solothurn",
-              "date": "2026-11-04",
+              "detail": "Solothurn — en cours, dernier jour : 18 novembre 2026",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Schweizer Landwirtschaft: Entwicklung von der Eiszeit bis zum 1. Weltkrieg",
-              "detail": "Volkshochschule Solothurn, Solothurn",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schweizer-landwirtschaft-entwicklung-von-der-eiszeit-bis-zum-1-weltkrieg/"
-            },
-            {
-              "label": "The ones we love - Kino on Demand",
-              "detail": "Solothurn",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-ones-we-love-kino-on-demand-1/"
             },
             {
               "label": "Was ist Jazz?",
               "detail": "Solothurn — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             },
             {
               "label": "Dynamisch Zeichnen",
               "detail": "Solothurn — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
             },
             {
               "label": "Vom Urknall zum Leben",
               "detail": "Solothurn — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
             },
             {
               "label": "Le Centro Italiano invité à l'hôtel Roten Ochsen, Soleure",
               "detail": "Hotel Roter Ochsen — en cours, dernier jour : 16 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
+            },
+            {
+              "label": "Computer Grundlagen",
+              "detail": "Volkshochschule Solothurn, Solothurn — en cours, dernier jour : 10 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/soleure/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

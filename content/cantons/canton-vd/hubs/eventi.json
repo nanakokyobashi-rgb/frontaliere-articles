@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "4e64dfd55c43a09e1f883c630660ee41848e7f7bf611bb05d34822f20c7cc68f",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "5a48fce2b31b10b05852213212af5134182284b01632de0e707594d6575aa72e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-03T20:20:58.923Z",
+      "updatedAt": "2026-11-04T02:24:05.931Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -38,75 +38,80 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Couvreu-Zyklus II.",
-              "detail": "Salle du Conseil communal, Vevey",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/events/knowledge/vevey/cycle-couvreu-ii_AJLDq6f"
+              "label": "Cena di beneficenza al Fairmont Montreux Palace a favore di Morija",
+              "detail": "Fairmont Montreux Palace, Montreux",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/diner-de-charite-au-fairmont-montreux-palace-en-faveur-de-morija/"
+            },
+            {
+              "label": "Wine and Cheese Pairing Evening",
+              "detail": "Yens",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-accords-vins-et-fromages/"
+            },
+            {
+              "label": "Blandine Lehout",
+              "detail": "Théâtre de l'Octogone, Pully",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/blandine-lehout-1/"
             },
             {
               "label": "CYRIL BONDI – Freie Hand",
-              "detail": "Théatre Oriental-Vevey, Vevey",
-              "date": "2026-11-04",
+              "detail": "Théatre Oriental-Vevey, Vevey — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-05",
               "url": "https://www.guidle.com/it/evenements/musique/vevey/cyril-bondi-carte-blanche_AbcKZ5P"
             },
             {
-              "label": "Comedy on the Coast - The Roommates",
-              "detail": "Etoy",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-on-the-coast-the-roommates/"
-            },
-            {
               "label": "Un monde éperdu - Thierry Romanens",
-              "detail": "Théâtre Boulimie",
-              "date": "2026-11-04",
+              "detail": "Théâtre Boulimie — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-05",
               "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
-            },
-            {
-              "label": "November Jam Session",
-              "detail": "Satellite",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/events/music/lausanne/november-jam-session_AyEqRab"
-            },
-            {
-              "label": "Vacherin Mont d'Or baked at the Terrace",
-              "detail": "Villeneuve VD — in corso, ultimo giorno: 4 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vacherin-mont-dor-baked-at-the-terrace/"
             },
             {
               "label": "\"Dreamscapes\": Print Exhibition",
               "detail": "Galerie-Atelier Arva, Vevey — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
             },
             {
               "label": "Atelier de mosaïque",
               "detail": "Renens — in corso, ultimo giorno: 19 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
             },
             {
               "label": "Kombucha, Kefir, and Homemade Soda Workshop",
               "detail": "Aubonne — in corso, ultimo giorno: 9 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
             },
             {
               "label": "Reflections",
               "detail": "Vevey — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Crazy Diner show Company",
+              "detail": "Corcelles-près-Payerne",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crazy-diner-show-company/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "11e édition du Marché aux jouets",
+              "date": "2026-11-04T08:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90860"
+            },
             {
               "label": "Réponse à la question de M. Hadrien Buclin «Adapter la fête du bois au réchauffement climatique?»",
               "date": "2026-10-08T11:30:00.000Z",
@@ -118,7 +123,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +145,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "VD",
@@ -161,75 +166,80 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Cycle Couvreu II",
-              "detail": "Salle du Conseil communal, Vevey",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/events/knowledge/vevey/cycle-couvreu-ii_AJLDq6f"
+              "label": "Charity dinner at the Fairmont Montreux Palace in aid of Morija",
+              "detail": "Fairmont Montreux Palace, Montreux",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/diner-de-charite-au-fairmont-montreux-palace-en-faveur-de-morija/"
+            },
+            {
+              "label": "Wine and Cheese Pairing Evening",
+              "detail": "Yens",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-accords-vins-et-fromages/"
+            },
+            {
+              "label": "Blandine Lehout",
+              "detail": "Théâtre de l'Octogone, Pully",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/blandine-lehout-1/"
             },
             {
               "label": "CYRIL BONDI - carte blanche",
-              "detail": "Théatre Oriental-Vevey, Vevey",
-              "date": "2026-11-04",
+              "detail": "Théatre Oriental-Vevey, Vevey — ongoing, last day: 7 November 2026",
+              "date": "2026-11-05",
               "url": "https://www.guidle.com/it/evenements/musique/vevey/cyril-bondi-carte-blanche_AbcKZ5P"
             },
             {
-              "label": "Comedy on the Coast - The Roommates",
-              "detail": "Etoy",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-on-the-coast-the-roommates/"
-            },
-            {
               "label": "Un monde éperdu - Thierry Romanens",
-              "detail": "Théâtre Boulimie",
-              "date": "2026-11-04",
+              "detail": "Théâtre Boulimie — ongoing, last day: 14 November 2026",
+              "date": "2026-11-05",
               "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
-            },
-            {
-              "label": "November Jam Session",
-              "detail": "Satellite",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/events/music/lausanne/november-jam-session_AyEqRab"
-            },
-            {
-              "label": "Vacherin Mont d'Or baked at the Terrace",
-              "detail": "Villeneuve VD — ongoing, last day: 4 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vacherin-mont-dor-baked-at-the-terrace/"
             },
             {
               "label": "\"Dreamscapes\": Print Exhibition",
               "detail": "Galerie-Atelier Arva, Vevey — ongoing, last day: 12 November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
             },
             {
               "label": "Atelier de mosaïque",
               "detail": "Renens — ongoing, last day: 19 November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
             },
             {
               "label": "Kombucha, Kefir, and Homemade Soda Workshop",
               "detail": "Aubonne — ongoing, last day: 9 November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
             },
             {
               "label": "Reflections",
               "detail": "Vevey — ongoing, last day: 15 November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Crazy Diner show Company",
+              "detail": "Corcelles-près-Payerne",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crazy-diner-show-company/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "11e édition du Marché aux jouets",
+              "date": "2026-11-04T08:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90860"
+            },
             {
               "label": "Réponse à la question de M. Hadrien Buclin «Adapter la fête du bois au réchauffement climatique?»",
               "date": "2026-10-08T11:30:00.000Z",
@@ -241,7 +251,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +273,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "VD",
@@ -284,75 +294,80 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Couvreu-Zyklus II.",
-              "detail": "Salle du Conseil communal, Vevey",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/events/knowledge/vevey/cycle-couvreu-ii_AJLDq6f"
+              "label": "Charity-Dinner im Fairmont Montreux Palace zugunsten von Morija",
+              "detail": "Fairmont Montreux Palace, Montreux",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/diner-de-charite-au-fairmont-montreux-palace-en-faveur-de-morija/"
+            },
+            {
+              "label": "Soirée Accords Vins et Fromages",
+              "detail": "Yens",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-accords-vins-et-fromages/"
+            },
+            {
+              "label": "Blandine Lehout",
+              "detail": "Théâtre de l'Octogone, Pully",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/blandine-lehout-1/"
             },
             {
               "label": "CYRIL BONDI – Freie Hand",
-              "detail": "Théatre Oriental-Vevey, Vevey",
-              "date": "2026-11-04",
+              "detail": "Théatre Oriental-Vevey, Vevey — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-05",
               "url": "https://www.guidle.com/it/evenements/musique/vevey/cyril-bondi-carte-blanche_AbcKZ5P"
             },
             {
-              "label": "Humor an der Küste – Die Mitbewohner",
-              "detail": "Etoy",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-on-the-coast-the-roommates/"
-            },
-            {
               "label": "Un monde éperdu - Thierry Romanens",
-              "detail": "Théâtre Boulimie",
-              "date": "2026-11-04",
+              "detail": "Théâtre Boulimie — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-05",
               "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
-            },
-            {
-              "label": "November Jam Session",
-              "detail": "Satellite",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/events/music/lausanne/november-jam-session_AyEqRab"
-            },
-            {
-              "label": "Vacherin Mont d'Or aus dem Ofen à la Terrasse",
-              "detail": "Villeneuve VD — läuft, letzter Tag: 4. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vacherin-mont-dor-baked-at-the-terrace/"
             },
             {
               "label": "„Traumlandschaften“: Ausstellung mit Radierungen",
               "detail": "Galerie-Atelier Arva, Vevey — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
             },
             {
               "label": "Atelier de mosaïque",
               "detail": "Renens — läuft, letzter Tag: 19. November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
             },
             {
               "label": "Workshop zu Kombucha, Kefir und hausgemachten Limonaden",
               "detail": "Aubonne — läuft, letzter Tag: 9. November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
             },
             {
               "label": "Reflexionen",
               "detail": "Vevey — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Crazy Diner show Company",
+              "detail": "Corcelles-près-Payerne",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crazy-diner-show-company/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "11e édition du Marché aux jouets",
+              "date": "2026-11-04T08:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90860"
+            },
             {
               "label": "Réponse à la question de M. Hadrien Buclin «Adapter la fête du bois au réchauffement climatique?»",
               "date": "2026-10-08T11:30:00.000Z",
@@ -364,7 +379,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +401,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "VD",
@@ -407,75 +422,80 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Cycle Couvreu II",
-              "detail": "Salle du Conseil communal, Vevey",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/events/knowledge/vevey/cycle-couvreu-ii_AJLDq6f"
+              "label": "Dîner de Charité au Fairmont Montreux Palace en faveur de Morija",
+              "detail": "Fairmont Montreux Palace, Montreux",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/diner-de-charite-au-fairmont-montreux-palace-en-faveur-de-morija/"
+            },
+            {
+              "label": "Soirée Accords Vins et Fromages",
+              "detail": "Yens",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-accords-vins-et-fromages/"
+            },
+            {
+              "label": "Blandine Lehout",
+              "detail": "Théâtre de l'Octogone, Pully",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/blandine-lehout-1/"
             },
             {
               "label": "Cyril Bondi - carte blanche",
-              "detail": "Théatre Oriental-Vevey, Vevey",
-              "date": "2026-11-04",
+              "detail": "Théatre Oriental-Vevey, Vevey — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-05",
               "url": "https://www.guidle.com/it/evenements/musique/vevey/cyril-bondi-carte-blanche_AbcKZ5P"
             },
             {
-              "label": "Humour sur la côte - Les colocs",
-              "detail": "Etoy",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-on-the-coast-the-roommates/"
-            },
-            {
               "label": "Un monde éperdu - Thierry Romanens",
-              "detail": "Théâtre Boulimie",
-              "date": "2026-11-04",
+              "detail": "Théâtre Boulimie — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-05",
               "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
-            },
-            {
-              "label": "November Jam Session",
-              "detail": "Satellite",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/events/music/lausanne/november-jam-session_AyEqRab"
-            },
-            {
-              "label": "Brisolée à la Terrasse",
-              "detail": "Villeneuve VD — en cours, dernier jour : 4 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vacherin-mont-dor-baked-at-the-terrace/"
             },
             {
               "label": "Paysages rêvés - Exposition de gravures",
               "detail": "Galerie-Atelier Arva, Vevey — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
             },
             {
               "label": "Atelier de mosaïque",
               "detail": "Renens — en cours, dernier jour : 19 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
             },
             {
               "label": "Atelier Kombucha, kéfir et sodas sauvages",
               "detail": "Aubonne — en cours, dernier jour : 9 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
             },
             {
               "label": "Reflets",
               "detail": "Vevey — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-04",
+              "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Crazy Diner show Company",
+              "detail": "Corcelles-près-Payerne",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crazy-diner-show-company/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "11e édition du Marché aux jouets",
+              "date": "2026-11-04T08:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90860"
+            },
             {
               "label": "Réponse à la question de M. Hadrien Buclin «Adapter la fête du bois au réchauffement climatique?»",
               "date": "2026-10-08T11:30:00.000Z",
@@ -487,7 +507,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +529,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

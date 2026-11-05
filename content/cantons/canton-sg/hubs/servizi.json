@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "c7df8483d72eabcbf741266c6c7056c9dc9ce8b965d340c5e5c48c1c8c35dc88",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "f7c620baa8926e1548739d1de05bb928634d9262dc09f0e68bb5eda1df5cdf5d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-03T14:10:08.795Z",
+      "updatedAt": "2026-11-05T06:46:26.804Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "updatedAt": "2026-11-05T00:59:56.280Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "10",
-          "note": "offerta mediana 590 CHF"
+          "note": "offerta mediana 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -79,30 +79,30 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "SG3520",
-              "value": "4500 CHF",
+              "label": "SG3544",
+              "value": "2000 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6679"
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6694"
             },
             {
-              "label": "SG10451",
-              "value": "1000 CHF",
+              "label": "SG41354",
+              "value": "520 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6680"
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6697"
             },
             {
-              "label": "SG31393",
-              "value": "800 CHF",
+              "label": "SG51590",
+              "value": "520 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6681"
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6698"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "4 °C",
-              "detail": "oggi da 3 a 4 °C"
+              "value": "2 °C",
+              "detail": "oggi da 2 a 8 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -124,9 +124,9 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
-              "label": "Abbruchprämie für Bauten ausserhalb der Bauzonen",
+              "label": "Regierung verabschiedet Bericht und Antrag zu einem umfassenden Reformpaket für das Gesundheitswesen",
               "date": "2026-11-03",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/abbruchpraemie-fuer-bauten-ausserhalb-der-bauzonen-.html"
+              "url": "https://www.regierung.li/medienportal-medium/16182/235059/0/medienmitteilung"
             },
             {
               "label": "Runder Tisch Gesundheitswesen: Kostendämpfung und Versorgungssicherheit im Fokus",
@@ -154,7 +154,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/innovation-fuer-menschen-mit-als-und-seltenen-neuromuskulaeren-erkrankungen-2026-10-16/"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "SG",
@@ -251,7 +251,7 @@
         {
           "label": "Plate auctions running",
           "value": "10",
-          "note": "typical bid 590 CHF"
+          "note": "typical bid 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -286,30 +286,30 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "SG3520",
-              "value": "4,500 CHF",
+              "label": "SG3544",
+              "value": "2,000 CHF",
               "detail": "current bid",
-              "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6679"
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6694"
             },
             {
-              "label": "SG10451",
-              "value": "1,000 CHF",
+              "label": "SG41354",
+              "value": "520 CHF",
               "detail": "current bid",
-              "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6680"
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6697"
             },
             {
-              "label": "SG31393",
-              "value": "800 CHF",
+              "label": "SG51590",
+              "value": "520 CHF",
               "detail": "current bid",
-              "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6681"
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6698"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -318,12 +318,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "4 °C",
-              "detail": "today from 3 to 4 °C"
+              "value": "2 °C",
+              "detail": "today from 2 to 8 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -331,9 +331,9 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
-              "label": "Abbruchprämie für Bauten ausserhalb der Bauzonen",
+              "label": "Regierung verabschiedet Bericht und Antrag zu einem umfassenden Reformpaket für das Gesundheitswesen",
               "date": "2026-11-03",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/abbruchpraemie-fuer-bauten-ausserhalb-der-bauzonen-.html"
+              "url": "https://www.regierung.li/medienportal-medium/16182/235059/0/medienmitteilung"
             },
             {
               "label": "Runder Tisch Gesundheitswesen: Kostendämpfung und Versorgungssicherheit im Fokus",
@@ -361,7 +361,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/innovation-fuer-menschen-mit-als-und-seltenen-neuromuskulaeren-erkrankungen-2026-10-16/"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "SG",
@@ -454,7 +454,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "10",
-          "note": "mittleres Gebot 590 CHF"
+          "note": "mittleres Gebot 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -489,30 +489,30 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "SG3520",
-              "value": "4’500 CHF",
+              "label": "SG3544",
+              "value": "2’000 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6679"
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6694"
             },
             {
-              "label": "SG10451",
-              "value": "1’000 CHF",
+              "label": "SG41354",
+              "value": "520 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6680"
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6697"
             },
             {
-              "label": "SG31393",
-              "value": "800 CHF",
+              "label": "SG51590",
+              "value": "520 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6681"
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6698"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -521,12 +521,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "4 °C",
-              "detail": "heute 3 bis 4 °C"
+              "value": "2 °C",
+              "detail": "heute 2 bis 8 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -534,9 +534,9 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
-              "label": "Abbruchprämie für Bauten ausserhalb der Bauzonen",
+              "label": "Regierung verabschiedet Bericht und Antrag zu einem umfassenden Reformpaket für das Gesundheitswesen",
               "date": "2026-11-03",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/abbruchpraemie-fuer-bauten-ausserhalb-der-bauzonen-.html"
+              "url": "https://www.regierung.li/medienportal-medium/16182/235059/0/medienmitteilung"
             },
             {
               "label": "Runder Tisch Gesundheitswesen: Kostendämpfung und Versorgungssicherheit im Fokus",
@@ -564,7 +564,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/innovation-fuer-menschen-mit-als-und-seltenen-neuromuskulaeren-erkrankungen-2026-10-16/"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "SG",
@@ -657,7 +657,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "10",
-          "note": "offre centrale 590 CHF"
+          "note": "offre centrale 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -692,30 +692,30 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "SG3520",
-              "value": "4 500 CHF",
+              "label": "SG3544",
+              "value": "2 000 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6679"
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6694"
             },
             {
-              "label": "SG10451",
-              "value": "1 000 CHF",
+              "label": "SG41354",
+              "value": "520 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6680"
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6697"
             },
             {
-              "label": "SG31393",
-              "value": "800 CHF",
+              "label": "SG51590",
+              "value": "520 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6681"
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6698"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -724,12 +724,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "4 °C",
-              "detail": "aujourd’hui de 3 à 4 °C"
+              "value": "2 °C",
+              "detail": "aujourd’hui de 2 à 8 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -737,9 +737,9 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
-              "label": "Abbruchprämie für Bauten ausserhalb der Bauzonen",
+              "label": "Regierung verabschiedet Bericht und Antrag zu einem umfassenden Reformpaket für das Gesundheitswesen",
               "date": "2026-11-03",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/abbruchpraemie-fuer-bauten-ausserhalb-der-bauzonen-.html"
+              "url": "https://www.regierung.li/medienportal-medium/16182/235059/0/medienmitteilung"
             },
             {
               "label": "Runder Tisch Gesundheitswesen: Kostendämpfung und Versorgungssicherheit im Fokus",
@@ -767,7 +767,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/innovation-fuer-menschen-mit-als-und-seltenen-neuromuskulaeren-erkrankungen-2026-10-16/"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

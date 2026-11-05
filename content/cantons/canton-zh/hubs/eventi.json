@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "0e21f4164ab4cb8389dc69d49288fca459cb807de193646727d2cbed5a194048",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "39f16dfd70693a1731dfc1581e9b6a49ecc041ea777f8b8a8ad5bafc2f0e2ee4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-03T20:20:58.923Z",
+      "updatedAt": "2026-11-04T02:24:05.931Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "347",
+          "value": "349",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Treffnachmittage zu Vielfalt und Respekt im KJAV",
-              "detail": "KJAV, Volketswil",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/treffnachmittage-zu-vielfalt-und-respekt-im-kjav/"
+              "label": "Auto Zurigo",
+              "detail": "Messezentrum Zürich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auto-zurigo/"
             },
             {
-              "label": "State of Asia Address 2026",
-              "detail": "Universität Zürich, Zürich",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/state-of-asia-address-2026_AASjBiG"
+              "label": "Mensch SUCHT Leben",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mensch-sucht-leben/"
             },
             {
-              "label": "Kehrichtverwertung und Klimaschutz",
-              "detail": "Kehrichtverwertungsanlage Zürcher Oberland KEZO, Hinwil",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/hinwil/kehrichtverwertung-und-klimaschutz_ApiwC3y"
+              "label": "Agile Unconference 2026",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/agile-unconference-2026_APUQmBW"
             },
             {
-              "label": "Tüftelwerkstatt «Wir bauen einen Seifenblasen-Automaten»",
-              "detail": "Wildberg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tueftelwerkstatt-wir-bauen-einen-seifenblasen-automaten/"
+              "label": "Ökumenischer Frauen-Treff Dübendorf",
+              "detail": "Dübendorf",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oekumenischer-frauen-treff-duebendorf-1/"
             },
             {
-              "label": "Kindercoiffeur",
-              "detail": "Urdorf",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindercoiffeur-3/"
+              "label": "MINIMUM November 2026",
+              "detail": "8404 Winterthur, Winterthur",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/minimum-november-2026/"
             },
             {
-              "label": "Klanglabor",
-              "detail": "Gemeinschaftszentrum Oerlikon, Zürich",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/klanglabor/"
+              "label": "Addressing War? On artistic engagement with conflict and violence",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adressing-war-on-artistic-engagement-with-conflict-and-violence/"
             },
             {
-              "label": "Lego-Nachmittag",
-              "detail": "Aesch ZH",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lego-nachmittag/"
+              "label": "Führung in «Neubenennen» (auf Englisch)",
+              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/fuehrung-in-neubenennen-auf-englisch_Ag6MLL2"
             },
             {
-              "label": "Lempen Puppet Theatre - Karneval der Tiere",
-              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schlieren/lempen-puppet-theatre-karneval-der-tiere_AQHyaLh"
+              "label": "Round table by KUNST BRAUCHT KOHLE Online",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/runder-tisch-von-kunst-braucht-kohle-online/"
             },
             {
-              "label": "English Stories für Kinder",
-              "detail": "Gemeindebibliothek Pfäffikon, Pfäffikon",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/english-stories-fuer-kinder/"
+              "label": "Skyrim: Musikalisches Erbe von Tamriel",
+              "detail": "Evang.-ref. Kirche St. Peter",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/skyrim-musikalisches-erbe-von-tamriel_AeJ11Y1"
             },
             {
-              "label": "Paavo Järvi & Hayato Sumino",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/paavo-jaervi-hayato-sumino-3/"
+              "label": "Skyrim: Musikalisches Erbe von Tamriel",
+              "detail": "Kirche St. Peter, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/skyrim-musikalisches-erbe-von-tamriel/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "347",
+          "value": "349",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Treffnachmittage zu Vielfalt und Respekt im KJAV",
-              "detail": "KJAV, Volketswil",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/treffnachmittage-zu-vielfalt-und-respekt-im-kjav/"
+              "label": "Car Zurich",
+              "detail": "Messezentrum Zürich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auto-zurigo/"
             },
             {
-              "label": "State of Asia Address 2026",
-              "detail": "Universität Zürich, Zürich",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/state-of-asia-address-2026_AASjBiG"
+              "label": "Mensch SUCHT Leben",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mensch-sucht-leben/"
             },
             {
-              "label": "Kehrichtverwertung und Klimaschutz",
-              "detail": "Kehrichtverwertungsanlage Zürcher Oberland KEZO, Hinwil",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/hinwil/kehrichtverwertung-und-klimaschutz_ApiwC3y"
+              "label": "Agile Unconference 2026",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/agile-unconference-2026_APUQmBW"
             },
             {
-              "label": "Tüftelwerkstatt «Wir bauen einen Seifenblasen-Automaten»",
-              "detail": "Wildberg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tueftelwerkstatt-wir-bauen-einen-seifenblasen-automaten/"
+              "label": "Ökumenischer Frauen-Treff Dübendorf",
+              "detail": "Dübendorf",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oekumenischer-frauen-treff-duebendorf-1/"
             },
             {
-              "label": "Kindercoiffeur",
-              "detail": "Urdorf",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindercoiffeur-3/"
+              "label": "MINIMUM November 2026",
+              "detail": "8404 Winterthur, Winterthur",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/minimum-november-2026/"
             },
             {
-              "label": "Klanglabor",
-              "detail": "Gemeinschaftszentrum Oerlikon, Zürich",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/klanglabor/"
+              "label": "Addressing War? On artistic engagement with conflict and violence",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adressing-war-on-artistic-engagement-with-conflict-and-violence/"
             },
             {
-              "label": "Lego-Nachmittag",
-              "detail": "Aesch ZH",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lego-nachmittag/"
+              "label": "Führung in «Neubenennen» (auf Englisch)",
+              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/fuehrung-in-neubenennen-auf-englisch_Ag6MLL2"
             },
             {
-              "label": "Lempen Puppet Theatre - Karneval der Tiere",
-              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schlieren/lempen-puppet-theatre-karneval-der-tiere_AQHyaLh"
+              "label": "Round table by KUNST BRAUCHT KOHLE Online",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/runder-tisch-von-kunst-braucht-kohle-online/"
             },
             {
-              "label": "English Stories für Kinder",
-              "detail": "Gemeindebibliothek Pfäffikon, Pfäffikon",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/english-stories-fuer-kinder/"
+              "label": "Skyrim: Musikalisches Erbe von Tamriel",
+              "detail": "Evang.-ref. Kirche St. Peter",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/skyrim-musikalisches-erbe-von-tamriel_AeJ11Y1"
             },
             {
-              "label": "Paavo Järvi & Hayato Sumino",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/paavo-jaervi-hayato-sumino-3/"
+              "label": "Skyrim: Musikalisches Erbe von Tamriel",
+              "detail": "Kirche St. Peter, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/skyrim-musikalisches-erbe-von-tamriel/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "347",
+          "value": "349",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Treffnachmittage zu Vielfalt und Respekt im KJAV",
-              "detail": "KJAV, Volketswil",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/treffnachmittage-zu-vielfalt-und-respekt-im-kjav/"
+              "label": "Auto Zürich",
+              "detail": "Messezentrum Zürich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auto-zurigo/"
             },
             {
-              "label": "State of Asia Address 2026",
-              "detail": "Universität Zürich, Zürich",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/state-of-asia-address-2026_AASjBiG"
+              "label": "Mensch SUCHT Leben",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mensch-sucht-leben/"
             },
             {
-              "label": "Kehrichtverwertung und Klimaschutz",
-              "detail": "Kehrichtverwertungsanlage Zürcher Oberland KEZO, Hinwil",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/hinwil/kehrichtverwertung-und-klimaschutz_ApiwC3y"
+              "label": "Agile Unconference 2026",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/agile-unconference-2026_APUQmBW"
             },
             {
-              "label": "Tüftelwerkstatt «Wir bauen einen Seifenblasen-Automaten»",
-              "detail": "Wildberg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tueftelwerkstatt-wir-bauen-einen-seifenblasen-automaten/"
+              "label": "Ökumenischer Frauen-Treff Dübendorf",
+              "detail": "Dübendorf",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oekumenischer-frauen-treff-duebendorf-1/"
             },
             {
-              "label": "Kindercoiffeur",
-              "detail": "Urdorf",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindercoiffeur-3/"
+              "label": "MINIMUM November 2026",
+              "detail": "8404 Winterthur, Winterthur",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/minimum-november-2026/"
             },
             {
-              "label": "Klanglabor",
-              "detail": "Gemeinschaftszentrum Oerlikon, Zürich",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/klanglabor/"
+              "label": "Addressing War? On artistic engagement with conflict and violence",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adressing-war-on-artistic-engagement-with-conflict-and-violence/"
             },
             {
-              "label": "Lego-Nachmittag",
-              "detail": "Aesch ZH",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lego-nachmittag/"
+              "label": "Führung in «Neubenennen» (auf Englisch)",
+              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/fuehrung-in-neubenennen-auf-englisch_Ag6MLL2"
             },
             {
-              "label": "Lempen Puppet Theatre - Karneval der Tiere",
-              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schlieren/lempen-puppet-theatre-karneval-der-tiere_AQHyaLh"
+              "label": "Runder Tisch von KUNST BRAUCHT KOHLE Online",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/runder-tisch-von-kunst-braucht-kohle-online/"
             },
             {
-              "label": "English Stories für Kinder",
-              "detail": "Gemeindebibliothek Pfäffikon, Pfäffikon",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/english-stories-fuer-kinder/"
+              "label": "Skyrim: Musikalisches Erbe von Tamriel",
+              "detail": "Evang.-ref. Kirche St. Peter",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/skyrim-musikalisches-erbe-von-tamriel_AeJ11Y1"
             },
             {
-              "label": "Paavo Järvi & Hayato Sumino",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/paavo-jaervi-hayato-sumino-3/"
+              "label": "Skyrim: Musikalisches Erbe von Tamriel",
+              "detail": "Kirche St. Peter, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/skyrim-musikalisches-erbe-von-tamriel/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "347",
+          "value": "349",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Treffnachmittage zu Vielfalt und Respekt im KJAV",
-              "detail": "KJAV, Volketswil",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/treffnachmittage-zu-vielfalt-und-respekt-im-kjav/"
+              "label": "Auto Zurich",
+              "detail": "Messezentrum Zürich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auto-zurigo/"
             },
             {
-              "label": "State of Asia Address 2026",
-              "detail": "Universität Zürich, Zürich",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/state-of-asia-address-2026_AASjBiG"
+              "label": "Mensch SUCHT Leben",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mensch-sucht-leben/"
             },
             {
-              "label": "Kehrichtverwertung und Klimaschutz",
-              "detail": "Kehrichtverwertungsanlage Zürcher Oberland KEZO, Hinwil",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/hinwil/kehrichtverwertung-und-klimaschutz_ApiwC3y"
+              "label": "Agile Unconference 2026",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/agile-unconference-2026_APUQmBW"
             },
             {
-              "label": "Tüftelwerkstatt «Wir bauen einen Seifenblasen-Automaten»",
-              "detail": "Wildberg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tueftelwerkstatt-wir-bauen-einen-seifenblasen-automaten/"
+              "label": "Ökumenischer Frauen-Treff Dübendorf",
+              "detail": "Dübendorf",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oekumenischer-frauen-treff-duebendorf-1/"
             },
             {
-              "label": "Kindercoiffeur",
-              "detail": "Urdorf",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindercoiffeur-3/"
+              "label": "MINIMUM November 2026",
+              "detail": "8404 Winterthur, Winterthur",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/minimum-november-2026/"
             },
             {
-              "label": "Klanglabor",
-              "detail": "Gemeinschaftszentrum Oerlikon, Zürich",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/klanglabor/"
+              "label": "Addressing War? On artistic engagement with conflict and violence",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adressing-war-on-artistic-engagement-with-conflict-and-violence/"
             },
             {
-              "label": "Lego-Nachmittag",
-              "detail": "Aesch ZH",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lego-nachmittag/"
+              "label": "Führung in «Neubenennen» (auf Englisch)",
+              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/fuehrung-in-neubenennen-auf-englisch_Ag6MLL2"
             },
             {
-              "label": "Lempen Puppet Theatre - Karneval der Tiere",
-              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schlieren/lempen-puppet-theatre-karneval-der-tiere_AQHyaLh"
+              "label": "Round table by KUNST BRAUCHT KOHLE Online",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/runder-tisch-von-kunst-braucht-kohle-online/"
             },
             {
-              "label": "English Stories für Kinder",
-              "detail": "Gemeindebibliothek Pfäffikon, Pfäffikon",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/english-stories-fuer-kinder/"
+              "label": "Skyrim: Musikalisches Erbe von Tamriel",
+              "detail": "Evang.-ref. Kirche St. Peter",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/skyrim-musikalisches-erbe-von-tamriel_AeJ11Y1"
             },
             {
-              "label": "Paavo Järvi & Hayato Sumino",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/paavo-jaervi-hayato-sumino-3/"
+              "label": "Skyrim: Musikalisches Erbe von Tamriel",
+              "detail": "Kirche St. Peter, Zürich",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/skyrim-musikalisches-erbe-von-tamriel/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

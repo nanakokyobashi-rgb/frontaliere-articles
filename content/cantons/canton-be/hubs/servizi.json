@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "de06a4d850f40592d9d299531727e102edf310bf1893b54db98b9ecdd1821667",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "91ed93c5fc38e07f7686b1512727d2d215d71e1f93b772df512fe582a9703015",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-03T14:10:08.795Z",
+      "updatedAt": "2026-11-05T06:46:26.804Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "updatedAt": "2026-11-05T00:59:56.280Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -43,7 +43,7 @@
         },
         {
           "label": "Aste di targhe in corso",
-          "value": "9",
+          "value": "7",
           "note": "offerta mediana 490 CHF"
         }
       ],
@@ -79,30 +79,30 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "BE67367",
-              "value": "990 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-04T20:00:00.000Z",
-              "url": "https://auktion-be.ch/de/auction/231385"
-            },
-            {
-              "label": "BE96469",
+              "label": "BE85958",
               "value": "790 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-04T20:00:00.000Z",
-              "url": "https://auktion-be.ch/de/auction/231388"
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231474"
             },
             {
-              "label": "BE44465",
-              "value": "690 CHF",
+              "label": "BE96569",
+              "value": "790 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-04T20:00:00.000Z",
-              "url": "https://auktion-be.ch/de/auction/231386"
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231475"
+            },
+            {
+              "label": "BE311116",
+              "value": "490 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231471"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "Bern",
-              "value": "5 °C",
-              "detail": "oggi da 4 a 5 °C"
+              "value": "3 °C",
+              "detail": "oggi da 3 a 9 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -124,12 +124,17 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Arbeitsaufenthalte für Kulturschaffende: Tessin und Genua",
+              "date": "2026-11-04T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/arbeitsaufenthalte-fuer-kulturschaffende-tessin-und-genua"
+            },
+            {
               "label": "Gesundheit am Arbeitsplatz – Zeitdruck grösste Herausforderung",
               "date": "2026-09-09T09:58:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +214,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "BE",
@@ -225,7 +230,7 @@
         },
         {
           "label": "Plate auctions running",
-          "value": "9",
+          "value": "7",
           "note": "typical bid 490 CHF"
         }
       ],
@@ -261,30 +266,30 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "BE67367",
-              "value": "990 CHF",
-              "detail": "current bid",
-              "date": "2026-11-04T20:00:00.000Z",
-              "url": "https://auktion-be.ch/de/auction/231385"
-            },
-            {
-              "label": "BE96469",
+              "label": "BE85958",
               "value": "790 CHF",
               "detail": "current bid",
-              "date": "2026-11-04T20:00:00.000Z",
-              "url": "https://auktion-be.ch/de/auction/231388"
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231474"
             },
             {
-              "label": "BE44465",
-              "value": "690 CHF",
+              "label": "BE96569",
+              "value": "790 CHF",
               "detail": "current bid",
-              "date": "2026-11-04T20:00:00.000Z",
-              "url": "https://auktion-be.ch/de/auction/231386"
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231475"
+            },
+            {
+              "label": "BE311116",
+              "value": "490 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231471"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -293,12 +298,12 @@
           "items": [
             {
               "label": "Bern",
-              "value": "5 °C",
-              "detail": "today from 4 to 5 °C"
+              "value": "3 °C",
+              "detail": "today from 3 to 9 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -306,12 +311,17 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Arbeitsaufenthalte für Kulturschaffende: Tessin und Genua",
+              "date": "2026-11-04T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/arbeitsaufenthalte-fuer-kulturschaffende-tessin-und-genua"
+            },
+            {
               "label": "Gesundheit am Arbeitsplatz – Zeitdruck grösste Herausforderung",
               "date": "2026-09-09T09:58:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -387,7 +397,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "BE",
@@ -403,7 +413,7 @@
         },
         {
           "label": "Laufende Kontrollschild-Auktionen",
-          "value": "9",
+          "value": "7",
           "note": "mittleres Gebot 490 CHF"
         }
       ],
@@ -439,30 +449,30 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "BE67367",
-              "value": "990 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-04T20:00:00.000Z",
-              "url": "https://auktion-be.ch/de/auction/231385"
-            },
-            {
-              "label": "BE96469",
+              "label": "BE85958",
               "value": "790 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-04T20:00:00.000Z",
-              "url": "https://auktion-be.ch/de/auction/231388"
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231474"
             },
             {
-              "label": "BE44465",
-              "value": "690 CHF",
+              "label": "BE96569",
+              "value": "790 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-04T20:00:00.000Z",
-              "url": "https://auktion-be.ch/de/auction/231386"
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231475"
+            },
+            {
+              "label": "BE311116",
+              "value": "490 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231471"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -471,12 +481,12 @@
           "items": [
             {
               "label": "Bern",
-              "value": "5 °C",
-              "detail": "heute 4 bis 5 °C"
+              "value": "3 °C",
+              "detail": "heute 3 bis 9 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -484,12 +494,17 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Arbeitsaufenthalte für Kulturschaffende: Tessin und Genua",
+              "date": "2026-11-04T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/arbeitsaufenthalte-fuer-kulturschaffende-tessin-und-genua"
+            },
+            {
               "label": "Gesundheit am Arbeitsplatz – Zeitdruck grösste Herausforderung",
               "date": "2026-09-09T09:58:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -565,7 +580,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "BE",
@@ -581,7 +596,7 @@
         },
         {
           "label": "Enchères de plaques en cours",
-          "value": "9",
+          "value": "7",
           "note": "offre centrale 490 CHF"
         }
       ],
@@ -617,30 +632,30 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "BE67367",
-              "value": "990 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-04T20:00:00.000Z",
-              "url": "https://auktion-be.ch/de/auction/231385"
-            },
-            {
-              "label": "BE96469",
+              "label": "BE85958",
               "value": "790 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-04T20:00:00.000Z",
-              "url": "https://auktion-be.ch/de/auction/231388"
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231474"
             },
             {
-              "label": "BE44465",
-              "value": "690 CHF",
+              "label": "BE96569",
+              "value": "790 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-04T20:00:00.000Z",
-              "url": "https://auktion-be.ch/de/auction/231386"
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231475"
+            },
+            {
+              "label": "BE311116",
+              "value": "490 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231471"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -649,12 +664,12 @@
           "items": [
             {
               "label": "Bern",
-              "value": "5 °C",
-              "detail": "aujourd’hui de 4 à 5 °C"
+              "value": "3 °C",
+              "detail": "aujourd’hui de 3 à 9 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -662,12 +677,17 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Arbeitsaufenthalte für Kulturschaffende: Tessin und Genua",
+              "date": "2026-11-04T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/arbeitsaufenthalte-fuer-kulturschaffende-tessin-und-genua"
+            },
+            {
               "label": "Gesundheit am Arbeitsplatz – Zeitdruck grösste Herausforderung",
               "date": "2026-09-09T09:58:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -739,7 +759,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

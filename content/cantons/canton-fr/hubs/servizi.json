@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "5f9b8f8ed8612e8d4c4f43de444dce6c021422e03b667fc3d658c828df0251f1",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "c1d5dd0ca28a04be817b99edbe3959d13d0161775eea17c225a150ed2ea529c7",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-03T14:10:08.795Z",
+      "updatedAt": "2026-11-05T06:46:26.804Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "updatedAt": "2026-11-05T00:59:56.280Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "14",
-          "note": "offerta mediana 187,50 CHF"
+          "note": "offerta mediana 212,50 CHF"
         }
       ],
       "dataBlocks": [
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -107,17 +107,22 @@
             {
               "label": "Fribourg",
               "value": "4 °C",
-              "detail": "oggi da 3 a 5 °C"
+              "detail": "oggi da 3 a 10 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Un règlement de parking plus efficace et équitable",
+              "date": "2026-11-04",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/un-reglement-de-parking-plus-efficace-et-equitable"
+            },
             {
               "label": "Bruno Boschung nommé chef de l’ORP Centre du canton de Fribourg",
               "date": "2026-11-02T06:44:07.000Z",
@@ -142,14 +147,9 @@
               "label": "Demandes de permis de construire et de démolir",
               "date": "2026-10-21T07:24:32.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-271"
-            },
-            {
-              "label": "20’000 BD « Boule à Zéro » offertes aux enfants hospitalisés en dix ans !",
-              "date": "2026-10-21",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/20000-bd-boule-zero-offertes-aux-enfants-hospitalises-en-dix-ans"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "FR",
@@ -246,7 +246,7 @@
         {
           "label": "Plate auctions running",
           "value": "14",
-          "note": "typical bid 187.50 CHF"
+          "note": "typical bid 212.50 CHF"
         }
       ],
       "dataBlocks": [
@@ -299,7 +299,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -309,17 +309,22 @@
             {
               "label": "Fribourg",
               "value": "4 °C",
-              "detail": "today from 3 to 5 °C"
+              "detail": "today from 3 to 10 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Un règlement de parking plus efficace et équitable",
+              "date": "2026-11-04",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/un-reglement-de-parking-plus-efficace-et-equitable"
+            },
             {
               "label": "Bruno Boschung nommé chef de l’ORP Centre du canton de Fribourg",
               "date": "2026-11-02T06:44:07.000Z",
@@ -344,14 +349,9 @@
               "label": "Demandes de permis de construire et de démolir",
               "date": "2026-10-21T07:24:32.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-271"
-            },
-            {
-              "label": "20’000 BD « Boule à Zéro » offertes aux enfants hospitalisés en dix ans !",
-              "date": "2026-10-21",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/20000-bd-boule-zero-offertes-aux-enfants-hospitalises-en-dix-ans"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "FR",
@@ -444,7 +444,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "14",
-          "note": "mittleres Gebot 187.50 CHF"
+          "note": "mittleres Gebot 212.50 CHF"
         }
       ],
       "dataBlocks": [
@@ -497,7 +497,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -507,17 +507,22 @@
             {
               "label": "Fribourg",
               "value": "4 °C",
-              "detail": "heute 3 bis 5 °C"
+              "detail": "heute 3 bis 10 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Un règlement de parking plus efficace et équitable",
+              "date": "2026-11-04",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/un-reglement-de-parking-plus-efficace-et-equitable"
+            },
             {
               "label": "Bruno Boschung nommé chef de l’ORP Centre du canton de Fribourg",
               "date": "2026-11-02T06:44:07.000Z",
@@ -542,14 +547,9 @@
               "label": "Demandes de permis de construire et de démolir",
               "date": "2026-10-21T07:24:32.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-271"
-            },
-            {
-              "label": "20’000 BD « Boule à Zéro » offertes aux enfants hospitalisés en dix ans !",
-              "date": "2026-10-21",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/20000-bd-boule-zero-offertes-aux-enfants-hospitalises-en-dix-ans"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "FR",
@@ -642,7 +642,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "14",
-          "note": "offre centrale 187,50 CHF"
+          "note": "offre centrale 212,50 CHF"
         }
       ],
       "dataBlocks": [
@@ -695,7 +695,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -705,17 +705,22 @@
             {
               "label": "Fribourg",
               "value": "4 °C",
-              "detail": "aujourd’hui de 3 à 5 °C"
+              "detail": "aujourd’hui de 3 à 10 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Un règlement de parking plus efficace et équitable",
+              "date": "2026-11-04",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/un-reglement-de-parking-plus-efficace-et-equitable"
+            },
             {
               "label": "Bruno Boschung nommé chef de l’ORP Centre du canton de Fribourg",
               "date": "2026-11-02T06:44:07.000Z",
@@ -740,14 +745,9 @@
               "label": "Demandes de permis de construire et de démolir",
               "date": "2026-10-21T07:24:32.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-271"
-            },
-            {
-              "label": "20’000 BD « Boule à Zéro » offertes aux enfants hospitalisés en dix ans !",
-              "date": "2026-10-21",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/20000-bd-boule-zero-offertes-aux-enfants-hospitalises-en-dix-ans"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "8058fd116f5d523fbec1a6e1cee421f7aa0e01569a610e5fdd56d51d416e26b3",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "c1582154e675e41e9985f3cff0792d38b216c57eab81dd2935188541f08fe50b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-03T20:20:58.923Z",
+      "updatedAt": "2026-11-04T02:24:05.931Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "42",
+          "value": "41",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,18 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "C’est la fête",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
-            },
-            {
-              "label": "Le Bourgeois Gentilhomme",
-              "detail": "Equilibre, Fribourg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-bourgeois-gentilhomme-1/"
-            },
             {
               "label": "Midi théâtre : Tavolo Pour Drü",
               "detail": "Nuithonie, Villars-sur-Glâne",
@@ -66,6 +54,12 @@
               "detail": "Fribourg",
               "date": "2026-11-05",
               "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-visio"
+            },
+            {
+              "label": "C’est la fête",
+              "detail": "Villars-sur-Glâne — in corso, ultimo giorno: 6 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
             },
             {
               "label": "BDmania",
@@ -96,11 +90,17 @@
               "detail": "Villars-sur-Glâne",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-etre-menstruel/"
+            },
+            {
+              "label": "Gravelodux",
+              "detail": "Estavayer-le-Lac, Estavayer",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gravelodux/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,12 +108,32 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "20. bis 27. November 2026: Festival der Kinderrechte",
+              "date": "2026-11-04T13:00:09.000Z",
+              "url": "https://www.fr.ch/de/gsd/news/20-bis-27-november-2026-festival-der-kinderrechte"
+            },
+            {
+              "label": "20 au 27 novembre : Un festival pour faire vivre les droits de l’enfant",
+              "date": "2026-11-04T13:00:09.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/20-au-27-novembre-un-festival-pour-faire-vivre-les-droits-de-lenfant"
+            },
+            {
+              "label": "Festival Culture & Ecole BCF : 17 000 élèves et enseignant-e-s à la 9e édition",
+              "date": "2026-11-04T06:23:38.000Z",
+              "url": "https://www.fr.ch/dfac/actualites/festival-culture-ecole-bcf-17-000-eleves-et-enseignant-e-s-a-la-9e-edition"
+            },
+            {
+              "label": "Festival Kultur & Schule FKB: 17'000 Schülerinnen, Schüler und Lehrpersonen werden an der 9. Ausgabe teilnehmen",
+              "date": "2026-11-04T06:23:38.000Z",
+              "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
+            },
+            {
               "label": "Öffentlicher Informationsanlass zum Projekt einer Wildtierpassage in Saussivue",
               "date": "2026-10-29T08:28:22.000Z",
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +155,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "FR",
@@ -145,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "42",
+          "value": "41",
           "note": "from the site’s events calendar"
         }
       ],
@@ -155,18 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "C’est la fête",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
-            },
-            {
-              "label": "Le Bourgeois Gentilhomme",
-              "detail": "Equilibre, Fribourg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-bourgeois-gentilhomme-1/"
-            },
             {
               "label": "Midi théâtre : Tavolo Pour Drü",
               "detail": "Nuithonie, Villars-sur-Glâne",
@@ -184,6 +192,12 @@
               "detail": "Fribourg",
               "date": "2026-11-05",
               "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-visio"
+            },
+            {
+              "label": "C’est la fête",
+              "detail": "Villars-sur-Glâne — ongoing, last day: 6 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
             },
             {
               "label": "BDmania",
@@ -214,11 +228,17 @@
               "detail": "Villars-sur-Glâne",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-etre-menstruel/"
+            },
+            {
+              "label": "Gravelodux",
+              "detail": "Estavayer-le-Lac, Estavayer",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gravelodux/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -226,12 +246,32 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "20. bis 27. November 2026: Festival der Kinderrechte",
+              "date": "2026-11-04T13:00:09.000Z",
+              "url": "https://www.fr.ch/de/gsd/news/20-bis-27-november-2026-festival-der-kinderrechte"
+            },
+            {
+              "label": "20 au 27 novembre : Un festival pour faire vivre les droits de l’enfant",
+              "date": "2026-11-04T13:00:09.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/20-au-27-novembre-un-festival-pour-faire-vivre-les-droits-de-lenfant"
+            },
+            {
+              "label": "Festival Culture & Ecole BCF : 17 000 élèves et enseignant-e-s à la 9e édition",
+              "date": "2026-11-04T06:23:38.000Z",
+              "url": "https://www.fr.ch/dfac/actualites/festival-culture-ecole-bcf-17-000-eleves-et-enseignant-e-s-a-la-9e-edition"
+            },
+            {
+              "label": "Festival Kultur & Schule FKB: 17'000 Schülerinnen, Schüler und Lehrpersonen werden an der 9. Ausgabe teilnehmen",
+              "date": "2026-11-04T06:23:38.000Z",
+              "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
+            },
+            {
               "label": "Öffentlicher Informationsanlass zum Projekt einer Wildtierpassage in Saussivue",
               "date": "2026-10-29T08:28:22.000Z",
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +293,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "FR",
@@ -263,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "42",
+          "value": "41",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -273,18 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "C’est la fête",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
-            },
-            {
-              "label": "Le Bourgeois Gentilhomme",
-              "detail": "Equilibre, Fribourg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-bourgeois-gentilhomme-1/"
-            },
             {
               "label": "Midi théâtre : Tavolo Pour Drü",
               "detail": "Nuithonie, Villars-sur-Glâne",
@@ -302,6 +330,12 @@
               "detail": "Fribourg",
               "date": "2026-11-05",
               "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-visio"
+            },
+            {
+              "label": "C’est la fête",
+              "detail": "Villars-sur-Glâne — läuft, letzter Tag: 6. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
             },
             {
               "label": "BDmania",
@@ -332,11 +366,17 @@
               "detail": "Villars-sur-Glâne",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-etre-menstruel/"
+            },
+            {
+              "label": "Gravelodux",
+              "detail": "Estavayer-le-Lac, Estavayer",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gravelodux/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -344,12 +384,32 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "20. bis 27. November 2026: Festival der Kinderrechte",
+              "date": "2026-11-04T13:00:09.000Z",
+              "url": "https://www.fr.ch/de/gsd/news/20-bis-27-november-2026-festival-der-kinderrechte"
+            },
+            {
+              "label": "20 au 27 novembre : Un festival pour faire vivre les droits de l’enfant",
+              "date": "2026-11-04T13:00:09.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/20-au-27-novembre-un-festival-pour-faire-vivre-les-droits-de-lenfant"
+            },
+            {
+              "label": "Festival Culture & Ecole BCF : 17 000 élèves et enseignant-e-s à la 9e édition",
+              "date": "2026-11-04T06:23:38.000Z",
+              "url": "https://www.fr.ch/dfac/actualites/festival-culture-ecole-bcf-17-000-eleves-et-enseignant-e-s-a-la-9e-edition"
+            },
+            {
+              "label": "Festival Kultur & Schule FKB: 17'000 Schülerinnen, Schüler und Lehrpersonen werden an der 9. Ausgabe teilnehmen",
+              "date": "2026-11-04T06:23:38.000Z",
+              "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
+            },
+            {
               "label": "Öffentlicher Informationsanlass zum Projekt einer Wildtierpassage in Saussivue",
               "date": "2026-10-29T08:28:22.000Z",
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +431,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "FR",
@@ -381,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "42",
+          "value": "41",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -391,18 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "C’est la fête",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
-            },
-            {
-              "label": "Le Bourgeois Gentilhomme",
-              "detail": "Equilibre, Fribourg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-bourgeois-gentilhomme-1/"
-            },
             {
               "label": "Midi théâtre : Tavolo Pour Drü",
               "detail": "Nuithonie, Villars-sur-Glâne",
@@ -420,6 +468,12 @@
               "detail": "Fribourg",
               "date": "2026-11-05",
               "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-visio"
+            },
+            {
+              "label": "C’est la fête",
+              "detail": "Villars-sur-Glâne — en cours, dernier jour : 6 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
             },
             {
               "label": "BDmania",
@@ -450,11 +504,17 @@
               "detail": "Villars-sur-Glâne",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-etre-menstruel/"
+            },
+            {
+              "label": "Gravelodux",
+              "detail": "Estavayer-le-Lac, Estavayer",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gravelodux/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -462,12 +522,32 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "20. bis 27. November 2026: Festival der Kinderrechte",
+              "date": "2026-11-04T13:00:09.000Z",
+              "url": "https://www.fr.ch/de/gsd/news/20-bis-27-november-2026-festival-der-kinderrechte"
+            },
+            {
+              "label": "20 au 27 novembre : Un festival pour faire vivre les droits de l’enfant",
+              "date": "2026-11-04T13:00:09.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/20-au-27-novembre-un-festival-pour-faire-vivre-les-droits-de-lenfant"
+            },
+            {
+              "label": "Festival Culture & Ecole BCF : 17 000 élèves et enseignant-e-s à la 9e édition",
+              "date": "2026-11-04T06:23:38.000Z",
+              "url": "https://www.fr.ch/dfac/actualites/festival-culture-ecole-bcf-17-000-eleves-et-enseignant-e-s-a-la-9e-edition"
+            },
+            {
+              "label": "Festival Kultur & Schule FKB: 17'000 Schülerinnen, Schüler und Lehrpersonen werden an der 9. Ausgabe teilnehmen",
+              "date": "2026-11-04T06:23:38.000Z",
+              "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
+            },
+            {
               "label": "Öffentlicher Informationsanlass zum Projekt einer Wildtierpassage in Saussivue",
               "date": "2026-10-29T08:28:22.000Z",
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +569,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

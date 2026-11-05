@@ -4,22 +4,22 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "0690454a62024cfc98f2a87948bc978ea3d885fe4be668e3d33dd8d033911866",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "108b1e711de9aeceefb38f2987d05ad33b0b63fdb15af7c5d229427e019a2d01",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-02T23:59:59.000Z",
+      "updatedAt": "2026-11-04T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-03T20:00:07.431Z",
+      "updatedAt": "2026-11-05T01:51:30.468Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Hermance, settimana conclusa: 2 novembre 2026"
+          "note": "Hermance, settimana conclusa: 4 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "5",
-          "note": "segnalazioni aggiornate: 3 novembre 2026"
+          "value": "2",
+          "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 3 novembre 2026"
+          "note": "segnalazioni aggiornate: 5 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 27 ottobre 2026 – 2 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 ottobre 2026 – 4 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Hermance",
@@ -66,44 +66,44 @@
             },
             {
               "label": "Sauverny",
-              "value": "0 min",
+              "value": "0,1 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/sauverny/oggi/"
             },
             {
               "label": "Landecy",
-              "value": "0,4 min",
+              "value": "1 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/landecy/oggi/"
             },
             {
+              "label": "Meyrin / CERN",
+              "value": "1,2 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/meyrin-cern/oggi/"
+            },
+            {
               "label": "Moillesulaz",
-              "value": "0,6 min",
+              "value": "1,6 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/moillesulaz/oggi/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "0,9 min",
+              "value": "2,6 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/thonex-vallard/oggi/"
             },
             {
-              "label": "Meyrin / CERN",
-              "value": "1 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/meyrin-cern/oggi/"
-            },
-            {
               "label": "Perly (Perly-Certoux)",
-              "value": "2 min",
+              "value": "2,9 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/perly/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -117,56 +117,49 @@
               "date": "2026-10-12T06:58:00.000Z"
             },
             {
-              "label": "A1 Lausanne -> Genève Svincolo autostradale Meyrin Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 5.0",
-              "value": "Chiusura",
-              "detail": "fine prevista: 5 novembre 2026",
-              "date": "2026-10-12T06:58:00.000Z"
-            },
-            {
-              "label": "A1 Lausanne -> Genève Svincolo autostradale Vernier Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 5.0",
-              "value": "Chiusura",
-              "detail": "fine prevista: 5 novembre 2026",
-              "date": "2026-10-12T07:00:00.000Z"
-            },
-            {
               "label": "A1 Genève -> Lausanne tra Svincolo autostradale Bernex E Svincolo autostradale Vernier Situazione: chiusa cantiere, lunghezza [km] 4.2",
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
               "date": "2026-10-12T07:02:00.000Z"
             },
             {
-              "label": "A1 Lausanne -> Genève tra Svincolo autostradale Meyrin E Svincolo autostradale Bernex Situazione: chiusa cantiere, lunghezza [km] 5.0",
-              "value": "Chiusura",
-              "detail": "fine prevista: 5 novembre 2026",
-              "date": "2026-11-04T21:15:00.000Z"
-            },
-            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Traffico",
-              "date": "2026-11-03T20:00:07.431Z",
+              "date": "2026-11-05T01:51:30.468Z",
               "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
               "value": "Cantiere",
-              "date": "2026-11-03T20:00:07.431Z",
+              "date": "2026-11-05T01:51:30.468Z",
               "url": "https://www.ge.ch/node/45210"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Cantiere",
-              "date": "2026-11-03T20:00:07.431Z",
+              "date": "2026-11-05T01:51:30.468Z",
               "url": "https://www.ge.ch/node/45273"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
+              "value": "Cantiere",
+              "date": "2026-11-05T01:51:30.468Z",
+              "url": "https://www.ge.ch/node/45356"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Mouvement social : jeudi 05 novembre",
+              "date": "2026-11-04T11:25:42.000Z",
+              "url": "https://www.lemanexpress.com/2026/11/04/mouvement-social-jeudi-05-novembre/"
+            },
             {
               "label": "Info chantier Voie verte Genève-Satigny",
               "date": "2026-11-03",
@@ -191,14 +184,9 @@
               "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
               "date": "2026-10-30",
               "url": "https://www.ge.ch/node/45377"
-            },
-            {
-              "label": "Fermeture temporaire des caisses du service des contraventions jusqu’à nouvel avis.",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45029"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +246,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "GE",
@@ -269,24 +257,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Hermance, week ending 2 November 2026"
+          "note": "Hermance, week ending 4 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "5",
-          "note": "reports as of 3 November 2026"
+          "value": "2",
+          "note": "reports as of 5 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "3",
-          "note": "reports as of 3 November 2026"
+          "note": "reports as of 5 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 27 October 2026 to 2 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 29 October 2026 to 4 November 2026, fastest first.",
           "items": [
             {
               "label": "Hermance",
@@ -302,44 +290,44 @@
             },
             {
               "label": "Sauverny",
-              "value": "0 min",
+              "value": "0.1 min",
               "detail": "48 readings",
               "url": "/en/border-wait/sauverny/today/"
             },
             {
               "label": "Landecy",
-              "value": "0.4 min",
+              "value": "1 min",
               "detail": "48 readings",
               "url": "/en/border-wait/landecy/today/"
             },
             {
+              "label": "Meyrin / CERN",
+              "value": "1.2 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/meyrin-cern/today/"
+            },
+            {
               "label": "Moillesulaz",
-              "value": "0.6 min",
+              "value": "1.6 min",
               "detail": "48 readings",
               "url": "/en/border-wait/moillesulaz/today/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "0.9 min",
+              "value": "2.6 min",
               "detail": "48 readings",
               "url": "/en/border-wait/thonex-vallard/today/"
             },
             {
-              "label": "Meyrin / CERN",
-              "value": "1 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/meyrin-cern/today/"
-            },
-            {
               "label": "Perly (Perly-Certoux)",
-              "value": "2 min",
+              "value": "2.9 min",
               "detail": "48 readings",
               "url": "/en/border-wait/perly/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -353,56 +341,49 @@
               "date": "2026-10-12T06:58:00.000Z"
             },
             {
-              "label": "A1 Lausanne -> Genève Svincolo autostradale Meyrin Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 5.0",
-              "value": "Closure",
-              "detail": "until 5 November 2026",
-              "date": "2026-10-12T06:58:00.000Z"
-            },
-            {
-              "label": "A1 Lausanne -> Genève Svincolo autostradale Vernier Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 5.0",
-              "value": "Closure",
-              "detail": "until 5 November 2026",
-              "date": "2026-10-12T07:00:00.000Z"
-            },
-            {
               "label": "A1 Genève -> Lausanne tra Svincolo autostradale Bernex E Svincolo autostradale Vernier Situazione: chiusa cantiere, lunghezza [km] 4.2",
               "value": "Closure",
               "detail": "until 6 November 2026",
               "date": "2026-10-12T07:02:00.000Z"
             },
             {
-              "label": "A1 Lausanne -> Genève tra Svincolo autostradale Meyrin E Svincolo autostradale Bernex Situazione: chiusa cantiere, lunghezza [km] 5.0",
-              "value": "Closure",
-              "detail": "until 5 November 2026",
-              "date": "2026-11-04T21:15:00.000Z"
-            },
-            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Traffic",
-              "date": "2026-11-03T20:00:07.431Z",
+              "date": "2026-11-05T01:51:30.468Z",
               "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
               "value": "Roadworks",
-              "date": "2026-11-03T20:00:07.431Z",
+              "date": "2026-11-05T01:51:30.468Z",
               "url": "https://www.ge.ch/node/45210"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Roadworks",
-              "date": "2026-11-03T20:00:07.431Z",
+              "date": "2026-11-05T01:51:30.468Z",
               "url": "https://www.ge.ch/node/45273"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
+              "value": "Roadworks",
+              "date": "2026-11-05T01:51:30.468Z",
+              "url": "https://www.ge.ch/node/45356"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Mouvement social : jeudi 05 novembre",
+              "date": "2026-11-04T11:25:42.000Z",
+              "url": "https://www.lemanexpress.com/2026/11/04/mouvement-social-jeudi-05-novembre/"
+            },
             {
               "label": "Info chantier Voie verte Genève-Satigny",
               "date": "2026-11-03",
@@ -427,14 +408,9 @@
               "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
               "date": "2026-10-30",
               "url": "https://www.ge.ch/node/45377"
-            },
-            {
-              "label": "Fermeture temporaire des caisses du service des contraventions jusqu’à nouvel avis.",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45029"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -494,7 +470,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "GE",
@@ -505,24 +481,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Hermance, Woche bis 2. November 2026"
+          "note": "Hermance, Woche bis 4. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "5",
-          "note": "Meldungen vom 3. November 2026"
+          "value": "2",
+          "note": "Meldungen vom 5. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "3",
-          "note": "Meldungen vom 3. November 2026"
+          "note": "Meldungen vom 5. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 27. Oktober 2026 bis 2. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. Oktober 2026 bis 4. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Hermance",
@@ -538,44 +514,44 @@
             },
             {
               "label": "Sauverny",
-              "value": "0 Min.",
+              "value": "0.1 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/sauverny/heute/"
             },
             {
               "label": "Landecy",
-              "value": "0.4 Min.",
+              "value": "1 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/landecy/heute/"
             },
             {
+              "label": "Meyrin / CERN",
+              "value": "1.2 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/meyrin-cern/heute/"
+            },
+            {
               "label": "Moillesulaz",
-              "value": "0.6 Min.",
+              "value": "1.6 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/moillesulaz/heute/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "0.9 Min.",
+              "value": "2.6 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/thonex-vallard/heute/"
             },
             {
-              "label": "Meyrin / CERN",
-              "value": "1 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/meyrin-cern/heute/"
-            },
-            {
               "label": "Perly (Perly-Certoux)",
-              "value": "2 Min.",
+              "value": "2.9 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/perly/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -589,56 +565,49 @@
               "date": "2026-10-12T06:58:00.000Z"
             },
             {
-              "label": "A1 Lausanne -> Genf Anschluss Meyrin Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 5.0",
-              "value": "Sperrung",
-              "detail": "bis 5. November 2026",
-              "date": "2026-10-12T06:58:00.000Z"
-            },
-            {
-              "label": "A1 Lausanne -> Genf Anschluss Vernier Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 5.0",
-              "value": "Sperrung",
-              "detail": "bis 5. November 2026",
-              "date": "2026-10-12T07:00:00.000Z"
-            },
-            {
               "label": "A1 Genf -> Lausanne zwischen Anschluss Bernex und Anschluss Vernier Sachlage: Strecke gesperrt Baustelle, Länge [km] 4.2",
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
               "date": "2026-10-12T07:02:00.000Z"
             },
             {
-              "label": "A1 Lausanne -> Genf zwischen Anschluss Meyrin und Anschluss Bernex Sachlage: Strecke gesperrt Baustelle, Länge [km] 5.0",
-              "value": "Sperrung",
-              "detail": "bis 5. November 2026",
-              "date": "2026-11-04T21:15:00.000Z"
-            },
-            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Verkehr",
-              "date": "2026-11-03T20:00:07.431Z",
+              "date": "2026-11-05T01:51:30.468Z",
               "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
               "value": "Baustelle",
-              "date": "2026-11-03T20:00:07.431Z",
+              "date": "2026-11-05T01:51:30.468Z",
               "url": "https://www.ge.ch/node/45210"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Baustelle",
-              "date": "2026-11-03T20:00:07.431Z",
+              "date": "2026-11-05T01:51:30.468Z",
               "url": "https://www.ge.ch/node/45273"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
+              "value": "Baustelle",
+              "date": "2026-11-05T01:51:30.468Z",
+              "url": "https://www.ge.ch/node/45356"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Mouvement social : jeudi 05 novembre",
+              "date": "2026-11-04T11:25:42.000Z",
+              "url": "https://www.lemanexpress.com/2026/11/04/mouvement-social-jeudi-05-novembre/"
+            },
             {
               "label": "Info chantier Voie verte Genève-Satigny",
               "date": "2026-11-03",
@@ -663,14 +632,9 @@
               "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
               "date": "2026-10-30",
               "url": "https://www.ge.ch/node/45377"
-            },
-            {
-              "label": "Fermeture temporaire des caisses du service des contraventions jusqu’à nouvel avis.",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45029"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -730,7 +694,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "GE",
@@ -741,24 +705,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Hermance, semaine jusqu’au 2 novembre 2026"
+          "note": "Hermance, semaine jusqu’au 4 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "5",
-          "note": "signalements au 3 novembre 2026"
+          "value": "2",
+          "note": "signalements au 5 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "3",
-          "note": "signalements au 3 novembre 2026"
+          "note": "signalements au 5 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 27 octobre 2026 au 2 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 octobre 2026 au 4 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Hermance",
@@ -774,44 +738,44 @@
             },
             {
               "label": "Sauverny",
-              "value": "0 min",
+              "value": "0,1 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/sauverny/aujourd-hui/"
             },
             {
               "label": "Landecy",
-              "value": "0,4 min",
+              "value": "1 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/landecy/aujourd-hui/"
             },
             {
+              "label": "Meyrin / CERN",
+              "value": "1,2 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/meyrin-cern/aujourd-hui/"
+            },
+            {
               "label": "Moillesulaz",
-              "value": "0,6 min",
+              "value": "1,6 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/moillesulaz/aujourd-hui/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "0,9 min",
+              "value": "2,6 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/thonex-vallard/aujourd-hui/"
             },
             {
-              "label": "Meyrin / CERN",
-              "value": "1 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/meyrin-cern/aujourd-hui/"
-            },
-            {
               "label": "Perly (Perly-Certoux)",
-              "value": "2 min",
+              "value": "2,9 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/perly/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -825,56 +789,49 @@
               "date": "2026-10-12T06:58:00.000Z"
             },
             {
-              "label": "A1 Lausanne -> Genève Jonction autoroutière Meyrin Situation: entrée fermée travaux, longueur [km] 5.0",
-              "value": "Fermeture",
-              "detail": "jusqu’au 5 novembre 2026",
-              "date": "2026-10-12T06:58:00.000Z"
-            },
-            {
-              "label": "A1 Lausanne -> Genève Jonction autoroutière Vernier Situation: entrée fermée travaux, longueur [km] 5.0",
-              "value": "Fermeture",
-              "detail": "jusqu’au 5 novembre 2026",
-              "date": "2026-10-12T07:00:00.000Z"
-            },
-            {
               "label": "A1 Genève -> Lausanne entre Jonction autoroutière Bernex et Jonction autoroutière Vernier Situation: fermé travaux, longueur [km] 4.2",
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
               "date": "2026-10-12T07:02:00.000Z"
             },
             {
-              "label": "A1 Lausanne -> Genève entre Jonction autoroutière Meyrin et Jonction autoroutière Bernex Situation: fermé travaux, longueur [km] 5.0",
-              "value": "Fermeture",
-              "detail": "jusqu’au 5 novembre 2026",
-              "date": "2026-11-04T21:15:00.000Z"
-            },
-            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Trafic",
-              "date": "2026-11-03T20:00:07.431Z",
+              "date": "2026-11-05T01:51:30.468Z",
               "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
               "value": "Chantier",
-              "date": "2026-11-03T20:00:07.431Z",
+              "date": "2026-11-05T01:51:30.468Z",
               "url": "https://www.ge.ch/node/45210"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Chantier",
-              "date": "2026-11-03T20:00:07.431Z",
+              "date": "2026-11-05T01:51:30.468Z",
               "url": "https://www.ge.ch/node/45273"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
+              "value": "Chantier",
+              "date": "2026-11-05T01:51:30.468Z",
+              "url": "https://www.ge.ch/node/45356"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Mouvement social : jeudi 05 novembre",
+              "date": "2026-11-04T11:25:42.000Z",
+              "url": "https://www.lemanexpress.com/2026/11/04/mouvement-social-jeudi-05-novembre/"
+            },
             {
               "label": "Info chantier Voie verte Genève-Satigny",
               "date": "2026-11-03",
@@ -899,14 +856,9 @@
               "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
               "date": "2026-10-30",
               "url": "https://www.ge.ch/node/45377"
-            },
-            {
-              "label": "Fermeture temporaire des caisses du service des contraventions jusqu’à nouvel avis.",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45029"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -966,7 +918,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

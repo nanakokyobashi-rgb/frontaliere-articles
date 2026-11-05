@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "0c5d87f2e2d99bdd6e2a4036021a34b6ee210bf1d00a04892295c35f759177c6",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "f841198cea8a753e7556f8695a2c8b4aa7c77afa2fad02c3bd7c942fc809b46a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "updatedAt": "2026-11-05T00:59:56.280Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -66,11 +66,11 @@
             {
               "label": "Lausanne",
               "value": "6 °C",
-              "detail": "oggi da 5 a 7 °C"
+              "detail": "oggi da 5 a 10 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,7 +108,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -188,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "VD",
@@ -232,11 +232,11 @@
             {
               "label": "Lausanne",
               "value": "6 °C",
-              "detail": "today from 5 to 7 °C"
+              "detail": "today from 5 to 10 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -274,7 +274,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -350,7 +350,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "VD",
@@ -394,11 +394,11 @@
             {
               "label": "Lausanne",
               "value": "6 °C",
-              "detail": "heute 5 bis 7 °C"
+              "detail": "heute 5 bis 10 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -436,7 +436,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -512,7 +512,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "VD",
@@ -556,11 +556,11 @@
             {
               "label": "Lausanne",
               "value": "6 °C",
-              "detail": "aujourd’hui de 5 à 7 °C"
+              "detail": "aujourd’hui de 5 à 10 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -598,7 +598,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -670,7 +670,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

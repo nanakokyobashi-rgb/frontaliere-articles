@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "79f5c155e4ab5ffdb61de6390790133a9d8bb3dcee80b9b9570c83e952dc7d7a",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "03a4d69be8c192a744289edb68464d1b3c2f7d904db114a64c6fa3c65e851a81",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-03T14:10:08.795Z",
+      "updatedAt": "2026-11-05T06:46:26.804Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "updatedAt": "2026-11-05T00:59:56.280Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -87,7 +87,7 @@
             },
             {
               "label": "GR11652",
-              "value": "550 CHF",
+              "value": "600 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-08T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2258&locale=de_CH"
@@ -102,7 +102,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "5 °C",
-              "detail": "oggi da 4 a 6 °C"
+              "value": "6 °C",
+              "detail": "oggi da 6 a 15 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -154,7 +154,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -183,16 +183,16 @@
           "date": "2026-09-06T23:47:41.211Z"
         },
         {
-          "title": "Scuol chiude scuole a Ftan e Tarasp, genitori ricorrono",
-          "url": "/articoli-svizzera/chiusura-scuole-ftan-tarasp/",
-          "excerpt": "Il Municipio di Scuol vuole chiudere due sedi entro il 2028/29 per motivi finanziari e demografici. I genitori hanno presentato ricorso al Tribunale d'appello dei Grigioni.",
-          "date": "2026-09-30T22:52:15.843Z"
-        },
-        {
           "title": "Permesso L nei Grigioni: durata, proroga e cambio datore",
           "url": "/articoli-svizzera/permesso-l-breve-durata-grigioni-validita/",
           "excerpt": "Nel Cantone dei Grigioni il permesso L ha durata fino a 12 mesi, proroghe solo in casi eccezionali e cambio datore subordinato a nuova domanda cantonale.",
           "date": "2026-08-30T22:08:30.040Z"
+        },
+        {
+          "title": "Scuol chiude scuole a Ftan e Tarasp, genitori ricorrono",
+          "url": "/articoli-svizzera/chiusura-scuole-ftan-tarasp/",
+          "excerpt": "Il Municipio di Scuol vuole chiudere due sedi entro il 2028/29 per motivi finanziari e demografici. I genitori hanno presentato ricorso al Tribunale d'appello dei Grigioni.",
+          "date": "2026-09-30T22:52:15.843Z"
         },
         {
           "title": "LAMal Grigioni: premi, franchigie e riduzione",
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "GR",
@@ -294,7 +294,7 @@
             },
             {
               "label": "GR11652",
-              "value": "550 CHF",
+              "value": "600 CHF",
               "detail": "current bid",
               "date": "2026-11-08T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2258&locale=de_CH"
@@ -309,7 +309,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -318,12 +318,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "5 °C",
-              "detail": "today from 4 to 6 °C"
+              "value": "6 °C",
+              "detail": "today from 6 to 15 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +361,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -390,16 +390,16 @@
           "date": "2026-09-06T23:47:41.211Z"
         },
         {
-          "title": "Scuol closes schools in Ftan and Tarasp, parents appeal",
-          "url": "/en/swiss-articles/school-closure-ftan-tarasp/",
-          "excerpt": "The Scuol municipal government plans to close two schools by 2028/29 for financial and demographic reasons. Parents have filed an appeal with the Graubünden Court of Appeals.",
-          "date": "2026-09-30T22:52:15.843Z"
-        },
-        {
           "title": "Permit L in Graubünden: duration, extension and change of employer",
           "url": "/en/swiss-articles/short-term-l-permit-graubunden-validity/",
           "excerpt": "In the Canton of Graubünden, the L permit lasts up to 12 months, extensions only in exceptional cases and change of employer subject to new cantonal application.",
           "date": "2026-08-30T22:08:30.040Z"
+        },
+        {
+          "title": "Scuol closes schools in Ftan and Tarasp, parents appeal",
+          "url": "/en/swiss-articles/school-closure-ftan-tarasp/",
+          "excerpt": "The Scuol municipal government plans to close two schools by 2028/29 for financial and demographic reasons. Parents have filed an appeal with the Graubünden Court of Appeals.",
+          "date": "2026-09-30T22:52:15.843Z"
         },
         {
           "title": "LAMal Grisioni: premiums, deductibles and reduction",
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "GR",
@@ -497,7 +497,7 @@
             },
             {
               "label": "GR11652",
-              "value": "550 CHF",
+              "value": "600 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-08T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2258&locale=de_CH"
@@ -512,7 +512,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -521,12 +521,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "5 °C",
-              "detail": "heute 4 bis 6 °C"
+              "value": "6 °C",
+              "detail": "heute 6 bis 15 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -564,7 +564,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -593,16 +593,16 @@
           "date": "2026-09-06T23:47:41.211Z"
         },
         {
-          "title": "Scuol schließt Schulen in Ftan und Tarasp, Eltern legen Widerspruch ein",
-          "url": "/de/schweiz-artikel/schulschliessung-ftan-tarasp/",
-          "excerpt": "Der Gemeindevorstand von Scuol will aus finanziellen und demografischen Gründen bis 2028/29 zwei Schulstandorte schliessen. Die Eltern haben beim Appellationsgericht des Kantons Graubünden Rekurs eingelegt.",
-          "date": "2026-09-30T22:52:15.843Z"
-        },
-        {
           "title": "L-Bewilligung in Graubünden: Dauer, Verlängerung und Wechsel des Arbeitgebers",
           "url": "/de/schweiz-artikel/kurzaufenthaltsbewilligung-l-graubuenden-gueltigkeit/",
           "excerpt": "Im Kanton Graubünden ist die L-Bewilligung bis zu 12 Monate gültig, Verlängerungen nur in Ausnahmefällen und Arbeitgeberwechsel nur auf erneutes kantonales Gesuch.",
           "date": "2026-08-30T22:08:30.040Z"
+        },
+        {
+          "title": "Scuol schließt Schulen in Ftan und Tarasp, Eltern legen Widerspruch ein",
+          "url": "/de/schweiz-artikel/schulschliessung-ftan-tarasp/",
+          "excerpt": "Der Gemeindevorstand von Scuol will aus finanziellen und demografischen Gründen bis 2028/29 zwei Schulstandorte schliessen. Die Eltern haben beim Appellationsgericht des Kantons Graubünden Rekurs eingelegt.",
+          "date": "2026-09-30T22:52:15.843Z"
         },
         {
           "title": "KVG Graubünden: Prämien, Franchisen und Reduktionen",
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "GR",
@@ -700,7 +700,7 @@
             },
             {
               "label": "GR11652",
-              "value": "550 CHF",
+              "value": "600 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-08T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2258&locale=de_CH"
@@ -715,7 +715,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-03T14:10:08.795Z"
+          "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
           "id": "meteo",
@@ -724,12 +724,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "5 °C",
-              "detail": "aujourd’hui de 4 à 6 °C"
+              "value": "6 °C",
+              "detail": "aujourd’hui de 6 à 15 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -767,7 +767,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -796,16 +796,16 @@
           "date": "2026-09-06T23:47:41.211Z"
         },
         {
-          "title": "Scuol ferme les écoles de Ftan et Tarasp, les parents recourent",
-          "url": "/fr/articles-suisse/fermeture-ecoles-ftan-tarasp/",
-          "excerpt": "La municipalité de Scuol souhaite fermer deux sites d’ici 2028/29 pour des raisons financières et démographiques. Les parents ont déposé un recours auprès du Tribunal d’appel des Grisons.",
-          "date": "2026-09-30T22:52:15.843Z"
-        },
-        {
           "title": "Permis L dans les Grisons : durée, prolongation et changement d'employeur",
           "url": "/fr/articles-suisse/permis-l-courte-duree-grisons-validite/",
           "excerpt": "Dans le canton des Grisons, le permis L a une durée maximale de 12 mois, prorogation uniquement dans des cas exceptionnels et changement d'employeur subordonné à une nouvelle demande cantonale.",
           "date": "2026-08-30T22:08:30.040Z"
+        },
+        {
+          "title": "Scuol ferme les écoles de Ftan et Tarasp, les parents recourent",
+          "url": "/fr/articles-suisse/fermeture-ecoles-ftan-tarasp/",
+          "excerpt": "La municipalité de Scuol souhaite fermer deux sites d’ici 2028/29 pour des raisons financières et démographiques. Les parents ont déposé un recours auprès du Tribunal d’appel des Grisons.",
+          "date": "2026-09-30T22:52:15.843Z"
         },
         {
           "title": "LAMal Grisons : primes, franchises et réduction",
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

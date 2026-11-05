@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "f79f67f22b8130baae2b909c14cdbc4bca0dc7ae637b8e0caa686f071a01642c",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "2842d39e97c1bb916344d3c93e3ab1cad2b4e07f8fdcab56d8120e9b76651ef5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-03T16:44:04.086Z",
+      "updatedAt": "2026-11-05T03:14:14.745Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "updatedAt": "2026-11-05T00:59:56.280Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -66,16 +66,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-03T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-04T07:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-04T23:00:00.000Z"
             },
             {
@@ -92,11 +82,21 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-11-06T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-06T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-07T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-03T16:44:04.086Z"
+          "updatedAt": "2026-11-05T03:14:14.745Z"
         },
         {
           "id": "meteo",
@@ -106,11 +106,11 @@
             {
               "label": "Genève",
               "value": "6 °C",
-              "detail": "oggi da 5 a 7 °C"
+              "detail": "oggi da 6 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -148,7 +148,7 @@
               "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "GE",
@@ -267,16 +267,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-03T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-04T07:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-04T23:00:00.000Z"
             },
             {
@@ -293,11 +283,21 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-11-06T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-06T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-07T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-03T16:44:04.086Z"
+          "updatedAt": "2026-11-05T03:14:14.745Z"
         },
         {
           "id": "meteo",
@@ -307,11 +307,11 @@
             {
               "label": "Genève",
               "value": "6 °C",
-              "detail": "today from 5 to 7 °C"
+              "detail": "today from 6 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "GE",
@@ -463,16 +463,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-03T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-04T07:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-04T23:00:00.000Z"
             },
             {
@@ -489,11 +479,21 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-11-06T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-06T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-07T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-03T16:44:04.086Z"
+          "updatedAt": "2026-11-05T03:14:14.745Z"
         },
         {
           "id": "meteo",
@@ -503,11 +503,11 @@
             {
               "label": "Genève",
               "value": "6 °C",
-              "detail": "heute 5 bis 7 °C"
+              "detail": "heute 6 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -545,7 +545,7 @@
               "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -620,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "GE",
@@ -659,16 +659,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-03T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-04T07:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-04T23:00:00.000Z"
             },
             {
@@ -685,11 +675,21 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-11-06T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-06T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-07T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-03T16:44:04.086Z"
+          "updatedAt": "2026-11-05T03:14:14.745Z"
         },
         {
           "id": "meteo",
@@ -699,11 +699,11 @@
             {
               "label": "Genève",
               "value": "6 °C",
-              "detail": "aujourd’hui de 5 à 7 °C"
+              "detail": "aujourd’hui de 6 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -741,7 +741,7 @@
               "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -813,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

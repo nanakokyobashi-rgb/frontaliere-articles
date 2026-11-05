@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "a0b6a753086d637c937d2e57d430346323072af5edf868c9b264aa81bcd97ea0",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "e866eeba860724af3e1dcaa688901eb1df52e6260adea9a5ee4046830ac50594",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-03T20:20:58.923Z",
+      "updatedAt": "2026-11-04T02:24:05.931Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "192",
+          "value": "193",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Mercato delle carote",
-              "detail": "Graben",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/carrot-market/"
+              "label": "20 Years of the Gstaad Curling Hall",
+              "detail": "Gstaad, Saanen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-years-of-the-gstaad-curling-hall/"
             },
             {
-              "label": "LANGNAU MÄRIT im Chüechlihus",
-              "detail": "Langnau i.E.",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/langnau-maerit-im-chueechlihus-6/"
+              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
+              "detail": "Bern",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/5-energy-future-days-und-messe-bauen-wohnen-energie/"
             },
             {
-              "label": "MITTENDRIN: Oli Kehrli \"Zwänzg Jahr unbedingt\"",
-              "detail": "Der Burgerspittel im Viererfeld",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mittendrin-oli-kehrli-zwaenzg-jahr-unbedingt_Av3UEpM"
+              "label": "NEULAND Trade Fair Thun",
+              "detail": "Thun",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/neuland-trade-fair-thun/"
             },
             {
-              "label": "Führungen hinter die Kulissen: Die schönsten Fossilien",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fuehrungen-hinter-die-kulissen-die-schoensten-fossilien/"
+              "label": "3 x S – Spiel, Spass, Sprachen",
+              "detail": "Münsingen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/3-x-s-spiel-spass-sprachen-2/"
             },
             {
-              "label": "Aynsley Lister - Special Guest: Nina Attal",
+              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
+              "detail": "BERNEXPO",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/5-energy-future-days-und-messe-bauen-wohnen-energie_AdcRiHk"
+            },
+            {
+              "label": "100 Jahre Peter Alexander",
+              "detail": "National Bern, Bern",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/100-jahre-peter-alexander_ASWU5w6"
+            },
+            {
+              "label": "24. Niesen-Jass",
+              "detail": "Niesen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/niesen-jasset/"
+            },
+            {
+              "label": "VIVALDI - Die vier Jahreszeiten",
+              "detail": "KKThun, Thun",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/thun/vivaldi-die-vier-jahreszeiten_AJXYSdd"
+            },
+            {
+              "label": "Anna Rossinelli - Heat Tour 2026",
               "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/aynsley-lister-special-guest-nina-attal_Amq6ay7"
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/anna-rossinelli-heat-tour-2026_ArdY558"
             },
             {
-              "label": "ANIMITTWOCH: VAMPIRE HUNTER D: BLOODLUST",
-              "detail": "CineCamera",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/animittwoch-vampire-hunter-d-bloodlust_AU7nFGT"
-            },
-            {
-              "label": "SULLIVAN FORTNER TRIO",
-              "detail": "Marians Jazzroom — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sullivan-fortner-trio_Aypbp8X"
-            },
-            {
-              "label": "Escort Trips on the DS “Spiez” & MS “Schilthorn”—Noon Departure from Thun",
-              "detail": "Thunersee, Spiez — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
-            },
-            {
-              "label": "moving moments",
-              "detail": "Sporthalle Ebnit, Saanen — in corso, ultimo giorno: 29 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
-            },
-            {
-              "label": "Im Härz",
-              "detail": "Bern — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
+              "label": "Chrut u Rüebe",
+              "detail": "BeJazz Club / Vidmarhallen",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/chrut-u-rueebe_AgXYhLg"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "192",
+          "value": "193",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Carrot Market",
-              "detail": "Graben",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/carrot-market/"
+              "label": "20 Years of the Gstaad Curling Hall",
+              "detail": "Gstaad, Saanen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-years-of-the-gstaad-curling-hall/"
             },
             {
-              "label": "LANGNAU MÄRIT im Chüechlihus",
-              "detail": "Langnau i.E.",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/langnau-maerit-im-chueechlihus-6/"
+              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
+              "detail": "Bern",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/5-energy-future-days-und-messe-bauen-wohnen-energie/"
             },
             {
-              "label": "MITTENDRIN: Oli Kehrli \"Zwänzg Jahr unbedingt\"",
-              "detail": "Der Burgerspittel im Viererfeld",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mittendrin-oli-kehrli-zwaenzg-jahr-unbedingt_Av3UEpM"
+              "label": "NEULAND Trade Fair Thun",
+              "detail": "Thun",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/neuland-trade-fair-thun/"
             },
             {
-              "label": "Führungen hinter die Kulissen: Die schönsten Fossilien",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fuehrungen-hinter-die-kulissen-die-schoensten-fossilien/"
+              "label": "3 x S – Spiel, Spass, Sprachen",
+              "detail": "Münsingen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/3-x-s-spiel-spass-sprachen-2/"
             },
             {
-              "label": "Aynsley Lister - Special Guest: Nina Attal",
+              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
+              "detail": "BERNEXPO",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/5-energy-future-days-und-messe-bauen-wohnen-energie_AdcRiHk"
+            },
+            {
+              "label": "100 Jahre Peter Alexander",
+              "detail": "National Bern, Bern",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/100-jahre-peter-alexander_ASWU5w6"
+            },
+            {
+              "label": "24. Niesen-Jass",
+              "detail": "Niesen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/niesen-jasset/"
+            },
+            {
+              "label": "VIVALDI - Die vier Jahreszeiten",
+              "detail": "KKThun, Thun",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/thun/vivaldi-die-vier-jahreszeiten_AJXYSdd"
+            },
+            {
+              "label": "Anna Rossinelli - Heat Tour 2026",
               "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/aynsley-lister-special-guest-nina-attal_Amq6ay7"
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/anna-rossinelli-heat-tour-2026_ArdY558"
             },
             {
-              "label": "ANIMITTWOCH: VAMPIRE HUNTER D: BLOODLUST",
-              "detail": "CineCamera",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/animittwoch-vampire-hunter-d-bloodlust_AU7nFGT"
-            },
-            {
-              "label": "SULLIVAN FORTNER TRIO",
-              "detail": "Marians Jazzroom — ongoing, last day: 7 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sullivan-fortner-trio_Aypbp8X"
-            },
-            {
-              "label": "Escort Trips on the DS “Spiez” & MS “Schilthorn”—Noon Departure from Thun",
-              "detail": "Thunersee, Spiez — ongoing, last day: 8 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
-            },
-            {
-              "label": "moving moments",
-              "detail": "Sporthalle Ebnit, Saanen — ongoing, last day: 29 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
-            },
-            {
-              "label": "Im Härz",
-              "detail": "Bern — ongoing, last day: 8 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
+              "label": "Chrut u Rüebe",
+              "detail": "BeJazz Club / Vidmarhallen",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/chrut-u-rueebe_AgXYhLg"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "192",
+          "value": "193",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Rüeblimärt Aarau",
-              "detail": "Graben",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/carrot-market/"
+              "label": "20 Jahre Curlinghalle Gstaad",
+              "detail": "Gstaad, Saanen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-years-of-the-gstaad-curling-hall/"
             },
             {
-              "label": "LANGNAU MÄRIT im Chüechlihus",
-              "detail": "Langnau i.E.",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/langnau-maerit-im-chueechlihus-6/"
+              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
+              "detail": "Bern",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/5-energy-future-days-und-messe-bauen-wohnen-energie/"
             },
             {
-              "label": "MITTENDRIN: Oli Kehrli \"Zwänzg Jahr unbedingt\"",
-              "detail": "Der Burgerspittel im Viererfeld",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mittendrin-oli-kehrli-zwaenzg-jahr-unbedingt_Av3UEpM"
+              "label": "NEULAND Messe Thun",
+              "detail": "Thun",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/neuland-trade-fair-thun/"
             },
             {
-              "label": "Führungen hinter die Kulissen: Die schönsten Fossilien",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fuehrungen-hinter-die-kulissen-die-schoensten-fossilien/"
+              "label": "3 x S – Spiel, Spass, Sprachen",
+              "detail": "Münsingen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/3-x-s-spiel-spass-sprachen-2/"
             },
             {
-              "label": "Aynsley Lister - Special Guest: Nina Attal",
+              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
+              "detail": "BERNEXPO",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/5-energy-future-days-und-messe-bauen-wohnen-energie_AdcRiHk"
+            },
+            {
+              "label": "100 Jahre Peter Alexander",
+              "detail": "National Bern, Bern",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/100-jahre-peter-alexander_ASWU5w6"
+            },
+            {
+              "label": "24. Niesen-Jass",
+              "detail": "Niesen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/niesen-jasset/"
+            },
+            {
+              "label": "VIVALDI - Die vier Jahreszeiten",
+              "detail": "KKThun, Thun",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/thun/vivaldi-die-vier-jahreszeiten_AJXYSdd"
+            },
+            {
+              "label": "Anna Rossinelli - Heat Tour 2026",
               "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/aynsley-lister-special-guest-nina-attal_Amq6ay7"
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/anna-rossinelli-heat-tour-2026_ArdY558"
             },
             {
-              "label": "ANIMITTWOCH: VAMPIRE HUNTER D: BLOODLUST",
-              "detail": "CineCamera",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/animittwoch-vampire-hunter-d-bloodlust_AU7nFGT"
-            },
-            {
-              "label": "SULLIVAN FORTNER TRIO",
-              "detail": "Marians Jazzroom — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sullivan-fortner-trio_Aypbp8X"
-            },
-            {
-              "label": "Begleitfahrten DS «Spiez» & MS «Schilthorn» Mittagsfahrt ab Thun",
-              "detail": "Thunersee, Spiez — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
-            },
-            {
-              "label": "BeMo - Bewegte Momente",
-              "detail": "Sporthalle Ebnit, Saanen — läuft, letzter Tag: 29. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
-            },
-            {
-              "label": "Im Härz",
-              "detail": "Bern — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
+              "label": "Chrut u Rüebe",
+              "detail": "BeJazz Club / Vidmarhallen",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/chrut-u-rueebe_AgXYhLg"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "192",
+          "value": "193",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Marché des carottes",
-              "detail": "Graben",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/carrot-market/"
+              "label": "20 ans de la Halle de Curling de Gstaad",
+              "detail": "Gstaad, Saanen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-years-of-the-gstaad-curling-hall/"
             },
             {
-              "label": "LANGNAU MÄRIT im Chüechlihus",
-              "detail": "Langnau i.E.",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/langnau-maerit-im-chueechlihus-6/"
+              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
+              "detail": "Bern",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/5-energy-future-days-und-messe-bauen-wohnen-energie/"
             },
             {
-              "label": "MITTENDRIN: Oli Kehrli \"Zwänzg Jahr unbedingt\"",
-              "detail": "Der Burgerspittel im Viererfeld",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mittendrin-oli-kehrli-zwaenzg-jahr-unbedingt_Av3UEpM"
+              "label": "NEULAND Foire de Thoune",
+              "detail": "Thun",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/neuland-trade-fair-thun/"
             },
             {
-              "label": "Führungen hinter die Kulissen: Die schönsten Fossilien",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fuehrungen-hinter-die-kulissen-die-schoensten-fossilien/"
+              "label": "3 x S – Spiel, Spass, Sprachen",
+              "detail": "Münsingen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/3-x-s-spiel-spass-sprachen-2/"
             },
             {
-              "label": "Aynsley Lister - Special Guest: Nina Attal",
+              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
+              "detail": "BERNEXPO",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/5-energy-future-days-und-messe-bauen-wohnen-energie_AdcRiHk"
+            },
+            {
+              "label": "100 Jahre Peter Alexander",
+              "detail": "National Bern, Bern",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/100-jahre-peter-alexander_ASWU5w6"
+            },
+            {
+              "label": "24. Niesen-Jass",
+              "detail": "Niesen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/niesen-jasset/"
+            },
+            {
+              "label": "VIVALDI - Die vier Jahreszeiten",
+              "detail": "KKThun, Thun",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/thun/vivaldi-die-vier-jahreszeiten_AJXYSdd"
+            },
+            {
+              "label": "Anna Rossinelli - Heat Tour 2026",
               "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/aynsley-lister-special-guest-nina-attal_Amq6ay7"
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/anna-rossinelli-heat-tour-2026_ArdY558"
             },
             {
-              "label": "ANIMITTWOCH: VAMPIRE HUNTER D: BLOODLUST",
-              "detail": "CineCamera",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/animittwoch-vampire-hunter-d-bloodlust_AU7nFGT"
-            },
-            {
-              "label": "SULLIVAN FORTNER TRIO",
-              "detail": "Marians Jazzroom — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sullivan-fortner-trio_Aypbp8X"
-            },
-            {
-              "label": "Trajets d'accompagnement en train « Spiez » et en bateau « Schilthorn » : trajet de midi au départ de Thoune",
-              "detail": "Thunersee, Spiez — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
-            },
-            {
-              "label": "des moments mouvementés",
-              "detail": "Sporthalle Ebnit, Saanen — en cours, dernier jour : 29 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
-            },
-            {
-              "label": "Im Härz",
-              "detail": "Bern — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
+              "label": "Chrut u Rüebe",
+              "detail": "BeJazz Club / Vidmarhallen",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/chrut-u-rueebe_AgXYhLg"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

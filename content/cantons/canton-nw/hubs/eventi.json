@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "f85ab23b3f15f8c7ba0744c016f5a3b8545c21ee1f84d7ac15cec4daa8b9cec6",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "d041f60268abb28464ff1e4ec0fc5d437a9531da0c4dc70b1fd459942358dde9",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-03T20:20:58.923Z",
+      "updatedAt": "2026-11-04T02:24:05.931Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "65",
+          "value": "66",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,18 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-11-04",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89773"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "BrueckerMeisterTrauffer - Noten von Vanille und Ambra",
               "detail": "lit.z Literaturhaus Zentralschweiz, Stans, Stans",
@@ -81,6 +69,12 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/stans/brueckermeistertrauffer-noten-von-vanille-und-ambra_ASMrc9N"
             },
             {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
               "label": "Die frohe Botschaft von Jesus Christus",
               "detail": "Bücher von Matt, Stans, Stans",
               "date": "2026-11-06",
@@ -91,11 +85,17 @@
               "detail": "Kulturraum, Buochs, Buochs",
               "date": "2026-11-06",
               "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+            },
+            {
+              "label": "Vernissage: Augustina Flüeler. Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-06",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95152"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/nidvaldo/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "NW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "65",
+          "value": "66",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,18 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-11-04",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89773"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — ongoing, last day: 14 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "BrueckerMeisterTrauffer - Noten von Vanille und Ambra",
               "detail": "lit.z Literaturhaus Zentralschweiz, Stans, Stans",
@@ -186,6 +174,12 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/stans/brueckermeistertrauffer-noten-von-vanille-und-ambra_ASMrc9N"
             },
             {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — ongoing, last day: 14 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
               "label": "Die frohe Botschaft von Jesus Christus",
               "detail": "Bücher von Matt, Stans, Stans",
               "date": "2026-11-06",
@@ -196,11 +190,17 @@
               "detail": "Kulturraum, Buochs, Buochs",
               "date": "2026-11-06",
               "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+            },
+            {
+              "label": "Vernissage: Augustina Flüeler. Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-06",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95152"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/nidwalden/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "NW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "65",
+          "value": "66",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,18 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-11-04",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89773"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "BrueckerMeisterTrauffer - Noten von Vanille und Ambra",
               "detail": "lit.z Literaturhaus Zentralschweiz, Stans, Stans",
@@ -291,6 +279,12 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/stans/brueckermeistertrauffer-noten-von-vanille-und-ambra_ASMrc9N"
             },
             {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
               "label": "Die frohe Botschaft von Jesus Christus",
               "detail": "Bücher von Matt, Stans, Stans",
               "date": "2026-11-06",
@@ -301,11 +295,17 @@
               "detail": "Kulturraum, Buochs, Buochs",
               "date": "2026-11-06",
               "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+            },
+            {
+              "label": "Vernissage: Augustina Flüeler. Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-06",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95152"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/nidwalden/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "NW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "65",
+          "value": "66",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,18 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-11-04",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89773"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "BrueckerMeisterTrauffer - Noten von Vanille und Ambra",
               "detail": "lit.z Literaturhaus Zentralschweiz, Stans, Stans",
@@ -396,6 +384,12 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/stans/brueckermeistertrauffer-noten-von-vanille-und-ambra_ASMrc9N"
             },
             {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
               "label": "Die frohe Botschaft von Jesus Christus",
               "detail": "Bücher von Matt, Stans, Stans",
               "date": "2026-11-06",
@@ -406,11 +400,17 @@
               "detail": "Kulturraum, Buochs, Buochs",
               "date": "2026-11-06",
               "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+            },
+            {
+              "label": "Vernissage: Augustina Flüeler. Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-06",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95152"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/nidwald/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

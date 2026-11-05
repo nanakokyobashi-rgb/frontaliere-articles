@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "8d90323624f5eaadfadcbb799d94a72de4428e1ed50cf442cec987262c66fc5a",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "4ca22d111e82fdd720cc04e437f7cbc4fefb46a4bff7861c7ef948dd2f618f14",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "updatedAt": "2026-11-05T00:59:56.280Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -61,11 +61,11 @@
             {
               "label": "Sarnen",
               "value": "5 °C",
-              "detail": "oggi da 5 a 6 °C"
+              "detail": "oggi da 5 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -83,7 +83,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -106,6 +106,12 @@
           "date": "2026-08-16T16:06:32.147Z"
         },
         {
+          "title": "Sistema scolastico Canton Obvaldo: iscrizione e cicli",
+          "url": "/articoli-svizzera/sistema-scolastico-canton-obvaldo-iscrizione-e-cicli/",
+          "excerpt": "I cicli scolastici nel Canton di Obvaldo sono divisi in tre fasi: asilo nido, scuola elementare e scuola secondaria.",
+          "date": "2026-08-16T16:26:07.130Z"
+        },
+        {
           "title": "Patente di guida Obvaldo: conversione ed esami",
           "url": "/articoli-svizzera/patente-guida-obvaldo-conversione/",
           "excerpt": "Guida completa alla conversione della patente estera nel Cantone di Obvaldo: procedura, esame teorico e pratico, corsi obbligatori e documenti necessari.",
@@ -116,12 +122,6 @@
           "url": "/articoli-svizzera/franchigie-obvaldo-malattia-riduzione/",
           "excerpt": "Franchigie obbligatorie, riduzioni di premio e sussidi cantonali per l'assicurazione malattia nel Cantone di Obvaldo. Procedura di richiesta e modelli assicurativi alternativi.",
           "date": "2026-08-23T05:27:44.369Z"
-        },
-        {
-          "title": "Sistema scolastico Canton Obvaldo: iscrizione e cicli",
-          "url": "/articoli-svizzera/sistema-scolastico-canton-obvaldo-iscrizione-e-cicli/",
-          "excerpt": "I cicli scolastici nel Canton di Obvaldo sono divisi in tre fasi: asilo nido, scuola elementare e scuola secondaria.",
-          "date": "2026-08-16T16:26:07.130Z"
         },
         {
           "title": "Permesso L di breve durata nel Cantone di Obvaldo: validità e proroga",
@@ -163,7 +163,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "OW",
@@ -202,11 +202,11 @@
             {
               "label": "Sarnen",
               "value": "5 °C",
-              "detail": "today from 5 to 6 °C"
+              "detail": "today from 5 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -224,7 +224,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -247,6 +247,12 @@
           "date": "2026-08-16T16:06:32.147Z"
         },
         {
+          "title": "Canton Obwalden school system: enrolment and cycles",
+          "url": "/en/swiss-articles/sistema-scolastico-canton-obwalden-iscrizione-e-cicli-en/",
+          "excerpt": "The school cycles in the Canton of Obwalden are divided into three phases: kindergarten, primary school and secondary school.",
+          "date": "2026-08-16T16:26:07.130Z"
+        },
+        {
           "title": "Obwalden Driving License: Conversion and Exams",
           "url": "/en/swiss-articles/driving-licence-obwalden-conversion/",
           "excerpt": "Complete guide to the conversion of the foreign licence in the Canton of Obwalden: procedure, theoretical and practical examination, compulsory courses and necessary documents.",
@@ -257,12 +263,6 @@
           "url": "/en/swiss-articles/obwalden-health-insurance-deductibles-subsidies/",
           "excerpt": "Compulsory deductibles, premium reductions and cantonal health insurance benefits in the Canton of Obwalden. Application procedure and alternative insurance models.",
           "date": "2026-08-23T05:27:44.369Z"
-        },
-        {
-          "title": "Canton Obwalden school system: enrolment and cycles",
-          "url": "/en/swiss-articles/sistema-scolastico-canton-obwalden-iscrizione-e-cicli-en/",
-          "excerpt": "The school cycles in the Canton of Obwalden are divided into three phases: kindergarten, primary school and secondary school.",
-          "date": "2026-08-16T16:26:07.130Z"
         },
         {
           "title": "Short-term permit L in the Canton of Obwalden: validity and extension",
@@ -300,7 +300,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "OW",
@@ -339,11 +339,11 @@
             {
               "label": "Sarnen",
               "value": "5 °C",
-              "detail": "heute 5 bis 6 °C"
+              "detail": "heute 5 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +361,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -384,6 +384,12 @@
           "date": "2026-08-16T16:06:32.147Z"
         },
         {
+          "title": "Schulsystem Kanton Obwalden: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/sistema-scolastico-canton-obwalden-iscrizione-e-cicli-de/",
+          "excerpt": "Die Schulzyklen im Kanton Obwalden sind in drei Phasen unterteilt: Kindergarten, Grundschule und Sekundarschule.",
+          "date": "2026-08-16T16:26:07.130Z"
+        },
+        {
           "title": "Führerschein Obwalden: Umschulung und Prüfungen",
           "url": "/de/schweiz-artikel/fuehrerschein-obwalden-umwandlung/",
           "excerpt": "Vollständiger Leitfaden zur Umwandlung des ausländischen Führerscheins im Kanton Obwalden: Verfahren, theoretische und praktische Prüfung, Pflichtkurse und erforderliche Unterlagen.",
@@ -394,12 +400,6 @@
           "url": "/de/schweiz-artikel/obwalden-krankenversicherung-franchisen-reduktion/",
           "excerpt": "Obligatorische Franchisen, Prämienverbilligungen und kantonale Krankenversicherungsbeiträge im Kanton Obwalden. Antragsverfahren und alternative Versicherungsmodelle.",
           "date": "2026-08-23T05:27:44.369Z"
-        },
-        {
-          "title": "Schulsystem Kanton Obwalden: Einschreibung und Zyklen",
-          "url": "/de/schweiz-artikel/sistema-scolastico-canton-obwalden-iscrizione-e-cicli-de/",
-          "excerpt": "Die Schulzyklen im Kanton Obwalden sind in drei Phasen unterteilt: Kindergarten, Grundschule und Sekundarschule.",
-          "date": "2026-08-16T16:26:07.130Z"
         },
         {
           "title": "Kurzzeitbewilligung L im Kanton Obwalden: Gültigkeit und Verlängerung",
@@ -437,7 +437,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "OW",
@@ -476,11 +476,11 @@
             {
               "label": "Sarnen",
               "value": "5 °C",
-              "detail": "aujourd’hui de 5 à 6 °C"
+              "detail": "aujourd’hui de 5 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -498,7 +498,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -521,6 +521,12 @@
           "date": "2026-08-16T16:06:32.147Z"
         },
         {
+          "title": "Système scolaire Canton Obwald : inscription et cycles",
+          "url": "/fr/articles-suisse/sistema-scolastico-canton-obwald-iscrizione-e-cicli-fr/",
+          "excerpt": "Les cycles scolaires dans le canton d'Obwald sont divisés en trois phases : crèche, école primaire et école secondaire.",
+          "date": "2026-08-16T16:26:07.130Z"
+        },
+        {
           "title": "Permis de conduire Obwald : conversion et examens",
           "url": "/fr/articles-suisse/permis-de-conduire-obwald-conversion/",
           "excerpt": "Guide complet pour la conversion du permis étranger dans le canton d'Obwald : procédure, examen théorique et pratique, cours obligatoires et documents nécessaires.",
@@ -531,12 +537,6 @@
           "url": "/fr/articles-suisse/obwald-assurance-maladie-franchises-reduction/",
           "excerpt": "Franchises obligatoires, réductions de primes et allocations cantonales pour l'assurance-maladie dans le canton d'Obwald. Procédure de demande et modèles d'assurance alternatifs.",
           "date": "2026-08-23T05:27:44.369Z"
-        },
-        {
-          "title": "Système scolaire Canton Obwald : inscription et cycles",
-          "url": "/fr/articles-suisse/sistema-scolastico-canton-obwald-iscrizione-e-cicli-fr/",
-          "excerpt": "Les cycles scolaires dans le canton d'Obwald sont divisés en trois phases : crèche, école primaire et école secondaire.",
-          "date": "2026-08-16T16:26:07.130Z"
         },
         {
           "title": "Permis L de courte durée dans le canton d'Obwald : validité et prolongation",
@@ -570,7 +570,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

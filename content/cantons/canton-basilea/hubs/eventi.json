@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "b910c29253c374e5b7273965618b82fd2f6740335c936bdfb53a0b236a90b25b",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "19c3aced056994defd6c50510998f9488e7ba42138840136cf3c77909e0c055b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-03T20:20:58.923Z",
+      "updatedAt": "2026-11-04T02:24:05.931Z",
       "keyFacts": 1
     }
   ],
@@ -33,54 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Der «Blüthner» auf Reisen",
-              "detail": "Museum Kleines Klingental",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_ApBTcQT"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "Basel komponiert: Leopold van der Pals – Streichquartette als Spiegel des Lebens",
-              "detail": "Basel",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basel-komponiert-leopold-van-der-pals-streichquartette-als-spiegel-des-lebens/"
-            },
-            {
-              "label": "Lara Stoll - Volume 5 - Die Rückkehr!",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lara-stoll-volume-5-die-rueckkehr/"
-            },
-            {
-              "label": "Porrum Pub Quiz – hosted by Silvan",
-              "detail": "Porrum Cocktailbar @ Markthalle, Basel — in corso, ultimo giorno: 4 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
-              "detail": "Basilea, Basel — in corso, ultimo giorno: 25 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — in corso, ultimo giorno: 5 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Inaugurazione della mostra “Figure per l’eternità” di Peter Moilliet",
               "detail": "Allschwil",
               "date": "2026-11-05",
@@ -91,11 +43,59 @@
               "detail": "Allschwil",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kopfkind-lesung-mit-christine-johanna-keller/"
+            },
+            {
+              "label": "Basler Madrigalisten: Swiss Music",
+              "detail": "Zunftsaal Schmiedenhof",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/events/music/basel/basel-madrigalists-swiss-music_A43SXQc"
+            },
+            {
+              "label": "SIGNS, GAMES, AND MESSAGES",
+              "detail": "Museum Kleines Klingental, Basel",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/signs-games-and-messages-1/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
+            },
+            {
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel — in corso, ultimo giorno: 18 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
+            },
+            {
+              "label": "Öffentliche Führungen im Hanro-Depot",
+              "detail": "Liestal — in corso, ultimo giorno: 2 dicembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
+              "detail": "Basilea, Basel — in corso, ultimo giorno: 25 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — in corso, ultimo giorno: 5 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
+              "label": "Mostra “ <Figuren für die Ewigkeit> ” di Peter Moilliet",
+              "detail": "Allschwil",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-figuren-fuer-die-ewigkeit-di-peter-moilliet/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -138,54 +138,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Der «Blüthner» auf Reisen",
-              "detail": "Museum Kleines Klingental",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_ApBTcQT"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "Basel komponiert: Leopold van der Pals – Streichquartette als Spiegel des Lebens",
-              "detail": "Basel",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basel-komponiert-leopold-van-der-pals-streichquartette-als-spiegel-des-lebens/"
-            },
-            {
-              "label": "Lara Stoll - Volume 5 - Die Rückkehr!",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lara-stoll-volume-5-die-rueckkehr/"
-            },
-            {
-              "label": "Porrum Pub Quiz – hosted by Silvan",
-              "detail": "Porrum Cocktailbar @ Markthalle, Basel — ongoing, last day: 4 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — ongoing, last day: 25 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — ongoing, last day: 5 November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Opening of the exhibition ‘Figures for Eternity’ by Peter Moilliet",
               "detail": "Allschwil",
               "date": "2026-11-05",
@@ -196,11 +148,59 @@
               "detail": "Allschwil",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kopfkind-lesung-mit-christine-johanna-keller/"
+            },
+            {
+              "label": "Basel Madrigalists: Swiss Music",
+              "detail": "Zunftsaal Schmiedenhof",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/events/music/basel/basel-madrigalists-swiss-music_A43SXQc"
+            },
+            {
+              "label": "SIGNS, GAMES, AND MESSAGES",
+              "detail": "Museum Kleines Klingental, Basel",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/signs-games-and-messages-1/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
+            },
+            {
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel — ongoing, last day: 18 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
+            },
+            {
+              "label": "Öffentliche Führungen im Hanro-Depot",
+              "detail": "Liestal — ongoing, last day: 2 December 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — ongoing, last day: 25 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — ongoing, last day: 5 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
+              "label": "Exhibition: \" <Figuren für die Ewigkeit> \" by Peter Moilliet",
+              "detail": "Allschwil",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-figuren-fuer-die-ewigkeit-di-peter-moilliet/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -243,54 +243,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Der «Blüthner» auf Reisen",
-              "detail": "Museum Kleines Klingental",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_ApBTcQT"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "Basel komponiert: Leopold van der Pals – Streichquartette als Spiegel des Lebens",
-              "detail": "Basel",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basel-komponiert-leopold-van-der-pals-streichquartette-als-spiegel-des-lebens/"
-            },
-            {
-              "label": "Lara Stoll - Volume 5 - Die Rückkehr!",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lara-stoll-volume-5-die-rueckkehr/"
-            },
-            {
-              "label": "Porrum Pub Quiz – hosted by Silvan",
-              "detail": "Porrum Cocktailbar @ Markthalle, Basel — läuft, letzter Tag: 4. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
-            },
-            {
-              "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — läuft, letzter Tag: 25. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — läuft, letzter Tag: 5. November 2026",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Vernissage \"Figuren für die Ewigkeit\" Peter Moilliet",
               "detail": "Allschwil",
               "date": "2026-11-05",
@@ -301,11 +253,59 @@
               "detail": "Allschwil",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kopfkind-lesung-mit-christine-johanna-keller/"
+            },
+            {
+              "label": "Basler Madrigalisten: Swiss Music",
+              "detail": "Zunftsaal Schmiedenhof",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/events/music/basel/basel-madrigalists-swiss-music_A43SXQc"
+            },
+            {
+              "label": "SIGNS, GAMES AND MESSAGES",
+              "detail": "Museum Kleines Klingental, Basel",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/signs-games-and-messages-1/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
+            },
+            {
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel — läuft, letzter Tag: 18. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
+            },
+            {
+              "label": "Öffentliche Führungen im Hanro-Depot",
+              "detail": "Liestal — läuft, letzter Tag: 2. Dezember 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — läuft, letzter Tag: 25. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — läuft, letzter Tag: 5. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
+              "label": "Ausstellung \"Figuren für die Ewigkeit\" Peter Moilliet",
+              "detail": "Allschwil",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-figuren-fuer-die-ewigkeit-di-peter-moilliet/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -348,54 +348,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Der «Blüthner» auf Reisen",
-              "detail": "Museum Kleines Klingental",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_ApBTcQT"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "Basel komponiert: Leopold van der Pals – Streichquartette als Spiegel des Lebens",
-              "detail": "Basel",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basel-komponiert-leopold-van-der-pals-streichquartette-als-spiegel-des-lebens/"
-            },
-            {
-              "label": "Lara Stoll - Volume 5 - Die Rückkehr!",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lara-stoll-volume-5-die-rueckkehr/"
-            },
-            {
-              "label": "Porrum Pub Quiz – hosted by Silvan",
-              "detail": "Porrum Cocktailbar @ Markthalle, Basel — en cours, dernier jour : 4 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — en cours, dernier jour : 25 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — en cours, dernier jour : 5 novembre 2026",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Vernissage « Des figures pour l'éternité » de Peter Moilliet",
               "detail": "Allschwil",
               "date": "2026-11-05",
@@ -406,11 +358,59 @@
               "detail": "Allschwil",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kopfkind-lesung-mit-christine-johanna-keller/"
+            },
+            {
+              "label": "Les Madrigalistes de Bâle : Swiss Music",
+              "detail": "Zunftsaal Schmiedenhof",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/events/music/basel/basel-madrigalists-swiss-music_A43SXQc"
+            },
+            {
+              "label": "SIGNS, GAMES AND MESSAGES",
+              "detail": "Museum Kleines Klingental, Basel",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/signs-games-and-messages-1/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
+            },
+            {
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel — en cours, dernier jour : 18 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
+            },
+            {
+              "label": "Öffentliche Führungen im Hanro-Depot",
+              "detail": "Liestal — en cours, dernier jour : 2 décembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — en cours, dernier jour : 25 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — en cours, dernier jour : 5 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
+              "label": "Exposition « <Figuren für die Ewigkeit> » de Peter Moilliet",
+              "detail": "Allschwil",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-figuren-fuer-die-ewigkeit-di-peter-moilliet/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

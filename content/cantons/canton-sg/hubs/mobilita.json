@@ -4,22 +4,22 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "188f7d14c4bd7c69a7411b64fbc4389ff0a93b6ab4e421ae256aa3f68c4045f6",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "23adf5eac17cfa0f4ebeafc27bac71be585a5168880bbdb7925d7200abd4969d",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-02T23:59:59.000Z",
+      "updatedAt": "2026-11-04T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-03T20:00:07.431Z",
+      "updatedAt": "2026-11-05T01:51:30.468Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Kriessern-Mäder, settimana conclusa: 2 novembre 2026"
+          "note": "Kriessern-Mäder, settimana conclusa: 4 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "7",
-          "note": "segnalazioni aggiornate: 3 novembre 2026"
+          "value": "8",
+          "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "12",
-          "note": "segnalazioni aggiornate: 3 novembre 2026"
+          "note": "segnalazioni aggiornate: 5 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 27 ottobre 2026 – 2 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 ottobre 2026 – 4 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Kriessern-Mäder",
@@ -63,12 +63,6 @@
               "value": "0 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/montlingen-koblach/oggi/"
-            },
-            {
-              "label": "Rheineck-Gaißau",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/rheineck-gai-au/oggi/"
             },
             {
               "label": "Rüthi-Meiningen",
@@ -89,6 +83,12 @@
               "url": "/traffico-dogane/sevelen-vaduz/oggi/"
             },
             {
+              "label": "Rheineck-Gaißau",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/rheineck-gai-au/oggi/"
+            },
+            {
               "label": "Widnau-Lustenau (Wiesenrain)",
               "value": "0 min",
               "detail": "48 rilevazioni",
@@ -103,7 +103,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -141,6 +141,12 @@
               "date": "2026-09-15T12:47:00.000Z"
             },
             {
+              "label": "A1 St. Gallen <-> St. Margrethen Svincolo autostradale St. Gallen-St. Fiden Situazione: uscita chiusa cantiere, lunghezza [km] 0.3",
+              "value": "Chiusura",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-10-26T15:31:00.000Z"
+            },
+            {
               "label": "A3 Zürich -> Chur tra Svincolo autostradale Murg E Svincolo autostradale Flums Situazione: chiusa cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 13 novembre 2026",
@@ -151,16 +157,10 @@
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
               "date": "2026-11-04T18:30:00.000Z"
-            },
-            {
-              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 13 novembre 2026",
-              "date": "2026-04-10T06:30:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -168,37 +168,37 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
-              "label": "Mogelsberg: Auto von Strasse abgekommen",
-              "date": "2026-11-03",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/mogelsberg--auto-von-strasse-abgekommen.html"
+              "label": "Gossau: Brand in Gastrobetrieb",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/gossau--brand-in-gastrobetrieb.html"
             },
             {
-              "label": "Direktverbindung Weinfelden-St.Gallen-Bregenz mit der S3 - Einführungsangebot für Kombiabos OTV-VVV",
-              "date": "2026-11-02",
-              "url": "https://www.ostwind.ch/about/unternehmen/news/uebersicht/einf%C3%BChrungsangebot-direktverbindung-s3-weinfelden-via-st.-gallen-nach-bregenz.html"
+              "label": "Wattwil: Zwei Tote bei Gewalttat",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/wattwil--zwei-tote-bei-gewalttat.html"
             },
             {
-              "label": "Oberuzwil: Brand in Mehrfamilienhaus",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/oberuzwil--brand-in-mehrfamilienhaus.html"
+              "label": "Rorschach: Auto nach Unfall auf Bahngleis geraten",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/rorschach--auto-nach-unfall-auf-bahngleis-geraten.html"
             },
             {
-              "label": "Kanton St. Gallen: Halloween-Nacht",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st--gallen--halloween-nacht.html"
+              "label": "Altenrhein: Bei Arbeitsunfall schwer verletzt",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/altenrhein--bei-arbeitsunfall-schwer-verletzt.html"
             },
             {
-              "label": "Kanton St.Gallen: Fahrunfähige und alkoholisierte Verkehrsteilnehmende",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--fahrunfaehige-und-alkoholisierte-verkehrsteiln.html"
+              "label": "Rüthi: Gewässerverschmutzung",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/ruethi--gewaesserverschmutzung.html"
             },
             {
-              "label": "Bad Ragaz: Brennender Balkon bei Mehrfamilienhaus",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/bad-ragaz--brennender-balkon-bei-mehrfamilienhaus.html"
+              "label": "Sargans: Festnahme nach Einbruch in Gewerbeliegenschaft",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/sargans--festnahme-nach-einbruch-in-gewerbeliegenschaft.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -286,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "SG",
@@ -297,24 +297,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Kriessern-Mäder, week ending 2 November 2026"
+          "note": "Kriessern-Mäder, week ending 4 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "7",
-          "note": "reports as of 3 November 2026"
+          "value": "8",
+          "note": "reports as of 5 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "12",
-          "note": "reports as of 3 November 2026"
+          "note": "reports as of 5 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 27 October 2026 to 2 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 29 October 2026 to 4 November 2026, fastest first.",
           "items": [
             {
               "label": "Kriessern-Mäder",
@@ -327,12 +327,6 @@
               "value": "0 min",
               "detail": "48 readings",
               "url": "/en/border-wait/montlingen-koblach/today/"
-            },
-            {
-              "label": "Rheineck-Gaißau",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/rheineck-gai-au/today/"
             },
             {
               "label": "Rüthi-Meiningen",
@@ -353,6 +347,12 @@
               "url": "/en/border-wait/sevelen-vaduz/today/"
             },
             {
+              "label": "Rheineck-Gaißau",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/rheineck-gai-au/today/"
+            },
+            {
               "label": "Widnau-Lustenau (Wiesenrain)",
               "value": "0 min",
               "detail": "48 readings",
@@ -367,7 +367,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -405,6 +405,12 @@
               "date": "2026-09-15T12:47:00.000Z"
             },
             {
+              "label": "A1 St. Gallen <-> St. Margrethen Svincolo autostradale St. Gallen-St. Fiden Situazione: uscita chiusa cantiere, lunghezza [km] 0.3",
+              "value": "Closure",
+              "detail": "until 6 November 2026",
+              "date": "2026-10-26T15:31:00.000Z"
+            },
+            {
               "label": "A3 Zürich -> Chur tra Svincolo autostradale Murg E Svincolo autostradale Flums Situazione: chiusa cantiere",
               "value": "Closure",
               "detail": "until 13 November 2026",
@@ -415,16 +421,10 @@
               "value": "Closure",
               "detail": "until 6 November 2026",
               "date": "2026-11-04T18:30:00.000Z"
-            },
-            {
-              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità…",
-              "value": "Roadworks",
-              "detail": "until 13 November 2026",
-              "date": "2026-04-10T06:30:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -432,37 +432,37 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
-              "label": "Mogelsberg: Auto von Strasse abgekommen",
-              "date": "2026-11-03",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/mogelsberg--auto-von-strasse-abgekommen.html"
+              "label": "Gossau: Brand in Gastrobetrieb",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/gossau--brand-in-gastrobetrieb.html"
             },
             {
-              "label": "Direktverbindung Weinfelden-St.Gallen-Bregenz mit der S3 - Einführungsangebot für Kombiabos OTV-VVV",
-              "date": "2026-11-02",
-              "url": "https://www.ostwind.ch/about/unternehmen/news/uebersicht/einf%C3%BChrungsangebot-direktverbindung-s3-weinfelden-via-st.-gallen-nach-bregenz.html"
+              "label": "Wattwil: Zwei Tote bei Gewalttat",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/wattwil--zwei-tote-bei-gewalttat.html"
             },
             {
-              "label": "Oberuzwil: Brand in Mehrfamilienhaus",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/oberuzwil--brand-in-mehrfamilienhaus.html"
+              "label": "Rorschach: Auto nach Unfall auf Bahngleis geraten",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/rorschach--auto-nach-unfall-auf-bahngleis-geraten.html"
             },
             {
-              "label": "Kanton St. Gallen: Halloween-Nacht",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st--gallen--halloween-nacht.html"
+              "label": "Altenrhein: Bei Arbeitsunfall schwer verletzt",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/altenrhein--bei-arbeitsunfall-schwer-verletzt.html"
             },
             {
-              "label": "Kanton St.Gallen: Fahrunfähige und alkoholisierte Verkehrsteilnehmende",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--fahrunfaehige-und-alkoholisierte-verkehrsteiln.html"
+              "label": "Rüthi: Gewässerverschmutzung",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/ruethi--gewaesserverschmutzung.html"
             },
             {
-              "label": "Bad Ragaz: Brennender Balkon bei Mehrfamilienhaus",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/bad-ragaz--brennender-balkon-bei-mehrfamilienhaus.html"
+              "label": "Sargans: Festnahme nach Einbruch in Gewerbeliegenschaft",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/sargans--festnahme-nach-einbruch-in-gewerbeliegenschaft.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "SG",
@@ -560,24 +560,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Kriessern-Mäder, Woche bis 2. November 2026"
+          "note": "Kriessern-Mäder, Woche bis 4. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "7",
-          "note": "Meldungen vom 3. November 2026"
+          "value": "8",
+          "note": "Meldungen vom 5. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "12",
-          "note": "Meldungen vom 3. November 2026"
+          "note": "Meldungen vom 5. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 27. Oktober 2026 bis 2. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. Oktober 2026 bis 4. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Kriessern-Mäder",
@@ -590,12 +590,6 @@
               "value": "0 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/montlingen-koblach/heute/"
-            },
-            {
-              "label": "Rheineck-Gaißau",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/rheineck-gai-au/heute/"
             },
             {
               "label": "Rüthi-Meiningen",
@@ -616,6 +610,12 @@
               "url": "/de/wartezeit-grenze/sevelen-vaduz/heute/"
             },
             {
+              "label": "Rheineck-Gaißau",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/rheineck-gai-au/heute/"
+            },
+            {
               "label": "Widnau-Lustenau (Wiesenrain)",
               "value": "0 Min.",
               "detail": "48 Messungen",
@@ -630,7 +630,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -668,6 +668,12 @@
               "date": "2026-09-15T12:47:00.000Z"
             },
             {
+              "label": "A1 St. Gallen <-> St. Margrethen Anschluss St. Gallen-St. Fiden Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.3",
+              "value": "Sperrung",
+              "detail": "bis 6. November 2026",
+              "date": "2026-10-26T15:31:00.000Z"
+            },
+            {
               "label": "A3 Zürich -> Chur zwischen Anschluss Murg und Anschluss Flums Sachlage: Strecke gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 13. November 2026",
@@ -678,16 +684,10 @@
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
               "date": "2026-11-04T18:30:00.000Z"
-            },
-            {
-              "label": "A13 Sargans <-> St. Margrethen zwischen Anschluss Oberriet und Anschluss Haag Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: veränderte Verkehrsführung Zusatz 1…",
-              "value": "Baustelle",
-              "detail": "bis 13. November 2026",
-              "date": "2026-04-10T06:30:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -695,37 +695,37 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
-              "label": "Mogelsberg: Auto von Strasse abgekommen",
-              "date": "2026-11-03",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/mogelsberg--auto-von-strasse-abgekommen.html"
+              "label": "Gossau: Brand in Gastrobetrieb",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/gossau--brand-in-gastrobetrieb.html"
             },
             {
-              "label": "Direktverbindung Weinfelden-St.Gallen-Bregenz mit der S3 - Einführungsangebot für Kombiabos OTV-VVV",
-              "date": "2026-11-02",
-              "url": "https://www.ostwind.ch/about/unternehmen/news/uebersicht/einf%C3%BChrungsangebot-direktverbindung-s3-weinfelden-via-st.-gallen-nach-bregenz.html"
+              "label": "Wattwil: Zwei Tote bei Gewalttat",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/wattwil--zwei-tote-bei-gewalttat.html"
             },
             {
-              "label": "Oberuzwil: Brand in Mehrfamilienhaus",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/oberuzwil--brand-in-mehrfamilienhaus.html"
+              "label": "Rorschach: Auto nach Unfall auf Bahngleis geraten",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/rorschach--auto-nach-unfall-auf-bahngleis-geraten.html"
             },
             {
-              "label": "Kanton St. Gallen: Halloween-Nacht",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st--gallen--halloween-nacht.html"
+              "label": "Altenrhein: Bei Arbeitsunfall schwer verletzt",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/altenrhein--bei-arbeitsunfall-schwer-verletzt.html"
             },
             {
-              "label": "Kanton St.Gallen: Fahrunfähige und alkoholisierte Verkehrsteilnehmende",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--fahrunfaehige-und-alkoholisierte-verkehrsteiln.html"
+              "label": "Rüthi: Gewässerverschmutzung",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/ruethi--gewaesserverschmutzung.html"
             },
             {
-              "label": "Bad Ragaz: Brennender Balkon bei Mehrfamilienhaus",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/bad-ragaz--brennender-balkon-bei-mehrfamilienhaus.html"
+              "label": "Sargans: Festnahme nach Einbruch in Gewerbeliegenschaft",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/sargans--festnahme-nach-einbruch-in-gewerbeliegenschaft.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -812,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "SG",
@@ -823,24 +823,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Kriessern-Mäder, semaine jusqu’au 2 novembre 2026"
+          "note": "Kriessern-Mäder, semaine jusqu’au 4 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "7",
-          "note": "signalements au 3 novembre 2026"
+          "value": "8",
+          "note": "signalements au 5 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "12",
-          "note": "signalements au 3 novembre 2026"
+          "note": "signalements au 5 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 27 octobre 2026 au 2 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 octobre 2026 au 4 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Kriessern-Mäder",
@@ -853,12 +853,6 @@
               "value": "0 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/montlingen-koblach/aujourd-hui/"
-            },
-            {
-              "label": "Rheineck-Gaißau",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/rheineck-gai-au/aujourd-hui/"
             },
             {
               "label": "Rüthi-Meiningen",
@@ -879,6 +873,12 @@
               "url": "/fr/temps-attente-douane/sevelen-vaduz/aujourd-hui/"
             },
             {
+              "label": "Rheineck-Gaißau",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/rheineck-gai-au/aujourd-hui/"
+            },
+            {
               "label": "Widnau-Lustenau (Wiesenrain)",
               "value": "0 min",
               "detail": "48 relevés",
@@ -893,7 +893,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -931,6 +931,12 @@
               "date": "2026-09-15T12:47:00.000Z"
             },
             {
+              "label": "A1 St-Gall <-> St. Margrethen Jonction autoroutière St. Gall-St. Fiden Situation: sortie fermée travaux, longueur [km] 0.3",
+              "value": "Fermeture",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-10-26T15:31:00.000Z"
+            },
+            {
               "label": "A3 Zurich -> Coire entre Jonction autoroutière Murg et Jonction autoroutière Flums Situation: fermé travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 13 novembre 2026",
@@ -941,16 +947,10 @@
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
               "date": "2026-11-04T18:30:00.000Z"
-            },
-            {
-              "label": "A13 Sargans <-> St. Margrethen entre Jonction autoroutière Oberriet et Jonction autoroutière Haag Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: nouveau plan de circulation…",
-              "value": "Chantier",
-              "detail": "jusqu’au 13 novembre 2026",
-              "date": "2026-04-10T06:30:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -958,37 +958,37 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
-              "label": "Mogelsberg: Auto von Strasse abgekommen",
-              "date": "2026-11-03",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/mogelsberg--auto-von-strasse-abgekommen.html"
+              "label": "Gossau: Brand in Gastrobetrieb",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/gossau--brand-in-gastrobetrieb.html"
             },
             {
-              "label": "Direktverbindung Weinfelden-St.Gallen-Bregenz mit der S3 - Einführungsangebot für Kombiabos OTV-VVV",
-              "date": "2026-11-02",
-              "url": "https://www.ostwind.ch/about/unternehmen/news/uebersicht/einf%C3%BChrungsangebot-direktverbindung-s3-weinfelden-via-st.-gallen-nach-bregenz.html"
+              "label": "Wattwil: Zwei Tote bei Gewalttat",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/wattwil--zwei-tote-bei-gewalttat.html"
             },
             {
-              "label": "Oberuzwil: Brand in Mehrfamilienhaus",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/oberuzwil--brand-in-mehrfamilienhaus.html"
+              "label": "Rorschach: Auto nach Unfall auf Bahngleis geraten",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/rorschach--auto-nach-unfall-auf-bahngleis-geraten.html"
             },
             {
-              "label": "Kanton St. Gallen: Halloween-Nacht",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st--gallen--halloween-nacht.html"
+              "label": "Altenrhein: Bei Arbeitsunfall schwer verletzt",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/altenrhein--bei-arbeitsunfall-schwer-verletzt.html"
             },
             {
-              "label": "Kanton St.Gallen: Fahrunfähige und alkoholisierte Verkehrsteilnehmende",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--fahrunfaehige-und-alkoholisierte-verkehrsteiln.html"
+              "label": "Rüthi: Gewässerverschmutzung",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/ruethi--gewaesserverschmutzung.html"
             },
             {
-              "label": "Bad Ragaz: Brennender Balkon bei Mehrfamilienhaus",
-              "date": "2026-11-01",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/bad-ragaz--brennender-balkon-bei-mehrfamilienhaus.html"
+              "label": "Sargans: Festnahme nach Einbruch in Gewerbeliegenschaft",
+              "date": "2026-11-04",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/sargans--festnahme-nach-einbruch-in-gewerbeliegenschaft.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -1076,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

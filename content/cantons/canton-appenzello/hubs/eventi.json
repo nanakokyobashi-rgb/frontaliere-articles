@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "71f770c21e584b69d9f505e7e5d66e6c58fc064005974b835fb55e7d25d31888",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "905c4bc38cefc04b87d0f370cd82d1de4aa0f7bac301c4aba53463e54eebc7a0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-03T20:20:58.923Z",
+      "updatedAt": "2026-11-04T02:24:05.931Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "14",
+          "value": "13",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,12 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Cuarteto Quiroga",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/akce/klasicky/herisau/cuarteto-quiroga_AsgGLCC"
-            },
             {
               "label": "Acoustic Voyagers und Wooden Impact",
               "detail": "Appenzell",
@@ -91,11 +85,17 @@
               "detail": "Appenzello",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
+            },
+            {
+              "label": "J. S. Bach: BWV 226 \"Lo Spirito aiuta\" e BWV 229 \"Vieni, Gesù, vieni\".",
+              "detail": "Evang.-ref. Kirche Trogen, Trogen",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/trogen/j-s-bach-bwv-226-der-geist-hilft-und-bwv-229-komm-jesu-komm_AAmxSs7"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "14",
+          "value": "13",
           "note": "from the site’s events calendar"
         }
       ],
@@ -143,12 +143,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Cuarteto Quiroga",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/akce/klasicky/herisau/cuarteto-quiroga_AsgGLCC"
-            },
             {
               "label": "Acoustic Voyagers und Wooden Impact",
               "detail": "Appenzell",
@@ -202,11 +196,17 @@
               "detail": "Appenzello",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
+            },
+            {
+              "label": "J. S. Bach: BWV 226 \"The Spirit helps\" and BWV 229 \"Come, Jesus, come\"",
+              "detail": "Evang.-ref. Kirche Trogen, Trogen",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/trogen/j-s-bach-bwv-226-der-geist-hilft-und-bwv-229-komm-jesu-komm_AAmxSs7"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "14",
+          "value": "13",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -254,12 +254,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Cuarteto Quiroga",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/akce/klasicky/herisau/cuarteto-quiroga_AsgGLCC"
-            },
             {
               "label": "Acoustic Voyagers und Wooden Impact",
               "detail": "Appenzell",
@@ -313,11 +307,17 @@
               "detail": "Appenzello",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
+            },
+            {
+              "label": "J. S. Bach: BWV 226 «Der Geist hilft» und BWV 229 «Komm, Jesu, komm»",
+              "detail": "Evang.-ref. Kirche Trogen, Trogen",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/trogen/j-s-bach-bwv-226-der-geist-hilft-und-bwv-229-komm-jesu-komm_AAmxSs7"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "14",
+          "value": "13",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -365,12 +365,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Cuarteto Quiroga",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/akce/klasicky/herisau/cuarteto-quiroga_AsgGLCC"
-            },
             {
               "label": "Acoustic Voyagers und Wooden Impact",
               "detail": "Appenzell",
@@ -424,11 +418,17 @@
               "detail": "Appenzello",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
+            },
+            {
+              "label": "J. S. Bach : BWV 226 \"Der Geist hilft\" et BWV 229 \"Komm, Jesu, komm\" (Viens, Jésus, viens)",
+              "detail": "Evang.-ref. Kirche Trogen, Trogen",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/trogen/j-s-bach-bwv-226-der-geist-hilft-und-bwv-229-komm-jesu-komm_AAmxSs7"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

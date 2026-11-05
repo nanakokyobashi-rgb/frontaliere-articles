@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "d192b62ea9e87d9898077d8f002c19a9a4950e2748aa3fc1b27c2048acfb73c6",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "429a54b150bfa0d09142625b7376fe6816b8332e01891c81daedc1c9b20633a5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-03T16:44:05.264Z",
+      "updatedAt": "2026-11-05T03:14:15.858Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "updatedAt": "2026-11-05T00:59:56.280Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -76,27 +76,27 @@
             {
               "label": "Gare",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-03T17:30:00.000Z"
-            },
-            {
-              "label": "Gare",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-04T17:30:00.000Z"
-            },
-            {
-              "label": "Gare",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-05T17:30:00.000Z"
             },
             {
               "label": "Gare",
               "detail": "Moutier, Moutier",
               "date": "2026-11-06T17:30:00.000Z"
+            },
+            {
+              "label": "Pharmacie Erard",
+              "detail": "Alle, Ajoie",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Voirol",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-07T07:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-03T16:44:05.264Z"
+          "updatedAt": "2026-11-05T03:14:15.858Z"
         },
         {
           "id": "meteo",
@@ -105,12 +105,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "5 °C",
-              "detail": "oggi da 4 a 6 °C"
+              "value": "3 °C",
+              "detail": "oggi da 2 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -183,7 +183,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "JU",
@@ -232,27 +232,27 @@
             {
               "label": "Gare",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-03T17:30:00.000Z"
-            },
-            {
-              "label": "Gare",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-04T17:30:00.000Z"
-            },
-            {
-              "label": "Gare",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-05T17:30:00.000Z"
             },
             {
               "label": "Gare",
               "detail": "Moutier, Moutier",
               "date": "2026-11-06T17:30:00.000Z"
+            },
+            {
+              "label": "Pharmacie Erard",
+              "detail": "Alle, Ajoie",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Voirol",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-07T07:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-03T16:44:05.264Z"
+          "updatedAt": "2026-11-05T03:14:15.858Z"
         },
         {
           "id": "meteo",
@@ -261,12 +261,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "5 °C",
-              "detail": "today from 4 to 6 °C"
+              "value": "3 °C",
+              "detail": "today from 2 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -289,7 +289,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -335,7 +335,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "JU",
@@ -384,27 +384,27 @@
             {
               "label": "Gare",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-03T17:30:00.000Z"
-            },
-            {
-              "label": "Gare",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-04T17:30:00.000Z"
-            },
-            {
-              "label": "Gare",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-05T17:30:00.000Z"
             },
             {
               "label": "Gare",
               "detail": "Moutier, Moutier",
               "date": "2026-11-06T17:30:00.000Z"
+            },
+            {
+              "label": "Pharmacie Erard",
+              "detail": "Alle, Ajoie",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Voirol",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-07T07:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-03T16:44:05.264Z"
+          "updatedAt": "2026-11-05T03:14:15.858Z"
         },
         {
           "id": "meteo",
@@ -413,12 +413,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "5 °C",
-              "detail": "heute 4 bis 6 °C"
+              "value": "3 °C",
+              "detail": "heute 2 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -441,7 +441,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -487,7 +487,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "JU",
@@ -536,27 +536,27 @@
             {
               "label": "Gare",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-03T17:30:00.000Z"
-            },
-            {
-              "label": "Gare",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-04T17:30:00.000Z"
-            },
-            {
-              "label": "Gare",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-05T17:30:00.000Z"
             },
             {
               "label": "Gare",
               "detail": "Moutier, Moutier",
               "date": "2026-11-06T17:30:00.000Z"
+            },
+            {
+              "label": "Pharmacie Erard",
+              "detail": "Alle, Ajoie",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Voirol",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-07T07:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-03T16:44:05.264Z"
+          "updatedAt": "2026-11-05T03:14:15.858Z"
         },
         {
           "id": "meteo",
@@ -565,12 +565,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "5 °C",
-              "detail": "aujourd’hui de 4 à 6 °C"
+              "value": "3 °C",
+              "detail": "aujourd’hui de 2 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-03T19:43:34.090Z"
+          "updatedAt": "2026-11-05T00:59:56.280Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -593,7 +593,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -635,7 +635,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

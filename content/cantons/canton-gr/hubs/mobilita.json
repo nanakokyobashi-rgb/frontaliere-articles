@@ -4,22 +4,22 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "8368dc95e8d9dc6279d56205cd91aa150900bfc8a85798a6a360c94c82cf6f33",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "bc55a6cfe9db08b2586fe71a9e45666aee8152c40835187fdc42f01c19fc7fad",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-02T23:59:59.000Z",
+      "updatedAt": "2026-11-04T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-03T20:00:07.431Z",
+      "updatedAt": "2026-11-05T01:51:30.468Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -33,36 +33,30 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Giogo di Santa Maria (Passo dell'Umbrail), settimana conclusa: 2 novembre 2026"
+          "note": "Giogo di Santa Maria (Passo dell'Umbrail), settimana conclusa: 4 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "8",
-          "note": "segnalazioni aggiornate: 3 novembre 2026"
+          "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "7",
-          "note": "segnalazioni aggiornate: 3 novembre 2026"
+          "value": "9",
+          "note": "segnalazioni aggiornate: 5 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 27 ottobre 2026 – 2 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 ottobre 2026 – 4 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
               "value": "0 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/giogo-di-santa-maria/oggi/"
-            },
-            {
-              "label": "Samnaun-Spiss",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/samnaun-spiss/oggi/"
             },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
@@ -83,10 +77,10 @@
               "url": "/traffico-dogane/martina-nauders/oggi/"
             },
             {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0,1 min",
+              "label": "Samnaun-Spiss",
+              "value": "0 min",
               "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/castasegna-villa-di-chiavenna/oggi/"
+              "url": "/traffico-dogane/samnaun-spiss/oggi/"
             },
             {
               "label": "Campocologno-Tirano",
@@ -95,15 +89,21 @@
               "url": "/traffico-dogane/campocologno-tirano/oggi/"
             },
             {
-              "label": "Forcola di Livigno",
+              "label": "Castasegna-Villa di Chiavenna",
               "value": "0,1 min",
               "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/forcola-di-livigno/oggi/"
+              "url": "/traffico-dogane/castasegna-villa-di-chiavenna/oggi/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0,2 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/passo-dello-spluga/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -160,13 +160,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Ausweichverkehr: Verkehrsmanagement wird weiterentwickelt",
+              "date": "2026-11-04",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110401.aspx"
+            },
             {
               "label": "Neue St. Petersbachbrücke in Obersaxen ist eröffnet",
               "date": "2026-10-30",
@@ -191,14 +196,9 @@
               "label": "Umbau Bahnhof Versam-Safien",
               "date": "2026-10-19",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
-            },
-            {
-              "label": "Bahnersatzbusse auf der Arosalinie",
-              "date": "2026-10-19",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/bahnersatzbusse-arosalinie/"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "GR",
@@ -301,36 +301,30 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Giogo di Santa Maria (Passo dell'Umbrail), week ending 2 November 2026"
+          "note": "Giogo di Santa Maria (Passo dell'Umbrail), week ending 4 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "8",
-          "note": "reports as of 3 November 2026"
+          "note": "reports as of 5 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "7",
-          "note": "reports as of 3 November 2026"
+          "value": "9",
+          "note": "reports as of 5 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 27 October 2026 to 2 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 29 October 2026 to 4 November 2026, fastest first.",
           "items": [
             {
               "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
               "value": "0 min",
               "detail": "48 readings",
               "url": "/en/border-wait/giogo-di-santa-maria/today/"
-            },
-            {
-              "label": "Samnaun-Spiss",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/samnaun-spiss/today/"
             },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
@@ -351,10 +345,10 @@
               "url": "/en/border-wait/martina-nauders/today/"
             },
             {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0.1 min",
+              "label": "Samnaun-Spiss",
+              "value": "0 min",
               "detail": "48 readings",
-              "url": "/en/border-wait/castasegna-villa-di-chiavenna/today/"
+              "url": "/en/border-wait/samnaun-spiss/today/"
             },
             {
               "label": "Campocologno-Tirano",
@@ -363,15 +357,21 @@
               "url": "/en/border-wait/campocologno-tirano/today/"
             },
             {
-              "label": "Forcola di Livigno",
+              "label": "Castasegna-Villa di Chiavenna",
               "value": "0.1 min",
               "detail": "48 readings",
-              "url": "/en/border-wait/forcola-di-livigno/today/"
+              "url": "/en/border-wait/castasegna-villa-di-chiavenna/today/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0.2 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/passo-dello-spluga/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -428,13 +428,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Ausweichverkehr: Verkehrsmanagement wird weiterentwickelt",
+              "date": "2026-11-04",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110401.aspx"
+            },
             {
               "label": "Neue St. Petersbachbrücke in Obersaxen ist eröffnet",
               "date": "2026-10-30",
@@ -459,14 +464,9 @@
               "label": "Umbau Bahnhof Versam-Safien",
               "date": "2026-10-19",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
-            },
-            {
-              "label": "Bahnersatzbusse auf der Arosalinie",
-              "date": "2026-10-19",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/bahnersatzbusse-arosalinie/"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "GR",
@@ -568,36 +568,30 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Giogo di Santa Maria (Passo dell'Umbrail), Woche bis 2. November 2026"
+          "note": "Giogo di Santa Maria (Passo dell'Umbrail), Woche bis 4. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "8",
-          "note": "Meldungen vom 3. November 2026"
+          "note": "Meldungen vom 5. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "7",
-          "note": "Meldungen vom 3. November 2026"
+          "value": "9",
+          "note": "Meldungen vom 5. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 27. Oktober 2026 bis 2. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. Oktober 2026 bis 4. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
               "value": "0 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/giogo-di-santa-maria/heute/"
-            },
-            {
-              "label": "Samnaun-Spiss",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/samnaun-spiss/heute/"
             },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
@@ -618,10 +612,10 @@
               "url": "/de/wartezeit-grenze/martina-nauders/heute/"
             },
             {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0.1 Min.",
+              "label": "Samnaun-Spiss",
+              "value": "0 Min.",
               "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/castasegna-villa-di-chiavenna/heute/"
+              "url": "/de/wartezeit-grenze/samnaun-spiss/heute/"
             },
             {
               "label": "Campocologno-Tirano",
@@ -630,15 +624,21 @@
               "url": "/de/wartezeit-grenze/campocologno-tirano/heute/"
             },
             {
-              "label": "Forcola di Livigno",
+              "label": "Castasegna-Villa di Chiavenna",
               "value": "0.1 Min.",
               "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/forcola-di-livigno/heute/"
+              "url": "/de/wartezeit-grenze/castasegna-villa-di-chiavenna/heute/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0.2 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/passo-dello-spluga/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -695,13 +695,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Ausweichverkehr: Verkehrsmanagement wird weiterentwickelt",
+              "date": "2026-11-04",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110401.aspx"
+            },
             {
               "label": "Neue St. Petersbachbrücke in Obersaxen ist eröffnet",
               "date": "2026-10-30",
@@ -726,14 +731,9 @@
               "label": "Umbau Bahnhof Versam-Safien",
               "date": "2026-10-19",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
-            },
-            {
-              "label": "Bahnersatzbusse auf der Arosalinie",
-              "date": "2026-10-19",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/bahnersatzbusse-arosalinie/"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "GR",
@@ -836,36 +836,30 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Giogo di Santa Maria (Passo dell'Umbrail), semaine jusqu’au 2 novembre 2026"
+          "note": "Giogo di Santa Maria (Passo dell'Umbrail), semaine jusqu’au 4 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "8",
-          "note": "signalements au 3 novembre 2026"
+          "note": "signalements au 5 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "7",
-          "note": "signalements au 3 novembre 2026"
+          "value": "9",
+          "note": "signalements au 5 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 27 octobre 2026 au 2 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 octobre 2026 au 4 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
               "value": "0 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/giogo-di-santa-maria/aujourd-hui/"
-            },
-            {
-              "label": "Samnaun-Spiss",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/samnaun-spiss/aujourd-hui/"
             },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
@@ -886,10 +880,10 @@
               "url": "/fr/temps-attente-douane/martina-nauders/aujourd-hui/"
             },
             {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0,1 min",
+              "label": "Samnaun-Spiss",
+              "value": "0 min",
               "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/castasegna-villa-di-chiavenna/aujourd-hui/"
+              "url": "/fr/temps-attente-douane/samnaun-spiss/aujourd-hui/"
             },
             {
               "label": "Campocologno-Tirano",
@@ -898,15 +892,21 @@
               "url": "/fr/temps-attente-douane/campocologno-tirano/aujourd-hui/"
             },
             {
-              "label": "Forcola di Livigno",
+              "label": "Castasegna-Villa di Chiavenna",
               "value": "0,1 min",
               "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/forcola-di-livigno/aujourd-hui/"
+              "url": "/fr/temps-attente-douane/castasegna-villa-di-chiavenna/aujourd-hui/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0,2 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/passo-dello-spluga/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -963,13 +963,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Ausweichverkehr: Verkehrsmanagement wird weiterentwickelt",
+              "date": "2026-11-04",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110401.aspx"
+            },
             {
               "label": "Neue St. Petersbachbrücke in Obersaxen ist eröffnet",
               "date": "2026-10-30",
@@ -994,14 +999,9 @@
               "label": "Umbau Bahnhof Versam-Safien",
               "date": "2026-10-19",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
-            },
-            {
-              "label": "Bahnersatzbusse auf der Arosalinie",
-              "date": "2026-10-19",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/bahnersatzbusse-arosalinie/"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

@@ -4,14 +4,14 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "99d47fb4f997c3d261ab5cd05e7e439177bed869dba4105136e3b85902a1efe6",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "af926a5c4e95f3e5a726c4551c9220857953b1156b79618b1fa9e38cc1fde385",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-03T14:41:22.679Z",
+      "updatedAt": "2026-11-04T14:52:31.010Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-10T13:39:20.000Z"
+      "carryUntilAt": "2026-11-11T13:00:00.000Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,125 EUR/l",
-              "detail": "media regionale: minimo 1,990 EUR/l, 102 stazioni rilevate",
-              "date": "2026-11-03T13:39:20.000Z"
+              "value": "2,116 EUR/l",
+              "detail": "media regionale: minimo 1,990 EUR/l, 106 stazioni rilevate",
+              "date": "2026-11-04T13:00:00.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,271 EUR/l",
-              "detail": "media regionale: minimo 2,149 EUR/l, 106 stazioni rilevate",
-              "date": "2026-11-03T14:00:45.000Z"
+              "value": "2,259 EUR/l",
+              "detail": "media regionale: minimo 2,114 EUR/l, 112 stazioni rilevate",
+              "date": "2026-11-04T13:00:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-04T14:52:31.010Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Vallese: il Consiglio di Stato punta a 180 milioni di risparmi",
+          "url": "/articoli-vallese/vallese-piano-risparmi-2030/",
+          "excerpt": "L'articolo di RTS riferisce che il Consiglio di Stato del Vallese deve individuare CHF 180 milioni di risparmi entro il 2030 per mantenere l'equilibrio del bilancio cantonale.",
+          "date": "2026-11-05T04:21:02.956Z"
+        },
         {
           "title": "Vionnaz: revoca divieti acqua potabile dopo 41 giorni",
           "url": "/articoli-vallese/vionnaz-revoca-divieti-acqua/",
@@ -94,12 +100,6 @@
           "url": "/articoli-vallese/salario-minimo-valese-voto/",
           "excerpt": "La destra e l'economia vallesana dicono no a CHF 22 l'ora.",
           "date": "2026-10-26T17:48:49.413Z"
-        },
-        {
-          "title": "Rapporto OVS: 83% vallesani in buona salute, obesità al 13% e rischi psicosociali al 44%",
-          "url": "/articoli-vallese/salute-vallese-2026-ovs/",
-          "excerpt": "Nel 2022, l'83% degli adulti in Vallese dichiarava di essere in buona o ottima salute, contro l'85% in Svizzera.",
-          "date": "2026-10-18T08:16:12.890Z"
         }
       ],
       "links": [
@@ -128,7 +128,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "VS",
@@ -169,23 +169,29 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.125 EUR/l",
-              "detail": "regional average: lowest 1.990 EUR/l, 102 stations surveyed",
-              "date": "2026-11-03T13:39:20.000Z"
+              "value": "2.116 EUR/l",
+              "detail": "regional average: lowest 1.990 EUR/l, 106 stations surveyed",
+              "date": "2026-11-04T13:00:00.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.271 EUR/l",
-              "detail": "regional average: lowest 2.149 EUR/l, 106 stations surveyed",
-              "date": "2026-11-03T14:00:45.000Z"
+              "value": "2.259 EUR/l",
+              "detail": "regional average: lowest 2.114 EUR/l, 112 stations surveyed",
+              "date": "2026-11-04T13:00:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-04T14:52:31.010Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Valais: the Council of State aims for 180 million in savings",
+          "url": "/en/valais-articles/valais-savings-plan-2030/",
+          "excerpt": "The RTS article reports that the Valais Council of State must identify CHF 180 million in savings by 2030 to maintain the balance of the cantonal budget.",
+          "date": "2026-11-05T04:21:02.956Z"
+        },
         {
           "title": "Vionnaz: drinking water bans lifted after 41 days",
           "url": "/en/valais-articles/vionnaz-revokes-water-restrictions/",
@@ -209,12 +215,6 @@
           "url": "/en/valais-articles/valais-minimum-wage-vote/",
           "excerpt": "The right wing and the Valais economy say no to CHF 22 an hour.",
           "date": "2026-10-26T17:48:49.413Z"
-        },
-        {
-          "title": "OVS report: 83% of Valais residents in good health",
-          "url": "/en/valais-articles/valais-health-2026-ovs/",
-          "excerpt": "In 2022, 83% of adults in Valais reported being in good or very good health, compared with 85% in Switzerland.",
-          "date": "2026-10-18T08:16:12.890Z"
         }
       ],
       "links": [
@@ -243,7 +243,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "VS",
@@ -284,23 +284,29 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.125 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 102 erfasste Tankstellen",
-              "date": "2026-11-03T13:39:20.000Z"
+              "value": "2.116 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 106 erfasste Tankstellen",
+              "date": "2026-11-04T13:00:00.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.271 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.149 EUR/l, 106 erfasste Tankstellen",
-              "date": "2026-11-03T14:00:45.000Z"
+              "value": "2.259 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.114 EUR/l, 112 erfasste Tankstellen",
+              "date": "2026-11-04T13:00:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-04T14:52:31.010Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Wallis: Der Staatsrat strebt Einsparungen von 180 Millionen an",
+          "url": "/de/wallis-artikel/wallis-sparplan-2030/",
+          "excerpt": "Der Artikel von RTS berichtet, dass der Staatsrat des Wallis bis 2030 Einsparungen von CHF 180 Millionen ermitteln muss, um das Gleichgewicht des kantonalen Haushalts zu wahren.",
+          "date": "2026-11-05T04:21:02.956Z"
+        },
         {
           "title": "Vionnaz: Aufhebung der Trinkwasserverbote nach 41 Tagen",
           "url": "/de/wallis-artikel/vionnaz-wasserbeschrankungen-aufhebung/",
@@ -324,12 +330,6 @@
           "url": "/de/wallis-artikel/wallis-mindestlohn-abstimmung/",
           "excerpt": "Die Rechte und die Walliser Wirtschaft sagen Nein zu CHF 22 pro Stunde.",
           "date": "2026-10-26T17:48:49.413Z"
-        },
-        {
-          "title": "OVS-Bericht: 83% Walliser fit, 13% adipös, 44% Psychorisiken",
-          "url": "/de/wallis-artikel/wallis-gesundheit-2026-ovs/",
-          "excerpt": "Im Jahr 2022 gaben 83% der Erwachsenen im Wallis an, bei guter oder sehr guter Gesundheit zu sein, gegenüber 85% in der Schweiz.",
-          "date": "2026-10-18T08:16:12.890Z"
         }
       ],
       "links": [
@@ -354,7 +354,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "VS",
@@ -395,23 +395,29 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,125 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 102 stations relevées",
-              "date": "2026-11-03T13:39:20.000Z"
+              "value": "2,116 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 106 stations relevées",
+              "date": "2026-11-04T13:00:00.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,271 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,149 EUR/l, 106 stations relevées",
-              "date": "2026-11-03T14:00:45.000Z"
+              "value": "2,259 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,114 EUR/l, 112 stations relevées",
+              "date": "2026-11-04T13:00:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-04T14:52:31.010Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Valais : Conseil d’État vise 180 millions d’économies",
+          "url": "/fr/articles-valais/valais-plan-economies-2030/",
+          "excerpt": "L’article de la RTS rapporte que le Conseil d’État du Valais doit prévoir 180 millions de CHF d’économies d’ici 2030 pour maintenir le solde du budget cantonal.",
+          "date": "2026-11-05T04:21:02.956Z"
+        },
         {
           "title": "Vionnaz : levée des interdictions liées à l’eau potable après 41 jours",
           "url": "/fr/articles-valais/vionnaz-levee-restrictions-eau/",
@@ -435,12 +441,6 @@
           "url": "/fr/articles-valais/salaire-minimum-valais-vote/",
           "excerpt": "La droite et l’économie valaisanne disent non à CHF 22 de l’heure.",
           "date": "2026-10-26T17:48:49.413Z"
-        },
-        {
-          "title": "Rapport OVS : 83% des Valaisans en bonne santé, 13% obèses",
-          "url": "/fr/articles-valais/valais-sante-2026-ovs/",
-          "excerpt": "En 2022, 83% des adultes en Valais déclaraient être en bonne ou excellente santé, contre 85% en Suisse.",
-          "date": "2026-10-18T08:16:12.890Z"
         }
       ],
       "links": [
@@ -469,7 +469,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

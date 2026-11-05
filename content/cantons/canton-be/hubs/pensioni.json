@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-23T02:23:53.372Z",
-  "contentHash": "15068969f69fa59da5474d8548cefd24f1b5e522c98cabda332ca647f7115d77",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "7530489d39f0726f7c1a0df004c8352ea10831b38063621c4e44de568fc42c7b",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T16:03:41.824Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -139,9 +139,14 @@
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
+            },
+            {
+              "label": "Information zur Rentenerhöhung ab 1. Januar 2027",
+              "date": "2026-09-03",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -213,7 +218,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-23T02:23:53.372Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "BE",
@@ -325,9 +330,14 @@
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
+            },
+            {
+              "label": "Information zur Rentenerhöhung ab 1. Januar 2027",
+              "date": "2026-09-03",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -399,7 +409,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-23T02:23:53.372Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "BE",
@@ -511,9 +521,14 @@
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
+            },
+            {
+              "label": "Information zur Rentenerhöhung ab 1. Januar 2027",
+              "date": "2026-09-03",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -585,7 +600,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-23T02:23:53.372Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "BE",
@@ -697,9 +712,14 @@
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
+            },
+            {
+              "label": "Information zur Rentenerhöhung ab 1. Januar 2027",
+              "date": "2026-09-03",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -771,7 +791,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-23T02:23:53.372Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

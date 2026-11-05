@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "7630f0d7120413e4cc92e945be2fbb30b6f1078cbe7ecc5edf585ffa1034d2b0",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "9dd750256ac547f87a853f11b9c65cecaa77ca01bb6ba1be944c07f7d145618b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-03T20:20:58.923Z",
+      "updatedAt": "2026-11-04T02:24:05.931Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "17",
+          "value": "16",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,12 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Tiro del Rütli a 300 m",
-              "detail": "Seelisberg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tiro-del-ruetli-a-300-m/"
-            },
             {
               "label": "Aquarellmalen und Mischtechniken - verschiedene Maltechniken",
               "detail": "Altdorf",
@@ -91,11 +85,17 @@
               "detail": "Working Point",
               "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/impulsabend-ki-in-der-vereinsarbeit/"
+            },
+            {
+              "label": "Gaming am Mittwoch",
+              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gaming-am-mittwoch-3/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "17",
+          "value": "16",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,12 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Rütlischiessen 300 m",
-              "detail": "Seelisberg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tiro-del-ruetli-a-300-m/"
-            },
             {
               "label": "Aquarellmalen und Mischtechniken - verschiedene Maltechniken",
               "detail": "Altdorf",
@@ -196,11 +190,17 @@
               "detail": "Working Point",
               "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/impulsabend-ki-in-der-vereinsarbeit/"
+            },
+            {
+              "label": "Gaming am Mittwoch",
+              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gaming-am-mittwoch-3/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "17",
+          "value": "16",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,12 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Rütlischiessen 300 m",
-              "detail": "Seelisberg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tiro-del-ruetli-a-300-m/"
-            },
             {
               "label": "Aquarellmalen und Mischtechniken - verschiedene Maltechniken",
               "detail": "Altdorf",
@@ -301,11 +295,17 @@
               "detail": "Working Point",
               "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/impulsabend-ki-in-der-vereinsarbeit/"
+            },
+            {
+              "label": "Gaming am Mittwoch",
+              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gaming-am-mittwoch-3/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "17",
+          "value": "16",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,12 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Tir du Rütli à 300 m",
-              "detail": "Seelisberg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tiro-del-ruetli-a-300-m/"
-            },
             {
               "label": "Aquarellmalen und Mischtechniken - verschiedene Maltechniken",
               "detail": "Altdorf",
@@ -406,11 +400,17 @@
               "detail": "Working Point",
               "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/impulsabend-ki-in-der-vereinsarbeit/"
+            },
+            {
+              "label": "Gaming am Mittwoch",
+              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gaming-am-mittwoch-3/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

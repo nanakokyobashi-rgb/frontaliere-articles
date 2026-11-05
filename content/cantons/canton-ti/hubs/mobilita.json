@@ -4,22 +4,22 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "64e32f6e417488c1b7d50014969b20b04c75103107cc41240be26c92aba05a04",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "d1eeec351902f4bad7a57b20a4244495e3f5dd68ea0e0b2dfd74d11d7392099d",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-02T23:59:59.000Z",
+      "updatedAt": "2026-11-04T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-03T20:00:07.431Z",
+      "updatedAt": "2026-11-05T01:51:30.468Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-04T22:54:23.302Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Biegno-Indemini, settimana conclusa: 2 novembre 2026"
+          "note": "Biegno-Indemini, settimana conclusa: 4 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "2",
-          "note": "segnalazioni aggiornate: 3 novembre 2026"
+          "value": "3",
+          "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "23",
-          "note": "segnalazioni aggiornate: 3 novembre 2026"
+          "value": "24",
+          "note": "segnalazioni aggiornate: 5 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 27 ottobre 2026 – 2 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 ottobre 2026 – 4 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -59,22 +59,10 @@
               "url": "/traffico-dogane/biegno-indemini/oggi/"
             },
             {
-              "label": "Camedo (Re-Centovalli)",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/camedo/oggi/"
-            },
-            {
               "label": "Campione d'Italia-Bissone",
               "value": "0 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/campione-d-italia-bissone/oggi/"
-            },
-            {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/cremenaga-ponte-cremenaga/oggi/"
             },
             {
               "label": "Drezzo-Pedrinate",
@@ -89,27 +77,44 @@
               "url": "/traffico-dogane/dumenza-cassinone/oggi/"
             },
             {
-              "label": "Luino-Fornasette",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/luino-fornasette/oggi/"
-            },
-            {
               "label": "Piaggio Valmara (Cannobio-Brissago)",
               "value": "0 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/piaggio-valmara/oggi/"
+            },
+            {
+              "label": "Ronago-Novazzano",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/ronago-novazzano/oggi/"
+            },
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/camedo/oggi/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/cremenaga-ponte-cremenaga/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
+            {
+              "label": "Revocato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
+              "value": "Chiusura",
+              "date": "2026-10-21T09:51:00.000Z"
+            },
             {
               "label": "Tremola, Airolo in tutte le direzioni Situazione: chiusa Causa: chiusura invernale",
               "value": "Chiusura",
@@ -120,6 +125,16 @@
               "value": "Chiusura",
               "detail": "fine prevista: 9 dicembre 2026",
               "date": "2026-10-30T06:00:00.000Z"
+            },
+            {
+              "label": "Revocato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Lugano Nord E Svincolo autostradale Mendrisio Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-14T14:33:00.000Z"
+            },
+            {
+              "label": "Revocato: A2 Chiasso -> S. Gottardo tra Dogana Chiasso Brogeda E Galleria Galleria San Gottardo Situazione: si prevedono problemi di traffico Causa: trasporto eccezionale",
+              "value": "Traffico",
+              "date": "2026-11-04T18:34:00.000Z"
             },
             {
               "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
@@ -138,34 +153,21 @@
               "value": "Cantiere",
               "detail": "fine prevista: 28 giugno 2028",
               "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Parcheggio Chiasso-Dogana commerciale Situazione: problemi di traffico cantiere, lunghezza [km] 0.1",
-              "value": "Cantiere",
-              "detail": "fine prevista: 24 marzo 2027",
-              "date": "2025-04-01T03:00:00.000Z"
-            },
-            {
-              "label": "H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite temporaneo…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 27 novembre 2026",
-              "date": "2026-05-22T05:00:00.000Z"
-            },
-            {
-              "label": "H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere, lunghezza [km] 0.37 Limitazione del traffico: nuova viabilità Aggiunta 1…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 20 novembre 2026",
-              "date": "2026-08-27T05:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Importanti modifiche alla circolazione tra Castione-Arbedo, Bellinzona, Locarno e Chiasso dal 13 al 16 novembre 2026.",
+              "date": "2026-11-04",
+              "url": "https://www.tilo.ch/avvisi/261104_NSIF-intervalli-cardini-e-ME-55h.html"
+            },
             {
               "label": "Importanti modifiche alla circolazione tra Castione-Arbedo, Bellinzona, Locarno e Chiasso dal 6 al 9 novembre 2026.",
               "date": "2026-10-27",
@@ -190,14 +192,9 @@
               "label": "Importanti modifiche alla circolazione tra Cadenazzo e Locarno dal 30 ottobre al 3 novembre 2026.",
               "date": "2026-10-19",
               "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
-            },
-            {
-              "label": "Importanti modifiche alla circolazione tra Lugano e Chiasso dal 30 ottobre all’8 novembre 2026.",
-              "date": "2026-10-19",
-              "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "TI",
@@ -304,24 +301,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Biegno-Indemini, week ending 2 November 2026"
+          "note": "Biegno-Indemini, week ending 4 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "2",
-          "note": "reports as of 3 November 2026"
+          "value": "3",
+          "note": "reports as of 5 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "23",
-          "note": "reports as of 3 November 2026"
+          "value": "24",
+          "note": "reports as of 5 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 27 October 2026 to 2 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 29 October 2026 to 4 November 2026, fastest first.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -330,22 +327,10 @@
               "url": "/en/border-wait/biegno-indemini/today/"
             },
             {
-              "label": "Camedo (Re-Centovalli)",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/camedo/today/"
-            },
-            {
               "label": "Campione d'Italia-Bissone",
               "value": "0 min",
               "detail": "48 readings",
               "url": "/en/border-wait/campione-d-italia-bissone/today/"
-            },
-            {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/cremenaga-ponte-cremenaga/today/"
             },
             {
               "label": "Drezzo-Pedrinate",
@@ -360,27 +345,44 @@
               "url": "/en/border-wait/dumenza-cassinone/today/"
             },
             {
-              "label": "Luino-Fornasette",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/luino-fornasette/today/"
-            },
-            {
               "label": "Piaggio Valmara (Cannobio-Brissago)",
               "value": "0 min",
               "detail": "48 readings",
               "url": "/en/border-wait/piaggio-valmara/today/"
+            },
+            {
+              "label": "Ronago-Novazzano",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/ronago-novazzano/today/"
+            },
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/camedo/today/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/cremenaga-ponte-cremenaga/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
+            {
+              "label": "Revocato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
+              "value": "Closure",
+              "date": "2026-10-21T09:51:00.000Z"
+            },
             {
               "label": "Tremola, Airolo in tutte le direzioni Situazione: chiusa Causa: chiusura invernale",
               "value": "Closure",
@@ -391,6 +393,16 @@
               "value": "Closure",
               "detail": "until 9 December 2026",
               "date": "2026-10-30T06:00:00.000Z"
+            },
+            {
+              "label": "Revocato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Lugano Nord E Svincolo autostradale Mendrisio Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-14T14:33:00.000Z"
+            },
+            {
+              "label": "Revocato: A2 Chiasso -> S. Gottardo tra Dogana Chiasso Brogeda E Galleria Galleria San Gottardo Situazione: si prevedono problemi di traffico Causa: trasporto eccezionale",
+              "value": "Traffic",
+              "date": "2026-11-04T18:34:00.000Z"
             },
             {
               "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
@@ -409,34 +421,21 @@
               "value": "Roadworks",
               "detail": "until 28 June 2028",
               "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Parcheggio Chiasso-Dogana commerciale Situazione: problemi di traffico cantiere, lunghezza [km] 0.1",
-              "value": "Roadworks",
-              "detail": "until 24 March 2027",
-              "date": "2025-04-01T03:00:00.000Z"
-            },
-            {
-              "label": "H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite temporaneo…",
-              "value": "Roadworks",
-              "detail": "until 27 November 2026",
-              "date": "2026-05-22T05:00:00.000Z"
-            },
-            {
-              "label": "H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere, lunghezza [km] 0.37 Limitazione del traffico: nuova viabilità Aggiunta 1…",
-              "value": "Roadworks",
-              "detail": "until 20 November 2026",
-              "date": "2026-08-27T05:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Importanti modifiche alla circolazione tra Castione-Arbedo, Bellinzona, Locarno e Chiasso dal 13 al 16 novembre 2026.",
+              "date": "2026-11-04",
+              "url": "https://www.tilo.ch/avvisi/261104_NSIF-intervalli-cardini-e-ME-55h.html"
+            },
             {
               "label": "Importanti modifiche alla circolazione tra Castione-Arbedo, Bellinzona, Locarno e Chiasso dal 6 al 9 novembre 2026.",
               "date": "2026-10-27",
@@ -461,14 +460,9 @@
               "label": "Importanti modifiche alla circolazione tra Cadenazzo e Locarno dal 30 ottobre al 3 novembre 2026.",
               "date": "2026-10-19",
               "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
-            },
-            {
-              "label": "Importanti modifiche alla circolazione tra Lugano e Chiasso dal 30 ottobre all’8 novembre 2026.",
-              "date": "2026-10-19",
-              "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -563,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "TI",
@@ -574,24 +568,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Biegno-Indemini, Woche bis 2. November 2026"
+          "note": "Biegno-Indemini, Woche bis 4. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "2",
-          "note": "Meldungen vom 3. November 2026"
+          "value": "3",
+          "note": "Meldungen vom 5. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "23",
-          "note": "Meldungen vom 3. November 2026"
+          "value": "24",
+          "note": "Meldungen vom 5. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 27. Oktober 2026 bis 2. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. Oktober 2026 bis 4. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -600,22 +594,10 @@
               "url": "/de/wartezeit-grenze/biegno-indemini/heute/"
             },
             {
-              "label": "Camedo (Re-Centovalli)",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/camedo/heute/"
-            },
-            {
               "label": "Campione d'Italia-Bissone",
               "value": "0 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/campione-d-italia-bissone/heute/"
-            },
-            {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/cremenaga-ponte-cremenaga/heute/"
             },
             {
               "label": "Drezzo-Pedrinate",
@@ -630,27 +612,44 @@
               "url": "/de/wartezeit-grenze/dumenza-cassinone/heute/"
             },
             {
-              "label": "Luino-Fornasette",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/luino-fornasette/heute/"
-            },
-            {
               "label": "Piaggio Valmara (Cannobio-Brissago)",
               "value": "0 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/piaggio-valmara/heute/"
+            },
+            {
+              "label": "Ronago-Novazzano",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/ronago-novazzano/heute/"
+            },
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/camedo/heute/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/cremenaga-ponte-cremenaga/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
+            {
+              "label": "Aufgehoben: A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
+              "value": "Sperrung",
+              "date": "2026-10-21T09:51:00.000Z"
+            },
             {
               "label": "Tremola, Airolo in beide Richtungen Sachlage: Strecke gesperrt Ursache: Wintersperre",
               "value": "Sperrung",
@@ -661,6 +660,16 @@
               "value": "Sperrung",
               "detail": "bis 9. Dezember 2026",
               "date": "2026-10-30T06:00:00.000Z"
+            },
+            {
+              "label": "Aufgehoben: A2 Gotthard -> Chiasso zwischen Anschluss Lugano-Nord und Anschluss Mendrisio Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-14T14:33:00.000Z"
+            },
+            {
+              "label": "Aufgehoben: A2 Chiasso -> Gotthard zwischen Zollstation Chiasso-Brogeda und Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung zu erwarten Ursache: Ausnahmetransport",
+              "value": "Verkehr",
+              "date": "2026-11-04T18:34:00.000Z"
             },
             {
               "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
@@ -679,34 +688,21 @@
               "value": "Baustelle",
               "detail": "bis 28. Juni 2028",
               "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> Gotthard Parkplatz Chiasso-Warenzoll Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1",
-              "value": "Baustelle",
-              "detail": "bis 24. März 2027",
-              "date": "2025-04-01T03:00:00.000Z"
-            },
-            {
-              "label": "H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung Zusatz 1: vorübergehende Begrenzung der…",
-              "value": "Baustelle",
-              "detail": "bis 27. November 2026",
-              "date": "2026-05-22T05:00:00.000Z"
-            },
-            {
-              "label": "H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.37 Verkehrsführung: veränderte Verkehrsführung Zusatz 1…",
-              "value": "Baustelle",
-              "detail": "bis 20. November 2026",
-              "date": "2026-08-27T05:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Importanti modifiche alla circolazione tra Castione-Arbedo, Bellinzona, Locarno e Chiasso dal 13 al 16 novembre 2026.",
+              "date": "2026-11-04",
+              "url": "https://www.tilo.ch/avvisi/261104_NSIF-intervalli-cardini-e-ME-55h.html"
+            },
             {
               "label": "Importanti modifiche alla circolazione tra Castione-Arbedo, Bellinzona, Locarno e Chiasso dal 6 al 9 novembre 2026.",
               "date": "2026-10-27",
@@ -731,14 +727,9 @@
               "label": "Importanti modifiche alla circolazione tra Cadenazzo e Locarno dal 30 ottobre al 3 novembre 2026.",
               "date": "2026-10-19",
               "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
-            },
-            {
-              "label": "Importanti modifiche alla circolazione tra Lugano e Chiasso dal 30 ottobre all’8 novembre 2026.",
-              "date": "2026-10-19",
-              "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -833,7 +824,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "TI",
@@ -844,24 +835,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Biegno-Indemini, semaine jusqu’au 2 novembre 2026"
+          "note": "Biegno-Indemini, semaine jusqu’au 4 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "2",
-          "note": "signalements au 3 novembre 2026"
+          "value": "3",
+          "note": "signalements au 5 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "23",
-          "note": "signalements au 3 novembre 2026"
+          "value": "24",
+          "note": "signalements au 5 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 27 octobre 2026 au 2 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 octobre 2026 au 4 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -870,22 +861,10 @@
               "url": "/fr/temps-attente-douane/biegno-indemini/aujourd-hui/"
             },
             {
-              "label": "Camedo (Re-Centovalli)",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/camedo/aujourd-hui/"
-            },
-            {
               "label": "Campione d'Italia-Bissone",
               "value": "0 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/campione-d-italia-bissone/aujourd-hui/"
-            },
-            {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/cremenaga-ponte-cremenaga/aujourd-hui/"
             },
             {
               "label": "Drezzo-Pedrinate",
@@ -900,27 +879,44 @@
               "url": "/fr/temps-attente-douane/dumenza-cassinone/aujourd-hui/"
             },
             {
-              "label": "Luino-Fornasette",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/luino-fornasette/aujourd-hui/"
-            },
-            {
               "label": "Piaggio Valmara (Cannobio-Brissago)",
               "value": "0 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/piaggio-valmara/aujourd-hui/"
+            },
+            {
+              "label": "Ronago-Novazzano",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/ronago-novazzano/aujourd-hui/"
+            },
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/camedo/aujourd-hui/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/cremenaga-ponte-cremenaga/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-02T23:59:59.000Z"
+          "updatedAt": "2026-11-04T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
+            {
+              "label": "Révoqué: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
+              "value": "Fermeture",
+              "date": "2026-10-21T09:51:00.000Z"
+            },
             {
               "label": "Tremola, Airolo dans les deux sens Situation: fermé Raison: fermeture hivernale",
               "value": "Fermeture",
@@ -931,6 +927,16 @@
               "value": "Fermeture",
               "detail": "jusqu’au 9 décembre 2026",
               "date": "2026-10-30T06:00:00.000Z"
+            },
+            {
+              "label": "Révoqué: A2 St-Gothard -> Chiasso entre Jonction autoroutière Lugano-Nord et Jonction autoroutière Mendrisio Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-14T14:33:00.000Z"
+            },
+            {
+              "label": "Révoqué: A2 Chiasso -> St-Gothard entre Poste de douane Chiasso-Brogeda et Tunnel Tunnel du St-Gothard Situation: ralentissements prévus Raison: convoi exceptionnel",
+              "value": "Trafic",
+              "date": "2026-11-04T18:34:00.000Z"
             },
             {
               "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
@@ -949,34 +955,21 @@
               "value": "Chantier",
               "detail": "jusqu’au 28 juin 2028",
               "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> St-Gothard Parking Chiasso-Douane commercial Situation: trafic perturbé travaux, longueur [km] 0.1",
-              "value": "Chantier",
-              "detail": "jusqu’au 24 mars 2027",
-              "date": "2025-04-01T03:00:00.000Z"
-            },
-            {
-              "label": "H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies Complément 1: limitation temporaire de…",
-              "value": "Chantier",
-              "detail": "jusqu’au 27 novembre 2026",
-              "date": "2026-05-22T05:00:00.000Z"
-            },
-            {
-              "label": "H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux, longueur [km] 0.37 Gestion du trafic: nouveau plan de circulation Complément 1…",
-              "value": "Chantier",
-              "detail": "jusqu’au 20 novembre 2026",
-              "date": "2026-08-27T05:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-03T20:00:07.431Z"
+          "updatedAt": "2026-11-05T01:51:30.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Importanti modifiche alla circolazione tra Castione-Arbedo, Bellinzona, Locarno e Chiasso dal 13 al 16 novembre 2026.",
+              "date": "2026-11-04",
+              "url": "https://www.tilo.ch/avvisi/261104_NSIF-intervalli-cardini-e-ME-55h.html"
+            },
             {
               "label": "Importanti modifiche alla circolazione tra Castione-Arbedo, Bellinzona, Locarno e Chiasso dal 6 al 9 novembre 2026.",
               "date": "2026-10-27",
@@ -1001,14 +994,9 @@
               "label": "Importanti modifiche alla circolazione tra Cadenazzo e Locarno dal 30 ottobre al 3 novembre 2026.",
               "date": "2026-10-19",
               "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
-            },
-            {
-              "label": "Importanti modifiche alla circolazione tra Lugano e Chiasso dal 30 ottobre all’8 novembre 2026.",
-              "date": "2026-10-19",
-              "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-04T22:54:23.302Z"
         }
       ],
       "curatedArticles": [
@@ -1104,7 +1092,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }

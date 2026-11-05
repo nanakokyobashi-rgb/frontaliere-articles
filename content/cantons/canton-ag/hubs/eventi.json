@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "0062fccecde459cd5430848b8461b8a9fa8ce1503ad77bdfd59498a08c7ff67d",
+  "updatedAt": "2026-11-05T12:35:27.590Z",
+  "contentHash": "622602625d55c364eb272e8b9ae3c3befb5a0f43782a112b84ce30e5cdac51c5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-03T20:20:58.923Z",
+      "updatedAt": "2026-11-04T02:24:05.931Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "107",
+          "value": "102",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Aarauer Highlights am Rüeblimärttag",
-              "detail": "Aarau",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aarauer-highlights-am-rueeblimaerttag/"
+              "label": "Mircos Suche nach dem Schatten",
+              "detail": "Kurtheater Baden, Baden",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mircos-suche-nach-dem-schatten-1/"
             },
             {
-              "label": "Ein Blick: Lisa Kugler",
-              "detail": "Singisen Forum",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/muri-ag/ein-blick-lisa-kugler_AyjHJhL"
+              "label": "Veranstaltung für Menschen mit Sehbehinderungen",
+              "detail": "Aargauer Kunsthaus, Aarau",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/aarau/veranstaltung-fuer-menschen-mit-sehbehinderungen_AiUMMKD"
             },
             {
-              "label": "Helle Nacht - Technik praktisch erleben - einfach und verständlich",
-              "detail": "Festo AG, Lupfig",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/lupfig/helle-nacht-technik-praktisch-erleben-einfach-und-verstaendlich_AYBYdA8"
+              "label": "Wirtschaftspodium Limmattal 2026",
+              "detail": "Umwelt Arena, Spreitenbach",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wirtschaftspodium-limmattal-2026/"
             },
             {
-              "label": "Helle Nacht im Museum Burghalde Lenzburg: Steinzeitindustrie",
-              "detail": "Lenzburg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helle-nacht-im-museum-burghalde-lenzburg-steinzeitindustrie/"
+              "label": "Afterwork Live Musik - Jon Shain Trio",
+              "detail": "Grand Casino Baden, Baden",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/baden/afterwork-live-musik-jon-shain-trio_A9fu9mK"
             },
             {
-              "label": "Märchen & Orgel am Jahrmarkt",
-              "detail": "Reformierte Kirche Baden, Baden",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/baden/maerchen-und-orgel-am-jahrmarkt_AdwpwJe"
+              "label": "Räbeliechtliumzug",
+              "detail": "Muri AG",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug/"
             },
             {
-              "label": "Märliziit",
-              "detail": "Bibliothek Muri",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/maerliziit/"
+              "label": "Country-Music meets Boogie–Woogie I Chris Regez Band & Alain Boog",
+              "detail": "Hotel Schützen, Rheinfelden",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/country-music-meets-boogiewoogie-i-chris-regez-band-und-alain-boog_AF2H2Q7"
             },
             {
-              "label": "7. Helle Nacht: Vom Reblaus-Schreck zum Akku-Sprühgerät",
-              "detail": "Egliswil",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/7-helle-nacht-vom-reblausschreck-zum-akkuspruehgeraet/"
+              "label": "Peach Weber - King of Gäx",
+              "detail": "Bad Zurzach, Zurzach",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/peach-weber-king-of-gaex-5/"
             },
             {
-              "label": "Leben, Lieben und Leiden im Mittelalter - Fokus Energie",
-              "detail": "Rathaus, Rheinfelden",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/leben-lieben-und-leiden-im-mittelalter-fokus-energie/"
+              "label": "Metzgete",
+              "detail": "Kaiseraugst — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
             },
             {
-              "label": "Corso di Jass per principianti (parte 2) a Mellingen con schede in tedesco",
-              "detail": "Mellingen",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/corso-di-jass-per-principianti-parte-2-a-mellingen-con-schede-in-tedesco/"
+              "label": "Metzgete im Adler, Kaiseraugst",
+              "detail": "Landgasthof Adler, Kaiseraugst — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
             },
             {
-              "label": "Allie X (CAN)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/allie-x-can_AcHLpsJ"
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — in corso, ultimo giorno: 28 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "107",
+          "value": "102",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Aarauer Highlights am Rüeblimärttag",
-              "detail": "Aarau",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aarauer-highlights-am-rueeblimaerttag/"
+              "label": "Mircos Suche nach dem Schatten",
+              "detail": "Kurtheater Baden, Baden",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mircos-suche-nach-dem-schatten-1/"
             },
             {
-              "label": "Ein Blick: Lisa Kugler",
-              "detail": "Singisen Forum",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/muri-ag/ein-blick-lisa-kugler_AyjHJhL"
+              "label": "Veranstaltung fr",
+              "detail": "Aargauer Kunsthaus, Aarau",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/aarau/veranstaltung-fuer-menschen-mit-sehbehinderungen_AiUMMKD"
             },
             {
-              "label": "Helle Nacht - Technik praktisch erleben - einfach und verständlich",
-              "detail": "Festo AG, Lupfig",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/lupfig/helle-nacht-technik-praktisch-erleben-einfach-und-verstaendlich_AYBYdA8"
+              "label": "Wirtschaftspodium Limmattal 2026",
+              "detail": "Umwelt Arena, Spreitenbach",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wirtschaftspodium-limmattal-2026/"
             },
             {
-              "label": "Helle Nacht im Museum Burghalde Lenzburg: Steinzeitindustrie",
-              "detail": "Lenzburg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helle-nacht-im-museum-burghalde-lenzburg-steinzeitindustrie/"
+              "label": "Afteror",
+              "detail": "Grand Casino Baden, Baden",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/baden/afterwork-live-musik-jon-shain-trio_A9fu9mK"
             },
             {
-              "label": "M Org",
-              "detail": "Reformierte Kirche Baden, Baden",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/baden/maerchen-und-orgel-am-jahrmarkt_AdwpwJe"
+              "label": "Räbeliechtliumzug",
+              "detail": "Muri AG",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug/"
             },
             {
-              "label": "Märliziit",
-              "detail": "Bibliothek Muri",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/maerliziit/"
+              "label": "Country-Music meets Boogie–Woogie I Chris Regez Band & Alain Boog",
+              "detail": "Hotel Schützen, Rheinfelden",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/country-music-meets-boogiewoogie-i-chris-regez-band-und-alain-boog_AF2H2Q7"
             },
             {
-              "label": "7. Helle Nacht: Vom Reblaus-Schreck zum Akku-Sprühgerät",
-              "detail": "Egliswil",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/7-helle-nacht-vom-reblausschreck-zum-akkuspruehgeraet/"
+              "label": "Peach Weber - King of Gäx",
+              "detail": "Bad Zurzach, Zurzach",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/peach-weber-king-of-gaex-5/"
             },
             {
-              "label": "Leben, Lieben und Leiden im Mittelalter - Fokus Energie",
-              "detail": "Rathaus, Rheinfelden",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/leben-lieben-und-leiden-im-mittelalter-fokus-energie/"
+              "label": "Metzgete",
+              "detail": "Kaiseraugst — ongoing, last day: 7 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
             },
             {
-              "label": "Jass course for beginners (part 2) in Mellingen with German cards",
-              "detail": "Mellingen",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/corso-di-jass-per-principianti-parte-2-a-mellingen-con-schede-in-tedesco/"
+              "label": "Metzgete im Adler, Kaiseraugst",
+              "detail": "Landgasthof Adler, Kaiseraugst — ongoing, last day: 7 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
             },
             {
-              "label": "Allie X (CAN)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/allie-x-can_AcHLpsJ"
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — ongoing, last day: 28 November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "107",
+          "value": "102",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Aarauer Highlights am Rüeblimärttag",
-              "detail": "Aarau",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aarauer-highlights-am-rueeblimaerttag/"
+              "label": "Mircos Suche nach dem Schatten",
+              "detail": "Kurtheater Baden, Baden",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mircos-suche-nach-dem-schatten-1/"
             },
             {
-              "label": "Ein Blick: Lisa Kugler",
-              "detail": "Singisen Forum",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/muri-ag/ein-blick-lisa-kugler_AyjHJhL"
+              "label": "Anstaltungf ①R Menschen mit Sehbehinderungen",
+              "detail": "Aargauer Kunsthaus, Aarau",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/aarau/veranstaltung-fuer-menschen-mit-sehbehinderungen_AiUMMKD"
             },
             {
-              "label": "Helle Nacht - Technik praktisch erleben - einfach und verständlich",
-              "detail": "Festo AG, Lupfig",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/lupfig/helle-nacht-technik-praktisch-erleben-einfach-und-verstaendlich_AYBYdA8"
+              "label": "Wirtschaftspodium Limmattal 2026",
+              "detail": "Umwelt Arena, Spreitenbach",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wirtschaftspodium-limmattal-2026/"
             },
             {
-              "label": "Helle Nacht im Museum Burghalde Lenzburg: Steinzeitindustrie",
-              "detail": "Lenzburg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helle-nacht-im-museum-burghalde-lenzburg-steinzeitindustrie/"
+              "label": "Afterwork Live Musik – Jon Shain Trio",
+              "detail": "Grand Casino Baden, Baden",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/baden/afterwork-live-musik-jon-shain-trio_A9fu9mK"
             },
             {
-              "label": "M ①rchen & Orgel am ⑤ahrmarkt",
-              "detail": "Reformierte Kirche Baden, Baden",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/baden/maerchen-und-orgel-am-jahrmarkt_AdwpwJe"
+              "label": "Räbeliechtliumzug",
+              "detail": "Muri AG",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug/"
             },
             {
-              "label": "Märliziit",
-              "detail": "Bibliothek Muri",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/maerliziit/"
+              "label": "Country-Music meets Boogie–Woogie I Chris Regez Band & Alain Boog",
+              "detail": "Hotel Schützen, Rheinfelden",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/country-music-meets-boogiewoogie-i-chris-regez-band-und-alain-boog_AF2H2Q7"
             },
             {
-              "label": "7. Helle Nacht: Vom Reblaus-Schreck zum Akku-Sprühgerät",
-              "detail": "Egliswil",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/7-helle-nacht-vom-reblausschreck-zum-akkuspruehgeraet/"
+              "label": "Peach Weber - King of Gäx",
+              "detail": "Bad Zurzach, Zurzach",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/peach-weber-king-of-gaex-5/"
             },
             {
-              "label": "Leben, Lieben und Leiden im Mittelalter - Fokus Energie",
-              "detail": "Rathaus, Rheinfelden",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/leben-lieben-und-leiden-im-mittelalter-fokus-energie/"
+              "label": "Metzgete",
+              "detail": "Kaiseraugst — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
             },
             {
-              "label": "Jasskurs für Anfänger (Teil 2) in Mellingen mit deutsche Karten",
-              "detail": "Mellingen",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/corso-di-jass-per-principianti-parte-2-a-mellingen-con-schede-in-tedesco/"
+              "label": "Metzgete im Adler, Kaiseraugst",
+              "detail": "Landgasthof Adler, Kaiseraugst — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
             },
             {
-              "label": "Allie X (CAN)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/allie-x-can_AcHLpsJ"
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — läuft, letzter Tag: 28. November 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "107",
+          "value": "102",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Aarauer Highlights am Rüeblimärttag",
-              "detail": "Aarau",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aarauer-highlights-am-rueeblimaerttag/"
+              "label": "Mircos Suche nach dem Schatten",
+              "detail": "Kurtheater Baden, Baden",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mircos-suche-nach-dem-schatten-1/"
             },
             {
-              "label": "Ein Blick: Lisa Kugler",
-              "detail": "Singisen Forum",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/muri-ag/ein-blick-lisa-kugler_AyjHJhL"
+              "label": "Veranstaltung en",
+              "detail": "Aargauer Kunsthaus, Aarau",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/aarau/veranstaltung-fuer-menschen-mit-sehbehinderungen_AiUMMKD"
             },
             {
-              "label": "Helle Nacht - Technik praktisch erleben - einfach und verständlich",
-              "detail": "Festo AG, Lupfig",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/lupfig/helle-nacht-technik-praktisch-erleben-einfach-und-verstaendlich_AYBYdA8"
+              "label": "Wirtschaftspodium Limmattal 2026",
+              "detail": "Umwelt Arena, Spreitenbach",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wirtschaftspodium-limmattal-2026/"
             },
             {
-              "label": "Helle Nacht im Museum Burghalde Lenzburg: Steinzeitindustrie",
-              "detail": "Lenzburg",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helle-nacht-im-museum-burghalde-lenzburg-steinzeitindustrie/"
+              "label": "Afterwork Live Musique - Jon Shain Trio",
+              "detail": "Grand Casino Baden, Baden",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/baden/afterwork-live-musik-jon-shain-trio_A9fu9mK"
             },
             {
-              "label": "M Organisme",
-              "detail": "Reformierte Kirche Baden, Baden",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/baden/maerchen-und-orgel-am-jahrmarkt_AdwpwJe"
+              "label": "Räbeliechtliumzug",
+              "detail": "Muri AG",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug/"
             },
             {
-              "label": "Märliziit",
-              "detail": "Bibliothek Muri",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/maerliziit/"
+              "label": "Country-Music meets Boogie–Woogie I Chris Regez Band & Alain Boog",
+              "detail": "Hotel Schützen, Rheinfelden",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/country-music-meets-boogiewoogie-i-chris-regez-band-und-alain-boog_AF2H2Q7"
             },
             {
-              "label": "7. Helle Nacht: Vom Reblaus-Schreck zum Akku-Sprühgerät",
-              "detail": "Egliswil",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/7-helle-nacht-vom-reblausschreck-zum-akkuspruehgeraet/"
+              "label": "Peach Weber - King of Gäx",
+              "detail": "Bad Zurzach, Zurzach",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/peach-weber-king-of-gaex-5/"
             },
             {
-              "label": "Leben, Lieben und Leiden im Mittelalter - Fokus Energie",
-              "detail": "Rathaus, Rheinfelden",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/leben-lieben-und-leiden-im-mittelalter-fokus-energie/"
+              "label": "Metzgete",
+              "detail": "Kaiseraugst — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
             },
             {
-              "label": "Cours de jass pour débutants (2e partie) à Mellingen avec cartes allemandes",
-              "detail": "Mellingen",
-              "date": "2026-11-04",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/corso-di-jass-per-principianti-parte-2-a-mellingen-con-schede-in-tedesco/"
+              "label": "Metzgete im Adler, Kaiseraugst",
+              "detail": "Landgasthof Adler, Kaiseraugst — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
             },
             {
-              "label": "Allie X (CAN)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-11-04",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/allie-x-can_AcHLpsJ"
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — en cours, dernier jour : 28 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-11-03T20:20:58.923Z"
+          "updatedAt": "2026-11-04T02:24:05.931Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-05T12:35:27.590Z"
     }
   }
 }
