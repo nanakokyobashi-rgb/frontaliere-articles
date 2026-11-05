@@ -384,7 +384,13 @@ test('solo un arresto cooperativo provato può differire senza run report', () =
   assert.match(branch, /steps\.generate\.outputs\.article/);
   assert.match(branch, /steps\.generate\.outputs\.cooperative_stop/);
   assert.match(branch, /git reset --mixed HEAD/);
-  assert.match(branch, /deferring the run/);
+  assert.match(branch, /preserving only the pool-attempt counters/);
+  assert.match(branch, /git restore --source=HEAD --worktree -- "\$recovery_state"/);
+  assert.match(branch, /record-discovery-attempt\.mjs/);
+  assert.match(branch, /git add -- "\$recovery_state"/);
+  const restoreStateAt = branch.indexOf('git restore --source=HEAD --worktree -- "$recovery_state"');
+  const recordAttemptAt = branch.indexOf('node generator/scripts/record-discovery-attempt.mjs');
+  assert.ok(restoreStateAt >= 0 && recordAttemptAt > restoreStateAt, 'lo stato va ripristinato da HEAD prima di applicare i marker');
   assert.match(
     branch,
     /if \[ "\$\{\{ steps\.generate\.outputs\.cooperative_stop \}\}" = "true" \] && \[ "\$\{\{ steps\.generate\.outputs\.article \}\}" != "true" \]/,
