@@ -8,6 +8,8 @@ import {
   buildDiscoveryArticlesIndex,
   normalizeDiscoveryProvider,
   parseDiscoverySidecar,
+  resolveExistingDiscoverySidecarPath,
+  resolveDiscoverySidecarPath,
 } from '../../scripts/lib/discovery-articles-index.mjs';
 import { SECTION_PATHS } from '../../scripts/lib/build-sitemap.mjs';
 
@@ -178,6 +180,102 @@ describe('discovery article index projection', () => {
     assert.equal(payload.articles.some(({ id }) => id === 'not-published'), false);
   });
 
+  test('keeps non-ASCII registry IDs when their sidecar basename is safe', () => {
+    const id = 'änderung-arbeitsmarkt';
+    const section = publishedSection();
+    section.registry.push({ id, date: '2026-11-02' });
+    section.slugMap[id] = { it: `${id}-it`, en: `${id}-en`, de: `${id}-de`, fr: `${id}-fr` };
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      section.metaByLocale[locale].set(id, { title: `Titolo ${locale}`, excerpt: `Sintesi ${locale}` });
+    }
+    section.sidecars.set(id, {
+      id,
+      publishedAt: '2026-11-02T09:15:00.000Z',
+      _discovery_attribution: { candidateId: 'trend-topic-5', signalProvider: 'google-trends' },
+    });
+
+    const payload = buildDiscoveryArticlesIndex({
+      commit: 'e'.repeat(40),
+      generatedAt: '2026-11-05T10:00:00.000Z',
+      sections: [section],
+    });
+
+    assert.equal(payload.articles.some((article) => article.id === id), true);
+    const sidecarRoot = path.resolve('/tmp/discovery-sidecars');
+    assert.equal(
+      resolveDiscoverySidecarPath(sidecarRoot, id),
+      path.join(sidecarRoot, `${id}.json`),
+    );
+    assert.equal(
+      resolveDiscoverySidecarPath(sidecarRoot, 'nested/änderung'),
+      path.join(sidecarRoot, 'nested', 'änderung.json'),
+    );
+    assert.equal(
+      resolveDiscoverySidecarPath(sidecarRoot, 'nested/..'),
+      path.join(sidecarRoot, 'nested', '...json'),
+    );
+    assert.equal(resolveDiscoverySidecarPath(sidecarRoot, '../outside'), null);
+    assert.equal(resolveDiscoverySidecarPath(sidecarRoot, 'nested/../outside'), null);
+    assert.equal(resolveDiscoverySidecarPath(sidecarRoot, '..\\outside'), null);
+  });
+
+  test('rejects nested sidecar symlinks that resolve outside the sidecar directory', () => {
+    const tempRoot = fs.mkdtempSync(path.join('/tmp', 'discovery-sidecar-'));
+    const sidecarRoot = path.join(tempRoot, 'sidecars');
+    const outsideRoot = path.join(tempRoot, 'outside');
+    fs.mkdirSync(sidecarRoot);
+    fs.mkdirSync(outsideRoot);
+    fs.writeFileSync(path.join(outsideRoot, 'article.json'), JSON.stringify({ id: 'nested/article' }));
+    fs.symlinkSync(outsideRoot, path.join(sidecarRoot, 'nested'), 'dir');
+
+    try {
+      assert.throws(
+        () => resolveExistingDiscoverySidecarPath(sidecarRoot, 'nested/article', tempRoot),
+        /resolves outside its directory/,
+      );
+    } finally {
+      fs.rmSync(tempRoot, { recursive: true, force: true });
+    }
+  });
+
+  test('rejects a sidecar root symlink that resolves outside the repository', () => {
+    const tempRoot = fs.mkdtempSync(path.join('/tmp', 'discovery-sidecar-root-'));
+    const trustedRoot = path.join(tempRoot, 'repository');
+    const outsideRoot = path.join(tempRoot, 'outside');
+    const sidecarRoot = path.join(trustedRoot, 'content', 'discovery-attribution');
+    fs.mkdirSync(sidecarRoot, { recursive: true });
+    fs.mkdirSync(outsideRoot);
+    fs.rmSync(sidecarRoot, { recursive: true });
+    fs.symlinkSync(outsideRoot, sidecarRoot, 'dir');
+
+    try {
+      assert.throws(
+        () => resolveExistingDiscoverySidecarPath(sidecarRoot, 'missing', trustedRoot),
+        /sidecar directory resolves outside the repository/,
+      );
+    } finally {
+      fs.rmSync(tempRoot, { recursive: true, force: true });
+    }
+  });
+
+  test('rejects a nested symlink escape even when the sidecar file is absent', () => {
+    const tempRoot = fs.mkdtempSync(path.join('/tmp', 'discovery-sidecar-missing-'));
+    const sidecarRoot = path.join(tempRoot, 'repository', 'content', 'discovery-attribution');
+    const outsideRoot = path.join(tempRoot, 'outside');
+    fs.mkdirSync(sidecarRoot, { recursive: true });
+    fs.mkdirSync(outsideRoot);
+    fs.symlinkSync(outsideRoot, path.join(sidecarRoot, 'nested'), 'dir');
+
+    try {
+      assert.throws(
+        () => resolveExistingDiscoverySidecarPath(sidecarRoot, 'nested/missing', path.join(tempRoot, 'repository')),
+        /resolves outside its directory/,
+      );
+    } finally {
+      fs.rmSync(tempRoot, { recursive: true, force: true });
+    }
+  });
+
   test('excludes canonical shadows, retired editions, registry withdrawals and ledger rows', () => {
     const shadowed = buildDiscoveryArticleShadow({
       canonicalSlugs: ['trend-article-it'],
@@ -255,6 +353,8 @@ describe('discovery article index projection', () => {
     assert.match(workflow, /'data\/swiss-articles\/\*\*'/);
     assert.match(builder, /canonicalOverrides:\s*section\.canonicalOverrides/);
     assert.match(builder, /retiredDailyEditions:\s*section\.retiredDailyEditions/);
+    assert.match(builder, /resolveDiscoverySidecarPath\(sidecarDir, id\)/);
+    assert.match(builder, /resolveExistingDiscoverySidecarPath\(sidecarDir, id\)/);
     assert.match(builder, /buildDiscoveryArticleShadow\(/);
   });
 });
