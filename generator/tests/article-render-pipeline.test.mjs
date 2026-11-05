@@ -42,3 +42,36 @@ test('registry restore writes the exact original source after a successful rende
     rmSync(root, { recursive: true, force: true });
   }
 });
+
+
+test('registry restore preserves every thrown value even with frozen errors or broken diagnostics', () => {
+  const root = mkdtempSync(join(tmpdir(), 'article-render-restore-values-'));
+  try {
+    for (const primaryError of [null, undefined, false, 0, '', 'render failed', Object.freeze(new Error('frozen'))]) {
+      let caught = false;
+      try {
+        try {
+          throw primaryError;
+        } finally {
+          restoreRegistrySource({
+            registryPath: root,
+            original: 'original registry',
+            primaryError,
+            hasPrimaryError: true,
+            logger: { error() { throw new Error('logger failed'); } },
+          });
+        }
+      } catch (error) {
+        caught = true;
+        assert.equal(error, primaryError);
+      }
+      assert.equal(caught, true);
+    }
+    assert.throws(
+      () => restoreRegistrySource({ registryPath: root, original: 'original registry', hasPrimaryError: false }),
+      (error) => error.code === 'EISDIR',
+    );
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});

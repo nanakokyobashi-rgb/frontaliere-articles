@@ -95,13 +95,13 @@ function prepareFreshnessOverlay({ rootDir, section, ids, logPrefix }) {
   };
 }
 
-/** Restore the source overlay while preserving a render failure as the primary error. */
-export function restoreRegistrySource({ registryPath, original, primaryError = null, logger = console } = {}) {
+/** Restore the source overlay; even a falsy thrown value remains the primary failure. */
+export function restoreRegistrySource({ registryPath, original, primaryError = null, hasPrimaryError = primaryError !== null, logger = console } = {}) {
   if (!registryPath || typeof original !== 'string') return;
   try {
     fs.writeFileSync(registryPath, original, 'utf8');
   } catch (restoreError) {
-    if (!primaryError) throw restoreError;
+    if (!hasPrimaryError) throw restoreError;
     try {
       primaryError.restoreError = restoreError;
     } catch {
@@ -132,6 +132,7 @@ export function restoreRegistrySource({ registryPath, original, primaryError = n
 export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', persistentReleasedArticles = [], beforeOffload, probeOnlineImage }) {
   const freshnessOverlay = prepareFreshnessOverlay({ rootDir, section, ids, logPrefix });
   let primaryError = null;
+  let hasPrimaryError = false;
   try {
     return await renderSectionArticlePipelineBody({
       rootDir,
@@ -145,9 +146,10 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     });
   } catch (error) {
     primaryError = error;
+    hasPrimaryError = true;
     throw error;
   } finally {
-    restoreRegistrySource({ ...freshnessOverlay, primaryError });
+    restoreRegistrySource({ ...freshnessOverlay, primaryError, hasPrimaryError });
   }
 }
 
