@@ -20,8 +20,9 @@ import '../../host/cantonSectionsBootstrap.mjs';
  * `latestCantonArticles` is optional while already published pre-fallback
  * documents are being refreshed; new producer output always includes it.
  *
- * La forma e' validata qui, al confine fra producer e publisher. Ogni voce di
- * locale e' l'input di `renderCantonTopicHub` (engine/cantonSectionPages.ts).
+ * La forma e' validata e normalizzata qui, al confine fra producer e publisher.
+ * Ogni voce di locale restituita e' gia' l'input canonico sicuro di
+ * `renderCantonTopicHub` (engine/cantonSectionPages.ts).
  *
  * Nessun hub e' mai `noindex` (decisione del proprietario, 2026-10-05). Un hub
  * senza file semplicemente non viene pubblicato, e una sezione a cui manca un
@@ -34,7 +35,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
-import { CANTON_HUB_MIN_CONTENT_WORDS, countCantonHubContentWords } from './canton-hub-content.mjs';
+import { CANTON_HUB_MIN_CONTENT_WORDS, countCantonHubContentWords, normalizeCantonHubInput } from './canton-hub-content.mjs';
 import { hubFilePath } from '../../generator/scripts/lib/canton-hubs/paths.mjs';
 
 export const CANTON_HUB_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
@@ -73,26 +74,23 @@ function validateHubDocument(doc, section, topic, rel) {
   const actualLocales = Object.keys(doc.locales).sort().join(',');
   const expectedLocales = [...CANTON_HUB_LOCALES].sort().join(',');
   if (actualLocales !== expectedLocales) throw new Error(`${rel}: locali ${actualLocales || 'assenti'} diverse da ${expectedLocales}`);
+  const normalizedLocales = {};
   for (const locale of CANTON_HUB_LOCALES) {
-    const entry = doc.locales[locale];
+    let entry = doc.locales[locale];
     if (!isPlainObject(entry)) throw new Error(`${rel}: locale "${locale}" mancante`);
     if (entry.canton !== expectedCanton) throw new Error(`${rel}: canton della locale "${locale}" non valido`);
     if (entry.topic !== topic) throw new Error(`${rel}: topic della locale "${locale}" non valido`);
     if (entry.locale !== locale) throw new Error(`${rel}: codice della locale "${locale}" non valido`);
     if (typeof entry.intro !== 'string' || entry.intro.trim() === '') throw new Error(`${rel}: intro "${locale}" vuota`);
-    for (const field of ['keyFacts', 'dataBlocks', 'curatedArticles', 'links']) {
-      if (!Array.isArray(entry[field])) throw new Error(`${rel}: ${field} della locale "${locale}" deve essere un array`);
-    }
-    if (entry.latestCantonArticles !== undefined && !Array.isArray(entry.latestCantonArticles)) {
-      throw new Error(`${rel}: latestCantonArticles della locale "${locale}" deve essere un array`);
-    }
+    entry = normalizeCantonHubInput(entry, `${rel}: locale "${locale}"`);
     const contentWords = countCantonHubContentWords(entry);
     if (contentWords < CANTON_HUB_MIN_CONTENT_WORDS) {
       throw new Error(`${rel}: contenuto insufficiente nella locale "${locale}" (${contentWords} parole < ${CANTON_HUB_MIN_CONTENT_WORDS})`);
     }
     if (!isIsoDate(entry.updatedAt)) throw new Error(`${rel}: updatedAt della locale "${locale}" non e' valida`);
+    normalizedLocales[locale] = entry;
   }
-  return doc;
+  return { ...doc, locales: normalizedLocales };
 }
 
 /** Read, parse and validate the complete producer document, or `null` when it
@@ -121,7 +119,8 @@ export function readCantonHubDocument(root, section, topic) {
 /**
  * I dati di un hub per le quattro locali, o `null` se il file non esiste.
  * Mantiene il contratto storico del publisher: il documento P10 completo resta
- * interno al corpus, mentre questa funzione espone solo `locales` ai renderer.
+ * interno al corpus, mentre questa funzione espone solo le `locales` gia'
+ * validate e normalizzate ai renderer.
  *
  * @returns {Record<string, Record<string, unknown>> | null}
  */
