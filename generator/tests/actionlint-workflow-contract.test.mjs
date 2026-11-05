@@ -14,7 +14,11 @@ test('required PR check installs pinned actionlint and validates every tracked w
   assert.match(TESTS_WORKFLOW, /go install github\.com\/rhysd\/actionlint\/cmd\/actionlint@v1\.7\.12/);
   assert.match(
     TESTS_WORKFLOW,
-    /git ls-files -z -- '\.github\/workflows\/\*\.yml' '\.github\/workflows\/\*\.yaml' \| xargs -0 -r actionlint -config-file \.github\/actionlint\.yaml/,
+    /git ls-files -z -- '\.github\/workflows\/\*\.yml' '\.github\/workflows\/\*\.yaml' \| xargs -0 -r actionlint -shellcheck= -config-file \.github\/actionlint\.yaml/,
+  );
+  assert.match(
+    TESTS_WORKFLOW,
+    /- name: Setup isolated article source runtime\s+if: \$\{\{ !cancelled\(\) \}\}\s+uses: \.\/\.github\/actions\/setup-article-source-runtime/,
   );
   assert.equal((ACTIONLINT_CONFIG.match(/unexpected key "queue"/g) || []).length, 3);
   assert.match(ACTIONLINT_CONFIG, /\.github\/workflows\/translate-queue-recovery-watchdog\.yml:/);
