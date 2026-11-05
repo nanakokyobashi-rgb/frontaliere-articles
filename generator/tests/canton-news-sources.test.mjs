@@ -183,7 +183,7 @@ test('json-api: i campi testuali non stringa non diventano titoli artificiali', 
     {
       url: '/articles/lead-fallback',
       title: 'Titolo valido con lead di fallback',
-      abstract: { text: 'lead non testuale' },
+      abstract: '<span></span>',
       lead: 'Lead pubblico valido scelto dopo il campo non testuale.',
       publication_date: '2026-10-05T10:00:00Z',
     },
@@ -199,11 +199,11 @@ test('json-api: i campi testuali non stringa non diventano titoli artificiali', 
   assert.deepEqual(news, []);
 });
 
-test('json-entities: un nome non stringa lascia usare il titolo stringa e non la coercizione', () => {
+test('json-entities: un nome markup-only lascia usare il titolo successivo', () => {
   const html = `<div data-entities='${JSON.stringify([
     {
-      name: { text: 'titolo artificiale' },
-      title: 'Titolo valido dell\'entità',
+      name: '<a href="/entity/markup-only"></a>',
+      title: '<a href="/entity/1">Titolo valido dell\'entità</a>',
       url: '/entity/1',
       datum: '05.10.2026',
     },
@@ -215,28 +215,71 @@ test('json-entities: un nome non stringa lascia usare il titolo stringa e non la
 });
 
 test('json-api: i record BE e il corpo CMS saltano gli alias non stringa', () => {
-  const beItems = extractJsonApiItems(JSON.stringify([{
-    id: 'be-1',
-    publishOn: '2026-10-05T12:00:00Z',
-    contentList: [
-      { title: { text: 'titolo artificiale' }, lead: 'lead non selezionato' },
-      { title: 'Titolo BE valido dopo un alias non stringa', lead: 'Lead BE valido', languageCode: 'de' },
-    ],
-  }]), 'https://api.news.apps.be.ch/api/news');
-  assert.equal(beItems.length, 1);
-  assert.equal(beItems[0].headline, 'Titolo BE valido dopo un alias non stringa');
+  const beItems = extractJsonApiItems(JSON.stringify([
+    {
+      id: { value: 'be-object' },
+      publishOn: '2026-10-05T12:00:00Z',
+      contentList: [{ title: 'Titolo BE da non emettere con ID oggetto' }],
+    },
+    {
+      id: ['be-array'],
+      publishOn: '2026-10-05T12:00:00Z',
+      contentList: [{ title: 'Titolo BE da non emettere con ID array' }],
+    },
+    {
+      id: 'be-1',
+      publishOn: '2026-10-05T12:00:00Z',
+      contentList: [
+        { title: '<span></span>', lead: 'lead non selezionato' },
+        { title: 'Titolo BE valido dopo un alias markup-only', lead: 'Lead BE valido', languageCode: 'de' },
+      ],
+    },
+    {
+      id: 42,
+      publishOn: '2026-10-05T12:00:00Z',
+      contentList: [{ title: 'Titolo BE numerico valido', languageCode: 'de' }],
+    },
+  ]), 'https://api.news.apps.be.ch/api/news');
+  assert.equal(beItems.length, 2);
+  assert.equal(beItems[0].headline, 'Titolo BE valido dopo un alias markup-only');
   assert.equal(beItems[0].lead, 'Lead BE valido');
+  assert.equal(beItems[0].url, 'https://www.be.ch/de/start.html?newsID=be-1');
+  assert.equal(beItems[1].headline, 'Titolo BE numerico valido');
+  assert.equal(beItems[1].url, 'https://www.be.ch/de/start.html?newsID=42');
 
   const body = Array.from({ length: 8 }, () => 'Corpo CMS pubblico con fatti verificabili.').join(' ');
   const [cmsItem] = extractJsonApiItems(JSON.stringify([{
     kachellabel: 'Titolo CMS valido',
     publication_date: '05.10.2026',
     permalink: '/Webseite/cms-1.html',
-    post_content: { html: 'corpo non testuale' },
+    post_content: '<div></div>',
     body,
   }]), 'https://sh.ch/CMS/content/list?language=DE');
   assert.equal(cmsItem.sourceContent, body);
   assert.doesNotMatch(cmsItem.sourceContent, /\[object Object\]/u);
+});
+
+test('json-api CMS: permalink oggetto o array non diventano URL sintetiche', () => {
+  const api = 'https://sh.ch/CMS/content/list?language=DE';
+  const items = extractJsonApiItems(JSON.stringify([
+    {
+      kachellabel: 'CMS con permalink oggetto da scartare',
+      publication_date: '05.10.2026',
+      permalink: { href: '/Webseite/falso.html' },
+    },
+    {
+      kachellabel: 'CMS con permalink array da scartare',
+      publication_date: '05.10.2026',
+      permalink: ['/Webseite/falso-array.html'],
+    },
+    {
+      kachellabel: 'CMS con permalink stringa valido',
+      publication_date: '05.10.2026',
+      permalink: '/Webseite/valido.html',
+    },
+  ]), api);
+  assert.deepEqual(items.map((item) => item.url), ['https://sh.ch/Webseite/valido.html']);
+  assert.ok(items.every((item) => !item.url.includes('[object Object]')));
 });
 
 test('json-api articoli: free=false conserva solo titolo e lead pubblico, senza corpo premium', () => {

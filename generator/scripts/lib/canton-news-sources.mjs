@@ -549,9 +549,15 @@ function stripTags(value) {
     .trim();
 }
 
+/** Sceglie il primo alias con testo visibile, conservando il valore originale. */
+function firstVisibleString(...values) {
+  return values.find((value) => typeof value === 'string' && stripTags(value)) ?? '';
+}
+
 function absoluteUrl(href, base) {
+  if (typeof href !== 'string' || !href.trim()) return null;
   try {
-    const u = new URL(String(href || '').trim(), base);
+    const u = new URL(href.trim(), base);
     return /^https?:$/.test(u.protocol) ? u.href : null;
   } catch {
     return null;
@@ -1083,7 +1089,7 @@ export function extractJsonEntitiesItems(html, pageUrl) {
     const rows = Array.isArray(parsed) ? parsed : Array.isArray(parsed?.data) ? parsed.data : [];
     for (const row of rows) {
       if (!row || typeof row !== 'object') continue;
-      const name = firstString(row.name, row.title);
+      const name = firstVisibleString(row.name, row.title);
       const hrefMatch = /href\s*=\s*["']([^"']+)["']/i.exec(name);
       const url = absoluteUrl(firstString(hrefMatch?.[1], row.url, row.link), pageUrl);
       const headline = stripTags(name);
@@ -1139,7 +1145,7 @@ export function extractJsonApiItems(text, apiUrl, { notes = [] } = {}) {
       const url = absoluteUrl(firstString(article?.url, article?.link), apiUrl);
       const headline = stripTags(firstString(article?.title));
       if (!url || headline.length < 10) continue;
-      const lead = stripTags(firstString(article?.abstract, article?.lead, article?.description));
+      const lead = stripTags(firstVisibleString(article?.abstract, article?.lead, article?.description));
       const rawDate = article?.publication_date ?? article?.publicationDate ?? article?.date;
       const date = parseDottedDate(rawDate) || validDate(rawDate);
       // A `free: false` item may still expose a public title/abstract in the
@@ -1169,15 +1175,16 @@ export function extractJsonApiItems(text, apiUrl, { notes = [] } = {}) {
     const origin = 'https://www.be.ch';
     for (const n of data) {
       const content = Array.isArray(n?.contentList)
-        ? n.contentList.find((c) => c && c.enabled !== false && typeof c.title === 'string' && c.title.trim())
+        ? n.contentList.find((c) => c && c.enabled !== false && firstVisibleString(c.title))
         : null;
-      if (!n?.id || !content) continue;
+      const id = n?.id;
+      if (!id || typeof id === 'object' || typeof id === 'function' || !content) continue;
       const lang = /^[a-z]{2}$/.test(String(content.languageCode || '')) ? content.languageCode : 'de';
       const headline = stripTags(content.title);
       if (headline.length < 10) continue;
       const lead = stripTags(firstString(content.lead));
       out.push({
-        url: `${origin}/${lang}/start.html?newsID=${encodeURIComponent(n.id)}`,
+        url: `${origin}/${lang}/start.html?newsID=${encodeURIComponent(id)}`,
         headline,
         date: validDate(n.publishOn),
         ...(lead ? { lead } : {}),
@@ -1194,7 +1201,7 @@ export function extractJsonApiItems(text, apiUrl, { notes = [] } = {}) {
   // generatore, senza inventare una URL diversa o perdere il contenuto.
   if (Array.isArray(data) && data.some((n) => n && n.permalink && n.publication_date)) {
     for (const n of data) {
-      const url = absoluteUrl(n?.permalink, apiUrl);
+      const url = absoluteUrl(firstString(n?.permalink), apiUrl);
       const shape = cmsPayloadShape(n);
       if ((shape.mixed || shape.fallback) && Array.isArray(notes)) {
         const fields = shape.fields.join(', ') || 'nessun alias titolo';
@@ -1217,8 +1224,8 @@ export function extractJsonApiItems(text, apiUrl, { notes = [] } = {}) {
         || parseDottedDate(n?.publication_date)
         || validDate(n?.publication_date);
       if (!date) continue;
-      const lead = stripTags(firstString(n?.teaserText, n?.lead, n?.description));
-      const sourceContent = stripTags(firstString(
+      const lead = stripTags(firstVisibleString(n?.teaserText, n?.lead, n?.description));
+      const sourceContent = stripTags(firstVisibleString(
         n?.post_content,
         n?.post_content_areaPage,
         n?.content,
