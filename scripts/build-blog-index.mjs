@@ -75,6 +75,7 @@ import { readArticleRegistry } from './lib/registry-image-reader.mjs';
 // blog-index-frontaliere-it-full.json carried five of them.
 import { sanitizeDeep, assertNoControlChars } from './lib/sanitize-control-chars.mjs';
 import { reportStrippedControlCharsDeep } from '../generator/scripts/lib/control-char-write-report.mjs';
+import { writeFileAtomic } from '../generator/scripts/lib/atomic-write-file.mjs';
 import { readStaticObjectEntries } from './lib/ts-literals.mjs';
 import { parsePositiveNum } from './lib/parse-positive-num.mjs';
 // Il pavimento anti-troncamento, derivato dal corpus invece che scritto a mano:
@@ -166,6 +167,16 @@ const expectedCreditFiles = new Set(
 const writtenCredits = {};
 /** `{ <path relativo a dist/api>: byte UTF-8 }`, per l'indice discovery. */
 const writtenDiscoveryIndex = {};
+let stagingOut = null;
+
+function stagedArtifact(name) {
+  if (!stagingOut) throw new Error('[blog-index] staging output is not ready');
+  const finalFile = path.join(OUT, name);
+  return {
+    file: path.join(stagingOut, name),
+    rel: path.relative(API_ROOT, finalFile),
+  };
+}
 
 /**
  * The release the credits belong to: `manifest.json`'s `commit`, written by
@@ -545,7 +556,6 @@ if (!failed && PUBLISHES_TO_API) {
   });
   const cleanDiscovery = sanitizeDeep(discovery);
   preparedDiscoveryIndex = {
-    file: path.join(OUT, 'discovery-articles.json'),
     source: discovery,
     payload: cleanDiscovery,
     text: JSON.stringify(cleanDiscovery) + '\n',
@@ -553,16 +563,20 @@ if (!failed && PUBLISHES_TO_API) {
 }
 
 if (!failed) {
-  fs.mkdirSync(OUT, { recursive: true });
+  fs.mkdirSync(path.dirname(OUT), { recursive: true });
+  stagingOut = fs.mkdtempSync(path.join(path.dirname(OUT), `.${path.basename(OUT)}-stage-`));
 
-  // Fase 2: la validazione e' completa; da qui in poi si scrive il set preparato.
+  // Fase 2: la validazione e' completa; da qui in poi si scrive il set preparato
+  // fuori dalla superficie live. Il rename verso OUT avviene solo dopo tutti i
+  // gate, dentro commitDiscoveryIndexArtifacts().
   for (const { section, locales, credits } of preparedSections) {
-    const creditsFile = path.join(OUT, `image-credits-${section.name}.json`);
+    const creditsArtifact = stagedArtifact(`image-credits-${section.name}.json`);
+    const creditsFile = creditsArtifact.file;
     const cleanCredits = sanitizeDeep(credits);
     reportStrippedControlCharsDeep(creditsFile, credits, cleanCredits);
     const creditsText = JSON.stringify(cleanCredits) + '\n';
-    fs.writeFileSync(creditsFile, creditsText);
-    writtenCredits[path.relative(API_ROOT, creditsFile)] = byteSize(creditsText);
+    writeFileAtomic(creditsFile, creditsText);
+    writtenCredits[creditsArtifact.rel] = byteSize(creditsText);
     console.log(
       `[blog-index] ${path.basename(creditsFile)} — ${Object.keys(credits.covers).length} credited covers, ` +
       `${Object.keys(credits.files).length} Commons files, ${Math.round(byteSize(creditsText) / 1024)} KB`,
@@ -585,7 +599,8 @@ if (!failed) {
       // still missing something — no extra bytes on the common path, and no
       // window to fall through on the uncommon one.
       const capped = entries.slice(0, RECENT_LIMIT);
-      const file = path.join(OUT, `blog-index-${section.name}-${locale}.json`);
+      const artifact = stagedArtifact(`blog-index-${section.name}-${locale}.json`);
+      const file = artifact.file;
       const payload = {
         version: 1, section: section.name, locale,
         count: capped.length, total: entries.length, articles: capped,
@@ -597,12 +612,13 @@ if (!failed) {
       const cleanPayload = sanitizeDeep(payload);
       reportStrippedControlCharsDeep(file, payload, cleanPayload);
       const text = JSON.stringify(cleanPayload) + '\n';
-      fs.writeFileSync(file, text);
-      writtenShards[path.relative(API_ROOT, file)] = byteSize(text);
+      writeFileAtomic(file, text);
+      writtenShards[artifact.rel] = byteSize(text);
       const kb = Math.round(fs.statSync(file).size / 1024);
       console.log(`[blog-index] ${path.basename(file)} — ${capped.length}/${entries.length} articles, ${kb} KB, newest ${capped[0]?.date ?? '— (sezione senza articoli)'}`);
 
-      const fullFile = path.join(OUT, `blog-index-${section.name}-${locale}-full.json`);
+      const fullArtifact = stagedArtifact(`blog-index-${section.name}-${locale}-full.json`);
+      const fullFile = fullArtifact.file;
       const fullPayload = {
         version: 1, section: section.name, locale,
         count: entries.length, total: entries.length, articles: entries,
@@ -611,8 +627,8 @@ if (!failed) {
       const cleanFullPayload = sanitizeDeep(fullPayload);
       reportStrippedControlCharsDeep(fullFile, fullPayload, cleanFullPayload);
       const fullText = JSON.stringify(cleanFullPayload) + '\n';
-      fs.writeFileSync(fullFile, fullText);
-      writtenShards[path.relative(API_ROOT, fullFile)] = byteSize(fullText);
+      writeFileAtomic(fullFile, fullText);
+      writtenShards[fullArtifact.rel] = byteSize(fullText);
       const fullKb = Math.round(fs.statSync(fullFile).size / 1024);
       console.log(`[blog-index] ${path.basename(fullFile)} — ${entries.length} articles, ${fullKb} KB`);
     }
@@ -622,7 +638,8 @@ if (!failed) {
   // cover record without first knowing the article section. It also carries
   // the governed generated/editorial registries, which are not Commons files
   // and therefore cannot be represented by buildImageCreditsIndex().
-  const aggregateFile = path.join(OUT, path.basename(BLOG_IMAGE_CREDITS_AGGREGATE));
+  const aggregateArtifact = stagedArtifact(path.basename(BLOG_IMAGE_CREDITS_AGGREGATE));
+  const aggregateFile = aggregateArtifact.file;
   const sectionPayloads = Object.fromEntries(
     preparedSections.map(({ section, credits }) => [section.name, credits]),
   );
@@ -634,8 +651,8 @@ if (!failed) {
   const cleanAggregate = sanitizeDeep(aggregate);
   reportStrippedControlCharsDeep(aggregateFile, aggregate, cleanAggregate);
   const aggregateText = JSON.stringify(cleanAggregate) + '\n';
-  fs.writeFileSync(aggregateFile, aggregateText);
-  writtenCredits[path.relative(API_ROOT, aggregateFile)] = byteSize(aggregateText);
+  writeFileAtomic(aggregateFile, aggregateText);
+  writtenCredits[aggregateArtifact.rel] = byteSize(aggregateText);
   console.log(
     `[blog-index] ${path.basename(aggregateFile)} — `
       + `${Object.keys(aggregate.generated).length} generated, `
@@ -649,10 +666,12 @@ if (!failed) {
   // before phase 2, so this write cannot be the first place a bad sidecar is
   // discovered.
   if (preparedDiscoveryIndex) {
-    const { file, source, payload, text } = preparedDiscoveryIndex;
+    const discoveryArtifact = stagedArtifact('discovery-articles.json');
+    const { source, payload, text } = preparedDiscoveryIndex;
+    const { file } = discoveryArtifact;
     reportStrippedControlCharsDeep(file, source, payload);
-    fs.writeFileSync(file, text);
-    writtenDiscoveryIndex[path.relative(API_ROOT, file)] = byteSize(text);
+    writeFileAtomic(file, text);
+    writtenDiscoveryIndex[discoveryArtifact.rel] = byteSize(text);
     console.log(`[blog-index] discovery-articles.json — ${payload.count} published articles`);
   }
 }
@@ -672,7 +691,7 @@ if (!failed) {
       else if (entry.name.endsWith('.json')) emitted.push(abs);
     }
   };
-  if (fs.existsSync(OUT)) walk(OUT);
+  if (stagingOut && fs.existsSync(stagingOut)) walk(stagingOut);
   for (const file of emitted) {
     assertNoControlChars(fs.readFileSync(file, 'utf-8'), file);
   }
@@ -680,74 +699,199 @@ if (!failed) {
 }
 
 /**
- * Validate and commit the complete blog-index release in one manifest write.
+ * Validate and commit the complete blog-index release as one
+ * rollback-capable transaction. The staged files are moved only after every
+ * producer has succeeded; if a later move or the manifest declaration fails,
+ * the previous files and manifest are restored before the error reaches the
+ * caller.
  *
- * The files are intentionally written before this function: every gate below
- * validates the bytes on disk, while `declareApiArtifacts()` validates all
- * existing manifest entries before touching manifest.json. Keeping all new
- * declarations in one call means a failed discovery gate cannot leave a
- * manifest that describes only the earlier shards or cover credits.
+ * `declareApiArtifacts()` remains the final manifest gate. Keeping all new
+ * declarations in one call means a retry cannot publish a manifest that
+ * describes only the earlier shards or cover credits.
  */
 function commitDiscoveryIndexArtifacts() {
-  if (!PUBLISHES_TO_API) return;
+  if (!stagingOut) return;
 
-  // `manifest.json` is the first file the site reads and the only way it can
-  // reject a truncated payload before rendering it. The shards are a closed
-  // product (sections x locales x {capped, full}); one missing member is a
-  // partial set and must never be declared as a shorter index.
-  const actualShards = Object.keys(writtenShards).length;
-  const missingShards = [...expectedShards].filter((rel) => !Object.hasOwn(writtenShards, rel));
-  if (actualShards !== expectedShards.size || missingShards.length > 0) {
-    console.error(`[blog-index] wrote ${actualShards} shards, expected ${expectedShards.size} — missing ${missingShards.join(', ') || 'unknown'} — refusing to publish a partial index set`);
-    failed = true;
-    return;
+  const entries = { ...writtenShards, ...writtenCredits, ...writtenDiscoveryIndex };
+  const plan = Object.entries(entries).map(([rel, size]) => {
+    const finalFile = path.join(API_ROOT, rel);
+    const relativeToOut = path.relative(OUT, finalFile);
+    if (!relativeToOut || relativeToOut.startsWith(`..${path.sep}`) || path.isAbsolute(relativeToOut)) {
+      throw new Error(`[blog-index] artifact ${rel} escapes the output directory`);
+    }
+    return {
+      rel,
+      size,
+      finalFile,
+      stagedFile: path.join(stagingOut, relativeToOut),
+      relativeToOut,
+    };
+  });
+
+  for (const artifact of plan) {
+    if (!fs.existsSync(artifact.stagedFile)) {
+      throw new Error(`[blog-index] staged artifact ${artifact.rel} is missing`);
+    }
+    const actual = fs.statSync(artifact.stagedFile).size;
+    if (actual !== artifact.size) {
+      throw new Error(`[blog-index] staged artifact ${artifact.rel} has ${actual} bytes, expected ${artifact.size}`);
+    }
   }
 
-  const missingCredits = [...expectedCreditFiles].filter((rel) => !Object.hasOwn(writtenCredits, rel));
-  if (missingCredits.length > 0 || Object.keys(writtenCredits).length !== expectedCreditFiles.size) {
-    console.error(`[blog-index] cover credits: missing ${missingCredits.join(', ') || 'unknown'} — refusing to publish a partial set`);
-    failed = true;
-    return;
+  if (PUBLISHES_TO_API) {
+    // `manifest.json` is the first file the site reads and the only way it can
+    // reject a truncated payload before rendering it. The shards are a closed
+    // product (sections x locales x {capped, full}); one missing member is a
+    // partial set and must never be declared as a shorter index.
+    const actualShards = Object.keys(writtenShards).length;
+    const missingShards = [...expectedShards].filter((rel) => !Object.hasOwn(writtenShards, rel));
+    if (actualShards !== expectedShards.size || missingShards.length > 0) {
+      throw new Error(
+        `[blog-index] wrote ${actualShards} shards, expected ${expectedShards.size} — `
+          + `missing ${missingShards.join(', ') || 'unknown'} — refusing to publish a partial index set`,
+      );
+    }
+
+    const missingCredits = [...expectedCreditFiles].filter((rel) => !Object.hasOwn(writtenCredits, rel));
+    if (missingCredits.length > 0 || Object.keys(writtenCredits).length !== expectedCreditFiles.size) {
+      throw new Error(
+        `[blog-index] cover credits: missing ${missingCredits.join(', ') || 'unknown'} — refusing to publish a partial set`,
+      );
+    }
+
+    // The discovery index is intentionally allowed to be empty on a quiet
+    // release. Its gate checks schema, commit and cardinality instead of a
+    // positive floor, then commits its bytes alongside the other artifacts.
+    const discoveryRel = 'data/discovery-articles.json';
+    if (Object.keys(writtenDiscoveryIndex).length !== 1 || !Object.hasOwn(writtenDiscoveryIndex, discoveryRel)) {
+      throw new Error('[blog-index] discovery index missing — refusing to publish an undescribed surface');
+    }
+    const discoveryFile = path.join(stagingOut, 'discovery-articles.json');
+    const discoveryPayload = JSON.parse(fs.readFileSync(discoveryFile, 'utf-8'));
+    if (
+      discoveryPayload?.schema !== 1
+      || discoveryPayload.commit !== releaseCommit
+      || !Array.isArray(discoveryPayload.articles)
+      || discoveryPayload.count !== discoveryPayload.articles.length
+    ) {
+      throw new Error('[blog-index] discovery index has an invalid schema, commit or count — refusing');
+    }
   }
 
-  // The discovery index is intentionally allowed to be empty on a quiet
-  // release. Its gate checks schema, commit and cardinality instead of a
-  // positive floor, then commits its bytes alongside the other artifacts.
-  const discoveryRel = 'data/discovery-articles.json';
-  if (Object.keys(writtenDiscoveryIndex).length !== 1 || !Object.hasOwn(writtenDiscoveryIndex, discoveryRel)) {
-    console.error('[blog-index] discovery index missing — refusing to publish an undescribed surface');
-    failed = true;
-    return;
-  }
-  const discoveryFile = path.join(API_ROOT, discoveryRel);
-  const discoveryPayload = JSON.parse(fs.readFileSync(discoveryFile, 'utf-8'));
-  if (
-    discoveryPayload?.schema !== 1
-    || discoveryPayload.commit !== releaseCommit
-    || !Array.isArray(discoveryPayload.articles)
-    || discoveryPayload.count !== discoveryPayload.articles.length
-  ) {
-    console.error('[blog-index] discovery index has an invalid schema, commit or count — refusing');
-    failed = true;
-    return;
+  const rollbackRoot = fs.mkdtempSync(path.join(path.dirname(OUT), `.${path.basename(OUT)}-rollback-`));
+  const records = [];
+  const manifestPath = path.join(API_ROOT, 'manifest.json');
+  const manifestBackup = PUBLISHES_TO_API ? path.join(rollbackRoot, 'manifest.json') : null;
+  let manifestBackedUp = false;
+  let committedCount = 0;
+  const failAfterRaw = process.env.BLOG_INDEX_TEST_FAIL_AFTER_ARTIFACT;
+  const failAfter = failAfterRaw === undefined ? null : Number(failAfterRaw);
+
+  try {
+    if (failAfter !== null && (!Number.isInteger(failAfter) || failAfter < 1)) {
+      throw new Error('BLOG_INDEX_TEST_FAIL_AFTER_ARTIFACT must be a positive integer');
+    }
+    if (PUBLISHES_TO_API) {
+      if (!fs.existsSync(manifestPath)) {
+        throw new Error(`${manifestPath} not found: cannot commit the published blog index`);
+      }
+      JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+      fs.copyFileSync(manifestPath, manifestBackup);
+      manifestBackedUp = true;
+    }
+
+    for (const artifact of plan) {
+      const record = { ...artifact, backupFile: null, installed: false };
+      records.push(record);
+      fs.mkdirSync(path.dirname(artifact.finalFile), { recursive: true });
+      if (fs.existsSync(artifact.finalFile)) {
+        record.backupFile = path.join(rollbackRoot, 'artifacts', artifact.relativeToOut);
+        fs.mkdirSync(path.dirname(record.backupFile), { recursive: true });
+        fs.renameSync(artifact.finalFile, record.backupFile);
+      }
+      fs.renameSync(artifact.stagedFile, artifact.finalFile);
+      record.installed = true;
+      committedCount += 1;
+      if (failAfter === committedCount) {
+        throw new Error(`test failpoint after ${committedCount} committed artifact(s)`);
+      }
+    }
+
+    if (PUBLISHES_TO_API) {
+      const committedDiscovery = JSON.parse(fs.readFileSync(path.join(OUT, 'discovery-articles.json'), 'utf-8'));
+      const total = declareApiArtifacts(
+        API_ROOT,
+        entries,
+        {
+          blogIndexShards: Object.keys(writtenShards).length,
+          imageCreditFiles: expectedCreditFiles.size,
+          discoveryArticles: committedDiscovery.count,
+        },
+      );
+      console.log(
+        `[blog-index] manifest.files: ${Object.keys(writtenShards).length} shards, `
+          + `${expectedCreditFiles.size} cover-credit files and discovery index declared, `
+          + `${total} artifacts match on disk`,
+      );
+    } else {
+      console.log(`[blog-index] committed ${plan.length} staged artifacts`);
+    }
+  } catch (error) {
+    const rollbackErrors = [];
+    if (manifestBackedUp) {
+      try {
+        fs.rmSync(manifestPath, { force: true });
+        fs.renameSync(manifestBackup, manifestPath);
+      } catch (rollbackError) {
+        rollbackErrors.push(rollbackError);
+      }
+    }
+    for (const record of records.reverse()) {
+      try {
+        if (record.installed) fs.rmSync(record.finalFile, { recursive: true, force: true });
+        if (record.backupFile && fs.existsSync(record.backupFile)) {
+          fs.mkdirSync(path.dirname(record.finalFile), { recursive: true });
+          fs.renameSync(record.backupFile, record.finalFile);
+        }
+      } catch (rollbackError) {
+        rollbackErrors.push(rollbackError);
+      }
+    }
+    try { fs.rmSync(rollbackRoot, { recursive: true, force: true }); } catch (rollbackError) {
+      rollbackErrors.push(rollbackError);
+    }
+    try { fs.rmSync(stagingOut, { recursive: true, force: true }); } catch (rollbackError) {
+      rollbackErrors.push(rollbackError);
+    }
+    if (rollbackErrors.length > 0) {
+      throw new AggregateError(
+        [error, ...rollbackErrors],
+        `[blog-index] atomic commit failed and rollback was incomplete: ${error.message}`,
+      );
+    }
+    throw error;
   }
 
-  const total = declareApiArtifacts(
-    API_ROOT,
-    { ...writtenShards, ...writtenCredits, ...writtenDiscoveryIndex },
-    {
-      blogIndexShards: actualShards,
-      imageCreditFiles: expectedCreditFiles.size,
-      discoveryArticles: discoveryPayload.count,
-    },
-  );
-  console.log(
-    `[blog-index] manifest.files: ${actualShards} shards, `
-      + `${expectedCreditFiles.size} cover-credit files and discovery index declared, `
-      + `${total} artifacts match on disk`,
-  );
+  try { fs.rmSync(rollbackRoot, { recursive: true, force: true }); } catch (error) {
+    console.warn(`::warning::[blog-index] could not remove rollback staging: ${error.message}`);
+  }
+  try { fs.rmSync(stagingOut, { recursive: true, force: true }); } catch (error) {
+    console.warn(`::warning::[blog-index] could not remove artifact staging: ${error.message}`);
+  }
+  stagingOut = null;
 }
 
-if (!failed && PUBLISHES_TO_API) commitDiscoveryIndexArtifacts();
+try {
+  if (!failed) commitDiscoveryIndexArtifacts();
+} catch (error) {
+  console.error(`[blog-index] atomic commit failed: ${error.message}`);
+  if (stagingOut) {
+    try { fs.rmSync(stagingOut, { recursive: true, force: true }); } catch (cleanupError) {
+      console.error(`[blog-index] artifact staging cleanup failed: ${cleanupError.message}`);
+    }
+    stagingOut = null;
+  }
+  failed = true;
+}
 
 if (failed) process.exit(1);

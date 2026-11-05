@@ -132,10 +132,11 @@ test('senza manifest.json rifiuta invece di inventarne uno', () => {
 
 test('build-blog-index dichiara i suoi shard e rifiuta un set parziale', () => {
   const src = readFileSync(resolve(ROOT, 'scripts/build-blog-index.mjs'), 'utf-8');
-  assert.match(src, /declareApiArtifacts\(\s*API_ROOT,\s*\{\s*\.\.\.writtenShards,\s*\.\.\.writtenCredits,\s*\.\.\.writtenDiscoveryIndex/);
+  assert.match(src, /const entries = \{\s*\.\.\.writtenShards,\s*\.\.\.writtenCredits,\s*\.\.\.writtenDiscoveryIndex\s*\}/);
+  assert.match(src, /declareApiArtifacts\(\s*API_ROOT,\s*entries,/);
   // I byte dichiarati sono quelli del testo scritto, newline finale compreso.
-  assert.match(src, /writtenShards\[path\.relative\(API_ROOT, file\)\] = byteSize\(text\)/);
-  assert.match(src, /writtenShards\[path\.relative\(API_ROOT, fullFile\)\] = byteSize\(fullText\)/);
+  assert.match(src, /writtenShards\[artifact\.rel\] = byteSize\(text\)/);
+  assert.match(src, /writtenShards\[fullArtifact\.rel\] = byteSize\(fullText\)/);
   // Il set e' un prodotto cartesiano chiuso: una voce mancante e' un set
   // troncato, e va rifiutata prima della pubblicazione.
   assert.match(src, /const expectedShards = new Set\(\s*SECTIONS\.flatMap/);
@@ -144,19 +145,22 @@ test('build-blog-index dichiara i suoi shard e rifiuta un set parziale', () => {
   assert.match(src, /refusing to publish a partial index set/);
   // Fuori da dist/api/ non c'e' un manifest da arricchire, e non se ne inventa uno.
   assert.match(src, /PUBLISHES_TO_API = OUT === DEFAULT_OUT/);
-  assert.match(src, /if \(!failed && PUBLISHES_TO_API\)/);
+  assert.match(src, /if \(!failed\) commitDiscoveryIndexArtifacts\(\)/);
   assert.match(src, /const walk = \(dir\) => \{[\s\S]*?if \(entry\.isDirectory\(\)\) walk\(abs\);/);
 });
 
 test('build-blog-index prepara discovery prima delle scritture e committa il manifest una volta sola', () => {
   const src = readFileSync(resolve(ROOT, 'scripts/build-blog-index.mjs'), 'utf-8');
   const discoveryPreparation = src.indexOf('const discovery = buildDiscoveryArticlesIndex({');
-  const phaseTwo = src.indexOf('fs.mkdirSync(OUT, { recursive: true });');
+  const phaseTwo = src.indexOf('stagingOut = fs.mkdtempSync(');
   assert.ok(discoveryPreparation >= 0, 'la preparazione discovery deve essere esplicita');
   assert.ok(discoveryPreparation < phaseTwo, 'un errore discovery non deve seguire le scritture della fase 2');
 
   assert.match(src, /function commitDiscoveryIndexArtifacts\(\)/);
   assert.match(src, /\{\s*\.\.\.writtenShards,\s*\.\.\.writtenCredits,\s*\.\.\.writtenDiscoveryIndex\s*\}/);
+  assert.match(src, /rollbackRoot/);
+  assert.match(src, /BLOG_INDEX_TEST_FAIL_AFTER_ARTIFACT/);
+  assert.match(src, /fs\.renameSync\(artifact\.stagedFile, artifact\.finalFile\)/);
   assert.equal(
     [...src.matchAll(/declareApiArtifacts\(\s*API_ROOT/g)].length,
     1,

@@ -37,6 +37,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { writeFileAtomic } from '../../generator/scripts/lib/atomic-write-file.mjs';
 
 /** Byte UTF-8, non code unit UTF-16 — vedi `build-api.mjs` (#905). */
 export const byteSize = (text) => Buffer.byteLength(text, 'utf-8');
@@ -99,6 +100,6 @@ export function declareApiArtifacts(apiRoot, entries, counts = {}) {
   }
   // Validate the candidate before touching the manifest. A pre-existing
   // mismatch must not be persisted together with the new declaration (#1081).
-  fs.writeFileSync(manifestPath, JSON.stringify(candidate));
+  writeFileAtomic(manifestPath, JSON.stringify(candidate));
   return Object.keys(candidate.files).length;
 }

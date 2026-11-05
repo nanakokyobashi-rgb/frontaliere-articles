@@ -151,10 +151,10 @@ test('ogni choke point di scrittura passa da qui — per OGNI sanitizer, non sol
       if (!e.name.endsWith('.mjs')) continue;
       const src = fs.readFileSync(p, 'utf-8');
       // A choke point can use the shared snapshot writer instead of calling
-      // fs.writeFileSync directly. Count that explicit file-write helper too;
+      // fs.writeFileSync directly. Count explicit file-write helpers too;
       // otherwise moving an already-guarded write behind the helper makes the
       // inventory silently lose the caller that sanitizes and reports it.
-      if (!/(?:writeFileSync|writeFileSnapshotAtomically)\(/.test(src)) continue;
+      if (!/(?:writeFileSync|writeFileSnapshotAtomically|writeFileAtomic)\(/.test(src)) continue;
       const used = sanitizers.filter((s) => new RegExp(`\\b${s}\\(`).test(src));
       if (used.length) seen.push({ rel: path.relative(root, p), src, used });
     }
