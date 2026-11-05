@@ -11,6 +11,10 @@
     "canton-sh::https://sh.ch/webseite/kanton-schaffhausen/beh-rde/regierung/staatskanzlei/medienmitteilungen-24340447-de.html": {
       "section": "canton-sh",
       "ts": 1793918364173
+    },
+    "canton-sh::https://www.shn.ch/region/kanton/2026-11-04/schaffhauser-polizei-warnt-vor-telefonbetrug-seniorin-will-zehntausende": {
+      "section": "canton-sh",
+      "ts": 1793920414012
     }
   }
 }
