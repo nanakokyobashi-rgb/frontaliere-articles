@@ -19363,6 +19363,11 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // selectMinWordsRetryModel()'s back-to-back-duplicate skip below.
   let previousMinWordsModel = null;
   const sourceCopyMode = getSourceCopyMode();
+  // These values are consumed again by the final pre-write gates, after the
+  // retry loop. Keep the state outside the per-attempt block so a successful
+  // generation cannot leave those gates reading a block-scoped binding.
+  let sourceCopyChanged = false;
+  let preTranslationExcerptRepairs = [];
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     // Cost accounting for the rejection ledger. Counted here — at the top of
@@ -19614,6 +19619,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       { articleId: data.id, locale: 'it', mode: sourceCopyMode },
     );
     data.content.it = sourceCopyResult.article;
+    sourceCopyChanged = sourceCopyResult.changed;
     if (sourceCopyResult.rejected) {
       throw new SourceCopyError(
         `Anti-copia strutturale: overlap massimo ${sourceCopyResult.verdict.maxWords} parole consecutive `
@@ -19625,8 +19631,8 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     // Repair generated descriptions before optimizeSeoMetadata applies its
     // completion and minimum-length assertions. The source-copy refresh path
     // performs the same repair after deriving its replacement metadata.
-    let preTranslationExcerptRepairs = [];
-    if (sourceCopyResult.changed) {
+    preTranslationExcerptRepairs = [];
+    if (sourceCopyChanged) {
       refreshSourceCopyDerivedMetadata(data);
     } else {
       preTranslationExcerptRepairs = repairGeneratedArticleDescriptions(data);
@@ -20592,14 +20598,14 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   const excerptRepairs = repairGeneratedArticleDescriptions(data);
   preserveMunicipalityNamesInMetadata(data);
   assertArticleDescriptionsArePlain(data);
-  if (sourceCopyResult.changed || preTranslationExcerptRepairs.length > 0 || excerptRepairs.length > 0) {
+  if (sourceCopyChanged || preTranslationExcerptRepairs.length > 0 || excerptRepairs.length > 0) {
     assertGeneratedArticleQuality(data, {
       cantonBody: bodyTextForCantonPostcondition(data),
     });
   }
   // Metadata repairs can change duplicate admission; check the exact values
   // that will be published after all final metadata normalization.
-  if (sourceCopyResult.changed || sourceCopyFinalChanged
+  if (sourceCopyChanged || sourceCopyFinalChanged
     || preTranslationExcerptRepairs.length > 0 || excerptRepairs.length > 0) {
     console.error('🔍 Verifica duplicati post-riparazione:');
     checkForDuplicates(data);
