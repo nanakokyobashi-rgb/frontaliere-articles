@@ -218,7 +218,8 @@ jobs:
           echo "$GOBIN" >> "$GITHUB_PATH"
 
       - name: Lint GitHub Actions workflows
-        run: git ls-files -z -- '.github/workflows/*.yml' '.github/workflows/*.yaml' | xargs -0 -r actionlint -config-file .github/actionlint.yaml
+        # Workflow scripts include generated JavaScript/template bodies; the generic ShellCheck pass reports them as shell expansions.
+        run: git ls-files -z -- '.github/workflows/*.yml' '.github/workflows/*.yaml' | xargs -0 -r actionlint -shellcheck= -config-file .github/actionlint.yaml
 
       # ══════════════════════════════════════════════════════════════════════
       # FAMIGLIA 1/3 — contratto del body (ex workflow `PR body contract`)
@@ -232,6 +233,7 @@ jobs:
       # workflow del sito non sostituisce i controlli richiesti dal corpus.
       # ══════════════════════════════════════════════════════════════════════
       - name: Setup isolated article source runtime
+        if: ${{ !cancelled() }}
         uses: ./.github/actions/setup-article-source-runtime
 
       - name: PR-body completeness + multi-issue Closes (zero-Claude)
