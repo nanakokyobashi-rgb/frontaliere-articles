@@ -352,6 +352,10 @@ export const NON_SONO_CONTENT_GATES = Object.freeze({
     'verifica il reader condiviso e applica countRegistryArticles a un corpus '
     + 'sintetico sotto mkdtemp; il literal content/ e\' una fixture, non il corpus '
     + 'reale del checkout, quindi un articolo pubblicato non puo\' renderla rossa.',
+  'generator/tests/image-credit-records.test.mjs':
+    'copia input statici del publisher in una directory temporanea e verifica '
+    + 'gli artefatti prodotti da registri sintetici; non applica regole editoriali '
+    + 'ai corpi reali, quindi un nuovo articolo non puo\' renderla rossa.',
   'generator/tests/loop-workflow-triggers.test.mjs':
     'verifica solo trigger, concorrenza e forma dei workflow; le stringhe '
     + 'content/** sono valori attesi e nessun file del corpus viene aperto.',
