@@ -11367,7 +11367,7 @@ const HEADLINE_SELECTION_FALLBACK = {
   engaged: false,
 };
 
-async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAttempts, fallback = { models: [], engaged: false }) {
+async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAttempts, fallback = { models: [], engaged: false }, redactDiagnostics = false) {
   let last = null;
   // I modelli la cui risposta HTTP 200 il protocollo ha RIGETTATO in questa
   // selezione. Per la cascata quella era una chiamata riuscita (+2): nella run
@@ -11436,16 +11436,39 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
       // `prefer` non lo mette in testa. Il roster intero e' a terra solo dopo
       // che anche Codex ha fallito, e allora l'errore risale intatto.
       if (err?.code === 'ALL_MODELS_EXHAUSTED') {
+        if (redactDiagnostics) {
+          // Preserve the structured disposition fields and error identity used
+          // by main().catch, but do not propagate provider text that can echo
+          // a signal-driven headline into its diagnostics.
+          const stack = typeof err.stack === 'string' ? err.stack : '';
+          const stackFrames = stack
+            .split('\n')
+            .slice(1)
+            .filter((line) => /^\s*at\s/.test(line));
+          err.message = '[signal-related infrastructure diagnostic redacted]';
+          err.stack = `${err.name || 'Error'}: ${err.message}`
+            + (stackFrames.length ? `\n${stackFrames.join('\n')}` : '');
+        }
         if (useFallback || fallback.models.length === 0 || attempt === maxAttempts) throw err;
         fallback.engaged = true;
-        last = { rejection: SELECTION_REJECTION.INFRA_ERROR, detail: String(err?.message ?? err) };
+        last = {
+          rejection: SELECTION_REJECTION.INFRA_ERROR,
+          detail: redactDiagnostics
+            ? '[signal-related infrastructure diagnostic redacted]'
+            : String(err?.message ?? err),
+        };
         console.error(
           `  ⚠️  ${label}: cascata free esaurita — tentativo ${attempt}/${maxAttempts}, il prossimo passa a ${fallback.models.join(', ')}`,
         );
         continue;
       }
       if (fallback.models.length > 0) fallback.engaged = true;
-      last = { rejection: SELECTION_REJECTION.INFRA_ERROR, detail: String(err?.message ?? err) };
+      last = {
+        rejection: SELECTION_REJECTION.INFRA_ERROR,
+        detail: redactDiagnostics
+          ? '[signal-related infrastructure diagnostic redacted]'
+          : String(err?.message ?? err),
+      };
       console.error(
         `  ⚠️  ${label}: errore infrastrutturale (${last.detail}) — tentativo ${attempt}/${maxAttempts}`,
       );
@@ -11469,9 +11492,11 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
     recordModelContentFailure(modelUsedRef.model, { recordScore: callOpts.recordScore });
     if (modelUsedRef.model && !rejectedModels.includes(modelUsedRef.model)) rejectedModels.push(modelUsedRef.model);
     if (fallback.models.length > 0) fallback.engaged = true;
-    last = parsed;
+    last = redactDiagnostics
+      ? { ...parsed, detail: '[signal-related model response redacted]' }
+      : parsed;
     console.error(
-      `  ⚠️  ${label}: risposta RIGETTATA (${parsed.rejection}: ${parsed.detail}) — tentativo ${attempt}/${maxAttempts}`,
+      `  ⚠️  ${label}: risposta RIGETTATA (${last.rejection}: ${last.detail}) — tentativo ${attempt}/${maxAttempts}`,
     );
     RUN_REPORT.selectionUsage.responsesRejected += 1;
     RUN_REPORT.selectionUsage.rejectionReasons[parsed.rejection] =
@@ -11512,6 +11537,8 @@ async function selectArticle(headlines) {
   // Chunking: if too many headlines, split into batches to avoid token overflow
   const MAX_HEADLINES_PER_BATCH = 50;
   let trimmed = headlines.slice(0, 500);
+  const redactDiagnostics = trimmed.some(isSignalDrivenTopicCandidate)
+    || isSignalDrivenRunReport(RUN_REPORT);
   let batchWinners = [];
   if (trimmed.length > MAX_HEADLINES_PER_BATCH) {
     // Split into batches
@@ -11530,6 +11557,7 @@ async function selectArticle(headlines) {
         `Batch ${batchIdx + 1}`,
         HEADLINE_SELECTION_MAX_ATTEMPTS_BATCH,
         HEADLINE_SELECTION_FALLBACK,
+        redactDiagnostics,
       );
       if (!picked.ok) {
         // Niente clamp: un batch senza una scelta valida si SALTA. Prendere la
@@ -11560,6 +11588,7 @@ async function selectArticle(headlines) {
     'Selezione finale',
     HEADLINE_SELECTION_MAX_ATTEMPTS_FINAL,
     HEADLINE_SELECTION_FALLBACK,
+    redactDiagnostics,
   );
   if (!picked.ok) {
     // Qui stava «fallback a indice 0». Ripiegare sulla prima headline pubblica
