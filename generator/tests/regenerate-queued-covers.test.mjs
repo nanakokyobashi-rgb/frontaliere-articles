@@ -1645,15 +1645,16 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
     workflow,
     /name: Dispatch and complete pending cover publishers[\s\S]*?id: republish[\s\S]*?continue-on-error: true/u,
   );
-  assert.match(workflow, /expected_sections="\$\(jq -c '\[\.items\[\] \| \.section\] \| unique \| sort'/u);
-  assert.match(workflow, /\(\.sections \| length > 0\)/u);
-  assert.match(workflow, /\[\.sections\[\] \| \.section\] \| sort == \$expected_sections/u);
-  assert.match(workflow, /\.status == "not-started"/u);
-  assert.match(workflow, /empty, unexpected, or invalid sections; keeping the outbox/u);
+  assert.match(workflow, /publisherStatusDisposition/u);
+  assert.match(workflow, /validatePublisherStatus\(outbox, status\)/u);
+  assert.match(workflow, /publisher_disposition="\$\(OUTBOX_FILE="\$OUTBOX_FILE" STATUS_FILE="\$STATUS_FILE" node --input-type=module/u);
   assert.match(workflow, /publisher_failed='false'/u);
-  assert.match(workflow, /any\(\.sections\[\]; \.status == "failed"\)/u);
+  assert.match(workflow, /generation_allowed/u);
+  assert.match(workflow, /publisher_deferred/u);
   assert.match(workflow, /pre-generation publishers are still in progress; keeping the outbox/u);
-  assert.match(workflow, /pre-generation publisher failed; keeping the outbox/u);
+  assert.match(workflow, /pre-generation publisher failed; keeping the outbox durable while allowing unrelated cover generation/u);
+  assert.match(workflow, /Report terminal pre-generation publisher failure/u);
+  assert.match(workflow, /the cover queue was allowed to progress, but this run stays failed/u);
   assert.doesNotMatch(workflow, /gh run watch/u);
   assert.match(workflow, /queued-cover-deadline-ms/);
   assert.match(workflow, /queued-cover-job-start-ms/);
