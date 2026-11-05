@@ -48,6 +48,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.vionnaz-revoca-divieti-acqua.title': 'Vionnaz : levée des interdictions liées à l’eau potable après 41 jours',
     'blog.article.vionnaz-revoca-divieti-acqua.excerpt': 'La municipalité de Vionnaz a déclaré satisfaisante la situation des sources, réautorisant l’arrosage des pelouses, le remplissage des piscines et le lavage des véhicules, tout en maintenant les recommandations d’économie d’eau.',
     'blog.article.vionnaz-revoca-divieti-acqua.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.vallese-piano-risparmi-2030.title': 'Valais : Conseil d’État vise 180 millions d’économies',
+    'blog.article.vallese-piano-risparmi-2030.excerpt': 'L’article de la RTS rapporte que le Conseil d’État du Valais doit prévoir 180 millions de CHF d’économies d’ici 2030 pour maintenir le solde du budget cantonal.',
+    'blog.article.vallese-piano-risparmi-2030.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVsFr;

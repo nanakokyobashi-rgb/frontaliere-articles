@@ -48,6 +48,9 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.vionnaz-revoca-divieti-acqua.title': 'Vionnaz: drinking water bans lifted after 41 days',
     'blog.article.vionnaz-revoca-divieti-acqua.excerpt': 'The municipality of Vionnaz has declared the situation regarding water sources satisfactory, reinstating the watering of lawns, the filling of swimming pools and the washing of vehicles, while maintaining water-saving recommendations.',
     'blog.article.vionnaz-revoca-divieti-acqua.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.vallese-piano-risparmi-2030.title': 'Valais: the Council of State aims for 180 million in savings',
+    'blog.article.vallese-piano-risparmi-2030.excerpt': 'The RTS article reports that the Valais Council of State must identify CHF 180 million in savings by 2030 to maintain the balance of the cantonal budget.',
+    'blog.article.vallese-piano-risparmi-2030.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVsEn;

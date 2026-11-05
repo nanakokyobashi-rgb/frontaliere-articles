@@ -18,6 +18,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'bains-ovronnaz-nuovo-sursis': { it: 'bains-ovronnaz-nuovo-sursis', en: 'bains-ovronnaz-new-sursis', de: 'bains-ovronnaz-neuer-sursis', fr: 'bains-ovronnaz-nouveau-sursis' },
  'val-de-bagnes-sostenibilita-2024': { it: 'val-de-bagnes-sostenibilita-2024', en: 'val-de-bagnes-sustainability', de: 'val-de-bagnes-nachhaltigkeit', fr: 'val-de-bagnes-durable' },
  'vionnaz-revoca-divieti-acqua': { it: 'vionnaz-revoca-divieti-acqua', en: 'vionnaz-revokes-water-restrictions', de: 'vionnaz-wasserbeschrankungen-aufhebung', fr: 'vionnaz-levee-restrictions-eau' },
+ 'vallese-piano-risparmi-2030': { it: 'vallese-piano-risparmi-2030', en: 'valais-savings-plan-2030', de: 'wallis-sparplan-2030', fr: 'valais-plan-economies-2030' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

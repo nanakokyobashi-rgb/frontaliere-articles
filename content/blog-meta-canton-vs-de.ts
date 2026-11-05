@@ -48,6 +48,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.vionnaz-revoca-divieti-acqua.title': 'Vionnaz: Aufhebung der Trinkwasserverbote nach 41 Tagen',
     'blog.article.vionnaz-revoca-divieti-acqua.excerpt': 'Die Gemeinde Vionnaz hat die Lage der Quellen als zufriedenstellend bezeichnet und die Nutzung von Rasenflächen, Schwimmbädern und Fahrzeugen wieder ermöglicht, die Empfehlungen zum Wassersparen jedoch beibehalten.',
     'blog.article.vionnaz-revoca-divieti-acqua.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.vallese-piano-risparmi-2030.title': 'Wallis: Der Staatsrat strebt Einsparungen von 180 Millionen an',
+    'blog.article.vallese-piano-risparmi-2030.excerpt': 'Der Artikel von RTS berichtet, dass der Staatsrat des Wallis bis 2030 Einsparungen von CHF 180 Millionen ermitteln muss, um das Gleichgewicht des kantonalen Haushalts zu wahren.',
+    'blog.article.vallese-piano-risparmi-2030.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVsDe;
