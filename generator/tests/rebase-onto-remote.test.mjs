@@ -2284,41 +2284,105 @@ test('un conflitto sui contatori somma gli incrementi dei due lati, e l\'articol
   }
 });
 
-test('un conflitto sulla coppia discovery fonde tentativi e watermark nello stesso file', () => {
+test('un conflitto discovery fonde insieme entrambe le sezioni nello stesso file', () => {
   const w = makeWorld();
   const statePath = 'data/discovery-attempt-state.json';
-  const pair = 'frontaliereProvenAttempts,frontaliereDiscoveryResetAt';
-  const state = (proven, resetAt) => `${JSON.stringify({
+  const state = (frontaliereProven, frontaliereResetAt, svizzeraProven, svizzeraResetAt) => `${JSON.stringify({
     version: 1,
-    frontaliereProvenAttempts: proven,
-    frontaliereDiscoveryResetAt: resetAt,
-    svizzeraProvenAttempts: 2,
-    svizzeraDiscoveryResetAt: 1,
+    frontaliereProvenAttempts: frontaliereProven,
+    frontaliereDiscoveryResetAt: frontaliereResetAt,
+    svizzeraProvenAttempts: svizzeraProven,
+    svizzeraDiscoveryResetAt: svizzeraResetAt,
   }, null, 2)}\n`;
+  const stateCounterSpecs = parseHelperArgs(readFileSync(WORKFLOW, 'utf8')).counters
+    .filter((spec) => spec.startsWith(`${statePath}:`));
+  assert.equal(stateCounterSpecs.length, 2, 'il workflow deve dichiarare una coppia discovery per ogni sezione');
+  const counterArgs = stateCounterSpecs.flatMap((spec) => ['--merge-counter', spec]);
   try {
-    write(w.work, statePath, state(5, 3));
+    write(w.work, statePath, state(5, 3, 8, 6));
     commitAll(w.work, 'seed discovery attempt state');
     git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
 
-    landUpstream(w, [[statePath, state(6, 6), 'upstream proven publication reset']]);
-    write(w.work, statePath, state(6, 5));
+    landUpstream(w, [
+      [statePath, state(6, 6, 8, 6), 'upstream frontaliere publication reset'],
+      [statePath, state(6, 6, 9, 9), 'upstream svizzera publication reset'],
+    ]);
+    write(w.work, statePath, state(7, 5, 10, 7));
     write(w.work, 'content/blog-body/it/articolo-discovery.ts', 'export const d = 1\n');
-    commitAll(w.work, 'Generate article after discovery reset (frontaliere)');
+    commitAll(w.work, 'Generate article after discovery resets');
 
-    const { code, out } = runHelper(w.work, w.upstream, '--merge-counter', `${statePath}:${pair}`);
-    assert.equal(code, 0, `il conflitto sulla coppia deve essere risolto in modo atomico:\n${out}`);
+    const { code, out } = runHelper(w.work, w.upstream, ...counterArgs);
+    assert.equal(code, 0, `il conflitto deve fondere insieme entrambe le coppie:\n${out}`);
     assert.match(out, /resolved counter conflict by summing both sides/);
 
     git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
     const merged = JSON.parse(git(w.work, 'show', `HEAD:${statePath}`));
-    assert.equal(merged.frontaliereProvenAttempts, 7);
-    assert.equal(merged.frontaliereDiscoveryResetAt, 6);
+    assert.deepEqual({
+      frontaliereProvenAttempts: merged.frontaliereProvenAttempts,
+      frontaliereDiscoveryResetAt: merged.frontaliereDiscoveryResetAt,
+      svizzeraProvenAttempts: merged.svizzeraProvenAttempts,
+      svizzeraDiscoveryResetAt: merged.svizzeraDiscoveryResetAt,
+    }, {
+      frontaliereProvenAttempts: 8,
+      frontaliereDiscoveryResetAt: 6,
+      svizzeraProvenAttempts: 11,
+      svizzeraDiscoveryResetAt: 9,
+    });
     assert.ok(merged.frontaliereDiscoveryResetAt <= merged.frontaliereProvenAttempts);
+    assert.ok(merged.svizzeraDiscoveryResetAt <= merged.svizzeraProvenAttempts);
     assert.equal(
       git(w.work, 'show', 'HEAD:content/blog-body/it/articolo-discovery.ts'),
       'export const d = 1\n',
       'l’articolo deve essere incluso nel commit realmente pushato, non solo nel working tree',
     );
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('una coppia discovery non valida evita un merge parziale dell’intero stato condiviso', () => {
+  const w = makeWorld();
+  const statePath = 'data/discovery-attempt-state.json';
+  const state = (frontaliereProven, frontaliereResetAt, svizzeraProven, svizzeraResetAt) => `${JSON.stringify({
+    version: 1,
+    frontaliereProvenAttempts: frontaliereProven,
+    frontaliereDiscoveryResetAt: frontaliereResetAt,
+    svizzeraProvenAttempts: svizzeraProven,
+    svizzeraDiscoveryResetAt: svizzeraResetAt,
+  }, null, 2)}\n`;
+  const stateCounterSpecs = parseHelperArgs(readFileSync(WORKFLOW, 'utf8')).counters
+    .filter((spec) => spec.startsWith(`${statePath}:`));
+  assert.equal(stateCounterSpecs.length, 2, 'il workflow deve dichiarare entrambe le coppie');
+  const counterArgs = stateCounterSpecs.flatMap((spec) => ['--merge-counter', spec]);
+  try {
+    write(w.work, statePath, state(5, 3, 8, 6));
+    commitAll(w.work, 'seed discovery attempt state');
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+
+    const upstreamState = state(6, 6, 9, 9);
+    landUpstream(w, [[statePath, upstreamState, 'upstream discovery resets']]);
+    write(w.work, statePath, state(7, 5, 10, 11));
+    write(w.work, 'content/blog-body/it/articolo-discovery-invalido.ts', 'export const d = 1\n');
+    commitAll(w.work, 'Generate article with invalid discovery state');
+
+    const { code, out } = runHelper(w.work, w.upstream, ...counterArgs);
+    assert.equal(code, 42, `un dato non riconciliabile deve bloccare il push dopo il fallback:\n${out}`);
+    assert.match(out, /counter merge refused .* resolved by taking upstream/);
+    assert.match(out, /counter reconciliation failed; stage=resolve category=counter-resolver/);
+
+    const merged = JSON.parse(git(w.work, 'show', `HEAD:${statePath}`));
+    assert.equal(merged.frontaliereProvenAttempts, 6,
+      'una coppia valida non viene scritta se la seconda coppia non e’ riconciliabile');
+    assert.equal(merged.frontaliereDiscoveryResetAt, 6);
+    assert.equal(merged.svizzeraProvenAttempts, 9);
+    assert.equal(merged.svizzeraDiscoveryResetAt, 9);
+    assert.equal(
+      git(w.work, 'show', 'HEAD:content/blog-body/it/articolo-discovery-invalido.ts'),
+      'export const d = 1\n',
+      'il fallback sui contatori non deve scartare l’articolo',
+    );
+    assert.equal(git(w.work, 'status', '--porcelain').trim(), '',
+      'il fallback lascia il tree pulito mentre il caller rifiuta il push');
   } finally {
     w.cleanup();
   }

@@ -226,16 +226,20 @@ if [ "$ALLOWED" = " " ] && [ "${#REGISTRIES[@]}" -eq 0 ] && [ "${#REGISTRY_PATTE
   exit 2
 fi
 
-# La coppia path:campo dichiarata per il contatore $1.
+# Tutte le coppie path:campo dichiarate per il contatore $1, da fondere insieme.
 counter_spec_of() {
-  local candidate="$1" spec
+  local candidate="$1" spec fields=""
   for spec in $COUNTER_SPECS; do
     if [ "${spec%:*}" = "$candidate" ]; then
-      echo "$spec"
-      return 0
+      if [ -n "$fields" ]; then
+        fields="$fields,${spec#*:}"
+      else
+        fields="${spec#*:}"
+      fi
     fi
   done
-  return 1
+  [ -n "$fields" ] || return 1
+  printf '%s:%s\n' "$candidate" "$fields"
 }
 
 # Vero se $1 comincia con uno dei prefissi dichiarati con --take-theirs.

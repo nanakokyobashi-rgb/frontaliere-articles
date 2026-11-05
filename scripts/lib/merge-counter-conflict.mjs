@@ -85,7 +85,7 @@ function parseCounterDoc(text, field, label) {
  * Fonde un contatore a tre vie. Pura: i tre lati arrivano come testo.
  *
  * @param {{base: string|null, upstream: string, replayed: string, field: string}} sides
- *        `field` can be a single counter or a supported discovery-counter pair;
+ *        `field` can be a single counter or one or more discovery-counter pairs;
  *        `base` null = file assente nella base comune (add/add).
  * @returns {{ok: true, merged: string, value?: number, values: Record<string, number>, rule: string}|{ok: false, reason: string}}
  */
@@ -93,8 +93,8 @@ export function mergeCounterDocuments({ base, upstream, replayed, field }) {
   if (typeof field !== 'string' || !field) return { ok: false, reason: 'campo contatore non indicato' };
   const fields = parseCounterFields(field);
   if (fields.error) return { ok: false, reason: fields.error };
-  if (fields.kind === 'discovery-attempt-pair') {
-    return mergeDiscoveryAttemptPairDocuments({ base, upstream, replayed, fields });
+  if (fields.kind === 'discovery-attempt-pair' || fields.kind === 'discovery-attempt-pairs') {
+    return mergeDiscoveryAttemptPairsDocuments({ base, upstream, replayed, fields });
   }
 
   const up = parseCounterDoc(upstream, field, 'upstream');
@@ -127,25 +127,32 @@ export function mergeCounterDocuments({ base, upstream, replayed, field }) {
   return { ok: true, merged, value, values: { [field]: value }, rule };
 }
 
-/**
- * Parses either one counter field or the paired recovery state
- * `<section>ProvenAttempts,<section>DiscoveryResetAt`.
- */
+/** Parses a single counter field or one or more section-local discovery pairs. */
 function parseCounterFields(field) {
   const names = field.split(',');
   if (names.length === 1 && names[0]) return { kind: 'single', field: names[0] };
-  if (names.length !== 2 || names.some((name) => !name)) {
-    return { error: 'spec contatore non valida: atteso un campo o una coppia discovery' };
+  if (names.length < 2 || names.length % 2 !== 0 || names.some((name) => !name)) {
+    return { error: 'spec contatore non valida: atteso un campo o una o piu coppie discovery' };
   }
-  const proven = /^(frontaliere|svizzera)ProvenAttempts$/.exec(names[0]);
-  const resetAt = /^(frontaliere|svizzera)DiscoveryResetAt$/.exec(names[1]);
-  if (!proven || !resetAt || proven[1] !== resetAt[1]) {
-    return { error: 'coppia discovery non valida: servono ProvenAttempts e DiscoveryResetAt della stessa sezione' };
+  const pairs = [];
+  const sections = new Set();
+  for (let i = 0; i < names.length; i += 2) {
+    const proven = /^(frontaliere|svizzera)ProvenAttempts$/.exec(names[i]);
+    const resetAt = /^(frontaliere|svizzera)DiscoveryResetAt$/.exec(names[i + 1]);
+    if (!proven || !resetAt || proven[1] !== resetAt[1] || sections.has(proven[1])) {
+      return { error: 'coppia discovery non valida o duplicata: servono ProvenAttempts e DiscoveryResetAt della stessa sezione' };
+    }
+    sections.add(proven[1]);
+    pairs.push({ provenField: names[i], resetAtField: names[i + 1] });
   }
-  return { kind: 'discovery-attempt-pair', provenField: names[0], resetAtField: names[1] };
+  return {
+    kind: pairs.length === 1 ? 'discovery-attempt-pair' : 'discovery-attempt-pairs',
+    pairs,
+    ...pairs[0],
+  };
 }
 
-function parseCounterPairDoc(text, fields, label) {
+function parseDiscoveryAttemptPairsDoc(text, pairs, label) {
   let doc;
   try {
     doc = JSON.parse(text);
@@ -155,61 +162,83 @@ function parseCounterPairDoc(text, fields, label) {
   if (!doc || typeof doc !== 'object' || Array.isArray(doc)) {
     return { error: `${label}: non e' un oggetto JSON` };
   }
-  const proven = doc[fields.provenField];
-  const resetAt = doc[fields.resetAtField];
-  if (!Number.isSafeInteger(proven) || proven < 0) {
-    return { error: `${label}: il campo '${fields.provenField}' non e' un intero sicuro non negativo` };
+  const parsedPairs = [];
+  for (const fields of pairs) {
+    const proven = doc[fields.provenField];
+    const resetAt = doc[fields.resetAtField];
+    if (!Number.isSafeInteger(proven) || proven < 0) {
+      return { error: `${label}: il campo '${fields.provenField}' non e' un intero sicuro non negativo` };
+    }
+    if (!Number.isSafeInteger(resetAt) || resetAt < 0) {
+      return { error: `${label}: il campo '${fields.resetAtField}' non e' un intero sicuro non negativo` };
+    }
+    if (resetAt > proven) {
+      return { error: `${label}: il watermark discovery supera ProvenAttempts` };
+    }
+    parsedPairs.push({ ...fields, proven, resetAt });
   }
-  if (!Number.isSafeInteger(resetAt) || resetAt < 0) {
-    return { error: `${label}: il campo '${fields.resetAtField}' non e' un intero sicuro non negativo` };
-  }
-  if (resetAt > proven) {
-    return { error: `${label}: il watermark discovery supera ProvenAttempts` };
-  }
-  return { doc, proven, resetAt };
+  return { doc, pairs: parsedPairs };
 }
 
-function mergeDiscoveryAttemptPairDocuments({ base, upstream, replayed, fields }) {
-  const up = parseCounterPairDoc(upstream, fields, 'upstream');
+function mergeDiscoveryAttemptPairsDocuments({ base, upstream, replayed, fields }) {
+  const up = parseDiscoveryAttemptPairsDoc(upstream, fields.pairs, 'upstream');
   if (up.error) return { ok: false, reason: up.error };
-  const mine = parseCounterPairDoc(replayed, fields, 'commit rigiocato');
+  const mine = parseDiscoveryAttemptPairsDoc(replayed, fields.pairs, 'commit rigiocato');
   if (mine.error) return { ok: false, reason: mine.error };
   const b = base == null
-    ? { doc: {}, proven: 0, resetAt: 0 }
-    : parseCounterPairDoc(base, fields, 'base');
+    ? { doc: {}, pairs: fields.pairs.map((pair) => ({ ...pair, proven: 0, resetAt: 0 })) }
+    : parseDiscoveryAttemptPairsDoc(base, fields.pairs, 'base');
   if (b.error) return { ok: false, reason: b.error };
 
-  const delta = mine.proven - b.proven;
-  if (delta < 0 || up.proven < b.proven) {
-    return { ok: false, reason: 'ProvenAttempts non monotono: un lato ha decrementato il contatore' };
-  }
-  if (mine.resetAt < b.resetAt || up.resetAt < b.resetAt) {
-    return { ok: false, reason: 'DiscoveryResetAt non monotono: un lato ha decrementato il watermark' };
+  const values = {};
+  const rules = [];
+  for (let i = 0; i < fields.pairs.length; i += 1) {
+    const pair = fields.pairs[i];
+    const basePair = b.pairs[i];
+    const upstreamPair = up.pairs[i];
+    const replayedPair = mine.pairs[i];
+    const section = pair.provenField.replace(/ProvenAttempts$/, '');
+    const delta = replayedPair.proven - basePair.proven;
+    if (delta < 0 || upstreamPair.proven < basePair.proven) {
+      return { ok: false, reason: `ProvenAttempts non monotono nella sezione ${section}` };
+    }
+    if (replayedPair.resetAt < basePair.resetAt || upstreamPair.resetAt < basePair.resetAt) {
+      return { ok: false, reason: `DiscoveryResetAt non monotono nella sezione ${section}` };
+    }
+
+    const proven = upstreamPair.proven + delta;
+    if (!Number.isSafeInteger(proven)) {
+      return { ok: false, reason: `il merge di ProvenAttempts supera gli interi sicuri nella sezione ${section}` };
+    }
+    // The reset marker is an absolute watermark, not an additive counter. Taking
+    // the latest value from either branch avoids counting the same reset twice.
+    // If both branches end at their own watermark, both have completed a reset
+    // after their local attempts. Since the final reset in the merged order must
+    // follow every branch's completed reset, it clears the combined attempts.
+    const bothBranchesReset = upstreamPair.resetAt === upstreamPair.proven
+      && replayedPair.resetAt === replayedPair.proven;
+    const resetAt = bothBranchesReset
+      ? proven
+      : Math.max(basePair.resetAt, upstreamPair.resetAt, replayedPair.resetAt);
+    if (resetAt > proven) {
+      return { ok: false, reason: `il merge della coppia discovery violerebbe resetAt <= provenAttempts nella sezione ${section}` };
+    }
+    values[pair.provenField] = proven;
+    values[pair.resetAtField] = resetAt;
+    const resetRule = bothBranchesReset
+      ? `DiscoveryResetAt=${proven} (entrambi i rami terminano con reset)`
+      : `DiscoveryResetAt=max(${basePair.resetAt}, ${upstreamPair.resetAt}, ${replayedPair.resetAt})`;
+    rules.push(`${pair.provenField}=${upstreamPair.proven} + (${replayedPair.proven} − ${basePair.proven}); ${resetRule}`);
   }
 
-  const proven = up.proven + delta;
-  if (!Number.isSafeInteger(proven)) {
-    return { ok: false, reason: 'il merge di ProvenAttempts supera gli interi sicuri' };
-  }
-  // The reset marker is an absolute watermark, not an additive counter. Taking
-  // the latest value from either branch avoids counting the same reset twice.
-  // If both branches end at their own watermark, both have completed a reset
-  // after their local attempts. Since the final reset in the merged order must
-  // follow every branch's completed reset, it clears the combined attempts.
-  const bothBranchesReset = up.resetAt === up.proven && mine.resetAt === mine.proven;
-  const resetAt = bothBranchesReset
-    ? proven
-    : Math.max(b.resetAt, up.resetAt, mine.resetAt);
-  if (resetAt > proven) {
-    return { ok: false, reason: 'il merge della coppia discovery violerebbe resetAt <= provenAttempts' };
-  }
-  const values = { [fields.provenField]: proven, [fields.resetAtField]: resetAt };
   const merged = `${JSON.stringify({ ...up.doc, ...values }, null, 2)}\n`;
-  const resetRule = bothBranchesReset
-    ? `DiscoveryResetAt=${proven} (entrambi i rami terminano con reset)`
-    : `DiscoveryResetAt=max(${b.resetAt}, ${up.resetAt}, ${mine.resetAt})`;
-  const rule = `ProvenAttempts=${up.proven} + (${mine.proven} − ${b.proven}); ${resetRule}`;
-  return { ok: true, merged, values, rule };
+  return {
+    ok: true,
+    merged,
+    ...(fields.pairs.length === 1 ? { value: values[fields.pairs[0].provenField] } : {}),
+    values,
+    rule: rules.join('; '),
+  };
 }
 
 /** Splitta `<path>:<campo>` sull'ULTIMO `:`. */
@@ -226,7 +255,9 @@ export function parseCounterSpec(spec) {
 function parseWorkingCounterDoc(text, field, label) {
   const fields = parseCounterFields(field);
   if (fields.error) return { error: fields.error };
-  if (fields.kind === 'discovery-attempt-pair') return parseCounterPairDoc(text, fields, label);
+  if (fields.kind === 'discovery-attempt-pair' || fields.kind === 'discovery-attempt-pairs') {
+    return parseDiscoveryAttemptPairsDoc(text, fields.pairs, label);
+  }
   return parseCounterDoc(text, fields.field, label);
 }
 
