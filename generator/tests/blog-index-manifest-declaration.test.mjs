@@ -148,6 +148,22 @@ test('build-blog-index dichiara i suoi shard e rifiuta un set parziale', () => {
   assert.match(src, /const walk = \(dir\) => \{[\s\S]*?if \(entry\.isDirectory\(\)\) walk\(abs\);/);
 });
 
+test('build-blog-index prepara discovery prima delle scritture e committa il manifest una volta sola', () => {
+  const src = readFileSync(resolve(ROOT, 'scripts/build-blog-index.mjs'), 'utf-8');
+  const discoveryPreparation = src.indexOf('const discovery = buildDiscoveryArticlesIndex({');
+  const phaseTwo = src.indexOf('fs.mkdirSync(OUT, { recursive: true });');
+  assert.ok(discoveryPreparation >= 0, 'la preparazione discovery deve essere esplicita');
+  assert.ok(discoveryPreparation < phaseTwo, 'un errore discovery non deve seguire le scritture della fase 2');
+
+  assert.match(src, /function commitDiscoveryIndexArtifacts\(\)/);
+  assert.match(src, /\{\.\.\.writtenShards, \.\.\.writtenCredits, \.\.\.writtenDiscoveryIndex\}/);
+  assert.equal(
+    [...src.matchAll(/declareApiArtifacts\(API_ROOT/g)].length,
+    1,
+    'il manifest deve ricevere tutte le dichiarazioni in un solo commit',
+  );
+});
+
 test('build-blog-index valida tutte le sezioni prima di scrivere qualsiasi shard', () => {
   const root = mkdtempSync(join(tmpdir(), 'blog-index-atomic-'));
   // The import closure, not a hand list: the list stopped at ten files while

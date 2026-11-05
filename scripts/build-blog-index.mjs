@@ -440,6 +440,7 @@ function prepareDiscoveryIndexSections() {
 
 let failed = false;
 const preparedSections = [];
+let preparedDiscoveryIndex = null;
 
 // Fase 1: valida e prepara tutti gli shard senza creare la directory di output.
 // Nessuna sezione parziale deve poter lasciare artefatti se una sezione successiva
@@ -531,6 +532,25 @@ for (const section of SECTIONS) {
   preparedSections.push({ section, registry, locales, metaByLocale, credits: credits.payload });
 }
 for (const message of creditWarnings) console.warn('::warning::' + message);
+
+// Discovery reads the already-written API registry and slug documents, but it
+// must be prepared before phase 2 starts writing blog artifacts. Otherwise a
+// malformed sidecar can fail after the earlier shards have changed on disk,
+// leaving a retry with a mixed working tree.
+if (!failed && PUBLISHES_TO_API) {
+  const discovery = buildDiscoveryArticlesIndex({
+    commit: releaseCommit,
+    generatedAt: new Date().toISOString(),
+    sections: prepareDiscoveryIndexSections(),
+  });
+  const cleanDiscovery = sanitizeDeep(discovery);
+  preparedDiscoveryIndex = {
+    file: path.join(OUT, 'discovery-articles.json'),
+    source: discovery,
+    payload: cleanDiscovery,
+    text: JSON.stringify(cleanDiscovery) + '\n',
+  };
+}
 
 if (!failed) {
   fs.mkdirSync(OUT, { recursive: true });
@@ -625,20 +645,15 @@ if (!failed) {
 
   // Discovery attribution stays private in each article sidecar. Publish only
   // a small allowlisted projection, and only for ids the registry API above
-  // already published in this same manifest commit.
-  if (PUBLISHES_TO_API) {
-    const discovery = buildDiscoveryArticlesIndex({
-      commit: releaseCommit,
-      generatedAt: new Date().toISOString(),
-      sections: prepareDiscoveryIndexSections(),
-    });
-    const discoveryFile = path.join(OUT, 'discovery-articles.json');
-    const cleanDiscovery = sanitizeDeep(discovery);
-    reportStrippedControlCharsDeep(discoveryFile, discovery, cleanDiscovery);
-    const discoveryText = JSON.stringify(cleanDiscovery) + '\n';
-    fs.writeFileSync(discoveryFile, discoveryText);
-    writtenDiscoveryIndex[path.relative(API_ROOT, discoveryFile)] = byteSize(discoveryText);
-    console.log(`[blog-index] discovery-articles.json — ${discovery.count} published articles`);
+  // already published in this same manifest commit. The payload was prepared
+  // before phase 2, so this write cannot be the first place a bad sidecar is
+  // discovered.
+  if (preparedDiscoveryIndex) {
+    const { file, source, payload, text } = preparedDiscoveryIndex;
+    reportStrippedControlCharsDeep(file, source, payload);
+    fs.writeFileSync(file, text);
+    writtenDiscoveryIndex[path.relative(API_ROOT, file)] = byteSize(text);
+    console.log(`[blog-index] discovery-articles.json — ${payload.count} published articles`);
   }
 }
 
@@ -664,71 +679,75 @@ if (!failed) {
   console.log(`[blog-index] control-character gate: ${emitted.length} files clean`);
 }
 
-// ── Final gate: gli shard sono dichiarati in manifest.files ───────────────
-//
-// `manifest.json` e' il primo file che il sito legge, ed e' il solo modo che ha
-// di rifiutare un payload troncato PRIMA di renderlo. Copriva pero' solo cio'
-// che `build-api.mjs` scrive: questi shard, che sono la superficie delle liste,
-// ne restavano fuori. Dichiararli qui — e rivalidare subito l'intero manifest
-// contro il disco — li porta sotto la stessa rete degli altri 29 artefatti.
-//
-// Prima il conteggio, che e' la meta' `counts` dello stesso argomento: il set
-// e' un prodotto cartesiano chiuso (sezioni x locali x {capped, full}), quindi
-// una sola voce mancante e' un set troncato, e va rifiutata qui invece di
-// essere pubblicata come "indice piu' corto".
-if (!failed && PUBLISHES_TO_API) {
-  const actual = Object.keys(writtenShards).length;
-  const missing = [...expectedShards].filter((rel) => !Object.hasOwn(writtenShards, rel));
-  if (actual !== expectedShards.size || missing.length > 0) {
-    console.error(`[blog-index] wrote ${actual} shards, expected ${expectedShards.size} — missing ${missing.join(', ') || 'unknown'} — refusing to publish a partial index set`);
-    failed = true;
-  } else {
-    const total = declareApiArtifacts(API_ROOT, writtenShards, { blogIndexShards: actual });
-    console.log(`[blog-index] manifest.files: ${actual} shards declared, ${total} artifacts match on disk`);
-  }
-}
+/**
+ * Validate and commit the complete blog-index release in one manifest write.
+ *
+ * The files are intentionally written before this function: every gate below
+ * validates the bytes on disk, while `declareApiArtifacts()` validates all
+ * existing manifest entries before touching manifest.json. Keeping all new
+ * declarations in one call means a failed discovery gate cannot leave a
+ * manifest that describes only the earlier shards or cover credits.
+ */
+function commitDiscoveryIndexArtifacts() {
+  if (!PUBLISHES_TO_API) return;
 
-// Same net for the cover credits, declared on their own so the closed product
-// above stays the index's: one file per section, or a refusal.
-if (!failed && PUBLISHES_TO_API) {
-  const missing = [...expectedCreditFiles].filter((rel) => !Object.hasOwn(writtenCredits, rel));
-  if (missing.length > 0 || Object.keys(writtenCredits).length !== expectedCreditFiles.size) {
-    console.error(`[blog-index] cover credits: missing ${missing.join(', ') || 'unknown'} — refusing to publish a partial set`);
+  // `manifest.json` is the first file the site reads and the only way it can
+  // reject a truncated payload before rendering it. The shards are a closed
+  // product (sections x locales x {capped, full}); one missing member is a
+  // partial set and must never be declared as a shorter index.
+  const actualShards = Object.keys(writtenShards).length;
+  const missingShards = [...expectedShards].filter((rel) => !Object.hasOwn(writtenShards, rel));
+  if (actualShards !== expectedShards.size || missingShards.length > 0) {
+    console.error(`[blog-index] wrote ${actualShards} shards, expected ${expectedShards.size} — missing ${missingShards.join(', ') || 'unknown'} — refusing to publish a partial index set`);
     failed = true;
-  } else {
-    const total = declareApiArtifacts(API_ROOT, writtenCredits, { imageCreditFiles: expectedCreditFiles.size });
-    console.log(`[blog-index] manifest.files: ${expectedCreditFiles.size} cover-credit files declared, ${total} artifacts match on disk`);
+    return;
   }
-}
 
-// The discovery index is an intentionally valid empty set on a quiet release,
-// so its gate checks contract, commit and cardinality rather than a positive
-// floor. The manifest still declares both its bytes and count for the site pull.
-if (!failed && PUBLISHES_TO_API) {
-  const rel = 'data/discovery-articles.json';
-  if (Object.keys(writtenDiscoveryIndex).length !== 1 || !Object.hasOwn(writtenDiscoveryIndex, rel)) {
+  const missingCredits = [...expectedCreditFiles].filter((rel) => !Object.hasOwn(writtenCredits, rel));
+  if (missingCredits.length > 0 || Object.keys(writtenCredits).length !== expectedCreditFiles.size) {
+    console.error(`[blog-index] cover credits: missing ${missingCredits.join(', ') || 'unknown'} — refusing to publish a partial set`);
+    failed = true;
+    return;
+  }
+
+  // The discovery index is intentionally allowed to be empty on a quiet
+  // release. Its gate checks schema, commit and cardinality instead of a
+  // positive floor, then commits its bytes alongside the other artifacts.
+  const discoveryRel = 'data/discovery-articles.json';
+  if (Object.keys(writtenDiscoveryIndex).length !== 1 || !Object.hasOwn(writtenDiscoveryIndex, discoveryRel)) {
     console.error('[blog-index] discovery index missing — refusing to publish an undescribed surface');
     failed = true;
-  } else {
-    const file = path.join(API_ROOT, rel);
-    const payload = JSON.parse(fs.readFileSync(file, 'utf-8'));
-    if (
-      payload?.schema !== 1
-      || payload.commit !== releaseCommit
-      || !Array.isArray(payload.articles)
-      || payload.count !== payload.articles.length
-    ) {
-      console.error('[blog-index] discovery index has an invalid schema, commit or count — refusing');
-      failed = true;
-    } else {
-      const total = declareApiArtifacts(
-        API_ROOT,
-        writtenDiscoveryIndex,
-        { discoveryArticles: payload.count },
-      );
-      console.log(`[blog-index] manifest.files: discovery index declared, ${total} artifacts match on disk`);
-    }
+    return;
   }
+  const discoveryFile = path.join(API_ROOT, discoveryRel);
+  const discoveryPayload = JSON.parse(fs.readFileSync(discoveryFile, 'utf-8'));
+  if (
+    discoveryPayload?.schema !== 1
+    || discoveryPayload.commit !== releaseCommit
+    || !Array.isArray(discoveryPayload.articles)
+    || discoveryPayload.count !== discoveryPayload.articles.length
+  ) {
+    console.error('[blog-index] discovery index has an invalid schema, commit or count — refusing');
+    failed = true;
+    return;
+  }
+
+  const total = declareApiArtifacts(
+    API_ROOT,
+    { ...writtenShards, ...writtenCredits, ...writtenDiscoveryIndex },
+    {
+      blogIndexShards: actualShards,
+      imageCreditFiles: expectedCreditFiles.size,
+      discoveryArticles: discoveryPayload.count,
+    },
+  );
+  console.log(
+    `[blog-index] manifest.files: ${actualShards} shards, `
+      + `${expectedCreditFiles.size} cover-credit files and discovery index declared, `
+      + `${total} artifacts match on disk`,
+  );
 }
+
+if (!failed && PUBLISHES_TO_API) commitDiscoveryIndexArtifacts();
 
 if (failed) process.exit(1);
