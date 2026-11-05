@@ -102,6 +102,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.sciaffusa-mercato-lavoro-ottobre.title': 'Canton Sciaffusa: 1375 disoccupati iscritti al RAV a fine ottobre',
     'blog.article.sciaffusa-mercato-lavoro-ottobre.excerpt': 'A fine ottobre, nel Canton Sciaffusa, il RAV contava 1375 disoccupati; 2310 persone erano in cerca d\'impiego.',
     'blog.article.sciaffusa-mercato-lavoro-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.quartierplan-ebnat-west-pubblico.title': 'Quartierplan Ebnat West esposto dal 7 al 26 novembre',
+    'blog.article.quartierplan-ebnat-west-pubblico.excerpt': 'Ebnat West sarà sviluppata gradualmente con usi misti. Almeno il 40% dell\'area sarà per attività e servizi.',
+    'blog.article.quartierplan-ebnat-west-pubblico.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

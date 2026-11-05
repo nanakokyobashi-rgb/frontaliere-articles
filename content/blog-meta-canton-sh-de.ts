@@ -102,6 +102,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.sciaffusa-mercato-lavoro-ottobre.title': 'Kanton Schaffhausen: Ende Oktober 1375 beim RAV registrierte Arbeitslose',
     'blog.article.sciaffusa-mercato-lavoro-ottobre.excerpt': 'Ende Oktober waren im Kanton Schaffhausen beim RAV 1375 Arbeitslose registriert; 2310 Personen waren auf Stellensuche.',
     'blog.article.sciaffusa-mercato-lavoro-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.quartierplan-ebnat-west-pubblico.title': 'Quartierplan Ebnat West vom 7. bis 26. November ausgestellt.',
+    'blog.article.quartierplan-ebnat-west-pubblico.excerpt': 'Ebnat West wird schrittweise mit gemischten Nutzungen ausgebaut.',
+    'blog.article.quartierplan-ebnat-west-pubblico.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

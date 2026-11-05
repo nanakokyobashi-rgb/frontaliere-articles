@@ -36,6 +36,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'rheinfall-management-2026': { it: 'rheinfall-management-2026', en: 'cantonal-council-discusses-management-of-the-rhine-falls-vote-looms', de: 'kantonsrat-berat-rheinfall-bewirtschaftung-abstimmung-droht', fr: 'le-conseil-cantonal-debat-de-la-gestion-des-chutes-du-rhin-un-vote-se-profile' },
  'gpk-modifiche-budget-2027': { it: 'gpk-modifiche-budget-2027', en: 'gpk-schaffhausen-2027-budget-changes', de: 'gpk-schaffhausen-budget-2027-aenderung', fr: 'gpk-schaffhouse-budget-2027-modifications' },
  'sciaffusa-mercato-lavoro-ottobre': { it: 'sciaffusa-mercato-lavoro-ottobre', en: 'schaffhausen-job-market-october', de: 'schaffhausen-arbeitsmarkt-oktober', fr: 'schaffhouse-marche-travail-octobre' },
+ 'quartierplan-ebnat-west-pubblico': { it: 'quartierplan-ebnat-west-pubblico', en: 'ebnat-west-district-plan-public', de: 'quartierplan-ebnat-west-oeffentlich', fr: 'plan-quartier-ebnat-west-public' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

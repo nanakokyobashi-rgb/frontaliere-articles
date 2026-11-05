@@ -102,6 +102,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.sciaffusa-mercato-lavoro-ottobre.title': 'Canton Schaffhausen: RAV had 1,375 unemployed at end-Oct',
     'blog.article.sciaffusa-mercato-lavoro-ottobre.excerpt': 'At the end of October, in the Canton of Schaffhausen, the RAV counted 1375 unemployed people; 2310 people were looking for work.',
     'blog.article.sciaffusa-mercato-lavoro-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.quartierplan-ebnat-west-pubblico.title': 'Ebnat West district plan on display from November 7 to 26',
+    'blog.article.quartierplan-ebnat-west-pubblico.excerpt': 'Ebnat West will be developed gradually with mixed uses. At least 40% of the area will be for activities and services.',
+    'blog.article.quartierplan-ebnat-west-pubblico.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

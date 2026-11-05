@@ -102,6 +102,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.sciaffusa-mercato-lavoro-ottobre.title': 'Canton de Schaffhouse : 1375 chômeurs inscrits au RAV fin octobre',
     'blog.article.sciaffusa-mercato-lavoro-ottobre.excerpt': 'Fin octobre, dans le canton de Schaffhouse, le RAV comptait 1375 chômeurs ; 2310 personnes étaient à la recherche d’un emploi.',
     'blog.article.sciaffusa-mercato-lavoro-ottobre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.quartierplan-ebnat-west-pubblico.title': 'Quartierplan Ebnat West exposé du 7 au 26 novembre',
+    'blog.article.quartierplan-ebnat-west-pubblico.excerpt': 'Ebnat West sera développé progressivement avec des usages mixtes.',
+    'blog.article.quartierplan-ebnat-west-pubblico.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

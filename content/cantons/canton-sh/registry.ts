@@ -370,4 +370,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'quartierplan-ebnat-west-pubblico',
+ category: 'novita',
+ date: '2026-11-05T22:32:14.608Z',
+ image: '/images/blog/article-quartierplan-ebnat-west-pubblico.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
