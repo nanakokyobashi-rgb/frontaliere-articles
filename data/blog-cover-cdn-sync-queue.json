@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-mercato-immobiliare-sciaffusa-crescita.webp",
+      "sha256": "552ea87b5bdfeaaf554a24c8e37ef6e1dafbb3d0f12489ff09316326d3740b8d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-mercato-immobiliare-sciaffusa-crescita-480w.webp",
+      "sha256": "3c24432be227e9ad59c1943f5b9ea179cfea6d9b91efebc11296f31d685e599f"
+    }
+  ]
 }
