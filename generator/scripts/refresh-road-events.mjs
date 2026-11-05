@@ -73,9 +73,20 @@ const fail = (msg) => {
 const ISO_INSTANT_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,9})?)?(?:Z|[+-]\d{2}:\d{2})$/;
 const isIso = (v) => typeof v === 'string' && ISO_INSTANT_RE.test(v) && Number.isFinite(Date.parse(v));
 
+const RAW_HTTPS_URL_RE = /^https:\/\/[^\s"<>]+$/;
+
 function isHttpsUrlOrNull(value) {
   if (value === null) return true;
-  if (typeof value !== 'string' || value.length === 0 || value.trim() !== value) return false;
+  if (typeof value !== 'string' || value.trim() !== value || !RAW_HTTPS_URL_RE.test(value)) return false;
+
+  // WHATWG URL accepts empty userinfo (`https://@host`) and normalises several
+  // non-canonical forms. The cache must only contain the raw form the emitter
+  // can publish, and `@` is forbidden anywhere in the URL authority.
+  const remainder = value.slice('https://'.length);
+  const authorityEnd = remainder.search(/[\/?#]/u);
+  const authority = remainder.slice(0, authorityEnd === -1 ? remainder.length : authorityEnd);
+  if (authority.includes('@')) return false;
+
   try {
     const url = new URL(value);
     return url.protocol === 'https:' && Boolean(url.hostname) && !url.username && !url.password;
