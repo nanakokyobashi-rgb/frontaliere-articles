@@ -3387,9 +3387,9 @@
       "sitePath": "scripts/lib/discovery/discoveryPool.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "58f4101443999b81",
-        "corpus": "58f4101443999b81",
-        "alignedAt": "2026-11-05"
+        "site": "6138d9b387163803",
+        "corpus": "6138d9b387163803",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -3437,9 +3437,9 @@
       "sitePath": "scripts/lib/discovery/sources/googleNewsRssSource.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "46f8224054b57971",
-        "corpus": "46f8224054b57971",
-        "alignedAt": "2026-11-05"
+        "site": "f55d14d95a523a5d",
+        "corpus": "f55d14d95a523a5d",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -4585,9 +4585,9 @@
       "path": "scripts/generate-image-thumbnails.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "440e8d4a8ff12f2a",
-        "corpus": "440e8d4a8ff12f2a",
-        "alignedAt": "2026-11-05"
+        "site": "d152b789a50c0186",
+        "corpus": "d152b789a50c0186",
+        "alignedAt": "2026-10-04"
       }
     },
     {

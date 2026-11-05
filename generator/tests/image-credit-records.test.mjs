@@ -459,6 +459,73 @@ test('build-blog-index still publishes when two covers credit one file different
   }
 });
 
+test('build-blog-index ripristina gli artefatti precedenti dopo un errore di commit e il retry committa il set intero', () => {
+  const root = blogIndexTree();
+  try {
+    const releaseCommit = 'atomic-release';
+    const locales = ['it', 'en', 'de', 'fr'];
+    const sectionNames = CORPUS_SECTIONS.map(({ section }) => section);
+    const artifactNames = [
+      ...sectionNames.flatMap((section) => [
+        `image-credits-${section}.json`,
+        ...locales.flatMap((locale) => [
+          `blog-index-${section}-${locale}.json`,
+          `blog-index-${section}-${locale}-full.json`,
+        ]),
+      ]),
+      'image-credits-blog.json',
+      'discovery-articles.json',
+    ];
+    const previousText = 'previous snapshot\n';
+    for (const name of artifactNames) writeRaw(root, `dist/api/data/${name}`, previousText);
+    const previousManifest = {
+      schema: 1,
+      commit: releaseCommit,
+      counts: { previous: 1 },
+      files: Object.fromEntries(artifactNames.map((name) => [`data/${name}`, Buffer.byteLength(previousText)])),
+    };
+    writeRaw(root, 'dist/api/manifest.json', JSON.stringify(previousManifest));
+    writeRaw(root, 'dist/api/slugs.json', JSON.stringify({ commit: releaseCommit, blog: {}, swiss: {} }));
+    writeRaw(root, 'dist/api/articles.json', '[]');
+    writeRaw(root, 'dist/api/swiss-articles.json', '[]');
+
+    const script = path.join(root, 'scripts/build-blog-index.mjs');
+    const failed = spawnSync(process.execPath, [script], {
+      cwd: root,
+      encoding: 'utf8',
+      env: { ...process.env, BLOG_INDEX_TEST_FAIL_AFTER_ARTIFACT: '1' },
+    });
+    assert.equal(failed.status, 1, failed.stdout + failed.stderr);
+    assert.match(failed.stderr, /test failpoint after 1 committed artifact/);
+    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(root, 'dist/api/manifest.json'), 'utf8')), previousManifest);
+    for (const name of artifactNames) {
+      assert.equal(fs.readFileSync(path.join(root, 'dist/api/data', name), 'utf8'), previousText, name);
+    }
+    assert.deepEqual(
+      fs.readdirSync(path.join(root, 'dist/api')).filter((name) => /-(?:stage|rollback)-/u.test(name)),
+      [],
+      'un errore dopo il primo rename non deve lasciare staging riutilizzabile',
+    );
+
+    const retryEnv = { ...process.env };
+    delete retryEnv.BLOG_INDEX_TEST_FAIL_AFTER_ARTIFACT;
+    const retried = spawnSync(process.execPath, [script], { cwd: root, encoding: 'utf8', env: retryEnv });
+    assert.equal(retried.status, 0, retried.stdout + retried.stderr);
+    const manifest = JSON.parse(fs.readFileSync(path.join(root, 'dist/api/manifest.json'), 'utf8'));
+    const discovery = JSON.parse(fs.readFileSync(path.join(root, 'dist/api/data/discovery-articles.json'), 'utf8'));
+    assert.equal(manifest.commit, releaseCommit);
+    assert.equal(manifest.counts.blogIndexShards, sectionNames.length * locales.length * 2);
+    assert.equal(manifest.counts.imageCreditFiles, sectionNames.length + 1);
+    assert.equal(manifest.counts.discoveryArticles, discovery.count);
+    for (const name of artifactNames) {
+      const rel = `data/${name}`;
+      assert.equal(manifest.files[rel], fs.statSync(path.join(root, 'dist/api', rel)).size, rel);
+    }
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('publish-api.yml uploads and purges credits and discovery index, and republishes when their builders change', () => {
   const wf = fs.readFileSync(path.join(REPO, '.github/workflows/publish-api.yml'), 'utf-8');
   assert.match(wf, /for f in dist\/api\/data\/blog-index-\*\.json dist\/api\/data\/image-credits-\*\.json dist\/api\/data\/discovery-articles\.json; do\n\s+\[ -s "\$f" \] \|\| continue\n\s+bash scripts\/lib\/upload-cdn-file\.sh "\$f" "data\/\$\(basename "\$f"\)" "public,max-age=600"\n\s+urls\+=\("https:\/\/cdn\.frontaliereticino\.ch\/data\/\$\(basename "\$f"\)"\)/);
