@@ -5,7 +5,7 @@
  *
  * `host/shell-contract-fingerprint.json` registra lo SHA-256 della metà scalare
  * del contratto, e i due repo lo asseriscono entrambi: è il gate che tiene
- * insieme le due metà. Ma uno dei 22 scalari — `cdnPreconnectHint` — non è un
+ * insieme le due metà. Ma uno dei 23 scalari — `cdnPreconnectHint` — non è un
  * letterale: il getter del bootstrap lo risolve da `process.env.ASSET_CDN`
  * quando il contratto viene letto. Il digest quindi dipende dalla sorgente E
  * dall'ambiente presente al momento della lettura:

@@ -13,9 +13,10 @@
  * place of its static GA4 page_view for 2 h 40 min.
  *
  * This repository can publish exactly the files whose content it holds: today
- * the GA4 producer and derived byte-exact recovery/Ads/Partnerize/Meta Pixel snapshots exported by
- * scripts/ci/export-third-party-shell-assets.ts on the site. New HTML names their
- * hashes; the site's stable aliases remain available for older documents.
+ * the GA4 producer and derived byte-exact site-support, AdSense, Partnerize and
+ * Meta Pixel snapshots exported by scripts/ci/export-third-party-shell-assets.ts
+ * on the site. New HTML names their hashes; the site's stable aliases remain
+ * available for older documents.
  * The decision itself — ask the CDN, read R2 only for a file it did not serve,
  * upload what R2 does not hold, never replace an object, stop when it cannot
  * tell — lives in scripts/lib/cdn-shell-assets.mjs, an identical twin of the
@@ -33,14 +34,14 @@ import { createHash } from 'node:crypto';
 import { URL as NodeURL } from 'node:url';
 import { fileURLToPath } from 'node:url';
 
-import { AD_RECOVERY_FILENAME, ADSENSE_LOADER_FILENAME, META_PIXEL_LOADER_FILENAME, PARTNERIZE_TAG_FILENAME, GTAG_INIT_CONTENT, GTAG_INIT_VERSIONED_FILENAME } from '../../host/constants.ts';
+import { AD_RECOVERY_VERSIONED_FILENAME, ADSENSE_LOADER_FILENAME, META_PIXEL_LOADER_FILENAME, PARTNERIZE_TAG_FILENAME, GTAG_INIT_CONTENT, GTAG_INIT_VERSIONED_FILENAME } from '../../host/constants.ts';
 import { ensureCdnShellAssets, shellAssetsFromStaticScripts } from '../lib/cdn-shell-assets.mjs';
 
 /** [name, content] of every shell file whose bytes `host/` holds. */
 export function hostShellFiles(snapshot = JSON.parse(readFileSync(new NodeURL('../../host/third-party-shell-assets.json', import.meta.url), 'utf8'))) {
   // Bind availability to the very filenames used by the HTML, not to whatever
   // subset or alternate names an otherwise hash-valid snapshot happens to hold.
-  const required = new Set([AD_RECOVERY_FILENAME, ADSENSE_LOADER_FILENAME, PARTNERIZE_TAG_FILENAME, META_PIXEL_LOADER_FILENAME]);
+  const required = new Set([AD_RECOVERY_VERSIONED_FILENAME, ADSENSE_LOADER_FILENAME, PARTNERIZE_TAG_FILENAME, META_PIXEL_LOADER_FILENAME]);
   if (!Array.isArray(snapshot?.assets)) throw new Error('Transported asset set mismatch');
   const names = new Set(snapshot.assets.map((asset) => asset?.name));
   if (snapshot.assets.length !== required.size || names.size !== required.size || [...required].some((name) => !names.has(name))) {

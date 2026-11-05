@@ -191,15 +191,15 @@ export const PARTNERIZE_TAG_SNIPPET = `<script>${initialDocumentGuard.content}</
  */
 export const ADSENSE_CLIENT_ID = 'ca-pub-8628054934855353';
 
-export const ADSENSE_LOADER_FILENAME = 'adsense-loader-104c45232c43.js';
+export const AD_RECOVERY_VERSIONED_FILENAME = 'site-support-fc1145f96a94.js';
+export const AD_RECOVERY_SNIPPET = `<script defer data-cfasync="false" src="/assets/${AD_RECOVERY_VERSIONED_FILENAME}"></script>`;
 
-export const AD_RECOVERY_FILENAME = 'site-support-50cb0db54969.js';
-export const AD_RECOVERY_SNIPPET = `<script defer data-cfasync="false" src="/assets/${AD_RECOVERY_FILENAME}"></script>`;
+export const ADSENSE_LOADER_FILENAME = 'adsense-loader-104c45232c43.js';
 
 export const ADSENSE_LAZY_LOADER = `<script defer src="/assets/${ADSENSE_LOADER_FILENAME}"></script>`;
 
 export const META_PIXEL_LOADER_FILENAME = 'meta-pixel-base-code-b5078da79aec.js';
-export const META_PIXEL_SNIPPET = `<!-- Meta Pixel Code -->
+export const META_PIXEL_BASE_CODE = `<!-- Meta Pixel Code -->
 <script defer src="/assets/${META_PIXEL_LOADER_FILENAME}"></script>
 <!-- End Meta Pixel Code -->`;
 
