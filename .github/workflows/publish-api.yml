@@ -21,6 +21,10 @@ on:
     branches: [main]
     paths:
       - 'content/**'
+      # Discovery attribution sidecars feed a public, privacy-limited index.
+      # Changes to them must republish even when article content is unchanged.
+      - 'data/blog-articles/**'
+      - 'data/swiss-articles/**'
       - 'scripts/ci/check-blog-body-links.mjs'
       - 'scripts/lib/article-link-contract.mjs'
       - 'generator/scripts/lib/article-meta-block.mjs'
@@ -152,6 +156,7 @@ on:
       # either lands, republishes nothing, and the served surface keeps being
       # built by the old code until an unrelated corpus change happens along.
       - 'scripts/build-blog-index.mjs'
+      - 'scripts/lib/discovery-articles-index.mjs'
       - 'scripts/lib/registry-image-reader.mjs'
       - 'scripts/lib/ts-literals.mjs'
       - 'scripts/lib/sanitize-control-chars.mjs'
@@ -861,6 +866,27 @@ jobs:
             echo "::error::news-ticker-live.json carries only $ticker articles — refusing to publish"
             exit 1
           fi
+
+          # Discovery attribution is published only as a minimal, localized
+          # projection. It may be empty, but its bytes and count must match the
+          # same manifest commit the site will pull.
+          test -s dist/api/data/discovery-articles.json || {
+            echo "::error::data/discovery-articles.json missing or empty"; exit 1; }
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const artifact = 'dist/api/data/discovery-articles.json';
+          const index = JSON.parse(fs.readFileSync(artifact, 'utf8'));
+          const manifest = JSON.parse(fs.readFileSync('dist/api/manifest.json', 'utf8'));
+          const bytes = fs.statSync(artifact).size;
+          if (index.schema !== 1 || index.commit !== manifest.commit
+            || !Array.isArray(index.articles) || index.count !== index.articles.length
+            || manifest.counts?.discoveryArticles !== index.count
+            || manifest.files?.['data/discovery-articles.json'] !== bytes) {
+            console.error('::error::data/discovery-articles.json does not match its manifest contract');
+            process.exit(1);
+          }
+          console.log(`discovery articles: ${index.count}`);
+          NODE
 
           # ── Migration artifacts (docs §7 in the site repo) ──────────────
           #

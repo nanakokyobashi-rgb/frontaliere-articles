@@ -60,7 +60,9 @@
  *        the full one is what stops the cap being a cliff — see the slice below.
  *        <out>/image-credits-<section>.json             the section's Commons credits
  *        <out>/image-credits-blog.json                  all reader-facing cover records
- *        (3 files)
+ *        <out>/discovery-articles.json                  published articles with a
+ *                                                       normalized discovery provider
+ *        (4 files)
  */
 
 import '../host/cantonSectionsBootstrap.mjs';
@@ -90,7 +92,9 @@ import {
 // nessun consumer puo' verificare prima di usarla.
 import { declareApiArtifacts, byteSize } from './lib/api-manifest.mjs';
 import { buildImageCreditsIndex, corpusCreditReader } from './lib/image-credit-records.mjs';
-import { CORPUS_SECTIONS } from './lib/corpus-sections.mjs';
+import { CORPUS_SECTIONS, PUBLISHED_API_SECTIONS } from './lib/corpus-sections.mjs';
+import { SITE, SECTION_PATHS } from './lib/build-sitemap.mjs';
+import { buildDiscoveryArticlesIndex } from './lib/discovery-articles-index.mjs';
 import {
   BLOG_IMAGE_CREDITS_AGGREGATE,
   buildBlogImageCreditsAggregate,
@@ -114,11 +118,21 @@ const LOCALES = ['it', 'en', 'de', 'fr'];
 // prefisso meta vengono da `scripts/lib/corpus-sections.mjs`, che li deriva da
 // `ARTICLE_SECTION_CORE`. Con le due sezioni storiche gli shard sono gli stessi
 // di sempre (`blog-index-frontaliere-*`, `blog-index-svizzera-*`).
+// These are the two sidecar locations `create-article` uses for the discovery
+// capable section kinds (same paths declared in `article-surfaces.mjs`).
+const DISCOVERY_SIDECAR_DIR_BY_KIND = Object.freeze({
+  frontaliere: 'data/blog-articles',
+  national: 'data/swiss-articles',
+});
 const SECTIONS = CORPUS_SECTIONS.map((section) => ({
   name: section.section,
   registry: section.registryFile,
   metaPrefix: path.basename(section.metaPrefix),
+  // Discovery attribution is currently written by the two non-canton article
+  // generators; canton sidecars have a separate editorial pipeline.
+  sidecarDir: DISCOVERY_SIDECAR_DIR_BY_KIND[section.kind] ?? null,
 }));
+const PUBLISHED_SECTIONS = new Map(PUBLISHED_API_SECTIONS.map((section) => [section.section, section.api]));
 const expectedShards = new Set(
   SECTIONS.flatMap((section) => LOCALES.flatMap((locale) => [
     path.relative(API_ROOT, path.join(OUT, `blog-index-${section.name}-${locale}.json`)),
@@ -133,6 +147,8 @@ const expectedCreditFiles = new Set(
   ],
 );
 const writtenCredits = {};
+/** `{ <path relativo a dist/api>: byte UTF-8 }`, per l'indice discovery. */
+const writtenDiscoveryIndex = {};
 
 /**
  * The release the credits belong to: `manifest.json`'s `commit`, written by
@@ -289,6 +305,79 @@ function readMeta(metaPrefix, locale) {
   return out;
 }
 
+/** Read private attribution only for ids already emitted by build-api.mjs. */
+function readDiscoverySidecars(section, registry) {
+  const sidecars = new Map();
+  const sidecarDir = section.sidecarDir ? path.join(ROOT, section.sidecarDir) : null;
+  if (!sidecarDir || !fs.existsSync(sidecarDir)) return sidecars;
+
+  for (const article of registry) {
+    const id = article?.id;
+    if (typeof id !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,180}$/u.test(id)) continue;
+    const file = path.join(sidecarDir, `${id}.json`);
+    if (!fs.existsSync(file)) continue;
+    try {
+      const sidecar = JSON.parse(fs.readFileSync(file, 'utf-8'));
+      if (sidecar && typeof sidecar === 'object' && !Array.isArray(sidecar) && sidecar.id === id) {
+        sidecars.set(id, sidecar);
+      }
+    } catch (err) {
+      console.warn(`[blog-index] discovery sidecar ${path.relative(ROOT, file)} unreadable: ${err.message}`);
+    }
+  }
+  return sidecars;
+}
+
+/**
+ * Build inputs from the already-written HTTP registry and slug artifacts.
+ * A sidecar cannot introduce an id that the current manifest does not publish.
+ */
+function prepareDiscoveryIndexSections() {
+  const manifest = JSON.parse(fs.readFileSync(path.join(API_ROOT, 'manifest.json'), 'utf-8'));
+  if (!releaseCommit || manifest.commit !== releaseCommit) {
+    throw new Error('[blog-index] manifest commit changed before discovery index — refusing mixed release');
+  }
+  const slugsDoc = JSON.parse(fs.readFileSync(path.join(API_ROOT, 'slugs.json'), 'utf-8'));
+  if (slugsDoc.commit !== manifest.commit) {
+    throw new Error('[blog-index] slugs.json does not match the manifest commit — refusing discovery index');
+  }
+
+  return preparedSections.flatMap(({ section, registry, metaByLocale }) => {
+    if (!section.sidecarDir) return [];
+    const api = PUBLISHED_SECTIONS.get(section.name);
+    if (!api) return [];
+    const registryFile = path.join(API_ROOT, api.registry);
+    const publicRows = JSON.parse(fs.readFileSync(registryFile, 'utf-8'));
+    if (!Array.isArray(publicRows)) {
+      throw new Error(`[blog-index] ${api.registry} is not an array — refusing discovery index`);
+    }
+    const publishedIds = new Set(publicRows
+      .filter((row) => row?.commit === manifest.commit && (!api.family || row.section === section.name))
+      .map((row) => row?.id)
+      .filter((id) => typeof id === 'string'));
+    const publishedRegistry = registry.filter((article) => publishedIds.has(article.id));
+    const sectionSlugRows = api.family
+      ? slugsDoc[api.slugsKey]?.[section.name]
+      : slugsDoc[api.slugsKey];
+    const sectionFallbackReasons = api.family
+      ? slugsDoc.fallbackReasons?.[api.slugsKey]?.[section.name]
+      : slugsDoc.fallbackReasons?.[api.slugsKey];
+    if (!sectionSlugRows || typeof sectionSlugRows !== 'object') {
+      throw new Error(`[blog-index] slugs.json has no ${api.slugsKey} map for ${section.name}`);
+    }
+
+    return [{
+      name: section.name,
+      registry: publishedRegistry,
+      sidecars: readDiscoverySidecars(section, publishedRegistry),
+      paths: SECTION_PATHS[section.name],
+      slugMap: sectionSlugRows,
+      fallbackReasons: sectionFallbackReasons || {},
+      metaByLocale,
+    }];
+  });
+}
+
 let failed = false;
 const preparedSections = [];
 
@@ -332,8 +421,10 @@ for (const section of SECTIONS) {
 
   const itMeta = readMeta(section.metaPrefix, 'it');
   const locales = [];
+  const metaByLocale = { it: itMeta };
   for (const locale of LOCALES) {
     const meta = locale === 'it' ? itMeta : readMeta(section.metaPrefix, locale);
+    metaByLocale[locale] = meta;
     const entries = [];
     for (const a of registry) {
       const title = meta.get(a.id)?.title ?? itMeta.get(a.id)?.title;
@@ -377,7 +468,7 @@ for (const section of SECTIONS) {
   for (const conflict of credits.conflicts) {
     creditWarnings.push(`${section.name}: ${conflict} — both covers carry the most recent read of the file until the records agree`);
   }
-  preparedSections.push({ section, locales, credits: credits.payload });
+  preparedSections.push({ section, registry, locales, metaByLocale, credits: credits.payload });
 }
 for (const message of creditWarnings) console.warn('::warning::' + message);
 
@@ -471,6 +562,24 @@ if (!failed) {
       + `${Object.keys(aggregate.editorial).length} editorial, `
       + `${Object.keys(aggregate.covers).length} Commons covers`,
   );
+
+  // Discovery attribution stays private in each article sidecar. Publish only
+  // a small allowlisted projection, and only for ids the registry API above
+  // already published in this same manifest commit.
+  if (PUBLISHES_TO_API) {
+    const discovery = buildDiscoveryArticlesIndex({
+      commit: releaseCommit,
+      generatedAt: new Date().toISOString(),
+      sections: prepareDiscoveryIndexSections(),
+    });
+    const discoveryFile = path.join(OUT, 'discovery-articles.json');
+    const cleanDiscovery = sanitizeDeep(discovery);
+    reportStrippedControlCharsDeep(discoveryFile, discovery, cleanDiscovery);
+    const discoveryText = JSON.stringify(cleanDiscovery) + '\n';
+    fs.writeFileSync(discoveryFile, discoveryText);
+    writtenDiscoveryIndex[path.relative(API_ROOT, discoveryFile)] = byteSize(discoveryText);
+    console.log(`[blog-index] discovery-articles.json — ${discovery.count} published articles`);
+  }
 }
 
 // ── Final gate: no control character leaves this script either ────────────
@@ -529,6 +638,36 @@ if (!failed && PUBLISHES_TO_API) {
   } else {
     const total = declareApiArtifacts(API_ROOT, writtenCredits, { imageCreditFiles: expectedCreditFiles.size });
     console.log(`[blog-index] manifest.files: ${expectedCreditFiles.size} cover-credit files declared, ${total} artifacts match on disk`);
+  }
+}
+
+// The discovery index is an intentionally valid empty set on a quiet release,
+// so its gate checks contract, commit and cardinality rather than a positive
+// floor. The manifest still declares both its bytes and count for the site pull.
+if (!failed && PUBLISHES_TO_API) {
+  const rel = 'data/discovery-articles.json';
+  if (Object.keys(writtenDiscoveryIndex).length !== 1 || !Object.hasOwn(writtenDiscoveryIndex, rel)) {
+    console.error('[blog-index] discovery index missing — refusing to publish an undescribed surface');
+    failed = true;
+  } else {
+    const file = path.join(API_ROOT, rel);
+    const payload = JSON.parse(fs.readFileSync(file, 'utf-8'));
+    if (
+      payload?.schema !== 1
+      || payload.commit !== releaseCommit
+      || !Array.isArray(payload.articles)
+      || payload.count !== payload.articles.length
+    ) {
+      console.error('[blog-index] discovery index has an invalid schema, commit or count — refusing');
+      failed = true;
+    } else {
+      const total = declareApiArtifacts(
+        API_ROOT,
+        writtenDiscoveryIndex,
+        { discoveryArticles: payload.count },
+      );
+      console.log(`[blog-index] manifest.files: discovery index declared, ${total} artifacts match on disk`);
+    }
   }
 }
 
