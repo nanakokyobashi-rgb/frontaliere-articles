@@ -6936,7 +6936,7 @@
       "reason": "Proiezione publisher che legge registry e sidecar del corpus e pubblica l’indice localizzato degli articoli discovery. Il sito consuma l’artefatto HTTP e non importa questo modulo.",
       "baseline": {
         "site": null,
-        "corpus": "79d274c6bff74fb9",
+        "corpus": "71390bf2e773d839",
         "alignedAt": "2026-11-05"
       }
     }
