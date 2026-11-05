@@ -1,9 +1,11 @@
-# `tests.yml` disables actionlint's generic ShellCheck pass because generated
-# workflow scripts embed JavaScript/template bodies that it parses as shell.
-# GitHub Actions supports `concurrency.queue` (`single` or `max`), but the
-# required actionlint v1.7.12 check does not model that schema field yet.
-# Ignore only that diagnostic on the three workflows that use the documented
-# queue policy; actionlint still checks workflow syntax and expressions.
+# The required gate checks syntax and expressions on all tracked workflows,
+# then runs ShellCheck-enabled actionlint on workflows changed by the PR.
+# Generated workflows can contain embedded JavaScript/template bodies that
+# ShellCheck parses as shell, so untouched workflow copies stay in the first
+# pass while edited workflows receive the active shell check.
+# GitHub Actions supports `concurrency.queue` (`single` or `max`), but pinned
+# actionlint v1.7.12 does not model that schema field yet. Ignore only that
+# diagnostic on the three workflows that use the documented queue policy.
 paths:
   .github/workflows/translate-queue-recovery-watchdog.yml:
     ignore:

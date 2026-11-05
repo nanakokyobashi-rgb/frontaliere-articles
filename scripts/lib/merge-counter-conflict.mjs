@@ -4,7 +4,7 @@
  * CONTATORE sommando gli incrementi dei due lati, invece di sceglierne uno.
  *
  * Uso (durante un rebase fermo su un conflitto, dalla radice del repo):
- *   node scripts/lib/merge-counter-conflict.mjs <path>:<campo>
+ *   node scripts/lib/merge-counter-conflict.mjs <path>:<campo[,campo]>
  *
  * Exit 0 = il file in working tree e' stato riscritto col valore fuso (il
  *          chiamante puo' fare `git add`). Exit 1 = fusione non dimostrabile:
@@ -31,6 +31,10 @@
  *     upstream nel frattempo, che con molti scrittori paralleli sono piu' d'uno.
  *     Entrambe fanno derivare la rotazione 1-su-N che i contatori governano
  *     (`shouldUseExperimentalTier`, `shouldForceEvergreen`, `decideSlot`).
+ *   · `discovery-attempt-state.json` ha coppie per sezione: `ProvenAttempts`
+ *     somma gli incrementi, mentre `DiscoveryResetAt` e' un watermark assoluto.
+ *     La coppia si fonde insieme e rifiuta uno stato in cui il watermark supera
+ *     il contatore, invece di sommare entrambi i campi indipendentemente.
  *
  * La risoluzione corretta e' il merge a tre vie di un contatore:
  *
@@ -71,8 +75,8 @@ function parseCounterDoc(text, field, label) {
     return { error: `${label}: non e' un oggetto JSON` };
   }
   const value = doc[field];
-  if (!Number.isInteger(value) || value < 0) {
-    return { error: `${label}: il campo '${field}' non e' un intero non negativo (${JSON.stringify(value)})` };
+  if (!Number.isSafeInteger(value) || value < 0) {
+    return { error: `${label}: il campo '${field}' non e' un intero sicuro non negativo (${JSON.stringify(value)})` };
   }
   return { doc, value };
 }
@@ -81,11 +85,18 @@ function parseCounterDoc(text, field, label) {
  * Fonde un contatore a tre vie. Pura: i tre lati arrivano come testo.
  *
  * @param {{base: string|null, upstream: string, replayed: string, field: string}} sides
+ *        `field` can be a single counter or a supported discovery-counter pair;
  *        `base` null = file assente nella base comune (add/add).
- * @returns {{ok: true, merged: string, value: number, rule: string}|{ok: false, reason: string}}
+ * @returns {{ok: true, merged: string, value?: number, values: Record<string, number>, rule: string}|{ok: false, reason: string}}
  */
 export function mergeCounterDocuments({ base, upstream, replayed, field }) {
   if (typeof field !== 'string' || !field) return { ok: false, reason: 'campo contatore non indicato' };
+  const fields = parseCounterFields(field);
+  if (fields.error) return { ok: false, reason: fields.error };
+  if (fields.kind === 'discovery-attempt-pair') {
+    return mergeDiscoveryAttemptPairDocuments({ base, upstream, replayed, fields });
+  }
+
   const up = parseCounterDoc(upstream, field, 'upstream');
   if (up.error) return { ok: false, reason: up.error };
   const mine = parseCounterDoc(replayed, field, 'commit rigiocato');
@@ -106,18 +117,117 @@ export function mergeCounterDocuments({ base, upstream, replayed, field }) {
     value = up.value + delta;
     rule = `${up.value} + (${mine.value} − ${b.value})`;
   }
+  if (!Number.isSafeInteger(value)) {
+    return { ok: false, reason: `il merge del contatore '${field}' supera gli interi sicuri` };
+  }
 
   // Lo spread conserva l'ordine delle chiavi di upstream e la riassegnazione
   // tiene il campo al suo posto: il diff contro upstream e' una riga sola.
   const merged = `${JSON.stringify({ ...up.doc, [field]: value }, null, 2)}\n`;
-  return { ok: true, merged, value, rule };
+  return { ok: true, merged, value, values: { [field]: value }, rule };
+}
+
+/**
+ * Parses either one counter field or the paired recovery state
+ * `<section>ProvenAttempts,<section>DiscoveryResetAt`.
+ */
+function parseCounterFields(field) {
+  const names = field.split(',');
+  if (names.length === 1 && names[0]) return { kind: 'single', field: names[0] };
+  if (names.length !== 2 || names.some((name) => !name)) {
+    return { error: 'spec contatore non valida: atteso un campo o una coppia discovery' };
+  }
+  const proven = /^(frontaliere|svizzera)ProvenAttempts$/.exec(names[0]);
+  const resetAt = /^(frontaliere|svizzera)DiscoveryResetAt$/.exec(names[1]);
+  if (!proven || !resetAt || proven[1] !== resetAt[1]) {
+    return { error: 'coppia discovery non valida: servono ProvenAttempts e DiscoveryResetAt della stessa sezione' };
+  }
+  return { kind: 'discovery-attempt-pair', provenField: names[0], resetAtField: names[1] };
+}
+
+function parseCounterPairDoc(text, fields, label) {
+  let doc;
+  try {
+    doc = JSON.parse(text);
+  } catch (e) {
+    return { error: `${label}: JSON illeggibile (${e.message})` };
+  }
+  if (!doc || typeof doc !== 'object' || Array.isArray(doc)) {
+    return { error: `${label}: non e' un oggetto JSON` };
+  }
+  const proven = doc[fields.provenField];
+  const resetAt = doc[fields.resetAtField];
+  if (!Number.isSafeInteger(proven) || proven < 0) {
+    return { error: `${label}: il campo '${fields.provenField}' non e' un intero sicuro non negativo` };
+  }
+  if (!Number.isSafeInteger(resetAt) || resetAt < 0) {
+    return { error: `${label}: il campo '${fields.resetAtField}' non e' un intero sicuro non negativo` };
+  }
+  if (resetAt > proven) {
+    return { error: `${label}: il watermark discovery supera ProvenAttempts` };
+  }
+  return { doc, proven, resetAt };
+}
+
+function mergeDiscoveryAttemptPairDocuments({ base, upstream, replayed, fields }) {
+  const up = parseCounterPairDoc(upstream, fields, 'upstream');
+  if (up.error) return { ok: false, reason: up.error };
+  const mine = parseCounterPairDoc(replayed, fields, 'commit rigiocato');
+  if (mine.error) return { ok: false, reason: mine.error };
+  const b = base == null
+    ? { doc: {}, proven: 0, resetAt: 0 }
+    : parseCounterPairDoc(base, fields, 'base');
+  if (b.error) return { ok: false, reason: b.error };
+
+  const delta = mine.proven - b.proven;
+  if (delta < 0 || up.proven < b.proven) {
+    return { ok: false, reason: 'ProvenAttempts non monotono: un lato ha decrementato il contatore' };
+  }
+  if (mine.resetAt < b.resetAt || up.resetAt < b.resetAt) {
+    return { ok: false, reason: 'DiscoveryResetAt non monotono: un lato ha decrementato il watermark' };
+  }
+
+  const proven = up.proven + delta;
+  if (!Number.isSafeInteger(proven)) {
+    return { ok: false, reason: 'il merge di ProvenAttempts supera gli interi sicuri' };
+  }
+  // The reset marker is an absolute watermark, not an additive counter. Taking
+  // the latest value from either branch avoids counting the same reset twice.
+  // If both branches end at their own watermark, both have completed a reset
+  // after their local attempts. Since the final reset in the merged order must
+  // follow every branch's completed reset, it clears the combined attempts.
+  const bothBranchesReset = up.resetAt === up.proven && mine.resetAt === mine.proven;
+  const resetAt = bothBranchesReset
+    ? proven
+    : Math.max(b.resetAt, up.resetAt, mine.resetAt);
+  if (resetAt > proven) {
+    return { ok: false, reason: 'il merge della coppia discovery violerebbe resetAt <= provenAttempts' };
+  }
+  const values = { [fields.provenField]: proven, [fields.resetAtField]: resetAt };
+  const merged = `${JSON.stringify({ ...up.doc, ...values }, null, 2)}\n`;
+  const resetRule = bothBranchesReset
+    ? `DiscoveryResetAt=${proven} (entrambi i rami terminano con reset)`
+    : `DiscoveryResetAt=max(${b.resetAt}, ${up.resetAt}, ${mine.resetAt})`;
+  const rule = `ProvenAttempts=${up.proven} + (${mine.proven} − ${b.proven}); ${resetRule}`;
+  return { ok: true, merged, values, rule };
 }
 
 /** Splitta `<path>:<campo>` sull'ULTIMO `:`. */
 export function parseCounterSpec(spec) {
-  const at = String(spec ?? '').lastIndexOf(':');
-  if (at <= 0 || at === spec.length - 1) return null;
-  return { path: spec.slice(0, at), field: spec.slice(at + 1) };
+  const text = String(spec ?? '');
+  const at = text.lastIndexOf(':');
+  if (at <= 0 || at === text.length - 1) return null;
+  const path = text.slice(0, at);
+  const field = text.slice(at + 1);
+  if (parseCounterFields(field).error) return null;
+  return { path, field };
+}
+
+function parseWorkingCounterDoc(text, field, label) {
+  const fields = parseCounterFields(field);
+  if (fields.error) return { error: fields.error };
+  if (fields.kind === 'discovery-attempt-pair') return parseCounterPairDoc(text, fields, label);
+  return parseCounterDoc(text, fields.field, label);
 }
 
 /** Il blob di uno stage dell'indice, o null se quello stage non c'e'. */
@@ -217,18 +327,20 @@ export function reconcileCounters(preRebase, upstream, specs, { log = console.lo
       } catch {
         throw reconciliationFailure('working-tree-read');
       }
-      const parsed = parseCounterDoc(text, spec.field, 'working tree');
+      const parsed = parseWorkingCounterDoc(text, spec.field, 'working tree');
       if (parsed.error) throw reconciliationFailure('working-tree-counter');
       current = parsed.doc;
       currentDocs.set(spec.path, current);
       originalTexts.set(spec.path, text);
-    } else if (parseCounterDoc(JSON.stringify(current), spec.field, 'working tree').error) {
+    } else if (parseWorkingCounterDoc(JSON.stringify(current), spec.field, 'working tree').error) {
       throw reconciliationFailure('working-tree-counter');
     }
 
-    if (current[spec.field] !== result.value) {
-      current[spec.field] = result.value;
-      rewritten.add(spec.path);
+    for (const [field, value] of Object.entries(result.values ?? { [spec.field]: result.value })) {
+      if (current[field] !== value) {
+        current[field] = value;
+        rewritten.add(spec.path);
+      }
     }
   }
 
@@ -258,7 +370,7 @@ function main(argv) {
   if (argv[0] === '--reconcile') {
     const [, preRebase, upstream, ...specs] = argv;
     if (!preRebase || !upstream || specs.length === 0) {
-      console.error('uso: merge-counter-conflict.mjs --reconcile <pre-rebase> <upstream> <path>:<campo>...');
+      console.error('uso: merge-counter-conflict.mjs --reconcile <pre-rebase> <upstream> <path>:<campo[,campo]>...');
       return 2;
     }
     try {
@@ -270,12 +382,12 @@ function main(argv) {
     }
   }
   if (argv.length !== 1) {
-    console.error('uso: merge-counter-conflict.mjs <path>:<campo>');
+    console.error('uso: merge-counter-conflict.mjs <path>:<campo[,campo]>');
     return 2;
   }
   const spec = parseCounterSpec(argv[0]);
   if (!spec) {
-    console.error(`uso: merge-counter-conflict.mjs <path>:<campo> (ricevuto '${argv[0]}')`);
+    console.error(`uso: merge-counter-conflict.mjs <path>:<campo[,campo]> (ricevuto '${argv[0]}')`);
     return 2;
   }
   const upstream = readStage(2, spec.path);
@@ -290,7 +402,10 @@ function main(argv) {
     return 1;
   }
   writeFileSync(spec.path, result.merged);
-  console.log(`merge contatore: ${spec.path} ${spec.field}=${result.value} (${result.rule})`);
+  const values = Object.entries(result.values ?? { [spec.field]: result.value })
+    .map(([field, value]) => `${field}=${value}`)
+    .join(', ');
+  console.log(`merge contatore: ${spec.path} ${values} (${result.rule})`);
   return 0;
 }
 

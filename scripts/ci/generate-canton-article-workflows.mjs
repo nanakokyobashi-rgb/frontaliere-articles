@@ -342,11 +342,16 @@ export const CORE_REPLACEMENTS = [
   {
     id: 'rebase: i contatori discovery non si applicano al core cantonale',
     count: 1,
-    find: '              --merge-counter data/discovery-attempt-state.json:frontaliereProvenAttempts \\\n'
-      + '              --merge-counter data/discovery-attempt-state.json:frontaliereDiscoveryResetAt \\\n'
-      + '              --merge-counter data/discovery-attempt-state.json:svizzeraProvenAttempts \\\n'
-      + '              --merge-counter data/discovery-attempt-state.json:svizzeraDiscoveryResetAt \\\n',
+    find: '              --merge-counter data/discovery-attempt-state.json:frontaliereProvenAttempts,frontaliereDiscoveryResetAt \\\n'
+      + '              --merge-counter data/discovery-attempt-state.json:svizzeraProvenAttempts,svizzeraDiscoveryResetAt \\\n',
     replace: '',
+  },
+  {
+    id: 'lint: ShellCheck vede la chiamata indiretta del trap EXIT',
+    count: 1,
+    find: '          stall_atexit() {\n',
+    replace: '          # shellcheck disable=SC2317 # chiamata dal trap EXIT, indiretta per ShellCheck.\n'
+      + '          stall_atexit() {\n',
   },
 ];
 

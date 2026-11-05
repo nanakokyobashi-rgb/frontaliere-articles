@@ -138,10 +138,15 @@ test('the active generator records terminal attempts and workflow merges every c
   );
   assert.match(cooperativeNoReportBranch, /node generator\/scripts\/record-discovery-attempt\.mjs/);
   assert.match(cooperativeNoReportBranch, /git add -- "\$recovery_state"/);
-  for (const field of DISCOVERY_ATTEMPT_COUNTER_FIELDS) {
+  for (const section of ['frontaliere', 'svizzera']) {
+    const pair = `${section}ProvenAttempts,${section}DiscoveryResetAt`;
     assert.ok(
-      workflow.includes(`--merge-counter data/discovery-attempt-state.json:${field}`),
-      `missing conflict-safe merge declaration for ${field}`,
+      workflow.includes(`--merge-counter data/discovery-attempt-state.json:${pair}`),
+      `missing atomic conflict-safe merge declaration for ${pair}`,
     );
+  }
+  for (const field of DISCOVERY_ATTEMPT_COUNTER_FIELDS) {
+    assert.doesNotMatch(workflow, new RegExp(`--merge-counter data/discovery-attempt-state\\.json:${field}(?:\\s|\\\\)`),
+      `${field} must be merged with its paired watermark`);
   }
 });

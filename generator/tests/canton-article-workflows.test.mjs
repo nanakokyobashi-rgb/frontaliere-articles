@@ -141,7 +141,12 @@ test('ogni sostituzione dichiara un ancoraggio che la sorgente ha esattamente N 
 
 test('nessun nome della coppia storica resta cablato nelle righe eseguibili del core', () => {
   const jobs = CORE.slice(CORE.indexOf('\njobs:\n'));
-  assert.ok(!jobs.split('\n').some((l) => l.trim().startsWith('#')), 'il core non porta commenti: le ragioni stanno nella sorgente');
+  const comments = jobs.split('\n').filter((line) => line.trim().startsWith('#'));
+  assert.deepEqual(
+    comments,
+    ['          # shellcheck disable=SC2317 # chiamata dal trap EXIT, indiretta per ShellCheck.'],
+    'il core non copia la prosa della sorgente e mantiene solo la direttiva lint necessaria',
+  );
   for (const literal of ['generate-article.yml', 'blog-body']) {
     assert.ok(!jobs.includes(literal), `«${literal}» e' ancora nel core`);
   }
@@ -199,10 +204,8 @@ test('gli step che le sostituzioni non toccano sono identici alla sorgente, comm
   const strippedSource = stripComments(SOURCE.slice(SOURCE.indexOf('\njobs:\n')));
   const touched = ['Skip when a generation is already in flight', 'Resolve run mode and section', 'Generate the article', 'Commit and push', 'Chain — dispatch the next link'];
   const discoveryCounterArgs = [
-    '              --merge-counter data/discovery-attempt-state.json:frontaliereProvenAttempts \\\n',
-    '              --merge-counter data/discovery-attempt-state.json:frontaliereDiscoveryResetAt \\\n',
-    '              --merge-counter data/discovery-attempt-state.json:svizzeraProvenAttempts \\\n',
-    '              --merge-counter data/discovery-attempt-state.json:svizzeraDiscoveryResetAt \\\n',
+    '              --merge-counter data/discovery-attempt-state.json:frontaliereProvenAttempts,frontaliereDiscoveryResetAt \\\n',
+    '              --merge-counter data/discovery-attempt-state.json:svizzeraProvenAttempts,svizzeraDiscoveryResetAt \\\n',
   ].join('');
   const sourceCommitAndPush = stepBlock(strippedSource, 'Commit and push');
   assert.equal(sourceCommitAndPush.split(discoveryCounterArgs).length - 1, 1, 'la sorgente deve dichiarare una sola volta i quattro contatori discovery storici');
