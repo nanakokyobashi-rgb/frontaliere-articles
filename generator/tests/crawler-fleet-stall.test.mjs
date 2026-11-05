@@ -199,14 +199,14 @@ test('il riepilogo per giorno conta gruppi DISTINTI, non commit', () => {
 
 test('la flotta si CONTA, non si dichiara: la soglia resta meta anche se cresce', () => {
   // La review: regex, denominatore e soglia tarati su cardinalità fissa smettono
-  // di rappresentare «metà della flotta» appena la flotta cresce. Con 24 gruppi
-  // e soglia fissa 12 servirebbe che metà esatta fallisse prima di suonare.
+  // di rappresentare «metà della flotta» appena la flotta cresce. Con 25 gruppi
+  // la soglia corrente è 13; un fallback fisso a 12 sarebbe più permissivo.
   const contractGroups = JSON.parse(readFileSync('generator/data/crawler-cross-repo-contract.json', 'utf8')).groupCount;
   assert.equal(countCrawlerGroups('/nonexistent-dir'), contractGroups, 'il contratto resta autorevole anche senza workflow locali');
   assert.equal(countCrawlerGroups('/nonexistent-dir', '/nonexistent-contract.json'), FALLBACK_GROUP_COUNT, 'fallback alla cardinalita corrente, non a zero');
   assert.equal(MIN_COVERAGE_FRACTION, 0.5);
   assert.equal(MIN_GROUPS_PER_DAY, Math.max(2, Math.round(EXPECTED_GROUPS * MIN_COVERAGE_FRACTION)));
-  assert.equal(FALLBACK_GROUP_COUNT, 24);
+  assert.equal(FALLBACK_GROUP_COUNT, 25);
   assert.equal(MIN_GROUPS_PER_DAY, Math.max(2, Math.round(EXPECTED_GROUPS * MIN_COVERAGE_FRACTION)));
 });
 

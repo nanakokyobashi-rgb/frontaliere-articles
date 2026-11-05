@@ -113,16 +113,17 @@ export const GROUP_COMMIT_RE = /^Auto-update crawler group (\d{2}) jobs/;
  *
  * Era una costante 23, e la review ha ragione: regex, denominatore e soglia
  * tarati su una cardinalita' fissa smettono di rappresentare "meta' della
- * flotta" appena la flotta cresce. Un gruppo 24 aggiunto avrebbe lasciato la
- * soglia a 12 su 24 — cioe' avrebbe richiesto che METÀ ESATTA fallisse prima
- * di suonare, silenziosamente piu' permissiva ogni volta che il fleet cresce.
+ * flotta" appena la flotta cresce. Una crescita a 24 gruppi avrebbe lasciato
+ * la soglia a 12 su 24 — cioe' avrebbe richiesto che METÀ ESATTA fallisse
+ * prima di suonare, silenziosamente piu' permissiva ogni volta che il fleet
+ * cresce. Il fallback corrente segue la cardinalita' nota di 25 gruppi.
  *
  * Il contratto e' la sorgente autorevole anche quando il checkout e' sparse o
  * sta attraversando il trasporto sito→corpus. I workflow locali servono solo
  * come fallback quando il contratto non e' leggibile; l'ultimo fallback resta
  * la cardinalità corrente nota invece di zero.
  */
-export const FALLBACK_GROUP_COUNT = 24;
+export const FALLBACK_GROUP_COUNT = 25;
 
 const CONTRACT_PATH = 'generator/data/crawler-cross-repo-contract.json';
 
