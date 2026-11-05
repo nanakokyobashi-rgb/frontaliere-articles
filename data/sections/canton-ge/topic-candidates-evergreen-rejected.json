@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ge::https://lecourrier.ch/2026/11/02/ras-le-bol-contre-le-bruit": {
-      "section": "canton-ge",
-      "ts": 1793647392618
-    },
-    "canton-ge::https://lecourrier.ch/2026/11/02/parc-immobilier-pas-de-boussole-claire": {
-      "section": "canton-ge",
-      "ts": 1793662987119
-    },
     "canton-ge::https://www.ge.ch/node/41839": {
       "section": "canton-ge",
       "ts": 1793771351550
@@ -23,6 +15,10 @@
     "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6074": {
       "section": "canton-ge",
       "ts": 1793779973252
+    },
+    "canton-ge::https://lecourrier.ch/2026/11/04/impot-auto-transitoire": {
+      "section": "canton-ge",
+      "ts": 1793866444432
     }
   }
 }
