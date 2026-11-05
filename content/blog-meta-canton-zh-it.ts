@@ -72,6 +72,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.zurigo-strategia-energetica-2026.title': 'Zurigo adotta la Strategia energetica 2026',
     'blog.article.zurigo-strategia-energetica-2026.excerpt': 'Il Regierungsrat del Cantone di Zurigo ha adottato la strategia energetica e la pianificazione energetica 2026.',
     'blog.article.zurigo-strategia-energetica-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.adeguamento-merkblatt-beteiligungen-zrh.title': 'Adeguamento Merkblatt Beteiligungen e altri atti nel Steuerbuch di Zurigo',
+    'blog.article.adeguamento-merkblatt-beteiligungen-zrh.excerpt': 'Sentenza del 12 maggio 2026 (ST.2025.64) permette di considerare prestiti anche a breve ai sensi del § 81a StG, valido subito per periodi dal 2020.',
+    'blog.article.adeguamento-merkblatt-beteiligungen-zrh.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZhIt;
