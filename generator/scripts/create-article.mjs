@@ -2756,7 +2756,6 @@ function isSignalDrivenRunReport(report) {
     || report?.topicCandidateAttribution
     || report?.pool === 'discovery'
     || report?.selectedTier === 'experimental'
-    || SIGNAL_TOPIC_TERMS.size > 0
   );
 }
 
@@ -4218,6 +4217,10 @@ function headlineSimilarity(a, b) {
 
 function isTrendBackedDiscoveryCandidate(candidate) {
   return candidate?.source === 'trends' || candidate?.meta?.signalProvider === 'google-trends';
+}
+
+function hasSecureDiscoveryPublisherUrl(chosen, url) {
+  return !chosen?._discoveryCandidate || isSecureHttpsUrl(url);
 }
 
 function isSignalDrivenTopicCandidate(candidate) {
@@ -18491,15 +18494,20 @@ async function main() {
     // Helper — convert discovery candidates into headline-shaped objects
     // compatible with rankAndSelectHeadlines (field `headline`, optional `url`).
     const _discoveryCandidatesToHeadlines = (candidates) => {
-      const candidatesWithEvidence = attachTrendEvidenceToCandidates(candidates, headlineSimilarity);
+      // The pool may also contain topic-only Suggest/orphan rows. Keep them
+      // as search seeds, but only send candidates with a real secure source
+      // URL to article generation; a synthetic discovery:// URL would make
+      // fetchPageContent return an empty body and could disguise a news run as
+      // an evergreen article.
+      const candidatesWithEvidence = attachTrendEvidenceToCandidates(candidates, headlineSimilarity)
+        .filter((candidate) => isSecureHttpsUrl(candidate?.url));
       _discoveryCandidatesById = new Map();
       const out = [];
       for (const c of candidatesWithEvidence) {
         const id = `discovery::${c.source}::${String(c.headline).toLowerCase()}`;
-        _discoveryCandidatesById.set(id, c);
         const headline = {
           headline: c.headline,
-          url: c.url || `discovery://${encodeURIComponent(c.source)}/${encodeURIComponent(c.headline)}`,
+          url: c.url,
           source: c.source,
           relatedHeadlines: [],
           _discoveryId: id,
@@ -18517,7 +18525,10 @@ async function main() {
         // exact behaviour that discarded ~219 real news/run and is gone. Keep a
         // defensive falsy-guard only (should not fire for a valid candidate).
         const resolved = resolveGoogleNewsHeadline(headline, _provenHeadlinesForDiscovery);
-        if (!resolved) continue;
+        // A resolver may replace a secure Google News wrapper with a publisher
+        // URL, so validate the final URL too before admitting it to generation.
+        if (!resolved || !isSecureHttpsUrl(resolved.url)) continue;
+        _discoveryCandidatesById.set(id, c);
         if (resolved._resolvedFromGoogleNewsRss) {
           console.error(
             `   🔗 Google News RSS risolto a fonte diretta (${resolved._resolvedGoogleNewsScore.toFixed(2)}): `
@@ -19129,16 +19140,22 @@ async function main() {
               chosen = { ...chosen, url: realUrl, _resolvedFromGoogleNewsRss: chosen.url };
             }
 
-            // Trend-backed candidates require a secure publisher URL after
-            // Google News wrapper resolution. The RSS wrapper itself being
+            // Discovery candidates require a secure publisher URL after
+            // Google News wrapper decoding. The RSS wrapper itself being
             // HTTPS is not sufficient evidence that its destination is.
+            if (!hasSecureDiscoveryPublisherUrl(chosen, url)) {
+              const trendBacked = isTrendBackedDiscoveryCandidate(chosen?._discoveryCandidate);
+              RUN_REPORT.notes.push(trendBacked
+                ? 'Trend-backed source rejected: resolved publisher URL is not HTTPS'
+                : 'Discovery source rejected: resolved publisher URL is not HTTPS');
+              console.error(trendBacked
+                ? '   ⏭️  Fonte Trends ignorata: URL dell’editore non HTTPS dopo la risoluzione Google News'
+                : '   ⏭️  Fonte discovery ignorata: URL dell’editore non HTTPS dopo la risoluzione Google News');
+              attempt--;
+              continue;
+            }
+
             if (isTrendBackedDiscoveryCandidate(chosen?._discoveryCandidate)) {
-              if (!isSecureHttpsUrl(url)) {
-                RUN_REPORT.notes.push('Trend-backed source rejected: resolved publisher URL is not HTTPS');
-                console.error('   ⏭️  Fonte Trends ignorata: URL dell’editore non HTTPS dopo la risoluzione Google News');
-                attempt--;
-                continue;
-              }
               if (RUN_REPORT.discoveryAttribution?.candidateId === chosen._discoveryId) {
                 RUN_REPORT.discoveryAttribution.resolvedSourceUrl = url;
               }

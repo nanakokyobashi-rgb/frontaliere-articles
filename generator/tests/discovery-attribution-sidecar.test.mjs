@@ -15,6 +15,48 @@ const generateArticleCoreWorkflow = readFileSync(
   'utf8',
 );
 
+function cutFunction(name) {
+  const anchor = `function ${name}(`;
+  const start = createArticleSource.indexOf(anchor);
+  assert.notEqual(start, -1, `${anchor} missing from create-article.mjs`);
+  const end = createArticleSource.indexOf('\n}\n', start);
+  assert.ok(end > start, `closing brace for ${name} not found`);
+  return createArticleSource.slice(start, end + 2);
+}
+
+function makePostRebaseReportProjector(signalTopicTerms) {
+  return new Function(
+    'SIGNAL_TOPIC_TERMS',
+    `${cutFunction('isSignalDrivenRunReport')}\n`
+      + `${cutFunction('projectRunReportForPostRebaseUniqueness')}\n`
+      + 'return projectRunReportForPostRebaseUniqueness;',
+  )(new Set(signalTopicTerms));
+}
+
+test('remembered signal terms do not classify a proven fallback as signal-driven', () => {
+  const project = makePostRebaseReportProjector(['previous trend topic']);
+  const projected = project({
+    pool: 'proven',
+    selectedTier: 'proven',
+    discoveryAttribution: null,
+    topicCandidateAttribution: null,
+  });
+
+  assert.equal(projected.signalDriven, false);
+});
+
+test('the selected discovery outcome remains signal-driven without remembered terms', () => {
+  const project = makePostRebaseReportProjector([]);
+  const projected = project({
+    pool: 'discovery',
+    selectedTier: 'proven',
+    discoveryAttribution: null,
+    topicCandidateAttribution: null,
+  });
+
+  assert.equal(projected.signalDriven, true);
+});
+
 test('selected signal-led discovery attribution reaches the run report and article sidecar', () => {
   assert.match(createArticleSource, /discoveryAttribution: null/);
   assert.match(createArticleSource, /topicCandidateAttribution: null/);
