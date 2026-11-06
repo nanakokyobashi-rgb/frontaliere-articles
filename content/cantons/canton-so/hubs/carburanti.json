@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "55e611cfccb4b1baf8f0358193b7b5fc71702d8bf2cecdff0f052998c6a5953e",
+  "updatedAt": "2026-11-06T03:39:37.648Z",
+  "contentHash": "762afb1d02539a60d0be89f80b2a26f516cdc7a12bbfe0882eac189b0436738f",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Disoccupazione Canton Soletta ottobre 2026: 4'543 registrati",
+          "url": "/articoli-soletta/tasso-disoccupazione-ottobre-2026/",
+          "excerpt": "In ottobre 2026 nel Canton Soletta risultavano 4'543 disoccupati registrati, in diminuzione di otto persone rispetto al mese precedente.",
+          "date": "2026-11-06T03:29:06.353Z"
+        },
+        {
           "title": "Cantone Soletta: proroga GAV per due anni per dipendenti pubblici",
           "url": "/articoli-soletta/kantonsrat-proroga-gav-due-anni/",
           "excerpt": "Il GAV per tutti i dipendenti di diritto pubblico del Cantone è prorogato per due anni, evitando l'assenza contrattuale dal 1° gennaio 2027.",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/soletta-stipendi-pubblici-2027/",
           "excerpt": "A Soletta il personale statale, gli insegnanti e i dipendenti degli ospedali riceveranno l'1,0% in più dal 2027 dopo l'accordo sull'inflazione.",
           "date": "2026-10-29T11:38:26.035Z"
-        },
-        {
-          "title": "Soletta: la Ratsleitung contro la PUK sugli ospedali",
-          "url": "/articoli-soletta/soletta-ratsleitung-puk-ospedali/",
-          "excerpt": "La Ratsleitung di Soletta considera non utile una PUK sugli ospedali; il Consiglio cantonale voterà l'11 novembre.",
-          "date": "2026-10-29T10:41:25.882Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T03:39:37.648Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Unemployment in the Canton of Solothurn, October 2026: 4'543 registered",
+          "url": "/en/solothurn-articles/unemployment-rate-october-2026/",
+          "excerpt": "In October 2026, 4'543 registered unemployed people were recorded in the Canton of Solothurn, a decrease of eight people compared with the previous month.",
+          "date": "2026-11-06T03:29:06.353Z"
+        },
+        {
           "title": "Canton of Solothurn: GAV extended for two years for public employees",
           "url": "/en/solothurn-articles/cantonal-parliament-extends-collective-agreement/",
           "excerpt": "The GAV for all public-law employees of the Canton has been extended for two years, avoiding a contractual gap from January 1, 2027.",
@@ -193,12 +199,6 @@
           "url": "/en/solothurn-articles/solothurn-public-wages-2027/",
           "excerpt": "In Solothurn, state employees, teachers and hospital employees will receive 1,0% more from 2027 following the inflation agreement.",
           "date": "2026-10-29T11:38:26.035Z"
-        },
-        {
-          "title": "Solothurn: Council leadership opposes the hospital PUK",
-          "url": "/en/solothurn-articles/solothurn-hospital-puk-opposed/",
-          "excerpt": "Solothurn’s council leadership considers a PUK on the hospitals unnecessary; the cantonal council will vote on 11 November.",
-          "date": "2026-10-29T10:41:25.882Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T03:39:37.648Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Solothurn: 4'543 Arbeitslose im Okt. 2026",
+          "url": "/de/solothurn-artikel/arbeitslosenquote-oktober-2026/",
+          "excerpt": "Im Oktober 2026 waren im Kanton Solothurn 4'543 Arbeitslose registriert, acht Personen weniger als im Vormonat.",
+          "date": "2026-11-06T03:29:06.353Z"
+        },
+        {
           "title": "Solothurn: GAV um 2 Jahre für öffentliche Angestellte verlängert",
           "url": "/de/solothurn-artikel/kantonsrat-verlaengert-gav-zwei-jahre/",
           "excerpt": "Der GAV für alle öffentlich-rechtlichen Angestellten des Kantons wird um zwei Jahre verlängert, wodurch eine Vertragslücke ab dem 1. Januar 2027 vermieden wird.",
@@ -292,12 +298,6 @@
           "url": "/de/solothurn-artikel/solothurn-staatsloehne-2027/",
           "excerpt": "In Solothurn erhalten das Staatspersonal, die Lehrpersonen und die Spitalangestellten ab 2027 nach der Einigung über die Inflation 1,0% mehr.",
           "date": "2026-10-29T11:38:26.035Z"
-        },
-        {
-          "title": "Solothurn: Die Ratsleitung gegen die PUK zu den Spitälern",
-          "url": "/de/solothurn-artikel/solothurn-spitaeler-puk-abgelehnt/",
-          "excerpt": "Gemäss Mitteilung der Ratsleitung wäre eine PUK nicht der richtige Weg und würde dem Zweck nicht dienen.",
-          "date": "2026-10-29T10:41:25.882Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T03:39:37.648Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Chômage dans le canton de Soleure en octobre 2026 : 4'543 personnes inscrites",
+          "url": "/fr/articles-soleure/taux-chomage-octobre-2026/",
+          "excerpt": "En octobre 2026, 4'543 chômeurs étaient inscrits dans le canton de Soleure, soit huit personnes de moins que le mois précédent.",
+          "date": "2026-11-06T03:29:06.353Z"
+        },
+        {
           "title": "Soleure: proroga CCT de deux ans pour fonctionnaires",
           "url": "/fr/articles-soleure/parlement-cantonal-prolonge-convention-collective/",
           "excerpt": "La CCT pour tous les employés de droit public du canton est prolongée de deux ans, évitant ainsi un vide contractuel à compter du 1er janvier 2027.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-soleure/salaires-publics-soleure-2027/",
           "excerpt": "À Soleure, le personnel de l'État, les enseignants et les employés des hôpitaux recevront 1,0% de plus à partir de 2027 après l'accord sur l'inflation.",
           "date": "2026-10-29T11:38:26.035Z"
-        },
-        {
-          "title": "Soleure : la direction du Conseil contre la PUK sur les hôpitaux",
-          "url": "/fr/articles-soleure/soleure-puk-hopitaux-refusee/",
-          "excerpt": "La direction du Conseil de Soleure considère qu’une PUK sur les hôpitaux n’est pas utile ; le Conseil cantonal votera le 11 novembre.",
-          "date": "2026-10-29T10:41:25.882Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T03:39:37.648Z"
     }
   }
 }
