@@ -495,6 +495,21 @@ test('Chain: con gli input della coppia storica il core dispatcha come la sorgen
   }
 });
 
+test('Chain: il core invia dispatch_origin solo al workflow principale', () => {
+  const core = runChain(CORE, {
+    CHAIN_DISPATCH: 'true', CALLER_WORKFLOW: 'generate-article.yml',
+    PRIMARY_SECTION: PAIR.primary, SIBLING_SECTION: PAIR.sibling,
+    SECTION_PRODUCED: 'svizzera', SECTION_REQUESTED: 'frontaliere',
+  });
+  const canton = runChain(CORE, {
+    CHAIN_DISPATCH: 'true', CALLER_WORKFLOW: 'generate-article-ti.yml',
+    PRIMARY_SECTION: 'canton-ti', SIBLING_SECTION: '',
+    SECTION_PRODUCED: 'canton-ti', SECTION_REQUESTED: 'canton-ti',
+  });
+  assert.equal(core.payload.inputs.dispatch_origin, 'chain');
+  assert.equal(Object.hasOwn(canton.payload.inputs, 'dispatch_origin'), false);
+});
+
 test('Chain: un cantone non dispatcha nessun successore', () => {
   const canton = { CALLER_WORKFLOW: 'generate-article-ti.yml', PRIMARY_SECTION: 'canton-ti', SIBLING_SECTION: '', SECTION_REQUESTED: 'canton-ti' };
   for (const flag of ['false', '', 'TRUE']) {
@@ -781,7 +796,7 @@ test('il core dichiara ogni input che i chiamanti passano, e la catena e\' spent
   assert.match(inputsBlock, /chain_dispatch:\n(?: {8}.*\n)*? {8}default: false\n {8}type: boolean/);
   assert.match(inputsBlock, /section_gate:\n(?: {8}.*\n)*? {8}default: 'none'/);
   assert.doesNotMatch(CORE, /get_generation_oidc_token|request_generation_claim|ACTIONS_ID_TOKEN_REQUEST_URL|ACTIONS_ID_TOKEN_REQUEST_TOKEN/);
-  assert.doesNotMatch(CORE, /dispatch_origin|DISPATCH_ORIGIN/);
+  assert.doesNotMatch(CORE, /DISPATCH_ORIGIN|inputs\.dispatch_origin/);
   assert.match(CORE, /^on:\n {2}workflow_call:\n/m);
   assert.doesNotMatch(CORE, /^ {2}(schedule|push|workflow_dispatch):/m, 'il core non ha trigger suoi');
   // Il gate decide senza entrare nella coda del writer. La generazione di ogni

@@ -1648,8 +1648,12 @@ jobs:
           echo "${kind}: depth ${depth}→${next_depth}, streak ${streak}→${next_streak}, soccorso ${rescue}→${next_rescue}, sezione ${base}→${next_section}, fra ${wait_s}s"
           [ "$wait_s" -gt 0 ] && sleep "$wait_s"
 
-          payload=$(printf '{"ref":"main","inputs":{"section":"%s","chain_depth":"%s","no_article_streak":"%s","parent_run_id":"%s","rescue_depth":"%s"}}' \
-            "$next_section" "$next_depth" "$next_streak" "${SELF_ID:-}" "$next_rescue")
+          chain_origin_input=''
+          if [ -n "${SIBLING_SECTION:-}" ]; then
+            chain_origin_input='"dispatch_origin":"chain",'
+          fi
+          payload=$(printf '{"ref":"main","inputs":{"section":"%s",%s"chain_depth":"%s","no_article_streak":"%s","parent_run_id":"%s","rescue_depth":"%s"}}' \
+            "$next_section" "$chain_origin_input" "$next_depth" "$next_streak" "${SELF_ID:-}" "$next_rescue")
 
           dispatch() {
             curl -sS -o /tmp/chain-dispatch.json -w '%{http_code}' \

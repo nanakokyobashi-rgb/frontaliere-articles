@@ -525,10 +525,16 @@ export const CORE_REPLACEMENTS = [
     replace: '"https://api.github.com/repos/$REPO/actions/workflows/$CALLER_WORKFLOW/dispatches"',
   },
   {
-    id: 'chain: origin del dispatch resta solo nel workflow principale',
+    id: 'chain: dispatch_origin per le coppie alternate',
     count: 1,
-    find: '"dispatch_origin":"chain",',
-    replace: '',
+    find: '          payload=$(printf \'{"ref":"main","inputs":{"section":"%s","dispatch_origin":"chain","chain_depth":"%s","no_article_streak":"%s","parent_run_id":"%s","rescue_depth":"%s"}}\' \\\n'
+      + '            "$next_section" "$next_depth" "$next_streak" "${SELF_ID:-}" "$next_rescue")\n',
+    replace: '          chain_origin_input=\'\'\n'
+      + '          if [ -n "${SIBLING_SECTION:-}" ]; then\n'
+      + '            chain_origin_input=\'"dispatch_origin":"chain",\'\n'
+      + '          fi\n'
+      + '          payload=$(printf \'{"ref":"main","inputs":{"section":"%s",%s"chain_depth":"%s","no_article_streak":"%s","parent_run_id":"%s","rescue_depth":"%s"}}\' \\\n'
+      + '            "$next_section" "$chain_origin_input" "$next_depth" "$next_streak" "${SELF_ID:-}" "$next_rescue")\n',
   },
   {
     id: 'rebase: i contatori discovery non si applicano al core cantonale',

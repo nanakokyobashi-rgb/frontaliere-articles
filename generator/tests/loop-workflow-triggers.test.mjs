@@ -45,7 +45,8 @@ const active = (src) =>
     .join('\n');
 
 const TESTS = active(read('.github/workflows/tests.yml'));
-const GA = active(read('.github/workflows/generate-article.yml'));
+const GENERATE_ARTICLE_WORKFLOW = read('.github/workflows/generate-article.yml');
+const GA = active(GENERATE_ARTICLE_WORKFLOW);
 const FOLLOWUP_DRAINER = read('.github/workflows/followup-drainer.yml');
 
 test('followup-drainer: cron durevole, wake-up reattivi bounded e fallback Codex', () => {
@@ -428,7 +429,7 @@ test('generate-article: la soglia di incastro resta sotto l\'intervallo Cloud Sc
   assert.ok(Number.isFinite(wedge), 'Soglia di incastro non leggibile da `admit`.');
 
   // Il marker è il contratto condiviso con il loop clock del sito.
-  const marker = /^# generation-cloud-slot-minutes: ([\d,]+)$/m.exec(GA);
+  const marker = /^# generation-cloud-slot-minutes: ([\d,]+)$/m.exec(GENERATE_ARTICLE_WORKFLOW);
   const minuti = marker ? marker[1].split(',').map(Number) : [];
   assert.ok(
     minuti.length >= 2 && minuti.every((minute) => Number.isInteger(minute) && minute >= 0 && minute < 60),
@@ -508,7 +509,7 @@ test('generate-article: l\'esenzione del dispatch discrimina un anello da un uma
 });
 
 test('generate-article: Cloud Scheduler conserva i due slot nominali della catena', () => {
-  const marker = /^# generation-cloud-slot-minutes: ([\d,]+)$/m.exec(GA);
+  const marker = /^# generation-cloud-slot-minutes: ([\d,]+)$/m.exec(GENERATE_ARTICLE_WORKFLOW);
   const slots = marker ? marker[1].split(',').map(Number) : [];
   assert.equal(
     slots.length,
