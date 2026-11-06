@@ -85,6 +85,21 @@ test('il piano completo passa da artifact e la matrix porta solo il routing', ()
   assert.doesNotMatch(workflow, /ARTICLE_IDS_JSON: \$\{\{ toJSON\(matrix\.target\.ids\) \}\}/u);
 });
 
+test('i repair di pagina usano il percorso article-only senza rilassare i gate', () => {
+  const resolveStep = stepText('Resolve mode, article ids and section');
+  const renderStep = stepText('Render the articles (fast path)');
+  assert.match(workflow, /article_only:\s*[\s\S]*type: boolean/u);
+  assert.match(resolveStep, /ARTICLE_ONLY_INPUT: \$\{\{ inputs\.article_only \}\}/u);
+  assert.match(resolveStep, /article_only=false/u);
+  assert.match(resolveStep, /articleOnly: \$articleOnly/u);
+  assert.match(renderStep, /matrix\.target\.articleOnly/u);
+  assert.match(renderStep, /publish_args\+=\(--article-only\)/u);
+  assert.match(publisher, /includeAggregatePages: !args\.articleOnly/u);
+  assert.match(pipeline, /const aggregatePagesAllowed = includeAggregatePages && aggregateVerdict\.allowed;/u);
+  assert.match(observer, /-f', 'article_only=true'/u);
+  assert.match(observer, /lagRepairCap = repairCap/u);
+});
+
 test('la matrix ha un solo job completo per sezione/shard', () => {
   assert.match(
     workflow,
@@ -663,7 +678,7 @@ test('un articolo ricaduto sull’immagine generica passa dalla lettura della pa
   // articolo rilasciato col fallback invece li ferma: il registro completo
   // conserva ancora il path dell'immagine dichiarata che manca.
   assert.match(pipeline, /const aggregateVerdict = aggregatePageVerdict\(imagePostcondition\);/);
-  assert.match(pipeline, /const aggregatePagesAllowed = aggregateVerdict\.allowed;/);
+  assert.match(pipeline, /const aggregatePagesAllowed = includeAggregatePages && aggregateVerdict\.allowed;/);
   assert.match(pipeline, /releasedWithGenericImage\.length > 0/);
   assert.doesNotMatch(pipeline, /aggregatePagesAllowed = imagePostcondition\.excludedArticles\.length === 0/);
   assert.match(pipeline, /if \(aggregatePagesAllowed\) \{[\s\S]*await renderArticleHubPages\(/);

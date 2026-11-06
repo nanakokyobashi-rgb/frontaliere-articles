@@ -84,6 +84,11 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
     workflow,
     /while \[ "\$\(active_runs_for_shard "\$section" "\$target_shard"\)" -gt 0 \]/,
   );
+  assert.doesNotMatch(
+    workflow,
+    /-f 'inputs\[article_only\]=true'/,
+    'il ghost backfill deve aggiornare anche aggregate e landing, non solo la pagina articolo',
+  );
   assert.match(
     workflow,
     /\.selected\[\].*\[\.id, \.section, \.shard\]/,
