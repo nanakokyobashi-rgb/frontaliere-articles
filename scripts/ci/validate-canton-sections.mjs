@@ -162,12 +162,14 @@ export function parseGlobalNewsUrls(createArticleSrc) {
   return out;
 }
 
-/** Minuti dei `cron:` di generate-article.yml (`'M * * * *'`): frontaliere e svizzera. */
+/** Minuti riservati al generatore principale: cron nativi storici o slot Cloud Scheduler dichiarati. */
 export function parseReservedCronMinutes(workflowYaml) {
   const out = new Set();
   for (const m of workflowYaml.matchAll(/^\s*-\s*cron:\s*['"]?([0-9,]+)\s/gm)) {
     for (const x of m[1].split(',')) out.add(Number(x));
   }
+  const cloudSlots = workflowYaml.match(/^# generation-cloud-slot-minutes:\s*([0-9,]+)\s*$/mu);
+  for (const minute of cloudSlots?.[1]?.split(',') ?? []) out.add(Number(minute));
   return out;
 }
 

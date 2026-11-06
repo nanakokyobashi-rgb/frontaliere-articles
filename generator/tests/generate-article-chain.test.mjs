@@ -906,12 +906,88 @@ test('il trigger push chaina ancora solo su content/**, mai sul bookkeeping', ()
   // i job, e l'assert negativo qui sotto avrebbe letto anche il loro corpo:
   // un test che passa o fallisce per ciò che sta in un job non è più il test del
   // blocco `on:`. `permissions:` è il primo top-level dopo `on:` in questo file.
-  const onBlock = sliceBetween(ACTIVE, 'on:\n  schedule:', '\npermissions:', { label: 'trigger paths' });
+  const onBlock = sliceBetween(ACTIVE, 'on:\n', '\npermissions:', { label: 'trigger paths' });
   assert.match(onBlock, /- 'content\/\*\*'/);
+  assert.doesNotMatch(onBlock, /^\s{2}schedule:/m, 'Cloud Scheduler è l’unico proprietario degli slot nominali');
   assert.ok(
     !/topic-candidates|data\/\*\*|- 'data\//.test(onBlock),
     'un run senza articolo scrive solo data/: metterlo nei paths riarma la ricorsione senza contenuto',
   );
+});
+
+test('Cloud Scheduler possiede un contratto di slot fail-closed nel workflow corpus', () => {
+  const runName = WF.split('\n').find((line) => line.startsWith('run-name:')) || '';
+  const dispatchInputs = sliceBetween(WF, '  workflow_dispatch:\n', '\npermissions:', { label: 'dispatch inputs' });
+  const admit = extractRun('Skip when a generation is already in flight');
+  assert.match(WF, /^# generation-cloud-clock-contract: v1$/m);
+  assert.match(WF, /^# generation-cloud-slot-minutes: 7,37$/m);
+  assert.ok(runName.includes('inputs.loop_clock') && runName.includes('inputs.recovery_slot'), 'il run-name deve esporre marker stabili per la riconciliazione');
+  assert.ok(runName.includes('[loop-clock ') && runName.includes('[generation-slot '), 'il run-name deve contenere entrambi i marker');
+  for (const input of ['loop_clock', 'recovery_slot', 'recovery_claim']) {
+    assert.ok(dispatchInputs.includes('      ' + input + ':'), input + ' deve essere un input esplicito');
+  }
+  assert.match(dispatchInputs, /dispatch_origin:\n        description:[^\n]*\n        required: true\n        type: choice\n        options:\n          - manual\n          - cloud_scheduler\n          - chain\n          - editorial_signal/);
+  assert.doesNotMatch(dispatchInputs.match(/      dispatch_origin:\n[\s\S]*?(?=      [a-z_]+:|$)/)?.[0] || '', /default:/);
+  assert.match(WF, /admit:[\s\S]*?permissions:[\s\S]*?id-token: write/);
+  assert.match(admit, /request_generation_claim admit/);
+  assert.match(admit, /release_generation_claim/);
+  assert.match(admit, /ACTIONS_ID_TOKEN_REQUEST_URL/);
+  assert.match(admit, /DISPATCH_ORIGIN/);
+  assert.match(admit, /generation-dispatch-origin-missing/);
+  assert.match(admit, /generation-dispatch-origin-mismatch/);
+  assert.match(admit, /\[ "\$dispatch_origin" = "manual" \]/);
+  assert.match(admit, /cloud_scheduler\)/);
+});
+
+test('dispatch origin: input mancanti e combinazioni incoerenti falliscono chiusi', () => {
+  const admit = extractRun('Skip when a generation is already in flight');
+  const start = admit.indexOf('dispatch_origin="${DISPATCH_ORIGIN:-}"');
+  const end = admit.indexOf('\n\nhas_slot_input=false', start);
+  assert.ok(start >= 0 && end > start, 'il blocco di validazione dell’origine deve avere confini stabili');
+  const originGate = admit.slice(start, end);
+  const run = (overrides = {}) => spawnSync('bash', ['-c', [
+    'skip_generation_slot() { printf "skip:%s\\n" "$1"; exit 27; }',
+    'chain_depth="${CHAIN_DEPTH:-0}"',
+    'is_link=false',
+    'if [ "$chain_depth" -gt 0 ]; then is_link=true; fi',
+    originGate,
+    'printf "accepted\\n"',
+  ].join('\n')], {
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      EVENT_NAME: 'workflow_dispatch',
+      DISPATCH_ORIGIN: '',
+      LOOP_CLOCK: '',
+      RECOVERY_SLOT: '',
+      RECOVERY_CLAIM: '',
+      CHAIN_DEPTH: '0',
+      PARENT_RUN_ID: '',
+      ...overrides,
+    },
+  });
+  const assertRejected = (overrides, reason) => {
+    const result = run(overrides);
+    assert.equal(result.status, 27);
+    assert.equal(result.stdout.trim(), `skip:${reason}`);
+  };
+  const assertAccepted = (overrides) => {
+    const result = run(overrides);
+    assert.equal(result.status, 0);
+    assert.equal(result.stdout.trim(), 'accepted');
+  };
+
+  assertRejected({}, 'generation-dispatch-origin-missing');
+  assertRejected({ DISPATCH_ORIGIN: 'manual', LOOP_CLOCK: 'slot-marker' }, 'generation-dispatch-origin-mismatch');
+  assertRejected({ DISPATCH_ORIGIN: 'cloud_scheduler' }, 'generation-dispatch-origin-mismatch');
+  assertAccepted({
+    DISPATCH_ORIGIN: 'cloud_scheduler',
+    LOOP_CLOCK: 'corpus-generation-slot-frontaliere@2026-11-06T10:07Z',
+    RECOVERY_SLOT: 'generate-article/frontaliere/2026-11-06T10:07Z',
+    RECOVERY_CLAIM: '01234567-89ab-cdef-0123-456789abcdef',
+  });
+  assertAccepted({ DISPATCH_ORIGIN: 'chain', CHAIN_DEPTH: '1', PARENT_RUN_ID: '4242' });
+  assertAccepted({ DISPATCH_ORIGIN: 'editorial_signal' });
 });
 
 test('un push su content/** non viene scartato se il producer è ancora in volo', () => {
@@ -979,6 +1055,7 @@ test('il workflow dispatcha se stesso SOLO dietro un esito dichiarato', () => {
     declaredAt < dispatchAt,
     'la guardia deve precedere il dispatch, altrimenti e\' decorazione',
   );
+  assert.match(CHAIN_RUN, /dispatch_origin":"chain/);
 });
 
 test('il blocco run del generatore non interpola nulla: niente injection, ed e\' eseguibile qui', () => {

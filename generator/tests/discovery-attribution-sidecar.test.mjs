@@ -65,6 +65,8 @@ test('selected signal-led discovery attribution reaches the run report and artic
   assert.match(createArticleSource, /candidate\?\.source === 'trends'/);
   assert.match(createArticleSource, /attachTrendEvidenceToCandidates\(candidates, headlineSimilarity\)/);
   assert.match(createArticleSource, /Number\(pool\.perSource\?\.trends\)/);
+  assert.match(createArticleSource, /Number\(pool\.perSource\?\.trendSignals\)/);
+  assert.equal((createArticleSource.match(/trends=\$\{trendsWithEvidence\} trendSignals=\$\{trendSignals\}/gu) || []).length, 2);
   assert.match(createArticleSource, /Trend signal skipped: no secure Google News evidence URL/);
   assert.match(createArticleSource, /const evidenceUrl = isSecureHttpsUrl\(meta\.evidenceUrl\)/);
   assert.match(createArticleSource, /if \(isTrendBackedDiscoveryCandidate\(discoveryCandidate\)\)/);
