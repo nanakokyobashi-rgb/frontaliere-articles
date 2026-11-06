@@ -2378,10 +2378,12 @@ export function formatCantonCommitSummary(perCanton) {
  * Legge la coda delle copertine senza interpretare un JSON parziale come una
  * coda sana. Un `requestedAt` invalido rende la misura non disponibile: l'età
  * minima sarebbe altrimenti un numero inventato proprio mentre il resolver ha
- * bisogno di un allarme. Gli item `failed` restano visibili nella diagnostica,
- * ma non sono azionabili fino alla scadenza del cooldown condiviso col drain;
- * quando lo diventano, l'età SLO parte da quella scadenza. Gli item `terminal`
- * non sono mai azionabili, ma hanno un contatore separato che tiene acceso il
+ * bisogno di un allarme. Lo stesso vale per `lastFailureAt` di un item
+ * `failed`: il contratto condiviso rifiuta il metadata invece di contarlo come
+ * retry pronto. Gli item `failed` restano visibili nella diagnostica, ma non
+ * sono azionabili fino alla scadenza del cooldown condiviso col drain; quando
+ * lo diventano, l'età SLO parte da quella scadenza. Gli item `terminal` non
+ * sono mai azionabili, ma hanno un contatore separato che tiene acceso il
  * watchdog: restano evidenza di una copertina degradata, non lavoro da replay.
  */
 export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
@@ -2391,7 +2393,6 @@ export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
     const parsed = items.map((item) => ({
       item,
       requestedAt: Date.parse(String(item?.requestedAt || '')),
-      lastFailureAt: Date.parse(String(item?.lastFailureAt || '')),
       actionableAt: imageRegenerationActionableAt(item, COVER_QUEUE_MAX_AGE_HOURS),
     }));
     if (parsed.some(({ requestedAt }) => !Number.isFinite(requestedAt))) {
@@ -2408,15 +2409,13 @@ export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
     if (!Number.isFinite(observedAt)) {
       return { available: false, reason: 'cover queue measurement received an invalid timestamp' };
     }
-    const actionable = parsed.filter(({ item, lastFailureAt, actionableAt }) => {
+    const actionable = parsed.filter(({ item, actionableAt }) => {
       const status = String(item?.status || 'unknown');
       if (!Number.isFinite(actionableAt) || actionableAt > observedAt) return false;
       if (status !== 'failed') return true;
-      // Missing failure metadata cannot prove that the cooldown is active.
-      // Keep the item visible as actionable rather than silently declaring it
-      // healthy; the drainer itself remains fail-closed for that retry.
-      return !Number.isFinite(lastFailureAt)
-        || failedImageRegenerationRetryIsEligible(item, observedAt, COVER_QUEUE_MAX_AGE_HOURS);
+      // Malformed failure metadata was rejected by the shared actionable-at
+      // contract above, so reaching this branch means the cooldown is known.
+      return failedImageRegenerationRetryIsEligible(item, observedAt, COVER_QUEUE_MAX_AGE_HOURS);
     });
     const oldestActionable = actionable.length
       ? actionable.reduce((oldest, candidate) => (

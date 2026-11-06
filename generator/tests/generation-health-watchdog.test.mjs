@@ -73,6 +73,7 @@ import {
   reconcile,
   summarizeRuns,
 } from '../../scripts/ci/scan-generation-health.mjs';
+import { imageRegenerationActionableAt } from '../scripts/lib/image-regeneration-queue.mjs';
 import { sliceBetween } from './lib/anchored-slice.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -834,6 +835,32 @@ describe('collectCoverQueue — la coda è una misura fail-closed', () => {
       }));
       const result = collectCoverQueue(root, NOW);
       assert.equal(result.available, false);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  test('un failed con lastFailureAt invalido resta non misurabile e non azionabile', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'generation-health-cover-'));
+    const item = {
+      articleId: 'broken-failure-metadata',
+      requestedAt: '2026-10-01T00:00:00.000Z',
+      lastFailureAt: 'not-a-date',
+      status: 'failed',
+    };
+    try {
+      fs.mkdirSync(path.join(root, 'data'), { recursive: true });
+      fs.writeFileSync(path.join(root, 'data/image-regeneration-queue.json'), JSON.stringify({
+        schema: 1,
+        items: [item],
+      }));
+      const result = collectCoverQueue(root, Date.parse('2026-11-06T00:00:00.000Z'));
+      assert.equal(result.available, false);
+      assert.match(result.reason, /invalid lastFailureAt/);
+      assert.throws(
+        () => imageRegenerationActionableAt(item, COVER_QUEUE_MAX_AGE_HOURS),
+        /invalid lastFailureAt/,
+      );
     } finally {
       fs.rmSync(root, { recursive: true, force: true });
     }
