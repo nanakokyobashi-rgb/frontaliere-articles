@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "fisco",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "48316d5b4e2e4708cedaf432b5a4c6197f3578b449822fa007f9870c72580f42",
+  "updatedAt": "2026-11-06T12:06:41.332Z",
+  "contentHash": "d7138372a327a630e21b29dd659fa13ce910e0e16c064b04fc9a9ccc5b847ce9",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Niederwil propone aliquota comunale al 107% nel 2027",
+          "url": "/articoli-argovia/niederwil-aumento-imposta-2027/",
+          "excerpt": "Niederwil propone il passaggio dal 103% al 107%; il deficit del budget 2027 scenderebbe da CHF 401'200 a CHF 151'200.",
+          "date": "2026-11-06T12:02:37.265Z"
+        },
+        {
           "title": "Mellingen: preventivo 2027 con un disavanzo di 3,54 milioni",
           "url": "/articoli-argovia/mellingen-budget-2027/",
           "excerpt": "Il comune di Mellingen prevede per il 2027 un disavanzo di 3.546.810 franchi e conferma il coefficiente fiscale al 110%.",
@@ -165,7 +171,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-06T12:06:41.332Z"
     },
     "en": {
       "canton": "AG",
@@ -250,6 +256,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Niederwil proposes a municipal tax rate of 107% in 2027",
+          "url": "/en/aargau-articles/niederwil-municipal-tax-2027/",
+          "excerpt": "Niederwil proposes increasing it from 103% to 107%; the 2027 budget deficit would decrease from CHF 401'200 to CHF 151'200.",
+          "date": "2026-11-06T12:02:37.265Z"
+        },
+        {
           "title": "Mellingen: 2027 budget with a deficit of 3,54 million",
           "url": "/en/aargau-articles/mellingen-2027-budget-with-a-deficit-of-3-54-million/",
           "excerpt": "The municipality of Mellingen forecasts a deficit of CHF 3,546,810 for 2027 and confirms the tax coefficient at 110%.",
@@ -313,7 +325,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-06T12:06:41.332Z"
     },
     "de": {
       "canton": "AG",
@@ -398,6 +410,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Niederwil schlägt für 2027 einen Gemeindesteuerfuss von 107% vor",
+          "url": "/de/aargau-artikel/niederwil-steuerfuss-erhoehung-2027/",
+          "excerpt": "Niederwil schlägt eine Erhöhung des Steuerfusses von 103% auf 107% vor; das Defizit des Budgets 2027 würde von CHF 401'200 auf CHF 151'200 sinken.",
+          "date": "2026-11-06T12:02:37.265Z"
+        },
+        {
           "title": "Mellingen: Kostenvoranschlag 2027 mit einem Defizit von 3,54 Mio.",
           "url": "/de/aargau-artikel/mellingen-kostenvoranschlag-2027-mit-einem-defizit-von-3-54-mio/",
           "excerpt": "Die Gemeinde Mellingen rechnet für 2027 mit einem Defizit von 3.546.810 Franken und bestätigt die Steuerquote von 110%.",
@@ -461,7 +479,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-06T12:06:41.332Z"
     },
     "fr": {
       "canton": "AG",
@@ -546,6 +564,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Niederwil propose un taux communal de 107 % en 2027",
+          "url": "/fr/articles-argovie/niederwil-hausse-taux-fiscal-2027/",
+          "excerpt": "Niederwil propose le passage de 103 % à 107 % ; le déficit du budget 2027 passerait de CHF 401'200 à CHF 151'200.",
+          "date": "2026-11-06T12:02:37.265Z"
+        },
+        {
           "title": "Mellingen : devis 2027 avec un déficit de 3,54 millions",
           "url": "/fr/articles-argovie/mellingen-devis-2027-avec-un-deficit-de-3-54-millions/",
           "excerpt": "La commune de Mellingen prévoit pour 2027 un déficit de 3 546 810 francs et confirme le coefficient d'imposition à 110 %.",
@@ -609,7 +633,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-06T12:06:41.332Z"
     }
   }
 }
