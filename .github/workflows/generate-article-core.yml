@@ -105,6 +105,7 @@ jobs:
           CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}
           CALLER_WORKFLOW: ${{ inputs.caller_workflow }}
           DRY_RUN: ${{ inputs.dry_run }}
+
         run: |
           set -uo pipefail
           content_push=false
@@ -128,9 +129,31 @@ jobs:
           esac
           trap 'echo "content_push=$content_push" >> "$GITHUB_OUTPUT"; echo "run_mode=$run_mode" >> "$GITHUB_OUTPUT"' EXIT
 
+          loop_clock_dispatch=false
+
+
+
+          release_generation_claim() { return 0; }
+
+          skip_generation_slot() {
+            local reason="$1"
+            echo "::warning::slot Cloud Scheduler non ammesso: $reason"
+            if ! release_generation_claim; then
+              echo "::warning::claim non rilasciato esplicitamente; lease e retry Cloud Scheduler restano il fallback."
+            fi
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "GENERATION_OUTCOME kind=skipped reason=$reason section=unknown"
+            exit 0
+          }
+
           chain_depth=0
           case "${CHAIN_DEPTH:-0}" in
-            ''|*[!0-9]*) chain_depth=0 ;;
+            ''|*[!0-9]*)
+              if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+                skip_generation_slot generation-dispatch-chain-depth-invalid
+              fi
+              chain_depth=0
+              ;;
             *) chain_depth="${CHAIN_DEPTH:-0}" ;;
           esac
           is_link=false
@@ -139,8 +162,47 @@ jobs:
           fi
           echo "chain_link=$is_link" >> "$GITHUB_OUTPUT"
 
-          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$is_link" != "true" ]; then
-            echo "Dispatch manuale (chain_depth=$chain_depth) → si procede sempre."
+
+          has_slot_input=false
+          if [ -n "${LOOP_CLOCK:-}" ] || [ -n "${RECOVERY_SLOT:-}" ] || [ -n "${RECOVERY_CLAIM:-}" ]; then
+            has_slot_input=true
+          fi
+          if [ "$has_slot_input" = "true" ]; then
+            if [ "$EVENT_NAME" != "workflow_dispatch" ] \
+              || [ -z "${LOOP_CLOCK:-}" ] \
+              || [ -z "${RECOVERY_SLOT:-}" ] \
+              || [ -z "${RECOVERY_CLAIM:-}" ] \
+              || [ "$is_link" = "true" ] \
+              || [ "${DRY_RUN:-false}" = "true" ]; then
+              skip_generation_slot generation-slot-input-invalid
+            fi
+            case "${SECTION_REQUESTED:-}" in
+              "$SECTION_REQUESTED") ;;
+              *) skip_generation_slot generation-slot-section-invalid ;;
+            esac
+            slot_prefix="generate-article/${SECTION_REQUESTED}/"
+            case "$RECOVERY_SLOT" in
+              "${slot_prefix}"????-??-??T??:??Z)
+                slot_timestamp="${RECOVERY_SLOT#"$slot_prefix"}"
+                ;;
+              *) skip_generation_slot generation-slot-key-invalid ;;
+            esac
+            if ! [[ "$RECOVERY_CLAIM" =~ ^[0-9a-f-]{36}$ ]]; then
+              skip_generation_slot generation-slot-claim-invalid
+            fi
+            expected_loop_clock="corpus-generation-slot-${SECTION_REQUESTED}@${slot_timestamp}"
+            if [ "$LOOP_CLOCK" != "$expected_loop_clock" ]; then
+              skip_generation_slot generation-slot-clock-mismatch
+            fi
+            loop_clock_dispatch=true
+            echo "::add-mask::$RECOVERY_CLAIM"
+          fi
+
+
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] \
+            && [ "$is_link" != "true" ] \
+            && [ "$loop_clock_dispatch" != "true" ]; then
+            echo "Dispatch manuale cantonale (chain_depth=$chain_depth) → si procede sempre."
             echo "proceed=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -212,6 +274,9 @@ jobs:
 
           fail_closed_admission() {
             echo "::warning::impossibile validare l'elenco completo delle run di generazione — ammissione negata"
+            if ! release_generation_claim; then
+              echo "::warning::claim non rilasciato esplicitamente; lease e retry Cloud Scheduler restano il fallback."
+            fi
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             echo "GENERATION_OUTCOME kind=skipped reason=admit-run-list-unreadable section=unknown"
             exit 0
@@ -351,12 +416,19 @@ jobs:
             else
               echo "Ci sono $older run di generate-article già in volo e più vecchie di questa ($self_created)."
               echo "La catena sta già camminando: questo arrivo ($EVENT_NAME) è un riavvio ridondante → skip."
+              if ! release_generation_claim; then
+                echo "::warning::claim non rilasciato esplicitamente; lease e retry Cloud Scheduler restano il fallback."
+              fi
               echo "proceed=false" >> "$GITHUB_OUTPUT"
               echo "GENERATION_OUTCOME kind=skipped reason=admit-in-flight section=unknown"
               exit 0
             fi
           else
             echo "Nessuna generazione più vecchia in volo → si procede."
+          fi
+
+          if [ "$loop_clock_dispatch" = "true" ]; then
+            skip_generation_slot generation-slot-unavailable-in-canton-core
           fi
           echo "proceed=true" >> "$GITHUB_OUTPUT"
 
@@ -1038,7 +1110,7 @@ jobs:
                 echo "::error::create-article.mjs ha restituito exit 5 senza marker producer-owned valido per la sezione $sec"
                 break
               fi
-              echo "::warning::pool AI condiviso indisponibile sulla sezione $sec; si cede al prossimo cron"
+              echo "::warning::pool AI condiviso indisponibile sulla sezione $sec; si cede al prossimo slot Cloud Scheduler"
               provider_blocked=true
               effective="$sec"
               break
@@ -1127,7 +1199,7 @@ jobs:
             exit 1
           fi
           if [ "$provider_blocked" = "true" ]; then
-            echo "::notice::pool AI condiviso temporaneamente indisponibile: nessun retry immediato, si attende il prossimo cron"
+            echo "::notice::pool AI condiviso temporaneamente indisponibile: nessun retry immediato, si attende il prossimo slot Cloud Scheduler"
             exit 0
           fi
           echo "nessun articolo, ma ogni tentativo ha dichiarato una ragione locale alla sezione (exit 4) — verde"
@@ -1541,22 +1613,22 @@ jobs:
           [ "${CHAIN_DISPATCH:-}" = "true" ] || stop "catena via dispatch spenta per questo chiamante (chain_dispatch != true)"
 
           [ "${ARTICLE:-}" = "true" ] && stop "articolo prodotto — il successore lo fa gia' il push su content/**"
-          [ "${PROVIDER_BLOCKED:-}" = "true" ] && stop "pool AI condiviso temporaneamente indisponibile; si cede al cron"
+          [ "${PROVIDER_BLOCKED:-}" = "true" ] && stop "pool AI condiviso temporaneamente indisponibile; si cede a Cloud Scheduler"
           [ "${ROSTER_BLOCKED:-}" = "true" ] && stop "roster esaurito: il prossimo tentativo troverebbe lo stesso muro, non una finestra nuova"
-          [ "${COOPERATIVE_STOP:-}" = "true" ] && stop "cap cooperativo raggiunto: nessun articolo e nessun dispatch immediato; si cede al cron"
+          [ "${COOPERATIVE_STOP:-}" = "true" ] && stop "cap cooperativo raggiunto: nessun articolo e nessun dispatch immediato; si cede a Cloud Scheduler"
 
           kind='link'
           next_rescue="$rescue"
           if [ "${DECLARED:-}" != "true" ]; then
             kind=rescue
-            [ "$rescue" -ge "$max_rescue" ] && stop "esito NON dichiarato (kill duro, stallo, exit 3, uscita muta o guasto prima del generatore), e il soccorso di questa catena e' gia' speso ($rescue/$max_rescue) — si cede al cron"
+            [ "$rescue" -ge "$max_rescue" ] && stop "esito NON dichiarato (kill duro, stallo, exit 3, uscita muta o guasto prima del generatore), e il soccorso di questa catena e' gia' speso ($rescue/$max_rescue) — si cede a Cloud Scheduler"
             next_rescue=$(( rescue + 1 ))
           fi
 
           next_depth=$(( depth + 1 ))
           next_streak=$(( streak + 1 ))
-          [ "$next_streak" -ge "$max_streak" ] && stop "$next_streak anelli secchi di fila (cap $max_streak) — si cede al cron"
-          [ "$next_depth" -ge "$max_depth" ] && stop "profondita' $next_depth (cap $max_depth) — si cede al cron"
+          [ "$next_streak" -ge "$max_streak" ] && stop "$next_streak anelli secchi di fila (cap $max_streak) — si cede a Cloud Scheduler"
+          [ "$next_depth" -ge "$max_depth" ] && stop "profondita' $next_depth (cap $max_depth) — si cede a Cloud Scheduler"
 
           base="${SECTION_PRODUCED:-}"
           [ -n "$base" ] || base="${SECTION_REQUESTED:-${PRIMARY_SECTION:-}}"
@@ -1576,8 +1648,12 @@ jobs:
           echo "${kind}: depth ${depth}→${next_depth}, streak ${streak}→${next_streak}, soccorso ${rescue}→${next_rescue}, sezione ${base}→${next_section}, fra ${wait_s}s"
           [ "$wait_s" -gt 0 ] && sleep "$wait_s"
 
-          payload=$(printf '{"ref":"main","inputs":{"section":"%s","chain_depth":"%s","no_article_streak":"%s","parent_run_id":"%s","rescue_depth":"%s"}}' \
-            "$next_section" "$next_depth" "$next_streak" "${SELF_ID:-}" "$next_rescue")
+          chain_origin_input=''
+          if [ -n "${SIBLING_SECTION:-}" ]; then
+            chain_origin_input='"dispatch_origin":"chain",'
+          fi
+          payload=$(printf '{"ref":"main","inputs":{"section":"%s",%s"chain_depth":"%s","no_article_streak":"%s","parent_run_id":"%s","rescue_depth":"%s"}}' \
+            "$next_section" "$chain_origin_input" "$next_depth" "$next_streak" "${SELF_ID:-}" "$next_rescue")
 
           dispatch() {
             curl -sS -o /tmp/chain-dispatch.json -w '%{http_code}' \
@@ -1600,5 +1676,5 @@ jobs:
             echo "$kind dispatchato con $token_name: sezione $next_section, depth $next_depth, streak $next_streak, soccorso $next_rescue"
             exit 0
           fi
-          echo "::warning::dispatch ($kind) fallito (HTTP $code con $token_name): $(head -c 300 /tmp/chain-dispatch.json 2>/dev/null). La catena si ferma, il cron riprende."
+          echo "::warning::dispatch ($kind) fallito (HTTP $code con $token_name): $(head -c 300 /tmp/chain-dispatch.json 2>/dev/null). La catena si ferma, Cloud Scheduler riprende al prossimo slot."
           exit 0

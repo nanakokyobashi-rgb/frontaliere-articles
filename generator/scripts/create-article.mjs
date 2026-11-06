@@ -18614,8 +18614,9 @@ async function main() {
           deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
           deadlineReserveMs: MIN_VIABLE_ATTEMPT_MS,
         });
-        const trendSignals = Number(pool.perSource?.trends) || 0;
-        console.error(`DISCOVERY_POOL_BUILD orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${pool.perSource.trends} trendSignals=${trendSignals} postDedup=${pool.postDedupCount}`);
+        const trendSignals = Number(pool.perSource?.trendSignals) || 0;
+        const trendsWithEvidence = Number(pool.perSource?.trends) || 0;
+        console.error(`DISCOVERY_POOL_BUILD orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${trendsWithEvidence} trendSignals=${trendSignals} postDedup=${pool.postDedupCount}`);
         _discoveryHeadlines = _discoveryCandidatesToHeadlines(pool.candidates);
       } catch (err) {
         console.error(`⚠️  Discovery pool build failed error_type=${safeDiscoveryErrorType(err)}; falling back to proven`);
@@ -19311,8 +19312,9 @@ async function main() {
             deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
             deadlineReserveMs: MIN_VIABLE_ATTEMPT_MS,
           });
-          const trendSignals = Number(pool.perSource?.trends) || 0;
-          console.error(`DISCOVERY_POOL_BUILD_FALLBACK orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${pool.perSource.trends} trendSignals=${trendSignals} postDedup=${pool.postDedupCount}`);
+          const trendSignals = Number(pool.perSource?.trendSignals) || 0;
+          const trendsWithEvidence = Number(pool.perSource?.trends) || 0;
+          console.error(`DISCOVERY_POOL_BUILD_FALLBACK orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${trendsWithEvidence} trendSignals=${trendSignals} postDedup=${pool.postDedupCount}`);
           const fbHeadlines = _discoveryCandidatesToHeadlines(pool.candidates);
           if (fbHeadlines.length > 0) {
             chosenPool = 'discovery';

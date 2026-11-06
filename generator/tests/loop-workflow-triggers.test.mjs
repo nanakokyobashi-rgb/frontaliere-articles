@@ -45,7 +45,8 @@ const active = (src) =>
     .join('\n');
 
 const TESTS = active(read('.github/workflows/tests.yml'));
-const GA = active(read('.github/workflows/generate-article.yml'));
+const GENERATE_ARTICLE_WORKFLOW = read('.github/workflows/generate-article.yml');
+const GA = active(GENERATE_ARTICLE_WORKFLOW);
 const FOLLOWUP_DRAINER = read('.github/workflows/followup-drainer.yml');
 
 test('followup-drainer: cron durevole, wake-up reattivi bounded e fallback Codex', () => {
@@ -404,7 +405,7 @@ test('generate-article: il gate di ammissione ignora le run OLTRE la soglia di i
   );
 });
 
-// ── La soglia di incastro è derivata dal CRON, non dall'istogramma ───────────
+// ── La soglia di incastro è derivata dagli slot Cloud Scheduler ──────────────
 //
 // `WEDGE_SECONDS` sembra una costante scelta a occhio, e la prima volta lo era:
 // veniva da una «banda vuota» fra le run sane e le incastrate, misurata su 119
@@ -412,30 +413,30 @@ test('generate-article: il gate di ammissione ignora le run OLTRE la soglia di i
 // SOTTO il massimo delle sane (2556s), quindi nessun valore separa le due
 // distribuzioni e l'istogramma non può scegliere.
 //
-// Il valore viene invece dalla cadenza del cron. Durante un wedge da ~42 minuti
-// arriva UN solo `schedule`, con età fra un intervallo di cron e la morte della
-// run: la soglia deve stare a un intervallo o sotto, o quell'arrivo — l'unico
+// Il valore viene invece dalla cadenza Cloud Scheduler. Durante un wedge da
+// ~42 minuti arriva UN solo slot programmato, con età fra un intervallo e la
+// morte della run: la soglia deve stare a un intervallo o sotto, o quell'arrivo — l'unico
 // che c'è da salvare — resta fuori e la fix non fa niente.
 //
-// Questo test lega le due cose. Se un giorno il cron cambia cadenza, o qualcuno
-// alza la soglia «per prudenza», qui si accende invece di scoprirlo contando
+// Questo test lega le due cose. Se un giorno Cloud Scheduler cambia cadenza,
+// o qualcuno alza la soglia «per prudenza», qui si accende invece di scoprirlo contando
 // gli articoli mancanti.
-test('generate-article: la soglia di incastro resta sotto l\'intervallo del cron', () => {
+test('generate-article: la soglia di incastro resta sotto l\'intervallo Cloud Scheduler', () => {
   const admit = jobBlock(GA, 'admit');
   assert.ok(admit, 'job `admit` non trovato');
 
   const wedge = Number((admit.match(/WEDGE_SECONDS=(\d+)/) || [])[1]);
   assert.ok(Number.isFinite(wedge), 'Soglia di incastro non leggibile da `admit`.');
 
-  // I minuti degli slot cron di questo workflow: `7 * * * *` e `37 * * * *`.
-  const minuti = [...GA.matchAll(/-\s*cron:\s*'(\d+)\s+\*/g)].map((m) => Number(m[1]));
+  // Il marker è il contratto condiviso con il loop clock del sito.
+  const marker = /^# generation-cloud-slot-minutes: ([\d,]+)$/m.exec(GENERATE_ARTICLE_WORKFLOW);
+  const minuti = marker ? marker[1].split(',').map(Number) : [];
   assert.ok(
-    minuti.length >= 2,
-    `Slot cron orari leggibili: ${minuti.length}, ne servono almeno 2. O il cron è sceso a uno ` +
-      `slot, o ha cambiato forma (es. non più orario) e questa regex non lo legge più. In ` +
-      `entrambi i casi la cadenza da cui dipende \`WEDGE_SECONDS\` è cambiata e la soglia va ` +
-      `rifatta: meglio rosso qui che un controllo che passa senza controllare niente.`,
+    minuti.length >= 2 && minuti.every((minute) => Number.isInteger(minute) && minute >= 0 && minute < 60),
+    `Slot Cloud Scheduler leggibili: ${minuti.length}, ne servono almeno due minuti validi. ` +
+      `Se la cadenza cambia, la soglia va rifatta: meglio rosso qui che un controllo che passa senza controllare niente.`,
   );
+  assert.equal(new Set(minuti).size, minuti.length, 'gli slot devono avere minuti distinti');
 
   // L'intervallo peggiore fra due slot consecutivi in un'ora (che si richiude).
   const ordinati = [...minuti].sort((a, b) => a - b);
@@ -446,10 +447,10 @@ test('generate-article: la soglia di incastro resta sotto l\'intervallo del cron
   assert.ok(
     wedge <= gap * 60,
     `La soglia di incastro (${wedge}s = ${(wedge / 60).toFixed(0)} min) ha superato l'intervallo ` +
-      `del cron (${gap} min). Durante un wedge arriva un solo \`schedule\`, e con la soglia sopra ` +
+      `di Cloud Scheduler (${gap} min). Durante un wedge arriva un solo slot, e con la soglia sopra ` +
       `l'intervallo quell'arrivo non viene mai ammesso: il gate torna a bloccare tutti i ` +
       `successori di una run incastrata, che è il difetto che questa soglia esisteva per chiudere. ` +
-      `Se hai cambiato la cadenza del cron, rifai la soglia con lei.`,
+      `Se hai cambiato la cadenza Cloud Scheduler, rifai la soglia con lei.`,
   );
 });
 
@@ -507,14 +508,13 @@ test('generate-article: l\'esenzione del dispatch discrimina un anello da un uma
   );
 });
 
-test('generate-article: il cron resta il riavvio della catena, e non scende a uno slot', () => {
-  const on = GA.slice(GA.indexOf('on:'), GA.indexOf('\npermissions:'));
-  const slots = on.match(/- cron: '/g) || [];
+test('generate-article: Cloud Scheduler conserva i due slot nominali della catena', () => {
+  const marker = /^# generation-cloud-slot-minutes: ([\d,]+)$/m.exec(GENERATE_ARTICLE_WORKFLOW);
+  const slots = marker ? marker[1].split(',').map(Number) : [];
   assert.equal(
     slots.length,
     2,
-    'Quattro slot erano la compensazione di una catena che si spezzava a ogni anello secco; con il ' +
-      'successore garantito due bastano. Ma sotto i due il cron smette di essere una rete: è l\'unica ' +
-      'cosa che riaccende dopo un cap esaurito o un kill switch riarmato.',
+    'Il marker Cloud Scheduler deve dichiarare entrambi gli slot nominali che riaccendono la catena.',
   );
+  assert.deepEqual(slots, [7, 37]);
 });

@@ -495,6 +495,21 @@ test('Chain: con gli input della coppia storica il core dispatcha come la sorgen
   }
 });
 
+test('Chain: il core invia dispatch_origin solo al workflow principale', () => {
+  const core = runChain(CORE, {
+    CHAIN_DISPATCH: 'true', CALLER_WORKFLOW: 'generate-article.yml',
+    PRIMARY_SECTION: PAIR.primary, SIBLING_SECTION: PAIR.sibling,
+    SECTION_PRODUCED: 'svizzera', SECTION_REQUESTED: 'frontaliere',
+  });
+  const canton = runChain(CORE, {
+    CHAIN_DISPATCH: 'true', CALLER_WORKFLOW: 'generate-article-ti.yml',
+    PRIMARY_SECTION: 'canton-ti', SIBLING_SECTION: '',
+    SECTION_PRODUCED: 'canton-ti', SECTION_REQUESTED: 'canton-ti',
+  });
+  assert.equal(core.payload.inputs.dispatch_origin, 'chain');
+  assert.equal(Object.hasOwn(canton.payload.inputs, 'dispatch_origin'), false);
+});
+
 test('Chain: un cantone non dispatcha nessun successore', () => {
   const canton = { CALLER_WORKFLOW: 'generate-article-ti.yml', PRIMARY_SECTION: 'canton-ti', SIBLING_SECTION: '', SECTION_REQUESTED: 'canton-ti' };
   for (const flag of ['false', '', 'TRUE']) {
@@ -541,10 +556,12 @@ exit 0
 }
 
 const MODE_SCENARIOS = [
-  { name: 'cron frontaliere', event: 'schedule', schedule: '7 * * * *' },
-  { name: 'cron svizzera', event: 'schedule', schedule: '37 * * * *' },
-  { name: 'cron svizzera storico', event: 'schedule', schedule: '22 * * * *' },
-  { name: 'cron ignoto', event: 'schedule', schedule: '52 * * * *' },
+  { name: 'Cloud Scheduler frontaliere', event: 'workflow_dispatch', requested: 'frontaliere', dry: 'false' },
+  { name: 'Cloud Scheduler svizzera', event: 'workflow_dispatch', requested: 'svizzera', dry: 'false' },
+  { name: 'cron cantonale frontaliere', event: 'schedule', schedule: '7 * * * *' },
+  { name: 'cron cantonale svizzera', event: 'schedule', schedule: '37 * * * *' },
+  { name: 'cron cantonale storico', event: 'schedule', schedule: '22 * * * *' },
+  { name: 'cron cantonale ignoto', event: 'schedule', schedule: '52 * * * *' },
   { name: 'anello dopo svizzera', event: 'push', changed: 'content/blog-body-ch/it/a.ts', subject: 'Generate blog article (svizzera)' },
   { name: 'anello dopo frontaliere', event: 'push', changed: 'content/blog-body/it/a.ts', subject: 'Generate blog article (frontaliere)' },
   { name: 'anello dopo un altro produttore', event: 'push', changed: 'content/blog-body/it/a.ts', subject: 'Weekly border-wait ranking digest refresh' },
@@ -562,13 +579,14 @@ const modeCtx = (s) => ({
   'needs.admit.outputs.run_mode': s.admitMode || 'production',
   'github.event.before': '1111111111111111111111111111111111111111',
   'github.sha': '2222222222222222222222222222222222222222',
+  'github.event.schedule': s.schedule || '',
   'inputs.dry_run': s.dry || 'false',
 });
 
-test('Resolve run mode and section: con gli input della coppia storica il core sceglie come la sorgente', () => {
+test('Resolve run mode and section: Cloud Scheduler usa gli input della coppia e la catena resta invariata', () => {
   for (const s of MODE_SCENARIOS) {
     const source = runMode(SOURCE, {
-      ctx: { ...modeCtx(s), 'github.event.schedule': s.schedule || '', 'inputs.section': s.requested || '' },
+      ctx: { ...modeCtx(s), 'inputs.section': s.requested || '' },
       subject: s.subject, changed: s.changed,
     });
     const core = runMode(CORE, {
@@ -583,8 +601,7 @@ test('Resolve run mode and section: con gli input della coppia storica il core s
       assert.equal(source.chain, 'true', `${s.name}: unknown deve restare nella catena writer`);
     }
   }
-  // I cron della gemella dichiarati al core sono quelli che la sorgente cabla.
-  assert.match(SOURCE, /'22 \* \* \* \*'\|'37 \* \* \* \*'\) SEC=svizzera ;;/);
+  assert.doesNotMatch(SOURCE, /^  schedule:/m, 'il workflow principale non ha trigger cron nativi');
 });
 
 test('Resolve run mode and section: un cantone resta sulla propria sezione, qualunque cosa lo svegli', () => {
@@ -626,6 +643,7 @@ const CALLERS = CANTONS.map((c) => ({ canton: c, file: callerWorkflowFile(c.code
 
 test('cron: minuto e cadenza vengono dal profilo, e gli slot non si ammassano', () => {
   const reserved = parseReservedCronMinutes(SOURCE);
+  assert.deepEqual([...reserved].sort((a, b) => a - b), [7, 37], 'gli slot Cloud Scheduler restano riservati anche senza cron nativo');
   const seen = new Set();
   for (const { canton, crons, file } of CALLERS) {
     assert.equal(crons.length, 1, file);
@@ -777,6 +795,8 @@ test('il core dichiara ogni input che i chiamanti passano, e la catena e\' spent
   }
   assert.match(inputsBlock, /chain_dispatch:\n(?: {8}.*\n)*? {8}default: false\n {8}type: boolean/);
   assert.match(inputsBlock, /section_gate:\n(?: {8}.*\n)*? {8}default: 'none'/);
+  assert.doesNotMatch(CORE, /get_generation_oidc_token|request_generation_claim|ACTIONS_ID_TOKEN_REQUEST_URL|ACTIONS_ID_TOKEN_REQUEST_TOKEN/);
+  assert.doesNotMatch(CORE, /DISPATCH_ORIGIN|inputs\.dispatch_origin/);
   assert.match(CORE, /^on:\n {2}workflow_call:\n/m);
   assert.doesNotMatch(CORE, /^ {2}(schedule|push|workflow_dispatch):/m, 'il core non ha trigger suoi');
   // Il gate decide senza entrare nella coda del writer. La generazione di ogni

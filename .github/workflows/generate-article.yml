@@ -1,4 +1,7 @@
 name: Generate Blog Article
+# generation-cloud-clock-contract: v1
+# generation-cloud-slot-minutes: 7,37
+run-name: ${{ format('[loop-clock {0}] [generation-slot {1}] Generate Blog Article', inputs.loop_clock || 'manual', inputs.recovery_slot || 'none') }}
 
 # The last producer to move (issue #4974 item 3, §4/§5). Scans for a source,
 # generates a full multi-language article and registers it into the corpus this
@@ -76,13 +79,14 @@ name: Generate Blog Article
 # WHY IT CANNOT RUN AWAY. The chain link is the ARTICLE, not the run: only a
 # push that touches content/** continues it. A run that generates nothing
 # pushes only data/topic-candidates-evergreen-rejected.json, which is not in the
-# trigger paths, so the chain stops there and waits for cron. That is the one
-# deliberate difference from the site repo's version, which dispatched
+# trigger paths, so the chain stops there and waits for a Cloud Scheduler slot.
+# That is the one deliberate difference from the site repo's version, which dispatched
 # unconditionally — an unconditional chain that hits a fast-failing generator
 # spins as fast as the runs exit, and this repo has just spent four days proving
 # the generator can fail on every attempt. Chaining only on success makes the
-# stop condition impossible to get wrong, at the price of needing cron to
-# restart it after a dry spell. The two extra cron slots below pay that price.
+# stop condition impossible to get wrong, at the price of needing scheduled
+# slots to restart it after a dry spell. Cloud Scheduler owns the two nominal
+# UTC slots (:07 frontaliere, :37 svizzera) after the readiness cutover.
 #
 # THAT PRICE TURNED OUT TO BE PAID EVERY SECOND LINK (2026-08-10). The chain
 # alternates sections, and a section whose pool is dry ends the chain the first
@@ -98,9 +102,9 @@ name: Generate Blog Article
 # ora e' l'ESITO DICHIARATO: un run che non produce ma esce con una ragione
 # specifica alla sezione (EXIT_NO_ARTICLE_DECLARED, exit 4) dispatcha il
 # successore dopo 90s. Le indisponibilita' condivise del pool AI usano exit 5
-# e cedono al cron. Il buco che chiude e' misurato: 6,8h di
+# e cedono al prossimo slot programmato. Il buco che chiude e' misurato: 6,8h di
 # tempo davvero morto su 50,2h di finestra (14%), cioe' nessuna run vera attiva,
-# quasi tutto in attesa di uno slot cron dopo un anello secco.
+# quasi tutto in attesa di uno slot Cloud Scheduler dopo un anello secco.
 #
 # LA CONDIZIONE DI STOP E' PIU' LARGA, MA E' ANCORA IMPOSSIBILE DA SBAGLIARE, e
 # la ragione e' la stessa di prima letta al contrario: un generatore che
@@ -117,22 +121,23 @@ name: Generate Blog Article
 #   2. un tetto orario dentro `admit` (default 20 run/ora, `vars.CHAIN_MAX_RUNS_PER_HOUR`),
 #      calcolato dalla stessa chiamata API che il gate fa gia': zero chiamate in
 #      piu', e agisce PRIMA che il job `generate` esista;
-#   3. `no_article_streak`, cap 6: sei anelli secchi di fila cedono al cron;
+#   3. `no_article_streak`, cap 6: sei anelli secchi di fila cedono allo slot programmato;
 #   4. `chain_depth`, cap 40;
 #   5. `rescue_depth`, cap 1 — il gettone del SOCCORSO, che non e' un anello.
 # Piu' un kill switch a due strati (vedi lo step «Chain»).
 #
 # IL SOCCORSO, che non e' un anello (2026-08-19, #459). Lo stop sopra e' giusto
 # e resta: un esito non dichiarato non chaina. Ma il taglio 4→2 slot ha lasciato
-# proprio quel caso al solo cron, e la latenza di ripartenza oscilla fra ~5 e
-# ~35 minuti secondo la FASE fra il wedge e lo slot — perche' `admit` salta un
+# proprio quel caso al solo slot programmato, ora gestito da Cloud Scheduler,
+# e la latenza di ripartenza oscilla fra ~5 e ~35 minuti secondo la FASE fra il
+# wedge e lo slot — perche' `admit` salta un
 # arrivo che trova una run in volo da meno di 1800s (#442). Il soccorso e' un
 # riavvio SINGOLO per catena: un anello riparte subito e presume che valga la
 # pena riprovare, il soccorso presume solo che il muro possa non essere
-# permanente. Se fallisce anche lui si cede al cron, come prima.
+# permanente. Se fallisce anche lui si cede allo slot Cloud Scheduler, come prima.
 # NON copre `roster_blocked`: li' il muro e' noto, e il secondo tentativo lo
 # ritroverebbe identico. E non copre la morte del JOB (timeout del runner,
-# runner perso): li' nemmeno questo step gira, e il cron resta l'unica rete.
+# runner perso): li' nemmeno questo step gira, e Cloud Scheduler resta l'unica rete.
 #
 # ALSO DROPPED, each for a reason
 #   - mint-app-token.mjs: the App has no rights here (above).
@@ -148,22 +153,9 @@ name: Generate Blog Article
 #     their own kill-switches, never transported.
 
 on:
-  schedule:
-    # DUE SLOT, non piu' quattro (2026-08-18). Quattro erano la compensazione di
-    # una catena che si spezzava a ogni anello secco: il cron doveva riaccenderla
-    # da solo, e con GitHub che lascia cadere slot sotto carico (sei mancati di
-    # fila il 2026-08-03) due non bastavano. Ora l'anello secco ha un successore
-    # (vedi «L'ANELLO NON E' PIU' SOLO L'ARTICOLO»), quindi due slot bastano —
-    # e servono ancora: sono l'unica cosa che riaccende dopo un `chain_depth` o
-    # un `no_article_streak` esauriti, o dopo un kill switch riarmato. Per
-    # questo NON si scende a uno.
-    # Misurato il 2026-08-18: 40 dei 47 arrivi `schedule` delle ultime 100 run
-    # sono stati saltati da `admit` come riavvii ridondanti — cioe' i due slot
-    # tolti erano quasi interamente lavoro buttato.
-    # I due rimasti stanno liberi dai minuti degli altri produttori (:15
-    # publish-journalist, :30 batch-faq, :50 border-wait).
-    - cron: '7 * * * *'   # frontaliere
-    - cron: '37 * * * *'  # svizzera
+  # Cloud Scheduler in the site repo owns the nominal :07/:37 UTC slots.
+  # Keep this workflow dispatch-only for that clock: native schedule triggers
+  # are removed so one system owns each nominal slot.
   push:
     # Without this, ANY branch touching content/** starts a generation
     # attempt — not just main. Measured (issue #35, same bug class in
@@ -172,7 +164,7 @@ on:
     # MERGIATO") reverted the corpus wholesale and still matched
     # `content/**`. The normal chain (this workflow, batch-faq,
     # border-wait, publish-journalist) always pushes to
-    # `github.ref_name`, which for scheduled/dispatch runs is main — so
+    # `github.ref_name`, which for dispatch runs is main — so
     # this restriction does not affect the real chain link, only stray
     # non-main pushes. Matches publish-api.yml's own `branches: [main]`
     # guard on the same paths.
@@ -186,7 +178,7 @@ on:
       - 'scripts/ci/stamp-content-updated-at.mjs'
       - 'scripts/lib/content-updated-at.mjs'
       # THE CHAIN LINK. A corpus push means an article was actually produced, so
-      # the next attempt starts immediately instead of waiting for a cron slot
+      # the next attempt starts immediately instead of waiting for a scheduled slot
       # that may never arrive. Runs that produce nothing touch only
       # data/topic-candidates-evergreen-rejected.json and so do not chain — see
       # the header. Other producers (batch-faq, border-wait, publish-journalist)
@@ -209,10 +201,34 @@ on:
         required: false
         default: false
         type: boolean
+      dispatch_origin:
+        description: 'Required: manual request, Cloud Scheduler slot, workflow chain link, or editorial signal'
+        required: true
+        type: choice
+        options:
+          - manual
+          - cloud_scheduler
+          - chain
+          - editorial_signal
+      loop_clock:
+        description: 'Cloud Scheduler slot identity (required for cloud_scheduler origin)'
+        required: false
+        default: ''
+        type: string
+      recovery_slot:
+        description: 'Nominal UTC generation slot key claimed by Cloud Scheduler'
+        required: false
+        default: ''
+        type: string
+      recovery_claim:
+        description: 'One-time Firestore claim token for this nominal slot'
+        required: false
+        default: ''
+        type: string
       # ── I TRE INPUT DELLA CATENA ────────────────────────────────────────────
       # Nessuno di questi va messo a mano: li scrive lo step «Chain» dell'anello
-      # precedente. Un dispatch umano li lascia ai default, ed e' proprio questo
-      # a distinguerlo da un anello.
+      # precedente. L'origine esplicita del dispatch distingue la catena dagli
+      # avvii manuali anche se un input tecnico viene omesso.
       chain_depth:
         # DOPPIO LAVORO, e va saputo: e' il contatore di profondita' ED e' il
         # MARCATORE. `admit` esenta ogni dispatch umano dal gate (una richiesta
@@ -231,12 +247,12 @@ on:
         type: string
       rescue_depth:
         # NON e' un contatore di anelli: e' il gettone del SOCCORSO. Un esito
-        # non dichiarato (wedge) non chaina mai — e resta giusto cosi' — ma il
-        # cron da solo non lo copre piu' da quando gli slot sono due (#459).
+        # non dichiarato (wedge) non chaina mai — e resta giusto cosi' — ma i
+        # due slot orari di Cloud Scheduler da soli non lo coprono (#459).
         # Il soccorso e' UN riavvio, e questo gettone e' cio' che lo rende uno:
         # viaggia anche negli anelli normali, quindi il tetto e' uno per
-        # CATENA, non uno per run. Una catena nuova (cron, o push dopo un
-        # articolo) riparte da 0 perche' quel dispatch non lo imposta.
+        # CATENA, non uno per run. Una catena nuova (uno slot Cloud Scheduler o
+        # un push dopo un articolo) riparte da 0 perche' quel dispatch non lo imposta.
         description: 'Rescue restarts already spent by this chain (0 = none, never set by hand)'
         required: false
         default: '0'
@@ -300,7 +316,7 @@ on:
 #
 #  · `admit` (nessun gruppo, quindi mai in coda e mai sfrattato) risponde a
 #    «serve un'altra generazione ADESSO?». Se una run di questo workflow è già
-#    in volo la risposta è no — per costruzione, non per euristica: il cron è
+#    in volo la risposta è no — per costruzione, non per euristica: Cloud Scheduler è
 #    solo lo STARTER della catena (vedi l'intestazione), e gli altri produttori
 #    che spingono `content/**` sono «one more restart point». Un riavvio mentre
 #    la catena cammina è ridondante: la run in volo, se produce, chaina da sé.
@@ -315,12 +331,12 @@ on:
 # run con `total_count == 0` non è più producibile; e l'arrivo ridondante esce
 # `skipped`, non `cancelled`, cioè smette di far sparire il lavoro di un altro.
 # Quando la catena è ferma — pool secco, run fallita, niente in volo — il gate
-# lascia passare tutto come prima, che è esattamente il caso in cui il cron
+# lascia passare tutto come prima, che è esattamente il caso in cui Cloud Scheduler
 # serve.
 #
 # Il costo, dichiarato: se la run in volo non produce nulla, l'arrivo scartato
-# non c'è più e la catena riparte al prossimo slot cron (≤15 min). È il prezzo
-# già scelto e già scritto in questa intestazione («needing cron to restart it
+# non c'è più e la catena riparte al prossimo slot Cloud Scheduler (≤15 min). È il prezzo
+# già scelto e già scritto in questa intestazione («needing Cloud Scheduler to restart it
 # after a dry spell»), non uno nuovo.
 
 permissions:
@@ -336,6 +352,7 @@ jobs:
     permissions:
       actions: read # elencare le run di questo workflow
       contents: read # il compare per distinguere il self-test dal chain link
+      id-token: write # OIDC autenticato per ammettere/rilasciare lo slot Firestore
     outputs:
       proceed: ${{ steps.check.outputs.proceed }}
       chain_link: ${{ steps.check.outputs.chain_link }}
@@ -358,6 +375,91 @@ jobs:
           CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}
           CALLER_WORKFLOW: generate-article.yml
           DRY_RUN: ${{ inputs.dry_run }}
+          SECTION_REQUESTED: ${{ inputs.section }}
+          DISPATCH_ORIGIN: ${{ inputs.dispatch_origin }}
+          LOOP_CLOCK: ${{ inputs.loop_clock }}
+          RECOVERY_SLOT: ${{ inputs.recovery_slot }}
+          RECOVERY_CLAIM: ${{ inputs.recovery_claim }}
+          GENERATION_CLAIM_ENDPOINT: https://europe-west6-frontaliere-ticino.cloudfunctions.net/claimGenerationSlot
+        # Un push che non tocca `content/**` è il SELF-TEST dry del workflow
+        # (vedi i `paths` sopra: le altre due voci sono questo file e
+        # create-article.mjs). Non scrive niente, quindi non ha niente da
+        # serializzare — e soprattutto non va saltato: è l'unica prova che il
+        # workflow appena modificato parta ancora, e con il gate cieco
+        # verrebbe saltata quasi sempre, perché una generazione è in volo
+        # quasi sempre.
+        #
+        # Un commit che rigenera più chiamanti cantonali modifica più file che
+        # sono tutti nei rispettivi `push.paths`: senza un'elezione, ogni
+        # chiamante consumerebbe uno slot runner per lo stesso self-test dry.
+        # Il path alfabeticamente primo è il solo che esegue la prova; gli
+        # altri terminano qui con successo. Un singolo file resta il leader
+        # naturale, e i push che toccano `content/**` non passano da questo
+        # ramo.
+        # Il workflow sorgente non è un caller cantonale: se è modificato
+        # nello stesso push, resta fuori dall'handoff e conserva il proprio
+        # self-test. L'elezione si applica solo al caller presente nel batch.
+        #
+        # NB: il marker del chain link viene calcolato una volta qui, nel gate,
+        # e trasportato come output del job. Questa domanda è più stretta —
+        # «questo arrivo può scrivere?» — e nel dubbio (compare vuoto,
+        # `before` azzerato, errore API) si risponde di sì e si prosegue col
+        # ragionamento sotto, cioè si degrada al comportamento normale.
+        # A content push is the producer's successor. It may arrive while
+        # the producer is still in flight (the push can happen before the
+        # producer run has reached its final step), so remember this trigger
+        # for the in-flight decision below. The generate job's own
+        # concurrency group serializes it safely behind the producer.
+
+        # ── LIMITE DI ETA', e perche' senza non bastava ──────────────────
+        # Il confronto qui sopra non aveva un limite SUPERIORE: bastava che
+        # una run piu' vecchia risultasse ancora in volo per far saltare ogni
+        # arrivo successivo, per tutta la sua vita. Quando quella run e'
+        # incastrata il gate trasforma il guasto di UNA run in una finestra
+        # morta lunga quanto il suo timeout.
+        #
+        # Misurato il 2026-08-18 su 600 run (4 giorni). Il primo campione era
+        # di 119 run e mostrava una «banda vuota» fra 24,4 e 41,6 minuti: a
+        # n=600 quella banda NON esiste, ed e' un errore da non ripetere.
+        #   success  n=548   p50 3,1   p90 11,0   p95 14,0   max 42,6 min
+        #   failure  n=50    p50 42,4  p90 46,0   p95 50,2   max 51,0 min
+        # Le due distribuzioni si SOVRAPPONGONO: la mediana delle fallite
+        # (2543s) sta SOTTO il massimo delle sane (2556s). Nessuna soglia di
+        # durata le separa — ed e' esattamente per questo che il kill non usa
+        # la durata ma il SILENZIO (watchdog di stallo, piu' in basso). Qui
+        # non si uccide niente: si decide solo se AMMETTERE un successore, e
+        # l'asimmetria di costo e' tutta la ragione per cui una soglia di
+        # durata e' accettabile qui e non la' (vedi il prezzo, sotto).
+        #
+        # Da dove viene allora 1800? NON dall'istogramma: i wedge colti sono
+        # 44/50 per OGNI valore fra 1500 e 2400s, quindi la durata non sceglie.
+        # Viene dalla cadenza degli slot Cloud Scheduler, `7 * * * *` e `37 * * * *`, cioe' 30
+        # minuti. Durante un wedge da ~42 min arriva un solo slot programmato, con
+        # eta' compresa fra 30 e 42 min: 1800s e' il valore piu' ALTO che lo
+        # ammette ancora. A 2100s se ne perde meta', a 2400s quasi tutto; sotto
+        # i 1800s non si guadagna nessun arrivo (non ce ne sono di piu'
+        # giovani) e si pagano solo piu' falsi positivi. Se la cadenza degli
+        # slot cambia, questa soglia va rifatta con lei.
+        #
+        # Il prezzo, misurato e accettato: 5 run sane su 548 (0,91%) superano
+        # i 1800s, e per quelle il successore viene ammesso a torto. Costa una
+        # run in coda, non un articolo: si mette in CODA dietro la sana (vedi
+        # sotto), non la uccide e non le si sovrappone. E' il verso giusto in
+        # cui sbagliare.
+        #
+        # Proseguire per un push su `content/**` NON riapre il buco di
+        # sovrapposizione che e' costato #255/#281/#285: il job `generate` ha
+        # `concurrency: generate-article` con `cancel-in-progress: false`,
+        # quindi l'arrivo ammesso si METTE IN CODA e parte quando l'incastrata
+        # muore. Qui si sceglie fra «aspetta in coda» e «non esistere mai»,
+        # non fra «una» e «due». Gli altri trigger conservano il gate: una
+        # schedule o un dispatch di catena ridondante resta uno skip.
+        #
+        # L'eta' si misura da `$self_created`, non da `now`: e' gia' letto,
+        # rende il verdetto deterministico e non dipende dall'orologio del
+        # runner. Le date sono validate prima del confronto; se una lettura
+        # non e' interpretabile, `fail_closed_admission` nega l'ammissione.
+
         run: |
           set -uo pipefail
           # `run_mode` alimenta il gruppo di concurrency del job generate. Il
@@ -385,6 +487,69 @@ jobs:
           esac
           trap 'echo "content_push=$content_push" >> "$GITHUB_OUTPUT"; echo "run_mode=$run_mode" >> "$GITHUB_OUTPUT"' EXIT
 
+          generation_claim_endpoint="${GENERATION_CLAIM_ENDPOINT:-}"
+          generation_oidc_token=''
+          has_generation_claim=false
+          loop_clock_dispatch=false
+          if [ -n "${RECOVERY_SLOT:-}" ] && [ -n "${RECOVERY_CLAIM:-}" ]; then
+            has_generation_claim=true
+          fi
+
+          get_generation_oidc_token() {
+            if [ -n "$generation_oidc_token" ]; then return 0; fi
+            if [ -z "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ] \
+              || [ -z "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-}" ] \
+              || [ -z "$generation_claim_endpoint" ]; then
+              return 1
+            fi
+            local encoded_audience token_url token_response
+            encoded_audience="$(jq -rn --arg value "$generation_claim_endpoint" '$value | @uri')" || return 1
+            token_url="${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${encoded_audience}"
+            token_response="$(curl -sS --fail --max-time 10 \
+              -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+              "$token_url" 2>/dev/null)" || return 1
+            generation_oidc_token="$(jq -er '.value | select(type == "string" and length > 0)' \
+              <<<"$token_response" 2>/dev/null)" || return 1
+            echo "::add-mask::$generation_oidc_token"
+          }
+
+          request_generation_claim() {
+            local action payload response status body
+            action="$1"
+            get_generation_oidc_token || return 1
+            payload="$(jq -cn --arg action "$action" --arg slotKey "$RECOVERY_SLOT" \
+              --arg claimToken "$RECOVERY_CLAIM" --arg runId "$SELF_ID" \
+              '{action:$action,slotKey:$slotKey,claimToken:$claimToken,runId:$runId}')" || return 1
+            response="$(curl -sS --max-time 10 -X POST \
+              -H "Authorization: Bearer ${generation_oidc_token}" \
+              -H 'Content-Type: application/json' -d "$payload" \
+              -w $'\n%{http_code}' "$generation_claim_endpoint" 2>/dev/null)" || return 1
+            status="${response##*$'\n'}"
+            body="${response%$'\n'*}"
+            [ "$status" = "200" ] || return 1
+            if [ "$action" = "admit" ]; then
+              jq -e '.ok == true and .admitted == true' <<<"$body" >/dev/null 2>&1
+            else
+              jq -e '.ok == true and .released == true' <<<"$body" >/dev/null 2>&1
+            fi
+          }
+
+          release_generation_claim() {
+            [ "$has_generation_claim" = "true" ] || return 0
+            request_generation_claim release
+          }
+
+          skip_generation_slot() {
+            local reason="$1"
+            echo "::warning::slot Cloud Scheduler non ammesso: $reason"
+            if ! release_generation_claim; then
+              echo "::warning::claim non rilasciato esplicitamente; lease e retry Cloud Scheduler restano il fallback."
+            fi
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "GENERATION_OUTCOME kind=skipped reason=$reason section=unknown"
+            exit 0
+          }
+
           # ── UN DISPATCH ORA PUO' ESSERE DUE COSE DIVERSE (2026-08-18) ───────
           #
           # Prima di questa riga il gate esentava OGNI `workflow_dispatch`, e
@@ -408,7 +573,12 @@ jobs:
           # orario e il confronto con le run in volo, con il solo padre escluso.
           chain_depth=0
           case "${CHAIN_DEPTH:-0}" in
-            ''|*[!0-9]*) chain_depth=0 ;;
+            ''|*[!0-9]*)
+              if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+                skip_generation_slot generation-dispatch-chain-depth-invalid
+              fi
+              chain_depth=0
+              ;;
             *) chain_depth="${CHAIN_DEPTH:-0}" ;;
           esac
           is_link=false
@@ -417,41 +587,103 @@ jobs:
           fi
           echo "chain_link=$is_link" >> "$GITHUB_OUTPUT"
 
-          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$is_link" != "true" ]; then
-            echo "Dispatch manuale (chain_depth=$chain_depth) → si procede sempre."
+          dispatch_origin="${DISPATCH_ORIGIN:-}"
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            if [ -z "$dispatch_origin" ]; then
+              skip_generation_slot generation-dispatch-origin-missing
+            fi
+            case "$dispatch_origin" in
+              manual)
+                if [ "$is_link" = "true" ] \
+                  || [ -n "${LOOP_CLOCK:-}" ] \
+                  || [ -n "${RECOVERY_SLOT:-}" ] \
+                  || [ -n "${RECOVERY_CLAIM:-}" ] \
+                  || [ -n "${PARENT_RUN_ID:-}" ]; then
+                  skip_generation_slot generation-dispatch-origin-mismatch
+                fi
+                ;;
+              cloud_scheduler)
+                if [ "$is_link" = "true" ] \
+                  || [ -z "${LOOP_CLOCK:-}" ] \
+                  || [ -z "${RECOVERY_SLOT:-}" ] \
+                  || [ -z "${RECOVERY_CLAIM:-}" ] \
+                  || [ -n "${PARENT_RUN_ID:-}" ]; then
+                  skip_generation_slot generation-dispatch-origin-mismatch
+                fi
+                ;;
+              chain)
+                if [ "$is_link" != "true" ] \
+                  || [ -n "${LOOP_CLOCK:-}" ] \
+                  || [ -n "${RECOVERY_SLOT:-}" ] \
+                  || [ -n "${RECOVERY_CLAIM:-}" ] \
+                  || [ -z "${PARENT_RUN_ID:-}" ]; then
+                  skip_generation_slot generation-dispatch-origin-mismatch
+                fi
+                ;;
+              editorial_signal)
+                if [ "$is_link" = "true" ] \
+                  || [ -n "${LOOP_CLOCK:-}" ] \
+                  || [ -n "${RECOVERY_SLOT:-}" ] \
+                  || [ -n "${RECOVERY_CLAIM:-}" ] \
+                  || [ -n "${PARENT_RUN_ID:-}" ]; then
+                  skip_generation_slot generation-dispatch-origin-mismatch
+                fi
+                ;;
+              *) skip_generation_slot generation-dispatch-origin-missing ;;
+            esac
+          fi
+
+          has_slot_input=false
+          if [ -n "${LOOP_CLOCK:-}" ] || [ -n "${RECOVERY_SLOT:-}" ] || [ -n "${RECOVERY_CLAIM:-}" ]; then
+            has_slot_input=true
+          fi
+          if [ "$has_slot_input" = "true" ]; then
+            if [ "$EVENT_NAME" != "workflow_dispatch" ] \
+              || [ -z "${LOOP_CLOCK:-}" ] \
+              || [ -z "${RECOVERY_SLOT:-}" ] \
+              || [ -z "${RECOVERY_CLAIM:-}" ] \
+              || [ "$is_link" = "true" ] \
+              || [ "${DRY_RUN:-false}" = "true" ]; then
+              skip_generation_slot generation-slot-input-invalid
+            fi
+            case "${SECTION_REQUESTED:-}" in
+              frontaliere|svizzera) ;;
+              *) skip_generation_slot generation-slot-section-invalid ;;
+            esac
+            slot_prefix="generate-article/${SECTION_REQUESTED}/"
+            case "$RECOVERY_SLOT" in
+              "${slot_prefix}"????-??-??T??:??Z)
+                slot_timestamp="${RECOVERY_SLOT#"$slot_prefix"}"
+                ;;
+              *) skip_generation_slot generation-slot-key-invalid ;;
+            esac
+            if ! [[ "$RECOVERY_CLAIM" =~ ^[0-9a-f-]{36}$ ]]; then
+              skip_generation_slot generation-slot-claim-invalid
+            fi
+            expected_loop_clock="corpus-generation-slot-${SECTION_REQUESTED}@${slot_timestamp}"
+            if [ "$LOOP_CLOCK" != "$expected_loop_clock" ]; then
+              skip_generation_slot generation-slot-clock-mismatch
+            fi
+            loop_clock_dispatch=true
+            echo "::add-mask::$RECOVERY_CLAIM"
+          fi
+
+          # A scheduled event can survive briefly after the main trigger is
+          # removed. It has no Firestore claim and must not create a second
+          # owner for the same nominal slot. Generated canton callers keep
+          # their separate schedules, so retire only this workflow's event.
+          if [ "$EVENT_NAME" = "schedule" ] \
+            && [ "${CALLER_WORKFLOW:-}" = "generate-article.yml" ]; then
+            skip_generation_slot native-schedule-retired
+          fi
+
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] \
+            && { [ "$dispatch_origin" = "manual" ] || [ "$dispatch_origin" = "editorial_signal" ]; }; then
+            echo "Dispatch manuale/editoriale esplicito (chain_depth=$chain_depth) → si procede sempre."
             echo "proceed=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          # Un push che non tocca `content/**` è il SELF-TEST dry del workflow
-          # (vedi i `paths` sopra: le altre due voci sono questo file e
-          # create-article.mjs). Non scrive niente, quindi non ha niente da
-          # serializzare — e soprattutto non va saltato: è l'unica prova che il
-          # workflow appena modificato parta ancora, e con il gate cieco
-          # verrebbe saltata quasi sempre, perché una generazione è in volo
-          # quasi sempre.
-          #
-          # Un commit che rigenera più chiamanti cantonali modifica più file che
-          # sono tutti nei rispettivi `push.paths`: senza un'elezione, ogni
-          # chiamante consumerebbe uno slot runner per lo stesso self-test dry.
-          # Il path alfabeticamente primo è il solo che esegue la prova; gli
-          # altri terminano qui con successo. Un singolo file resta il leader
-          # naturale, e i push che toccano `content/**` non passano da questo
-          # ramo.
-          # Il workflow sorgente non è un caller cantonale: se è modificato
-          # nello stesso push, resta fuori dall'handoff e conserva il proprio
-          # self-test. L'elezione si applica solo al caller presente nel batch.
-          #
-          # NB: il marker del chain link viene calcolato una volta qui, nel gate,
-          # e trasportato come output del job. Questa domanda è più stretta —
-          # «questo arrivo può scrivere?» — e nel dubbio (compare vuoto,
-          # `before` azzerato, errore API) si risponde di sì e si prosegue col
-          # ragionamento sotto, cioè si degrada al comportamento normale.
-          # A content push is the producer's successor. It may arrive while
-          # the producer is still in flight (the push can happen before the
-          # producer run has reached its final step), so remember this trigger
-          # for the in-flight decision below. The generate job's own
-          # concurrency group serializes it safely behind the producer.
           if [ "$EVENT_NAME" = "push" ] && [ -n "${PUSH_BEFORE:-}" ]; then
             compare_status=0
             compare_truncated=false
@@ -519,6 +751,9 @@ jobs:
 
           fail_closed_admission() {
             echo "::warning::impossibile validare l'elenco completo delle run di generazione — ammissione negata"
+            if ! release_generation_claim; then
+              echo "::warning::claim non rilasciato esplicitamente; lease e retry Cloud Scheduler restano il fallback."
+            fi
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             echo "GENERATION_OUTCOME kind=skipped reason=admit-run-list-unreadable section=unknown"
             exit 0
@@ -588,8 +823,8 @@ jobs:
           # da zero e i due cap non vedono niente. Questo tetto invece si calcola
           # dallo stesso snapshot bounded gia' usato dal gate, e nessuno puo'
           # ripulirlo passando un input sbagliato. Vale solo per gli anelli: un
-          # umano e il cron restano fuori (il cron ha due slot, un umano si
-          # ferma da solo).
+          # avvio manuale e gli slot Cloud Scheduler restano fuori (sono due
+          # slot/ora; un avvio manuale si ferma da solo).
           if [ "$is_link" = "true" ]; then
             cap="${CHAIN_MAX_RUNS_PER_HOUR:-}"
             case "$cap" in
@@ -651,54 +886,6 @@ jobs:
           case "$parent_id" in
             ''|*[!0-9]*) parent_id=0 ;;
           esac
-          # ── LIMITE DI ETA', e perche' senza non bastava ──────────────────
-          # Il confronto qui sopra non aveva un limite SUPERIORE: bastava che
-          # una run piu' vecchia risultasse ancora in volo per far saltare ogni
-          # arrivo successivo, per tutta la sua vita. Quando quella run e'
-          # incastrata il gate trasforma il guasto di UNA run in una finestra
-          # morta lunga quanto il suo timeout.
-          #
-          # Misurato il 2026-08-18 su 600 run (4 giorni). Il primo campione era
-          # di 119 run e mostrava una «banda vuota» fra 24,4 e 41,6 minuti: a
-          # n=600 quella banda NON esiste, ed e' un errore da non ripetere.
-          #   success  n=548   p50 3,1   p90 11,0   p95 14,0   max 42,6 min
-          #   failure  n=50    p50 42,4  p90 46,0   p95 50,2   max 51,0 min
-          # Le due distribuzioni si SOVRAPPONGONO: la mediana delle fallite
-          # (2543s) sta SOTTO il massimo delle sane (2556s). Nessuna soglia di
-          # durata le separa — ed e' esattamente per questo che il kill non usa
-          # la durata ma il SILENZIO (watchdog di stallo, piu' in basso). Qui
-          # non si uccide niente: si decide solo se AMMETTERE un successore, e
-          # l'asimmetria di costo e' tutta la ragione per cui una soglia di
-          # durata e' accettabile qui e non la' (vedi il prezzo, sotto).
-          #
-          # Da dove viene allora 1800? NON dall'istogramma: i wedge colti sono
-          # 44/50 per OGNI valore fra 1500 e 2400s, quindi la durata non sceglie.
-          # Viene dalla CADENZA DEL CRON, `7 * * * *` e `37 * * * *`, cioe' 30
-          # minuti. Durante un wedge da ~42 min arriva UN solo `schedule`, con
-          # eta' compresa fra 30 e 42 min: 1800s e' il valore piu' ALTO che lo
-          # ammette ancora. A 2100s se ne perde meta', a 2400s quasi tutto; sotto
-          # i 1800s non si guadagna nessun arrivo (non ce ne sono di piu'
-          # giovani) e si pagano solo piu' falsi positivi. Se il cron cambia
-          # cadenza, questa soglia va rifatta con lui.
-          #
-          # Il prezzo, misurato e accettato: 5 run sane su 548 (0,91%) superano
-          # i 1800s, e per quelle il successore viene ammesso a torto. Costa una
-          # run in coda, non un articolo: si mette in CODA dietro la sana (vedi
-          # sotto), non la uccide e non le si sovrappone. E' il verso giusto in
-          # cui sbagliare.
-          #
-          # Proseguire per un push su `content/**` NON riapre il buco di
-          # sovrapposizione che e' costato #255/#281/#285: il job `generate` ha
-          # `concurrency: generate-article` con `cancel-in-progress: false`,
-          # quindi l'arrivo ammesso si METTE IN CODA e parte quando l'incastrata
-          # muore. Qui si sceglie fra «aspetta in coda» e «non esistere mai»,
-          # non fra «una» e «due». Gli altri trigger conservano il gate: una
-          # schedule o un dispatch di catena ridondante resta uno skip.
-          #
-          # L'eta' si misura da `$self_created`, non da `now`: e' gia' letto,
-          # rende il verdetto deterministico e non dipende dall'orologio del
-          # runner. Le date sono validate prima del confronto; se una lettura
-          # non e' interpretabile, `fail_closed_admission` nega l'ammissione.
           WEDGE_SECONDS=1800
 
           if ! older="$(printf '%s' "$inflight" \
@@ -741,12 +928,28 @@ jobs:
             else
               echo "Ci sono $older run di generate-article già in volo e più vecchie di questa ($self_created)."
               echo "La catena sta già camminando: questo arrivo ($EVENT_NAME) è un riavvio ridondante → skip."
+              if ! release_generation_claim; then
+                echo "::warning::claim non rilasciato esplicitamente; lease e retry Cloud Scheduler restano il fallback."
+              fi
               echo "proceed=false" >> "$GITHUB_OUTPUT"
               echo "GENERATION_OUTCOME kind=skipped reason=admit-in-flight section=unknown"
               exit 0
             fi
           else
             echo "Nessuna generazione più vecchia in volo → si procede."
+          fi
+
+          if [ "$loop_clock_dispatch" = "true" ]; then
+            if ! request_generation_claim admit; then
+              echo "::warning::ammissione Firestore dello slot non confermata; il generatore resta chiuso."
+              if ! release_generation_claim; then
+                echo "::warning::claim non rilasciato esplicitamente; lease e retry Cloud Scheduler restano il fallback."
+              fi
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              echo "GENERATION_OUTCOME kind=skipped reason=generation-slot-claim-denied section=unknown"
+              exit 0
+            fi
+            echo "Slot Cloud Scheduler ammesso dal registro Firestore: $RECOVERY_SLOT."
           fi
           echo "proceed=true" >> "$GITHUB_OUTPUT"
 
@@ -849,9 +1052,9 @@ jobs:
             DRY=false
           fi
 
-          # Section. github.event.schedule carries the cron expression that
-          # fired, which is the only way a scheduled run can tell which of its
-          # schedules it is — there is no per-schedule input.
+          # The main workflow no longer declares a native schedule trigger.
+          # Keep this schedule branch as the source template for the generated
+          # canton core, whose caller workflows still have their own cron slots.
           if [ "$EV" = "schedule" ]; then
             case "${{ github.event.schedule }}" in
               '22 * * * *'|'37 * * * *') SEC=svizzera ;;
@@ -1043,7 +1246,7 @@ jobs:
       #   3. A wall-clock budget caps the pair so two attempts cannot outlive
       #      the job's 60-minute timeout.
       # So "both sections dry" ends exactly where it ended before: one run, no
-      # article, no push, chain stopped, cron restarts it.
+      # article, no push, chain stopped, Cloud Scheduler restarts it.
       #
       # THE ALTERNATIVES, AND WHY NOT:
       #   - Hand the baton to the other section at CHAIN level: the empty run
@@ -1380,7 +1583,8 @@ jobs:
               # partial transaction. Only a clean, body-less stop is a
               # declared no-article outcome.
               # The marker is the declaration; keep all_declared=true so
-              # the no-article path exits 0 and the next cron can retry.
+              # the no-article path exits 0 and the next Cloud Scheduler slot
+              # can retry.
             # A provider that stalls stalls for the other section too, and the
             # budget is already gone. Stop; do not spend the job's remaining
             # minutes on the same wall.
@@ -1878,7 +2082,7 @@ jobs:
                 echo "::error::create-article.mjs ha restituito exit 5 senza marker producer-owned valido per la sezione $sec"
                 break
               fi
-              echo "::warning::pool AI condiviso indisponibile sulla sezione $sec; si cede al prossimo cron"
+              echo "::warning::pool AI condiviso indisponibile sulla sezione $sec; si cede al prossimo slot Cloud Scheduler"
               provider_blocked=true
               effective="$sec"
               break
@@ -1967,7 +2171,7 @@ jobs:
             exit 1
           fi
           if [ "$provider_blocked" = "true" ]; then
-            echo "::notice::pool AI condiviso temporaneamente indisponibile: nessun retry immediato, si attende il prossimo cron"
+            echo "::notice::pool AI condiviso temporaneamente indisponibile: nessun retry immediato, si attende il prossimo slot Cloud Scheduler"
             exit 0
           fi
           echo "nessun articolo, ma ogni tentativo ha dichiarato una ragione locale alla sezione (exit 4) — verde"
@@ -2732,8 +2936,8 @@ jobs:
       # ── L'ANELLO CHE MANCAVA (2026-08-18) ───────────────────────────────────
       #
       # IL BUCO, misurato: su 399 run in 50,2 ore il tempo davvero morto — nessuna
-      # generazione vera attiva — e' 6,8h, il 14% della finestra. Non e' il cron
-      # che manca gli slot: e' che un anello che non produce non pusha niente
+      # generazione vera attiva — e' 6,8h, il 14% della finestra. Non è Cloud Scheduler
+      # a mancare gli slot: è che un anello che non produce non pusha niente
       # sotto `content/**`, quindi non ha successore e la catena aspetta il
       # prossimo slot. Le run fallite ne occupano altre 15,7h (31%), che e' un
       # problema diverso e non si chiude qui.
@@ -2837,9 +3041,9 @@ jobs:
           # dichiarato con uno di questi flag non deve spendere il soccorso,
           # perche' il muro e' noto.
           [ "${ARTICLE:-}" = "true" ] && stop "articolo prodotto — il successore lo fa gia' il push su content/**"
-          [ "${PROVIDER_BLOCKED:-}" = "true" ] && stop "pool AI condiviso temporaneamente indisponibile; si cede al cron"
+          [ "${PROVIDER_BLOCKED:-}" = "true" ] && stop "pool AI condiviso temporaneamente indisponibile; si cede a Cloud Scheduler"
           [ "${ROSTER_BLOCKED:-}" = "true" ] && stop "roster esaurito: il prossimo tentativo troverebbe lo stesso muro, non una finestra nuova"
-          [ "${COOPERATIVE_STOP:-}" = "true" ] && stop "cap cooperativo raggiunto: nessun articolo e nessun dispatch immediato; si cede al cron"
+          [ "${COOPERATIVE_STOP:-}" = "true" ] && stop "cap cooperativo raggiunto: nessun articolo e nessun dispatch immediato; si cede a Cloud Scheduler"
 
           # `kind` tiene distinte due cose che finiscono entrambe in un dispatch.
           # L'ANELLO presume che valga la pena riprovare, e lo si concede solo a
@@ -2849,14 +3053,14 @@ jobs:
           next_rescue="$rescue"
           if [ "${DECLARED:-}" != "true" ]; then
             kind=rescue
-            [ "$rescue" -ge "$max_rescue" ] && stop "esito NON dichiarato (kill duro, stallo, exit 3, uscita muta o guasto prima del generatore), e il soccorso di questa catena e' gia' speso ($rescue/$max_rescue) — si cede al cron"
+            [ "$rescue" -ge "$max_rescue" ] && stop "esito NON dichiarato (kill duro, stallo, exit 3, uscita muta o guasto prima del generatore), e il soccorso di questa catena e' gia' speso ($rescue/$max_rescue) — si cede a Cloud Scheduler"
             next_rescue=$(( rescue + 1 ))
           fi
 
           next_depth=$(( depth + 1 ))
           next_streak=$(( streak + 1 ))
-          [ "$next_streak" -ge "$max_streak" ] && stop "$next_streak anelli secchi di fila (cap $max_streak) — si cede al cron"
-          [ "$next_depth" -ge "$max_depth" ] && stop "profondita' $next_depth (cap $max_depth) — si cede al cron"
+          [ "$next_streak" -ge "$max_streak" ] && stop "$next_streak anelli secchi di fila (cap $max_streak) — si cede a Cloud Scheduler"
+          [ "$next_depth" -ge "$max_depth" ] && stop "profondita' $next_depth (cap $max_depth) — si cede a Cloud Scheduler"
 
           # La sezione alterna, come ogni anello. `section` in uscita dallo step
           # di generazione e' la sezione che ha SCRITTO; senza articolo e' quella
@@ -2881,7 +3085,7 @@ jobs:
           echo "${kind}: depth ${depth}→${next_depth}, streak ${streak}→${next_streak}, soccorso ${rescue}→${next_rescue}, sezione ${base}→${next_section}, fra ${wait_s}s"
           [ "$wait_s" -gt 0 ] && sleep "$wait_s"
 
-          payload=$(printf '{"ref":"main","inputs":{"section":"%s","chain_depth":"%s","no_article_streak":"%s","parent_run_id":"%s","rescue_depth":"%s"}}' \
+          payload=$(printf '{"ref":"main","inputs":{"section":"%s","dispatch_origin":"chain","chain_depth":"%s","no_article_streak":"%s","parent_run_id":"%s","rescue_depth":"%s"}}' \
             "$next_section" "$next_depth" "$next_streak" "${SELF_ID:-}" "$next_rescue")
 
           dispatch() {
@@ -2905,8 +3109,8 @@ jobs:
             echo "$kind dispatchato con $token_name: sezione $next_section, depth $next_depth, streak $next_streak, soccorso $next_rescue"
             exit 0
           fi
-          # Rosso NO: un successore mancato costa un giro di cron, e far fallire
+          # Rosso NO: un successore mancato costa un giro programmato, e far fallire
           # la run qui renderebbe illeggibile la classificazione dell'esito che
           # lo step di generazione ha appena scritto.
-          echo "::warning::dispatch ($kind) fallito (HTTP $code con $token_name): $(head -c 300 /tmp/chain-dispatch.json 2>/dev/null). La catena si ferma, il cron riprende."
+          echo "::warning::dispatch ($kind) fallito (HTTP $code con $token_name): $(head -c 300 /tmp/chain-dispatch.json 2>/dev/null). La catena si ferma, Cloud Scheduler riprende al prossimo slot."
           exit 0
