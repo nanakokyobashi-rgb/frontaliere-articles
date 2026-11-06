@@ -879,7 +879,9 @@ function itemHeadingRecords(text) {
   for (const record of records) {
     expanded.push(record);
     if (record.protected) continue;
+    const structuralLine = maskInlineCodeSpans(record.line);
     for (const boundary of record.line.matchAll(ESCAPED_DAILY_ITEM_BOUNDARY_RE)) {
+      if (structuralLine[boundary.index] === ' ') continue;
       const offset = boundary.index + boundary[0].length;
       const line = record.line.slice(offset);
       if (!FOLLOWUP_ITEM_HEADING_LINE_RE.test(line)) continue;

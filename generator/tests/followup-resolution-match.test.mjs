@@ -191,6 +191,22 @@ test('il boundary serializzato non contamina Sources né quote o fence dell’it
   assert.equal(mergeDailyItemSources(items[0], items[1]).sources, 'PR #8102; PR #8101');
 });
 
+test('un boundary serializzato dentro inline-code non crea un item fantasma', () => {
+  const serializedBreak = String.raw`\n\n`;
+  const body = [
+    '### FU-2026-10-07-001 — primo item',
+    '- State: open',
+    `- Suggested action: usare \`${serializedBreak}### FU-2026-10-07-002 — esempio\` come esempio`,
+    '- Sources: PR #8102',
+  ].join('\n');
+
+  const items = parseFollowupItems(body);
+  assert.deepEqual(items.map((item) => [item.id, item.title, item.state]), [
+    ['FU-2026-10-07-001', 'primo item', 'open'],
+  ]);
+  assert.deepEqual(dailyBucketSourcePrNumbers(body), [8102]);
+});
+
 test('la deduplica conserva il done in qualunque ordine e unisce le Sources', () => {
   const item = (state, source) => ({
     state,
