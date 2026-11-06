@@ -626,15 +626,15 @@ test('il lettore TS rifiuta template interpolati ma preserva l’interpolazione 
 });
 
 describe('ledger di lettura e piano di backfill', () => {
-  test('il ledger reale copre i 210 stale con forma e conteggi attesi', () => {
+  test('il ledger reale copre i 211 articoli letti con forma e conteggi attesi', () => {
     const rows = backfillType.readArticleTypeReadings();
     const counts = Object.fromEntries(['news', 'evergreen', 'unclassified'].map((decision) => [
       decision,
       rows.filter((row) => row.decision === decision).length,
     ]));
-    assert.equal(rows.length, 210);
-    assert.deepEqual(counts, { news: 47, evergreen: 22, unclassified: 141 });
-    assert.equal(new Set(rows.map((row) => row.id)).size, 210);
+    assert.equal(rows.length, 211);
+    assert.deepEqual(counts, { news: 48, evergreen: 22, unclassified: 141 });
+    assert.equal(new Set(rows.map((row) => row.id)).size, 211);
     for (const row of rows) {
       assert.deepEqual(Object.keys(row).sort(), ['basis', 'decision', 'id', 'readAt', 'reason']);
       assert.equal(row.basis, 'reading');

@@ -7908,6 +7908,7 @@ const RAW_ARTICLES = [
  date: '2026-04-17T18:33:12.083Z',
  image: '/images/blog/moon-stars-resident-discount-locarno-card-2.webp',
  hasCalculator: true,
+ articleType: 'news',
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
