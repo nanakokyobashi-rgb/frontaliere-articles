@@ -28,6 +28,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'aumento-soglie-reddito-2027': { it: 'aumento-soglie-reddito-2027', en: 'income-threshold-increase-2027', de: 'einkommensschwellen-erhoehung-2027', fr: 'augmentation-seuils-revenu-2027' },
  'sportello-virtuale-polizia-berna': { it: 'sportello-virtuale-polizia-berna', en: 'bern-virtual-police-counter', de: 'virtueller-polizeischalter-bern', fr: 'guichet-police-virtuel-berne' },
  'procedure-impianti-solari-eolici': { it: 'procedure-impianti-solari-eolici', en: 'solar-wind-plant-procedures', de: 'verfahren-solare-windanlagen', fr: 'procedures-installations-solaires' },
+ 'revisione-legge-personale-berna': { it: 'revisione-legge-personale-berna', en: 'bern-personnel-law-consultation', de: 'bern-personalgesetz-vernehmlassung', fr: 'berne-loi-personnel-consultation' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

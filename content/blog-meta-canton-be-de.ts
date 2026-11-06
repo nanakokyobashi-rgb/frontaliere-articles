@@ -78,6 +78,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.procedure-impianti-solari-eolici.title': 'Revision des Berner Baugesetzes für Solar- und Windenergieanlagen',
     'blog.article.procedure-impianti-solari-eolici.excerpt': 'Am 1. April 2026 ist der sogenannte Beschleunigungserlass des Bundes in Kraft getreten, der die Kantone verpflichtet, die Verfahren für den Bau, den Ausbau und die Erneuerung von Solar- und Windenergieanlagen von nationalem Interesse zu beschleunigen.',
     'blog.article.procedure-impianti-solari-eolici.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.revisione-legge-personale-berna.title': 'Regierung des Kantons Bern eröffnet Vernehmlassung zum Personalgesetz',
+    'blog.article.revisione-legge-personale-berna.excerpt': 'Die Kantonsregierung eröffnet die Vernehmlassung zur Teilrevision des Personalgesetzes: Die Frist ist auf den 12. Februar 2027 festgelegt.',
+    'blog.article.revisione-legge-personale-berna.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;

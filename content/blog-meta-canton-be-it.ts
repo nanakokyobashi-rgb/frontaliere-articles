@@ -78,6 +78,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.procedure-impianti-solari-eolici.title': 'Revisione legge edilizia Berna per impianti solari ed eolici',
     'blog.article.procedure-impianti-solari-eolici.excerpt': 'Dal 1° aprile 2026 è in vigore l\'obbligo federale per impianti solari ed eolici di interesse nazionale; Berna adegua la legge edilizia.',
     'blog.article.procedure-impianti-solari-eolici.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.revisione-legge-personale-berna.title': 'Governo di Berna apre consultazione sulla legge sul personale',
+    'blog.article.revisione-legge-personale-berna.excerpt': 'Il Governo cantonale apre la consultazione sulla revisione parziale della legge sul personale: il termine è fissato al 12 febbraio 2027.',
+    'blog.article.revisione-legge-personale-berna.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBeIt;

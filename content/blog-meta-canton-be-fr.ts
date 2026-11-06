@@ -78,6 +78,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.procedure-impianti-solari-eolici.title': 'Révision de la loi bernoise sur le solaire et l\'éolien',
     'blog.article.procedure-impianti-solari-eolici.excerpt': 'Depuis le 1er avril 2026, l\'obligation fédérale concernant les installations solaires et éoliennes d\'intérêt national est en vigueur ; Berne adapte la loi sur les constructions.',
     'blog.article.procedure-impianti-solari-eolici.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.revisione-legge-personale-berna.title': 'Le Gouvernement de Berne ouvre la consultation sur la loi sur le personnel',
+    'blog.article.revisione-legge-personale-berna.excerpt': 'Le Gouvernement cantonal ouvre la consultation sur la révision partielle de la loi sur le personnel : le délai est fixé au 12 février 2027.',
+    'blog.article.revisione-legge-personale-berna.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

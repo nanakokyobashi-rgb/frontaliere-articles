@@ -78,6 +78,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.procedure-impianti-solari-eolici.title': 'Revision of Bern building law for solar and wind installations',
     'blog.article.procedure-impianti-solari-eolici.excerpt': 'Since April 1, 2026, the federal requirement for solar and wind installations of national interest has been in force; Bern is amending the building law.',
     'blog.article.procedure-impianti-solari-eolici.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.revisione-legge-personale-berna.title': 'Government of Bern opens consultation on personnel law',
+    'blog.article.revisione-legge-personale-berna.excerpt': 'The cantonal government is opening the consultation on the partial revision of the personnel law: the deadline is set for February 12, 2027.',
+    'blog.article.revisione-legge-personale-berna.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;
