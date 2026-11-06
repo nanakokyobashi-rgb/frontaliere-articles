@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/822798/verkehrsunfall-am-mittwochmittag-im-bildackerkreisel-in-gamsen": {
-      "section": "canton-vs",
-      "ts": 1793798369253
-    },
-    "canton-vs::https://www.pomona.ch/story/819661/steuerinitiative-schafft-wirrwarr-und-ist-ungerecht-und-teuer": {
-      "section": "canton-vs",
-      "ts": 1793798370781
-    },
-    "canton-vs::https://www.pomona.ch/story/822770/sabotage-im-supermarkt-was-hinter-den-cyberangriffen-steckt": {
-      "section": "canton-vs",
-      "ts": 1793798372397
-    },
     "canton-vs::https://www.ossolanews.it/2026/11/05/leggi-notizia/argomenti/attualita-26/articolo/frontalieri-piu-risorse-per-gli-stipendi-nel-vco-il-piemonte-pronto-a-ricevere-i-fondi.html": {
       "section": "canton-vs",
       "ts": 1793919237517
@@ -35,6 +23,22 @@
     "canton-vs::https://www.pomona.ch/story/820458/ruffiner-reisen-verdr%c3%a4ngt-postauto": {
       "section": "canton-vs",
       "ts": 1793968290227
+    },
+    "canton-vs::https://www.pomona.ch/story/823382/just-eat-macht-auf-uber-gr%c3%b6sste-ahvausgleichskasse-schl%c3%a4gt-alarm": {
+      "section": "canton-vs",
+      "ts": 1793971033439
+    },
+    "canton-vs::https://www.pomona.ch/story/821809/vom-spital-zum-wohnquartier-gemeinde-visp-lanciert-studienauftrag": {
+      "section": "canton-vs",
+      "ts": 1793973091892
+    },
+    "canton-vs::https://www.pomona.ch/story/822445/so-will-der-nationalrat-die-aufr%c3%bcstung-finanzieren%c2%a0-sp-droht-mit-referendum": {
+      "section": "canton-vs",
+      "ts": 1793973094601
+    },
+    "canton-vs::https://www.pomona.ch/story/823525/jetzt-auch-in-der-schweiz-metzgerei-muss-nach-cyberangriff-schliessen-auch-k%c3%bchlung-von-volgl%c3%a4den-gest%c3%b6rt": {
+      "section": "canton-vs",
+      "ts": 1793973108557
     }
   }
 }
