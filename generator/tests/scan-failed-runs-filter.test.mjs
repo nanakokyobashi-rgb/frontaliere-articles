@@ -145,6 +145,31 @@ test('un esito di lease condiviso non attribuisce il fallimento a un crawler', (
   assert.match(report.description, /fust: crawler exited with status 44/);
 });
 
+test('la diagnostica lease/lock richiede parole intere', () => {
+  const cases = [
+    ['request failed: blocked by WAF', 'Crawler Failure: Run capri-holdings'],
+    ['request failed: please retry', 'Crawler Failure: Run capri-holdings'],
+    ['global data-pipeline lease is busy', `Workflow Failure: ${CRAWLER_GROUP}`],
+    ['global lock not acquired', `Workflow Failure: ${CRAWLER_GROUP}`],
+  ];
+
+  for (const [detail, expectedTitle] of cases) {
+    const log = [
+      groupLogLine('28:00.0000000', `❌ Capri Holdings crawler failed: ${detail}`),
+      groupLogLine('28:00.0100000', 'capri-holdings: crawler exited with status 1'),
+      groupLogLine('28:00.0200000', 'crawler group completed with 26 succeeded, 1 failed, 0 missing, 0 systemic'),
+    ].join('\n');
+    const report = buildCrawlerFailureReport({
+      log,
+      run: CRAWLER_RUN,
+      workflowName: CRAWLER_GROUP,
+    });
+
+    assert.ok(report, detail);
+    assert.equal(report.title, expectedTitle, detail);
+  }
+});
+
 test('lo shell trace con ANSI serializzato come ^[[ non diventa una diagnostica runtime', () => {
   const escapedAnsi = '^[[36;1m';
   const reset = '^[[0m';
