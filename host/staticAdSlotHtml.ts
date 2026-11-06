@@ -77,23 +77,33 @@ export function isStaticAdSlotKey(value: unknown): value is StaticAdSlotKey {
 }
 
 /** Validate runtime payloads before coercion or attribute rendering. */
-function validStaticAdOptions(options: unknown): options is StaticAdSlotHtmlOptions | undefined {
-  if (options === undefined) return true;
-  if (options === null || typeof options !== 'object' || Array.isArray(options)) return false;
-  for (const [field, type] of [
-    ['placement', 'string'],
-    ['experimentId', 'string'],
-    ['experimentVariant', 'string'],
-    ['collapseWhenUnfilled', 'boolean'],
-  ]) {
-    const descriptor = Object.getOwnPropertyDescriptor(options, field);
-    // Inherited fields and accessors are not data payloads. Do not invoke them.
-    if (!descriptor) {
-      if (field in options) return false;
-    } else if (!('value' in descriptor)
-      || (descriptor.value !== undefined && typeof descriptor.value !== type)) return false;
+type StaticAdOptionsSnapshot = Pick<StaticAdSlotHtmlOptions,
+  'placement' | 'experimentId' | 'experimentVariant' | 'collapseWhenUnfilled'>;
+
+function snapshotStaticAdOptions(options: unknown): StaticAdOptionsSnapshot | null {
+  try {
+    if (options === undefined) return {};
+    if (options === null || typeof options !== 'object' || Array.isArray(options)) return null;
+
+    const snapshot: StaticAdOptionsSnapshot = {};
+    for (const [field, type] of [
+      ['placement', 'string'],
+      ['experimentId', 'string'],
+      ['experimentVariant', 'string'],
+      ['collapseWhenUnfilled', 'boolean'],
+    ] as const) {
+      const descriptor = Object.getOwnPropertyDescriptor(options, field);
+      // Inherited fields and accessors are not data payloads. Do not invoke them.
+      if (!descriptor) {
+        if (field in options) return null;
+      } else if (!('value' in descriptor)
+        || (descriptor.value !== undefined && typeof descriptor.value !== type)) return null;
+      else snapshot[field] = descriptor.value;
+    }
+    return snapshot;
+  } catch {
+    return null;
   }
-  return true;
 }
 
 function safeDataValue(value: string): string {
@@ -101,7 +111,9 @@ function safeDataValue(value: string): string {
 }
 
 export function staticAdSlotHtml(slot: StaticAdSlotKey, options?: StaticAdSlotHtmlOptions): string {
-  if (!isStaticAdSlotKey(slot) || !validStaticAdOptions(options)) return '';
+  if (!isStaticAdSlotKey(slot)) return '';
+  const optionSnapshot = snapshotStaticAdOptions(options);
+  if (optionSnapshot === null) return '';
 
   const config = STATIC_AD_SLOTS[slot];
   const attrs = [
@@ -112,12 +124,12 @@ export function staticAdSlotHtml(slot: StaticAdSlotKey, options?: StaticAdSlotHt
     `data-ad-format="${config.format}"`,
   ];
   if (config.layout) attrs.push(`data-ad-layout="${config.layout}"`);
-  if (options?.placement || config.placement) {
-    attrs.push(`data-ad-placement="${safeDataValue(options?.placement || config.placement || '')}"`);
+  if (optionSnapshot.placement || config.placement) {
+    attrs.push(`data-ad-placement="${safeDataValue(optionSnapshot.placement || config.placement || '')}"`);
   }
-  if (options?.collapseWhenUnfilled) attrs.push('data-ft-static-ad="true"');
-  if (options?.experimentId) attrs.push(`data-ad-experiment="${safeDataValue(options.experimentId)}"`);
-  if (options?.experimentVariant) attrs.push(`data-ad-variant="${safeDataValue(options.experimentVariant)}"`);
+  if (optionSnapshot.collapseWhenUnfilled) attrs.push('data-ft-static-ad="true"');
+  if (optionSnapshot.experimentId) attrs.push(`data-ad-experiment="${safeDataValue(optionSnapshot.experimentId)}"`);
+  if (optionSnapshot.experimentVariant) attrs.push(`data-ad-variant="${safeDataValue(optionSnapshot.experimentVariant)}"`);
   if (config.fullWidthResponsive) attrs.push('data-full-width-responsive="true"');
   return `<div data-house><ins ${attrs.join(' ')}></ins></div>`;
 }

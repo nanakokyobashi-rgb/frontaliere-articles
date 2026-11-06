@@ -130,6 +130,52 @@ test('malformed ad options fail closed without coercing fields or invoking acces
   }
 });
 
+test('proxy ad options fail closed on traps and render one descriptor snapshot', () => {
+  const descriptorTrap = new Proxy(Object.create(null), {
+    getOwnPropertyDescriptor() {
+      throw new Error('descriptor trap must be contained');
+    },
+  });
+  assert.doesNotThrow(() => {
+    assert.equal(staticAdSlotHtml('article-atf', descriptorTrap), '');
+  });
+
+  const presenceTrap = new Proxy(Object.create(null), {
+    has() {
+      throw new Error('has trap must be contained');
+    },
+  });
+  assert.doesNotThrow(() => {
+    assert.equal(staticAdSlotHtml('article-atf', presenceTrap), '');
+  });
+
+  const target = {
+    placement: 'proxy-placement',
+    experimentId: 'proxy-experiment',
+    experimentVariant: 'proxy-variant',
+    collapseWhenUnfilled: false,
+  };
+  const descriptorFields = [];
+  const getTrap = new Proxy(target, {
+    getOwnPropertyDescriptor(current, field) {
+      descriptorFields.push(field);
+      return Object.getOwnPropertyDescriptor(current, field);
+    },
+    get() {
+      throw new Error('render must use the descriptor snapshot');
+    },
+  });
+  const markup = staticAdSlotHtml('article-atf', getTrap);
+
+  assert.deepEqual(descriptorFields, [
+    'placement', 'experimentId', 'experimentVariant', 'collapseWhenUnfilled',
+  ]);
+  assert.match(markup, /data-ad-placement="proxy-placement"/);
+  assert.match(markup, /data-ad-experiment="proxy-experiment"/);
+  assert.match(markup, /data-ad-variant="proxy-variant"/);
+  assert.doesNotMatch(markup, /data-ft-static-ad/);
+});
+
 test('valid ad options preserve defaults, false flags and attribute escaping', () => {
   assert.equal(staticAdSlotHtml('article-atf', {}), staticAdSlotHtml('article-atf'));
   const markup = staticAdSlotHtml('article-atf', {
