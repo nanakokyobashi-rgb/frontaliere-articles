@@ -91,6 +91,26 @@ test('il monitor centrale ha budget bounded, permessi check e inoltra dry-run/lo
   assert.match(step, /if \[ "\$\{\{ github\.event\.inputs\.dry_run \}\}" = "true" \]; then/);
 });
 
+test('il monitor esegue anche il resolver delle issue timeout scoped', () => {
+  const scan = workflowStep('Scan timed out and host-killed jobs');
+  const resolve = workflowStep('Close recovered scoped timeout issues');
+
+  assert.ok(WORKFLOW.indexOf(resolve) > WORKFLOW.indexOf(scan),
+    'il resolver deve osservare anche le issue aperte dallo scan corrente');
+  assert.match(resolve, /^        if: always\(\)$/m);
+  assert.match(resolve, /^        continue-on-error: true$/m);
+  assert.match(resolve, /GH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/);
+  assert.match(resolve, /GH_REPO: \$\{\{ github\.repository \}\}/);
+  assert.match(resolve, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\}"/);
+  assert.match(resolve, /node scripts\/ci\/scan-job-timeouts\.mjs --resolve --dry-run/);
+  assert.match(resolve, /else\n\s+node scripts\/ci\/scan-job-timeouts\.mjs --resolve\n\s+fi/);
+  assert.equal(
+    (WORKFLOW.match(/scan-job-timeouts\.mjs --resolve(?! --dry-run)/g) || []).length,
+    1,
+    'il resolver live deve avere un solo punto di invocazione',
+  );
+});
+
 test('orizzonte created fail-closed e lookback derivato realmente cappato a 12 ore', () => {
   assert.throws(
     () => assertRunAgeHorizon({ maxRunAgeMinutes: 3 * 24 * 60, allowTruncated: false }),
