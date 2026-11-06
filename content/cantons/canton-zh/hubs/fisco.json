@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "fisco",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "adafdae41f3cdf43cb1c3fe1cb89230d96b948b75ea1b10ad7d87bbd9a5dca62",
+  "updatedAt": "2026-11-06T11:58:54.825Z",
+  "contentHash": "ede49c1676e7e018090425aa7271de6685bace0f853344fd2b231f6e48b3cdf2",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -115,10 +115,16 @@
               "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/steuern-finanzen/anpassung-des-merkblatts-beteiligungen-und-weiterer-erlasse-im-z.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Carmen Walker Späh chiede meno tasse per imprese e privati",
+          "url": "/articoli-zurigo/zurigo-tasse-imprese-privati/",
+          "excerpt": "Carmen Walker Späh vuole riportare Zurigo nel campo medio delle imposte sugli utili con un pacchetto per imprese e privati.",
+          "date": "2026-11-06T11:54:29.834Z"
+        },
         {
           "title": "Goldküste: moglie riceve una seconda fattura fiscale",
           "url": "/articoli-zurigo/seconda-fattura-goldkueste/",
@@ -160,12 +166,6 @@
           "url": "/articoli-svizzera/imposta-cani-zurigo-guida/",
           "excerpt": "Nel Cantone di Zurigo l'imposta sui cani segue regole cantonali e comunali.",
           "date": "2026-10-12T08:03:47.898Z"
-        },
-        {
-          "title": "Cembra e Vontobel lasciano Zurigo: fisco e spazi spingono il trasloco",
-          "url": "/articoli-svizzera/cembra-vontobel-sede-baden-baar/",
-          "excerpt": "Cembra sposta 660 dipendenti a Baden (15% imposte) in autunno 2027; Vontobel porta 1.500 posti a Baar (12%) entro il 2030. Zurigo al 20%.",
-          "date": "2026-09-25T22:08:30.423Z"
         }
       ],
       "latestCantonArticles": [],
@@ -195,7 +195,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T11:58:54.825Z"
     },
     "en": {
       "canton": "ZH",
@@ -288,10 +288,16 @@
               "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/steuern-finanzen/anpassung-des-merkblatts-beteiligungen-und-weiterer-erlasse-im-z.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Carmen Walker Späh calls for lower taxes for businesses and private individuals",
+          "url": "/en/zurich-articles/zurich-taxes-companies-private/",
+          "excerpt": "Carmen Walker Späh wants to bring Zurich back into the middle range of profit taxes with a package for businesses and private individuals.",
+          "date": "2026-11-06T11:54:29.834Z"
+        },
         {
           "title": "Gold Coast: wife receives a second tax bill",
           "url": "/en/zurich-articles/gold-coast-second-tax-bill/",
@@ -333,12 +339,6 @@
           "url": "/en/swiss-articles/dog-tax-in-zurich-registration-guide/",
           "excerpt": "In the Canton of Zurich, the dog tax follows cantonal and municipal rules.",
           "date": "2026-10-12T08:03:47.898Z"
-        },
-        {
-          "title": "Cembra and Vontobel leave Zurich: taxes and space drive the move",
-          "url": "/en/swiss-articles/cembra-vontobel-relocation-baden-baar/",
-          "excerpt": "Cembra moves 660 employees to Baden (15% taxes) in autumn 2027; Vontobel brings 1.500 jobs to Baar (12%) by 2030. Zurich at 20%.",
-          "date": "2026-09-25T22:08:30.423Z"
         }
       ],
       "latestCantonArticles": [],
@@ -368,7 +368,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T11:58:54.825Z"
     },
     "de": {
       "canton": "ZH",
@@ -461,10 +461,16 @@
               "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/steuern-finanzen/anpassung-des-merkblatts-beteiligungen-und-weiterer-erlasse-im-z.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Carmen Walker Späh fordert weniger Steuern für Unternehmen und Privatpersonen",
+          "url": "/de/zurich-artikel/zuerich-steuern-unternehmen-private/",
+          "excerpt": "Carmen Walker Späh will Zürich mit einem Paket für Unternehmen und Privatpersonen wieder ins Mittelfeld der Gewinnsteuern bringen.",
+          "date": "2026-11-06T11:54:29.834Z"
+        },
         {
           "title": "Goldküste: Ehefrau erhält eine zweite Steuerrechnung",
           "url": "/de/zurich-artikel/goldkueste-zweite-steuerrechnung/",
@@ -506,12 +512,6 @@
           "url": "/de/schweiz-artikel/hundesteuer-in-zurich-leitfaden-zur-registrierung/",
           "excerpt": "Im Kanton Zürich richtet sich die Hundesteuer nach kantonalen und kommunalen Vorschriften.",
           "date": "2026-10-12T08:03:47.898Z"
-        },
-        {
-          "title": "Cembra & Vontobel Zürich: Steuern & Räume treiben Umzug",
-          "url": "/de/schweiz-artikel/cembra-vontobel-sitz-baden-baar/",
-          "excerpt": "Cembra verlegt im Herbst 2027 660 Mitarbeitende nach Baden (15% Steuern); Vontobel verlegt bis 2030 1.500 Arbeitsplätze nach Baar (12%). Zürich bei 20%.",
-          "date": "2026-09-25T22:08:30.423Z"
         }
       ],
       "latestCantonArticles": [],
@@ -541,7 +541,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T11:58:54.825Z"
     },
     "fr": {
       "canton": "ZH",
@@ -634,10 +634,16 @@
               "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/steuern-finanzen/anpassung-des-merkblatts-beteiligungen-und-weiterer-erlasse-im-z.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Carmen Walker Späh demande moins d’impôts pour tous",
+          "url": "/fr/articles-zurich/zurich-impots-entreprises-particuliers/",
+          "excerpt": "Carmen Walker Späh veut ramener Zurich dans la moyenne en matière d’imposition des bénéfices avec un paquet pour les entreprises et les particuliers.",
+          "date": "2026-11-06T11:54:29.834Z"
+        },
         {
           "title": "Goldküste : l'épouse reçoit une deuxième facture fiscale",
           "url": "/fr/articles-zurich/goldcoast-deuxieme-facture-fiscale/",
@@ -679,12 +685,6 @@
           "url": "/fr/articles-suisse/taxe-sur-les-chiens-a-zurich-guide-d-enregistrement/",
           "excerpt": "Dans le canton de Zurich, l'impôt sur les chiens suit les règles cantonales et communales.",
           "date": "2026-10-12T08:03:47.898Z"
-        },
-        {
-          "title": "Cembra et Vontobel quittent Zurich : fiscalité et locaux",
-          "url": "/fr/articles-suisse/cembra-vontobel-siege-baden-baar/",
-          "excerpt": "Cembra déplace 660 employés à Baden (15 % d'impôts) à l'automne 2027 ; Vontobel apporte 1 500 postes à Baar (12 %) d'ici 2030. Zurich à 20 %.",
-          "date": "2026-09-25T22:08:30.423Z"
         }
       ],
       "latestCantonArticles": [],
@@ -714,7 +714,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T11:58:54.825Z"
     }
   }
 }
