@@ -15,6 +15,7 @@
  */
 
 import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { isArrayBuffer as isArrayBufferValue } from 'node:util/types';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { truncateSlugAtWordBoundary } from './slug-truncate.mjs';
@@ -898,7 +899,7 @@ async function readEventImageBody(response, maxBytes) {
       // copied nothing (no `length`) and `Buffer.from(value)` shared the
       // producer's memory; a typed array other than Uint8Array would be copied
       // element by element instead of byte by byte.
-      const bytes = value instanceof ArrayBuffer
+      const bytes = isArrayBufferValue(value)
         ? new Uint8Array(value)
         : new Uint8Array(value.buffer, value.byteOffset, value.byteLength);
       if (buffer) buffer.set(bytes, totalBytes);

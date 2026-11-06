@@ -80,6 +80,7 @@ import {
 import { historyRevisionFromEnv } from '../lib/corpus-floors.mjs';
 import { createGithubIssue, resolveGithubIssue } from '../lib/github-issue-creator.mjs';
 import { isRegularFile } from '../lib/article-surfaces.mjs';
+import { readLocalizedToponymTable } from '../../generator/scripts/lib/localized-toponym-table.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -500,7 +501,8 @@ export const REQUIRED_FILES = [
  * corpus. `article-body-api.test.mjs` arriva qui tramite `nav-link-labels.mjs`;
  * in uno sparse checkout l'import deve essere verificato prima di avviare
  * `node --test`, altrimenti un blob omesso diventa un generico errore di
- * esecuzione invece di una diagnosi del preflight.
+ * esecuzione invece di una diagnosi del preflight. Il lettore condiviso col
+ * consumer verifica anche JSON e forme cantonali: la sola presenza non basta.
  */
 export const ARTICLE_BODY_API_SOURCE_FIXTURE = 'generator/data/localized-toponyms.json';
 export const REQUIRED_SOURCE_FILES = Object.freeze([ARTICLE_BODY_API_SOURCE_FIXTURE]);
@@ -548,6 +550,14 @@ export function preflight(
         `${rel}: fixture della closure dei gate assente o illeggibile. ` +
           'Il test article-body-api non deve partire con un import incompleto.',
       );
+      continue;
+    }
+    if (rel === ARTICLE_BODY_API_SOURCE_FIXTURE) {
+      try {
+        readLocalizedToponymTable(path.join(root, rel));
+      } catch (error) {
+        violations.push(`${rel}: fixture non utilizzabile dalla closure dei gate: ${error.message}`);
+      }
     }
   }
   return { ok: violations.length === 0, violations, perRoot };
