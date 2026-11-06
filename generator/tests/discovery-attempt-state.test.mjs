@@ -112,21 +112,25 @@ test('workflow recovery CLI records a no-report cooperative stop from its marker
 test('the active generator records terminal attempts and workflow merges every counter', () => {
   const generatorSource = readFileSync(path.resolve(HERE, '../scripts/create-article.mjs'), 'utf8');
   const workflow = readFileSync(path.resolve(HERE, '../../.github/workflows/generate-article.yml'), 'utf8');
+  const coreWorkflow = readFileSync(path.resolve(HERE, '../../.github/workflows/generate-article-core.yml'), 'utf8');
 
   assert.match(generatorSource, /persistDiscoveryAttemptOutcome\(RUN_REPORT\.status\)/);
+  assert.match(generatorSource, /const noArticleOutcome = \['deferred', 'skipped', 'error'\]\.includes\(status\)/);
   assert.match(generatorSource, /recoveryDecision\.shouldForceDiscovery/);
   assert.match(generatorSource, /DISCOVERY_RECOVERY_DECISION section=/);
   assert.match(generatorSource, /writeDiscoveryAttemptMarker\(/);
   assert.match(workflow, /record-discovery-attempt\.mjs/);
   assert.match(workflow, /git restore --source=HEAD --worktree/);
   assert.match(workflow, /DISCOVERY_ATTEMPT_MARKER="\$attempt_pool_marker"/);
+  assert.match(
+    workflow,
+    /failure\(\) && steps\.generate\.outcome == 'failure' && steps\.generate\.outputs\.article != 'true'/,
+  );
   const commitStart = workflow.indexOf('      - name: Commit and push');
   const reportStart = workflow.indexOf('RUN_REPORT="$RUNNER_TEMP/create-article-run-report.json"', commitStart);
-  const noChangesGate = workflow.slice(
-    workflow.indexOf('git add -A', commitStart),
-    reportStart,
-  );
-  assert.ok(commitStart >= 0 && reportStart > commitStart, 'il commit step deve contenere un gate report delimitabile');
+  const normalAddStart = workflow.indexOf('\n            git add -A\n', commitStart) + 1;
+  const noChangesGate = workflow.slice(normalAddStart, reportStart);
+  assert.ok(commitStart >= 0 && normalAddStart > commitStart && reportStart > normalAddStart, 'il commit step deve contenere un gate report delimitabile');
   assert.match(noChangesGate, /if git diff --cached --quiet; then[\s\S]*cooperative_stop.*article/);
   assert.ok(
     noChangesGate.indexOf('cooperative_stop') < noChangesGate.indexOf('exit 0'),
@@ -138,10 +142,35 @@ test('the active generator records terminal attempts and workflow merges every c
   );
   assert.match(cooperativeNoReportBranch, /node generator\/scripts\/record-discovery-attempt\.mjs/);
   assert.match(cooperativeNoReportBranch, /git add -- "\$recovery_state"/);
-  for (const field of DISCOVERY_ATTEMPT_COUNTER_FIELDS) {
+  const failedGenerationRecoveryBranch = workflow.slice(
+    workflow.indexOf('if [ "${{ steps.generate.outcome }}" = "failure" ]; then', commitStart),
+    workflow.indexOf('else\n            git add -A', commitStart),
+  );
+  assert.match(failedGenerationRecoveryBranch, /generation failed without an article/);
+  assert.match(failedGenerationRecoveryBranch, /git reset --hard HEAD[\s\S]*git clean -fd/);
+  assert.match(failedGenerationRecoveryBranch, /node generator\/scripts\/record-discovery-attempt\.mjs/);
+  assert.doesNotMatch(failedGenerationRecoveryBranch, /cooperative_stop/);
+  assert.match(
+    coreWorkflow,
+    /failure\(\) && steps\.generate\.outcome == 'failure' && steps\.generate\.outputs\.article != 'true'/,
+  );
+  const coreCommitStart = coreWorkflow.indexOf('      - name: Commit and push');
+  const coreFailedGenerationRecoveryBranch = coreWorkflow.slice(
+    coreWorkflow.indexOf('if [ "${{ steps.generate.outcome }}" = "failure" ]; then', coreCommitStart),
+    coreWorkflow.indexOf('else\n            git add -A', coreCommitStart),
+  );
+  assert.match(coreFailedGenerationRecoveryBranch, /git reset --hard HEAD[\s\S]*git clean -fd/);
+  assert.match(coreFailedGenerationRecoveryBranch, /node generator\/scripts\/record-discovery-attempt\.mjs/);
+  assert.doesNotMatch(coreFailedGenerationRecoveryBranch, /cooperative_stop/);
+  for (const section of ['frontaliere', 'svizzera']) {
+    const pair = `${section}ProvenAttempts,${section}DiscoveryResetAt`;
     assert.ok(
-      workflow.includes(`--merge-counter data/discovery-attempt-state.json:${field}`),
-      `missing conflict-safe merge declaration for ${field}`,
+      workflow.includes(`--merge-counter data/discovery-attempt-state.json:${pair}`),
+      `missing atomic conflict-safe merge declaration for ${pair}`,
     );
+  }
+  for (const field of DISCOVERY_ATTEMPT_COUNTER_FIELDS) {
+    assert.doesNotMatch(workflow, new RegExp(`--merge-counter data/discovery-attempt-state\\.json:${field}(?:\\s|\\\\)`),
+      `${field} must be merged with its paired watermark`);
   }
 });

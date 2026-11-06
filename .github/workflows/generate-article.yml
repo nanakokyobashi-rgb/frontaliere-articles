@@ -1519,7 +1519,9 @@ jobs:
           stall_log="$diag_dir/attempt.log"
           tee_pid=""
           attempt_pipe=""
-          stop_marker=""
+          # Il client sta FUORI dalla cartella caricata: se ci stesse dentro,
+          # `if-no-files-found: ignore` non scatterebbe mai e ogni run
+          # caricherebbe un artifact con dentro solo lo strumento.
           cdp_client="${RUNNER_TEMP:-/tmp}/cdp-stack.mjs"
 
           proc_tree() {
@@ -1626,7 +1628,11 @@ jobs:
             done
           }
 
+          # Il watchdog non sopravvive mai allo step: muore col tentativo (qui
+          # sotto) e comunque all'uscita, qualunque ramo la produca.
           watch_pid=""
+          # The EXIT trap invokes this function indirectly.
+          # shellcheck disable=SC2317 # chiamata dal trap EXIT, indiretta per ShellCheck.
           stall_atexit() {
             kill_tree KILL "${watch_pid:-}"
             kill_tree KILL "${tee_pid:-}"
@@ -1935,6 +1941,7 @@ jobs:
             echo "section=$effective"
             echo "declared=$all_declared"
             echo "cooperative_stop=$cooperative_stop"
+            echo "outcome_kind=$outcome_kind"
             echo "roster_blocked=$roster_blocked"
             echo "provider_blocked=$provider_blocked"
             echo "partial_failure=$partial_failure"
@@ -2180,7 +2187,7 @@ jobs:
 
       - name: Commit and push
         id: commit
-        if: ${{ steps.mode.outputs.dry != 'true' && (success() || (failure() && steps.generate.outcome == 'failure' && steps.generate.outputs.cooperative_stop == 'true' && steps.generate.outputs.article != 'true')) }}
+        if: ${{ !cancelled() && steps.mode.outputs.dry != 'true' && (success() || (failure() && steps.generate.outcome == 'failure' && steps.generate.outputs.article != 'true' && (steps.generate.outputs.cooperative_stop == 'true' || steps.generate.outputs.outcome_kind == 'error'))) }}
         # Note del comando fuori dallo scalar run: mantenere il comando sotto 21.000 caratteri.
         # `.tmp` is inside the checkout and the rebase helper can remove or
         # replace it while replaying the generated commit. Preserve the
@@ -2391,12 +2398,15 @@ jobs:
           set -euo pipefail
           discovery_recovery_only=false
           if [ "${{ steps.generate.outcome }}" = "failure" ]; then
-            if [ "${{ steps.generate.outputs.cooperative_stop }}" != "true" ] || [ "${{ steps.generate.outputs.article }}" = "true" ]; then
-              echo "::error::failed generation is not an eligible no-article cooperative stop"
+            if [ "${{ steps.generate.outputs.article }}" = "true" ]; then
+              echo "::error::failed generation reported an article; refusing to publish recovery-only state"
               exit 1
             fi
-            echo "::warning::generation failed after a cooperative no-article stop; discarding unverified changes and preserving only pool-attempt counters"
-            git reset --mixed HEAD
+            echo "::warning::generation failed without an article; discarding unverified changes and preserving only pool-attempt counters"
+            # Markers and diagnostics live under RUNNER_TEMP, outside this
+            # checkout; the earlier always-upload step has already preserved them.
+            git reset --hard HEAD
+            git clean -fd
             recovery_state='data/discovery-attempt-state.json'
             if git ls-files --error-unmatch -- "$recovery_state" >/dev/null 2>&1; then
               git restore --source=HEAD --worktree -- "$recovery_state"
@@ -2501,6 +2511,9 @@ jobs:
 
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          # La stessa costante e' letta dal rebase helper: un reconcile fallito
+          # non puo' diventare un retry del push.
+          source scripts/lib/rebase-onto-remote-status.sh
           push_target() {
             if [ "$TARGET" = 'main' ]; then
               node scripts/ci/guard-main-tree-shrink.mjs --push-main --remote "$REMOTE" --target main --after HEAD
@@ -2525,7 +2538,7 @@ jobs:
             fi
             sleep $((attempt * 3))
             rebased=1
-            bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
+            if bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
               data/generated-image-registry.json \
               data/editorial-image-registry.json \
               data/topic-candidates-evergreen-rejected.json \
@@ -2536,15 +2549,38 @@ jobs:
               data/generated-image-registry.json \
               --merge-queue data/image-regeneration-queue.json \
               --merge-counter data/quota-state.json:runCounter \
-              --merge-counter data/discovery-attempt-state.json:frontaliereProvenAttempts \
-              --merge-counter data/discovery-attempt-state.json:frontaliereDiscoveryResetAt \
-              --merge-counter data/discovery-attempt-state.json:svizzeraProvenAttempts \
-              --merge-counter data/discovery-attempt-state.json:svizzeraDiscoveryResetAt \
+              --merge-counter data/discovery-attempt-state.json:frontaliereProvenAttempts,frontaliereDiscoveryResetAt \
+              --merge-counter data/discovery-attempt-state.json:svizzeraProvenAttempts,svizzeraDiscoveryResetAt \
               --merge-counter data/topic-candidates-experimental-counter.json:count \
               --merge-counter data/topic-candidates-evergreen-counter.json:count \
               --section-surfaces \
               --take-theirs content/image-credits/blog/ \
-              --take-theirs public/images/blog/ || rebased=0
+              --take-theirs public/images/blog/; then
+              :
+            else
+              rebase_status=$?
+              if [ "$rebase_status" -eq "$COUNTER_RECONCILE_FAILURE_STATUS" ]; then
+                echo "::error::counter reconciliation failed; refusing to retry push"
+                exit 1
+              fi
+              rebased=0
+            fi
+            # ── Ricontrollo dopo il rebase (D18) ──
+            #
+            # L'unicita' dell'id (namespace globale `blog-{id}`), il dedup della
+            # fonte, la chiave di argomento-guida e la duplicazione multi-segnale
+            # di titolo / excerpt il generatore li verifica sul tree di INIZIO run: reggono
+            # solo finche' gli scrittori sono seriali. Il rebase appena fatto ha
+            # fuso lo stato di altri run senza guardarli — `--merge-registry`
+            # unisce record di registri diversi anche con lo stesso id, il ledger
+            # URL->id prende upstream e il meta può contenere una notizia quasi
+            # identica — quindi le quattro domande si rifanno qui, sullo stato che si
+            # sta per pushare. Una violazione non si risolve riprovando: niente
+            # push, exit 1, e la run porta POST_REBASE_UNIQUENESS_VIOLATION nel
+            # log (POST_REBASE_UNIQUENESS_ERROR se il controllo non e' eseguibile:
+            # una garanzia non verificabile non si da' per verificata).
+            # Le sezioni vengono da ARTICLE_SECTION_CORE_LIST, non da un elenco
+            # qui: una sezione nuova e' coperta senza toccare questo step.
             if [ "$rebased" -eq 1 ]; then
               node scripts/ci/merge-generated-image-registry.mjs \
                 data/generated-image-registry.json "$registry_base" "$registry_snapshot"

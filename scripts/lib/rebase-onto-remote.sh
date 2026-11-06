@@ -6,7 +6,7 @@
 #   bash scripts/lib/rebase-onto-remote.sh <remote-url> <target-branch> [bookkeeping-path...]
 #     [--merge-registry <path>] [--merge-registry-pattern <glob>]
 #     [--merge-queue <path>] [--take-theirs <prefix/>]
-#     [--merge-counter <path>:<field>]
+#     [--merge-counter <path>:<field[,field]>]
 #     [--section-surfaces]   # i path di ogni sezione ATTIVA del core, derivati
 #                            # da scripts/ci/rebase-section-args.mjs
 #
@@ -92,7 +92,7 @@
 # `requestedAt` e aggiorna solo i contatori di fallimento e' stale e non la
 # riesuma; un `requestedAt` successivo all'avvio e' invece una nuova richiesta.
 #
-# ── Il QUINTO ramo: i contatori (`--merge-counter <path>:<campo>`, D18) ──────
+# ── Il QUINTO ramo: i contatori (`--merge-counter <path>:<campo[,campo]>`, D18) ──────
 #
 # `data/topic-candidates-{experimental,evergreen}-counter.json` e
 # `data/quota-state.json` sono contatori riscritti per intero a ogni run che
@@ -114,6 +114,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MERGE_RESOLVER="$SCRIPT_DIR/merge-content-registry-conflict.mjs"
 QUEUE_RESOLVER="$SCRIPT_DIR/merge-image-regeneration-queue.mjs"
 COUNTER_RESOLVER="$SCRIPT_DIR/merge-counter-conflict.mjs"
+. "$SCRIPT_DIR/rebase-onto-remote-status.sh"
 
 # FIVE categories, deliberately not one list: they mean different things about
 # the file, and collapsing any two of them resolves a conflict the wrong way.
@@ -124,7 +125,8 @@ COUNTER_RESOLVER="$SCRIPT_DIR/merge-counter-conflict.mjs"
 #                      registro append-only con glob esplicito → unisci i RECORD
 #   --merge-queue      coda globale per articleId → unisci gli ITEM
 #   --take-theirs      file PER-ARTICOLO      → prendi il commit rigiocato
-#   --merge-counter    contatore (path:campo) → upstream + incremento rigiocato
+#   --merge-counter    contatore (path:campo) → upstream + incremento rigiocato;
+#                      coppie discovery: tentativi additivi + watermark non additivo
 #
 # Appending a registry to the bookkeeping allowlist would have "resolved" it by
 # taking upstream — i.e. by deleting this run's article from the registry while
@@ -179,10 +181,10 @@ $section_args
 EOF_SECTION_ARGS
       ;;
     --merge-counter)
-      [ "$#" -ge 2 ] || { echo "::error::--merge-counter requires <path>:<field>"; exit 2; }
+      [ "$#" -ge 2 ] || { echo "::error::--merge-counter requires <path>:<field[,field]>"; exit 2; }
       case "$2" in
         ?*:?*) ;;
-        *) echo "::error::--merge-counter requires <path>:<field>, got '$2'"; exit 2 ;;
+        *) echo "::error::--merge-counter requires <path>:<field[,field]>, got '$2'"; exit 2 ;;
       esac
       COUNTERS="$COUNTERS${2%:*} "
       COUNTER_SPECS="$COUNTER_SPECS$2 "
@@ -381,7 +383,7 @@ stage_conflict_paths() {
 
 if git pull --rebase "$REMOTE" "$TARGET" >"$rebase_log" 2>&1; then
   echo "git pull --rebase completed"
-  reconcile_counters || exit 1
+  reconcile_counters || exit "$COUNTER_RECONCILE_FAILURE_STATUS"
   exit 0
 fi
 
@@ -409,7 +411,7 @@ progress_marker=""
 for _pass in $(seq 1 20); do
   rebase_in_progress || {
     echo "rebase completed"
-    reconcile_counters || exit 1
+    reconcile_counters || exit "$COUNTER_RECONCILE_FAILURE_STATUS"
     exit 0
   }
 

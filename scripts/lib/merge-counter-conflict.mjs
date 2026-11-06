@@ -4,13 +4,15 @@
  * CONTATORE sommando gli incrementi dei due lati, invece di sceglierne uno.
  *
  * Uso (durante un rebase fermo su un conflitto, dalla radice del repo):
- *   node scripts/lib/merge-counter-conflict.mjs <path>:<campo>
+ *   node scripts/lib/merge-counter-conflict.mjs <path>:<campo[,campo]>
  *
  * Exit 0 = il file in working tree e' stato riscritto col valore fuso (il
  *          chiamante puo' fare `git add`). Exit 1 = fusione non dimostrabile:
  *          il file NON e' stato toccato e il chiamante decide (in
  *          `rebase-onto-remote.sh` ricade su «prendi upstream», cioe' sul
- *          comportamento che questi file avevano prima). Exit 2 = uso errato.
+ *          comportamento che questi file avevano prima). In `--reconcile`,
+ *          exit 1 invece blocca il commit quando una spec non e' dimostrabile.
+ *          Exit 2 = uso errato.
  *
  * ── Perche' una quarta categoria (D18, PR «P1» delle sezioni cantonali) ─────
  *
@@ -29,6 +31,10 @@
  *     upstream nel frattempo, che con molti scrittori paralleli sono piu' d'uno.
  *     Entrambe fanno derivare la rotazione 1-su-N che i contatori governano
  *     (`shouldUseExperimentalTier`, `shouldForceEvergreen`, `decideSlot`).
+ *   · `discovery-attempt-state.json` ha coppie per sezione: `ProvenAttempts`
+ *     somma gli incrementi, mentre `DiscoveryResetAt` e' un watermark assoluto.
+ *     La coppia si fonde insieme e rifiuta uno stato in cui il watermark supera
+ *     il contatore, invece di sommare entrambi i campi indipendentemente.
  *
  * La risoluzione corretta e' il merge a tre vie di un contatore:
  *
@@ -55,7 +61,7 @@
  * stage 3 (`--theirs`) e' il commit RIGIOCATO, l'inverso di un merge.
  */
 import { execFileSync } from 'node:child_process';
-import { readFileSync, realpathSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 function parseCounterDoc(text, field, label) {
@@ -69,8 +75,8 @@ function parseCounterDoc(text, field, label) {
     return { error: `${label}: non e' un oggetto JSON` };
   }
   const value = doc[field];
-  if (!Number.isInteger(value) || value < 0) {
-    return { error: `${label}: il campo '${field}' non e' un intero non negativo (${JSON.stringify(value)})` };
+  if (!Number.isSafeInteger(value) || value < 0) {
+    return { error: `${label}: il campo '${field}' non e' un intero sicuro non negativo (${JSON.stringify(value)})` };
   }
   return { doc, value };
 }
@@ -79,24 +85,42 @@ function parseCounterDoc(text, field, label) {
  * Fonde un contatore a tre vie. Pura: i tre lati arrivano come testo.
  *
  * @param {{base: string|null, upstream: string, replayed: string, field: string}} sides
+ *        `field` can be a single counter or a supported discovery-counter pair;
  *        `base` null = file assente nella base comune (add/add).
- * @returns {{ok: true, merged: string, value: number, rule: string}|{ok: false, reason: string}}
+ * @returns {{ok: true, merged: string, value?: number, values: Record<string, number>, rule: string}|{ok: false, reason: string}}
  */
 export function mergeCounterDocuments({ base, upstream, replayed, field }) {
   if (typeof field !== 'string' || !field) return { ok: false, reason: 'campo contatore non indicato' };
-  const up = parseCounterDoc(upstream, field, 'upstream');
-  if (up.error) return { ok: false, reason: up.error };
-  const mine = parseCounterDoc(replayed, field, 'commit rigiocato');
-  if (mine.error) return { ok: false, reason: mine.error };
+  const fields = parseCounterFields(field);
+  if (fields.error) return { ok: false, reason: fields.error };
+  if (fields.kind === 'discovery-attempt-pair') {
+    return mergeDiscoveryAttemptPairDocuments({ base, upstream, replayed, fields });
+  }
+
+  const up = upstream == null ? null : parseCounterDoc(upstream, field, 'upstream');
+  if (up?.error) return { ok: false, reason: up.error };
+  const mine = replayed == null ? null : parseCounterDoc(replayed, field, 'commit rigiocato');
+  if (mine?.error) return { ok: false, reason: mine.error };
+  if (!up && !mine) return { ok: false, reason: 'entrambi i lati sono assenti senza una base comune' };
 
   let value;
   let rule;
   if (base == null) {
-    value = Math.max(up.value, mine.value);
-    rule = `max(${up.value}, ${mine.value}) — nessuna base comune`;
+    if (!up || !mine) {
+      const present = up ?? mine;
+      value = present.value;
+      rule = `add-only ${value} — una sola versione del contatore`;
+    } else {
+      value = Math.max(up.value, mine.value);
+      rule = `max(${up.value}, ${mine.value}) — nessuna base comune`;
+    }
   } else {
+    if (!up || !mine) return { ok: false, reason: 'un lato del contatore manca dalla revisione' };
     const b = parseCounterDoc(base, field, 'base');
     if (b.error) return { ok: false, reason: b.error };
+    if (up.value < b.value) {
+      return { ok: false, reason: `upstream ha decrementato '${field}' (${b.value} → ${up.value})` };
+    }
     const delta = mine.value - b.value;
     if (delta < 0) {
       return { ok: false, reason: `il commit rigiocato ha decrementato '${field}' (${b.value} → ${mine.value})` };
@@ -104,18 +128,151 @@ export function mergeCounterDocuments({ base, upstream, replayed, field }) {
     value = up.value + delta;
     rule = `${up.value} + (${mine.value} − ${b.value})`;
   }
+  if (!Number.isSafeInteger(value)) {
+    return { ok: false, reason: `il merge del contatore '${field}' supera gli interi sicuri` };
+  }
 
   // Lo spread conserva l'ordine delle chiavi di upstream e la riassegnazione
   // tiene il campo al suo posto: il diff contro upstream e' una riga sola.
-  const merged = `${JSON.stringify({ ...up.doc, [field]: value }, null, 2)}\n`;
-  return { ok: true, merged, value, rule };
+  const source = up ?? mine;
+  const merged = `${JSON.stringify({ ...source.doc, [field]: value }, null, 2)}\n`;
+  return { ok: true, merged, value, values: { [field]: value }, rule };
+}
+
+/**
+ * Parses either one counter field or the paired recovery state
+ * `<section>ProvenAttempts,<section>DiscoveryResetAt`.
+ */
+function parseCounterFields(field) {
+  const names = field.split(',');
+  if (names.length === 1 && names[0]) return { kind: 'single', field: names[0] };
+  if (names.length !== 2 || names.some((name) => !name)) {
+    return { error: 'spec contatore non valida: atteso un campo o una coppia discovery' };
+  }
+  const proven = /^(frontaliere|svizzera)ProvenAttempts$/.exec(names[0]);
+  const resetAt = /^(frontaliere|svizzera)DiscoveryResetAt$/.exec(names[1]);
+  if (!proven || !resetAt || proven[1] !== resetAt[1]) {
+    return { error: 'coppia discovery non valida: servono ProvenAttempts e DiscoveryResetAt della stessa sezione' };
+  }
+  return { kind: 'discovery-attempt-pair', provenField: names[0], resetAtField: names[1] };
+}
+
+function parseCounterPairDoc(text, fields, label) {
+  let doc;
+  try {
+    doc = JSON.parse(text);
+  } catch (e) {
+    return { error: `${label}: JSON illeggibile (${e.message})` };
+  }
+  if (!doc || typeof doc !== 'object' || Array.isArray(doc)) {
+    return { error: `${label}: non e' un oggetto JSON` };
+  }
+  const proven = doc[fields.provenField];
+  const resetAt = doc[fields.resetAtField];
+  if (!Number.isSafeInteger(proven) || proven < 0) {
+    return { error: `${label}: il campo '${fields.provenField}' non e' un intero sicuro non negativo` };
+  }
+  if (!Number.isSafeInteger(resetAt) || resetAt < 0) {
+    return { error: `${label}: il campo '${fields.resetAtField}' non e' un intero sicuro non negativo` };
+  }
+  if (resetAt > proven) {
+    return { error: `${label}: il watermark discovery supera ProvenAttempts` };
+  }
+  return { doc, proven, resetAt };
+}
+
+function mergeDiscoveryAttemptPairDocuments({ base, upstream, replayed, fields }) {
+  const up = upstream == null ? null : parseCounterPairDoc(upstream, fields, 'upstream');
+  if (up?.error) return { ok: false, reason: up.error };
+  const mine = replayed == null ? null : parseCounterPairDoc(replayed, fields, 'commit rigiocato');
+  if (mine?.error) return { ok: false, reason: mine.error };
+  if (!up && !mine) return { ok: false, reason: 'entrambi i lati sono assenti senza una base comune' };
+  if (base == null && (!up || !mine)) {
+    const present = up ?? mine;
+    const values = {
+      [fields.provenField]: present.proven,
+      [fields.resetAtField]: present.resetAt,
+    };
+    return {
+      ok: true,
+      merged: `${JSON.stringify({ ...present.doc, ...values }, null, 2)}\n`,
+      values,
+      rule: `add-only ${present.proven} — una sola versione della coppia discovery`,
+    };
+  }
+  if (base != null && (!up || !mine)) {
+    return { ok: false, reason: 'un lato della coppia discovery manca dalla revisione' };
+  }
+  const b = base == null ? null : parseCounterPairDoc(base, fields, 'base');
+  if (b?.error) return { ok: false, reason: b.error };
+
+  if (base == null) {
+    // Without a common base both files may be independent add/adds, so their
+    // increments cannot be separated from copied state. Keep the larger
+    // monotone count instead of treating the same creation as two increments.
+    const proven = Math.max(up.proven, mine.proven);
+    const bothBranchesReset = up.resetAt === up.proven && mine.resetAt === mine.proven;
+    const resetAt = bothBranchesReset
+      ? proven
+      : Math.min(proven, Math.max(up.resetAt, mine.resetAt));
+    const values = { [fields.provenField]: proven, [fields.resetAtField]: resetAt };
+    return {
+      ok: true,
+      merged: `${JSON.stringify({ ...up.doc, ...values }, null, 2)}\n`,
+      values,
+      rule: `max(${up.proven}, ${mine.proven}) — nessuna base comune; watermark=${resetAt}`,
+    };
+  }
+
+  const delta = mine.proven - b.proven;
+  if (delta < 0 || up.proven < b.proven) {
+    return { ok: false, reason: 'ProvenAttempts non monotono: un lato ha decrementato il contatore' };
+  }
+  if (mine.resetAt < b.resetAt || up.resetAt < b.resetAt) {
+    return { ok: false, reason: 'DiscoveryResetAt non monotono: un lato ha decrementato il watermark' };
+  }
+
+  const proven = up.proven + delta;
+  if (!Number.isSafeInteger(proven)) {
+    return { ok: false, reason: 'il merge di ProvenAttempts supera gli interi sicuri' };
+  }
+  // The reset marker is an absolute watermark, not an additive counter. Taking
+  // the latest value from either branch avoids counting the same reset twice.
+  // If both branches end at their own watermark, both have completed a reset
+  // after their local attempts. Since the final reset in the merged order must
+  // follow every branch's completed reset, it clears the combined attempts.
+  const bothBranchesReset = up.resetAt === up.proven && mine.resetAt === mine.proven;
+  const resetAt = bothBranchesReset
+    ? proven
+    : Math.max(b.resetAt, up.resetAt, mine.resetAt);
+  if (resetAt > proven) {
+    return { ok: false, reason: 'il merge della coppia discovery violerebbe resetAt <= provenAttempts' };
+  }
+  const values = { [fields.provenField]: proven, [fields.resetAtField]: resetAt };
+  const merged = `${JSON.stringify({ ...up.doc, ...values }, null, 2)}\n`;
+  const resetRule = bothBranchesReset
+    ? `DiscoveryResetAt=${proven} (entrambi i rami terminano con reset)`
+    : `DiscoveryResetAt=max(${b.resetAt}, ${up.resetAt}, ${mine.resetAt})`;
+  const rule = `ProvenAttempts=${up.proven} + (${mine.proven} − ${b.proven}); ${resetRule}`;
+  return { ok: true, merged, values, rule };
 }
 
 /** Splitta `<path>:<campo>` sull'ULTIMO `:`. */
 export function parseCounterSpec(spec) {
-  const at = String(spec ?? '').lastIndexOf(':');
-  if (at <= 0 || at === spec.length - 1) return null;
-  return { path: spec.slice(0, at), field: spec.slice(at + 1) };
+  const text = String(spec ?? '');
+  const at = text.lastIndexOf(':');
+  if (at <= 0 || at === text.length - 1) return null;
+  const path = text.slice(0, at);
+  const field = text.slice(at + 1);
+  if (parseCounterFields(field).error) return null;
+  return { path, field };
+}
+
+function parseWorkingCounterDoc(text, field, label) {
+  const fields = parseCounterFields(field);
+  if (fields.error) return { error: fields.error };
+  if (fields.kind === 'discovery-attempt-pair') return parseCounterPairDoc(text, fields, label);
+  return parseCounterDoc(text, fields.field, label);
 }
 
 /** Il blob di uno stage dell'indice, o null se quello stage non c'e'. */
@@ -134,14 +291,16 @@ function git(args) {
   return execFileSync('git', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
 }
 
-/** Il blob di `path` a `rev`; null se il path non c'e' o la revisione non si legge. */
+/** Il blob di `path` a `rev`; null solo se il path non c'e'. */
 function readAt(rev, path) {
-  try {
-    if (!git(['ls-tree', '--name-only', rev, '--', path]).trim()) return null;
-    return git(['show', `${rev}:${path}`]);
-  } catch {
-    return null;
-  }
+  if (!git(['ls-tree', '--name-only', rev, '--', path]).trim()) return null;
+  return git(['show', `${rev}:${path}`]);
+}
+
+function reconciliationFailure(category) {
+  const error = new Error(category);
+  error.reconciliationCategory = category;
+  return error;
 }
 
 /**
@@ -153,70 +312,125 @@ function readAt(rev, path) {
  * e si riscrive in working tree quello che differisce. Stampa su stdout un
  * path per riga, uno per file riscritto; il chiamante fa `git add` + amend.
  *
- * Tutto cio' che non si sa dimostrare (file assente o illeggibile su un lato,
- * decremento) si lascia com'e', con un avviso: e' il comportamento di prima.
+ * Tutte le spec si verificano prima di scrivere. Una spec non dimostrabile
+ * rende l'intero comando non-zero, cosi' il chiamante non puo' committare una
+ * riconciliazione parziale. Una spec assente da base, upstream, commit rigiocato
+ * e working tree e' un no-op verificato: nessun contatore esiste da fondere.
+ * Se invece il contatore esisteva nella base, la sua assenza da un lato e'
+ * un errore.
  */
 export function reconcileCounters(preRebase, upstream, specs, { log = console.log, warn = console.error } = {}) {
-  let base = null;
+  let base;
   try {
-    base = git(['merge-base', preRebase, upstream]).trim() || null;
+    base = git(['merge-base', preRebase, upstream]).trim();
   } catch {
-    base = null;
+    throw reconciliationFailure('merge-base');
   }
-  const rewritten = [];
+  if (!base) throw reconciliationFailure('merge-base');
+
+  const currentDocs = new Map();
+  const originalTexts = new Map();
+  const rewritten = new Set();
   for (const raw of specs) {
     const spec = parseCounterSpec(raw);
-    if (!spec) {
-      warn(`::warning::riconciliazione contatori: spec non valida '${raw}'`);
+    if (!spec) throw reconciliationFailure('invalid-spec');
+
+    let mine;
+    let up;
+    let baseText;
+    try {
+      mine = readAt(preRebase, spec.path);
+      up = readAt(upstream, spec.path);
+      baseText = readAt(base, spec.path);
+    } catch {
+      throw reconciliationFailure('revision-read');
+    }
+
+    if (baseText == null && mine == null && up == null) {
+      if (existsSync(spec.path)) throw reconciliationFailure('working-tree-counter-without-history');
       continue;
     }
-    const mine = readAt(preRebase, spec.path);
-    const up = readAt(upstream, spec.path);
-    if (mine == null || up == null) continue;
+    if (baseText != null && (mine == null || up == null)) {
+      throw reconciliationFailure('missing-revision-file');
+    }
+
     const result = mergeCounterDocuments({
-      base: base ? readAt(base, spec.path) : null,
+      base: baseText,
       upstream: up,
       replayed: mine,
       field: spec.field,
     });
-    if (!result.ok) {
-      warn(`::warning::${spec.path}: riconciliazione del contatore non dimostrabile — ${result.reason}`);
-      continue;
+    if (!result.ok) throw reconciliationFailure('counter-not-reconcilable');
+
+    let current = currentDocs.get(spec.path);
+    if (!current) {
+      let text;
+      try {
+        text = readFileSync(spec.path, 'utf8');
+      } catch {
+        throw reconciliationFailure('working-tree-read');
+      }
+      const parsed = parseWorkingCounterDoc(text, spec.field, 'working tree');
+      if (parsed.error) throw reconciliationFailure('working-tree-counter');
+      current = parsed.doc;
+      currentDocs.set(spec.path, current);
+      originalTexts.set(spec.path, text);
+    } else if (parseWorkingCounterDoc(JSON.stringify(current), spec.field, 'working tree').error) {
+      throw reconciliationFailure('working-tree-counter');
     }
-    let current;
-    try {
-      current = JSON.parse(readFileSync(spec.path, 'utf8'));
-    } catch {
-      warn(`::warning::${spec.path}: contatore assente o illeggibile dopo il rebase — non lo riconcilio`);
-      continue;
+
+    for (const [field, value] of Object.entries(result.values ?? { [spec.field]: result.value })) {
+      if (current[field] !== value) {
+        current[field] = value;
+        rewritten.add(spec.path);
+      }
     }
-    if (!current || typeof current !== 'object' || Array.isArray(current)) continue;
-    if (current[spec.field] === result.value) continue;
-    writeFileSync(spec.path, `${JSON.stringify({ ...current, [spec.field]: result.value }, null, 2)}\n`);
-    warn(`riconciliazione contatore: ${spec.path} ${spec.field} ${current[spec.field]} → ${result.value} (${result.rule})`);
-    rewritten.push(spec.path);
   }
-  for (const p of rewritten) log(p);
-  return rewritten;
+
+  try {
+    for (const p of rewritten) {
+      writeFileSync(p, `${JSON.stringify(currentDocs.get(p), null, 2)}\n`);
+    }
+  } catch {
+    for (const p of [...rewritten].reverse()) {
+      try {
+        writeFileSync(p, originalTexts.get(p));
+      } catch {
+        // The caller still fails closed; it never commits after this error.
+      }
+    }
+    throw reconciliationFailure('working-tree-write');
+  }
+
+  for (const p of rewritten) {
+    warn(`riconciliazione contatore completata: ${p} (dettagli numerici omessi)`);
+    log(p);
+  }
+  return [...rewritten];
 }
 
 function main(argv) {
   if (argv[0] === '--reconcile') {
     const [, preRebase, upstream, ...specs] = argv;
     if (!preRebase || !upstream || specs.length === 0) {
-      console.error('uso: merge-counter-conflict.mjs --reconcile <pre-rebase> <upstream> <path>:<campo>...');
+      console.error('uso: merge-counter-conflict.mjs --reconcile <pre-rebase> <upstream> <path>:<campo[,campo]>...');
       return 2;
     }
-    reconcileCounters(preRebase, upstream, specs);
-    return 0;
+    try {
+      reconcileCounters(preRebase, upstream, specs);
+      return 0;
+    } catch (error) {
+      console.error(`::error::counter reconciliation failed; category=${error.reconciliationCategory || 'counter-data'}`);
+      return 1;
+    }
   }
   if (argv.length !== 1) {
-    console.error('uso: merge-counter-conflict.mjs <path>:<campo>');
+    console.error('uso: merge-counter-conflict.mjs <path>:<campo[,campo]>');
     return 2;
   }
   const spec = parseCounterSpec(argv[0]);
   if (!spec) {
-    console.error(`uso: merge-counter-conflict.mjs <path>:<campo> (ricevuto '${argv[0]}')`);
+    console.error(`uso: merge-counter-conflict.mjs <path>:<campo[,campo]> (ricevuto '${argv[0]}')`);
     return 2;
   }
   const upstream = readStage(2, spec.path);
@@ -231,7 +445,10 @@ function main(argv) {
     return 1;
   }
   writeFileSync(spec.path, result.merged);
-  console.log(`merge contatore: ${spec.path} ${spec.field}=${result.value} (${result.rule})`);
+  const values = Object.entries(result.values ?? { [spec.field]: result.value })
+    .map(([field, value]) => `${field}=${value}`)
+    .join(', ');
+  console.log(`merge contatore: ${spec.path} ${values} (${result.rule})`);
   return 0;
 }
 

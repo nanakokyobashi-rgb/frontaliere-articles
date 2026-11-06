@@ -446,8 +446,11 @@ function parseHelperArgs(yamlText) {
       const pattern = clean.split(/\s+/)[1];
       if (pattern) registryPatterns.push(pattern.replace(/^(['"])(.*)\1$/, '$2'));
     } else if (clean.startsWith('--take-theirs')) {
-      const prefix = clean.split(/\s+/)[1]?.replace(/^(['"])(.*)\1$/, '$2');
-      if (prefix) takeTheirs.push(prefix.replace(/\s*\|\|\s*true$/, ''));
+      const prefix = clean.split(/\s+/)[1]
+        ?.replace(/;$/, '')
+        .replace(/^(['"])(.*)\1$/, '$2')
+        .replace(/\s*\|\|\s*true$/, '');
+      if (prefix) takeTheirs.push(prefix);
     } else if (clean.startsWith('--merge-counter')) {
       const spec = clean.split(/\s+/)[1];
       if (spec) counters.push(spec);
@@ -2232,7 +2235,7 @@ test('il commit di riconciliazione contatori fallito blocca il successo e ripris
       allowlist: ['--merge-counter', `${EVERGREEN_COUNTER_PATH}:count`],
       env: { ...GIT_ENV, ...shimEnv, FAIL_GIT_AMEND: '1' },
     });
-    assert.equal(code, 1, out);
+    assert.equal(code, 42, out);
     assert.match(out, /counter reconciliation failed; stage=commit category=git-amend/);
     assert.doesNotMatch(out, /private-article-path|topic-candidates-evergreen-counter/);
     assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 11, 'il dato resta nello stato prodotto dal rebase');
@@ -2281,6 +2284,46 @@ test('un conflitto sui contatori somma gli incrementi dei due lati, e l\'articol
   }
 });
 
+test('un conflitto sulla coppia discovery fonde tentativi e watermark nello stesso file', () => {
+  const w = makeWorld();
+  const statePath = 'data/discovery-attempt-state.json';
+  const pair = 'frontaliereProvenAttempts,frontaliereDiscoveryResetAt';
+  const state = (proven, resetAt) => `${JSON.stringify({
+    version: 1,
+    frontaliereProvenAttempts: proven,
+    frontaliereDiscoveryResetAt: resetAt,
+    svizzeraProvenAttempts: 2,
+    svizzeraDiscoveryResetAt: 1,
+  }, null, 2)}\n`;
+  try {
+    write(w.work, statePath, state(5, 3));
+    commitAll(w.work, 'seed discovery attempt state');
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+
+    landUpstream(w, [[statePath, state(6, 6), 'upstream proven publication reset']]);
+    write(w.work, statePath, state(6, 5));
+    write(w.work, 'content/blog-body/it/articolo-discovery.ts', 'export const d = 1\n');
+    commitAll(w.work, 'Generate article after discovery reset (frontaliere)');
+
+    const { code, out } = runHelper(w.work, w.upstream, '--merge-counter', `${statePath}:${pair}`);
+    assert.equal(code, 0, `il conflitto sulla coppia deve essere risolto in modo atomico:\n${out}`);
+    assert.match(out, /resolved counter conflict by summing both sides/);
+
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    const merged = JSON.parse(git(w.work, 'show', `HEAD:${statePath}`));
+    assert.equal(merged.frontaliereProvenAttempts, 7);
+    assert.equal(merged.frontaliereDiscoveryResetAt, 6);
+    assert.ok(merged.frontaliereDiscoveryResetAt <= merged.frontaliereProvenAttempts);
+    assert.equal(
+      git(w.work, 'show', 'HEAD:content/blog-body/it/articolo-discovery.ts'),
+      'export const d = 1\n',
+      'l’articolo deve essere incluso nel commit realmente pushato, non solo nel working tree',
+    );
+  } finally {
+    w.cleanup();
+  }
+});
+
 test('due run che scrivono lo STESSO valore (nessun conflitto) non perdono un incremento', () => {
   // Base 10, upstream 11, questo run 11: blob identici, git non vede conflitto
   // e il rebase finirebbe su 11. La riconciliazione a rebase riuscito porta 12.
@@ -2320,22 +2363,23 @@ test('un rebase senza contatori toccati da upstream lascia i contatori come sono
   }
 });
 
-test('un contatore che non si sa fondere ricade su «prendi upstream», non aborta', () => {
-  // Il ripiego e' il comportamento che quota-state.json aveva prima del ramo:
-  // un contatore sbagliato di uno costa meno di un articolo perso.
+test('una spec contatore non dimostrabile blocca il push anche dopo il fallback upstream del conflitto', () => {
   const w = counterWorld();
   try {
     landUpstream(w, [[EVERGREEN_COUNTER_PATH, `${JSON.stringify({ count: 12 }, null, 2)}\n`, 'u ever']]);
+    const upstreamHeadBefore = git(w.upstream, 'rev-parse', 'main').trim();
     write(w.work, EVERGREEN_COUNTER_PATH, '{"count": "rotto"}\n');
     write(w.work, 'content/blog-body/it/articolo-ripiego.ts', 'export const r = 1\n');
     commitAll(w.work, 'Generate blog article (frontaliere)');
 
     const { code, out } = runHelper(w.work, w.upstream, ...helperArgsFromWorkflow());
-    assert.equal(code, 0, `il ripiego deve risolvere:\n${out}`);
+    assert.equal(code, 42, out);
     assert.match(out, /counter merge refused \(path redacted\)/);
-    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    assert.match(out, /counter reconciliation failed; stage=resolve category=counter-resolver/);
     assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/articolo-ripiego.ts')));
-    assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 12, 'ripiego = copia upstream');
+    assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 12, 'il tree rebased conserva il valore upstream');
+    assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'il tree rebased resta pulito dopo il rifiuto');
+    assert.equal(git(w.upstream, 'rev-parse', 'main').trim(), upstreamHeadBefore, 'nessun push avviene dopo il rifiuto');
   } finally {
     w.cleanup();
   }
@@ -2346,7 +2390,7 @@ test('--merge-counter senza campo e\' un errore del chiamante', () => {
   try {
     const { code, out } = runHelper(w.work, w.upstream, '--merge-counter', EVERGREEN_COUNTER_PATH);
     assert.equal(code, 2, out);
-    assert.match(out, /--merge-counter requires <path>:<field>/);
+    assert.match(out, /--merge-counter requires <path>:<field\[,field\]>/);
   } finally {
     w.cleanup();
   }

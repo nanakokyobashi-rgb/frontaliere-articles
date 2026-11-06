@@ -1150,12 +1150,12 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped e sottopone anche il mirror engine-lockstep-auto al contratto body e alla review completa, senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: la review Codex ora registra causa startup/telemetria sicura e concede una sola ripetizione al claim `failed-transient`; la baseline corpus riattesta questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile. 2026-10-08: il gate generator-ci risolve lo scope dal diff locale `base...head` e passa alla REST dei file PR solo nelle invocazioni legacy senza `PR_BASE_SHA`, eliminando la lettura inutile su ogni PR non-generator.",
+      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped e sottopone anche il mirror engine-lockstep-auto al contratto body e alla review completa, senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: la review Codex ora registra causa startup/telemetria sicura e concede una sola ripetizione al claim `failed-transient`; la baseline corpus riattesta questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile. 2026-10-08: il gate generator-ci risolve lo scope dal diff locale `base...head` e passa alla REST dei file PR solo nelle invocazioni legacy senza `PR_BASE_SHA`, eliminando la lettura inutile su ogni PR non-generator. 2026-11-05: il gate installa Go 1.26.1 e actionlint v1.7.12 e convalida tutti i workflow tracciati prima dei gate della PR; la configurazione mantiene solo tre eccezioni puntuali per il campo `concurrency.queue`, ancora non modellato da questa versione.",
       "baseline": {
         "site": "a5bde04943e54f3c",
-        "corpus": "2d1545ebc9f7a413",
-        "alignedAt": "2026-10-14",
-        "forcedAt": "2026-10-14T18:25:10.701Z"
+        "corpus": "484bcbc8843bde9b",
+        "alignedAt": "2026-11-06",
+        "forcedAt": "2026-11-06T03:29:07.924Z"
       }
     },
     {
@@ -2669,6 +2669,16 @@
         "site": null,
         "corpus": "fe4d0086b9bfdca7",
         "alignedAt": "2026-08-14"
+      }
+    },
+    {
+      "path": "scripts/lib/rebase-onto-remote-status.sh",
+      "mode": "corpus-only",
+      "reason": "Contratto condiviso per il codice di uscita della riconciliazione dei contatori: `rebase-onto-remote.sh` lo importa e i workflow `generate-article.yml` e `generate-article-core.yml` lo usano per non ritentare un push dopo un fallimento fail-closed. E' parte del percorso di recovery del corpus, senza omonimo sul sito, come il helper che lo importa.",
+      "baseline": {
+        "site": null,
+        "corpus": "1d77187c62f6319e",
+        "alignedAt": "2026-11-05"
       }
     },
     {
