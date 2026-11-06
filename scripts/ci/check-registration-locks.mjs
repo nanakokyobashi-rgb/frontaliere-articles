@@ -11,10 +11,24 @@ import { registerLockFilenamePattern } from '../../generator/scripts/lib/registe
 
 export const REGISTER_LOCK_FILE_RE = registerLockFilenamePattern();
 
+export function sectionFromFilename(fileName) {
+  const match = REGISTER_LOCK_FILE_RE.exec(path.basename(fileName));
+  return match?.[1] || null;
+}
+
 function sectionFrom(fileName, parsed) {
-  if (typeof parsed?.section === 'string' && parsed.section.length > 0) return parsed.section;
-  const match = REGISTER_LOCK_FILE_RE.exec(fileName);
-  return match?.[1] || 'non-identificata';
+  return sectionFromFilename(fileName)
+    || (typeof parsed?.section === 'string' && parsed.section.length > 0 ? parsed.section : null)
+    || 'non-identificata';
+}
+
+function sectionMismatchFrom(fileName, parsed) {
+  const filenameSection = sectionFromFilename(fileName);
+  const payloadSection = typeof parsed?.section === 'string' && parsed.section.length > 0
+    ? parsed.section
+    : null;
+  if (!filenameSection || !payloadSection || filenameSection === payloadSection) return null;
+  return { filename: filenameSection, payload: payloadSection };
 }
 
 function runIdFrom(parsed) {
@@ -45,6 +59,7 @@ export function findRegistrationLocks(dataDir) {
         file: entry.name,
         path: file,
         section: sectionFrom(entry.name, parsed),
+        sectionMismatch: sectionMismatchFrom(entry.name, parsed),
         runId: runIdFrom(parsed),
         parsed,
         parseError,
@@ -53,9 +68,16 @@ export function findRegistrationLocks(dataDir) {
 }
 
 export function formatRegistrationLockError(lock) {
-  const detail = lock.parseError
+  const details = [];
+  if (lock.sectionMismatch) {
+    details.push(
+      `sezione JSON=${lock.sectionMismatch.payload} diversa dal filename=${lock.sectionMismatch.filename}`,
+    );
+  }
+  details.push(lock.parseError
     ? 'JSON illeggibile'
-    : `workflow=${lock.parsed?.workflow || 'non identificato'}`;
+    : `workflow=${lock.parsed?.workflow || 'non identificato'}`);
+  const detail = details.join(', ');
   return `lock orfano di ${lock.section} dalla run ${lock.runId}: ${lock.file} (${detail})`;
 }
 
