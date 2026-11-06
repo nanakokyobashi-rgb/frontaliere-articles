@@ -268,6 +268,10 @@ export function summarizeProviderPreflight(providers, generatedAt = new Date().t
   const blocked = providers.filter((provider) => provider.status !== 'ready');
   return {
     generatedAt,
+    probeScope: 'transport-and-catalog-reachability',
+    inferenceAttempted: false,
+    inferenceQuotaChecked: false,
+    probeReadyProviders: ready.map(({ provider }) => provider),
     ready: ready.length > 0,
     readyProviders: ready.map(({ provider }) => provider),
     blockedProviders: blocked.map(({ provider, status, reason }) => ({ provider, status, reason })),

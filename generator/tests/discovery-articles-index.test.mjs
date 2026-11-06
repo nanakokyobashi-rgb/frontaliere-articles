@@ -155,9 +155,9 @@ describe('discovery article index projection', () => {
       'other',
       'other',
       'google_trends',
-      'other',
+      'google_news',
     ]);
-    assert.equal(payload.articles.every(({ provider }) => ['google_trends', 'other'].includes(provider)), true);
+    assert.equal(payload.articles.every(({ provider }) => ['google_trends', 'google_news', 'other'].includes(provider)), true);
     for (const field of ['title', 'excerpt', 'url']) {
       assert.deepEqual(Object.keys(payload.articles[5][field]), ['it', 'en']);
     }
@@ -321,12 +321,15 @@ describe('discovery article index projection', () => {
     }), 'google_trends');
     assert.equal(normalizeDiscoveryProvider({
       _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['google-news-rss'] },
-    }), 'other');
+    }), 'google_news');
     assert.equal(normalizeDiscoveryProvider({
       _topic_candidate_attribution: { candidateId: 'bad-id', providers: ['reddit'] },
     }), null);
     assert.equal(normalizeDiscoveryProvider({
       _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['unknown'] },
+    }), null);
+    assert.equal(normalizeDiscoveryProvider({
+      _topic_candidate_attribution: { candidateId: '1234abcd', providers: [] },
     }), null);
     assert.equal(normalizeDiscoveryProvider(null), null);
   });

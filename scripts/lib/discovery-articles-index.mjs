@@ -10,7 +10,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE, publishedArticleLocales } from './build-sitemap.mjs';
 
-const PUBLIC_PROVIDERS = new Set(['google_trends', 'other']);
+const PUBLIC_PROVIDERS = new Set(['google_trends', 'google_news', 'other']);
 const TOPIC_PROVIDERS = new Set(['google-news-rss']);
 const SUPPORTED_TOPIC_PROVIDERS = new Set([...TOPIC_PROVIDERS, 'reddit']);
 const LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
@@ -169,7 +169,7 @@ function timestamp(value) {
  * Collapse private attribution to the small, stable public provider enum.
  *
  * @param {unknown} sidecar
- * @returns {'google_trends'|'other'|null}
+ * @returns {'google_trends'|'google_news'|'other'|null}
  */
 export function normalizeDiscoveryProvider(sidecar) {
   if (!isRecord(sidecar)) return null;
@@ -192,10 +192,15 @@ export function normalizeDiscoveryProvider(sidecar) {
   ) {
     return null;
   }
-  const providers = topic.providers.filter((provider) => SUPPORTED_TOPIC_PROVIDERS.has(provider));
-  if (providers.length === 0 || providers.length !== topic.providers.length) return null;
+  if (topic.providers.some((provider) => !SUPPORTED_TOPIC_PROVIDERS.has(provider))) return null;
+  const providers = [...new Set(topic.providers)];
+  if (providers.length === 0) return null;
+  // Google News-only candidates have a safe normalized public label that the
+  // newsletter already accepts. Keep Reddit and mixed-source attribution
+  // private as `other`, which remains ineligible for newsletter selection.
+  if (providers.length === 1 && providers[0] === 'google-news-rss') return 'google_news';
   // Reddit candidates can only reach this point after the feed's explicit
-  // Remote Config approval gate. Keep the source private in the public index.
+  // Remote Config approval gate. The normalized public value does not reveal it.
   return 'other';
 }
 
