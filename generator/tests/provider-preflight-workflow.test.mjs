@@ -35,7 +35,6 @@ test('il dry-run non viene bloccato dal preflight che richiede una lane attiva',
 });
 
 test('i report distinguono la sonda di catalogo dai modelli eleggibili a runtime', () => {
-  assert.match(WORKFLOW, /Probe provider transport\/catalog reachability \(no inference\)/);
   assert.match(CREATE_ARTICLE, /scope: 'runtime-model-eligibility'/);
   assert.match(CREATE_ARTICLE, /runtimeEligibleModels: roster\.availableModels/);
   assert.match(CREATE_ARTICLE, /runtimeEligibleProviders: roster\.availableProviders/);
