@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://www.schaffhausen24.ch/articles/416903-stein-am-rhein-stellt-budget-2027-vor": {
-      "section": "canton-sh",
-      "ts": 1793760314034
-    },
     "canton-sh::https://sh.ch/webseite/kanton-schaffhausen/beh-rde/regierung/staatskanzlei/medienmitteilungen-24340447-de.html": {
       "section": "canton-sh",
       "ts": 1793918364173
@@ -19,6 +15,18 @@
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-02/bei-der-wefa-in-thayngen-kommt-es-zu-einem-wechsel": {
       "section": "canton-sh",
       "ts": 1793931888953
+    },
+    "canton-sh::https://www.radiomunot.ch/p/neuhauser-budget-2027-schwarze-null-dank-reserven-3v0wfojhh04lqprzwvenux": {
+      "section": "canton-sh",
+      "ts": 1793951718332
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-20/jestetter-erfindung-soll-den-zahnarztbesuch-komfortabler": {
+      "section": "canton-sh",
+      "ts": 1793951719634
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-01/gf-verkauft-luft-und-raumfahrt-sowie-industriegasturbinen": {
+      "section": "canton-sh",
+      "ts": 1793952079933
     }
   }
 }
