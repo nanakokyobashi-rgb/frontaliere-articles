@@ -1,9 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/bellinzonese/1951679/semafori-a-cadenazzo-il-flusso-di-traffico-migliorera": {
-    "articleId": "semafori-cadenazzo-traffico",
-    "ts": "2026-09-23T01:21:52.042Z",
-    "keyForm": 2
-  },
   "https://comozero.it/attualita/frontalieri-un-nuovo-problema-fiscale-e-realta-ecco-in-cosa-consiste": {
     "articleId": "rimborso-imposta-lpp-2024",
     "ts": "2026-09-23T10:40:11.794Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4214055": {
     "articleId": "versamento-avs-dicembre-importi",
     "ts": "2026-11-03T13:45:07.058Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/pubbliredazionale/frontalieri-e-telelavoro-nel-2026-come-organizzare-la-postazione-di-lavoro-a-casa": {
+    "articleId": "frontalieri-telelavoro-protocollo-2026",
+    "ts": "2026-11-06T10:40:32.025Z",
     "keyForm": 2
   }
 }
