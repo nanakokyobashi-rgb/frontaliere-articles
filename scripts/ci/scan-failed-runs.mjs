@@ -1943,7 +1943,7 @@ const NOT_BOOKKEEPING_RE = /rebase conflict on '([^']+)', which is not a whole-f
 const PUSH_EXHAUSTED_RE = /##\[error\]push failed after \d+ attempts/;
 const CRAWLER_GROUP_MEMBER_STATUS_RE = /(?:^|[^a-z0-9-])([a-z0-9][a-z0-9-]*):\s*crawler exited with status\s+([1-9]\d*)\b/i;
 const CRAWLER_SHARED_FAILURE_RE = /(?:shared deferred-commit precondition failed|shared group precondition failure|group commit failed|crawler group interrupted)/i;
-const CRAWLER_LEASE_DIAGNOSTIC_RE = /(?:lease|lock).{0,120}(?:failed|error|busy|not acquired|missing|expired|unavailable|conflict)|(?:failed|error|busy|not acquired|missing|expired|unavailable|conflict).{0,120}(?:lease|lock)/i;
+const CRAWLER_LEASE_DIAGNOSTIC_RE = /(?:\b(?:lease|lock)\b).{0,120}\b(?:failed|error|busy|not acquired|missing|expired|unavailable|conflict)\b|\b(?:failed|error|busy|not acquired|missing|expired|unavailable|conflict)\b.{0,120}\b(?:lease|lock)\b/i;
 const CRAWLER_GROUP_DIAGNOSTIC_RE = /crawler failed:|crawler exited with status [1-9]\d*\b|no terminal status was published|invalid terminal status|invalid status:|crawler aggregate|crawler group (?:completed with|interrupted)|shared deferred-commit precondition failed|shared group precondition failure|group commit failed|runner shutdown.*exit 143|systemic.*143/i;
 // Riga di verdetto dell'aggregatore (step «Fail crawler group after all member
 // outcomes» dei workflow generati). Forma letta dal log vero della run
