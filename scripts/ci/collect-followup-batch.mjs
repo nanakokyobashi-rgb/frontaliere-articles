@@ -509,6 +509,7 @@ const CLAIM_BULLET_LINE_RE = /^\s*[-*+]\s+\S/;
 const NO_NEW_DAILY_BUCKET_RE = /(?:\bnessun(?:o)?\s+(?:nuov[oa]\s+)?(?:bucket\s+(?:daily|giornalier[oa])|daily\s+bucket)\b|\bno\s+(?:new\s+)?daily\s+bucket\b)[^\r\n]*(?:apert\w*|creat\w*|modificat\w*|aggiornat\w*|opened|created|changed|updated)\b/i;
 const TRACKED_RESIDUALS_RE = /(?:\bresidu[io]\b[^\r\n]*(?:già\s+tracciat\w*|non\s+generano\s+un\s+secondo\s+contenitore)|\bresiduals?\b[^\r\n]*(?:already\s+tracked|no\s+second\s+container))/i;
 const POSITIVE_ITEM_CLAIM_RE = /(?:\b(?:aggiunt\w*|creat\w*|apert\w*|updated?|added|created|opened)\b[^\r\n]*\bitems?(?!-level)\b|\bitems?(?!-level)\b[^\r\n]*\b(?:aggiunt\w*|creat\w*|apert\w*|updated?|added|created|opened)\b)/i;
+const NEGATIVE_ITEM_CLAIM_RE = /\b(?:nessun(?:o)?|no|zero|0)\s+items?\b/i;
 
 /**
  * La finestra di claim del marker: ogni riga `Created/updated:` PIU' la lista
@@ -636,8 +637,9 @@ function attestationLines(lines) {
  *    vale solo se non dichiara item o bucket strutturali; un semplice «nessun
  *    bucket» resta non provato.
  *  - nel marker H2 canonico a zero, un bullet `FU-...` che attesta
- *    esplicitamente «gia' tracciato» e' un riferimento storico, non un item
- *    nuovo. La forma `Follow-up item:` resta sempre un claim positivo.
+ *    positivamente e senza negazioni «gia' tracciato» e' un riferimento
+ *    storico, non un item nuovo. La forma `Follow-up item:` e ogni claim
+ *    positivo restano prioritari.
  *  - uno SKIP esplicito e' l'intestazione "## Post-merge follow-up triage:
  *    skipped by anti-nipote gate". In questo caso il finding resta di
  *    proprieta' della follow-up issue genitrice, quindi non esiste un bucket o
@@ -673,12 +675,16 @@ export function triageMarkerPersistenceExpectation(markerBody) {
     // vuoto, e il backfill ammette solo la ragione del prompt (`: PR not eligible …`).
     /^\s*##\s+Post-merge follow-up triage\s*(?::\s*zero outstanding items\.?|\(backfill skipped\)(?:\s*:\s*PR not eligible\b.*)?)\s*$/i.test(line));
   // Il marker zero puo' citare un FU gia' tracciato nel bucket precedente. La
-  // forma stretta evita che una dichiarazione `Follow-up item:` o un claim
-  // positivo nel corpo venga promosso a contesto.
+  // forma stretta richiede un'attestazione positiva: «non e' gia' tracciato»
+  // e «non va considerato gia' tracciato» lasciano l'item outstanding. Un
+  // claim `Follow-up item:` o positivo resta sempre prioritario.
   const historicalZeroOutstandingItems = canonicalZero
     ? new Set(claimEvidenceLines.filter((line) =>
       /^\s*[-*+]\s+(?:`)?FU-\d{4}-\d{2}-\d{2}-\d{3}\b/i.test(line)
-        && /\bgi[àa]\s+tracciat[oa]\b/i.test(line),
+        && /\bgi[àa]\s+tracciat[oa]\b/i.test(line)
+        && !/\bnon\b[^\r\n]*\bgi[àa]\s+tracciat[oa]\b/i.test(line)
+        && !/Follow-up\s+item\s*:/i.test(line)
+        && !POSITIVE_ITEM_CLAIM_RE.test(line),
     ).flatMap((line) => [...line.matchAll(/FU-\d{4}-\d{2}-\d{2}-\d{3}\b/gi)].map((match) => match[0].toUpperCase())))
     : new Set();
   // `Follow-up item:` is a structural claim only when it starts its own
@@ -691,6 +697,7 @@ export function triageMarkerPersistenceExpectation(markerBody) {
       /^\s*(?:(?:(?:[-*+]|\d+[.)])\s+)?Follow-up\s+item\s*:\s*|[-*+]\s+)(?:`(FU-\d{4}-\d{2}-\d{2}-\d{3})`|(FU-\d{4}-\d{2}-\d{2}-\d{3})\b)/gi,
     )].map((match) => (match[1] || match[2]).toUpperCase()))
     .filter((item) => !historicalZeroOutstandingItems.has(item)))];
+  const uniqueItems = [...new Set(items)];
   // Il `#N` deve stare accanto a «bucket»: cosi' un `PR concatenata #9050`
   // citato fra i drop non diventa un candidato. Prendiamo il primo numero dopo
   // ciascuna occorrenza di «bucket», non ogni numero della riga: la prosa puo'
@@ -708,16 +715,18 @@ export function triageMarkerPersistenceExpectation(markerBody) {
       && /\bbucket\b[^#\r\n]*#[1-9]\d*\b[^\r\n]*\bnon\s+modificat[oa]\s+da\s+questa\s+PR\b/i.test(prose);
   });
   const inlineCodeFreeAttestations = attesting.map((line) => line.replace(/(`+)[^`]*?\1/g, ' '));
-  const hasPositiveItemClaim = inlineCodeFreeAttestations.some((line) => POSITIVE_ITEM_CLAIM_RE.test(line));
+  const hasPositiveItemClaim = uniqueItems.length > 0
+    || inlineCodeFreeAttestations.some((line) =>
+      POSITIVE_ITEM_CLAIM_RE.test(line) && !NEGATIVE_ITEM_CLAIM_RE.test(line));
   const noNewDailyBucketZero = inlineCodeFreeAttestations.some((line) => NO_NEW_DAILY_BUCKET_RE.test(line))
     && inlineCodeFreeAttestations.some((line) => TRACKED_RESIDUALS_RE.test(line))
     && !hasPositiveItemClaim;
-  const explicitZero = canonicalZero
+  const explicitZero = !hasPositiveItemClaim && (canonicalZero
     || unchangedBucketZero
-    || (noNewDailyBucketZero && buckets.length === 0);
+    || (noNewDailyBucketZero && buckets.length === 0));
   const explicitAntiNipoteSkip = attesting.some((line) =>
-    /^\s*##\s+Post-merge follow-up triage\s*:\s*skipped by anti-nipote gate\b/i.test(line));
-  const uniqueItems = [...new Set(items)];
+    /^\s*##\s+Post-merge follow-up triage\s*:\s*skipped by anti-nipote gate\b/i.test(line))
+    && !hasPositiveItemClaim;
   return {
     items: uniqueItems,
     buckets: [...new Set(buckets)],
