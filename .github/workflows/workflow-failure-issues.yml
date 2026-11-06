@@ -175,6 +175,27 @@ jobs:
             node scripts/ci/scan-job-timeouts.mjs
           fi
 
+      # I titoli scoped (`CI Failure (<evento>): ...`) restano volutamente
+      # fuori dal reconciler generale: solo questo scanner conosce evento e
+      # popolazione di run corretti. La CLI di risoluzione e' separata dalla
+      # scansione, quindi va cablata esplicitamente anche quando uno scanner
+      # precedente fallisce. Il resolver richiede tre run pulite e resta
+      # fail-closed su history illeggibile o issue rivendicate.
+      - name: Close recovered scoped timeout issues
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          export GH_TOKEN="${runtime_pat:-$GH_TOKEN}"
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            node scripts/ci/scan-job-timeouts.mjs --resolve --dry-run
+          else
+            node scripts/ci/scan-job-timeouts.mjs --resolve
+          fi
+
       - name: Cleanup Firebase credentials
         if: always()
         run: rm -f /tmp/firebase-sa.json
