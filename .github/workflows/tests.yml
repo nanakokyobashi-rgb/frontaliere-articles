@@ -151,7 +151,9 @@ jobs:
       PREFLIGHT_EVENT_NAME: ${{ github.event_name }}
       PREFLIGHT_PUSH_BASE_REVISION: ${{ github.event.before }}
       PREFLIGHT_PR_BASE_REVISION: ${{ github.event.pull_request.base.sha }}
+      PREFLIGHT_PR_HEAD_REVISION: ${{ github.event.pull_request.head.sha }}
       PREFLIGHT_DISPATCH_BASE_REVISION: ${{ inputs.base_sha }}
+      PREFLIGHT_DISPATCH_HEAD_REVISION: ${{ inputs.head_sha }}
     steps:
       # `fetch-pr-files.mjs` executes an attested absolute GitHub CLI path;
       # resolve it before checkout so the PR cannot influence the executable.
@@ -229,21 +231,50 @@ jobs:
       - name: ShellCheck changed GitHub Actions workflows
         run: |
           set -euo pipefail
-          base="${PREFLIGHT_PR_BASE_REVISION:-${PREFLIGHT_PUSH_BASE_REVISION:-${PREFLIGHT_DISPATCH_BASE_REVISION:-}}}"
+          base=''
+          case "${PREFLIGHT_EVENT_NAME:-}" in
+            pull_request) base="${PREFLIGHT_PR_BASE_REVISION:-}" ;;
+            push) base="${PREFLIGHT_PUSH_BASE_REVISION:-}" ;;
+            workflow_dispatch) base="${PREFLIGHT_DISPATCH_BASE_REVISION:-}" ;;
+          esac
           if [ -n "$base" ] && [[ ! "$base" =~ ^[0-9a-fA-F]{40,64}$ ]]; then
             base=''
           fi
           if [ -n "$base" ] && ! git cat-file -e "$base^{commit}" 2>/dev/null; then
             base=''
           fi
+          compare_head=HEAD
+          if [ "${PREFLIGHT_EVENT_NAME:-}" = 'pull_request' ]; then
+            compare_head="${PREFLIGHT_PR_HEAD_REVISION:-}"
+            if [ -z "$compare_head" ] || [[ ! "$compare_head" =~ ^[0-9a-fA-F]{40,64}$ ]] \
+              || ! git cat-file -e "$compare_head^{commit}" 2>/dev/null; then
+              echo '::error::Head della PR non disponibile per il controllo ShellCheck.'
+              exit 1
+            fi
+          elif [ -n "${PREFLIGHT_DISPATCH_HEAD_REVISION:-}" ]; then
+            compare_head="$PREFLIGHT_DISPATCH_HEAD_REVISION"
+            if [[ ! "$compare_head" =~ ^[0-9a-fA-F]{40,64}$ ]] \
+              || ! git cat-file -e "$compare_head^{commit}" 2>/dev/null; then
+              echo '::error::Head del dispatch non disponibile per il controllo ShellCheck.'
+              exit 1
+            fi
+            if [ -z "$base" ]; then
+              echo '::error::Base richiesta quando il dispatch specifica la head di una PR.'
+              exit 1
+            fi
+          fi
           if [ -z "$base" ]; then
-            base="$(git rev-parse --verify HEAD^ 2>/dev/null || true)"
+            if [ "${PREFLIGHT_EVENT_NAME:-}" = 'pull_request' ]; then
+              echo '::error::Base della PR non disponibile per il controllo ShellCheck.'
+              exit 1
+            fi
+            base="$(git rev-parse --verify "$compare_head^" 2>/dev/null || true)"
           fi
           changed_workflows=()
           changed_workflows_file="$(mktemp "${RUNNER_TEMP:-/tmp}/actionlint-workflows.XXXXXX")"
           trap 'rm -f "$changed_workflows_file"' EXIT
           if [ -n "$base" ]; then
-            if ! git diff --name-only -z "$base...HEAD" -- '.github/workflows/*.yml' '.github/workflows/*.yaml' > "$changed_workflows_file"; then
+            if ! git diff --name-only -z "$base...$compare_head" -- '.github/workflows/*.yml' '.github/workflows/*.yaml' > "$changed_workflows_file"; then
               echo '::error::Impossibile calcolare la diff dei workflow per ShellCheck.'
               exit 1
             fi

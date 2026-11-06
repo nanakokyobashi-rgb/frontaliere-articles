@@ -18,9 +18,22 @@ test('required PR check validates every workflow and ShellChecks changed workflo
   );
   assert.match(
     TESTS_WORKFLOW,
-    /name: ShellCheck changed GitHub Actions workflows[\s\S]+?if ! git diff --name-only -z "\$base\.\.\.HEAD"[\s\S]+?> "\$changed_workflows_file"; then[\s\S]+?::error::Impossibile calcolare la diff[\s\S]+?if \[ -f "\$workflow" \][\s\S]+?actionlint -config-file \.github\/actionlint\.yaml "\$\{changed_workflows\[@\]\}"/,
+    /name: ShellCheck changed GitHub Actions workflows[\s\S]+?compare_head=HEAD[\s\S]+?PREFLIGHT_PR_HEAD_REVISION[\s\S]+?if ! git diff --name-only -z "\$base\.\.\.\$compare_head"[\s\S]+?> "\$changed_workflows_file"; then[\s\S]+?::error::Impossibile calcolare la diff[\s\S]+?if \[ -f "\$workflow" \][\s\S]+?actionlint -config-file \.github\/actionlint\.yaml "\$\{changed_workflows\[@\]\}"/,
   );
+  assert.match(
+    TESTS_WORKFLOW,
+    /if \[ "\$\{PREFLIGHT_EVENT_NAME:-\}" = 'pull_request' \]; then[\s\S]+?compare_head="\$\{PREFLIGHT_PR_HEAD_REVISION:-\}"/,
+  );
+  assert.match(
+    TESTS_WORKFLOW,
+    /elif \[ -n "\$\{PREFLIGHT_DISPATCH_HEAD_REVISION:-\}" \]; then[\s\S]+?compare_head="\$PREFLIGHT_DISPATCH_HEAD_REVISION"/,
+  );
+  assert.match(TESTS_WORKFLOW, /pull_request\) base="\$\{PREFLIGHT_PR_BASE_REVISION:-\}"/);
+  assert.match(TESTS_WORKFLOW, /push\) base="\$\{PREFLIGHT_PUSH_BASE_REVISION:-\}"/);
+  assert.match(TESTS_WORKFLOW, /workflow_dispatch\) base="\$\{PREFLIGHT_DISPATCH_BASE_REVISION:-\}"/);
   assert.match(TESTS_WORKFLOW, /PREFLIGHT_DISPATCH_BASE_REVISION: \$\{\{ inputs\.base_sha \}\}/);
+  assert.match(TESTS_WORKFLOW, /PREFLIGHT_PR_HEAD_REVISION: \$\{\{ github\.event\.pull_request\.head\.sha \}\}/);
+  assert.match(TESTS_WORKFLOW, /PREFLIGHT_DISPATCH_HEAD_REVISION: \$\{\{ inputs\.head_sha \}\}/);
   assert.match(
     TESTS_WORKFLOW,
     /- name: Setup isolated article source runtime\s+if: \$\{\{ !cancelled\(\) \}\}\s+uses: \.\/\.github\/actions\/setup-article-source-runtime/,
