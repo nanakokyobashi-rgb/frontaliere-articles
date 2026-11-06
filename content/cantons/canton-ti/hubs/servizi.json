@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-11-06T10:45:07.076Z",
-  "contentHash": "a9340039d8480c726eb0d3b12163fcb539711e782b007e4a8c7555136b10bf41",
+  "updatedAt": "2026-11-06T18:39:35.128Z",
+  "contentHash": "d5c2024a84dbd8d26a419bfbe20df1cad12fb51cba0800109d68ea95f56dc824",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -74,16 +74,6 @@
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
             {
-              "label": "Boscolo",
-              "detail": "Airolo, Biasca e Valli",
-              "date": "2026-10-30T17:00:00.000Z"
-            },
-            {
-              "label": "Pedrazzetti",
-              "detail": "Giubiasco, Bellinzonese",
-              "date": "2026-10-30T17:30:00.000Z"
-            },
-            {
               "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
               "detail": "Lugano, Luganese",
               "date": "2026-10-31T07:00:00.000Z"
@@ -102,6 +92,16 @@
               "label": "Camorino",
               "detail": "Camorino, Bellinzonese",
               "date": "2026-11-06T17:30:00.000Z"
+            },
+            {
+              "label": "Liver",
+              "detail": "Chiasso, Mendrisiotto",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Stella",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-07T07:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -256,7 +256,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-11-06T10:45:07.076Z"
+      "updatedAt": "2026-11-06T18:39:35.128Z"
     },
     "en": {
       "canton": "TI",
@@ -303,16 +303,6 @@
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
             {
-              "label": "Boscolo",
-              "detail": "Airolo, Biasca e Valli",
-              "date": "2026-10-30T17:00:00.000Z"
-            },
-            {
-              "label": "Pedrazzetti",
-              "detail": "Giubiasco, Bellinzonese",
-              "date": "2026-10-30T17:30:00.000Z"
-            },
-            {
               "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
               "detail": "Lugano, Luganese",
               "date": "2026-10-31T07:00:00.000Z"
@@ -331,6 +321,16 @@
               "label": "Camorino",
               "detail": "Camorino, Bellinzonese",
               "date": "2026-11-06T17:30:00.000Z"
+            },
+            {
+              "label": "Liver",
+              "detail": "Chiasso, Mendrisiotto",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Stella",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-07T07:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -480,7 +480,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-11-06T10:45:07.076Z"
+      "updatedAt": "2026-11-06T18:39:35.128Z"
     },
     "de": {
       "canton": "TI",
@@ -527,16 +527,6 @@
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
             {
-              "label": "Boscolo",
-              "detail": "Airolo, Biasca e Valli",
-              "date": "2026-10-30T17:00:00.000Z"
-            },
-            {
-              "label": "Pedrazzetti",
-              "detail": "Giubiasco, Bellinzonese",
-              "date": "2026-10-30T17:30:00.000Z"
-            },
-            {
               "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
               "detail": "Lugano, Luganese",
               "date": "2026-10-31T07:00:00.000Z"
@@ -555,6 +545,16 @@
               "label": "Camorino",
               "detail": "Camorino, Bellinzonese",
               "date": "2026-11-06T17:30:00.000Z"
+            },
+            {
+              "label": "Liver",
+              "detail": "Chiasso, Mendrisiotto",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Stella",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-07T07:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -704,7 +704,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-11-06T10:45:07.076Z"
+      "updatedAt": "2026-11-06T18:39:35.128Z"
     },
     "fr": {
       "canton": "TI",
@@ -751,16 +751,6 @@
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
             {
-              "label": "Boscolo",
-              "detail": "Airolo, Biasca e Valli",
-              "date": "2026-10-30T17:00:00.000Z"
-            },
-            {
-              "label": "Pedrazzetti",
-              "detail": "Giubiasco, Bellinzonese",
-              "date": "2026-10-30T17:30:00.000Z"
-            },
-            {
               "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
               "detail": "Lugano, Luganese",
               "date": "2026-10-31T07:00:00.000Z"
@@ -779,6 +769,16 @@
               "label": "Camorino",
               "detail": "Camorino, Bellinzonese",
               "date": "2026-11-06T17:30:00.000Z"
+            },
+            {
+              "label": "Liver",
+              "detail": "Chiasso, Mendrisiotto",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Stella",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-07T07:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -925,7 +925,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-11-06T10:45:07.076Z"
+      "updatedAt": "2026-11-06T18:39:35.128Z"
     }
   }
 }

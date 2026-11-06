@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T16:04:12.780Z",
-  "contentHash": "6dd266d2ce2bcc7561f4538e835150baf544e914f500be9e223c6a7696d5b86f",
+  "updatedAt": "2026-11-06T18:39:35.128Z",
+  "contentHash": "fd6eabe331f4b520b7bd9449b922125b8be56a01683c1756a8f4fabc9e698292",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "17",
+          "value": "16",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
@@ -67,12 +67,6 @@
               "date": "2026-10-12T16:35:00.000Z"
             },
             {
-              "label": "Altavilla, Murten in tutte le direzioni Situazione: chiusa Causa: lavori di manutenzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 6 novembre 2026",
-              "date": "2026-10-15T05:00:00.000Z"
-            },
-            {
               "label": "Route du Postillon, Courtepin in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Chiusura",
               "detail": "fine prevista: 27 novembre 2026",
@@ -89,6 +83,12 @@
               "value": "Chiusura",
               "detail": "fine prevista: 23 novembre 2026",
               "date": "2026-10-27T16:49:00.000Z"
+            },
+            {
+              "label": "Nussbaumen, Wünnewil-Flamatt in tutte le direzioni Situazione: divieto di transito Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 23 novembre 2026",
+              "date": "2026-10-27T16:51:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-06T16:04:12.780Z"
+      "updatedAt": "2026-11-06T18:39:35.128Z"
     },
     "en": {
       "canton": "FR",
@@ -204,7 +204,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "17",
+          "value": "16",
           "note": "reports as of 5 November 2026"
         },
         {
@@ -244,12 +244,6 @@
               "date": "2026-10-12T16:35:00.000Z"
             },
             {
-              "label": "Altavilla, Murten in tutte le direzioni Situazione: chiusa Causa: lavori di manutenzione",
-              "value": "Closure",
-              "detail": "until 6 November 2026",
-              "date": "2026-10-15T05:00:00.000Z"
-            },
-            {
               "label": "Route du Postillon, Courtepin in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Closure",
               "detail": "until 27 November 2026",
@@ -266,6 +260,12 @@
               "value": "Closure",
               "detail": "until 23 November 2026",
               "date": "2026-10-27T16:49:00.000Z"
+            },
+            {
+              "label": "Nussbaumen, Wünnewil-Flamatt in tutte le direzioni Situazione: divieto di transito Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 23 November 2026",
+              "date": "2026-10-27T16:51:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-06T16:04:12.780Z"
+      "updatedAt": "2026-11-06T18:39:35.128Z"
     },
     "de": {
       "canton": "FR",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "17",
+          "value": "16",
           "note": "Meldungen vom 5. November 2026"
         },
         {
@@ -421,12 +421,6 @@
               "date": "2026-10-12T16:35:00.000Z"
             },
             {
-              "label": "Altavilla, Murten in beide Richtungen Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 6. November 2026",
-              "date": "2026-10-15T05:00:00.000Z"
-            },
-            {
               "label": "Route du Postillon, Courtepin in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
               "value": "Sperrung",
               "detail": "bis 27. November 2026",
@@ -443,6 +437,12 @@
               "value": "Sperrung",
               "detail": "bis 23. November 2026",
               "date": "2026-10-27T16:49:00.000Z"
+            },
+            {
+              "label": "Nussbaumen, Wünnewil-Flamatt in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 23. November 2026",
+              "date": "2026-10-27T16:51:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-06T16:04:12.780Z"
+      "updatedAt": "2026-11-06T18:39:35.128Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,7 +558,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "17",
+          "value": "16",
           "note": "signalements au 5 novembre 2026"
         },
         {
@@ -598,12 +598,6 @@
               "date": "2026-10-12T16:35:00.000Z"
             },
             {
-              "label": "Altavilla, Murten dans les deux sens Situation: fermé Raison: travaux de maintenance",
-              "value": "Fermeture",
-              "detail": "jusqu’au 6 novembre 2026",
-              "date": "2026-10-15T05:00:00.000Z"
-            },
-            {
               "label": "Route du Postillon, Courtepin dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
               "value": "Fermeture",
               "detail": "jusqu’au 27 novembre 2026",
@@ -620,6 +614,12 @@
               "value": "Fermeture",
               "detail": "jusqu’au 23 novembre 2026",
               "date": "2026-10-27T16:49:00.000Z"
+            },
+            {
+              "label": "Nussbaumen, Wünnewil-Flamatt dans les deux sens Situation: circulation de transit interdite Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 23 novembre 2026",
+              "date": "2026-10-27T16:51:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-06T16:04:12.780Z"
+      "updatedAt": "2026-11-06T18:39:35.128Z"
     }
   }
 }
