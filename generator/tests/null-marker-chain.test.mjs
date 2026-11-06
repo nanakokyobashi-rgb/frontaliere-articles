@@ -167,6 +167,36 @@ describe('translateFieldFreeMt — l’uscita di un motore non e’ prosa', () =
     assert.deepEqual(signals, [{ targetLang: 'de', fieldType: 'title', reason: 'passthrough' }]);
   });
 
+  test('rifiuta l’italiano equivalente dopo normalizzazione di whitespace e maiuscole', async () => {
+    const signals = [];
+    const source = 'Il Consiglio di Stato ha approvato il messaggio.';
+    const out = await translateFieldFreeMt({
+      text: source,
+      sourceLang: 'it',
+      targetLang: 'fr',
+      fieldType: 'description',
+      translate: async () => '  IL CONSIGLIO DI STATO\nHA APPROVATO IL MESSAGGIO.  ',
+      onUnusableOutput: (event) => signals.push(event),
+    });
+
+    assert.equal(out, '');
+    assert.deepEqual(signals, [{ targetLang: 'fr', fieldType: 'description', reason: 'passthrough' }]);
+  });
+
+  test('accetta testo realmente tradotto e non applica il rifiuto fra locali uguali', async () => {
+    assert.equal(await run('Ein deutscher Titel'), 'Ein deutscher Titel');
+
+    const source = 'Titolo invariato';
+    const sameLocale = await translateFieldFreeMt({
+      text: source,
+      sourceLang: 'it',
+      targetLang: 'it',
+      fieldType: 'title',
+      translate: async () => source.toUpperCase(),
+    });
+    assert.equal(sameLocale, source.toUpperCase());
+  });
+
   test('rifiuta un lone surrogate prodotto dal motore prima del write boundary', async () => {
     const signals = [];
     const out = await translateFieldFreeMt({
