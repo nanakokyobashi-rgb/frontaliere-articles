@@ -3140,6 +3140,18 @@ test('reconcile: il parser accetta commenti a blocco dopo una dichiarazione semi
   );
 });
 
+test('reconcile: il parser maschera regex dopo keyword di statement senza perdere l export', () => {
+  const regexWithCommentPrefix = String.raw`/\/*/;`;
+  const sources = [
+    `for (;;) { break\n${regexWithCommentPrefix} }\nexport const CANTON_LANDING_CARD_LIMIT = 24;`,
+    `for (;;) { continue\n${regexWithCommentPrefix} }\nexport const CANTON_LANDING_CARD_LIMIT = 24;`,
+    `debugger\n${regexWithCommentPrefix}\nexport const CANTON_LANDING_CARD_LIMIT = 24;`,
+    `export default ${regexWithCommentPrefix}\nexport const CANTON_LANDING_CARD_LIMIT = 24;`,
+  ];
+
+  for (const source of sources) assert.equal(parseCantonLandingCardLimitExport(source), 24, source);
+});
+
 // ── Dati degli hub ───────────────────────────────────────────────────────────
 
 function hubRoot(files) {
