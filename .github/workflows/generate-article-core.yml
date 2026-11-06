@@ -1101,6 +1101,7 @@ jobs:
             echo "section=$effective"
             echo "declared=$all_declared"
             echo "cooperative_stop=$cooperative_stop"
+            echo "outcome_kind=$outcome_kind"
             echo "roster_blocked=$roster_blocked"
             echo "provider_blocked=$provider_blocked"
             echo "partial_failure=$partial_failure"
@@ -1201,7 +1202,7 @@ jobs:
 
       - name: Commit and push
         id: commit
-        if: ${{ !cancelled() && steps.mode.outputs.dry != 'true' && (success() || (failure() && steps.generate.outcome == 'failure' && steps.generate.outputs.article != 'true')) }}
+        if: ${{ !cancelled() && steps.mode.outputs.dry != 'true' && (success() || (failure() && steps.generate.outcome == 'failure' && steps.generate.outputs.article != 'true' && (steps.generate.outputs.cooperative_stop == 'true' || steps.generate.outputs.outcome_kind == 'error'))) }}
         run: |
           set -euo pipefail
           discovery_recovery_only=false
@@ -1211,8 +1212,6 @@ jobs:
               exit 1
             fi
             echo "::warning::generation failed without an article; discarding unverified changes and preserving only pool-attempt counters"
-            # Markers and diagnostics live under RUNNER_TEMP, outside this
-            # checkout; the earlier always-upload step has already preserved them.
             git reset --hard HEAD
             git clean -fd
             recovery_state='data/discovery-attempt-state.json'

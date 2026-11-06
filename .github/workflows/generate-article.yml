@@ -1941,6 +1941,7 @@ jobs:
             echo "section=$effective"
             echo "declared=$all_declared"
             echo "cooperative_stop=$cooperative_stop"
+            echo "outcome_kind=$outcome_kind"
             echo "roster_blocked=$roster_blocked"
             echo "provider_blocked=$provider_blocked"
             echo "partial_failure=$partial_failure"
@@ -2186,7 +2187,7 @@ jobs:
 
       - name: Commit and push
         id: commit
-        if: ${{ !cancelled() && steps.mode.outputs.dry != 'true' && (success() || (failure() && steps.generate.outcome == 'failure' && steps.generate.outputs.article != 'true')) }}
+        if: ${{ !cancelled() && steps.mode.outputs.dry != 'true' && (success() || (failure() && steps.generate.outcome == 'failure' && steps.generate.outputs.article != 'true' && (steps.generate.outputs.cooperative_stop == 'true' || steps.generate.outputs.outcome_kind == 'error'))) }}
         # Note del comando fuori dallo scalar run: mantenere il comando sotto 21.000 caratteri.
         # `.tmp` is inside the checkout and the rebase helper can remove or
         # replace it while replaying the generated commit. Preserve the

@@ -414,8 +414,16 @@ test('un generate fallito salva solo i marker di recovery e lascia rossa la run'
     assert.match(condition, /success\(\)/, `${path.basename(file)}: il percorso normale deve restare attivo`);
     assert.match(condition, /failure\(\)/, `${path.basename(file)}: il recupero deve poter partire dopo un errore`);
     assert.match(condition, /steps\.generate\.outcome == 'failure'/);
-    assert.match(condition, /steps\.generate\.outputs\.cooperative_stop == 'true'/);
-    assert.match(condition, /steps\.generate\.outputs\.article != 'true'/);
+    assert.match(
+      condition,
+      /success\(\)\s*\|\|\s*\(failure\(\)\s*&&\s*steps\.generate\.outcome == 'failure'\s*&&\s*steps\.generate\.outputs\.article != 'true'\s*&&\s*\(steps\.generate\.outputs\.cooperative_stop == 'true'\s*\|\|\s*steps\.generate\.outputs\.outcome_kind == 'error'\)\)/,
+      `${path.basename(file)}: recovery solo per stop cooperativo o errore dichiarato, senza cambiare la precedenza`,
+    );
+    assert.match(
+      workflow,
+      /\{\s*echo "article=\$produced"[\s\S]*?echo "outcome_kind=\$outcome_kind"[\s\S]*?\} >> "\$GITHUB_OUTPUT"/,
+      `${path.basename(file)}: outcome_kind deve essere un output del passo generate`,
+    );
 
     const failureStart = commit.indexOf('if [ "${{ steps.generate.outcome }}" = "failure" ]; then');
     const normalStage = commit.indexOf('            git add -A', failureStart);
@@ -424,7 +432,8 @@ test('un generate fallito salva solo i marker di recovery e lascia rossa la run'
     assert.ok(failureStart >= 0 && normalStage > failureStart, `${path.basename(file)}: il ramo di errore deve precedere lo staging generale`);
     assert.ok(recoveryGate > failureStart && reportGate > recoveryGate, `${path.basename(file)}: il recupero deve precedere qualunque uso del report`);
     const failedRecovery = commit.slice(failureStart, normalStage);
-    assert.match(failedRecovery, /git reset --mixed HEAD/);
+    assert.match(failedRecovery, /git reset --hard HEAD/);
+    assert.match(failedRecovery, /git clean -fd/);
     assert.match(failedRecovery, /git restore --source=HEAD --worktree -- "\$recovery_state"/);
     assert.match(failedRecovery, /record-discovery-attempt\.mjs/);
     assert.match(failedRecovery, /git add -- "\$recovery_state"/);
