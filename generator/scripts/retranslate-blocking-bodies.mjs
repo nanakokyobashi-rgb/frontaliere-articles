@@ -2108,11 +2108,12 @@ export function trackedBodyGapErrors(contentRoot, opts = {}) {
  * L'audit ufficiale (`audit-article-factuality.mjs`) vive solo nel sito e
  * tiene in memoria l'intero corpus (~6 GB di heap): nessun workflow del corpus
  * lo puo' ne' importare (il confine e' HTTP) ne' lanciare, e senza il suo file
- * lo strumento usciva 2. Qui si applica la STESSA guardia che `processPair`
- * usa per decidere `oldCodes` — `runFactualityGates` sui campi body del file,
- * con l'italiano dello stesso id come riferimento, e i soli `critical` — un
- * file alla volta: per ogni `content/blog-body[-ch]/<locale>/<id>.ts` si leggono
- * quel file e il suo `it`, poi si lasciano andare.
+ * lo strumento usciva 2. Qui si applicano le STESSE guardie che `processPair`
+ * usa per decidere `oldCodes`: `runFactualityGates` sui campi body del file,
+ * con l'italiano dello stesso id come riferimento e i soli `critical`, più il
+ * detector per-riga dei residui italiani. Un file alla volta: per ogni
+ * `content/blog-body[-ch]/<locale>/<id>.ts` si leggono quel file e il suo `it`,
+ * poi si lasciano andare.
  *
  * Il `dir` restituito e' quello dell'audit (`services/locales/blog-body[-ch]`)
  * perche' `processPair` lo traduce con `DIR_TO_REAL`: le coppie entrano nella
@@ -2177,11 +2178,17 @@ export function scanContentForBlockingPairs(contentRoot, { locales = ['en', 'de'
         }
         if (!Object.keys(sections).length) continue;
         const result = runFactualityGates({ sections, locale, italianSections });
-        const codes = criticalCodes(result);
+        const italianResidue = scanItalianResidue(sections, locale);
+        const codes = currentBlockingCodes({
+          factualityCodes: criticalCodes(result),
+          italianResidue,
+        });
         if (!codes.length) continue;
         const evidence = codes.map((code) => ({
           code,
-          excerpt: (result.issues || []).find((i) => i.severity === 'critical' && i.code === code)?.evidence || '',
+          excerpt: code === 'italian-residue'
+            ? (italianResidue[0]?.text || '').slice(0, 200)
+            : (result.issues || []).find((i) => i.severity === 'critical' && i.code === code)?.evidence || '',
         }));
         pairs.push({ id, locale, dir, codes, evidence });
       }

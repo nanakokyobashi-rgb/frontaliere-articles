@@ -2994,6 +2994,42 @@ test('blockingPairsFromContent trova le coppie bloccanti, ch compreso, e lascia 
   }
 });
 
+test('scanContentForBlockingPairs include i residui italiani rilevati per riga', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-scan-italian-residue-'));
+  const id = 'residuo-italiano';
+  const french = 'Le travailleur frontalier doit vérifier les informations publiées avant son départ. '.repeat(12);
+  const italianResidue = [
+    'A partire da settembre, il San Gottardo sperimenterà un ciclo di chiusure notturne per lavori di manutenzione.',
+    'Calendario completo delle chiusure:',
+    'Totale: 18 notti di chiusura notturna distribuite su 6 settimane.',
+  ].join('\n');
+  try {
+    const itPath = path.join(tmp, 'content/blog-body/it', `${id}.ts`);
+    const frPath = path.join(tmp, 'content/blog-body/fr', `${id}.ts`);
+    fs.mkdirSync(path.dirname(itPath), { recursive: true });
+    fs.mkdirSync(path.dirname(frPath), { recursive: true });
+    fs.writeFileSync(itPath, fileFor(id, {
+      body1: 'Da settembre sono previsti lavori notturni. Il programma indica le fasce orarie e i giorni interessati. Chi viaggia deve organizzarsi in anticipo.',
+      body2: IT_LONG,
+      body3: IT_LONG,
+    }));
+    fs.writeFileSync(frPath, fileFor(id, {
+      body1: italianResidue,
+      body2: french,
+      body3: french,
+    }));
+
+    const scan = scanContentForBlockingPairs(tmp, { locales: ['fr'] });
+    assert.equal(scan.scanned, 1);
+    assert.deepEqual(scan.pairs.map(({ id: pairId, locale, codes }) => ({ id: pairId, locale, codes })), [
+      { id, locale: 'fr', codes: ['italian-residue'] },
+    ]);
+    assert.match(scan.pairs[0].evidence[0].excerpt, /settembre|calendario|frontalieri/iu);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
 test('--scan rifiuta un secondo sorgente di coppie e i flag fuori contesto', () => {
   const run = (...args) => spawnSync(process.execPath, [SCAN_SCRIPT, ...args], { encoding: 'utf8' });
   // Molti percorsi escono 2: ogni caso fissa anche il messaggio della SUA
