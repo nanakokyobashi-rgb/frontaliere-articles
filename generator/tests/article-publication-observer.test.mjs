@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {
+  DEFAULT_LAG_REPAIR_CAP,
   OBSERVER_USER_AGENT,
   buildObserverTargets,
   parseCoverageLedger,
@@ -27,6 +28,10 @@ const currentDate = '2026-10-06T00:00:00Z';
 // Mezzogiorno del giorno prima: senza dubbio precedente al 2026-10-05 in ogni fuso.
 const staleDate = '2026-10-04T12:00:00Z';
 const ownImage = '/images/blog/article.webp';
+
+test('il cap dei retry stale è separato da quello del ledger immagini', () => {
+  assert.equal(DEFAULT_LAG_REPAIR_CAP, 25);
+});
 
 test('il registry observer legge solo i campi top-level dentro una voce bilanciata', () => {
   const source = `const ARTICLES = [{

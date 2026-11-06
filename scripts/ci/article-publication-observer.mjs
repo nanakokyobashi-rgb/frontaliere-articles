@@ -11,7 +11,9 @@
  * image. The network loop is deliberately sequential and rate-limited because
  * this is a courtesy check, not a crawler. Degraded articles are kept in the
  * observer issue body until a live read is sane; at most three proven image
- * repairs and three stale-but-readable page retries are dispatched per run.
+ * repairs and a bounded set of stale-but-readable page retries are dispatched
+ * per run. Stale page repairs use the article-only publisher path, so their cap
+ * is independent from the image-repair cap.
  * Unpreparable targets with publication metadata are kept as durable coverage
  * blockers in the same stable issue until they can be observed. A body-only
  * legacy residue has no publication intent and is not an observer target.
@@ -61,6 +63,10 @@ export const DEFAULT_LEDGER_RETENTION_DAYS = 90;
 export const DEFAULT_TERMINAL_RETENTION_DAYS = 14;
 export const SITE_BASE_URL = 'https://frontaliereticino.ch';
 export const DEFAULT_REPAIR_WORKFLOW = 'fast-publish-article.yml';
+// Article-only retries do not rebuild the archive or landing surfaces. A
+// larger bounded cap lets a corpus-sized lag converge in weeks rather than
+// leaving the observer's three-item image cap as a months-long queue.
+export const DEFAULT_LAG_REPAIR_CAP = 25;
 // The apex answers 403 to the default User-Agent of Node's fetch (measured on
 // 2026-10-07): without a name of its own the observer would report every page
 // as lagging with "HTTP 403".
@@ -915,7 +921,7 @@ export async function runObserver({
   fetchDeclaredImageImpl = fetchDeclaredImage,
   githubClient = null,
   repairCap = DEFAULT_REPAIR_CAP,
-  lagRepairCap = repairCap,
+  lagRepairCap = DEFAULT_LAG_REPAIR_CAP,
   maxPages = DEFAULT_MAX_PAGES,
   minIntervalMs = DEFAULT_MIN_INTERVAL_MS,
   fetchTimeoutMs = DEFAULT_FETCH_TIMEOUT_MS,

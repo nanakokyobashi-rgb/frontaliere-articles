@@ -84,6 +84,7 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
     workflow,
     /while \[ "\$\(active_runs_for_shard "\$section" "\$target_shard"\)" -gt 0 \]/,
   );
+  assert.match(workflow, /-f 'inputs\[article_only\]=true'/);
   assert.match(
     workflow,
     /\.selected\[\].*\[\.id, \.section, \.shard\]/,
