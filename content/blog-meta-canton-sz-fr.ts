@@ -36,6 +36,9 @@ const blogMetaCantonSzFr: Record<string, string> = {
     'blog.article.finanziamento-riarmo-esercito.title': 'Réarmement de l’armée : le National évite la hausse de la TVA',
     'blog.article.finanziamento-riarmo-esercito.excerpt': 'Réarmement de CHF 24 milliards : le National vise CHF 1,3 milliard par an de 2028 à 2045 sans augmenter la TVA ; le PS menace de lancer un référendum.',
     'blog.article.finanziamento-riarmo-esercito.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.ricerca-fisco-aziende-svitto.title': 'Schwyz, la recherche devrait être plus avantageuse pour les entreprises',
+    'blog.article.ricerca-fisco-aziende-svitto.excerpt': 'Bote.ch relie la recherche à l’attractivité fiscale pour les entreprises du canton de Schwyz, mais les informations disponibles n’indiquent ni mesures, ni chiffres, ni dates.',
+    'blog.article.ricerca-fisco-aziende-svitto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSzFr;

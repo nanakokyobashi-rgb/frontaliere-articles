@@ -36,6 +36,9 @@ const blogMetaCantonSzEn: Record<string, string> = {
     'blog.article.finanziamento-riarmo-esercito.title': 'Army rearmament: the National Council avoids the VAT increase',
     'blog.article.finanziamento-riarmo-esercito.excerpt': 'Rearmament of CHF 24 billion: the National Council aims for CHF 1.3 billion annually from 2028 to 2045 without increasing VAT; the SP threatens a referendum.',
     'blog.article.finanziamento-riarmo-esercito.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.ricerca-fisco-aziende-svitto.title': 'Schwyz, research should be more worthwhile for companies',
+    'blog.article.ricerca-fisco-aziende-svitto.excerpt': 'Bote.ch links the research to the tax advantages for companies in the Canton of Schwyz, but the available material does not indicate any measures, figures, or dates.',
+    'blog.article.ricerca-fisco-aziende-svitto.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSzEn;

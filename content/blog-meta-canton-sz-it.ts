@@ -36,6 +36,9 @@ const blogMetaCantonSzIt: Record<string, string> = {
     'blog.article.finanziamento-riarmo-esercito.title': 'Riarmo dell’esercito: il Nazionale evita l’aumento IVA',
     'blog.article.finanziamento-riarmo-esercito.excerpt': 'Riarmo da CHF 24 miliardi: il Nazionale punta a CHF 1,3 miliardi annui dal 2028 al 2045 senza aumentare l’IVA; la SP minaccia il referendum.',
     'blog.article.finanziamento-riarmo-esercito.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.ricerca-fisco-aziende-svitto.title': 'Svitto, la ricerca dovrebbe convenire di più alle aziende',
+    'blog.article.ricerca-fisco-aziende-svitto.excerpt': 'Bote.ch collega la ricerca alla convenienza fiscale per le aziende del Canton Svitto, ma il materiale disponibile non indica misure, cifre o date.',
+    'blog.article.ricerca-fisco-aziende-svitto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSzIt;

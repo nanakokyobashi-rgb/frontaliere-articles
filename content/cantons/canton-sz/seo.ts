@@ -431,6 +431,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ricerca-fisco-aziende-svitto': {
+    title: 'Svitto, la ricerca dovrebbe convenire di più alle aziende',
+    description: 'Il titolo di Bote.ch parla di ricerca più conveniente fiscalmente per le aziende del Canton Svitto, senza indicare cifre o date.',
+    keywords: 'frontalieri, ticino, svizzera, italia, svitto, ricerca, dovrebbe, convenire',
+    ogTitle: 'Svitto, la ricerca dovrebbe convenire di più alle aziende',
+    ogDescription: 'La pagina indicata da Bote.ch collega la ricerca alla convenienza fiscale delle aziende svittesi. I dati Fisco SZ 2026 distinguono imposta personale e fonte A0 dai dettagli, non presenti, sulla misura per le imprese.',
+    canonicalPath: '/articoli-svitto/ricerca-fisco-aziende-svitto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svitto, la ricerca dovrebbe convenire di più alle aziende",
+      "description": "Il titolo di Bote.ch parla di ricerca più conveniente fiscalmente per le aziende del Canton Svitto, senza indicare cifre o date.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ricerca-fisco-aziende-svitto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-06T03:37:01+00:00",
+      "dateModified": "2026-11-06T03:37:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svitto/ricerca-fisco-aziende-svitto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'ricerca-fisco-aziende-svitto',
+ category: 'fiscale',
+ date: '2026-11-06T03:37:01.055Z',
+ image: '/images/blog/article-ricerca-fisco-aziende-svitto.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SZ'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

@@ -14,6 +14,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'schuebelbach-aliquote-2027': { it: 'schuebelbach-aliquote-2027', en: 'schuebelbach-tax-rates-2027', de: 'schuebelbach-steuerfuss-2027', fr: 'schuebelbach-taux-fiscal-2027' },
  'sp-uri-no-finanziamento-avs': { it: 'sp-uri-no-finanziamento-avs', en: 'uri-sp-rejects-avs-funding', de: 'uri-sp-lehnt-ahv-finanzierung-ab', fr: 'uri-sp-refuse-financement-avs' },
  'finanziamento-riarmo-esercito': { it: 'finanziamento-riarmo-esercito', en: 'army-rearmament-funding', de: 'finanzierung-aufruestung-armee', fr: 'financement-rearmement-armee' },
+ 'ricerca-fisco-aziende-svitto': { it: 'ricerca-fisco-aziende-svitto', en: 'schwyz-research-company-tax', de: 'schwyzer-firmen-forschung-steuern', fr: 'recherche-entreprises-fiscalite-schwyz' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
