@@ -105,6 +105,7 @@ jobs:
           CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}
           CALLER_WORKFLOW: ${{ inputs.caller_workflow }}
           DRY_RUN: ${{ inputs.dry_run }}
+
         run: |
           set -uo pipefail
           content_push=false
@@ -1671,5 +1672,5 @@ jobs:
             echo "$kind dispatchato con $token_name: sezione $next_section, depth $next_depth, streak $next_streak, soccorso $next_rescue"
             exit 0
           fi
-          echo "::warning::dispatch ($kind) fallito (HTTP $code con $token_name): $(head -c 300 /tmp/chain-dispatch.json 2>/dev/null). La catena si ferma, il cron riprende."
+          echo "::warning::dispatch ($kind) fallito (HTTP $code con $token_name): $(head -c 300 /tmp/chain-dispatch.json 2>/dev/null). La catena si ferma, Cloud Scheduler riprende al prossimo slot."
           exit 0

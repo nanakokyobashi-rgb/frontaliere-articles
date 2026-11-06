@@ -564,6 +564,7 @@ const modeCtx = (s) => ({
   'needs.admit.outputs.run_mode': s.admitMode || 'production',
   'github.event.before': '1111111111111111111111111111111111111111',
   'github.sha': '2222222222222222222222222222222222222222',
+  'github.event.schedule': s.schedule || '',
   'inputs.dry_run': s.dry || 'false',
 });
 

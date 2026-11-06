@@ -381,6 +381,85 @@ jobs:
           RECOVERY_SLOT: ${{ inputs.recovery_slot }}
           RECOVERY_CLAIM: ${{ inputs.recovery_claim }}
           GENERATION_CLAIM_ENDPOINT: https://europe-west6-frontaliere-ticino.cloudfunctions.net/claimGenerationSlot
+        # Un push che non tocca `content/**` è il SELF-TEST dry del workflow
+        # (vedi i `paths` sopra: le altre due voci sono questo file e
+        # create-article.mjs). Non scrive niente, quindi non ha niente da
+        # serializzare — e soprattutto non va saltato: è l'unica prova che il
+        # workflow appena modificato parta ancora, e con il gate cieco
+        # verrebbe saltata quasi sempre, perché una generazione è in volo
+        # quasi sempre.
+        #
+        # Un commit che rigenera più chiamanti cantonali modifica più file che
+        # sono tutti nei rispettivi `push.paths`: senza un'elezione, ogni
+        # chiamante consumerebbe uno slot runner per lo stesso self-test dry.
+        # Il path alfabeticamente primo è il solo che esegue la prova; gli
+        # altri terminano qui con successo. Un singolo file resta il leader
+        # naturale, e i push che toccano `content/**` non passano da questo
+        # ramo.
+        # Il workflow sorgente non è un caller cantonale: se è modificato
+        # nello stesso push, resta fuori dall'handoff e conserva il proprio
+        # self-test. L'elezione si applica solo al caller presente nel batch.
+        #
+        # NB: il marker del chain link viene calcolato una volta qui, nel gate,
+        # e trasportato come output del job. Questa domanda è più stretta —
+        # «questo arrivo può scrivere?» — e nel dubbio (compare vuoto,
+        # `before` azzerato, errore API) si risponde di sì e si prosegue col
+        # ragionamento sotto, cioè si degrada al comportamento normale.
+        # A content push is the producer's successor. It may arrive while
+        # the producer is still in flight (the push can happen before the
+        # producer run has reached its final step), so remember this trigger
+        # for the in-flight decision below. The generate job's own
+        # concurrency group serializes it safely behind the producer.
+
+        # ── LIMITE DI ETA', e perche' senza non bastava ──────────────────
+        # Il confronto qui sopra non aveva un limite SUPERIORE: bastava che
+        # una run piu' vecchia risultasse ancora in volo per far saltare ogni
+        # arrivo successivo, per tutta la sua vita. Quando quella run e'
+        # incastrata il gate trasforma il guasto di UNA run in una finestra
+        # morta lunga quanto il suo timeout.
+        #
+        # Misurato il 2026-08-18 su 600 run (4 giorni). Il primo campione era
+        # di 119 run e mostrava una «banda vuota» fra 24,4 e 41,6 minuti: a
+        # n=600 quella banda NON esiste, ed e' un errore da non ripetere.
+        #   success  n=548   p50 3,1   p90 11,0   p95 14,0   max 42,6 min
+        #   failure  n=50    p50 42,4  p90 46,0   p95 50,2   max 51,0 min
+        # Le due distribuzioni si SOVRAPPONGONO: la mediana delle fallite
+        # (2543s) sta SOTTO il massimo delle sane (2556s). Nessuna soglia di
+        # durata le separa — ed e' esattamente per questo che il kill non usa
+        # la durata ma il SILENZIO (watchdog di stallo, piu' in basso). Qui
+        # non si uccide niente: si decide solo se AMMETTERE un successore, e
+        # l'asimmetria di costo e' tutta la ragione per cui una soglia di
+        # durata e' accettabile qui e non la' (vedi il prezzo, sotto).
+        #
+        # Da dove viene allora 1800? NON dall'istogramma: i wedge colti sono
+        # 44/50 per OGNI valore fra 1500 e 2400s, quindi la durata non sceglie.
+        # Viene dalla cadenza degli slot Cloud Scheduler, `7 * * * *` e `37 * * * *`, cioe' 30
+        # minuti. Durante un wedge da ~42 min arriva un solo slot programmato, con
+        # eta' compresa fra 30 e 42 min: 1800s e' il valore piu' ALTO che lo
+        # ammette ancora. A 2100s se ne perde meta', a 2400s quasi tutto; sotto
+        # i 1800s non si guadagna nessun arrivo (non ce ne sono di piu'
+        # giovani) e si pagano solo piu' falsi positivi. Se la cadenza degli
+        # slot cambia, questa soglia va rifatta con lei.
+        #
+        # Il prezzo, misurato e accettato: 5 run sane su 548 (0,91%) superano
+        # i 1800s, e per quelle il successore viene ammesso a torto. Costa una
+        # run in coda, non un articolo: si mette in CODA dietro la sana (vedi
+        # sotto), non la uccide e non le si sovrappone. E' il verso giusto in
+        # cui sbagliare.
+        #
+        # Proseguire per un push su `content/**` NON riapre il buco di
+        # sovrapposizione che e' costato #255/#281/#285: il job `generate` ha
+        # `concurrency: generate-article` con `cancel-in-progress: false`,
+        # quindi l'arrivo ammesso si METTE IN CODA e parte quando l'incastrata
+        # muore. Qui si sceglie fra «aspetta in coda» e «non esistere mai»,
+        # non fra «una» e «due». Gli altri trigger conservano il gate: una
+        # schedule o un dispatch di catena ridondante resta uno skip.
+        #
+        # L'eta' si misura da `$self_created`, non da `now`: e' gia' letto,
+        # rende il verdetto deterministico e non dipende dall'orologio del
+        # runner. Le date sono validate prima del confronto; se una lettura
+        # non e' interpretabile, `fail_closed_admission` nega l'ammissione.
+
         run: |
           set -uo pipefail
           # `run_mode` alimenta il gruppo di concurrency del job generate. Il
@@ -605,35 +684,6 @@ jobs:
             exit 0
           fi
 
-          # Un push che non tocca `content/**` è il SELF-TEST dry del workflow
-          # (vedi i `paths` sopra: le altre due voci sono questo file e
-          # create-article.mjs). Non scrive niente, quindi non ha niente da
-          # serializzare — e soprattutto non va saltato: è l'unica prova che il
-          # workflow appena modificato parta ancora, e con il gate cieco
-          # verrebbe saltata quasi sempre, perché una generazione è in volo
-          # quasi sempre.
-          #
-          # Un commit che rigenera più chiamanti cantonali modifica più file che
-          # sono tutti nei rispettivi `push.paths`: senza un'elezione, ogni
-          # chiamante consumerebbe uno slot runner per lo stesso self-test dry.
-          # Il path alfabeticamente primo è il solo che esegue la prova; gli
-          # altri terminano qui con successo. Un singolo file resta il leader
-          # naturale, e i push che toccano `content/**` non passano da questo
-          # ramo.
-          # Il workflow sorgente non è un caller cantonale: se è modificato
-          # nello stesso push, resta fuori dall'handoff e conserva il proprio
-          # self-test. L'elezione si applica solo al caller presente nel batch.
-          #
-          # NB: il marker del chain link viene calcolato una volta qui, nel gate,
-          # e trasportato come output del job. Questa domanda è più stretta —
-          # «questo arrivo può scrivere?» — e nel dubbio (compare vuoto,
-          # `before` azzerato, errore API) si risponde di sì e si prosegue col
-          # ragionamento sotto, cioè si degrada al comportamento normale.
-          # A content push is the producer's successor. It may arrive while
-          # the producer is still in flight (the push can happen before the
-          # producer run has reached its final step), so remember this trigger
-          # for the in-flight decision below. The generate job's own
-          # concurrency group serializes it safely behind the producer.
           if [ "$EVENT_NAME" = "push" ] && [ -n "${PUSH_BEFORE:-}" ]; then
             compare_status=0
             compare_truncated=false
@@ -836,54 +886,6 @@ jobs:
           case "$parent_id" in
             ''|*[!0-9]*) parent_id=0 ;;
           esac
-          # ── LIMITE DI ETA', e perche' senza non bastava ──────────────────
-          # Il confronto qui sopra non aveva un limite SUPERIORE: bastava che
-          # una run piu' vecchia risultasse ancora in volo per far saltare ogni
-          # arrivo successivo, per tutta la sua vita. Quando quella run e'
-          # incastrata il gate trasforma il guasto di UNA run in una finestra
-          # morta lunga quanto il suo timeout.
-          #
-          # Misurato il 2026-08-18 su 600 run (4 giorni). Il primo campione era
-          # di 119 run e mostrava una «banda vuota» fra 24,4 e 41,6 minuti: a
-          # n=600 quella banda NON esiste, ed e' un errore da non ripetere.
-          #   success  n=548   p50 3,1   p90 11,0   p95 14,0   max 42,6 min
-          #   failure  n=50    p50 42,4  p90 46,0   p95 50,2   max 51,0 min
-          # Le due distribuzioni si SOVRAPPONGONO: la mediana delle fallite
-          # (2543s) sta SOTTO il massimo delle sane (2556s). Nessuna soglia di
-          # durata le separa — ed e' esattamente per questo che il kill non usa
-          # la durata ma il SILENZIO (watchdog di stallo, piu' in basso). Qui
-          # non si uccide niente: si decide solo se AMMETTERE un successore, e
-          # l'asimmetria di costo e' tutta la ragione per cui una soglia di
-          # durata e' accettabile qui e non la' (vedi il prezzo, sotto).
-          #
-          # Da dove viene allora 1800? NON dall'istogramma: i wedge colti sono
-          # 44/50 per OGNI valore fra 1500 e 2400s, quindi la durata non sceglie.
-          # Viene dalla cadenza degli slot Cloud Scheduler, `7 * * * *` e `37 * * * *`, cioe' 30
-          # minuti. Durante un wedge da ~42 min arriva un solo slot programmato, con
-          # eta' compresa fra 30 e 42 min: 1800s e' il valore piu' ALTO che lo
-          # ammette ancora. A 2100s se ne perde meta', a 2400s quasi tutto; sotto
-          # i 1800s non si guadagna nessun arrivo (non ce ne sono di piu'
-          # giovani) e si pagano solo piu' falsi positivi. Se la cadenza degli
-          # slot cambia, questa soglia va rifatta con lei.
-          #
-          # Il prezzo, misurato e accettato: 5 run sane su 548 (0,91%) superano
-          # i 1800s, e per quelle il successore viene ammesso a torto. Costa una
-          # run in coda, non un articolo: si mette in CODA dietro la sana (vedi
-          # sotto), non la uccide e non le si sovrappone. E' il verso giusto in
-          # cui sbagliare.
-          #
-          # Proseguire per un push su `content/**` NON riapre il buco di
-          # sovrapposizione che e' costato #255/#281/#285: il job `generate` ha
-          # `concurrency: generate-article` con `cancel-in-progress: false`,
-          # quindi l'arrivo ammesso si METTE IN CODA e parte quando l'incastrata
-          # muore. Qui si sceglie fra «aspetta in coda» e «non esistere mai»,
-          # non fra «una» e «due». Gli altri trigger conservano il gate: una
-          # schedule o un dispatch di catena ridondante resta uno skip.
-          #
-          # L'eta' si misura da `$self_created`, non da `now`: e' gia' letto,
-          # rende il verdetto deterministico e non dipende dall'orologio del
-          # runner. Le date sono validate prima del confronto; se una lettura
-          # non e' interpretabile, `fail_closed_admission` nega l'ammissione.
           WEDGE_SECONDS=1800
 
           if ! older="$(printf '%s' "$inflight" \

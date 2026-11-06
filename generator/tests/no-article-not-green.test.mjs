@@ -672,10 +672,10 @@ test('exit 5 producer-owned resta verde e ferma i retry immediati', () => {
     nodeExit: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
     writeSharedProviderMarker: true,
   });
-  assert.equal(r.status, 0, 'un blocco temporaneo del pool condiviso deve cedere al cron');
+  assert.equal(r.status, 0, 'un blocco temporaneo del pool condiviso deve cedere al prossimo slot');
   assert.equal(r.attempts, 1, 'non deve rilanciare lo stesso pool sulla sezione gemella');
   assert.match(r.outputs, /provider_blocked=true/);
-  assert.match(r.stdout, /si attende il prossimo cron/);
+  assert.match(r.stdout, /si attende il prossimo slot Cloud Scheduler/);
 });
 
 test('exit 5 successivo non nasconde un errore precedente non dichiarato', () => {

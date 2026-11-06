@@ -906,7 +906,7 @@ test('il trigger push chaina ancora solo su content/**, mai sul bookkeeping', ()
   // i job, e l'assert negativo qui sotto avrebbe letto anche il loro corpo:
   // un test che passa o fallisce per ciò che sta in un job non è più il test del
   // blocco `on:`. `permissions:` è il primo top-level dopo `on:` in questo file.
-  const onBlock = sliceBetween(ACTIVE, 'on:\n', '\npermissions:', { label: 'trigger paths' });
+  const onBlock = sliceBetween(ACTIVE, '\non:\n', '\npermissions:', { label: 'trigger paths' });
   assert.match(onBlock, /- 'content\/\*\*'/);
   assert.doesNotMatch(onBlock, /^\s{2}schedule:/m, 'Cloud Scheduler è l’unico proprietario degli slot nominali');
   assert.ok(
@@ -1421,7 +1421,7 @@ test('LA GUARDIA STRUTTURALE: senza dichiarazione non parte MAI un anello', () =
   for (const outcome of [{ declared: 'true', providerBlocked: 'true' }, { declared: 'false', providerBlocked: 'true' }]) {
     const r = runChainStep(outcome);
     assert.equal(r.dispatches.length, 0, `ha dispatchato su ${JSON.stringify(outcome)}`);
-    assert.match(r.stdout, /pool AI condiviso temporaneamente indisponibile; si cede al cron/);
+    assert.match(r.stdout, /pool AI condiviso temporaneamente indisponibile; si cede a Cloud Scheduler/);
     assert.equal(r.status, 0);
   }
   const cooperative = runChainStep({ cooperativeStop: 'true', declared: 'true' });
