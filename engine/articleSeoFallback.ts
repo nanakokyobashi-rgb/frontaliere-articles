@@ -223,18 +223,40 @@ const normalizeLegacyAngleNavMarkers = (line: string): string => {
 
 /** Decode only the entities that can occur in legacy article HTML attributes/text. */
 const decodeInlineHtmlEntities = (value: string): string => value.replace(
- /&(amp|lt|gt|quot|#39|apos);/gi,
- (_, entity: string) => INLINE_HTML_ENTITY_MAP[entity.toLowerCase()] ?? _,
+ /&(?:(#(?:x[0-9a-f]+|\d+))|(amp|lt|gt|quot|apos));/gi,
+ (_, numeric: string | undefined, named: string | undefined) => {
+  if (numeric) {
+   const digits = numeric.slice(1);
+   const radix = /^x/i.test(digits) ? 16 : 10;
+   const codePoint = Number.parseInt(digits.replace(/^x/i, ''), radix);
+   if (
+    Number.isInteger(codePoint)
+    && codePoint > 0
+    && codePoint <= 0x10ffff
+    && !(codePoint >= 0xd800 && codePoint <= 0xdfff)
+   ) return String.fromCodePoint(codePoint);
+   return _;
+  }
+  return INLINE_HTML_ENTITY_MAP[named!.toLowerCase()] ?? _;
+ },
 );
 
-/** Keep article links useful without allowing a source URL to become script. */
+/**
+ * Keep article links useful without allowing a source URL to become script.
+ *
+ * Static article HTML is served through Cloudflare Email Protection. A
+ * `mailto:` anchor is rewritten there to `/cdn-cgi/l/email-protection`, which
+ * is an endpoint rather than an article and becomes a crawlable frontier 404.
+ * Returning `null` keeps the visible contact label copyable while emitting no
+ * target for Cloudflare or a crawler to follow.
+ */
 const safeInlineHref = (value: string): string | null => {
  const href = decodeInlineHtmlEntities(value).trim().replace(/^(["'])|(["'])$/g, '');
  if (!href || /[\u0000-\u001f\u007f\\]/.test(href) || href.startsWith('//')) return null;
  if (/^https?:\/\//i.test(href)) {
   try { return new URL(href).hostname ? href : null; } catch { return null; }
  }
- if (/^mailto:/i.test(href)) return href;
+ if (/^mailto:/i.test(href)) return null;
  if (href.startsWith('/') || href.startsWith('#')) return href;
  if (/^\.{1,2}\//.test(href) || href.startsWith('?')) return href;
  // Reject unsupported schemes, not ordinary relative references. Bare web
@@ -269,7 +291,7 @@ export const renderArticleInlineMarkup = (line: string, opts: ArticleBodyRenderO
   .replace(/(^|[\s([>{\"'“‘])(_{1,3})(?=\S)([^\n]*?\S)\2(?=$|[\s)\]}.,!?;:'\"”’<])/g, '$1<em>$3</em>');
  const stashLink = (label: string, href: string): string => {
  const safeHref = safeInlineHref(href);
- if (!safeHref) return label;
+ if (!safeHref) return decodeInlineHtmlEntities(label);
  const resolvedHref = safeInlineHref(resolveHref(safeHref)) ?? safeHref;
  const token = `\u0000inline-link-${links.length}\u0000`;
   // Markdown link labels can themselves contain emphasis, for example
