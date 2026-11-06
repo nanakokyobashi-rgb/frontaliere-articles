@@ -1089,38 +1089,382 @@ jobs:
           # dentro; senza il socket il provider resta semplicemente «non
           # disponibile». Nessun token Claude: la lane Haiku e' spenta.
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
+        # Note del comando fuori dallo scalar run: mantenere il comando sotto 21.000 caratteri.
+        # `set +e` explicitly: GitHub's default shell is `bash -eo pipefail`,
+        # so without this the step dies the instant create-article.mjs exits
+        # non-zero and every branch below — the timeout handling, the
+        # no-article-this-run handling — is unreachable. That is exactly what
+        # happened on the first scheduled run after cutover: the step was
+        # reported as a hard failure for a condition it was written to absorb.
+        # THE HONEST SIGNAL, DEFINED ONCE. A real generation ADDS a per-locale
+        # body file under content/blog-body{,-ch}/<loc>/<id>.ts — the same
+        # thing fast-publish-article.yml keys on. Everything downstream (the
+        # commit title, the job summary) reads the outputs this function
+        # produces, so there is exactly one definition of "an article exists"
+        # in this file. `git add -A` first because the body files are new and
+        # untracked; it is idempotent and "Commit and push" runs it again.
+        # `|| true` at the call site: a no-match `grep` exits 1.
+        # A failed attempt can touch the registration transaction before it
+        # has emitted the first body file: beginRegisterLock() writes its
+        # runner-local marker, then the router/union/meta targets are updated
+        # before writeSectionLocale() creates the body. The body probe alone
+        # must not let that dirty transaction fall through to the other
+        # section. The marker is outside content/ and ignored by git on
+        # purpose; collect and count only real staged corpus paths so a
+        # stale/forced lock can never masquerade as a partial registration.
+        # The cooperative-stop proof has its own channel. Reading the file
+        # to EOF after the attempt has been waited for means the classifier
+        # never depends on the asynchronous `tee` that carries human logs.
+        # The token binds the proof to this exact attempt, so a stale or
+        # ordinary diagnostic marker cannot declare a timeout.
+        # The attempt list, fixed before the loop — this is the termination
+        # argument in code: one entry per section, never more.
+          # A human who named a section (or handed over a URL, which is
+          # section-specific) gets that section and nothing else. A chain
+          # link is also `workflow_dispatch`, but it is not human: it keeps
+          # the bounded fallback so one dry section cannot kill the baton.
+        # 3000s against the job's 60-minute timeout leaves ~10 minutes for
+        # checkout, npm ci, the thumbnail encode and the push. `SECONDS` is
+        # this shell's own clock, so it measures the attempts and nothing else.
+        #
+        # The bound that matters: attempt N's cap is min(hard_kill, budget −
+        # elapsed), so the attempts sum to at most `budget_s` however many
+        # there are. Without the `budget_s − SECONDS` term two attempts could
+        # each take `hard_kill_s` and outlive the job's own timeout, which is
+        # the version generate-article-chain.test.mjs caught before it shipped.
+        #
+        # Overridable so that test can drive the arithmetic in seconds instead
+        # of in tens of minutes; nothing sets these in CI.
+        # ── IL WEDGE, E PERCHE' IL CAP DI DURATA NON LO VEDE ──────────────
+        #
+        # Misurato il 2026-08-18 sulle 69 run `failure` dal 13-08: 42 sono lo
+        # STESSO difetto, 26,6 ore in cinque giorni, e dal 16-08 e' l'unica
+        # causa di fallimento rimasta (17-08: 12 su 12; 18-08: 2 su 2). Le
+        # run campione sono 32077204181, 31867246321, 31858140066 (la prima,
+        # 15-08 02:02Z) e 32103362457 (l'ultima).
+        #
+        # LA FORMA DEL DIFETTO, con le tre prove che la fissano — tutte e tre
+        # su 42 run su 42:
+        #   1. il segnale e' SEMPRE SIGKILL, mai SIGTERM (42 «Killed», 0
+        #      «Terminated»), e l'intervallo inizio-sezione → kill sta fra
+        #      2459 e 2460s, cioe' hard_kill_s + il grace di --kill-after=60s
+        #      al secondo. Eppure ai-models.mjs registra un handler SIGTERM
+        #      che esce 143: il processo non l'ha eseguito per 60 secondi.
+        #   2. l'heartbeat da 60s di `_callModel` («⏳ … in-flight Ns») non
+        #      stampa mai (assente in 39 run su 42, mentre altrove nei log
+        #      compare 144 volte);
+        #   3. il cap duro interno «hard cap: no response» non scatta 0 volte
+        #      su 69, e non compare nessun AbortError/TimeoutError/ECONNRESET.
+        # Un timer JS che non parte, un handler di segnale che non gira e
+        # nessun errore di rete: l'event loop e' bloccato da lavoro SINCRONO.
+        #
+        # In 40 run su 42 il silenzio comincia subito dopo una riga
+        # `[prompt-budget]`, che e' un INDIZIO e non una localizzazione: quella
+        # riga e' su stderr, stdout e stderr verso una pipe sono scritti in
+        # modo asincrono e su canali distinti, l'ordinamento fra i due non e'
+        # garantito, e su SIGKILL cio' che e' ancora in coda si perde.
+        # «Ultima riga vista» non e' «ultimo punto eseguito» — ed e' la
+        # ragione per cui questo step ora prende uno STACK, da cui non si
+        # scappa, invece di far dedurre il punto dal log.
+        #
+        # PERCHE' NON SI ABBASSA `hard_kill_s`, che e' la mitigazione ovvia.
+        # E' stata misurata: su 530 run `success` vere (≥90s) le durate sono
+        # p50=460s, p75=704s, p90=1599s, p95=2493s. Un cap a 900s ucciderebbe
+        # 82 run sane su 530 (15,5%), uno a 1200s ne ucciderebbe 63 (11,9%).
+        # La durata NON separa i due regimi. Il SILENZIO si': su cinque run
+        # sane (32051739807, 32069883181, 32074009886, 32086523370 e una da
+        # 677s) il buco fra due righe di log consecutive sta fra 3 e 21s al
+        # p99, con un MASSIMO osservato di 182s; una run incastrata tace 2337s
+        # mediani. Piu' di un ordine di grandezza fra i due, e la soglia sotto
+        # e' 1,65x il massimo legittimo osservato.
+        #
+        # ABBASSATA DA 600s A 300s il 2026-08-18, con il watchdog gia' in
+        # produzione e la prima cattura in mano. La run 32130136859 ha taciuto
+        # dai 402s ed e' finita a 1058s: 402 + i 600 di soglia + il poll. La
+        # soglia e' quindi il termine DOMINANTE del costo di un wedge — non
+        # il punto in cui si incastra, che varia — e a 300s la stessa run
+        # sarebbe finita intorno ai 750s.
+        #
+        # Il margine che si spende e' quello fra 182s e 300s, e un argomento
+        # strutturale lo rende piu' largo di quanto il rapporto suggerisca:
+        # durante una chiamata a un modello `_callModel` emette un heartbeat
+        # ogni 60s, quindi una run viva non puo' tacere a lungo mentre aspetta
+        # un provider. I silenzi legittimi lunghi stanno FUORI dalle chiamate
+        # (checkout, encode della thumbnail, git), ed e' li' che sono stati
+        # misurati i 182s. Se una run sana venisse uccisa, si vedrebbe come
+        # un kill per stallo con `stalled` non vuoto e uno stack che NON e'
+        # in lavoro sincrono: e' quello il segnale per risalire, non la
+        # durata della run.
+        #
+        # Quindi il cap di durata resta dov'e' — e' lui a coprire il caso
+        # «lento ma vivo» — e questo watchdog copre il caso «muto». Il wedge
+        # costa 5 minuti invece di 40: ~87% delle 26,6 ore.
+        #
+        # LA MISURA E' LA CRESCITA DI UN FILE, non un timestamp per riga: lo
+        # step produce fino a 5.500 righe e un `date` per riga sarebbe una
+        # spesa per ogni riga per osservare un evento che capita una volta.
+        # `wc -c` ogni 30s costa 80 letture in tutto il budget.
+        #
+        # Overridable come i due sopra, cosi' che
+        # generate-article-chain.test.mjs possa provare il kill per stallo in
+        # secondi invece che in dieci minuti; nulla li imposta in CI.
+        # Fuori dal workspace di proposito: `article_body_added` fa `git add
+        # -A`, quindi qualunque file diagnostico scritto sotto il repo
+        # finirebbe nel commit e su main. RUNNER_TEMP non e' in git.
+        # Il client sta FUORI dalla cartella caricata: se ci stesse dentro,
+        # `if-no-files-found: ignore` non scatterebbe mai e ogni run
+        # caricherebbe un artifact con dentro solo lo strumento.
+        # L'albero dei processi, foglie per prime. `ps -A -o pid=,ppid=` si
+        # comporta identico su Linux e su macOS (questi blocchi girano anche
+        # nei test in locale); `pgrep -P` no.
+        # ── PRENDERE LO STACK, PERCHE' LA CAUSA NON SI TROVA LEGGENDO ─────
+        #
+        # Il client CDP qui sotto e' la meta' che trasforma il prossimo wedge
+        # in una prova invece che in un silenzio. Sta qui dentro e non in
+        # scripts/ perche' e' inerte finche' il watchdog non scatta.
+        #
+        # VERIFICATO su node v22.23.2 (il `node-version: '22'` di questo
+        # workflow) contro un processo con l'event loop bloccato da un `while`
+        # sincrono, il 2026-08-18:
+        #   - `--report-on-signal --report-signal=SIGUSR2 --report-directory`
+        #     sono accettati, e con l'event loop LIBERO il report viene
+        #     scritto (header, javascriptStack, nativeStack, libuv, heap);
+        #   - con l'event loop BLOCCATO il report NON viene scritto: la
+        #     richiesta resta appesa e il file compare solo quando il loop
+        #     riparte. Misurato: 0 file dopo SIGUSR2 a loop bloccato, 1 file
+        #     appena il blocco finisce. Il report da solo non basta per QUESTO
+        #     difetto — che e' esattamente un loop che non riparte piu'.
+        #   - SIGUSR1 accende l'inspector ANCHE a loop bloccato (lo fa un
+        #     thread dedicato), e `Debugger.pause` restituisce i callFrame:
+        #     lo stack JS del frame incastrato, che e' cio' che serve.
+        # Quindi si mandano entrambi: SIGUSR2 copre il caso in cui il loop si
+        # sblocchi (il report porta anche stack nativo e handle libuv), il
+        # client CDP copre il wedge vero.
+        # I pid di create-article.mjs dentro l'albero del tentativo. Serve al
+        # campionamento e ai segnali: `timeout` NON va segnalato al posto suo
+        # (SIGUSR1/2 non sono fra quelli che rilancia, e li prenderebbe come
+        # terminazione, orfanando il figlio).
+        # Il watchdog. Non fallisce mai lo step da solo: alza un flag e
+        # uccide, e chi classifica l'esito resta il codice dopo il ciclo.
+            # ── LA TRAIETTORIA DELLA MEMORIA, dallo STESSO campione ────────
+            # Costa un `ps` ogni 30s e separa due ipotesi che il silenzio da
+            # solo confonde: un thrash del GC (major collection su heap
+            # saturo — congela l'event loop, non serve SIGTERM, cede solo a
+            # SIGKILL: spiega da sola tutti e tre i segnali osservati) tiene
+            # l'RSS incollato al tetto con la CPU al 100%; un blocco in
+            # codice nativo lascia l'RSS fermo e la CPU a zero. Il workflow
+            # non imposta NODE_OPTIONS ne' --max-old-space-size (verificato:
+            # zero occorrenze in questo file), quindi il tetto e' quello di
+            # default del runner ed e' raggiungibile.
+            # Campionato da FUORI il processo di proposito: un sampler dentro
+            # (worker thread) andrebbe iniettato nel generatore, che questa PR
+            # non tocca — e un worker non vede comunque l'heap del main.
+            # Il flag PRIMA di qualunque segnale: da qui in poi qualunque
+            # cosa succeda al processo, l'esito e' «stallo» e non «kill duro».
+            # Il grace serve al report di SIGUSR2, che e' scritto dal
+            # processo stesso: ucciderlo subito butterebbe via l'unica cosa
+            # per cui e' stato chiesto.
+        # Il watchdog non sopravvive mai allo step: muore col tentativo (qui
+        # sotto) e comunque all'uscita, qualunque ramo la produca.
+        # The EXIT trap invokes this function indirectly.
+        # shellcheck disable=SC2329
+          # Il log del tentativo e la traiettoria si caricano solo quando
+          # servono: su una run che ha prodotto non resta niente da caricare,
+          # e l'artifact sparisce da solo con `if-no-files-found: ignore`.
+        # Never start an attempt that cannot finish. A sixteenth of the budget
+        # (~3 minutes on the defaults) is the floor; it also keeps the cap
+        # strictly positive, and that matters — `timeout 0s` means NO limit,
+        # so a zero cap would hand the job away rather than protect it.
+        # ── L'OSSERVATORE (issue #313 / #348) ────────────────────────────
+        #
+        # LA REGOLA E' INVERTITA rispetto a com'era, ed e' l'inversione a
+        # essere la fix. Prima: «assorbi ogni uscita tranne quelle nominate»
+        # (all'inizio nessuna, poi il solo exit 3). Una regola di quella forma
+        # lascia passare per costruzione ogni difetto non ancora nominato, ed
+        # e' precisamente cosi' che la run 31823202761 e' uscita verde: la sua
+        # miscela di errori non era il caso nominato. Ora: «se non c'e' un
+        # articolo, FALLISCI, salvo esiti dichiarati» — cioe' exit 4 per una
+        # ragione locale alla sezione o exit 5 per il pool condiviso.
+        #
+        # Le ragioni dichiarate sono enumerate in
+        # `generator/scripts/lib/exhaustion-disposition.mjs`. Exit 4 e' una
+        # ragione specifica alla sezione e permette di provare la gemella;
+        # exit 5 segnala un guasto del pool condiviso e ferma i retry.
+        #
+        # Tutto il resto e' rosso, exit 0 compreso: un create-article.mjs che
+        # esce 0 senza scrivere un corpo non ha dichiarato niente, ed e'
+        # indistinguibile da una generazione riuscita. Anche il kill duro a
+        # 2400s: quaranta minuti spesi su un provider che stalla non sono un
+        # differimento, e assorbirli e' lo stesso silenzio verde a un'altra
+        # riga.
+        #
+        # L'ORACOLO E' IL CODICE DI USCITA, con una sola eccezione dichiarata:
+        # il SIGTERM cooperativo deve avere la prova nel file di controllo
+        # per-attempt, vincolata al token corrente. Mai una stringa dello
+        # stdout/stderr: quel flusso e' pieno di diagnostica, e un `grep` su
+        # di esso e' un oracolo che si acceca da solo senza dirlo.
+        #
+        # COSA QUESTA REGOLA NON COPRE, dichiarato perche' non venga
+        # ri-derivato: un differimento VERO che si ripete per ore (quota vera
+        # su tutto il roster, o pool secco per una notte intera) resta verde,
+        # run per run, ed e' giusto — la sua patologia e' la DURATA, che un
+        # singolo run non ha il denominatore per vedere. Quel denominatore ce
+        # l'ha gia' `scripts/ci/scan-generation-health.mjs` (condizione
+        # `generation-idle`, soglia 6h, cron ogni 2h): il 2026-08-14 ha
+        # funzionato, ed e' lui ad aver aperto la #348 alle 14:03:36Z.
+        # Duplicarlo qui dentro sarebbe una seconda copia peggiore di un
+        # osservatore che gia' regge.
+        # Resta false se un tentativo termina con un codice non dichiarato;
+        # i blocchi noti hanno i propri flag sotto.
+        # La prima ragione non dichiarata incontrata, per il messaggio finale.
+          # Il processo ha un suo default (RUN_WALL_BUDGET_MS, 30min) che non
+          # conosce il cap di sezione appena calcolato sopra — issue #462: su
+          # un cap stretto (`remaining` piccolo) il processo si crede libero
+          # fino al default e dichiara centinaia di secondi residui che non
+          # esistono, falsando ogni `deadlineMs` derivato (inclusa l'allowance
+          # di #451). Il -60 rispecchia il `--kill-after=60s` di `timeout`
+          # sotto: il processo deve fermarsi da solo prima del kill duro, non
+          # al secondo esatto in cui il kill duro arriva.
+          # The report is evidence for this exact attempt. Never let a report
+          # from an earlier section/attempt reach Commit and push, and keep
+          # each producer write on a unique path so a killed process cannot
+          # leave an apparently current report behind.
+          # ── LA CARD DI RUN, E PERCHE' NON SERVE UNO STEP NUOVO ───────
+          # `finalizeRunReport` scrive gia' un report su ogni percorso
+          # terminale, ma dentro `.tmp/` del workspace: nessuno lo legge e
+          # muore col runner. Qui la sua proiezione minima (~0,5 KB, schema
+          # fisso) esce in `$diag_dir`, che lo step «Upload wedge
+          # diagnostics» — `if: always()`, gia' esistente — porta fuori
+          # senza un passo in piu'. Un verdetto emesso da uno step NUOVO
+          # prima del commit non segnalerebbe: cancellerebbe lo stato, ed e'
+          # l'errore che questo giro evita non aggiungendo lo step.
+          #
+          # Il nome porta la SEZIONE: il loop gira fino a due volte nella
+          # stessa run e un nome fisso lascerebbe leggere solo l'ultimo
+          # tentativo — cioe' perderebbe silenziosamente meta' del campione,
+          # che e' il difetto che la card esiste per chiudere.
+          # The card is also the producer-owned proof for a declared exit 5;
+          # do not let a card from an earlier attempt attest this one.
+          # Il tentativo gira in background con l'output duplicato su
+          # `$stall_log`: e' quel file a crescere (o a non crescere) che il
+          # watchdog campiona. Il marker cooperativo va invece nel file di
+          # controllo dedicato: il log resta diagnostica, mai un oracolo.
+          # `$!` e' il pid di `timeout`, quindi `wait` piu' sotto restituisce
+          # il suo codice di uscita esattamente come prima.
+          # I flag `--report-*` vanno PRIMA del path dello script, e non
+          # cambiano la forma degli argomenti di `timeout` (tre, come prima).
+          # Il watchdog muore col tentativo, e con lui il suo `sleep`: un
+          # figlio rimasto vivo terrebbe aperto lo stdout dello step.
+          # A report is useful only when its producer identity matches this
+          # attempt. A cooperative deadline may legitimately have no report
+          # because SIGTERM arrived before finalization; the commit step can
+          # defer only that explicitly proven case. Every report that does
+          # exist must be copied to the stable hand-off path only after this
+          # identity check.
+          # ── LO STALLO PRIMA DEL KILL DURO, e l'ordine e' obbligatorio ────
+          # Un kill del watchdog esce 137 come il grace di `timeout`, quindi
+          # il codice di uscita da solo non distingue i due difetti. Li
+          # distingue il flag, che il watchdog alza prima di toccare il
+          # processo. Sono due patologie diverse — «bloccato» contro «lento
+          # oltre il cap» — e il prossimo lettore deve poterle contare
+          # separatamente nei log, non stimarle.
+            # GNU `timeout` reports 124 when the child receives its initial
+            # SIGTERM, even if the child handles that signal and exits cleanly
+            # before the --kill-after grace. The machine marker is emitted by
+            # create-article.mjs into the per-attempt control file before its
+            # cooperative-stop warning. Without this distinction a controlled
+            # deadline stop is misreported as a hard kill and opens a recurring
+            # workflow-failure issue; without the token/file check an ordinary
+            # diagnostic could make a real hard kill green.
+              # A signal received after a body/registration write is still a
+              # partial transaction. Only a clean, body-less stop is a
+              # declared no-article outcome.
+              # The marker is the declaration; keep all_declared=true so
+              # the no-article path exits 0 and the next cron can retry.
+            # A provider that stalls stalls for the other section too, and the
+            # budget is already gone. Stop; do not spend the job's remaining
+            # minutes on the same wall.
+            #
+            # NON PIU' ASSORBITO (issue #313 / #348): un kill duro dopo
+            # ${cap}s non e' un differimento — non c'e' niente che si curi da
+            # solo al prossimo giro, e la run che lo assorbe e' verde per
+            # quaranta minuti spesi contro un muro. Il `break` resta (il muro
+            # e' lo stesso per l'altra sezione), il verde no.
+          # ISSUE #313 — l'ECCEZIONE all'assorbimento qui sotto, e va valutata
+          # prima di esso. Exit 3 non vuol dire «nessuna fonte adatta»: vuol
+          # dire che il roster ha rifiutato il payload sulla TAGLIA, cioe' una
+          # condizione che il prossimo run riproduce identica perche' nessuna
+          # finestra di quota rimpicciolisce un prompt. Assorbirla e' il ciclo
+          # che ha tenuto questo workflow `success` per 60+ run consecutive
+          # senza un articolo (06:06Z → 16:30Z del 2026-08-14), senza che
+          # `scan-failed-runs.mjs` — che raccoglie solo le run `failure` —
+          # avesse nulla da raccogliere.
+          #
+          # Non si esce subito: la sezione gemella va comunque tentata per un
+          # rifiuto di taglia specifico al prompt. Un'indisponibilita' del
+          # pool condiviso usa invece exit 5 e ferma il ciclo.
+              # A process that writes a body and then fails has produced only
+              # a partial transaction. Do not let the body probe turn that
+              # failure into `produced=true`: the commit step uses this
+              # output, and a broad git add -A would otherwise publish the
+              # partial files together with later fallback output.
+            # Do not try the sibling section: its registration would share
+            # the dirty union/router/meta files, and the final `git add -A`
+            # must never publish them without a complete body transaction.
+          # ── LA DICHIARAZIONE, valutata DOPO aver constatato che non c'e' un
+          # corpo. L'ordine conta: exit 4 con un articolo scritto non esiste,
+          # ma exit 0 CON articolo e' il caso normale e non deve mai passare
+          # di qui. Sopra c'e' gia' il `break`, quindi qui `$rc` descrive
+          # sempre un tentativo finito a mani vuote.
+            # Esito legittimo circoscritto alla sezione: l'altra fonte puo'
+            # ancora essere valida.
+            # Il caso piu' insidioso, e quello che nessuno stava guardando:
+            # uscita 0 senza aver scritto niente. Non e' distinguibile da una
+            # generazione riuscita se non contando i corpi, che e' esattamente
+            # cio' che `article_body_added` fa un attimo sopra.
+        # Zero tentativi non e' una dichiarazione vacuamente vera: e' il caso
+        # che il ramo «tried == 0» piu' sotto rende rosso, e senza questa riga
+        # `all_declared` restava `true` per costruzione (nessun giro del loop
+        # lo tocca), quindi lo step «Chain» — che legge `declared` e non lo
+        # status del job — dispatchava il successore esattamente nel caso in
+        # cui il generatore non e' nemmeno partito.
+        # Lascia una classificazione esplicita nel log anche quando il job
+        # viene poi chiuso con exit 0/1. Il watchdog usa questi eventi per
+        # separare articolo prodotto, no-op legittimo, timeout e rosso
+        # tecnico; il solo risultato del job non contiene questa distinzione.
+        # A partial transaction or a timeout is never a generated outcome:
+        # the body probe must not hide a red producer result in telemetry.
+        # `article` is the signal; `section` is the section that actually
+        # wrote, which is what the next chain link alternates off.
+        #
+        # Gli esiti di blocco sono separati da `declared`: il prompt troppo
+        # grande e il pool AI condiviso fermano la catena per ragioni diverse.
+        # ── LA RUN DIVENTA ROSSA (issue #313 / #348) ──────────────────────
+        # Gli output sono gia' scritti sopra: gli step con `if: always()` (il
+        # Summary) leggono lo stesso verdetto che leggerebbero su una run
+        # verde, quindi il fallimento non li rende ciechi.
+        #
+        # Un corpo scritto con exit non-zero resta una transazione parziale,
+        # e un timeout resta un timeout: nessuno dei due deve essere
+        # riclassificato come articolo generato dal probe del body.
+        # Da qui in giu' NON c'e' un articolo. La domanda non e' piu' «quale
+        # errore e' successo» — e' «qualcuno ha dichiarato perche'?».
+        # Nessun articolo, ma ogni tentativo ha dichiarato una ragione
+        # legittima: e' il verde senza articolo per ragioni locali alla
+        # sezione. Se questo
+        # stato PERSISTE, a vederlo e' `scan-generation-health.mjs`
+        # (`generation-idle`, 6h) — non questo step, che non ha il
+        # denominatore per distinguere una notte secca da un guasto.
         run: |
-          # `set +e` explicitly: GitHub's default shell is `bash -eo pipefail`,
-          # so without this the step dies the instant create-article.mjs exits
-          # non-zero and every branch below — the timeout handling, the
-          # no-article-this-run handling — is unreachable. That is exactly what
-          # happened on the first scheduled run after cutover: the step was
-          # reported as a hard failure for a condition it was written to absorb.
           set +e
           set -uo pipefail
 
-          # THE HONEST SIGNAL, DEFINED ONCE. A real generation ADDS a per-locale
-          # body file under content/blog-body{,-ch}/<loc>/<id>.ts — the same
-          # thing fast-publish-article.yml keys on. Everything downstream (the
-          # commit title, the job summary) reads the outputs this function
-          # produces, so there is exactly one definition of "an article exists"
-          # in this file. `git add -A` first because the body files are new and
-          # untracked; it is idempotent and "Commit and push" runs it again.
-          # `|| true` at the call site: a no-match `grep` exits 1.
           article_body_added() {
             git add -A
             git diff --cached --name-only --diff-filter=A \
               | grep -E '^content/blog-body(-ch)?/[a-z]{2}/.+\.ts$' | head -1
           }
 
-          # A failed attempt can touch the registration transaction before it
-          # has emitted the first body file: beginRegisterLock() writes its
-          # runner-local marker, then the router/union/meta targets are updated
-          # before writeSectionLocale() creates the body. The body probe alone
-          # must not let that dirty transaction fall through to the other
-          # section. The marker is outside content/ and ignored by git on
-          # purpose; collect and count only real staged corpus paths so a
-          # stale/forced lock can never masquerade as a partial registration.
           stagedContentPaths=()
           registration_state_dirty() {
             stagedContentPaths=()
@@ -1133,11 +1477,6 @@ jobs:
             echo "stagedContentPaths.length=${#stagedContentPaths[@]}"
           }
 
-          # The cooperative-stop proof has its own channel. Reading the file
-          # to EOF after the attempt has been waited for means the classifier
-          # never depends on the asynchronous `tee` that carries human logs.
-          # The token binds the proof to this exact attempt, so a stale or
-          # ordinary diagnostic marker cannot declare a timeout.
           await_cooperative_stop_marker() {
             local marker_file="$1" token="$2" line
             [ -r "$marker_file" ] || return 1
@@ -1152,17 +1491,11 @@ jobs:
             return 1
           }
 
-          # The attempt list, fixed before the loop — this is the termination
-          # argument in code: one entry per section, never more.
           sections=("$TARGET_SECTION")
           if [ -z "${SOURCE_URL:-}" ] && {
             [ "${EVENT_NAME:-}" != "workflow_dispatch" ] ||
             [ "${CHAIN_LINK:-false}" = "true" ]
           }; then
-            # A human who named a section (or handed over a URL, which is
-            # section-specific) gets that section and nothing else. A chain
-            # link is also `workflow_dispatch`, but it is not human: it keeps
-            # the bounded fallback so one dry section cannot kill the baton.
             if [ "$TARGET_SECTION" = "svizzera" ]; then
               sections+=(frontaliere)
             else
@@ -1170,101 +1503,13 @@ jobs:
             fi
           fi
 
-          # 3000s against the job's 60-minute timeout leaves ~10 minutes for
-          # checkout, npm ci, the thumbnail encode and the push. `SECONDS` is
-          # this shell's own clock, so it measures the attempts and nothing else.
-          #
-          # The bound that matters: attempt N's cap is min(hard_kill, budget −
-          # elapsed), so the attempts sum to at most `budget_s` however many
-          # there are. Without the `budget_s − SECONDS` term two attempts could
-          # each take `hard_kill_s` and outlive the job's own timeout, which is
-          # the version generate-article-chain.test.mjs caught before it shipped.
-          #
-          # Overridable so that test can drive the arithmetic in seconds instead
-          # of in tens of minutes; nothing sets these in CI.
           budget_s="${GENERATE_BUDGET_S:-3000}"
           hard_kill_s="${GENERATE_HARD_KILL_S:-2400}"
 
-          # ── IL WEDGE, E PERCHE' IL CAP DI DURATA NON LO VEDE ──────────────
-          #
-          # Misurato il 2026-08-18 sulle 69 run `failure` dal 13-08: 42 sono lo
-          # STESSO difetto, 26,6 ore in cinque giorni, e dal 16-08 e' l'unica
-          # causa di fallimento rimasta (17-08: 12 su 12; 18-08: 2 su 2). Le
-          # run campione sono 32077204181, 31867246321, 31858140066 (la prima,
-          # 15-08 02:02Z) e 32103362457 (l'ultima).
-          #
-          # LA FORMA DEL DIFETTO, con le tre prove che la fissano — tutte e tre
-          # su 42 run su 42:
-          #   1. il segnale e' SEMPRE SIGKILL, mai SIGTERM (42 «Killed», 0
-          #      «Terminated»), e l'intervallo inizio-sezione → kill sta fra
-          #      2459 e 2460s, cioe' hard_kill_s + il grace di --kill-after=60s
-          #      al secondo. Eppure ai-models.mjs registra un handler SIGTERM
-          #      che esce 143: il processo non l'ha eseguito per 60 secondi.
-          #   2. l'heartbeat da 60s di `_callModel` («⏳ … in-flight Ns») non
-          #      stampa mai (assente in 39 run su 42, mentre altrove nei log
-          #      compare 144 volte);
-          #   3. il cap duro interno «hard cap: no response» non scatta 0 volte
-          #      su 69, e non compare nessun AbortError/TimeoutError/ECONNRESET.
-          # Un timer JS che non parte, un handler di segnale che non gira e
-          # nessun errore di rete: l'event loop e' bloccato da lavoro SINCRONO.
-          #
-          # In 40 run su 42 il silenzio comincia subito dopo una riga
-          # `[prompt-budget]`, che e' un INDIZIO e non una localizzazione: quella
-          # riga e' su stderr, stdout e stderr verso una pipe sono scritti in
-          # modo asincrono e su canali distinti, l'ordinamento fra i due non e'
-          # garantito, e su SIGKILL cio' che e' ancora in coda si perde.
-          # «Ultima riga vista» non e' «ultimo punto eseguito» — ed e' la
-          # ragione per cui questo step ora prende uno STACK, da cui non si
-          # scappa, invece di far dedurre il punto dal log.
-          #
-          # PERCHE' NON SI ABBASSA `hard_kill_s`, che e' la mitigazione ovvia.
-          # E' stata misurata: su 530 run `success` vere (≥90s) le durate sono
-          # p50=460s, p75=704s, p90=1599s, p95=2493s. Un cap a 900s ucciderebbe
-          # 82 run sane su 530 (15,5%), uno a 1200s ne ucciderebbe 63 (11,9%).
-          # La durata NON separa i due regimi. Il SILENZIO si': su cinque run
-          # sane (32051739807, 32069883181, 32074009886, 32086523370 e una da
-          # 677s) il buco fra due righe di log consecutive sta fra 3 e 21s al
-          # p99, con un MASSIMO osservato di 182s; una run incastrata tace 2337s
-          # mediani. Piu' di un ordine di grandezza fra i due, e la soglia sotto
-          # e' 1,65x il massimo legittimo osservato.
-          #
-          # ABBASSATA DA 600s A 300s il 2026-08-18, con il watchdog gia' in
-          # produzione e la prima cattura in mano. La run 32130136859 ha taciuto
-          # dai 402s ed e' finita a 1058s: 402 + i 600 di soglia + il poll. La
-          # soglia e' quindi il termine DOMINANTE del costo di un wedge — non
-          # il punto in cui si incastra, che varia — e a 300s la stessa run
-          # sarebbe finita intorno ai 750s.
-          #
-          # Il margine che si spende e' quello fra 182s e 300s, e un argomento
-          # strutturale lo rende piu' largo di quanto il rapporto suggerisca:
-          # durante una chiamata a un modello `_callModel` emette un heartbeat
-          # ogni 60s, quindi una run viva non puo' tacere a lungo mentre aspetta
-          # un provider. I silenzi legittimi lunghi stanno FUORI dalle chiamate
-          # (checkout, encode della thumbnail, git), ed e' li' che sono stati
-          # misurati i 182s. Se una run sana venisse uccisa, si vedrebbe come
-          # un kill per stallo con `stalled` non vuoto e uno stack che NON e'
-          # in lavoro sincrono: e' quello il segnale per risalire, non la
-          # durata della run.
-          #
-          # Quindi il cap di durata resta dov'e' — e' lui a coprire il caso
-          # «lento ma vivo» — e questo watchdog copre il caso «muto». Il wedge
-          # costa 5 minuti invece di 40: ~87% delle 26,6 ore.
-          #
-          # LA MISURA E' LA CRESCITA DI UN FILE, non un timestamp per riga: lo
-          # step produce fino a 5.500 righe e un `date` per riga sarebbe una
-          # spesa per ogni riga per osservare un evento che capita una volta.
-          # `wc -c` ogni 30s costa 80 letture in tutto il budget.
-          #
-          # Overridable come i due sopra, cosi' che
-          # generate-article-chain.test.mjs possa provare il kill per stallo in
-          # secondi invece che in dieci minuti; nulla li imposta in CI.
           stall_s="${GENERATE_STALL_S:-300}"
           stall_poll_s="${GENERATE_STALL_POLL_S:-30}"
           stall_grace_s="${GENERATE_STALL_GRACE_S:-10}"
 
-          # Fuori dal workspace di proposito: `article_body_added` fa `git add
-          # -A`, quindi qualunque file diagnostico scritto sotto il repo
-          # finirebbe nel commit e su main. RUNNER_TEMP non e' in git.
           diag_dir="${RUNNER_TEMP:-/tmp}/generate-diagnostics"
           rm -rf "$diag_dir"
           mkdir -p "$diag_dir"
@@ -1275,14 +1520,8 @@ jobs:
           tee_pid=""
           attempt_pipe=""
           stop_marker=""
-          # Il client sta FUORI dalla cartella caricata: se ci stesse dentro,
-          # `if-no-files-found: ignore` non scatterebbe mai e ogni run
-          # caricherebbe un artifact con dentro solo lo strumento.
           cdp_client="${RUNNER_TEMP:-/tmp}/cdp-stack.mjs"
 
-          # L'albero dei processi, foglie per prime. `ps -A -o pid=,ppid=` si
-          # comporta identico su Linux e su macOS (questi blocchi girano anche
-          # nei test in locale); `pgrep -P` no.
           proc_tree() {
             local root="$1" kid
             for kid in $(ps -A -o pid= -o ppid= | awk -v p="$root" '$2 == p { print $1 }'); do
@@ -1299,29 +1538,6 @@ jobs:
             done
           }
 
-          # ── PRENDERE LO STACK, PERCHE' LA CAUSA NON SI TROVA LEGGENDO ─────
-          #
-          # Il client CDP qui sotto e' la meta' che trasforma il prossimo wedge
-          # in una prova invece che in un silenzio. Sta qui dentro e non in
-          # scripts/ perche' e' inerte finche' il watchdog non scatta.
-          #
-          # VERIFICATO su node v22.23.2 (il `node-version: '22'` di questo
-          # workflow) contro un processo con l'event loop bloccato da un `while`
-          # sincrono, il 2026-08-18:
-          #   - `--report-on-signal --report-signal=SIGUSR2 --report-directory`
-          #     sono accettati, e con l'event loop LIBERO il report viene
-          #     scritto (header, javascriptStack, nativeStack, libuv, heap);
-          #   - con l'event loop BLOCCATO il report NON viene scritto: la
-          #     richiesta resta appesa e il file compare solo quando il loop
-          #     riparte. Misurato: 0 file dopo SIGUSR2 a loop bloccato, 1 file
-          #     appena il blocco finisce. Il report da solo non basta per QUESTO
-          #     difetto — che e' esattamente un loop che non riparte piu'.
-          #   - SIGUSR1 accende l'inspector ANCHE a loop bloccato (lo fa un
-          #     thread dedicato), e `Debugger.pause` restituisce i callFrame:
-          #     lo stack JS del frame incastrato, che e' cio' che serve.
-          # Quindi si mandano entrambi: SIGUSR2 copre il caso in cui il loop si
-          # sblocchi (il report porta anche stack nativo e handle libuv), il
-          # client CDP copre il wedge vero.
           cat > "$cdp_client" <<'CDP_CLIENT'
           const fs = await import('node:fs');
           const outFile = process.argv[2];
@@ -1361,10 +1577,6 @@ jobs:
           });
           CDP_CLIENT
 
-          # I pid di create-article.mjs dentro l'albero del tentativo. Serve al
-          # campionamento e ai segnali: `timeout` NON va segnalato al posto suo
-          # (SIGUSR1/2 non sono fra quelli che rilancia, e li prenderebbe come
-          # terminazione, orfanando il figlio).
           create_article_pids() {
             local root="$1" p args out=""
             for p in $(proc_tree "$root"); do
@@ -1376,8 +1588,6 @@ jobs:
             printf '%s' "$out"
           }
 
-          # Il watchdog. Non fallisce mai lo step da solo: alza un flag e
-          # uccide, e chi classifica l'esito resta il codice dopo il ciclo.
           stall_watchdog() {
             local root="$1" last=-1 quiet=0 size p node_pids
             while kill -0 "$root" 2>/dev/null; do
@@ -1385,19 +1595,6 @@ jobs:
               size="$(wc -c < "$stall_log" 2>/dev/null | tr -d ' ')"
               [ -n "$size" ] || size=0
 
-              # ── LA TRAIETTORIA DELLA MEMORIA, dallo STESSO campione ────────
-              # Costa un `ps` ogni 30s e separa due ipotesi che il silenzio da
-              # solo confonde: un thrash del GC (major collection su heap
-              # saturo — congela l'event loop, non serve SIGTERM, cede solo a
-              # SIGKILL: spiega da sola tutti e tre i segnali osservati) tiene
-              # l'RSS incollato al tetto con la CPU al 100%; un blocco in
-              # codice nativo lascia l'RSS fermo e la CPU a zero. Il workflow
-              # non imposta NODE_OPTIONS ne' --max-old-space-size (verificato:
-              # zero occorrenze in questo file), quindi il tetto e' quello di
-              # default del runner ed e' raggiungibile.
-              # Campionato da FUORI il processo di proposito: un sampler dentro
-              # (worker thread) andrebbe iniettato nel generatore, che questa PR
-              # non tocca — e un worker non vede comunque l'heap del main.
               [ -s "$diag_dir/resources.log" ] || \
                 echo "# ts elapsed log_bytes | pid rss_kb cpu% state" > "$diag_dir/resources.log"
               for p in $(create_article_pids "$root"); do
@@ -1413,8 +1610,6 @@ jobs:
               quiet=$(( quiet + stall_poll_s ))
               [ "$quiet" -lt "$stall_s" ] && continue
 
-              # Il flag PRIMA di qualunque segnale: da qui in poi qualunque
-              # cosa succeda al processo, l'esito e' «stallo» e non «kill duro».
               : > "$stall_flag"
               echo "::warning::watchdog: nessun output per ${quiet}s (soglia ${stall_s}s) sulla sezione ${sec} — l'event loop e' bloccato, non e' lentezza. Prendo lo stack e uccido."
 
@@ -1425,9 +1620,6 @@ jobs:
               node "$cdp_client" "$diag_dir/stack-${sec}-${tried}.txt" \
                 >> "$diag_dir/cdp-client.log" 2>&1 || true
 
-              # Il grace serve al report di SIGUSR2, che e' scritto dal
-              # processo stesso: ucciderlo subito butterebbe via l'unica cosa
-              # per cui e' stato chiesto.
               sleep "$stall_grace_s"
               kill_tree KILL "$root"
               return 0
@@ -1435,17 +1627,10 @@ jobs:
           }
 
           watch_pid=""
-          # Il watchdog non sopravvive mai allo step: muore col tentativo (qui
-          # sotto) e comunque all'uscita, qualunque ramo la produca.
-          # The EXIT trap invokes this function indirectly.
-          # shellcheck disable=SC2329
           stall_atexit() {
             kill_tree KILL "${watch_pid:-}"
             kill_tree KILL "${tee_pid:-}"
             [ -z "${attempt_pipe:-}" ] || rm -f "$attempt_pipe"
-            # Il log del tentativo e la traiettoria si caricano solo quando
-            # servono: su una run che ha prodotto non resta niente da caricare,
-            # e l'artifact sparisce da solo con `if-no-files-found: ignore`.
             if [ ! -f "$stall_flag" ] && [ "${produced:-false}" = "true" ]; then
               rm -f "$stall_log" "$diag_dir/resources.log"
             fi
@@ -1453,61 +1638,15 @@ jobs:
           }
           trap stall_atexit EXIT
 
-          # Never start an attempt that cannot finish. A sixteenth of the budget
-          # (~3 minutes on the defaults) is the floor; it also keeps the cap
-          # strictly positive, and that matters — `timeout 0s` means NO limit,
-          # so a zero cap would hand the job away rather than protect it.
           min_attempt_s=$(( budget_s / 16 ))
           [ "$min_attempt_s" -lt 1 ] && min_attempt_s=1
           produced=false
           partial_failure=false
           effective="$TARGET_SECTION"
           tried=0
-          # ── L'OSSERVATORE (issue #313 / #348) ────────────────────────────
-          #
-          # LA REGOLA E' INVERTITA rispetto a com'era, ed e' l'inversione a
-          # essere la fix. Prima: «assorbi ogni uscita tranne quelle nominate»
-          # (all'inizio nessuna, poi il solo exit 3). Una regola di quella forma
-          # lascia passare per costruzione ogni difetto non ancora nominato, ed
-          # e' precisamente cosi' che la run 31823202761 e' uscita verde: la sua
-          # miscela di errori non era il caso nominato. Ora: «se non c'e' un
-          # articolo, FALLISCI, salvo esiti dichiarati» — cioe' exit 4 per una
-          # ragione locale alla sezione o exit 5 per il pool condiviso.
-          #
-          # Le ragioni dichiarate sono enumerate in
-          # `generator/scripts/lib/exhaustion-disposition.mjs`. Exit 4 e' una
-          # ragione specifica alla sezione e permette di provare la gemella;
-          # exit 5 segnala un guasto del pool condiviso e ferma i retry.
-          #
-          # Tutto il resto e' rosso, exit 0 compreso: un create-article.mjs che
-          # esce 0 senza scrivere un corpo non ha dichiarato niente, ed e'
-          # indistinguibile da una generazione riuscita. Anche il kill duro a
-          # 2400s: quaranta minuti spesi su un provider che stalla non sono un
-          # differimento, e assorbirli e' lo stesso silenzio verde a un'altra
-          # riga.
-          #
-          # L'ORACOLO E' IL CODICE DI USCITA, con una sola eccezione dichiarata:
-          # il SIGTERM cooperativo deve avere la prova nel file di controllo
-          # per-attempt, vincolata al token corrente. Mai una stringa dello
-          # stdout/stderr: quel flusso e' pieno di diagnostica, e un `grep` su
-          # di esso e' un oracolo che si acceca da solo senza dirlo.
-          #
-          # COSA QUESTA REGOLA NON COPRE, dichiarato perche' non venga
-          # ri-derivato: un differimento VERO che si ripete per ore (quota vera
-          # su tutto il roster, o pool secco per una notte intera) resta verde,
-          # run per run, ed e' giusto — la sua patologia e' la DURATA, che un
-          # singolo run non ha il denominatore per vedere. Quel denominatore ce
-          # l'ha gia' `scripts/ci/scan-generation-health.mjs` (condizione
-          # `generation-idle`, soglia 6h, cron ogni 2h): il 2026-08-14 ha
-          # funzionato, ed e' lui ad aver aperto la #348 alle 14:03:36Z.
-          # Duplicarlo qui dentro sarebbe una seconda copia peggiore di un
-          # osservatore che gia' regge.
           roster_blocked=false
           provider_blocked=false
-          # Resta false se un tentativo termina con un codice non dichiarato;
-          # i blocchi noti hanno i propri flag sotto.
           all_declared=true
-          # La prima ragione non dichiarata incontrata, per il messaggio finale.
           undeclared_why=""
           outcome_kind="error"
           outcome_reason="unclassified"
@@ -1527,20 +1666,8 @@ jobs:
             tried=$(( tried + 1 ))
             echo "── attempt $tried: section=$sec cap=${cap}s"
 
-            # Il processo ha un suo default (RUN_WALL_BUDGET_MS, 30min) che non
-            # conosce il cap di sezione appena calcolato sopra — issue #462: su
-            # un cap stretto (`remaining` piccolo) il processo si crede libero
-            # fino al default e dichiara centinaia di secondi residui che non
-            # esistono, falsando ogni `deadlineMs` derivato (inclusa l'allowance
-            # di #451). Il -60 rispecchia il `--kill-after=60s` di `timeout`
-            # sotto: il processo deve fermarsi da solo prima del kill duro, non
-            # al secondo esatto in cui il kill duro arriva.
             export CREATE_ARTICLE_MAX_WALL_MS=$(( (cap - 60) * 1000 ))
 
-            # The report is evidence for this exact attempt. Never let a report
-            # from an earlier section/attempt reach Commit and push, and keep
-            # each producer write on a unique path so a killed process cannot
-            # leave an apparently current report behind.
             attempt_report="$diag_dir/create-article-run-report-$tried.json"
             attempt_post_rebase_handoff="${RUNNER_TEMP:-/tmp}/create-article-post-rebase-run-report-$tried.json"
             attempt_pool_marker="$diag_dir/discovery-attempt-$sec.json"
@@ -1558,23 +1685,7 @@ jobs:
             rm -f "$attempt_pool_marker"
             export DISCOVERY_ATTEMPT_MARKER="$attempt_pool_marker"
 
-            # ── LA CARD DI RUN, E PERCHE' NON SERVE UNO STEP NUOVO ───────
-            # `finalizeRunReport` scrive gia' un report su ogni percorso
-            # terminale, ma dentro `.tmp/` del workspace: nessuno lo legge e
-            # muore col runner. Qui la sua proiezione minima (~0,5 KB, schema
-            # fisso) esce in `$diag_dir`, che lo step «Upload wedge
-            # diagnostics» — `if: always()`, gia' esistente — porta fuori
-            # senza un passo in piu'. Un verdetto emesso da uno step NUOVO
-            # prima del commit non segnalerebbe: cancellerebbe lo stato, ed e'
-            # l'errore che questo giro evita non aggiungendo lo step.
-            #
-            # Il nome porta la SEZIONE: il loop gira fino a due volte nella
-            # stessa run e un nome fisso lascerebbe leggere solo l'ultimo
-            # tentativo — cioe' perderebbe silenziosamente meta' del campione,
-            # che e' il difetto che la card esiste per chiudere.
             export RUN_CARD_FILE="$diag_dir/run-card-$sec.json"
-            # The card is also the producer-owned proof for a declared exit 5;
-            # do not let a card from an earlier attempt attest this one.
             if ! rm -f "$RUN_CARD_FILE"; then
               all_declared=false
               outcome_kind="error"
@@ -1585,14 +1696,6 @@ jobs:
               break
             fi
 
-            # Il tentativo gira in background con l'output duplicato su
-            # `$stall_log`: e' quel file a crescere (o a non crescere) che il
-            # watchdog campiona. Il marker cooperativo va invece nel file di
-            # controllo dedicato: il log resta diagnostica, mai un oracolo.
-            # `$!` e' il pid di `timeout`, quindi `wait` piu' sotto restituisce
-            # il suo codice di uscita esattamente come prima.
-            # I flag `--report-*` vanno PRIMA del path dello script, e non
-            # cambiano la forma degli argomenti di `timeout` (tre, come prima).
             rm -f "$stall_flag"
             : > "$stall_log"
             attempt_pipe="$diag_dir/attempt-${tried}.pipe"
@@ -1626,8 +1729,6 @@ jobs:
             stall_watchdog "$attempt_pid" &
             watch_pid=$!
             if wait "$attempt_pid"; then rc=0; else rc=$?; fi
-            # Il watchdog muore col tentativo, e con lui il suo `sleep`: un
-            # figlio rimasto vivo terrebbe aperto lo stdout dello step.
             kill_tree KILL "$watch_pid"
             wait "$watch_pid" 2>/dev/null || true
             watch_pid=""
@@ -1645,12 +1746,6 @@ jobs:
               break
             fi
 
-            # A report is useful only when its producer identity matches this
-            # attempt. A cooperative deadline may legitimately have no report
-            # because SIGTERM arrived before finalization; the commit step can
-            # defer only that explicitly proven case. Every report that does
-            # exist must be copied to the stable hand-off path only after this
-            # identity check.
             if [ -s "$attempt_report" ]; then
               if ! jq -e --arg run_id "$run_id" --arg run_attempt "$run_attempt" --arg section "$sec" '
                 (.runId | tostring) == $run_id
@@ -1691,13 +1786,6 @@ jobs:
               echo "::warning::nessun run report per la sezione $sec: sarà differibile solo con marker SIGTERM cooperativo"
             fi
 
-            # ── LO STALLO PRIMA DEL KILL DURO, e l'ordine e' obbligatorio ────
-            # Un kill del watchdog esce 137 come il grace di `timeout`, quindi
-            # il codice di uscita da solo non distingue i due difetti. Li
-            # distingue il flag, che il watchdog alza prima di toccare il
-            # processo. Sono due patologie diverse — «bloccato» contro «lento
-            # oltre il cap» — e il prossimo lettore deve poterle contare
-            # separatamente nei log, non stimarle.
             if [ -f "$stall_flag" ]; then
               echo "::warning::create-article.mjs muto per ${stall_s}s sulla sezione $sec — ucciso dal watchdog dello stallo, mentre il cap di durata (${cap}s) non era nemmeno vicino"
               outcome_kind="timeout"
@@ -1712,18 +1800,7 @@ jobs:
               cooperative_stop=true
             fi
             if [ "$rc" = "124" ] || [ "$rc" = "137" ]; then
-              # GNU `timeout` reports 124 when the child receives its initial
-              # SIGTERM, even if the child handles that signal and exits cleanly
-              # before the --kill-after grace. The machine marker is emitted by
-              # create-article.mjs into the per-attempt control file before its
-              # cooperative-stop warning. Without this distinction a controlled
-              # deadline stop is misreported as a hard kill and opens a recurring
-              # workflow-failure issue; without the token/file check an ordinary
-              # diagnostic could make a real hard kill green.
               if [ "$cooperative_stop" = "true" ]; then
-                # A signal received after a body/registration write is still a
-                # partial transaction. Only a clean, body-less stop is a
-                # declared no-article outcome.
                 body="$(article_body_added || true)"
                 if [ -n "$body" ]; then
                   partial_failure=true
@@ -1744,19 +1821,8 @@ jobs:
                 outcome_kind="no-article"
                 outcome_reason="cooperative-deadline"
                 outcome_section="$sec"
-                # The marker is the declaration; keep all_declared=true so
-                # the no-article path exits 0 and the next cron can retry.
                 break
               fi
-              # A provider that stalls stalls for the other section too, and the
-              # budget is already gone. Stop; do not spend the job's remaining
-              # minutes on the same wall.
-              #
-              # NON PIU' ASSORBITO (issue #313 / #348): un kill duro dopo
-              # ${cap}s non e' un differimento — non c'e' niente che si curi da
-              # solo al prossimo giro, e la run che lo assorbe e' verde per
-              # quaranta minuti spesi contro un muro. Il `break` resta (il muro
-              # e' lo stesso per l'altra sezione), il verde no.
               echo "::warning::create-article.mjs hard-killed after ${cap}s on section $sec — no article this run"
               outcome_kind="timeout"
               outcome_reason="hard-kill"
@@ -1765,19 +1831,6 @@ jobs:
               [ -n "$undeclared_why" ] || undeclared_why="kill duro dopo ${cap}s sulla sezione $sec (exit $rc): un provider che stalla non e' un differimento"
               break
             fi
-            # ISSUE #313 — l'ECCEZIONE all'assorbimento qui sotto, e va valutata
-            # prima di esso. Exit 3 non vuol dire «nessuna fonte adatta»: vuol
-            # dire che il roster ha rifiutato il payload sulla TAGLIA, cioe' una
-            # condizione che il prossimo run riproduce identica perche' nessuna
-            # finestra di quota rimpicciolisce un prompt. Assorbirla e' il ciclo
-            # che ha tenuto questo workflow `success` per 60+ run consecutive
-            # senza un articolo (06:06Z → 16:30Z del 2026-08-14), senza che
-            # `scan-failed-runs.mjs` — che raccoglie solo le run `failure` —
-            # avesse nulla da raccogliere.
-            #
-            # Non si esce subito: la sezione gemella va comunque tentata per un
-            # rifiuto di taglia specifico al prompt. Un'indisponibilita' del
-            # pool condiviso usa invece exit 5 e ferma il ciclo.
             if [ "$rc" = "3" ]; then
               echo "::warning::create-article.mjs: il roster non puo' servire il prompt della sezione $sec (exit 3)"
               roster_blocked=true
@@ -1786,11 +1839,6 @@ jobs:
             body="$(article_body_added || true)"
             if [ -n "$body" ]; then
               if [ "$rc" != "0" ]; then
-                # A process that writes a body and then fails has produced only
-                # a partial transaction. Do not let the body probe turn that
-                # failure into `produced=true`: the commit step uses this
-                # output, and a broad git add -A would otherwise publish the
-                # partial files together with later fallback output.
                 partial_failure=true
                 all_declared=false
                 [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs ha scritto un corpo sulla sezione $sec ma e' terminato con exit $rc: output parziale non pubblicabile"
@@ -1806,9 +1854,6 @@ jobs:
 
             registration_state_dirty
             if [ "${#stagedContentPaths[@]}" -gt 0 ]; then
-              # Do not try the sibling section: its registration would share
-              # the dirty union/router/meta files, and the final `git add -A`
-              # must never publish them without a complete body transaction.
               registration_dirty_count="${#stagedContentPaths[@]}"
               partial_failure=true
               all_declared=false
@@ -1833,20 +1878,9 @@ jobs:
               break
             fi
 
-            # ── LA DICHIARAZIONE, valutata DOPO aver constatato che non c'e' un
-            # corpo. L'ordine conta: exit 4 con un articolo scritto non esiste,
-            # ma exit 0 CON articolo e' il caso normale e non deve mai passare
-            # di qui. Sopra c'e' gia' il `break`, quindi qui `$rc` descrive
-            # sempre un tentativo finito a mani vuote.
             if [ "$rc" = "4" ]; then
-              # Esito legittimo circoscritto alla sezione: l'altra fonte puo'
-              # ancora essere valida.
               echo "::warning::create-article.mjs: nessun articolo sulla sezione $sec, ragione legittima DICHIARATA (exit 4)"
             elif [ "$rc" = "0" ]; then
-              # Il caso piu' insidioso, e quello che nessuno stava guardando:
-              # uscita 0 senza aver scritto niente. Non e' distinguibile da una
-              # generazione riuscita se non contando i corpi, che e' esattamente
-              # cio' che `article_body_added` fa un attimo sopra.
               all_declared=false
               [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito 0 sulla sezione $sec senza scrivere un corpo e senza dichiarare una ragione (attesa: exit 4)"
             else
@@ -1855,22 +1889,10 @@ jobs:
             fi
           done
 
-          # Zero tentativi non e' una dichiarazione vacuamente vera: e' il caso
-          # che il ramo «tried == 0» piu' sotto rende rosso, e senza questa riga
-          # `all_declared` restava `true` per costruzione (nessun giro del loop
-          # lo tocca), quindi lo step «Chain» — che legge `declared` e non lo
-          # status del job — dispatchava il successore esattamente nel caso in
-          # cui il generatore non e' nemmeno partito.
           if [ "$tried" = "0" ]; then
             all_declared=false
           fi
 
-          # Lascia una classificazione esplicita nel log anche quando il job
-          # viene poi chiuso con exit 0/1. Il watchdog usa questi eventi per
-          # separare articolo prodotto, no-op legittimo, timeout e rosso
-          # tecnico; il solo risultato del job non contiene questa distinzione.
-          # A partial transaction or a timeout is never a generated outcome:
-          # the body probe must not hide a red producer result in telemetry.
           if [ "$partial_failure" = "true" ]; then
             outcome_kind="error"
             outcome_reason="partial-failure"
@@ -1908,11 +1930,6 @@ jobs:
           fi
           echo "GENERATION_OUTCOME kind=$outcome_kind reason=$outcome_reason section=$outcome_section"
 
-          # `article` is the signal; `section` is the section that actually
-          # wrote, which is what the next chain link alternates off.
-          #
-          # Gli esiti di blocco sono separati da `declared`: il prompt troppo
-          # grande e il pool AI condiviso fermano la catena per ragioni diverse.
           {
             echo "article=$produced"
             echo "section=$effective"
@@ -1924,22 +1941,12 @@ jobs:
           } >> "$GITHUB_OUTPUT"
           echo "article=$produced section=$effective declared=$all_declared roster_blocked=$roster_blocked provider_blocked=$provider_blocked partial_failure=$partial_failure attempts=$tried/${#sections[@]}"
 
-          # ── LA RUN DIVENTA ROSSA (issue #313 / #348) ──────────────────────
-          # Gli output sono gia' scritti sopra: gli step con `if: always()` (il
-          # Summary) leggono lo stesso verdetto che leggerebbero su una run
-          # verde, quindi il fallimento non li rende ciechi.
-          #
-          # Un corpo scritto con exit non-zero resta una transazione parziale,
-          # e un timeout resta un timeout: nessuno dei due deve essere
-          # riclassificato come articolo generato dal probe del body.
           if [ "$partial_failure" = "true" ]; then
             exit 1
           fi
           if [ "$produced" = "true" ]; then
             exit 0
           fi
-          # Da qui in giu' NON c'e' un articolo. La domanda non e' piu' «quale
-          # errore e' successo» — e' «qualcuno ha dichiarato perche'?».
           if [ "$tried" = "0" ]; then
             echo "::error::nessun tentativo eseguito: il budget wall-clock era gia' speso prima del primo. Una run che non prova nemmeno non e' un esito normale."
             exit 1
@@ -1956,12 +1963,6 @@ jobs:
             echo "::notice::pool AI condiviso temporaneamente indisponibile: nessun retry immediato, si attende il prossimo cron"
             exit 0
           fi
-          # Nessun articolo, ma ogni tentativo ha dichiarato una ragione
-          # legittima: e' il verde senza articolo per ragioni locali alla
-          # sezione. Se questo
-          # stato PERSISTE, a vederlo e' `scan-generation-health.mjs`
-          # (`generation-idle`, 6h) — non questo step, che non ha il
-          # denominatore per distinguere una notte secca da un guasto.
           echo "nessun articolo, ma ogni tentativo ha dichiarato una ragione locale alla sezione (exit 4) — verde"
           exit 0
 
@@ -2180,6 +2181,212 @@ jobs:
       - name: Commit and push
         id: commit
         if: ${{ steps.mode.outputs.dry != 'true' && (success() || (failure() && steps.generate.outcome == 'failure' && steps.generate.outputs.cooperative_stop == 'true' && steps.generate.outputs.article != 'true')) }}
+        # Note del comando fuori dallo scalar run: mantenere il comando sotto 21.000 caratteri.
+        # `.tmp` is inside the checkout and the rebase helper can remove or
+        # replace it while replaying the generated commit. Preserve the
+        # report before the first push attempt so the post-rebase gate still
+        # has the run's topic evidence after a remote race.
+          # A declared no-article run can still have durable bookkeeping
+          # (for example the rejected-topic ledger). It has no article
+          # identity for the post-rebase uniqueness gate to check, so a
+          # missing producer report is recoverable only when no content was
+          # staged. An unreported body remains fail-closed.
+        # Title the commit by what it actually produced. `git add -A` stages
+        # data/topic-candidates-evergreen-rejected.json, which this job
+        # rewrites on EVERY run including ones that generate nothing, so
+        # "changes exist" is not "an article exists" — and every such run was
+        # landing as "Generate blog article (section)". Measured on four
+        # consecutive runs: two produced an article, two produced only the
+        # rejected-candidates file, and all four claimed an article. The log
+        # read as twice the output that existed.
+        #
+        # The probe that answers that question now lives once, in
+        # `article_body_added` in the "Generate the article" step, because it
+        # is also what decides whether the fallback section gets a turn. This
+        # step and the job summary both read its outputs, so the commit title
+        # and the summary line cannot drift apart — that drift is defect 2 of
+        # this PR, where the summary said "Generated: true" on the very run
+        # whose commit said "no article generated".
+        #
+        # The produced branch names the EFFECTIVE section — the one that
+        # wrote — not the one the link was assigned, because the next link
+        # alternates off this subject and must alternate off what exists.
+        # Il commit di QUESTO run, preso prima di ogni rebase: e' da li' che
+        # check-post-rebase-uniqueness.mjs legge cosa il run ha aggiunto (id,
+        # meta titolo/excerpt e voce del ledger URL->id), perche' dopo il
+        # rebase il ledger puo' non avere piu' la voce del run (bookkeeping:
+        # vince upstream), mentre il nuovo contenuto va comunque ricontrollato.
+        # Il registro delle immagini generate e' un ledger append-only, non una
+        # cache sacrificabile: il rebase puo' prendere upstream per uscire da
+        # un conflitto testuale, quindi conserviamo la copia di questo run e
+        # la riuniamo dopo ogni rebase con il resolver fail-closed dedicato.
+          # A conflict here is routinely NOT transient: this job rewrites the
+          # bookkeeping caches below in full on every run, so two runs
+          # started from different bases conflict for real and all five
+          # attempts then fail identically (issue #76). The helper takes
+          # upstream's copy when the conflict is confined to those caches and
+          # lets the rebase finish, so the commit — and the article in it —
+          # survives. Any other conflicting path still aborts, as before.
+          #
+          # public/data/journalist-image-catalog.json joined the list on
+          # 2026-08-11 (issue #225). It belongs to the same category by
+          # construction, not by convenience: generate-journalist-image-catalog.mjs
+          # DERIVES it entirely from the filenames under public/images/blog/
+          # ("Run directly to do a full rescan"), and appendCatalogEntry()
+          # rewrites the whole file as a single JSON.stringify line with no
+          # newline — so any two runs that add an image conflict textually on
+          # that one line, every time. It was NOT on the list, so the helper
+          # aborted exactly as designed, five times, and the run died on
+          # "the article is registered locally but not pushed" with
+          # steps.generate.outputs.article == true. Measured over the 37h to
+          # 2026-08-11: 4 failures of this workflow, 4 with a fully generated
+          # article — LLM, four DeepL translations and the hero image all
+          # already paid for — thrown away. Run 31459831234 is the one that
+          # conflicted on this path.
+          #
+          # Taking upstream costs one catalog entry (the new image's), and the
+          # image file itself still lands in the commit; a full rescan restores
+          # it. Losing the commit costs the whole article.
+          #
+          # ── I REGISTRI sono una categoria diversa (issue #255, #281, #285) ──
+          #
+          # I path sopra sono cache: la risoluzione giusta e' prendere
+          # upstream, perche' al giro dopo vengono riscritte da zero. I path
+          # sotto `--merge-registry` sono REGISTRI APPEND-ONLY, e per loro
+          # prendere un lato non «perde un aggiornamento»: CANCELLA i record
+          # che quel lato non ha. Aggiungerli all'allowlist di sopra avrebbe
+          # tolto dal registro l'articolo appena generato lasciandone i corpi
+          # sul posto — cioe' avrebbe fabbricato un articolo fantasma invece
+          # di perderlo. Sono due semantiche opposte, quindi due liste.
+          #
+          # Senza questa seconda lista non c'era una terza opzione e il
+          # conflitto abortiva: cinque tentativi, poi `exit 1` qui sotto, con
+          # l'articolo — LLM, quattro traduzioni DeepL, immagine hero, tutto
+          # gia' pagato — perso davvero, non ritardato. Tre occorrenze
+          # misurate: #255 sui path FRONTALIERE, #281 e #285 sui gemelli
+          # SVIZZERA. Ogni sezione attiva e' dichiarata da `--section-surfaces`
+          # (vedi sotto), e `generator/tests/rebase-onto-remote.test.mjs`
+          # deriva l'elenco atteso da `ARTICLE_SECTION_CORE` + `corpusPath()`
+          # e da create-article.mjs invece di ricopiarlo: un target di
+          # scrittura nuovo che non arriva all'helper fa rosso il test, che e'
+          # esattamente cio' che a #225 non successe.
+          # data/article-source-urls.json e data/swiss-article-source-urls.json
+          # (issue #496) sono i ledger URL->id di source-url-ledger.mjs, non
+          # registri del corpus: `saveSourceUrls` in create-article.mjs legge
+          # l'intera mappa a inizio run e la riscrive per intero (con trim
+          # FIFO a 500 voci), esattamente come public/data/journalist-image-catalog.json
+          # sopra. Prendere upstream costa la SOLA voce di dedup di questo run
+          # (il layer cross-sezione di #251 e i controlli within-section —
+          # preFlightHeadlineCheck, checkForDuplicates, checkSemanticNearDuplicate
+          # — restano intatti); l'articolo stesso vive nei registri sotto
+          # --merge-registry e non e' toccato da questa riga. Erano assenti da
+          # ENTRAMBE le liste, quindi un conflitto qui abortiva il rebase come
+          # in #76/#225: la famiglia SVIZZERA e' quella misurata dalla issue,
+          # ma il gemello FRONTALIERE ha lo stesso difetto e va chiuso insieme.
+          #
+          # data/article-source-quotas.json e data/swiss-article-source-quotas.json
+          # sono la stessa classe: saveSourceQuotaState() in create-article.mjs
+          # legge SOURCE_QUOTA_FILE intero a inizio run e lo riscrive intero,
+          # staged nella STESSA git add di SOURCE_URLS_FILE sopra (create-article.mjs,
+          # "if (existsSync(resolve(SOURCE_QUOTA_FILE)))"). data/topic-candidates-consumed.json
+          # e' il terzo gemello: persistConsumedTracker() in article-topic-selector.mjs
+          # fa lo stesso whole-file rewrite (FIFO-capped in appendConsumedId),
+          # staged anch'esso condizionalmente nello stesso punto. corpus-paths.mjs
+          # nomina gia' i tre insieme come "generator state ... MOVE with the
+          # generator" — mancavano dall'allowlist per lo stesso motivo dei ledger
+          # sopra: mai stati aggiunti (issue #496).
+          #
+          # data/quota-state.json e' un quarto gemello, scoperto durante la
+          # review di questa stessa issue: QUOTA_STATE_PATH in
+          # generator/scripts/lib/scheduler/quotaController.mjs, caricato da
+          # loadQuotaState() e riscritto per intero da saveQuotaState()
+          # (create-article.mjs chiama _saveQuotaState(_incrementCounter(...))
+          # dopo ogni publish riuscito) — stesso pattern whole-file-rewrite dei
+          # ledger sopra, ma UN SOLO file condiviso fra le due sezioni (nessuna
+          # variante swiss-). Era assente dall'allowlist: un conflitto di
+          # rebase su questo file abortiva il run esattamente come #76/#225/#496.
+          #
+          # ── I CONTATORI (`--merge-counter <path>:<campo>`, D18) ──
+          #
+          # data/topic-candidates-experimental-counter.json e
+          # data/topic-candidates-evergreen-counter.json (EXPERIMENTAL_COUNTER_PATH
+          # / EVERGREEN_COUNTER_PATH in article-topic-selector.mjs, campo `count`)
+          # erano in `git add -A` — 198 e 133 dei 200 commit del generatore
+          # misurati il 2026-10-05 li toccano — ma in NESSUNA delle liste qui
+          # sotto: un conflitto li' abortiva il rebase come in #76/#225/#496.
+          # Non vanno fra i bare path: sono contatori, e «prendi upstream»
+          # perde l'incremento di questo run, mentre --take-theirs perderebbe
+          # tutti quelli atterrati upstream nel frattempo. La risoluzione
+          # giusta e' sommare: upstream + (rigiocato − base), cioe'
+          # merge-counter-conflict.mjs. data/quota-state.json (`runCounter`) e'
+          # lo stesso contatore e passa dalla stessa strada; se la fusione non e'
+          # dimostrabile l'helper ricade su «prendi upstream», cioe' su cio' che
+          # quel file aveva prima. Il conflitto non e' l'unico modo di perdere un
+          # incremento: due run da N che scrivono entrambi N+1 danno lo STESSO
+          # blob e nessun conflitto, quindi a rebase riuscito l'helper riconcilia
+          # comunque ogni contatore dichiarato (upstream + incremento pre-rebase).
+          # data/discovery-attempt-state.json conserva contatori monotoni
+          # per sezione: i fallimenti proven incrementano `*ProvenAttempts`;
+          # una discovery o una pubblicazione avanza `*DiscoveryResetAt`.
+          # La differenza forza uno slot discovery dopo tre fallimenti proven
+          # senza ridurre contatori, quindi usa la stessa fusione a tre vie.
+          #
+          # data/topic-candidates-today-picks.json (TODAY_PICKS_BY_CLUSTER_PATH,
+          # persistTodayPicksByCluster) e' la stessa classe del consumed tracker:
+          # non tracciato oggi, ma riscritto per intero dopo una pubblicazione
+          # del ranker e quindi preso da `git add -A`; due run che lo creano
+          # sarebbero un add/add che aborta. E' un tetto giornaliero per
+          # cluster, cache del giorno: si prende upstream. La guardia in
+          # rebase-onto-remote.test.mjs deriva da article-topic-selector.mjs
+          # OGNI path scritto da una persist*: uno nuovo fuori da queste liste
+          # fa rosso li'.
+          #
+          # content/image-credits/blog/ (P14) e' un target PER-ARTICOLO come i
+          # corpi e l'hero: per una copertina Commons il generatore scrive
+          # `<slug>.json`, il credito di QUEL file webp. Due run sullo stesso
+          # slug lo scrivono in add/add, e fuori da --take-theirs il rebase
+          # aborterebbe come in #281; deve vincere lo stesso lato di
+          # public/images/blog/, altrimenti l'immagine di un run porterebbe il
+          # credito della foto dell'altro.
+          #
+          # ── I path PER SEZIONE vengono dal core (`--section-surfaces`) ──
+          #
+          # Registri, mappe slug, meta per locale, chunk SEO di scrittura,
+          # ledger URL->id e quote, corpi e sidecar di OGNI sezione attiva non
+          # sono piu' elencati qui: `--section-surfaces` fa derivare all'helper
+          # l'elenco da scripts/ci/rebase-section-args.mjs, che lo legge da
+          # SECTIONS di scripts/lib/article-surfaces.mjs, cioe' da
+          # ARTICLE_SECTION_CORE. Le categorie restano quelle descritte sopra
+          # (ledger e quote = prendi upstream, registri = --merge-registry,
+          # corpi e sidecar = --take-theirs). Qui restano solo i path che non
+          # dipendono da quante sezioni esistono.
+          #
+          # `data/generated-image-registry.json` e' un ledger JSON con un
+          # resolver proprio: il passaggio come bookkeeping serve solo a
+          # completare il rebase prendendo upstream, mentre lo snapshot sopra
+          # viene riunito subito dopo. Senza quel secondo passaggio il record
+          # della copertina di questo run sparirebbe dal registro e resterebbe
+          # un articolo fantasma, con il corpo presente ma senza provenienza.
+          #
+          # Il backoff deve precedere fetch+rebase: dormire DOPO il rebase
+          # rende HEAD gia' stantio prima del tentativo successivo, proprio
+          # durante le raffiche di push dei crawler.
+          # ── Ricontrollo dopo il rebase (D18) ──
+          #
+          # L'unicita' dell'id (namespace globale `blog-{id}`), il dedup della
+          # fonte, la chiave di argomento-guida e la duplicazione multi-segnale
+          # di titolo / excerpt il generatore li verifica sul tree di INIZIO run: reggono
+          # solo finche' gli scrittori sono seriali. Il rebase appena fatto ha
+          # fuso lo stato di altri run senza guardarli — `--merge-registry`
+          # unisce record di registri diversi anche con lo stesso id, il ledger
+          # URL->id prende upstream e il meta può contenere una notizia quasi
+          # identica — quindi le quattro domande si rifanno qui, sullo stato che si
+          # sta per pushare. Una violazione non si risolve riprovando: niente
+          # push, exit 1, e la run porta POST_REBASE_UNIQUENESS_VIOLATION nel
+          # log (POST_REBASE_UNIQUENESS_ERROR se il controllo non e' eseguibile:
+          # una garanzia non verificabile non si da' per verificata).
+          # Le sezioni vengono da ARTICLE_SECTION_CORE_LIST, non da un elenco
+          # qui: una sezione nuova e' coperta senza toccare questo step.
         run: |
           set -euo pipefail
           discovery_recovery_only=false
@@ -2221,10 +2428,6 @@ jobs:
               fi
             fi
           fi
-          # `.tmp` is inside the checkout and the rebase helper can remove or
-          # replace it while replaying the generated commit. Preserve the
-          # report before the first push attempt so the post-rebase gate still
-          # has the run's topic evidence after a remote race.
           RUN_REPORT="$RUNNER_TEMP/create-article-run-report.json"
           POST_REBASE_RUN_REPORT="$RUNNER_TEMP/create-article-post-rebase-run-report.json"
           has_run_report=false
@@ -2257,11 +2460,6 @@ jobs:
               exit 0
             fi
           elif [ "${{ steps.generate.outputs.article }}" != "true" ] && [ "${{ steps.generate.outputs.declared }}" = "true" ]; then
-            # A declared no-article run can still have durable bookkeeping
-            # (for example the rejected-topic ledger). It has no article
-            # identity for the post-rebase uniqueness gate to check, so a
-            # missing producer report is recoverable only when no content was
-            # staged. An unreported body remains fail-closed.
             staged_content="$(git diff --cached --name-only -- content/ || true)"
             if [ -n "$staged_content" ]; then
               echo "::error::create-article run report is missing with staged content; refusing to publish unverified article files"
@@ -2276,26 +2474,6 @@ jobs:
             echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push fires no workflow at all (anti-recursion), so the article would never reach the site via publish-api.yml AND the self-trigger chain would stop dead. Both depend on this push being PAT-authenticated."
             exit 1
           fi
-          # Title the commit by what it actually produced. `git add -A` stages
-          # data/topic-candidates-evergreen-rejected.json, which this job
-          # rewrites on EVERY run including ones that generate nothing, so
-          # "changes exist" is not "an article exists" — and every such run was
-          # landing as "Generate blog article (section)". Measured on four
-          # consecutive runs: two produced an article, two produced only the
-          # rejected-candidates file, and all four claimed an article. The log
-          # read as twice the output that existed.
-          #
-          # The probe that answers that question now lives once, in
-          # `article_body_added` in the "Generate the article" step, because it
-          # is also what decides whether the fallback section gets a turn. This
-          # step and the job summary both read its outputs, so the commit title
-          # and the summary line cannot drift apart — that drift is defect 2 of
-          # this PR, where the summary said "Generated: true" on the very run
-          # whose commit said "no article generated".
-          #
-          # The produced branch names the EFFECTIVE section — the one that
-          # wrote — not the one the link was assigned, because the next link
-          # alternates off this subject and must alternate off what exists.
           if [ "$discovery_recovery_only" = "true" ]; then
             git commit --quiet -m "Record discovery attempt recovery"
           elif [ "${{ steps.generate.outputs.article }}" = "true" ]; then
@@ -2303,17 +2481,8 @@ jobs:
           else
             git commit --quiet -m "Record rejected topic candidates (${{ steps.mode.outputs.section }} — no article generated)"
           fi
-          # Il commit di QUESTO run, preso prima di ogni rebase: e' da li' che
-          # check-post-rebase-uniqueness.mjs legge cosa il run ha aggiunto (id,
-          # meta titolo/excerpt e voce del ledger URL->id), perche' dopo il
-          # rebase il ledger puo' non avere piu' la voce del run (bookkeeping:
-          # vince upstream), mentre il nuovo contenuto va comunque ricontrollato.
           PRODUCED="$(git rev-parse HEAD)"
           printf '%s\n' "$PRODUCED" > "$RUNNER_TEMP/produced-article-commit"
-          # Il registro delle immagini generate e' un ledger append-only, non una
-          # cache sacrificabile: il rebase puo' prendere upstream per uscire da
-          # un conflitto testuale, quindi conserviamo la copia di questo run e
-          # la riuniamo dopo ogni rebase con il resolver fail-closed dedicato.
           registry_base="$RUNNER_TEMP/generated-image-registry-base.json"
           registry_snapshot="$RUNNER_TEMP/generated-image-registry-replayed.json"
           if ! git show "$PRODUCED^:data/generated-image-registry.json" > "$registry_base"; then
@@ -2354,157 +2523,6 @@ jobs:
             if [ "$attempt" -eq 5 ]; then
               break
             fi
-            # A conflict here is routinely NOT transient: this job rewrites the
-            # bookkeeping caches below in full on every run, so two runs
-            # started from different bases conflict for real and all five
-            # attempts then fail identically (issue #76). The helper takes
-            # upstream's copy when the conflict is confined to those caches and
-            # lets the rebase finish, so the commit — and the article in it —
-            # survives. Any other conflicting path still aborts, as before.
-            #
-            # public/data/journalist-image-catalog.json joined the list on
-            # 2026-08-11 (issue #225). It belongs to the same category by
-            # construction, not by convenience: generate-journalist-image-catalog.mjs
-            # DERIVES it entirely from the filenames under public/images/blog/
-            # ("Run directly to do a full rescan"), and appendCatalogEntry()
-            # rewrites the whole file as a single JSON.stringify line with no
-            # newline — so any two runs that add an image conflict textually on
-            # that one line, every time. It was NOT on the list, so the helper
-            # aborted exactly as designed, five times, and the run died on
-            # "the article is registered locally but not pushed" with
-            # steps.generate.outputs.article == true. Measured over the 37h to
-            # 2026-08-11: 4 failures of this workflow, 4 with a fully generated
-            # article — LLM, four DeepL translations and the hero image all
-            # already paid for — thrown away. Run 31459831234 is the one that
-            # conflicted on this path.
-            #
-            # Taking upstream costs one catalog entry (the new image's), and the
-            # image file itself still lands in the commit; a full rescan restores
-            # it. Losing the commit costs the whole article.
-            #
-            # ── I REGISTRI sono una categoria diversa (issue #255, #281, #285) ──
-            #
-            # I path sopra sono cache: la risoluzione giusta e' prendere
-            # upstream, perche' al giro dopo vengono riscritte da zero. I path
-            # sotto `--merge-registry` sono REGISTRI APPEND-ONLY, e per loro
-            # prendere un lato non «perde un aggiornamento»: CANCELLA i record
-            # che quel lato non ha. Aggiungerli all'allowlist di sopra avrebbe
-            # tolto dal registro l'articolo appena generato lasciandone i corpi
-            # sul posto — cioe' avrebbe fabbricato un articolo fantasma invece
-            # di perderlo. Sono due semantiche opposte, quindi due liste.
-            #
-            # Senza questa seconda lista non c'era una terza opzione e il
-            # conflitto abortiva: cinque tentativi, poi `exit 1` qui sotto, con
-            # l'articolo — LLM, quattro traduzioni DeepL, immagine hero, tutto
-            # gia' pagato — perso davvero, non ritardato. Tre occorrenze
-            # misurate: #255 sui path FRONTALIERE, #281 e #285 sui gemelli
-            # SVIZZERA. Ogni sezione attiva e' dichiarata da `--section-surfaces`
-            # (vedi sotto), e `generator/tests/rebase-onto-remote.test.mjs`
-            # deriva l'elenco atteso da `ARTICLE_SECTION_CORE` + `corpusPath()`
-            # e da create-article.mjs invece di ricopiarlo: un target di
-            # scrittura nuovo che non arriva all'helper fa rosso il test, che e'
-            # esattamente cio' che a #225 non successe.
-            # data/article-source-urls.json e data/swiss-article-source-urls.json
-            # (issue #496) sono i ledger URL->id di source-url-ledger.mjs, non
-            # registri del corpus: `saveSourceUrls` in create-article.mjs legge
-            # l'intera mappa a inizio run e la riscrive per intero (con trim
-            # FIFO a 500 voci), esattamente come public/data/journalist-image-catalog.json
-            # sopra. Prendere upstream costa la SOLA voce di dedup di questo run
-            # (il layer cross-sezione di #251 e i controlli within-section —
-            # preFlightHeadlineCheck, checkForDuplicates, checkSemanticNearDuplicate
-            # — restano intatti); l'articolo stesso vive nei registri sotto
-            # --merge-registry e non e' toccato da questa riga. Erano assenti da
-            # ENTRAMBE le liste, quindi un conflitto qui abortiva il rebase come
-            # in #76/#225: la famiglia SVIZZERA e' quella misurata dalla issue,
-            # ma il gemello FRONTALIERE ha lo stesso difetto e va chiuso insieme.
-            #
-            # data/article-source-quotas.json e data/swiss-article-source-quotas.json
-            # sono la stessa classe: saveSourceQuotaState() in create-article.mjs
-            # legge SOURCE_QUOTA_FILE intero a inizio run e lo riscrive intero,
-            # staged nella STESSA git add di SOURCE_URLS_FILE sopra (create-article.mjs,
-            # "if (existsSync(resolve(SOURCE_QUOTA_FILE)))"). data/topic-candidates-consumed.json
-            # e' il terzo gemello: persistConsumedTracker() in article-topic-selector.mjs
-            # fa lo stesso whole-file rewrite (FIFO-capped in appendConsumedId),
-            # staged anch'esso condizionalmente nello stesso punto. corpus-paths.mjs
-            # nomina gia' i tre insieme come "generator state ... MOVE with the
-            # generator" — mancavano dall'allowlist per lo stesso motivo dei ledger
-            # sopra: mai stati aggiunti (issue #496).
-            #
-            # data/quota-state.json e' un quarto gemello, scoperto durante la
-            # review di questa stessa issue: QUOTA_STATE_PATH in
-            # generator/scripts/lib/scheduler/quotaController.mjs, caricato da
-            # loadQuotaState() e riscritto per intero da saveQuotaState()
-            # (create-article.mjs chiama _saveQuotaState(_incrementCounter(...))
-            # dopo ogni publish riuscito) — stesso pattern whole-file-rewrite dei
-            # ledger sopra, ma UN SOLO file condiviso fra le due sezioni (nessuna
-            # variante swiss-). Era assente dall'allowlist: un conflitto di
-            # rebase su questo file abortiva il run esattamente come #76/#225/#496.
-            #
-            # ── I CONTATORI (`--merge-counter <path>:<campo>`, D18) ──
-            #
-            # data/topic-candidates-experimental-counter.json e
-            # data/topic-candidates-evergreen-counter.json (EXPERIMENTAL_COUNTER_PATH
-            # / EVERGREEN_COUNTER_PATH in article-topic-selector.mjs, campo `count`)
-            # erano in `git add -A` — 198 e 133 dei 200 commit del generatore
-            # misurati il 2026-10-05 li toccano — ma in NESSUNA delle liste qui
-            # sotto: un conflitto li' abortiva il rebase come in #76/#225/#496.
-            # Non vanno fra i bare path: sono contatori, e «prendi upstream»
-            # perde l'incremento di questo run, mentre --take-theirs perderebbe
-            # tutti quelli atterrati upstream nel frattempo. La risoluzione
-            # giusta e' sommare: upstream + (rigiocato − base), cioe'
-            # merge-counter-conflict.mjs. data/quota-state.json (`runCounter`) e'
-            # lo stesso contatore e passa dalla stessa strada; se la fusione non e'
-            # dimostrabile l'helper ricade su «prendi upstream», cioe' su cio' che
-            # quel file aveva prima. Il conflitto non e' l'unico modo di perdere un
-            # incremento: due run da N che scrivono entrambi N+1 danno lo STESSO
-            # blob e nessun conflitto, quindi a rebase riuscito l'helper riconcilia
-            # comunque ogni contatore dichiarato (upstream + incremento pre-rebase).
-            # data/discovery-attempt-state.json conserva contatori monotoni
-            # per sezione: i fallimenti proven incrementano `*ProvenAttempts`;
-            # una discovery o una pubblicazione avanza `*DiscoveryResetAt`.
-            # La differenza forza uno slot discovery dopo tre fallimenti proven
-            # senza ridurre contatori, quindi usa la stessa fusione a tre vie.
-            #
-            # data/topic-candidates-today-picks.json (TODAY_PICKS_BY_CLUSTER_PATH,
-            # persistTodayPicksByCluster) e' la stessa classe del consumed tracker:
-            # non tracciato oggi, ma riscritto per intero dopo una pubblicazione
-            # del ranker e quindi preso da `git add -A`; due run che lo creano
-            # sarebbero un add/add che aborta. E' un tetto giornaliero per
-            # cluster, cache del giorno: si prende upstream. La guardia in
-            # rebase-onto-remote.test.mjs deriva da article-topic-selector.mjs
-            # OGNI path scritto da una persist*: uno nuovo fuori da queste liste
-            # fa rosso li'.
-            #
-            # content/image-credits/blog/ (P14) e' un target PER-ARTICOLO come i
-            # corpi e l'hero: per una copertina Commons il generatore scrive
-            # `<slug>.json`, il credito di QUEL file webp. Due run sullo stesso
-            # slug lo scrivono in add/add, e fuori da --take-theirs il rebase
-            # aborterebbe come in #281; deve vincere lo stesso lato di
-            # public/images/blog/, altrimenti l'immagine di un run porterebbe il
-            # credito della foto dell'altro.
-            #
-            # ── I path PER SEZIONE vengono dal core (`--section-surfaces`) ──
-            #
-            # Registri, mappe slug, meta per locale, chunk SEO di scrittura,
-            # ledger URL->id e quote, corpi e sidecar di OGNI sezione attiva non
-            # sono piu' elencati qui: `--section-surfaces` fa derivare all'helper
-            # l'elenco da scripts/ci/rebase-section-args.mjs, che lo legge da
-            # SECTIONS di scripts/lib/article-surfaces.mjs, cioe' da
-            # ARTICLE_SECTION_CORE. Le categorie restano quelle descritte sopra
-            # (ledger e quote = prendi upstream, registri = --merge-registry,
-            # corpi e sidecar = --take-theirs). Qui restano solo i path che non
-            # dipendono da quante sezioni esistono.
-            #
-            # `data/generated-image-registry.json` e' un ledger JSON con un
-            # resolver proprio: il passaggio come bookkeeping serve solo a
-            # completare il rebase prendendo upstream, mentre lo snapshot sopra
-            # viene riunito subito dopo. Senza quel secondo passaggio il record
-            # della copertina di questo run sparirebbe dal registro e resterebbe
-            # un articolo fantasma, con il corpo presente ma senza provenienza.
-            #
-            # Il backoff deve precedere fetch+rebase: dormire DOPO il rebase
-            # rende HEAD gia' stantio prima del tentativo successivo, proprio
-            # durante le raffiche di push dei crawler.
             sleep $((attempt * 3))
             rebased=1
             bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
@@ -2527,22 +2545,6 @@ jobs:
               --section-surfaces \
               --take-theirs content/image-credits/blog/ \
               --take-theirs public/images/blog/ || rebased=0
-            # ── Ricontrollo dopo il rebase (D18) ──
-            #
-            # L'unicita' dell'id (namespace globale `blog-{id}`), il dedup della
-            # fonte, la chiave di argomento-guida e la duplicazione multi-segnale
-            # di titolo / excerpt il generatore li verifica sul tree di INIZIO run: reggono
-            # solo finche' gli scrittori sono seriali. Il rebase appena fatto ha
-            # fuso lo stato di altri run senza guardarli — `--merge-registry`
-            # unisce record di registri diversi anche con lo stesso id, il ledger
-            # URL->id prende upstream e il meta può contenere una notizia quasi
-            # identica — quindi le quattro domande si rifanno qui, sullo stato che si
-            # sta per pushare. Una violazione non si risolve riprovando: niente
-            # push, exit 1, e la run porta POST_REBASE_UNIQUENESS_VIOLATION nel
-            # log (POST_REBASE_UNIQUENESS_ERROR se il controllo non e' eseguibile:
-            # una garanzia non verificabile non si da' per verificata).
-            # Le sezioni vengono da ARTICLE_SECTION_CORE_LIST, non da un elenco
-            # qui: una sezione nuova e' coperta senza toccare questo step.
             if [ "$rebased" -eq 1 ]; then
               node scripts/ci/merge-generated-image-registry.mjs \
                 data/generated-image-registry.json "$registry_base" "$registry_snapshot"
