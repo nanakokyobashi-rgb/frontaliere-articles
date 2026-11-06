@@ -79,8 +79,8 @@ run-name: ${{ format('[loop-clock {0}] [generation-slot {1}] Generate Blog Artic
 # WHY IT CANNOT RUN AWAY. The chain link is the ARTICLE, not the run: only a
 # push that touches content/** continues it. A run that generates nothing
 # pushes only data/topic-candidates-evergreen-rejected.json, which is not in the
-# trigger paths, so the chain stops there and waits for a Cloud Scheduler slot. That is the one
-# deliberate difference from the site repo's version, which dispatched
+# trigger paths, so the chain stops there and waits for a Cloud Scheduler slot.
+# That is the one deliberate difference from the site repo's version, which dispatched
 # unconditionally — an unconditional chain that hits a fast-failing generator
 # spins as fast as the runs exit, and this repo has just spent four days proving
 # the generator can fail on every attempt. Chaining only on success makes the
@@ -128,8 +128,9 @@ run-name: ${{ format('[loop-clock {0}] [generation-slot {1}] Generate Blog Artic
 #
 # IL SOCCORSO, che non e' un anello (2026-08-19, #459). Lo stop sopra e' giusto
 # e resta: un esito non dichiarato non chaina. Ma il taglio 4→2 slot ha lasciato
-# proprio quel caso al solo slot programmato, ora gestito da Cloud Scheduler, e la latenza di ripartenza oscilla fra ~5 e
-# ~35 minuti secondo la FASE fra il wedge e lo slot — perche' `admit` salta un
+# proprio quel caso al solo slot programmato, ora gestito da Cloud Scheduler,
+# e la latenza di ripartenza oscilla fra ~5 e ~35 minuti secondo la FASE fra il
+# wedge e lo slot — perche' `admit` salta un
 # arrivo che trova una run in volo da meno di 1800s (#442). Il soccorso e' un
 # riavvio SINGOLO per catena: un anello riparte subito e presume che valga la
 # pena riprovare, il soccorso presume solo che il muro possa non essere
@@ -246,12 +247,12 @@ on:
         type: string
       rescue_depth:
         # NON e' un contatore di anelli: e' il gettone del SOCCORSO. Un esito
-        # non dichiarato (wedge) non chaina mai — e resta giusto cosi' — ma il
-        # cron da solo non lo copre piu' da quando gli slot sono due (#459).
+        # non dichiarato (wedge) non chaina mai — e resta giusto cosi' — ma i
+        # due slot orari di Cloud Scheduler da soli non lo coprono (#459).
         # Il soccorso e' UN riavvio, e questo gettone e' cio' che lo rende uno:
         # viaggia anche negli anelli normali, quindi il tetto e' uno per
-        # CATENA, non uno per run. Una catena nuova (cron, o push dopo un
-        # articolo) riparte da 0 perche' quel dispatch non lo imposta.
+        # CATENA, non uno per run. Una catena nuova (uno slot Cloud Scheduler o
+        # un push dopo un articolo) riparte da 0 perche' quel dispatch non lo imposta.
         description: 'Rescue restarts already spent by this chain (0 = none, never set by hand)'
         required: false
         default: '0'
@@ -315,7 +316,7 @@ on:
 #
 #  · `admit` (nessun gruppo, quindi mai in coda e mai sfrattato) risponde a
 #    «serve un'altra generazione ADESSO?». Se una run di questo workflow è già
-#    in volo la risposta è no — per costruzione, non per euristica: il cron è
+#    in volo la risposta è no — per costruzione, non per euristica: Cloud Scheduler è
 #    solo lo STARTER della catena (vedi l'intestazione), e gli altri produttori
 #    che spingono `content/**` sono «one more restart point». Un riavvio mentre
 #    la catena cammina è ridondante: la run in volo, se produce, chaina da sé.
@@ -330,12 +331,12 @@ on:
 # run con `total_count == 0` non è più producibile; e l'arrivo ridondante esce
 # `skipped`, non `cancelled`, cioè smette di far sparire il lavoro di un altro.
 # Quando la catena è ferma — pool secco, run fallita, niente in volo — il gate
-# lascia passare tutto come prima, che è esattamente il caso in cui il cron
+# lascia passare tutto come prima, che è esattamente il caso in cui Cloud Scheduler
 # serve.
 #
 # Il costo, dichiarato: se la run in volo non produce nulla, l'arrivo scartato
-# non c'è più e la catena riparte al prossimo slot cron (≤15 min). È il prezzo
-# già scelto e già scritto in questa intestazione («needing cron to restart it
+# non c'è più e la catena riparte al prossimo slot Cloud Scheduler (≤15 min). È il prezzo
+# già scelto e già scritto in questa intestazione («needing Cloud Scheduler to restart it
 # after a dry spell»), non uno nuovo.
 
 permissions:
@@ -772,8 +773,8 @@ jobs:
           # da zero e i due cap non vedono niente. Questo tetto invece si calcola
           # dallo stesso snapshot bounded gia' usato dal gate, e nessuno puo'
           # ripulirlo passando un input sbagliato. Vale solo per gli anelli: un
-          # umano e il cron restano fuori (il cron ha due slot, un umano si
-          # ferma da solo).
+          # avvio manuale e gli slot Cloud Scheduler restano fuori (sono due
+          # slot/ora; un avvio manuale si ferma da solo).
           if [ "$is_link" = "true" ]; then
             cap="${CHAIN_MAX_RUNS_PER_HOUR:-}"
             case "$cap" in
@@ -1243,7 +1244,7 @@ jobs:
       #   3. A wall-clock budget caps the pair so two attempts cannot outlive
       #      the job's 60-minute timeout.
       # So "both sections dry" ends exactly where it ended before: one run, no
-      # article, no push, chain stopped, cron restarts it.
+      # article, no push, chain stopped, Cloud Scheduler restarts it.
       #
       # THE ALTERNATIVES, AND WHY NOT:
       #   - Hand the baton to the other section at CHAIN level: the empty run
@@ -1580,7 +1581,8 @@ jobs:
               # partial transaction. Only a clean, body-less stop is a
               # declared no-article outcome.
               # The marker is the declaration; keep all_declared=true so
-              # the no-article path exits 0 and the next cron can retry.
+              # the no-article path exits 0 and the next Cloud Scheduler slot
+              # can retry.
             # A provider that stalls stalls for the other section too, and the
             # budget is already gone. Stop; do not spend the job's remaining
             # minutes on the same wall.
@@ -2932,8 +2934,8 @@ jobs:
       # ── L'ANELLO CHE MANCAVA (2026-08-18) ───────────────────────────────────
       #
       # IL BUCO, misurato: su 399 run in 50,2 ore il tempo davvero morto — nessuna
-          # generazione vera attiva — e' 6,8h, il 14% della finestra. Non e' Cloud Scheduler
-      # che manca gli slot: e' che un anello che non produce non pusha niente
+      # generazione vera attiva — e' 6,8h, il 14% della finestra. Non è Cloud Scheduler
+      # a mancare gli slot: è che un anello che non produce non pusha niente
       # sotto `content/**`, quindi non ha successore e la catena aspetta il
       # prossimo slot. Le run fallite ne occupano altre 15,7h (31%), che e' un
       # problema diverso e non si chiude qui.
@@ -3108,5 +3110,5 @@ jobs:
           # Rosso NO: un successore mancato costa un giro programmato, e far fallire
           # la run qui renderebbe illeggibile la classificazione dell'esito che
           # lo step di generazione ha appena scritto.
-          echo "::warning::dispatch ($kind) fallito (HTTP $code con $token_name): $(head -c 300 /tmp/chain-dispatch.json 2>/dev/null). La catena si ferma, il cron riprende."
+          echo "::warning::dispatch ($kind) fallito (HTTP $code con $token_name): $(head -c 300 /tmp/chain-dispatch.json 2>/dev/null). La catena si ferma, Cloud Scheduler riprende al prossimo slot."
           exit 0
