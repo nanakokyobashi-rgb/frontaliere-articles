@@ -301,8 +301,9 @@ export function translatedStringOrNull(value, targetLang) {
 
 /**
  * La «traduzione» e' la sorgente ricopiata? Confronto normalizzato: spazi ai
- * bordi tolti e ogni sequenza di whitespace ridotta a uno spazio, lo stesso
- * criterio con cui la cascata free-MT riconosce un passthrough (#1084).
+ * bordi tolti, ogni sequenza di whitespace ridotta a uno spazio e differenze
+ * di maiuscole ignorate, lo stesso criterio con cui la cascata free-MT
+ * riconosce un passthrough (#1084).
  *
  * UNICO predicato per OGNI punto che accetta un body tradotto (#1875): la
  * cascata free-MT, il ramo LLM legacy (`ARTICLE_TRANSLATE_FREE_MT=0`, chiamata
@@ -320,7 +321,7 @@ export function translatedStringOrNull(value, targetLang) {
  */
 export function isSourcePassthrough(translated, source) {
   if (typeof translated !== 'string' || typeof source !== 'string') return false;
-  const normalize = (value) => value.trim().replace(/\s+/g, ' ');
+  const normalize = (value) => value.trim().replace(/\s+/g, ' ').toLowerCase();
   const src = normalize(source);
   return src.length > 0 && normalize(translated) === src;
 }
