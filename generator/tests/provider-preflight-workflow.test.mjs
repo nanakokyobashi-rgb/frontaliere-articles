@@ -8,6 +8,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const WORKFLOW = fs.readFileSync(path.join(HERE, '../../.github/workflows/generate-article.yml'), 'utf8');
 const FAQ_WORKFLOW = fs.readFileSync(path.join(HERE, '../../.github/workflows/batch-faq-articles.yml'), 'utf8');
 const DAILY_BRIEF_WORKFLOW = fs.readFileSync(path.join(HERE, '../../.github/workflows/generate-daily-brief.yml'), 'utf8');
+const CREATE_ARTICLE = fs.readFileSync(path.join(HERE, '../scripts/create-article.mjs'), 'utf8');
 
 test('Generate Blog Article esegue il preflight dopo il setup opzionale e prima della generazione', () => {
   const setup = WORKFLOW.indexOf('id: setup_claude_haiku_fallback');
@@ -31,6 +32,14 @@ test('il dry-run non viene bloccato dal preflight che richiede una lane attiva',
   const start = WORKFLOW.indexOf('id: provider_preflight');
   const end = WORKFLOW.indexOf('# Dry mode stops here', start);
   assert.match(WORKFLOW.slice(start, end), /if: steps\.mode\.outputs\.dry != 'true'/);
+});
+
+test('i report distinguono la sonda di catalogo dai modelli eleggibili a runtime', () => {
+  assert.match(WORKFLOW, /Probe provider transport\/catalog reachability \(no inference\)/);
+  assert.match(CREATE_ARTICLE, /scope: 'runtime-model-eligibility'/);
+  assert.match(CREATE_ARTICLE, /runtimeEligibleModels: roster\.availableModels/);
+  assert.match(CREATE_ARTICLE, /runtimeEligibleProviders: roster\.availableProviders/);
+  assert.match(CREATE_ARTICLE, /unavailableModels: roster\.unavailableModels/);
 });
 
 test('anche il batch FAQ usa lo stesso preflight e non il solo PAT GitHub', () => {

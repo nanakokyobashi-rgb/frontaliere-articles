@@ -1162,7 +1162,7 @@ jobs:
         with:
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
 
-      - name: Verify a model provider is actually available
+      - name: Probe provider transport/catalog reachability (no inference)
         id: provider_preflight
         if: steps.mode.outputs.dry != 'true'
         env:

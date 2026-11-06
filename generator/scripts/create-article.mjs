@@ -18454,8 +18454,12 @@ async function main() {
     const rosterReady = providerRosterReady(rosterOptions);
     const roster = getProviderRosterStatus(rosterOptions);
     RUN_REPORT.providerRosterPreflight = {
+      scope: 'runtime-model-eligibility',
       ready: rosterReady,
       rosterSize: roster.rosterSize,
+      runtimeEligibleModels: roster.availableModels,
+      runtimeEligibleProviders: roster.availableProviders,
+      unavailableModels: roster.unavailableModels,
       availableModelCount: roster.availableModels.length,
       availableProviders: roster.availableProviders,
       reason: roster.reason,

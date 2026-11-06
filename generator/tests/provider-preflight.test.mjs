@@ -48,7 +48,11 @@ test('una lane pronta rende il roster utilizzabile anche con altre lane bloccate
     { provider: 'github', status: 'quota_or_rate_limited', reason: 'quota_or_rate_limited' },
     { provider: 'gemini', status: 'ready', reason: 'catalog_reachable' },
   ], '2026-09-14T12:00:00.000Z');
+  assert.equal(report.probeScope, 'transport-and-catalog-reachability');
+  assert.equal(report.inferenceAttempted, false);
+  assert.equal(report.inferenceQuotaChecked, false);
   assert.equal(report.ready, true);
+  assert.deepEqual(report.probeReadyProviders, ['gemini']);
   assert.deepEqual(report.readyProviders, ['gemini']);
   assert.deepEqual(report.blockedProviders, [{ provider: 'github', status: 'quota_or_rate_limited', reason: 'quota_or_rate_limited' }]);
 });
