@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-11-06T07:52:55.870Z",
-  "contentHash": "a15d027ea25cda45cfda86f27f40ac3b42b8cc81977eda8bdae467cd1cef9d18",
+  "updatedAt": "2026-11-06T08:18:18.749Z",
+  "contentHash": "3bb5be112c3ab5dbb2dbac4a95456eb2b79ec2cf8cf1d21e82a97fedcad7ad2b",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Andermatt, piano di quartiere per il toro Max l'Uristier",
+          "url": "/articoli-uri/andermatt-piano-max-uristier/",
+          "excerpt": "Il piano Nätschen West è in partecipazione fino al 7 dicembre: Max l'Uristier misura 36 metri di lunghezza e 20 di altezza.",
+          "date": "2026-11-06T08:13:38.091Z"
+        },
+        {
           "title": "Canton Uri: 3.934 alunni e 224 sezioni nel 2025/2026",
           "url": "/articoli-uri/volksschule-uri-iscrizioni-2025-2026/",
           "excerpt": "Il rapporto sulla Volksschule del Canton Uri per l'anno scolastico 2025/2026 descrive un aumento contenuto degli iscritti e un ampliamento delle sezioni.",
@@ -82,12 +88,6 @@
           "url": "/articoli-uri/incendio-tunnel-fluelen/",
           "excerpt": "Un incendio di un veicolo ha imposto la chiusura del tunnel di Flüelen per circa un'ora e mezza giovedì 29 ottobre.",
           "date": "2026-10-31T10:27:30.338Z"
-        },
-        {
-          "title": "Susten e Furka chiusi, San Gottardo percorribile di giorno",
-          "url": "/articoli-uri/susten-furka-chiusura-invernale/",
-          "excerpt": "Dal mercoledì 28 ottobre i passi della Furka e del Susten sono chiusi per l'inverno; il passo del San Gottardo resta percorribile di giorno.",
-          "date": "2026-10-28T17:45:24.471Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-06T07:52:55.870Z"
+      "updatedAt": "2026-11-06T08:18:18.749Z"
     },
     "en": {
       "canton": "UR",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Andermatt, neighborhood plan for the bull Max l'Uristier",
+          "url": "/en/uri-articles/andermatt-max-wooden-bull-plan/",
+          "excerpt": "The Nätschen West plan is open for public consultation until December 7: Max l'Uristier is 36 meters long and 20 meters high.",
+          "date": "2026-11-06T08:13:38.091Z"
+        },
+        {
           "title": "Canton Uri: 3.934 students and 224 sections in 2025/2026",
           "url": "/en/uri-articles/volksschule-uri-enrollments-2025-2026/",
           "excerpt": "The report on the Volksschule of the Canton of Uri for the 2025/2026 school year describes a limited increase in enrolments and an expansion of the sections.",
@@ -169,12 +175,6 @@
           "url": "/en/uri-articles/vehicle-fire-fluelen-tunnel/",
           "excerpt": "A vehicle fire forced the closure of the Flüelen tunnel for about an hour and a half on Thursday, October 29.",
           "date": "2026-10-31T10:27:30.338Z"
-        },
-        {
-          "title": "Susten and Furka closed, Gotthard passable during the day",
-          "url": "/en/uri-articles/susten-furka-winter-closure/",
-          "excerpt": "As of Wednesday, October 28, the Furka and Susten passes are closed for the winter; the San Gottardo Pass remains passable during the day.",
-          "date": "2026-10-28T17:45:24.471Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-06T07:52:55.870Z"
+      "updatedAt": "2026-11-06T08:18:18.749Z"
     },
     "de": {
       "canton": "UR",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Andermatt, Quartierplan für den Stier Max l'Uristier",
+          "url": "/de/uri-artikel/andermatt-plan-holzstier-max/",
+          "excerpt": "Der Plan Nätschen West liegt bis zum 7. Dezember zur Mitwirkung auf: Max l'Uristier ist 36 Meter lang und 20 Meter hoch.",
+          "date": "2026-11-06T08:13:38.091Z"
+        },
+        {
           "title": "Kanton Uri: 3.934 Schüler und 224 Klassen im Jahr 2025/2026",
           "url": "/de/uri-artikel/volksschule-uri-einschreibungen-2025-2026/",
           "excerpt": "Der Bericht der Volksschule des Kantons Uri für das Schuljahr 2025/2026 beschreibt einen begrenzten Anstieg der Anmeldungen und eine Erweiterung der Abteilungen.",
@@ -256,12 +262,6 @@
           "url": "/de/uri-artikel/fahrzeugbrand-fluelen-tunnel/",
           "excerpt": "Am Donnerstagmorgen, dem 29. Oktober, wurde der Flüeler Tunnel nach einem Fahrzeugbrand etwa eineinhalb Stunden lang gesperrt.",
           "date": "2026-10-31T10:27:30.338Z"
-        },
-        {
-          "title": "Susten und Furka gesperrt, Gotthard tagsüber befahrbar",
-          "url": "/de/uri-artikel/susten-furka-wintersperre/",
-          "excerpt": "Es lässt sich über die Wintersperre der Furka und des Susten ab Mittwoch, 28. Oktober, berichten sowie über die abweichende Situation am Gotthard, der vorerst tagsüber befahrbar ist.",
-          "date": "2026-10-28T17:45:24.471Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-06T07:52:55.870Z"
+      "updatedAt": "2026-11-06T08:18:18.749Z"
     },
     "fr": {
       "canton": "UR",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Andermatt, plan de quartier pour le taureau Max l'Uristier",
+          "url": "/fr/articles-uri/andermatt-plan-taureau-bois/",
+          "excerpt": "Le plan Nätschen West est en consultation jusqu'au 7 décembre : Max l'Uristier mesure 36 mètres de long et 20 de haut.",
+          "date": "2026-11-06T08:13:38.091Z"
+        },
+        {
           "title": "Canton d’Uri : 3.934 élèves et 224 sections en 2025/2026",
           "url": "/fr/articles-uri/volksschule-uri-inscriptions-2025-2026/",
           "excerpt": "Le rapport sur la Volksschule du canton d’Uri pour l’année scolaire 2025/2026 décrit une augmentation limitée des inscriptions et une expansion des sections.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-uri/incendie-tunnel-fluelen/",
           "excerpt": "L’incendie d’un véhicule a entraîné la fermeture du tunnel de Flüelen pendant environ une heure et demie jeudi 29 octobre.",
           "date": "2026-10-31T10:27:30.338Z"
-        },
-        {
-          "title": "Susten et Furka fermés, Saint-Gothard praticable de jour",
-          "url": "/fr/articles-uri/fermeture-hivernale-susten-furka/",
-          "excerpt": "À partir du mercredi 28 octobre, les cols de la Furka et du Susten sont fermés pour l'hiver ; le col du Saint-Gothard reste praticable de jour.",
-          "date": "2026-10-28T17:45:24.471Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-06T07:52:55.870Z"
+      "updatedAt": "2026-11-06T08:18:18.749Z"
     }
   }
 }
