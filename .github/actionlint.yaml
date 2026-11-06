@@ -7,6 +7,14 @@
 # actionlint v1.7.12 does not model that schema field yet. Ignore only that
 # diagnostic on the three workflows that use the documented queue policy.
 paths:
+  # I gruppi crawler generati materializzano gli script child con `printf` e
+  # stringhe single-quoted: le espansioni devono avvenire quando gira il child,
+  # non nel launcher che scrive il file. SC2016/SC1003 descrivono quindi proprio
+  # il quoting intenzionale; ogni altro diagnostico ShellCheck resta attivo.
+  .github/workflows/crawler-group-*.yml:
+    ignore:
+      - 'shellcheck reported issue in this script: SC2016:'
+      - 'shellcheck reported issue in this script: SC1003:'
   .github/workflows/translate-queue-recovery-watchdog.yml:
     ignore:
       - 'unexpected key "queue"'
