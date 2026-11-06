@@ -9,6 +9,18 @@ MATERIALIZED_RESOLVE_PATHS=(
   scripts/ci/fast-publish-section-preflight.sh
   scripts/ci/fetch-push-base-if-missing.sh
 )
+restore_materialized_resolve_paths() {
+  local runtime_path=''
+  for runtime_path in "${MATERIALIZED_RESOLVE_PATHS[@]}"; do
+    if git cat-file -e "HEAD:$runtime_path" 2>/dev/null; then
+      git restore --source=HEAD --worktree -- "$runtime_path" || return 1
+    elif [ -e "$runtime_path" ] || [ -L "$runtime_path" ]; then
+      # Un helper introdotto dopo la revisione pinnata e' un file non
+      # tracciato in quella HEAD: toglie solo il target materializzato noto.
+      rm -f -- "$runtime_path" || return 1
+    fi
+  done
+}
 # Un replay richiesto come produttivo non può diventare un dry-run
 # silenzioso: il nome della run riflette l'input, quindi falliamo
 # prima di risolvere o redispatchare se il kill switch lo disarma.
@@ -244,7 +256,7 @@ if [ -n "$pinned_source" ]; then
     # cambiato, Git rifiuta il checkout per non sovrascrivere la modifica
     # locale. Sono file di runtime, non output del corpus: riportali prima ai
     # byte tracciati della revisione pinnata, poi riallinea l'intero checkout.
-    if ! git restore --source=HEAD --worktree -- "${MATERIALIZED_RESOLVE_PATHS[@]}"; then
+    if ! restore_materialized_resolve_paths; then
       echo '::error::impossibile ripristinare gli helper materializzati prima del replan stale'
       exit 1
     fi

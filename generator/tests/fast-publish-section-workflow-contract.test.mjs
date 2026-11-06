@@ -1,6 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 
 const workflow = readFileSync(
   new URL('../../.github/workflows/fast-publish-section.yml', import.meta.url),
@@ -139,11 +142,55 @@ test('il replan stale ripristina tutti gli helper materializzati prima di cambia
   const restoredTargets = declaredBlock.trim().split(/\s+/u).filter(Boolean).sort();
 
   assert.deepEqual(restoredTargets, materializedTargets);
-  const restore = resolver.indexOf('git restore --source=HEAD --worktree -- "${MATERIALIZED_RESOLVE_PATHS[@]}"');
+  const restore = resolver.indexOf('if ! restore_materialized_resolve_paths; then');
   const checkout = resolver.indexOf('git checkout --detach "$current_main"');
   assert.ok(restore >= 0, 'manca il ripristino fail-closed degli helper di runtime');
   assert.ok(checkout > restore, 'il checkout della HEAD corrente deve seguire il ripristino degli helper');
+  assert.match(resolver, /git cat-file -e "HEAD:\$runtime_path"/u);
+  assert.match(resolver, /git restore --source=HEAD --worktree -- "\$runtime_path"/u);
+  assert.match(resolver, /elif \[ -e "\$runtime_path" \] \|\| \[ -L "\$runtime_path" \]; then[\s\S]*rm -f -- "\$runtime_path"/u);
   assert.match(resolver, /impossibile ripristinare gli helper materializzati prima del replan stale/u);
+});
+
+test('il restore stale ripristina i target tracciati e rimuove quelli assenti dalla vecchia HEAD', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'fast-section-stale-restore-'));
+  const declared = resolver.match(/MATERIALIZED_RESOLVE_PATHS=\(\n[\s\S]*?\n\)/u)?.[0];
+  const restoreFunction = resolver.match(/restore_materialized_resolve_paths\(\) \{\n[\s\S]*?\n\}/u)?.[0];
+  assert.ok(declared && restoreFunction, 'contratto restore non estraibile');
+  const tracked = [
+    'scripts/ci/fast-publish-section-resolve.sh',
+    'scripts/ci/read-main-head.sh',
+    'scripts/ci/fast-publish-section-edge-candidate.sh',
+    'scripts/ci/fetch-push-base-if-missing.sh',
+  ];
+  const absent = 'scripts/ci/fast-publish-section-preflight.sh';
+  const git = (...args) => execFileSync('git', args, { cwd: root, stdio: 'pipe' });
+
+  try {
+    git('init', '--quiet');
+    git('config', 'user.name', 'Test');
+    git('config', 'user.email', 'test@example.invalid');
+    for (const target of tracked) {
+      mkdirSync(path.dirname(path.join(root, target)), { recursive: true });
+      writeFileSync(path.join(root, target), `tracked:${target}\n`);
+    }
+    git('add', '.');
+    git('commit', '--quiet', '-m', 'old pinned head');
+
+    for (const target of tracked) writeFileSync(path.join(root, target), `runtime:${target}\n`);
+    symlinkSync('/runtime/only/preflight.sh', path.join(root, absent));
+    execFileSync('bash', ['-c', `${declared}\n${restoreFunction}\nrestore_materialized_resolve_paths`], {
+      cwd: root,
+      stdio: 'pipe',
+    });
+
+    for (const target of tracked) {
+      assert.equal(readFileSync(path.join(root, target), 'utf8'), `tracked:${target}\n`, target);
+    }
+    assert.equal(existsSync(path.join(root, absent)), false, 'il target runtime assente dalla HEAD deve sparire');
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('fast-publish-section conserva la guardia di freschezza anche con checkout pinned precedente', () => {
