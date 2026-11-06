@@ -38,6 +38,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import { runInNewContext } from 'node:vm';
+import { isArrayBuffer as isArrayBufferValue } from 'node:util/types';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -196,7 +198,10 @@ function loadBodyReader() {
   const names = ['awaitEventImageCleanup', 'cancelEventImageResponse', 'releaseEventImageReader', 'readEventImageBody'];
   const source = [constant[0], ...names.map((name) => `${body(name)}\n}`)].join('\n\n');
   // eslint-disable-next-line no-new-func
-  return new Function('Buffer', `${source}\nreturn { readEventImageBody };`)(Buffer);
+  return new Function('Buffer', 'isArrayBufferValue', `${source}\nreturn { readEventImageBody };`)(
+    Buffer,
+    isArrayBufferValue,
+  );
 }
 
 function fakeResponse(reader, headers = {}) {
@@ -292,11 +297,13 @@ test('FU-004: conserva una copia di ogni chunk quando il reader riusa il buffer'
 // Sito valerielinc-ops/frontaliere-si-o-no, issue 10283 (FU-2026-09-29-004):
 // un body polyfill puo' restituire l'ArrayBuffer nudo. Su quello
 // `Buffer.from(value)` e' una vista sulla memoria del produttore e, con la
-// lunghezza dichiarata, `buffer.set(value, n)` non copiava niente.
+// lunghezza dichiarata, `buffer.set(value, n)` non copiava niente. Il reader
+// puo' anche restituire un buffer da un'altra realm: `instanceof ArrayBuffer`
+// non lo riconosce, mentre il predicate del runtime si'.
 for (const [label, headers] of [['chunked', {}], ['lunghezza dichiarata', { 'content-length': '4' }]]) {
   test(`FU-004: copia un ArrayBuffer nudo riusato dal reader (${label})`, async () => {
     const { readEventImageBody } = loadBodyReader();
-    const shared = new ArrayBuffer(2);
+    const shared = runInNewContext('new ArrayBuffer(2)');
     let read = 0;
     const reader = {
       read: async () => {
