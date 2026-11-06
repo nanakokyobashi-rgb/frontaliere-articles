@@ -1089,6 +1089,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-niederwil-aumento-imposta-2027': {
+    title: 'Niederwil propone aliquota comunale al 107% nel 2027',
+    description: 'Il Comune di Niederwil propone di alzare lo Steuerfuss dal 103% al 107% nel 2027. Il deficit di bilancio scenderebbe da CHF 401\'200 a CHF 151\'200.',
+    keywords: 'frontalieri, ticino, svizzera, italia, niederwil, propone, aliquota, comunale',
+    ogTitle: 'Niederwil, proposta di aliquota al 107% nel 2027',
+    ogDescription: 'Il Gemeinderat propone alla prossima assemblea il passaggio dal 103% al 107%. Nel budget 2027, il deficit scenderebbe da CHF 401\'200 a CHF 151\'200; dopo il prelievo dalla riserva di rivalutazione, l\'eccedenza è CHF 33\'700 per il Gemeindehaus.',
+    canonicalPath: '/articoli-argovia/niederwil-aumento-imposta-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Niederwil propone aliquota comunale al 107% nel 2027",
+      "description": "Il Comune di Niederwil propone di alzare lo Steuerfuss dal 103% al 107% nel 2027. Il deficit di bilancio scenderebbe da CHF 401'200 a CHF 151'200.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-niederwil-aumento-imposta-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-06T12:02:37+00:00",
+      "dateModified": "2026-11-06T12:02:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/niederwil-aumento-imposta-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

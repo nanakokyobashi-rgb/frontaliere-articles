@@ -87,6 +87,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.aarau-rinnovo-tigli-zollrain.title': 'Aarau remplacera les tilleuls restants au Zollrain',
     'blog.article.aarau-rinnovo-tigli-zollrain.excerpt': 'Aarau remplacera les tilleuls restants au Zollrain et rénovera l’espace vert.',
     'blog.article.aarau-rinnovo-tigli-zollrain.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.niederwil-aumento-imposta-2027.title': 'Niederwil propose un taux communal de 107 % en 2027',
+    'blog.article.niederwil-aumento-imposta-2027.excerpt': 'Niederwil propose le passage de 103 % à 107 % ; le déficit du budget 2027 passerait de CHF 401\'200 à CHF 151\'200.',
+    'blog.article.niederwil-aumento-imposta-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAgFr;

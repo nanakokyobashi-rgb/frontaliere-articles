@@ -87,6 +87,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.aarau-rinnovo-tigli-zollrain.title': 'Aarau will replace the remaining lime trees at Zollrain',
     'blog.article.aarau-rinnovo-tigli-zollrain.excerpt': 'Aarau will replace the remaining linden trees at Zollrain and renovate the green space.',
     'blog.article.aarau-rinnovo-tigli-zollrain.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.niederwil-aumento-imposta-2027.title': 'Niederwil proposes a municipal tax rate of 107% in 2027',
+    'blog.article.niederwil-aumento-imposta-2027.excerpt': 'Niederwil proposes increasing it from 103% to 107%; the 2027 budget deficit would decrease from CHF 401\'200 to CHF 151\'200.',
+    'blog.article.niederwil-aumento-imposta-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAgEn;

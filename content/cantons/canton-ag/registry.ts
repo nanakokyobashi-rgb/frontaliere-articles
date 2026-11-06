@@ -315,4 +315,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'niederwil-aumento-imposta-2027',
+ category: 'fiscale',
+ date: '2026-11-06T12:02:37.265Z',
+ image: '/images/blog/article-niederwil-aumento-imposta-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
