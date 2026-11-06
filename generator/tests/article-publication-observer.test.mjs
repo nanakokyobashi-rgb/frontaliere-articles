@@ -700,6 +700,53 @@ test('un ritardo stale già osservato ridispatcha la pagina leggibile al fast pu
   }
 });
 
+test('un retry stale sovrapposto al repair immagine non muta la riga immagine', async () => {
+  const rootDir = observerRoot();
+  fs.appendFileSync(
+    path.join(rootDir, 'content/blog-articles-data.ts'),
+    "\n{ id: 'lagging', updatedAt: '2026-10-07', date: '2026-09-01', image: '/images/blog/lagging.webp' },\n",
+  );
+  fs.appendFileSync(path.join(rootDir, 'content/routerBlogData.ts'), "\n'lagging': { it: 'lagging' },\n");
+  const github = issueClient({
+    issue: {
+      number: 2448,
+      body: renderDegradationLedger([{
+        section: 'frontaliere',
+        articleId: 'lagging',
+        url: 'https://frontaliereticino.ch/articoli-frontaliere/lagging/',
+        registryImage: '/images/blog/lagging.webp',
+        firstSeenAt: '2026-10-01T00:00:00.000Z',
+        attempts: 3,
+        status: 'exhausted',
+      }]),
+    },
+  });
+  const log = `commit ${'a'.repeat(40)} 1791321600\ncontent/blog-body/it/lagging.ts\n`;
+  try {
+    const result = await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => log,
+      githubClient: github.client,
+      minIntervalMs: 0,
+      fetchImpl: async () => ({
+        ok: true,
+        status: 200,
+        text: async () => ownPage('/images/blog/lagging.webp').replace('2026-09-02', '2026-10-06'),
+      }),
+    });
+    assert.deepEqual(
+      github.calls.filter((call) => call.type === 'dispatch').map((call) => call.args),
+      [{ section: 'frontaliere', ids: ['lagging'], articleOnly: true, issueNumber: 2448 }],
+    );
+    assert.deepEqual(result.ledger.map((item) => [item.articleId, item.status, item.attempts, item.registryImage]), [
+      ['lagging', 'exhausted', 3, '/images/blog/lagging.webp'],
+    ]);
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
 test('i retry stale restano article-only mentre i repair immagine conservano gli aggregati', async () => {
   const rootDir = observerRoot();
   fs.appendFileSync(

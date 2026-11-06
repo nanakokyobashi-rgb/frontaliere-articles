@@ -915,6 +915,27 @@ function isLaggingLedgerItem(item) {
   return item?.registryImage === null && Boolean(item?.url);
 }
 
+function markPublicationRepairDispatched(ledger, group, result) {
+  const groupKeys = new Set(group.ledgerItems.map((item) => ledgerKey(item)));
+  const dispatchable = ledger.filter((item) => (
+    groupKeys.has(ledgerKey(item))
+      && (group.articleOnly ? isLaggingLedgerItem(item) : !isLaggingLedgerItem(item))
+  ));
+  const marked = markDispatched(
+    dispatchable,
+    dispatchable.map((item) => ({
+      key: ledgerKey(item),
+      runId: result?.runId ?? null,
+      dispatchedAt: result?.dispatchedAt,
+    })),
+  );
+  const markedByKey = new Map(marked.map((item) => [ledgerKey(item), item]));
+  // `ledgerKey` intentionally identifies the article, so scope the rows by
+  // repair kind before applying a dispatch. An article-only retry must not
+  // borrow the run/status of an overlapping image repair row.
+  return ledger.map((item) => markedByKey.get(ledgerKey(item)) ?? item);
+}
+
 async function persistLedger(issue, items, github) {
   const body = upsertDegradationLedger(issue.body || '', items);
   if (body !== issue.body) {
@@ -1118,11 +1139,7 @@ export async function runObserver({
         articleOnly: group.articleOnly,
         issueNumber: issue.number,
       });
-      ledger = markDispatched(ledger, group.ledgerItems.map((item) => ({
-        key: ledgerKey(item),
-        runId: result?.runId ?? null,
-        dispatchedAt: result?.dispatchedAt,
-      })));
+      ledger = markPublicationRepairDispatched(ledger, group, result);
       dispatched.push({ section: group.section, ids: group.ids, runId: result?.runId ?? null });
       await persistLedger(issue, ledger, github);
     }
