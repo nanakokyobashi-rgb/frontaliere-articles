@@ -532,7 +532,6 @@ jobs:
               -f ref=main \
               -f "inputs[article_id]=$id" \
               -f "inputs[section]=$section" \
-              -f 'inputs[article_only]=true' \
               -f "inputs[dry_run]=false"; then
               echo "::warning::dispatch fallito per $section/$id — la conterà il prossimo giro"
               printf '%s\t%s\t%s\n' "$id" "$section" "lost" >> "$results"

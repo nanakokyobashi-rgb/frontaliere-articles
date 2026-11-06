@@ -97,7 +97,7 @@ test('i repair di pagina usano il percorso article-only senza rilassare i gate',
   assert.match(publisher, /includeAggregatePages: !args\.articleOnly/u);
   assert.match(pipeline, /const aggregatePagesAllowed = includeAggregatePages && aggregateVerdict\.allowed;/u);
   assert.match(observer, /-f', 'article_only=true'/u);
-  assert.match(observer, /DEFAULT_LAG_REPAIR_CAP = 25/u);
+  assert.match(observer, /lagRepairCap = repairCap/u);
 });
 
 test('la matrix ha un solo job completo per sezione/shard', () => {

@@ -12,8 +12,8 @@
  * this is a courtesy check, not a crawler. Degraded articles are kept in the
  * observer issue body until a live read is sane; at most three proven image
  * repairs and a bounded set of stale-but-readable page retries are dispatched
- * per run. Stale page repairs use the article-only publisher path, so their cap
- * is independent from the image-repair cap.
+ * per run. Stale page repairs use the article-only publisher path and share the
+ * same bounded fan-out.
  * Unpreparable targets with publication metadata are kept as durable coverage
  * blockers in the same stable issue until they can be observed. A body-only
  * legacy residue has no publication intent and is not an observer target.
@@ -63,10 +63,6 @@ export const DEFAULT_LEDGER_RETENTION_DAYS = 90;
 export const DEFAULT_TERMINAL_RETENTION_DAYS = 14;
 export const SITE_BASE_URL = 'https://frontaliereticino.ch';
 export const DEFAULT_REPAIR_WORKFLOW = 'fast-publish-article.yml';
-// Article-only retries do not rebuild the archive or landing surfaces. A
-// larger bounded cap lets a corpus-sized lag converge in weeks rather than
-// leaving the observer's three-item image cap as a months-long queue.
-export const DEFAULT_LAG_REPAIR_CAP = 25;
 // The apex answers 403 to the default User-Agent of Node's fetch (measured on
 // 2026-10-07): without a name of its own the observer would report every page
 // as lagging with "HTTP 403".
@@ -897,6 +893,8 @@ function groupPublicationRepairs(items = []) {
       }
       imageIds.add(articleId);
       if (item.repairKind === 'image') group.ledgerItems.push(item);
+    } else if (item.repairKind === 'lagging') {
+      group.ledgerItems.push(item);
     }
   }
   return [...groups.values()]
@@ -908,6 +906,13 @@ function groupPublicationRepairs(items = []) {
         : group;
     })
     .filter((group) => group.ids.length > 0);
+}
+
+function isLaggingLedgerItem(item) {
+  // Image degradation rows always carry the registry image. A null image plus
+  // a live article URL is therefore a durable marker for a readable stale-page
+  // retry; legacy orphan rows have neither and keep their old retirement path.
+  return item?.registryImage === null && Boolean(item?.url);
 }
 
 async function persistLedger(issue, items, github) {
@@ -943,7 +948,7 @@ export async function runObserver({
   fetchDeclaredImageImpl = fetchDeclaredImage,
   githubClient = null,
   repairCap = DEFAULT_REPAIR_CAP,
-  lagRepairCap = DEFAULT_LAG_REPAIR_CAP,
+  lagRepairCap = repairCap,
   maxPages = DEFAULT_MAX_PAGES,
   minIntervalMs = DEFAULT_MIN_INTERVAL_MS,
   fetchTimeoutMs = DEFAULT_FETCH_TIMEOUT_MS,
@@ -1015,8 +1020,6 @@ export async function runObserver({
     retentionDays: DEFAULT_LEDGER_RETENTION_DAYS,
     terminalRetentionDays: DEFAULT_TERMINAL_RETENTION_DAYS,
   });
-  const healthyKeys = report.checked.filter((entry) => entry.target.durable && saneLiveImage(entry)).map((entry) => ledgerKey(entry.target));
-  ledger = removeHealthyItems(ledger, healthyKeys);
   ledger = mergeDegradedItems(
     ledger,
     report.degraded.map((entry) => ({
@@ -1027,6 +1030,42 @@ export async function runObserver({
       firstSeenAt: new Date(entry.target.changedAt || nowMs).toISOString(),
     })),
     new Date(nowMs).toISOString(),
+  );
+  const readableLagging = report.lagging.filter((entry) => entry.page?.status === 200);
+  const laggingKeys = new Set(readableLagging.map((entry) => ledgerKey(entry.target)));
+  const checkedKeys = new Set(report.checked.map((entry) => ledgerKey(entry.target)));
+  ledger = mergeDegradedItems(
+    ledger,
+    readableLagging.map((entry) => ({
+      section: entry.target.section,
+      articleId: entry.target.articleId,
+      url: entry.target.url,
+      // A null registry image distinguishes this retry marker from a durable
+      // image repair while keeping it out of releasedArticleFallbacks().
+      registryImage: null,
+      firstSeenAt: new Date(entry.target.changedAt || nowMs).toISOString(),
+      lastOutcome: 'lagging-observed',
+    })),
+    new Date(nowMs).toISOString(),
+  );
+
+  // A stale marker is only useful while the page is still stale. Keep image
+  // rows independent, but drop a resolved stale-only marker before selecting
+  // the next dispatch set.
+  ledger = ledger.filter((item) => (
+    !isLaggingLedgerItem(item)
+      || laggingKeys.has(ledgerKey(item))
+      || !checkedKeys.has(ledgerKey(item))
+  ));
+
+  const healthyKeys = new Set(
+    report.checked
+      .filter((entry) => entry.target.durable && saneLiveImage(entry))
+      .map((entry) => ledgerKey(entry.target)),
+  );
+  ledger = removeHealthyItems(
+    ledger,
+    [...healthyKeys].filter((key) => !laggingKeys.has(key) && ledger.some((item) => ledgerKey(item) === key && !isLaggingLedgerItem(item))),
   );
 
   // Persist reconciliation and this scan's ledger changes after the early
@@ -1055,11 +1094,15 @@ export async function runObserver({
   });
   // A lagging page is already a live, actionable publication failure. Retry
   // only readable stale pages: HTTP failures describe an unavailable origin,
-  // not evidence that another publish would repair the article. Keep this
-  // bounded independently from the image-repair cap so a large stale window
-  // cannot starve the durable image ledger (or vice versa).
-  const laggingRepairs = report.lagging
-    .filter((entry) => entry.page?.status === 200)
+  // not evidence that another publish would repair the article. The ledger is
+  // the identity fence: an in-flight retry, or one whose terminal outcome was
+  // just reconciled in this scan, cannot be dispatched again immediately.
+  const activeDispatchKeys = new Set([
+    ...reconciled.handledKeys,
+    ...ledger.filter((item) => item.status === 'in-flight').map((item) => ledgerKey(item)),
+  ]);
+  const laggingRepairs = readableLagging
+    .filter((entry) => !activeDispatchKeys.has(ledgerKey(entry.target)))
     .slice(0, effectiveLagRepairCap)
     .map((entry) => ({ ...entry.target, repairKind: 'lagging' }));
   const repairItems = [

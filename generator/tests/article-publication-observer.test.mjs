@@ -4,7 +4,6 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {
-  DEFAULT_LAG_REPAIR_CAP,
   OBSERVER_USER_AGENT,
   buildObserverTargets,
   parseCoverageLedger,
@@ -28,10 +27,6 @@ const currentDate = '2026-10-06T00:00:00Z';
 // Mezzogiorno del giorno prima: senza dubbio precedente al 2026-10-05 in ogni fuso.
 const staleDate = '2026-10-04T12:00:00Z';
 const ownImage = '/images/blog/article.webp';
-
-test('il cap dei retry stale è separato da quello del ledger immagini', () => {
-  assert.equal(DEFAULT_LAG_REPAIR_CAP, 25);
-});
 
 test('il registry observer legge solo i campi top-level dentro una voce bilanciata', () => {
   const source = `const ARTICLES = [{
@@ -682,6 +677,24 @@ test('un ritardo stale già osservato ridispatcha la pagina leggibile al fast pu
       github.calls.filter((call) => call.type === 'dispatch').map((call) => call.args),
       [{ section: 'frontaliere', ids: ['lagging'], articleOnly: true, issueNumber: 9001 }],
     );
+    assert.deepEqual(result.ledger.map((item) => [item.articleId, item.status, item.registryImage]), [
+      ['lagging', 'in-flight', null],
+    ]);
+
+    const second = await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:10:00Z'),
+      gitLogImpl: () => log,
+      githubClient: github.client,
+      minIntervalMs: 0,
+      fetchImpl: async () => ({
+        ok: true,
+        status: 200,
+        text: async () => ownPage('/images/blog/lagging.webp').replace('2026-09-02', '2026-10-06'),
+      }),
+    });
+    assert.deepEqual(second.dispatched, []);
+    assert.equal(github.calls.filter((call) => call.type === 'dispatch').length, 1);
   } finally {
     fs.rmSync(rootDir, { recursive: true, force: true });
   }
