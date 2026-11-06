@@ -59,34 +59,38 @@ export function repairEventsDigestLocalizedToponyms(data) {
   if (!data || typeof data !== 'object' || Array.isArray(data)) return data;
 
   const sourceProfileFor = createLocalizedToponymSourceProfileCache();
-  const repaired = { ...data };
-  if (data.content && typeof data.content === 'object' && !Array.isArray(data.content)
-      && Object.hasOwn(data.content, 'it')) {
-    repaired.content = { ...data.content };
-    for (const locale of LOCALIZED_TOPONYM_LOCALES) {
-      if (locale === 'it' || !Object.hasOwn(repaired.content, locale)) continue;
-      repaired.content[locale] = repairParallelLocaleValue(
-        data.content.it,
-        data.content[locale],
-        locale,
-        sourceProfileFor,
-      );
+  try {
+    const repaired = { ...data };
+    if (data.content && typeof data.content === 'object' && !Array.isArray(data.content)
+        && Object.hasOwn(data.content, 'it')) {
+      repaired.content = { ...data.content };
+      for (const locale of LOCALIZED_TOPONYM_LOCALES) {
+        if (locale === 'it' || !Object.hasOwn(repaired.content, locale)) continue;
+        repaired.content[locale] = repairParallelLocaleValue(
+          data.content.it,
+          data.content[locale],
+          locale,
+          sourceProfileFor,
+        );
+      }
     }
-  }
 
-  if (data.imageAlt && typeof data.imageAlt === 'object' && !Array.isArray(data.imageAlt)
-      && typeof data.imageAlt.it === 'string') {
-    repaired.imageAlt = { ...data.imageAlt };
-    for (const locale of LOCALIZED_TOPONYM_LOCALES) {
-      if (locale === 'it' || typeof repaired.imageAlt[locale] !== 'string') continue;
-      repaired.imageAlt[locale] = replaceLocalizedToponymMismatches({
-        sourceText: data.imageAlt.it,
-        targetText: repaired.imageAlt[locale],
-        locale,
-        sourceProfile: sourceProfileFor(data.imageAlt.it),
-      }).text;
+    if (data.imageAlt && typeof data.imageAlt === 'object' && !Array.isArray(data.imageAlt)
+        && typeof data.imageAlt.it === 'string') {
+      repaired.imageAlt = { ...data.imageAlt };
+      for (const locale of LOCALIZED_TOPONYM_LOCALES) {
+        if (locale === 'it' || typeof repaired.imageAlt[locale] !== 'string') continue;
+        repaired.imageAlt[locale] = replaceLocalizedToponymMismatches({
+          sourceText: data.imageAlt.it,
+          targetText: repaired.imageAlt[locale],
+          locale,
+          sourceProfile: sourceProfileFor(data.imageAlt.it),
+        }).text;
+      }
     }
-  }
 
-  return repaired;
+    return repaired;
+  } finally {
+    sourceProfileFor.clear();
+  }
 }

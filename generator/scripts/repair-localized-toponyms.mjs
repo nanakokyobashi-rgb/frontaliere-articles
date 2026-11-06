@@ -205,6 +205,7 @@ try {
   }
 } finally {
   clearLocalizedToponymSourceProfiles();
+  sourceProfileFor.clear();
 }
 
 const rewrittenSources = new Map();

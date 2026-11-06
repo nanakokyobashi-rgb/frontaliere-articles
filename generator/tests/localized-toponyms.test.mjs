@@ -314,14 +314,31 @@ test('la cache dei profili toponimici è bounded e pulibile', () => {
   assert.equal(cache.size, 0);
   assert.equal(otherCache.size, 0);
   assert.notStrictEqual(cache('terza sorgente'), retainedProfile, 'clear deve invalidare i profili retenuti');
+  cache.clear();
+  otherCache.clear();
+  cache.clear();
   clearLocalizedToponymSourceProfiles();
+});
+
+test('il gate articolo rilascia la cache one-shot del profilo', () => {
+  clearLocalizedToponymSourceProfiles();
+  const article = {
+    content: {
+      it: { title: 'Lucerna' },
+      en: { title: 'Lucerna' },
+    },
+  };
+  assert.equal(findArticleLocalizedToponymMismatches(article).length, 1);
+  assert.equal(clearLocalizedToponymSourceProfiles(), 0);
 });
 
 test('il repair corpus pulisce la cache prima della riscrittura', () => {
   const source = readFileSync(path.join(ROOT, 'generator/scripts/repair-localized-toponyms.mjs'), 'utf8');
   const cleanup = source.indexOf('clearLocalizedToponymSourceProfiles();');
+  const clearSourceProfile = source.indexOf('sourceProfileFor.clear();');
   const rewrite = source.indexOf('const rewrittenSources = new Map();');
   assert.ok(cleanup >= 0 && cleanup < rewrite, 'la cache va pulita prima di preparare le scritture');
+  assert.ok(cleanup < clearSourceProfile && clearSourceProfile < rewrite, 'la cache del repair va deregistrata prima delle scritture');
   assert.match(source.slice(0, cleanup), /finally\s*\{/u);
 });
 
