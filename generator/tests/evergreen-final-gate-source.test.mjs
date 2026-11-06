@@ -91,7 +91,7 @@ const GATE_SRC = [
   cutFunction('runArticleFactualityGates'),
   cutFunctionIfPresent('factualityGateSourceText'),
   cutFunctionIfPresent('assertItalianArticlePassesFactualityGates'),
-  cutFunction('collectPublishedTextValues'),
+  cutFunction('collectPublishedTextValuesIterative'),
   cutFunction('repairEditorialClaimsInObject'),
   cutFunction('repairArticleEditorialClaims'),
   cutFunction('assertArticlePassesFactualityGates'),
