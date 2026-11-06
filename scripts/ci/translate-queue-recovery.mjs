@@ -210,6 +210,63 @@ export async function decodeChunkedJsonResponse(reader, { maxBytes = MAX_RESPONS
   }
 }
 
+function declaredResponseLength(response) {
+  const raw = response?.headers?.get?.('content-length');
+  if (raw === null || raw === undefined || raw === '') return null;
+  const text = String(raw);
+  if (!/^\d+$/.test(text)) throw new ObservationFailure('api_incomplete');
+  const length = Number(text);
+  if (!Number.isSafeInteger(length)) throw new ObservationFailure('api_incomplete');
+  return length;
+}
+
+/** Read JSON only when the body is stream-bounded or its fallback size is declared. */
+export async function readBoundedJsonResponse(
+  response,
+  { maxBytes = MAX_RESPONSE_BYTES } = {},
+) {
+  if (!Number.isSafeInteger(maxBytes) || maxBytes < 0) {
+    throw new TypeError('invalid_response_limit');
+  }
+  const declaredLength = declaredResponseLength(response);
+  if (declaredLength !== null && declaredLength > maxBytes) {
+    throw new ObservationFailure('api_response_too_large');
+  }
+
+  try {
+    if (typeof response?.body?.getReader === 'function') {
+      return await decodeChunkedJsonResponse(response.body.getReader(), { maxBytes });
+    }
+  } catch (error) {
+    if (error instanceof ObservationFailure) throw error;
+    throw new ObservationFailure('api_incomplete');
+  }
+
+  // A text-only response has no safe way to enforce a byte limit before the
+  // runtime materializes it. Reject it unless the transport declared a bounded
+  // body; the normal Fetch response uses the stream path above.
+  if (declaredLength === null) throw new ObservationFailure('api_incomplete');
+
+  let text;
+  try {
+    text = await response.text();
+  } catch (error) {
+    if (error?.code === 'ERR_STRING_TOO_LONG') {
+      throw new ObservationFailure('api_response_too_large');
+    }
+    throw new ObservationFailure('api_incomplete');
+  }
+  if (typeof text !== 'string') throw new ObservationFailure('api_incomplete');
+  if (Buffer.byteLength(text, 'utf8') > maxBytes) {
+    throw new ObservationFailure('api_response_too_large');
+  }
+  try {
+    return JSON.parse(text);
+  } catch {
+    throw new ObservationFailure('api_invalid_json');
+  }
+}
+
 function canonicalJson(value) {
   if (value === null || typeof value !== 'object') return JSON.stringify(value);
   if (Array.isArray(value)) return `[${value.map(canonicalJson).join(',')}]`;
@@ -360,30 +417,7 @@ export function createReadOnlyGithubClient({ fetchImpl, token }) {
       }
       if (!response?.ok) throw new ObservationFailure('api_http_error');
 
-      const declaredLength = Number(response?.headers?.get?.('content-length'));
-      if (Number.isFinite(declaredLength) && declaredLength > MAX_RESPONSE_BYTES) {
-        throw new ObservationFailure('api_response_too_large');
-      }
-      let text = '';
-      try {
-        if (typeof response?.body?.getReader === 'function') {
-          const reader = response.body.getReader();
-          return await decodeChunkedJsonResponse(reader);
-        } else {
-          text = await response.text();
-          if (Buffer.byteLength(text, 'utf8') > MAX_RESPONSE_BYTES) {
-            throw new ObservationFailure('api_response_too_large');
-          }
-        }
-      } catch (error) {
-        if (error instanceof ObservationFailure) throw error;
-        throw new ObservationFailure('api_incomplete');
-      }
-      try {
-        return JSON.parse(text);
-      } catch {
-        throw new ObservationFailure('api_invalid_json');
-      }
+      return await readBoundedJsonResponse(response);
     },
   };
 }

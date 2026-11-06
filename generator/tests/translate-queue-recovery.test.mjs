@@ -27,6 +27,7 @@ import {
   compareRunIdsDeterministically,
   createReadOnlyGithubClient,
   decodeChunkedJsonResponse,
+  readBoundedJsonResponse,
   observeTranslateQueue,
 } from '../../scripts/ci/translate-queue-recovery.mjs';
 
@@ -41,12 +42,16 @@ const NOW = Date.parse('2026-09-01T17:27:00.000Z');
 const TOKEN = 'test-token-must-never-be-serialized';
 
 function response(status, body, headers = {}) {
-  const normalized = new Map(Object.entries(headers).map(([key, value]) => [key.toLowerCase(), value]));
+  const text = typeof body === 'string' ? body : JSON.stringify(body);
+  const normalized = new Map(Object.entries({
+    'content-length': String(Buffer.byteLength(text ?? '', 'utf8')),
+    ...headers,
+  }).map(([key, value]) => [key.toLowerCase(), value]));
   return {
     headers: { get: (key) => normalized.get(String(key).toLowerCase()) ?? null },
     ok: status >= 200 && status < 300,
     status,
-    async text() { return typeof body === 'string' ? body : JSON.stringify(body); },
+    async text() { return text; },
   };
 }
 
@@ -191,6 +196,35 @@ test('il decoder JSON conserva UTF-8 spezzato fra chunk e fallisce chiuso su byt
       },
     }),
     /api_incomplete/,
+  );
+});
+
+test('un fallback senza stream e senza content-length non legge un body non bounded', async () => {
+  let textCalls = 0;
+  await assert.rejects(
+    readBoundedJsonResponse({
+      headers: { get: () => null },
+      async text() {
+        textCalls += 1;
+        return '{"unexpected":true}';
+      },
+    }),
+    (error) => error?.code === 'api_incomplete',
+  );
+  assert.equal(textCalls, 0);
+});
+
+test('un fallback che fallisce per stringa troppo lunga conserva la diagnosi bounded', async () => {
+  await assert.rejects(
+    readBoundedJsonResponse({
+      headers: { get: () => '1' },
+      async text() {
+        const error = new Error('body too large');
+        error.code = 'ERR_STRING_TOO_LONG';
+        throw error;
+      },
+    }),
+    (error) => error?.code === 'api_response_too_large',
   );
 });
 

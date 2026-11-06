@@ -12,6 +12,7 @@ import {
   RERUN_PRESERVATION_PROOF,
   TARGET_BRANCH,
   TARGET_REPOSITORY,
+  readBoundedJsonResponse,
   TARGET_WORKFLOW_BLOB_SHA,
   TARGET_WORKFLOW_ID,
   TARGET_WORKFLOW_PATH,
@@ -46,7 +47,6 @@ if (TARGET_ONLY_MAX_INSPECTION_GET_REQUESTS > MAX_PHASE_GET_REQUESTS) {
 }
 
 const API_ROOT = 'https://api.github.com';
-const MAX_RESPONSE_BYTES = 4 * 1024 * 1024;
 const RUN_ID_RE = /^[1-9][0-9]{0,19}$/;
 const SHA_RE = /^[a-f0-9]{40}$/;
 const SHA256_RE = /^[a-f0-9]{64}$/;
@@ -197,23 +197,14 @@ function requestSignal(deadlineAt, clock) {
 }
 
 async function readBoundedJson(response) {
-  const declaredLength = Number(response?.headers?.get?.('content-length'));
-  if (Number.isFinite(declaredLength) && declaredLength > MAX_RESPONSE_BYTES) {
-    throw new RecoveryFailure('api_response_too_large');
-  }
-  let text;
   try {
-    text = await response.text();
-  } catch {
-    throw new RecoveryFailure('api_incomplete');
-  }
-  if (Buffer.byteLength(text, 'utf8') > MAX_RESPONSE_BYTES) {
-    throw new RecoveryFailure('api_response_too_large');
-  }
-  try {
-    return JSON.parse(text);
-  } catch {
-    throw new RecoveryFailure('api_invalid_json');
+    return await readBoundedJsonResponse(response);
+  } catch (error) {
+    const code = new Set(['api_incomplete', 'api_invalid_json', 'api_response_too_large'])
+      .has(error?.code)
+      ? error.code
+      : 'api_incomplete';
+    throw new RecoveryFailure(code);
   }
 }
 
