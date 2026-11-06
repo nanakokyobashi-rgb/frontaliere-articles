@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1952370/salasso-alla-pompa-dopo-il-diesel-ora-tocchera-alla-benzina": {
-    "articleId": "salasso-alla-pompa-benzina",
-    "ts": "2026-09-25T01:29:16.672Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1952394/made-europe-switzerld-ministri-industria": {
     "articleId": "made-in-europe-svizzera",
     "ts": "2026-09-25T02:02:09.100Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4216212": {
     "articleId": "previdenza-lpp-tasso-2-percento",
     "ts": "2026-11-06T18:35:07.053Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4217367": {
+    "articleId": "riserva-elettrica-risparmio-cdf",
+    "ts": "2026-11-06T22:13:50.530Z",
     "keyForm": 2
   }
 }
