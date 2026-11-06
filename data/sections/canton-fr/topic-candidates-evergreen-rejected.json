@@ -23,6 +23,10 @@
     "canton-fr::https://www.freiburger-nachrichten.ch/story/302572/auf-die-13-ahv-verzichten-unm%c3%b6glich-und-alle-weiteren-fragen-zur-ersten-auszahlung": {
       "section": "canton-fr",
       "ts": 1793911873690
+    },
+    "canton-fr::https://www.frapp.ch/fr/articles/stories/cff-bacs-a-papier-supprimes-des-poubelles": {
+      "section": "canton-fr",
+      "ts": 1793964543322
     }
   }
 }
