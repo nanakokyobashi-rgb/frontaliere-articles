@@ -220,6 +220,12 @@ for (const scenario of [
     replayedEvergreen: '{"count":9}\n',
     expectedCategory: 'counter-not-reconcilable',
   },
+  {
+    name: 'counter decrement in upstream',
+    upstreamEvergreen: '{"count":9}\n',
+    replayedEvergreen: '{"count":11}\n',
+    expectedCategory: 'counter-not-reconcilable',
+  },
 ]) {
   test(`post-rebase reconcile fails closed on ${scenario.name} before writing any counter`, () => {
     const world = makeWorld(scenario);

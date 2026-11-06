@@ -110,6 +110,9 @@ export function mergeCounterDocuments({ base, upstream, replayed, field }) {
   } else {
     const b = parseCounterDoc(base, field, 'base');
     if (b.error) return { ok: false, reason: b.error };
+    if (up.value < b.value) {
+      return { ok: false, reason: `upstream ha decrementato '${field}' (${b.value} → ${up.value})` };
+    }
     const delta = mine.value - b.value;
     if (delta < 0) {
       return { ok: false, reason: `il commit rigiocato ha decrementato '${field}' (${b.value} → ${mine.value})` };
