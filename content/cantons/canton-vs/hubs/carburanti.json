@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "de11010eb5ed0d40dbfcad445343578580a55d52559087d83b4077586ad7253f",
+  "updatedAt": "2026-11-06T11:17:24.782Z",
+  "contentHash": "d1f482e319dbd9c5bff28e6a8cf5b54e7993ac86ec7d7c0688fd46b08cace048",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Stato del Vallese implementa piattaforma di intelligenza artificiale AVA",
+          "url": "/articoli-vallese/stato-vallese-intelligenza-artificiale/",
+          "excerpt": "AVA è accessibile al personale dello Stato del Vallese da giovedì; il costo operativo è di circa CHF 2 al mese per utente attivo.",
+          "date": "2026-11-06T11:13:23.591Z"
+        },
+        {
           "title": "Aumento tasso disoccupazione ottobre in Canton Vallese",
           "url": "/articoli-vallese/aumento-tasso-disoccupazione-ottobre/",
           "excerpt": "Alla fine di ottobre, 6'082 disoccupati risultavano iscritti presso gli Uffici regionali di collocamento del Vallese, 327 in più rispetto al mese precedente.",
@@ -94,12 +100,6 @@
           "url": "/articoli-vallese/val-de-bagnes-sostenibilita-2024/",
           "excerpt": "Dal 24 al 31 ottobre, 175 persone hanno partecipato alla Settimana della sostenibilità a Val de Bagnes.",
           "date": "2026-11-03T09:11:19.910Z"
-        },
-        {
-          "title": "Bains d'Ovronnaz: sursis concordatario fino al 31 marzo 2027",
-          "url": "/articoli-vallese/bains-ovronnaz-nuovo-sursis/",
-          "excerpt": "Il tribunale del distretto di Martigny ha concesso ai Bains d'Ovronnaz un nuovo sursis concordatario fino al 31 marzo 2027.",
-          "date": "2026-10-28T15:29:18.560Z"
         }
       ],
       "links": [
@@ -128,7 +128,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T11:17:24.782Z"
     },
     "en": {
       "canton": "VS",
@@ -187,6 +187,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "State of Valais implements the AVA artificial intelligence platform",
+          "url": "/en/valais-articles/valais-state-artificial-intelligence/",
+          "excerpt": "AVA has been accessible to staff of the State of Valais since Thursday; the operating cost is approximately CHF 2 per month per active user.",
+          "date": "2026-11-06T11:13:23.591Z"
+        },
+        {
           "title": "Increase in unemployment rate in October in the Canton of Valais",
           "url": "/en/valais-articles/increase-unemployment-rate-october/",
           "excerpt": "At the end of October, 6,082 unemployed people were registered with the Valais Regional Employment Offices, 327 more than in the previous month.",
@@ -209,12 +215,6 @@
           "url": "/en/valais-articles/val-de-bagnes-sustainability/",
           "excerpt": "From October 24 to 31, 175 people participated in Sustainability Week in Val de Bagnes.",
           "date": "2026-11-03T09:11:19.910Z"
-        },
-        {
-          "title": "Bains d'Ovronnaz: composition moratorium until March 31, 2027",
-          "url": "/en/valais-articles/bains-ovronnaz-new-sursis/",
-          "excerpt": "The Martigny district court has granted Bains d'Ovronnaz a new composition moratorium until March 31, 2027.",
-          "date": "2026-10-28T15:29:18.560Z"
         }
       ],
       "links": [
@@ -243,7 +243,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T11:17:24.782Z"
     },
     "de": {
       "canton": "VS",
@@ -302,6 +302,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Staat Wallis implementiert Plattform für künstliche Intelligenz AVA",
+          "url": "/de/wallis-artikel/staat-wallis-kunstliche-intelligenz/",
+          "excerpt": "AVA ist dem Personal des Staates Wallis seit Donnerstag zugänglich; die Betriebskosten betragen etwa CHF 2 pro Monat und aktivem Nutzer.",
+          "date": "2026-11-06T11:13:23.591Z"
+        },
+        {
           "title": "Im Oktober steigt die Arbeitslosenquote im Kanton Wallis",
           "url": "/de/wallis-artikel/tatsatz-arbeitslosigkeit-oktober/",
           "excerpt": "Ende Oktober waren 6.082 Arbeitslose bei den Regionalen Arbeitsämtern des Wallis registriert, 327 mehr als im Vormonat.",
@@ -324,12 +330,6 @@
           "url": "/de/wallis-artikel/val-de-bagnes-nachhaltigkeit/",
           "excerpt": "Vom 24. bis 31. Oktober nahmen 175 Personen an der Nachhaltigkeitswoche in Val de Bagnes teil.",
           "date": "2026-11-03T09:11:19.910Z"
-        },
-        {
-          "title": "Bains d'Ovronnaz: Nachlassstundung bis zum 31. März 2027",
-          "url": "/de/wallis-artikel/bains-ovronnaz-neuer-sursis/",
-          "excerpt": "Das Bezirksgericht Martigny hat den Bains d'Ovronnaz eine neue Nachlassstundung bis zum 31. März 2027 gewährt.",
-          "date": "2026-10-28T15:29:18.560Z"
         }
       ],
       "links": [
@@ -354,7 +354,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T11:17:24.782Z"
     },
     "fr": {
       "canton": "VS",
@@ -413,6 +413,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "L'État du Valais met en œuvre la plateforme d'intelligence artificielle AVA",
+          "url": "/fr/articles-valais/etat-valais-intelligence-artificielle/",
+          "excerpt": "AVA est accessible au personnel de l'État du Valais depuis jeudi ; le coût opérationnel s'élève à environ CHF 2 par mois et par utilisateur actif.",
+          "date": "2026-11-06T11:13:23.591Z"
+        },
+        {
           "title": "Hausse du taux de chômage en octobre dans le canton du Valais",
           "url": "/fr/articles-valais/hausse-taux-chomage-octobre/",
           "excerpt": "Fin octobre, 6 082 chômeurs étaient enregistrés auprès des Bureaux régionaux de l’emploi du Valais, soit 327 de plus que le mois précédent.",
@@ -435,12 +441,6 @@
           "url": "/fr/articles-valais/val-de-bagnes-durable/",
           "excerpt": "Du 24 au 31 octobre, 175 personnes ont participé à la Semaine de la durabilité à Val de Bagnes.",
           "date": "2026-11-03T09:11:19.910Z"
-        },
-        {
-          "title": "Bains d'Ovronnaz : sursis concordataire jusqu'au 31 mars 2027",
-          "url": "/fr/articles-valais/bains-ovronnaz-nouveau-sursis/",
-          "excerpt": "Le tribunal de district de Martigny a accordé aux Bains d'Ovronnaz un nouveau sursis concordataire jusqu'au 31 mars 2027.",
-          "date": "2026-10-28T15:29:18.560Z"
         }
       ],
       "links": [
@@ -469,7 +469,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T11:17:24.782Z"
     }
   }
 }
