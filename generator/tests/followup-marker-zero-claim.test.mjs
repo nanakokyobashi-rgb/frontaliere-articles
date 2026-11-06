@@ -170,6 +170,33 @@ test('un FU già tracciato nel bucket precedente è storico solo nel marker H2 z
   }
 });
 
+test('negazioni e marker misti non trasformano FU outstanding in riferimenti storici (#1721)', () => {
+  const heading = '## Post-merge follow-up triage: zero outstanding items.';
+  for (const line of [
+    '- FU-2026-11-06-002 non è tracciato nel bucket precedente #3520.',
+    '- FU-2026-11-06-002 non è già tracciato nel bucket precedente #3520.',
+    '- FU-2026-11-06-002 non va considerato già tracciato nel bucket precedente #3520.',
+  ]) {
+    const marker = [heading, line].join('\n');
+    const expectation = triageMarkerPersistenceExpectation(marker);
+    assert.deepEqual(expectation.items, ['FU-2026-11-06-002'], marker);
+    assert.equal(expectation.explicitZero, false, marker);
+    assert.equal(verifyTriageMarkerPersistence(marker, 3663, () => false), false, marker);
+  }
+
+  const mixed = [
+    heading,
+    'Created/updated: 1 item nel bucket #3520.',
+    '- FU-2026-11-06-001 già tracciato nel bucket precedente #3520.',
+    '- Follow-up item: FU-2026-11-06-003',
+  ].join('\n');
+  const expectation = triageMarkerPersistenceExpectation(mixed);
+  assert.deepEqual(expectation.items, ['FU-2026-11-06-003']);
+  assert.equal(expectation.explicitZero, false);
+  assert.equal(expectation.requiresBucket, true);
+  assert.equal(verifyTriageMarkerPersistence(mixed, 3663, () => false), false);
+});
+
 test('il marker reale senza item e con bucket invariato e\' uno zero, non un claim positivo (#9286)', () => {
   const marker = [
     '## Post-merge follow-up triage',
