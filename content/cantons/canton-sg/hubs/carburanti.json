@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "766a307901b7f992fec579282f726da2ad96c129472f5be3063208e707b563b5",
+  "updatedAt": "2026-11-06T11:46:36.216Z",
+  "contentHash": "71c0366d201ad7c2166cf504ca657881931c8fd084b2a706da582c433bacda49",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil: piano finanziario 2027-2031 tra debiti e risparmi",
+          "url": "/articoli-san-gallo/wil-piano-finanziario-2027-2031/",
+          "excerpt": "Il piano finanziario di Wil prevede un aumento del debito netto da 43 a 125 milioni di franchi entro il 2031, nonostante misure di risparmio.",
+          "date": "2026-11-06T11:41:24.161Z"
+        },
+        {
           "title": "Cambiamenti orari bus St.Gallen: interessate Rosenberg, Schuppis e Winkeln",
           "url": "/articoli-san-gallo/cambiamento-orari-st-gallen/",
           "excerpt": "Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/votazione-29-novembre-2026/",
           "excerpt": "Il referendum riguarda il regolamento per il fondo di dismissione e smantellamento della rete gas delle TBW, con costi previsti di CHF 45,8 milioni.",
           "date": "2026-10-27T02:30:52.478Z"
-        },
-        {
-          "title": "Controllo traffico San Gallo: 105 violazioni accertate il 24 ottobre 2026",
-          "url": "/articoli-san-gallo/controllo-traffico-san-gallo-ottobre/",
-          "excerpt": "La Polizia cantonale di San Gallo ha condotto nella notte tra venerdì e sabato del 24 ottobre 2026 un controllo mirato nel traffico stradale, insieme al Bundesamt für Zoll und Grenzsicherheit, indicato con l'acronimo…",
-          "date": "2026-10-27T00:06:31.670Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T11:46:36.216Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil: 2027-2031 financial plan between debts and savings",
+          "url": "/en/st-gallen-articles/wil-financial-plan-2027-2031/",
+          "excerpt": "Wil's financial plan provides for an increase in net debt from 43 to 125 million francs by 2031, despite savings measures.",
+          "date": "2026-11-06T11:41:24.161Z"
+        },
+        {
           "title": "St.Gallen bus schedule changes: Rosenberg, Schuppis and Winkeln affected",
           "url": "/en/st-gallen-articles/st-gallen-schedule-changes/",
           "excerpt": "The project affects Rosenberg, Schuppis, Grossacker and Winkeln.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/vote-november-29-2026/",
           "excerpt": "The referendum concerns the regulations for the fund for the decommissioning and dismantling of TBW's gas network, with expected costs of CHF 45,8 million.",
           "date": "2026-10-27T02:30:52.478Z"
-        },
-        {
-          "title": "St. Gallen traffic check: 105 violations confirmed on October 24, 2026",
-          "url": "/en/st-gallen-articles/st-gallen-traffic-control-october/",
-          "excerpt": "105 violations recorded during the night of October 24 Approximately 150 vehicles and occupants checked 70 vehicles traveling at over 80 km/h on the A13.",
-          "date": "2026-10-27T00:06:31.670Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T11:46:36.216Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil: Finanzplan 2027-2031 zwischen Schulden und Ersparnissen",
+          "url": "/de/st-gallen-artikel/wil-finanzplan-2027-2031/",
+          "excerpt": "Wils Finanzplan sieht eine Erhöhung der Nettoverschuldung von 43 auf 125 Millionen Francs bis 2031 vor, trotz Kostensparmaßnahmen.",
+          "date": "2026-11-06T11:41:24.161Z"
+        },
+        {
           "title": "Busfahrplan in St.Gallen: Änderungen in drei Quartieren",
           "url": "/de/st-gallen-artikel/st-gallen-fahrplanwechsel/",
           "excerpt": "Der Entwurf betrifft Rosenberg, Schuppis, Grossacker und Winkeln.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/abstimmung-29-november-2026/",
           "excerpt": "Das Referendum betrifft das Reglement für den Fonds zur Stilllegung und zum Rückbau des Gasnetzes der TBW, mit vorgesehenen Kosten von CHF 45,8 Millionen.",
           "date": "2026-10-27T02:30:52.478Z"
-        },
-        {
-          "title": "Verkehrskontrolle St. Gallen: 105 Verstöße am 24. Oktober 2026 festgestellt",
-          "url": "/de/st-gallen-artikel/verkehrskontrolle-st-gallen-oktober/",
-          "excerpt": "Die Kantonspolizei St. Gallen führte in der Nacht von Freitag auf Samstag, 24. Oktober 2026, gemeinsam mit dem Bundesamt für Zoll und Grenzsicherheit, abgekürzt BAZG, und der Landespolizei des Fürstentums Liechtenstein…",
-          "date": "2026-10-27T00:06:31.670Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T11:46:36.216Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil : plan financier 2027-2031 entre dettes et économies",
+          "url": "/fr/articles-saint-gall/wil-plan-financier-2027-2031/",
+          "excerpt": "Le plan financier de Wil prévoit une augmentation de la dette nette de 43 à 125 millions de francs d’ici 2031, malgré des mesures d’économie.",
+          "date": "2026-11-06T11:41:24.161Z"
+        },
+        {
           "title": "Horaires bus St.Gallen changés : Rosenberg/Schuppis/Winkeln",
           "url": "/fr/articles-saint-gall/changements-horaires-st-gallen/",
           "excerpt": "Le projet concerne Rosenberg, Schuppis, Grossacker et Winkeln.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/vote-29-novembre-2026/",
           "excerpt": "Le référendum concerne le règlement relatif au fonds de désaffectation et de démantèlement du réseau de gaz de TBW, dont les coûts prévus s’élèvent à CHF 45,8 millions.",
           "date": "2026-10-27T02:30:52.478Z"
-        },
-        {
-          "title": "Contrôle du trafic à Saint-Gall : 105 infractions constatées le 24 octobre 2026",
-          "url": "/fr/articles-saint-gall/controle-trafic-st-galle-octobre/",
-          "excerpt": "La police cantonale de Saint-Gall a mené, dans la nuit de vendredi à samedi, le 24 octobre 2026, un contrôle ciblé du trafic routier, avec l'Office fédéral de la douane et de la sécurité des frontières, désigné par…",
-          "date": "2026-10-27T00:06:31.670Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T11:46:36.216Z"
     }
   }
 }
