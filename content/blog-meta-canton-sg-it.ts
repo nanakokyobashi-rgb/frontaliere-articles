@@ -84,6 +84,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.cambiamento-orari-st-gallen.title': 'Cambiamenti orari bus St.Gallen: interessate Rosenberg, Schuppis e Winkeln',
     'blog.article.cambiamento-orari-st-gallen.excerpt': 'Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln.',
     'blog.article.cambiamento-orari-st-gallen.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.wil-piano-finanziario-2027-2031.title': 'Wil: piano finanziario 2027-2031 tra debiti e risparmi',
+    'blog.article.wil-piano-finanziario-2027-2031.excerpt': 'Il piano finanziario di Wil prevede un aumento del debito netto da 43 a 125 milioni di franchi entro il 2031, nonostante misure di risparmio.',
+    'blog.article.wil-piano-finanziario-2027-2031.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

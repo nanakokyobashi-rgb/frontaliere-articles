@@ -84,6 +84,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.cambiamento-orari-st-gallen.title': 'Busfahrplan in St.Gallen: Änderungen in drei Quartieren',
     'blog.article.cambiamento-orari-st-gallen.excerpt': 'Der Entwurf betrifft Rosenberg, Schuppis, Grossacker und Winkeln.',
     'blog.article.cambiamento-orari-st-gallen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.wil-piano-finanziario-2027-2031.title': 'Wil: Finanzplan 2027-2031 zwischen Schulden und Ersparnissen',
+    'blog.article.wil-piano-finanziario-2027-2031.excerpt': 'Wils Finanzplan sieht eine Erhöhung der Nettoverschuldung von 43 auf 125 Millionen Francs bis 2031 vor, trotz Kostensparmaßnahmen.',
+    'blog.article.wil-piano-finanziario-2027-2031.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

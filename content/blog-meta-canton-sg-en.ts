@@ -84,6 +84,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.cambiamento-orari-st-gallen.title': 'St.Gallen bus schedule changes: Rosenberg, Schuppis and Winkeln affected',
     'blog.article.cambiamento-orari-st-gallen.excerpt': 'The project affects Rosenberg, Schuppis, Grossacker and Winkeln.',
     'blog.article.cambiamento-orari-st-gallen.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.wil-piano-finanziario-2027-2031.title': 'Wil: 2027-2031 financial plan between debts and savings',
+    'blog.article.wil-piano-finanziario-2027-2031.excerpt': 'Wil\'s financial plan provides for an increase in net debt from 43 to 125 million francs by 2031, despite savings measures.',
+    'blog.article.wil-piano-finanziario-2027-2031.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

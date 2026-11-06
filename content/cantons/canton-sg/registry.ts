@@ -303,4 +303,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'wil-piano-finanziario-2027-2031',
+ category: 'fiscale',
+ date: '2026-11-06T11:41:24.161Z',
+ image: '/images/blog/article-wil-piano-finanziario-2027-2031.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
