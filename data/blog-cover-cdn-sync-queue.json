@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-volksschule-uri-iscrizioni-2025-2026.webp",
-      "sha256": "fe4303f8a7a00af82761d13b6808b414ee3e23d68f4a6d50fa257bc21a95c31f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-volksschule-uri-iscrizioni-2025-2026-480w.webp",
-      "sha256": "731edcf14f67b31cebcbda48e93615b17673b6e0cb776a660c325c8a02e9ddd2"
-    }
-  ]
+  "items": []
 }
