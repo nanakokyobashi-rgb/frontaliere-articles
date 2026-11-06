@@ -535,17 +535,43 @@ test('un excerpt vuoto prende una frase completa dal body oppure rifiuta l’art
   );
 });
 
-test('un excerpt assente viene derivato dal body prima della traduzione', () => {
-  const body = 'Il Consiglio federale ha pubblicato i nuovi dati sui lavoratori frontalieri e sulle misure fiscali applicate in Svizzera.';
-  const article = { id: 'excerpt-assente', content: { it: { body1: body } } };
+test('excerpt assenti o non testuali usano il body della stessa lingua prima della traduzione', () => {
+  const italianBody = 'Il Consiglio federale ha pubblicato i nuovi dati sui lavoratori frontalieri e sulle misure fiscali applicate in Svizzera.';
+  const englishBody = 'The Federal Council published new figures on cross-border workers and the tax measures that apply to them in Switzerland.';
+  const article = {
+    id: 'excerpt-assente',
+    content: {
+      it: { body1: italianBody },
+      en: {
+        excerpt: null,
+        body1: englishBody,
+        seoDescription: null,
+        ogDescription: 42,
+      },
+    },
+  };
   const repairs = repairGeneratedArticleDescriptions(article);
-  assert.equal(article.content.it.excerpt, body);
+  assert.equal(article.content.it.excerpt, italianBody);
+  assert.equal(article.content.en.excerpt, englishBody);
   assert.deepEqual(repairs.map(({ locale, field, source }) => ({ locale, field, source })), [
     { locale: 'it', field: 'excerpt', source: 'article-body' },
+    { locale: 'en', field: 'excerpt', source: 'article-body' },
   ]);
+  assert.equal(article.content.en.seoDescription, null);
+  assert.equal(article.content.en.ogDescription, 42);
+  assert.equal(Object.hasOwn(article.content.en, 'description'), false);
+  assert.deepEqual(repairGeneratedArticleDescriptions(article), [], 'la riparazione è idempotente');
+
   assert.throws(
-    () => repairGeneratedArticleDescriptions({ id: 'excerpt-assente-senza-body', content: { it: { body1: 'Testo' } } }),
-    (error) => error.qualityReject === true && /is empty and has no safe body excerpt/u.test(error.message),
+    () => repairGeneratedArticleDescriptions({
+      id: 'excerpt-assente-senza-body',
+      content: {
+        it: { excerpt: italianBody, body1: italianBody },
+        en: { body1: 'This clause is incomplete because' },
+      },
+    }),
+    (error) => error.qualityReject === true
+      && /\[excerpt-complete\] en\/excerpt-assente-senza-body\/excerpt is empty and has no safe body excerpt/u.test(error.message),
   );
 });
 
