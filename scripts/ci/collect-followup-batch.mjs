@@ -678,14 +678,14 @@ export function triageMarkerPersistenceExpectation(markerBody) {
   // forma stretta richiede un'attestazione positiva: «non e' gia' tracciato»
   // e «non va considerato gia' tracciato» lasciano l'item outstanding. Un
   // claim `Follow-up item:` o positivo resta sempre prioritario.
-  const historicalZeroOutstandingItems = canonicalZero
+  const historicalZeroOutstandingLines = canonicalZero
     ? new Set(claimEvidenceLines.filter((line) =>
       /^\s*[-*+]\s+(?:`)?FU-\d{4}-\d{2}-\d{2}-\d{3}\b/i.test(line)
         && /\bgi[àa]\s+tracciat[oa]\b/i.test(line)
         && !/\bnon\b[^\r\n]*\bgi[àa]\s+tracciat[oa]\b/i.test(line)
         && !/Follow-up\s+item\s*:/i.test(line)
         && !POSITIVE_ITEM_CLAIM_RE.test(line),
-    ).flatMap((line) => [...line.matchAll(/FU-\d{4}-\d{2}-\d{2}-\d{3}\b/gi)].map((match) => match[0].toUpperCase())))
+    ))
     : new Set();
   // `Follow-up item:` is a structural claim only when it starts its own
   // marker line. A correction may instead repeat the stable ID at the start
@@ -693,10 +693,10 @@ export function triageMarkerPersistenceExpectation(markerBody) {
   // line shape is deliberately narrow: an inline service reference remains
   // context and cannot turn a zero marker into an item (issue #2299).
   const items = [...new Set(claimEvidenceLines
+    .filter((line) => !historicalZeroOutstandingLines.has(line))
     .flatMap((line) => [...line.matchAll(
       /^\s*(?:(?:(?:[-*+]|\d+[.)])\s+)?Follow-up\s+item\s*:\s*|[-*+]\s+)(?:`(FU-\d{4}-\d{2}-\d{2}-\d{3})`|(FU-\d{4}-\d{2}-\d{2}-\d{3})\b)/gi,
-    )].map((match) => (match[1] || match[2]).toUpperCase()))
-    .filter((item) => !historicalZeroOutstandingItems.has(item)))];
+    )].map((match) => (match[1] || match[2]).toUpperCase())))];
   const uniqueItems = [...new Set(items)];
   // Il `#N` deve stare accanto a «bucket»: cosi' un `PR concatenata #9050`
   // citato fra i drop non diventa un candidato. Prendiamo il primo numero dopo

@@ -195,6 +195,17 @@ test('negazioni e marker misti non trasformano FU outstanding in riferimenti sto
   assert.equal(expectation.explicitZero, false);
   assert.equal(expectation.requiresBucket, true);
   assert.equal(verifyTriageMarkerPersistence(mixed, 3663, () => false), false);
+
+  const sameId = [
+    heading,
+    '- FU-2026-11-06-001 già tracciato nel bucket precedente #3520.',
+    '- Follow-up item: FU-2026-11-06-001',
+  ].join('\n');
+  const sameIdExpectation = triageMarkerPersistenceExpectation(sameId);
+  assert.deepEqual(sameIdExpectation.items, ['FU-2026-11-06-001']);
+  assert.equal(sameIdExpectation.explicitZero, false);
+  assert.equal(sameIdExpectation.requiresBucket, true);
+  assert.equal(verifyTriageMarkerPersistence(sameId, 3663, () => false), false);
 });
 
 test('il marker reale senza item e con bucket invariato e\' uno zero, non un claim positivo (#9286)', () => {
