@@ -6214,14 +6214,29 @@ export function assertArticlePassesFactualityGates(data, options = {}) {
   assertPublishedEditorialClaims(data);
 }
 
-function collectPublishedTextValues(value, path = [], seen = new Set()) {
-  if (typeof value === 'string') return [{ path: path.join('.'), text: value }];
-  if (!value || typeof value !== 'object' || seen.has(value)) return [];
-  seen.add(value);
+function collectPublishedTextValuesIterative(value, path = [], seen = new Set()) {
+  let rootPath = null;
+  for (const key of path) rootPath = { parent: rootPath, key };
 
   const values = [];
-  for (const [key, child] of Object.entries(value)) {
-    values.push(...collectPublishedTextValues(child, [...path, key], seen));
+  const pending = [{ value, path: rootPath }];
+  while (pending.length > 0) {
+    const current = pending.pop();
+    if (typeof current.value === 'string') {
+      const keys = [];
+      for (let node = current.path; node; node = node.parent) keys.push(node.key);
+      values.push({ path: keys.reverse().join('.'), text: current.value });
+      continue;
+    }
+    if (!current.value || typeof current.value !== 'object' || seen.has(current.value)) continue;
+    seen.add(current.value);
+
+    const entries = Object.entries(current.value);
+    // The stack is LIFO; reverse the entries to preserve recursive DFS order.
+    for (let index = entries.length - 1; index >= 0; index -= 1) {
+      const [key, child] = entries[index];
+      pending.push({ value: child, path: { parent: current.path, key } });
+    }
   }
   return values;
 }
@@ -6234,7 +6249,7 @@ function assertNoCorpusFabricatedInstitutionNames(data) {
     ['imageAlt', data?.imageAlt],
     ['seo', data?.seo],
   ]) {
-    for (const { path, text } of collectPublishedTextValues(value, [root], seen)) {
+    for (const { path, text } of collectPublishedTextValuesIterative(value, [root], seen)) {
       for (const issue of checkCorpusFabricatedInstitutionNames(text)) {
         findings.push('[' + path + '] ' + issue.evidence);
       }
