@@ -97,17 +97,25 @@ export function mergeCounterDocuments({ base, upstream, replayed, field }) {
     return mergeDiscoveryAttemptPairDocuments({ base, upstream, replayed, fields });
   }
 
-  const up = parseCounterDoc(upstream, field, 'upstream');
-  if (up.error) return { ok: false, reason: up.error };
-  const mine = parseCounterDoc(replayed, field, 'commit rigiocato');
-  if (mine.error) return { ok: false, reason: mine.error };
+  const up = upstream == null ? null : parseCounterDoc(upstream, field, 'upstream');
+  if (up?.error) return { ok: false, reason: up.error };
+  const mine = replayed == null ? null : parseCounterDoc(replayed, field, 'commit rigiocato');
+  if (mine?.error) return { ok: false, reason: mine.error };
+  if (!up && !mine) return { ok: false, reason: 'entrambi i lati sono assenti senza una base comune' };
 
   let value;
   let rule;
   if (base == null) {
-    value = Math.max(up.value, mine.value);
-    rule = `max(${up.value}, ${mine.value}) — nessuna base comune`;
+    if (!up || !mine) {
+      const present = up ?? mine;
+      value = present.value;
+      rule = `add-only ${value} — una sola versione del contatore`;
+    } else {
+      value = Math.max(up.value, mine.value);
+      rule = `max(${up.value}, ${mine.value}) — nessuna base comune`;
+    }
   } else {
+    if (!up || !mine) return { ok: false, reason: 'un lato del contatore manca dalla revisione' };
     const b = parseCounterDoc(base, field, 'base');
     if (b.error) return { ok: false, reason: b.error };
     if (up.value < b.value) {
@@ -126,7 +134,8 @@ export function mergeCounterDocuments({ base, upstream, replayed, field }) {
 
   // Lo spread conserva l'ordine delle chiavi di upstream e la riassegnazione
   // tiene il campo al suo posto: il diff contro upstream e' una riga sola.
-  const merged = `${JSON.stringify({ ...up.doc, [field]: value }, null, 2)}\n`;
+  const source = up ?? mine;
+  const merged = `${JSON.stringify({ ...source.doc, [field]: value }, null, 2)}\n`;
   return { ok: true, merged, value, values: { [field]: value }, rule };
 }
 
@@ -173,14 +182,47 @@ function parseCounterPairDoc(text, fields, label) {
 }
 
 function mergeDiscoveryAttemptPairDocuments({ base, upstream, replayed, fields }) {
-  const up = parseCounterPairDoc(upstream, fields, 'upstream');
-  if (up.error) return { ok: false, reason: up.error };
-  const mine = parseCounterPairDoc(replayed, fields, 'commit rigiocato');
-  if (mine.error) return { ok: false, reason: mine.error };
-  const b = base == null
-    ? { doc: {}, proven: 0, resetAt: 0 }
-    : parseCounterPairDoc(base, fields, 'base');
-  if (b.error) return { ok: false, reason: b.error };
+  const up = upstream == null ? null : parseCounterPairDoc(upstream, fields, 'upstream');
+  if (up?.error) return { ok: false, reason: up.error };
+  const mine = replayed == null ? null : parseCounterPairDoc(replayed, fields, 'commit rigiocato');
+  if (mine?.error) return { ok: false, reason: mine.error };
+  if (!up && !mine) return { ok: false, reason: 'entrambi i lati sono assenti senza una base comune' };
+  if (base == null && (!up || !mine)) {
+    const present = up ?? mine;
+    const values = {
+      [fields.provenField]: present.proven,
+      [fields.resetAtField]: present.resetAt,
+    };
+    return {
+      ok: true,
+      merged: `${JSON.stringify({ ...present.doc, ...values }, null, 2)}\n`,
+      values,
+      rule: `add-only ${present.proven} — una sola versione della coppia discovery`,
+    };
+  }
+  if (base != null && (!up || !mine)) {
+    return { ok: false, reason: 'un lato della coppia discovery manca dalla revisione' };
+  }
+  const b = base == null ? null : parseCounterPairDoc(base, fields, 'base');
+  if (b?.error) return { ok: false, reason: b.error };
+
+  if (base == null) {
+    // Without a common base both files may be independent add/adds, so their
+    // increments cannot be separated from copied state. Keep the larger
+    // monotone count instead of treating the same creation as two increments.
+    const proven = Math.max(up.proven, mine.proven);
+    const bothBranchesReset = up.resetAt === up.proven && mine.resetAt === mine.proven;
+    const resetAt = bothBranchesReset
+      ? proven
+      : Math.min(proven, Math.max(up.resetAt, mine.resetAt));
+    const values = { [fields.provenField]: proven, [fields.resetAtField]: resetAt };
+    return {
+      ok: true,
+      merged: `${JSON.stringify({ ...up.doc, ...values }, null, 2)}\n`,
+      values,
+      rule: `max(${up.proven}, ${mine.proven}) — nessuna base comune; watermark=${resetAt}`,
+    };
+  }
 
   const delta = mine.proven - b.proven;
   if (delta < 0 || up.proven < b.proven) {
@@ -308,8 +350,6 @@ export function reconcileCounters(preRebase, upstream, specs, { log = console.lo
       if (existsSync(spec.path)) throw reconciliationFailure('working-tree-counter-without-history');
       continue;
     }
-    if (baseText == null && mine == null) mine = up;
-    if (baseText == null && up == null) up = mine;
     if (baseText != null && (mine == null || up == null)) {
       throw reconciliationFailure('missing-revision-file');
     }

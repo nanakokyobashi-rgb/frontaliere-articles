@@ -29,6 +29,39 @@ test('senza base comune (add/add) si tiene il massimo: mai contato due volte', (
   assert.equal(r.value, 7);
 });
 
+test('una coppia discovery creata su un solo lato resta un singolo incremento', () => {
+  const replayed = doc({ frontaliereProvenAttempts: 3, frontaliereDiscoveryResetAt: 1, other: 'kept' });
+  const r = mergeCounterDocuments({
+    base: null,
+    upstream: null,
+    replayed,
+    field: 'frontaliereProvenAttempts,frontaliereDiscoveryResetAt',
+  });
+  assert.equal(r.ok, true);
+  assert.deepEqual(r.values, { frontaliereProvenAttempts: 3, frontaliereDiscoveryResetAt: 1 });
+  assert.equal(r.merged, replayed);
+});
+
+test('independent add/add discovery pairs keep the larger monotone count and a valid watermark', () => {
+  const r = mergeCounterDocuments({
+    base: null,
+    upstream: doc({ svizzeraProvenAttempts: 4, svizzeraDiscoveryResetAt: 2 }),
+    replayed: doc({ svizzeraProvenAttempts: 6, svizzeraDiscoveryResetAt: 3 }),
+    field: 'svizzeraProvenAttempts,svizzeraDiscoveryResetAt',
+  });
+  assert.equal(r.ok, true);
+  assert.deepEqual(r.values, { svizzeraProvenAttempts: 6, svizzeraDiscoveryResetAt: 3 });
+
+  const bothReset = mergeCounterDocuments({
+    base: null,
+    upstream: doc({ svizzeraProvenAttempts: 4, svizzeraDiscoveryResetAt: 4 }),
+    replayed: doc({ svizzeraProvenAttempts: 6, svizzeraDiscoveryResetAt: 6 }),
+    field: 'svizzeraProvenAttempts,svizzeraDiscoveryResetAt',
+  });
+  assert.equal(bothReset.ok, true);
+  assert.deepEqual(bothReset.values, { svizzeraProvenAttempts: 6, svizzeraDiscoveryResetAt: 6 });
+});
+
 test('si rifiuta di fondere cio\' che non sa dimostrare', () => {
   const base = doc({ count: 10 });
   const cases = [
