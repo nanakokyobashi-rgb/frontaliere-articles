@@ -738,6 +738,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-riconoscimento-familiari-assistenti-uri': {
+    title: 'Uri: riconoscimento ai familiari assistenti | Frontaliere Ticino',
+    description: 'Il 30 ottobre Uri ha ringraziato i familiari assistenti. Christian Arnold ha consegnato un omaggio ad Annemarie Arnold.',
+    keywords: 'frontalieri, ticino, svizzera, italia, riconoscimento, familiari, assistenti, ottobre',
+    ogTitle: 'Uri: riconoscimento ai familiari assistenti',
+    ogDescription: 'Il 30 ottobre Uri ha ringraziato i familiari assistenti. Christian Arnold ha consegnato un omaggio ad Annemarie Arnold.',
+    canonicalPath: '/articoli-uri/riconoscimento-familiari-assistenti-uri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Uri: riconoscimento ai familiari assistenti",
+      "description": "Il 30 ottobre Uri ha ringraziato i familiari assistenti. Christian Arnold ha consegnato un omaggio ad Annemarie Arnold.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-riconoscimento-familiari-assistenti-uri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-06T11:28:43+00:00",
+      "dateModified": "2026-11-06T11:28:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/riconoscimento-familiari-assistenti-uri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -60,6 +60,9 @@ const blogMetaCantonUrFr: Record<string, string> = {
     'blog.article.uri-progetto-cultura-integrazione.title': 'Uri lance un projet sur la culture et l’intégration',
     'blog.article.uri-progetto-cultura-integrazione.excerpt': 'Le projet «Netzwerk Kultur und Integration» durera trois ans, avec un démarrage prévu le 1er décembre 2026, afin de faciliter l’accès des personnes migrantes aux offres culturelles urbaines.',
     'blog.article.uri-progetto-cultura-integrazione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.riconoscimento-familiari-assistenti-uri.title': 'Uri : reconnaissance envers les proches aidants',
+    'blog.article.riconoscimento-familiari-assistenti-uri.excerpt': 'Le 30 octobre, Uri a remercié les proches aidants. Christian Arnold a remis un cadeau à Annemarie Arnold.',
+    'blog.article.riconoscimento-familiari-assistenti-uri.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonUrFr;

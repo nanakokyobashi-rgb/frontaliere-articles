@@ -60,6 +60,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.uri-progetto-cultura-integrazione.title': 'Uri startet Projekt zu Kultur und Integration',
     'blog.article.uri-progetto-cultura-integrazione.excerpt': 'Das Projekt "Netzwerk Kultur und Integration" wird drei Jahre dauern, beginnend am 1. Dezember 2026, um Migranten den Zugang zu den kulturellen Angeboten von Uri zu erleichtern.',
     'blog.article.uri-progetto-cultura-integrazione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.riconoscimento-familiari-assistenti-uri.title': 'Uri: Anerkennung für pflegende Angehörige',
+    'blog.article.riconoscimento-familiari-assistenti-uri.excerpt': 'Am 30. Oktober dankte Uri den pflegenden Angehörigen. Christian Arnold überreichte Annemarie Arnold ein Präsent.',
+    'blog.article.riconoscimento-familiari-assistenti-uri.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;

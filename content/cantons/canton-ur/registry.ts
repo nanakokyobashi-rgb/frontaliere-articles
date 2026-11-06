@@ -215,4 +215,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'riconoscimento-familiari-assistenti-uri',
+ category: 'novita',
+ date: '2026-11-06T11:28:43.895Z',
+ image: '/images/blog/article-riconoscimento-familiari-assistenti-uri.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['UR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
