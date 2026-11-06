@@ -5,18 +5,18 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (image vision fallback deadline exceeded)",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to rail travel and cinema, but it contains a recognizable foreground traveler.); gemini (Ge",
       "status": "failed",
-      "failureCount": 20,
+      "failureCount": 21,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-06T08:10:29.687Z"
+      "lastFailureAt": "2026-11-06T15:57:37.045Z"
     },
     {
       "articleId": "giovani-donne-stipendi-svizzera",
       "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
       "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (Codex broker timed out after 119903ms)",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 18,
       "requestedAt": "2026-10-19T03:17:12.439Z",
       "lastFailureAt": "2026-11-06T08:12:30.089Z"
@@ -26,7 +26,7 @@
       "title": "Operatori sanitari frontalieri: Como boccheggia",
       "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
       "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Relevant generic synthetic editorial scene, but it contains a recognizable foreground person.); gemini (Gemini image request f",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 17,
       "requestedAt": "2026-10-23T15:23:52.650Z",
       "lastFailureAt": "2026-11-06T08:14:30.432Z"
@@ -36,7 +36,7 @@
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
       "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (image vision fallback deadline exceeded)",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 17,
       "requestedAt": "2026-10-24T19:06:53.846Z",
       "lastFailureAt": "2026-11-06T08:16:30.746Z"
@@ -46,7 +46,7 @@
       "title": "Infermieri Osc e sindacati chiedono sblocco stipendi",
       "fallbackImage": "/images/blog/article-assemblea-ccti-rotta-economia.webp",
       "reason": "All image providers failed for article-infermieri-osc-sindacati-stipendi: openai-codex (image vision fallback deadline exceeded)",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 2,
       "requestedAt": "2026-10-31T09:38:46.360Z",
       "lastFailureAt": "2026-11-06T08:18:31.112Z"
