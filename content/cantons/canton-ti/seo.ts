@@ -1050,6 +1050,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-reclutamento-infermieri-varese': {
+    title: 'Infermieri lombardi verso il Ticino: 7.000 CHF',
+    description: 'Una giovane professionista di Varese ha lasciato un impiego da 1.800 euro al mese per 7.000 franchi. All\'Asst Sette Laghi, 56 candidature per 15 posti.',
+    keywords: 'infermieri lombardi, lavoro in Svizzera, salari infermieri, Ticino, Asst Sette Laghi, Varese, personale sanitario',
+    ogTitle: 'Infermieri lombardi verso il Ticino: 7.000 CHF',
+    ogDescription: 'Una giovane professionista della provincia di Varese ha lasciato un impiego da 1.800 euro al mese per lavorare in Svizzera con 7.000 franchi. Intanto, le strutture sanitarie cercano di coprire il ricambio.',
+    canonicalPath: '/articoli-ticino/reclutamento-infermieri-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Infermieri lombardi verso il Ticino: 7.000 CHF",
+      "description": "Una giovane professionista di Varese ha lasciato un impiego da 1.800 euro al mese per 7.000 franchi. All'Asst Sette Laghi, 56 candidature per 15 posti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-reclutamento-infermieri-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-06T22:55:12+00:00",
+      "dateModified": "2026-11-06T22:55:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/reclutamento-infermieri-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

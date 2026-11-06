@@ -84,6 +84,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.svizzera-uscita-schengen-controlli.title': 'Austritt der Schweiz aus Schengen: Risiko von Kontrollen und Wartezeiten an den Grenzen',
     'blog.article.svizzera-uscita-schengen-controlli.excerpt': 'Ein Bericht des Bundesrats, der im September 2026 veröffentlicht wurde, untersucht das Szenario eines möglichen Austritts der Schweiz aus den Schengen- und Dublin-Abkommen.',
     'blog.article.svizzera-uscita-schengen-controlli.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.reclutamento-infermieri-varese.title': 'Pflegekräfte aus der Lombardei in Richtung Tessin: 7.000 CHF',
+    'blog.article.reclutamento-infermieri-varese.excerpt': 'Das Lohngefälle treibt italienische Pflegekräfte weiterhin über die Grenze: Eine junge Fachkraft aus der Provinz Varese wechselte von den monatlichen 1.800 Euro aus der vorherigen Beschäftigung zu einer Stelle in der Schweiz, wo 7.000 Franken verdient werden.',
+    'blog.article.reclutamento-infermieri-varese.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTiDe;

@@ -84,6 +84,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.svizzera-uscita-schengen-controlli.title': 'Switzerland’s exit from Schengen: risk of checks and delays at the borders',
     'blog.article.svizzera-uscita-schengen-controlli.excerpt': 'A report by the Federal Council, published in September 2026, examines the scenario of a possible withdrawal by Switzerland from the Schengen and Dublin agreements.',
     'blog.article.svizzera-uscita-schengen-controlli.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.reclutamento-infermieri-varese.title': 'Lombard nurses heading to Ticino: 7.000 CHF',
+    'blog.article.reclutamento-infermieri-varese.excerpt': 'The pay gap continues to drive Italian nurses abroad: a young professional from the province of Varese went from the 1.800 euros per month of her previous job to a job in Switzerland, where she earns 7.000 francs.',
+    'blog.article.reclutamento-infermieri-varese.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTiEn;

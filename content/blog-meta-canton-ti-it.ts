@@ -84,6 +84,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.svizzera-uscita-schengen-controlli.title': 'Uscita Svizzera da Schengen: rischio controlli e attese ai confini',
     'blog.article.svizzera-uscita-schengen-controlli.excerpt': 'Un rapporto del Consiglio federale, pubblicato nel settembre 2026, esamina lo scenario di un\'eventuale uscita della Svizzera dagli accordi di Schengen e Dublino.',
     'blog.article.svizzera-uscita-schengen-controlli.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.reclutamento-infermieri-varese.title': 'Infermieri lombardi verso il Ticino: 7.000 CHF',
+    'blog.article.reclutamento-infermieri-varese.excerpt': 'Il divario retributivo continua a spingere gli infermieri italiani oltreconfine: una giovane professionista della provincia di Varese è passata dai 1.800 euro mensili del precedente impiego a un lavoro in Svizzera, dove guadagna 7.000 franchi.',
+    'blog.article.reclutamento-infermieri-varese.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTiIt;

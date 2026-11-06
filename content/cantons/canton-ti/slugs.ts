@@ -30,6 +30,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'frontalieri-riforma-disoccupazione-ue': { it: 'frontalieri-riforma-disoccupazione-ue', en: 'cross-border-unemployment-reform-eu', de: 'frontalieri-arbeitslosigkeit-reform-eu', fr: 'frontaliers-reforme-chomage-ue' },
  'guasto-camerlata-linea-chiasso': { it: 'guasto-camerlata-linea-chiasso', en: 'camerlata-rail-delay-chiasso', de: 'bahnstoerung-camerlata-chiasso', fr: 'retards-rail-camerlata-chiasso' },
  'svizzera-uscita-schengen-controlli': { it: 'svizzera-uscita-schengen-controlli', en: 'switzerland-schengen-exit-controls', de: 'schweiz-schengen-ausstieg-kontrollen', fr: 'suisse-sortie-schengen-controles' },
+ 'reclutamento-infermieri-varese': { it: 'reclutamento-infermieri-varese', en: 'nurse-recruitment-varese', de: 'pflegepersonal-rekrutierung-varese', fr: 'recrutement-infirmiers-varese' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

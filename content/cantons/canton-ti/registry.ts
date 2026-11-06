@@ -304,4 +304,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'reclutamento-infermieri-varese',
+ category: 'novita',
+ date: '2026-11-06T22:55:12.637Z',
+ image: '/images/blog/article-reclutamento-infermieri-varese.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
