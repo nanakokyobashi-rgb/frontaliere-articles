@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "pensioni",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "8a6687c5279ce6c4dcec7c2f867df61f6800a1bf72ff8dcc8801e6e80537b5c6",
+  "updatedAt": "2026-11-06T12:42:30.258Z",
+  "contentHash": "e36cd0a1561722ac12d43ad78b777e1d84b34615d68be35dfeac6bef7e6c8ee5",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -166,10 +166,16 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Cassa pensione Zurigo: stop al cambio di sistema",
+          "url": "/articoli-zurigo/cassa-pensione-stop-sistema/",
+          "excerpt": "Dopo un cyberattacco a una società software, la cassa pensione della città di Zurigo ha fermato il cambio di sistema, secondo il Tages-Anzeiger.",
+          "date": "2026-11-06T12:32:40.387Z"
+        },
         {
           "title": "Attacco informatico: cassa pensioni Zurigo e Posta colpite",
           "url": "/articoli-svizzera/dati-assicurati-casse-zurigo-posta/",
@@ -211,12 +217,6 @@
           "url": "/articoli-svizzera/prestazioni-complementari-zurigo-minimo/",
           "excerpt": "Nel cantone Zurigo la cassa di compensazione calcola la rendita AVS e interviene con prestazioni complementari se il primo pilastro non copre il minimo vitale.",
           "date": "2026-08-21T20:44:12.172Z"
-        },
-        {
-          "title": "AVS e prestazioni complementari nel Canton Zurigo",
-          "url": "/articoli-svizzera/avs-prestazioni-complementari-zurigo-cassa/",
-          "excerpt": "Come funziona il primo pilastro AVS nel Canton Zurigo: cassa di compensazione, calcolo della rendita, lacune e prestazioni complementari per il minimo vitale.",
-          "date": "2026-08-21T19:16:14.034Z"
         }
       ],
       "latestCantonArticles": [],
@@ -238,7 +238,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T12:42:30.258Z"
     },
     "en": {
       "canton": "ZH",
@@ -377,10 +377,16 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Zurich pension fund: halt to the system change",
+          "url": "/en/zurich-articles/zurich-pension-fund-system-stop/",
+          "excerpt": "After a cyberattack on a software company, the city of Zurich’s pension fund halted the system change, according to the Tages-Anzeiger.",
+          "date": "2026-11-06T12:32:40.387Z"
+        },
         {
           "title": "Cyberattack: Zurich pension fund and Swiss Post hit",
           "url": "/en/swiss-articles/pension-data-breach-zurich-post/",
@@ -422,12 +428,6 @@
           "url": "/en/swiss-articles/supplementary-benefits-zurich-minimum-living/",
           "excerpt": "In the canton of Zurich, the compensation fund calculates the AVS annuity and intervenes with complementary benefits if the first pillar does not cover the vital minimum.",
           "date": "2026-08-21T20:44:12.172Z"
-        },
-        {
-          "title": "AVS and complementary services in the Canton of Zurich",
-          "url": "/en/swiss-articles/avs-supplementary-benefits-zurich-compensation-office/",
-          "excerpt": "How the first AVS pillar works in the Canton of Zurich: compensation fund, annuity calculation, gaps and supplementary benefits for the living minimum.",
-          "date": "2026-08-21T19:16:14.034Z"
         }
       ],
       "latestCantonArticles": [],
@@ -449,7 +449,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T12:42:30.258Z"
     },
     "de": {
       "canton": "ZH",
@@ -588,10 +588,16 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Pensionskasse Zürich: Stopp des Systemwechsels",
+          "url": "/de/zurich-artikel/zuerich-pensionskasse-systemstopp/",
+          "excerpt": "Nach einem Cyberangriff auf ein Softwareunternehmen hat die Pensionskasse der Stadt Zürich den Systemwechsel gestoppt, wie der Tages-Anzeiger berichtet.",
+          "date": "2026-11-06T12:32:40.387Z"
+        },
         {
           "title": "Cyberangriff: Pensionskasse Zürich und Posta betroffen",
           "url": "/de/schweiz-artikel/datenleck-pensionskassen-zurich-post/",
@@ -633,12 +639,6 @@
           "url": "/de/schweiz-artikel/zusatzleistungen-zurich-existenzminimum/",
           "excerpt": "Im Kanton Zürich berechnet die Ausgleichskasse die AHV-Rente und greift mit Ergänzungsleistungen ein, wenn die erste Säule nicht das Existenzminimum abdeckt.",
           "date": "2026-08-21T20:44:12.172Z"
-        },
-        {
-          "title": "AHV und Ergänzungsleistungen im Kanton Zürich",
-          "url": "/de/schweiz-artikel/avs-ergaenzungsleistungen-zuerich-ausgleichskasse/",
-          "excerpt": "So funktioniert die erste AHV-Säule im Kanton Zürich: Ausgleichskasse, Rentenberechnung, Lücken und Ergänzungsleistungen für das Lebensminimum.",
-          "date": "2026-08-21T19:16:14.034Z"
         }
       ],
       "latestCantonArticles": [],
@@ -660,7 +660,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T12:42:30.258Z"
     },
     "fr": {
       "canton": "ZH",
@@ -799,10 +799,16 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Caisse de pension de Zurich : arrêt du changement de système",
+          "url": "/fr/articles-zurich/caisse-pension-zurich-systeme-stop/",
+          "excerpt": "Après une cyberattaque contre une société de logiciels, la caisse de pension de la ville de Zurich a interrompu le changement de système, selon le Tages-Anzeiger.",
+          "date": "2026-11-06T12:32:40.387Z"
+        },
         {
           "title": "Cyberattaque : la caisse de pension de Zurich et Posta touchées",
           "url": "/fr/articles-suisse/fuite-donnees-caisses-zurich-poste/",
@@ -844,12 +850,6 @@
           "url": "/fr/articles-suisse/prestations-complementaires-zurich-minimum-vital/",
           "excerpt": "Dans le canton de Zurich, la caisse de compensation calcule la rente AVS et intervient avec des prestations complémentaires si le premier pilier ne couvre pas le minimum vital.",
           "date": "2026-08-21T20:44:12.172Z"
-        },
-        {
-          "title": "AVS et prestations complémentaires dans le canton de Zurich",
-          "url": "/fr/articles-suisse/ava-prestations-complementaires-zurich-caisse/",
-          "excerpt": "Comment fonctionne le premier pilier AVS dans le canton de Zurich : caisse de compensation, calcul de la rente, lacunes et prestations complémentaires pour le minimum vital.",
-          "date": "2026-08-21T19:16:14.034Z"
         }
       ],
       "latestCantonArticles": [],
@@ -871,7 +871,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T12:42:30.258Z"
     }
   }
 }
