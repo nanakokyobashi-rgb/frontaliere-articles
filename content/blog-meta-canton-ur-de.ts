@@ -51,6 +51,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.seedorf-reussstrasse-lavori-innesto.title': 'Seedorf: Reussstrasse wegen Arbeiten an der Einmündung gesperrt',
     'blog.article.seedorf-reussstrasse-lavori-innesto.excerpt': 'Die Reussstrasse in Seedorf wird wegen Arbeiten an der Einmündung Richtung Süden, in Richtung Attinghausen, im Hinblick auf den Radweg Altdorf-Seedorf gesperrt.',
     'blog.article.seedorf-reussstrasse-lavori-innesto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.volksschule-uri-iscrizioni-2025-2026.title': 'Kanton Uri: 3.934 Schüler und 224 Klassen im Jahr 2025/2026',
+    'blog.article.volksschule-uri-iscrizioni-2025-2026.excerpt': 'Der Bericht der Volksschule des Kantons Uri für das Schuljahr 2025/2026 beschreibt einen begrenzten Anstieg der Anmeldungen und eine Erweiterung der Abteilungen.',
+    'blog.article.volksschule-uri-iscrizioni-2025-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;

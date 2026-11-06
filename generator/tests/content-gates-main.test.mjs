@@ -89,6 +89,8 @@ describe('content-gates-main: il workflow', () => {
       '/.github/workflows/tests.yml',
       '/data/article-source-urls.json',
       '/data/article-type-cutover.json',
+      '/data/article-type-readings.json',
+      '/data/article-type-readings.manifest.json',
       '/data/blog-articles-data.ts',
       '/data/blog-images-used.json',
       '/data/blog-images-used-site-legacy.json',

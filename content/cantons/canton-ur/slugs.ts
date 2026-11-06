@@ -19,6 +19,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'incendio-tunnel-fluelen': { it: 'incendio-tunnel-fluelen', en: 'vehicle-fire-fluelen-tunnel', de: 'fahrzeugbrand-fluelen-tunnel', fr: 'incendie-tunnel-fluelen' },
  'chiusura-invernale-gottardo': { it: 'chiusura-invernale-gottardo', en: 'gotthard-winter-closure', de: 'gotthard-wintersperre', fr: 'fermeture-hivernale-gothard' },
  'seedorf-reussstrasse-lavori-innesto': { it: 'seedorf-reussstrasse-lavori-innesto', en: 'seedorf-reussstrasse-works-inlet', de: 'seedorf-reussstrasse-arbeiten-innesto', fr: 'seedorf-reussstrasse-travaux-injection' },
+ 'volksschule-uri-iscrizioni-2025-2026': { it: 'volksschule-uri-iscrizioni-2025-2026', en: 'volksschule-uri-enrollments-2025-2026', de: 'volksschule-uri-einschreibungen-2025-2026', fr: 'volksschule-uri-inscriptions-2025-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

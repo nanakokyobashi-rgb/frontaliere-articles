@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "9e6748ff6f376a884244370c71edda22ad37990367ccc40a888ad4a098498409",
+  "updatedAt": "2026-11-06T07:52:55.870Z",
+  "contentHash": "a15d027ea25cda45cfda86f27f40ac3b42b8cc81977eda8bdae467cd1cef9d18",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-03T14:41:22.679Z",
+      "updatedAt": "2026-11-05T14:57:01.545Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-05T14:57:01.545Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Canton Uri: 3.934 alunni e 224 sezioni nel 2025/2026",
+          "url": "/articoli-uri/volksschule-uri-iscrizioni-2025-2026/",
+          "excerpt": "Il rapporto sulla Volksschule del Canton Uri per l'anno scolastico 2025/2026 descrive un aumento contenuto degli iscritti e un ampliamento delle sezioni.",
+          "date": "2026-11-06T07:40:45.014Z"
+        },
         {
           "title": "Seedorf: Reussstrasse chiusa per lavori di innesto",
           "url": "/articoli-uri/seedorf-reussstrasse-lavori-innesto/",
@@ -82,12 +88,6 @@
           "url": "/articoli-uri/susten-furka-chiusura-invernale/",
           "excerpt": "Dal mercoledì 28 ottobre i passi della Furka e del Susten sono chiusi per l'inverno; il passo del San Gottardo resta percorribile di giorno.",
           "date": "2026-10-28T17:45:24.471Z"
-        },
-        {
-          "title": "Uri, traffico rilevato in 31 punti il 5 novembre 2026",
-          "url": "/articoli-uri/conteggio-traffico-uri-novembre/",
-          "excerpt": "Nel fondovalle urano, il 5 novembre 2026, 31 punti rileveranno veicoli e direzioni tra le 06:00 e le 22:00 per rivedere il modello cantonale.",
-          "date": "2026-10-27T11:34:34.578Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-06T07:52:55.870Z"
     },
     "en": {
       "canton": "UR",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-05T14:57:01.545Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Canton Uri: 3.934 students and 224 sections in 2025/2026",
+          "url": "/en/uri-articles/volksschule-uri-enrollments-2025-2026/",
+          "excerpt": "The report on the Volksschule of the Canton of Uri for the 2025/2026 school year describes a limited increase in enrolments and an expansion of the sections.",
+          "date": "2026-11-06T07:40:45.014Z"
+        },
         {
           "title": "Seedorf: Reussstrasse closed for connection works",
           "url": "/en/uri-articles/seedorf-reussstrasse-works-inlet/",
@@ -169,12 +175,6 @@
           "url": "/en/uri-articles/susten-furka-winter-closure/",
           "excerpt": "As of Wednesday, October 28, the Furka and Susten passes are closed for the winter; the San Gottardo Pass remains passable during the day.",
           "date": "2026-10-28T17:45:24.471Z"
-        },
-        {
-          "title": "Uri, traffic detected at 31 points on November 5, 2026",
-          "url": "/en/uri-articles/uri-traffic-count-november/",
-          "excerpt": "In the Uranian valley floor, on November 5, 2026, 31 points will record vehicles and directions between 06:00 and 22:00 to review the cantonal model.",
-          "date": "2026-10-27T11:34:34.578Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-06T07:52:55.870Z"
     },
     "de": {
       "canton": "UR",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-05T14:57:01.545Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Kanton Uri: 3.934 Schüler und 224 Klassen im Jahr 2025/2026",
+          "url": "/de/uri-artikel/volksschule-uri-einschreibungen-2025-2026/",
+          "excerpt": "Der Bericht der Volksschule des Kantons Uri für das Schuljahr 2025/2026 beschreibt einen begrenzten Anstieg der Anmeldungen und eine Erweiterung der Abteilungen.",
+          "date": "2026-11-06T07:40:45.014Z"
+        },
         {
           "title": "Seedorf: Reussstrasse wegen Arbeiten an der Einmündung gesperrt",
           "url": "/de/uri-artikel/seedorf-reussstrasse-arbeiten-innesto/",
@@ -256,12 +262,6 @@
           "url": "/de/uri-artikel/susten-furka-wintersperre/",
           "excerpt": "Es lässt sich über die Wintersperre der Furka und des Susten ab Mittwoch, 28. Oktober, berichten sowie über die abweichende Situation am Gotthard, der vorerst tagsüber befahrbar ist.",
           "date": "2026-10-28T17:45:24.471Z"
-        },
-        {
-          "title": "Uri, Verkehr an 31 Stellen am 5. November 2026 erfasst",
-          "url": "/de/uri-artikel/verkehrszaehlung-uri-november/",
-          "excerpt": "Am Donnerstag, dem 5. November 2026, wird im Urner Talboden eine Erhebung der Verkehrsströme durchgeführt.",
-          "date": "2026-10-27T11:34:34.578Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-06T07:52:55.870Z"
     },
     "fr": {
       "canton": "UR",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-05T14:57:01.545Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Canton d’Uri : 3.934 élèves et 224 sections en 2025/2026",
+          "url": "/fr/articles-uri/volksschule-uri-inscriptions-2025-2026/",
+          "excerpt": "Le rapport sur la Volksschule du canton d’Uri pour l’année scolaire 2025/2026 décrit une augmentation limitée des inscriptions et une expansion des sections.",
+          "date": "2026-11-06T07:40:45.014Z"
+        },
         {
           "title": "Seedorf : Reussstrasse fermée pour des travaux de raccordement",
           "url": "/fr/articles-uri/seedorf-reussstrasse-travaux-injection/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-uri/fermeture-hivernale-susten-furka/",
           "excerpt": "À partir du mercredi 28 octobre, les cols de la Furka et du Susten sont fermés pour l'hiver ; le col du Saint-Gothard reste praticable de jour.",
           "date": "2026-10-28T17:45:24.471Z"
-        },
-        {
-          "title": "Uri, trafic relevé en 31 points le 5 novembre 2026",
-          "url": "/fr/articles-uri/comptage-trafic-uri-novembre/",
-          "excerpt": "Dans la vallée uranaise, le 5 novembre 2026, 31 points recenseront les véhicules et leur direction entre les 06:00 et les 22:00 afin de revoir le modèle cantonal.",
-          "date": "2026-10-27T11:34:34.578Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-06T07:52:55.870Z"
     }
   }
 }

@@ -182,4 +182,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'volksschule-uri-iscrizioni-2025-2026',
+ category: 'pratico',
+ date: '2026-11-06T07:40:45.014Z',
+ image: '/images/blog/article-volksschule-uri-iscrizioni-2025-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['UR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
