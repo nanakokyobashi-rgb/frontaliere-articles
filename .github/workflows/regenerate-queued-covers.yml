@@ -147,7 +147,7 @@ jobs:
             echo "::error::watchdog queue threshold is too small for the recovery margin: $watchdog_max_age_hours"
             exit 1
           fi
-          read -r queue_count actionable_count oldest_actionable_age_hours < <(QUEUE_FILE="$QUEUE_FILE" RETRY_AFTER_HOURS="$watchdog_max_age_hours" node --input-type=module <<'NODE'
+          queue_measurement="$(QUEUE_FILE="$QUEUE_FILE" RETRY_AFTER_HOURS="$watchdog_max_age_hours" node --input-type=module <<'NODE'
           import fs from 'node:fs';
           import { imageRegenerationActionableAt } from './generator/scripts/lib/image-regeneration-queue.mjs';
 
@@ -169,7 +169,8 @@ jobs:
             : Math.max(0, (now - oldestActionable) / 3_600_000);
           process.stdout.write(`${requestedAt.length} ${actionableAt.length} ${ageHours}\n`);
           NODE
-          )
+          )"
+          read -r queue_count actionable_count oldest_actionable_age_hours <<< "$queue_measurement"
           if [ "$queue_count" -eq 0 ]; then
             echo 'should_drain=false' >> "$GITHUB_OUTPUT"
             echo 'cover queue is empty: no watchdog recovery needed'

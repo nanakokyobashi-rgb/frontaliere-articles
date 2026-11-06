@@ -1612,6 +1612,9 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(workflow, /watchdog_max_age_hours=.*COVER_QUEUE_MAX_AGE_HOURS/u);
   assert.match(workflow, /recovery_age_hours=\$\(\(watchdog_max_age_hours - 2\)\)/u);
   assert.match(workflow, /imageRegenerationActionableAt/);
+  assert.match(workflow, /queue_measurement="\$\(QUEUE_FILE="\$QUEUE_FILE" RETRY_AFTER_HOURS=/u);
+  assert.match(workflow, /read -r queue_count actionable_count oldest_actionable_age_hours <<< "\$queue_measurement"/u);
+  assert.doesNotMatch(workflow, /read -r queue_count actionable_count oldest_actionable_age_hours < <\(QUEUE_FILE=/u);
   assert.match(workflow, /read -r queue_count actionable_count oldest_actionable_age_hours/);
   assert.match(
     workflow,

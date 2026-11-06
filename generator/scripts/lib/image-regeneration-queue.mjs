@@ -158,8 +158,8 @@ export function failedImageRegenerationRetryIsEligible(item, nowMs, retryAfterHo
  * only after the cooldown that starts at its last failure; using requestedAt
  * after that point makes an old failure look like an old ready retry and lets
  * the watchdog fire immediately when the cooldown ends. Missing failure
- * metadata falls back to requestedAt so diagnostics remain fail-open, while
- * the drainer's stricter retry predicate remains fail-closed.
+ * metadata is malformed queue state: fail closed so diagnostics and recovery
+ * cannot disagree with the drainer's stricter retry predicate.
  */
 export function imageRegenerationActionableAt(item, retryAfterHours) {
   const requestedAt = Date.parse(String(item?.requestedAt || ''));
@@ -171,8 +171,11 @@ export function imageRegenerationActionableAt(item, retryAfterHours) {
 
   const retryHours = Number(retryAfterHours);
   const lastFailureAt = Date.parse(String(item?.lastFailureAt || ''));
-  if (!Number.isFinite(retryHours) || retryHours <= 0 || !Number.isFinite(lastFailureAt)) {
-    return requestedAt;
+  if (!Number.isFinite(retryHours) || retryHours <= 0) {
+    throw new Error('image regeneration retry cooldown is invalid');
+  }
+  if (!Number.isFinite(lastFailureAt)) {
+    throw new Error('failed image regeneration item has invalid lastFailureAt');
   }
   return Math.max(requestedAt, lastFailureAt + retryHours * HOUR_MS);
 }
