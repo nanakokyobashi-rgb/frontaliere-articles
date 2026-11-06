@@ -72,6 +72,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.zurigo-strategia-energetica-2026.title': 'Zürich verabschiedet die Energiestrategie 2026',
     'blog.article.zurigo-strategia-energetica-2026.excerpt': 'Der Regierungsrat des Kantons Zürich hat die Energiestrategie und die Energieplanung 2026 verabschiedet.',
     'blog.article.zurigo-strategia-energetica-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.adeguamento-merkblatt-beteiligungen-zrh.title': 'Merkblatt Beteiligungen & Erlasse Zürcher Steuerbuch angepasst',
+    'blog.article.adeguamento-merkblatt-beteiligungen-zrh.excerpt': 'Das Urteil vom 12. Mai 2026 (ST.2025.64) ermöglicht es, auch kurzfristige Darlehen im Sinne von § 81a StG zu berücksichtigen; dies gilt sofort für Zeiträume ab 2020.',
+    'blog.article.adeguamento-merkblatt-beteiligungen-zrh.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

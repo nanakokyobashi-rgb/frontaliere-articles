@@ -285,6 +285,19 @@ test('published-slug-guard: il gemello del sito resta dichiarato adapted (#339)'
   assert.match(entry.reason, /marker|diagnostic/i);
 });
 
+test('old-history-guard: il gemello spostato resta adapted (#339)', () => {
+  const entry = byPath.get('scripts/ci/old-history-guard.mjs');
+  assert.ok(entry, 'old-history-guard.mjs deve restare censito');
+  assert.equal(entry.sitePath, 'scripts/lib/old-history-guard.mjs');
+  assert.equal(entry.mode, 'adapted',
+    'il sito ha spostato e riscritto il guard: il path locale non puo\' restare un falso identical');
+  assert.equal(entry.baseline?.site, '32f3a2ebdacdce90');
+  assert.equal(entry.baseline?.corpus, 'eaa660a9d1474ce7');
+  assert.match(entry.reason, /spostato.*scripts\/lib\/old-history-guard\.mjs/u);
+  assert.match(entry.reason, /git-push-with-retry/);
+  assert.match(entry.reason, /#339/);
+});
+
 test('atomic-write-json: durability corpus e guardie crawler sito restano adattate (#13307)', () => {
   const entry = byPath.get('generator/scripts/lib/atomic-write-json.mjs');
   assert.ok(entry, 'atomic-write-json.mjs deve restare censito');

@@ -9,6 +9,8 @@
  * the abort remains the best-effort transport cancellation.
  */
 
+import { isArrayBuffer as isArrayBufferValue } from 'node:util/types';
+
 const BODY_METHODS = new Set(['arrayBuffer', 'blob', 'bytes', 'formData', 'json', 'text']);
 const ACTIVE_DEADLINES = new WeakMap();
 export const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
@@ -25,7 +27,7 @@ export function removeAbortListenerSafely(signal, listener) {
 function bodyChunkToBytes(value) {
   if (typeof value === 'string') return new TextEncoder().encode(value);
   if (value instanceof Uint8Array) return Uint8Array.from(value);
-  if (value instanceof ArrayBuffer) return Uint8Array.from(new Uint8Array(value));
+  if (isArrayBufferValue(value)) return Uint8Array.from(new Uint8Array(value));
   if (ArrayBuffer.isView(value)) {
     return Uint8Array.from(new Uint8Array(value.buffer, value.byteOffset, value.byteLength));
   }

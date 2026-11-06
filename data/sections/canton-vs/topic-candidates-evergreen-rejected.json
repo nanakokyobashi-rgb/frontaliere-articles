@@ -4,54 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/820899/darum-ruht-die-baustelle-beim-fuxji-in-visp": {
-      "section": "canton-vs",
-      "ts": 1793633354889
-    },
-    "canton-vs::https://vework-public.vs.ch/app/publication/fr/27-09-2026/1": {
-      "section": "canton-vs",
-      "ts": 1793634625799
-    },
-    "canton-vs::https://www.watson.ch/wirtschaft/schweiz/569132969-der-schnee-ist-da-dann-oeffnen-die-schweizer-skigebiete": {
-      "section": "canton-vs",
-      "ts": 1793634628624
-    },
-    "canton-vs::https://www.pomona.ch/story/821180/heftiger-machtkampf-um-polens-verfassungsgericht-entbrannt": {
-      "section": "canton-vs",
-      "ts": 1793634630195
-    },
-    "canton-vs::https://canal9.ch/de/der-neue-polizeijahrgang-beginnt-heute-mit-der-schule": {
-      "section": "canton-vs",
-      "ts": 1793663294821
-    },
-    "canton-vs::https://www.pomona.ch/story/822152/ausf%c3%a4lle-von-sbbz%c3%bcgen-zwischen-bern-und-brig-am-dienstag": {
-      "section": "canton-vs",
-      "ts": 1793721277369
-    },
-    "canton-vs::https://www.pomona.ch/story/821586/wer-im-falschen-zugteil-einsteigt-landet-am-falschen-ziel-neues-konzept-der-sbb-verwirrt": {
-      "section": "canton-vs",
-      "ts": 1793721279225
-    },
-    "canton-vs::https://www.pomona.ch/story/821758/kantonspolizei-wallis-lanciert-digitale-webanwendung-zur-sensibilisierung-f%c3%bcr-sexuelle-gewalt": {
-      "section": "canton-vs",
-      "ts": 1793721283260
-    },
-    "canton-vs::https://www.pomona.ch/story/821395/revidierte-bfszahlen-walliser-wirtschaft-schrumpft": {
-      "section": "canton-vs",
-      "ts": 1793721792105
-    },
-    "canton-vs::https://www.pomona.ch/story/821997/jedes-leben-verl%c3%a4uft-anders-jedes-verdient-faire-steuern": {
-      "section": "canton-vs",
-      "ts": 1793721793643
-    },
-    "canton-vs::https://www.pomona.ch/story/821807/visp-wird-energiestadt-gold": {
-      "section": "canton-vs",
-      "ts": 1793721794980
-    },
-    "canton-vs::https://www.pomona.ch/story/822020/armee-will-immobilien-f%c3%bcr-milliarden-ausbauen-finanzkontrolle-%c3%bcbt-scharfe-kritik": {
-      "section": "canton-vs",
-      "ts": 1793721796542
-    },
     "canton-vs::https://www.pomona.ch/story/822168/so-stimmen-sie-richtig-ab-kanton-wallis-lanciert-neue-hilfsmittel": {
       "section": "canton-vs",
       "ts": 1793750400472
@@ -103,6 +55,10 @@
     "canton-vs::https://www.pomona.ch/story/822770/sabotage-im-supermarkt-was-hinter-den-cyberangriffen-steckt": {
       "section": "canton-vs",
       "ts": 1793798372397
+    },
+    "canton-vs::https://www.ossolanews.it/2026/11/05/leggi-notizia/argomenti/attualita-26/articolo/frontalieri-piu-risorse-per-gli-stipendi-nel-vco-il-piemonte-pronto-a-ricevere-i-fondi.html": {
+      "section": "canton-vs",
+      "ts": 1793919237517
     }
   }
 }

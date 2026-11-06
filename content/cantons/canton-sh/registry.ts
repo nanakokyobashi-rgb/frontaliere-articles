@@ -381,4 +381,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'mercato-immobiliare-sciaffusa-crescita',
+ category: 'pratico',
+ date: '2026-11-05T22:54:26.311Z',
+ image: '/images/blog/article-mercato-immobiliare-sciaffusa-crescita.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

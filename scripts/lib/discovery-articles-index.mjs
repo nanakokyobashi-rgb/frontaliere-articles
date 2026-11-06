@@ -12,6 +12,7 @@ import { SITE, publishedArticleLocales } from './build-sitemap.mjs';
 
 const PUBLIC_PROVIDERS = new Set(['google_trends', 'other']);
 const TOPIC_PROVIDERS = new Set(['google-news-rss']);
+const SUPPORTED_TOPIC_PROVIDERS = new Set([...TOPIC_PROVIDERS, 'reddit']);
 const LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 const REPOSITORY_ROOT = fs.realpathSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..'));
 
@@ -174,10 +175,6 @@ export function normalizeDiscoveryProvider(sidecar) {
   if (!isRecord(sidecar)) return null;
 
   const topic = sidecar._topic_candidate_attribution;
-  if (isRecord(topic) && Array.isArray(topic.providers) && topic.providers.includes('reddit')) {
-    return null;
-  }
-
   const discovery = sidecar._discovery_attribution;
   if (
     isRecord(discovery)
@@ -195,9 +192,10 @@ export function normalizeDiscoveryProvider(sidecar) {
   ) {
     return null;
   }
-  if (topic.providers.includes('reddit')) return null;
-  const providers = topic.providers.filter((provider) => TOPIC_PROVIDERS.has(provider));
-  if (providers.length === 0) return null;
+  const providers = topic.providers.filter((provider) => SUPPORTED_TOPIC_PROVIDERS.has(provider));
+  if (providers.length === 0 || providers.length !== topic.providers.length) return null;
+  // Reddit candidates can only reach this point after the feed's explicit
+  // Remote Config approval gate. Keep the source private in the public index.
   return 'other';
 }
 

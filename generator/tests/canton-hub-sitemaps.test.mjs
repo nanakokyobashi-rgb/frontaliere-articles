@@ -4,6 +4,12 @@ import assert from 'node:assert/strict';
 import { isRelevantCantonHubSitemap } from '../scripts/lib/canton-hub-sitemaps.mjs';
 import { isIntentionalNoindexPharmacyPage } from '../scripts/lib/canton-hub-published-route.mjs';
 
+test('il gate include la sitemap lavoro principale e quelle cantonali', () => {
+  for (const name of ['sitemap-jobs.xml', 'sitemap-jobs-ticino.xml', 'sitemap-jobs-grigioni.xml']) {
+    assert.equal(isRelevantCantonHubSitemap(`https://frontaliereticino.ch/${name}`), true, name);
+  }
+});
+
 test('il gate degli hub include gli shard sitemap delle varianti locali', () => {
   assert.equal(
     isRelevantCantonHubSitemap('https://frontaliereticino.ch/sitemap-locale-variants-001.xml'),

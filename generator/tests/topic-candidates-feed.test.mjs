@@ -3,6 +3,7 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
+import { runInNewContext } from 'node:vm';
 import { brotliCompressSync, gzipSync } from 'node:zlib';
 
 import {
@@ -432,4 +433,77 @@ test('temporary workflow path takes precedence over the local file default', () 
     resolveExperimentalCandidatesPath(' ', 'data/experimental-candidates.json'),
     'data/experimental-candidates.json',
   );
+});
+
+
+test('accepts cross-realm binary chunks and rejects forged ArrayBuffer tags', async () => {
+  const body = Buffer.from(JSON.stringify(makeFeed()));
+  const foreign = runInNewContext('new Uint8Array(bytes).buffer', { bytes: [...body] });
+  for (const [value, expected] of [
+    [foreign, true],
+    [runInNewContext('new Uint8Array(bytes)', { bytes: [...body] }), true],
+    [{ byteLength: body.length, [Symbol.toStringTag]: 'ArrayBuffer' }, false],
+  ]) {
+    let sent = false;
+    let cancelled = false;
+    let released = false;
+    const result = await fetchTopicCandidatesFeed({
+      nowMs: NOW_MS,
+      redditDataApiApproved: true,
+      fetchImpl: async () => streamingResponse({
+        async read() {
+          if (sent) return { done: true };
+          sent = true;
+          return { done: false, value };
+        },
+        async cancel() { cancelled = true; },
+        releaseLock() { released = true; },
+      }),
+    });
+    assert.equal(result.ok, expected);
+    assert.equal(released, true);
+    if (expected) assert.equal(result.feed.candidates.length, 1);
+    else {
+      assert.equal(result.reason, 'response_body_invalid');
+      assert.equal(cancelled, true);
+    }
+  }
+});
+
+test('normalizes consistent duplicate decimal lengths without weakening byte guards', async () => {
+  const body = JSON.stringify(makeFeed());
+  const size = Buffer.byteLength(body);
+  for (const [length, reason, options = {}, encoding = 'identity'] of [
+    [`${size}, ${size}`, null],
+    [` 0${size} ,\t${size} `, null],
+    [`${size}, ${size}`, null, {}, 'GZip'],
+    [`${size}, ${size + 1}`, 'content_length_invalid'],
+    [`${size},`, 'content_length_invalid'],
+    [`+${size}`, 'content_length_invalid'],
+    [`${size}.0`, 'content_length_invalid'],
+    ['0x10', 'content_length_invalid'],
+    ['1e2', 'content_length_invalid'],
+    [`\u00a0${size}`, 'content_length_invalid'],
+    ['9007199254740992, 9007199254740992', 'content_length_invalid'],
+    [`${size + 1}, ${size + 1}`, 'response_truncated'],
+    [`${size}, ${size}`, 'response_too_large', { maxBytes: size - 1 }],
+  ]) {
+    let sent = false;
+    const result = await fetchTopicCandidatesFeed({
+      nowMs: NOW_MS,
+      redditDataApiApproved: true,
+      ...options,
+      fetchImpl: async () => streamingResponse({
+        async read() {
+          if (sent) return { done: true };
+          sent = true;
+          return { done: false, value: Buffer.from(body) };
+        },
+        releaseLock() {},
+      }, { 'Content-Length': length, 'Content-Encoding': encoding }),
+    });
+    assert.equal(result.ok, reason === null, length);
+    if (reason) assert.equal(result.reason, reason, length);
+    else assert.equal(result.feed.candidates.length, 1);
+  }
 });

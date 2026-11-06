@@ -105,6 +105,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.quartierplan-ebnat-west-pubblico.title': 'Quartierplan Ebnat West exposé du 7 au 26 novembre',
     'blog.article.quartierplan-ebnat-west-pubblico.excerpt': 'Ebnat West sera développé progressivement avec des usages mixtes.',
     'blog.article.quartierplan-ebnat-west-pubblico.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.mercato-immobiliare-sciaffusa-crescita.title': 'Prix des logements à Schaffhouse en hausse selon l’Eigenheim-Index',
+    'blog.article.mercato-immobiliare-sciaffusa-crescita.excerpt': 'Appartements +4,0% sur un an et maisons individuelles +3,7% sur un an dans le canton de Schaffhouse ; un appartement typique coûte CHF 770\'000.',
+    'blog.article.mercato-immobiliare-sciaffusa-crescita.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

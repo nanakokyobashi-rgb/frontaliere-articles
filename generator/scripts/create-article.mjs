@@ -18860,6 +18860,11 @@ async function main() {
               break;
             }
           }
+          // The catch below uses the selected candidate to redact duplicate
+          // diagnostics. Keep it in the attempt scope rather than the try
+          // block: a generation error must not become a ReferenceError while
+          // the original error is being classified (issue #2238).
+          let chosen = null;
           try {
             // Filter out already-tried URLs.
             const availableHeadlines = pool.headlines.filter(h => !triedUrls.has(h.url));
@@ -18869,7 +18874,6 @@ async function main() {
             }
 
             // ── Demand-driven ranker (Phase B+C) ──
-            let chosen = null;
             let rankerTier = null;
             let rankerScoreObj = null;
             let rankerCluster = null;

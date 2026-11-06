@@ -197,7 +197,7 @@ test('il rollback mantiene la revisione e condivide il budget Pages fra i batch'
   assert.match(source, /rollback_repo=.*shard_https_push_url\s+"\$SHARD_REPO"/u);
   assert.match(source, /rollback_git_opts=\(-c credential\.helper=/u);
   assert.match(source, /\$\{rollback_git_opts\[@/u);
-  assert.match(source, /candidate_parent=.*show -s --format='%P'\s+"\$candidate"/u);
+  assert.match(source, /candidate_parent=.*cat-file -p\s+"\$candidate"/u);
   assert.match(source, /candidate_parent.*expected_parent/u);
   assert.match(source, /expected_parent="\$candidate"/u);
   assert.match(source, /expected_parent.*remote_head/u);

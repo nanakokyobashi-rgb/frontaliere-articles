@@ -4,45 +4,17 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://www.schaffhausen24.ch/articles/416440-marthalen-plant-ausbau-des-gesundheitszentrums": {
-      "section": "canton-sh",
-      "ts": 1793662369285
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-02/bei-der-wefa-in-thayngen-kommt-es-zu-einem-wechsel": {
-      "section": "canton-sh",
-      "ts": 1793667978329
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-01/gf-verkauft-luft-und-raumfahrt-sowie-industriegasturbinen": {
-      "section": "canton-sh",
-      "ts": 1793675867594
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-07/georg-fischer-schlaegt-ton-buechner-als-neuen-praesidenten": {
-      "section": "canton-sh",
-      "ts": 1793694524731
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-30/ist-orange-das-neue-schwarz-wie-sich-weidmueller-im-ki": {
-      "section": "canton-sh",
-      "ts": 1793694527538
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-12/gf-vizepraesidentin-gehoert-zu-den-top-100-women-in-business": {
-      "section": "canton-sh",
-      "ts": 1793702235665
-    },
-    "canton-sh::https://www.radiomunot.ch/p/regionalnachrichten-vom-3-november-2026-1130-uhr-0b2ct3zfdzgmycardifqh1": {
-      "section": "canton-sh",
-      "ts": 1793707377324
-    },
-    "canton-sh::https://sh.ch/webseite/kanton-schaffhausen/beh-rde/regierung/staatskanzlei/medienmitteilungen-24340447-de.html": {
-      "section": "canton-sh",
-      "ts": 1793721440433
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-23/gvs-weine-ag-verlaesst-herblingen-und-zieht-nach-osterfingen": {
-      "section": "canton-sh",
-      "ts": 1793722205748
-    },
     "canton-sh::https://www.schaffhausen24.ch/articles/416903-stein-am-rhein-stellt-budget-2027-vor": {
       "section": "canton-sh",
       "ts": 1793760314034
+    },
+    "canton-sh::https://sh.ch/webseite/kanton-schaffhausen/beh-rde/regierung/staatskanzlei/medienmitteilungen-24340447-de.html": {
+      "section": "canton-sh",
+      "ts": 1793918364173
+    },
+    "canton-sh::https://www.shn.ch/region/kanton/2026-11-04/schaffhauser-polizei-warnt-vor-telefonbetrug-seniorin-will-zehntausende": {
+      "section": "canton-sh",
+      "ts": 1793920414012
     }
   }
 }

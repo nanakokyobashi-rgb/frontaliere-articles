@@ -37,6 +37,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'gpk-modifiche-budget-2027': { it: 'gpk-modifiche-budget-2027', en: 'gpk-schaffhausen-2027-budget-changes', de: 'gpk-schaffhausen-budget-2027-aenderung', fr: 'gpk-schaffhouse-budget-2027-modifications' },
  'sciaffusa-mercato-lavoro-ottobre': { it: 'sciaffusa-mercato-lavoro-ottobre', en: 'schaffhausen-job-market-october', de: 'schaffhausen-arbeitsmarkt-oktober', fr: 'schaffhouse-marche-travail-octobre' },
  'quartierplan-ebnat-west-pubblico': { it: 'quartierplan-ebnat-west-pubblico', en: 'ebnat-west-district-plan-public', de: 'quartierplan-ebnat-west-oeffentlich', fr: 'plan-quartier-ebnat-west-public' },
+ 'mercato-immobiliare-sciaffusa-crescita': { it: 'mercato-immobiliare-sciaffusa-crescita', en: 'schaffhausen-real-estate-growth', de: 'schaffhausen-immobilienmarkt-wachstum', fr: 'immobilier-schaffhouse-croissance' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
