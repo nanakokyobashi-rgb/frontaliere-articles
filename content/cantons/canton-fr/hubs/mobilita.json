@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T05:23:07.727Z",
-  "contentHash": "516d6db8b6305871a84f0c8427a2b94bc9590a83f475c9856744ecfd6f68b022",
+  "updatedAt": "2026-11-06T16:04:12.780Z",
+  "contentHash": "6dd266d2ce2bcc7561f4538e835150baf544e914f500be9e223c6a7696d5b86f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -27,12 +27,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "19",
+          "value": "17",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "9",
+          "value": "8",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         }
       ],
@@ -73,12 +73,6 @@
               "date": "2026-10-15T05:00:00.000Z"
             },
             {
-              "label": "Route des Chapelettes, Chapelle in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 6 novembre 2026",
-              "date": "2026-10-21T14:24:00.000Z"
-            },
-            {
               "label": "Route du Postillon, Courtepin in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Chiusura",
               "detail": "fine prevista: 27 novembre 2026",
@@ -89,6 +83,12 @@
               "value": "Chiusura",
               "detail": "fine prevista: 27 novembre 2026",
               "date": "2026-10-26T06:34:00.000Z"
+            },
+            {
+              "label": "Amtmerswilweg, Wünnewil-Flamatt in tutte le direzioni Situazione: divieto di transito Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 23 novembre 2026",
+              "date": "2026-10-27T16:49:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-06T16:04:12.780Z"
     },
     "en": {
       "canton": "FR",
@@ -204,12 +204,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "19",
+          "value": "17",
           "note": "reports as of 5 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "9",
+          "value": "8",
           "note": "reports as of 5 November 2026"
         }
       ],
@@ -250,12 +250,6 @@
               "date": "2026-10-15T05:00:00.000Z"
             },
             {
-              "label": "Route des Chapelettes, Chapelle in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Closure",
-              "detail": "until 6 November 2026",
-              "date": "2026-10-21T14:24:00.000Z"
-            },
-            {
               "label": "Route du Postillon, Courtepin in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Closure",
               "detail": "until 27 November 2026",
@@ -266,6 +260,12 @@
               "value": "Closure",
               "detail": "until 27 November 2026",
               "date": "2026-10-26T06:34:00.000Z"
+            },
+            {
+              "label": "Amtmerswilweg, Wünnewil-Flamatt in tutte le direzioni Situazione: divieto di transito Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 23 November 2026",
+              "date": "2026-10-27T16:49:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-06T16:04:12.780Z"
     },
     "de": {
       "canton": "FR",
@@ -381,12 +381,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "19",
+          "value": "17",
           "note": "Meldungen vom 5. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "9",
+          "value": "8",
           "note": "Meldungen vom 5. November 2026"
         }
       ],
@@ -427,12 +427,6 @@
               "date": "2026-10-15T05:00:00.000Z"
             },
             {
-              "label": "Route des Chapelettes, Chapelle in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 6. November 2026",
-              "date": "2026-10-21T14:24:00.000Z"
-            },
-            {
               "label": "Route du Postillon, Courtepin in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
               "value": "Sperrung",
               "detail": "bis 27. November 2026",
@@ -443,6 +437,12 @@
               "value": "Sperrung",
               "detail": "bis 27. November 2026",
               "date": "2026-10-26T06:34:00.000Z"
+            },
+            {
+              "label": "Amtmerswilweg, Wünnewil-Flamatt in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 23. November 2026",
+              "date": "2026-10-27T16:49:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-06T16:04:12.780Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,12 +558,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "19",
+          "value": "17",
           "note": "signalements au 5 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "9",
+          "value": "8",
           "note": "signalements au 5 novembre 2026"
         }
       ],
@@ -604,12 +604,6 @@
               "date": "2026-10-15T05:00:00.000Z"
             },
             {
-              "label": "Route des Chapelettes, Chapelle dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
-              "value": "Fermeture",
-              "detail": "jusqu’au 6 novembre 2026",
-              "date": "2026-10-21T14:24:00.000Z"
-            },
-            {
               "label": "Route du Postillon, Courtepin dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
               "value": "Fermeture",
               "detail": "jusqu’au 27 novembre 2026",
@@ -620,6 +614,12 @@
               "value": "Fermeture",
               "detail": "jusqu’au 27 novembre 2026",
               "date": "2026-10-26T06:34:00.000Z"
+            },
+            {
+              "label": "Amtmerswilweg, Wünnewil-Flamatt dans les deux sens Situation: circulation de transit interdite Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 23 novembre 2026",
+              "date": "2026-10-27T16:49:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-06T16:04:12.780Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T05:23:07.727Z",
-  "contentHash": "fbd1c27b0001095b975e3ab7491e95ead03420d41506ab736acb6bf9266f669e",
+  "updatedAt": "2026-11-06T16:04:12.780Z",
+  "contentHash": "a7dccf5423385088d3475f63c5e5e4efe9c16794a91be480bafe30a84bd87f26",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "20",
+          "value": "19",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "15",
+          "value": "13",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         }
       ],
@@ -246,7 +246,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-06T16:04:12.780Z"
     },
     "en": {
       "canton": "VS",
@@ -261,12 +261,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "20",
+          "value": "19",
           "note": "reports as of 5 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "15",
+          "value": "13",
           "note": "reports as of 5 November 2026"
         }
       ],
@@ -470,7 +470,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-06T16:04:12.780Z"
     },
     "de": {
       "canton": "VS",
@@ -485,12 +485,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "20",
+          "value": "19",
           "note": "Meldungen vom 5. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "15",
+          "value": "13",
           "note": "Meldungen vom 5. November 2026"
         }
       ],
@@ -694,7 +694,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-06T16:04:12.780Z"
     },
     "fr": {
       "canton": "VS",
@@ -709,12 +709,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "20",
+          "value": "19",
           "note": "signalements au 5 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "15",
+          "value": "13",
           "note": "signalements au 5 novembre 2026"
         }
       ],
@@ -918,7 +918,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-06T16:04:12.780Z"
     }
   }
 }
