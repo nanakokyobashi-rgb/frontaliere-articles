@@ -54,6 +54,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.volksschule-uri-iscrizioni-2025-2026.title': 'Kanton Uri: 3.934 Schüler und 224 Klassen im Jahr 2025/2026',
     'blog.article.volksschule-uri-iscrizioni-2025-2026.excerpt': 'Der Bericht der Volksschule des Kantons Uri für das Schuljahr 2025/2026 beschreibt einen begrenzten Anstieg der Anmeldungen und eine Erweiterung der Abteilungen.',
     'blog.article.volksschule-uri-iscrizioni-2025-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.andermatt-piano-max-uristier.title': 'Andermatt, Quartierplan für den Stier Max l\'Uristier',
+    'blog.article.andermatt-piano-max-uristier.excerpt': 'Der Plan Nätschen West liegt bis zum 7. Dezember zur Mitwirkung auf: Max l\'Uristier ist 36 Meter lang und 20 Meter hoch.',
+    'blog.article.andermatt-piano-max-uristier.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;

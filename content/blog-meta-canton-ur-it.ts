@@ -54,6 +54,9 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.volksschule-uri-iscrizioni-2025-2026.title': 'Canton Uri: 3.934 alunni e 224 sezioni nel 2025/2026',
     'blog.article.volksschule-uri-iscrizioni-2025-2026.excerpt': 'Il rapporto sulla Volksschule del Canton Uri per l\'anno scolastico 2025/2026 descrive un aumento contenuto degli iscritti e un ampliamento delle sezioni.',
     'blog.article.volksschule-uri-iscrizioni-2025-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.andermatt-piano-max-uristier.title': 'Andermatt, piano di quartiere per il toro Max l\'Uristier',
+    'blog.article.andermatt-piano-max-uristier.excerpt': 'Il piano Nätschen West è in partecipazione fino al 7 dicembre: Max l\'Uristier misura 36 metri di lunghezza e 20 di altezza.',
+    'blog.article.andermatt-piano-max-uristier.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonUrIt;

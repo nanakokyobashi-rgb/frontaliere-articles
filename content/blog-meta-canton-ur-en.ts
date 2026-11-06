@@ -54,6 +54,9 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.volksschule-uri-iscrizioni-2025-2026.title': 'Canton Uri: 3.934 students and 224 sections in 2025/2026',
     'blog.article.volksschule-uri-iscrizioni-2025-2026.excerpt': 'The report on the Volksschule of the Canton of Uri for the 2025/2026 school year describes a limited increase in enrolments and an expansion of the sections.',
     'blog.article.volksschule-uri-iscrizioni-2025-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.andermatt-piano-max-uristier.title': 'Andermatt, neighborhood plan for the bull Max l\'Uristier',
+    'blog.article.andermatt-piano-max-uristier.excerpt': 'The Nätschen West plan is open for public consultation until December 7: Max l\'Uristier is 36 meters long and 20 meters high.',
+    'blog.article.andermatt-piano-max-uristier.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonUrEn;

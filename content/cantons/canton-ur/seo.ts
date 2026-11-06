@@ -660,6 +660,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-andermatt-piano-max-uristier': {
+    title: 'Andermatt, piano di quartiere per il toro Max l\'Uristier',
+    description: 'Ad Andermatt il piano Nätschen West è in partecipazione fino al 7 dicembre e prevede Max l\'Uristier, toro di legno lungo 36 metri e alto 20.',
+    keywords: 'frontalieri, ticino, svizzera, italia, andermatt, piano, quartiere, toro',
+    ogTitle: 'Piano Nätschen West per Max l\'Uristier',
+    ogDescription: 'Il piano Nätschen West è in partecipazione ad Andermatt: Max l\'Uristier, toro in legno lungo 36 metri e alto 20, prevede una piattaforma panoramica, arrivi in gondola o treno e una capienza massima di 150 persone.',
+    canonicalPath: '/articoli-uri/andermatt-piano-max-uristier/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Andermatt, piano di quartiere per il toro Max l'Uristier",
+      "description": "Ad Andermatt il piano Nätschen West è in partecipazione fino al 7 dicembre e prevede Max l'Uristier, toro di legno lungo 36 metri e alto 20.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-andermatt-piano-max-uristier.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-06T08:13:38+00:00",
+      "dateModified": "2026-11-06T08:13:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/andermatt-piano-max-uristier/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
