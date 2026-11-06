@@ -1,11 +1,13 @@
 import { readFileSync } from 'node:fs';
+import {
+  LOCALIZED_TOPONYM_ENTITY_TYPES as ENTITY_TYPES,
+  readLocalizedToponymTable,
+} from './localized-toponym-table.mjs';
 import { decodeHtmlEntities } from './decode-html-entities.mjs';
 import { DIGEST_EVENT_MARKER_PATTERN } from './events-digest-marker.mjs';
 import { scanStaticArticleFieldEntries } from './static-article-field-scanner.mjs';
 
-const TABLE = JSON.parse(
-  readFileSync(new URL('../../data/localized-toponyms.json', import.meta.url), 'utf8'),
-);
+const TABLE = readLocalizedToponymTable(new URL('../../data/localized-toponyms.json', import.meta.url));
 
 export const LOCALIZED_TOPONYM_LOCALES = Object.freeze([...TABLE.locales]);
 export const LOCALIZED_TOPONYMS = Object.freeze(
@@ -21,7 +23,6 @@ export const LOCALIZED_TOPONYMS = Object.freeze(
 );
 
 const LOCALE_SET = new Set(LOCALIZED_TOPONYM_LOCALES);
-const ENTITY_TYPES = Object.freeze(['canton', 'capital']);
 // Punctuation keeps separate fields readable in prompts and prevents a
 // multiword toponym from being assembled across adjacent field boundaries.
 export const LOCALIZED_TOPONYM_FIELD_SEPARATOR = '\n;\n';
