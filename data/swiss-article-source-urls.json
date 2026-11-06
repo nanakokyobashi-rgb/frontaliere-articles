@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4102957": {
-    "articleId": "turismo-agosto-ospiti-estero",
-    "ts": "2026-09-24T22:53:55.016Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1952370/salasso-alla-pompa-dopo-il-diesel-ora-tocchera-alla-benzina": {
     "articleId": "salasso-alla-pompa-benzina",
     "ts": "2026-09-25T01:29:16.672Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4217424": {
     "articleId": "riforma-assicurazione-invalidita-ai",
     "ts": "2026-11-06T05:15:10.920Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4216212": {
+    "articleId": "previdenza-lpp-tasso-2-percento",
+    "ts": "2026-11-06T18:35:07.053Z",
     "keyForm": 2
   }
 }
