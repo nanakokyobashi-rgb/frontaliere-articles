@@ -12933,37 +12933,9 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/estero/estero/1960211/sciopero-generale-in-italia-mobilitazione-in-60-citta-con-tensioni-a-roma-e-torino": {
-      "section": "frontaliere",
-      "ts": 1793622326804
-    },
-    "frontaliere::https://www.varesenews.it/2026/11/due-operai-in-nero-e-ponteggi-senza-protezioni-i-carabinieri-sospendono-unimpresa-edile-a-novara/2726011": {
-      "section": "frontaliere",
-      "ts": 1793622335592
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1960477/punti-indicatore-imprese-lavoro-prospettive-mercato": {
-      "section": "frontaliere",
-      "ts": 1793622346073
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/mercato-del-lavoro%3a-le-prospettive-si-offuscano-leggermente/92312143": {
-      "section": "frontaliere",
-      "ts": 1793625970576
-    },
-    "frontaliere::https://www.rsi.ch/s/4142153": {
-      "section": "frontaliere",
-      "ts": 1793693072998
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1957650/merci-dogana-valigie-caccia-camion": {
-      "section": "frontaliere",
-      "ts": 1793700885046
-    },
-    "svizzera::https://www.tio.ch/svizzera/attualita/1960695/salute-ia-consulente-svizzera-malattia": {
+    "svizzera::https://www.quotidianopiu.it/dettaglio/14446047/niente-esenzione-per-lente-pubblico-svizzero-manca-la-reciprocita": {
       "section": "svizzera",
-      "ts": 1793715916543
-    },
-    "svizzera::https://www.rsi.ch/s/4214271": {
-      "section": "svizzera",
-      "ts": 1793751304212
+      "ts": 1793985457175
     }
   }
 }
