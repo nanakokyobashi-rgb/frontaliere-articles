@@ -11,6 +11,10 @@
     "canton-sg::https://www.sg.ch/news/sgch_kantonsrat/2026/11/einheitliche-finanzierung-der-gesundheitsleistungen.html": {
       "section": "canton-sg",
       "ts": 1793917187458
+    },
+    "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-nachhaltigkeit": {
+      "section": "canton-sg",
+      "ts": 1794007150741
     }
   }
 }
