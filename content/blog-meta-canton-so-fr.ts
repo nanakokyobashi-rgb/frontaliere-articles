@@ -75,6 +75,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.solothurn-riduzione-premi-2027.title': 'Réduction des primes d\'assurance 2027 : CHF 221 millions à Soleure',
     'blog.article.solothurn-riduzione-premi-2027.excerpt': 'En 2027, à Soleure, environ CHF 221 millions sont prévus.',
     'blog.article.solothurn-riduzione-premi-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.kantonsrat-proroga-gav-due-anni.title': 'Soleure: proroga CCT de deux ans pour fonctionnaires',
+    'blog.article.kantonsrat-proroga-gav-due-anni.excerpt': 'La CCT pour tous les employés de droit public du canton est prolongée de deux ans, évitant ainsi un vide contractuel à compter du 1er janvier 2027.',
+    'blog.article.kantonsrat-proroga-gav-due-anni.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

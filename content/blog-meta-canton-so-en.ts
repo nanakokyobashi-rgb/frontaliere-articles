@@ -75,6 +75,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.solothurn-riduzione-premi-2027.title': 'Insurance premium reductions in 2027: CHF 221 million in Solothurn',
     'blog.article.solothurn-riduzione-premi-2027.excerpt': 'In 2027, around CHF 221 million are planned for Solothurn.',
     'blog.article.solothurn-riduzione-premi-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.kantonsrat-proroga-gav-due-anni.title': 'Canton of Solothurn: GAV extended for two years for public employees',
+    'blog.article.kantonsrat-proroga-gav-due-anni.excerpt': 'The GAV for all public-law employees of the Canton has been extended for two years, avoiding a contractual gap from January 1, 2027.',
+    'blog.article.kantonsrat-proroga-gav-due-anni.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

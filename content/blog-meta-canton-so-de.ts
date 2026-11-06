@@ -75,6 +75,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.solothurn-riduzione-premi-2027.title': 'Prämienverbilligung 2027: CHF 221 Millionen in Solothurn',
     'blog.article.solothurn-riduzione-premi-2027.excerpt': '2027 sind in Solothurn rund CHF 221 Millionen vorgesehen.',
     'blog.article.solothurn-riduzione-premi-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.kantonsrat-proroga-gav-due-anni.title': 'Solothurn: GAV um 2 Jahre für öffentliche Angestellte verlängert',
+    'blog.article.kantonsrat-proroga-gav-due-anni.excerpt': 'Der GAV für alle öffentlich-rechtlichen Angestellten des Kantons wird um zwei Jahre verlängert, wodurch eine Vertragslücke ab dem 1. Januar 2027 vermieden wird.',
+    'blog.article.kantonsrat-proroga-gav-due-anni.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;

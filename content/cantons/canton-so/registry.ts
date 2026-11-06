@@ -270,4 +270,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'kantonsrat-proroga-gav-due-anni',
+ category: 'pratico',
+ date: '2026-11-06T02:38:57.836Z',
+ image: '/images/blog/article-kantonsrat-proroga-gav-due-anni.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

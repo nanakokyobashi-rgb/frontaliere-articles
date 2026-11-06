@@ -75,6 +75,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.solothurn-riduzione-premi-2027.title': 'Riduzione premi assicurativi 2027: CHF 221 milioni a Soletta',
     'blog.article.solothurn-riduzione-premi-2027.excerpt': 'Nel 2027 a Soletta sono previsti circa CHF 221 milioni.',
     'blog.article.solothurn-riduzione-premi-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.kantonsrat-proroga-gav-due-anni.title': 'Cantone Soletta: proroga GAV per due anni per dipendenti pubblici',
+    'blog.article.kantonsrat-proroga-gav-due-anni.excerpt': 'Il GAV per tutti i dipendenti di diritto pubblico del Cantone è prorogato per due anni, evitando l\'assenza contrattuale dal 1° gennaio 2027.',
+    'blog.article.kantonsrat-proroga-gav-due-anni.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;

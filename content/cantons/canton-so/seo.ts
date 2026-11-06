@@ -933,6 +933,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-kantonsrat-proroga-gav-due-anni': {
+    title: 'Cantone Soletta: proroga GAV per due anni per dipendenti pubblici',
+    description: 'Il GAV per i dipendenti pubblici del Cantone Soletta è prorogato per due anni, coprendo amministrazione, scuole e ospedali fino al 2026 e oltre.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cantone, soletta, proroga, anni',
+    ogTitle: 'Proroga GAV Cantone Soletta due anni',
+    ogDescription: 'Il Consiglio cantonale di Soletta ha prorogato il GAV per due anni per tutti i dipendenti di diritto pubblico, evitando un vuoto contrattuale dal 1° gennaio 2027.',
+    canonicalPath: '/articoli-soletta/kantonsrat-proroga-gav-due-anni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cantone Soletta: proroga GAV per due anni per dipendenti pubblici",
+      "description": "Il GAV per i dipendenti pubblici del Cantone Soletta è prorogato per due anni, coprendo amministrazione, scuole e ospedali fino al 2026 e oltre.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-kantonsrat-proroga-gav-due-anni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-06T02:38:57+00:00",
+      "dateModified": "2026-11-06T02:38:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/kantonsrat-proroga-gav-due-anni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
