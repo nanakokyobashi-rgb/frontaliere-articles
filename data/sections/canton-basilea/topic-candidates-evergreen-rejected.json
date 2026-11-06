@@ -4,25 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-basilea::https://www.schwarzwaelder-bote.de/lokales/loerrach/steuer-im-fokus-damit-keine-steuerschulden-entstehen-79653902.html": {
+    "canton-basilea::https://www.bs.ch/news/2026-vorauszahlung-der-kantonalen-steuern-2026": {
       "section": "canton-basilea",
-      "ts": 1793633341246
-    },
-    "canton-basilea::https://www.bs.ch/medienmitteilungen/2026-pensionskassengesetz-punktuelle-anpassungen-bewaehrtem-gesetz": {
-      "section": "canton-basilea",
-      "ts": 1793634079849
-    },
-    "canton-basilea::https://www.bazonline.ch/genf-einigung-fuer-gekuendigte-mieter-am-carl-vogt-boulevard-843454971092": {
-      "section": "canton-basilea",
-      "ts": 1793648052606
-    },
-    "canton-basilea::https://bajour.ch/a/enzootische-pneumonie-750-schweine-in-betrieb-in-baselland-getoetet": {
-      "section": "canton-basilea",
-      "ts": 1793668893471
-    },
-    "canton-basilea::https://www.nau.ch/news/schweiz/unterstutzung-fur-gekundigte-mietende-an-genfer-carl-vogt-boulevard-67196618": {
-      "section": "canton-basilea",
-      "ts": 1793700811215
+      "ts": 1793964748510
     }
   }
 }
