@@ -204,4 +204,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'uri-progetto-cultura-integrazione',
+ category: 'novita',
+ date: '2026-11-06T08:38:58.092Z',
+ image: '/images/blog/article-uri-progetto-cultura-integrazione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['UR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

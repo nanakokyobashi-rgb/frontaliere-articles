@@ -699,6 +699,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-uri-progetto-cultura-integrazione': {
+    title: 'Uri avvia progetto su cultura e integrazione | Frontaliere Ticino',
+    description: 'Uri avvia il progetto «Netzwerk Kultur und Integration» per facilitare l\'accesso culturale alla popolazione migrante.',
+    keywords: 'frontalieri, ticino, svizzera, italia, avvia, progetto, cultura, integrazione',
+    ogTitle: 'Uri avvia progetto su cultura e integrazione',
+    ogDescription: 'Il progetto «Netzwerk Kultur und Integration» del Canton Uri mira a migliorare l\'accesso culturale della popolazione migrante. Durata tre anni, con avvio il 1° dicembre 2026.',
+    canonicalPath: '/articoli-uri/uri-progetto-cultura-integrazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Uri avvia progetto su cultura e integrazione",
+      "description": "Uri avvia il progetto «Netzwerk Kultur und Integration» per facilitare l'accesso culturale alla popolazione migrante.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-uri-progetto-cultura-integrazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-06T08:38:58+00:00",
+      "dateModified": "2026-11-06T08:38:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/uri-progetto-cultura-integrazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

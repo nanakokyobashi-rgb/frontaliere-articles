@@ -57,6 +57,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.andermatt-piano-max-uristier.title': 'Andermatt, Quartierplan für den Stier Max l\'Uristier',
     'blog.article.andermatt-piano-max-uristier.excerpt': 'Der Plan Nätschen West liegt bis zum 7. Dezember zur Mitwirkung auf: Max l\'Uristier ist 36 Meter lang und 20 Meter hoch.',
     'blog.article.andermatt-piano-max-uristier.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.uri-progetto-cultura-integrazione.title': 'Uri startet Projekt zu Kultur und Integration',
+    'blog.article.uri-progetto-cultura-integrazione.excerpt': 'Das Projekt "Netzwerk Kultur und Integration" wird drei Jahre dauern, beginnend am 1. Dezember 2026, um Migranten den Zugang zu den kulturellen Angeboten von Uri zu erleichtern.',
+    'blog.article.uri-progetto-cultura-integrazione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;
