@@ -308,7 +308,33 @@ test('ramo missing-field: itValue whitespace-only lancia l\'errore invece di pub
 
   await assert.rejects(
     () => runMissingFieldLoop({ data, itContent, callWithRetry }),
-    /Campo body1 mancante nella traduzione en/,
+    (error) => error.qualityReject === true && /Campo body1 mancante nella traduzione en/.test(error.message),
+  );
+});
+
+test('excerpt tradotto senza sorgente valida è un quality reject dichiarato', async () => {
+  const data = {
+    content: {
+      en: {
+        title: 'A valid English title for this article',
+        body1: 'The English body contains a complete sentence about the published subject.',
+        body2: 'A second English body section with enough context.',
+        body3: 'A third English body section with enough context.',
+      },
+    },
+  };
+  const itContent = {
+    title: 'Titolo italiano valido per questo articolo',
+    excerpt: '   ',
+    body1: 'Il corpo italiano contiene una frase completa sul tema pubblicato.',
+    body2: 'Seconda sezione italiana con contesto sufficiente.',
+    body3: 'Terza sezione italiana con contesto sufficiente.',
+  };
+  const callWithRetry = async () => { throw new Error('non dovrebbe essere chiamato per una sorgente vuota'); };
+
+  await assert.rejects(
+    () => runMissingFieldLoop({ data, itContent, callWithRetry }),
+    (error) => error.qualityReject === true && /Campo excerpt mancante nella traduzione en/.test(error.message),
   );
 });
 

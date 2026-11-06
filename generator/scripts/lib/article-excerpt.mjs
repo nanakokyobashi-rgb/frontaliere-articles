@@ -1135,8 +1135,12 @@ export function repairGeneratedArticleDescriptions(article) {
   }));
 
   const repairField = ({ fields, field, locale, title, body, siblingValues, maxLength, minLength }) => {
-    const original = fields?.[field];
-    if (typeof original !== 'string') return;
+    const sourceValue = fields?.[field];
+    // Excerpt is required before translation. If the generated payload omitted
+    // it entirely, derive it from this article's localized body just as we do
+    // for an explicitly empty excerpt. Optional SEO descriptions stay absent.
+    if (typeof sourceValue !== 'string' && field !== 'excerpt') return;
+    const original = typeof sourceValue === 'string' ? sourceValue : '';
     const defects = findDescriptionDefects(original, { locale, field, body });
     if (defects.length === 0) return;
     const options = { locale, maxLength, minLength, body };

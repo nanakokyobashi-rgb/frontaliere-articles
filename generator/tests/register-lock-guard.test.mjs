@@ -9,6 +9,7 @@ import {
   checkRegistrationLocks,
   findRegistrationLocks,
   formatRegistrationLockError,
+  sectionFromFilename,
 } from '../../scripts/ci/check-registration-locks.mjs';
 
 function sandbox() {
@@ -38,6 +39,24 @@ test('producer e guard condividono la regex dei marker di registrazione', () => 
     assert.match(filename, producerPattern, `${section}: il producer deve generare un nome accettato`);
     assert.match(filename, REGISTER_LOCK_FILE_RE, `${section}: il guard deve riconoscere il marker generato`);
   }
+});
+
+test('il guard attribuisce il lock scoped al filename e rifiuta il mismatch del JSON', () => {
+  const root = sandbox();
+  fs.writeFileSync(
+    path.join(root, 'register-in-progress-canton-ti.json'),
+    JSON.stringify({ section: 'frontaliere', runId: '37615236890', workflow: 'Generate canton TI' }),
+  );
+  const [lock] = findRegistrationLocks(root);
+  assert.equal(sectionFromFilename(lock.file), 'canton-ti');
+  assert.equal(lock.section, 'canton-ti');
+  assert.deepEqual(lock.sectionMismatch, { filename: 'canton-ti', payload: 'frontaliere' });
+  assert.equal(checkRegistrationLocks(root), 1);
+  assert.match(
+    formatRegistrationLockError(lock),
+    /sezione JSON=frontaliere diversa dal filename=canton-ti/,
+  );
+  fs.rmSync(root, { recursive: true, force: true });
 });
 
 test('un lock orfano nomina sezione e run invece di un errore generico', () => {

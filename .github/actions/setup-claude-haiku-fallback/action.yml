@@ -470,16 +470,35 @@ runs:
         # Run npm with a throw-away environment. This strips all job-level
         # credentials (including GitHub and package-manager tokens) and keeps
         # user config/cache inside this action-owned temporary prefix.
-        if ! /usr/bin/env -i \
+        # npm install has no useful wall-clock deadline of its own. Keep this
+        # optional lane bounded; a timeout disables Codex and lets the normal
+        # model cascade continue instead of consuming the article job.
+        codex_cli_install_timeout_seconds=300
+        codex_cli_install_timeout_bin=/usr/bin/timeout
+        if [ ! -x "$codex_cli_install_timeout_bin" ]; then
+          echo '::warning::Trusted timeout utility unavailable; Codex CLI lane disabled and the normal model cascade remains available'
+          rm -rf -- "$codex_prefix"
+          exit 0
+        fi
+        install_status=0
+        /usr/bin/env -i \
           PATH="$safe_path" \
           HOME="$npm_home" \
           CI="true" \
           NPM_CONFIG_USERCONFIG="$npmrc" \
           NPM_CONFIG_GLOBALCONFIG="$global_npmrc" \
           npm_config_cache="$npm_cache" \
-          "$trusted_node" "$trusted_npm" install --prefix "$codex_prefix" --no-save --no-package-lock \
-            --no-fund --no-audit @openai/codex@0.153.4; then
-          echo "::warning::Codex CLI install failed; the normal fallback cascade remains available"
+          "$codex_cli_install_timeout_bin" --signal=TERM --kill-after=10s \
+          "${codex_cli_install_timeout_seconds}s" "$trusted_node" "$trusted_npm" install \
+            --prefix "$codex_prefix" --no-save --no-package-lock \
+            --no-fund --no-audit @openai/codex@0.153.4
+        install_status=$?
+        if [ "$install_status" -ne 0 ]; then
+          if [ "$install_status" -eq 124 ] || [ "$install_status" -eq 137 ]; then
+            echo "::warning::Codex CLI install timed out after ${codex_cli_install_timeout_seconds}s; the normal fallback cascade remains available"
+          else
+            echo "::warning::Codex CLI install failed with exit ${install_status}; the normal fallback cascade remains available"
+          fi
           rm -rf -- "$codex_prefix"
           exit 0
         fi
