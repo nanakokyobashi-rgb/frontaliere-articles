@@ -29,6 +29,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'supporto-datori-lavoro-turgovia': { it: 'supporto-datori-lavoro-turgovia', en: 'employer-support-thurgau', de: 'arbeitgeber-unterstuetzung-thurgau', fr: 'soutien-employeurs-thurgovie' },
  'turgovia-piano-risparmio-60-milioni': { it: 'turgovia-piano-risparmio-60-milioni', en: 'thurgau-savings-plan-60-million', de: 'thurgau-sparpaket-60-millionen', fr: 'thurgovie-plan-economies-60-millions' },
  'economia-imprese-cantone-turgovia': { it: 'economia-imprese-cantone-turgovia', en: 'thurgau-business-canton-economy', de: 'wirtschaft-firmen-kanton-thurgau', fr: 'economie-entreprises-canton-thurgovie' },
+ 'domanda-edilizia-meisenweg': { it: 'domanda-edilizia-meisenweg', en: 'building-permit-meisenweg', de: 'baugesuch-meisenweg', fr: 'permis-construire-meisenweg' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

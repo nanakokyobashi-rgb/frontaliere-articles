@@ -4,17 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-tg::https://awa.tg.ch/public/upload/assets/34935/infoblatt_was_tun_bei_ausstehendem_lohn.pdf?fp=1": {
-      "section": "canton-tg",
-      "ts": 1793770485300
-    },
-    "canton-tg::https://awa.tg.ch/arbeitgebende/arbeitnehmerschutz/arbeitnehmerschutz-am-arbeitsplatz.html/3325": {
-      "section": "canton-tg",
-      "ts": 1793778545100
-    },
     "canton-tg::https://www.kreuzlingen.ch/aktuelles/steueramt-bleibt-am-9-november-vormittags-geschlossen": {
       "section": "canton-tg",
       "ts": 1793798071093
+    },
+    "canton-tg::https://www.frauenfeld.ch/wohnen-mobilitaet/wohnen/bauen-und-umwelt/oeffentliche-auflagen.html/1009/news/12637": {
+      "section": "canton-tg",
+      "ts": 1793968637907
     }
   }
 }

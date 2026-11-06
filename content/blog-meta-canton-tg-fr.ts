@@ -81,6 +81,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.economia-imprese-cantone-turgovia.title': 'Soutien entreprises Thurgovie : cadres et implantation',
     'blog.article.economia-imprese-cantone-turgovia.excerpt': 'L’administration propose un accompagnement, des informations et des conseils aux entreprises existantes ainsi qu’aux personnes qui souhaitent s’implanter dans le canton de Thurgovie.',
     'blog.article.economia-imprese-cantone-turgovia.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.domanda-edilizia-meisenweg.title': 'Demande de permis de construire pour Meisenweg 9 à Frauenfeld',
+    'blog.article.domanda-edilizia-meisenweg.excerpt': 'L\'avis concerne Meisenweg 9 à Frauenfeld : maison individuelle, installation solaire et aménagement des espaces extérieurs, avec consultation du 4 au 23 novembre 2026.',
+    'blog.article.domanda-edilizia-meisenweg.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;

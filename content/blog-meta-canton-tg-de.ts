@@ -81,6 +81,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.economia-imprese-cantone-turgovia.title': 'Unterstützung für Unternehmen im Kanton Thurgau: Rahmenbedingungen und Ansiedlung',
     'blog.article.economia-imprese-cantone-turgovia.excerpt': 'Die Verwaltung bietet bestehenden Unternehmen und allen, die sich im Kanton Thurgau ansiedeln möchten, Begleitung, Information und Beratung.',
     'blog.article.economia-imprese-cantone-turgovia.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.domanda-edilizia-meisenweg.title': 'Bauantrag für Meisenweg 9 in Frauenfeld',
+    'blog.article.domanda-edilizia-meisenweg.excerpt': 'Die Mitteilung betrifft Meisenweg 9 in Frauenfeld: Einfamilienhaus, Solaranlage und Außenbereich, mit Beratung vom 4. bis 23. November 2026.',
+    'blog.article.domanda-edilizia-meisenweg.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTgDe;

@@ -294,4 +294,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'domanda-edilizia-meisenweg',
+ category: 'pratico',
+ date: '2026-11-06T12:57:20.385Z',
+ image: '/images/blog/article-domanda-edilizia-meisenweg.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

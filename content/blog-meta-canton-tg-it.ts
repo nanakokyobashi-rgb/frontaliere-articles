@@ -81,6 +81,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.economia-imprese-cantone-turgovia.title': 'Supporto imprese Canton Turgovia: condizioni quadro e insediamento',
     'blog.article.economia-imprese-cantone-turgovia.excerpt': 'L\'amministrazione offre accompagnamento, informazione e consulenza alle imprese esistenti e a chi desidera insediarsi nel Cantone Turgovia.',
     'blog.article.economia-imprese-cantone-turgovia.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.domanda-edilizia-meisenweg.title': 'Domanda edilizia per Meisenweg 9 a Frauenfeld',
+    'blog.article.domanda-edilizia-meisenweg.excerpt': 'L\'avviso riguarda Meisenweg 9 a Frauenfeld: casa unifamiliare, impianto solare e area esterna, con consultazione dal 4 al 23 novembre 2026.',
+    'blog.article.domanda-edilizia-meisenweg.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;

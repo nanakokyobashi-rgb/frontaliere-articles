@@ -81,6 +81,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.economia-imprese-cantone-turgovia.title': 'Business support in Thurgau: conditions and establishment',
     'blog.article.economia-imprese-cantone-turgovia.excerpt': 'The administration provides support, information and advice to existing businesses and to those wishing to establish themselves in the Canton of Thurgau.',
     'blog.article.economia-imprese-cantone-turgovia.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.domanda-edilizia-meisenweg.title': 'Building application for Meisenweg 9 in Frauenfeld',
+    'blog.article.domanda-edilizia-meisenweg.excerpt': 'The notice concerns Meisenweg 9 in Frauenfeld: a single-family house, solar installation and outdoor area, with consultation from November 4 to 23, 2026.',
+    'blog.article.domanda-edilizia-meisenweg.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTgEn;

@@ -1011,6 +1011,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-domanda-edilizia-meisenweg': {
+    title: 'Domanda edilizia per Meisenweg 9 a Frauenfeld | Frontaliere Ticino',
+    description: 'A Frauenfeld il baugesuch per Meisenweg 9 riguarda ampliamento, impianto solare e area esterna. Consultazione fino al 23 novembre 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, domanda, edilizia, meisenweg, frauenfeld',
+    ogTitle: 'Frauenfeld: domanda edilizia al Meisenweg 9',
+    ogDescription: 'L\'avviso per Meisenweg 9 a Frauenfeld riguarda una casa unifamiliare, un impianto solare e la sistemazione esterna. Gli atti sono al Bankplatz 3 dal 4 al 23 novembre 2026; le opposizioni devono essere scritte e motivate.',
+    canonicalPath: '/articoli-turgovia/domanda-edilizia-meisenweg/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Domanda edilizia per Meisenweg 9 a Frauenfeld",
+      "description": "A Frauenfeld il baugesuch per Meisenweg 9 riguarda ampliamento, impianto solare e area esterna. Consultazione fino al 23 novembre 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-domanda-edilizia-meisenweg.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-06T12:57:20+00:00",
+      "dateModified": "2026-11-06T12:57:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/domanda-edilizia-meisenweg/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
