@@ -2,6 +2,25 @@
 # Resolve the fast-publish matrix outside workflow YAML. Keeping this long
 # resolver in a checked-in script avoids GitHub's 21k run-expression limit.
 set -euo pipefail
+MATERIALIZED_RESOLVE_PATHS=(
+  scripts/ci/fast-publish-section-resolve.sh
+  scripts/ci/read-main-head.sh
+  scripts/ci/fast-publish-section-edge-candidate.sh
+  scripts/ci/fast-publish-section-preflight.sh
+  scripts/ci/fetch-push-base-if-missing.sh
+)
+restore_materialized_resolve_paths() {
+  local runtime_path=''
+  for runtime_path in "${MATERIALIZED_RESOLVE_PATHS[@]}"; do
+    if git cat-file -e "HEAD:$runtime_path" 2>/dev/null; then
+      git restore --source=HEAD --worktree -- "$runtime_path" || return 1
+    elif [ -e "$runtime_path" ] || [ -L "$runtime_path" ]; then
+      # Un helper introdotto dopo la revisione pinnata e' un file non
+      # tracciato in quella HEAD: toglie solo il target materializzato noto.
+      rm -f -- "$runtime_path" || return 1
+    fi
+  done
+}
 # Un replay richiesto come produttivo non può diventare un dry-run
 # silenzioso: il nome della run riflette l'input, quindi falliamo
 # prima di risolvere o redispatchare se il kill switch lo disarma.
@@ -230,6 +249,15 @@ if [ -n "$pinned_source" ]; then
     fi
     if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "${DRY_RUN_INPUT:-true}" = 'false' ] && [ "$replay_dry" = 'true' ]; then
       echo '::error::replay richiesto con dry_run=false ma il publisher è disarmato; nessuna pubblicazione è stata eseguita'
+      exit 1
+    fi
+    # Il workflow materializza questi helper dalla propria revisione dentro il
+    # checkout pinnato (uno come symlink). Se main avanza e uno degli helper e'
+    # cambiato, Git rifiuta il checkout per non sovrascrivere la modifica
+    # locale. Sono file di runtime, non output del corpus: riportali prima ai
+    # byte tracciati della revisione pinnata, poi riallinea l'intero checkout.
+    if ! restore_materialized_resolve_paths; then
+      echo '::error::impossibile ripristinare gli helper materializzati prima del replan stale'
       exit 1
     fi
     if ! git checkout --detach "$current_main"; then
