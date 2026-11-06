@@ -989,6 +989,15 @@
       }
     },
     {
+      "path": "scripts/lib/codex-reserve-report.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "c0cb793705475707",
+        "corpus": "c0cb793705475707",
+        "alignedAt": "2026-11-06"
+      }
+    },
+    {
       "path": "scripts/lib/content-updated-at.mjs",
       "mode": "corpus-only",
       "reason": "Sorgente unica per derivare e applicare `updatedAt` dai commit dei body ai registry TypeScript del corpus. Il sito riceve JSON pubblicato via HTTP e non deve importare la logica che legge e modifica le sorgenti content/.",
