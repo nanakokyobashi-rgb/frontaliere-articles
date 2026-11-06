@@ -133,18 +133,16 @@ describe('discovery article index projection', () => {
 
     assert.equal(payload.schema, 1);
     assert.equal(payload.commit, 'a'.repeat(40));
-    assert.equal(payload.count, 4);
+    assert.equal(payload.count, 7);
     assert.deepEqual(payload.articles.map(({ id }) => id), [
       'trend-article',
+      'reddit-article',
+      'reddit-only-article',
+      'reddit-and-trends-article',
       'news-only-article',
       'fallback-locale',
       'missing-excerpt',
     ]);
-    assert.equal(payload.articles.some(({ id }) => [
-      'reddit-article',
-      'reddit-only-article',
-      'reddit-and-trends-article',
-    ].includes(id)), false);
 
     const trend = payload.articles[0];
     assert.equal(trend.provider, 'google_trends');
@@ -153,17 +151,23 @@ describe('discovery article index projection', () => {
     assert.deepEqual(Object.keys(trend.excerpt), ['it', 'en', 'de', 'fr']);
     assert.deepEqual(Object.keys(trend.url), ['it', 'en', 'de', 'fr']);
     assert.equal(trend.url.it, 'https://frontaliereticino.ch/articoli-frontaliere/trend-article-it/');
-    assert.equal(payload.articles[1].provider, 'other');
+    assert.deepEqual(payload.articles.slice(1, 5).map(({ provider }) => provider), [
+      'other',
+      'other',
+      'google_trends',
+      'other',
+    ]);
+    assert.equal(payload.articles.every(({ provider }) => ['google_trends', 'other'].includes(provider)), true);
     for (const field of ['title', 'excerpt', 'url']) {
-      assert.deepEqual(Object.keys(payload.articles[2][field]), ['it', 'en']);
+      assert.deepEqual(Object.keys(payload.articles[5][field]), ['it', 'en']);
     }
-    const missingExcerpt = payload.articles[3];
+    const missingExcerpt = payload.articles[6];
     for (const field of ['title', 'excerpt', 'url']) {
       assert.deepEqual(Object.keys(missingExcerpt[field]), ['it', 'en', 'de']);
     }
 
     const serialized = JSON.stringify(payload);
-    assert.doesNotMatch(serialized, /private trend query|publisher\.example|reddit\.com|private-title|0\.91/);
+    assert.doesNotMatch(serialized, /private trend query|publisher\.example|reddit\.com|private-title|0\.91|0\.92|a1b2c3d4|fedcba98|abcdef12/);
   });
 
   test('requires the sidecar to belong to an article in the published registry', () => {
@@ -283,7 +287,11 @@ describe('discovery article index projection', () => {
       sections: [publishedSection({ shadowed })],
     });
 
-    assert.deepEqual(payload.articles.map(({ id }) => id), ['fallback-locale', 'missing-excerpt']);
+    assert.deepEqual(payload.articles.map(({ id }) => id), [
+      'reddit-and-trends-article',
+      'fallback-locale',
+      'missing-excerpt',
+    ]);
   });
 
   test('rejects a present sidecar with invalid JSON or a mismatched article id', () => {
@@ -303,14 +311,14 @@ describe('discovery article index projection', () => {
     }), 'google_trends');
     assert.equal(normalizeDiscoveryProvider({
       _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['reddit'] },
-    }), null);
+    }), 'other');
     assert.equal(normalizeDiscoveryProvider({
       _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['reddit', 'google-news-rss'] },
-    }), null);
+    }), 'other');
     assert.equal(normalizeDiscoveryProvider({
       _discovery_attribution: { candidateId: 'trend-1', signalProvider: 'google-trends' },
       _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['reddit', 'google-news-rss'] },
-    }), null);
+    }), 'google_trends');
     assert.equal(normalizeDiscoveryProvider({
       _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['google-news-rss'] },
     }), 'other');
