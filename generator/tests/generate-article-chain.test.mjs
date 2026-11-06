@@ -824,12 +824,12 @@ test('il watchdog non sopravvive allo step, e non lo fa fallire da solo', () => 
   assert.match(gen, /kill_tree KILL "\$watch_pid"/, 'il watchdog va ucciso con il tentativo, con tutto il suo albero');
   // Il verdetto sull'esito resta dove stava: il watchdog alza un flag, non esce
   // mai per conto proprio.
-  // L'anchor usa il confine fra funzioni eseguibili, non il commento descrittivo
-  // che puo' stare fuori dallo scalar `run` per rispettare il limite di avvio.
+  // L'anchor usa il confine della funzione successiva: una direttiva ShellCheck
+  // puo' stare fra l'assegnazione del PID e questa dichiarazione.
   const watchdogBody = sliceBetween(
     gen,
     'stall_watchdog() {',
-    'watch_pid=""\nstall_atexit() {',
+    'stall_atexit() {',
     { label: 'watchdog body' },
   );
   assert.ok(!/\bexit [0-9]/.test(watchdogBody), 'il watchdog non deve poter terminare lo step da solo');

@@ -1630,9 +1630,9 @@ jobs:
 
           # Il watchdog non sopravvive mai allo step: muore col tentativo (qui
           # sotto) e comunque all'uscita, qualunque ramo la produca.
+          watch_pid=""
           # The EXIT trap invokes this function indirectly.
           # shellcheck disable=SC2317 # chiamata dal trap EXIT, indiretta per ShellCheck.
-          watch_pid=""
           stall_atexit() {
             kill_tree KILL "${watch_pid:-}"
             kill_tree KILL "${tee_pid:-}"
