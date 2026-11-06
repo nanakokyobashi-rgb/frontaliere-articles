@@ -1,7 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { isRelevantCantonHubSitemap } from '../scripts/lib/canton-hub-sitemaps.mjs';
+import {
+  isRelevantCantonHubSitemap,
+  normalizeCantonHubSitemapUrl,
+} from '../scripts/lib/canton-hub-sitemaps.mjs';
 import { isIntentionalNoindexPharmacyPage } from '../scripts/lib/canton-hub-published-route.mjs';
 
 test('il gate include la sitemap lavoro principale e quelle cantonali', () => {
@@ -25,6 +28,16 @@ test('il gate include anche la sitemap plate-auctions non shardizzata', () => {
   assert.equal(
     isRelevantCantonHubSitemap('https://frontaliereticino.ch/sitemap-plate-auctions.xml'),
     true,
+  );
+});
+
+test('il gate seleziona le sitemap dal pathname anche con query o fragment', () => {
+  const url = 'https://frontaliereticino.ch/sitemap-jobs.xml?revision=42#jobs';
+  assert.equal(normalizeCantonHubSitemapUrl(url), '/sitemap-jobs.xml');
+  assert.equal(isRelevantCantonHubSitemap(url), true);
+  assert.equal(
+    isRelevantCantonHubSitemap('https://frontaliereticino.ch/indice?next=/sitemap-jobs.xml'),
+    false,
   );
 });
 

@@ -10,6 +10,14 @@
  */
 const RELEVANT_SITEMAP_RE = /\/sitemap-(?:pages|locale-variants(?:-\d+)?|fuel-[a-z-]+|border-wait|health-premiums|farmacie|plate-auctions(?:-\d+)?|weather|eventi|jobs(?:-[a-z-]+)?|blog)\.xml$/;
 
+export function normalizeCantonHubSitemapUrl(url) {
+  try {
+    return new URL(String(url), 'https://frontaliereticino.ch').pathname;
+  } catch {
+    return '';
+  }
+}
+
 export function isRelevantCantonHubSitemap(url) {
-  return RELEVANT_SITEMAP_RE.test(String(url));
+  return RELEVANT_SITEMAP_RE.test(normalizeCantonHubSitemapUrl(url));
 }
