@@ -515,7 +515,7 @@ const NEGATIVE_ITEM_CLAIM_RE = /\b(?:nessun(?:o)?|no|zero|0)\s+items?\b/i;
 // is evidence for the zero, not a persistence claim. Keep this list tied to
 // the hard-exclude/closing vocabularies in FOLLOWUP.md; an unclassified line
 // remains a live item and therefore keeps the parser fail-closed.
-const DROPPED_ZERO_ITEM_REASON_RE = /\b(?:no-acceptance-condition|non-actionable-churn|missing-test-nit|live-verification(?:-only)?|(?:not|non)[-\s]+funnel[-\s]+critical|closing-state|already-on-main|hard-exclude)\b/i;
+const DROPPED_ZERO_ITEM_REASON_RE = /\b(?:no[-\s]+acceptance[-\s]+condition|non[-\s]+actionable[-\s]+churn|missing[-\s]+test[-\s]+nit|live[-\s]+verification(?:[-\s]+only)?|(?:not|non)[-\s]+funnel[-\s]+critical|closing[-\s]+state|already[-\s]+on[-\s]+main)\b/i;
 const DIRECT_FU_BULLET_RE = /^\s*[-*+]\s+(?:`)?FU-\d{4}-\d{2}-\d{2}-\d{3}\b/i;
 
 /**

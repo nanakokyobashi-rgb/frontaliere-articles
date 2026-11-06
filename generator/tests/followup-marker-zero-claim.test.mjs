@@ -201,6 +201,24 @@ test('un FU droppato con una ragione deterministica è contesto nel marker H2 ze
   assert.equal(verifyTriageMarkerPersistence(explicitItem, 3663, () => false), false);
 });
 
+test('il marker reale della PR #3663 non viene quarantinato per FU scartati (#2299)', () => {
+  const marker = [
+    '## Post-merge follow-up triage: zero outstanding items.',
+    '- FU-2026-11-02-001 è residuo editoriale/storico senza una modifica o acceptance falsificabile: `no-acceptance-condition`.',
+    '- FU-2026-11-02-002 è già tracciato nel bucket precedente #3520; non viene duplicato.',
+    '- I bullet `per scelta`/`in questa PR` sono `closing-state`.',
+    '- Le tre domande sulla cache riguardano bookkeeping/costo senza impatto sulla superficie o sul ciclo funnel: `not-funnel-critical`.',
+  ].join('\n');
+  const expectation = triageMarkerPersistenceExpectation(marker);
+
+  assert.deepEqual(expectation.items, []);
+  assert.deepEqual(expectation.buckets, [3520]);
+  assert.equal(expectation.explicitZero, true);
+  assert.equal(verifyTriageMarkerPersistence(marker, 3663, () => {
+    throw new Error('il marker zero reale non deve cercare Sources: PR #3663');
+  }), true);
+});
+
 test('negazioni e marker misti non trasformano FU outstanding in riferimenti storici (#1721)', () => {
   const heading = '## Post-merge follow-up triage: zero outstanding items.';
   for (const line of [
