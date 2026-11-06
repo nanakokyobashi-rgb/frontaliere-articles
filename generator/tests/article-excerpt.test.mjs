@@ -605,6 +605,23 @@ test('ripara excerpt italiano dal body prima del gate che lo richiede', () => {
   );
 });
 
+test('un excerpt assente viene riparato dal body una sola volta, oppure rifiutato', () => {
+  const body = 'Il Consiglio federale ha pubblicato i nuovi dati sui lavoratori frontalieri e sulle misure fiscali applicate in Svizzera.';
+  const article = { id: 'excerpt-assente', content: { it: { body1: body } } };
+  const repairs = repairGeneratedArticleDescriptions(article);
+
+  assert.equal(article.content.it.excerpt, body);
+  assert.deepEqual(
+    repairs.map(({ locale, field, source }) => ({ locale, field, source })),
+    [{ locale: 'it', field: 'excerpt', source: 'article-body' }],
+  );
+  assert.deepEqual(repairGeneratedArticleDescriptions(article), [], 'la seconda passata deve essere idempotente');
+  assert.throws(
+    () => repairGeneratedArticleDescriptions({ id: 'excerpt-assente-senza-body', content: { it: {} } }),
+    (error) => error.qualityReject === true && /is empty and has no safe body excerpt/u.test(error.message),
+  );
+});
+
 test('un campo descrittivo vuoto usa un sibling valido quando il body non offre una frase completa', () => {
   const sibling = 'L’accordo aggiorna le regole applicate ai lavoratori frontalieri dal prossimo anno.';
   const article = {
