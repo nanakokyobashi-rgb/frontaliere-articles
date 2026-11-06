@@ -811,6 +811,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-neuchatel-dossier-consiglio-stato': {
+    title: 'Neuchâtel: tre dossier trattati dal Consiglio di Stato',
+    description: 'Seduta del 2 novembre 2026: Neuchâtel risponde a una consultazione federale, chiede una ratifica e propone di non sviluppare una nuova app.',
+    keywords: 'frontalieri, ticino, svizzera, italia, neuch, dossier, trattati, consiglio',
+    ogTitle: 'Neuchâtel: tre dossier del Consiglio di Stato',
+    ogDescription: 'Il comunicato del 2 novembre 2026 riassume la risposta sul codice penale, la richiesta di ratifica della convenzione sullo scambio d\'informazioni nella privazione della libertà e la proposta di non sviluppare un\'app pubblica aggiuntiva.',
+    canonicalPath: '/articoli-neuchatel/neuchatel-dossier-consiglio-stato/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neuchâtel: tre dossier trattati dal Consiglio di Stato",
+      "description": "Seduta del 2 novembre 2026: Neuchâtel risponde a una consultazione federale, chiede una ratifica e propone di non sviluppare una nuova app.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-neuchatel-dossier-consiglio-stato.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-06T03:22:02+00:00",
+      "dateModified": "2026-11-06T03:22:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/neuchatel-dossier-consiglio-stato/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

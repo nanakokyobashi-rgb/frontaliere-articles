@@ -66,6 +66,9 @@ const blogMetaCantonNeFr: Record<string, string> = {
     'blog.article.economia-neuchateloise-incertezza.title': 'Économie neuchâteloise : dynamique mais volatile',
     'blog.article.economia-neuchateloise-incertezza.excerpt': 'Le rapport 2026 sur le PIB romand décrit la place économique de Neuchâtel comme dynamique, mais volatile face aux aléas géopolitiques internationaux.',
     'blog.article.economia-neuchateloise-incertezza.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.neuchatel-dossier-consiglio-stato.title': 'Neuchâtel : trois dossiers traités par le Conseil d\'État',
+    'blog.article.neuchatel-dossier-consiglio-stato.excerpt': 'Le 2 novembre 2026, le Conseil d\'État du canton de Neuchâtel a diffusé les informations succinctes relatives à sa séance.',
+    'blog.article.neuchatel-dossier-consiglio-stato.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNeFr;

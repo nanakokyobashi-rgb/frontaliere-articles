@@ -66,6 +66,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.economia-neuchateloise-incertezza.title': 'Neuchâtel economy: dynamic but volatile',
     'blog.article.economia-neuchateloise-incertezza.excerpt': 'The 2026 report on Roman GDP describes the economic square of Neuchâtel as dynamic, but volatile in the face of international geopolitical unforeseen events.',
     'blog.article.economia-neuchateloise-incertezza.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.neuchatel-dossier-consiglio-stato.title': 'Neuchâtel: three dossiers handled by the Council of State',
+    'blog.article.neuchatel-dossier-consiglio-stato.excerpt': 'On November 2, 2026, the Council of State of the Canton of Neuchâtel published brief information relating to its meeting.',
+    'blog.article.neuchatel-dossier-consiglio-stato.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;

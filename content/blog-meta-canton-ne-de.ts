@@ -66,6 +66,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.economia-neuchateloise-incertezza.title': 'Neuenburger Wirtschaft: dynamisch, aber volatil',
     'blog.article.economia-neuchateloise-incertezza.excerpt': 'BIP der Westschweiz geschätzt: 198 Milliarden Franken im Jahr 2025 Wachstum 2025: 2,2% gegenüber 1,8% in der Schweiz Prognosen: 1,9% im Jahr 2026 und 1,5%.',
     'blog.article.economia-neuchateloise-incertezza.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.neuchatel-dossier-consiglio-stato.title': 'Neuenburg: drei vom Staatsrat behandelte Dossiers',
+    'blog.article.neuchatel-dossier-consiglio-stato.excerpt': 'Der Staatsrat des Kantons Neuch hat am 2.November 2026 die Kurzinformationen zu seiner Sitzung veröffentlicht.',
+    'blog.article.neuchatel-dossier-consiglio-stato.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;

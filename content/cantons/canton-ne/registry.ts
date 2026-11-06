@@ -239,4 +239,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'neuchatel-dossier-consiglio-stato',
+ category: 'novita',
+ date: '2026-11-06T03:22:02.144Z',
+ image: '/images/blog/article-neuchatel-dossier-consiglio-stato.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

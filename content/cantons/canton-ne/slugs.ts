@@ -24,6 +24,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'rht-ritorno-normale-orologeria': { it: 'rht-ritorno-normale-orologeria', en: 'rht-return-to-normal-watchmaking', de: 'rht-normal-rueckkehr-uhren', fr: 'rht-retour-normal-horlogerie' },
  'arco-giurassiano-frontalieri': { it: 'arco-giurassiano-frontalieri', en: 'jurassic-arc-cross-border-work', de: 'jurabogen-grenzgaenger-arbeit', fr: 'arc-jurassien-emploi-frontalier' },
  'economia-neuchateloise-incertezza': { it: 'economia-neuchateloise-incertezza', en: 'neuchatel-economy-uncertainty', de: 'neuenburg-wirtschaft-unsicherheit', fr: 'economie-neuchatel-incertitude' },
+ 'neuchatel-dossier-consiglio-stato': { it: 'neuchatel-dossier-consiglio-stato', en: 'neuchatel-state-council-dossiers', de: 'neuenburg-regierungsrat-dossiers', fr: 'neuchatel-dossiers-conseil-etat' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
