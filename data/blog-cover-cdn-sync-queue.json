@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-tasso-disoccupazione-ottobre-2026.webp",
+      "sha256": "3e57e804b351af43efbab3fba695e03e4169b0ac823f111f79ccbad00db422e8"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-tasso-disoccupazione-ottobre-2026-480w.webp",
+      "sha256": "75cf54fbce846c2d150afda7dc27d6d3d91e72cca5f784e197ddf3c08eaf443f"
+    }
+  ]
 }
