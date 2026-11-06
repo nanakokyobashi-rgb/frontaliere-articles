@@ -75,6 +75,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.adeguamento-merkblatt-beteiligungen-zrh.title': 'Merkblatt Beteiligungen & Erlasse Zürcher Steuerbuch angepasst',
     'blog.article.adeguamento-merkblatt-beteiligungen-zrh.excerpt': 'Das Urteil vom 12. Mai 2026 (ST.2025.64) ermöglicht es, auch kurzfristige Darlehen im Sinne von § 81a StG zu berücksichtigen; dies gilt sofort für Zeiträume ab 2020.',
     'blog.article.adeguamento-merkblatt-beteiligungen-zrh.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zurigo-tasse-imprese-privati.title': 'Carmen Walker Späh fordert weniger Steuern für Unternehmen und Privatpersonen',
+    'blog.article.zurigo-tasse-imprese-privati.excerpt': 'Carmen Walker Späh will Zürich mit einem Paket für Unternehmen und Privatpersonen wieder ins Mittelfeld der Gewinnsteuern bringen.',
+    'blog.article.zurigo-tasse-imprese-privati.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

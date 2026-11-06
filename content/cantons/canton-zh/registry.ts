@@ -270,4 +270,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'zurigo-tasse-imprese-privati',
+ category: 'fiscale',
+ date: '2026-11-06T11:54:29.834Z',
+ image: '/images/blog/article-zurigo-tasse-imprese-privati.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

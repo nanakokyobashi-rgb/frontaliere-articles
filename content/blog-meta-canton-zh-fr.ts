@@ -75,6 +75,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.adeguamento-merkblatt-beteiligungen-zrh.title': 'Mise à jour fiche participations et actes fiscaux Zurich',
     'blog.article.adeguamento-merkblatt-beteiligungen-zrh.excerpt': 'L’arrêt du 12 mai 2026 (ST.2025.64) permet de considérer également les prêts à court terme au sens du § 81a StG, avec effet immédiat pour les périodes à partir de 2020.',
     'blog.article.adeguamento-merkblatt-beteiligungen-zrh.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.zurigo-tasse-imprese-privati.title': 'Carmen Walker Späh demande moins d’impôts pour tous',
+    'blog.article.zurigo-tasse-imprese-privati.excerpt': 'Carmen Walker Späh veut ramener Zurich dans la moyenne en matière d’imposition des bénéfices avec un paquet pour les entreprises et les particuliers.',
+    'blog.article.zurigo-tasse-imprese-privati.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;

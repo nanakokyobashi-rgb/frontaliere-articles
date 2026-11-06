@@ -75,6 +75,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.adeguamento-merkblatt-beteiligungen-zrh.title': 'Update to Merkblatt Beteiligungen and other documents in Zurich\'s Steuerbuch',
     'blog.article.adeguamento-merkblatt-beteiligungen-zrh.excerpt': 'Judgment of May 12, 2026 (ST.2025.64) allows even short-term loans to be considered under § 81a StG, immediately applicable to periods from 2020.',
     'blog.article.adeguamento-merkblatt-beteiligungen-zrh.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.zurigo-tasse-imprese-privati.title': 'Carmen Walker Späh calls for lower taxes for businesses and private individuals',
+    'blog.article.zurigo-tasse-imprese-privati.excerpt': 'Carmen Walker Späh wants to bring Zurich back into the middle range of profit taxes with a package for businesses and private individuals.',
+    'blog.article.zurigo-tasse-imprese-privati.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;

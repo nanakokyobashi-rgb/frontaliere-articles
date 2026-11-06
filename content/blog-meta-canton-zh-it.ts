@@ -75,6 +75,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.adeguamento-merkblatt-beteiligungen-zrh.title': 'Adeguamento Merkblatt Beteiligungen e altri atti nel Steuerbuch di Zurigo',
     'blog.article.adeguamento-merkblatt-beteiligungen-zrh.excerpt': 'Sentenza del 12 maggio 2026 (ST.2025.64) permette di considerare prestiti anche a breve ai sensi del § 81a StG, valido subito per periodi dal 2020.',
     'blog.article.adeguamento-merkblatt-beteiligungen-zrh.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.zurigo-tasse-imprese-privati.title': 'Carmen Walker Späh chiede meno tasse per imprese e privati',
+    'blog.article.zurigo-tasse-imprese-privati.excerpt': 'Carmen Walker Späh vuole riportare Zurigo nel campo medio delle imposte sugli utili con un pacchetto per imprese e privati.',
+    'blog.article.zurigo-tasse-imprese-privati.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZhIt;
