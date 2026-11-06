@@ -59,6 +59,7 @@ import {
 import { closedIssueRefs } from './followup-resolution-match.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
 import { CLAIM_LABEL } from './stale-claim-detector.mjs';
+import { manifestPinLookup } from './manifest-pinned-issues.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1';
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
@@ -649,6 +650,15 @@ export function stillClosable(live) {
 }
 
 function closeIssue(number, { reason, comment, keeper }) {
+  const pin = manifestPinLookup(number, REPO);
+  if (!pin.ok) {
+    console.log(`#${number}: manifest dei pin illeggibile → nessuna chiusura in questo tick.`);
+    return false;
+  }
+  if (pin.path) {
+    console.log(`#${number}: manifest pin ${pin.path} → issue lasciata aperta.`);
+    return false;
+  }
   const live = ghJson(['issue', 'view', String(number), '--repo', REPO, '--json', 'state,labels']);
   if (!stillClosable(live)) {
     console.log(`#${number}: claim preso, gia' chiusa o stato illeggibile subito prima della chiusura → resta com'e'.`);
