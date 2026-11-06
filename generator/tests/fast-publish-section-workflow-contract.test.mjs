@@ -125,6 +125,27 @@ test('fast-publish-section mantiene il resolver sotto il limite del parser GitHu
   assert.doesNotMatch(resolver, /\$\{\{/u);
 });
 
+test('il replan stale ripristina tutti gli helper materializzati prima di cambiare HEAD', () => {
+  const materializer = workflow.slice(
+    workflow.indexOf('\n      - name: Materialize resolver from workflow revision'),
+    workflow.indexOf('\n      - name: Set up Node (resolve)'),
+  );
+  const targetAssignments = [...materializer.matchAll(/\b[a-z_]+_target='([^']+)'/gu)]
+    .map((match) => match[1]);
+  const symlinkTargets = [...materializer.matchAll(/ln -sfn [^\n]+ (scripts\/ci\/[a-z0-9-]+\.sh)/gu)]
+    .map((match) => match[1]);
+  const materializedTargets = [...new Set([...targetAssignments, ...symlinkTargets])].sort();
+  const declaredBlock = resolver.match(/MATERIALIZED_RESOLVE_PATHS=\(\n([\s\S]*?)\n\)/u)?.[1] ?? '';
+  const restoredTargets = declaredBlock.trim().split(/\s+/u).filter(Boolean).sort();
+
+  assert.deepEqual(restoredTargets, materializedTargets);
+  const restore = resolver.indexOf('git restore --source=HEAD --worktree -- "${MATERIALIZED_RESOLVE_PATHS[@]}"');
+  const checkout = resolver.indexOf('git checkout --detach "$current_main"');
+  assert.ok(restore >= 0, 'manca il ripristino fail-closed degli helper di runtime');
+  assert.ok(checkout > restore, 'il checkout della HEAD corrente deve seguire il ripristino degli helper');
+  assert.match(resolver, /impossibile ripristinare gli helper materializzati prima del replan stale/u);
+});
+
 test('fast-publish-section conserva la guardia di freschezza anche con checkout pinned precedente', () => {
   const materializers = [...workflow.matchAll(/- name: Materialize (?:resolver|freshness helper) from workflow revision[\s\S]*?(?=\n      - name:|\n  [A-Za-z_][A-Za-z0-9_-]*:|$)/gu)]
     .map((match) => match[0]);

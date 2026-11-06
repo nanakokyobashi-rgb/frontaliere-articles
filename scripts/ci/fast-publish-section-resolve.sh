@@ -2,6 +2,13 @@
 # Resolve the fast-publish matrix outside workflow YAML. Keeping this long
 # resolver in a checked-in script avoids GitHub's 21k run-expression limit.
 set -euo pipefail
+MATERIALIZED_RESOLVE_PATHS=(
+  scripts/ci/fast-publish-section-resolve.sh
+  scripts/ci/read-main-head.sh
+  scripts/ci/fast-publish-section-edge-candidate.sh
+  scripts/ci/fast-publish-section-preflight.sh
+  scripts/ci/fetch-push-base-if-missing.sh
+)
 # Un replay richiesto come produttivo non può diventare un dry-run
 # silenzioso: il nome della run riflette l'input, quindi falliamo
 # prima di risolvere o redispatchare se il kill switch lo disarma.
@@ -230,6 +237,15 @@ if [ -n "$pinned_source" ]; then
     fi
     if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "${DRY_RUN_INPUT:-true}" = 'false' ] && [ "$replay_dry" = 'true' ]; then
       echo '::error::replay richiesto con dry_run=false ma il publisher è disarmato; nessuna pubblicazione è stata eseguita'
+      exit 1
+    fi
+    # Il workflow materializza questi helper dalla propria revisione dentro il
+    # checkout pinnato (uno come symlink). Se main avanza e uno degli helper e'
+    # cambiato, Git rifiuta il checkout per non sovrascrivere la modifica
+    # locale. Sono file di runtime, non output del corpus: riportali prima ai
+    # byte tracciati della revisione pinnata, poi riallinea l'intero checkout.
+    if ! git restore --source=HEAD --worktree -- "${MATERIALIZED_RESOLVE_PATHS[@]}"; then
+      echo '::error::impossibile ripristinare gli helper materializzati prima del replan stale'
       exit 1
     fi
     if ! git checkout --detach "$current_main"; then
