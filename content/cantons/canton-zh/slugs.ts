@@ -28,6 +28,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'zurigo-strategia-energetica-2026': { it: 'zurigo-strategia-energetica-2026', en: 'zurich-energy-strategy-2026', de: 'zuerich-energiestrategie-2026', fr: 'zurich-strategie-energetique-2026' },
  'adeguamento-merkblatt-beteiligungen-zrh': { it: 'adeguamento-merkblatt-beteiligungen-zrh', en: 'merkblatt-beteiligungen-zurich-update', de: 'anpassung-merkblatt-beteiligungen-zrh', fr: 'ajustement-merkblatt-beteiligungen-zrh' },
  'zurigo-tasse-imprese-privati': { it: 'zurigo-tasse-imprese-privati', en: 'zurich-taxes-companies-private', de: 'zuerich-steuern-unternehmen-private', fr: 'zurich-impots-entreprises-particuliers' },
+ 'cassa-pensione-stop-sistema': { it: 'cassa-pensione-stop-sistema', en: 'zurich-pension-fund-system-stop', de: 'zuerich-pensionskasse-systemstopp', fr: 'caisse-pension-zurich-systeme-stop' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

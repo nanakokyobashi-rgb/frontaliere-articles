@@ -78,6 +78,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.zurigo-tasse-imprese-privati.title': 'Carmen Walker Späh chiede meno tasse per imprese e privati',
     'blog.article.zurigo-tasse-imprese-privati.excerpt': 'Carmen Walker Späh vuole riportare Zurigo nel campo medio delle imposte sugli utili con un pacchetto per imprese e privati.',
     'blog.article.zurigo-tasse-imprese-privati.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.cassa-pensione-stop-sistema.title': 'Cassa pensione Zurigo: stop al cambio di sistema',
+    'blog.article.cassa-pensione-stop-sistema.excerpt': 'Dopo un cyberattacco a una società software, la cassa pensione della città di Zurigo ha fermato il cambio di sistema, secondo il Tages-Anzeiger.',
+    'blog.article.cassa-pensione-stop-sistema.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZhIt;

@@ -78,6 +78,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.zurigo-tasse-imprese-privati.title': 'Carmen Walker Späh calls for lower taxes for businesses and private individuals',
     'blog.article.zurigo-tasse-imprese-privati.excerpt': 'Carmen Walker Späh wants to bring Zurich back into the middle range of profit taxes with a package for businesses and private individuals.',
     'blog.article.zurigo-tasse-imprese-privati.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cassa-pensione-stop-sistema.title': 'Zurich pension fund: halt to the system change',
+    'blog.article.cassa-pensione-stop-sistema.excerpt': 'After a cyberattack on a software company, the city of Zurich’s pension fund halted the system change, according to the Tages-Anzeiger.',
+    'blog.article.cassa-pensione-stop-sistema.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;

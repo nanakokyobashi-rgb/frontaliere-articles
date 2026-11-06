@@ -281,4 +281,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'cassa-pensione-stop-sistema',
+ category: 'pensione',
+ date: '2026-11-06T12:32:40.387Z',
+ image: '/images/blog/article-cassa-pensione-stop-sistema.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];

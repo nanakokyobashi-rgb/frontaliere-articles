@@ -972,6 +972,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cassa-pensione-stop-sistema': {
+    title: 'Cassa pensione Zurigo: stop al cambio di sistema',
+    description: 'Dopo un cyberattacco a una società software, la cassa pensione della città di Zurigo ha fermato il cambio di sistema, secondo il Tages-Anzeiger.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cassa, pensione, zurigo, stop',
+    ogTitle: 'Cassa pensione Zurigo: stop al cambio di sistema',
+    ogDescription: 'Il titolo del Tages-Anzeiger segnala una fuga di dati presso la cassa pensione della città di Zurigo. Dopo un cyberattacco a una società software, l\'ente ha fermato il cambio di sistema; il titolo non indica durata o portata.',
+    canonicalPath: '/articoli-zurigo/cassa-pensione-stop-sistema/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cassa pensione Zurigo: stop al cambio di sistema",
+      "description": "Dopo un cyberattacco a una società software, la cassa pensione della città di Zurigo ha fermato il cambio di sistema, secondo il Tages-Anzeiger.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cassa-pensione-stop-sistema.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-06T12:32:40+00:00",
+      "dateModified": "2026-11-06T12:32:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/cassa-pensione-stop-sistema/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

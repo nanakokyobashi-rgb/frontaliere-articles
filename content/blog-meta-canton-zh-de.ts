@@ -78,6 +78,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.zurigo-tasse-imprese-privati.title': 'Carmen Walker Späh fordert weniger Steuern für Unternehmen und Privatpersonen',
     'blog.article.zurigo-tasse-imprese-privati.excerpt': 'Carmen Walker Späh will Zürich mit einem Paket für Unternehmen und Privatpersonen wieder ins Mittelfeld der Gewinnsteuern bringen.',
     'blog.article.zurigo-tasse-imprese-privati.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cassa-pensione-stop-sistema.title': 'Pensionskasse Zürich: Stopp des Systemwechsels',
+    'blog.article.cassa-pensione-stop-sistema.excerpt': 'Nach einem Cyberangriff auf ein Softwareunternehmen hat die Pensionskasse der Stadt Zürich den Systemwechsel gestoppt, wie der Tages-Anzeiger berichtet.',
+    'blog.article.cassa-pensione-stop-sistema.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

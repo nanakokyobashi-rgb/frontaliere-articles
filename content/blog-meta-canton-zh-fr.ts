@@ -78,6 +78,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.zurigo-tasse-imprese-privati.title': 'Carmen Walker Späh demande moins d’impôts pour tous',
     'blog.article.zurigo-tasse-imprese-privati.excerpt': 'Carmen Walker Späh veut ramener Zurich dans la moyenne en matière d’imposition des bénéfices avec un paquet pour les entreprises et les particuliers.',
     'blog.article.zurigo-tasse-imprese-privati.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.cassa-pensione-stop-sistema.title': 'Caisse de pension de Zurich : arrêt du changement de système',
+    'blog.article.cassa-pensione-stop-sistema.excerpt': 'Après une cyberattaque contre une société de logiciels, la caisse de pension de la ville de Zurich a interrompu le changement de système, selon le Tages-Anzeiger.',
+    'blog.article.cassa-pensione-stop-sistema.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;
