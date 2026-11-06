@@ -417,6 +417,18 @@ runs:
         printf 'codex_install_root=%s\n' "$install_home" >> "$GITHUB_OUTPUT"
         # This step intentionally has neither CODEX_HOME/auth.json nor any
         # bridge token. Keep npm's cache/user config in the throw-away home.
+        # npm install has no useful wall-clock deadline of its own. Bound the
+        # install before the primary action can reach its provider watchdog;
+        # a failed/expired setup remains a real Codex failure for the fallback
+        # classifier, never an unbounded wait.
+        codex_cli_install_timeout_seconds=300
+        codex_cli_install_timeout_bin=/usr/bin/timeout
+        [ -x "$codex_cli_install_timeout_bin" ] || {
+          echo '::error::Trusted timeout utility unavailable; refusing an unbounded Codex CLI install.'
+          exit 1
+        }
+        install_status=0
+        set +e
         env -i \
           PATH="$(/usr/bin/dirname "$trusted_npm"):$(/usr/bin/dirname "$trusted_node"):/usr/bin:/bin" \
           HOME="$install_home" \
@@ -424,7 +436,19 @@ runs:
           NPM_CONFIG_USERCONFIG=/dev/null \
           npm_config_cache="$install_home/cache" \
           npm_config_prefix="$codex_prefix" \
-          "$trusted_node" "$trusted_npm" install --global --no-fund --no-audit @openai/codex@0.153.4 >/dev/null
+          "$codex_cli_install_timeout_bin" --signal=TERM --kill-after=10s \
+          "${codex_cli_install_timeout_seconds}s" "$trusted_node" "$trusted_npm" install \
+            --global --no-fund --no-audit @openai/codex@0.153.4 >/dev/null
+        install_status=$?
+        set -e
+        if [ "$install_status" -ne 0 ]; then
+          if [ "$install_status" -eq 124 ] || [ "$install_status" -eq 137 ]; then
+            echo "::error::Codex CLI install timed out after ${codex_cli_install_timeout_seconds}s."
+          else
+            echo "::error::Codex CLI install failed with exit ${install_status}."
+          fi
+          exit "$install_status"
+        fi
         codex_path="$codex_prefix/bin/codex"
         case "$codex_path" in
           /*) ;;
