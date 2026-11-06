@@ -10,7 +10,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE, publishedArticleLocales } from './build-sitemap.mjs';
 
-const PUBLIC_PROVIDERS = new Set(['google_trends', 'other']);
+const PUBLIC_PROVIDERS = new Set(['google_trends', 'google_news', 'reddit', 'other']);
 const TOPIC_PROVIDERS = new Set(['google-news-rss']);
 const SUPPORTED_TOPIC_PROVIDERS = new Set([...TOPIC_PROVIDERS, 'reddit']);
 const LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
@@ -169,13 +169,29 @@ function timestamp(value) {
  * Collapse private attribution to the small, stable public provider enum.
  *
  * @param {unknown} sidecar
- * @returns {'google_trends'|'other'|null}
+ * @returns {'google_trends'|'google_news'|'reddit'|'other'|null}
  */
 export function normalizeDiscoveryProvider(sidecar) {
   if (!isRecord(sidecar)) return null;
 
   const topic = sidecar._topic_candidate_attribution;
   const discovery = sidecar._discovery_attribution;
+  const hasValidTopicAttribution = isRecord(topic)
+    && typeof topic.candidateId === 'string'
+    && /^[a-f0-9]{8}$/u.test(topic.candidateId)
+    && Array.isArray(topic.providers);
+  const providers = hasValidTopicAttribution
+    ? topic.providers.filter((provider) => SUPPORTED_TOPIC_PROVIDERS.has(provider))
+    : [];
+  if (hasValidTopicAttribution && (providers.length === 0 || providers.length !== topic.providers.length)) {
+    return null;
+  }
+
+  // Reddit is the conservative label for a mixed-source candidate so the
+  // newsletter can enforce its existing exclusion without exposing URLs or
+  // other private attribution.
+  if (providers.includes('reddit')) return 'reddit';
+
   if (
     isRecord(discovery)
     && isNonEmptyString(discovery.candidateId)
@@ -184,18 +200,8 @@ export function normalizeDiscoveryProvider(sidecar) {
     return 'google_trends';
   }
 
-  if (
-    !isRecord(topic)
-    || typeof topic.candidateId !== 'string'
-    || !/^[a-f0-9]{8}$/u.test(topic.candidateId)
-    || !Array.isArray(topic.providers)
-  ) {
-    return null;
-  }
-  const providers = topic.providers.filter((provider) => SUPPORTED_TOPIC_PROVIDERS.has(provider));
-  if (providers.length === 0 || providers.length !== topic.providers.length) return null;
-  // Reddit candidates can only reach this point after the feed's explicit
-  // Remote Config approval gate. Keep the source private in the public index.
+  if (!hasValidTopicAttribution) return null;
+  if (providers.includes('google-news-rss')) return 'google_news';
   return 'other';
 }
 

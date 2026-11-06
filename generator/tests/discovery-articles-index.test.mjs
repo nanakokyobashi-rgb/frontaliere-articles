@@ -152,12 +152,17 @@ describe('discovery article index projection', () => {
     assert.deepEqual(Object.keys(trend.url), ['it', 'en', 'de', 'fr']);
     assert.equal(trend.url.it, 'https://frontaliereticino.ch/articoli-frontaliere/trend-article-it/');
     assert.deepEqual(payload.articles.slice(1, 5).map(({ provider }) => provider), [
-      'other',
-      'other',
-      'google_trends',
-      'other',
+      'reddit',
+      'reddit',
+      'reddit',
+      'google_news',
     ]);
-    assert.equal(payload.articles.every(({ provider }) => ['google_trends', 'other'].includes(provider)), true);
+    assert.equal(payload.articles.every(({ provider }) => [
+      'google_trends',
+      'google_news',
+      'reddit',
+      'other',
+    ].includes(provider)), true);
     for (const field of ['title', 'excerpt', 'url']) {
       assert.deepEqual(Object.keys(payload.articles[5][field]), ['it', 'en']);
     }
@@ -311,17 +316,20 @@ describe('discovery article index projection', () => {
     }), 'google_trends');
     assert.equal(normalizeDiscoveryProvider({
       _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['reddit'] },
-    }), 'other');
+    }), 'reddit');
     assert.equal(normalizeDiscoveryProvider({
       _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['reddit', 'google-news-rss'] },
-    }), 'other');
+    }), 'reddit');
     assert.equal(normalizeDiscoveryProvider({
       _discovery_attribution: { candidateId: 'trend-1', signalProvider: 'google-trends' },
       _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['reddit', 'google-news-rss'] },
-    }), 'google_trends');
+    }), 'reddit');
     assert.equal(normalizeDiscoveryProvider({
       _topic_candidate_attribution: { candidateId: '1234abcd', providers: ['google-news-rss'] },
-    }), 'other');
+    }), 'google_news');
+    assert.equal(normalizeDiscoveryProvider({
+      _discovery_attribution: { candidateId: 'trend-1', signalProvider: 'google-trends' },
+    }), 'google_trends');
     assert.equal(normalizeDiscoveryProvider({
       _topic_candidate_attribution: { candidateId: 'bad-id', providers: ['reddit'] },
     }), null);
