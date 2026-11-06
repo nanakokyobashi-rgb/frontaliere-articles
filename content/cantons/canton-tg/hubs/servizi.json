@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "c5d1172e4bc9f7b34e0b22ac688e5d6f06e8fa4f71185b145d44bca1111e4cec",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "4f1ede2d9906a56549818a703ad83d953c14ee9f29ae8425825b2eb74849d392",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-05T06:46:26.804Z",
+      "updatedAt": "2026-11-05T20:04:43.050Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-05T22:13:34.865Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -78,16 +83,30 @@
               "url": "https://auktion.tg.ch/de/auction/109755"
             },
             {
-              "label": "TG312008",
-              "value": "610 CHF",
+              "label": "TG858000",
+              "value": "810 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-11T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109915"
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://auktion.tg.ch/de/auction/109774"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-05T06:46:26.804Z"
+          "updatedAt": "2026-11-05T20:04:43.050Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "3 °C",
+              "detail": "oggi da 3 a 4 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -125,7 +144,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/10/14/tag-der-offenen-tuer-klinik-st-katharinental/"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -205,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "TG",
@@ -261,16 +280,30 @@
               "url": "https://auktion.tg.ch/de/auction/109755"
             },
             {
-              "label": "TG312008",
-              "value": "610 CHF",
+              "label": "TG858000",
+              "value": "810 CHF",
               "detail": "current bid",
-              "date": "2026-11-11T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109915"
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://auktion.tg.ch/de/auction/109774"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-05T06:46:26.804Z"
+          "updatedAt": "2026-11-05T20:04:43.050Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "3 °C",
+              "detail": "today from 3 to 4 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -308,7 +341,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/10/14/tag-der-offenen-tuer-klinik-st-katharinental/"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -384,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "TG",
@@ -440,16 +473,30 @@
               "url": "https://auktion.tg.ch/de/auction/109755"
             },
             {
-              "label": "TG312008",
-              "value": "610 CHF",
+              "label": "TG858000",
+              "value": "810 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-11T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109915"
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://auktion.tg.ch/de/auction/109774"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-05T06:46:26.804Z"
+          "updatedAt": "2026-11-05T20:04:43.050Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "3 °C",
+              "detail": "heute 3 bis 4 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +534,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/10/14/tag-der-offenen-tuer-klinik-st-katharinental/"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -563,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "TG",
@@ -619,16 +666,30 @@
               "url": "https://auktion.tg.ch/de/auction/109755"
             },
             {
-              "label": "TG312008",
-              "value": "610 CHF",
+              "label": "TG858000",
+              "value": "810 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-11T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109915"
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://auktion.tg.ch/de/auction/109774"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-05T06:46:26.804Z"
+          "updatedAt": "2026-11-05T20:04:43.050Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "3 °C",
+              "detail": "aujourd’hui de 3 à 4 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -666,7 +727,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/10/14/tag-der-offenen-tuer-klinik-st-katharinental/"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -738,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

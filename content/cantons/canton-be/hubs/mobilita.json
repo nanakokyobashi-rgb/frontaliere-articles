@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T03:39:37.648Z",
-  "contentHash": "a39afb74897140ec25aa783dd3f8dd9c3d80bedb1583dc554ef9a28b0f7878c2",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "d379fdb59c228fae070327332bc748d801a6266e78a35d74b4ff25c4f74b5b21",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T11:32:49.603Z",
+      "updatedAt": "2026-11-05T20:21:30.260Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -27,12 +27,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "17",
+          "value": "16",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "82",
+          "value": "81",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         }
       ],
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +130,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -182,7 +182,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-06T03:39:37.648Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "BE",
@@ -192,12 +192,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "17",
+          "value": "16",
           "note": "reports as of 5 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "82",
+          "value": "81",
           "note": "reports as of 5 November 2026"
         }
       ],
@@ -257,7 +257,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -295,7 +295,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -347,7 +347,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-06T03:39:37.648Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "BE",
@@ -357,12 +357,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "17",
+          "value": "16",
           "note": "Meldungen vom 5. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "82",
+          "value": "81",
           "note": "Meldungen vom 5. November 2026"
         }
       ],
@@ -422,7 +422,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -460,7 +460,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -512,7 +512,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-06T03:39:37.648Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "BE",
@@ -522,12 +522,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "17",
+          "value": "16",
           "note": "signalements au 5 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "82",
+          "value": "81",
           "note": "signalements au 5 novembre 2026"
         }
       ],
@@ -587,7 +587,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -625,7 +625,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -677,7 +677,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-06T03:39:37.648Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

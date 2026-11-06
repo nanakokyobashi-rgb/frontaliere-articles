@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "786cb56e327be0ccaf4a40d83205b6b9701567f4c4a87b60e317b3724304da27",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "41cc46d72165d950eb74cc8945bd89fa5446df26136bb28ae8895f801a2c5d3a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-05T12:34:21.473Z",
+      "updatedAt": "2026-11-05T23:57:31.394Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-05T06:46:26.804Z",
+      "updatedAt": "2026-11-05T20:04:43.050Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-05T22:13:34.865Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "31",
-          "note": "offerta mediana 200 CHF"
+          "note": "offerta mediana 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -111,7 +116,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-05T12:34:21.473Z"
+          "updatedAt": "2026-11-05T23:57:31.394Z"
         },
         {
           "id": "aste-targhe",
@@ -120,29 +125,43 @@
           "items": [
             {
               "label": "ZH839",
-              "value": "4000 CHF",
+              "value": "7200 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
             },
             {
               "label": "ZH5545",
-              "value": "2000 CHF",
+              "value": "2200 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
             },
             {
-              "label": "ZH15618",
-              "value": "500 CHF",
+              "label": "ZH77786",
+              "value": "1020 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-11T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43731"
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-05T06:46:26.804Z"
+          "updatedAt": "2026-11-05T20:04:43.050Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "4 °C",
+              "detail": "oggi da 3 a 5 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -180,7 +199,7 @@
               "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -260,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "ZH",
@@ -277,7 +296,7 @@
         {
           "label": "Plate auctions running",
           "value": "31",
-          "note": "typical bid 200 CHF"
+          "note": "typical bid 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -344,7 +363,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-05T12:34:21.473Z"
+          "updatedAt": "2026-11-05T23:57:31.394Z"
         },
         {
           "id": "aste-targhe",
@@ -353,29 +372,43 @@
           "items": [
             {
               "label": "ZH839",
-              "value": "4,000 CHF",
+              "value": "7,200 CHF",
               "detail": "current bid",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
             },
             {
               "label": "ZH5545",
-              "value": "2,000 CHF",
+              "value": "2,200 CHF",
               "detail": "current bid",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
             },
             {
-              "label": "ZH15618",
-              "value": "500 CHF",
+              "label": "ZH77786",
+              "value": "1,020 CHF",
               "detail": "current bid",
               "date": "2026-11-11T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43731"
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-05T06:46:26.804Z"
+          "updatedAt": "2026-11-05T20:04:43.050Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "4 °C",
+              "detail": "today from 3 to 5 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -413,7 +446,7 @@
               "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "ZH",
@@ -506,7 +539,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "31",
-          "note": "mittleres Gebot 200 CHF"
+          "note": "mittleres Gebot 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -573,7 +606,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-05T12:34:21.473Z"
+          "updatedAt": "2026-11-05T23:57:31.394Z"
         },
         {
           "id": "aste-targhe",
@@ -582,29 +615,43 @@
           "items": [
             {
               "label": "ZH839",
-              "value": "4’000 CHF",
+              "value": "7’200 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
             },
             {
               "label": "ZH5545",
-              "value": "2’000 CHF",
+              "value": "2’200 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
             },
             {
-              "label": "ZH15618",
-              "value": "500 CHF",
+              "label": "ZH77786",
+              "value": "1’020 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-11T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43731"
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-05T06:46:26.804Z"
+          "updatedAt": "2026-11-05T20:04:43.050Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "4 °C",
+              "detail": "heute 3 bis 5 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -642,7 +689,7 @@
               "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -718,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "ZH",
@@ -735,7 +782,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "31",
-          "note": "offre centrale 200 CHF"
+          "note": "offre centrale 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -802,7 +849,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-05T12:34:21.473Z"
+          "updatedAt": "2026-11-05T23:57:31.394Z"
         },
         {
           "id": "aste-targhe",
@@ -811,29 +858,43 @@
           "items": [
             {
               "label": "ZH839",
-              "value": "4 000 CHF",
+              "value": "7 200 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
             },
             {
               "label": "ZH5545",
-              "value": "2 000 CHF",
+              "value": "2 200 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
             },
             {
-              "label": "ZH15618",
-              "value": "500 CHF",
+              "label": "ZH77786",
+              "value": "1 020 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-11T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43731"
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-05T06:46:26.804Z"
+          "updatedAt": "2026-11-05T20:04:43.050Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "4 °C",
+              "detail": "aujourd’hui de 3 à 5 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -871,7 +932,7 @@
               "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -943,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

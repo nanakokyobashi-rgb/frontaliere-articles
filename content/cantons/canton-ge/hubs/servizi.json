@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "28e5a54f2bf049b5ce2834693cd71499d3cfbe5e9c6bdad9acd891aefb75d6a3",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "10551163d4c3bb004072bf733cde7a06ee5f4fb82d3b1da98448dbe388d50034",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-05T12:34:18.927Z",
+      "updatedAt": "2026-11-05T23:57:30.030Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-05T22:13:34.865Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -91,7 +96,21 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-05T12:34:18.927Z"
+          "updatedAt": "2026-11-05T23:57:30.030Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "8 °C",
+              "detail": "oggi da 7 a 8 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -102,6 +121,11 @@
               "label": "Le chômage dans le canton de Genève en octobre 2026",
               "date": "2026-11-05T13:30:00.000Z",
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10891&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6076"
+            },
+            {
+              "label": "Laurent Roth nommé directeur ad intérim de la Division privée des HUG dès le 1er janvier 2027",
+              "date": "2026-11-05",
+              "url": "https://www.hug.ch/actualite/laurent-roth-nomme-directeur-ad-interim-division-privee-hug-1er-janvier-2027"
             },
             {
               "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
@@ -122,14 +146,9 @@
               "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
               "date": "2026-11-02",
               "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
-            },
-            {
-              "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
-              "date": "2026-11-02",
-              "url": "https://www.hug.ch/actualite/recherche-therapie-cellulaire-innovante-pour-traiter-insuffisance-cardiaque"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "GE",
@@ -278,7 +297,21 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-05T12:34:18.927Z"
+          "updatedAt": "2026-11-05T23:57:30.030Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "8 °C",
+              "detail": "today from 7 to 8 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -289,6 +322,11 @@
               "label": "Le chômage dans le canton de Genève en octobre 2026",
               "date": "2026-11-05T13:30:00.000Z",
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10891&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6076"
+            },
+            {
+              "label": "Laurent Roth nommé directeur ad intérim de la Division privée des HUG dès le 1er janvier 2027",
+              "date": "2026-11-05",
+              "url": "https://www.hug.ch/actualite/laurent-roth-nomme-directeur-ad-interim-division-privee-hug-1er-janvier-2027"
             },
             {
               "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
@@ -309,14 +347,9 @@
               "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
               "date": "2026-11-02",
               "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
-            },
-            {
-              "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
-              "date": "2026-11-02",
-              "url": "https://www.hug.ch/actualite/recherche-therapie-cellulaire-innovante-pour-traiter-insuffisance-cardiaque"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "GE",
@@ -460,7 +493,21 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-05T12:34:18.927Z"
+          "updatedAt": "2026-11-05T23:57:30.030Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "8 °C",
+              "detail": "heute 7 bis 8 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -471,6 +518,11 @@
               "label": "Le chômage dans le canton de Genève en octobre 2026",
               "date": "2026-11-05T13:30:00.000Z",
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10891&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6076"
+            },
+            {
+              "label": "Laurent Roth nommé directeur ad intérim de la Division privée des HUG dès le 1er janvier 2027",
+              "date": "2026-11-05",
+              "url": "https://www.hug.ch/actualite/laurent-roth-nomme-directeur-ad-interim-division-privee-hug-1er-janvier-2027"
             },
             {
               "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
@@ -491,14 +543,9 @@
               "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
               "date": "2026-11-02",
               "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
-            },
-            {
-              "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
-              "date": "2026-11-02",
-              "url": "https://www.hug.ch/actualite/recherche-therapie-cellulaire-innovante-pour-traiter-insuffisance-cardiaque"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "GE",
@@ -642,7 +689,21 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-05T12:34:18.927Z"
+          "updatedAt": "2026-11-05T23:57:30.030Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "8 °C",
+              "detail": "aujourd’hui de 7 à 8 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -653,6 +714,11 @@
               "label": "Le chômage dans le canton de Genève en octobre 2026",
               "date": "2026-11-05T13:30:00.000Z",
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10891&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6076"
+            },
+            {
+              "label": "Laurent Roth nommé directeur ad intérim de la Division privée des HUG dès le 1er janvier 2027",
+              "date": "2026-11-05",
+              "url": "https://www.hug.ch/actualite/laurent-roth-nomme-directeur-ad-interim-division-privee-hug-1er-janvier-2027"
             },
             {
               "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
@@ -673,14 +739,9 @@
               "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
               "date": "2026-11-02",
               "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
-            },
-            {
-              "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
-              "date": "2026-11-02",
-              "url": "https://www.hug.ch/actualite/recherche-therapie-cellulaire-innovante-pour-traiter-insuffisance-cardiaque"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -752,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

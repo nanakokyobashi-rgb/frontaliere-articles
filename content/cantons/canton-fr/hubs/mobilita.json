@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "ee32347e977337dfb30276eda007cc49ab08b83b5ec085a7a090813440382817",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "516d6db8b6305871a84f0c8427a2b94bc9590a83f475c9856744ecfd6f68b022",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T11:32:49.603Z",
+      "updatedAt": "2026-11-05T20:21:30.260Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "10",
+          "value": "9",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         }
       ],
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +130,7 @@
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "FR",
@@ -209,7 +209,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "10",
+          "value": "9",
           "note": "reports as of 5 November 2026"
         }
       ],
@@ -269,7 +269,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -307,7 +307,7 @@
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "FR",
@@ -386,7 +386,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "10",
+          "value": "9",
           "note": "Meldungen vom 5. November 2026"
         }
       ],
@@ -446,7 +446,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -484,7 +484,7 @@
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "FR",
@@ -563,7 +563,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "10",
+          "value": "9",
           "note": "signalements au 5 novembre 2026"
         }
       ],
@@ -623,7 +623,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -661,7 +661,7 @@
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

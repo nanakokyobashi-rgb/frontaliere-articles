@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "0471f41096f3ae5f29ed6b0887f16b16c4052c8a9e5fb2dddce7d880980972c4",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "c3200c7fb2850a82dc747b94813c9934176cb274e2725f416bf1cff9bf69e8de",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T11:32:49.603Z",
+      "updatedAt": "2026-11-05T20:21:30.260Z",
       "keyFacts": 2
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "3",
+          "value": "2",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
@@ -37,12 +37,6 @@
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
-            {
-              "label": "A4 Altdorf <-> Zürich tra Svincolo autostradale Brunnen E Svincolo autostradale Brunnen Süd Situazione: chiusa cantiere, lunghezza [km] 2.3",
-              "value": "Chiusura",
-              "detail": "fine prevista: 6 novembre 2026",
-              "date": "2026-09-21T06:53:00.000Z"
-            },
             {
               "label": "A4 Altdorf <-> Brunnen Svincolo autostradale Brunnen Süd Situazione: entrato-uscito chiusa cantiere, lunghezza [km] 0.12",
               "value": "Chiusura",
@@ -69,7 +63,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         }
       ],
       "curatedArticles": [
@@ -103,7 +97,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "SZ",
@@ -113,7 +107,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "3",
+          "value": "2",
           "note": "reports as of 5 November 2026"
         },
         {
@@ -128,12 +122,6 @@
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
-            {
-              "label": "A4 Altdorf <-> Zürich tra Svincolo autostradale Brunnen E Svincolo autostradale Brunnen Süd Situazione: chiusa cantiere, lunghezza [km] 2.3",
-              "value": "Closure",
-              "detail": "until 6 November 2026",
-              "date": "2026-09-21T06:53:00.000Z"
-            },
             {
               "label": "A4 Altdorf <-> Brunnen Svincolo autostradale Brunnen Süd Situazione: entrato-uscito chiusa cantiere, lunghezza [km] 0.12",
               "value": "Closure",
@@ -160,7 +148,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         }
       ],
       "curatedArticles": [
@@ -194,7 +182,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "SZ",
@@ -204,7 +192,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "3",
+          "value": "2",
           "note": "Meldungen vom 5. November 2026"
         },
         {
@@ -219,12 +207,6 @@
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
-            {
-              "label": "A4 Altdorf <-> Zürich zwischen Anschluss Brunnen und Anschluss Brunnen-Süd Sachlage: Strecke gesperrt Baustelle, Länge [km] 2.3",
-              "value": "Sperrung",
-              "detail": "bis 6. November 2026",
-              "date": "2026-09-21T06:53:00.000Z"
-            },
             {
               "label": "A4 Altdorf <-> Brunnen Anschluss Brunnen-Süd Sachlage: Ein- und Ausfahrt gesperrt Baustelle, Länge [km] 0.12",
               "value": "Sperrung",
@@ -251,7 +233,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +267,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "SZ",
@@ -295,7 +277,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "3",
+          "value": "2",
           "note": "signalements au 5 novembre 2026"
         },
         {
@@ -310,12 +292,6 @@
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
-            {
-              "label": "A4 Altdorf <-> Zurich entre Jonction autoroutière Brunnen et Jonction autoroutière Brunnen-Sud Situation: fermé travaux, longueur [km] 2.3",
-              "value": "Fermeture",
-              "detail": "jusqu’au 6 novembre 2026",
-              "date": "2026-09-21T06:53:00.000Z"
-            },
             {
               "label": "A4 Altdorf <-> Brunnen Jonction autoroutière Brunnen-Sud Situation: Entrée et sortie verrouillées travaux, longueur [km] 0.12",
               "value": "Fermeture",
@@ -342,7 +318,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         }
       ],
       "curatedArticles": [
@@ -376,7 +352,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

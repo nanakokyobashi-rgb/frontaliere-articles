@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "69f758af2161e802d36a903e470afbc46e4f89f94f9c6acff26127c7e1e19856",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "ae369f7f1433ef1fbff44243d94a2a0bd5d2acd17997113d24c99a10ea3ce14f",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T11:32:49.603Z",
+      "updatedAt": "2026-11-05T20:21:30.260Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "20",
+          "value": "23",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         }
       ],
@@ -127,6 +127,16 @@
               "date": "2026-11-05T06:55:00.000Z"
             },
             {
+              "label": "Revocato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Chiasso Dogana commerciale E Dogana Chiasso Brogeda Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-11-05T16:04:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Chiasso tra Svincolo autostradale Bellinzona Sud E Parcheggio al Sasso Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia di destra bloccata",
+              "value": "Traffico",
+              "date": "2026-11-05T20:05:00.000Z"
+            },
+            {
               "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
               "value": "Cantiere",
               "detail": "fine prevista: 29 dicembre 2028",
@@ -143,22 +153,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 28 giugno 2028",
               "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Parcheggio Chiasso-Dogana commerciale Situazione: problemi di traffico cantiere, lunghezza [km] 0.1",
-              "value": "Cantiere",
-              "detail": "fine prevista: 24 marzo 2027",
-              "date": "2025-04-01T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Svincolo autostradale Faido Situazione: problemi di traffico nel raccordo, lunghezza [km] 0.1, cantiere Limitazione del traffico: corsie strette ridotta su una corsia…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 16 novembre 2026",
-              "date": "2026-09-21T06:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -196,7 +194,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -292,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "TI",
@@ -312,7 +310,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "20",
+          "value": "23",
           "note": "reports as of 5 November 2026"
         }
       ],
@@ -397,6 +395,16 @@
               "date": "2026-11-05T06:55:00.000Z"
             },
             {
+              "label": "Revocato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Chiasso Dogana commerciale E Dogana Chiasso Brogeda Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-11-05T16:04:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Chiasso tra Svincolo autostradale Bellinzona Sud E Parcheggio al Sasso Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia di destra bloccata",
+              "value": "Traffic",
+              "date": "2026-11-05T20:05:00.000Z"
+            },
+            {
               "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
               "value": "Roadworks",
               "detail": "until 29 December 2028",
@@ -413,22 +421,10 @@
               "value": "Roadworks",
               "detail": "until 28 June 2028",
               "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Parcheggio Chiasso-Dogana commerciale Situazione: problemi di traffico cantiere, lunghezza [km] 0.1",
-              "value": "Roadworks",
-              "detail": "until 24 March 2027",
-              "date": "2025-04-01T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Svincolo autostradale Faido Situazione: problemi di traffico nel raccordo, lunghezza [km] 0.1, cantiere Limitazione del traffico: corsie strette ridotta su una corsia…",
-              "value": "Roadworks",
-              "detail": "until 16 November 2026",
-              "date": "2026-09-21T06:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -466,7 +462,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -561,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "TI",
@@ -581,7 +577,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "20",
+          "value": "23",
           "note": "Meldungen vom 5. November 2026"
         }
       ],
@@ -666,6 +662,16 @@
               "date": "2026-11-05T06:55:00.000Z"
             },
             {
+              "label": "Aufgehoben: A2 Gotthard -> Chiasso zwischen Anschluss Chiasso-Warenzoll und Zollstation Chiasso-Brogeda Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-11-05T16:04:00.000Z"
+            },
+            {
+              "label": "A2 Gotthard -> Chiasso zwischen Anschluss Bellinzona-Süd und Parkplatz al Sasso Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen blockiert",
+              "value": "Verkehr",
+              "date": "2026-11-05T20:05:00.000Z"
+            },
+            {
               "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
               "value": "Baustelle",
               "detail": "bis 29. Dezember 2028",
@@ -682,22 +688,10 @@
               "value": "Baustelle",
               "detail": "bis 28. Juni 2028",
               "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> Gotthard Parkplatz Chiasso-Warenzoll Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1",
-              "value": "Baustelle",
-              "detail": "bis 24. März 2027",
-              "date": "2025-04-01T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> Gotthard Anschluss Faido Sachlage: Verkehrsbehinderung im Anschluss, Länge [km] 0.1, Baustelle Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1…",
-              "value": "Baustelle",
-              "detail": "bis 16. November 2026",
-              "date": "2026-09-21T06:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -735,7 +729,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -830,7 +824,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "TI",
@@ -850,7 +844,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "20",
+          "value": "23",
           "note": "signalements au 5 novembre 2026"
         }
       ],
@@ -935,6 +929,16 @@
               "date": "2026-11-05T06:55:00.000Z"
             },
             {
+              "label": "Révoqué: A2 St-Gothard -> Chiasso entre Jonction autoroutière Chiasso-Douane commercial et Poste de douane Chiasso-Brogeda Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-11-05T16:04:00.000Z"
+            },
+            {
+              "label": "A2 St-Gothard -> Chiasso entre Jonction autoroutière Bellinzone-Sud et Parking al Sasso Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: voie de droite bloquée",
+              "value": "Trafic",
+              "date": "2026-11-05T20:05:00.000Z"
+            },
+            {
               "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
               "value": "Chantier",
               "detail": "jusqu’au 29 décembre 2028",
@@ -951,22 +955,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 28 juin 2028",
               "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> St-Gothard Parking Chiasso-Douane commercial Situation: trafic perturbé travaux, longueur [km] 0.1",
-              "value": "Chantier",
-              "detail": "jusqu’au 24 mars 2027",
-              "date": "2025-04-01T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> St-Gothard Jonction autoroutière Faido Situation: trafic perturbé dans la jonction, longueur [km] 0.1, travaux Gestion du trafic: rétrécissement des voies sur une voie de circulation…",
-              "value": "Chantier",
-              "detail": "jusqu’au 16 novembre 2026",
-              "date": "2026-09-21T06:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1004,7 +996,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -1100,7 +1092,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

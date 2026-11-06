@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T03:47:53.148Z",
-  "contentHash": "a1c4111e68decb75646295910dd93782ab3f726d7179c5fe6df37ce04c3fb17e",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "5fd8ecb9d17145cb063a33c1e9b7b0d1f99e4fe4241f45aba4932903892fb37a",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T11:32:49.603Z",
-      "keyFacts": 2
+      "updatedAt": "2026-11-05T20:21:30.260Z",
+      "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -34,11 +34,6 @@
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
           "note": "Hermance, settimana conclusa: 4 novembre 2026"
-        },
-        {
-          "label": "Chiusure stradali in corso o imminenti",
-          "value": "1",
-          "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
@@ -111,49 +106,49 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "A1 Genève <-> Lausanne Galleria Galleria Chèvres Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.4",
-              "value": "Chiusura",
-              "detail": "fine prevista: 6 novembre 2026",
-              "date": "2026-10-12T06:58:00.000Z"
-            },
-            {
-              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Bernex E Svincolo autostradale Vernier, al chilometro 5.2 Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia…",
-              "value": "Traffico",
-              "date": "2026-11-05T11:21:00.000Z"
-            },
-            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Traffico",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45382"
+            },
+            {
+              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
+              "value": "Traffico",
+              "date": "2026-11-05T20:21:30.260Z",
+              "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Cantiere",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45273"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "value": "Cantiere",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45356"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
               "value": "Cantiere",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45397"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
+              "date": "2026-11-05",
+              "url": "https://www.ge.ch/node/45418"
+            },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
               "date": "2026-11-05",
@@ -178,14 +173,9 @@
               "label": "Réouverture de l’établissement pénitentiaire de Villars après travaux",
               "date": "2026-11-02",
               "url": "https://www.ge.ch/node/45383"
-            },
-            {
-              "label": "Perturbations de la circulation - dimanche 1er novembre",
-              "date": "2026-10-31",
-              "url": "https://www.ge.ch/node/45382"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -245,7 +235,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-06T03:47:53.148Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "GE",
@@ -257,11 +247,6 @@
           "label": "Fastest crossing of the week",
           "value": "0 min",
           "note": "Hermance, week ending 4 November 2026"
-        },
-        {
-          "label": "Road closures in force or imminent",
-          "value": "1",
-          "note": "reports as of 5 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
@@ -334,49 +319,49 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "A1 Genève <-> Lausanne Galleria Galleria Chèvres Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.4",
-              "value": "Closure",
-              "detail": "until 6 November 2026",
-              "date": "2026-10-12T06:58:00.000Z"
-            },
-            {
-              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Bernex E Svincolo autostradale Vernier, al chilometro 5.2 Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia…",
-              "value": "Traffic",
-              "date": "2026-11-05T11:21:00.000Z"
-            },
-            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Traffic",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45382"
+            },
+            {
+              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
+              "value": "Traffic",
+              "date": "2026-11-05T20:21:30.260Z",
+              "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Roadworks",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45273"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "value": "Roadworks",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45356"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
               "value": "Roadworks",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45397"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
+              "date": "2026-11-05",
+              "url": "https://www.ge.ch/node/45418"
+            },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
               "date": "2026-11-05",
@@ -401,14 +386,9 @@
               "label": "Réouverture de l’établissement pénitentiaire de Villars après travaux",
               "date": "2026-11-02",
               "url": "https://www.ge.ch/node/45383"
-            },
-            {
-              "label": "Perturbations de la circulation - dimanche 1er novembre",
-              "date": "2026-10-31",
-              "url": "https://www.ge.ch/node/45382"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -468,7 +448,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-06T03:47:53.148Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "GE",
@@ -480,11 +460,6 @@
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
           "note": "Hermance, Woche bis 4. November 2026"
-        },
-        {
-          "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "1",
-          "note": "Meldungen vom 5. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
@@ -557,49 +532,49 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "A1 Genf <-> Lausanne Tunnel Chèvres-Tunnel Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.4",
-              "value": "Sperrung",
-              "detail": "bis 6. November 2026",
-              "date": "2026-10-12T06:58:00.000Z"
-            },
-            {
-              "label": "A1 Genf -> Lausanne zwischen Anschluss Bernex und Anschluss Vernier, bei Kilometer 5.2 Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: Pannenstreifen blockiert",
-              "value": "Verkehr",
-              "date": "2026-11-05T11:21:00.000Z"
-            },
-            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Verkehr",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45382"
+            },
+            {
+              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
+              "value": "Verkehr",
+              "date": "2026-11-05T20:21:30.260Z",
+              "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Baustelle",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45273"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "value": "Baustelle",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45356"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
               "value": "Baustelle",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45397"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
+              "date": "2026-11-05",
+              "url": "https://www.ge.ch/node/45418"
+            },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
               "date": "2026-11-05",
@@ -624,14 +599,9 @@
               "label": "Réouverture de l’établissement pénitentiaire de Villars après travaux",
               "date": "2026-11-02",
               "url": "https://www.ge.ch/node/45383"
-            },
-            {
-              "label": "Perturbations de la circulation - dimanche 1er novembre",
-              "date": "2026-10-31",
-              "url": "https://www.ge.ch/node/45382"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -691,7 +661,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-06T03:47:53.148Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "GE",
@@ -703,11 +673,6 @@
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
           "note": "Hermance, semaine jusqu’au 4 novembre 2026"
-        },
-        {
-          "label": "Fermetures de routes en cours ou imminentes",
-          "value": "1",
-          "note": "signalements au 5 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
@@ -780,49 +745,49 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "A1 Genève <-> Lausanne Tunnel Tunnel de Chèvres Situation: entrée fermée travaux, longueur [km] 0.4",
-              "value": "Fermeture",
-              "detail": "jusqu’au 6 novembre 2026",
-              "date": "2026-10-12T06:58:00.000Z"
-            },
-            {
-              "label": "A1 Genève -> Lausanne entre Jonction autoroutière Bernex et Jonction autoroutière Vernier, au kilomètre 5.2 Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: bande d'arrêt…",
-              "value": "Trafic",
-              "date": "2026-11-05T11:21:00.000Z"
-            },
-            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Trafic",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45382"
+            },
+            {
+              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
+              "value": "Trafic",
+              "date": "2026-11-05T20:21:30.260Z",
+              "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Chantier",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45273"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "value": "Chantier",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45356"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
               "value": "Chantier",
-              "date": "2026-11-05T11:32:49.603Z",
+              "date": "2026-11-05T20:21:30.260Z",
               "url": "https://www.ge.ch/node/45397"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
+              "date": "2026-11-05",
+              "url": "https://www.ge.ch/node/45418"
+            },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
               "date": "2026-11-05",
@@ -847,14 +812,9 @@
               "label": "Réouverture de l’établissement pénitentiaire de Villars après travaux",
               "date": "2026-11-02",
               "url": "https://www.ge.ch/node/45383"
-            },
-            {
-              "label": "Perturbations de la circulation - dimanche 1er novembre",
-              "date": "2026-10-31",
-              "url": "https://www.ge.ch/node/45382"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -914,7 +874,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-06T03:47:53.148Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

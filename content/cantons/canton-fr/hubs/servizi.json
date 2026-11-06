@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "49067b3610d7689bd30d8f9f9fe530304744d2870729bdfc95f6657e40553b85",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "0f372a479c6a8901b93bb3ceb7cf112cb71403700a6c4655cd85a1f1e5edd3b9",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-05T06:46:26.804Z",
+      "updatedAt": "2026-11-05T20:04:43.050Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-05T22:13:34.865Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -92,13 +97,32 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
-          "updatedAt": "2026-11-05T06:46:26.804Z"
+          "updatedAt": "2026-11-05T20:04:43.050Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "6 °C",
+              "detail": "oggi da 5 a 7 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-05T09:58:03.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-273"
+            },
             {
               "label": "Arbeitslosigkeit im Kanton Freiburg im Oktober 2026 unverändert bei 2,5 %",
               "date": "2026-11-05T08:14:22.000Z",
@@ -123,14 +147,9 @@
               "label": "Bruno Boschung nommé chef de l’ORP Centre du canton de Fribourg",
               "date": "2026-11-02T06:44:07.000Z",
               "url": "https://www.fr.ch/deef/spe/actualites/bruno-boschung-nomme-chef-de-lorp-centre-du-canton-de-fribourg"
-            },
-            {
-              "label": "Bruno Boschung zum Leiter des RAV Zentrum des Kantons Freiburg ernannt",
-              "date": "2026-11-02T06:44:07.000Z",
-              "url": "https://www.fr.ch/de/vwbd/ama/news/bruno-boschung-zum-leiter-des-rav-zentrum-des-kantons-freiburg-ernannt"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -210,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "FR",
@@ -280,13 +299,32 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
-          "updatedAt": "2026-11-05T06:46:26.804Z"
+          "updatedAt": "2026-11-05T20:04:43.050Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "6 °C",
+              "detail": "today from 5 to 7 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-05T09:58:03.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-273"
+            },
             {
               "label": "Arbeitslosigkeit im Kanton Freiburg im Oktober 2026 unverändert bei 2,5 %",
               "date": "2026-11-05T08:14:22.000Z",
@@ -311,14 +349,9 @@
               "label": "Bruno Boschung nommé chef de l’ORP Centre du canton de Fribourg",
               "date": "2026-11-02T06:44:07.000Z",
               "url": "https://www.fr.ch/deef/spe/actualites/bruno-boschung-nomme-chef-de-lorp-centre-du-canton-de-fribourg"
-            },
-            {
-              "label": "Bruno Boschung zum Leiter des RAV Zentrum des Kantons Freiburg ernannt",
-              "date": "2026-11-02T06:44:07.000Z",
-              "url": "https://www.fr.ch/de/vwbd/ama/news/bruno-boschung-zum-leiter-des-rav-zentrum-des-kantons-freiburg-ernannt"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -394,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "FR",
@@ -464,13 +497,32 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
-          "updatedAt": "2026-11-05T06:46:26.804Z"
+          "updatedAt": "2026-11-05T20:04:43.050Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "6 °C",
+              "detail": "heute 5 bis 7 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-05T09:58:03.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-273"
+            },
             {
               "label": "Arbeitslosigkeit im Kanton Freiburg im Oktober 2026 unverändert bei 2,5 %",
               "date": "2026-11-05T08:14:22.000Z",
@@ -495,14 +547,9 @@
               "label": "Bruno Boschung nommé chef de l’ORP Centre du canton de Fribourg",
               "date": "2026-11-02T06:44:07.000Z",
               "url": "https://www.fr.ch/deef/spe/actualites/bruno-boschung-nomme-chef-de-lorp-centre-du-canton-de-fribourg"
-            },
-            {
-              "label": "Bruno Boschung zum Leiter des RAV Zentrum des Kantons Freiburg ernannt",
-              "date": "2026-11-02T06:44:07.000Z",
-              "url": "https://www.fr.ch/de/vwbd/ama/news/bruno-boschung-zum-leiter-des-rav-zentrum-des-kantons-freiburg-ernannt"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -578,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "FR",
@@ -648,13 +695,32 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
-          "updatedAt": "2026-11-05T06:46:26.804Z"
+          "updatedAt": "2026-11-05T20:04:43.050Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 5 à 7 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-05T22:13:34.865Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-05T09:58:03.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-273"
+            },
             {
               "label": "Arbeitslosigkeit im Kanton Freiburg im Oktober 2026 unverändert bei 2,5 %",
               "date": "2026-11-05T08:14:22.000Z",
@@ -679,14 +745,9 @@
               "label": "Bruno Boschung nommé chef de l’ORP Centre du canton de Fribourg",
               "date": "2026-11-02T06:44:07.000Z",
               "url": "https://www.fr.ch/deef/spe/actualites/bruno-boschung-nomme-chef-de-lorp-centre-du-canton-de-fribourg"
-            },
-            {
-              "label": "Bruno Boschung zum Leiter des RAV Zentrum des Kantons Freiburg ernannt",
-              "date": "2026-11-02T06:44:07.000Z",
-              "url": "https://www.fr.ch/de/vwbd/ama/news/bruno-boschung-zum-leiter-des-rav-zentrum-des-kantons-freiburg-ernannt"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -758,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

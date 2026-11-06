@@ -4,17 +4,17 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "5fcb7488ab4a6ef60f37327cac4ccf08a61f6d21e8e57ab997cd7135f0bce4e6",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "80ef0ba63913b23f7c268995c93733d1b3f570c6c937b099659c7871cf668de5",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T01:51:30.468Z",
+      "updatedAt": "2026-11-05T20:21:30.260Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -92,13 +92,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Baustellen-News: Sperrung Dorfstrasse vom 9.-27.11.2026",
+              "date": "2026-11-05",
+              "url": "https://www.buochs.ch/_rte/information/3042271"
+            },
             {
               "label": "Bergstrasse 4: Strassensperrung am 25.11.2026 infolge Krandemontage",
               "date": "2026-11-02",
@@ -123,14 +128,9 @@
               "label": "A2 Lehnenviadukt Beckenried - Verkehrsumstellung für die nächste Bauphase und die Reinigung des Seelisbergtunnels",
               "date": "2026-10-14",
               "url": "https://www.buochs.ch/_rte/information/3010885"
-            },
-            {
-              "label": "Fahrplanwechsel ab 13. Dezember 2026",
-              "date": "2026-10-14",
-              "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -170,7 +170,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "NW",
@@ -245,13 +245,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Baustellen-News: Sperrung Dorfstrasse vom 9.-27.11.2026",
+              "date": "2026-11-05",
+              "url": "https://www.buochs.ch/_rte/information/3042271"
+            },
             {
               "label": "Bergstrasse 4: Strassensperrung am 25.11.2026 infolge Krandemontage",
               "date": "2026-11-02",
@@ -276,14 +281,9 @@
               "label": "A2 Lehnenviadukt Beckenried - Verkehrsumstellung für die nächste Bauphase und die Reinigung des Seelisbergtunnels",
               "date": "2026-10-14",
               "url": "https://www.buochs.ch/_rte/information/3010885"
-            },
-            {
-              "label": "Fahrplanwechsel ab 13. Dezember 2026",
-              "date": "2026-10-14",
-              "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -323,7 +323,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "NW",
@@ -398,13 +398,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Baustellen-News: Sperrung Dorfstrasse vom 9.-27.11.2026",
+              "date": "2026-11-05",
+              "url": "https://www.buochs.ch/_rte/information/3042271"
+            },
             {
               "label": "Bergstrasse 4: Strassensperrung am 25.11.2026 infolge Krandemontage",
               "date": "2026-11-02",
@@ -429,14 +434,9 @@
               "label": "A2 Lehnenviadukt Beckenried - Verkehrsumstellung für die nächste Bauphase und die Reinigung des Seelisbergtunnels",
               "date": "2026-10-14",
               "url": "https://www.buochs.ch/_rte/information/3010885"
-            },
-            {
-              "label": "Fahrplanwechsel ab 13. Dezember 2026",
-              "date": "2026-10-14",
-              "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -476,7 +476,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "NW",
@@ -551,13 +551,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Baustellen-News: Sperrung Dorfstrasse vom 9.-27.11.2026",
+              "date": "2026-11-05",
+              "url": "https://www.buochs.ch/_rte/information/3042271"
+            },
             {
               "label": "Bergstrasse 4: Strassensperrung am 25.11.2026 infolge Krandemontage",
               "date": "2026-11-02",
@@ -582,14 +587,9 @@
               "label": "A2 Lehnenviadukt Beckenried - Verkehrsumstellung für die nächste Bauphase und die Reinigung des Seelisbergtunnels",
               "date": "2026-10-14",
               "url": "https://www.buochs.ch/_rte/information/3010885"
-            },
-            {
-              "label": "Fahrplanwechsel ab 13. Dezember 2026",
-              "date": "2026-10-14",
-              "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -629,7 +629,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

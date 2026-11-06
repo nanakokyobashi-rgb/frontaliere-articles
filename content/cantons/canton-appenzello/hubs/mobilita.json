@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "3c15fb733921294fd9e78b08923fbf0846321202f58ae93d91127841afd737ea",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "6f882be76950fc7d925ed6868bff15669e2e122421201ae16921245f6c2d3b7f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T01:51:30.468Z",
+      "updatedAt": "2026-11-05T20:21:30.260Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -38,12 +38,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "Haslen - Selbstunfall mit Personenwagen",
-              "value": "Traffico",
-              "date": "2026-11-04T11:40:01.435Z",
-              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
-            },
-            {
               "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
               "value": "Cantiere",
               "detail": "fine prevista: 13 novembre 2026",
@@ -51,7 +45,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -89,7 +83,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -111,7 +105,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -132,12 +126,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "Haslen - Selbstunfall mit Personenwagen",
-              "value": "Traffic",
-              "date": "2026-11-04T11:40:01.435Z",
-              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
-            },
-            {
               "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
               "value": "Roadworks",
               "detail": "until 13 November 2026",
@@ -145,7 +133,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -183,7 +171,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -205,7 +193,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -226,12 +214,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "Haslen - Selbstunfall mit Personenwagen",
-              "value": "Verkehr",
-              "date": "2026-11-04T11:40:01.435Z",
-              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
-            },
-            {
               "label": "459 Waldstatt <-> Appenzell zwischen Ortschaft Waldstatt und Ortschaft Hundwil Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1…",
               "value": "Baustelle",
               "detail": "bis 13. November 2026",
@@ -239,7 +221,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -277,7 +259,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -299,7 +281,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -320,12 +302,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "Haslen - Selbstunfall mit Personenwagen",
-              "value": "Trafic",
-              "date": "2026-11-04T11:40:01.435Z",
-              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
-            },
-            {
               "label": "459 Waldstatt <-> Appenzell entre Localité Waldstatt et Localité Hundwil Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: circulation alternée à une voie Complément 1…",
               "value": "Chantier",
               "detail": "jusqu’au 13 novembre 2026",
@@ -333,7 +309,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -371,7 +347,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -393,7 +369,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "bc55a6cfe9db08b2586fe71a9e45666aee8152c40835187fdc42f01c19fc7fad",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "a4ff95343cbc3e380aa599431e307cd64667d3bf4dfb3177d831c64521eff236",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T01:51:30.468Z",
+      "updatedAt": "2026-11-05T20:21:30.260Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "9",
+          "value": "8",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         }
       ],
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +198,7 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "GR",
@@ -310,7 +310,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "9",
+          "value": "8",
           "note": "reports as of 5 November 2026"
         }
       ],
@@ -428,7 +428,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -466,7 +466,7 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "GR",
@@ -577,7 +577,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "9",
+          "value": "8",
           "note": "Meldungen vom 5. November 2026"
         }
       ],
@@ -695,7 +695,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -733,7 +733,7 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "GR",
@@ -845,7 +845,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "9",
+          "value": "8",
           "note": "signalements au 5 novembre 2026"
         }
       ],
@@ -963,7 +963,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1001,7 +1001,7 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

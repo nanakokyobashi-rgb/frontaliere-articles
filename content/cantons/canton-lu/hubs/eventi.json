@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "39161d41ceb92e3bf39eabc65c18d11eaf5f80d433f23af03aa29d2f0a52c051",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "5fab8c93682089551c52ecd1019c9625c4977ef189db3a36cccd3b6771667c83",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -100,13 +100,28 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-11-05T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694302"
+            },
+            {
+              "label": "Salonkonzert",
+              "date": "2026-11-05T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463716"
+            },
+            {
+              "label": "FUKA KIOSK - Kultur zum Abholen",
+              "date": "2026-11-04T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6363316"
+            },
             {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-11-02T23:00:00.000Z",
@@ -121,24 +136,9 @@
               "label": "Schweizer Wohntage: Luzern",
               "date": "2026-10-30T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "date": "2026-10-29T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7587574"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-29T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463713"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-10-29T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "LU",
@@ -255,13 +255,28 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-11-05T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694302"
+            },
+            {
+              "label": "Salonkonzert",
+              "date": "2026-11-05T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463716"
+            },
+            {
+              "label": "FUKA KIOSK - Kultur zum Abholen",
+              "date": "2026-11-04T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6363316"
+            },
             {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-11-02T23:00:00.000Z",
@@ -276,24 +291,9 @@
               "label": "Schweizer Wohntage: Luzern",
               "date": "2026-10-30T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "date": "2026-10-29T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7587574"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-29T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463713"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-10-29T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "LU",
@@ -410,13 +410,28 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-11-05T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694302"
+            },
+            {
+              "label": "Salonkonzert",
+              "date": "2026-11-05T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463716"
+            },
+            {
+              "label": "FUKA KIOSK - Kultur zum Abholen",
+              "date": "2026-11-04T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6363316"
+            },
             {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-11-02T23:00:00.000Z",
@@ -431,24 +446,9 @@
               "label": "Schweizer Wohntage: Luzern",
               "date": "2026-10-30T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "date": "2026-10-29T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7587574"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-29T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463713"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-10-29T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "LU",
@@ -565,13 +565,28 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-11-05T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694302"
+            },
+            {
+              "label": "Salonkonzert",
+              "date": "2026-11-05T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463716"
+            },
+            {
+              "label": "FUKA KIOSK - Kultur zum Abholen",
+              "date": "2026-11-04T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6363316"
+            },
             {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-11-02T23:00:00.000Z",
@@ -586,24 +601,9 @@
               "label": "Schweizer Wohntage: Luzern",
               "date": "2026-10-30T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "date": "2026-10-29T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7587574"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-29T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463713"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-10-29T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

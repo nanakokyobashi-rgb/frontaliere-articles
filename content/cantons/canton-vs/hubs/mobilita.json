@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T03:26:59.048Z",
-  "contentHash": "7bd88d65201cd592e37c2f1fa012451593a8ebcb4f49d99094685479ade06106",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "fbd1c27b0001095b975e3ab7491e95ead03420d41506ab736acb6bf9266f669e",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T11:32:49.603Z",
+      "updatedAt": "2026-11-05T20:21:30.260Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "21",
+          "value": "20",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
@@ -105,27 +105,10 @@
               "date": "2026-08-31T05:00:00.000Z"
             },
             {
-              "label": "A21 Diramazione Gran San Bernardo <-> Martigny-Croix tra Svincolo autostradale Martigny-Croix E Svincolo autostradale Martigny-Expo Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 6 novembre 2026",
-              "date": "2026-09-10T03:59:00.000Z"
-            },
-            {
-              "label": "A21 Diramazione Gran San Bernardo <-> Martigny-Croix tra Svincolo autostradale Martigny-Expo E Svincolo autostradale Martigny-Croix Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 6 novembre 2026",
-              "date": "2026-09-17T18:00:00.000Z"
-            },
-            {
               "label": "Epinassey, Saint-Maurice in tutte le direzioni Situazione: chiusa Causa: lavori di costruzione",
               "value": "Chiusura",
               "detail": "fine prevista: 18 dicembre 2026",
               "date": "2026-09-28T06:00:00.000Z"
-            },
-            {
-              "label": "Sion <-> Sanetschpass Passo Col du Sanetsch Situazione: chiusa",
-              "value": "Chiusura",
-              "date": "2026-10-20T13:09:00.000Z"
             },
             {
               "label": "Ausserbinn, Ernen in tutte le direzioni Situazione: chiusa Causa: chiusura invernale",
@@ -136,10 +119,26 @@
               "label": "Zer Meiggeru, Saas-Almagell <-> Mattmark, Saas-Almagell Situazione: chiusa Causa: chiusura invernale",
               "value": "Chiusura",
               "date": "2026-10-23T09:44:00.000Z"
+            },
+            {
+              "label": "Morgins, Troistorrents <-> Restaurant d’alpage Tovassière, Route de Chésery, Morgins Situazione: chiusa Causa: chiusura invernale",
+              "value": "Chiusura",
+              "date": "2026-10-23T14:29:00.000Z"
+            },
+            {
+              "label": "A21 Diramazione Gran San Bernardo -> Martigny-Croix tra Svincolo autostradale Martigny-Expo E Svincolo autostradale Martigny-Croix Situazione: problemi di traffico cantiere, lunghezza [km] 0.6…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 11 novembre 2026",
+              "date": "2026-10-26T07:00:00.000Z"
+            },
+            {
+              "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Situazione: chiusa Causa: chiusura invernale",
+              "value": "Chiusura",
+              "date": "2026-10-27T12:15:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -177,7 +176,7 @@
               "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -247,7 +246,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-06T03:26:59.048Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "VS",
@@ -262,7 +261,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "21",
+          "value": "20",
           "note": "reports as of 5 November 2026"
         },
         {
@@ -330,27 +329,10 @@
               "date": "2026-08-31T05:00:00.000Z"
             },
             {
-              "label": "A21 Diramazione Gran San Bernardo <-> Martigny-Croix tra Svincolo autostradale Martigny-Croix E Svincolo autostradale Martigny-Expo Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 6 November 2026",
-              "date": "2026-09-10T03:59:00.000Z"
-            },
-            {
-              "label": "A21 Diramazione Gran San Bernardo <-> Martigny-Croix tra Svincolo autostradale Martigny-Expo E Svincolo autostradale Martigny-Croix Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 6 November 2026",
-              "date": "2026-09-17T18:00:00.000Z"
-            },
-            {
               "label": "Epinassey, Saint-Maurice in tutte le direzioni Situazione: chiusa Causa: lavori di costruzione",
               "value": "Closure",
               "detail": "until 18 December 2026",
               "date": "2026-09-28T06:00:00.000Z"
-            },
-            {
-              "label": "Sion <-> Sanetschpass Passo Col du Sanetsch Situazione: chiusa",
-              "value": "Closure",
-              "date": "2026-10-20T13:09:00.000Z"
             },
             {
               "label": "Ausserbinn, Ernen in tutte le direzioni Situazione: chiusa Causa: chiusura invernale",
@@ -361,10 +343,26 @@
               "label": "Zer Meiggeru, Saas-Almagell <-> Mattmark, Saas-Almagell Situazione: chiusa Causa: chiusura invernale",
               "value": "Closure",
               "date": "2026-10-23T09:44:00.000Z"
+            },
+            {
+              "label": "Morgins, Troistorrents <-> Restaurant d’alpage Tovassière, Route de Chésery, Morgins Situazione: chiusa Causa: chiusura invernale",
+              "value": "Closure",
+              "date": "2026-10-23T14:29:00.000Z"
+            },
+            {
+              "label": "A21 Diramazione Gran San Bernardo -> Martigny-Croix tra Svincolo autostradale Martigny-Expo E Svincolo autostradale Martigny-Croix Situazione: problemi di traffico cantiere, lunghezza [km] 0.6…",
+              "value": "Closure",
+              "detail": "until 11 November 2026",
+              "date": "2026-10-26T07:00:00.000Z"
+            },
+            {
+              "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Situazione: chiusa Causa: chiusura invernale",
+              "value": "Closure",
+              "date": "2026-10-27T12:15:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -402,7 +400,7 @@
               "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -472,7 +470,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-06T03:26:59.048Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "VS",
@@ -487,7 +485,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "21",
+          "value": "20",
           "note": "Meldungen vom 5. November 2026"
         },
         {
@@ -555,27 +553,10 @@
               "date": "2026-08-31T05:00:00.000Z"
             },
             {
-              "label": "A21 Verzweigung Gd-St-Bernard <-> Martigny-Croix zwischen Anschluss Martigny-Croix und Anschluss Martigny-Expo Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 6. November 2026",
-              "date": "2026-09-10T03:59:00.000Z"
-            },
-            {
-              "label": "A21 Verzweigung Gd-St-Bernard <-> Martigny-Croix zwischen Anschluss Martigny-Expo und Anschluss Martigny-Croix Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 6. November 2026",
-              "date": "2026-09-17T18:00:00.000Z"
-            },
-            {
               "label": "Epinassey, Saint-Maurice in beide Richtungen Sachlage: Strecke gesperrt Ursache: Bauarbeiten",
               "value": "Sperrung",
               "detail": "bis 18. Dezember 2026",
               "date": "2026-09-28T06:00:00.000Z"
-            },
-            {
-              "label": "Sion <-> Sanetschpass Pass Col du Sanetsch Sachlage: Strecke gesperrt",
-              "value": "Sperrung",
-              "date": "2026-10-20T13:09:00.000Z"
             },
             {
               "label": "Ausserbinn, Ernen in beide Richtungen Sachlage: Strecke gesperrt Ursache: Wintersperre",
@@ -586,10 +567,26 @@
               "label": "Zer Meiggeru, Saas-Almagell <-> Mattmark, Saas-Almagell Sachlage: Strecke gesperrt Ursache: Wintersperre",
               "value": "Sperrung",
               "date": "2026-10-23T09:44:00.000Z"
+            },
+            {
+              "label": "Morgins, Troistorrents <-> Restaurant d’alpage Tovassière, Route de Chésery, Morgins Sachlage: Strecke gesperrt Ursache: Wintersperre",
+              "value": "Sperrung",
+              "date": "2026-10-23T14:29:00.000Z"
+            },
+            {
+              "label": "A21 Verzweigung Gd-St-Bernard -> Martigny-Croix zwischen Anschluss Martigny-Expo und Anschluss Martigny-Croix Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Verkehrsführung: Pannenstreifen…",
+              "value": "Sperrung",
+              "detail": "bis 11. November 2026",
+              "date": "2026-10-26T07:00:00.000Z"
+            },
+            {
+              "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Sachlage: Strecke gesperrt Ursache: Wintersperre",
+              "value": "Sperrung",
+              "date": "2026-10-27T12:15:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -627,7 +624,7 @@
               "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -697,7 +694,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-06T03:26:59.048Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "VS",
@@ -712,7 +709,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "21",
+          "value": "20",
           "note": "signalements au 5 novembre 2026"
         },
         {
@@ -780,27 +777,10 @@
               "date": "2026-08-31T05:00:00.000Z"
             },
             {
-              "label": "A21 Echangeur Gd-St-Bernard <-> Martigny-Croix entre Jonction autoroutière Martigny-Croix et Jonction autoroutière Martigny-Expo Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 6 novembre 2026",
-              "date": "2026-09-10T03:59:00.000Z"
-            },
-            {
-              "label": "A21 Echangeur Gd-St-Bernard <-> Martigny-Croix entre Jonction autoroutière Martigny-Expo et Jonction autoroutière Martigny-Croix Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 6 novembre 2026",
-              "date": "2026-09-17T18:00:00.000Z"
-            },
-            {
               "label": "Epinassey, Saint-Maurice dans les deux sens Situation: fermé Raison: travaux de construction",
               "value": "Fermeture",
               "detail": "jusqu’au 18 décembre 2026",
               "date": "2026-09-28T06:00:00.000Z"
-            },
-            {
-              "label": "Sion <-> Sanetschpass Col Col du Sanetsch Situation: fermé",
-              "value": "Fermeture",
-              "date": "2026-10-20T13:09:00.000Z"
             },
             {
               "label": "Ausserbinn, Ernen dans les deux sens Situation: fermé Raison: fermeture hivernale",
@@ -811,10 +791,26 @@
               "label": "Zer Meiggeru, Saas-Almagell <-> Mattmark, Saas-Almagell Situation: fermé Raison: fermeture hivernale",
               "value": "Fermeture",
               "date": "2026-10-23T09:44:00.000Z"
+            },
+            {
+              "label": "Morgins, Troistorrents <-> Restaurant d’alpage Tovassière, Route de Chésery, Morgins Situation: fermé Raison: fermeture hivernale",
+              "value": "Fermeture",
+              "date": "2026-10-23T14:29:00.000Z"
+            },
+            {
+              "label": "A21 Echangeur Gd-St-Bernard -> Martigny-Croix entre Jonction autoroutière Martigny-Expo et Jonction autoroutière Martigny-Croix Situation: trafic perturbé travaux, longueur [km] 0.6 Gestion du…",
+              "value": "Fermeture",
+              "detail": "jusqu’au 11 novembre 2026",
+              "date": "2026-10-26T07:00:00.000Z"
+            },
+            {
+              "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Situation: fermé Raison: fermeture hivernale",
+              "value": "Fermeture",
+              "date": "2026-10-27T12:15:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -852,7 +848,7 @@
               "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -922,7 +918,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-06T03:26:59.048Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "7c439ba385a1e8ba429a131dea915218f214b0dac4cc470e0eaf60d1f7ed4242",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "9d7351600ebf972f6d737399081a3aceff11c8b914d46442e24fb5ffb088820f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T11:32:49.603Z",
+      "updatedAt": "2026-11-05T20:21:30.260Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -54,11 +54,6 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
-              "label": "A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Svincolo autostradale Erstfeld, al chilometro 145.5 Situazione: pericolo Causa: oggetto sulla strada",
-              "value": "Traffico",
-              "date": "2026-11-05T11:26:00.000Z"
-            },
-            {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2026",
@@ -87,10 +82,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 10 novembre 2026",
               "date": "2026-10-27T12:59:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Area di servizio S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del traffico: corsie…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 12 novembre 2026",
+              "date": "2026-10-27T13:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -98,37 +99,37 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Ermächtigung zur Erhebung von Ordnungsbussen auf der ...",
+              "date": "2026-11-03",
+              "url": "https://www.ur.ch/_rte/information/139309"
+            },
+            {
+              "label": "Seedorf: Reussstrasse wegen Belagsarbeiten gesperrt",
+              "date": "2026-11-03",
+              "url": "https://www.ur.ch/_rte/information/139024"
+            },
+            {
+              "label": "A4 Axenstrasse: Winterfahrplan Veloshuttle",
+              "date": "2026-10-30",
+              "url": "https://www.ur.ch/_rte/information/130696"
+            },
+            {
+              "label": "Verkehrsdaten werden aktualisiert",
+              "date": "2026-10-27",
+              "url": "https://www.ur.ch/_rte/information/138838"
+            },
+            {
+              "label": "Axenstrasse: nächtliche Sperrungen für Unterhalts- ...",
+              "date": "2026-10-27",
+              "url": "https://www.ur.ch/_rte/information/139150"
+            },
+            {
               "label": "Bristenstrasse: Sperrungen wegen Nachtarbeiten",
               "date": "2026-10-13",
               "url": "https://www.ur.ch/_rte/information/138850"
-            },
-            {
-              "label": "Tunnelsperrungen zwischen Amsteg und Gurtnellen",
-              "date": "2026-10-13",
-              "url": "https://www.ur.ch/_rte/information/138922"
-            },
-            {
-              "label": "A2 Lehnenviadukt Beckenried – Verkehrsumstellung für ...",
-              "date": "2026-10-12",
-              "url": "https://www.ur.ch/_rte/information/138895"
-            },
-            {
-              "label": "Klausenpass: Nachtsperrung wegen Belagseinbau",
-              "date": "2026-10-08",
-              "url": "https://www.ur.ch/_rte/information/138844"
-            },
-            {
-              "label": "Klausenpass: Nachtsperrung wegen Demontagearbeiten",
-              "date": "2026-10-01",
-              "url": "https://www.ur.ch/_rte/information/138700"
-            },
-            {
-              "label": "Vorlage zur verkehrsträgerübergreifenden Bewältigung ...",
-              "date": "2026-10-01",
-              "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -192,7 +193,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "UR",
@@ -229,11 +230,6 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
-              "label": "A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Svincolo autostradale Erstfeld, al chilometro 145.5 Situazione: pericolo Causa: oggetto sulla strada",
-              "value": "Traffic",
-              "date": "2026-11-05T11:26:00.000Z"
-            },
-            {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
               "value": "Roadworks",
               "detail": "until 31 December 2026",
@@ -262,10 +258,16 @@
               "value": "Roadworks",
               "detail": "until 10 November 2026",
               "date": "2026-10-27T12:59:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Area di servizio S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del traffico: corsie…",
+              "value": "Roadworks",
+              "detail": "until 12 November 2026",
+              "date": "2026-10-27T13:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -273,37 +275,37 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Ermächtigung zur Erhebung von Ordnungsbussen auf der ...",
+              "date": "2026-11-03",
+              "url": "https://www.ur.ch/_rte/information/139309"
+            },
+            {
+              "label": "Seedorf: Reussstrasse wegen Belagsarbeiten gesperrt",
+              "date": "2026-11-03",
+              "url": "https://www.ur.ch/_rte/information/139024"
+            },
+            {
+              "label": "A4 Axenstrasse: Winterfahrplan Veloshuttle",
+              "date": "2026-10-30",
+              "url": "https://www.ur.ch/_rte/information/130696"
+            },
+            {
+              "label": "Verkehrsdaten werden aktualisiert",
+              "date": "2026-10-27",
+              "url": "https://www.ur.ch/_rte/information/138838"
+            },
+            {
+              "label": "Axenstrasse: nächtliche Sperrungen für Unterhalts- ...",
+              "date": "2026-10-27",
+              "url": "https://www.ur.ch/_rte/information/139150"
+            },
+            {
               "label": "Bristenstrasse: Sperrungen wegen Nachtarbeiten",
               "date": "2026-10-13",
               "url": "https://www.ur.ch/_rte/information/138850"
-            },
-            {
-              "label": "Tunnelsperrungen zwischen Amsteg und Gurtnellen",
-              "date": "2026-10-13",
-              "url": "https://www.ur.ch/_rte/information/138922"
-            },
-            {
-              "label": "A2 Lehnenviadukt Beckenried – Verkehrsumstellung für ...",
-              "date": "2026-10-12",
-              "url": "https://www.ur.ch/_rte/information/138895"
-            },
-            {
-              "label": "Klausenpass: Nachtsperrung wegen Belagseinbau",
-              "date": "2026-10-08",
-              "url": "https://www.ur.ch/_rte/information/138844"
-            },
-            {
-              "label": "Klausenpass: Nachtsperrung wegen Demontagearbeiten",
-              "date": "2026-10-01",
-              "url": "https://www.ur.ch/_rte/information/138700"
-            },
-            {
-              "label": "Vorlage zur verkehrsträgerübergreifenden Bewältigung ...",
-              "date": "2026-10-01",
-              "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -367,7 +369,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "UR",
@@ -404,11 +406,6 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
-              "label": "A2 Luzern -> Gotthard zwischen Autobahndreieck Verzweigung Altdorf und Anschluss Erstfeld, bei Kilometer 145.5 Sachlage: Gefahr Ursache: Gegenstände auf der Fahrbahn",
-              "value": "Verkehr",
-              "date": "2026-11-05T11:26:00.000Z"
-            },
-            {
               "label": "H2 Airolo <-> Göschenen zwischen Ortschaft Andermatt und Ortschaft Hospental Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2026",
@@ -437,10 +434,16 @@
               "value": "Baustelle",
               "detail": "bis 10. November 2026",
               "date": "2026-10-27T12:59:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Gotthard zwischen Autobahndreieck Verzweigung Altdorf und Raststätte Gotthard Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.15 Verkehrsführung: Fahrbahnverengung auf einen…",
+              "value": "Baustelle",
+              "detail": "bis 12. November 2026",
+              "date": "2026-10-27T13:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -448,37 +451,37 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Ermächtigung zur Erhebung von Ordnungsbussen auf der ...",
+              "date": "2026-11-03",
+              "url": "https://www.ur.ch/_rte/information/139309"
+            },
+            {
+              "label": "Seedorf: Reussstrasse wegen Belagsarbeiten gesperrt",
+              "date": "2026-11-03",
+              "url": "https://www.ur.ch/_rte/information/139024"
+            },
+            {
+              "label": "A4 Axenstrasse: Winterfahrplan Veloshuttle",
+              "date": "2026-10-30",
+              "url": "https://www.ur.ch/_rte/information/130696"
+            },
+            {
+              "label": "Verkehrsdaten werden aktualisiert",
+              "date": "2026-10-27",
+              "url": "https://www.ur.ch/_rte/information/138838"
+            },
+            {
+              "label": "Axenstrasse: nächtliche Sperrungen für Unterhalts- ...",
+              "date": "2026-10-27",
+              "url": "https://www.ur.ch/_rte/information/139150"
+            },
+            {
               "label": "Bristenstrasse: Sperrungen wegen Nachtarbeiten",
               "date": "2026-10-13",
               "url": "https://www.ur.ch/_rte/information/138850"
-            },
-            {
-              "label": "Tunnelsperrungen zwischen Amsteg und Gurtnellen",
-              "date": "2026-10-13",
-              "url": "https://www.ur.ch/_rte/information/138922"
-            },
-            {
-              "label": "A2 Lehnenviadukt Beckenried – Verkehrsumstellung für ...",
-              "date": "2026-10-12",
-              "url": "https://www.ur.ch/_rte/information/138895"
-            },
-            {
-              "label": "Klausenpass: Nachtsperrung wegen Belagseinbau",
-              "date": "2026-10-08",
-              "url": "https://www.ur.ch/_rte/information/138844"
-            },
-            {
-              "label": "Klausenpass: Nachtsperrung wegen Demontagearbeiten",
-              "date": "2026-10-01",
-              "url": "https://www.ur.ch/_rte/information/138700"
-            },
-            {
-              "label": "Vorlage zur verkehrsträgerübergreifenden Bewältigung ...",
-              "date": "2026-10-01",
-              "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -542,7 +545,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "UR",
@@ -579,11 +582,6 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
-              "label": "A2 Lucerne -> St-Gothard entre Echangeur Echangeur d'Altdorf et Jonction autoroutière Erstfeld, au kilomètre 145.5 Situation: danger Raison: objets sur la chaussée",
-              "value": "Trafic",
-              "date": "2026-11-05T11:26:00.000Z"
-            },
-            {
               "label": "H2 Airolo <-> Göschenen entre Localité Andermatt et Localité Hospental Situation: trafic perturbé travaux, longueur [km] 0.5 Complément 1: limitation temporaire de largeur largeur de la voie [m] 4.0…",
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2026",
@@ -612,10 +610,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 10 novembre 2026",
               "date": "2026-10-27T12:59:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> St-Gothard entre Echangeur Echangeur d'Altdorf et Aire de service St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.15 Gestion du trafic: rétrécissement des voies sur une…",
+              "value": "Chantier",
+              "detail": "jusqu’au 12 novembre 2026",
+              "date": "2026-10-27T13:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -623,37 +627,37 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Ermächtigung zur Erhebung von Ordnungsbussen auf der ...",
+              "date": "2026-11-03",
+              "url": "https://www.ur.ch/_rte/information/139309"
+            },
+            {
+              "label": "Seedorf: Reussstrasse wegen Belagsarbeiten gesperrt",
+              "date": "2026-11-03",
+              "url": "https://www.ur.ch/_rte/information/139024"
+            },
+            {
+              "label": "A4 Axenstrasse: Winterfahrplan Veloshuttle",
+              "date": "2026-10-30",
+              "url": "https://www.ur.ch/_rte/information/130696"
+            },
+            {
+              "label": "Verkehrsdaten werden aktualisiert",
+              "date": "2026-10-27",
+              "url": "https://www.ur.ch/_rte/information/138838"
+            },
+            {
+              "label": "Axenstrasse: nächtliche Sperrungen für Unterhalts- ...",
+              "date": "2026-10-27",
+              "url": "https://www.ur.ch/_rte/information/139150"
+            },
+            {
               "label": "Bristenstrasse: Sperrungen wegen Nachtarbeiten",
               "date": "2026-10-13",
               "url": "https://www.ur.ch/_rte/information/138850"
-            },
-            {
-              "label": "Tunnelsperrungen zwischen Amsteg und Gurtnellen",
-              "date": "2026-10-13",
-              "url": "https://www.ur.ch/_rte/information/138922"
-            },
-            {
-              "label": "A2 Lehnenviadukt Beckenried – Verkehrsumstellung für ...",
-              "date": "2026-10-12",
-              "url": "https://www.ur.ch/_rte/information/138895"
-            },
-            {
-              "label": "Klausenpass: Nachtsperrung wegen Belagseinbau",
-              "date": "2026-10-08",
-              "url": "https://www.ur.ch/_rte/information/138844"
-            },
-            {
-              "label": "Klausenpass: Nachtsperrung wegen Demontagearbeiten",
-              "date": "2026-10-01",
-              "url": "https://www.ur.ch/_rte/information/138700"
-            },
-            {
-              "label": "Vorlage zur verkehrsträgerübergreifenden Bewältigung ...",
-              "date": "2026-10-01",
-              "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -717,7 +721,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }

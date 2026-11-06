@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "3f5419d66914e2210de8b5fe3be8de56dae51a6afdc8cab86b1b968e143946c3",
+  "updatedAt": "2026-11-06T05:23:07.727Z",
+  "contentHash": "f16e019684e9a345ba34a7f7126b5b8a73a21e67a51d67ac2733f4274e7e52df",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T11:32:49.603Z",
+      "updatedAt": "2026-11-05T20:21:30.260Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "15",
+          "value": "12",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "16",
+          "value": "15",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         }
       ],
@@ -111,12 +111,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "A51 Zürich -> Aeroporto tra Svincolo autostradale Glattbrugg E Svincolo autostradale Aeroporto Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 6 novembre 2026",
-              "date": "2026-10-14T11:08:00.000Z"
-            },
-            {
               "label": "A51 Aeroporto -> Zürich tra Svincolo autostradale Aeroporto E Svincolo autostradale Glattbrugg Situazione: chiusa cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 13 novembre 2026",
@@ -141,12 +135,6 @@
               "date": "2026-10-21T14:13:00.000Z"
             },
             {
-              "label": "A4 Winterthur -> Schaffhausen tra Raccordo autostradale Diramazione Winterthur Nord E Svincolo autostradale Adlikon Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 6 novembre 2026",
-              "date": "2026-10-22T15:56:00.000Z"
-            },
-            {
               "label": "A4 Winterthur -> Schaffhausen Svincolo autostradale Henggart Situazione: uscita chiusa cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 9 novembre 2026",
@@ -157,10 +145,22 @@
               "value": "Chiusura",
               "detail": "fine prevista: 9 novembre 2026",
               "date": "2026-10-22T19:00:00.000Z"
+            },
+            {
+              "label": "A1L Letten <-> Diramazione Zürich Ost tra Svincolo autostradale Unterstrass E Svincolo autostradale Aubrugg Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 11 dicembre 2026",
+              "date": "2026-10-27T17:01:00.000Z"
+            },
+            {
+              "label": "A1L Letten <-> Diramazione Zürich Ost tra Svincolo autostradale Unterstrass E Raccordo autostradale Diramazione Zürich Ost Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 16 dicembre 2026",
+              "date": "2026-10-27T17:05:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +198,7 @@
               "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261017f_zh_nord_sili.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +282,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "en": {
       "canton": "ZH",
@@ -297,12 +297,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "15",
+          "value": "12",
           "note": "reports as of 5 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "16",
+          "value": "15",
           "note": "reports as of 5 November 2026"
         }
       ],
@@ -371,12 +371,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "A51 Zürich -> Aeroporto tra Svincolo autostradale Glattbrugg E Svincolo autostradale Aeroporto Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 6 November 2026",
-              "date": "2026-10-14T11:08:00.000Z"
-            },
-            {
               "label": "A51 Aeroporto -> Zürich tra Svincolo autostradale Aeroporto E Svincolo autostradale Glattbrugg Situazione: chiusa cantiere",
               "value": "Closure",
               "detail": "until 13 November 2026",
@@ -401,12 +395,6 @@
               "date": "2026-10-21T14:13:00.000Z"
             },
             {
-              "label": "A4 Winterthur -> Schaffhausen tra Raccordo autostradale Diramazione Winterthur Nord E Svincolo autostradale Adlikon Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 6 November 2026",
-              "date": "2026-10-22T15:56:00.000Z"
-            },
-            {
               "label": "A4 Winterthur -> Schaffhausen Svincolo autostradale Henggart Situazione: uscita chiusa cantiere",
               "value": "Closure",
               "detail": "until 9 November 2026",
@@ -417,10 +405,22 @@
               "value": "Closure",
               "detail": "until 9 November 2026",
               "date": "2026-10-22T19:00:00.000Z"
+            },
+            {
+              "label": "A1L Letten <-> Diramazione Zürich Ost tra Svincolo autostradale Unterstrass E Svincolo autostradale Aubrugg Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
+              "value": "Closure",
+              "detail": "until 11 December 2026",
+              "date": "2026-10-27T17:01:00.000Z"
+            },
+            {
+              "label": "A1L Letten <-> Diramazione Zürich Ost tra Svincolo autostradale Unterstrass E Raccordo autostradale Diramazione Zürich Ost Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
+              "value": "Closure",
+              "detail": "until 16 December 2026",
+              "date": "2026-10-27T17:05:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -458,7 +458,7 @@
               "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261017f_zh_nord_sili.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -542,7 +542,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "de": {
       "canton": "ZH",
@@ -557,12 +557,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "15",
+          "value": "12",
           "note": "Meldungen vom 5. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "16",
+          "value": "15",
           "note": "Meldungen vom 5. November 2026"
         }
       ],
@@ -631,12 +631,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "A51 Zürich -> Flughafen zwischen Anschluss Glattbrugg und Anschluss Flughafen Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 6. November 2026",
-              "date": "2026-10-14T11:08:00.000Z"
-            },
-            {
               "label": "A51 Flughafen -> Zürich zwischen Anschluss Flughafen und Anschluss Glattbrugg Sachlage: Strecke gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 13. November 2026",
@@ -661,12 +655,6 @@
               "date": "2026-10-21T14:13:00.000Z"
             },
             {
-              "label": "A4 Winterthur -> Schaffhausen zwischen Autobahndreieck Verzweigung Winterthur-Nord und Anschluss Adlikon Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 6. November 2026",
-              "date": "2026-10-22T15:56:00.000Z"
-            },
-            {
               "label": "A4 Winterthur -> Schaffhausen Anschluss Henggart Sachlage: Ausfahrt gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 9. November 2026",
@@ -677,10 +665,22 @@
               "value": "Sperrung",
               "detail": "bis 9. November 2026",
               "date": "2026-10-22T19:00:00.000Z"
+            },
+            {
+              "label": "A1L Letten <-> Verzweigung Zürich-Ost zwischen Anschluss Unterstrass und Anschluss Aubrugg Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 11. Dezember 2026",
+              "date": "2026-10-27T17:01:00.000Z"
+            },
+            {
+              "label": "A1L Letten <-> Verzweigung Zürich-Ost zwischen Anschluss Unterstrass und Autobahndreieck Verzweigung Zürich-Ost Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 16. Dezember 2026",
+              "date": "2026-10-27T17:05:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -718,7 +718,7 @@
               "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261017f_zh_nord_sili.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -802,7 +802,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     },
     "fr": {
       "canton": "ZH",
@@ -817,12 +817,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "15",
+          "value": "12",
           "note": "signalements au 5 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "16",
+          "value": "15",
           "note": "signalements au 5 novembre 2026"
         }
       ],
@@ -891,12 +891,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "A51 Zurich -> Aéroport entre Jonction autoroutière Glattbrugg et Jonction autoroutière Aéroport Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 6 novembre 2026",
-              "date": "2026-10-14T11:08:00.000Z"
-            },
-            {
               "label": "A51 Aéroport -> Zurich entre Jonction autoroutière Aéroport et Jonction autoroutière Glattbrugg Situation: fermé travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 13 novembre 2026",
@@ -921,12 +915,6 @@
               "date": "2026-10-21T14:13:00.000Z"
             },
             {
-              "label": "A4 Winterthur -> Schaffhouse entre Echangeur Echangeur de Winterthur-Nord et Jonction autoroutière Adlikon Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 6 novembre 2026",
-              "date": "2026-10-22T15:56:00.000Z"
-            },
-            {
               "label": "A4 Winterthur -> Schaffhouse Jonction autoroutière Henggart Situation: sortie fermée travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 9 novembre 2026",
@@ -937,10 +925,22 @@
               "value": "Fermeture",
               "detail": "jusqu’au 9 novembre 2026",
               "date": "2026-10-22T19:00:00.000Z"
+            },
+            {
+              "label": "A1L Letten <-> Echangeur de Zurich-Est entre Jonction autoroutière Unterstrass et Jonction autoroutière Aubrugg Situation: fermé travaux Gestion du trafic: voie fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 11 décembre 2026",
+              "date": "2026-10-27T17:01:00.000Z"
+            },
+            {
+              "label": "A1L Letten <-> Echangeur de Zurich-Est entre Jonction autoroutière Unterstrass et Echangeur Echangeur de Zurich-Est Situation: fermé travaux Gestion du trafic: voie fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 16 décembre 2026",
+              "date": "2026-10-27T17:05:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T11:32:49.603Z"
+          "updatedAt": "2026-11-05T20:21:30.260Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -978,7 +978,7 @@
               "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261017f_zh_nord_sili.html"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -1062,7 +1062,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T05:23:07.727Z"
     }
   }
 }
