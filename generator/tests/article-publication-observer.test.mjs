@@ -611,6 +611,10 @@ test('il ledger sopravvive alla finestra, viene letto per primo e il cap produce
     assert.deepEqual(read.map((url) => url.split('/').at(-2)), ['alpha', 'zeta']);
     assert.deepEqual(proven, ['/images/blog/alpha.webp', '/images/blog/zeta.webp']);
     assert.deepEqual(result.dispatched, [{ section: 'frontaliere', ids: ['alpha'], runId: 'run-1' }]);
+    assert.deepEqual(
+      github.calls.filter((call) => call.type === 'dispatch').map((call) => call.args),
+      [{ section: 'frontaliere', ids: ['alpha'], articleOnly: false, issueNumber: 2448 }],
+    );
     assert.deepEqual(result.ledger.map((item) => [item.articleId, item.status]), [['alpha', 'in-flight'], ['zeta', 'pending']]);
   } finally {
     fs.rmSync(rootDir, { recursive: true, force: true });
@@ -676,7 +680,49 @@ test('un ritardo stale già osservato ridispatcha la pagina leggibile al fast pu
     }]);
     assert.deepEqual(
       github.calls.filter((call) => call.type === 'dispatch').map((call) => call.args),
-      [{ section: 'frontaliere', ids: ['lagging'], issueNumber: 9001 }],
+      [{ section: 'frontaliere', ids: ['lagging'], articleOnly: true, issueNumber: 9001 }],
+    );
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
+test('i retry stale restano article-only mentre i repair immagine conservano gli aggregati', async () => {
+  const rootDir = observerRoot();
+  fs.appendFileSync(
+    path.join(rootDir, 'content/blog-articles-data.ts'),
+    "\n{ id: 'lagging', updatedAt: '2026-10-07', date: '2026-09-01', image: '/images/blog/lagging.webp' },\n",
+  );
+  fs.appendFileSync(path.join(rootDir, 'content/routerBlogData.ts'), "\n'lagging': { it: 'lagging' },\n");
+  const github = issueClient();
+  const log = [
+    `commit ${'a'.repeat(40)} 1791321600`,
+    'content/blog-body/it/lagging.ts',
+    `commit ${'b'.repeat(40)} 1791417600`,
+    'content/blog-body/it/missing-image.ts',
+  ].join('\n');
+  try {
+    await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => log,
+      githubClient: github.client,
+      minIntervalMs: 0,
+      fetchImpl: async (url) => ({
+        ok: true,
+        status: 200,
+        text: async () => url.includes('/lagging/')
+          ? ownPage('/images/blog/lagging.webp').replace('2026-09-02', '2026-10-06')
+          : genericPage(),
+      }),
+      fetchDeclaredImageImpl: async () => ({ bytes: 5, contentType: 'image/webp' }),
+    });
+    assert.deepEqual(
+      github.calls.filter((call) => call.type === 'dispatch').map((call) => call.args),
+      [
+        { section: 'frontaliere', ids: ['lagging'], articleOnly: true, issueNumber: 9001 },
+        { section: 'frontaliere', ids: ['missing-image'], articleOnly: false, issueNumber: 9001 },
+      ],
     );
   } finally {
     fs.rmSync(rootDir, { recursive: true, force: true });

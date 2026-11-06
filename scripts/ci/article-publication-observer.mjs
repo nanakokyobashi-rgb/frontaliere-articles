@@ -795,7 +795,7 @@ function defaultGithubClient() {
     async getRun(runId) {
       return ghJson(['api', `repos/${process.env.GH_REPO}/actions/runs/${runId}`]);
     },
-    async dispatch({ section, ids }) {
+    async dispatch({ section, ids, articleOnly = false }) {
       const dispatchedAt = Date.now();
       const dispatchNonce = `observer-${randomUUID()}`;
       const runsBefore = ghJson([
@@ -804,19 +804,22 @@ function defaultGithubClient() {
       ]);
       const previousRunIds = new Set((Array.isArray(runsBefore) ? runsBefore : []).map((item) => String(item.databaseId)));
       const idsJson = JSON.stringify(ids);
-      execFileSync('gh', [
+      const workflowArgs = [
         'workflow', 'run', DEFAULT_REPAIR_WORKFLOW,
         '-f', `article_ids=${idsJson}`,
         '-f', `section=${section}`,
-        // A stale-page repair has one correctness target: the requested article
-        // pages. Rebuilding the full archive here creates an unrelated Pages
-        // build failure domain and can keep every requested page stale.
-        '-f', 'article_only=true',
+        ...(articleOnly ? [
+          // A stale-page repair has one correctness target: the requested article
+          // pages. Rebuilding the full archive here creates an unrelated Pages
+          // build failure domain and can keep every requested page stale.
+          '-f', 'article_only=true',
+        ] : []),
         '-f', 'dry_run=false',
         '-f', `dispatch_nonce=${dispatchNonce}`,
         '--ref', 'main',
         ...ghRepoArgs(),
-      ], { encoding: 'utf8' });
+      ];
+      execFileSync('gh', workflowArgs, { encoding: 'utf8' });
       // `gh workflow run` returns before the run is visible in Actions. The
       // unique run-name nonce is the identity fence; the pre-dispatch snapshot
       // prevents an old matching run from ever being selected. If Actions does
@@ -873,19 +876,38 @@ function saneLiveImage(entry) {
 
 function groupPublicationRepairs(items = []) {
   const groups = new Map();
+  const imageIdsBySection = new Map();
   for (const item of items) {
     const section = String(item?.section ?? '').trim();
     const articleId = String(item?.articleId ?? '').trim();
     if (!section || !articleId) continue;
-    let group = groups.get(section);
+    const articleOnly = item.repairKind === 'lagging';
+    const groupKey = `${section}:${articleOnly ? 'article' : 'aggregate'}`;
+    let group = groups.get(groupKey);
     if (!group) {
-      group = { section, ids: [], ledgerItems: [] };
-      groups.set(section, group);
+      group = { section, articleOnly, ids: [], ledgerItems: [] };
+      groups.set(groupKey, group);
     }
     if (!group.ids.includes(articleId)) group.ids.push(articleId);
-    if (item.repairKind === 'image') group.ledgerItems.push(item);
+    if (!articleOnly) {
+      let imageIds = imageIdsBySection.get(section);
+      if (!imageIds) {
+        imageIds = new Set();
+        imageIdsBySection.set(section, imageIds);
+      }
+      imageIds.add(articleId);
+      if (item.repairKind === 'image') group.ledgerItems.push(item);
+    }
   }
-  return [...groups.values()];
+  return [...groups.values()]
+    .map((group) => {
+      if (!group.articleOnly) return group;
+      const imageIds = imageIdsBySection.get(group.section);
+      return imageIds
+        ? { ...group, ids: group.ids.filter((articleId) => !imageIds.has(articleId)) }
+        : group;
+    })
+    .filter((group) => group.ids.length > 0);
 }
 
 async function persistLedger(issue, items, github) {
@@ -1047,7 +1069,12 @@ export async function runObserver({
   const dispatched = [];
   if (issue && repairItems.length > 0) {
     for (const group of groupPublicationRepairs(repairItems)) {
-      const result = await github.dispatch({ section: group.section, ids: group.ids, issueNumber: issue.number });
+      const result = await github.dispatch({
+        section: group.section,
+        ids: group.ids,
+        articleOnly: group.articleOnly,
+        issueNumber: issue.number,
+      });
       ledger = markDispatched(ledger, group.ledgerItems.map((item) => ({
         key: ledgerKey(item),
         runId: result?.runId ?? null,

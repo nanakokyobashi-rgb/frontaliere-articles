@@ -39,10 +39,11 @@
 //      Applied to every written file (index + bridge), matching
 //      blogImageCdnFinalizePlugin's unconditional whole-dist walk in the full
 //      build while keeping scratch-only images reachable after cleanup.
-//   6. after the image postcondition, renderArticleHubPages({section}) only if
-//      every requested article is publishable. Otherwise the previous archive
-//      stays online: a new archive built from the whole registry could link to
-//      a page deliberately withheld from this push. On the safe path, calls
+//   6. after the image postcondition, renderArticleHubPages({section}) when
+//      aggregate pages are requested and every requested article is publishable.
+//      Otherwise the previous archive stays online: a new archive built from the
+//      whole registry could link to a page deliberately withheld from this push.
+//      On the safe path, calls
 //      the SAME renderArticleHubPagesCore the full build's emitSeoHubs uses
 //      (engine/articleHubPagesPlugin.ts) — byte-identical by construction. It
 //      does not run through steps 2-5: those are article-body specific (flat
@@ -383,11 +384,12 @@ async function main() {
 
   // subtree convention matches scripts/lib/section-shard-slugs.json's own
   // documented formula: it -> <slug>, en/de/fr -> <loc>/<slug>.
-  // All article pages, redirect bridges, and hub-archive paths for this locale
-  // are sent together — push-article-shard-incremental.sh takes an arbitrary
-  // list of relpaths per locale/section invocation, so no separate push call or
-  // workflow change is needed (.github/workflows/fast-publish-article.yml
-  // already forwards every entry in `paths[]`).
+  // All rendered article pages and redirect bridges, plus hub-archive paths when
+  // aggregate pages were requested, are sent together —
+  // push-article-shard-incremental.sh takes an arbitrary list of relpaths per
+  // locale/section invocation, so no separate push call or workflow change is
+  // needed (.github/workflows/fast-publish-article.yml already forwards every
+  // entry in `paths[]`).
   const shards = locales.map((locale) => {
     const articleIds = entries.filter((entry) => entry.paths[locale]).map((entry) => entry.articleId);
     const bridgeIds = entries.filter((entry) => entry.flatPaths[locale]).map((entry) => entry.articleId);
