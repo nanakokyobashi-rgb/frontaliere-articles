@@ -1012,9 +1012,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 come chiusura transitiva del trasporto di scripts/ci/scan-job-timeouts.mjs per #1110: lo scanner Site importa isFailureReportingDisabled, assente nella copia Corpus precedente. Copia byte-identica dal sito, senza adattamenti locali.",
       "baseline": {
-        "site": "9809517e88621e2c",
-        "corpus": "9809517e88621e2c",
-        "alignedAt": "2026-10-14"
+        "site": "42fadcf61b8cd01f",
+        "corpus": "42fadcf61b8cd01f",
+        "alignedAt": "2026-11-06"
       }
     },
     {
@@ -2804,9 +2804,9 @@
       "mode": "identical",
       "reason": "Garanzia che gli script statici della shell siano serviti dalla CDN prima che un emettitore pubblichi l'HTML che li referenzia (sito issue 12270, sito PR #12275, #12299 e #12305): chiede alla CDN, legge R2 solo per un file non servito, carica cio' che R2 non ha e non sostituisce mai un oggetto; poi chiede l'URL delle pagine nelle due varianti di cache per ogni file, anche per quelli che la sonda mostra (la HEAD della sonda legge R2 e non vede un 404 tenuto dall'edge): un file che la sonda non ha mostrato, o che a quell'URL non risponde, viene invalidato all'edge e riconfermato, e se non puo' stabilirlo si ferma. Usa solo i moduli di Node e due comandi, proprio per poter restare byte-identico: scripts/lib/upload-cdn-file.sh (anch'esso identical) e scripts/cf-purge-cache.mjs, che qui e' la copia di questo repo con la stessa modalita' `--files=` e la stessa riga di successo (lo verifica host/tests/host-shell-assets.test.mjs). Il sito lo chiama da scripts/ci/ensure-cdn-shell-assets.mjs con tutti i file di staticScriptsPlugin; qui lo chiama scripts/ci/ensure-host-shell-assets.mjs con i file di cui host/ porta il contenuto.",
       "baseline": {
-        "site": "680753badffef6c4",
-        "corpus": "680753badffef6c4",
-        "alignedAt": "2026-11-03"
+        "site": "69a44f9d83a634f0",
+        "corpus": "69a44f9d83a634f0",
+        "alignedAt": "2026-11-06"
       }
     },
     {
@@ -2909,9 +2909,9 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "6e6a33dcc7d0b5ce",
-        "corpus": "6e6a33dcc7d0b5ce",
-        "alignedAt": "2026-11-04"
+        "site": "365019245a7f1dd6",
+        "corpus": "365019245a7f1dd6",
+        "alignedAt": "2026-11-06"
       }
     },
     {
@@ -3456,9 +3456,9 @@
       "sitePath": "scripts/lib/discovery/sources/googleNewsRssSource.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "f55d14d95a523a5d",
-        "corpus": "f55d14d95a523a5d",
-        "alignedAt": "2026-11-04"
+        "site": "46f8224054b57971",
+        "corpus": "46f8224054b57971",
+        "alignedAt": "2026-11-06"
       }
     },
     {
@@ -4604,9 +4604,9 @@
       "path": "scripts/generate-image-thumbnails.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d152b789a50c0186",
-        "corpus": "d152b789a50c0186",
-        "alignedAt": "2026-10-04"
+        "site": "440e8d4a8ff12f2a",
+        "corpus": "440e8d4a8ff12f2a",
+        "alignedAt": "2026-11-06"
       }
     },
     {
