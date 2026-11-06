@@ -14,6 +14,7 @@ import {
   TARGET_ONLY_DETAIL_GET_REQUESTS,
   TARGET_ONLY_OBSERVATION_MODE,
   createRecoveryClaim,
+  createRecoveryReadClient,
   runRecoveryClaim,
 } from '../../scripts/ci/translate-queue-recovery-claim.mjs';
 import {
@@ -61,12 +62,16 @@ const TEST_NO_SUCCESSOR_GUARD_CAPABILITY = Object.freeze({
 });
 
 function response(status, body = {}, headers = {}) {
-  const normalized = new Map(Object.entries(headers).map(([key, value]) => [key.toLowerCase(), value]));
+  const text = typeof body === 'string' ? body : JSON.stringify(body);
+  const normalized = new Map(Object.entries({
+    'content-length': String(Buffer.byteLength(text ?? '', 'utf8')),
+    ...headers,
+  }).map(([key, value]) => [key.toLowerCase(), value]));
   return {
     headers: { get: (key) => normalized.get(String(key).toLowerCase()) ?? null },
     ok: status >= 200 && status < 300,
     status,
-    async text() { return typeof body === 'string' ? body : JSON.stringify(body); },
+    async text() { return text; },
   };
 }
 
@@ -337,6 +342,29 @@ test('observe_only classifica un candidato ma non possiede effetti remoti', asyn
   assert.ok(report.queryBudget.usedGets <= MAX_PHASE_GET_REQUESTS);
   assert.ok(!json.includes(TOKEN));
   assert.ok(!json.includes('Authorization'));
+});
+
+test('il client claim non usa response.text senza una prova di dimensione', async () => {
+  let textCalls = 0;
+  const client = createRecoveryReadClient({
+    deadlineAt: Date.now() + 10_000,
+    fetchImpl: async () => ({
+      headers: { get: () => null },
+      ok: true,
+      status: 200,
+      async text() {
+        textCalls += 1;
+        return '{"unexpected":true}';
+      },
+    }),
+    maxGets: 1,
+    token: TOKEN,
+  });
+  await assert.rejects(
+    client.getJson(`/repos/${TARGET_REPOSITORY}/actions/runs/${TARGET_RUN_ID}`),
+    (error) => error?.code === 'api_incomplete',
+  );
+  assert.equal(textCalls, 0);
 });
 
 test('report canonico e ordinamento reason code sono stabili', async () => {
