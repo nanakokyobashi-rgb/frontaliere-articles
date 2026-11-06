@@ -21,6 +21,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'seedorf-reussstrasse-lavori-innesto': { it: 'seedorf-reussstrasse-lavori-innesto', en: 'seedorf-reussstrasse-works-inlet', de: 'seedorf-reussstrasse-arbeiten-innesto', fr: 'seedorf-reussstrasse-travaux-injection' },
  'volksschule-uri-iscrizioni-2025-2026': { it: 'volksschule-uri-iscrizioni-2025-2026', en: 'volksschule-uri-enrollments-2025-2026', de: 'volksschule-uri-einschreibungen-2025-2026', fr: 'volksschule-uri-inscriptions-2025-2026' },
  'andermatt-piano-max-uristier': { it: 'andermatt-piano-max-uristier', en: 'andermatt-max-wooden-bull-plan', de: 'andermatt-plan-holzstier-max', fr: 'andermatt-plan-taureau-bois' },
+ 'uri-progetto-cultura-integrazione': { it: 'uri-progetto-cultura-integrazione', en: 'uri-culture-integration-project', de: 'uri-kultur-integrationsprojekt', fr: 'uri-projet-culture-integration' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

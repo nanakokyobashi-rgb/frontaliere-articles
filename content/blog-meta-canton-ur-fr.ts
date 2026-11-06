@@ -57,6 +57,9 @@ const blogMetaCantonUrFr: Record<string, string> = {
     'blog.article.andermatt-piano-max-uristier.title': 'Andermatt, plan de quartier pour le taureau Max l\'Uristier',
     'blog.article.andermatt-piano-max-uristier.excerpt': 'Le plan Nätschen West est en consultation jusqu\'au 7 décembre : Max l\'Uristier mesure 36 mètres de long et 20 de haut.',
     'blog.article.andermatt-piano-max-uristier.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.uri-progetto-cultura-integrazione.title': 'Uri lance un projet sur la culture et l’intégration',
+    'blog.article.uri-progetto-cultura-integrazione.excerpt': 'Le projet «Netzwerk Kultur und Integration» durera trois ans, avec un démarrage prévu le 1er décembre 2026, afin de faciliter l’accès des personnes migrantes aux offres culturelles urbaines.',
+    'blog.article.uri-progetto-cultura-integrazione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonUrFr;

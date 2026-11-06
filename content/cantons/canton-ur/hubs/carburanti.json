@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-11-06T08:18:18.749Z",
-  "contentHash": "3bb5be112c3ab5dbb2dbac4a95456eb2b79ec2cf8cf1d21e82a97fedcad7ad2b",
+  "updatedAt": "2026-11-06T08:42:56.834Z",
+  "contentHash": "b287d3600283084ad6a81fa45a3192ab90db88d6a9733dc2bd84e4a8aeb1e1f0",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Uri avvia progetto su cultura e integrazione",
+          "url": "/articoli-uri/uri-progetto-cultura-integrazione/",
+          "excerpt": "Il progetto «Netzwerk Kultur und Integration» durerà tre anni, con avvio previsto il 1° dicembre 2026, per facilitare l'accesso delle persone migranti alle offerte culturali urane.",
+          "date": "2026-11-06T08:38:58.092Z"
+        },
+        {
           "title": "Andermatt, piano di quartiere per il toro Max l'Uristier",
           "url": "/articoli-uri/andermatt-piano-max-uristier/",
           "excerpt": "Il piano Nätschen West è in partecipazione fino al 7 dicembre: Max l'Uristier misura 36 metri di lunghezza e 20 di altezza.",
@@ -82,12 +88,6 @@
           "url": "/articoli-uri/chiusura-invernale-gottardo/",
           "excerpt": "Da giovedì scatta la chiusura invernale del passo del Gottardo: tre dei cinque passi alpini urani saranno chiusi, mentre Oberalp e Klausenpass restano aperti.",
           "date": "2026-11-03T09:00:46.783Z"
-        },
-        {
-          "title": "Incendio di un veicolo, chiuso il tunnel di Flüelen",
-          "url": "/articoli-uri/incendio-tunnel-fluelen/",
-          "excerpt": "Un incendio di un veicolo ha imposto la chiusura del tunnel di Flüelen per circa un'ora e mezza giovedì 29 ottobre.",
-          "date": "2026-10-31T10:27:30.338Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-06T08:18:18.749Z"
+      "updatedAt": "2026-11-06T08:42:56.834Z"
     },
     "en": {
       "canton": "UR",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Uri launches project on culture and integration",
+          "url": "/en/uri-articles/uri-culture-integration-project/",
+          "excerpt": "The “Netzwerk Kultur und Integration” project will last three years, with a planned start date of December 1, 2026, to facilitate migrants’ access to urban cultural offerings.",
+          "date": "2026-11-06T08:38:58.092Z"
+        },
+        {
           "title": "Andermatt, neighborhood plan for the bull Max l'Uristier",
           "url": "/en/uri-articles/andermatt-max-wooden-bull-plan/",
           "excerpt": "The Nätschen West plan is open for public consultation until December 7: Max l'Uristier is 36 meters long and 20 meters high.",
@@ -169,12 +175,6 @@
           "url": "/en/uri-articles/gotthard-winter-closure/",
           "excerpt": "Starting Thursday, the winter closure of the Gotthard Pass takes effect: three of the five Alpine passes in Uri will be closed, while Oberalp and Klausenpass remain open.",
           "date": "2026-11-03T09:00:46.783Z"
-        },
-        {
-          "title": "Vehicle fire, Flüelen tunnel closed",
-          "url": "/en/uri-articles/vehicle-fire-fluelen-tunnel/",
-          "excerpt": "A vehicle fire forced the closure of the Flüelen tunnel for about an hour and a half on Thursday, October 29.",
-          "date": "2026-10-31T10:27:30.338Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-06T08:18:18.749Z"
+      "updatedAt": "2026-11-06T08:42:56.834Z"
     },
     "de": {
       "canton": "UR",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Uri startet Projekt zu Kultur und Integration",
+          "url": "/de/uri-artikel/uri-kultur-integrationsprojekt/",
+          "excerpt": "Das Projekt \"Netzwerk Kultur und Integration\" wird drei Jahre dauern, beginnend am 1. Dezember 2026, um Migranten den Zugang zu den kulturellen Angeboten von Uri zu erleichtern.",
+          "date": "2026-11-06T08:38:58.092Z"
+        },
+        {
           "title": "Andermatt, Quartierplan für den Stier Max l'Uristier",
           "url": "/de/uri-artikel/andermatt-plan-holzstier-max/",
           "excerpt": "Der Plan Nätschen West liegt bis zum 7. Dezember zur Mitwirkung auf: Max l'Uristier ist 36 Meter lang und 20 Meter hoch.",
@@ -256,12 +262,6 @@
           "url": "/de/uri-artikel/gotthard-wintersperre/",
           "excerpt": "Ab Donnerstag tritt die Wintersperre des Gotthardpasses in Kraft: Drei der fünf Urner Alpenpässe werden geschlossen sein, während Oberalp und Klausenpass vorerst offen bleiben.",
           "date": "2026-11-03T09:00:46.783Z"
-        },
-        {
-          "title": "Brand eines Fahrzeugs, Tunnel von Flüelen geschlossen",
-          "url": "/de/uri-artikel/fahrzeugbrand-fluelen-tunnel/",
-          "excerpt": "Am Donnerstagmorgen, dem 29. Oktober, wurde der Flüeler Tunnel nach einem Fahrzeugbrand etwa eineinhalb Stunden lang gesperrt.",
-          "date": "2026-10-31T10:27:30.338Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-06T08:18:18.749Z"
+      "updatedAt": "2026-11-06T08:42:56.834Z"
     },
     "fr": {
       "canton": "UR",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Uri lance un projet sur la culture et l’intégration",
+          "url": "/fr/articles-uri/uri-projet-culture-integration/",
+          "excerpt": "Le projet «Netzwerk Kultur und Integration» durera trois ans, avec un démarrage prévu le 1er décembre 2026, afin de faciliter l’accès des personnes migrantes aux offres culturelles urbaines.",
+          "date": "2026-11-06T08:38:58.092Z"
+        },
+        {
           "title": "Andermatt, plan de quartier pour le taureau Max l'Uristier",
           "url": "/fr/articles-uri/andermatt-plan-taureau-bois/",
           "excerpt": "Le plan Nätschen West est en consultation jusqu'au 7 décembre : Max l'Uristier mesure 36 mètres de long et 20 de haut.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-uri/fermeture-hivernale-gothard/",
           "excerpt": "À partir de jeudi, la fermeture hivernale du col du Gothard entre en vigueur : trois des cinq cols alpins uranais seront fermés, tandis que l’Oberalp et le Klausenpass restent ouverts.",
           "date": "2026-11-03T09:00:46.783Z"
-        },
-        {
-          "title": "Incendie d’un véhicule, tunnel de Flüelen fermé",
-          "url": "/fr/articles-uri/incendie-tunnel-fluelen/",
-          "excerpt": "L’incendie d’un véhicule a entraîné la fermeture du tunnel de Flüelen pendant environ une heure et demie jeudi 29 octobre.",
-          "date": "2026-10-31T10:27:30.338Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-06T08:18:18.749Z"
+      "updatedAt": "2026-11-06T08:42:56.834Z"
     }
   }
 }

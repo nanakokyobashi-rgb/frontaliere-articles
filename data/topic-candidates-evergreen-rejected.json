@@ -4224,6 +4224,66 @@
       "firstSeenAt": "2026-11-04T02:05:05.697Z",
       "lastValidatedAt": "2026-11-04T02:05:05.697Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "permesso di pesca canton Zurigo requisiti e stagioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-06T08:50:11.745Z",
+      "lastValidatedAt": "2026-11-06T08:50:11.745Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "targhe e immatricolazione canton Zurigo guida a procedura e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-06T08:50:11.779Z",
+      "lastValidatedAt": "2026-11-06T08:50:11.779Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "collaudo veicoli canton Zurigo convocazione e requisiti",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-06T08:50:11.807Z",
+      "lastValidatedAt": "2026-11-06T08:50:11.807Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "licenza esercizio pubblico canton Zurigo requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-06T08:50:11.834Z",
+      "lastValidatedAt": "2026-11-06T08:50:11.834Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "tasse universitarie canton Zurigo guida a iscrizione e contributi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-06T08:50:11.857Z",
+      "lastValidatedAt": "2026-11-06T08:50:11.857Z",
+      "expiresAt": null
     }
   ],
   "strikes": [

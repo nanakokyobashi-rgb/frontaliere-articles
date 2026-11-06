@@ -57,6 +57,9 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.andermatt-piano-max-uristier.title': 'Andermatt, neighborhood plan for the bull Max l\'Uristier',
     'blog.article.andermatt-piano-max-uristier.excerpt': 'The Nätschen West plan is open for public consultation until December 7: Max l\'Uristier is 36 meters long and 20 meters high.',
     'blog.article.andermatt-piano-max-uristier.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.uri-progetto-cultura-integrazione.title': 'Uri launches project on culture and integration',
+    'blog.article.uri-progetto-cultura-integrazione.excerpt': 'The “Netzwerk Kultur und Integration” project will last three years, with a planned start date of December 1, 2026, to facilitate migrants’ access to urban cultural offerings.',
+    'blog.article.uri-progetto-cultura-integrazione.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonUrEn;
