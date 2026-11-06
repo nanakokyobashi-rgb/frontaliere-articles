@@ -46,7 +46,14 @@ normalizeContractEnv();
  * mancava (`edge404`) finche' quella chiave non viene invalidata, come quello
  * vero fa per alcuni minuti.
  */
-function fakeCdn(stored, { probeAnswer, storeAnswer, uploadWorks = true, purgeWorks = true, confirmAnswer } = {}) {
+function fakeCdn(stored, {
+  probeAnswer,
+  storeAnswer,
+  uploadWorks = true,
+  refreshCacheControl = () => true,
+  purgeWorks = true,
+  confirmAnswer,
+} = {}) {
   const bucket = new Set(stored);
   const edge404 = new Set();
   const calls = { checkStored: [], upload: [], purge: [], confirm: [], wait: [] };
@@ -64,6 +71,7 @@ function fakeCdn(stored, { probeAnswer, storeAnswer, uploadWorks = true, purgeWo
       if (uploadWorks) bucket.add(key);
       return uploadWorks;
     },
+    refreshCacheControl,
     purge: (keys) => {
       calls.purge.push([...keys]);
       if (purgeWorks) for (const key of keys) edge404.delete(key);
