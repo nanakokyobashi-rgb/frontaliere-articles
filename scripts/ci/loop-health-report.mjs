@@ -603,7 +603,19 @@ export function fixerJobStats(runs, runGh = gh, {
       measured = false;
       continue;
     }
-    const result = classifyFixerJob(response?.jobs);
+    const jobs = response?.jobs;
+    const result = classifyFixerJob(jobs);
+    // A run cancelled or skipped before dispatching any job legitimately
+    // returns an empty job list. Count that run-level outcome without claiming
+    // that the fixer started; every other empty list remains fail-closed.
+    if (result.state === 'unknown'
+        && Array.isArray(jobs)
+        && jobs.length === 0
+        && ['cancelled', 'skipped'].includes(run?.conclusion)) {
+      if (run.conclusion === 'cancelled') cancelled += 1;
+      else skipped += 1;
+      continue;
+    }
     if (result.state === 'skipped') {
       skipped += 1;
     } else if (result.state === 'pending') {
