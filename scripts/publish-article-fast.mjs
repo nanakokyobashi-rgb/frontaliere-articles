@@ -279,7 +279,7 @@ function writeLegacySlugRedirects({ section, entries, hubResult, distDir }) {
 }
 
 function parseArgs(argv) {
-  const out = { ids: [] };
+  const out = { ids: [], articleOnly: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--id') out.ids.push(argv[++i]);
@@ -299,6 +299,7 @@ function parseArgs(argv) {
     else if (a === '--out') out.out = argv[++i];
     else if (a === '--summary') out.summary = argv[++i];
     else if (a === '--persistent-generic-fallbacks-file') out.persistentGenericFallbacksFile = argv[++i];
+    else if (a === '--article-only') out.articleOnly = true;
   }
   out.ids = [...new Set(out.ids)];
   if (out.ids.some((id) => typeof id !== 'string' || !id)) {
@@ -311,7 +312,7 @@ function parseArgs(argv) {
   ];
   if (missing.length > 0) {
     console.error(`[publish-article-fast] missing required flag(s): ${missing.map((k) => `--${k}`).join(', ')}`);
-    console.error('Usage: npx -y tsx scripts/publish-article-fast.mjs (--id <articleId> | --ids <jsonArray> | --ids-file <jsonPath>) --section <active section with a Pages shard> --out <scratchDistDir> --summary <summaryJsonPath> [--persistent-generic-fallbacks-file <json>]');
+    console.error('Usage: npx -y tsx scripts/publish-article-fast.mjs (--id <articleId> | --ids <jsonArray> | --ids-file <jsonPath>) --section <active section with a Pages shard> --out <scratchDistDir> --summary <summaryJsonPath> [--article-only] [--persistent-generic-fallbacks-file <json>]');
     process.exit(1);
   }
   // Prima di qualunque render: la sezione deve essere ATTIVA nel core e avere
@@ -348,6 +349,7 @@ async function main() {
       ids: args.ids,
       logPrefix: 'publish-article-fast',
       persistentReleasedArticles,
+      includeAggregatePages: !args.articleOnly,
     });
   } catch (err) {
     console.error(`[publish-article-fast] ${err.message}`);
@@ -423,6 +425,7 @@ async function main() {
     requestedIds: args.ids,
     ids: publishedIds,
     section: args.section,
+    articleOnly: args.articleOnly,
     contentRevision,
     imagePostcondition,
     genericFallbackArticles,

@@ -14,8 +14,10 @@ import '../../host/cantonSectionsBootstrap.mjs';
  *   0. symlink di public/images nello scratch (solo per il passo 1)
  *   1. renderArticlePages (engine/ogPagesPlugin.ts)
  *   2-5. flat bridge, link contestuali, hreflang, hero sul CDN, sanificazione
- *   6. archivio `/tutti/` + page-N (engine/articleHubPagesPlugin.ts)
- *   6b. `beforeOffload`: pagine in piu' del chiamante (landing e hub cantonali)
+ *   6. archivio `/tutti/` + page-N (engine/articleHubPagesPlugin.ts), quando
+ *      il chiamante richiede le superfici aggregate
+ *   6b. `beforeOffload`: pagine in piu' del chiamante (landing e hub cantonali),
+ *       con le stesse condizioni dell'archivio
  *   7. offload-generated-images-cdn.mjs sull'intero scratch
  *   7b. verifica che gli /assets/ riscritti esistano sul CDN (non fatale)
  *
@@ -123,13 +125,14 @@ export function restoreRegistrySource({ registryPath, original, primaryError = n
  * @param {string[]} opts.ids id articolo da rendere (vuoto = nessun articolo, solo archivio ed extra)
  * @param {string} [opts.logPrefix]
  * @param {any[]} [opts.persistentReleasedArticles] fallback releases read from the durable observer ledger
+ * @param {boolean} [opts.includeAggregatePages=true] render and return the archive/landing surfaces in addition to article pages
  * @param {(ctx: { distDir: string, entries: any[], hubResult: any, releasedArticles: any[], effectiveEntries: any[] }) => (string[] | void | Promise<string[] | void>)} [opts.beforeOffload]
  *   scrive pagine in piu' in distDir e ne restituisce i path relativi
  * @param {(url: string) => Promise<{ state: string, reason: string }>} [opts.probeOnlineImage]
  *   lettura della pagina online per gli articoli ricaduti sull'immagine generica (default: produzione)
  * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[], declaredImages: object, downloadedImageKeys: string[], imageFetchFailures: any[], imagePostcondition: object, genericFallbackArticles: any[], aggregatePagesAllowed: boolean }>}
  */
-export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', persistentReleasedArticles = [], beforeOffload, probeOnlineImage }) {
+export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', persistentReleasedArticles = [], includeAggregatePages = true, beforeOffload, probeOnlineImage }) {
   const freshnessOverlay = prepareFreshnessOverlay({ rootDir, section, ids, logPrefix });
   let primaryError = null;
   let hasPrimaryError = false;
@@ -141,6 +144,7 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
       ids,
       logPrefix,
       persistentReleasedArticles,
+      includeAggregatePages,
       beforeOffload,
       probeOnlineImage,
     });
@@ -153,7 +157,7 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
   }
 }
 
-async function renderSectionArticlePipelineBody({ rootDir, distDir, section, ids, logPrefix, persistentReleasedArticles, beforeOffload, probeOnlineImage }) {
+async function renderSectionArticlePipelineBody({ rootDir, distDir, section, ids, logPrefix, persistentReleasedArticles, includeAggregatePages, beforeOffload, probeOnlineImage }) {
   // Use the same source-backed CDN base as image offload. The host bootstrap
   // resolves its preconnect origin when the engine reads the contract, so the
   // value does not depend on when host/constants.ts was imported.
@@ -314,7 +318,7 @@ async function renderSectionArticlePipelineBody({ rootDir, distDir, section, ids
   if (releasedWithGenericImage.length > 0) {
     console.error(`[${logPrefix}] aggregate pages use the generic image for ${releasedWithGenericImage.length} released article(s)`);
   }
-  const aggregatePagesAllowed = aggregateVerdict.allowed;
+  const aggregatePagesAllowed = includeAggregatePages && aggregateVerdict.allowed;
   // The registry declaration remains in imagePostcondition for diagnostics,
   // but downstream hero upload must inspect the image actually rendered. A
   // released article has `/og-image.png`, so treating its missing declaration
@@ -415,7 +419,10 @@ async function renderSectionArticlePipelineBody({ rootDir, distDir, section, ids
       downloadedImageKeys: imageStage.downloadedImageKeys,
     });
   } else {
-    console.error(`[${logPrefix}] aggregate pages withheld by the image postcondition verdict`);
+    const reason = includeAggregatePages
+      ? 'the image postcondition verdict'
+      : 'the caller requested article-only publication';
+    console.error(`[${logPrefix}] aggregate pages withheld by ${reason}`);
   }
 
   // ── Step 7: offload-generated-images-cdn.mjs, unmodified, via subprocess ──

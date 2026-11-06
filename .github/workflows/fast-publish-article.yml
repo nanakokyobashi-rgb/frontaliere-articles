@@ -141,6 +141,11 @@ on:
         description: 'JSON array of article ids to publish together (takes precedence over article_id)'
         required: false
         type: string
+      article_only:
+        description: 'Publish article pages and bridges without rebuilding aggregate archive surfaces'
+        required: false
+        default: false
+        type: boolean
       section:
         description: 'an active section of the core with a Pages shard, e.g. frontaliere or svizzera (empty = derive)'
         required: false
@@ -221,6 +226,7 @@ jobs:
         env:
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
           ARTICLE_ID_INPUT: ${{ inputs.article_id }}
+          ARTICLE_ONLY_INPUT: ${{ inputs.article_only }}
           SECTION_INPUT: ${{ inputs.section }}
           DRY_RUN_INPUT: ${{ inputs.dry_run }}
           EVENT_NAME: ${{ github.event_name }}
@@ -229,6 +235,7 @@ jobs:
         run: |
           set -euo pipefail
           ids=()
+          article_only=false
           groups='{}'
           article_plan='[]'
           write_output() { printf '%s\n' "$1" >> "$GITHUB_OUTPUT"; }
@@ -279,6 +286,11 @@ jobs:
             # cannot publish by accident.
             dry=true
             [ "$DRY_RUN_INPUT" = "false" ] && dry=false
+            case "${ARTICLE_ONLY_INPUT:-false}" in
+              true) article_only=true ;;
+              false|'') ;;
+              *) echo "::error::article_only must be boolean"; exit 1 ;;
+            esac
             section="$SECTION_INPUT"
             if [ -n "$ARTICLE_IDS_INPUT" ]; then
               ids_json="$(printf '%s' "$ARTICLE_IDS_INPUT" | jq -ce '
@@ -427,7 +439,7 @@ jobs:
           while IFS= read -r target; do
             target_section="$(printf '%s' "$target" | jq -r '.section')"
             target_shard="$(node scripts/ci/fast-publish-section.mjs shard-of "$target_section")"
-            target_with_shard="$(printf '%s' "$target" | jq -c --arg shard "$target_shard" '. + {shard: $shard}')"
+            target_with_shard="$(printf '%s' "$target" | jq -c --arg shard "$target_shard" --argjson articleOnly "$article_only" '. + {shard: $shard, articleOnly: $articleOnly}')"
             publish_plan_with_shards="$(
               printf '%s\n%s\n' "$publish_plan_with_shards" "$target_with_shard" |
                 jq -cs '.[0] + [.[1]]'
@@ -772,12 +784,19 @@ jobs:
           revision="$(git show -s --format=%ct HEAD).$(git rev-parse --short=12 HEAD)"
           echo "ARTICLE_CONTENT_REVISION=$revision" >> "$GITHUB_ENV"
           export ARTICLE_CONTENT_REVISION="$revision"
-          npx -y tsx@4.23.15 scripts/publish-article-fast.mjs \
-            --ids-file "$article_ids_file" \
-            --section "${{ matrix.target.section }}" \
-            --out "$RUNNER_TEMP/fast-dist" \
-            --summary "$RUNNER_TEMP/fast-summary.json" \
+          publish_args=(
+            --ids-file "$article_ids_file"
+            --section "${{ matrix.target.section }}"
+            --out "$RUNNER_TEMP/fast-dist"
+            --summary "$RUNNER_TEMP/fast-summary.json"
             --persistent-generic-fallbacks-file "$RUNNER_TEMP/persistent-image-fallbacks.json"
+          )
+          if [ "${{ matrix.target.articleOnly }}" = "true" ]; then
+            echo "article-only repair: aggregate archive surfaces are intentionally omitted"
+            publish_args+=(--article-only)
+          fi
+          npx -y tsx@4.23.15 scripts/publish-article-fast.mjs \
+            "${publish_args[@]}"
 
       # The hub LANDING was the one article surface a full site deploy still
       # owned. Since ARTICOLIFRONTALIERE_BUILD_EMIT_SKIP went on (2026-07-29

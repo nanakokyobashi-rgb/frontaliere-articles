@@ -802,6 +802,10 @@ function defaultGithubClient() {
         'workflow', 'run', DEFAULT_REPAIR_WORKFLOW,
         '-f', `article_ids=${idsJson}`,
         '-f', `section=${section}`,
+        // A stale-page repair has one correctness target: the requested article
+        // pages. Rebuilding the full archive here creates an unrelated Pages
+        // build failure domain and can keep every requested page stale.
+        '-f', 'article_only=true',
         '-f', 'dry_run=false',
         '-f', `dispatch_nonce=${dispatchNonce}`,
         '--ref', 'main',
