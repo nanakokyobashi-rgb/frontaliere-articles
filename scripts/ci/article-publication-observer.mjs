@@ -72,7 +72,120 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const COVERAGE_LEDGER_SCHEMA = 1;
 export const COVERAGE_LEDGER_START = '<!-- ARTICLE_PUBLICATION_COVERAGE_LEDGER v1 -->';
 export const COVERAGE_LEDGER_END = '<!-- /ARTICLE_PUBLICATION_COVERAGE_LEDGER -->';
+const PUBLICATION_RETRY_LEDGER_SCHEMA = 1;
+export const PUBLICATION_RETRY_LEDGER_START = '<!-- ARTICLE_PUBLICATION_RETRY_LEDGER v1 -->';
+export const PUBLICATION_RETRY_LEDGER_END = '<!-- /ARTICLE_PUBLICATION_RETRY_LEDGER -->';
 const COVERAGE_LEDGER_FENCE = '```';
+
+const PUBLICATION_RETRY_STATUSES = new Set(['pending', 'in-flight', 'exhausted', 'orphaned', 'retired']);
+
+function normalizedPublicationRetry(item) {
+  const section = String(item?.section ?? '').trim();
+  const articleId = String(item?.articleId ?? '').trim();
+  if (!section || !articleId) throw new Error('publication retry senza section/articleId');
+  const attempts = Number.isInteger(item?.attempts) && item.attempts >= 0 ? item.attempts : 0;
+  const status = PUBLICATION_RETRY_STATUSES.has(item?.status)
+    ? item.status
+    : attempts >= 3 ? 'exhausted' : 'pending';
+  const absenceAttempts = Number.isInteger(item?.absenceAttempts) && item.absenceAttempts >= 0
+    ? item.absenceAttempts
+    : 0;
+  return {
+    section,
+    articleId,
+    url: item?.url ? String(item.url) : null,
+    firstSeenAt: item?.firstSeenAt ? String(item.firstSeenAt) : null,
+    lastSeenAt: item?.lastSeenAt ? String(item.lastSeenAt) : null,
+    attempts,
+    status,
+    runId: item?.runId === null || item?.runId === undefined ? null : String(item.runId),
+    dispatchedAt: item?.dispatchedAt ? String(item.dispatchedAt) : null,
+    lastOutcome: item?.lastOutcome ? String(item.lastOutcome) : null,
+    absenceAttempts,
+    retiredAt: item?.retiredAt ? String(item.retiredAt) : null,
+  };
+}
+
+function sortedPublicationRetries(items = []) {
+  return [...items].map(normalizedPublicationRetry).sort((a, b) => ledgerKey(a).localeCompare(ledgerKey(b)));
+}
+
+export function parsePublicationRetryLedger(body) {
+  const source = String(body ?? '');
+  const start = source.indexOf(PUBLICATION_RETRY_LEDGER_START);
+  if (start < 0) return { present: false, items: [] };
+  const end = source.indexOf(PUBLICATION_RETRY_LEDGER_END, start + PUBLICATION_RETRY_LEDGER_START.length);
+  if (end < 0) throw new Error('ledger retry pubblicazione troncato');
+  const section = source.slice(start + PUBLICATION_RETRY_LEDGER_START.length, end);
+  const json = section.match(/```json\s*\n([\s\S]*?)\n```/i)?.[1];
+  if (!json) throw new Error('ledger retry pubblicazione senza JSON');
+  let parsed;
+  try {
+    parsed = JSON.parse(json);
+  } catch (error) {
+    throw new Error(`ledger retry pubblicazione non valido: ${error.message}`);
+  }
+  if (parsed?.schema !== PUBLICATION_RETRY_LEDGER_SCHEMA || !Array.isArray(parsed.items)) {
+    throw new Error('ledger retry pubblicazione con schema sconosciuto');
+  }
+  return { present: true, items: sortedPublicationRetries(parsed.items) };
+}
+
+export function renderPublicationRetryLedger(items = []) {
+  const payload = JSON.stringify({ schema: PUBLICATION_RETRY_LEDGER_SCHEMA, items: sortedPublicationRetries(items) }, null, 2);
+  return `${PUBLICATION_RETRY_LEDGER_START}\n${COVERAGE_LEDGER_FENCE}json\n${payload}\n${COVERAGE_LEDGER_FENCE}\n${PUBLICATION_RETRY_LEDGER_END}`;
+}
+
+function upsertPublicationRetryLedger(body, items = []) {
+  const source = String(body ?? '');
+  const start = source.indexOf(PUBLICATION_RETRY_LEDGER_START);
+  if (start < 0) {
+    if (items.length === 0) return source;
+    const rendered = renderPublicationRetryLedger(items);
+    return source.trimEnd() ? `${source.trimEnd()}\n\n${rendered}\n` : `${rendered}\n`;
+  }
+  const endMarker = source.indexOf(PUBLICATION_RETRY_LEDGER_END, start + PUBLICATION_RETRY_LEDGER_START.length);
+  if (endMarker < 0) throw new Error('ledger retry pubblicazione troncato');
+  const end = endMarker + PUBLICATION_RETRY_LEDGER_END.length;
+  return `${source.slice(0, start)}${renderPublicationRetryLedger(items)}${source.slice(end)}`;
+}
+
+function mergePublicationRetries(existing = [], observed = [], now = new Date().toISOString()) {
+  const byKey = new Map(sortedPublicationRetries(existing).map((item) => [ledgerKey(item), item]));
+  for (const raw of observed) {
+    const item = normalizedPublicationRetry({
+      section: raw.section,
+      articleId: raw.articleId,
+      url: raw.url,
+      firstSeenAt: raw.firstSeenAt ?? now,
+      lastSeenAt: now,
+      attempts: raw.attempts ?? 0,
+      status: raw.status ?? 'pending',
+      runId: raw.runId,
+      dispatchedAt: raw.dispatchedAt,
+      lastOutcome: raw.lastOutcome,
+      absenceAttempts: raw.absenceAttempts,
+      retiredAt: raw.retiredAt,
+    });
+    const key = ledgerKey(item);
+    const previous = byKey.get(key);
+    if (!previous) {
+      byKey.set(key, item);
+      continue;
+    }
+    const status = previous.status === 'in-flight' || previous.status === 'exhausted' ? previous.status : 'pending';
+    byKey.set(key, {
+      ...previous,
+      url: item.url ?? previous.url,
+      firstSeenAt: previous.firstSeenAt ?? item.firstSeenAt ?? now,
+      lastSeenAt: now,
+      status,
+      absenceAttempts: 0,
+      retiredAt: null,
+    });
+  }
+  return sortedPublicationRetries([...byKey.values()]);
+}
 
 function normalizedCoverageBlocker(item) {
   const section = String(item?.section ?? '').trim();
@@ -908,36 +1021,17 @@ function groupPublicationRepairs(items = []) {
     .filter((group) => group.ids.length > 0);
 }
 
-function isLaggingLedgerItem(item) {
-  // Image degradation rows always carry the registry image. A null image plus
-  // a live article URL is therefore a durable marker for a readable stale-page
-  // retry; legacy orphan rows have neither and keep their old retirement path.
-  return item?.registryImage === null && Boolean(item?.url);
-}
-
-function markPublicationRepairDispatched(ledger, group, result) {
-  const groupKeys = new Set(group.ledgerItems.map((item) => ledgerKey(item)));
-  const dispatchable = ledger.filter((item) => (
-    groupKeys.has(ledgerKey(item))
-      && (group.articleOnly ? isLaggingLedgerItem(item) : !isLaggingLedgerItem(item))
-  ));
-  const marked = markDispatched(
-    dispatchable,
-    dispatchable.map((item) => ({
-      key: ledgerKey(item),
-      runId: result?.runId ?? null,
-      dispatchedAt: result?.dispatchedAt,
-    })),
-  );
-  const markedByKey = new Map(marked.map((item) => [ledgerKey(item), item]));
-  // `ledgerKey` intentionally identifies the article, so scope the rows by
-  // repair kind before applying a dispatch. An article-only retry must not
-  // borrow the run/status of an overlapping image repair row.
-  return ledger.map((item) => markedByKey.get(ledgerKey(item)) ?? item);
-}
-
 async function persistLedger(issue, items, github) {
   const body = upsertDegradationLedger(issue.body || '', items);
+  if (body !== issue.body) {
+    await github.editIssue(issue.number, body);
+    issue.body = body;
+  }
+  return issue;
+}
+
+async function persistPublicationRetryLedger(issue, items, github) {
+  const body = upsertPublicationRetryLedger(issue.body || '', items);
   if (body !== issue.body) {
     await github.editIssue(issue.number, body);
     issue.body = body;
@@ -991,13 +1085,19 @@ export async function runObserver({
   const github = githubClient || defaultGithubClient();
   let issue = await github.findOpenIssue();
   let ledger = issue ? parseDegradationLedger(issue.body || '').items : [];
+  let publicationRetries = issue ? parsePublicationRetryLedger(issue.body || '').items : [];
   let coverageBlockers = issue ? parseCoverageLedger(issue.body || '').items : [];
   ledger = retainDegradationLedger(ledger, {
     nowMs,
     retentionDays: DEFAULT_LEDGER_RETENTION_DAYS,
     terminalRetentionDays: DEFAULT_TERMINAL_RETENTION_DAYS,
   });
-  const prepared = buildObserverTargets({ changedBodies, ledgerItems: ledger, coverageBlockers, ...sources });
+  const prepared = buildObserverTargets({
+    changedBodies,
+    ledgerItems: [...ledger, ...publicationRetries],
+    coverageBlockers,
+    ...sources,
+  });
   coverageBlockers = prepared.coverageBlockers;
   const report = await observePublicationLag({
     targets: prepared.targets,
@@ -1021,7 +1121,11 @@ export async function runObserver({
     || report.timedOutPages.length > 0
     || prepared.skipped.length > 0
     || coverageBlockers.length > 0;
-  const actionable = coverageIncomplete || report.lagging.length > 0 || report.degraded.length > 0 || ledger.length > 0;
+  const actionable = coverageIncomplete
+    || report.lagging.length > 0
+    || report.degraded.length > 0
+    || ledger.length > 0
+    || publicationRetries.length > 0;
   const issueDescription = upsertCoverageLedger(description, coverageBlockers);
   if (actionable && !issue) {
     issue = await github.createIssue(issueDescription);
@@ -1031,12 +1135,21 @@ export async function runObserver({
   if (issue) {
     await persistCoverageLedger(issue, coverageBlockers, github);
     await persistLedger(issue, ledger, github);
+    await persistPublicationRetryLedger(issue, publicationRetries, github);
   }
 
-  const reconciled = await reconcileDispatches(ledger, github);
-  ledger = reconciled.items;
+  const reconciledImage = await reconcileDispatches(ledger, github);
+  ledger = reconciledImage.items;
+  const reconciledRetry = await reconcileDispatches(publicationRetries, github);
+  publicationRetries = reconciledRetry.items;
   ledger = markLedgerItemsAbsent(ledger, prepared.missingLedgerKeys, new Date(nowMs).toISOString());
+  publicationRetries = markLedgerItemsAbsent(publicationRetries, prepared.missingLedgerKeys, new Date(nowMs).toISOString());
   ledger = retainDegradationLedger(ledger, {
+    nowMs,
+    retentionDays: DEFAULT_LEDGER_RETENTION_DAYS,
+    terminalRetentionDays: DEFAULT_TERMINAL_RETENTION_DAYS,
+  });
+  publicationRetries = retainDegradationLedger(publicationRetries, {
     nowMs,
     retentionDays: DEFAULT_LEDGER_RETENTION_DAYS,
     terminalRetentionDays: DEFAULT_TERMINAL_RETENTION_DAYS,
@@ -1055,28 +1168,23 @@ export async function runObserver({
   const readableLagging = report.lagging.filter((entry) => entry.page?.status === 200);
   const laggingKeys = new Set(readableLagging.map((entry) => ledgerKey(entry.target)));
   const checkedKeys = new Set(report.checked.map((entry) => ledgerKey(entry.target)));
-  ledger = mergeDegradedItems(
-    ledger,
+  publicationRetries = mergePublicationRetries(
+    publicationRetries,
     readableLagging.map((entry) => ({
       section: entry.target.section,
       articleId: entry.target.articleId,
       url: entry.target.url,
-      // A null registry image distinguishes this retry marker from a durable
-      // image repair while keeping it out of releasedArticleFallbacks().
-      registryImage: null,
       firstSeenAt: new Date(entry.target.changedAt || nowMs).toISOString(),
       lastOutcome: 'lagging-observed',
     })),
     new Date(nowMs).toISOString(),
   );
 
-  // A stale marker is only useful while the page is still stale. Keep image
-  // rows independent, but drop a resolved stale-only marker before selecting
-  // the next dispatch set.
-  ledger = ledger.filter((item) => (
-    !isLaggingLedgerItem(item)
-      || laggingKeys.has(ledgerKey(item))
-      || !checkedKeys.has(ledgerKey(item))
+  // A retry row is only useful while the page is still stale. If the scan was
+  // incomplete, keep the row because absence from `report.lagging` is not
+  // evidence that the page caught up.
+  publicationRetries = publicationRetries.filter((item) => (
+    laggingKeys.has(ledgerKey(item)) || !checkedKeys.has(ledgerKey(item))
   ));
 
   const healthyKeys = new Set(
@@ -1084,16 +1192,14 @@ export async function runObserver({
       .filter((entry) => entry.target.durable && saneLiveImage(entry))
       .map((entry) => ledgerKey(entry.target)),
   );
-  ledger = removeHealthyItems(
-    ledger,
-    [...healthyKeys].filter((key) => !laggingKeys.has(key) && ledger.some((item) => ledgerKey(item) === key && !isLaggingLedgerItem(item))),
-  );
+  ledger = removeHealthyItems(ledger, [...healthyKeys]);
 
   // Persist reconciliation and this scan's ledger changes after the early
   // coverage checkpoint above.
   if (issue) {
     await persistCoverageLedger(issue, coverageBlockers, github);
     await persistLedger(issue, ledger, github);
+    await persistPublicationRetryLedger(issue, publicationRetries, github);
   }
 
   const readyKeys = new Set();
@@ -1110,7 +1216,7 @@ export async function runObserver({
 
   const candidates = repairCandidates(ledger, {
     readyKeys,
-    excludeKeys: reconciled.handledKeys,
+    excludeKeys: reconciledImage.handledKeys,
     cap: effectiveRepairCap,
   });
   // A lagging page is already a live, actionable publication failure. Retry
@@ -1119,8 +1225,10 @@ export async function runObserver({
   // the identity fence: an in-flight retry, or one whose terminal outcome was
   // just reconciled in this scan, cannot be dispatched again immediately.
   const activeDispatchKeys = new Set([
-    ...reconciled.handledKeys,
+    ...reconciledImage.handledKeys,
+    ...reconciledRetry.handledKeys,
     ...ledger.filter((item) => item.status === 'in-flight').map((item) => ledgerKey(item)),
+    ...publicationRetries.filter((item) => item.status === 'in-flight').map((item) => ledgerKey(item)),
   ]);
   const laggingRepairs = readableLagging
     .filter((entry) => !activeDispatchKeys.has(ledgerKey(entry.target)))
@@ -1139,14 +1247,31 @@ export async function runObserver({
         articleOnly: group.articleOnly,
         issueNumber: issue.number,
       });
-      ledger = markPublicationRepairDispatched(ledger, group, result);
+      const dispatchesForLedger = group.ledgerItems.map((item) => ({
+        key: ledgerKey(item),
+        runId: result?.runId ?? null,
+        dispatchedAt: result?.dispatchedAt,
+      }));
+      if (group.articleOnly) {
+        publicationRetries = markDispatched(publicationRetries, dispatchesForLedger);
+      } else {
+        ledger = markDispatched(ledger, dispatchesForLedger);
+      }
       dispatched.push({ section: group.section, ids: group.ids, runId: result?.runId ?? null });
       await persistLedger(issue, ledger, github);
+      await persistPublicationRetryLedger(issue, publicationRetries, github);
     }
   }
 
   let resolved = null;
-  if (!coverageIncomplete && !report.lagging.length && !report.degraded.length && ledger.length === 0 && issue) {
+  if (
+    !coverageIncomplete
+      && !report.lagging.length
+      && !report.degraded.length
+      && ledger.length === 0
+      && publicationRetries.length === 0
+      && issue
+  ) {
     resolved = await github.resolveIssue();
   }
   return {
@@ -1157,6 +1282,7 @@ export async function runObserver({
     resolved,
     dispatched,
     ledger,
+    publicationRetries,
     changedBodies,
     skipped: prepared.skipped,
     description,

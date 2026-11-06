@@ -677,8 +677,9 @@ test('un ritardo stale già osservato ridispatcha la pagina leggibile al fast pu
       github.calls.filter((call) => call.type === 'dispatch').map((call) => call.args),
       [{ section: 'frontaliere', ids: ['lagging'], articleOnly: true, issueNumber: 9001 }],
     );
-    assert.deepEqual(result.ledger.map((item) => [item.articleId, item.status, item.registryImage]), [
-      ['lagging', 'in-flight', null],
+    assert.deepEqual(result.ledger, []);
+    assert.deepEqual(result.publicationRetries.map((item) => [item.articleId, item.status, item.runId]), [
+      ['lagging', 'in-flight', 'run-1'],
     ]);
 
     const second = await runObserver({
