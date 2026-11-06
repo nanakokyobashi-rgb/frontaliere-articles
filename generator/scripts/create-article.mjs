@@ -13747,6 +13747,12 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     err.qualityReject = true;
     throw err;
   }
+  // The raw Italian payload has a strict required-excerpt gate here. Repair
+  // only a missing/unusable excerpt from this locale's body before that gate;
+  // the same helper rejects the candidate when no safe source exists.
+  if (!hasUsableContentText(itContent.excerpt)) {
+    repairGeneratedArticleDescriptions({ content: { it: itContent } });
+  }
   validateItalianPayload(itContent, 'it');
 
   // ── Title length enforcement (Semrush ≤ 60 chars gate) ──
@@ -14979,7 +14985,9 @@ ${localizedToponymInstruction(targetLang)}`;
           console.warn(`  ⚠️  ${field} (${locale}) ${floorMiss}: sorgente IT assente, niente da ritradurre — valore tradotto mantenuto`);
           continue;
         }
-        throw new Error(`Campo ${field} mancante nella traduzione ${locale} (e assente anche nella sorgente IT)`);
+        const error = new Error(`Campo ${field} mancante nella traduzione ${locale} (e assente anche nella sorgente IT)`);
+        error.qualityReject = true;
+        throw error;
       }
       console.error(
         faqControlRejected
@@ -20133,6 +20141,12 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     // The same helper is called again after translations below because this
     // primary path does not enter registerArticleFiles().
     assertGeneratedArticleQuality(data);
+    // The claim repair above can remove unsupported text from descriptions
+    // after the first pass. Restore only excerpts with a complete sentence
+    // from the same locale's sanitized body before translation reads the IT
+    // source; if none exists the helper rejects this candidate as content.
+    const postClaimExcerptRepairs = repairGeneratedArticleDescriptions(data);
+    preTranslationExcerptRepairs.push(...postClaimExcerptRepairs);
     // Step 3a.0-dup: i gate deterministici dei duplicati, gli stessi di Step
     // 3a.2 e 3a.4, gia' qui, prima del fact-check e dell'espansione. Id e
     // titolo IT sono stabili da questo punto: il fact-check e l'espansione
