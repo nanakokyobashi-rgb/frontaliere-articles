@@ -22,11 +22,11 @@ test('recovery becomes due after three unsuccessful proven attempts', () => {
   assert.equal(DISCOVERY_RECOVERY_THRESHOLD, 3);
 
   for (let i = 0; i < 2; i += 1) {
-    state = recordDiscoveryAttempt(state, { section: 'frontaliere', poolKind: 'proven' });
+    state = recordDiscoveryAttempt(state, { section: 'frontaliere', poolKind: 'proven', candidateAttempted: true });
     assert.equal(discoveryRecoveryDecision(state, { section: 'frontaliere' }).shouldForceDiscovery, false);
   }
 
-  state = recordDiscoveryAttempt(state, { section: 'frontaliere', poolKind: 'proven' });
+  state = recordDiscoveryAttempt(state, { section: 'frontaliere', poolKind: 'proven', candidateAttempted: true });
   const decision = discoveryRecoveryDecision(state, { section: 'frontaliere' });
   assert.equal(decision.outstandingProvenFailures, 3);
   assert.equal(decision.shouldForceDiscovery, true);
@@ -35,11 +35,11 @@ test('recovery becomes due after three unsuccessful proven attempts', () => {
 test('a discovery attempt resets the outstanding proven failures without decreasing counters', () => {
   let state = loadDiscoveryAttemptState({ path: path.join(HERE, 'missing-discovery-state.json') });
   for (let i = 0; i < 3; i += 1) {
-    state = recordDiscoveryAttempt(state, { section: 'frontaliere', poolKind: 'proven' });
+    state = recordDiscoveryAttempt(state, { section: 'frontaliere', poolKind: 'proven', candidateAttempted: true });
   }
 
   const before = state;
-  state = recordDiscoveryAttempt(state, { section: 'frontaliere', poolKind: 'discovery' });
+  state = recordDiscoveryAttempt(state, { section: 'frontaliere', poolKind: 'discovery', candidateAttempted: true });
   const after = discoveryRecoveryDecision(state, { section: 'frontaliere' });
   assert.equal(after.provenAttempts, before.frontaliereProvenAttempts);
   assert.equal(after.outstandingProvenFailures, 0);
@@ -50,10 +50,15 @@ test('a discovery attempt resets the outstanding proven failures without decreas
 test('a successful proven publication clears its own retry debt', () => {
   let state = loadDiscoveryAttemptState({ path: path.join(HERE, 'missing-discovery-state.json') });
   for (let i = 0; i < 3; i += 1) {
-    state = recordDiscoveryAttempt(state, { section: 'frontaliere', poolKind: 'proven' });
+    state = recordDiscoveryAttempt(state, { section: 'frontaliere', poolKind: 'proven', candidateAttempted: true });
   }
 
-  state = recordDiscoveryAttempt(state, { section: 'frontaliere', poolKind: 'proven', generated: true });
+  state = recordDiscoveryAttempt(state, {
+    section: 'frontaliere',
+    poolKind: 'proven',
+    generated: true,
+    candidateAttempted: true,
+  });
   const decision = discoveryRecoveryDecision(state, { section: 'frontaliere' });
   assert.equal(decision.provenAttempts, 4);
   assert.equal(decision.outstandingProvenFailures, 0);
@@ -63,7 +68,7 @@ test('a successful proven publication clears its own retry debt', () => {
 test('frontaliere and svizzera recovery counters are independent', () => {
   let state = loadDiscoveryAttemptState({ path: path.join(HERE, 'missing-discovery-state.json') });
   for (let i = 0; i < 3; i += 1) {
-    state = recordDiscoveryAttempt(state, { section: 'frontaliere', poolKind: 'proven' });
+    state = recordDiscoveryAttempt(state, { section: 'frontaliere', poolKind: 'proven', candidateAttempted: true });
   }
   assert.equal(discoveryRecoveryDecision(state, { section: 'frontaliere' }).shouldForceDiscovery, true);
   assert.equal(discoveryRecoveryDecision(state, { section: 'svizzera' }).shouldForceDiscovery, false);
@@ -74,8 +79,8 @@ test('state persists and keeps every mergeable counter monotonic', () => {
   const statePath = path.join(dir, 'data', 'discovery-attempt-state.json');
   try {
     let state = loadDiscoveryAttemptState({ path: statePath });
-    state = recordDiscoveryAttempt(state, { section: 'svizzera', poolKind: 'proven' });
-    state = recordDiscoveryAttempt(state, { section: 'svizzera', poolKind: 'discovery' });
+    state = recordDiscoveryAttempt(state, { section: 'svizzera', poolKind: 'proven', candidateAttempted: true });
+    state = recordDiscoveryAttempt(state, { section: 'svizzera', poolKind: 'discovery', candidateAttempted: true });
     assert.equal(saveDiscoveryAttemptState(state, { path: statePath }), true);
 
     const reloaded = loadDiscoveryAttemptState({ path: statePath });

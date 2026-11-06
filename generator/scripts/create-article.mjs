@@ -2108,6 +2108,9 @@ const RUN_REPORT = {
   selectedTier: null,
   selectedScore: null,
   selectedCluster: null,
+  candidateAttempted: false,
+  candidateAttemptStage: null,
+  providerRosterPreflight: null,
   poolSize: 0,
   // Phase 3 — proven/discovery pool dispatch.
   // _pool ∈ {'proven','discovery','evergreen-fallback'}; _pool_source is the
@@ -2454,23 +2457,58 @@ function persistDiscoveryAttemptOutcome(status) {
   const poolKind = RUN_REPORT.poolSlotKind;
   if (!['proven', 'discovery'].includes(poolKind)) return;
   const generated = status === 'generated' && Boolean(RUN_REPORT.article?.id);
+  const candidateAttempted = RUN_REPORT.candidateAttempted === true;
   const noArticleOutcome = ['deferred', 'skipped', 'error'].includes(status);
   if (!generated && !noArticleOutcome) return;
 
   const state = _loadDiscoveryAttemptState();
+  if (!candidateAttempted) {
+    const decision = _discoveryRecoveryDecision(state, { section: RUN_REPORT.section || SECTION_NAME });
+    RUN_REPORT.poolRecoveryOutcome = {
+      persisted: true,
+      recorded: false,
+      candidateAttempted: false,
+      poolKind,
+      generated,
+      outcome: status,
+      reason: 'candidate-not-attempted',
+      provenAttempts: decision.provenAttempts,
+      outstandingProvenFailures: decision.outstandingProvenFailures,
+    };
+    console.error(
+      `DISCOVERY_ATTEMPT_STATE section=${RUN_REPORT.section || SECTION_NAME}`
+      + ` pool=${poolKind} recorded=0 candidateAttempted=0`
+      + ` outcome=${status}`
+      + ` provenAttempts=${decision.provenAttempts}`
+      + ` outstandingProvenFailures=${decision.outstandingProvenFailures}`,
+    );
+    return;
+  }
   const next = _recordDiscoveryAttempt(state, {
     section: RUN_REPORT.section || SECTION_NAME,
     poolKind,
     generated,
+    candidateAttempted,
   });
   if (!_saveDiscoveryAttemptState(next)) {
-    RUN_REPORT.poolRecoveryOutcome = { persisted: false, poolKind, generated, outcome: status };
+    RUN_REPORT.poolRecoveryOutcome = {
+      persisted: false,
+      recorded: true,
+      candidateAttempted: true,
+      candidateAttemptStage: RUN_REPORT.candidateAttemptStage,
+      poolKind,
+      generated,
+      outcome: status,
+    };
     console.warn('[discovery-attempt] state write failed; next scheduled run will retry from persisted state');
     return;
   }
   const decision = _discoveryRecoveryDecision(next, { section: RUN_REPORT.section || SECTION_NAME });
   RUN_REPORT.poolRecoveryOutcome = {
     persisted: true,
+    recorded: true,
+    candidateAttempted: true,
+    candidateAttemptStage: RUN_REPORT.candidateAttemptStage,
     poolKind,
     generated,
     outcome: status,
@@ -2479,14 +2517,16 @@ function persistDiscoveryAttemptOutcome(status) {
   };
   console.error(
     `DISCOVERY_ATTEMPT_STATE section=${RUN_REPORT.section || SECTION_NAME}`
-    + ` pool=${poolKind} generated=${generated ? 1 : 0}`
+    + ` pool=${poolKind} recorded=1 candidateAttempted=1`
+    + ` stage=${RUN_REPORT.candidateAttemptStage || 'unknown'}`
+    + ` generated=${generated ? 1 : 0}`
     + ` outcome=${status}`
     + ` provenAttempts=${decision.provenAttempts}`
     + ` outstandingProvenFailures=${decision.outstandingProvenFailures}`,
   );
 }
 
-function writeDiscoveryAttemptMarker({ section, poolKind, recoveryEligible }) {
+function writeDiscoveryAttemptMarker({ section, poolKind, recoveryEligible, candidateAttempted = false, stage = null }) {
   const markerPath = process.env.DISCOVERY_ATTEMPT_MARKER;
   if (!markerPath || recoveryEligible !== true) return;
   try {
@@ -2496,6 +2536,8 @@ function writeDiscoveryAttemptMarker({ section, poolKind, recoveryEligible }) {
       section,
       poolKind,
       recoveryEligible: true,
+      candidateAttempted: candidateAttempted === true,
+      stage: typeof stage === 'string' && stage ? stage : null,
     })}\n`, 'utf8');
   } catch (err) {
     console.warn(`[discovery-attempt] selection marker write failed: ${err?.message || err}`);
@@ -18411,6 +18453,13 @@ async function main() {
     const rosterOptions = { chain: [...DEFAULT_CHAIN, ...PREFERRED_GENERATION_MODELS] };
     const rosterReady = providerRosterReady(rosterOptions);
     const roster = getProviderRosterStatus(rosterOptions);
+    RUN_REPORT.providerRosterPreflight = {
+      ready: rosterReady,
+      rosterSize: roster.rosterSize,
+      availableModelCount: roster.availableModels.length,
+      availableProviders: roster.availableProviders,
+      reason: roster.reason,
+    };
     console.error(
       `PROVIDER_ROSTER ready=${rosterReady} size=${roster.rosterSize}`
       + ` available=${roster.availableModels.length}`
@@ -19225,6 +19274,15 @@ async function main() {
             }
 
             // Attempt the full article generation + duplicate check
+            RUN_REPORT.candidateAttempted = true;
+            RUN_REPORT.candidateAttemptStage = 'generation-start';
+            writeDiscoveryAttemptMarker({
+              section: SECTION_NAME,
+              poolKind: RUN_REPORT.poolSlotKind,
+              recoveryEligible: RUN_REPORT.poolRecoveryEligible,
+              candidateAttempted: true,
+              stage: RUN_REPORT.candidateAttemptStage,
+            });
             await generateAndValidateArticle(url, chosen);
             newsSuccess = true;
             // Persist ranker state ONLY on success (failure shouldn't bump counters).

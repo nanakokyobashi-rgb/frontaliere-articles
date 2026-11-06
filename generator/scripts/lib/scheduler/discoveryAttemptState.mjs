@@ -126,16 +126,18 @@ export function discoveryRecoveryDecision(state, {
 
 /**
  * Record one terminal pool attempt without decreasing any persisted counter.
- * A discovery attempt or successful publication advances the reset watermark.
+ * Only a candidate-level attempt consumes recovery debt. A discovery candidate
+ * attempt or successful publication of a selected candidate advances the reset watermark.
  */
 export function recordDiscoveryAttempt(state, {
   section,
   poolKind,
   generated = false,
+  candidateAttempted = false,
 } = {}) {
   const safe = normalizeState(state);
   const fields = counterFields(section);
-  if (!fields || !['proven', 'discovery'].includes(poolKind)) return safe;
+  if (!fields || !['proven', 'discovery'].includes(poolKind) || candidateAttempted !== true) return safe;
 
   const next = { ...safe };
   if (poolKind === 'proven') {
