@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 import {
@@ -573,6 +574,21 @@ test('excerpt assenti o non testuali usano il body della stessa lingua prima del
     (error) => error.qualityReject === true
       && /\[excerpt-complete\] en\/excerpt-assente-senza-body\/excerpt is empty and has no safe body excerpt/u.test(error.message),
   );
+});
+
+test('ripara excerpt dopo il gate claim e prima di tradurre', () => {
+  const generator = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
+  const generationStart = generator.indexOf('async function generateAndValidateArticle(');
+  const claimGate = generator.indexOf('assertGeneratedArticleQuality(data);', generationStart);
+  const postClaimRepair = generator.indexOf(
+    'const postClaimExcerptRepairs = repairGeneratedArticleDescriptions(data);',
+    claimGate,
+  );
+  const translation = generator.indexOf('await translateArticle(data);', postClaimRepair);
+
+  assert.ok(generationStart >= 0 && claimGate > generationStart, 'il gate claim deve precedere la traduzione');
+  assert.ok(postClaimRepair > claimGate && translation > postClaimRepair, 'il repair deve seguire i claim e precedere il translator');
+  assert.match(generator.slice(postClaimRepair, translation), /preTranslationExcerptRepairs\.push\(\.\.\.postClaimExcerptRepairs\)/u);
 });
 
 test('un campo descrittivo vuoto usa un sibling valido quando il body non offre una frase completa', () => {
