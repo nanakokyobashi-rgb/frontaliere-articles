@@ -304,4 +304,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lausanna-credito-colonnine-2031',
+ category: 'pratico',
+ date: '2026-11-06T13:19:17.107Z',
+ image: '/images/blog/article-lausanna-credito-colonnine-2031.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

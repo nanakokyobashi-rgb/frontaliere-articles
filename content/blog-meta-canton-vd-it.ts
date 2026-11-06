@@ -84,6 +84,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.ctmg-diventa-centrale-sante.title': 'CTMG diventa Centrale santé e risponde al 058 6 116 116',
     'blog.article.ctmg-diventa-centrale-sante.excerpt': 'La Centrale santé serve Vaud e Neuchâtel 24/24, 7/7 con il nuovo numero 058 6 116 116; i vecchi numeri rimangono reindirizzati.',
     'blog.article.ctmg-diventa-centrale-sante.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lausanna-credito-colonnine-2031.title': 'Mobilità elettrica: 200 colonnine previste a Losanna entro il 2031',
+    'blog.article.lausanna-credito-colonnine-2031.excerpt': 'La Municipalità di Losanna sollecita un credito d\'investimento di CHF 3 milioni per sviluppare la rete di colonnine di ricarica sul dominio pubblico durante la legislatura 2026-2031.',
+    'blog.article.lausanna-credito-colonnine-2031.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVdIt;

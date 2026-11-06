@@ -84,6 +84,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.ctmg-diventa-centrale-sante.title': 'CTMG wird zur Centrale santé und ist unter 058 6 116 116 erreichbar',
     'blog.article.ctmg-diventa-centrale-sante.excerpt': 'Die Centrale santé ist für Waadt und Neuenburg 24/24, 7/7 unter der neuen Nummer 058 6 116 116 erreichbar; die alten Nummern werden weiterhin umgeleitet.',
     'blog.article.ctmg-diventa-centrale-sante.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lausanna-credito-colonnine-2031.title': 'Elektromobilität: 200 Ladesäulen in Lausanne bis 2031 vorgesehen',
+    'blog.article.lausanna-credito-colonnine-2031.excerpt': 'Die Stadtregierung von Lausanne ersucht um einen Investitionskredit von CHF 3 Millionen, um das Netz der Ladesäulen auf öffentlichem Grund während der Legislaturperiode 2026-2031 auszubauen.',
+    'blog.article.lausanna-credito-colonnine-2031.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;

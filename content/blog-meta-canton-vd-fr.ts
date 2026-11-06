@@ -84,6 +84,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.ctmg-diventa-centrale-sante.title': 'La CTMG devient Centrale santé et répond au 058 6 116 116',
     'blog.article.ctmg-diventa-centrale-sante.excerpt': 'La Centrale santé dessert Vaud et Neuchâtel 24/24, 7/7 avec le nouveau numéro 058 6 116 116 ; les anciens numéros restent redirigés.',
     'blog.article.ctmg-diventa-centrale-sante.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lausanna-credito-colonnine-2031.title': 'Mobilité électrique : 200 bornes prévues à Lausanne d’ici 2031',
+    'blog.article.lausanna-credito-colonnine-2031.excerpt': 'La Municipalité de Lausanne demande un crédit d’investissement de CHF 3 millions afin d’étendre, sur le domaine public, le réseau de bornes de recharge au cours de la législature 2026-2031.',
+    'blog.article.lausanna-credito-colonnine-2031.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVdFr;

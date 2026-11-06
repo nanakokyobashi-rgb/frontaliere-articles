@@ -30,6 +30,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'grand-conseil-27-ottobre': { it: 'grand-conseil-27-ottobre', en: 'grand-conseil-27-october', de: 'grosser-rat-27-oktober', fr: 'grand-conseil-27-octobre' },
  'cantiere-stazione-morges-2026': { it: 'cantiere-stazione-morges-2026', en: 'morges-station-construction-2026', de: 'morges-bahnhof-bau-2026', fr: 'chantier-gare-morges-2026' },
  'ctmg-diventa-centrale-sante': { it: 'ctmg-diventa-centrale-sante', en: 'ctmg-becomes-sante-center', de: 'ctmg-wird-sante-zentrale', fr: 'ctmg-devient-centrale-sante' },
+ 'lausanna-credito-colonnine-2031': { it: 'lausanna-credito-colonnine-2031', en: 'lausanne-charging-stations-2031', de: 'lausanne-ladestationen-2031', fr: 'lausanne-bornes-2031' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
