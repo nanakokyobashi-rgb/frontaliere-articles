@@ -15,6 +15,7 @@ if (markerPaths.length === 0) {
 
 let state = loadDiscoveryAttemptState();
 let recorded = 0;
+let notAttempted = 0;
 for (const markerPath of markerPaths) {
   let marker;
   try {
@@ -29,13 +30,16 @@ for (const markerPath of markerPaths) {
     console.error(`[discovery-attempt] unsupported marker ${markerPath}`);
     process.exit(1);
   }
+  const candidateAttempted = marker.candidateAttempted !== false;
   state = recordDiscoveryAttempt(state, {
     section: marker.section,
     poolKind: marker.poolKind,
     generated: false,
+    candidateAttempted,
   });
-  recorded += 1;
+  if (candidateAttempted) recorded += 1;
+  else notAttempted += 1;
 }
 
 if (recorded > 0 && !saveDiscoveryAttemptState(state)) process.exit(1);
-console.log(`[discovery-attempt] recovered ${recorded} no-article attempt marker(s)`);
+console.log(`[discovery-attempt] recovered ${recorded} candidate attempt(s); preserved debt for ${notAttempted} unattempted slot(s)`);

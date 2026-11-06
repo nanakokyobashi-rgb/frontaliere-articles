@@ -109741,16 +109741,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-previdenza-lpp-tasso-2-percento': {
     title: 'Previdenza LPP: tasso d’interesse al 2% dal 1° gen. 2027',
-    description: 'Dal 1° gennaio 2027 il tasso minimo del secondo pilastro sale al 2%, con rendimenti medi del 6,1% nel 2025 e 5,4% nel 2026 e copertura del 122,5% a fine agosto 2026.',
+    description: 'Dal 1° gennaio 2027 il tasso minimo LPP sale al 2%; rendimenti medi: 6,1% nel 2025 e 5,4% fino a fine agosto 2026; copertura media: 122,5% a fine agosto 2026.',
     keywords: 'previdenza, LPP, tasso minimo, secondo pilastro, rendimento, copertura, UFAS, Svizzera',
     ogTitle: 'Previdenza LPP: tasso minimo al 2% dal 2027',
-    ogDescription: 'Il Consiglio federale ha fissato al 2% il tasso minimo del secondo pilastro dal 1° gennaio 2027. Rendimenti medi del 6,1% nel 2025 e 5,4% nel 2026; copertura media del 122,5% a fine agosto 2026.',
+    ogDescription: 'Il Consiglio federale ha fissato al 2% il tasso minimo LPP dal 1° gennaio 2027. L’UFAS stima rendimenti medi del 6,1% nel 2025 e del 5,4% fino a fine agosto 2026; copertura media: 122,5% a fine agosto 2026.',
     canonicalPath: '/articoli-svizzera/previdenza-lpp-tasso-2-percento/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Previdenza LPP: tasso d’interesse al 2% dal 1° gen. 2027",
-      "description": "Dal 1° gennaio 2027 il tasso minimo del secondo pilastro sale al 2%, con rendimenti medi del 6,1% nel 2025 e 5,4% nel 2026 e copertura del 122,5% a fine agosto 2026.",
+      "description": "Dal 1° gennaio 2027 il tasso minimo LPP sale al 2%; rendimenti medi: 6,1% nel 2025 e 5,4% fino a fine agosto 2026; copertura media: 122,5% a fine agosto 2026.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
