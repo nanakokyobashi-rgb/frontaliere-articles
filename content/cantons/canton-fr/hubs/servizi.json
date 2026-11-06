@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "c1d5dd0ca28a04be817b99edbe3959d13d0161775eea17c225a150ed2ea529c7",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "49067b3610d7689bd30d8f9f9fe530304744d2870729bdfc95f6657e40553b85",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -18,13 +18,8 @@
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-11-05T00:59:56.280Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T13:31:40.660Z",
       "keyFacts": 0
     }
   ],
@@ -100,24 +95,25 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Fribourg",
-              "value": "4 °C",
-              "detail": "oggi da 3 a 10 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Arbeitslosigkeit im Kanton Freiburg im Oktober 2026 unverändert bei 2,5 %",
+              "date": "2026-11-05T08:14:22.000Z",
+              "url": "https://www.fr.ch/de/vwbd/ama/news/arbeitslosigkeit-im-kanton-freiburg-im-oktober-2026-unveraendert-bei-25"
+            },
+            {
+              "label": "Chômage stable dans le canton de Fribourg en octobre 2026, à 2,5%",
+              "date": "2026-11-05T08:14:22.000Z",
+              "url": "https://www.fr.ch/deef/spe/actualites/chomage-stable-dans-le-canton-de-fribourg-en-octobre-2026-a-25"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-05T07:32:32.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-272"
+            },
             {
               "label": "Un règlement de parking plus efficace et équitable",
               "date": "2026-11-04",
@@ -132,24 +128,9 @@
               "label": "Bruno Boschung zum Leiter des RAV Zentrum des Kantons Freiburg ernannt",
               "date": "2026-11-02T06:44:07.000Z",
               "url": "https://www.fr.ch/de/vwbd/ama/news/bruno-boschung-zum-leiter-des-rav-zentrum-des-kantons-freiburg-ernannt"
-            },
-            {
-              "label": "Movember : lumière sur la physiothérapie et la médecine nucléaire dans la prise en charge du cancer de la prostate",
-              "date": "2026-11-02",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/movember-lumiere-sur-la-physiotherapie-et-la-medecine-nucleaire-dans-la-prise-en-charge-du-cancer-de-la-prostate"
-            },
-            {
-              "label": "Eintragungen - Öffnungszeiten zum Jahresende",
-              "date": "2026-10-27T15:53:10.000Z",
-              "url": "https://www.fr.ch/de/vwbd/hra/news/eintragungen-oeffnungszeiten-zum-jahresende-0"
-            },
-            {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-10-21T07:24:32.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-271"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -229,7 +210,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "FR",
@@ -302,24 +283,25 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Fribourg",
-              "value": "4 °C",
-              "detail": "today from 3 to 10 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Arbeitslosigkeit im Kanton Freiburg im Oktober 2026 unverändert bei 2,5 %",
+              "date": "2026-11-05T08:14:22.000Z",
+              "url": "https://www.fr.ch/de/vwbd/ama/news/arbeitslosigkeit-im-kanton-freiburg-im-oktober-2026-unveraendert-bei-25"
+            },
+            {
+              "label": "Chômage stable dans le canton de Fribourg en octobre 2026, à 2,5%",
+              "date": "2026-11-05T08:14:22.000Z",
+              "url": "https://www.fr.ch/deef/spe/actualites/chomage-stable-dans-le-canton-de-fribourg-en-octobre-2026-a-25"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-05T07:32:32.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-272"
+            },
             {
               "label": "Un règlement de parking plus efficace et équitable",
               "date": "2026-11-04",
@@ -334,24 +316,9 @@
               "label": "Bruno Boschung zum Leiter des RAV Zentrum des Kantons Freiburg ernannt",
               "date": "2026-11-02T06:44:07.000Z",
               "url": "https://www.fr.ch/de/vwbd/ama/news/bruno-boschung-zum-leiter-des-rav-zentrum-des-kantons-freiburg-ernannt"
-            },
-            {
-              "label": "Movember : lumière sur la physiothérapie et la médecine nucléaire dans la prise en charge du cancer de la prostate",
-              "date": "2026-11-02",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/movember-lumiere-sur-la-physiotherapie-et-la-medecine-nucleaire-dans-la-prise-en-charge-du-cancer-de-la-prostate"
-            },
-            {
-              "label": "Eintragungen - Öffnungszeiten zum Jahresende",
-              "date": "2026-10-27T15:53:10.000Z",
-              "url": "https://www.fr.ch/de/vwbd/hra/news/eintragungen-oeffnungszeiten-zum-jahresende-0"
-            },
-            {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-10-21T07:24:32.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-271"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +394,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "FR",
@@ -500,24 +467,25 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Fribourg",
-              "value": "4 °C",
-              "detail": "heute 3 bis 10 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Arbeitslosigkeit im Kanton Freiburg im Oktober 2026 unverändert bei 2,5 %",
+              "date": "2026-11-05T08:14:22.000Z",
+              "url": "https://www.fr.ch/de/vwbd/ama/news/arbeitslosigkeit-im-kanton-freiburg-im-oktober-2026-unveraendert-bei-25"
+            },
+            {
+              "label": "Chômage stable dans le canton de Fribourg en octobre 2026, à 2,5%",
+              "date": "2026-11-05T08:14:22.000Z",
+              "url": "https://www.fr.ch/deef/spe/actualites/chomage-stable-dans-le-canton-de-fribourg-en-octobre-2026-a-25"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-05T07:32:32.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-272"
+            },
             {
               "label": "Un règlement de parking plus efficace et équitable",
               "date": "2026-11-04",
@@ -532,24 +500,9 @@
               "label": "Bruno Boschung zum Leiter des RAV Zentrum des Kantons Freiburg ernannt",
               "date": "2026-11-02T06:44:07.000Z",
               "url": "https://www.fr.ch/de/vwbd/ama/news/bruno-boschung-zum-leiter-des-rav-zentrum-des-kantons-freiburg-ernannt"
-            },
-            {
-              "label": "Movember : lumière sur la physiothérapie et la médecine nucléaire dans la prise en charge du cancer de la prostate",
-              "date": "2026-11-02",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/movember-lumiere-sur-la-physiotherapie-et-la-medecine-nucleaire-dans-la-prise-en-charge-du-cancer-de-la-prostate"
-            },
-            {
-              "label": "Eintragungen - Öffnungszeiten zum Jahresende",
-              "date": "2026-10-27T15:53:10.000Z",
-              "url": "https://www.fr.ch/de/vwbd/hra/news/eintragungen-oeffnungszeiten-zum-jahresende-0"
-            },
-            {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-10-21T07:24:32.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-271"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -625,7 +578,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "FR",
@@ -698,24 +651,25 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Fribourg",
-              "value": "4 °C",
-              "detail": "aujourd’hui de 3 à 10 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Arbeitslosigkeit im Kanton Freiburg im Oktober 2026 unverändert bei 2,5 %",
+              "date": "2026-11-05T08:14:22.000Z",
+              "url": "https://www.fr.ch/de/vwbd/ama/news/arbeitslosigkeit-im-kanton-freiburg-im-oktober-2026-unveraendert-bei-25"
+            },
+            {
+              "label": "Chômage stable dans le canton de Fribourg en octobre 2026, à 2,5%",
+              "date": "2026-11-05T08:14:22.000Z",
+              "url": "https://www.fr.ch/deef/spe/actualites/chomage-stable-dans-le-canton-de-fribourg-en-octobre-2026-a-25"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-05T07:32:32.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-272"
+            },
             {
               "label": "Un règlement de parking plus efficace et équitable",
               "date": "2026-11-04",
@@ -730,24 +684,9 @@
               "label": "Bruno Boschung zum Leiter des RAV Zentrum des Kantons Freiburg ernannt",
               "date": "2026-11-02T06:44:07.000Z",
               "url": "https://www.fr.ch/de/vwbd/ama/news/bruno-boschung-zum-leiter-des-rav-zentrum-des-kantons-freiburg-ernannt"
-            },
-            {
-              "label": "Movember : lumière sur la physiothérapie et la médecine nucléaire dans la prise en charge du cancer de la prostate",
-              "date": "2026-11-02",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/movember-lumiere-sur-la-physiotherapie-et-la-medecine-nucleaire-dans-la-prise-en-charge-du-cancer-de-la-prostate"
-            },
-            {
-              "label": "Eintragungen - Öffnungszeiten zum Jahresende",
-              "date": "2026-10-27T15:53:10.000Z",
-              "url": "https://www.fr.ch/de/vwbd/hra/news/eintragungen-oeffnungszeiten-zum-jahresende-0"
-            },
-            {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-10-21T07:24:32.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-271"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -819,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

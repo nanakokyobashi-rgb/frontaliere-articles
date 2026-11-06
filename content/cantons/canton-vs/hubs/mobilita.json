@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "4b0a3778d2e04172780731842f1fcb2881fa5536331fb3eb8ce0bcece5eef6a5",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "4ad323b91e97a695878e7a7e5ac4ab12993100f62a2a65eb538a984da3d12619",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T01:51:30.468Z",
+      "updatedAt": "2026-11-05T11:32:49.603Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T13:31:40.660Z",
       "keyFacts": 0
     }
   ],
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "20",
+          "value": "22",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "14",
+          "value": "15",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         }
       ],
@@ -139,7 +139,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T11:32:49.603Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -177,7 +177,7 @@
               "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -247,7 +247,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "VS",
@@ -262,12 +262,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "20",
+          "value": "22",
           "note": "reports as of 5 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "14",
+          "value": "15",
           "note": "reports as of 5 November 2026"
         }
       ],
@@ -364,7 +364,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T11:32:49.603Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -402,7 +402,7 @@
               "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -472,7 +472,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "VS",
@@ -487,12 +487,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "20",
+          "value": "22",
           "note": "Meldungen vom 5. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "14",
+          "value": "15",
           "note": "Meldungen vom 5. November 2026"
         }
       ],
@@ -589,7 +589,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T11:32:49.603Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -627,7 +627,7 @@
               "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -697,7 +697,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "VS",
@@ -712,12 +712,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "20",
+          "value": "22",
           "note": "signalements au 5 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "14",
+          "value": "15",
           "note": "signalements au 5 novembre 2026"
         }
       ],
@@ -814,7 +814,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T11:32:49.603Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -852,7 +852,7 @@
               "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -922,7 +922,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

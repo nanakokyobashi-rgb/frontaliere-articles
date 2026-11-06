@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "fisco",
-  "updatedAt": "2026-10-31T13:52:20.998Z",
-  "contentHash": "4f13027ddd2b450d3bbb0436e8ae1c90355ad6d651c6a82445cc9b6bd485f78c",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "99d8cf2645b4412a16267f4df969b4c19a9f57b98d1a364fa9485535a8182a88",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T21:45:03.956Z",
+      "updatedAt": "2026-11-05T13:31:40.660Z",
       "keyFacts": 0
     }
   ],
@@ -120,10 +120,16 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Aumento tasso disoccupazione ottobre in Canton Vallese",
+          "url": "/articoli-vallese/aumento-tasso-disoccupazione-ottobre/",
+          "excerpt": "Alla fine di ottobre, 6'082 disoccupati risultavano iscritti presso gli Uffici regionali di collocamento del Vallese, 327 in più rispetto al mese precedente.",
+          "date": "2026-11-05T14:49:33.548Z"
+        },
         {
           "title": "Imposta successione Vallese: aliquote e esenzioni",
           "url": "/articoli-svizzera/successione-donazione-vallese-guida/",
@@ -194,7 +200,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-31T13:52:20.998Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "VS",
@@ -292,10 +298,16 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Increase in unemployment rate in October in the Canton of Valais",
+          "url": "/en/valais-articles/increase-unemployment-rate-october/",
+          "excerpt": "At the end of October, 6,082 unemployed people were registered with the Valais Regional Employment Offices, 327 more than in the previous month.",
+          "date": "2026-11-05T14:49:33.548Z"
+        },
         {
           "title": "Valais inheritance tax: rates and exemptions",
           "url": "/en/swiss-articles/succession-donation-valais-guide/",
@@ -366,7 +378,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-31T13:52:20.998Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "VS",
@@ -464,10 +476,16 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Im Oktober steigt die Arbeitslosenquote im Kanton Wallis",
+          "url": "/de/wallis-artikel/tatsatz-arbeitslosigkeit-oktober/",
+          "excerpt": "Ende Oktober waren 6.082 Arbeitslose bei den Regionalen Arbeitsämtern des Wallis registriert, 327 mehr als im Vormonat.",
+          "date": "2026-11-05T14:49:33.548Z"
+        },
         {
           "title": "Erbschaftssteuer Wallis: Steuersätze und Befreiungen",
           "url": "/de/schweiz-artikel/erbschaft-schenkung-wallis-anleitung/",
@@ -538,7 +556,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-31T13:52:20.998Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "VS",
@@ -636,10 +654,16 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Hausse du taux de chômage en octobre dans le canton du Valais",
+          "url": "/fr/articles-valais/hausse-taux-chomage-octobre/",
+          "excerpt": "Fin octobre, 6 082 chômeurs étaient enregistrés auprès des Bureaux régionaux de l’emploi du Valais, soit 327 de plus que le mois précédent.",
+          "date": "2026-11-05T14:49:33.548Z"
+        },
         {
           "title": "Impôt succession Valais : taux et exonérations",
           "url": "/fr/articles-suisse/succession-donation-valais-guide/",
@@ -710,7 +734,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-31T13:52:20.998Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

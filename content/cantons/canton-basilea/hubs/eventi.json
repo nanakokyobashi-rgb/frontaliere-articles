@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "19c3aced056994defd6c50510998f9488e7ba42138840136cf3c77909e0c055b",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "082a26f85d19f8615845d6d6d9ee9d24a89dee9e872be3ed14274b7b3d68e2b1",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Inaugurazione della mostra “Figure per l’eternità” di Peter Moilliet",
-              "detail": "Allschwil",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/inaugurazione-della-mostra-figure-per-leternita-di-peter-moilliet/"
-            },
-            {
-              "label": "KOPFKIND Lesung mit Christine Johanna Keller",
-              "detail": "Allschwil",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kopfkind-lesung-mit-christine-johanna-keller/"
-            },
-            {
-              "label": "Basler Madrigalisten: Swiss Music",
-              "detail": "Zunftsaal Schmiedenhof",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/events/music/basel/basel-madrigalists-swiss-music_A43SXQc"
-            },
-            {
-              "label": "SIGNS, GAMES, AND MESSAGES",
-              "detail": "Museum Kleines Klingental, Basel",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/signs-games-and-messages-1/"
-            },
-            {
-              "label": "Endstation",
-              "detail": "Basel",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
-            },
-            {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal — in corso, ultimo giorno: 2 dicembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
-              "detail": "Basilea, Basel — in corso, ultimo giorno: 25 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — in corso, ultimo giorno: 5 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Mostra “ <Figuren für die Ewigkeit> ” di Peter Moilliet",
               "detail": "Allschwil",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-figuren-fuer-die-ewigkeit-di-peter-moilliet/"
+            },
+            {
+              "label": "PANTHEON GOES LIVE - 6. November 2026",
+              "detail": "Muttenz",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pantheon-goes-live-6-november-2026/"
+            },
+            {
+              "label": "Creme Wiesn",
+              "detail": "Messe Basel Congress Center, Basel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/creme-wiesn/"
+            },
+            {
+              "label": "Lunik - Cycle breaker Tour",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lunik-cycle-breaker-tour_AMs3qrj"
+            },
+            {
+              "label": "Spinnen - Wesen aus einer anderen Welt",
+              "detail": "Gemeindehaus Riehen, Riehen",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/riehen/spinnen-wesen-aus-einer-anderen-welt_AFypsMm"
+            },
+            {
+              "label": "Stimmungen. Lieder, sånger, lauluja.",
+              "detail": "Kulturkirche Paulus",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/stimmungen-lieder-snger-lauluja_AERRD3R"
+            },
+            {
+              "label": "24 Nights Eric Clapton Tribute Unplugged",
+              "detail": "Musik- und Kulturzentrum Don Bosco",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/24-nights-eric-clapton-tribute-unplugged_AMi6S69"
+            },
+            {
+              "label": "24 Nights Eric Clapton Tribute Unplugged",
+              "detail": "Basel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/24-nights-eric-clapton-tribute-unplugged/"
+            },
+            {
+              "label": "Andreas Rebers - I gang grad wieder",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/andreas-rebers-i-gang-grad-wieder/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -138,64 +138,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Opening of the exhibition ‘Figures for Eternity’ by Peter Moilliet",
-              "detail": "Allschwil",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/inaugurazione-della-mostra-figure-per-leternita-di-peter-moilliet/"
-            },
-            {
-              "label": "KOPFKIND Lesung mit Christine Johanna Keller",
-              "detail": "Allschwil",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kopfkind-lesung-mit-christine-johanna-keller/"
-            },
-            {
-              "label": "Basel Madrigalists: Swiss Music",
-              "detail": "Zunftsaal Schmiedenhof",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/events/music/basel/basel-madrigalists-swiss-music_A43SXQc"
-            },
-            {
-              "label": "SIGNS, GAMES, AND MESSAGES",
-              "detail": "Museum Kleines Klingental, Basel",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/signs-games-and-messages-1/"
-            },
-            {
-              "label": "Endstation",
-              "detail": "Basel",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
-            },
-            {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel — ongoing, last day: 18 November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal — ongoing, last day: 2 December 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — ongoing, last day: 25 November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — ongoing, last day: 5 November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Exhibition: \" <Figuren für die Ewigkeit> \" by Peter Moilliet",
               "detail": "Allschwil",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-figuren-fuer-die-ewigkeit-di-peter-moilliet/"
+            },
+            {
+              "label": "PANTHEON GOES LIVE - 6. November 2026",
+              "detail": "Muttenz",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pantheon-goes-live-6-november-2026/"
+            },
+            {
+              "label": "Creme Wiesn",
+              "detail": "Messe Basel Congress Center, Basel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/creme-wiesn/"
+            },
+            {
+              "label": "Lunik-C bre",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lunik-cycle-breaker-tour_AMs3qrj"
+            },
+            {
+              "label": "Spinnen - Wesen aus einer anderen Welt",
+              "detail": "Gemeindehaus Riehen, Riehen",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/riehen/spinnen-wesen-aus-einer-anderen-welt_AFypsMm"
+            },
+            {
+              "label": "Stimmungen. Lieder, sånger, lauluja.",
+              "detail": "Kulturkirche Paulus",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/stimmungen-lieder-snger-lauluja_AERRD3R"
+            },
+            {
+              "label": "24 Nights Eric Clapton Tribute Unplugged",
+              "detail": "Musik- und Kulturzentrum Don Bosco",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/24-nights-eric-clapton-tribute-unplugged_AMi6S69"
+            },
+            {
+              "label": "24 Nights Eric Clapton Tribute Unplugged",
+              "detail": "Basel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/24-nights-eric-clapton-tribute-unplugged/"
+            },
+            {
+              "label": "Andreas Rebers - I gang grad wieder",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/andreas-rebers-i-gang-grad-wieder/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel — ongoing, last day: 15 November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -243,64 +243,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Vernissage \"Figuren für die Ewigkeit\" Peter Moilliet",
-              "detail": "Allschwil",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/inaugurazione-della-mostra-figure-per-leternita-di-peter-moilliet/"
-            },
-            {
-              "label": "KOPFKIND Lesung mit Christine Johanna Keller",
-              "detail": "Allschwil",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kopfkind-lesung-mit-christine-johanna-keller/"
-            },
-            {
-              "label": "Basler Madrigalisten: Swiss Music",
-              "detail": "Zunftsaal Schmiedenhof",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/events/music/basel/basel-madrigalists-swiss-music_A43SXQc"
-            },
-            {
-              "label": "SIGNS, GAMES AND MESSAGES",
-              "detail": "Museum Kleines Klingental, Basel",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/signs-games-and-messages-1/"
-            },
-            {
-              "label": "Endstation",
-              "detail": "Basel",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
-            },
-            {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal — läuft, letzter Tag: 2. Dezember 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — läuft, letzter Tag: 25. November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — läuft, letzter Tag: 5. November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Ausstellung \"Figuren für die Ewigkeit\" Peter Moilliet",
               "detail": "Allschwil",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-figuren-fuer-die-ewigkeit-di-peter-moilliet/"
+            },
+            {
+              "label": "PANTHEON GOES LIVE - 6. November 2026",
+              "detail": "Muttenz",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pantheon-goes-live-6-november-2026/"
+            },
+            {
+              "label": "Creme Wiesn",
+              "detail": "Messe Basel Congress Center, Basel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/creme-wiesn/"
+            },
+            {
+              "label": "Lunik – Fahrrad-Breaker-Tour",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lunik-cycle-breaker-tour_AMs3qrj"
+            },
+            {
+              "label": "Spinnen - Wesen aus einer anderen Welt",
+              "detail": "Gemeindehaus Riehen, Riehen",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/riehen/spinnen-wesen-aus-einer-anderen-welt_AFypsMm"
+            },
+            {
+              "label": "Stimmungen. Lieder, sånger, lauluja.",
+              "detail": "Kulturkirche Paulus",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/stimmungen-lieder-snger-lauluja_AERRD3R"
+            },
+            {
+              "label": "24 Nights Eric Clapton Tribute Unplugged",
+              "detail": "Musik- und Kulturzentrum Don Bosco",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/24-nights-eric-clapton-tribute-unplugged_AMi6S69"
+            },
+            {
+              "label": "24 Nights Eric Clapton Tribute Unplugged",
+              "detail": "Basel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/24-nights-eric-clapton-tribute-unplugged/"
+            },
+            {
+              "label": "Andreas Rebers - I gang grad wieder",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/andreas-rebers-i-gang-grad-wieder/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -348,64 +348,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Vernissage « Des figures pour l'éternité » de Peter Moilliet",
-              "detail": "Allschwil",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/inaugurazione-della-mostra-figure-per-leternita-di-peter-moilliet/"
-            },
-            {
-              "label": "KOPFKIND Lesung mit Christine Johanna Keller",
-              "detail": "Allschwil",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kopfkind-lesung-mit-christine-johanna-keller/"
-            },
-            {
-              "label": "Les Madrigalistes de Bâle : Swiss Music",
-              "detail": "Zunftsaal Schmiedenhof",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/events/music/basel/basel-madrigalists-swiss-music_A43SXQc"
-            },
-            {
-              "label": "SIGNS, GAMES AND MESSAGES",
-              "detail": "Museum Kleines Klingental, Basel",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/signs-games-and-messages-1/"
-            },
-            {
-              "label": "Endstation",
-              "detail": "Basel",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
-            },
-            {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal — en cours, dernier jour : 2 décembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — en cours, dernier jour : 25 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — en cours, dernier jour : 5 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Exposition « <Figuren für die Ewigkeit> » de Peter Moilliet",
               "detail": "Allschwil",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-figuren-fuer-die-ewigkeit-di-peter-moilliet/"
+            },
+            {
+              "label": "PANTHEON GOES LIVE - 6. November 2026",
+              "detail": "Muttenz",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pantheon-goes-live-6-november-2026/"
+            },
+            {
+              "label": "Creme Wiesn",
+              "detail": "Messe Basel Congress Center, Basel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/creme-wiesn/"
+            },
+            {
+              "label": "Lunik - Tour du briseur de vélo",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lunik-cycle-breaker-tour_AMs3qrj"
+            },
+            {
+              "label": "Spinnen - Wesen aus einer anderen Welt",
+              "detail": "Gemeindehaus Riehen, Riehen",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/riehen/spinnen-wesen-aus-einer-anderen-welt_AFypsMm"
+            },
+            {
+              "label": "Stimmungen. Lieder, sånger, lauluja.",
+              "detail": "Kulturkirche Paulus",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/stimmungen-lieder-snger-lauluja_AERRD3R"
+            },
+            {
+              "label": "24 Nights Eric Clapton Tribute Unplugged",
+              "detail": "Musik- und Kulturzentrum Don Bosco",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/24-nights-eric-clapton-tribute-unplugged_AMi6S69"
+            },
+            {
+              "label": "24 Nights Eric Clapton Tribute Unplugged",
+              "detail": "Basel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/24-nights-eric-clapton-tribute-unplugged/"
+            },
+            {
+              "label": "Andreas Rebers - I gang grad wieder",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/andreas-rebers-i-gang-grad-wieder/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "pensioni",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "c7358eb964960aa422d61c685768513cf30498ea65a2150f558d8933c20c9980",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "8a6687c5279ce6c4dcec7c2f867df61f6800a1bf72ff8dcc8801e6e80537b5c6",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-05T13:31:40.660Z",
       "keyFacts": 0
     }
   ],
@@ -137,7 +137,7 @@
           "items": [
             {
               "label": "«Uber-Modell»: Bei der AHV gibt es keine Wahlfreiheit",
-              "date": "2026-11-03",
+              "date": "2026-11-05",
               "url": "https://svazurich.ch/aktuell/aktuell/news/kontext/-uber-modell---bei-der-ahv-gibt-es-keine-wahlfreiheit.html"
             },
             {
@@ -166,7 +166,7 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -238,7 +238,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "ZH",
@@ -348,7 +348,7 @@
           "items": [
             {
               "label": "«Uber-Modell»: Bei der AHV gibt es keine Wahlfreiheit",
-              "date": "2026-11-03",
+              "date": "2026-11-05",
               "url": "https://svazurich.ch/aktuell/aktuell/news/kontext/-uber-modell---bei-der-ahv-gibt-es-keine-wahlfreiheit.html"
             },
             {
@@ -377,7 +377,7 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -449,7 +449,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "ZH",
@@ -559,7 +559,7 @@
           "items": [
             {
               "label": "«Uber-Modell»: Bei der AHV gibt es keine Wahlfreiheit",
-              "date": "2026-11-03",
+              "date": "2026-11-05",
               "url": "https://svazurich.ch/aktuell/aktuell/news/kontext/-uber-modell---bei-der-ahv-gibt-es-keine-wahlfreiheit.html"
             },
             {
@@ -588,7 +588,7 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -660,7 +660,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "ZH",
@@ -770,7 +770,7 @@
           "items": [
             {
               "label": "«Uber-Modell»: Bei der AHV gibt es keine Wahlfreiheit",
-              "date": "2026-11-03",
+              "date": "2026-11-05",
               "url": "https://svazurich.ch/aktuell/aktuell/news/kontext/-uber-modell---bei-der-ahv-gibt-es-keine-wahlfreiheit.html"
             },
             {
@@ -799,7 +799,7 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -871,7 +871,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

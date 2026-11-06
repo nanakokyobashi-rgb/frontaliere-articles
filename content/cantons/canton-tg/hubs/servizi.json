@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "eb206666a7bc0975538f515a6d29713a3376c8aed8ba9bd4f33fe778e0ca64da",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "c5d1172e4bc9f7b34e0b22ac688e5d6f06e8fa4f71185b145d44bca1111e4cec",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -18,13 +18,8 @@
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-11-05T00:59:56.280Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T13:31:40.660Z",
       "keyFacts": 0
     }
   ],
@@ -95,24 +90,25 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Frauenfeld",
-              "value": "4 °C",
-              "detail": "oggi da 3 a 9 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Arbeitslosenquote bleibt im Oktober stabil",
+              "date": "2026-11-05",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80356"
+            },
+            {
+              "label": "Arbeitslosenquote bleibt im Oktober stabil",
+              "date": "2026-11-05",
+              "url": "https://www.tg.ch/news.html/485/news/80643"
+            },
+            {
+              "label": "Neue Familienabteilung: Alles unter einem Dach",
+              "date": "2026-11-05",
+              "url": "https://www.stgag.ch/news/detail/2026/11/05/neue-familienabteilung-alles-unter-einem-dach/"
+            },
             {
               "label": "𝗭𝘂𝗿ü𝗰𝗸 𝘇𝘂𝗿 𝗡𝗼𝗿𝗺: 𝗕𝘂𝗻𝗱𝗲𝘀𝗿𝗮𝘁 𝗳ä𝗵𝗿𝘁 𝗞𝘂𝗿𝘇𝗮𝗿𝗯𝗲𝗶𝘁 𝗮𝗯 𝟮𝟬𝟮𝟳 𝘀𝗰𝗵𝗿𝗶𝘁𝘁𝘄𝗲𝗶𝘀𝗲 𝘇𝘂𝗿ü𝗰𝗸",
               "date": "2026-10-21",
@@ -127,24 +123,9 @@
               "label": "Tag der offenen Tür Klinik St. Katharinental",
               "date": "2026-10-14",
               "url": "https://www.stgag.ch/news/detail/2026/10/14/tag-der-offenen-tuer-klinik-st-katharinental/"
-            },
-            {
-              "label": "Die Arbeitslosenquote bleibt unverändert",
-              "date": "2026-10-06",
-              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80356"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt unverändert",
-              "date": "2026-10-06",
-              "url": "https://www.tg.ch/news.html/485/news/80354"
-            },
-            {
-              "label": "Thurgauer Arbeitsmarkt zeigt sich stabil – Konjunkturaussichten hellen sich auf",
-              "date": "2026-09-07",
-              "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -224,7 +205,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "TG",
@@ -292,24 +273,25 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Frauenfeld",
-              "value": "4 °C",
-              "detail": "today from 3 to 9 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Arbeitslosenquote bleibt im Oktober stabil",
+              "date": "2026-11-05",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80356"
+            },
+            {
+              "label": "Arbeitslosenquote bleibt im Oktober stabil",
+              "date": "2026-11-05",
+              "url": "https://www.tg.ch/news.html/485/news/80643"
+            },
+            {
+              "label": "Neue Familienabteilung: Alles unter einem Dach",
+              "date": "2026-11-05",
+              "url": "https://www.stgag.ch/news/detail/2026/11/05/neue-familienabteilung-alles-unter-einem-dach/"
+            },
             {
               "label": "𝗭𝘂𝗿ü𝗰𝗸 𝘇𝘂𝗿 𝗡𝗼𝗿𝗺: 𝗕𝘂𝗻𝗱𝗲𝘀𝗿𝗮𝘁 𝗳ä𝗵𝗿𝘁 𝗞𝘂𝗿𝘇𝗮𝗿𝗯𝗲𝗶𝘁 𝗮𝗯 𝟮𝟬𝟮𝟳 𝘀𝗰𝗵𝗿𝗶𝘁𝘁𝘄𝗲𝗶𝘀𝗲 𝘇𝘂𝗿ü𝗰𝗸",
               "date": "2026-10-21",
@@ -324,24 +306,9 @@
               "label": "Tag der offenen Tür Klinik St. Katharinental",
               "date": "2026-10-14",
               "url": "https://www.stgag.ch/news/detail/2026/10/14/tag-der-offenen-tuer-klinik-st-katharinental/"
-            },
-            {
-              "label": "Die Arbeitslosenquote bleibt unverändert",
-              "date": "2026-10-06",
-              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80356"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt unverändert",
-              "date": "2026-10-06",
-              "url": "https://www.tg.ch/news.html/485/news/80354"
-            },
-            {
-              "label": "Thurgauer Arbeitsmarkt zeigt sich stabil – Konjunkturaussichten hellen sich auf",
-              "date": "2026-09-07",
-              "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +384,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "TG",
@@ -485,24 +452,25 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Frauenfeld",
-              "value": "4 °C",
-              "detail": "heute 3 bis 9 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Arbeitslosenquote bleibt im Oktober stabil",
+              "date": "2026-11-05",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80356"
+            },
+            {
+              "label": "Arbeitslosenquote bleibt im Oktober stabil",
+              "date": "2026-11-05",
+              "url": "https://www.tg.ch/news.html/485/news/80643"
+            },
+            {
+              "label": "Neue Familienabteilung: Alles unter einem Dach",
+              "date": "2026-11-05",
+              "url": "https://www.stgag.ch/news/detail/2026/11/05/neue-familienabteilung-alles-unter-einem-dach/"
+            },
             {
               "label": "𝗭𝘂𝗿ü𝗰𝗸 𝘇𝘂𝗿 𝗡𝗼𝗿𝗺: 𝗕𝘂𝗻𝗱𝗲𝘀𝗿𝗮𝘁 𝗳ä𝗵𝗿𝘁 𝗞𝘂𝗿𝘇𝗮𝗿𝗯𝗲𝗶𝘁 𝗮𝗯 𝟮𝟬𝟮𝟳 𝘀𝗰𝗵𝗿𝗶𝘁𝘁𝘄𝗲𝗶𝘀𝗲 𝘇𝘂𝗿ü𝗰𝗸",
               "date": "2026-10-21",
@@ -517,24 +485,9 @@
               "label": "Tag der offenen Tür Klinik St. Katharinental",
               "date": "2026-10-14",
               "url": "https://www.stgag.ch/news/detail/2026/10/14/tag-der-offenen-tuer-klinik-st-katharinental/"
-            },
-            {
-              "label": "Die Arbeitslosenquote bleibt unverändert",
-              "date": "2026-10-06",
-              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80356"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt unverändert",
-              "date": "2026-10-06",
-              "url": "https://www.tg.ch/news.html/485/news/80354"
-            },
-            {
-              "label": "Thurgauer Arbeitsmarkt zeigt sich stabil – Konjunkturaussichten hellen sich auf",
-              "date": "2026-09-07",
-              "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -610,7 +563,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "TG",
@@ -678,24 +631,25 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Frauenfeld",
-              "value": "4 °C",
-              "detail": "aujourd’hui de 3 à 9 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Arbeitslosenquote bleibt im Oktober stabil",
+              "date": "2026-11-05",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80356"
+            },
+            {
+              "label": "Arbeitslosenquote bleibt im Oktober stabil",
+              "date": "2026-11-05",
+              "url": "https://www.tg.ch/news.html/485/news/80643"
+            },
+            {
+              "label": "Neue Familienabteilung: Alles unter einem Dach",
+              "date": "2026-11-05",
+              "url": "https://www.stgag.ch/news/detail/2026/11/05/neue-familienabteilung-alles-unter-einem-dach/"
+            },
             {
               "label": "𝗭𝘂𝗿ü𝗰𝗸 𝘇𝘂𝗿 𝗡𝗼𝗿𝗺: 𝗕𝘂𝗻𝗱𝗲𝘀𝗿𝗮𝘁 𝗳ä𝗵𝗿𝘁 𝗞𝘂𝗿𝘇𝗮𝗿𝗯𝗲𝗶𝘁 𝗮𝗯 𝟮𝟬𝟮𝟳 𝘀𝗰𝗵𝗿𝗶𝘁𝘁𝘄𝗲𝗶𝘀𝗲 𝘇𝘂𝗿ü𝗰𝗸",
               "date": "2026-10-21",
@@ -710,24 +664,9 @@
               "label": "Tag der offenen Tür Klinik St. Katharinental",
               "date": "2026-10-14",
               "url": "https://www.stgag.ch/news/detail/2026/10/14/tag-der-offenen-tuer-klinik-st-katharinental/"
-            },
-            {
-              "label": "Die Arbeitslosenquote bleibt unverändert",
-              "date": "2026-10-06",
-              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80356"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt unverändert",
-              "date": "2026-10-06",
-              "url": "https://www.tg.ch/news.html/485/news/80354"
-            },
-            {
-              "label": "Thurgauer Arbeitsmarkt zeigt sich stabil – Konjunkturaussichten hellen sich auf",
-              "date": "2026-09-07",
-              "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -799,7 +738,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

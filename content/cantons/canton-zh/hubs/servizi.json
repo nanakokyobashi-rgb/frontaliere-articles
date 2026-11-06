@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "1816817442445c01d2e70d68db3fa0808377969bf5601cd77929318998f10338",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "786cb56e327be0ccaf4a40d83205b6b9701567f4c4a87b60e317b3724304da27",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-05T03:14:15.858Z",
+      "updatedAt": "2026-11-05T12:34:21.473Z",
       "keyFacts": 0
     },
     {
@@ -23,13 +23,8 @@
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-11-05T00:59:56.280Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T13:31:40.660Z",
       "keyFacts": 0
     }
   ],
@@ -86,11 +81,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-04T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-05T23:00:00.000Z"
             },
             {
@@ -112,11 +102,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-09T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-10T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-05T03:14:15.858Z"
+          "updatedAt": "2026-11-05T12:34:21.473Z"
         },
         {
           "id": "aste-targhe",
@@ -150,24 +145,20 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "4 °C",
-              "detail": "oggi da 4 a 9 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Verhütung für Männer: Methoden, Sicherheit & Forschung",
+              "date": "2026-11-05T09:21:22.000Z",
+              "url": "https://www.usz.ch/verhuetung-fuer-maenner-methoden-sicherheit-forschung/"
+            },
+            {
+              "label": "Stabile Arbeitslosenquote, positive Geschäftslage",
+              "date": "2026-11-05",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/stabile-arbeitslosenquote-positive-geschaeftslage.html"
+            },
             {
               "label": "20 Jahre Clinical Trials Center am USZ: Gemeinsam Forschung ermöglichen",
               "date": "2026-11-03T07:54:02.000Z",
@@ -187,19 +178,9 @@
               "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
               "date": "2026-10-30T11:33:43.000Z",
               "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
-            },
-            {
-              "label": "Innosuisse-Förderung für «PhariX»",
-              "date": "2026-10-30T06:45:39.000Z",
-              "url": "https://www.usz.ch/innosuisse-foerderung-fuer-pharix/"
-            },
-            {
-              "label": "Gemeinsam gegen Brustkrebs: Ein starkes Zeichen für die Brustgesundheit",
-              "date": "2026-10-29T14:32:30.000Z",
-              "url": "https://www.usz.ch/gemeinsam-gegen-brustkrebs-ein-starkes-zeichen-fuer-die-brustgesundheit/"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -279,7 +260,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "ZH",
@@ -333,11 +314,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-04T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-05T23:00:00.000Z"
             },
             {
@@ -359,11 +335,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-09T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-10T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-05T03:14:15.858Z"
+          "updatedAt": "2026-11-05T12:34:21.473Z"
         },
         {
           "id": "aste-targhe",
@@ -397,24 +378,20 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "4 °C",
-              "detail": "today from 4 to 9 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Verhütung für Männer: Methoden, Sicherheit & Forschung",
+              "date": "2026-11-05T09:21:22.000Z",
+              "url": "https://www.usz.ch/verhuetung-fuer-maenner-methoden-sicherheit-forschung/"
+            },
+            {
+              "label": "Stabile Arbeitslosenquote, positive Geschäftslage",
+              "date": "2026-11-05",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/stabile-arbeitslosenquote-positive-geschaeftslage.html"
+            },
             {
               "label": "20 Jahre Clinical Trials Center am USZ: Gemeinsam Forschung ermöglichen",
               "date": "2026-11-03T07:54:02.000Z",
@@ -434,19 +411,9 @@
               "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
               "date": "2026-10-30T11:33:43.000Z",
               "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
-            },
-            {
-              "label": "Innosuisse-Förderung für «PhariX»",
-              "date": "2026-10-30T06:45:39.000Z",
-              "url": "https://www.usz.ch/innosuisse-foerderung-fuer-pharix/"
-            },
-            {
-              "label": "Gemeinsam gegen Brustkrebs: Ein starkes Zeichen für die Brustgesundheit",
-              "date": "2026-10-29T14:32:30.000Z",
-              "url": "https://www.usz.ch/gemeinsam-gegen-brustkrebs-ein-starkes-zeichen-fuer-die-brustgesundheit/"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -522,7 +489,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "ZH",
@@ -576,11 +543,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-04T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-05T23:00:00.000Z"
             },
             {
@@ -602,11 +564,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-09T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-10T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-05T03:14:15.858Z"
+          "updatedAt": "2026-11-05T12:34:21.473Z"
         },
         {
           "id": "aste-targhe",
@@ -640,24 +607,20 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "4 °C",
-              "detail": "heute 4 bis 9 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Verhütung für Männer: Methoden, Sicherheit & Forschung",
+              "date": "2026-11-05T09:21:22.000Z",
+              "url": "https://www.usz.ch/verhuetung-fuer-maenner-methoden-sicherheit-forschung/"
+            },
+            {
+              "label": "Stabile Arbeitslosenquote, positive Geschäftslage",
+              "date": "2026-11-05",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/stabile-arbeitslosenquote-positive-geschaeftslage.html"
+            },
             {
               "label": "20 Jahre Clinical Trials Center am USZ: Gemeinsam Forschung ermöglichen",
               "date": "2026-11-03T07:54:02.000Z",
@@ -677,19 +640,9 @@
               "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
               "date": "2026-10-30T11:33:43.000Z",
               "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
-            },
-            {
-              "label": "Innosuisse-Förderung für «PhariX»",
-              "date": "2026-10-30T06:45:39.000Z",
-              "url": "https://www.usz.ch/innosuisse-foerderung-fuer-pharix/"
-            },
-            {
-              "label": "Gemeinsam gegen Brustkrebs: Ein starkes Zeichen für die Brustgesundheit",
-              "date": "2026-10-29T14:32:30.000Z",
-              "url": "https://www.usz.ch/gemeinsam-gegen-brustkrebs-ein-starkes-zeichen-fuer-die-brustgesundheit/"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -765,7 +718,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "ZH",
@@ -819,11 +772,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-04T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-05T23:00:00.000Z"
             },
             {
@@ -845,11 +793,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-09T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-10T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-05T03:14:15.858Z"
+          "updatedAt": "2026-11-05T12:34:21.473Z"
         },
         {
           "id": "aste-targhe",
@@ -883,24 +836,20 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "4 °C",
-              "detail": "aujourd’hui de 4 à 9 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Verhütung für Männer: Methoden, Sicherheit & Forschung",
+              "date": "2026-11-05T09:21:22.000Z",
+              "url": "https://www.usz.ch/verhuetung-fuer-maenner-methoden-sicherheit-forschung/"
+            },
+            {
+              "label": "Stabile Arbeitslosenquote, positive Geschäftslage",
+              "date": "2026-11-05",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/stabile-arbeitslosenquote-positive-geschaeftslage.html"
+            },
             {
               "label": "20 Jahre Clinical Trials Center am USZ: Gemeinsam Forschung ermöglichen",
               "date": "2026-11-03T07:54:02.000Z",
@@ -920,19 +869,9 @@
               "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
               "date": "2026-10-30T11:33:43.000Z",
               "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
-            },
-            {
-              "label": "Innosuisse-Förderung für «PhariX»",
-              "date": "2026-10-30T06:45:39.000Z",
-              "url": "https://www.usz.ch/innosuisse-foerderung-fuer-pharix/"
-            },
-            {
-              "label": "Gemeinsam gegen Brustkrebs: Ein starkes Zeichen für die Brustgesundheit",
-              "date": "2026-10-29T14:32:30.000Z",
-              "url": "https://www.usz.ch/gemeinsam-gegen-brustkrebs-ein-starkes-zeichen-fuer-die-brustgesundheit/"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -1004,7 +943,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "3c2a5b8dabdcb3433738165567d09d5aff79a6f9fbd9926f15877e5d49991365",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "ce7eb8f6e51755822919f3537c2bdbf3040335eac5d6331cf5b229f06364f895",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "71",
+          "value": "72",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,36 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Théâtre - École Alambics : Prodiges / les Symphonistes d'Octodure [EN]",
-              "detail": "Martigny",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theatre-ecole-alambics-prodiges-les-symphonistes-doctodure-en/"
-            },
-            {
-              "label": "Le Bourgeois gentilhomme",
-              "detail": "Monthey",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-bourgeois-gentilhomme/"
-            },
-            {
-              "label": "martigny expo : Braderie d'automne [EN]",
-              "detail": "Martigny — in corso, ultimo giorno: 5 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martigny-expo-braderie-dautomne-en/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Theater: Aufführungen in Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
-            },
             {
               "label": "“Silentium est aurum”",
               "detail": "St-Séverin, Conthey",
@@ -91,6 +61,36 @@
               "detail": "Sion / Sitten, Sion",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-revue-valaisanne-2026/"
+            },
+            {
+              "label": "Jazz GmbH",
+              "detail": "Jazz Chälli, Visp",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/events/music/visp/jazz-llc_ArLfCn7"
+            },
+            {
+              "label": "Jazz, LLC",
+              "detail": "Jazz Chälli, Visp",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jazz-gmbh-1/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Galerie la Belle Toile : Vernissage - L'Éternité du fragile [EN]",
+              "detail": "Martigny",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/galerie-la-belle-toile-vernissage-leternite-du-fragile-en/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "VS",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "71",
+          "value": "72",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,36 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Théâtre - École Alambics : Prodiges / les Symphonistes d'Octodure [EN]",
-              "detail": "Martigny",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theatre-ecole-alambics-prodiges-les-symphonistes-doctodure-en/"
-            },
-            {
-              "label": "Le Bourgeois gentilhomme",
-              "detail": "Monthey",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-bourgeois-gentilhomme/"
-            },
-            {
-              "label": "martigny expo : Braderie d'automne [EN]",
-              "detail": "Martigny — ongoing, last day: 5 November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martigny-expo-braderie-dautomne-en/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Theater: Aufführungen in Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald — ongoing, last day: 8 November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
-            },
             {
               "label": "“Silentium est aurum”",
               "detail": "St-Séverin, Conthey",
@@ -196,6 +166,36 @@
               "detail": "Sion / Sitten, Sion",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-revue-valaisanne-2026/"
+            },
+            {
+              "label": "Jazz, LLC",
+              "detail": "Jazz Chälli, Visp",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/events/music/visp/jazz-llc_ArLfCn7"
+            },
+            {
+              "label": "Jazz, LLC",
+              "detail": "Jazz Chälli, Visp",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jazz-gmbh-1/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — ongoing, last day: 8 November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Galerie la Belle Toile : Vernissage - L'Éternité du fragile [EN]",
+              "detail": "Martigny",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/galerie-la-belle-toile-vernissage-leternite-du-fragile-en/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "VS",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "71",
+          "value": "72",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,36 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Théâtre - École Alambics : Prodiges / les Symphonistes d'Octodure [DE]",
-              "detail": "Martigny",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theatre-ecole-alambics-prodiges-les-symphonistes-doctodure-en/"
-            },
-            {
-              "label": "Le Bourgeois gentilhomme",
-              "detail": "Monthey",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-bourgeois-gentilhomme/"
-            },
-            {
-              "label": "martigny expo : Braderie d'automne [DE]",
-              "detail": "Martigny — läuft, letzter Tag: 5. November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martigny-expo-braderie-dautomne-en/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Theater: Aufführungen in Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
-            },
             {
               "label": "„Silentium est aurum“",
               "detail": "St-Séverin, Conthey",
@@ -301,6 +271,36 @@
               "detail": "Sion / Sitten, Sion",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-revue-valaisanne-2026/"
+            },
+            {
+              "label": "Jazz GmbH",
+              "detail": "Jazz Chälli, Visp",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/events/music/visp/jazz-llc_ArLfCn7"
+            },
+            {
+              "label": "Jazz GmbH",
+              "detail": "Jazz Chälli, Visp",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jazz-gmbh-1/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Galerie la Belle Toile : Vernissage - L'Éternité du fragile [DE]",
+              "detail": "Martigny",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/galerie-la-belle-toile-vernissage-leternite-du-fragile-en/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "71",
+          "value": "72",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,36 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Théâtre - École Alambics : Prodiges / les Symphonistes d'Octodure",
-              "detail": "Martigny",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theatre-ecole-alambics-prodiges-les-symphonistes-doctodure-en/"
-            },
-            {
-              "label": "Le Bourgeois gentilhomme",
-              "detail": "Monthey",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-bourgeois-gentilhomme/"
-            },
-            {
-              "label": "martigny expo : Braderie d'automne",
-              "detail": "Martigny — en cours, dernier jour : 5 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martigny-expo-braderie-dautomne-en/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Théâtre : représentations à Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
-            },
             {
               "label": "“ Silentium est aurum “",
               "detail": "St-Séverin, Conthey",
@@ -406,6 +376,36 @@
               "detail": "Sion / Sitten, Sion",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-revue-valaisanne-2026/"
+            },
+            {
+              "label": "Jazz S.A.R.L.",
+              "detail": "Jazz Chälli, Visp",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/events/music/visp/jazz-llc_ArLfCn7"
+            },
+            {
+              "label": "Jazz S.A.R.L.",
+              "detail": "Jazz Chälli, Visp",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jazz-gmbh-1/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
+              "label": "Théâtre : représentations à Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Galerie la Belle Toile : Vernissage - L'Éternité du fragile",
+              "detail": "Martigny",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/galerie-la-belle-toile-vernissage-leternite-du-fragile-en/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

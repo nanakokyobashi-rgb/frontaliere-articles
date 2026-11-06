@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "6426781f593038042764371565b2c7ba5ac38970b3da5aaa5d3adfa4ed66163d",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "7c439ba385a1e8ba429a131dea915218f214b0dac4cc470e0eaf60d1f7ed4242",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T01:51:30.468Z",
+      "updatedAt": "2026-11-05T11:32:49.603Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T13:31:40.660Z",
       "keyFacts": 0
     }
   ],
@@ -54,6 +54,11 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Svincolo autostradale Erstfeld, al chilometro 145.5 Situazione: pericolo Causa: oggetto sulla strada",
+              "value": "Traffico",
+              "date": "2026-11-05T11:26:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2026",
@@ -82,16 +87,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 10 novembre 2026",
               "date": "2026-10-27T12:59:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Area di servizio S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del traffico: corsie…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 12 novembre 2026",
-              "date": "2026-10-27T13:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T11:32:49.603Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +128,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -193,7 +192,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "UR",
@@ -230,6 +229,11 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Svincolo autostradale Erstfeld, al chilometro 145.5 Situazione: pericolo Causa: oggetto sulla strada",
+              "value": "Traffic",
+              "date": "2026-11-05T11:26:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
               "value": "Roadworks",
               "detail": "until 31 December 2026",
@@ -258,16 +262,10 @@
               "value": "Roadworks",
               "detail": "until 10 November 2026",
               "date": "2026-10-27T12:59:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Area di servizio S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del traffico: corsie…",
-              "value": "Roadworks",
-              "detail": "until 12 November 2026",
-              "date": "2026-10-27T13:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T11:32:49.603Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -305,7 +303,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -369,7 +367,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "UR",
@@ -406,6 +404,11 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "A2 Luzern -> Gotthard zwischen Autobahndreieck Verzweigung Altdorf und Anschluss Erstfeld, bei Kilometer 145.5 Sachlage: Gefahr Ursache: Gegenstände auf der Fahrbahn",
+              "value": "Verkehr",
+              "date": "2026-11-05T11:26:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen zwischen Ortschaft Andermatt und Ortschaft Hospental Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2026",
@@ -434,16 +437,10 @@
               "value": "Baustelle",
               "detail": "bis 10. November 2026",
               "date": "2026-10-27T12:59:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Gotthard zwischen Autobahndreieck Verzweigung Altdorf und Raststätte Gotthard Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.15 Verkehrsführung: Fahrbahnverengung auf einen…",
-              "value": "Baustelle",
-              "detail": "bis 12. November 2026",
-              "date": "2026-10-27T13:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T11:32:49.603Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -481,7 +478,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -545,7 +542,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "UR",
@@ -582,6 +579,11 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "A2 Lucerne -> St-Gothard entre Echangeur Echangeur d'Altdorf et Jonction autoroutière Erstfeld, au kilomètre 145.5 Situation: danger Raison: objets sur la chaussée",
+              "value": "Trafic",
+              "date": "2026-11-05T11:26:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen entre Localité Andermatt et Localité Hospental Situation: trafic perturbé travaux, longueur [km] 0.5 Complément 1: limitation temporaire de largeur largeur de la voie [m] 4.0…",
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2026",
@@ -610,16 +612,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 10 novembre 2026",
               "date": "2026-10-27T12:59:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne -> St-Gothard entre Echangeur Echangeur d'Altdorf et Aire de service St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.15 Gestion du trafic: rétrécissement des voies sur une…",
-              "value": "Chantier",
-              "detail": "jusqu’au 12 novembre 2026",
-              "date": "2026-10-27T13:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T11:32:49.603Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -657,7 +653,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -721,7 +717,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

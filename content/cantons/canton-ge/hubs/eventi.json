@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "d383b951539235fb32b07b3a60dad782556d849486cdf60b65cdb1a3ccd1293a",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "40f653e2f9098521a83ef54fcd8770435ce14c8039a8d1413a37c0ebc960cd86",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T13:31:40.660Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "281",
+          "value": "261",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Art en Vieille-Ville (AVV) - Vernissages communs de l'automne",
+              "label": "ALAIN DELLA MAESTRA TRIO",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/art-vieille-ville-vernissages-communs-automne"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/alain-della-maestra-trio"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
+              "label": "Atelier de danse contemporaine avec Alia Al-Saadi (gratuit)",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-1"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/atelier-danse-contemporaine-alia-saadi-gratuit"
             },
             {
-              "label": "Cours de Tango Argentin - Niveau débutant",
+              "label": "Concert \"Faubourg Tango\" trio",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-7"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/concert-faubourg-tango-trio"
             },
             {
-              "label": "crAsh-test/crAsh-son #6.8 – Avec Nadan Rojnic",
+              "label": "Concert événement NICOLAS FOLMER ”SO MILES 2” FEAT. SPECIAL GUEST RICK MARGITZA Jazz moderne Bebop",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/crash-testcrash-68-nadan-rojnic"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/concert-evenement-nicolas-folmer-miles-2-feat-special-guest-rick-margitza-jazz-moderne-bebop"
             },
             {
-              "label": "De l'Ombre aux Lumières. La peinture genevoise (1444-1782)",
+              "label": "Cycle Beethoven 1",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/ombre-lumieres-peinture-genevoise-1444-1782-0"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/cycle-beethoven-1"
             },
             {
-              "label": "Don’t Kill The Cow en Vostok Session ROCK (GE).",
+              "label": "DJ BETO · REGGAETON, BACHATA, SALSA, MERENGUE",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/kill-vostok-session-rock"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/beto-reggaeton-bachata-salsa-merengue"
             },
             {
-              "label": "GIFF | CONFÉRENCE | FOCUS FANNY HERRERO",
+              "label": "Emergentia 2026: \"Coming Soon\" de Soraya Leila Emery",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-conference-focus-fanny-herrero"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/emergentia-2026-coming-soon-soraya-leila-emery"
             },
             {
-              "label": "GIFF | PROJECTION | FRANK & LOUIS",
+              "label": "Et toi? Quand tu seras grand.e...",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-projection-frank-louis"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/seras-grande-0"
             },
             {
-              "label": "GIFF | PROJECTION | THE BURNING GIANTS",
+              "label": "Et toi? Quand tu seras grand.e... * COMPLET *",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-projection-burning-giants"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/seras-grande-complet"
             },
             {
-              "label": "GIFF PRO | TALKS | BR.AI.N / SERIES – PARADOXES : RÉINVENTER LA FABRIQUE DE LA FICTION",
+              "label": "GIFF | PROJECTION | GLAXO",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-talks-brain-series-paradoxes-reinventer-fabrique-fiction"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/giff-projection-glaxo"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -118,7 +118,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "281",
+          "value": "261",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,64 +161,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Art en Vieille-Ville (AVV) - Vernissages communs de l'automne",
+              "label": "ALAIN DELLA MAESTRA TRIO",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/art-vieille-ville-vernissages-communs-automne"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/alain-della-maestra-trio"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
+              "label": "Atelier de danse contemporaine avec Alia Al-Saadi (gratuit)",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-1"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/atelier-danse-contemporaine-alia-saadi-gratuit"
             },
             {
-              "label": "Cours de Tango Argentin - Niveau débutant",
+              "label": "Concert \"Faubourg Tango\" trio",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-7"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/concert-faubourg-tango-trio"
             },
             {
-              "label": "crAsh-test/crAsh-son #6.8 – Avec Nadan Rojnic",
+              "label": "Concert événement NICOLAS FOLMER ”SO MILES 2” FEAT. SPECIAL GUEST RICK MARGITZA Jazz moderne Bebop",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/crash-testcrash-68-nadan-rojnic"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/concert-evenement-nicolas-folmer-miles-2-feat-special-guest-rick-margitza-jazz-moderne-bebop"
             },
             {
-              "label": "De l'Ombre aux Lumières. La peinture genevoise (1444-1782)",
+              "label": "Cycle Beethoven 1",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/ombre-lumieres-peinture-genevoise-1444-1782-0"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/cycle-beethoven-1"
             },
             {
-              "label": "Don’t Kill The Cow en Vostok Session ROCK (GE).",
+              "label": "DJ BETO · REGGAETON, BACHATA, SALSA, MERENGUE",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/kill-vostok-session-rock"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/beto-reggaeton-bachata-salsa-merengue"
             },
             {
-              "label": "GIFF | CONFÉRENCE | FOCUS FANNY HERRERO",
+              "label": "Emergentia 2026: \"Coming Soon\" de Soraya Leila Emery",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-conference-focus-fanny-herrero"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/emergentia-2026-coming-soon-soraya-leila-emery"
             },
             {
-              "label": "GIFF | PROJECTION | FRANK & LOUIS",
+              "label": "Et toi? Quand tu seras grand.e...",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-projection-frank-louis"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/seras-grande-0"
             },
             {
-              "label": "GIFF | PROJECTION | THE BURNING GIANTS",
+              "label": "Et toi? Quand tu seras grand.e... * COMPLET *",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-projection-burning-giants"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/seras-grande-complet"
             },
             {
-              "label": "GIFF PRO | TALKS | BR.AI.N / SERIES – PARADOXES : RÉINVENTER LA FABRIQUE DE LA FICTION",
+              "label": "GIFF | PROJECTION | GLAXO",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-talks-brain-series-paradoxes-reinventer-fabrique-fiction"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/giff-projection-glaxo"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -241,7 +241,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "281",
+          "value": "261",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,64 +284,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Art en Vieille-Ville (AVV) - Vernissages communs de l'automne",
+              "label": "ALAIN DELLA MAESTRA TRIO",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/art-vieille-ville-vernissages-communs-automne"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/alain-della-maestra-trio"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
+              "label": "Atelier de danse contemporaine avec Alia Al-Saadi (gratuit)",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-1"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/atelier-danse-contemporaine-alia-saadi-gratuit"
             },
             {
-              "label": "Cours de Tango Argentin - Niveau débutant",
+              "label": "Concert \"Faubourg Tango\" trio",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-7"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/concert-faubourg-tango-trio"
             },
             {
-              "label": "crAsh-test/crAsh-son #6.8 – Avec Nadan Rojnic",
+              "label": "Concert événement NICOLAS FOLMER ”SO MILES 2” FEAT. SPECIAL GUEST RICK MARGITZA Jazz moderne Bebop",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/crash-testcrash-68-nadan-rojnic"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/concert-evenement-nicolas-folmer-miles-2-feat-special-guest-rick-margitza-jazz-moderne-bebop"
             },
             {
-              "label": "De l'Ombre aux Lumières. La peinture genevoise (1444-1782)",
+              "label": "Cycle Beethoven 1",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/ombre-lumieres-peinture-genevoise-1444-1782-0"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/cycle-beethoven-1"
             },
             {
-              "label": "Don’t Kill The Cow en Vostok Session ROCK (GE).",
+              "label": "DJ BETO · REGGAETON, BACHATA, SALSA, MERENGUE",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/kill-vostok-session-rock"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/beto-reggaeton-bachata-salsa-merengue"
             },
             {
-              "label": "GIFF | CONFÉRENCE | FOCUS FANNY HERRERO",
+              "label": "Emergentia 2026: \"Coming Soon\" de Soraya Leila Emery",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-conference-focus-fanny-herrero"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/emergentia-2026-coming-soon-soraya-leila-emery"
             },
             {
-              "label": "GIFF | PROJECTION | FRANK & LOUIS",
+              "label": "Et toi? Quand tu seras grand.e...",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-projection-frank-louis"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/seras-grande-0"
             },
             {
-              "label": "GIFF | PROJECTION | THE BURNING GIANTS",
+              "label": "Et toi? Quand tu seras grand.e... * COMPLET *",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-projection-burning-giants"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/seras-grande-complet"
             },
             {
-              "label": "GIFF PRO | TALKS | BR.AI.N / SERIES – PARADOXES : RÉINVENTER LA FABRIQUE DE LA FICTION",
+              "label": "GIFF | PROJECTION | GLAXO",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-talks-brain-series-paradoxes-reinventer-fabrique-fiction"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/giff-projection-glaxo"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -364,7 +364,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "281",
+          "value": "261",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,64 +407,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Art en Vieille-Ville (AVV) - Vernissages communs de l'automne",
+              "label": "ALAIN DELLA MAESTRA TRIO",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/art-vieille-ville-vernissages-communs-automne"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/alain-della-maestra-trio"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
+              "label": "Atelier de danse contemporaine avec Alia Al-Saadi (gratuit)",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-1"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/atelier-danse-contemporaine-alia-saadi-gratuit"
             },
             {
-              "label": "Cours de Tango Argentin - Niveau débutant",
+              "label": "Concert \"Faubourg Tango\" trio",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-7"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/concert-faubourg-tango-trio"
             },
             {
-              "label": "crAsh-test/crAsh-son #6.8 – Avec Nadan Rojnic",
+              "label": "Concert événement NICOLAS FOLMER ”SO MILES 2” FEAT. SPECIAL GUEST RICK MARGITZA Jazz moderne Bebop",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/crash-testcrash-68-nadan-rojnic"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/concert-evenement-nicolas-folmer-miles-2-feat-special-guest-rick-margitza-jazz-moderne-bebop"
             },
             {
-              "label": "De l'Ombre aux Lumières. La peinture genevoise (1444-1782)",
+              "label": "Cycle Beethoven 1",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/ombre-lumieres-peinture-genevoise-1444-1782-0"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/cycle-beethoven-1"
             },
             {
-              "label": "Don’t Kill The Cow en Vostok Session ROCK (GE).",
+              "label": "DJ BETO · REGGAETON, BACHATA, SALSA, MERENGUE",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/kill-vostok-session-rock"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/beto-reggaeton-bachata-salsa-merengue"
             },
             {
-              "label": "GIFF | CONFÉRENCE | FOCUS FANNY HERRERO",
+              "label": "Emergentia 2026: \"Coming Soon\" de Soraya Leila Emery",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-conference-focus-fanny-herrero"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/emergentia-2026-coming-soon-soraya-leila-emery"
             },
             {
-              "label": "GIFF | PROJECTION | FRANK & LOUIS",
+              "label": "Et toi? Quand tu seras grand.e...",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-projection-frank-louis"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/seras-grande-0"
             },
             {
-              "label": "GIFF | PROJECTION | THE BURNING GIANTS",
+              "label": "Et toi? Quand tu seras grand.e... * COMPLET *",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-projection-burning-giants"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/seras-grande-complet"
             },
             {
-              "label": "GIFF PRO | TALKS | BR.AI.N / SERIES – PARADOXES : RÉINVENTER LA FABRIQUE DE LA FICTION",
+              "label": "GIFF | PROJECTION | GLAXO",
               "detail": "Genève",
-              "date": "2026-11-05",
-              "url": "https://www.geneve.ch/agenda/giff-talks-brain-series-paradoxes-reinventer-fabrique-fiction"
+              "date": "2026-11-06",
+              "url": "https://www.geneve.ch/agenda/giff-projection-glaxo"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -487,7 +487,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

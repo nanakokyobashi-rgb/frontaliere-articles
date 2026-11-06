@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "03a4d69be8c192a744289edb68464d1b3c2f7d904db114a64c6fa3c65e851a81",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "c68feec94426e6eef7c7773b1fd26f9e72af27658e70902af5d40a0cba470d33",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -18,13 +18,8 @@
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-11-05T00:59:56.280Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T13:31:40.660Z",
       "keyFacts": 0
     }
   ],
@@ -105,24 +100,15 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Chur",
-              "value": "6 °C",
-              "detail": "oggi da 6 a 15 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Innovationen am KSGR: Massgeschneiderte Handwurzelprothesen als Alternative zu Versteifungen",
+              "date": "2026-11-05",
+              "url": "https://www.ksgr.ch/aktuelles/innovationen-am-ksgr-massgeschneiderte-handwurzelprothesen"
+            },
             {
               "label": "Wenn die Luft knapp wird: Internationale Empfehlungen mit Bündner Beteiligung",
               "date": "2026-10-26",
@@ -147,14 +133,9 @@
               "label": "Nationale Woche gegen Food Waste: Dranbleiben macht den Unterschied",
               "date": "2026-09-15",
               "url": "https://www.ksgr.ch/aktuelles/nationale-woche-gegen-food-waste-dranbleiben-macht-den-unterschied"
-            },
-            {
-              "label": "Arbeitslosigkeit - August 2026",
-              "date": "2026-09-07",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +215,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "GR",
@@ -312,24 +293,15 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Chur",
-              "value": "6 °C",
-              "detail": "today from 6 to 15 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Innovationen am KSGR: Massgeschneiderte Handwurzelprothesen als Alternative zu Versteifungen",
+              "date": "2026-11-05",
+              "url": "https://www.ksgr.ch/aktuelles/innovationen-am-ksgr-massgeschneiderte-handwurzelprothesen"
+            },
             {
               "label": "Wenn die Luft knapp wird: Internationale Empfehlungen mit Bündner Beteiligung",
               "date": "2026-10-26",
@@ -354,14 +326,9 @@
               "label": "Nationale Woche gegen Food Waste: Dranbleiben macht den Unterschied",
               "date": "2026-09-15",
               "url": "https://www.ksgr.ch/aktuelles/nationale-woche-gegen-food-waste-dranbleiben-macht-den-unterschied"
-            },
-            {
-              "label": "Arbeitslosigkeit - August 2026",
-              "date": "2026-09-07",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +404,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "GR",
@@ -515,24 +482,15 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Chur",
-              "value": "6 °C",
-              "detail": "heute 6 bis 15 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Innovationen am KSGR: Massgeschneiderte Handwurzelprothesen als Alternative zu Versteifungen",
+              "date": "2026-11-05",
+              "url": "https://www.ksgr.ch/aktuelles/innovationen-am-ksgr-massgeschneiderte-handwurzelprothesen"
+            },
             {
               "label": "Wenn die Luft knapp wird: Internationale Empfehlungen mit Bündner Beteiligung",
               "date": "2026-10-26",
@@ -557,14 +515,9 @@
               "label": "Nationale Woche gegen Food Waste: Dranbleiben macht den Unterschied",
               "date": "2026-09-15",
               "url": "https://www.ksgr.ch/aktuelles/nationale-woche-gegen-food-waste-dranbleiben-macht-den-unterschied"
-            },
-            {
-              "label": "Arbeitslosigkeit - August 2026",
-              "date": "2026-09-07",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -640,7 +593,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "GR",
@@ -718,24 +671,15 @@
           "updatedAt": "2026-11-05T06:46:26.804Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Chur",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 6 à 15 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Innovationen am KSGR: Massgeschneiderte Handwurzelprothesen als Alternative zu Versteifungen",
+              "date": "2026-11-05",
+              "url": "https://www.ksgr.ch/aktuelles/innovationen-am-ksgr-massgeschneiderte-handwurzelprothesen"
+            },
             {
               "label": "Wenn die Luft knapp wird: Internationale Empfehlungen mit Bündner Beteiligung",
               "date": "2026-10-26",
@@ -760,14 +704,9 @@
               "label": "Nationale Woche gegen Food Waste: Dranbleiben macht den Unterschied",
               "date": "2026-09-15",
               "url": "https://www.ksgr.ch/aktuelles/nationale-woche-gegen-food-waste-dranbleiben-macht-den-unterschied"
-            },
-            {
-              "label": "Arbeitslosigkeit - August 2026",
-              "date": "2026-09-07",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -839,7 +778,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

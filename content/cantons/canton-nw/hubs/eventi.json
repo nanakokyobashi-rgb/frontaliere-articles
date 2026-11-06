@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "d041f60268abb28464ff1e4ec0fc5d437a9531da0c4dc70b1fd459942358dde9",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "1aea2a45323e685ca856fe575a04ab41f1dba3fe2f1c389b5e8c6dfe3ed9c2a6",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "66",
+          "value": "62",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,48 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "BrueckerMeisterTrauffer - Noten von Vanille und Ambra",
-              "detail": "lit.z Literaturhaus Zentralschweiz, Stans, Stans",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94309"
-            },
-            {
-              "label": "Oeltrotte-Trüllern - Alterszentrum Oeltrotte",
-              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94624"
-            },
-            {
-              "label": "Räbeliechtli-Umzug",
-              "detail": "Pfarrkirche, Buochs bis Dorfpark, Buochs, Buochs, Buochs",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89965"
-            },
-            {
-              "label": "Vereinsgottesdienst",
-              "detail": "Pfarrkirche St. Peter und Paul, Stans, Stans",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/92662"
-            },
-            {
-              "label": "«Borneo-Louis»: Buchpräsentation mit Lesung und Musik",
-              "detail": "Gemeindesaal, Ennetbürgen, Ennetbürgen",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/92392"
-            },
-            {
-              "label": "BrueckerMeisterTrauffer – Noten von Vanille und Ambra",
-              "detail": "lit.z Literaturhaus Zentralschweiz, Stans",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/stans/brueckermeistertrauffer-noten-von-vanille-und-ambra_ASMrc9N"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "Die frohe Botschaft von Jesus Christus",
               "detail": "Bücher von Matt, Stans, Stans",
@@ -91,6 +49,48 @@
               "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
               "date": "2026-11-06",
               "url": "https://www.nw.ch/anlaesseaktuelles/95152"
+            },
+            {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
+              "label": "AUGUSTINA FLÜELER - Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95098"
+            },
+            {
+              "label": "AUGUSTINA FLÜELER - Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95101"
+            },
+            {
+              "label": "AUGUSTINA FLÜELER - Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95104"
+            },
+            {
+              "label": "Dorfplatzmarkt Dallenwil",
+              "detail": "Dorfplatz, Dallenwil, Dallenwil",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/87281"
+            },
+            {
+              "label": "FG: Agentenkurs für Jungs",
+              "detail": "Oberstufenschulhaus, Beckenried, Beckenried",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93544"
+            },
+            {
+              "label": "Frauengemeinschaft - Geisslen chlepfä",
+              "detail": "Roter Platz, Schulhaus Morgenstern, Ennetmoos, Ennetmoos",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90571"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "NW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "66",
+          "value": "62",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,48 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "BrueckerMeisterTrauffer - Noten von Vanille und Ambra",
-              "detail": "lit.z Literaturhaus Zentralschweiz, Stans, Stans",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94309"
-            },
-            {
-              "label": "Oeltrotte-Trüllern - Alterszentrum Oeltrotte",
-              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94624"
-            },
-            {
-              "label": "Räbeliechtli-Umzug",
-              "detail": "Pfarrkirche, Buochs bis Dorfpark, Buochs, Buochs, Buochs",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89965"
-            },
-            {
-              "label": "Vereinsgottesdienst",
-              "detail": "Pfarrkirche St. Peter und Paul, Stans, Stans",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/92662"
-            },
-            {
-              "label": "«Borneo-Louis»: Buchpräsentation mit Lesung und Musik",
-              "detail": "Gemeindesaal, Ennetbürgen, Ennetbürgen",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/92392"
-            },
-            {
-              "label": "BrueckerMeisterTrauffer - Notes of vanilla and ambergris",
-              "detail": "lit.z Literaturhaus Zentralschweiz, Stans",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/stans/brueckermeistertrauffer-noten-von-vanille-und-ambra_ASMrc9N"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — ongoing, last day: 14 November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "Die frohe Botschaft von Jesus Christus",
               "detail": "Bücher von Matt, Stans, Stans",
@@ -196,6 +154,48 @@
               "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
               "date": "2026-11-06",
               "url": "https://www.nw.ch/anlaesseaktuelles/95152"
+            },
+            {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — ongoing, last day: 14 November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
+              "label": "AUGUSTINA FLÜELER - Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95098"
+            },
+            {
+              "label": "AUGUSTINA FLÜELER - Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95101"
+            },
+            {
+              "label": "AUGUSTINA FLÜELER - Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95104"
+            },
+            {
+              "label": "Dorfplatzmarkt Dallenwil",
+              "detail": "Dorfplatz, Dallenwil, Dallenwil",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/87281"
+            },
+            {
+              "label": "FG: Agentenkurs für Jungs",
+              "detail": "Oberstufenschulhaus, Beckenried, Beckenried",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93544"
+            },
+            {
+              "label": "Frauengemeinschaft - Geisslen chlepfä",
+              "detail": "Roter Platz, Schulhaus Morgenstern, Ennetmoos, Ennetmoos",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90571"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "NW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "66",
+          "value": "62",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,48 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "BrueckerMeisterTrauffer - Noten von Vanille und Ambra",
-              "detail": "lit.z Literaturhaus Zentralschweiz, Stans, Stans",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94309"
-            },
-            {
-              "label": "Oeltrotte-Trüllern - Alterszentrum Oeltrotte",
-              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94624"
-            },
-            {
-              "label": "Räbeliechtli-Umzug",
-              "detail": "Pfarrkirche, Buochs bis Dorfpark, Buochs, Buochs, Buochs",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89965"
-            },
-            {
-              "label": "Vereinsgottesdienst",
-              "detail": "Pfarrkirche St. Peter und Paul, Stans, Stans",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/92662"
-            },
-            {
-              "label": "«Borneo-Louis»: Buchpräsentation mit Lesung und Musik",
-              "detail": "Gemeindesaal, Ennetbürgen, Ennetbürgen",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/92392"
-            },
-            {
-              "label": "BrueckerMeisterTrauffer – Noten von Vanille und Bernstein",
-              "detail": "lit.z Literaturhaus Zentralschweiz, Stans",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/stans/brueckermeistertrauffer-noten-von-vanille-und-ambra_ASMrc9N"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "Die frohe Botschaft von Jesus Christus",
               "detail": "Bücher von Matt, Stans, Stans",
@@ -301,6 +259,48 @@
               "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
               "date": "2026-11-06",
               "url": "https://www.nw.ch/anlaesseaktuelles/95152"
+            },
+            {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
+              "label": "AUGUSTINA FLÜELER - Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95098"
+            },
+            {
+              "label": "AUGUSTINA FLÜELER - Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95101"
+            },
+            {
+              "label": "AUGUSTINA FLÜELER - Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95104"
+            },
+            {
+              "label": "Dorfplatzmarkt Dallenwil",
+              "detail": "Dorfplatz, Dallenwil, Dallenwil",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/87281"
+            },
+            {
+              "label": "FG: Agentenkurs für Jungs",
+              "detail": "Oberstufenschulhaus, Beckenried, Beckenried",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93544"
+            },
+            {
+              "label": "Frauengemeinschaft - Geisslen chlepfä",
+              "detail": "Roter Platz, Schulhaus Morgenstern, Ennetmoos, Ennetmoos",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90571"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "NW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "66",
+          "value": "62",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,48 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "BrueckerMeisterTrauffer - Noten von Vanille und Ambra",
-              "detail": "lit.z Literaturhaus Zentralschweiz, Stans, Stans",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94309"
-            },
-            {
-              "label": "Oeltrotte-Trüllern - Alterszentrum Oeltrotte",
-              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94624"
-            },
-            {
-              "label": "Räbeliechtli-Umzug",
-              "detail": "Pfarrkirche, Buochs bis Dorfpark, Buochs, Buochs, Buochs",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89965"
-            },
-            {
-              "label": "Vereinsgottesdienst",
-              "detail": "Pfarrkirche St. Peter und Paul, Stans, Stans",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/92662"
-            },
-            {
-              "label": "«Borneo-Louis»: Buchpräsentation mit Lesung und Musik",
-              "detail": "Gemeindesaal, Ennetbürgen, Ennetbürgen",
-              "date": "2026-11-05",
-              "url": "https://www.nw.ch/anlaesseaktuelles/92392"
-            },
-            {
-              "label": "BrueckerMeisterTrauffer – Notes de Vanille et Ambra",
-              "detail": "lit.z Literaturhaus Zentralschweiz, Stans",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/stans/brueckermeistertrauffer-noten-von-vanille-und-ambra_ASMrc9N"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "Die frohe Botschaft von Jesus Christus",
               "detail": "Bücher von Matt, Stans, Stans",
@@ -406,6 +364,48 @@
               "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
               "date": "2026-11-06",
               "url": "https://www.nw.ch/anlaesseaktuelles/95152"
+            },
+            {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
+              "label": "AUGUSTINA FLÜELER - Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95098"
+            },
+            {
+              "label": "AUGUSTINA FLÜELER - Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95101"
+            },
+            {
+              "label": "AUGUSTINA FLÜELER - Klosterfrau, Künstlerin, Textilunternehmerin",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95104"
+            },
+            {
+              "label": "Dorfplatzmarkt Dallenwil",
+              "detail": "Dorfplatz, Dallenwil, Dallenwil",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/87281"
+            },
+            {
+              "label": "FG: Agentenkurs für Jungs",
+              "detail": "Oberstufenschulhaus, Beckenried, Beckenried",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93544"
+            },
+            {
+              "label": "Frauengemeinschaft - Geisslen chlepfä",
+              "detail": "Roter Platz, Schulhaus Morgenstern, Ennetmoos, Ennetmoos",
+              "date": "2026-11-07",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90571"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

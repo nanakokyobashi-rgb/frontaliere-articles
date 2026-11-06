@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "fisco",
-  "updatedAt": "2026-10-27T11:00:30.317Z",
-  "contentHash": "9b9abf0f7ff7e3fddd16f7c359528d0e0e36ba2ed1ab696949318af8106105f3",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "adafdae41f3cdf43cb1c3fe1cb89230d96b948b75ea1b10ad7d87bbd9a5dca62",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -16,6 +16,11 @@
       "id": "imposta-alla-fonte",
       "updatedAt": "2026-10-05T07:54:42.677Z",
       "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -98,6 +103,19 @@
           "sourceName": "Autorità fiscale cantonale",
           "sourceUrl": "https://www.zh.ch/de/steuern-finanzen/steuern/quellensteuer.html",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Anpassung des Merkblatts Beteiligungen und weiterer Erlasse im Zürcher Steuerbuch",
+              "date": "2026-11-05",
+              "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/steuern-finanzen/anpassung-des-merkblatts-beteiligungen-und-weiterer-erlasse-im-z.html"
+            }
+          ],
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -177,7 +195,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-27T11:00:30.317Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "ZH",
@@ -258,6 +276,19 @@
           "sourceName": "Cantonal tax authority",
           "sourceUrl": "https://www.zh.ch/de/steuern-finanzen/steuern/quellensteuer.html",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Anpassung des Merkblatts Beteiligungen und weiterer Erlasse im Zürcher Steuerbuch",
+              "date": "2026-11-05",
+              "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/steuern-finanzen/anpassung-des-merkblatts-beteiligungen-und-weiterer-erlasse-im-z.html"
+            }
+          ],
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -337,7 +368,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-27T11:00:30.317Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "ZH",
@@ -418,6 +449,19 @@
           "sourceName": "Kantonale Steuerbehörde",
           "sourceUrl": "https://www.zh.ch/de/steuern-finanzen/steuern/quellensteuer.html",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Anpassung des Merkblatts Beteiligungen und weiterer Erlasse im Zürcher Steuerbuch",
+              "date": "2026-11-05",
+              "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/steuern-finanzen/anpassung-des-merkblatts-beteiligungen-und-weiterer-erlasse-im-z.html"
+            }
+          ],
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -497,7 +541,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-27T11:00:30.317Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "ZH",
@@ -578,6 +622,19 @@
           "sourceName": "Autorité fiscale cantonale",
           "sourceUrl": "https://www.zh.ch/de/steuern-finanzen/steuern/quellensteuer.html",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Anpassung des Merkblatts Beteiligungen und weiterer Erlasse im Zürcher Steuerbuch",
+              "date": "2026-11-05",
+              "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/steuern-finanzen/anpassung-des-merkblatts-beteiligungen-und-weiterer-erlasse-im-z.html"
+            }
+          ],
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -657,7 +714,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-27T11:00:30.317Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "58deba4e7da18fd43510003ff93d1602043cf5911efb29c9f321e8ac95ffdf44",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "44d0236329b9fb1f80bea6118a2e16bda74d355c6c4e5085dd972a95f37b8504",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "68",
+          "value": "66",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,42 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Menschwerdung – evolutionäre Geschichte der Geburt",
-              "detail": "Kulturmuseum, St. Gallen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/menschwerdung-evolutionaere-geschichte-der-geburt/"
-            },
-            {
-              "label": "Radio- und Fernsehpreis der Ostschweiz 2026",
-              "detail": "Pfalzkeller, St. Gallen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/radio-und-fernsehpreis-der-ostschweiz-2026/"
-            },
-            {
-              "label": "Helga Schneider: ICH WEISS",
-              "detail": "Stadthof Rorschach, Rorschach",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/helga-schneider-ich-weiss-12/"
-            },
-            {
-              "label": "Lennart Schilgen - \"…macht nichts! Lieder vom Schleifen und Schleifen lassen\"",
-              "detail": "Verrucano Mels - Kultur und Kongresshaus, Mels",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/mels/lennart-schilgen-macht-nichts-lieder-vom-schleifen-und-schleifen-lassen_ACgfpjq"
-            },
-            {
-              "label": "Claudia Valer, Werkschau",
-              "detail": "Pflegeheim Heiligkreuz, St. Gallen — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
-            },
-            {
-              "label": "Fokusmodul – Meisner-Workout",
-              "detail": "Switzerland Innovation Park Ost — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
             {
               "label": "Herbst-Wein-Erlebnis",
               "detail": "Rathauskeller Mels, Mels",
@@ -91,6 +55,42 @@
               "detail": "INAC Gesellschaftsraum, Berneck",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/berneck/larissa-baumann-und-band_AAPaKZP"
+            },
+            {
+              "label": "Fabian Unteregger",
+              "detail": "Wil SG",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fabian-unteregger-4/"
+            },
+            {
+              "label": "Mamma Mia Party / Konzert",
+              "detail": "Dezent, St. Gallen",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mamma-mia-party-konzert-3/"
+            },
+            {
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
+            },
+            {
+              "label": "Fokusmodul – Meisner-Workout",
+              "detail": "Switzerland Innovation Park Ost — in corso, ultimo giorno: 12 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "Käsefest Rapperswil-Jona",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaesefest-rapperswil-jona/"
+            },
+            {
+              "label": "Linoldruck-Vertiefungskurs",
+              "detail": "Lichtensteig",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/linoldruck-vertiefungskurs/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "68",
+          "value": "66",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,42 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Menschwerdung – evolutionäre Geschichte der Geburt",
-              "detail": "Kulturmuseum, St. Gallen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/menschwerdung-evolutionaere-geschichte-der-geburt/"
-            },
-            {
-              "label": "Radio-und Fernsehpreis der Ostsch 2",
-              "detail": "Pfalzkeller, St. Gallen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/radio-und-fernsehpreis-der-ostschweiz-2026/"
-            },
-            {
-              "label": "Helga Schneider: ICH WEISS",
-              "detail": "Stadthof Rorschach, Rorschach",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/helga-schneider-ich-weiss-12/"
-            },
-            {
-              "label": "Lennart Schilgen - \"…macht nichts! Lieder vom Schleifen und Schleifen lassen\"",
-              "detail": "Verrucano Mels - Kultur und Kongresshaus, Mels",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/mels/lennart-schilgen-macht-nichts-lieder-vom-schleifen-und-schleifen-lassen_ACgfpjq"
-            },
-            {
-              "label": "Claudia Valer, Werkschau",
-              "detail": "Pflegeheim Heiligkreuz, St. Gallen — ongoing, last day: 8 November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
-            },
-            {
-              "label": "Fokusmodul-Meisner -ork",
-              "detail": "Switzerland Innovation Park Ost — ongoing, last day: 12 November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
             {
               "label": "Herbst-Wein-Erlebnis",
               "detail": "Rathauskeller Mels, Mels",
@@ -196,6 +160,42 @@
               "detail": "INAC Gesellschaftsraum, Berneck",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/berneck/larissa-baumann-und-band_AAPaKZP"
+            },
+            {
+              "label": "Fabian Unteregger",
+              "detail": "Wil SG",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fabian-unteregger-4/"
+            },
+            {
+              "label": "Mamma Mia Party / Konzert",
+              "detail": "Dezent, St. Gallen",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mamma-mia-party-konzert-3/"
+            },
+            {
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen — ongoing, last day: 8 November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
+            },
+            {
+              "label": "Fokusmodul-Meisner -ork",
+              "detail": "Switzerland Innovation Park Ost — ongoing, last day: 12 November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "Käsefest Rapperswil-Jona",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaesefest-rapperswil-jona/"
+            },
+            {
+              "label": "Linoldruck-Vertiefungskurs",
+              "detail": "Lichtensteig",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/linoldruck-vertiefungskurs/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "68",
+          "value": "66",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,42 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Menschwerdung – evolutionäre Geschichte der Geburt",
-              "detail": "Kulturmuseum, St. Gallen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/menschwerdung-evolutionaere-geschichte-der-geburt/"
-            },
-            {
-              "label": "Radio-und Fernsehpreis der Ostsch Juni 2026",
-              "detail": "Pfalzkeller, St. Gallen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/radio-und-fernsehpreis-der-ostschweiz-2026/"
-            },
-            {
-              "label": "Helga Schneider: ICH WEISS",
-              "detail": "Stadthof Rorschach, Rorschach",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/helga-schneider-ich-weiss-12/"
-            },
-            {
-              "label": "Lennart Schilgen - \"…macht nichts! Lieder vom Schleifen und Schleifen lassen\"",
-              "detail": "Verrucano Mels - Kultur und Kongresshaus, Mels",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/mels/lennart-schilgen-macht-nichts-lieder-vom-schleifen-und-schleifen-lassen_ACgfpjq"
-            },
-            {
-              "label": "Claudia Valer, Werkschau",
-              "detail": "Pflegeheim Heiligkreuz, St. Gallen — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
-            },
-            {
-              "label": "Fokusmodul-Meisner-Grafforkout",
-              "detail": "Switzerland Innovation Park Ost — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
             {
               "label": "Herbst-Wein-Erlebnis",
               "detail": "Rathauskeller Mels, Mels",
@@ -301,6 +265,42 @@
               "detail": "INAC Gesellschaftsraum, Berneck",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/berneck/larissa-baumann-und-band_AAPaKZP"
+            },
+            {
+              "label": "Fabian Unteregger",
+              "detail": "Wil SG",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fabian-unteregger-4/"
+            },
+            {
+              "label": "Mamma Mia Party / Konzert",
+              "detail": "Dezent, St. Gallen",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mamma-mia-party-konzert-3/"
+            },
+            {
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
+            },
+            {
+              "label": "Fokusmodul-Meisner-Grafforkout",
+              "detail": "Switzerland Innovation Park Ost — läuft, letzter Tag: 12. November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "Käsefest Rapperswil-Jona",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaesefest-rapperswil-jona/"
+            },
+            {
+              "label": "Linoldruck-Vertiefungskurs",
+              "detail": "Lichtensteig",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/linoldruck-vertiefungskurs/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "68",
+          "value": "66",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,42 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Menschwerdung – evolutionäre Geschichte der Geburt",
-              "detail": "Kulturmuseum, St. Gallen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/menschwerdung-evolutionaere-geschichte-der-geburt/"
-            },
-            {
-              "label": "Prix de la Radio et de la télévision d'Ostsch 2",
-              "detail": "Pfalzkeller, St. Gallen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/radio-und-fernsehpreis-der-ostschweiz-2026/"
-            },
-            {
-              "label": "Helga Schneider: ICH WEISS",
-              "detail": "Stadthof Rorschach, Rorschach",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/helga-schneider-ich-weiss-12/"
-            },
-            {
-              "label": "Lennart Schilgen - \"…macht nichts! Lieder vom Schleifen und Schleifen lassen\"",
-              "detail": "Verrucano Mels - Kultur und Kongresshaus, Mels",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/mels/lennart-schilgen-macht-nichts-lieder-vom-schleifen-und-schleifen-lassen_ACgfpjq"
-            },
-            {
-              "label": "Claudia Valer, Werkschau",
-              "detail": "Pflegeheim Heiligkreuz, St. Gallen — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
-            },
-            {
-              "label": "Module d'alimentation-Meisner-ork",
-              "detail": "Switzerland Innovation Park Ost — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
             {
               "label": "Herbst-Wein-Erlebnis",
               "detail": "Rathauskeller Mels, Mels",
@@ -406,6 +370,42 @@
               "detail": "INAC Gesellschaftsraum, Berneck",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/berneck/larissa-baumann-und-band_AAPaKZP"
+            },
+            {
+              "label": "Fabian Unteregger",
+              "detail": "Wil SG",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fabian-unteregger-4/"
+            },
+            {
+              "label": "Mamma Mia Party / Konzert",
+              "detail": "Dezent, St. Gallen",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mamma-mia-party-konzert-3/"
+            },
+            {
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
+            },
+            {
+              "label": "Module d'alimentation-Meisner-ork",
+              "detail": "Switzerland Innovation Park Ost — en cours, dernier jour : 12 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "Käsefest Rapperswil-Jona",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaesefest-rapperswil-jona/"
+            },
+            {
+              "label": "Linoldruck-Vertiefungskurs",
+              "detail": "Lichtensteig",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/linoldruck-vertiefungskurs/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "2200d0b8bdb62056153c1c2369034528ac796ccabaa784857902bf9125edd71f",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "59af9897b15c186faa5cf01c849da3b24e81f713335da2524690ccb80b090977",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T13:31:40.660Z",
       "keyFacts": 0
     }
   ],
@@ -37,12 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "\"Dusha&Cheese\" SPECIAL GUEST Sara Santos, Flamencotänzerin",
-              "detail": "Haberhaus Bühne",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/dusha-und-cheese-special-guest-sara-santos-flamencotaenzerin_ApgqrL4"
-            },
             {
               "label": "Vibes im Visitor Centre – ein First Friday Event",
               "detail": "Schaffhauserland Tourismus",
@@ -96,6 +90,12 @@
               "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/salonorchester-schaffhausen-memories/"
+            },
+            {
+              "label": "«Die Kunst der Komödie» I",
+              "detail": "Schaffhausen",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-kunst-der-komoedie-i/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -138,7 +138,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vom+bodensee+an+den+main+august+mosbrugger+_+architekt_+professor+und+sohn+einer+bedeutenden+kuenstlerfamilie"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "SH",
@@ -180,12 +180,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "\"Dusha&Cheese\" SPECIAL GUEST Sara Santos, flamenco dancer",
-              "detail": "Haberhaus Bühne",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/dusha-und-cheese-special-guest-sara-santos-flamencotaenzerin_ApgqrL4"
-            },
             {
               "label": "Vibes im Visitor Centre – ein First Friday Event",
               "detail": "Schaffhauserland Tourismus",
@@ -239,6 +233,12 @@
               "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/salonorchester-schaffhausen-memories/"
+            },
+            {
+              "label": "«Die Kunst der Komödie» I",
+              "detail": "Schaffhausen",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-kunst-der-komoedie-i/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -281,7 +281,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vom+bodensee+an+den+main+august+mosbrugger+_+architekt_+professor+und+sohn+einer+bedeutenden+kuenstlerfamilie"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +303,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "SH",
@@ -323,12 +323,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "\"Dusha&Cheese\" SPECIAL GUEST Sara Santos, Flamencotänzerin",
-              "detail": "Haberhaus Bühne",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/dusha-und-cheese-special-guest-sara-santos-flamencotaenzerin_ApgqrL4"
-            },
             {
               "label": "Vibes im Visitor Centre – ein First Friday Event",
               "detail": "Schaffhauserland Tourismus",
@@ -382,6 +376,12 @@
               "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/salonorchester-schaffhausen-memories/"
+            },
+            {
+              "label": "«Die Kunst der Komödie» I",
+              "detail": "Schaffhausen",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-kunst-der-komoedie-i/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -424,7 +424,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vom+bodensee+an+den+main+august+mosbrugger+_+architekt_+professor+und+sohn+einer+bedeutenden+kuenstlerfamilie"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -446,7 +446,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "SH",
@@ -466,12 +466,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "« Dusha&Cheese » INVITÉE SPÉCIALE : Sara Santos, danseuse de flamenco",
-              "detail": "Haberhaus Bühne",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/dusha-und-cheese-special-guest-sara-santos-flamencotaenzerin_ApgqrL4"
-            },
             {
               "label": "Vibes im Visitor Centre – ein First Friday Event",
               "detail": "Schaffhauserland Tourismus",
@@ -525,6 +519,12 @@
               "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/salonorchester-schaffhausen-memories/"
+            },
+            {
+              "label": "«Die Kunst der Komödie» I",
+              "detail": "Schaffhausen",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-kunst-der-komoedie-i/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -567,7 +567,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vom+bodensee+an+den+main+august+mosbrugger+_+architekt_+professor+und+sohn+einer+bedeutenden+kuenstlerfamilie"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +589,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "2842d39e97c1bb916344d3c93e3ab1cad2b4e07f8fdcab56d8120e9b76651ef5",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "28e5a54f2bf049b5ce2834693cd71499d3cfbe5e9c6bdad9acd891aefb75d6a3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-05T03:14:14.745Z",
-      "keyFacts": 0
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-11-05T00:59:56.280Z",
+      "updatedAt": "2026-11-05T12:34:18.927Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T13:31:40.660Z",
       "keyFacts": 0
     }
   ],
@@ -66,16 +61,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-04T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-05T07:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-05T23:00:00.000Z"
             },
             {
@@ -92,31 +77,37 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-11-07T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-08T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-09T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-05T03:14:14.745Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Genève",
-              "value": "6 °C",
-              "detail": "oggi da 6 a 11 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
+          "updatedAt": "2026-11-05T12:34:18.927Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Le chômage dans le canton de Genève en octobre 2026",
+              "date": "2026-11-05T13:30:00.000Z",
+              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10891&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6076"
+            },
+            {
+              "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
+              "date": "2026-11-05",
+              "url": "https://www.ge.ch/node/45404"
+            },
             {
               "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
               "date": "2026-11-03",
@@ -136,19 +127,9 @@
               "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
               "date": "2026-11-02",
               "url": "https://www.hug.ch/actualite/recherche-therapie-cellulaire-innovante-pour-traiter-insuffisance-cardiaque"
-            },
-            {
-              "label": "Tentatives d'escroquerie téléphoniques : usurpation de l'identité d'un médecin des HUG",
-              "date": "2026-11-02",
-              "url": "https://www.hug.ch/actualite/tentatives-escroquerie-telephoniques-usurpation-identite-medecin-hug"
-            },
-            {
-              "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
-              "date": "2026-10-30",
-              "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -228,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "GE",
@@ -267,16 +248,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-04T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-05T07:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-05T23:00:00.000Z"
             },
             {
@@ -293,31 +264,37 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-11-07T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-08T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-09T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-05T03:14:14.745Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Genève",
-              "value": "6 °C",
-              "detail": "today from 6 to 11 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
+          "updatedAt": "2026-11-05T12:34:18.927Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Le chômage dans le canton de Genève en octobre 2026",
+              "date": "2026-11-05T13:30:00.000Z",
+              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10891&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6076"
+            },
+            {
+              "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
+              "date": "2026-11-05",
+              "url": "https://www.ge.ch/node/45404"
+            },
             {
               "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
               "date": "2026-11-03",
@@ -337,19 +314,9 @@
               "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
               "date": "2026-11-02",
               "url": "https://www.hug.ch/actualite/recherche-therapie-cellulaire-innovante-pour-traiter-insuffisance-cardiaque"
-            },
-            {
-              "label": "Tentatives d'escroquerie téléphoniques : usurpation de l'identité d'un médecin des HUG",
-              "date": "2026-11-02",
-              "url": "https://www.hug.ch/actualite/tentatives-escroquerie-telephoniques-usurpation-identite-medecin-hug"
-            },
-            {
-              "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
-              "date": "2026-10-30",
-              "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +391,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "GE",
@@ -463,16 +430,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-04T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-05T07:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-05T23:00:00.000Z"
             },
             {
@@ -489,31 +446,37 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-11-07T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-08T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-09T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-05T03:14:14.745Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Genève",
-              "value": "6 °C",
-              "detail": "heute 6 bis 11 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
+          "updatedAt": "2026-11-05T12:34:18.927Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Le chômage dans le canton de Genève en octobre 2026",
+              "date": "2026-11-05T13:30:00.000Z",
+              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10891&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6076"
+            },
+            {
+              "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
+              "date": "2026-11-05",
+              "url": "https://www.ge.ch/node/45404"
+            },
             {
               "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
               "date": "2026-11-03",
@@ -533,19 +496,9 @@
               "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
               "date": "2026-11-02",
               "url": "https://www.hug.ch/actualite/recherche-therapie-cellulaire-innovante-pour-traiter-insuffisance-cardiaque"
-            },
-            {
-              "label": "Tentatives d'escroquerie téléphoniques : usurpation de l'identité d'un médecin des HUG",
-              "date": "2026-11-02",
-              "url": "https://www.hug.ch/actualite/tentatives-escroquerie-telephoniques-usurpation-identite-medecin-hug"
-            },
-            {
-              "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
-              "date": "2026-10-30",
-              "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -620,7 +573,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "GE",
@@ -659,16 +612,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-04T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-05T07:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-05T23:00:00.000Z"
             },
             {
@@ -685,31 +628,37 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-11-07T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-08T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-09T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-05T03:14:14.745Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Genève",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 6 à 11 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-05T00:59:56.280Z"
+          "updatedAt": "2026-11-05T12:34:18.927Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Le chômage dans le canton de Genève en octobre 2026",
+              "date": "2026-11-05T13:30:00.000Z",
+              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10891&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6076"
+            },
+            {
+              "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
+              "date": "2026-11-05",
+              "url": "https://www.ge.ch/node/45404"
+            },
             {
               "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
               "date": "2026-11-03",
@@ -729,19 +678,9 @@
               "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
               "date": "2026-11-02",
               "url": "https://www.hug.ch/actualite/recherche-therapie-cellulaire-innovante-pour-traiter-insuffisance-cardiaque"
-            },
-            {
-              "label": "Tentatives d'escroquerie téléphoniques : usurpation de l'identité d'un médecin des HUG",
-              "date": "2026-11-02",
-              "url": "https://www.hug.ch/actualite/tentatives-escroquerie-telephoniques-usurpation-identite-medecin-hug"
-            },
-            {
-              "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
-              "date": "2026-10-30",
-              "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -813,7 +752,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

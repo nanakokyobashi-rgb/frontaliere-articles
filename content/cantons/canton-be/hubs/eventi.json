@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "e866eeba860724af3e1dcaa688901eb1df52e6260adea9a5ee4046830ac50594",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "956267abe9b58787b191f2879c773d924a1a073f1415c7ab83858921a9b47f73",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "193",
+          "value": "194",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "20 Years of the Gstaad Curling Hall",
-              "detail": "Gstaad, Saanen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-years-of-the-gstaad-curling-hall/"
-            },
-            {
-              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
+              "label": "Alpensounds. Volksmusik zwischen Erbe und Experiment",
               "detail": "Bern",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/5-energy-future-days-und-messe-bauen-wohnen-energie/"
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alpensounds-volksmusik-zwischen-erbe-und-experiment/"
             },
             {
-              "label": "NEULAND Trade Fair Thun",
+              "label": "Calimero's fondue boat",
               "detail": "Thun",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/neuland-trade-fair-thun/"
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/calimeros-fondue-boat/"
             },
             {
-              "label": "3 x S – Spiel, Spass, Sprachen",
-              "detail": "Münsingen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/3-x-s-spiel-spass-sprachen-2/"
+              "label": "Soul Jam im Hotel Wetterhorn",
+              "detail": "Hasliberg",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soul-jam-im-hotel-wetterhorn/"
             },
             {
-              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
-              "detail": "BERNEXPO",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/5-energy-future-days-und-messe-bauen-wohnen-energie_AdcRiHk"
+              "label": "Astronomy evening: About starlight photography",
+              "detail": "3084 Wabern",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/astronomieabend-sternhimmelfotografie/"
             },
             {
-              "label": "100 Jahre Peter Alexander",
-              "detail": "National Bern, Bern",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/100-jahre-peter-alexander_ASWU5w6"
+              "label": "Galadinner und Konzert mit Kristina & Evelyn Brunner",
+              "detail": "Konzerthalle Riggisberg, Riggisberg",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/evenements/musique/riggisberg/diner-de-gala-et-concert-avec-kristina-et-evelyn-brunner_AE5enSV"
             },
             {
-              "label": "24. Niesen-Jass",
-              "detail": "Niesen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/niesen-jasset/"
+              "label": "Krimi am Fels",
+              "detail": "Restaurant Stein & Sein, Interlaken",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/krimi-am-fels/"
             },
             {
-              "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "KKThun, Thun",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/thun/vivaldi-die-vier-jahreszeiten_AJXYSdd"
+              "label": "Laternenumzug",
+              "detail": "Beatenberg",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/laternenumzug/"
             },
             {
-              "label": "Anna Rossinelli - Heat Tour 2026",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/anna-rossinelli-heat-tour-2026_ArdY558"
+              "label": "Saint City Orchestra",
+              "detail": "Kulturfabrik KUFA, Lyss",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lyss/saint-city-orchestra_A5hiViE"
             },
             {
-              "label": "Chrut u Rüebe",
-              "detail": "BeJazz Club / Vidmarhallen",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/chrut-u-rueebe_AgXYhLg"
+              "label": "Calimeros Fondueschiff",
+              "detail": "Schiffstation Thun-Bahnhof, Thun",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/calimeros-fondueschiff_AGefx94"
+            },
+            {
+              "label": "Dann mach doch Limonade, bitch",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dann-mach-doch-limonade-bitch-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "193",
+          "value": "194",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,64 +156,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "20 Years of the Gstaad Curling Hall",
-              "detail": "Gstaad, Saanen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-years-of-the-gstaad-curling-hall/"
-            },
-            {
-              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
+              "label": "Alpensounds. Volksmusik zwischen Erbe und Experiment",
               "detail": "Bern",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/5-energy-future-days-und-messe-bauen-wohnen-energie/"
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alpensounds-volksmusik-zwischen-erbe-und-experiment/"
             },
             {
-              "label": "NEULAND Trade Fair Thun",
+              "label": "Calimero's fondue boat",
               "detail": "Thun",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/neuland-trade-fair-thun/"
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/calimeros-fondue-boat/"
             },
             {
-              "label": "3 x S – Spiel, Spass, Sprachen",
-              "detail": "Münsingen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/3-x-s-spiel-spass-sprachen-2/"
+              "label": "Soul Jam im Hotel Wetterhorn",
+              "detail": "Hasliberg",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soul-jam-im-hotel-wetterhorn/"
             },
             {
-              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
-              "detail": "BERNEXPO",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/5-energy-future-days-und-messe-bauen-wohnen-energie_AdcRiHk"
+              "label": "Astronomy evening: About starlight photography",
+              "detail": "3084 Wabern",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/astronomieabend-sternhimmelfotografie/"
             },
             {
-              "label": "100 Jahre Peter Alexander",
-              "detail": "National Bern, Bern",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/100-jahre-peter-alexander_ASWU5w6"
+              "label": "Galadinner und Konzert mit Kristina & Evelyn Brunner",
+              "detail": "Konzerthalle Riggisberg, Riggisberg",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/evenements/musique/riggisberg/diner-de-gala-et-concert-avec-kristina-et-evelyn-brunner_AE5enSV"
             },
             {
-              "label": "24. Niesen-Jass",
-              "detail": "Niesen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/niesen-jasset/"
+              "label": "Krimi am Fels",
+              "detail": "Restaurant Stein & Sein, Interlaken",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/krimi-am-fels/"
             },
             {
-              "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "KKThun, Thun",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/thun/vivaldi-die-vier-jahreszeiten_AJXYSdd"
+              "label": "Laternenumzug",
+              "detail": "Beatenberg",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/laternenumzug/"
             },
             {
-              "label": "Anna Rossinelli - Heat Tour 2026",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/anna-rossinelli-heat-tour-2026_ArdY558"
+              "label": "Saint City Orchestra",
+              "detail": "Kulturfabrik KUFA, Lyss",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lyss/saint-city-orchestra_A5hiViE"
             },
             {
-              "label": "Chrut u Rüebe",
-              "detail": "BeJazz Club / Vidmarhallen",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/chrut-u-rueebe_AgXYhLg"
+              "label": "Calimeros Fondueschiff",
+              "detail": "Schiffstation Thun-Bahnhof, Thun",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/calimeros-fondueschiff_AGefx94"
+            },
+            {
+              "label": "Dann mach doch Limonade, bitch",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dann-mach-doch-limonade-bitch-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "193",
+          "value": "194",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,64 +279,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "20 Jahre Curlinghalle Gstaad",
-              "detail": "Gstaad, Saanen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-years-of-the-gstaad-curling-hall/"
-            },
-            {
-              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
+              "label": "Alpensounds. Volksmusik zwischen Erbe und Experiment",
               "detail": "Bern",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/5-energy-future-days-und-messe-bauen-wohnen-energie/"
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alpensounds-volksmusik-zwischen-erbe-und-experiment/"
             },
             {
-              "label": "NEULAND Messe Thun",
+              "label": "Calimeros Fondueschiff",
               "detail": "Thun",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/neuland-trade-fair-thun/"
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/calimeros-fondue-boat/"
             },
             {
-              "label": "3 x S – Spiel, Spass, Sprachen",
-              "detail": "Münsingen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/3-x-s-spiel-spass-sprachen-2/"
+              "label": "Soul Jam im Hotel Wetterhorn",
+              "detail": "Hasliberg",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soul-jam-im-hotel-wetterhorn/"
             },
             {
-              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
-              "detail": "BERNEXPO",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/5-energy-future-days-und-messe-bauen-wohnen-energie_AdcRiHk"
+              "label": "Astronomieabend: Sternhimmelfotografie",
+              "detail": "3084 Wabern",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/astronomieabend-sternhimmelfotografie/"
             },
             {
-              "label": "100 Jahre Peter Alexander",
-              "detail": "National Bern, Bern",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/100-jahre-peter-alexander_ASWU5w6"
+              "label": "Galadinner und Konzert mit Kristina & Evelyn Brunner",
+              "detail": "Konzerthalle Riggisberg, Riggisberg",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/evenements/musique/riggisberg/diner-de-gala-et-concert-avec-kristina-et-evelyn-brunner_AE5enSV"
             },
             {
-              "label": "24. Niesen-Jass",
-              "detail": "Niesen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/niesen-jasset/"
+              "label": "Krimi am Fels",
+              "detail": "Restaurant Stein & Sein, Interlaken",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/krimi-am-fels/"
             },
             {
-              "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "KKThun, Thun",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/thun/vivaldi-die-vier-jahreszeiten_AJXYSdd"
+              "label": "Laternenumzug",
+              "detail": "Beatenberg",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/laternenumzug/"
             },
             {
-              "label": "Anna Rossinelli - Heat Tour 2026",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/anna-rossinelli-heat-tour-2026_ArdY558"
+              "label": "Saint City Orchestra",
+              "detail": "Kulturfabrik KUFA, Lyss",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lyss/saint-city-orchestra_A5hiViE"
             },
             {
-              "label": "Chrut u Rüebe",
-              "detail": "BeJazz Club / Vidmarhallen",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/chrut-u-rueebe_AgXYhLg"
+              "label": "Calimeros Fondueschiff",
+              "detail": "Schiffstation Thun-Bahnhof, Thun",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/calimeros-fondueschiff_AGefx94"
+            },
+            {
+              "label": "Dann mach doch Limonade, bitch",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dann-mach-doch-limonade-bitch-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "193",
+          "value": "194",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,64 +402,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "20 ans de la Halle de Curling de Gstaad",
-              "detail": "Gstaad, Saanen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-years-of-the-gstaad-curling-hall/"
-            },
-            {
-              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
+              "label": "Alpensounds. Volksmusik zwischen Erbe und Experiment",
               "detail": "Bern",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/5-energy-future-days-und-messe-bauen-wohnen-energie/"
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alpensounds-volksmusik-zwischen-erbe-und-experiment/"
             },
             {
-              "label": "NEULAND Foire de Thoune",
+              "label": "Bateau fondue Calimeros",
               "detail": "Thun",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/neuland-trade-fair-thun/"
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/calimeros-fondue-boat/"
             },
             {
-              "label": "3 x S – Spiel, Spass, Sprachen",
-              "detail": "Münsingen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/3-x-s-spiel-spass-sprachen-2/"
+              "label": "Soul Jam im Hotel Wetterhorn",
+              "detail": "Hasliberg",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soul-jam-im-hotel-wetterhorn/"
             },
             {
-              "label": "6. Energy Future Days und Messe \"Bauen, Wohnen, Energie\"",
-              "detail": "BERNEXPO",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/5-energy-future-days-und-messe-bauen-wohnen-energie_AdcRiHk"
+              "label": "Soirée astronomique: Photographie du ciel étoilé",
+              "detail": "3084 Wabern",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/astronomieabend-sternhimmelfotografie/"
             },
             {
-              "label": "100 Jahre Peter Alexander",
-              "detail": "National Bern, Bern",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/100-jahre-peter-alexander_ASWU5w6"
+              "label": "Dîner de gala et concert avec Kristina et Evelyn Brunner",
+              "detail": "Konzerthalle Riggisberg, Riggisberg",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/evenements/musique/riggisberg/diner-de-gala-et-concert-avec-kristina-et-evelyn-brunner_AE5enSV"
             },
             {
-              "label": "24. Niesen-Jass",
-              "detail": "Niesen",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/niesen-jasset/"
+              "label": "Krimi am Fels",
+              "detail": "Restaurant Stein & Sein, Interlaken",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/krimi-am-fels/"
             },
             {
-              "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "KKThun, Thun",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/thun/vivaldi-die-vier-jahreszeiten_AJXYSdd"
+              "label": "Laternenumzug",
+              "detail": "Beatenberg",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/laternenumzug/"
             },
             {
-              "label": "Anna Rossinelli - Heat Tour 2026",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/anna-rossinelli-heat-tour-2026_ArdY558"
+              "label": "Saint City Orchestra",
+              "detail": "Kulturfabrik KUFA, Lyss",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lyss/saint-city-orchestra_A5hiViE"
             },
             {
-              "label": "Chrut u Rüebe",
-              "detail": "BeJazz Club / Vidmarhallen",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/chrut-u-rueebe_AgXYhLg"
+              "label": "Calimeros Fondueschiff",
+              "detail": "Schiffstation Thun-Bahnhof, Thun",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/calimeros-fondueschiff_AGefx94"
+            },
+            {
+              "label": "Dann mach doch Limonade, bitch",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dann-mach-doch-limonade-bitch-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

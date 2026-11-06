@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "39f16dfd70693a1731dfc1581e9b6a49ecc041ea777f8b8a8ad5bafc2f0e2ee4",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "769d2edb6d46480ae5484c3a0b5f542f23e275dcfbee1fc4ed650e0e43c7cca4",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "349",
+          "value": "348",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Auto Zurigo",
-              "detail": "Messezentrum Zürich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auto-zurigo/"
+              "label": "The 10th HNHCP Educational Conference",
+              "detail": "Universität Zürich, Zürich",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/the-10th-hnhcp-educational-conference_Any1ALn"
             },
             {
-              "label": "Mensch SUCHT Leben",
+              "label": "Kurzfilmevent Dietikon mit Gleis21-OsKar",
+              "detail": "Dietikon",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kurzfilmevent-dietikon-mit-gleis21-oskar/"
+            },
+            {
+              "label": "Yoga und Meditation",
+              "detail": "Kappel am Albis",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yoga-und-meditation-1/"
+            },
+            {
+              "label": "Entrepreneurs Summit 2026",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mensch-sucht-leben/"
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/entrepreneurs-summit-2026/"
             },
             {
-              "label": "Agile Unconference 2026",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/agile-unconference-2026_APUQmBW"
+              "label": "Grundkenntnistest",
+              "detail": "DÃ¼bendorf, Dübendorf",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/grundkenntnistest-12/"
             },
             {
-              "label": "Ökumenischer Frauen-Treff Dübendorf",
-              "detail": "Dübendorf",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oekumenischer-frauen-treff-duebendorf-1/"
+              "label": "Kantonaler Deutschtest für die Einbürgerung",
+              "detail": "DÃ¼bendorf, Dübendorf",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kantonaler-deutschtest-fuer-die-einbuergerung-9/"
             },
             {
-              "label": "MINIMUM November 2026",
-              "detail": "8404 Winterthur, Winterthur",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/minimum-november-2026/"
+              "label": "Räbeliechtliumzug Rüti ZH 2026",
+              "detail": "Rüti ZH, Rüti (ZH)",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/raebeliechtliumzug-rueti-zh-2026/"
             },
             {
-              "label": "Addressing War? On artistic engagement with conflict and violence",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adressing-war-on-artistic-engagement-with-conflict-and-violence/"
+              "label": "Räbeliechtli-Umzug Aesch ZH",
+              "detail": "Treffpunkt Alter Chindsgi Museumsstrasse, Aesch (ZH)",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raebeliechtli-umzug-aesch-zh/"
             },
             {
-              "label": "Führung in «Neubenennen» (auf Englisch)",
-              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/fuehrung-in-neubenennen-auf-englisch_Ag6MLL2"
+              "label": "Räbeliechtliumzug Schwerzenbach",
+              "detail": "Schwerzenbach",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug-schwerzenbach/"
             },
             {
-              "label": "Round table by KUNST BRAUCHT KOHLE Online",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/runder-tisch-von-kunst-braucht-kohle-online/"
-            },
-            {
-              "label": "Skyrim: Musikalisches Erbe von Tamriel",
-              "detail": "Evang.-ref. Kirche St. Peter",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/skyrim-musikalisches-erbe-von-tamriel_AeJ11Y1"
-            },
-            {
-              "label": "Skyrim: Musikalisches Erbe von Tamriel",
-              "detail": "Kirche St. Peter, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/skyrim-musikalisches-erbe-von-tamriel/"
+              "label": "50 Jahr Reppischfäger Dietikon",
+              "detail": "Dietikon",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahr-reppischfaeger-dietikon/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "349",
+          "value": "348",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,64 +144,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Car Zurich",
-              "detail": "Messezentrum Zürich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auto-zurigo/"
+              "label": "The 10th HNHCP Educational Conference",
+              "detail": "Universität Zürich, Zürich",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/the-10th-hnhcp-educational-conference_Any1ALn"
             },
             {
-              "label": "Mensch SUCHT Leben",
+              "label": "Kurzfilmevent Dietikon mit Gleis21-OsKar",
+              "detail": "Dietikon",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kurzfilmevent-dietikon-mit-gleis21-oskar/"
+            },
+            {
+              "label": "Yoga und Meditation",
+              "detail": "Kappel am Albis",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yoga-und-meditation-1/"
+            },
+            {
+              "label": "Entrepreneurs Summit 2026",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mensch-sucht-leben/"
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/entrepreneurs-summit-2026/"
             },
             {
-              "label": "Agile Unconference 2026",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/agile-unconference-2026_APUQmBW"
+              "label": "Grundkenntnistest",
+              "detail": "DÃ¼bendorf, Dübendorf",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/grundkenntnistest-12/"
             },
             {
-              "label": "Ökumenischer Frauen-Treff Dübendorf",
-              "detail": "Dübendorf",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oekumenischer-frauen-treff-duebendorf-1/"
+              "label": "Kantonaler Deutschtest für die Einbürgerung",
+              "detail": "DÃ¼bendorf, Dübendorf",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kantonaler-deutschtest-fuer-die-einbuergerung-9/"
             },
             {
-              "label": "MINIMUM November 2026",
-              "detail": "8404 Winterthur, Winterthur",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/minimum-november-2026/"
+              "label": "Räbeliechtliumzug Rüti ZH 2026",
+              "detail": "Rüti ZH, Rüti (ZH)",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/raebeliechtliumzug-rueti-zh-2026/"
             },
             {
-              "label": "Addressing War? On artistic engagement with conflict and violence",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adressing-war-on-artistic-engagement-with-conflict-and-violence/"
+              "label": "Räbeliechtli-Umzug Aesch ZH",
+              "detail": "Treffpunkt Alter Chindsgi Museumsstrasse, Aesch (ZH)",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raebeliechtli-umzug-aesch-zh/"
             },
             {
-              "label": "Führung in «Neubenennen» (auf Englisch)",
-              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/fuehrung-in-neubenennen-auf-englisch_Ag6MLL2"
+              "label": "Räbeliechtliumzug Schwerzenbach",
+              "detail": "Schwerzenbach",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug-schwerzenbach/"
             },
             {
-              "label": "Round table by KUNST BRAUCHT KOHLE Online",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/runder-tisch-von-kunst-braucht-kohle-online/"
-            },
-            {
-              "label": "Skyrim: Musikalisches Erbe von Tamriel",
-              "detail": "Evang.-ref. Kirche St. Peter",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/skyrim-musikalisches-erbe-von-tamriel_AeJ11Y1"
-            },
-            {
-              "label": "Skyrim: Musikalisches Erbe von Tamriel",
-              "detail": "Kirche St. Peter, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/skyrim-musikalisches-erbe-von-tamriel/"
+              "label": "50 Jahr Reppischfäger Dietikon",
+              "detail": "Dietikon",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahr-reppischfaeger-dietikon/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "349",
+          "value": "348",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,64 +255,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Auto Zürich",
-              "detail": "Messezentrum Zürich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auto-zurigo/"
+              "label": "The 10th HNHCP Educational Conference",
+              "detail": "Universität Zürich, Zürich",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/the-10th-hnhcp-educational-conference_Any1ALn"
             },
             {
-              "label": "Mensch SUCHT Leben",
+              "label": "Kurzfilmevent Dietikon mit Gleis21-OsKar",
+              "detail": "Dietikon",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kurzfilmevent-dietikon-mit-gleis21-oskar/"
+            },
+            {
+              "label": "Yoga und Meditation",
+              "detail": "Kappel am Albis",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yoga-und-meditation-1/"
+            },
+            {
+              "label": "Entrepreneurs Summit 2026",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mensch-sucht-leben/"
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/entrepreneurs-summit-2026/"
             },
             {
-              "label": "Agile Unconference 2026",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/agile-unconference-2026_APUQmBW"
+              "label": "Grundkenntnistest",
+              "detail": "DÃ¼bendorf, Dübendorf",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/grundkenntnistest-12/"
             },
             {
-              "label": "Ökumenischer Frauen-Treff Dübendorf",
-              "detail": "Dübendorf",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oekumenischer-frauen-treff-duebendorf-1/"
+              "label": "Kantonaler Deutschtest für die Einbürgerung",
+              "detail": "DÃ¼bendorf, Dübendorf",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kantonaler-deutschtest-fuer-die-einbuergerung-9/"
             },
             {
-              "label": "MINIMUM November 2026",
-              "detail": "8404 Winterthur, Winterthur",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/minimum-november-2026/"
+              "label": "Räbeliechtliumzug Rüti ZH 2026",
+              "detail": "Rüti ZH, Rüti (ZH)",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/raebeliechtliumzug-rueti-zh-2026/"
             },
             {
-              "label": "Addressing War? On artistic engagement with conflict and violence",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adressing-war-on-artistic-engagement-with-conflict-and-violence/"
+              "label": "Räbeliechtli-Umzug Aesch ZH",
+              "detail": "Treffpunkt Alter Chindsgi Museumsstrasse, Aesch (ZH)",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raebeliechtli-umzug-aesch-zh/"
             },
             {
-              "label": "Führung in «Neubenennen» (auf Englisch)",
-              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/fuehrung-in-neubenennen-auf-englisch_Ag6MLL2"
+              "label": "Räbeliechtliumzug Schwerzenbach",
+              "detail": "Schwerzenbach",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug-schwerzenbach/"
             },
             {
-              "label": "Runder Tisch von KUNST BRAUCHT KOHLE Online",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/runder-tisch-von-kunst-braucht-kohle-online/"
-            },
-            {
-              "label": "Skyrim: Musikalisches Erbe von Tamriel",
-              "detail": "Evang.-ref. Kirche St. Peter",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/skyrim-musikalisches-erbe-von-tamriel_AeJ11Y1"
-            },
-            {
-              "label": "Skyrim: Musikalisches Erbe von Tamriel",
-              "detail": "Kirche St. Peter, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/skyrim-musikalisches-erbe-von-tamriel/"
+              "label": "50 Jahr Reppischfäger Dietikon",
+              "detail": "Dietikon",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahr-reppischfaeger-dietikon/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "349",
+          "value": "348",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,64 +366,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Auto Zurich",
-              "detail": "Messezentrum Zürich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auto-zurigo/"
+              "label": "The 10th HNHCP Educational Conference",
+              "detail": "Universität Zürich, Zürich",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/the-10th-hnhcp-educational-conference_Any1ALn"
             },
             {
-              "label": "Mensch SUCHT Leben",
+              "label": "Kurzfilmevent Dietikon mit Gleis21-OsKar",
+              "detail": "Dietikon",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kurzfilmevent-dietikon-mit-gleis21-oskar/"
+            },
+            {
+              "label": "Yoga und Meditation",
+              "detail": "Kappel am Albis",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yoga-und-meditation-1/"
+            },
+            {
+              "label": "Entrepreneurs Summit 2026",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mensch-sucht-leben/"
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/entrepreneurs-summit-2026/"
             },
             {
-              "label": "Agile Unconference 2026",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/agile-unconference-2026_APUQmBW"
+              "label": "Grundkenntnistest",
+              "detail": "DÃ¼bendorf, Dübendorf",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/grundkenntnistest-12/"
             },
             {
-              "label": "Ökumenischer Frauen-Treff Dübendorf",
-              "detail": "Dübendorf",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oekumenischer-frauen-treff-duebendorf-1/"
+              "label": "Kantonaler Deutschtest für die Einbürgerung",
+              "detail": "DÃ¼bendorf, Dübendorf",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kantonaler-deutschtest-fuer-die-einbuergerung-9/"
             },
             {
-              "label": "MINIMUM November 2026",
-              "detail": "8404 Winterthur, Winterthur",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/minimum-november-2026/"
+              "label": "Räbeliechtliumzug Rüti ZH 2026",
+              "detail": "Rüti ZH, Rüti (ZH)",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/raebeliechtliumzug-rueti-zh-2026/"
             },
             {
-              "label": "Addressing War? On artistic engagement with conflict and violence",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adressing-war-on-artistic-engagement-with-conflict-and-violence/"
+              "label": "Räbeliechtli-Umzug Aesch ZH",
+              "detail": "Treffpunkt Alter Chindsgi Museumsstrasse, Aesch (ZH)",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raebeliechtli-umzug-aesch-zh/"
             },
             {
-              "label": "Führung in «Neubenennen» (auf Englisch)",
-              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/fuehrung-in-neubenennen-auf-englisch_Ag6MLL2"
+              "label": "Räbeliechtliumzug Schwerzenbach",
+              "detail": "Schwerzenbach",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug-schwerzenbach/"
             },
             {
-              "label": "Round table by KUNST BRAUCHT KOHLE Online",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/runder-tisch-von-kunst-braucht-kohle-online/"
-            },
-            {
-              "label": "Skyrim: Musikalisches Erbe von Tamriel",
-              "detail": "Evang.-ref. Kirche St. Peter",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/skyrim-musikalisches-erbe-von-tamriel_AeJ11Y1"
-            },
-            {
-              "label": "Skyrim: Musikalisches Erbe von Tamriel",
-              "detail": "Kirche St. Peter, Zürich",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/skyrim-musikalisches-erbe-von-tamriel/"
+              "label": "50 Jahr Reppischfäger Dietikon",
+              "detail": "Dietikon",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahr-reppischfaeger-dietikon/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

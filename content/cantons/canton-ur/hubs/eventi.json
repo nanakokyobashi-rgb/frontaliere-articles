@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "9dd750256ac547f87a853f11b9c65cecaa77ca01bb6ba1be944c07f7d145618b",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "c614527c60b1f8ed8d187a285fc0723658a606969ccc827e775ef93c2d5750e8",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -33,12 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Aquarellmalen und Mischtechniken - verschiedene Maltechniken",
-              "detail": "Altdorf",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aquarellmalen-und-mischtechniken-verschiedene-maltechniken/"
-            },
-            {
               "label": "Julia Steiner",
               "detail": "Altdorf",
               "date": "2026-11-06",
@@ -91,6 +85,12 @@
               "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/gaming-am-mittwoch-3/"
+            },
+            {
+              "label": "Handlettering",
+              "detail": "Berufs- und Weiterbildungszentrum Uri",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/handlettering/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "UR",
@@ -137,12 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Aquarellmalen und Mischtechniken - verschiedene Maltechniken",
-              "detail": "Altdorf",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aquarellmalen-und-mischtechniken-verschiedene-maltechniken/"
-            },
             {
               "label": "Julia Steiner",
               "detail": "Altdorf",
@@ -196,6 +190,12 @@
               "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/gaming-am-mittwoch-3/"
+            },
+            {
+              "label": "Handlettering",
+              "detail": "Berufs- und Weiterbildungszentrum Uri",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/handlettering/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "UR",
@@ -242,12 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Aquarellmalen und Mischtechniken - verschiedene Maltechniken",
-              "detail": "Altdorf",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aquarellmalen-und-mischtechniken-verschiedene-maltechniken/"
-            },
             {
               "label": "Julia Steiner",
               "detail": "Altdorf",
@@ -301,6 +295,12 @@
               "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/gaming-am-mittwoch-3/"
+            },
+            {
+              "label": "Handlettering",
+              "detail": "Berufs- und Weiterbildungszentrum Uri",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/handlettering/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "UR",
@@ -347,12 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Aquarellmalen und Mischtechniken - verschiedene Maltechniken",
-              "detail": "Altdorf",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aquarellmalen-und-mischtechniken-verschiedene-maltechniken/"
-            },
             {
               "label": "Julia Steiner",
               "detail": "Altdorf",
@@ -406,6 +400,12 @@
               "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/gaming-am-mittwoch-3/"
+            },
+            {
+              "label": "Handlettering",
+              "detail": "Berufs- und Weiterbildungszentrum Uri",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/handlettering/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

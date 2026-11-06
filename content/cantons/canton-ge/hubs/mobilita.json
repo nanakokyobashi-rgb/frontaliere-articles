@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "108b1e711de9aeceefb38f2987d05ad33b0b63fdb15af7c5d229427e019a2d01",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "334bb619e7f16a3f539aa0115a8cfac939d36d69f508592c08036804ad725ffa",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T01:51:30.468Z",
+      "updatedAt": "2026-11-05T11:32:49.603Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T13:31:40.660Z",
       "keyFacts": 0
     }
   ],
@@ -123,38 +123,48 @@
               "date": "2026-10-12T07:02:00.000Z"
             },
             {
-              "label": "Perturbations de la circulation - dimanche 1er novembre",
+              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Bernex E Svincolo autostradale Vernier, al chilometro 5.2 Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia…",
               "value": "Traffico",
-              "date": "2026-11-05T01:51:30.468Z",
-              "url": "https://www.ge.ch/node/45382"
+              "date": "2026-11-05T11:21:00.000Z"
             },
             {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
-              "value": "Cantiere",
-              "date": "2026-11-05T01:51:30.468Z",
-              "url": "https://www.ge.ch/node/45210"
+              "label": "Perturbations de la circulation - dimanche 1er novembre",
+              "value": "Traffico",
+              "date": "2026-11-05T11:32:49.603Z",
+              "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Cantiere",
-              "date": "2026-11-05T01:51:30.468Z",
+              "date": "2026-11-05T11:32:49.603Z",
               "url": "https://www.ge.ch/node/45273"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "value": "Cantiere",
-              "date": "2026-11-05T01:51:30.468Z",
+              "date": "2026-11-05T11:32:49.603Z",
               "url": "https://www.ge.ch/node/45356"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
+              "value": "Cantiere",
+              "date": "2026-11-05T11:32:49.603Z",
+              "url": "https://www.ge.ch/node/45397"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T11:32:49.603Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.ge.ch/node/45397"
+            },
             {
               "label": "Mouvement social : jeudi 05 novembre",
               "date": "2026-11-04T11:25:42.000Z",
@@ -179,14 +189,9 @@
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "date": "2026-10-31",
               "url": "https://www.ge.ch/node/45382"
-            },
-            {
-              "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
-              "date": "2026-10-30",
-              "url": "https://www.ge.ch/node/45377"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -246,7 +251,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "GE",
@@ -347,38 +352,48 @@
               "date": "2026-10-12T07:02:00.000Z"
             },
             {
-              "label": "Perturbations de la circulation - dimanche 1er novembre",
+              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Bernex E Svincolo autostradale Vernier, al chilometro 5.2 Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia…",
               "value": "Traffic",
-              "date": "2026-11-05T01:51:30.468Z",
-              "url": "https://www.ge.ch/node/45382"
+              "date": "2026-11-05T11:21:00.000Z"
             },
             {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
-              "value": "Roadworks",
-              "date": "2026-11-05T01:51:30.468Z",
-              "url": "https://www.ge.ch/node/45210"
+              "label": "Perturbations de la circulation - dimanche 1er novembre",
+              "value": "Traffic",
+              "date": "2026-11-05T11:32:49.603Z",
+              "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Roadworks",
-              "date": "2026-11-05T01:51:30.468Z",
+              "date": "2026-11-05T11:32:49.603Z",
               "url": "https://www.ge.ch/node/45273"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "value": "Roadworks",
-              "date": "2026-11-05T01:51:30.468Z",
+              "date": "2026-11-05T11:32:49.603Z",
               "url": "https://www.ge.ch/node/45356"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
+              "value": "Roadworks",
+              "date": "2026-11-05T11:32:49.603Z",
+              "url": "https://www.ge.ch/node/45397"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T11:32:49.603Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.ge.ch/node/45397"
+            },
             {
               "label": "Mouvement social : jeudi 05 novembre",
               "date": "2026-11-04T11:25:42.000Z",
@@ -403,14 +418,9 @@
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "date": "2026-10-31",
               "url": "https://www.ge.ch/node/45382"
-            },
-            {
-              "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
-              "date": "2026-10-30",
-              "url": "https://www.ge.ch/node/45377"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -470,7 +480,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "GE",
@@ -571,38 +581,48 @@
               "date": "2026-10-12T07:02:00.000Z"
             },
             {
-              "label": "Perturbations de la circulation - dimanche 1er novembre",
+              "label": "A1 Genf -> Lausanne zwischen Anschluss Bernex und Anschluss Vernier, bei Kilometer 5.2 Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: Pannenstreifen blockiert",
               "value": "Verkehr",
-              "date": "2026-11-05T01:51:30.468Z",
-              "url": "https://www.ge.ch/node/45382"
+              "date": "2026-11-05T11:21:00.000Z"
             },
             {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
-              "value": "Baustelle",
-              "date": "2026-11-05T01:51:30.468Z",
-              "url": "https://www.ge.ch/node/45210"
+              "label": "Perturbations de la circulation - dimanche 1er novembre",
+              "value": "Verkehr",
+              "date": "2026-11-05T11:32:49.603Z",
+              "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Baustelle",
-              "date": "2026-11-05T01:51:30.468Z",
+              "date": "2026-11-05T11:32:49.603Z",
               "url": "https://www.ge.ch/node/45273"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "value": "Baustelle",
-              "date": "2026-11-05T01:51:30.468Z",
+              "date": "2026-11-05T11:32:49.603Z",
               "url": "https://www.ge.ch/node/45356"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
+              "value": "Baustelle",
+              "date": "2026-11-05T11:32:49.603Z",
+              "url": "https://www.ge.ch/node/45397"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T11:32:49.603Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.ge.ch/node/45397"
+            },
             {
               "label": "Mouvement social : jeudi 05 novembre",
               "date": "2026-11-04T11:25:42.000Z",
@@ -627,14 +647,9 @@
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "date": "2026-10-31",
               "url": "https://www.ge.ch/node/45382"
-            },
-            {
-              "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
-              "date": "2026-10-30",
-              "url": "https://www.ge.ch/node/45377"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -694,7 +709,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "GE",
@@ -795,38 +810,48 @@
               "date": "2026-10-12T07:02:00.000Z"
             },
             {
-              "label": "Perturbations de la circulation - dimanche 1er novembre",
+              "label": "A1 Genève -> Lausanne entre Jonction autoroutière Bernex et Jonction autoroutière Vernier, au kilomètre 5.2 Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: bande d'arrêt…",
               "value": "Trafic",
-              "date": "2026-11-05T01:51:30.468Z",
-              "url": "https://www.ge.ch/node/45382"
+              "date": "2026-11-05T11:21:00.000Z"
             },
             {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
-              "value": "Chantier",
-              "date": "2026-11-05T01:51:30.468Z",
-              "url": "https://www.ge.ch/node/45210"
+              "label": "Perturbations de la circulation - dimanche 1er novembre",
+              "value": "Trafic",
+              "date": "2026-11-05T11:32:49.603Z",
+              "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Chantier",
-              "date": "2026-11-05T01:51:30.468Z",
+              "date": "2026-11-05T11:32:49.603Z",
               "url": "https://www.ge.ch/node/45273"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "value": "Chantier",
-              "date": "2026-11-05T01:51:30.468Z",
+              "date": "2026-11-05T11:32:49.603Z",
               "url": "https://www.ge.ch/node/45356"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
+              "value": "Chantier",
+              "date": "2026-11-05T11:32:49.603Z",
+              "url": "https://www.ge.ch/node/45397"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T01:51:30.468Z"
+          "updatedAt": "2026-11-05T11:32:49.603Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
+              "date": "2026-11-05",
+              "url": "https://www.ge.ch/node/45397"
+            },
             {
               "label": "Mouvement social : jeudi 05 novembre",
               "date": "2026-11-04T11:25:42.000Z",
@@ -851,14 +876,9 @@
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "date": "2026-10-31",
               "url": "https://www.ge.ch/node/45382"
-            },
-            {
-              "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
-              "date": "2026-10-30",
-              "url": "https://www.ge.ch/node/45377"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -918,7 +938,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

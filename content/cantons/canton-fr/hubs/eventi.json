@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "c1582154e675e41e9985f3cff0792d38b216c57eab81dd2935188541f08fe50b",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "821b9da0c3de2c1b52d4e1bcc2f8be324db35c05cfd920a07662a89a17e335a8",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T13:31:40.660Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "41",
+          "value": "39",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,30 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Midi théâtre : Tavolo Pour Drü",
-              "detail": "Nuithonie, Villars-sur-Glâne",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/midi-theatre-tavolo-pour-drue-1/"
-            },
-            {
-              "label": "Afterwork",
-              "detail": "Fribourg",
-              "date": "2026-11-05",
-              "url": "https://www.fr.ch/mahf/evenements/afterwork-2"
-            },
-            {
-              "label": "Séance d'information \"Admissions 2027-28\" - en visio",
-              "detail": "Fribourg",
-              "date": "2026-11-05",
-              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-visio"
-            },
-            {
-              "label": "C’est la fête",
-              "detail": "Villars-sur-Glâne — in corso, ultimo giorno: 6 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
-            },
             {
               "label": "BDmania",
               "detail": "Belfaux",
@@ -86,6 +62,12 @@
               "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
             },
             {
+              "label": "C’est la fête",
+              "detail": "Villars-sur-Glâne — in corso, ultimo giorno: 6 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
+            },
+            {
               "label": "Bien-être menstruel",
               "detail": "Villars-sur-Glâne",
               "date": "2026-11-07",
@@ -96,6 +78,24 @@
               "detail": "Estavayer-le-Lac, Estavayer",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gravelodux/"
+            },
+            {
+              "label": "Requiem For A Dead Sun",
+              "detail": "Théâtre du Passage, Fribourg",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/requiem-for-a-dead-sun/"
+            },
+            {
+              "label": "Journées des artisans",
+              "detail": "Estavayer-le-Lac, Estavayer",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/journees-des-artisans/"
+            },
+            {
+              "label": "Poils et mamelles",
+              "detail": "Fribourg",
+              "date": "2026-11-07",
+              "url": "https://www.fr.ch/mhnf/evenements/poils-et-mamelles"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -133,7 +133,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "FR",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "41",
+          "value": "39",
           "note": "from the site’s events calendar"
         }
       ],
@@ -175,30 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Midi théâtre : Tavolo Pour Drü",
-              "detail": "Nuithonie, Villars-sur-Glâne",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/midi-theatre-tavolo-pour-drue-1/"
-            },
-            {
-              "label": "Afterwork",
-              "detail": "Fribourg",
-              "date": "2026-11-05",
-              "url": "https://www.fr.ch/mahf/evenements/afterwork-2"
-            },
-            {
-              "label": "Séance d'information \"Admissions 2027-28\" - en visio",
-              "detail": "Fribourg",
-              "date": "2026-11-05",
-              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-visio"
-            },
-            {
-              "label": "C’est la fête",
-              "detail": "Villars-sur-Glâne — ongoing, last day: 6 November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
-            },
             {
               "label": "BDmania",
               "detail": "Belfaux",
@@ -224,6 +200,12 @@
               "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
             },
             {
+              "label": "C’est la fête",
+              "detail": "Villars-sur-Glâne — ongoing, last day: 6 November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
+            },
+            {
               "label": "Bien-être menstruel",
               "detail": "Villars-sur-Glâne",
               "date": "2026-11-07",
@@ -234,6 +216,24 @@
               "detail": "Estavayer-le-Lac, Estavayer",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gravelodux/"
+            },
+            {
+              "label": "Requiem For A Dead Sun",
+              "detail": "Théâtre du Passage, Fribourg",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/requiem-for-a-dead-sun/"
+            },
+            {
+              "label": "Journées des artisans",
+              "detail": "Estavayer-le-Lac, Estavayer",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/journees-des-artisans/"
+            },
+            {
+              "label": "Poils et mamelles",
+              "detail": "Fribourg",
+              "date": "2026-11-07",
+              "url": "https://www.fr.ch/mhnf/evenements/poils-et-mamelles"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -271,7 +271,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "FR",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "41",
+          "value": "39",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -313,30 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Midi théâtre : Tavolo Pour Drü",
-              "detail": "Nuithonie, Villars-sur-Glâne",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/midi-theatre-tavolo-pour-drue-1/"
-            },
-            {
-              "label": "Afterwork",
-              "detail": "Fribourg",
-              "date": "2026-11-05",
-              "url": "https://www.fr.ch/mahf/evenements/afterwork-2"
-            },
-            {
-              "label": "Séance d'information \"Admissions 2027-28\" - en visio",
-              "detail": "Fribourg",
-              "date": "2026-11-05",
-              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-visio"
-            },
-            {
-              "label": "C’est la fête",
-              "detail": "Villars-sur-Glâne — läuft, letzter Tag: 6. November 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
-            },
             {
               "label": "BDmania",
               "detail": "Belfaux",
@@ -362,6 +338,12 @@
               "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
             },
             {
+              "label": "C’est la fête",
+              "detail": "Villars-sur-Glâne — läuft, letzter Tag: 6. November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
+            },
+            {
               "label": "Bien-être menstruel",
               "detail": "Villars-sur-Glâne",
               "date": "2026-11-07",
@@ -372,6 +354,24 @@
               "detail": "Estavayer-le-Lac, Estavayer",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gravelodux/"
+            },
+            {
+              "label": "Requiem For A Dead Sun",
+              "detail": "Théâtre du Passage, Fribourg",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/requiem-for-a-dead-sun/"
+            },
+            {
+              "label": "Journées des artisans",
+              "detail": "Estavayer-le-Lac, Estavayer",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/journees-des-artisans/"
+            },
+            {
+              "label": "Poils et mamelles",
+              "detail": "Fribourg",
+              "date": "2026-11-07",
+              "url": "https://www.fr.ch/mhnf/evenements/poils-et-mamelles"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -409,7 +409,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "FR",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "41",
+          "value": "39",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -451,30 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Midi théâtre : Tavolo Pour Drü",
-              "detail": "Nuithonie, Villars-sur-Glâne",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/midi-theatre-tavolo-pour-drue-1/"
-            },
-            {
-              "label": "Afterwork",
-              "detail": "Fribourg",
-              "date": "2026-11-05",
-              "url": "https://www.fr.ch/mahf/evenements/afterwork-2"
-            },
-            {
-              "label": "Séance d'information \"Admissions 2027-28\" - en visio",
-              "detail": "Fribourg",
-              "date": "2026-11-05",
-              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-visio"
-            },
-            {
-              "label": "C’est la fête",
-              "detail": "Villars-sur-Glâne — en cours, dernier jour : 6 novembre 2026",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
-            },
             {
               "label": "BDmania",
               "detail": "Belfaux",
@@ -500,6 +476,12 @@
               "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
             },
             {
+              "label": "C’est la fête",
+              "detail": "Villars-sur-Glâne — en cours, dernier jour : 6 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
+            },
+            {
               "label": "Bien-être menstruel",
               "detail": "Villars-sur-Glâne",
               "date": "2026-11-07",
@@ -510,6 +492,24 @@
               "detail": "Estavayer-le-Lac, Estavayer",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gravelodux/"
+            },
+            {
+              "label": "Requiem For A Dead Sun",
+              "detail": "Théâtre du Passage, Fribourg",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/requiem-for-a-dead-sun/"
+            },
+            {
+              "label": "Journées des artisans",
+              "detail": "Estavayer-le-Lac, Estavayer",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/journees-des-artisans/"
+            },
+            {
+              "label": "Poils et mamelles",
+              "detail": "Fribourg",
+              "date": "2026-11-07",
+              "url": "https://www.fr.ch/mhnf/evenements/poils-et-mamelles"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -547,7 +547,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T13:31:40.660Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }

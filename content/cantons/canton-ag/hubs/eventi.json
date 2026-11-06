@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "622602625d55c364eb272e8b9ae3c3befb5a0f43782a112b84ce30e5cdac51c5",
+  "updatedAt": "2026-11-06T02:42:42.127Z",
+  "contentHash": "f1d53e06496e3a0a229e2c1c3a80d7cf9484106175a3dec626a4a10e9e2353e0",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "102",
+          "value": "101",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "TGS - Aufführung \"Hesch en Vogel\"",
+              "detail": "Spreitenbach",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
+            },
+            {
               "label": "Mircos Suche nach dem Schatten",
-              "detail": "Kurtheater Baden, Baden",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mircos-suche-nach-dem-schatten-1/"
+              "detail": "Baden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mircos-suche-nach-dem-schatten-2/"
             },
             {
-              "label": "Veranstaltung für Menschen mit Sehbehinderungen",
-              "detail": "Aargauer Kunsthaus, Aarau",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/aarau/veranstaltung-fuer-menschen-mit-sehbehinderungen_AiUMMKD"
+              "label": "Sushi-Kurs: Fisch und Vegi-Variationen",
+              "detail": "Baden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sushi-kurs-fisch-und-vegi-variationen/"
             },
             {
-              "label": "Wirtschaftspodium Limmattal 2026",
-              "detail": "Umwelt Arena, Spreitenbach",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wirtschaftspodium-limmattal-2026/"
+              "label": "Lucky The Girl",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/lucky-the-girl_A36iCD2"
             },
             {
-              "label": "Afterwork Live Musik - Jon Shain Trio",
-              "detail": "Grand Casino Baden, Baden",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/baden/afterwork-live-musik-jon-shain-trio_A9fu9mK"
+              "label": "Tim Vantol (NL) | Support: Reno Gabriel (CH)",
+              "detail": "Böröm pöm pöm, Oberentfelden",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberentfelden/tim-vantol-nl-support-tba_AthUvPM"
             },
             {
-              "label": "Räbeliechtliumzug",
-              "detail": "Muri AG",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug/"
-            },
-            {
-              "label": "Country-Music meets Boogie–Woogie I Chris Regez Band & Alain Boog",
-              "detail": "Hotel Schützen, Rheinfelden",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/country-music-meets-boogiewoogie-i-chris-regez-band-und-alain-boog_AF2H2Q7"
-            },
-            {
-              "label": "Peach Weber - King of Gäx",
-              "detail": "Bad Zurzach, Zurzach",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/peach-weber-king-of-gaex-5/"
+              "label": "Eto • Alwa Alibi",
+              "detail": "Baden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/eto-alwa-alibi/"
             },
             {
               "label": "Metzgete",
               "detail": "Kaiseraugst — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-05",
+              "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
             },
             {
               "label": "Metzgete im Adler, Kaiseraugst",
               "detail": "Landgasthof Adler, Kaiseraugst — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-05",
+              "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
             },
             {
               "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
               "detail": "Strohmuseum im Park — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-05",
+              "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
+              "label": "Schiff über Bord!",
+              "detail": "Gemeindesaal «Breiten», Rothrist — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "102",
+          "value": "101",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,64 +138,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "TGS - Aufführung \"Hesch en Vogel\"",
+              "detail": "Spreitenbach",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
+            },
+            {
               "label": "Mircos Suche nach dem Schatten",
-              "detail": "Kurtheater Baden, Baden",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mircos-suche-nach-dem-schatten-1/"
+              "detail": "Baden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mircos-suche-nach-dem-schatten-2/"
             },
             {
-              "label": "Veranstaltung fr",
-              "detail": "Aargauer Kunsthaus, Aarau",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/aarau/veranstaltung-fuer-menschen-mit-sehbehinderungen_AiUMMKD"
+              "label": "Sushi-Kurs: Fisch und Vegi-Variationen",
+              "detail": "Baden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sushi-kurs-fisch-und-vegi-variationen/"
             },
             {
-              "label": "Wirtschaftspodium Limmattal 2026",
-              "detail": "Umwelt Arena, Spreitenbach",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wirtschaftspodium-limmattal-2026/"
+              "label": "Lucky The Girl",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/lucky-the-girl_A36iCD2"
             },
             {
-              "label": "Afteror",
-              "detail": "Grand Casino Baden, Baden",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/baden/afterwork-live-musik-jon-shain-trio_A9fu9mK"
+              "label": "Tim Vantol (NL) | Support: Jean-Claude Juncker (CH)",
+              "detail": "Böröm pöm pöm, Oberentfelden",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberentfelden/tim-vantol-nl-support-tba_AthUvPM"
             },
             {
-              "label": "Räbeliechtliumzug",
-              "detail": "Muri AG",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug/"
-            },
-            {
-              "label": "Country-Music meets Boogie–Woogie I Chris Regez Band & Alain Boog",
-              "detail": "Hotel Schützen, Rheinfelden",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/country-music-meets-boogiewoogie-i-chris-regez-band-und-alain-boog_AF2H2Q7"
-            },
-            {
-              "label": "Peach Weber - King of Gäx",
-              "detail": "Bad Zurzach, Zurzach",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/peach-weber-king-of-gaex-5/"
+              "label": "Eto • Alwa Alibi",
+              "detail": "Baden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/eto-alwa-alibi/"
             },
             {
               "label": "Metzgete",
               "detail": "Kaiseraugst — ongoing, last day: 7 November 2026",
-              "date": "2026-11-05",
+              "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
             },
             {
               "label": "Metzgete im Adler, Kaiseraugst",
               "detail": "Landgasthof Adler, Kaiseraugst — ongoing, last day: 7 November 2026",
-              "date": "2026-11-05",
+              "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
             },
             {
               "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
               "detail": "Strohmuseum im Park — ongoing, last day: 28 November 2026",
-              "date": "2026-11-05",
+              "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
+              "label": "Schiff über Bord!",
+              "detail": "Gemeindesaal «Breiten», Rothrist — ongoing, last day: 7 November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "102",
+          "value": "101",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,64 +243,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "TGS - Aufführung \"Hesch en Vogel\"",
+              "detail": "Spreitenbach",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
+            },
+            {
               "label": "Mircos Suche nach dem Schatten",
-              "detail": "Kurtheater Baden, Baden",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mircos-suche-nach-dem-schatten-1/"
+              "detail": "Baden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mircos-suche-nach-dem-schatten-2/"
             },
             {
-              "label": "Anstaltungf ①R Menschen mit Sehbehinderungen",
-              "detail": "Aargauer Kunsthaus, Aarau",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/aarau/veranstaltung-fuer-menschen-mit-sehbehinderungen_AiUMMKD"
+              "label": "Sushi-Kurs: Fisch und Vegi-Variationen",
+              "detail": "Baden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sushi-kurs-fisch-und-vegi-variationen/"
             },
             {
-              "label": "Wirtschaftspodium Limmattal 2026",
-              "detail": "Umwelt Arena, Spreitenbach",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wirtschaftspodium-limmattal-2026/"
+              "label": "Lucky The Girl",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/lucky-the-girl_A36iCD2"
             },
             {
-              "label": "Afterwork Live Musik – Jon Shain Trio",
-              "detail": "Grand Casino Baden, Baden",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/baden/afterwork-live-musik-jon-shain-trio_A9fu9mK"
+              "label": "Tim Vantol (NL) | Unterstützung: Reno Gabriel (CH)",
+              "detail": "Böröm pöm pöm, Oberentfelden",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberentfelden/tim-vantol-nl-support-tba_AthUvPM"
             },
             {
-              "label": "Räbeliechtliumzug",
-              "detail": "Muri AG",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug/"
-            },
-            {
-              "label": "Country-Music meets Boogie–Woogie I Chris Regez Band & Alain Boog",
-              "detail": "Hotel Schützen, Rheinfelden",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/country-music-meets-boogiewoogie-i-chris-regez-band-und-alain-boog_AF2H2Q7"
-            },
-            {
-              "label": "Peach Weber - King of Gäx",
-              "detail": "Bad Zurzach, Zurzach",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/peach-weber-king-of-gaex-5/"
+              "label": "Eto • Alwa Alibi",
+              "detail": "Baden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/eto-alwa-alibi/"
             },
             {
               "label": "Metzgete",
               "detail": "Kaiseraugst — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-05",
+              "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
             },
             {
               "label": "Metzgete im Adler, Kaiseraugst",
               "detail": "Landgasthof Adler, Kaiseraugst — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-05",
+              "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
             },
             {
               "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
               "detail": "Strohmuseum im Park — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-05",
+              "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
+              "label": "Schiff über Bord!",
+              "detail": "Gemeindesaal «Breiten», Rothrist — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "102",
+          "value": "101",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,64 +348,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "TGS - Aufführung \"Hesch en Vogel\"",
+              "detail": "Spreitenbach",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
+            },
+            {
               "label": "Mircos Suche nach dem Schatten",
-              "detail": "Kurtheater Baden, Baden",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mircos-suche-nach-dem-schatten-1/"
+              "detail": "Baden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mircos-suche-nach-dem-schatten-2/"
             },
             {
-              "label": "Veranstaltung en",
-              "detail": "Aargauer Kunsthaus, Aarau",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/aarau/veranstaltung-fuer-menschen-mit-sehbehinderungen_AiUMMKD"
+              "label": "Sushi-Kurs: Fisch und Vegi-Variationen",
+              "detail": "Baden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sushi-kurs-fisch-und-vegi-variationen/"
             },
             {
-              "label": "Wirtschaftspodium Limmattal 2026",
-              "detail": "Umwelt Arena, Spreitenbach",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wirtschaftspodium-limmattal-2026/"
+              "label": "Lucky The Girl",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/lucky-the-girl_A36iCD2"
             },
             {
-              "label": "Afterwork Live Musique - Jon Shain Trio",
-              "detail": "Grand Casino Baden, Baden",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/baden/afterwork-live-musik-jon-shain-trio_A9fu9mK"
+              "label": "Tim Vantol (NL) | Soutien : Reno Gabriel (CH)",
+              "detail": "Böröm pöm pöm, Oberentfelden",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberentfelden/tim-vantol-nl-support-tba_AthUvPM"
             },
             {
-              "label": "Räbeliechtliumzug",
-              "detail": "Muri AG",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug/"
-            },
-            {
-              "label": "Country-Music meets Boogie–Woogie I Chris Regez Band & Alain Boog",
-              "detail": "Hotel Schützen, Rheinfelden",
-              "date": "2026-11-05",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/country-music-meets-boogiewoogie-i-chris-regez-band-und-alain-boog_AF2H2Q7"
-            },
-            {
-              "label": "Peach Weber - King of Gäx",
-              "detail": "Bad Zurzach, Zurzach",
-              "date": "2026-11-05",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/peach-weber-king-of-gaex-5/"
+              "label": "Eto • Alwa Alibi",
+              "detail": "Baden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/eto-alwa-alibi/"
             },
             {
               "label": "Metzgete",
               "detail": "Kaiseraugst — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-05",
+              "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
             },
             {
               "label": "Metzgete im Adler, Kaiseraugst",
               "detail": "Landgasthof Adler, Kaiseraugst — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-05",
+              "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
             },
             {
               "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
               "detail": "Strohmuseum im Park — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-05",
+              "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
+              "label": "Schiff über Bord!",
+              "detail": "Gemeindesaal «Breiten», Rothrist — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-06T02:42:42.127Z"
     }
   }
 }
