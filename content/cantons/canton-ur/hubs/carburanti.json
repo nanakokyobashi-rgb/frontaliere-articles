@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-11-06T08:42:56.834Z",
-  "contentHash": "b287d3600283084ad6a81fa45a3192ab90db88d6a9733dc2bd84e4a8aeb1e1f0",
+  "updatedAt": "2026-11-06T11:34:18.422Z",
+  "contentHash": "9289efce2e4f2eff905cf9d9594bd2088a9e540f3bfc7f78b5a33a1564665a0e",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Uri: riconoscimento ai familiari assistenti",
+          "url": "/articoli-uri/riconoscimento-familiari-assistenti-uri/",
+          "excerpt": "Il 30 ottobre Uri ha ringraziato i familiari assistenti. Christian Arnold ha consegnato un omaggio ad Annemarie Arnold.",
+          "date": "2026-11-06T11:28:43.895Z"
+        },
+        {
           "title": "Uri avvia progetto su cultura e integrazione",
           "url": "/articoli-uri/uri-progetto-cultura-integrazione/",
           "excerpt": "Il progetto «Netzwerk Kultur und Integration» durerà tre anni, con avvio previsto il 1° dicembre 2026, per facilitare l'accesso delle persone migranti alle offerte culturali urane.",
@@ -82,12 +88,6 @@
           "url": "/articoli-uri/seedorf-reussstrasse-lavori-innesto/",
           "excerpt": "La Reussstrasse a Seedorf sarà chiusa per lavori all'innesto verso sud, direzione Attinghausen, in vista della pista ciclabile Altdorf-Seedorf.",
           "date": "2026-11-03T12:26:50.675Z"
-        },
-        {
-          "title": "Passo del Gottardo: chiusura invernale da giovedì",
-          "url": "/articoli-uri/chiusura-invernale-gottardo/",
-          "excerpt": "Da giovedì scatta la chiusura invernale del passo del Gottardo: tre dei cinque passi alpini urani saranno chiusi, mentre Oberalp e Klausenpass restano aperti.",
-          "date": "2026-11-03T09:00:46.783Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-06T08:42:56.834Z"
+      "updatedAt": "2026-11-06T11:34:18.422Z"
     },
     "en": {
       "canton": "UR",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Uri: recognition for family caregivers",
+          "url": "/en/uri-articles/recognition-family-caregivers-uri/",
+          "excerpt": "On October 30, Uri thanked family caregivers. Christian Arnold presented a gift to Annemarie Arnold.",
+          "date": "2026-11-06T11:28:43.895Z"
+        },
+        {
           "title": "Uri launches project on culture and integration",
           "url": "/en/uri-articles/uri-culture-integration-project/",
           "excerpt": "The “Netzwerk Kultur und Integration” project will last three years, with a planned start date of December 1, 2026, to facilitate migrants’ access to urban cultural offerings.",
@@ -169,12 +175,6 @@
           "url": "/en/uri-articles/seedorf-reussstrasse-works-inlet/",
           "excerpt": "Reussstrasse in Seedorf will be closed for construction work at the southern junction, toward Attinghausen, in preparation for the Altdorf-Seedorf cycle path.",
           "date": "2026-11-03T12:26:50.675Z"
-        },
-        {
-          "title": "Gotthard Pass: winter closure from Thursday",
-          "url": "/en/uri-articles/gotthard-winter-closure/",
-          "excerpt": "Starting Thursday, the winter closure of the Gotthard Pass takes effect: three of the five Alpine passes in Uri will be closed, while Oberalp and Klausenpass remain open.",
-          "date": "2026-11-03T09:00:46.783Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-06T08:42:56.834Z"
+      "updatedAt": "2026-11-06T11:34:18.422Z"
     },
     "de": {
       "canton": "UR",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Uri: Anerkennung für pflegende Angehörige",
+          "url": "/de/uri-artikel/anerkennung-pflegende-angehoerige-uri/",
+          "excerpt": "Am 30. Oktober dankte Uri den pflegenden Angehörigen. Christian Arnold überreichte Annemarie Arnold ein Präsent.",
+          "date": "2026-11-06T11:28:43.895Z"
+        },
+        {
           "title": "Uri startet Projekt zu Kultur und Integration",
           "url": "/de/uri-artikel/uri-kultur-integrationsprojekt/",
           "excerpt": "Das Projekt \"Netzwerk Kultur und Integration\" wird drei Jahre dauern, beginnend am 1. Dezember 2026, um Migranten den Zugang zu den kulturellen Angeboten von Uri zu erleichtern.",
@@ -256,12 +262,6 @@
           "url": "/de/uri-artikel/seedorf-reussstrasse-arbeiten-innesto/",
           "excerpt": "Die Reussstrasse in Seedorf wird wegen Arbeiten an der Einmündung Richtung Süden, in Richtung Attinghausen, im Hinblick auf den Radweg Altdorf-Seedorf gesperrt.",
           "date": "2026-11-03T12:26:50.675Z"
-        },
-        {
-          "title": "Gotthardpass: Wintersperre ab Donnerstag",
-          "url": "/de/uri-artikel/gotthard-wintersperre/",
-          "excerpt": "Ab Donnerstag tritt die Wintersperre des Gotthardpasses in Kraft: Drei der fünf Urner Alpenpässe werden geschlossen sein, während Oberalp und Klausenpass vorerst offen bleiben.",
-          "date": "2026-11-03T09:00:46.783Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-06T08:42:56.834Z"
+      "updatedAt": "2026-11-06T11:34:18.422Z"
     },
     "fr": {
       "canton": "UR",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Uri : reconnaissance envers les proches aidants",
+          "url": "/fr/articles-uri/reconnaissance-proches-aidants-uri/",
+          "excerpt": "Le 30 octobre, Uri a remercié les proches aidants. Christian Arnold a remis un cadeau à Annemarie Arnold.",
+          "date": "2026-11-06T11:28:43.895Z"
+        },
+        {
           "title": "Uri lance un projet sur la culture et l’intégration",
           "url": "/fr/articles-uri/uri-projet-culture-integration/",
           "excerpt": "Le projet «Netzwerk Kultur und Integration» durera trois ans, avec un démarrage prévu le 1er décembre 2026, afin de faciliter l’accès des personnes migrantes aux offres culturelles urbaines.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-uri/seedorf-reussstrasse-travaux-injection/",
           "excerpt": "La Reussstrasse à Seedorf sera fermée pour des travaux de raccordement vers le sud, en direction d’Attinghausen, dans le cadre de la piste cyclable Altdorf-Seedorf.",
           "date": "2026-11-03T12:26:50.675Z"
-        },
-        {
-          "title": "Col du Gothard : fermeture hivernale dès jeudi",
-          "url": "/fr/articles-uri/fermeture-hivernale-gothard/",
-          "excerpt": "À partir de jeudi, la fermeture hivernale du col du Gothard entre en vigueur : trois des cinq cols alpins uranais seront fermés, tandis que l’Oberalp et le Klausenpass restent ouverts.",
-          "date": "2026-11-03T09:00:46.783Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-06T08:42:56.834Z"
+      "updatedAt": "2026-11-06T11:34:18.422Z"
     }
   }
 }
