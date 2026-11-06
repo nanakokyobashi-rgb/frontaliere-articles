@@ -591,6 +591,20 @@ test('ripara excerpt dopo il gate claim e prima di tradurre', () => {
   assert.match(generator.slice(postClaimRepair, translation), /preTranslationExcerptRepairs\.push\(\.\.\.postClaimExcerptRepairs\)/u);
 });
 
+test('ripara excerpt italiano dal body prima del gate che lo richiede', () => {
+  const generator = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
+  const earlyRepair = generator.indexOf(
+    'repairGeneratedArticleDescriptions({ content: { it: itContent } });',
+  );
+  const payloadGate = generator.indexOf("validateItalianPayload(itContent, 'it');", earlyRepair);
+
+  assert.ok(earlyRepair >= 0 && payloadGate > earlyRepair, 'l excerpt va riparato prima del required-field gate');
+  assert.match(
+    generator.slice(earlyRepair - 180, payloadGate),
+    /if \(!hasUsableContentText\(itContent\.excerpt\)\)/u,
+  );
+});
+
 test('un campo descrittivo vuoto usa un sibling valido quando il body non offre una frase completa', () => {
   const sibling = 'L’accordo aggiorna le regole applicate ai lavoratori frontalieri dal prossimo anno.';
   const article = {

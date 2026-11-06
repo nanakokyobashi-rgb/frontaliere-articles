@@ -13747,6 +13747,12 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     err.qualityReject = true;
     throw err;
   }
+  // The raw Italian payload has a strict required-excerpt gate here. Repair
+  // only a missing/unusable excerpt from this locale's body before that gate;
+  // the same helper rejects the candidate when no safe source exists.
+  if (!hasUsableContentText(itContent.excerpt)) {
+    repairGeneratedArticleDescriptions({ content: { it: itContent } });
+  }
   validateItalianPayload(itContent, 'it');
 
   // ── Title length enforcement (Semrush ≤ 60 chars gate) ──
