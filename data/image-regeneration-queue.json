@@ -5,59 +5,58 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Synthetic photorealistic illustration with a recognizable foreground person seen from behind; no visible text or logo. The scene does ",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 19,
+      "failureCount": 20,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-05T19:35:05.745Z"
+      "lastFailureAt": "2026-11-06T08:10:29.687Z"
     },
     {
       "articleId": "giovani-donne-stipendi-svizzera",
       "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (image vision fallback deadline exceeded)",
+      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (Codex broker timed out after 119903ms)",
       "status": "failed",
-      "failureCount": 17,
+      "failureCount": 18,
       "requestedAt": "2026-10-19T03:17:12.439Z",
-      "lastFailureAt": "2026-11-05T19:37:06.079Z"
+      "lastFailureAt": "2026-11-06T08:12:30.089Z"
     },
     {
       "articleId": "sanitari-italiani-fuga-svizzera",
       "title": "Operatori sanitari frontalieri: Como boccheggia",
       "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
-      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Synthetic editorial-style scene relevant to Ticino rail commuting, but it contains a recognizable foreground person viewed fro",
+      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Relevant generic synthetic editorial scene, but it contains a recognizable foreground person.); gemini (Gemini image request f",
       "status": "failed",
-      "failureCount": 16,
+      "failureCount": 17,
       "requestedAt": "2026-10-23T15:23:52.650Z",
-      "lastFailureAt": "2026-11-05T19:39:06.417Z"
+      "lastFailureAt": "2026-11-06T08:14:30.432Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Topic-relevant generic commuter rail scene, but a foreground person and station display/signage are visible.); gemini (Gemini ",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 16,
+      "failureCount": 17,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-05T19:40:52.504Z",
-      "retryHint": "no-text"
+      "lastFailureAt": "2026-11-06T08:16:30.746Z"
     },
     {
       "articleId": "infermieri-osc-sindacati-stipendi",
       "title": "Infermieri Osc e sindacati chiedono sblocco stipendi",
       "fallbackImage": "/images/blog/article-assemblea-ccti-rotta-economia.webp",
-      "reason": "All image providers failed for article-infermieri-osc-sindacati-stipendi: openai-codex (vision gate rejected image: Generic synthetic editorial scene of a nurse at a train station; no text, logos, or identifiable face, but a recognizable fo",
+      "reason": "All image providers failed for article-infermieri-osc-sindacati-stipendi: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-31T09:38:46.360Z",
-      "lastFailureAt": "2026-11-05T22:02:01.909Z"
+      "lastFailureAt": "2026-11-06T08:18:31.112Z"
     },
     {
       "articleId": "versamento-avs-dicembre-importi",
       "title": "Tredicesima AVS, per alcuni sarà inferiore",
       "fallbackImage": "/images/blog/article-referendum-iva-2026-aumento-per-la-tredicesima-pensione.webp",
       "reason": "All image providers failed for article-versamento-avs-dicembre-importi: openai-codex (image vision fallback deadline exceeded)",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 1,
       "requestedAt": "2026-11-03T13:45:07.056Z",
       "lastFailureAt": "2026-11-05T22:04:02.271Z"
