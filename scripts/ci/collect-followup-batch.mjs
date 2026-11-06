@@ -510,6 +510,13 @@ const NO_NEW_DAILY_BUCKET_RE = /(?:\bnessun(?:o)?\s+(?:nuov[oa]\s+)?(?:bucket\s+
 const TRACKED_RESIDUALS_RE = /(?:\bresidu[io]\b[^\r\n]*(?:già\s+tracciat\w*|non\s+generano\s+un\s+secondo\s+contenitore)|\bresiduals?\b[^\r\n]*(?:already\s+tracked|no\s+second\s+container))/i;
 const POSITIVE_ITEM_CLAIM_RE = /(?:\b(?:aggiunt\w*|creat\w*|apert\w*|updated?|added|created|opened)\b[^\r\n]*\bitems?(?!-level)\b|\bitems?(?!-level)\b[^\r\n]*\b(?:aggiunt\w*|creat\w*|apert\w*|updated?|added|created|opened)\b)/i;
 const NEGATIVE_ITEM_CLAIM_RE = /\b(?:nessun(?:o)?|no|zero|0)\s+items?\b/i;
+// A canonical zero marker may repeat a stable FU id while explaining why the
+// candidate was dropped by the deterministic follow-up contract. Such a line
+// is evidence for the zero, not a persistence claim. Keep this list tied to
+// the hard-exclude/closing vocabularies in FOLLOWUP.md; an unclassified line
+// remains a live item and therefore keeps the parser fail-closed.
+const DROPPED_ZERO_ITEM_REASON_RE = /\b(?:no-acceptance-condition|non-actionable-churn|missing-test-nit|live-verification(?:-only)?|(?:not|non)[-\s]+funnel[-\s]+critical|closing-state|already-on-main|hard-exclude)\b/i;
+const DIRECT_FU_BULLET_RE = /^\s*[-*+]\s+(?:`)?FU-\d{4}-\d{2}-\d{2}-\d{3}\b/i;
 
 /**
  * La finestra di claim del marker: ogni riga `Created/updated:` PIU' la lista
@@ -637,9 +644,11 @@ function attestationLines(lines) {
  *    vale solo se non dichiara item o bucket strutturali; un semplice «nessun
  *    bucket» resta non provato.
  *  - nel marker H2 canonico a zero, un bullet `FU-...` che attesta
- *    positivamente e senza negazioni «gia' tracciato» e' un riferimento
- *    storico, non un item nuovo. La forma `Follow-up item:` e ogni claim
- *    positivo restano prioritari.
+ *    positivamente e senza negazioni «gia' tracciato» oppure dichiara una
+ *    ragione deterministica di drop (`no-acceptance-condition`, churn,
+ *    missing-test, live-verification, non-funnel o closing-state) e' contesto,
+ *    non un item nuovo. La forma `Follow-up item:` e ogni claim positivo
+ *    restano prioritari.
  *  - uno SKIP esplicito e' l'intestazione "## Post-merge follow-up triage:
  *    skipped by anti-nipote gate". In questo caso il finding resta di
  *    proprieta' della follow-up issue genitrice, quindi non esiste un bucket o
@@ -674,18 +683,19 @@ export function triageMarkerPersistenceExpectation(markerBody) {
     // Fino a fine riga: «zero outstanding items but 1 item remains» non e' l'esito
     // vuoto, e il backfill ammette solo la ragione del prompt (`: PR not eligible …`).
     /^\s*##\s+Post-merge follow-up triage\s*(?::\s*zero outstanding items\.?|\(backfill skipped\)(?:\s*:\s*PR not eligible\b.*)?)\s*$/i.test(line));
-  // Il marker zero puo' citare un FU gia' tracciato nel bucket precedente. La
-  // forma stretta richiede un'attestazione positiva: «non e' gia' tracciato»
-  // e «non va considerato gia' tracciato» lasciano l'item outstanding. Un
-  // claim `Follow-up item:` o positivo resta sempre prioritario.
-  const historicalZeroOutstandingLines = canonicalZero
-    ? new Set(claimEvidenceLines.filter((line) =>
-      /^\s*[-*+]\s+(?:`)?FU-\d{4}-\d{2}-\d{2}-\d{3}\b/i.test(line)
-        && /\bgi[àa]\s+tracciat[oa]\b/i.test(line)
-        && !/\bnon\b[^\r\n]*\bgi[àa]\s+tracciat[oa]\b/i.test(line)
-        && !/Follow-up\s+item\s*:/i.test(line)
-        && !POSITIVE_ITEM_CLAIM_RE.test(line),
-    ))
+  // Il marker zero puo' citare un FU gia' tracciato nel bucket precedente o
+  // spiegare perche' un candidato e' stato droppato. La forma stretta richiede
+  // un'attestazione negativa: «non e' gia' tracciato» e «non va considerato
+  // gia' tracciato» lasciano l'item outstanding. Un claim `Follow-up item:` o
+  // positivo resta sempre prioritario.
+  const nonPersistedZeroLines = canonicalZero
+    ? new Set(claimEvidenceLines.filter((line) => {
+      if (!DIRECT_FU_BULLET_RE.test(line)) return false;
+      if (/Follow-up\s+item\s*:/i.test(line) || POSITIVE_ITEM_CLAIM_RE.test(line)) return false;
+      const historical = /\bgi[àa]\s+tracciat[oa]\b/i.test(line)
+        && !/\bnon\b[^\r\n]*\bgi[àa]\s+tracciat[oa]\b/i.test(line);
+      return historical || DROPPED_ZERO_ITEM_REASON_RE.test(line);
+    }))
     : new Set();
   // `Follow-up item:` is a structural claim only when it starts its own
   // marker line. A correction may instead repeat the stable ID at the start
@@ -693,7 +703,7 @@ export function triageMarkerPersistenceExpectation(markerBody) {
   // line shape is deliberately narrow: an inline service reference remains
   // context and cannot turn a zero marker into an item (issue #2299).
   const items = [...new Set(claimEvidenceLines
-    .filter((line) => !historicalZeroOutstandingLines.has(line))
+    .filter((line) => !nonPersistedZeroLines.has(line))
     .flatMap((line) => [...line.matchAll(
       /^\s*(?:(?:(?:[-*+]|\d+[.)])\s+)?Follow-up\s+item\s*:\s*|[-*+]\s+)(?:`(FU-\d{4}-\d{2}-\d{2}-\d{3})`|(FU-\d{4}-\d{2}-\d{2}-\d{3})\b)/gi,
     )].map((match) => (match[1] || match[2]).toUpperCase())))];

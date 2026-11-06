@@ -170,6 +170,37 @@ test('un FU già tracciato nel bucket precedente è storico solo nel marker H2 z
   }
 });
 
+test('un FU droppato con una ragione deterministica è contesto nel marker H2 zero (#2299)', () => {
+  const heading = '## Post-merge follow-up triage: zero outstanding items.';
+  const reasons = [
+    'no-acceptance-condition',
+    'non-actionable-churn',
+    'missing-test-nit',
+    'live-verification-only',
+    'not-funnel-critical',
+    'non funnel-critical',
+    'closing-state',
+    'already-on-main',
+  ];
+
+  for (const reason of reasons) {
+    const marker = `${heading}\n- FU-2026-11-02-001 è stato droppato con motivo \`${reason}\`.`;
+    const expectation = triageMarkerPersistenceExpectation(marker);
+    assert.deepEqual(expectation.items, [], reason);
+    assert.equal(expectation.buckets.length, 0, reason);
+    assert.equal(expectation.explicitZero, true, reason);
+    assert.equal(verifyTriageMarkerPersistence(marker, 3663, () => {
+      throw new Error(`una riga droppata (${reason}) non deve leggere un bucket`);
+    }), true, reason);
+  }
+
+  const explicitItem = `${heading}\n- Follow-up item: FU-2026-11-02-001 — no-acceptance-condition`;
+  const itemExpectation = triageMarkerPersistenceExpectation(explicitItem);
+  assert.deepEqual(itemExpectation.items, ['FU-2026-11-02-001']);
+  assert.equal(itemExpectation.explicitZero, false);
+  assert.equal(verifyTriageMarkerPersistence(explicitItem, 3663, () => false), false);
+});
+
 test('negazioni e marker misti non trasformano FU outstanding in riferimenti storici (#1721)', () => {
   const heading = '## Post-merge follow-up triage: zero outstanding items.';
   for (const line of [
