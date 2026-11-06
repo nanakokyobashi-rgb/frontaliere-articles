@@ -144,6 +144,32 @@ test('un item su una riga propria resta una dichiarazione positiva', () => {
   assert.equal(expectation.requiresBucket, true);
 });
 
+test('un FU già tracciato nel bucket precedente è storico solo nel marker H2 zero (#1721)', () => {
+  const historical = [
+    '## Post-merge follow-up triage: zero outstanding items.',
+    '- FU-2026-11-06-001 già tracciato nel bucket precedente #3520.',
+  ].join('\n');
+  const expectation = triageMarkerPersistenceExpectation(historical);
+
+  assert.deepEqual(expectation.items, []);
+  assert.deepEqual(expectation.buckets, [3520]);
+  assert.equal(expectation.explicitZero, true);
+  assert.equal(verifyTriageMarkerPersistence(historical, 3663, () => {
+    throw new Error('il riferimento storico non deve richiedere Sources: PR #3663');
+  }), true);
+
+  for (const positive of [
+    historical.replace('zero outstanding items.', 'results.'),
+    historical.replace('- FU-', '- Follow-up item: FU-'),
+  ]) {
+    const positiveExpectation = triageMarkerPersistenceExpectation(positive);
+    assert.deepEqual(positiveExpectation.items, ['FU-2026-11-06-001'], positive);
+    assert.equal(positiveExpectation.explicitZero, false, positive);
+    assert.equal(positiveExpectation.requiresBucket, true, positive);
+    assert.equal(verifyTriageMarkerPersistence(positive, 3663, () => false), false, positive);
+  }
+});
+
 test('il marker reale senza item e con bucket invariato e\' uno zero, non un claim positivo (#9286)', () => {
   const marker = [
     '## Post-merge follow-up triage',
