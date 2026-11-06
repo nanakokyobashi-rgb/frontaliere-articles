@@ -4,13 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vd::https://www.rts.ch/info/regions/vaud/2026/article/vaud-et-neuchatel-lancent-un-numero-unique-pour-la-sante-29402837.html?rts_source=rss_t": {
+    "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-frontalier-6-au-13-novembre-2026": {
       "section": "canton-vd",
-      "ts": 1793661790249
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
-      "section": "canton-vd",
-      "ts": 1793770243578
+      "ts": 1793963070552
     }
   }
 }
