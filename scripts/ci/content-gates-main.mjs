@@ -181,6 +181,9 @@ export const CONTENT_GATES = [
   'generator/tests/article-unrendered-markup.test.mjs',
   'generator/tests/article-topic-coverage-guard.test.mjs',
   'generator/tests/article-source-echo.test.mjs',
+  // #2627: offerta Locarno Card legata all'edizione Moon&Stars 2026;
+  // la prova temporale nel body e la decisione news devono restare insieme.
+  'generator/tests/article-type-moon-stars-resident-discount.test.mjs',
   'generator/tests/blog-headline-validation.test.mjs',
   'generator/tests/blog-title-casing.test.mjs',
   'generator/tests/escaped-tab-marker-corpus.test.mjs',
