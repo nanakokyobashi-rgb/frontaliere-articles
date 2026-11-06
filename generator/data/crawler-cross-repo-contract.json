@@ -1546,7 +1546,7 @@
       "file": "crawler-group-23.yml",
       "sourceLogic": "crawler-group-23-logic.yml",
       "sourceSha256": "c72607833bfd0c9c59d3f5b60bef53c2915e0049ce6ac7834e0e1075b0e7bb7f",
-      "artifactSha256": "2a6fb6460e0079182a2a035ddc8be111a94261ebaf8da24876323b41702486a7",
+      "artifactSha256": "e1dfb0560182efed98704a8fdaef40ddf8cd7a38cd57cc300ca8174a5cc44364",
       "generatorSha256": "03de6975aac839c8e38a32b5bc76b9db9c7ed480b814bb91e65077c2230668a2",
       "members": [
         "albergo-gardenia",
@@ -1618,7 +1618,7 @@
       "file": "crawler-group-25.yml",
       "sourceLogic": "crawler-group-25-logic.yml",
       "sourceSha256": "ed8735fdaee50fefc709f7d9b15e3a458c3a86ac0e6140a9505972439e870609",
-      "artifactSha256": "5f0260c6ec8ba40bb4e64ea8428da26bb4c3e7dcd29b26b3cceb0333b40e0841",
+      "artifactSha256": "23208cabe2b0add186cfb9ba58075c5dde38db5a52bee414c174b49fe044ba21",
       "generatorSha256": "03de6975aac839c8e38a32b5bc76b9db9c7ed480b814bb91e65077c2230668a2",
       "members": [
         "protectas"
