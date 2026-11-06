@@ -972,6 +972,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tasso-disoccupazione-ottobre-2026': {
+    title: 'Disoccupazione Canton Soletta ottobre 2026: 4\'543 registrati',
+    description: 'Nel Canton Soletta, ottobre 2026 ha visto 4\'543 disoccupati registrati, in calo di otto persone rispetto al mese precedente. Tasso al 3,0%.',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, canton, soletta, ottobre',
+    ogTitle: 'Disoccupazione Canton Soletta ottobre 2026 4\'543',
+    ogDescription: 'Dati ufficiali dell\'Amt für Wirtschaft und Arbeit: 4\'543 disoccupati registrati nel Canton Soletta in ottobre 2026. Diminuzione di 8 persone rispetto al mese precedente. Tasso al 3,0%.',
+    canonicalPath: '/articoli-soletta/tasso-disoccupazione-ottobre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disoccupazione Canton Soletta ottobre 2026: 4'543 registrati",
+      "description": "Nel Canton Soletta, ottobre 2026 ha visto 4'543 disoccupati registrati, in calo di otto persone rispetto al mese precedente. Tasso al 3,0%.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tasso-disoccupazione-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-06T03:29:06+00:00",
+      "dateModified": "2026-11-06T03:29:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/tasso-disoccupazione-ottobre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

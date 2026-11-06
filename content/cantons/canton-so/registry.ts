@@ -281,4 +281,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tasso-disoccupazione-ottobre-2026',
+ category: 'novita',
+ date: '2026-11-06T03:29:06.353Z',
+ image: '/images/blog/article-tasso-disoccupazione-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

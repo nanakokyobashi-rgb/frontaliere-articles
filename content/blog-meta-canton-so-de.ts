@@ -78,6 +78,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.kantonsrat-proroga-gav-due-anni.title': 'Solothurn: GAV um 2 Jahre für öffentliche Angestellte verlängert',
     'blog.article.kantonsrat-proroga-gav-due-anni.excerpt': 'Der GAV für alle öffentlich-rechtlichen Angestellten des Kantons wird um zwei Jahre verlängert, wodurch eine Vertragslücke ab dem 1. Januar 2027 vermieden wird.',
     'blog.article.kantonsrat-proroga-gav-due-anni.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.tasso-disoccupazione-ottobre-2026.title': 'Solothurn: 4\'543 Arbeitslose im Okt. 2026',
+    'blog.article.tasso-disoccupazione-ottobre-2026.excerpt': 'Im Oktober 2026 waren im Kanton Solothurn 4\'543 Arbeitslose registriert, acht Personen weniger als im Vormonat.',
+    'blog.article.tasso-disoccupazione-ottobre-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;

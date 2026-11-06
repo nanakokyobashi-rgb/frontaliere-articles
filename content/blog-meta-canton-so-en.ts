@@ -78,6 +78,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.kantonsrat-proroga-gav-due-anni.title': 'Canton of Solothurn: GAV extended for two years for public employees',
     'blog.article.kantonsrat-proroga-gav-due-anni.excerpt': 'The GAV for all public-law employees of the Canton has been extended for two years, avoiding a contractual gap from January 1, 2027.',
     'blog.article.kantonsrat-proroga-gav-due-anni.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.tasso-disoccupazione-ottobre-2026.title': 'Unemployment in the Canton of Solothurn, October 2026: 4\'543 registered',
+    'blog.article.tasso-disoccupazione-ottobre-2026.excerpt': 'In October 2026, 4\'543 registered unemployed people were recorded in the Canton of Solothurn, a decrease of eight people compared with the previous month.',
+    'blog.article.tasso-disoccupazione-ottobre-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

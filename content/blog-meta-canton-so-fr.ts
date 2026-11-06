@@ -78,6 +78,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.kantonsrat-proroga-gav-due-anni.title': 'Soleure: proroga CCT de deux ans pour fonctionnaires',
     'blog.article.kantonsrat-proroga-gav-due-anni.excerpt': 'La CCT pour tous les employés de droit public du canton est prolongée de deux ans, évitant ainsi un vide contractuel à compter du 1er janvier 2027.',
     'blog.article.kantonsrat-proroga-gav-due-anni.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.tasso-disoccupazione-ottobre-2026.title': 'Chômage dans le canton de Soleure en octobre 2026 : 4\'543 personnes inscrites',
+    'blog.article.tasso-disoccupazione-ottobre-2026.excerpt': 'En octobre 2026, 4\'543 chômeurs étaient inscrits dans le canton de Soleure, soit huit personnes de moins que le mois précédent.',
+    'blog.article.tasso-disoccupazione-ottobre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

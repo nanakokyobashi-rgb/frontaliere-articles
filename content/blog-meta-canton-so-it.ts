@@ -78,6 +78,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.kantonsrat-proroga-gav-due-anni.title': 'Cantone Soletta: proroga GAV per due anni per dipendenti pubblici',
     'blog.article.kantonsrat-proroga-gav-due-anni.excerpt': 'Il GAV per tutti i dipendenti di diritto pubblico del Cantone è prorogato per due anni, evitando l\'assenza contrattuale dal 1° gennaio 2027.',
     'blog.article.kantonsrat-proroga-gav-due-anni.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.tasso-disoccupazione-ottobre-2026.title': 'Disoccupazione Canton Soletta ottobre 2026: 4\'543 registrati',
+    'blog.article.tasso-disoccupazione-ottobre-2026.excerpt': 'In ottobre 2026 nel Canton Soletta risultavano 4\'543 disoccupati registrati, in diminuzione di otto persone rispetto al mese precedente.',
+    'blog.article.tasso-disoccupazione-ottobre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;
