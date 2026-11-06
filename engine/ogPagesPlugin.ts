@@ -30,6 +30,10 @@ import { ARTICLE_INDEX_EXCLUSIONS_FILES, articleIndexExclusionKey, loadArticleIn
 import { readImageIntrinsicSize } from './shared/imageIntrinsicSize';
 import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from './shared/articleStaticSource.mjs';
 import {
+ replaceStaticBaseUrlTemplates,
+ resolveStaticBaseUrlTemplate,
+} from './shared/static-base-url-template.mjs';
+import {
   hasInterpolatedStaticProperty,
   lastStaticPropertyValue,
   readStaticBooleanProperty,
@@ -84,6 +88,11 @@ type ResolvedArticleAuthor = ArticleAuthorIdentity & {
 function isRealArticleAuthor(author: ArticleAuthorIdentity | undefined): boolean {
   return author?.kind === 'real-author'
     || (!author?.kind && Boolean(author?.uid || author?.cvPath || author?.social?.linkedin));
+}
+
+/** Resolve one static `${BASE_URL}` template with the same escape semantics as JS. */
+export function resolveStaticTemplateUrl(value: string, baseUrl: string): string {
+  return resolveStaticBaseUrlTemplate(value, baseUrl);
 }
 
 /** Strip the publisher suffix before title equality/collision checks and HTML output. */
@@ -1680,8 +1689,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const raw = readStaticCompositeProperty(sd, field);
  if (!raw) return null;
  try {
- const jsonStr = raw
- .replace(/`\$\{BASE_URL\}([^`]*)`/g, (_match: string, suffix: string) => JSON.stringify(`${BASE_URL}${suffix}`))
+ const jsonStr = replaceStaticBaseUrlTemplates(raw, (match: string) => JSON.stringify(resolveStaticTemplateUrl(match, BASE_URL)))
  .replace(/,\s*([\]}])/g, '$1'); // strip trailing commas
  return JSON.parse(jsonStr);
  } catch { return null; }
