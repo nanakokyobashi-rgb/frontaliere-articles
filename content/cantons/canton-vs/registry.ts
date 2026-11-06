@@ -194,4 +194,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'stato-vallese-intelligenza-artificiale',
+ category: 'novita',
+ date: '2026-11-06T11:13:23.591Z',
+ image: '/images/blog/article-stato-vallese-intelligenza-artificiale.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

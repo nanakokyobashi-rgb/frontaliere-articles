@@ -54,6 +54,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.aumento-tasso-disoccupazione-ottobre.title': 'Im Oktober steigt die Arbeitslosenquote im Kanton Wallis',
     'blog.article.aumento-tasso-disoccupazione-ottobre.excerpt': 'Ende Oktober waren 6.082 Arbeitslose bei den Regionalen Arbeitsämtern des Wallis registriert, 327 mehr als im Vormonat.',
     'blog.article.aumento-tasso-disoccupazione-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.stato-vallese-intelligenza-artificiale.title': 'Staat Wallis implementiert Plattform für künstliche Intelligenz AVA',
+    'blog.article.stato-vallese-intelligenza-artificiale.excerpt': 'AVA ist dem Personal des Staates Wallis seit Donnerstag zugänglich; die Betriebskosten betragen etwa CHF 2 pro Monat und aktivem Nutzer.',
+    'blog.article.stato-vallese-intelligenza-artificiale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVsDe;

@@ -655,6 +655,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-stato-vallese-intelligenza-artificiale': {
+    title: 'Stato del Vallese implementa piattaforma di intelligenza artificiale AVA',
+    description: 'Lo Stato del Vallese rende disponibile AVA, la sua IA sovrana, al personale da giovedì.',
+    keywords: 'frontalieri, ticino, svizzera, italia, stato, vallese, implementa, piattaforma',
+    ogTitle: 'Stato del Vallese adotta IA sovrana AVA',
+    ogDescription: 'AVA, la piattaforma di intelligenza artificiale sovrana del Vallese, è accessibile al personale da giovedì. Il costo è circa CHF 2/mese per utente attivo, garantendo che nessun dato transiti presso fornitori esteri.',
+    canonicalPath: '/articoli-vallese/stato-vallese-intelligenza-artificiale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stato del Vallese implementa piattaforma di intelligenza artificiale AVA",
+      "description": "Lo Stato del Vallese rende disponibile AVA, la sua IA sovrana, al personale da giovedì.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-stato-vallese-intelligenza-artificiale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-06T11:13:23+00:00",
+      "dateModified": "2026-11-06T11:13:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/stato-vallese-intelligenza-artificiale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

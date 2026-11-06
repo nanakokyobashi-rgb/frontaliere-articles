@@ -20,6 +20,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'vionnaz-revoca-divieti-acqua': { it: 'vionnaz-revoca-divieti-acqua', en: 'vionnaz-revokes-water-restrictions', de: 'vionnaz-wasserbeschrankungen-aufhebung', fr: 'vionnaz-levee-restrictions-eau' },
  'vallese-piano-risparmi-2030': { it: 'vallese-piano-risparmi-2030', en: 'valais-savings-plan-2030', de: 'wallis-sparplan-2030', fr: 'valais-plan-economies-2030' },
  'aumento-tasso-disoccupazione-ottobre': { it: 'aumento-tasso-disoccupazione-ottobre', en: 'increase-unemployment-rate-october', de: 'tatsatz-arbeitslosigkeit-oktober', fr: 'hausse-taux-chomage-octobre' },
+ 'stato-vallese-intelligenza-artificiale': { it: 'stato-vallese-intelligenza-artificiale', en: 'valais-state-artificial-intelligence', de: 'staat-wallis-kunstliche-intelligenz', fr: 'etat-valais-intelligence-artificielle' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

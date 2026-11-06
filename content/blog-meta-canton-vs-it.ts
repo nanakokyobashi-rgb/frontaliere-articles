@@ -54,6 +54,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.aumento-tasso-disoccupazione-ottobre.title': 'Aumento tasso disoccupazione ottobre in Canton Vallese',
     'blog.article.aumento-tasso-disoccupazione-ottobre.excerpt': 'Alla fine di ottobre, 6\'082 disoccupati risultavano iscritti presso gli Uffici regionali di collocamento del Vallese, 327 in più rispetto al mese precedente.',
     'blog.article.aumento-tasso-disoccupazione-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.stato-vallese-intelligenza-artificiale.title': 'Stato del Vallese implementa piattaforma di intelligenza artificiale AVA',
+    'blog.article.stato-vallese-intelligenza-artificiale.excerpt': 'AVA è accessibile al personale dello Stato del Vallese da giovedì; il costo operativo è di circa CHF 2 al mese per utente attivo.',
+    'blog.article.stato-vallese-intelligenza-artificiale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVsIt;

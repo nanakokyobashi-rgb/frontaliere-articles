@@ -54,6 +54,9 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.aumento-tasso-disoccupazione-ottobre.title': 'Increase in unemployment rate in October in the Canton of Valais',
     'blog.article.aumento-tasso-disoccupazione-ottobre.excerpt': 'At the end of October, 6,082 unemployed people were registered with the Valais Regional Employment Offices, 327 more than in the previous month.',
     'blog.article.aumento-tasso-disoccupazione-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.stato-vallese-intelligenza-artificiale.title': 'State of Valais implements the AVA artificial intelligence platform',
+    'blog.article.stato-vallese-intelligenza-artificiale.excerpt': 'AVA has been accessible to staff of the State of Valais since Thursday; the operating cost is approximately CHF 2 per month per active user.',
+    'blog.article.stato-vallese-intelligenza-artificiale.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVsEn;

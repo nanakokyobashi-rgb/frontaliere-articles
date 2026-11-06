@@ -54,6 +54,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.aumento-tasso-disoccupazione-ottobre.title': 'Hausse du taux de chômage en octobre dans le canton du Valais',
     'blog.article.aumento-tasso-disoccupazione-ottobre.excerpt': 'Fin octobre, 6 082 chômeurs étaient enregistrés auprès des Bureaux régionaux de l’emploi du Valais, soit 327 de plus que le mois précédent.',
     'blog.article.aumento-tasso-disoccupazione-ottobre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.stato-vallese-intelligenza-artificiale.title': 'L\'État du Valais met en œuvre la plateforme d\'intelligence artificielle AVA',
+    'blog.article.stato-vallese-intelligenza-artificiale.excerpt': 'AVA est accessible au personnel de l\'État du Valais depuis jeudi ; le coût opérationnel s\'élève à environ CHF 2 par mois et par utilisateur actif.',
+    'blog.article.stato-vallese-intelligenza-artificiale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVsFr;
