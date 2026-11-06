@@ -592,8 +592,15 @@ export function createLocalizedToponymSourceProfileCache({
     throw new RangeError('maxEntries della cache toponimi deve essere un intero positivo.');
   }
   const profiles = new Map();
-  SOURCE_PROFILE_CACHE_REFERENCES.add(new WeakRef(profiles));
+  const reference = new WeakRef(profiles);
+  let registered = true;
+  SOURCE_PROFILE_CACHE_REFERENCES.add(reference);
   const getProfile = (sourceText = '') => {
+    // A cleared cache may be reused, but must be visible to the next global clear.
+    if (!registered) {
+      SOURCE_PROFILE_CACHE_REFERENCES.add(reference);
+      registered = true;
+    }
     const text = String(sourceText ?? '');
     const cached = profiles.get(text);
     if (cached) {
@@ -608,10 +615,17 @@ export function createLocalizedToponymSourceProfileCache({
     profiles.set(text, profile);
     return profile;
   };
+  const clear = () => {
+    profiles.clear();
+    // One-shot callers must not leave a dead WeakRef in the global registry.
+    if (!registered) return;
+    SOURCE_PROFILE_CACHE_REFERENCES.delete(reference);
+    registered = false;
+  };
   Object.defineProperties(getProfile, {
     size: { get: () => profiles.size },
     maxEntries: { value: maxEntries },
-    clear: { value: () => profiles.clear() },
+    clear: { value: clear },
   });
   return getProfile;
 }
@@ -1176,7 +1190,7 @@ function transformEventsDigestBody2({
     }
     return result.text;
   };
-  const getSourceProfile = sourceProfileFor || createLocalizedToponymSourceProfileCache();
+  const getSourceProfile = sourceProfileFor || createLocalizedToponymSourceProfile;
   const applyPair = (sourceValue, targetValue) => collectPairResult(
     replaceLocalizedToponymMismatches({
       sourceText: sourceValue,
@@ -1329,46 +1343,50 @@ export function findArticleLocalizedToponymMismatches(data) {
   if (!source.trim()) return [];
 
   const sourceProfileFor = createLocalizedToponymSourceProfileCache();
-  sourceProfileFor(source);
-  const issues = [];
-  const isEventsDigest = typeof data?.id === 'string' && data.id.startsWith('eventi-weekend-');
-  for (const locale of LOCALIZED_TOPONYM_LOCALES.filter((item) => item !== 'it')) {
-    const targetProjection = articleLocaleProjection(data, locale);
-    let targetIssues = isEventsDigest
-      ? findEventsDigestArticleLocaleMismatches(data, locale, source, sourceProfileFor)
-      : null;
-    if (targetIssues === null) {
-      const target = collectStrings({ ...targetProjection, slug: undefined })
-        .join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
-      targetIssues = findLocalizedToponymMismatches({
-        sourceText: source,
-        targetText: target,
-        locale,
-        sourceProfile: sourceProfileFor(source),
-      });
-      const provisionalSlugs = new Set([
-        ...(Array.isArray(data?._slugsProvisionalFromIt) ? data._slugsProvisionalFromIt : []),
-        ...(Array.isArray(data?._slugI18nFallbacks)
-          ? data._slugI18nFallbacks
-            .map((record) => typeof record === 'string' ? record : record?.locale)
-            .filter(Boolean)
-          : []),
-      ]);
-      if (targetProjection.slug && !provisionalSlugs.has(locale)) {
-        targetIssues.push(...findLocalizedToponymMismatches({
+  try {
+    sourceProfileFor(source);
+    const issues = [];
+    const isEventsDigest = typeof data?.id === 'string' && data.id.startsWith('eventi-weekend-');
+    for (const locale of LOCALIZED_TOPONYM_LOCALES.filter((item) => item !== 'it')) {
+      const targetProjection = articleLocaleProjection(data, locale);
+      let targetIssues = isEventsDigest
+        ? findEventsDigestArticleLocaleMismatches(data, locale, source, sourceProfileFor)
+        : null;
+      if (targetIssues === null) {
+        const target = collectStrings({ ...targetProjection, slug: undefined })
+          .join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
+        targetIssues = findLocalizedToponymMismatches({
           sourceText: source,
-          targetText: targetProjection.slug,
+          targetText: target,
           locale,
-          slug: true,
           sourceProfile: sourceProfileFor(source),
-        }));
+        });
+        const provisionalSlugs = new Set([
+          ...(Array.isArray(data?._slugsProvisionalFromIt) ? data._slugsProvisionalFromIt : []),
+          ...(Array.isArray(data?._slugI18nFallbacks)
+            ? data._slugI18nFallbacks
+              .map((record) => typeof record === 'string' ? record : record?.locale)
+              .filter(Boolean)
+            : []),
+        ]);
+        if (targetProjection.slug && !provisionalSlugs.has(locale)) {
+          targetIssues.push(...findLocalizedToponymMismatches({
+            sourceText: source,
+            targetText: targetProjection.slug,
+            locale,
+            slug: true,
+            sourceProfile: sourceProfileFor(source),
+          }));
+        }
+      }
+      for (const issue of targetIssues) {
+        issues.push({ ...issue, locale });
       }
     }
-    for (const issue of targetIssues) {
-      issues.push({ ...issue, locale });
-    }
+    return issues;
+  } finally {
+    sourceProfileFor.clear();
   }
-  return issues;
 }
 
 export function validateLocalizedToponymTable() {

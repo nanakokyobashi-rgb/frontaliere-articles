@@ -1,6 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  clearLocalizedToponymSourceProfiles,
   findArticleLocalizedToponymMismatches,
   parseEventsDigestBody2Safe,
   pairEventsByStableKey,
@@ -364,6 +365,17 @@ describe('repairEventsDigestLocalizedToponyms', () => {
     assert.ok(findArticleLocalizedToponymMismatches(repaired).some(({ locale, code, type }) => (
       locale === 'en' && code === 'BODY2' && type === 'structure'
     )));
+  });
+
+  it('releases the one-shot repair profile cache', () => {
+    clearLocalizedToponymSourceProfiles();
+    repairEventsDigestLocalizedToponyms({
+      content: {
+        it: { title: 'Zurigo' },
+        en: { title: 'Zurich' },
+      },
+    });
+    assert.equal(clearLocalizedToponymSourceProfiles(), 0);
   });
 
   it('keeps heading-like and non-record bullet lines inside a multiline event title', () => {
