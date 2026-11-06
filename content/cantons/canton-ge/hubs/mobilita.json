@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "334bb619e7f16a3f539aa0115a8cfac939d36d69f508592c08036804ad725ffa",
+  "updatedAt": "2026-11-06T03:47:53.148Z",
+  "contentHash": "a1c4111e68decb75646295910dd93782ab3f726d7179c5fe6df37ce04c3fb17e",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "2",
+          "value": "1",
           "note": "segnalazioni aggiornate: 5 novembre 2026"
         },
         {
@@ -115,12 +115,6 @@
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
               "date": "2026-10-12T06:58:00.000Z"
-            },
-            {
-              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Bernex E Svincolo autostradale Vernier Situazione: chiusa cantiere, lunghezza [km] 4.2",
-              "value": "Chiusura",
-              "detail": "fine prevista: 6 novembre 2026",
-              "date": "2026-10-12T07:02:00.000Z"
             },
             {
               "label": "A1 Genève -> Lausanne tra Svincolo autostradale Bernex E Svincolo autostradale Vernier, al chilometro 5.2 Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia…",
@@ -251,7 +245,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T03:47:53.148Z"
     },
     "en": {
       "canton": "GE",
@@ -266,7 +260,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "2",
+          "value": "1",
           "note": "reports as of 5 November 2026"
         },
         {
@@ -344,12 +338,6 @@
               "value": "Closure",
               "detail": "until 6 November 2026",
               "date": "2026-10-12T06:58:00.000Z"
-            },
-            {
-              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Bernex E Svincolo autostradale Vernier Situazione: chiusa cantiere, lunghezza [km] 4.2",
-              "value": "Closure",
-              "detail": "until 6 November 2026",
-              "date": "2026-10-12T07:02:00.000Z"
             },
             {
               "label": "A1 Genève -> Lausanne tra Svincolo autostradale Bernex E Svincolo autostradale Vernier, al chilometro 5.2 Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia…",
@@ -480,7 +468,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T03:47:53.148Z"
     },
     "de": {
       "canton": "GE",
@@ -495,7 +483,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "2",
+          "value": "1",
           "note": "Meldungen vom 5. November 2026"
         },
         {
@@ -573,12 +561,6 @@
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
               "date": "2026-10-12T06:58:00.000Z"
-            },
-            {
-              "label": "A1 Genf -> Lausanne zwischen Anschluss Bernex und Anschluss Vernier Sachlage: Strecke gesperrt Baustelle, Länge [km] 4.2",
-              "value": "Sperrung",
-              "detail": "bis 6. November 2026",
-              "date": "2026-10-12T07:02:00.000Z"
             },
             {
               "label": "A1 Genf -> Lausanne zwischen Anschluss Bernex und Anschluss Vernier, bei Kilometer 5.2 Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: Pannenstreifen blockiert",
@@ -709,7 +691,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T03:47:53.148Z"
     },
     "fr": {
       "canton": "GE",
@@ -724,7 +706,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "2",
+          "value": "1",
           "note": "signalements au 5 novembre 2026"
         },
         {
@@ -802,12 +784,6 @@
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
               "date": "2026-10-12T06:58:00.000Z"
-            },
-            {
-              "label": "A1 Genève -> Lausanne entre Jonction autoroutière Bernex et Jonction autoroutière Vernier Situation: fermé travaux, longueur [km] 4.2",
-              "value": "Fermeture",
-              "detail": "jusqu’au 6 novembre 2026",
-              "date": "2026-10-12T07:02:00.000Z"
             },
             {
               "label": "A1 Genève -> Lausanne entre Jonction autoroutière Bernex et Jonction autoroutière Vernier, au kilomètre 5.2 Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: bande d'arrêt…",
@@ -938,7 +914,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-06T03:47:53.148Z"
     }
   }
 }

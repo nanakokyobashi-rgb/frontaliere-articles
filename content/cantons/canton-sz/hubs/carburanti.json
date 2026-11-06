@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "c9fa7148538de8a29a86c37148e09fa5c9144d57c7186e6e55f68298506db33b",
+  "updatedAt": "2026-11-06T03:47:53.148Z",
+  "contentHash": "0be2b718f2cc2ca8f6519626efd9dcce265b0aa0906d0f58d3041e1005403700",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-03T14:41:22.679Z",
+      "updatedAt": "2026-11-05T14:57:01.545Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-05T14:57:01.545Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Svitto, la ricerca dovrebbe convenire di più alle aziende",
+          "url": "/articoli-svitto/ricerca-fisco-aziende-svitto/",
+          "excerpt": "Bote.ch collega la ricerca alla convenienza fiscale per le aziende del Canton Svitto, ma il materiale disponibile non indica misure, cifre o date.",
+          "date": "2026-11-06T03:37:01.055Z"
+        },
         {
           "title": "Riarmo dell’esercito: il Nazionale evita l’aumento IVA",
           "url": "/articoli-svitto/finanziamento-riarmo-esercito/",
@@ -82,12 +88,6 @@
           "url": "/articoli-svitto/pfaeffikon-apero-imprese/",
           "excerpt": "La Wirtschaftsförderung Höfe ha riunito 93 ospiti alla KSA di Pfäffikon: l'incontro punta su scambio, cooperazione e contatti tra imprese.",
           "date": "2026-10-27T01:42:11.869Z"
-        },
-        {
-          "title": "Kantonsrat: sì a 36 milioni tra Biberbrugg e Chaltenboden",
-          "url": "/articoli-svitto/kantonsrat-biberbrugg-chaltenboden/",
-          "excerpt": "Il Kantonsrat approva 64-28 la spesa di 36 milioni per la mobilità lenta tra Biberbrugg e Chaltenboden.",
-          "date": "2026-10-21T13:31:24.335Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-06T03:47:53.148Z"
     },
     "en": {
       "canton": "SZ",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-05T14:57:01.545Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Schwyz, research should be more worthwhile for companies",
+          "url": "/en/schwyz-articles/schwyz-research-company-tax/",
+          "excerpt": "Bote.ch links the research to the tax advantages for companies in the Canton of Schwyz, but the available material does not indicate any measures, figures, or dates.",
+          "date": "2026-11-06T03:37:01.055Z"
+        },
         {
           "title": "Army rearmament: the National Council avoids the VAT increase",
           "url": "/en/schwyz-articles/army-rearmament-funding/",
@@ -169,12 +175,6 @@
           "url": "/en/schwyz-articles/pfaeffikon-business-aperitif-93-guests/",
           "excerpt": "Wirtschaftsförderung Höfe brought together 93 guests at KSA in Pfäffikon: the meeting focuses on exchange, cooperation and contacts between companies.",
           "date": "2026-10-27T01:42:11.869Z"
-        },
-        {
-          "title": "Cantonal Council: yes to 36 million between Biberbrugg and Chaltenboden",
-          "url": "/en/schwyz-articles/cantonal-council-biberbrugg-chaltenboden/",
-          "excerpt": "The Cantonal Council approved 64-28 spending 36 million on active mobility between Biberbrugg and Chaltenboden.",
-          "date": "2026-10-21T13:31:24.335Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-06T03:47:53.148Z"
     },
     "de": {
       "canton": "SZ",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-05T14:57:01.545Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Schwyz, Forschung sollte sich für Unternehmen mehr lohnen",
+          "url": "/de/schwyz-artikel/schwyzer-firmen-forschung-steuern/",
+          "excerpt": "Bote.ch verbindet die Forschung mit der steuerlichen Attraktivität für Unternehmen im Kanton Schwyz, aber das verfügbare Material nennt keine Maßnahmen, Zahlen oder Daten.",
+          "date": "2026-11-06T03:37:01.055Z"
+        },
         {
           "title": "Aufrüstung der Armee: Der Nationalrat vermeidet eine Mehrwertsteuererhöhung",
           "url": "/de/schwyz-artikel/finanzierung-aufruestung-armee/",
@@ -256,12 +262,6 @@
           "url": "/de/schwyz-artikel/pfaeffikon-unternehmen-apero-93-gaeste/",
           "excerpt": "Die Wirtschaftsförderung Höfe hat an der KSA in Pfäffikon 93 Gäste zusammengebracht: Das Treffen setzt auf Austausch, Kooperation und Kontakte zwischen Unternehmen.",
           "date": "2026-10-27T01:42:11.869Z"
-        },
-        {
-          "title": "Kantonsrat: Ja zu 36 Millionen zwischen Biberbrugg und Chaltenboden",
-          "url": "/de/schwyz-artikel/kantonsrat-ja-zu-36-millionen-zwischen-biberbrugg-und-chaltenboden/",
-          "excerpt": "Der Kantonsrat genehmigt mit 64-28 die Ausgabe von 36 Millionen für den Langsamverkehr zwischen Biberbrugg und Chaltenboden.",
-          "date": "2026-10-21T13:31:24.335Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-06T03:47:53.148Z"
     },
     "fr": {
       "canton": "SZ",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-05T14:57:01.545Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Schwyz, la recherche devrait être plus avantageuse pour les entreprises",
+          "url": "/fr/articles-schwytz/recherche-entreprises-fiscalite-schwyz/",
+          "excerpt": "Bote.ch relie la recherche à l’attractivité fiscale pour les entreprises du canton de Schwyz, mais les informations disponibles n’indiquent ni mesures, ni chiffres, ni dates.",
+          "date": "2026-11-06T03:37:01.055Z"
+        },
         {
           "title": "Réarmement de l’armée : le National évite la hausse de la TVA",
           "url": "/fr/articles-schwytz/financement-rearmement-armee/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-schwytz/pfaeffikon-apero-entreprises-93-invites/",
           "excerpt": "La Wirtschaftsförderung Höfe a réuni 93 invités à la KSA de Pfäffikon : la rencontre mise sur l’échange, la coopération et les contacts entre entreprises.",
           "date": "2026-10-27T01:42:11.869Z"
-        },
-        {
-          "title": "Kantonsrat : oui à 36 millions entre Biberbrugg et Chaltenboden",
-          "url": "/fr/articles-schwytz/conseil-biberbrugg-chaltenboden/",
-          "excerpt": "Le Kantonsrat approuve par 64 voix contre 28 la dépense de 36 millions pour la mobilité douce entre Biberbrugg et Chaltenboden.",
-          "date": "2026-10-21T13:31:24.335Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-06T03:47:53.148Z"
     }
   }
 }
