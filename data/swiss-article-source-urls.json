@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/bns-lascia-tasso-guida-allo-0%2c0%25/92111318": {
-    "articleId": "bns-tasso-guida-zero-2026",
-    "ts": "2026-09-24T22:00:36.109Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4102957": {
     "articleId": "turismo-agosto-ospiti-estero",
     "ts": "2026-09-24T22:53:55.016Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4212855": {
     "articleId": "cdf-critica-armasuisse-immobili",
     "ts": "2026-11-03T20:13:29.950Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4217424": {
+    "articleId": "riforma-assicurazione-invalidita-ai",
+    "ts": "2026-11-06T05:15:10.920Z",
     "keyForm": 2
   }
 }
