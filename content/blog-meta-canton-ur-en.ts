@@ -51,6 +51,9 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.seedorf-reussstrasse-lavori-innesto.title': 'Seedorf: Reussstrasse closed for connection works',
     'blog.article.seedorf-reussstrasse-lavori-innesto.excerpt': 'Reussstrasse in Seedorf will be closed for construction work at the southern junction, toward Attinghausen, in preparation for the Altdorf-Seedorf cycle path.',
     'blog.article.seedorf-reussstrasse-lavori-innesto.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.volksschule-uri-iscrizioni-2025-2026.title': 'Canton Uri: 3.934 students and 224 sections in 2025/2026',
+    'blog.article.volksschule-uri-iscrizioni-2025-2026.excerpt': 'The report on the Volksschule of the Canton of Uri for the 2025/2026 school year describes a limited increase in enrolments and an expansion of the sections.',
+    'blog.article.volksschule-uri-iscrizioni-2025-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonUrEn;
