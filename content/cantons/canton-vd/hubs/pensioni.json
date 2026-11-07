@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "pensioni",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "fca3d3842ed2c2ab8113eafaf112f0a8af621cc8e2d808dcc2d985f5495b9e02",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "5efa96820d4d3640e22c6ff11d4cb681e709729c62e8351e179ca97b3d4df20b",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T20:43:08.728Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Investissement responsable : évolution des critères d'exclusions",
+              "date": "2026-11-06",
+              "url": "https://www.cpev.ch/actualites/investissement-responsable-evolution-des-criteres-dexclusions"
+            },
+            {
               "label": "Table ronde « L’argent de nos retraites à l’épreuve de la transparence » - Communication du CA",
               "date": "2026-10-12",
               "url": "https://www.cpev.ch/actualites/table-ronde-largent-de-nos-retraites-lepreuve-de-la-transparence-communication-du-ca"
@@ -159,14 +164,9 @@
               "label": "Célébration du bouquet de chantier à Prilly",
               "date": "2026-09-17",
               "url": "https://www.cpev.ch/actualites/celebration-du-bouquet-de-chantier-prilly"
-            },
-            {
-              "label": "L’Autorité de surveillance accepte le retrait du plan de prévoyance 2027",
-              "date": "2026-08-27",
-              "url": "https://www.cpev.ch/actualites/lautorite-de-surveillance-accepte-le-retrait-du-plan-de-prevoyance-2027"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -214,7 +214,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "VD",
@@ -323,6 +323,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Investissement responsable : évolution des critères d'exclusions",
+              "date": "2026-11-06",
+              "url": "https://www.cpev.ch/actualites/investissement-responsable-evolution-des-criteres-dexclusions"
+            },
+            {
               "label": "Table ronde « L’argent de nos retraites à l’épreuve de la transparence » - Communication du CA",
               "date": "2026-10-12",
               "url": "https://www.cpev.ch/actualites/table-ronde-largent-de-nos-retraites-lepreuve-de-la-transparence-communication-du-ca"
@@ -346,14 +351,9 @@
               "label": "Célébration du bouquet de chantier à Prilly",
               "date": "2026-09-17",
               "url": "https://www.cpev.ch/actualites/celebration-du-bouquet-de-chantier-prilly"
-            },
-            {
-              "label": "L’Autorité de surveillance accepte le retrait du plan de prévoyance 2027",
-              "date": "2026-08-27",
-              "url": "https://www.cpev.ch/actualites/lautorite-de-surveillance-accepte-le-retrait-du-plan-de-prevoyance-2027"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -401,7 +401,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "VD",
@@ -510,6 +510,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Investissement responsable : évolution des critères d'exclusions",
+              "date": "2026-11-06",
+              "url": "https://www.cpev.ch/actualites/investissement-responsable-evolution-des-criteres-dexclusions"
+            },
+            {
               "label": "Table ronde « L’argent de nos retraites à l’épreuve de la transparence » - Communication du CA",
               "date": "2026-10-12",
               "url": "https://www.cpev.ch/actualites/table-ronde-largent-de-nos-retraites-lepreuve-de-la-transparence-communication-du-ca"
@@ -533,14 +538,9 @@
               "label": "Célébration du bouquet de chantier à Prilly",
               "date": "2026-09-17",
               "url": "https://www.cpev.ch/actualites/celebration-du-bouquet-de-chantier-prilly"
-            },
-            {
-              "label": "L’Autorité de surveillance accepte le retrait du plan de prévoyance 2027",
-              "date": "2026-08-27",
-              "url": "https://www.cpev.ch/actualites/lautorite-de-surveillance-accepte-le-retrait-du-plan-de-prevoyance-2027"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -588,7 +588,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "VD",
@@ -697,6 +697,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Investissement responsable : évolution des critères d'exclusions",
+              "date": "2026-11-06",
+              "url": "https://www.cpev.ch/actualites/investissement-responsable-evolution-des-criteres-dexclusions"
+            },
+            {
               "label": "Table ronde « L’argent de nos retraites à l’épreuve de la transparence » - Communication du CA",
               "date": "2026-10-12",
               "url": "https://www.cpev.ch/actualites/table-ronde-largent-de-nos-retraites-lepreuve-de-la-transparence-communication-du-ca"
@@ -720,14 +725,9 @@
               "label": "Célébration du bouquet de chantier à Prilly",
               "date": "2026-09-17",
               "url": "https://www.cpev.ch/actualites/celebration-du-bouquet-de-chantier-prilly"
-            },
-            {
-              "label": "L’Autorité de surveillance accepte le retrait du plan de prévoyance 2027",
-              "date": "2026-08-27",
-              "url": "https://www.cpev.ch/actualites/lautorite-de-surveillance-accepte-le-retrait-du-plan-de-prevoyance-2027"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -775,7 +775,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }

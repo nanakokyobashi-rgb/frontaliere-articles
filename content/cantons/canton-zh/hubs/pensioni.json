@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "pensioni",
-  "updatedAt": "2026-11-06T12:42:30.258Z",
-  "contentHash": "e36cd0a1561722ac12d43ad78b777e1d84b34615d68be35dfeac6bef7e6c8ee5",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "45ab1cdab16922e22e8437db1c1a9557948ad6a936b0b15b3d51c1f7ff841ca4",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Höhere AHV/IV-Renten und EO-Anmeldung am Smartphone",
+              "date": "2026-11-06",
+              "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/hoehere-ahv-iv-renten-und-eo-anmeldung-am-smartphone.html"
+            },
+            {
               "label": "«Uber-Modell»: Bei der AHV gibt es keine Wahlfreiheit",
               "date": "2026-11-05",
               "url": "https://svazurich.ch/aktuell/aktuell/news/kontext/-uber-modell---bei-der-ahv-gibt-es-keine-wahlfreiheit.html"
@@ -159,14 +164,9 @@
               "label": "This-Priis 2027: Eine Nomination, die Engagement sichtbar macht",
               "date": "2026-08-31",
               "url": "https://svazurich.ch/aktuell/aktuell/news/anlaesse/eine-nomination-die-engagement-sichtbar-macht.html"
-            },
-            {
-              "label": "TeleZ bringt Sommerserie zum This-Priis 2026",
-              "date": "2026-08-25",
-              "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -238,7 +238,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-06T12:42:30.258Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "ZH",
@@ -347,6 +347,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Höhere AHV/IV-Renten und EO-Anmeldung am Smartphone",
+              "date": "2026-11-06",
+              "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/hoehere-ahv-iv-renten-und-eo-anmeldung-am-smartphone.html"
+            },
+            {
               "label": "«Uber-Modell»: Bei der AHV gibt es keine Wahlfreiheit",
               "date": "2026-11-05",
               "url": "https://svazurich.ch/aktuell/aktuell/news/kontext/-uber-modell---bei-der-ahv-gibt-es-keine-wahlfreiheit.html"
@@ -370,14 +375,9 @@
               "label": "This-Priis 2027: Eine Nomination, die Engagement sichtbar macht",
               "date": "2026-08-31",
               "url": "https://svazurich.ch/aktuell/aktuell/news/anlaesse/eine-nomination-die-engagement-sichtbar-macht.html"
-            },
-            {
-              "label": "TeleZ bringt Sommerserie zum This-Priis 2026",
-              "date": "2026-08-25",
-              "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -449,7 +449,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-06T12:42:30.258Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "ZH",
@@ -558,6 +558,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Höhere AHV/IV-Renten und EO-Anmeldung am Smartphone",
+              "date": "2026-11-06",
+              "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/hoehere-ahv-iv-renten-und-eo-anmeldung-am-smartphone.html"
+            },
+            {
               "label": "«Uber-Modell»: Bei der AHV gibt es keine Wahlfreiheit",
               "date": "2026-11-05",
               "url": "https://svazurich.ch/aktuell/aktuell/news/kontext/-uber-modell---bei-der-ahv-gibt-es-keine-wahlfreiheit.html"
@@ -581,14 +586,9 @@
               "label": "This-Priis 2027: Eine Nomination, die Engagement sichtbar macht",
               "date": "2026-08-31",
               "url": "https://svazurich.ch/aktuell/aktuell/news/anlaesse/eine-nomination-die-engagement-sichtbar-macht.html"
-            },
-            {
-              "label": "TeleZ bringt Sommerserie zum This-Priis 2026",
-              "date": "2026-08-25",
-              "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -660,7 +660,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-06T12:42:30.258Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "ZH",
@@ -769,6 +769,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Höhere AHV/IV-Renten und EO-Anmeldung am Smartphone",
+              "date": "2026-11-06",
+              "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/hoehere-ahv-iv-renten-und-eo-anmeldung-am-smartphone.html"
+            },
+            {
               "label": "«Uber-Modell»: Bei der AHV gibt es keine Wahlfreiheit",
               "date": "2026-11-05",
               "url": "https://svazurich.ch/aktuell/aktuell/news/kontext/-uber-modell---bei-der-ahv-gibt-es-keine-wahlfreiheit.html"
@@ -792,14 +797,9 @@
               "label": "This-Priis 2027: Eine Nomination, die Engagement sichtbar macht",
               "date": "2026-08-31",
               "url": "https://svazurich.ch/aktuell/aktuell/news/anlaesse/eine-nomination-die-engagement-sichtbar-macht.html"
-            },
-            {
-              "label": "TeleZ bringt Sommerserie zum This-Priis 2026",
-              "date": "2026-08-25",
-              "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -871,7 +871,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-06T12:42:30.258Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }

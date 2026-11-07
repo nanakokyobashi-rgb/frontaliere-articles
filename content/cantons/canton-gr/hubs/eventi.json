@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "e49a19eb519687ed3456787656ec3eeb287f49ee1b119c53fa4489b6b414d91a",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "a197b6edd6d01e08ab48c3b23dc336d0c54f533df36bd63c5c244746703d667c",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T00:12:54.064Z",
+      "updatedAt": "2026-11-06T13:54:16.445Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "75",
+          "value": "76",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,6 +32,12 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
+            {
+              "label": "Theateraufführung Jungmannschaft Bergün «Heute Gemeindeversammlung»",
+              "detail": "Bergün / Bravuogn, Bergün Filisur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theater-der-jungmannschaft-berguen/"
+            },
             {
               "label": "SCHNELLERTOLLERMEIER | Konzert |",
               "detail": "Chur",
@@ -85,17 +91,11 @@
               "detail": "Hotel Ucliva",
               "date": "2026-11-07",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/waltensburg-vuorz/fanntastic-vibes-reto-burrell-und-lin-stucki-in-waltensburg_AFxts6v"
-            },
-            {
-              "label": "10. Kongress \"Graubünden forscht\"",
-              "detail": "Kongresszentrum Davos, Davos — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/davos-platz/10-kongress-graubuenden-forscht_ArjyJmB"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-06T13:54:16.445Z"
         }
       ],
       "curatedArticles": [
@@ -153,7 +153,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "GR",
@@ -163,7 +163,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "75",
+          "value": "76",
           "note": "from the site’s events calendar"
         }
       ],
@@ -173,6 +173,12 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
+            {
+              "label": "Theateraufführung Jungmannschaft Bergün «Heute Gemeindeversammlung»",
+              "detail": "Bergün / Bravuogn, Bergün Filisur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theater-der-jungmannschaft-berguen/"
+            },
             {
               "label": "SCHNELLERTOLLERMEIER | Konzert |",
               "detail": "Chur",
@@ -226,17 +232,11 @@
               "detail": "Hotel Ucliva",
               "date": "2026-11-07",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/waltensburg-vuorz/fanntastic-vibes-reto-burrell-und-lin-stucki-in-waltensburg_AFxts6v"
-            },
-            {
-              "label": "10th Conference \"Graubünden forscht\"",
-              "detail": "Kongresszentrum Davos, Davos — ongoing, last day: 7 November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/davos-platz/10-kongress-graubuenden-forscht_ArjyJmB"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-06T13:54:16.445Z"
         }
       ],
       "curatedArticles": [
@@ -294,7 +294,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "GR",
@@ -304,7 +304,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "75",
+          "value": "76",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -314,6 +314,12 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
+            {
+              "label": "Theateraufführung Jungmannschaft Bergün «Heute Gemeindeversammlung»",
+              "detail": "Bergün / Bravuogn, Bergün Filisur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theater-der-jungmannschaft-berguen/"
+            },
             {
               "label": "SCHNELLERTOLLERMEIER | Konzert |",
               "detail": "Chur",
@@ -367,17 +373,11 @@
               "detail": "Hotel Ucliva",
               "date": "2026-11-07",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/waltensburg-vuorz/fanntastic-vibes-reto-burrell-und-lin-stucki-in-waltensburg_AFxts6v"
-            },
-            {
-              "label": "10. Kongress \"Graubünden forscht\"",
-              "detail": "Kongresszentrum Davos, Davos — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/davos-platz/10-kongress-graubuenden-forscht_ArjyJmB"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-06T13:54:16.445Z"
         }
       ],
       "curatedArticles": [
@@ -435,7 +435,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "GR",
@@ -445,7 +445,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "75",
+          "value": "76",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -455,6 +455,12 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
+            {
+              "label": "Theateraufführung Jungmannschaft Bergün «Heute Gemeindeversammlung»",
+              "detail": "Bergün / Bravuogn, Bergün Filisur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theater-der-jungmannschaft-berguen/"
+            },
             {
               "label": "SCHNELLERTOLLERMEIER | Konzert |",
               "detail": "Chur",
@@ -508,17 +514,11 @@
               "detail": "Hotel Ucliva",
               "date": "2026-11-07",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/waltensburg-vuorz/fanntastic-vibes-reto-burrell-und-lin-stucki-in-waltensburg_AFxts6v"
-            },
-            {
-              "label": "10. Kongress \"Graubünden forscht\"",
-              "detail": "Kongresszentrum Davos, Davos — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/davos-platz/10-kongress-graubuenden-forscht_ArjyJmB"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-06T13:54:16.445Z"
         }
       ],
       "curatedArticles": [
@@ -576,7 +576,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }

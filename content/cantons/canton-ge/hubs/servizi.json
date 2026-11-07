@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-06T23:00:41.085Z",
-  "contentHash": "a4f707ad2e3489e50cb46b35a740f07f9ece926ab14160089b82ea3d5c268fb9",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "df09f8639550faaff526e7b3af9a15d5a853ce354bb91c5139859d6c50c1162b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-05T23:57:30.030Z",
+      "updatedAt": "2026-11-06T20:00:45.352Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-06T21:42:36.229Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -91,7 +96,21 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-05T23:57:30.030Z"
+          "updatedAt": "2026-11-06T20:00:45.352Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "9 °C",
+              "detail": "oggi da 7 a 10 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +148,7 @@
               "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-06T23:00:41.085Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "GE",
@@ -278,7 +297,21 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-05T23:57:30.030Z"
+          "updatedAt": "2026-11-06T20:00:45.352Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "9 °C",
+              "detail": "today from 7 to 10 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -316,7 +349,7 @@
               "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-06T23:00:41.085Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "GE",
@@ -460,7 +493,21 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-05T23:57:30.030Z"
+          "updatedAt": "2026-11-06T20:00:45.352Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "9 °C",
+              "detail": "heute 7 bis 10 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -498,7 +545,7 @@
               "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-06T23:00:41.085Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "GE",
@@ -642,7 +689,21 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-05T23:57:30.030Z"
+          "updatedAt": "2026-11-06T20:00:45.352Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "9 °C",
+              "detail": "aujourd’hui de 7 à 10 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -680,7 +741,7 @@
               "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -752,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-06T23:00:41.085Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }

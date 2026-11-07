@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T18:39:35.128Z",
-  "contentHash": "fd6eabe331f4b520b7bd9449b922125b8be56a01683c1756a8f4fabc9e698292",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "b75e55c5bbd2721e6f50e73e51b15672560004f65548e8f3743cdd7115034d66",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T20:21:30.260Z",
+      "updatedAt": "2026-11-06T19:47:29.462Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "16",
-          "note": "segnalazioni aggiornate: 5 novembre 2026"
+          "note": "segnalazioni aggiornate: 6 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "8",
-          "note": "segnalazioni aggiornate: 5 novembre 2026"
+          "note": "segnalazioni aggiornate: 6 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -92,13 +92,23 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
+              "date": "2026-11-06T09:03:15.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/neyruz-beginn-der-arbeiten-zur-verbesserung-der-verkehrssicherheit-auf-der-kantonsstrasse-zwischen-der-einfahrt-und-dem-dorfplatz"
+            },
+            {
+              "label": "Neyruz : lancement des travaux d’amélioration de la sécurité sur la route cantonale entre l’entrée et la place du village",
+              "date": "2026-11-06T09:03:15.000Z",
+              "url": "https://www.fr.ch/dime/actualites/neyruz-lancement-des-travaux-damelioration-de-la-securite-sur-la-route-cantonale-entre-lentree-et-la-place-du-village"
+            },
             {
               "label": "Einige Zwischenfälle und mehrere Verkehrsunfälle",
               "date": "2026-11-01T09:10:00.000Z",
@@ -118,19 +128,9 @@
               "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
               "date": "2026-10-22T14:05:19.000Z",
               "url": "https://www.fr.ch/dime/actualites/villars-sur-glane-debut-des-travaux-damelioration-du-marquage-et-de-la-signalisation-du-giratoire-de-belle-croix"
-            },
-            {
-              "label": "Restrictions de circulation dues aux manifestations",
-              "date": "2026-10-14T00:21:00.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
-            },
-            {
-              "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
-              "date": "2026-10-07T13:45:16.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-06T18:39:35.128Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "FR",
@@ -205,12 +205,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "16",
-          "note": "reports as of 5 November 2026"
+          "note": "reports as of 6 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "8",
-          "note": "reports as of 5 November 2026"
+          "note": "reports as of 6 November 2026"
         }
       ],
       "dataBlocks": [
@@ -269,13 +269,23 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
+              "date": "2026-11-06T09:03:15.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/neyruz-beginn-der-arbeiten-zur-verbesserung-der-verkehrssicherheit-auf-der-kantonsstrasse-zwischen-der-einfahrt-und-dem-dorfplatz"
+            },
+            {
+              "label": "Neyruz : lancement des travaux d’amélioration de la sécurité sur la route cantonale entre l’entrée et la place du village",
+              "date": "2026-11-06T09:03:15.000Z",
+              "url": "https://www.fr.ch/dime/actualites/neyruz-lancement-des-travaux-damelioration-de-la-securite-sur-la-route-cantonale-entre-lentree-et-la-place-du-village"
+            },
             {
               "label": "Einige Zwischenfälle und mehrere Verkehrsunfälle",
               "date": "2026-11-01T09:10:00.000Z",
@@ -295,19 +305,9 @@
               "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
               "date": "2026-10-22T14:05:19.000Z",
               "url": "https://www.fr.ch/dime/actualites/villars-sur-glane-debut-des-travaux-damelioration-du-marquage-et-de-la-signalisation-du-giratoire-de-belle-croix"
-            },
-            {
-              "label": "Restrictions de circulation dues aux manifestations",
-              "date": "2026-10-14T00:21:00.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
-            },
-            {
-              "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
-              "date": "2026-10-07T13:45:16.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-06T18:39:35.128Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "FR",
@@ -382,12 +382,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "16",
-          "note": "Meldungen vom 5. November 2026"
+          "note": "Meldungen vom 6. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "8",
-          "note": "Meldungen vom 5. November 2026"
+          "note": "Meldungen vom 6. November 2026"
         }
       ],
       "dataBlocks": [
@@ -446,13 +446,23 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
+              "date": "2026-11-06T09:03:15.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/neyruz-beginn-der-arbeiten-zur-verbesserung-der-verkehrssicherheit-auf-der-kantonsstrasse-zwischen-der-einfahrt-und-dem-dorfplatz"
+            },
+            {
+              "label": "Neyruz : lancement des travaux d’amélioration de la sécurité sur la route cantonale entre l’entrée et la place du village",
+              "date": "2026-11-06T09:03:15.000Z",
+              "url": "https://www.fr.ch/dime/actualites/neyruz-lancement-des-travaux-damelioration-de-la-securite-sur-la-route-cantonale-entre-lentree-et-la-place-du-village"
+            },
             {
               "label": "Einige Zwischenfälle und mehrere Verkehrsunfälle",
               "date": "2026-11-01T09:10:00.000Z",
@@ -472,19 +482,9 @@
               "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
               "date": "2026-10-22T14:05:19.000Z",
               "url": "https://www.fr.ch/dime/actualites/villars-sur-glane-debut-des-travaux-damelioration-du-marquage-et-de-la-signalisation-du-giratoire-de-belle-croix"
-            },
-            {
-              "label": "Restrictions de circulation dues aux manifestations",
-              "date": "2026-10-14T00:21:00.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
-            },
-            {
-              "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
-              "date": "2026-10-07T13:45:16.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-06T18:39:35.128Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "FR",
@@ -559,12 +559,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "16",
-          "note": "signalements au 5 novembre 2026"
+          "note": "signalements au 6 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "8",
-          "note": "signalements au 5 novembre 2026"
+          "note": "signalements au 6 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -623,13 +623,23 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
+              "date": "2026-11-06T09:03:15.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/neyruz-beginn-der-arbeiten-zur-verbesserung-der-verkehrssicherheit-auf-der-kantonsstrasse-zwischen-der-einfahrt-und-dem-dorfplatz"
+            },
+            {
+              "label": "Neyruz : lancement des travaux d’amélioration de la sécurité sur la route cantonale entre l’entrée et la place du village",
+              "date": "2026-11-06T09:03:15.000Z",
+              "url": "https://www.fr.ch/dime/actualites/neyruz-lancement-des-travaux-damelioration-de-la-securite-sur-la-route-cantonale-entre-lentree-et-la-place-du-village"
+            },
             {
               "label": "Einige Zwischenfälle und mehrere Verkehrsunfälle",
               "date": "2026-11-01T09:10:00.000Z",
@@ -649,19 +659,9 @@
               "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
               "date": "2026-10-22T14:05:19.000Z",
               "url": "https://www.fr.ch/dime/actualites/villars-sur-glane-debut-des-travaux-damelioration-du-marquage-et-de-la-signalisation-du-giratoire-de-belle-croix"
-            },
-            {
-              "label": "Restrictions de circulation dues aux manifestations",
-              "date": "2026-10-14T00:21:00.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
-            },
-            {
-              "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
-              "date": "2026-10-07T13:45:16.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-06T18:39:35.128Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }

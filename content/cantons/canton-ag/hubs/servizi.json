@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-11-06T22:19:33.900Z",
-  "contentHash": "b1da0cb95c74a487e93b033b732ed0632addf8a1eab3a385e40172ab3f094db6",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "dc565629b8acb3e8e4fc3189512397b865e8af081ec3d1c9bc5ab1ac951201e3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,18 @@
       "keyFacts": 1
     },
     {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-06T19:25:36.781Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-06T21:42:36.229Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -30,6 +40,11 @@
           "value": "569,90 CHF",
           "note": "regione di premio 0, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "18",
+          "note": "offerta mediana 2080 CHF"
         }
       ],
       "dataBlocks": [
@@ -47,6 +62,51 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-01T11:17:34.347Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "AG7529",
+              "value": "4600 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58808"
+            },
+            {
+              "label": "AG8843",
+              "value": "4600 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58809"
+            },
+            {
+              "label": "AG9417",
+              "value": "4000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58811"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.auktion-ag.ch/de/",
+          "updatedAt": "2026-11-06T19:25:36.781Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "7 °C",
+              "detail": "oggi da 6 a 7 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -84,7 +144,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -164,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-06T22:19:33.900Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "AG",
@@ -177,6 +237,11 @@
           "value": "569.90 CHF",
           "note": "premium region 0, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "18",
+          "note": "typical bid 2,080 CHF"
         }
       ],
       "dataBlocks": [
@@ -194,6 +259,51 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-01T11:17:34.347Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "AG7529",
+              "value": "4,600 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58808"
+            },
+            {
+              "label": "AG8843",
+              "value": "4,600 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58809"
+            },
+            {
+              "label": "AG9417",
+              "value": "4,000 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58811"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.auktion-ag.ch/de/",
+          "updatedAt": "2026-11-06T19:25:36.781Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "7 °C",
+              "detail": "today from 6 to 7 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +341,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -307,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-06T22:19:33.900Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "AG",
@@ -320,6 +430,11 @@
           "value": "569.90 CHF",
           "note": "Prämienregion 0, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "18",
+          "note": "mittleres Gebot 2’080 CHF"
         }
       ],
       "dataBlocks": [
@@ -337,6 +452,51 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-01T11:17:34.347Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "AG7529",
+              "value": "4’600 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58808"
+            },
+            {
+              "label": "AG8843",
+              "value": "4’600 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58809"
+            },
+            {
+              "label": "AG9417",
+              "value": "4’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58811"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.auktion-ag.ch/de/",
+          "updatedAt": "2026-11-06T19:25:36.781Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "7 °C",
+              "detail": "heute 6 bis 7 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -374,7 +534,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -450,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-06T22:19:33.900Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "AG",
@@ -463,6 +623,11 @@
           "value": "569,90 CHF",
           "note": "région de primes 0, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "18",
+          "note": "offre centrale 2 080 CHF"
         }
       ],
       "dataBlocks": [
@@ -480,6 +645,51 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-01T11:17:34.347Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "AG7529",
+              "value": "4 600 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58808"
+            },
+            {
+              "label": "AG8843",
+              "value": "4 600 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58809"
+            },
+            {
+              "label": "AG9417",
+              "value": "4 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58811"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.auktion-ag.ch/de/",
+          "updatedAt": "2026-11-06T19:25:36.781Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "7 °C",
+              "detail": "aujourd’hui de 6 à 7 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -517,7 +727,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-06T22:19:33.900Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }

@@ -87,6 +87,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.lausanna-credito-colonnine-2031.title': 'Mobilité électrique : 200 bornes prévues à Lausanne d’ici 2031',
     'blog.article.lausanna-credito-colonnine-2031.excerpt': 'La Municipalité de Lausanne demande un crédit d’investissement de CHF 3 millions afin d’étendre, sur le domaine public, le réseau de bornes de recharge au cours de la législature 2026-2031.',
     'blog.article.lausanna-credito-colonnine-2031.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.vaud-salari-pubblici-2027.title': 'Vaud, salaires publics indexés de 1,5% en 2027',
+    'blog.article.vaud-salari-pubblici-2027.excerpt': 'Mercredi, le Conseil d\'Etat vaudois a annoncé la pleine indexation des salaires de l\'ensemble du personnel de l\'Etat pour 2027.',
+    'blog.article.vaud-salari-pubblici-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVdFr;

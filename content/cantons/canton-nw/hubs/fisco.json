@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "fisco",
-  "updatedAt": "2026-10-30T19:44:57.077Z",
-  "contentHash": "1a634ddb105d3798b2d686688ae30b2b7f37c6f23a486694318967897bab1ef2",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "8055bf7c14f33aef231ce335b666cf1bb28f61b1afdc54fb0069fb551b0fcfc1",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -109,6 +109,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Verkehrssteuer: Befreiung für energieeffiziente Fahrzeuge soll entfallen",
+              "date": "2026-11-06",
+              "url": "https://www.nw.ch/_rte/information/139333"
+            },
+            {
               "label": "Vorsicht vor Phishing-Mails",
               "date": "2026-09-14T10:34:56.000Z",
               "url": "https://www.steuern-nw.ch/vorsicht-vor-phishing-mails/"
@@ -119,7 +124,7 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -171,7 +176,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-30T19:44:57.077Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "NW",
@@ -258,6 +263,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Verkehrssteuer: Befreiung für energieeffiziente Fahrzeuge soll entfallen",
+              "date": "2026-11-06",
+              "url": "https://www.nw.ch/_rte/information/139333"
+            },
+            {
               "label": "Vorsicht vor Phishing-Mails",
               "date": "2026-09-14T10:34:56.000Z",
               "url": "https://www.steuern-nw.ch/vorsicht-vor-phishing-mails/"
@@ -268,7 +278,7 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -320,7 +330,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-30T19:44:57.077Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "NW",
@@ -407,6 +417,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Verkehrssteuer: Befreiung für energieeffiziente Fahrzeuge soll entfallen",
+              "date": "2026-11-06",
+              "url": "https://www.nw.ch/_rte/information/139333"
+            },
+            {
               "label": "Vorsicht vor Phishing-Mails",
               "date": "2026-09-14T10:34:56.000Z",
               "url": "https://www.steuern-nw.ch/vorsicht-vor-phishing-mails/"
@@ -417,7 +432,7 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -469,7 +484,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-30T19:44:57.077Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "NW",
@@ -556,6 +571,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Verkehrssteuer: Befreiung für energieeffiziente Fahrzeuge soll entfallen",
+              "date": "2026-11-06",
+              "url": "https://www.nw.ch/_rte/information/139333"
+            },
+            {
               "label": "Vorsicht vor Phishing-Mails",
               "date": "2026-09-14T10:34:56.000Z",
               "url": "https://www.steuern-nw.ch/vorsicht-vor-phishing-mails/"
@@ -566,7 +586,7 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -618,7 +638,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-30T19:44:57.077Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }
