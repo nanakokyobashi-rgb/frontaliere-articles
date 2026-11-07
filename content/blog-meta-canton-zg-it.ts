@@ -66,6 +66,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.consultazione-piano-zugo.title': 'Zugo pubblica l\'adeguamento del Piano direttore 26/1',
     'blog.article.consultazione-piano-zugo.excerpt': 'Il Canton Zugo mette in consultazione il Piano direttore 26/1: zone speciali per più abitazioni e strategia di stabilizzazione nell\'area non edificabile.',
     'blog.article.consultazione-piano-zugo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.zug-fondo-zukunftskapital-900m.title': 'Canton Zug accantona 900 milioni per generazioni future',
+    'blog.article.zug-fondo-zukunftskapital-900m.excerpt': 'Il fondo «Zukunftskapital» è previsto per il 2028, con prelievi possibili non prima di dieci anni, gestito dalla Direzione delle finanze.',
+    'blog.article.zug-fondo-zukunftskapital-900m.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZgIt;

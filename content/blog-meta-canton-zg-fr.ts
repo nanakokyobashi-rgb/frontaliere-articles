@@ -66,6 +66,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.consultazione-piano-zugo.title': 'Zoug publie l’adaptation du Plan directeur 26/1',
     'blog.article.consultazione-piano-zugo.excerpt': 'Le canton de Zoug met en consultation le Plan directeur 26/1 : zones spéciales pour davantage de logements et stratégie de stabilisation dans la zone non constructible.',
     'blog.article.consultazione-piano-zugo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.zug-fondo-zukunftskapital-900m.title': 'Le canton de Zoug met de côté 900 millions pour les générations futures',
+    'blog.article.zug-fondo-zukunftskapital-900m.excerpt': 'Le fonds «Zukunftskapital» est prévu pour 2028, avec des prélèvements possibles au plus tôt dans dix ans, géré par la Direction des finances.',
+    'blog.article.zug-fondo-zukunftskapital-900m.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZgFr;

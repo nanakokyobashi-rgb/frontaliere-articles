@@ -24,6 +24,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'balti-zug-robatech-acquisizione': { it: 'balti-zug-robatech-acquisizione', en: 'robatech-takes-over-balti-baar', de: 'robatech-uebernimmt-balti-baar', fr: 'robatech-reprend-balti-baar' },
  'cham-moltiplicatore-fiscale-2027': { it: 'cham-moltiplicatore-fiscale-2027', en: 'cham-tax-rate-2027', de: 'cham-steuerfuss-2027', fr: 'cham-taux-fiscal-2027' },
  'consultazione-piano-zugo': { it: 'consultazione-piano-zugo', en: 'zug-directive-plan-consultation', de: 'zug-richtplan-mitwirkung-26-1', fr: 'plan-directeur-zoug-consultation' },
+ 'zug-fondo-zukunftskapital-900m': { it: 'zug-fondo-zukunftskapital-900m', en: 'zug-future-capital-900m', de: 'zug-zukunftskapital-900m', fr: 'zoug-capital-avenir-900m' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

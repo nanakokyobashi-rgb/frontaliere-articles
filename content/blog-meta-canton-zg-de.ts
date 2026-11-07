@@ -66,6 +66,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.consultazione-piano-zugo.title': 'Zug veröffentlicht die Anpassung des Richtplans 26/1',
     'blog.article.consultazione-piano-zugo.excerpt': 'Der Kanton Zug legt den Richtplan 26/1 zur Vernehmlassung vor: Sonderbauzonen für mehr Wohnungen und eine Stabilisierungsstrategie im Nichtbaugebiet.',
     'blog.article.consultazione-piano-zugo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zug-fondo-zukunftskapital-900m.title': 'Kanton Zug legt 900 Millionen für künftige Generationen zurück',
+    'blog.article.zug-fondo-zukunftskapital-900m.excerpt': 'Der Fonds «Zukunftskapital» ist für 2028 vorgesehen, Entnahmen sind frühestens nach zehn Jahren möglich und er wird von der Finanzdirektion verwaltet.',
+    'blog.article.zug-fondo-zukunftskapital-900m.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZgDe;

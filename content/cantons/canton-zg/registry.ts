@@ -238,4 +238,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'zug-fondo-zukunftskapital-900m',
+ category: 'fiscale',
+ date: '2026-11-07T11:06:15.874Z',
+ image: '/images/blog/article-zug-fondo-zukunftskapital-900m.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZG'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
