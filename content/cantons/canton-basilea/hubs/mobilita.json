@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-11-07T11:15:37.760Z",
-  "contentHash": "f0833b3caa275813c3dda9d8fe140935c4342103f843f4e1e5a92fd65018f89a",
+  "updatedAt": "2026-11-07T12:37:57.345Z",
+  "contentHash": "de0a24fbb0464aab834e51bdcb3a35a038fffacbcd0ee5b0c8f4bdefaab5f77d",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -203,6 +203,12 @@
           "date": "2026-10-27T00:34:47.659Z"
         },
         {
+          "title": "Riaprono accessi Osttangente a Basilea il 16 novembre 2026",
+          "url": "/articoli-basilea/osttangente-riapertura-basilea/",
+          "excerpt": "Il 16 novembre 2026 riaprono l'uscita Wettsteinallee e l'ingresso Riehenstrasse; la Schwarzwaldstrasse sotto l'A2 sarà percorribile.",
+          "date": "2026-11-07T12:34:26.574Z"
+        },
+        {
           "title": "Parlamento di Basilea: mozione per iniziare i cantieri alle 6",
           "url": "/articoli-basilea/basilea-cantieri-alle-sei/",
           "excerpt": "Mercoledì il Gran Consiglio di Basilea ha trasmesso per la prima volta al governo una mozione di Luca Urgese (FDP) sull'orario di lavoro nei cantieri.",
@@ -237,12 +243,6 @@
           "url": "/articoli-svizzera/grigioni-modello-basilese-traffico/",
           "excerpt": "Il governo grigionese è scettico sull'adozione del modello di sanzioni di Birsfelden per deviare il traffico festivo e turistico.",
           "date": "2026-06-29T16:07:16.810Z"
-        },
-        {
-          "title": "Sistema scolastico Basilea Campagna: iscrizione e cicli",
-          "url": "/articoli-svizzera/cicli-basilea-campagna/",
-          "excerpt": "Guida alla scuola dell'obbligo a Basilea Campagna: iscrizione, cicli, calendario, lingue di insegnamento e passaggio alle scuole medie superiori.",
-          "date": "2026-10-02T03:08:58.952Z"
         }
       ],
       "latestCantonArticles": [],
@@ -276,7 +276,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-07T12:37:57.345Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -457,6 +457,12 @@
           "date": "2026-10-27T00:34:47.659Z"
         },
         {
+          "title": "Osttangente access points in Basel reopen on November 16, 2026",
+          "url": "/en/basel-articles/osttangente-reopening-basel/",
+          "excerpt": "On November 16, 2026, the Wettsteinallee exit and Riehenstrasse entrance will reopen; Schwarzwaldstrasse under the A2 will be passable.",
+          "date": "2026-11-07T12:34:26.574Z"
+        },
+        {
           "title": "Basel Parliament: motion to start construction work at 6",
           "url": "/en/basel-articles/basel-construction-start-six/",
           "excerpt": "The Grand Council of Basel has referred a motion to allow construction work from 6 a.m.",
@@ -491,12 +497,6 @@
           "url": "/en/swiss-articles/graubunden-basel-model-traffic/",
           "excerpt": "The Grison government is sceptical about adopting the Birsfelden model of sanctions to divert holiday and tourist traffic.",
           "date": "2026-06-29T16:07:16.810Z"
-        },
-        {
-          "title": "Basel-Landschaft school system: enrolment and cycles",
-          "url": "/en/swiss-articles/basel-campagna-school-cycles/",
-          "excerpt": "Guide to compulsory schooling in Basel-Landschaft: enrolment, cycles, calendar, languages of instruction and transition to secondary school.",
-          "date": "2026-10-02T03:08:58.952Z"
         }
       ],
       "latestCantonArticles": [],
@@ -530,7 +530,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-07T12:37:57.345Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -711,6 +711,12 @@
           "date": "2026-10-27T00:34:47.659Z"
         },
         {
+          "title": "Osttangente-Zugänge in Basel am 16. November 2026 wiedereröffnet",
+          "url": "/de/basel-artikel/osttangente-zugange-in-basel-am-16-november-2026-wiedereroffnet/",
+          "excerpt": "Am 16. November 2026 enden die Schliessungen und Umleitungen im Zusammenhang mit der Sanierung der Osttangente im Wettsteinquartier in Basel.",
+          "date": "2026-11-07T12:34:26.574Z"
+        },
+        {
           "title": "Basler Parlament: Motion für einen Baubeginn um 6 Uhr",
           "url": "/de/basel-artikel/basel-baustart-um-sechs/",
           "excerpt": "Der Grosse Rat von Basel hat eine Motion überwiesen, um Bauarbeiten von Juni bis August um 6 Uhr zu ermöglichen; lärmintensive Arbeiten würden weiterhin erst ab 7 Uhr stattfinden.",
@@ -745,12 +751,6 @@
           "url": "/de/schweiz-artikel/graubuenden-basler-modell-verkehr/",
           "excerpt": "Die Bündner Regierung ist skeptisch gegenüber der Einführung des Birsfeldener Sanktionsmodells, um den Urlaubs- und Tourismusverkehr abzulenken.",
           "date": "2026-06-29T16:07:16.810Z"
-        },
-        {
-          "title": "Schulsystem Basel-Landschaft: Einschreibung und Zyklen",
-          "url": "/de/schweiz-artikel/schule-basel-landschaft-zyklen/",
-          "excerpt": "Leitfaden zur Schulpflicht in Basel-Landschaft: Einschreibung, Zyklen, Kalender, Unterrichtssprachen und Übergang zur weiterführenden Schule.",
-          "date": "2026-10-02T03:08:58.952Z"
         }
       ],
       "latestCantonArticles": [],
@@ -784,7 +784,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-07T12:37:57.345Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -965,6 +965,12 @@
           "date": "2026-10-27T00:34:47.659Z"
         },
         {
+          "title": "Réouverture des accès Osttangente à Bâle le 16 novembre 2026",
+          "url": "/fr/articles-bale/osttangente-reouverture-basle/",
+          "excerpt": "Le 16 novembre 2026, la sortie Wettsteinallee et l'entrée Riehenstrasse rouvrent ; la Schwarzwaldstrasse sous l'A2 sera praticable.",
+          "date": "2026-11-07T12:34:26.574Z"
+        },
+        {
           "title": "Parlement de Bâle : motion pour commencer les chantiers à 6 heures",
           "url": "/fr/articles-bale/bale-chantier-six-heures/",
           "excerpt": "Le Grand Conseil de Bâle a transmis une motion visant à autoriser les travaux de construction à 6 heures de juin à août ; les travaux bruyants resteraient à partir de 7 heures.",
@@ -999,12 +1005,6 @@
           "url": "/fr/articles-suisse/grisons-modele-bale-trafic/",
           "excerpt": "Le gouvernement grison est sceptique quant à l'adoption du modèle de sanctions de Birsfelden pour détourner le trafic festif et touristique.",
           "date": "2026-06-29T16:07:16.810Z"
-        },
-        {
-          "title": "Système scolaire de Bâle-Landschaft : effectifs et cycles",
-          "url": "/fr/articles-suisse/ecole-bale-campagne-cycles/",
-          "excerpt": "Guide de la scolarité obligatoire à Bâle-Landschaft : inscription, cycles, calendrier, langues d’enseignement et transition vers le secondaire.",
-          "date": "2026-10-02T03:08:58.952Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1038,7 +1038,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-07T12:37:57.345Z"
     }
   }
 }
