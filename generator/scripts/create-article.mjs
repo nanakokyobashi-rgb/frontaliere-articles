@@ -13368,6 +13368,14 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // prompt non cambia: ricontattarlo con lo stesso `prefer` e' spendere una
   // chiamata su un esito gia' noto.
   let _preferDegradataDalRibracket = false;
+  // Solo le chiamate BODY usano la preferenza: il flag cambia quando il
+  // ri-bracketing si arma, quindi il preflight deve ricalcolarla al momento
+  // della chiamata invece di catturare il valore iniziale.
+  const _preferPerBodyCall = () => (
+    _preferActiveThisAttempt && !_preferDegradataDalRibracket
+      ? PREFERRED_GENERATION_MODELS
+      : undefined
+  );
   let _splitCall1 = _splitAttiva ? _buildCall1() : null;
   if (_splitCall1) {
     console.error(
@@ -13390,7 +13398,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     if (typeof guardProviderInputCapForCall === 'function') {
       guardProviderInputCapForCall(_splitCall1, {
         model: useGeminiDirect ? AI_MODELS.GEMINI_FLASH : (forceModel || GH_MODEL_HEAVY),
-        prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined,
+        prefer: _preferPerBodyCall(),
         splitMode: _splitMode,
         phase: 'prompt-built-body-call',
         promptPart: 'body',
@@ -13643,9 +13651,10 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // `validateItalianPayload` — cioe' senza rigenerazione e senza rotazione
     // di modello. `META_ONLY_FIELDS` le da' la validazione che le compete:
     // esattamente i due campi di testo che questa meta' produce.
-    const _metadataPrefer = (_preferActiveThisAttempt && !_preferDegradataDalRibracket)
-      ? PREFERRED_GENERATION_MODELS
-      : undefined;
+    // Metadata is deliberately neutral: the preferred-model lane is reserved
+    // for the body call. Keep the named value for the cap guard so its roster
+    // calculation is visibly tied to the actual metadata options (undefined).
+    const _metadataPrefer = undefined;
     // The metadata request has its own prompt and its own effective roster.
     // Check it only after the body exists (the article text is part of this
     // prompt), but before callLLM can spend a request or walk a doomed suffix.
@@ -13659,8 +13668,8 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       });
     }
     const rawMeta = useGeminiDirect
-      ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, prefer: _metadataPrefer, expectedFields: META_ONLY_FIELDS, locale: primaryLocale })
-      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, prefer: _metadataPrefer, expectedFields: META_ONLY_FIELDS, locale: primaryLocale });
+      ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS, locale: primaryLocale })
+      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS, locale: primaryLocale });
     let metaData;
     try {
       metaData = JSON.parse(repairLlmJson(rawMeta));
@@ -13897,7 +13906,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       { msgs: llmMessages, schema: articleSchema, est: _promptEstTokens },
       {
         model: useGeminiDirect ? AI_MODELS.GEMINI_FLASH : (forceModel || GH_MODEL_HEAVY),
-        prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined,
+        prefer: _preferPerBodyCall(),
         splitMode: _splitMode,
         phase: 'prompt-built-full-call',
         promptPart: 'full',
