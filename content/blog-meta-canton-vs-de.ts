@@ -57,6 +57,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.stato-vallese-intelligenza-artificiale.title': 'Staat Wallis implementiert Plattform für künstliche Intelligenz AVA',
     'blog.article.stato-vallese-intelligenza-artificiale.excerpt': 'AVA ist dem Personal des Staates Wallis seit Donnerstag zugänglich; die Betriebskosten betragen etwa CHF 2 pro Monat und aktivem Nutzer.',
     'blog.article.stato-vallese-intelligenza-artificiale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lavoro-vallese-ottobre-2026.title': 'Arbeitslosigkeit im Wallis steigt auf 3,3%: 6.082 registrierte Arbeitslose',
+    'blog.article.lavoro-vallese-ottobre-2026.excerpt': 'Ende Oktober 2026 waren 6.082 Personen bei den Regionalen Arbeitsvermittlungszentren (RAV) des Wallis registriert.',
+    'blog.article.lavoro-vallese-ottobre-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVsDe;

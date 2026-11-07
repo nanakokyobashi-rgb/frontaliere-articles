@@ -205,4 +205,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lavoro-vallese-ottobre-2026',
+ category: 'novita',
+ date: '2026-11-07T03:35:00.194Z',
+ image: '/images/blog/article-lavoro-vallese-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

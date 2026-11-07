@@ -57,6 +57,9 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.stato-vallese-intelligenza-artificiale.title': 'State of Valais implements the AVA artificial intelligence platform',
     'blog.article.stato-vallese-intelligenza-artificiale.excerpt': 'AVA has been accessible to staff of the State of Valais since Thursday; the operating cost is approximately CHF 2 per month per active user.',
     'blog.article.stato-vallese-intelligenza-artificiale.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lavoro-vallese-ottobre-2026.title': 'Unemployment in Valais rises to 3,3%: 6.082 registered people',
+    'blog.article.lavoro-vallese-ottobre-2026.excerpt': 'At the end of October 2026, 6.082 people were registered with the Regional Employment Offices (ORP) in Valais.',
+    'blog.article.lavoro-vallese-ottobre-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVsEn;
