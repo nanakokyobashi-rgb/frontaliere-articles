@@ -11,6 +11,10 @@
     "canton-tg::https://grenzgaengerzentrum.de/ratgeber/allgemein/grenzgaenger-kinder-schule-schweiz": {
       "section": "canton-tg",
       "ts": 1794005848081
+    },
+    "canton-tg::https://www.kreuzlingen.ch/aktuelles/steueramt-bleibt-am-9-november-vormittags-geschlossen": {
+      "section": "canton-tg",
+      "ts": 1794012712249
     }
   }
 }
