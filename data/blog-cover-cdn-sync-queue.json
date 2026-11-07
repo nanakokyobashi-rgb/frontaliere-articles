@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-lavoro-zurigo-imprese.webp",
+      "sha256": "03880a3054dd1d2dd75a37ca62a158aa0e6c77ac9f803fc72fe9f401fa27329b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-lavoro-zurigo-imprese-480w.webp",
+      "sha256": "9bdea83e0ddd31015428169be90e9388bf345ed78b058fc75ff99e8d7d7940f7"
+    }
+  ]
 }
