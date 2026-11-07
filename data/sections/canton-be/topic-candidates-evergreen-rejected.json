@@ -75,6 +75,26 @@
     "canton-be::https://ajour.ch/story/705936/travaux-des-cff-aprs-laffaissement-dun-remblai-perles": {
       "section": "canton-be",
       "ts": 1793982844852
+    },
+    "canton-be::https://ajour.ch/story/705673/nidauer-gemeinder%c3%a4tin-zum-stau-auf-der-bernstrasse-vorerst-wird-es-so-bleiben-wie-es-ist": {
+      "section": "canton-be",
+      "ts": 1794010895700
+    },
+    "canton-be::https://ajour.ch/story/705951/vernehmlassung-zur-teilrevision-des-personalgesetzes-er%c3%b6ffnet": {
+      "section": "canton-be",
+      "ts": 1794010897570
+    },
+    "canton-be::https://ajour.ch/story/705797/berner-polizei-ermittelt-nach-cyberangriff-auf-metzgerei-in-k%c3%b6niz": {
+      "section": "canton-be",
+      "ts": 1794010899219
+    },
+    "canton-be::https://ajour.ch/story/705991/galsstrasse-wird-f%c3%bcr-belagsarbeiten-gesperrt": {
+      "section": "canton-be",
+      "ts": 1794010900861
+    },
+    "canton-be::https://ajour.ch/story/705949/strassensperrung-infolge-holzschlag-im-bl%c3%a4siwald-neuegglehn": {
+      "section": "canton-be",
+      "ts": 1794010902315
     }
   }
 }
