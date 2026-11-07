@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-roma-cambia-proposta-tassa.webp",
+      "sha256": "8f9e8bfc70189cd3a4231d8ee811f5d79750c55106077e214b423295e5773abd"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-roma-cambia-proposta-tassa-480w.webp",
+      "sha256": "9b77af11ad70230131e6371cf5beb9943ecb95c9ff18e9a9d93ab7d61e98a169"
+    }
+  ]
 }
