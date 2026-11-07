@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-avs-iva-tredicesima-rendita.webp",
-      "sha256": "783060df2e036118688dafc6e338f5a67cee972463a81b6b7040af6ccb0c7313"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-avs-iva-tredicesima-rendita-480w.webp",
-      "sha256": "0eeafecb3d9e8541f589a97fb8506ef77c15217d6a6270209b5aaf510b28a04f"
-    }
-  ]
+  "items": []
 }
