@@ -21,6 +21,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'vallese-piano-risparmi-2030': { it: 'vallese-piano-risparmi-2030', en: 'valais-savings-plan-2030', de: 'wallis-sparplan-2030', fr: 'valais-plan-economies-2030' },
  'aumento-tasso-disoccupazione-ottobre': { it: 'aumento-tasso-disoccupazione-ottobre', en: 'increase-unemployment-rate-october', de: 'tatsatz-arbeitslosigkeit-oktober', fr: 'hausse-taux-chomage-octobre' },
  'stato-vallese-intelligenza-artificiale': { it: 'stato-vallese-intelligenza-artificiale', en: 'valais-state-artificial-intelligence', de: 'staat-wallis-kunstliche-intelligenz', fr: 'etat-valais-intelligence-artificielle' },
+ 'lavoro-vallese-ottobre-2026': { it: 'lavoro-vallese-ottobre-2026', en: 'valais-labor-market-october-2026', de: 'walliser-arbeitsmarkt-oktober-2026', fr: 'marche-travail-valais-octobre-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

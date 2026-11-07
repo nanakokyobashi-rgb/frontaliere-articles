@@ -57,6 +57,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.stato-vallese-intelligenza-artificiale.title': 'Stato del Vallese implementa piattaforma di intelligenza artificiale AVA',
     'blog.article.stato-vallese-intelligenza-artificiale.excerpt': 'AVA è accessibile al personale dello Stato del Vallese da giovedì; il costo operativo è di circa CHF 2 al mese per utente attivo.',
     'blog.article.stato-vallese-intelligenza-artificiale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lavoro-vallese-ottobre-2026.title': 'Disoccupazione in Vallese sale al 3,3%: 6.082 iscritti',
+    'blog.article.lavoro-vallese-ottobre-2026.excerpt': 'A fine ottobre 2026, 6.082 persone risultavano iscritte agli Uffici regionali di collocamento (ORP) del Vallese.',
+    'blog.article.lavoro-vallese-ottobre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVsIt;

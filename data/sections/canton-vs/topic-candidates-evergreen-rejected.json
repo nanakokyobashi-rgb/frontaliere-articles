@@ -71,6 +71,18 @@
     "canton-vs::https://www.pomona.ch/story/823268/arbeitslosigkeit-im-wallis-steigt-im-oktober-an": {
       "section": "canton-vs",
       "ts": 1794010074892
+    },
+    "canton-vs::https://www.ledauphine.com/faits-divers-justice/2026/11/06/tout-le-monde-connait-cette-faiblesse-francaise-entre-anemasse-et-la-suisse-une-operation-transfrontaliere-contre-le-point-de-deal-du-chalet": {
+      "section": "canton-vs",
+      "ts": 1794022891282
+    },
+    "canton-vs::https://www.ledauphine.com/economie/2026/11/06/une-premiere-piste-de-ski-ouverte-des-ce-samedi": {
+      "section": "canton-vs",
+      "ts": 1794023395722
+    },
+    "canton-vs::https://www.pomona.ch/story/823854/brand-im-briger-spitalneubau-rund-270-personen-proben-den-ernstfall": {
+      "section": "canton-vs",
+      "ts": 1794023398000
     }
   }
 }

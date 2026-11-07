@@ -57,6 +57,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.stato-vallese-intelligenza-artificiale.title': 'L\'État du Valais met en œuvre la plateforme d\'intelligence artificielle AVA',
     'blog.article.stato-vallese-intelligenza-artificiale.excerpt': 'AVA est accessible au personnel de l\'État du Valais depuis jeudi ; le coût opérationnel s\'élève à environ CHF 2 par mois et par utilisateur actif.',
     'blog.article.stato-vallese-intelligenza-artificiale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lavoro-vallese-ottobre-2026.title': 'Le chômage en Valais atteint 3,3% : 6.082 inscrits',
+    'blog.article.lavoro-vallese-ottobre-2026.excerpt': 'À fin octobre 2026, 6.082 personnes étaient inscrites auprès des Offices régionaux de placement (ORP) du Valais.',
+    'blog.article.lavoro-vallese-ottobre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVsFr;
