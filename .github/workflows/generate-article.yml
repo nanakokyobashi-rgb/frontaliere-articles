@@ -797,13 +797,15 @@ jobs:
                     and (.created_at >= $since)
                     and (.status | type) == "string"
                     and (.status as $status | ($known | index($status)) != null)
+                    and (.display_title | type) == "string"
+                    and (.display_title | length) > 0
                   ))
                 and (($pages | map(.total_count) | unique | length) == 1)
                 and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
                 and (([$pages[].workflow_runs[].id] | unique | length)
                   == ([$pages[].workflow_runs[]] | length))
               then
-                [$pages[].workflow_runs[] | {id, created_at, status, display_title: (.display_title // "")}]
+                [$pages[].workflow_runs[] | {id, created_at, status, display_title}]
               else
                 error("generation run listing incomplete")
               end
@@ -866,7 +868,12 @@ jobs:
             fail_closed_admission
           fi
 
-          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ -n "${SOURCE_URL:-}" ]; then
+          # A dry run loads the generator but creates no article. It may reuse
+          # the same URL as a production dispatch, so it must not reserve the
+          # production retry-deduplication key.
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] \
+            && [ "${DRY_RUN:-false}" != "true" ] \
+            && [ -n "${SOURCE_URL:-}" ]; then
             if jq -e --arg s "$SOURCE_URL" --arg m "$self_created" --argjson i "$SELF_ID" 'any(.[]; [.created_at,.id]<[$m,$i]and(.display_title|contains("[dispatch-source=\($s)]")))' <<<"$runs" >/dev/null 2>/dev/null; then
               skip_generation_slot duplicate-dispatch-source
             elif [ "$?" -ne 1 ]; then

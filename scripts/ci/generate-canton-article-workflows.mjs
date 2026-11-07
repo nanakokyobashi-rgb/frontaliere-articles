@@ -275,15 +275,24 @@ export const CORE_REPLACEMENTS = [
     replace: '',
   },
   {
+    id: 'admit: la completezza di display_title resta nel receiver principale',
+    count: 1,
+    find: '                    and (.display_title | type) == "string"\n'
+      + '                    and (.display_title | length) > 0\n',
+    replace: '',
+  },
+  {
     id: 'admit: display_title resta solo nel receiver principale',
     count: 1,
-    find: '                [$pages[].workflow_runs[] | {id, created_at, status, display_title: (.display_title // "")}]\n',
+    find: '                [$pages[].workflow_runs[] | {id, created_at, status, display_title}]\n',
     replace: '                [$pages[].workflow_runs[] | {id, created_at, status}]\n',
   },
   {
     id: 'admit: la deduplica della source URL resta nel receiver principale',
     count: 1,
-    find: '          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ -n "${SOURCE_URL:-}" ]; then\n'
+    find: '          if [ "$EVENT_NAME" = "workflow_dispatch" ] \\\n'
+      + '            && [ "${DRY_RUN:-false}" != "true" ] \\\n'
+      + '            && [ -n "${SOURCE_URL:-}" ]; then\n'
       + '            if jq -e --arg s "$SOURCE_URL" --arg m "$self_created" --argjson i "$SELF_ID" \'any(.[]; [.created_at,.id]<[$m,$i]and(.display_title|contains("[dispatch-source=\\($s)]")))\' <<<"$runs" >/dev/null 2>/dev/null; then\n'
       + '              skip_generation_slot duplicate-dispatch-source\n'
       + '            elif [ "$?" -ne 1 ]; then\n'
