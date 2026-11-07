@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-telelavoro-frontaliere-quadro-svizzero.webp",
-      "sha256": "21ac2017dc4758e176ff60f7194897bbae048a425caeef86b96c342c91eea06f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-telelavoro-frontaliere-quadro-svizzero-480w.webp",
-      "sha256": "551cf1dbfb47bad8adcda4ebb92bb713d6e8c25217bdfd430555598742c9812e"
-    }
-  ]
+  "items": []
 }
