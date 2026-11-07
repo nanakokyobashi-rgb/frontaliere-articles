@@ -36,6 +36,9 @@ const blogMetaCantonJuIt: Record<string, string> = {
     'blog.article.cff-cargo-rinuncia-legno-alle.title': 'CFF Cargo ferma il trasporto del legno ad Alle da dicembre',
     'blog.article.cff-cargo-rinuncia-legno-alle.excerpt': 'Ad Alle, in Ajoie, CFF Cargo ha deciso di sopprimere da dicembre il servizio ferroviario per i carri singoli impiegato nel trasporto del legno.',
     'blog.article.cff-cargo-rinuncia-legno-alle.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.giura-regain-fiducia-imprese.title': 'Regain di fiducia delle imprese nel Canton Giura',
+    'blog.article.giura-regain-fiducia-imprese.excerpt': 'Il 38% delle 116 imprese intervistate dalla CCIJ giudica buona o eccellente la situazione, con un aumento dal 24% di un anno fa.',
+    'blog.article.giura-regain-fiducia-imprese.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonJuIt;
