@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-07T11:15:37.760Z",
-  "contentHash": "ad8ac1caeed1fb4ee90027c4a18703abe393d0b964ee52cce8901c1cf13ceaf2",
+  "updatedAt": "2026-11-07T23:06:51.422Z",
+  "contentHash": "e7acd71e830619943745f84c09daad71c98a731dd5181b6e3f504ef69e498e6b",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "15",
+          "value": "14",
           "note": "segnalazioni aggiornate: 7 novembre 2026"
         },
         {
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-07T23:06:51.422Z"
     },
     "en": {
       "canton": "AG",
@@ -285,7 +285,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "15",
+          "value": "14",
           "note": "reports as of 7 November 2026"
         },
         {
@@ -518,7 +518,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-07T23:06:51.422Z"
     },
     "de": {
       "canton": "AG",
@@ -533,7 +533,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "15",
+          "value": "14",
           "note": "Meldungen vom 7. November 2026"
         },
         {
@@ -766,7 +766,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-07T23:06:51.422Z"
     },
     "fr": {
       "canton": "AG",
@@ -781,7 +781,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "15",
+          "value": "14",
           "note": "signalements au 7 novembre 2026"
         },
         {
@@ -1014,7 +1014,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-07T23:06:51.422Z"
     }
   }
 }

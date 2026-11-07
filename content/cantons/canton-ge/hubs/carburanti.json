@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "carburanti",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "69ba564f10c515885e7f2b903a23a3c4505b71cc800d8fb98b56f7325f105a21",
+  "updatedAt": "2026-11-07T23:06:51.422Z",
+  "contentHash": "c71e65322755b7485e9c5a0b89dd5b796d6b241b326f50f4fdab03428ac7271b",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "A1: la destra ginevrina chiede una terza corsia",
+          "url": "/articoli-ginevra/a1-terza-corsia-ginevra/",
+          "excerpt": "La maggioranza di destra del Grand Conseil genevois ha chiesto di usare temporaneamente la banda d'arresto d'emergenza come terza corsia sull'autostrada A1, nel tratto compreso tra Le Vengeron e Coppet (VD), cioè il…",
+          "date": "2026-11-07T23:02:48.751Z"
+        },
+        {
           "title": "Furti con effrazione nel Canton Ginevra: 3'410 nel 2025",
           "url": "/articoli-ginevra/furti-cantone-ginevra-2025/",
           "excerpt": "3'410 furti nel 2025, contro 3'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti.",
@@ -94,12 +100,6 @@
           "url": "/articoli-ginevra/taf-regolamento-aeroporto-ginevra/",
           "excerpt": "Il Tribunale amministrativo federale ha dato il via libera al regolamento di esercizio dell’aeroporto di Ginevra.",
           "date": "2026-10-19T06:20:16.297Z"
-        },
-        {
-          "title": "Indagini congiunturali nelle imprese ginevrine",
-          "url": "/articoli-ginevra/indagini-imprese-ginevrine/",
-          "excerpt": "La Repubblica e il Cantone di Ginevra segnala indagini congiunturali di settembre nelle imprese ginevrine.",
-          "date": "2026-10-10T20:58:56.034Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T23:06:51.422Z"
     },
     "en": {
       "canton": "GE",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "A1: Geneva's right wing calls for a third lane",
+          "url": "/en/geneva-articles/a1-geneva-third-lane/",
+          "excerpt": "The right-wing majority of the Geneva Grand Council called for the emergency lane to be used temporarily as a third lane on the A1 motorway, on the section between Le Vengeron and Coppet (VD), that is, the corridor…",
+          "date": "2026-11-07T23:02:48.751Z"
+        },
+        {
           "title": "Burglaries in the Canton of Geneva: 3'410 in 2025",
           "url": "/en/geneva-articles/geneva-canton-burglary-2025/",
           "excerpt": "3'410 thefts in 2025, compared with 3'196 in 2024 6,7% growth between 2024 and 2025 Police meetings: Wednesday, 28 October Term Value What Burglaries involving.",
@@ -193,12 +199,6 @@
           "url": "/en/geneva-articles/geneva-airport-taf-ruling/",
           "excerpt": "The Federal Administrative Court has given the green light to Geneva Airport’s operating regulations.",
           "date": "2026-10-19T06:20:16.297Z"
-        },
-        {
-          "title": "Business surveys among Geneva companies",
-          "url": "/en/geneva-articles/geneva-business-surveys/",
-          "excerpt": "The Republic and Canton of Geneva reports September business surveys among Geneva companies.",
-          "date": "2026-10-10T20:58:56.034Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T23:06:51.422Z"
     },
     "de": {
       "canton": "GE",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "A1: Die Genfer Rechte fordert eine dritte Fahrspur",
+          "url": "/de/genf-artikel/a1-genf-dritte-spur/",
+          "excerpt": "Die rechte Mehrheit des Genfer Grossen Rats hat gefordert, den Pannenstreifen auf der Autobahn A1 vorübergehend als dritte Fahrspur zu nutzen, und zwar auf dem Abschnitt zwischen Le Vengeron und Coppet (VD), also auf…",
+          "date": "2026-11-07T23:02:48.751Z"
+        },
+        {
           "title": "Einbruchdiebstähle im Kanton Genf: 3'410 im Jahr 2025",
           "url": "/de/genf-artikel/einbrueche-kanton-genf-2025/",
           "excerpt": "Im Kanton Genf wurden 2025 3'410 Einbruch- oder Einschleichdiebstähle registriert. Insgesamt waren es 3'196 Fälle im Jahr 2024 und 2'986 im Jahr 2023.",
@@ -292,12 +298,6 @@
           "url": "/de/genf-artikel/genfer-flughafen-taf-urteil/",
           "excerpt": "Das Bundesverwaltungsgericht hat grünes Licht für das Betriebsreglement des Flughafens Genf gegeben.",
           "date": "2026-10-19T06:20:16.297Z"
-        },
-        {
-          "title": "Konjunkturumfragen bei Genfer Unternehmen",
-          "url": "/de/genf-artikel/konjunkturumfragen-genfer-unternehmen/",
-          "excerpt": "Die Republik und der Kanton Genf melden Konjunkturumfragen im September bei Genfer Unternehmen.",
-          "date": "2026-10-10T20:58:56.034Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T23:06:51.422Z"
     },
     "fr": {
       "canton": "GE",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "A1 : la droite genevoise demande une troisième voie",
+          "url": "/fr/articles-geneve/a1-geneve-troisieme-voie/",
+          "excerpt": "Le Grand Conseil genevois a approuvé la motion par 45 voix contre 38.",
+          "date": "2026-11-07T23:02:48.751Z"
+        },
+        {
           "title": "Vols par effraction dans le canton de Genève : 3'410 en 2025",
           "url": "/fr/articles-geneve/cambriolages-canton-geneve-2025/",
           "excerpt": "3'410 vols en 2025, contre 3'196 en 2024 Hausse de 6,7% entre 2024 et 2025 Rencontres de la police : mercredi 28 octobre Terme Valeur Quoi Vols avec effraction.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-geneve/aeroport-geneve-arret-taf/",
           "excerpt": "Le règlement d’exploitation de l’aéroport de Genève a été validé par le Tribunal administratif fédéral.",
           "date": "2026-10-19T06:20:16.297Z"
-        },
-        {
-          "title": "Enquêtes conjoncturelles dans les entreprises genevoises",
-          "url": "/fr/articles-geneve/enquetes-conjoncture-entreprises-genevoises/",
-          "excerpt": "La République et le canton de Genève signale des enquêtes conjoncturelles de septembre dans les entreprises genevoises.",
-          "date": "2026-10-10T20:58:56.034Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T23:06:51.422Z"
     }
   }
 }
