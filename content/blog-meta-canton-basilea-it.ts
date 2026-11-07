@@ -57,6 +57,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.sussidi-premi-basel-2027.title': 'Basilea Città aumenta i sussidi ai premi per il 2027',
     'blog.article.sussidi-premi-basel-2027.excerpt': 'Il Governo di Basilea Città adegua i contributi ai premi: +4,4% adulti, +4,9% bambini, +3,6% giovani adulti e circa CHF 243 milioni di spesa.',
     'blog.article.sussidi-premi-basel-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.osttangente-riapertura-basilea.title': 'Riaprono accessi Osttangente a Basilea il 16 novembre 2026',
+    'blog.article.osttangente-riapertura-basilea.excerpt': 'Il 16 novembre 2026 riaprono l\'uscita Wettsteinallee e l\'ingresso Riehenstrasse; la Schwarzwaldstrasse sotto l\'A2 sarà percorribile.',
+    'blog.article.osttangente-riapertura-basilea.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;

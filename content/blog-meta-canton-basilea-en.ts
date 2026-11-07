@@ -57,6 +57,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.sussidi-premi-basel-2027.title': 'Basel-Stadt increases premium subsidies for 2027',
     'blog.article.sussidi-premi-basel-2027.excerpt': 'The Government of Basel-Stadt adjusts premium subsidies: +4.4% for adults, +4.9% for children, +3.6% for young adults and approximately CHF 243 million in expenditure.',
     'blog.article.sussidi-premi-basel-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.osttangente-riapertura-basilea.title': 'Osttangente access points in Basel reopen on November 16, 2026',
+    'blog.article.osttangente-riapertura-basilea.excerpt': 'On November 16, 2026, the Wettsteinallee exit and Riehenstrasse entrance will reopen; Schwarzwaldstrasse under the A2 will be passable.',
+    'blog.article.osttangente-riapertura-basilea.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;

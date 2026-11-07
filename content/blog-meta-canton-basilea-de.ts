@@ -57,6 +57,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.sussidi-premi-basel-2027.title': 'Basel-Stadt erhöht die Prämienverbilligungen für 2027',
     'blog.article.sussidi-premi-basel-2027.excerpt': 'Die Regierung von Basel-Stadt passt die Prämienbeiträge an: +4,4% für Erwachsene, +4,9% für Kinder, +3,6% für junge Erwachsene und rund CHF 243 Millionen Ausgaben.',
     'blog.article.sussidi-premi-basel-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.osttangente-riapertura-basilea.title': 'Osttangente-Zugänge in Basel am 16. November 2026 wiedereröffnet',
+    'blog.article.osttangente-riapertura-basilea.excerpt': 'Am 16. November 2026 enden die Schliessungen und Umleitungen im Zusammenhang mit der Sanierung der Osttangente im Wettsteinquartier in Basel.',
+    'blog.article.osttangente-riapertura-basilea.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;
