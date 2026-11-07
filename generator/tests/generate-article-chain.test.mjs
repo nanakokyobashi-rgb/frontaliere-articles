@@ -923,7 +923,7 @@ test('Cloud Scheduler possiede un contratto di slot fail-closed nel workflow cor
   assert.match(WF, /^# generation-cloud-slot-minutes: 7,37$/m);
   assert.ok(runName.includes('inputs.loop_clock') && runName.includes('inputs.recovery_slot'), 'il run-name deve esporre marker stabili per la riconciliazione');
   assert.ok(runName.includes('[loop-clock ') && runName.includes('[generation-slot '), 'il run-name deve contenere entrambi i marker');
-  assert.ok(runName.includes('inputs.dry_run') && runName.includes('[dispatch-mode='), 'il run-name deve distinguere dry e production');
+  assert.ok(runName.includes('inputs.dispatch_key') && runName.includes('inputs.dry_run') && runName.includes('[dispatch-mode='), 'il run-name deve esporre una chiave bounded e distinguere dry e production');
   for (const input of ['loop_clock', 'recovery_slot', 'recovery_claim']) {
     assert.ok(dispatchInputs.includes('      ' + input + ':'), input + ' deve essere un input esplicito');
   }
@@ -940,18 +940,24 @@ test('Cloud Scheduler possiede un contratto di slot fail-closed nel workflow cor
   assert.match(admit, /cloud_scheduler\)/);
 });
 
-test('un retry del dispatch con la stessa URL viene deduplicato dal ricevitore', () => {
+test('un retry del dispatch con la stessa chiave viene deduplicato dal ricevitore', () => {
   const runName = WF.split('\n').find((line) => line.startsWith('run-name:')) || '';
   const admit = extractRun('Skip when a generation is already in flight');
-  assert.ok(runName.includes('inputs.url'), 'la URL sorgente deve entrare nell’identità osservabile della run');
+  assert.ok(runName.includes('inputs.dispatch_key'), 'la chiave bounded deve entrare nell’identità osservabile della run');
+  assert.doesNotMatch(runName, /inputs\.url/, 'la URL sorgente non deve entrare nel titolo della run');
+  assert.match(WF, /dispatch_key:\n\s+description: [^\n]*sha256:<64 lowercase hex>/);
   assert.match(WF, /SOURCE_URL: \$\{\{ inputs\.url \}\}/);
+  assert.match(WF, /DISPATCH_KEY: \$\{\{ inputs\.dispatch_key \}\}/);
   assert.match(admit, /and \(\.display_title \| type\) == "string"\s+and \(\.display_title \| length\) > 0/);
   assert.match(admit, /\{id, created_at, status, display_title\}/);
   assert.doesNotMatch(admit, /display_title: \(\.display_title \/\/ ""\)/);
-  assert.match(admit, /if \[ "\$EVENT_NAME" = "workflow_dispatch" \] && \[ "\$\{DRY_RUN:-false\}" != "true" \] && \[ -n "\$\{SOURCE_URL:-\}" \] && jq -e /);
+  assert.match(admit, /if \[ "\$EVENT_NAME" = "workflow_dispatch" \] && \[ "\$\{DRY_RUN:-false\}" != "true" \] && \[ -n "\$\{SOURCE_URL:-\}" \]; then/);
+  assert.match(admit, /if jq -e --arg k/);
   assert.match(admit, /duplicate-dispatch-source/);
-  assert.ok(admit.includes('dispatch-mode=dry'));
-  assert.ok(admit.includes('contains("[dispatch-source=\\($s)]"))and((.display_title|contains("[dispatch-mode=dry]"))|not)'));
+  assert.ok(admit.includes('dispatch-mode=production'));
+  assert.ok(admit.includes('startswith("[dispatch-key=\\($k)] [dispatch-mode=production]")'));
+  assert.ok(admit.includes('startswith("[dispatch-source=\\($s)] [dispatch-mode=production]")'));
+  assert.doesNotMatch(admit, /contains\("\[dispatch-mode=dry\]"\)/, 'la modalità deve essere un marker delimitato, non una sottostringa della URL');
   const dedupeAt = admit.indexOf('duplicate-dispatch-source');
   const explicitAt = admit.indexOf('if [ "$explicit_dispatch" = "true" ]');
   assert.ok(dedupeAt >= 0 && explicitAt > dedupeAt, 'la deduplica deve precedere l’eccezione manuale/editoriale');
