@@ -50,26 +50,6 @@
       "failureCount": 3,
       "requestedAt": "2026-10-31T09:38:46.360Z",
       "lastFailureAt": "2026-11-07T01:51:13.423Z"
-    },
-    {
-      "articleId": "versamento-avs-dicembre-importi",
-      "title": "Tredicesima AVS, per alcuni sarà inferiore",
-      "fallbackImage": "/images/blog/article-referendum-iva-2026-aumento-per-la-tredicesima-pensione.webp",
-      "reason": "All image providers failed for article-versamento-avs-dicembre-importi: openai-codex (image vision fallback deadline exceeded)",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-11-03T13:45:07.056Z",
-      "lastFailureAt": "2026-11-05T22:04:02.271Z"
-    },
-    {
-      "articleId": "iva-aumento-famiglie-redditi-bassi",
-      "title": "Aumento IVA: studio UBS evidenzia impatto maggiore su famiglie a reddito basso",
-      "fallbackImage": "/images/blog/article-avs-voto-iva-il-29-novembre-per-la-13esima-rendita.webp",
-      "reason": "All image providers failed for article-iva-aumento-famiglie-redditi-bassi: openai-codex (vision gate rejected image: Synthetic photorealistic editorial scene relevant to Swiss fami",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-11-07T03:12:12.738Z",
-      "lastFailureAt": "2026-11-07T03:12:12.738Z"
     }
   ]
 }

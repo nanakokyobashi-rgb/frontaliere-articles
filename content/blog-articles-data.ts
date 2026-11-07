@@ -48026,7 +48026,7 @@ const RAW_ARTICLES = [
  id: 'versamento-avs-dicembre-importi',
  category: 'pensione',
  date: '2026-11-03T13:45:05.597Z',
- image: '/images/blog/article-referendum-iva-2026-aumento-per-la-tredicesima-pensione.webp',
+ image: '/images/blog/article-versamento-avs-dicembre-importi.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'laura-bianchi',
