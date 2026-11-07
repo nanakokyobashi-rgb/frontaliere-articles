@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "carburanti",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "0f4bba8cb0126c84acc37d59f5aa769bb09d2ec3c7894aa11b6c7f4e00760533",
+  "updatedAt": "2026-11-07T10:16:12.560Z",
+  "contentHash": "05d07585c9bd3685922dcdba9ba780e027d08149b2da30649c935ada30b23678",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Regain di fiducia delle imprese nel Canton Giura",
+          "url": "/articoli-giura/giura-regain-fiducia-imprese/",
+          "excerpt": "Il 38% delle 116 imprese intervistate dalla CCIJ giudica buona o eccellente la situazione, con un aumento dal 24% di un anno fa.",
+          "date": "2026-11-07T10:11:35.777Z"
+        },
+        {
           "title": "CFF Cargo ferma il trasporto del legno ad Alle da dicembre",
           "url": "/articoli-giura/cff-cargo-rinuncia-legno-alle/",
           "excerpt": "Ad Alle, in Ajoie, CFF Cargo ha deciso di sopprimere da dicembre il servizio ferroviario per i carri singoli impiegato nel trasporto del legno.",
@@ -94,12 +100,6 @@
           "url": "/articoli-giura/fiscalita-coppie-marite-voto/",
           "excerpt": "Secondo la ricostruzione di RFJ, il sistema prevede che ogni contribuente sia tassato separatamente, indipendentemente dallo stato civile. Il 29 novembre, la questione torna alle urne: gli svizzeri dovranno esprimersi…",
           "date": "2026-10-27T00:08:19.325Z"
-        },
-        {
-          "title": "Governo giurassiano nomina due figure per il 2027",
-          "url": "/articoli-giura/governo-giurassiano-nomine-2027/",
-          "excerpt": "Sandrine Crevoisier guiderà il nuovo Servizio penitenziario.",
-          "date": "2026-10-26T18:04:54.331Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T10:16:12.560Z"
     },
     "en": {
       "canton": "JU",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Recovery of business confidence in the Canton of Jura",
+          "url": "/en/jura-articles/jura-regain-business-confidence/",
+          "excerpt": "38% of the 116 companies surveyed by CCIJ rate the situation as good or excellent, up from 24% a year ago.",
+          "date": "2026-11-07T10:11:35.777Z"
+        },
+        {
           "title": "CFF Cargo stops the transport of wood in Alle from December",
           "url": "/en/jura-articles/cff-cargo-renounces-wood-transport-alle/",
           "excerpt": "In Alle, in Ajoie, CFF Cargo has decided to cancel the railway service for single wagons used in the transport of wood from December.",
@@ -193,12 +199,6 @@
           "url": "/en/jura-articles/marital-couple-tax-vote/",
           "excerpt": "According to RFJ's reconstruction, the system provides that each taxpayer is taxed separately, regardless of marital status. On November 29, the issue returns to the polls: the Swiss will have to express their opinion…",
           "date": "2026-10-27T00:08:19.325Z"
-        },
-        {
-          "title": "Jura government appoints two figures for 2027",
-          "url": "/en/jura-articles/jura-government-appointments-2027/",
-          "excerpt": "Sandrine Crevoisier will lead the new Penitentiary Service.",
-          "date": "2026-10-26T18:04:54.331Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T10:16:12.560Z"
     },
     "de": {
       "canton": "JU",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Regain des Vertrauens der Unternehmen im Kanton Jura",
+          "url": "/de/jura-artikel/regain-des-vertrauens-der-unternehmen-im-kanton-jura/",
+          "excerpt": "38% der 116 von der CCIJ befragten Unternehmen bewerten die Situation als gut oder ausgezeichnet, ein Anstieg gegenüber 24% vor einem Jahr.",
+          "date": "2026-11-07T10:11:35.777Z"
+        },
+        {
           "title": "CFF Cargo stellt ab Dezember den Holztransport in Alle ein",
           "url": "/de/jura-artikel/sbb-cargo-verzichtet-auf-holztransport-alle/",
           "excerpt": "In Alle, in Ajoie, hat CFF Cargo beschlossen, den Bahnverkehr für Einzelwagen für den Holztransport ab Dezember einzustellen.",
@@ -292,12 +298,6 @@
           "url": "/de/jura-artikel/ehepaare-steuer-abstimmung/",
           "excerpt": "Am 8. März wurde die Einzelbesteuerung mit 54 % verabschiedet. Am 29. November findet die Abstimmung über die Initiative des Zentrums statt Der Text schlägt.",
           "date": "2026-10-27T00:08:19.325Z"
-        },
-        {
-          "title": "Die Regierung von Jura ernennt für 2027 zweistellige Personen",
-          "url": "/de/jura-artikel/jurakanton-nominationen-2027/",
-          "excerpt": "Sandrine Crevoisier wird den neuen Gefängnisdienst leiten.",
-          "date": "2026-10-26T18:04:54.331Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T10:16:12.560Z"
     },
     "fr": {
       "canton": "JU",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Regain de confiance des entreprises dans le canton du Jura",
+          "url": "/fr/articles-jura/jura-regain-confiance-entreprises/",
+          "excerpt": "Le questionnaire envoyé par la Chambre de commerce et d'industrie du Jura (CCIJ) montre un changement de ton parmi les entreprises du canton. Parmi les 116 qui ont répondu, 38% jugent la situation actuelle bonne ou…",
+          "date": "2026-11-07T10:11:35.777Z"
+        },
+        {
           "title": "CFF Cargo arrête le transport de bois à Alle à partir de décembre",
           "url": "/fr/articles-jura/cff-cargo-renonce-transport-bois-alle/",
           "excerpt": "A Alle, en Ajoie, CFF Cargo a décidé de supprimer à partir de décembre la desserte ferroviaire des wagons isolés utilisés pour le transport du bois.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-jura/fiscalite-couples-maries-vote/",
           "excerpt": "Selon la reconstitution de RFJ, le système prévoit que chaque contribuable est imposé séparément, quelle que soit sa situation familiale. Le 29 novembre, la question revient aux urnes: les Suisses devront se prononcer…",
           "date": "2026-10-27T00:08:19.325Z"
-        },
-        {
-          "title": "Le gouvernement Jura nomme deux chiffres pour 2027",
-          "url": "/fr/articles-jura/gouvernement-jurassien-nominations-2027/",
-          "excerpt": "Sandrine Crevoisier dirigera le nouveau Service pénitentiaire.",
-          "date": "2026-10-26T18:04:54.331Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T10:16:12.560Z"
     }
   }
 }
