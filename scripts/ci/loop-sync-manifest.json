@@ -5968,9 +5968,9 @@
       "path": ".github/actions/claude-codex-fallback/git-bridge-server.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d7968e40d638f010",
-        "corpus": "d7968e40d638f010",
-        "alignedAt": "2026-09-29"
+        "site": "ad75e2d381e99758",
+        "corpus": "ad75e2d381e99758",
+        "alignedAt": "2026-11-07"
       }
     },
     {
