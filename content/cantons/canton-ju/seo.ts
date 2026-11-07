@@ -426,6 +426,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-giura-regain-fiducia-imprese': {
+    title: 'Regain di fiducia delle imprese nel Canton Giura',
+    description: 'Il 38% delle imprese giurassiane giudica buona o eccellente la situazione, trainata da difesa e sicurezza. Dati CCIJ su 116 risposte.',
+    keywords: 'frontalieri, ticino, svizzera, italia, regain, fiducia, imprese, canton',
+    ogTitle: 'Regain di fiducia imprese Canton Giura',
+    ogDescription: 'Il 38% delle 116 imprese giurassiane valuta buona o eccellente la situazione, segnando un aumento dal 24% di un anno fa. Settori trainanti: difesa, sicurezza e spazio.',
+    canonicalPath: '/articoli-giura/giura-regain-fiducia-imprese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Regain di fiducia delle imprese nel Canton Giura",
+      "description": "Il 38% delle imprese giurassiane giudica buona o eccellente la situazione, trainata da difesa e sicurezza. Dati CCIJ su 116 risposte.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-giura-regain-fiducia-imprese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-07T10:11:35+00:00",
+      "dateModified": "2026-11-07T10:11:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-giura/giura-regain-fiducia-imprese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

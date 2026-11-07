@@ -36,6 +36,9 @@ const blogMetaCantonJuFr: Record<string, string> = {
     'blog.article.cff-cargo-rinuncia-legno-alle.title': 'CFF Cargo arrête le transport de bois à Alle à partir de décembre',
     'blog.article.cff-cargo-rinuncia-legno-alle.excerpt': 'A Alle, en Ajoie, CFF Cargo a décidé de supprimer à partir de décembre la desserte ferroviaire des wagons isolés utilisés pour le transport du bois.',
     'blog.article.cff-cargo-rinuncia-legno-alle.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.giura-regain-fiducia-imprese.title': 'Regain de confiance des entreprises dans le canton du Jura',
+    'blog.article.giura-regain-fiducia-imprese.excerpt': 'Le questionnaire envoyé par la Chambre de commerce et d\'industrie du Jura (CCIJ) montre un changement de ton parmi les entreprises du canton. Parmi les 116 qui ont répondu, 38% jugent la situation actuelle bonne ou excellente : 28% la qualifient de bonne et 10% d\'excellente.',
+    'blog.article.giura-regain-fiducia-imprese.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonJuFr;

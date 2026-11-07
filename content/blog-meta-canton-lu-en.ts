@@ -84,6 +84,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.semal-st-klemens-ebikon.title': 'New St. Klemens traffic light for bus punctuality in Ebikon',
     'blog.article.semal-st-klemens-ebikon.excerpt': 'Test at the St. Klemens stop on the cantonal road toward Lucerne; decision expected at the end of summer 2027 after consultation.',
     'blog.article.semal-st-klemens-ebikon.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.nav-kita-proroga-fino-2030.title': 'Extension of NAV Kita until June 30, 2030, in the Canton of Lucerne',
+    'blog.article.nav-kita-proroga-fino-2030.excerpt': 'The Normalarbeitsvertrag for childcare centers has been extended until June 30, 2030, to monitor violations of minimum wages, with checks in 2025 and 2026.',
+    'blog.article.nav-kita-proroga-fino-2030.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

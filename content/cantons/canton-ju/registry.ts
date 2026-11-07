@@ -128,4 +128,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'giura-regain-fiducia-imprese',
+ category: 'novita',
+ date: '2026-11-07T10:11:35.777Z',
+ image: '/images/blog/article-giura-regain-fiducia-imprese.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['JU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

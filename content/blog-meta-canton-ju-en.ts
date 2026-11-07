@@ -36,6 +36,9 @@ const blogMetaCantonJuEn: Record<string, string> = {
     'blog.article.cff-cargo-rinuncia-legno-alle.title': 'CFF Cargo stops the transport of wood in Alle from December',
     'blog.article.cff-cargo-rinuncia-legno-alle.excerpt': 'In Alle, in Ajoie, CFF Cargo has decided to cancel the railway service for single wagons used in the transport of wood from December.',
     'blog.article.cff-cargo-rinuncia-legno-alle.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.giura-regain-fiducia-imprese.title': 'Recovery of business confidence in the Canton of Jura',
+    'blog.article.giura-regain-fiducia-imprese.excerpt': '38% of the 116 companies surveyed by CCIJ rate the situation as good or excellent, up from 24% a year ago.',
+    'blog.article.giura-regain-fiducia-imprese.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonJuEn;

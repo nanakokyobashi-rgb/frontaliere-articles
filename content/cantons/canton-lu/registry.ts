@@ -304,4 +304,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'nav-kita-proroga-fino-2030',
+ category: 'pratico',
+ date: '2026-11-07T10:23:39.187Z',
+ image: '/images/blog/article-nav-kita-proroga-fino-2030.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
