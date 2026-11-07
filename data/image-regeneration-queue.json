@@ -5,19 +5,18 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Generic synthetic scene, but it contains a recognizable foreground commuter and event-style signage; it does not clearly depict the sp",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (Codex broker rejected the request: Codex CLI timed out after 119905ms)",
       "status": "failed",
-      "failureCount": 23,
+      "failureCount": 24,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-07T13:48:37.578Z",
-      "retryHint": "no-text"
+      "lastFailureAt": "2026-11-07T20:07:00.408Z"
     },
     {
       "articleId": "giovani-donne-stipendi-svizzera",
       "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
       "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (image vision fallback deadline exceeded)",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 20,
       "requestedAt": "2026-10-19T03:17:12.439Z",
       "lastFailureAt": "2026-11-07T13:50:37.776Z"
@@ -27,7 +26,7 @@
       "title": "Operatori sanitari frontalieri: Como boccheggia",
       "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
       "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (image vision fallback deadline exceeded)",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 19,
       "requestedAt": "2026-10-23T15:23:52.650Z",
       "lastFailureAt": "2026-11-07T13:52:37.993Z"
@@ -37,7 +36,7 @@
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
       "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (image vision fallback deadline exceeded)",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 19,
       "requestedAt": "2026-10-24T19:06:53.846Z",
       "lastFailureAt": "2026-11-07T13:54:38.210Z"
