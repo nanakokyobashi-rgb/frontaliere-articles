@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-11-06T23:47:26.995Z",
-  "contentHash": "f77af795f50403944dcc6670a99ee9d177071772e17212d355a98c698136be60",
+  "updatedAt": "2026-11-07T13:27:38.984Z",
+  "contentHash": "10a67fb865ebd38fab8241bad7cdf5b50e15175f113bff38ca6ac7ee792cb41d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-05T14:57:01.545Z",
+      "updatedAt": "2026-11-06T14:35:31.386Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-05T14:57:01.545Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Consiglio di Stato approva sostegno AfA, nomina e revisione AFV",
+          "url": "/articoli-berna/consiglio-stato-approva-pratiche/",
+          "excerpt": "Il Consiglio di Stato ha approvato CHF 360'000 per l'AfA (2026-2028), la nomina di Sabine Dändliker (dal 1° aprile 2027) e la revisione parziale del Polizeigesetz (AFV).",
+          "date": "2026-11-07T13:23:00.798Z"
+        },
         {
           "title": "Governo di Berna apre consultazione sulla legge sul personale",
           "url": "/articoli-berna/revisione-legge-personale-berna/",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/aumento-soglie-reddito-2027/",
           "excerpt": "Dal 1° gennaio 2027 salgono le soglie di reddito; circa 19.000 persone diventano aventi diritto, con una quota prevista del 25,35%.",
           "date": "2026-10-30T21:03:54.671Z"
-        },
-        {
-          "title": "Berna: più sussidi ai premi delle casse malati dal 2027",
-          "url": "/articoli-berna/riduzione-premi-malattia-2027/",
-          "excerpt": "Il Canton Berna annuncia più sussidi per la riduzione dei premi delle casse malati dal 2027, senza indicare importi o percentuali.",
-          "date": "2026-10-30T20:01:40.296Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-06T23:47:26.995Z"
+      "updatedAt": "2026-11-07T13:27:38.984Z"
     },
     "en": {
       "canton": "BE",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-05T14:57:01.545Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Council of State approves AfA support, appointment and AFV revision",
+          "url": "/en/bern-articles/cantonal-council-approves-measures/",
+          "excerpt": "The State Council approved CHF 360'000 for AfA (2026-2028), the appointment of Sabine Dändliker (from April 1, 2027) and the partial revision of the Polizeigesetz (AFV).",
+          "date": "2026-11-07T13:23:00.798Z"
+        },
         {
           "title": "Government of Bern opens consultation on personnel law",
           "url": "/en/bern-articles/bern-personnel-law-consultation/",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/income-threshold-increase-2027/",
           "excerpt": "From January 1, 2027, income thresholds increase; approximately 19.000 people become eligible, with an expected share of 25,35%.",
           "date": "2026-10-30T21:03:54.671Z"
-        },
-        {
-          "title": "Bern: more subsidies for health insurance premiums from 2027",
-          "url": "/en/bern-articles/health-premium-subsidies-2027/",
-          "excerpt": "The Canton of Bern announces more subsidies to reduce health insurance premiums from 2027, without specifying amounts or percentages.",
-          "date": "2026-10-30T20:01:40.296Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-06T23:47:26.995Z"
+      "updatedAt": "2026-11-07T13:27:38.984Z"
     },
     "de": {
       "canton": "BE",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-05T14:57:01.545Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Staatsrat genehmigt Unterstützung für AfA, Ernennung und Revision der AFV",
+          "url": "/de/bern-artikel/staatsrat-genehmigt-massnahmen/",
+          "excerpt": "Der Staatsrat hat CHF 360'000 für die AfA (2026-2028), die Ernennung von Sabine Dändliker (ab 1. April 2027) und die Teilrevision des Polizeigesetzes (AFV) genehmigt.",
+          "date": "2026-11-07T13:23:00.798Z"
+        },
         {
           "title": "Regierung des Kantons Bern eröffnet Vernehmlassung zum Personalgesetz",
           "url": "/de/bern-artikel/bern-personalgesetz-vernehmlassung/",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/einkommensschwellen-erhoehung-2027/",
           "excerpt": "Ab dem 1. Januar 2027 steigen die Einkommensgrenzen; rund 19.000 Personen werden anspruchsberechtigt, mit einem voraussichtlichen Anteil von 25,35%.",
           "date": "2026-10-30T21:03:54.671Z"
-        },
-        {
-          "title": "Bern: Mehr Prämienverbilligung für Krankenkassenprämien ab 2027",
-          "url": "/de/bern-artikel/praemienverbilligung-krankenkassen-2027/",
-          "excerpt": "Der Kanton Bern kündigt ab 2027 mehr Prämienverbilligung für Krankenkassenprämien an, ohne Beträge oder Prozentsätze zu nennen.",
-          "date": "2026-10-30T20:01:40.296Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-06T23:47:26.995Z"
+      "updatedAt": "2026-11-07T13:27:38.984Z"
     },
     "fr": {
       "canton": "BE",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-05T14:57:01.545Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Conseil d'État approuve soutien AfA, nomme et révise l'AFV",
+          "url": "/fr/articles-berne/conseil-etat-approuve-mesures/",
+          "excerpt": "Le Conseil d'État a approuvé CHF 360'000 pour l'AfA (2026-2028), la nomination de Sabine Dändliker (à partir du 1er avril 2027) et la révision partielle du Polizeigesetz (AFV).",
+          "date": "2026-11-07T13:23:00.798Z"
+        },
         {
           "title": "Le Gouvernement de Berne ouvre la consultation sur la loi sur le personnel",
           "url": "/fr/articles-berne/berne-loi-personnel-consultation/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/augmentation-seuils-revenu-2027/",
           "excerpt": "À partir du 1er janvier 2027, les seuils de revenu augmentent ; environ 19.000 personnes deviennent ayants droit, avec un taux prévu de 25,35%.",
           "date": "2026-10-30T21:03:54.671Z"
-        },
-        {
-          "title": "Berne : plus de subsides aux primes-maladie dès 2027",
-          "url": "/fr/articles-berne/aides-primes-maladie-2027/",
-          "excerpt": "Le canton de Berne annonce davantage de subsides pour la réduction des primes des caisses-maladie à partir de 2027, sans indiquer de montants ni de pourcentages.",
-          "date": "2026-10-30T20:01:40.296Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-06T23:47:26.995Z"
+      "updatedAt": "2026-11-07T13:27:38.984Z"
     }
   }
 }
