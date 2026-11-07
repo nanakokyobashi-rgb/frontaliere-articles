@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-07T13:49:51.813Z",
-  "contentHash": "2fff7a1f66ff51d2f7226ee8b7a3f49a94983f65c8f3ba4bdc6b44255d2aa1d0",
+  "updatedAt": "2026-11-07T15:02:29.415Z",
+  "contentHash": "6682eaac982a19b206e513fe10c8c0aa457366c89c8bdf5c994c92f693c79f1b",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Incendio a Sins AG: interrotta la linea S26",
+          "url": "/articoli-argovia/incendio-sins-linea-s26/",
+          "excerpt": "Un incendio in un fienile a Sins AG ha interrotto la tratta tra Rotkreuz e Lenzburg: sulla S26 circolano bus sostitutivi fino alle 16 circa.",
+          "date": "2026-11-07T14:59:05.149Z"
+        },
+        {
           "title": "MARBEL Immobilien a Mellingen: esperienza di oltre due decenni",
           "url": "/articoli-argovia/due-generazioni-immobiliare-mellingen/",
           "excerpt": "Martin e Roman Strebel gestiscono MARBEL Immobilien a Mellingen, offrendo servizi di vendita, valutazione o eredità immobiliari con competenza regionale.",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/aarau-rinnovo-tigli-zollrain/",
           "excerpt": "Aarau sostituirà i tigli rimasti al Zollrain e rinnoverà l’area verde.",
           "date": "2026-11-03T19:57:16.000Z"
-        },
-        {
-          "title": "Fislisbach: Baden deve ancora fornire acqua potabile",
-          "url": "/articoli-argovia/siccita-fislisbach-forniture/",
-          "excerpt": "A metà ottobre 2026 il prelievo settimanale è sceso a 7'136 m3, ma le forniture di Regionalwerke Baden AG restano necessarie.",
-          "date": "2026-11-03T10:33:15.362Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-07T13:49:51.813Z"
+      "updatedAt": "2026-11-07T15:02:29.415Z"
     },
     "en": {
       "canton": "AG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fire at Sins AG: S26 line interrupted",
+          "url": "/en/aargau-articles/sins-fire-s26-rail-interruption/",
+          "excerpt": "A fire in a barn in Sins AG has interrupted the route between Rotkreuz and Lenzburg: replacement buses are operating on the S26 until around 16:00.",
+          "date": "2026-11-07T14:59:05.149Z"
+        },
+        {
           "title": "MARBEL Immobilien in Mellingen: more than two decades of experience",
           "url": "/en/aargau-articles/two-generations-real-estate-mellingen/",
           "excerpt": "Martin and Roman Strebel run MARBEL Immobilien in Mellingen, offering services for property sales, valuations, or inheritances with regional expertise.",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/aarau-zollrain-linden-renewal/",
           "excerpt": "Aarau will replace the remaining linden trees at Zollrain and renovate the green space.",
           "date": "2026-11-03T19:57:16.000Z"
-        },
-        {
-          "title": "Fislisbach: Baden still has to provide drinking water",
-          "url": "/en/aargau-articles/fislisbach-drought-water-supply/",
-          "excerpt": "In mid-October 2026 the weekly withdrawal fell to 7'136 m3, but supplies from Regionalwerke Baden AG remain necessary.",
-          "date": "2026-11-03T10:33:15.362Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-07T13:49:51.813Z"
+      "updatedAt": "2026-11-07T15:02:29.415Z"
     },
     "de": {
       "canton": "AG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Brand in Sins AG: Linie S26 unterbrochen",
+          "url": "/de/aargau-artikel/brand-sins-s26-bahnunterbruch/",
+          "excerpt": "Ein Brand in einer Scheune in Sins AG hat die Strecke zwischen Rotkreuz und Lenzburg unterbrochen: Auf der S26 verkehren bis etwa 16 Uhr Ersatzbusse.",
+          "date": "2026-11-07T14:59:05.149Z"
+        },
+        {
           "title": "MARBEL Immobilien in Mellingen: Erfahrung von über zwei Jahrzehnten",
           "url": "/de/aargau-artikel/zwei-generationen-immobilien-mellingen/",
           "excerpt": "Martin und Roman Strebel führen MARBEL Immobilien in Mellingen und bieten Dienstleistungen für den Verkauf, die Bewertung oder die Vererbung von Immobilien mit regionaler Kompetenz an.",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/aarau-zollrain-linden-erneuerung/",
           "excerpt": "Aarau wird die verbliebenen Linden am Zollrain ersetzen und die Grünanlage erneuern.",
           "date": "2026-11-03T19:57:16.000Z"
-        },
-        {
-          "title": "Fislisbach: Baden muss weiterhin Trinkwasser liefern",
-          "url": "/de/aargau-artikel/fislisbach-trinkwasser-lieferungen/",
-          "excerpt": "Mitte Oktober 2026 sank die wöchentliche Wasserentnahme auf 7'136 m3, doch die Lieferungen von Regionalwerke Baden AG bleiben notwendig.",
-          "date": "2026-11-03T10:33:15.362Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-07T13:49:51.813Z"
+      "updatedAt": "2026-11-07T15:02:29.415Z"
     },
     "fr": {
       "canton": "AG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Incendie à Sins AG : ligne S26 interrompue",
+          "url": "/fr/articles-argovie/incendie-sins-s26-interruption/",
+          "excerpt": "Un incendie dans une grange à Sins AG a interrompu la liaison entre Rotkreuz et Lenzburg : des bus de remplacement circulent sur la S26 jusqu’à environ 16 heures.",
+          "date": "2026-11-07T14:59:05.149Z"
+        },
+        {
           "title": "MARBEL Immobilien à Mellingen : une expérience de plus de deux décennies",
           "url": "/fr/articles-argovie/deux-generations-immobilier-mellingen/",
           "excerpt": "Martin et Roman Strebel gèrent MARBEL Immobilien à Mellingen, en proposant des services de vente, d’évaluation ou de succession immobilière avec une expertise régionale.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/aarau-renovation-tilleuls-zollrain/",
           "excerpt": "Aarau remplacera les tilleuls restants au Zollrain et rénovera l’espace vert.",
           "date": "2026-11-03T19:57:16.000Z"
-        },
-        {
-          "title": "Fislisbach : Baden doit encore fournir de l’eau potable",
-          "url": "/fr/articles-argovie/fislisbach-eau-potable-livraisons/",
-          "excerpt": "À la mi-octobre 2026, le prélèvement hebdomadaire est descendu à 7'136 m3, mais les approvisionnements de Regionalwerke Baden AG restent nécessaires.",
-          "date": "2026-11-03T10:33:15.362Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-07T13:49:51.813Z"
+      "updatedAt": "2026-11-07T15:02:29.415Z"
     }
   }
 }
