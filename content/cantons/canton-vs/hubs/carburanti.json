@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-11-06T11:17:24.782Z",
-  "contentHash": "d1f482e319dbd9c5bff28e6a8cf5b54e7993ac86ec7d7c0688fd46b08cace048",
+  "updatedAt": "2026-11-07T03:38:09.989Z",
+  "contentHash": "0c99a90f8056a18939ddd133f83c1f883249a148e008c5d4aff57358e700d6de",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Disoccupazione in Vallese sale al 3,3%: 6.082 iscritti",
+          "url": "/articoli-vallese/lavoro-vallese-ottobre-2026/",
+          "excerpt": "A fine ottobre 2026, 6.082 persone risultavano iscritte agli Uffici regionali di collocamento (ORP) del Vallese.",
+          "date": "2026-11-07T03:35:00.194Z"
+        },
+        {
           "title": "Stato del Vallese implementa piattaforma di intelligenza artificiale AVA",
           "url": "/articoli-vallese/stato-vallese-intelligenza-artificiale/",
           "excerpt": "AVA è accessibile al personale dello Stato del Vallese da giovedì; il costo operativo è di circa CHF 2 al mese per utente attivo.",
@@ -94,12 +100,6 @@
           "url": "/articoli-vallese/vionnaz-revoca-divieti-acqua/",
           "excerpt": "La municipalità di Vionnaz ha dichiarato soddisfacente la situazione delle fonti, ripristinando prati, piscine e veicoli, ma mantenendo le raccomandazioni di risparmio.",
           "date": "2026-11-03T23:46:43.546Z"
-        },
-        {
-          "title": "Val de Bagnes: 175 persone per settimana sostenibilità",
-          "url": "/articoli-vallese/val-de-bagnes-sostenibilita-2024/",
-          "excerpt": "Dal 24 al 31 ottobre, 175 persone hanno partecipato alla Settimana della sostenibilità a Val de Bagnes.",
-          "date": "2026-11-03T09:11:19.910Z"
         }
       ],
       "links": [
@@ -128,7 +128,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-06T11:17:24.782Z"
+      "updatedAt": "2026-11-07T03:38:09.989Z"
     },
     "en": {
       "canton": "VS",
@@ -187,6 +187,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Unemployment in Valais rises to 3,3%: 6.082 registered people",
+          "url": "/en/valais-articles/valais-labor-market-october-2026/",
+          "excerpt": "At the end of October 2026, 6.082 people were registered with the Regional Employment Offices (ORP) in Valais.",
+          "date": "2026-11-07T03:35:00.194Z"
+        },
+        {
           "title": "State of Valais implements the AVA artificial intelligence platform",
           "url": "/en/valais-articles/valais-state-artificial-intelligence/",
           "excerpt": "AVA has been accessible to staff of the State of Valais since Thursday; the operating cost is approximately CHF 2 per month per active user.",
@@ -209,12 +215,6 @@
           "url": "/en/valais-articles/vionnaz-revokes-water-restrictions/",
           "excerpt": "The municipality of Vionnaz has declared the situation regarding water sources satisfactory, reinstating the watering of lawns, the filling of swimming pools and the washing of vehicles, while maintaining water-saving…",
           "date": "2026-11-03T23:46:43.546Z"
-        },
-        {
-          "title": "Val de Bagnes: 175 people for Sustainability Week",
-          "url": "/en/valais-articles/val-de-bagnes-sustainability/",
-          "excerpt": "From October 24 to 31, 175 people participated in Sustainability Week in Val de Bagnes.",
-          "date": "2026-11-03T09:11:19.910Z"
         }
       ],
       "links": [
@@ -243,7 +243,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-06T11:17:24.782Z"
+      "updatedAt": "2026-11-07T03:38:09.989Z"
     },
     "de": {
       "canton": "VS",
@@ -302,6 +302,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Arbeitslosigkeit im Wallis steigt auf 3,3%: 6.082 registrierte Arbeitslose",
+          "url": "/de/wallis-artikel/walliser-arbeitsmarkt-oktober-2026/",
+          "excerpt": "Ende Oktober 2026 waren 6.082 Personen bei den Regionalen Arbeitsvermittlungszentren (RAV) des Wallis registriert.",
+          "date": "2026-11-07T03:35:00.194Z"
+        },
+        {
           "title": "Staat Wallis implementiert Plattform für künstliche Intelligenz AVA",
           "url": "/de/wallis-artikel/staat-wallis-kunstliche-intelligenz/",
           "excerpt": "AVA ist dem Personal des Staates Wallis seit Donnerstag zugänglich; die Betriebskosten betragen etwa CHF 2 pro Monat und aktivem Nutzer.",
@@ -324,12 +330,6 @@
           "url": "/de/wallis-artikel/vionnaz-wasserbeschrankungen-aufhebung/",
           "excerpt": "Die Gemeinde Vionnaz hat die Lage der Quellen als zufriedenstellend bezeichnet und die Nutzung von Rasenflächen, Schwimmbädern und Fahrzeugen wieder ermöglicht, die Empfehlungen zum Wassersparen jedoch beibehalten.",
           "date": "2026-11-03T23:46:43.546Z"
-        },
-        {
-          "title": "Val de Bagnes: 175 Personen für die Nachhaltigkeitswoche",
-          "url": "/de/wallis-artikel/val-de-bagnes-nachhaltigkeit/",
-          "excerpt": "Vom 24. bis 31. Oktober nahmen 175 Personen an der Nachhaltigkeitswoche in Val de Bagnes teil.",
-          "date": "2026-11-03T09:11:19.910Z"
         }
       ],
       "links": [
@@ -354,7 +354,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-06T11:17:24.782Z"
+      "updatedAt": "2026-11-07T03:38:09.989Z"
     },
     "fr": {
       "canton": "VS",
@@ -413,6 +413,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Le chômage en Valais atteint 3,3% : 6.082 inscrits",
+          "url": "/fr/articles-valais/marche-travail-valais-octobre-2026/",
+          "excerpt": "À fin octobre 2026, 6.082 personnes étaient inscrites auprès des Offices régionaux de placement (ORP) du Valais.",
+          "date": "2026-11-07T03:35:00.194Z"
+        },
+        {
           "title": "L'État du Valais met en œuvre la plateforme d'intelligence artificielle AVA",
           "url": "/fr/articles-valais/etat-valais-intelligence-artificielle/",
           "excerpt": "AVA est accessible au personnel de l'État du Valais depuis jeudi ; le coût opérationnel s'élève à environ CHF 2 par mois et par utilisateur actif.",
@@ -435,12 +441,6 @@
           "url": "/fr/articles-valais/vionnaz-levee-restrictions-eau/",
           "excerpt": "La municipalité de Vionnaz a déclaré satisfaisante la situation des sources, réautorisant l’arrosage des pelouses, le remplissage des piscines et le lavage des véhicules, tout en maintenant les recommandations…",
           "date": "2026-11-03T23:46:43.546Z"
-        },
-        {
-          "title": "Val de Bagnes : 175 personnes pour la semaine de la durabilité",
-          "url": "/fr/articles-valais/val-de-bagnes-durable/",
-          "excerpt": "Du 24 au 31 octobre, 175 personnes ont participé à la Semaine de la durabilité à Val de Bagnes.",
-          "date": "2026-11-03T09:11:19.910Z"
         }
       ],
       "links": [
@@ -469,7 +469,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-06T11:17:24.782Z"
+      "updatedAt": "2026-11-07T03:38:09.989Z"
     }
   }
 }
