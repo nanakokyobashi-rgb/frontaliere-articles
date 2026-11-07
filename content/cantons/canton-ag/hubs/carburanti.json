@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-06T12:06:41.332Z",
-  "contentHash": "a4f484976105665914d39b117214595c63658ae64017ff504f08e403c4ee6619",
+  "updatedAt": "2026-11-07T01:12:46.016Z",
+  "contentHash": "cbb2ee9ebaf7be9e994adce972a8ce230facaf052fd6dadbde1ff7d4867f858d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Chiusura Oelrainstrasse Baden giovedì 5 novembre per rimontaggio container",
+          "url": "/articoli-argovia/oelrainstrasse-chiusura-5-novembre/",
+          "excerpt": "L'Oelrainstrasse tra Parkhaus Bahnhof e Parkhaus Theaterplatz sarà chiusa dalle 8.30 alle circa 11 per il rimontaggio di quattro container interrati.",
+          "date": "2026-11-07T01:08:28.390Z"
+        },
+        {
           "title": "Niederwil propone aliquota comunale al 107% nel 2027",
           "url": "/articoli-argovia/niederwil-aumento-imposta-2027/",
           "excerpt": "Niederwil propone il passaggio dal 103% al 107%; il deficit del budget 2027 scenderebbe da CHF 401'200 a CHF 151'200.",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/blackout-brugg-guasto-alta-tensione/",
           "excerpt": "Il Canton Argovia ha avvertito su Alertswiss per un blackout nella regione di Brugg.",
           "date": "2026-11-02T23:55:33.810Z"
-        },
-        {
-          "title": "Fislisbach: il 5 novembre incontro sulla scuola Leematten",
-          "url": "/articoli-argovia/fislisbach-sondaggio-leematten/",
-          "excerpt": "Il Comune di Fislisbach presenta il 5 novembre i risultati del sondaggio dopo il voto che ha respinto un credito da CHF 5,28 milioni.",
-          "date": "2026-10-31T12:27:23.904Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-06T12:06:41.332Z"
+      "updatedAt": "2026-11-07T01:12:46.016Z"
     },
     "en": {
       "canton": "AG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Closure of Oelrainstrasse, Baden, Thursday, November 5, for container reassembly",
+          "url": "/en/aargau-articles/oelrainstrasse-closure-november-5/",
+          "excerpt": "L'Oelrainstrasse between Parkhaus Bahnhof and Parkhaus Theaterplatz will be closed from 8:30 until approximately 11 for the reassembly of four underground containers.",
+          "date": "2026-11-07T01:08:28.390Z"
+        },
+        {
           "title": "Niederwil proposes a municipal tax rate of 107% in 2027",
           "url": "/en/aargau-articles/niederwil-municipal-tax-2027/",
           "excerpt": "Niederwil proposes increasing it from 103% to 107%; the 2027 budget deficit would decrease from CHF 401'200 to CHF 151'200.",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/brugg-power-outage-high-voltage-fault/",
           "excerpt": "The Canton of Aargau issued a warning on Alertswiss about a blackout in the Brugg region.",
           "date": "2026-11-02T23:55:33.810Z"
-        },
-        {
-          "title": "Fislisbach: November 5 meeting about Leematten school",
-          "url": "/en/aargau-articles/fislisbach-leematten-survey/",
-          "excerpt": "The Municipality of Fislisbach presents the survey results on November 5 following the vote that rejected a credit of CHF 5,28 million.",
-          "date": "2026-10-31T12:27:23.904Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-06T12:06:41.332Z"
+      "updatedAt": "2026-11-07T01:12:46.016Z"
     },
     "de": {
       "canton": "AG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Sperrung Oelrainstrasse: 5.11. wegen Container-Wiedereinbau",
+          "url": "/de/aargau-artikel/oelrainstrasse-schliessung-5-november/",
+          "excerpt": "Die Oelrainstrasse zwischen Parkhaus Bahnhof und Parkhaus Theaterplatz wird von 8.30 bis etwa 11 Uhr wegen des Wiedereinbaus von vier unterirdischen Containern gesperrt.",
+          "date": "2026-11-07T01:08:28.390Z"
+        },
+        {
           "title": "Niederwil schlägt für 2027 einen Gemeindesteuerfuss von 107% vor",
           "url": "/de/aargau-artikel/niederwil-steuerfuss-erhoehung-2027/",
           "excerpt": "Niederwil schlägt eine Erhöhung des Steuerfusses von 103% auf 107% vor; das Defizit des Budgets 2027 würde von CHF 401'200 auf CHF 151'200 sinken.",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/brugg-stromausfall-hochspannungsstoerung/",
           "excerpt": "Der Kanton Aargau hat auf Alertswiss vor einem Stromausfall in der Region Brugg gewarnt.",
           "date": "2026-11-02T23:55:33.810Z"
-        },
-        {
-          "title": "Fislisbach: Am 5. November Treffen zur Schule Leematten",
-          "url": "/de/aargau-artikel/fislisbach-leematten-umfrage/",
-          "excerpt": "Die überprüfbaren Informationen betreffen somit das Treffen am 5. November um 19.30 Uhr im Mehrzwecksaal der Schule Leematten, die Präsentation der Ergebnisse durch Sotomo und die Erläuterung des weiteren Vorgehens…",
-          "date": "2026-10-31T12:27:23.904Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-06T12:06:41.332Z"
+      "updatedAt": "2026-11-07T01:12:46.016Z"
     },
     "fr": {
       "canton": "AG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Baden : Oelrainstrasse fermée pour remonter des conteneurs",
+          "url": "/fr/articles-argovie/oelrainstrasse-fermeture-5-novembre/",
+          "excerpt": "L’Oelrainstrasse entre Parkhaus Bahnhof et Parkhaus Theaterplatz sera fermée de 8.30 à environ 11 pour le remontage de quatre conteneurs enterrés.",
+          "date": "2026-11-07T01:08:28.390Z"
+        },
+        {
           "title": "Niederwil propose un taux communal de 107 % en 2027",
           "url": "/fr/articles-argovie/niederwil-hausse-taux-fiscal-2027/",
           "excerpt": "Niederwil propose le passage de 103 % à 107 % ; le déficit du budget 2027 passerait de CHF 401'200 à CHF 151'200.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/panne-courant-brugg-haute-tension/",
           "excerpt": "Le canton d'Argovie a averti sur Alertswiss d'une panne de courant dans la région de Brugg.",
           "date": "2026-11-02T23:55:33.810Z"
-        },
-        {
-          "title": "Fislisbach : le 5 novembre, rencontre au sujet de l’école Leematten",
-          "url": "/fr/articles-argovie/fislisbach-sondage-leematten/",
-          "excerpt": "La commune de Fislisbach présente le 5 novembre les résultats du sondage après le vote qui a rejeté un crédit de CHF 5,28 millions.",
-          "date": "2026-10-31T12:27:23.904Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-06T12:06:41.332Z"
+      "updatedAt": "2026-11-07T01:12:46.016Z"
     }
   }
 }
