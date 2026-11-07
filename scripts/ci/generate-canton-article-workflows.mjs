@@ -290,15 +290,7 @@ export const CORE_REPLACEMENTS = [
   {
     id: 'admit: la deduplica della source URL resta nel receiver principale',
     count: 1,
-    find: '          if [ "$EVENT_NAME" = "workflow_dispatch" ] \\\n'
-      + '            && [ "${DRY_RUN:-false}" != "true" ] \\\n'
-      + '            && [ -n "${SOURCE_URL:-}" ]; then\n'
-      + '            if jq -e --arg s "$SOURCE_URL" --arg m "$self_created" --argjson i "$SELF_ID" \'any(.[]; [.created_at,.id]<[$m,$i]and(.display_title|contains("[dispatch-source=\\($s)]")))\' <<<"$runs" >/dev/null 2>/dev/null; then\n'
-      + '              skip_generation_slot duplicate-dispatch-source\n'
-      + '            elif [ "$?" -ne 1 ]; then\n'
-      + '              fail_closed_admission\n'
-      + '            fi\n'
-      + '          fi\n',
+    find: '          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "${DRY_RUN:-false}" != "true" ] && [ -n "${SOURCE_URL:-}" ] && jq -e --arg s "$SOURCE_URL" --arg m "$self_created" --argjson i "$SELF_ID" \'any(.[]; [.created_at,.id]<[$m,$i]and(.display_title|contains("[dispatch-source=\\($s)]")))\' <<<"$runs" >/dev/null 2>/dev/null; then skip_generation_slot duplicate-dispatch-source; elif [ "$?" -ne 1 ]; then fail_closed_admission; fi\n',
     replace: '',
   },
   {

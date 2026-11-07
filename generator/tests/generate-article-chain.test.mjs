@@ -947,7 +947,7 @@ test('un retry del dispatch con la stessa URL viene deduplicato dal ricevitore',
   assert.match(admit, /and \(\.display_title \| type\) == "string"\s+and \(\.display_title \| length\) > 0/);
   assert.match(admit, /\{id, created_at, status, display_title\}/);
   assert.doesNotMatch(admit, /display_title: \(\.display_title \/\/ ""\)/);
-  assert.match(admit, /if \[ "\$EVENT_NAME" = "workflow_dispatch" \] \\\n\s+&& \[ "\$\{DRY_RUN:-false\}" != "true" \] \\\n\s+&& \[ -n "\$\{SOURCE_URL:-\}" \]; then/);
+  assert.match(admit, /if \[ "\$EVENT_NAME" = "workflow_dispatch" \] && \[ "\$\{DRY_RUN:-false\}" != "true" \] && \[ -n "\$\{SOURCE_URL:-\}" \] && jq -e /);
   assert.match(admit, /duplicate-dispatch-source/);
   assert.ok(admit.includes('contains("[dispatch-source=\\($s)]")'));
   const dedupeAt = admit.indexOf('duplicate-dispatch-source');

@@ -820,13 +820,10 @@ jobs:
 
           # ── IL TETTO ORARIO, l'unica guardia che un contatore non aggira ────
           #
-          # `chain_depth` e `no_article_streak` viaggiano NEGLI INPUT: un anello
-          # che li dimentica, o un dispatch fatto a mano con i default, riparte
-          # da zero e i due cap non vedono niente. Questo tetto invece si calcola
-          # dallo stesso snapshot bounded gia' usato dal gate, e nessuno puo'
-          # ripulirlo passando un input sbagliato. Vale solo per gli anelli: un
-          # avvio manuale e gli slot Cloud Scheduler restano fuori (sono due
-          # slot/ora; un avvio manuale si ferma da solo).
+          # `chain_depth` e `no_article_streak` sono input: un anello che li
+          # dimentica riparte da zero. Questo tetto usa lo snapshot bounded del
+          # gate, non si aggira con input errati e vale solo per gli anelli.
+          # Avvii manuali e slot Cloud Scheduler restano fuori.
           if [ "$is_link" = "true" ]; then
             cap="${CHAIN_MAX_RUNS_PER_HOUR:-}"
             case "$cap" in
@@ -868,18 +865,7 @@ jobs:
             fail_closed_admission
           fi
 
-          # A dry run loads the generator but creates no article. It may reuse
-          # the same URL as a production dispatch, so it must not reserve the
-          # production retry-deduplication key.
-          if [ "$EVENT_NAME" = "workflow_dispatch" ] \
-            && [ "${DRY_RUN:-false}" != "true" ] \
-            && [ -n "${SOURCE_URL:-}" ]; then
-            if jq -e --arg s "$SOURCE_URL" --arg m "$self_created" --argjson i "$SELF_ID" 'any(.[]; [.created_at,.id]<[$m,$i]and(.display_title|contains("[dispatch-source=\($s)]")))' <<<"$runs" >/dev/null 2>/dev/null; then
-              skip_generation_slot duplicate-dispatch-source
-            elif [ "$?" -ne 1 ]; then
-              fail_closed_admission
-            fi
-          fi
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "${DRY_RUN:-false}" != "true" ] && [ -n "${SOURCE_URL:-}" ] && jq -e --arg s "$SOURCE_URL" --arg m "$self_created" --argjson i "$SELF_ID" 'any(.[]; [.created_at,.id]<[$m,$i]and(.display_title|contains("[dispatch-source=\($s)]")))' <<<"$runs" >/dev/null 2>/dev/null; then skip_generation_slot duplicate-dispatch-source; elif [ "$?" -ne 1 ]; then fail_closed_admission; fi
 
           if [ "$explicit_dispatch" = "true" ]; then
             echo "Dispatch manuale/editoriale esplicito (chain_depth=$chain_depth) → si procede."
