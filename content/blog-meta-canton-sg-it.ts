@@ -93,6 +93,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.voto-regolamento-fondo-gas-wil.title': 'Voto 29 novembre 2026: Regolamento fondo dismissione rete gas TBW',
     'blog.article.voto-regolamento-fondo-gas-wil.excerpt': 'La votazione riguarda il regolamento per il fondo destinato alla dismissione della rete gas TBW, che misura circa 570 km.',
     'blog.article.voto-regolamento-fondo-gas-wil.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.voto-wil-29-novembre-2026.title': 'Voto a Wil domenica 29 novembre 2026 su proposte comunali e federali',
+    'blog.article.voto-wil-29-novembre-2026.excerpt': 'Domenica 29 novembre 2026, a Wil saranno sottoposte al voto due proposte comunali.',
+    'blog.article.voto-wil-29-novembre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;
