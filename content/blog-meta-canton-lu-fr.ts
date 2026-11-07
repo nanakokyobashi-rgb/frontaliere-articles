@@ -84,6 +84,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.semal-st-klemens-ebikon.title': 'Nouveau feu de signalisation à St. Klemens pour la ponctualité des bus à Ebikon',
     'blog.article.semal-st-klemens-ebikon.excerpt': 'Test à l\'arrêt St. Klemens sur la route cantonale en direction de Lucerne ; décision prévue à la fin de l\'été 2027 après consultation.',
     'blog.article.semal-st-klemens-ebikon.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.nav-kita-proroga-fino-2030.title': 'Prolongation du NAV Kita jusqu\'au 30 juin 2030 dans le canton de Lucerne',
+    'blog.article.nav-kita-proroga-fino-2030.excerpt': 'Le contrat-type de travail pour les Kitas est prolongé jusqu\'au 30 juin 2030 afin de surveiller les violations des salaires minimaux, avec des contrôles en 2025 et 2026.',
+    'blog.article.nav-kita-proroga-fino-2030.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

@@ -84,6 +84,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.semal-st-klemens-ebikon.title': 'Nuovo semaforo St. Klemens per puntualità bus a Ebikon',
     'blog.article.semal-st-klemens-ebikon.excerpt': 'Test alla fermata St. Klemens sulla strada cantonale verso Lucerna; decisione prevista a fine estate 2027 dopo consultazione.',
     'blog.article.semal-st-klemens-ebikon.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.nav-kita-proroga-fino-2030.title': 'Proroga NAV Kita fino al 30 giugno 2030 nel Canton Lucerna',
+    'blog.article.nav-kita-proroga-fino-2030.excerpt': 'Il Normalarbeitsvertrag per le Kitas è prorogato fino al 30 giugno 2030 per monitorare le violazioni dei salari minimi, con controlli nel 2025 e 2026.',
+    'blog.article.nav-kita-proroga-fino-2030.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;

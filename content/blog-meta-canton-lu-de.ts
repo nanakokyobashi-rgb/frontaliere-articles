@@ -84,6 +84,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.semal-st-klemens-ebikon.title': 'Neue Ampel St. Klemens für Bus-Pünktlichkeit in Ebikon',
     'blog.article.semal-st-klemens-ebikon.excerpt': 'Test an der Haltestelle St. Klemens an der Kantonsstrasse nach Luzern; Entscheidung nach Rücksprache für Spätsommer 2027 geplant.',
     'blog.article.semal-st-klemens-ebikon.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.nav-kita-proroga-fino-2030.title': 'Verlängerung des NAV Kita bis zum 30. Juni 2030 im Kanton Luzern',
+    'blog.article.nav-kita-proroga-fino-2030.excerpt': 'Der Normalarbeitsvertrag für Kitas wird bis zum 30. Juni 2030 verlängert, um Verstöße gegen die Mindestlohnvorschriften zu überwachen, mit Kontrollen in den Jahren 2025 und 2026.',
+    'blog.article.nav-kita-proroga-fino-2030.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

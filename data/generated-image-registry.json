@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 1169,
+  "assetCount": 1170,
   "assets": [
     {
       "schema": 1,
@@ -48431,6 +48431,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic synthetic industrial landscape; no readable text, logos, or recognizable people."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-nav-kita-proroga-fino-2030",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "654bd42ae417d6bf8c2c7cf65713ccfe34cde1d2231147081a2533bf5d00f45d",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "da9df20b14f159015a5d3918a53a969af1137e416c318ce9fecd156689e95b20",
+      "bytes": 186292,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-11-07T10:23:27.475Z",
+      "verifiedAt": "2026-11-07T10:23:39.092Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-nav-kita-proroga-fino-2030.webp",
+      "area": "Swiss border region",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Synthetic editorial illustration of Lucerne featuring the Chapel Bridge; no text, logos, people, or event-specific content."
       }
     }
   ]
