@@ -953,10 +953,13 @@ test('un retry del dispatch con la stessa URL viene deduplicato dal ricevitore',
   assert.doesNotMatch(admit, /display_title: \(\.display_title \/\/ ""\)/);
   assert.match(admit, /if \[ "\$EVENT_NAME" = "workflow_dispatch" \] && \[ "\$\{DRY_RUN:-false\}" != "true" \] && \[ -n "\$\{SOURCE_URL:-\}" \]/);
   assert.match(admit, /\^\[a-f0-9\]\{32\}\$/);
-  assert.match(admit, /sha256sum \| cut -c1-32/);
+  assert.match(admit, /sha256sum \| cut -d' ' -f1/);
+  assert.match(admit, /legacy_dispatch_key="sha256:\$\{source_digest\}"/);
   assert.match(admit, /duplicate-dispatch-source/);
   assert.ok(admit.includes('[dispatch-mode=production]'));
   assert.ok(admit.includes('contains("[dispatch-source-key=\\($k)]")'));
+  assert.ok(admit.includes('contains("[dispatch-key=\\($lk)]")'), 'la deduplica deve conservare il marker storico bounded');
+  assert.ok(admit.includes('contains("[dispatch-source=\\($s)]")'), 'la deduplica deve conservare il marker storico URL');
   assert.doesNotMatch(admit, /contains\("\[dispatch-mode=dry\]"\)/, 'la modalità è un marker positivo separato dalla URL');
   const dedupeAt = admit.indexOf('duplicate-dispatch-source');
   const explicitAt = admit.indexOf('if [ "$explicit_dispatch" = "true" ]');
