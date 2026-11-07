@@ -31,6 +31,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'tamponamento-a1-gossau': { it: 'tamponamento-a1-gossau', en: 'gossau-a1-crash', de: 'auffahrunfall-a1-gossau', fr: 'accident-a1-gossau' },
  'cambiamento-orari-st-gallen': { it: 'cambiamento-orari-st-gallen', en: 'st-gallen-schedule-changes', de: 'st-gallen-fahrplanwechsel', fr: 'changements-horaires-st-gallen' },
  'wil-piano-finanziario-2027-2031': { it: 'wil-piano-finanziario-2027-2031', en: 'wil-financial-plan-2027-2031', de: 'wil-finanzplan-2027-2031', fr: 'wil-plan-financier-2027-2031' },
+ 'meno-cercatori-lavoro-ottobre': { it: 'meno-cercatori-lavoro-ottobre', en: 'fewer-job-seekers-october', de: 'weniger-stellensuchende-oktober', fr: 'moins-chercheurs-emploi-octobre' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

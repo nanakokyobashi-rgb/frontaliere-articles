@@ -87,6 +87,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.wil-piano-finanziario-2027-2031.title': 'Wil: 2027-2031 financial plan between debts and savings',
     'blog.article.wil-piano-finanziario-2027-2031.excerpt': 'Wil\'s financial plan provides for an increase in net debt from 43 to 125 million francs by 2031, despite savings measures.',
     'blog.article.wil-piano-finanziario-2027-2031.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.meno-cercatori-lavoro-ottobre.title': '11,341 people seeking work in St. Gallen, end-Oct 2026',
+    'blog.article.meno-cercatori-lavoro-ottobre.excerpt': 'At the end of October 2026, the RAV of the Canton of St. Gallen counted 11\'341 jobseekers, of whom 5\'784 were unemployed.',
+    'blog.article.meno-cercatori-lavoro-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

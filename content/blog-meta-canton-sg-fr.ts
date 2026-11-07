@@ -87,6 +87,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.wil-piano-finanziario-2027-2031.title': 'Wil : plan financier 2027-2031 entre dettes et économies',
     'blog.article.wil-piano-finanziario-2027-2031.excerpt': 'Le plan financier de Wil prévoit une augmentation de la dette nette de 43 à 125 millions de francs d’ici 2031, malgré des mesures d’économie.',
     'blog.article.wil-piano-finanziario-2027-2031.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.meno-cercatori-lavoro-ottobre.title': '11\'341 demandeurs d\'emploi à Saint-Gall fin oct. 2026',
+    'blog.article.meno-cercatori-lavoro-ottobre.excerpt': 'Fin octobre 2026, le RAV du canton de Saint-Gall comptait 11\'341 personnes à la recherche d\'un emploi, dont 5\'784 chômeurs.',
+    'blog.article.meno-cercatori-lavoro-ottobre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;

@@ -87,6 +87,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.wil-piano-finanziario-2027-2031.title': 'Wil: piano finanziario 2027-2031 tra debiti e risparmi',
     'blog.article.wil-piano-finanziario-2027-2031.excerpt': 'Il piano finanziario di Wil prevede un aumento del debito netto da 43 a 125 milioni di franchi entro il 2031, nonostante misure di risparmio.',
     'blog.article.wil-piano-finanziario-2027-2031.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.meno-cercatori-lavoro-ottobre.title': '11\'341 persone in cerca di lavoro a fine ottobre 2026 nel Canton San Gallo',
+    'blog.article.meno-cercatori-lavoro-ottobre.excerpt': 'A fine ottobre 2026, il RAV del Cantone San Gallo contava 11\'341 persone in cerca di lavoro, di cui 5\'784 disoccupate.',
+    'blog.article.meno-cercatori-lavoro-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;
