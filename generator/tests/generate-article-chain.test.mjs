@@ -956,11 +956,14 @@ test('un retry del dispatch con la stessa URL viene deduplicato dal ricevitore',
   assert.doesNotMatch(admit, /display_title: \(\.display_title \/\/ ""\)/);
   assert.match(admit, /if \[ "\$EVENT_NAME" = "workflow_dispatch" \] && \[ "\$\{DRY_RUN:-false\}" != "true" \] && \[ -n "\$\{SOURCE_URL:-\}" \]/);
   assert.match(admit, /\^\[a-f0-9\]\{32\}\$/);
-  assert.match(admit, /sha256sum \| cut -c1-32/);
+  assert.match(admit, /sha256sum \| cut -d' ' -f1/);
+  assert.match(admit, /legacy_dispatch_key="sha256:\$\{source_digest\}"/);
   assert.match(admit, /duplicate-dispatch-source/);
   assert.ok(admit.includes('[dispatch-mode=production]'));
   assert.ok(admit.includes('--arg k "$expected_source_key"'), 'la deduplica deve usare la chiave derivata e validata');
   assert.ok(admit.includes('startswith("[dispatch-source-key=\\($k)] [dispatch-mode=production]")'), 'il marker deve essere un token strutturato completo');
+  assert.ok(admit.includes('startswith("[dispatch-key=\\($lk)] [dispatch-mode=production]")'), 'la deduplica deve conservare il marker storico bounded');
+  assert.ok(admit.includes('startswith("[dispatch-source=\\($s)] [dispatch-mode=production]")'), 'la deduplica deve conservare il marker storico URL');
   assert.doesNotMatch(admit, /contains\("\[dispatch-source-key=/, 'la chiave non deve essere cercata come sottostringa libera');
   assert.doesNotMatch(admit, /contains\("\[dispatch-mode=dry\]"\)/, 'la modalità è un marker positivo separato dalla URL');
   assert.match(admit, /\(\(\$active \| index\(\$run\.status\)\) != null\s+or \(\$run\.status == "completed" and \$run\.conclusion == "success"\)\)/);

@@ -878,16 +878,25 @@ jobs:
 
           if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "${DRY_RUN:-false}" != "true" ] && [ -n "${SOURCE_URL:-}" ]; then
             if ! [[ "${SOURCE_KEY:-}" =~ ^[a-f0-9]{32}$ ]]; then skip_generation_slot dispatch-source-key-invalid; fi
-            if ! expected_source_key="$(printf '%s' "$SOURCE_URL" | sha256sum | cut -c1-32)"; then skip_generation_slot dispatch-source-key-unavailable; fi
+            if ! source_digest="$(printf '%s' "$SOURCE_URL" | sha256sum | cut -d' ' -f1)"; then skip_generation_slot dispatch-source-key-unavailable; fi
+            if ! [[ "$source_digest" =~ ^[a-f0-9]{64}$ ]]; then skip_generation_slot dispatch-source-key-unavailable; fi
+            expected_source_key="${source_digest:0:32}"
+            legacy_dispatch_key="sha256:${source_digest}"
             [ "$SOURCE_KEY" = "$expected_source_key" ] || skip_generation_slot dispatch-source-key-mismatch
-            if jq -e --arg k "$expected_source_key" --arg m "$self_created" --argjson i "$SELF_ID" --argjson active "$IN_FLIGHT_STATUSES" '
+            if jq -e --arg k "$expected_source_key" --arg lk "$legacy_dispatch_key" --arg s "$SOURCE_URL" --arg m "$self_created" --argjson i "$SELF_ID" --argjson active "$IN_FLIGHT_STATUSES" '
               any(.[];
                 . as $run
                 | ([$run.created_at,$run.id] < [$m,$i])
                   and (($active | index($run.status)) != null
                     or ($run.status == "completed" and $run.conclusion == "success"))
-                  and ($run.display_title
-                    | startswith("[dispatch-source-key=\($k)] [dispatch-mode=production]"))
+                  and (
+                    ($run.display_title
+                      | startswith("[dispatch-source-key=\($k)] [dispatch-mode=production]"))
+                    or ($run.display_title
+                      | startswith("[dispatch-key=\($lk)] [dispatch-mode=production]"))
+                    or ($run.display_title
+                      | startswith("[dispatch-source=\($s)] [dispatch-mode=production]"))
+                  )
               )
             ' <<<"$runs" >/dev/null 2>/dev/null; then skip_generation_slot duplicate-dispatch-source; elif [ "$?" -ne 1 ]; then fail_closed_admission; fi
           fi
