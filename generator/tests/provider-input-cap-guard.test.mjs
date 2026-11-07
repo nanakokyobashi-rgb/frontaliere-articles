@@ -16,7 +16,7 @@ function extractFunctionSource(signature) {
   return SOURCE.slice(start, start + end + 2);
 }
 
-const GUARD_SOURCE = extractFunctionSource('function providerInputCapGuard(models, splitMode = \'auto\') {');
+const GUARD_SOURCE = extractFunctionSource('function providerInputCapGuard(models, splitMode = \'auto\', minimumInputTokensOverride = null) {');
 const FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS = Number(
   SOURCE.match(/const PROMPT_UNIQUE_SCAFFOLD_FLOOR_TOKENS = (\d+);/)?.[1],
 );
@@ -32,7 +32,7 @@ function makeGuard(caps, splitMode = 'auto') {
     if (caps instanceof Map) return caps.get(model);
     return caps(model);
   }, 5850, FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS);
-  return (models) => guard(models, splitMode);
+  return (models, minimumInputTokensOverride = null) => guard(models, splitMode, minimumInputTokensOverride);
 }
 
 test('providerInputCapGuard rejects a roster whose every input cap is below the prompt floor', () => {
@@ -46,8 +46,8 @@ test('providerInputCapGuard rejects a roster whose every input cap is below the 
     minimumInputTokens: FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS,
     eligibleModels: [],
     rejectedModels: [
-      { model: 'small-a', requestLimit: 4000, reason: 'below-prompt-scaffold-floor' },
-      { model: 'small-b', requestLimit: 3000, reason: 'below-prompt-scaffold-floor' },
+      { model: 'small-a', requestLimit: 4000, reason: 'below-minimum-input-floor' },
+      { model: 'small-b', requestLimit: 3000, reason: 'below-minimum-input-floor' },
     ],
   });
 });
@@ -67,7 +67,7 @@ test('providerInputCapGuard keeps unbounded and exact-floor models eligible', ()
       { model: 'floor', requestLimit: 5850 },
     ],
     rejectedModels: [
-      { model: 'too-small', requestLimit: 4000, reason: 'below-prompt-scaffold-floor' },
+      { model: 'too-small', requestLimit: 4000, reason: 'below-minimum-input-floor' },
     ],
   });
 });
@@ -85,7 +85,7 @@ test('providerInputCapGuard keeps auto conservative until split is decided', () 
       { model: 'full-floor', requestLimit: FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS },
     ],
     rejectedModels: [
-      { model: 'body-floor', requestLimit: 5850, reason: 'below-prompt-scaffold-floor' },
+      { model: 'body-floor', requestLimit: 5850, reason: 'below-minimum-input-floor' },
     ],
   });
 });
@@ -104,13 +104,29 @@ test('providerInputCapGuard uses the single-call scaffold floor when split is of
       { model: 'full-floor', requestLimit: FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS },
     ],
     rejectedModels: [
-      { model: 'body-floor', requestLimit: 5850, reason: 'below-prompt-scaffold-floor' },
-      { model: 'full-floor-minus-one', requestLimit: FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS - 1, reason: 'below-prompt-scaffold-floor' },
+      { model: 'body-floor', requestLimit: 5850, reason: 'below-minimum-input-floor' },
+      { model: 'full-floor-minus-one', requestLimit: FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS - 1, reason: 'below-minimum-input-floor' },
     ],
   });
 
   const splitGuard = makeGuard(new Map([['body-floor', 5850]]), 'on');
   assert.equal(splitGuard(['body-floor']).ready, true, 'on deve usare il floor della chiamata split');
+});
+
+test('providerInputCapGuard does not treat the zero-content scaffold as the real body floor', () => {
+  const guard = makeGuard(new Map([
+    ['learned-small', 6000],
+    ['body-minimum', 6800],
+  ]), 'on');
+
+  assert.deepEqual(guard(['learned-small', 'body-minimum'], 6800), {
+    ready: true,
+    minimumInputTokens: 6800,
+    eligibleModels: [{ model: 'body-minimum', requestLimit: 6800 }],
+    rejectedModels: [
+      { model: 'learned-small', requestLimit: 6000, reason: 'below-minimum-input-floor' },
+    ],
+  });
 });
 
 test('providerInputCapGuard fails closed on an unreadable cap and is wired before the scan', () => {
@@ -130,6 +146,13 @@ test('providerInputCapGuard fails closed on an unreadable cap and is wired befor
   const preflight = SOURCE.slice(preflightStart, scanStart);
   assert.match(preflight, /const promptSplitMode = getPromptSplitMode\(\);/);
   assert.match(preflight, /providerInputCapGuard\(roster\.availableModels, promptSplitMode\)/);
-  assert.match(preflight, /PROVIDER_INPUT_CAP ready=/);
+  assert.match(preflight, /PROVIDER_INPUT_CAP_PRECHECK ready=/);
   assert.match(preflight, /if \(!inputCapGuard\.ready\)/);
+
+  const callGeminiStart = SOURCE.indexOf('async function callGemini(');
+  const promptGuard = SOURCE.indexOf('const _promptInputCapGuard = typeof providerInputCapGuard');
+  assert.ok(callGeminiStart >= 0 && promptGuard > callGeminiStart, 'prompt-built input-cap guard missing inside callGemini');
+  const promptGuardBlock = SOURCE.slice(promptGuard, promptGuard + 900);
+  assert.match(promptGuardBlock, /_minimumPromptCall\.est/);
+  assert.match(promptGuardBlock, /phase: 'prompt-built-minimum-request'/);
 });
