@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-11-07T00:55:35.159Z",
-  "contentHash": "3a141c66190589e146d79e2b48e294ee30f9d917a3a81626317bb71900924857",
+  "updatedAt": "2026-11-07T09:42:27.754Z",
+  "contentHash": "57e4113aedd16573eaf941ea649d317b1c24557640fa4d6b2b8ef8b733d8cdc7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-05T14:57:01.545Z",
+      "updatedAt": "2026-11-06T14:35:31.386Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-05T14:57:01.545Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Nuovo semaforo St. Klemens per puntualità bus a Ebikon",
+          "url": "/articoli-lucerna/semal-st-klemens-ebikon/",
+          "excerpt": "Test alla fermata St. Klemens sulla strada cantonale verso Lucerna; decisione prevista a fine estate 2027 dopo consultazione.",
+          "date": "2026-11-07T09:26:29.750Z"
+        },
         {
           "title": "Kriens decide una riduzione delle imposte",
           "url": "/articoli-lucerna/kriens-riduce-imposte/",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/lukb-utile-nove-mesi/",
           "excerpt": "La LUKB registra 223,3 milioni di franchi di utile nei primi nove mesi.",
           "date": "2026-10-31T13:51:58.051Z"
-        },
-        {
-          "title": "Rettore Kanti promuove legame con l'Università di Lucerna",
-          "url": "/articoli-lucerna/kanti-rektor-draht-universitaet/",
-          "excerpt": "Marco Stössel, rettore della Kantonsschule Beromünster, ha parlato al Dies Academicus 2026 sul percorso formativo comune tra ginnasi e università.",
-          "date": "2026-10-31T13:00:04.976Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-07T00:55:35.159Z"
+      "updatedAt": "2026-11-07T09:42:27.754Z"
     },
     "en": {
       "canton": "LU",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-05T14:57:01.545Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "New St. Klemens traffic light for bus punctuality in Ebikon",
+          "url": "/en/lucerne-articles/st-klemens-ebikon-traffic-light/",
+          "excerpt": "Test at the St. Klemens stop on the cantonal road toward Lucerne; decision expected at the end of summer 2027 after consultation.",
+          "date": "2026-11-07T09:26:29.750Z"
+        },
         {
           "title": "Kriens decides on a tax reduction",
           "url": "/en/lucerne-articles/kriens-tax-cut/",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/lucerne-cantonal-bank-profit-nine-months/",
           "excerpt": "LUKB records 223,3 million francs in profit in the first nine months.",
           "date": "2026-10-31T13:51:58.051Z"
-        },
-        {
-          "title": "Rector Kanti Strengthens Ties with the University of Lucerne",
-          "url": "/en/lucerne-articles/kanti-rector-university-link/",
-          "excerpt": "Marco Stössel, principal of the Kantonsschule Beromünster, spoke at the 2026 Dies Academicus about the common educational pathway between high schools and universities.",
-          "date": "2026-10-31T13:00:04.976Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-07T00:55:35.159Z"
+      "updatedAt": "2026-11-07T09:42:27.754Z"
     },
     "de": {
       "canton": "LU",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-05T14:57:01.545Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Neue Ampel St. Klemens für Bus-Pünktlichkeit in Ebikon",
+          "url": "/de/luzern-artikel/semafor-st-klemens-ebikon/",
+          "excerpt": "Test an der Haltestelle St. Klemens an der Kantonsstrasse nach Luzern; Entscheidung nach Rücksprache für Spätsommer 2027 geplant.",
+          "date": "2026-11-07T09:26:29.750Z"
+        },
         {
           "title": "Kriens beschließt eine Steuersenkung",
           "url": "/de/luzern-artikel/kriens-steuersenkung/",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/luzerner-kantonalbank-gewinn-neun-monate/",
           "excerpt": "Die LUKB verzeichnet in den ersten neun Monaten einen Gewinn von 223,3 Millionen Franken.",
           "date": "2026-10-31T13:51:58.051Z"
-        },
-        {
-          "title": "Rektor Kanti fördert die Zusammenarbeit mit der Universität Luzern",
-          "url": "/de/luzern-artikel/kanti-rektor-universitaet-draht/",
-          "excerpt": "Marco Stössel, Rektor der Kantonsschule Beromünster, sprach am Dies Academicus 2026 über den gemeinsamen Bildungsweg von Gymnasium und Universität.",
-          "date": "2026-10-31T13:00:04.976Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-07T00:55:35.159Z"
+      "updatedAt": "2026-11-07T09:42:27.754Z"
     },
     "fr": {
       "canton": "LU",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-05T14:57:01.545Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Nouveau feu de signalisation à St. Klemens pour la ponctualité des bus à Ebikon",
+          "url": "/fr/articles-lucerne/semafore-st-klemens-ebikon/",
+          "excerpt": "Test à l'arrêt St. Klemens sur la route cantonale en direction de Lucerne ; décision prévue à la fin de l'été 2027 après consultation.",
+          "date": "2026-11-07T09:26:29.750Z"
+        },
         {
           "title": "Kriens décide une réduction des impôts",
           "url": "/fr/articles-lucerne/baisse-impots-kriens/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/banque-cantonale-lucerne-benefice-neuf-mois/",
           "excerpt": "La LUKB enregistre un bénéfice de 223,3 millions de francs au cours des neuf premiers mois.",
           "date": "2026-10-31T13:51:58.051Z"
-        },
-        {
-          "title": "Le recteur Kanti renforce les liens avec l'Université de Lucerne",
-          "url": "/fr/articles-lucerne/kanti-recteur-lien-universite/",
-          "excerpt": "Marco Stössel, recteur de la Kantonsschule de Beromünster, est intervenu lors du Dies Academicus 2026 sur le parcours de formation commun entre les lycées et les universités.",
-          "date": "2026-10-31T13:00:04.976Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-07T00:55:35.159Z"
+      "updatedAt": "2026-11-07T09:42:27.754Z"
     }
   }
 }

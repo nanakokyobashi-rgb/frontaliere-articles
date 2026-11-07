@@ -93,6 +93,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.voto-regolamento-fondo-gas-wil.title': 'Vote November 29, 2026: Regulation for the TBW gas network decommissioning fund',
     'blog.article.voto-regolamento-fondo-gas-wil.excerpt': 'The vote concerns the regulations for the fund intended for the decommissioning of the TBW gas network, which measures approximately 570 km.',
     'blog.article.voto-regolamento-fondo-gas-wil.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.voto-wil-29-novembre-2026.title': 'Voting in Wil on Sunday, November 29, 2026, on municipal and federal proposals',
+    'blog.article.voto-wil-29-novembre-2026.excerpt': 'On Sunday, November 29, 2026, two municipal proposals will be put to a vote in Wil.',
+    'blog.article.voto-wil-29-novembre-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

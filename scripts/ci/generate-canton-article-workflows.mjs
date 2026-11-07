@@ -266,11 +266,55 @@ export const CORE_REPLACEMENTS = [
     id: 'admit: gli input del cloud clock restano solo nel workflow principale',
     count: 1,
     find: '          SECTION_REQUESTED: ${{ inputs.section }}\n'
+      + '          SOURCE_URL: ${{ inputs.url }}\n'
+      + '          SOURCE_KEY: ${{ inputs.source_key }}\n'
       + '          DISPATCH_ORIGIN: ${{ inputs.dispatch_origin }}\n'
       + '          LOOP_CLOCK: ${{ inputs.loop_clock }}\n'
       + '          RECOVERY_SLOT: ${{ inputs.recovery_slot }}\n'
       + '          RECOVERY_CLAIM: ${{ inputs.recovery_claim }}\n'
       + '          GENERATION_CLAIM_ENDPOINT: https://europe-west6-frontaliere-ticino.cloudfunctions.net/claimGenerationSlot\n',
+    replace: '',
+  },
+  {
+    id: 'admit: la completezza di display_title resta nel receiver principale',
+    count: 1,
+    find: '                    and (.display_title | type) == "string"\n'
+      + '                    and (.display_title | length) > 0\n',
+    replace: '',
+  },
+  {
+    id: 'admit: display_title resta solo nel receiver principale',
+    count: 1,
+    find: '                [$pages[].workflow_runs[] | {id, created_at, status, conclusion, display_title}]\n',
+    replace: '                [$pages[].workflow_runs[] | {id, created_at, status, conclusion}]\n',
+  },
+  {
+    id: 'admit: la deduplica della source URL resta nel receiver principale',
+    count: 1,
+    find: '          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "${DRY_RUN:-false}" != "true" ] && [ -n "${SOURCE_URL:-}" ]; then\n'
+      + '            if ! [[ "${SOURCE_KEY:-}" =~ ^[a-f0-9]{32}$ ]]; then skip_generation_slot dispatch-source-key-invalid; fi\n'
+      + '            if ! source_digest="$(printf \'%s\' "$SOURCE_URL" | sha256sum | cut -d\' \' -f1)"; then skip_generation_slot dispatch-source-key-unavailable; fi\n'
+      + '            if ! [[ "$source_digest" =~ ^[a-f0-9]{64}$ ]]; then skip_generation_slot dispatch-source-key-unavailable; fi\n'
+      + '            expected_source_key="${source_digest:0:32}"\n'
+      + '            legacy_dispatch_key="sha256:${source_digest}"\n'
+      + '            [ "$SOURCE_KEY" = "$expected_source_key" ] || skip_generation_slot dispatch-source-key-mismatch\n'
+      + '            if jq -e --arg k "$expected_source_key" --arg lk "$legacy_dispatch_key" --arg s "$SOURCE_URL" --arg m "$self_created" --argjson i "$SELF_ID" --argjson active "$IN_FLIGHT_STATUSES" \'\n'
+      + '              any(.[];\n'
+      + '                . as $run\n'
+      + '                | ([$run.created_at,$run.id] < [$m,$i])\n'
+      + '                  and (($active | index($run.status)) != null\n'
+      + '                    or ($run.status == "completed" and $run.conclusion == "success"))\n'
+      + '                  and (\n'
+      + '                    ($run.display_title\n'
+      + '                      | startswith("[dispatch-source-key=\\($k)] [dispatch-mode=production]"))\n'
+      + '                    or ($run.display_title\n'
+      + '                      | startswith("[dispatch-key=\\($lk)] [dispatch-mode=production]"))\n'
+      + '                    or ($run.display_title\n'
+      + '                      | startswith("[dispatch-source=\\($s)] [dispatch-mode=production]"))\n'
+      + '                  )\n'
+      + '              )\n'
+      + '            \' <<<"$runs" >/dev/null 2>/dev/null; then skip_generation_slot duplicate-dispatch-source; elif [ "$?" -ne 1 ]; then fail_closed_admission; fi\n'
+      + '          fi\n',
     replace: '',
   },
   {
@@ -326,13 +370,13 @@ export const CORE_REPLACEMENTS = [
   {
     id: 'admit: il core cantonale non riceve dispatch_origin',
     count: 1,
-    find: '          if [ "$EVENT_NAME" = "workflow_dispatch" ] \\\n'
+    find: '          explicit_dispatch=false\n'
+      + '          if [ "$EVENT_NAME" = "workflow_dispatch" ] \\\n'
       + '            && { [ "$dispatch_origin" = "manual" ] || [ "$dispatch_origin" = "editorial_signal" ]; }; then\n'
-      + '            echo "Dispatch manuale/editoriale esplicito (chain_depth=$chain_depth) → si procede sempre."\n'
-      + '            echo "proceed=true" >> "$GITHUB_OUTPUT"\n'
-      + '            exit 0\n'
+      + '            explicit_dispatch=true\n'
       + '          fi\n',
-    replace: '          if [ "$EVENT_NAME" = "workflow_dispatch" ] \\\n'
+    replace: '          explicit_dispatch=false\n'
+      + '          if [ "$EVENT_NAME" = "workflow_dispatch" ] \\\n'
       + '            && [ "$is_link" != "true" ] \\\n'
       + '            && [ "$loop_clock_dispatch" != "true" ]; then\n'
       + '            echo "Dispatch manuale cantonale (chain_depth=$chain_depth) → si procede sempre."\n'
@@ -547,7 +591,7 @@ export const CORE_REPLACEMENTS = [
     id: 'lint: ShellCheck vede la chiamata indiretta del trap EXIT',
     count: 1,
     find: '          stall_atexit() {\n',
-    replace: '          # shellcheck disable=SC2317 # chiamata dal trap EXIT, indiretta per ShellCheck.\n'
+    replace: '          # shellcheck disable=SC2317,SC2329 # chiamata dal trap EXIT, indiretta per ShellCheck.\n'
       + '          stall_atexit() {\n',
   },
 ];

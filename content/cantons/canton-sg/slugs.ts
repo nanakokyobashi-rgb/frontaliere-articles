@@ -33,6 +33,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'wil-piano-finanziario-2027-2031': { it: 'wil-piano-finanziario-2027-2031', en: 'wil-financial-plan-2027-2031', de: 'wil-finanzplan-2027-2031', fr: 'wil-plan-financier-2027-2031' },
  'meno-cercatori-lavoro-ottobre': { it: 'meno-cercatori-lavoro-ottobre', en: 'fewer-job-seekers-october', de: 'weniger-stellensuchende-oktober', fr: 'moins-chercheurs-emploi-octobre' },
  'voto-regolamento-fondo-gas-wil': { it: 'voto-regolamento-fondo-gas-wil', en: 'vote-regulation-gas-fund-wil', de: 'abstimmung-reglement-fonds-gas-wil', fr: 'vote-reglement-fonds-gaz-wil' },
+ 'voto-wil-29-novembre-2026': { it: 'voto-wil-29-novembre-2026', en: 'wil-vote-november-29-2026', de: 'wil-wahl-29-november-2026', fr: 'vote-wil-29-novembre-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

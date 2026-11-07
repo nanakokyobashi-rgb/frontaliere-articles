@@ -29,6 +29,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'centro-sicurezza-rothenburg': { it: 'centro-sicurezza-rothenburg', en: 'rothenburg-security-center', de: 'sicherheitszentrum-rothenburg', fr: 'centre-securite-rothenburg' },
  'lucerna-scuole-certificati-medici': { it: 'lucerna-scuole-certificati-medici', en: 'lucerne-schools-medical-certificates', de: 'luzern-schulen-arztzeugnisse', fr: 'lucerne-ecoles-certificats-medicaux' },
  'kriens-riduce-imposte': { it: 'kriens-riduce-imposte', en: 'kriens-tax-cut', de: 'kriens-steuersenkung', fr: 'baisse-impots-kriens' },
+ 'semal-st-klemens-ebikon': { it: 'semal-st-klemens-ebikon', en: 'st-klemens-ebikon-traffic-light', de: 'semafor-st-klemens-ebikon', fr: 'semafore-st-klemens-ebikon' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

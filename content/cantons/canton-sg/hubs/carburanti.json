@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-07T08:17:25.360Z",
-  "contentHash": "8b98c9f818043559201aa0cc22e7e41477401e042380d709fd2c05047049b98b",
+  "updatedAt": "2026-11-07T09:54:40.735Z",
+  "contentHash": "b7aa2a1350aea79360457ee09647bfc1d5cb285a9f8943463223603c259208c5",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Voto a Wil domenica 29 novembre 2026 su proposte comunali e federali",
+          "url": "/articoli-san-gallo/voto-wil-29-novembre-2026/",
+          "excerpt": "Domenica 29 novembre 2026, a Wil saranno sottoposte al voto due proposte comunali.",
+          "date": "2026-11-07T09:39:57.626Z"
+        },
+        {
           "title": "Voto 29 novembre 2026: Regolamento fondo dismissione rete gas TBW",
           "url": "/articoli-san-gallo/voto-regolamento-fondo-gas-wil/",
           "excerpt": "La votazione riguarda il regolamento per il fondo destinato alla dismissione della rete gas TBW, che misura circa 570 km.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/cambiamento-orari-st-gallen/",
           "excerpt": "Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln.",
           "date": "2026-11-03T08:22:04.208Z"
-        },
-        {
-          "title": "Scontro sulla A1 a Gossau: quattro feriti",
-          "url": "/articoli-san-gallo/tamponamento-a1-gossau/",
-          "excerpt": "Incidente tra due auto sulla A1 a Gossau il 29 ottobre 2026: un 55enne ferito in modo significativo, tre feriti lievi e coda verso St.Gallen.",
-          "date": "2026-10-31T10:32:07.607Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-07T08:17:25.360Z"
+      "updatedAt": "2026-11-07T09:54:40.735Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Voting in Wil on Sunday, November 29, 2026, on municipal and federal proposals",
+          "url": "/en/st-gallen-articles/wil-vote-november-29-2026/",
+          "excerpt": "On Sunday, November 29, 2026, two municipal proposals will be put to a vote in Wil.",
+          "date": "2026-11-07T09:39:57.626Z"
+        },
+        {
           "title": "Vote November 29, 2026: Regulation for the TBW gas network decommissioning fund",
           "url": "/en/st-gallen-articles/vote-regulation-gas-fund-wil/",
           "excerpt": "The vote concerns the regulations for the fund intended for the decommissioning of the TBW gas network, which measures approximately 570 km.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/st-gallen-schedule-changes/",
           "excerpt": "The project affects Rosenberg, Schuppis, Grossacker and Winkeln.",
           "date": "2026-11-03T08:22:04.208Z"
-        },
-        {
-          "title": "Crash on the A1 in Gossau: four injured",
-          "url": "/en/st-gallen-articles/gossau-a1-crash/",
-          "excerpt": "Accident involving two cars on the A1 in Gossau on October 29, 2026: a 55-year-old seriously injured, three people with minor injuries, and traffic backed up toward St.Gallen.",
-          "date": "2026-10-31T10:32:07.607Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-07T08:17:25.360Z"
+      "updatedAt": "2026-11-07T09:54:40.735Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Abstimmung in Wil am 29.11.: kommunale & eidg. Vorlagen",
+          "url": "/de/st-gallen-artikel/wil-wahl-29-november-2026/",
+          "excerpt": "Am Sonntag, 29. November 2026, werden in Wil zwei kommunale Vorlagen zur Abstimmung vorgelegt.",
+          "date": "2026-11-07T09:39:57.626Z"
+        },
+        {
           "title": "Abstimmung 29.11.2026: Reglement zum TBW-Gasnetzfonds",
           "url": "/de/st-gallen-artikel/abstimmung-reglement-fonds-gas-wil/",
           "excerpt": "Bei der Abstimmung geht es um das Reglement für den Fonds zur Stilllegung des TBW-Gasnetzes, das rund 570 km lang ist.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/st-gallen-fahrplanwechsel/",
           "excerpt": "Der Entwurf betrifft Rosenberg, Schuppis, Grossacker und Winkeln.",
           "date": "2026-11-03T08:22:04.208Z"
-        },
-        {
-          "title": "Kollision auf der A1 bei Gossau: vier Verletzte",
-          "url": "/de/st-gallen-artikel/auffahrunfall-a1-gossau/",
-          "excerpt": "Der Unfallhergang wird als Heckkollision zwischen zwei Autos beschrieben.",
-          "date": "2026-10-31T10:32:07.607Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-07T08:17:25.360Z"
+      "updatedAt": "2026-11-07T09:54:40.735Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Vote à Wil le 29 novembre 2026 : communal et fédéral",
+          "url": "/fr/articles-saint-gall/vote-wil-29-novembre-2026/",
+          "excerpt": "Le dimanche 29 novembre 2026, deux propositions communales seront soumises au vote à Wil.",
+          "date": "2026-11-07T09:39:57.626Z"
+        },
+        {
           "title": "Vote du 29 novembre 2026 : fonds de démantèlement TBW",
           "url": "/fr/articles-saint-gall/vote-reglement-fonds-gaz-wil/",
           "excerpt": "Le vote porte sur le règlement du fonds destiné au démantèlement du réseau de gaz TBW, qui mesure environ 570 km.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/changements-horaires-st-gallen/",
           "excerpt": "Le projet concerne Rosenberg, Schuppis, Grossacker et Winkeln.",
           "date": "2026-11-03T08:22:04.208Z"
-        },
-        {
-          "title": "Collision sur l’A1 à Gossau : quatre blessés",
-          "url": "/fr/articles-saint-gall/accident-a1-gossau/",
-          "excerpt": "Accident entre deux voitures sur l’A1 à Gossau le 29 octobre 2026 : un homme de 55 ans grièvement blessé, trois blessés légers et un embouteillage en direction de St.Gallen.",
-          "date": "2026-10-31T10:32:07.607Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-07T08:17:25.360Z"
+      "updatedAt": "2026-11-07T09:54:40.735Z"
     }
   }
 }

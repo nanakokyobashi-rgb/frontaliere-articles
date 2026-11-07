@@ -199,6 +199,7 @@ jobs:
           fi
 
 
+          explicit_dispatch=false
           if [ "$EVENT_NAME" = "workflow_dispatch" ] \
             && [ "$is_link" != "true" ] \
             && [ "$loop_clock_dispatch" != "true" ]; then
@@ -284,6 +285,7 @@ jobs:
 
           IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
           ALL_RUN_STATUSES='["queued","in_progress","requested","waiting","pending","completed"]'
+          KNOWN_RUN_CONCLUSIONS='["success","failure","neutral","cancelled","skipped","timed_out","action_required","stale","startup_failure"]'
           admission_window_seconds=3600
           if ! admission_since="$(date -u -d "$admission_window_seconds seconds ago" '+%Y-%m-%dT%H:%M:%SZ')"; then
             fail_closed_admission
@@ -294,7 +296,7 @@ jobs:
             2>/dev/null)"; then
             fail_closed_admission
           fi
-          if ! runs="$(jq -c --argjson known "$ALL_RUN_STATUSES" --arg since "$admission_since" '
+          if ! runs="$(jq -c --argjson known "$ALL_RUN_STATUSES" --argjson known_conclusions "$KNOWN_RUN_CONCLUSIONS" --arg since "$admission_since" '
             . as $pages
             | if (type == "array" and length > 0)
                 and all(.[];
@@ -314,13 +316,22 @@ jobs:
                     and (.created_at >= $since)
                     and (.status | type) == "string"
                     and (.status as $status | ($known | index($status)) != null)
+                    and has("conclusion")
+                    and (
+                      (.status != "completed" and .conclusion == null)
+                      or (
+                        .status == "completed"
+                        and (.conclusion | type) == "string"
+                        and (.conclusion as $conclusion | ($known_conclusions | index($conclusion)) != null)
+                      )
+                    )
                   ))
                 and (($pages | map(.total_count) | unique | length) == 1)
                 and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
                 and (([$pages[].workflow_runs[].id] | unique | length)
                   == ([$pages[].workflow_runs[]] | length))
               then
-                [$pages[].workflow_runs[] | {id: .id, created_at: .created_at, status: .status}]
+                [$pages[].workflow_runs[] | {id, created_at, status, conclusion}]
               else
                 error("generation run listing incomplete")
               end
@@ -372,6 +383,13 @@ jobs:
           fi
           if [ -z "${self_created:-}" ]; then
             fail_closed_admission
+          fi
+
+
+          if [ "$explicit_dispatch" = "true" ]; then
+            echo "Dispatch manuale/editoriale esplicito (chain_depth=$chain_depth) → si procede."
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
 
           parent_id="${PARENT_RUN_ID:-}"
@@ -864,7 +882,7 @@ jobs:
           }
 
           watch_pid=""
-          # shellcheck disable=SC2317 # chiamata dal trap EXIT, indiretta per ShellCheck.
+          # shellcheck disable=SC2317,SC2329 # chiamata dal trap EXIT, indiretta per ShellCheck.
           stall_atexit() {
             kill_tree KILL "${watch_pid:-}"
             kill_tree KILL "${tee_pid:-}"

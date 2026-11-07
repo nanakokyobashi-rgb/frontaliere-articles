@@ -93,6 +93,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.voto-regolamento-fondo-gas-wil.title': 'Abstimmung 29.11.2026: Reglement zum TBW-Gasnetzfonds',
     'blog.article.voto-regolamento-fondo-gas-wil.excerpt': 'Bei der Abstimmung geht es um das Reglement für den Fonds zur Stilllegung des TBW-Gasnetzes, das rund 570 km lang ist.',
     'blog.article.voto-regolamento-fondo-gas-wil.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.voto-wil-29-novembre-2026.title': 'Abstimmung in Wil am 29.11.: kommunale & eidg. Vorlagen',
+    'blog.article.voto-wil-29-novembre-2026.excerpt': 'Am Sonntag, 29. November 2026, werden in Wil zwei kommunale Vorlagen zur Abstimmung vorgelegt.',
+    'blog.article.voto-wil-29-novembre-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

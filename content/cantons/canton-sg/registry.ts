@@ -336,4 +336,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'voto-wil-29-novembre-2026',
+ category: 'pratico',
+ date: '2026-11-07T09:39:57.626Z',
+ image: '/images/blog/article-voto-wil-29-novembre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
