@@ -5,7 +5,9 @@ import os from 'node:os';
 import path from 'node:path';
 import {
   OBSERVER_USER_AGENT,
+  MAX_ISSUE_DESCRIPTION_BYTES,
   buildObserverTargets,
+  compactIssueDescription,
   parseCoverageLedger,
   renderCoverageLedger,
   formatObserverReport,
@@ -504,6 +506,19 @@ test('il tetto di pagine taglia i cambi più vecchi, non la fine dell’alfabeto
   assert.equal(result.maxPages, 1);
   assert.match(formatObserverReport(result, { nowMs }), /limite: 1/);
   assert.match(formatObserverReport(result, { nowMs }), /2 più vecchie nella finestra non sono state lette/);
+});
+
+test('il report passato alla issue resta sotto il budget argv e indica il dettaglio omesso', () => {
+  const source = [
+    'Controllate: 2000; in ritardo: 2000; immagini degradate: 0; limite: 5000.',
+    ...Array.from({ length: 1000 }, (_, index) => `- Ritardo articolo-${index} — ${'x'.repeat(80)}`),
+  ].join('\n');
+  const compact = compactIssueDescription(source);
+
+  assert.ok(Buffer.byteLength(compact, 'utf8') <= MAX_ISSUE_DESCRIPTION_BYTES);
+  assert.match(compact, /Controllate: 2000/);
+  assert.match(compact, /Report troncato prima dell'invio a GitHub/);
+  assert.ok(compact.length < source.length);
 });
 
 function observerRoot() {
