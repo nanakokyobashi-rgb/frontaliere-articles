@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-disoccupazione-stabile-ottobre.webp",
+      "sha256": "6bb4a258f6cae8b59e0f5573eeccdc51b67427bf78ddb51a1b3fa4f7f66c714b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-disoccupazione-stabile-ottobre-480w.webp",
+      "sha256": "12bf5f4b26a5e207337d6c1598511e4b2b45c03a55f92a52dec3e1a916f46fe0"
+    }
+  ]
 }
