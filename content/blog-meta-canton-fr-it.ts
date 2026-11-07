@@ -72,6 +72,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.berra-2030-progetto-canton.title': 'Cantone propone 3,54 milioni per stazione intermedia Berra 2030',
     'blog.article.berra-2030-progetto-canton.excerpt': 'Il Cantone propone di sostenere con 3,54 milioni di franchi la creazione di una stazione intermedia sul télémixte, nell’ambito di Berra 2030.',
     'blog.article.berra-2030-progetto-canton.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.neyruz-strada-cantonale-valtraloc.title': 'Neyruz: lavori Valtraloc, conclusione autunno 2028',
+    'blog.article.neyruz-strada-cantonale-valtraloc.excerpt': 'La strada cantonale di Neyruz entrerà in cantiere. Il progetto Valtraloc prevede la valorizzazione degli spazi, conclusione prevista per l\'autunno 2028.',
+    'blog.article.neyruz-strada-cantonale-valtraloc.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonFrIt;

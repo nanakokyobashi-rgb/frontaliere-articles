@@ -57,6 +57,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.sussidi-premi-basel-2027.title': 'Bâle-Ville augmente les subventions aux primes pour 2027',
     'blog.article.sussidi-premi-basel-2027.excerpt': 'Le Gouvernement de Bâle-Ville adapte les contributions aux primes : +4,4% pour les adultes, +4,9% pour les enfants, +3,6% pour les jeunes adultes et environ CHF 243 millions de dépenses.',
     'blog.article.sussidi-premi-basel-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.osttangente-riapertura-basilea.title': 'Réouverture des accès Osttangente à Bâle le 16 novembre 2026',
+    'blog.article.osttangente-riapertura-basilea.excerpt': 'Le 16 novembre 2026, la sortie Wettsteinallee et l\'entrée Riehenstrasse rouvrent ; la Schwarzwaldstrasse sous l\'A2 sera praticable.',
+    'blog.article.osttangente-riapertura-basilea.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;

@@ -205,4 +205,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'osttangente-riapertura-basilea',
+ category: 'pratico',
+ date: '2026-11-07T12:34:26.574Z',
+ image: '/images/blog/article-osttangente-riapertura-basilea.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
