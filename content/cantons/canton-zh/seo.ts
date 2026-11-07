@@ -1011,6 +1011,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-zurigo-budget-rivalutazione-immobili': {
+    title: 'Zurigo: rivalutazione immobili per affitti accessibili',
+    description: 'La Città di Zurigo prevede un guadagno contabile di 2,5 miliardi di franchi per garantire affitti accessibili tramite un pacchetto straordinario.',
+    keywords: 'frontalieri, ticino, svizzera, italia, zurigo, rivalutazione, immobili, affitti',
+    ogTitle: 'Zurigo: 2,5 miliardi per affitti accessibili',
+    ogDescription: 'La Città di Zurigo utilizzerà un guadagno contabile stimato di 2,5 miliardi di franchi per un pacchetto straordinario dedicato all\'abitare e all\'edilizia di utilità pubblica.',
+    canonicalPath: '/articoli-zurigo/zurigo-budget-rivalutazione-immobili/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zurigo: rivalutazione immobili per affitti accessibili",
+      "description": "La Città di Zurigo prevede un guadagno contabile di 2,5 miliardi di franchi per garantire affitti accessibili tramite un pacchetto straordinario.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-zurigo-budget-rivalutazione-immobili.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-07T00:01:52+00:00",
+      "dateModified": "2026-11-07T00:01:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/zurigo-budget-rivalutazione-immobili/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

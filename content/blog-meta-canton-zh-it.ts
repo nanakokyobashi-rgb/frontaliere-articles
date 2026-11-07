@@ -81,6 +81,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.cassa-pensione-stop-sistema.title': 'Cassa pensione Zurigo: stop al cambio di sistema',
     'blog.article.cassa-pensione-stop-sistema.excerpt': 'Dopo un cyberattacco a una società software, la cassa pensione della città di Zurigo ha fermato il cambio di sistema, secondo il Tages-Anzeiger.',
     'blog.article.cassa-pensione-stop-sistema.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.zurigo-budget-rivalutazione-immobili.title': 'Zurigo: rivalutazione immobili per affitti accessibili',
+    'blog.article.zurigo-budget-rivalutazione-immobili.excerpt': 'La Città di Zurigo stima un guadagno contabile di 2,5 miliardi di franchi nel budget 2027 per sostenere l\'edilizia di utilità pubblica.',
+    'blog.article.zurigo-budget-rivalutazione-immobili.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZhIt;

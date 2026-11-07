@@ -81,6 +81,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.cassa-pensione-stop-sistema.title': 'Caisse de pension de Zurich : arrêt du changement de système',
     'blog.article.cassa-pensione-stop-sistema.excerpt': 'Après une cyberattaque contre une société de logiciels, la caisse de pension de la ville de Zurich a interrompu le changement de système, selon le Tages-Anzeiger.',
     'blog.article.cassa-pensione-stop-sistema.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.zurigo-budget-rivalutazione-immobili.title': 'Zurich : revalorisation des biens immobiliers pour des loyers abordables',
+    'blog.article.zurigo-budget-rivalutazione-immobili.excerpt': 'La Ville de Zurich estime un gain comptable de 2,5 milliards de francs dans le budget 2027 pour soutenir la construction de logements d’utilité publique.',
+    'blog.article.zurigo-budget-rivalutazione-immobili.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;

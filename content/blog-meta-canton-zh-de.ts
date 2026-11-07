@@ -81,6 +81,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.cassa-pensione-stop-sistema.title': 'Pensionskasse Zürich: Stopp des Systemwechsels',
     'blog.article.cassa-pensione-stop-sistema.excerpt': 'Nach einem Cyberangriff auf ein Softwareunternehmen hat die Pensionskasse der Stadt Zürich den Systemwechsel gestoppt, wie der Tages-Anzeiger berichtet.',
     'blog.article.cassa-pensione-stop-sistema.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zurigo-budget-rivalutazione-immobili.title': 'Zürich: Neubewertung von Immobilien für erschwingliche Mieten',
+    'blog.article.zurigo-budget-rivalutazione-immobili.excerpt': 'Die Stadt Zürich schätzt im Budget 2027 einen Buchgewinn von 2,5 Milliarden Franken, um den gemeinnützigen Wohnungsbau zu unterstützen.',
+    'blog.article.zurigo-budget-rivalutazione-immobili.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

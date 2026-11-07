@@ -81,6 +81,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.cassa-pensione-stop-sistema.title': 'Zurich pension fund: halt to the system change',
     'blog.article.cassa-pensione-stop-sistema.excerpt': 'After a cyberattack on a software company, the city of Zurich’s pension fund halted the system change, according to the Tages-Anzeiger.',
     'blog.article.cassa-pensione-stop-sistema.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.zurigo-budget-rivalutazione-immobili.title': 'Zurich: property revaluation for affordable rents',
+    'blog.article.zurigo-budget-rivalutazione-immobili.excerpt': 'The City of Zurich estimates an accounting gain of 2,5 billion francs in the 2027 budget to support public-interest housing.',
+    'blog.article.zurigo-budget-rivalutazione-immobili.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;

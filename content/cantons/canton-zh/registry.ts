@@ -292,4 +292,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'zurigo-budget-rivalutazione-immobili',
+ category: 'novita',
+ date: '2026-11-07T00:01:51.984Z',
+ image: '/images/blog/article-zurigo-budget-rivalutazione-immobili.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
