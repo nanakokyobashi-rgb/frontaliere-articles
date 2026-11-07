@@ -939,6 +939,20 @@ test('Cloud Scheduler possiede un contratto di slot fail-closed nel workflow cor
   assert.match(admit, /cloud_scheduler\)/);
 });
 
+test('un retry del dispatch con la stessa URL viene deduplicato dal ricevitore', () => {
+  const runName = WF.split('\n').find((line) => line.startsWith('run-name:')) || '';
+  const admit = extractRun('Skip when a generation is already in flight');
+  assert.ok(runName.includes('inputs.url'), 'la URL sorgente deve entrare nell’identità osservabile della run');
+  assert.match(WF, /SOURCE_URL: \$\{\{ inputs\.url \}\}/);
+  assert.match(admit, /display_title: \(\.display_title \/\/ ""\)/);
+  assert.match(admit, /duplicate-dispatch-source/);
+  assert.match(admit, /contains\("\[dispatch-source=" \+ \$source \+ "\]"\)/);
+  const dedupeAt = admit.indexOf('duplicate-dispatch-source');
+  const explicitAt = admit.indexOf('if [ "$explicit_dispatch" = "true" ]');
+  assert.ok(dedupeAt >= 0 && explicitAt > dedupeAt, 'la deduplica deve precedere l’eccezione manuale/editoriale');
+  assert.match(admit, /one-hour admission window/);
+});
+
 test('dispatch origin: input mancanti e combinazioni incoerenti falliscono chiusi', () => {
   const admit = extractRun('Skip when a generation is already in flight');
   const start = admit.indexOf('dispatch_origin="${DISPATCH_ORIGIN:-}"');

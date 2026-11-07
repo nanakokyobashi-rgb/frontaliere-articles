@@ -1,7 +1,7 @@
 name: Generate Blog Article
 # generation-cloud-clock-contract: v1
 # generation-cloud-slot-minutes: 7,37
-run-name: ${{ format('[loop-clock {0}] [generation-slot {1}] Generate Blog Article', inputs.loop_clock || 'manual', inputs.recovery_slot || 'none') }}
+run-name: ${{ format('[dispatch-source={0}] [loop-clock {1}] [generation-slot {2}] Generate Blog Article', inputs.url || 'auto-scan', inputs.loop_clock || 'manual', inputs.recovery_slot || 'none') }}
 
 # The last producer to move (issue #4974 item 3, §4/§5). Scans for a source,
 # generates a full multi-language article and registers it into the corpus this
@@ -376,6 +376,7 @@ jobs:
           CALLER_WORKFLOW: generate-article.yml
           DRY_RUN: ${{ inputs.dry_run }}
           SECTION_REQUESTED: ${{ inputs.section }}
+          SOURCE_URL: ${{ inputs.url }}
           DISPATCH_ORIGIN: ${{ inputs.dispatch_origin }}
           LOOP_CLOCK: ${{ inputs.loop_clock }}
           RECOVERY_SLOT: ${{ inputs.recovery_slot }}
@@ -677,11 +678,10 @@ jobs:
             skip_generation_slot native-schedule-retired
           fi
 
+          explicit_dispatch=false
           if [ "$EVENT_NAME" = "workflow_dispatch" ] \
             && { [ "$dispatch_origin" = "manual" ] || [ "$dispatch_origin" = "editorial_signal" ]; }; then
-            echo "Dispatch manuale/editoriale esplicito (chain_depth=$chain_depth) → si procede sempre."
-            echo "proceed=true" >> "$GITHUB_OUTPUT"
-            exit 0
+            explicit_dispatch=true
           fi
 
           if [ "$EVENT_NAME" = "push" ] && [ -n "${PUSH_BEFORE:-}" ]; then
@@ -797,13 +797,19 @@ jobs:
                     and (.created_at >= $since)
                     and (.status | type) == "string"
                     and (.status as $status | ($known | index($status)) != null)
+                    and ((.display_title == null) or (.display_title | type) == "string")
                   ))
                 and (($pages | map(.total_count) | unique | length) == 1)
                 and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
                 and (([$pages[].workflow_runs[].id] | unique | length)
                   == ([$pages[].workflow_runs[]] | length))
               then
-                [$pages[].workflow_runs[] | {id: .id, created_at: .created_at, status: .status}]
+                [$pages[].workflow_runs[] | {
+                  id: .id,
+                  created_at: .created_at,
+                  status: .status,
+                  display_title: (.display_title // "")
+                }]
               else
                 error("generation run listing incomplete")
               end
@@ -864,6 +870,45 @@ jobs:
           fi
           if [ -z "${self_created:-}" ]; then
             fail_closed_admission
+          fi
+
+          # A producer retry is ambiguous by design: GitHub may have accepted
+          # the first workflow_dispatch and still return HTTP 5xx. The second
+          # receiver run must therefore be idempotent on the stable source URL,
+          # not merely serialized behind the first run. `run-name` carries the
+          # exact input URL into the Actions run snapshot above; the older run
+          # wins, while a distinct URL remains an independent request. The
+          # one-hour admission window bounds the key's lifetime so a later
+          # deliberate editorial refresh is not swallowed forever.
+          same_source_older=0
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ -n "${SOURCE_URL:-}" ]; then
+            if ! same_source_older="$(printf '%s' "$runs" \
+              | jq -r --arg source "$SOURCE_URL" --arg mine "$self_created" --argjson me "$SELF_ID" '
+                  [ .[]
+                    | select(.id != $me)
+                    | select(.created_at < $mine or (.created_at == $mine and .id < $me))
+                    | select(.display_title | contains("[dispatch-source=" + $source + "]"))
+                  ] | length' 2>/dev/null)"; then
+              fail_closed_admission
+            fi
+            case "$same_source_older" in
+              ''|*[!0-9]*) fail_closed_admission ;;
+            esac
+            if [ "$same_source_older" -gt 0 ]; then
+              echo "Dispatch duplicato per la stessa source URL: una run più vecchia è già presente ($SOURCE_URL) → skip idempotente."
+              if ! release_generation_claim; then
+                echo "::warning::claim non rilasciato esplicitamente; lease e retry Cloud Scheduler restano il fallback."
+              fi
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              echo "GENERATION_OUTCOME kind=skipped reason=duplicate-dispatch-source section=unknown"
+              exit 0
+            fi
+          fi
+
+          if [ "$explicit_dispatch" = "true" ]; then
+            echo "Dispatch manuale/editoriale esplicito (chain_depth=$chain_depth) → si procede."
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
 
           # Si cede solo a chi è PIÙ VECCHIO. Il confronto asimmetrico è ciò che
