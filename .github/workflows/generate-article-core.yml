@@ -872,7 +872,7 @@ jobs:
           }
 
           watch_pid=""
-          # shellcheck disable=SC2317 # chiamata dal trap EXIT, indiretta per ShellCheck.
+          # shellcheck disable=SC2317,SC2329 # chiamata dal trap EXIT, indiretta per ShellCheck.
           stall_atexit() {
             kill_tree KILL "${watch_pid:-}"
             kill_tree KILL "${tee_pid:-}"

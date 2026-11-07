@@ -1850,7 +1850,7 @@ jobs:
           # sotto) e comunque all'uscita, qualunque ramo la produca.
           watch_pid=""
           # The EXIT trap invokes this function indirectly.
-          # shellcheck disable=SC2317 # chiamata dal trap EXIT, indiretta per ShellCheck.
+          # shellcheck disable=SC2317,SC2329 # chiamata dal trap EXIT, indiretta per ShellCheck.
           stall_atexit() {
             kill_tree KILL "${watch_pid:-}"
             kill_tree KILL "${tee_pid:-}"

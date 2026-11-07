@@ -144,7 +144,7 @@ test('nessun nome della coppia storica resta cablato nelle righe eseguibili del 
   const comments = jobs.split('\n').filter((line) => line.trim().startsWith('#'));
   assert.deepEqual(
     comments,
-    ['          # shellcheck disable=SC2317 # chiamata dal trap EXIT, indiretta per ShellCheck.'],
+    ['          # shellcheck disable=SC2317,SC2329 # chiamata dal trap EXIT, indiretta per ShellCheck.'],
     'il core non copia la prosa della sorgente e mantiene solo la direttiva lint necessaria',
   );
   for (const literal of ['generate-article.yml', 'blog-body']) {

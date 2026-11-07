@@ -566,7 +566,7 @@ export const CORE_REPLACEMENTS = [
     id: 'lint: ShellCheck vede la chiamata indiretta del trap EXIT',
     count: 1,
     find: '          stall_atexit() {\n',
-    replace: '          # shellcheck disable=SC2317 # chiamata dal trap EXIT, indiretta per ShellCheck.\n'
+    replace: '          # shellcheck disable=SC2317,SC2329 # chiamata dal trap EXIT, indiretta per ShellCheck.\n'
       + '          stall_atexit() {\n',
   },
 ];
