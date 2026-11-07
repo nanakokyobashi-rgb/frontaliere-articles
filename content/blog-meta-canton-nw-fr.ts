@@ -27,6 +27,9 @@ const blogMetaCantonNwFr: Record<string, string> = {
     'blog.article.chiusura-imbocco-dorfstrasse.title': 'Dorfstrasse : entrée fermée du 9 au 27 novembre 2026',
     'blog.article.chiusura-imbocco-dorfstrasse.excerpt': 'L’entrée de la Dorfstrasse sera fermée du 9 au 27 novembre 2026 pour des travaux ; la note indique quatre routes pour y accéder.',
     'blog.article.chiusura-imbocco-dorfstrasse.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.tassa-circolazione-veicoli-categoria-a.title': 'Véhicules A: taxe de circulation exonérée à Nidwald, 36 mois',
+    'blog.article.tassa-circolazione-veicoli-categoria-a.excerpt': 'Dans le canton de Nidwald, les véhicules classés dans la catégorie d’efficacité A sont aujourd’hui exemptés de la taxe de circulation pendant les 36 premiers mois suivant leur première mise en circulation.',
+    'blog.article.tassa-circolazione-veicoli-categoria-a.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNwFr;

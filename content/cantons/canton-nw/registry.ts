@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tassa-circolazione-veicoli-categoria-a',
+ category: 'fiscale',
+ date: '2026-11-07T11:05:42.871Z',
+ image: '/images/blog/article-tassa-circolazione-veicoli-categoria-a.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NW'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
