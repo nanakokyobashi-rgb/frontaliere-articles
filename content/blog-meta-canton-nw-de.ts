@@ -24,6 +24,9 @@ const blogMetaCantonNwDe: Record<string, string> = {
     'blog.article.hergiswil-bergstrasse-gru.title': 'Hergiswil: Bergstrasse 4 am 25.11.2026 gesperrt',
     'blog.article.hergiswil-bergstrasse-gru.excerpt': 'Im betroffenen Abschnitt wird die Bergstrasse während des Abbaus des Krans als vollständig gesperrt angegeben.',
     'blog.article.hergiswil-bergstrasse-gru.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.chiusura-imbocco-dorfstrasse.title': 'Dorfstrasse: Zufahrt vom 9. bis 27. November 2026 gesperrt',
+    'blog.article.chiusura-imbocco-dorfstrasse.excerpt': 'Die Zufahrt zur Dorfstrasse wird vom 9. bis 27. November 2026 wegen Bauarbeiten gesperrt; in der Mitteilung werden vier Strassen als Zugang angegeben.',
+    'blog.article.chiusura-imbocco-dorfstrasse.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNwDe;

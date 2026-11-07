@@ -24,6 +24,9 @@ const blogMetaCantonNwIt: Record<string, string> = {
     'blog.article.hergiswil-bergstrasse-gru.title': 'Hergiswil: Bergstrasse 4 chiusa il 25.11.2026',
     'blog.article.hergiswil-bergstrasse-gru.excerpt': 'A Hergiswil il tratto interessato della Bergstrasse sarà chiuso il 25 novembre 2026 per lo smontaggio di una gru.',
     'blog.article.hergiswil-bergstrasse-gru.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.chiusura-imbocco-dorfstrasse.title': 'Dorfstrasse: imbocco chiuso dal 9 al 27 novembre 2026',
+    'blog.article.chiusura-imbocco-dorfstrasse.excerpt': 'L\'imbocco della Dorfstrasse sarà chiuso dal 9 al 27 novembre 2026 per lavori; la nota indica quattro strade per l\'accesso.',
+    'blog.article.chiusura-imbocco-dorfstrasse.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNwIt;

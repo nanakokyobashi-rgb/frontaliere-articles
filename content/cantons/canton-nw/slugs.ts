@@ -10,6 +10,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'hergiswil-fattura-fiscale-online': { it: 'hergiswil-fattura-fiscale-online', en: 'hergiswil-provisional-tax-bill', de: 'hergiswil-provisorische-steuerrechnung', fr: 'hergiswil-facture-fiscale-provisoire' },
  'chiusura-ponte-scheidgraben': { it: 'chiusura-ponte-scheidgraben', en: 'scheidgraben-bridge-closure', de: 'sperrung-scheidgraben-bruecke', fr: 'fermeture-pont-scheidgraben' },
  'hergiswil-bergstrasse-gru': { it: 'hergiswil-bergstrasse-gru', en: 'hergiswil-bergstrasse-crane', de: 'hergiswil-bergstrasse-kran', fr: 'hergiswil-bergstrasse-grue' },
+ 'chiusura-imbocco-dorfstrasse': { it: 'chiusura-imbocco-dorfstrasse', en: 'dorfstrasse-junction-closure', de: 'sperrung-dorfstrasse-einmuendung', fr: 'fermeture-acces-dorfstrasse' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
