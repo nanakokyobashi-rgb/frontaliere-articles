@@ -292,4 +292,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'consiglio-stato-approva-pratiche',
+ category: 'novita',
+ date: '2026-11-07T13:23:00.798Z',
+ image: '/images/blog/article-consiglio-stato-approva-pratiche.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

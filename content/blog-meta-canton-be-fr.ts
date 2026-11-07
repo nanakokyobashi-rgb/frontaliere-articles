@@ -81,6 +81,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.revisione-legge-personale-berna.title': 'Le Gouvernement de Berne ouvre la consultation sur la loi sur le personnel',
     'blog.article.revisione-legge-personale-berna.excerpt': 'Le Gouvernement cantonal ouvre la consultation sur la révision partielle de la loi sur le personnel : le délai est fixé au 12 février 2027.',
     'blog.article.revisione-legge-personale-berna.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.consiglio-stato-approva-pratiche.title': 'Conseil d\'État approuve soutien AfA, nomme et révise l\'AFV',
+    'blog.article.consiglio-stato-approva-pratiche.excerpt': 'Le Conseil d\'État a approuvé CHF 360\'000 pour l\'AfA (2026-2028), la nomination de Sabine Dändliker (à partir du 1er avril 2027) et la révision partielle du Polizeigesetz (AFV).',
+    'blog.article.consiglio-stato-approva-pratiche.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

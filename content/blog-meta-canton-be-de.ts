@@ -81,6 +81,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.revisione-legge-personale-berna.title': 'Regierung des Kantons Bern eröffnet Vernehmlassung zum Personalgesetz',
     'blog.article.revisione-legge-personale-berna.excerpt': 'Die Kantonsregierung eröffnet die Vernehmlassung zur Teilrevision des Personalgesetzes: Die Frist ist auf den 12. Februar 2027 festgelegt.',
     'blog.article.revisione-legge-personale-berna.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.consiglio-stato-approva-pratiche.title': 'Staatsrat genehmigt Unterstützung für AfA, Ernennung und Revision der AFV',
+    'blog.article.consiglio-stato-approva-pratiche.excerpt': 'Der Staatsrat hat CHF 360\'000 für die AfA (2026-2028), die Ernennung von Sabine Dändliker (ab 1. April 2027) und die Teilrevision des Polizeigesetzes (AFV) genehmigt.',
+    'blog.article.consiglio-stato-approva-pratiche.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;

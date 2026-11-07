@@ -1006,6 +1006,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-consiglio-stato-approva-pratiche': {
+    title: 'Consiglio di Stato approva sostegno AfA, nomina e revisione AFV',
+    description: 'Il Consiglio di Stato del Canton Berna ha approvato CHF 360\'000 per l\'AfA, la nomina di Sabine Dändliker dal 1° aprile 2027 e un credito.',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, stato, approva, sostegno',
+    ogTitle: 'Consiglio di Stato Berna approva sostegno AfA e nomina',
+    ogDescription: 'Il Consiglio di Stato del Canton Berna ha approvato diverse pratiche, inclusi CHF 360\'000 per l\'AfA (2026-2028), la nomina di Sabine Dändliker dal 1° aprile 2027 e un credito di CHF 740\'000 per Kirchlindach.',
+    canonicalPath: '/articoli-berna/consiglio-stato-approva-pratiche/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio di Stato approva sostegno AfA, nomina e revisione AFV",
+      "description": "Il Consiglio di Stato del Canton Berna ha approvato CHF 360'000 per l'AfA, la nomina di Sabine Dändliker dal 1° aprile 2027 e un credito.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-consiglio-stato-approva-pratiche.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-07T13:23:00+00:00",
+      "dateModified": "2026-11-07T13:23:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/consiglio-stato-approva-pratiche/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
