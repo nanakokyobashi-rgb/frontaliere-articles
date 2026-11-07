@@ -39,6 +39,9 @@ const blogMetaCantonSzFr: Record<string, string> = {
     'blog.article.ricerca-fisco-aziende-svitto.title': 'Schwyz, la recherche devrait être plus avantageuse pour les entreprises',
     'blog.article.ricerca-fisco-aziende-svitto.excerpt': 'Bote.ch relie la recherche à l’attractivité fiscale pour les entreprises du canton de Schwyz, mais les informations disponibles n’indiquent ni mesures, ni chiffres, ni dates.',
     'blog.article.ricerca-fisco-aziende-svitto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.martinimarkt-principale-strada-chiusa.title': 'Martinimarkt : accès et sortie impossibles sur Hauptstrasse',
+    'blog.article.martinimarkt-principale-strada-chiusa.excerpt': 'De 6.00 à 20.00 pendant toute la journée du marché, l’accès et la sortie sont interdits sur Hauptstrasse entre Dorfplatz et Benzigerstrasse.',
+    'blog.article.martinimarkt-principale-strada-chiusa.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSzFr;

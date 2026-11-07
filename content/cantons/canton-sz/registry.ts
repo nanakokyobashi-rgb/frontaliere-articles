@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'martinimarkt-principale-strada-chiusa',
+ category: 'pratico',
+ date: '2026-11-07T08:08:34.915Z',
+ image: '/images/blog/article-martinimarkt-principale-strada-chiusa.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SZ'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
