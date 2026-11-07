@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/705696/%c3%b6vunternehmen-spannen-bei-handyapp-zusammen": {
-      "section": "canton-be",
-      "ts": 1793909421056
-    },
     "canton-be::https://ajour.ch/story/705628/mehr-arbeitslose-im-kanton-bern%c2%a0-biel-bleibt-auf-hohem-niveau": {
       "section": "canton-be",
       "ts": 1793935765795
@@ -95,6 +91,34 @@
     "canton-be::https://ajour.ch/story/705949/strassensperrung-infolge-holzschlag-im-bl%c3%a4siwald-neuegglehn": {
       "section": "canton-be",
       "ts": 1794010902315
+    },
+    "canton-be::https://ajour.ch/story/706127/la-conseillre-municipale-socialiste-sandra-friedli-sexprime-sur-les-bouchons-de-la-route-de-berne": {
+      "section": "canton-be",
+      "ts": 1794088351086
+    },
+    "canton-be::https://ajour.ch/story/706070/sbb-planen-neue-direktz%c3%bcge-in-f%c3%bcnf-europ%c3%a4ische-st%c3%a4dte-london-bleibt-schwierig": {
+      "section": "canton-be",
+      "ts": 1794088352601
+    },
+    "canton-be::https://ajour.ch/story/706071/les-cff-prvoient-de-nouvelles-liaisons-directes-vers-cinq-villes-europennes-londres-reste-un-cas-difficile": {
+      "section": "canton-be",
+      "ts": 1794088354003
+    },
+    "canton-be::https://ajour.ch/story/705850/das-droht-arbeitnehmenden-bei-einem-nein-zur-ahvreform": {
+      "section": "canton-be",
+      "ts": 1794088363163
+    },
+    "canton-be::https://ajour.ch/story/705696/%c3%b6vunternehmen-spannen-bei-handyapp-zusammen": {
+      "section": "canton-be",
+      "ts": 1794088365111
+    },
+    "canton-be::https://ajour.ch/story/705611/post-greift-swisscom-an-so-viel-kosten-die-neuen-internet-und-tvabos": {
+      "section": "canton-be",
+      "ts": 1794088368476
+    },
+    "canton-be::https://ajour.ch/story/705911/warum-berns-wirtschaft-kleiner-ist-als-gedacht": {
+      "section": "canton-be",
+      "ts": 1794088369487
     }
   }
 }
