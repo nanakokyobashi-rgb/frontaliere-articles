@@ -162,6 +162,54 @@ function _preferisceModelloSenzaCap(prefer) {
       && getDeclaredRequestTokenLimit(m) === undefined,
   );
 }
+
+/**
+ * Check whether the currently available roster contains at least one model
+ * that can accept the smallest article-generation call. `providerRosterReady`
+ * only answers whether a model is available; `callLLM` applies the input-cap
+ * check later, after the source scan has already spent its budget. The split
+ * body call has a hard scaffold floor, so a roster made only of lower caps
+ * cannot generate an article even after every reducible input block is gone.
+ *
+ * The cap lookup deliberately reuses `getDeclaredRequestTokenLimit`, the same
+ * source used by `callLLM`, including runtime-learned limits. An undefined cap
+ * remains eligible: it is the contract for a lane such as Codex whose input
+ * limit is not declared to this router.
+ */
+function providerInputCapGuard(models) {
+  const eligibleModels = [];
+  const rejectedModels = [];
+  if (!Array.isArray(models)) {
+    return {
+      ready: false,
+      minimumInputTokens: PROMPT_SCAFFOLD_FLOOR_TOKENS,
+      eligibleModels,
+      rejectedModels,
+    };
+  }
+
+  for (const model of models) {
+    let requestLimit;
+    try {
+      requestLimit = getDeclaredRequestTokenLimit(model);
+    } catch {
+      rejectedModels.push({ model, requestLimit: null, reason: 'input-cap-unreadable' });
+      continue;
+    }
+    if (requestLimit === undefined || requestLimit >= PROMPT_SCAFFOLD_FLOOR_TOKENS) {
+      eligibleModels.push({ model, requestLimit: requestLimit ?? null });
+    } else {
+      rejectedModels.push({ model, requestLimit, reason: 'below-prompt-scaffold-floor' });
+    }
+  }
+
+  return {
+    ready: eligibleModels.length > 0,
+    minimumInputTokens: PROMPT_SCAFFOLD_FLOOR_TOKENS,
+    eligibleModels,
+    rejectedModels,
+  };
+}
 // Quota-free MT cascade (DeepL-free / Google / MyMemory / LibreTranslate /
 // local Opus-MT) — the SAME translator the job crawlers + FAQ batch use
 // (scripts/lib/dedicated-crawler-common.mjs, batch-add-faq-to-articles.mjs).
@@ -18453,6 +18501,7 @@ async function main() {
     const rosterOptions = { chain: [...DEFAULT_CHAIN, ...PREFERRED_GENERATION_MODELS] };
     const rosterReady = providerRosterReady(rosterOptions);
     const roster = getProviderRosterStatus(rosterOptions);
+    const inputCapGuard = providerInputCapGuard(roster.availableModels);
     RUN_REPORT.providerRosterPreflight = {
       scope: 'runtime-model-eligibility',
       ready: rosterReady,
@@ -18463,12 +18512,19 @@ async function main() {
       availableModelCount: roster.availableModels.length,
       availableProviders: roster.availableProviders,
       reason: roster.reason,
+      inputCapGuard,
     };
     console.error(
       `PROVIDER_ROSTER ready=${rosterReady} size=${roster.rosterSize}`
       + ` available=${roster.availableModels.length}`
       + ` providers=${roster.availableProviders.join(',') || 'none'}`
       + ` reason=${roster.reason}`,
+    );
+    console.error(
+      `PROVIDER_INPUT_CAP ready=${inputCapGuard.ready}`
+      + ` floor=${inputCapGuard.minimumInputTokens}`
+      + ` eligible=${inputCapGuard.eligibleModels.map(({ model }) => model).join(',') || 'none'}`
+      + ` rejected=${inputCapGuard.rejectedModels.map(({ model, requestLimit }) => `${model}:${requestLimit ?? 'unreadable'}`).join(',') || 'none'}`,
     );
     if (!rosterReady) {
       finalizeRunReport('error', {
@@ -18477,6 +18533,19 @@ async function main() {
       console.error(
         `::error::provider-roster-unavailable: reason=${roster.reason}`
         + ` roster=${roster.rosterSize} available=${roster.availableModels.length}`,
+      );
+      await exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT);
+      return;
+    }
+    if (!inputCapGuard.ready) {
+      finalizeRunReport('error', {
+        notes: [
+          ...RUN_REPORT.notes,
+          `Provider roster cannot serve the prompt: every available input cap is below ${inputCapGuard.minimumInputTokens} tokens`,
+        ],
+      });
+      console.error(
+        `::error::provider-input-cap-unavailable: no eligible model accepts the ${inputCapGuard.minimumInputTokens}-token prompt scaffold`,
       );
       await exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT);
       return;
