@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/302160/wer-f%c3%bcrs-parkieren-digital-zahlt-sollte-zweimal-hinschauen": {
-      "section": "canton-fr",
-      "ts": 1793868140081
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/302820/weniger-verz%c3%b6gerungen-bei-der-auszahlung-von-arbeitslosengeldern": {
-      "section": "canton-fr",
-      "ts": 1793887239047
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/302278/so-nutzen-sie-das-neue-digitale-angebot-vom-murtenbieter-und-anzeiger-von-kerzers": {
-      "section": "canton-fr",
-      "ts": 1793887240522
-    },
     "canton-fr::https://www.freiburger-nachrichten.ch/story/303077/post-greift-swisscom-an-so-viel-kosten-die-neuen-internet-und-tvabos": {
       "section": "canton-fr",
       "ts": 1793911872156
@@ -27,6 +15,14 @@
     "canton-fr::https://www.frapp.ch/fr/articles/stories/cff-bacs-a-papier-supprimes-des-poubelles": {
       "section": "canton-fr",
       "ts": 1793964543322
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/303179/just-eat-macht-auf-uber-gr%c3%b6sste-ahvausgleichskasse-schl%c3%a4gt-alarm": {
+      "section": "canton-fr",
+      "ts": 1794076160331
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/303428/das-droht-arbeitnehmenden-bei-einem-nein-zur-ahvreform": {
+      "section": "canton-fr",
+      "ts": 1794076161509
     }
   }
 }
