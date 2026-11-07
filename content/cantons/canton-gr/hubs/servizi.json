@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "50e3a1ac01d496a93856ad28c789c3478dc58d4a011713f636d4a5886e7f7c10",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "3bf98edd5261abac6a1e2fb30f66fca756df0bf5ac5dc49ef5d0410e51a4bbdb",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,18 @@
       "keyFacts": 1
     },
     {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-06T19:25:36.781Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-06T21:42:36.229Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -30,6 +40,11 @@
           "value": "573,45 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "5",
+          "note": "offerta mediana 550 CHF"
         }
       ],
       "dataBlocks": [
@@ -59,14 +74,74 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "GR11652",
+              "value": "650 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-08T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2258&locale=de_CH"
+            },
+            {
+              "label": "GR19693",
+              "value": "650 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-08T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2261&locale=de_CH"
+            },
+            {
+              "label": "GR13954",
+              "value": "550 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-08T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2259&locale=de_CH"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
+          "updatedAt": "2026-11-06T19:25:36.781Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Chur",
+              "value": "6 °C",
+              "detail": "oggi da 6 a 9 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Warum Kalorien die besten Freunde von Proteinen sind",
+              "date": "2026-11-06",
+              "url": "https://www.ksgr.ch/aktuelles/warum-kalorien-die-besten-freunde-von-proteinen-sind"
+            },
+            {
+              "label": "Austausch zum Grenzgängerabkommen mit Italien",
+              "date": "2026-11-06",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110602.aspx"
+            },
+            {
               "label": "Innovationen am KSGR: Massgeschneiderte Handwurzelprothesen als Alternative zu Versteifungen",
               "date": "2026-11-05",
               "url": "https://www.ksgr.ch/aktuelles/innovationen-am-ksgr-massgeschneiderte-handwurzelprothesen"
+            },
+            {
+              "label": "Arbeitslosigkeit - Oktober 2026",
+              "date": "2026-11-05",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110500.aspx"
             },
             {
               "label": "Wenn die Luft knapp wird: Internationale Empfehlungen mit Bündner Beteiligung",
@@ -77,24 +152,9 @@
               "label": "Arbeitslosigkeit - September 2026",
               "date": "2026-10-06",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
-            },
-            {
-              "label": "Mitgestalten – am ersten Patient:innen-Tag des Schmerzzentrums",
-              "date": "2026-09-24",
-              "url": "https://www.ksgr.ch/aktuelles/mitgestalten-am-ersten-patientinnen-tag-des-schmerzzentrums"
-            },
-            {
-              "label": "Finissage «Heilen ist Kunst ist Heilen» – und was dann?",
-              "date": "2026-09-21",
-              "url": "https://www.ksgr.ch/aktuelles/finissage-heilen-ist-kunst-ist-heilen-und-was-dann"
-            },
-            {
-              "label": "Nationale Woche gegen Food Waste: Dranbleiben macht den Unterschied",
-              "date": "2026-09-15",
-              "url": "https://www.ksgr.ch/aktuelles/nationale-woche-gegen-food-waste-dranbleiben-macht-den-unterschied"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -174,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "GR",
@@ -187,6 +247,11 @@
           "value": "573.45 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "5",
+          "note": "typical bid 550 CHF"
         }
       ],
       "dataBlocks": [
@@ -216,14 +281,74 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "GR11652",
+              "value": "650 CHF",
+              "detail": "current bid",
+              "date": "2026-11-08T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2258&locale=de_CH"
+            },
+            {
+              "label": "GR19693",
+              "value": "650 CHF",
+              "detail": "current bid",
+              "date": "2026-11-08T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2261&locale=de_CH"
+            },
+            {
+              "label": "GR13954",
+              "value": "550 CHF",
+              "detail": "current bid",
+              "date": "2026-11-08T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2259&locale=de_CH"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
+          "updatedAt": "2026-11-06T19:25:36.781Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Chur",
+              "value": "6 °C",
+              "detail": "today from 6 to 9 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Warum Kalorien die besten Freunde von Proteinen sind",
+              "date": "2026-11-06",
+              "url": "https://www.ksgr.ch/aktuelles/warum-kalorien-die-besten-freunde-von-proteinen-sind"
+            },
+            {
+              "label": "Austausch zum Grenzgängerabkommen mit Italien",
+              "date": "2026-11-06",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110602.aspx"
+            },
+            {
               "label": "Innovationen am KSGR: Massgeschneiderte Handwurzelprothesen als Alternative zu Versteifungen",
               "date": "2026-11-05",
               "url": "https://www.ksgr.ch/aktuelles/innovationen-am-ksgr-massgeschneiderte-handwurzelprothesen"
+            },
+            {
+              "label": "Arbeitslosigkeit - Oktober 2026",
+              "date": "2026-11-05",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110500.aspx"
             },
             {
               "label": "Wenn die Luft knapp wird: Internationale Empfehlungen mit Bündner Beteiligung",
@@ -234,24 +359,9 @@
               "label": "Arbeitslosigkeit - September 2026",
               "date": "2026-10-06",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
-            },
-            {
-              "label": "Mitgestalten – am ersten Patient:innen-Tag des Schmerzzentrums",
-              "date": "2026-09-24",
-              "url": "https://www.ksgr.ch/aktuelles/mitgestalten-am-ersten-patientinnen-tag-des-schmerzzentrums"
-            },
-            {
-              "label": "Finissage «Heilen ist Kunst ist Heilen» – und was dann?",
-              "date": "2026-09-21",
-              "url": "https://www.ksgr.ch/aktuelles/finissage-heilen-ist-kunst-ist-heilen-und-was-dann"
-            },
-            {
-              "label": "Nationale Woche gegen Food Waste: Dranbleiben macht den Unterschied",
-              "date": "2026-09-15",
-              "url": "https://www.ksgr.ch/aktuelles/nationale-woche-gegen-food-waste-dranbleiben-macht-den-unterschied"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "GR",
@@ -340,6 +450,11 @@
           "value": "573.45 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "5",
+          "note": "mittleres Gebot 550 CHF"
         }
       ],
       "dataBlocks": [
@@ -369,14 +484,74 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "GR11652",
+              "value": "650 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-08T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2258&locale=de_CH"
+            },
+            {
+              "label": "GR19693",
+              "value": "650 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-08T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2261&locale=de_CH"
+            },
+            {
+              "label": "GR13954",
+              "value": "550 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-08T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2259&locale=de_CH"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
+          "updatedAt": "2026-11-06T19:25:36.781Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Chur",
+              "value": "6 °C",
+              "detail": "heute 6 bis 9 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Warum Kalorien die besten Freunde von Proteinen sind",
+              "date": "2026-11-06",
+              "url": "https://www.ksgr.ch/aktuelles/warum-kalorien-die-besten-freunde-von-proteinen-sind"
+            },
+            {
+              "label": "Austausch zum Grenzgängerabkommen mit Italien",
+              "date": "2026-11-06",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110602.aspx"
+            },
+            {
               "label": "Innovationen am KSGR: Massgeschneiderte Handwurzelprothesen als Alternative zu Versteifungen",
               "date": "2026-11-05",
               "url": "https://www.ksgr.ch/aktuelles/innovationen-am-ksgr-massgeschneiderte-handwurzelprothesen"
+            },
+            {
+              "label": "Arbeitslosigkeit - Oktober 2026",
+              "date": "2026-11-05",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110500.aspx"
             },
             {
               "label": "Wenn die Luft knapp wird: Internationale Empfehlungen mit Bündner Beteiligung",
@@ -387,24 +562,9 @@
               "label": "Arbeitslosigkeit - September 2026",
               "date": "2026-10-06",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
-            },
-            {
-              "label": "Mitgestalten – am ersten Patient:innen-Tag des Schmerzzentrums",
-              "date": "2026-09-24",
-              "url": "https://www.ksgr.ch/aktuelles/mitgestalten-am-ersten-patientinnen-tag-des-schmerzzentrums"
-            },
-            {
-              "label": "Finissage «Heilen ist Kunst ist Heilen» – und was dann?",
-              "date": "2026-09-21",
-              "url": "https://www.ksgr.ch/aktuelles/finissage-heilen-ist-kunst-ist-heilen-und-was-dann"
-            },
-            {
-              "label": "Nationale Woche gegen Food Waste: Dranbleiben macht den Unterschied",
-              "date": "2026-09-15",
-              "url": "https://www.ksgr.ch/aktuelles/nationale-woche-gegen-food-waste-dranbleiben-macht-den-unterschied"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "GR",
@@ -493,6 +653,11 @@
           "value": "573,45 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "5",
+          "note": "offre centrale 550 CHF"
         }
       ],
       "dataBlocks": [
@@ -522,14 +687,74 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "GR11652",
+              "value": "650 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-08T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2258&locale=de_CH"
+            },
+            {
+              "label": "GR19693",
+              "value": "650 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-08T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2261&locale=de_CH"
+            },
+            {
+              "label": "GR13954",
+              "value": "550 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-08T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2259&locale=de_CH"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
+          "updatedAt": "2026-11-06T19:25:36.781Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Chur",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 6 à 9 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Warum Kalorien die besten Freunde von Proteinen sind",
+              "date": "2026-11-06",
+              "url": "https://www.ksgr.ch/aktuelles/warum-kalorien-die-besten-freunde-von-proteinen-sind"
+            },
+            {
+              "label": "Austausch zum Grenzgängerabkommen mit Italien",
+              "date": "2026-11-06",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110602.aspx"
+            },
+            {
               "label": "Innovationen am KSGR: Massgeschneiderte Handwurzelprothesen als Alternative zu Versteifungen",
               "date": "2026-11-05",
               "url": "https://www.ksgr.ch/aktuelles/innovationen-am-ksgr-massgeschneiderte-handwurzelprothesen"
+            },
+            {
+              "label": "Arbeitslosigkeit - Oktober 2026",
+              "date": "2026-11-05",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110500.aspx"
             },
             {
               "label": "Wenn die Luft knapp wird: Internationale Empfehlungen mit Bündner Beteiligung",
@@ -540,24 +765,9 @@
               "label": "Arbeitslosigkeit - September 2026",
               "date": "2026-10-06",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
-            },
-            {
-              "label": "Mitgestalten – am ersten Patient:innen-Tag des Schmerzzentrums",
-              "date": "2026-09-24",
-              "url": "https://www.ksgr.ch/aktuelles/mitgestalten-am-ersten-patientinnen-tag-des-schmerzzentrums"
-            },
-            {
-              "label": "Finissage «Heilen ist Kunst ist Heilen» – und was dann?",
-              "date": "2026-09-21",
-              "url": "https://www.ksgr.ch/aktuelles/finissage-heilen-ist-kunst-ist-heilen-und-was-dann"
-            },
-            {
-              "label": "Nationale Woche gegen Food Waste: Dranbleiben macht den Unterschied",
-              "date": "2026-09-15",
-              "url": "https://www.ksgr.ch/aktuelles/nationale-woche-gegen-food-waste-dranbleiben-macht-den-unterschied"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -629,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T05:23:07.727Z",
-  "contentHash": "6f882be76950fc7d925ed6868bff15669e2e122421201ae16921245f6c2d3b7f",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "651f450ef3e6191d18acaf0b9ed1acdad56d85995ced4d156ee875d5f066bb69",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T20:21:30.260Z",
+      "updatedAt": "2026-11-06T19:47:29.462Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -27,8 +27,8 @@
       "keyFacts": [
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "1",
-          "note": "segnalazioni aggiornate: 5 novembre 2026"
+          "value": "3",
+          "note": "segnalazioni aggiornate: 6 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -42,10 +42,22 @@
               "value": "Cantiere",
               "detail": "fine prevista: 13 novembre 2026",
               "date": "2026-10-05T06:20:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil -> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 15 febbraio 2027",
+              "date": "2026-11-05T20:33:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil <-> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 0.05 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite temporaneo…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-11-06T06:45:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -83,7 +95,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -105,7 +117,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -115,8 +127,8 @@
       "keyFacts": [
         {
           "label": "Roadworks active or imminent",
-          "value": "1",
-          "note": "reports as of 5 November 2026"
+          "value": "3",
+          "note": "reports as of 6 November 2026"
         }
       ],
       "dataBlocks": [
@@ -130,10 +142,22 @@
               "value": "Roadworks",
               "detail": "until 13 November 2026",
               "date": "2026-10-05T06:20:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil -> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza…",
+              "value": "Roadworks",
+              "detail": "until 15 February 2027",
+              "date": "2026-11-05T20:33:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil <-> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 0.05 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite temporaneo…",
+              "value": "Roadworks",
+              "detail": "until 13 November 2026",
+              "date": "2026-11-06T06:45:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -171,7 +195,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -193,7 +217,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -203,8 +227,8 @@
       "keyFacts": [
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "1",
-          "note": "Meldungen vom 5. November 2026"
+          "value": "3",
+          "note": "Meldungen vom 6. November 2026"
         }
       ],
       "dataBlocks": [
@@ -218,10 +242,22 @@
               "value": "Baustelle",
               "detail": "bis 13. November 2026",
               "date": "2026-10-05T06:20:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil -> St. Gallen Ortschaft Herisau Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
+              "value": "Baustelle",
+              "detail": "bis 15. Februar 2027",
+              "date": "2026-11-05T20:33:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil <-> St. Gallen Ortschaft Herisau Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.05 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
+              "value": "Baustelle",
+              "detail": "bis 13. November 2026",
+              "date": "2026-11-06T06:45:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -259,7 +295,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -281,7 +317,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -291,8 +327,8 @@
       "keyFacts": [
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "1",
-          "note": "signalements au 5 novembre 2026"
+          "value": "3",
+          "note": "signalements au 6 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -306,10 +342,22 @@
               "value": "Chantier",
               "detail": "jusqu’au 13 novembre 2026",
               "date": "2026-10-05T06:20:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil -> St-Gall Localité Herisau Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de largeur largeur de…",
+              "value": "Chantier",
+              "detail": "jusqu’au 15 février 2027",
+              "date": "2026-11-05T20:33:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil <-> St-Gall Localité Herisau Situation: trafic perturbé travaux, longueur [km] 0.05 Gestion du trafic: circulation alternée à une voie Complément 1: limitation temporaire de largeur…",
+              "value": "Chantier",
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-11-06T06:45:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -347,7 +395,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -369,7 +417,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }

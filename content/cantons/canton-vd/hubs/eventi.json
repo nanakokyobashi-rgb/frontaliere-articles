@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "0be67cf837a611e512402310d98cf7af0632e2b57e548bf66d1cde1e803aea44",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "b51f8e3276a20b96da4acb7d7fcfa821db1e7f7a14c6e97f4bff9e29336c4f2f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T00:12:54.064Z",
+      "updatedAt": "2026-11-06T13:54:16.445Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "73",
+          "value": "74",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,6 +37,12 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
+            {
+              "label": "Theater | If I Lie to You, Will You Still Love Me?",
+              "detail": "Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theater-if-i-lie-to-you-will-you-still-love-me/"
+            },
             {
               "label": "Epicoop's Gourmet Saturday",
               "detail": "Vevey",
@@ -90,17 +96,11 @@
               "detail": "Morges",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/dahlia-tuberous-roots-sale/"
-            },
-            {
-              "label": "Home Mycology: From Mycelium to the Plate",
-              "detail": "Les Jardins de Chivrageon, Aubonne",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mykologie-zu-hause-vom-myzel-auf-den-teller/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-06T13:54:16.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -145,7 +145,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "VD",
@@ -155,7 +155,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "73",
+          "value": "74",
           "note": "from the site’s events calendar"
         }
       ],
@@ -165,6 +165,12 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
+            {
+              "label": "Theater | If I Lie to You, Will You Still Love Me?",
+              "detail": "Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theater-if-i-lie-to-you-will-you-still-love-me/"
+            },
             {
               "label": "Epicoop's Gourmet Saturday",
               "detail": "Vevey",
@@ -218,17 +224,11 @@
               "detail": "Morges",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/dahlia-tuberous-roots-sale/"
-            },
-            {
-              "label": "Home Mycology: From Mycelium to the Plate",
-              "detail": "Les Jardins de Chivrageon, Aubonne",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mykologie-zu-hause-vom-myzel-auf-den-teller/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-06T13:54:16.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -251,7 +251,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -273,7 +273,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "VD",
@@ -283,7 +283,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "73",
+          "value": "74",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -293,6 +293,12 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
+            {
+              "label": "Theater | Wenn ich dich anlüge, liebst du mich dann noch?",
+              "detail": "Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theater-if-i-lie-to-you-will-you-still-love-me/"
+            },
             {
               "label": "Gourmet-Samstag von Epicoop",
               "detail": "Vevey",
@@ -346,17 +352,11 @@
               "detail": "Morges",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/dahlia-tuberous-roots-sale/"
-            },
-            {
-              "label": "Mykologie zu Hause: Vom Myzel auf den Teller",
-              "detail": "Les Jardins de Chivrageon, Aubonne",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mykologie-zu-hause-vom-myzel-auf-den-teller/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-06T13:54:16.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -379,7 +379,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -401,7 +401,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "VD",
@@ -411,7 +411,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "73",
+          "value": "74",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -421,6 +421,12 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
+            {
+              "label": "Théâtre | Si je te mens, tu m'aimes ?",
+              "detail": "Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theater-if-i-lie-to-you-will-you-still-love-me/"
+            },
             {
               "label": "Samedi Gourmand d’Epicoop",
               "detail": "Vevey",
@@ -474,17 +480,11 @@
               "detail": "Morges",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/dahlia-tuberous-roots-sale/"
-            },
-            {
-              "label": "Mycologie à la maison : Du mycélium à l'assiette",
-              "detail": "Les Jardins de Chivrageon, Aubonne",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mykologie-zu-hause-vom-myzel-auf-den-teller/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-06T13:54:16.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -507,7 +507,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -529,7 +529,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }

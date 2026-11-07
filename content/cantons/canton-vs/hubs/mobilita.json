@@ -4,22 +4,22 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T18:39:35.128Z",
-  "contentHash": "77a6643e7929161159729a3842da3edeccadea0d1cb1b5ad236d780fca003644",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "e8f18bb66dd935ceef3cb8badf82a5d2f25a8ea064f8fbbfed479c15296c7021",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-04T23:59:59.000Z",
+      "updatedAt": "2026-11-05T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T20:21:30.260Z",
+      "updatedAt": "2026-11-06T19:47:29.462Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Morgins-Châtel (Pas de Morgins), settimana conclusa: 4 novembre 2026"
+          "note": "Morgins-Châtel (Pas de Morgins), settimana conclusa: 5 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "19",
-          "note": "segnalazioni aggiornate: 5 novembre 2026"
+          "value": "21",
+          "note": "segnalazioni aggiornate: 6 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "12",
-          "note": "segnalazioni aggiornate: 5 novembre 2026"
+          "value": "13",
+          "note": "segnalazioni aggiornate: 6 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 ottobre 2026 – 4 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 30 ottobre 2026 – 5 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
@@ -65,16 +65,16 @@
               "url": "/traffico-dogane/sempione/oggi/"
             },
             {
-              "label": "Saint-Gingolph",
-              "value": "0,1 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/saint-gingolph/oggi/"
-            },
-            {
               "label": "Le Châtelard-Vallorcine",
-              "value": "0,1 min",
+              "value": "0,2 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/le-chatelard-vallorcine/oggi/"
+            },
+            {
+              "label": "Saint-Gingolph",
+              "value": "0,2 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/saint-gingolph/oggi/"
             },
             {
               "label": "Traforo del Gran San Bernardo",
@@ -85,7 +85,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-04T23:59:59.000Z"
+          "updatedAt": "2026-11-05T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -138,13 +138,28 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Statale 337 della Valle Vigezzo, ancora un senso unico alternato",
+              "date": "2026-11-06T16:10:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-ancora-un-senso-unico-alternato.html"
+            },
+            {
+              "label": "Svizzera, fermato un autotreno italiano: aveva il sistema di controllo delle emissioni manomesso",
+              "date": "2026-11-06T09:06:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/confine/articolo/svizzera-fermato-un-autotreno-italiano-aveva-il-sistema-di-controllo-delle-emissioni-manomesso.html"
+            },
+            {
+              "label": "Superstrada del Sempione, limitazioni e restringimenti in diversi tratti",
+              "date": "2026-11-06T08:00:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/superstrada-del-sempione-limitazioni-e-restringimenti-in-diversi-tratti-1.html"
+            },
             {
               "label": "SS 659, dieci giorni di senso unico alternato",
               "date": "2026-11-04T14:55:00.000Z",
@@ -159,24 +174,9 @@
               "label": "Radar in Ticino, i controlli della velocità dal 2 all'8 novembre: ecco dove saranno effettuati",
               "date": "2026-11-02T08:10:49.000Z",
               "url": "https://www.ossolanews.it/2026/11/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-2-all8-novembre-ecco-dove-saranno-effettuati.html"
-            },
-            {
-              "label": "Ponte sull’Anza, prende forma il nuovo collegamento tra Piedimulera e Pieve Vergonte",
-              "date": "2026-10-31T18:08:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/31/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/ponte-sullanza-prende-forma-il-nuovo-collegamento-tra-piedimulera-e-pieve-vergonte.html"
-            },
-            {
-              "label": "Anas, festa di Ognissanti e weekend di Halloween massima prudenza negli spostamenti serali e notturni",
-              "date": "2026-10-30T13:08:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/30/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anas-festa-di-ognissanti-e-weekend-di-halloween-massima-prudenza-negli-spostamenti-serali-e-nottur-2.html"
-            },
-            {
-              "label": "Domodossola, a Nosere cambia la viabilità per i lavori alla nuova rotonda",
-              "date": "2026-10-28T18:10:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -246,7 +246,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-06T18:39:35.128Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "VS",
@@ -257,24 +257,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Morgins-Châtel (Pas de Morgins), week ending 4 November 2026"
+          "note": "Morgins-Châtel (Pas de Morgins), week ending 5 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "19",
-          "note": "reports as of 5 November 2026"
+          "value": "21",
+          "note": "reports as of 6 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "12",
-          "note": "reports as of 5 November 2026"
+          "value": "13",
+          "note": "reports as of 6 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 29 October 2026 to 4 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 30 October 2026 to 5 November 2026, fastest first.",
           "items": [
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
@@ -289,16 +289,16 @@
               "url": "/en/border-wait/sempione/today/"
             },
             {
-              "label": "Saint-Gingolph",
-              "value": "0.1 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/saint-gingolph/today/"
-            },
-            {
               "label": "Le Châtelard-Vallorcine",
-              "value": "0.1 min",
+              "value": "0.2 min",
               "detail": "48 readings",
               "url": "/en/border-wait/le-chatelard-vallorcine/today/"
+            },
+            {
+              "label": "Saint-Gingolph",
+              "value": "0.2 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/saint-gingolph/today/"
             },
             {
               "label": "Traforo del Gran San Bernardo",
@@ -309,7 +309,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-04T23:59:59.000Z"
+          "updatedAt": "2026-11-05T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -362,13 +362,28 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Statale 337 della Valle Vigezzo, ancora un senso unico alternato",
+              "date": "2026-11-06T16:10:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-ancora-un-senso-unico-alternato.html"
+            },
+            {
+              "label": "Svizzera, fermato un autotreno italiano: aveva il sistema di controllo delle emissioni manomesso",
+              "date": "2026-11-06T09:06:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/confine/articolo/svizzera-fermato-un-autotreno-italiano-aveva-il-sistema-di-controllo-delle-emissioni-manomesso.html"
+            },
+            {
+              "label": "Superstrada del Sempione, limitazioni e restringimenti in diversi tratti",
+              "date": "2026-11-06T08:00:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/superstrada-del-sempione-limitazioni-e-restringimenti-in-diversi-tratti-1.html"
+            },
             {
               "label": "SS 659, dieci giorni di senso unico alternato",
               "date": "2026-11-04T14:55:00.000Z",
@@ -383,24 +398,9 @@
               "label": "Radar in Ticino, i controlli della velocità dal 2 all'8 novembre: ecco dove saranno effettuati",
               "date": "2026-11-02T08:10:49.000Z",
               "url": "https://www.ossolanews.it/2026/11/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-2-all8-novembre-ecco-dove-saranno-effettuati.html"
-            },
-            {
-              "label": "Ponte sull’Anza, prende forma il nuovo collegamento tra Piedimulera e Pieve Vergonte",
-              "date": "2026-10-31T18:08:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/31/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/ponte-sullanza-prende-forma-il-nuovo-collegamento-tra-piedimulera-e-pieve-vergonte.html"
-            },
-            {
-              "label": "Anas, festa di Ognissanti e weekend di Halloween massima prudenza negli spostamenti serali e notturni",
-              "date": "2026-10-30T13:08:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/30/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anas-festa-di-ognissanti-e-weekend-di-halloween-massima-prudenza-negli-spostamenti-serali-e-nottur-2.html"
-            },
-            {
-              "label": "Domodossola, a Nosere cambia la viabilità per i lavori alla nuova rotonda",
-              "date": "2026-10-28T18:10:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -470,7 +470,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-06T18:39:35.128Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "VS",
@@ -481,24 +481,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Morgins-Châtel (Pas de Morgins), Woche bis 4. November 2026"
+          "note": "Morgins-Châtel (Pas de Morgins), Woche bis 5. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "19",
-          "note": "Meldungen vom 5. November 2026"
+          "value": "21",
+          "note": "Meldungen vom 6. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "12",
-          "note": "Meldungen vom 5. November 2026"
+          "value": "13",
+          "note": "Meldungen vom 6. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. Oktober 2026 bis 4. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 30. Oktober 2026 bis 5. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
@@ -513,16 +513,16 @@
               "url": "/de/wartezeit-grenze/sempione/heute/"
             },
             {
-              "label": "Saint-Gingolph",
-              "value": "0.1 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/saint-gingolph/heute/"
-            },
-            {
               "label": "Le Châtelard-Vallorcine",
-              "value": "0.1 Min.",
+              "value": "0.2 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/le-chatelard-vallorcine/heute/"
+            },
+            {
+              "label": "Saint-Gingolph",
+              "value": "0.2 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/saint-gingolph/heute/"
             },
             {
               "label": "Traforo del Gran San Bernardo",
@@ -533,7 +533,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-04T23:59:59.000Z"
+          "updatedAt": "2026-11-05T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -586,13 +586,28 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Statale 337 della Valle Vigezzo, ancora un senso unico alternato",
+              "date": "2026-11-06T16:10:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-ancora-un-senso-unico-alternato.html"
+            },
+            {
+              "label": "Svizzera, fermato un autotreno italiano: aveva il sistema di controllo delle emissioni manomesso",
+              "date": "2026-11-06T09:06:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/confine/articolo/svizzera-fermato-un-autotreno-italiano-aveva-il-sistema-di-controllo-delle-emissioni-manomesso.html"
+            },
+            {
+              "label": "Superstrada del Sempione, limitazioni e restringimenti in diversi tratti",
+              "date": "2026-11-06T08:00:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/superstrada-del-sempione-limitazioni-e-restringimenti-in-diversi-tratti-1.html"
+            },
             {
               "label": "SS 659, dieci giorni di senso unico alternato",
               "date": "2026-11-04T14:55:00.000Z",
@@ -607,24 +622,9 @@
               "label": "Radar in Ticino, i controlli della velocità dal 2 all'8 novembre: ecco dove saranno effettuati",
               "date": "2026-11-02T08:10:49.000Z",
               "url": "https://www.ossolanews.it/2026/11/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-2-all8-novembre-ecco-dove-saranno-effettuati.html"
-            },
-            {
-              "label": "Ponte sull’Anza, prende forma il nuovo collegamento tra Piedimulera e Pieve Vergonte",
-              "date": "2026-10-31T18:08:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/31/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/ponte-sullanza-prende-forma-il-nuovo-collegamento-tra-piedimulera-e-pieve-vergonte.html"
-            },
-            {
-              "label": "Anas, festa di Ognissanti e weekend di Halloween massima prudenza negli spostamenti serali e notturni",
-              "date": "2026-10-30T13:08:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/30/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anas-festa-di-ognissanti-e-weekend-di-halloween-massima-prudenza-negli-spostamenti-serali-e-nottur-2.html"
-            },
-            {
-              "label": "Domodossola, a Nosere cambia la viabilità per i lavori alla nuova rotonda",
-              "date": "2026-10-28T18:10:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -694,7 +694,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-06T18:39:35.128Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "VS",
@@ -705,24 +705,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Morgins-Châtel (Pas de Morgins), semaine jusqu’au 4 novembre 2026"
+          "note": "Morgins-Châtel (Pas de Morgins), semaine jusqu’au 5 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "19",
-          "note": "signalements au 5 novembre 2026"
+          "value": "21",
+          "note": "signalements au 6 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "12",
-          "note": "signalements au 5 novembre 2026"
+          "value": "13",
+          "note": "signalements au 6 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 octobre 2026 au 4 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 30 octobre 2026 au 5 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
@@ -737,16 +737,16 @@
               "url": "/fr/temps-attente-douane/sempione/aujourd-hui/"
             },
             {
-              "label": "Saint-Gingolph",
-              "value": "0,1 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/saint-gingolph/aujourd-hui/"
-            },
-            {
               "label": "Le Châtelard-Vallorcine",
-              "value": "0,1 min",
+              "value": "0,2 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/le-chatelard-vallorcine/aujourd-hui/"
+            },
+            {
+              "label": "Saint-Gingolph",
+              "value": "0,2 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/saint-gingolph/aujourd-hui/"
             },
             {
               "label": "Traforo del Gran San Bernardo",
@@ -757,7 +757,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-04T23:59:59.000Z"
+          "updatedAt": "2026-11-05T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -810,13 +810,28 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Statale 337 della Valle Vigezzo, ancora un senso unico alternato",
+              "date": "2026-11-06T16:10:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-ancora-un-senso-unico-alternato.html"
+            },
+            {
+              "label": "Svizzera, fermato un autotreno italiano: aveva il sistema di controllo delle emissioni manomesso",
+              "date": "2026-11-06T09:06:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/confine/articolo/svizzera-fermato-un-autotreno-italiano-aveva-il-sistema-di-controllo-delle-emissioni-manomesso.html"
+            },
+            {
+              "label": "Superstrada del Sempione, limitazioni e restringimenti in diversi tratti",
+              "date": "2026-11-06T08:00:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/superstrada-del-sempione-limitazioni-e-restringimenti-in-diversi-tratti-1.html"
+            },
             {
               "label": "SS 659, dieci giorni di senso unico alternato",
               "date": "2026-11-04T14:55:00.000Z",
@@ -831,24 +846,9 @@
               "label": "Radar in Ticino, i controlli della velocità dal 2 all'8 novembre: ecco dove saranno effettuati",
               "date": "2026-11-02T08:10:49.000Z",
               "url": "https://www.ossolanews.it/2026/11/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-2-all8-novembre-ecco-dove-saranno-effettuati.html"
-            },
-            {
-              "label": "Ponte sull’Anza, prende forma il nuovo collegamento tra Piedimulera e Pieve Vergonte",
-              "date": "2026-10-31T18:08:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/31/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/ponte-sullanza-prende-forma-il-nuovo-collegamento-tra-piedimulera-e-pieve-vergonte.html"
-            },
-            {
-              "label": "Anas, festa di Ognissanti e weekend di Halloween massima prudenza negli spostamenti serali e notturni",
-              "date": "2026-10-30T13:08:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/30/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anas-festa-di-ognissanti-e-weekend-di-halloween-massima-prudenza-negli-spostamenti-serali-e-nottur-2.html"
-            },
-            {
-              "label": "Domodossola, a Nosere cambia la viabilità per i lavori alla nuova rotonda",
-              "date": "2026-10-28T18:10:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -918,7 +918,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-06T18:39:35.128Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }

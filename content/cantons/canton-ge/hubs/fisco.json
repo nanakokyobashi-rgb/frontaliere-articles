@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "fisco",
-  "updatedAt": "2026-10-19T18:33:18.720Z",
-  "contentHash": "39facb6d7b767eac90b7cb494537a64dd155646e747e8a7ea40368c96b4d42df",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "6d01a3a340e28f9ba486f2061abb234ec6da882b1b862068a825e839b2f345fd",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -110,6 +110,21 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Historique des taux de capitalisation pour l'immobilier",
+              "date": "2026-11-06",
+              "url": "https://www.ge.ch/node/1149"
+            },
+            {
+              "label": "Historique des taux d'intérêt ICC et taux d'escompte",
+              "date": "2026-11-06",
+              "url": "https://www.ge.ch/node/45428"
+            },
+            {
+              "label": "Historique des taux d'intérêt IFD",
+              "date": "2026-11-06",
+              "url": "https://www.ge.ch/node/45430"
+            },
+            {
               "label": "Tentative de phishing en cours",
               "date": "2026-10-19",
               "url": "https://www.ge.ch/node/45263"
@@ -123,24 +138,9 @@
               "label": "AFC Infos - Octobre 2026",
               "date": "2026-10-12",
               "url": "https://www.ge.ch/node/45195"
-            },
-            {
-              "label": "Rachats dans le 3e pilier A: ce qui change dans la déclaration d'impôt 2026",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45125"
-            },
-            {
-              "label": "Guide GeTaxPM 2026",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45129"
-            },
-            {
-              "label": "Campagne exceptionnelle d'envoi de bordereaux provisoires IFD",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45131"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -184,7 +184,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "GE",
@@ -272,6 +272,21 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Historique des taux de capitalisation pour l'immobilier",
+              "date": "2026-11-06",
+              "url": "https://www.ge.ch/node/1149"
+            },
+            {
+              "label": "Historique des taux d'intérêt ICC et taux d'escompte",
+              "date": "2026-11-06",
+              "url": "https://www.ge.ch/node/45428"
+            },
+            {
+              "label": "Historique des taux d'intérêt IFD",
+              "date": "2026-11-06",
+              "url": "https://www.ge.ch/node/45430"
+            },
+            {
               "label": "Tentative de phishing en cours",
               "date": "2026-10-19",
               "url": "https://www.ge.ch/node/45263"
@@ -285,24 +300,9 @@
               "label": "AFC Infos - Octobre 2026",
               "date": "2026-10-12",
               "url": "https://www.ge.ch/node/45195"
-            },
-            {
-              "label": "Rachats dans le 3e pilier A: ce qui change dans la déclaration d'impôt 2026",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45125"
-            },
-            {
-              "label": "Guide GeTaxPM 2026",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45129"
-            },
-            {
-              "label": "Campagne exceptionnelle d'envoi de bordereaux provisoires IFD",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45131"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -346,7 +346,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "GE",
@@ -434,6 +434,21 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Historique des taux de capitalisation pour l'immobilier",
+              "date": "2026-11-06",
+              "url": "https://www.ge.ch/node/1149"
+            },
+            {
+              "label": "Historique des taux d'intérêt ICC et taux d'escompte",
+              "date": "2026-11-06",
+              "url": "https://www.ge.ch/node/45428"
+            },
+            {
+              "label": "Historique des taux d'intérêt IFD",
+              "date": "2026-11-06",
+              "url": "https://www.ge.ch/node/45430"
+            },
+            {
               "label": "Tentative de phishing en cours",
               "date": "2026-10-19",
               "url": "https://www.ge.ch/node/45263"
@@ -447,24 +462,9 @@
               "label": "AFC Infos - Octobre 2026",
               "date": "2026-10-12",
               "url": "https://www.ge.ch/node/45195"
-            },
-            {
-              "label": "Rachats dans le 3e pilier A: ce qui change dans la déclaration d'impôt 2026",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45125"
-            },
-            {
-              "label": "Guide GeTaxPM 2026",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45129"
-            },
-            {
-              "label": "Campagne exceptionnelle d'envoi de bordereaux provisoires IFD",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45131"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -508,7 +508,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "GE",
@@ -596,6 +596,21 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Historique des taux de capitalisation pour l'immobilier",
+              "date": "2026-11-06",
+              "url": "https://www.ge.ch/node/1149"
+            },
+            {
+              "label": "Historique des taux d'intérêt ICC et taux d'escompte",
+              "date": "2026-11-06",
+              "url": "https://www.ge.ch/node/45428"
+            },
+            {
+              "label": "Historique des taux d'intérêt IFD",
+              "date": "2026-11-06",
+              "url": "https://www.ge.ch/node/45430"
+            },
+            {
               "label": "Tentative de phishing en cours",
               "date": "2026-10-19",
               "url": "https://www.ge.ch/node/45263"
@@ -609,24 +624,9 @@
               "label": "AFC Infos - Octobre 2026",
               "date": "2026-10-12",
               "url": "https://www.ge.ch/node/45195"
-            },
-            {
-              "label": "Rachats dans le 3e pilier A: ce qui change dans la déclaration d'impôt 2026",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45125"
-            },
-            {
-              "label": "Guide GeTaxPM 2026",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45129"
-            },
-            {
-              "label": "Campagne exceptionnelle d'envoi de bordereaux provisoires IFD",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45131"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -670,7 +670,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }

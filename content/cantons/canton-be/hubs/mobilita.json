@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T18:39:35.128Z",
-  "contentHash": "5dbb62fa9297ea5f21436b3b90c442abc268b57b74de1638c01bb764f521df47",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "f0bdd518977220b7dc30a24c52040a2174c71c68059e8e1fd81e499692402340",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-05T20:21:30.260Z",
+      "updatedAt": "2026-11-06T19:47:29.462Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "16",
-          "note": "segnalazioni aggiornate: 5 novembre 2026"
+          "note": "segnalazioni aggiornate: 6 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "77",
-          "note": "segnalazioni aggiornate: 5 novembre 2026"
+          "value": "78",
+          "note": "segnalazioni aggiornate: 6 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -103,6 +103,11 @@
               "label": "öV Plus App: Gemeinsam für den Stadt- und Regionalverkehr",
               "date": "2026-11-05",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/11-05_-mm-ov-plus-app"
+            },
+            {
+              "label": "öV Plus App: Gemeinsam für Stadt- und Regionalverkehr",
+              "date": "2026-11-05",
+              "url": "https://www.bernmobil.ch/de/oev-plus-app-gemeinsam-fuer-stadt-und-regionalverkehr"
             },
             {
               "label": "öV Plus App: Gemeinsam für den Stadt- und Regionalverkehr",
@@ -123,14 +128,9 @@
               "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
               "date": "2026-10-30T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
-            },
-            {
-              "label": "Massnahmen zur Verbesserung der Sicherheit in den Velostationen",
-              "date": "2026-10-27T10:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -182,7 +182,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-06T18:39:35.128Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "BE",
@@ -193,12 +193,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "16",
-          "note": "reports as of 5 November 2026"
+          "note": "reports as of 6 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "77",
-          "note": "reports as of 5 November 2026"
+          "value": "78",
+          "note": "reports as of 6 November 2026"
         }
       ],
       "dataBlocks": [
@@ -257,7 +257,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -268,6 +268,11 @@
               "label": "öV Plus App: Gemeinsam für den Stadt- und Regionalverkehr",
               "date": "2026-11-05",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/11-05_-mm-ov-plus-app"
+            },
+            {
+              "label": "öV Plus App: Gemeinsam für Stadt- und Regionalverkehr",
+              "date": "2026-11-05",
+              "url": "https://www.bernmobil.ch/de/oev-plus-app-gemeinsam-fuer-stadt-und-regionalverkehr"
             },
             {
               "label": "öV Plus App: Gemeinsam für den Stadt- und Regionalverkehr",
@@ -288,14 +293,9 @@
               "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
               "date": "2026-10-30T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
-            },
-            {
-              "label": "Massnahmen zur Verbesserung der Sicherheit in den Velostationen",
-              "date": "2026-10-27T10:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -347,7 +347,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-06T18:39:35.128Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "BE",
@@ -358,12 +358,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "16",
-          "note": "Meldungen vom 5. November 2026"
+          "note": "Meldungen vom 6. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "77",
-          "note": "Meldungen vom 5. November 2026"
+          "value": "78",
+          "note": "Meldungen vom 6. November 2026"
         }
       ],
       "dataBlocks": [
@@ -422,7 +422,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -433,6 +433,11 @@
               "label": "öV Plus App: Gemeinsam für den Stadt- und Regionalverkehr",
               "date": "2026-11-05",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/11-05_-mm-ov-plus-app"
+            },
+            {
+              "label": "öV Plus App: Gemeinsam für Stadt- und Regionalverkehr",
+              "date": "2026-11-05",
+              "url": "https://www.bernmobil.ch/de/oev-plus-app-gemeinsam-fuer-stadt-und-regionalverkehr"
             },
             {
               "label": "öV Plus App: Gemeinsam für den Stadt- und Regionalverkehr",
@@ -453,14 +458,9 @@
               "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
               "date": "2026-10-30T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
-            },
-            {
-              "label": "Massnahmen zur Verbesserung der Sicherheit in den Velostationen",
-              "date": "2026-10-27T10:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -512,7 +512,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-06T18:39:35.128Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "BE",
@@ -523,12 +523,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "16",
-          "note": "signalements au 5 novembre 2026"
+          "note": "signalements au 6 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "77",
-          "note": "signalements au 5 novembre 2026"
+          "value": "78",
+          "note": "signalements au 6 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -587,7 +587,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-05T20:21:30.260Z"
+          "updatedAt": "2026-11-06T19:47:29.462Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -598,6 +598,11 @@
               "label": "öV Plus App: Gemeinsam für den Stadt- und Regionalverkehr",
               "date": "2026-11-05",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/11-05_-mm-ov-plus-app"
+            },
+            {
+              "label": "öV Plus App: Gemeinsam für Stadt- und Regionalverkehr",
+              "date": "2026-11-05",
+              "url": "https://www.bernmobil.ch/de/oev-plus-app-gemeinsam-fuer-stadt-und-regionalverkehr"
             },
             {
               "label": "öV Plus App: Gemeinsam für den Stadt- und Regionalverkehr",
@@ -618,14 +623,9 @@
               "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
               "date": "2026-10-30T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
-            },
-            {
-              "label": "Massnahmen zur Verbesserung der Sicherheit in den Velostationen",
-              "date": "2026-10-27T10:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -677,7 +677,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-06T18:39:35.128Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "54795fbb693b5563e0d112d6f008152443058ffc6d4da9772cf2570b9641dec5",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "77ceddab41137349a06f56e571ea664230df64bbabb511c713ec1f582ddf6161",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T00:12:54.064Z",
+      "updatedAt": "2026-11-06T13:54:16.445Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "237",
+          "value": "359",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -50,6 +50,12 @@
               "url": "https://www.geneve.ch/agenda/aurelien-douge-titre-barre-acier"
             },
             {
+              "label": "Ballet pour adultes - Tous Niveaux",
+              "detail": "Genève",
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux-0"
+            },
+            {
               "label": "Cité Seniors fête ses 20 ans | Journée anniversaire",
               "detail": "Genève",
               "date": "2026-11-07",
@@ -60,6 +66,12 @@
               "detail": "Genève",
               "date": "2026-11-07",
               "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-curious-bards-airs-vagabonds-irlande-ecosse"
+            },
+            {
+              "label": "Danse contemporaine pour adultes - Tous Niveaux",
+              "detail": "Genève",
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/danse-contemporaine-adultes-niveaux-0"
             },
             {
               "label": "De fil en traits",
@@ -84,23 +96,11 @@
               "detail": "Genève",
               "date": "2026-11-07",
               "url": "https://www.geneve.ch/agenda/exposition-1602-compagnie-0"
-            },
-            {
-              "label": "Fête de l’Espace de quartier Plainpalais",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/fete-espace-quartier-plainpalais"
-            },
-            {
-              "label": "GIFF | PROJECTION | CLOSING NIGHT: ARRESTED MEMORY",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/giff-projection-closing-night-arrested-memory"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-06T13:54:16.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "237",
+          "value": "359",
           "note": "from the site’s events calendar"
         }
       ],
@@ -173,6 +173,12 @@
               "url": "https://www.geneve.ch/agenda/aurelien-douge-titre-barre-acier"
             },
             {
+              "label": "Ballet pour adultes - Tous Niveaux",
+              "detail": "Genève",
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux-0"
+            },
+            {
               "label": "Cité Seniors fête ses 20 ans | Journée anniversaire",
               "detail": "Genève",
               "date": "2026-11-07",
@@ -183,6 +189,12 @@
               "detail": "Genève",
               "date": "2026-11-07",
               "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-curious-bards-airs-vagabonds-irlande-ecosse"
+            },
+            {
+              "label": "Danse contemporaine pour adultes - Tous Niveaux",
+              "detail": "Genève",
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/danse-contemporaine-adultes-niveaux-0"
             },
             {
               "label": "De fil en traits",
@@ -207,23 +219,11 @@
               "detail": "Genève",
               "date": "2026-11-07",
               "url": "https://www.geneve.ch/agenda/exposition-1602-compagnie-0"
-            },
-            {
-              "label": "Fête de l’Espace de quartier Plainpalais",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/fete-espace-quartier-plainpalais"
-            },
-            {
-              "label": "GIFF | PROJECTION | CLOSING NIGHT: ARRESTED MEMORY",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/giff-projection-closing-night-arrested-memory"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-06T13:54:16.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "237",
+          "value": "359",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -296,6 +296,12 @@
               "url": "https://www.geneve.ch/agenda/aurelien-douge-titre-barre-acier"
             },
             {
+              "label": "Ballet pour adultes - Tous Niveaux",
+              "detail": "Genève",
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux-0"
+            },
+            {
               "label": "Cité Seniors fête ses 20 ans | Journée anniversaire",
               "detail": "Genève",
               "date": "2026-11-07",
@@ -306,6 +312,12 @@
               "detail": "Genève",
               "date": "2026-11-07",
               "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-curious-bards-airs-vagabonds-irlande-ecosse"
+            },
+            {
+              "label": "Danse contemporaine pour adultes - Tous Niveaux",
+              "detail": "Genève",
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/danse-contemporaine-adultes-niveaux-0"
             },
             {
               "label": "De fil en traits",
@@ -330,23 +342,11 @@
               "detail": "Genève",
               "date": "2026-11-07",
               "url": "https://www.geneve.ch/agenda/exposition-1602-compagnie-0"
-            },
-            {
-              "label": "Fête de l’Espace de quartier Plainpalais",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/fete-espace-quartier-plainpalais"
-            },
-            {
-              "label": "GIFF | PROJECTION | CLOSING NIGHT: ARRESTED MEMORY",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/giff-projection-closing-night-arrested-memory"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-06T13:54:16.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "237",
+          "value": "359",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -419,6 +419,12 @@
               "url": "https://www.geneve.ch/agenda/aurelien-douge-titre-barre-acier"
             },
             {
+              "label": "Ballet pour adultes - Tous Niveaux",
+              "detail": "Genève",
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux-0"
+            },
+            {
               "label": "Cité Seniors fête ses 20 ans | Journée anniversaire",
               "detail": "Genève",
               "date": "2026-11-07",
@@ -429,6 +435,12 @@
               "detail": "Genève",
               "date": "2026-11-07",
               "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-curious-bards-airs-vagabonds-irlande-ecosse"
+            },
+            {
+              "label": "Danse contemporaine pour adultes - Tous Niveaux",
+              "detail": "Genève",
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/danse-contemporaine-adultes-niveaux-0"
             },
             {
               "label": "De fil en traits",
@@ -453,23 +465,11 @@
               "detail": "Genève",
               "date": "2026-11-07",
               "url": "https://www.geneve.ch/agenda/exposition-1602-compagnie-0"
-            },
-            {
-              "label": "Fête de l’Espace de quartier Plainpalais",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/fete-espace-quartier-plainpalais"
-            },
-            {
-              "label": "GIFF | PROJECTION | CLOSING NIGHT: ARRESTED MEMORY",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/giff-projection-closing-night-arrested-memory"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-06T13:54:16.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }

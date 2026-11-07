@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-06T23:00:41.085Z",
-  "contentHash": "0ebb7d176373cf9075477eacb56f29ea0a07de39a365175f8dc13de574bd32f9",
+  "updatedAt": "2026-11-07T06:55:41.643Z",
+  "contentHash": "9f86861d4d22c69bdba773d51092e6640ccad4700600be16a11faf66ea6d4f1b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-05T23:57:31.394Z",
+      "updatedAt": "2026-11-06T20:00:47.799Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-06T19:25:36.781Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-06T21:42:36.229Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -35,6 +45,11 @@
           "value": "639,80 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "31",
+          "note": "offerta mediana 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -101,13 +116,63 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-05T23:57:31.394Z"
+          "updatedAt": "2026-11-06T20:00:47.799Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "ZH839",
+              "value": "11.600 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
+            },
+            {
+              "label": "ZH5545",
+              "value": "10.200 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
+            },
+            {
+              "label": "ZH16303",
+              "value": "1300 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43732"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-06T19:25:36.781Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "7 °C",
+              "detail": "oggi da 6 a 7 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
+              "date": "2026-11-06T13:22:37.000Z",
+              "url": "https://www.usz.ch/hpv-impfung-warum-sie-auch-fuer-jungen-und-maenner-wichtig-ist/"
+            },
             {
               "label": "Verhütung für Männer: Methoden, Sicherheit & Forschung",
               "date": "2026-11-05T09:21:22.000Z",
@@ -132,14 +197,9 @@
               "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
               "date": "2026-10-30T13:25:55.000Z",
               "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
-            },
-            {
-              "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
-              "date": "2026-10-30T11:33:43.000Z",
-              "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -219,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-06T23:00:41.085Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "en": {
       "canton": "ZH",
@@ -232,6 +292,11 @@
           "value": "639.80 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "31",
+          "note": "typical bid 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -298,13 +363,63 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-05T23:57:31.394Z"
+          "updatedAt": "2026-11-06T20:00:47.799Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "ZH839",
+              "value": "11,600 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
+            },
+            {
+              "label": "ZH5545",
+              "value": "10,200 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
+            },
+            {
+              "label": "ZH16303",
+              "value": "1,300 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43732"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-06T19:25:36.781Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "7 °C",
+              "detail": "today from 6 to 7 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
+              "date": "2026-11-06T13:22:37.000Z",
+              "url": "https://www.usz.ch/hpv-impfung-warum-sie-auch-fuer-jungen-und-maenner-wichtig-ist/"
+            },
             {
               "label": "Verhütung für Männer: Methoden, Sicherheit & Forschung",
               "date": "2026-11-05T09:21:22.000Z",
@@ -329,14 +444,9 @@
               "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
               "date": "2026-10-30T13:25:55.000Z",
               "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
-            },
-            {
-              "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
-              "date": "2026-10-30T11:33:43.000Z",
-              "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -412,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-06T23:00:41.085Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "de": {
       "canton": "ZH",
@@ -425,6 +535,11 @@
           "value": "639.80 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "31",
+          "note": "mittleres Gebot 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -491,13 +606,63 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-05T23:57:31.394Z"
+          "updatedAt": "2026-11-06T20:00:47.799Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "ZH839",
+              "value": "11’600 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
+            },
+            {
+              "label": "ZH5545",
+              "value": "10’200 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
+            },
+            {
+              "label": "ZH16303",
+              "value": "1’300 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43732"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-06T19:25:36.781Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "7 °C",
+              "detail": "heute 6 bis 7 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
+              "date": "2026-11-06T13:22:37.000Z",
+              "url": "https://www.usz.ch/hpv-impfung-warum-sie-auch-fuer-jungen-und-maenner-wichtig-ist/"
+            },
             {
               "label": "Verhütung für Männer: Methoden, Sicherheit & Forschung",
               "date": "2026-11-05T09:21:22.000Z",
@@ -522,14 +687,9 @@
               "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
               "date": "2026-10-30T13:25:55.000Z",
               "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
-            },
-            {
-              "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
-              "date": "2026-10-30T11:33:43.000Z",
-              "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -605,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-06T23:00:41.085Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     },
     "fr": {
       "canton": "ZH",
@@ -618,6 +778,11 @@
           "value": "639,80 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "31",
+          "note": "offre centrale 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -684,13 +849,63 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-05T23:57:31.394Z"
+          "updatedAt": "2026-11-06T20:00:47.799Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "ZH839",
+              "value": "11 600 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
+            },
+            {
+              "label": "ZH5545",
+              "value": "10 200 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
+            },
+            {
+              "label": "ZH16303",
+              "value": "1 300 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43732"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-06T19:25:36.781Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "7 °C",
+              "detail": "aujourd’hui de 6 à 7 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-06T21:42:36.229Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
+              "date": "2026-11-06T13:22:37.000Z",
+              "url": "https://www.usz.ch/hpv-impfung-warum-sie-auch-fuer-jungen-und-maenner-wichtig-ist/"
+            },
             {
               "label": "Verhütung für Männer: Methoden, Sicherheit & Forschung",
               "date": "2026-11-05T09:21:22.000Z",
@@ -715,14 +930,9 @@
               "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
               "date": "2026-10-30T13:25:55.000Z",
               "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
-            },
-            {
-              "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
-              "date": "2026-10-30T11:33:43.000Z",
-              "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -794,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-06T23:00:41.085Z"
+      "updatedAt": "2026-11-07T06:55:41.643Z"
     }
   }
 }
