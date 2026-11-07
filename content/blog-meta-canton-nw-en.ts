@@ -27,6 +27,9 @@ const blogMetaCantonNwEn: Record<string, string> = {
     'blog.article.chiusura-imbocco-dorfstrasse.title': 'Dorfstrasse: entrance closed from November 9 to 27, 2026',
     'blog.article.chiusura-imbocco-dorfstrasse.excerpt': 'The entrance to Dorfstrasse will be closed from November 9 to 27, 2026, for construction work; the notice indicates four routes for access.',
     'blog.article.chiusura-imbocco-dorfstrasse.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.tassa-circolazione-veicoli-categoria-a.title': 'Category A vehicle tax exemption in Nidwalden for 36 mo',
+    'blog.article.tassa-circolazione-veicoli-categoria-a.excerpt': 'The proposed revision provides that this exemption will be abolished in future and that newly registered vehicles will be taxed under the ordinary rules from the outset.',
+    'blog.article.tassa-circolazione-veicoli-categoria-a.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNwEn;

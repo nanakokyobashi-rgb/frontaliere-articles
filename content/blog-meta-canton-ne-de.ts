@@ -69,6 +69,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.neuchatel-dossier-consiglio-stato.title': 'Neuenburg: drei vom Staatsrat behandelte Dossiers',
     'blog.article.neuchatel-dossier-consiglio-stato.excerpt': 'Der Staatsrat des Kantons Neuch hat am 2.November 2026 die Kurzinformationen zu seiner Sitzung veröffentlicht.',
     'blog.article.neuchatel-dossier-consiglio-stato.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.ostaj-stagnazione-frontalieri.title': 'Stagnazione frontalieri: Ostaj-Daten und Buch zu grenzüberschreitenden Verbindungen',
+    'blog.article.ostaj-stagnazione-frontalieri.excerpt': 'Das Observatoire statistique de l \'Arc jurassien (Ostaj) berichtet von einer Stagnation der Grenzgänger, die sich in zwanzigJahren verdreifacht hat.',
+    'blog.article.ostaj-stagnazione-frontalieri.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;

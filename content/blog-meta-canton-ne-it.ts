@@ -69,6 +69,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.neuchatel-dossier-consiglio-stato.title': 'Neuchâtel: tre dossier trattati dal Consiglio di Stato',
     'blog.article.neuchatel-dossier-consiglio-stato.excerpt': 'Il 2 novembre 2026 il Consiglio di Stato del Canton Neuchâtel ha diffuso le informazioni brevi relative alla sua seduta.',
     'blog.article.neuchatel-dossier-consiglio-stato.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.ostaj-stagnazione-frontalieri.title': 'Stagnazione frontalieri: dati Ostaj e libro sui legami transfrontalieri',
+    'blog.article.ostaj-stagnazione-frontalieri.excerpt': 'L\'Observatoire statistique de l\'Arc jurassien (Ostaj) segnala stagnazione dei lavoratori frontalieri, triplicati in vent\'anni.',
+    'blog.article.ostaj-stagnazione-frontalieri.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNeIt;

@@ -850,6 +850,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ostaj-stagnazione-frontalieri': {
+    title: 'Stagnazione frontalieri: dati Ostaj e libro sui legami transfrontalieri',
+    description: 'L\'Ostaj segnala stagnazione dei frontalieri, triplicati in vent\'anni. Uscita BD \'Vivre la Frontière dans l\'Arc jurassien\' con Costille e Dufour.',
+    keywords: 'frontalieri, ticino, svizzera, italia, stagnazione, dati, ostaj, libro',
+    ogTitle: 'Stagnazione frontalieri Ostaj e legami transfrontalieri',
+    ogDescription: 'L\'Ostaj segnala stagnazione dei lavoratori frontalieri, triplicati in vent\'anni. È uscita la BD \'Vivre la Frontière dans l\'Arc jurassien\' con Costille e Dufour.',
+    canonicalPath: '/articoli-neuchatel/ostaj-stagnazione-frontalieri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stagnazione frontalieri: dati Ostaj e libro sui legami transfrontalieri",
+      "description": "L'Ostaj segnala stagnazione dei frontalieri, triplicati in vent'anni. Uscita BD 'Vivre la Frontière dans l'Arc jurassien' con Costille e Dufour.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ostaj-stagnazione-frontalieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-07T11:35:41+00:00",
+      "dateModified": "2026-11-07T11:35:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/ostaj-stagnazione-frontalieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

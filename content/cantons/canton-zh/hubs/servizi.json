@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-07T09:54:40.735Z",
-  "contentHash": "79f73f0d39fa45284dd38ae649fb6ccc6b2db6db74995ac758af8e1ffc3e8ef0",
+  "updatedAt": "2026-11-07T11:15:37.760Z",
+  "contentHash": "f73538186e72209ae173f7488ef9d0f9abab7583ffd45426f8d94d3a2d4a23d7",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-06T20:00:47.799Z",
+      "updatedAt": "2026-11-07T05:16:42.303Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-06T19:25:36.781Z",
+      "updatedAt": "2026-11-07T05:57:27.338Z",
       "keyFacts": 1
     },
     {
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "31",
-          "note": "offerta mediana 300 CHF"
+          "note": "offerta mediana 330 CHF"
         }
       ],
       "dataBlocks": [
@@ -111,7 +111,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-06T20:00:47.799Z"
+          "updatedAt": "2026-11-07T05:16:42.303Z"
         },
         {
           "id": "aste-targhe",
@@ -120,29 +120,29 @@
           "items": [
             {
               "label": "ZH839",
-              "value": "11.600 CHF",
+              "value": "12.000 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
             },
             {
               "label": "ZH5545",
-              "value": "10.200 CHF",
+              "value": "11.200 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
             },
             {
-              "label": "ZH16303",
-              "value": "1300 CHF",
+              "label": "ZH77786",
+              "value": "2040 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-11T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43732"
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-06T19:25:36.781Z"
+          "updatedAt": "2026-11-07T05:57:27.338Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -260,7 +260,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-07T09:54:40.735Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "en": {
       "canton": "ZH",
@@ -277,7 +277,7 @@
         {
           "label": "Plate auctions running",
           "value": "31",
-          "note": "typical bid 300 CHF"
+          "note": "typical bid 330 CHF"
         }
       ],
       "dataBlocks": [
@@ -344,7 +344,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-06T20:00:47.799Z"
+          "updatedAt": "2026-11-07T05:16:42.303Z"
         },
         {
           "id": "aste-targhe",
@@ -353,29 +353,29 @@
           "items": [
             {
               "label": "ZH839",
-              "value": "11,600 CHF",
+              "value": "12,000 CHF",
               "detail": "current bid",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
             },
             {
               "label": "ZH5545",
-              "value": "10,200 CHF",
+              "value": "11,200 CHF",
               "detail": "current bid",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
             },
             {
-              "label": "ZH16303",
-              "value": "1,300 CHF",
+              "label": "ZH77786",
+              "value": "2,040 CHF",
               "detail": "current bid",
               "date": "2026-11-11T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43732"
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-06T19:25:36.781Z"
+          "updatedAt": "2026-11-07T05:57:27.338Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -489,7 +489,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-07T09:54:40.735Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "de": {
       "canton": "ZH",
@@ -506,7 +506,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "31",
-          "note": "mittleres Gebot 300 CHF"
+          "note": "mittleres Gebot 330 CHF"
         }
       ],
       "dataBlocks": [
@@ -573,7 +573,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-06T20:00:47.799Z"
+          "updatedAt": "2026-11-07T05:16:42.303Z"
         },
         {
           "id": "aste-targhe",
@@ -582,29 +582,29 @@
           "items": [
             {
               "label": "ZH839",
-              "value": "11’600 CHF",
+              "value": "12’000 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
             },
             {
               "label": "ZH5545",
-              "value": "10’200 CHF",
+              "value": "11’200 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
             },
             {
-              "label": "ZH16303",
-              "value": "1’300 CHF",
+              "label": "ZH77786",
+              "value": "2’040 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-11T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43732"
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-06T19:25:36.781Z"
+          "updatedAt": "2026-11-07T05:57:27.338Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -718,7 +718,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-07T09:54:40.735Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "fr": {
       "canton": "ZH",
@@ -735,7 +735,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "31",
-          "note": "offre centrale 300 CHF"
+          "note": "offre centrale 330 CHF"
         }
       ],
       "dataBlocks": [
@@ -802,7 +802,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-06T20:00:47.799Z"
+          "updatedAt": "2026-11-07T05:16:42.303Z"
         },
         {
           "id": "aste-targhe",
@@ -811,29 +811,29 @@
           "items": [
             {
               "label": "ZH839",
-              "value": "11 600 CHF",
+              "value": "12 000 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
             },
             {
               "label": "ZH5545",
-              "value": "10 200 CHF",
+              "value": "11 200 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-11T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
             },
             {
-              "label": "ZH16303",
-              "value": "1 300 CHF",
+              "label": "ZH77786",
+              "value": "2 040 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-11T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43732"
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-06T19:25:36.781Z"
+          "updatedAt": "2026-11-07T05:57:27.338Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -943,7 +943,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-07T09:54:40.735Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     }
   }
 }

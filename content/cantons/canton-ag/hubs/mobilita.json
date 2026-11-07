@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "9753f4c1c1ac67bbccd7f286c8e3c72a250440ae5df5734884bfc101e6bfba71",
+  "updatedAt": "2026-11-07T11:15:37.760Z",
+  "contentHash": "ad8ac1caeed1fb4ee90027c4a18703abe393d0b964ee52cce8901c1cf13ceaf2",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-06T19:47:29.462Z",
+      "updatedAt": "2026-11-07T01:17:15.077Z",
       "keyFacts": 2
     },
     {
@@ -38,12 +38,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "15",
-          "note": "segnalazioni aggiornate: 6 novembre 2026"
+          "note": "segnalazioni aggiornate: 7 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "28",
-          "note": "segnalazioni aggiornate: 6 novembre 2026"
+          "note": "segnalazioni aggiornate: 7 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -154,7 +154,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-06T19:47:29.462Z"
+          "updatedAt": "2026-11-07T01:17:15.077Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "en": {
       "canton": "AG",
@@ -286,12 +286,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "15",
-          "note": "reports as of 6 November 2026"
+          "note": "reports as of 7 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "28",
-          "note": "reports as of 6 November 2026"
+          "note": "reports as of 7 November 2026"
         }
       ],
       "dataBlocks": [
@@ -402,7 +402,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-06T19:47:29.462Z"
+          "updatedAt": "2026-11-07T01:17:15.077Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -518,7 +518,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "de": {
       "canton": "AG",
@@ -534,12 +534,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "15",
-          "note": "Meldungen vom 6. November 2026"
+          "note": "Meldungen vom 7. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "28",
-          "note": "Meldungen vom 6. November 2026"
+          "note": "Meldungen vom 7. November 2026"
         }
       ],
       "dataBlocks": [
@@ -650,7 +650,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-06T19:47:29.462Z"
+          "updatedAt": "2026-11-07T01:17:15.077Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -766,7 +766,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "fr": {
       "canton": "AG",
@@ -782,12 +782,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "15",
-          "note": "signalements au 6 novembre 2026"
+          "note": "signalements au 7 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "28",
-          "note": "signalements au 6 novembre 2026"
+          "note": "signalements au 7 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -898,7 +898,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-06T19:47:29.462Z"
+          "updatedAt": "2026-11-07T01:17:15.077Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1014,7 +1014,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     }
   }
 }

@@ -27,6 +27,9 @@ const blogMetaCantonNwIt: Record<string, string> = {
     'blog.article.chiusura-imbocco-dorfstrasse.title': 'Dorfstrasse: imbocco chiuso dal 9 al 27 novembre 2026',
     'blog.article.chiusura-imbocco-dorfstrasse.excerpt': 'L\'imbocco della Dorfstrasse sarà chiuso dal 9 al 27 novembre 2026 per lavori; la nota indica quattro strade per l\'accesso.',
     'blog.article.chiusura-imbocco-dorfstrasse.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.tassa-circolazione-veicoli-categoria-a.title': 'Esente tassa circolazione veicoli categoria A nel Canton Nidvaldo per 36 mesi',
+    'blog.article.tassa-circolazione-veicoli-categoria-a.excerpt': 'Nel Canton Nidvaldo, i veicoli inseriti nella categoria di efficienza A sono oggi esenti dalla tassa di circolazione per i primi 36 mesi dalla loro prima messa in circolazione.',
+    'blog.article.tassa-circolazione-veicoli-categoria-a.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNwIt;

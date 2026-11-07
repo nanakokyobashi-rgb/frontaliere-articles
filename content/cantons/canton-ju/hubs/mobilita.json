@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "d9bbdc610a0584ef034a758f1eb40f582cd3e91f7a650af0fac6572662a45d12",
+  "updatedAt": "2026-11-07T11:15:37.760Z",
+  "contentHash": "f0d364c13f353c2427c00f132e70ebddfefa619e9cbab27f964ecce05cf69865",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-06T19:47:29.462Z",
+      "updatedAt": "2026-11-07T01:17:15.077Z",
       "keyFacts": 1
     },
     {
@@ -38,7 +38,7 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 6 novembre 2026"
+          "note": "segnalazioni aggiornate: 7 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -89,7 +89,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-06T19:47:29.462Z"
+          "updatedAt": "2026-11-07T01:17:15.077Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -155,7 +155,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "en": {
       "canton": "JU",
@@ -171,7 +171,7 @@
         {
           "label": "Road closures in force or imminent",
           "value": "1",
-          "note": "reports as of 6 November 2026"
+          "note": "reports as of 7 November 2026"
         }
       ],
       "dataBlocks": [
@@ -222,7 +222,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-06T19:47:29.462Z"
+          "updatedAt": "2026-11-07T01:17:15.077Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -288,7 +288,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "de": {
       "canton": "JU",
@@ -304,7 +304,7 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "1",
-          "note": "Meldungen vom 6. November 2026"
+          "note": "Meldungen vom 7. November 2026"
         }
       ],
       "dataBlocks": [
@@ -355,7 +355,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-06T19:47:29.462Z"
+          "updatedAt": "2026-11-07T01:17:15.077Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -421,7 +421,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "fr": {
       "canton": "JU",
@@ -437,7 +437,7 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "1",
-          "note": "signalements au 6 novembre 2026"
+          "note": "signalements au 7 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -488,7 +488,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-06T19:47:29.462Z"
+          "updatedAt": "2026-11-07T01:17:15.077Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -554,7 +554,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "c447dc42fb78ace0a1d441e87f52d6b3e330b88de5032769bb68fe55a5aef74b",
+  "updatedAt": "2026-11-07T11:18:55.081Z",
+  "contentHash": "1f40203dbcef1cfb831584252894480cf01613f9fcdcd2de4e1c9e813ea91a6c",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-03T14:41:22.679Z",
+      "updatedAt": "2026-11-06T14:35:31.386Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Canton Zug accantona 900 milioni per generazioni future",
+          "url": "/articoli-zugo/zug-fondo-zukunftskapital-900m/",
+          "excerpt": "Il fondo «Zukunftskapital» è previsto per il 2028, con prelievi possibili non prima di dieci anni, gestito dalla Direzione delle finanze.",
+          "date": "2026-11-07T11:06:15.874Z"
+        },
         {
           "title": "Zugo pubblica l'adeguamento del Piano direttore 26/1",
           "url": "/articoli-zugo/consultazione-piano-zugo/",
@@ -82,12 +88,6 @@
           "url": "/articoli-zugo/risch-231-milioni-tasse/",
           "excerpt": "Il titolo di Zentralplus segnala 231 milioni di investimenti per Risch e una riduzione delle imposte.",
           "date": "2026-10-27T07:07:01.285Z"
-        },
-        {
-          "title": "Zugo rende disponibile l'agenda del Kantonsrat",
-          "url": "/articoli-zugo/zugo-agenda-kantonsrat-ottobre/",
-          "excerpt": "La fonte del Canton Zugo rende disponibile l'ordine del giorno della seduta del Kantonsrat del 29 ottobre 2026.",
-          "date": "2026-10-27T01:58:14.398Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-07T11:18:55.081Z"
     },
     "en": {
       "canton": "ZG",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Canton Zug earmarks 900 million for future generations",
+          "url": "/en/zug-articles/zug-future-capital-900m/",
+          "excerpt": "The «Zukunftskapital» fund is planned for 2028, with withdrawals possible no earlier than ten years, and is managed by the Directorate of Finance.",
+          "date": "2026-11-07T11:06:15.874Z"
+        },
         {
           "title": "Zug publishes the adjustment to the 26/1 Structure Plan",
           "url": "/en/zug-articles/zug-directive-plan-consultation/",
@@ -169,12 +175,6 @@
           "url": "/en/zug-articles/risch-231-million-tax-cut/",
           "excerpt": "The Zentralplus headline reports 231 million in investments for Risch and a reduction in taxes.",
           "date": "2026-10-27T07:07:01.285Z"
-        },
-        {
-          "title": "Zug makes the Kantonsrat agenda available",
-          "url": "/en/zug-articles/zug-cantonal-council-agenda-october-2026/",
-          "excerpt": "The source from the Canton of Zug makes available the agenda for the Kantonsrat session on October 29, 2026.",
-          "date": "2026-10-27T01:58:14.398Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-07T11:18:55.081Z"
     },
     "de": {
       "canton": "ZG",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Kanton Zug legt 900 Millionen für künftige Generationen zurück",
+          "url": "/de/zug-artikel/zug-zukunftskapital-900m/",
+          "excerpt": "Der Fonds «Zukunftskapital» ist für 2028 vorgesehen, Entnahmen sind frühestens nach zehn Jahren möglich und er wird von der Finanzdirektion verwaltet.",
+          "date": "2026-11-07T11:06:15.874Z"
+        },
         {
           "title": "Zug veröffentlicht die Anpassung des Richtplans 26/1",
           "url": "/de/zug-artikel/zug-richtplan-mitwirkung-26-1/",
@@ -256,12 +262,6 @@
           "url": "/de/zug-artikel/risch-231-millionen-steuern/",
           "excerpt": "Die Überschrift von Zentralplus weist auf Investitionen in Höhe von 231 Millionen für Risch und eine Senkung der Steuern hin.",
           "date": "2026-10-27T07:07:01.285Z"
-        },
-        {
-          "title": "Zug stellt die Traktandenliste des Kantonsrats zur Verfügung",
-          "url": "/de/zug-artikel/zug-traktandenliste-kantonsrat-oktober-2026/",
-          "excerpt": "Der 29. Oktober 2026 ist das angegebene Datum für die Sitzung des Kantonsrats von Zug. Die zugehörige Traktandenliste, also die Liste der Tagesordnungspunkte, ist verfügbar: Dies ist die zentrale Aussage der Quelle.",
-          "date": "2026-10-27T01:58:14.398Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-07T11:18:55.081Z"
     },
     "fr": {
       "canton": "ZG",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Le canton de Zoug met de côté 900 millions pour les générations futures",
+          "url": "/fr/articles-zoug/zoug-capital-avenir-900m/",
+          "excerpt": "Le fonds «Zukunftskapital» est prévu pour 2028, avec des prélèvements possibles au plus tôt dans dix ans, géré par la Direction des finances.",
+          "date": "2026-11-07T11:06:15.874Z"
+        },
         {
           "title": "Zoug publie l’adaptation du Plan directeur 26/1",
           "url": "/fr/articles-zoug/plan-directeur-zoug-consultation/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-zoug/risch-231-millions-impots/",
           "excerpt": "Le titre de Zentralplus signale 231 millions d’investissements pour Risch et une réduction des impôts.",
           "date": "2026-10-27T07:07:01.285Z"
-        },
-        {
-          "title": "Zoug met à disposition l’ordre du jour du Kantonsrat",
-          "url": "/fr/articles-zoug/zoug-ordre-du-jour-conseil-octobre-2026/",
-          "excerpt": "La source du canton de Zoug met à disposition l’ordre du jour de la séance du Kantonsrat du 29 octobre 2026.",
-          "date": "2026-10-27T01:58:14.398Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-07T11:18:55.081Z"
     }
   }
 }

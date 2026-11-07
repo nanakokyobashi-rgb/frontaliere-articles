@@ -66,6 +66,9 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.consultazione-piano-zugo.title': 'Zug publishes the adjustment to the 26/1 Structure Plan',
     'blog.article.consultazione-piano-zugo.excerpt': 'The Canton of Zug is putting the 26/1 Structure Plan out for consultation: special zones for multiple dwellings and a stabilization strategy in the non-building area.',
     'blog.article.consultazione-piano-zugo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.zug-fondo-zukunftskapital-900m.title': 'Canton Zug earmarks 900 million for future generations',
+    'blog.article.zug-fondo-zukunftskapital-900m.excerpt': 'The «Zukunftskapital» fund is planned for 2028, with withdrawals possible no earlier than ten years, and is managed by the Directorate of Finance.',
+    'blog.article.zug-fondo-zukunftskapital-900m.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZgEn;
