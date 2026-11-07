@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-infermieri-osc-sindacati-stipendi.webp",
-      "sha256": "d4ec0197536399588c7dde530073da29ef6ac3008fbe4226755466f4b32e4a33"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-infermieri-osc-sindacati-stipendi-480w.webp",
-      "sha256": "e0cd0f26a8802875619f083afc6d39db690752df67d7597fd4a4133e84d25826"
-    }
-  ]
+  "items": []
 }
