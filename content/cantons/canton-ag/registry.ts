@@ -326,4 +326,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'oelrainstrasse-chiusura-5-novembre',
+ category: 'pratico',
+ date: '2026-11-07T01:08:28.390Z',
+ image: '/images/blog/article-oelrainstrasse-chiusura-5-novembre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
