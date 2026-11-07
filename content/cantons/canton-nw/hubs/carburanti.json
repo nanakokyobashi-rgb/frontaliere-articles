@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "carburanti",
-  "updatedAt": "2026-11-07T00:51:56.780Z",
-  "contentHash": "ea145b27fde7085a0d2af145700974dcbcadf5475bc436d2402804f2eab1ca8e",
+  "updatedAt": "2026-11-07T11:15:37.760Z",
+  "contentHash": "c082ea847610a9c9106ef7c02ea5f2676682254a5fac10d7913e71f4833b7eb4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-05T14:57:01.545Z",
+      "updatedAt": "2026-11-06T14:35:31.386Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-05T14:57:01.545Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Esente tassa circolazione veicoli categoria A nel Canton Nidvaldo per 36 mesi",
+          "url": "/articoli-nidvaldo/tassa-circolazione-veicoli-categoria-a/",
+          "excerpt": "Nel Canton Nidvaldo, i veicoli inseriti nella categoria di efficienza A sono oggi esenti dalla tassa di circolazione per i primi 36 mesi dalla loro prima messa in circolazione.",
+          "date": "2026-11-07T11:05:42.871Z"
+        },
         {
           "title": "Dorfstrasse: imbocco chiuso dal 9 al 27 novembre 2026",
           "url": "/articoli-nidvaldo/chiusura-imbocco-dorfstrasse/",
@@ -82,12 +88,6 @@
           "url": "/articoli-nidvaldo/hergiswil-fattura-fiscale-online/",
           "excerpt": "A Hergiswil le fatture fiscali provvisorie possono essere richieste online: il modulo consente di trasmettere modifiche che saranno poi recepite nella fattura.",
           "date": "2026-10-30T19:39:12.910Z"
-        },
-        {
-          "title": "Eventi del weekend nel Canton Nidvaldo: cosa fare sabato e domenica",
-          "url": "/articoli-nidvaldo/eventi-weekend-nidvaldo/",
-          "excerpt": "Eventi nel Canton Nidvaldo ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
-          "date": "2026-10-17T11:29:11.132Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-07T00:51:56.780Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "en": {
       "canton": "NW",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-05T14:57:01.545Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Category A vehicle tax exemption in Nidwalden for 36 mo",
+          "url": "/en/nidwalden-articles/vehicle-category-a-circulation-tax/",
+          "excerpt": "The proposed revision provides that this exemption will be abolished in future and that newly registered vehicles will be taxed under the ordinary rules from the outset.",
+          "date": "2026-11-07T11:05:42.871Z"
+        },
         {
           "title": "Dorfstrasse: entrance closed from November 9 to 27, 2026",
           "url": "/en/nidwalden-articles/dorfstrasse-junction-closure/",
@@ -169,12 +175,6 @@
           "url": "/en/nidwalden-articles/hergiswil-provisional-tax-bill/",
           "excerpt": "In Hergiswil, provisional tax bills can be requested online: the form allows you to submit changes that will then be incorporated into the bill.",
           "date": "2026-10-30T19:39:12.910Z"
-        },
-        {
-          "title": "Weekend events in Nidwalden: what to do Saturday & Sunday",
-          "url": "/en/nidwalden-articles/weekend-events-nidwalden/",
-          "excerpt": "Events in Nidwalden every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
-          "date": "2026-10-17T11:29:11.132Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-07T00:51:56.780Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "de": {
       "canton": "NW",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-05T14:57:01.545Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Nidwalden: Kat.-A-Fahrzeuge 36 Monate ohne Verkehrssteuer",
+          "url": "/de/nidwalden-artikel/verkehrssteuer-kategorie-a-fahrzeuge/",
+          "excerpt": "Im Kanton Nidwalden sind Fahrzeuge der Effizienzkategorie A heute während der ersten 36 Monate ab ihrer ersten Inverkehrsetzung von der Verkehrssteuer befreit.",
+          "date": "2026-11-07T11:05:42.871Z"
+        },
         {
           "title": "Dorfstrasse: Zufahrt vom 9. bis 27. November 2026 gesperrt",
           "url": "/de/nidwalden-artikel/sperrung-dorfstrasse-einmuendung/",
@@ -256,12 +262,6 @@
           "url": "/de/nidwalden-artikel/hergiswil-provisorische-steuerrechnung/",
           "excerpt": "In Hergiswil können provisorische Steuerrechnungen online angefordert werden: Über das Formular können Änderungen übermittelt werden, die anschließend in der Rechnung berücksichtigt werden.",
           "date": "2026-10-30T19:39:12.910Z"
-        },
-        {
-          "title": "Veranstaltungen am Wochenende in Nidwalden: was tun Sa & So",
-          "url": "/de/nidwalden-artikel/wochenend-veranstaltungen-nidwalden/",
-          "excerpt": "Veranstaltungen in Nidwalden an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
-          "date": "2026-10-17T11:29:11.132Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-07T00:51:56.780Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "fr": {
       "canton": "NW",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-05T14:57:01.545Z"
+          "updatedAt": "2026-11-06T14:35:31.386Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Véhicules A: taxe de circulation exonérée à Nidwald, 36 mois",
+          "url": "/fr/articles-nidwald/taxe-circulation-vehicules-categorie-a/",
+          "excerpt": "Dans le canton de Nidwald, les véhicules classés dans la catégorie d’efficacité A sont aujourd’hui exemptés de la taxe de circulation pendant les 36 premiers mois suivant leur première mise en circulation.",
+          "date": "2026-11-07T11:05:42.871Z"
+        },
         {
           "title": "Dorfstrasse : entrée fermée du 9 au 27 novembre 2026",
           "url": "/fr/articles-nidwald/fermeture-acces-dorfstrasse/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-nidwald/hergiswil-facture-fiscale-provisoire/",
           "excerpt": "À Hergiswil, les factures fiscales provisoires peuvent être demandées en ligne : le formulaire permet de transmettre des modifications qui seront ensuite prises en compte dans la facture.",
           "date": "2026-10-30T19:39:12.910Z"
-        },
-        {
-          "title": "Événements du week-end à Nidwald : que faire samedi & dimanche",
-          "url": "/fr/articles-nidwald/evenements-week-end-nidwald/",
-          "excerpt": "Événements à Nidwald chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
-          "date": "2026-10-17T11:29:11.132Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-07T00:51:56.780Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     }
   }
 }

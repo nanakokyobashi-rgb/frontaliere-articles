@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "fisco",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "8055bf7c14f33aef231ce335b666cf1bb28f61b1afdc54fb0069fb551b0fcfc1",
+  "updatedAt": "2026-11-07T11:15:37.760Z",
+  "contentHash": "8bcc3ece5b530114ebc59f6b24e6f04038976ec293a2867929824543a8a92231",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -135,6 +135,12 @@
           "date": "2026-10-30T19:39:12.910Z"
         },
         {
+          "title": "Esente tassa circolazione veicoli categoria A nel Canton Nidvaldo per 36 mesi",
+          "url": "/articoli-nidvaldo/tassa-circolazione-veicoli-categoria-a/",
+          "excerpt": "Nel Canton Nidvaldo, i veicoli inseriti nella categoria di efficienza A sono oggi esenti dalla tassa di circolazione per i primi 36 mesi dalla loro prima messa in circolazione.",
+          "date": "2026-11-07T11:05:42.871Z"
+        },
+        {
           "title": "Comprare casa in Nidvaldo: prezzi, mutuo e fiscalità",
           "url": "/articoli-svizzera/nidvaldo-comprare-casa-costi-fiscali/",
           "excerpt": "Acquistare casa in Svizzera richiede di orientarsi tra tre livelli di tassazione, mutuo ipotecario e spese notarili. Scopri come funziona il sistema e come valutare la sostenibilità del prestito.",
@@ -176,7 +182,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "en": {
       "canton": "NW",
@@ -289,6 +295,12 @@
           "date": "2026-10-30T19:39:12.910Z"
         },
         {
+          "title": "Category A vehicle tax exemption in Nidwalden for 36 mo",
+          "url": "/en/nidwalden-articles/vehicle-category-a-circulation-tax/",
+          "excerpt": "The proposed revision provides that this exemption will be abolished in future and that newly registered vehicles will be taxed under the ordinary rules from the outset.",
+          "date": "2026-11-07T11:05:42.871Z"
+        },
+        {
           "title": "Buying a house in Nidwalden: prices, mortgage and taxation",
           "url": "/en/swiss-articles/nidwalden-buying-house-costs-taxes/",
           "excerpt": "Buying a house in Switzerland requires you to navigate between three levels of taxation, mortgage and notary fees. Learn how the system works and how to assess loan sustainability.",
@@ -330,7 +342,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "de": {
       "canton": "NW",
@@ -443,6 +455,12 @@
           "date": "2026-10-30T19:39:12.910Z"
         },
         {
+          "title": "Nidwalden: Kat.-A-Fahrzeuge 36 Monate ohne Verkehrssteuer",
+          "url": "/de/nidwalden-artikel/verkehrssteuer-kategorie-a-fahrzeuge/",
+          "excerpt": "Im Kanton Nidwalden sind Fahrzeuge der Effizienzkategorie A heute während der ersten 36 Monate ab ihrer ersten Inverkehrsetzung von der Verkehrssteuer befreit.",
+          "date": "2026-11-07T11:05:42.871Z"
+        },
+        {
           "title": "Haus kaufen in Nidwalden: Preise, Hypothek und Steuern",
           "url": "/de/schweiz-artikel/nidwalden-haus-kaufen-kosten-steuern/",
           "excerpt": "Beim Hauskauf in der Schweiz müssen Sie sich zwischen drei Steuerstufen, Hypothekendarlehen und Notarkosten orientieren. Erfahren Sie, wie das System funktioniert und wie Sie die Tragbarkeit des Darlehens bewerten…",
@@ -484,7 +502,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     },
     "fr": {
       "canton": "NW",
@@ -597,6 +615,12 @@
           "date": "2026-10-30T19:39:12.910Z"
         },
         {
+          "title": "Véhicules A: taxe de circulation exonérée à Nidwald, 36 mois",
+          "url": "/fr/articles-nidwald/taxe-circulation-vehicules-categorie-a/",
+          "excerpt": "Dans le canton de Nidwald, les véhicules classés dans la catégorie d’efficacité A sont aujourd’hui exemptés de la taxe de circulation pendant les 36 premiers mois suivant leur première mise en circulation.",
+          "date": "2026-11-07T11:05:42.871Z"
+        },
+        {
           "title": "Acheter une maison à Nidwald : prix, hypothèque et fiscalité",
           "url": "/fr/articles-suisse/nidwald-acheter-maison-couts-fiscalite/",
           "excerpt": "Acheter une maison en Suisse nécessite de s'orienter entre trois niveaux d'imposition, de prêt hypothécaire et de frais de notaire. Découvrez comment fonctionne le système et comment évaluer la durabilité du prêt.",
@@ -638,7 +662,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:15:37.760Z"
     }
   }
 }
