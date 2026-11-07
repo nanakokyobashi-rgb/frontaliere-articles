@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "b3ee7b716df52ffd594ebb63e013c4c67c69f6c58bc6e28cb596417a2e35457f",
+  "updatedAt": "2026-11-07T13:49:51.813Z",
+  "contentHash": "2fff7a1f66ff51d2f7226ee8b7a3f49a94983f65c8f3ba4bdc6b44255d2aa1d0",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "MARBEL Immobilien a Mellingen: esperienza di oltre due decenni",
+          "url": "/articoli-argovia/due-generazioni-immobiliare-mellingen/",
+          "excerpt": "Martin e Roman Strebel gestiscono MARBEL Immobilien a Mellingen, offrendo servizi di vendita, valutazione o eredità immobiliari con competenza regionale.",
+          "date": "2026-11-07T13:46:13.665Z"
+        },
+        {
           "title": "Chiusura Oelrainstrasse Baden giovedì 5 novembre per rimontaggio container",
           "url": "/articoli-argovia/oelrainstrasse-chiusura-5-novembre/",
           "excerpt": "L'Oelrainstrasse tra Parkhaus Bahnhof e Parkhaus Theaterplatz sarà chiusa dalle 8.30 alle circa 11 per il rimontaggio di quattro container interrati.",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/siccita-fislisbach-forniture/",
           "excerpt": "A metà ottobre 2026 il prelievo settimanale è sceso a 7'136 m3, ma le forniture di Regionalwerke Baden AG restano necessarie.",
           "date": "2026-11-03T10:33:15.362Z"
-        },
-        {
-          "title": "Blackout a Brugg: guasto ad alta tensione",
-          "url": "/articoli-argovia/blackout-brugg-guasto-alta-tensione/",
-          "excerpt": "Il Canton Argovia ha avvertito su Alertswiss per un blackout nella regione di Brugg.",
-          "date": "2026-11-02T23:55:33.810Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T13:49:51.813Z"
     },
     "en": {
       "canton": "AG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "MARBEL Immobilien in Mellingen: more than two decades of experience",
+          "url": "/en/aargau-articles/two-generations-real-estate-mellingen/",
+          "excerpt": "Martin and Roman Strebel run MARBEL Immobilien in Mellingen, offering services for property sales, valuations, or inheritances with regional expertise.",
+          "date": "2026-11-07T13:46:13.665Z"
+        },
+        {
           "title": "Closure of Oelrainstrasse, Baden, Thursday, November 5, for container reassembly",
           "url": "/en/aargau-articles/oelrainstrasse-closure-november-5/",
           "excerpt": "L'Oelrainstrasse between Parkhaus Bahnhof and Parkhaus Theaterplatz will be closed from 8:30 until approximately 11 for the reassembly of four underground containers.",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/fislisbach-drought-water-supply/",
           "excerpt": "In mid-October 2026 the weekly withdrawal fell to 7'136 m3, but supplies from Regionalwerke Baden AG remain necessary.",
           "date": "2026-11-03T10:33:15.362Z"
-        },
-        {
-          "title": "Blackout in Brugg: high-voltage fault",
-          "url": "/en/aargau-articles/brugg-power-outage-high-voltage-fault/",
-          "excerpt": "The Canton of Aargau issued a warning on Alertswiss about a blackout in the Brugg region.",
-          "date": "2026-11-02T23:55:33.810Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T13:49:51.813Z"
     },
     "de": {
       "canton": "AG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "MARBEL Immobilien in Mellingen: Erfahrung von über zwei Jahrzehnten",
+          "url": "/de/aargau-artikel/zwei-generationen-immobilien-mellingen/",
+          "excerpt": "Martin und Roman Strebel führen MARBEL Immobilien in Mellingen und bieten Dienstleistungen für den Verkauf, die Bewertung oder die Vererbung von Immobilien mit regionaler Kompetenz an.",
+          "date": "2026-11-07T13:46:13.665Z"
+        },
+        {
           "title": "Sperrung Oelrainstrasse: 5.11. wegen Container-Wiedereinbau",
           "url": "/de/aargau-artikel/oelrainstrasse-schliessung-5-november/",
           "excerpt": "Die Oelrainstrasse zwischen Parkhaus Bahnhof und Parkhaus Theaterplatz wird von 8.30 bis etwa 11 Uhr wegen des Wiedereinbaus von vier unterirdischen Containern gesperrt.",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/fislisbach-trinkwasser-lieferungen/",
           "excerpt": "Mitte Oktober 2026 sank die wöchentliche Wasserentnahme auf 7'136 m3, doch die Lieferungen von Regionalwerke Baden AG bleiben notwendig.",
           "date": "2026-11-03T10:33:15.362Z"
-        },
-        {
-          "title": "Stromausfall in Brugg: Störung im Hochspannungsnetz",
-          "url": "/de/aargau-artikel/brugg-stromausfall-hochspannungsstoerung/",
-          "excerpt": "Der Kanton Aargau hat auf Alertswiss vor einem Stromausfall in der Region Brugg gewarnt.",
-          "date": "2026-11-02T23:55:33.810Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T13:49:51.813Z"
     },
     "fr": {
       "canton": "AG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "MARBEL Immobilien à Mellingen : une expérience de plus de deux décennies",
+          "url": "/fr/articles-argovie/deux-generations-immobilier-mellingen/",
+          "excerpt": "Martin et Roman Strebel gèrent MARBEL Immobilien à Mellingen, en proposant des services de vente, d’évaluation ou de succession immobilière avec une expertise régionale.",
+          "date": "2026-11-07T13:46:13.665Z"
+        },
+        {
           "title": "Baden : Oelrainstrasse fermée pour remonter des conteneurs",
           "url": "/fr/articles-argovie/oelrainstrasse-fermeture-5-novembre/",
           "excerpt": "L’Oelrainstrasse entre Parkhaus Bahnhof et Parkhaus Theaterplatz sera fermée de 8.30 à environ 11 pour le remontage de quatre conteneurs enterrés.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/fislisbach-eau-potable-livraisons/",
           "excerpt": "À la mi-octobre 2026, le prélèvement hebdomadaire est descendu à 7'136 m3, mais les approvisionnements de Regionalwerke Baden AG restent nécessaires.",
           "date": "2026-11-03T10:33:15.362Z"
-        },
-        {
-          "title": "Panne de courant à Brugg : panne de haute tension",
-          "url": "/fr/articles-argovie/panne-courant-brugg-haute-tension/",
-          "excerpt": "Le canton d'Argovie a averti sur Alertswiss d'une panne de courant dans la région de Brugg.",
-          "date": "2026-11-02T23:55:33.810Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T13:49:51.813Z"
     }
   }
 }
