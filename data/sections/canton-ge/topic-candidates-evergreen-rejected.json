@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ge::https://lecourrier.ch/2026/11/04/impot-auto-transitoire": {
-      "section": "canton-ge",
-      "ts": 1793866444432
-    },
     "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6076": {
       "section": "canton-ge",
       "ts": 1793963297662
@@ -15,6 +11,10 @@
     "canton-ge::https://www.ge.ch/node/45397": {
       "section": "canton-ge",
       "ts": 1794009030813
+    },
+    "canton-ge::https://www.ge.ch/node/45404": {
+      "section": "canton-ge",
+      "ts": 1794093498981
     }
   }
 }
