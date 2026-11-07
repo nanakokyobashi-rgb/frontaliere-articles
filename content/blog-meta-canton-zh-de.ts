@@ -84,6 +84,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.zurigo-budget-rivalutazione-immobili.title': 'Zürich: Neubewertung von Immobilien für erschwingliche Mieten',
     'blog.article.zurigo-budget-rivalutazione-immobili.excerpt': 'Die Stadt Zürich schätzt im Budget 2027 einen Buchgewinn von 2,5 Milliarden Franken, um den gemeinnützigen Wohnungsbau zu unterstützen.',
     'blog.article.zurigo-budget-rivalutazione-immobili.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lavoro-zurigo-imprese.title': 'Arbeitslosenquote bei 2,9% in Zürich: Unternehmen optimistischer',
+    'blog.article.lavoro-zurigo-imprese.excerpt': 'Ende Oktober bleibt die Arbeitslosenquote im Kanton Zürich bei 2,9%; die Unternehmen beurteilen die Lage besser, doch die offenen Stellen bei den RAV sinken auf 7.010.',
+    'blog.article.lavoro-zurigo-imprese.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

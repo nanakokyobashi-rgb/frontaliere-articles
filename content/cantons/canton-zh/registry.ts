@@ -303,4 +303,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lavoro-zurigo-imprese',
+ category: 'novita',
+ date: '2026-11-07T01:22:38.462Z',
+ image: '/images/blog/article-lavoro-zurigo-imprese.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -84,6 +84,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.zurigo-budget-rivalutazione-immobili.title': 'Zurigo: rivalutazione immobili per affitti accessibili',
     'blog.article.zurigo-budget-rivalutazione-immobili.excerpt': 'La Città di Zurigo stima un guadagno contabile di 2,5 miliardi di franchi nel budget 2027 per sostenere l\'edilizia di utilità pubblica.',
     'blog.article.zurigo-budget-rivalutazione-immobili.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lavoro-zurigo-imprese.title': 'Disoccupazione al 2,9% a Zurigo: imprese più ottimiste',
+    'blog.article.lavoro-zurigo-imprese.excerpt': 'A fine ottobre la disoccupazione nel Canton Zurigo resta al 2,9%; le imprese migliorano il giudizio, ma i posti vacanti scendono a 7.010.',
+    'blog.article.lavoro-zurigo-imprese.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZhIt;

@@ -1050,6 +1050,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lavoro-zurigo-imprese': {
+    title: 'Disoccupazione al 2,9% a Zurigo: imprese più ottimiste',
+    description: 'A ottobre il tasso di disoccupazione a Zurigo resta al 2,9%. I disoccupati sono 25.724 e le imprese valutano meglio la situazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, zurigo, imprese, ottimiste',
+    ogTitle: 'Zurigo: disoccupazione stabile, imprese più positive',
+    ogDescription: 'Il tasso cantonale resta al 2,9% a fine ottobre. I RAV contano 7.010 posti vacanti, 595 in meno.',
+    canonicalPath: '/articoli-zurigo/lavoro-zurigo-imprese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disoccupazione al 2,9% a Zurigo: imprese più ottimiste",
+      "description": "A ottobre il tasso di disoccupazione a Zurigo resta al 2,9%. I disoccupati sono 25.724 e le imprese valutano meglio la situazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lavoro-zurigo-imprese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-07T01:22:38+00:00",
+      "dateModified": "2026-11-07T01:22:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/lavoro-zurigo-imprese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

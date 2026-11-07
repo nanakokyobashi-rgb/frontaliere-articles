@@ -84,6 +84,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.zurigo-budget-rivalutazione-immobili.title': 'Zurich : revalorisation des biens immobiliers pour des loyers abordables',
     'blog.article.zurigo-budget-rivalutazione-immobili.excerpt': 'La Ville de Zurich estime un gain comptable de 2,5 milliards de francs dans le budget 2027 pour soutenir la construction de logements d’utilité publique.',
     'blog.article.zurigo-budget-rivalutazione-immobili.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lavoro-zurigo-imprese.title': 'Chômage à 2,9 % à Zurich : les entreprises plus optimistes',
+    'blog.article.lavoro-zurigo-imprese.excerpt': 'Fin octobre, le chômage dans le canton de Zurich reste à 2,9 % ; les entreprises portent un jugement plus positif, mais les postes vacants diminuent à 7.010.',
+    'blog.article.lavoro-zurigo-imprese.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;

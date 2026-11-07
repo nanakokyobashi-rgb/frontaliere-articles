@@ -84,6 +84,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.zurigo-budget-rivalutazione-immobili.title': 'Zurich: property revaluation for affordable rents',
     'blog.article.zurigo-budget-rivalutazione-immobili.excerpt': 'The City of Zurich estimates an accounting gain of 2,5 billion francs in the 2027 budget to support public-interest housing.',
     'blog.article.zurigo-budget-rivalutazione-immobili.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lavoro-zurigo-imprese.title': 'Unemployment at 2,9% in Zurich: businesses more optimistic',
+    'blog.article.lavoro-zurigo-imprese.excerpt': 'At the end of October, unemployment in the Canton of Zurich remains at 2,9%; companies\' assessment improves, but vacancies fall to 7.010.',
+    'blog.article.lavoro-zurigo-imprese.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;
