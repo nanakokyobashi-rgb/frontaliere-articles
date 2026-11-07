@@ -162,6 +162,102 @@ function _preferisceModelloSenzaCap(prefer) {
       && getDeclaredRequestTokenLimit(m) === undefined,
   );
 }
+
+// Misurato con fonte e fatti a zero: il prompt unico ha un'impalcatura piu'
+// grande della sola chiamata di scrittura split (7180 contro 5850 token).
+// Questo e' soltanto il lower-bound sicuro del preflight: il controllo
+// definitivo usa il prompt costruito, perche' il body reale conserva anche il
+// floor della fonte e i fatti di dominio.
+const PROMPT_UNIQUE_SCAFFOLD_FLOOR_TOKENS = 7180;
+
+function getPromptSplitMode() {
+  return String(process.env.CREATE_ARTICLE_PROMPT_SPLIT || 'auto').toLowerCase();
+}
+
+/**
+ * Check whether the roster can accept a request above the supplied floor.
+ *
+ * Before the source scan only the zero-content scaffold is knowable, so that
+ * call is a safe lower-bound precheck and must not claim that the article
+ * prompt fits. After `callGemini` builds the real body, it calls this same
+ * guard with the actual minimum request: source/domain-facts floors included.
+ * Keeping the cap lookup here means both phases use declared and learned
+ * limits from the same source.
+ *
+ * An undefined cap remains eligible: it is the contract for a lane such as
+ * Codex whose input limit is not declared to this router.
+ */
+function providerInputCapGuard(models, splitMode = 'auto', minimumInputTokensOverride = null) {
+  const override = Number(minimumInputTokensOverride);
+  const minimumInputTokens = Number.isFinite(override) && override > 0
+    ? override
+    : splitMode === 'on'
+      ? PROMPT_SCAFFOLD_FLOOR_TOKENS
+      : PROMPT_UNIQUE_SCAFFOLD_FLOOR_TOKENS;
+  const eligibleModels = [];
+  const rejectedModels = [];
+  if (!Array.isArray(models)) {
+    return {
+      ready: false,
+      minimumInputTokens,
+      eligibleModels,
+      rejectedModels,
+    };
+  }
+
+  for (const model of models) {
+    let requestLimit;
+    try {
+      requestLimit = getDeclaredRequestTokenLimit(model);
+    } catch {
+      rejectedModels.push({ model, requestLimit: null, reason: 'input-cap-unreadable' });
+      continue;
+    }
+    if (requestLimit === undefined || requestLimit >= minimumInputTokens) {
+      eligibleModels.push({ model, requestLimit: requestLimit ?? null });
+    } else {
+      rejectedModels.push({ model, requestLimit, reason: 'below-minimum-input-floor' });
+    }
+  }
+
+  return {
+    ready: eligibleModels.length > 0,
+    minimumInputTokens,
+    eligibleModels,
+    rejectedModels,
+  };
+}
+
+function generationRosterOptions() {
+  return { chain: [...DEFAULT_CHAIN, ...PREFERRED_GENERATION_MODELS] };
+}
+
+function providerInputCapGuardError(inputCapGuard) {
+  const finiteLimits = inputCapGuard.rejectedModels
+    .map(({ requestLimit }) => requestLimit)
+    .filter((limit) => Number.isFinite(limit));
+  const maxSkippedReqLimit = finiteLimits.length ? Math.max(...finiteLimits) : 0;
+  const minSkippedReqLimit = finiteLimits.length ? Math.min(...finiteLimits) : 0;
+  const estimatedRequestTokens = inputCapGuard.minimumInputTokens;
+  const over = estimatedRequestTokens - maxSkippedReqLimit;
+  const error = new Error(
+    `Provider roster cannot serve the minimum article request: ${estimatedRequestTokens} tokens `
+    + `versus a best declared cap of ${maxSkippedReqLimit} (over by ${over})`,
+  );
+  error.code = 'ALL_MODELS_EXHAUSTED';
+  error.providerInputCapGuard = true;
+  error.inputCapReport = {
+    count: inputCapGuard.rejectedModels.length,
+    maxSkippedReqLimit,
+    minSkippedReqLimit,
+    estimatedRequestTokens,
+  };
+  error.retryRequestTokenBudget = maxSkippedReqLimit;
+  error.maxSkippedReqLimit = maxSkippedReqLimit;
+  error.minSkippedReqLimit = minSkippedReqLimit;
+  error.estimatedRequestTokens = estimatedRequestTokens;
+  return error;
+}
 // Quota-free MT cascade (DeepL-free / Google / MyMemory / LibreTranslate /
 // local Opus-MT) — the SAME translator the job crawlers + FAQ batch use
 // (scripts/lib/dedicated-crawler-common.mjs, batch-add-faq-to-articles.mjs).
@@ -13046,6 +13142,56 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     };
   };
 
+  // Il preflight in `main()` conosce soltanto lo scaffold, perche' la fonte
+  // viene scaricata dopo la scansione. Qui il prompt e' finalmente costruibile:
+  // misura il piu' piccolo body che il percorso puo' davvero inviare,
+  // conservando il floor della fonte e i fatti di dominio. Nel percorso unico
+  // il gradino finale della scala e' la minima richiesta raggiungibile; nel
+  // percorso split il body non puo' buttare i fatti per rientrare.
+  const _minimumPromptCall = _splitAttiva
+    ? _buildHalf(
+      'body',
+      _clampSourceBody(truncatedContent, PROMPT_SOURCE_FLOOR_CHARS),
+      domainFactsBlock,
+      _remediationShort,
+    )
+    : _buildStep(_shrinkLadder.length - 1);
+  const _promptRoster = typeof getProviderRosterStatus === 'function'
+    && typeof generationRosterOptions === 'function'
+    ? getProviderRosterStatus(generationRosterOptions())
+    : null;
+  const _promptInputCapGuard = typeof providerInputCapGuard === 'function'
+    && _promptRoster?.availableModels?.length > 0
+    ? providerInputCapGuard(
+      _promptRoster.availableModels,
+      _splitMode,
+      _minimumPromptCall.est,
+    )
+    : null;
+  if (_promptInputCapGuard && typeof RUN_REPORT !== 'undefined' && RUN_REPORT?.providerRosterPreflight) {
+    RUN_REPORT.providerRosterPreflight.inputCapGuard = {
+      phase: 'prompt-built-minimum-request',
+      promptPart: _splitAttiva ? 'body' : 'full',
+      sourceFloorChars: PROMPT_SOURCE_FLOOR_CHARS,
+      ..._promptInputCapGuard,
+    };
+  }
+  if (_promptInputCapGuard) {
+    console.error(
+      `PROVIDER_INPUT_CAP ready=${_promptInputCapGuard.ready}`
+      + ` phase=prompt-built part=${_splitAttiva ? 'body' : 'full'}`
+      + ` floor=${_promptInputCapGuard.minimumInputTokens}`
+      + ` eligible=${_promptInputCapGuard.eligibleModels.map(({ model }) => model).join(',') || 'none'}`
+      + ` rejected=${_promptInputCapGuard.rejectedModels.map(({ model, requestLimit }) => `${model}:${requestLimit ?? 'unreadable'}`).join(',') || 'none'}`,
+    );
+  }
+  if (_promptInputCapGuard && !_promptInputCapGuard.ready) {
+    console.error(
+      `::error::provider-input-cap-unavailable: no eligible model accepts the ${_promptInputCapGuard.minimumInputTokens}-token minimum ${_splitAttiva ? 'body' : 'full'} request`,
+    );
+    throw providerInputCapGuardError(_promptInputCapGuard);
+  }
+
   // Costruita QUI, non dentro `_generateSplit`, cosi' che il peso e il
   // contenuto della chiamata di scrittura siano osservabili senza eseguire
   // una chiamata LLM — e' cio' su cui il test si aggancia.
@@ -18443,18 +18589,22 @@ async function main() {
   }
 
   // `initScoreStore()` also completes the dynamic discovery latch. Check the
-  // resulting roster before scanning sources or spending an inference call:
-  // without this guard an empty/disabled provider set paid the whole scan and
-  // only failed after the first headline reached callLLM(). The workflow
-  // preflight remains the network-level probe; this is the in-process,
-  // fail-closed contract for the exact router state used by generation.
+  // resulting roster and the zero-content scaffold before scanning sources or
+  // spending an inference call: without this guard an empty/disabled provider
+  // set paid the whole scan and only failed after the first headline reached
+  // callLLM(). The source-dependent input-cap check runs again in callGemini
+  // after the real prompt is assembled; this pre-scan phase must not pretend
+  // that its scaffold floor is the article request.
   await initScoreStore();
   if (!DRY_RUN_SCAN) {
-    const rosterOptions = { chain: [...DEFAULT_CHAIN, ...PREFERRED_GENERATION_MODELS] };
+    const rosterOptions = generationRosterOptions();
     const rosterReady = providerRosterReady(rosterOptions);
     const roster = getProviderRosterStatus(rosterOptions);
+    const promptSplitMode = getPromptSplitMode();
+    const inputCapGuard = providerInputCapGuard(roster.availableModels, promptSplitMode);
     RUN_REPORT.providerRosterPreflight = {
       scope: 'runtime-model-eligibility',
+      promptSplitMode,
       ready: rosterReady,
       rosterSize: roster.rosterSize,
       runtimeEligibleModels: roster.availableModels,
@@ -18463,12 +18613,22 @@ async function main() {
       availableModelCount: roster.availableModels.length,
       availableProviders: roster.availableProviders,
       reason: roster.reason,
+      inputCapGuard: {
+        phase: 'pre-scan-scaffold-lower-bound',
+        ...inputCapGuard,
+      },
     };
     console.error(
       `PROVIDER_ROSTER ready=${rosterReady} size=${roster.rosterSize}`
       + ` available=${roster.availableModels.length}`
       + ` providers=${roster.availableProviders.join(',') || 'none'}`
       + ` reason=${roster.reason}`,
+    );
+    console.error(
+      `PROVIDER_INPUT_CAP_PRECHECK ready=${inputCapGuard.ready}`
+      + ` scaffoldFloor=${inputCapGuard.minimumInputTokens}`
+      + ` eligible=${inputCapGuard.eligibleModels.map(({ model }) => model).join(',') || 'none'}`
+      + ` rejected=${inputCapGuard.rejectedModels.map(({ model, requestLimit }) => `${model}:${requestLimit ?? 'unreadable'}`).join(',') || 'none'}`,
     );
     if (!rosterReady) {
       finalizeRunReport('error', {
@@ -18477,6 +18637,19 @@ async function main() {
       console.error(
         `::error::provider-roster-unavailable: reason=${roster.reason}`
         + ` roster=${roster.rosterSize} available=${roster.availableModels.length}`,
+      );
+      await exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT);
+      return;
+    }
+    if (!inputCapGuard.ready) {
+      finalizeRunReport('error', {
+        notes: [
+          ...RUN_REPORT.notes,
+          `Provider roster cannot serve even the prompt scaffold: every available input cap is below ${inputCapGuard.minimumInputTokens} tokens`,
+        ],
+      });
+      console.error(
+        `::error::provider-input-cap-unavailable: no eligible model accepts the ${inputCapGuard.minimumInputTokens}-token prompt scaffold`,
       );
       await exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT);
       return;
@@ -20073,6 +20246,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         );
         throw e;
       }
+      // Il guard prompt-built ha gia' provato il minimo ricostruibile, quindi
+      // un retry identico non puo' comprare un modello: la cascata va dichiarata
+      // esaurita subito, senza ripetere la scansione dei cap per ogni tentativo.
+      if (e?.providerInputCapGuard === true) throw e;
       // ── Il numero che la libreria calcola e che nessuno leggeva ──────────
       //
       // Quando ogni modello ha rifiutato per DIMENSIONE, `callLLM` allega
