@@ -165,8 +165,8 @@ function _preferisceModelloSenzaCap(prefer) {
 
 // Misurato con fonte e fatti a zero: il prompt unico ha un'impalcatura piu'
 // grande della sola chiamata di scrittura split (7180 contro 5850 token).
-// Questo e' il secondo floor che il preflight deve conoscere quando il flag
-// di rollback disattiva lo split.
+// Questo e' il floor conservativo che il preflight deve conoscere quando il
+// flag di rollback disattiva lo split o quando `auto` non l'ha ancora deciso.
 const PROMPT_UNIQUE_SCAFFOLD_FLOOR_TOKENS = 7180;
 
 function getPromptSplitMode() {
@@ -178,9 +178,10 @@ function getPromptSplitMode() {
  * that can accept the smallest article-generation call. `providerRosterReady`
  * only answers whether a model is available; `callLLM` applies the input-cap
  * check later, after the source scan has already spent its budget. The prompt
- * floor depends on the requested split mode: the split body call has the
- * 5850-token scaffold, while the explicit `off` rollback uses the 7180-token
- * single-call scaffold.
+ * floor depends on the requested split mode: the explicit `on` mode has the
+ * 5850-token scaffold, while `off` and `auto` use the 7180-token single-call
+ * scaffold. `auto` is conservative here because this preflight runs before
+ * the source scan can decide whether the split is actually needed.
  *
  * The cap lookup deliberately reuses `getDeclaredRequestTokenLimit`, the same
  * source used by `callLLM`, including runtime-learned limits. An undefined cap
@@ -188,9 +189,9 @@ function getPromptSplitMode() {
  * limit is not declared to this router.
  */
 function providerInputCapGuard(models, splitMode = 'auto') {
-  const minimumInputTokens = splitMode === 'off'
-    ? PROMPT_UNIQUE_SCAFFOLD_FLOOR_TOKENS
-    : PROMPT_SCAFFOLD_FLOOR_TOKENS;
+  const minimumInputTokens = splitMode === 'on'
+    ? PROMPT_SCAFFOLD_FLOOR_TOKENS
+    : PROMPT_UNIQUE_SCAFFOLD_FLOOR_TOKENS;
   const eligibleModels = [];
   const rejectedModels = [];
   if (!Array.isArray(models)) {

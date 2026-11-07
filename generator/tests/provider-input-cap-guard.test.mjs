@@ -43,7 +43,7 @@ test('providerInputCapGuard rejects a roster whose every input cap is below the 
 
   assert.deepEqual(guard(['small-a', 'small-b']), {
     ready: false,
-    minimumInputTokens: 5850,
+    minimumInputTokens: FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS,
     eligibleModels: [],
     rejectedModels: [
       { model: 'small-a', requestLimit: 4000, reason: 'below-prompt-scaffold-floor' },
@@ -57,7 +57,7 @@ test('providerInputCapGuard keeps unbounded and exact-floor models eligible', ()
     ['unbounded', undefined],
     ['floor', 5850],
     ['too-small', 4000],
-  ]));
+  ]), 'on');
 
   assert.deepEqual(guard(['unbounded', 'floor', 'too-small']), {
     ready: true,
@@ -68,6 +68,24 @@ test('providerInputCapGuard keeps unbounded and exact-floor models eligible', ()
     ],
     rejectedModels: [
       { model: 'too-small', requestLimit: 4000, reason: 'below-prompt-scaffold-floor' },
+    ],
+  });
+});
+
+test('providerInputCapGuard keeps auto conservative until split is decided', () => {
+  const guard = makeGuard(new Map([
+    ['body-floor', 5850],
+    ['full-floor', FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS],
+  ]), 'auto');
+
+  assert.deepEqual(guard(['body-floor', 'full-floor']), {
+    ready: true,
+    minimumInputTokens: FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS,
+    eligibleModels: [
+      { model: 'full-floor', requestLimit: FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS },
+    ],
+    rejectedModels: [
+      { model: 'body-floor', requestLimit: 5850, reason: 'below-prompt-scaffold-floor' },
     ],
   });
 });
@@ -91,8 +109,8 @@ test('providerInputCapGuard uses the single-call scaffold floor when split is of
     ],
   });
 
-  const splitGuard = makeGuard(new Map([['body-floor', 5850]]), 'auto');
-  assert.equal(splitGuard(['body-floor']).ready, true, 'auto deve conservare il floor della chiamata split');
+  const splitGuard = makeGuard(new Map([['body-floor', 5850]]), 'on');
+  assert.equal(splitGuard(['body-floor']).ready, true, 'on deve usare il floor della chiamata split');
 });
 
 test('providerInputCapGuard fails closed on an unreadable cap and is wired before the scan', () => {
@@ -101,7 +119,7 @@ test('providerInputCapGuard fails closed on an unreadable cap and is wired befor
   });
   assert.deepEqual(guard(['broken']), {
     ready: false,
-    minimumInputTokens: 5850,
+    minimumInputTokens: FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS,
     eligibleModels: [],
     rejectedModels: [{ model: 'broken', requestLimit: null, reason: 'input-cap-unreadable' }],
   });
