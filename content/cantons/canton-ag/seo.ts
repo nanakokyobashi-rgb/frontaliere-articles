@@ -1206,6 +1206,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-incendio-sins-linea-s26': {
+    title: 'Incendio a Sins AG: interrotta la linea S26 | Frontaliere Ticino',
+    description: 'Incendio in un fienile a Sins AG: interrotta la tratta Rotkreuz-Lenzburg. Sulla linea S26 circolano bus sostitutivi fino alle 16 circa.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incendio, sins, interrotta, linea',
+    ogTitle: 'Incendio a Sins AG: interrotta la linea S26',
+    ogDescription: 'Un incendio a Sins AG ha interrotto la tratta ferroviaria tra Rotkreuz e Lenzburg. La linea S26 è servita da bus sostitutivi, con interruzione prevista fino alle 16 circa; la polizia cantonale riferisce che l\'intervento era ancora in corso.',
+    canonicalPath: '/articoli-argovia/incendio-sins-linea-s26/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incendio a Sins AG: interrotta la linea S26",
+      "description": "Incendio in un fienile a Sins AG: interrotta la tratta Rotkreuz-Lenzburg. Sulla linea S26 circolano bus sostitutivi fino alle 16 circa.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-incendio-sins-linea-s26.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-07T14:59:05+00:00",
+      "dateModified": "2026-11-07T14:59:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/incendio-sins-linea-s26/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

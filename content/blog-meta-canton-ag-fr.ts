@@ -96,6 +96,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.due-generazioni-immobiliare-mellingen.title': 'MARBEL Immobilien à Mellingen : une expérience de plus de deux décennies',
     'blog.article.due-generazioni-immobiliare-mellingen.excerpt': 'Martin et Roman Strebel gèrent MARBEL Immobilien à Mellingen, en proposant des services de vente, d’évaluation ou de succession immobilière avec une expertise régionale.',
     'blog.article.due-generazioni-immobiliare-mellingen.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.incendio-sins-linea-s26.title': 'Incendie à Sins AG : ligne S26 interrompue',
+    'blog.article.incendio-sins-linea-s26.excerpt': 'Un incendie dans une grange à Sins AG a interrompu la liaison entre Rotkreuz et Lenzburg : des bus de remplacement circulent sur la S26 jusqu’à environ 16 heures.',
+    'blog.article.incendio-sins-linea-s26.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAgFr;

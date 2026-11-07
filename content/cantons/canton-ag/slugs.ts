@@ -34,6 +34,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'niederwil-aumento-imposta-2027': { it: 'niederwil-aumento-imposta-2027', en: 'niederwil-municipal-tax-2027', de: 'niederwil-steuerfuss-erhoehung-2027', fr: 'niederwil-hausse-taux-fiscal-2027' },
  'oelrainstrasse-chiusura-5-novembre': { it: 'oelrainstrasse-chiusura-5-novembre', en: 'oelrainstrasse-closure-november-5', de: 'oelrainstrasse-schliessung-5-november', fr: 'oelrainstrasse-fermeture-5-novembre' },
  'due-generazioni-immobiliare-mellingen': { it: 'due-generazioni-immobiliare-mellingen', en: 'two-generations-real-estate-mellingen', de: 'zwei-generationen-immobilien-mellingen', fr: 'deux-generations-immobilier-mellingen' },
+ 'incendio-sins-linea-s26': { it: 'incendio-sins-linea-s26', en: 'sins-fire-s26-rail-interruption', de: 'brand-sins-s26-bahnunterbruch', fr: 'incendie-sins-s26-interruption' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
