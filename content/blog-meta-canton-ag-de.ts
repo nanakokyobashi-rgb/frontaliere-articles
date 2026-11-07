@@ -93,6 +93,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.oelrainstrasse-chiusura-5-novembre.title': 'Sperrung Oelrainstrasse: 5.11. wegen Container-Wiedereinbau',
     'blog.article.oelrainstrasse-chiusura-5-novembre.excerpt': 'Die Oelrainstrasse zwischen Parkhaus Bahnhof und Parkhaus Theaterplatz wird von 8.30 bis etwa 11 Uhr wegen des Wiedereinbaus von vier unterirdischen Containern gesperrt.',
     'blog.article.oelrainstrasse-chiusura-5-novembre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.due-generazioni-immobiliare-mellingen.title': 'MARBEL Immobilien in Mellingen: Erfahrung von über zwei Jahrzehnten',
+    'blog.article.due-generazioni-immobiliare-mellingen.excerpt': 'Martin und Roman Strebel führen MARBEL Immobilien in Mellingen und bieten Dienstleistungen für den Verkauf, die Bewertung oder die Vererbung von Immobilien mit regionaler Kompetenz an.',
+    'blog.article.due-generazioni-immobiliare-mellingen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;

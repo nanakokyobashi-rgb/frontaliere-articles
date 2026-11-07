@@ -337,4 +337,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'due-generazioni-immobiliare-mellingen',
+ category: 'pratico',
+ date: '2026-11-07T13:46:13.665Z',
+ image: '/images/blog/article-due-generazioni-immobiliare-mellingen.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

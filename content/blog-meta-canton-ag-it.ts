@@ -93,6 +93,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.oelrainstrasse-chiusura-5-novembre.title': 'Chiusura Oelrainstrasse Baden giovedì 5 novembre per rimontaggio container',
     'blog.article.oelrainstrasse-chiusura-5-novembre.excerpt': 'L\'Oelrainstrasse tra Parkhaus Bahnhof e Parkhaus Theaterplatz sarà chiusa dalle 8.30 alle circa 11 per il rimontaggio di quattro container interrati.',
     'blog.article.oelrainstrasse-chiusura-5-novembre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.due-generazioni-immobiliare-mellingen.title': 'MARBEL Immobilien a Mellingen: esperienza di oltre due decenni',
+    'blog.article.due-generazioni-immobiliare-mellingen.excerpt': 'Martin e Roman Strebel gestiscono MARBEL Immobilien a Mellingen, offrendo servizi di vendita, valutazione o eredità immobiliari con competenza regionale.',
+    'blog.article.due-generazioni-immobiliare-mellingen.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAgIt;

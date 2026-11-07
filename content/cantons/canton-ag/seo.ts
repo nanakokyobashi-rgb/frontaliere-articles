@@ -1167,6 +1167,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-due-generazioni-immobiliare-mellingen': {
+    title: 'MARBEL Immobilien a Mellingen: esperienza di oltre due decenni',
+    description: 'MARBEL Immobilien a Mellingen offre servizi di vendita, valutazione o eredità immobiliari con il team Martin e Roman Strebel da oltre due decenni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, marbel, immobilien, mellingen, esperienza',
+    ogTitle: 'MARBEL Immobilien a Mellingen: esperienza due decenni',
+    ogDescription: 'Scopri come MARBEL Immobilien, guidata da Martin e Roman Strebel a Mellingen, supporta i proprietari nella vendita, valutazione o eredità di immobili da oltre due decenni.',
+    canonicalPath: '/articoli-argovia/due-generazioni-immobiliare-mellingen/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "MARBEL Immobilien a Mellingen: esperienza di oltre due decenni",
+      "description": "MARBEL Immobilien a Mellingen offre servizi di vendita, valutazione o eredità immobiliari con il team Martin e Roman Strebel da oltre due decenni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-due-generazioni-immobiliare-mellingen.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-07T13:46:13+00:00",
+      "dateModified": "2026-11-07T13:46:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/due-generazioni-immobiliare-mellingen/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

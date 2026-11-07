@@ -33,6 +33,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'aarau-rinnovo-tigli-zollrain': { it: 'aarau-rinnovo-tigli-zollrain', en: 'aarau-zollrain-linden-renewal', de: 'aarau-zollrain-linden-erneuerung', fr: 'aarau-renovation-tilleuls-zollrain' },
  'niederwil-aumento-imposta-2027': { it: 'niederwil-aumento-imposta-2027', en: 'niederwil-municipal-tax-2027', de: 'niederwil-steuerfuss-erhoehung-2027', fr: 'niederwil-hausse-taux-fiscal-2027' },
  'oelrainstrasse-chiusura-5-novembre': { it: 'oelrainstrasse-chiusura-5-novembre', en: 'oelrainstrasse-closure-november-5', de: 'oelrainstrasse-schliessung-5-november', fr: 'oelrainstrasse-fermeture-5-novembre' },
+ 'due-generazioni-immobiliare-mellingen': { it: 'due-generazioni-immobiliare-mellingen', en: 'two-generations-real-estate-mellingen', de: 'zwei-generationen-immobilien-mellingen', fr: 'deux-generations-immobilier-mellingen' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
