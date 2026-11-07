@@ -521,6 +521,40 @@ test('il report passato alla issue resta sotto il budget argv e indica il dettag
   assert.ok(compact.length < source.length);
 });
 
+test('il payload di creazione resta bounded quando il ledger viene aggiunto a un report enorme', async () => {
+  const rootDir = observerRoot();
+  fs.appendFileSync(
+    path.join(rootDir, 'content/blog-meta-it.ts'),
+    "\n'blog.article.senza-registry.title': 'Senza registry',\n",
+  );
+  const github = issueClient();
+  const log = [
+    `commit ${'b'.repeat(40)} 1791417600`,
+    'content/blog-body/it/alpha.ts',
+    'content/blog-body/it/senza-registry.ts',
+  ].join('\n');
+  try {
+    await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      githubClient: github.client,
+      gitLogImpl: () => log,
+      minIntervalMs: 0,
+      fetchImpl: async () => { throw new Error('x'.repeat(20_000)); },
+    });
+
+    const created = github.calls.find((call) => call.type === 'create');
+    assert.ok(created);
+    assert.ok(Buffer.byteLength(created.description, 'utf8') <= MAX_ISSUE_DESCRIPTION_BYTES);
+    assert.deepEqual(
+      parseCoverageLedger(created.description).items.map((item) => item.articleId),
+      ['senza-registry'],
+    );
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
 function observerRoot() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-publication-observer-run-'));
   const sources = {

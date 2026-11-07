@@ -888,6 +888,29 @@ export function compactIssueDescription(description, maxBytes = MAX_ISSUE_DESCRI
   return `${prefix.trimEnd()}${suffix}`;
 }
 
+function boundedIssueDescription(description, coverageBlockers) {
+  const withLedger = upsertCoverageLedger(description, coverageBlockers);
+  if (Buffer.byteLength(withLedger, 'utf8') <= MAX_ISSUE_DESCRIPTION_BYTES) return withLedger;
+
+  if (coverageBlockers.length > 0) {
+    const renderedLedger = renderCoverageLedger(coverageBlockers);
+    const ledgerBytes = Buffer.byteLength(`\n\n${renderedLedger}\n`, 'utf8');
+    const reportBudget = MAX_ISSUE_DESCRIPTION_BYTES - ledgerBytes;
+    if (reportBudget > 0) {
+      const candidate = upsertCoverageLedger(
+        compactIssueDescription(description, reportBudget),
+        coverageBlockers,
+      );
+      if (Buffer.byteLength(candidate, 'utf8') <= MAX_ISSUE_DESCRIPTION_BYTES) return candidate;
+    }
+  }
+
+  // If the full ledger cannot coexist with a bounded report in the create argv
+  // budget, persist it in the following --body-file edit rather than
+  // truncating its machine-readable markers or sending an oversized payload.
+  return compactIssueDescription(description);
+}
+
 function defaultGithubClient() {
   return {
     async findOpenIssue() {
@@ -1146,11 +1169,11 @@ export async function runObserver({
     || report.degraded.length > 0
     || ledger.length > 0
     || publicationRetries.length > 0;
-  const issueDescription = upsertCoverageLedger(compactIssueDescription(description), coverageBlockers);
+  const issueDescription = boundedIssueDescription(description, coverageBlockers);
   if (actionable && !issue) {
     issue = await github.createIssue(issueDescription);
     if (!issue) throw new Error('issue observer non trovata dopo la creazione');
-    if (!issue.body) issue.body = description;
+    if (!issue.body) issue.body = issueDescription;
   }
   if (issue) {
     await persistCoverageLedger(issue, coverageBlockers, github);
