@@ -923,6 +923,7 @@ test('Cloud Scheduler possiede un contratto di slot fail-closed nel workflow cor
   assert.match(WF, /^# generation-cloud-slot-minutes: 7,37$/m);
   assert.ok(runName.includes('inputs.loop_clock') && runName.includes('inputs.recovery_slot'), 'il run-name deve esporre marker stabili per la riconciliazione');
   assert.ok(runName.includes('[loop-clock ') && runName.includes('[generation-slot '), 'il run-name deve contenere entrambi i marker');
+  assert.ok(runName.includes('inputs.dry_run') && runName.includes('[dispatch-mode='), 'il run-name deve distinguere dry e production');
   for (const input of ['loop_clock', 'recovery_slot', 'recovery_claim']) {
     assert.ok(dispatchInputs.includes('      ' + input + ':'), input + ' deve essere un input esplicito');
   }
@@ -949,7 +950,8 @@ test('un retry del dispatch con la stessa URL viene deduplicato dal ricevitore',
   assert.doesNotMatch(admit, /display_title: \(\.display_title \/\/ ""\)/);
   assert.match(admit, /if \[ "\$EVENT_NAME" = "workflow_dispatch" \] && \[ "\$\{DRY_RUN:-false\}" != "true" \] && \[ -n "\$\{SOURCE_URL:-\}" \] && jq -e /);
   assert.match(admit, /duplicate-dispatch-source/);
-  assert.ok(admit.includes('contains("[dispatch-source=\\($s)]")'));
+  assert.ok(admit.includes('dispatch-mode=production'));
+  assert.ok(admit.includes('contains("[dispatch-source=\\($s)] [dispatch-mode=production]")'));
   const dedupeAt = admit.indexOf('duplicate-dispatch-source');
   const explicitAt = admit.indexOf('if [ "$explicit_dispatch" = "true" ]');
   assert.ok(dedupeAt >= 0 && explicitAt > dedupeAt, 'la deduplica deve precedere l’eccezione manuale/editoriale');
