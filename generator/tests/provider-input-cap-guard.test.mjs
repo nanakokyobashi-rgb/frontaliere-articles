@@ -17,6 +17,7 @@ function extractFunctionSource(signature) {
 }
 
 const GUARD_SOURCE = extractFunctionSource('function providerInputCapGuard(');
+const CALL_GUARD_SOURCE = extractFunctionSource('function guardProviderInputCapForCall(');
 const FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS = Number(
   SOURCE.match(/const PROMPT_UNIQUE_SCAFFOLD_FLOOR_TOKENS = (\d+);/)?.[1],
 );
@@ -201,4 +202,41 @@ test('providerInputCapGuard fails closed on an unreadable cap and is wired befor
   assert.match(metadataBlock, /guardProviderInputCapForCall\(_call2/);
   assert.match(metadataBlock, /prefer: _metadataPrefer/);
   assert.match(metadataBlock, /phase: 'prompt-built-metadata-call'/);
+});
+
+test('an empty effective roster stays on callLLM exhaustion handling', () => {
+  const roster = {
+    availableModels: [],
+    unavailableModels: [{ model: 'claude-cli/haiku', reason: 'per-run-call-cap' }],
+  };
+  const guard = new Function(
+    'getProviderRosterStatus',
+    'generationCallRosterOptions',
+    'providerInputCapGuard',
+    'estimateProviderRequestTokens',
+    'providerInputCapGuardError',
+    'console',
+    `${CALL_GUARD_SOURCE}\nreturn guardProviderInputCapForCall;`,
+  )(
+    () => roster,
+    () => ({ chain: ['requested'] }),
+    () => { throw new Error('the cap guard must not inspect an empty roster'); },
+    () => { throw new Error('the token estimator must not inspect an empty roster'); },
+    () => { throw new Error('the cap error must not be created for an empty roster'); },
+    { error() {} },
+  );
+
+  assert.deepEqual(
+    guard({ msgs: [], schema: {}, est: 9000 }, { model: 'requested' }),
+    { roster, inputCapGuard: null },
+  );
+
+  const promptGuardStart = SOURCE.indexOf('const _promptInputCapGuard =');
+  const promptGuardEnd = SOURCE.indexOf('// Costruita QUI', promptGuardStart);
+  assert.ok(promptGuardStart >= 0 && promptGuardEnd > promptGuardStart, 'prompt-built guard delimiters missing');
+  assert.match(
+    SOURCE.slice(promptGuardStart, promptGuardEnd),
+    /_promptRoster\.availableModels\.length > 0/,
+    'the prompt-built guard must not run when the effective roster is empty',
+  );
 });

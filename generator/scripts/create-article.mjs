@@ -334,19 +334,15 @@ function guardProviderInputCapForCall(promptCall, {
 } = {}) {
   if (!promptCall || !Array.isArray(promptCall.msgs) || !promptCall.schema) return null;
   const roster = getProviderRosterStatus(generationCallRosterOptions({ model, prefer }));
+  // An empty effective suffix belongs to callLLM's normal exhaustion path:
+  // cooldown, per-run caps, and unavailable models are not input-cap evidence.
+  if (roster.availableModels.length === 0) return { roster, inputCapGuard: null };
   const inputCapGuard = providerInputCapGuard(
     roster.availableModels,
     splitMode,
     promptCall.est,
     (candidate) => estimateProviderRequestTokens(promptCall.msgs, promptCall.schema, candidate),
   );
-  if (roster.availableModels.length === 0) {
-    inputCapGuard.rejectedModels = roster.unavailableModels.map(({ model: unavailableModel, reason }) => ({
-      model: unavailableModel,
-      requestLimit: null,
-      reason: `not-effective-call-candidate:${reason}`,
-    }));
-  }
   console.error(
     `PROVIDER_INPUT_CAP phase=${phase} ready=${inputCapGuard.ready}`
     + ` model=${model || 'default'} part=${promptPart}`
@@ -13269,6 +13265,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     : null;
   const _promptInputCapGuard = typeof providerInputCapGuard === 'function'
     && _promptRoster
+    && _promptRoster.availableModels.length > 0
     ? providerInputCapGuard(
       _promptRoster.availableModels,
       _splitMode,
