@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "82582713863d81c2b0c6a46a97412e1297115a7c6587c86da850e290de2bc2b4",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "6a26bb687e429d062e2b598f739c6bac39a6a469b47c148656a1a34134545f7b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "24",
+          "value": "20",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,42 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Vino e cucina",
-              "detail": "Braunwald",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/wine-dine-6-november-2026/"
-            },
-            {
-              "label": "Blues Night mit Aynsley Lister",
-              "detail": "LKS Linthkraft Stiftung",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/linthal/blues-night-mit-aynsley-lister_Af8cfm4"
-            },
-            {
-              "label": "Tina Teubner - PROTOKOLLE DER SEHNSUCHT",
-              "detail": "Glarus",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tina-teubner-protokolle-der-sehnsucht/"
-            },
-            {
-              "label": "Buchstart für Kinder im November",
-              "detail": "Glarus — in corso, ultimo giorno: 6 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-november/"
-            },
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
-            {
-              "label": "Balboa Schnupperkurs",
-              "detail": "Ennenda, Glarus — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
-            },
             {
               "label": "35. Herbstfest Braunwald, 7. November 2026",
               "detail": "Braunwald, Glarus Süd",
@@ -91,11 +55,47 @@
               "detail": "Kunsthaus Glarus, Glarus",
               "date": "2026-11-07",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/patrick-sommer-quintett_AcD8e7k"
+            },
+            {
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
+            },
+            {
+              "label": "Balboa Schnupperkurs",
+              "detail": "Ennenda, Glarus — in corso, ultimo giorno: 11 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Glatti Cheibe: Buuchweh-Tour",
+              "detail": "Schwanden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glatti-cheibe-buuchweh-tour/"
+            },
+            {
+              "label": "Turnrevue Niederurnen 2026",
+              "detail": "Niederurnen, Glarus Nord",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
+            },
+            {
+              "label": "Das Schweizer Sexpubquiz – Wissen, Lachen, Überraschungen",
+              "detail": "Glarus",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-schweizer-sexpubquiz-wissen-lachen-ueberraschungen/"
+            },
+            {
+              "label": "Fluch der Rabenmutter",
+              "detail": "Schwanden",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "GL",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "24",
+          "value": "20",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,42 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Wine & Dine",
-              "detail": "Braunwald",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/wine-dine-6-november-2026/"
-            },
-            {
-              "label": "Blues Night mit Aynsley Lister",
-              "detail": "LKS Linthkraft Stiftung",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/linthal/blues-night-mit-aynsley-lister_Af8cfm4"
-            },
-            {
-              "label": "Tina Teubner - PROTOKOLLE DER SEHNSUCHT",
-              "detail": "Glarus",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tina-teubner-protokolle-der-sehnsucht/"
-            },
-            {
-              "label": "Buchstart für Kinder im November",
-              "detail": "Glarus — ongoing, last day: 6 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-november/"
-            },
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus — ongoing, last day: 14 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
-            {
-              "label": "Balboa Schnupperkurs",
-              "detail": "Ennenda, Glarus — ongoing, last day: 11 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
-            },
             {
               "label": "35. Herbstfest Braunwald, 7. November 2026",
               "detail": "Braunwald, Glarus Süd",
@@ -196,11 +160,47 @@
               "detail": "Kunsthaus Glarus, Glarus",
               "date": "2026-11-07",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/patrick-sommer-quintett_AcD8e7k"
+            },
+            {
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus — ongoing, last day: 14 November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
+            },
+            {
+              "label": "Balboa Schnupperkurs",
+              "detail": "Ennenda, Glarus — ongoing, last day: 11 November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Glatti Cheibe: Buuchweh-Tour",
+              "detail": "Schwanden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glatti-cheibe-buuchweh-tour/"
+            },
+            {
+              "label": "Turnrevue Niederurnen 2026",
+              "detail": "Niederurnen, Glarus Nord",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
+            },
+            {
+              "label": "Das Schweizer Sexpubquiz – Wissen, Lachen, Überraschungen",
+              "detail": "Glarus",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-schweizer-sexpubquiz-wissen-lachen-ueberraschungen/"
+            },
+            {
+              "label": "Fluch der Rabenmutter",
+              "detail": "Schwanden",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "GL",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "24",
+          "value": "20",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,42 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Wine & Dine",
-              "detail": "Braunwald",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/wine-dine-6-november-2026/"
-            },
-            {
-              "label": "Blues Night mit Aynsley Lister",
-              "detail": "LKS Linthkraft Stiftung",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/linthal/blues-night-mit-aynsley-lister_Af8cfm4"
-            },
-            {
-              "label": "Tina Teubner - PROTOKOLLE DER SEHNSUCHT",
-              "detail": "Glarus",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tina-teubner-protokolle-der-sehnsucht/"
-            },
-            {
-              "label": "Buchstart für Kinder im November",
-              "detail": "Glarus — läuft, letzter Tag: 6. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-november/"
-            },
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
-            {
-              "label": "Balboa Schnupperkurs",
-              "detail": "Ennenda, Glarus — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
-            },
             {
               "label": "35. Herbstfest Braunwald, 7. November 2026",
               "detail": "Braunwald, Glarus Süd",
@@ -301,11 +265,47 @@
               "detail": "Kunsthaus Glarus, Glarus",
               "date": "2026-11-07",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/patrick-sommer-quintett_AcD8e7k"
+            },
+            {
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
+            },
+            {
+              "label": "Balboa Schnupperkurs",
+              "detail": "Ennenda, Glarus — läuft, letzter Tag: 11. November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Glatti Cheibe: Buuchweh-Tour",
+              "detail": "Schwanden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glatti-cheibe-buuchweh-tour/"
+            },
+            {
+              "label": "Turnrevue Niederurnen 2026",
+              "detail": "Niederurnen, Glarus Nord",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
+            },
+            {
+              "label": "Das Schweizer Sexpubquiz – Wissen, Lachen, Überraschungen",
+              "detail": "Glarus",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-schweizer-sexpubquiz-wissen-lachen-ueberraschungen/"
+            },
+            {
+              "label": "Fluch der Rabenmutter",
+              "detail": "Schwanden",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "GL",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "24",
+          "value": "20",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,42 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Gastronomie et vins",
-              "detail": "Braunwald",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/wine-dine-6-november-2026/"
-            },
-            {
-              "label": "Blues Night mit Aynsley Lister",
-              "detail": "LKS Linthkraft Stiftung",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/linthal/blues-night-mit-aynsley-lister_Af8cfm4"
-            },
-            {
-              "label": "Tina Teubner - PROTOKOLLE DER SEHNSUCHT",
-              "detail": "Glarus",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tina-teubner-protokolle-der-sehnsucht/"
-            },
-            {
-              "label": "Buchstart für Kinder im November",
-              "detail": "Glarus — en cours, dernier jour : 6 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-november/"
-            },
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
-            {
-              "label": "Schnupperkurs de Balboa",
-              "detail": "Ennenda, Glarus — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
-            },
             {
               "label": "35. Herbstfest Braunwald, 7. November 2026",
               "detail": "Braunwald, Glarus Süd",
@@ -406,11 +370,47 @@
               "detail": "Kunsthaus Glarus, Glarus",
               "date": "2026-11-07",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/patrick-sommer-quintett_AcD8e7k"
+            },
+            {
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
+            },
+            {
+              "label": "Schnupperkurs de Balboa",
+              "detail": "Ennenda, Glarus — en cours, dernier jour : 11 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Glatti Cheibe: Buuchweh-Tour",
+              "detail": "Schwanden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glatti-cheibe-buuchweh-tour/"
+            },
+            {
+              "label": "Turnrevue Niederurnen 2026",
+              "detail": "Niederurnen, Glarus Nord",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
+            },
+            {
+              "label": "Das Schweizer Sexpubquiz – Wissen, Lachen, Überraschungen",
+              "detail": "Glarus",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-schweizer-sexpubquiz-wissen-lachen-ueberraschungen/"
+            },
+            {
+              "label": "Fluch der Rabenmutter",
+              "detail": "Schwanden",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

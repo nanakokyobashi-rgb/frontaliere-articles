@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "d62b1ce45088400f50a39aa2fb14d9f4cb7bc080d41d1c1e5b1b5454a0830ecb",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "1ff31ca98824592b2a9d91aa92fae1a3849b176b5648f68cf5f89504d75d2b85",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "51",
+          "value": "53",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,36 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Laternenbasteln und Laternenumzug im Familienzentrum",
-              "detail": "Familienzentrum Region Weinfelden, Weinfelden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laternenbasteln-und-laternenumzug-im-familienzentrum/"
-            },
-            {
-              "label": "YES/NO",
-              "detail": "Phönix Theater, Steckborn",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yesno/"
-            },
-            {
-              "label": "Inbalanceleben am Bodensee QiGong - Meditation - Achtsamkeit",
-              "detail": "See & Park Hotel Feldbach, Steckborn — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — in corso, ultimo giorno: 13 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Tag der offenen Tür",
               "detail": "Kreuzlingen",
@@ -86,6 +56,24 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-dinner-mit-max-buenzli-1/"
             },
             {
+              "label": "Inbalanceleben am Bodensee QiGong - Meditation - Achtsamkeit",
+              "detail": "See & Park Hotel Feldbach, Steckborn — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
+            },
+            {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — in corso, ultimo giorno: 13 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
               "label": "Peter Pan",
               "detail": "Frauenfeld",
               "date": "2026-11-08",
@@ -96,11 +84,23 @@
               "detail": "Kartause Ittingen",
               "date": "2026-11-08",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/warth/special-jazz-concert-mit-chris-hopkins_Axp4V8S"
+            },
+            {
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Evang.-ref. Kirche Steckborn, Steckborn",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/steckborn/leidenschaft-und-samba_Asb4kQL"
+            },
+            {
+              "label": "Klangreich",
+              "detail": "Alte Kirche Romanshorn, Romanshorn",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/romanshorn/klangreich_AckDusU"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "51",
+          "value": "53",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,36 +171,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Laternenbasteln und Laternenumzug im Familienzentrum",
-              "detail": "Familienzentrum Region Weinfelden, Weinfelden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laternenbasteln-und-laternenumzug-im-familienzentrum/"
-            },
-            {
-              "label": "YES/NO",
-              "detail": "Phönix Theater, Steckborn",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yesno/"
-            },
-            {
-              "label": "Inbalanceleben am Bodensee QiGong-Meditation-Achtsamkeit",
-              "detail": "See & Park Hotel Feldbach, Steckborn — ongoing, last day: 8 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — ongoing, last day: 13 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — ongoing, last day: 24 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Tag der offenen Tür",
               "detail": "Kreuzlingen",
@@ -220,6 +190,24 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-dinner-mit-max-buenzli-1/"
             },
             {
+              "label": "Inbalanceleben am Bodensee QiGong-Meditation-Achtsamkeit",
+              "detail": "See & Park Hotel Feldbach, Steckborn — ongoing, last day: 8 November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
+            },
+            {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — ongoing, last day: 13 November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — ongoing, last day: 24 November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
               "label": "Peter Pan",
               "detail": "Frauenfeld",
               "date": "2026-11-08",
@@ -230,11 +218,23 @@
               "detail": "Kartause Ittingen",
               "date": "2026-11-08",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/warth/special-jazz-concert-mit-chris-hopkins_Axp4V8S"
+            },
+            {
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Evang.-ref. Kirche Steckborn, Steckborn",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/steckborn/leidenschaft-und-samba_Asb4kQL"
+            },
+            {
+              "label": "Klangreich",
+              "detail": "Alte Kirche Romanshorn, Romanshorn",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/romanshorn/klangreich_AckDusU"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "51",
+          "value": "53",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -305,36 +305,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Laternenbasteln und Laternenumzug im Familienzentrum",
-              "detail": "Familienzentrum Region Weinfelden, Weinfelden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laternenbasteln-und-laternenumzug-im-familienzentrum/"
-            },
-            {
-              "label": "YES/NO",
-              "detail": "Phönix Theater, Steckborn",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yesno/"
-            },
-            {
-              "label": "Inbalanceleben am Bodensee QiGong-Meditation-Achtsamkeit",
-              "detail": "See & Park Hotel Feldbach, Steckborn — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — läuft, letzter Tag: 13. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Tag der offenen Tür",
               "detail": "Kreuzlingen",
@@ -354,6 +324,24 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-dinner-mit-max-buenzli-1/"
             },
             {
+              "label": "Inbalanceleben am Bodensee QiGong-Meditation-Achtsamkeit",
+              "detail": "See & Park Hotel Feldbach, Steckborn — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
+            },
+            {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — läuft, letzter Tag: 13. November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
               "label": "Peter Pan",
               "detail": "Frauenfeld",
               "date": "2026-11-08",
@@ -364,11 +352,23 @@
               "detail": "Kartause Ittingen",
               "date": "2026-11-08",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/warth/special-jazz-concert-mit-chris-hopkins_Axp4V8S"
+            },
+            {
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Evang.-ref. Kirche Steckborn, Steckborn",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/steckborn/leidenschaft-und-samba_Asb4kQL"
+            },
+            {
+              "label": "Klangreich",
+              "detail": "Alte Kirche Romanshorn, Romanshorn",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/romanshorn/klangreich_AckDusU"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "51",
+          "value": "53",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -439,36 +439,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Laternenbasteln und Laternenumzug im Familienzentrum",
-              "detail": "Familienzentrum Region Weinfelden, Weinfelden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laternenbasteln-und-laternenumzug-im-familienzentrum/"
-            },
-            {
-              "label": "YES/NO",
-              "detail": "Phönix Theater, Steckborn",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yesno/"
-            },
-            {
-              "label": "Inbalanceleben am Bodensee QiGong - Méditation - Achtsamkeit",
-              "detail": "See & Park Hotel Feldbach, Steckborn — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — en cours, dernier jour : 13 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Tag der offenen Tür",
               "detail": "Kreuzlingen",
@@ -488,6 +458,24 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-dinner-mit-max-buenzli-1/"
             },
             {
+              "label": "Inbalanceleben am Bodensee QiGong - Méditation - Achtsamkeit",
+              "detail": "See & Park Hotel Feldbach, Steckborn — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
+            },
+            {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — en cours, dernier jour : 13 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
               "label": "Peter Pan",
               "detail": "Frauenfeld",
               "date": "2026-11-08",
@@ -498,11 +486,23 @@
               "detail": "Kartause Ittingen",
               "date": "2026-11-08",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/warth/special-jazz-concert-mit-chris-hopkins_Axp4V8S"
+            },
+            {
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Evang.-ref. Kirche Steckborn, Steckborn",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/steckborn/leidenschaft-und-samba_Asb4kQL"
+            },
+            {
+              "label": "Klangreich",
+              "detail": "Alte Kirche Romanshorn, Romanshorn",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/romanshorn/klangreich_AckDusU"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

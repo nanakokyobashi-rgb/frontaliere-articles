@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "pensioni",
-  "updatedAt": "2026-11-05T12:35:27.590Z",
-  "contentHash": "7530489d39f0726f7c1a0df004c8352ea10831b38063621c4e44de568fc42c7b",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "c470960cc448dbc9d02b58ddcae7394d2abd19d63bcd6d53dd9b27de67f7e7a5",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-04T22:54:23.302Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -146,7 +146,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -181,16 +181,16 @@
           "date": "2026-08-22T02:05:16.385Z"
         },
         {
-          "title": "Terzo pilastro 3a svizzera: vantaggi 2026 canton Berna",
-          "url": "/articoli-svizzera/guida-terzo-3a-berna/",
-          "excerpt": "Guida 2026 al 3a nel canton Berna: massimale indicizzato, tre livelli fiscali e confronto tra provider bancari e assicurativi.",
-          "date": "2026-10-03T13:22:34.891Z"
-        },
-        {
           "title": "AVS e prestazioni complementari nel Cantone Berna",
           "url": "/articoli-svizzera/avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione/",
           "excerpt": "La cassa di compensazione del Cantone Berna influenza le prestazioni complementari dell'AVS, ma la fonte non fornisce informazioni specifiche.",
           "date": "2026-08-13T16:04:43.335Z"
+        },
+        {
+          "title": "Terzo pilastro 3a svizzera: vantaggi 2026 canton Berna",
+          "url": "/articoli-svizzera/guida-terzo-3a-berna/",
+          "excerpt": "Guida 2026 al 3a nel canton Berna: massimale indicizzato, tre livelli fiscali e confronto tra provider bancari e assicurativi.",
+          "date": "2026-10-03T13:22:34.891Z"
         },
         {
           "title": "Formazione continua nel Canton Berna: requisiti e contributi",
@@ -218,7 +218,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "BE",
@@ -337,7 +337,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -372,16 +372,16 @@
           "date": "2026-08-22T02:05:16.385Z"
         },
         {
-          "title": "Swiss third pillar 3a: 2026 benefits in the canton of Bern",
-          "url": "/en/swiss-articles/swiss-3a-pillar-bern-guide/",
-          "excerpt": "2026 Guide to 3a in the canton of Bern: indexed maximum, three tax levels, and comparison between banking and insurance providers.",
-          "date": "2026-10-03T13:22:34.891Z"
-        },
-        {
           "title": "AVS and complementary services in Canton Bern",
           "url": "/en/swiss-articles/avs-and-complementary-benefits-cantone-bern-compensation-fund/",
           "excerpt": "The Canton Bern Compensation Fund affects the supplementary performance of the AVS, but the source does not provide specific information.",
           "date": "2026-08-13T16:04:43.335Z"
+        },
+        {
+          "title": "Swiss third pillar 3a: 2026 benefits in the canton of Bern",
+          "url": "/en/swiss-articles/swiss-3a-pillar-bern-guide/",
+          "excerpt": "2026 Guide to 3a in the canton of Bern: indexed maximum, three tax levels, and comparison between banking and insurance providers.",
+          "date": "2026-10-03T13:22:34.891Z"
         },
         {
           "title": "Continuing education in the Canton of Bern: requirements and contributions",
@@ -409,7 +409,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "BE",
@@ -528,7 +528,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -563,16 +563,16 @@
           "date": "2026-08-22T02:05:16.385Z"
         },
         {
-          "title": "Schweizer Säule 3a: Vorteile 2026 im Kanton Bern",
-          "url": "/de/schweiz-artikel/3a-saeule-bern-leitfaden/",
-          "excerpt": "Leitfaden 2026 zur Säule 3a im Kanton Bern: indexierter Höchstbetrag, drei Steuerebenen und Vergleich von Bank- und Versicherungsanbietern.",
-          "date": "2026-10-03T13:22:34.891Z"
-        },
-        {
           "title": "AHV und Ergänzungsleistungen im Kanton Bern",
           "url": "/de/schweiz-artikel/avs-und-zusatzleistungen-cantone-bern-entschadigungsfonds/",
           "excerpt": "Die Ausgleichskasse des Kantons Bern beeinflusst die Ergänzungsleistungen der AHV, die Quelle liefert jedoch keine konkreten Angaben.",
           "date": "2026-08-13T16:04:43.335Z"
+        },
+        {
+          "title": "Schweizer Säule 3a: Vorteile 2026 im Kanton Bern",
+          "url": "/de/schweiz-artikel/3a-saeule-bern-leitfaden/",
+          "excerpt": "Leitfaden 2026 zur Säule 3a im Kanton Bern: indexierter Höchstbetrag, drei Steuerebenen und Vergleich von Bank- und Versicherungsanbietern.",
+          "date": "2026-10-03T13:22:34.891Z"
         },
         {
           "title": "Weiterbildung im Kanton Bern: Voraussetzungen und Beiträge",
@@ -600,7 +600,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "BE",
@@ -719,7 +719,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-04T22:54:23.302Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -754,16 +754,16 @@
           "date": "2026-08-22T02:05:16.385Z"
         },
         {
-          "title": "Troisième pilier 3a suisse : avantages 2026 dans le canton de Berne",
-          "url": "/fr/articles-suisse/pilier-3a-berne-guide/",
-          "excerpt": "Guide 2026 du pilier 3a dans le canton de Berne : plafond indexé, trois niveaux fiscaux et comparaison entre les prestataires bancaires et les assureurs.",
-          "date": "2026-10-03T13:22:34.891Z"
-        },
-        {
           "title": "AVS et prestations complémentaires dans le canton de Berne",
           "url": "/fr/articles-suisse/avs-et-benefices-complementaires-cantone-berne-fonds-de-compensation/",
           "excerpt": "La caisse de compensation du canton de Berne influe sur les prestations complémentaires de l'AVS, mais la source ne fournit pas d'informations spécifiques.",
           "date": "2026-08-13T16:04:43.335Z"
+        },
+        {
+          "title": "Troisième pilier 3a suisse : avantages 2026 dans le canton de Berne",
+          "url": "/fr/articles-suisse/pilier-3a-berne-guide/",
+          "excerpt": "Guide 2026 du pilier 3a dans le canton de Berne : plafond indexé, trois niveaux fiscaux et comparaison entre les prestataires bancaires et les assureurs.",
+          "date": "2026-10-03T13:22:34.891Z"
         },
         {
           "title": "Formation continue dans le canton de Berne : exigences et contributions",
@@ -791,7 +791,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-05T12:35:27.590Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

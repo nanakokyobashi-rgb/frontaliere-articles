@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "c614527c60b1f8ed8d187a285fc0723658a606969ccc827e775ef93c2d5750e8",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "cf298da9aaa22ee8ea0d0be097bbd6b3cb4f75ec04319c4ae73d91788e18e11e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "16",
+          "value": "17",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,12 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Julia Steiner",
-              "detail": "Altdorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/julia-steiner/"
-            },
             {
               "label": "Cardmania",
               "detail": "Schattdorf",
@@ -91,11 +85,17 @@
               "detail": "Berufs- und Weiterbildungszentrum Uri",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/handlettering/"
+            },
+            {
+              "label": "TriffAltdorf - Verlag Bildfluss mit Christof Hirtler und Christian de Simoni",
+              "detail": "Altdorf",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-verlag-bildfluss-mit-christof-hirtler-und-christian-de-simoni/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "16",
+          "value": "17",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,12 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Julia Steiner",
-              "detail": "Altdorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/julia-steiner/"
-            },
             {
               "label": "Cardmania",
               "detail": "Schattdorf",
@@ -196,11 +190,17 @@
               "detail": "Berufs- und Weiterbildungszentrum Uri",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/handlettering/"
+            },
+            {
+              "label": "TriffAltdorf - Verlag Bildfluss mit Christof Hirtler und Christian de Simoni",
+              "detail": "Altdorf",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-verlag-bildfluss-mit-christof-hirtler-und-christian-de-simoni/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "16",
+          "value": "17",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,12 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Julia Steiner",
-              "detail": "Altdorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/julia-steiner/"
-            },
             {
               "label": "Cardmania",
               "detail": "Schattdorf",
@@ -301,11 +295,17 @@
               "detail": "Berufs- und Weiterbildungszentrum Uri",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/handlettering/"
+            },
+            {
+              "label": "TriffAltdorf - Verlag Bildfluss mit Christof Hirtler und Christian de Simoni",
+              "detail": "Altdorf",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-verlag-bildfluss-mit-christof-hirtler-und-christian-de-simoni/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "16",
+          "value": "17",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,12 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Julia Steiner",
-              "detail": "Altdorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/julia-steiner/"
-            },
             {
               "label": "Cardmania",
               "detail": "Schattdorf",
@@ -406,11 +400,17 @@
               "detail": "Berufs- und Weiterbildungszentrum Uri",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/handlettering/"
+            },
+            {
+              "label": "TriffAltdorf - Verlag Bildfluss mit Christof Hirtler und Christian de Simoni",
+              "detail": "Altdorf",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-verlag-bildfluss-mit-christof-hirtler-und-christian-de-simoni/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

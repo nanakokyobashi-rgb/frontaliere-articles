@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "fisco",
-  "updatedAt": "2026-11-06T11:58:54.825Z",
-  "contentHash": "ede49c1676e7e018090425aa7271de6685bace0f853344fd2b231f6e48b3cdf2",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "7d940a886f7a2db939fc77ec438274e3d9d80d661e98ec5aec996b41c7f0e449",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -162,10 +162,10 @@
           "date": "2026-10-03T08:33:46.697Z"
         },
         {
-          "title": "Imposta sui cani a Zurigo: guida alla registrazione",
-          "url": "/articoli-svizzera/imposta-cani-zurigo-guida/",
-          "excerpt": "Nel Cantone di Zurigo l'imposta sui cani segue regole cantonali e comunali.",
-          "date": "2026-10-12T08:03:47.898Z"
+          "title": "Cembra e Vontobel lasciano Zurigo: fisco e spazi spingono il trasloco",
+          "url": "/articoli-svizzera/cembra-vontobel-sede-baden-baar/",
+          "excerpt": "Cembra sposta 660 dipendenti a Baden (15% imposte) in autunno 2027; Vontobel porta 1.500 posti a Baar (12%) entro il 2030. Zurigo al 20%.",
+          "date": "2026-09-25T22:08:30.423Z"
         }
       ],
       "latestCantonArticles": [],
@@ -195,7 +195,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-06T11:58:54.825Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "ZH",
@@ -335,10 +335,10 @@
           "date": "2026-10-03T08:33:46.697Z"
         },
         {
-          "title": "Dog tax in Zurich: registration guide",
-          "url": "/en/swiss-articles/dog-tax-in-zurich-registration-guide/",
-          "excerpt": "In the Canton of Zurich, the dog tax follows cantonal and municipal rules.",
-          "date": "2026-10-12T08:03:47.898Z"
+          "title": "Cembra and Vontobel leave Zurich: taxes and space drive the move",
+          "url": "/en/swiss-articles/cembra-vontobel-relocation-baden-baar/",
+          "excerpt": "Cembra moves 660 employees to Baden (15% taxes) in autumn 2027; Vontobel brings 1.500 jobs to Baar (12%) by 2030. Zurich at 20%.",
+          "date": "2026-09-25T22:08:30.423Z"
         }
       ],
       "latestCantonArticles": [],
@@ -368,7 +368,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-06T11:58:54.825Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "ZH",
@@ -508,10 +508,10 @@
           "date": "2026-10-03T08:33:46.697Z"
         },
         {
-          "title": "Hundesteuer in Zürich: Leitfaden zur Registrierung",
-          "url": "/de/schweiz-artikel/hundesteuer-in-zurich-leitfaden-zur-registrierung/",
-          "excerpt": "Im Kanton Zürich richtet sich die Hundesteuer nach kantonalen und kommunalen Vorschriften.",
-          "date": "2026-10-12T08:03:47.898Z"
+          "title": "Cembra & Vontobel Zürich: Steuern & Räume treiben Umzug",
+          "url": "/de/schweiz-artikel/cembra-vontobel-sitz-baden-baar/",
+          "excerpt": "Cembra verlegt im Herbst 2027 660 Mitarbeitende nach Baden (15% Steuern); Vontobel verlegt bis 2030 1.500 Arbeitsplätze nach Baar (12%). Zürich bei 20%.",
+          "date": "2026-09-25T22:08:30.423Z"
         }
       ],
       "latestCantonArticles": [],
@@ -541,7 +541,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-06T11:58:54.825Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "ZH",
@@ -681,10 +681,10 @@
           "date": "2026-10-03T08:33:46.697Z"
         },
         {
-          "title": "Taxe sur les chiens à Zurich : guide d'enregistrement",
-          "url": "/fr/articles-suisse/taxe-sur-les-chiens-a-zurich-guide-d-enregistrement/",
-          "excerpt": "Dans le canton de Zurich, l'impôt sur les chiens suit les règles cantonales et communales.",
-          "date": "2026-10-12T08:03:47.898Z"
+          "title": "Cembra et Vontobel quittent Zurich : fiscalité et locaux",
+          "url": "/fr/articles-suisse/cembra-vontobel-siege-baden-baar/",
+          "excerpt": "Cembra déplace 660 employés à Baden (15 % d'impôts) à l'automne 2027 ; Vontobel apporte 1 500 postes à Baar (12 %) d'ici 2030. Zurich à 20 %.",
+          "date": "2026-09-25T22:08:30.423Z"
         }
       ],
       "latestCantonArticles": [],
@@ -714,7 +714,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-06T11:58:54.825Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

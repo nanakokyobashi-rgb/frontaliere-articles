@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "7f7f6ca337acb4b214932e2855290536623c6e143449b46625dc70e66d96b442",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "f9c92f3217ef6bab3a861dd4aa06a00d50d912a611e2911a22d4cf1305de8447",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Vortrag und Besichtigung Hospiz Derendingen mit der Frauengemeinschaft Langendor",
-              "detail": "Solothurn, Derendingen",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-und-besichtigung-hospiz-derendingen-mit-der-frauengemeinschaft-langendor/"
+              "label": "Vintage Computer Festival",
+              "detail": "Derendingen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vintage-computer-festival/"
             },
             {
-              "label": "Whisky-Masterclass unabhängige Abfüller",
-              "detail": "Solothurn",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/whisky-masterclass-unabhaengige-abfueller/"
+              "label": "CENK",
+              "detail": "Kulturfabrik Kofmehl, Solothurn",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cenk/"
             },
             {
-              "label": "z’Tanz Late Night Special",
-              "detail": "Solothurn",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ztanz-late-night-special/"
+              "label": "Fondue-Abend",
+              "detail": "Derendingen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondue-abend/"
             },
             {
-              "label": "liederlich - das Schweizer Liedermacherfestival",
-              "detail": "SCHULER Vinothek Seewen, Seewen",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seewen-sz/liederlich-das-schweizer-liedermacherfestival_AGJU2tX"
+              "label": "Amarone Festival",
+              "detail": "Hugi Weine AG, Selzach",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/amarone-festival/"
+            },
+            {
+              "label": "ZOEY",
+              "detail": "wydeKANTINE, Dornach",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dornach/zoey_ArjS1n6"
+            },
+            {
+              "label": "Sonic 35",
+              "detail": "Industrie Bännli, Wolfwil",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonic-35/"
             },
             {
               "label": "Lottomatch der Schützengesellschaft Kyburg",
-              "detail": "Mehrzweckhalle Aetigkofen",
-              "date": "2026-11-06",
+              "detail": "Mehrzweckhalle Aetigkofen — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lottomatch-der-schuetzengesellschaft-kyburg/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — in corso, ultimo giorno: 3 dicembre 2026",
-              "date": "2026-11-06",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
             },
             {
               "label": "Leben im Zeitalter der Dauerkrise",
               "detail": "Solothurn — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-11-06",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
               "detail": "Solothurn — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-06",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
-            },
-            {
-              "label": "Dynamisch Zeichnen",
-              "detail": "Solothurn — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/soletta/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "SO",
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Vortrag und Besichtigung Hospiz Derendingen mit der Frauengemeinschaft Langendor",
-              "detail": "Solothurn, Derendingen",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-und-besichtigung-hospiz-derendingen-mit-der-frauengemeinschaft-langendor/"
+              "label": "Vintage Computer Festival",
+              "detail": "Derendingen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vintage-computer-festival/"
             },
             {
-              "label": "Whisky-Masterclass unabhängige Abfüller",
-              "detail": "Solothurn",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/whisky-masterclass-unabhaengige-abfueller/"
+              "label": "CENK",
+              "detail": "Kulturfabrik Kofmehl, Solothurn",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cenk/"
             },
             {
-              "label": "z'Tanz Late Night Special",
-              "detail": "Solothurn",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ztanz-late-night-special/"
+              "label": "Fondue-Abend",
+              "detail": "Derendingen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondue-abend/"
             },
             {
-              "label": "liederlich - das Schweizer Liedermacherfestival",
-              "detail": "SCHULER Vinothek Seewen, Seewen",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seewen-sz/liederlich-das-schweizer-liedermacherfestival_AGJU2tX"
+              "label": "Amarone Festival",
+              "detail": "Hugi Weine AG, Selzach",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/amarone-festival/"
+            },
+            {
+              "label": "ZOEY",
+              "detail": "wydeKANTINE, Dornach",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dornach/zoey_ArjS1n6"
+            },
+            {
+              "label": "Sonic 35",
+              "detail": "Industrie Bännli, Wolfwil",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonic-35/"
             },
             {
               "label": "Lottomatch der Schützengesellschaft Kyburg",
-              "detail": "Mehrzweckhalle Aetigkofen",
-              "date": "2026-11-06",
+              "detail": "Mehrzweckhalle Aetigkofen — ongoing, last day: 8 November 2026",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lottomatch-der-schuetzengesellschaft-kyburg/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — ongoing, last day: 3 December 2026",
-              "date": "2026-11-06",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
             },
             {
               "label": "Leben im Zeitalter der Dauerkrise",
               "detail": "Solothurn — ongoing, last day: 12 November 2026",
-              "date": "2026-11-06",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
               "detail": "Solothurn — ongoing, last day: 18 November 2026",
-              "date": "2026-11-06",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — ongoing, last day: 24 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
-            },
-            {
-              "label": "Dynamisch Zeichnen",
-              "detail": "Solothurn — ongoing, last day: 7 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/solothurn/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "SO",
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Vortrag und Besichtigung Hospiz Derendingen mit der Frauengemeinschaft Langendor",
-              "detail": "Solothurn, Derendingen",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-und-besichtigung-hospiz-derendingen-mit-der-frauengemeinschaft-langendor/"
+              "label": "Vintage Computer Festival",
+              "detail": "Derendingen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vintage-computer-festival/"
             },
             {
-              "label": "Whisky-Masterclass unabhängige Abfüller",
-              "detail": "Solothurn",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/whisky-masterclass-unabhaengige-abfueller/"
+              "label": "CENK",
+              "detail": "Kulturfabrik Kofmehl, Solothurn",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cenk/"
             },
             {
-              "label": "z 'Tanz Late Night Special",
-              "detail": "Solothurn",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ztanz-late-night-special/"
+              "label": "Fondue-Abend",
+              "detail": "Derendingen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondue-abend/"
             },
             {
-              "label": "liederlich - das Schweizer Liedermacherfestival",
-              "detail": "SCHULER Vinothek Seewen, Seewen",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seewen-sz/liederlich-das-schweizer-liedermacherfestival_AGJU2tX"
+              "label": "Amarone Festival",
+              "detail": "Hugi Weine AG, Selzach",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/amarone-festival/"
+            },
+            {
+              "label": "ZOEY",
+              "detail": "wydeKANTINE, Dornach",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dornach/zoey_ArjS1n6"
+            },
+            {
+              "label": "Sonic 35",
+              "detail": "Industrie Bännli, Wolfwil",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonic-35/"
             },
             {
               "label": "Lottomatch der Schützengesellschaft Kyburg",
-              "detail": "Mehrzweckhalle Aetigkofen",
-              "date": "2026-11-06",
+              "detail": "Mehrzweckhalle Aetigkofen — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lottomatch-der-schuetzengesellschaft-kyburg/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — läuft, letzter Tag: 3. Dezember 2026",
-              "date": "2026-11-06",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
             },
             {
               "label": "Leben im Zeitalter der Dauerkrise",
               "detail": "Solothurn — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-11-06",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
               "detail": "Solothurn — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-06",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
-            },
-            {
-              "label": "Dynamisch Zeichnen",
-              "detail": "Solothurn — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/solothurn/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "SO",
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Vortrag und Besichtigung Hospiz Derendingen mit der Frauengemeinschaft Langendor",
-              "detail": "Solothurn, Derendingen",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-und-besichtigung-hospiz-derendingen-mit-der-frauengemeinschaft-langendor/"
+              "label": "Vintage Computer Festival",
+              "detail": "Derendingen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vintage-computer-festival/"
             },
             {
-              "label": "Whisky-Masterclass unabhängige Abfüller",
-              "detail": "Solothurn",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/whisky-masterclass-unabhaengige-abfueller/"
+              "label": "CENK",
+              "detail": "Kulturfabrik Kofmehl, Solothurn",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cenk/"
             },
             {
-              "label": "Z'Tanz Spécial Tard de Nuit",
-              "detail": "Solothurn",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ztanz-late-night-special/"
+              "label": "Fondue-Abend",
+              "detail": "Derendingen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondue-abend/"
             },
             {
-              "label": "liederlich - das Schweizer Liedermacherfestival",
-              "detail": "SCHULER Vinothek Seewen, Seewen",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seewen-sz/liederlich-das-schweizer-liedermacherfestival_AGJU2tX"
+              "label": "Amarone Festival",
+              "detail": "Hugi Weine AG, Selzach",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/amarone-festival/"
+            },
+            {
+              "label": "ZOEY",
+              "detail": "wydeKANTINE, Dornach",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dornach/zoey_ArjS1n6"
+            },
+            {
+              "label": "Sonic 35",
+              "detail": "Industrie Bännli, Wolfwil",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonic-35/"
             },
             {
               "label": "Lottomatch der Schützengesellschaft Kyburg",
-              "detail": "Mehrzweckhalle Aetigkofen",
-              "date": "2026-11-06",
+              "detail": "Mehrzweckhalle Aetigkofen — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lottomatch-der-schuetzengesellschaft-kyburg/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — en cours, dernier jour : 3 décembre 2026",
-              "date": "2026-11-06",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
             },
             {
               "label": "Leben im Zeitalter der Dauerkrise",
               "detail": "Solothurn — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-11-06",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
               "detail": "Solothurn — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-06",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
-            },
-            {
-              "label": "Dynamisch Zeichnen",
-              "detail": "Solothurn — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/soleure/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

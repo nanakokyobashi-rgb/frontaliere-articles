@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "4a9a626f8a526836a4ed2072254357dfa6b20745632dde0ea776a135aebb1d05",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "0be67cf837a611e512402310d98cf7af0632e2b57e548bf66d1cde1e803aea44",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "76",
+          "value": "73",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Crazy Diner show Company",
-              "detail": "Corcelles-près-Payerne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crazy-diner-show-company/"
+              "label": "Epicoop's Gourmet Saturday",
+              "detail": "Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
             },
             {
-              "label": "Ens. Hortus Amoris: Streichquartette (Devienne-Mozart)",
-              "detail": "Villa La Goulue",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-legier-la-chiesaz/ens-hortus-amoris-streichquartette-devienne-mozart_ABUtvL2"
+              "label": "Movie Night - The Wizard of Oz",
+              "detail": "Corsier-sur-Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/movie-night-the-wizard-of-oz/"
             },
             {
-              "label": "Ens. Hortus Amoris: string quartets (Devienne-Mozart)",
-              "detail": "St-Légier, Blonay - Saint-Légier",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ens-hortus-amoris-string-quartets-deviennemozart/"
+              "label": "Murder in the cellar - Murder Mystery Evening",
+              "detail": "Théâtre de l'Odéon, Villeneuve (VD)",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/murder-in-the-cellar-murder-mystery-evening/"
             },
             {
-              "label": "Payerne Fair",
-              "detail": "Comptoir de Payerne, Payerne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
+              "label": "Pixel Academy - Switch Sports e Just Dance",
+              "detail": "Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pixel-academy-switch-sports-and-just-dance/"
             },
             {
-              "label": "Präsentation des neuen Albums „J’ai survécu“ von Izia Jeen",
-              "detail": "Les Salle del Castillo, Vevey",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/evenements/musique/vevey/vernissage-de-lalbum-de-izia-jeen-jai-survecu_AkiSSNq"
+              "label": "Crafts Market",
+              "detail": "Préverenges",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-market/"
             },
             {
-              "label": "Lausanne Bach Festival",
-              "detail": "Divers lieux, Lausanne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
+              "label": "Discovering the \"Bourru\" in the vineyards La Côte",
+              "detail": "Caveau des Vignerons de Luins-Vinzel, Vinzel",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/discovering-the-bourru-in-the-vineyards-la-cote/"
             },
             {
-              "label": "Magie und Design",
-              "detail": "Mudac, Lausanne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/magie-und-design/"
+              "label": "Exhibition by Barbara B.",
+              "detail": "Puidoux",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/exhibition-by-barbara-b/"
             },
             {
-              "label": "PV - Presque Vrai",
-              "detail": "Théâtre de Marens, Nyon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/pv-presque-vrai-1/"
+              "label": "Swiss Gymnastics Test Final",
+              "detail": "Salle omnisports du Pierrier, Montreux",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-gymnastics-test-final/"
             },
             {
-              "label": "Théâtre Waouw - Show \"La lune sout le toit\"",
-              "detail": "Aigle",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theatre-waouw-show-la-lune-sout-le-toit/"
+              "label": "Dahlia tuberous roots sale",
+              "detail": "Morges",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dahlia-tuberous-roots-sale/"
             },
             {
-              "label": "biche2biche",
-              "detail": "Nyon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biche2biche/"
+              "label": "Home Mycology: From Mycelium to the Plate",
+              "detail": "Les Jardins de Chivrageon, Aubonne",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mykologie-zu-hause-vom-myzel-auf-den-teller/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -145,7 +145,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "VD",
@@ -155,7 +155,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "76",
+          "value": "73",
           "note": "from the site’s events calendar"
         }
       ],
@@ -166,69 +166,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Crazy Diner show Company",
-              "detail": "Corcelles-près-Payerne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crazy-diner-show-company/"
+              "label": "Epicoop's Gourmet Saturday",
+              "detail": "Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
             },
             {
-              "label": "Ens. Hortus Amoris: string quartets (Devienne-Mozart)",
-              "detail": "Villa La Goulue",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-legier-la-chiesaz/ens-hortus-amoris-streichquartette-devienne-mozart_ABUtvL2"
+              "label": "Movie Night - The Wizard of Oz",
+              "detail": "Corsier-sur-Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/movie-night-the-wizard-of-oz/"
             },
             {
-              "label": "Ens. Hortus Amoris: string quartets (Devienne-Mozart)",
-              "detail": "St-Légier, Blonay - Saint-Légier",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ens-hortus-amoris-string-quartets-deviennemozart/"
+              "label": "Murder in the cellar - Murder Mystery Evening",
+              "detail": "Théâtre de l'Odéon, Villeneuve (VD)",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/murder-in-the-cellar-murder-mystery-evening/"
             },
             {
-              "label": "Payerne Fair",
-              "detail": "Comptoir de Payerne, Payerne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
+              "label": "Pixel Academy - Switch Sports and Just Dance",
+              "detail": "Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pixel-academy-switch-sports-and-just-dance/"
             },
             {
-              "label": "Release Party for Izia Jeen's New Album \"J'ai survécu\"",
-              "detail": "Les Salle del Castillo, Vevey",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/evenements/musique/vevey/vernissage-de-lalbum-de-izia-jeen-jai-survecu_AkiSSNq"
+              "label": "Crafts Market",
+              "detail": "Préverenges",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-market/"
             },
             {
-              "label": "Lausanne Bach Festival",
-              "detail": "Divers lieux, Lausanne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
+              "label": "Discovering the \"Bourru\" in the vineyards La Côte",
+              "detail": "Caveau des Vignerons de Luins-Vinzel, Vinzel",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/discovering-the-bourru-in-the-vineyards-la-cote/"
             },
             {
-              "label": "Magie und Design",
-              "detail": "Mudac, Lausanne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/magie-und-design/"
+              "label": "Exhibition by Barbara B.",
+              "detail": "Puidoux",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/exhibition-by-barbara-b/"
             },
             {
-              "label": "PV - Presque Vrai",
-              "detail": "Théâtre de Marens, Nyon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/pv-presque-vrai-1/"
+              "label": "Swiss Gymnastics Test Final",
+              "detail": "Salle omnisports du Pierrier, Montreux",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-gymnastics-test-final/"
             },
             {
-              "label": "Théâtre Waouw - Show \"La lune sout le toit\"",
-              "detail": "Aigle",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theatre-waouw-show-la-lune-sout-le-toit/"
+              "label": "Dahlia tuberous roots sale",
+              "detail": "Morges",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dahlia-tuberous-roots-sale/"
             },
             {
-              "label": "biche2biche",
-              "detail": "Nyon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biche2biche/"
+              "label": "Home Mycology: From Mycelium to the Plate",
+              "detail": "Les Jardins de Chivrageon, Aubonne",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mykologie-zu-hause-vom-myzel-auf-den-teller/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -251,7 +251,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -273,7 +273,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "VD",
@@ -283,7 +283,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "76",
+          "value": "73",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -294,69 +294,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Crazy Diner show Company",
-              "detail": "Corcelles-près-Payerne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crazy-diner-show-company/"
+              "label": "Gourmet-Samstag von Epicoop",
+              "detail": "Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
             },
             {
-              "label": "Ens. Hortus Amoris: Streichquartette (Devienne-Mozart)",
-              "detail": "Villa La Goulue",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-legier-la-chiesaz/ens-hortus-amoris-streichquartette-devienne-mozart_ABUtvL2"
+              "label": "Filmabend – Der Zauberer von Oz",
+              "detail": "Corsier-sur-Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/movie-night-the-wizard-of-oz/"
             },
             {
-              "label": "Ens. Hortus Amoris: Streichquartette (Devienne-Mozart)",
-              "detail": "St-Légier, Blonay - Saint-Légier",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ens-hortus-amoris-string-quartets-deviennemozart/"
+              "label": "Mord im Weinkeller - Mord- und Mystery-Abend",
+              "detail": "Théâtre de l'Odéon, Villeneuve (VD)",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/murder-in-the-cellar-murder-mystery-evening/"
             },
             {
-              "label": "Gewerbeausstellung von Payerne",
-              "detail": "Comptoir de Payerne, Payerne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
+              "label": "Pixel Academy - Switch Sports und Just Dance",
+              "detail": "Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pixel-academy-switch-sports-and-just-dance/"
             },
             {
-              "label": "Präsentation des neuen Albums „J’ai survécu“ von Izia Jeen",
-              "detail": "Les Salle del Castillo, Vevey",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/evenements/musique/vevey/vernissage-de-lalbum-de-izia-jeen-jai-survecu_AkiSSNq"
+              "label": "Kunsthandwerkermarkt",
+              "detail": "Préverenges",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-market/"
             },
             {
-              "label": "Bach-Festival Lausanne",
-              "detail": "Divers lieux, Lausanne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
+              "label": "Auf der Entdeckung des \"Bourru\" in den Weinbergen La Côte",
+              "detail": "Caveau des Vignerons de Luins-Vinzel, Vinzel",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/discovering-the-bourru-in-the-vineyards-la-cote/"
             },
             {
-              "label": "Magie und Design",
-              "detail": "Mudac, Lausanne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/magie-und-design/"
+              "label": "Ausstellung von Barbara B.",
+              "detail": "Puidoux",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/exhibition-by-barbara-b/"
             },
             {
-              "label": "PV - Presque Vrai",
-              "detail": "Théâtre de Marens, Nyon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/pv-presque-vrai-1/"
+              "label": "Schweizer Finale der Gymnastiktests",
+              "detail": "Salle omnisports du Pierrier, Montreux",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-gymnastics-test-final/"
             },
             {
-              "label": "Théâtre Waouw - Schauspiel \"La lune sous le toit\"",
-              "detail": "Aigle",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theatre-waouw-show-la-lune-sout-le-toit/"
+              "label": "Verkauf der Dahlienknollenwurzeln",
+              "detail": "Morges",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dahlia-tuberous-roots-sale/"
             },
             {
-              "label": "biche2biche",
-              "detail": "Nyon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biche2biche/"
+              "label": "Mykologie zu Hause: Vom Myzel auf den Teller",
+              "detail": "Les Jardins de Chivrageon, Aubonne",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mykologie-zu-hause-vom-myzel-auf-den-teller/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -379,7 +379,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -401,7 +401,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "VD",
@@ -411,7 +411,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "76",
+          "value": "73",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -422,69 +422,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Crazy Diner show Company",
-              "detail": "Corcelles-près-Payerne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crazy-diner-show-company/"
+              "label": "Samedi Gourmand d’Epicoop",
+              "detail": "Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
             },
             {
-              "label": "Ensemble Hortus Amoris: Quatuors classiques",
-              "detail": "Villa La Goulue",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-legier-la-chiesaz/ens-hortus-amoris-streichquartette-devienne-mozart_ABUtvL2"
+              "label": "Soirée cinéma - Le Magicien d'Oz",
+              "detail": "Corsier-sur-Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/movie-night-the-wizard-of-oz/"
             },
             {
-              "label": "Ensemble Hortus Amoris: Quatuors classiques",
-              "detail": "St-Légier, Blonay - Saint-Légier",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ens-hortus-amoris-string-quartets-deviennemozart/"
+              "label": "Meurtre au caveau - Soirée Meurtre et Mystère",
+              "detail": "Théâtre de l'Odéon, Villeneuve (VD)",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/murder-in-the-cellar-murder-mystery-evening/"
             },
             {
-              "label": "Comptoir de Payerne",
-              "detail": "Comptoir de Payerne, Payerne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
+              "label": "Pixel Academy - Switch Sports et Just Dance",
+              "detail": "Vevey",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pixel-academy-switch-sports-and-just-dance/"
             },
             {
-              "label": "Vernissage de l'album de Izia Jeen - J'ai survécu",
-              "detail": "Les Salle del Castillo, Vevey",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/evenements/musique/vevey/vernissage-de-lalbum-de-izia-jeen-jai-survecu_AkiSSNq"
+              "label": "Marché des Artisans",
+              "detail": "Préverenges",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-market/"
             },
             {
-              "label": "Festival Bach de Lausanne",
-              "detail": "Divers lieux, Lausanne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
+              "label": "À la découverte du \"Bourru\" dans le vignoble",
+              "detail": "Caveau des Vignerons de Luins-Vinzel, Vinzel",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/discovering-the-bourru-in-the-vineyards-la-cote/"
             },
             {
-              "label": "Magie et Design",
-              "detail": "Mudac, Lausanne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/magie-und-design/"
+              "label": "Exposition de Barbara B.",
+              "detail": "Puidoux",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/exhibition-by-barbara-b/"
             },
             {
-              "label": "PV - Presque Vrai",
-              "detail": "Théâtre de Marens, Nyon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/pv-presque-vrai-1/"
+              "label": "Finale Suisse des Tests en gymnastique et danse",
+              "detail": "Salle omnisports du Pierrier, Montreux",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-gymnastics-test-final/"
             },
             {
-              "label": "Concert - \"Voix sœurs\"",
-              "detail": "Aigle",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theatre-waouw-show-la-lune-sout-le-toit/"
+              "label": "Vente des racines tubéreuses de Dahlias",
+              "detail": "Morges",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dahlia-tuberous-roots-sale/"
             },
             {
-              "label": "biche2biche",
-              "detail": "Nyon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biche2biche/"
+              "label": "Mycologie à la maison : Du mycélium à l'assiette",
+              "detail": "Les Jardins de Chivrageon, Aubonne",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mykologie-zu-hause-vom-myzel-auf-den-teller/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -507,7 +507,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -529,7 +529,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

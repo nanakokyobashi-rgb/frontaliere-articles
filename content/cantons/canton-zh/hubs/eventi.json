@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "769d2edb6d46480ae5484c3a0b5f542f23e275dcfbee1fc4ed650e0e43c7cca4",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "ffab892efdf9c197d2f4373c79becd918b01f48473db049d8d542677368e1918",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "348",
+          "value": "354",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "The 10th HNHCP Educational Conference",
-              "detail": "Universität Zürich, Zürich",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/the-10th-hnhcp-educational-conference_Any1ALn"
+              "label": "Oldies Night",
+              "detail": "Dübendorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-night/"
             },
             {
-              "label": "Kurzfilmevent Dietikon mit Gleis21-OsKar",
+              "label": "Uetliberger Weihnachtsmarkt",
+              "detail": "Hotel UTO KULM car-free hideaway in Zurich, Zürich",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/uetliberger-weihnachtsmarkt/"
+            },
+            {
+              "label": "Bewegung, Entspannung & Brunch",
+              "detail": "Turbenthal",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bewegung-entspannung-brunch-1/"
+            },
+            {
+              "label": "Cruisetour & e-hoi - Fiera delle crociere",
+              "detail": "Lake Side",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/knowledge/zurich/cruisetour-und-e-hoi-cruise-fair_AtqWDnc"
+            },
+            {
+              "label": "Herbstmarkt Urdorf",
+              "detail": "Urdorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstmarkt-urdorf/"
+            },
+            {
+              "label": "Tag der offenen Türe bei den Zürcher Sängerknaben",
+              "detail": "Probelokal der Zürcher Sängerknaben",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/tag-der-offenen-tuere-bei-den-zuercher-saengerknaben_AxvMmfK"
+            },
+            {
+              "label": "Tag der offenen Tanztür bei SalsaRica",
+              "detail": "SalsaRica Tanzschule",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/tag-der-offenen-tuer-bei-salarica_AxVjGTV"
+            },
+            {
+              "label": "Schnellster Limmattaler Fisch",
               "detail": "Dietikon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kurzfilmevent-dietikon-mit-gleis21-oskar/"
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schnellster-limmattaler-fisch/"
             },
             {
-              "label": "Yoga und Meditation",
-              "detail": "Kappel am Albis",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yoga-und-meditation-1/"
+              "label": "Instrumente kennenlernen",
+              "detail": "Schulhaus Zentral, Dietikon",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/instrumente-kennenlernen_ARKtMhY"
             },
             {
-              "label": "Entrepreneurs Summit 2026",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/entrepreneurs-summit-2026/"
-            },
-            {
-              "label": "Grundkenntnistest",
-              "detail": "DÃ¼bendorf, Dübendorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/grundkenntnistest-12/"
-            },
-            {
-              "label": "Kantonaler Deutschtest für die Einbürgerung",
-              "detail": "DÃ¼bendorf, Dübendorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kantonaler-deutschtest-fuer-die-einbuergerung-9/"
-            },
-            {
-              "label": "Räbeliechtliumzug Rüti ZH 2026",
-              "detail": "Rüti ZH, Rüti (ZH)",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/raebeliechtliumzug-rueti-zh-2026/"
-            },
-            {
-              "label": "Räbeliechtli-Umzug Aesch ZH",
-              "detail": "Treffpunkt Alter Chindsgi Museumsstrasse, Aesch (ZH)",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raebeliechtli-umzug-aesch-zh/"
-            },
-            {
-              "label": "Räbeliechtliumzug Schwerzenbach",
-              "detail": "Schwerzenbach",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug-schwerzenbach/"
-            },
-            {
-              "label": "50 Jahr Reppischfäger Dietikon",
-              "detail": "Dietikon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahr-reppischfaeger-dietikon/"
+              "label": "Turner-Chränzli TV Ried",
+              "detail": "Gibswil, Wald (ZH)",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turner-chraenzli-tv-ried/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "348",
+          "value": "354",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "The 10th HNHCP Educational Conference",
-              "detail": "Universität Zürich, Zürich",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/the-10th-hnhcp-educational-conference_Any1ALn"
+              "label": "Oldies Night",
+              "detail": "Dübendorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-night/"
             },
             {
-              "label": "Kurzfilmevent Dietikon mit Gleis21-OsKar",
+              "label": "Uetliberger Weihnachtsmarkt",
+              "detail": "Hotel UTO KULM car-free hideaway in Zurich, Zürich",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/uetliberger-weihnachtsmarkt/"
+            },
+            {
+              "label": "Bewegung, Entspannung & Brunch",
+              "detail": "Turbenthal",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bewegung-entspannung-brunch-1/"
+            },
+            {
+              "label": "Cruisetour & e-hoi Cruise Fair",
+              "detail": "Lake Side",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/knowledge/zurich/cruisetour-und-e-hoi-cruise-fair_AtqWDnc"
+            },
+            {
+              "label": "Herbstmarkt Urdorf",
+              "detail": "Urdorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstmarkt-urdorf/"
+            },
+            {
+              "label": "Tag der offenen Türe bei den Zürcher Sängerknaben",
+              "detail": "Probelokal der Zürcher Sängerknaben",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/tag-der-offenen-tuere-bei-den-zuercher-saengerknaben_AxvMmfK"
+            },
+            {
+              "label": "Tag der offenen Tanztür bei SalsaRica",
+              "detail": "SalsaRica Tanzschule",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/tag-der-offenen-tuer-bei-salarica_AxVjGTV"
+            },
+            {
+              "label": "Schnellster Limmattaler Fisch",
               "detail": "Dietikon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kurzfilmevent-dietikon-mit-gleis21-oskar/"
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schnellster-limmattaler-fisch/"
             },
             {
-              "label": "Yoga und Meditation",
-              "detail": "Kappel am Albis",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yoga-und-meditation-1/"
+              "label": "Instrumente kennenlernen",
+              "detail": "Schulhaus Zentral, Dietikon",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/instrumente-kennenlernen_ARKtMhY"
             },
             {
-              "label": "Entrepreneurs Summit 2026",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/entrepreneurs-summit-2026/"
-            },
-            {
-              "label": "Grundkenntnistest",
-              "detail": "DÃ¼bendorf, Dübendorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/grundkenntnistest-12/"
-            },
-            {
-              "label": "Kantonaler Deutschtest für die Einbürgerung",
-              "detail": "DÃ¼bendorf, Dübendorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kantonaler-deutschtest-fuer-die-einbuergerung-9/"
-            },
-            {
-              "label": "Räbeliechtliumzug Rüti ZH 2026",
-              "detail": "Rüti ZH, Rüti (ZH)",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/raebeliechtliumzug-rueti-zh-2026/"
-            },
-            {
-              "label": "Räbeliechtli-Umzug Aesch ZH",
-              "detail": "Treffpunkt Alter Chindsgi Museumsstrasse, Aesch (ZH)",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raebeliechtli-umzug-aesch-zh/"
-            },
-            {
-              "label": "Räbeliechtliumzug Schwerzenbach",
-              "detail": "Schwerzenbach",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug-schwerzenbach/"
-            },
-            {
-              "label": "50 Jahr Reppischfäger Dietikon",
-              "detail": "Dietikon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahr-reppischfaeger-dietikon/"
+              "label": "Turner-Chr TV",
+              "detail": "Gibswil, Wald (ZH)",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turner-chraenzli-tv-ried/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "348",
+          "value": "354",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "The 10th HNHCP Educational Conference",
-              "detail": "Universität Zürich, Zürich",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/the-10th-hnhcp-educational-conference_Any1ALn"
+              "label": "Oldies Night",
+              "detail": "Dübendorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-night/"
             },
             {
-              "label": "Kurzfilmevent Dietikon mit Gleis21-OsKar",
+              "label": "Uetliberger Weihnachtsmarkt",
+              "detail": "Hotel UTO KULM car-free hideaway in Zurich, Zürich",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/uetliberger-weihnachtsmarkt/"
+            },
+            {
+              "label": "Bewegung, Entspannung & Brunch",
+              "detail": "Turbenthal",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bewegung-entspannung-brunch-1/"
+            },
+            {
+              "label": "Cruisetour & e-hoi Kreuzfahrtenmesse",
+              "detail": "Lake Side",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/knowledge/zurich/cruisetour-und-e-hoi-cruise-fair_AtqWDnc"
+            },
+            {
+              "label": "Herbstmarkt Urdorf",
+              "detail": "Urdorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstmarkt-urdorf/"
+            },
+            {
+              "label": "Tag der offenen Türe bei den Zürcher Sängerknaben",
+              "detail": "Probelokal der Zürcher Sängerknaben",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/tag-der-offenen-tuere-bei-den-zuercher-saengerknaben_AxvMmfK"
+            },
+            {
+              "label": "Tag der offenen Tanztür bei SalsaRica",
+              "detail": "SalsaRica Tanzschule",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/tag-der-offenen-tuer-bei-salarica_AxVjGTV"
+            },
+            {
+              "label": "Schnellster Limmattaler Fisch",
               "detail": "Dietikon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kurzfilmevent-dietikon-mit-gleis21-oskar/"
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schnellster-limmattaler-fisch/"
             },
             {
-              "label": "Yoga und Meditation",
-              "detail": "Kappel am Albis",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yoga-und-meditation-1/"
+              "label": "Instrumente kennenlernen",
+              "detail": "Schulhaus Zentral, Dietikon",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/instrumente-kennenlernen_ARKtMhY"
             },
             {
-              "label": "Entrepreneurs Summit 2026",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/entrepreneurs-summit-2026/"
-            },
-            {
-              "label": "Grundkenntnistest",
-              "detail": "DÃ¼bendorf, Dübendorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/grundkenntnistest-12/"
-            },
-            {
-              "label": "Kantonaler Deutschtest für die Einbürgerung",
-              "detail": "DÃ¼bendorf, Dübendorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kantonaler-deutschtest-fuer-die-einbuergerung-9/"
-            },
-            {
-              "label": "Räbeliechtliumzug Rüti ZH 2026",
-              "detail": "Rüti ZH, Rüti (ZH)",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/raebeliechtliumzug-rueti-zh-2026/"
-            },
-            {
-              "label": "Räbeliechtli-Umzug Aesch ZH",
-              "detail": "Treffpunkt Alter Chindsgi Museumsstrasse, Aesch (ZH)",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raebeliechtli-umzug-aesch-zh/"
-            },
-            {
-              "label": "Räbeliechtliumzug Schwerzenbach",
-              "detail": "Schwerzenbach",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug-schwerzenbach/"
-            },
-            {
-              "label": "50 Jahr Reppischfäger Dietikon",
-              "detail": "Dietikon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahr-reppischfaeger-dietikon/"
+              "label": "Turner-Chr ①nzli TV Ried",
+              "detail": "Gibswil, Wald (ZH)",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turner-chraenzli-tv-ried/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "348",
+          "value": "354",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "The 10th HNHCP Educational Conference",
-              "detail": "Universität Zürich, Zürich",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/the-10th-hnhcp-educational-conference_Any1ALn"
+              "label": "Oldies Night",
+              "detail": "Dübendorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-night/"
             },
             {
-              "label": "Kurzfilmevent Dietikon mit Gleis21-OsKar",
+              "label": "Uetliberger Weihnachtsmarkt",
+              "detail": "Hotel UTO KULM car-free hideaway in Zurich, Zürich",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/uetliberger-weihnachtsmarkt/"
+            },
+            {
+              "label": "Bewegung, Entspannung & Brunch",
+              "detail": "Turbenthal",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bewegung-entspannung-brunch-1/"
+            },
+            {
+              "label": "Salon des croisières Cruisetour & e-hoi",
+              "detail": "Lake Side",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/knowledge/zurich/cruisetour-und-e-hoi-cruise-fair_AtqWDnc"
+            },
+            {
+              "label": "Herbstmarkt Urdorf",
+              "detail": "Urdorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstmarkt-urdorf/"
+            },
+            {
+              "label": "Tag der offenen Türe bei den Zürcher Sängerknaben",
+              "detail": "Probelokal der Zürcher Sängerknaben",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/tag-der-offenen-tuere-bei-den-zuercher-saengerknaben_AxvMmfK"
+            },
+            {
+              "label": "Tag der offenen Tanztür bei SalsaRica",
+              "detail": "SalsaRica Tanzschule",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/tag-der-offenen-tuer-bei-salarica_AxVjGTV"
+            },
+            {
+              "label": "Schnellster Limmattaler Fisch",
               "detail": "Dietikon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kurzfilmevent-dietikon-mit-gleis21-oskar/"
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schnellster-limmattaler-fisch/"
             },
             {
-              "label": "Yoga und Meditation",
-              "detail": "Kappel am Albis",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yoga-und-meditation-1/"
+              "label": "Instrumente kennenlernen",
+              "detail": "Schulhaus Zentral, Dietikon",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/instrumente-kennenlernen_ARKtMhY"
             },
             {
-              "label": "Entrepreneurs Summit 2026",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/entrepreneurs-summit-2026/"
-            },
-            {
-              "label": "Grundkenntnistest",
-              "detail": "DÃ¼bendorf, Dübendorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/grundkenntnistest-12/"
-            },
-            {
-              "label": "Kantonaler Deutschtest für die Einbürgerung",
-              "detail": "DÃ¼bendorf, Dübendorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kantonaler-deutschtest-fuer-die-einbuergerung-9/"
-            },
-            {
-              "label": "Räbeliechtliumzug Rüti ZH 2026",
-              "detail": "Rüti ZH, Rüti (ZH)",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/raebeliechtliumzug-rueti-zh-2026/"
-            },
-            {
-              "label": "Räbeliechtli-Umzug Aesch ZH",
-              "detail": "Treffpunkt Alter Chindsgi Museumsstrasse, Aesch (ZH)",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raebeliechtli-umzug-aesch-zh/"
-            },
-            {
-              "label": "Räbeliechtliumzug Schwerzenbach",
-              "detail": "Schwerzenbach",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/raebeliechtliumzug-schwerzenbach/"
-            },
-            {
-              "label": "50 Jahr Reppischfäger Dietikon",
-              "detail": "Dietikon",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahr-reppischfaeger-dietikon/"
+              "label": "Tourneur-Chr TV",
+              "detail": "Gibswil, Wald (ZH)",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turner-chraenzli-tv-ried/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

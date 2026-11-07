@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "f43873bf23b280a6dd9fbf9a398da07efacef7a3e81bdff6e0d5fc61f0ab1897",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "db10c0e158ea4021da75c23e7be3103a84dcc9165d16cb5a26fd28e3eb84c9f5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "14",
+          "value": "12",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,30 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Acoustic Voyagers und Wooden Impact",
-              "detail": "Appenzell",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/acoustic-voyagers-und-wooden-impact/"
-            },
-            {
-              "label": "Jubiläumsshow der Jugendmusik Heiden",
-              "detail": "Kursaal Heiden, Heiden",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/heiden/jubilaeumsshow-der-jugendmusik-heiden_Ai2NFLf"
-            },
-            {
-              "label": "Duo comico Messer&Gabel - WandStand",
-              "detail": "Herisau",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/duo-comico-messergabel-wandstand-1/"
-            },
-            {
-              "label": "Taxco - Una chicca per tutti gli appassionati di musica country",
-              "detail": "Linde Heiden, Heiden",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/heiden/taxcoa-treat-for-all-country-fans_A7XWEju"
-            },
             {
               "label": "Sushi-Abend im Resort Hof Weissbad",
               "detail": "Weissbad, Schwende-Rüte",
@@ -67,6 +43,12 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-07",
               "url": "https://www.guidle.com/it/eventos/musica/herisau/stress-a-visita-de-como-curar_APwBdRE"
+            },
+            {
+              "label": "Jubiläumsshow der Jugendmusik Heiden",
+              "detail": "Kursaal Heiden, Heiden — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/music/heiden/jubilaeumsshow-der-jugendmusik-heiden_Ai2NFLf"
             },
             {
               "label": "Arte e musica: Louis Christ, alias Louis de Saint-Gall",
@@ -91,11 +73,29 @@
               "detail": "Evang.-ref. Kirche Trogen, Trogen",
               "date": "2026-11-13",
               "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/trogen/j-s-bach-bwv-226-der-geist-hilft-und-bwv-229-komm-jesu-komm_AAmxSs7"
+            },
+            {
+              "label": "Simon Enzler",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/simon-enzler-1/"
+            },
+            {
+              "label": "Evento di intrattenimento Saumchörli Herisau",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
+            },
+            {
+              "label": "Todisco e Pupato",
+              "detail": "Assel-Keller, Schönengrund",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "14",
+          "value": "12",
           "note": "from the site’s events calendar"
         }
       ],
@@ -143,30 +143,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Acoustic Voyagers und Wooden Impact",
-              "detail": "Appenzell",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/acoustic-voyagers-und-wooden-impact/"
-            },
-            {
-              "label": "Jubiläumsshow der Jugendmusik Heiden",
-              "detail": "Kursaal Heiden, Heiden",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/heiden/jubilaeumsshow-der-jugendmusik-heiden_Ai2NFLf"
-            },
-            {
-              "label": "Comedy duo Messer&Gabel - WandStand",
-              "detail": "Herisau",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/duo-comico-messergabel-wandstand-1/"
-            },
-            {
-              "label": "Taxco—A Treat for All Country Fans",
-              "detail": "Linde Heiden, Heiden",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/heiden/taxcoa-treat-for-all-country-fans_A7XWEju"
-            },
             {
               "label": "Sushi-Abend im Resort Hof Weissbad",
               "detail": "Weissbad, Schwende-Rüte",
@@ -178,6 +154,12 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-07",
               "url": "https://www.guidle.com/it/eventos/musica/herisau/stress-a-visita-de-como-curar_APwBdRE"
+            },
+            {
+              "label": "Jubiläumsshow der Jugendmusik Heiden",
+              "detail": "Kursaal Heiden, Heiden — ongoing, last day: 7 November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/music/heiden/jubilaeumsshow-der-jugendmusik-heiden_Ai2NFLf"
             },
             {
               "label": "Art & Music: Louis Christ, also known as Louis de Saint-Gall",
@@ -202,11 +184,29 @@
               "detail": "Evang.-ref. Kirche Trogen, Trogen",
               "date": "2026-11-13",
               "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/trogen/j-s-bach-bwv-226-der-geist-hilft-und-bwv-229-komm-jesu-komm_AAmxSs7"
+            },
+            {
+              "label": "Simon Enzler",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/simon-enzler-1/"
+            },
+            {
+              "label": "Entertainment event Saumchörli Herisau",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
+            },
+            {
+              "label": "Todisco & Pupato",
+              "detail": "Assel-Keller, Schönengrund",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "14",
+          "value": "12",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -254,30 +254,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Acoustic Voyagers und Wooden Impact",
-              "detail": "Appenzell",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/acoustic-voyagers-und-wooden-impact/"
-            },
-            {
-              "label": "Jubiläumsshow der Jugendmusik Heiden",
-              "detail": "Kursaal Heiden, Heiden",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/heiden/jubilaeumsshow-der-jugendmusik-heiden_Ai2NFLf"
-            },
-            {
-              "label": "Comedy-Duo Messer&Gabel - WandStand",
-              "detail": "Herisau",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/duo-comico-messergabel-wandstand-1/"
-            },
-            {
-              "label": "Taxco - Leckerbissen für alle Country Fans",
-              "detail": "Linde Heiden, Heiden",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/heiden/taxcoa-treat-for-all-country-fans_A7XWEju"
-            },
             {
               "label": "Sushi-Abend im Resort Hof Weissbad",
               "detail": "Weissbad, Schwende-Rüte",
@@ -289,6 +265,12 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-07",
               "url": "https://www.guidle.com/it/eventos/musica/herisau/stress-a-visita-de-como-curar_APwBdRE"
+            },
+            {
+              "label": "Jubiläumsshow der Jugendmusik Heiden",
+              "detail": "Kursaal Heiden, Heiden — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/music/heiden/jubilaeumsshow-der-jugendmusik-heiden_Ai2NFLf"
             },
             {
               "label": "Kunst & Musik: Louis Christ alias Louis de Saint-Gall",
@@ -313,11 +295,29 @@
               "detail": "Evang.-ref. Kirche Trogen, Trogen",
               "date": "2026-11-13",
               "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/trogen/j-s-bach-bwv-226-der-geist-hilft-und-bwv-229-komm-jesu-komm_AAmxSs7"
+            },
+            {
+              "label": "Simon Enzler",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/simon-enzler-1/"
+            },
+            {
+              "label": "Unterhaltungsanlass Saumchörli Herisau",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
+            },
+            {
+              "label": "Todisco & Pupato",
+              "detail": "Assel-Keller, Schönengrund",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "14",
+          "value": "12",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -365,30 +365,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Acoustic Voyagers und Wooden Impact",
-              "detail": "Appenzell",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/acoustic-voyagers-und-wooden-impact/"
-            },
-            {
-              "label": "Jubiläumsshow der Jugendmusik Heiden",
-              "detail": "Kursaal Heiden, Heiden",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/heiden/jubilaeumsshow-der-jugendmusik-heiden_Ai2NFLf"
-            },
-            {
-              "label": "Duo comique Couteaux&Fourchettes - WandStand",
-              "detail": "Herisau",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/duo-comico-messergabel-wandstand-1/"
-            },
-            {
-              "label": "Taxco : un régal pour tous les fans de country",
-              "detail": "Linde Heiden, Heiden",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/heiden/taxcoa-treat-for-all-country-fans_A7XWEju"
-            },
             {
               "label": "Sushi-Abend im Resort Hof Weissbad",
               "detail": "Weissbad, Schwende-Rüte",
@@ -400,6 +376,12 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-07",
               "url": "https://www.guidle.com/it/eventos/musica/herisau/stress-a-visita-de-como-curar_APwBdRE"
+            },
+            {
+              "label": "Jubiläumsshow der Jugendmusik Heiden",
+              "detail": "Kursaal Heiden, Heiden — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/music/heiden/jubilaeumsshow-der-jugendmusik-heiden_Ai2NFLf"
             },
             {
               "label": "Art et musique : Louis Christ, alias Louis de Saint-Gall",
@@ -424,11 +406,29 @@
               "detail": "Evang.-ref. Kirche Trogen, Trogen",
               "date": "2026-11-13",
               "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/trogen/j-s-bach-bwv-226-der-geist-hilft-und-bwv-229-komm-jesu-komm_AAmxSs7"
+            },
+            {
+              "label": "Simon Enzler",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/simon-enzler-1/"
+            },
+            {
+              "label": "Manifestation de divertissement Saumchörli Herisau",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
+            },
+            {
+              "label": "Todisco & Pupato",
+              "detail": "Assel-Keller, Schönengrund",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

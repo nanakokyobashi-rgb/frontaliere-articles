@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "d15b5c0d6a6c2369546dcf77d726e4e6a94b0ee4d1a5a4dc65218f660556ef61",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "05af89f5f2cdda9ad545310ec3a8279c7875d6a71efbe0460525842e41ee8ae1",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     }
   ],
@@ -33,30 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "FG Sarnen: Qi Gong der Vier Jahreszeiten",
-              "detail": "Pfarreizentrum, Sarnen, Sarnen",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/88727"
-            },
-            {
-              "label": "Räbäliechtli-Umzug",
-              "detail": "Kirche Rudenz, Giswil, Giswil",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/87470"
-            },
-            {
-              "label": "Vinos de Espana",
-              "detail": "Klublokal A. Riebli, Giswil, Giswil",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/92356"
-            },
-            {
-              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
-              "detail": "Zytlade Lindenhof, Sarnen, Sarnen — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
-            },
-            {
               "label": "Jahreskonzert",
               "detail": "Turnhalle 1/Kulturhalle, Giswil, Giswil",
               "date": "2026-11-07",
@@ -87,15 +63,39 @@
               "url": "https://www.guidle.com/it/events/music/engelberg/live-im-restaurant-wasserfall-laendlerkapelle-carlo-brunner_Aa66aew"
             },
             {
+              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
+              "detail": "Zytlade Lindenhof, Sarnen, Sarnen — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
+            },
+            {
               "label": "Jahreskonzert",
               "detail": "Turnhalle 1/Kulturhalle, Giswil, Giswil",
               "date": "2026-11-08",
               "url": "https://www.ow.ch/anlaesseaktuelles/87464"
+            },
+            {
+              "label": "Schüler- und Karlischiessen",
+              "detail": "MZG Flüeli-Ranft, Flüeli-Ranft",
+              "date": "2026-11-08",
+              "url": "https://www.ow.ch/anlaesseaktuelles/91090"
+            },
+            {
+              "label": "Stiftung Lebensraum Gebirge: Ultima Latet",
+              "detail": "Grafenort",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stiftung-lebensraum-gebirge-ultima-latet/"
+            },
+            {
+              "label": "Friedensmesse",
+              "detail": "Flüeli-Ranft, Flüeli-Ranft",
+              "date": "2026-11-10",
+              "url": "https://www.ow.ch/anlaesseaktuelles/90853"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/obvaldo/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "OW",
@@ -137,30 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "FG Sarnen: Qi Gong der Vier Jahreszeiten",
-              "detail": "Pfarreizentrum, Sarnen, Sarnen",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/88727"
-            },
-            {
-              "label": "Räbäliechtli-Umzug",
-              "detail": "Kirche Rudenz, Giswil, Giswil",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/87470"
-            },
-            {
-              "label": "Vinos de Espana",
-              "detail": "Klublokal A. Riebli, Giswil, Giswil",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/92356"
-            },
-            {
-              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
-              "detail": "Zytlade Lindenhof, Sarnen, Sarnen — ongoing, last day: 7 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
-            },
             {
               "label": "Jahreskonzert",
               "detail": "Turnhalle 1/Kulturhalle, Giswil, Giswil",
@@ -192,15 +168,39 @@
               "url": "https://www.guidle.com/it/events/music/engelberg/live-im-restaurant-wasserfall-laendlerkapelle-carlo-brunner_Aa66aew"
             },
             {
+              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
+              "detail": "Zytlade Lindenhof, Sarnen, Sarnen — ongoing, last day: 7 November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
+            },
+            {
               "label": "Jahreskonzert",
               "detail": "Turnhalle 1/Kulturhalle, Giswil, Giswil",
               "date": "2026-11-08",
               "url": "https://www.ow.ch/anlaesseaktuelles/87464"
+            },
+            {
+              "label": "Schüler- und Karlischiessen",
+              "detail": "MZG Flüeli-Ranft, Flüeli-Ranft",
+              "date": "2026-11-08",
+              "url": "https://www.ow.ch/anlaesseaktuelles/91090"
+            },
+            {
+              "label": "Stiftung Lebensraum Gebirge: Ultima Latet",
+              "detail": "Grafenort",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stiftung-lebensraum-gebirge-ultima-latet/"
+            },
+            {
+              "label": "Friedensmesse",
+              "detail": "Flüeli-Ranft, Flüeli-Ranft",
+              "date": "2026-11-10",
+              "url": "https://www.ow.ch/anlaesseaktuelles/90853"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/obwalden/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "OW",
@@ -242,30 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "FG Sarnen: Qi Gong der Vier Jahreszeiten",
-              "detail": "Pfarreizentrum, Sarnen, Sarnen",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/88727"
-            },
-            {
-              "label": "Räbäliechtli-Umzug",
-              "detail": "Kirche Rudenz, Giswil, Giswil",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/87470"
-            },
-            {
-              "label": "Vinos de Espana",
-              "detail": "Klublokal A. Riebli, Giswil, Giswil",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/92356"
-            },
-            {
-              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
-              "detail": "Zytlade Lindenhof, Sarnen, Sarnen — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
-            },
             {
               "label": "Jahreskonzert",
               "detail": "Turnhalle 1/Kulturhalle, Giswil, Giswil",
@@ -297,15 +273,39 @@
               "url": "https://www.guidle.com/it/events/music/engelberg/live-im-restaurant-wasserfall-laendlerkapelle-carlo-brunner_Aa66aew"
             },
             {
+              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
+              "detail": "Zytlade Lindenhof, Sarnen, Sarnen — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
+            },
+            {
               "label": "Jahreskonzert",
               "detail": "Turnhalle 1/Kulturhalle, Giswil, Giswil",
               "date": "2026-11-08",
               "url": "https://www.ow.ch/anlaesseaktuelles/87464"
+            },
+            {
+              "label": "Schüler- und Karlischiessen",
+              "detail": "MZG Flüeli-Ranft, Flüeli-Ranft",
+              "date": "2026-11-08",
+              "url": "https://www.ow.ch/anlaesseaktuelles/91090"
+            },
+            {
+              "label": "Stiftung Lebensraum Gebirge: Ultima Latet",
+              "detail": "Grafenort",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stiftung-lebensraum-gebirge-ultima-latet/"
+            },
+            {
+              "label": "Friedensmesse",
+              "detail": "Flüeli-Ranft, Flüeli-Ranft",
+              "date": "2026-11-10",
+              "url": "https://www.ow.ch/anlaesseaktuelles/90853"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/obwalden/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "OW",
@@ -347,30 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "FG Sarnen: Qi Gong der Vier Jahreszeiten",
-              "detail": "Pfarreizentrum, Sarnen, Sarnen",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/88727"
-            },
-            {
-              "label": "Räbäliechtli-Umzug",
-              "detail": "Kirche Rudenz, Giswil, Giswil",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/87470"
-            },
-            {
-              "label": "Vinos de Espana",
-              "detail": "Klublokal A. Riebli, Giswil, Giswil",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/92356"
-            },
-            {
-              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
-              "detail": "Zytlade Lindenhof, Sarnen, Sarnen — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
-            },
             {
               "label": "Jahreskonzert",
               "detail": "Turnhalle 1/Kulturhalle, Giswil, Giswil",
@@ -402,15 +378,39 @@
               "url": "https://www.guidle.com/it/events/music/engelberg/live-im-restaurant-wasserfall-laendlerkapelle-carlo-brunner_Aa66aew"
             },
             {
+              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
+              "detail": "Zytlade Lindenhof, Sarnen, Sarnen — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
+            },
+            {
               "label": "Jahreskonzert",
               "detail": "Turnhalle 1/Kulturhalle, Giswil, Giswil",
               "date": "2026-11-08",
               "url": "https://www.ow.ch/anlaesseaktuelles/87464"
+            },
+            {
+              "label": "Schüler- und Karlischiessen",
+              "detail": "MZG Flüeli-Ranft, Flüeli-Ranft",
+              "date": "2026-11-08",
+              "url": "https://www.ow.ch/anlaesseaktuelles/91090"
+            },
+            {
+              "label": "Stiftung Lebensraum Gebirge: Ultima Latet",
+              "detail": "Grafenort",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stiftung-lebensraum-gebirge-ultima-latet/"
+            },
+            {
+              "label": "Friedensmesse",
+              "detail": "Flüeli-Ranft, Flüeli-Ranft",
+              "date": "2026-11-10",
+              "url": "https://www.ow.ch/anlaesseaktuelles/90853"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/obwald/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "821b9da0c3de2c1b52d4e1bcc2f8be324db35c05cfd920a07662a89a17e335a8",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "a5b3dbba06329c406341b4fcb2b0da18f51f41f8a6e437247b7c4debb74bf503",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "39",
+          "value": "41",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,36 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "BDmania",
-              "detail": "Belfaux",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
-            },
-            {
-              "label": "Bellarena Indoor Festival | Rock Monsters of Switzerland",
-              "detail": "BCF-Arena",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-rock-monsters-of-switzerland_AeCMyVG"
-            },
-            {
-              "label": "Bellarena Winter Edition 2026",
-              "detail": "BCF - Arena, Fribourg",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bellarena-winter-edition-2026/"
-            },
-            {
-              "label": "Vully Blues Festival",
-              "detail": "Vully Blues Club",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
-            },
-            {
-              "label": "C’est la fête",
-              "detail": "Villars-sur-Glâne — in corso, ultimo giorno: 6 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
-            },
             {
               "label": "Bien-être menstruel",
               "detail": "Villars-sur-Glâne",
@@ -96,11 +66,41 @@
               "detail": "Fribourg",
               "date": "2026-11-07",
               "url": "https://www.fr.ch/mhnf/evenements/poils-et-mamelles"
+            },
+            {
+              "label": "Murten on Ice",
+              "detail": "Murten on Ice, Murten",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/murten-on-ice/"
+            },
+            {
+              "label": "Artisans Days",
+              "detail": "Estavayer-le-Lac, Estavayer",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/artisans-days/"
+            },
+            {
+              "label": "Museums’ Night",
+              "detail": "La Gruyère Tourisme, Bulle",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/museums-night/"
+            },
+            {
+              "label": "Bellarena Indoor Festival | Jarry & Friends",
+              "detail": "BCF-Arena",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-jarry-und-friends_AsNFdMR"
+            },
+            {
+              "label": "Bellarena Indoor Festival | Jarry & Friends",
+              "detail": "Fribourg",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bellarena-indoor-festival-jarry-friends/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "FR",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "39",
+          "value": "41",
           "note": "from the site’s events calendar"
         }
       ],
@@ -175,36 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "BDmania",
-              "detail": "Belfaux",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
-            },
-            {
-              "label": "Bellarena Indoor Festival | Rock Monsters of Switzerland",
-              "detail": "BCF-Arena",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-rock-monsters-of-switzerland_AeCMyVG"
-            },
-            {
-              "label": "Bellarena Winter Edition 2026",
-              "detail": "BCF - Arena, Fribourg",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bellarena-winter-edition-2026/"
-            },
-            {
-              "label": "Vully Blues Festival",
-              "detail": "Vully Blues Club",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
-            },
-            {
-              "label": "C’est la fête",
-              "detail": "Villars-sur-Glâne — ongoing, last day: 6 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
-            },
             {
               "label": "Bien-être menstruel",
               "detail": "Villars-sur-Glâne",
@@ -234,11 +204,41 @@
               "detail": "Fribourg",
               "date": "2026-11-07",
               "url": "https://www.fr.ch/mhnf/evenements/poils-et-mamelles"
+            },
+            {
+              "label": "Murten on Ice",
+              "detail": "Murten on Ice, Murten",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/murten-on-ice/"
+            },
+            {
+              "label": "Artisans Days",
+              "detail": "Estavayer-le-Lac, Estavayer",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/artisans-days/"
+            },
+            {
+              "label": "Museums’ Night",
+              "detail": "La Gruyère Tourisme, Bulle",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/museums-night/"
+            },
+            {
+              "label": "Bellarena Indoor Festival | Jarry & Friends",
+              "detail": "BCF-Arena",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-jarry-und-friends_AsNFdMR"
+            },
+            {
+              "label": "Bellarena Indoor Festival | Jarry & Friends",
+              "detail": "Fribourg",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bellarena-indoor-festival-jarry-friends/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "FR",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "39",
+          "value": "41",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -313,36 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "BDmania",
-              "detail": "Belfaux",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
-            },
-            {
-              "label": "Bellarena Indoor Festival | Rock Monsters of Switzerland",
-              "detail": "BCF-Arena",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-rock-monsters-of-switzerland_AeCMyVG"
-            },
-            {
-              "label": "Bellarena Winter Edition 2026",
-              "detail": "BCF - Arena, Fribourg",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bellarena-winter-edition-2026/"
-            },
-            {
-              "label": "Vully Blues Festival",
-              "detail": "Vully Blues Club",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
-            },
-            {
-              "label": "C’est la fête",
-              "detail": "Villars-sur-Glâne — läuft, letzter Tag: 6. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
-            },
             {
               "label": "Bien-être menstruel",
               "detail": "Villars-sur-Glâne",
@@ -372,11 +342,41 @@
               "detail": "Fribourg",
               "date": "2026-11-07",
               "url": "https://www.fr.ch/mhnf/evenements/poils-et-mamelles"
+            },
+            {
+              "label": "Murten on Ice",
+              "detail": "Murten on Ice, Murten",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/murten-on-ice/"
+            },
+            {
+              "label": "Tags des Kunsthandwerks",
+              "detail": "Estavayer-le-Lac, Estavayer",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/artisans-days/"
+            },
+            {
+              "label": "Museumsnacht",
+              "detail": "La Gruyère Tourisme, Bulle",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/museums-night/"
+            },
+            {
+              "label": "Bellarena Indoor Festival | Jarry & Friends",
+              "detail": "BCF-Arena",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-jarry-und-friends_AsNFdMR"
+            },
+            {
+              "label": "Bellarena Indoor Festival | Jarry & Friends",
+              "detail": "Fribourg",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bellarena-indoor-festival-jarry-friends/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +409,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "FR",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "39",
+          "value": "41",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -451,36 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "BDmania",
-              "detail": "Belfaux",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
-            },
-            {
-              "label": "Bellarena Indoor Festival | Rock Monsters of Switzerland",
-              "detail": "BCF-Arena",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-rock-monsters-of-switzerland_AeCMyVG"
-            },
-            {
-              "label": "Bellarena Winter Edition 2026",
-              "detail": "BCF - Arena, Fribourg",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bellarena-winter-edition-2026/"
-            },
-            {
-              "label": "Vully Blues Festival",
-              "detail": "Vully Blues Club",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
-            },
-            {
-              "label": "C’est la fête",
-              "detail": "Villars-sur-Glâne — en cours, dernier jour : 6 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
-            },
             {
               "label": "Bien-être menstruel",
               "detail": "Villars-sur-Glâne",
@@ -510,11 +480,41 @@
               "detail": "Fribourg",
               "date": "2026-11-07",
               "url": "https://www.fr.ch/mhnf/evenements/poils-et-mamelles"
+            },
+            {
+              "label": "Murten on Ice",
+              "detail": "Murten on Ice, Murten",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/murten-on-ice/"
+            },
+            {
+              "label": "Journées des Artisans",
+              "detail": "Estavayer-le-Lac, Estavayer",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/artisans-days/"
+            },
+            {
+              "label": "La Nuit des Musées | Gruyère, Glâne et Pays-d’Enhaut",
+              "detail": "La Gruyère Tourisme, Bulle",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/museums-night/"
+            },
+            {
+              "label": "Bellarena Indoor Festival | Jarry & Friends",
+              "detail": "BCF-Arena",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-jarry-und-friends_AsNFdMR"
+            },
+            {
+              "label": "Bellarena Indoor Festival | Jarry & Friends",
+              "detail": "Fribourg",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bellarena-indoor-festival-jarry-friends/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +547,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

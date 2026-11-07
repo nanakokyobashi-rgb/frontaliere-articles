@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "40f653e2f9098521a83ef54fcd8770435ce14c8039a8d1413a37c0ebc960cd86",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "54795fbb693b5563e0d112d6f008152443058ffc6d4da9772cf2570b9641dec5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "261",
+          "value": "237",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "ALAIN DELLA MAESTRA TRIO",
+              "label": "Ateliers thérapeutiques pour les personnes vivant des situations de racisme",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/alain-della-maestra-trio"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/ateliers-therapeutiques-vivant-situations-racisme"
             },
             {
-              "label": "Atelier de danse contemporaine avec Alia Al-Saadi (gratuit)",
+              "label": "Aurélien Dougé, Sans titre (Barre d’acier)",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/atelier-danse-contemporaine-alia-saadi-gratuit"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/aurelien-douge-titre-barre-acier"
             },
             {
-              "label": "Concert \"Faubourg Tango\" trio",
+              "label": "Cité Seniors fête ses 20 ans | Journée anniversaire",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/concert-faubourg-tango-trio"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-journee-anniversaire"
             },
             {
-              "label": "Concert événement NICOLAS FOLMER ”SO MILES 2” FEAT. SPECIAL GUEST RICK MARGITZA Jazz moderne Bebop",
+              "label": "CONCERT (Festival Celtiques) - The Curious Bards, airs vagabonds d'Irlande et d'Ecosse",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/concert-evenement-nicolas-folmer-miles-2-feat-special-guest-rick-margitza-jazz-moderne-bebop"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-curious-bards-airs-vagabonds-irlande-ecosse"
             },
             {
-              "label": "Cycle Beethoven 1",
+              "label": "De fil en traits",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/cycle-beethoven-1"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/traits"
             },
             {
-              "label": "DJ BETO · REGGAETON, BACHATA, SALSA, MERENGUE",
+              "label": "Des insectes entre les pages",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/beto-reggaeton-bachata-salsa-merengue"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/insectes-entre-pages"
             },
             {
-              "label": "Emergentia 2026: \"Coming Soon\" de Soraya Leila Emery",
+              "label": "DJ KENKYLLA · AFRO CARIBBEAN SOCA DANCEHALL",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/emergentia-2026-coming-soon-soraya-leila-emery"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/kenkylla-afro-caribbean-soca-dancehall-0"
             },
             {
-              "label": "Et toi? Quand tu seras grand.e...",
+              "label": "Exposition 1602 & Compagnie",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/seras-grande-0"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/exposition-1602-compagnie-0"
             },
             {
-              "label": "Et toi? Quand tu seras grand.e... * COMPLET *",
+              "label": "Fête de l’Espace de quartier Plainpalais",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/seras-grande-complet"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/fete-espace-quartier-plainpalais"
             },
             {
-              "label": "GIFF | PROJECTION | GLAXO",
+              "label": "GIFF | PROJECTION | CLOSING NIGHT: ARRESTED MEMORY",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/giff-projection-glaxo"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/giff-projection-closing-night-arrested-memory"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "261",
+          "value": "237",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,69 +161,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "ALAIN DELLA MAESTRA TRIO",
+              "label": "Ateliers thérapeutiques pour les personnes vivant des situations de racisme",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/alain-della-maestra-trio"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/ateliers-therapeutiques-vivant-situations-racisme"
             },
             {
-              "label": "Atelier de danse contemporaine avec Alia Al-Saadi (gratuit)",
+              "label": "Aurélien Dougé, Sans titre (Barre d’acier)",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/atelier-danse-contemporaine-alia-saadi-gratuit"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/aurelien-douge-titre-barre-acier"
             },
             {
-              "label": "Concert \"Faubourg Tango\" trio",
+              "label": "Cité Seniors fête ses 20 ans | Journée anniversaire",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/concert-faubourg-tango-trio"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-journee-anniversaire"
             },
             {
-              "label": "Concert événement NICOLAS FOLMER ”SO MILES 2” FEAT. SPECIAL GUEST RICK MARGITZA Jazz moderne Bebop",
+              "label": "CONCERT (Festival Celtiques) - The Curious Bards, airs vagabonds d'Irlande et d'Ecosse",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/concert-evenement-nicolas-folmer-miles-2-feat-special-guest-rick-margitza-jazz-moderne-bebop"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-curious-bards-airs-vagabonds-irlande-ecosse"
             },
             {
-              "label": "Cycle Beethoven 1",
+              "label": "De fil en traits",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/cycle-beethoven-1"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/traits"
             },
             {
-              "label": "DJ BETO · REGGAETON, BACHATA, SALSA, MERENGUE",
+              "label": "Des insectes entre les pages",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/beto-reggaeton-bachata-salsa-merengue"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/insectes-entre-pages"
             },
             {
-              "label": "Emergentia 2026: \"Coming Soon\" de Soraya Leila Emery",
+              "label": "DJ KENKYLLA · AFRO CARIBBEAN SOCA DANCEHALL",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/emergentia-2026-coming-soon-soraya-leila-emery"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/kenkylla-afro-caribbean-soca-dancehall-0"
             },
             {
-              "label": "Et toi? Quand tu seras grand.e...",
+              "label": "Exposition 1602 & Compagnie",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/seras-grande-0"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/exposition-1602-compagnie-0"
             },
             {
-              "label": "Et toi? Quand tu seras grand.e... * COMPLET *",
+              "label": "Fête de l’Espace de quartier Plainpalais",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/seras-grande-complet"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/fete-espace-quartier-plainpalais"
             },
             {
-              "label": "GIFF | PROJECTION | GLAXO",
+              "label": "GIFF | PROJECTION | CLOSING NIGHT: ARRESTED MEMORY",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/giff-projection-glaxo"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/giff-projection-closing-night-arrested-memory"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "261",
+          "value": "237",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,69 +284,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "ALAIN DELLA MAESTRA TRIO",
+              "label": "Ateliers thérapeutiques pour les personnes vivant des situations de racisme",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/alain-della-maestra-trio"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/ateliers-therapeutiques-vivant-situations-racisme"
             },
             {
-              "label": "Atelier de danse contemporaine avec Alia Al-Saadi (gratuit)",
+              "label": "Aurélien Dougé, Sans titre (Barre d’acier)",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/atelier-danse-contemporaine-alia-saadi-gratuit"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/aurelien-douge-titre-barre-acier"
             },
             {
-              "label": "Concert \"Faubourg Tango\" trio",
+              "label": "Cité Seniors fête ses 20 ans | Journée anniversaire",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/concert-faubourg-tango-trio"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-journee-anniversaire"
             },
             {
-              "label": "Concert événement NICOLAS FOLMER ”SO MILES 2” FEAT. SPECIAL GUEST RICK MARGITZA Jazz moderne Bebop",
+              "label": "CONCERT (Festival Celtiques) - The Curious Bards, airs vagabonds d'Irlande et d'Ecosse",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/concert-evenement-nicolas-folmer-miles-2-feat-special-guest-rick-margitza-jazz-moderne-bebop"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-curious-bards-airs-vagabonds-irlande-ecosse"
             },
             {
-              "label": "Cycle Beethoven 1",
+              "label": "De fil en traits",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/cycle-beethoven-1"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/traits"
             },
             {
-              "label": "DJ BETO · REGGAETON, BACHATA, SALSA, MERENGUE",
+              "label": "Des insectes entre les pages",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/beto-reggaeton-bachata-salsa-merengue"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/insectes-entre-pages"
             },
             {
-              "label": "Emergentia 2026: \"Coming Soon\" de Soraya Leila Emery",
+              "label": "DJ KENKYLLA · AFRO CARIBBEAN SOCA DANCEHALL",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/emergentia-2026-coming-soon-soraya-leila-emery"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/kenkylla-afro-caribbean-soca-dancehall-0"
             },
             {
-              "label": "Et toi? Quand tu seras grand.e...",
+              "label": "Exposition 1602 & Compagnie",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/seras-grande-0"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/exposition-1602-compagnie-0"
             },
             {
-              "label": "Et toi? Quand tu seras grand.e... * COMPLET *",
+              "label": "Fête de l’Espace de quartier Plainpalais",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/seras-grande-complet"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/fete-espace-quartier-plainpalais"
             },
             {
-              "label": "GIFF | PROJECTION | GLAXO",
+              "label": "GIFF | PROJECTION | CLOSING NIGHT: ARRESTED MEMORY",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/giff-projection-glaxo"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/giff-projection-closing-night-arrested-memory"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "261",
+          "value": "237",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,69 +407,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "ALAIN DELLA MAESTRA TRIO",
+              "label": "Ateliers thérapeutiques pour les personnes vivant des situations de racisme",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/alain-della-maestra-trio"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/ateliers-therapeutiques-vivant-situations-racisme"
             },
             {
-              "label": "Atelier de danse contemporaine avec Alia Al-Saadi (gratuit)",
+              "label": "Aurélien Dougé, Sans titre (Barre d’acier)",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/atelier-danse-contemporaine-alia-saadi-gratuit"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/aurelien-douge-titre-barre-acier"
             },
             {
-              "label": "Concert \"Faubourg Tango\" trio",
+              "label": "Cité Seniors fête ses 20 ans | Journée anniversaire",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/concert-faubourg-tango-trio"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-journee-anniversaire"
             },
             {
-              "label": "Concert événement NICOLAS FOLMER ”SO MILES 2” FEAT. SPECIAL GUEST RICK MARGITZA Jazz moderne Bebop",
+              "label": "CONCERT (Festival Celtiques) - The Curious Bards, airs vagabonds d'Irlande et d'Ecosse",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/concert-evenement-nicolas-folmer-miles-2-feat-special-guest-rick-margitza-jazz-moderne-bebop"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-curious-bards-airs-vagabonds-irlande-ecosse"
             },
             {
-              "label": "Cycle Beethoven 1",
+              "label": "De fil en traits",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/cycle-beethoven-1"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/traits"
             },
             {
-              "label": "DJ BETO · REGGAETON, BACHATA, SALSA, MERENGUE",
+              "label": "Des insectes entre les pages",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/beto-reggaeton-bachata-salsa-merengue"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/insectes-entre-pages"
             },
             {
-              "label": "Emergentia 2026: \"Coming Soon\" de Soraya Leila Emery",
+              "label": "DJ KENKYLLA · AFRO CARIBBEAN SOCA DANCEHALL",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/emergentia-2026-coming-soon-soraya-leila-emery"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/kenkylla-afro-caribbean-soca-dancehall-0"
             },
             {
-              "label": "Et toi? Quand tu seras grand.e...",
+              "label": "Exposition 1602 & Compagnie",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/seras-grande-0"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/exposition-1602-compagnie-0"
             },
             {
-              "label": "Et toi? Quand tu seras grand.e... * COMPLET *",
+              "label": "Fête de l’Espace de quartier Plainpalais",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/seras-grande-complet"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/fete-espace-quartier-plainpalais"
             },
             {
-              "label": "GIFF | PROJECTION | GLAXO",
+              "label": "GIFF | PROJECTION | CLOSING NIGHT: ARRESTED MEMORY",
               "detail": "Genève",
-              "date": "2026-11-06",
-              "url": "https://www.geneve.ch/agenda/giff-projection-glaxo"
+              "date": "2026-11-07",
+              "url": "https://www.geneve.ch/agenda/giff-projection-closing-night-arrested-memory"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

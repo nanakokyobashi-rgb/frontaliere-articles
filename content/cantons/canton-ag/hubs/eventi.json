@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "f1d53e06496e3a0a229e2c1c3a80d7cf9484106175a3dec626a4a10e9e2353e0",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "9173a82cf15b0fb8c68d4668d3c109cc8f7a8ba09224a840d304f6163b289228",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "101",
+          "value": "111",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "TGS - Aufführung \"Hesch en Vogel\"",
-              "detail": "Spreitenbach",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
+              "label": "6. Schweizer Samichlaus-Synode",
+              "detail": "Wislikofen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/6-schweizer-samichlaussynode/"
             },
             {
-              "label": "Mircos Suche nach dem Schatten",
+              "label": "KI erleben",
               "detail": "Baden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mircos-suche-nach-dem-schatten-2/"
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-erleben/"
             },
             {
-              "label": "Sushi-Kurs: Fisch und Vegi-Variationen",
-              "detail": "Baden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sushi-kurs-fisch-und-vegi-variationen/"
+              "label": "Herbstdegustation mit Treberwürsten",
+              "detail": "5234 Villigen, Villigen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstdegustation-mit-treberwuersten/"
             },
             {
-              "label": "Lucky The Girl",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/lucky-the-girl_A36iCD2"
+              "label": "KURS: SCHNEESTERN – ausgebucht, WARTELISTE",
+              "detail": "Wohlen AG",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-schneestern-ausgebucht-warteliste/"
             },
             {
-              "label": "Tim Vantol (NL) | Support: Reno Gabriel (CH)",
-              "detail": "Böröm pöm pöm, Oberentfelden",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberentfelden/tim-vantol-nl-support-tba_AthUvPM"
+              "label": "Altstadtrundgang",
+              "detail": "Aarau",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altstadtrundgang-13/"
             },
             {
-              "label": "Eto • Alwa Alibi",
-              "detail": "Baden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/eto-alwa-alibi/"
+              "label": "Jahreskonzert mit Theater",
+              "detail": "Mehrzweckhalle Chrüzlibachtal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rekingen-ag/jahreskonzert-mit-theater_AuQFGRF"
             },
             {
-              "label": "Metzgete",
-              "detail": "Kaiseraugst — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
+              "label": "Mystischer Streifzug durch dunkle Gassen - Kindertour",
+              "detail": "Laufenburg",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mystischer-streifzug-durch-dunkle-gassen-kindertour/"
             },
             {
-              "label": "Metzgete im Adler, Kaiseraugst",
-              "detail": "Landgasthof Adler, Kaiseraugst — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
+              "label": "Michel Gammenthaler - Impossible",
+              "detail": "Neue Turnhalle, Bergdietikon",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/michel-gammenthaler-impossible-4/"
             },
             {
-              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
-              "detail": "Strohmuseum im Park — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+              "label": "Salsa & Bachata Social",
+              "detail": "AUREA, Rheinfelden",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/salsa-und-bachata-social_Aeh9Kth"
             },
             {
-              "label": "Schiff über Bord!",
-              "detail": "Gemeindesaal «Breiten», Rothrist — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
+              "label": "Simon Enzler",
+              "detail": "Wohlen AG",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/simon-enzler-24/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "101",
+          "value": "111",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "TGS - Aufführung \"Hesch en Vogel\"",
-              "detail": "Spreitenbach",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
+              "label": "6. Schweizer Samichlaus-Synode",
+              "detail": "Wislikofen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/6-schweizer-samichlaussynode/"
             },
             {
-              "label": "Mircos Suche nach dem Schatten",
+              "label": "KI erleben",
               "detail": "Baden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mircos-suche-nach-dem-schatten-2/"
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-erleben/"
             },
             {
-              "label": "Sushi-Kurs: Fisch und Vegi-Variationen",
-              "detail": "Baden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sushi-kurs-fisch-und-vegi-variationen/"
+              "label": "Herbstdegustation mit Treberwürsten",
+              "detail": "5234 Villigen, Villigen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstdegustation-mit-treberwuersten/"
             },
             {
-              "label": "Lucky The Girl",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/lucky-the-girl_A36iCD2"
+              "label": "KURS: SCHNEESTERN – ausgebucht, WARTELISTE",
+              "detail": "Wohlen AG",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-schneestern-ausgebucht-warteliste/"
             },
             {
-              "label": "Tim Vantol (NL) | Support: Jean-Claude Juncker (CH)",
-              "detail": "Böröm pöm pöm, Oberentfelden",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberentfelden/tim-vantol-nl-support-tba_AthUvPM"
+              "label": "Altstadtrundgang",
+              "detail": "Aarau",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altstadtrundgang-13/"
             },
             {
-              "label": "Eto • Alwa Alibi",
-              "detail": "Baden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/eto-alwa-alibi/"
+              "label": "Jahreskonzert mit Theater",
+              "detail": "Mehrzweckhalle Chrüzlibachtal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rekingen-ag/jahreskonzert-mit-theater_AuQFGRF"
             },
             {
-              "label": "Metzgete",
-              "detail": "Kaiseraugst — ongoing, last day: 7 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
+              "label": "Mystischer Streifzug durch dunkle Gassen - Kindertour",
+              "detail": "Laufenburg",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mystischer-streifzug-durch-dunkle-gassen-kindertour/"
             },
             {
-              "label": "Metzgete im Adler, Kaiseraugst",
-              "detail": "Landgasthof Adler, Kaiseraugst — ongoing, last day: 7 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
+              "label": "Michel Gammenthaler - Impossible",
+              "detail": "Neue Turnhalle, Bergdietikon",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/michel-gammenthaler-impossible-4/"
             },
             {
-              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
-              "detail": "Strohmuseum im Park — ongoing, last day: 28 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+              "label": "Salsa & Bachata Social",
+              "detail": "AUREA, Rheinfelden",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/salsa-und-bachata-social_Aeh9Kth"
             },
             {
-              "label": "Schiff über Bord!",
-              "detail": "Gemeindesaal «Breiten», Rothrist — ongoing, last day: 7 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
+              "label": "Simon Enzler",
+              "detail": "Wohlen AG",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/simon-enzler-24/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "101",
+          "value": "111",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "TGS - Aufführung \"Hesch en Vogel\"",
-              "detail": "Spreitenbach",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
+              "label": "6. Schweizer Samichlaus-Synode",
+              "detail": "Wislikofen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/6-schweizer-samichlaussynode/"
             },
             {
-              "label": "Mircos Suche nach dem Schatten",
+              "label": "KI erleben",
               "detail": "Baden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mircos-suche-nach-dem-schatten-2/"
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-erleben/"
             },
             {
-              "label": "Sushi-Kurs: Fisch und Vegi-Variationen",
-              "detail": "Baden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sushi-kurs-fisch-und-vegi-variationen/"
+              "label": "Herbstdegustation mit Treberwürsten",
+              "detail": "5234 Villigen, Villigen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstdegustation-mit-treberwuersten/"
             },
             {
-              "label": "Lucky The Girl",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/lucky-the-girl_A36iCD2"
+              "label": "KURS: SCHNEESTERN – ausgebucht, WARTELISTE",
+              "detail": "Wohlen AG",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-schneestern-ausgebucht-warteliste/"
             },
             {
-              "label": "Tim Vantol (NL) | Unterstützung: Reno Gabriel (CH)",
-              "detail": "Böröm pöm pöm, Oberentfelden",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberentfelden/tim-vantol-nl-support-tba_AthUvPM"
+              "label": "Altstadtrundgang",
+              "detail": "Aarau",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altstadtrundgang-13/"
             },
             {
-              "label": "Eto • Alwa Alibi",
-              "detail": "Baden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/eto-alwa-alibi/"
+              "label": "Jahreskonzert mit Theater",
+              "detail": "Mehrzweckhalle Chrüzlibachtal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rekingen-ag/jahreskonzert-mit-theater_AuQFGRF"
             },
             {
-              "label": "Metzgete",
-              "detail": "Kaiseraugst — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
+              "label": "Mystischer Streifzug durch dunkle Gassen - Kindertour",
+              "detail": "Laufenburg",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mystischer-streifzug-durch-dunkle-gassen-kindertour/"
             },
             {
-              "label": "Metzgete im Adler, Kaiseraugst",
-              "detail": "Landgasthof Adler, Kaiseraugst — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
+              "label": "Michel Gammenthaler - Impossible",
+              "detail": "Neue Turnhalle, Bergdietikon",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/michel-gammenthaler-impossible-4/"
             },
             {
-              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
-              "detail": "Strohmuseum im Park — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+              "label": "Salsa & Bachata Social",
+              "detail": "AUREA, Rheinfelden",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/salsa-und-bachata-social_Aeh9Kth"
             },
             {
-              "label": "Schiff über Bord!",
-              "detail": "Gemeindesaal «Breiten», Rothrist — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
+              "label": "Simon Enzler",
+              "detail": "Wohlen AG",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/simon-enzler-24/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "101",
+          "value": "111",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "TGS - Aufführung \"Hesch en Vogel\"",
-              "detail": "Spreitenbach",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
+              "label": "6. Schweizer Samichlaus-Synode",
+              "detail": "Wislikofen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/6-schweizer-samichlaussynode/"
             },
             {
-              "label": "Mircos Suche nach dem Schatten",
+              "label": "KI erleben",
               "detail": "Baden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mircos-suche-nach-dem-schatten-2/"
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-erleben/"
             },
             {
-              "label": "Sushi-Kurs: Fisch und Vegi-Variationen",
-              "detail": "Baden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sushi-kurs-fisch-und-vegi-variationen/"
+              "label": "Herbstdegustation mit Treberwürsten",
+              "detail": "5234 Villigen, Villigen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstdegustation-mit-treberwuersten/"
             },
             {
-              "label": "Lucky The Girl",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/lucky-the-girl_A36iCD2"
+              "label": "KURS: SCHNEESTERN – ausgebucht, WARTELISTE",
+              "detail": "Wohlen AG",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-schneestern-ausgebucht-warteliste/"
             },
             {
-              "label": "Tim Vantol (NL) | Soutien : Reno Gabriel (CH)",
-              "detail": "Böröm pöm pöm, Oberentfelden",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberentfelden/tim-vantol-nl-support-tba_AthUvPM"
+              "label": "Altstadtrundgang",
+              "detail": "Aarau",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altstadtrundgang-13/"
             },
             {
-              "label": "Eto • Alwa Alibi",
-              "detail": "Baden",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/eto-alwa-alibi/"
+              "label": "Jahreskonzert mit Theater",
+              "detail": "Mehrzweckhalle Chrüzlibachtal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rekingen-ag/jahreskonzert-mit-theater_AuQFGRF"
             },
             {
-              "label": "Metzgete",
-              "detail": "Kaiseraugst — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
+              "label": "Mystischer Streifzug durch dunkle Gassen - Kindertour",
+              "detail": "Laufenburg",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mystischer-streifzug-durch-dunkle-gassen-kindertour/"
             },
             {
-              "label": "Metzgete im Adler, Kaiseraugst",
-              "detail": "Landgasthof Adler, Kaiseraugst — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
+              "label": "Michel Gammenthaler - Impossible",
+              "detail": "Neue Turnhalle, Bergdietikon",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/michel-gammenthaler-impossible-4/"
             },
             {
-              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
-              "detail": "Strohmuseum im Park — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+              "label": "Salsa & Bachata Social",
+              "detail": "AUREA, Rheinfelden",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/salsa-und-bachata-social_Aeh9Kth"
             },
             {
-              "label": "Schiff über Bord!",
-              "detail": "Gemeindesaal «Breiten», Rothrist — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
+              "label": "Simon Enzler",
+              "detail": "Wohlen AG",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/simon-enzler-24/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

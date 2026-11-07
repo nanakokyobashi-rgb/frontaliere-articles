@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "956267abe9b58787b191f2879c773d924a1a073f1415c7ab83858921a9b47f73",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "52ba7d6696f3f19fec6a7894ba6b1f0b9c301dbe0080da851428378b79a9b463",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "194",
+          "value": "195",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Alpensounds. Volksmusik zwischen Erbe und Experiment",
+              "label": "Stress. Eine Ausstellung, die Mut macht",
               "detail": "Bern",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alpensounds-volksmusik-zwischen-erbe-und-experiment/"
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stress-eine-ausstellung-die-mut-macht/"
             },
             {
-              "label": "Calimero's fondue boat",
-              "detail": "Thun",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/calimeros-fondue-boat/"
+              "label": "Jewelry made from horsehair",
+              "detail": "Tanzlokal Bear Line Dancers, Interlaken",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bijou-en-crin-de-cheval/"
             },
             {
-              "label": "Soul Jam im Hotel Wetterhorn",
-              "detail": "Hasliberg",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soul-jam-im-hotel-wetterhorn/"
+              "label": "Der Ton und seine Vielfalt im Theater",
+              "detail": "Burgdorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-ton-und-seine-vielfalt-im-theater/"
             },
             {
-              "label": "Astronomy evening: About starlight photography",
-              "detail": "3084 Wabern",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/astronomieabend-sternhimmelfotografie/"
+              "label": "Rosehip Day 2026",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rosehip-day-2026/"
             },
             {
-              "label": "Galadinner und Konzert mit Kristina & Evelyn Brunner",
-              "detail": "Konzerthalle Riggisberg, Riggisberg",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/evenements/musique/riggisberg/diner-de-gala-et-concert-avec-kristina-et-evelyn-brunner_AE5enSV"
+              "label": "Apéro mit Brot- und Zopfverkauf",
+              "detail": "Kulturreben / Culturovignes",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/apero-mit-brot-und-zopfverkauf-1/"
             },
             {
-              "label": "Krimi am Fels",
-              "detail": "Restaurant Stein & Sein, Interlaken",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/krimi-am-fels/"
+              "label": "Heilpflanzenwerkstatt – Kräuter zum Verschenken",
+              "detail": "Praxis für Naturheilkunde, Laupen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/heilpflanzenwerkstatt-kraeuter-zum-verschenken/"
             },
             {
-              "label": "Laternenumzug",
-              "detail": "Beatenberg",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/laternenumzug/"
+              "label": "Myrta Benedetti: Vernissage Ausstellung Vogelwelten",
+              "detail": "Spiez",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/myrta-benedetti-vernissage-ausstellung-vogelwelten/"
             },
             {
-              "label": "Saint City Orchestra",
-              "detail": "Kulturfabrik KUFA, Lyss",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lyss/saint-city-orchestra_A5hiViE"
+              "label": "Flohmarkt",
+              "detail": "QuartierInfo Mett, Biel/Bienne",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/flohmarkt-2/"
             },
             {
-              "label": "Calimeros Fondueschiff",
-              "detail": "Schiffstation Thun-Bahnhof, Thun",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/calimeros-fondueschiff_AGefx94"
+              "label": "Handpan Schnupperkurs",
+              "detail": "Handpanschule Thun, Thun",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AMhqtKn"
             },
             {
-              "label": "Dann mach doch Limonade, bitch",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dann-mach-doch-limonade-bitch-1/"
+              "label": "LANGATUN BRENNSEMINAR Samstag, 7. November 2026",
+              "detail": "Aarwangen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/langatun-brennseminar-samstag-7-november-2026/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "194",
+          "value": "195",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Alpensounds. Volksmusik zwischen Erbe und Experiment",
+              "label": "Stress. Eine Ausstellung, die Mut macht",
               "detail": "Bern",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alpensounds-volksmusik-zwischen-erbe-und-experiment/"
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stress-eine-ausstellung-die-mut-macht/"
             },
             {
-              "label": "Calimero's fondue boat",
-              "detail": "Thun",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/calimeros-fondue-boat/"
+              "label": "Jewelry made from horsehair",
+              "detail": "Tanzlokal Bear Line Dancers, Interlaken",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bijou-en-crin-de-cheval/"
             },
             {
-              "label": "Soul Jam im Hotel Wetterhorn",
-              "detail": "Hasliberg",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soul-jam-im-hotel-wetterhorn/"
+              "label": "Der Ton und seine Vielfalt im Theater",
+              "detail": "Burgdorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-ton-und-seine-vielfalt-im-theater/"
             },
             {
-              "label": "Astronomy evening: About starlight photography",
-              "detail": "3084 Wabern",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/astronomieabend-sternhimmelfotografie/"
+              "label": "Rosehip Day 2026",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rosehip-day-2026/"
             },
             {
-              "label": "Galadinner und Konzert mit Kristina & Evelyn Brunner",
-              "detail": "Konzerthalle Riggisberg, Riggisberg",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/evenements/musique/riggisberg/diner-de-gala-et-concert-avec-kristina-et-evelyn-brunner_AE5enSV"
+              "label": "Apéro mit Brot- und Zopfverkauf",
+              "detail": "Kulturreben / Culturovignes",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/apero-mit-brot-und-zopfverkauf-1/"
             },
             {
-              "label": "Krimi am Fels",
-              "detail": "Restaurant Stein & Sein, Interlaken",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/krimi-am-fels/"
+              "label": "Heilpflanzenwerkstatt – Kräuter zum Verschenken",
+              "detail": "Praxis für Naturheilkunde, Laupen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/heilpflanzenwerkstatt-kraeuter-zum-verschenken/"
             },
             {
-              "label": "Laternenumzug",
-              "detail": "Beatenberg",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/laternenumzug/"
+              "label": "Myrta Benedetti: Vernissage Ausstellung Vogelwelten",
+              "detail": "Spiez",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/myrta-benedetti-vernissage-ausstellung-vogelwelten/"
             },
             {
-              "label": "Saint City Orchestra",
-              "detail": "Kulturfabrik KUFA, Lyss",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lyss/saint-city-orchestra_A5hiViE"
+              "label": "Flohmarkt",
+              "detail": "QuartierInfo Mett, Biel/Bienne",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/flohmarkt-2/"
             },
             {
-              "label": "Calimeros Fondueschiff",
-              "detail": "Schiffstation Thun-Bahnhof, Thun",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/calimeros-fondueschiff_AGefx94"
+              "label": "Handpan Schnupperkurs",
+              "detail": "Handpanschule Thun, Thun",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AMhqtKn"
             },
             {
-              "label": "Dann mach doch Limonade, bitch",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dann-mach-doch-limonade-bitch-1/"
+              "label": "LANGATUN BRENNSEMINAR Samstag, 7. November 2026",
+              "detail": "Aarwangen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/langatun-brennseminar-samstag-7-november-2026/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "194",
+          "value": "195",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Alpensounds. Volksmusik zwischen Erbe und Experiment",
+              "label": "Stress. Eine Ausstellung, die Mut macht",
               "detail": "Bern",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alpensounds-volksmusik-zwischen-erbe-und-experiment/"
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stress-eine-ausstellung-die-mut-macht/"
             },
             {
-              "label": "Calimeros Fondueschiff",
-              "detail": "Thun",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/calimeros-fondue-boat/"
+              "label": "Schmuckstück aus Pferdehaar",
+              "detail": "Tanzlokal Bear Line Dancers, Interlaken",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bijou-en-crin-de-cheval/"
             },
             {
-              "label": "Soul Jam im Hotel Wetterhorn",
-              "detail": "Hasliberg",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soul-jam-im-hotel-wetterhorn/"
+              "label": "Der Ton und seine Vielfalt im Theater",
+              "detail": "Burgdorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-ton-und-seine-vielfalt-im-theater/"
             },
             {
-              "label": "Astronomieabend: Sternhimmelfotografie",
-              "detail": "3084 Wabern",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/astronomieabend-sternhimmelfotografie/"
+              "label": "Hagebuttentag 2026",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rosehip-day-2026/"
             },
             {
-              "label": "Galadinner und Konzert mit Kristina & Evelyn Brunner",
-              "detail": "Konzerthalle Riggisberg, Riggisberg",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/evenements/musique/riggisberg/diner-de-gala-et-concert-avec-kristina-et-evelyn-brunner_AE5enSV"
+              "label": "Apéro mit Brot- und Zopfverkauf",
+              "detail": "Kulturreben / Culturovignes",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/apero-mit-brot-und-zopfverkauf-1/"
             },
             {
-              "label": "Krimi am Fels",
-              "detail": "Restaurant Stein & Sein, Interlaken",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/krimi-am-fels/"
+              "label": "Heilpflanzenwerkstatt – Kräuter zum Verschenken",
+              "detail": "Praxis für Naturheilkunde, Laupen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/heilpflanzenwerkstatt-kraeuter-zum-verschenken/"
             },
             {
-              "label": "Laternenumzug",
-              "detail": "Beatenberg",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/laternenumzug/"
+              "label": "Myrta Benedetti: Vernissage Ausstellung Vogelwelten",
+              "detail": "Spiez",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/myrta-benedetti-vernissage-ausstellung-vogelwelten/"
             },
             {
-              "label": "Saint City Orchestra",
-              "detail": "Kulturfabrik KUFA, Lyss",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lyss/saint-city-orchestra_A5hiViE"
+              "label": "Flohmarkt",
+              "detail": "QuartierInfo Mett, Biel/Bienne",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/flohmarkt-2/"
             },
             {
-              "label": "Calimeros Fondueschiff",
-              "detail": "Schiffstation Thun-Bahnhof, Thun",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/calimeros-fondueschiff_AGefx94"
+              "label": "Handpan Schnupperkurs",
+              "detail": "Handpanschule Thun, Thun",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AMhqtKn"
             },
             {
-              "label": "Dann mach doch Limonade, bitch",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dann-mach-doch-limonade-bitch-1/"
+              "label": "LANGATUN BRENNSEMINAR Samstag, 7. November 2026",
+              "detail": "Aarwangen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/langatun-brennseminar-samstag-7-november-2026/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "194",
+          "value": "195",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Alpensounds. Volksmusik zwischen Erbe und Experiment",
+              "label": "Stress. Eine Ausstellung, die Mut macht",
               "detail": "Bern",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alpensounds-volksmusik-zwischen-erbe-und-experiment/"
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stress-eine-ausstellung-die-mut-macht/"
             },
             {
-              "label": "Bateau fondue Calimeros",
-              "detail": "Thun",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/calimeros-fondue-boat/"
+              "label": "Bijou en crin de cheval",
+              "detail": "Tanzlokal Bear Line Dancers, Interlaken",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bijou-en-crin-de-cheval/"
             },
             {
-              "label": "Soul Jam im Hotel Wetterhorn",
-              "detail": "Hasliberg",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soul-jam-im-hotel-wetterhorn/"
+              "label": "Der Ton und seine Vielfalt im Theater",
+              "detail": "Burgdorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-ton-und-seine-vielfalt-im-theater/"
             },
             {
-              "label": "Soirée astronomique: Photographie du ciel étoilé",
-              "detail": "3084 Wabern",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/astronomieabend-sternhimmelfotografie/"
+              "label": "Journée de l'églantier 2026",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rosehip-day-2026/"
             },
             {
-              "label": "Dîner de gala et concert avec Kristina et Evelyn Brunner",
-              "detail": "Konzerthalle Riggisberg, Riggisberg",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/evenements/musique/riggisberg/diner-de-gala-et-concert-avec-kristina-et-evelyn-brunner_AE5enSV"
+              "label": "Apéro vente de pain/tresses",
+              "detail": "Kulturreben / Culturovignes",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/apero-mit-brot-und-zopfverkauf-1/"
             },
             {
-              "label": "Krimi am Fels",
-              "detail": "Restaurant Stein & Sein, Interlaken",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/krimi-am-fels/"
+              "label": "Heilpflanzenwerkstatt – Kräuter zum Verschenken",
+              "detail": "Praxis für Naturheilkunde, Laupen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/heilpflanzenwerkstatt-kraeuter-zum-verschenken/"
             },
             {
-              "label": "Laternenumzug",
-              "detail": "Beatenberg",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/laternenumzug/"
+              "label": "Myrta Benedetti: Vernissage Ausstellung Vogelwelten",
+              "detail": "Spiez",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/myrta-benedetti-vernissage-ausstellung-vogelwelten/"
             },
             {
-              "label": "Saint City Orchestra",
-              "detail": "Kulturfabrik KUFA, Lyss",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lyss/saint-city-orchestra_A5hiViE"
+              "label": "Marché aux puces",
+              "detail": "QuartierInfo Mett, Biel/Bienne",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/flohmarkt-2/"
             },
             {
-              "label": "Calimeros Fondueschiff",
-              "detail": "Schiffstation Thun-Bahnhof, Thun",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/calimeros-fondueschiff_AGefx94"
+              "label": "Handpan Schnupperkurs",
+              "detail": "Handpanschule Thun, Thun",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AMhqtKn"
             },
             {
-              "label": "Dann mach doch Limonade, bitch",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dann-mach-doch-limonade-bitch-1/"
+              "label": "LANGATUN BRENNSEMINAR Samstag, 7. November 2026",
+              "detail": "Aarwangen",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/langatun-brennseminar-samstag-7-november-2026/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

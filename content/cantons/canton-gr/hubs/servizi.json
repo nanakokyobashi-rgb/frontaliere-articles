@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-11-06T22:19:33.900Z",
-  "contentHash": "7436bbd9e6c96d58288444e324fb1970422ae5804bf8294d8c6adc6ad81c39ec",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "50e3a1ac01d496a93856ad28c789c3478dc58d4a011713f636d4a5886e7f7c10",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -141,10 +141,10 @@
           "date": "2026-08-30T18:10:50.603Z"
         },
         {
-          "title": "Paisco Loveno-Grigioni: guida frontaliere, tasse, permessi",
-          "url": "/articoli-frontaliere/vivere-paisco-loveno-lavorare-grigioni-frontaliere/",
-          "excerpt": "Lavorare in Grigioni da Paisco Loveno: Permesso G, trattenute alla fonte, esenzione €10'000, LAMal, credito d'imposta e procedura dal 2024.",
-          "date": "2026-08-25T10:25:07.764Z"
+          "title": "Ospedale Grigioni: 518 milioni per 12 anni",
+          "url": "/articoli-svizzera/ospedale-grigioni-ampliamento-500m/",
+          "excerpt": "La nuova ala dell'Ospedale cantonale dei Grigioni entra in servizio a fine novembre 2026 dopo 518 milioni investiti.",
+          "date": "2026-08-18T19:56:19.062Z"
         }
       ],
       "latestCantonArticles": [],
@@ -174,7 +174,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-06T22:19:33.900Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "GR",
@@ -298,10 +298,10 @@
           "date": "2026-08-30T18:10:50.603Z"
         },
         {
-          "title": "Paisco Loveno-Grisioni: border guide, taxes, permits",
-          "url": "/en/cross-border-articles/living-paisco-loveno-working-graubunden-cross-border/",
-          "excerpt": "Working in Graubünden from Paisco Loveno: G Permit, withholding tax, €10,000 exemption, LAMal, tax credit and procedure from 2024.",
-          "date": "2026-08-25T10:25:07.764Z"
+          "title": "Graubünden Hospital: 518 million over 12 years",
+          "url": "/en/swiss-articles/graubunden-hospital-expansion-500m/",
+          "excerpt": "The new wing of the Cantonal Hospital of Graubünden comes into service at the end of November 2026 after 518 million invested.",
+          "date": "2026-08-18T19:56:19.062Z"
         }
       ],
       "latestCantonArticles": [],
@@ -327,7 +327,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-06T22:19:33.900Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "GR",
@@ -451,10 +451,10 @@
           "date": "2026-08-30T18:10:50.603Z"
         },
         {
-          "title": "Paisco Loveno-Graubünden: Grenzführer, Steuern, Genehmigungen",
-          "url": "/de/grenzgaenger-artikel/in-paisco-loveno-wohnen-in-graubuenden-arbeiten-frontalier/",
-          "excerpt": "Arbeiten in Graubünden ab Paisco Loveno: Bewilligung G, Quellensteuer, Befreiung € 10'000, KVG, Steuergutschrift und Verfahren ab 2024.",
-          "date": "2026-08-25T10:25:07.764Z"
+          "title": "Spital Graubünden: 518 Millionen für 12 Jahre",
+          "url": "/de/schweiz-artikel/graubuenden-spital-erweiterung-500m/",
+          "excerpt": "Der neue Flügel des Kantonsspitals Graubünden wird Ende November 2026 nach Investitionen von 518 Millionen in Betrieb genommen. Operationssäle werden von 10 auf 13 erhöht.",
+          "date": "2026-08-18T19:56:19.062Z"
         }
       ],
       "latestCantonArticles": [],
@@ -480,7 +480,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-06T22:19:33.900Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "GR",
@@ -604,10 +604,10 @@
           "date": "2026-08-30T18:10:50.603Z"
         },
         {
-          "title": "Paisco Loveno-Grisons : guide frontalier, taxes, permis",
-          "url": "/fr/articles-frontalier/vivre-paisco-loveno-travailler-grisons-frontalier/",
-          "excerpt": "Travailler dans les Grisons de Paisco Loveno : Permis G, retenues à la source, exonération € 10'000, LAMal, crédit d'impôt et procédure à partir de 2024.",
-          "date": "2026-08-25T10:25:07.764Z"
+          "title": "Hôpital Grisons : 518 millions pour 12 ans",
+          "url": "/fr/articles-suisse/hopital-grisons-extension-500m/",
+          "excerpt": "La nouvelle aile de l'Hôpital cantonal des Grisons entre en service fin novembre 2026 après 518 millions investis.",
+          "date": "2026-08-18T19:56:19.062Z"
         }
       ],
       "latestCantonArticles": [],
@@ -629,7 +629,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-06T22:19:33.900Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

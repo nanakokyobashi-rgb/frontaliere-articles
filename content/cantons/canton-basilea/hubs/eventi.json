@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "082a26f85d19f8615845d6d6d9ee9d24a89dee9e872be3ed14274b7b3d68e2b1",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "bd86b5d325abbe1f46d4c76120f61ed6761915d1b9948792eaa9e63745a5112e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "72",
+          "value": "71",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Mostra “ <Figuren für die Ewigkeit> ” di Peter Moilliet",
-              "detail": "Allschwil",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-figuren-fuer-die-ewigkeit-di-peter-moilliet/"
+              "label": "Jahreskonzert Chor der Nationen Basel",
+              "detail": "Kulturkirche Paulus, Basel",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/jahreskonzert-chor-der-nationen-basel_AYi1LCW"
+            },
+            {
+              "label": "«Aline» C. F. Ramuz",
+              "detail": "Sissach",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aline-c-f-ramuz/"
+            },
+            {
+              "label": "ETO x Alwa Alibi",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/eto-x-alwa-alibi_AdWuy4Z"
+            },
+            {
+              "label": "Michael von der Heide - Von der Heide singt Knef",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/michael-von-der-heide-von-der-heide-singt-knef_AUggHgR"
+            },
+            {
+              "label": "Oropax - Zwei wie kein anderer",
+              "detail": "Basel",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oropax-zwei-wie-kein-anderer/"
+            },
+            {
+              "label": "Playin‘ Tachles",
+              "detail": "Kulturscheune, Liestal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/playin-tachles_ABBvwXu"
+            },
+            {
+              "label": "Dire Strats",
+              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/dire-strats_AbSEZw2"
+            },
+            {
+              "label": "Lisa Brunner: «Das könnte Ihnen auch gefallen»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lisa-brunner-das-koennte-ihnen-auch-gefallen_A2at5ST"
             },
             {
               "label": "PANTHEON GOES LIVE - 6. November 2026",
-              "detail": "Muttenz",
-              "date": "2026-11-06",
+              "detail": "Muttenz — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pantheon-goes-live-6-november-2026/"
             },
             {
               "label": "Creme Wiesn",
-              "detail": "Messe Basel Congress Center, Basel",
-              "date": "2026-11-06",
+              "detail": "Messe Basel Congress Center, Basel — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/creme-wiesn/"
-            },
-            {
-              "label": "Lunik - Cycle breaker Tour",
-              "detail": "Kuppel Basel, Basel",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lunik-cycle-breaker-tour_AMs3qrj"
-            },
-            {
-              "label": "Spinnen - Wesen aus einer anderen Welt",
-              "detail": "Gemeindehaus Riehen, Riehen",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/riehen/spinnen-wesen-aus-einer-anderen-welt_AFypsMm"
-            },
-            {
-              "label": "Stimmungen. Lieder, sånger, lauluja.",
-              "detail": "Kulturkirche Paulus",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/stimmungen-lieder-snger-lauluja_AERRD3R"
-            },
-            {
-              "label": "24 Nights Eric Clapton Tribute Unplugged",
-              "detail": "Musik- und Kulturzentrum Don Bosco",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/24-nights-eric-clapton-tribute-unplugged_AMi6S69"
-            },
-            {
-              "label": "24 Nights Eric Clapton Tribute Unplugged",
-              "detail": "Basel",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/24-nights-eric-clapton-tribute-unplugged/"
-            },
-            {
-              "label": "Andreas Rebers - I gang grad wieder",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/andreas-rebers-i-gang-grad-wieder/"
-            },
-            {
-              "label": "Endstation",
-              "detail": "Basel — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "72",
+          "value": "71",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Exhibition: \" <Figuren für die Ewigkeit> \" by Peter Moilliet",
-              "detail": "Allschwil",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-figuren-fuer-die-ewigkeit-di-peter-moilliet/"
+              "label": "Jahreskonzert Chor der Nationen Basel",
+              "detail": "Kulturkirche Paulus, Basel",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/jahreskonzert-chor-der-nationen-basel_AYi1LCW"
+            },
+            {
+              "label": "«Aline» C. F. Ramuz",
+              "detail": "Sissach",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aline-c-f-ramuz/"
+            },
+            {
+              "label": "ETO x Alwa Alibi",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/eto-x-alwa-alibi_AdWuy4Z"
+            },
+            {
+              "label": "Michael von der Heide - Von der Heide singt Knef",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/michael-von-der-heide-von-der-heide-singt-knef_AUggHgR"
+            },
+            {
+              "label": "Oropax - Zwei wie kein anderer",
+              "detail": "Basel",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oropax-zwei-wie-kein-anderer/"
+            },
+            {
+              "label": "Playin‘ Tachles",
+              "detail": "Kulturscheune, Liestal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/playin-tachles_ABBvwXu"
+            },
+            {
+              "label": "Dire Strats",
+              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/dire-strats_AbSEZw2"
+            },
+            {
+              "label": "Lisa Brunner: «Das könnte Ihnen auch gefallen»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lisa-brunner-das-koennte-ihnen-auch-gefallen_A2at5ST"
             },
             {
               "label": "PANTHEON GOES LIVE - 6. November 2026",
-              "detail": "Muttenz",
-              "date": "2026-11-06",
+              "detail": "Muttenz — ongoing, last day: 7 November 2026",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pantheon-goes-live-6-november-2026/"
             },
             {
               "label": "Creme Wiesn",
-              "detail": "Messe Basel Congress Center, Basel",
-              "date": "2026-11-06",
+              "detail": "Messe Basel Congress Center, Basel — ongoing, last day: 7 November 2026",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/creme-wiesn/"
-            },
-            {
-              "label": "Lunik-C bre",
-              "detail": "Kuppel Basel, Basel",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lunik-cycle-breaker-tour_AMs3qrj"
-            },
-            {
-              "label": "Spinnen - Wesen aus einer anderen Welt",
-              "detail": "Gemeindehaus Riehen, Riehen",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/riehen/spinnen-wesen-aus-einer-anderen-welt_AFypsMm"
-            },
-            {
-              "label": "Stimmungen. Lieder, sånger, lauluja.",
-              "detail": "Kulturkirche Paulus",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/stimmungen-lieder-snger-lauluja_AERRD3R"
-            },
-            {
-              "label": "24 Nights Eric Clapton Tribute Unplugged",
-              "detail": "Musik- und Kulturzentrum Don Bosco",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/24-nights-eric-clapton-tribute-unplugged_AMi6S69"
-            },
-            {
-              "label": "24 Nights Eric Clapton Tribute Unplugged",
-              "detail": "Basel",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/24-nights-eric-clapton-tribute-unplugged/"
-            },
-            {
-              "label": "Andreas Rebers - I gang grad wieder",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/andreas-rebers-i-gang-grad-wieder/"
-            },
-            {
-              "label": "Endstation",
-              "detail": "Basel — ongoing, last day: 15 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "72",
+          "value": "71",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Ausstellung \"Figuren für die Ewigkeit\" Peter Moilliet",
-              "detail": "Allschwil",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-figuren-fuer-die-ewigkeit-di-peter-moilliet/"
+              "label": "Jahreskonzert Chor der Nationen Basel",
+              "detail": "Kulturkirche Paulus, Basel",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/jahreskonzert-chor-der-nationen-basel_AYi1LCW"
+            },
+            {
+              "label": "«Aline» C. F. Ramuz",
+              "detail": "Sissach",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aline-c-f-ramuz/"
+            },
+            {
+              "label": "ETO x Alwa Alibi",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/eto-x-alwa-alibi_AdWuy4Z"
+            },
+            {
+              "label": "Michael von der Heide - Von der Heide singt Knef",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/michael-von-der-heide-von-der-heide-singt-knef_AUggHgR"
+            },
+            {
+              "label": "Oropax - Zwei wie kein anderer",
+              "detail": "Basel",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oropax-zwei-wie-kein-anderer/"
+            },
+            {
+              "label": "Playin‘ Tachles",
+              "detail": "Kulturscheune, Liestal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/playin-tachles_ABBvwXu"
+            },
+            {
+              "label": "Dire Strats",
+              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/dire-strats_AbSEZw2"
+            },
+            {
+              "label": "Lisa Brunner: «Das könnte Ihnen auch gefallen»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lisa-brunner-das-koennte-ihnen-auch-gefallen_A2at5ST"
             },
             {
               "label": "PANTHEON GOES LIVE - 6. November 2026",
-              "detail": "Muttenz",
-              "date": "2026-11-06",
+              "detail": "Muttenz — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pantheon-goes-live-6-november-2026/"
             },
             {
               "label": "Creme Wiesn",
-              "detail": "Messe Basel Congress Center, Basel",
-              "date": "2026-11-06",
+              "detail": "Messe Basel Congress Center, Basel — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/creme-wiesn/"
-            },
-            {
-              "label": "Lunik – Fahrrad-Breaker-Tour",
-              "detail": "Kuppel Basel, Basel",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lunik-cycle-breaker-tour_AMs3qrj"
-            },
-            {
-              "label": "Spinnen - Wesen aus einer anderen Welt",
-              "detail": "Gemeindehaus Riehen, Riehen",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/riehen/spinnen-wesen-aus-einer-anderen-welt_AFypsMm"
-            },
-            {
-              "label": "Stimmungen. Lieder, sånger, lauluja.",
-              "detail": "Kulturkirche Paulus",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/stimmungen-lieder-snger-lauluja_AERRD3R"
-            },
-            {
-              "label": "24 Nights Eric Clapton Tribute Unplugged",
-              "detail": "Musik- und Kulturzentrum Don Bosco",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/24-nights-eric-clapton-tribute-unplugged_AMi6S69"
-            },
-            {
-              "label": "24 Nights Eric Clapton Tribute Unplugged",
-              "detail": "Basel",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/24-nights-eric-clapton-tribute-unplugged/"
-            },
-            {
-              "label": "Andreas Rebers - I gang grad wieder",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/andreas-rebers-i-gang-grad-wieder/"
-            },
-            {
-              "label": "Endstation",
-              "detail": "Basel — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "72",
+          "value": "71",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Exposition « <Figuren für die Ewigkeit> » de Peter Moilliet",
-              "detail": "Allschwil",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-figuren-fuer-die-ewigkeit-di-peter-moilliet/"
+              "label": "Jahreskonzert Chor der Nationen Basel",
+              "detail": "Kulturkirche Paulus, Basel",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/jahreskonzert-chor-der-nationen-basel_AYi1LCW"
+            },
+            {
+              "label": "«Aline» C. F. Ramuz",
+              "detail": "Sissach",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aline-c-f-ramuz/"
+            },
+            {
+              "label": "ETO x Alwa Alibi",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/eto-x-alwa-alibi_AdWuy4Z"
+            },
+            {
+              "label": "Michael von der Heide - Von der Heide singt Knef",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/michael-von-der-heide-von-der-heide-singt-knef_AUggHgR"
+            },
+            {
+              "label": "Oropax - Zwei wie kein anderer",
+              "detail": "Basel",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oropax-zwei-wie-kein-anderer/"
+            },
+            {
+              "label": "Playin‘ Tachles",
+              "detail": "Kulturscheune, Liestal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/playin-tachles_ABBvwXu"
+            },
+            {
+              "label": "Dire Strats",
+              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/dire-strats_AbSEZw2"
+            },
+            {
+              "label": "Lisa Brunner: «Das könnte Ihnen auch gefallen»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lisa-brunner-das-koennte-ihnen-auch-gefallen_A2at5ST"
             },
             {
               "label": "PANTHEON GOES LIVE - 6. November 2026",
-              "detail": "Muttenz",
-              "date": "2026-11-06",
+              "detail": "Muttenz — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pantheon-goes-live-6-november-2026/"
             },
             {
               "label": "Creme Wiesn",
-              "detail": "Messe Basel Congress Center, Basel",
-              "date": "2026-11-06",
+              "detail": "Messe Basel Congress Center, Basel — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/creme-wiesn/"
-            },
-            {
-              "label": "Lunik - Tour du briseur de vélo",
-              "detail": "Kuppel Basel, Basel",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lunik-cycle-breaker-tour_AMs3qrj"
-            },
-            {
-              "label": "Spinnen - Wesen aus einer anderen Welt",
-              "detail": "Gemeindehaus Riehen, Riehen",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/riehen/spinnen-wesen-aus-einer-anderen-welt_AFypsMm"
-            },
-            {
-              "label": "Stimmungen. Lieder, sånger, lauluja.",
-              "detail": "Kulturkirche Paulus",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/stimmungen-lieder-snger-lauluja_AERRD3R"
-            },
-            {
-              "label": "24 Nights Eric Clapton Tribute Unplugged",
-              "detail": "Musik- und Kulturzentrum Don Bosco",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/24-nights-eric-clapton-tribute-unplugged_AMi6S69"
-            },
-            {
-              "label": "24 Nights Eric Clapton Tribute Unplugged",
-              "detail": "Basel",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/24-nights-eric-clapton-tribute-unplugged/"
-            },
-            {
-              "label": "Andreas Rebers - I gang grad wieder",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/andreas-rebers-i-gang-grad-wieder/"
-            },
-            {
-              "label": "Endstation",
-              "detail": "Basel — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

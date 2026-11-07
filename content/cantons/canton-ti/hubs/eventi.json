@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "d04971020652d39c6182f811a71155cb792169b9475823e47723e71b4f9aa31a",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "2f8e65b20389342760bf8e62033b560feafa1a5a8131a7867bd33d752b82a61f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "170",
+          "value": "162",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Nuova videofinestra al PalaCinema con Nils Braun",
-              "detail": "PalaCinema, Locarno",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/64782"
-            },
-            {
-              "label": "Lugano Philosophy Colloquia",
-              "detail": "Aula Multiuso, Facoltà di Teologia di Lugano, Lugano",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/64333"
-            },
-            {
-              "label": "Serata anni 90 con Maxi B",
+              "label": "High Season Closing",
               "detail": "Fiore di pietra, Mendrisio",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/62919"
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64176"
             },
             {
-              "label": "Circus punk - Live",
-              "detail": "Bar Cervo, Bellinzona",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/63976"
+              "label": "Experience the Middle Ages in Bellinzona: the tour",
+              "detail": "Infopoint, Bellinzona",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/61639"
             },
             {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Teatro Sociale, Bellinzona",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bellinzona/vivaldi-die-vier-jahreszeiten_A2FPx6Q"
+              "label": "Tana ludica",
+              "detail": "Fisiodog, Lamone",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64288"
             },
             {
-              "label": "Valentina Tioli & Friends. Opening: Alba",
-              "detail": "Studio Foce, Lugano",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/63900"
+              "label": "La fame di Arlecchino",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/63717"
             },
             {
-              "label": "La Hollywood Band sul palco di casa",
+              "label": "Il Ticino delle meraviglie",
+              "detail": "Libreria pagina 21, Locarno",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64683"
+            },
+            {
+              "label": "Dinner Fiore di pietra",
+              "detail": "Fiore di pietra, Mendrisio",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64064"
+            },
+            {
+              "label": "Special Night Birthday Party all'Hollywood",
               "detail": "Ristorante Hollywood Live Music, Lugano",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/64720"
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64721"
             },
             {
-              "label": "Jazz Workshop 2026",
-              "detail": "Bar La Grotta dell’Hotel Ascona, Ascona — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261105/64566"
+              "label": "Monteforno di Sara Rossi Guidicelli",
+              "detail": "Cinema teatro, Chiasso",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64585"
             },
             {
-              "label": "Anima Mundi - Esposizione di pittura e scultura",
-              "detail": "Tania Art Galerie, Locarno — in corso, ultimo giorno: 13 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261105/64345"
+              "label": "I grandi dietro i grandi",
+              "detail": "Sala congressi, Muralto",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/63691"
             },
             {
-              "label": "Vamos - Il giovedì latino",
-              "detail": "Temus club, Agno — in corso, ultimo giorno: 19 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261105/64646"
+              "label": "Nuova videofinestra al PalaCinema con Nils Braun",
+              "detail": "PalaCinema, Locarno — in corso, ultimo giorno: 19 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261106/64782"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "170",
+          "value": "162",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "New Video Window at the PalaCinema with Nils Braun",
-              "detail": "PalaCinema, Locarno",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/64782"
-            },
-            {
-              "label": "Lugano Philosophia Colloqu",
-              "detail": "Aula Multiuso, Facoltà di Teologia di Lugano, Lugano",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/64333"
-            },
-            {
-              "label": "Evening in the 90s with Maxi B",
+              "label": "High Season Closure",
               "detail": "Fiore di pietra, Mendrisio",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/62919"
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64176"
             },
             {
-              "label": "Circus punk - Live",
-              "detail": "Bar Cervo, Bellinzona",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/63976"
+              "label": "Eper Experience the Middle Ages in Bellinzona: the tour",
+              "detail": "Infopoint, Bellinzona",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/61639"
             },
             {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Teatro Sociale, Bellinzona",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bellinzona/vivaldi-die-vier-jahreszeiten_A2FPx6Q"
+              "label": "Playful den",
+              "detail": "Fisiodog, Lamone",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64288"
             },
             {
-              "label": "Valentina Tioli & Friends. Opening: Dawn",
-              "detail": "Studio Foce, Lugano",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/63900"
+              "label": "The hunger of Harlequin",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/63717"
             },
             {
-              "label": "The Hollywood Band on the Home Stage",
+              "label": "Ticino of wonders",
+              "detail": "Libreria pagina 21, Locarno",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64683"
+            },
+            {
+              "label": "Stone Flower Dinner",
+              "detail": "Fiore di pietra, Mendrisio",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64064"
+            },
+            {
+              "label": "Hollywood Special Night Birthday Party",
               "detail": "Ristorante Hollywood Live Music, Lugano",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/64720"
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64721"
             },
             {
-              "label": "J",
-              "detail": "Bar La Grotta dell’Hotel Ascona, Ascona — ongoing, last day: 7 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261105/64566"
+              "label": "Monteforno by Sara Rossi Guidicelli",
+              "detail": "Cinema teatro, Chiasso",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64585"
             },
             {
-              "label": "Anima Mundi - Painting and Sculpture Exhibition",
-              "detail": "Tania Art Galerie, Locarno — ongoing, last day: 13 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261105/64345"
+              "label": "The greats behind the greats",
+              "detail": "Sala congressi, Muralto",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/63691"
             },
             {
-              "label": "VAMOS - Latin Thursday",
-              "detail": "Temus club, Agno — ongoing, last day: 19 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261105/64646"
+              "label": "New Video Window at the PalaCinema with Nils Braun",
+              "detail": "PalaCinema, Locarno — ongoing, last day: 19 November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261106/64782"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "170",
+          "value": "162",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Neues Videofenster im PalaCinema mit Nils Braun",
-              "detail": "PalaCinema, Locarno",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/64782"
-            },
-            {
-              "label": "Lugano Philosophy Kolloquium",
-              "detail": "Aula Multiuso, Facoltà di Teologia di Lugano, Lugano",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/64333"
-            },
-            {
-              "label": "90er Jahre Abend mit Maxi B",
+              "label": "Hochsaisonabschluss",
               "detail": "Fiore di pietra, Mendrisio",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/62919"
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64176"
             },
             {
-              "label": "Circus Punk – Live",
-              "detail": "Bar Cervo, Bellinzona",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/63976"
+              "label": "Experience the Middle Ages in Bellinzona: die Tour",
+              "detail": "Infopoint, Bellinzona",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/61639"
             },
             {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Teatro Sociale, Bellinzona",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bellinzona/vivaldi-die-vier-jahreszeiten_A2FPx6Q"
+              "label": "Spielhöhle",
+              "detail": "Fisiodog, Lamone",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64288"
             },
             {
-              "label": "Valentina Tioli & Friends. Eröffnung: Alba",
-              "detail": "Studio Foce, Lugano",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/63900"
+              "label": "Der Hunger des Harlekins",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/63717"
             },
             {
-              "label": "Die Hollywood Band auf der Heimbühne",
+              "label": "Das Tessin der Wunder",
+              "detail": "Libreria pagina 21, Locarno",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64683"
+            },
+            {
+              "label": "Dinner Steinblume",
+              "detail": "Fiore di pietra, Mendrisio",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64064"
+            },
+            {
+              "label": "Special Night Birthday Party in Hollywood",
               "detail": "Ristorante Hollywood Live Music, Lugano",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/64720"
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64721"
             },
             {
-              "label": "Jazz-Workshop 2026",
-              "detail": "Bar La Grotta dell’Hotel Ascona, Ascona — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261105/64566"
+              "label": "Monteforno von Sara Rossi Guidicelli",
+              "detail": "Cinema teatro, Chiasso",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64585"
             },
             {
-              "label": "Anima Mundi - Ausstellung von Gemälden und Skulpturen",
-              "detail": "Tania Art Galerie, Locarno — läuft, letzter Tag: 13. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261105/64345"
+              "label": "Die Großen hinter den Großen",
+              "detail": "Sala congressi, Muralto",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/63691"
             },
             {
-              "label": "VAMOS - Der lateinische Donnerstag",
-              "detail": "Temus club, Agno — läuft, letzter Tag: 19. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261105/64646"
+              "label": "Neues Videofenster im PalaCinema mit Nils Braun",
+              "detail": "PalaCinema, Locarno — läuft, letzter Tag: 19. November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261106/64782"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "170",
+          "value": "162",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Nouvelle projection vidéo au PalaCinema avec Nils Braun",
-              "detail": "PalaCinema, Locarno",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/64782"
-            },
-            {
-              "label": "Colloques de philosophie de Lugano",
-              "detail": "Aula Multiuso, Facoltà di Teologia di Lugano, Lugano",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/64333"
-            },
-            {
-              "label": "Soirée années 90 avec Maxi B",
+              "label": "Fermeture haute saison",
               "detail": "Fiore di pietra, Mendrisio",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/62919"
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64176"
             },
             {
-              "label": "Cirque punk - Live",
-              "detail": "Bar Cervo, Bellinzona",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/63976"
+              "label": "Experience the Middle Ages in Bellinzona : the tour",
+              "detail": "Infopoint, Bellinzona",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/61639"
             },
             {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Teatro Sociale, Bellinzona",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bellinzona/vivaldi-die-vier-jahreszeiten_A2FPx6Q"
+              "label": "Tana ludique",
+              "detail": "Fisiodog, Lamone",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64288"
             },
             {
-              "label": "Valentina Tioli & Friends. Ouverture : Alba",
-              "detail": "Studio Foce, Lugano",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/63900"
+              "label": "La faim d'Arlequin",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/63717"
             },
             {
-              "label": "Le Hollywood Band sur scène",
+              "label": "Le Tessin des merveilles",
+              "detail": "Libreria pagina 21, Locarno",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64683"
+            },
+            {
+              "label": "Dinner Fleur de pierre",
+              "detail": "Fiore di pietra, Mendrisio",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64064"
+            },
+            {
+              "label": "Special Night Birthday Party à Hollywood",
               "detail": "Ristorante Hollywood Live Music, Lugano",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261106/64720"
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64721"
             },
             {
-              "label": "Atelier de Jazz 2026",
-              "detail": "Bar La Grotta dell’Hotel Ascona, Ascona — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261105/64566"
+              "label": "Monteforno de Sara Rossi Guidicelli",
+              "detail": "Cinema teatro, Chiasso",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/64585"
             },
             {
-              "label": "Anima Mundi - Exposition de peinture et de sculpture",
-              "detail": "Tania Art Galerie, Locarno — en cours, dernier jour : 13 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261105/64345"
+              "label": "Les grands derrière les grands",
+              "detail": "Sala congressi, Muralto",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261107/63691"
             },
             {
-              "label": "VAMOS - Le Jeudi Latin",
-              "detail": "Temus club, Agno — en cours, dernier jour : 19 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.tio.ch/agenda/day/20261105/64646"
+              "label": "Nouvelle projection vidéo au PalaCinema avec Nils Braun",
+              "detail": "PalaCinema, Locarno — en cours, dernier jour : 19 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.tio.ch/agenda/day/20261106/64782"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T05:23:07.727Z",
-  "contentHash": "5fab8c93682089551c52ecd1019c9625c4977ef189db3a36cccd3b6771667c83",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "06f6c41ee5f11c6ac0985d33766e76dab1c7bb17215384b23d19d5cf220d3ed6",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Yoga Fall Festival",
-              "detail": "Hotel Vitznauerhof, Vitznau",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yoga-herbst-festival/"
+              "label": "Naturschutzfachliche Pflege",
+              "detail": "Ettiswil",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturschutzfachliche-pflege/"
             },
             {
-              "label": "Yoga Sphere Retreat",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yogasphaere-auszeit/"
+              "label": "Musikalische Unterhaltung",
+              "detail": "Kurhaus Seeblick, Weggis",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment-group-melange_AKTRKTK"
             },
             {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-11-06",
-              "url": "https://www.stadtluzern.ch/sitzung/7694302"
+              "label": "Metal Night",
+              "detail": "Schwiizer Chalet, Schenkon",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schenkon/metal-night_Aq8k3pD"
             },
             {
-              "label": "Kurs Fermentieren | 6.11.2026",
-              "detail": "UNESCO Biosphäre Entlebuch, Schüpfheim",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/neu-kurs-fermentieren-6112026/"
+              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
+              "detail": "Röm.-kath. Magdalenenkirche, Luzern",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/meggen/der-backgammon-chor-luzern-praesentiert-voyage-voyage_A8mbuHX"
             },
             {
-              "label": "Salonkonzert",
-              "detail": "Luzern",
-              "date": "2026-11-06",
-              "url": "https://www.stadtluzern.ch/sitzung/7463716"
+              "label": "Mundartlieder zum Zuhören",
+              "detail": "BEWIA Höchweid AG, Werthenstein",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/werthenstein/mundartlieder-zum-zuhoeren_AH3rW94"
             },
             {
-              "label": "Oropax - Zwei wie kein anderer",
-              "detail": "Kulturzentrum Braui, Hochdorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oropax-zwei-wie-kein-anderer-4/"
-            },
-            {
-              "label": "Theateraufführung \"Garageusen\"",
+              "label": "Theater und Konzert",
               "detail": "Schulhaus Greppen, Greppen",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/greppen/theater-production-garageusen_AED7uEn"
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/evenements/musique/greppen/theatre-et-concert_AEj7TYF"
             },
             {
-              "label": "Troubas Kater",
-              "detail": "Schüür",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/troubas-kater_Af1qQQK"
+              "label": "Trio Anderscht, Désireée Dell`Amore & Daniel Küfler mit \"Saitenzauber\"",
+              "detail": "Vitznau",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trio-anderscht-desireee-dellamore-daniel-kuefler-mit-saitenzauber/"
             },
             {
-              "label": "Gletschergarten by Night",
-              "detail": "Gletschergarten Luzern, Luzern — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/gletschergarten-by-night_Ae2At5L"
+              "label": "Unique, das neue Show-Feuerwerk von Chris & Mike",
+              "detail": "Theater Duo Fischbach, Fischbach",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/unique-das-neue-showfeuerwerk-von-chris-mike/"
             },
             {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Jesuitenkirche",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/luzern/vivaldi-die-vier-jahreszeiten_AEGvrBe"
+            },
+            {
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Jesuitenkirche, Luzern",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vivaldi-die-vier-jahreszeiten-7/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "LU",
@@ -193,64 +193,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Yoga Fall Festival",
-              "detail": "Hotel Vitznauerhof, Vitznau",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yoga-herbst-festival/"
+              "label": "Naturschutzfachliche Pflege",
+              "detail": "Ettiswil",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturschutzfachliche-pflege/"
             },
             {
-              "label": "Yoga Sphere Retreat",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yogasphaere-auszeit/"
+              "label": "Musical entertainment - Group Mélange",
+              "detail": "Kurhaus Seeblick, Weggis",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment-group-melange_AKTRKTK"
             },
             {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-11-06",
-              "url": "https://www.stadtluzern.ch/sitzung/7694302"
+              "label": "Metal Night",
+              "detail": "Schwiizer Chalet, Schenkon",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schenkon/metal-night_Aq8k3pD"
             },
             {
-              "label": "Kurs Fermentieren | 6.11.2026",
-              "detail": "UNESCO Biosphäre Entlebuch, Schüpfheim",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/neu-kurs-fermentieren-6112026/"
+              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
+              "detail": "Röm.-kath. Magdalenenkirche, Luzern",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/meggen/der-backgammon-chor-luzern-praesentiert-voyage-voyage_A8mbuHX"
             },
             {
-              "label": "Salonkonzert",
-              "detail": "Luzern",
-              "date": "2026-11-06",
-              "url": "https://www.stadtluzern.ch/sitzung/7463716"
+              "label": "Mundartlieder zum Zuhören",
+              "detail": "BEWIA Höchweid AG, Werthenstein",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/werthenstein/mundartlieder-zum-zuhoeren_AH3rW94"
             },
             {
-              "label": "Oropax - Zwei wie kein anderer",
-              "detail": "Kulturzentrum Braui, Hochdorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oropax-zwei-wie-kein-anderer-4/"
-            },
-            {
-              "label": "Theater Production \"Garageusen\"",
+              "label": "Theater and Concerts",
               "detail": "Schulhaus Greppen, Greppen",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/greppen/theater-production-garageusen_AED7uEn"
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/evenements/musique/greppen/theatre-et-concert_AEj7TYF"
             },
             {
-              "label": "Troubas Kater",
-              "detail": "Schüür",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/troubas-kater_Af1qQQK"
+              "label": "Trio Anderscht, Désireée Dell`Amore & Daniel Küfler mit \"Saitenzauber\"",
+              "detail": "Vitznau",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trio-anderscht-desireee-dellamore-daniel-kuefler-mit-saitenzauber/"
             },
             {
-              "label": "Gletschergarten by Night",
-              "detail": "Gletschergarten Luzern, Luzern — ongoing, last day: 7 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/gletschergarten-by-night_Ae2At5L"
+              "label": "Unique, das neue Show-Feuerwerk von Chris & Mike",
+              "detail": "Theater Duo Fischbach, Fischbach",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/unique-das-neue-showfeuerwerk-von-chris-mike/"
             },
             {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Jesuitenkirche",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/luzern/vivaldi-die-vier-jahreszeiten_AEGvrBe"
+            },
+            {
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Jesuitenkirche, Luzern",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vivaldi-die-vier-jahreszeiten-7/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "LU",
@@ -348,64 +348,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Yoga Herbst Festival",
-              "detail": "Hotel Vitznauerhof, Vitznau",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yoga-herbst-festival/"
+              "label": "Naturschutzfachliche Pflege",
+              "detail": "Ettiswil",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturschutzfachliche-pflege/"
             },
             {
-              "label": "Yogasphäre-Auszeit",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yogasphaere-auszeit/"
+              "label": "Musikalische Unterhaltung",
+              "detail": "Kurhaus Seeblick, Weggis",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment-group-melange_AKTRKTK"
             },
             {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-11-06",
-              "url": "https://www.stadtluzern.ch/sitzung/7694302"
+              "label": "Metal Night",
+              "detail": "Schwiizer Chalet, Schenkon",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schenkon/metal-night_Aq8k3pD"
             },
             {
-              "label": "Kurs Fermentieren | 6.11.2026",
-              "detail": "UNESCO Biosphäre Entlebuch, Schüpfheim",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/neu-kurs-fermentieren-6112026/"
+              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
+              "detail": "Röm.-kath. Magdalenenkirche, Luzern",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/meggen/der-backgammon-chor-luzern-praesentiert-voyage-voyage_A8mbuHX"
             },
             {
-              "label": "Salonkonzert",
-              "detail": "Luzern",
-              "date": "2026-11-06",
-              "url": "https://www.stadtluzern.ch/sitzung/7463716"
+              "label": "Mundartlieder zum Zuhören",
+              "detail": "BEWIA Höchweid AG, Werthenstein",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/werthenstein/mundartlieder-zum-zuhoeren_AH3rW94"
             },
             {
-              "label": "Oropax - Zwei wie kein anderer",
-              "detail": "Kulturzentrum Braui, Hochdorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oropax-zwei-wie-kein-anderer-4/"
-            },
-            {
-              "label": "Theateraufführung \"Garageusen\"",
+              "label": "Theater und Konzert",
               "detail": "Schulhaus Greppen, Greppen",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/greppen/theater-production-garageusen_AED7uEn"
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/evenements/musique/greppen/theatre-et-concert_AEj7TYF"
             },
             {
-              "label": "Troubas Kater",
-              "detail": "Schüür",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/troubas-kater_Af1qQQK"
+              "label": "Trio Anderscht, Désireée Dell`Amore & Daniel Küfler mit \"Saitenzauber\"",
+              "detail": "Vitznau",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trio-anderscht-desireee-dellamore-daniel-kuefler-mit-saitenzauber/"
             },
             {
-              "label": "Gletschergarten by Night",
-              "detail": "Gletschergarten Luzern, Luzern — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/gletschergarten-by-night_Ae2At5L"
+              "label": "Unique, das neue Show-Feuerwerk von Chris & Mike",
+              "detail": "Theater Duo Fischbach, Fischbach",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/unique-das-neue-showfeuerwerk-von-chris-mike/"
             },
             {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Jesuitenkirche",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/luzern/vivaldi-die-vier-jahreszeiten_AEGvrBe"
+            },
+            {
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Jesuitenkirche, Luzern",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vivaldi-die-vier-jahreszeiten-7/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "LU",
@@ -503,64 +503,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Festival d'automne de yoga",
-              "detail": "Hotel Vitznauerhof, Vitznau",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yoga-herbst-festival/"
+              "label": "Naturschutzfachliche Pflege",
+              "detail": "Ettiswil",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturschutzfachliche-pflege/"
             },
             {
-              "label": "Escapade « Yogasphère »",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yogasphaere-auszeit/"
+              "label": "Musikalische Unterhaltung",
+              "detail": "Kurhaus Seeblick, Weggis",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment-group-melange_AKTRKTK"
             },
             {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-11-06",
-              "url": "https://www.stadtluzern.ch/sitzung/7694302"
+              "label": "Metal Night",
+              "detail": "Schwiizer Chalet, Schenkon",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schenkon/metal-night_Aq8k3pD"
             },
             {
-              "label": "Kurs Fermentieren | 6.11.2026",
-              "detail": "UNESCO Biosphäre Entlebuch, Schüpfheim",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/neu-kurs-fermentieren-6112026/"
+              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
+              "detail": "Röm.-kath. Magdalenenkirche, Luzern",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/meggen/der-backgammon-chor-luzern-praesentiert-voyage-voyage_A8mbuHX"
             },
             {
-              "label": "Salonkonzert",
-              "detail": "Luzern",
-              "date": "2026-11-06",
-              "url": "https://www.stadtluzern.ch/sitzung/7463716"
+              "label": "Mundartlieder zum Zuhören",
+              "detail": "BEWIA Höchweid AG, Werthenstein",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/werthenstein/mundartlieder-zum-zuhoeren_AH3rW94"
             },
             {
-              "label": "Oropax - Zwei wie kein anderer",
-              "detail": "Kulturzentrum Braui, Hochdorf",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oropax-zwei-wie-kein-anderer-4/"
-            },
-            {
-              "label": "Pièce de théâtre « Garageusen »",
+              "label": "Théâtre et concert",
               "detail": "Schulhaus Greppen, Greppen",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/greppen/theater-production-garageusen_AED7uEn"
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/evenements/musique/greppen/theatre-et-concert_AEj7TYF"
             },
             {
-              "label": "Troubas Kater",
-              "detail": "Schüür",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/troubas-kater_Af1qQQK"
+              "label": "Trio Anderscht, Désireée Dell`Amore & Daniel Küfler mit \"Saitenzauber\"",
+              "detail": "Vitznau",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trio-anderscht-desireee-dellamore-daniel-kuefler-mit-saitenzauber/"
             },
             {
-              "label": "Gletschergarten by Night",
-              "detail": "Gletschergarten Luzern, Luzern — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/gletschergarten-by-night_Ae2At5L"
+              "label": "Unique, das neue Show-Feuerwerk von Chris & Mike",
+              "detail": "Theater Duo Fischbach, Fischbach",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/unique-das-neue-showfeuerwerk-von-chris-mike/"
             },
             {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Jesuitenkirche",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/luzern/vivaldi-die-vier-jahreszeiten_AEGvrBe"
+            },
+            {
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Jesuitenkirche, Luzern",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vivaldi-die-vier-jahreszeiten-7/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T05:23:07.727Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

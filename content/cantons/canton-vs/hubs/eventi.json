@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "ce7eb8f6e51755822919f3537c2bdbf3040335eac5d6331cf5b229f06364f895",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "659f34dc30a4fce260290f43d755454c9486802bd38d395de43c4606043f4758",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "72",
+          "value": "70",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "“Silentium est aurum”",
-              "detail": "St-Séverin, Conthey",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/silentium-est-aurum/"
-            },
-            {
-              "label": "Konzert mit Sibylle Fässler & André Pousaz inkl. 4-Gang-Abendessen",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-featuring-sibylle-faessler-und-andre-pousaz-including-a-4-course-dinner_AFZGi97"
-            },
-            {
-              "label": "soirée #sansfiltre",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-sansfiltre/"
-            },
-            {
-              "label": "Schubertiade Sion",
-              "detail": "Clinique romande de réadaptation CRR-Suva, Sion",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/evenements/classique/sion/schubertiade-sion_AnEgGKQ"
-            },
-            {
-              "label": "La Revue Valaisanne 2026",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-revue-valaisanne-2026/"
-            },
-            {
-              "label": "Jazz GmbH",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/visp/jazz-llc_ArLfCn7"
-            },
-            {
-              "label": "Jazz, LLC",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jazz-gmbh-1/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Theater: Aufführungen in Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
-            },
-            {
               "label": "Galerie la Belle Toile : Vernissage - L'Éternité du fragile [EN]",
               "detail": "Martigny",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/galerie-la-belle-toile-vernissage-leternite-du-fragile-en/"
+            },
+            {
+              "label": "Native shrub and hedge maintenance",
+              "detail": "Salgesch",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/native-shrub-and-hedge-maintenance/"
+            },
+            {
+              "label": "Lo Pan Ner – Roggenbrotfest im Backhaus Oberwald",
+              "detail": "3999 Oberwald",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-roggenbrotfest-im-backhaus-oberwald/"
+            },
+            {
+              "label": "Lo Pan Ner – Rye bread festival at the Oberwald bakery",
+              "detail": "Backhüs Oberwald",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-rye-bread-festival-at-the-oberwald-bakery/"
+            },
+            {
+              "label": "Sagenabend",
+              "detail": "Brig, Brig-Glis",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagenabend/"
+            },
+            {
+              "label": "Enisum + Wizards of Wiznan",
+              "detail": "Manoir Pub",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/music/st-maurice/enisum-wizards-of-wiznan_AkR2Qgf"
+            },
+            {
+              "label": "Croma Quartet",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/croma-quartet/"
+            },
+            {
+              "label": "UN TOUT P’TIT PEU AVANT PLUS TARD",
+              "detail": "Théâtre du Dé, Evionnaz",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/evionnaz/un-tout-ptit-peu-avant-plus-tard_AaX1HVJ"
+            },
+            {
+              "label": "LE BOURGEOIS GENTILHOMME",
+              "detail": "Savièse",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-bourgeois-gentilhomme-2/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "VS",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "72",
+          "value": "70",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "“Silentium est aurum”",
-              "detail": "St-Séverin, Conthey",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/silentium-est-aurum/"
-            },
-            {
-              "label": "Concert featuring Sibylle Fässler & André Pousaz, including a 4-course dinner",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-featuring-sibylle-faessler-und-andre-pousaz-including-a-4-course-dinner_AFZGi97"
-            },
-            {
-              "label": "party # sansfiltre",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-sansfiltre/"
-            },
-            {
-              "label": "Schubertiade Sion",
-              "detail": "Clinique romande de réadaptation CRR-Suva, Sion",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/evenements/classique/sion/schubertiade-sion_AnEgGKQ"
-            },
-            {
-              "label": "La Revue Valaisanne 2026",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-revue-valaisanne-2026/"
-            },
-            {
-              "label": "Jazz, LLC",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/visp/jazz-llc_ArLfCn7"
-            },
-            {
-              "label": "Jazz, LLC",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jazz-gmbh-1/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Theater: Aufführungen in Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald — ongoing, last day: 8 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
-            },
-            {
               "label": "Galerie la Belle Toile : Vernissage - L'Éternité du fragile [EN]",
               "detail": "Martigny",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/galerie-la-belle-toile-vernissage-leternite-du-fragile-en/"
+            },
+            {
+              "label": "Native shrub and hedge maintenance",
+              "detail": "Salgesch",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/native-shrub-and-hedge-maintenance/"
+            },
+            {
+              "label": "Lo Pan Ner – Roggenbrotfest im Backhaus Oberwald",
+              "detail": "3999 Oberwald",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-roggenbrotfest-im-backhaus-oberwald/"
+            },
+            {
+              "label": "Lo Pan Ner – Rye bread festival at the Oberwald bakery",
+              "detail": "Backhüs Oberwald",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-rye-bread-festival-at-the-oberwald-bakery/"
+            },
+            {
+              "label": "Sagenabend",
+              "detail": "Brig, Brig-Glis",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagenabend/"
+            },
+            {
+              "label": "Enisum + Wizards of Wiznan",
+              "detail": "Manoir Pub",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/music/st-maurice/enisum-wizards-of-wiznan_AkR2Qgf"
+            },
+            {
+              "label": "Croma Quartet",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/croma-quartet/"
+            },
+            {
+              "label": "UN TOUT P’TIT PEU AVANT PLUS TARD",
+              "detail": "Théâtre du Dé, Evionnaz",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/evionnaz/un-tout-ptit-peu-avant-plus-tard_AaX1HVJ"
+            },
+            {
+              "label": "LE BOURGEOIS GENTILHOMME",
+              "detail": "Savièse",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-bourgeois-gentilhomme-2/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "VS",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "72",
+          "value": "70",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "„Silentium est aurum“",
-              "detail": "St-Séverin, Conthey",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/silentium-est-aurum/"
-            },
-            {
-              "label": "Konzert mit Sibylle Fässler & André Pousaz inkl. 4-Gang-Abendessen",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-featuring-sibylle-faessler-und-andre-pousaz-including-a-4-course-dinner_AFZGi97"
-            },
-            {
-              "label": "Soirée #sansfilter",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-sansfiltre/"
-            },
-            {
-              "label": "Schubertiade Sion",
-              "detail": "Clinique romande de réadaptation CRR-Suva, Sion",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/evenements/classique/sion/schubertiade-sion_AnEgGKQ"
-            },
-            {
-              "label": "La Revue Valaisanne 2026",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-revue-valaisanne-2026/"
-            },
-            {
-              "label": "Jazz GmbH",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/visp/jazz-llc_ArLfCn7"
-            },
-            {
-              "label": "Jazz GmbH",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jazz-gmbh-1/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Theater: Aufführungen in Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
-            },
-            {
               "label": "Galerie la Belle Toile : Vernissage - L'Éternité du fragile [DE]",
               "detail": "Martigny",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/galerie-la-belle-toile-vernissage-leternite-du-fragile-en/"
+            },
+            {
+              "label": "Einheimische Sträucher und Heckenpflege",
+              "detail": "Salgesch",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/native-shrub-and-hedge-maintenance/"
+            },
+            {
+              "label": "Lo Pan Ner – Roggenbrotfest im Backhaus Oberwald",
+              "detail": "3999 Oberwald",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-roggenbrotfest-im-backhaus-oberwald/"
+            },
+            {
+              "label": "Lo Pan Ner – Roggenbrotfest im Backhaus Oberwald",
+              "detail": "Backhüs Oberwald",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-rye-bread-festival-at-the-oberwald-bakery/"
+            },
+            {
+              "label": "Sagenabend",
+              "detail": "Brig, Brig-Glis",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagenabend/"
+            },
+            {
+              "label": "Enisum + Wizards of Wiznan",
+              "detail": "Manoir Pub",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/music/st-maurice/enisum-wizards-of-wiznan_AkR2Qgf"
+            },
+            {
+              "label": "Croma Quartet",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/croma-quartet/"
+            },
+            {
+              "label": "UN TOUT P’TIT PEU AVANT PLUS TARD",
+              "detail": "Théâtre du Dé, Evionnaz",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/evionnaz/un-tout-ptit-peu-avant-plus-tard_AaX1HVJ"
+            },
+            {
+              "label": "LE BOURGEOIS GENTILHOMME",
+              "detail": "Savièse",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-bourgeois-gentilhomme-2/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "72",
+          "value": "70",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "“ Silentium est aurum “",
-              "detail": "St-Séverin, Conthey",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/silentium-est-aurum/"
-            },
-            {
-              "label": "Konzert mit Sibylle Fässler & André Pousaz inkl. 4-Gang-Abendessen",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-featuring-sibylle-faessler-und-andre-pousaz-including-a-4-course-dinner_AFZGi97"
-            },
-            {
-              "label": "soirées #sansfiltre",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-sansfiltre/"
-            },
-            {
-              "label": "Schubertiade Sion",
-              "detail": "Clinique romande de réadaptation CRR-Suva, Sion",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/evenements/classique/sion/schubertiade-sion_AnEgGKQ"
-            },
-            {
-              "label": "La Revue Valaisanne 2026",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-revue-valaisanne-2026/"
-            },
-            {
-              "label": "Jazz S.A.R.L.",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/visp/jazz-llc_ArLfCn7"
-            },
-            {
-              "label": "Jazz S.A.R.L.",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jazz-gmbh-1/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Théâtre : représentations à Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
-            },
-            {
               "label": "Galerie la Belle Toile : Vernissage - L'Éternité du fragile",
               "detail": "Martigny",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/galerie-la-belle-toile-vernissage-leternite-du-fragile-en/"
+            },
+            {
+              "label": "Buissons indigènes et entretien des haies",
+              "detail": "Salgesch",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/native-shrub-and-hedge-maintenance/"
+            },
+            {
+              "label": "Lo Pan Ner – Roggenbrotfest im Backhaus Oberwald",
+              "detail": "3999 Oberwald",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-roggenbrotfest-im-backhaus-oberwald/"
+            },
+            {
+              "label": "Lo Pan Ner – Roggenbrotfest im Backhaus Oberwald",
+              "detail": "Backhüs Oberwald",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-rye-bread-festival-at-the-oberwald-bakery/"
+            },
+            {
+              "label": "Sagenabend",
+              "detail": "Brig, Brig-Glis",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagenabend/"
+            },
+            {
+              "label": "Enisum + Wizards of Wiznan",
+              "detail": "Manoir Pub",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/events/music/st-maurice/enisum-wizards-of-wiznan_AkR2Qgf"
+            },
+            {
+              "label": "Croma Quartet",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/croma-quartet/"
+            },
+            {
+              "label": "UN TOUT P’TIT PEU AVANT PLUS TARD",
+              "detail": "Théâtre du Dé, Evionnaz",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/evionnaz/un-tout-ptit-peu-avant-plus-tard_AaX1HVJ"
+            },
+            {
+              "label": "LE BOURGEOIS GENTILHOMME",
+              "detail": "Savièse",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-bourgeois-gentilhomme-2/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "f220deb35ad331cb0faa10e914d4b03b3ad582800106f77d83f07b647805bdb0",
+  "updatedAt": "2026-11-07T00:07:07.049Z",
+  "contentHash": "e49a19eb519687ed3456787656ec3eeb287f49ee1b119c53fa4489b6b414d91a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-04T02:24:05.931Z",
+      "updatedAt": "2026-11-06T00:12:54.064Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "72",
+          "value": "75",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "SCHNELLERTOLLERMEIER | Konzert |",
+              "detail": "Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schnellertollermeier-konzert/"
+            },
+            {
+              "label": "forum refurmo - Workshopreihe 2026 / Winterapotheke",
+              "detail": "Samedan",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/forum-refurmo-workshopreihe-2026-winterapotheke/"
+            },
+            {
+              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
+              "detail": "Val Surses: Savognin, Surses",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
+            },
+            {
+              "label": "Spielevent mit Tamara Mütsch",
+              "detail": "Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spielevent-mit-tamara-muetsch/"
+            },
+            {
+              "label": "Spiele aus aller Welt",
+              "detail": "Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spiele-aus-aller-welt/"
+            },
+            {
+              "label": "Crime Scene Dinner: The Most Beautiful, Last Night of Life",
+              "detail": "Davos",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crime-scene-dinner-the-most-beautiful-last-night-of-life/"
+            },
+            {
+              "label": "Cose mai accadute - omaggio a J.L. Borges",
+              "detail": "Museo Casa Besta, Brusio",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/brusio/cose-mai-accadute-omaggio-a-jl-borges_ApyJLkQ"
+            },
+            {
+              "label": "Konzerte des Bündner Singkreis mit der Kammerphilharmonie Graubünden",
+              "detail": "Coira, Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzerte-des-buendner-singkreis-mit-der-kammerphilharmonie-graubuenden/"
+            },
+            {
+              "label": "fANNtastic vibes «Reto Burrell & Lin Stucki» in Waltensburg",
+              "detail": "Hotel Ucliva",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/waltensburg-vuorz/fanntastic-vibes-reto-burrell-und-lin-stucki-in-waltensburg_AFxts6v"
+            },
+            {
               "label": "10. Kongress \"Graubünden forscht\"",
-              "detail": "Kongresszentrum Davos, Davos",
-              "date": "2026-11-06",
+              "detail": "Kongresszentrum Davos, Davos — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-07",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/davos-platz/10-kongress-graubuenden-forscht_ArjyJmB"
-            },
-            {
-              "label": "10th Conference \"Graubünden forscht\"",
-              "detail": "Kongresszentrum Davos, Davos",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/10th-conference-graubuenden-forscht/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella, Vaz/Obervaz",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schwiizergoofe-weekend/"
-            },
-            {
-              "label": "Juniors Academy Neon-Paint-Party",
-              "detail": "Kunstpol, Chur",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/juniors-academy-neon-paint-party-2/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella Resort",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/valbella/schwiizergoofe-weekend_AJPxTY3"
-            },
-            {
-              "label": "Trio Surpreisa",
-              "detail": "Kulturplatz Davos, Davos",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/trio-surpreisa/"
-            },
-            {
-              "label": "Cinema Staziun Lavin - LE CITTA DI PIANURA",
-              "detail": "Cinema Staziun, Zernez",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
-            },
-            {
-              "label": "Festival dello yoga di montagna",
-              "detail": "Schweizerhof Flims, Romantik Hotel & SPA, Flims — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/flims-waldhaus/mountain-yoga-festival_A86Gpwd"
-            },
-            {
-              "label": "Musiktheater: La scoula chi svoula",
-              "detail": "Sala cumünala, Scuol — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/scuol/musiktheater-la-scoula-chi-svoula_AAZic7b"
-            },
-            {
-              "label": "Cinema Staziun Lavin - BECAARIA",
-              "detail": "Cinema Staziun, Zernez — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -153,7 +153,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "en": {
       "canton": "GR",
@@ -163,7 +163,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "72",
+          "value": "75",
           "note": "from the site’s events calendar"
         }
       ],
@@ -174,69 +174,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "SCHNELLERTOLLERMEIER | Konzert |",
+              "detail": "Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schnellertollermeier-konzert/"
+            },
+            {
+              "label": "forum refurmo - Workshopreihe 2026 / Winterapotheke",
+              "detail": "Samedan",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/forum-refurmo-workshopreihe-2026-winterapotheke/"
+            },
+            {
+              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
+              "detail": "Val Surses: Savognin, Surses",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
+            },
+            {
+              "label": "Spielevent mit Tamara Mütsch",
+              "detail": "Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spielevent-mit-tamara-muetsch/"
+            },
+            {
+              "label": "Spiele aus aller Welt",
+              "detail": "Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spiele-aus-aller-welt/"
+            },
+            {
+              "label": "Crime Scene Dinner: The Most Beautiful, Last Night of Life",
+              "detail": "Davos",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crime-scene-dinner-the-most-beautiful-last-night-of-life/"
+            },
+            {
+              "label": "Cose mai accadute - omaggio a J.L. Borges",
+              "detail": "Museo Casa Besta, Brusio",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/brusio/cose-mai-accadute-omaggio-a-jl-borges_ApyJLkQ"
+            },
+            {
+              "label": "Konzerte des Bündner Singkreis mit der Kammerphilharmonie Graubünden",
+              "detail": "Coira, Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzerte-des-buendner-singkreis-mit-der-kammerphilharmonie-graubuenden/"
+            },
+            {
+              "label": "fANNtastic vibes «Reto Burrell & Lin Stucki» in Waltensburg",
+              "detail": "Hotel Ucliva",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/waltensburg-vuorz/fanntastic-vibes-reto-burrell-und-lin-stucki-in-waltensburg_AFxts6v"
+            },
+            {
               "label": "10th Conference \"Graubünden forscht\"",
-              "detail": "Kongresszentrum Davos, Davos",
-              "date": "2026-11-06",
+              "detail": "Kongresszentrum Davos, Davos — ongoing, last day: 7 November 2026",
+              "date": "2026-11-07",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/davos-platz/10-kongress-graubuenden-forscht_ArjyJmB"
-            },
-            {
-              "label": "10th Conference \"Graubünden forscht\"",
-              "detail": "Kongresszentrum Davos, Davos",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/10th-conference-graubuenden-forscht/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella, Vaz/Obervaz",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schwiizergoofe-weekend/"
-            },
-            {
-              "label": "Neon-Paint-Part Neon",
-              "detail": "Kunstpol, Chur",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/juniors-academy-neon-paint-party-2/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella Resort",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/valbella/schwiizergoofe-weekend_AJPxTY3"
-            },
-            {
-              "label": "Surpreisa Trio",
-              "detail": "Kulturplatz Davos, Davos",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/trio-surpreisa/"
-            },
-            {
-              "label": "Cinema Staziun Lavin - LE CITTA DI PIANURA",
-              "detail": "Cinema Staziun, Zernez",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
-            },
-            {
-              "label": "Mountain Yoga Festival",
-              "detail": "Schweizerhof Flims, Romantik Hotel & SPA, Flims — ongoing, last day: 8 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/flims-waldhaus/mountain-yoga-festival_A86Gpwd"
-            },
-            {
-              "label": "Musiktheater: La scoula chi svoula",
-              "detail": "Sala cumünala, Scuol — ongoing, last day: 7 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/scuol/musiktheater-la-scoula-chi-svoula_AAZic7b"
-            },
-            {
-              "label": "Cinema Staziun Lavin - BECAARIA",
-              "detail": "Cinema Staziun, Zernez — ongoing, last day: 7 November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -294,7 +294,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "de": {
       "canton": "GR",
@@ -304,7 +304,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "72",
+          "value": "75",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -315,69 +315,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "SCHNELLERTOLLERMEIER | Konzert |",
+              "detail": "Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schnellertollermeier-konzert/"
+            },
+            {
+              "label": "forum refurmo - Workshopreihe 2026 / Winterapotheke",
+              "detail": "Samedan",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/forum-refurmo-workshopreihe-2026-winterapotheke/"
+            },
+            {
+              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
+              "detail": "Val Surses: Savognin, Surses",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
+            },
+            {
+              "label": "Spielevent mit Tamara Mütsch",
+              "detail": "Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spielevent-mit-tamara-muetsch/"
+            },
+            {
+              "label": "Spiele aus aller Welt",
+              "detail": "Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spiele-aus-aller-welt/"
+            },
+            {
+              "label": "Tatort-Dinner: Mord in der Hochzeitsnacht",
+              "detail": "Davos",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crime-scene-dinner-the-most-beautiful-last-night-of-life/"
+            },
+            {
+              "label": "Cose mai accadute - omaggio a J.L. Borges",
+              "detail": "Museo Casa Besta, Brusio",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/brusio/cose-mai-accadute-omaggio-a-jl-borges_ApyJLkQ"
+            },
+            {
+              "label": "Konzerte des Bündner Singkreis mit der Kammerphilharmonie Graubünden",
+              "detail": "Coira, Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzerte-des-buendner-singkreis-mit-der-kammerphilharmonie-graubuenden/"
+            },
+            {
+              "label": "fANNtastic vibes «Reto Burrell & Lin Stucki» in Waltensburg",
+              "detail": "Hotel Ucliva",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/waltensburg-vuorz/fanntastic-vibes-reto-burrell-und-lin-stucki-in-waltensburg_AFxts6v"
+            },
+            {
               "label": "10. Kongress \"Graubünden forscht\"",
-              "detail": "Kongresszentrum Davos, Davos",
-              "date": "2026-11-06",
+              "detail": "Kongresszentrum Davos, Davos — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-07",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/davos-platz/10-kongress-graubuenden-forscht_ArjyJmB"
-            },
-            {
-              "label": "10. Kongress \"Graubünden forscht\"",
-              "detail": "Kongresszentrum Davos, Davos",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/10th-conference-graubuenden-forscht/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella, Vaz/Obervaz",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schwiizergoofe-weekend/"
-            },
-            {
-              "label": "Neon-Paint-Party der Juniorenakademie",
-              "detail": "Kunstpol, Chur",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/juniors-academy-neon-paint-party-2/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella Resort",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/valbella/schwiizergoofe-weekend_AJPxTY3"
-            },
-            {
-              "label": "Überraschungstrio",
-              "detail": "Kulturplatz Davos, Davos",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/trio-surpreisa/"
-            },
-            {
-              "label": "Cinema Staziun Lavin - LE CITTA DI PIANURA",
-              "detail": "Cinema Staziun, Zernez",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
-            },
-            {
-              "label": "Mountain Yoga Festival",
-              "detail": "Schweizerhof Flims, Romantik Hotel & SPA, Flims — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/flims-waldhaus/mountain-yoga-festival_A86Gpwd"
-            },
-            {
-              "label": "Musiktheater: La scoula chi svoula",
-              "detail": "Sala cumünala, Scuol — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/scuol/musiktheater-la-scoula-chi-svoula_AAZic7b"
-            },
-            {
-              "label": "Cinema Staziun Lavin - BECAARIA",
-              "detail": "Cinema Staziun, Zernez — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -435,7 +435,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     },
     "fr": {
       "canton": "GR",
@@ -445,7 +445,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "72",
+          "value": "75",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -456,69 +456,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "SCHNELLERTOLLERMEIER | Konzert |",
+              "detail": "Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schnellertollermeier-konzert/"
+            },
+            {
+              "label": "forum refurmo - Workshopreihe 2026 / Winterapotheke",
+              "detail": "Samedan",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/forum-refurmo-workshopreihe-2026-winterapotheke/"
+            },
+            {
+              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
+              "detail": "Val Surses: Savognin, Surses",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
+            },
+            {
+              "label": "Spielevent mit Tamara Mütsch",
+              "detail": "Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spielevent-mit-tamara-muetsch/"
+            },
+            {
+              "label": "Spiele aus aller Welt",
+              "detail": "Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spiele-aus-aller-welt/"
+            },
+            {
+              "label": "Crime Scene Dinner: The Most Beautiful, Last Night of Life",
+              "detail": "Davos",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crime-scene-dinner-the-most-beautiful-last-night-of-life/"
+            },
+            {
+              "label": "Cose mai accadute - omaggio a J.L. Borges",
+              "detail": "Museo Casa Besta, Brusio",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/brusio/cose-mai-accadute-omaggio-a-jl-borges_ApyJLkQ"
+            },
+            {
+              "label": "Konzerte des Bündner Singkreis mit der Kammerphilharmonie Graubünden",
+              "detail": "Coira, Chur",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzerte-des-buendner-singkreis-mit-der-kammerphilharmonie-graubuenden/"
+            },
+            {
+              "label": "fANNtastic vibes «Reto Burrell & Lin Stucki» in Waltensburg",
+              "detail": "Hotel Ucliva",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/waltensburg-vuorz/fanntastic-vibes-reto-burrell-und-lin-stucki-in-waltensburg_AFxts6v"
+            },
+            {
               "label": "10. Kongress \"Graubünden forscht\"",
-              "detail": "Kongresszentrum Davos, Davos",
-              "date": "2026-11-06",
+              "detail": "Kongresszentrum Davos, Davos — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-07",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/davos-platz/10-kongress-graubuenden-forscht_ArjyJmB"
-            },
-            {
-              "label": "10th Conference \"Graubünden forscht\"",
-              "detail": "Kongresszentrum Davos, Davos",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/10th-conference-graubuenden-forscht/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella, Vaz/Obervaz",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schwiizergoofe-weekend/"
-            },
-            {
-              "label": "Académie des Juniors Néon-Peinture-Party",
-              "detail": "Kunstpol, Chur",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/juniors-academy-neon-paint-party-2/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella Resort",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/valbella/schwiizergoofe-weekend_AJPxTY3"
-            },
-            {
-              "label": "Trio-surprises",
-              "detail": "Kulturplatz Davos, Davos",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/trio-surpreisa/"
-            },
-            {
-              "label": "Cinema Staziun Lavin - LE CITTA DI PIANURA",
-              "detail": "Cinema Staziun, Zernez",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
-            },
-            {
-              "label": "Festival de yoga en montagne",
-              "detail": "Schweizerhof Flims, Romantik Hotel & SPA, Flims — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/events/music/flims-waldhaus/mountain-yoga-festival_A86Gpwd"
-            },
-            {
-              "label": "Musiktheater: La scoula chi svoula",
-              "detail": "Sala cumünala, Scuol — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/scuol/musiktheater-la-scoula-chi-svoula_AAZic7b"
-            },
-            {
-              "label": "Cinema Staziun Lavin - BECAARIA",
-              "detail": "Cinema Staziun, Zernez — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-06",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-11-04T02:24:05.931Z"
+          "updatedAt": "2026-11-06T00:12:54.064Z"
         }
       ],
       "curatedArticles": [
@@ -576,7 +576,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-07T00:07:07.049Z"
     }
   }
 }
