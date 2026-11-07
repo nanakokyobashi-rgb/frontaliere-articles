@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1952348/iniziativa-sulla-neutralita-iniziativa-sull-alimentazione-come-avete-votato": {
-    "articleId": "urne-due-iniziative-2026",
-    "ts": "2026-09-25T03:15:17.893Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/gk9oevj1cu2z": {
     "articleId": "conferenza-protezione-popolazione-berna",
     "ts": "2026-09-25T04:12:08.523Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1961319/iva-aumento-capacita-reddito-famiglie-risparmio-ubs-studio-redditi": {
     "articleId": "iva-aumento-famiglie-redditi-bassi",
     "ts": "2026-11-07T03:12:12.740Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4218526": {
+    "articleId": "disoccupazione-stabile-ottobre",
+    "ts": "2026-11-07T15:49:34.095Z",
     "keyForm": 2
   }
 }
