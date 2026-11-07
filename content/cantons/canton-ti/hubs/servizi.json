@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "b1398d131ab1684a8d90c45adbd8abbeb856f4f8a7291b6ead2044d40df9183e",
+  "updatedAt": "2026-11-07T07:44:08.014Z",
+  "contentHash": "73be8a4d1301ce0ccd5c4a4486f6d0fd6641ce5cf3b6b79d2ca940410a16b7ce",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -79,16 +79,6 @@
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
             {
-              "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
-              "detail": "Lugano, Luganese",
-              "date": "2026-10-31T07:00:00.000Z"
-            },
-            {
-              "label": "Internazionale La Rinascente",
-              "detail": "Ligornetto, Mendrisiotto",
-              "date": "2026-11-03T07:00:00.000Z"
-            },
-            {
               "label": "Martinoli",
               "detail": "Dongio, Biasca e Valli",
               "date": "2026-11-06T17:00:00.000Z"
@@ -107,6 +97,16 @@
               "label": "Farmacia Stella",
               "detail": "Lugano, Luganese",
               "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "San Nicolao",
+              "detail": "Novazzano, Mendrisiotto",
+              "date": "2026-11-10T07:00:00.000Z"
+            },
+            {
+              "label": "Pharmantica",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-11-13T17:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T07:44:08.014Z"
     },
     "en": {
       "canton": "TI",
@@ -342,16 +342,6 @@
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
             {
-              "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
-              "detail": "Lugano, Luganese",
-              "date": "2026-10-31T07:00:00.000Z"
-            },
-            {
-              "label": "Internazionale La Rinascente",
-              "detail": "Ligornetto, Mendrisiotto",
-              "date": "2026-11-03T07:00:00.000Z"
-            },
-            {
               "label": "Martinoli",
               "detail": "Dongio, Biasca e Valli",
               "date": "2026-11-06T17:00:00.000Z"
@@ -370,6 +360,16 @@
               "label": "Farmacia Stella",
               "detail": "Lugano, Luganese",
               "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "San Nicolao",
+              "detail": "Novazzano, Mendrisiotto",
+              "date": "2026-11-10T07:00:00.000Z"
+            },
+            {
+              "label": "Pharmantica",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-11-13T17:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T07:44:08.014Z"
     },
     "de": {
       "canton": "TI",
@@ -600,16 +600,6 @@
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
             {
-              "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
-              "detail": "Lugano, Luganese",
-              "date": "2026-10-31T07:00:00.000Z"
-            },
-            {
-              "label": "Internazionale La Rinascente",
-              "detail": "Ligornetto, Mendrisiotto",
-              "date": "2026-11-03T07:00:00.000Z"
-            },
-            {
               "label": "Martinoli",
               "detail": "Dongio, Biasca e Valli",
               "date": "2026-11-06T17:00:00.000Z"
@@ -628,6 +618,16 @@
               "label": "Farmacia Stella",
               "detail": "Lugano, Luganese",
               "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "San Nicolao",
+              "detail": "Novazzano, Mendrisiotto",
+              "date": "2026-11-10T07:00:00.000Z"
+            },
+            {
+              "label": "Pharmantica",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-11-13T17:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T07:44:08.014Z"
     },
     "fr": {
       "canton": "TI",
@@ -858,16 +858,6 @@
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
             {
-              "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
-              "detail": "Lugano, Luganese",
-              "date": "2026-10-31T07:00:00.000Z"
-            },
-            {
-              "label": "Internazionale La Rinascente",
-              "detail": "Ligornetto, Mendrisiotto",
-              "date": "2026-11-03T07:00:00.000Z"
-            },
-            {
               "label": "Martinoli",
               "detail": "Dongio, Biasca e Valli",
               "date": "2026-11-06T17:00:00.000Z"
@@ -886,6 +876,16 @@
               "label": "Farmacia Stella",
               "detail": "Lugano, Luganese",
               "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "San Nicolao",
+              "detail": "Novazzano, Mendrisiotto",
+              "date": "2026-11-10T07:00:00.000Z"
+            },
+            {
+              "label": "Pharmantica",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-11-13T17:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T07:44:08.014Z"
     }
   }
 }

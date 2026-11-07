@@ -90,6 +90,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.meno-cercatori-lavoro-ottobre.title': '11,341 people seeking work in St. Gallen, end-Oct 2026',
     'blog.article.meno-cercatori-lavoro-ottobre.excerpt': 'At the end of October 2026, the RAV of the Canton of St. Gallen counted 11\'341 jobseekers, of whom 5\'784 were unemployed.',
     'blog.article.meno-cercatori-lavoro-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.voto-regolamento-fondo-gas-wil.title': 'Vote November 29, 2026: Regulation for the TBW gas network decommissioning fund',
+    'blog.article.voto-regolamento-fondo-gas-wil.excerpt': 'The vote concerns the regulations for the fund intended for the decommissioning of the TBW gas network, which measures approximately 570 km.',
+    'blog.article.voto-regolamento-fondo-gas-wil.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

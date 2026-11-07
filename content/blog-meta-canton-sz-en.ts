@@ -39,6 +39,9 @@ const blogMetaCantonSzEn: Record<string, string> = {
     'blog.article.ricerca-fisco-aziende-svitto.title': 'Schwyz, research should be more worthwhile for companies',
     'blog.article.ricerca-fisco-aziende-svitto.excerpt': 'Bote.ch links the research to the tax advantages for companies in the Canton of Schwyz, but the available material does not indicate any measures, figures, or dates.',
     'blog.article.ricerca-fisco-aziende-svitto.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.martinimarkt-principale-strada-chiusa.title': 'Martinimarkt: access and exit not possible on Hauptstrasse',
+    'blog.article.martinimarkt-principale-strada-chiusa.excerpt': 'From 6:00 a.m. to 8:00 p.m. throughout the entire market day, entry and exit are prohibited on Hauptstrasse between Dorfplatz and Benzigerstrasse.',
+    'blog.article.martinimarkt-principale-strada-chiusa.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSzEn;

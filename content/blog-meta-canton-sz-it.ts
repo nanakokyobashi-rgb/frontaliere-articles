@@ -39,6 +39,9 @@ const blogMetaCantonSzIt: Record<string, string> = {
     'blog.article.ricerca-fisco-aziende-svitto.title': 'Svitto, la ricerca dovrebbe convenire di più alle aziende',
     'blog.article.ricerca-fisco-aziende-svitto.excerpt': 'Bote.ch collega la ricerca alla convenienza fiscale per le aziende del Canton Svitto, ma il materiale disponibile non indica misure, cifre o date.',
     'blog.article.ricerca-fisco-aziende-svitto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.martinimarkt-principale-strada-chiusa.title': 'Martinimarkt: accesso e uscita non possibili su Hauptstrasse',
+    'blog.article.martinimarkt-principale-strada-chiusa.excerpt': 'Dalle 6.00 alle 20.00 dell\'intero giorno di mercato, l\'accesso e l\'uscita sono vietati su Hauptstrasse tra Dorfplatz e Benzigerstrasse.',
+    'blog.article.martinimarkt-principale-strada-chiusa.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSzIt;

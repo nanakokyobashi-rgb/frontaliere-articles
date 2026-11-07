@@ -470,6 +470,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-martinimarkt-principale-strada-chiusa': {
+    title: 'Martinimarkt: accesso e uscita non possibili su Hauptstrasse',
+    description: 'Accesso e uscita vietati su Hauptstrasse tra Dorfplatz e Benzigerstrasse dalle 6.00 alle 20.00 durante il Martinimarkt. Rumori da lunedì alle 6.00.',
+    keywords: 'frontalieri, ticino, svizzera, italia, martinimarkt, accesso, uscita, possibili',
+    ogTitle: 'Martinimarkt: Hauptstrasse chiusa dalle 6.00 alle 20.00',
+    ogDescription: 'Informazioni sulla chiusura di Hauptstrasse tra Dorfplatz e Benzigerstrasse per il Martinimarkt. Accesso/uscita vietato 6:00-20:00; rumori da lunedì alle 6:00.',
+    canonicalPath: '/articoli-svitto/martinimarkt-principale-strada-chiusa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Martinimarkt: accesso e uscita non possibili su Hauptstrasse",
+      "description": "Accesso e uscita vietati su Hauptstrasse tra Dorfplatz e Benzigerstrasse dalle 6.00 alle 20.00 durante il Martinimarkt. Rumori da lunedì alle 6.00.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-martinimarkt-principale-strada-chiusa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-07T08:08:34+00:00",
+      "dateModified": "2026-11-07T08:08:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svitto/martinimarkt-principale-strada-chiusa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

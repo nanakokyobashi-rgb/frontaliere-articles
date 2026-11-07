@@ -39,6 +39,9 @@ const blogMetaCantonSzDe: Record<string, string> = {
     'blog.article.ricerca-fisco-aziende-svitto.title': 'Schwyz, Forschung sollte sich für Unternehmen mehr lohnen',
     'blog.article.ricerca-fisco-aziende-svitto.excerpt': 'Bote.ch verbindet die Forschung mit der steuerlichen Attraktivität für Unternehmen im Kanton Schwyz, aber das verfügbare Material nennt keine Maßnahmen, Zahlen oder Daten.',
     'blog.article.ricerca-fisco-aziende-svitto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.martinimarkt-principale-strada-chiusa.title': 'Martinimarkt: Zu- und Wegfahrt auf der Hauptstrasse nicht möglich',
+    'blog.article.martinimarkt-principale-strada-chiusa.excerpt': 'Während des gesamten Markttags von 6.00 bis 20.00 Uhr sind Zu- und Wegfahrt auf der Hauptstrasse zwischen Dorfplatz und Benzigerstrasse verboten.',
+    'blog.article.martinimarkt-principale-strada-chiusa.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSzDe;

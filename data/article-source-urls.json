@@ -1,9 +1,4 @@
 {
-  "https://comozero.it/attualita/frontalieri-un-nuovo-problema-fiscale-e-realta-ecco-in-cosa-consiste": {
-    "articleId": "rimborso-imposta-lpp-2024",
-    "ts": "2026-09-23T10:40:11.794Z",
-    "keyForm": 2
-  },
   "stats-astra://monthly/2026-09/frontaliere": {
     "articleId": "parco-veicoli-ticino-settembre-2026",
     "ts": "2026-09-23T11:09:07.308Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/pubbliredazionale/frontalieri-e-telelavoro-nel-2026-come-organizzare-la-postazione-di-lavoro-a-casa": {
     "articleId": "frontalieri-telelavoro-protocollo-2026",
     "ts": "2026-11-06T10:40:32.025Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4222865": {
+    "articleId": "roma-cambia-proposta-tassa",
+    "ts": "2026-11-07T08:19:19.568Z",
     "keyForm": 2
   }
 }

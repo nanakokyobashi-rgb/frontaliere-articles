@@ -90,6 +90,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.meno-cercatori-lavoro-ottobre.title': '11\'341 Stellensuchende Ende Oktober 2026 im Kanton St. Gallen',
     'blog.article.meno-cercatori-lavoro-ottobre.excerpt': 'Ende Oktober 2026 zählte das RAV des Kantons St. Gallen 11\'341 Stellensuchende, davon 5\'784 Arbeitslose.',
     'blog.article.meno-cercatori-lavoro-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.voto-regolamento-fondo-gas-wil.title': 'Abstimmung 29.11.2026: Reglement zum TBW-Gasnetzfonds',
+    'blog.article.voto-regolamento-fondo-gas-wil.excerpt': 'Bei der Abstimmung geht es um das Reglement für den Fonds zur Stilllegung des TBW-Gasnetzes, das rund 570 km lang ist.',
+    'blog.article.voto-regolamento-fondo-gas-wil.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;
