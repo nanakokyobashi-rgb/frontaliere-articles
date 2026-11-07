@@ -72,6 +72,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.berra-2030-progetto-canton.title': 'Kanton schlägt 3,54 Millionen für die Mittelstation Berra 2030 vor',
     'blog.article.berra-2030-progetto-canton.excerpt': 'Der Kanton schlägt vor, die Errichtung einer Mittelstation an der Kombibahn im Rahmen von Berra 2030 mit 3,54 Millionen Franken zu unterstützen.',
     'blog.article.berra-2030-progetto-canton.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.neyruz-strada-cantonale-valtraloc.title': 'Neyruz: Valtraloc-Arbeiten, Abschluss im Herbst 2028',
+    'blog.article.neyruz-strada-cantonale-valtraloc.excerpt': 'Die Kantonsstraße von Neyruz wird zur Baustelle. Das Projekt Valtraloc sieht eine Aufwertung der Räume vor; der Abschluss ist für den Herbst 2028 vorgesehen.',
+    'blog.article.neyruz-strada-cantonale-valtraloc.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonFrDe;
