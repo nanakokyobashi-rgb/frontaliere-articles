@@ -1089,6 +1089,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vaud-salari-pubblici-2027': {
+    title: 'Vaud, stipendi pubblici indicizzati dell\'1,5% nel 2027',
+    description: 'Vaud indicizza dell\'1,5% gli stipendi del personale dello Stato nel 2027, mantiene le annuità e affronta la mobilitazione di SUD sui tagli.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vaud, stipendi, pubblici, indicizzati',
+    ogTitle: 'Vaud, stipendi pubblici indicizzati dell\'1,5% nel 2027',
+    ogDescription: 'Il governo vodese concede il pieno adeguamento salariale dell\'1,5% per il 2027 e conferma le annuità. La decisione arriva mentre il Canton Vaud affronta un piano di risparmi dopo l\'iniziativa fiscale dei 12%, con SUD che mantiene aperto il conflitto.',
+    canonicalPath: '/articoli-vaud/vaud-salari-pubblici-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vaud, stipendi pubblici indicizzati dell'1,5% nel 2027",
+      "description": "Vaud indicizza dell'1,5% gli stipendi del personale dello Stato nel 2027, mantiene le annuità e affronta la mobilitazione di SUD sui tagli.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-vaud-salari-pubblici-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-07T07:36:45+00:00",
+      "dateModified": "2026-11-07T07:36:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/vaud-salari-pubblici-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

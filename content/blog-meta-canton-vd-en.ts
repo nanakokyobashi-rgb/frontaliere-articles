@@ -87,6 +87,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.lausanna-credito-colonnine-2031.title': 'Electric mobility: 200 charging stations planned in Lausanne by 2031',
     'blog.article.lausanna-credito-colonnine-2031.excerpt': 'The Municipality of Lausanne is requesting an investment credit of CHF 3 million to develop the network of charging points on public property during the 2026-2031 legislature.',
     'blog.article.lausanna-credito-colonnine-2031.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.vaud-salari-pubblici-2027.title': 'Vaud, public-sector salaries indexed by 1,5% in 2027',
+    'blog.article.vaud-salari-pubblici-2027.excerpt': 'On Wednesday, the State Council announced the full indexation of the salaries of all state personnel for 2027.',
+    'blog.article.vaud-salari-pubblici-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVdEn;

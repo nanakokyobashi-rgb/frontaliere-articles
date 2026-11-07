@@ -87,6 +87,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.lausanna-credito-colonnine-2031.title': 'Elektromobilität: 200 Ladesäulen in Lausanne bis 2031 vorgesehen',
     'blog.article.lausanna-credito-colonnine-2031.excerpt': 'Die Stadtregierung von Lausanne ersucht um einen Investitionskredit von CHF 3 Millionen, um das Netz der Ladesäulen auf öffentlichem Grund während der Legislaturperiode 2026-2031 auszubauen.',
     'blog.article.lausanna-credito-colonnine-2031.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.vaud-salari-pubblici-2027.title': 'Waadt, indexierte öffentliche Gehälter von 1,5% im Jahr 2027',
+    'blog.article.vaud-salari-pubblici-2027.excerpt': 'Am Mittwoch kündigte der Waadtländer Staatsrat die vollständige Indexierung der Gehälter aller Staatsbediensteten für 2027 an.',
+    'blog.article.vaud-salari-pubblici-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;

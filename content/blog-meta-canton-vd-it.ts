@@ -87,6 +87,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.lausanna-credito-colonnine-2031.title': 'Mobilità elettrica: 200 colonnine previste a Losanna entro il 2031',
     'blog.article.lausanna-credito-colonnine-2031.excerpt': 'La Municipalità di Losanna sollecita un credito d\'investimento di CHF 3 milioni per sviluppare la rete di colonnine di ricarica sul dominio pubblico durante la legislatura 2026-2031.',
     'blog.article.lausanna-credito-colonnine-2031.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.vaud-salari-pubblici-2027.title': 'Vaud, stipendi pubblici indicizzati dell\'1,5% nel 2027',
+    'blog.article.vaud-salari-pubblici-2027.excerpt': 'Mercoledì il Consiglio di Stato vodese ha annunciato la piena indicizzazione degli stipendi dell\'intero personale dello Stato per il 2027.',
+    'blog.article.vaud-salari-pubblici-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVdIt;
