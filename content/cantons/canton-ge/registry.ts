@@ -139,4 +139,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'a1-terza-corsia-ginevra',
+ category: 'novita',
+ date: '2026-11-07T23:02:48.751Z',
+ image: '/images/blog/article-a1-terza-corsia-ginevra.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

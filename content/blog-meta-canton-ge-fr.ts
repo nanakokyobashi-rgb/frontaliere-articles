@@ -39,6 +39,9 @@ const blogMetaCantonGeFr: Record<string, string> = {
     'blog.article.furti-cantone-ginevra-2025.title': 'Vols par effraction dans le canton de Genève : 3\'410 en 2025',
     'blog.article.furti-cantone-ginevra-2025.excerpt': '3\'410 vols en 2025, contre 3\'196 en 2024 Hausse de 6,7% entre 2024 et 2025 Rencontres de la police : mercredi 28 octobre Terme Valeur Quoi Vols avec effraction.',
     'blog.article.furti-cantone-ginevra-2025.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.a1-terza-corsia-ginevra.title': 'A1 : la droite genevoise demande une troisième voie',
+    'blog.article.a1-terza-corsia-ginevra.excerpt': 'Le Grand Conseil genevois a approuvé la motion par 45 voix contre 38.',
+    'blog.article.a1-terza-corsia-ginevra.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGeFr;

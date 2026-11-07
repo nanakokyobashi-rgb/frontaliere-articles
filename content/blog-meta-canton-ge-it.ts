@@ -39,6 +39,9 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.furti-cantone-ginevra-2025.title': 'Furti con effrazione nel Canton Ginevra: 3\'410 nel 2025',
     'blog.article.furti-cantone-ginevra-2025.excerpt': '3\'410 furti nel 2025, contro 3\'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti.',
     'blog.article.furti-cantone-ginevra-2025.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.a1-terza-corsia-ginevra.title': 'A1: la destra ginevrina chiede una terza corsia',
+    'blog.article.a1-terza-corsia-ginevra.excerpt': 'La maggioranza di destra del Grand Conseil genevois ha chiesto di usare temporaneamente la banda d\'arresto d\'emergenza come terza corsia sull\'autostrada A1, nel tratto compreso tra Le Vengeron e Coppet (VD), cioè il corridoio precisato nella mozione.',
+    'blog.article.a1-terza-corsia-ginevra.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGeIt;

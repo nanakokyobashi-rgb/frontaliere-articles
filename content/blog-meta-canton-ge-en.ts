@@ -39,6 +39,9 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.furti-cantone-ginevra-2025.title': 'Burglaries in the Canton of Geneva: 3\'410 in 2025',
     'blog.article.furti-cantone-ginevra-2025.excerpt': '3\'410 thefts in 2025, compared with 3\'196 in 2024 6,7% growth between 2024 and 2025 Police meetings: Wednesday, 28 October Term Value What Burglaries involving.',
     'blog.article.furti-cantone-ginevra-2025.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.a1-terza-corsia-ginevra.title': 'A1: Geneva\'s right wing calls for a third lane',
+    'blog.article.a1-terza-corsia-ginevra.excerpt': 'The right-wing majority of the Geneva Grand Council called for the emergency lane to be used temporarily as a third lane on the A1 motorway, on the section between Le Vengeron and Coppet (VD), that is, the corridor specified in the motion.',
+    'blog.article.a1-terza-corsia-ginevra.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGeEn;

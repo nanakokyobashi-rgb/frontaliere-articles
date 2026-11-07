@@ -465,6 +465,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-a1-terza-corsia-ginevra': {
+    title: 'A1: la destra ginevrina chiede una terza corsia',
+    description: 'Il Grand Conseil genevois vota una mozione per chiedere alla Confederazione la terza corsia temporanea sull\'A1 tra Le Vengeron e Coppet.',
+    keywords: 'frontalieri, ticino, svizzera, italia, destra, ginevrina, chiede, terza',
+    ogTitle: 'A1 tra Le Vengeron e Coppet: mozione per la terza corsia',
+    ogDescription: 'La maggioranza di destra del Grand Conseil genevois vuole aprire temporaneamente la banda d\'arresto d\'emergenza sull\'A1. La mozione, approvata con 45 voti contro 38, chiede all\'esecutivo di intervenire presso la Confederazione.',
+    canonicalPath: '/articoli-ginevra/a1-terza-corsia-ginevra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "A1: la destra ginevrina chiede una terza corsia",
+      "description": "Il Grand Conseil genevois vota una mozione per chiedere alla Confederazione la terza corsia temporanea sull'A1 tra Le Vengeron e Coppet.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-a1-terza-corsia-ginevra.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-07T23:02:48+00:00",
+      "dateModified": "2026-11-07T23:02:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ginevra/a1-terza-corsia-ginevra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

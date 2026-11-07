@@ -39,6 +39,9 @@ const blogMetaCantonGeDe: Record<string, string> = {
     'blog.article.furti-cantone-ginevra-2025.title': 'Einbruchdiebstähle im Kanton Genf: 3\'410 im Jahr 2025',
     'blog.article.furti-cantone-ginevra-2025.excerpt': 'Im Kanton Genf wurden 2025 3\'410 Einbruch- oder Einschleichdiebstähle registriert. Insgesamt waren es 3\'196 Fälle im Jahr 2024 und 2\'986 im Jahr 2023.',
     'blog.article.furti-cantone-ginevra-2025.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.a1-terza-corsia-ginevra.title': 'A1: Die Genfer Rechte fordert eine dritte Fahrspur',
+    'blog.article.a1-terza-corsia-ginevra.excerpt': 'Die rechte Mehrheit des Genfer Grossen Rats hat gefordert, den Pannenstreifen auf der Autobahn A1 vorübergehend als dritte Fahrspur zu nutzen, und zwar auf dem Abschnitt zwischen Le Vengeron und Coppet (VD), also auf dem in der Motion präzisierten Korridor.',
+    'blog.article.a1-terza-corsia-ginevra.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGeDe;
