@@ -81,6 +81,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.kriens-riduce-imposte.title': 'Kriens décide une réduction des impôts',
     'blog.article.kriens-riduce-imposte.excerpt': 'Zentralplus signale la décision de Kriens ; le matériel disponible n’indique ni le montant, ni le pourcentage, ni la date d’entrée en vigueur de la réduction.',
     'blog.article.kriens-riduce-imposte.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.semal-st-klemens-ebikon.title': 'Nouveau feu de signalisation à St. Klemens pour la ponctualité des bus à Ebikon',
+    'blog.article.semal-st-klemens-ebikon.excerpt': 'Test à l\'arrêt St. Klemens sur la route cantonale en direction de Lucerne ; décision prévue à la fin de l\'été 2027 après consultation.',
+    'blog.article.semal-st-klemens-ebikon.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

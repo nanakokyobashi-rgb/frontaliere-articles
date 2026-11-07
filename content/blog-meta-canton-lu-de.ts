@@ -81,6 +81,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.kriens-riduce-imposte.title': 'Kriens beschließt eine Steuersenkung',
     'blog.article.kriens-riduce-imposte.excerpt': 'Der Titel der von Zentralplus veröffentlichten Nachricht weist darauf hin, dass Kriens eine Steuersenkung beschlossen hat.',
     'blog.article.kriens-riduce-imposte.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.semal-st-klemens-ebikon.title': 'Neue Ampel St. Klemens für Bus-Pünktlichkeit in Ebikon',
+    'blog.article.semal-st-klemens-ebikon.excerpt': 'Test an der Haltestelle St. Klemens an der Kantonsstrasse nach Luzern; Entscheidung nach Rücksprache für Spätsommer 2027 geplant.',
+    'blog.article.semal-st-klemens-ebikon.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

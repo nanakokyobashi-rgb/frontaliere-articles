@@ -293,4 +293,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'semal-st-klemens-ebikon',
+ category: 'pratico',
+ date: '2026-11-07T09:26:29.750Z',
+ image: '/images/blog/article-semal-st-klemens-ebikon.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
