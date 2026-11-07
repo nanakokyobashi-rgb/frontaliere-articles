@@ -4844,9 +4844,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-02.yml",
       "mode": "identical",
       "baseline": {
-        "site": "90564476b6072234",
-        "corpus": "90564476b6072234",
-        "alignedAt": "2026-11-06"
+        "site": "03b2fdc71a5397c1",
+        "corpus": "03b2fdc71a5397c1",
+        "alignedAt": "2026-11-07"
       }
     },
     {
@@ -4854,9 +4854,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-03.yml",
       "mode": "identical",
       "baseline": {
-        "site": "d3de75a3c28601d8",
-        "corpus": "d3de75a3c28601d8",
-        "alignedAt": "2026-11-06"
+        "site": "e518ef8571ff659c",
+        "corpus": "e518ef8571ff659c",
+        "alignedAt": "2026-11-07"
       }
     },
     {
@@ -5075,8 +5075,8 @@
       "mode": "identical",
       "reason": "La baseline registra lo stesso digest SHA-256 raw sui due lati; `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "e10237bf2c44f719",
-        "corpus": "e10237bf2c44f719",
+        "site": "073f4fafb2fcbf4a",
+        "corpus": "073f4fafb2fcbf4a",
         "alignedAt": "2026-11-07"
       }
     },
@@ -6015,8 +6015,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-24.yml",
       "mode": "identical",
       "baseline": {
-        "site": "809118ab370eb3dc",
-        "corpus": "809118ab370eb3dc",
+        "site": "b76566f10e9d2e50",
+        "corpus": "b76566f10e9d2e50",
         "alignedAt": "2026-11-07"
       }
     },
