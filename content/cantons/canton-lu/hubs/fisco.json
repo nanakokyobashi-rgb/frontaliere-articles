@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "fisco",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "6b97b4779af7e8dd0de7dfcbf00dbbb8b3689478cb09db07982d2f2d7d03f624",
+  "updatedAt": "2026-11-07T00:55:35.159Z",
+  "contentHash": "5e653d077d813983f833554fc43087f2a9c60209d500d398df386fa7de563834",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-05T22:54:19.931Z",
       "keyFacts": 0
     }
   ],
@@ -115,10 +115,16 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Kriens decide una riduzione delle imposte",
+          "url": "/articoli-lucerna/kriens-riduce-imposte/",
+          "excerpt": "Zentralplus segnala la decisione di Kriens; il materiale disponibile non indica importo, percentuale o decorrenza della riduzione.",
+          "date": "2026-11-07T00:45:28.812Z"
+        },
         {
           "title": "Canton Lucerna riduce le imposte: decisione definitiva",
           "url": "/articoli-lucerna/lucerna-riduce-imposte/",
@@ -160,12 +166,6 @@
           "url": "/articoli-svizzera/fisco-lucerna-tre-livelli-2026/",
           "excerpt": "Tre livelli fiscali e moltiplicatore comunale: il confronto 2026 parte dalla struttura nazionale e applica il metodo al canton Lucerna.",
           "date": "2026-10-01T03:47:26.930Z"
-        },
-        {
-          "title": "Imposta di successione e donazione Canton Lucerna: aliquote",
-          "url": "/articoli-svizzera/imposta-successione-donazione-lucerna-guida/",
-          "excerpt": "Guida completa all'imposta di successione e donazione nel Canton Lucerna. Scopri le aliquote per grado di parentela, le esenzioni e come dichiarare l'eredità.",
-          "date": "2026-08-22T12:05:19.300Z"
         }
       ],
       "latestCantonArticles": [],
@@ -191,7 +191,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-07T00:55:35.159Z"
     },
     "en": {
       "canton": "LU",
@@ -284,10 +284,16 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Kriens decides on a tax reduction",
+          "url": "/en/lucerne-articles/kriens-tax-cut/",
+          "excerpt": "Zentralplus reports Kriens’s decision; the available material does not specify the amount, percentage, or effective date of the reduction.",
+          "date": "2026-11-07T00:45:28.812Z"
+        },
         {
           "title": "Canton Lucerne cuts taxes: final decision",
           "url": "/en/lucerne-articles/lucerne-canton-cuts-taxes/",
@@ -329,12 +335,6 @@
           "url": "/en/swiss-articles/lucerne-tax-three-levels-2026/",
           "excerpt": "Three tax tiers and the municipal multiplier: The 2026 comparison begins with the national structure and applies the method to the canton of Lucerne.",
           "date": "2026-10-01T03:47:26.930Z"
-        },
-        {
-          "title": "Inheritance and gift tax Canton Lucerne: rates",
-          "url": "/en/swiss-articles/succession-donation-tax-lucerne-guide/",
-          "excerpt": "Complete guide to inheritance and gift tax in the Canton of Lucerne. Learn about kinship rates, exemptions, and how to declare inheritance.",
-          "date": "2026-08-22T12:05:19.300Z"
         }
       ],
       "latestCantonArticles": [],
@@ -360,7 +360,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-07T00:55:35.159Z"
     },
     "de": {
       "canton": "LU",
@@ -453,10 +453,16 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Kriens beschließt eine Steuersenkung",
+          "url": "/de/luzern-artikel/kriens-steuersenkung/",
+          "excerpt": "Der Titel der von Zentralplus veröffentlichten Nachricht weist darauf hin, dass Kriens eine Steuersenkung beschlossen hat.",
+          "date": "2026-11-07T00:45:28.812Z"
+        },
         {
           "title": "Kanton Luzern senkt die Steuern: endgültige Entscheidung",
           "url": "/de/luzern-artikel/luzern-senkt-steuern/",
@@ -498,12 +504,6 @@
           "url": "/de/schweiz-artikel/steuern-luzern-drei-ebenen-2026/",
           "excerpt": "Die kantonalen Verwaltungsverwaltungen verwalten kantonale und kommunale Steuern. Der Vergleich des Kantons Luzern muss von diesen beiden lokalen Komponenten ausgehen, ohne die Bundeszahl wie einen kantonalen Satz zu…",
           "date": "2026-10-01T03:47:26.930Z"
-        },
-        {
-          "title": "Erbschafts- und Schenkungssteuer Kanton Luzern: Steuersätze",
-          "url": "/de/schweiz-artikel/erbschaftssteuer-schenkungssteuer-luzern-leitfaden/",
-          "excerpt": "Vollständiger Leitfaden zur Erbschafts- und Schenkungssteuer im Kanton Luzern. Entdecken Sie die Sätze nach Verwandtschaftsgrad, die Ausnahmen und wie Sie die Erbschaft erklären können.",
-          "date": "2026-08-22T12:05:19.300Z"
         }
       ],
       "latestCantonArticles": [],
@@ -529,7 +529,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-07T00:55:35.159Z"
     },
     "fr": {
       "canton": "LU",
@@ -622,10 +622,16 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-05T22:54:19.931Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Kriens décide une réduction des impôts",
+          "url": "/fr/articles-lucerne/baisse-impots-kriens/",
+          "excerpt": "Zentralplus signale la décision de Kriens ; le matériel disponible n’indique ni le montant, ni le pourcentage, ni la date d’entrée en vigueur de la réduction.",
+          "date": "2026-11-07T00:45:28.812Z"
+        },
         {
           "title": "Le canton de Lucerne réduit les impôts : décision définitive",
           "url": "/fr/articles-lucerne/lucerne-baisse-impots/",
@@ -667,12 +673,6 @@
           "url": "/fr/articles-suisse/impots-lucerne-trois-niveaux-2026/",
           "excerpt": "Trois niveaux d’imposition et multiplicateur municipal : la comparaison 2026 part de la structure nationale et applique la méthode au canton de Lucerne.",
           "date": "2026-10-01T03:47:26.930Z"
-        },
-        {
-          "title": "Droits de succession et de donation Canton de Lucerne : taux",
-          "url": "/fr/articles-suisse/impot-succession-donation-lucerne-guide/",
-          "excerpt": "Guide complet de l'impôt sur les successions et les donations dans le canton de Lucerne. Découvrez les taux par degré de parenté, les exemptions et comment déclarer l'héritage.",
-          "date": "2026-08-22T12:05:19.300Z"
         }
       ],
       "latestCantonArticles": [],
@@ -698,7 +698,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-07T00:55:35.159Z"
     }
   }
 }
