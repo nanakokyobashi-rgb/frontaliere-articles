@@ -267,7 +267,7 @@ export const CORE_REPLACEMENTS = [
     count: 1,
     find: '          SECTION_REQUESTED: ${{ inputs.section }}\n'
       + '          SOURCE_URL: ${{ inputs.url }}\n'
-      + '          DISPATCH_KEY: ${{ inputs.dispatch_key }}\n'
+      + '          SOURCE_KEY: ${{ inputs.source_key }}\n'
       + '          DISPATCH_ORIGIN: ${{ inputs.dispatch_origin }}\n'
       + '          LOOP_CLOCK: ${{ inputs.loop_clock }}\n'
       + '          RECOVERY_SLOT: ${{ inputs.recovery_slot }}\n'
@@ -292,7 +292,10 @@ export const CORE_REPLACEMENTS = [
     id: 'admit: la deduplica della source URL resta nel receiver principale',
     count: 1,
     find: '          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "${DRY_RUN:-false}" != "true" ] && [ -n "${SOURCE_URL:-}" ]; then\n'
-      + '            if jq -e --arg k "${DISPATCH_KEY:-}" --arg s "$SOURCE_URL" --arg m "$self_created" --argjson i "$SELF_ID" \'any(.[]; [.created_at,.id] < [$m,$i] and ((.display_title | startswith("[dispatch-key=\\($k)] [dispatch-mode=production]")) or (.display_title | startswith("[dispatch-source=\\($s)] [dispatch-mode=production]"))))\' <<<"$runs" >/dev/null 2>/dev/null; then skip_generation_slot duplicate-dispatch-source; elif [ "$?" -ne 1 ]; then fail_closed_admission; fi\n'
+      + '            if ! [[ "${SOURCE_KEY:-}" =~ ^[a-f0-9]{32}$ ]]; then skip_generation_slot dispatch-source-key-invalid; fi\n'
+      + '            if ! expected_source_key="$(printf \'%s\' "$SOURCE_URL" | sha256sum | cut -c1-32)"; then skip_generation_slot dispatch-source-key-unavailable; fi\n'
+      + '            [ "$SOURCE_KEY" = "$expected_source_key" ] || skip_generation_slot dispatch-source-key-mismatch\n'
+      + '            if jq -e --arg k "$SOURCE_KEY" --arg m "$self_created" --argjson i "$SELF_ID" \'any(.[]; [.created_at,.id]<[$m,$i]and(.display_title|contains("[dispatch-source-key=\\($k)]"))and(.display_title|contains("[dispatch-mode=production]")))\' <<<"$runs" >/dev/null 2>/dev/null; then skip_generation_slot duplicate-dispatch-source; elif [ "$?" -ne 1 ]; then fail_closed_admission; fi\n'
       + '          fi\n',
     replace: '',
   },

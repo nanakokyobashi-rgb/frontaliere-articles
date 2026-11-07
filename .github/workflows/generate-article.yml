@@ -1,10 +1,10 @@
 name: Generate Blog Article
 # generation-cloud-clock-contract: v1
 # generation-cloud-slot-minutes: 7,37
-# `dispatch_key` is a producer-generated sha256:<64 lowercase hex> token. Keep
-# the source URL out of the title: GitHub may truncate long run names, while
-# the bounded key remains stable across a transient dispatch retry.
-run-name: ${{ format('[dispatch-key={0}] [dispatch-mode={1}] [loop-clock {2}] [generation-slot {3}] Generate Blog Article', inputs.dispatch_key || 'none', inputs.dry_run && 'dry' || 'production', inputs.loop_clock || 'manual', inputs.recovery_slot || 'none') }}
+# `source_key` is the producer-supplied first 32 hex characters of
+# SHA-256(source URL). It is bounded before it becomes part of the observable
+# run identity; the admission gate verifies it against `inputs.url` below.
+run-name: ${{ format('[dispatch-source-key={0}] [dispatch-mode={1}] [loop-clock {2}] [generation-slot {3}] Generate Blog Article', inputs.source_key || 'auto-scan', inputs.dry_run && 'dry' || 'production', inputs.loop_clock || 'manual', inputs.recovery_slot || 'none') }}
 
 # The last producer to move (issue #4974 item 3, §4/§5). Scans for a source,
 # generates a full multi-language article and registers it into the corpus this
@@ -194,9 +194,10 @@ on:
         description: 'Optional: specific source URL (empty = auto-scan)'
         required: false
         type: string
-      dispatch_key:
-        description: 'Optional bounded producer key (sha256:<64 lowercase hex>) for retry deduplication'
+      source_key:
+        description: 'First 32 lowercase hex characters of SHA-256(url); required for production URL dispatches'
         required: false
+        default: ''
         type: string
       section:
         description: 'frontaliere (default) or svizzera'
@@ -385,7 +386,7 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run }}
           SECTION_REQUESTED: ${{ inputs.section }}
           SOURCE_URL: ${{ inputs.url }}
-          DISPATCH_KEY: ${{ inputs.dispatch_key }}
+          SOURCE_KEY: ${{ inputs.source_key }}
           DISPATCH_ORIGIN: ${{ inputs.dispatch_origin }}
           LOOP_CLOCK: ${{ inputs.loop_clock }}
           RECOVERY_SLOT: ${{ inputs.recovery_slot }}
@@ -568,18 +569,10 @@ jobs:
           # quella premessa non copre più il caso nuovo, e va tenuta l'esenzione
           # SOLO per gli umani.
           #
-          # Le due forme sbagliate, entrambe rotte, per capire perché serve un
-          # marcatore e non un'euristica:
-          #   - anello NON esente → non partirebbe mai. Il dispatch nasce dentro
-          #     il job del padre, quindi al momento della domanda il padre è per
-          #     forza `in_progress` e per forza più vecchio: il gate vedrebbe
-          #     sempre «una generazione è già in volo» e salterebbe ogni anello.
-          #   - anello esente come un umano → entrerebbe nel gruppo di
-          #     concurrency mentre un'altra run cammina, e lì GitHub tiene UNA
-          #     sola pending e cancella la precedente a ogni arrivo: è la
-          #     politica di scarto che le #193/#212 hanno appena chiuso.
-          # Quindi: `chain_depth > 0` ⇒ anello, e per l'anello valgono il tetto
-          # orario e il confronto con le run in volo, con il solo padre escluso.
+          # Il dispatch di catena è esente solo con `chain_depth > 0`: il padre
+          # resta escluso, ma altre run in volo bloccano l'anello. Trattarlo come
+          # umano aggirerebbe la concurrency; trattarlo come non esente fermerebbe
+          # ogni anello.
           chain_depth=0
           case "${CHAIN_DEPTH:-0}" in
             ''|*[!0-9]*)
@@ -874,7 +867,10 @@ jobs:
           fi
 
           if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "${DRY_RUN:-false}" != "true" ] && [ -n "${SOURCE_URL:-}" ]; then
-            if jq -e --arg k "${DISPATCH_KEY:-}" --arg s "$SOURCE_URL" --arg m "$self_created" --argjson i "$SELF_ID" 'any(.[]; [.created_at,.id] < [$m,$i] and ((.display_title | startswith("[dispatch-key=\($k)] [dispatch-mode=production]")) or (.display_title | startswith("[dispatch-source=\($s)] [dispatch-mode=production]"))))' <<<"$runs" >/dev/null 2>/dev/null; then skip_generation_slot duplicate-dispatch-source; elif [ "$?" -ne 1 ]; then fail_closed_admission; fi
+            if ! [[ "${SOURCE_KEY:-}" =~ ^[a-f0-9]{32}$ ]]; then skip_generation_slot dispatch-source-key-invalid; fi
+            if ! expected_source_key="$(printf '%s' "$SOURCE_URL" | sha256sum | cut -c1-32)"; then skip_generation_slot dispatch-source-key-unavailable; fi
+            [ "$SOURCE_KEY" = "$expected_source_key" ] || skip_generation_slot dispatch-source-key-mismatch
+            if jq -e --arg k "$SOURCE_KEY" --arg m "$self_created" --argjson i "$SELF_ID" 'any(.[]; [.created_at,.id]<[$m,$i]and(.display_title|contains("[dispatch-source-key=\($k)]"))and(.display_title|contains("[dispatch-mode=production]")))' <<<"$runs" >/dev/null 2>/dev/null; then skip_generation_slot duplicate-dispatch-source; elif [ "$?" -ne 1 ]; then fail_closed_admission; fi
           fi
 
           if [ "$explicit_dispatch" = "true" ]; then
