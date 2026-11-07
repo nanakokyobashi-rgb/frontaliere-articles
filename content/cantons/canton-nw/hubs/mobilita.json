@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T16:04:12.780Z",
-  "contentHash": "d0564affe433ee0b1d55d9304e2faf0acdc218bf7fb50bdd455d0eb043497fa4",
+  "updatedAt": "2026-11-07T00:51:56.780Z",
+  "contentHash": "bcc19ba89ae0481d9ab84511f04834aac44a222dabe15944ef7fac3c31470743",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -129,6 +129,12 @@
           "date": "2026-10-30T20:11:37.696Z"
         },
         {
+          "title": "Dorfstrasse: imbocco chiuso dal 9 al 27 novembre 2026",
+          "url": "/articoli-nidvaldo/chiusura-imbocco-dorfstrasse/",
+          "excerpt": "L'imbocco della Dorfstrasse sarà chiuso dal 9 al 27 novembre 2026 per lavori; la nota indica quattro strade per l'accesso.",
+          "date": "2026-11-07T00:43:15.544Z"
+        },
+        {
           "title": "Hergiswil: Bergstrasse 4 chiusa il 25.11.2026",
           "url": "/articoli-nidvaldo/hergiswil-bergstrasse-gru/",
           "excerpt": "A Hergiswil il tratto interessato della Bergstrasse sarà chiuso il 25 novembre 2026 per lo smontaggio di una gru.",
@@ -158,7 +164,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-06T16:04:12.780Z"
+      "updatedAt": "2026-11-07T00:51:56.780Z"
     },
     "en": {
       "canton": "NW",
@@ -270,6 +276,12 @@
           "date": "2026-10-30T20:11:37.696Z"
         },
         {
+          "title": "Dorfstrasse: entrance closed from November 9 to 27, 2026",
+          "url": "/en/nidwalden-articles/dorfstrasse-junction-closure/",
+          "excerpt": "The entrance to Dorfstrasse will be closed from November 9 to 27, 2026, for construction work; the notice indicates four routes for access.",
+          "date": "2026-11-07T00:43:15.544Z"
+        },
+        {
           "title": "Hergiswil: Bergstrasse 4 closed on November 25, 2026",
           "url": "/en/nidwalden-articles/hergiswil-bergstrasse-crane/",
           "excerpt": "In Hergiswil, the affected section of Bergstrasse will be closed on November 25, 2026, for the dismantling of a crane.",
@@ -299,7 +311,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-06T16:04:12.780Z"
+      "updatedAt": "2026-11-07T00:51:56.780Z"
     },
     "de": {
       "canton": "NW",
@@ -411,6 +423,12 @@
           "date": "2026-10-30T20:11:37.696Z"
         },
         {
+          "title": "Dorfstrasse: Zufahrt vom 9. bis 27. November 2026 gesperrt",
+          "url": "/de/nidwalden-artikel/sperrung-dorfstrasse-einmuendung/",
+          "excerpt": "Die Zufahrt zur Dorfstrasse wird vom 9. bis 27. November 2026 wegen Bauarbeiten gesperrt; in der Mitteilung werden vier Strassen als Zugang angegeben.",
+          "date": "2026-11-07T00:43:15.544Z"
+        },
+        {
           "title": "Hergiswil: Bergstrasse 4 am 25.11.2026 gesperrt",
           "url": "/de/nidwalden-artikel/hergiswil-bergstrasse-kran/",
           "excerpt": "Im betroffenen Abschnitt wird die Bergstrasse während des Abbaus des Krans als vollständig gesperrt angegeben.",
@@ -440,7 +458,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-06T16:04:12.780Z"
+      "updatedAt": "2026-11-07T00:51:56.780Z"
     },
     "fr": {
       "canton": "NW",
@@ -552,6 +570,12 @@
           "date": "2026-10-30T20:11:37.696Z"
         },
         {
+          "title": "Dorfstrasse : entrée fermée du 9 au 27 novembre 2026",
+          "url": "/fr/articles-nidwald/fermeture-acces-dorfstrasse/",
+          "excerpt": "L’entrée de la Dorfstrasse sera fermée du 9 au 27 novembre 2026 pour des travaux ; la note indique quatre routes pour y accéder.",
+          "date": "2026-11-07T00:43:15.544Z"
+        },
+        {
           "title": "Hergiswil : Bergstrasse 4 fermée le 25.11.2026",
           "url": "/fr/articles-nidwald/hergiswil-bergstrasse-grue/",
           "excerpt": "À Hergiswil, le tronçon concerné de la Bergstrasse sera fermé le 25 novembre 2026 pour le démontage d'une grue.",
@@ -581,7 +605,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-06T16:04:12.780Z"
+      "updatedAt": "2026-11-07T00:51:56.780Z"
     }
   }
 }
