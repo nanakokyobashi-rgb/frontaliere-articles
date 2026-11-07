@@ -5,7 +5,9 @@ import os from 'node:os';
 import path from 'node:path';
 import {
   OBSERVER_USER_AGENT,
+  MAX_ISSUE_DESCRIPTION_BYTES,
   buildObserverTargets,
+  compactIssueDescription,
   parseCoverageLedger,
   renderCoverageLedger,
   formatObserverReport,
@@ -504,6 +506,53 @@ test('il tetto di pagine taglia i cambi più vecchi, non la fine dell’alfabeto
   assert.equal(result.maxPages, 1);
   assert.match(formatObserverReport(result, { nowMs }), /limite: 1/);
   assert.match(formatObserverReport(result, { nowMs }), /2 più vecchie nella finestra non sono state lette/);
+});
+
+test('il report passato alla issue resta sotto il budget argv e indica il dettaglio omesso', () => {
+  const source = [
+    'Controllate: 2000; in ritardo: 2000; immagini degradate: 0; limite: 5000.',
+    ...Array.from({ length: 1000 }, (_, index) => `- Ritardo articolo-${index} — ${'x'.repeat(80)}`),
+  ].join('\n');
+  const compact = compactIssueDescription(source);
+
+  assert.ok(Buffer.byteLength(compact, 'utf8') <= MAX_ISSUE_DESCRIPTION_BYTES);
+  assert.match(compact, /Controllate: 2000/);
+  assert.match(compact, /Report troncato prima dell'invio a GitHub/);
+  assert.ok(compact.length < source.length);
+});
+
+test('il payload di creazione resta bounded quando il ledger viene aggiunto a un report enorme', async () => {
+  const rootDir = observerRoot();
+  fs.appendFileSync(
+    path.join(rootDir, 'content/blog-meta-it.ts'),
+    "\n'blog.article.senza-registry.title': 'Senza registry',\n",
+  );
+  const github = issueClient();
+  const log = [
+    `commit ${'b'.repeat(40)} 1791417600`,
+    'content/blog-body/it/alpha.ts',
+    'content/blog-body/it/senza-registry.ts',
+  ].join('\n');
+  try {
+    await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      githubClient: github.client,
+      gitLogImpl: () => log,
+      minIntervalMs: 0,
+      fetchImpl: async () => { throw new Error('x'.repeat(20_000)); },
+    });
+
+    const created = github.calls.find((call) => call.type === 'create');
+    assert.ok(created);
+    assert.ok(Buffer.byteLength(created.description, 'utf8') <= MAX_ISSUE_DESCRIPTION_BYTES);
+    assert.deepEqual(
+      parseCoverageLedger(created.description).items.map((item) => item.articleId),
+      ['senza-registry'],
+    );
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
 });
 
 function observerRoot() {

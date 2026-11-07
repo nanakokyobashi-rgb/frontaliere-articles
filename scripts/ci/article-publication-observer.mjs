@@ -61,6 +61,10 @@ export const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
 export const DEFAULT_SCAN_TIMEOUT_MS = 20 * 60 * 1000;
 export const DEFAULT_LEDGER_RETENTION_DAYS = 90;
 export const DEFAULT_TERMINAL_RETENTION_DAYS = 14;
+// The shared issue reporter transports its description through a `gh` argv
+// value. Keep the observer-specific report well below the runner's combined
+// argv/environment budget; the complete report still goes to the step summary.
+export const MAX_ISSUE_DESCRIPTION_BYTES = 16 * 1024;
 export const SITE_BASE_URL = 'https://frontaliereticino.ch';
 export const DEFAULT_REPAIR_WORKFLOW = 'fast-publish-article.yml';
 // The apex answers 403 to the default User-Agent of Node's fetch (measured on
@@ -872,6 +876,41 @@ function ghJson(args) {
   return JSON.parse(output || 'null');
 }
 
+export function compactIssueDescription(description, maxBytes = MAX_ISSUE_DESCRIPTION_BYTES) {
+  const source = String(description ?? '');
+  if (Buffer.byteLength(source, 'utf8') <= maxBytes) return source;
+
+  const suffix = '\n\n⚠️ Report troncato prima dell\'invio a GitHub: il dettaglio completo resta nel riepilogo della run.';
+  const prefixBudget = Math.max(0, maxBytes - Buffer.byteLength(suffix, 'utf8'));
+  let prefix = Buffer.from(source, 'utf8').subarray(0, prefixBudget).toString('utf8');
+  const lastNewline = prefix.lastIndexOf('\n');
+  if (lastNewline > 0) prefix = prefix.slice(0, lastNewline);
+  return `${prefix.trimEnd()}${suffix}`;
+}
+
+function boundedIssueDescription(description, coverageBlockers) {
+  const withLedger = upsertCoverageLedger(description, coverageBlockers);
+  if (Buffer.byteLength(withLedger, 'utf8') <= MAX_ISSUE_DESCRIPTION_BYTES) return withLedger;
+
+  if (coverageBlockers.length > 0) {
+    const renderedLedger = renderCoverageLedger(coverageBlockers);
+    const ledgerBytes = Buffer.byteLength(`\n\n${renderedLedger}\n`, 'utf8');
+    const reportBudget = MAX_ISSUE_DESCRIPTION_BYTES - ledgerBytes;
+    if (reportBudget > 0) {
+      const candidate = upsertCoverageLedger(
+        compactIssueDescription(description, reportBudget),
+        coverageBlockers,
+      );
+      if (Buffer.byteLength(candidate, 'utf8') <= MAX_ISSUE_DESCRIPTION_BYTES) return candidate;
+    }
+  }
+
+  // If the full ledger cannot coexist with a bounded report in the create argv
+  // budget, persist it in the following --body-file edit rather than
+  // truncating its machine-readable markers or sending an oversized payload.
+  return compactIssueDescription(description);
+}
+
 function defaultGithubClient() {
   return {
     async findOpenIssue() {
@@ -892,7 +931,11 @@ function defaultGithubClient() {
       return this.findOpenIssue();
     },
     async editIssue(number, body) {
-      execFileSync('gh', ['issue', 'edit', String(number), '--body', body, ...ghRepoArgs()], { encoding: 'utf8' });
+      execFileSync(
+        'gh',
+        ['issue', 'edit', String(number), '--body-file', '-', ...ghRepoArgs()],
+        { encoding: 'utf8', input: String(body ?? '') },
+      );
     },
     async resolveIssue() {
       const { resolveGithubIssue } = await import('../lib/github-issue-creator.mjs');
@@ -1126,11 +1169,11 @@ export async function runObserver({
     || report.degraded.length > 0
     || ledger.length > 0
     || publicationRetries.length > 0;
-  const issueDescription = upsertCoverageLedger(description, coverageBlockers);
+  const issueDescription = boundedIssueDescription(description, coverageBlockers);
   if (actionable && !issue) {
     issue = await github.createIssue(issueDescription);
     if (!issue) throw new Error('issue observer non trovata dopo la creazione');
-    if (!issue.body) issue.body = description;
+    if (!issue.body) issue.body = issueDescription;
   }
   if (issue) {
     await persistCoverageLedger(issue, coverageBlockers, github);
