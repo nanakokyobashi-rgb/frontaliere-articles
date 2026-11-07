@@ -4,13 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ur::http://www.urnerwochenblatt.ch/artikel/auto-brennt-am-oberalppass-vollstaendig-aus": {
-      "section": "canton-ur",
-      "ts": 1793746785826
-    },
     "canton-ur::https://www.nau.ch/politik/regional/uri-stimmt-uber-hohere-strassenverkehrssteuern-ab-67196979": {
       "section": "canton-ur",
-      "ts": 1793890859720
+      "ts": 1794085352982
     }
   }
 }
