@@ -474,6 +474,63 @@ jobs:
         # `run_mode` alimenta il gruppo di concurrency del job generate; il trap
         # copre anche tutti gli exit anticipati, così nessun job ricade nel
         # gruppo dry per un output mancante.
+        # Le note sotto restano fuori dallo scalar `run`: GitHub conta anche i
+        # commenti nel comando di avvio e il limite e' 21.000 caratteri.
+        #
+        # ── UN DISPATCH ORA PUO' ESSERE DUE COSE DIVERSE (2026-08-18) ───────
+        #
+        # Prima di questa riga il gate esentava OGNI `workflow_dispatch`, e
+        # aveva ragione: era sempre una richiesta esplicita di un umano,
+        # spesso con un `url` preciso, cioè il contrario di un riavvio
+        # ridondante. Da quando la catena dispatcha il proprio successore
+        # quella premessa non copre più il caso nuovo, e va tenuta l'esenzione
+        # SOLO per gli umani.
+        #
+        # Il dispatch di catena è esente solo con `chain_depth > 0`: il padre
+        # resta escluso, ma altre run in volo bloccano l'anello. Trattarlo come
+        # umano aggirerebbe la concurrency; trattarlo come non esente fermerebbe
+        # ogni anello.
+        #
+        # A scheduled event can survive briefly after the main trigger is
+        # removed. It has no Firestore claim and must not create a second
+        # owner for the same nominal slot. Generated canton callers keep
+        # their separate schedules, so retire only this workflow's event.
+        #
+        # A single bounded Actions snapshot replaces the old five status
+        # queries. The partitioned requests could fail closed during normal
+        # status turnover, and a scheduled run then ended green before the
+        # generator was reached. A one-hour window is enough for admission:
+        # runs older than the 1800-second wedge threshold cannot block, while
+        # the same snapshot also supplies the chain's hourly cap.
+        #
+        # ── IL TETTO ORARIO, l'unica guardia che un contatore non aggira ────
+        #
+        # `chain_depth` e `no_article_streak` sono input: un anello che li
+        # dimentica riparte da zero. Questo tetto usa lo snapshot bounded del
+        # gate, non si aggira con input errati e vale solo per gli anelli.
+        # Avvii manuali e slot Cloud Scheduler restano fuori.
+        #
+        # Si cede solo a chi è PIÙ VECCHIO. Il confronto asimmetrico è ciò che
+        # rende impossibile il caso in cui due arrivi simultanei si vedono a
+        # vicenda e si fermano entrambi: fra due run che si osservano, esattamente
+        # una si vede davanti. Il tie-break sull'id copre lo stesso secondo.
+        #
+        # IL PADRE VA ESCLUSO, e solo lui. Un anello nasce da dentro il job che
+        # lo dispatcha: quel run è più vecchio e ancora in volo per
+        # costruzione, quindi senza questa esclusione il confronto
+        # asimmetrico direbbe «cedi» a ogni anello, sempre. Escluderlo NON
+        # apre il buco della sovrapposizione: qualunque ALTRA run in volo fa
+        # ancora saltare l'anello, ed è la risposta voluta — `create-article.mjs`
+        # scrive registri su ~10 file e l'unica mutua esclusione reale è il
+        # rebase-resolver del push; il repo ha già pagato tre volte
+        # (#255, #281, #285) un conflitto su quei path, ogni volta con un
+        # articolo perso, non ritardato. Meglio saltare un anello che
+        # sovrapporre due generazioni.
+        #
+        # La snapshot copre un'ora: le run vecchie oltre la soglia di wedge
+        # non possono bloccare per costruzione e non servono al verdetto. Le
+        # run fra 1800 e 3600 secondi restano invece visibili nel warning,
+        # così un'incastrata recente non diventa silenziosa.
         run: |
           set -uo pipefail
           content_push=false
@@ -560,19 +617,6 @@ jobs:
             exit 0
           }
 
-          # ── UN DISPATCH ORA PUO' ESSERE DUE COSE DIVERSE (2026-08-18) ───────
-          #
-          # Prima di questa riga il gate esentava OGNI `workflow_dispatch`, e
-          # aveva ragione: era sempre una richiesta esplicita di un umano,
-          # spesso con un `url` preciso, cioè il contrario di un riavvio
-          # ridondante. Da quando la catena dispatcha il proprio successore
-          # quella premessa non copre più il caso nuovo, e va tenuta l'esenzione
-          # SOLO per gli umani.
-          #
-          # Il dispatch di catena è esente solo con `chain_depth > 0`: il padre
-          # resta escluso, ma altre run in volo bloccano l'anello. Trattarlo come
-          # umano aggirerebbe la concurrency; trattarlo come non esente fermerebbe
-          # ogni anello.
           chain_depth=0
           case "${CHAIN_DEPTH:-0}" in
             ''|*[!0-9]*)
@@ -670,10 +714,6 @@ jobs:
             echo "::add-mask::$RECOVERY_CLAIM"
           fi
 
-          # A scheduled event can survive briefly after the main trigger is
-          # removed. It has no Firestore claim and must not create a second
-          # owner for the same nominal slot. Generated canton callers keep
-          # their separate schedules, so retire only this workflow's event.
           if [ "$EVENT_NAME" = "schedule" ] \
             && [ "${CALLER_WORKFLOW:-}" = "generate-article.yml" ]; then
             skip_generation_slot native-schedule-retired
@@ -760,12 +800,6 @@ jobs:
             exit 0
           }
 
-          # A single bounded Actions snapshot replaces the old five status
-          # queries. The partitioned requests could fail closed during normal
-          # status turnover, and a scheduled run then ended green before the
-          # generator was reached. A one-hour window is enough for admission:
-          # runs older than the 1800-second wedge threshold cannot block, while
-          # the same snapshot also supplies the chain's hourly cap.
           IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
           ALL_RUN_STATUSES='["queued","in_progress","requested","waiting","pending","completed"]'
           KNOWN_RUN_CONCLUSIONS='["success","failure","neutral","cancelled","skipped","timed_out","action_required","stale","startup_failure"]'
@@ -829,12 +863,6 @@ jobs:
             fail_closed_admission
           fi
 
-          # ── IL TETTO ORARIO, l'unica guardia che un contatore non aggira ────
-          #
-          # `chain_depth` e `no_article_streak` sono input: un anello che li
-          # dimentica riparte da zero. Questo tetto usa lo snapshot bounded del
-          # gate, non si aggira con input errati e vale solo per gli anelli.
-          # Avvii manuali e slot Cloud Scheduler restano fuori.
           if [ "$is_link" = "true" ]; then
             cap="${CHAIN_MAX_RUNS_PER_HOUR:-}"
             case "$cap" in
@@ -907,22 +935,6 @@ jobs:
             exit 0
           fi
 
-          # Si cede solo a chi è PIÙ VECCHIO. Il confronto asimmetrico è ciò che
-          # rende impossibile il caso in cui due arrivi simultanei si vedono a
-          # vicenda e si fermano entrambi: fra due run che si osservano, esattamente
-          # una si vede davanti. Il tie-break sull'id copre lo stesso secondo.
-          #
-          # IL PADRE VA ESCLUSO, e solo lui. Un anello nasce da dentro il job che
-          # lo dispatcha: quel run è più vecchio e ancora in volo per
-          # costruzione, quindi senza questa esclusione il confronto
-          # asimmetrico direbbe «cedi» a ogni anello, sempre. Escluderlo NON
-          # apre il buco della sovrapposizione: qualunque ALTRA run in volo fa
-          # ancora saltare l'anello, ed è la risposta voluta — `create-article.mjs`
-          # scrive registri su ~10 file e l'unica mutua esclusione reale è il
-          # rebase-resolver del push; il repo ha già pagato tre volte
-          # (#255, #281, #285) un conflitto su quei path, ogni volta con un
-          # articolo perso, non ritardato. Meglio saltare un anello che
-          # sovrapporre due generazioni.
           parent_id="${PARENT_RUN_ID:-}"
           case "$parent_id" in
             ''|*[!0-9]*) parent_id=0 ;;
@@ -940,10 +952,6 @@ jobs:
             fail_closed_admission
           fi
 
-          # La snapshot copre un'ora: le run vecchie oltre la soglia di wedge
-          # non possono bloccare per costruzione e non servono al verdetto. Le
-          # run fra 1800 e 3600 secondi restano invece visibili nel warning,
-          # così un'incastrata recente non diventa silenziosa.
           if ! stale="$(printf '%s' "$inflight" \
             | jq -r --argjson me "$SELF_ID" --arg mine "$self_created" --argjson dad "$parent_id" \
                    --argjson wedge "$WEDGE_SECONDS" \
