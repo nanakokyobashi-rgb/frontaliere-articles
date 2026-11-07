@@ -71,7 +71,7 @@ import { fileURLToPath } from 'node:url';
 import { readArticleRegistry } from '../../scripts/lib/registry-image-reader.mjs';
 import { readCanonicalPath } from '../../scripts/lib/seo-canonical-path.mjs';
 import { VALID_NAV_ACTIONS, sanitizeArticleMarkdownLinks } from '../../scripts/lib/article-link-contract.mjs';
-import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, getProviderRosterStatus, providerRosterReady, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
+import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, getProviderRosterStatus, providerRosterReady, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, getProviderForModel, applyModelsPrefer, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
 import { classifyWithDecisionsApi } from './lib/decisions-api.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
@@ -187,7 +187,12 @@ function getPromptSplitMode() {
  * An undefined cap remains eligible: it is the contract for a lane such as
  * Codex whose input limit is not declared to this router.
  */
-function providerInputCapGuard(models, splitMode = 'auto', minimumInputTokensOverride = null) {
+function providerInputCapGuard(
+  models,
+  splitMode = 'auto',
+  minimumInputTokensOverride = null,
+  estimateRequestTokensForModel = null,
+) {
   const override = Number(minimumInputTokensOverride);
   const minimumInputTokens = Number.isFinite(override) && override > 0
     ? override
@@ -213,10 +218,26 @@ function providerInputCapGuard(models, splitMode = 'auto', minimumInputTokensOve
       rejectedModels.push({ model, requestLimit: null, reason: 'input-cap-unreadable' });
       continue;
     }
-    if (requestLimit === undefined || requestLimit >= minimumInputTokens) {
-      eligibleModels.push({ model, requestLimit: requestLimit ?? null });
+    let estimatedRequestTokens = minimumInputTokens;
+    const hasModelEstimate = typeof estimateRequestTokensForModel === 'function';
+    if (hasModelEstimate) {
+      try {
+        estimatedRequestTokens = Number(estimateRequestTokensForModel(model));
+        if (!Number.isFinite(estimatedRequestTokens) || estimatedRequestTokens <= 0) throw new Error('invalid request estimate');
+      } catch {
+        rejectedModels.push({ model, requestLimit: null, reason: 'input-estimate-unreadable' });
+        continue;
+      }
+    }
+    const result = { model, requestLimit: requestLimit ?? null };
+    if (hasModelEstimate) result.estimatedRequestTokens = estimatedRequestTokens;
+    if (requestLimit === undefined || requestLimit >= estimatedRequestTokens) {
+      eligibleModels.push(result);
     } else {
-      rejectedModels.push({ model, requestLimit, reason: 'below-minimum-input-floor' });
+      rejectedModels.push({
+        ...result,
+        reason: hasModelEstimate ? 'below-request-estimate' : 'below-minimum-input-floor',
+      });
     }
   }
 
@@ -232,13 +253,52 @@ function generationRosterOptions() {
   return { chain: [...DEFAULT_CHAIN, ...PREFERRED_GENERATION_MODELS] };
 }
 
+/**
+ * Return the candidate set that callLLM() will actually walk for a generation
+ * call. The provider roster preflight needs the set after the requested-model
+ * start point and per-call preference have been applied: a model that is
+ * available before `opts.model` is not a candidate for that call, while a
+ * preferred model is re-added by `applyModelsPrefer()` even when the start
+ * point sliced it away.
+ *
+ * `getProviderRosterStatus()` still owns the force-chain override, runtime
+ * availability and cooldown decisions. This helper only mirrors the
+ * deterministic chain shaping that happens before those checks in callLLM().
+ */
+function generationCallRosterOptions({ model, prefer } = {}) {
+  let chain = generationRosterOptions().chain;
+  if (model) {
+    const index = chain.indexOf(model);
+    if (index > 0) chain = chain.slice(index);
+    else if (index < 0) chain = [model, ...chain.filter((candidate) => candidate !== model)];
+  }
+  return { chain: applyModelsPrefer(chain, prefer) };
+}
+
+function estimateProviderRequestTokens(messages, schema, model) {
+  return estimateRequestTokens(
+    messages,
+    { jsonSchema: schema, maxTokens: IT_GENERATION_MAX_TOKENS },
+    getProviderForModel(model),
+    model,
+  );
+}
+
 function providerInputCapGuardError(inputCapGuard) {
   const finiteLimits = inputCapGuard.rejectedModels
     .map(({ requestLimit }) => requestLimit)
     .filter((limit) => Number.isFinite(limit));
   const maxSkippedReqLimit = finiteLimits.length ? Math.max(...finiteLimits) : 0;
   const minSkippedReqLimit = finiteLimits.length ? Math.min(...finiteLimits) : 0;
-  const estimatedRequestTokens = inputCapGuard.minimumInputTokens;
+  const finiteEstimates = [
+    ...inputCapGuard.eligibleModels,
+    ...inputCapGuard.rejectedModels,
+  ]
+    .map(({ estimatedRequestTokens }) => estimatedRequestTokens)
+    .filter((estimate) => Number.isFinite(estimate));
+  const estimatedRequestTokens = finiteEstimates.length
+    ? Math.max(...finiteEstimates)
+    : inputCapGuard.minimumInputTokens;
   const over = estimatedRequestTokens - maxSkippedReqLimit;
   const error = new Error(
     `Provider roster cannot serve the minimum article request: ${estimatedRequestTokens} tokens `
@@ -257,6 +317,51 @@ function providerInputCapGuardError(inputCapGuard) {
   error.minSkippedReqLimit = minSkippedReqLimit;
   error.estimatedRequestTokens = estimatedRequestTokens;
   return error;
+}
+
+/**
+ * Guard one already-built request against the models that its callLLM options
+ * can really reach. The estimate callback is deliberately model-aware: the
+ * schema is part of the request for strict-schema providers, but Groq (for
+ * example) receives only `json_object`, exactly as callLLM() estimates it.
+ */
+function guardProviderInputCapForCall(promptCall, {
+  model,
+  prefer,
+  splitMode = 'auto',
+  phase = 'prompt-built-call',
+  promptPart = 'full',
+} = {}) {
+  if (!promptCall || !Array.isArray(promptCall.msgs) || !promptCall.schema) return null;
+  const roster = getProviderRosterStatus(generationCallRosterOptions({ model, prefer }));
+  const inputCapGuard = providerInputCapGuard(
+    roster.availableModels,
+    splitMode,
+    promptCall.est,
+    (candidate) => estimateProviderRequestTokens(promptCall.msgs, promptCall.schema, candidate),
+  );
+  if (roster.availableModels.length === 0) {
+    inputCapGuard.rejectedModels = roster.unavailableModels.map(({ model: unavailableModel, reason }) => ({
+      model: unavailableModel,
+      requestLimit: null,
+      reason: `not-effective-call-candidate:${reason}`,
+    }));
+  }
+  console.error(
+    `PROVIDER_INPUT_CAP phase=${phase} ready=${inputCapGuard.ready}`
+    + ` model=${model || 'default'} part=${promptPart}`
+    + ` eligible=${inputCapGuard.eligibleModels.map(({ model: candidate }) => candidate).join(',') || 'none'}`
+    + ` rejected=${inputCapGuard.rejectedModels.map(({ model: candidate, requestLimit }) => `${candidate}:${requestLimit ?? 'unreadable'}`).join(',') || 'none'}`,
+  );
+  if (!inputCapGuard.ready) {
+    const error = providerInputCapGuardError(inputCapGuard);
+    error.inputCapReport.phase = phase;
+    error.inputCapReport.promptPart = promptPart;
+    error.inputCapReport.runtimeEligibleModels = roster.availableModels;
+    error.inputCapReport.unavailableModels = roster.unavailableModels;
+    throw error;
+  }
+  return { roster, inputCapGuard };
 }
 // Quota-free MT cascade (DeepL-free / Google / MyMemory / LibreTranslate /
 // local Opus-MT) — the SAME translator the job crawlers + FAQ batch use
@@ -13156,22 +13261,28 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       _remediationShort,
     )
     : _buildStep(_shrinkLadder.length - 1);
+  const _promptCallModel = useGeminiDirect ? AI_MODELS.GEMINI_FLASH : (forceModel || GH_MODEL_HEAVY);
+  const _promptCallPrefer = _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined;
   const _promptRoster = typeof getProviderRosterStatus === 'function'
-    && typeof generationRosterOptions === 'function'
-    ? getProviderRosterStatus(generationRosterOptions())
+    && typeof generationCallRosterOptions === 'function'
+    ? getProviderRosterStatus(generationCallRosterOptions({ model: _promptCallModel, prefer: _promptCallPrefer }))
     : null;
   const _promptInputCapGuard = typeof providerInputCapGuard === 'function'
-    && _promptRoster?.availableModels?.length > 0
+    && _promptRoster
     ? providerInputCapGuard(
       _promptRoster.availableModels,
       _splitMode,
       _minimumPromptCall.est,
+      (candidate) => estimateProviderRequestTokens(_minimumPromptCall.msgs, _minimumPromptCall.schema, candidate),
     )
     : null;
   if (_promptInputCapGuard && typeof RUN_REPORT !== 'undefined' && RUN_REPORT?.providerRosterPreflight) {
     RUN_REPORT.providerRosterPreflight.inputCapGuard = {
       phase: 'prompt-built-minimum-request',
       promptPart: _splitAttiva ? 'body' : 'full',
+      effectiveModel: _promptCallModel,
+      runtimeEligibleModels: _promptRoster.availableModels,
+      unavailableModels: _promptRoster.unavailableModels,
       sourceFloorChars: PROMPT_SOURCE_FLOOR_CHARS,
       ..._promptInputCapGuard,
     };
@@ -13272,6 +13383,19 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // resti invariato byte a byte. `null` = ricadi sulla chiamata unica.
   const _generateSplit = async () => {
     _splitPromptTentato = _splitCall1 ? _splitCall1.p : null;
+    // The lower-bound guard above proves that the split path has a viable
+    // body lane. Re-check the actual assembled body as well: provider-specific
+    // schema accounting can make this request fit (or not fit) differently
+    // from the provider-agnostic lower bound.
+    if (typeof guardProviderInputCapForCall === 'function') {
+      guardProviderInputCapForCall(_splitCall1, {
+        model: useGeminiDirect ? AI_MODELS.GEMINI_FLASH : (forceModel || GH_MODEL_HEAVY),
+        prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined,
+        splitMode: _splitMode,
+        phase: 'prompt-built-body-call',
+        promptPart: 'body',
+      });
+    }
     // `expectedFields` DICHIARA cio' che questa meta' produce, invece di
     // lasciarlo dedurre a `callLLM` dalla prosa del prompt. L'istruzione dice
     // «(body1, body2, body3). NON produrre ... title, excerpt ...»: i cinque
@@ -13519,9 +13643,24 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // `validateItalianPayload` — cioe' senza rigenerazione e senza rotazione
     // di modello. `META_ONLY_FIELDS` le da' la validazione che le compete:
     // esattamente i due campi di testo che questa meta' produce.
+    const _metadataPrefer = (_preferActiveThisAttempt && !_preferDegradataDalRibracket)
+      ? PREFERRED_GENERATION_MODELS
+      : undefined;
+    // The metadata request has its own prompt and its own effective roster.
+    // Check it only after the body exists (the article text is part of this
+    // prompt), but before callLLM can spend a request or walk a doomed suffix.
+    if (typeof guardProviderInputCapForCall === 'function') {
+      guardProviderInputCapForCall(_call2, {
+        model: useGeminiDirect ? AI_MODELS.GEMINI_FLASH : (forceModel || GH_MODEL_HEAVY),
+        prefer: _metadataPrefer,
+        splitMode: _splitMode,
+        phase: 'prompt-built-metadata-call',
+        promptPart: 'meta',
+      });
+    }
     const rawMeta = useGeminiDirect
-      ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS, locale: primaryLocale })
-      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS, locale: primaryLocale });
+      ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, prefer: _metadataPrefer, expectedFields: META_ONLY_FIELDS, locale: primaryLocale })
+      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, prefer: _metadataPrefer, expectedFields: META_ONLY_FIELDS, locale: primaryLocale });
     let metaData;
     try {
       metaData = JSON.parse(repairLlmJson(rawMeta));
@@ -13752,6 +13891,18 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   if (_splitAttiva) {
     itRaw = await _generateSplit();
     if (itRaw === null) console.error('  ↩️ [prompt-split] fallback: chiamata unica.');
+  }
+  if (itRaw == null && typeof guardProviderInputCapForCall === 'function') {
+    guardProviderInputCapForCall(
+      { msgs: llmMessages, schema: articleSchema, est: _promptEstTokens },
+      {
+        model: useGeminiDirect ? AI_MODELS.GEMINI_FLASH : (forceModel || GH_MODEL_HEAVY),
+        prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined,
+        splitMode: _splitMode,
+        phase: 'prompt-built-full-call',
+        promptPart: 'full',
+      },
+    );
   }
   if (itRaw != null) {
     // gia' generato in due chiamate

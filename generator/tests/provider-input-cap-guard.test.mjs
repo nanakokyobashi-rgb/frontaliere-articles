@@ -16,13 +16,13 @@ function extractFunctionSource(signature) {
   return SOURCE.slice(start, start + end + 2);
 }
 
-const GUARD_SOURCE = extractFunctionSource('function providerInputCapGuard(models, splitMode = \'auto\', minimumInputTokensOverride = null) {');
+const GUARD_SOURCE = extractFunctionSource('function providerInputCapGuard(');
 const FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS = Number(
   SOURCE.match(/const PROMPT_UNIQUE_SCAFFOLD_FLOOR_TOKENS = (\d+);/)?.[1],
 );
 assert.ok(Number.isSafeInteger(FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS), 'full prompt floor constant missing');
 
-function makeGuard(caps, splitMode = 'auto') {
+function makeGuard(caps, splitMode = 'auto', estimates = null) {
   const guard = new Function(
     'getDeclaredRequestTokenLimit',
     'PROMPT_SCAFFOLD_FLOOR_TOKENS',
@@ -32,7 +32,14 @@ function makeGuard(caps, splitMode = 'auto') {
     if (caps instanceof Map) return caps.get(model);
     return caps(model);
   }, 5850, FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS);
-  return (models, minimumInputTokensOverride = null) => guard(models, splitMode, minimumInputTokensOverride);
+  return (models, minimumInputTokensOverride = null) => guard(
+    models,
+    splitMode,
+    minimumInputTokensOverride,
+    estimates
+      ? (model) => (estimates instanceof Map ? estimates.get(model) : estimates(model))
+      : null,
+  );
 }
 
 test('providerInputCapGuard rejects a roster whose every input cap is below the prompt floor', () => {
@@ -129,6 +136,36 @@ test('providerInputCapGuard does not treat the zero-content scaffold as the real
   });
 });
 
+test('providerInputCapGuard compares each effective model with its provider-accurate estimate', () => {
+  const guard = makeGuard(
+    new Map([
+      ['groq/usable-without-schema', 8000],
+      ['github/schema-would-overrun', 8000],
+    ]),
+    'off',
+    new Map([
+      ['groq/usable-without-schema', 7990],
+      ['github/schema-would-overrun', 8200],
+    ]),
+  );
+
+  assert.deepEqual(guard(['groq/usable-without-schema', 'github/schema-would-overrun'], 8200), {
+    ready: true,
+    minimumInputTokens: 8200,
+    eligibleModels: [{
+      model: 'groq/usable-without-schema',
+      requestLimit: 8000,
+      estimatedRequestTokens: 7990,
+    }],
+    rejectedModels: [{
+      model: 'github/schema-would-overrun',
+      requestLimit: 8000,
+      estimatedRequestTokens: 8200,
+      reason: 'below-request-estimate',
+    }],
+  });
+});
+
 test('providerInputCapGuard fails closed on an unreadable cap and is wired before the scan', () => {
   const guard = makeGuard(() => {
     throw new Error('malformed model');
@@ -152,7 +189,16 @@ test('providerInputCapGuard fails closed on an unreadable cap and is wired befor
   const callGeminiStart = SOURCE.indexOf('async function callGemini(');
   const promptGuard = SOURCE.indexOf('const _promptInputCapGuard = typeof providerInputCapGuard');
   assert.ok(callGeminiStart >= 0 && promptGuard > callGeminiStart, 'prompt-built input-cap guard missing inside callGemini');
-  const promptGuardBlock = SOURCE.slice(promptGuard, promptGuard + 900);
+  const promptGuardBlock = SOURCE.slice(SOURCE.lastIndexOf('const _promptCallModel', promptGuard), promptGuard + 1100);
   assert.match(promptGuardBlock, /_minimumPromptCall\.est/);
+  assert.match(promptGuardBlock, /estimateProviderRequestTokens\(_minimumPromptCall\.msgs, _minimumPromptCall\.schema, candidate\)/);
+  assert.match(promptGuardBlock, /generationCallRosterOptions\(\{ model: _promptCallModel, prefer: _promptCallPrefer \}\)/);
   assert.match(promptGuardBlock, /phase: 'prompt-built-minimum-request'/);
+
+  const splitStart = SOURCE.indexOf('const _call2 = _buildHalf(\'meta\'', callGeminiStart);
+  assert.ok(splitStart >= 0, 'metadata call anchor missing');
+  const metadataBlock = SOURCE.slice(splitStart, splitStart + 2400);
+  assert.match(metadataBlock, /guardProviderInputCapForCall\(_call2/);
+  assert.match(metadataBlock, /prefer: _metadataPrefer/);
+  assert.match(metadataBlock, /phase: 'prompt-built-metadata-call'/);
 });
