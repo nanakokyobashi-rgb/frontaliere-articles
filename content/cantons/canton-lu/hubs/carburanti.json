@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-11-07T09:42:27.754Z",
-  "contentHash": "57e4113aedd16573eaf941ea649d317b1c24557640fa4d6b2b8ef8b733d8cdc7",
+  "updatedAt": "2026-11-07T10:30:49.335Z",
+  "contentHash": "8e0eb5ff8bed54e66fc3827c44eb23db450557b4b2c4038c5119bb94f5edaf81",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Proroga NAV Kita fino al 30 giugno 2030 nel Canton Lucerna",
+          "url": "/articoli-lucerna/nav-kita-proroga-fino-2030/",
+          "excerpt": "Il Normalarbeitsvertrag per le Kitas è prorogato fino al 30 giugno 2030 per monitorare le violazioni dei salari minimi, con controlli nel 2025 e 2026.",
+          "date": "2026-11-07T10:23:39.187Z"
+        },
+        {
           "title": "Nuovo semaforo St. Klemens per puntualità bus a Ebikon",
           "url": "/articoli-lucerna/semal-st-klemens-ebikon/",
           "excerpt": "Test alla fermata St. Klemens sulla strada cantonale verso Lucerna; decisione prevista a fine estate 2027 dopo consultazione.",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/centro-sicurezza-rothenburg/",
           "excerpt": "L'elettorato lucernese voterà alla fine del mese sul credito di 276 milioni di CHF per il centro di sicurezza.",
           "date": "2026-11-03T00:11:08.711Z"
-        },
-        {
-          "title": "Banca cantonale di Lucerna: utile +8,7% in nove mesi",
-          "url": "/articoli-lucerna/lukb-utile-nove-mesi/",
-          "excerpt": "La LUKB registra 223,3 milioni di franchi di utile nei primi nove mesi.",
-          "date": "2026-10-31T13:51:58.051Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-07T09:42:27.754Z"
+      "updatedAt": "2026-11-07T10:30:49.335Z"
     },
     "en": {
       "canton": "LU",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Extension of NAV Kita until June 30, 2030, in the Canton of Lucerne",
+          "url": "/en/lucerne-articles/nav-kita-extension-until-2030/",
+          "excerpt": "The Normalarbeitsvertrag for childcare centers has been extended until June 30, 2030, to monitor violations of minimum wages, with checks in 2025 and 2026.",
+          "date": "2026-11-07T10:23:39.187Z"
+        },
+        {
           "title": "New St. Klemens traffic light for bus punctuality in Ebikon",
           "url": "/en/lucerne-articles/st-klemens-ebikon-traffic-light/",
           "excerpt": "Test at the St. Klemens stop on the cantonal road toward Lucerne; decision expected at the end of summer 2027 after consultation.",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/rothenburg-security-center/",
           "excerpt": "The Lucerne electorate will vote at the end of the month on the CHF 276 million credit for the security centre.",
           "date": "2026-11-03T00:11:08.711Z"
-        },
-        {
-          "title": "Lucerne Cantonal Bank: profit +8,7% in nine months",
-          "url": "/en/lucerne-articles/lucerne-cantonal-bank-profit-nine-months/",
-          "excerpt": "LUKB records 223,3 million francs in profit in the first nine months.",
-          "date": "2026-10-31T13:51:58.051Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-07T09:42:27.754Z"
+      "updatedAt": "2026-11-07T10:30:49.335Z"
     },
     "de": {
       "canton": "LU",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Verlängerung des NAV Kita bis zum 30. Juni 2030 im Kanton Luzern",
+          "url": "/de/luzern-artikel/nav-kita-verlangerung-bis-2030/",
+          "excerpt": "Der Normalarbeitsvertrag für Kitas wird bis zum 30. Juni 2030 verlängert, um Verstöße gegen die Mindestlohnvorschriften zu überwachen, mit Kontrollen in den Jahren 2025 und 2026.",
+          "date": "2026-11-07T10:23:39.187Z"
+        },
+        {
           "title": "Neue Ampel St. Klemens für Bus-Pünktlichkeit in Ebikon",
           "url": "/de/luzern-artikel/semafor-st-klemens-ebikon/",
           "excerpt": "Test an der Haltestelle St. Klemens an der Kantonsstrasse nach Luzern; Entscheidung nach Rücksprache für Spätsommer 2027 geplant.",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/sicherheitszentrum-rothenburg/",
           "excerpt": "Die Luzerner Stimmberechtigten werden Ende des Monats über den Kredit von 276 Millionen CHF für das Sicherheitszentrum abstimmen.",
           "date": "2026-11-03T00:11:08.711Z"
-        },
-        {
-          "title": "Luzerner Kantonalbank: Gewinn +8,7% in neun Monaten",
-          "url": "/de/luzern-artikel/luzerner-kantonalbank-gewinn-neun-monate/",
-          "excerpt": "Die LUKB verzeichnet in den ersten neun Monaten einen Gewinn von 223,3 Millionen Franken.",
-          "date": "2026-10-31T13:51:58.051Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-07T09:42:27.754Z"
+      "updatedAt": "2026-11-07T10:30:49.335Z"
     },
     "fr": {
       "canton": "LU",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Prolongation du NAV Kita jusqu'au 30 juin 2030 dans le canton de Lucerne",
+          "url": "/fr/articles-lucerne/nav-kita-prolongation-jusqua-2030/",
+          "excerpt": "Le contrat-type de travail pour les Kitas est prolongé jusqu'au 30 juin 2030 afin de surveiller les violations des salaires minimaux, avec des contrôles en 2025 et 2026.",
+          "date": "2026-11-07T10:23:39.187Z"
+        },
+        {
           "title": "Nouveau feu de signalisation à St. Klemens pour la ponctualité des bus à Ebikon",
           "url": "/fr/articles-lucerne/semafore-st-klemens-ebikon/",
           "excerpt": "Test à l'arrêt St. Klemens sur la route cantonale en direction de Lucerne ; décision prévue à la fin de l'été 2027 après consultation.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/centre-securite-rothenburg/",
           "excerpt": "L'électorat lucernois votera à la fin du mois sur le crédit de 276 millions de CHF pour le centre de sécurité.",
           "date": "2026-11-03T00:11:08.711Z"
-        },
-        {
-          "title": "Banque cantonale de Lucerne : bénéfice en hausse de 8,7 % sur neuf mois",
-          "url": "/fr/articles-lucerne/banque-cantonale-lucerne-benefice-neuf-mois/",
-          "excerpt": "La LUKB enregistre un bénéfice de 223,3 millions de francs au cours des neuf premiers mois.",
-          "date": "2026-10-31T13:51:58.051Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-07T09:42:27.754Z"
+      "updatedAt": "2026-11-07T10:30:49.335Z"
     }
   }
 }
