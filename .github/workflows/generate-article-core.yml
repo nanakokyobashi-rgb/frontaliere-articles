@@ -199,12 +199,11 @@ jobs:
           fi
 
 
+          explicit_dispatch=false
           if [ "$EVENT_NAME" = "workflow_dispatch" ] \
             && [ "$is_link" != "true" ] \
             && [ "$loop_clock_dispatch" != "true" ]; then
-            echo "Dispatch manuale cantonale (chain_depth=$chain_depth) → si procede sempre."
-            echo "proceed=true" >> "$GITHUB_OUTPUT"
-            exit 0
+            explicit_dispatch=true
           fi
 
           if [ "$EVENT_NAME" = "push" ] && [ -n "${PUSH_BEFORE:-}" ]; then
@@ -320,7 +319,7 @@ jobs:
                 and (([$pages[].workflow_runs[].id] | unique | length)
                   == ([$pages[].workflow_runs[]] | length))
               then
-                [$pages[].workflow_runs[] | {id: .id, created_at: .created_at, status: .status}]
+                [$pages[].workflow_runs[] | {id, created_at, status}]
               else
                 error("generation run listing incomplete")
               end
@@ -372,6 +371,13 @@ jobs:
           fi
           if [ -z "${self_created:-}" ]; then
             fail_closed_admission
+          fi
+
+
+          if [ "$explicit_dispatch" = "true" ]; then
+            echo "Dispatch manuale/editoriale esplicito (chain_depth=$chain_depth) → si procede."
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
 
           parent_id="${PARENT_RUN_ID:-}"

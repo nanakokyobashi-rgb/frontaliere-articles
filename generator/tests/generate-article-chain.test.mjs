@@ -946,11 +946,11 @@ test('un retry del dispatch con la stessa URL viene deduplicato dal ricevitore',
   assert.match(WF, /SOURCE_URL: \$\{\{ inputs\.url \}\}/);
   assert.match(admit, /display_title: \(\.display_title \/\/ ""\)/);
   assert.match(admit, /duplicate-dispatch-source/);
-  assert.match(admit, /contains\("\[dispatch-source=" \+ \$source \+ "\]"\)/);
+  assert.ok(admit.includes('contains("[dispatch-source=\\($s)]")'));
   const dedupeAt = admit.indexOf('duplicate-dispatch-source');
   const explicitAt = admit.indexOf('if [ "$explicit_dispatch" = "true" ]');
   assert.ok(dedupeAt >= 0 && explicitAt > dedupeAt, 'la deduplica deve precedere l’eccezione manuale/editoriale');
-  assert.match(admit, /one-hour admission window/);
+  assert.match(WF, /bounded one-hour run snapshot/);
 });
 
 test('dispatch origin: input mancanti e combinazioni incoerenti falliscono chiusi', () => {

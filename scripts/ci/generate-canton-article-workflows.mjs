@@ -266,11 +266,30 @@ export const CORE_REPLACEMENTS = [
     id: 'admit: gli input del cloud clock restano solo nel workflow principale',
     count: 1,
     find: '          SECTION_REQUESTED: ${{ inputs.section }}\n'
+      + '          SOURCE_URL: ${{ inputs.url }}\n'
       + '          DISPATCH_ORIGIN: ${{ inputs.dispatch_origin }}\n'
       + '          LOOP_CLOCK: ${{ inputs.loop_clock }}\n'
       + '          RECOVERY_SLOT: ${{ inputs.recovery_slot }}\n'
       + '          RECOVERY_CLAIM: ${{ inputs.recovery_claim }}\n'
       + '          GENERATION_CLAIM_ENDPOINT: https://europe-west6-frontaliere-ticino.cloudfunctions.net/claimGenerationSlot\n',
+    replace: '',
+  },
+  {
+    id: 'admit: display_title resta solo nel receiver principale',
+    count: 1,
+    find: '                [$pages[].workflow_runs[] | {id, created_at, status, display_title: (.display_title // "")}]\n',
+    replace: '                [$pages[].workflow_runs[] | {id, created_at, status}]\n',
+  },
+  {
+    id: 'admit: la deduplica della source URL resta nel receiver principale',
+    count: 1,
+    find: '          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ -n "${SOURCE_URL:-}" ]; then\n'
+      + '            if jq -e --arg s "$SOURCE_URL" --arg m "$self_created" --argjson i "$SELF_ID" \'any(.[]; [.created_at,.id]<[$m,$i]and(.display_title|contains("[dispatch-source=\\($s)]")))\' <<<"$runs" >/dev/null 2>/dev/null; then\n'
+      + '              skip_generation_slot duplicate-dispatch-source\n'
+      + '            elif [ "$?" -ne 1 ]; then\n'
+      + '              fail_closed_admission\n'
+      + '            fi\n'
+      + '          fi\n',
     replace: '',
   },
   {
@@ -326,18 +345,16 @@ export const CORE_REPLACEMENTS = [
   {
     id: 'admit: il core cantonale non riceve dispatch_origin',
     count: 1,
-    find: '          if [ "$EVENT_NAME" = "workflow_dispatch" ] \\\n'
+    find: '          explicit_dispatch=false\n'
+      + '          if [ "$EVENT_NAME" = "workflow_dispatch" ] \\\n'
       + '            && { [ "$dispatch_origin" = "manual" ] || [ "$dispatch_origin" = "editorial_signal" ]; }; then\n'
-      + '            echo "Dispatch manuale/editoriale esplicito (chain_depth=$chain_depth) → si procede sempre."\n'
-      + '            echo "proceed=true" >> "$GITHUB_OUTPUT"\n'
-      + '            exit 0\n'
+      + '            explicit_dispatch=true\n'
       + '          fi\n',
-    replace: '          if [ "$EVENT_NAME" = "workflow_dispatch" ] \\\n'
+    replace: '          explicit_dispatch=false\n'
+      + '          if [ "$EVENT_NAME" = "workflow_dispatch" ] \\\n'
       + '            && [ "$is_link" != "true" ] \\\n'
       + '            && [ "$loop_clock_dispatch" != "true" ]; then\n'
-      + '            echo "Dispatch manuale cantonale (chain_depth=$chain_depth) → si procede sempre."\n'
-      + '            echo "proceed=true" >> "$GITHUB_OUTPUT"\n'
-      + '            exit 0\n'
+      + '            explicit_dispatch=true\n'
       + '          fi\n',
   },
   {
