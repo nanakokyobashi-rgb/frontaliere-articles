@@ -285,8 +285,8 @@ export const CORE_REPLACEMENTS = [
   {
     id: 'admit: display_title resta solo nel receiver principale',
     count: 1,
-    find: '                [$pages[].workflow_runs[] | {id, created_at, status, display_title}]\n',
-    replace: '                [$pages[].workflow_runs[] | {id, created_at, status}]\n',
+    find: '                [$pages[].workflow_runs[] | {id, created_at, status, conclusion, display_title}]\n',
+    replace: '                [$pages[].workflow_runs[] | {id, created_at, status, conclusion}]\n',
   },
   {
     id: 'admit: la deduplica della source URL resta nel receiver principale',
@@ -295,7 +295,16 @@ export const CORE_REPLACEMENTS = [
       + '            if ! [[ "${SOURCE_KEY:-}" =~ ^[a-f0-9]{32}$ ]]; then skip_generation_slot dispatch-source-key-invalid; fi\n'
       + '            if ! expected_source_key="$(printf \'%s\' "$SOURCE_URL" | sha256sum | cut -c1-32)"; then skip_generation_slot dispatch-source-key-unavailable; fi\n'
       + '            [ "$SOURCE_KEY" = "$expected_source_key" ] || skip_generation_slot dispatch-source-key-mismatch\n'
-      + '            if jq -e --arg k "$SOURCE_KEY" --arg m "$self_created" --argjson i "$SELF_ID" \'any(.[]; [.created_at,.id]<[$m,$i]and(.display_title|contains("[dispatch-source-key=\\($k)]"))and(.display_title|contains("[dispatch-mode=production]")))\' <<<"$runs" >/dev/null 2>/dev/null; then skip_generation_slot duplicate-dispatch-source; elif [ "$?" -ne 1 ]; then fail_closed_admission; fi\n'
+      + '            if jq -e --arg k "$expected_source_key" --arg m "$self_created" --argjson i "$SELF_ID" --argjson active "$IN_FLIGHT_STATUSES" \'\n'
+      + '              any(.[];\n'
+      + '                . as $run\n'
+      + '                | ([$run.created_at,$run.id] < [$m,$i])\n'
+      + '                  and (($active | index($run.status)) != null\n'
+      + '                    or ($run.status == "completed" and $run.conclusion == "success"))\n'
+      + '                  and ($run.display_title\n'
+      + '                    | startswith("[dispatch-source-key=\\($k)] [dispatch-mode=production]"))\n'
+      + '              )\n'
+      + '            \' <<<"$runs" >/dev/null 2>/dev/null; then skip_generation_slot duplicate-dispatch-source; elif [ "$?" -ne 1 ]; then fail_closed_admission; fi\n'
       + '          fi\n',
     replace: '',
   },

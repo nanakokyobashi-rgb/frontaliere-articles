@@ -2,9 +2,9 @@ name: Generate Blog Article
 # generation-cloud-clock-contract: v1
 # generation-cloud-slot-minutes: 7,37
 # `source_key` is the producer-supplied first 32 hex characters of
-# SHA-256(source URL). It is bounded before it becomes part of the observable
+# SHA-256(source URL). Only a dispatch with a URL exposes it in the observable
 # run identity; the admission gate verifies it against `inputs.url` below.
-run-name: ${{ format('[dispatch-source-key={0}] [dispatch-mode={1}] [loop-clock {2}] [generation-slot {3}] Generate Blog Article', inputs.source_key || 'auto-scan', inputs.dry_run && 'dry' || 'production', inputs.loop_clock || 'manual', inputs.recovery_slot || 'none') }}
+run-name: ${{ format('[dispatch-source-key={0}] [dispatch-mode={1}] [loop-clock {2}] [generation-slot {3}] Generate Blog Article', inputs.url != '' && inputs.source_key != '' && inputs.source_key || 'auto-scan', inputs.dry_run && 'dry' || 'production', inputs.loop_clock || 'manual', inputs.recovery_slot || 'none') }}
 
 # The last producer to move (issue #4974 item 3, §4/§5). Scans for a source,
 # generates a full multi-language article and registers it into the corpus this
@@ -768,6 +768,7 @@ jobs:
           # the same snapshot also supplies the chain's hourly cap.
           IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
           ALL_RUN_STATUSES='["queued","in_progress","requested","waiting","pending","completed"]'
+          KNOWN_RUN_CONCLUSIONS='["success","failure","neutral","cancelled","skipped","timed_out","action_required","stale","startup_failure"]'
           admission_window_seconds=3600
           if ! admission_since="$(date -u -d "$admission_window_seconds seconds ago" '+%Y-%m-%dT%H:%M:%SZ')"; then
             fail_closed_admission
@@ -778,7 +779,7 @@ jobs:
             2>/dev/null)"; then
             fail_closed_admission
           fi
-          if ! runs="$(jq -c --argjson known "$ALL_RUN_STATUSES" --arg since "$admission_since" '
+          if ! runs="$(jq -c --argjson known "$ALL_RUN_STATUSES" --argjson known_conclusions "$KNOWN_RUN_CONCLUSIONS" --arg since "$admission_since" '
             . as $pages
             | if (type == "array" and length > 0)
                 and all(.[];
@@ -798,6 +799,15 @@ jobs:
                     and (.created_at >= $since)
                     and (.status | type) == "string"
                     and (.status as $status | ($known | index($status)) != null)
+                    and has("conclusion")
+                    and (
+                      (.status != "completed" and .conclusion == null)
+                      or (
+                        .status == "completed"
+                        and (.conclusion | type) == "string"
+                        and (.conclusion as $conclusion | ($known_conclusions | index($conclusion)) != null)
+                      )
+                    )
                     and (.display_title | type) == "string"
                     and (.display_title | length) > 0
                   ))
@@ -806,7 +816,7 @@ jobs:
                 and (([$pages[].workflow_runs[].id] | unique | length)
                   == ([$pages[].workflow_runs[]] | length))
               then
-                [$pages[].workflow_runs[] | {id, created_at, status, display_title}]
+                [$pages[].workflow_runs[] | {id, created_at, status, conclusion, display_title}]
               else
                 error("generation run listing incomplete")
               end
@@ -870,7 +880,16 @@ jobs:
             if ! [[ "${SOURCE_KEY:-}" =~ ^[a-f0-9]{32}$ ]]; then skip_generation_slot dispatch-source-key-invalid; fi
             if ! expected_source_key="$(printf '%s' "$SOURCE_URL" | sha256sum | cut -c1-32)"; then skip_generation_slot dispatch-source-key-unavailable; fi
             [ "$SOURCE_KEY" = "$expected_source_key" ] || skip_generation_slot dispatch-source-key-mismatch
-            if jq -e --arg k "$SOURCE_KEY" --arg m "$self_created" --argjson i "$SELF_ID" 'any(.[]; [.created_at,.id]<[$m,$i]and(.display_title|contains("[dispatch-source-key=\($k)]"))and(.display_title|contains("[dispatch-mode=production]")))' <<<"$runs" >/dev/null 2>/dev/null; then skip_generation_slot duplicate-dispatch-source; elif [ "$?" -ne 1 ]; then fail_closed_admission; fi
+            if jq -e --arg k "$expected_source_key" --arg m "$self_created" --argjson i "$SELF_ID" --argjson active "$IN_FLIGHT_STATUSES" '
+              any(.[];
+                . as $run
+                | ([$run.created_at,$run.id] < [$m,$i])
+                  and (($active | index($run.status)) != null
+                    or ($run.status == "completed" and $run.conclusion == "success"))
+                  and ($run.display_title
+                    | startswith("[dispatch-source-key=\($k)] [dispatch-mode=production]"))
+              )
+            ' <<<"$runs" >/dev/null 2>/dev/null; then skip_generation_slot duplicate-dispatch-source; elif [ "$?" -ne 1 ]; then fail_closed_admission; fi
           fi
 
           if [ "$explicit_dispatch" = "true" ]; then
