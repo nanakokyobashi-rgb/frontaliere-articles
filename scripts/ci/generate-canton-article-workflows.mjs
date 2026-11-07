@@ -354,7 +354,9 @@ export const CORE_REPLACEMENTS = [
       + '          if [ "$EVENT_NAME" = "workflow_dispatch" ] \\\n'
       + '            && [ "$is_link" != "true" ] \\\n'
       + '            && [ "$loop_clock_dispatch" != "true" ]; then\n'
-      + '            explicit_dispatch=true\n'
+      + '            echo "Dispatch manuale cantonale (chain_depth=$chain_depth) → si procede sempre."\n'
+      + '            echo "proceed=true" >> "$GITHUB_OUTPUT"\n'
+      + '            exit 0\n'
       + '          fi\n',
   },
   {

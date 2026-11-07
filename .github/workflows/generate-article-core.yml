@@ -203,7 +203,9 @@ jobs:
           if [ "$EVENT_NAME" = "workflow_dispatch" ] \
             && [ "$is_link" != "true" ] \
             && [ "$loop_clock_dispatch" != "true" ]; then
-            explicit_dispatch=true
+            echo "Dispatch manuale cantonale (chain_depth=$chain_depth) → si procede sempre."
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
 
           if [ "$EVENT_NAME" = "push" ] && [ -n "${PUSH_BEFORE:-}" ]; then
