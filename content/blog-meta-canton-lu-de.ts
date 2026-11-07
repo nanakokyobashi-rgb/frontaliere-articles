@@ -78,6 +78,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.lucerna-scuole-certificati-medici.title': 'Kanton Luzern: weniger ärztliche Atteste für Schulabsenzen',
     'blog.article.lucerna-scuole-certificati-medici.excerpt': 'Während der Grippesaison werden die Schulleitungen ein ärztliches Attest nur verlangen, wenn begründete Zweifel an den Absenzen der Schülerinnen und Schüler bestehen.',
     'blog.article.lucerna-scuole-certificati-medici.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.kriens-riduce-imposte.title': 'Kriens beschließt eine Steuersenkung',
+    'blog.article.kriens-riduce-imposte.excerpt': 'Der Titel der von Zentralplus veröffentlichten Nachricht weist darauf hin, dass Kriens eine Steuersenkung beschlossen hat.',
+    'blog.article.kriens-riduce-imposte.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

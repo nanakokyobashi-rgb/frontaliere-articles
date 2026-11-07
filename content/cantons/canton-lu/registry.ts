@@ -282,4 +282,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'kriens-riduce-imposte',
+ category: 'fiscale',
+ date: '2026-11-07T00:45:28.812Z',
+ image: '/images/blog/article-kriens-riduce-imposte.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

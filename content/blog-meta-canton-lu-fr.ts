@@ -78,6 +78,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.lucerna-scuole-certificati-medici.title': 'Canton de Lucerne : moins de certificats médicaux pour les absences scolaires',
     'blog.article.lucerna-scuole-certificati-medici.excerpt': 'Durant la saison grippale, les directions des écoles ne demanderont un certificat médical qu\'en présence de doutes fondés concernant les absences des élèves.',
     'blog.article.lucerna-scuole-certificati-medici.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.kriens-riduce-imposte.title': 'Kriens décide une réduction des impôts',
+    'blog.article.kriens-riduce-imposte.excerpt': 'Zentralplus signale la décision de Kriens ; le matériel disponible n’indique ni le montant, ni le pourcentage, ni la date d’entrée en vigueur de la réduction.',
+    'blog.article.kriens-riduce-imposte.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

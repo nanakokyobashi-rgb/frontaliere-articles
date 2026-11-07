@@ -78,6 +78,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.lucerna-scuole-certificati-medici.title': 'Canton Lucerne: fewer medical certificates for school absences',
     'blog.article.lucerna-scuole-certificati-medici.excerpt': 'During flu season, school administrations will require a medical certificate only when there are well-founded doubts about students\' absences.',
     'blog.article.lucerna-scuole-certificati-medici.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.kriens-riduce-imposte.title': 'Kriens decides on a tax reduction',
+    'blog.article.kriens-riduce-imposte.excerpt': 'Zentralplus reports Kriens’s decision; the available material does not specify the amount, percentage, or effective date of the reduction.',
+    'blog.article.kriens-riduce-imposte.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

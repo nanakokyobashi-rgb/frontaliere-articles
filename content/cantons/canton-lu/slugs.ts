@@ -28,6 +28,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'lukb-utile-nove-mesi': { it: 'lukb-utile-nove-mesi', en: 'lucerne-cantonal-bank-profit-nine-months', de: 'luzerner-kantonalbank-gewinn-neun-monate', fr: 'banque-cantonale-lucerne-benefice-neuf-mois' },
  'centro-sicurezza-rothenburg': { it: 'centro-sicurezza-rothenburg', en: 'rothenburg-security-center', de: 'sicherheitszentrum-rothenburg', fr: 'centre-securite-rothenburg' },
  'lucerna-scuole-certificati-medici': { it: 'lucerna-scuole-certificati-medici', en: 'lucerne-schools-medical-certificates', de: 'luzern-schulen-arztzeugnisse', fr: 'lucerne-ecoles-certificats-medicaux' },
+ 'kriens-riduce-imposte': { it: 'kriens-riduce-imposte', en: 'kriens-tax-cut', de: 'kriens-steuersenkung', fr: 'baisse-impots-kriens' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
