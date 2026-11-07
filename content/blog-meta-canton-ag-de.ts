@@ -90,6 +90,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.niederwil-aumento-imposta-2027.title': 'Niederwil schlägt für 2027 einen Gemeindesteuerfuss von 107% vor',
     'blog.article.niederwil-aumento-imposta-2027.excerpt': 'Niederwil schlägt eine Erhöhung des Steuerfusses von 103% auf 107% vor; das Defizit des Budgets 2027 würde von CHF 401\'200 auf CHF 151\'200 sinken.',
     'blog.article.niederwil-aumento-imposta-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.oelrainstrasse-chiusura-5-novembre.title': 'Sperrung Oelrainstrasse: 5.11. wegen Container-Wiedereinbau',
+    'blog.article.oelrainstrasse-chiusura-5-novembre.excerpt': 'Die Oelrainstrasse zwischen Parkhaus Bahnhof und Parkhaus Theaterplatz wird von 8.30 bis etwa 11 Uhr wegen des Wiedereinbaus von vier unterirdischen Containern gesperrt.',
+    'blog.article.oelrainstrasse-chiusura-5-novembre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;

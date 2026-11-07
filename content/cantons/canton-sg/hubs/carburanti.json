@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-06T11:46:36.216Z",
-  "contentHash": "71c0366d201ad7c2166cf504ca657881931c8fd084b2a706da582c433bacda49",
+  "updatedAt": "2026-11-07T01:05:17.737Z",
+  "contentHash": "3a203cc00fbfcc559dca95901fc0e09f6188525104fae0aade30f30c4a09b405",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "11'341 persone in cerca di lavoro a fine ottobre 2026 nel Canton San Gallo",
+          "url": "/articoli-san-gallo/meno-cercatori-lavoro-ottobre/",
+          "excerpt": "A fine ottobre 2026, il RAV del Cantone San Gallo contava 11'341 persone in cerca di lavoro, di cui 5'784 disoccupate.",
+          "date": "2026-11-07T01:00:43.057Z"
+        },
+        {
           "title": "Wil: piano finanziario 2027-2031 tra debiti e risparmi",
           "url": "/articoli-san-gallo/wil-piano-finanziario-2027-2031/",
           "excerpt": "Il piano finanziario di Wil prevede un aumento del debito netto da 43 a 125 milioni di franchi entro il 2031, nonostante misure di risparmio.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/wil-budget-nachtrag-2027-115/",
           "excerpt": "Il preventivo 2027 prevede un moltiplicatore fiscale del 115%, con minori entrate di circa CHF 3,8 milioni e un deficit stimato di circa CHF 5,78 milioni.",
           "date": "2026-10-27T18:02:08.096Z"
-        },
-        {
-          "title": "Votazione 29 novembre 2026 sul fondo rete gas TBW",
-          "url": "/articoli-san-gallo/votazione-29-novembre-2026/",
-          "excerpt": "Il referendum riguarda il regolamento per il fondo di dismissione e smantellamento della rete gas delle TBW, con costi previsti di CHF 45,8 milioni.",
-          "date": "2026-10-27T02:30:52.478Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-06T11:46:36.216Z"
+      "updatedAt": "2026-11-07T01:05:17.737Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "11,341 people seeking work in St. Gallen, end-Oct 2026",
+          "url": "/en/st-gallen-articles/fewer-job-seekers-october/",
+          "excerpt": "At the end of October 2026, the RAV of the Canton of St. Gallen counted 11'341 jobseekers, of whom 5'784 were unemployed.",
+          "date": "2026-11-07T01:00:43.057Z"
+        },
+        {
           "title": "Wil: 2027-2031 financial plan between debts and savings",
           "url": "/en/st-gallen-articles/wil-financial-plan-2027-2031/",
           "excerpt": "Wil's financial plan provides for an increase in net debt from 43 to 125 million francs by 2031, despite savings measures.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/wil-budget-supplement-2027-115/",
           "excerpt": "The 2027 budget provides for a tax multiplier of 115%, with lower revenue of approximately CHF 3,8 million and an estimated deficit of approximately CHF 5,78 million.",
           "date": "2026-10-27T18:02:08.096Z"
-        },
-        {
-          "title": "Vote on November 29, 2026 on the TBW gas network fund",
-          "url": "/en/st-gallen-articles/vote-november-29-2026/",
-          "excerpt": "The referendum concerns the regulations for the fund for the decommissioning and dismantling of TBW's gas network, with expected costs of CHF 45,8 million.",
-          "date": "2026-10-27T02:30:52.478Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-06T11:46:36.216Z"
+      "updatedAt": "2026-11-07T01:05:17.737Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "11'341 Stellensuchende Ende Oktober 2026 im Kanton St. Gallen",
+          "url": "/de/st-gallen-artikel/weniger-stellensuchende-oktober/",
+          "excerpt": "Ende Oktober 2026 zählte das RAV des Kantons St. Gallen 11'341 Stellensuchende, davon 5'784 Arbeitslose.",
+          "date": "2026-11-07T01:00:43.057Z"
+        },
+        {
           "title": "Wil: Finanzplan 2027-2031 zwischen Schulden und Ersparnissen",
           "url": "/de/st-gallen-artikel/wil-finanzplan-2027-2031/",
           "excerpt": "Wils Finanzplan sieht eine Erhöhung der Nettoverschuldung von 43 auf 125 Millionen Francs bis 2031 vor, trotz Kostensparmaßnahmen.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/wil-budgetnachtrag-2027-115/",
           "excerpt": "Das Budget 2027 sieht einen Steuerfuss von 115% vor, mit Mindereinnahmen von etwa CHF 3,8 Millionen und einem geschätzten Defizit von etwa CHF 5,78 Millionen.",
           "date": "2026-10-27T18:02:08.096Z"
-        },
-        {
-          "title": "Abstimmung vom 29. November 2026 über den Gasnetzfonds der TBW",
-          "url": "/de/st-gallen-artikel/abstimmung-29-november-2026/",
-          "excerpt": "Das Referendum betrifft das Reglement für den Fonds zur Stilllegung und zum Rückbau des Gasnetzes der TBW, mit vorgesehenen Kosten von CHF 45,8 Millionen.",
-          "date": "2026-10-27T02:30:52.478Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-06T11:46:36.216Z"
+      "updatedAt": "2026-11-07T01:05:17.737Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "11'341 demandeurs d'emploi à Saint-Gall fin oct. 2026",
+          "url": "/fr/articles-saint-gall/moins-chercheurs-emploi-octobre/",
+          "excerpt": "Fin octobre 2026, le RAV du canton de Saint-Gall comptait 11'341 personnes à la recherche d'un emploi, dont 5'784 chômeurs.",
+          "date": "2026-11-07T01:00:43.057Z"
+        },
+        {
           "title": "Wil : plan financier 2027-2031 entre dettes et économies",
           "url": "/fr/articles-saint-gall/wil-plan-financier-2027-2031/",
           "excerpt": "Le plan financier de Wil prévoit une augmentation de la dette nette de 43 à 125 millions de francs d’ici 2031, malgré des mesures d’économie.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/wil-suppl-budget-2027-115/",
           "excerpt": "Le budget 2027 prévoit un coefficient fiscal de 115%, avec des recettes inférieures d’environ CHF 3,8 millions et un déficit estimé à environ CHF 5,78 millions.",
           "date": "2026-10-27T18:02:08.096Z"
-        },
-        {
-          "title": "Votation du 29 novembre 2026 sur le fonds du réseau de gaz TBW",
-          "url": "/fr/articles-saint-gall/vote-29-novembre-2026/",
-          "excerpt": "Le référendum concerne le règlement relatif au fonds de désaffectation et de démantèlement du réseau de gaz de TBW, dont les coûts prévus s’élèvent à CHF 45,8 millions.",
-          "date": "2026-10-27T02:30:52.478Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-06T11:46:36.216Z"
+      "updatedAt": "2026-11-07T01:05:17.737Z"
     }
   }
 }

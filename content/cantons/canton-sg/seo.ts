@@ -1089,6 +1089,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-meno-cercatori-lavoro-ottobre': {
+    title: '11\'341 persone in cerca di lavoro a fine ottobre 2026 nel Canton San Gallo',
+    description: 'Dati RAV Canton San Gallo fine ottobre 2026: 11\'341 in cerca di lavoro, 5\'784 disoccupati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, persone, cerca, lavoro, fine',
+    ogTitle: '11\'341 in cerca di lavoro in San Gallo ottobre 2026',
+    ogDescription: 'Bollettino RAV Cantone San Gallo fine ottobre 2026: 11\'341 persone in cerca di impiego, 5\'784 disoccupate. Preannunciato lavoro ridotto per novembre 2026.',
+    canonicalPath: '/articoli-san-gallo/meno-cercatori-lavoro-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "11'341 persone in cerca di lavoro a fine ottobre 2026 nel Canton San Gallo",
+      "description": "Dati RAV Canton San Gallo fine ottobre 2026: 11'341 in cerca di lavoro, 5'784 disoccupati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-meno-cercatori-lavoro-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-07T01:00:43+00:00",
+      "dateModified": "2026-11-07T01:00:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/meno-cercatori-lavoro-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

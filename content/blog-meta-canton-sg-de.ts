@@ -87,6 +87,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.wil-piano-finanziario-2027-2031.title': 'Wil: Finanzplan 2027-2031 zwischen Schulden und Ersparnissen',
     'blog.article.wil-piano-finanziario-2027-2031.excerpt': 'Wils Finanzplan sieht eine Erhöhung der Nettoverschuldung von 43 auf 125 Millionen Francs bis 2031 vor, trotz Kostensparmaßnahmen.',
     'blog.article.wil-piano-finanziario-2027-2031.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.meno-cercatori-lavoro-ottobre.title': '11\'341 Stellensuchende Ende Oktober 2026 im Kanton St. Gallen',
+    'blog.article.meno-cercatori-lavoro-ottobre.excerpt': 'Ende Oktober 2026 zählte das RAV des Kantons St. Gallen 11\'341 Stellensuchende, davon 5\'784 Arbeitslose.',
+    'blog.article.meno-cercatori-lavoro-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

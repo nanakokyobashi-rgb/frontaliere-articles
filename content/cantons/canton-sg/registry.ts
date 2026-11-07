@@ -314,4 +314,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'meno-cercatori-lavoro-ottobre',
+ category: 'pratico',
+ date: '2026-11-07T01:00:43.057Z',
+ image: '/images/blog/article-meno-cercatori-lavoro-ottobre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

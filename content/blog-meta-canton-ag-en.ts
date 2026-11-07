@@ -90,6 +90,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.niederwil-aumento-imposta-2027.title': 'Niederwil proposes a municipal tax rate of 107% in 2027',
     'blog.article.niederwil-aumento-imposta-2027.excerpt': 'Niederwil proposes increasing it from 103% to 107%; the 2027 budget deficit would decrease from CHF 401\'200 to CHF 151\'200.',
     'blog.article.niederwil-aumento-imposta-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.oelrainstrasse-chiusura-5-novembre.title': 'Closure of Oelrainstrasse, Baden, Thursday, November 5, for container reassembly',
+    'blog.article.oelrainstrasse-chiusura-5-novembre.excerpt': 'L\'Oelrainstrasse between Parkhaus Bahnhof and Parkhaus Theaterplatz will be closed from 8:30 until approximately 11 for the reassembly of four underground containers.',
+    'blog.article.oelrainstrasse-chiusura-5-novembre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAgEn;

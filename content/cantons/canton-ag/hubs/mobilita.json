@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-06T16:04:12.780Z",
-  "contentHash": "f5464d8886f83644e97216f19eee6a1e06161f742687198a012821135e3e9108",
+  "updatedAt": "2026-11-07T01:12:46.016Z",
+  "contentHash": "a01099386b88a1acc146e42000011ab65afba4cdf4226210ec67bad0524286a5",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -221,6 +221,12 @@
           "date": "2026-10-21T12:23:52.110Z"
         },
         {
+          "title": "Chiusura Oelrainstrasse Baden giovedì 5 novembre per rimontaggio container",
+          "url": "/articoli-argovia/oelrainstrasse-chiusura-5-novembre/",
+          "excerpt": "L'Oelrainstrasse tra Parkhaus Bahnhof e Parkhaus Theaterplatz sarà chiusa dalle 8.30 alle circa 11 per il rimontaggio di quattro container interrati.",
+          "date": "2026-11-07T01:08:28.390Z"
+        },
+        {
           "title": "SBB chiudono a Döttingen: ultimo centro viaggi del distretto",
           "url": "/articoli-argovia/sbb-chiude-reisezentrum-doettingen/",
           "excerpt": "Le SBB chiudono a Döttingen l'ultimo Reisezentrum del distretto.",
@@ -264,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-06T16:04:12.780Z"
+      "updatedAt": "2026-11-07T01:12:46.016Z"
     },
     "en": {
       "canton": "AG",
@@ -463,6 +469,12 @@
           "date": "2026-10-21T12:23:52.110Z"
         },
         {
+          "title": "Closure of Oelrainstrasse, Baden, Thursday, November 5, for container reassembly",
+          "url": "/en/aargau-articles/oelrainstrasse-closure-november-5/",
+          "excerpt": "L'Oelrainstrasse between Parkhaus Bahnhof and Parkhaus Theaterplatz will be closed from 8:30 until approximately 11 for the reassembly of four underground containers.",
+          "date": "2026-11-07T01:08:28.390Z"
+        },
+        {
           "title": "SBB close in Döttingen: the district’s last travel center",
           "url": "/en/aargau-articles/sbb-closes-doettingen-travel-centre/",
           "excerpt": "SBB are closing the district’s last travel centre in Döttingen.",
@@ -506,7 +518,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-06T16:04:12.780Z"
+      "updatedAt": "2026-11-07T01:12:46.016Z"
     },
     "de": {
       "canton": "AG",
@@ -705,6 +717,12 @@
           "date": "2026-10-21T12:23:52.110Z"
         },
         {
+          "title": "Sperrung Oelrainstrasse: 5.11. wegen Container-Wiedereinbau",
+          "url": "/de/aargau-artikel/oelrainstrasse-schliessung-5-november/",
+          "excerpt": "Die Oelrainstrasse zwischen Parkhaus Bahnhof und Parkhaus Theaterplatz wird von 8.30 bis etwa 11 Uhr wegen des Wiedereinbaus von vier unterirdischen Containern gesperrt.",
+          "date": "2026-11-07T01:08:28.390Z"
+        },
+        {
           "title": "SBB schließen in Döttingen: letztes Reisezentrum des Bezirks",
           "url": "/de/aargau-artikel/sbb-schliesst-reisezentrum-doettingen/",
           "excerpt": "Die SBB schließen in Döttingen das letzte Reisezentrum des Bezirks.",
@@ -748,7 +766,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-06T16:04:12.780Z"
+      "updatedAt": "2026-11-07T01:12:46.016Z"
     },
     "fr": {
       "canton": "AG",
@@ -947,6 +965,12 @@
           "date": "2026-10-21T12:23:52.110Z"
         },
         {
+          "title": "Baden : Oelrainstrasse fermée pour remonter des conteneurs",
+          "url": "/fr/articles-argovie/oelrainstrasse-fermeture-5-novembre/",
+          "excerpt": "L’Oelrainstrasse entre Parkhaus Bahnhof et Parkhaus Theaterplatz sera fermée de 8.30 à environ 11 pour le remontage de quatre conteneurs enterrés.",
+          "date": "2026-11-07T01:08:28.390Z"
+        },
+        {
           "title": "Les SBB ferment à Döttingen : dernier centre de voyages du district",
           "url": "/fr/articles-argovie/sbb-ferme-centre-voyage-doettingen/",
           "excerpt": "Les SBB ferment à Döttingen le dernier centre de voyages du district.",
@@ -990,7 +1014,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-06T16:04:12.780Z"
+      "updatedAt": "2026-11-07T01:12:46.016Z"
     }
   }
 }
