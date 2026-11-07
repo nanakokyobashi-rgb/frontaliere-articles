@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "a5f508d81690d09822d363f61caec9aed2b0c8f8e31116157f45a3a0a7e862a1",
+  "updatedAt": "2026-11-07T09:42:27.754Z",
+  "contentHash": "02f495558cedfdacb2c6fdf3ed770320fce42fb703646c3be397b11c2e619231",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -125,6 +125,12 @@
           "date": "2026-10-31T09:19:08.597Z"
         },
         {
+          "title": "Nuovo semaforo St. Klemens per puntualità bus a Ebikon",
+          "url": "/articoli-lucerna/semal-st-klemens-ebikon/",
+          "excerpt": "Test alla fermata St. Klemens sulla strada cantonale verso Lucerna; decisione prevista a fine estate 2027 dopo consultazione.",
+          "date": "2026-11-07T09:26:29.750Z"
+        },
+        {
           "title": "Tunnel Sonnenberg chiuso per ispezione strutturale",
           "url": "/articoli-lucerna/tunnel-sonnenberg-chiusura-notte/",
           "excerpt": "Chiusura completa del tunnel Sonnenberg in entrambe le direzioni dalla notte tra il 4 e il 5 novembre 2026, dalle 22.00 alle 05.00.",
@@ -172,7 +178,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T09:42:27.754Z"
     },
     "en": {
       "canton": "LU",
@@ -280,6 +286,12 @@
           "date": "2026-10-31T09:19:08.597Z"
         },
         {
+          "title": "New St. Klemens traffic light for bus punctuality in Ebikon",
+          "url": "/en/lucerne-articles/st-klemens-ebikon-traffic-light/",
+          "excerpt": "Test at the St. Klemens stop on the cantonal road toward Lucerne; decision expected at the end of summer 2027 after consultation.",
+          "date": "2026-11-07T09:26:29.750Z"
+        },
+        {
           "title": "Sonnenberg Tunnel closed for structural inspection",
           "url": "/en/lucerne-articles/sonnenberg-tunnel-night-closure/",
           "excerpt": "Complete closure of the Sonnenberg tunnel in both directions during the night of November 4–5, 2026, from 22.00 to 05.00.",
@@ -325,7 +337,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T09:42:27.754Z"
     },
     "de": {
       "canton": "LU",
@@ -433,6 +445,12 @@
           "date": "2026-10-31T09:19:08.597Z"
         },
         {
+          "title": "Neue Ampel St. Klemens für Bus-Pünktlichkeit in Ebikon",
+          "url": "/de/luzern-artikel/semafor-st-klemens-ebikon/",
+          "excerpt": "Test an der Haltestelle St. Klemens an der Kantonsstrasse nach Luzern; Entscheidung nach Rücksprache für Spätsommer 2027 geplant.",
+          "date": "2026-11-07T09:26:29.750Z"
+        },
+        {
           "title": "Tunnel Sonnenberg wegen struktureller Inspektion gesperrt",
           "url": "/de/luzern-artikel/sonnenberg-tunnel-nachtschliessung/",
           "excerpt": "Laut der Quelle wird der Sonnenberg-Tunnel in Luzern in der Nacht von Mittwoch, dem 4. November, auf Donnerstag, den 5. November 2026, in beiden Richtungen vollständig gesperrt.",
@@ -478,7 +496,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T09:42:27.754Z"
     },
     "fr": {
       "canton": "LU",
@@ -586,6 +604,12 @@
           "date": "2026-10-31T09:19:08.597Z"
         },
         {
+          "title": "Nouveau feu de signalisation à St. Klemens pour la ponctualité des bus à Ebikon",
+          "url": "/fr/articles-lucerne/semafore-st-klemens-ebikon/",
+          "excerpt": "Test à l'arrêt St. Klemens sur la route cantonale en direction de Lucerne ; décision prévue à la fin de l'été 2027 après consultation.",
+          "date": "2026-11-07T09:26:29.750Z"
+        },
+        {
           "title": "Tunnel du Sonnenberg fermé pour inspection structurelle",
           "url": "/fr/articles-lucerne/tunnel-sonnenberg-fermeture-nuit/",
           "excerpt": "Fermeture complète du tunnel du Sonnenberg dans les deux directions dans la nuit du 4 au 5 novembre 2026, de 22.00 à 05.00.",
@@ -633,7 +657,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T09:42:27.754Z"
     }
   }
 }
