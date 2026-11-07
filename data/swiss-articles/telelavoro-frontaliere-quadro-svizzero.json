@@ -1,0 +1,19 @@
+{
+  "id": "telelavoro-frontaliere-quadro-svizzero",
+  "slug": "telelavoro-frontaliere-quadro-svizzero",
+  "publishedAt": "2026-11-07T15:02:33.263Z",
+  "cluster": null,
+  "_pool": "proven",
+  "_pool_source": "experimental",
+  "_discovery_attribution": null,
+  "_topic_candidate_attribution": {
+    "candidateId": "5e1a20eb",
+    "providers": [
+      "google-news-rss"
+    ],
+    "detectedAt": "2026-11-02T01:15:07.194Z",
+    "score": 0.373,
+    "redditPermalink": null
+  },
+  "_score_breakdown": null
+}

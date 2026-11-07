@@ -30192,6 +30192,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'telelavoro-frontaliere-quadro-svizzero',
+    category: 'pratico',
+    date: '2026-11-07T15:02:30.657Z',
+    image: '/images/blog/article-telelavoro-frontaliere-quadro-svizzero.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
