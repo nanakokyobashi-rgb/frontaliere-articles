@@ -325,4 +325,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'voto-regolamento-fondo-gas-wil',
+ category: 'pratico',
+ date: '2026-11-07T08:11:06.917Z',
+ image: '/images/blog/article-voto-regolamento-fondo-gas-wil.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

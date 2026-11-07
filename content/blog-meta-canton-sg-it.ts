@@ -90,6 +90,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.meno-cercatori-lavoro-ottobre.title': '11\'341 persone in cerca di lavoro a fine ottobre 2026 nel Canton San Gallo',
     'blog.article.meno-cercatori-lavoro-ottobre.excerpt': 'A fine ottobre 2026, il RAV del Cantone San Gallo contava 11\'341 persone in cerca di lavoro, di cui 5\'784 disoccupate.',
     'blog.article.meno-cercatori-lavoro-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.voto-regolamento-fondo-gas-wil.title': 'Voto 29 novembre 2026: Regolamento fondo dismissione rete gas TBW',
+    'blog.article.voto-regolamento-fondo-gas-wil.excerpt': 'La votazione riguarda il regolamento per il fondo destinato alla dismissione della rete gas TBW, che misura circa 570 km.',
+    'blog.article.voto-regolamento-fondo-gas-wil.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;
