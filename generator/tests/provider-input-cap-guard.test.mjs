@@ -16,17 +16,23 @@ function extractFunctionSource(signature) {
   return SOURCE.slice(start, start + end + 2);
 }
 
-const GUARD_SOURCE = extractFunctionSource('function providerInputCapGuard(models) {');
+const GUARD_SOURCE = extractFunctionSource('function providerInputCapGuard(models, splitMode = \'auto\') {');
+const FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS = Number(
+  SOURCE.match(/const PROMPT_UNIQUE_SCAFFOLD_FLOOR_TOKENS = (\d+);/)?.[1],
+);
+assert.ok(Number.isSafeInteger(FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS), 'full prompt floor constant missing');
 
-function makeGuard(caps, floor = 5850) {
-  return new Function(
+function makeGuard(caps, splitMode = 'auto') {
+  const guard = new Function(
     'getDeclaredRequestTokenLimit',
     'PROMPT_SCAFFOLD_FLOOR_TOKENS',
+    'PROMPT_UNIQUE_SCAFFOLD_FLOOR_TOKENS',
     `${GUARD_SOURCE}\nreturn providerInputCapGuard;`,
   )((model) => {
     if (caps instanceof Map) return caps.get(model);
     return caps(model);
-  }, floor);
+  }, 5850, FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS);
+  return (models) => guard(models, splitMode);
 }
 
 test('providerInputCapGuard rejects a roster whose every input cap is below the prompt floor', () => {
@@ -66,6 +72,29 @@ test('providerInputCapGuard keeps unbounded and exact-floor models eligible', ()
   });
 });
 
+test('providerInputCapGuard uses the single-call scaffold floor when split is off', () => {
+  const guard = makeGuard(new Map([
+    ['body-floor', 5850],
+    ['full-floor-minus-one', FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS - 1],
+    ['full-floor', FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS],
+  ]), 'off');
+
+  assert.deepEqual(guard(['body-floor', 'full-floor-minus-one', 'full-floor']), {
+    ready: true,
+    minimumInputTokens: FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS,
+    eligibleModels: [
+      { model: 'full-floor', requestLimit: FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS },
+    ],
+    rejectedModels: [
+      { model: 'body-floor', requestLimit: 5850, reason: 'below-prompt-scaffold-floor' },
+      { model: 'full-floor-minus-one', requestLimit: FULL_PROMPT_SCAFFOLD_FLOOR_TOKENS - 1, reason: 'below-prompt-scaffold-floor' },
+    ],
+  });
+
+  const splitGuard = makeGuard(new Map([['body-floor', 5850]]), 'auto');
+  assert.equal(splitGuard(['body-floor']).ready, true, 'auto deve conservare il floor della chiamata split');
+});
+
 test('providerInputCapGuard fails closed on an unreadable cap and is wired before the scan', () => {
   const guard = makeGuard(() => {
     throw new Error('malformed model');
@@ -81,7 +110,8 @@ test('providerInputCapGuard fails closed on an unreadable cap and is wired befor
   const scanStart = SOURCE.indexOf('// ── Auto-scan mode:', preflightStart);
   assert.ok(preflightStart >= 0 && scanStart > preflightStart, 'preflight/scan delimiters missing');
   const preflight = SOURCE.slice(preflightStart, scanStart);
-  assert.match(preflight, /providerInputCapGuard\(roster\.availableModels\)/);
+  assert.match(preflight, /const promptSplitMode = getPromptSplitMode\(\);/);
+  assert.match(preflight, /providerInputCapGuard\(roster\.availableModels, promptSplitMode\)/);
   assert.match(preflight, /PROVIDER_INPUT_CAP ready=/);
   assert.match(preflight, /if \(!inputCapGuard\.ready\)/);
 });

@@ -163,26 +163,40 @@ function _preferisceModelloSenzaCap(prefer) {
   );
 }
 
+// Misurato con fonte e fatti a zero: il prompt unico ha un'impalcatura piu'
+// grande della sola chiamata di scrittura split (7180 contro 5850 token).
+// Questo e' il secondo floor che il preflight deve conoscere quando il flag
+// di rollback disattiva lo split.
+const PROMPT_UNIQUE_SCAFFOLD_FLOOR_TOKENS = 7180;
+
+function getPromptSplitMode() {
+  return String(process.env.CREATE_ARTICLE_PROMPT_SPLIT || 'auto').toLowerCase();
+}
+
 /**
  * Check whether the currently available roster contains at least one model
  * that can accept the smallest article-generation call. `providerRosterReady`
  * only answers whether a model is available; `callLLM` applies the input-cap
- * check later, after the source scan has already spent its budget. The split
- * body call has a hard scaffold floor, so a roster made only of lower caps
- * cannot generate an article even after every reducible input block is gone.
+ * check later, after the source scan has already spent its budget. The prompt
+ * floor depends on the requested split mode: the split body call has the
+ * 5850-token scaffold, while the explicit `off` rollback uses the 7180-token
+ * single-call scaffold.
  *
  * The cap lookup deliberately reuses `getDeclaredRequestTokenLimit`, the same
  * source used by `callLLM`, including runtime-learned limits. An undefined cap
  * remains eligible: it is the contract for a lane such as Codex whose input
  * limit is not declared to this router.
  */
-function providerInputCapGuard(models) {
+function providerInputCapGuard(models, splitMode = 'auto') {
+  const minimumInputTokens = splitMode === 'off'
+    ? PROMPT_UNIQUE_SCAFFOLD_FLOOR_TOKENS
+    : PROMPT_SCAFFOLD_FLOOR_TOKENS;
   const eligibleModels = [];
   const rejectedModels = [];
   if (!Array.isArray(models)) {
     return {
       ready: false,
-      minimumInputTokens: PROMPT_SCAFFOLD_FLOOR_TOKENS,
+      minimumInputTokens,
       eligibleModels,
       rejectedModels,
     };
@@ -196,7 +210,7 @@ function providerInputCapGuard(models) {
       rejectedModels.push({ model, requestLimit: null, reason: 'input-cap-unreadable' });
       continue;
     }
-    if (requestLimit === undefined || requestLimit >= PROMPT_SCAFFOLD_FLOOR_TOKENS) {
+    if (requestLimit === undefined || requestLimit >= minimumInputTokens) {
       eligibleModels.push({ model, requestLimit: requestLimit ?? null });
     } else {
       rejectedModels.push({ model, requestLimit, reason: 'below-prompt-scaffold-floor' });
@@ -205,7 +219,7 @@ function providerInputCapGuard(models) {
 
   return {
     ready: eligibleModels.length > 0,
-    minimumInputTokens: PROMPT_SCAFFOLD_FLOOR_TOKENS,
+    minimumInputTokens,
     eligibleModels,
     rejectedModels,
   };
@@ -18501,9 +18515,11 @@ async function main() {
     const rosterOptions = { chain: [...DEFAULT_CHAIN, ...PREFERRED_GENERATION_MODELS] };
     const rosterReady = providerRosterReady(rosterOptions);
     const roster = getProviderRosterStatus(rosterOptions);
-    const inputCapGuard = providerInputCapGuard(roster.availableModels);
+    const promptSplitMode = getPromptSplitMode();
+    const inputCapGuard = providerInputCapGuard(roster.availableModels, promptSplitMode);
     RUN_REPORT.providerRosterPreflight = {
       scope: 'runtime-model-eligibility',
+      promptSplitMode,
       ready: rosterReady,
       rosterSize: roster.rosterSize,
       runtimeEligibleModels: roster.availableModels,
