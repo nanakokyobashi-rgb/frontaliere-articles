@@ -950,8 +950,8 @@ test('un retry del dispatch con la stessa URL viene deduplicato dal ricevitore',
   assert.doesNotMatch(admit, /display_title: \(\.display_title \/\/ ""\)/);
   assert.match(admit, /if \[ "\$EVENT_NAME" = "workflow_dispatch" \] && \[ "\$\{DRY_RUN:-false\}" != "true" \] && \[ -n "\$\{SOURCE_URL:-\}" \] && jq -e /);
   assert.match(admit, /duplicate-dispatch-source/);
-  assert.ok(admit.includes('dispatch-mode=production'));
-  assert.ok(admit.includes('contains("[dispatch-source=\\($s)] [dispatch-mode=production]")'));
+  assert.ok(admit.includes('dispatch-mode=dry'));
+  assert.ok(admit.includes('contains("[dispatch-source=\\($s)]"))and((.display_title|contains("[dispatch-mode=dry]"))|not)'));
   const dedupeAt = admit.indexOf('duplicate-dispatch-source');
   const explicitAt = admit.indexOf('if [ "$explicit_dispatch" = "true" ]');
   assert.ok(dedupeAt >= 0 && explicitAt > dedupeAt, 'la deduplica deve precedere l’eccezione manuale/editoriale');
