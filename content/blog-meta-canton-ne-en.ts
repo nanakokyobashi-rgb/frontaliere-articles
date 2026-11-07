@@ -69,6 +69,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.neuchatel-dossier-consiglio-stato.title': 'Neuchâtel: three dossiers handled by the Council of State',
     'blog.article.neuchatel-dossier-consiglio-stato.excerpt': 'On November 2, 2026, the Council of State of the Canton of Neuchâtel published brief information relating to its meeting.',
     'blog.article.neuchatel-dossier-consiglio-stato.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.ostaj-stagnazione-frontalieri.title': 'Stagnation of cross-border commuters: Ostaj data and book on cross-border ties',
+    'blog.article.ostaj-stagnazione-frontalieri.excerpt': 'The Statistical Observatory of the Jura Arc (Ostaj) reports stagnation among cross-border workers, who have tripled in twenty years.',
+    'blog.article.ostaj-stagnazione-frontalieri.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;

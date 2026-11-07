@@ -250,4 +250,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'ostaj-stagnazione-frontalieri',
+ category: 'novita',
+ date: '2026-11-07T11:35:41.176Z',
+ image: '/images/blog/article-ostaj-stagnazione-frontalieri.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
