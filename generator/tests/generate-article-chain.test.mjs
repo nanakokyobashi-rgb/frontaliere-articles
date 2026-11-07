@@ -943,15 +943,21 @@ test('Cloud Scheduler possiede un contratto di slot fail-closed nel workflow cor
 test('un retry del dispatch con la stessa URL viene deduplicato dal ricevitore', () => {
   const runName = WF.split('\n').find((line) => line.startsWith('run-name:')) || '';
   const admit = extractRun('Skip when a generation is already in flight');
-  assert.ok(runName.includes('inputs.url'), 'la URL sorgente deve entrare nell’identità osservabile della run');
+  assert.ok(runName.includes('inputs.source_key'), 'la chiave bounded della URL deve entrare nell’identità osservabile della run');
+  assert.doesNotMatch(runName, /inputs\.url/, 'la URL completa non deve entrare nel titolo della run');
+  assert.match(WF, /source_key:\n        description: [^\n]*SHA-256\(url\)/);
   assert.match(WF, /SOURCE_URL: \$\{\{ inputs\.url \}\}/);
+  assert.match(WF, /SOURCE_KEY: \$\{\{ inputs\.source_key \}\}/);
   assert.match(admit, /and \(\.display_title \| type\) == "string"\s+and \(\.display_title \| length\) > 0/);
   assert.match(admit, /\{id, created_at, status, display_title\}/);
   assert.doesNotMatch(admit, /display_title: \(\.display_title \/\/ ""\)/);
-  assert.match(admit, /if \[ "\$EVENT_NAME" = "workflow_dispatch" \] && \[ "\$\{DRY_RUN:-false\}" != "true" \] && \[ -n "\$\{SOURCE_URL:-\}" \] && jq -e /);
+  assert.match(admit, /if \[ "\$EVENT_NAME" = "workflow_dispatch" \] && \[ "\$\{DRY_RUN:-false\}" != "true" \] && \[ -n "\$\{SOURCE_URL:-\}" \]/);
+  assert.match(admit, /\^\[a-f0-9\]\{32\}\$/);
+  assert.match(admit, /sha256sum \| cut -c1-32/);
   assert.match(admit, /duplicate-dispatch-source/);
-  assert.ok(admit.includes('dispatch-mode=dry'));
-  assert.ok(admit.includes('contains("[dispatch-source=\\($s)]"))and((.display_title|contains("[dispatch-mode=dry]"))|not)'));
+  assert.ok(admit.includes('[dispatch-mode=production]'));
+  assert.ok(admit.includes('contains("[dispatch-source-key=\\($k)]")'));
+  assert.doesNotMatch(admit, /contains\("\[dispatch-mode=dry\]"\)/, 'la modalità è un marker positivo separato dalla URL');
   const dedupeAt = admit.indexOf('duplicate-dispatch-source');
   const explicitAt = admit.indexOf('if [ "$explicit_dispatch" = "true" ]');
   assert.ok(dedupeAt >= 0 && explicitAt > dedupeAt, 'la deduplica deve precedere l’eccezione manuale/editoriale');

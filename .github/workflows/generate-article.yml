@@ -1,7 +1,10 @@
 name: Generate Blog Article
 # generation-cloud-clock-contract: v1
 # generation-cloud-slot-minutes: 7,37
-run-name: ${{ format('[dispatch-source={0}] [dispatch-mode={1}] [loop-clock {2}] [generation-slot {3}] Generate Blog Article', inputs.url || 'auto-scan', inputs.dry_run && 'dry' || 'production', inputs.loop_clock || 'manual', inputs.recovery_slot || 'none') }}
+# `source_key` is the producer-supplied first 32 hex characters of
+# SHA-256(source URL). It is bounded before it becomes part of the observable
+# run identity; the admission gate verifies it against `inputs.url` below.
+run-name: ${{ format('[dispatch-source-key={0}] [dispatch-mode={1}] [loop-clock {2}] [generation-slot {3}] Generate Blog Article', inputs.source_key || 'auto-scan', inputs.dry_run && 'dry' || 'production', inputs.loop_clock || 'manual', inputs.recovery_slot || 'none') }}
 
 # The last producer to move (issue #4974 item 3, §4/§5). Scans for a source,
 # generates a full multi-language article and registers it into the corpus this
@@ -191,6 +194,11 @@ on:
         description: 'Optional: specific source URL (empty = auto-scan)'
         required: false
         type: string
+      source_key:
+        description: 'First 32 lowercase hex characters of SHA-256(url); required for production URL dispatches'
+        required: false
+        default: ''
+        type: string
       section:
         description: 'frontaliere (default) or svizzera'
         required: false
@@ -378,6 +386,7 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run }}
           SECTION_REQUESTED: ${{ inputs.section }}
           SOURCE_URL: ${{ inputs.url }}
+          SOURCE_KEY: ${{ inputs.source_key }}
           DISPATCH_ORIGIN: ${{ inputs.dispatch_origin }}
           LOOP_CLOCK: ${{ inputs.loop_clock }}
           RECOVERY_SLOT: ${{ inputs.recovery_slot }}
@@ -865,7 +874,27 @@ jobs:
             fail_closed_admission
           fi
 
-          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "${DRY_RUN:-false}" != "true" ] && [ -n "${SOURCE_URL:-}" ] && jq -e --arg s "$SOURCE_URL" --arg m "$self_created" --argjson i "$SELF_ID" 'any(.[]; [.created_at,.id]<[$m,$i]and(.display_title|contains("[dispatch-source=\($s)]"))and((.display_title|contains("[dispatch-mode=dry]"))|not))' <<<"$runs" >/dev/null 2>/dev/null; then skip_generation_slot duplicate-dispatch-source; elif [ "$?" -ne 1 ]; then fail_closed_admission; fi
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "${DRY_RUN:-false}" != "true" ] && [ -n "${SOURCE_URL:-}" ]; then
+            if [[ ! "${SOURCE_KEY:-}" =~ ^[a-f0-9]{32}$ ]]; then
+              skip_generation_slot dispatch-source-key-invalid
+            fi
+            if ! expected_source_key="$(printf '%s' "$SOURCE_URL" | sha256sum | cut -c1-32)"; then
+              skip_generation_slot dispatch-source-key-unavailable
+            fi
+            if [ "$SOURCE_KEY" != "$expected_source_key" ]; then
+              skip_generation_slot dispatch-source-key-mismatch
+            fi
+            if jq -e --arg k "$SOURCE_KEY" --arg m "$self_created" --argjson i "$SELF_ID" \
+              'any(.[];
+                [.created_at,.id] < [$m,$i]
+                and (.display_title | contains("[dispatch-source-key=\($k)]"))
+                and (.display_title | contains("[dispatch-mode=production]"))
+              )' <<<"$runs" >/dev/null 2>/dev/null; then
+              skip_generation_slot duplicate-dispatch-source
+            elif [ "$?" -ne 1 ]; then
+              fail_closed_admission
+            fi
+          fi
 
           if [ "$explicit_dispatch" = "true" ]; then
             echo "Dispatch manuale/editoriale esplicito (chain_depth=$chain_depth) → si procede."
