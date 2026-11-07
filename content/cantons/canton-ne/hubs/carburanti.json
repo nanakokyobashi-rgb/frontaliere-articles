@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "carburanti",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "7184027f4d32e1b759746a12fe9a789741928ac14735dc83b18ec63d11925a8a",
+  "updatedAt": "2026-11-07T11:40:22.216Z",
+  "contentHash": "5e49d2deb772392f3741280ee831876f7ac84daab3b36fa22719694c9cb58b4f",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Stagnazione frontalieri: dati Ostaj e libro sui legami transfrontalieri",
+          "url": "/articoli-neuchatel/ostaj-stagnazione-frontalieri/",
+          "excerpt": "L'Observatoire statistique de l'Arc jurassien (Ostaj) segnala stagnazione dei lavoratori frontalieri, triplicati in vent'anni.",
+          "date": "2026-11-07T11:35:41.176Z"
+        },
+        {
           "title": "Neuchâtel: tre dossier trattati dal Consiglio di Stato",
           "url": "/articoli-neuchatel/neuchatel-dossier-consiglio-stato/",
           "excerpt": "Il 2 novembre 2026 il Consiglio di Stato del Canton Neuchâtel ha diffuso le informazioni brevi relative alla sua seduta.",
@@ -94,12 +100,6 @@
           "url": "/articoli-neuchatel/rht-ritorno-normale-orologeria/",
           "excerpt": "Zenith ha avviato un licenziamento collettivo a Le Locle.",
           "date": "2026-10-27T18:01:44.534Z"
-        },
-        {
-          "title": "Prezzi delle abitazioni in Svizzera: +1,7% nel trimestre",
-          "url": "/articoli-neuchatel/abitazioni-svizzere-rincaro-settembre/",
-          "excerpt": "Nel terzo trimestre i prezzi residenziali svizzeri sono saliti dell'1,7% sul trimestre e del 4,4% su base annua, secondo l'OFS.",
-          "date": "2026-10-27T12:37:22.077Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:40:22.216Z"
     },
     "en": {
       "canton": "NE",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Stagnation of cross-border commuters: Ostaj data and book on cross-border ties",
+          "url": "/en/neuchatel-articles/ostaj-frontalier-stagnation/",
+          "excerpt": "The Statistical Observatory of the Jura Arc (Ostaj) reports stagnation among cross-border workers, who have tripled in twenty years.",
+          "date": "2026-11-07T11:35:41.176Z"
+        },
+        {
           "title": "Neuchâtel: three dossiers handled by the Council of State",
           "url": "/en/neuchatel-articles/neuchatel-state-council-dossiers/",
           "excerpt": "On November 2, 2026, the Council of State of the Canton of Neuchâtel published brief information relating to its meeting.",
@@ -193,12 +199,6 @@
           "url": "/en/neuchatel-articles/rht-return-to-normal-watchmaking/",
           "excerpt": "Zenith has initiated a collective dismissal in Le Locle.",
           "date": "2026-10-27T18:01:44.534Z"
-        },
-        {
-          "title": "Housing prices in Switzerland: +1,7% in the quarter",
-          "url": "/en/neuchatel-articles/swiss-housing-rise-september/",
-          "excerpt": "In the third quarter, Swiss residential prices rose by 1.7% quarter-on-quarter and 4.4% year-on-year, according to the FSO.",
-          "date": "2026-10-27T12:37:22.077Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:40:22.216Z"
     },
     "de": {
       "canton": "NE",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Stagnazione frontalieri: Ostaj-Daten und Buch zu grenzüberschreitenden Verbindungen",
+          "url": "/de/neuenburg-artikel/ostaj-frontalier-stagnation/",
+          "excerpt": "Das Observatoire statistique de l 'Arc jurassien (Ostaj) berichtet von einer Stagnation der Grenzgänger, die sich in zwanzigJahren verdreifacht hat.",
+          "date": "2026-11-07T11:35:41.176Z"
+        },
+        {
           "title": "Neuenburg: drei vom Staatsrat behandelte Dossiers",
           "url": "/de/neuenburg-artikel/neuenburg-regierungsrat-dossiers/",
           "excerpt": "Der Staatsrat des Kantons Neuch hat am 2.November 2026 die Kurzinformationen zu seiner Sitzung veröffentlicht.",
@@ -292,12 +298,6 @@
           "url": "/de/neuenburg-artikel/rht-normal-rueckkehr-uhren/",
           "excerpt": "Zenith hat in Le Locle eine Massenentlassung eingeleitet.",
           "date": "2026-10-27T18:01:44.534Z"
-        },
-        {
-          "title": "Wohnungspreise in der Schweiz: +1,7% im Quartal",
-          "url": "/de/neuenburg-artikel/schweizer-wohnpreise-september/",
-          "excerpt": "Im dritten Quartal stiegen die Schweizer Wohnungspreise laut SFO im Quartal um 1,7% und im Jahresvergleich um 4,4%.",
-          "date": "2026-10-27T12:37:22.077Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:40:22.216Z"
     },
     "fr": {
       "canton": "NE",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Stagnazione frontalieri: dati Ostaj e libro sui legami",
+          "url": "/fr/articles-neuchatel/ostaj-stagnation-frontalier/",
+          "excerpt": "L'Observatoire statistique de l'Arc jurassien (Ostaj) signale une stagnation du nombre de travailleurs frontaliers, dont le nombre a triplé en vingt ans.",
+          "date": "2026-11-07T11:35:41.176Z"
+        },
+        {
           "title": "Neuchâtel : trois dossiers traités par le Conseil d'État",
           "url": "/fr/articles-neuchatel/neuchatel-dossiers-conseil-etat/",
           "excerpt": "Le 2 novembre 2026, le Conseil d'État du canton de Neuchâtel a diffusé les informations succinctes relatives à sa séance.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-neuchatel/rht-retour-normal-horlogerie/",
           "excerpt": "Zenith a engagé une procédure de licenciement collectif au Locle.",
           "date": "2026-10-27T18:01:44.534Z"
-        },
-        {
-          "title": "Prix du logement en Suisse : +1,7% au cours du trimestre",
-          "url": "/fr/articles-neuchatel/prix-logement-suisse-septembre/",
-          "excerpt": "Au troisième trimestre, les prix résidentiels suisses ont augmenté de 1,7% sur le trimestre et de 4,4% sur une base annuelle, selon l'OFS.",
-          "date": "2026-10-27T12:37:22.077Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-07T11:40:22.216Z"
     }
   }
 }
