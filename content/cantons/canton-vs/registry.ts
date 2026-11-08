@@ -216,4 +216,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'ferie-sciare-concentrazione-2027',
+ category: 'pratico',
+ date: '2026-11-08T03:06:47.282Z',
+ image: '/images/blog/article-ferie-sciare-concentrazione-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

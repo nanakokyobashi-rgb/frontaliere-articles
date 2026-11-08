@@ -60,6 +60,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.lavoro-vallese-ottobre-2026.title': 'Arbeitslosigkeit im Wallis steigt auf 3,3%: 6.082 registrierte Arbeitslose',
     'blog.article.lavoro-vallese-ottobre-2026.excerpt': 'Ende Oktober 2026 waren 6.082 Personen bei den Regionalen Arbeitsvermittlungszentren (RAV) des Wallis registriert.',
     'blog.article.lavoro-vallese-ottobre-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.ferie-sciare-concentrazione-2027.title': 'Skiferien 2027 in der Schweiz zwischen Februar und März',
+    'blog.article.ferie-sciare-concentrazione-2027.excerpt': 'Im Jahr 2027 konzentrieren sich die Sportferien auf drei bis vier Wochen, mit einem ungefähren Hauptzeitfenster vom 4. bis 26. Februar.',
+    'blog.article.ferie-sciare-concentrazione-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVsDe;

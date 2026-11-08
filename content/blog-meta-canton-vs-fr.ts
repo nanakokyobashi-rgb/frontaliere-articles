@@ -60,6 +60,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.lavoro-vallese-ottobre-2026.title': 'Le chômage en Valais atteint 3,3% : 6.082 inscrits',
     'blog.article.lavoro-vallese-ottobre-2026.excerpt': 'À fin octobre 2026, 6.082 personnes étaient inscrites auprès des Offices régionaux de placement (ORP) du Valais.',
     'blog.article.lavoro-vallese-ottobre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.ferie-sciare-concentrazione-2027.title': 'Vacances de ski 2027 concentrées entre février et mars en Suisse',
+    'blog.article.ferie-sciare-concentrazione-2027.excerpt': 'En 2027, les vacances sportives se concentrent sur trois à quatre semaines, avec une fenêtre principale indicative du 4 au 26 février.',
+    'blog.article.ferie-sciare-concentrazione-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVsFr;

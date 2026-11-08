@@ -733,6 +733,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ferie-sciare-concentrazione-2027': {
+    title: 'Ferie sciistiche 2027 concentrate tra febbraio e marzo in Svizzera',
+    description: 'Nel 2027 le ferie sportive si concentrano in 3-4 settimane, circa dal 4 al 26 febbraio. Pasqua è il 28 marzo. Dati su prenotazioni e alternative.',
+    keywords: 'frontalieri, ticino, svizzera, italia, ferie, sciistiche, concentrate, febbraio',
+    ogTitle: 'Ferie sciistiche 2027 concentrate febbraio marzo Svizzera',
+    ogDescription: 'Nel 2027 le ferie sportive si concentrano in 3-4 settimane, circa dal 4 al 26 febbraio. Pasqua è il 28 marzo. Dati su prenotazioni e alternative per gli operatori.',
+    canonicalPath: '/articoli-vallese/ferie-sciare-concentrazione-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ferie sciistiche 2027 concentrate tra febbraio e marzo in Svizzera",
+      "description": "Nel 2027 le ferie sportive si concentrano in 3-4 settimane, circa dal 4 al 26 febbraio. Pasqua è il 28 marzo. Dati su prenotazioni e alternative.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ferie-sciare-concentrazione-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-08T03:06:47+00:00",
+      "dateModified": "2026-11-08T03:06:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/ferie-sciare-concentrazione-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

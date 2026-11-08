@@ -60,6 +60,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.lavoro-vallese-ottobre-2026.title': 'Disoccupazione in Vallese sale al 3,3%: 6.082 iscritti',
     'blog.article.lavoro-vallese-ottobre-2026.excerpt': 'A fine ottobre 2026, 6.082 persone risultavano iscritte agli Uffici regionali di collocamento (ORP) del Vallese.',
     'blog.article.lavoro-vallese-ottobre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.ferie-sciare-concentrazione-2027.title': 'Ferie sciistiche 2027 concentrate tra febbraio e marzo in Svizzera',
+    'blog.article.ferie-sciare-concentrazione-2027.excerpt': 'Nel 2027 le ferie sportive si concentrano in tre-quattro settimane, con una finestra principale indicativa dal 4 al 26 febbraio.',
+    'blog.article.ferie-sciare-concentrazione-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVsIt;

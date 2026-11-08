@@ -115,6 +115,10 @@
     "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
       "section": "canton-vs",
       "ts": 1794102337700
+    },
+    "canton-vs::https://vework-public.vs.ch/app/publication/fr/27-09-2026/1": {
+      "section": "canton-vs",
+      "ts": 1794106266886
     }
   }
 }

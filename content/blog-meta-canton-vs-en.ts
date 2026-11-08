@@ -60,6 +60,9 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.lavoro-vallese-ottobre-2026.title': 'Unemployment in Valais rises to 3,3%: 6.082 registered people',
     'blog.article.lavoro-vallese-ottobre-2026.excerpt': 'At the end of October 2026, 6.082 people were registered with the Regional Employment Offices (ORP) in Valais.',
     'blog.article.lavoro-vallese-ottobre-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.ferie-sciare-concentrazione-2027.title': 'Ski holidays in 2027 concentrated between February and March in Switzerland',
+    'blog.article.ferie-sciare-concentrazione-2027.excerpt': 'In 2027, sports holidays are concentrated into three to four weeks, with an indicative main window from February 4 to 26.',
+    'blog.article.ferie-sciare-concentrazione-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVsEn;
