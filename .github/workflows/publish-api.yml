@@ -302,7 +302,6 @@ jobs:
             .github/actions/setup-article-source-runtime \
             engine host scripts generator/scripts generator/data \
             articleSections.ts package.json package-lock.json \
-            generator/package.json generator/package-lock.json
           orchestration_diff_status=$?
           set -e
           if [ "$orchestration_diff_status" -gt 1 ]; then
@@ -483,7 +482,6 @@ jobs:
             .github/actions/setup-article-source-runtime \
             engine host scripts generator/scripts generator/data \
             articleSections.ts package.json package-lock.json \
-            generator/package.json generator/package-lock.json
           orchestration_diff_status=$?
           set -e
           if [ "$orchestration_diff_status" -gt 1 ]; then
