@@ -51,6 +51,18 @@
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/glp-luzern-sagt-nein-zur-digitalisierungsinitiative-art-1730969": {
       "section": "canton-sz",
       "ts": 1794137148380
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/altdorf-gemeindeversammlung-mit-budget-2027-und-wahlen-art-1730713": {
+      "section": "canton-sz",
+      "ts": 1794142147207
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/villa-unterer-frauenstein-in-zug-die-wichtigsten-fragen-zur-abstimmung-art-1730907": {
+      "section": "canton-sz",
+      "ts": 1794142156541
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/schweizer-firmen-schlecht-auf-cyberangriffe-vorbereitet-art-1730921": {
+      "section": "canton-sz",
+      "ts": 1794142581362
     }
   }
 }
