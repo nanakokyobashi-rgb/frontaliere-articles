@@ -20,6 +20,7 @@ import { fileURLToPath } from 'node:url';
 import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL, ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
 import { cantonTopicHubPath } from '../../engine/shared/cantonSectionCopy.mjs';
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
+import { publishApiFreshnessPaths } from '../../scripts/lib/publish-api-input-range.mjs';
 import {
   API_BASE,
   APEX,
@@ -1124,6 +1125,24 @@ test('publisher: legge la struttura reale di on.push.paths e cerca l\'ultimo inp
     '--',
     'content/**',
   ]);
+});
+
+test('publisher freshness ignora il commit bookkeeping skip-ci ma include gli input runtime triggeranti', () => {
+  const triggerPaths = publishApiTriggerPaths();
+  const freshnessPaths = publishApiFreshnessPaths();
+  assert.ok(triggerPaths.includes('data/blog-cover-cdn-sync-queue.json'));
+  assert.ok(!freshnessPaths.includes('data/blog-cover-cdn-sync-queue.json'));
+  assert.deepEqual(
+    freshnessPaths,
+    triggerPaths.filter((triggerPath) => triggerPath !== 'data/blog-cover-cdn-sync-queue.json'),
+  );
+  for (const runtimePath of [
+    '.github/actions/setup-article-source-runtime/**',
+    'scripts/ci/article-source-runtime/**',
+    'scripts/ci/check-article-source-runtime.mjs',
+  ]) {
+    assert.ok(freshnessPaths.includes(runtimePath), `${runtimePath} deve invalidare il publisher obsoleto`);
+  }
 });
 
 test('publisher migration manifest usa percorsi canonici per landing e hub', () => {

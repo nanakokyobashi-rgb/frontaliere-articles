@@ -185,6 +185,12 @@ on:
       - 'data/generated-image-registry.json'
       - 'data/editorial-image-registry.json'
       - 'data/blog-cover-cdn-sync-queue.json'
+      # The isolated parser runtime is loaded from this workflow revision.
+      # Changes to any of its files must enqueue a publish with the matching
+      # runtime instead of leaving the only run on the previous action.
+      - '.github/actions/setup-article-source-runtime/**'
+      - 'scripts/ci/article-source-runtime/**'
+      - 'scripts/ci/check-article-source-runtime.mjs'
       - 'scripts/ci/verify-publish-api-source-current.sh'
       - 'scripts/lib/publish-api-input-range.mjs'
       - '.github/workflows/publish-api.yml'
@@ -291,29 +297,36 @@ jobs:
             SOURCE_COMMIT="$WORKFLOW_COMMIT"
           fi
 
-          # The publisher job loads its scripts from current main but its
-          # workflow and isolated runtime support from WORKFLOW_COMMIT. If any
-          # executable publisher/orchestration input changed in between, skip
-          # this stale run cleanly; the newer push run owns that source/runtime
-          # pair. Content and data changes remain eligible for coalescing.
-          set +e
-          git diff --quiet "$WORKFLOW_COMMIT" "$current_main" -- \
-            .github/workflows/publish-api.yml \
-            .github/actions/setup-article-source-runtime \
-            engine host scripts generator/scripts generator/data \
-            articleSections.ts package.json package-lock.json
-          orchestration_diff_status=$?
-          set -e
-          if [ "$orchestration_diff_status" -gt 1 ]; then
-            echo "::error::impossibile confrontare il runtime publisher con current main"
+          # Use the exact paths that trigger this workflow. If one advanced
+          # after this run started, its newer push run is guaranteed to be in
+          # the FIFO queue; unrelated commits must not suppress the only publish.
+          if ! publish_api_trigger_paths="$(node --input-type=module -e '
+            import { publishApiFreshnessPaths } from "./scripts/lib/publish-api-input-range.mjs";
+            process.stdout.write(publishApiFreshnessPaths().join("\n"));
+          ')"; then
+            echo "::error::impossibile leggere gli input del trigger publish-api"
             exit 1
           fi
-          if [ "$orchestration_diff_status" -eq 1 ]; then
+          mapfile -t publish_api_trigger_path_list <<< "$publish_api_trigger_paths"
+          if [ "${#publish_api_trigger_path_list[@]}" -eq 0 ]; then
+            echo "::error::il trigger publish-api non dichiara path da confrontare"
+            exit 1
+          fi
+          if git diff --quiet "$WORKFLOW_COMMIT" "$current_main" -- "${publish_api_trigger_path_list[@]}"; then
+            trigger_diff_status=0
+          else
+            trigger_diff_status=$?
+          fi
+          if [ "$trigger_diff_status" -gt 1 ]; then
+            echo "::error::impossibile confrontare gli input trigger di publish-api con current main"
+            exit 1
+          fi
+          if [ "$trigger_diff_status" -eq 1 ]; then
             {
               echo "publish=false"
               echo "source_commit=$current_main"
             } >> "$GITHUB_OUTPUT"
-            echo "::notice::publish-api superato: il workflow/runtime $WORKFLOW_COMMIT e' stato superato da main=$current_main; il job publisher viene saltato senza errore"
+            echo "::notice::publish-api superato: gli input trigger di main=$current_main sono avanzati dopo il run=$WORKFLOW_COMMIT; il nuovo run e' preservato nella coda FIFO"
             exit 0
           fi
 
@@ -482,21 +495,30 @@ jobs:
             echo "::error::publish non riconciliabile: checkout=$checked_out non e' antenato di main=$current_main"
             exit 1
           fi
-          set +e
-          git diff --quiet "$GITHUB_SHA" "$current_main" -- \
-            .github/workflows/publish-api.yml \
-            .github/actions/setup-article-source-runtime \
-            engine host scripts generator/scripts generator/data \
-            articleSections.ts package.json package-lock.json
-          orchestration_diff_status=$?
-          set -e
-          if [ "$orchestration_diff_status" -gt 1 ]; then
-            echo "::error::impossibile confrontare il runtime publisher con current main"
+          if ! publish_api_trigger_paths="$(node --input-type=module -e '
+            import { publishApiFreshnessPaths } from "./scripts/lib/publish-api-input-range.mjs";
+            process.stdout.write(publishApiFreshnessPaths().join("\n"));
+          ')"; then
+            echo "::error::impossibile leggere gli input del trigger publish-api"
             exit 1
           fi
-          if [ "$orchestration_diff_status" -eq 1 ]; then
+          mapfile -t publish_api_trigger_path_list <<< "$publish_api_trigger_paths"
+          if [ "${#publish_api_trigger_path_list[@]}" -eq 0 ]; then
+            echo "::error::il trigger publish-api non dichiara path da confrontare"
+            exit 1
+          fi
+          if git diff --quiet "$GITHUB_SHA" "$current_main" -- "${publish_api_trigger_path_list[@]}"; then
+            trigger_diff_status=0
+          else
+            trigger_diff_status=$?
+          fi
+          if [ "$trigger_diff_status" -gt 1 ]; then
+            echo "::error::impossibile confrontare gli input trigger di publish-api con current main"
+            exit 1
+          fi
+          if [ "$trigger_diff_status" -eq 1 ]; then
             echo "PUBLISH_API_SKIP=true" >> "$GITHUB_ENV"
-            echo "::notice::publish-api saltato: main ha superato workflow/runtime dopo il preflight; tutte le fasi successive restano disattivate"
+            echo "::notice::publish-api saltato: gli input trigger di main=$current_main sono avanzati dopo il preflight; il nuovo run e' preservato nella coda FIFO e tutte le fasi restano disattivate"
             exit 0
           fi
           api_input_changed="$(

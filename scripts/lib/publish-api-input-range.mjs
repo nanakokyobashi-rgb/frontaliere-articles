@@ -74,7 +74,12 @@ export function publishApiTriggerPaths({ workflowText = null } = {}) {
   return paths;
 }
 
-function publishApiInputPaths(triggerPathsImpl) {
+/**
+ * Paths whose changes supersede an active publish run. Bookkeeping commits
+ * listed in the trigger still use `[skip ci]`, so they must not invalidate the
+ * queued run that is responsible for publishing the accompanying API input.
+ */
+export function publishApiFreshnessPaths({ triggerPathsImpl = publishApiTriggerPaths } = {}) {
   return triggerPathsImpl()
     .filter((triggerPath) => !PUBLISH_API_BOOKKEEPING_PATHS.has(triggerPath));
 }
@@ -88,7 +93,7 @@ export function latestApiInputCommit(
 ) {
   const commit = String(publisherCommit ?? '').trim();
   if (!commit) throw new Error('commit publisher assente: impossibile classificare gli input API');
-  const triggerPaths = publishApiInputPaths(triggerPathsImpl);
+  const triggerPaths = publishApiFreshnessPaths({ triggerPathsImpl });
   if (triggerPaths.length === 0) return null;
   try {
     const latest = execFileSyncImpl(
@@ -121,7 +126,7 @@ export function apiInputChangedInRange(
   if (!/^0+$/.test(base) && !FULL_GIT_SHA_RE.test(base)) {
     throw new Error('base della push non valida: ' + base);
   }
-  const triggerPaths = publishApiInputPaths(triggerPathsImpl);
+  const triggerPaths = publishApiFreshnessPaths({ triggerPathsImpl });
   // With no pathspec, rev-list would classify every commit as an API input.
   if (triggerPaths.length === 0) return false;
   const args = ['-C', ROOT_DIR, 'rev-list', '--max-count=1', head];

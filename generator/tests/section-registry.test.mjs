@@ -1707,7 +1707,7 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.doesNotMatch(wf, /publish-api-bounded-replay-publisher/);
   assert.match(wf, /if: needs\.source_preflight\.outputs\.publish == 'true'/);
   assert.match(wf, /publish=false/);
-  assert.match(wf, /il job publisher viene saltato senza errore/);
+  assert.match(wf, /il nuovo run e' preservato nella coda FIFO/);
   assert.match(wf, /if \[ "\$EXPLICIT_REPLAY" = 'true' \]/);
   assert.match(wf, /replay bounded superato: main=\$current_main contiene input API piu' recenti del commit delle pagine=\$SOURCE_COMMIT/);
   assert.equal(
@@ -1715,7 +1715,17 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
     25,
     'dopo la freshness guard ogni step deve rispettare lo skip deciso in corsa',
   );
-  assert.match(wf, /git diff --quiet "\$WORKFLOW_COMMIT" "\$current_main"/);
+  assert.equal(
+    (wf.match(/publishApiFreshnessPaths\(\)/g) || []).length,
+    2,
+    'preflight e freshness barrier devono usare gli stessi path del trigger publish-api',
+  );
+  assert.equal(
+    (wf.match(/"\$\{publish_api_trigger_path_list\[@\]\}"/g) || []).length,
+    2,
+    'le due freshness guard devono confrontare l’intera lista di trigger',
+  );
+  assert.doesNotMatch(wf, /engine host scripts generator\/scripts generator\/data/);
   assert.match(wf, /ref: \$\{\{ needs\.source_preflight\.outputs\.source_commit \}\}/);
   assert.match(wf, /Verify publish source is current main/);
   assert.match(wf, /gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main"/);

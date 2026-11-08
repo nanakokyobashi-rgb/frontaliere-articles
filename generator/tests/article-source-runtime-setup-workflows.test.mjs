@@ -161,7 +161,14 @@ test('article-source runtime is isolated, pinned, retried, and limited to parser
   assert.match(publishApi, /uses: \.\/\.article-source-runtime\/\.github\/actions\/setup-article-source-runtime/);
   assert.ok(publishApi.indexOf('Setup isolated article source runtime') < publishApi.indexOf('Verify publish source is current main'), 'publish-api must install parser runtime before the source guard runs');
   const publishApiPushPaths = publishApiWorkflow.slice(publishApiWorkflow.indexOf('on:'), publishApiWorkflow.indexOf('permissions:'));
-  assert.ok(publishApiPushPaths.includes("'scripts/lib/npm-ci-retry.sh'"), 'changing the action retry helper must rerun publish-api');
+  for (const pattern of [
+    "'.github/actions/setup-article-source-runtime/**'",
+    "'scripts/ci/article-source-runtime/**'",
+    "'scripts/ci/check-article-source-runtime.mjs'",
+    "'scripts/lib/npm-ci-retry.sh'",
+  ]) {
+    assert.ok(publishApiPushPaths.includes(pattern), `changing ${pattern} must rerun publish-api`);
+  }
 
   assert.match(getJobBlock(read('.github/workflows/fast-publish-article.yml'), 'publish'), /Setup isolated article source runtime\n        if: needs\.resolve\.outputs\.skip != 'true'/);
   assert.match(
