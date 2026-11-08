@@ -87,6 +87,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.lavoro-zurigo-imprese.title': 'Arbeitslosenquote bei 2,9% in Zürich: Unternehmen optimistischer',
     'blog.article.lavoro-zurigo-imprese.excerpt': 'Ende Oktober bleibt die Arbeitslosenquote im Kanton Zürich bei 2,9%; die Unternehmen beurteilen die Lage besser, doch die offenen Stellen bei den RAV sinken auf 7.010.',
     'blog.article.lavoro-zurigo-imprese.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zurigo-fondo-abitativo.title': 'Zürich, 2,5 Milliarden mehr: Er will einen Hausfonds',
+    'blog.article.zurigo-fondo-abitativo.excerpt': 'Zürich gilt als reicher als CHF 2,5 Milliarden und will einen Eigenheimfonds von Hunderten Millionen, aber der Lead bezweifelt, dass das reicht.',
+    'blog.article.zurigo-fondo-abitativo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

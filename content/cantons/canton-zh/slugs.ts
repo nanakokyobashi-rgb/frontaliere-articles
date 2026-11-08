@@ -31,6 +31,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'cassa-pensione-stop-sistema': { it: 'cassa-pensione-stop-sistema', en: 'zurich-pension-fund-system-stop', de: 'zuerich-pensionskasse-systemstopp', fr: 'caisse-pension-zurich-systeme-stop' },
  'zurigo-budget-rivalutazione-immobili': { it: 'zurigo-budget-rivalutazione-immobili', en: 'zurich-budget-property-revaluation', de: 'zuerich-budget-immobilienaufwertung', fr: 'zurich-budget-revaluation-immobiliere' },
  'lavoro-zurigo-imprese': { it: 'lavoro-zurigo-imprese', en: 'zurich-jobs-business-outlook', de: 'zuerich-arbeitsmarkt-unternehmen', fr: 'zurich-emploi-entreprises' },
+ 'zurigo-fondo-abitativo': { it: 'zurigo-fondo-abitativo', en: 'zurich-housing-fund', de: 'zuerich-wohnfonds', fr: 'zurich-fonds-logement' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

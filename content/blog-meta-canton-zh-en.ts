@@ -87,6 +87,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.lavoro-zurigo-imprese.title': 'Unemployment at 2,9% in Zurich: businesses more optimistic',
     'blog.article.lavoro-zurigo-imprese.excerpt': 'At the end of October, unemployment in the Canton of Zurich remains at 2,9%; companies\' assessment improves, but vacancies fall to 7.010.',
     'blog.article.lavoro-zurigo-imprese.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.zurigo-fondo-abitativo.title': 'Zurich, 2,5 billion more: wants a housing fund',
+    'blog.article.zurigo-fondo-abitativo.excerpt': 'Zurich is reported to be CHF 2,5 billion richer and wants a housing fund worth hundreds of millions, but the lead doubts that will be enough.',
+    'blog.article.zurigo-fondo-abitativo.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;

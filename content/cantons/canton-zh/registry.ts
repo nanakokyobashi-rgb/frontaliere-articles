@@ -314,4 +314,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'zurigo-fondo-abitativo',
+ category: 'novita',
+ date: '2026-11-08T12:03:31.336Z',
+ image: '/images/blog/article-zurigo-fondo-abitativo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
