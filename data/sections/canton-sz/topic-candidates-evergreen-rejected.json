@@ -39,6 +39,14 @@
     "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/wirtschaftsgeschichten-der-woche-kerosin-manor-steuern-art-1730902": {
       "section": "canton-sz",
       "ts": 1794106077573
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/rundweg-gottardo-zwei-millionen-franken-zugesichert-art-1730960": {
+      "section": "canton-sz",
+      "ts": 1794112877039
+    },
+    "canton-sz::https://www.hoefner.ch/2026/11/06/treffsicher-am-ruetlischiessen": {
+      "section": "canton-sz",
+      "ts": 1794112887263
     }
   }
 }
