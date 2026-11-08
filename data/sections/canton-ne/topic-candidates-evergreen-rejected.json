@@ -19,6 +19,10 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261106-tesla-va-cesser-la-production-du-cybertruck-vers-mi-2027.html": {
       "section": "canton-ne",
       "ts": 1794130938448
+    },
+    "canton-ne::https://www.rts.ch/info/regions/vaud/2026/article/vaud-et-neuchatel-lancent-un-numero-unique-pour-la-sante-29402837.html": {
+      "section": "canton-ne",
+      "ts": 1794167250647
     }
   }
 }
