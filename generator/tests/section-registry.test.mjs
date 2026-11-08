@@ -1716,6 +1716,18 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
     'dopo la freshness guard ogni step deve rispettare lo skip deciso in corsa',
   );
   assert.match(wf, /git diff --quiet "\$WORKFLOW_COMMIT" "\$current_main"/);
+  const preflightDiffAt = wf.indexOf('          git diff --quiet "$WORKFLOW_COMMIT" "$current_main" -- ');
+  const preflightDiffEnd = wf.indexOf('          orchestration_diff_status=$?', preflightDiffAt);
+  const runtimeDiffAt = wf.indexOf('          git diff --quiet "$GITHUB_SHA" "$current_main" -- ');
+  const runtimeDiffEnd = wf.indexOf('          orchestration_diff_status=$?', runtimeDiffAt);
+  assert.ok(preflightDiffAt >= 0 && preflightDiffEnd > preflightDiffAt, 'il preflight deve avere un diff runtime delimitato');
+  assert.ok(runtimeDiffAt >= 0 && runtimeDiffEnd > runtimeDiffAt, 'la freshness guard deve avere un diff runtime delimitato');
+  for (const diff of [wf.slice(preflightDiffAt, preflightDiffEnd), wf.slice(runtimeDiffAt, runtimeDiffEnd)]) {
+    for (const broadPath of ['engine', 'host', 'scripts', 'generator/scripts', 'generator/data', 'articleSections.ts', 'package.json', 'package-lock.json']) {
+      assert.doesNotMatch(diff, new RegExp(`\\n\\s+${broadPath.replaceAll('/', '\\/')}\\s*\\n`), broadPath);
+    }
+    assert.doesNotMatch(diff, /scripts\/ci\/loop-drift-check\.mjs/);
+  }
   assert.match(wf, /ref: \$\{\{ needs\.source_preflight\.outputs\.source_commit \}\}/);
   assert.match(wf, /Verify publish source is current main/);
   assert.match(wf, /gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main"/);
@@ -1785,6 +1797,9 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
     'scripts/lib/is-invoked-directly.mjs',
     'scripts/ci/verify-publish-api-source-current.sh',
     'generator/scripts/load-rc-env.mjs',
+    '.github/actions/setup-article-source-runtime/**',
+    'scripts/ci/article-source-runtime/**',
+    'scripts/ci/check-article-source-runtime.mjs',
   ]) {
     assert.ok(filters.includes(p), p);
   }

@@ -187,6 +187,12 @@ on:
       - 'data/blog-cover-cdn-sync-queue.json'
       - 'scripts/ci/verify-publish-api-source-current.sh'
       - 'scripts/lib/publish-api-input-range.mjs'
+      # The publisher checks out this isolated TypeScript runtime from the
+      # workflow revision. Changes to any of its files must therefore start a
+      # newer run before an older run can reject itself as stale.
+      - '.github/actions/setup-article-source-runtime/**'
+      - 'scripts/ci/article-source-runtime/**'
+      - 'scripts/ci/check-article-source-runtime.mjs'
       - '.github/workflows/publish-api.yml'
   # The editorial companion contains a weekly update even when no article or
   # code push occurs. Rebuild it on a real weekly cadence so the HTTP surface
@@ -291,17 +297,18 @@ jobs:
             SOURCE_COMMIT="$WORKFLOW_COMMIT"
           fi
 
-          # The publisher job loads its scripts from current main but its
-          # workflow and isolated runtime support from WORKFLOW_COMMIT. If any
-          # executable publisher/orchestration input changed in between, skip
-          # this stale run cleanly; the newer push run owns that source/runtime
-          # pair. Content and data changes remain eligible for coalescing.
+          # The publisher job loads publisher inputs from current main but its
+          # workflow and isolated runtime support from WORKFLOW_COMMIT. Only
+          # those runtime files must wait for their newer push run; the rest of
+          # the publisher inputs are classified from on.push.paths below and
+          # remain eligible for coalescing.
           set +e
           git diff --quiet "$WORKFLOW_COMMIT" "$current_main" -- \
             .github/workflows/publish-api.yml \
             .github/actions/setup-article-source-runtime \
-            engine host scripts generator/scripts generator/data \
-            articleSections.ts package.json package-lock.json
+            scripts/ci/article-source-runtime \
+            scripts/ci/check-article-source-runtime.mjs \
+            scripts/lib/npm-ci-retry.sh
           orchestration_diff_status=$?
           set -e
           if [ "$orchestration_diff_status" -gt 1 ]; then
@@ -486,8 +493,9 @@ jobs:
           git diff --quiet "$GITHUB_SHA" "$current_main" -- \
             .github/workflows/publish-api.yml \
             .github/actions/setup-article-source-runtime \
-            engine host scripts generator/scripts generator/data \
-            articleSections.ts package.json package-lock.json
+            scripts/ci/article-source-runtime \
+            scripts/ci/check-article-source-runtime.mjs \
+            scripts/lib/npm-ci-retry.sh
           orchestration_diff_status=$?
           set -e
           if [ "$orchestration_diff_status" -gt 1 ]; then
