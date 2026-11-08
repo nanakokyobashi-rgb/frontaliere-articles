@@ -5,41 +5,41 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (Codex broker rejected the request: Codex CLI timed out after 119905ms)",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Generic synthetic commuter-station scene with no readable text, logos, or recognizable face, but it contains a prominent foreground pe",
       "status": "failed",
-      "failureCount": 24,
+      "failureCount": 25,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-07T20:07:00.408Z"
+      "lastFailureAt": "2026-11-08T04:32:10.827Z"
     },
     {
       "articleId": "giovani-donne-stipendi-svizzera",
       "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (image vision fallback deadline exceeded)",
-      "status": "queued",
-      "failureCount": 20,
+      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial illustration matching education-versus-earnings inequality; a recognizable foreground person is sh",
+      "status": "failed",
+      "failureCount": 21,
       "requestedAt": "2026-10-19T03:17:12.439Z",
-      "lastFailureAt": "2026-11-07T13:50:37.776Z"
+      "lastFailureAt": "2026-11-08T04:33:41.877Z"
     },
     {
       "articleId": "sanitari-italiani-fuga-svizzera",
       "title": "Operatori sanitari frontalieri: Como boccheggia",
       "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
       "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (image vision fallback deadline exceeded)",
-      "status": "queued",
-      "failureCount": 19,
+      "status": "failed",
+      "failureCount": 20,
       "requestedAt": "2026-10-23T15:23:52.650Z",
-      "lastFailureAt": "2026-11-07T13:52:37.993Z"
+      "lastFailureAt": "2026-11-08T04:35:42.194Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
       "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (image vision fallback deadline exceeded)",
-      "status": "queued",
-      "failureCount": 19,
+      "status": "failed",
+      "failureCount": 20,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-07T13:54:38.210Z"
+      "lastFailureAt": "2026-11-08T04:37:42.538Z"
     }
   ]
 }
