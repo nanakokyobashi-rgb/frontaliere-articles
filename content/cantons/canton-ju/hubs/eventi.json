@@ -4,12 +4,12 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "548e4cc92fd472f86e0ec070be14be53d2f540bb7dc030dec4a56cfbe6775bde",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "2cc014ace5e4e72cc518fc36b5dd8d9b2cdc5d69a3c22e3f646eae53dc880537",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T13:54:16.445Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     }
   ],
@@ -33,15 +33,9 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Concert annuel de la Fanfare Municipale de Porrentruy",
-              "detail": "Porrentruy",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concert-annuel-de-la-fanfare-municipale-de-porrentruy/"
-            },
-            {
               "label": "Résistance artistique",
               "detail": "Delémont — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -49,11 +43,17 @@
               "detail": "Vicques",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/leopold-lemarchand/"
+            },
+            {
+              "label": "CARTE-BLANCHE AU FESTIVAL DE LA TARTE AUX NOIX: KAYA + TRIBUTE SOUND SYSTEM",
+              "detail": "Le Soleil, Saignelégier",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/evenements/musique/saignelegier/carte-blanche-au-festival-de-la-tarte-aux-noix-kaya-tribute-sound-system_AaEd8Tb"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/giura/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -81,7 +81,7 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "JU",
@@ -102,15 +102,9 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Concert annuel de la Fanfare Municipale de Porrentruy",
-              "detail": "Porrentruy",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concert-annuel-de-la-fanfare-municipale-de-porrentruy/"
-            },
-            {
               "label": "Résistance artistique",
               "detail": "Delémont — ongoing, last day: 21 November 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -118,11 +112,17 @@
               "detail": "Vicques",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/leopold-lemarchand/"
+            },
+            {
+              "label": "CARTE-BLANCHE AU FESTIVAL DE LA TARTE AUX NOIX: KAYA + TRIBUTE SOUND SYSTEM",
+              "detail": "Le Soleil, Saignelégier",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/evenements/musique/saignelegier/carte-blanche-au-festival-de-la-tarte-aux-noix-kaya-tribute-sound-system_AaEd8Tb"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/jura/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +150,7 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "JU",
@@ -171,15 +171,9 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Concert annuel de la Fanfare Municipale de Porrentruy",
-              "detail": "Porrentruy",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concert-annuel-de-la-fanfare-municipale-de-porrentruy/"
-            },
-            {
               "label": "Résistance artistique",
               "detail": "Delémont — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -187,11 +181,17 @@
               "detail": "Vicques",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/leopold-lemarchand/"
+            },
+            {
+              "label": "CARTE-BLANCHE AU FESTIVAL DE LA TARTE AUX NOIX: KAYA + TRIBUTE SOUND SYSTEM",
+              "detail": "Le Soleil, Saignelégier",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/evenements/musique/saignelegier/carte-blanche-au-festival-de-la-tarte-aux-noix-kaya-tribute-sound-system_AaEd8Tb"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/jura/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -219,7 +219,7 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "JU",
@@ -240,15 +240,9 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Concert annuel de la Fanfare Municipale de Porrentruy",
-              "detail": "Porrentruy",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concert-annuel-de-la-fanfare-municipale-de-porrentruy/"
-            },
-            {
               "label": "Résistance artistique",
               "detail": "Delémont — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -256,11 +250,17 @@
               "detail": "Vicques",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/leopold-lemarchand/"
+            },
+            {
+              "label": "CARTE-BLANCHE AU FESTIVAL DE LA TARTE AUX NOIX: KAYA + TRIBUTE SOUND SYSTEM",
+              "detail": "Le Soleil, Saignelégier",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/evenements/musique/saignelegier/carte-blanche-au-festival-de-la-tarte-aux-noix-kaya-tribute-sound-system_AaEd8Tb"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/jura/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -288,7 +288,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

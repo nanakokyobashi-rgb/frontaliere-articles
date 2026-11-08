@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-11-07T09:54:40.735Z",
-  "contentHash": "9f5721c0e080776a5cf2457ddb0fa11688bfd0ba57e351b20d3176e570faeb08",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "79fe25f1bc75d06c410284388ff90c2d41ac1fdb7748d04b3b357736d411d773",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-06T19:25:36.781Z",
+      "updatedAt": "2026-11-07T05:57:27.338Z",
       "keyFacts": 1
     },
     {
@@ -87,7 +87,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-06T19:25:36.781Z"
+          "updatedAt": "2026-11-07T05:57:27.338Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -139,16 +139,16 @@
           "date": "2026-08-16T14:08:59.768Z"
         },
         {
-          "title": "Patente di guida nel Canton Svitto: procedura ed esami",
-          "url": "/articoli-svizzera/patente-guida-svitto-conversione-ed-esami/",
-          "excerpt": "Come ottenere o convertire la patente nel Cantone di Svitto: iscrizione, esami teorico e pratico e corsi obbligatori secondo la normativa federale.",
-          "date": "2026-08-30T01:23:24.295Z"
-        },
-        {
           "title": "Permessi di domicilio C nel Cantone di Svitto: requisiti e domanda",
           "url": "/articoli-svizzera/permesso-di-domicilio-c-canton-svitto/",
           "excerpt": "Per ottenere un permesso di domicilio C nel Cantone di Svitto, i frontalieri devono rispettare determinati requisiti e seguire una procedura specifica.",
           "date": "2026-08-16T11:13:39.319Z"
+        },
+        {
+          "title": "Patente di guida nel Canton Svitto: procedura ed esami",
+          "url": "/articoli-svizzera/patente-guida-svitto-conversione-ed-esami/",
+          "excerpt": "Come ottenere o convertire la patente nel Cantone di Svitto: iscrizione, esami teorico e pratico e corsi obbligatori secondo la normativa federale.",
+          "date": "2026-08-30T01:23:24.295Z"
         },
         {
           "title": "Permesso B in Svitto: come richiederlo e rinnovarlo",
@@ -190,7 +190,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-07T09:54:40.735Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "SZ",
@@ -255,7 +255,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-06T19:25:36.781Z"
+          "updatedAt": "2026-11-07T05:57:27.338Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -307,16 +307,16 @@
           "date": "2026-08-16T14:08:59.768Z"
         },
         {
-          "title": "Driving licence in the Canton of Schwyz: procedure and examinations",
-          "url": "/en/swiss-articles/driving-licence-schwyz-conversion-and-exams/",
-          "excerpt": "How to obtain or convert your driver's license in the Canton of Schwyz: registration, theoretical and practical exams and compulsory courses according to federal regulations.",
-          "date": "2026-08-30T01:23:24.295Z"
-        },
-        {
           "title": "Residence permits C in the Canton of Schwyz: requirements and application",
           "url": "/en/swiss-articles/residence-permits-c-in-the-canton-of-schwyz-requirements-and-application/",
           "excerpt": "To obtain a residence permit C in the Canton of Schwyz, border workers must comply with certain requirements and follow a specific procedure.",
           "date": "2026-08-16T11:13:39.319Z"
+        },
+        {
+          "title": "Driving licence in the Canton of Schwyz: procedure and examinations",
+          "url": "/en/swiss-articles/driving-licence-schwyz-conversion-and-exams/",
+          "excerpt": "How to obtain or convert your driver's license in the Canton of Schwyz: registration, theoretical and practical exams and compulsory courses according to federal regulations.",
+          "date": "2026-08-30T01:23:24.295Z"
         },
         {
           "title": "Permit B in Schwyz: how to request and renew it",
@@ -354,7 +354,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-07T09:54:40.735Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "SZ",
@@ -419,7 +419,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-06T19:25:36.781Z"
+          "updatedAt": "2026-11-07T05:57:27.338Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -471,16 +471,16 @@
           "date": "2026-08-16T14:08:59.768Z"
         },
         {
-          "title": "Führerschein im Kanton Schwyz: Verfahren und Prüfungen",
-          "url": "/de/schweiz-artikel/fuehrerschein-schwyz-umschreibung-und-pruefungen/",
-          "excerpt": "So erhalten oder umwandeln Sie Ihren Führerschein im Kanton Schwyz: Einschreibung, theoretische und praktische Prüfungen und Pflichtkurse gemäss Bundesgesetzgebung.",
-          "date": "2026-08-30T01:23:24.295Z"
-        },
-        {
           "title": "Niederlassungsbewilligungen C im Kanton Schwyz: Voraussetzungen und Antrag",
           "url": "/de/schweiz-artikel/niederlassungsbewilligungen-c-im-kanton-schwyz-voraussetzungen-und-antrag/",
           "excerpt": "Um eine Niederlassungsbewilligung C im Kanton Schwyz zu erhalten, müssen Grenzgänger bestimmte Voraussetzungen erfüllen und ein bestimmtes Verfahren einhalten.",
           "date": "2026-08-16T11:13:39.319Z"
+        },
+        {
+          "title": "Führerschein im Kanton Schwyz: Verfahren und Prüfungen",
+          "url": "/de/schweiz-artikel/fuehrerschein-schwyz-umschreibung-und-pruefungen/",
+          "excerpt": "So erhalten oder umwandeln Sie Ihren Führerschein im Kanton Schwyz: Einschreibung, theoretische und praktische Prüfungen und Pflichtkurse gemäss Bundesgesetzgebung.",
+          "date": "2026-08-30T01:23:24.295Z"
         },
         {
           "title": "Ausweis B in Schwyz: Beantragung und Erneuerung",
@@ -518,7 +518,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-07T09:54:40.735Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "SZ",
@@ -583,7 +583,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-06T19:25:36.781Z"
+          "updatedAt": "2026-11-07T05:57:27.338Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -635,16 +635,16 @@
           "date": "2026-08-16T14:08:59.768Z"
         },
         {
-          "title": "Permis de conduire dans le canton de Schwytz : procédure et examens",
-          "url": "/fr/articles-suisse/permis-conduire-schwytz-conversion-et-examens/",
-          "excerpt": "Comment obtenir ou convertir le permis dans le canton de Schwytz : inscription, examens théoriques et pratiques et cours obligatoires selon la réglementation fédérale.",
-          "date": "2026-08-30T01:23:24.295Z"
-        },
-        {
           "title": "Permis de séjour C dans le canton de Schwytz : exigences et demande",
           "url": "/fr/articles-suisse/permis-de-sejour-c-dans-le-canton-de-schwytz-exigences-et-demande/",
           "excerpt": "Pour obtenir un permis de séjour C dans le canton de Schwytz, les frontaliers doivent respecter certaines exigences et suivre une procédure spécifique.",
           "date": "2026-08-16T11:13:39.319Z"
+        },
+        {
+          "title": "Permis de conduire dans le canton de Schwytz : procédure et examens",
+          "url": "/fr/articles-suisse/permis-conduire-schwytz-conversion-et-examens/",
+          "excerpt": "Comment obtenir ou convertir le permis dans le canton de Schwytz : inscription, examens théoriques et pratiques et cours obligatoires selon la réglementation fédérale.",
+          "date": "2026-08-30T01:23:24.295Z"
         },
         {
           "title": "Permis B à Schwytz : comment le demander et le renouveler",
@@ -678,7 +678,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-07T09:54:40.735Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

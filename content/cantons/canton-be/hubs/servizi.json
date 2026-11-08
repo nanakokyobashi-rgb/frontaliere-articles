@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-11-07T09:54:40.735Z",
-  "contentHash": "d0bb9ed3d9abfc29a7e7986e451034f947143cf755764afb23752b8c759cd744",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "763ed55775f441342b7fc4cbcadca481c0a4a8adb04b4aed74a71dbd7586cef4",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-06T19:25:36.781Z",
+      "updatedAt": "2026-11-07T05:57:27.338Z",
       "keyFacts": 1
     },
     {
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-11-06T19:25:36.781Z"
+          "updatedAt": "2026-11-07T05:57:27.338Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -150,16 +150,16 @@
           "date": "2026-10-15T02:50:14.192Z"
         },
         {
-          "title": "Licenza di caccia canton Berna requisiti e domanda",
-          "url": "/articoli-svizzera/licenza-caccia-berna-requisiti/",
-          "excerpt": "Scopri come richiedere la licenza di caccia nel Cantone di Berna: verifica competenza, requisiti, esami, specie cacciabili, documenti, scadenze e importi.",
-          "date": "2026-10-14T07:05:00.305Z"
-        },
-        {
           "title": "Autorizzazione edilizia a Berna: requisiti e procedura",
           "url": "/articoli-svizzera/permesso-edilizio-berna-procedura/",
           "excerpt": "Cantone di Berna: quando serve l'autorizzazione edilizia, quali documenti preparare e perché i lavori non possono iniziare prima del permesso.",
           "date": "2026-10-06T01:17:07.729Z"
+        },
+        {
+          "title": "Licenza di caccia canton Berna requisiti e domanda",
+          "url": "/articoli-svizzera/licenza-caccia-berna-requisiti/",
+          "excerpt": "Scopri come richiedere la licenza di caccia nel Cantone di Berna: verifica competenza, requisiti, esami, specie cacciabili, documenti, scadenze e importi.",
+          "date": "2026-10-14T07:05:00.305Z"
         },
         {
           "title": "A scuola solo 4 giorni, l'esperimento (per ora) convince",
@@ -195,7 +195,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-07T09:54:40.735Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "BE",
@@ -270,7 +270,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-11-06T19:25:36.781Z"
+          "updatedAt": "2026-11-07T05:57:27.338Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -323,16 +323,16 @@
           "date": "2026-10-15T02:50:14.192Z"
         },
         {
-          "title": "Hunting license in the canton of Bern: requirements and application",
-          "url": "/en/swiss-articles/hunting-license-bern-requirements/",
-          "excerpt": "Discover how to apply for a hunting license in the Canton of Bern: verify competence, requirements, exams, huntable species, documents, deadlines, and amounts.",
-          "date": "2026-10-14T07:05:00.305Z"
-        },
-        {
           "title": "Building permit in Bern: requirements and procedure",
           "url": "/en/swiss-articles/bern-building-permit-process/",
           "excerpt": "Canton of Bern: when a building permit is required, which documents to prepare, and why work cannot begin before the permit.",
           "date": "2026-10-06T01:17:07.729Z"
+        },
+        {
+          "title": "Hunting license in the canton of Bern: requirements and application",
+          "url": "/en/swiss-articles/hunting-license-bern-requirements/",
+          "excerpt": "Discover how to apply for a hunting license in the Canton of Bern: verify competence, requirements, exams, huntable species, documents, deadlines, and amounts.",
+          "date": "2026-10-14T07:05:00.305Z"
         },
         {
           "title": "At school only 4 days, the experiment (for now) convinces",
@@ -364,7 +364,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-07T09:54:40.735Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "BE",
@@ -439,7 +439,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-11-06T19:25:36.781Z"
+          "updatedAt": "2026-11-07T05:57:27.338Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -492,16 +492,16 @@
           "date": "2026-10-15T02:50:14.192Z"
         },
         {
-          "title": "Jagdlizenz im Kanton Bern: Voraussetzungen und Antrag",
-          "url": "/de/schweiz-artikel/jagdkarte-bern-voraussetzungen/",
-          "excerpt": "Erfahren Sie, wie Sie die Jagdlizenz im Kanton Bern beantragen: Prüfen Sie Zuständigkeit, Voraussetzungen, Prüfungen, jagdbare Arten, Dokumente, Fristen und Beträge.",
-          "date": "2026-10-14T07:05:00.305Z"
-        },
-        {
           "title": "Baubewilligung in Bern: Anforderungen und Verfahren",
           "url": "/de/schweiz-artikel/baubewilligung-bern-verfahren/",
           "excerpt": "Kanton Bern: wann eine Baubewilligung erforderlich ist, welche Unterlagen vorzubereiten sind und warum die Arbeiten nicht vor Erteilung der Bewilligung beginnen dürfen.",
           "date": "2026-10-06T01:17:07.729Z"
+        },
+        {
+          "title": "Jagdlizenz im Kanton Bern: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/jagdkarte-bern-voraussetzungen/",
+          "excerpt": "Erfahren Sie, wie Sie die Jagdlizenz im Kanton Bern beantragen: Prüfen Sie Zuständigkeit, Voraussetzungen, Prüfungen, jagdbare Arten, Dokumente, Fristen und Beträge.",
+          "date": "2026-10-14T07:05:00.305Z"
         },
         {
           "title": "In der Schule nur 4 Tage, überzeugt das Experiment (vorerst)",
@@ -533,7 +533,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-07T09:54:40.735Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "BE",
@@ -608,7 +608,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-11-06T19:25:36.781Z"
+          "updatedAt": "2026-11-07T05:57:27.338Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -661,16 +661,16 @@
           "date": "2026-10-15T02:50:14.192Z"
         },
         {
-          "title": "Permis de chasse dans le canton de Berne : conditions et demande",
-          "url": "/fr/articles-suisse/permis-chasse-berne-conditions/",
-          "excerpt": "Découvrez comment demander le permis de chasse dans le canton de Berne : vérifiez la compétence, les conditions, les examens, les espèces chassables, les documents, les délais et les montants.",
-          "date": "2026-10-14T07:05:00.305Z"
-        },
-        {
           "title": "Autorisation de construire à Berne : exigences et procédure",
           "url": "/fr/articles-suisse/permis-construire-berne-procedure/",
           "excerpt": "Canton de Berne : quand une autorisation de construire est nécessaire, quels documents préparer et pourquoi les travaux ne peuvent pas commencer avant l'obtention de l'autorisation.",
           "date": "2026-10-06T01:17:07.729Z"
+        },
+        {
+          "title": "Permis de chasse dans le canton de Berne : conditions et demande",
+          "url": "/fr/articles-suisse/permis-chasse-berne-conditions/",
+          "excerpt": "Découvrez comment demander le permis de chasse dans le canton de Berne : vérifiez la compétence, les conditions, les examens, les espèces chassables, les documents, les délais et les montants.",
+          "date": "2026-10-14T07:05:00.305Z"
         },
         {
           "title": "À l'école seulement 4 jours, l'expérience (pour l'instant) convainc",
@@ -698,7 +698,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-07T09:54:40.735Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

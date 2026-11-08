@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "db10c0e158ea4021da75c23e7be3103a84dcc9165d16cb5a26fd28e3eb84c9f5",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "efdcb55690ecafdd89b1dedbdb245d4629d29dd9533a4489b80c4670f5c8ee11",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T00:12:54.064Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "12",
+          "value": "10",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,24 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Sushi-Abend im Resort Hof Weissbad",
-              "detail": "Weissbad, Schwende-Rüte",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sushi-abend-im-resort-hof-weissbad/"
-            },
-            {
-              "label": "Stress - Il tour di come guarire",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/eventos/musica/herisau/stress-a-visita-de-como-curar_APwBdRE"
-            },
-            {
-              "label": "Jubiläumsshow der Jugendmusik Heiden",
-              "detail": "Kursaal Heiden, Heiden — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/music/heiden/jubilaeumsshow-der-jugendmusik-heiden_Ai2NFLf"
-            },
             {
               "label": "Arte e musica: Louis Christ, alias Louis de Saint-Gall",
               "detail": "Haus zur Stickerei, Heiden",
@@ -91,11 +73,29 @@
               "detail": "Assel-Keller, Schönengrund",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
+            },
+            {
+              "label": "Ein Abend mit Joachim B. Schmidt",
+              "detail": "Appenzell",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ein-abend-mit-joachim-b-schmidt/"
+            },
+            {
+              "label": "Starbugs Comedy - Showtime",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
+            },
+            {
+              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
+              "detail": "Gonten",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "12",
+          "value": "10",
           "note": "from the site’s events calendar"
         }
       ],
@@ -143,24 +143,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Sushi-Abend im Resort Hof Weissbad",
-              "detail": "Weissbad, Schwende-Rüte",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sushi-abend-im-resort-hof-weissbad/"
-            },
-            {
-              "label": "Stress - The tour of how to heal",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/eventos/musica/herisau/stress-a-visita-de-como-curar_APwBdRE"
-            },
-            {
-              "label": "Jubiläumsshow der Jugendmusik Heiden",
-              "detail": "Kursaal Heiden, Heiden — ongoing, last day: 7 November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/music/heiden/jubilaeumsshow-der-jugendmusik-heiden_Ai2NFLf"
-            },
             {
               "label": "Art & Music: Louis Christ, also known as Louis de Saint-Gall",
               "detail": "Haus zur Stickerei, Heiden",
@@ -202,11 +184,29 @@
               "detail": "Assel-Keller, Schönengrund",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
+            },
+            {
+              "label": "Ein Abend mit Joachim B. Schmidt",
+              "detail": "Appenzell",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ein-abend-mit-joachim-b-schmidt/"
+            },
+            {
+              "label": "Starbugs Comedy - Showtime",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
+            },
+            {
+              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
+              "detail": "Gonten",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "12",
+          "value": "10",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -254,24 +254,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Sushi-Abend im Resort Hof Weissbad",
-              "detail": "Weissbad, Schwende-Rüte",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sushi-abend-im-resort-hof-weissbad/"
-            },
-            {
-              "label": "Stress - Die Tour, wie man heilt",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/eventos/musica/herisau/stress-a-visita-de-como-curar_APwBdRE"
-            },
-            {
-              "label": "Jubiläumsshow der Jugendmusik Heiden",
-              "detail": "Kursaal Heiden, Heiden — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/music/heiden/jubilaeumsshow-der-jugendmusik-heiden_Ai2NFLf"
-            },
             {
               "label": "Kunst & Musik: Louis Christ alias Louis de Saint-Gall",
               "detail": "Haus zur Stickerei, Heiden",
@@ -313,11 +295,29 @@
               "detail": "Assel-Keller, Schönengrund",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
+            },
+            {
+              "label": "Ein Abend mit Joachim B. Schmidt",
+              "detail": "Appenzell",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ein-abend-mit-joachim-b-schmidt/"
+            },
+            {
+              "label": "Starbugs Comedy - Showtime",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
+            },
+            {
+              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
+              "detail": "Gonten",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "12",
+          "value": "10",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -365,24 +365,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Sushi-Abend im Resort Hof Weissbad",
-              "detail": "Weissbad, Schwende-Rüte",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sushi-abend-im-resort-hof-weissbad/"
-            },
-            {
-              "label": "Stress - Le tour de la façon de guérir",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/eventos/musica/herisau/stress-a-visita-de-como-curar_APwBdRE"
-            },
-            {
-              "label": "Jubiläumsshow der Jugendmusik Heiden",
-              "detail": "Kursaal Heiden, Heiden — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/music/heiden/jubilaeumsshow-der-jugendmusik-heiden_Ai2NFLf"
-            },
             {
               "label": "Art et musique : Louis Christ, alias Louis de Saint-Gall",
               "detail": "Haus zur Stickerei, Heiden",
@@ -424,11 +406,29 @@
               "detail": "Assel-Keller, Schönengrund",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
+            },
+            {
+              "label": "Ein Abend mit Joachim B. Schmidt",
+              "detail": "Appenzell",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ein-abend-mit-joachim-b-schmidt/"
+            },
+            {
+              "label": "Comédie Starbugs - Showtime",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
+            },
+            {
+              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
+              "detail": "Gonten",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

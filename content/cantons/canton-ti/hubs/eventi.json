@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "7e125031d505d1d66fd80b2d04579f8ad8841bf1da132a62b8dd36bc577cf672",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "a13de5393fefc4cdcf35e8090ba69a6096996cd2f25bbd66b01c90149e060e49",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T13:54:16.445Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "231",
+          "value": "233",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Giornata per la popolazione",
-              "detail": "La Filanda, Mendrisio",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64827"
+              "label": "Gyotaku - Tracce di pesci",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/61721"
             },
             {
-              "label": "High Season Closing",
-              "detail": "Fiore di pietra, Mendrisio",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64176"
+              "label": "AperòJazz - JazzClub Verbano",
+              "detail": "Ristorante Teatro Dimitri, Locarno",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64823"
             },
             {
-              "label": "Experience the Middle Ages in Bellinzona: the tour",
-              "detail": "Infopoint, Bellinzona",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/61639"
+              "label": "Matinée",
+              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64801"
             },
             {
-              "label": "Il mercatino solidale benefico di Natale di Mario",
-              "detail": "Via Lavizzari 10, Bellinzona",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64830"
+              "label": "C'era una volta il tempo... per imparare a memoria",
+              "detail": "Domus Poetica, Bellinzona",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64768"
             },
             {
-              "label": "Mercato autunnale de \"Ul Marchièt da Lambro\"",
-              "detail": "Piazza da Cornòn, Dalpe",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64876"
+              "label": "Tombola di Novembre",
+              "detail": "Locali Protezione Civile, Mendrisio",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64814"
             },
             {
-              "label": "Aline d'Auria - Mai più, tra poco, spesso, un tempo.",
-              "detail": "Casa Rotonda",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64617"
+              "label": "Conferenza di Franco Lurà e assemblea d'autunno",
+              "detail": "Palazzo dei Landfogti",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64829"
             },
             {
-              "label": "Planetario",
-              "detail": "L'ideatorio, Lugano",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/63445"
+              "label": "Colonne sonore dell'immaginario",
+              "detail": "Villa Negroni, Vezia",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64784"
             },
             {
-              "label": "Robot - Esposizione interattiva",
-              "detail": "L'ideatorio, Lugano",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/63442"
+              "label": "Galà di beneficienza - Clown senza frontiere CH",
+              "detail": "Teatro Dimitri, Locarno",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64756"
             },
             {
-              "label": "Tana ludica",
-              "detail": "Fisiodog, Lamone",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64288"
+              "label": "Il Piccolo Principe e i suoi amici",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/63718"
             },
             {
-              "label": "Atelier – Cézanne: tocchi di colore",
-              "detail": "Museo in erba, Lugano",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64853"
+              "label": "Le quattro stagioni",
+              "detail": "Teatro del gatto, Ascona",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64774"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "231",
+          "value": "233",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Community Day",
-              "detail": "La Filanda, Mendrisio",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64827"
+              "label": "Gyotaku - Fish Trails",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/61721"
             },
             {
-              "label": "High Season Closure",
-              "detail": "Fiore di pietra, Mendrisio",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64176"
+              "label": "ApòJazz - JazzClub Verbano",
+              "detail": "Ristorante Teatro Dimitri, Locarno",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64823"
             },
             {
-              "label": "Eper Experience the Middle Ages in Bellinzona: the tour",
-              "detail": "Infopoint, Bellinzona",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/61639"
+              "label": "Matinee",
+              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64801"
             },
             {
-              "label": "Mario's Christmas charity market",
-              "detail": "Via Lavizzari 10, Bellinzona",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64830"
+              "label": "Once upon a time there was time... to learn by heart",
+              "detail": "Domus Poetica, Bellinzona",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64768"
             },
             {
-              "label": "Autumn market of \"Ul Marchièt da Lambro\"",
-              "detail": "Piazza da Cornòn, Dalpe",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64876"
+              "label": "November Bingo",
+              "detail": "Locali Protezione Civile, Mendrisio",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64814"
             },
             {
-              "label": "Aline d 'Auria - Never again, soon, often, once.",
-              "detail": "Casa Rotonda",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64617"
+              "label": "Conference by Franco Lurà and autumn assembly",
+              "detail": "Palazzo dei Landfogti",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64829"
             },
             {
-              "label": "Planetarium",
-              "detail": "L'ideatorio, Lugano",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/63445"
+              "label": "Soundtracks of the Imagination",
+              "detail": "Villa Negroni, Vezia",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64784"
             },
             {
-              "label": "Robot - Interactive Display",
-              "detail": "L'ideatorio, Lugano",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/63442"
+              "label": "Charity Gala - Clowns Without Borders CH",
+              "detail": "Teatro Dimitri, Locarno",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64756"
             },
             {
-              "label": "Playful den",
-              "detail": "Fisiodog, Lamone",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64288"
+              "label": "The Little Prince and his friends",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/63718"
             },
             {
-              "label": "Atelier – Cézanne: touches of color",
-              "detail": "Museo in erba, Lugano",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64853"
+              "label": "The Four Seasons",
+              "detail": "Teatro del gatto, Ascona",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64774"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "231",
+          "value": "233",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Tag der Bevölkerung",
-              "detail": "La Filanda, Mendrisio",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64827"
+              "label": "Gyotaku - Spuren von Fischen",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/61721"
             },
             {
-              "label": "Hochsaisonabschluss",
-              "detail": "Fiore di pietra, Mendrisio",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64176"
+              "label": "AperòJazz – JazzClub Verbano",
+              "detail": "Ristorante Teatro Dimitri, Locarno",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64823"
             },
             {
-              "label": "Experience the Middle Ages in Bellinzona: die Tour",
-              "detail": "Infopoint, Bellinzona",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/61639"
+              "label": "Matinee",
+              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64801"
             },
             {
-              "label": "Marios Weihnachts-Wohltätigkeitsmarkt",
-              "detail": "Via Lavizzari 10, Bellinzona",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64830"
+              "label": "Es war einmal eine Zeit, da war Zeit... um auswendig zu lernen",
+              "detail": "Domus Poetica, Bellinzona",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64768"
             },
             {
-              "label": "Herbstmarkt von \"Ul Marchièt da Lambro\"",
-              "detail": "Piazza da Cornòn, Dalpe",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64876"
+              "label": "November-Bingo",
+              "detail": "Locali Protezione Civile, Mendrisio",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64814"
             },
             {
-              "label": "Aline d 'Auria - Nie wieder, bald, oft, einst.",
-              "detail": "Casa Rotonda",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64617"
+              "label": "Konferenz von Franco Lurà und Herbstversammlung",
+              "detail": "Palazzo dei Landfogti",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64829"
             },
             {
-              "label": "Planetarium",
-              "detail": "L'ideatorio, Lugano",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/63445"
+              "label": "Soundtracks der Fantasiewelt",
+              "detail": "Villa Negroni, Vezia",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64784"
             },
             {
-              "label": "Roboter - Interaktive Ausstellung",
-              "detail": "L'ideatorio, Lugano",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/63442"
+              "label": "Wohltätigkeitsgala – Clowns ohne Grenzen CH",
+              "detail": "Teatro Dimitri, Locarno",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64756"
             },
             {
-              "label": "Spielhöhle",
-              "detail": "Fisiodog, Lamone",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64288"
+              "label": "Der kleine Prinz und seine Freunde",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/63718"
             },
             {
-              "label": "Atelier – Cézanne: Farbakzente",
-              "detail": "Museo in erba, Lugano",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64853"
+              "label": "Die vier Jahreszeiten",
+              "detail": "Teatro del gatto, Ascona",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64774"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "231",
+          "value": "233",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Journée ouverte au public",
-              "detail": "La Filanda, Mendrisio",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64827"
+              "label": "Gyotaku - Traces de poissons",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/61721"
             },
             {
-              "label": "Fermeture haute saison",
-              "detail": "Fiore di pietra, Mendrisio",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64176"
+              "label": "ApòJazz - JazzClub Verbano",
+              "detail": "Ristorante Teatro Dimitri, Locarno",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64823"
             },
             {
-              "label": "Experience the Middle Ages in Bellinzona : the tour",
-              "detail": "Infopoint, Bellinzona",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/61639"
+              "label": "- jusqu'à la levée du couvre-feu. - Matinées ?",
+              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64801"
             },
             {
-              "label": "Le marché caritatif de Noël de Mario",
-              "detail": "Via Lavizzari 10, Bellinzona",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64830"
+              "label": "Il était une fois un temps… pour apprendre par cœur",
+              "detail": "Domus Poetica, Bellinzona",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64768"
             },
             {
-              "label": "Marché d’automne de « Ul Marchièt da Lambro »",
-              "detail": "Piazza da Cornòn, Dalpe",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64876"
+              "label": "Tombola de novembre",
+              "detail": "Locali Protezione Civile, Mendrisio",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64814"
             },
             {
-              "label": "Aline d'Auria - Plus jamais, bientôt, souvent, depuis longtemps.",
-              "detail": "Casa Rotonda",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64617"
+              "label": "Conférence de Franco Lurà et assemblée d’automne",
+              "detail": "Palazzo dei Landfogti",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64829"
             },
             {
-              "label": "Planétarium",
-              "detail": "L'ideatorio, Lugano",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/63445"
+              "label": "Bandes originales de l'imaginaire",
+              "detail": "Villa Negroni, Vezia",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64784"
             },
             {
-              "label": "Robot - Exposition interactive",
-              "detail": "L'ideatorio, Lugano",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/63442"
+              "label": "Gala de charité - Clowns sans frontières CH",
+              "detail": "Teatro Dimitri, Locarno",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64756"
             },
             {
-              "label": "Tana ludique",
-              "detail": "Fisiodog, Lamone",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64288"
+              "label": "Le Petit Prince et ses amis",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/63718"
             },
             {
-              "label": "Atelier – Cézanne : touches de couleur",
-              "detail": "Museo in erba, Lugano",
-              "date": "2026-11-07",
-              "url": "https://www.tio.ch/agenda/day/20261107/64853"
+              "label": "Les quatre saisons",
+              "detail": "Teatro del gatto, Ascona",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64774"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

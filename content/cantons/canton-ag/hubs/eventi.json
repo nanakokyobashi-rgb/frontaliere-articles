@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "9173a82cf15b0fb8c68d4668d3c109cc8f7a8ba09224a840d304f6163b289228",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "3f5af98f0aba0d506f8e384c1cc2461ccb58e37123932bc82bd4ea4f8748a3ce",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T00:12:54.064Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "111",
+          "value": "107",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "6. Schweizer Samichlaus-Synode",
-              "detail": "Wislikofen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/6-schweizer-samichlaussynode/"
+              "label": "X-Mas Repro Flohmarkt",
+              "detail": "Muri AG",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/x-mas-repro-flohmarkt/"
             },
             {
-              "label": "KI erleben",
+              "label": "Höhlen im Kalkstein und weitere Karstphänomene",
+              "detail": "5080 Laufenburg, Laufenburg",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hoehlen-im-kalkstein-und-weitere-karstphaenomene/"
+            },
+            {
+              "label": "Selbstfürsorge alltagstauglich leben",
+              "detail": "Kompetenzzentrum Frau und Familie, Baden",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/selbstfuersorge-alltagstauglich-leben/"
+            },
+            {
+              "label": "Walk-in Closet Kleidertauschbörse",
+              "detail": "Bremgarten",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/walk-in-closet-kleidertauschboerse-1/"
+            },
+            {
+              "label": "Öffentliche Führung - Museum für medizinhistorische Bücher Muri",
+              "detail": "Muri AG",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-museum-fuer-medizinhistorische-buecher-muri-10/"
+            },
+            {
+              "label": "Musik-Performance «Reflection»",
               "detail": "Baden",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-erleben/"
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musik-performance-reflection/"
+            },
+            {
+              "label": "Archspire (CA)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/archspire-ca_ANAm3Zh"
+            },
+            {
+              "label": "Patricia Brennan Septet",
+              "detail": "Pflegi Muri",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/patricia-brennan-septet_AxjmEks"
             },
             {
               "label": "Herbstdegustation mit Treberwürsten",
-              "detail": "5234 Villigen, Villigen",
-              "date": "2026-11-07",
+              "detail": "5234 Villigen, Villigen — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstdegustation-mit-treberwuersten/"
             },
             {
-              "label": "KURS: SCHNEESTERN – ausgebucht, WARTELISTE",
-              "detail": "Wohlen AG",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-schneestern-ausgebucht-warteliste/"
-            },
-            {
-              "label": "Altstadtrundgang",
-              "detail": "Aarau",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altstadtrundgang-13/"
-            },
-            {
-              "label": "Jahreskonzert mit Theater",
-              "detail": "Mehrzweckhalle Chrüzlibachtal",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rekingen-ag/jahreskonzert-mit-theater_AuQFGRF"
-            },
-            {
-              "label": "Mystischer Streifzug durch dunkle Gassen - Kindertour",
-              "detail": "Laufenburg",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mystischer-streifzug-durch-dunkle-gassen-kindertour/"
-            },
-            {
-              "label": "Michel Gammenthaler - Impossible",
-              "detail": "Neue Turnhalle, Bergdietikon",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/michel-gammenthaler-impossible-4/"
-            },
-            {
-              "label": "Salsa & Bachata Social",
-              "detail": "AUREA, Rheinfelden",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/salsa-und-bachata-social_Aeh9Kth"
-            },
-            {
-              "label": "Simon Enzler",
-              "detail": "Wohlen AG",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/simon-enzler-24/"
+              "label": "TGS - Aufführung \"Hesch en Vogel\"",
+              "detail": "Spreitenbach — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "111",
+          "value": "107",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "6. Schweizer Samichlaus-Synode",
-              "detail": "Wislikofen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/6-schweizer-samichlaussynode/"
+              "label": "X-Mas Repro Flohmarkt",
+              "detail": "Muri AG",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/x-mas-repro-flohmarkt/"
             },
             {
-              "label": "KI erleben",
+              "label": "Höhlen im Kalkstein und weitere Karstphänomene",
+              "detail": "5080 Laufenburg, Laufenburg",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hoehlen-im-kalkstein-und-weitere-karstphaenomene/"
+            },
+            {
+              "label": "Selbstfürsorge alltagstauglich leben",
+              "detail": "Kompetenzzentrum Frau und Familie, Baden",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/selbstfuersorge-alltagstauglich-leben/"
+            },
+            {
+              "label": "Walk-in Closet Kleidertauschbörse",
+              "detail": "Bremgarten",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/walk-in-closet-kleidertauschboerse-1/"
+            },
+            {
+              "label": "Öffentliche Führung - Museum für medizinhistorische Bücher Muri",
+              "detail": "Muri AG",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-museum-fuer-medizinhistorische-buecher-muri-10/"
+            },
+            {
+              "label": "Musik-Performance «Reflection»",
               "detail": "Baden",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-erleben/"
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musik-performance-reflection/"
+            },
+            {
+              "label": "Archspire (CA)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/archspire-ca_ANAm3Zh"
+            },
+            {
+              "label": "Patricia Brennan Septet",
+              "detail": "Pflegi Muri",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/patricia-brennan-septet_AxjmEks"
             },
             {
               "label": "Herbstdegustation mit Treberwürsten",
-              "detail": "5234 Villigen, Villigen",
-              "date": "2026-11-07",
+              "detail": "5234 Villigen, Villigen — ongoing, last day: 8 November 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstdegustation-mit-treberwuersten/"
             },
             {
-              "label": "KURS: SCHNEESTERN – ausgebucht, WARTELISTE",
-              "detail": "Wohlen AG",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-schneestern-ausgebucht-warteliste/"
-            },
-            {
-              "label": "Altstadtrundgang",
-              "detail": "Aarau",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altstadtrundgang-13/"
-            },
-            {
-              "label": "Jahreskonzert mit Theater",
-              "detail": "Mehrzweckhalle Chrüzlibachtal",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rekingen-ag/jahreskonzert-mit-theater_AuQFGRF"
-            },
-            {
-              "label": "Mystischer Streifzug durch dunkle Gassen - Kindertour",
-              "detail": "Laufenburg",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mystischer-streifzug-durch-dunkle-gassen-kindertour/"
-            },
-            {
-              "label": "Michel Gammenthaler - Impossible",
-              "detail": "Neue Turnhalle, Bergdietikon",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/michel-gammenthaler-impossible-4/"
-            },
-            {
-              "label": "Salsa & Bachata Social",
-              "detail": "AUREA, Rheinfelden",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/salsa-und-bachata-social_Aeh9Kth"
-            },
-            {
-              "label": "Simon Enzler",
-              "detail": "Wohlen AG",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/simon-enzler-24/"
+              "label": "TGS - Aufführung \"Hesch en Vogel\"",
+              "detail": "Spreitenbach — ongoing, last day: 14 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "111",
+          "value": "107",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "6. Schweizer Samichlaus-Synode",
-              "detail": "Wislikofen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/6-schweizer-samichlaussynode/"
+              "label": "X-Mas Repro Flohmarkt",
+              "detail": "Muri AG",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/x-mas-repro-flohmarkt/"
             },
             {
-              "label": "KI erleben",
+              "label": "Höhlen im Kalkstein und weitere Karstphänomene",
+              "detail": "5080 Laufenburg, Laufenburg",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hoehlen-im-kalkstein-und-weitere-karstphaenomene/"
+            },
+            {
+              "label": "Selbstfürsorge alltagstauglich leben",
+              "detail": "Kompetenzzentrum Frau und Familie, Baden",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/selbstfuersorge-alltagstauglich-leben/"
+            },
+            {
+              "label": "Walk-in Closet Kleidertauschbörse",
+              "detail": "Bremgarten",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/walk-in-closet-kleidertauschboerse-1/"
+            },
+            {
+              "label": "Öffentliche Führung - Museum für medizinhistorische Bücher Muri",
+              "detail": "Muri AG",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-museum-fuer-medizinhistorische-buecher-muri-10/"
+            },
+            {
+              "label": "Musik-Performance «Reflection»",
               "detail": "Baden",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-erleben/"
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musik-performance-reflection/"
+            },
+            {
+              "label": "Archspire (CA)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/archspire-ca_ANAm3Zh"
+            },
+            {
+              "label": "Patricia Brennan Septet",
+              "detail": "Pflegi Muri",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/patricia-brennan-septet_AxjmEks"
             },
             {
               "label": "Herbstdegustation mit Treberwürsten",
-              "detail": "5234 Villigen, Villigen",
-              "date": "2026-11-07",
+              "detail": "5234 Villigen, Villigen — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstdegustation-mit-treberwuersten/"
             },
             {
-              "label": "KURS: SCHNEESTERN – ausgebucht, WARTELISTE",
-              "detail": "Wohlen AG",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-schneestern-ausgebucht-warteliste/"
-            },
-            {
-              "label": "Altstadtrundgang",
-              "detail": "Aarau",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altstadtrundgang-13/"
-            },
-            {
-              "label": "Jahreskonzert mit Theater",
-              "detail": "Mehrzweckhalle Chrüzlibachtal",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rekingen-ag/jahreskonzert-mit-theater_AuQFGRF"
-            },
-            {
-              "label": "Mystischer Streifzug durch dunkle Gassen - Kindertour",
-              "detail": "Laufenburg",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mystischer-streifzug-durch-dunkle-gassen-kindertour/"
-            },
-            {
-              "label": "Michel Gammenthaler - Impossible",
-              "detail": "Neue Turnhalle, Bergdietikon",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/michel-gammenthaler-impossible-4/"
-            },
-            {
-              "label": "Salsa & Bachata Social",
-              "detail": "AUREA, Rheinfelden",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/salsa-und-bachata-social_Aeh9Kth"
-            },
-            {
-              "label": "Simon Enzler",
-              "detail": "Wohlen AG",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/simon-enzler-24/"
+              "label": "TGS - Aufführung \"Hesch en Vogel\"",
+              "detail": "Spreitenbach — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "111",
+          "value": "107",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "6. Schweizer Samichlaus-Synode",
-              "detail": "Wislikofen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/6-schweizer-samichlaussynode/"
+              "label": "X-Mas Repro Flohmarkt",
+              "detail": "Muri AG",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/x-mas-repro-flohmarkt/"
             },
             {
-              "label": "KI erleben",
+              "label": "Höhlen im Kalkstein und weitere Karstphänomene",
+              "detail": "5080 Laufenburg, Laufenburg",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hoehlen-im-kalkstein-und-weitere-karstphaenomene/"
+            },
+            {
+              "label": "Selbstfürsorge alltagstauglich leben",
+              "detail": "Kompetenzzentrum Frau und Familie, Baden",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/selbstfuersorge-alltagstauglich-leben/"
+            },
+            {
+              "label": "Walk-in Closet Kleidertauschbörse",
+              "detail": "Bremgarten",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/walk-in-closet-kleidertauschboerse-1/"
+            },
+            {
+              "label": "Öffentliche Führung - Museum für medizinhistorische Bücher Muri",
+              "detail": "Muri AG",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-museum-fuer-medizinhistorische-buecher-muri-10/"
+            },
+            {
+              "label": "Musik-Performance «Reflection»",
               "detail": "Baden",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-erleben/"
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musik-performance-reflection/"
+            },
+            {
+              "label": "Archspire (CA)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/archspire-ca_ANAm3Zh"
+            },
+            {
+              "label": "Patricia Brennan Septet",
+              "detail": "Pflegi Muri",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/patricia-brennan-septet_AxjmEks"
             },
             {
               "label": "Herbstdegustation mit Treberwürsten",
-              "detail": "5234 Villigen, Villigen",
-              "date": "2026-11-07",
+              "detail": "5234 Villigen, Villigen — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstdegustation-mit-treberwuersten/"
             },
             {
-              "label": "KURS: SCHNEESTERN – ausgebucht, WARTELISTE",
-              "detail": "Wohlen AG",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-schneestern-ausgebucht-warteliste/"
-            },
-            {
-              "label": "Altstadtrundgang",
-              "detail": "Aarau",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altstadtrundgang-13/"
-            },
-            {
-              "label": "Jahreskonzert mit Theater",
-              "detail": "Mehrzweckhalle Chrüzlibachtal",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rekingen-ag/jahreskonzert-mit-theater_AuQFGRF"
-            },
-            {
-              "label": "Mystischer Streifzug durch dunkle Gassen - Kindertour",
-              "detail": "Laufenburg",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mystischer-streifzug-durch-dunkle-gassen-kindertour/"
-            },
-            {
-              "label": "Michel Gammenthaler - Impossible",
-              "detail": "Neue Turnhalle, Bergdietikon",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/michel-gammenthaler-impossible-4/"
-            },
-            {
-              "label": "Salsa & Bachata Social",
-              "detail": "AUREA, Rheinfelden",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/salsa-und-bachata-social_Aeh9Kth"
-            },
-            {
-              "label": "Simon Enzler",
-              "detail": "Wohlen AG",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/simon-enzler-24/"
+              "label": "TGS - Aufführung \"Hesch en Vogel\"",
+              "detail": "Spreitenbach — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

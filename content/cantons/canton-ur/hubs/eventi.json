@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "cf298da9aaa22ee8ea0d0be097bbd6b3cb4f75ec04319c4ae73d91788e18e11e",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "af9c48e76794f62f5b93785f629147b4bf774117b4294f9f6d4b88b8f52848af",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T00:12:54.064Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "17",
+          "value": "14",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,34 +33,10 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Cardmania",
-              "detail": "Schattdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cardmania/"
-            },
-            {
               "label": "Örgeliplausch im Bernerstil",
-              "detail": "Haus der Volksmusik",
-              "date": "2026-11-07",
+              "detail": "Haus der Volksmusik — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oergeliplausch-im-bernerstil/"
-            },
-            {
-              "label": "Spielnacht Ludothek Altdorf",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielnacht-ludothek-altdorf/"
-            },
-            {
-              "label": "gegenPOL 24 Stunden",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gegenpol-24-stunden/"
-            },
-            {
-              "label": "Konzert Berner Örgeliplausch",
-              "detail": "Altdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-berner-oergeliplausch/"
             },
             {
               "label": "Digital sicher? - Wie wir uns vor Gefahren im Netz schützen",
@@ -91,11 +67,35 @@
               "detail": "Altdorf",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-verlag-bildfluss-mit-christof-hirtler-und-christian-de-simoni/"
+            },
+            {
+              "label": "Gabirano",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gabirano/"
+            },
+            {
+              "label": "Oldies-Disco",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-disco-1/"
+            },
+            {
+              "label": "Altdorfer Beenälisuppä",
+              "detail": "Altdorf",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altdorfer-beenaelisuppae/"
+            },
+            {
+              "label": "Pirmin Huber Swiss Folk",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "17",
+          "value": "14",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,34 +138,10 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Cardmania",
-              "detail": "Schattdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cardmania/"
-            },
-            {
               "label": "Örgeliplausch im Bernerstil",
-              "detail": "Haus der Volksmusik",
-              "date": "2026-11-07",
+              "detail": "Haus der Volksmusik — ongoing, last day: 8 November 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oergeliplausch-im-bernerstil/"
-            },
-            {
-              "label": "Spielnacht Ludothek Altdorf",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielnacht-ludothek-altdorf/"
-            },
-            {
-              "label": "gegenPOL 24 Stunden",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gegenpol-24-stunden/"
-            },
-            {
-              "label": "Konzert Berner Örgeliplausch",
-              "detail": "Altdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-berner-oergeliplausch/"
             },
             {
               "label": "Digital sicher? - Wie wir uns vor Gefahren im Netz schützen",
@@ -196,11 +172,35 @@
               "detail": "Altdorf",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-verlag-bildfluss-mit-christof-hirtler-und-christian-de-simoni/"
+            },
+            {
+              "label": "Gabirano",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gabirano/"
+            },
+            {
+              "label": "Oldies-Disco",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-disco-1/"
+            },
+            {
+              "label": "Altdorfer Beenälisuppä",
+              "detail": "Altdorf",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altdorfer-beenaelisuppae/"
+            },
+            {
+              "label": "Pirmin Huber Swiss Folk",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "17",
+          "value": "14",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,34 +243,10 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Cardmania",
-              "detail": "Schattdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cardmania/"
-            },
-            {
               "label": "Örgeliplausch im Bernerstil",
-              "detail": "Haus der Volksmusik",
-              "date": "2026-11-07",
+              "detail": "Haus der Volksmusik — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oergeliplausch-im-bernerstil/"
-            },
-            {
-              "label": "Spielnacht Ludothek Altdorf",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielnacht-ludothek-altdorf/"
-            },
-            {
-              "label": "gegenPOL 24 Stunden",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gegenpol-24-stunden/"
-            },
-            {
-              "label": "Konzert Berner Örgeliplausch",
-              "detail": "Altdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-berner-oergeliplausch/"
             },
             {
               "label": "Digital sicher? - Wie wir uns vor Gefahren im Netz schützen",
@@ -301,11 +277,35 @@
               "detail": "Altdorf",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-verlag-bildfluss-mit-christof-hirtler-und-christian-de-simoni/"
+            },
+            {
+              "label": "Gabirano",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gabirano/"
+            },
+            {
+              "label": "Oldies-Disco",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-disco-1/"
+            },
+            {
+              "label": "Altdorfer Beenälisuppä",
+              "detail": "Altdorf",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altdorfer-beenaelisuppae/"
+            },
+            {
+              "label": "Pirmin Huber Swiss Folk",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "17",
+          "value": "14",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,34 +348,10 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Cardmania",
-              "detail": "Schattdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cardmania/"
-            },
-            {
               "label": "Örgeliplausch im Bernerstil",
-              "detail": "Haus der Volksmusik",
-              "date": "2026-11-07",
+              "detail": "Haus der Volksmusik — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oergeliplausch-im-bernerstil/"
-            },
-            {
-              "label": "Spielnacht Ludothek Altdorf",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielnacht-ludothek-altdorf/"
-            },
-            {
-              "label": "gegenPOL 24 Stunden",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gegenpol-24-stunden/"
-            },
-            {
-              "label": "Konzert Berner Örgeliplausch",
-              "detail": "Altdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-berner-oergeliplausch/"
             },
             {
               "label": "Digital sicher? - Wie wir uns vor Gefahren im Netz schützen",
@@ -406,11 +382,35 @@
               "detail": "Altdorf",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-verlag-bildfluss-mit-christof-hirtler-und-christian-de-simoni/"
+            },
+            {
+              "label": "Gabirano",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gabirano/"
+            },
+            {
+              "label": "Oldies-Disco",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-disco-1/"
+            },
+            {
+              "label": "Altdorfer Beenälisuppä",
+              "detail": "Altdorf",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altdorfer-beenaelisuppae/"
+            },
+            {
+              "label": "Pirmin Huber Swiss Folk",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

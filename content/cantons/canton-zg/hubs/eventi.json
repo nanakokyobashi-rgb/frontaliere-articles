@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "a2ddb50c84a7dc8a24c2df402b2eebf27b12c36cc418c25b2d03318993ca3f76",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "1da5361e4075ad72111043343d01e22f1aa251710c067d641e05bf3731a270a3",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T00:12:54.064Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "28",
+          "value": "26",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,39 +33,21 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Kunstbesuch",
-              "detail": "Primarschulhaus Kirchbühl 2, Cham",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/cham/kunstbesuch_A81PFFF"
-            },
-            {
-              "label": "ECHO - Gemeinschaftskonzert Blockflötenorchester Belflauto & Soprabasso",
-              "detail": "Kirche St. Johannes",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/echo-gemeinschaftskonzert-blockfloetenorchester-belflauto-und-soprabasso_AYUtsxc"
-            },
-            {
-              "label": "ECHO - Gemeinschaftskonzert Blockflötenorchester Belflauto & Soprabasso",
-              "detail": "Zug",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/echo-gemeinschaftskonzert-blockfloetenorchester-belflauto-soprabasso/"
-            },
-            {
               "label": "Taschenlampenführung durch die Burg",
               "detail": "Zug — in corso, ultimo giorno: 13 novembre 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
             },
             {
               "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenführung für Erwachsene",
               "detail": "Museum Burg Zug, Zug — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — in corso, ultimo giorno: 10 novembre 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
@@ -91,11 +73,29 @@
               "detail": "Zugo",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brevi-visite-guidate-allora-di-pranzo/"
+            },
+            {
+              "label": "more than music cham.",
+              "detail": "Röm.-kath.Pfarreiheim St. Jakob, Cham",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/more-than-music-cham_AQFw8Gm"
+            },
+            {
+              "label": "Der Besuch der alten Dame",
+              "detail": "Chollerhalle, Zug",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-besuch-der-alten-dame-2/"
+            },
+            {
+              "label": "Benefizkonzert",
+              "detail": "Jugendkulturzentrum Industrie45",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/benefizkonzert_AreUZ5c"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "ZG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "28",
+          "value": "26",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,39 +138,21 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Kunstbesuch",
-              "detail": "Primarschulhaus Kirchbühl 2, Cham",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/cham/kunstbesuch_A81PFFF"
-            },
-            {
-              "label": "ECHO - Gemeinschaftskonzert Blockflötenorchester Belflute & Soprabasso",
-              "detail": "Kirche St. Johannes",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/echo-gemeinschaftskonzert-blockfloetenorchester-belflauto-und-soprabasso_AYUtsxc"
-            },
-            {
-              "label": "ECHO - Gemeinschaftskonzert Blockflötenorchester Belflauto & Soprabasso",
-              "detail": "Zug",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/echo-gemeinschaftskonzert-blockfloetenorchester-belflauto-soprabasso/"
-            },
-            {
               "label": "Taschenlampenführung durch die Burg",
               "detail": "Zug — ongoing, last day: 13 November 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
             },
             {
               "label": "Gallows, Wheel, and Pyre: A Flashlight Tour for Adults",
               "detail": "Museum Burg Zug, Zug — ongoing, last day: 27 November 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — ongoing, last day: 10 November 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
@@ -196,11 +178,29 @@
               "detail": "Zugo",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brevi-visite-guidate-allora-di-pranzo/"
+            },
+            {
+              "label": "more than music cham.",
+              "detail": "Röm.-kath.Pfarreiheim St. Jakob, Cham",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/more-than-music-cham_AQFw8Gm"
+            },
+            {
+              "label": "Der Besuch der alten Dame",
+              "detail": "Chollerhalle, Zug",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-besuch-der-alten-dame-2/"
+            },
+            {
+              "label": "Benefizkonzert",
+              "detail": "Jugendkulturzentrum Industrie45",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/benefizkonzert_AreUZ5c"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "ZG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "28",
+          "value": "26",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,39 +243,21 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Kunstbesuch",
-              "detail": "Primarschulhaus Kirchbühl 2, Cham",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/cham/kunstbesuch_A81PFFF"
-            },
-            {
-              "label": "Echo - Gemeinschaftskonzert Blockflötenorchester Belflauto & Soprabass",
-              "detail": "Kirche St. Johannes",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/echo-gemeinschaftskonzert-blockfloetenorchester-belflauto-und-soprabasso_AYUtsxc"
-            },
-            {
-              "label": "ECHO - Gemeinschaftskonzert Blockflötenorchester Belflauto & Soprabasso",
-              "detail": "Zug",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/echo-gemeinschaftskonzert-blockfloetenorchester-belflauto-soprabasso/"
-            },
-            {
               "label": "Taschenlampenführung durch die Burg",
               "detail": "Zug — läuft, letzter Tag: 13. November 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
             },
             {
               "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenf Acrymmhrung f acrymmr er Acrymmachsene",
               "detail": "Museum Burg Zug, Zug — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — läuft, letzter Tag: 10. November 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
@@ -301,11 +283,29 @@
               "detail": "Zugo",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brevi-visite-guidate-allora-di-pranzo/"
+            },
+            {
+              "label": "more than music cham.",
+              "detail": "Röm.-kath.Pfarreiheim St. Jakob, Cham",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/more-than-music-cham_AQFw8Gm"
+            },
+            {
+              "label": "Der Besuch der alten Dame",
+              "detail": "Chollerhalle, Zug",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-besuch-der-alten-dame-2/"
+            },
+            {
+              "label": "Benefizkonzert",
+              "detail": "Jugendkulturzentrum Industrie45",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/benefizkonzert_AreUZ5c"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "ZG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "28",
+          "value": "26",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,39 +348,21 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Kunstbesuch",
-              "detail": "Primarschulhaus Kirchbühl 2, Cham",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/cham/kunstbesuch_A81PFFF"
-            },
-            {
-              "label": "ECHO - Gemeinschaftskonzert Blockflötenorchester Belflauto & Surbasse",
-              "detail": "Kirche St. Johannes",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/echo-gemeinschaftskonzert-blockfloetenorchester-belflauto-und-soprabasso_AYUtsxc"
-            },
-            {
-              "label": "ECHO - Gemeinschaftskonzert Blockflötenorchester Belflauto & Soprabasso",
-              "detail": "Zug",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/echo-gemeinschaftskonzert-blockfloetenorchester-belflauto-soprabasso/"
-            },
-            {
               "label": "Taschenlampenführung durch die Burg",
               "detail": "Zug — en cours, dernier jour : 13 novembre 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
             },
             {
               "label": "La potence, la roue et le bûcher. La visite guidée à la lampe de poche pour adultes",
               "detail": "Museum Burg Zug, Zug — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — en cours, dernier jour : 10 novembre 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
@@ -406,11 +388,29 @@
               "detail": "Zugo",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brevi-visite-guidate-allora-di-pranzo/"
+            },
+            {
+              "label": "more than music cham.",
+              "detail": "Röm.-kath.Pfarreiheim St. Jakob, Cham",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/more-than-music-cham_AQFw8Gm"
+            },
+            {
+              "label": "Der Besuch der alten Dame",
+              "detail": "Chollerhalle, Zug",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-besuch-der-alten-dame-2/"
+            },
+            {
+              "label": "Benefizkonzert",
+              "detail": "Jugendkulturzentrum Industrie45",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/benefizkonzert_AreUZ5c"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

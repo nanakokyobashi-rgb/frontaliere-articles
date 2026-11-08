@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "161aa830c5c12d2e0f582399a2b2e53b31c07589fcbe11b86e08438ef41cdc7b",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "d3394cc178585b219a639446f57ebb38f0c00684d75590a5ef8e612b1c2fdb99",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T00:12:54.064Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "19",
+          "value": "24",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,18 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Razorlight [UK]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/razorlight-uk_ARnKZkM"
-            },
-            {
-              "label": "Salonorchester Schaffhausen - «MEMORIES»",
-              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salonorchester-schaffhausen-memories/"
-            },
             {
               "label": "«Die Kunst der Komödie» I",
               "detail": "Schaffhausen",
@@ -96,11 +84,23 @@
               "detail": "Kulturzentrum Kammgarn",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/events/music/schaffhausen/shakra-ch_AugjFVX"
+            },
+            {
+              "label": "7th Schaffhausen Vinyl Exchange",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7th-schaffhausen-vinyl-exchange/"
+            },
+            {
+              "label": "Hanna & Harald",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,7 +138,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vom+bodensee+an+den+main+august+mosbrugger+_+architekt_+professor+und+sohn+einer+bedeutenden+kuenstlerfamilie"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "SH",
@@ -170,7 +170,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "19",
+          "value": "24",
           "note": "from the site’s events calendar"
         }
       ],
@@ -180,18 +180,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Razorlight [UK]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/razorlight-uk_ARnKZkM"
-            },
-            {
-              "label": "Salonorchester Schaffhausen - «MEMORIES»",
-              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salonorchester-schaffhausen-memories/"
-            },
             {
               "label": "«Die Kunst der Komödie» I",
               "detail": "Schaffhausen",
@@ -239,11 +227,23 @@
               "detail": "Kulturzentrum Kammgarn",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/events/music/schaffhausen/shakra-ch_AugjFVX"
+            },
+            {
+              "label": "7th Schaffhausen Vinyl Exchange",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7th-schaffhausen-vinyl-exchange/"
+            },
+            {
+              "label": "Hanna & Harald",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -281,7 +281,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vom+bodensee+an+den+main+august+mosbrugger+_+architekt_+professor+und+sohn+einer+bedeutenden+kuenstlerfamilie"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +303,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "SH",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "19",
+          "value": "24",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -323,18 +323,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Razorlight [UK]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/razorlight-uk_ARnKZkM"
-            },
-            {
-              "label": "Salonorchester Schaffhausen - «MEMORIES»",
-              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salonorchester-schaffhausen-memories/"
-            },
             {
               "label": "«Die Kunst der Komödie» I",
               "detail": "Schaffhausen",
@@ -382,11 +370,23 @@
               "detail": "Kulturzentrum Kammgarn",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/events/music/schaffhausen/shakra-ch_AugjFVX"
+            },
+            {
+              "label": "7. Schaffhauser Vinylbörse",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7th-schaffhausen-vinyl-exchange/"
+            },
+            {
+              "label": "Hanna & Harald",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -424,7 +424,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vom+bodensee+an+den+main+august+mosbrugger+_+architekt_+professor+und+sohn+einer+bedeutenden+kuenstlerfamilie"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -446,7 +446,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "SH",
@@ -456,7 +456,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "19",
+          "value": "24",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -466,18 +466,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Razorlight [Royaume-Uni]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/razorlight-uk_ARnKZkM"
-            },
-            {
-              "label": "Salonorchester Schaffhausen - «MEMORIES»",
-              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salonorchester-schaffhausen-memories/"
-            },
             {
               "label": "«Die Kunst der Komödie» I",
               "detail": "Schaffhausen",
@@ -525,11 +513,23 @@
               "detail": "Kulturzentrum Kammgarn",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/events/music/schaffhausen/shakra-ch_AugjFVX"
+            },
+            {
+              "label": "7e bourse aux vinyles de Schaffhouse",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7th-schaffhausen-vinyl-exchange/"
+            },
+            {
+              "label": "Hanna & Harald",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -567,7 +567,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vom+bodensee+an+den+main+august+mosbrugger+_+architekt_+professor+und+sohn+einer+bedeutenden+kuenstlerfamilie"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +589,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

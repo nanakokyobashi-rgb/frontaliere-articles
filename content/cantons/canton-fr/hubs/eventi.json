@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "a5b3dbba06329c406341b4fcb2b0da18f51f41f8a6e437247b7c4debb74bf503",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "af5469cd10cfc257d3c0026766ccb699325b7fd41aa3aa5d343f80f9af324c5b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T00:12:54.064Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "41",
+          "value": "38",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Bien-être menstruel",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-etre-menstruel/"
+              "label": "Menu del Kilbi alla locanda di campagna Garmiswil a Düdingen",
+              "detail": "Landgasthof Garmiswil, Düdingen",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kilbi-menu-im-landgasthof-garmiswil-in-duedingen/"
             },
             {
-              "label": "Gravelodux",
-              "detail": "Estavayer-le-Lac, Estavayer",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gravelodux/"
+              "label": "le Vide-Dressing des Tilleuls",
+              "detail": "Case postale, Châtel-Saint-Denis",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-vide-dressing-des-tilleuls/"
             },
             {
-              "label": "Requiem For A Dead Sun",
-              "detail": "Théâtre du Passage, Fribourg",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/requiem-for-a-dead-sun/"
+              "label": "Orlando Ensemble « Italian Music »",
+              "detail": "Fribourg",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orlando-ensemble-italian-music/"
+            },
+            {
+              "label": "Winds and Voices – Wenn Orchesterklang auf Gospelgroove trifft!",
+              "detail": "Deutsche Kirche",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/events/music/murten/winds-and-voices-when-orchestral-sound-meets-gospel-groove_AJJfkH8"
             },
             {
               "label": "Journées des artisans",
-              "detail": "Estavayer-le-Lac, Estavayer",
-              "date": "2026-11-07",
+              "detail": "Estavayer-le-Lac, Estavayer — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/journees-des-artisans/"
             },
             {
-              "label": "Poils et mamelles",
-              "detail": "Fribourg",
-              "date": "2026-11-07",
-              "url": "https://www.fr.ch/mhnf/evenements/poils-et-mamelles"
-            },
-            {
-              "label": "Murten on Ice",
-              "detail": "Murten on Ice, Murten",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/murten-on-ice/"
-            },
-            {
               "label": "Artisans Days",
-              "detail": "Estavayer-le-Lac, Estavayer",
-              "date": "2026-11-07",
+              "detail": "Estavayer-le-Lac, Estavayer — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/artisans-days/"
             },
             {
-              "label": "Museums’ Night",
-              "detail": "La Gruyère Tourisme, Bulle",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/museums-night/"
+              "label": "BDmania",
+              "detail": "Belfaux — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
             },
             {
-              "label": "Bellarena Indoor Festival | Jarry & Friends",
-              "detail": "BCF-Arena",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-jarry-und-friends_AsNFdMR"
-            },
-            {
-              "label": "Bellarena Indoor Festival | Jarry & Friends",
+              "label": "L'année du livre suisse : Thierry Raboud",
               "detail": "Fribourg",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bellarena-indoor-festival-jarry-friends/"
+              "date": "2026-11-09",
+              "url": "https://www.fr.ch/bcu/evenements/lannee-du-livre-suisse-thierry-raboud"
+            },
+            {
+              "label": "Café-visite : Fascinants chiroptères",
+              "detail": "Fribourg",
+              "date": "2026-11-10",
+              "url": "https://www.fr.ch/mhnf/evenements/cafe-visite-fascinants-chiropteres"
+            },
+            {
+              "label": "COMPLET | Café-visite : Fascinants chiroptères",
+              "detail": "Fribourg",
+              "date": "2026-11-10",
+              "url": "https://www.fr.ch/mhnf/evenements/complet-cafe-visite-fascinants-chiropteres"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "FR",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "41",
+          "value": "38",
           "note": "from the site’s events calendar"
         }
       ],
@@ -176,69 +176,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Bien-être menstruel",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-etre-menstruel/"
+              "label": "Kilbi Menu at the Landgasthof Garmiswil in Düdingen",
+              "detail": "Landgasthof Garmiswil, Düdingen",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kilbi-menu-im-landgasthof-garmiswil-in-duedingen/"
             },
             {
-              "label": "Gravelodux",
-              "detail": "Estavayer-le-Lac, Estavayer",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gravelodux/"
+              "label": "le Vide-Dressing des Tilleuls",
+              "detail": "Case postale, Châtel-Saint-Denis",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-vide-dressing-des-tilleuls/"
             },
             {
-              "label": "Requiem For A Dead Sun",
-              "detail": "Théâtre du Passage, Fribourg",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/requiem-for-a-dead-sun/"
+              "label": "Orlando Ensemble « Italian Music »",
+              "detail": "Fribourg",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orlando-ensemble-italian-music/"
+            },
+            {
+              "label": "Winds and Voices – When orchestral sound meets gospel groove!",
+              "detail": "Deutsche Kirche",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/events/music/murten/winds-and-voices-when-orchestral-sound-meets-gospel-groove_AJJfkH8"
             },
             {
               "label": "Journées des artisans",
-              "detail": "Estavayer-le-Lac, Estavayer",
-              "date": "2026-11-07",
+              "detail": "Estavayer-le-Lac, Estavayer — ongoing, last day: 8 November 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/journees-des-artisans/"
             },
             {
-              "label": "Poils et mamelles",
-              "detail": "Fribourg",
-              "date": "2026-11-07",
-              "url": "https://www.fr.ch/mhnf/evenements/poils-et-mamelles"
-            },
-            {
-              "label": "Murten on Ice",
-              "detail": "Murten on Ice, Murten",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/murten-on-ice/"
-            },
-            {
               "label": "Artisans Days",
-              "detail": "Estavayer-le-Lac, Estavayer",
-              "date": "2026-11-07",
+              "detail": "Estavayer-le-Lac, Estavayer — ongoing, last day: 8 November 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/artisans-days/"
             },
             {
-              "label": "Museums’ Night",
-              "detail": "La Gruyère Tourisme, Bulle",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/museums-night/"
+              "label": "BDmania",
+              "detail": "Belfaux — ongoing, last day: 8 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
             },
             {
-              "label": "Bellarena Indoor Festival | Jarry & Friends",
-              "detail": "BCF-Arena",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-jarry-und-friends_AsNFdMR"
-            },
-            {
-              "label": "Bellarena Indoor Festival | Jarry & Friends",
+              "label": "L'année du livre suisse : Thierry Raboud",
               "detail": "Fribourg",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bellarena-indoor-festival-jarry-friends/"
+              "date": "2026-11-09",
+              "url": "https://www.fr.ch/bcu/evenements/lannee-du-livre-suisse-thierry-raboud"
+            },
+            {
+              "label": "Café-visite : Fascinants chiroptères",
+              "detail": "Fribourg",
+              "date": "2026-11-10",
+              "url": "https://www.fr.ch/mhnf/evenements/cafe-visite-fascinants-chiropteres"
+            },
+            {
+              "label": "COMPLET | Café-visite : Fascinants chiroptères",
+              "detail": "Fribourg",
+              "date": "2026-11-10",
+              "url": "https://www.fr.ch/mhnf/evenements/complet-cafe-visite-fascinants-chiropteres"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "FR",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "41",
+          "value": "38",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -314,69 +314,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Bien-être menstruel",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-etre-menstruel/"
+              "label": "Kilbi-Menu im Landgasthof Garmiswil in Düdingen",
+              "detail": "Landgasthof Garmiswil, Düdingen",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kilbi-menu-im-landgasthof-garmiswil-in-duedingen/"
             },
             {
-              "label": "Gravelodux",
-              "detail": "Estavayer-le-Lac, Estavayer",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gravelodux/"
+              "label": "le Vide-Dressing des Tilleuls",
+              "detail": "Case postale, Châtel-Saint-Denis",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-vide-dressing-des-tilleuls/"
             },
             {
-              "label": "Requiem For A Dead Sun",
-              "detail": "Théâtre du Passage, Fribourg",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/requiem-for-a-dead-sun/"
+              "label": "Ensemble Orlando „Italienische Musik“",
+              "detail": "Fribourg",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orlando-ensemble-italian-music/"
+            },
+            {
+              "label": "Winds and Voices – Wenn Orchesterklang auf Gospelgroove trifft!",
+              "detail": "Deutsche Kirche",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/events/music/murten/winds-and-voices-when-orchestral-sound-meets-gospel-groove_AJJfkH8"
             },
             {
               "label": "Journées des artisans",
-              "detail": "Estavayer-le-Lac, Estavayer",
-              "date": "2026-11-07",
+              "detail": "Estavayer-le-Lac, Estavayer — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/journees-des-artisans/"
             },
             {
-              "label": "Poils et mamelles",
-              "detail": "Fribourg",
-              "date": "2026-11-07",
-              "url": "https://www.fr.ch/mhnf/evenements/poils-et-mamelles"
-            },
-            {
-              "label": "Murten on Ice",
-              "detail": "Murten on Ice, Murten",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/murten-on-ice/"
-            },
-            {
               "label": "Tags des Kunsthandwerks",
-              "detail": "Estavayer-le-Lac, Estavayer",
-              "date": "2026-11-07",
+              "detail": "Estavayer-le-Lac, Estavayer — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/artisans-days/"
             },
             {
-              "label": "Museumsnacht",
-              "detail": "La Gruyère Tourisme, Bulle",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/museums-night/"
+              "label": "BDmania",
+              "detail": "Belfaux — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
             },
             {
-              "label": "Bellarena Indoor Festival | Jarry & Friends",
-              "detail": "BCF-Arena",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-jarry-und-friends_AsNFdMR"
-            },
-            {
-              "label": "Bellarena Indoor Festival | Jarry & Friends",
+              "label": "L'année du livre suisse : Thierry Raboud",
               "detail": "Fribourg",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bellarena-indoor-festival-jarry-friends/"
+              "date": "2026-11-09",
+              "url": "https://www.fr.ch/bcu/evenements/lannee-du-livre-suisse-thierry-raboud"
+            },
+            {
+              "label": "Café-visite : Fascinants chiroptères",
+              "detail": "Fribourg",
+              "date": "2026-11-10",
+              "url": "https://www.fr.ch/mhnf/evenements/cafe-visite-fascinants-chiropteres"
+            },
+            {
+              "label": "COMPLET | Café-visite : Fascinants chiroptères",
+              "detail": "Fribourg",
+              "date": "2026-11-10",
+              "url": "https://www.fr.ch/mhnf/evenements/complet-cafe-visite-fascinants-chiropteres"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +409,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "FR",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "41",
+          "value": "38",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -452,69 +452,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Bien-être menstruel",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-etre-menstruel/"
+              "label": "Menu de Bénichon au Landgasthof Garmiswil à Guin",
+              "detail": "Landgasthof Garmiswil, Düdingen",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kilbi-menu-im-landgasthof-garmiswil-in-duedingen/"
             },
             {
-              "label": "Gravelodux",
-              "detail": "Estavayer-le-Lac, Estavayer",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gravelodux/"
+              "label": "le Vide-Dressing des Tilleuls",
+              "detail": "Case postale, Châtel-Saint-Denis",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-vide-dressing-des-tilleuls/"
             },
             {
-              "label": "Requiem For A Dead Sun",
-              "detail": "Théâtre du Passage, Fribourg",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/requiem-for-a-dead-sun/"
+              "label": "Ensemble Orlando « Musique italienne »",
+              "detail": "Fribourg",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orlando-ensemble-italian-music/"
+            },
+            {
+              "label": "Winds and Voices – Quand la sonorité d'un orchestre rencontre le groove du gospel !",
+              "detail": "Deutsche Kirche",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/events/music/murten/winds-and-voices-when-orchestral-sound-meets-gospel-groove_AJJfkH8"
             },
             {
               "label": "Journées des artisans",
-              "detail": "Estavayer-le-Lac, Estavayer",
-              "date": "2026-11-07",
+              "detail": "Estavayer-le-Lac, Estavayer — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/journees-des-artisans/"
             },
             {
-              "label": "Poils et mamelles",
-              "detail": "Fribourg",
-              "date": "2026-11-07",
-              "url": "https://www.fr.ch/mhnf/evenements/poils-et-mamelles"
-            },
-            {
-              "label": "Murten on Ice",
-              "detail": "Murten on Ice, Murten",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/murten-on-ice/"
-            },
-            {
               "label": "Journées des Artisans",
-              "detail": "Estavayer-le-Lac, Estavayer",
-              "date": "2026-11-07",
+              "detail": "Estavayer-le-Lac, Estavayer — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/artisans-days/"
             },
             {
-              "label": "La Nuit des Musées | Gruyère, Glâne et Pays-d’Enhaut",
-              "detail": "La Gruyère Tourisme, Bulle",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/museums-night/"
+              "label": "BDmania",
+              "detail": "Belfaux — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
             },
             {
-              "label": "Bellarena Indoor Festival | Jarry & Friends",
-              "detail": "BCF-Arena",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-jarry-und-friends_AsNFdMR"
-            },
-            {
-              "label": "Bellarena Indoor Festival | Jarry & Friends",
+              "label": "L'année du livre suisse : Thierry Raboud",
               "detail": "Fribourg",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bellarena-indoor-festival-jarry-friends/"
+              "date": "2026-11-09",
+              "url": "https://www.fr.ch/bcu/evenements/lannee-du-livre-suisse-thierry-raboud"
+            },
+            {
+              "label": "Café-visite : Fascinants chiroptères",
+              "detail": "Fribourg",
+              "date": "2026-11-10",
+              "url": "https://www.fr.ch/mhnf/evenements/cafe-visite-fascinants-chiropteres"
+            },
+            {
+              "label": "COMPLET | Café-visite : Fascinants chiroptères",
+              "detail": "Fribourg",
+              "date": "2026-11-10",
+              "url": "https://www.fr.ch/mhnf/evenements/complet-cafe-visite-fascinants-chiropteres"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +547,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

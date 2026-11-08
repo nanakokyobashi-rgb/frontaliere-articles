@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "3c9f82d0db01388ecbdb56be5e87cea1e7a44228589bfd473420cb82d22192d7",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "928f45f604988e140df475eda49072e4cf5bac79bbac4517aac8650db2d8a77d",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T13:54:16.445Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "71",
+          "value": "72",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Käsefest Rapperswil-Jona",
-              "detail": "Rapperswil-Jona",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaesefest-rapperswil-jona/"
+              "label": "Marian Petrescu Triology - Classical Heritage - Pearls of Jazz Tour",
+              "detail": "Kaffeehaus",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/marian-petrescu-triology-classical-heritage-pearls-of-jazz-tour_AUQL6eV"
+            },
+            {
+              "label": "Explora präsentiert: Roadtrip Italien",
+              "detail": "Rorschach",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/explora-praesentiert-roadtrip-italien/"
+            },
+            {
+              "label": "Steelbands in Concert",
+              "detail": "Speerhalle Weesen, Weesen",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weesen/steelbands-in-concert_AV5TFPW"
+            },
+            {
+              "label": "Philothea Kindertheater - De chly Drache",
+              "detail": "Mogelsberg",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philothea-kindertheater-de-chly-drache/"
+            },
+            {
+              "label": "Sofalesung: Micha Friemel - Ausser mir",
+              "detail": "Sofalesung zu Gast bei Andrea, St. Gallen",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sofalesung-micha-friemel-ausser-mir/"
+            },
+            {
+              "label": "Jahreskonzert Chor der Nationen St. Gallen",
+              "detail": "St. Laurenzen Kirche St.Gallen, St. Gallen",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/jahreskonzert-chor-der-nationen-st-gallen_AQTx4PM"
             },
             {
               "label": "Linoldruck-Vertiefungskurs",
-              "detail": "Lichtensteig",
-              "date": "2026-11-07",
+              "detail": "Lichtensteig — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/linoldruck-vertiefungskurs/"
             },
             {
-              "label": "Martini Markt Mogelsberg",
-              "detail": "Mogelsberg, Neckertal",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martini-markt-mogelsberg/"
-            },
-            {
-              "label": "Exkursion Begegnungsorte",
-              "detail": "Lichtensteig",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/exkursion-begegnungsorte/"
-            },
-            {
-              "label": "Leerstehende Gebäude umnutzen und Begegnungsräume schaffen",
-              "detail": "9620 Lichtensteig, Lichtensteig",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/leerstehende-gebaeude-umnutzen-und-begegnungsraeume-schaffen/"
-            },
-            {
-              "label": "Globine zu Gast im Buchhaus!",
-              "detail": "St. Gallen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/globine-zu-gast-im-buchhaus-2/"
-            },
-            {
-              "label": "Schellen-Ursli - Ein Musical für Klein und Gross",
-              "detail": "Würth Haus Rorschach, Rorschach",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schellen-ursli-ein-musical-fuer-klein-und-gross/"
-            },
-            {
               "label": "Wild-Buffet",
-              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann",
-              "date": "2026-11-07",
+              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — in corso, ultimo giorno: 21 novembre 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
             },
             {
-              "label": "Chorkonzerte VoceSonante unplugged",
-              "detail": "Kirche St. Nikolaus",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/chorkonzerte-vocesonante-unplugged_Atxry9Y"
+              "label": "Mo Klé Relase-Party feat. Into Orleans",
+              "detail": "Kulturlokal Bahnhof Bruggen — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/mo-kle-relase-party-feat-into-orleans_Anq3yyB"
             },
             {
-              "label": "Cyrano de zapzarap",
-              "detail": "Tonhalle Wil",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/cyrano-de-zapzarap_AcbduAw"
+              "label": "Schlüssel zur eigenen Musikalität",
+              "detail": "Wildhaus — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schluessel-zur-eigenen-musikalitaet/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "71",
+          "value": "72",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Käsefest Rapperswil-Jona",
-              "detail": "Rapperswil-Jona",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaesefest-rapperswil-jona/"
+              "label": "Marian Petrescu Triology - Classical Heritage - Pearls of Jazz Tour",
+              "detail": "Kaffeehaus",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/marian-petrescu-triology-classical-heritage-pearls-of-jazz-tour_AUQL6eV"
+            },
+            {
+              "label": "Explora präsentiert: Roadtrip Italien",
+              "detail": "Rorschach",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/explora-praesentiert-roadtrip-italien/"
+            },
+            {
+              "label": "Steelbands in Concert",
+              "detail": "Speerhalle Weesen, Weesen",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weesen/steelbands-in-concert_AV5TFPW"
+            },
+            {
+              "label": "Philothea Kindertheater - De chly Drache",
+              "detail": "Mogelsberg",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philothea-kindertheater-de-chly-drache/"
+            },
+            {
+              "label": "Sofalesung: Micha Friemel - Ausser mir",
+              "detail": "Sofalesung zu Gast bei Andrea, St. Gallen",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sofalesung-micha-friemel-ausser-mir/"
+            },
+            {
+              "label": "Jahreskonzert Chor der Nationen St. Gallen",
+              "detail": "St. Laurenzen Kirche St.Gallen, St. Gallen",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/jahreskonzert-chor-der-nationen-st-gallen_AQTx4PM"
             },
             {
               "label": "Linoldruck-Vertiefungskurs",
-              "detail": "Lichtensteig",
-              "date": "2026-11-07",
+              "detail": "Lichtensteig — ongoing, last day: 8 November 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/linoldruck-vertiefungskurs/"
             },
             {
-              "label": "Martini Markt Mogelsberg",
-              "detail": "Mogelsberg, Neckertal",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martini-markt-mogelsberg/"
-            },
-            {
-              "label": "Exkursion Begegnungsorte",
-              "detail": "Lichtensteig",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/exkursion-begegnungsorte/"
-            },
-            {
-              "label": "Leerstehende Gebäude umnutzen und Begegnungsräume schaffen",
-              "detail": "9620 Lichtensteig, Lichtensteig",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/leerstehende-gebaeude-umnutzen-und-begegnungsraeume-schaffen/"
-            },
-            {
-              "label": "Globine zu Gast im Buchhaus!",
-              "detail": "St. Gallen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/globine-zu-gast-im-buchhaus-2/"
-            },
-            {
-              "label": "Schellen-Ursli - Ein Musical für Klein und Gross",
-              "detail": "Würth Haus Rorschach, Rorschach",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schellen-ursli-ein-musical-fuer-klein-und-gross/"
-            },
-            {
               "label": "Wild-Buffet",
-              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann",
-              "date": "2026-11-07",
+              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — ongoing, last day: 21 November 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
             },
             {
-              "label": "Chorkonzerte VoceSonante unplugged",
-              "detail": "Kirche St. Nikolaus",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/chorkonzerte-vocesonante-unplugged_Atxry9Y"
+              "label": "Mo Klé Relase-Party feat. Into Orleans",
+              "detail": "Kulturlokal Bahnhof Bruggen — ongoing, last day: 8 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/mo-kle-relase-party-feat-into-orleans_Anq3yyB"
             },
             {
-              "label": "Cyrano de zapzarap",
-              "detail": "Tonhalle Wil",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/cyrano-de-zapzarap_AcbduAw"
+              "label": "Schlüssel zur eigenen Musikalität",
+              "detail": "Wildhaus — ongoing, last day: 8 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schluessel-zur-eigenen-musikalitaet/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "71",
+          "value": "72",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Käsefest Rapperswil-Jona",
-              "detail": "Rapperswil-Jona",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaesefest-rapperswil-jona/"
+              "label": "Marian Petrescu Triology - Classical Heritage - Pearls of Jazz Tour",
+              "detail": "Kaffeehaus",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/marian-petrescu-triology-classical-heritage-pearls-of-jazz-tour_AUQL6eV"
+            },
+            {
+              "label": "Explora präsentiert: Roadtrip Italien",
+              "detail": "Rorschach",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/explora-praesentiert-roadtrip-italien/"
+            },
+            {
+              "label": "Steelbands in Concert",
+              "detail": "Speerhalle Weesen, Weesen",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weesen/steelbands-in-concert_AV5TFPW"
+            },
+            {
+              "label": "Philothea Kindertheater - De chly Drache",
+              "detail": "Mogelsberg",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philothea-kindertheater-de-chly-drache/"
+            },
+            {
+              "label": "Sofalesung: Micha Friemel - Ausser mir",
+              "detail": "Sofalesung zu Gast bei Andrea, St. Gallen",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sofalesung-micha-friemel-ausser-mir/"
+            },
+            {
+              "label": "Jahreskonzert Chor der Nationen St. Gallen",
+              "detail": "St. Laurenzen Kirche St.Gallen, St. Gallen",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/jahreskonzert-chor-der-nationen-st-gallen_AQTx4PM"
             },
             {
               "label": "Linoldruck-Vertiefungskurs",
-              "detail": "Lichtensteig",
-              "date": "2026-11-07",
+              "detail": "Lichtensteig — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/linoldruck-vertiefungskurs/"
             },
             {
-              "label": "Martini Markt Mogelsberg",
-              "detail": "Mogelsberg, Neckertal",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martini-markt-mogelsberg/"
-            },
-            {
-              "label": "Exkursion Begegnungsorte",
-              "detail": "Lichtensteig",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/exkursion-begegnungsorte/"
-            },
-            {
-              "label": "Leerstehende Gebäude umnutzen und Begegnungsräume schaffen",
-              "detail": "9620 Lichtensteig, Lichtensteig",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/leerstehende-gebaeude-umnutzen-und-begegnungsraeume-schaffen/"
-            },
-            {
-              "label": "Globine zu Gast im Buchhaus!",
-              "detail": "St. Gallen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/globine-zu-gast-im-buchhaus-2/"
-            },
-            {
-              "label": "Schellen-Ursli - Ein Musical für Klein und Gross",
-              "detail": "Würth Haus Rorschach, Rorschach",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schellen-ursli-ein-musical-fuer-klein-und-gross/"
-            },
-            {
               "label": "Wild-Buffet",
-              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann",
-              "date": "2026-11-07",
+              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — läuft, letzter Tag: 21. November 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
             },
             {
-              "label": "Chorkonzerte VoceSonante unplugged",
-              "detail": "Kirche St. Nikolaus",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/chorkonzerte-vocesonante-unplugged_Atxry9Y"
+              "label": "Mo Klé Relase-Party feat. Into Orleans",
+              "detail": "Kulturlokal Bahnhof Bruggen — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/mo-kle-relase-party-feat-into-orleans_Anq3yyB"
             },
             {
-              "label": "Cyrano de zapzarap",
-              "detail": "Tonhalle Wil",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/cyrano-de-zapzarap_AcbduAw"
+              "label": "Schlüssel zur eigenen Musikalität",
+              "detail": "Wildhaus — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schluessel-zur-eigenen-musikalitaet/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "71",
+          "value": "72",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Käsefest Rapperswil-Jona",
-              "detail": "Rapperswil-Jona",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaesefest-rapperswil-jona/"
+              "label": "Marian Petrescu Triology - Classical Heritage - Pearls of Jazz Tour",
+              "detail": "Kaffeehaus",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/marian-petrescu-triology-classical-heritage-pearls-of-jazz-tour_AUQL6eV"
+            },
+            {
+              "label": "Explora präsentiert: Roadtrip Italien",
+              "detail": "Rorschach",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/explora-praesentiert-roadtrip-italien/"
+            },
+            {
+              "label": "Steelbands in Concert",
+              "detail": "Speerhalle Weesen, Weesen",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weesen/steelbands-in-concert_AV5TFPW"
+            },
+            {
+              "label": "Philothea Kindertheater - De chly Drache",
+              "detail": "Mogelsberg",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philothea-kindertheater-de-chly-drache/"
+            },
+            {
+              "label": "Sofalesung: Micha Friemel - Ausser mir",
+              "detail": "Sofalesung zu Gast bei Andrea, St. Gallen",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sofalesung-micha-friemel-ausser-mir/"
+            },
+            {
+              "label": "Jahreskonzert Chor der Nationen St. Gallen",
+              "detail": "St. Laurenzen Kirche St.Gallen, St. Gallen",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/jahreskonzert-chor-der-nationen-st-gallen_AQTx4PM"
             },
             {
               "label": "Linoldruck-Vertiefungskurs",
-              "detail": "Lichtensteig",
-              "date": "2026-11-07",
+              "detail": "Lichtensteig — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/linoldruck-vertiefungskurs/"
             },
             {
-              "label": "Martini Markt Mogelsberg",
-              "detail": "Mogelsberg, Neckertal",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martini-markt-mogelsberg/"
-            },
-            {
-              "label": "Exkursion Begegnungsorte",
-              "detail": "Lichtensteig",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/exkursion-begegnungsorte/"
-            },
-            {
-              "label": "Leerstehende Gebäude umnutzen und Begegnungsräume schaffen",
-              "detail": "9620 Lichtensteig, Lichtensteig",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/leerstehende-gebaeude-umnutzen-und-begegnungsraeume-schaffen/"
-            },
-            {
-              "label": "Globine zu Gast im Buchhaus!",
-              "detail": "St. Gallen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/globine-zu-gast-im-buchhaus-2/"
-            },
-            {
-              "label": "Schellen-Ursli - Ein Musical für Klein und Gross",
-              "detail": "Würth Haus Rorschach, Rorschach",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schellen-ursli-ein-musical-fuer-klein-und-gross/"
-            },
-            {
               "label": "Wild-Buffet",
-              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann",
-              "date": "2026-11-07",
+              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — en cours, dernier jour : 21 novembre 2026",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
             },
             {
-              "label": "Chorkonzerte VoceSonante unplugged",
-              "detail": "Kirche St. Nikolaus",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/chorkonzerte-vocesonante-unplugged_Atxry9Y"
+              "label": "Mo Klé Relase-Party feat. Into Orleans",
+              "detail": "Kulturlokal Bahnhof Bruggen — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/mo-kle-relase-party-feat-into-orleans_Anq3yyB"
             },
             {
-              "label": "Cyrano de zapzarap",
-              "detail": "Tonhalle Wil",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/cyrano-de-zapzarap_AcbduAw"
+              "label": "Schlüssel zur eigenen Musikalität",
+              "detail": "Wildhaus — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schluessel-zur-eigenen-musikalitaet/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

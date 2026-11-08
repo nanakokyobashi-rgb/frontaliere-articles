@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "6a26bb687e429d062e2b598f739c6bac39a6a469b47c148656a1a34134545f7b",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "7cbc77b854cb8787edc442478333436fd0518827c5c6baaef6858bbae7725aff",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T00:12:54.064Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "20",
+          "value": "21",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,39 +33,15 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "35. Herbstfest Braunwald, 7. November 2026",
-              "detail": "Braunwald, Glarus Süd",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/35-herbstfest-braunwald-7-november-2026/"
-            },
-            {
-              "label": "☆Star d'Epices - Gewürz-Workshop☆",
-              "detail": "Mühlehorn (Kerenzerberg)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/star-depices-gewuerzworkshop-9/"
-            },
-            {
-              "label": "Turnerkränzli Matt",
-              "detail": "Matt, Glarus Süd",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnerkraenzli-matt/"
-            },
-            {
-              "label": "Patrick Sommer Quintett",
-              "detail": "Kunsthaus Glarus, Glarus",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/patrick-sommer-quintett_AcD8e7k"
-            },
-            {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -91,11 +67,35 @@
               "detail": "Schwanden",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
+            },
+            {
+              "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
+              "detail": "Glarus",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-repair-cafe-reparieren-statt-wegwerfen/"
+            },
+            {
+              "label": "Chirezer Adventsmarkt",
+              "detail": "Filzbach (Kerenzerberg)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
+            },
+            {
+              "label": "Stubete Gäng – Samichlaus Tour 2026 – Näfels, lintharena",
+              "detail": "Hotel Lintharena",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stubete-gaeng-samichlaus-tour-2026-naefels-lintharena/"
+            },
+            {
+              "label": "Herbstkonzert des Glarner Kammerorchesters",
+              "detail": "Glarona",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstkonzert-des-glarner-kammerorchesters/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "GL",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "20",
+          "value": "21",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,39 +138,15 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "35. Herbstfest Braunwald, 7. November 2026",
-              "detail": "Braunwald, Glarus Süd",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/35-herbstfest-braunwald-7-november-2026/"
-            },
-            {
-              "label": "☆Star d'Epices - Gewürz-Workshop☆",
-              "detail": "Mühlehorn (Kerenzerberg)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/star-depices-gewuerzworkshop-9/"
-            },
-            {
-              "label": "Turnerkränzli Matt",
-              "detail": "Matt, Glarus Süd",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnerkraenzli-matt/"
-            },
-            {
-              "label": "Patrick Sommer Quintett",
-              "detail": "Kunsthaus Glarus, Glarus",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/patrick-sommer-quintett_AcD8e7k"
-            },
-            {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — ongoing, last day: 14 November 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — ongoing, last day: 11 November 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -196,11 +172,35 @@
               "detail": "Schwanden",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
+            },
+            {
+              "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
+              "detail": "Glarus",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-repair-cafe-reparieren-statt-wegwerfen/"
+            },
+            {
+              "label": "Chirezer Adventsmarkt",
+              "detail": "Filzbach (Kerenzerberg)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
+            },
+            {
+              "label": "Stubete Gäng – Samichlaus Tour 2026 – Näfels, lintharena",
+              "detail": "Hotel Lintharena",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stubete-gaeng-samichlaus-tour-2026-naefels-lintharena/"
+            },
+            {
+              "label": "Herbstkonzert des Glarner Kammerorchesters",
+              "detail": "Glarona",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstkonzert-des-glarner-kammerorchesters/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "GL",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "20",
+          "value": "21",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,39 +243,15 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "35. Herbstfest Braunwald, 7. November 2026",
-              "detail": "Braunwald, Glarus Süd",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/35-herbstfest-braunwald-7-november-2026/"
-            },
-            {
-              "label": "☆Star d'Epices - Gewürz-Workshop☆",
-              "detail": "Mühlehorn (Kerenzerberg)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/star-depices-gewuerzworkshop-9/"
-            },
-            {
-              "label": "Turnerkränzli Matt",
-              "detail": "Matt, Glarus Süd",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnerkraenzli-matt/"
-            },
-            {
-              "label": "Patrick Sommer Quintett",
-              "detail": "Kunsthaus Glarus, Glarus",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/patrick-sommer-quintett_AcD8e7k"
-            },
-            {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -301,11 +277,35 @@
               "detail": "Schwanden",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
+            },
+            {
+              "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
+              "detail": "Glarus",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-repair-cafe-reparieren-statt-wegwerfen/"
+            },
+            {
+              "label": "Chirezer Adventsmarkt",
+              "detail": "Filzbach (Kerenzerberg)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
+            },
+            {
+              "label": "Stubete Gäng – Samichlaus Tour 2026 – Näfels, lintharena",
+              "detail": "Hotel Lintharena",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stubete-gaeng-samichlaus-tour-2026-naefels-lintharena/"
+            },
+            {
+              "label": "Jubiläumskonzert des Glarner Kammerorchesters",
+              "detail": "Glarona",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstkonzert-des-glarner-kammerorchesters/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "GL",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "20",
+          "value": "21",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,39 +348,15 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "35. Herbstfest Braunwald, 7. November 2026",
-              "detail": "Braunwald, Glarus Süd",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/35-herbstfest-braunwald-7-november-2026/"
-            },
-            {
-              "label": "☆Star d'Epices - Gewürz-Workshop☆",
-              "detail": "Mühlehorn (Kerenzerberg)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/star-depices-gewuerzworkshop-9/"
-            },
-            {
-              "label": "Turnerkränzli Matt",
-              "detail": "Matt, Glarus Süd",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnerkraenzli-matt/"
-            },
-            {
-              "label": "Patrick Sommer Quintett",
-              "detail": "Kunsthaus Glarus, Glarus",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/patrick-sommer-quintett_AcD8e7k"
-            },
-            {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Schnupperkurs de Balboa",
               "detail": "Ennenda, Glarus — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -406,11 +382,35 @@
               "detail": "Schwanden",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
+            },
+            {
+              "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
+              "detail": "Glarus",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-repair-cafe-reparieren-statt-wegwerfen/"
+            },
+            {
+              "label": "Chirezer Adventsmarkt",
+              "detail": "Filzbach (Kerenzerberg)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
+            },
+            {
+              "label": "Stubete Gäng – Samichlaus Tour 2026 – Näfels, lintharena",
+              "detail": "Hotel Lintharena",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stubete-gaeng-samichlaus-tour-2026-naefels-lintharena/"
+            },
+            {
+              "label": "Herbstkonzert des Glarner Kammerorchesters",
+              "detail": "Glarona",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstkonzert-des-glarner-kammerorchesters/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "659f34dc30a4fce260290f43d755454c9486802bd38d395de43c4606043f4758",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "223b8af4f8bfc569886584d8807a5c17dadf812d3e7197502857acc8521ff866",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T00:12:54.064Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "70",
+          "value": "71",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Galerie la Belle Toile : Vernissage - L'Éternité du fragile [EN]",
-              "detail": "Martigny",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/galerie-la-belle-toile-vernissage-leternite-du-fragile-en/"
+              "label": "Le Marché des Fromages d’alpage",
+              "detail": "Bruson",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-marche-des-fromages-dalpage/"
             },
             {
-              "label": "Native shrub and hedge maintenance",
-              "detail": "Salgesch",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/native-shrub-and-hedge-maintenance/"
+              "label": "HOMMAGE À LA PROIE",
+              "detail": "Le Châble",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/hommage-a-la-proie/"
             },
             {
-              "label": "Lo Pan Ner – Roggenbrotfest im Backhaus Oberwald",
-              "detail": "3999 Oberwald",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-roggenbrotfest-im-backhaus-oberwald/"
-            },
-            {
-              "label": "Lo Pan Ner – Rye bread festival at the Oberwald bakery",
-              "detail": "Backhüs Oberwald",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-rye-bread-festival-at-the-oberwald-bakery/"
-            },
-            {
-              "label": "Sagenabend",
-              "detail": "Brig, Brig-Glis",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagenabend/"
-            },
-            {
-              "label": "Enisum + Wizards of Wiznan",
-              "detail": "Manoir Pub",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/music/st-maurice/enisum-wizards-of-wiznan_AkR2Qgf"
-            },
-            {
-              "label": "Croma Quartet",
+              "label": "AU FIL DE SOI",
               "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/croma-quartet/"
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/au-fil-de-soi/"
+            },
+            {
+              "label": "Le Concert Spirituel",
+              "detail": "NODA BCVS - Salle de concerts et congrès, Sion",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/evenements/classique/sion/le-concert-spirituel_AKmJLHn"
+            },
+            {
+              "label": "Le Concert Spirituel ǀ H. Niquet",
+              "detail": "NODA BCVS, Sion",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-concert-spirituel-h-niquet/"
             },
             {
               "label": "UN TOUT P’TIT PEU AVANT PLUS TARD",
-              "detail": "Théâtre du Dé, Evionnaz",
-              "date": "2026-11-07",
+              "detail": "Théâtre du Dé, Evionnaz — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-08",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/evionnaz/un-tout-ptit-peu-avant-plus-tard_AaX1HVJ"
-            },
-            {
-              "label": "LE BOURGEOIS GENTILHOMME",
-              "detail": "Savièse",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-bourgeois-gentilhomme-2/"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "UNI60+ : Introduction à l'utilisation de zoom",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/uni60-introduction-a-lutilisation-de-zoom/"
+            },
+            {
+              "label": "Martinimarkt Visp - 2026",
+              "detail": "Kaufplatz Visp, Visp",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/martinimarkt-visp-2026/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "VS",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "70",
+          "value": "71",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Galerie la Belle Toile : Vernissage - L'Éternité du fragile [EN]",
-              "detail": "Martigny",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/galerie-la-belle-toile-vernissage-leternite-du-fragile-en/"
+              "label": "Le Marché des Fromages d’alpage",
+              "detail": "Bruson",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-marche-des-fromages-dalpage/"
             },
             {
-              "label": "Native shrub and hedge maintenance",
-              "detail": "Salgesch",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/native-shrub-and-hedge-maintenance/"
+              "label": "HOMMAGE À LA PROIE",
+              "detail": "Le Châble",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/hommage-a-la-proie/"
             },
             {
-              "label": "Lo Pan Ner – Roggenbrotfest im Backhaus Oberwald",
-              "detail": "3999 Oberwald",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-roggenbrotfest-im-backhaus-oberwald/"
-            },
-            {
-              "label": "Lo Pan Ner – Rye bread festival at the Oberwald bakery",
-              "detail": "Backhüs Oberwald",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-rye-bread-festival-at-the-oberwald-bakery/"
-            },
-            {
-              "label": "Sagenabend",
-              "detail": "Brig, Brig-Glis",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagenabend/"
-            },
-            {
-              "label": "Enisum + Wizards of Wiznan",
-              "detail": "Manoir Pub",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/music/st-maurice/enisum-wizards-of-wiznan_AkR2Qgf"
-            },
-            {
-              "label": "Croma Quartet",
+              "label": "AU FIL DE SOI",
               "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/croma-quartet/"
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/au-fil-de-soi/"
+            },
+            {
+              "label": "Le Concert Spirituel",
+              "detail": "NODA BCVS - Salle de concerts et congrès, Sion",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/evenements/classique/sion/le-concert-spirituel_AKmJLHn"
+            },
+            {
+              "label": "Le Concert Spirituel ǀ H. Niquet",
+              "detail": "NODA BCVS, Sion",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-concert-spirituel-h-niquet/"
             },
             {
               "label": "UN TOUT P’TIT PEU AVANT PLUS TARD",
-              "detail": "Théâtre du Dé, Evionnaz",
-              "date": "2026-11-07",
+              "detail": "Théâtre du Dé, Evionnaz — ongoing, last day: 8 November 2026",
+              "date": "2026-11-08",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/evionnaz/un-tout-ptit-peu-avant-plus-tard_AaX1HVJ"
-            },
-            {
-              "label": "LE BOURGEOIS GENTILHOMME",
-              "detail": "Savièse",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-bourgeois-gentilhomme-2/"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — ongoing, last day: 8 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "UNI60+ : Introduction à l'utilisation de zoom",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/uni60-introduction-a-lutilisation-de-zoom/"
+            },
+            {
+              "label": "Martinimarkt Visp - 2026",
+              "detail": "Kaufplatz Visp, Visp",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/martinimarkt-visp-2026/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "VS",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "70",
+          "value": "71",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Galerie la Belle Toile : Vernissage - L'Éternité du fragile [DE]",
-              "detail": "Martigny",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/galerie-la-belle-toile-vernissage-leternite-du-fragile-en/"
+              "label": "Le Marché des Fromages d’alpage",
+              "detail": "Bruson",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-marche-des-fromages-dalpage/"
             },
             {
-              "label": "Einheimische Sträucher und Heckenpflege",
-              "detail": "Salgesch",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/native-shrub-and-hedge-maintenance/"
+              "label": "HOMMAGE À LA PROIE",
+              "detail": "Le Châble",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/hommage-a-la-proie/"
             },
             {
-              "label": "Lo Pan Ner – Roggenbrotfest im Backhaus Oberwald",
-              "detail": "3999 Oberwald",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-roggenbrotfest-im-backhaus-oberwald/"
-            },
-            {
-              "label": "Lo Pan Ner – Roggenbrotfest im Backhaus Oberwald",
-              "detail": "Backhüs Oberwald",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-rye-bread-festival-at-the-oberwald-bakery/"
-            },
-            {
-              "label": "Sagenabend",
-              "detail": "Brig, Brig-Glis",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagenabend/"
-            },
-            {
-              "label": "Enisum + Wizards of Wiznan",
-              "detail": "Manoir Pub",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/music/st-maurice/enisum-wizards-of-wiznan_AkR2Qgf"
-            },
-            {
-              "label": "Croma Quartet",
+              "label": "AU FIL DE SOI",
               "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/croma-quartet/"
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/au-fil-de-soi/"
+            },
+            {
+              "label": "Le Concert Spirituel",
+              "detail": "NODA BCVS - Salle de concerts et congrès, Sion",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/evenements/classique/sion/le-concert-spirituel_AKmJLHn"
+            },
+            {
+              "label": "Le Concert Spirituel ǀ H. Niquet",
+              "detail": "NODA BCVS, Sion",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-concert-spirituel-h-niquet/"
             },
             {
               "label": "UN TOUT P’TIT PEU AVANT PLUS TARD",
-              "detail": "Théâtre du Dé, Evionnaz",
-              "date": "2026-11-07",
+              "detail": "Théâtre du Dé, Evionnaz — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-08",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/evionnaz/un-tout-ptit-peu-avant-plus-tard_AaX1HVJ"
-            },
-            {
-              "label": "LE BOURGEOIS GENTILHOMME",
-              "detail": "Savièse",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-bourgeois-gentilhomme-2/"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "UNI60+ : Introduction à l'utilisation de zoom",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/uni60-introduction-a-lutilisation-de-zoom/"
+            },
+            {
+              "label": "Martinimarkt Visp - 2026",
+              "detail": "Kaufplatz Visp, Visp",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/martinimarkt-visp-2026/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "70",
+          "value": "71",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Galerie la Belle Toile : Vernissage - L'Éternité du fragile",
-              "detail": "Martigny",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/galerie-la-belle-toile-vernissage-leternite-du-fragile-en/"
+              "label": "Le Marché des Fromages d’alpage",
+              "detail": "Bruson",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-marche-des-fromages-dalpage/"
             },
             {
-              "label": "Buissons indigènes et entretien des haies",
-              "detail": "Salgesch",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/native-shrub-and-hedge-maintenance/"
+              "label": "HOMMAGE À LA PROIE",
+              "detail": "Le Châble",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/hommage-a-la-proie/"
             },
             {
-              "label": "Lo Pan Ner – Roggenbrotfest im Backhaus Oberwald",
-              "detail": "3999 Oberwald",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-roggenbrotfest-im-backhaus-oberwald/"
-            },
-            {
-              "label": "Lo Pan Ner – Roggenbrotfest im Backhaus Oberwald",
-              "detail": "Backhüs Oberwald",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lo-pan-ner-rye-bread-festival-at-the-oberwald-bakery/"
-            },
-            {
-              "label": "Sagenabend",
-              "detail": "Brig, Brig-Glis",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagenabend/"
-            },
-            {
-              "label": "Enisum + Wizards of Wiznan",
-              "detail": "Manoir Pub",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/music/st-maurice/enisum-wizards-of-wiznan_AkR2Qgf"
-            },
-            {
-              "label": "Croma Quartet",
+              "label": "AU FIL DE SOI",
               "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/croma-quartet/"
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/au-fil-de-soi/"
+            },
+            {
+              "label": "Le Concert Spirituel",
+              "detail": "NODA BCVS - Salle de concerts et congrès, Sion",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/evenements/classique/sion/le-concert-spirituel_AKmJLHn"
+            },
+            {
+              "label": "Le Concert Spirituel ǀ H. Niquet",
+              "detail": "NODA BCVS, Sion",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-concert-spirituel-h-niquet/"
             },
             {
               "label": "UN TOUT P’TIT PEU AVANT PLUS TARD",
-              "detail": "Théâtre du Dé, Evionnaz",
-              "date": "2026-11-07",
+              "detail": "Théâtre du Dé, Evionnaz — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-08",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/evionnaz/un-tout-ptit-peu-avant-plus-tard_AaX1HVJ"
-            },
-            {
-              "label": "LE BOURGEOIS GENTILHOMME",
-              "detail": "Savièse",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-bourgeois-gentilhomme-2/"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-07",
+              "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
+              "label": "Théâtre : représentations à Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "UNI60+ : Introduction à l'utilisation de zoom",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/uni60-introduction-a-lutilisation-de-zoom/"
+            },
+            {
+              "label": "Martinimarkt Visp - 2026",
+              "detail": "Kaufplatz Visp, Visp",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/martinimarkt-visp-2026/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "ffab892efdf9c197d2f4373c79becd918b01f48473db049d8d542677368e1918",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "f7897b37c76429c4b4cdc49b4068bb4cbf578ea9661152408d0e022fb71bcb1a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T00:12:54.064Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "354",
+          "value": "349",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Oldies Night",
-              "detail": "Dübendorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-night/"
+              "label": "Koffergeschichten – Improtheater ab 4 Jahren",
+              "detail": "Uster",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/koffergeschichten-improtheater-ab-4-jahren/"
             },
             {
-              "label": "Uetliberger Weihnachtsmarkt",
-              "detail": "Hotel UTO KULM car-free hideaway in Zurich, Zürich",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/uetliberger-weihnachtsmarkt/"
+              "label": "Los Dos für Familien",
+              "detail": "Moods im Schiffbau",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/los-dos-fuer-familien_AfVRaK6"
             },
             {
-              "label": "Bewegung, Entspannung & Brunch",
-              "detail": "Turbenthal",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bewegung-entspannung-brunch-1/"
+              "label": "Kammermusik-Matinee",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kammermusik-matinee-2/"
             },
             {
-              "label": "Cruisetour & e-hoi - Fiera delle crociere",
-              "detail": "Lake Side",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/knowledge/zurich/cruisetour-und-e-hoi-cruise-fair_AtqWDnc"
+              "label": "Kinder-Zaubershow mit Dan White & dem quasselnden Seehund",
+              "detail": "Dürnten",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kinderzaubershow-mit-dan-white-dem-quasselnden-seehund/"
             },
             {
-              "label": "Herbstmarkt Urdorf",
-              "detail": "Urdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstmarkt-urdorf/"
+              "label": "Schwiizergoofe",
+              "detail": "Volkshaus Zürich, Zürich",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schwiizergoofe-12/"
             },
             {
-              "label": "Tag der offenen Türe bei den Zürcher Sängerknaben",
-              "detail": "Probelokal der Zürcher Sängerknaben",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/tag-der-offenen-tuere-bei-den-zuercher-saengerknaben_AxvMmfK"
+              "label": "Alice im Wunderland",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alice-im-wunderland-1/"
             },
             {
-              "label": "Tag der offenen Tanztür bei SalsaRica",
-              "detail": "SalsaRica Tanzschule",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/tag-der-offenen-tuer-bei-salarica_AxVjGTV"
+              "label": "Netzwerker der Natur",
+              "detail": "Naturstation Silberweide, Mönchaltorf",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/netzwerker-der-natur/"
             },
             {
-              "label": "Schnellster Limmattaler Fisch",
-              "detail": "Dietikon",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schnellster-limmattaler-fisch/"
+              "label": "Familienkonzert - Chaos im Königreich Organum",
+              "detail": "Kantonsschule Zürcher Oberland, Wetzikon (ZH)",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familienkonzert-chaos-im-koenigreich-organum/"
             },
             {
-              "label": "Instrumente kennenlernen",
-              "detail": "Schulhaus Zentral, Dietikon",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/instrumente-kennenlernen_ARKtMhY"
+              "label": "Herbstkonzert Harmonie und Jungbläser Turbenthal",
+              "detail": "Reformierte Kirche, Turbenthal",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/turbenthal/herbstkonzert-harmonie-und-jungblaeser-turbenthal_AfZZR9Z"
             },
             {
-              "label": "Turner-Chränzli TV Ried",
-              "detail": "Gibswil, Wald (ZH)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turner-chraenzli-tv-ried/"
+              "label": "Kindertheater",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindertheater-3/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "354",
+          "value": "349",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Oldies Night",
-              "detail": "Dübendorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-night/"
+              "label": "Koffergeschichten – Improtheater ab 4 Jahren",
+              "detail": "Uster",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/koffergeschichten-improtheater-ab-4-jahren/"
             },
             {
-              "label": "Uetliberger Weihnachtsmarkt",
-              "detail": "Hotel UTO KULM car-free hideaway in Zurich, Zürich",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/uetliberger-weihnachtsmarkt/"
+              "label": "Los Dos für Familien",
+              "detail": "Moods im Schiffbau",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/los-dos-fuer-familien_AfVRaK6"
             },
             {
-              "label": "Bewegung, Entspannung & Brunch",
-              "detail": "Turbenthal",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bewegung-entspannung-brunch-1/"
+              "label": "Kammermusik-Matinee",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kammermusik-matinee-2/"
             },
             {
-              "label": "Cruisetour & e-hoi Cruise Fair",
-              "detail": "Lake Side",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/knowledge/zurich/cruisetour-und-e-hoi-cruise-fair_AtqWDnc"
+              "label": "Kinder-Zaubershow mit Dan White & dem quasselnden Seehund",
+              "detail": "Dürnten",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kinderzaubershow-mit-dan-white-dem-quasselnden-seehund/"
             },
             {
-              "label": "Herbstmarkt Urdorf",
-              "detail": "Urdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstmarkt-urdorf/"
+              "label": "Schwiizergoofe",
+              "detail": "Volkshaus Zürich, Zürich",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schwiizergoofe-12/"
             },
             {
-              "label": "Tag der offenen Türe bei den Zürcher Sängerknaben",
-              "detail": "Probelokal der Zürcher Sängerknaben",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/tag-der-offenen-tuere-bei-den-zuercher-saengerknaben_AxvMmfK"
+              "label": "Alice im Wunderland",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alice-im-wunderland-1/"
             },
             {
-              "label": "Tag der offenen Tanztür bei SalsaRica",
-              "detail": "SalsaRica Tanzschule",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/tag-der-offenen-tuer-bei-salarica_AxVjGTV"
+              "label": "Netzwerker der Natur",
+              "detail": "Naturstation Silberweide, Mönchaltorf",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/netzwerker-der-natur/"
             },
             {
-              "label": "Schnellster Limmattaler Fisch",
-              "detail": "Dietikon",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schnellster-limmattaler-fisch/"
+              "label": "Familienkonzert - Chaos im Königreich Organum",
+              "detail": "Kantonsschule Zürcher Oberland, Wetzikon (ZH)",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familienkonzert-chaos-im-koenigreich-organum/"
             },
             {
-              "label": "Instrumente kennenlernen",
-              "detail": "Schulhaus Zentral, Dietikon",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/instrumente-kennenlernen_ARKtMhY"
+              "label": "Herbstkonzert Harmonie und Jungbläser Turbenthal",
+              "detail": "Reformierte Kirche, Turbenthal",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/turbenthal/herbstkonzert-harmonie-und-jungblaeser-turbenthal_AfZZR9Z"
             },
             {
-              "label": "Turner-Chr TV",
-              "detail": "Gibswil, Wald (ZH)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turner-chraenzli-tv-ried/"
+              "label": "Kindertheater",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindertheater-3/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "354",
+          "value": "349",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Oldies Night",
-              "detail": "Dübendorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-night/"
+              "label": "Koffergeschichten – Improtheater ab 4 Jahren",
+              "detail": "Uster",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/koffergeschichten-improtheater-ab-4-jahren/"
             },
             {
-              "label": "Uetliberger Weihnachtsmarkt",
-              "detail": "Hotel UTO KULM car-free hideaway in Zurich, Zürich",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/uetliberger-weihnachtsmarkt/"
+              "label": "Los Dos für Familien",
+              "detail": "Moods im Schiffbau",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/los-dos-fuer-familien_AfVRaK6"
             },
             {
-              "label": "Bewegung, Entspannung & Brunch",
-              "detail": "Turbenthal",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bewegung-entspannung-brunch-1/"
+              "label": "Kammermusik-Matinee",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kammermusik-matinee-2/"
             },
             {
-              "label": "Cruisetour & e-hoi Kreuzfahrtenmesse",
-              "detail": "Lake Side",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/knowledge/zurich/cruisetour-und-e-hoi-cruise-fair_AtqWDnc"
+              "label": "Kinder-Zaubershow mit Dan White & dem quasselnden Seehund",
+              "detail": "Dürnten",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kinderzaubershow-mit-dan-white-dem-quasselnden-seehund/"
             },
             {
-              "label": "Herbstmarkt Urdorf",
-              "detail": "Urdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstmarkt-urdorf/"
+              "label": "Schwiizergoofe",
+              "detail": "Volkshaus Zürich, Zürich",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schwiizergoofe-12/"
             },
             {
-              "label": "Tag der offenen Türe bei den Zürcher Sängerknaben",
-              "detail": "Probelokal der Zürcher Sängerknaben",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/tag-der-offenen-tuere-bei-den-zuercher-saengerknaben_AxvMmfK"
+              "label": "Alice im Wunderland",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alice-im-wunderland-1/"
             },
             {
-              "label": "Tag der offenen Tanztür bei SalsaRica",
-              "detail": "SalsaRica Tanzschule",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/tag-der-offenen-tuer-bei-salarica_AxVjGTV"
+              "label": "Netzwerker der Natur",
+              "detail": "Naturstation Silberweide, Mönchaltorf",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/netzwerker-der-natur/"
             },
             {
-              "label": "Schnellster Limmattaler Fisch",
-              "detail": "Dietikon",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schnellster-limmattaler-fisch/"
+              "label": "Familienkonzert - Chaos im Königreich Organum",
+              "detail": "Kantonsschule Zürcher Oberland, Wetzikon (ZH)",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familienkonzert-chaos-im-koenigreich-organum/"
             },
             {
-              "label": "Instrumente kennenlernen",
-              "detail": "Schulhaus Zentral, Dietikon",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/instrumente-kennenlernen_ARKtMhY"
+              "label": "Herbstkonzert Harmonie und Jungbläser Turbenthal",
+              "detail": "Reformierte Kirche, Turbenthal",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/turbenthal/herbstkonzert-harmonie-und-jungblaeser-turbenthal_AfZZR9Z"
             },
             {
-              "label": "Turner-Chr ①nzli TV Ried",
-              "detail": "Gibswil, Wald (ZH)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turner-chraenzli-tv-ried/"
+              "label": "Kindertheater",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindertheater-3/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "354",
+          "value": "349",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Oldies Night",
-              "detail": "Dübendorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-night/"
+              "label": "Koffergeschichten – Improtheater ab 4 Jahren",
+              "detail": "Uster",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/koffergeschichten-improtheater-ab-4-jahren/"
             },
             {
-              "label": "Uetliberger Weihnachtsmarkt",
-              "detail": "Hotel UTO KULM car-free hideaway in Zurich, Zürich",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/uetliberger-weihnachtsmarkt/"
+              "label": "Los Dos für Familien",
+              "detail": "Moods im Schiffbau",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/los-dos-fuer-familien_AfVRaK6"
             },
             {
-              "label": "Bewegung, Entspannung & Brunch",
-              "detail": "Turbenthal",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bewegung-entspannung-brunch-1/"
+              "label": "Kammermusik-Matinee",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kammermusik-matinee-2/"
             },
             {
-              "label": "Salon des croisières Cruisetour & e-hoi",
-              "detail": "Lake Side",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/knowledge/zurich/cruisetour-und-e-hoi-cruise-fair_AtqWDnc"
+              "label": "Kinder-Zaubershow mit Dan White & dem quasselnden Seehund",
+              "detail": "Dürnten",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kinderzaubershow-mit-dan-white-dem-quasselnden-seehund/"
             },
             {
-              "label": "Herbstmarkt Urdorf",
-              "detail": "Urdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstmarkt-urdorf/"
+              "label": "Schwiizergoofe",
+              "detail": "Volkshaus Zürich, Zürich",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schwiizergoofe-12/"
             },
             {
-              "label": "Tag der offenen Türe bei den Zürcher Sängerknaben",
-              "detail": "Probelokal der Zürcher Sängerknaben",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/tag-der-offenen-tuere-bei-den-zuercher-saengerknaben_AxvMmfK"
+              "label": "Alice im Wunderland",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alice-im-wunderland-1/"
             },
             {
-              "label": "Tag der offenen Tanztür bei SalsaRica",
-              "detail": "SalsaRica Tanzschule",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/tag-der-offenen-tuer-bei-salarica_AxVjGTV"
+              "label": "Netzwerker der Natur",
+              "detail": "Naturstation Silberweide, Mönchaltorf",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/netzwerker-der-natur/"
             },
             {
-              "label": "Schnellster Limmattaler Fisch",
-              "detail": "Dietikon",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schnellster-limmattaler-fisch/"
+              "label": "Familienkonzert - Chaos im Königreich Organum",
+              "detail": "Kantonsschule Zürcher Oberland, Wetzikon (ZH)",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familienkonzert-chaos-im-koenigreich-organum/"
             },
             {
-              "label": "Instrumente kennenlernen",
-              "detail": "Schulhaus Zentral, Dietikon",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/instrumente-kennenlernen_ARKtMhY"
+              "label": "Herbstkonzert Harmonie und Jungbläser Turbenthal",
+              "detail": "Reformierte Kirche, Turbenthal",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/turbenthal/herbstkonzert-harmonie-und-jungblaeser-turbenthal_AfZZR9Z"
             },
             {
-              "label": "Tourneur-Chr TV",
-              "detail": "Gibswil, Wald (ZH)",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turner-chraenzli-tv-ried/"
+              "label": "Kindertheater",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindertheater-3/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

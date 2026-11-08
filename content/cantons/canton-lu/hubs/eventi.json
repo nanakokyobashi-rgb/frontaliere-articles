@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "d0cd5ea78dfc7cb27e37c55e2ecabe4235fbf73fe9ee39418d9397c19ba64046",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "b85c15d480a37c1bbc94651db7027cef9c4c8890ed6e2d52d632a7743fb361b8",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T13:54:16.445Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     },
     {
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "58",
+          "value": "56",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Naturschutzfachliche Pflege",
-              "detail": "Ettiswil",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturschutzfachliche-pflege/"
+              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
+              "detail": "Lucerne, Luzern",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
             },
             {
-              "label": "Musikalische Unterhaltung",
-              "detail": "Kurhaus Seeblick, Weggis",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment-group-melange_AKTRKTK"
+              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
+              "detail": "Hotel Schweizerhof, Luzern",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
             },
             {
-              "label": "Metal Night",
-              "detail": "Schwiizer Chalet, Schenkon",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schenkon/metal-night_Aq8k3pD"
+              "label": "360° Milonga",
+              "detail": "Bourbaki Panorama",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
             },
             {
-              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
-              "detail": "Röm.-kath. Magdalenenkirche, Luzern",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/meggen/der-backgammon-chor-luzern-praesentiert-voyage-voyage_A8mbuHX"
+              "label": "Yoga Fall Festival",
+              "detail": "Hotel Vitznauerhof, Vitznau — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yoga-herbst-festival/"
             },
             {
-              "label": "Mundartlieder zum Zuhören",
-              "detail": "BEWIA Höchweid AG, Werthenstein",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/werthenstein/mundartlieder-zum-zuhoeren_AH3rW94"
+              "label": "Yoga Sphere Retreat",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yogasphaere-auszeit/"
             },
             {
-              "label": "Theater und Konzert",
-              "detail": "Schulhaus Greppen, Greppen",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/evenements/musique/greppen/theatre-et-concert_AEj7TYF"
+              "label": "Theateraufführung \"Garageusen\"",
+              "detail": "Schulhaus Greppen, Greppen — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/events/music/greppen/theater-production-garageusen_AED7uEn"
             },
             {
-              "label": "Trio Anderscht, Désireée Dell`Amore & Daniel Küfler mit \"Saitenzauber\"",
-              "detail": "Vitznau",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trio-anderscht-desireee-dellamore-daniel-kuefler-mit-saitenzauber/"
+              "label": "Schweizer Wohntage: Luzern",
+              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
             },
             {
-              "label": "Unique, das neue Show-Feuerwerk von Chris & Mike",
-              "detail": "Theater Duo Fischbach, Fischbach",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/unique-das-neue-showfeuerwerk-von-chris-mike/"
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
             },
             {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Jesuitenkirche",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/luzern/vivaldi-die-vier-jahreszeiten_AEGvrBe"
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — in corso, ultimo giorno: 25 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
             },
             {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Jesuitenkirche, Luzern",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vivaldi-die-vier-jahreszeiten-7/"
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "LU",
@@ -182,7 +182,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "58",
+          "value": "56",
           "note": "from the site’s events calendar"
         }
       ],
@@ -193,69 +193,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Naturschutzfachliche Pflege",
-              "detail": "Ettiswil",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturschutzfachliche-pflege/"
+              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
+              "detail": "Lucerne, Luzern",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
             },
             {
-              "label": "Musical entertainment - Group Mélange",
-              "detail": "Kurhaus Seeblick, Weggis",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment-group-melange_AKTRKTK"
+              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
+              "detail": "Hotel Schweizerhof, Luzern",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
             },
             {
-              "label": "Metal Night",
-              "detail": "Schwiizer Chalet, Schenkon",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schenkon/metal-night_Aq8k3pD"
+              "label": "360° Milonga",
+              "detail": "Bourbaki Panorama",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
             },
             {
-              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
-              "detail": "Röm.-kath. Magdalenenkirche, Luzern",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/meggen/der-backgammon-chor-luzern-praesentiert-voyage-voyage_A8mbuHX"
+              "label": "Yoga Fall Festival",
+              "detail": "Hotel Vitznauerhof, Vitznau — ongoing, last day: 8 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yoga-herbst-festival/"
             },
             {
-              "label": "Mundartlieder zum Zuhören",
-              "detail": "BEWIA Höchweid AG, Werthenstein",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/werthenstein/mundartlieder-zum-zuhoeren_AH3rW94"
+              "label": "Yoga Sphere Retreat",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli — ongoing, last day: 8 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yogasphaere-auszeit/"
             },
             {
-              "label": "Theater and Concerts",
-              "detail": "Schulhaus Greppen, Greppen",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/evenements/musique/greppen/theatre-et-concert_AEj7TYF"
+              "label": "Theater Production \"Garageusen\"",
+              "detail": "Schulhaus Greppen, Greppen — ongoing, last day: 8 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/events/music/greppen/theater-production-garageusen_AED7uEn"
             },
             {
-              "label": "Trio Anderscht, Désireée Dell`Amore & Daniel Küfler mit \"Saitenzauber\"",
-              "detail": "Vitznau",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trio-anderscht-desireee-dellamore-daniel-kuefler-mit-saitenzauber/"
+              "label": "Schweizer Wohntage: Luzern",
+              "detail": "Luzern — ongoing, last day: 15 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
             },
             {
-              "label": "Unique, das neue Show-Feuerwerk von Chris & Mike",
-              "detail": "Theater Duo Fischbach, Fischbach",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/unique-das-neue-showfeuerwerk-von-chris-mike/"
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — ongoing, last day: 15 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
             },
             {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Jesuitenkirche",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/luzern/vivaldi-die-vier-jahreszeiten_AEGvrBe"
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — ongoing, last day: 25 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
             },
             {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Jesuitenkirche, Luzern",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vivaldi-die-vier-jahreszeiten-7/"
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "LU",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "58",
+          "value": "56",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Naturschutzfachliche Pflege",
-              "detail": "Ettiswil",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturschutzfachliche-pflege/"
+              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
+              "detail": "Lucerne, Luzern",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
             },
             {
-              "label": "Musikalische Unterhaltung",
-              "detail": "Kurhaus Seeblick, Weggis",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment-group-melange_AKTRKTK"
+              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
+              "detail": "Hotel Schweizerhof, Luzern",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
             },
             {
-              "label": "Metal Night",
-              "detail": "Schwiizer Chalet, Schenkon",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schenkon/metal-night_Aq8k3pD"
+              "label": "360° Milonga",
+              "detail": "Bourbaki Panorama",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
             },
             {
-              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
-              "detail": "Röm.-kath. Magdalenenkirche, Luzern",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/meggen/der-backgammon-chor-luzern-praesentiert-voyage-voyage_A8mbuHX"
+              "label": "Yoga Herbst Festival",
+              "detail": "Hotel Vitznauerhof, Vitznau — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yoga-herbst-festival/"
             },
             {
-              "label": "Mundartlieder zum Zuhören",
-              "detail": "BEWIA Höchweid AG, Werthenstein",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/werthenstein/mundartlieder-zum-zuhoeren_AH3rW94"
+              "label": "Yogasphäre-Auszeit",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yogasphaere-auszeit/"
             },
             {
-              "label": "Theater und Konzert",
-              "detail": "Schulhaus Greppen, Greppen",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/evenements/musique/greppen/theatre-et-concert_AEj7TYF"
+              "label": "Theateraufführung \"Garageusen\"",
+              "detail": "Schulhaus Greppen, Greppen — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/events/music/greppen/theater-production-garageusen_AED7uEn"
             },
             {
-              "label": "Trio Anderscht, Désireée Dell`Amore & Daniel Küfler mit \"Saitenzauber\"",
-              "detail": "Vitznau",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trio-anderscht-desireee-dellamore-daniel-kuefler-mit-saitenzauber/"
+              "label": "Schweizer Wohntage: Luzern",
+              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
             },
             {
-              "label": "Unique, das neue Show-Feuerwerk von Chris & Mike",
-              "detail": "Theater Duo Fischbach, Fischbach",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/unique-das-neue-showfeuerwerk-von-chris-mike/"
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
             },
             {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Jesuitenkirche",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/luzern/vivaldi-die-vier-jahreszeiten_AEGvrBe"
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — läuft, letzter Tag: 25. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
             },
             {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Jesuitenkirche, Luzern",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vivaldi-die-vier-jahreszeiten-7/"
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "LU",
@@ -492,7 +492,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "58",
+          "value": "56",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -503,69 +503,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Naturschutzfachliche Pflege",
-              "detail": "Ettiswil",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturschutzfachliche-pflege/"
+              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
+              "detail": "Lucerne, Luzern",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
             },
             {
-              "label": "Musikalische Unterhaltung",
-              "detail": "Kurhaus Seeblick, Weggis",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment-group-melange_AKTRKTK"
+              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
+              "detail": "Hotel Schweizerhof, Luzern",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
             },
             {
-              "label": "Metal Night",
-              "detail": "Schwiizer Chalet, Schenkon",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schenkon/metal-night_Aq8k3pD"
+              "label": "360° Milonga",
+              "detail": "Bourbaki Panorama",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
             },
             {
-              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
-              "detail": "Röm.-kath. Magdalenenkirche, Luzern",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/meggen/der-backgammon-chor-luzern-praesentiert-voyage-voyage_A8mbuHX"
+              "label": "Festival d'automne de yoga",
+              "detail": "Hotel Vitznauerhof, Vitznau — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yoga-herbst-festival/"
             },
             {
-              "label": "Mundartlieder zum Zuhören",
-              "detail": "BEWIA Höchweid AG, Werthenstein",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/werthenstein/mundartlieder-zum-zuhoeren_AH3rW94"
+              "label": "Escapade « Yogasphère »",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/yogasphaere-auszeit/"
             },
             {
-              "label": "Théâtre et concert",
-              "detail": "Schulhaus Greppen, Greppen",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/evenements/musique/greppen/theatre-et-concert_AEj7TYF"
+              "label": "Pièce de théâtre « Garageusen »",
+              "detail": "Schulhaus Greppen, Greppen — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/events/music/greppen/theater-production-garageusen_AED7uEn"
             },
             {
-              "label": "Trio Anderscht, Désireée Dell`Amore & Daniel Küfler mit \"Saitenzauber\"",
-              "detail": "Vitznau",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trio-anderscht-desireee-dellamore-daniel-kuefler-mit-saitenzauber/"
+              "label": "Schweizer Wohntage: Luzern",
+              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
             },
             {
-              "label": "Unique, das neue Show-Feuerwerk von Chris & Mike",
-              "detail": "Theater Duo Fischbach, Fischbach",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/unique-das-neue-showfeuerwerk-von-chris-mike/"
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
             },
             {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Jesuitenkirche",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/luzern/vivaldi-die-vier-jahreszeiten_AEGvrBe"
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — en cours, dernier jour : 25 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
             },
             {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Jesuitenkirche, Luzern",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vivaldi-die-vier-jahreszeiten-7/"
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

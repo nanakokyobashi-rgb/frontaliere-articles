@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "eca8abdbc4321c8e6e188605ed9c51029e923a31690fd63e6a58530fa2dbf29b",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "2d707aea9519f5b0338b06fd74e989e03a85429d9f5a36982c02917a2af50a37",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T00:12:54.064Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "19",
+          "value": "16",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,48 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "20. Kreativ-Handwerkermarkt",
-              "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
-            },
-            {
-              "label": "Hölloch Expedition Glitter Gate",
-              "detail": "Muotathal",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hoelloch-expedition-glitter-gate-1/"
-            },
-            {
-              "label": "Hölloch Tages-Expedition Glitzertor",
-              "detail": "Hölloch Center, Muotathal",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muotathal/hoelloch-tages-expedition-glitzertor_AxiRDhS"
-            },
-            {
-              "label": "Hölloch 2-Tages-Expedition",
-              "detail": "Hölloch Center Muotathal, Muotathal",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/muotathal/dies-und-das/hoelloch-parcours_Avpatrc"
-            },
-            {
-              "label": "Martinsmarkt Gersau",
-              "detail": "6442 Gersau, Gersau",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinsmarkt-gersau/"
-            },
-            {
-              "label": "2. Handgruobi-Chilbi",
-              "detail": "Rickenbach b. Schwyz, Schwyz",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/2-handgruobichilbi/"
-            },
-            {
-              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
             {
               "label": "Besser Schreiben und Informationen finden mit Hilfe des Computers / Tageskurs",
               "detail": "Küssnacht am Rigi",
@@ -91,11 +49,53 @@
               "detail": "Forum Schweizer Geschichte Schwyz, Schwyz",
               "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zeitreise-ins-mittelalter-mit-gertrud-der-stauffacherin/"
+            },
+            {
+              "label": "DinnerKrimi «Pizza, Pasta, Mord»",
+              "detail": "Einsiedeln",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dinnerkrimi-pizza-pasta-mord-1/"
+            },
+            {
+              "label": "20. Kreativ-Handwerkermarkt",
+              "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
+            },
+            {
+              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
+              "detail": "Schwyz — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
+            },
+            {
+              "label": "Mercato Martini",
+              "detail": "Khaled Madi, Einsiedeln",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/martini-market/"
+            },
+            {
+              "label": "Publikumsvortrag: Die genetische Untersuchung am Beispiel Brustkrebs",
+              "detail": "Hotel Drei Könige, Einsiedeln",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/publikumsvortrag-die-genetische-untersuchung-am-beispiel-brustkrebs/"
+            },
+            {
+              "label": "Familienworkshop - Siegel. Kunst und Handwerk.",
+              "detail": "Schwyz",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-siegel-kunst-und-handwerk/"
+            },
+            {
+              "label": "Erzählnacht: Ein Spaziergang voller Geschichten durch Küssnacht",
+              "detail": "Küssnacht am Rigi, Küssnacht (SZ)",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-ein-spaziergang-voller-geschichten-durch-kuessnacht/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "SZ",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "19",
+          "value": "16",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,48 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "20. Kreativ-Handwerkermarkt",
-              "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
-            },
-            {
-              "label": "Hölloch Expedition Glitter Gate",
-              "detail": "Muotathal",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hoelloch-expedition-glitter-gate-1/"
-            },
-            {
-              "label": "Hölloch Expedition Glitter Gate",
-              "detail": "Hölloch Center, Muotathal",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muotathal/hoelloch-tages-expedition-glitzertor_AxiRDhS"
-            },
-            {
-              "label": "H 2 Lloch 2-Tages-Ex",
-              "detail": "Hölloch Center Muotathal, Muotathal",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/muotathal/dies-und-das/hoelloch-parcours_Avpatrc"
-            },
-            {
-              "label": "Martinsmarkt Gersau",
-              "detail": "6442 Gersau, Gersau",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinsmarkt-gersau/"
-            },
-            {
-              "label": "2. Handgruobi-Chilbi",
-              "detail": "Rickenbach b. Schwyz, Schwyz",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/2-handgruobichilbi/"
-            },
-            {
-              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz — ongoing, last day: 14 November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
             {
               "label": "Besser Schreiben und Informationen finden mit Hilfe des Computers / Tageskurs",
               "detail": "Küssnacht am Rigi",
@@ -196,11 +154,53 @@
               "detail": "Forum Schweizer Geschichte Schwyz, Schwyz",
               "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zeitreise-ins-mittelalter-mit-gertrud-der-stauffacherin/"
+            },
+            {
+              "label": "DinnerKrimi «Pizza, Pasta, Mord»",
+              "detail": "Einsiedeln",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dinnerkrimi-pizza-pasta-mord-1/"
+            },
+            {
+              "label": "20. Kreativ-Handwerkermarkt",
+              "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm — ongoing, last day: 8 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
+            },
+            {
+              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
+              "detail": "Schwyz — ongoing, last day: 14 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
+            },
+            {
+              "label": "Martini Market",
+              "detail": "Khaled Madi, Einsiedeln",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/martini-market/"
+            },
+            {
+              "label": "Publikumsvortrag: Die genetische Untersuchung am Beispiel Brustkrebs",
+              "detail": "Hotel Drei Könige, Einsiedeln",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/publikumsvortrag-die-genetische-untersuchung-am-beispiel-brustkrebs/"
+            },
+            {
+              "label": "Familienworkshop - Siegel. Kunst und Handwerk.",
+              "detail": "Schwyz",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-siegel-kunst-und-handwerk/"
+            },
+            {
+              "label": "Erzählnacht: Ein Spaziergang voller Geschichten durch Küssnacht",
+              "detail": "Küssnacht am Rigi, Küssnacht (SZ)",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-ein-spaziergang-voller-geschichten-durch-kuessnacht/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "SZ",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "19",
+          "value": "16",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,48 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "20. Kreativ-Handwerkermarkt",
-              "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
-            },
-            {
-              "label": "Hölloch Tages-Expedition Glitzertor",
-              "detail": "Muotathal",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hoelloch-expedition-glitter-gate-1/"
-            },
-            {
-              "label": "Hölloch Tages-Expedition Glitzertor",
-              "detail": "Hölloch Center, Muotathal",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muotathal/hoelloch-tages-expedition-glitzertor_AxiRDhS"
-            },
-            {
-              "label": "H Zucchlloch 2-Tages-E Zucchppedition",
-              "detail": "Hölloch Center Muotathal, Muotathal",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/muotathal/dies-und-das/hoelloch-parcours_Avpatrc"
-            },
-            {
-              "label": "Martinsmarkt Gersau",
-              "detail": "6442 Gersau, Gersau",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinsmarkt-gersau/"
-            },
-            {
-              "label": "2. Handgruobi-Chilbi",
-              "detail": "Rickenbach b. Schwyz, Schwyz",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/2-handgruobichilbi/"
-            },
-            {
-              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
             {
               "label": "Besser Schreiben und Informationen finden mit Hilfe des Computers / Tageskurs",
               "detail": "Küssnacht am Rigi",
@@ -301,11 +259,53 @@
               "detail": "Forum Schweizer Geschichte Schwyz, Schwyz",
               "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zeitreise-ins-mittelalter-mit-gertrud-der-stauffacherin/"
+            },
+            {
+              "label": "DinnerKrimi «Pizza, Pasta, Mord»",
+              "detail": "Einsiedeln",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dinnerkrimi-pizza-pasta-mord-1/"
+            },
+            {
+              "label": "20. Kreativ-Handwerkermarkt",
+              "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
+            },
+            {
+              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
+              "detail": "Schwyz — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
+            },
+            {
+              "label": "Martinimarkt",
+              "detail": "Khaled Madi, Einsiedeln",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/martini-market/"
+            },
+            {
+              "label": "Publikumsvortrag: Die genetische Untersuchung am Beispiel Brustkrebs",
+              "detail": "Hotel Drei Könige, Einsiedeln",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/publikumsvortrag-die-genetische-untersuchung-am-beispiel-brustkrebs/"
+            },
+            {
+              "label": "Familienworkshop - Siegel. Kunst und Handwerk.",
+              "detail": "Schwyz",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-siegel-kunst-und-handwerk/"
+            },
+            {
+              "label": "Erzählnacht: Ein Spaziergang voller Geschichten durch Küssnacht",
+              "detail": "Küssnacht am Rigi, Küssnacht (SZ)",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-ein-spaziergang-voller-geschichten-durch-kuessnacht/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "SZ",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "19",
+          "value": "16",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,48 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "20. Kreativ-Handwerkermarkt",
-              "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
-            },
-            {
-              "label": "Hölloch Expedition Glitter Gate",
-              "detail": "Muotathal",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hoelloch-expedition-glitter-gate-1/"
-            },
-            {
-              "label": "Hölloch Tages-Expedition Glitzertor",
-              "detail": "Hölloch Center, Muotathal",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muotathal/hoelloch-tages-expedition-glitzertor_AxiRDhS"
-            },
-            {
-              "label": "Hölloch 2-Tages-Expédition",
-              "detail": "Hölloch Center Muotathal, Muotathal",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/muotathal/dies-und-das/hoelloch-parcours_Avpatrc"
-            },
-            {
-              "label": "Martinsmarkt Gersau",
-              "detail": "6442 Gersau, Gersau",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinsmarkt-gersau/"
-            },
-            {
-              "label": "2. Handgruobi-Chilbi",
-              "detail": "Rickenbach b. Schwyz, Schwyz",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/2-handgruobichilbi/"
-            },
-            {
-              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
             {
               "label": "Besser Schreiben und Informationen finden mit Hilfe des Computers / Tageskurs",
               "detail": "Küssnacht am Rigi",
@@ -406,11 +364,53 @@
               "detail": "Forum Schweizer Geschichte Schwyz, Schwyz",
               "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zeitreise-ins-mittelalter-mit-gertrud-der-stauffacherin/"
+            },
+            {
+              "label": "DinnerKrimi «Pizza, Pasta, Mord»",
+              "detail": "Einsiedeln",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dinnerkrimi-pizza-pasta-mord-1/"
+            },
+            {
+              "label": "20. Kreativ-Handwerkermarkt",
+              "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
+            },
+            {
+              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
+              "detail": "Schwyz — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
+            },
+            {
+              "label": "Marché de la Saint-Martin",
+              "detail": "Khaled Madi, Einsiedeln",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/martini-market/"
+            },
+            {
+              "label": "Publikumsvortrag: Die genetische Untersuchung am Beispiel Brustkrebs",
+              "detail": "Hotel Drei Könige, Einsiedeln",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/publikumsvortrag-die-genetische-untersuchung-am-beispiel-brustkrebs/"
+            },
+            {
+              "label": "Familienworkshop - Siegel. Kunst und Handwerk.",
+              "detail": "Schwyz",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-siegel-kunst-und-handwerk/"
+            },
+            {
+              "label": "Erzählnacht: Ein Spaziergang voller Geschichten durch Küssnacht",
+              "detail": "Küssnacht am Rigi, Küssnacht (SZ)",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-ein-spaziergang-voller-geschichten-durch-kuessnacht/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

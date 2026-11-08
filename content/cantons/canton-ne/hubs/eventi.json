@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "e212a088600ad0a30271f60e55b8b3fcf2d2c5f7ecc565e8412fd8f1e690b2c5",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "e796182684254ec564c1d67d7688496c77e11e95c6a97dd6dd72693ad2b2e9a0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T00:12:54.064Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-06T22:26:45.566Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "21",
+          "value": "20",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Session DIY",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/session-diy-1/"
-            },
-            {
-              "label": "Conférence — Le théâtre de Dürrenmatt",
-              "detail": "Théâtre du Passage, Neuchâtel",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/conference-le-theatre-de-duerrenmatt/"
-            },
-            {
-              "label": "BROKEN BACK (FR)",
-              "detail": "Case à Chocs, Neuchâtel",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/broken-back-fr_AWQ6tpm"
-            },
-            {
-              "label": "Secrets of the Abyss",
-              "detail": "Secrets des Abysses, Neuchâtel — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
-            },
-            {
-              "label": "Un parfum de Chocolat",
-              "detail": "Boudry — in corso, ultimo giorno: 30 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
-            },
-            {
-              "label": "Brunch + visite guidée",
-              "detail": "Musée d'ethnographie, Neuchâtel — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
-            },
-            {
-              "label": "Apéro Contes",
-              "detail": "La Chaux-de-Fonds — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
-            },
-            {
-              "label": "Chocolatissimo",
-              "detail": "Chocolatissimo, Neuchâtel — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
-            },
-            {
               "label": "MAXIMILIAN HORNUNG Violoncello mit Orchester - Elgar",
               "detail": "La Chaux-de-Fonds",
               "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/maximilian-hornung-violoncello-mit-orchester-elgar/"
             },
             {
+              "label": "Secrets of the Abyss",
+              "detail": "Secrets des Abysses, Neuchâtel — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
+            },
+            {
+              "label": "Un parfum de Chocolat",
+              "detail": "Boudry — in corso, ultimo giorno: 30 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
+            },
+            {
+              "label": "Brunch + visite guidée",
+              "detail": "Musée d'ethnographie, Neuchâtel — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
+            },
+            {
+              "label": "Apéro Contes",
+              "detail": "La Chaux-de-Fonds — in corso, ultimo giorno: 28 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
+            },
+            {
               "label": "Cioccolato, domande esistenziali e scarpe comode…",
               "detail": "Bibliomonde, Neuchâtel",
               "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolat-questions-existentielles-et-bonnes-chaussures/"
+            },
+            {
+              "label": "Der Šenster Gob - Musique de l'Est et Musique Klezmer – République Tchèque",
+              "detail": "Bleu Café, Neuchâtel",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/der-enster-gob-musique-de-lest-et-musique-klezmer-republique-tcheque_A3qEY4L"
+            },
+            {
+              "label": "Soirées Lyrico-gustatives 2026",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soirees-lyrico-gustatives-2026/"
+            },
+            {
+              "label": "Spectacle Urban Move Academy x MEN",
+              "detail": "Neuchâtel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spectacle-urban-move-academy-x-men/"
+            },
+            {
+              "label": "Petite balade aux enfers",
+              "detail": "Neuchâtel",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/petite-balade-aux-enfers/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/neuchatel/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -128,7 +128,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +150,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "NE",
@@ -160,7 +160,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "21",
+          "value": "20",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,69 +171,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Session DIY",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/session-diy-1/"
-            },
-            {
-              "label": "Conférence — Le théâtre de Dürrenmatt",
-              "detail": "Théâtre du Passage, Neuchâtel",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/conference-le-theatre-de-duerrenmatt/"
-            },
-            {
-              "label": "BROKEN BACK (FR)",
-              "detail": "Case à Chocs, Neuchâtel",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/broken-back-fr_AWQ6tpm"
-            },
-            {
-              "label": "Secrets of the Abyss",
-              "detail": "Secrets des Abysses, Neuchâtel — ongoing, last day: 14 November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
-            },
-            {
-              "label": "Un parfum de Chocolat",
-              "detail": "Boudry — ongoing, last day: 30 November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
-            },
-            {
-              "label": "Brunch + visite guidée",
-              "detail": "Musée d'ethnographie, Neuchâtel — ongoing, last day: 15 November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
-            },
-            {
-              "label": "Apéro Contes",
-              "detail": "La Chaux-de-Fonds — ongoing, last day: 28 November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
-            },
-            {
-              "label": "Chocolatissimo",
-              "detail": "Chocolatissimo, Neuchâtel — ongoing, last day: 7 November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
-            },
-            {
               "label": "MAXIMILIAN HORNUNG Violoncello mit Orchester - Elgar",
               "detail": "La Chaux-de-Fonds",
               "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/maximilian-hornung-violoncello-mit-orchester-elgar/"
             },
             {
+              "label": "Secrets of the Abyss",
+              "detail": "Secrets des Abysses, Neuchâtel — ongoing, last day: 14 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
+            },
+            {
+              "label": "Un parfum de Chocolat",
+              "detail": "Boudry — ongoing, last day: 30 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
+            },
+            {
+              "label": "Brunch + visite guidée",
+              "detail": "Musée d'ethnographie, Neuchâtel — ongoing, last day: 15 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
+            },
+            {
+              "label": "Apéro Contes",
+              "detail": "La Chaux-de-Fonds — ongoing, last day: 28 November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
+            },
+            {
               "label": "Chocolate, existential questions, and good shoes…",
               "detail": "Bibliomonde, Neuchâtel",
               "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolat-questions-existentielles-et-bonnes-chaussures/"
+            },
+            {
+              "label": "Der Šenster Gob - Musique de l'Est et Musique Klezmer – République Tchèque",
+              "detail": "Bleu Café, Neuchâtel",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/der-enster-gob-musique-de-lest-et-musique-klezmer-republique-tcheque_A3qEY4L"
+            },
+            {
+              "label": "Soirées Lyrico-gustatives 2026",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soirees-lyrico-gustatives-2026/"
+            },
+            {
+              "label": "Spectacle Urban Move Academy x MEN",
+              "detail": "Neuchâtel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spectacle-urban-move-academy-x-men/"
+            },
+            {
+              "label": "Petite balade aux enfers",
+              "detail": "Neuchâtel",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/petite-balade-aux-enfers/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/neuchatel/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -261,7 +261,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -283,7 +283,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "NE",
@@ -293,7 +293,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "21",
+          "value": "20",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -304,69 +304,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Session DIY",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/session-diy-1/"
-            },
-            {
-              "label": "Conférence — Le théâtre de Dürrenmatt",
-              "detail": "Théâtre du Passage, Neuchâtel",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/conference-le-theatre-de-duerrenmatt/"
-            },
-            {
-              "label": "BROKEN BACK (FR)",
-              "detail": "Case à Chocs, Neuchâtel",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/broken-back-fr_AWQ6tpm"
-            },
-            {
-              "label": "Geheimnisse der Tiefsee",
-              "detail": "Secrets des Abysses, Neuchâtel — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
-            },
-            {
-              "label": "Un parfum de Chocolat",
-              "detail": "Boudry — läuft, letzter Tag: 30. November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
-            },
-            {
-              "label": "Brunch + visite guidée",
-              "detail": "Musée d'ethnographie, Neuchâtel — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
-            },
-            {
-              "label": "Apéro Contes",
-              "detail": "La Chaux-de-Fonds — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
-            },
-            {
-              "label": "Chocolatissimo",
-              "detail": "Chocolatissimo, Neuchâtel — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
-            },
-            {
               "label": "MAXIMILIAN HORNUNG Violoncello mit Orchester - Elgar",
               "detail": "La Chaux-de-Fonds",
               "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/maximilian-hornung-violoncello-mit-orchester-elgar/"
             },
             {
+              "label": "Geheimnisse der Tiefsee",
+              "detail": "Secrets des Abysses, Neuchâtel — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
+            },
+            {
+              "label": "Un parfum de Chocolat",
+              "detail": "Boudry — läuft, letzter Tag: 30. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
+            },
+            {
+              "label": "Brunch + visite guidée",
+              "detail": "Musée d'ethnographie, Neuchâtel — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
+            },
+            {
+              "label": "Apéro Contes",
+              "detail": "La Chaux-de-Fonds — läuft, letzter Tag: 28. November 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
+            },
+            {
               "label": "Schokolade, existenzielle Fragen und gute Schuhe…",
               "detail": "Bibliomonde, Neuchâtel",
               "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolat-questions-existentielles-et-bonnes-chaussures/"
+            },
+            {
+              "label": "Der Šenster Gob - Musique de l'Est et Musique Klezmer – République Tchèque",
+              "detail": "Bleu Café, Neuchâtel",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/der-enster-gob-musique-de-lest-et-musique-klezmer-republique-tcheque_A3qEY4L"
+            },
+            {
+              "label": "Soirées Lyrico-gustatives 2026",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soirees-lyrico-gustatives-2026/"
+            },
+            {
+              "label": "Spectacle Urban Move Academy x MEN",
+              "detail": "Neuchâtel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spectacle-urban-move-academy-x-men/"
+            },
+            {
+              "label": "Petite balade aux enfers",
+              "detail": "Neuchâtel",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/petite-balade-aux-enfers/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/neuenburg/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -394,7 +394,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -416,7 +416,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "NE",
@@ -426,7 +426,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "21",
+          "value": "20",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -437,69 +437,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Session DIY",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/session-diy-1/"
-            },
-            {
-              "label": "Conférence — Le théâtre de Dürrenmatt",
-              "detail": "Théâtre du Passage, Neuchâtel",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/conference-le-theatre-de-duerrenmatt/"
-            },
-            {
-              "label": "BROKEN BACK (FR)",
-              "detail": "Case à Chocs, Neuchâtel",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/broken-back-fr_AWQ6tpm"
-            },
-            {
-              "label": "Secrets des Abysses",
-              "detail": "Secrets des Abysses, Neuchâtel — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
-            },
-            {
-              "label": "Un parfum de Chocolat",
-              "detail": "Boudry — en cours, dernier jour : 30 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
-            },
-            {
-              "label": "Brunch + visite guidée",
-              "detail": "Musée d'ethnographie, Neuchâtel — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
-            },
-            {
-              "label": "Apéro Contes",
-              "detail": "La Chaux-de-Fonds — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
-            },
-            {
-              "label": "Chocolatissimo",
-              "detail": "Chocolatissimo, Neuchâtel — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
-            },
-            {
               "label": "MAXIMILIAN HORNUNG Violoncello mit Orchester - Elgar",
               "detail": "La Chaux-de-Fonds",
               "date": "2026-11-08",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/maximilian-hornung-violoncello-mit-orchester-elgar/"
             },
             {
+              "label": "Secrets des Abysses",
+              "detail": "Secrets des Abysses, Neuchâtel — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
+            },
+            {
+              "label": "Un parfum de Chocolat",
+              "detail": "Boudry — en cours, dernier jour : 30 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
+            },
+            {
+              "label": "Brunch + visite guidée",
+              "detail": "Musée d'ethnographie, Neuchâtel — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
+            },
+            {
+              "label": "Apéro Contes",
+              "detail": "La Chaux-de-Fonds — en cours, dernier jour : 28 novembre 2026",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
+            },
+            {
               "label": "Chocolat, questions existentielles et bonnes chaussures…",
               "detail": "Bibliomonde, Neuchâtel",
               "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolat-questions-existentielles-et-bonnes-chaussures/"
+            },
+            {
+              "label": "Der Šenster Gob - Musique de l'Est et Musique Klezmer – République Tchèque",
+              "detail": "Bleu Café, Neuchâtel",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/der-enster-gob-musique-de-lest-et-musique-klezmer-republique-tcheque_A3qEY4L"
+            },
+            {
+              "label": "Soirées Lyrico-gustatives 2026",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soirees-lyrico-gustatives-2026/"
+            },
+            {
+              "label": "Spectacle Urban Move Academy x MEN",
+              "detail": "Neuchâtel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spectacle-urban-move-academy-x-men/"
+            },
+            {
+              "label": "Petite balade aux enfers",
+              "detail": "Neuchâtel",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/petite-balade-aux-enfers/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/neuchatel/",
-          "updatedAt": "2026-11-06T00:12:54.064Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -527,7 +527,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-06T22:26:45.566Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "7599411cdad2d9c5510089313aec4778c2074b4258fd1d029f556427c33b37b5",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "3eb14a4562c0e11b10f0705ff1a2d2912894c931083e71ea12c01cc472e08813",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T13:54:16.445Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "197",
+          "value": "199",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Stress. Eine Ausstellung, die Mut macht",
+              "label": "Szenische Lesung",
+              "detail": "Thun",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/szenische-lesung/"
+            },
+            {
+              "label": "Trachtengruppe Gohl Unterhaltungsabend 2026",
+              "detail": "Langnau i.E., Langnau im Emmental",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trachtengruppe-gohl-unterhaltungsabend-2026/"
+            },
+            {
+              "label": "Workshop – 5 Wege zur Collage",
+              "detail": "Kunstmuseum Thun, Thun",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-5-wege-zur-collage/"
+            },
+            {
+              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
+              "detail": "Saalbau",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-be/konzert-jugendblasorchester-vbj-2026-kirchberg_AYQQYMZ"
+            },
+            {
+              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
+              "detail": "Kirchberg BE, Kirchberg (BE)",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-jugendblasorchester-vbj-2026-kirchberg/"
+            },
+            {
+              "label": "Bachvesper «Vergnügte Ruh»",
               "detail": "Bern",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stress-eine-ausstellung-die-mut-macht/"
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bachvesper-vergnuegte-ruh/"
             },
             {
-              "label": "Jewelry made from horsehair",
-              "detail": "Tanzlokal Bear Line Dancers, Interlaken",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bijou-en-crin-de-cheval/"
+              "label": "Duo-Abend Herbert Schaad, Violine / Jürg Lietha, Klavier",
+              "detail": "Aula Sekundarschule Zollikofen, Zollikofen",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/zollikofen/duo-abend-herbert-schaad-violine-juerg-lietha-klavier_Ad9VuBK"
             },
             {
-              "label": "Der Ton und seine Vielfalt im Theater",
-              "detail": "Burgdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-ton-und-seine-vielfalt-im-theater/"
+              "label": "Konzert gem. Chor",
+              "detail": "Evang.-ref. Kirche Beatenberg, Beatenberg",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/beatenberg/konzert-gem-chor_AMVAF7X"
             },
             {
-              "label": "Rosehip Day 2026",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rosehip-day-2026/"
+              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
+              "detail": "Villa Morillon",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater_ABawZWS"
             },
             {
-              "label": "Apéro mit Brot- und Zopfverkauf",
-              "detail": "Kulturreben / Culturovignes",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/apero-mit-brot-und-zopfverkauf-1/"
-            },
-            {
-              "label": "Heilpflanzenwerkstatt – Kräuter zum Verschenken",
-              "detail": "Praxis für Naturheilkunde, Laupen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/heilpflanzenwerkstatt-kraeuter-zum-verschenken/"
-            },
-            {
-              "label": "Myrta Benedetti: Vernissage Ausstellung Vogelwelten",
-              "detail": "Spiez",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/myrta-benedetti-vernissage-ausstellung-vogelwelten/"
-            },
-            {
-              "label": "Flohmarkt",
-              "detail": "QuartierInfo Mett, Biel/Bienne",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/flohmarkt-2/"
-            },
-            {
-              "label": "Handpan Schnupperkurs",
-              "detail": "Handpanschule Thun, Thun",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AMhqtKn"
-            },
-            {
-              "label": "LANGATUN BRENNSEMINAR Samstag, 7. November 2026",
-              "detail": "Aarwangen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/langatun-brennseminar-samstag-7-november-2026/"
+              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
+              "detail": "Bern",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "197",
+          "value": "199",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Stress. Eine Ausstellung, die Mut macht",
+              "label": "Szenische Lesung",
+              "detail": "Thun",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/szenische-lesung/"
+            },
+            {
+              "label": "Trachtengruppe Gohl Unterhaltungsabend 2026",
+              "detail": "Langnau i.E., Langnau im Emmental",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trachtengruppe-gohl-unterhaltungsabend-2026/"
+            },
+            {
+              "label": "Workshop – 5 Wege zur Collage",
+              "detail": "Kunstmuseum Thun, Thun",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-5-wege-zur-collage/"
+            },
+            {
+              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
+              "detail": "Saalbau",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-be/konzert-jugendblasorchester-vbj-2026-kirchberg_AYQQYMZ"
+            },
+            {
+              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
+              "detail": "Kirchberg BE, Kirchberg (BE)",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-jugendblasorchester-vbj-2026-kirchberg/"
+            },
+            {
+              "label": "Bachvesper «Vergnügte Ruh»",
               "detail": "Bern",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stress-eine-ausstellung-die-mut-macht/"
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bachvesper-vergnuegte-ruh/"
             },
             {
-              "label": "Jewelry made from horsehair",
-              "detail": "Tanzlokal Bear Line Dancers, Interlaken",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bijou-en-crin-de-cheval/"
+              "label": "Duo-Abend Herbert Schaad, Violine / Jürg Lietha, Klavier",
+              "detail": "Aula Sekundarschule Zollikofen, Zollikofen",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/zollikofen/duo-abend-herbert-schaad-violine-juerg-lietha-klavier_Ad9VuBK"
             },
             {
-              "label": "Der Ton und seine Vielfalt im Theater",
-              "detail": "Burgdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-ton-und-seine-vielfalt-im-theater/"
+              "label": "Konzert gem. Chor",
+              "detail": "Evang.-ref. Kirche Beatenberg, Beatenberg",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/beatenberg/konzert-gem-chor_AMVAF7X"
             },
             {
-              "label": "Rosehip Day 2026",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rosehip-day-2026/"
+              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
+              "detail": "Villa Morillon",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater_ABawZWS"
             },
             {
-              "label": "Apéro mit Brot- und Zopfverkauf",
-              "detail": "Kulturreben / Culturovignes",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/apero-mit-brot-und-zopfverkauf-1/"
-            },
-            {
-              "label": "Heilpflanzenwerkstatt – Kräuter zum Verschenken",
-              "detail": "Praxis für Naturheilkunde, Laupen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/heilpflanzenwerkstatt-kraeuter-zum-verschenken/"
-            },
-            {
-              "label": "Myrta Benedetti: Vernissage Ausstellung Vogelwelten",
-              "detail": "Spiez",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/myrta-benedetti-vernissage-ausstellung-vogelwelten/"
-            },
-            {
-              "label": "Flohmarkt",
-              "detail": "QuartierInfo Mett, Biel/Bienne",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/flohmarkt-2/"
-            },
-            {
-              "label": "Handpan Schnupperkurs",
-              "detail": "Handpanschule Thun, Thun",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AMhqtKn"
-            },
-            {
-              "label": "LANGATUN BRENNSEMINAR Samstag, 7. November 2026",
-              "detail": "Aarwangen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/langatun-brennseminar-samstag-7-november-2026/"
+              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
+              "detail": "Bern",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "197",
+          "value": "199",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Stress. Eine Ausstellung, die Mut macht",
+              "label": "Szenische Lesung",
+              "detail": "Thun",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/szenische-lesung/"
+            },
+            {
+              "label": "Trachtengruppe Gohl Unterhaltungsabend 2026",
+              "detail": "Langnau i.E., Langnau im Emmental",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trachtengruppe-gohl-unterhaltungsabend-2026/"
+            },
+            {
+              "label": "Workshop – 5 Wege zur Collage",
+              "detail": "Kunstmuseum Thun, Thun",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-5-wege-zur-collage/"
+            },
+            {
+              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
+              "detail": "Saalbau",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-be/konzert-jugendblasorchester-vbj-2026-kirchberg_AYQQYMZ"
+            },
+            {
+              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
+              "detail": "Kirchberg BE, Kirchberg (BE)",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-jugendblasorchester-vbj-2026-kirchberg/"
+            },
+            {
+              "label": "Bachvesper «Vergnügte Ruh»",
               "detail": "Bern",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stress-eine-ausstellung-die-mut-macht/"
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bachvesper-vergnuegte-ruh/"
             },
             {
-              "label": "Schmuckstück aus Pferdehaar",
-              "detail": "Tanzlokal Bear Line Dancers, Interlaken",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bijou-en-crin-de-cheval/"
+              "label": "Duo-Abend Herbert Schaad, Violine / Jürg Lietha, Klavier",
+              "detail": "Aula Sekundarschule Zollikofen, Zollikofen",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/zollikofen/duo-abend-herbert-schaad-violine-juerg-lietha-klavier_Ad9VuBK"
             },
             {
-              "label": "Der Ton und seine Vielfalt im Theater",
-              "detail": "Burgdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-ton-und-seine-vielfalt-im-theater/"
+              "label": "Konzert gem. Chor",
+              "detail": "Evang.-ref. Kirche Beatenberg, Beatenberg",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/beatenberg/konzert-gem-chor_AMVAF7X"
             },
             {
-              "label": "Hagebuttentag 2026",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rosehip-day-2026/"
+              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
+              "detail": "Villa Morillon",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater_ABawZWS"
             },
             {
-              "label": "Apéro mit Brot- und Zopfverkauf",
-              "detail": "Kulturreben / Culturovignes",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/apero-mit-brot-und-zopfverkauf-1/"
-            },
-            {
-              "label": "Heilpflanzenwerkstatt – Kräuter zum Verschenken",
-              "detail": "Praxis für Naturheilkunde, Laupen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/heilpflanzenwerkstatt-kraeuter-zum-verschenken/"
-            },
-            {
-              "label": "Myrta Benedetti: Vernissage Ausstellung Vogelwelten",
-              "detail": "Spiez",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/myrta-benedetti-vernissage-ausstellung-vogelwelten/"
-            },
-            {
-              "label": "Flohmarkt",
-              "detail": "QuartierInfo Mett, Biel/Bienne",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/flohmarkt-2/"
-            },
-            {
-              "label": "Handpan Schnupperkurs",
-              "detail": "Handpanschule Thun, Thun",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AMhqtKn"
-            },
-            {
-              "label": "LANGATUN BRENNSEMINAR Samstag, 7. November 2026",
-              "detail": "Aarwangen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/langatun-brennseminar-samstag-7-november-2026/"
+              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
+              "detail": "Bern",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "197",
+          "value": "199",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Stress. Eine Ausstellung, die Mut macht",
+              "label": "Szenische Lesung",
+              "detail": "Thun",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/szenische-lesung/"
+            },
+            {
+              "label": "Trachtengruppe Gohl Unterhaltungsabend 2026",
+              "detail": "Langnau i.E., Langnau im Emmental",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trachtengruppe-gohl-unterhaltungsabend-2026/"
+            },
+            {
+              "label": "Workshop – 5 Wege zur Collage",
+              "detail": "Kunstmuseum Thun, Thun",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-5-wege-zur-collage/"
+            },
+            {
+              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
+              "detail": "Saalbau",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-be/konzert-jugendblasorchester-vbj-2026-kirchberg_AYQQYMZ"
+            },
+            {
+              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
+              "detail": "Kirchberg BE, Kirchberg (BE)",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-jugendblasorchester-vbj-2026-kirchberg/"
+            },
+            {
+              "label": "Bachvesper «Vergnügte Ruh»",
               "detail": "Bern",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stress-eine-ausstellung-die-mut-macht/"
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bachvesper-vergnuegte-ruh/"
             },
             {
-              "label": "Bijou en crin de cheval",
-              "detail": "Tanzlokal Bear Line Dancers, Interlaken",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bijou-en-crin-de-cheval/"
+              "label": "Duo-Abend Herbert Schaad, Violine / Jürg Lietha, Klavier",
+              "detail": "Aula Sekundarschule Zollikofen, Zollikofen",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/zollikofen/duo-abend-herbert-schaad-violine-juerg-lietha-klavier_Ad9VuBK"
             },
             {
-              "label": "Der Ton und seine Vielfalt im Theater",
-              "detail": "Burgdorf",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-ton-und-seine-vielfalt-im-theater/"
+              "label": "Konzert gem. Chor",
+              "detail": "Evang.-ref. Kirche Beatenberg, Beatenberg",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/beatenberg/konzert-gem-chor_AMVAF7X"
             },
             {
-              "label": "Journée de l'églantier 2026",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rosehip-day-2026/"
+              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
+              "detail": "Villa Morillon",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater_ABawZWS"
             },
             {
-              "label": "Apéro vente de pain/tresses",
-              "detail": "Kulturreben / Culturovignes",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/apero-mit-brot-und-zopfverkauf-1/"
-            },
-            {
-              "label": "Heilpflanzenwerkstatt – Kräuter zum Verschenken",
-              "detail": "Praxis für Naturheilkunde, Laupen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/heilpflanzenwerkstatt-kraeuter-zum-verschenken/"
-            },
-            {
-              "label": "Myrta Benedetti: Vernissage Ausstellung Vogelwelten",
-              "detail": "Spiez",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/myrta-benedetti-vernissage-ausstellung-vogelwelten/"
-            },
-            {
-              "label": "Marché aux puces",
-              "detail": "QuartierInfo Mett, Biel/Bienne",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/flohmarkt-2/"
-            },
-            {
-              "label": "Handpan Schnupperkurs",
-              "detail": "Handpanschule Thun, Thun",
-              "date": "2026-11-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AMhqtKn"
-            },
-            {
-              "label": "LANGATUN BRENNSEMINAR Samstag, 7. November 2026",
-              "detail": "Aarwangen",
-              "date": "2026-11-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/langatun-brennseminar-samstag-7-november-2026/"
+              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
+              "detail": "Bern",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }

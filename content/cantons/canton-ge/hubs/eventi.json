@@ -4,12 +4,12 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "77ceddab41137349a06f56e571ea664230df64bbabb511c713ec1f582ddf6161",
+  "updatedAt": "2026-11-08T01:29:55.978Z",
+  "contentHash": "b1e050e881c47683e16d78aa3fabc3d98edd3c7775f7826d3dcefac5a0789175",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-06T13:54:16.445Z",
+      "updatedAt": "2026-11-07T01:21:56.611Z",
       "keyFacts": 1
     },
     {
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "359",
+          "value": "331",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Ateliers thérapeutiques pour les personnes vivant des situations de racisme",
+              "label": "AMISTAT + Orange Oak",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/ateliers-therapeutiques-vivant-situations-racisme"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/amistat-orange"
             },
             {
-              "label": "Aurélien Dougé, Sans titre (Barre d’acier)",
+              "label": "Ciné goûter - Luca (2024, durée : 1h36)",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/aurelien-douge-titre-barre-acier"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/cine-gouter-luca-2024-duree-1h36"
             },
             {
-              "label": "Ballet pour adultes - Tous Niveaux",
+              "label": "Demi-finale",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux-0"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/demi-finale"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | Journée anniversaire",
+              "label": "Emmanuel Pahud; Éric Le Sage",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-journee-anniversaire"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/emmanuel-pahud-eric-sage"
             },
             {
-              "label": "CONCERT (Festival Celtiques) - The Curious Bards, airs vagabonds d'Irlande et d'Ecosse",
+              "label": "Focus · Hommage à Patricio Guzmán (1941-2026)",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-curious-bards-airs-vagabonds-irlande-ecosse"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/focus-hommage-patricio-guzman-1941-2026"
             },
             {
-              "label": "Danse contemporaine pour adultes - Tous Niveaux",
+              "label": "Improoo - Le Festival du long format improvisé - En Thérapie",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/danse-contemporaine-adultes-niveaux-0"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/improoo-festival-long-format-improvise-therapie"
             },
             {
-              "label": "De fil en traits",
+              "label": "Les dimanches de Cité Seniors | Duo de guitares Leu et Dragonetti",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/traits"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/dimanches-cite-seniors-guitares-dragonetti"
             },
             {
-              "label": "Des insectes entre les pages",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/insectes-entre-pages"
+              "label": "Une balade en forêt, une raclette en extérieur et les saveurs du terroir genevois !",
+              "detail": "Dardagny",
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/balade-foret-raclette-exterieur-saveurs-terroir-genevois"
             },
             {
-              "label": "DJ KENKYLLA · AFRO CARIBBEAN SOCA DANCEHALL",
+              "label": "Visite en Langue des Signes Française SaSA x MAMCO",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/kenkylla-afro-caribbean-soca-dancehall-0"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/visite-langue-signes-francaise-sasa-mamco-0"
             },
             {
-              "label": "Exposition 1602 & Compagnie",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/exposition-1602-compagnie-0"
+              "label": "80e Concours de Genève – Demi-finale 2 de Direction d'Orchestre - Contrechamps",
+              "detail": "Autre lieu, Genève",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/80e-concours-de-geneve-demi-finale-2-de-direction-dorchestre-contrechamps_AVqXP7s"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "359",
+          "value": "331",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,69 +161,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Ateliers thérapeutiques pour les personnes vivant des situations de racisme",
+              "label": "AMISTAT + Orange Oak",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/ateliers-therapeutiques-vivant-situations-racisme"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/amistat-orange"
             },
             {
-              "label": "Aurélien Dougé, Sans titre (Barre d’acier)",
+              "label": "Ciné goûter - Luca (2024, durée : 1h36)",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/aurelien-douge-titre-barre-acier"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/cine-gouter-luca-2024-duree-1h36"
             },
             {
-              "label": "Ballet pour adultes - Tous Niveaux",
+              "label": "Demi-finale",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux-0"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/demi-finale"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | Journée anniversaire",
+              "label": "Emmanuel Pahud; Éric Le Sage",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-journee-anniversaire"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/emmanuel-pahud-eric-sage"
             },
             {
-              "label": "CONCERT (Festival Celtiques) - The Curious Bards, airs vagabonds d'Irlande et d'Ecosse",
+              "label": "Focus · Hommage à Patricio Guzmán (1941-2026)",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-curious-bards-airs-vagabonds-irlande-ecosse"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/focus-hommage-patricio-guzman-1941-2026"
             },
             {
-              "label": "Danse contemporaine pour adultes - Tous Niveaux",
+              "label": "Improoo - Le Festival du long format improvisé - En Thérapie",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/danse-contemporaine-adultes-niveaux-0"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/improoo-festival-long-format-improvise-therapie"
             },
             {
-              "label": "De fil en traits",
+              "label": "Les dimanches de Cité Seniors | Duo de guitares Leu et Dragonetti",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/traits"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/dimanches-cite-seniors-guitares-dragonetti"
             },
             {
-              "label": "Des insectes entre les pages",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/insectes-entre-pages"
+              "label": "Une balade en forêt, une raclette en extérieur et les saveurs du terroir genevois !",
+              "detail": "Dardagny",
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/balade-foret-raclette-exterieur-saveurs-terroir-genevois"
             },
             {
-              "label": "DJ KENKYLLA · AFRO CARIBBEAN SOCA DANCEHALL",
+              "label": "Visite en Langue des Signes Française SaSA x MAMCO",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/kenkylla-afro-caribbean-soca-dancehall-0"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/visite-langue-signes-francaise-sasa-mamco-0"
             },
             {
-              "label": "Exposition 1602 & Compagnie",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/exposition-1602-compagnie-0"
+              "label": "80e Concours de Genève – Demi-finale 2 de Direction d'Orchestre - Contrechamps",
+              "detail": "Autre lieu, Genève",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/80e-concours-de-geneve-demi-finale-2-de-direction-dorchestre-contrechamps_AVqXP7s"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "359",
+          "value": "331",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,69 +284,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Ateliers thérapeutiques pour les personnes vivant des situations de racisme",
+              "label": "AMISTAT + Orange Oak",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/ateliers-therapeutiques-vivant-situations-racisme"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/amistat-orange"
             },
             {
-              "label": "Aurélien Dougé, Sans titre (Barre d’acier)",
+              "label": "Ciné goûter - Luca (2024, durée : 1h36)",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/aurelien-douge-titre-barre-acier"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/cine-gouter-luca-2024-duree-1h36"
             },
             {
-              "label": "Ballet pour adultes - Tous Niveaux",
+              "label": "Demi-finale",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux-0"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/demi-finale"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | Journée anniversaire",
+              "label": "Emmanuel Pahud; Éric Le Sage",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-journee-anniversaire"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/emmanuel-pahud-eric-sage"
             },
             {
-              "label": "CONCERT (Festival Celtiques) - The Curious Bards, airs vagabonds d'Irlande et d'Ecosse",
+              "label": "Focus · Hommage à Patricio Guzmán (1941-2026)",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-curious-bards-airs-vagabonds-irlande-ecosse"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/focus-hommage-patricio-guzman-1941-2026"
             },
             {
-              "label": "Danse contemporaine pour adultes - Tous Niveaux",
+              "label": "Improoo - Le Festival du long format improvisé - En Thérapie",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/danse-contemporaine-adultes-niveaux-0"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/improoo-festival-long-format-improvise-therapie"
             },
             {
-              "label": "De fil en traits",
+              "label": "Les dimanches de Cité Seniors | Duo de guitares Leu et Dragonetti",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/traits"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/dimanches-cite-seniors-guitares-dragonetti"
             },
             {
-              "label": "Des insectes entre les pages",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/insectes-entre-pages"
+              "label": "Une balade en forêt, une raclette en extérieur et les saveurs du terroir genevois !",
+              "detail": "Dardagny",
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/balade-foret-raclette-exterieur-saveurs-terroir-genevois"
             },
             {
-              "label": "DJ KENKYLLA · AFRO CARIBBEAN SOCA DANCEHALL",
+              "label": "Visite en Langue des Signes Française SaSA x MAMCO",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/kenkylla-afro-caribbean-soca-dancehall-0"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/visite-langue-signes-francaise-sasa-mamco-0"
             },
             {
-              "label": "Exposition 1602 & Compagnie",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/exposition-1602-compagnie-0"
+              "label": "80e Concours de Genève – Demi-finale 2 de Direction d'Orchestre - Contrechamps",
+              "detail": "Autre lieu, Genève",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/80e-concours-de-geneve-demi-finale-2-de-direction-dorchestre-contrechamps_AVqXP7s"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "359",
+          "value": "331",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,69 +407,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Ateliers thérapeutiques pour les personnes vivant des situations de racisme",
+              "label": "AMISTAT + Orange Oak",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/ateliers-therapeutiques-vivant-situations-racisme"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/amistat-orange"
             },
             {
-              "label": "Aurélien Dougé, Sans titre (Barre d’acier)",
+              "label": "Ciné goûter - Luca (2024, durée : 1h36)",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/aurelien-douge-titre-barre-acier"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/cine-gouter-luca-2024-duree-1h36"
             },
             {
-              "label": "Ballet pour adultes - Tous Niveaux",
+              "label": "Demi-finale",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux-0"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/demi-finale"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | Journée anniversaire",
+              "label": "Emmanuel Pahud; Éric Le Sage",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-journee-anniversaire"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/emmanuel-pahud-eric-sage"
             },
             {
-              "label": "CONCERT (Festival Celtiques) - The Curious Bards, airs vagabonds d'Irlande et d'Ecosse",
+              "label": "Focus · Hommage à Patricio Guzmán (1941-2026)",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-curious-bards-airs-vagabonds-irlande-ecosse"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/focus-hommage-patricio-guzman-1941-2026"
             },
             {
-              "label": "Danse contemporaine pour adultes - Tous Niveaux",
+              "label": "Improoo - Le Festival du long format improvisé - En Thérapie",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/danse-contemporaine-adultes-niveaux-0"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/improoo-festival-long-format-improvise-therapie"
             },
             {
-              "label": "De fil en traits",
+              "label": "Les dimanches de Cité Seniors | Duo de guitares Leu et Dragonetti",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/traits"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/dimanches-cite-seniors-guitares-dragonetti"
             },
             {
-              "label": "Des insectes entre les pages",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/insectes-entre-pages"
+              "label": "Une balade en forêt, une raclette en extérieur et les saveurs du terroir genevois !",
+              "detail": "Dardagny",
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/balade-foret-raclette-exterieur-saveurs-terroir-genevois"
             },
             {
-              "label": "DJ KENKYLLA · AFRO CARIBBEAN SOCA DANCEHALL",
+              "label": "Visite en Langue des Signes Française SaSA x MAMCO",
               "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/kenkylla-afro-caribbean-soca-dancehall-0"
+              "date": "2026-11-08",
+              "url": "https://www.geneve.ch/agenda/visite-langue-signes-francaise-sasa-mamco-0"
             },
             {
-              "label": "Exposition 1602 & Compagnie",
-              "detail": "Genève",
-              "date": "2026-11-07",
-              "url": "https://www.geneve.ch/agenda/exposition-1602-compagnie-0"
+              "label": "80e Concours de Genève – Demi-finale 2 de Direction d'Orchestre - Contrechamps",
+              "detail": "Autre lieu, Genève",
+              "date": "2026-11-08",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/80e-concours-de-geneve-demi-finale-2-de-direction-dorchestre-contrechamps_AVqXP7s"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-11-06T13:54:16.445Z"
+          "updatedAt": "2026-11-07T01:21:56.611Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:29:55.978Z"
     }
   }
 }
