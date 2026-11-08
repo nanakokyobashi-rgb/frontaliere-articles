@@ -4284,6 +4284,42 @@
       "firstSeenAt": "2026-11-06T08:50:11.857Z",
       "lastValidatedAt": "2026-11-06T08:50:11.857Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Albavilla e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-08T21:17:15.505Z",
+      "lastValidatedAt": "2026-11-08T21:17:15.505Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Bene Lario e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-08T21:17:15.515Z",
+      "lastValidatedAt": "2026-11-08T21:17:15.515Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Carlazzo e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-08T21:17:15.525Z",
+      "lastValidatedAt": "2026-11-08T21:17:15.525Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -4654,10 +4690,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-08T10:58:42.620Z",
-      "lastStrikeAt": "2026-11-08T16:37:53.611Z",
-      "expiresAt": "2026-12-08T16:37:53.611Z"
+      "lastStrikeAt": "2026-11-08T20:47:31.849Z",
+      "expiresAt": "2026-12-08T20:47:31.849Z"
     },
     {
       "keyword": "vivere a Cuveglio e lavorare in Ticino da frontaliere",
@@ -4666,10 +4702,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-08T11:00:57.757Z",
-      "lastStrikeAt": "2026-11-08T16:47:24.272Z",
-      "expiresAt": "2026-12-08T16:47:24.272Z"
+      "lastStrikeAt": "2026-11-08T20:56:59.020Z",
+      "expiresAt": "2026-12-08T20:56:59.020Z"
     },
     {
       "keyword": "vivere a Varese e lavorare in Ticino da frontaliere",
@@ -4678,10 +4714,22 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-08T16:56:29.539Z",
-      "lastStrikeAt": "2026-11-08T16:56:29.539Z",
-      "expiresAt": "2026-12-08T16:56:29.539Z"
+      "lastStrikeAt": "2026-11-08T21:07:58.059Z",
+      "expiresAt": "2026-12-08T21:07:58.059Z"
+    },
+    {
+      "keyword": "vivere a Premeno e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-08T21:17:15.494Z",
+      "lastStrikeAt": "2026-11-08T21:17:15.494Z",
+      "expiresAt": "2026-12-08T21:17:15.494Z"
     }
   ],
   "legacy": [
