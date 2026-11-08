@@ -25,9 +25,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
-import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
+import { reportStrippedControlChars, reportStrippedControlCharsDeep } from './lib/control-char-write-report.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { extractArticleBodyFields } from '../../scripts/lib/article-body-api.mjs';
 import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { factValueOf, isEmptyAmountFact, matchesVacuousValue, parseAiSearchSections } from './lib/key-facts-specificity.mjs';
 
@@ -104,6 +105,12 @@ export function repairBody(body, title = '') {
   return { value: facts.value, facts: facts.removed, markers: markers.removed };
 }
 
+export function bodyValuesForControlCharReport(source) {
+  return extractArticleBodyFields(source)
+    .filter(({ field, value }) => /^body\d+$/u.test(field) && typeof value === 'string')
+    .map(({ value }) => value);
+}
+
 function readTitles(contentDir) {
   const titles = new Map();
   for (const name of fs.readdirSync(contentDir)) {
@@ -147,6 +154,16 @@ function main(argv) {
         if (!check) {
           const clean = sanitizeText(next);
           reportStrippedControlChars(file, next, clean);
+          // This operation intentionally edits empty fields before writing;
+          // the raw/decoded C0 check still runs, but the content delta itself
+          // is not evidence of sanitization.
+          reportStrippedControlChars(file, source, next, { allowExpectedRewrite: true });
+          reportStrippedControlCharsDeep(
+            file,
+            bodyValuesForControlCharReport(source),
+            bodyValuesForControlCharReport(next),
+            { allowExpectedRewrite: true },
+          );
           writeFileSnapshotAtomically(file, source, clean);
         }
       }

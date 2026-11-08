@@ -61,15 +61,13 @@
  * comunque `clean` dopo il ritorno da questa funzione, perdendo il marker
  * esatto che serve per riparare il testo. Ora la funzione registra prima
  * l'evidenza e poi lancia; ogni choke point la chiama prima della scrittura,
- * quindi il sorgente originale resta intatto e il run fallisce chiuso. Anche
- * una sanificazione che cambia `clean` senza esporre un C0 letterale in
- * `original` fallisce chiusa: e' la forma con cui JSON/XML/HTML possono
- * decodificare un escape o un riferimento prima di togliere il marker.
+ * quindi il sorgente originale resta intatto e il run fallisce chiuso.
  * L'eventuale errore di I/O del report viene segnalato ma non rende il testo
  * pubblicabile.
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { readTsStringMap } from './ts-string-map.mjs';
 
 /** Dove finisce l'evidenza. Sovrascrivibile per i test. */
 export const DEFAULT_REPORT_PATH = process.env.CONTROL_CHAR_REPORT
@@ -87,6 +85,639 @@ export const DEFAULT_REPORT_PATH = process.env.CONTROL_CHAR_REPORT
 export const CONTEXT_CHARS = 20;
 
 const C0 = /[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g;
+const REGEX_PREFIX_WORDS = new Set(['return', 'throw', 'case', 'delete', 'void', 'typeof', 'instanceof', 'in', 'of', 'yield', 'await', 'else', 'do', 'new']);
+const CONTROL_PAREN_KEYWORDS = new Set(['if', 'for', 'while', 'switch', 'catch', 'with']);
+
+function isInvalidC0(code) {
+  return code < 0x20 && code !== 0x09 && code !== 0x0a && code !== 0x0d;
+}
+
+/** Svela le forme di escape che i writer HTML e JSON rimuovono. */
+function decodeEscapedControlChars(value) {
+  let out = '';
+  let i = 0;
+  while (i < value.length) {
+    if (value[i] !== '\\') {
+      out += value[i];
+      i += 1;
+      continue;
+    }
+    const next = value[i + 1];
+    if (next === 'x' && /^[0-9a-fA-F]{2}$/.test(value.slice(i + 2, i + 4))) {
+      const code = Number.parseInt(value.slice(i + 2, i + 4), 16);
+      out += isInvalidC0(code) ? String.fromCharCode(code) : value.slice(i, i + 4);
+      i += 4;
+      continue;
+    }
+    if (next === 'u' && value[i + 2] === '{') {
+      const end = value.indexOf('}', i + 3);
+      const digits = end < 0 ? '' : value.slice(i + 3, end);
+      if (/^[0-9a-fA-F]{1,6}$/.test(digits)) {
+        const code = Number.parseInt(digits, 16);
+        if (code <= 0x10ffff) {
+          out += isInvalidC0(code) ? String.fromCodePoint(code) : value.slice(i, end + 1);
+          i = end + 1;
+          continue;
+        }
+      }
+    }
+    if (next === 'u' && /^[0-9a-fA-F]{4}$/.test(value.slice(i + 2, i + 6))) {
+      const code = Number.parseInt(value.slice(i + 2, i + 6), 16);
+      out += isInvalidC0(code) ? String.fromCharCode(code) : value.slice(i, i + 6);
+      i += 6;
+      continue;
+    }
+    if (/[0-7]/.test(next || '')) {
+      // JavaScript non-strict strings and template quasis still interpret
+      // legacy octal escapes. In particular, \07 is U+0007 and must not
+      // cross the write gate as harmless-looking source text.
+      const maxDigits = next <= '3' ? 3 : 2;
+      let end = i + 2;
+      while (end < value.length && end < i + 1 + maxDigits && /[0-7]/.test(value[end])) end += 1;
+      const code = Number.parseInt(value.slice(i + 1, end), 8);
+      out += isInvalidC0(code) ? String.fromCharCode(code) : value.slice(i, end);
+      i = end;
+      continue;
+    }
+    if (next === 'b' || next === 'f' || next === 'v') {
+      const code = { b: 0x08, f: 0x0c, v: 0x0b }[next];
+      out += String.fromCharCode(code);
+      i += 2;
+      continue;
+    }
+    out += value.slice(i, i + 2);
+    i += 2;
+  }
+  return out;
+}
+
+function collectJsonStrings(value, out = []) {
+  if (typeof value === 'string') out.push(value);
+  else if (Array.isArray(value)) {
+    for (const item of value) collectJsonStrings(item, out);
+  } else if (value && typeof value === 'object') {
+    for (const [key, item] of Object.entries(value)) {
+      out.push(key);
+      collectJsonStrings(item, out);
+    }
+  }
+  return out;
+}
+
+function findTemplateExpressionClose(source, openingBrace) {
+  let depth = 1;
+  let index = openingBrace + 1;
+  let canStartRegex = true;
+  let lastIdentifier = null;
+  const controlParens = [];
+  while (index < source.length) {
+    const character = source[index];
+    const next = source[index + 1];
+    if (character === '/' && next === '/') {
+      index += 2;
+      while (index < source.length && !/[\r\n\u2028\u2029]/u.test(source[index])) index += 1;
+      continue;
+    }
+    if (character === '/' && next === '*') {
+      const close = source.indexOf('*/', index + 2);
+      index = close < 0 ? source.length : close + 2;
+      continue;
+    }
+    if (character === '\'' || character === '"') {
+      let end = index + 1;
+      while (end < source.length) {
+        if (source[end] === '\\') { end += 2; continue; }
+        if (source[end] === character) break;
+        end += 1;
+      }
+      index = Math.min(source.length, end + 1);
+      canStartRegex = false;
+      lastIdentifier = null;
+      continue;
+    }
+    if (character === '`') {
+      index = skipTemplateLiteral(source, index);
+      canStartRegex = false;
+      lastIdentifier = null;
+      continue;
+    }
+    if (character === '/' && canStartRegex) {
+      let end = index + 1;
+      let inClass = false;
+      while (end < source.length) {
+        const current = source[end];
+        if (current === '\\') { end += 2; continue; }
+        if (/[\r\n\u2028\u2029]/u.test(current)) break;
+        if (current === '[') inClass = true;
+        else if (current === ']' && inClass) inClass = false;
+        else if (current === '/' && !inClass) {
+          end += 1;
+          while (/[A-Za-z]/u.test(source[end] || '')) end += 1;
+          break;
+        }
+        end += 1;
+      }
+      if (end > index + 1 && !/[\r\n]/u.test(source[end - 1])) {
+        index = end;
+        canStartRegex = false;
+        lastIdentifier = null;
+        continue;
+      }
+    }
+    if (/[A-Za-z_$]/u.test(character)) {
+      let end = index + 1;
+      while (/[A-Za-z0-9_$]/u.test(source[end] || '')) end += 1;
+      const word = source.slice(index, end);
+      index = end;
+      canStartRegex = REGEX_PREFIX_WORDS.has(word);
+      lastIdentifier = word;
+      continue;
+    }
+    if (character === '(') {
+      controlParens.push(CONTROL_PAREN_KEYWORDS.has(lastIdentifier));
+      canStartRegex = true;
+      lastIdentifier = null;
+      index += 1;
+      continue;
+    }
+    if (character === ')') {
+      canStartRegex = controlParens.pop() ?? false;
+      lastIdentifier = null;
+      index += 1;
+      continue;
+    }
+    if (character === '{') {
+      depth += 1;
+      canStartRegex = true;
+    } else if (character === '}') {
+      depth -= 1;
+      if (depth === 0) return index;
+      canStartRegex = false;
+    } else if (!/\s/u.test(character)) {
+      canStartRegex = '([{,;:=!?&|+-%^~<>'.includes(character) || character === '/';
+      lastIdentifier = null;
+    }
+    index += 1;
+  }
+  return -1;
+}
+
+function skipTemplateLiteral(source, start) {
+  let index = start + 1;
+  while (index < source.length) {
+    if (source[index] === '\\') { index += 2; continue; }
+    if (source[index] === '`') return index + 1;
+    if (source[index] === '$' && source[index + 1] === '{') {
+      const close = findTemplateExpressionClose(source, index + 1);
+      if (close < 0) return source.length;
+      index = close + 1;
+      continue;
+    }
+    index += 1;
+  }
+  return source.length;
+}
+
+function decodeTemplateSegments(body, decodeStaticSegments) {
+  let output = '';
+  let index = 0;
+  let segmentStart = 0;
+  while (index < body.length) {
+    if (body[index] === '\\') { index += 2; continue; }
+    if (body[index] === '$' && body[index + 1] === '{') {
+      const close = findTemplateExpressionClose(body, index + 1);
+      if (close < 0) return output + body.slice(segmentStart);
+      const staticSegment = body.slice(segmentStart, index);
+      output += decodeStaticSegments ? decodeEscapedControlChars(staticSegment) : staticSegment;
+      output += '${' + decodeScriptEscapesOutsideComments(body.slice(index + 2, close)) + '}';
+      index = close + 1;
+      segmentStart = index;
+      continue;
+    }
+    index += 1;
+  }
+  const staticSegment = body.slice(segmentStart);
+  return output + (decodeStaticSegments ? decodeEscapedControlChars(staticSegment) : staticSegment);
+}
+
+function decodeScriptEscapesOutsideComments(source) {
+  let output = '';
+  let index = 0;
+  let canStartRegex = true;
+  let lastIdentifier = null;
+  let pendingFunctionParams = false;
+  let pendingFunctionBody = false;
+  let blockPending = false;
+  let declarationBlockPending = false;
+  let statementStart = true;
+  let labelCandidate = false;
+  let stringDotPending = false;
+  let stringRawTag = false;
+  let globalStringIdentifier = false;
+  let lastSignificant = null;
+  const controlParens = [];
+  const braceContexts = [];
+
+  while (index < source.length) {
+    const character = source[index];
+    const next = source[index + 1];
+    if (character === '/' && next === '/') {
+      let stop = index + 2;
+      while (stop < source.length && !/[\r\n\u2028\u2029]/u.test(source[stop])) stop += 1;
+      output += source.slice(index, stop);
+      index = stop;
+      continue;
+    }
+    if (character === '/' && next === '*') {
+      const close = source.indexOf('*/', index + 2);
+      const stop = close < 0 ? source.length : close + 2;
+      output += source.slice(index, stop);
+      index = stop;
+      continue;
+    }
+    if (character === '\'' || character === '"') {
+      let end = index + 1;
+      while (end < source.length) {
+        if (source[end] === '\\') { end += 2; continue; }
+        if (source[end] === character) break;
+        end += 1;
+      }
+      if (end >= source.length) {
+        output += source.slice(index);
+        break;
+      }
+      output += character + decodeEscapedControlChars(source.slice(index + 1, end)) + character;
+      index = end + 1;
+      canStartRegex = false;
+      lastIdentifier = null;
+      blockPending = false;
+      statementStart = false;
+      labelCandidate = false;
+      stringDotPending = false;
+      stringRawTag = false;
+      globalStringIdentifier = false;
+      lastSignificant = 'literal';
+      continue;
+    }
+    if (character === '`') {
+      const stop = skipTemplateLiteral(source, index);
+      const end = stop > index && source[stop - 1] === '`' ? stop - 1 : source.length;
+      const templateBody = source.slice(index + 1, end);
+      const preserveRawSegments = !canStartRegex && stringRawTag;
+      output += '`' + decodeTemplateSegments(templateBody, !preserveRawSegments) + (end < source.length ? '`' : '');
+      index = stop;
+      canStartRegex = false;
+      lastIdentifier = null;
+      blockPending = false;
+      statementStart = false;
+      labelCandidate = false;
+      stringDotPending = false;
+      stringRawTag = false;
+      globalStringIdentifier = false;
+      lastSignificant = 'literal';
+      continue;
+    }
+    if (character === '/' && canStartRegex) {
+      let end = index + 1;
+      let inClass = false;
+      while (end < source.length) {
+        const current = source[end];
+        if (current === '\\') { end += 2; continue; }
+        if (current === '\n' || current === '\r' || current === '\u2028' || current === '\u2029') break;
+        if (current === '[') inClass = true;
+        else if (current === ']' && inClass) inClass = false;
+        else if (current === '/' && !inClass) {
+          end += 1;
+          while (/[A-Za-z]/.test(source[end] || '')) end += 1;
+          break;
+        }
+        end += 1;
+      }
+      if (end > index + 1 && source[end - 1] !== '\n' && source[end - 1] !== '\r') {
+        output += source.slice(index, end);
+        index = end;
+        canStartRegex = false;
+        lastIdentifier = null;
+        blockPending = false;
+        statementStart = false;
+        labelCandidate = false;
+        stringDotPending = false;
+        stringRawTag = false;
+        globalStringIdentifier = false;
+        lastSignificant = 'literal';
+        continue;
+      }
+    }
+    if (/[A-Za-z_$]/.test(character)) {
+      let end = index + 1;
+      while (/[A-Za-z0-9_$]/.test(source[end] || '')) end += 1;
+      const word = source.slice(index, end);
+      const precedingSignificant = lastSignificant;
+      output += word;
+      index = end;
+      canStartRegex = REGEX_PREFIX_WORDS.has(word);
+      labelCandidate = statementStart;
+      statementStart = false;
+      stringRawTag = word === 'raw' && stringDotPending;
+      globalStringIdentifier = word === 'String' && precedingSignificant !== '.';
+      stringDotPending = false;
+      lastIdentifier = word;
+      lastSignificant = word;
+      if (word === 'function') {
+        pendingFunctionParams = true;
+        blockPending = false;
+      } else if (['class', 'enum', 'interface', 'namespace'].includes(word)) {
+        declarationBlockPending = true;
+        blockPending = true;
+      } else if (['do', 'else', 'finally', 'try'].includes(word)) {
+        blockPending = true;
+      } else if (!pendingFunctionParams && !declarationBlockPending) {
+        blockPending = false;
+      }
+      continue;
+    }
+    if (character === '(') {
+      output += character;
+      index += 1;
+      controlParens.push({
+        control: CONTROL_PAREN_KEYWORDS.has(lastIdentifier),
+        functionParams: pendingFunctionParams,
+      });
+      pendingFunctionParams = false;
+      canStartRegex = true;
+      lastIdentifier = null;
+      labelCandidate = false;
+      statementStart = false;
+      stringDotPending = false;
+      stringRawTag = false;
+      globalStringIdentifier = false;
+      lastSignificant = '(';
+      continue;
+    }
+    if (character === ')') {
+      output += character;
+      index += 1;
+      const context = controlParens.pop();
+      canStartRegex = context?.control ?? false;
+      pendingFunctionBody = context?.functionParams ?? false;
+      if (context?.control) blockPending = true;
+      lastIdentifier = null;
+      labelCandidate = false;
+      statementStart = context?.control ?? false;
+      stringDotPending = false;
+      stringRawTag = false;
+      globalStringIdentifier = false;
+      lastSignificant = ')';
+      continue;
+    }
+    if (source.startsWith('=>', index)) {
+      output += '=>';
+      index += 2;
+      canStartRegex = true;
+      lastIdentifier = null;
+      blockPending = false;
+      statementStart = false;
+      labelCandidate = false;
+      stringDotPending = false;
+      stringRawTag = false;
+      globalStringIdentifier = false;
+      lastSignificant = '=>';
+      continue;
+    }
+    if (character === '{') {
+      const objectPrefix = ['=', ':', '(', '[', ',', '?'].includes(lastSignificant)
+        || ['return', 'throw', 'yield'].includes(lastIdentifier);
+      const isBlock = blockPending || pendingFunctionBody || declarationBlockPending || !objectPrefix;
+      braceContexts.push(isBlock);
+      output += character;
+      index += 1;
+      canStartRegex = true;
+      lastIdentifier = null;
+      blockPending = false;
+      declarationBlockPending = false;
+      pendingFunctionBody = false;
+      statementStart = isBlock;
+      labelCandidate = false;
+      stringDotPending = false;
+      stringRawTag = false;
+      globalStringIdentifier = false;
+      lastSignificant = '{';
+      continue;
+    }
+    if (character === '}') {
+      output += character;
+      index += 1;
+      const isBlock = braceContexts.pop() ?? false;
+      canStartRegex = isBlock;
+      lastIdentifier = null;
+      blockPending = false;
+      statementStart = isBlock;
+      labelCandidate = false;
+      stringDotPending = false;
+      stringRawTag = false;
+      globalStringIdentifier = false;
+      lastSignificant = '}';
+      continue;
+    }
+    output += character;
+    index += 1;
+    if (!/\s/u.test(character)) {
+      const isStringDot = character === '.' && lastIdentifier === 'String' && globalStringIdentifier;
+      if (character === ':' && labelCandidate) {
+        blockPending = true;
+        statementStart = true;
+      } else if (character === ';') {
+        statementStart = true;
+      } else {
+        statementStart = false;
+      }
+      canStartRegex = '([{,;:=!?&|+-%^~<>'.includes(character) || character === '/';
+      lastIdentifier = null;
+      labelCandidate = false;
+      if (pendingFunctionParams && character !== '*') pendingFunctionParams = false;
+      if (character !== ';' && character !== ':' && !declarationBlockPending) blockPending = false;
+      stringDotPending = isStringDot;
+      stringRawTag = false;
+      globalStringIdentifier = false;
+      lastSignificant = character;
+    }
+  }
+  return output;
+}
+
+function decodeXmlReferencesOutsideLiterals(xml) {
+  const decode = (text) => text.replace(/&#(x[0-9a-fA-F]+|[0-9]+);/g, (reference, digits) => {
+    const code = digits[0] === 'x'
+      ? Number.parseInt(digits.slice(1), 16)
+      : Number.parseInt(digits, 10);
+    return Number.isFinite(code) && isInvalidC0(code) ? String.fromCharCode(code) : reference;
+  });
+  let output = '';
+  let index = 0;
+  while (index < xml.length) {
+    const comment = xml.indexOf('<!--', index);
+    const cdata = xml.indexOf('<![CDATA[', index);
+    const processingInstruction = xml.indexOf('<?', index);
+    const commentStart = comment < 0 ? xml.length : comment;
+    const cdataStart = cdata < 0 ? xml.length : cdata;
+    const processingInstructionStart = processingInstruction < 0 ? xml.length : processingInstruction;
+    const start = Math.min(commentStart, cdataStart, processingInstructionStart);
+    if (start < 0) return output + decode(xml.slice(index));
+    if (start === xml.length) return output + decode(xml.slice(index));
+    output += decode(xml.slice(index, start));
+    const closeMarker = start === commentStart ? '-->' : start === cdataStart ? ']]>' : '?>';
+    const openLength = start === commentStart ? 4 : start === cdataStart ? 9 : 2;
+    const close = xml.indexOf(closeMarker, start + openLength);
+    if (close < 0) return output + xml.slice(start);
+    output += xml.slice(start, close + closeMarker.length);
+    index = close + closeMarker.length;
+  }
+  return output;
+}
+
+function articleSourceReportableText(file, original) {
+  const normalizedFile = String(file).replaceAll('\\', '/');
+  const isBodySource = /(?:^|\/)content\/blog-body[^/]*\/[^/]+\/[^/]+\.ts$/u.test(normalizedFile);
+  const isMetaSource = /(?:^|\/)content\/blog-meta[^/]*\.ts$/u.test(normalizedFile);
+  if (!isBodySource && !isMetaSource) return null;
+
+  C0.lastIndex = 0;
+  const hasRawC0 = C0.test(original);
+  C0.lastIndex = 0;
+  if (hasRawC0) return original;
+
+  const text = [];
+  for (const [key, value] of readTsStringMap(original)) {
+    text.push(key);
+    if (key.endsWith('.faq')) {
+      try {
+        text.push(...collectJsonStrings(JSON.parse(value)));
+      } catch {
+        // The article parser rejects invalid FAQ JSON; keep the source intact here.
+        text.push(value);
+      }
+    } else {
+      text.push(value);
+    }
+  }
+  return text.length > 0 ? text.join('\n') : original;
+}
+
+function findHtmlTagEnd(html, start) {
+  let quote = null;
+  for (let index = start; index < html.length; index += 1) {
+    const character = html[index];
+    if (quote) {
+      if (character === quote) quote = null;
+    } else if (character === '"' || character === '\'') {
+      quote = character;
+    } else if (character === '>') {
+      return index;
+    }
+  }
+  return -1;
+}
+
+function hasHtmlAttribute(attributes, expectedName) {
+  let index = 0;
+  while (index < attributes.length) {
+    while (index < attributes.length && (/\s/u.test(attributes[index]) || attributes[index] === '/')) index += 1;
+    const start = index;
+    while (index < attributes.length && !/[\s=/>]/u.test(attributes[index])) index += 1;
+    if (start === index) {
+      index += 1;
+      continue;
+    }
+    if (attributes.slice(start, index).toLowerCase() === expectedName) return true;
+    while (index < attributes.length && /\s/u.test(attributes[index])) index += 1;
+    if (attributes[index] !== '=') continue;
+    index += 1;
+    while (index < attributes.length && /\s/u.test(attributes[index])) index += 1;
+    const quote = attributes[index];
+    if (quote === '"' || quote === '\'') {
+      index += 1;
+      while (index < attributes.length && attributes[index] !== quote) index += 1;
+      if (index < attributes.length) index += 1;
+    } else {
+      while (index < attributes.length && !/\s/u.test(attributes[index])) index += 1;
+    }
+  }
+  return false;
+}
+
+function decodeInlineScriptBodies(html) {
+  let output = '';
+  let cursor = 0;
+  let index = 0;
+  while (index < html.length) {
+    const open = html.indexOf('<', index);
+    if (open < 0) break;
+    if (html.startsWith('<!--', open)) {
+      const close = html.indexOf('-->', open + 4);
+      index = close < 0 ? html.length : close + 3;
+      continue;
+    }
+    if (html[open + 1] === '/' || html[open + 1] === '!' || html[open + 1] === '?') {
+      const end = findHtmlTagEnd(html, open + 2);
+      index = end < 0 ? html.length : end + 1;
+      continue;
+    }
+    let nameEnd = open + 1;
+    while (/[A-Za-z0-9:-]/u.test(html[nameEnd] || '')) nameEnd += 1;
+    if (nameEnd === open + 1) {
+      index = open + 1;
+      continue;
+    }
+    const tagName = html.slice(open + 1, nameEnd).toLowerCase();
+    const tagEnd = findHtmlTagEnd(html, nameEnd);
+    if (tagEnd < 0) break;
+    if (tagName !== 'script') {
+      index = tagEnd + 1;
+      continue;
+    }
+
+    const closePattern = /<\/script(?=[\t\n\f\r />])/gi;
+    closePattern.lastIndex = tagEnd + 1;
+    const closeStart = closePattern.exec(html);
+    if (!closeStart) break;
+    const closeEnd = findHtmlTagEnd(html, closeStart.index + '</script'.length);
+    if (closeEnd < 0) break;
+    const closeText = html.slice(closeStart.index, closeEnd + 1);
+    const body = html.slice(tagEnd + 1, closeStart.index);
+    output += html.slice(cursor, tagEnd + 1);
+    output += hasHtmlAttribute(html.slice(nameEnd, tagEnd), 'src')
+      ? body
+      : decodeScriptEscapesOutsideComments(body);
+    output += closeText;
+    cursor = closeEnd + 1;
+    index = cursor;
+  }
+  return output + html.slice(cursor);
+}
+
+function reportableText(file, original) {
+  // JSON.parse reveals both value and key escapes (for example `\\b` and
+  // `\\u0016`) before sanitizeDeep removes the resulting character.
+  try {
+    return collectJsonStrings(JSON.parse(original)).join('\n');
+  } catch {
+    // The other writer formats are not necessarily JSON documents.
+  }
+
+  const extension = path.extname(file).toLowerCase();
+  if (extension === '.ts') {
+    const articleSourceText = articleSourceReportableText(file, original);
+    if (articleSourceText !== null) return articleSourceText;
+  }
+  if (extension === '.xml') {
+    return decodeXmlReferencesOutsideLiterals(original);
+  }
+
+  if (extension === '.html' || extension === '.htm') {
+    return decodeInlineScriptBodies(original);
+  }
+  return original;
+}
 
 const LETTERA = /\p{L}/u;
 const CIFRA = /[0-9]/;
@@ -169,45 +800,13 @@ export function occurrencesIn(original, { contextChars = CONTEXT_CHARS } = {}) {
   return out;
 }
 
-/**
- * Registra uno strip e lo annuncia. Chiamare PRIMA di scrivere il file pulito.
- *
- * @param {string} file  path del file che si sta per scrivere
- * @param {string} original  contenuto com'era, coi marker ancora dentro
- * @param {string} clean  contenuto sanificato
- * @param {{reportPath?: string, log?: (s: string) => void, fsImpl?: typeof fs}} [opts]
- * @returns {0} se il testo non contiene control character C0 non ammessi
- * @throws {Error} se il testo contiene C0 non ammessi, dopo aver registrato l'evidenza
- */
-export function reportStrippedControlChars(file, original, clean, opts = {}) {
-  if (typeof original !== 'string') return 0;
-  const occ = occurrencesIn(original);
-
-  const log = opts.log || ((s) => console.error(s));
-  const reportPath = opts.reportPath || DEFAULT_REPORT_PATH;
-
-  // Some sanitizers decode escaped C0 characters before removing them. In
-  // that case `original` has no literal marker for `occurrencesIn` to record,
-  // but the changed output is still evidence that content would be published
-  // altered. Reject before any caller can write `clean`; the source remains
-  // available for diagnosis and repair.
-  if (clean !== original && occ.length === 0) {
-    log(
-      `::error::control-char-sanitize: ${file} e' cambiato durante la sanificazione `
-      + 'perche clean differisce da original senza un control character C0 letterale registrabile. '
-      + 'Scrittura rifiutata prima di pubblicare un valore alterato. '
-      + 'Evidenza in ' + reportPath + '.',
-    );
-    throw new Error(
-      `control-char-write-report: scrittura rifiutata per ${file}: `
-      + 'sanificazione non tracciata (clean differisce da original senza un marker C0 letterale); '
-      + 'sorgente preservato, verificare la rappresentazione codificata prima di riprovare.',
-    );
-  }
-
+/** Scrive l'evidenza prima di rifiutare l'output. */
+function reportOccurrences(file, occ, opts = {}) {
   if (occ.length === 0) return 0;
 
+  const log = opts.log || ((s) => console.error(s));
   const io = opts.fsImpl || fs;
+  const reportPath = opts.reportPath || DEFAULT_REPORT_PATH;
 
   const conResiduo = occ.filter((o) => o.residuo);
   stripped += occ.length;
@@ -221,7 +820,7 @@ export function reportStrippedControlChars(file, original, clean, opts = {}) {
   log(
     `::error::control-char-strip: ${file} portava ${occ.length} control character C0, ` +
     `di cui ${conResiduo.length} che rompono una parola (es. comp<16>9tences -> comp9tences). ` +
-    'Scrittura rifiutata prima di togliere il marker, che resta disponibile per la riparazione. ' +
+    'Scrittura rifiutata prima di togliere il marker o l\'escape, che resta disponibile per la riparazione. ' +
     'Evidenza in ' + reportPath + ' (issue #95, causa a monte #66).',
   );
 
@@ -242,6 +841,41 @@ export function reportStrippedControlChars(file, original, clean, opts = {}) {
       + `${occ.length} control character C0 non ammessi (${conResiduo.length} rompono una parola); `
       + 'sorgente preservato, ripararlo o metterlo in quarantena prima di riprovare.',
   );
+}
+
+function assertNoUntracedChange(file, original, clean, opts, changed = clean !== original) {
+  if (!changed || opts.allowExpectedRewrite === true) return;
+  const log = opts.log || ((s) => console.error(s));
+  const reportPath = opts.reportPath || DEFAULT_REPORT_PATH;
+  log(
+    `::error::control-char-sanitize: ${file} e' cambiato durante la sanificazione `
+    + 'senza un control character C0 riconoscibile da registrare. '
+    + 'Scrittura rifiutata per conservare la sorgente e consentire la diagnosi. '
+    + 'Evidenza attesa in ' + reportPath + '.',
+  );
+  throw new Error(
+    `control-char-write-report: scrittura rifiutata per ${file}: `
+    + 'sanificazione non tracciata (clean differisce da original senza un marker C0 riconoscibile); '
+    + 'sorgente preservato, verificare la rappresentazione prima di riprovare.',
+  );
+}
+
+/**
+ * Controlla il valore originale prima della write, svelando le rappresentazioni
+ * che i writer JSON, XML e HTML interpretano o rimuovono.
+ *
+ * @param {string} file path del file che si sta per scrivere
+ * @param {string} original contenuto com'era, coi marker ancora dentro
+ * @param {string} _clean contenuto sanificato che il chiamante intende scrivere
+ * @param {{reportPath?: string, log?: (s: string) => void, fsImpl?: typeof fs, allowExpectedRewrite?: boolean}} [opts]
+ * @returns {0} se l'originale non contiene control character C0 non ammessi
+ * @throws {Error} se l'originale contiene C0, dopo aver registrato l'evidenza
+ */
+export function reportStrippedControlChars(file, original, clean, opts = {}) {
+  if (typeof original !== 'string') return 0;
+  const occurrences = occurrencesIn(reportableText(file, original));
+  if (occurrences.length === 0) assertNoUntracedChange(file, original, clean, opts);
+  return reportOccurrences(file, occurrences, opts);
 }
 
 /**
@@ -291,25 +925,45 @@ function appendStepSummary(file, occ, opts = {}) {
 }
 
 /**
- * Le stringhe di una struttura — chiavi e foglie, in ordine di visita — unite
- * da `\n`.
+ * Le foglie stringa di una struttura, in ordine di visita, unite da `\n`.
  *
  * Serve a `reportStrippedControlCharsDeep`. `\n` e' 0x0A, che **non** e' nella
  * classe C0 che questo modulo cerca: unire con quello non puo' inventare ne'
- * nascondere un'occorrenza. Le chiavi sono incluse perche' `sanitizeDeep` le
- * sanifica prima della serializzazione, e `JSON.stringify` ne codificherebbe i
- * marker C0 rendendoli invisibili a `occurrencesIn`.
+ * nascondere un'occorrenza.
  */
 function joinStringLeaves(value, out = []) {
   if (typeof value === 'string') out.push(value);
   else if (Array.isArray(value)) for (const v of value) joinStringLeaves(v, out);
   else if (value && typeof value === 'object') {
-    for (const [key, child] of Object.entries(value)) {
+    for (const [key, nested] of Object.entries(value)) {
       out.push(key);
-      joinStringLeaves(child, out);
+      joinStringLeaves(nested, out);
     }
   }
   return out;
+}
+
+function sameSanitizedStructure(original, clean) {
+  if (Object.is(original, clean)) return true;
+  if (!original || !clean || typeof original !== 'object' || typeof clean !== 'object') return false;
+  const originalIsArray = Array.isArray(original);
+  if (originalIsArray !== Array.isArray(clean)) return false;
+  if (originalIsArray && original.length !== clean.length) return false;
+  if (!originalIsArray) {
+    const originalPrototype = Object.getPrototypeOf(original);
+    const cleanPrototype = Object.getPrototypeOf(clean);
+    const originalIsPlain = originalPrototype === Object.prototype || originalPrototype === null;
+    const cleanIsPlain = cleanPrototype === Object.prototype || cleanPrototype === null;
+    if (!originalIsPlain || !cleanIsPlain) return false;
+  }
+
+  const originalKeys = Object.keys(original);
+  const cleanKeys = Object.keys(clean);
+  if (originalKeys.length !== cleanKeys.length) return false;
+  for (const key of originalKeys) {
+    if (!Object.hasOwn(clean, key) || !sameSanitizedStructure(original[key], clean[key])) return false;
+  }
+  return true;
 }
 
 /**
@@ -325,14 +979,15 @@ function joinStringLeaves(value, out = []) {
  * corpus, un grep di byte sui `.json` non vedeva la corruzione mentre i `.ts` la
  * mostravano.
  *
- * Quindi si guardano chiavi e foglie stringa **prima** della serializzazione,
- * che e' l'unico momento in cui il byte esiste come byte.
+ * Quindi si guardano le chiavi e le foglie stringa **prima** della
+ * serializzazione, che e' l'unico momento in cui il byte esiste come byte.
  */
 export function reportStrippedControlCharsDeep(file, original, clean, opts = {}) {
-  return reportStrippedControlChars(
-    file,
-    joinStringLeaves(original).join('\n'),
-    joinStringLeaves(clean).join('\n'),
-    opts,
-  );
+  const originalText = joinStringLeaves(original).join('\n');
+  const cleanText = joinStringLeaves(clean).join('\n');
+  const occurrences = occurrencesIn(originalText);
+  if (occurrences.length === 0) {
+    assertNoUntracedChange(file, originalText, cleanText, opts, !sameSanitizedStructure(original, clean));
+  }
+  return reportOccurrences(file, occurrences, opts);
 }
