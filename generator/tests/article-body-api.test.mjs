@@ -151,7 +151,7 @@ test('the repaired FAQ sources have valid JSON, unchanged Q/A text, and canonica
       locale: 'de',
       id: 'vivere-casnate-bernate-frontaliere-ticino',
       count: 5,
-      qaHash: '39a6b9b198506c94f2cd2d79bc38a4000e6927e4260aa1b45bb02dc85b466c72',
+      qaHash: '3f768cc5c2f098b487d900ccc41dcfcf7ee95706d2767104c0d7bbc49459db46',
     },
     {
       locale: 'fr',

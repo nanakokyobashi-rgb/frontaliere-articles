@@ -77,16 +77,20 @@ jobs:
             local reason="${1:-unknown}"
             local detail="${2:-}"
             echo "::warning::translate-pending queue guard could not inspect GitHub Actions (${reason}${detail:+; ${detail}}); skipping the heavy run to keep the queue bounded."
-            echo "run=false" >> "$GITHUB_OUTPUT"
-            echo "waiting_runs=-1" >> "$GITHUB_OUTPUT"
-            echo "guard_error=${reason}" >> "$GITHUB_OUTPUT"
+            {
+              echo "run=false"
+              echo "waiting_runs=-1"
+              echo "guard_error=${reason}"
+            } >> "$GITHUB_OUTPUT"
             exit 0
           }
           if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] && [ "$TRANSLATION_MANUAL_OVERRIDE" = "true" ]; then
             echo "::warning::translate-pending manual workflow_dispatch input detected; bypassing the duplicate guard by request."
-            echo "run=true" >> "$GITHUB_OUTPUT"
-            echo "waiting_runs=0" >> "$GITHUB_OUTPUT"
-            echo "guard_error=" >> "$GITHUB_OUTPUT"
+            {
+              echo "run=true"
+              echo "waiting_runs=0"
+              echo "guard_error="
+            } >> "$GITHUB_OUTPUT"
             exit 0
           fi
           guard_started_at=$SECONDS
@@ -286,14 +290,18 @@ jobs:
           other_waiting=$((candidate_count - 1))
           if [ "$oldest_run_id" = "$GITHUB_RUN_ID" ]; then
             echo "✅ translate-pending queue guard admits the oldest waiting run; ${active_heavy_runs} heavy run(s) currently active and ${other_waiting} waiting behind it."
-            echo "run=true" >> "$GITHUB_OUTPUT"
-            echo "waiting_runs=$other_waiting" >> "$GITHUB_OUTPUT"
-            echo "guard_error=" >> "$GITHUB_OUTPUT"
+            {
+              echo "run=true"
+              echo "waiting_runs=$other_waiting"
+              echo "guard_error="
+            } >> "$GITHUB_OUTPUT"
           else
             echo "::warning::translate-pending queue guard found older run ${oldest_run_id}; skipping this duplicate. The oldest run will process the backlog."
-            echo "run=false" >> "$GITHUB_OUTPUT"
-            echo "waiting_runs=$other_waiting" >> "$GITHUB_OUTPUT"
-            echo "guard_error=" >> "$GITHUB_OUTPUT"
+            {
+              echo "run=false"
+              echo "waiting_runs=$other_waiting"
+              echo "guard_error="
+            } >> "$GITHUB_OUTPUT"
           fi
       - name: Fail the run when the queue guard was blind
         if: steps.translate_queue_guard.outputs.guard_error != ''
@@ -741,7 +749,7 @@ jobs:
         if: always() && !cancelled() && steps.checkout.outcome == 'success' && github.event_name == 'schedule' && inputs.skip_translate != true && inputs.dry_run != true && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
         env:
           REPAIR_LANE_DEADLINE_MS: "12600000"
-          REPAIR_LANE_MIN_REMAINING_MS: "900000"
+          REPAIR_LANE_MIN_REMAINING_MS: "5400000"
         run: node scripts/translate-repair-lane-gate.mjs
       - name: "Phase 2d: Fix untranslated titles (free cascade)"
         if: always() && !cancelled() && steps.checkout.outcome == 'success' && github.event_name == 'schedule' && github.event.schedule == '0 7 * * *' && inputs.skip_translate != true && inputs.dry_run != true && steps.repair_lane_budget.outputs.run == 'true' && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
