@@ -111,6 +111,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.sciaffusa-case-unifamiliari.title': 'Canton of Schaffhausen: one in four homes is a single-family home',
     'blog.article.sciaffusa-case-unifamiliari.excerpt': 'In the Canton of Schaffhausen, one in four houses is a single-family home; the lead describes the dream of homeownership as an increasing expense.',
     'blog.article.sciaffusa-case-unifamiliari.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.gpk-risparmi-bilancio-2027.title': 'GPK proposes savings for the 2027 cantonal budget',
+    'blog.article.gpk-risparmi-bilancio-2027.excerpt': 'The 2027 cantonal budget forecasts a deficit of approximately CHF 62.8 million; cantonal salaries will increase by 1 percent.',
+    'blog.article.gpk-risparmi-bilancio-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

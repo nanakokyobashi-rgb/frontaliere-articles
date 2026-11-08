@@ -1411,6 +1411,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-gpk-risparmi-bilancio-2027': {
+    title: 'GPK propone risparmi per il budget cantonale 2027',
+    description: 'GPK propone risparmi per il bilancio cantonale 2027 con un disavanzo stimato di CHF 62,8 milioni. Salari cantonali +1%.',
+    keywords: 'frontalieri, ticino, svizzera, italia, propone, risparmi, budget, cantonale',
+    ogTitle: 'GPK propone risparmi per budget 2027 Sciaffusa',
+    ogDescription: 'Il preventivo cantonale 2027 prevede un disavanzo di circa CHF 62,8 milioni. La GPK chiede risparmi, mentre gli stipendi cantonali aumenteranno dell\'1%.',
+    canonicalPath: '/articoli-sciaffusa/gpk-risparmi-bilancio-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "GPK propone risparmi per il budget cantonale 2027",
+      "description": "GPK propone risparmi per il bilancio cantonale 2027 con un disavanzo stimato di CHF 62,8 milioni. Salari cantonali +1%.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-gpk-risparmi-bilancio-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-08T20:34:02+00:00",
+      "dateModified": "2026-11-08T20:34:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/gpk-risparmi-bilancio-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

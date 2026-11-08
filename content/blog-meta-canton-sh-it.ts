@@ -111,6 +111,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.sciaffusa-case-unifamiliari.title': 'Canton Sciaffusa: una casa su quattro è unifamiliare',
     'blog.article.sciaffusa-case-unifamiliari.excerpt': 'Nel Canton Sciaffusa una casa su quattro è unifamiliare; il lead descrive il sogno della proprietà come una spesa crescente.',
     'blog.article.sciaffusa-case-unifamiliari.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.gpk-risparmi-bilancio-2027.title': 'GPK propone risparmi per il budget cantonale 2027',
+    'blog.article.gpk-risparmi-bilancio-2027.excerpt': 'Il preventivo cantonale 2027 prevede un disavanzo di circa CHF 62,8 milioni; gli stipendi cantonali aumenteranno dell\'1 per cento.',
+    'blog.article.gpk-risparmi-bilancio-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;
