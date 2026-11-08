@@ -403,4 +403,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'gpk-risparmi-bilancio-2027',
+ category: 'fiscale',
+ date: '2026-11-08T20:34:02.887Z',
+ image: '/images/blog/article-gpk-risparmi-bilancio-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

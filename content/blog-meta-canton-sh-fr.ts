@@ -111,6 +111,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.sciaffusa-case-unifamiliari.title': 'Canton de Schaffhouse : une maison sur quatre est individuelle',
     'blog.article.sciaffusa-case-unifamiliari.excerpt': 'Dans le canton de Schaffhouse, une maison sur quatre est individuelle ; le chapô décrit le rêve de devenir propriétaire comme une dépense croissante.',
     'blog.article.sciaffusa-case-unifamiliari.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.gpk-risparmi-bilancio-2027.title': 'GPK propose des économies pour le budget cantonal 2027',
+    'blog.article.gpk-risparmi-bilancio-2027.excerpt': 'Le budget cantonal 2027 prévoit un déficit d\'environ CHF 62,8 millions ; les salaires cantonaux augmenteront de 1 pour cent.',
+    'blog.article.gpk-risparmi-bilancio-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

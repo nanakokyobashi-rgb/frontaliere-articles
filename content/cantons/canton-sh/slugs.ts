@@ -39,6 +39,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'quartierplan-ebnat-west-pubblico': { it: 'quartierplan-ebnat-west-pubblico', en: 'ebnat-west-district-plan-public', de: 'quartierplan-ebnat-west-oeffentlich', fr: 'plan-quartier-ebnat-west-public' },
  'mercato-immobiliare-sciaffusa-crescita': { it: 'mercato-immobiliare-sciaffusa-crescita', en: 'schaffhausen-real-estate-growth', de: 'schaffhausen-immobilienmarkt-wachstum', fr: 'immobilier-schaffhouse-croissance' },
  'sciaffusa-case-unifamiliari': { it: 'sciaffusa-case-unifamiliari', en: 'schaffhausen-detached-houses', de: 'schaffhausen-einfamilienhaeuser', fr: 'schaffhouse-maisons-individuelles' },
+ 'gpk-risparmi-bilancio-2027': { it: 'gpk-risparmi-bilancio-2027', en: 'gpk-savings-2027-budget', de: 'gpk-einsparungen-budget-2027', fr: 'gpk-economies-budget-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

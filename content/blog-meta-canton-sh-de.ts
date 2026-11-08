@@ -111,6 +111,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.sciaffusa-case-unifamiliari.title': 'Kanton Schaffhausen: Jedes vierte Haus ist ein Einfamilienhaus',
     'blog.article.sciaffusa-case-unifamiliari.excerpt': 'Im Kanton Schaffhausen ist jedes vierte Haus ein Einfamilienhaus; der Lead beschreibt den Traum vom Eigenheim als zunehmend kostspielig.',
     'blog.article.sciaffusa-case-unifamiliari.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.gpk-risparmi-bilancio-2027.title': 'GPK schlägt Einsparungen für das kantonale Budget 2027 vor',
+    'blog.article.gpk-risparmi-bilancio-2027.excerpt': 'Das kantonale Budget 2027 sieht ein Defizit von rund CHF 62,8 Millionen vor; die kantonalen Löhne werden um 1 Prozent steigen.',
+    'blog.article.gpk-risparmi-bilancio-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;
