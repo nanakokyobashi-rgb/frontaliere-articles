@@ -4,37 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-l-inflation-s-emballe-a-1-5-en-octobre.html": {
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261106-les-cff-adaptent-leurs-stations-de-recyclage-le-papier-supprime.html": {
       "section": "canton-ju",
-      "ts": 1793702204695
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-aramco-le-benefice-flambe-de-34-6-au-troisieme-trimestre.html": {
-      "section": "canton-ju",
-      "ts": 1793702215078
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/suisse/20261103-petit-benefice-au-budget-2027-de-la-ville-de-neuchatel.html": {
-      "section": "canton-ju",
-      "ts": 1793704061125
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-avec-l-outlet-aubonne-le-francais-evoriel-s-installe-en-suisse.html": {
-      "section": "canton-ju",
-      "ts": 1793720214962
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-stadler-construit-un-nouveau-centre-et-cree-80-emplois.html": {
-      "section": "canton-ju",
-      "ts": 1793720229394
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/suisse/20261103-trafic-ferroviaire-interrompu-entre-lausanne-et-geneve.html": {
-      "section": "canton-ju",
-      "ts": 1793755800623
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261105-le-chomage-reste-stable-a-3-0-en-octobre.html": {
-      "section": "canton-ju",
-      "ts": 1793873147097
-    },
-    "canton-ju::https://www.h-ju.ch/fr/a-propos/medias-presse/communiques-de-presse/la-sante-mentale-au-coeur-de-la-27eme-journee-scientifique-interjurassienne-de-la-sante.html": {
-      "section": "canton-ju",
-      "ts": 1793874293073
+      "ts": 1794096366649
     }
   }
 }
