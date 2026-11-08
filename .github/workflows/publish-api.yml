@@ -301,7 +301,7 @@ jobs:
             .github/workflows/publish-api.yml \
             .github/actions/setup-article-source-runtime \
             engine host scripts generator/scripts generator/data \
-            articleSections.ts package.json package-lock.json \
+            articleSections.ts package.json package-lock.json
           orchestration_diff_status=$?
           set -e
           if [ "$orchestration_diff_status" -gt 1 ]; then
@@ -309,8 +309,10 @@ jobs:
             exit 1
           fi
           if [ "$orchestration_diff_status" -eq 1 ]; then
-            echo "publish=false" >> "$GITHUB_OUTPUT"
-            echo "source_commit=$current_main" >> "$GITHUB_OUTPUT"
+            {
+              echo "publish=false"
+              echo "source_commit=$current_main"
+            } >> "$GITHUB_OUTPUT"
             echo "::notice::publish-api superato: il workflow/runtime $WORKFLOW_COMMIT e' stato superato da main=$current_main; il job publisher viene saltato senza errore"
             exit 0
           fi
@@ -326,8 +328,10 @@ jobs:
           )"
           if [ "$api_input_changed" = 'true' ]; then
             if [ "$EXPLICIT_REPLAY" = 'true' ]; then
-              echo "publish=false" >> "$GITHUB_OUTPUT"
-              echo "source_commit=$current_main" >> "$GITHUB_OUTPUT"
+              {
+                echo "publish=false"
+                echo "source_commit=$current_main"
+              } >> "$GITHUB_OUTPUT"
               echo "::notice::replay bounded superato: main=$current_main contiene input API piu' recenti del commit delle pagine=$SOURCE_COMMIT; la push corrente mantiene la pubblicazione"
               exit 0
             fi
@@ -335,8 +339,10 @@ jobs:
           else
             echo "::notice::publish-api riallineato alla HEAD corrente $current_main: nessun input API nel delta"
           fi
-          echo "publish=true" >> "$GITHUB_OUTPUT"
-          echo "source_commit=$current_main" >> "$GITHUB_OUTPUT"
+          {
+            echo "publish=true"
+            echo "source_commit=$current_main"
+          } >> "$GITHUB_OUTPUT"
 
   publish:
     needs: source_preflight
@@ -481,7 +487,7 @@ jobs:
             .github/workflows/publish-api.yml \
             .github/actions/setup-article-source-runtime \
             engine host scripts generator/scripts generator/data \
-            articleSections.ts package.json package-lock.json \
+            articleSections.ts package.json package-lock.json
           orchestration_diff_status=$?
           set -e
           if [ "$orchestration_diff_status" -gt 1 ]; then
@@ -680,9 +686,11 @@ jobs:
               echo "::warning::non posso confermare una run publish-api verde precedente (conclusione: $last_publish_conclusion): preflight completo del corpus"
             fi
           fi
-          echo "scan-mode=$scan_mode" >> "$GITHUB_OUTPUT"
-          echo "scan-reason=$scan_reason" >> "$GITHUB_OUTPUT"
-          echo "changed-files-path=$changed_files_path" >> "$GITHUB_OUTPUT"
+          {
+            echo "scan-mode=$scan_mode"
+            echo "scan-reason=$scan_reason"
+            echo "changed-files-path=$changed_files_path"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Preflight — i corpi articolo devono parsare come TypeScript
         if: env.PUBLISH_API_SKIP != 'true'
