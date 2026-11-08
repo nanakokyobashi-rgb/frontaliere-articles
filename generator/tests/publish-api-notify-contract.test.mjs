@@ -45,10 +45,10 @@ const EXPECTED_FIELDS = [
 
 test('Notify the site emette il payload bounded con il contratto completo', () => {
   const normalizedNotifyStep = NOTIFY_STEP.replace(/\s+/g, ' ');
-  assert.match(normalizedNotifyStep, /if: >- steps\.deploy\.outcome == 'success' && steps\.publish_edge\.outcome == 'success'/);
+  assert.match(normalizedNotifyStep, /if: >- env\.PUBLISH_API_SKIP != 'true' && steps\.deploy\.outcome == 'success' && steps\.publish_edge\.outcome == 'success'/);
   assert.match(normalizedNotifyStep, /github\.event_name == 'push' \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.source_commit != ''\)/);
   assert.match(NOTIFY_STEP, /continue-on-error: true/);
-  assert.match(NOTIFY_STEP, /PUBLISHED_SOURCE_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(NOTIFY_STEP, /PUBLISHED_SOURCE_COMMIT: \$\{\{ needs\.source_preflight\.outputs\.source_commit \}\}/);
   assert.match(NOTIFY_STEP, /published_source_commit="\$\{PUBLISH_API_SOURCE_COMMIT:-\$PUBLISHED_SOURCE_COMMIT\}"/);
   assert.match(NOTIFY_STEP, /SOURCE_EVENT: \$\{\{ github\.event_name \}\}/);
   assert.match(PAYLOAD_CONSTRUCTION, /jq -cn/);

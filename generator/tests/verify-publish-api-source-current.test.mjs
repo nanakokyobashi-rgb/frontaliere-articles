@@ -16,6 +16,7 @@ function runHelper({
   ancestor = true,
   fetchedMain = CURRENT,
   fetchedAtLeastAuthoritative = true,
+  githubEnv = true,
 } = {}) {
   const dir = mkdtempSync(resolve(tmpdir(), 'verify-publish-api-source-'));
   const envFile = resolve(dir, 'github-env');
@@ -41,7 +42,7 @@ function runHelper({
     const env = {
       ...process.env,
       PATH: fakeBin + ':' + process.env.PATH,
-      GITHUB_ENV: envFile,
+      RUNNER_TEMP: dir,
       GH_TOKEN: 'test-token',
       REPOSITORY: 'nanakokyobashi-rgb/frontaliere-articles',
       PUBLISH_API_SOURCE_COMMIT: SOURCE,
@@ -52,6 +53,8 @@ function runHelper({
       FAKE_AUTHORITATIVE_MAIN: CURRENT,
       FAKE_FETCHED_AT_LEAST: String(fetchedAtLeastAuthoritative),
     };
+    if (githubEnv) env.GITHUB_ENV = envFile;
+    else delete env.GITHUB_ENV;
     try {
       const stdout = execFileSync('bash', [HELPER], {
         cwd: ROOT,
@@ -95,11 +98,16 @@ test('freshness helper rifiuta un fetch piu vecchio della HEAD autorevole', () =
   assert.match(result.output, new RegExp('fetch=' + SOURCE));
 });
 
-test('freshness helper resta fail-closed quando main contiene input API nuovi', () => {
+test('freshness helper disattiva le fasi successive quando main contiene input API nuovi', () => {
   const result = runHelper({ apiInputChanged: true });
-  assert.equal(result.status, 1);
-  assert.match(result.output, /contiene input API piu' recenti/u);
+  assert.equal(result.status, 0);
+  assert.match(result.output, /publish-api saltato prima di test: main=.*contiene input API piu' recenti/u);
+  assert.match(result.output, /PUBLISH_API_SKIP=true/u);
   assert.doesNotMatch(result.output, new RegExp('PUBLISH_API_SOURCE_COMMIT=' + CURRENT));
+
+  const outsideActions = runHelper({ apiInputChanged: true, githubEnv: false });
+  assert.equal(outsideActions.status, 1, 'senza il meccanismo che salta le fasi successive il gate resta fail-closed');
+  assert.match(outsideActions.output, /contiene input API piu' recenti/u);
 });
 
 test('freshness helper resta fail-closed se la storia non è riconciliabile', () => {

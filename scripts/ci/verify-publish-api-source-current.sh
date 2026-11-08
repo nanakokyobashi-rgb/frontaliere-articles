@@ -1,15 +1,20 @@
 #!/usr/bin/env bash
 # Fail closed unless the artifact that is about to be published still belongs
-# to the current main revision. A later main commit is safe to adopt only when
-# the workflow's declared API inputs did not change; the artifact source marker
-# remains immutable because it is also the commit recorded in manifest.json and
-# sent to downstream consumers. Keep this check in one bounded helper so every
-# irreversible publisher phase uses the same freshness contract.
+# to current main. A later main commit is safe to adopt only when the workflow's
+# declared API inputs did not change; otherwise mark the remaining workflow
+# steps to skip. The artifact source marker remains immutable because it is also
+# recorded in manifest.json and sent downstream. Keep this bounded helper so
+# every irreversible phase uses the same freshness contract.
 set -euo pipefail
 
 context="${VERIFY_CONTEXT:-publish-api phase}"
 repository="${REPOSITORY:-${GITHUB_REPOSITORY:-}}"
 published_source="${PUBLISH_API_SOURCE_COMMIT:-${PUBLISHED_SOURCE_COMMIT:-}}"
+skip_marker="${RUNNER_TEMP:-${TMPDIR:-/tmp}}/publish-api-skip"
+
+if [ -f "$skip_marker" ]; then
+  exit 0
+fi
 
 if [ -z "$repository" ]; then
   echo "::error::repository assente: impossibile verificare la sorgente prima di $context"
@@ -58,6 +63,12 @@ if [ "$current_main" != "$published_source" ]; then
     exit 1
   fi
   if [ "$api_input_changed" = 'true' ]; then
+    if [ -n "${GITHUB_ENV:-}" ]; then
+      echo 'PUBLISH_API_SKIP=true' >> "$GITHUB_ENV"
+      printf 'true\n' > "$skip_marker"
+      echo "::notice::publish-api saltato prima di $context: main=$current_main contiene input API piu' recenti di source=$published_source; le fasi successive restano disattivate"
+      exit 0
+    fi
     echo "::error::publish stantio prima di $context: main=$current_main contiene input API piu' recenti di source=$published_source; il run della nuova push deve pubblicare quella release"
     exit 1
   fi
