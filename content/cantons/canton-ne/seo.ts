@@ -889,6 +889,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontalieri-aumento-pausa-2023': {
+    title: 'Frontalieri: aumento in vent\'anni e pausa dalla dinamica dal 2023',
+    description: 'L\'Ostaj segnala che i frontalieri sono più che triplicati in vent\'anni, con quasi 75.000 al giorno, ma la dinamica è in pausa dal 2023.',
+    keywords: 'frontalieri, ticino, svizzera, italia, aumento, vent, anni, pausa',
+    ogTitle: 'Frontalieri: aumento in vent\'anni e pausa dal 2023',
+    ogDescription: 'L\'Observatoire statistique de l\'Arc jurassien (Ostaj) documenta un aumento di più di tre volte in vent\'anni, con circa 75.000 frontalieri giornalieri, ma una pausa della dinamica dal 2023.',
+    canonicalPath: '/articoli-neuchatel/frontalieri-aumento-pausa-2023/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: aumento in vent'anni e pausa dalla dinamica dal 2023",
+      "description": "L'Ostaj segnala che i frontalieri sono più che triplicati in vent'anni, con quasi 75.000 al giorno, ma la dinamica è in pausa dal 2023.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontalieri-aumento-pausa-2023.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-08T13:22:41+00:00",
+      "dateModified": "2026-11-08T13:22:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/frontalieri-aumento-pausa-2023/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

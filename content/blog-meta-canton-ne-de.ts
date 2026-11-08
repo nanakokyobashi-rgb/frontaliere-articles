@@ -72,6 +72,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.ostaj-stagnazione-frontalieri.title': 'Stagnazione frontalieri: Ostaj-Daten und Buch zu grenzüberschreitenden Verbindungen',
     'blog.article.ostaj-stagnazione-frontalieri.excerpt': 'Das Observatoire statistique de l \'Arc jurassien (Ostaj) berichtet von einer Stagnation der Grenzgänger, die sich in zwanzigJahren verdreifacht hat.',
     'blog.article.ostaj-stagnazione-frontalieri.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.frontalieri-aumento-pausa-2023.title': 'Grenzgänger: Zunahme in zwanzig Jahren und Pause bei der Entwicklung seit 2023',
+    'blog.article.frontalieri-aumento-pausa-2023.excerpt': 'Das statistische Observatorium des Jurabogens (Ostaj) weist darauf hin, dass sich die Zahl der Grenzgänger in zwanzig Jahren mehr als verdreifacht hat und fast 75.000 von ihnen täglich die Grenze überqueren, die Entwicklung aber seit 2023 pausiert.',
+    'blog.article.frontalieri-aumento-pausa-2023.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;

@@ -72,6 +72,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.ostaj-stagnazione-frontalieri.title': 'Stagnation of cross-border commuters: Ostaj data and book on cross-border ties',
     'blog.article.ostaj-stagnazione-frontalieri.excerpt': 'The Statistical Observatory of the Jura Arc (Ostaj) reports stagnation among cross-border workers, who have tripled in twenty years.',
     'blog.article.ostaj-stagnazione-frontalieri.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.frontalieri-aumento-pausa-2023.title': 'Cross-border commuters: 20-year rise pauses since 2023',
+    'blog.article.frontalieri-aumento-pausa-2023.excerpt': 'The Statistical Observatory of the Jura Arc (Ostaj) reports that over twenty years, cross-border workers have more than tripled, reaching nearly 75.000 per day, but the trend has been on hold since 2023.',
+    'blog.article.frontalieri-aumento-pausa-2023.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;
