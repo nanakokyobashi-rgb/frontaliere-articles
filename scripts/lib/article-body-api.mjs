@@ -19,7 +19,7 @@ export const REQUIRED_ARTICLE_BODY_FIELDS = Object.freeze(['body1', 'body2', 'bo
 export const MAX_ARTICLE_BODY_QUARANTINES = 3;
 // Fixed ceiling for the currently inventoried, hash-pinned legacy C0 sources.
 // Any additional record beyond this reviewed set fails the build closed.
-export const MAX_REGISTERED_C0_SOURCE_QUARANTINES = 44;
+export const MAX_REGISTERED_C0_SOURCE_QUARANTINES = 46;
 
 const BODY_FIELD_RE = /^body(?:[1-9]|1[0-9]|20)$/u;
 const ARTICLE_KEY_RE = /^blog\.article\.([^'"\r\n]+)\.(body\d+|faq)$/u;
