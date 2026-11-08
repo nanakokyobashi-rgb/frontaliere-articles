@@ -5,7 +5,7 @@
 # pass while edited workflows receive the active shell check.
 # GitHub Actions supports `concurrency.queue` (`single` or `max`), but pinned
 # actionlint v1.7.12 does not model that schema field yet. Ignore only that
-# diagnostic on the three workflows that use the documented queue policy.
+# diagnostic on the workflows that use the documented queue policy.
 paths:
   # I gruppi crawler generati materializzano gli script child con `printf` e
   # stringhe single-quoted: le espansioni devono avvenire quando gira il child,
@@ -22,5 +22,8 @@ paths:
     ignore:
       - 'unexpected key "queue"'
   .github/workflows/translate-pending.yml:
+    ignore:
+      - 'unexpected key "queue"'
+  .github/workflows/publish-api.yml:
     ignore:
       - 'unexpected key "queue"'

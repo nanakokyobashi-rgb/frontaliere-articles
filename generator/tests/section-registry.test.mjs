@@ -93,6 +93,7 @@ import { floorViolations, unpublishedFamilySectionsOf } from '../../scripts/ci/v
 import {
   CANTON_HUBS_API,
   acquireBootstrapLocks,
+  BOOTSTRAP_LOCK_ACQUIRE_WAIT_MS,
   BOOTSTRAP_WAIT_MS,
   STAGING_VERIFY_ATTEMPTS,
   declaredFiles,
@@ -1292,7 +1293,12 @@ test('edge: il lease R2 copre il timeout bootstrap massimo e il tombstone resta 
     SECTION_BOOTSTRAP_LOCK_TTL_MS >= (longestWorkflowTimeoutMinutes + leaseSafetyMarginMinutes) * 60 * 1000,
     'il lease R2 deve superare il timeout del producer con margine per il cleanup',
   );
-  assert.equal(BOOTSTRAP_WAIT_MS, 100 * 60 * 1000, 'il bootstrap API deve coprire il budget massimo del producer');
+  assert.equal(BOOTSTRAP_WAIT_MS, 100 * 60 * 1000, 'il readiness gate del bootstrap API resta bounded');
+  assert.equal(BOOTSTRAP_LOCK_ACQUIRE_WAIT_MS, 45 * 60 * 1000, 'l acquisizione finale dei lease ha una finestra bounded separata');
+  assert.ok(
+    publishApiTimeoutMinutes * 60 * 1000 >= BOOTSTRAP_WAIT_MS + BOOTSTRAP_LOCK_ACQUIRE_WAIT_MS + 30 * 60 * 1000,
+    'il timeout publish-api deve lasciare spazio ai due budget bootstrap e al cleanup',
+  );
   assert.ok(BOOTSTRAP_WAIT_MS < SECTION_BOOTSTRAP_LOCK_TTL_MS, 'il publisher edge fallisce chiuso prima della scadenza del bootstrap attivo');
   const active = makeSectionBootstrapLock({ section: 'canton-ti', commit: COMMIT, owner: 'test/bootstrap' });
   assert.equal(active.role, 'bootstrap');
@@ -1696,18 +1702,41 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   const freshnessHelper = readFileSync(path.join(ROOT, 'scripts/ci/verify-publish-api-source-current.sh'), 'utf8');
   const edgePublisher = readFileSync(path.join(ROOT, 'scripts/publish-section-edge.mjs'), 'utf8');
   assert.match(wf, /source_commit:\n\s+description: .*replay bootstrap bounded/);
-  assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(wf, /source_preflight:/);
+  assert.match(wf, /group: publish-api\n\s+queue: max\n\s+cancel-in-progress: false/);
+  assert.doesNotMatch(wf, /publish-api-bounded-replay-publisher/);
+  assert.match(wf, /if: needs\.source_preflight\.outputs\.publish == 'true'/);
+  assert.match(wf, /publish=false/);
+  assert.match(wf, /il nuovo run e' preservato nella coda FIFO/);
+  assert.match(wf, /if \[ "\$EXPLICIT_REPLAY" = 'true' \]/);
+  assert.match(wf, /replay bounded superato: main=\$current_main contiene input API piu' recenti del commit delle pagine=\$SOURCE_COMMIT/);
+  assert.equal(
+    (wf.slice(wf.indexOf('      - name: Install the preflight parser (esbuild)')).match(/env\.PUBLISH_API_SKIP != 'true'/g) || []).length,
+    25,
+    'dopo la freshness guard ogni step deve rispettare lo skip deciso in corsa',
+  );
+  assert.equal(
+    (wf.match(/publishApiFreshnessPaths\(\)/g) || []).length,
+    2,
+    'preflight e freshness barrier devono usare gli stessi path del trigger publish-api',
+  );
+  assert.equal(
+    (wf.match(/"\$\{publish_api_trigger_path_list\[@\]\}"/g) || []).length,
+    2,
+    'le due freshness guard devono confrontare l’intera lista di trigger',
+  );
+  assert.doesNotMatch(wf, /engine host scripts generator\/scripts generator\/data/);
+  assert.match(wf, /ref: \$\{\{ needs\.source_preflight\.outputs\.source_commit \}\}/);
   assert.match(wf, /Verify publish source is current main/);
   assert.match(wf, /gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main"/);
-  assert.match(wf, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \}\}/);
-  assert.match(wf, /if \[ -z "\$SOURCE_COMMIT" \]/);
-  assert.match(wf, /publish stantio: main=\$current_main contiene input API/);
+  assert.match(wf, /PREFLIGHT_SOURCE_COMMIT: \$\{\{ needs\.source_preflight\.outputs\.source_commit \}\}/);
+  assert.match(wf, /publish superato coalesced: main=\$current_main contiene input API/);
   assert.match(wf, /git fetch --no-tags origin main/);
-  assert.match(wf, /git merge-base --is-ancestor "\$SOURCE_COMMIT" "\$current_main"/);
+  assert.match(wf, /git merge-base --is-ancestor "\$checked_out" "\$current_main"/);
   assert.match(wf, /apiInputChangedInRange/);
   assert.match(wf, /git checkout --detach "\$current_main"/);
   assert.match(wf, /PUBLISH_API_SOURCE_COMMIT=\$current_main/);
-  assert.match(wf, /nessun input publish-api nel delta/);
+  assert.match(wf, /nessun input API nel delta/);
   assert.equal(
     (wf.match(/bash scripts\/ci\/verify-publish-api-source-current\.sh/g) || []).length,
     8,
@@ -1727,6 +1756,8 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(freshnessHelper, /git fetch --no-tags origin main/);
   assert.match(freshnessHelper, /git merge-base --is-ancestor "\$published_source" "\$current_main"/);
   assert.match(freshnessHelper, /apiInputChangedInRange/);
+  assert.match(freshnessHelper, /publish-api-skip/);
+  assert.match(freshnessHelper, /PUBLISH_API_SKIP=true/);
   assert.match(freshnessHelper, /il commit dell'artifact resta/);
   assert.match(freshnessHelper, /PUBLISH_API_SOURCE_COMMIT/);
   const queuePush = wf.slice(wf.indexOf('push_queue_commit()'), wf.indexOf('queue_changed=false'));
@@ -1764,6 +1795,9 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
     'scripts/lib/is-invoked-directly.mjs',
     'scripts/ci/verify-publish-api-source-current.sh',
     'generator/scripts/load-rc-env.mjs',
+    '.github/actions/setup-article-source-runtime/**',
+    'scripts/ci/article-source-runtime/**',
+    'scripts/ci/check-article-source-runtime.mjs',
   ]) {
     assert.ok(filters.includes(p), p);
   }
@@ -1819,7 +1853,7 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.equal(wf.slice(at, edgeEnd).trimEnd(), [
     '      - name: Publish the canton sections release to the edge',
     '        id: publish_edge',
-    "        if: steps.deploy.outcome == 'success'",
+    "        if: env.PUBLISH_API_SKIP != 'true' && steps.deploy.outcome == 'success'",
     '        env:',
     '          GH_TOKEN: ${{ github.token }}',
     '        run: node scripts/publish-section-edge.mjs',

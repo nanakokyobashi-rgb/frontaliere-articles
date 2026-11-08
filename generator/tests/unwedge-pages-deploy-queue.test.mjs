@@ -80,7 +80,7 @@ test('lo script punta al publisher che esiste, e il publisher ha ancora il gate 
   assert.ok(fs.existsSync(path.join(ROOT, publisherPath)), `${publisherPath} non esiste: il reaper non sbloccherebbe niente`);
   const publisher = read(publisherPath);
   assert.match(publisher, /environment:\s*\n\s*name: github-pages/);
-  assert.match(publisher, /concurrency:\s*\n\s*group: publish-api\s*\n\s*cancel-in-progress: false/);
+  assert.match(publisher, /concurrency:\s*\n\s*group: publish-api\s*\n\s*queue: max\s*\n\s*cancel-in-progress: false/);
 });
 
 test('il chiamante gira a cadenza, invoca lo script e ha actions: write', () => {

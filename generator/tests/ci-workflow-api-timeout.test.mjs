@@ -19,8 +19,8 @@ test('le letture GitHub dei workflow CI hanno un limite di 60 secondi', () => {
   const source = sources.join('\n');
   assert.equal(
     (source.match(/timeout --kill-after=1s 60s gh api/g) || []).length,
-    22,
-    'tutte le ventidue chiamate gh api del gruppo devono essere bounded',
+    23,
+    'tutte le ventitre chiamate gh api del gruppo devono essere bounded',
   );
   assert.doesNotMatch(
     source,

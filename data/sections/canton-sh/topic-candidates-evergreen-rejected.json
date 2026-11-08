@@ -4,30 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://sh.ch/webseite/kanton-schaffhausen/beh-rde/regierung/staatskanzlei/medienmitteilungen-24340447-de.html": {
-      "section": "canton-sh",
-      "ts": 1793918364173
-    },
-    "canton-sh::https://www.shn.ch/region/kanton/2026-11-04/schaffhauser-polizei-warnt-vor-telefonbetrug-seniorin-will-zehntausende": {
-      "section": "canton-sh",
-      "ts": 1793920414012
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-02/bei-der-wefa-in-thayngen-kommt-es-zu-einem-wechsel": {
-      "section": "canton-sh",
-      "ts": 1793931888953
-    },
-    "canton-sh::https://www.radiomunot.ch/p/neuhauser-budget-2027-schwarze-null-dank-reserven-3v0wfojhh04lqprzwvenux": {
-      "section": "canton-sh",
-      "ts": 1793951718332
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-20/jestetter-erfindung-soll-den-zahnarztbesuch-komfortabler": {
-      "section": "canton-sh",
-      "ts": 1793951719634
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-01/gf-verkauft-luft-und-raumfahrt-sowie-industriegasturbinen": {
-      "section": "canton-sh",
-      "ts": 1793952079933
-    },
     "canton-sh::https://grenzgaengerzentrum.de/ratgeber/allgemein/grenzgaenger-kinder-schule-schweiz": {
       "section": "canton-sh",
       "ts": 1794006321615
@@ -35,6 +11,10 @@
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-27/sig-erzielt-gutes-ergebnis-im-dritten-quartal-und-will-fuer": {
       "section": "canton-sh",
       "ts": 1794081609215
+    },
+    "canton-sh::https://www.radiomunot.ch/p/regionalnachrichten-vom-6-november-2026-1130-uhr-2jmpchd23hpm3n7lssqcdl": {
+      "section": "canton-sh",
+      "ts": 1794171394731
     }
   }
 }

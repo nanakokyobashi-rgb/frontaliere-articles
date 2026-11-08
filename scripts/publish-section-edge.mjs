@@ -588,13 +588,15 @@ export function requiredPageKeys(section, { sitemapXml, previousSitemapXml = nul
 }
 
 /**
- * Quanto il publisher puo' attendere il bootstrap e ogni quanto ritenta.
- * La finestra del publisher e' bounded a 100 minuti per lasciare spazio al
- * replay quando il producer e' ancora in coda. Il lease del producer copre
- * invece l'intero timeout di 360 minuti, con margine di cleanup; il ruolo
- * edge-publisher usa un TTL separato e bounded al proprio job.
+ * Budget massimi del publisher per il bootstrap e l'handshake del lease edge.
+ * I 100 minuti coprono readiness e pagine; l'acquisizione atomica dei lease ha
+ * altri 45 minuti, cosi' la prima attesa non consuma la finestra necessaria a
+ * chiudere la gara finale prima del flip. Entrambi restano dentro il timeout
+ * bounded del job publish-api. Il lease del producer copre il timeout di 360
+ * minuti con margine di cleanup; il ruolo edge-publisher usa un TTL separato.
  */
 export const BOOTSTRAP_WAIT_MS = 100 * 60 * 1000;
+export const BOOTSTRAP_LOCK_ACQUIRE_WAIT_MS = 45 * 60 * 1000;
 export const BOOTSTRAP_RETRY_MS = 20 * 1000;
 /** Un tombstone transitorio non deve lasciare un lease attivo fino al TTL. */
 export const BOOTSTRAP_RELEASE_ATTEMPTS = 3;
@@ -886,12 +888,14 @@ export async function publishRelease(
     log = console.log,
     tmpDir = os.tmpdir(),
     bootstrapWaitMs = BOOTSTRAP_WAIT_MS,
+    bootstrapLockAcquireWaitMs = BOOTSTRAP_LOCK_ACQUIRE_WAIT_MS,
     bootstrapRetryMs = BOOTSTRAP_RETRY_MS,
     bootstrapReleaseAttempts = BOOTSTRAP_RELEASE_ATTEMPTS,
     stagingVerifyAttempts = STAGING_VERIFY_ATTEMPTS,
     stagingVerifyRetryMs = STAGING_VERIFY_RETRY_MS,
     verifySourceCurrent = null,
     sleep,
+    now = Date.now,
   },
 ) {
   const previous = await readPreviousRelease(io);
@@ -1014,10 +1018,11 @@ export async function publishRelease(
     }
   }
 
-  const bootstrapDeadline = Date.now() + Math.max(0, bootstrapWaitMs);
+  const bootstrapDeadline = now() + Math.max(0, bootstrapWaitMs);
   const lockedBeforeBootstrap = await waitForBootstrapLocks(release.live, io, {
     retryMs: bootstrapRetryMs,
     sleep,
+    now,
     deadline: bootstrapDeadline,
     commit: release.commit,
     log,
@@ -1043,11 +1048,17 @@ export async function publishRelease(
   // dopo aver visto il lock assente. L'acquisizione condizionale R2 chiude la
   // finestra: se vince il publisher, il bootstrap non puo' sovrascrivere le
   // pagine; se vince il bootstrap, il publisher aspetta senza fare il flip.
+  // La prima attesa puo' consumare tutto il budget di readiness/pagine. Il
+  // lease condizionale riceve una finestra bounded propria, cosi' il controllo
+  // finale di sicurezza non eredita una deadline quasi scaduta.
+  const lockAcquireDeadline = now() + Math.max(0, bootstrapLockAcquireWaitMs);
   const acquired = await acquireBootstrapLocks(release.live, release.commit, io, {
+    waitMs: bootstrapLockAcquireWaitMs,
     retryMs: bootstrapRetryMs,
     releaseAttempts: bootstrapReleaseAttempts,
     sleep,
-    deadline: bootstrapDeadline,
+    now,
+    deadline: lockAcquireDeadline,
     log,
   });
   if (acquired.error) {
@@ -1062,7 +1073,7 @@ export async function publishRelease(
     waitMs: 0,
     retryMs: 0,
     sleep,
-    deadline: Date.now(),
+    deadline: now(),
   });
   if (missingAfterLock.length) {
     return stopBeforeFlip(
