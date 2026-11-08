@@ -111,6 +111,22 @@
     "canton-be::https://ajour.ch/story/705819/hackerattacken-auf-gewerbe-bund-begr%c3%bcsst-freiwillige-meldungen": {
       "section": "canton-be",
       "ts": 1794111207568
+    },
+    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/3977a909-8dc8-411d-adf1-12628293ccdb": {
+      "section": "canton-be",
+      "ts": 1794118319310
+    },
+    "canton-be::https://ajour.ch/story/705732/zwei-strassen-wegen-bauarbeiten-gesperrt": {
+      "section": "canton-be",
+      "ts": 1794118321398
+    },
+    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/b45ca2d3-2080-42c7-9a9a-b5416fe74e59": {
+      "section": "canton-be",
+      "ts": 1794118353937
+    },
+    "canton-be::https://ajour.ch/story/705646/stadt-thun-schaltet-digitale-karte-zur-w%c3%a4rmeversorgung-auf": {
+      "section": "canton-be",
+      "ts": 1794118355868
     }
   }
 }
