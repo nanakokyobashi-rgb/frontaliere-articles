@@ -73,6 +73,13 @@ test('a deterministic no-relevant-cover result skips its article; verifier outag
   }), false, 'il codice generico senza il marker deterministico non basta a riclassificare');
 });
 
+test('a localized slug collision rejects the candidate without masking infrastructure errors', () => {
+  const isQualityRejectError = loadQualityClassifier();
+
+  assert.equal(isQualityRejectError({ slugCollision: true }), true);
+  assert.equal(isQualityRejectError({ slugCollision: false }), false);
+});
+
 test('a retryable cover-boundary failure defers the run without weakening the image gate', () => {
   const isRetryableArticleCoverError = loadCoverDeferralClassifier();
 

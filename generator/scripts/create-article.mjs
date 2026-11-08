@@ -18545,8 +18545,9 @@ function isRetryableArticleCoverError(e) {
 
 /**
  * True when the error is a CONTENT/QUALITY rejection (fact-check block,
- * topic-gate REGOLA #0 abort, fabrication, or a non-conformant headline that
- * survived its retry budget) rather than an infrastructure bug.
+ * topic-gate REGOLA #0 abort, fabrication, localized-slug collision, or a
+ * non-conformant headline that survived its retry budget) rather than an
+ * infrastructure bug.
  *
  * Such rejections mean "no acceptable article this run" — exactly the same
  * disposition as a duplicate or an exhausted free-model pool. The retry loops
@@ -18587,6 +18588,10 @@ function isQualityRejectError(e) {
   // Provider/verifier outages remain retryable infrastructure errors and do
   // not set this explicit marker.
   if (e.imageQualityFailure === true) return true;
+  // A translated slug can collide with an existing route even when the
+  // article body is valid. The shared uniqueness guard rejects that candidate
+  // before any write; rotate to the next headline instead of failing the run.
+  if (e.slugCollision === true) return true;
   if (e.qualityReject === true || e.topicGateAbort === true) return true;
   // `troppo corto` covers the whole thin-content class (too-short IT body
   // after the retry+expand ladder, too-short char count, too-short locale
