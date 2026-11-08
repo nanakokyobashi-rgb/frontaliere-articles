@@ -291,16 +291,24 @@ function appendStepSummary(file, occ, opts = {}) {
 }
 
 /**
- * Le foglie stringa di una struttura, in ordine di visita, unite da `\n`.
+ * Le stringhe di una struttura — chiavi e foglie, in ordine di visita — unite
+ * da `\n`.
  *
  * Serve a `reportStrippedControlCharsDeep`. `\n` e' 0x0A, che **non** e' nella
  * classe C0 che questo modulo cerca: unire con quello non puo' inventare ne'
- * nascondere un'occorrenza.
+ * nascondere un'occorrenza. Le chiavi sono incluse perche' `sanitizeDeep` le
+ * sanifica prima della serializzazione, e `JSON.stringify` ne codificherebbe i
+ * marker C0 rendendoli invisibili a `occurrencesIn`.
  */
 function joinStringLeaves(value, out = []) {
   if (typeof value === 'string') out.push(value);
   else if (Array.isArray(value)) for (const v of value) joinStringLeaves(v, out);
-  else if (value && typeof value === 'object') for (const v of Object.values(value)) joinStringLeaves(v, out);
+  else if (value && typeof value === 'object') {
+    for (const [key, child] of Object.entries(value)) {
+      out.push(key);
+      joinStringLeaves(child, out);
+    }
+  }
   return out;
 }
 
@@ -317,8 +325,8 @@ function joinStringLeaves(value, out = []) {
  * corpus, un grep di byte sui `.json` non vedeva la corruzione mentre i `.ts` la
  * mostravano.
  *
- * Quindi si guardano le foglie stringa **prima** della serializzazione, che e'
- * l'unico momento in cui il byte esiste come byte.
+ * Quindi si guardano chiavi e foglie stringa **prima** della serializzazione,
+ * che e' l'unico momento in cui il byte esiste come byte.
  */
 export function reportStrippedControlCharsDeep(file, original, clean, opts = {}) {
   return reportStrippedControlChars(

@@ -21,6 +21,7 @@ import os from 'node:os';
 import {
   occurrencesIn,
   reportStrippedControlChars,
+  reportStrippedControlCharsDeep,
   strippedCount,
   residueCount,
   stripLasciaResiduo,
@@ -143,6 +144,21 @@ test('una sanificazione codificata che cambia clean viene rifiutata fail-closed'
   assert.equal(logs.length, 1);
   assert.match(logs[0], /^::error::/u);
   assert.match(logs[0], /clean differisce da original/u);
+});
+
+test('una sanificazione JSON che cambia una chiave C0 viene rifiutata fail-closed', () => {
+  resetCounters();
+  const original = { [`na${B}me`]: 'Chiasso' };
+  const clean = { name: 'Chiasso' };
+
+  assert.throws(
+    () => reportStrippedControlCharsDeep('public/data/example.json', original, clean, {
+      log: () => {}, fsImpl: { mkdirSync() {}, appendFileSync() {} },
+      summaryPath: '', reportPath: 'control-char-report.jsonl',
+    }),
+    /scrittura rifiutata/u,
+  );
+  assert.equal(strippedCount(), 1, 'il marker nella chiave deve essere registrato');
 });
 
 test('ogni choke point di scrittura passa da qui — per OGNI sanitizer, non solo sanitizeText', () => {
