@@ -151,14 +151,17 @@ function decodeEscapedControlChars(value) {
   return out;
 }
 
-function collectJsonStrings(value, out = []) {
-  if (typeof value === 'string') out.push(value);
-  else if (Array.isArray(value)) {
-    for (const item of value) collectJsonStrings(item, out);
+function collectJsonStringFields(value, field = '$', out = []) {
+  if (typeof value === 'string') {
+    out.push({ field, text: value, offsetBasis: 'decoded-json-field' });
+  } else if (Array.isArray(value)) {
+    for (let index = 0; index < value.length; index += 1) {
+      collectJsonStringFields(value[index], `${field}[${index}]`, out);
+    }
   } else if (value && typeof value === 'object') {
     for (const [key, item] of Object.entries(value)) {
-      out.push(key);
-      collectJsonStrings(item, out);
+      out.push({ field: `${field} key`, text: key, offsetBasis: 'decoded-json-field' });
+      collectJsonStringFields(item, `${field}.${key}`, out);
     }
   }
   return out;
@@ -575,7 +578,11 @@ function decodeXmlReferencesOutsideLiterals(xml) {
   return output;
 }
 
-function articleSourceReportableText(file, original) {
+/**
+ * Each item carries its own coordinate system: decoded TypeScript/FAQ offsets
+ * are value-relative, never file offsets, and therefore include the field path.
+ */
+function articleSourceReportableFields(file, original) {
   const normalizedFile = String(file).replaceAll('\\', '/');
   const isBodySource = /(?:^|\/)content\/blog-body[^/]*\/[^/]+\/[^/]+\.ts$/u.test(normalizedFile);
   const isMetaSource = /(?:^|\/)content\/blog-meta[^/]*\.ts$/u.test(normalizedFile);
@@ -584,23 +591,27 @@ function articleSourceReportableText(file, original) {
   C0.lastIndex = 0;
   const hasRawC0 = C0.test(original);
   C0.lastIndex = 0;
-  if (hasRawC0) return original;
+  if (hasRawC0) {
+    return [{ field: null, text: original, offsetBasis: 'source-file' }];
+  }
 
-  const text = [];
+  const fields = [];
   for (const [key, value] of readTsStringMap(original)) {
-    text.push(key);
+    fields.push({ field: 'property key', text: key, offsetBasis: 'decoded-ts-field' });
     if (key.endsWith('.faq')) {
       try {
-        text.push(...collectJsonStrings(JSON.parse(value)));
+        fields.push(...collectJsonStringFields(JSON.parse(value), key));
       } catch {
         // The article parser rejects invalid FAQ JSON; keep the source intact here.
-        text.push(value);
+        fields.push({ field: key, text: value, offsetBasis: 'decoded-ts-field' });
       }
     } else {
-      text.push(value);
+      fields.push({ field: key, text: value, offsetBasis: 'decoded-ts-field' });
     }
   }
-  return text.length > 0 ? text.join('\n') : original;
+  return fields.length > 0
+    ? fields
+    : [{ field: null, text: original, offsetBasis: 'source-file' }];
 }
 
 function findHtmlTagEnd(html, start) {
@@ -695,28 +706,28 @@ function decodeInlineScriptBodies(html) {
   return output + html.slice(cursor);
 }
 
-function reportableText(file, original) {
+function reportableFields(file, original) {
   // JSON.parse reveals both value and key escapes (for example `\\b` and
   // `\\u0016`) before sanitizeDeep removes the resulting character.
   try {
-    return collectJsonStrings(JSON.parse(original)).join('\n');
+    return collectJsonStringFields(JSON.parse(original));
   } catch {
     // The other writer formats are not necessarily JSON documents.
   }
 
   const extension = path.extname(file).toLowerCase();
   if (extension === '.ts') {
-    const articleSourceText = articleSourceReportableText(file, original);
-    if (articleSourceText !== null) return articleSourceText;
+    const articleSourceFields = articleSourceReportableFields(file, original);
+    if (articleSourceFields !== null) return articleSourceFields;
   }
   if (extension === '.xml') {
-    return decodeXmlReferencesOutsideLiterals(original);
+    return [{ field: null, text: decodeXmlReferencesOutsideLiterals(original), offsetBasis: 'decoded-document' }];
   }
 
   if (extension === '.html' || extension === '.htm') {
-    return decodeInlineScriptBodies(original);
+    return [{ field: null, text: decodeInlineScriptBodies(original), offsetBasis: 'decoded-document' }];
   }
-  return original;
+  return [{ field: null, text: original, offsetBasis: 'source-file' }];
 }
 
 const LETTERA = /\p{L}/u;
@@ -873,7 +884,9 @@ function assertNoUntracedChange(file, original, clean, opts, changed = clean !==
  */
 export function reportStrippedControlChars(file, original, clean, opts = {}) {
   if (typeof original !== 'string') return 0;
-  const occurrences = occurrencesIn(reportableText(file, original));
+  const occurrences = reportableFields(file, original).flatMap(({ field, text: reportable, offsetBasis }) => (
+    occurrencesIn(reportable).map((occurrence) => ({ ...occurrence, field, offsetBasis }))
+  ));
   if (occurrences.length === 0) assertNoUntracedChange(file, original, clean, opts);
   return reportOccurrences(file, occurrences, opts);
 }
@@ -912,9 +925,9 @@ function appendStepSummary(file, occ, opts = {}) {
     '',
     `${occ.length} control character C0 rilevati; scrittura rifiutata. ${occ.filter((o) => o.residuo).length} avrebbero rotto una parola dopo lo strip.`,
     '',
-    '| offset | byte | rompe una parola | contesto (prima dello strip) |',
-    '|---|---|---|---|',
-    ...occ.map((o) => `| ${o.at} | 0x${o.byte.toString(16).padStart(2, '0')} | ${o.residuo ? 'si' : 'no'} | \`${visibile(o.context).replace(/\|/g, '\\|')}\` |`),
+    '| campo | base offset | offset | byte | rompe una parola | contesto (prima dello strip) |',
+    '|---|---|---|---|---|---|',
+    ...occ.map((o) => `| \`${visibile(o.field ?? '(documento)').replace(/\|/g, '\\|').replace(/`/g, '\\`')}\` | ${o.offsetBasis ?? 'value'} | ${o.at} | 0x${o.byte.toString(16).padStart(2, '0')} | ${o.residuo ? 'si' : 'no'} | \`${visibile(o.context).replace(/\|/g, '\\|')}\` |`),
     '',
   ];
   try {

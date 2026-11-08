@@ -144,6 +144,22 @@ test('l\'evidenza finisce su disco in forma leggibile da un programma', () => {
   assert.ok(rec.context.includes(B), 'il record deve portare il byte, non solo il conteggio');
 });
 
+test('l\'offset di un FAQ decodificato indica il campo e la propria base', () => {
+  resetCounters();
+  const writes = [];
+  const source = String.raw`export default { 'blog.article.example.faq': '[{"q":"ab\\u00169","a":"risposta"}]' };`;
+  expectRejectedWrite('content/blog-body/fr/example.ts', source, source, {
+    log: () => {},
+    fsImpl: { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) },
+    reportPath: '/tmp/r.jsonl',
+    summaryPath: '',
+  });
+  const rec = JSON.parse(writes.find((w) => w.p === '/tmp/r.jsonl').d.trim());
+  assert.equal(rec.field, 'blog.article.example.faq[0].q');
+  assert.equal(rec.offsetBasis, 'decoded-json-field');
+  assert.equal(rec.at, 2, 'l\'offset e\' relativo al valore FAQ decodificato');
+});
+
 test('un errore I/O del report non permette di scrivere il contenuto sanificato', () => {
   resetCounters();
   const logs = [];
