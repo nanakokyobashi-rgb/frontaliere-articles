@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "8a4e5f76194d30dffe284d2c2d4c90ad647d38a73c5eaa594ab1e50123b70052",
+  "updatedAt": "2026-11-08T22:45:42.198Z",
+  "contentHash": "b0c1616487dbb11aca5f0703e22250466588f87a80f5c2f6c8101f1b6f4d7c2d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Vallese, il tasso di disoccupazione tocca il 3,3 per cento",
+          "url": "/articoli-vallese/vallese-tasso-disoccupazione-33/",
+          "excerpt": "Nel Canton Vallese, a ottobre, il tasso di disoccupazione ha registrato un incremento di 0,2 punti percentuali, portandosi al 3,3%.",
+          "date": "2026-11-08T22:41:21.858Z"
+        },
+        {
           "title": "Ferie sciistiche 2027 concentrate tra febbraio e marzo in Svizzera",
           "url": "/articoli-vallese/ferie-sciare-concentrazione-2027/",
           "excerpt": "Nel 2027 le ferie sportive si concentrano in tre-quattro settimane, con una finestra principale indicativa dal 4 al 26 febbraio.",
@@ -94,12 +100,6 @@
           "url": "/articoli-vallese/aumento-tasso-disoccupazione-ottobre/",
           "excerpt": "Alla fine di ottobre, 6'082 disoccupati risultavano iscritti presso gli Uffici regionali di collocamento del Vallese, 327 in più rispetto al mese precedente.",
           "date": "2026-11-05T14:49:33.548Z"
-        },
-        {
-          "title": "Vallese: il Consiglio di Stato punta a 180 milioni di risparmi",
-          "url": "/articoli-vallese/vallese-piano-risparmi-2030/",
-          "excerpt": "L'articolo di RTS riferisce che il Consiglio di Stato del Vallese deve individuare CHF 180 milioni di risparmi entro il 2030 per mantenere l'equilibrio del bilancio cantonale.",
-          "date": "2026-11-05T04:21:02.956Z"
         }
       ],
       "links": [
@@ -128,7 +128,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-08T22:45:42.198Z"
     },
     "en": {
       "canton": "VS",
@@ -187,6 +187,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Valais, the unemployment rate reaches 3,3 percent",
+          "url": "/en/valais-articles/valais-unemployment-rate-33/",
+          "excerpt": "In the Canton of Valais, in October, the unemployment rate increased by 0,2 percentage points, reaching 3,3%.",
+          "date": "2026-11-08T22:41:21.858Z"
+        },
+        {
           "title": "Ski holidays in 2027 concentrated between February and March in Switzerland",
           "url": "/en/valais-articles/ski-holidays-concentration-2027/",
           "excerpt": "In 2027, sports holidays are concentrated into three to four weeks, with an indicative main window from February 4 to 26.",
@@ -209,12 +215,6 @@
           "url": "/en/valais-articles/increase-unemployment-rate-october/",
           "excerpt": "At the end of October, 6,082 unemployed people were registered with the Valais Regional Employment Offices, 327 more than in the previous month.",
           "date": "2026-11-05T14:49:33.548Z"
-        },
-        {
-          "title": "Valais: the Council of State aims for 180 million in savings",
-          "url": "/en/valais-articles/valais-savings-plan-2030/",
-          "excerpt": "The RTS article reports that the Valais Council of State must identify CHF 180 million in savings by 2030 to maintain the balance of the cantonal budget.",
-          "date": "2026-11-05T04:21:02.956Z"
         }
       ],
       "links": [
@@ -243,7 +243,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-08T22:45:42.198Z"
     },
     "de": {
       "canton": "VS",
@@ -302,6 +302,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wallis, die Arbeitslosenquote erreicht 3,3 Prozent",
+          "url": "/de/wallis-artikel/wallis-arbeitslosenquote-33/",
+          "excerpt": "Im Kanton Wallis verzeichnete die Arbeitslosenquote im Oktober einen Anstieg um 0,2 Prozentpunkte und erreichte 3,3%.",
+          "date": "2026-11-08T22:41:21.858Z"
+        },
+        {
           "title": "Skiferien 2027 in der Schweiz zwischen Februar und März",
           "url": "/de/wallis-artikel/skiferien-konzentration-2027/",
           "excerpt": "Im Jahr 2027 konzentrieren sich die Sportferien auf drei bis vier Wochen, mit einem ungefähren Hauptzeitfenster vom 4. bis 26. Februar.",
@@ -324,12 +330,6 @@
           "url": "/de/wallis-artikel/tatsatz-arbeitslosigkeit-oktober/",
           "excerpt": "Ende Oktober waren 6.082 Arbeitslose bei den Regionalen Arbeitsämtern des Wallis registriert, 327 mehr als im Vormonat.",
           "date": "2026-11-05T14:49:33.548Z"
-        },
-        {
-          "title": "Wallis: Der Staatsrat strebt Einsparungen von 180 Millionen an",
-          "url": "/de/wallis-artikel/wallis-sparplan-2030/",
-          "excerpt": "Der Artikel von RTS berichtet, dass der Staatsrat des Wallis bis 2030 Einsparungen von CHF 180 Millionen ermitteln muss, um das Gleichgewicht des kantonalen Haushalts zu wahren.",
-          "date": "2026-11-05T04:21:02.956Z"
         }
       ],
       "links": [
@@ -354,7 +354,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-08T22:45:42.198Z"
     },
     "fr": {
       "canton": "VS",
@@ -413,6 +413,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Valais, le taux de chômage atteint 3,3 pour cent",
+          "url": "/fr/articles-valais/valais-taux-chomage-33/",
+          "excerpt": "Dans le canton du Valais, en octobre, le taux de chômage a enregistré une hausse de 0,2 point de pourcentage, atteignant 3,3%.",
+          "date": "2026-11-08T22:41:21.858Z"
+        },
+        {
           "title": "Vacances de ski 2027 concentrées entre février et mars en Suisse",
           "url": "/fr/articles-valais/vacances-ski-concentration-2027/",
           "excerpt": "En 2027, les vacances sportives se concentrent sur trois à quatre semaines, avec une fenêtre principale indicative du 4 au 26 février.",
@@ -435,12 +441,6 @@
           "url": "/fr/articles-valais/hausse-taux-chomage-octobre/",
           "excerpt": "Fin octobre, 6 082 chômeurs étaient enregistrés auprès des Bureaux régionaux de l’emploi du Valais, soit 327 de plus que le mois précédent.",
           "date": "2026-11-05T14:49:33.548Z"
-        },
-        {
-          "title": "Valais : Conseil d’État vise 180 millions d’économies",
-          "url": "/fr/articles-valais/valais-plan-economies-2030/",
-          "excerpt": "L’article de la RTS rapporte que le Conseil d’État du Valais doit prévoir 180 millions de CHF d’économies d’ici 2030 pour maintenir le solde du budget cantonal.",
-          "date": "2026-11-05T04:21:02.956Z"
         }
       ],
       "links": [
@@ -469,7 +469,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-08T22:45:42.198Z"
     }
   }
 }
