@@ -42,12 +42,31 @@ export function normalizeHtml(html) {
     .join('\n');
 }
 
+function isCloudflareBotFightScriptSource(script) {
+  let sourceStart = script.indexOf(CLOUDFLARE_BOT_FIGHT_SCRIPT_SRC);
+  while (sourceStart >= 0) {
+    const quote = script[sourceStart - 1];
+    if (quote === "'" || quote === '"') {
+      const suffix = script.slice(sourceStart + CLOUDFLARE_BOT_FIGHT_SCRIPT_SRC.length);
+      if (suffix.startsWith(quote)) return true;
+
+      // Cloudflare puts a per-request ray in the source URL and assigns that
+      // URL through a variable. Accept only that one known query field;
+      // arbitrary script URLs or parameters remain mismatches.
+      const ray = suffix.startsWith('?ray=') ? suffix.slice(5, 21) : '';
+      if (suffix[21] === quote && /^[a-f0-9]{16}$/iu.test(ray)) return true;
+    }
+    sourceStart = script.indexOf(CLOUDFLARE_BOT_FIGHT_SCRIPT_SRC, sourceStart + 1);
+  }
+  return false;
+}
+
 /**
  * Cloudflare's edge may append its JavaScript-detection probe immediately
- * before </body>. The probe is not part of the static document published to
- * the shard, so remove only that exact, trailing edge-owned script before
- * comparing fingerprints. Any other script, marker, or placement remains a
- * real byte mismatch.
+ * before </body>. Its `ray` query changes on every request, so remove only the
+ * trailing script with the known source path and Cloudflare marker before
+ * comparing fingerprints. Any other script, marker, query, or placement
+ * remains a real byte mismatch.
  */
 export function stripCloudflareBotFightScript(html) {
   if (typeof html !== 'string') throw new TypeError('HTML must be a string');
@@ -64,7 +83,7 @@ export function stripCloudflareBotFightScript(html) {
     : candidateWithWhitespace;
   if (!candidate.endsWith('</script>')
     || !candidate.includes('window.__CF$cv$params=')
-    || !candidate.includes(`a.src='${CLOUDFLARE_BOT_FIGHT_SCRIPT_SRC}'`)) {
+    || !isCloudflareBotFightScriptSource(candidate)) {
     return html;
   }
 

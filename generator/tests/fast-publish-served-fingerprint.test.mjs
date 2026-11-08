@@ -58,6 +58,7 @@ function workflowRun(name) {
 const NEW_HTML = '<main>\n  <h1>Nuovo articolo</h1>\n</main>\n';
 const OLD_HTML = '<main>\n  <h1>Articolo vecchio</h1>\n</main>\n';
 const CF_BOT_FIGHT_SCRIPT = "<script>(function(){window.__CF$cv$params={r:'ray',t:'time'};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';})();</script>";
+const CF_BOT_FIGHT_SCRIPT_WITH_RAY = "<script>(function(){var payload=\"window.__CF$cv$params={r:'0123456789abcdef',t:'time'};var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=0123456789abcdef',a=document.createElement('script');a.src=u;\";})();</script>";
 const RECORD = {
   url: 'https://frontaliereticino.ch/articoli-ticino/demo/',
   origin: 'https://origin-articolifrontaliere-it.frontaliereticino.ch/articoli-ticino/demo/',
@@ -263,16 +264,29 @@ test('la verifica CDN invia un User-Agent esplicito accettato dal bordo', async 
   });
 });
 
-test('il fingerprint ignora solo lo script Cloudflare di bot-fight in coda al body', async () => {
+test('il fingerprint ignora lo script Cloudflare di bot-fight in coda, anche con ray per richiesta', async () => {
   const baseHtml = '<html><body><main>Nuovo articolo</main></body></html>\n';
-  const servedHtml = baseHtml.replace('</body>', `${CF_BOT_FIGHT_SCRIPT}</body>`);
   const record = { ...RECORD, sha: fingerprintHtml(baseHtml) };
 
-  assert.equal(stripCloudflareBotFightScript(servedHtml), baseHtml);
-  await assert.doesNotReject(() => verifyApex({
-    records: [record],
-    fetchImpl: async () => response(servedHtml, { 'cf-cache-status': 'MISS' }),
-  }));
+  for (const script of [CF_BOT_FIGHT_SCRIPT, CF_BOT_FIGHT_SCRIPT_WITH_RAY]) {
+    const servedHtml = baseHtml.replace('</body>', `${script}</body>`);
+    assert.equal(stripCloudflareBotFightScript(servedHtml), baseHtml);
+    await assert.doesNotReject(() => verifyApex({
+      records: [record],
+      fetchImpl: async () => response(servedHtml, { 'cf-cache-status': 'MISS' }),
+    }));
+  }
+});
+
+test('un URL Bot Fight con query diversa da ray resta un mismatch', () => {
+  const baseHtml = '<html><body><main>Nuovo articolo</main></body></html>\n';
+  const unrecognizedScript = CF_BOT_FIGHT_SCRIPT_WITH_RAY.replace(
+    '?ray=0123456789abcdef',
+    '?ray=0123456789abcdef&other=1',
+  );
+  const servedHtml = baseHtml.replace('</body>', `${unrecognizedScript}</body>`);
+
+  assert.equal(stripCloudflareBotFightScript(servedHtml), servedHtml);
 });
 
 test('un marker Cloudflare fuori dal contratto non viene normalizzato', () => {
