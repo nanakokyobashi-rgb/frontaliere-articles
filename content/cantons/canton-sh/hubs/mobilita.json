@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "mobilita",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "4880d0e5a1ba9b56e6259bccefdd381cc5fcba5c647d45e82fdd792b078f79f9",
+  "updatedAt": "2026-11-08T03:11:57.760Z",
+  "contentHash": "27f9f704175e5373a29751bd298dc8c47c38b81129fe562b160fb67e669bd3e0",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-05T23:59:59.000Z",
+      "updatedAt": "2026-11-06T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-06T22:26:45.566Z",
+      "updatedAt": "2026-11-07T21:07:56.550Z",
       "keyFacts": 0
     }
   ],
@@ -28,26 +28,20 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, settimana conclusa: 5 novembre 2026"
+          "note": "Bargen SH – Tengen, settimana conclusa: 6 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 30 ottobre 2026 – 5 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 31 ottobre 2026 – 6 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/bargen-sh-tengen/oggi/"
-            },
-            {
-              "label": "Blumberg – Bargen SH, Alte Bargener Strasse",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/blumberg-bargen-sh-alte-bargener-strasse/oggi/"
             },
             {
               "label": "Blumberg – Beggingen",
@@ -84,11 +78,17 @@
               "value": "0 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/dorflingen-gottmadingen-randegg/oggi/"
+            },
+            {
+              "label": "Eggingen – Hallau",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/eggingen-hallau/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-05T23:59:59.000Z"
+          "updatedAt": "2026-11-06T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -126,7 +126,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -198,7 +198,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "en": {
       "canton": "SH",
@@ -209,26 +209,20 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, week ending 5 November 2026"
+          "note": "Bargen SH – Tengen, week ending 6 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 30 October 2026 to 5 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 31 October 2026 to 6 November 2026, fastest first.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 min",
               "detail": "48 readings",
               "url": "/en/border-wait/bargen-sh-tengen/today/"
-            },
-            {
-              "label": "Blumberg – Bargen SH, Alte Bargener Strasse",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/blumberg-bargen-sh-alte-bargener-strasse/today/"
             },
             {
               "label": "Blumberg – Beggingen",
@@ -265,11 +259,17 @@
               "value": "0 min",
               "detail": "48 readings",
               "url": "/en/border-wait/dorflingen-gottmadingen-randegg/today/"
+            },
+            {
+              "label": "Eggingen – Hallau",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/eggingen-hallau/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-05T23:59:59.000Z"
+          "updatedAt": "2026-11-06T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -307,7 +307,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -379,7 +379,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "de": {
       "canton": "SH",
@@ -390,26 +390,20 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Bargen SH – Tengen, Woche bis 5. November 2026"
+          "note": "Bargen SH – Tengen, Woche bis 6. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 30. Oktober 2026 bis 5. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 31. Oktober 2026 bis 6. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/bargen-sh-tengen/heute/"
-            },
-            {
-              "label": "Blumberg – Bargen SH, Alte Bargener Strasse",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/blumberg-bargen-sh-alte-bargener-strasse/heute/"
             },
             {
               "label": "Blumberg – Beggingen",
@@ -446,11 +440,17 @@
               "value": "0 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/dorflingen-gottmadingen-randegg/heute/"
+            },
+            {
+              "label": "Eggingen – Hallau",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/eggingen-hallau/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-05T23:59:59.000Z"
+          "updatedAt": "2026-11-06T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -488,7 +488,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -560,7 +560,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "fr": {
       "canton": "SH",
@@ -571,26 +571,20 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, semaine jusqu’au 5 novembre 2026"
+          "note": "Bargen SH – Tengen, semaine jusqu’au 6 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 30 octobre 2026 au 5 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 31 octobre 2026 au 6 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/bargen-sh-tengen/aujourd-hui/"
-            },
-            {
-              "label": "Blumberg – Bargen SH, Alte Bargener Strasse",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/blumberg-bargen-sh-alte-bargener-strasse/aujourd-hui/"
             },
             {
               "label": "Blumberg – Beggingen",
@@ -627,11 +621,17 @@
               "value": "0 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/dorflingen-gottmadingen-randegg/aujourd-hui/"
+            },
+            {
+              "label": "Eggingen – Hallau",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/eggingen-hallau/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-05T23:59:59.000Z"
+          "updatedAt": "2026-11-06T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -669,7 +669,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -741,7 +741,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     }
   }
 }

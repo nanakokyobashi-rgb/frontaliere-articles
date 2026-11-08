@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T01:29:55.978Z",
-  "contentHash": "a13de5393fefc4cdcf35e8090ba69a6096996cd2f25bbd66b01c90149e060e49",
+  "updatedAt": "2026-11-08T03:11:57.760Z",
+  "contentHash": "3a80cb478524b08d8366dda4c5c8c72c977d02567fca7bfe38e614c7623fb7fc",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T01:21:56.611Z",
+      "updatedAt": "2026-11-07T12:39:52.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "233",
+          "value": "238",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -43,6 +43,12 @@
               "detail": "Ristorante Teatro Dimitri, Locarno",
               "date": "2026-11-08",
               "url": "https://www.tio.ch/agenda/day/20261108/64823"
+            },
+            {
+              "label": "Festa di San Martino",
+              "detail": "Chiesa di San Martino a Ditto, Lugano",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64918"
             },
             {
               "label": "Matinée",
@@ -85,17 +91,11 @@
               "detail": "Teatro Foce, Lugano",
               "date": "2026-11-08",
               "url": "https://www.tio.ch/agenda/day/20261108/63718"
-            },
-            {
-              "label": "Le quattro stagioni",
-              "detail": "Teatro del gatto, Ascona",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64774"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "233",
+          "value": "238",
           "note": "from the site’s events calendar"
         }
       ],
@@ -194,6 +194,12 @@
               "detail": "Ristorante Teatro Dimitri, Locarno",
               "date": "2026-11-08",
               "url": "https://www.tio.ch/agenda/day/20261108/64823"
+            },
+            {
+              "label": "St. Martin's Day",
+              "detail": "Chiesa di San Martino a Ditto, Lugano",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64918"
             },
             {
               "label": "Matinee",
@@ -236,17 +242,11 @@
               "detail": "Teatro Foce, Lugano",
               "date": "2026-11-08",
               "url": "https://www.tio.ch/agenda/day/20261108/63718"
-            },
-            {
-              "label": "The Four Seasons",
-              "detail": "Teatro del gatto, Ascona",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64774"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "233",
+          "value": "238",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -345,6 +345,12 @@
               "detail": "Ristorante Teatro Dimitri, Locarno",
               "date": "2026-11-08",
               "url": "https://www.tio.ch/agenda/day/20261108/64823"
+            },
+            {
+              "label": "Martinstag",
+              "detail": "Chiesa di San Martino a Ditto, Lugano",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64918"
             },
             {
               "label": "Matinee",
@@ -387,17 +393,11 @@
               "detail": "Teatro Foce, Lugano",
               "date": "2026-11-08",
               "url": "https://www.tio.ch/agenda/day/20261108/63718"
-            },
-            {
-              "label": "Die vier Jahreszeiten",
-              "detail": "Teatro del gatto, Ascona",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64774"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "233",
+          "value": "238",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -496,6 +496,12 @@
               "detail": "Ristorante Teatro Dimitri, Locarno",
               "date": "2026-11-08",
               "url": "https://www.tio.ch/agenda/day/20261108/64823"
+            },
+            {
+              "label": "Fête de la Saint-Martin",
+              "detail": "Chiesa di San Martino a Ditto, Lugano",
+              "date": "2026-11-08",
+              "url": "https://www.tio.ch/agenda/day/20261108/64918"
             },
             {
               "label": "- jusqu'à la levée du couvre-feu. - Matinées ?",
@@ -538,17 +544,11 @@
               "detail": "Teatro Foce, Lugano",
               "date": "2026-11-08",
               "url": "https://www.tio.ch/agenda/day/20261108/63718"
-            },
-            {
-              "label": "Les quatre saisons",
-              "detail": "Teatro del gatto, Ascona",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64774"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     }
   }
 }

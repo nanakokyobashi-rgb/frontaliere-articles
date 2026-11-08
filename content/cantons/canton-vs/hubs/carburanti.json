@@ -4,14 +4,14 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "a51c720befde918d534d71c7918ef8fd0b5ee7a1bb6ec848d6180ae3119aec02",
+  "updatedAt": "2026-11-08T03:11:57.760Z",
+  "contentHash": "8a4e5f76194d30dffe284d2c2d4c90ad647d38a73c5eaa594ab1e50123b70052",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-06T14:35:31.386Z",
+      "updatedAt": "2026-11-07T13:30:35.165Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-13T13:43:57.000Z"
+      "carryUntilAt": "2026-11-14T10:15:00.000Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,085 EUR/l",
-              "detail": "media regionale: minimo 1,970 EUR/l, 106 stazioni rilevate",
-              "date": "2026-11-06T13:43:57.000Z"
+              "value": "2,082 EUR/l",
+              "detail": "media regionale: minimo 1,969 EUR/l, 103 stazioni rilevate",
+              "date": "2026-11-07T10:15:00.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,227 EUR/l",
-              "detail": "media regionale: minimo 2,054 EUR/l, 115 stazioni rilevate",
-              "date": "2026-11-06T13:43:57.000Z"
+              "value": "2,222 EUR/l",
+              "detail": "media regionale: minimo 2,054 EUR/l, 114 stazioni rilevate",
+              "date": "2026-11-07T10:15:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-06T14:35:31.386Z"
+          "updatedAt": "2026-11-07T13:30:35.165Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Ferie sciistiche 2027 concentrate tra febbraio e marzo in Svizzera",
+          "url": "/articoli-vallese/ferie-sciare-concentrazione-2027/",
+          "excerpt": "Nel 2027 le ferie sportive si concentrano in tre-quattro settimane, con una finestra principale indicativa dal 4 al 26 febbraio.",
+          "date": "2026-11-08T03:06:47.282Z"
+        },
         {
           "title": "Disoccupazione in Vallese sale al 3,3%: 6.082 iscritti",
           "url": "/articoli-vallese/lavoro-vallese-ottobre-2026/",
@@ -94,12 +100,6 @@
           "url": "/articoli-vallese/vallese-piano-risparmi-2030/",
           "excerpt": "L'articolo di RTS riferisce che il Consiglio di Stato del Vallese deve individuare CHF 180 milioni di risparmi entro il 2030 per mantenere l'equilibrio del bilancio cantonale.",
           "date": "2026-11-05T04:21:02.956Z"
-        },
-        {
-          "title": "Vionnaz: revoca divieti acqua potabile dopo 41 giorni",
-          "url": "/articoli-vallese/vionnaz-revoca-divieti-acqua/",
-          "excerpt": "La municipalità di Vionnaz ha dichiarato soddisfacente la situazione delle fonti, ripristinando prati, piscine e veicoli, ma mantenendo le raccomandazioni di risparmio.",
-          "date": "2026-11-03T23:46:43.546Z"
         }
       ],
       "links": [
@@ -128,7 +128,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "en": {
       "canton": "VS",
@@ -169,23 +169,29 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.085 EUR/l",
-              "detail": "regional average: lowest 1.970 EUR/l, 106 stations surveyed",
-              "date": "2026-11-06T13:43:57.000Z"
+              "value": "2.082 EUR/l",
+              "detail": "regional average: lowest 1.969 EUR/l, 103 stations surveyed",
+              "date": "2026-11-07T10:15:00.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.227 EUR/l",
-              "detail": "regional average: lowest 2.054 EUR/l, 115 stations surveyed",
-              "date": "2026-11-06T13:43:57.000Z"
+              "value": "2.222 EUR/l",
+              "detail": "regional average: lowest 2.054 EUR/l, 114 stations surveyed",
+              "date": "2026-11-07T10:15:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-06T14:35:31.386Z"
+          "updatedAt": "2026-11-07T13:30:35.165Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Ski holidays in 2027 concentrated between February and March in Switzerland",
+          "url": "/en/valais-articles/ski-holidays-concentration-2027/",
+          "excerpt": "In 2027, sports holidays are concentrated into three to four weeks, with an indicative main window from February 4 to 26.",
+          "date": "2026-11-08T03:06:47.282Z"
+        },
         {
           "title": "Unemployment in Valais rises to 3,3%: 6.082 registered people",
           "url": "/en/valais-articles/valais-labor-market-october-2026/",
@@ -209,12 +215,6 @@
           "url": "/en/valais-articles/valais-savings-plan-2030/",
           "excerpt": "The RTS article reports that the Valais Council of State must identify CHF 180 million in savings by 2030 to maintain the balance of the cantonal budget.",
           "date": "2026-11-05T04:21:02.956Z"
-        },
-        {
-          "title": "Vionnaz: drinking water bans lifted after 41 days",
-          "url": "/en/valais-articles/vionnaz-revokes-water-restrictions/",
-          "excerpt": "The municipality of Vionnaz has declared the situation regarding water sources satisfactory, reinstating the watering of lawns, the filling of swimming pools and the washing of vehicles, while maintaining water-saving…",
-          "date": "2026-11-03T23:46:43.546Z"
         }
       ],
       "links": [
@@ -243,7 +243,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "de": {
       "canton": "VS",
@@ -284,23 +284,29 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.085 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.970 EUR/l, 106 erfasste Tankstellen",
-              "date": "2026-11-06T13:43:57.000Z"
+              "value": "2.082 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.969 EUR/l, 103 erfasste Tankstellen",
+              "date": "2026-11-07T10:15:00.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.227 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.054 EUR/l, 115 erfasste Tankstellen",
-              "date": "2026-11-06T13:43:57.000Z"
+              "value": "2.222 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.054 EUR/l, 114 erfasste Tankstellen",
+              "date": "2026-11-07T10:15:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-06T14:35:31.386Z"
+          "updatedAt": "2026-11-07T13:30:35.165Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Skiferien 2027 in der Schweiz zwischen Februar und März",
+          "url": "/de/wallis-artikel/skiferien-konzentration-2027/",
+          "excerpt": "Im Jahr 2027 konzentrieren sich die Sportferien auf drei bis vier Wochen, mit einem ungefähren Hauptzeitfenster vom 4. bis 26. Februar.",
+          "date": "2026-11-08T03:06:47.282Z"
+        },
         {
           "title": "Arbeitslosigkeit im Wallis steigt auf 3,3%: 6.082 registrierte Arbeitslose",
           "url": "/de/wallis-artikel/walliser-arbeitsmarkt-oktober-2026/",
@@ -324,12 +330,6 @@
           "url": "/de/wallis-artikel/wallis-sparplan-2030/",
           "excerpt": "Der Artikel von RTS berichtet, dass der Staatsrat des Wallis bis 2030 Einsparungen von CHF 180 Millionen ermitteln muss, um das Gleichgewicht des kantonalen Haushalts zu wahren.",
           "date": "2026-11-05T04:21:02.956Z"
-        },
-        {
-          "title": "Vionnaz: Aufhebung der Trinkwasserverbote nach 41 Tagen",
-          "url": "/de/wallis-artikel/vionnaz-wasserbeschrankungen-aufhebung/",
-          "excerpt": "Die Gemeinde Vionnaz hat die Lage der Quellen als zufriedenstellend bezeichnet und die Nutzung von Rasenflächen, Schwimmbädern und Fahrzeugen wieder ermöglicht, die Empfehlungen zum Wassersparen jedoch beibehalten.",
-          "date": "2026-11-03T23:46:43.546Z"
         }
       ],
       "links": [
@@ -354,7 +354,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "fr": {
       "canton": "VS",
@@ -395,23 +395,29 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,085 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,970 EUR/l, 106 stations relevées",
-              "date": "2026-11-06T13:43:57.000Z"
+              "value": "2,082 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,969 EUR/l, 103 stations relevées",
+              "date": "2026-11-07T10:15:00.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,227 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,054 EUR/l, 115 stations relevées",
-              "date": "2026-11-06T13:43:57.000Z"
+              "value": "2,222 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,054 EUR/l, 114 stations relevées",
+              "date": "2026-11-07T10:15:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-06T14:35:31.386Z"
+          "updatedAt": "2026-11-07T13:30:35.165Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Vacances de ski 2027 concentrées entre février et mars en Suisse",
+          "url": "/fr/articles-valais/vacances-ski-concentration-2027/",
+          "excerpt": "En 2027, les vacances sportives se concentrent sur trois à quatre semaines, avec une fenêtre principale indicative du 4 au 26 février.",
+          "date": "2026-11-08T03:06:47.282Z"
+        },
         {
           "title": "Le chômage en Valais atteint 3,3% : 6.082 inscrits",
           "url": "/fr/articles-valais/marche-travail-valais-octobre-2026/",
@@ -435,12 +441,6 @@
           "url": "/fr/articles-valais/valais-plan-economies-2030/",
           "excerpt": "L’article de la RTS rapporte que le Conseil d’État du Valais doit prévoir 180 millions de CHF d’économies d’ici 2030 pour maintenir le solde du budget cantonal.",
           "date": "2026-11-05T04:21:02.956Z"
-        },
-        {
-          "title": "Vionnaz : levée des interdictions liées à l’eau potable après 41 jours",
-          "url": "/fr/articles-valais/vionnaz-levee-restrictions-eau/",
-          "excerpt": "La municipalité de Vionnaz a déclaré satisfaisante la situation des sources, réautorisant l’arrosage des pelouses, le remplissage des piscines et le lavage des véhicules, tout en maintenant les recommandations…",
-          "date": "2026-11-03T23:46:43.546Z"
         }
       ],
       "links": [
@@ -469,7 +469,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     }
   }
 }

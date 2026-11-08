@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T01:29:55.978Z",
-  "contentHash": "3eb14a4562c0e11b10f0705ff1a2d2912894c931083e71ea12c01cc472e08813",
+  "updatedAt": "2026-11-08T03:11:57.760Z",
+  "contentHash": "e2af4a2bb30bd0c11b0838ae523e5f50ca711eeea169873912c7924c2ebad7a7",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T01:21:56.611Z",
+      "updatedAt": "2026-11-07T12:39:52.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "199",
+          "value": "202",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "199",
+          "value": "202",
           "note": "from the site’s events calendar"
         }
       ],
@@ -218,7 +218,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "199",
+          "value": "202",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -341,7 +341,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "199",
+          "value": "202",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -464,7 +464,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     }
   }
 }

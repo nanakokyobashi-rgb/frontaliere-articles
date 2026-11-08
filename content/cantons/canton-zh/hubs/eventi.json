@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T01:29:55.978Z",
-  "contentHash": "f7897b37c76429c4b4cdc49b4068bb4cbf578ea9661152408d0e022fb71bcb1a",
+  "updatedAt": "2026-11-08T03:11:57.760Z",
+  "contentHash": "c1451647d0593310a32831c7de0e2ade45d8af4f20e7c21f48cd0be03a8e96f1",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T01:21:56.611Z",
+      "updatedAt": "2026-11-07T12:39:52.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "349",
+          "value": "351",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "349",
+          "value": "351",
           "note": "from the site’s events calendar"
         }
       ],
@@ -206,7 +206,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "349",
+          "value": "351",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -317,7 +317,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "349",
+          "value": "351",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -428,7 +428,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T03:11:57.760Z"
     }
   }
 }
