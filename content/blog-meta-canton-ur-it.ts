@@ -66,6 +66,9 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.rene-schuler-unterschachen.title': 'René Schuler assumerà la presidenza di Unterschächen',
     'blog.article.rene-schuler-unterschachen.excerpt': 'René Schuler assumerà a inizio 2027 la presidenza di Unterschächen e succederà ad André Bissig, che lascerà il Gemeinderat a fine anno.',
     'blog.article.rene-schuler-unterschachen.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.presidenza-spiringen-schuler.title': 'Peter Schuler sarà il nuovo presidente di Spiringen',
+    'blog.article.presidenza-spiringen-schuler.excerpt': 'Peter Schuler, vicepresidente in carica, subentrerà a René Müller il 1° gennaio; il mandato indicato è 2026/27.',
+    'blog.article.presidenza-spiringen-schuler.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonUrIt;
