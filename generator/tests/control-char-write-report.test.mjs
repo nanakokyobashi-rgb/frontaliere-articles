@@ -123,6 +123,28 @@ test('il controllo si applica anche quando clean coincide con un original che co
   assert.equal(strippedCount(), 1);
 });
 
+test('una sanificazione codificata che cambia clean viene rifiutata fail-closed', () => {
+  resetCounters();
+  const logs = [];
+  const backspace = String.fromCharCode(0x08);
+  const original = JSON.stringify({ name: `Chi${backspace}asso` });
+  const clean = JSON.stringify({ name: 'Chiasso' });
+  assert.equal(original.includes(backspace), false, 'JSON.stringify deve codificare il C0');
+  assert.ok(original.includes('\\b'), 'la sorgente deve contenere la forma JSON \\b');
+  assert.notEqual(clean, original);
+
+  assert.throws(
+    () => reportStrippedControlChars('public/data/example.json', original, clean, {
+      log: (s) => logs.push(s), summaryPath: '', reportPath: 'control-char-report.jsonl',
+    }),
+    /sanificazione non tracciata/u,
+  );
+  assert.equal(strippedCount(), 0, 'non si deve inventare un offset per un marker non decodificato');
+  assert.equal(logs.length, 1);
+  assert.match(logs[0], /^::error::/u);
+  assert.match(logs[0], /clean differisce da original/u);
+});
+
 test('ogni choke point di scrittura passa da qui — per OGNI sanitizer, non solo sanitizeText', () => {
   // ## Perche' questo guard e' stato riscritto (#133)
   //

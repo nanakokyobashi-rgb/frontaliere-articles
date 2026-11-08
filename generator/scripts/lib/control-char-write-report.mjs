@@ -61,7 +61,10 @@
  * comunque `clean` dopo il ritorno da questa funzione, perdendo il marker
  * esatto che serve per riparare il testo. Ora la funzione registra prima
  * l'evidenza e poi lancia; ogni choke point la chiama prima della scrittura,
- * quindi il sorgente originale resta intatto e il run fallisce chiuso.
+ * quindi il sorgente originale resta intatto e il run fallisce chiuso. Anche
+ * una sanificazione che cambia `clean` senza esporre un C0 letterale in
+ * `original` fallisce chiusa: e' la forma con cui JSON/XML/HTML possono
+ * decodificare un escape o un riferimento prima di togliere il marker.
  * L'eventuale errore di I/O del report viene segnalato ma non rende il testo
  * pubblicabile.
  */
@@ -179,11 +182,32 @@ export function occurrencesIn(original, { contextChars = CONTEXT_CHARS } = {}) {
 export function reportStrippedControlChars(file, original, clean, opts = {}) {
   if (typeof original !== 'string') return 0;
   const occ = occurrencesIn(original);
-  if (occ.length === 0) return 0;
 
   const log = opts.log || ((s) => console.error(s));
-  const io = opts.fsImpl || fs;
   const reportPath = opts.reportPath || DEFAULT_REPORT_PATH;
+
+  // Some sanitizers decode escaped C0 characters before removing them. In
+  // that case `original` has no literal marker for `occurrencesIn` to record,
+  // but the changed output is still evidence that content would be published
+  // altered. Reject before any caller can write `clean`; the source remains
+  // available for diagnosis and repair.
+  if (clean !== original && occ.length === 0) {
+    log(
+      `::error::control-char-sanitize: ${file} e' cambiato durante la sanificazione `
+      + 'perche clean differisce da original senza un control character C0 letterale registrabile. '
+      + 'Scrittura rifiutata prima di pubblicare un valore alterato. '
+      + 'Evidenza in ' + reportPath + '.',
+    );
+    throw new Error(
+      `control-char-write-report: scrittura rifiutata per ${file}: `
+      + 'sanificazione non tracciata (clean differisce da original senza un marker C0 letterale); '
+      + 'sorgente preservato, verificare la rappresentazione codificata prima di riprovare.',
+    );
+  }
+
+  if (occ.length === 0) return 0;
+
+  const io = opts.fsImpl || fs;
 
   const conResiduo = occ.filter((o) => o.residuo);
   stripped += occ.length;
