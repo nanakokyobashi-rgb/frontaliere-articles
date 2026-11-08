@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/altdorf-gemeindeversammlung-mit-budget-2027-und-wahlen-art-1730713": {
-      "section": "canton-sz",
-      "ts": 1793951191096
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schwyz/katholische-kirchgemeinde-senkt-erneut-steuerfuss-art-1730565": {
-      "section": "canton-sz",
-      "ts": 1793951205103
-    },
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/alpnach-budgetdefizit-und-investitionen-praegen-das-jahr-2027-art-1730803": {
       "section": "canton-sz",
       "ts": 1794015212574
@@ -47,6 +39,18 @@
     "canton-sz::https://www.hoefner.ch/2026/11/06/treffsicher-am-ruetlischiessen": {
       "section": "canton-sz",
       "ts": 1794112887263
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/sbb-manager-verraet-diese-staedte-werden-bald-neu-angefahren-art-1730919": {
+      "section": "canton-sz",
+      "ts": 1794135694318
+    },
+    "canton-sz::https://www.nau.ch/politik/regional/schwyzer-parlamentskommission-will-steuersenkung-fur-unternehmen-67198912": {
+      "section": "canton-sz",
+      "ts": 1794136943335
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/glp-luzern-sagt-nein-zur-digitalisierungsinitiative-art-1730969": {
+      "section": "canton-sz",
+      "ts": 1794137148380
     }
   }
 }
