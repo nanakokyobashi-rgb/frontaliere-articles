@@ -146,7 +146,7 @@ function main(argv) {
         totals.file += 1;
         if (!check) {
           const clean = sanitizeText(next);
-          reportStrippedControlChars(file, source, clean);
+          reportStrippedControlChars(file, next, clean);
           writeFileSnapshotAtomically(file, source, clean);
         }
       }

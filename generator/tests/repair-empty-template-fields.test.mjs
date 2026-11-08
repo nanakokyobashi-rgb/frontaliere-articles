@@ -81,6 +81,6 @@ test('il riparatore registra i C0 dalla sorgente subito prima dello snapshot', (
   assert.match(SCRIPT, /import \{ sanitizeText \} from '\.\.\/\.\.\/scripts\/lib\/sanitize-control-chars\.mjs';/u);
   assert.match(
     SCRIPT,
-    /if \(!check\) \{\s*const clean = sanitizeText\(next\);\s*reportStrippedControlChars\(file, source, clean\);\s*writeFileSnapshotAtomically\(file, source, clean\);\s*\}/u,
+    /if \(!check\) \{\s*const clean = sanitizeText\(next\);\s*reportStrippedControlChars\(file, next, clean\);\s*writeFileSnapshotAtomically\(file, source, clean\);\s*\}/u,
   );
 });
