@@ -227,4 +227,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vallese-tasso-disoccupazione-33',
+ category: 'novita',
+ date: '2026-11-08T22:41:21.858Z',
+ image: '/images/blog/article-vallese-tasso-disoccupazione-33.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

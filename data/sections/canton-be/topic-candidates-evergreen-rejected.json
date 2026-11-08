@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/705891/abgesackter-bahndamm-in-pieterlen-sbb-startet-mit-notfallsanierungsarbeiten": {
-      "section": "canton-be",
-      "ts": 1793982724298
-    },
-    "canton-be::https://ajour.ch/story/705717/b%c3%a4renkreisel-in-aarberg-der-kanton-will-stau-so-gut-es-geht-verhindern": {
-      "section": "canton-be",
-      "ts": 1793982819773
-    },
-    "canton-be::https://ajour.ch/story/705936/travaux-des-cff-aprs-laffaissement-dun-remblai-perles": {
-      "section": "canton-be",
-      "ts": 1793982844852
-    },
     "canton-be::https://ajour.ch/story/705673/nidauer-gemeinder%c3%a4tin-zum-stau-auf-der-bernstrasse-vorerst-wird-es-so-bleiben-wie-es-ist": {
       "section": "canton-be",
       "ts": 1794010895700
@@ -127,6 +115,14 @@
     "canton-be::https://ajour.ch/story/705831/die-bewegung-ist-bereits-%c3%bcberall-in-europa-hunderttausende-demonstrieren-f%c3%bcr-h%c3%b6here-l%c3%b6hne": {
       "section": "canton-be",
       "ts": 1794142750572
+    },
+    "canton-be::https://ajour.ch/story/705258/das-playbernfestival-als-digitale-spielewiese-kleine-spiele-sind-erz%c3%a4hlerisch-interessanter": {
+      "section": "canton-be",
+      "ts": 1794177429243
+    },
+    "canton-be::https://ajour.ch/story/702724/von-der-apotheke-in-den-supermarkt-die-geschichte-der-ovomaltine": {
+      "section": "canton-be",
+      "ts": 1794177430892
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "fisco",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "4eb5e2842b2b010f71ffb9ebd3941db357ba31d5b4ea471c8a9bf94856178836",
+  "updatedAt": "2026-11-08T22:45:42.198Z",
+  "contentHash": "e6067e7505913e9440928ebe91d53eeffd23aaf56953729c7e7568e412fc0a10",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -108,6 +108,12 @@
           "date": "2026-10-27T02:57:10.663Z"
         },
         {
+          "title": "GPK propone risparmi per il budget cantonale 2027",
+          "url": "/articoli-sciaffusa/gpk-risparmi-bilancio-2027/",
+          "excerpt": "Il preventivo cantonale 2027 prevede un disavanzo di circa CHF 62,8 milioni; gli stipendi cantonali aumenteranno dell'1 per cento.",
+          "date": "2026-11-08T20:34:02.887Z"
+        },
+        {
           "title": "GPK propone modifiche al budget 2027 di Sciaffusa",
           "url": "/articoli-sciaffusa/gpk-modifiche-budget-2027/",
           "excerpt": "Il deficit previsto scenderebbe a circa 5 milioni di CHF; la crescita della massa salariale passerebbe allo 0,5%.",
@@ -165,7 +171,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-08T22:45:42.198Z"
     },
     "en": {
       "canton": "SH",
@@ -256,6 +262,12 @@
           "date": "2026-10-27T02:57:10.663Z"
         },
         {
+          "title": "GPK proposes savings for the 2027 cantonal budget",
+          "url": "/en/schaffhausen-articles/gpk-savings-2027-budget/",
+          "excerpt": "The 2027 cantonal budget forecasts a deficit of approximately CHF 62.8 million; cantonal salaries will increase by 1 percent.",
+          "date": "2026-11-08T20:34:02.887Z"
+        },
+        {
           "title": "GPK proposes changes to Schaffhausen's 2027 budget",
           "url": "/en/schaffhausen-articles/gpk-schaffhausen-2027-budget-changes/",
           "excerpt": "The projected deficit would fall to approximately CHF 5 million; growth in the wage bill would drop to 0.5%.",
@@ -313,7 +325,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-08T22:45:42.198Z"
     },
     "de": {
       "canton": "SH",
@@ -404,6 +416,12 @@
           "date": "2026-10-27T02:57:10.663Z"
         },
         {
+          "title": "GPK schlägt Einsparungen für das kantonale Budget 2027 vor",
+          "url": "/de/schaffhausen-artikel/gpk-einsparungen-budget-2027/",
+          "excerpt": "Das kantonale Budget 2027 sieht ein Defizit von rund CHF 62,8 Millionen vor; die kantonalen Löhne werden um 1 Prozent steigen.",
+          "date": "2026-11-08T20:34:02.887Z"
+        },
+        {
           "title": "GPK schlägt Änderungen am Budget 2027 von Schaffhausen vor",
           "url": "/de/schaffhausen-artikel/gpk-schaffhausen-budget-2027-aenderung/",
           "excerpt": "Das erwartete Defizit würde auf rund 5 Millionen CHF sinken; das Wachstum der Lohnsumme würde auf 0,5% zurückgehen.",
@@ -461,7 +479,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-08T22:45:42.198Z"
     },
     "fr": {
       "canton": "SH",
@@ -552,6 +570,12 @@
           "date": "2026-10-27T02:57:10.663Z"
         },
         {
+          "title": "GPK propose des économies pour le budget cantonal 2027",
+          "url": "/fr/articles-schaffhouse/gpk-economies-budget-2027/",
+          "excerpt": "Le budget cantonal 2027 prévoit un déficit d'environ CHF 62,8 millions ; les salaires cantonaux augmenteront de 1 pour cent.",
+          "date": "2026-11-08T20:34:02.887Z"
+        },
+        {
           "title": "GPK propose des modifications au budget 2027 de Schaffhouse",
           "url": "/fr/articles-schaffhouse/gpk-schaffhouse-budget-2027-modifications/",
           "excerpt": "Le déficit prévu passerait à environ 5 millions de CHF ; la croissance de la masse salariale passerait à 0,5%.",
@@ -609,7 +633,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-08T22:45:42.198Z"
     }
   }
 }

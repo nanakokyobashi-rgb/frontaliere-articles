@@ -63,6 +63,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.ferie-sciare-concentrazione-2027.title': 'Ferie sciistiche 2027 concentrate tra febbraio e marzo in Svizzera',
     'blog.article.ferie-sciare-concentrazione-2027.excerpt': 'Nel 2027 le ferie sportive si concentrano in tre-quattro settimane, con una finestra principale indicativa dal 4 al 26 febbraio.',
     'blog.article.ferie-sciare-concentrazione-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.vallese-tasso-disoccupazione-33.title': 'Vallese, il tasso di disoccupazione tocca il 3,3 per cento',
+    'blog.article.vallese-tasso-disoccupazione-33.excerpt': 'Nel Canton Vallese, a ottobre, il tasso di disoccupazione ha registrato un incremento di 0,2 punti percentuali, portandosi al 3,3%.',
+    'blog.article.vallese-tasso-disoccupazione-33.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVsIt;

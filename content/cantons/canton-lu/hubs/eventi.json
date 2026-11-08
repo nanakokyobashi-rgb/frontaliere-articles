@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T01:29:55.978Z",
-  "contentHash": "b85c15d480a37c1bbc94651db7027cef9c4c8890ed6e2d52d632a7743fb361b8",
+  "updatedAt": "2026-11-08T22:45:42.198Z",
+  "contentHash": "0797a12b1ee609bfb8483a944091cbb4691865e164060b9ba8cf9eb3ccb7daa5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T01:21:56.611Z",
+      "updatedAt": "2026-11-07T12:39:52.087Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-06T22:26:45.566Z",
+      "updatedAt": "2026-11-07T21:07:56.550Z",
       "keyFacts": 0
     }
   ],
@@ -100,13 +100,23 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
+              "date": "2026-11-08T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629616"
+            },
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-11-08T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648414"
+            },
             {
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-11-05T23:00:00.000Z",
@@ -126,19 +136,9 @@
               "label": "Winter Qi Gong Inseli",
               "date": "2026-11-02T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694113"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-01T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648411"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "date": "2026-10-30T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7723786"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T22:45:42.198Z"
     },
     "en": {
       "canton": "LU",
@@ -255,13 +255,23 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
+              "date": "2026-11-08T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629616"
+            },
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-11-08T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648414"
+            },
             {
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-11-05T23:00:00.000Z",
@@ -281,19 +291,9 @@
               "label": "Winter Qi Gong Inseli",
               "date": "2026-11-02T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694113"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-01T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648411"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "date": "2026-10-30T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7723786"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T22:45:42.198Z"
     },
     "de": {
       "canton": "LU",
@@ -410,13 +410,23 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
+              "date": "2026-11-08T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629616"
+            },
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-11-08T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648414"
+            },
             {
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-11-05T23:00:00.000Z",
@@ -436,19 +446,9 @@
               "label": "Winter Qi Gong Inseli",
               "date": "2026-11-02T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694113"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-01T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648411"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "date": "2026-10-30T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7723786"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T22:45:42.198Z"
     },
     "fr": {
       "canton": "LU",
@@ -565,13 +565,23 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
+              "date": "2026-11-08T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629616"
+            },
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-11-08T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648414"
+            },
             {
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-11-05T23:00:00.000Z",
@@ -591,19 +601,9 @@
               "label": "Winter Qi Gong Inseli",
               "date": "2026-11-02T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694113"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-01T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648411"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "date": "2026-10-30T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7723786"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-08T22:45:42.198Z"
     }
   }
 }

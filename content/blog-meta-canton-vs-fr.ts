@@ -63,6 +63,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.ferie-sciare-concentrazione-2027.title': 'Vacances de ski 2027 concentrées entre février et mars en Suisse',
     'blog.article.ferie-sciare-concentrazione-2027.excerpt': 'En 2027, les vacances sportives se concentrent sur trois à quatre semaines, avec une fenêtre principale indicative du 4 au 26 février.',
     'blog.article.ferie-sciare-concentrazione-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.vallese-tasso-disoccupazione-33.title': 'Valais, le taux de chômage atteint 3,3 pour cent',
+    'blog.article.vallese-tasso-disoccupazione-33.excerpt': 'Dans le canton du Valais, en octobre, le taux de chômage a enregistré une hausse de 0,2 point de pourcentage, atteignant 3,3%.',
+    'blog.article.vallese-tasso-disoccupazione-33.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVsFr;
