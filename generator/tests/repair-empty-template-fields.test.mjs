@@ -4,8 +4,15 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
 import { repairBody } from '../scripts/repair-empty-template-fields.mjs';
 import { isEmptyAmountFact, stripVacuousFacts } from '../scripts/lib/key-facts-specificity.mjs';
+
+const SCRIPT = fs.readFileSync(
+  path.join(import.meta.dirname, '..', 'scripts', 'repair-empty-template-fields.mjs'),
+  'utf8',
+);
 
 test('la riga vuota esce, le altre restano', () => {
   const body = '## Fatti chiave\n- Cosa: x\n- Dove: Lugano\n- Chi: Cantone\n- Importo: Non specificato\n\nTesto.';
@@ -66,5 +73,13 @@ test('il marcatore dentro una frase esce con il titolo dell\'articolo, e solo co
   assert.equal(
     repairBody('Abschluss. ARTIKELTITEL: Etwas anderes folgt.', title).value,
     'Abschluss. Etwas anderes folgt.',
+  );
+});
+
+test('il riparatore registra i C0 dalla sorgente subito prima dello snapshot', () => {
+  assert.match(SCRIPT, /import \{ reportStrippedControlChars \} from '\.\/lib\/control-char-write-report\.mjs';/u);
+  assert.match(
+    SCRIPT,
+    /if \(!check\) \{\s*reportStrippedControlChars\(file, source, next\);\s*writeFileSnapshotAtomically\(file, source, next\);\s*\}/u,
   );
 });
