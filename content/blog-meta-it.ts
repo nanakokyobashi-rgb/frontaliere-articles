@@ -13682,6 +13682,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.roma-cambia-proposta-tassa.title': 'Roma cambia proposta tassa salute per vecchi frontalieri',
     'blog.article.roma-cambia-proposta-tassa.excerpt': 'Roma vuole cambiare le regole della cosiddetta tassa sulla salute prima ancora di applicarla.',
     'blog.article.roma-cambia-proposta-tassa.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.smile-varese-como-ticino.title': 'SMILE: mobilità sostenibile tra Varese, Como e Ticino',
+    'blog.article.smile-varese-como-ticino.excerpt': 'Il 10 novembre 2026 Chiasso sarà il punto di presentazione pubblica di SMILE.',
+    'blog.article.smile-varese-como-ticino.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;
