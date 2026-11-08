@@ -4606,10 +4606,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-04T02:04:53.226Z",
-      "lastStrikeAt": "2026-11-08T10:52:47.409Z",
-      "expiresAt": "2026-12-08T10:52:47.409Z"
+      "lastStrikeAt": "2026-11-08T13:25:19.858Z",
+      "expiresAt": "2026-12-08T13:25:19.858Z"
     },
     {
       "keyword": "vivere a Duno e lavorare in Ticino da frontaliere",
@@ -4618,10 +4618,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-04T02:05:05.613Z",
-      "lastStrikeAt": "2026-11-08T10:54:03.833Z",
-      "expiresAt": "2026-12-08T10:54:03.833Z"
+      "lastStrikeAt": "2026-11-08T13:33:13.955Z",
+      "expiresAt": "2026-12-08T13:33:13.955Z"
     },
     {
       "keyword": "vivere a Vertemate con Minoprio e lavorare in Ticino da frontaliere",
@@ -4630,10 +4630,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-04T02:05:17.964Z",
-      "lastStrikeAt": "2026-11-08T10:55:49.811Z",
-      "expiresAt": "2026-12-08T10:55:49.811Z"
+      "lastStrikeAt": "2026-11-08T13:44:47.476Z",
+      "expiresAt": "2026-12-08T13:44:47.476Z"
     },
     {
       "keyword": "vivere a Azzate e lavorare in Ticino da frontaliere",
@@ -4642,10 +4642,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-08T10:57:41.512Z",
-      "lastStrikeAt": "2026-11-08T10:57:41.512Z",
-      "expiresAt": "2026-12-08T10:57:41.512Z"
+      "lastStrikeAt": "2026-11-08T13:55:43.240Z",
+      "expiresAt": "2026-12-08T13:55:43.240Z"
     },
     {
       "keyword": "vivere a Casalzuigno e lavorare in Ticino da frontaliere",
