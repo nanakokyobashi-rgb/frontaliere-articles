@@ -1,0 +1,445 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "section": "svizzera",
+      "locale": "de",
+      "id": "credito-imposta-frontalieri-2026",
+      "source": "content/blog-body-ch/de/credito-imposta-frontalieri-2026.ts",
+      "sha256": "25a0208d5f2e77e646ca40331dca34bdd912081d2568614b10b011dcdec944c4",
+      "rawC0Count": 1,
+      "decodedC0Count": 1,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "svizzera",
+      "locale": "fr",
+      "id": "india-aels-protezione-capitali",
+      "source": "content/blog-body-ch/fr/india-aels-protezione-capitali.ts",
+      "sha256": "0978973232786be75a14d94e6aa3aafe0a60bc9c5850f0faf46bb88e97f776c1",
+      "rawC0Count": 0,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "svizzera",
+      "locale": "fr",
+      "id": "legge-piattaforme-tutela-giovani",
+      "source": "content/blog-body-ch/fr/legge-piattaforme-tutela-giovani.ts",
+      "sha256": "67c24834d7e4b08fae41ee567ddf6b7f635256805d4f53cdf5233628b9ef93ca",
+      "rawC0Count": 0,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "de",
+      "id": "controlli-varese-esposto-espulsione",
+      "source": "content/blog-body/de/controlli-varese-esposto-espulsione.ts",
+      "sha256": "60cd1a84650ca5cc52ce975178ba1f04cd7e892a54120d10c3e255b8e086233b",
+      "rawC0Count": 2,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "de",
+      "id": "cooperazione-giudiziaria-svizzera-italia",
+      "source": "content/blog-body/de/cooperazione-giudiziaria-svizzera-italia.ts",
+      "sha256": "3ab1fddaea88176fde0240d1929e24f3a5fd4321d908556abe81f059345ca6d9",
+      "rawC0Count": 0,
+      "decodedC0Count": 1,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "de",
+      "id": "cpi-caso-hospita-rivalutazione-periti",
+      "source": "content/blog-body/de/cpi-caso-hospita-rivalutazione-periti.ts",
+      "sha256": "06feb52b126199db86e6afab0e0e619007f62ff60aa9d4d0636c6b6279d83f03",
+      "rawC0Count": 0,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "de",
+      "id": "cure-a-domicilio-tassa-ticino",
+      "source": "content/blog-body/de/cure-a-domicilio-tassa-ticino.ts",
+      "sha256": "28708df4e60712174af7aa6e962e109fad2c7bd02fc81c9ddde3ee5f54a91589",
+      "rawC0Count": 0,
+      "decodedC0Count": 3,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "de",
+      "id": "diventare-pastore-ticino",
+      "source": "content/blog-body/de/diventare-pastore-ticino.ts",
+      "sha256": "ef57977486d5ca761f07206d7e451637b13675b8a7827e29cbb049cbd444be0a",
+      "rawC0Count": 12,
+      "decodedC0Count": 12,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "de",
+      "id": "gasolio-costi-pullman-ticino-lago-como",
+      "source": "content/blog-body/de/gasolio-costi-pullman-ticino-lago-como.ts",
+      "sha256": "af2960e047c4b6d7226e6cd677c62cf8946e57f989851068365a9f1059b92d53",
+      "rawC0Count": 2,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "de",
+      "id": "lavoro-notte-lincendio-laveno-mombello",
+      "source": "content/blog-body/de/lavoro-notte-lincendio-laveno-mombello.ts",
+      "sha256": "562abc3093e6bc5776bb736c7fa479ef7b0b884f7405cb65546e05c60b8f1a36",
+      "rawC0Count": 6,
+      "decodedC0Count": 6,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "de",
+      "id": "permessi-dimora-diversi-opinioni",
+      "source": "content/blog-body/de/permessi-dimora-diversi-opinioni.ts",
+      "sha256": "09ac8fbc4cca2b8bb62404ffcaaa660c78ff357160651f603fcbb3c3c2edea69",
+      "rawC0Count": 8,
+      "decodedC0Count": 8,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "de",
+      "id": "prezzi-benzina-ticino",
+      "source": "content/blog-body/de/prezzi-benzina-ticino.ts",
+      "sha256": "44bcd1475e8331ff5383a8e02e61b2ece44de6612a795aa63ce208758efa7319",
+      "rawC0Count": 2,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "de",
+      "id": "protesta-costi-cure-domicilio",
+      "source": "content/blog-body/de/protesta-costi-cure-domicilio.ts",
+      "sha256": "379352ec369ca3ba529bdb82651ca5d7dc23f464634613e3efe354bdecc7e91d",
+      "rawC0Count": 4,
+      "decodedC0Count": 4,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "de",
+      "id": "salario-minimo-per-il-controprogetto-la-strada-e-in-discesa",
+      "source": "content/blog-body/de/salario-minimo-per-il-controprogetto-la-strada-e-in-discesa.ts",
+      "sha256": "2ba0948ba0defb19b7cf59cbc122b0daf0244980dc3850b64342dcfb8c64f50a",
+      "rawC0Count": 0,
+      "decodedC0Count": 1,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "de",
+      "id": "tax-free-come-cresce",
+      "source": "content/blog-body/de/tax-free-come-cresce.ts",
+      "sha256": "e568816e5b1ce9929d1454afe81925963b7a932ca630108ab29251fa7d7831d5",
+      "rawC0Count": 2,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "de",
+      "id": "vacanze-di-pasqua-san-gottardo",
+      "source": "content/blog-body/de/vacanze-di-pasqua-san-gottardo.ts",
+      "sha256": "0e24d44ceb9c39074b7b0e884bf0e094426fc993b60be17a4c755c41ce0c780b",
+      "rawC0Count": 2,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "en",
+      "id": "contrabbando-ticino-2026",
+      "source": "content/blog-body/en/contrabbando-ticino-2026.ts",
+      "sha256": "b6d721531fbb6047650a5a66169dd7feab28321de7e7a96128ebbcf2bd037b98",
+      "rawC0Count": 2,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "en",
+      "id": "cooperazione-giudiziaria-svizzera-italia",
+      "source": "content/blog-body/en/cooperazione-giudiziaria-svizzera-italia.ts",
+      "sha256": "72f848c4316c94adf9b3cbd7f946ccf8b9cf62b7df0e261a84eee29369705fab",
+      "rawC0Count": 0,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "en",
+      "id": "cpi-caso-hospita-rivalutazione-periti",
+      "source": "content/blog-body/en/cpi-caso-hospita-rivalutazione-periti.ts",
+      "sha256": "359dd268cd02fd863105b6c4170ff55c7851d409e361c45834d75a457a47eef5",
+      "rawC0Count": 0,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "en",
+      "id": "cure-a-domicilio-tassa-ticino",
+      "source": "content/blog-body/en/cure-a-domicilio-tassa-ticino.ts",
+      "sha256": "7d188c2984f54cd95249bb7382e2c24edac104a98b5293e06f2a8d1514211767",
+      "rawC0Count": 0,
+      "decodedC0Count": 3,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "en",
+      "id": "medici-manca-verbano-ticino-2026",
+      "source": "content/blog-body/en/medici-manca-verbano-ticino-2026.ts",
+      "sha256": "f5cd767d1589bc273d9f76af36720a2894822d99b7506d2264b238328610e114",
+      "rawC0Count": 6,
+      "decodedC0Count": 6,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "en",
+      "id": "protesta-costi-cure-domicilio",
+      "source": "content/blog-body/en/protesta-costi-cure-domicilio.ts",
+      "sha256": "aec4bb486d44fcded5717cc7cc6dc6b9a581c187eb9831c903451be0e290ca09",
+      "rawC0Count": 2,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "en",
+      "id": "salario-minimo-per-il-controprogetto-la-strada-e-in-discesa",
+      "source": "content/blog-body/en/salario-minimo-per-il-controprogetto-la-strada-e-in-discesa.ts",
+      "sha256": "4127b26f9c7773abe4985f3ceeaecbd98db4b3ec074cc49ae7e5f3b428076903",
+      "rawC0Count": 0,
+      "decodedC0Count": 3,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "bellinzona-2025-consuntivo-risultati",
+      "source": "content/blog-body/fr/bellinzona-2025-consuntivo-risultati.ts",
+      "sha256": "389f793a7e696ec12807e1972c283e76872b6db535c5bc569b0604deb935b447",
+      "rawC0Count": 18,
+      "decodedC0Count": 18,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "brebbia-19enne-grave-incidente-fabbrica",
+      "source": "content/blog-body/fr/brebbia-19enne-grave-incidente-fabbrica.ts",
+      "sha256": "a7ea97c04de15b8e4d14b67fc33f412e4ea5cdafaa38933940ce695ebf3e8e8e",
+      "rawC0Count": 4,
+      "decodedC0Count": 4,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "como-lago-pasqua-boom-prenotazioni",
+      "source": "content/blog-body/fr/como-lago-pasqua-boom-prenotazioni.ts",
+      "sha256": "0a56b3627eccdf87eaa4a0da7cc0e4d61df58913f2448fa01db8d2c62d81b5ba",
+      "rawC0Count": 3,
+      "decodedC0Count": 3,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "contibellinzona2025risultati",
+      "source": "content/blog-body/fr/contibellinzona2025risultati.ts",
+      "sha256": "33bf03cf881d4d257b629b65fb86d0c546b0caf31f9eeb3b87eced2b57986be6",
+      "rawC0Count": 19,
+      "decodedC0Count": 19,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "cooperazione-giudiziaria-svizzera-italia",
+      "source": "content/blog-body/fr/cooperazione-giudiziaria-svizzera-italia.ts",
+      "sha256": "306f7f88336d2367b1c666bd46603b7e7f19a7009a5a149dd1eff7b04ec80e27",
+      "rawC0Count": 0,
+      "decodedC0Count": 1,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "cpi-caso-hospita-rivalutazione-periti",
+      "source": "content/blog-body/fr/cpi-caso-hospita-rivalutazione-periti.ts",
+      "sha256": "801d2cc502519b81aad7b056e4232e8f227bbbac21787fbf1dd3b8cc1bd16915",
+      "rawC0Count": 0,
+      "decodedC0Count": 1,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "cure-a-domicilio-tassa-ticino",
+      "source": "content/blog-body/fr/cure-a-domicilio-tassa-ticino.ts",
+      "sha256": "c126eb58564799dcad057ad0b2447a4731ad3e7ce37d75dea4d402445ec9d8ab",
+      "rawC0Count": 0,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "education-day-confindustria-varese-2026",
+      "source": "content/blog-body/fr/education-day-confindustria-varese-2026.ts",
+      "sha256": "4ae579c57af3ff0eaa75133111968217dbd239b2170b00a95d6f02187f06154b",
+      "rawC0Count": 8,
+      "decodedC0Count": 8,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "frontalieri-disoccupati-svizzera-indennita",
+      "source": "content/blog-body/fr/frontalieri-disoccupati-svizzera-indennita.ts",
+      "sha256": "b5d539e20b561e5d24959d75b7db5b6c2aa90fa853b1cbe075fa07a03217be0c",
+      "rawC0Count": 2,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "frontalieri-ticino-spese-svizzera-2026",
+      "source": "content/blog-body/fr/frontalieri-ticino-spese-svizzera-2026.ts",
+      "sha256": "ea782217822c66f89d2f01816789684539eb30c2a841565642dbd181a3e8ac03",
+      "rawC0Count": 12,
+      "decodedC0Count": 12,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "nestle-200-posti-lombardia",
+      "source": "content/blog-body/fr/nestle-200-posti-lombardia.ts",
+      "sha256": "4b5d7103f7627e0818bb8dd142c606787c5865f2cd7fb0208486d981ab8707c1",
+      "rawC0Count": 58,
+      "decodedC0Count": 58,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "pasqua-messaggio-di-avvenire",
+      "source": "content/blog-body/fr/pasqua-messaggio-di-avvenire.ts",
+      "sha256": "beae32c62d2122efd6943da43b84ab5e4621900914a2c0f50c34ad0d9714287a",
+      "rawC0Count": 18,
+      "decodedC0Count": 18,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "provincia-di-varese-investe-su-manutenzione-delle-strade-e-del-verde-con-i-ristorni-dei-frontalieri-2026",
+      "source": "content/blog-body/fr/provincia-di-varese-investe-su-manutenzione-delle-strade-e-del-verde-con-i-ristorni-dei-frontalieri-2026.ts",
+      "sha256": "1af845104e3c3007dbfbe7df179668d1cc90b8321b3b83af08f36528d7ba3cbc",
+      "rawC0Count": 1,
+      "decodedC0Count": 1,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "salario-minimo-per-il-controprogetto-la-strada-e-in-discesa",
+      "source": "content/blog-body/fr/salario-minimo-per-il-controprogetto-la-strada-e-in-discesa.ts",
+      "sha256": "ea3acb53c853f5fc5dfa71913c0b624882bd271e1b380f54e2565ad338569890",
+      "rawC0Count": 0,
+      "decodedC0Count": 1,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "fr",
+      "id": "svincolo-a2-sigirino-ritardo",
+      "source": "content/blog-body/fr/svincolo-a2-sigirino-ritardo.ts",
+      "sha256": "193070ae5132ff81e11e0c430109b073ebd86056d917a17cf224d82497ab0fa3",
+      "rawC0Count": 2,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: marker C0 non ricostruibile con la provenienza disponibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "it",
+      "id": "cooperazione-giudiziaria-svizzera-italia",
+      "source": "content/blog-body/it/cooperazione-giudiziaria-svizzera-italia.ts",
+      "sha256": "b3d6120a5d23890bcad6076acecd8fbb8bd3b4fd59c800aac6d9e0a66fccc450",
+      "rawC0Count": 0,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "it",
+      "id": "cpi-caso-hospita-rivalutazione-periti",
+      "source": "content/blog-body/it/cpi-caso-hospita-rivalutazione-periti.ts",
+      "sha256": "876e3a47543321b3995a8f6e14d858287b4bba6049116700fbdc1b6ea7a80dea",
+      "rawC0Count": 0,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "it",
+      "id": "cure-a-domicilio-tassa-ticino",
+      "source": "content/blog-body/it/cure-a-domicilio-tassa-ticino.ts",
+      "sha256": "77dd01edfb59bf3e99ec79ab7b5a321940a20d3695f865033531b8c3a1371345",
+      "rawC0Count": 0,
+      "decodedC0Count": 4,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "it",
+      "id": "nessun-prelievo-avs-sulle-mance",
+      "source": "content/blog-body/it/nessun-prelievo-avs-sulle-mance.ts",
+      "sha256": "f75d212142ce92e4605171f4bb163830fb7f6c3416c309986c3e6179ec456162",
+      "rawC0Count": 0,
+      "decodedC0Count": 1,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "it",
+      "id": "ristorni-congelati-ticino-italia",
+      "source": "content/blog-body/it/ristorni-congelati-ticino-italia.ts",
+      "sha256": "6372d9e765f423f76c78ab4ca39a3f9f7369145ced35ffbdffd6dd6aea6a884b",
+      "rawC0Count": 0,
+      "decodedC0Count": 2,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    },
+    {
+      "section": "frontaliere",
+      "locale": "it",
+      "id": "salario-minimo-per-il-controprogetto-la-strada-e-in-discesa",
+      "source": "content/blog-body/it/salario-minimo-per-il-controprogetto-la-strada-e-in-discesa.ts",
+      "sha256": "47f7c2ffa9ab6f9fd9e85b47b5f4889b3f771a5a737122c25f1b2b727584cc38",
+      "rawC0Count": 0,
+      "decodedC0Count": 3,
+      "reason": "Body escluso dall’API: control character decodificato da un escape senza provenienza ricostruibile; rigenerare da una sorgente pulita."
+    }
+  ]
+}

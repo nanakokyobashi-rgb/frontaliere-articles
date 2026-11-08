@@ -17,12 +17,16 @@ export const ARTICLE_BODY_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 export const MAX_ARTICLE_BODY_FIELDS = 20;
 export const REQUIRED_ARTICLE_BODY_FIELDS = Object.freeze(['body1', 'body2', 'body3']);
 export const MAX_ARTICLE_BODY_QUARANTINES = 3;
+// Fixed ceiling for the currently inventoried, hash-pinned legacy C0 sources.
+// Any additional record beyond this reviewed set fails the build closed.
+export const MAX_REGISTERED_C0_SOURCE_QUARANTINES = 44;
 
 const BODY_FIELD_RE = /^body(?:[1-9]|1[0-9]|20)$/u;
 const ARTICLE_KEY_RE = /^blog\.article\.([^'"\r\n]+)\.(body\d+|faq)$/u;
 const ARTICLE_SECTION_RE = /^[a-z0-9-]+$/u;
 const PAYLOAD_KEYS = Object.freeze(['schemaVersion', 'section', 'locale', 'id', 'revision', 'meta', 'translations']);
 const META_KEYS = Object.freeze(['title', 'excerpt', 'imageAlt']);
+const C0_RE = /[\u0000-\u0008\u000b\u000c\u000e-\u001f]/u;
 
 class ArticleBodySourceValidationError extends Error {
   constructor(message, cause) {
@@ -40,6 +44,54 @@ function sourceValidationError(error) {
 
 function isArticleBodySourceValidationError(error) {
   return error instanceof ArticleBodySourceValidationError;
+}
+
+function assertC0Free(value, context) {
+  if (typeof value === 'string') {
+    if (C0_RE.test(value)) throw new Error(`${context}: control character C0 non registrato; rifiuto la pubblicazione`);
+    return;
+  }
+  if (Array.isArray(value)) {
+    value.forEach((entry, index) => assertC0Free(entry, `${context}[${index}]`));
+    return;
+  }
+  if (value && typeof value === 'object') {
+    for (const [key, entry] of Object.entries(value)) {
+      assertC0Free(key, `${context} key`);
+      assertC0Free(entry, `${context}.${key}`);
+    }
+  }
+}
+
+function countC0InValue(value) {
+  if (typeof value === 'string') return [...value.matchAll(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/gu)].length;
+  if (Array.isArray(value)) return value.reduce((count, entry) => count + countC0InValue(entry), 0);
+  if (value && typeof value === 'object') {
+    return Object.entries(value).reduce(
+      (count, [key, entry]) => count + countC0InValue(key) + countC0InValue(entry),
+      0,
+    );
+  }
+  return 0;
+}
+
+function decodedSourceC0Count(source) {
+  let count = 0;
+  for (const entry of extractArticleBodyFields(source)) {
+    if (typeof entry.value !== 'string') continue;
+    if (entry.field === 'faq') {
+      let faq;
+      try {
+        faq = JSON.parse(entry.value);
+      } catch (error) {
+        throw new Error(`article body API: FAQ JSON invalido durante il controllo C0 (${error.message})`);
+      }
+      count += countC0InValue(faq);
+    } else {
+      count += countC0InValue(entry.value);
+    }
+  }
+  return count;
 }
 
 function skipTrivia(source, offset) {
@@ -284,6 +336,8 @@ export function buildArticleBodyPayload({ section, locale, id, meta, source }) {
   } catch (error) {
     throw sourceValidationError(error);
   }
+  assertC0Free(articleMeta, `${section}/${locale}/${id}.meta`);
+  assertC0Free(source, `${section}/${locale}/${id}.source`);
   let entries;
   try {
     entries = extractArticleBodyFields(source);
@@ -292,6 +346,9 @@ export function buildArticleBodyPayload({ section, locale, id, meta, source }) {
   }
   const translations = {};
   for (const entry of entries) {
+    if (typeof entry.value === 'string') {
+      assertC0Free(entry.value, `${section}/${locale}/${id}.${entry.field}`);
+    }
     if (entry.id !== id) throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}: chiave body per id ${entry.id}`);
     if (entry.error) throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}.${entry.field}: ${entry.error}`);
     if (!BODY_FIELD_RE.test(entry.field) && entry.field !== 'faq') {
@@ -318,6 +375,7 @@ export function buildArticleBodyPayload({ section, locale, id, meta, source }) {
       throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}.faq: JSON non valido (${error.message})`, error);
     }
     if (!Array.isArray(parsedFaq)) throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}.faq: atteso array JSON`);
+    assertC0Free(parsedFaq, `${section}/${locale}/${id}.faq`);
   }
   const payload = {
     schemaVersion: 1,
@@ -364,9 +422,12 @@ function assertPayloadShape(payload, { section, locale, id }) {
   if (fields.some((field) => typeof payload.translations[field] !== 'string' || !payload.translations[field].trim())) {
     throw new Error('translations payload contiene valore vuoto');
   }
+  assertC0Free(payload.meta, `${section}/${locale}/${id}.meta`);
+  assertC0Free(payload.translations, `${section}/${locale}/${id}.translations`);
   if (Object.prototype.hasOwnProperty.call(payload.translations, 'faq')) {
     const faq = JSON.parse(payload.translations.faq);
     if (!Array.isArray(faq)) throw new Error('faq payload non e\u0300 un array');
+    assertC0Free(faq, `${section}/${locale}/${id}.faq`);
   }
   if (payload.revision !== articleBodyRevision(payload)) throw new Error('revision payload non corrisponde al contenuto');
 }
@@ -384,14 +445,95 @@ function quarantineReason(error) {
   return message.replace(/\s+/gu, ' ').trim().slice(0, 400) || 'errore non specificato';
 }
 
-export function assertArticleBodyQuarantineBudget(totals, limit = MAX_ARTICLE_BODY_QUARANTINES) {
+function quarantineIdentityKey(section, locale, id) {
+  return JSON.stringify([section, locale, id]);
+}
+
+function normalizeSourceQuarantine(records, { root, sections, idsBySection, publicSet, locales }) {
+  if (!Array.isArray(records)) throw new Error('article body API: source quarantine non valido');
+  if (records.length > MAX_REGISTERED_C0_SOURCE_QUARANTINES) {
+    throw new Error(
+      `article body API: quarantene C0 hash-pinned oltre il limite esplicito `
+        + `(${records.length} > ${MAX_REGISTERED_C0_SOURCE_QUARANTINES})`,
+    );
+  }
+  if (records.length === 0) return new Map();
+  const sectionByName = new Map(sections.map((section) => [section.section, section]));
+  const recordsByIdentity = new Map();
+  const recordsBySource = new Set();
+  const rootPath = path.resolve(root);
+
+  for (const record of records) {
+    if (!record || typeof record !== 'object' || Array.isArray(record)) {
+      throw new Error('article body API: record source quarantine non valido');
+    }
+    const { section, locale, id, source, sha256, rawC0Count, decodedC0Count = 0, reason } = record;
+    assertValidSection(section);
+    assertValidLocale(locale);
+    assertValidId(id, 'source quarantine id');
+    if (!publicSet.has(section) || !locales.includes(locale) || !idsBySection.get(section)?.includes(id)) {
+      throw new Error(`article body API: source quarantine non pubblicata o fuori registry: ${section}/${locale}/${id}`);
+    }
+    const sectionConfig = sectionByName.get(section);
+    const expectedSource = path.join(sectionConfig.bodyDir, locale, `${id}.ts`).split(path.sep).join('/');
+    if (source !== expectedSource || recordsBySource.has(source)) {
+      throw new Error(`article body API: source quarantine path duplicato o inatteso: ${source}`);
+    }
+    if (typeof sha256 !== 'string' || !/^[a-f0-9]{64}$/u.test(sha256)
+      || !Number.isInteger(rawC0Count) || rawC0Count < 0
+      || !Number.isInteger(decodedC0Count) || decodedC0Count < 0 || rawC0Count + decodedC0Count < 1
+      || typeof reason !== 'string' || !reason.trim() || C0_RE.test(reason)) {
+      throw new Error(`article body API: fingerprint, count o reason non valido: ${source}`);
+    }
+    const absoluteSource = path.resolve(rootPath, ...source.split('/'));
+    const relativeToRoot = path.relative(rootPath, absoluteSource);
+    if (!relativeToRoot || relativeToRoot === '..' || relativeToRoot.startsWith(`..${path.sep}`) || path.isAbsolute(relativeToRoot)) {
+      throw new Error(`article body API: source quarantine fuori dal corpus: ${source}`);
+    }
+    let bytes;
+    try {
+      bytes = fs.readFileSync(absoluteSource);
+    } catch (error) {
+      throw new Error(`article body API: source quarantine assente ${source}: ${error.message}`);
+    }
+    const sourceText = bytes.toString('utf8');
+    const actualHash = createHash('sha256').update(bytes).digest('hex');
+    const actualC0Count = [...sourceText.matchAll(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/gu)].length;
+    const actualDecodedC0Count = decodedSourceC0Count(sourceText);
+    if (actualHash !== sha256 || actualC0Count !== rawC0Count || actualDecodedC0Count !== decodedC0Count) {
+      throw new Error(`article body API: source quarantine stale per ${source}; correggere la sorgente o aggiornare la prova`);
+    }
+    const identity = quarantineIdentityKey(section, locale, id);
+    if (recordsByIdentity.has(identity)) throw new Error(`article body API: source quarantine duplicato: ${section}/${locale}/${id}`);
+    const normalized = { section, locale, id, source, sha256, rawC0Count, decodedC0Count, reason };
+    recordsByIdentity.set(identity, normalized);
+    recordsBySource.add(source);
+  }
+  return recordsByIdentity;
+}
+
+export function assertArticleBodyQuarantineBudget(
+  totals,
+  limit = MAX_ARTICLE_BODY_QUARANTINES,
+  registeredQuarantined = 0,
+) {
   const quarantined = Number(totals?.quarantined);
   if (!Number.isInteger(quarantined) || quarantined < 0) {
     throw new Error(`article body API: conteggio quarantena non valido: ${String(totals?.quarantined)}`);
   }
-  if (quarantined > limit) {
+  if (!Number.isInteger(registeredQuarantined) || registeredQuarantined < 0 || registeredQuarantined > quarantined) {
+    throw new Error(`article body API: conteggio quarantene registrate non valido: ${String(registeredQuarantined)}`);
+  }
+  if (registeredQuarantined > MAX_REGISTERED_C0_SOURCE_QUARANTINES) {
     throw new Error(
-      `article body API: soglia quarantena superata (${quarantined} > ${limit}); `
+      `article body API: quarantene C0 hash-pinned oltre il limite esplicito `
+        + `(${registeredQuarantined} > ${MAX_REGISTERED_C0_SOURCE_QUARANTINES})`,
+    );
+  }
+  const unexpected = quarantined - registeredQuarantined;
+  if (unexpected > limit) {
+    throw new Error(
+      `article body API: soglia quarantena superata (${unexpected} > ${limit}); `
         + 'rifiuto la superficie invece di pubblicare un set troppo incompleto',
     );
   }
@@ -399,10 +541,12 @@ export function assertArticleBodyQuarantineBudget(totals, limit = MAX_ARTICLE_BO
 
 export function appendArticleBodyQuarantineSummary(quarantined, summaryPath = process.env.GITHUB_STEP_SUMMARY) {
   if (!summaryPath || !Array.isArray(quarantined) || quarantined.length === 0) return;
+  const registeredCount = quarantined.filter((item) => item.registeredSource === true).length;
+  const unexpectedCount = quarantined.length - registeredCount;
   const lines = [
     '## Article body quarantine',
     '',
-    `Articoli esclusi dalla superficie: **${quarantined.length}**. Soglia fail-closed: **${MAX_ARTICLE_BODY_QUARANTINES}**.`,
+    `Articoli esclusi dalla superficie: **${quarantined.length}** (${registeredCount} sorgenti C0 hash-pinned, tetto **${MAX_REGISTERED_C0_SOURCE_QUARANTINES}**; ${unexpectedCount} quarantene inattese, soglia fail-closed **${MAX_ARTICLE_BODY_QUARANTINES}**).`,
     '',
     '| Sorgente | Motivo |',
     '| --- | --- |',
@@ -425,6 +569,7 @@ export function emitArticleBodyApi({
   registries,
   publicSections,
   metaBySectionLocale,
+  sourceQuarantine = [],
   sanitize = (value) => value,
 }) {
   const publicSet = publicSections instanceof Set ? publicSections : new Set(publicSections);
@@ -437,9 +582,13 @@ export function emitArticleBodyApi({
     const registry = publicSet.has(section.section) ? registries[section.section] : [];
     idsBySection.set(section.section, validatedRegistryIds(section.section, registry));
   }
+  const sourceQuarantineByIdentity = normalizeSourceQuarantine(sourceQuarantine, {
+    root, sections, idsBySection, publicSet, locales,
+  });
   const capabilitySections = {};
   const totals = { expected: 0, available: 0, missing: 0, quarantined: 0 };
   const quarantined = [];
+  let registeredQuarantined = 0;
   for (const section of sections) {
     const isPublic = publicSet.has(section.section);
     const ids = idsBySection.get(section.section);
@@ -460,6 +609,24 @@ export function emitArticleBodyApi({
         assertValidId(id, `${section.section} registry id`);
         const relativeSource = path.join(section.bodyDir, locale, `${id}.ts`);
         const sourcePath = path.join(root, relativeSource);
+        const registeredSource = sourceQuarantineByIdentity.get(quarantineIdentityKey(section.section, locale, id));
+        if (registeredSource) {
+          const quarantine = {
+            section: section.section,
+            locale,
+            id,
+            source: registeredSource.source,
+            reason: registeredSource.reason,
+            registeredSource: true,
+          };
+          quarantined.push(quarantine);
+          missingCount += 1;
+          quarantinedCount += 1;
+          registeredQuarantined += 1;
+          entries[id] = { status: 'missing' };
+          console.warn(`::warning::article body quarantined (hash-pinned C0 source): ${registeredSource.source}`);
+          continue;
+        }
         if (!fs.existsSync(sourcePath)) {
           entries[id] = { status: 'missing' };
           missingCount += 1;
@@ -467,6 +634,9 @@ export function emitArticleBodyApi({
         }
         const meta = metaBySectionLocale?.[section.section]?.[locale];
         const source = fs.readFileSync(sourcePath, 'utf8');
+        if (C0_RE.test(source)) {
+          throw new Error(`article body API: C0 non registrato in ${relativeSource}; aggiungere una provenienza verificata o riparare la sorgente`);
+        }
         let rawPayload;
         try {
           rawPayload = buildArticleBodyPayload({
@@ -576,22 +746,41 @@ export function emitArticleBodyApi({
     },
     totals,
     quarantined,
+    registeredQuarantined,
   };
 }
 
 /** Re-read every index and payload from disk; no in-memory writer state is trusted. */
-export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, registries, publicSections, locales = ARTICLE_BODY_LOCALES }) {
+export function verifyArticleBodyApiOnDisk({
+  outDir,
+  root,
+  capability,
+  sections,
+  registries,
+  publicSections,
+  locales = ARTICLE_BODY_LOCALES,
+  sourceQuarantine = [],
+}) {
   const publicSet = publicSections instanceof Set ? publicSections : new Set(publicSections);
   const expectedPayloadPaths = new Set();
   const expectedIndexPaths = new Set();
   const totals = { expected: 0, available: 0, missing: 0, quarantined: 0 };
   const diskSections = {};
+  const idsBySection = new Map();
+  for (const section of sections) {
+    assertValidSection(section.section);
+    const registry = publicSet.has(section.section) ? registries[section.section] : [];
+    idsBySection.set(section.section, validatedRegistryIds(section.section, registry));
+  }
+  const sourceQuarantineByIdentity = normalizeSourceQuarantine(sourceQuarantine, {
+    root, sections, idsBySection, publicSet, locales,
+  });
+  const verifiedRegisteredQuarantines = new Set();
+  let registeredQuarantined = 0;
 
   for (const section of sections) {
     const isPublic = publicSet.has(section.section);
-    assertValidSection(section.section);
-    const registry = isPublic ? registries[section.section] : [];
-    const ids = validatedRegistryIds(section.section, registry);
+    const ids = idsBySection.get(section.section);
     diskSections[section.section] = { status: isPublic ? 'public' : 'inactive', locales: {} };
     for (const locale of locales) {
       assertValidLocale(locale);
@@ -617,6 +806,12 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
           throw new Error(`${indexPath}: dettaglio quarantena non valido`);
         }
         quarantinedById.set(item.id, item.reason);
+        const knownSource = sourceQuarantineByIdentity.get(quarantineIdentityKey(section.section, locale, item.id));
+        if (knownSource) {
+          if (item.reason !== knownSource.reason) throw new Error(`${indexPath}: reason quarantena diverso dal registro per ${item.id}`);
+          verifiedRegisteredQuarantines.add(quarantineIdentityKey(section.section, locale, item.id));
+          registeredQuarantined += 1;
+        }
       }
       const indexIds = Object.keys(index.entries);
       const missingIds = ids.filter((id) => !Object.prototype.hasOwnProperty.call(index.entries, id));
@@ -701,5 +896,8 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
   if (JSON.stringify(capability) !== JSON.stringify(expectedCapability)) {
     throw new Error('manifest articleBodies capability non corrisponde agli indici su disco');
   }
-  return { totals, sections: diskSections };
+  if (verifiedRegisteredQuarantines.size !== sourceQuarantineByIdentity.size) {
+    throw new Error('article body API: indice su disco incompleto rispetto alle quarantene C0 hash-pinned');
+  }
+  return { totals, sections: diskSections, registeredQuarantined };
 }

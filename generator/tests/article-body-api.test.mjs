@@ -13,6 +13,7 @@ import {
   emitArticleBodyApi,
   extractArticleBodyFields,
   MAX_ARTICLE_BODY_QUARANTINES,
+  MAX_REGISTERED_C0_SOURCE_QUARANTINES,
   verifyArticleBodyApiOnDisk,
 } from '../../scripts/lib/article-body-api.mjs';
 import { findNonCanonicalArticleLinks } from '../../scripts/lib/article-link-contract.mjs';
@@ -20,6 +21,7 @@ import { sanitizeDeep } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { metaFieldRegex, unescapeTsValue } from '../scripts/lib/meta-field-regex.mjs';
 
 const articleId = 'example-article';
+const C0 = String.fromCharCode(0x16);
 const sourceFor = (id = articleId, body = 'First body') => [
   'const articleBody = {',
   `  'blog.article.${id}.body1': '${body}',`,
@@ -28,6 +30,38 @@ const sourceFor = (id = articleId, body = 'First body') => [
   `  'blog.article.${id}.faq': '[{"q":"Question?","a":"Answer."}]',`,
   '};',
 ].join('\n');
+
+function sourceQuarantineRecord({ section = 'frontaliere', locale = 'it', id = articleId, source, bytes, reason = 'C0 provenance unavailable' }) {
+  const content = bytes ?? Buffer.from(source, 'utf8');
+  const text = content.toString('utf8');
+  const rawC0Count = [...text.matchAll(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/gu)].length;
+  const decodedC0Count = extractArticleBodyFields(text).reduce((count, field) => {
+    if (typeof field.value !== 'string') return count;
+    let value = field.value;
+    if (field.field === 'faq') {
+      try { value = JSON.parse(value); } catch { return count; }
+    }
+    const countValue = (entry) => {
+      if (typeof entry === 'string') return [...entry.matchAll(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/gu)].length;
+      if (Array.isArray(entry)) return entry.reduce((total, item) => total + countValue(item), 0);
+      if (entry && typeof entry === 'object') {
+        return Object.entries(entry).reduce((total, [key, item]) => total + countValue(key) + countValue(item), 0);
+      }
+      return 0;
+    };
+    return count + countValue(value);
+  }, 0);
+  return {
+    section,
+    locale,
+    id,
+    source,
+    sha256: createHash('sha256').update(content).digest('hex'),
+    rawC0Count,
+    decodedC0Count,
+    reason,
+  };
+}
 
 const metaFor = (
   id = articleId,
@@ -254,6 +288,21 @@ test('FAQ control escapes remain JSON escapes until JSON.parse', () => {
   const rawFaq = fields.find(({ field }) => field === 'faq')?.value;
   assert.equal(rawFaq, faq);
   assert.equal(JSON.parse(rawFaq)[0].a, 'First\bSecond\fThird');
+});
+
+test('C0 in a parsed FAQ object key is rejected and included in quarantine fingerprints', () => {
+  const faq = JSON.stringify([{ q: 'Question?', a: 'Answer.', [C0]: 'value' }]);
+  const source = sourceFor().replace(
+    `'blog.article.example-article.faq': '[{"q":"Question?","a":"Answer."}]',`,
+    `'blog.article.example-article.faq': ${JSON.stringify(faq)},`,
+  );
+  assert.equal(sourceQuarantineRecord({
+    source: 'content/frontaliere/it/example-article.ts',
+    bytes: Buffer.from(source, 'utf8'),
+  }).decodedC0Count, 1);
+  assert.throws(() => buildArticleBodyPayload({
+    section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source,
+  }), /\.faq\[0\] key: control character C0 non registrato/u);
 });
 
 test('TypeScript octal-looking control escapes remain source-stable', () => {
@@ -580,7 +629,7 @@ test('metadata rejects missing excerpts, blank titles, and non-text values', () 
   }
 });
 
-test('sanitized blank image alternatives become null before hashing and disk verification', () => {
+test('an image alternative with C0 fails before the sanitizer can publish it', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-sanitized-alt-source-'));
   const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-sanitized-alt-output-'));
   const localeDir = path.join(root, 'content/frontaliere/it');
@@ -592,7 +641,7 @@ test('sanitized blank image alternatives become null before hashing and disk ver
   const metaBySectionLocale = {
     frontaliere: { it: metaFor(articleId, 'Example title', 'Short summary.', '\u0000') },
   };
-  const emitted = emitArticleBodyApi({
+  assert.throws(() => emitArticleBodyApi({
     root,
     outDir,
     locales: ['it'],
@@ -601,19 +650,8 @@ test('sanitized blank image alternatives become null before hashing and disk ver
     publicSections: new Set(['frontaliere']),
     metaBySectionLocale,
     sanitize: (value) => sanitizeDeep(value),
-  });
-  const payloadPath = path.join(outDir, `bodies/frontaliere/it/${articleId}.json`);
-  const payload = JSON.parse(fs.readFileSync(payloadPath, 'utf8'));
-  assert.deepEqual(payload.meta, { title: 'Example title', excerpt: 'Short summary.', imageAlt: null });
-  assert.equal(payload.revision, articleBodyRevision(payload));
-  assert.deepEqual(verifyArticleBodyApiOnDisk({
-    outDir,
-    capability: emitted.capability,
-    sections,
-    registries,
-    publicSections: new Set(['frontaliere']),
-    locales: ['it'],
-  }).totals, emitted.totals);
+  }), /frontaliere\/it\/example-article\.meta\.imageAlt: control character C0/u);
+  assert.equal(fs.existsSync(path.join(outDir, 'bodies')), false, 'il contenuto non deve uscire dal gate');
 });
 
 test('section/locale indexes explicitly represent missing sources and inactive sections', () => {
@@ -668,6 +706,118 @@ test('section/locale indexes explicitly represent missing sources and inactive s
     locales,
   });
   assert.deepEqual(verified.totals, emitted.totals);
+});
+
+test('a hash-pinned C0 source is withheld from payloads and verified on disk', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-c0-source-'));
+  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-c0-output-'));
+  const relativeSource = `content/frontaliere/it/${articleId}.ts`;
+  const source = sourceFor(articleId, `First ${C0}body`);
+  fs.mkdirSync(path.dirname(path.join(root, relativeSource)), { recursive: true });
+  fs.writeFileSync(path.join(root, relativeSource), source);
+  const sourceQuarantine = [sourceQuarantineRecord({ source: relativeSource, bytes: Buffer.from(source, 'utf8') })];
+  const sections = [{ section: 'frontaliere', bodyDir: 'content/frontaliere' }];
+  const registries = { frontaliere: [{ id: articleId }] };
+  const publicSections = new Set(['frontaliere']);
+  const metaBySectionLocale = { frontaliere: { it: metaFor() } };
+
+  const emitted = emitArticleBodyApi({
+    root, outDir, locales: ['it'], sections, registries, publicSections, metaBySectionLocale, sourceQuarantine,
+  });
+  assert.deepEqual(emitted.totals, { expected: 1, available: 0, missing: 1, quarantined: 1 });
+  assert.equal(emitted.registeredQuarantined, 1);
+  assert.equal(fs.readFileSync(path.join(root, relativeSource), 'utf8').includes(C0), true, 'la sorgente resta intatta');
+  const index = JSON.parse(fs.readFileSync(path.join(outDir, 'bodies/frontaliere/it/index.json'), 'utf8'));
+  assert.equal(index.entries[articleId].status, 'missing');
+  assert.deepEqual(index.quarantined, [{ id: articleId, reason: sourceQuarantine[0].reason }]);
+  assert.equal(fs.existsSync(path.join(outDir, `bodies/frontaliere/it/${articleId}.json`)), false);
+  assert.doesNotThrow(() => assertArticleBodyQuarantineBudget(emitted.totals, 3, emitted.registeredQuarantined));
+
+  const verified = verifyArticleBodyApiOnDisk({
+    outDir, root, capability: emitted.capability, sections, registries, publicSections,
+    locales: ['it'], sourceQuarantine,
+  });
+  assert.deepEqual(verified.totals, emitted.totals);
+  assert.equal(verified.registeredQuarantined, 1);
+});
+
+test('unexpected C0 sources and stale quarantine fingerprints fail closed', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-unregistered-c0-source-'));
+  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-unregistered-c0-output-'));
+  const relativeSource = `content/frontaliere/it/${articleId}.ts`;
+  const source = sourceFor(articleId, `First ${C0}body`);
+  const sourcePath = path.join(root, relativeSource);
+  fs.mkdirSync(path.dirname(sourcePath), { recursive: true });
+  fs.writeFileSync(sourcePath, source);
+  const options = {
+    root, outDir, locales: ['it'], sections: [{ section: 'frontaliere', bodyDir: 'content/frontaliere' }],
+    registries: { frontaliere: [{ id: articleId }] }, publicSections: new Set(['frontaliere']),
+    metaBySectionLocale: { frontaliere: { it: metaFor() } },
+  };
+  assert.throws(() => emitArticleBodyApi(options), /C0 non registrato/u);
+
+  const staleRecord = sourceQuarantineRecord({ source: relativeSource, bytes: Buffer.from(source, 'utf8') });
+  fs.writeFileSync(sourcePath, sourceFor(articleId, `First ${C0}changed body`));
+  assert.throws(
+    () => emitArticleBodyApi({ ...options, sourceQuarantine: [staleRecord] }),
+    /source quarantine stale/u,
+  );
+});
+
+test('C0 decoded from an escaped FAQ is quarantined only with a matching fingerprint', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-escaped-c0-source-'));
+  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-escaped-c0-output-'));
+  const relativeSource = `content/frontaliere/it/${articleId}.ts`;
+  const backslash = String.fromCharCode(92);
+  const source = sourceFor().replace('Question?', `Question${backslash}${backslash}u00148`);
+  const sourcePath = path.join(root, relativeSource);
+  fs.mkdirSync(path.dirname(sourcePath), { recursive: true });
+  fs.writeFileSync(sourcePath, source);
+  const record = sourceQuarantineRecord({ source: relativeSource, bytes: Buffer.from(source, 'utf8') });
+  assert.equal(record.rawC0Count, 0);
+  assert.equal(record.decodedC0Count, 1);
+  const options = {
+    root, outDir, locales: ['it'], sections: [{ section: 'frontaliere', bodyDir: 'content/frontaliere' }],
+    registries: { frontaliere: [{ id: articleId }] }, publicSections: new Set(['frontaliere']),
+    metaBySectionLocale: { frontaliere: { it: metaFor() } },
+  };
+  assert.throws(() => emitArticleBodyApi(options), /control character C0 non registrato/u);
+  const emitted = emitArticleBodyApi({ ...options, sourceQuarantine: [record] });
+  assert.equal(emitted.registeredQuarantined, 1);
+  assert.equal(fs.existsSync(path.join(outDir, `bodies/frontaliere/it/${articleId}.json`)), false);
+  assert.equal(verifyArticleBodyApiOnDisk({
+    outDir, root, capability: emitted.capability, sections: options.sections,
+    registries: options.registries, publicSections: options.publicSections,
+    locales: ['it'], sourceQuarantine: [record],
+  }).registeredQuarantined, 1);
+});
+
+test('quarantine fingerprints detect understated decoded C0 counts when raw C0 is also present', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-understated-c0-source-'));
+  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-understated-c0-output-'));
+  const relativeSource = `content/frontaliere/it/${articleId}.ts`;
+  const faq = JSON.stringify([{ q: `Question${C0}`, a: 'Answer.' }]);
+  const source = sourceFor(articleId, `First ${C0}body`).replace(
+    `'blog.article.example-article.faq': '[{"q":"Question?","a":"Answer."}]',`,
+    `'blog.article.example-article.faq': ${JSON.stringify(faq)},`,
+  );
+  const sourcePath = path.join(root, relativeSource);
+  fs.mkdirSync(path.dirname(sourcePath), { recursive: true });
+  fs.writeFileSync(sourcePath, source);
+  const record = sourceQuarantineRecord({ source: relativeSource, bytes: Buffer.from(source, 'utf8') });
+  assert.ok(record.rawC0Count > 0);
+  assert.ok(record.decodedC0Count > 0);
+  record.decodedC0Count = 0;
+  assert.throws(() => emitArticleBodyApi({
+    root,
+    outDir,
+    locales: ['it'],
+    sections: [{ section: 'frontaliere', bodyDir: 'content/frontaliere' }],
+    registries: { frontaliere: [{ id: articleId }] },
+    publicSections: new Set(['frontaliere']),
+    metaBySectionLocale: { frontaliere: { it: metaFor() } },
+    sourceQuarantine: [record],
+  }), /source quarantine stale/u);
 });
 
 test('un body non parsabile viene messo in quarantena, escluso dall output e ri-verificato dal disco', () => {
@@ -745,10 +895,20 @@ test('un errore interno di sanitizzazione non viene convertito in quarantena', (
 
 test('la soglia di quarantena e esplicita e fail-closed', () => {
   assert.equal(MAX_ARTICLE_BODY_QUARANTINES, 3);
+  assert.equal(MAX_REGISTERED_C0_SOURCE_QUARANTINES, 44);
   assert.doesNotThrow(() => assertArticleBodyQuarantineBudget({ quarantined: 3 }));
+  assert.doesNotThrow(() => assertArticleBodyQuarantineBudget({ quarantined: 47 }, 3, 44));
   assert.throws(
     () => assertArticleBodyQuarantineBudget({ quarantined: 4 }),
     /soglia quarantena superata \(4 > 3\)/u,
+  );
+  assert.throws(
+    () => assertArticleBodyQuarantineBudget({ quarantined: 48 }, 3, 44),
+    /soglia quarantena superata \(4 > 3\)/u,
+  );
+  assert.throws(
+    () => assertArticleBodyQuarantineBudget({ quarantined: 45 }, 3, 45),
+    /hash-pinned oltre il limite esplicito \(45 > 44\)/u,
   );
 });
 
@@ -774,6 +934,23 @@ test('the disk gate rejects tampered payloads and body documents absent from the
     outDir, capability: emitted.capability, sections, registries,
     publicSections: new Set(['frontaliere']), locales,
   }), /revision payload non corrisponde/u);
+
+  emitArticleBodyApi({
+    root, outDir, locales, sections, registries, metaBySectionLocale,
+    publicSections: new Set(['frontaliere']),
+  });
+  const c0Payload = JSON.parse(fs.readFileSync(bodyPath, 'utf8'));
+  c0Payload.translations.body1 = `tampered${C0}`;
+  c0Payload.revision = articleBodyRevision(c0Payload);
+  fs.writeFileSync(bodyPath, JSON.stringify(c0Payload));
+  const indexPath = path.join(outDir, 'bodies/frontaliere/it/index.json');
+  const index = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+  index.entries[articleId].expectedHash = c0Payload.revision;
+  fs.writeFileSync(indexPath, JSON.stringify(index));
+  assert.throws(() => verifyArticleBodyApiOnDisk({
+    outDir, capability: emitted.capability, sections, registries,
+    publicSections: new Set(['frontaliere']), locales,
+  }), /control character C0 non registrato/u);
 
   emitArticleBodyApi({
     root, outDir, locales, sections, registries, metaBySectionLocale,
