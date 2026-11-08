@@ -108,6 +108,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.mercato-immobiliare-sciaffusa-crescita.title': 'Prix des logements à Schaffhouse en hausse selon l’Eigenheim-Index',
     'blog.article.mercato-immobiliare-sciaffusa-crescita.excerpt': 'Appartements +4,0% sur un an et maisons individuelles +3,7% sur un an dans le canton de Schaffhouse ; un appartement typique coûte CHF 770\'000.',
     'blog.article.mercato-immobiliare-sciaffusa-crescita.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sciaffusa-case-unifamiliari.title': 'Canton de Schaffhouse : une maison sur quatre est individuelle',
+    'blog.article.sciaffusa-case-unifamiliari.excerpt': 'Dans le canton de Schaffhouse, une maison sur quatre est individuelle ; le chapô décrit le rêve de devenir propriétaire comme une dépense croissante.',
+    'blog.article.sciaffusa-case-unifamiliari.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

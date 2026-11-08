@@ -108,6 +108,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.mercato-immobiliare-sciaffusa-crescita.title': 'Preise für Wohnimmobilien in Schaffhausen steigen laut Eigenheim-Index',
     'blog.article.mercato-immobiliare-sciaffusa-crescita.excerpt': 'Eigentumswohnungen +4,0% im Jahresvergleich und Einfamilienhäuser +3,7% im Jahresvergleich im Kanton Schaffhausen; eine typische Eigentumswohnung kostet CHF 770\'000.',
     'blog.article.mercato-immobiliare-sciaffusa-crescita.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sciaffusa-case-unifamiliari.title': 'Kanton Schaffhausen: Jedes vierte Haus ist ein Einfamilienhaus',
+    'blog.article.sciaffusa-case-unifamiliari.excerpt': 'Im Kanton Schaffhausen ist jedes vierte Haus ein Einfamilienhaus; der Lead beschreibt den Traum vom Eigenheim als zunehmend kostspielig.',
+    'blog.article.sciaffusa-case-unifamiliari.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

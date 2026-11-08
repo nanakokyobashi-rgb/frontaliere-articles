@@ -108,6 +108,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.mercato-immobiliare-sciaffusa-crescita.title': 'Schaffhausen housing prices rising according to Eigenheim-Index',
     'blog.article.mercato-immobiliare-sciaffusa-crescita.excerpt': 'Apartments +4,0% year-on-year and single-family homes +3,7% year-on-year in the Canton of Schaffhausen; a typical apartment costs CHF 770\'000.',
     'blog.article.mercato-immobiliare-sciaffusa-crescita.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sciaffusa-case-unifamiliari.title': 'Canton of Schaffhausen: one in four homes is a single-family home',
+    'blog.article.sciaffusa-case-unifamiliari.excerpt': 'In the Canton of Schaffhausen, one in four houses is a single-family home; the lead describes the dream of homeownership as an increasing expense.',
+    'blog.article.sciaffusa-case-unifamiliari.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

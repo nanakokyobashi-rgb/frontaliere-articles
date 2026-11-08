@@ -108,6 +108,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.mercato-immobiliare-sciaffusa-crescita.title': 'Prezzi abitazioni Sciaffusa in crescita secondo Eigenheim-Index',
     'blog.article.mercato-immobiliare-sciaffusa-crescita.excerpt': 'Appartamenti +4,0% annuo e case unifamiliari +3,7% annuo nel Canton Sciaffusa; un appartamento tipico costa CHF 770\'000.',
     'blog.article.mercato-immobiliare-sciaffusa-crescita.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sciaffusa-case-unifamiliari.title': 'Canton Sciaffusa: una casa su quattro è unifamiliare',
+    'blog.article.sciaffusa-case-unifamiliari.excerpt': 'Nel Canton Sciaffusa una casa su quattro è unifamiliare; il lead descrive il sogno della proprietà come una spesa crescente.',
+    'blog.article.sciaffusa-case-unifamiliari.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

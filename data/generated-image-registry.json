@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 1183,
+  "assetCount": 1184,
   "assets": [
     {
       "schema": 1,
@@ -49033,6 +49033,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic synthetic motorway illustration with no readable text, logos, people, or event-specific cues."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-sciaffusa-case-unifamiliari",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "31147a53eb2a42e9c8ef98b88621753b7d4c20d60b73c8ec368b3e8ddbb99f6c",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "4e820a15e101a30744270d58d42afd18b7f4a18e5f8686d6eac6129e7eee0321",
+      "bytes": 213848,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-11-08T01:25:03.600Z",
+      "verifiedAt": "2026-11-08T01:25:16.024Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-sciaffusa-case-unifamiliari.webp",
+      "area": "Swiss border region",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original generic synthetic residential illustration; no people, text, logos, signage, or event-specific cues."
       }
     }
   ]

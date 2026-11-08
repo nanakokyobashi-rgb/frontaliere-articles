@@ -38,6 +38,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'sciaffusa-mercato-lavoro-ottobre': { it: 'sciaffusa-mercato-lavoro-ottobre', en: 'schaffhausen-job-market-october', de: 'schaffhausen-arbeitsmarkt-oktober', fr: 'schaffhouse-marche-travail-octobre' },
  'quartierplan-ebnat-west-pubblico': { it: 'quartierplan-ebnat-west-pubblico', en: 'ebnat-west-district-plan-public', de: 'quartierplan-ebnat-west-oeffentlich', fr: 'plan-quartier-ebnat-west-public' },
  'mercato-immobiliare-sciaffusa-crescita': { it: 'mercato-immobiliare-sciaffusa-crescita', en: 'schaffhausen-real-estate-growth', de: 'schaffhausen-immobilienmarkt-wachstum', fr: 'immobilier-schaffhouse-croissance' },
+ 'sciaffusa-case-unifamiliari': { it: 'sciaffusa-case-unifamiliari', en: 'schaffhausen-detached-houses', de: 'schaffhausen-einfamilienhaeuser', fr: 'schaffhouse-maisons-individuelles' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

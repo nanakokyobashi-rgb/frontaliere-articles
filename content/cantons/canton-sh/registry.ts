@@ -392,4 +392,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sciaffusa-case-unifamiliari',
+ category: 'pratico',
+ date: '2026-11-08T01:25:16.110Z',
+ image: '/images/blog/article-sciaffusa-case-unifamiliari.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
