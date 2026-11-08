@@ -30,6 +30,13 @@ import {
 
 const B = String.fromCharCode(0x16); // il marker osservato nel corpus
 
+function expectRejectedWrite(file, original, clean, opts) {
+  assert.throws(
+    () => reportStrippedControlChars(file, original, clean, opts),
+    /scrittura rifiutata/u,
+  );
+}
+
 test('occurrencesIn trova i marker e ne registra byte e posizione', () => {
   const src = `const t = 'comp${B}9tences';`;
   const occ = occurrencesIn(src);
@@ -64,26 +71,24 @@ test('un contenuto pulito non registra niente e non annuncia niente', () => {
   assert.deepEqual(logs, []);
 });
 
-test('uno strip emette ::error::, non un warning fra mille', () => {
-  // `::warning::` in un run che ne produce migliaia e' cio' che ha reso questo
-  // difetto invisibile. L'annotazione deve essere di errore per comparire nel
-  // sommario della run.
+test('un marker C0 emette ::error:: e rifiuta la scrittura', () => {
   resetCounters();
   const logs = [];
   const writes = [];
   const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
-  const n = reportStrippedControlChars('a.ts', `x${B}9y`, 'x9y', { log: (s) => logs.push(s), fsImpl, reportPath: '/tmp/x.jsonl' });
-  assert.equal(n, 1);
+  expectRejectedWrite('a.ts', `x${B}9y`, 'x9y', { log: (s) => logs.push(s), fsImpl, reportPath: '/tmp/x.jsonl' });
   assert.equal(strippedCount(), 1);
   assert.equal(logs.length, 1);
   assert.match(logs[0], /^::error::/, `atteso ::error::, visto: ${logs[0]}`);
+  assert.match(logs[0], /Scrittura rifiutata prima di togliere il marker/u);
+  assert.equal(writes.length, 1, 'il report viene scritto prima del rifiuto');
 });
 
 test('l\'evidenza finisce su disco in forma leggibile da un programma', () => {
   resetCounters();
   const writes = [];
   const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
-  reportStrippedControlChars('content/blog-body/fr/x.ts', `a${B}9b`, 'a9b', {
+  expectRejectedWrite('content/blog-body/fr/x.ts', `a${B}9b`, 'a9b', {
     log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '/tmp/s.md',
   });
   // Filtrato per destinazione e non `writes.length === 1`: da #94 le
@@ -99,17 +104,21 @@ test('l\'evidenza finisce su disco in forma leggibile da un programma', () => {
   assert.ok(rec.context.includes(B), 'il record deve portare il byte, non solo il conteggio');
 });
 
-test('un disco che rifiuta la scrittura non fa fallire la scrittura del contenuto', () => {
-  // L'evidenza e' un di piu'. Se il report non si scrive, l'annotazione e' gia'
-  // uscita e l'articolo deve comunque essere scritto: bloccare qui fermerebbe
-  // la produzione per un problema di logging.
+test('un errore I/O del report non permette di scrivere il contenuto sanificato', () => {
   resetCounters();
   const logs = [];
   const fsImpl = { mkdirSync() { throw new Error('EACCES'); }, appendFileSync() {} };
-  const n = reportStrippedControlChars('a.ts', `x${B}9y`, 'x9y', { log: (s) => logs.push(s), fsImpl });
-  assert.equal(n, 1, 'l\'occorrenza va contata comunque');
+  expectRejectedWrite('a.ts', `x${B}9y`, 'x9y', { log: (s) => logs.push(s), fsImpl });
+  assert.equal(strippedCount(), 1, 'l\'occorrenza va contata comunque');
   assert.ok(logs.some((l) => l.startsWith('::error::')), 'l\'errore va annunciato comunque');
   assert.ok(logs.some((l) => /impossibile scrivere/.test(l)), 'e il fallimento del report va detto');
+});
+
+test('il controllo si applica anche quando clean coincide con un original che contiene C0', () => {
+  resetCounters();
+  const src = `x${B}9y`;
+  expectRejectedWrite('a.ts', src, src, { log: () => {}, summaryPath: '' });
+  assert.equal(strippedCount(), 1);
 });
 
 test('ogni choke point di scrittura passa da qui — per OGNI sanitizer, non solo sanitizeText', () => {
@@ -256,7 +265,7 @@ test('l\'annotazione dice quante rompono una parola, non solo quante ce n\'erano
   resetCounters();
   const righe = [];
   const src = `> ${B10}Der comp${B}9tences`;
-  reportStrippedControlChars('content/x.ts', src, src.replace(OGNI_C0, ''), {
+  expectRejectedWrite('content/x.ts', src, src.replace(OGNI_C0, ''), {
     log: (s) => righe.push(s),
     fsImpl: { mkdirSync() {}, appendFileSync() {} },
     reportPath: '/dev/null',
@@ -278,7 +287,7 @@ test('l\'evidenza finisce anche nel sommario della run, dove sopravvive al runne
   fs.writeFileSync(summary, '');
   try {
     const src = `des comp${B}9tences pratiques`;
-    reportStrippedControlChars('content/blog-body/fr/x.ts', src, src.replace(B, ''), {
+    expectRejectedWrite('content/blog-body/fr/x.ts', src, src.replace(B, ''), {
       log: () => {},
       reportPath: path.join(dir, 'strips.jsonl'),
       summaryPath: summary,
@@ -306,7 +315,7 @@ test('il sommario: il contesto resta UNA riga di tabella — a capo e TAB non la
   fs.writeFileSync(summary, '');
   try {
     const src = `avant\n\ncomp${B}9tences\tapres`;
-    reportStrippedControlChars('content/x.ts', src, src.replace(B, ''), {
+    expectRejectedWrite('content/x.ts', src, src.replace(B, ''), {
       log: () => {},
       reportPath: path.join(dir, 'strips.jsonl'),
       summaryPath: summary,
@@ -323,15 +332,15 @@ test('il sommario: il contesto resta UNA riga di tabella — a capo e TAB non la
   }
 });
 
-test('senza GITHUB_STEP_SUMMARY non si scrive niente e non si rompe niente', () => {
+test('senza GITHUB_STEP_SUMMARY il rifiuto continua a funzionare', () => {
   resetCounters();
   const src = `des comp${B}9tences`;
-  const n = reportStrippedControlChars('content/x.ts', src, src.replace(B, ''), {
+  expectRejectedWrite('content/x.ts', src, src.replace(B, ''), {
     log: () => {},
     fsImpl: { mkdirSync() {}, appendFileSync() {} },
     reportPath: '/dev/null',
     summaryPath: '',
   });
-  assert.equal(n, 1);
+  assert.equal(strippedCount(), 1);
   assert.equal(residueCount(), 1);
 });

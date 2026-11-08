@@ -55,16 +55,15 @@
  * la stessa evidenza viene anche appesa a `GITHUB_STEP_SUMMARY`, che resta
  * attaccato alla run per sempre e non richiede di toccare nessun workflow.
  *
- * ## Cosa NON fa, di proposito
+ * ## Guardia di scrittura
  *
- * Non fa fallire la generazione. Il rubinetto e' aperto e bloccare qui
- * fermerebbe la produzione di articoli per un difetto che riguarda una
- * manciata di caratteri: sarebbe la cura peggiore della malattia, ed e' la
- * forma di guasto che questo repo chiama «un rimedio che si auto-limita in
- * silenzio», al contrario. Emette `::error::` — che l'annotazione di GitHub
- * mostra nel sommario della run e che `scan-failed-runs.mjs` sa leggere — e
- * lascia sul disco l'evidenza. La decisione di bloccare, se mai servira', si
- * prende sui dati che questo file produce, non prima di averli.
+ * La segnalazione da sola non protegge il corpus: i chiamanti scrivevano
+ * comunque `clean` dopo il ritorno da questa funzione, perdendo il marker
+ * esatto che serve per riparare il testo. Ora la funzione registra prima
+ * l'evidenza e poi lancia; ogni choke point la chiama prima della scrittura,
+ * quindi il sorgente originale resta intatto e il run fallisce chiuso.
+ * L'eventuale errore di I/O del report viene segnalato ma non rende il testo
+ * pubblicabile.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -174,10 +173,11 @@ export function occurrencesIn(original, { contextChars = CONTEXT_CHARS } = {}) {
  * @param {string} original  contenuto com'era, coi marker ancora dentro
  * @param {string} clean  contenuto sanificato
  * @param {{reportPath?: string, log?: (s: string) => void, fsImpl?: typeof fs}} [opts]
- * @returns {number} quante occorrenze sono state registrate
+ * @returns {0} se il testo non contiene control character C0 non ammessi
+ * @throws {Error} se il testo contiene C0 non ammessi, dopo aver registrato l'evidenza
  */
 export function reportStrippedControlChars(file, original, clean, opts = {}) {
-  if (typeof original !== 'string' || original === clean) return 0;
+  if (typeof original !== 'string') return 0;
   const occ = occurrencesIn(original);
   if (occ.length === 0) return 0;
 
@@ -192,14 +192,13 @@ export function reportStrippedControlChars(file, original, clean, opts = {}) {
 
   // `::error::` e non `::warning::`: un warning in un run che ne produce
   // migliaia e' cio' che ha reso questo difetto invisibile per settimane.
-  // Il conteggio dei residui va PRIMA del resto: e' il numero che dice quante
-  // parole rotte questo run sta mandando online, e l'altro no.
+  // Il conteggio dei residui identifica le parole a rischio; il throw
+  // successivo blocca la scrittura e preserva l'ancora nel sorgente.
   log(
     `::error::control-char-strip: ${file} portava ${occ.length} control character C0, ` +
     `di cui ${conResiduo.length} che rompono una parola (es. comp<16>9tences -> comp9tences). ` +
-    'Sono stati tolti prima di scrivere, MA il marker che rende esatta la riparazione ' +
-    'e\' andato perso: il carattere accentato originale non e\' piu\' ricostruibile da ' +
-    'questo file. Evidenza in ' + reportPath + ' (issue #95, causa a monte #66).',
+    'Scrittura rifiutata prima di togliere il marker, che resta disponibile per la riparazione. ' +
+    'Evidenza in ' + reportPath + ' (issue #95, causa a monte #66).',
   );
 
   try {
@@ -207,15 +206,18 @@ export function reportStrippedControlChars(file, original, clean, opts = {}) {
     const lines = occ.map((o) => JSON.stringify({ file, ...o })).join('\n') + '\n';
     io.appendFileSync(reportPath, lines, 'utf-8');
   } catch (err) {
-    // L'evidenza e' un di piu': se il disco non collabora, l'annotazione sopra
-    // e' gia' stata emessa e la scrittura del contenuto non deve fallire per
-    // questo.
+    // Il report e' un di piu': anche se il disco non collabora, il throw sotto
+    // impedisce comunque di scrivere il contenuto sanificato.
     log(`::warning::control-char-strip: impossibile scrivere ${reportPath}: ${err.message}`);
   }
 
   appendStepSummary(file, occ, opts);
 
-  return occ.length;
+  throw new Error(
+    `control-char-write-report: scrittura rifiutata per ${file}: `
+      + `${occ.length} control character C0 non ammessi (${conResiduo.length} rompono una parola); `
+      + 'sorgente preservato, ripararlo o metterlo in quarantena prima di riprovare.',
+  );
 }
 
 /**
@@ -250,7 +252,7 @@ function appendStepSummary(file, occ, opts = {}) {
     '',
     `### control-char-strip — \`${file}\``,
     '',
-    `${occ.length} control character C0 tolti in scrittura, ${occ.filter((o) => o.residuo).length} dei quali rompono una parola.`,
+    `${occ.length} control character C0 rilevati; scrittura rifiutata. ${occ.filter((o) => o.residuo).length} avrebbero rotto una parola dopo lo strip.`,
     '',
     '| offset | byte | rompe una parola | contesto (prima dello strip) |',
     '|---|---|---|---|',

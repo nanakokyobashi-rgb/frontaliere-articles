@@ -3624,9 +3624,9 @@ function read(rel) {
 // Write-time guard (issue #66): a `.ts` under content/ must never carry a C0
 // control character other than TAB/LF/CR — they have shown up as the residue
 // of a mangled accented letter or typographic quote (`sar\x170` for «sarà»).
-// This is the single write choke point for the generator, so stripping here
-// is what makes it IMPOSSIBLE for the corpus to receive one, rather than
-// relying on every future write call site to remember to sanitize.
+// This is the single write choke point for the generator. The shared report
+// guard rejects a write containing C0 before the sanitized copy can replace
+// the source, rather than relying on future call sites to remember the rule.
 //
 // Monotonic counter so two writes in the same process to the same target
 // still get distinct temp files — the pid alone would not disambiguate them

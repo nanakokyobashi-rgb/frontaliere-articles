@@ -118,8 +118,8 @@ import {
   sanitizeJsonText,
   assertNoControlChars,
 } from './lib/sanitize-control-chars.mjs';
-// Sanificare non basta: togliere il byte C0 distrugge il MARKER che rende esatta
-// una riparazione futura. Qui si registra prima di distruggere (#95, #133).
+// Sanificare non basta: il report guard registra il marker e rifiuta la
+// scrittura prima che il testo sanificato possa sostituire la sorgente (#95, #133).
 import {
   reportStrippedControlChars,
   reportStrippedControlCharsDeep,
@@ -579,6 +579,14 @@ for (const family of PUBLIC_API_FAMILIES) {
 // source file; payload revisions cover identity, localized metadata and body.
 // Individual payloads stay out of manifest.files (the per-locale index carries
 // their hashes), but they are all re-read and validated by the final disk gate.
+const articleBodySourceQuarantineManifest = JSON.parse(fs.readFileSync(
+  path.join(ROOT, 'generator/data/article-body-source-quarantine.json'), 'utf8',
+));
+if (articleBodySourceQuarantineManifest.schemaVersion !== 1
+  || !Array.isArray(articleBodySourceQuarantineManifest.records)) {
+  throw new Error('article body API: manifest quarantine sorgenti non valido');
+}
+const articleBodySourceQuarantine = articleBodySourceQuarantineManifest.records;
 const articleBodyApi = emitArticleBodyApi({
   root: ROOT,
   outDir: OUT,
@@ -587,6 +595,7 @@ const articleBodyApi = emitArticleBodyApi({
   registries: SECTION_REGISTRIES,
   publicSections: new Set(PUBLIC_API_SECTIONS.map((section) => section.section)),
   metaBySectionLocale: SECTION_META_BY_LOCALE,
+  sourceQuarantine: articleBodySourceQuarantine,
   sanitize(value, relativePath) {
     const filePath = path.join(OUT, relativePath);
     const clean = sanitizeDeep(value);
@@ -595,7 +604,7 @@ const articleBodyApi = emitArticleBodyApi({
   },
 });
 appendArticleBodyQuarantineSummary(articleBodyApi.quarantined);
-assertArticleBodyQuarantineBudget(articleBodyApi.totals);
+assertArticleBodyQuarantineBudget(articleBodyApi.totals, undefined, articleBodyApi.registeredQuarantined);
 for (const section of PUBLISHED_API_SECTIONS) {
   for (const loc of LOCALES) {
     const indexPath = `bodies/${section.section}/${loc}/index.json`;
@@ -1822,13 +1831,15 @@ write('manifest.json', {
 const articleBodyManifest = JSON.parse(fs.readFileSync(path.join(OUT, 'manifest.json'), 'utf8'));
 const articleBodyDisk = verifyArticleBodyApiOnDisk({
   outDir: OUT,
+  root: ROOT,
   capability: articleBodyManifest.capabilities?.articleBodies,
   sections: PUBLISHED_API_SECTIONS,
   registries: SECTION_REGISTRIES,
   publicSections: new Set(PUBLIC_API_SECTIONS.map((section) => section.section)),
   locales: LOCALES,
+  sourceQuarantine: articleBodySourceQuarantine,
 });
-assertArticleBodyQuarantineBudget(articleBodyDisk.totals);
+assertArticleBodyQuarantineBudget(articleBodyDisk.totals, undefined, articleBodyDisk.registeredQuarantined);
 console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`);
 
 // ── Final gate: no control character leaves this process ──────────────────
