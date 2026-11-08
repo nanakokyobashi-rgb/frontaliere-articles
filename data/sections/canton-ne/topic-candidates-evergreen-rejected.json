@@ -7,6 +7,18 @@
     "canton-ne::https://www.estrepublicain.fr/culture-loisirs/2026/11/07/le-travail-frontalier-un-phenomene-certes-complexe-mais-qui-profite-aux-deux-pays": {
       "section": "canton-ne",
       "ts": 1794078968429
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261107-participation-record-au-festival-du-chocolat-a-neuchatel.html": {
+      "section": "canton-ne",
+      "ts": 1794130917401
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261106-amsterdam-chantier-d-un-centre-de-donnees-microsoft-occupe.html": {
+      "section": "canton-ne",
+      "ts": 1794130927626
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261106-tesla-va-cesser-la-production-du-cybertruck-vers-mi-2027.html": {
+      "section": "canton-ne",
+      "ts": 1794130938448
     }
   }
 }
