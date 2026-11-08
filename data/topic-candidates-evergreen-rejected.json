@@ -4570,10 +4570,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-04T00:56:42.844Z",
-      "lastStrikeAt": "2026-11-04T02:02:42.312Z",
-      "expiresAt": "2026-12-04T02:02:42.312Z"
+      "lastStrikeAt": "2026-11-08T07:58:50.623Z",
+      "expiresAt": "2026-12-08T07:58:50.623Z"
     },
     {
       "keyword": "vivere a Tremezzina e lavorare in Ticino da frontaliere",
