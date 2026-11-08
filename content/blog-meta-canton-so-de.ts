@@ -81,6 +81,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.tasso-disoccupazione-ottobre-2026.title': 'Solothurn: 4\'543 Arbeitslose im Okt. 2026',
     'blog.article.tasso-disoccupazione-ottobre-2026.excerpt': 'Im Oktober 2026 waren im Kanton Solothurn 4\'543 Arbeitslose registriert, acht Personen weniger als im Vormonat.',
     'blog.article.tasso-disoccupazione-ottobre-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.consiglio-soletta-rifiuta-trasparenza.title': 'Solothurner Rat lehnt Auftrag zur Transparenz bei Kampagnen ab',
+    'blog.article.consiglio-soletta-rifiuta-trasparenza.excerpt': 'Der Solothurner Kantonsrat hat am Mittwoch die Ausarbeitung eines Gesetzes über die Transparenz der Kampagnenfinanzierer mit 63 Gegenstimmen und 31 Ja-Stimmen abgelehnt.',
+    'blog.article.consiglio-soletta-rifiuta-trasparenza.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;

@@ -81,6 +81,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.tasso-disoccupazione-ottobre-2026.title': 'Disoccupazione Canton Soletta ottobre 2026: 4\'543 registrati',
     'blog.article.tasso-disoccupazione-ottobre-2026.excerpt': 'In ottobre 2026 nel Canton Soletta risultavano 4\'543 disoccupati registrati, in diminuzione di otto persone rispetto al mese precedente.',
     'blog.article.tasso-disoccupazione-ottobre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.consiglio-soletta-rifiuta-trasparenza.title': 'Consiglio di Soletta respinge mandato sulla trasparenza delle campagne',
+    'blog.article.consiglio-soletta-rifiuta-trasparenza.excerpt': 'Il Consiglio cantonale di Soletta ha respinto mercoledì l\'elaborazione di una legge sulla trasparenza dei finanziatori delle campagne con 63 voti contrari e 31 favorevoli.',
+    'blog.article.consiglio-soletta-rifiuta-trasparenza.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;

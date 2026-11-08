@@ -81,6 +81,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.tasso-disoccupazione-ottobre-2026.title': 'Chômage dans le canton de Soleure en octobre 2026 : 4\'543 personnes inscrites',
     'blog.article.tasso-disoccupazione-ottobre-2026.excerpt': 'En octobre 2026, 4\'543 chômeurs étaient inscrits dans le canton de Soleure, soit huit personnes de moins que le mois précédent.',
     'blog.article.tasso-disoccupazione-ottobre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.consiglio-soletta-rifiuta-trasparenza.title': 'Le Conseil de Soleure rejette le mandat sur la transparence des campagnes',
+    'blog.article.consiglio-soletta-rifiuta-trasparenza.excerpt': 'Selon le compte rendu publié par Nau.ch, le Conseil cantonal de Soleure a rejeté mercredi l\'élaboration d\'une loi visant à accroître la transparence des campagnes de votation.',
+    'blog.article.consiglio-soletta-rifiuta-trasparenza.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

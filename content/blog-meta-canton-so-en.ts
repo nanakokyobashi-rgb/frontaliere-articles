@@ -81,6 +81,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.tasso-disoccupazione-ottobre-2026.title': 'Unemployment in the Canton of Solothurn, October 2026: 4\'543 registered',
     'blog.article.tasso-disoccupazione-ottobre-2026.excerpt': 'In October 2026, 4\'543 registered unemployed people were recorded in the Canton of Solothurn, a decrease of eight people compared with the previous month.',
     'blog.article.tasso-disoccupazione-ottobre-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.consiglio-soletta-rifiuta-trasparenza.title': 'Solothurn Council rejects mandate on campaign transparency',
+    'blog.article.consiglio-soletta-rifiuta-trasparenza.excerpt': 'The Cantonal Council of Solothurn rejected on Wednesday the drafting of a law on transparency regarding campaign funders, with 63 votes against and 31 in favor.',
+    'blog.article.consiglio-soletta-rifiuta-trasparenza.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

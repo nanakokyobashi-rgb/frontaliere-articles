@@ -1011,6 +1011,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-consiglio-soletta-rifiuta-trasparenza': {
+    title: 'Consiglio di Soletta respinge mandato sulla trasparenza delle campagne',
+    description: 'Il Consiglio cantonale di Soletta ha respinto il mandato sulla trasparenza dei finanziatori delle campagne con 63 voti contrari e 31 favorevoli.',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, soletta, respinge, mandato',
+    ogTitle: 'Consiglio di Soletta respinge mandato sulla trasparenza',
+    ogDescription: 'Il Consiglio cantonale di Soletta ha respinto mercoledì l\'elaborazione di una legge sulla trasparenza dei finanziatori delle campagne con 63 voti contrari e 31 favorevoli.',
+    canonicalPath: '/articoli-soletta/consiglio-soletta-rifiuta-trasparenza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio di Soletta respinge mandato sulla trasparenza delle campagne",
+      "description": "Il Consiglio cantonale di Soletta ha respinto il mandato sulla trasparenza dei finanziatori delle campagne con 63 voti contrari e 31 favorevoli.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-consiglio-soletta-rifiuta-trasparenza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-08T01:34:07+00:00",
+      "dateModified": "2026-11-08T01:34:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/consiglio-soletta-rifiuta-trasparenza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
