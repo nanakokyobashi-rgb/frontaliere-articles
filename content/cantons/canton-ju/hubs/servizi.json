@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-11-08T07:09:01.940Z",
-  "contentHash": "e5969bcf3712df891a44a6db26948cd904af312e5178b3fcb657cd626d73ff71",
+  "updatedAt": "2026-11-08T12:07:40.615Z",
+  "contentHash": "91e5c1a4b0dd7818d5942fdcd5aff01291a782d9c8c72d81ba1098221720833a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-07T20:54:54.841Z",
-      "keyFacts": 0
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-11-07T20:23:01.745Z",
+      "updatedAt": "2026-11-08T00:17:50.046Z",
       "keyFacts": 0
     },
     {
@@ -76,11 +71,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-08T09:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-08T17:30:00.000Z"
             },
             {
@@ -92,25 +82,16 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-11-09T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-10T17:30:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-07T20:54:54.841Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Delémont",
-              "value": "7 °C",
-              "detail": "oggi da 6 a 9 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-07T20:23:01.745Z"
+          "updatedAt": "2026-11-08T00:17:50.046Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -188,7 +169,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-08T07:09:01.940Z"
+      "updatedAt": "2026-11-08T12:07:40.615Z"
     },
     "en": {
       "canton": "JU",
@@ -237,11 +218,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-08T09:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-08T17:30:00.000Z"
             },
             {
@@ -253,25 +229,16 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-11-09T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-10T17:30:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-07T20:54:54.841Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Delémont",
-              "value": "7 °C",
-              "detail": "today from 6 to 9 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-07T20:23:01.745Z"
+          "updatedAt": "2026-11-08T00:17:50.046Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -345,7 +312,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-08T07:09:01.940Z"
+      "updatedAt": "2026-11-08T12:07:40.615Z"
     },
     "de": {
       "canton": "JU",
@@ -394,11 +361,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-08T09:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-08T17:30:00.000Z"
             },
             {
@@ -410,25 +372,16 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-11-09T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-10T17:30:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-07T20:54:54.841Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Delémont",
-              "value": "7 °C",
-              "detail": "heute 6 bis 9 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-07T20:23:01.745Z"
+          "updatedAt": "2026-11-08T00:17:50.046Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -502,7 +455,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-08T07:09:01.940Z"
+      "updatedAt": "2026-11-08T12:07:40.615Z"
     },
     "fr": {
       "canton": "JU",
@@ -551,11 +504,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-08T09:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-08T17:30:00.000Z"
             },
             {
@@ -567,25 +515,16 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-11-09T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-10T17:30:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-07T20:54:54.841Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Delémont",
-              "value": "7 °C",
-              "detail": "aujourd’hui de 6 à 9 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-07T20:23:01.745Z"
+          "updatedAt": "2026-11-08T00:17:50.046Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -655,7 +594,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-08T07:09:01.940Z"
+      "updatedAt": "2026-11-08T12:07:40.615Z"
     }
   }
 }

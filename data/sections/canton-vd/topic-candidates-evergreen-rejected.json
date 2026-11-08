@@ -4,13 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-frontalier-6-au-13-novembre-2026": {
-      "section": "canton-vd",
-      "ts": 1793963070552
-    },
     "canton-vd::https://www.chuv.ch/fr/actualites/actualite/news_actu_1193/mais-ou-est-passee-la-sante-publique": {
       "section": "canton-vd",
       "ts": 1794108914838
+    },
+    "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-frontalier-6-au-13-novembre-2026": {
+      "section": "canton-vd",
+      "ts": 1794139073740
     }
   }
 }

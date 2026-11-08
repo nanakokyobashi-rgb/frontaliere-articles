@@ -261,4 +261,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontalieri-aumento-pausa-2023',
+ category: 'novita',
+ date: '2026-11-08T13:22:41.489Z',
+ image: '/images/blog/article-frontalieri-aumento-pausa-2023.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

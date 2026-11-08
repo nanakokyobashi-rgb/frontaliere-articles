@@ -72,6 +72,9 @@ const blogMetaCantonNeFr: Record<string, string> = {
     'blog.article.ostaj-stagnazione-frontalieri.title': 'Stagnazione frontalieri: dati Ostaj e libro sui legami',
     'blog.article.ostaj-stagnazione-frontalieri.excerpt': 'L\'Observatoire statistique de l\'Arc jurassien (Ostaj) signale une stagnation du nombre de travailleurs frontaliers, dont le nombre a triplé en vingt ans.',
     'blog.article.ostaj-stagnazione-frontalieri.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.frontalieri-aumento-pausa-2023.title': 'Frontaliers : hausse en vingt ans et pause de la dynamique depuis 2023',
+    'blog.article.frontalieri-aumento-pausa-2023.excerpt': 'L\'Observatoire statistique de l\'Arc jurassien (Ostaj) indique qu\'en vingt ans, le nombre de frontaliers a plus que triplé, avec près de 75.000 par jour, mais que la dynamique est en pause depuis 2023.',
+    'blog.article.frontalieri-aumento-pausa-2023.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNeFr;

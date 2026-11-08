@@ -87,6 +87,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.lavoro-zurigo-imprese.title': 'Chômage à 2,9 % à Zurich : les entreprises plus optimistes',
     'blog.article.lavoro-zurigo-imprese.excerpt': 'Fin octobre, le chômage dans le canton de Zurich reste à 2,9 % ; les entreprises portent un jugement plus positif, mais les postes vacants diminuent à 7.010.',
     'blog.article.lavoro-zurigo-imprese.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.zurigo-fondo-abitativo.title': 'Zurich, 2,5 milliards de plus : elle veut un fonds pour le logement',
+    'blog.article.zurigo-fondo-abitativo.excerpt': 'Zurich est décrite comme plus riche de CHF 2,5 milliards et veut un fonds pour le logement de plusieurs centaines de millions, mais le lead doute que cela suffise.',
+    'blog.article.zurigo-fondo-abitativo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;

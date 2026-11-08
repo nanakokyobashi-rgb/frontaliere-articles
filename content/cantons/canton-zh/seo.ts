@@ -1089,6 +1089,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-zurigo-fondo-abitativo': {
+    title: 'Zurigo, 2,5 miliardi in più: vuole un fondo casa',
+    description: 'Zurigo è indicata come più ricca di CHF 2,5 miliardi e vuole un fondo casa da centinaia di milioni, ma il lead dubita che basti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, zurigo, miliardi, vuole, fondo',
+    ogTitle: 'Zurigo: 2,5 miliardi in più e un fondo per l\'alloggio',
+    ogDescription: 'Il titolo parla di una città di Zurigo più ricca di CHF 2,5 miliardi e di centinaia di milioni destinati a un fondo per l\'alloggio. Il lead pubblico definisce il guadagno apparente generoso, ma dubita che risolva i problemi finanziari.',
+    canonicalPath: '/articoli-zurigo/zurigo-fondo-abitativo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zurigo, 2,5 miliardi in più: vuole un fondo casa",
+      "description": "Zurigo è indicata come più ricca di CHF 2,5 miliardi e vuole un fondo casa da centinaia di milioni, ma il lead dubita che basti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-zurigo-fondo-abitativo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-08T12:03:31+00:00",
+      "dateModified": "2026-11-08T12:03:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/zurigo-fondo-abitativo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
