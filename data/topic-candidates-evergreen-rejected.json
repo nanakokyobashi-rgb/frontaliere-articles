@@ -4642,10 +4642,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-08T10:57:41.512Z",
-      "lastStrikeAt": "2026-11-08T13:55:43.240Z",
-      "expiresAt": "2026-12-08T13:55:43.240Z"
+      "lastStrikeAt": "2026-11-08T16:28:10.563Z",
+      "expiresAt": "2026-12-08T16:28:10.563Z"
     },
     {
       "keyword": "vivere a Casalzuigno e lavorare in Ticino da frontaliere",
@@ -4654,10 +4654,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-08T10:58:42.620Z",
-      "lastStrikeAt": "2026-11-08T10:58:42.620Z",
-      "expiresAt": "2026-12-08T10:58:42.620Z"
+      "lastStrikeAt": "2026-11-08T16:37:53.611Z",
+      "expiresAt": "2026-12-08T16:37:53.611Z"
     },
     {
       "keyword": "vivere a Cuveglio e lavorare in Ticino da frontaliere",
@@ -4666,10 +4666,22 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-08T11:00:57.757Z",
-      "lastStrikeAt": "2026-11-08T11:00:57.757Z",
-      "expiresAt": "2026-12-08T11:00:57.757Z"
+      "lastStrikeAt": "2026-11-08T16:47:24.272Z",
+      "expiresAt": "2026-12-08T16:47:24.272Z"
+    },
+    {
+      "keyword": "vivere a Varese e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-08T16:56:29.539Z",
+      "lastStrikeAt": "2026-11-08T16:56:29.539Z",
+      "expiresAt": "2026-12-08T16:56:29.539Z"
     }
   ],
   "legacy": [
