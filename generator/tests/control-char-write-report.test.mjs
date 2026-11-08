@@ -76,7 +76,9 @@ test('un marker C0 emette ::error:: e rifiuta la scrittura', () => {
   const logs = [];
   const writes = [];
   const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
-  expectRejectedWrite('a.ts', `x${B}9y`, 'x9y', { log: (s) => logs.push(s), fsImpl, reportPath: '/tmp/x.jsonl' });
+  expectRejectedWrite('a.ts', `x${B}9y`, 'x9y', {
+    log: (s) => logs.push(s), fsImpl, reportPath: '/tmp/x.jsonl', summaryPath: '',
+  });
   assert.equal(strippedCount(), 1);
   assert.equal(logs.length, 1);
   assert.match(logs[0], /^::error::/, `atteso ::error::, visto: ${logs[0]}`);
