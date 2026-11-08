@@ -4582,10 +4582,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-04T00:56:57.903Z",
-      "lastStrikeAt": "2026-11-04T02:02:51.183Z",
-      "expiresAt": "2026-12-04T02:02:51.183Z"
+      "lastStrikeAt": "2026-11-08T09:25:09.418Z",
+      "expiresAt": "2026-12-08T09:25:09.418Z"
     },
     {
       "keyword": "vivere a Laveno-Mombello e lavorare in Ticino da frontaliere",
