@@ -772,6 +772,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vallese-tasso-disoccupazione-33': {
+    title: 'Vallese, il tasso di disoccupazione tocca il 3,3 per cento',
+    description: 'Nel Canton Vallese, il tasso di disoccupazione ha toccato il 3,3% a ottobre. 6.082 disoccupati nei Rav; ospitalità e agricoltura spiegano quasi il 70% dell\'aumento.',
+    keywords: 'Vallese, disoccupazione, tasso disoccupazione, Rav, ospitalità, agricoltura, ottobre',
+    ogTitle: 'Vallese, il tasso di disoccupazione tocca il 3,3 per cento',
+    ogDescription: 'Il tasso di disoccupazione in Canton Vallese è salito a 3,3% a ottobre. Nei Rav ci sono 6.082 disoccupati, con ospitalità e agricoltura responsabili di quasi il 70% dell\'incremento.',
+    canonicalPath: '/articoli-vallese/vallese-tasso-disoccupazione-33/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vallese, il tasso di disoccupazione tocca il 3,3 per cento",
+      "description": "Nel Canton Vallese, il tasso di disoccupazione ha toccato il 3,3% a ottobre. 6.082 disoccupati nei Rav; ospitalità e agricoltura spiegano quasi il 70% dell'aumento.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-vallese-tasso-disoccupazione-33.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-08T22:41:21+00:00",
+      "dateModified": "2026-11-08T22:41:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/vallese-tasso-disoccupazione-33/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

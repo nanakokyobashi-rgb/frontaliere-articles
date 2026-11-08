@@ -4,54 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/822320/auf-die-13-ahv-verzichten-unm%c3%b6glich-und-alle-weiteren-fragen-zur-ersten-auszahlung": {
-      "section": "canton-vs",
-      "ts": 1793962738622
-    },
-    "canton-vs::https://www.pomona.ch/story/822168/so-stimmen-sie-richtig-ab-kanton-wallis-lanciert-neue-hilfsmittel": {
-      "section": "canton-vs",
-      "ts": 1793962742996
-    },
-    "canton-vs::https://www.pomona.ch/story/822425/ruffiner-reisen-schnappt-postauto-millionenauftrag-weg": {
-      "section": "canton-vs",
-      "ts": 1793968289255
-    },
-    "canton-vs::https://www.pomona.ch/story/820458/ruffiner-reisen-verdr%c3%a4ngt-postauto": {
-      "section": "canton-vs",
-      "ts": 1793968290227
-    },
-    "canton-vs::https://www.pomona.ch/story/823382/just-eat-macht-auf-uber-gr%c3%b6sste-ahvausgleichskasse-schl%c3%a4gt-alarm": {
-      "section": "canton-vs",
-      "ts": 1793971033439
-    },
-    "canton-vs::https://www.pomona.ch/story/821809/vom-spital-zum-wohnquartier-gemeinde-visp-lanciert-studienauftrag": {
-      "section": "canton-vs",
-      "ts": 1793973091892
-    },
-    "canton-vs::https://www.pomona.ch/story/822445/so-will-der-nationalrat-die-aufr%c3%bcstung-finanzieren%c2%a0-sp-droht-mit-referendum": {
-      "section": "canton-vs",
-      "ts": 1793973094601
-    },
-    "canton-vs::https://www.pomona.ch/story/823525/jetzt-auch-in-der-schweiz-metzgerei-muss-nach-cyberangriff-schliessen-auch-k%c3%bchlung-von-volgl%c3%a4den-gest%c3%b6rt": {
-      "section": "canton-vs",
-      "ts": 1793973108557
-    },
-    "canton-vs::https://www.pomona.ch/story/822611/lichterl%c3%b6schen-bei-der-firma-kamintech-in-eyholz-warum-eine-erfolgreiche-%c3%a4ra-zu-ende-geht": {
-      "section": "canton-vs",
-      "ts": 1793982661166
-    },
-    "canton-vs::https://www.pomona.ch/story/823765/der-ahvpoker-wer-zahlt-die-rechnung-wenn-das-volk-nein-sagt": {
-      "section": "canton-vs",
-      "ts": 1793983206284
-    },
-    "canton-vs::https://www.pomona.ch/story/822920/die-walliser-wirtschaft-angesichts-globaler-herausforderungen": {
-      "section": "canton-vs",
-      "ts": 1793983220195
-    },
-    "canton-vs::https://www.pomona.ch/story/822565/hohe-kriminelle-energie-und-ki-cyberangriffe-treffen-vermehrt-kmu-ein-experte-gibt-tipps": {
-      "section": "canton-vs",
-      "ts": 1793983232225
-    },
     "canton-vs::https://www.pomona.ch/story/823211/post-greift-swisscom-an-so-viel-kosten-die-neuen-internet-und-tvabos": {
       "section": "canton-vs",
       "ts": 1794009316792
@@ -123,6 +75,10 @@
     "canton-vs::https://www.pomona.ch/story/824251/kanton-wallis-verweigert-mehreren-brand%c3%bcberlebenden-finanzielle-nothilfe": {
       "section": "canton-vs",
       "ts": 1794112177176
+    },
+    "canton-vs::https://www.pomona.ch/story/822920/die-walliser-wirtschaft-angesichts-globaler-herausforderungen": {
+      "section": "canton-vs",
+      "ts": 1794175953123
     }
   }
 }
