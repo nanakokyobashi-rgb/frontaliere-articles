@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/hoehere-mehrwertsteuer-soll-13-ahv-rente-finanzieren-ein-kommentar-art-1730590": {
-      "section": "canton-sz",
-      "ts": 1793917591011
-    },
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/altdorf-gemeindeversammlung-mit-budget-2027-und-wahlen-art-1730713": {
       "section": "canton-sz",
       "ts": 1793951191096
@@ -35,6 +31,14 @@
     "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/ahv-finanzierung-scheitert-die-steuererhoehung-ende-november-art-1730704": {
       "section": "canton-sz",
       "ts": 1794054670602
+    },
+    "canton-sz::https://www.marchanzeiger.ch/2026/11/06/treffsicher-am-ruetlischiessen": {
+      "section": "canton-sz",
+      "ts": 1794106066096
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/wirtschaftsgeschichten-der-woche-kerosin-manor-steuern-art-1730902": {
+      "section": "canton-sz",
+      "ts": 1794106077573
     }
   }
 }
