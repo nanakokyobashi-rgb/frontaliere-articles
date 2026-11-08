@@ -367,6 +367,20 @@ describe('unicita degli slug localizzati', () => {
     );
   });
 
+  it('marca la collisione del candidato per far ruotare il topic senza abbassare il gate', () => {
+    const unique = source.replace('de: "quellensteuer-tessin-rechner"', 'de: "quellensteuer-tessin-leitfaden"');
+    assert.throws(
+      () => assertLocalizedSlugCandidateUnique(
+        unique,
+        'SWISS_SLUGS',
+        { id: 'nuovo', slugs: { en: 'calculator-article' } },
+        { candidateLocales: ['en'], sourceLabel: 'content/routerSwissData.ts' },
+      ),
+      (error) => error.slugCollision === true
+        && /duplicate EN slug "calculator-article" maps to both "articolo-calcolatore" and "nuovo"/.test(error.message),
+    );
+  });
+
   it('trova il proprietario corrente dello slug escludendo l’articolo rinominato', () => {
     const current = {
       calcolatore: { it: 'calcolatore', en: 'calculator', de: 'quellensteuer-tessin-rechner', fr: 'calculateur' },
@@ -388,6 +402,13 @@ describe('unicita degli slug localizzati', () => {
     const repairWrite = REPAIR_LOCALIZED_TOPONYMS.indexOf('if (WRITE)', repairGate);
     assert.ok(repairGate >= 0 && repairWrite > repairGate, 'il repair deve rifiutare collisioni prima di ogni write');
     assert.match(POST_REBASE_UNIQUENESS, /kind: 'duplicate-localized-slug'/);
+  });
+
+  it('il dispatcher del generatore tratta una collisione candidata come rigetto di qualita\'', () => {
+    const qualityStart = SRC.indexOf('function isQualityRejectError(');
+    const qualityEnd = SRC.indexOf('\n}\n', qualityStart);
+    assert.ok(qualityStart >= 0 && qualityEnd > qualityStart, 'dispatcher dei rigetti non trovato');
+    assert.match(SRC.slice(qualityStart, qualityEnd), /e\.slugCollision === true/);
   });
 
   it('ammette una mappa cantonale assente solo con tutte le sorgenti assenti', () => {

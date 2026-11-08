@@ -285,9 +285,14 @@ export function assertLocalizedSlugCandidateUnique(
     }
     const existing = Object.entries(current).find(([, localized]) => localized[locale] === slug);
     if (existing) {
-      throw new Error(
+      const error = new Error(
         `${sourceLabel}: duplicate ${locale.toUpperCase()} slug "${slug}" maps to both "${existing[0]}" and "${candidate.id}"`,
       );
+      // The candidate is rejected before any write. Producers that can rotate
+      // to another topic must distinguish this content collision from a
+      // malformed/legacy map, which remains an infrastructure failure.
+      error.slugCollision = true;
+      throw error;
     }
   }
   return current;
