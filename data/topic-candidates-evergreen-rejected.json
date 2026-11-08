@@ -4606,10 +4606,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-04T02:04:53.226Z",
-      "lastStrikeAt": "2026-11-04T02:04:53.226Z",
-      "expiresAt": "2026-12-04T02:04:53.226Z"
+      "lastStrikeAt": "2026-11-08T10:52:47.409Z",
+      "expiresAt": "2026-12-08T10:52:47.409Z"
     },
     {
       "keyword": "vivere a Duno e lavorare in Ticino da frontaliere",
@@ -4618,10 +4618,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-04T02:05:05.613Z",
-      "lastStrikeAt": "2026-11-04T02:05:05.613Z",
-      "expiresAt": "2026-12-04T02:05:05.613Z"
+      "lastStrikeAt": "2026-11-08T10:54:03.833Z",
+      "expiresAt": "2026-12-08T10:54:03.833Z"
     },
     {
       "keyword": "vivere a Vertemate con Minoprio e lavorare in Ticino da frontaliere",
@@ -4630,10 +4630,46 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-04T02:05:17.964Z",
-      "lastStrikeAt": "2026-11-04T02:05:17.964Z",
-      "expiresAt": "2026-12-04T02:05:17.964Z"
+      "lastStrikeAt": "2026-11-08T10:55:49.811Z",
+      "expiresAt": "2026-12-08T10:55:49.811Z"
+    },
+    {
+      "keyword": "vivere a Azzate e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-08T10:57:41.512Z",
+      "lastStrikeAt": "2026-11-08T10:57:41.512Z",
+      "expiresAt": "2026-12-08T10:57:41.512Z"
+    },
+    {
+      "keyword": "vivere a Casalzuigno e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-08T10:58:42.620Z",
+      "lastStrikeAt": "2026-11-08T10:58:42.620Z",
+      "expiresAt": "2026-12-08T10:58:42.620Z"
+    },
+    {
+      "keyword": "vivere a Cuveglio e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-08T11:00:57.757Z",
+      "lastStrikeAt": "2026-11-08T11:00:57.757Z",
+      "expiresAt": "2026-12-08T11:00:57.757Z"
     }
   ],
   "legacy": [
@@ -12948,6 +12984,10 @@
     "frontaliere::https://www.rsi.ch/s/4224038": {
       "section": "frontaliere",
       "ts": 1794117641610
+    },
+    "frontaliere::https://comozero.it/attualita/politica-trasporti-svizzera-limiti-80-tassa-auto-elettriche": {
+      "section": "frontaliere",
+      "ts": 1794135108109
     }
   }
 }
