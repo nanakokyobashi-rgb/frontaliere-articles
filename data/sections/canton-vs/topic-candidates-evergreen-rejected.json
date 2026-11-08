@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.ossolanews.it/2026/11/05/leggi-notizia/argomenti/attualita-26/articolo/frontalieri-piu-risorse-per-gli-stipendi-nel-vco-il-piemonte-pronto-a-ricevere-i-fondi.html": {
-      "section": "canton-vs",
-      "ts": 1793919237517
-    },
     "canton-vs::https://www.pomona.ch/story/822320/auf-die-13-ahv-verzichten-unm%c3%b6glich-und-alle-weiteren-fragen-zur-ersten-auszahlung": {
       "section": "canton-vs",
       "ts": 1793962738622
@@ -115,6 +111,10 @@
     "canton-vs::https://www.pomona.ch/story/824255/klare-lohnforderungen-und-weichenstellungen-f%c3%bcr-die-zukunft": {
       "section": "canton-vs",
       "ts": 1794085663641
+    },
+    "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
+      "section": "canton-vs",
+      "ts": 1794102337700
     }
   }
 }
