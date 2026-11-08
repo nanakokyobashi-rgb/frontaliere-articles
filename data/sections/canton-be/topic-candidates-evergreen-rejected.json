@@ -4,30 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/705628/mehr-arbeitslose-im-kanton-bern%c2%a0-biel-bleibt-auf-hohem-niveau": {
-      "section": "canton-be",
-      "ts": 1793935765795
-    },
-    "canton-be::https://ajour.ch/story/704729/warum-die-neuen-berner-%c3%b6vanzeigen-gleich-aussehen-wie-die-in-biel": {
-      "section": "canton-be",
-      "ts": 1793935767233
-    },
-    "canton-be::https://ajour.ch/story/705630/le-chmage-augmente-lgrement-dans-le-canton-de-berne": {
-      "section": "canton-be",
-      "ts": 1793935768733
-    },
-    "canton-be::https://ajour.ch/story/705732/zwei-strassen-wegen-bauarbeiten-gesperrt": {
-      "section": "canton-be",
-      "ts": 1793935770021
-    },
-    "canton-be::https://ajour.ch/story/705819/hackerattacken-auf-gewerbe-bund-begr%c3%bcsst-freiwillige-meldungen": {
-      "section": "canton-be",
-      "ts": 1793935771360
-    },
-    "canton-be::https://ajour.ch/story/705070/die-neuen-verkehrsregeln-in-nidau-dort-d%c3%bcrfen-autos-ab-jetzt-nicht-mehr-durch": {
-      "section": "canton-be",
-      "ts": 1793935772678
-    },
     "canton-be::https://ajour.ch/story/705333/plainte-en-ligne-pour-violences-sexuelles-dans-le-canton-de-berne": {
       "section": "canton-be",
       "ts": 1793950396885
@@ -123,6 +99,18 @@
     "canton-be::https://ajour.ch/story/705977/stau-auf-der-bernstrasse-verkehrsplanung-ohne-folgeplan": {
       "section": "canton-be",
       "ts": 1794104796757
+    },
+    "canton-be::https://ajour.ch/story/705630/le-chmage-augmente-lgrement-dans-le-canton-de-berne": {
+      "section": "canton-be",
+      "ts": 1794111203600
+    },
+    "canton-be::https://ajour.ch/story/705628/mehr-arbeitslose-im-kanton-bern%c2%a0-biel-bleibt-auf-hohem-niveau": {
+      "section": "canton-be",
+      "ts": 1794111205897
+    },
+    "canton-be::https://ajour.ch/story/705819/hackerattacken-auf-gewerbe-bund-begr%c3%bcsst-freiwillige-meldungen": {
+      "section": "canton-be",
+      "ts": 1794111207568
     }
   }
 }
