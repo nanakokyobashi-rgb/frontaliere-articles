@@ -63,6 +63,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.riconoscimento-familiari-assistenti-uri.title': 'Uri: Anerkennung für pflegende Angehörige',
     'blog.article.riconoscimento-familiari-assistenti-uri.excerpt': 'Am 30. Oktober dankte Uri den pflegenden Angehörigen. Christian Arnold überreichte Annemarie Arnold ein Präsent.',
     'blog.article.riconoscimento-familiari-assistenti-uri.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.rene-schuler-unterschachen.title': 'René Schuler wird das Gemeindepräsidium von Unterschächen übernehmen',
+    'blog.article.rene-schuler-unterschachen.excerpt': 'René Schuler wird Anfang 2027 das Gemeindepräsidium von Unterschächen übernehmen und André Bissig nachfolgen, der den Gemeinderat Ende des Jahres verlassen wird.',
+    'blog.article.rene-schuler-unterschachen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;

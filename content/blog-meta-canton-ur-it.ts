@@ -63,6 +63,9 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.riconoscimento-familiari-assistenti-uri.title': 'Uri: riconoscimento ai familiari assistenti',
     'blog.article.riconoscimento-familiari-assistenti-uri.excerpt': 'Il 30 ottobre Uri ha ringraziato i familiari assistenti. Christian Arnold ha consegnato un omaggio ad Annemarie Arnold.',
     'blog.article.riconoscimento-familiari-assistenti-uri.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.rene-schuler-unterschachen.title': 'René Schuler assumerà la presidenza di Unterschächen',
+    'blog.article.rene-schuler-unterschachen.excerpt': 'René Schuler assumerà a inizio 2027 la presidenza di Unterschächen e succederà ad André Bissig, che lascerà il Gemeinderat a fine anno.',
+    'blog.article.rene-schuler-unterschachen.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonUrIt;
