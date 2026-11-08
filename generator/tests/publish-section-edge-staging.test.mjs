@@ -19,6 +19,7 @@ import {
 } from '../../scripts/publish-section-edge.mjs';
 import { EDGE_SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 import { makeSectionBootstrapLock } from '../../scripts/lib/section-bootstrap-lock.mjs';
+import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
 
 const bytes = Buffer.from('staging-fixture');
 const file = {
@@ -158,6 +159,100 @@ test('publishRelease resta fail-closed quando un adapter CDN restituisce 200 sen
   assert.deepEqual(result, { code: 1, phase: 'staging', flipped: false });
   assert.deepEqual(removed, [key]);
   assert.equal(requests.length, 2);
+});
+
+test('il publisher concede un budget bounded separato all handshake finale dopo la readiness', async (t) => {
+  const commit = 'e'.repeat(40);
+  const base = releaseBase(commit);
+  const sitemapName = 'sitemap-articles-canton-ti.xml';
+  const sitemapBytes = Buffer.from('<urlset />');
+  const tempDir = mkdtempSync(join(tmpdir(), 'section-edge-bootstrap-budget-'));
+  t.after(() => rmSync(tempDir, { recursive: true, force: true }));
+  const sitemapFile = {
+    name: sitemapName,
+    bytes: sitemapBytes.length,
+    sha256: createHash('sha256').update(sitemapBytes).digest('hex'),
+    local: join(tempDir, sitemapName),
+  };
+  writeFileSync(sitemapFile.local, sitemapBytes);
+  sitemapFile.key = `${base}${sitemapName}`;
+
+  const start = Date.now();
+  let now = start;
+  const lock = makeSectionBootstrapLock({
+    section: 'canton-ti',
+    commit,
+    owner: 'nanakokyobashi-rgb/frontaliere-articles:12345:1',
+    now: start,
+    ttlMs: 60 * 60 * 1000,
+  });
+  let lockReads = 0;
+  let acquireAttempts = 0;
+  let flips = 0;
+  const result = await publishRelease({
+    commit,
+    base,
+    registry: { schema: 1, commit, sections: { 'canton-ti': { status: 'live' } } },
+    live: ['canton-ti'],
+    files: [sitemapFile],
+    pointer: {
+      schema: 1,
+      commit,
+      sections: { 'canton-ti': { status: 'live' } },
+      release: {
+        commit,
+        base,
+        files: { [sitemapName]: { sha256: sitemapFile.sha256, bytes: sitemapFile.bytes } },
+        previous: null,
+      },
+    },
+  }, {
+    env: {
+      R2_ACCESS_KEY_ID: 'test',
+      R2_SECRET_ACCESS_KEY: 'test',
+      R2_S3_ENDPOINT: 'test',
+      R2_BUCKET: 'test',
+      CF_API_TOKEN: 'test',
+    },
+    io: {
+      fetchBytes: async (url) => {
+        if (url === `${CDN}/${EDGE_SECTION_REGISTRY_FILE}`) return { status: 404 };
+        if (url === `${CDN}/${sitemapFile.key}`) return { status: 200, body: sitemapBytes };
+        if (url === `${CDN}/edge/sections/_bootstrap-locks/canton-ti.json`) {
+          lockReads += 1;
+          return now < start + 100 ? { status: 200, body: Buffer.from(JSON.stringify(lock)) } : { status: 404 };
+        }
+        if (url.startsWith(`${CDN}/edge/sections/`)) {
+          return { status: 200, body: Buffer.from(CORPUS_ROUTE_OWNER_META_TAG) };
+        }
+        return { status: 404 };
+      },
+      upload: (_local, key) => {
+        if (key === EDGE_SECTION_REGISTRY_FILE) flips += 1;
+        return true;
+      },
+      remove: () => true,
+      readBootstrapLockOwnerRun: async () => ({ state: 'active', status: 'in_progress' }),
+      acquireBootstrapLock: async () => {
+        acquireAttempts += 1;
+        return acquireAttempts <= 2 ? 'busy' : 'acquired';
+      },
+      releaseBootstrapLock: async () => true,
+      purge: () => true,
+    },
+    bootstrapWaitMs: 100,
+    bootstrapLockAcquireWaitMs: 100,
+    bootstrapRetryMs: 20,
+    stagingVerifyAttempts: 1,
+    now: () => now,
+    sleep: async (ms) => { now += ms; },
+    log: () => {},
+  });
+
+  assert.deepEqual(result, { code: 0, phase: 'done', flipped: true });
+  assert.equal(lockReads, 6, 'la readiness usa tutto il proprio budget prima dell handshake');
+  assert.equal(acquireAttempts, 3, 'il lock viene ritentato nel budget indipendente');
+  assert.equal(flips, 1, 'il puntatore viene flippato solo dopo il lease');
 });
 
 test('publishRelease verifica la HEAD subito prima del flip edge', async () => {

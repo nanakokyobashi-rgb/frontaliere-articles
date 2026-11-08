@@ -206,10 +206,15 @@ on:
         default: ''
         type: string
 
-# One publish at a time, and never cancel one in flight: a half-written data
-# surface is worse than a slightly stale one.
+# Keep every publisher in one FIFO queue and never cancel an active run: a
+# half-written data surface is worse than a slightly stale one. `queue: max`
+# keeps up to 100 pending runs instead of replacing one; a bounded replay can
+# therefore never evict a pending main push. The preflight coalesces compatible
+# sources, skips stale pinned replays, and the in-job freshness barrier disables
+# remaining steps if main advances during a run.
 concurrency:
   group: publish-api
+  queue: max
   cancel-in-progress: false
 
 permissions:
@@ -223,18 +228,129 @@ permissions:
   issues: write
 
 jobs:
-  publish:
+  source_preflight:
     runs-on: ubuntu-latest
-    # MISURATO 2026-08-09: la run riuscita piu' recente (31315163937) impiega 44s
-    # in totale, di cui 6s per "Build data surface" e 22s per la spinta all'edge.
-    # Il budget esteso copre l'attesa bounded dei bootstrap, lo staging edge e il
-    # rilascio concorrente dei lease dopo il flip. Se il bootstrap termina prima,
-    # il suo replay rilancia comunque publish-api per riconciliare la release.
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      publish: ${{ steps.classify.outputs.publish }}
+      source_commit: ${{ steps.classify.outputs.source_commit }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # Classify with the workflow revision that GitHub started. The
+          # publisher job receives a resolved main commit only after this
+          # revision has been checked against current main.
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Classify publish source freshness
+        id: classify
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
+          EXPLICIT_REPLAY: ${{ inputs.source_commit != '' }}
+          WORKFLOW_COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if ! current_main="$(timeout --kill-after=1s 60s gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
+            echo "::error::impossibile verificare la HEAD corrente di main nel preflight"
+            exit 1
+          fi
+          if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::HEAD corrente di main non e' una SHA completa: $current_main"
+            exit 1
+          fi
+          if ! git fetch --no-tags origin main; then
+            echo "::error::impossibile scaricare la HEAD corrente di main nel preflight"
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor "$WORKFLOW_COMMIT" "$current_main"; then
+            echo "::error::revisione workflow=$WORKFLOW_COMMIT non riconciliabile con main=$current_main"
+            exit 1
+          fi
+          if [ -n "$SOURCE_COMMIT" ]; then
+            if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::source_commit non e' una SHA completa"
+              exit 1
+            fi
+            if ! git cat-file -e "$SOURCE_COMMIT^{commit}" 2>/dev/null; then
+              if ! git fetch --no-tags origin "$SOURCE_COMMIT"; then
+                echo "::error::source_commit non e' raggiungibile per il replay bounded"
+                exit 1
+              fi
+            fi
+            if ! git merge-base --is-ancestor "$SOURCE_COMMIT" "$current_main"; then
+              echo "::error::source_commit=$SOURCE_COMMIT non e' antenato di main=$current_main"
+              exit 1
+            fi
+          else
+            SOURCE_COMMIT="$WORKFLOW_COMMIT"
+          fi
+
+          # The publisher job loads its scripts from current main but its
+          # workflow and isolated runtime support from WORKFLOW_COMMIT. If any
+          # executable publisher/orchestration input changed in between, skip
+          # this stale run cleanly; the newer push run owns that source/runtime
+          # pair. Content and data changes remain eligible for coalescing.
+          set +e
+          git diff --quiet "$WORKFLOW_COMMIT" "$current_main" -- \
+            .github/workflows/publish-api.yml \
+            .github/actions/setup-article-source-runtime \
+            engine host scripts generator/scripts generator/data \
+            articleSections.ts package.json package-lock.json \
+            generator/package.json generator/package-lock.json
+          orchestration_diff_status=$?
+          set -e
+          if [ "$orchestration_diff_status" -gt 1 ]; then
+            echo "::error::impossibile confrontare il runtime publisher con current main"
+            exit 1
+          fi
+          if [ "$orchestration_diff_status" -eq 1 ]; then
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            echo "source_commit=$current_main" >> "$GITHUB_OUTPUT"
+            echo "::notice::publish-api superato: il workflow/runtime $WORKFLOW_COMMIT e' stato superato da main=$current_main; il job publisher viene saltato senza errore"
+            exit 0
+          fi
+
+          api_input_changed="$(
+            SOURCE_COMMIT="$SOURCE_COMMIT" CURRENT_MAIN="$current_main" node --input-type=module -e '
+              import { apiInputChangedInRange } from "./scripts/lib/publish-api-input-range.mjs";
+              process.stdout.write(String(apiInputChangedInRange({
+                before: process.env.SOURCE_COMMIT,
+                after: process.env.CURRENT_MAIN,
+              })));
+            '
+          )"
+          if [ "$api_input_changed" = 'true' ]; then
+            if [ "$EXPLICIT_REPLAY" = 'true' ]; then
+              echo "publish=false" >> "$GITHUB_OUTPUT"
+              echo "source_commit=$current_main" >> "$GITHUB_OUTPUT"
+              echo "::notice::replay bounded superato: main=$current_main contiene input API piu' recenti del commit delle pagine=$SOURCE_COMMIT; la push corrente mantiene la pubblicazione"
+              exit 0
+            fi
+            echo "::notice::publish-api coalesced: main=$current_main contiene input API piu' recenti della sorgente=$SOURCE_COMMIT; pubblichera' la sorgente corrente"
+          else
+            echo "::notice::publish-api riallineato alla HEAD corrente $current_main: nessun input API nel delta"
+          fi
+          echo "publish=true" >> "$GITHUB_OUTPUT"
+          echo "source_commit=$current_main" >> "$GITHUB_OUTPUT"
+
+  publish:
+    needs: source_preflight
+    if: needs.source_preflight.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    # Il budget copre build/deploy, la finestra bounded di readiness del bootstrap
+    # e un secondo budget bounded per acquisire i lease edge. Tenerli distinti
+    # evita che una readiness lenta lasci senza tempo la gara finale del lock.
     # workflow e `generator-ci.yml` erano gli unici due dei
     # 31 senza `timeout-minutes`, e qui l'assenza pesa il doppio: la concurrency
-    # `publish-api` NON cancella (`cancel-in-progress: false`), quindi un job
-    # appeso non fallisce — mette in coda ogni pubblicazione successiva dietro di
-    # se'. Il default di GitHub e' 6 ORE.
+    # `publish-api` NON cancella (`cancel-in-progress: false`), quindi
+    # un job appeso non fallisce — mette in coda ogni pubblicazione successiva
+    # dietro di se'. Il default di GitHub e' 6 ORE.
     #
     # Il retry aggiunto sotto rende il tetto necessario, non solo prudente:
     # 3 tentativi con backoff lineare allungano il caso peggiore, e senza un
@@ -253,7 +369,7 @@ jobs:
     # un job parcheggiato al gate non e' in esecuzione, e GitHub non gli applica
     # nessuna scadenza. Run 36762664618 e' rimasta in `waiting` dal
     # 2026-09-30T19:00:51Z con `wait_timer: 0` e `reviewers: []`, tenendo il
-    # gruppo `publish-api` e facendo finire `cancelled` ogni push successivo.
+    # gruppo principale e facendo finire `cancelled` ogni push successivo.
     # L'environment non si puo' togliere (actions/deploy-pages lega il
     # deployment alla run tramite la sua identita' OIDC): la via d'uscita e'
     # publish-api-unwedge.yml, che ogni 15 minuti cancella SOLO le run ferme in
@@ -264,12 +380,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          # Un replay post-bootstrap puo' essere dispatchato mentre main si
-          # muove. Il chiamante passa la revisione che ha caricato gli HTML;
-          # partiamo da quel ref e il guard sotto riallinea solo gli avanzamenti
-          # non-API, cosi' il registry API non annuncia una release diversa dalle
-          # pagine quando la storia contiene soltanto bookkeeping/workflow.
-          ref: ${{ inputs.source_commit || github.sha }}
+          # Il preflight risolve il ref dopo avere verificato la compatibilita'
+          # del workflow/runtime con la HEAD di main.
+          ref: ${{ needs.source_preflight.outputs.source_commit }}
           # fetch-depth: 0 perche' `github.event.before` deve essere raggiungibile
           # dal passo sotto: senza storia completa il diff sui corpi toccati non
           # si calcola, e lo scoping del preflight deve poter ricadere su
@@ -324,16 +437,17 @@ jobs:
       - name: Setup isolated article source runtime
         uses: ./.article-source-runtime/.github/actions/setup-article-source-runtime
 
-      # Every trigger is serialized, but a queued run can still start from the
-      # ref that was current when it was dispatched. A stale publisher must
-      # never overwrite a newer API surface. Non-API advances can be rebased to
-      # current main; an API advance remains fail-closed so the push-triggered
-      # run for that revision owns the release.
+      # Recheck after preflight to close the race where main advances while the
+      # publisher runner is being prepared. The preflight resolved the source
+      # to main, so this automatic path may coalesce newer API inputs only when
+      # the workflow/runtime compatibility check still holds.
       - name: Verify publish source is current main
+        id: source-current
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
-          SOURCE_COMMIT: ${{ inputs.source_commit }}
+          PREFLIGHT_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
+          EXPLICIT_REPLAY: ${{ inputs.source_commit != '' }}
         run: |
           set -euo pipefail
           if ! current_main="$(timeout --kill-after=1s 60s gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
@@ -345,59 +459,44 @@ jobs:
             exit 1
           fi
           checked_out="$(git rev-parse HEAD)"
-
-          if [ -z "$SOURCE_COMMIT" ]; then
-            if [ "$checked_out" = "$current_main" ]; then
-              echo "sorgente publish confermata sulla HEAD corrente di main $current_main"
-              echo "PUBLISH_API_SOURCE_COMMIT=$current_main" >> "$GITHUB_ENV"
-              exit 0
-            fi
-            if ! git fetch --no-tags origin main; then
-              echo "::error::impossibile scaricare la HEAD corrente di main per riallineare il publish"
-              exit 1
-            fi
-            if ! git merge-base --is-ancestor "$checked_out" "$current_main"; then
-              echo "::error::publish non riconciliabile: checkout=$checked_out non e' antenato di main=$current_main"
-              exit 1
-            fi
-            api_input_changed="$(
-              SOURCE_COMMIT="$checked_out" CURRENT_MAIN="$current_main" node --input-type=module -e '
-                import { apiInputChangedInRange } from "./scripts/publish-section-pages.mjs";
-                process.stdout.write(String(apiInputChangedInRange({
-                  before: process.env.SOURCE_COMMIT,
-                  after: process.env.CURRENT_MAIN,
-                })));
-              '
-            )"
-            if [ "$api_input_changed" = 'true' ]; then
-              echo "::error::publish stantio: main=$current_main contiene input API piu' recenti del checkout=$checked_out; attendo il run della nuova push"
-              exit 1
-            fi
-            git checkout --detach "$current_main"
-            echo "PUBLISH_API_SOURCE_COMMIT=$current_main" >> "$GITHUB_ENV"
-            echo "::notice::publish riallineato dal checkout $checked_out alla HEAD corrente $current_main: nessun input API nel delta"
-            exit 0
-          fi
-
-          if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
-            echo "::error::source_commit non e' una SHA completa"
+          if [ "$checked_out" != "$PREFLIGHT_SOURCE_COMMIT" ]; then
+            echo "::error::checkout=$checked_out non corrisponde alla sorgente approvata dal preflight=$PREFLIGHT_SOURCE_COMMIT"
             exit 1
           fi
-          if [ "$current_main" = "$SOURCE_COMMIT" ]; then
-            echo "replay bounded confermato sulla HEAD di main $SOURCE_COMMIT"
-            echo "PUBLISH_API_SOURCE_COMMIT=$SOURCE_COMMIT" >> "$GITHUB_ENV"
+
+          if [ "$checked_out" = "$current_main" ]; then
+            echo "sorgente publish confermata sulla HEAD corrente di main $current_main"
+            echo "PUBLISH_API_SOURCE_COMMIT=$current_main" >> "$GITHUB_ENV"
             exit 0
           fi
           if ! git fetch --no-tags origin main; then
-            echo "::error::impossibile scaricare la HEAD corrente di main per il replay bounded"
+            echo "::error::impossibile scaricare la HEAD corrente di main per riallineare il publish"
             exit 1
           fi
-          if ! git merge-base --is-ancestor "$SOURCE_COMMIT" "$current_main"; then
-            echo "::error::replay bounded non riconciliabile: source_commit=$SOURCE_COMMIT non e' antenato di main=$current_main"
+          if ! git merge-base --is-ancestor "$checked_out" "$current_main"; then
+            echo "::error::publish non riconciliabile: checkout=$checked_out non e' antenato di main=$current_main"
             exit 1
+          fi
+          set +e
+          git diff --quiet "$GITHUB_SHA" "$current_main" -- \
+            .github/workflows/publish-api.yml \
+            .github/actions/setup-article-source-runtime \
+            engine host scripts generator/scripts generator/data \
+            articleSections.ts package.json package-lock.json \
+            generator/package.json generator/package-lock.json
+          orchestration_diff_status=$?
+          set -e
+          if [ "$orchestration_diff_status" -gt 1 ]; then
+            echo "::error::impossibile confrontare il runtime publisher con current main"
+            exit 1
+          fi
+          if [ "$orchestration_diff_status" -eq 1 ]; then
+            echo "PUBLISH_API_SKIP=true" >> "$GITHUB_ENV"
+            echo "::notice::publish-api saltato: main ha superato workflow/runtime dopo il preflight; tutte le fasi successive restano disattivate"
+            exit 0
           fi
           api_input_changed="$(
-            SOURCE_COMMIT="$SOURCE_COMMIT" CURRENT_MAIN="$current_main" node --input-type=module -e '
+            SOURCE_COMMIT="$checked_out" CURRENT_MAIN="$current_main" node --input-type=module -e '
               import { apiInputChangedInRange } from "./scripts/publish-section-pages.mjs";
               process.stdout.write(String(apiInputChangedInRange({
                 before: process.env.SOURCE_COMMIT,
@@ -406,12 +505,17 @@ jobs:
             '
           )"
           if [ "$api_input_changed" = 'true' ]; then
-            echo "::error::replay bounded stale: main=$current_main contiene input API piu' recenti di source_commit=$SOURCE_COMMIT; il push-triggered publish-api deve pubblicare quella release"
-            exit 1
+            if [ "$EXPLICIT_REPLAY" = 'true' ]; then
+              echo "PUBLISH_API_SKIP=true" >> "$GITHUB_ENV"
+              echo "::notice::replay bounded superato dopo il preflight: main=$current_main contiene input API piu' recenti del commit delle pagine=$checked_out; le fasi successive restano disattivate"
+              exit 0
+            fi
+            echo "::notice::publish superato coalesced: main=$current_main contiene input API piu' recenti del checkout=$checked_out; questo run pubblica la sorgente corrente"
+          else
+            echo "::notice::publish riallineato dal checkout $checked_out alla HEAD corrente $current_main: nessun input API nel delta"
           fi
           git checkout --detach "$current_main"
           echo "PUBLISH_API_SOURCE_COMMIT=$current_main" >> "$GITHUB_ENV"
-          echo "::notice::replay bounded riallineato dalla sorgente $SOURCE_COMMIT alla HEAD corrente $current_main: nessun input publish-api nel delta"
 
       # ── PREFLIGHT: la sintassi dei corpi articolo ────────────────────────────
       #
@@ -441,6 +545,7 @@ jobs:
       # rotto si scopre in una decina di secondi, senza montare segreti ne'
       # produrre un artefatto da buttare.
       - name: Install the preflight parser (esbuild)
+        if: env.PUBLISH_API_SKIP != 'true'
         env:
           # Pin ESATTO, non un range. Un gate che cambia parser da solo puo'
           # iniziare a rifiutare qualcosa senza che nessuno abbia toccato una
@@ -474,6 +579,7 @@ jobs:
       # calcolabile in modo pulito: `workflow_dispatch` non ha un `before`,
       # `before` puo' essere assente o irraggiungibile dopo un force-push.
       - name: Determine which article bodies this push touched
+        if: env.PUBLISH_API_SKIP != 'true'
         id: changed-bodies
         env:
           BEFORE: ${{ github.event.before }}
@@ -581,6 +687,7 @@ jobs:
           echo "changed-files-path=$changed_files_path" >> "$GITHUB_OUTPUT"
 
       - name: Preflight — i corpi articolo devono parsare come TypeScript
+        if: env.PUBLISH_API_SKIP != 'true'
         env:
           PREFLIGHT_ESBUILD_DIR: ${{ runner.temp }}/preflight
           PREFLIGHT_SCAN_MODE: ${{ steps.changed-bodies.outputs.scan-mode }}
@@ -595,12 +702,14 @@ jobs:
         run: node scripts/ci/check-blog-body-syntax.mjs
 
       - name: Preflight — i link Markdown devono avere una destinazione canonica
+        if: env.PUBLISH_API_SKIP != 'true'
         env:
           PREFLIGHT_SCAN_MODE: ${{ steps.changed-bodies.outputs.scan-mode }}
           PREFLIGHT_CHANGED_FILES_FILE: ${{ steps.changed-bodies.outputs.changed-files-path }}
         run: node scripts/ci/check-blog-body-links.mjs
 
       - name: Preflight — ogni locale deve avere tutti i body dell’italiano
+        if: env.PUBLISH_API_SKIP != 'true'
         run: node scripts/ci/check-blog-locale-completeness.mjs
 
       # ── LA RETE DI SICUREZZA CHE MANCAVA (issue #267, #245 item 2) ──────────
@@ -729,6 +838,7 @@ jobs:
       # pubblicato non c'entra. Stessa distinzione gia' fatta sopra per
       # `news-scan-quality.test.mjs`.
       - name: Preflight — le guardie sul corpus generato (fabrication, segnaposto, slug i18n, eco della fonte, residuo cifra-lettera, coerenza FAQ, duplicati cross-sezione)
+        if: env.PUBLISH_API_SKIP != 'true'
         run: |
           node --test \
             generator/tests/article-fabrication-guard.test.mjs \
@@ -746,6 +856,7 @@ jobs:
       # Best-effort: publishing the API surface must not depend on them, so a
       # missing service account degrades to "no edge push", not a failed run.
       - name: Prepare Firebase credentials
+        if: env.PUBLISH_API_SKIP != 'true'
         id: fbcreds
         continue-on-error: true
         env:
@@ -760,7 +871,7 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
       - name: Load secrets from Remote Config
-        if: steps.fbcreds.outcome == 'success'
+        if: env.PUBLISH_API_SKIP != 'true' && steps.fbcreds.outcome == 'success'
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
@@ -780,6 +891,7 @@ jobs:
       # `dist/api/` mezzo vecchio e mezzo nuovo.
       # Costa poco anche quando non serve: misurato, questo step dura 6s.
       - name: Build data surface
+        if: env.PUBLISH_API_SKIP != 'true'
         run: bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/build-api.mjs
 
       # The runtime index the SITE's article LISTS read. Publishing an article
@@ -789,12 +901,14 @@ jobs:
       # every list until the site redeployed — the last thing generation here
       # still needed from over there.
       - name: Build the runtime blog index
+        if: env.PUBLISH_API_SKIP != 'true'
         run: node scripts/build-blog-index.mjs
 
       # The builder already refuses to emit an empty registry; this is the second
       # gate, on the artifact rather than the process, so a truncated write can
       # never be published over a good copy.
       - name: Verify artifact
+        if: env.PUBLISH_API_SKIP != 'true'
         env:
           # On a push, the previous publish is github.event.before, not HEAD^:
           # a push may contain more than one commit. Workflow dispatch has no
@@ -953,11 +1067,11 @@ jobs:
       # queued run can spend a long time between artifact verification and
       # publication.
       - name: Verify source before governed cover publish
-        if: github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        if: env.PUBLISH_API_SKIP != 'true' && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
-          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           VERIFY_CONTEXT: governed cover publish
         run: bash scripts/ci/verify-publish-api-source-current.sh
 
@@ -967,19 +1081,20 @@ jobs:
       # queue. A failed upload therefore blocks the deploy and leaves the exact
       # paths for the next scheduled or manual reconciliation.
       - name: Publish governed blog cover bytes before Pages deploy
-        if: github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        if: env.PUBLISH_API_SKIP != 'true' && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
         env:
           BEFORE: ${{ github.event.before }}
-          SHA: ${{ github.sha }}
+          SHA: ${{ needs.source_preflight.outputs.source_commit }}
           EVENT_NAME: ${{ github.event_name }}
           REF: ${{ github.ref }}
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
-          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           VERIFY_CONTEXT: governed cover publish (inside step)
         run: |
           set -euo pipefail
           bash scripts/ci/verify-publish-api-source-current.sh
+          if [ -f "$RUNNER_TEMP/publish-api-skip" ]; then exit 0; fi
           if [ "$REF" != 'refs/heads/main' ]; then
             echo "::error::cover CDN reconciliation is allowed only from refs/heads/main (got $REF)"
             exit 1
@@ -1125,8 +1240,10 @@ jobs:
                   return 1
                 fi
                 if [ "$api_input_changed" = 'true' ]; then
-                  echo "::error::cover queue push ha incorporato input API tra $source_commit e $queued_head; il run della nuova push deve possedere la pubblicazione"
-                  return 1
+                  echo "PUBLISH_API_SKIP=true" >> "$GITHUB_ENV"
+                  printf 'true\n' > "$RUNNER_TEMP/publish-api-skip"
+                  echo "::notice::publish-api saltato: il commit cover-queue ha incorporato input API tra $source_commit e $queued_head"
+                  return 0
                 fi
                 echo "PUBLISH_API_SOURCE_COMMIT=$queued_head" >> "$GITHUB_ENV"
                 export PUBLISH_API_SOURCE_COMMIT="$queued_head"
@@ -1200,6 +1317,7 @@ jobs:
           fi
 
           bash scripts/ci/verify-publish-api-source-current.sh
+          if [ -f "$RUNNER_TEMP/publish-api-skip" ]; then exit 0; fi
           mapfile -t manifest_entries < "$manifest_file"
           if [ "${#manifest_entries[@]}" -eq 0 ]; then
             if [ "$EVENT_NAME" = 'push' ] && { [ -z "${BEFORE:-}" ] || [[ "$BEFORE" =~ ^0+$ ]]; }; then
@@ -1264,6 +1382,7 @@ jobs:
       # only in this build log. Best-effort by construction (see the script):
       # it swallows its own errors and always exits 0.
       - name: Alert on shadowed ticker articles (non-blocking, detect-only per #293)
+        if: env.PUBLISH_API_SKIP != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -1272,36 +1391,41 @@ jobs:
           GH_TOKEN="${runtime_pat:-$GH_TOKEN}" node scripts/ci/ticker-shadow-alert.mjs
 
       - name: Verify source before Pages publish
+        if: env.PUBLISH_API_SKIP != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
-          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           VERIFY_CONTEXT: Pages publish
         run: bash scripts/ci/verify-publish-api-source-current.sh
 
       - uses: actions/configure-pages@v6
+        if: env.PUBLISH_API_SKIP != 'true'
 
       - uses: actions/upload-pages-artifact@v5
+        if: env.PUBLISH_API_SKIP != 'true'
         with:
           path: dist/api
 
       - name: Verify source is still current before Pages deploy
+        if: env.PUBLISH_API_SKIP != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
-          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           VERIFY_CONTEXT: Pages deploy
         run: bash scripts/ci/verify-publish-api-source-current.sh
 
       - id: deploy
+        if: env.PUBLISH_API_SKIP != 'true'
         uses: actions/deploy-pages@v5
 
       - name: Verify source is still current before edge upload
-        if: steps.deploy.outcome == 'success'
+        if: env.PUBLISH_API_SKIP != 'true' && steps.deploy.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
-          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           VERIFY_CONTEXT: edge upload
         run: bash scripts/ci/verify-publish-api-source-current.sh
 
@@ -1324,16 +1448,16 @@ jobs:
       # optimisation over a passthrough that already works, so a missing
       # credential or a failed upload must never fail a good publish.
       - name: Verify source before edge document publish
-        if: steps.deploy.outcome == 'success'
+        if: env.PUBLISH_API_SKIP != 'true' && steps.deploy.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
-          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           VERIFY_CONTEXT: edge document publish
         run: bash scripts/ci/verify-publish-api-source-current.sh
 
       - name: Push the article sitemaps and the blog index to the edge
-        if: steps.deploy.outcome == 'success'
+        if: env.PUBLISH_API_SKIP != 'true' && steps.deploy.outcome == 'success'
         continue-on-error: true
         run: |
           set -euo pipefail
@@ -1418,11 +1542,11 @@ jobs:
           fi
 
       - name: Verify source is still current before edge flip
-        if: steps.deploy.outcome == 'success'
+        if: env.PUBLISH_API_SKIP != 'true' && steps.deploy.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
-          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           VERIFY_CONTEXT: edge flip
         run: |
           bash scripts/ci/verify-publish-api-source-current.sh
@@ -1434,11 +1558,13 @@ jobs:
       # `edge/sections/_releases/<commit>/`, immutabili). `sections.json` su
       # Pages e' un catalogo senza stato.
       #
-      # Il protocollo e' in testa a scripts/publish-section-edge.mjs: staging
-      # sotto la base della release (riletto e confrontato per sha256), verifica
-      # che le pagine delle sezioni live siano gia' su R2, poi UN PUT del
-      # puntatore cambia tutto insieme. Prima del PUT un fallimento non cambia
-      # cio' che il Worker serve; dopo, la release nuova e' servita intera.
+      # Ordine di pubblicazione: Pages deploy, documenti edge, pagine cantonali
+      # gia' disponibili e lease R2 acquisiti, poi UN PUT del puntatore. Il
+      # protocollo in scripts/publish-section-edge.mjs verifica la release
+      # immutabile sotto la sua base, attende bounded i bootstrap concorrenti,
+      # ricontrolla le pagine dopo l'handshake e solo allora fa il flip. Prima
+      # del PUT un fallimento lascia intera la release precedente; dopo, quella
+      # nuova e' servita intera. La notifica al sito resta successiva al flip.
       #
       # DOPO il deploy Pages e PRIMA della notifica al sito. Le superfici di
       # famiglia (canton-articles.json, slugs.json.cantons, i feed) escono con
@@ -1454,7 +1580,7 @@ jobs:
       # warning e la notifica parte come sempre.
       - name: Publish the canton sections release to the edge
         id: publish_edge
-        if: steps.deploy.outcome == 'success'
+        if: env.PUBLISH_API_SKIP != 'true' && steps.deploy.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/publish-section-edge.mjs
@@ -1467,6 +1593,7 @@ jobs:
       # scheduled sync picks it up.
       - name: Notify the site
         if: >-
+          env.PUBLISH_API_SKIP != 'true' &&
           steps.deploy.outcome == 'success' &&
           steps.publish_edge.outcome == 'success' &&
           (
@@ -1476,7 +1603,7 @@ jobs:
         continue-on-error: true
         env:
           PAT: ${{ secrets.SITE_REPO_PAT }}
-          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           SOURCE_EVENT: ${{ github.event_name }}
         run: |
           set -euo pipefail
