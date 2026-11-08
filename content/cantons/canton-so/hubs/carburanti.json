@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "1ff45b278b76e4e04ca922c5a19f2d05ada50a52205a5979c46be142eaf0e385",
+  "updatedAt": "2026-11-08T01:48:22.297Z",
+  "contentHash": "ca33e2106c6919c1cd1e430cb60dcf4c1115c861fa88a4911e3e996084494e5d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Consiglio di Soletta respinge mandato sulla trasparenza delle campagne",
+          "url": "/articoli-soletta/consiglio-soletta-rifiuta-trasparenza/",
+          "excerpt": "Il Consiglio cantonale di Soletta ha respinto mercoledì l'elaborazione di una legge sulla trasparenza dei finanziatori delle campagne con 63 voti contrari e 31 favorevoli.",
+          "date": "2026-11-08T01:34:07.406Z"
+        },
+        {
           "title": "Disoccupazione Canton Soletta ottobre 2026: 4'543 registrati",
           "url": "/articoli-soletta/tasso-disoccupazione-ottobre-2026/",
           "excerpt": "In ottobre 2026 nel Canton Soletta risultavano 4'543 disoccupati registrati, in diminuzione di otto persone rispetto al mese precedente.",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/aumento-salari-soletta-2027/",
           "excerpt": "Dal 2027 il personale statale, i docenti e i dipendenti della Solothurner Spitäler AG riceveranno un adeguamento salariale dell'1,0%.",
           "date": "2026-11-03T09:00:18.121Z"
-        },
-        {
-          "title": "Stipendi pubblici a Soletta: +1,0% dal 2027",
-          "url": "/articoli-soletta/soletta-stipendi-pubblici-2027/",
-          "excerpt": "A Soletta il personale statale, gli insegnanti e i dipendenti degli ospedali riceveranno l'1,0% in più dal 2027 dopo l'accordo sull'inflazione.",
-          "date": "2026-10-29T11:38:26.035Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:48:22.297Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Solothurn Council rejects mandate on campaign transparency",
+          "url": "/en/solothurn-articles/solothurn-council-rejects-transparency/",
+          "excerpt": "The Cantonal Council of Solothurn rejected on Wednesday the drafting of a law on transparency regarding campaign funders, with 63 votes against and 31 in favor.",
+          "date": "2026-11-08T01:34:07.406Z"
+        },
+        {
           "title": "Unemployment in the Canton of Solothurn, October 2026: 4'543 registered",
           "url": "/en/solothurn-articles/unemployment-rate-october-2026/",
           "excerpt": "In October 2026, 4'543 registered unemployed people were recorded in the Canton of Solothurn, a decrease of eight people compared with the previous month.",
@@ -193,12 +199,6 @@
           "url": "/en/solothurn-articles/salary-increase-solothurn-2027/",
           "excerpt": "From 2027, state employees, teachers and employees of Solothurner Spitäler AG will receive a 1.0% salary adjustment.",
           "date": "2026-11-03T09:00:18.121Z"
-        },
-        {
-          "title": "Public-sector salaries in Solothurn: +1,0% from 2027",
-          "url": "/en/solothurn-articles/solothurn-public-wages-2027/",
-          "excerpt": "In Solothurn, state employees, teachers and hospital employees will receive 1,0% more from 2027 following the inflation agreement.",
-          "date": "2026-10-29T11:38:26.035Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:48:22.297Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Solothurner Rat lehnt Auftrag zur Transparenz bei Kampagnen ab",
+          "url": "/de/solothurn-artikel/kantonsrat-solothurn-lehnt-transparenz/",
+          "excerpt": "Der Solothurner Kantonsrat hat am Mittwoch die Ausarbeitung eines Gesetzes über die Transparenz der Kampagnenfinanzierer mit 63 Gegenstimmen und 31 Ja-Stimmen abgelehnt.",
+          "date": "2026-11-08T01:34:07.406Z"
+        },
+        {
           "title": "Solothurn: 4'543 Arbeitslose im Okt. 2026",
           "url": "/de/solothurn-artikel/arbeitslosenquote-oktober-2026/",
           "excerpt": "Im Oktober 2026 waren im Kanton Solothurn 4'543 Arbeitslose registriert, acht Personen weniger als im Vormonat.",
@@ -292,12 +298,6 @@
           "url": "/de/solothurn-artikel/lohnerhoehung-solothurn-2027/",
           "excerpt": "Ab 2027 erhalten das Staatspersonal, die Lehrpersonen und die Angestellten der Solothurner Spitäler AG eine Lohnanpassung von 1,0%.",
           "date": "2026-11-03T09:00:18.121Z"
-        },
-        {
-          "title": "Löhne im öffentlichen Dienst in Solothurn: +1,0% ab 2027",
-          "url": "/de/solothurn-artikel/solothurn-staatsloehne-2027/",
-          "excerpt": "In Solothurn erhalten das Staatspersonal, die Lehrpersonen und die Spitalangestellten ab 2027 nach der Einigung über die Inflation 1,0% mehr.",
-          "date": "2026-10-29T11:38:26.035Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:48:22.297Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Le Conseil de Soleure rejette le mandat sur la transparence des campagnes",
+          "url": "/fr/articles-soleure/conseil-soleure-rejette-transparence/",
+          "excerpt": "Selon le compte rendu publié par Nau.ch, le Conseil cantonal de Soleure a rejeté mercredi l'élaboration d'une loi visant à accroître la transparence des campagnes de votation.",
+          "date": "2026-11-08T01:34:07.406Z"
+        },
+        {
           "title": "Chômage dans le canton de Soleure en octobre 2026 : 4'543 personnes inscrites",
           "url": "/fr/articles-soleure/taux-chomage-octobre-2026/",
           "excerpt": "En octobre 2026, 4'543 chômeurs étaient inscrits dans le canton de Soleure, soit huit personnes de moins que le mois précédent.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-soleure/augmentation-salaire-soleure-2027/",
           "excerpt": "À partir de 2027, le personnel de l'État, les enseignants et les employés de la Solothurner Spitäler AG bénéficieront d'une adaptation salariale de 1,0 %.",
           "date": "2026-11-03T09:00:18.121Z"
-        },
-        {
-          "title": "Salaires publics à Soleure : +1,0% dès 2027",
-          "url": "/fr/articles-soleure/salaires-publics-soleure-2027/",
-          "excerpt": "À Soleure, le personnel de l'État, les enseignants et les employés des hôpitaux recevront 1,0% de plus à partir de 2027 après l'accord sur l'inflation.",
-          "date": "2026-10-29T11:38:26.035Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-08T01:48:22.297Z"
     }
   }
 }
