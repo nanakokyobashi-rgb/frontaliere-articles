@@ -78,8 +78,9 @@ test('il marcatore dentro una frase esce con il titolo dell\'articolo, e solo co
 
 test('il riparatore registra i C0 dalla sorgente subito prima dello snapshot', () => {
   assert.match(SCRIPT, /import \{ reportStrippedControlChars \} from '\.\/lib\/control-char-write-report\.mjs';/u);
+  assert.match(SCRIPT, /import \{ sanitizeText \} from '\.\.\/\.\.\/scripts\/lib\/sanitize-control-chars\.mjs';/u);
   assert.match(
     SCRIPT,
-    /if \(!check\) \{\s*reportStrippedControlChars\(file, source, next\);\s*writeFileSnapshotAtomically\(file, source, next\);\s*\}/u,
+    /if \(!check\) \{\s*const clean = sanitizeText\(next\);\s*reportStrippedControlChars\(file, source, clean\);\s*writeFileSnapshotAtomically\(file, source, clean\);\s*\}/u,
   );
 });

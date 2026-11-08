@@ -26,6 +26,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { factValueOf, isEmptyAmountFact, matchesVacuousValue, parseAiSearchSections } from './lib/key-facts-specificity.mjs';
@@ -144,8 +145,9 @@ function main(argv) {
         if (next === source) continue;
         totals.file += 1;
         if (!check) {
-          reportStrippedControlChars(file, source, next);
-          writeFileSnapshotAtomically(file, source, next);
+          const clean = sanitizeText(next);
+          reportStrippedControlChars(file, source, clean);
+          writeFileSnapshotAtomically(file, source, clean);
         }
       }
     }
