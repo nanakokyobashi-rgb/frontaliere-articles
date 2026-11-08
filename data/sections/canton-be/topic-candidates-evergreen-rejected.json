@@ -4,38 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/705333/plainte-en-ligne-pour-violences-sexuelles-dans-le-canton-de-berne": {
-      "section": "canton-be",
-      "ts": 1793950396885
-    },
-    "canton-be::https://ajour.ch/story/705156/sperrung-der-a6br%c3%bccke-%c3%bcber-den-nidaub%c3%bcrenkanal": {
-      "section": "canton-be",
-      "ts": 1793950398198
-    },
-    "canton-be::https://ajour.ch/story/705687/just-eat-sinspire-duber-la-plus-grande-caisse-de-compensation-avs-tire-la-sonnette-dalarme": {
-      "section": "canton-be",
-      "ts": 1793950399342
-    },
-    "canton-be::https://ajour.ch/story/705686/just-eat-macht-auf-uber-gr%c3%b6sste-ahvausgleichskasse-schl%c3%a4gt-alarm": {
-      "section": "canton-be",
-      "ts": 1793950400949
-    },
-    "canton-be::https://ajour.ch/story/705656/damit-%c3%a4ltere-menschen-l%c3%a4nger-zu-hause-wohnen-k%c3%b6nnen-der-kanton-bern-arbeitet-an-neuen-regeln": {
-      "section": "canton-be",
-      "ts": 1793950402174
-    },
-    "canton-be::https://ajour.ch/story/705612/la-poste-sen-prend-swisscom-voici-le-prix-des-nouveaux-abonnements-internet-et-tv": {
-      "section": "canton-be",
-      "ts": 1793950403680
-    },
-    "canton-be::https://ajour.ch/story/705000/gr%c3%bcnes-licht-f%c3%bcrs-budget-aber-der-finanzplan-f%c3%a4llt-durch": {
-      "section": "canton-be",
-      "ts": 1793950404783
-    },
-    "canton-be::https://ajour.ch/story/705729/jetzt-auch-in-der-schweiz-metzgerei-muss-nach-cyberangriff-schliessen-auch-k%c3%bchlung-von-volgl%c3%a4den-gest%c3%b6rt": {
-      "section": "canton-be",
-      "ts": 1793950406043
-    },
     "canton-be::https://ajour.ch/story/705891/abgesackter-bahndamm-in-pieterlen-sbb-startet-mit-notfallsanierungsarbeiten": {
       "section": "canton-be",
       "ts": 1793982724298
@@ -127,6 +95,38 @@
     "canton-be::https://ajour.ch/story/705646/stadt-thun-schaltet-digitale-karte-zur-w%c3%a4rmeversorgung-auf": {
       "section": "canton-be",
       "ts": 1794118355868
+    },
+    "canton-be::https://www.nau.ch/news/schweiz/neues-tarifsystem-senkt-krankenkassenkosten-vorubergehend-67199476": {
+      "section": "canton-be",
+      "ts": 1794141599290
+    },
+    "canton-be::https://ajour.ch/story/705729/jetzt-auch-in-der-schweiz-metzgerei-muss-nach-cyberangriff-schliessen-auch-k%c3%bchlung-von-volgl%c3%a4den-gest%c3%b6rt": {
+      "section": "canton-be",
+      "ts": 1794141601126
+    },
+    "canton-be::https://ajour.ch/story/705943/strassensperrung-in-treiten": {
+      "section": "canton-be",
+      "ts": 1794141602693
+    },
+    "canton-be::https://ajour.ch/story/705507/bieler-fraktionen-spannen-f%c3%bcr-ein-ja-zum-budget-zusammen": {
+      "section": "canton-be",
+      "ts": 1794141604357
+    },
+    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/a6829eac-0f7d-49dc-b88f-fe354e9800b1": {
+      "section": "canton-be",
+      "ts": 1794142745195
+    },
+    "canton-be::https://ajour.ch/story/705917/vernehmlassung-zur-teilrevision-der-gemeindeordnung": {
+      "section": "canton-be",
+      "ts": 1794142747029
+    },
+    "canton-be::https://ajour.ch/story/705811/amorce-dune-reprise-conomique-pour-les-entreprises-jurassiennes": {
+      "section": "canton-be",
+      "ts": 1794142748623
+    },
+    "canton-be::https://ajour.ch/story/705831/die-bewegung-ist-bereits-%c3%bcberall-in-europa-hunderttausende-demonstrieren-f%c3%bcr-h%c3%b6here-l%c3%b6hne": {
+      "section": "canton-be",
+      "ts": 1794142750572
     }
   }
 }
