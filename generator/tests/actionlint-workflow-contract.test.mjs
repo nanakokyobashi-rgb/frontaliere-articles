@@ -7,6 +7,12 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const TESTS_WORKFLOW = readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
 const ACTIONLINT_CONFIG = readFileSync(path.join(ROOT, '.github/actionlint.yaml'), 'utf8');
+const QUEUE_ALLOWLISTED_WORKFLOWS = [
+  '.github/workflows/translate-queue-recovery-watchdog.yml',
+  '.github/workflows/translate-queue-recovery.yml',
+  '.github/workflows/translate-pending.yml',
+  '.github/workflows/publish-api.yml',
+];
 
 test('required PR check validates every workflow and ShellChecks changed workflow scripts', () => {
   assert.match(TESTS_WORKFLOW, /uses: actions\/setup-go@v6/);
@@ -38,8 +44,13 @@ test('required PR check validates every workflow and ShellChecks changed workflo
     TESTS_WORKFLOW,
     /- name: Setup isolated article source runtime\s+if: \$\{\{ !cancelled\(\) \}\}\s+uses: \.\/\.github\/actions\/setup-article-source-runtime/,
   );
-  assert.equal((ACTIONLINT_CONFIG.match(/unexpected key "queue"/g) || []).length, 3);
-  assert.match(ACTIONLINT_CONFIG, /\.github\/workflows\/translate-queue-recovery-watchdog\.yml:/);
+  assert.equal(
+    (ACTIONLINT_CONFIG.match(/unexpected key "queue"/g) || []).length,
+    QUEUE_ALLOWLISTED_WORKFLOWS.length,
+  );
+  for (const workflow of QUEUE_ALLOWLISTED_WORKFLOWS) {
+    assert.match(ACTIONLINT_CONFIG, new RegExp(`${workflow.replaceAll('.', '\\.')}:`));
+  }
 });
 
 test('ShellCheck on changed workflows runs without the global opt-out', () => {
