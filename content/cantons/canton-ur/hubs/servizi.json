@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "servizi",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "020d6f3825a62c8944549308d9d03fdb048fa7fcc280666d8e5dde60353fd2dc",
+  "updatedAt": "2026-11-08T05:30:51.381Z",
+  "contentHash": "dbc7c6e30babb556dd5d763dc6d596c68e6a75627bf12d25949dd1619beb6aaf",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -88,6 +88,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Peter Schuler sarà il nuovo presidente di Spiringen",
+          "url": "/articoli-uri/presidenza-spiringen-schuler/",
+          "excerpt": "Peter Schuler, vicepresidente in carica, subentrerà a René Müller il 1° gennaio; il mandato indicato è 2026/27.",
+          "date": "2026-11-08T05:26:38.176Z"
+        },
+        {
           "title": "Autorizzazione edilizia canton Uri: requisiti e procedura",
           "url": "/articoli-svizzera/permesso-edilizio-uri/",
           "excerpt": "Nel Cantone di Uri l'autorizzazione edilizia richiede verifiche su requisiti, documenti, uffici, termini e opposizioni: i lavori partono solo dopo il permesso.",
@@ -128,12 +134,6 @@
           "url": "/articoli-svizzera/permesso-c-canton-uri-richiesta/",
           "excerpt": "Requisiti federali e cantonali per ottenere il permesso di domicilio C nel Cantone Uri: 10 anni di residenza, integrazione e conoscenze linguistiche.",
           "date": "2026-09-09T01:51:36.573Z"
-        },
-        {
-          "title": "Permesso di domicilio C nel Cantone di Uri: requisiti e domanda",
-          "url": "/articoli-svizzera/permesso-di-domicilio-c-ur-requisiti-e-domanda/",
-          "excerpt": "La durata richiesta per il permesso di domicilio C nel Cantone di Uri, i criteri di integrazione e le conoscenze linguistiche richieste.",
-          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -163,7 +163,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-08T05:30:51.381Z"
     },
     "en": {
       "canton": "UR",
@@ -229,6 +229,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Peter Schuler will be the new president of Spiringen",
+          "url": "/en/uri-articles/spiringen-municipal-president-schuler/",
+          "excerpt": "Peter Schuler, the incumbent vice president, will succeed René Müller on January 1; the term indicated is 2026/27.",
+          "date": "2026-11-08T05:26:38.176Z"
+        },
+        {
           "title": "Building permit in the canton of Uri: requirements and procedure",
           "url": "/en/swiss-articles/uri-building-permit-requirements/",
           "excerpt": "In the Canton of Uri, a building permit requires checks on requirements, documents, offices, deadlines and objections: work may begin only after the permit has been issued.",
@@ -269,12 +275,6 @@
           "url": "/en/swiss-articles/permit-c-canton-uri-request/",
           "excerpt": "Federal and cantonal requirements to obtain residence permit C in Canton Uri: 10 years of residence, integration and language skills.",
           "date": "2026-09-09T01:51:36.573Z"
-        },
-        {
-          "title": "Residence permit C in the Canton of Uri: requirements and application",
-          "url": "/en/swiss-articles/c-permit-uri-requirements-and-application/",
-          "excerpt": "The duration required for residence permit C in the Canton of Uri, the integration criteria and the language skills required.",
-          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -300,7 +300,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-08T05:30:51.381Z"
     },
     "de": {
       "canton": "UR",
@@ -366,6 +366,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Peter Schuler wird der neue Präsident von Spiringen",
+          "url": "/de/uri-artikel/spiringen-gemeindepraesident-schuler/",
+          "excerpt": "Peter Schuler, der amtierende Vizepräsident, wird am 1. Januar die Nachfolge von René Müller antreten; die angegebene Amtsdauer lautet 2026/27.",
+          "date": "2026-11-08T05:26:38.176Z"
+        },
+        {
           "title": "Baubewilligung im Kanton Uri: Anforderungen und Verfahren",
           "url": "/de/schweiz-artikel/baugesuch-uri-anforderungen/",
           "excerpt": "Im Kanton Uri erfordert die Baubewilligung die Prüfung von Anforderungen, Unterlagen, Behörden, Fristen und Einsprachen: Die Arbeiten beginnen erst nach der Bewilligung.",
@@ -406,12 +412,6 @@
           "url": "/de/schweiz-artikel/aufenthaltserlaubnis-c-kanton-uri-antrag/",
           "excerpt": "Eidgenössische und kantonale Voraussetzungen für die Niederlassungsbewilligung C im Kanton Uri: 10 Jahre Aufenthalt, Integration und Sprachkenntnisse.",
           "date": "2026-09-09T01:51:36.573Z"
-        },
-        {
-          "title": "Niederlassungsbewilligung C im Kanton Uri: Voraussetzungen und Antrag",
-          "url": "/de/schweiz-artikel/c-aufenthaltstitel-uri-anforderungen-und-antrag/",
-          "excerpt": "Die erforderliche Dauer für die Niederlassungsbewilligung C im Kanton Uri, die Integrationskriterien und die erforderlichen Sprachkenntnisse.",
-          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -437,7 +437,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-08T05:30:51.381Z"
     },
     "fr": {
       "canton": "UR",
@@ -503,6 +503,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Peter Schuler sera le nouveau président de Spiringen",
+          "url": "/fr/articles-uri/spiringen-president-communal-schuler/",
+          "excerpt": "Peter Schuler, vice-président en exercice, succédera à René Müller le 1er janvier ; le mandat indiqué est 2026/27.",
+          "date": "2026-11-08T05:26:38.176Z"
+        },
+        {
           "title": "Autorisation de construire dans le canton d’Uri : exigences et procédure",
           "url": "/fr/articles-suisse/permis-construire-uri-exigences/",
           "excerpt": "Dans le canton d’Uri, l’autorisation de construire nécessite des vérifications concernant les exigences, les documents, les services compétents, les délais et les oppositions : les travaux ne commencent qu’après…",
@@ -543,12 +549,6 @@
           "url": "/fr/articles-suisse/permis-c-canton-uri-demande/",
           "excerpt": "Conditions fédérales et cantonales pour obtenir le permis de séjour C dans le canton d'Uri : 10 ans de résidence, d'intégration et de connaissances linguistiques.",
           "date": "2026-09-09T01:51:36.573Z"
-        },
-        {
-          "title": "Permis de séjour C dans le canton d'Uri : exigences et demande",
-          "url": "/fr/articles-suisse/permis-de-sejour-c-uri-exigences-et-demande/",
-          "excerpt": "La durée requise pour le permis de séjour C dans le canton d'Uri, les critères d'intégration et les connaissances linguistiques requises.",
-          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -570,7 +570,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-08T05:30:51.381Z"
     }
   }
 }

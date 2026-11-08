@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-11-08T04:32:42.321Z",
-  "contentHash": "81c8f1f06f9cc18e2bef3bb8ab28ae769364c79697984d4c2a9e19688307d785",
+  "updatedAt": "2026-11-08T05:30:51.381Z",
+  "contentHash": "e1b43a05baeb1002a17132b22875054bc415588a21b944cbf37bca65b8b8e6cb",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Peter Schuler sarà il nuovo presidente di Spiringen",
+          "url": "/articoli-uri/presidenza-spiringen-schuler/",
+          "excerpt": "Peter Schuler, vicepresidente in carica, subentrerà a René Müller il 1° gennaio; il mandato indicato è 2026/27.",
+          "date": "2026-11-08T05:26:38.176Z"
+        },
+        {
           "title": "René Schuler assumerà la presidenza di Unterschächen",
           "url": "/articoli-uri/rene-schuler-unterschachen/",
           "excerpt": "René Schuler assumerà a inizio 2027 la presidenza di Unterschächen e succederà ad André Bissig, che lascerà il Gemeinderat a fine anno.",
@@ -82,12 +88,6 @@
           "url": "/articoli-uri/andermatt-piano-max-uristier/",
           "excerpt": "Il piano Nätschen West è in partecipazione fino al 7 dicembre: Max l'Uristier misura 36 metri di lunghezza e 20 di altezza.",
           "date": "2026-11-06T08:13:38.091Z"
-        },
-        {
-          "title": "Canton Uri: 3.934 alunni e 224 sezioni nel 2025/2026",
-          "url": "/articoli-uri/volksschule-uri-iscrizioni-2025-2026/",
-          "excerpt": "Il rapporto sulla Volksschule del Canton Uri per l'anno scolastico 2025/2026 descrive un aumento contenuto degli iscritti e un ampliamento delle sezioni.",
-          "date": "2026-11-06T07:40:45.014Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-08T04:32:42.321Z"
+      "updatedAt": "2026-11-08T05:30:51.381Z"
     },
     "en": {
       "canton": "UR",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Peter Schuler will be the new president of Spiringen",
+          "url": "/en/uri-articles/spiringen-municipal-president-schuler/",
+          "excerpt": "Peter Schuler, the incumbent vice president, will succeed René Müller on January 1; the term indicated is 2026/27.",
+          "date": "2026-11-08T05:26:38.176Z"
+        },
+        {
           "title": "René Schuler will assume the presidency of Unterschächen",
           "url": "/en/uri-articles/rene-schuler-will-assume-the-presidency-of-unterschachen/",
           "excerpt": "René Schuler will assume the presidency of Unterschächen at the beginning of 2027 and succeed André Bissig, who will leave the municipal council at the end of the year.",
@@ -169,12 +175,6 @@
           "url": "/en/uri-articles/andermatt-max-wooden-bull-plan/",
           "excerpt": "The Nätschen West plan is open for public consultation until December 7: Max l'Uristier is 36 meters long and 20 meters high.",
           "date": "2026-11-06T08:13:38.091Z"
-        },
-        {
-          "title": "Canton Uri: 3.934 students and 224 sections in 2025/2026",
-          "url": "/en/uri-articles/volksschule-uri-enrollments-2025-2026/",
-          "excerpt": "The report on the Volksschule of the Canton of Uri for the 2025/2026 school year describes a limited increase in enrolments and an expansion of the sections.",
-          "date": "2026-11-06T07:40:45.014Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-08T04:32:42.321Z"
+      "updatedAt": "2026-11-08T05:30:51.381Z"
     },
     "de": {
       "canton": "UR",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Peter Schuler wird der neue Präsident von Spiringen",
+          "url": "/de/uri-artikel/spiringen-gemeindepraesident-schuler/",
+          "excerpt": "Peter Schuler, der amtierende Vizepräsident, wird am 1. Januar die Nachfolge von René Müller antreten; die angegebene Amtsdauer lautet 2026/27.",
+          "date": "2026-11-08T05:26:38.176Z"
+        },
+        {
           "title": "René Schuler wird das Gemeindepräsidium von Unterschächen übernehmen",
           "url": "/de/uri-artikel/rene-schuler-wird-das-gemeindeprasidium-von-unterschachen-ubernehmen/",
           "excerpt": "René Schuler wird Anfang 2027 das Gemeindepräsidium von Unterschächen übernehmen und André Bissig nachfolgen, der den Gemeinderat Ende des Jahres verlassen wird.",
@@ -256,12 +262,6 @@
           "url": "/de/uri-artikel/andermatt-plan-holzstier-max/",
           "excerpt": "Der Plan Nätschen West liegt bis zum 7. Dezember zur Mitwirkung auf: Max l'Uristier ist 36 Meter lang und 20 Meter hoch.",
           "date": "2026-11-06T08:13:38.091Z"
-        },
-        {
-          "title": "Kanton Uri: 3.934 Schüler und 224 Klassen im Jahr 2025/2026",
-          "url": "/de/uri-artikel/volksschule-uri-einschreibungen-2025-2026/",
-          "excerpt": "Der Bericht der Volksschule des Kantons Uri für das Schuljahr 2025/2026 beschreibt einen begrenzten Anstieg der Anmeldungen und eine Erweiterung der Abteilungen.",
-          "date": "2026-11-06T07:40:45.014Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-08T04:32:42.321Z"
+      "updatedAt": "2026-11-08T05:30:51.381Z"
     },
     "fr": {
       "canton": "UR",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Peter Schuler sera le nouveau président de Spiringen",
+          "url": "/fr/articles-uri/spiringen-president-communal-schuler/",
+          "excerpt": "Peter Schuler, vice-président en exercice, succédera à René Müller le 1er janvier ; le mandat indiqué est 2026/27.",
+          "date": "2026-11-08T05:26:38.176Z"
+        },
+        {
           "title": "René Schuler assumera la présidence d’Unterschächen",
           "url": "/fr/articles-uri/rene-schuler-assumera-la-presidence-d-unterschachen/",
           "excerpt": "René Schuler assumera début 2027 la présidence d’Unterschächen et succédera à André Bissig, qui quittera le Gemeinderat à la fin de l’année.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-uri/andermatt-plan-taureau-bois/",
           "excerpt": "Le plan Nätschen West est en consultation jusqu'au 7 décembre : Max l'Uristier mesure 36 mètres de long et 20 de haut.",
           "date": "2026-11-06T08:13:38.091Z"
-        },
-        {
-          "title": "Canton d’Uri : 3.934 élèves et 224 sections en 2025/2026",
-          "url": "/fr/articles-uri/volksschule-uri-inscriptions-2025-2026/",
-          "excerpt": "Le rapport sur la Volksschule du canton d’Uri pour l’année scolaire 2025/2026 décrit une augmentation limitée des inscriptions et une expansion des sections.",
-          "date": "2026-11-06T07:40:45.014Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-08T04:32:42.321Z"
+      "updatedAt": "2026-11-08T05:30:51.381Z"
     }
   }
 }
