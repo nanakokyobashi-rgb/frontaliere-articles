@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/ohtzzau7ift5": {
-    "articleId": "lumpy-skin-disease-fine-vaccinazione",
-    "ts": "2026-09-25T04:56:43.757Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1952448/allianz-svizzera-studio-rischi-prevenzione": {
     "articleId": "canicola-danni-economici-2026",
     "ts": "2026-09-25T06:41:56.848Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/rubriche/ospite/1961525/avs-iva-costo-demir-sara": {
     "articleId": "avs-iva-tredicesima-rendita",
     "ts": "2026-11-07T16:49:29.034Z",
+    "keyForm": 2
+  },
+  "https://www.filodiritto.com/imposta-sostitutiva-del-5-le-pensioni-svizzere": {
+    "articleId": "imposta-sostitutiva-pensioni-svizzere",
+    "ts": "2026-11-08T03:26:09.643Z",
     "keyForm": 2
   }
 }

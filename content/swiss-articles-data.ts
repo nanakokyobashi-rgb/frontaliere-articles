@@ -30222,6 +30222,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'imposta-sostitutiva-pensioni-svizzere',
+    category: 'pensione',
+    date: '2026-11-08T03:26:08.422Z',
+    image: '/images/blog/article-imposta-sostitutiva-pensioni-svizzere.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
