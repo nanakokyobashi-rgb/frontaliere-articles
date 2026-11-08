@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "0cc0709f835ef360effdfd7ecd6f133adf5c8b40098c16178fd280bde0e81a9e",
+  "updatedAt": "2026-11-08T07:09:01.940Z",
+  "contentHash": "09d1e0fcaadc72bb62066aec8e471e3bdbdb0aa66b1a6010fdc42df8bb694bdd",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -237,16 +237,16 @@
           "date": "2026-10-07T06:12:18.855Z"
         },
         {
+          "title": "SMILE: mobilità sostenibile tra Varese, Como e Ticino",
+          "url": "/articoli-frontaliere/smile-varese-como-ticino/",
+          "excerpt": "Il 10 novembre 2026 Chiasso sarà il punto di presentazione pubblica di SMILE.",
+          "date": "2026-11-08T07:04:50.592Z"
+        },
+        {
           "title": "Semafori a Cadenazzo e traffico: effetti previsti nel 2027",
           "url": "/articoli-frontaliere/semafori-cadenazzo-traffico/",
           "excerpt": "Il Consiglio federale risponde sui semafori a Cadenazzo: efficacia del traffico tra Bellinzona e Locarno attesa a fine 2027.",
           "date": "2026-09-23T01:21:51.666Z"
-        },
-        {
-          "title": "Mendrisio-Melano, progetto MeMe per ridurre il rumore dell'autostrada",
-          "url": "/articoli-frontaliere/mendrisio-melano-progetto-meme-risanamento-fonico/",
-          "excerpt": "L'Ufficio federale delle strade (USTRA) ha pubblicato il disegno per il progetto MeMe, un piano di risanamento globale per il tratto dell'autostrada A2 tra Mendrisio e Melano.",
-          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -292,7 +292,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-08T07:09:01.940Z"
     },
     "en": {
       "canton": "TI",
@@ -506,16 +506,16 @@
           "date": "2026-10-07T06:12:18.855Z"
         },
         {
+          "title": "SMILE: sustainable mobility between Varese, Como and Ticino",
+          "url": "/en/cross-border-articles/smile-sustainable-mobility-between-varese-como-and-ticino/",
+          "excerpt": "On November 10, 2026, Chiasso will be the venue for SMILE’s public presentation.",
+          "date": "2026-11-08T07:04:50.592Z"
+        },
+        {
           "title": "Traffic lights in Cadenazzo and traffic: effects expected in 2027",
           "url": "/en/cross-border-articles/cadenazzo-traffic-lights/",
           "excerpt": "The Federal Council responds to the traffic lights in Cadenazzo: effective traffic between Bellinzona and Locarno expected at the end of 2027.",
           "date": "2026-09-23T01:21:51.666Z"
-        },
-        {
-          "title": "Mendrisio-Melano, MeMe project to reduce highway noise",
-          "url": "/en/cross-border-articles/mendrisio-melano-meme-project-noise-reduction/",
-          "excerpt": "The Federal Office of Roads (USTRA) has published the design for the MeMe project, a comprehensive rehabilitation plan for the stretch of the A2 motorway between Mendrisio and Melano.",
-          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -561,7 +561,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-08T07:09:01.940Z"
     },
     "de": {
       "canton": "TI",
@@ -775,16 +775,16 @@
           "date": "2026-10-07T06:12:18.855Z"
         },
         {
+          "title": "SMILE: Nachhaltige Mobilität zwischen Varese, Como und Tessin",
+          "url": "/de/grenzgaenger-artikel/smile-nachhaltige-mobilitat-zwischen-varese-como-und-tessin/",
+          "excerpt": "SMILE zielt darauf ab, eine nachhaltigere, zugänglichere und umfassend integrierte Mobilität im Gebiet zwischen den Provinzen Varese und Como und dem Kanton Tessin zu fördern.",
+          "date": "2026-11-08T07:04:50.592Z"
+        },
+        {
           "title": "Ampeln in Cadenazzo und Verkehr: erwartete Auswirkungen im Jahr 2027",
           "url": "/de/grenzgaenger-artikel/cadenazzo-ampeln-verkehr/",
           "excerpt": "Der Bundesrat antwortet an den Ampeln in Cadenazzo: Ende 2027 erwartete Verkehrseffizienz zwischen Bellinzona und Locarno.",
           "date": "2026-09-23T01:21:51.666Z"
-        },
-        {
-          "title": "Mendrisio-Melano, MeMe-Projekt zur Reduzierung des Autobahnlärms",
-          "url": "/de/grenzgaenger-artikel/mendrisio-melano-meme-projekt-larmreduzierung/",
-          "excerpt": "Das Bundesamt für Strassen (Astra) hat den Entwurf für das Projekt MeMe, einen umfassenden Sanierungsplan für den Autobahnabschnitt A2 zwischen Mendrisio und Melano, veröffentlicht.",
-          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -830,7 +830,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-08T07:09:01.940Z"
     },
     "fr": {
       "canton": "TI",
@@ -1045,16 +1045,16 @@
           "date": "2026-10-07T06:12:18.855Z"
         },
         {
+          "title": "SOURIRE : mobilité durable entre Varèse, Côme et le Tessin",
+          "url": "/fr/articles-frontalier/sourire-mobilite-durable-entre-varese-come-et-le-tessin/",
+          "excerpt": "Le 10 novembre 2026, Chiasso sera le point de présentation publique de SMILE.",
+          "date": "2026-11-08T07:04:50.592Z"
+        },
+        {
           "title": "Feu de signalisation à Cadenazzo et circulation : effets attendus en 2027",
           "url": "/fr/articles-frontalier/feux-cadenazzo-trafic/",
           "excerpt": "Le Conseil fédéral répond aux feux à Cadenazzo : efficacité du trafic entre Bellinzone et Locarno attendue fin 2027.",
           "date": "2026-09-23T01:21:51.666Z"
-        },
-        {
-          "title": "Mendrisio-Melano, projet MeMe pour réduire le bruit de l'autoroute",
-          "url": "/fr/articles-frontalier/mendrisio-melano-projet-meme-reduction-bruit/",
-          "excerpt": "L'Office fédéral des routes (OFROU) a publié le dessin pour le projet MeMe, un plan d'assainissement global pour le tronçon de l'autoroute A2 entre Mendrisio et Melano.",
-          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1100,7 +1100,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-08T07:09:01.940Z"
     }
   }
 }
