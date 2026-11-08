@@ -1707,7 +1707,7 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.doesNotMatch(wf, /publish-api-bounded-replay-publisher/);
   assert.match(wf, /if: needs\.source_preflight\.outputs\.publish == 'true'/);
   assert.match(wf, /publish=false/);
-  assert.match(wf, /il job publisher viene saltato senza errore/);
+  assert.match(wf, /il nuovo run e' preservato nella coda FIFO/);
   assert.match(wf, /if \[ "\$EXPLICIT_REPLAY" = 'true' \]/);
   assert.match(wf, /replay bounded superato: main=\$current_main contiene input API piu' recenti del commit delle pagine=\$SOURCE_COMMIT/);
   assert.equal(
@@ -1715,19 +1715,17 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
     25,
     'dopo la freshness guard ogni step deve rispettare lo skip deciso in corsa',
   );
-  assert.match(wf, /git diff --quiet "\$WORKFLOW_COMMIT" "\$current_main"/);
-  const preflightDiffAt = wf.indexOf('          git diff --quiet "$WORKFLOW_COMMIT" "$current_main" -- ');
-  const preflightDiffEnd = wf.indexOf('          orchestration_diff_status=$?', preflightDiffAt);
-  const runtimeDiffAt = wf.indexOf('          git diff --quiet "$GITHUB_SHA" "$current_main" -- ');
-  const runtimeDiffEnd = wf.indexOf('          orchestration_diff_status=$?', runtimeDiffAt);
-  assert.ok(preflightDiffAt >= 0 && preflightDiffEnd > preflightDiffAt, 'il preflight deve avere un diff runtime delimitato');
-  assert.ok(runtimeDiffAt >= 0 && runtimeDiffEnd > runtimeDiffAt, 'la freshness guard deve avere un diff runtime delimitato');
-  for (const diff of [wf.slice(preflightDiffAt, preflightDiffEnd), wf.slice(runtimeDiffAt, runtimeDiffEnd)]) {
-    for (const broadPath of ['engine', 'host', 'scripts', 'generator/scripts', 'generator/data', 'articleSections.ts', 'package.json', 'package-lock.json']) {
-      assert.doesNotMatch(diff, new RegExp(`\\n\\s+${broadPath.replaceAll('/', '\\/')}\\s*\\n`), broadPath);
-    }
-    assert.doesNotMatch(diff, /scripts\/ci\/loop-drift-check\.mjs/);
-  }
+  assert.equal(
+    (wf.match(/publishApiFreshnessPaths\(\)/g) || []).length,
+    2,
+    'preflight e freshness barrier devono usare gli stessi path del trigger publish-api',
+  );
+  assert.equal(
+    (wf.match(/"\$\{publish_api_trigger_path_list\[@\]\}"/g) || []).length,
+    2,
+    'le due freshness guard devono confrontare l’intera lista di trigger',
+  );
+  assert.doesNotMatch(wf, /engine host scripts generator\/scripts generator\/data/);
   assert.match(wf, /ref: \$\{\{ needs\.source_preflight\.outputs\.source_commit \}\}/);
   assert.match(wf, /Verify publish source is current main/);
   assert.match(wf, /gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main"/);
