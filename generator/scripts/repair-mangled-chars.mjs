@@ -128,20 +128,60 @@ const QUI = path.dirname(fileURLToPath(import.meta.url));
 const RADICE_DEFAULT = path.resolve(QUI, '..', '..');
 
 /**
+ * Sostituisce, solo per la reportistica, le escape C0 gia' dichiarate con
+ * escape legali della stessa lunghezza. Le nuove restano visibili al guard.
+ *
+ * @param {string} source
+ * @param {Array<{ spelling: string }>} declaredEscapedResiduals
+ */
+function maskDeclaredEscapedResiduals(source, declaredEscapedResiduals) {
+  const quota = new Map();
+  for (const { spelling } of declaredEscapedResiduals) {
+    quota.set(spelling, (quota.get(spelling) || 0) + 1);
+  }
+  if (quota.size === 0) return source;
+
+  let cursor = 0;
+  let masked = '';
+  for (const { index, spelling } of findEscapedControlChars(source)) {
+    const remaining = quota.get(spelling) || 0;
+    if (remaining === 0) continue;
+    // Mantiene sia la lunghezza nel sorgente sia un carattere nel valore
+    // decodificato: il report degli eventuali C0 nuovi conserva le coordinate.
+    const u = spelling.lastIndexOf('u00');
+    const replacement = u >= 0
+      ? spelling.slice(0, u) + 'u0020'
+      : spelling.slice(0, -1) + 't';
+    masked += source.slice(cursor, index) + replacement;
+    cursor = index + spelling.length;
+    quota.set(spelling, remaining - 1);
+  }
+  return cursor === 0 ? source : masked + source.slice(cursor);
+}
+
+/**
  * @param {string} file
  * @param {string|Buffer} content
- * @param {{ allowDeclaredEscapedResiduals?: boolean }} [options]
+ * @param {{ allowDeclaredEscapedResiduals?: boolean, declaredEscapedResiduals?: Array<{ spelling: string }> }} [options]
  */
-function writeFileAtomic(file, content, { allowDeclaredEscapedResiduals = false } = {}) {
+function writeFileAtomic(file, content, {
+  allowDeclaredEscapedResiduals = false,
+  declaredEscapedResiduals = [],
+} = {}) {
   const source = Buffer.isBuffer(content) ? content.toString('utf8') : content;
   const clean = sanitizeText(source);
-  reportStrippedControlChars(file, source, clean);
   // La sola eccezione e' il giro parziale di questo script: le escape residue
-  // sono gia' state elencate da `riparaEscapate` e l'uscita resta 2. Nessun
-  // altro writer puo' saltare il report, e il chiamante deve dimostrare prima
+  // sono gia' state elencate da `riparaEscapate` e l'uscita resta 2. Si
+  // mascherano solo le occorrenze dichiarate nel testo d'ingresso, lasciando
+  // al report i C0 raw e ogni escape nuova; il chiamante deve dimostrare prima
   // che non e' comparsa una spelling nuova.
-  if (findEscapedControlChars(clean).length > 0 && !allowDeclaredEscapedResiduals) {
-    reportStrippedControlChars(file, decodeEscapedControlChars(clean), clean);
+  const dichiarate = allowDeclaredEscapedResiduals ? declaredEscapedResiduals : [];
+  const reportSource = maskDeclaredEscapedResiduals(source, dichiarate);
+  const reportClean = maskDeclaredEscapedResiduals(clean, dichiarate);
+  reportStrippedControlChars(file, reportSource, reportClean);
+  const decodedEscapedSource = decodeEscapedControlChars(reportSource);
+  if (decodedEscapedSource !== reportSource) {
+    reportStrippedControlChars(file, decodedEscapedSource, reportClean);
   }
   writeFileAtomicUnchecked(file, Buffer.isBuffer(content) ? Buffer.from(clean, 'utf8') : clean);
 }
@@ -1628,7 +1668,8 @@ function main() {
     }
     // La spelling ESCAPATA, prima del residuo: una riparazione qui puo'
     // ripulire l'ancora di un residuo, e il residuo non ha ancora da restituire.
-    const nEscapate = findEscapedControlChars(corrente).length;
+    const escapateDichiarate = findEscapedControlChars(testo);
+    const nEscapate = escapateDichiarate.length;
     let escapedResiduals = [];
     let escapedWriteSafe = true;
     if (nEscapate > 0) {
@@ -1681,6 +1722,7 @@ function main() {
       const dest = path.join(opz.radice, f.percorso);
       writeFileAtomic(dest, Buffer.from(corrente, 'utf8'), {
         allowDeclaredEscapedResiduals: escapedResiduals.length > 0,
+        declaredEscapedResiduals: escapateDichiarate,
       });
     }
   }
