@@ -4,58 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/823211/post-greift-swisscom-an-so-viel-kosten-die-neuen-internet-und-tvabos": {
-      "section": "canton-vs",
-      "ts": 1794009316792
-    },
-    "canton-vs::https://www.pomona.ch/story/822798/verkehrsunfall-am-mittwochmittag-im-bildackerkreisel-in-gamsen": {
-      "section": "canton-vs",
-      "ts": 1794009328370
-    },
-    "canton-vs::https://www.pomona.ch/story/823588/kanton-wallis-f%c3%bchrt-eine-kil%c3%b6sung-ein": {
-      "section": "canton-vs",
-      "ts": 1794010065292
-    },
-    "canton-vs::https://www.pomona.ch/story/823268/arbeitslosigkeit-im-wallis-steigt-im-oktober-an": {
-      "section": "canton-vs",
-      "ts": 1794010074892
-    },
-    "canton-vs::https://www.ledauphine.com/faits-divers-justice/2026/11/06/tout-le-monde-connait-cette-faiblesse-francaise-entre-anemasse-et-la-suisse-une-operation-transfrontaliere-contre-le-point-de-deal-du-chalet": {
-      "section": "canton-vs",
-      "ts": 1794022891282
-    },
-    "canton-vs::https://www.ledauphine.com/economie/2026/11/06/une-premiere-piste-de-ski-ouverte-des-ce-samedi": {
-      "section": "canton-vs",
-      "ts": 1794023395722
-    },
-    "canton-vs::https://www.pomona.ch/story/823854/brand-im-briger-spitalneubau-rund-270-personen-proben-den-ernstfall": {
-      "section": "canton-vs",
-      "ts": 1794023398000
-    },
-    "canton-vs::https://www.pomona.ch/story/822770/sabotage-im-supermarkt-was-hinter-den-cyberangriffen-steckt": {
-      "section": "canton-vs",
-      "ts": 1794023932330
-    },
-    "canton-vs::https://www.pomona.ch/story/824007/der-kanton-wallis-bietet-teilzeitbezahlung-bei-vollzeitstelle": {
-      "section": "canton-vs",
-      "ts": 1794036923921
-    },
-    "canton-vs::https://www.lastampa.it/verbano-cusio-ossola/2026/11/07/news/tasse_frontalieri_stipendi_medici_inferimieri-15790869": {
-      "section": "canton-vs",
-      "ts": 1794046792380
-    },
-    "canton-vs::https://aostasera.it/notizie/ambiente/nuovi-bacini-in-montagna-contro-il-cambiamento-climatico-una-strategia-transfrontaliera-per-decidere-dove-e-se-costruirli": {
-      "section": "canton-vs",
-      "ts": 1794052888970
-    },
-    "canton-vs::https://www.pomona.ch/story/824161/cybercrime-die-schweiz-muss-nachr%c3%bcsten": {
-      "section": "canton-vs",
-      "ts": 1794052890953
-    },
-    "canton-vs::https://www.pomona.ch/story/824176/sbbmanager-verr%c3%a4t-diese-st%c3%a4dte-sollen-bedient-werden-so-stehts-um-den-londonzug": {
-      "section": "canton-vs",
-      "ts": 1794052900144
-    },
     "canton-vs::https://www.pomona.ch/story/824271/walliser-staatspersonal-fordert-vollen-teuerungsausgleich-von-08-prozent": {
       "section": "canton-vs",
       "ts": 1794085662596
@@ -91,6 +39,10 @@
     "canton-vs::https://www.pomona.ch/story/824383/munition-f%c3%bcr-die-ukraine-granaten-in-den-sudan-was-ein-ja-bei-waffenexporten-%c3%a4ndert": {
       "section": "canton-vs",
       "ts": 1794179820819
+    },
+    "canton-vs::https://www.pomona.ch/story/824007/der-kanton-wallis-bietet-teilzeitbezahlung-bei-vollzeitstelle": {
+      "section": "canton-vs",
+      "ts": 1794234804737
     }
   }
 }
