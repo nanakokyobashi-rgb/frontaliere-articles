@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://grenzgaengerzentrum.de/ratgeber/allgemein/grenzgaenger-kinder-schule-schweiz": {
-      "section": "canton-sh",
-      "ts": 1794006321615
-    },
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-27/sig-erzielt-gutes-ergebnis-im-dritten-quartal-und-will-fuer": {
       "section": "canton-sh",
       "ts": 1794081609215
@@ -15,6 +11,10 @@
     "canton-sh::https://www.radiomunot.ch/p/regionalnachrichten-vom-6-november-2026-1130-uhr-2jmpchd23hpm3n7lssqcdl": {
       "section": "canton-sh",
       "ts": 1794171394731
+    },
+    "canton-sh::https://grenzgaengerzentrum.de/ratgeber/allgemein/grenzgaenger-kinder-schule-schweiz": {
+      "section": "canton-sh",
+      "ts": 1794181250781
     }
   }
 }
