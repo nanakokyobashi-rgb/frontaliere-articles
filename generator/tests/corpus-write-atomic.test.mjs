@@ -133,21 +133,26 @@ const REGENERABLE_STATE = [
 ];
 
 // #922 item 5: allargare il predicato d'ingresso da `writeFileSync(` al NOME
-// della primitiva ha fatto entrare nel censimento due file che scrivono con
-// `appendFileSync`. Nessuno dei due tocca un artefatto pubblicato: il target e'
-// `$GITHUB_OUTPUT` / `$GITHUB_STEP_SUMMARY`, cioe' un file FUORI dal workspace,
-// aperto in append e mai riscritto in place. Un SIGKILL a meta' vi lascia una
-// riga tronca in un canale che il repo non pubblica, non un `content/**`
-// dimezzato — e non c'e' niente da rendere atomico, perche' l'append e' gia' il
-// contrario del troncamento. Entrano nel censimento solo perche' il criterio
-// gira sul FILE: la radice pubblicata che matcha sta altrove nella loro
-// sorgente raggiungibile.
-// Se uno dei due iniziasse a scrivere davvero un artefatto, la voce resta
-// muta — e' il limite noto del ragionamento per file, gia' pagato una volta in
+// della primitiva ha fatto entrare nel censimento file che scrivono con
+// `appendFileSync`. Questi canali non toccano un artefatto pubblicato: il
+// target e' un file FUORI dal workspace, aperto in append e mai riscritto in
+// place. Un SIGKILL a meta' puo' lasciare una riga tronca in un canale che il
+// repo non pubblica, non un `content/**` dimezzato — e non c'e' niente da
+// rendere atomico, perche' l'append e' gia' il contrario del troncamento.
+// Entrano nel censimento solo perche' il criterio gira sul FILE: la radice
+// pubblicata che matcha sta altrove nella loro sorgente raggiungibile.
+// Se un entry iniziasse a scrivere davvero un artefatto, la voce resta muta —
+// e' il limite noto del ragionamento per file, gia' pagato una volta in
 // `generate-border-wait-ranking-article.mjs` e coperto li' da un test dedicato.
 const APPEND_ONLY_CHANNEL = [
   'generator/scripts/publish-journalist-article.mjs',
   'generator/scripts/refresh-daily-brief-data.mjs',
+  // Deroga verificata nel codice: `reportOccurrences()` appende solo a
+  // `reportPath` (`CONTROL_CHAR_REPORT` oppure `RUNNER_TEMP`/`TMPDIR`) e
+  // `appendStepSummary()` solo a `GITHUB_STEP_SUMMARY`; il riferimento a
+  // `content/blog-body` in `articleSourceReportableText()` identifica l'input
+  // diagnosticato e non il target di alcuna scrittura pubblicata.
+  'generator/scripts/lib/control-char-write-report.mjs',
 ];
 
 const NOT_WORKFLOW_DRIVEN = [

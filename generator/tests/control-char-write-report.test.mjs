@@ -72,6 +72,43 @@ test('un contenuto pulito non registra niente e non annuncia niente', () => {
   assert.deepEqual(logs, []);
 });
 
+test('una modifica senza C0 riconoscibile fallisce chiusa, salvo una trasformazione esplicita', () => {
+  resetCounters();
+  assert.throws(
+    () => reportStrippedControlChars('public/data/example.json', '{"name":"Chiasso"}', '{"name":"Lugano"}', {
+      log: () => {}, summaryPath: '', reportPath: '/tmp/r.jsonl',
+    }),
+    /sanificazione non tracciata/u,
+  );
+  assert.equal(strippedCount(), 0, 'senza un marker non si inventa evidenza');
+
+  assert.equal(reportStrippedControlChars('content/blog-body/it/example.ts', 'prima', 'dopo', {
+    allowExpectedRewrite: true, log: () => {}, summaryPath: '',
+  }), 0);
+
+  assert.throws(
+    () => reportStrippedControlCharsDeep('public/data/example.json', { name: 'Chiasso' }, { name: 'Lugano' }, {
+      log: () => {}, summaryPath: '', reportPath: '/tmp/r.jsonl',
+    }),
+    /sanificazione non tracciata/u,
+  );
+  for (const [original, clean] of [
+    [{ count: 1 }, { count: 2 }],
+    [{ state: { enabled: true } }, { state: { enabled: false } }],
+    [{ a: ['same'] }, { a: 'same' }],
+  ]) {
+    assert.throws(
+      () => reportStrippedControlCharsDeep('public/data/example.json', original, clean, {
+        log: () => {}, summaryPath: '', reportPath: '/tmp/r.jsonl',
+      }),
+      /sanificazione non tracciata/u,
+    );
+  }
+  assert.equal(reportStrippedControlCharsDeep('content/blog-body/it/example.ts', ['prima'], ['dopo'], {
+    allowExpectedRewrite: true, log: () => {}, summaryPath: '',
+  }), 0);
+});
+
 test('un marker C0 emette ::error:: e rifiuta la scrittura', () => {
   resetCounters();
   const logs = [];
@@ -107,6 +144,44 @@ test('l\'evidenza finisce su disco in forma leggibile da un programma', () => {
   assert.ok(rec.context.includes(B), 'il record deve portare il byte, non solo il conteggio');
 });
 
+test('l\'offset di un FAQ decodificato indica il campo e la propria base', () => {
+  resetCounters();
+  const writes = [];
+  const source = String.raw`export default { 'blog.article.example.faq': '[{"q":"ab\\u00169","a":"risposta"}]' };`;
+  expectRejectedWrite('content/blog-body/fr/example.ts', source, source, {
+    log: () => {},
+    fsImpl: { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) },
+    reportPath: '/tmp/r.jsonl',
+    summaryPath: '',
+  });
+  const rec = JSON.parse(writes.find((w) => w.p === '/tmp/r.jsonl').d.trim());
+  assert.equal(rec.field, 'blog.article.example.faq[0].q');
+  assert.equal(rec.offsetBasis, 'decoded-json-field');
+  assert.equal(rec.at, 2, 'l\'offset e\' relativo al valore FAQ decodificato');
+});
+
+test('il report strutturato conserva il percorso dei campi e delimita i backtick nel Markdown', () => {
+  resetCounters();
+  const writes = [];
+  const original = { 'art|`icle': 'pre | ``' + B + '9 post' };
+  assert.throws(() => reportStrippedControlCharsDeep('public/data/article.jsonl', original, original, {
+    log: () => {},
+    fsImpl: { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) },
+    reportPath: '/tmp/deep-r.jsonl',
+    summaryPath: '/tmp/deep-s.md',
+  }), /scrittura rifiutata/u);
+
+  const rec = JSON.parse(writes.find((w) => w.p === '/tmp/deep-r.jsonl').d.trim());
+  assert.equal(rec.field, '$.art|`icle');
+  assert.equal(rec.offsetBasis, 'structured-field');
+  assert.equal(rec.at, 8, 'l\'offset e\' relativo alla stringa del campo');
+  const summary = writes.find((w) => w.p === '/tmp/deep-s.md').d;
+  const row = summary.split('\n').find((line) => line.includes('structured-field'));
+  assert.ok(summary.includes('&#124;'), 'i pipe nei campi e nel contesto sono entita, non separatori GFM');
+  assert.ok(row.includes('``') && row.includes('```'), 'i delimitatori superano i backtick del campo e del contesto');
+  assert.equal(row.split('|').length - 1, 7, 'la riga conserva le sette pipe strutturali della tabella');
+});
+
 test('un errore I/O del report non permette di scrivere il contenuto sanificato', () => {
   resetCounters();
   const logs = [];
@@ -122,43 +197,6 @@ test('il controllo si applica anche quando clean coincide con un original che co
   const src = `x${B}9y`;
   expectRejectedWrite('a.ts', src, src, { log: () => {}, summaryPath: '' });
   assert.equal(strippedCount(), 1);
-});
-
-test('una sanificazione codificata che cambia clean viene rifiutata fail-closed', () => {
-  resetCounters();
-  const logs = [];
-  const backspace = String.fromCharCode(0x08);
-  const original = JSON.stringify({ name: `Chi${backspace}asso` });
-  const clean = JSON.stringify({ name: 'Chiasso' });
-  assert.equal(original.includes(backspace), false, 'JSON.stringify deve codificare il C0');
-  assert.ok(original.includes('\\b'), 'la sorgente deve contenere la forma JSON \\b');
-  assert.notEqual(clean, original);
-
-  assert.throws(
-    () => reportStrippedControlChars('public/data/example.json', original, clean, {
-      log: (s) => logs.push(s), summaryPath: '', reportPath: 'control-char-report.jsonl',
-    }),
-    /sanificazione non tracciata/u,
-  );
-  assert.equal(strippedCount(), 0, 'non si deve inventare un offset per un marker non decodificato');
-  assert.equal(logs.length, 1);
-  assert.match(logs[0], /^::error::/u);
-  assert.match(logs[0], /clean differisce da original/u);
-});
-
-test('una sanificazione JSON che cambia una chiave C0 viene rifiutata fail-closed', () => {
-  resetCounters();
-  const original = { [`na${B}me`]: 'Chiasso' };
-  const clean = { name: 'Chiasso' };
-
-  assert.throws(
-    () => reportStrippedControlCharsDeep('public/data/example.json', original, clean, {
-      log: () => {}, fsImpl: { mkdirSync() {}, appendFileSync() {} },
-      summaryPath: '', reportPath: 'control-char-report.jsonl',
-    }),
-    /scrittura rifiutata/u,
-  );
-  assert.equal(strippedCount(), 1, 'il marker nella chiave deve essere registrato');
 });
 
 test('ogni choke point di scrittura passa da qui — per OGNI sanitizer, non solo sanitizeText', () => {
@@ -384,4 +422,240 @@ test('senza GITHUB_STEP_SUMMARY il rifiuto continua a funzionare', () => {
   });
   assert.equal(strippedCount(), 1);
   assert.equal(residueCount(), 1);
+});
+
+test('il report decodifica i C0 JSON prima della sanificazione, incluse le chiavi', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const backspace = String.fromCharCode(0x08);
+  const raw = JSON.stringify({ ['ti' + backspace + 'tle']: 'Chi' + backspace + 'asso' });
+  expectRejectedWrite('dist/api/data.json', raw, '{"title":"Chiasso"}', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  assert.equal(strippedCount(), 2);
+  const jsonl = writes.find((w) => w.p === '/tmp/r.jsonl').d.trim();
+  const records = jsonl.split('\n').map(JSON.parse);
+  assert.equal(records.length, 2);
+  assert.ok(records.every((record) => record.byte === 0x08));
+});
+
+test('il report decodifica i campi TypeScript article prima che il writer li salvi', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const source = String.raw`export const BLOG_ARTICLE_BODY = {
+    'blog.article.example.body1': 'comp\x089tences',
+    'blog.article.example.faq': '[{"que\\u0008stion":"Q","answer":"comp\\u00089tences"}]',
+  };`;
+  expectRejectedWrite('content/blog-body/it/example.ts', source, source, {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  const records = writes[0].d.trim().split('\n').map((line) => JSON.parse(line));
+  assert.deepEqual(records.map((record) => record.byte), [0x08, 0x08, 0x08]);
+});
+
+test('il report decodifica anche i campi TypeScript dei chunk meta', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const source = String.raw`export const BLOG_META = {
+    'blog.article.example.title': 'Titolo\x08rotto',
+  };`;
+  expectRejectedWrite('content/blog-meta-it.ts', source, source, {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
+});
+
+test('il report riconosce gli alias services/locales di body e meta', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const source = String.raw`export const BLOG_ARTICLE_BODY = {
+    'blog.article.example.body1': 'comp\x089tences',
+  };`;
+  const paths = [
+    'services/locales/blog-body/it/example.ts',
+    String.raw`services\locales\blog-body-ch\fr\example.ts`,
+    'services/locales/blog-body-canton-sg/fr/example.ts',
+    '/repo/services/locales/blog-meta-it.ts',
+    String.raw`services\locales\blog-meta-ch-fr.ts`,
+    'services/locales/blog-meta-canton-sg-fr.ts',
+  ];
+
+  for (const file of paths) {
+    expectRejectedWrite(file, source, source, {
+      log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+    });
+  }
+
+  assert.equal(writes.length, paths.length);
+  assert.deepEqual(writes.map(({ d }) => JSON.parse(d.trim()).byte), new Array(paths.length).fill(0x08));
+});
+
+test('i riferimenti numerici XML sono registrati prima che il writer li rimuova', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  expectRejectedWrite('dist/api/sitemap.xml', '<title>comp&#x16;9tences</title>', '<title>comp9tences</title>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  const record = JSON.parse(writes[0].d.trim());
+  assert.equal(record.byte, 0x16);
+  assert.equal(record.residuo, true);
+});
+
+test('gli escape C0 negli script HTML sono registrati ma un backslash letterale resta intatto', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const escapedControl = String.raw`\u0008`;
+  const html = '<script type="application/ld+json">{"headline":"Chi' + escapedControl + 'asso"}</script>';
+  expectRejectedWrite('dist/api/article.html', html, '<script type="application/ld+json">{"headline":"Chiasso"}</script>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
+
+  const literalBackslashB = String.raw`\b`;
+  const cleanHtml = '<script>const text = ' + JSON.stringify(literalBackslashB) + ';</script>';
+  assert.equal(reportStrippedControlChars('dist/api/article.html', cleanHtml, cleanHtml, { log: () => {} }), 0);
+});
+
+test('gli escape negli script HTML sono rilevati senza leggere commenti o regex literal', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const escapedControl = String.raw`\x08`;
+  const html = '<script>const text = "a' + escapedControl + 'b";</script>';
+  expectRejectedWrite('dist/api/article.html', html, '<script>const text = "ab";</script>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
+
+  const comment = '<script>// "' + escapedControl + '"\nconst text = "clean";</script>';
+  const regex = '<script>const matcher = /["' + escapedControl + '"]/;</script>';
+  const regexAfterIf = '<script>if (x) /["' + escapedControl + '"]/.test(x);</script>';
+  const regexAfterBlock = '<script>function f(){} /["' + escapedControl + '"]/.test("");</script>';
+  const regexAfterLabelledBlock = '<script>label: {} /["' + escapedControl + '"]/.test("");</script>';
+  const regexAfterControlledLabel = '<script>if (x) label: {} /["' + escapedControl + '"]/.test("");</script>';
+  assert.equal(reportStrippedControlChars('dist/api/comment.html', comment, comment, { log: () => {} }), 0);
+  assert.equal(reportStrippedControlChars('dist/api/regex.html', regex, regex, { log: () => {} }), 0);
+  assert.equal(reportStrippedControlChars('dist/api/regex-after-if.html', regexAfterIf, regexAfterIf, { log: () => {} }), 0);
+  assert.equal(reportStrippedControlChars('dist/api/regex-after-block.html', regexAfterBlock, regexAfterBlock, { log: () => {} }), 0);
+  assert.equal(reportStrippedControlChars('dist/api/regex-after-label.html', regexAfterLabelledBlock, regexAfterLabelledBlock, { log: () => {} }), 0);
+  assert.equal(reportStrippedControlChars('dist/api/regex-after-controlled-label.html', regexAfterControlledLabel, regexAfterControlledLabel, { log: () => {} }), 0);
+});
+
+test('gli escape ottali legacy negli script inline sono respinti prima della scrittura', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const octalEscapes = [String.raw`\7`, String.raw`\07`, String.raw`\08`];
+
+  for (const [index, escapedControl] of octalEscapes.entries()) {
+    const html = '<script>const text = "a' + escapedControl + 'b";</script>';
+    expectRejectedWrite(`dist/api/octal-${index}.html`, html, '<script>const text = "ab";</script>', {
+      log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+    });
+  }
+  assert.equal(writes.length, 3);
+  assert.deepEqual(writes.map(({ d }) => JSON.parse(d.trim()).byte), [0x07, 0x07, 0x00]);
+});
+
+test('gli escape C0 nei template literal statici sono rilevati, ma String.raw resta raw', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const escapedControl = String.raw`\x08`;
+  const html = '<script>const text = `a' + escapedControl + 'b`;</script>';
+  expectRejectedWrite('dist/api/template.html', html, '<script>const text = `ab`;</script>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
+
+  const raw = '<script>const text = String.raw`a' + escapedControl + 'b`;</script>';
+  assert.equal(reportStrippedControlChars('dist/api/template-raw.html', raw, raw, { log: () => {} }), 0);
+
+  const customTag = '<script>const text = identity`a' + escapedControl + 'b`;</script>';
+  expectRejectedWrite('dist/api/template-tagged.html', customTag, '<script>const text = identity`ab`;</script>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+
+  const memberTag = '<script>const text = Foo.String.raw`a' + escapedControl + 'b`;</script>';
+  expectRejectedWrite('dist/api/template-member-tag.html', memberTag, '<script>const text = Foo.String.raw`ab`;</script>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+
+  const interpolated = '<script>const text = `a' + escapedControl + '${value}b`;</script>';
+  expectRejectedWrite('dist/api/template-interpolated.html', interpolated, '<script>const text = `a${value}b`;</script>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+});
+
+test('data-src non rende esterno un blocco script inline', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const escapedControl = String.raw`\x08`;
+  const html = '<script data-src="example.js">const text = "a' + escapedControl + 'b";</script>';
+  expectRejectedWrite('dist/api/data-src.html', html, '<script data-src="example.js">const text = "ab";</script>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+
+  const quotedAttributeText = '<script data-note=" src=external.js > still inline">const text = "a' + escapedControl + 'b";</script>';
+  expectRejectedWrite('dist/api/quoted-attribute.html', quotedAttributeText, '<script data-note=" src=external.js > still inline">const text = "ab";</script>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+
+  const malformedEndTag = '<script>const text = "a' + escapedControl + 'b";</script x>';
+  expectRejectedWrite('dist/api/malformed-end-tag.html', malformedEndTag, '<script>const text = "ab";</script x>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+
+  const nbsp = '\u00a0';
+  const nonAsciiBoundary = '<script>const decoy = "</script' + nbsp + '>"; const text = "a' + escapedControl + 'b";</script>';
+  expectRejectedWrite('dist/api/non-ascii-end-boundary.html', nonAsciiBoundary,
+    '<script>const decoy = "</script' + nbsp + '>"; const text = "ab";</script>', {
+      log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+    });
+});
+
+test('un riferimento numerico in un commento XML segue il confine del sanitizer', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const xml = '<!-- titolo &#x08; lasciato in documentazione --><title>pulito</title>';
+  expectRejectedWrite('dist/api/comment.xml', xml, '<!-- titolo  lasciato in documentazione --><title>pulito</title>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
+});
+
+test('un riferimento numerico dentro CDATA XML segue il confine del sanitizer', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const xml = '<title><![CDATA[&#x08;]]></title>';
+  expectRejectedWrite('dist/api/cdata.xml', xml, '<title><![CDATA[]]></title>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
+});
+
+test('un riferimento numerico dentro una processing instruction XML segue il confine del sanitizer', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const xml = '<?probe &#x08;?> <title>pulito</title>';
+  expectRejectedWrite('dist/api/pi.xml', xml, '<?probe ?> <title>pulito</title>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
+});
+
+test('il report raw non interpreta escape TypeScript che compaiono solo nei commenti', () => {
+  resetCounters();
+  const source = String.raw`// documentazione: "\u0008"`;
+  assert.equal(reportStrippedControlChars('content/blog-body/fr/article.ts', source, source, { log: () => {} }), 0);
 });

@@ -6,7 +6,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { repairBody } from '../scripts/repair-empty-template-fields.mjs';
+import { bodyValuesForControlCharReport, repairBody } from '../scripts/repair-empty-template-fields.mjs';
+import { reportStrippedControlCharsDeep } from '../scripts/lib/control-char-write-report.mjs';
 import { isEmptyAmountFact, stripVacuousFacts } from '../scripts/lib/key-facts-specificity.mjs';
 
 const SCRIPT = fs.readFileSync(
@@ -77,10 +78,36 @@ test('il marcatore dentro una frase esce con il titolo dell\'articolo, e solo co
 });
 
 test('il riparatore registra i C0 dalla sorgente subito prima dello snapshot', () => {
-  assert.match(SCRIPT, /import \{ reportStrippedControlChars \} from '\.\/lib\/control-char-write-report\.mjs';/u);
+  assert.match(SCRIPT, /import \{ reportStrippedControlChars, reportStrippedControlCharsDeep \} from '\.\/lib\/control-char-write-report\.mjs';/u);
   assert.match(SCRIPT, /import \{ sanitizeText \} from '\.\.\/\.\.\/scripts\/lib\/sanitize-control-chars\.mjs';/u);
   assert.match(
     SCRIPT,
-    /if \(!check\) \{\s*const clean = sanitizeText\(next\);\s*reportStrippedControlChars\(file, next, clean\);\s*writeFileSnapshotAtomically\(file, source, clean\);\s*\}/u,
+    /if \(!check\) \{\s*const clean = sanitizeText\(next\);\s*reportStrippedControlChars\(file, next, clean\);\s*[\s\S]+?reportStrippedControlCharsDeep\([\s\S]+?writeFileSnapshotAtomically\(file, source, clean\);\s*\}/u,
+  );
+});
+
+test('la riparazione controlla i C0 prima della scrittura atomica', () => {
+  const source = fs.readFileSync(new URL('../scripts/repair-empty-template-fields.mjs', import.meta.url), 'utf8');
+  assert.match(source, /reportStrippedControlChars\(file, source, next, \{ allowExpectedRewrite: true \}\);\s*reportStrippedControlCharsDeep\([\s\S]+?\{ allowExpectedRewrite: true \},\s*\);\s*writeFileSnapshotAtomically\(file, source, clean\);/);
+});
+
+test('il guard decodifica solo i campi body TS e rileva tutti i C0 letterali o escaped', () => {
+  const escapes = String.raw`a\x08b \u{16}c \v \0z`;
+  const source = [
+    '// documentazione: \'blog.article.example-article.body1\': "' + String.raw`\x08` + '"',
+    "const body = { 'blog.article.example-article.body2': '" + escapes + "' };",
+  ].join('\n');
+  const values = bodyValuesForControlCharReport(source);
+  assert.equal(values.length, 1, 'il commento non viene interpretato come campo body');
+  assert.equal(values[0], `a${String.fromCharCode(0x08)}b ${String.fromCharCode(0x16)}c ${String.fromCharCode(0x0b)} ${String.fromCharCode(0)}z`);
+
+  assert.throws(
+    () => reportStrippedControlCharsDeep('content/blog-body/fr/example.ts', values, [], {
+      log: () => {},
+      fsImpl: { mkdirSync() {}, appendFileSync() {} },
+      reportPath: '/tmp/r.jsonl',
+      summaryPath: '',
+    }),
+    /scrittura rifiutata/u,
   );
 });
