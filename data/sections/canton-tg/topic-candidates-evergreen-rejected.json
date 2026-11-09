@@ -4,17 +4,17 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-tg::https://www.frauenfeld.ch/wohnen-mobilitaet/wohnen/bauen-und-umwelt/oeffentliche-auflagen.html/1009/news/12637": {
-      "section": "canton-tg",
-      "ts": 1793968637907
-    },
-    "canton-tg::https://grenzgaengerzentrum.de/ratgeber/allgemein/grenzgaenger-kinder-schule-schweiz": {
-      "section": "canton-tg",
-      "ts": 1794005848081
-    },
     "canton-tg::https://www.kreuzlingen.ch/aktuelles/steueramt-bleibt-am-9-november-vormittags-geschlossen": {
       "section": "canton-tg",
       "ts": 1794012712249
+    },
+    "canton-tg::https://grenzgaengerzentrum.de/ratgeber/allgemein/grenzgaenger-kinder-schule-schweiz": {
+      "section": "canton-tg",
+      "ts": 1794183044650
+    },
+    "canton-tg::https://www.suedkurier.de/kreis-konstanz/schwarzwaldbahn-faehrt-zwischen-singen-und-konstanz-nicht-pendler-und-seehas-betreiber-sind-frustriert-115639048": {
+      "section": "canton-tg",
+      "ts": 1794183060706
     }
   }
 }
