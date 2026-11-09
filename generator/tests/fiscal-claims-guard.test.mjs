@@ -26,30 +26,24 @@ import * as fixFaqLocales from '../scripts/fix-faq-locales.mjs';
 
 const ids = (text) => findFiscalClaims(text).map((claim) => claim.id);
 
-test('il repair fiscale registra i C0 dalla sorgente subito prima dello snapshot', () => {
-  const source = readFileSync(
-    path.join(import.meta.dirname, '..', 'scripts', 'repair-fiscal-claims.mjs'),
-    'utf8',
-  );
-  assert.match(source, /import \{ reportStrippedControlChars \} from '\.\/lib\/control-char-write-report\.mjs';/u);
-  assert.match(source, /import \{[\s\S]*decodeEscapedControlChars[\s\S]*findEscapedControlChars[\s\S]*\} from '\.\.\/\.\.\/scripts\/find-dirty-content-ids\.mjs';/u);
-  assert.match(source, /import \{ sanitizeText \} from '\.\.\/\.\.\/scripts\/lib\/sanitize-control-chars\.mjs';/u);
-  assert.match(
-    source,
-    /if \(!check\) \{\s*const clean = sanitizeText\(text\);\s*reportStrippedControlChars\(file, text, clean\);\s*if \(findEscapedControlChars\(clean\)\.length > 0\) \{\s*reportStrippedControlChars\(file, decodeEscapedControlChars\(clean\), clean\);\s*\}\s*writeFileSnapshotAtomically\(file, source, clean\);\s*\}/u,
-  );
-});
-
-test('il repair dei toponimi registra anche i C0 escapati prima della write', () => {
-  const source = readFileSync(
-    path.join(import.meta.dirname, '..', 'scripts', 'repair-localized-toponyms.mjs'),
-    'utf8',
-  );
-  assert.match(source, /import \{[\s\S]*decodeEscapedControlChars[\s\S]*findEscapedControlChars[\s\S]*\} from '\.\.\/\.\.\/scripts\/find-dirty-content-ids\.mjs';/u);
-  assert.match(
-    source,
-    /const clean = sanitizeText\(source\);\s*reportStrippedControlChars\(file, source, clean\);\s*if \(findEscapedControlChars\(clean\)\.length > 0\) \{\s*reportStrippedControlChars\(file, decodeEscapedControlChars\(clean\), clean\);\s*\}/u,
-  );
+test('i repair writer usano il choke point lexer-aware senza una scansione cieca del sorgente', () => {
+  const scripts = [
+    'repair-fiscal-claims.mjs',
+    'repair-localized-toponyms.mjs',
+    'repair-microcopy.mjs',
+    'repair-prompt-placeholders.mjs',
+    'repair-truncated-seo-titles.mjs',
+  ];
+  for (const script of scripts) {
+    const source = readFileSync(
+      path.join(import.meta.dirname, '..', 'scripts', script),
+      'utf8',
+    );
+    assert.match(source, /import \{ reportStrippedControlChars \} from '\.\/lib\/control-char-write-report\.mjs';/u, script);
+    assert.match(source, /import \{ sanitizeText \} from '\.\.\/\.\.\/scripts\/lib\/sanitize-control-chars\.mjs';/u, script);
+    assert.doesNotMatch(source, /(?:findEscapedControlChars|decodeEscapedControlChars)/u, script);
+    assert.match(source, /reportStrippedControlChars\(file, (?:text|source|content), clean\);/u, script);
+  }
 });
 
 test('franchigia 7.500: in ogni lingua, grafia e valuta', () => {

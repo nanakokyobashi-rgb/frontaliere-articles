@@ -62,10 +62,6 @@ import {
 import { writeFileAtomic as writeFileAtomicUnchecked } from './lib/atomic-write-file.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
-import {
-  decodeEscapedControlChars,
-  findEscapedControlChars,
-} from '../../scripts/find-dirty-content-ids.mjs';
 import { assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
 import { assertFaqPairsHaveNoRejectedControls } from '../../scripts/lib/faq-control-contract.mjs';
 import {
@@ -86,9 +82,6 @@ const CHECK_ONLY = process.argv.includes('--check');
 function writeFileAtomic(file, source) {
   const clean = sanitizeText(source);
   reportStrippedControlChars(file, source, clean);
-  if (findEscapedControlChars(clean).length > 0) {
-    reportStrippedControlChars(file, decodeEscapedControlChars(clean), clean);
-  }
   writeFileAtomicUnchecked(file, clean);
 }
 

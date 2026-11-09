@@ -723,3 +723,12 @@ test('il report raw non interpreta escape TypeScript che compaiono solo nei comm
   const source = String.raw`// documentazione: "\u0008"`;
   assert.equal(reportStrippedControlChars('content/blog-body/fr/article.ts', source, source, { log: () => {} }), 0);
 });
+
+test('il report TypeScript non interpreta regex, commenti o backslash letterali come C0', () => {
+  resetCounters();
+  const source = String.raw`const matcher = /\\b/;
+// documentazione: "\b"
+const backup = "C:\\backup";`;
+  assert.equal(reportStrippedControlChars('content/seo/seo-blog.ts', source, source, { log: () => {} }), 0);
+  assert.equal(strippedCount(), 0);
+});

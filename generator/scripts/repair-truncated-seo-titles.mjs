@@ -35,10 +35,6 @@ import { fileURLToPath } from 'node:url';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { LOCALES, SECTIONS, seoFilesFor } from '../../scripts/lib/article-surfaces.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
-import {
-  decodeEscapedControlChars,
-  findEscapedControlChars,
-} from '../../scripts/find-dirty-content-ids.mjs';
 import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
 import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
@@ -312,9 +308,6 @@ let writeTmpSeq = 0;
 function writeAtomic(file, content) {
   const clean = sanitizeText(content);
   reportStrippedControlChars(file, content, clean);
-  if (findEscapedControlChars(clean).length > 0) {
-    reportStrippedControlChars(file, decodeEscapedControlChars(clean), clean);
-  }
   const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
   try {
     fs.writeFileSync(tmp, clean, 'utf8');
