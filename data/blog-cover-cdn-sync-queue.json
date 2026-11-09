@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-via-libera-tram-treno-luganese.webp",
+      "sha256": "83eb6db694d936e1f7b7c7f682c5a4e423864de2719a5af8a17c65e80670e19b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-via-libera-tram-treno-luganese-480w.webp",
+      "sha256": "11fb3f14385cd4c0bbeb17a21a81c557c95ca239d1a25ff036f3cdf4b29d7813"
+    }
+  ]
 }
