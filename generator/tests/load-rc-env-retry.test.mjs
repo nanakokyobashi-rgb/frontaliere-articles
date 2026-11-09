@@ -87,6 +87,18 @@ test('application-intent ranking flag is mapped and missing remains fail-closed'
   assert.equal(shouldExportRcValue(null, 'APPLICATION_INTENT_RANKING_ENABLED'), false);
 });
 
+test('Application Concierge renewal rollout flags reach the environment loader', () => {
+  for (const [key, value] of [
+    ['APPLICATION_CONCIERGE_RENEWAL_ENABLED', 'true'],
+    ['APPLICATION_CONCIERGE_RENEWAL_ROLLOUT_PERCENT', '100'],
+  ]) {
+    assert.deepEqual(RC_TO_ENV[key], [key]);
+    assert.equal(getRcValue({ parameters: { [key]: { defaultValue: { value } } } }, key), value);
+    assert.equal(shouldExportRcValue(value, key), true);
+    assert.equal(shouldExportRcValue(null, key), false);
+  }
+});
+
 test('il loader corpus conserva il mapping della chiave Tankerkönig', () => {
   const source = fs.readFileSync(path.join(ROOT, 'scripts/load-rc-env.mjs'), 'utf8');
   assert.match(source, /TANKERKOENIG_API_KEY:\s+\['TANKERKOENIG_API_KEY'\]/);
