@@ -465,6 +465,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-porrentruy-imposta-budget-2027': {
+    title: 'Porrentruy prevede la quotità d\'imposta a 2 punti nel 2027',
+    description: 'Il budget 2027 di Porrentruy prevede la quotità d\'imposta a 2 punti, un taglio di 0,05 e un avanzo di CHF 29\'898 nel conto generale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, porrentruy, prevede, quotità, imposta',
+    ogTitle: 'Porrentruy: quotità d\'imposta a 2 punti nel 2027',
+    ogDescription: 'Il progetto presentato lunedì alla stampa combina una quotità d\'imposta prevista a 2 punti con un avanzo di CHF 29\'898 nel conto generale.',
+    canonicalPath: '/articoli-giura/porrentruy-imposta-budget-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Porrentruy prevede la quotità d'imposta a 2 punti nel 2027",
+      "description": "Il budget 2027 di Porrentruy prevede la quotità d'imposta a 2 punti, un taglio di 0,05 e un avanzo di CHF 29'898 nel conto generale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-porrentruy-imposta-budget-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-09T11:29:51+00:00",
+      "dateModified": "2026-11-09T11:29:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-giura/porrentruy-imposta-budget-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

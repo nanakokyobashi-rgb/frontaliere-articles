@@ -39,6 +39,9 @@ const blogMetaCantonJuFr: Record<string, string> = {
     'blog.article.giura-regain-fiducia-imprese.title': 'Regain de confiance des entreprises dans le canton du Jura',
     'blog.article.giura-regain-fiducia-imprese.excerpt': 'Le questionnaire envoyé par la Chambre de commerce et d\'industrie du Jura (CCIJ) montre un changement de ton parmi les entreprises du canton. Parmi les 116 qui ont répondu, 38% jugent la situation actuelle bonne ou excellente : 28% la qualifient de bonne et 10% d\'excellente.',
     'blog.article.giura-regain-fiducia-imprese.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.porrentruy-imposta-budget-2027.title': 'Porrentruy prévoit une quotité fiscale à 2 points en 2027',
+    'blog.article.porrentruy-imposta-budget-2027.excerpt': 'Le projet de budget 2027 prévoit pour Porrentruy une quotité fiscale à 2 points, une baisse de 0,05 et un excédent de CHF 29\'898.',
+    'blog.article.porrentruy-imposta-budget-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonJuFr;

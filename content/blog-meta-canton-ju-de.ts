@@ -39,6 +39,9 @@ const blogMetaCantonJuDe: Record<string, string> = {
     'blog.article.giura-regain-fiducia-imprese.title': 'Regain des Vertrauens der Unternehmen im Kanton Jura',
     'blog.article.giura-regain-fiducia-imprese.excerpt': '38% der 116 von der CCIJ befragten Unternehmen bewerten die Situation als gut oder ausgezeichnet, ein Anstieg gegenüber 24% vor einem Jahr.',
     'blog.article.giura-regain-fiducia-imprese.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.porrentruy-imposta-budget-2027.title': 'Porrentruy sieht für 2027 einen Steuerfuss von 2 Punkten vor',
+    'blog.article.porrentruy-imposta-budget-2027.excerpt': 'Der Budgetentwurf 2027 sieht für Porrentruy einen Steuerfuss von 2 Punkten, eine Senkung um 0,05 und einen Überschuss von CHF 29\'898 vor.',
+    'blog.article.porrentruy-imposta-budget-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonJuDe;

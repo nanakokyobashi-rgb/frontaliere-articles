@@ -39,6 +39,9 @@ const blogMetaCantonJuEn: Record<string, string> = {
     'blog.article.giura-regain-fiducia-imprese.title': 'Recovery of business confidence in the Canton of Jura',
     'blog.article.giura-regain-fiducia-imprese.excerpt': '38% of the 116 companies surveyed by CCIJ rate the situation as good or excellent, up from 24% a year ago.',
     'blog.article.giura-regain-fiducia-imprese.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.porrentruy-imposta-budget-2027.title': 'Porrentruy forecasts a tax rate of 2 points in 2027',
+    'blog.article.porrentruy-imposta-budget-2027.excerpt': 'The 2027 budget proposal sets Porrentruy’s tax rate at 2 points, with a reduction of 0,05 and a surplus of CHF 29\'898.',
+    'blog.article.porrentruy-imposta-budget-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonJuEn;

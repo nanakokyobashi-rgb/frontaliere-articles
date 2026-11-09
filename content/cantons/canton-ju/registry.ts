@@ -139,4 +139,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'porrentruy-imposta-budget-2027',
+ category: 'fiscale',
+ date: '2026-11-09T11:29:51.663Z',
+ image: '/images/blog/article-porrentruy-imposta-budget-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['JU'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
