@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "carburanti",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "3cd9bd8a7a61ce397e2de7921b1e29d6f1204c5414073a299e765ef57a5635e1",
+  "updatedAt": "2026-11-09T11:36:04.683Z",
+  "contentHash": "a3d19a1a6024bcb248790e6523540086c33001d80982b32aa29e6476a17ba9ba",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Porrentruy prevede la quotità d'imposta a 2 punti nel 2027",
+          "url": "/articoli-giura/porrentruy-imposta-budget-2027/",
+          "excerpt": "Il progetto di budget 2027 prevede per Porrentruy una quotità d'imposta a 2 punti, un taglio di 0,05 e un avanzo di CHF 29'898.",
+          "date": "2026-11-09T11:29:51.663Z"
+        },
+        {
           "title": "Regain di fiducia delle imprese nel Canton Giura",
           "url": "/articoli-giura/giura-regain-fiducia-imprese/",
           "excerpt": "Il 38% delle 116 imprese intervistate dalla CCIJ giudica buona o eccellente la situazione, con un aumento dal 24% di un anno fa.",
@@ -94,12 +100,6 @@
           "url": "/articoli-giura/prezzi-abitativi-terzo-trimestre/",
           "excerpt": "L'OFS segnala in Svizzera un aumento dei prezzi residenziali: 1,7% sul trimestre e 4,4% su un anno, con case a 2,1% e appartamenti a 1,3%.",
           "date": "2026-10-27T08:39:44.312Z"
-        },
-        {
-          "title": "Imposizione dei coniugi: voto il 29 novembre",
-          "url": "/articoli-giura/fiscalita-coppie-marite-voto/",
-          "excerpt": "Secondo la ricostruzione di RFJ, il sistema prevede che ogni contribuente sia tassato separatamente, indipendentemente dallo stato civile. Il 29 novembre, la questione torna alle urne: gli svizzeri dovranno esprimersi…",
-          "date": "2026-10-27T00:08:19.325Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T11:36:04.683Z"
     },
     "en": {
       "canton": "JU",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Porrentruy forecasts a tax rate of 2 points in 2027",
+          "url": "/en/jura-articles/porrentruy-tax-budget-2027/",
+          "excerpt": "The 2027 budget proposal sets Porrentruy’s tax rate at 2 points, with a reduction of 0,05 and a surplus of CHF 29'898.",
+          "date": "2026-11-09T11:29:51.663Z"
+        },
+        {
           "title": "Recovery of business confidence in the Canton of Jura",
           "url": "/en/jura-articles/jura-regain-business-confidence/",
           "excerpt": "38% of the 116 companies surveyed by CCIJ rate the situation as good or excellent, up from 24% a year ago.",
@@ -193,12 +199,6 @@
           "url": "/en/jura-articles/swiss-housing-prices-third-quarter/",
           "excerpt": "The OFS reports an increase in residential property prices in Switzerland: 1.7% quarter-on-quarter and 4.4% year-on-year, with houses at 2.1% and apartments at 1.3%.",
           "date": "2026-10-27T08:39:44.312Z"
-        },
-        {
-          "title": "Taxation of spouses: vote on 29 November",
-          "url": "/en/jura-articles/marital-couple-tax-vote/",
-          "excerpt": "According to RFJ's reconstruction, the system provides that each taxpayer is taxed separately, regardless of marital status. On November 29, the issue returns to the polls: the Swiss will have to express their opinion…",
-          "date": "2026-10-27T00:08:19.325Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T11:36:04.683Z"
     },
     "de": {
       "canton": "JU",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Porrentruy sieht für 2027 einen Steuerfuss von 2 Punkten vor",
+          "url": "/de/jura-artikel/porrentruy-steuer-budget-2027/",
+          "excerpt": "Der Budgetentwurf 2027 sieht für Porrentruy einen Steuerfuss von 2 Punkten, eine Senkung um 0,05 und einen Überschuss von CHF 29'898 vor.",
+          "date": "2026-11-09T11:29:51.663Z"
+        },
+        {
           "title": "Regain des Vertrauens der Unternehmen im Kanton Jura",
           "url": "/de/jura-artikel/regain-des-vertrauens-der-unternehmen-im-kanton-jura/",
           "excerpt": "38% der 116 von der CCIJ befragten Unternehmen bewerten die Situation als gut oder ausgezeichnet, ein Anstieg gegenüber 24% vor einem Jahr.",
@@ -292,12 +298,6 @@
           "url": "/de/jura-artikel/schweizer-wohnungspreise-drittes-quartal/",
           "excerpt": "Das BFS meldet für die Schweiz einen Anstieg der Wohnimmobilienpreise: 1,7% gegenüber dem Vorquartal und 4,4% im Jahresvergleich, bei Einfamilienhäusern um 2,1% und bei Eigentumswohnungen um 1,3%.",
           "date": "2026-10-27T08:39:44.312Z"
-        },
-        {
-          "title": "Besteuerung der Ehepartner: Abstimmung am 29. November",
-          "url": "/de/jura-artikel/ehepaare-steuer-abstimmung/",
-          "excerpt": "Am 8. März wurde die Einzelbesteuerung mit 54 % verabschiedet. Am 29. November findet die Abstimmung über die Initiative des Zentrums statt Der Text schlägt.",
-          "date": "2026-10-27T00:08:19.325Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T11:36:04.683Z"
     },
     "fr": {
       "canton": "JU",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Porrentruy prévoit une quotité fiscale à 2 points en 2027",
+          "url": "/fr/articles-jura/porrentruy-impot-budget-2027/",
+          "excerpt": "Le projet de budget 2027 prévoit pour Porrentruy une quotité fiscale à 2 points, une baisse de 0,05 et un excédent de CHF 29'898.",
+          "date": "2026-11-09T11:29:51.663Z"
+        },
+        {
           "title": "Regain de confiance des entreprises dans le canton du Jura",
           "url": "/fr/articles-jura/jura-regain-confiance-entreprises/",
           "excerpt": "Le questionnaire envoyé par la Chambre de commerce et d'industrie du Jura (CCIJ) montre un changement de ton parmi les entreprises du canton. Parmi les 116 qui ont répondu, 38% jugent la situation actuelle bonne ou…",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-jura/prix-logement-suisse-troisieme-trimestre/",
           "excerpt": "L'OFS signale en Suisse une hausse des prix résidentiels : 1,7 % sur le trimestre et 4,4 % sur un an, avec les maisons à 2,1 % et les appartements à 1,3 %.",
           "date": "2026-10-27T08:39:44.312Z"
-        },
-        {
-          "title": "Fiscalité des conjoints : votez le 29 novembre",
-          "url": "/fr/articles-jura/fiscalite-couples-maries-vote/",
-          "excerpt": "Selon la reconstitution de RFJ, le système prévoit que chaque contribuable est imposé séparément, quelle que soit sa situation familiale. Le 29 novembre, la question revient aux urnes: les Suisses devront se prononcer…",
-          "date": "2026-10-27T00:08:19.325Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T11:36:04.683Z"
     }
   }
 }

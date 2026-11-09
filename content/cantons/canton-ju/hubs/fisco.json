@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "fisco",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "c28cfb21b814028f67673e55cd588c0b4de0b5a3b0d72d8c22291dfc52ec9e5a",
+  "updatedAt": "2026-11-09T11:36:04.683Z",
+  "contentHash": "db1542c7203cfff10690be2d8caa5cc24257c3b2aca6c82aef96e3066caaffc4",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Porrentruy prevede la quotità d'imposta a 2 punti nel 2027",
+          "url": "/articoli-giura/porrentruy-imposta-budget-2027/",
+          "excerpt": "Il progetto di budget 2027 prevede per Porrentruy una quotità d'imposta a 2 punti, un taglio di 0,05 e un avanzo di CHF 29'898.",
+          "date": "2026-11-09T11:29:51.663Z"
+        },
+        {
           "title": "Imposizione dei coniugi: voto il 29 novembre",
           "url": "/articoli-giura/fiscalita-coppie-marite-voto/",
           "excerpt": "Secondo la ricostruzione di RFJ, il sistema prevede che ogni contribuente sia tassato separatamente, indipendentemente dallo stato civile. Il 29 novembre, la questione torna alle urne: gli svizzeri dovranno esprimersi…",
@@ -147,7 +153,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-09T11:36:04.683Z"
     },
     "en": {
       "canton": "JU",
@@ -232,6 +238,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Porrentruy forecasts a tax rate of 2 points in 2027",
+          "url": "/en/jura-articles/porrentruy-tax-budget-2027/",
+          "excerpt": "The 2027 budget proposal sets Porrentruy’s tax rate at 2 points, with a reduction of 0,05 and a surplus of CHF 29'898.",
+          "date": "2026-11-09T11:29:51.663Z"
+        },
+        {
           "title": "Taxation of spouses: vote on 29 November",
           "url": "/en/jura-articles/marital-couple-tax-vote/",
           "excerpt": "According to RFJ's reconstruction, the system provides that each taxpayer is taxed separately, regardless of marital status. On November 29, the issue returns to the polls: the Swiss will have to express their opinion…",
@@ -277,7 +289,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-09T11:36:04.683Z"
     },
     "de": {
       "canton": "JU",
@@ -362,6 +374,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Porrentruy sieht für 2027 einen Steuerfuss von 2 Punkten vor",
+          "url": "/de/jura-artikel/porrentruy-steuer-budget-2027/",
+          "excerpt": "Der Budgetentwurf 2027 sieht für Porrentruy einen Steuerfuss von 2 Punkten, eine Senkung um 0,05 und einen Überschuss von CHF 29'898 vor.",
+          "date": "2026-11-09T11:29:51.663Z"
+        },
+        {
           "title": "Besteuerung der Ehepartner: Abstimmung am 29. November",
           "url": "/de/jura-artikel/ehepaare-steuer-abstimmung/",
           "excerpt": "Am 8. März wurde die Einzelbesteuerung mit 54 % verabschiedet. Am 29. November findet die Abstimmung über die Initiative des Zentrums statt Der Text schlägt.",
@@ -407,7 +425,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-09T11:36:04.683Z"
     },
     "fr": {
       "canton": "JU",
@@ -492,6 +510,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Porrentruy prévoit une quotité fiscale à 2 points en 2027",
+          "url": "/fr/articles-jura/porrentruy-impot-budget-2027/",
+          "excerpt": "Le projet de budget 2027 prévoit pour Porrentruy une quotité fiscale à 2 points, une baisse de 0,05 et un excédent de CHF 29'898.",
+          "date": "2026-11-09T11:29:51.663Z"
+        },
+        {
           "title": "Fiscalité des conjoints : votez le 29 novembre",
           "url": "/fr/articles-jura/fiscalite-couples-maries-vote/",
           "excerpt": "Selon la reconstitution de RFJ, le système prévoit que chaque contribuable est imposé séparément, quelle que soit sa situation familiale. Le 29 novembre, la question revient aux urnes: les Suisses devront se prononcer…",
@@ -537,7 +561,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-09T11:36:04.683Z"
     }
   }
 }
