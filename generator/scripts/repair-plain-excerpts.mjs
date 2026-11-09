@@ -14,6 +14,8 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 import { assertNoExcerptCompletenessRegression } from '../../scripts/lib/excerpt-completeness-gate.mjs';
 import {
@@ -58,7 +60,9 @@ function decodeDoubleQuotedTS(value) {
 }
 
 function atomicWrite(file, before, after) {
-  writeFileSnapshotAtomically(file, before, after);
+  const clean = sanitizeText(after);
+  reportStrippedControlChars(file, after, clean);
+  writeFileSnapshotAtomically(file, before, clean);
 }
 
 function sectionForMeta(file) {

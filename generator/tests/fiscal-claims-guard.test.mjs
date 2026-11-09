@@ -26,6 +26,19 @@ import * as fixFaqLocales from '../scripts/fix-faq-locales.mjs';
 
 const ids = (text) => findFiscalClaims(text).map((claim) => claim.id);
 
+test('il repair fiscale registra i C0 dalla sorgente subito prima dello snapshot', () => {
+  const source = readFileSync(
+    path.join(import.meta.dirname, '..', 'scripts', 'repair-fiscal-claims.mjs'),
+    'utf8',
+  );
+  assert.match(source, /import \{ reportStrippedControlChars \} from '\.\/lib\/control-char-write-report\.mjs';/u);
+  assert.match(source, /import \{ sanitizeText \} from '\.\.\/\.\.\/scripts\/lib\/sanitize-control-chars\.mjs';/u);
+  assert.match(
+    source,
+    /if \(!check\) \{\s*const clean = sanitizeText\(text\);\s*reportStrippedControlChars\(file, text, clean\);\s*writeFileSnapshotAtomically\(file, source, clean\);\s*\}/u,
+  );
+});
+
 test('franchigia 7.500: in ogni lingua, grafia e valuta', () => {
   for (const sentence of [
     'I vecchi frontalieri beneficiano di un\'esenzione di 7.500 euro nel regime transitorio.',

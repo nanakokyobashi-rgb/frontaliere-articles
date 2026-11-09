@@ -250,6 +250,8 @@ test('ogni choke point di scrittura passa da qui — per OGNI sanitizer, non sol
     'generator/scripts/lib/article-meta-refresh.mjs',
     'generator/scripts/lib/evergreen-article-refresh.mjs',
     'generator/scripts/repair-empty-template-fields.mjs',
+    'generator/scripts/repair-fiscal-claims.mjs',
+    'generator/scripts/repair-plain-excerpts.mjs',
     'generator/scripts/retranslate-blocking-bodies.mjs',
     'scripts/build-api.mjs',
     'scripts/build-blog-index.mjs',
