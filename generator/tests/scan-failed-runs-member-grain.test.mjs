@@ -81,6 +81,10 @@ const file = process.env.FAKE_GH_STATE;
 const st = JSON.parse(fs.readFileSync(file, 'utf8'));
 const save = () => fs.writeFileSync(file, JSON.stringify(st));
 const opt = (n) => { const i = args.indexOf(n); return i === -1 ? undefined : args[i + 1]; };
+const body = () => {
+  const bodyFile = opt('--body-file');
+  return bodyFile === undefined ? opt('--body') : fs.readFileSync(bodyFile, 'utf8');
+};
 const all = (n) => args.flatMap((a, i) => (a === n ? [args[i + 1]] : []));
 const url = (n) => 'https://github.com/o/r/issues/' + n;
 if (args[0] === 'issue') {
@@ -112,7 +116,7 @@ if (args[0] === 'issue') {
   }
   if (args[1] === 'comment') {
     if (!issue) process.exit(1);
-    issue.comments.push({ body: opt('--body'), createdAt: new Date().toISOString() });
+    issue.comments.push({ body: body(), createdAt: new Date().toISOString() });
     save();
     process.stdout.write(url(issue.number) + '#issuecomment-1\\n');
     process.exit(0);
@@ -120,7 +124,7 @@ if (args[0] === 'issue') {
   if (args[1] === 'create') {
     const number = st.next++;
     st.issues.push({
-      number, title: opt('--title'), body: opt('--body'), state: 'OPEN',
+      number, title: opt('--title'), body: body(), state: 'OPEN',
       labels: all('--label'), createdAt: new Date().toISOString(), comments: [],
     });
     save();
