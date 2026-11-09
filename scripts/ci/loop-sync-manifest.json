@@ -2106,8 +2106,8 @@
       "mode": "identical",
       "reason": "Sanificazione dei control character in uscita, portata da #65. Registrata 'corpus-only-pending' dopo che la PR gemella sul sito era stata CHIUSA (valerielinc-ops#5488: il gate proposto rifiutava la home viva, 10 falsi positivi su 162 KB), con il lavoro di rientro tracciato in https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/5457. Promossa a `identical` da #157: il fetch su questo path non risponde piu' 404, e il contenuto scaricato e' byte-identico al file qui (hash 61f6e2723fabdad7 su entrambi i lati, verificato 2026-08-10) — non solo un file con lo stesso nome. Riallineata da #221 (site-ahead: valerielinc-ops#5585 aveva gia' corretto il docstring — (0x17,'0') e' «ò», non «à» — mentre qui era ancora fermo alla baseline del 2026-08-10); nessun codice eseguibile toccato, solo commenti.",
       "baseline": {
-        "site": "2a92741f0c3a6934",
-        "corpus": "2a92741f0c3a6934",
+        "site": "aaf40af555d4d70a",
+        "corpus": "aaf40af555d4d70a",
         "alignedAt": "2026-11-09"
       }
     },
@@ -4451,8 +4451,8 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "ee412ea54792f74a",
-        "corpus": "ee412ea54792f74a",
+        "site": "d8faa490721dc7b4",
+        "corpus": "d8faa490721dc7b4",
         "alignedAt": "2026-11-09"
       }
     },
