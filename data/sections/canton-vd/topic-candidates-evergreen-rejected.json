@@ -19,6 +19,10 @@
     "canton-vd::https://www.guidedufrontalier.com/actualites/declaration-dris-tou-couple-frontalier": {
       "section": "canton-vd",
       "ts": 1794194336542
+    },
+    "canton-vd::https://www.guidedufrontalier.com/actualites/retraite-frontalier-polypensionne": {
+      "section": "canton-vd",
+      "ts": 1794233220819
     }
   }
 }
