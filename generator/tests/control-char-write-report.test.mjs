@@ -621,34 +621,56 @@ test('data-src non rende esterno un blocco script inline', () => {
     });
 });
 
-test('un riferimento numerico in un commento XML segue il confine del sanitizer', () => {
+test('i riferimenti numerici nei commenti XML restano letterali anche nel report', () => {
   resetCounters();
   const writes = [];
   const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
   const xml = '<!-- titolo &#x08; lasciato in documentazione --><title>pulito</title>';
-  expectRejectedWrite('dist/api/comment.xml', xml, '<!-- titolo  lasciato in documentazione --><title>pulito</title>', {
+  assert.equal(reportStrippedControlChars('dist/api/comment.xml', xml, xml, {
     log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
-  });
-  assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
+  }), 0);
+  assert.equal(writes.length, 0);
 });
 
-test('un riferimento numerico dentro CDATA XML segue il confine del sanitizer', () => {
+test('i riferimenti numerici in CDATA XML restano letterali anche nel report', () => {
   resetCounters();
   const writes = [];
   const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
   const xml = '<title><![CDATA[&#x08;]]></title>';
-  expectRejectedWrite('dist/api/cdata.xml', xml, '<title><![CDATA[]]></title>', {
+  assert.equal(reportStrippedControlChars('dist/api/cdata.xml', xml, xml, {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  }), 0);
+  assert.equal(writes.length, 0);
+});
+
+test('i riferimenti numerici nelle processing instruction XML restano letterali anche nel report', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const xml = '<?probe &#x08;?> <title>pulito</title>';
+  assert.equal(reportStrippedControlChars('dist/api/pi.xml', xml, xml, {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  }), 0);
+  assert.equal(writes.length, 0);
+});
+
+test('un riferimento in una coda XML malformata viene ancora rilevato dal report', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const xml = '<!-- commento non terminato &#x08;';
+  expectRejectedWrite('dist/api/malformed-comment.xml', xml, '<!-- commento non terminato ', {
     log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
   });
   assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
 });
 
-test('un riferimento numerico dentro una processing instruction XML segue il confine del sanitizer', () => {
+test('un riferimento in un valore DTD con testo simile a commento viene rilevato', () => {
   resetCounters();
   const writes = [];
   const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
-  const xml = '<?probe &#x08;?> <title>pulito</title>';
-  expectRejectedWrite('dist/api/pi.xml', xml, '<?probe ?> <title>pulito</title>', {
+  const xml = '<!DOCTYPE root [<!ENTITY x "<!-- &#8; -->">]><root/>';
+  expectRejectedWrite('dist/api/dtd-entity.xml', xml, '<!DOCTYPE root [<!ENTITY x "<!--  -->">]><root/>', {
     log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
   });
   assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);

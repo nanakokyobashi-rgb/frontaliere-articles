@@ -67,6 +67,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { decodeInvalidXmlReferencesOutsideLiterals } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { readTsStringMap } from './ts-string-map.mjs';
 
 /** Dove finisce l'evidenza. Sovrascrivibile per i test. */
@@ -549,24 +550,6 @@ function decodeScriptEscapesOutsideComments(source) {
 }
 
 /**
- * Decode the numeric references that `sanitizeXmlDocument` removes.
- *
- * The sanitizer applies this rule to the whole XML string.  In particular,
- * it does not preserve a forbidden reference merely because it appears in a
- * comment, CDATA section, or processing instruction.  Keeping the report on
- * the same boundary is what preserves the original marker before the write
- * is rejected instead of misclassifying the change as untraced.
- */
-function decodeXmlNumericReferences(xml) {
-  return xml.replace(/&#(x[0-9a-fA-F]+|[0-9]+);/g, (reference, digits) => {
-    const code = digits[0] === 'x'
-      ? Number.parseInt(digits.slice(1), 16)
-      : Number.parseInt(digits, 10);
-    return Number.isFinite(code) && isInvalidC0(code) ? String.fromCharCode(code) : reference;
-  });
-}
-
-/**
  * Map the generator's main-layout article aliases to this repo's corpus layout.
  * The caller's spelling is retained in the emitted evidence.
  */
@@ -724,7 +707,7 @@ function reportableFields(file, original) {
     if (articleSourceFields !== null) return articleSourceFields;
   }
   if (extension === '.xml') {
-    return [{ field: null, text: decodeXmlNumericReferences(original), offsetBasis: 'decoded-document' }];
+    return [{ field: null, text: decodeInvalidXmlReferencesOutsideLiterals(original), offsetBasis: 'decoded-document' }];
   }
 
   if (extension === '.html' || extension === '.htm') {
