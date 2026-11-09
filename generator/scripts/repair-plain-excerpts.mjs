@@ -62,6 +62,7 @@ function decodeDoubleQuotedTS(value) {
 function atomicWrite(file, before, after) {
   const clean = sanitizeText(after);
   reportStrippedControlChars(file, after, clean);
+  assertDecodedSeoStringsAreSafe(file, after);
   writeFileSnapshotAtomically(file, before, clean);
 }
 
@@ -113,11 +114,22 @@ function structuredDataBlocks(source) {
 function assertDecodedStructuredDataIsSafe(file, source) {
   for (const block of structuredDataBlocks(source)) {
     for (const match of block.matchAll(/(")((?:[^"\\]|\\.)*)(")/gu)) {
-      const decoded = decodeDoubleQuotedTS(match[2]);
-      const clean = sanitizeText(decoded);
-      reportStrippedControlChars(file, decoded, clean);
+      reportDecodedStringIsSafe(file, match[2], '"');
     }
   }
+}
+
+function reportDecodedStringIsSafe(file, encoded, quote) {
+  const decoded = decodeTypeScriptString(encoded, quote);
+  const clean = sanitizeText(decoded);
+  reportStrippedControlChars(file, decoded, clean);
+}
+
+function assertDecodedSeoStringsAreSafe(file, source) {
+  for (const match of source.matchAll(/^[ \t]*(?:description|ogDescription)\s*:\s*'((?:[^'\\]|\\.)*)'/gmu)) {
+    reportDecodedStringIsSafe(file, match[1], "'");
+  }
+  assertDecodedStructuredDataIsSafe(file, source);
 }
 
 function sectionForMeta(file) {
@@ -382,7 +394,6 @@ function repairSeoFile(relativeFile, { writeMode = false, sourceMap } = {}) {
   });
 
   if (after !== before && writeMode) {
-    assertDecodedStructuredDataIsSafe(file, after);
     atomicWrite(file, before, after);
   }
   return { file: relativeFile, changed, details };

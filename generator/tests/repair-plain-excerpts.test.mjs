@@ -32,7 +32,7 @@ test('il repair SEO registra i C0 dalla sorgente subito prima dello snapshot', (
   assert.match(source, /import \{ sanitizeText \} from '\.\.\/\.\.\/scripts\/lib\/sanitize-control-chars\.mjs';/u);
   assert.match(
     source,
-    /function atomicWrite\(file, before, after\) \{\s*const clean = sanitizeText\(after\);\s*reportStrippedControlChars\(file, after, clean\);\s*writeFileSnapshotAtomically\(file, before, clean\);\s*\}/u,
+    /function atomicWrite\(file, before, after\) \{\s*const clean = sanitizeText\(after\);\s*reportStrippedControlChars\(file, after, clean\);\s*assertDecodedSeoStringsAreSafe\(file, after\);\s*writeFileSnapshotAtomically\(file, before, clean\);\s*\}/u,
   );
 });
 
@@ -40,11 +40,15 @@ test('il repair SEO controlla i C0 escapati dopo il decode di structuredData', (
   const source = readFileSync(SCRIPT, 'utf8');
   assert.match(
     source,
-    /function assertDecodedStructuredDataIsSafe\(file, source\) \{[\s\S]*const decoded = decodeDoubleQuotedTS\(match\[2\]\);[\s\S]*const clean = sanitizeText\(decoded\);[\s\S]*reportStrippedControlChars\(file, decoded, clean\);/u,
+    /function assertDecodedStructuredDataIsSafe\(file, source\) \{[\s\S]*reportDecodedStringIsSafe\(file, match\[2\], '"'\);/u,
   );
   assert.match(
     source,
-    /assertDecodedStructuredDataIsSafe\(file, after\);\s*atomicWrite\(file, before, after\);/u,
+    /function assertDecodedSeoStringsAreSafe\(file, source\) \{[\s\S]*description\|ogDescription[\s\S]*reportDecodedStringIsSafe\(file, match\[1\], "'"\);[\s\S]*assertDecodedStructuredDataIsSafe\(file, source\);/u,
+  );
+  assert.match(
+    source,
+    /function atomicWrite\(file, before, after\) \{[\s\S]*assertDecodedSeoStringsAreSafe\(file, after\);[\s\S]*writeFileSnapshotAtomically\(file, before, clean\);/u,
   );
 });
 
