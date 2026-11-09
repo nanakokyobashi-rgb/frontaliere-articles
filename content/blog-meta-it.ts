@@ -13685,6 +13685,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.smile-varese-como-ticino.title': 'SMILE: mobilità sostenibile tra Varese, Como e Ticino',
     'blog.article.smile-varese-como-ticino.excerpt': 'Il 10 novembre 2026 Chiasso sarà il punto di presentazione pubblica di SMILE.',
     'blog.article.smile-varese-como-ticino.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.vivere-magreglio-lavorare-ticino.title': 'Vivere a Magreglio e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-magreglio-lavorare-ticino.excerpt': 'Analisi e informazioni pratiche per chi sceglie di risiedere a Magreglio, in provincia di Como, e lavorare come frontaliere in Ticino.',
+    'blog.article.vivere-magreglio-lavorare-ticino.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;
