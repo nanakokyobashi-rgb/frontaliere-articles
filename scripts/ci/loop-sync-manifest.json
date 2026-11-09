@@ -6945,9 +6945,9 @@
       "mode": "identical",
       "reason": "Fingerprint byte-exact dei producer site-support, AdSense, Partnerize, Meta Pixel e helper canonici; lega gli snapshot trasportati ai byte sorgente e ne verifica l’insieme prima della pubblicazione.",
       "baseline": {
-        "site": "95d8d04585133d65",
-        "corpus": "95d8d04585133d65",
-        "alignedAt": "2026-11-05"
+        "site": "dc236b7de7fa65f7",
+        "corpus": "dc236b7de7fa65f7",
+        "alignedAt": "2026-11-09"
       }
     },
     {
