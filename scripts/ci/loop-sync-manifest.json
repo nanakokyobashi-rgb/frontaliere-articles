@@ -4232,7 +4232,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest e7c60f48… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
+      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest 4e12b102… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
       "baseline": {
         "site": "18668c902915dd43",
         "corpus": "02d366e3879d4a7a",
@@ -4242,7 +4242,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 23,
-        "sha256": "e7c60f4821b9826525b8faba1039ff79c9d49880cf661d41c0452ff3de6e7293"
+        "sha256": "4e12b102a1c071814d667a486261817fcc96415aae55b94d22c213bea8aba81c"
       }
     },
     {
@@ -4459,9 +4459,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
       "baseline": {
-        "site": "699fe7e20f015dc6",
-        "corpus": "699fe7e20f015dc6",
-        "alignedAt": "2026-11-05"
+        "site": "cace919981b8a649",
+        "corpus": "cace919981b8a649",
+        "alignedAt": "2026-11-09"
       }
     },
     {
