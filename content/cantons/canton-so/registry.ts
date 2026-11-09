@@ -303,4 +303,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'polizia-cantonale-comunicazione-media',
+ category: 'pratico',
+ date: '2026-11-09T01:46:37.001Z',
+ image: '/images/blog/article-polizia-cantonale-comunicazione-media.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

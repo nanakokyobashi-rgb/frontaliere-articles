@@ -84,6 +84,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.consiglio-soletta-rifiuta-trasparenza.title': 'Solothurn Council rejects mandate on campaign transparency',
     'blog.article.consiglio-soletta-rifiuta-trasparenza.excerpt': 'The Cantonal Council of Solothurn rejected on Wednesday the drafting of a law on transparency regarding campaign funders, with 63 votes against and 31 in favor.',
     'blog.article.consiglio-soletta-rifiuta-trasparenza.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.polizia-cantonale-comunicazione-media.title': 'Communications and Media Service of the Solothurn Cantonal Police',
+    'blog.article.polizia-cantonale-comunicazione-media.excerpt': 'The service operates 365 days a year, manages X, Facebook and Instagram, and prohibits drones within 300 m of an event.',
+    'blog.article.polizia-cantonale-comunicazione-media.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

@@ -84,6 +84,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.consiglio-soletta-rifiuta-trasparenza.title': 'Solothurner Rat lehnt Auftrag zur Transparenz bei Kampagnen ab',
     'blog.article.consiglio-soletta-rifiuta-trasparenza.excerpt': 'Der Solothurner Kantonsrat hat am Mittwoch die Ausarbeitung eines Gesetzes über die Transparenz der Kampagnenfinanzierer mit 63 Gegenstimmen und 31 Ja-Stimmen abgelehnt.',
     'blog.article.consiglio-soletta-rifiuta-trasparenza.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.polizia-cantonale-comunicazione-media.title': 'Kommunikations- und Mediendienst der Kantonspolizei Solothurn',
+    'blog.article.polizia-cantonale-comunicazione-media.excerpt': 'Der Dienst ist 365 Tage im Jahr tätig, betreut X, Facebook und Instagram und verbietet Drohnen im Umkreis von 300 m um eine Veranstaltung.',
+    'blog.article.polizia-cantonale-comunicazione-media.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;
