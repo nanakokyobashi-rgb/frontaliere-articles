@@ -217,7 +217,7 @@ const claimedOutputDescendants = new Map<string, string>();
  * Most pages are `<slug>/index.html`, so their parent directory is unique per
  * page. That directory is derived from the claimed index file instead of being
  * stored in `claimedOutputDescendants`, which otherwise pins one extra path
- * string per page for the whole build (~1.8M on a jobs leg).
+ * string per page for the whole build.
  */
 const DIRECTORY_INDEX_BASENAME = 'index.html';
 const DIRECTORY_INDEX_SUFFIX = `${path.sep}${DIRECTORY_INDEX_BASENAME}`;
