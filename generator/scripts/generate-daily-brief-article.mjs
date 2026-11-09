@@ -77,7 +77,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
 const LOCALES = ['it', 'en', 'de', 'fr'];
 const SNAPSHOT_PATH = path.join(REPO_ROOT, 'public', 'data', 'daily-brief.json');
-const DAILY_BRIEF_CODEX_TIMEOUT_MS = 45_000;
+// The Codex image lane can take longer than a photo/API fallback even when it
+// is healthy: successful daily runs have needed roughly 45 seconds just to
+// finish generation, before normalization and vision verification. A 45-second
+// cap therefore turned a slow-but-valid primary into a deterministic provider
+// failure; keep the overall 120-second image phase bounded for the remaining
+// governed checks and fallback attempts.
+const DAILY_BRIEF_CODEX_TIMEOUT_MS = 90_000;
 
 /** Rewrite only the 4 body files (idempotent same-day refresh). */
 export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) {
