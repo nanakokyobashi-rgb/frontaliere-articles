@@ -75,6 +75,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.neyruz-strada-cantonale-valtraloc.title': 'Neyruz: lavori Valtraloc, conclusione autunno 2028',
     'blog.article.neyruz-strada-cantonale-valtraloc.excerpt': 'La strada cantonale di Neyruz entrerà in cantiere. Il progetto Valtraloc prevede la valorizzazione degli spazi, conclusione prevista per l\'autunno 2028.',
     'blog.article.neyruz-strada-cantonale-valtraloc.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.friburgo-destra-tre-seggi.title': 'Elezioni a Friburgo: destra ottiene tre seggi al primo turno',
+    'blog.article.friburgo-destra-tre-seggi.excerpt': 'Il titolo mette insieme tre coordinate verificabili: il territorio di Friburgo, l\'organo Consiglio di Stato e l\'esito di tre seggi assegnati alla destra al primo turno.',
+    'blog.article.friburgo-destra-tre-seggi.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonFrIt;
