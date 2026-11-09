@@ -157,6 +157,15 @@ const APPEND_ONLY_CHANNEL = [
 
 const NOT_WORKFLOW_DRIVEN = [
   'generator/scripts/repair-mangled-chars.mjs',
+  // Eccezione verificata nel codice e nei workflow: questi due repairer non
+  // sono invocati da alcun workflow, e il loro commit passa gia' da helper
+  // atomici. `repair-fiscal-claims` chiama `writeFileSnapshotAtomically`, che
+  // prepara gli snapshot e li committa con temp+rename; `repair-microcopy`
+  // chiama `writeFileAtomic` da `lib/atomic-write-file.mjs`, che scrive il temp
+  // e usa `renameSync` con cleanup. Se uno dei due entra in un workflow, va
+  // tolto da questa lista e portato nei choke-point verificati sopra.
+  'generator/scripts/repair-fiscal-claims.mjs',
+  'generator/scripts/repair-microcopy.mjs',
   'generator/scripts/repair-prompt-placeholders.mjs',
   'generator/scripts/repair-source-echo.mjs',
   // Backfill deterministico manuale delle label `nav:`: non e' invocato da

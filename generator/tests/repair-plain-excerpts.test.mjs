@@ -26,6 +26,22 @@ test('il matcher dei meta include la chiusura della chiave prima dei due punti',
   assert.match(source, /assertPlainExcerpt\(repaired,\s*\{\s*\.\.\.context,\s*body\s*\}\)/u);
 });
 
+test('il repair SEO delega i C0 al choke point condiviso prima dello snapshot', () => {
+  const source = readFileSync(SCRIPT, 'utf8');
+  assert.match(source, /import \{ reportStrippedControlChars \} from '\.\/lib\/control-char-write-report\.mjs';/u);
+  assert.match(source, /import \{ sanitizeText \} from '\.\.\/\.\.\/scripts\/lib\/sanitize-control-chars\.mjs';/u);
+  assert.match(
+    source,
+    /function atomicWrite\(file, before, after\) \{\s*const clean = sanitizeText\(after\);\s*reportStrippedControlChars\(file, after, clean\);\s*writeFileSnapshotAtomically\(file, before, clean\);\s*\}/u,
+  );
+});
+
+test('il repair SEO non mantiene una scansione parziale dei soli campi descrizione', () => {
+  const source = readFileSync(SCRIPT, 'utf8');
+  assert.doesNotMatch(source, /assertDecoded(?:StructuredData|SeoStrings)AreSafe/u);
+  assert.match(source, /reportStrippedControlChars\(file, after, clean\);/u);
+});
+
 test('il repair storico include i chunk SEO cantonali e conserva solo i casi c', () => {
   const result = spawnSync(process.execPath, [SCRIPT], {
     cwd: ROOT,
