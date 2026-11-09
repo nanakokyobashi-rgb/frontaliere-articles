@@ -4,26 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/705673/nidauer-gemeinder%c3%a4tin-zum-stau-auf-der-bernstrasse-vorerst-wird-es-so-bleiben-wie-es-ist": {
-      "section": "canton-be",
-      "ts": 1794010895700
-    },
-    "canton-be::https://ajour.ch/story/705951/vernehmlassung-zur-teilrevision-des-personalgesetzes-er%c3%b6ffnet": {
-      "section": "canton-be",
-      "ts": 1794010897570
-    },
-    "canton-be::https://ajour.ch/story/705797/berner-polizei-ermittelt-nach-cyberangriff-auf-metzgerei-in-k%c3%b6niz": {
-      "section": "canton-be",
-      "ts": 1794010899219
-    },
-    "canton-be::https://ajour.ch/story/705991/galsstrasse-wird-f%c3%bcr-belagsarbeiten-gesperrt": {
-      "section": "canton-be",
-      "ts": 1794010900861
-    },
-    "canton-be::https://ajour.ch/story/705949/strassensperrung-infolge-holzschlag-im-bl%c3%a4siwald-neuegglehn": {
-      "section": "canton-be",
-      "ts": 1794010902315
-    },
     "canton-be::https://ajour.ch/story/706127/la-conseillre-municipale-socialiste-sandra-friedli-sexprime-sur-les-bouchons-de-la-route-de-berne": {
       "section": "canton-be",
       "ts": 1794088351086
@@ -123,6 +103,38 @@
     "canton-be::https://ajour.ch/story/702724/von-der-apotheke-in-den-supermarkt-die-geschichte-der-ovomaltine": {
       "section": "canton-be",
       "ts": 1794177430892
+    },
+    "canton-be::https://ajour.ch/story/705673/nidauer-gemeinder%c3%a4tin-zum-stau-auf-der-bernstrasse-vorerst-wird-es-so-bleiben-wie-es-ist": {
+      "section": "canton-be",
+      "ts": 1794194164751
+    },
+    "canton-be::https://ajour.ch/story/705991/galsstrasse-wird-f%c3%bcr-belagsarbeiten-gesperrt": {
+      "section": "canton-be",
+      "ts": 1794194166252
+    },
+    "canton-be::https://ajour.ch/story/705936/travaux-des-cff-aprs-laffaissement-dun-remblai-perles": {
+      "section": "canton-be",
+      "ts": 1794194167584
+    },
+    "canton-be::https://ajour.ch/story/705951/vernehmlassung-zur-teilrevision-des-personalgesetzes-er%c3%b6ffnet": {
+      "section": "canton-be",
+      "ts": 1794194169004
+    },
+    "canton-be::https://ajour.ch/story/705891/abgesackter-bahndamm-in-pieterlen-sbb-startet-mit-notfallsanierungsarbeiten": {
+      "section": "canton-be",
+      "ts": 1794194170345
+    },
+    "canton-be::https://ajour.ch/story/705949/strassensperrung-infolge-holzschlag-im-bl%c3%a4siwald-neuegglehn": {
+      "section": "canton-be",
+      "ts": 1794194171763
+    },
+    "canton-be::https://ajour.ch/story/705717/b%c3%a4renkreisel-in-aarberg-der-kanton-will-stau-so-gut-es-geht-verhindern": {
+      "section": "canton-be",
+      "ts": 1794194173312
+    },
+    "canton-be::https://www.nau.ch/politik/international/kamala-harris-nennt-trumps-zollpolitik-gegen-die-schweiz-rucksichtslos-67199420": {
+      "section": "canton-be",
+      "ts": 1794194192830
     }
   }
 }

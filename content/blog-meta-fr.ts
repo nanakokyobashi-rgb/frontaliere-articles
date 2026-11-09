@@ -13686,6 +13686,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.smile-varese-como-ticino.title': 'SOURIRE : mobilité durable entre Varèse, Côme et le Tessin',
     'blog.article.smile-varese-como-ticino.excerpt': 'Le 10 novembre 2026, Chiasso sera le point de présentation publique de SMILE.',
     'blog.article.smile-varese-como-ticino.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.vivere-magreglio-lavorare-ticino.title': 'Vivre à Magreglio et travailler au Tessin en tant que frontalier',
+    'blog.article.vivere-magreglio-lavorare-ticino.excerpt': 'Analyse et informations pratiques pour ceux qui choisissent de résider à Magreglio, dans la province de Como, et de travailler comme frontalier au Tessin.',
+    'blog.article.vivere-magreglio-lavorare-ticino.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

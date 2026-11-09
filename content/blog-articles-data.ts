@@ -48063,6 +48063,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vivere-magreglio-lavorare-ticino',
+ category: 'pratico',
+ date: '2026-11-09T02:23:34.224Z',
+ image: '/images/blog/article-vivere-magreglio-lavorare-ticino.webp',
+ hasCalculator: true,
+ articleType: 'evergreen',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
