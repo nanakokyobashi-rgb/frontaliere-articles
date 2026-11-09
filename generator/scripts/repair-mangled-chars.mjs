@@ -118,7 +118,10 @@ import { stripLasciaResiduo } from './lib/control-char-write-report.mjs';
 // (#336, #338).  Se quella regex cambia — le forme brevi `\b`/`\f` sono state
 // aggiunte dopo — questo riparatore la segue senza saperlo.  Riscriverla qui
 // sarebbe il modo esatto in cui le due spelling sono divergute la prima volta.
-import { findEscapedControlChars } from '../../scripts/find-dirty-content-ids.mjs';
+import {
+  decodeEscapedControlChars,
+  findEscapedControlChars,
+} from '../../scripts/find-dirty-content-ids.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
@@ -128,6 +131,9 @@ function writeFileAtomic(file, content) {
   const source = Buffer.isBuffer(content) ? content.toString('utf8') : content;
   const clean = sanitizeText(source);
   reportStrippedControlChars(file, source, clean);
+  if (findEscapedControlChars(clean).length > 0) {
+    reportStrippedControlChars(file, decodeEscapedControlChars(clean), clean);
+  }
   writeFileAtomicUnchecked(file, Buffer.isBuffer(content) ? Buffer.from(clean, 'utf8') : clean);
 }
 
@@ -1629,7 +1635,10 @@ function main() {
     if (res.riparazioni.length || res.lasciate.length) {
       residuiPerFile.push({ file: f.percorso, riparati: res.riparazioni.length, lasciati: res.lasciate.length });
     }
-    if (opz.scrivi && corrente !== testo) {
+    // Le occorrenze escapate non riparate sono gia' nell'elenco diagnostico:
+    // non permettere che una riparazione riuscita nello stesso file le porti
+    // comunque oltre questo confine di pubblicazione.
+    if (opz.scrivi && corrente !== testo && findEscapedControlChars(corrente).length === 0) {
       const dest = path.join(opz.radice, f.percorso);
       writeFileAtomic(dest, Buffer.from(corrente, 'utf8'));
     }
