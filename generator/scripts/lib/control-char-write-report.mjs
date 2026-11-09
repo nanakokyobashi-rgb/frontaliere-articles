@@ -871,6 +871,18 @@ function assertNoUntracedChange(file, original, clean, opts, changed = clean !==
   );
 }
 
+function markdownCodeSpan(value) {
+  const text = String(value);
+  const backtickRuns = text.match(/`+/gu) || [];
+  const delimiter = '`'.repeat(Math.max(1, ...backtickRuns.map((run) => run.length + 1)));
+  const pad = text.startsWith('`') || text.endsWith('`') || text.startsWith(' ') || text.endsWith(' ');
+  return `${delimiter}${pad ? ' ' : ''}${text}${pad ? ' ' : ''}${delimiter}`;
+}
+
+function markdownTableCode(value) {
+  return String(value).split('|').map(markdownCodeSpan).join('&#124;');
+}
+
 /**
  * Controlla il valore originale prima della write, svelando le rappresentazioni
  * che i writer JSON, XML e HTML interpretano o rimuovono.
@@ -921,13 +933,13 @@ function appendStepSummary(file, occ, opts = {}) {
     .replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\t/g, '\\t');
   const righe = [
     '',
-    `### control-char-strip — \`${file}\``,
+    `### control-char-strip — ${markdownCodeSpan(file)}`,
     '',
     `${occ.length} control character C0 rilevati; scrittura rifiutata. ${occ.filter((o) => o.residuo).length} avrebbero rotto una parola dopo lo strip.`,
     '',
     '| campo | base offset | offset | byte | rompe una parola | contesto (prima dello strip) |',
     '|---|---|---|---|---|---|',
-    ...occ.map((o) => `| \`${visibile(o.field ?? '(documento)').replace(/\|/g, '\\|').replace(/`/g, '\\`')}\` | ${o.offsetBasis ?? 'value'} | ${o.at} | 0x${o.byte.toString(16).padStart(2, '0')} | ${o.residuo ? 'si' : 'no'} | \`${visibile(o.context).replace(/\|/g, '\\|')}\` |`),
+    ...occ.map((o) => `| ${markdownTableCode(visibile(o.field ?? '(documento)'))} | ${o.offsetBasis ?? 'value'} | ${o.at} | 0x${o.byte.toString(16).padStart(2, '0')} | ${o.residuo ? 'si' : 'no'} | ${markdownTableCode(visibile(o.context))} |`),
     '',
   ];
   try {
@@ -951,6 +963,22 @@ function joinStringLeaves(value, out = []) {
     for (const [key, nested] of Object.entries(value)) {
       out.push(key);
       joinStringLeaves(nested, out);
+    }
+  }
+  return out;
+}
+
+function collectStructuredStringFields(value, field = '$', out = []) {
+  if (typeof value === 'string') {
+    out.push({ field, text: value, offsetBasis: 'structured-field' });
+  } else if (Array.isArray(value)) {
+    for (let index = 0; index < value.length; index += 1) {
+      collectStructuredStringFields(value[index], `${field}[${index}]`, out);
+    }
+  } else if (value && typeof value === 'object') {
+    for (const [key, nested] of Object.entries(value)) {
+      out.push({ field: `${field} key`, text: key, offsetBasis: 'structured-field' });
+      collectStructuredStringFields(nested, `${field}.${key}`, out);
     }
   }
   return out;
@@ -998,7 +1026,9 @@ function sameSanitizedStructure(original, clean) {
 export function reportStrippedControlCharsDeep(file, original, clean, opts = {}) {
   const originalText = joinStringLeaves(original).join('\n');
   const cleanText = joinStringLeaves(clean).join('\n');
-  const occurrences = occurrencesIn(originalText);
+  const occurrences = collectStructuredStringFields(original).flatMap(({ field, text, offsetBasis }) => (
+    occurrencesIn(text).map((occurrence) => ({ ...occurrence, field, offsetBasis }))
+  ));
   if (occurrences.length === 0) {
     assertNoUntracedChange(file, originalText, cleanText, opts, !sameSanitizedStructure(original, clean));
   }

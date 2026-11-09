@@ -160,6 +160,28 @@ test('l\'offset di un FAQ decodificato indica il campo e la propria base', () =>
   assert.equal(rec.at, 2, 'l\'offset e\' relativo al valore FAQ decodificato');
 });
 
+test('il report strutturato conserva il percorso dei campi e delimita i backtick nel Markdown', () => {
+  resetCounters();
+  const writes = [];
+  const original = { 'art|`icle': 'pre | ``' + B + '9 post' };
+  assert.throws(() => reportStrippedControlCharsDeep('public/data/article.jsonl', original, original, {
+    log: () => {},
+    fsImpl: { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) },
+    reportPath: '/tmp/deep-r.jsonl',
+    summaryPath: '/tmp/deep-s.md',
+  }), /scrittura rifiutata/u);
+
+  const rec = JSON.parse(writes.find((w) => w.p === '/tmp/deep-r.jsonl').d.trim());
+  assert.equal(rec.field, '$.art|`icle');
+  assert.equal(rec.offsetBasis, 'structured-field');
+  assert.equal(rec.at, 8, 'l\'offset e\' relativo alla stringa del campo');
+  const summary = writes.find((w) => w.p === '/tmp/deep-s.md').d;
+  const row = summary.split('\n').find((line) => line.includes('structured-field'));
+  assert.ok(summary.includes('&#124;'), 'i pipe nei campi e nel contesto sono entita, non separatori GFM');
+  assert.ok(row.includes('``') && row.includes('```'), 'i delimitatori superano i backtick del campo e del contesto');
+  assert.equal(row.split('|').length - 1, 7, 'la riga conserva le sette pipe strutturali della tabella');
+});
+
 test('un errore I/O del report non permette di scrivere il contenuto sanificato', () => {
   resetCounters();
   const logs = [];
