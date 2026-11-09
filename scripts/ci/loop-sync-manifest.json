@@ -4458,8 +4458,9 @@
     {
       "path": "host/shell-contract-fingerprint.json",
       "sitePath": "tests/articles-shell-contract-fingerprint.json",
-      "mode": "identical",
-      "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
+      "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3078",
+      "reason": "adattato: la SiteShellContract scalar fingerprint va ri-registrata insieme ai valori adattati di host/constants.ts; il trasporto identical-twin la blocca correttamente quando arriverebbe da sola. Aggiornare entrambi nello stesso giro e verificare host/tests/shell-contract-fingerprint.test.mjs.",
       "baseline": {
         "site": "cfbedfa01bcb1f9d",
         "corpus": "cfbedfa01bcb1f9d",
@@ -6944,8 +6945,8 @@
     {
       "path": "host/third-party-shell-assets-fingerprint.json",
       "sitePath": "tests/third-party-shell-assets-fingerprint.json",
-      "mode": "identical",
-      "reason": "Fingerprint byte-exact dei producer site-support, AdSense, Partnerize, Meta Pixel e helper canonici; lega gli snapshot trasportati ai byte sorgente e ne verifica l’insieme prima della pubblicazione.",
+      "mode": "adapted",
+      "reason": "adattato al bundle host: il fingerprint byte-exact di site-support, AdSense, Partnerize, Meta Pixel e helper canonici viaggia insieme allo snapshot adattato host/third-party-shell-assets.json e alle versioni asset in host/constants.ts. Non trasportarlo da solo; verificare host/tests/host-shell-assets.test.mjs prima della pubblicazione.",
       "baseline": {
         "site": "0a7f617c58f2dac6",
         "corpus": "0a7f617c58f2dac6",
@@ -6956,7 +6957,7 @@
       "path": "host/third-party-shell-assets.json",
       "sitePath": "scripts/ci/export-third-party-shell-assets.ts",
       "mode": "adapted",
-      "reason": "Snapshot byte-exact di site-support, AdSense, Partnerize, Meta Pixel e guardia inline canonica, generato dall’exporter del sito. hostShellFiles verifica nomi e SHA senza import fra repository; i fingerprint identici e quello scalare del contratto bloccano la pubblicazione se gli asset divergono.",
+      "reason": "Snapshot byte-exact di site-support, AdSense, Partnerize, Meta Pixel e guardia inline canonica, generato dall'exporter del sito. hostShellFiles verifica nomi e SHA senza import fra repository; sincronizzarlo nella stessa PR di host/third-party-shell-assets-fingerprint.json e host/constants.ts per conservare i byte e i nomi content-addressed che la pubblicazione usa.",
       "baseline": {
         "site": "6e2092fcc0f1e3d8",
         "corpus": "12297d0a702543c8",
