@@ -468,6 +468,32 @@ test('il report decodifica anche i campi TypeScript dei chunk meta', () => {
   assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
 });
 
+test('il report riconosce gli alias services/locales di body e meta', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const source = String.raw`export const BLOG_ARTICLE_BODY = {
+    'blog.article.example.body1': 'comp\x089tences',
+  };`;
+  const paths = [
+    'services/locales/blog-body/it/example.ts',
+    String.raw`services\locales\blog-body-ch\fr\example.ts`,
+    'services/locales/blog-body-canton-sg/fr/example.ts',
+    '/repo/services/locales/blog-meta-it.ts',
+    String.raw`services\locales\blog-meta-ch-fr.ts`,
+    'services/locales/blog-meta-canton-sg-fr.ts',
+  ];
+
+  for (const file of paths) {
+    expectRejectedWrite(file, source, source, {
+      log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+    });
+  }
+
+  assert.equal(writes.length, paths.length);
+  assert.deepEqual(writes.map(({ d }) => JSON.parse(d.trim()).byte), new Array(paths.length).fill(0x08));
+});
+
 test('i riferimenti numerici XML sono registrati prima che il writer li rimuova', () => {
   resetCounters();
   const writes = [];
@@ -595,19 +621,37 @@ test('data-src non rende esterno un blocco script inline', () => {
     });
 });
 
-test('un riferimento numerico in un commento XML non viene scambiato per contenuto', () => {
+test('un riferimento numerico in un commento XML segue il confine del sanitizer', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
   const xml = '<!-- titolo &#x08; lasciato in documentazione --><title>pulito</title>';
-  assert.equal(reportStrippedControlChars('dist/api/comment.xml', xml, xml, { log: () => {} }), 0);
+  expectRejectedWrite('dist/api/comment.xml', xml, '<!-- titolo  lasciato in documentazione --><title>pulito</title>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
 });
 
-test('un riferimento numerico dentro CDATA XML resta testo letterale', () => {
+test('un riferimento numerico dentro CDATA XML segue il confine del sanitizer', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
   const xml = '<title><![CDATA[&#x08;]]></title>';
-  assert.equal(reportStrippedControlChars('dist/api/cdata.xml', xml, xml, { log: () => {} }), 0);
+  expectRejectedWrite('dist/api/cdata.xml', xml, '<title><![CDATA[]]></title>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
 });
 
-test('un riferimento numerico dentro una processing instruction XML resta letterale', () => {
+test('un riferimento numerico dentro una processing instruction XML segue il confine del sanitizer', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
   const xml = '<?probe &#x08;?> <title>pulito</title>';
-  assert.equal(reportStrippedControlChars('dist/api/pi.xml', xml, xml, { log: () => {} }), 0);
+  expectRejectedWrite('dist/api/pi.xml', xml, '<?probe ?> <title>pulito</title>', {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
 });
 
 test('il report raw non interpreta escape TypeScript che compaiono solo nei commenti', () => {

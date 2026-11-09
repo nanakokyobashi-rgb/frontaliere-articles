@@ -548,34 +548,34 @@ function decodeScriptEscapesOutsideComments(source) {
   return output;
 }
 
-function decodeXmlReferencesOutsideLiterals(xml) {
-  const decode = (text) => text.replace(/&#(x[0-9a-fA-F]+|[0-9]+);/g, (reference, digits) => {
+/**
+ * Decode the numeric references that `sanitizeXmlDocument` removes.
+ *
+ * The sanitizer applies this rule to the whole XML string.  In particular,
+ * it does not preserve a forbidden reference merely because it appears in a
+ * comment, CDATA section, or processing instruction.  Keeping the report on
+ * the same boundary is what preserves the original marker before the write
+ * is rejected instead of misclassifying the change as untraced.
+ */
+function decodeXmlNumericReferences(xml) {
+  return xml.replace(/&#(x[0-9a-fA-F]+|[0-9]+);/g, (reference, digits) => {
     const code = digits[0] === 'x'
       ? Number.parseInt(digits.slice(1), 16)
       : Number.parseInt(digits, 10);
     return Number.isFinite(code) && isInvalidC0(code) ? String.fromCharCode(code) : reference;
   });
-  let output = '';
-  let index = 0;
-  while (index < xml.length) {
-    const comment = xml.indexOf('<!--', index);
-    const cdata = xml.indexOf('<![CDATA[', index);
-    const processingInstruction = xml.indexOf('<?', index);
-    const commentStart = comment < 0 ? xml.length : comment;
-    const cdataStart = cdata < 0 ? xml.length : cdata;
-    const processingInstructionStart = processingInstruction < 0 ? xml.length : processingInstruction;
-    const start = Math.min(commentStart, cdataStart, processingInstructionStart);
-    if (start < 0) return output + decode(xml.slice(index));
-    if (start === xml.length) return output + decode(xml.slice(index));
-    output += decode(xml.slice(index, start));
-    const closeMarker = start === commentStart ? '-->' : start === cdataStart ? ']]>' : '?>';
-    const openLength = start === commentStart ? 4 : start === cdataStart ? 9 : 2;
-    const close = xml.indexOf(closeMarker, start + openLength);
-    if (close < 0) return output + xml.slice(start);
-    output += xml.slice(start, close + closeMarker.length);
-    index = close + closeMarker.length;
-  }
-  return output;
+}
+
+/**
+ * Map the generator's main-layout article aliases to this repo's corpus layout.
+ * The caller's spelling is retained in the emitted evidence.
+ */
+function canonicalArticleSourcePath(file) {
+  const normalized = String(file).replaceAll('\\', '/');
+  return normalized.replace(
+    /(^|\/)services\/locales\/(blog-body[^/]*\/|blog-meta[^/]*-)/u,
+    '$1content/$2',
+  );
 }
 
 /**
@@ -583,7 +583,10 @@ function decodeXmlReferencesOutsideLiterals(xml) {
  * are value-relative, never file offsets, and therefore include the field path.
  */
 function articleSourceReportableFields(file, original) {
-  const normalizedFile = String(file).replaceAll('\\', '/');
+  // The transported generator calls the guard before corpusPath() resolves
+  // its main-layout aliases. Normalize them here so every article writer gets
+  // the same decoded-field protection without duplicating fixes at call sites.
+  const normalizedFile = canonicalArticleSourcePath(file);
   const isBodySource = /(?:^|\/)content\/blog-body[^/]*\/[^/]+\/[^/]+\.ts$/u.test(normalizedFile);
   const isMetaSource = /(?:^|\/)content\/blog-meta[^/]*\.ts$/u.test(normalizedFile);
   if (!isBodySource && !isMetaSource) return null;
@@ -721,7 +724,7 @@ function reportableFields(file, original) {
     if (articleSourceFields !== null) return articleSourceFields;
   }
   if (extension === '.xml') {
-    return [{ field: null, text: decodeXmlReferencesOutsideLiterals(original), offsetBasis: 'decoded-document' }];
+    return [{ field: null, text: decodeXmlNumericReferences(original), offsetBasis: 'decoded-document' }];
   }
 
   if (extension === '.html' || extension === '.htm') {
