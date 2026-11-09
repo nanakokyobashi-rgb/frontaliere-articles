@@ -5770,10 +5770,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-08T22:13:40.591Z",
-      "lastStrikeAt": "2026-11-09T02:14:46.614Z",
-      "expiresAt": "2026-12-09T02:14:46.614Z"
+      "lastStrikeAt": "2026-11-09T02:47:31.847Z",
+      "expiresAt": "2026-12-09T02:47:31.847Z"
     },
     {
       "keyword": "vivere a Cuvio e lavorare in Ticino da frontaliere",
@@ -5782,10 +5782,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-08T22:15:07.779Z",
-      "lastStrikeAt": "2026-11-09T02:14:54.401Z",
-      "expiresAt": "2026-12-09T02:14:54.401Z"
+      "lastStrikeAt": "2026-11-09T03:01:15.190Z",
+      "expiresAt": "2026-12-09T03:01:15.190Z"
     },
     {
       "keyword": "vivere a Cusino e lavorare in Ticino da frontaliere",
@@ -5794,10 +5794,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-08T22:16:20.588Z",
-      "lastStrikeAt": "2026-11-09T02:15:02.333Z",
-      "expiresAt": "2026-12-09T02:15:02.333Z"
+      "lastStrikeAt": "2026-11-09T03:10:47.532Z",
+      "expiresAt": "2026-12-09T03:10:47.532Z"
     },
     {
       "keyword": "vivere a San Nazzaro Val Cavargna e lavorare in Ticino da frontaliere",
