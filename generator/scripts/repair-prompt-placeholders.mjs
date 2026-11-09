@@ -52,14 +52,16 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { truncateToClause } from '../../host/shared/clauseTail.mjs';
 import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
 import {
   escapeForSingleQuoteTS,
   unescapeForSingleQuoteTS,
 } from './lib/article-meta-block.mjs';
-import { writeFileAtomic } from './lib/atomic-write-file.mjs';
+import { writeFileAtomic as writeFileAtomicUnchecked } from './lib/atomic-write-file.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
 import { assertFaqPairsHaveNoRejectedControls } from '../../scripts/lib/faq-control-contract.mjs';
 import {
@@ -76,6 +78,12 @@ import {
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CHECK_ONLY = process.argv.includes('--check');
+
+function writeFileAtomic(file, source) {
+  const clean = sanitizeText(source);
+  reportStrippedControlChars(file, source, clean);
+  writeFileAtomicUnchecked(file, clean);
+}
 
 const LOCALES = ['it', 'en', 'de', 'fr'];
 const EXCERPT_MAX = 160;

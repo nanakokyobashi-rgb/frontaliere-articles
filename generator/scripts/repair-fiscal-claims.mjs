@@ -35,6 +35,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 import { AMOUNT_7500, findFiscalClaims, findTaxHealthParameterErrors } from './lib/fiscal-claims-guard.mjs';
 
@@ -276,7 +278,11 @@ function main(argv) {
     for (const sentence of found) arith.push(`${rel}: ${sentence}`);
     if (text === source) continue;
     touched.push(rel);
-    if (!check) writeFileSnapshotAtomically(file, source, text);
+    if (!check) {
+      const clean = sanitizeText(text);
+      reportStrippedControlChars(file, text, clean);
+      writeFileSnapshotAtomically(file, source, clean);
+    }
   }
   console.log(JSON.stringify({ fileRiparati: touched.length, esempiAritmetici: arith.length }));
   for (const row of arith) console.log(`ARITH ${row}`);
