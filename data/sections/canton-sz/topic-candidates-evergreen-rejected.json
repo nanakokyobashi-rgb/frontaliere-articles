@@ -4,22 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/8756-8757-8803-10391-10392/news/26435": {
-      "section": "canton-sz",
-      "ts": 1794040142708
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schwyz/einflussreiche-kommission-will-steuern-fuer-firmen-senken-und-klagt-ueber-stellenwachstum-in-der-verwaltung-art-1730762": {
-      "section": "canton-sz",
-      "ts": 1794040188615
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/unterschaechen-rene-schuler-uebernimmt-das-gemeindepraesidium-art-1730899": {
-      "section": "canton-sz",
-      "ts": 1794040458698
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/ahv-finanzierung-scheitert-die-steuererhoehung-ende-november-art-1730704": {
-      "section": "canton-sz",
-      "ts": 1794054670602
-    },
     "canton-sz::https://www.marchanzeiger.ch/2026/11/06/treffsicher-am-ruetlischiessen": {
       "section": "canton-sz",
       "ts": 1794106066096
@@ -107,6 +91,18 @@
     "canton-sz::https://www.hoefner.ch/tnad/12536cleverpensionierung-pl-20261108-2051-025799": {
       "section": "canton-sz",
       "ts": 1794194135022
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/unterschaechen-rene-schuler-uebernimmt-das-gemeindepraesidium-art-1730899": {
+      "section": "canton-sz",
+      "ts": 1794227613310
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/luzerner-pensionskasse-im-fokus-von-fdp-mitte-und-svp-art-1731080": {
+      "section": "canton-sz",
+      "ts": 1794227622897
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/geschaefte-stauen-sich-im-luzerner-kantonsrat-art-1731092": {
+      "section": "canton-sz",
+      "ts": 1794227632605
     }
   }
 }
