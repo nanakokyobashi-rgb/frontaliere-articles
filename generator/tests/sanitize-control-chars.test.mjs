@@ -56,6 +56,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import * as sanitizeControlCharsModule from '../../scripts/lib/sanitize-control-chars.mjs';
 import {
   isInvalidControlCode,
   sanitizeText,
@@ -230,6 +231,34 @@ test('a numeric character reference to a forbidden character is removed too', ()
   // `&#x2019;` are ordinary text and must survive.
   const xml = '<t>a&#8;b&#x17;c&#233;d&#x2019;e&amp;f</t>';
   assert.equal(sanitizeXmlDocument(xml), '<t>abc&#233;d&#x2019;e&amp;f</t>');
+});
+
+test('preserves numeric references inside real XML comments, CDATA and processing instructions', {
+  skip: typeof sanitizeControlCharsModule.findInvalidXmlReferencesOutsideLiterals !== 'function',
+}, () => {
+  const xml = '<!-- &#8; --><t><![CDATA[&#8;]]></t><?probe &#8;?>';
+  assert.equal(sanitizeXmlDocument(xml), xml);
+  assert.deepEqual(sanitizeControlCharsModule.findInvalidXmlReferencesOutsideLiterals(xml), []);
+});
+
+test('does not mistake comment-like text in a DTD entity value for an XML comment', {
+  skip: typeof sanitizeControlCharsModule.findInvalidXmlReferencesOutsideLiterals !== 'function',
+}, () => {
+  const xml = '<!DOCTYPE root [<!ENTITY x "<!-- &#8; -->">]><root/>';
+  const findings = sanitizeControlCharsModule.findInvalidXmlReferencesOutsideLiterals(xml);
+  assert.equal(findings.length, 1);
+  assert.equal(findings[0].code, 8);
+  assert.equal(sanitizeXmlDocument(xml), '<!DOCTYPE root [<!ENTITY x "<!--  -->">]><root/>');
+});
+
+test('fails closed on forbidden references in an unterminated XML literal tail', {
+  skip: typeof sanitizeControlCharsModule.findInvalidXmlReferencesOutsideLiterals !== 'function',
+}, () => {
+  const xml = '<!-- commento non terminato &#8;';
+  const findings = sanitizeControlCharsModule.findInvalidXmlReferencesOutsideLiterals(xml);
+  assert.equal(findings.length, 1);
+  assert.equal(findings[0].code, 8);
+  assert.equal(sanitizeXmlDocument(xml), '<!-- commento non terminato ');
 });
 
 test('a clean XML document comes back byte-identical', () => {
