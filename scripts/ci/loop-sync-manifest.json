@@ -4234,18 +4234,18 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest 4e12b102… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
+      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest f0bdaf07… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
       "baseline": {
         "site": "141382885e28264f",
-        "corpus": "6c61c6bf12afc98a",
+        "corpus": "c89d2773c3b37de3",
         "alignedAt": "2026-11-09",
-        "forcedAt": "2026-11-09T11:05:27.842Z"
+        "forcedAt": "2026-11-09T12:32:37.000Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 23,
-        "sha256": "4e12b102a1c071814d667a486261817fcc96415aae55b94d22c213bea8aba81c"
+        "sha256": "f0bdaf07b953951655dc9e4caab733e2de2f80046d7c384763d388f98c0a2493"
       }
     },
     {
@@ -4462,8 +4462,8 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
       "baseline": {
-        "site": "cace919981b8a649",
-        "corpus": "cace919981b8a649",
+        "site": "c82023e99c12f73c",
+        "corpus": "c82023e99c12f73c",
         "alignedAt": "2026-11-09"
       }
     },
