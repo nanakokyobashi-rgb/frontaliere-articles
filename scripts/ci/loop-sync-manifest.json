@@ -4203,9 +4203,9 @@
       "sitePath": "build-plugins/shared/postWalkDerivedDigest.ts",
       "mode": "identical",
       "baseline": {
-        "site": "2e1c78dc51deb33a",
-        "corpus": "2e1c78dc51deb33a",
-        "alignedAt": "2026-09-20"
+        "site": "17e2f74050a4d6e3",
+        "corpus": "17e2f74050a4d6e3",
+        "alignedAt": "2026-11-09"
       }
     },
     {
@@ -4451,9 +4451,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "b2c578bda693f1f5",
-        "corpus": "b2c578bda693f1f5",
-        "alignedAt": "2026-11-03"
+        "site": "ee412ea54792f74a",
+        "corpus": "ee412ea54792f74a",
+        "alignedAt": "2026-11-09"
       }
     },
     {
