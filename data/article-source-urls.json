@@ -1,9 +1,4 @@
 {
-  "stats-astra://weekly/2026-w38/frontaliere": {
-    "articleId": "immatricolazioni-veicoli-ticino-w38-2026",
-    "ts": "2026-09-23T12:12:15.343Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1952377/franco-decisione-svizzera-franchi-dollaro": {
     "articleId": "decisione-bns-cambio-franco-euro",
     "ts": "2026-09-24T10:42:56.471Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/attualita/progetto-smile-mobilita-sostenibile-varese-como-ticino": {
     "articleId": "smile-varese-como-ticino",
     "ts": "2026-11-08T07:04:52.016Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/svizzera/svizzera/1961426/ogni-franco-che-va-nel-fondo-avs-e-il-piu-solidale-che-esista": {
+    "articleId": "finanziamento-tredicesima-avs",
+    "ts": "2026-11-09T10:37:12.607Z",
     "keyForm": 2
   }
 }

@@ -13688,6 +13688,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.vivere-magreglio-lavorare-ticino.title': 'Vivere a Magreglio e lavorare in Ticino da frontaliere',
     'blog.article.vivere-magreglio-lavorare-ticino.excerpt': 'Analisi e informazioni pratiche per chi sceglie di risiedere a Magreglio, in provincia di Como, e lavorare come frontaliere in Ticino.',
     'blog.article.vivere-magreglio-lavorare-ticino.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.finanziamento-tredicesima-avs.title': 'Aumento Iva 0,4 punti percentuali per tredicesima AVS',
+    'blog.article.finanziamento-tredicesima-avs.excerpt': 'La sua valutazione non sostituisce il dato: l’incremento indicato è di 0,4 punti percentuali.',
+    'blog.article.finanziamento-tredicesima-avs.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

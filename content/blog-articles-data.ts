@@ -48074,6 +48074,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'finanziamento-tredicesima-avs',
+ category: 'pensione',
+ date: '2026-11-09T10:37:10.589Z',
+ image: '/images/blog/article-finanziamento-tredicesima-avs.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
