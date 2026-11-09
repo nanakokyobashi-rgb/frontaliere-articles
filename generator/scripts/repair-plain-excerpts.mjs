@@ -62,74 +62,7 @@ function decodeDoubleQuotedTS(value) {
 function atomicWrite(file, before, after) {
   const clean = sanitizeText(after);
   reportStrippedControlChars(file, after, clean);
-  assertDecodedSeoStringsAreSafe(file, after);
   writeFileSnapshotAtomically(file, before, clean);
-}
-
-function structuredDataBlocks(source) {
-  const blocks = [];
-  for (const match of source.matchAll(/(?:^|[,{])[ \t]*(?:structuredData|["']structuredData["'])\s*:/gmu)) {
-    let start = match.index + match[0].length;
-    while (/\s/u.test(source[start] || '')) start += 1;
-    const opening = source[start];
-    if (opening !== '{' && opening !== '[') continue;
-    const stack = [opening === '{' ? '}' : ']'];
-    let quote = null;
-    for (let index = start + 1; index < source.length; index += 1) {
-      const character = source[index];
-      if (quote) {
-        if (character === '\\') index += 1;
-        else if (character === quote) quote = null;
-        continue;
-      }
-      if (character === '"' || character === "'" || character === '`') {
-        quote = character;
-        continue;
-      }
-      if (character === '/' && source[index + 1] === '/') {
-        const end = source.indexOf('\n', index + 2);
-        index = end < 0 ? source.length : end;
-        continue;
-      }
-      if (character === '/' && source[index + 1] === '*') {
-        const end = source.indexOf('*/', index + 2);
-        index = end < 0 ? source.length : end + 1;
-        continue;
-      }
-      if (character === '{') stack.push('}');
-      else if (character === '[') stack.push(']');
-      else if (character === '}' || character === ']') {
-        if (stack.at(-1) !== character) break;
-        stack.pop();
-        if (stack.length === 0) {
-          blocks.push(source.slice(start, index + 1));
-          break;
-        }
-      }
-    }
-  }
-  return blocks;
-}
-
-function assertDecodedStructuredDataIsSafe(file, source) {
-  for (const block of structuredDataBlocks(source)) {
-    for (const match of block.matchAll(/(")((?:[^"\\]|\\.)*)(")/gu)) {
-      reportDecodedStringIsSafe(file, match[2], '"');
-    }
-  }
-}
-
-function reportDecodedStringIsSafe(file, encoded, quote) {
-  const decoded = decodeTypeScriptString(encoded, quote);
-  const clean = sanitizeText(decoded);
-  reportStrippedControlChars(file, decoded, clean);
-}
-
-function assertDecodedSeoStringsAreSafe(file, source) {
-  for (const match of source.matchAll(/^[ \t]*(?:description|ogDescription)\s*:\s*'((?:[^'\\]|\\.)*)'/gmu)) {
-    reportDecodedStringIsSafe(file, match[1], "'");
-  }
-  assertDecodedStructuredDataIsSafe(file, source);
 }
 
 function sectionForMeta(file) {

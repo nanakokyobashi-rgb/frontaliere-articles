@@ -477,6 +477,27 @@ test('il report decodifica anche i campi TypeScript dei chunk meta', () => {
   assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
 });
 
+test('il report decodifica tutti i literal TS dei chunk SEO e dei moduli generici', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const source = [
+    'const BLOG_SEO_METADATA = {',
+    String.raw`  'blog-example': { title: '\x08', description: '\u{8}', ogTitle: '\v', structuredData: { "headline": "\f" } },`,
+    '};',
+  ].join('\n');
+  expectRejectedWrite('content/seo/seo-blog.ts', source, source, {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  expectRejectedWrite('content/routerBlogData.ts', source, source, {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  for (const write of writes) {
+    const records = write.d.trim().split('\n').map((line) => JSON.parse(line));
+    assert.deepEqual(records.map((record) => record.byte), [0x08, 0x08, 0x0b, 0x0c]);
+  }
+});
+
 test('il report riconosce gli alias services/locales di body e meta', () => {
   resetCounters();
   const writes = [];

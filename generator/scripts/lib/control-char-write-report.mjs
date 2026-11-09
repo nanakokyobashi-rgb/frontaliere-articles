@@ -600,6 +600,26 @@ function articleSourceReportableFields(file, original) {
     : [{ field: null, text: original, offsetBasis: 'source-file' }];
 }
 
+/**
+ * Decode every string literal in a generated TS module not covered by the
+ * article field reader.
+ *
+ * `readTsStringMap` deliberately reads only `blog.article.*` fields, which is
+ * correct for body/meta chunks but returns no entries for SEO chunks, slug maps,
+ * and other generic TS corpus modules. The write boundary must not inherit that
+ * blind spot. The lexer-aware decoder already used for inline scripts keeps
+ * comments, regex literals, and `String.raw` out of the evidence while
+ * decoding the same TS escape forms used by the source reader
+ * (`\\xNN`, `\\uXXXX`, `\\u{...}`, short controls, and escaped line breaks).
+ */
+function genericTsStringReportableFields(original) {
+  return [{
+    field: null,
+    text: decodeScriptEscapesOutsideComments(original),
+    offsetBasis: 'decoded-ts-source',
+  }];
+}
+
 function findHtmlTagEnd(html, start) {
   let quote = null;
   for (let index = start; index < html.length; index += 1) {
@@ -719,6 +739,7 @@ function reportableFields(file, original) {
   if (extension === '.ts') {
     const articleSourceFields = articleSourceReportableFields(file, original);
     if (articleSourceFields !== null) return articleSourceFields;
+    return genericTsStringReportableFields(original);
   }
   if (extension === '.xml') {
     const decodeReferences = sanitizeControlChars.decodeInvalidXmlReferencesOutsideLiterals;
