@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-nachhaltigkeit": {
-      "section": "canton-sg",
-      "ts": 1794007150741
-    },
     "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-kuenstliche-intelligenz": {
       "section": "canton-sg",
       "ts": 1794042903089
@@ -15,6 +11,10 @@
     "canton-sg::https://www.suedkurier.de/kreis-konstanz/schwarzwaldbahn-faehrt-zwischen-singen-und-konstanz-nicht-pendler-und-seehas-betreiber-sind-frustriert-115639048": {
       "section": "canton-sg",
       "ts": 1794167714062
+    },
+    "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-nachhaltigkeit": {
+      "section": "canton-sg",
+      "ts": 1794182436619
     }
   }
 }
