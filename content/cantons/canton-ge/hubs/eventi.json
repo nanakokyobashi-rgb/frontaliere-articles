@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "2ec2aa2f45137be722cccbe9c9aafeba764a26dfeec15b3a909eb8492354ae5a",
+  "updatedAt": "2026-11-09T01:55:21.693Z",
+  "contentHash": "d5e35b722027c8b7953f0880948db3e5b3aa74203d726f7da03d19792ed836a1",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "339",
+          "value": "325",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "AMISTAT + Orange Oak",
+              "label": "80e Concours de Genève – Demi-finale 3 de Direction d’orchestre – Orchestre de la Suisse Romande",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/amistat-orange"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/concours-geneve-demi-finale-3-direction-orchestre-orchestre-suisse-romande"
             },
             {
-              "label": "Ciné goûter - Luca (2024, durée : 1h36)",
+              "label": "Action Lumières - Ville de Genève",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/cine-gouter-luca-2024-duree-1h36"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/action-lumieres-ville-geneve"
             },
             {
-              "label": "Demi-finale",
+              "label": "Masson/Duboule/Ruiz/Vandenbulck",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/demi-finale"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/massondubouleruizvandenbulck"
             },
             {
-              "label": "Emmanuel Pahud; Éric Le Sage",
+              "label": "Semaine des droits humains 2026: Pour une santé globale et durable",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/emmanuel-pahud-eric-sage"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/semaine-droits-humains-2026-sante-globale-durable"
             },
             {
-              "label": "Focus · Hommage à Patricio Guzmán (1941-2026)",
+              "label": "Soirée PréPro : ARNO | SEBASTIAN",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/focus-hommage-patricio-guzman-1941-2026"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/soiree-prepro-arno-sebastian"
             },
             {
-              "label": "Improoo - Le Festival du long format improvisé - En Thérapie",
-              "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/improoo-festival-long-format-improvise-therapie"
+              "label": "80e Concours de Genève – Demi-finale 3 de Direction d'Orchestre - L'OSR",
+              "detail": "Geneva, Genève",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/80e-concours-de-geneve-demifinale-3-de-direction-dorchestre-losr/"
             },
             {
-              "label": "Les dimanches de Cité Seniors | Duo de guitares Leu et Dragonetti",
-              "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/dimanches-cite-seniors-guitares-dragonetti"
+              "label": "Atelier Créer sa propre lampe",
+              "detail": "Genève — in corso, ultimo giorno: 21 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/atelier-creer-propre-lampe"
             },
             {
-              "label": "Une balade en forêt, une raclette en extérieur et les saveurs du terroir genevois !",
-              "detail": "Dardagny",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/balade-foret-raclette-exterieur-saveurs-terroir-genevois"
+              "label": "Atelier-formation \"Apprendre à fabriquer ses cosmétiques naturels\"",
+              "detail": "Genève — in corso, ultimo giorno: 23 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/atelier-formation-apprendre-fabriquer-cosmetiques-naturels"
             },
             {
-              "label": "Visite en Langue des Signes Française SaSA x MAMCO",
-              "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/visite-langue-signes-francaise-sasa-mamco-0"
+              "label": "Ateliers pour seniors | @ssistance PC, Mac et tablettes numériques",
+              "detail": "Genève — in corso, ultimo giorno: 20 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/ateliers-seniors-ssistance-tablettes-numeriques"
             },
             {
-              "label": "80e Concours de Genève – Demi-finale 2 de Direction d'Orchestre - Contrechamps",
-              "detail": "Autre lieu, Genève",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/evenements/musique/geneve/80e-concours-de-geneve-demi-finale-2-de-direction-dorchestre-contrechamps_AVqXP7s"
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "339",
+          "value": "325",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,64 +161,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "AMISTAT + Orange Oak",
+              "label": "80e Concours de Genève – Demi-finale 3 de Direction d’orchestre – Orchestre de la Suisse Romande",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/amistat-orange"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/concours-geneve-demi-finale-3-direction-orchestre-orchestre-suisse-romande"
             },
             {
-              "label": "Ciné goûter - Luca (2024, durée : 1h36)",
+              "label": "Action Lumières - Ville de Genève",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/cine-gouter-luca-2024-duree-1h36"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/action-lumieres-ville-geneve"
             },
             {
-              "label": "Demi-finale",
+              "label": "Masson/Duboule/Ruiz/Vandenbulck",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/demi-finale"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/massondubouleruizvandenbulck"
             },
             {
-              "label": "Emmanuel Pahud; Éric Le Sage",
+              "label": "Semaine des droits humains 2026: Pour une santé globale et durable",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/emmanuel-pahud-eric-sage"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/semaine-droits-humains-2026-sante-globale-durable"
             },
             {
-              "label": "Focus · Hommage à Patricio Guzmán (1941-2026)",
+              "label": "Soirée PréPro : ARNO | SEBASTIAN",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/focus-hommage-patricio-guzman-1941-2026"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/soiree-prepro-arno-sebastian"
             },
             {
-              "label": "Improoo - Le Festival du long format improvisé - En Thérapie",
-              "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/improoo-festival-long-format-improvise-therapie"
+              "label": "80e Concours de Genève – Demi-finale 3 de Direction d'Orchestre - L'OSR",
+              "detail": "Geneva, Genève",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/80e-concours-de-geneve-demifinale-3-de-direction-dorchestre-losr/"
             },
             {
-              "label": "Les dimanches de Cité Seniors | Duo de guitares Leu et Dragonetti",
-              "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/dimanches-cite-seniors-guitares-dragonetti"
+              "label": "Atelier Créer sa propre lampe",
+              "detail": "Genève — ongoing, last day: 21 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/atelier-creer-propre-lampe"
             },
             {
-              "label": "Une balade en forêt, une raclette en extérieur et les saveurs du terroir genevois !",
-              "detail": "Dardagny",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/balade-foret-raclette-exterieur-saveurs-terroir-genevois"
+              "label": "Atelier-formation \"Apprendre à fabriquer ses cosmétiques naturels\"",
+              "detail": "Genève — ongoing, last day: 23 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/atelier-formation-apprendre-fabriquer-cosmetiques-naturels"
             },
             {
-              "label": "Visite en Langue des Signes Française SaSA x MAMCO",
-              "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/visite-langue-signes-francaise-sasa-mamco-0"
+              "label": "Ateliers pour seniors | @ssistance PC, Mac et tablettes numériques",
+              "detail": "Genève — ongoing, last day: 20 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/ateliers-seniors-ssistance-tablettes-numeriques"
             },
             {
-              "label": "80e Concours de Genève – Demi-finale 2 de Direction d'Orchestre - Contrechamps",
-              "detail": "Autre lieu, Genève",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/evenements/musique/geneve/80e-concours-de-geneve-demi-finale-2-de-direction-dorchestre-contrechamps_AVqXP7s"
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève — ongoing, last day: 15 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "339",
+          "value": "325",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,64 +284,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "AMISTAT + Orange Oak",
+              "label": "80e Concours de Genève – Demi-finale 3 de Direction d’orchestre – Orchestre de la Suisse Romande",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/amistat-orange"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/concours-geneve-demi-finale-3-direction-orchestre-orchestre-suisse-romande"
             },
             {
-              "label": "Ciné goûter - Luca (2024, durée : 1h36)",
+              "label": "Action Lumières - Ville de Genève",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/cine-gouter-luca-2024-duree-1h36"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/action-lumieres-ville-geneve"
             },
             {
-              "label": "Demi-finale",
+              "label": "Masson/Duboule/Ruiz/Vandenbulck",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/demi-finale"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/massondubouleruizvandenbulck"
             },
             {
-              "label": "Emmanuel Pahud; Éric Le Sage",
+              "label": "Semaine des droits humains 2026: Pour une santé globale et durable",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/emmanuel-pahud-eric-sage"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/semaine-droits-humains-2026-sante-globale-durable"
             },
             {
-              "label": "Focus · Hommage à Patricio Guzmán (1941-2026)",
+              "label": "Soirée PréPro : ARNO | SEBASTIAN",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/focus-hommage-patricio-guzman-1941-2026"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/soiree-prepro-arno-sebastian"
             },
             {
-              "label": "Improoo - Le Festival du long format improvisé - En Thérapie",
-              "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/improoo-festival-long-format-improvise-therapie"
+              "label": "80e Concours de Genève – Demi-finale 3 de Direction d'Orchestre - L'OSR",
+              "detail": "Geneva, Genève",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/80e-concours-de-geneve-demifinale-3-de-direction-dorchestre-losr/"
             },
             {
-              "label": "Les dimanches de Cité Seniors | Duo de guitares Leu et Dragonetti",
-              "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/dimanches-cite-seniors-guitares-dragonetti"
+              "label": "Atelier Créer sa propre lampe",
+              "detail": "Genève — läuft, letzter Tag: 21. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/atelier-creer-propre-lampe"
             },
             {
-              "label": "Une balade en forêt, une raclette en extérieur et les saveurs du terroir genevois !",
-              "detail": "Dardagny",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/balade-foret-raclette-exterieur-saveurs-terroir-genevois"
+              "label": "Atelier-formation \"Apprendre à fabriquer ses cosmétiques naturels\"",
+              "detail": "Genève — läuft, letzter Tag: 23. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/atelier-formation-apprendre-fabriquer-cosmetiques-naturels"
             },
             {
-              "label": "Visite en Langue des Signes Française SaSA x MAMCO",
-              "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/visite-langue-signes-francaise-sasa-mamco-0"
+              "label": "Ateliers pour seniors | @ssistance PC, Mac et tablettes numériques",
+              "detail": "Genève — läuft, letzter Tag: 20. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/ateliers-seniors-ssistance-tablettes-numeriques"
             },
             {
-              "label": "80e Concours de Genève – Demi-finale 2 de Direction d'Orchestre - Contrechamps",
-              "detail": "Autre lieu, Genève",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/evenements/musique/geneve/80e-concours-de-geneve-demi-finale-2-de-direction-dorchestre-contrechamps_AVqXP7s"
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "339",
+          "value": "325",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,64 +407,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "AMISTAT + Orange Oak",
+              "label": "80e Concours de Genève – Demi-finale 3 de Direction d’orchestre – Orchestre de la Suisse Romande",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/amistat-orange"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/concours-geneve-demi-finale-3-direction-orchestre-orchestre-suisse-romande"
             },
             {
-              "label": "Ciné goûter - Luca (2024, durée : 1h36)",
+              "label": "Action Lumières - Ville de Genève",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/cine-gouter-luca-2024-duree-1h36"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/action-lumieres-ville-geneve"
             },
             {
-              "label": "Demi-finale",
+              "label": "Masson/Duboule/Ruiz/Vandenbulck",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/demi-finale"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/massondubouleruizvandenbulck"
             },
             {
-              "label": "Emmanuel Pahud; Éric Le Sage",
+              "label": "Semaine des droits humains 2026: Pour une santé globale et durable",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/emmanuel-pahud-eric-sage"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/semaine-droits-humains-2026-sante-globale-durable"
             },
             {
-              "label": "Focus · Hommage à Patricio Guzmán (1941-2026)",
+              "label": "Soirée PréPro : ARNO | SEBASTIAN",
               "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/focus-hommage-patricio-guzman-1941-2026"
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/soiree-prepro-arno-sebastian"
             },
             {
-              "label": "Improoo - Le Festival du long format improvisé - En Thérapie",
-              "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/improoo-festival-long-format-improvise-therapie"
+              "label": "80e Concours de Genève – Demi-finale 3 de Direction d'Orchestre - L'OSR",
+              "detail": "Geneva, Genève",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/80e-concours-de-geneve-demifinale-3-de-direction-dorchestre-losr/"
             },
             {
-              "label": "Les dimanches de Cité Seniors | Duo de guitares Leu et Dragonetti",
-              "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/dimanches-cite-seniors-guitares-dragonetti"
+              "label": "Atelier Créer sa propre lampe",
+              "detail": "Genève — en cours, dernier jour : 21 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/atelier-creer-propre-lampe"
             },
             {
-              "label": "Une balade en forêt, une raclette en extérieur et les saveurs du terroir genevois !",
-              "detail": "Dardagny",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/balade-foret-raclette-exterieur-saveurs-terroir-genevois"
+              "label": "Atelier-formation \"Apprendre à fabriquer ses cosmétiques naturels\"",
+              "detail": "Genève — en cours, dernier jour : 23 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/atelier-formation-apprendre-fabriquer-cosmetiques-naturels"
             },
             {
-              "label": "Visite en Langue des Signes Française SaSA x MAMCO",
-              "detail": "Genève",
-              "date": "2026-11-08",
-              "url": "https://www.geneve.ch/agenda/visite-langue-signes-francaise-sasa-mamco-0"
+              "label": "Ateliers pour seniors | @ssistance PC, Mac et tablettes numériques",
+              "detail": "Genève — en cours, dernier jour : 20 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/ateliers-seniors-ssistance-tablettes-numeriques"
             },
             {
-              "label": "80e Concours de Genève – Demi-finale 2 de Direction d'Orchestre - Contrechamps",
-              "detail": "Autre lieu, Genève",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/evenements/musique/geneve/80e-concours-de-geneve-demi-finale-2-de-direction-dorchestre-contrechamps_AVqXP7s"
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     }
   }
 }

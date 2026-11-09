@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "e2af4a2bb30bd0c11b0838ae523e5f50ca711eeea169873912c7924c2ebad7a7",
+  "updatedAt": "2026-11-09T01:55:21.693Z",
+  "contentHash": "25f92c6c1165a90363dcb5788462bf1adda90227d7f740e1f246b9f54fa8f9f4",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "202",
+          "value": "188",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Szenische Lesung",
-              "detail": "Thun",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/szenische-lesung/"
+              "label": "moving moments",
+              "detail": "Sporthalle Ebnit, Saanen — in corso, ultimo giorno: 29 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
-              "label": "Trachtengruppe Gohl Unterhaltungsabend 2026",
-              "detail": "Langnau i.E., Langnau im Emmental",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trachtengruppe-gohl-unterhaltungsabend-2026/"
+              "label": "Lake Thun Play Ship",
+              "detail": "Thunersee, Thun — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             },
             {
-              "label": "Workshop – 5 Wege zur Collage",
-              "detail": "Kunstmuseum Thun, Thun",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-5-wege-zur-collage/"
+              "label": "solo exhibition by Andrea Cindy Raemy",
+              "detail": "Biel, Biel/Bienne — in corso, ultimo giorno: 27 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
             },
             {
-              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
-              "detail": "Saalbau",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-be/konzert-jugendblasorchester-vbj-2026-kirchberg_AYQQYMZ"
+              "label": "La torre magica",
+              "detail": "Thun — in corso, ultimo giorno: 26 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/der-magische-turm/"
             },
             {
-              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
-              "detail": "Kirchberg BE, Kirchberg (BE)",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-jugendblasorchester-vbj-2026-kirchberg/"
+              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
+              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — in corso, ultimo giorno: 21 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             },
             {
-              "label": "Bachvesper «Vergnügte Ruh»",
-              "detail": "Bern",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bachvesper-vergnuegte-ruh/"
+              "label": "Zaubermärchen im Tipi",
+              "detail": "Bolligen — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
             },
             {
-              "label": "Duo-Abend Herbert Schaad, Violine / Jürg Lietha, Klavier",
-              "detail": "Aula Sekundarschule Zollikofen, Zollikofen",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/zollikofen/duo-abend-herbert-schaad-violine-juerg-lietha-klavier_Ad9VuBK"
+              "label": "Lake Thun Breakfast Special",
+              "detail": "Thunersee, Thun — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             },
             {
-              "label": "Konzert gem. Chor",
-              "detail": "Evang.-ref. Kirche Beatenberg, Beatenberg",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/beatenberg/konzert-gem-chor_AMVAF7X"
+              "label": "Pflegeeinsatz Auried",
+              "detail": "Auried Naturschutzgebiet, Laupen — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
             },
             {
-              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
-              "detail": "Villa Morillon",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater_ABawZWS"
+              "label": "Afternoon Tea at Lake Thun",
+              "detail": "Thunersee, Thun — in corso, ultimo giorno: 12 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
             },
             {
-              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
-              "detail": "Bern",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater/"
+              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "detail": "Kandersteg",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "202",
+          "value": "188",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,64 +156,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Szenische Lesung",
-              "detail": "Thun",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/szenische-lesung/"
+              "label": "moving moments",
+              "detail": "Sporthalle Ebnit, Saanen — ongoing, last day: 29 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
-              "label": "Trachtengruppe Gohl Unterhaltungsabend 2026",
-              "detail": "Langnau i.E., Langnau im Emmental",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trachtengruppe-gohl-unterhaltungsabend-2026/"
+              "label": "Lake Thun Play Ship",
+              "detail": "Thunersee, Thun — ongoing, last day: 14 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             },
             {
-              "label": "Workshop – 5 Wege zur Collage",
-              "detail": "Kunstmuseum Thun, Thun",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-5-wege-zur-collage/"
+              "label": "solo exhibition by Andrea Cindy Raemy",
+              "detail": "Biel, Biel/Bienne — ongoing, last day: 27 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
             },
             {
-              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
-              "detail": "Saalbau",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-be/konzert-jugendblasorchester-vbj-2026-kirchberg_AYQQYMZ"
+              "label": "The magic tower",
+              "detail": "Thun — ongoing, last day: 26 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/der-magische-turm/"
             },
             {
-              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
-              "detail": "Kirchberg BE, Kirchberg (BE)",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-jugendblasorchester-vbj-2026-kirchberg/"
+              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
+              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — ongoing, last day: 21 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             },
             {
-              "label": "Bachvesper «Vergnügte Ruh»",
-              "detail": "Bern",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bachvesper-vergnuegte-ruh/"
+              "label": "Zaubermärchen im Tipi",
+              "detail": "Bolligen — ongoing, last day: 15 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
             },
             {
-              "label": "Duo-Abend Herbert Schaad, Violine / Jürg Lietha, Klavier",
-              "detail": "Aula Sekundarschule Zollikofen, Zollikofen",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/zollikofen/duo-abend-herbert-schaad-violine-juerg-lietha-klavier_Ad9VuBK"
+              "label": "Lake Thun Breakfast Special",
+              "detail": "Thunersee, Thun — ongoing, last day: 14 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             },
             {
-              "label": "Konzert gem. Chor",
-              "detail": "Evang.-ref. Kirche Beatenberg, Beatenberg",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/beatenberg/konzert-gem-chor_AMVAF7X"
+              "label": "Pflegeeinsatz Auried",
+              "detail": "Auried Naturschutzgebiet, Laupen — ongoing, last day: 14 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
             },
             {
-              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
-              "detail": "Villa Morillon",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater_ABawZWS"
+              "label": "Afternoon Tea at Lake Thun",
+              "detail": "Thunersee, Thun — ongoing, last day: 12 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
             },
             {
-              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
-              "detail": "Bern",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater/"
+              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "detail": "Kandersteg",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "202",
+          "value": "188",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,64 +279,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Szenische Lesung",
-              "detail": "Thun",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/szenische-lesung/"
+              "label": "BeMo - Bewegte Momente",
+              "detail": "Sporthalle Ebnit, Saanen — läuft, letzter Tag: 29. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
-              "label": "Trachtengruppe Gohl Unterhaltungsabend 2026",
-              "detail": "Langnau i.E., Langnau im Emmental",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trachtengruppe-gohl-unterhaltungsabend-2026/"
+              "label": "Spieleschiff Thunersee",
+              "detail": "Thunersee, Thun — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             },
             {
-              "label": "Workshop – 5 Wege zur Collage",
-              "detail": "Kunstmuseum Thun, Thun",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-5-wege-zur-collage/"
+              "label": "solo exhibition by Andrea Cindy Raemy",
+              "detail": "Biel, Biel/Bienne — läuft, letzter Tag: 27. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
             },
             {
-              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
-              "detail": "Saalbau",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-be/konzert-jugendblasorchester-vbj-2026-kirchberg_AYQQYMZ"
+              "label": "Der magische Turm",
+              "detail": "Thun — läuft, letzter Tag: 26. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/der-magische-turm/"
             },
             {
-              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
-              "detail": "Kirchberg BE, Kirchberg (BE)",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-jugendblasorchester-vbj-2026-kirchberg/"
+              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
+              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — läuft, letzter Tag: 21. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             },
             {
-              "label": "Bachvesper «Vergnügte Ruh»",
-              "detail": "Bern",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bachvesper-vergnuegte-ruh/"
+              "label": "Zaubermärchen im Tipi",
+              "detail": "Bolligen — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
             },
             {
-              "label": "Duo-Abend Herbert Schaad, Violine / Jürg Lietha, Klavier",
-              "detail": "Aula Sekundarschule Zollikofen, Zollikofen",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/zollikofen/duo-abend-herbert-schaad-violine-juerg-lietha-klavier_Ad9VuBK"
+              "label": "Frühstücksspezial Thunersee",
+              "detail": "Thunersee, Thun — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             },
             {
-              "label": "Konzert gem. Chor",
-              "detail": "Evang.-ref. Kirche Beatenberg, Beatenberg",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/beatenberg/konzert-gem-chor_AMVAF7X"
+              "label": "Pflegeeinsatz Auried",
+              "detail": "Auried Naturschutzgebiet, Laupen — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
             },
             {
-              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
-              "detail": "Villa Morillon",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater_ABawZWS"
+              "label": "Afternoon Tea Thunersee",
+              "detail": "Thunersee, Thun — läuft, letzter Tag: 12. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
             },
             {
-              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
-              "detail": "Bern",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater/"
+              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "detail": "Kandersteg",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "202",
+          "value": "188",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,64 +402,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Szenische Lesung",
-              "detail": "Thun",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/szenische-lesung/"
+              "label": "des moments mouvementés",
+              "detail": "Sporthalle Ebnit, Saanen — en cours, dernier jour : 29 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
-              "label": "Trachtengruppe Gohl Unterhaltungsabend 2026",
-              "detail": "Langnau i.E., Langnau im Emmental",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trachtengruppe-gohl-unterhaltungsabend-2026/"
+              "label": "Bateau ludique du lac de Thoune",
+              "detail": "Thunersee, Thun — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             },
             {
-              "label": "Workshop – 5 Wege zur Collage",
-              "detail": "Kunstmuseum Thun, Thun",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-5-wege-zur-collage/"
+              "label": "solo exhibition by Andrea Cindy Raemy",
+              "detail": "Biel, Biel/Bienne — en cours, dernier jour : 27 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
             },
             {
-              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
-              "detail": "Saalbau",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-be/konzert-jugendblasorchester-vbj-2026-kirchberg_AYQQYMZ"
+              "label": "La tour magique",
+              "detail": "Thun — en cours, dernier jour : 26 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/der-magische-turm/"
             },
             {
-              "label": "Konzert Jugendblasorchester VBJ 2026 Kirchberg",
-              "detail": "Kirchberg BE, Kirchberg (BE)",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-jugendblasorchester-vbj-2026-kirchberg/"
+              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
+              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — en cours, dernier jour : 21 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             },
             {
-              "label": "Bachvesper «Vergnügte Ruh»",
-              "detail": "Bern",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bachvesper-vergnuegte-ruh/"
+              "label": "Zaubermärchen im Tipi",
+              "detail": "Bolligen — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
             },
             {
-              "label": "Duo-Abend Herbert Schaad, Violine / Jürg Lietha, Klavier",
-              "detail": "Aula Sekundarschule Zollikofen, Zollikofen",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/zollikofen/duo-abend-herbert-schaad-violine-juerg-lietha-klavier_Ad9VuBK"
+              "label": "Spécial petit-déjeuner du lac de Thoune",
+              "detail": "Thunersee, Thun — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             },
             {
-              "label": "Konzert gem. Chor",
-              "detail": "Evang.-ref. Kirche Beatenberg, Beatenberg",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/beatenberg/konzert-gem-chor_AMVAF7X"
+              "label": "Pflegeeinsatz Auried",
+              "detail": "Auried Naturschutzgebiet, Laupen — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
             },
             {
-              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
-              "detail": "Villa Morillon",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater_ABawZWS"
+              "label": "Thé de l'après-midi au lac de Thoune",
+              "detail": "Thunersee, Thun — en cours, dernier jour : 12 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
             },
             {
-              "label": "Lichtjahre - Esther Hasler 20 Jahre Jubiläum Solotheater",
-              "detail": "Bern",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lichtjahre-esther-hasler-20-jahre-jubilaeum-solotheater/"
+              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "detail": "Kandersteg",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     }
   }
 }

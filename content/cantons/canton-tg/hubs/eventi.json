@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T01:29:55.978Z",
-  "contentHash": "2c68f81ae7397e6f08857a70575c6d79a0fdbb281601a0bfc6ee829f86efb920",
+  "updatedAt": "2026-11-09T01:55:21.693Z",
+  "contentHash": "ace681ddaff3d66454ac8cefd38daf893a00a96737e2fe68632513f5ab045896",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T01:21:56.611Z",
+      "updatedAt": "2026-11-07T12:39:52.087Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-06T22:26:45.566Z",
+      "updatedAt": "2026-11-07T21:07:56.550Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "56",
+          "value": "54",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,57 +38,15 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "BelCanto-Chor Frauenfeld - Reprise",
-              "detail": "Tägerwilen, Frauenfeld",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/belcanto-chor-frauenfeld-reprise-2/"
-            },
-            {
-              "label": "Peter Pan",
-              "detail": "Frauenfeld",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/peter-pan/"
-            },
-            {
-              "label": "Special Jazz Concert mit Chris Hopkins",
-              "detail": "Kartause Ittingen",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/warth/special-jazz-concert-mit-chris-hopkins_Axp4V8S"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Evang.-ref. Kirche Steckborn, Steckborn",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/steckborn/leidenschaft-und-samba_Asb4kQL"
-            },
-            {
-              "label": "Klangreich",
-              "detail": "Alte Kirche Romanshorn, Romanshorn",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/romanshorn/klangreich_AckDusU"
-            },
-            {
-              "label": "Chortreffen - Jubiläumskonzert Chor grenzenlos",
-              "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/chortreffen-jubilaeumskonzert-chor-grenzenlos_A4miv18"
-            },
-            {
-              "label": "Inbalanceleben am Bodensee QiGong - Meditation - Achtsamkeit",
-              "detail": "See & Park Hotel Feldbach, Steckborn — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
-            },
-            {
               "label": "La Table d'Amis | Tavolata",
               "detail": "Restaurant Seegarten, Kreuzlingen — in corso, ultimo giorno: 13 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
             },
             {
               "label": "Philosophie im Löchlgaischt",
               "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             },
             {
@@ -96,11 +54,53 @@
               "detail": "Weinfelden",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-eifach-nuema-4/"
+            },
+            {
+              "label": "Rolf Schmid - I mag einfach nüma",
+              "detail": "Weinfelden",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-einfach-nuema/"
+            },
+            {
+              "label": "Häslitreff",
+              "detail": "Weinfelden",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haeslitreff-6/"
+            },
+            {
+              "label": "Impuls Lounge",
+              "detail": "Weinfelden",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/impuls-lounge-3/"
+            },
+            {
+              "label": "Fiirobig",
+              "detail": "Weinfelden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiirobig-2/"
+            },
+            {
+              "label": "Bäume fällen, Dämme bauen, Burgen graben: 60 Jahre Biber im Thurgau",
+              "detail": "Röm.-kath. Begegnungszentrum, Münsterlingen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muensterlingen/baeume-faellen-daemme-bauen-burgen-graben-60-jahre-biber-im-thurgau_ARutaww"
+            },
+            {
+              "label": "Louis Chevrolet: Wie ein Schweizer Name die Autowelt eroberte",
+              "detail": "Weinfelden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/louis-chevrolet-wie-ein-schweizer-name-die-autowelt-eroberte/"
+            },
+            {
+              "label": "Miss Allie «Paradiesvogel Tour» – Schweizer Premiere",
+              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/miss-allie-paradiesvogel-tour-schweizer-premiere_AxyvTRE"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "56",
+          "value": "54",
           "note": "from the site’s events calendar"
         }
       ],
@@ -172,57 +172,15 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "BelCanto-Chor Frauenfeld - Reprise",
-              "detail": "Tägerwilen, Frauenfeld",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/belcanto-chor-frauenfeld-reprise-2/"
-            },
-            {
-              "label": "Peter Pan",
-              "detail": "Frauenfeld",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/peter-pan/"
-            },
-            {
-              "label": "Special Jazz Concert with Chris Hopkins",
-              "detail": "Kartause Ittingen",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/warth/special-jazz-concert-mit-chris-hopkins_Axp4V8S"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Evang.-ref. Kirche Steckborn, Steckborn",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/steckborn/leidenschaft-und-samba_Asb4kQL"
-            },
-            {
-              "label": "Klangreich",
-              "detail": "Alte Kirche Romanshorn, Romanshorn",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/romanshorn/klangreich_AckDusU"
-            },
-            {
-              "label": "Chortreffen - Jubiläumskonzert Chor grenzenlos",
-              "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/chortreffen-jubilaeumskonzert-chor-grenzenlos_A4miv18"
-            },
-            {
-              "label": "Inbalanceleben am Bodensee QiGong-Meditation-Achtsamkeit",
-              "detail": "See & Park Hotel Feldbach, Steckborn — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
-            },
-            {
               "label": "La Table d'Amis | Tavolata",
               "detail": "Restaurant Seegarten, Kreuzlingen — ongoing, last day: 13 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
             },
             {
               "label": "Philosophie im Löchlgaischt",
               "detail": "Eschenz — ongoing, last day: 24 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             },
             {
@@ -230,11 +188,53 @@
               "detail": "Weinfelden",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-eifach-nuema-4/"
+            },
+            {
+              "label": "Rolf Schmid - I mag einfach nüma",
+              "detail": "Weinfelden",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-einfach-nuema/"
+            },
+            {
+              "label": "Häslitreff",
+              "detail": "Weinfelden",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haeslitreff-6/"
+            },
+            {
+              "label": "Impuls Lounge",
+              "detail": "Weinfelden",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/impuls-lounge-3/"
+            },
+            {
+              "label": "Fiirobig",
+              "detail": "Weinfelden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiirobig-2/"
+            },
+            {
+              "label": "Bäume fällen, Dämme bauen, Burgen graben: 60 Jahre Biber im Thurgau",
+              "detail": "Röm.-kath. Begegnungszentrum, Münsterlingen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muensterlingen/baeume-faellen-daemme-bauen-burgen-graben-60-jahre-biber-im-thurgau_ARutaww"
+            },
+            {
+              "label": "Louis Chevrolet: Wie ein Schweizer Name die Autowelt eroberte",
+              "detail": "Weinfelden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/louis-chevrolet-wie-ein-schweizer-name-die-autowelt-eroberte/"
+            },
+            {
+              "label": "Miss Allie «Paradiesvogel Tour» – Schweizer Premiere",
+              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/miss-allie-paradiesvogel-tour-schweizer-premiere_AxyvTRE"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "56",
+          "value": "54",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -306,57 +306,15 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "BelCanto-Chor Frauenfeld - Reprise",
-              "detail": "Tägerwilen, Frauenfeld",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/belcanto-chor-frauenfeld-reprise-2/"
-            },
-            {
-              "label": "Peter Pan",
-              "detail": "Frauenfeld",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/peter-pan/"
-            },
-            {
-              "label": "Spezielles Jazzkonzert mit Chris Hopkins",
-              "detail": "Kartause Ittingen",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/warth/special-jazz-concert-mit-chris-hopkins_Axp4V8S"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Evang.-ref. Kirche Steckborn, Steckborn",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/steckborn/leidenschaft-und-samba_Asb4kQL"
-            },
-            {
-              "label": "Klangreich",
-              "detail": "Alte Kirche Romanshorn, Romanshorn",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/romanshorn/klangreich_AckDusU"
-            },
-            {
-              "label": "Chortreffen - Jubiläumskonzert Chor grenzenlos",
-              "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/chortreffen-jubilaeumskonzert-chor-grenzenlos_A4miv18"
-            },
-            {
-              "label": "Inbalanceleben am Bodensee QiGong-Meditation-Achtsamkeit",
-              "detail": "See & Park Hotel Feldbach, Steckborn — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
-            },
-            {
               "label": "La Table d'Amis | Tavolata",
               "detail": "Restaurant Seegarten, Kreuzlingen — läuft, letzter Tag: 13. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
             },
             {
               "label": "Philosophie im Löchlgaischt",
               "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             },
             {
@@ -364,11 +322,53 @@
               "detail": "Weinfelden",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-eifach-nuema-4/"
+            },
+            {
+              "label": "Rolf Schmid - I mag einfach nüma",
+              "detail": "Weinfelden",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-einfach-nuema/"
+            },
+            {
+              "label": "Häslitreff",
+              "detail": "Weinfelden",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haeslitreff-6/"
+            },
+            {
+              "label": "Impuls Lounge",
+              "detail": "Weinfelden",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/impuls-lounge-3/"
+            },
+            {
+              "label": "Fiirobig",
+              "detail": "Weinfelden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiirobig-2/"
+            },
+            {
+              "label": "Bäume fällen, Dämme bauen, Burgen graben: 60 Jahre Biber im Thurgau",
+              "detail": "Röm.-kath. Begegnungszentrum, Münsterlingen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muensterlingen/baeume-faellen-daemme-bauen-burgen-graben-60-jahre-biber-im-thurgau_ARutaww"
+            },
+            {
+              "label": "Louis Chevrolet: Wie ein Schweizer Name die Autowelt eroberte",
+              "detail": "Weinfelden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/louis-chevrolet-wie-ein-schweizer-name-die-autowelt-eroberte/"
+            },
+            {
+              "label": "Miss Allie «Paradiesvogel Tour» – Schweizer Premiere",
+              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/miss-allie-paradiesvogel-tour-schweizer-premiere_AxyvTRE"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "56",
+          "value": "54",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -440,57 +440,15 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "BelCanto-Chor Frauenfeld - Reprise",
-              "detail": "Tägerwilen, Frauenfeld",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/belcanto-chor-frauenfeld-reprise-2/"
-            },
-            {
-              "label": "Peter Pan",
-              "detail": "Frauenfeld",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/peter-pan/"
-            },
-            {
-              "label": "Concert de jazz spécial avec Chris Hopkins",
-              "detail": "Kartause Ittingen",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/warth/special-jazz-concert-mit-chris-hopkins_Axp4V8S"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Evang.-ref. Kirche Steckborn, Steckborn",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/steckborn/leidenschaft-und-samba_Asb4kQL"
-            },
-            {
-              "label": "Klangreich",
-              "detail": "Alte Kirche Romanshorn, Romanshorn",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/romanshorn/klangreich_AckDusU"
-            },
-            {
-              "label": "Chortreffen - Jubiläumskonzert Chor grenzenlos",
-              "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/chortreffen-jubilaeumskonzert-chor-grenzenlos_A4miv18"
-            },
-            {
-              "label": "Inbalanceleben am Bodensee QiGong - Méditation - Achtsamkeit",
-              "detail": "See & Park Hotel Feldbach, Steckborn — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
-            },
-            {
               "label": "La Table d'Amis | Tavolata",
               "detail": "Restaurant Seegarten, Kreuzlingen — en cours, dernier jour : 13 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
             },
             {
               "label": "Philosophie im Löchlgaischt",
               "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             },
             {
@@ -498,11 +456,53 @@
               "detail": "Weinfelden",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-eifach-nuema-4/"
+            },
+            {
+              "label": "Rolf Schmid - I mag einfach nüma",
+              "detail": "Weinfelden",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-einfach-nuema/"
+            },
+            {
+              "label": "Häslitreff",
+              "detail": "Weinfelden",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haeslitreff-6/"
+            },
+            {
+              "label": "Impuls Lounge",
+              "detail": "Weinfelden",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/impuls-lounge-3/"
+            },
+            {
+              "label": "Fiirobig",
+              "detail": "Weinfelden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiirobig-2/"
+            },
+            {
+              "label": "Bäume fällen, Dämme bauen, Burgen graben: 60 Jahre Biber im Thurgau",
+              "detail": "Röm.-kath. Begegnungszentrum, Münsterlingen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muensterlingen/baeume-faellen-daemme-bauen-burgen-graben-60-jahre-biber-im-thurgau_ARutaww"
+            },
+            {
+              "label": "Louis Chevrolet: Wie ein Schweizer Name die Autowelt eroberte",
+              "detail": "Weinfelden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/louis-chevrolet-wie-ein-schweizer-name-die-autowelt-eroberte/"
+            },
+            {
+              "label": "Miss Allie «Paradiesvogel Tour» – Schweizer Premiere",
+              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/miss-allie-paradiesvogel-tour-schweizer-premiere_AxyvTRE"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     }
   }
 }

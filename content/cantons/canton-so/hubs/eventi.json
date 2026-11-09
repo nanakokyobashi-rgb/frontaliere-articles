@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "df7ece0cd69f66af608ef4a4a2e899b9c6d9be671e97fe86e43d49cd22027af0",
+  "updatedAt": "2026-11-09T01:55:21.693Z",
+  "contentHash": "232c2291b4b2ee414c7900e7b33366dd5a05295e6f47d712c730874227a0fa5f",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "56",
+          "value": "54",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,63 +33,63 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Guitar & Cake",
+              "label": "Winterzauber im Seifen Haus",
+              "detail": "Seifen Haus",
+              "date": "2026-11-09",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/welschenrohr/swing-into-spring-seifenhaus_AMB1A7N"
+            },
+            {
+              "label": "Offizieller Bahnkurs November 2026",
+              "detail": "Grenchen",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
+            },
+            {
+              "label": "Medienkompetenz bei Jugendlichen stärken",
               "detail": "Solothurn",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/guitar-cake/"
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/medienkompetenz-bei-jugendlichen-staerken/"
             },
             {
-              "label": "LET’S DANCE ON SUNDAYS !!",
-              "detail": "Solothurn",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lets-dance-on-sundays-2/"
-            },
-            {
-              "label": "Vintage Computer Festival",
-              "detail": "Derendingen — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vintage-computer-festival/"
-            },
-            {
-              "label": "Lottomatch der Schützengesellschaft Kyburg",
-              "detail": "Mehrzweckhalle Aetigkofen — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lottomatch-der-schuetzengesellschaft-kyburg/"
+              "label": "Vortragsabend mit dem Sámi Jon Henrik Fjällgren Sänger & Rentierhirte",
+              "detail": "Olten",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortragsabend-mit-jon-henrik-fjaellgren/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — in corso, ultimo giorno: 3 dicembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
             },
             {
               "label": "Leben im Zeitalter der Dauerkrise",
               "detail": "Solothurn — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
               "detail": "Solothurn — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
             },
             {
               "label": "Was ist Jazz?",
               "detail": "Solothurn — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             },
             {
               "label": "Vom Urknall zum Leben",
               "detail": "Solothurn — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
             },
             {
               "label": "Il Centro Italiano è ospite dell'Hotel Roten Ochsen di Soletta.",
               "detail": "Hotel Roter Ochsen — in corso, ultimo giorno: 16 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             }
           ],
@@ -123,7 +123,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "en": {
       "canton": "SO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "56",
+          "value": "54",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,63 +144,63 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Guitar & Cake",
+              "label": "Winterzauber im Seifen Haus",
+              "detail": "Seifen Haus",
+              "date": "2026-11-09",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/welschenrohr/swing-into-spring-seifenhaus_AMB1A7N"
+            },
+            {
+              "label": "Offizieller Bahnkurs November 2026",
+              "detail": "Grenchen",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
+            },
+            {
+              "label": "Medienkompetenz bei Jugendlichen stärken",
               "detail": "Solothurn",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/guitar-cake/"
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/medienkompetenz-bei-jugendlichen-staerken/"
             },
             {
-              "label": "LET’S DANCE ON SUNDAYS !!",
-              "detail": "Solothurn",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lets-dance-on-sundays-2/"
-            },
-            {
-              "label": "Vintage Computer Festival",
-              "detail": "Derendingen — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vintage-computer-festival/"
-            },
-            {
-              "label": "Lottomatch der Schützengesellschaft Kyburg",
-              "detail": "Mehrzweckhalle Aetigkofen — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lottomatch-der-schuetzengesellschaft-kyburg/"
+              "label": "Vortragsabend mit dem Sámi Jon Henrik Fjällgren Sänger & Rentierhirte",
+              "detail": "Olten",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortragsabend-mit-jon-henrik-fjaellgren/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — ongoing, last day: 3 December 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
             },
             {
               "label": "Leben im Zeitalter der Dauerkrise",
               "detail": "Solothurn — ongoing, last day: 12 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
               "detail": "Solothurn — ongoing, last day: 18 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
             },
             {
               "label": "Was ist Jazz?",
               "detail": "Solothurn — ongoing, last day: 24 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             },
             {
               "label": "Vom Urknall zum Leben",
               "detail": "Solothurn — ongoing, last day: 18 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
             },
             {
               "label": "Centro Italiano as guest at the Hotel Roten Ochsen, Solothurn",
               "detail": "Hotel Roter Ochsen — ongoing, last day: 16 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             }
           ],
@@ -234,7 +234,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "de": {
       "canton": "SO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "56",
+          "value": "54",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,63 +255,63 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Guitar & Cake",
+              "label": "Winterzauber im Seifen Haus",
+              "detail": "Seifen Haus",
+              "date": "2026-11-09",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/welschenrohr/swing-into-spring-seifenhaus_AMB1A7N"
+            },
+            {
+              "label": "Offizieller Bahnkurs November 2026",
+              "detail": "Grenchen",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
+            },
+            {
+              "label": "Medienkompetenz bei Jugendlichen stärken",
               "detail": "Solothurn",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/guitar-cake/"
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/medienkompetenz-bei-jugendlichen-staerken/"
             },
             {
-              "label": "LET’S DANCE ON SUNDAYS !!",
-              "detail": "Solothurn",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lets-dance-on-sundays-2/"
-            },
-            {
-              "label": "Vintage Computer Festival",
-              "detail": "Derendingen — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vintage-computer-festival/"
-            },
-            {
-              "label": "Lottomatch der Schützengesellschaft Kyburg",
-              "detail": "Mehrzweckhalle Aetigkofen — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lottomatch-der-schuetzengesellschaft-kyburg/"
+              "label": "Vortragsabend mit dem Sámi Jon Henrik Fjällgren Sänger & Rentierhirte",
+              "detail": "Olten",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortragsabend-mit-jon-henrik-fjaellgren/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — läuft, letzter Tag: 3. Dezember 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
             },
             {
               "label": "Leben im Zeitalter der Dauerkrise",
               "detail": "Solothurn — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
               "detail": "Solothurn — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
             },
             {
               "label": "Was ist Jazz?",
               "detail": "Solothurn — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             },
             {
               "label": "Vom Urknall zum Leben",
               "detail": "Solothurn — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
             },
             {
               "label": "Centro Italiano zu Gast im Hotel Roten Ochsen, Solothurn",
               "detail": "Hotel Roter Ochsen — läuft, letzter Tag: 16. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             }
           ],
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "fr": {
       "canton": "SO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "56",
+          "value": "54",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,63 +366,63 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Guitar & Cake",
+              "label": "Winterzauber im Seifen Haus",
+              "detail": "Seifen Haus",
+              "date": "2026-11-09",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/welschenrohr/swing-into-spring-seifenhaus_AMB1A7N"
+            },
+            {
+              "label": "Offizieller Bahnkurs November 2026",
+              "detail": "Grenchen",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
+            },
+            {
+              "label": "Medienkompetenz bei Jugendlichen stärken",
               "detail": "Solothurn",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/guitar-cake/"
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/medienkompetenz-bei-jugendlichen-staerken/"
             },
             {
-              "label": "LET’S DANCE ON SUNDAYS !!",
-              "detail": "Solothurn",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lets-dance-on-sundays-2/"
-            },
-            {
-              "label": "Vintage Computer Festival",
-              "detail": "Derendingen — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vintage-computer-festival/"
-            },
-            {
-              "label": "Lottomatch der Schützengesellschaft Kyburg",
-              "detail": "Mehrzweckhalle Aetigkofen — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lottomatch-der-schuetzengesellschaft-kyburg/"
+              "label": "Vortragsabend mit dem Sámi Jon Henrik Fjällgren Sänger & Rentierhirte",
+              "detail": "Olten",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortragsabend-mit-jon-henrik-fjaellgren/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — en cours, dernier jour : 3 décembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
             },
             {
               "label": "Leben im Zeitalter der Dauerkrise",
               "detail": "Solothurn — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
               "detail": "Solothurn — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
             },
             {
               "label": "Was ist Jazz?",
               "detail": "Solothurn — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             },
             {
               "label": "Vom Urknall zum Leben",
               "detail": "Solothurn — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
             },
             {
               "label": "Le Centro Italiano invité à l'hôtel Roten Ochsen, Soleure",
               "detail": "Hotel Roter Ochsen — en cours, dernier jour : 16 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             }
           ],
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     }
   }
 }
