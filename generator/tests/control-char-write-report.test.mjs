@@ -289,6 +289,14 @@ test('ogni choke point di scrittura passa da qui — per OGNI sanitizer, non sol
     'generator/scripts/lib/article-meta-refresh.mjs',
     'generator/scripts/lib/evergreen-article-refresh.mjs',
     'generator/scripts/repair-empty-template-fields.mjs',
+    'generator/scripts/repair-fiscal-claims.mjs',
+    'generator/scripts/repair-localized-toponyms.mjs',
+    'generator/scripts/repair-mangled-chars.mjs',
+    'generator/scripts/repair-microcopy.mjs',
+    'generator/scripts/repair-plain-excerpts.mjs',
+    'generator/scripts/repair-prompt-placeholders.mjs',
+    'generator/scripts/repair-source-echo.mjs',
+    'generator/scripts/repair-truncated-seo-titles.mjs',
     'generator/scripts/retranslate-blocking-bodies.mjs',
     'scripts/build-api.mjs',
     'scripts/build-blog-index.mjs',
@@ -467,6 +475,27 @@ test('il report decodifica anche i campi TypeScript dei chunk meta', () => {
     log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
   });
   assert.equal(JSON.parse(writes[0].d.trim()).byte, 0x08);
+});
+
+test('il report decodifica tutti i literal TS dei chunk SEO e dei moduli generici', () => {
+  resetCounters();
+  const writes = [];
+  const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
+  const source = [
+    'const BLOG_SEO_METADATA = {',
+    String.raw`  'blog-example': { title: '\x08', description: '\u{8}', ogTitle: '\v', structuredData: { "headline": "\f" } },`,
+    '};',
+  ].join('\n');
+  expectRejectedWrite('content/seo/seo-blog.ts', source, source, {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  expectRejectedWrite('content/routerBlogData.ts', source, source, {
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '',
+  });
+  for (const write of writes) {
+    const records = write.d.trim().split('\n').map((line) => JSON.parse(line));
+    assert.deepEqual(records.map((record) => record.byte), [0x08, 0x08, 0x0b, 0x0c]);
+  }
 });
 
 test('il report riconosce gli alias services/locales di body e meta', () => {
@@ -693,4 +722,13 @@ test('il report raw non interpreta escape TypeScript che compaiono solo nei comm
   resetCounters();
   const source = String.raw`// documentazione: "\u0008"`;
   assert.equal(reportStrippedControlChars('content/blog-body/fr/article.ts', source, source, { log: () => {} }), 0);
+});
+
+test('il report TypeScript non interpreta regex, commenti o backslash letterali come C0', () => {
+  resetCounters();
+  const source = String.raw`const matcher = /\\b/;
+// documentazione: "\b"
+const backup = "C:\\backup";`;
+  assert.equal(reportStrippedControlChars('content/seo/seo-blog.ts', source, source, { log: () => {} }), 0);
+  assert.equal(strippedCount(), 0);
 });

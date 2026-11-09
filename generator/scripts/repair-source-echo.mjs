@@ -44,9 +44,17 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { writeFileAtomic } from './lib/atomic-write-file.mjs';
+import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
+import { writeFileAtomic as writeFileAtomicUnchecked } from './lib/atomic-write-file.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+
+function writeFileAtomic(file, source) {
+  const clean = sanitizeText(source);
+  reportStrippedControlChars(file, source, clean);
+  writeFileAtomicUnchecked(file, clean);
+}
 
 const RISTORNI = 'ristorni-frontalieri-berna-deplora-lo-stop-del-cantone-ma-vuole-una-soluzione.ts';
 const FESTIVAL = 'festival-meraviglia-laveno-luino-2026.ts';

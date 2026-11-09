@@ -15,6 +15,7 @@ import { readdirSync, readFileSync, renameSync, unlinkSync, writeFileSync } from
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYM_FIELD_SEPARATOR,
@@ -27,6 +28,7 @@ import {
   encodeStaticArticleFieldValue,
   scanStaticArticleFieldEntries,
 } from './lib/static-article-field-scanner.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import {
   assertLocalizedSlugMapUnique,
   parseLocalizedArticleSlugMap,
@@ -224,9 +226,11 @@ for (const [file, edits] of editsByFile) {
 
 if (WRITE) {
   for (const [file, source] of rewrittenSources) {
+    const clean = sanitizeText(source);
+    reportStrippedControlChars(file, source, clean);
     const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
     try {
-      writeFileSync(tmp, source, 'utf8');
+      writeFileSync(tmp, clean, 'utf8');
       renameSync(tmp, file);
     } catch (error) {
       try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }

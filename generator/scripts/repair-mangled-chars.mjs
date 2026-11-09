@@ -110,17 +110,101 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
-import { writeFileAtomic } from './lib/atomic-write-file.mjs';
+import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
+import { writeFileAtomic as writeFileAtomicUnchecked } from './lib/atomic-write-file.mjs';
 import { stripLasciaResiduo } from './lib/control-char-write-report.mjs';
 // L'oracolo della spelling escapata, non una seconda definizione: e' lo stesso
 // `ESCAPED_C0_RX` che conta le occorrenze in `find-dirty-content-ids.mjs`
 // (#336, #338).  Se quella regex cambia — le forme brevi `\b`/`\f` sono state
 // aggiunte dopo — questo riparatore la segue senza saperlo.  Riscriverla qui
 // sarebbe il modo esatto in cui le due spelling sono divergute la prima volta.
-import { findEscapedControlChars } from '../../scripts/find-dirty-content-ids.mjs';
+import {
+  decodeEscapedControlChars,
+  findEscapedControlChars,
+} from '../../scripts/find-dirty-content-ids.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
 const RADICE_DEFAULT = path.resolve(QUI, '..', '..');
+
+/**
+ * Sostituisce, solo per la reportistica, le escape C0 gia' dichiarate con
+ * escape legali della stessa lunghezza. Le nuove restano visibili al guard.
+ *
+ * @param {string} source
+ * @param {Array<{ spelling: string }>} declaredEscapedResiduals
+ */
+function maskDeclaredEscapedResiduals(source, declaredEscapedResiduals) {
+  const quota = new Map();
+  for (const { spelling } of declaredEscapedResiduals) {
+    quota.set(spelling, (quota.get(spelling) || 0) + 1);
+  }
+  if (quota.size === 0) return source;
+
+  let cursor = 0;
+  let masked = '';
+  for (const { index, spelling } of findEscapedControlChars(source)) {
+    const remaining = quota.get(spelling) || 0;
+    if (remaining === 0) continue;
+    // Mantiene sia la lunghezza nel sorgente sia un carattere nel valore
+    // decodificato: il report degli eventuali C0 nuovi conserva le coordinate.
+    const u = spelling.lastIndexOf('u00');
+    const replacement = u >= 0
+      ? spelling.slice(0, u) + 'u0020'
+      : spelling.slice(0, -1) + 't';
+    masked += source.slice(cursor, index) + replacement;
+    cursor = index + spelling.length;
+    quota.set(spelling, remaining - 1);
+  }
+  return cursor === 0 ? source : masked + source.slice(cursor);
+}
+
+/**
+ * @param {string} file
+ * @param {string|Buffer} content
+ * @param {{ allowDeclaredEscapedResiduals?: boolean, declaredEscapedResiduals?: Array<{ spelling: string }> }} [options]
+ */
+function writeFileAtomic(file, content, {
+  allowDeclaredEscapedResiduals = false,
+  declaredEscapedResiduals = [],
+} = {}) {
+  const source = Buffer.isBuffer(content) ? content.toString('utf8') : content;
+  const clean = sanitizeText(source);
+  // La sola eccezione e' il giro parziale di questo script: le escape residue
+  // sono gia' state elencate da `riparaEscapate` e l'uscita resta 2. Si
+  // mascherano solo le occorrenze dichiarate nel testo d'ingresso, lasciando
+  // al report i C0 raw e ogni escape nuova; il chiamante deve dimostrare prima
+  // che non e' comparsa una spelling nuova.
+  const dichiarate = allowDeclaredEscapedResiduals ? declaredEscapedResiduals : [];
+  const reportSource = maskDeclaredEscapedResiduals(source, dichiarate);
+  const reportClean = maskDeclaredEscapedResiduals(clean, dichiarate);
+  reportStrippedControlChars(file, reportSource, reportClean);
+  const decodedEscapedSource = decodeEscapedControlChars(reportSource);
+  if (decodedEscapedSource !== reportSource) {
+    reportStrippedControlChars(file, decodedEscapedSource, reportClean);
+  }
+  writeFileAtomicUnchecked(file, Buffer.isBuffer(content) ? Buffer.from(clean, 'utf8') : clean);
+}
+
+/**
+ * Una passata puo' applicare solo quattro riparazioni e lasciare le altre
+ * dichiarate per il giro successivo. Le sostituzioni di questo script possono
+ * solo rimuovere la spelling escapata scelta e inserire una lettera: se una
+ * spelling escapata resta, deve quindi essere una spelling gia' presente nel
+ * file d'ingresso, mai una nuova forma introdotta dalla riparazione.
+ */
+function escapedResidualsArePreexisting(before, after) {
+  const quota = new Map();
+  for (const { spelling } of findEscapedControlChars(before)) {
+    quota.set(spelling, (quota.get(spelling) || 0) + 1);
+  }
+  for (const { spelling } of findEscapedControlChars(after)) {
+    const remaining = quota.get(spelling) || 0;
+    if (remaining === 0) return false;
+    quota.set(spelling, remaining - 1);
+  }
+  return true;
+}
 
 /** I C0 che non compaiono mai legittimamente in un sorgente: TAB/LF/CR esclusi. */
 const MARKER_CLASSE = '\\u0000-\\u0008\\u000B\\u000C\\u000E-\\u001F';
@@ -1584,11 +1668,20 @@ function main() {
     }
     // La spelling ESCAPATA, prima del residuo: una riparazione qui puo'
     // ripulire l'ancora di un residuo, e il residuo non ha ancora da restituire.
-    const nEscapate = findEscapedControlChars(corrente).length;
+    const escapateDichiarate = findEscapedControlChars(testo);
+    const nEscapate = escapateDichiarate.length;
+    let escapedResiduals = [];
+    let escapedWriteSafe = true;
     if (nEscapate > 0) {
       escapateOccorrenze += nEscapate;
       const esc = riparaEscapate(f.percorso, corrente, testimoni, cacheTestimoni);
       corrente = esc.testo;
+      escapedResiduals = findEscapedControlChars(corrente);
+      // `riparaEscapate` deve riportare ogni spelling che resta: senza questa
+      // controprova, un bug nel rapporto potrebbe permettere una write parziale
+      // con un marker sfuggito alla diagnosi.
+      escapedWriteSafe = escapedResiduals.length === esc.lasciate.length
+        && escapedResidualsArePreexisting(testo, corrente);
       escapateRiparate += esc.riparazioni.length;
       for (const rip of esc.riparazioni) {
         riparazioniElenco.push({
@@ -1620,9 +1713,17 @@ function main() {
     if (res.riparazioni.length || res.lasciate.length) {
       residuiPerFile.push({ file: f.percorso, riparati: res.riparazioni.length, lasciati: res.lasciate.length });
     }
-    if (opz.scrivi && corrente !== testo) {
+    // Una riparazione parziale e' intenzionale: il tetto di quattro giri deve
+    // poter committare il progresso e lasciare le occorrenze gia' dichiarate
+    // per il giro successivo. Si scrive solo se nessuna spelling escapata nuova
+    // e' comparsa e ogni residuo e' entrato nel rapporto; l'uscita 2 resta il
+    // cancello che impedisce di considerare il file risolto.
+    if (opz.scrivi && corrente !== testo && escapedWriteSafe) {
       const dest = path.join(opz.radice, f.percorso);
-      writeFileAtomic(dest, Buffer.from(corrente, 'utf8'));
+      writeFileAtomic(dest, Buffer.from(corrente, 'utf8'), {
+        allowDeclaredEscapedResiduals: escapedResiduals.length > 0,
+        declaredEscapedResiduals: escapateDichiarate,
+      });
     }
   }
 

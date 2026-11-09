@@ -26,6 +26,26 @@ import * as fixFaqLocales from '../scripts/fix-faq-locales.mjs';
 
 const ids = (text) => findFiscalClaims(text).map((claim) => claim.id);
 
+test('i repair writer usano il choke point lexer-aware senza una scansione cieca del sorgente', () => {
+  const scripts = [
+    'repair-fiscal-claims.mjs',
+    'repair-localized-toponyms.mjs',
+    'repair-microcopy.mjs',
+    'repair-prompt-placeholders.mjs',
+    'repair-truncated-seo-titles.mjs',
+  ];
+  for (const script of scripts) {
+    const source = readFileSync(
+      path.join(import.meta.dirname, '..', 'scripts', script),
+      'utf8',
+    );
+    assert.match(source, /import \{ reportStrippedControlChars \} from '\.\/lib\/control-char-write-report\.mjs';/u, script);
+    assert.match(source, /import \{ sanitizeText \} from '\.\.\/\.\.\/scripts\/lib\/sanitize-control-chars\.mjs';/u, script);
+    assert.doesNotMatch(source, /(?:findEscapedControlChars|decodeEscapedControlChars)/u, script);
+    assert.match(source, /reportStrippedControlChars\(file, (?:text|source|content), clean\);/u, script);
+  }
+});
+
 test('franchigia 7.500: in ogni lingua, grafia e valuta', () => {
   for (const sentence of [
     'I vecchi frontalieri beneficiano di un\'esenzione di 7.500 euro nel regime transitorio.',
