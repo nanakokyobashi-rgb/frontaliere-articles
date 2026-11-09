@@ -1012,9 +1012,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 come chiusura transitiva del trasporto di scripts/ci/scan-job-timeouts.mjs per #1110: lo scanner Site importa isFailureReportingDisabled, assente nella copia Corpus precedente. Copia byte-identica dal sito, senza adattamenti locali.",
       "baseline": {
-        "site": "42fadcf61b8cd01f",
-        "corpus": "42fadcf61b8cd01f",
-        "alignedAt": "2026-11-06"
+        "site": "701111a429b662d6",
+        "corpus": "701111a429b662d6",
+        "alignedAt": "2026-11-09"
       }
     },
     {
@@ -2104,9 +2104,9 @@
       "mode": "identical",
       "reason": "Sanificazione dei control character in uscita, portata da #65. Registrata 'corpus-only-pending' dopo che la PR gemella sul sito era stata CHIUSA (valerielinc-ops#5488: il gate proposto rifiutava la home viva, 10 falsi positivi su 162 KB), con il lavoro di rientro tracciato in https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/5457. Promossa a `identical` da #157: il fetch su questo path non risponde piu' 404, e il contenuto scaricato e' byte-identico al file qui (hash 61f6e2723fabdad7 su entrambi i lati, verificato 2026-08-10) — non solo un file con lo stesso nome. Riallineata da #221 (site-ahead: valerielinc-ops#5585 aveva gia' corretto il docstring — (0x17,'0') e' «ò», non «à» — mentre qui era ancora fermo alla baseline del 2026-08-10); nessun codice eseguibile toccato, solo commenti.",
       "baseline": {
-        "site": "1d106a721fda1ae7",
-        "corpus": "1d106a721fda1ae7",
-        "alignedAt": "2026-10-04"
+        "site": "2a92741f0c3a6934",
+        "corpus": "2a92741f0c3a6934",
+        "alignedAt": "2026-11-09"
       }
     },
     {
@@ -4201,9 +4201,9 @@
       "sitePath": "build-plugins/shared/postWalkDerivedDigest.ts",
       "mode": "identical",
       "baseline": {
-        "site": "2e1c78dc51deb33a",
-        "corpus": "2e1c78dc51deb33a",
-        "alignedAt": "2026-09-20"
+        "site": "17e2f74050a4d6e3",
+        "corpus": "17e2f74050a4d6e3",
+        "alignedAt": "2026-11-09"
       }
     },
     {
@@ -4448,9 +4448,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "b2c578bda693f1f5",
-        "corpus": "b2c578bda693f1f5",
-        "alignedAt": "2026-11-03"
+        "site": "ee412ea54792f74a",
+        "corpus": "ee412ea54792f74a",
+        "alignedAt": "2026-11-09"
       }
     },
     {
@@ -6945,9 +6945,9 @@
       "mode": "identical",
       "reason": "Fingerprint byte-exact dei producer site-support, AdSense, Partnerize, Meta Pixel e helper canonici; lega gli snapshot trasportati ai byte sorgente e ne verifica l’insieme prima della pubblicazione.",
       "baseline": {
-        "site": "95d8d04585133d65",
-        "corpus": "95d8d04585133d65",
-        "alignedAt": "2026-11-05"
+        "site": "dc236b7de7fa65f7",
+        "corpus": "dc236b7de7fa65f7",
+        "alignedAt": "2026-11-09"
       }
     },
     {
