@@ -41,7 +41,8 @@ import { realpathSync } from 'node:fs';
  * — final close stays human (FOLLOWUP.md philosophy: never close on heuristic).
  * One exception, because it is not a heuristic: a conflict hand-off whose origin PR is
  * merged or mergeable again is closed (`closeResolvedHandoff`); the scheduled twin of
- * that rule is scripts/ci/reconcile-conflict-handoffs.mjs.
+ * that rule is scripts/ci/reconcile-conflict-handoffs.mjs. A manifest pin vetoes that
+ * close as well, because the cross-repo hand-off remains the live tracking record.
  *
  * Output (GITHUB_OUTPUT): `already_resolved=true|false`. issue-fix.yml gates the Claude
  * job on `already_resolved != 'true'`.
@@ -70,12 +71,14 @@ import {
   hasEnumeratedItems,
   maskInlineCodeSpans,
 } from './followup-resolution-match.mjs';
+import { manifestPinLookup } from './manifest-pinned-issues.mjs';
 
 export { hasEnumeratedItems };
 
 const DRY_RUN = process.env.DRY_RUN === '1';
 const ISSUE = process.env.ISSUE_NUMBER;
 const ISSUE_FIX_SNAPSHOT_FILE = process.env.ISSUE_FIX_SNAPSHOT_FILE;
+const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 const MARKER = '<!-- reconcile-bot -->';
 const OUTCOME = '<!-- FIX_OUTCOME: already-fixed -->';
 const LABEL = 'maybe-resolved';
@@ -466,6 +469,17 @@ export function handoffResolution(pr, { expectedHead = '', conflictClearedAfterO
  * on a new HEAD opens a new hand-off, so closing here loses nothing.
  */
 function closeResolvedHandoff(reason, evidenceMd) {
+  const pin = manifestPinLookup(ISSUE, REPO);
+  if (!pin.ok) {
+    console.log(`Issue #${ISSUE}: manifest dei pin illeggibile → nessuna chiusura in questo tick.`);
+    setOutput(false);
+    return;
+  }
+  if (pin.path) {
+    console.log(`Issue #${ISSUE}: manifest pin ${pin.path} → issue lasciata aperta.`);
+    setOutput(false);
+    return;
+  }
   if (!DRY_RUN) {
     const comment = `${MARKER}
 ${reason}

@@ -114,7 +114,7 @@ test('un miss con pin caricati lascia una traccia diagnostica', () => {
 test('handoff: una issue pinnata si consegna ma NON si chiude', () => {
   const body =
     'Il file da cambiare vive in valerielinc-ops/frontaliere-si-o-no: ' +
-    '`scripts/ci/check-issue-already-resolved.mjs` ha ancora la copia in shell.';
+    '`scripts/ci/alert-pat-down.mjs` ha ancora la copia in shell.';
 
   const free = handoffDecision({ verdict: 'blocked-admin-settings', body });
   assert.equal(free.handoff, true);
@@ -139,7 +139,7 @@ test('handoff: una issue pinnata si consegna ma NON si chiude', () => {
  */
 test('handoff: il pin produce un corto-circuito di parcheggio senza Claude', async () => {
   const { redeliveryDecision } = await import('../../scripts/ci/handoff-to-site.mjs');
-  const body = 'valerielinc-ops/frontaliere-si-o-no: `scripts/ci/check-issue-already-resolved.mjs`';
+  const body = 'valerielinc-ops/frontaliere-si-o-no: `scripts/ci/alert-pat-down.mjs`';
   const held = handoffDecision({ verdict: 'blocked-admin-settings', body, pinnedEntry: 'scripts/ci/detect-aggregate.mjs' });
   const r = redeliveryDecision({ decision: held, deliveredUrl: 'https://github.com/x/y/issues/1' });
   assert.equal(held.pinned, true);
@@ -240,10 +240,8 @@ test('ogni closer corpus-owned consulta la sorgente dei pin', () => {
  */
 test('i closer mirror-locked sono dichiarati, non dimenticati', () => {
   const EXPECTED_MIRROR_LOCKED = [
-    // Chiudono SOLO gli hand-off di conflitto («Conflitto con main…: riapplicare
-    // la PR #N su main», titolo esatto di pr-autorebase), mai un trackingIssue:
-    // valerielinc-ops/frontaliere-si-o-no#10714.
-    'scripts/ci/check-issue-already-resolved.mjs',
+    // Nessun closer resta `identical`: la copia che chiude gli hand-off di
+    // conflitto ora è `adapted` e consulta il manifest dei pin.
   ];
   const actual = discoverClosers().filter((c) => c.mode === 'identical').map((c) => c.rel);
   assert.deepEqual(

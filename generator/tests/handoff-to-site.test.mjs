@@ -42,7 +42,7 @@ const MIRROR_BODY = 'Root cause nota: il JSDoc bugiardo vive in `scripts/create-
   + 'del repo **`valerielinc-ops/frontaliere-si-o-no`**, non in questo repo. '
   + 'Confermato: `generator/scripts/create-article.mjs` qui è diverso.';
 
-const SINGLE_MIRROR_PATH = 'scripts/ci/check-issue-already-resolved.mjs';
+const SINGLE_MIRROR_PATH = 'scripts/ci/alert-pat-down.mjs';
 const SINGLE_MIRROR_BODY = 'Root cause nota: `' + SINGLE_MIRROR_PATH + '` è '
   + '`mode: identical` nel repo **`valerielinc-ops/frontaliere-si-o-no`**; '
   + 'scriverlo qui verrebbe sovrascritto al mirror successivo.';

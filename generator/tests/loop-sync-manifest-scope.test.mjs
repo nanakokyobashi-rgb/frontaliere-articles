@@ -234,6 +234,21 @@ test('reconcile-conflict-handoffs: il coupling adattato non rientra nel trasport
   assert.match(entry.reason, /isolat/i);
 });
 
+test('check-issue-already-resolved: il coupling adattato non rientra nel trasporto isolato (#3731)', () => {
+  const entry = byPath.get('scripts/ci/check-issue-already-resolved.mjs');
+  const dependency = byPath.get('scripts/ci/followup-resolution-match.mjs');
+  assert.ok(entry, 'check-issue-already-resolved.mjs deve restare censito');
+  assert.ok(dependency, 'followup-resolution-match.mjs deve restare censito');
+  assert.equal(entry.mode, 'adapted');
+  assert.equal(
+    entry.adaptationIssue,
+    'https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3731',
+  );
+  assert.equal(dependency.mode, 'adapted');
+  assert.match(entry.reason, /followup-resolution-match/);
+  assert.match(entry.reason, /isolat/i);
+});
+
 test('topic sources: i gemelli che importano gscOrphans non rientrano nel trasporto isolato (#3504)', () => {
   for (const rel of [
     'generator/scripts/lib/topic-sources/googleSuggest.mjs',
