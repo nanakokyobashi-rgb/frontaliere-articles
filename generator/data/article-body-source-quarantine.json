@@ -2,6 +2,26 @@
   "schemaVersion": 1,
   "records": [
     {
+      "section": "canton-sg",
+      "locale": "fr",
+      "id": "kolumbanstrasse-nuova-velostrasse",
+      "source": "content/blog-body-canton-sg/fr/kolumbanstrasse-nuova-velostrasse.ts",
+      "sha256": "f38bcfa62c6cdeb190fe693b8c591e980949faa8c317e5cddc14be02b915ea8f",
+      "rawC0Count": 0,
+      "decodedC0Count": 8,
+      "reason": "Body escluso dall'API: 8 control C0 decodificati nel FAQ Kolumbanstrasse; la cronologia Git disponibile parte dal testo corrotto e non conserva una versione integra, quindi il marker non e' ricostruibile con certezza. Rigenerare solo da una fonte pulita verificabile."
+    },
+    {
+      "section": "canton-sh",
+      "locale": "fr",
+      "id": "sciaffusa-formazione-farmacie",
+      "source": "content/blog-body-canton-sh/fr/sciaffusa-formazione-farmacie.ts",
+      "sha256": "ef05d1c5fa93f670cc79dbaa995af5c73d22a79a48ba1066cef5570022354534",
+      "rawC0Count": 0,
+      "decodedC0Count": 3,
+      "reason": "Body escluso dall'API: 3 control C0 decodificati nel FAQ Sciaffusa; la cronologia Git disponibile parte dal testo corrotto e non conserva una versione integra, quindi il marker non e' ricostruibile con certezza. Rigenerare solo da una fonte pulita verificabile."
+    },
+    {
       "section": "svizzera",
       "locale": "de",
       "id": "credito-imposta-frontalieri-2026",

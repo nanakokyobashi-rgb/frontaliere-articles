@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "07cd8cc1a59c813e685def6744be0129e2a4f5bd8dd51e6c888de0bde9e83334",
+  "updatedAt": "2026-11-09T01:55:21.693Z",
+  "contentHash": "df95fa3e0c4792aeb680853120e348b543750e94822e207f52898ff1d7c18079",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Servizio comunicazione e media polizia cantonale di Soletta",
+          "url": "/articoli-soletta/polizia-cantonale-comunicazione-media/",
+          "excerpt": "Il servizio opera 365 giorni all'anno, gestisce X, Facebook e Instagram e vieta i droni entro 300 m da un evento.",
+          "date": "2026-11-09T01:46:37.001Z"
+        },
+        {
           "title": "Consiglio di Soletta respinge mandato sulla trasparenza delle campagne",
           "url": "/articoli-soletta/consiglio-soletta-rifiuta-trasparenza/",
           "excerpt": "Il Consiglio cantonale di Soletta ha respinto mercoledì l'elaborazione di una legge sulla trasparenza dei finanziatori delle campagne con 63 voti contrari e 31 favorevoli.",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/solothurn-riduzione-premi-2027/",
           "excerpt": "Nel 2027 a Soletta sono previsti circa CHF 221 milioni.",
           "date": "2026-11-03T11:10:06.361Z"
-        },
-        {
-          "title": "Canton Soletta: aumento salariale dell'1% dal 2027",
-          "url": "/articoli-soletta/aumento-salari-soletta-2027/",
-          "excerpt": "Dal 2027 il personale statale, i docenti e i dipendenti della Solothurner Spitäler AG riceveranno un adeguamento salariale dell'1,0%.",
-          "date": "2026-11-03T09:00:18.121Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Communications and Media Service of the Solothurn Cantonal Police",
+          "url": "/en/solothurn-articles/cantonal-police-communication-media/",
+          "excerpt": "The service operates 365 days a year, manages X, Facebook and Instagram, and prohibits drones within 300 m of an event.",
+          "date": "2026-11-09T01:46:37.001Z"
+        },
+        {
           "title": "Solothurn Council rejects mandate on campaign transparency",
           "url": "/en/solothurn-articles/solothurn-council-rejects-transparency/",
           "excerpt": "The Cantonal Council of Solothurn rejected on Wednesday the drafting of a law on transparency regarding campaign funders, with 63 votes against and 31 in favor.",
@@ -193,12 +199,6 @@
           "url": "/en/solothurn-articles/solothurn-premium-reduction-2027/",
           "excerpt": "In 2027, around CHF 221 million are planned for Solothurn.",
           "date": "2026-11-03T11:10:06.361Z"
-        },
-        {
-          "title": "Canton Solothurn: 1% salary increase from 2027",
-          "url": "/en/solothurn-articles/salary-increase-solothurn-2027/",
-          "excerpt": "From 2027, state employees, teachers and employees of Solothurner Spitäler AG will receive a 1.0% salary adjustment.",
-          "date": "2026-11-03T09:00:18.121Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Kommunikations- und Mediendienst der Kantonspolizei Solothurn",
+          "url": "/de/solothurn-artikel/polizei-kantonal-kommunikation-media/",
+          "excerpt": "Der Dienst ist 365 Tage im Jahr tätig, betreut X, Facebook und Instagram und verbietet Drohnen im Umkreis von 300 m um eine Veranstaltung.",
+          "date": "2026-11-09T01:46:37.001Z"
+        },
+        {
           "title": "Solothurner Rat lehnt Auftrag zur Transparenz bei Kampagnen ab",
           "url": "/de/solothurn-artikel/kantonsrat-solothurn-lehnt-transparenz/",
           "excerpt": "Der Solothurner Kantonsrat hat am Mittwoch die Ausarbeitung eines Gesetzes über die Transparenz der Kampagnenfinanzierer mit 63 Gegenstimmen und 31 Ja-Stimmen abgelehnt.",
@@ -292,12 +298,6 @@
           "url": "/de/solothurn-artikel/solothurn-pramienreduktion-2027/",
           "excerpt": "2027 sind in Solothurn rund CHF 221 Millionen vorgesehen.",
           "date": "2026-11-03T11:10:06.361Z"
-        },
-        {
-          "title": "Kanton Solothurn: Lohnerhöhung von 1% ab 2027",
-          "url": "/de/solothurn-artikel/lohnerhoehung-solothurn-2027/",
-          "excerpt": "Ab 2027 erhalten das Staatspersonal, die Lehrpersonen und die Angestellten der Solothurner Spitäler AG eine Lohnanpassung von 1,0%.",
-          "date": "2026-11-03T09:00:18.121Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Service communication et médias de la police cantonale de Soleure",
+          "url": "/fr/articles-soleure/police-cantonale-communication-media/",
+          "excerpt": "Le service fonctionne 365 jours par an, gère X, Facebook et Instagram et interdit les drones dans un rayon de 300 m autour d’un événement.",
+          "date": "2026-11-09T01:46:37.001Z"
+        },
+        {
           "title": "Le Conseil de Soleure rejette le mandat sur la transparence des campagnes",
           "url": "/fr/articles-soleure/conseil-soleure-rejette-transparence/",
           "excerpt": "Selon le compte rendu publié par Nau.ch, le Conseil cantonal de Soleure a rejeté mercredi l'élaboration d'une loi visant à accroître la transparence des campagnes de votation.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-soleure/soleure-reduction-primes-2027/",
           "excerpt": "En 2027, à Soleure, environ CHF 221 millions sont prévus.",
           "date": "2026-11-03T11:10:06.361Z"
-        },
-        {
-          "title": "Canton de Soleure : augmentation salariale de 1 % à partir de 2027",
-          "url": "/fr/articles-soleure/augmentation-salaire-soleure-2027/",
-          "excerpt": "À partir de 2027, le personnel de l'État, les enseignants et les employés de la Solothurner Spitäler AG bénéficieront d'une adaptation salariale de 1,0 %.",
-          "date": "2026-11-03T09:00:18.121Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     }
   }
 }

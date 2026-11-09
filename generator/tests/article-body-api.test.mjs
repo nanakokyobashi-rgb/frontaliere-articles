@@ -895,20 +895,20 @@ test('un errore interno di sanitizzazione non viene convertito in quarantena', (
 
 test('la soglia di quarantena e esplicita e fail-closed', () => {
   assert.equal(MAX_ARTICLE_BODY_QUARANTINES, 3);
-  assert.equal(MAX_REGISTERED_C0_SOURCE_QUARANTINES, 44);
+  assert.equal(MAX_REGISTERED_C0_SOURCE_QUARANTINES, 46);
   assert.doesNotThrow(() => assertArticleBodyQuarantineBudget({ quarantined: 3 }));
-  assert.doesNotThrow(() => assertArticleBodyQuarantineBudget({ quarantined: 47 }, 3, 44));
+  assert.doesNotThrow(() => assertArticleBodyQuarantineBudget({ quarantined: 49 }, 3, 46));
   assert.throws(
     () => assertArticleBodyQuarantineBudget({ quarantined: 4 }),
     /soglia quarantena superata \(4 > 3\)/u,
   );
   assert.throws(
-    () => assertArticleBodyQuarantineBudget({ quarantined: 48 }, 3, 44),
+    () => assertArticleBodyQuarantineBudget({ quarantined: 50 }, 3, 46),
     /soglia quarantena superata \(4 > 3\)/u,
   );
   assert.throws(
-    () => assertArticleBodyQuarantineBudget({ quarantined: 45 }, 3, 45),
-    /hash-pinned oltre il limite esplicito \(45 > 44\)/u,
+    () => assertArticleBodyQuarantineBudget({ quarantined: 47 }, 3, 47),
+    /hash-pinned oltre il limite esplicito \(47 > 46\)/u,
   );
 });
 

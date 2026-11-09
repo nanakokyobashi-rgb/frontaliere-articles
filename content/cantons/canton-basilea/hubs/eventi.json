@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T01:29:55.978Z",
-  "contentHash": "1a441671e2dfd3af80f773b2da0e23ccd72a164d251c6ce70a15aded76753764",
+  "updatedAt": "2026-11-09T01:55:21.693Z",
+  "contentHash": "1ee8347d0a9a997dbd84d9eae8ecc2c16f92126e9703a977031310fb49b5641e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T01:21:56.611Z",
+      "updatedAt": "2026-11-07T12:39:52.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "74",
+          "value": "71",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Benefizkonzert zugunsten von Mädchen und Frauen im Tschad",
-              "detail": "Museum Kleines Klingental",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/benefizkonzert-zugunsten-von-maedchen-und-frauen-im-tschad_AxFLenJ"
-            },
-            {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Stadtcasino Basel, Basel",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/vivaldi-die-vier-jahreszeiten_APxKkcv"
-            },
-            {
-              "label": "Pinocchio - The Dance Show",
-              "detail": "Musical Theater Basel, Basel",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pinocchio-the-dance-show/"
-            },
-            {
-              "label": "ABGESAGT: Hardline",
-              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/hardline_AyHqt1F"
-            },
-            {
-              "label": "«Aline» C. F. Ramuz",
-              "detail": "Sissach — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aline-c-f-ramuz/"
-            },
-            {
-              "label": "Michael von der Heide - Von der Heide singt Knef",
-              "detail": "Theater Fauteuil - Tabourettli — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/michael-von-der-heide-von-der-heide-singt-knef_AUggHgR"
-            },
-            {
-              "label": "Playin‘ Tachles",
-              "detail": "Kulturscheune, Liestal — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/playin-tachles_ABBvwXu"
+              "label": "Bettina Dieterle: «The Rebellas – Best of Protest»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bettina-dieterle-the-rebellas-best-of-protest/"
             },
             {
               "label": "Endstation",
               "detail": "Basel — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
             },
             {
               "label": "Aroma-Massage",
               "detail": "Bio-Medica Fachschule, Basel — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
             },
             {
               "label": "Öffentliche Führungen im Hanro-Depot",
               "detail": "Liestal — in corso, ultimo giorno: 2 dicembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
+              "detail": "Basilea, Basel — in corso, ultimo giorno: 25 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Reeto von Gunten - 2052 - weiter vorgesorgt",
+              "detail": "Basel",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reeto-von-gunten-2052-weiter-vorgesorgt-2/"
+            },
+            {
+              "label": "Kreatives Töpfern für Kinder",
+              "detail": "Riehen",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kreatives-toepfern-fuer-kinder-2/"
+            },
+            {
+              "label": "Layāli und Amanés - Basel",
+              "detail": "Pauluskirche, Basel",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/layali-und-amanes-basel/"
+            },
+            {
+              "label": "Andrea Saemann",
+              "detail": "Kaserne Basel, Basel",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/basel/andrea-saemann_Aa6drch"
+            },
+            {
+              "label": "Felix Lobrecht - SELL OUT",
+              "detail": "Basel",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/felix-lobrecht-sell-out-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "74",
+          "value": "71",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Benefizkonzert zugunsten von Mädchen und Frauen im Tschad",
-              "detail": "Museum Kleines Klingental",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/benefizkonzert-zugunsten-von-maedchen-und-frauen-im-tschad_AxFLenJ"
-            },
-            {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Stadtcasino Basel, Basel",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/vivaldi-die-vier-jahreszeiten_APxKkcv"
-            },
-            {
-              "label": "Pinocchio - The Dance Show",
-              "detail": "Musical Theater Basel, Basel",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pinocchio-the-dance-show/"
-            },
-            {
-              "label": "ABGESAGT: Hardline",
-              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/hardline_AyHqt1F"
-            },
-            {
-              "label": "«Aline» C. F. Ramuz",
-              "detail": "Sissach — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aline-c-f-ramuz/"
-            },
-            {
-              "label": "Michael von der Heide - Von der Heide singt Knef",
-              "detail": "Theater Fauteuil - Tabourettli — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/michael-von-der-heide-von-der-heide-singt-knef_AUggHgR"
-            },
-            {
-              "label": "Playin‘ Tachles",
-              "detail": "Kulturscheune, Liestal — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/playin-tachles_ABBvwXu"
+              "label": "Bettina Dieterle: «The Rebellas – Best of Protest»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bettina-dieterle-the-rebellas-best-of-protest/"
             },
             {
               "label": "Endstation",
               "detail": "Basel — ongoing, last day: 15 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
             },
             {
               "label": "Aroma-Massage",
               "detail": "Bio-Medica Fachschule, Basel — ongoing, last day: 18 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
             },
             {
               "label": "Öffentliche Führungen im Hanro-Depot",
               "detail": "Liestal — ongoing, last day: 2 December 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — ongoing, last day: 25 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Reeto von Gunten - 2052 - weiter vorgesorgt",
+              "detail": "Basel",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reeto-von-gunten-2052-weiter-vorgesorgt-2/"
+            },
+            {
+              "label": "Kreatives Töpfern für Kinder",
+              "detail": "Riehen",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kreatives-toepfern-fuer-kinder-2/"
+            },
+            {
+              "label": "Layāli und Amanés - Basel",
+              "detail": "Pauluskirche, Basel",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/layali-und-amanes-basel/"
+            },
+            {
+              "label": "Andrea Saemann",
+              "detail": "Kaserne Basel, Basel",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/basel/andrea-saemann_Aa6drch"
+            },
+            {
+              "label": "Felix Lobrecht - SELL OUT",
+              "detail": "Basel",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/felix-lobrecht-sell-out-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "74",
+          "value": "71",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Benefizkonzert zugunsten von Mädchen und Frauen im Tschad",
-              "detail": "Museum Kleines Klingental",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/benefizkonzert-zugunsten-von-maedchen-und-frauen-im-tschad_AxFLenJ"
-            },
-            {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Stadtcasino Basel, Basel",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/vivaldi-die-vier-jahreszeiten_APxKkcv"
-            },
-            {
-              "label": "Pinocchio - The Dance Show",
-              "detail": "Musical Theater Basel, Basel",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pinocchio-the-dance-show/"
-            },
-            {
-              "label": "ABGESAGT: Hardline",
-              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/hardline_AyHqt1F"
-            },
-            {
-              "label": "«Aline» C. F. Ramuz",
-              "detail": "Sissach — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aline-c-f-ramuz/"
-            },
-            {
-              "label": "Michael von der Heide - Von der Heide singt Knef",
-              "detail": "Theater Fauteuil - Tabourettli — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/michael-von-der-heide-von-der-heide-singt-knef_AUggHgR"
-            },
-            {
-              "label": "Playin‘ Tachles",
-              "detail": "Kulturscheune, Liestal — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/playin-tachles_ABBvwXu"
+              "label": "Bettina Dieterle: «The Rebellas – Best of Protest»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bettina-dieterle-the-rebellas-best-of-protest/"
             },
             {
               "label": "Endstation",
               "detail": "Basel — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
             },
             {
               "label": "Aroma-Massage",
               "detail": "Bio-Medica Fachschule, Basel — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
             },
             {
               "label": "Öffentliche Führungen im Hanro-Depot",
               "detail": "Liestal — läuft, letzter Tag: 2. Dezember 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — läuft, letzter Tag: 25. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Reeto von Gunten - 2052 - weiter vorgesorgt",
+              "detail": "Basel",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reeto-von-gunten-2052-weiter-vorgesorgt-2/"
+            },
+            {
+              "label": "Kreatives Töpfern für Kinder",
+              "detail": "Riehen",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kreatives-toepfern-fuer-kinder-2/"
+            },
+            {
+              "label": "Layāli und Amanés - Basel",
+              "detail": "Pauluskirche, Basel",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/layali-und-amanes-basel/"
+            },
+            {
+              "label": "Andrea Saemann",
+              "detail": "Kaserne Basel, Basel",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/basel/andrea-saemann_Aa6drch"
+            },
+            {
+              "label": "Felix Lobrecht - SELL OUT",
+              "detail": "Basel",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/felix-lobrecht-sell-out-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "74",
+          "value": "71",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Benefizkonzert zugunsten von Mädchen und Frauen im Tschad",
-              "detail": "Museum Kleines Klingental",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/benefizkonzert-zugunsten-von-maedchen-und-frauen-im-tschad_AxFLenJ"
-            },
-            {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Stadtcasino Basel, Basel",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/vivaldi-die-vier-jahreszeiten_APxKkcv"
-            },
-            {
-              "label": "Pinocchio - The Dance Show",
-              "detail": "Musical Theater Basel, Basel",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pinocchio-the-dance-show/"
-            },
-            {
-              "label": "ABGESAGT: Hardline",
-              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/hardline_AyHqt1F"
-            },
-            {
-              "label": "«Aline» C. F. Ramuz",
-              "detail": "Sissach — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aline-c-f-ramuz/"
-            },
-            {
-              "label": "Michael von der Heide - Von der Heide singt Knef",
-              "detail": "Theater Fauteuil - Tabourettli — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/michael-von-der-heide-von-der-heide-singt-knef_AUggHgR"
-            },
-            {
-              "label": "Playin‘ Tachles",
-              "detail": "Kulturscheune, Liestal — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/playin-tachles_ABBvwXu"
+              "label": "Bettina Dieterle: «The Rebellas – Best of Protest»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bettina-dieterle-the-rebellas-best-of-protest/"
             },
             {
               "label": "Endstation",
               "detail": "Basel — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
             },
             {
               "label": "Aroma-Massage",
               "detail": "Bio-Medica Fachschule, Basel — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
             },
             {
               "label": "Öffentliche Führungen im Hanro-Depot",
               "detail": "Liestal — en cours, dernier jour : 2 décembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — en cours, dernier jour : 25 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Reeto von Gunten - 2052 - weiter vorgesorgt",
+              "detail": "Basel",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reeto-von-gunten-2052-weiter-vorgesorgt-2/"
+            },
+            {
+              "label": "Kreatives Töpfern für Kinder",
+              "detail": "Riehen",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kreatives-toepfern-fuer-kinder-2/"
+            },
+            {
+              "label": "Layāli und Amanés - Basel",
+              "detail": "Pauluskirche, Basel",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/layali-und-amanes-basel/"
+            },
+            {
+              "label": "Andrea Saemann",
+              "detail": "Kaserne Basel, Basel",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/basel/andrea-saemann_Aa6drch"
+            },
+            {
+              "label": "Felix Lobrecht - SELL OUT",
+              "detail": "Basel",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/felix-lobrecht-sell-out-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     }
   }
 }

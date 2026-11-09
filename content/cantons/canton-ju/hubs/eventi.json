@@ -4,12 +4,12 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T01:29:55.978Z",
-  "contentHash": "2cc014ace5e4e72cc518fc36b5dd8d9b2cdc5d69a3c22e3f646eae53dc880537",
+  "updatedAt": "2026-11-09T01:55:21.693Z",
+  "contentHash": "00591a0fa2562da644bacb6d78f4039c748ae9f1b34f817e3d0f5476a3989772",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T01:21:56.611Z",
+      "updatedAt": "2026-11-07T12:39:52.087Z",
       "keyFacts": 1
     }
   ],
@@ -35,7 +35,7 @@
             {
               "label": "Résistance artistique",
               "detail": "Delémont — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -53,7 +53,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/giura/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -81,7 +81,7 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "en": {
       "canton": "JU",
@@ -104,7 +104,7 @@
             {
               "label": "Résistance artistique",
               "detail": "Delémont — ongoing, last day: 21 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -122,7 +122,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/jura/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +150,7 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "de": {
       "canton": "JU",
@@ -173,7 +173,7 @@
             {
               "label": "Résistance artistique",
               "detail": "Delémont — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -191,7 +191,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/jura/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -219,7 +219,7 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "fr": {
       "canton": "JU",
@@ -242,7 +242,7 @@
             {
               "label": "Résistance artistique",
               "detail": "Delémont — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -260,7 +260,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/jura/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -288,7 +288,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     }
   }
 }

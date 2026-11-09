@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T01:29:55.978Z",
-  "contentHash": "57bdefad4e62afc3b0cc07f609096799f253b745c331e0c08308a4e311c0c9c9",
+  "updatedAt": "2026-11-09T01:55:21.693Z",
+  "contentHash": "05603daceaf741f48e4358c9205ff2dec14e149788f6793f96a508549d5c240c",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T01:21:56.611Z",
+      "updatedAt": "2026-11-07T12:39:52.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "60",
+          "value": "62",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,39 +33,15 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Älplerchilbi",
-              "detail": "Dorfplatz / Altes Schützenhaus, Beckenried, Beckenried",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94756"
-            },
-            {
-              "label": "Spaghetti-Sunnig - Genuss für die ganze Familie!",
-              "detail": "MZA Ennetbürgen, Ennetbürgen, Ennetbürgen",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94198"
-            },
-            {
-              "label": "Räbäliechtli-Umzug",
-              "detail": "Kirche St. Jakob, Ennetmoos, Ennetmoos",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94543"
-            },
-            {
-              "label": "Jubiläumskonzert «40 Jahre Camerata Stans»",
-              "detail": "Pfarrkirche St. Peter und Paul, Stans, Stans",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94528"
-            },
-            {
               "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
               "detail": "Kulturraum, Buochs, Buochs — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.nw.ch/anlaesseaktuelles/94222"
             },
             {
               "label": "De Otto gwünnt im Lotto",
               "detail": "Gemeindesaal Stansstad, Stansstad — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
             },
             {
@@ -91,11 +67,35 @@
               "detail": "Schulhaus Kniri, Stans, Stans",
               "date": "2026-11-10",
               "url": "https://www.nw.ch/anlaesseaktuelles/94447"
+            },
+            {
+              "label": "d'Wärchi - Offenes Atelier Mittwochnachmittag",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94351"
+            },
+            {
+              "label": "Herbstmarkt 2026",
+              "detail": "Stans",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89027"
+            },
+            {
+              "label": "Konzert & CD-Präsentation \"Müravglius\" Musik aus dem Münstertal",
+              "detail": "Kapuzinerkloster, Stans, Stans",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94936"
+            },
+            {
+              "label": "Meditation",
+              "detail": "kath. Pfarrkirche, Buochs, Buochs",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/92002"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/nidvaldo/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "en": {
       "canton": "NW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "60",
+          "value": "62",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,39 +138,15 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Älplerchilbi",
-              "detail": "Dorfplatz / Altes Schützenhaus, Beckenried, Beckenried",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94756"
-            },
-            {
-              "label": "Spaghetti-Sunnig - Genuss für die ganze Familie!",
-              "detail": "MZA Ennetbürgen, Ennetbürgen, Ennetbürgen",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94198"
-            },
-            {
-              "label": "Räbäliechtli-Umzug",
-              "detail": "Kirche St. Jakob, Ennetmoos, Ennetmoos",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94543"
-            },
-            {
-              "label": "Jubiläumskonzert «40 Jahre Camerata Stans»",
-              "detail": "Pfarrkirche St. Peter und Paul, Stans, Stans",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94528"
-            },
-            {
               "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
               "detail": "Kulturraum, Buochs, Buochs — ongoing, last day: 22 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.nw.ch/anlaesseaktuelles/94222"
             },
             {
               "label": "De Otto gwünnt im Lotto",
               "detail": "Gemeindesaal Stansstad, Stansstad — ongoing, last day: 14 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
             },
             {
@@ -196,11 +172,35 @@
               "detail": "Schulhaus Kniri, Stans, Stans",
               "date": "2026-11-10",
               "url": "https://www.nw.ch/anlaesseaktuelles/94447"
+            },
+            {
+              "label": "d'Wärchi - Offenes Atelier Mittwochnachmittag",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94351"
+            },
+            {
+              "label": "Herbstmarkt 2026",
+              "detail": "Stans",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89027"
+            },
+            {
+              "label": "Konzert & CD-Präsentation \"Müravglius\" Musik aus dem Münstertal",
+              "detail": "Kapuzinerkloster, Stans, Stans",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94936"
+            },
+            {
+              "label": "Meditation",
+              "detail": "kath. Pfarrkirche, Buochs, Buochs",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/92002"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/nidwalden/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "de": {
       "canton": "NW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "60",
+          "value": "62",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,39 +243,15 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Älplerchilbi",
-              "detail": "Dorfplatz / Altes Schützenhaus, Beckenried, Beckenried",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94756"
-            },
-            {
-              "label": "Spaghetti-Sunnig - Genuss für die ganze Familie!",
-              "detail": "MZA Ennetbürgen, Ennetbürgen, Ennetbürgen",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94198"
-            },
-            {
-              "label": "Räbäliechtli-Umzug",
-              "detail": "Kirche St. Jakob, Ennetmoos, Ennetmoos",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94543"
-            },
-            {
-              "label": "Jubiläumskonzert «40 Jahre Camerata Stans»",
-              "detail": "Pfarrkirche St. Peter und Paul, Stans, Stans",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94528"
-            },
-            {
               "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
               "detail": "Kulturraum, Buochs, Buochs — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.nw.ch/anlaesseaktuelles/94222"
             },
             {
               "label": "De Otto gwünnt im Lotto",
               "detail": "Gemeindesaal Stansstad, Stansstad — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
             },
             {
@@ -301,11 +277,35 @@
               "detail": "Schulhaus Kniri, Stans, Stans",
               "date": "2026-11-10",
               "url": "https://www.nw.ch/anlaesseaktuelles/94447"
+            },
+            {
+              "label": "d'Wärchi - Offenes Atelier Mittwochnachmittag",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94351"
+            },
+            {
+              "label": "Herbstmarkt 2026",
+              "detail": "Stans",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89027"
+            },
+            {
+              "label": "Konzert & CD-Präsentation \"Müravglius\" Musik aus dem Münstertal",
+              "detail": "Kapuzinerkloster, Stans, Stans",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94936"
+            },
+            {
+              "label": "Meditation",
+              "detail": "kath. Pfarrkirche, Buochs, Buochs",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/92002"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/nidwalden/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "fr": {
       "canton": "NW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "60",
+          "value": "62",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,39 +348,15 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Älplerchilbi",
-              "detail": "Dorfplatz / Altes Schützenhaus, Beckenried, Beckenried",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94756"
-            },
-            {
-              "label": "Spaghetti-Sunnig - Genuss für die ganze Familie!",
-              "detail": "MZA Ennetbürgen, Ennetbürgen, Ennetbürgen",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94198"
-            },
-            {
-              "label": "Räbäliechtli-Umzug",
-              "detail": "Kirche St. Jakob, Ennetmoos, Ennetmoos",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94543"
-            },
-            {
-              "label": "Jubiläumskonzert «40 Jahre Camerata Stans»",
-              "detail": "Pfarrkirche St. Peter und Paul, Stans, Stans",
-              "date": "2026-11-08",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94528"
-            },
-            {
               "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
               "detail": "Kulturraum, Buochs, Buochs — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.nw.ch/anlaesseaktuelles/94222"
             },
             {
               "label": "De Otto gwünnt im Lotto",
               "detail": "Gemeindesaal Stansstad, Stansstad — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
             },
             {
@@ -406,11 +382,35 @@
               "detail": "Schulhaus Kniri, Stans, Stans",
               "date": "2026-11-10",
               "url": "https://www.nw.ch/anlaesseaktuelles/94447"
+            },
+            {
+              "label": "d'Wärchi - Offenes Atelier Mittwochnachmittag",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94351"
+            },
+            {
+              "label": "Herbstmarkt 2026",
+              "detail": "Stans",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89027"
+            },
+            {
+              "label": "Konzert & CD-Präsentation \"Müravglius\" Musik aus dem Münstertal",
+              "detail": "Kapuzinerkloster, Stans, Stans",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94936"
+            },
+            {
+              "label": "Meditation",
+              "detail": "kath. Pfarrkirche, Buochs, Buochs",
+              "date": "2026-11-11",
+              "url": "https://www.nw.ch/anlaesseaktuelles/92002"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/nidwald/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     }
   }
 }

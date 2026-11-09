@@ -84,6 +84,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.consiglio-soletta-rifiuta-trasparenza.title': 'Consiglio di Soletta respinge mandato sulla trasparenza delle campagne',
     'blog.article.consiglio-soletta-rifiuta-trasparenza.excerpt': 'Il Consiglio cantonale di Soletta ha respinto mercoledì l\'elaborazione di una legge sulla trasparenza dei finanziatori delle campagne con 63 voti contrari e 31 favorevoli.',
     'blog.article.consiglio-soletta-rifiuta-trasparenza.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.polizia-cantonale-comunicazione-media.title': 'Servizio comunicazione e media polizia cantonale di Soletta',
+    'blog.article.polizia-cantonale-comunicazione-media.excerpt': 'Il servizio opera 365 giorni all\'anno, gestisce X, Facebook e Instagram e vieta i droni entro 300 m da un evento.',
+    'blog.article.polizia-cantonale-comunicazione-media.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;

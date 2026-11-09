@@ -1050,6 +1050,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-polizia-cantonale-comunicazione-media': {
+    title: 'Servizio comunicazione e media polizia cantonale di Soletta',
+    description: 'Il riferimento al BAZL è separato dalla regola cantonale dei 300 metri e non modifica il divieto descritto dalla polizia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, servizio, comunicazione, media, polizia',
+    ogTitle: 'Comunicazione e media Polizia Cantonale Soletta',
+    ogDescription: 'Il servizio di Comunicazione e Media della Polizia cantonale di Soletta opera 365 giorni all\'anno, gestisce X, Facebook e Instagram e applica il divieto di droni entro 300 m da eventi.',
+    canonicalPath: '/articoli-soletta/polizia-cantonale-comunicazione-media/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Servizio comunicazione e media polizia cantonale di Soletta",
+      "description": "Il riferimento al BAZL è separato dalla regola cantonale dei 300 metri e non modifica il divieto descritto dalla polizia.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-polizia-cantonale-comunicazione-media.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-09T01:46:37+00:00",
+      "dateModified": "2026-11-09T01:46:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/polizia-cantonale-comunicazione-media/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

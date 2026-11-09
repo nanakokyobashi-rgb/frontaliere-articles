@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T01:29:55.978Z",
-  "contentHash": "af5469cd10cfc257d3c0026766ccb699325b7fd41aa3aa5d343f80f9af324c5b",
+  "updatedAt": "2026-11-09T01:55:21.693Z",
+  "contentHash": "e85f307a7b1531a103052a1f51c31a9de7effc0766518433b7cf503d124dfbbe",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T01:21:56.611Z",
+      "updatedAt": "2026-11-07T12:39:52.087Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-06T22:26:45.566Z",
+      "updatedAt": "2026-11-07T21:07:56.550Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "38",
+          "value": "33",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,48 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Menu del Kilbi alla locanda di campagna Garmiswil a Düdingen",
-              "detail": "Landgasthof Garmiswil, Düdingen",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kilbi-menu-im-landgasthof-garmiswil-in-duedingen/"
-            },
-            {
-              "label": "le Vide-Dressing des Tilleuls",
-              "detail": "Case postale, Châtel-Saint-Denis",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-vide-dressing-des-tilleuls/"
-            },
-            {
-              "label": "Orlando Ensemble « Italian Music »",
-              "detail": "Fribourg",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orlando-ensemble-italian-music/"
-            },
-            {
-              "label": "Winds and Voices – Wenn Orchesterklang auf Gospelgroove trifft!",
-              "detail": "Deutsche Kirche",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/murten/winds-and-voices-when-orchestral-sound-meets-gospel-groove_AJJfkH8"
-            },
-            {
-              "label": "Journées des artisans",
-              "detail": "Estavayer-le-Lac, Estavayer — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/journees-des-artisans/"
-            },
-            {
-              "label": "Artisans Days",
-              "detail": "Estavayer-le-Lac, Estavayer — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/artisans-days/"
-            },
-            {
-              "label": "BDmania",
-              "detail": "Belfaux — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
-            },
             {
               "label": "L'année du livre suisse : Thierry Raboud",
               "detail": "Fribourg",
@@ -96,11 +54,53 @@
               "detail": "Fribourg",
               "date": "2026-11-10",
               "url": "https://www.fr.ch/mhnf/evenements/complet-cafe-visite-fascinants-chiropteres"
+            },
+            {
+              "label": "Découverte du mardi: Vierge à l'enfant en gloire, 1470",
+              "detail": "Fribourg",
+              "date": "2026-11-10",
+              "url": "https://www.fr.ch/mahf/evenements/decouverte-du-mardi-vierge-a-lenfant-en-gloire-1470-0"
+            },
+            {
+              "label": "Balkan Spirits",
+              "detail": "Podium Düdingen, Düdingen",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/balkan-spirits_ALGK4L5"
+            },
+            {
+              "label": "ONE OWL SOUL & LUCIEN MULLENER | SOUND BATH",
+              "detail": "MIAM",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/one-owl-soul-und-lucien-mullener-sound-bath_AtH4VY2"
+            },
+            {
+              "label": "Marine Leonardi – Mauvaise graine",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/marine-leonardi-mauvaise-graine/"
+            },
+            {
+              "label": "Kiwi Club – Apprentis taxidermistes",
+              "detail": "Fribourg",
+              "date": "2026-11-11",
+              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes-0"
+            },
+            {
+              "label": "Les voix d’Armand Niquille",
+              "detail": "Fribourg",
+              "date": "2026-11-12",
+              "url": "https://www.fr.ch/bcu/evenements/les-voix-darmand-niquille"
+            },
+            {
+              "label": "3ème concert à l’abonnement : Danish String Quartet",
+              "detail": "Fribourg",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "en": {
       "canton": "FR",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "38",
+          "value": "33",
           "note": "from the site’s events calendar"
         }
       ],
@@ -175,48 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Kilbi Menu at the Landgasthof Garmiswil in Düdingen",
-              "detail": "Landgasthof Garmiswil, Düdingen",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kilbi-menu-im-landgasthof-garmiswil-in-duedingen/"
-            },
-            {
-              "label": "le Vide-Dressing des Tilleuls",
-              "detail": "Case postale, Châtel-Saint-Denis",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-vide-dressing-des-tilleuls/"
-            },
-            {
-              "label": "Orlando Ensemble « Italian Music »",
-              "detail": "Fribourg",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orlando-ensemble-italian-music/"
-            },
-            {
-              "label": "Winds and Voices – When orchestral sound meets gospel groove!",
-              "detail": "Deutsche Kirche",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/murten/winds-and-voices-when-orchestral-sound-meets-gospel-groove_AJJfkH8"
-            },
-            {
-              "label": "Journées des artisans",
-              "detail": "Estavayer-le-Lac, Estavayer — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/journees-des-artisans/"
-            },
-            {
-              "label": "Artisans Days",
-              "detail": "Estavayer-le-Lac, Estavayer — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/artisans-days/"
-            },
-            {
-              "label": "BDmania",
-              "detail": "Belfaux — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
-            },
             {
               "label": "L'année du livre suisse : Thierry Raboud",
               "detail": "Fribourg",
@@ -234,11 +192,53 @@
               "detail": "Fribourg",
               "date": "2026-11-10",
               "url": "https://www.fr.ch/mhnf/evenements/complet-cafe-visite-fascinants-chiropteres"
+            },
+            {
+              "label": "Découverte du mardi: Vierge à l'enfant en gloire, 1470",
+              "detail": "Fribourg",
+              "date": "2026-11-10",
+              "url": "https://www.fr.ch/mahf/evenements/decouverte-du-mardi-vierge-a-lenfant-en-gloire-1470-0"
+            },
+            {
+              "label": "Balkan Spirits",
+              "detail": "Podium Düdingen, Düdingen",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/balkan-spirits_ALGK4L5"
+            },
+            {
+              "label": "ONE OWL SOUL & LUCIEN MULLENER | SOUND BATH",
+              "detail": "MIAM",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/one-owl-soul-und-lucien-mullener-sound-bath_AtH4VY2"
+            },
+            {
+              "label": "Marine Leonardi – Mauvaise graine",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/marine-leonardi-mauvaise-graine/"
+            },
+            {
+              "label": "Kiwi Club – Apprentis taxidermistes",
+              "detail": "Fribourg",
+              "date": "2026-11-11",
+              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes-0"
+            },
+            {
+              "label": "Les voix d’Armand Niquille",
+              "detail": "Fribourg",
+              "date": "2026-11-12",
+              "url": "https://www.fr.ch/bcu/evenements/les-voix-darmand-niquille"
+            },
+            {
+              "label": "3ème concert à l’abonnement : Danish String Quartet",
+              "detail": "Fribourg",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "de": {
       "canton": "FR",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "38",
+          "value": "33",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -313,48 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Kilbi-Menu im Landgasthof Garmiswil in Düdingen",
-              "detail": "Landgasthof Garmiswil, Düdingen",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kilbi-menu-im-landgasthof-garmiswil-in-duedingen/"
-            },
-            {
-              "label": "le Vide-Dressing des Tilleuls",
-              "detail": "Case postale, Châtel-Saint-Denis",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-vide-dressing-des-tilleuls/"
-            },
-            {
-              "label": "Ensemble Orlando „Italienische Musik“",
-              "detail": "Fribourg",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orlando-ensemble-italian-music/"
-            },
-            {
-              "label": "Winds and Voices – Wenn Orchesterklang auf Gospelgroove trifft!",
-              "detail": "Deutsche Kirche",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/murten/winds-and-voices-when-orchestral-sound-meets-gospel-groove_AJJfkH8"
-            },
-            {
-              "label": "Journées des artisans",
-              "detail": "Estavayer-le-Lac, Estavayer — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/journees-des-artisans/"
-            },
-            {
-              "label": "Tags des Kunsthandwerks",
-              "detail": "Estavayer-le-Lac, Estavayer — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/artisans-days/"
-            },
-            {
-              "label": "BDmania",
-              "detail": "Belfaux — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
-            },
             {
               "label": "L'année du livre suisse : Thierry Raboud",
               "detail": "Fribourg",
@@ -372,11 +330,53 @@
               "detail": "Fribourg",
               "date": "2026-11-10",
               "url": "https://www.fr.ch/mhnf/evenements/complet-cafe-visite-fascinants-chiropteres"
+            },
+            {
+              "label": "Découverte du mardi: Vierge à l'enfant en gloire, 1470",
+              "detail": "Fribourg",
+              "date": "2026-11-10",
+              "url": "https://www.fr.ch/mahf/evenements/decouverte-du-mardi-vierge-a-lenfant-en-gloire-1470-0"
+            },
+            {
+              "label": "Balkan Spirits",
+              "detail": "Podium Düdingen, Düdingen",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/balkan-spirits_ALGK4L5"
+            },
+            {
+              "label": "ONE OWL SOUL & LUCIEN MULLENER | SOUND BATH",
+              "detail": "MIAM",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/one-owl-soul-und-lucien-mullener-sound-bath_AtH4VY2"
+            },
+            {
+              "label": "Marine Leonardi – Mauvaise graine",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/marine-leonardi-mauvaise-graine/"
+            },
+            {
+              "label": "Kiwi Club – Apprentis taxidermistes",
+              "detail": "Fribourg",
+              "date": "2026-11-11",
+              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes-0"
+            },
+            {
+              "label": "Les voix d’Armand Niquille",
+              "detail": "Fribourg",
+              "date": "2026-11-12",
+              "url": "https://www.fr.ch/bcu/evenements/les-voix-darmand-niquille"
+            },
+            {
+              "label": "3ème concert à l’abonnement : Danish String Quartet",
+              "detail": "Fribourg",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +409,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "fr": {
       "canton": "FR",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "38",
+          "value": "33",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -451,48 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Menu de Bénichon au Landgasthof Garmiswil à Guin",
-              "detail": "Landgasthof Garmiswil, Düdingen",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kilbi-menu-im-landgasthof-garmiswil-in-duedingen/"
-            },
-            {
-              "label": "le Vide-Dressing des Tilleuls",
-              "detail": "Case postale, Châtel-Saint-Denis",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-vide-dressing-des-tilleuls/"
-            },
-            {
-              "label": "Ensemble Orlando « Musique italienne »",
-              "detail": "Fribourg",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orlando-ensemble-italian-music/"
-            },
-            {
-              "label": "Winds and Voices – Quand la sonorité d'un orchestre rencontre le groove du gospel !",
-              "detail": "Deutsche Kirche",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/murten/winds-and-voices-when-orchestral-sound-meets-gospel-groove_AJJfkH8"
-            },
-            {
-              "label": "Journées des artisans",
-              "detail": "Estavayer-le-Lac, Estavayer — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/journees-des-artisans/"
-            },
-            {
-              "label": "Journées des Artisans",
-              "detail": "Estavayer-le-Lac, Estavayer — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/artisans-days/"
-            },
-            {
-              "label": "BDmania",
-              "detail": "Belfaux — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
-            },
             {
               "label": "L'année du livre suisse : Thierry Raboud",
               "detail": "Fribourg",
@@ -510,11 +468,53 @@
               "detail": "Fribourg",
               "date": "2026-11-10",
               "url": "https://www.fr.ch/mhnf/evenements/complet-cafe-visite-fascinants-chiropteres"
+            },
+            {
+              "label": "Découverte du mardi: Vierge à l'enfant en gloire, 1470",
+              "detail": "Fribourg",
+              "date": "2026-11-10",
+              "url": "https://www.fr.ch/mahf/evenements/decouverte-du-mardi-vierge-a-lenfant-en-gloire-1470-0"
+            },
+            {
+              "label": "Balkan Spirits",
+              "detail": "Podium Düdingen, Düdingen",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/balkan-spirits_ALGK4L5"
+            },
+            {
+              "label": "ONE OWL SOUL & LUCIEN MULLENER | SOUND BATH",
+              "detail": "MIAM",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/one-owl-soul-und-lucien-mullener-sound-bath_AtH4VY2"
+            },
+            {
+              "label": "Marine Leonardi – Mauvaise graine",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/marine-leonardi-mauvaise-graine/"
+            },
+            {
+              "label": "Kiwi Club – Apprentis taxidermistes",
+              "detail": "Fribourg",
+              "date": "2026-11-11",
+              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes-0"
+            },
+            {
+              "label": "Les voix d’Armand Niquille",
+              "detail": "Fribourg",
+              "date": "2026-11-12",
+              "url": "https://www.fr.ch/bcu/evenements/les-voix-darmand-niquille"
+            },
+            {
+              "label": "3ème concert à l’abonnement : Danish String Quartet",
+              "detail": "Fribourg",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +547,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T01:29:55.978Z",
-  "contentHash": "cb5ccb2f7cbcb0b422de90ae3b1eafc2a54f862388f4105edbab6495a84dbab1",
+  "updatedAt": "2026-11-09T01:55:21.693Z",
+  "contentHash": "0b04f38c74a69a6675c593a0bc9c49728f234f8968e16e60109f97a47ec8ff71",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T01:21:56.611Z",
+      "updatedAt": "2026-11-07T12:39:52.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "68",
+          "value": "61",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Konzert in der Kirche Sent | The Lutz Brothers in Concert – Carte Blanche",
-              "detail": "Sent",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-in-der-kirche-sent-the-lutz-brothers-in-concert-carte-blanche/"
+              "label": "ZUOZ GLOBE PLAYS- IMMERSIVE THEATER",
+              "detail": "Lyceum Alpinum Zuoz, Zuoz",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zuoz-globe-plays-immersive-theater/"
             },
             {
-              "label": "konzert studio chur: Duo Lavarini-Bläsi",
-              "detail": "Chur",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzert-studio-chur-duo-lavarini-blaesi/"
+              "label": "Woche der Religionen - Lunch&Learn",
+              "detail": "KulturPunkt, Chur",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/woche-der-religionen-lunchlearn/"
             },
             {
-              "label": "Helvetiarockt – Local Gig Grischa",
-              "detail": "Chur",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helvetiarockt-local-gig-grischa/"
-            },
-            {
-              "label": "pressure",
-              "detail": "Kulturplatz Davos, Davos",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pressure-1/"
+              "label": "Eishockey-Schnuppertag für Kinder",
+              "detail": "Sportarena La Nars, Surses",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/eishockey-schnuppertag-fuer-kinder/"
             },
             {
               "label": "Peduzzis traditionelle Huus-Metzgete 2026",
               "detail": "Val Surses: Savognin, Surses — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
-            },
-            {
-              "label": "Cose mai accadute - omaggio a J.L. Borges",
-              "detail": "Museo Casa Besta, Brusio — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/brusio/cose-mai-accadute-omaggio-a-jl-borges_ApyJLkQ"
-            },
-            {
-              "label": "Konzerte des Bündner Singkreis mit der Kammerphilharmonie Graubünden",
-              "detail": "Coira, Chur — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzerte-des-buendner-singkreis-mit-der-kammerphilharmonie-graubuenden/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella, Vaz/Obervaz — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schwiizergoofe-weekend/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella Resort — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/valbella/schwiizergoofe-weekend_AJPxTY3"
             },
             {
               "label": "Cinema Staziun Lavin - LE CITTA DI PIANURA",
               "detail": "Cinema Staziun, Zernez — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
+            },
+            {
+              "label": "Tematizzare la Valle Riflessioni sulle forme di vita in Valposchiavo",
+              "detail": "Casa Torre, Poschiavo — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Caffè Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — in corso, ultimo giorno: 11 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Begegnungscafé",
+              "detail": "Chur",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/begegnungscafe-9/"
+            },
+            {
+              "label": "Kids-Treff: Gemeinsam Kochen und Essen",
+              "detail": "Arosa",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kids-treff-gemeinsam-kochen-und-essen/"
+            },
+            {
+              "label": "EHC Arosa vs. EHC Visp",
+              "detail": "EHC Arosa, Arosa",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ehc-arosa-vs-ehc-visp/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -153,7 +153,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "en": {
       "canton": "GR",
@@ -163,7 +163,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "68",
+          "value": "61",
           "note": "from the site’s events calendar"
         }
       ],
@@ -174,69 +174,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Konzert in der Kirche Sent | The Lutz Brothers in Concert – Carte Blanche",
-              "detail": "Sent",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-in-der-kirche-sent-the-lutz-brothers-in-concert-carte-blanche/"
+              "label": "ZUOZ GLOBE PLAYS- IMMERSIVE THEATER",
+              "detail": "Lyceum Alpinum Zuoz, Zuoz",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zuoz-globe-plays-immersive-theater/"
             },
             {
-              "label": "konzert studio chur: Duo Lavarini-Bläsi",
-              "detail": "Chur",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzert-studio-chur-duo-lavarini-blaesi/"
+              "label": "Woche der Religionen - Lunch&Learn",
+              "detail": "KulturPunkt, Chur",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/woche-der-religionen-lunchlearn/"
             },
             {
-              "label": "Helvetiarockt – Local Gig Grischa",
-              "detail": "Chur",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helvetiarockt-local-gig-grischa/"
-            },
-            {
-              "label": "pressure",
-              "detail": "Kulturplatz Davos, Davos",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pressure-1/"
+              "label": "Eishockey-Schnuppertag für Kinder",
+              "detail": "Sportarena La Nars, Surses",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/eishockey-schnuppertag-fuer-kinder/"
             },
             {
               "label": "Peduzzis traditionelle Huus-Metzgete 2026",
               "detail": "Val Surses: Savognin, Surses — ongoing, last day: 14 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
-            },
-            {
-              "label": "Cose mai accadute - omaggio a J.L. Borges",
-              "detail": "Museo Casa Besta, Brusio — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/brusio/cose-mai-accadute-omaggio-a-jl-borges_ApyJLkQ"
-            },
-            {
-              "label": "Konzerte des Bündner Singkreis mit der Kammerphilharmonie Graubünden",
-              "detail": "Coira, Chur — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzerte-des-buendner-singkreis-mit-der-kammerphilharmonie-graubuenden/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella, Vaz/Obervaz — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schwiizergoofe-weekend/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella Resort — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/valbella/schwiizergoofe-weekend_AJPxTY3"
             },
             {
               "label": "Cinema Staziun Lavin - LE CITTA DI PIANURA",
               "detail": "Cinema Staziun, Zernez — ongoing, last day: 14 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
+            },
+            {
+              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
+              "detail": "Casa Torre, Poschiavo — ongoing, last day: 14 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Café Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — ongoing, last day: 11 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Begegnungscafé",
+              "detail": "Chur",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/begegnungscafe-9/"
+            },
+            {
+              "label": "Kids-Treff: Gemeinsam Kochen und Essen",
+              "detail": "Arosa",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kids-treff-gemeinsam-kochen-und-essen/"
+            },
+            {
+              "label": "EHC Arosa vs. EHC Visp",
+              "detail": "EHC Arosa, Arosa",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ehc-arosa-vs-ehc-visp/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -294,7 +294,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "de": {
       "canton": "GR",
@@ -304,7 +304,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "68",
+          "value": "61",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -315,69 +315,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Konzert in der Kirche Sent | The Lutz Brothers in Concert – Carte Blanche",
-              "detail": "Sent",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-in-der-kirche-sent-the-lutz-brothers-in-concert-carte-blanche/"
+              "label": "ZUOZ GLOBE PLAYS- IMMERSIVE THEATER",
+              "detail": "Lyceum Alpinum Zuoz, Zuoz",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zuoz-globe-plays-immersive-theater/"
             },
             {
-              "label": "konzert studio chur: Duo Lavarini-Bläsi",
-              "detail": "Chur",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzert-studio-chur-duo-lavarini-blaesi/"
+              "label": "Woche der Religionen - Lunch&Learn",
+              "detail": "KulturPunkt, Chur",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/woche-der-religionen-lunchlearn/"
             },
             {
-              "label": "Helvetiarockt – Local Gig Grischa",
-              "detail": "Chur",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helvetiarockt-local-gig-grischa/"
-            },
-            {
-              "label": "Druck",
-              "detail": "Kulturplatz Davos, Davos",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pressure-1/"
+              "label": "Eishockey-Schnuppertag für Kinder",
+              "detail": "Sportarena La Nars, Surses",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/eishockey-schnuppertag-fuer-kinder/"
             },
             {
               "label": "Peduzzis traditionelle Huus-Metzgete 2026",
               "detail": "Val Surses: Savognin, Surses — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
-            },
-            {
-              "label": "Cose mai accadute - omaggio a J.L. Borges",
-              "detail": "Museo Casa Besta, Brusio — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/brusio/cose-mai-accadute-omaggio-a-jl-borges_ApyJLkQ"
-            },
-            {
-              "label": "Konzerte des Bündner Singkreis mit der Kammerphilharmonie Graubünden",
-              "detail": "Coira, Chur — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzerte-des-buendner-singkreis-mit-der-kammerphilharmonie-graubuenden/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella, Vaz/Obervaz — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schwiizergoofe-weekend/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella Resort — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/valbella/schwiizergoofe-weekend_AJPxTY3"
             },
             {
               "label": "Cinema Staziun Lavin - LE CITTA DI PIANURA",
               "detail": "Cinema Staziun, Zernez — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
+            },
+            {
+              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
+              "detail": "Casa Torre, Poschiavo — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Cafè Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — läuft, letzter Tag: 11. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Begegnungscafé",
+              "detail": "Chur",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/begegnungscafe-9/"
+            },
+            {
+              "label": "Kids-Treff: Gemeinsam Kochen und Essen",
+              "detail": "Arosa",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kids-treff-gemeinsam-kochen-und-essen/"
+            },
+            {
+              "label": "EHC Arosa vs. EHC Visp",
+              "detail": "EHC Arosa, Arosa",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ehc-arosa-vs-ehc-visp/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -435,7 +435,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "fr": {
       "canton": "GR",
@@ -445,7 +445,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "68",
+          "value": "61",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -456,69 +456,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Konzert in der Kirche Sent | The Lutz Brothers in Concert – Carte Blanche",
-              "detail": "Sent",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-in-der-kirche-sent-the-lutz-brothers-in-concert-carte-blanche/"
+              "label": "ZUOZ GLOBE PLAYS- IMMERSIVE THEATER",
+              "detail": "Lyceum Alpinum Zuoz, Zuoz",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zuoz-globe-plays-immersive-theater/"
             },
             {
-              "label": "konzert studio chur: Duo Lavarini-Bläsi",
-              "detail": "Chur",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzert-studio-chur-duo-lavarini-blaesi/"
+              "label": "Woche der Religionen - Lunch&Learn",
+              "detail": "KulturPunkt, Chur",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/woche-der-religionen-lunchlearn/"
             },
             {
-              "label": "Helvetiarockt – Local Gig Grischa",
-              "detail": "Chur",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helvetiarockt-local-gig-grischa/"
-            },
-            {
-              "label": "Pression",
-              "detail": "Kulturplatz Davos, Davos",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pressure-1/"
+              "label": "Eishockey-Schnuppertag für Kinder",
+              "detail": "Sportarena La Nars, Surses",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/eishockey-schnuppertag-fuer-kinder/"
             },
             {
               "label": "Peduzzis traditionelle Huus-Metzgete 2026",
               "detail": "Val Surses: Savognin, Surses — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
-            },
-            {
-              "label": "Cose mai accadute - omaggio a J.L. Borges",
-              "detail": "Museo Casa Besta, Brusio — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/brusio/cose-mai-accadute-omaggio-a-jl-borges_ApyJLkQ"
-            },
-            {
-              "label": "Konzerte des Bündner Singkreis mit der Kammerphilharmonie Graubünden",
-              "detail": "Coira, Chur — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzerte-des-buendner-singkreis-mit-der-kammerphilharmonie-graubuenden/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella, Vaz/Obervaz — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schwiizergoofe-weekend/"
-            },
-            {
-              "label": "Schwiizergoofe Weekend",
-              "detail": "Valbella Resort — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/valbella/schwiizergoofe-weekend_AJPxTY3"
             },
             {
               "label": "Cinema Staziun Lavin - LE CITTA DI PIANURA",
               "detail": "Cinema Staziun, Zernez — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
+            },
+            {
+              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
+              "detail": "Casa Torre, Poschiavo — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Café Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — en cours, dernier jour : 11 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Begegnungscafé",
+              "detail": "Chur",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/begegnungscafe-9/"
+            },
+            {
+              "label": "Kids-Treff: Gemeinsam Kochen und Essen",
+              "detail": "Arosa",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kids-treff-gemeinsam-kochen-und-essen/"
+            },
+            {
+              "label": "EHC Arosa vs. EHC Visp",
+              "detail": "EHC Arosa, Arosa",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ehc-arosa-vs-ehc-visp/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -576,7 +576,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T01:29:55.978Z",
-  "contentHash": "eedcb83e821a4fb4513e1633ad50dc05a692a999fda801636272782c71b52b6b",
+  "updatedAt": "2026-11-09T01:55:21.693Z",
+  "contentHash": "04b9167133cb9ca0b42d83dc41f15ab3b299207eacac607623c4b4c9c6779c35",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T01:21:56.611Z",
+      "updatedAt": "2026-11-07T12:39:52.087Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-06T22:26:45.566Z",
+      "updatedAt": "2026-11-07T21:07:56.550Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "67",
+          "value": "63",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Visite guidée - Noblesse oblige! - En Langue des signes",
-              "detail": "Prangins",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visite-guidee-noblesse-oblige-en-langue-des-signes/"
-            },
-            {
-              "label": "Konzerte in Grandson. Chor „Novantiqua“ aus Sitten",
-              "detail": "Concerts de Grandson, Grandson",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/grandson/grandson-concerts-the-novantiqua-choir-from-sion_As2dxNR"
-            },
-            {
-              "label": "Theater | If I Lie to You, Will You Still Love Me?",
-              "detail": "Vevey — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theater-if-i-lie-to-you-will-you-still-love-me/"
-            },
-            {
               "label": "Epicoop's Gourmet Saturday",
               "detail": "Vevey — in corso, ultimo giorno: 5 dicembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
-            },
-            {
-              "label": "Crafts Market",
-              "detail": "Préverenges — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-market/"
-            },
-            {
-              "label": "Discovering the \"Bourru\" in the vineyards La Côte",
-              "detail": "Caveau des Vignerons de Luins-Vinzel, Vinzel — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/discovering-the-bourru-in-the-vineyards-la-cote/"
-            },
-            {
-              "label": "Swiss Gymnastics Test Final",
-              "detail": "Salle omnisports du Pierrier, Montreux — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-gymnastics-test-final/"
             },
             {
               "label": "Payerne Fair",
               "detail": "Comptoir de Payerne, Payerne — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
             },
             {
               "label": "Lausanne Bach Festival",
               "detail": "Divers lieux, Lausanne — in corso, ultimo giorno: 4 dicembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
             },
             {
               "label": "Un monde éperdu - Thierry Romanens",
               "detail": "Théâtre Boulimie — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
+            },
+            {
+              "label": "\"Dreamscapes\": Print Exhibition",
+              "detail": "Galerie-Atelier Arva, Vevey — in corso, ultimo giorno: 12 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
+            },
+            {
+              "label": "Atelier de mosaïque",
+              "detail": "Renens — in corso, ultimo giorno: 19 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+            },
+            {
+              "label": "Kombucha, Kefir, and Homemade Soda Workshop",
+              "detail": "Aubonne — in corso, ultimo giorno: 9 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
+            },
+            {
+              "label": "Reflections",
+              "detail": "Vevey — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Archaeological Discoveries in Jerusalem",
+              "detail": "Clarens, Montreux",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/archaeological-discoveries-in-jerusalem/"
+            },
+            {
+              "label": "Rap! (1ère partie)",
+              "detail": "Lausanne",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rap-1ere-partie/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -145,7 +145,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "en": {
       "canton": "VD",
@@ -155,7 +155,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "67",
+          "value": "63",
           "note": "from the site’s events calendar"
         }
       ],
@@ -166,69 +166,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Visite guidée - Noblesse oblige! - En Langue des signes",
-              "detail": "Prangins",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visite-guidee-noblesse-oblige-en-langue-des-signes/"
-            },
-            {
-              "label": "Grandson Concerts. The Novantiqua Choir from Sion",
-              "detail": "Concerts de Grandson, Grandson",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/grandson/grandson-concerts-the-novantiqua-choir-from-sion_As2dxNR"
-            },
-            {
-              "label": "Theater | If I Lie to You, Will You Still Love Me?",
-              "detail": "Vevey — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theater-if-i-lie-to-you-will-you-still-love-me/"
-            },
-            {
               "label": "Epicoop's Gourmet Saturday",
               "detail": "Vevey — ongoing, last day: 5 December 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
-            },
-            {
-              "label": "Crafts Market",
-              "detail": "Préverenges — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-market/"
-            },
-            {
-              "label": "Discovering the \"Bourru\" in the vineyards La Côte",
-              "detail": "Caveau des Vignerons de Luins-Vinzel, Vinzel — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/discovering-the-bourru-in-the-vineyards-la-cote/"
-            },
-            {
-              "label": "Swiss Gymnastics Test Final",
-              "detail": "Salle omnisports du Pierrier, Montreux — ongoing, last day: 8 November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-gymnastics-test-final/"
             },
             {
               "label": "Payerne Fair",
               "detail": "Comptoir de Payerne, Payerne — ongoing, last day: 15 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
             },
             {
               "label": "Lausanne Bach Festival",
               "detail": "Divers lieux, Lausanne — ongoing, last day: 4 December 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
             },
             {
               "label": "Un monde éperdu - Thierry Romanens",
               "detail": "Théâtre Boulimie — ongoing, last day: 14 November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
+            },
+            {
+              "label": "\"Dreamscapes\": Print Exhibition",
+              "detail": "Galerie-Atelier Arva, Vevey — ongoing, last day: 12 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
+            },
+            {
+              "label": "Atelier de mosaïque",
+              "detail": "Renens — ongoing, last day: 19 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+            },
+            {
+              "label": "Kombucha, Kefir, and Homemade Soda Workshop",
+              "detail": "Aubonne — ongoing, last day: 9 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
+            },
+            {
+              "label": "Reflections",
+              "detail": "Vevey — ongoing, last day: 15 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Archaeological Discoveries in Jerusalem",
+              "detail": "Clarens, Montreux",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/archaeological-discoveries-in-jerusalem/"
+            },
+            {
+              "label": "Rap! (1ère partie)",
+              "detail": "Lausanne",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rap-1ere-partie/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -251,7 +251,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -273,7 +273,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "de": {
       "canton": "VD",
@@ -283,7 +283,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "67",
+          "value": "63",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -294,69 +294,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Visite guidée - Noblesse oblige! - En Langue des signes",
-              "detail": "Prangins",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visite-guidee-noblesse-oblige-en-langue-des-signes/"
-            },
-            {
-              "label": "Konzerte in Grandson. Chor „Novantiqua“ aus Sitten",
-              "detail": "Concerts de Grandson, Grandson",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/grandson/grandson-concerts-the-novantiqua-choir-from-sion_As2dxNR"
-            },
-            {
-              "label": "Theater | Wenn ich dich anlüge, liebst du mich dann noch?",
-              "detail": "Vevey — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theater-if-i-lie-to-you-will-you-still-love-me/"
-            },
-            {
               "label": "Gourmet-Samstag von Epicoop",
               "detail": "Vevey — läuft, letzter Tag: 5. Dezember 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
-            },
-            {
-              "label": "Kunsthandwerkermarkt",
-              "detail": "Préverenges — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-market/"
-            },
-            {
-              "label": "Auf der Entdeckung des \"Bourru\" in den Weinbergen La Côte",
-              "detail": "Caveau des Vignerons de Luins-Vinzel, Vinzel — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/discovering-the-bourru-in-the-vineyards-la-cote/"
-            },
-            {
-              "label": "Schweizer Finale der Gymnastiktests",
-              "detail": "Salle omnisports du Pierrier, Montreux — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-gymnastics-test-final/"
             },
             {
               "label": "Gewerbeausstellung von Payerne",
               "detail": "Comptoir de Payerne, Payerne — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
             },
             {
               "label": "Bach-Festival Lausanne",
               "detail": "Divers lieux, Lausanne — läuft, letzter Tag: 4. Dezember 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
             },
             {
               "label": "Un monde éperdu - Thierry Romanens",
               "detail": "Théâtre Boulimie — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
+            },
+            {
+              "label": "„Traumlandschaften“: Ausstellung mit Radierungen",
+              "detail": "Galerie-Atelier Arva, Vevey — läuft, letzter Tag: 12. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
+            },
+            {
+              "label": "Atelier de mosaïque",
+              "detail": "Renens — läuft, letzter Tag: 19. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+            },
+            {
+              "label": "Workshop zu Kombucha, Kefir und hausgemachten Limonaden",
+              "detail": "Aubonne — läuft, letzter Tag: 9. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
+            },
+            {
+              "label": "Reflexionen",
+              "detail": "Vevey — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Archäologische Funde in Jerusalem",
+              "detail": "Clarens, Montreux",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/archaeological-discoveries-in-jerusalem/"
+            },
+            {
+              "label": "Rap! (1ère partie)",
+              "detail": "Lausanne",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rap-1ere-partie/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -379,7 +379,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -401,7 +401,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "fr": {
       "canton": "VD",
@@ -411,7 +411,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "67",
+          "value": "63",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -422,69 +422,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Visite guidée - Noblesse oblige! - En Langue des signes",
-              "detail": "Prangins",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visite-guidee-noblesse-oblige-en-langue-des-signes/"
-            },
-            {
-              "label": "Concerts de Grandson. Chœur Novantiqua de Sion",
-              "detail": "Concerts de Grandson, Grandson",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/grandson/grandson-concerts-the-novantiqua-choir-from-sion_As2dxNR"
-            },
-            {
-              "label": "Théâtre | Si je te mens, tu m'aimes ?",
-              "detail": "Vevey — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theater-if-i-lie-to-you-will-you-still-love-me/"
-            },
-            {
               "label": "Samedi Gourmand d’Epicoop",
               "detail": "Vevey — en cours, dernier jour : 5 décembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
-            },
-            {
-              "label": "Marché des Artisans",
-              "detail": "Préverenges — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-market/"
-            },
-            {
-              "label": "À la découverte du \"Bourru\" dans le vignoble",
-              "detail": "Caveau des Vignerons de Luins-Vinzel, Vinzel — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/discovering-the-bourru-in-the-vineyards-la-cote/"
-            },
-            {
-              "label": "Finale Suisse des Tests en gymnastique et danse",
-              "detail": "Salle omnisports du Pierrier, Montreux — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-08",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-gymnastics-test-final/"
             },
             {
               "label": "Comptoir de Payerne",
               "detail": "Comptoir de Payerne, Payerne — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
             },
             {
               "label": "Festival Bach de Lausanne",
               "detail": "Divers lieux, Lausanne — en cours, dernier jour : 4 décembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
             },
             {
               "label": "Un monde éperdu - Thierry Romanens",
               "detail": "Théâtre Boulimie — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-08",
+              "date": "2026-11-09",
               "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
+            },
+            {
+              "label": "Paysages rêvés - Exposition de gravures",
+              "detail": "Galerie-Atelier Arva, Vevey — en cours, dernier jour : 12 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
+            },
+            {
+              "label": "Atelier de mosaïque",
+              "detail": "Renens — en cours, dernier jour : 19 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+            },
+            {
+              "label": "Atelier Kombucha, kéfir et sodas sauvages",
+              "detail": "Aubonne — en cours, dernier jour : 9 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
+            },
+            {
+              "label": "Reflets",
+              "detail": "Vevey — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Découvertes archéologiques à Jérusalem",
+              "detail": "Clarens, Montreux",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/archaeological-discoveries-in-jerusalem/"
+            },
+            {
+              "label": "Rap! (1ère partie)",
+              "detail": "Lausanne",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rap-1ere-partie/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -507,7 +507,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-07T21:07:56.550Z"
         }
       ],
       "curatedArticles": [
@@ -529,7 +529,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     }
   }
 }

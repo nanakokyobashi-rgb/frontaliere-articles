@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "3a80cb478524b08d8366dda4c5c8c72c977d02567fca7bfe38e614c7623fb7fc",
+  "updatedAt": "2026-11-09T01:55:21.693Z",
+  "contentHash": "b54d2ac3426c4c448fd83557cbc461adeae110933abb0e8e9f8ffa0d3c0b2f59",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "238",
+          "value": "235",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Gyotaku - Tracce di pesci",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/61721"
+              "label": "Corpi in prestito",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/58243"
             },
             {
-              "label": "AperòJazz - JazzClub Verbano",
-              "detail": "Ristorante Teatro Dimitri, Locarno",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64823"
+              "label": "Giovanni Anselmo",
+              "detail": "Repetto Gallery, Lugano",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/63802"
             },
             {
-              "label": "Festa di San Martino",
-              "detail": "Chiesa di San Martino a Ditto, Lugano",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64918"
+              "label": "Donazione di sangue",
+              "detail": "Casa Anziani, Parco San Rocco, Coldrerio",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64841"
             },
             {
-              "label": "Matinée",
-              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64801"
+              "label": "Ugo Mulas, Pietro Consagra, Arnaldo Pomodoro",
+              "detail": "Cortesi Gallery, Lugano",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/63724"
             },
             {
-              "label": "C'era una volta il tempo... per imparare a memoria",
-              "detail": "Domus Poetica, Bellinzona",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64768"
+              "label": "Mr. Nobody against Putin",
+              "detail": "GranRex, Locarno",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64738"
             },
             {
-              "label": "Tombola di Novembre",
-              "detail": "Locali Protezione Civile, Mendrisio",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64814"
-            },
-            {
-              "label": "Conferenza di Franco Lurà e assemblea d'autunno",
-              "detail": "Palazzo dei Landfogti",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64829"
-            },
-            {
-              "label": "Colonne sonore dell'immaginario",
-              "detail": "Villa Negroni, Vezia",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64784"
-            },
-            {
-              "label": "Galà di beneficienza - Clown senza frontiere CH",
-              "detail": "Teatro Dimitri, Locarno",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64756"
-            },
-            {
-              "label": "Il Piccolo Principe e i suoi amici",
+              "label": "Diario di un pazzo",
               "detail": "Teatro Foce, Lugano",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/63718"
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64026"
+            },
+            {
+              "label": "Microplastiche e PFAS quali pericoli corriamo?",
+              "detail": "Casa di Lù, Bellinzona",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64886"
+            },
+            {
+              "label": "Francesco Garolfi - Spettacolo musicale",
+              "detail": "Cinema Lux, Massagno",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64438"
+            },
+            {
+              "label": "Kirk Fletcher blues trio",
+              "detail": "Teatro del Gatto, Ascona",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64586"
+            },
+            {
+              "label": "Fede e guerra - Mostra fotografica",
+              "detail": "Centro pastorale S. Giuseppe, Lugano — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261107/64618"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "238",
+          "value": "235",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,64 +184,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Gyotaku - Fish Trails",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/61721"
+              "label": "Borrowed bodies",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/58243"
             },
             {
-              "label": "ApòJazz - JazzClub Verbano",
-              "detail": "Ristorante Teatro Dimitri, Locarno",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64823"
+              "label": "John Anselm",
+              "detail": "Repetto Gallery, Lugano",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/63802"
             },
             {
-              "label": "St. Martin's Day",
-              "detail": "Chiesa di San Martino a Ditto, Lugano",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64918"
+              "label": "Blood donation",
+              "detail": "Casa Anziani, Parco San Rocco, Coldrerio",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64841"
             },
             {
-              "label": "Matinee",
-              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64801"
+              "label": "Ugo Mulas, Pietro Consagra, Arnaldo Pomodoro",
+              "detail": "Cortesi Gallery, Lugano",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/63724"
             },
             {
-              "label": "Once upon a time there was time... to learn by heart",
-              "detail": "Domus Poetica, Bellinzona",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64768"
+              "label": "Mr. Nobod ag",
+              "detail": "GranRex, Locarno",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64738"
             },
             {
-              "label": "November Bingo",
-              "detail": "Locali Protezione Civile, Mendrisio",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64814"
-            },
-            {
-              "label": "Conference by Franco Lurà and autumn assembly",
-              "detail": "Palazzo dei Landfogti",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64829"
-            },
-            {
-              "label": "Soundtracks of the Imagination",
-              "detail": "Villa Negroni, Vezia",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64784"
-            },
-            {
-              "label": "Charity Gala - Clowns Without Borders CH",
-              "detail": "Teatro Dimitri, Locarno",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64756"
-            },
-            {
-              "label": "The Little Prince and his friends",
+              "label": "Diary of a Fool",
               "detail": "Teatro Foce, Lugano",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/63718"
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64026"
+            },
+            {
+              "label": "Microplastics and PFAS: what dangers do we face?",
+              "detail": "Casa di Lù, Bellinzona",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64886"
+            },
+            {
+              "label": "Francesco Garolfi - Musical show",
+              "detail": "Cinema Lux, Massagno",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64438"
+            },
+            {
+              "label": "Kirk Fletcher blues trio",
+              "detail": "Teatro del Gatto, Ascona",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64586"
+            },
+            {
+              "label": "Faith and War - Photo Exhibit",
+              "detail": "Centro pastorale S. Giuseppe, Lugano — ongoing, last day: 15 November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261107/64618"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "238",
+          "value": "235",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,64 +335,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Gyotaku - Spuren von Fischen",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/61721"
+              "label": "Leihkörper",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/58243"
             },
             {
-              "label": "AperòJazz – JazzClub Verbano",
-              "detail": "Ristorante Teatro Dimitri, Locarno",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64823"
+              "label": "Johannes Anselm",
+              "detail": "Repetto Gallery, Lugano",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/63802"
             },
             {
-              "label": "Martinstag",
-              "detail": "Chiesa di San Martino a Ditto, Lugano",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64918"
+              "label": "Blutspende",
+              "detail": "Casa Anziani, Parco San Rocco, Coldrerio",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64841"
             },
             {
-              "label": "Matinee",
-              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64801"
+              "label": "Ugo Mulas, Pietro Consagra, Arnaldo Pomodoro",
+              "detail": "Cortesi Gallery, Lugano",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/63724"
             },
             {
-              "label": "Es war einmal eine Zeit, da war Zeit... um auswendig zu lernen",
-              "detail": "Domus Poetica, Bellinzona",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64768"
+              "label": "Herr Niemand gegen Putin",
+              "detail": "GranRex, Locarno",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64738"
             },
             {
-              "label": "November-Bingo",
-              "detail": "Locali Protezione Civile, Mendrisio",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64814"
-            },
-            {
-              "label": "Konferenz von Franco Lurà und Herbstversammlung",
-              "detail": "Palazzo dei Landfogti",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64829"
-            },
-            {
-              "label": "Soundtracks der Fantasiewelt",
-              "detail": "Villa Negroni, Vezia",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64784"
-            },
-            {
-              "label": "Wohltätigkeitsgala – Clowns ohne Grenzen CH",
-              "detail": "Teatro Dimitri, Locarno",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64756"
-            },
-            {
-              "label": "Der kleine Prinz und seine Freunde",
+              "label": "Tagebuch eines Verrückten",
               "detail": "Teatro Foce, Lugano",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/63718"
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64026"
+            },
+            {
+              "label": "Mikroplastik und PFAS: Welche Gefahren sind wir gegenüber?",
+              "detail": "Casa di Lù, Bellinzona",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64886"
+            },
+            {
+              "label": "Francesco Garolfi - Musikalische Darbietung",
+              "detail": "Cinema Lux, Massagno",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64438"
+            },
+            {
+              "label": "Kirk Fletcher Blues-Trio",
+              "detail": "Teatro del Gatto, Ascona",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64586"
+            },
+            {
+              "label": "Glaube und Krieg - Fotoausstellung",
+              "detail": "Centro pastorale S. Giuseppe, Lugano — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261107/64618"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "238",
+          "value": "235",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,64 +486,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Gyotaku - Traces de poissons",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/61721"
+              "label": "Corps prêtés",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/58243"
             },
             {
-              "label": "ApòJazz - JazzClub Verbano",
-              "detail": "Ristorante Teatro Dimitri, Locarno",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64823"
+              "label": "Giovanni Anselme",
+              "detail": "Repetto Gallery, Lugano",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/63802"
             },
             {
-              "label": "Fête de la Saint-Martin",
-              "detail": "Chiesa di San Martino a Ditto, Lugano",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64918"
+              "label": "Don de sang",
+              "detail": "Casa Anziani, Parco San Rocco, Coldrerio",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64841"
             },
             {
-              "label": "- jusqu'à la levée du couvre-feu. - Matinées ?",
-              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64801"
+              "label": "Ugo Mulas, avec Pietro Consagra et Arnaldo Pomodoro",
+              "detail": "Cortesi Gallery, Lugano",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/63724"
             },
             {
-              "label": "Il était une fois un temps… pour apprendre par cœur",
-              "detail": "Domus Poetica, Bellinzona",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64768"
+              "label": "Monsieur Personne contre Poutine",
+              "detail": "GranRex, Locarno",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64738"
             },
             {
-              "label": "Tombola de novembre",
-              "detail": "Locali Protezione Civile, Mendrisio",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64814"
-            },
-            {
-              "label": "Conférence de Franco Lurà et assemblée d’automne",
-              "detail": "Palazzo dei Landfogti",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64829"
-            },
-            {
-              "label": "Bandes originales de l'imaginaire",
-              "detail": "Villa Negroni, Vezia",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64784"
-            },
-            {
-              "label": "Gala de charité - Clowns sans frontières CH",
-              "detail": "Teatro Dimitri, Locarno",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/64756"
-            },
-            {
-              "label": "Le Petit Prince et ses amis",
+              "label": "Journal d'un fou",
               "detail": "Teatro Foce, Lugano",
-              "date": "2026-11-08",
-              "url": "https://www.tio.ch/agenda/day/20261108/63718"
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64026"
+            },
+            {
+              "label": "Microplastiques et PFAS : quels dangers rencontrons-nous ?",
+              "detail": "Casa di Lù, Bellinzona",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64886"
+            },
+            {
+              "label": "Francesco Garolfi - Spectacle musical",
+              "detail": "Cinema Lux, Massagno",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64438"
+            },
+            {
+              "label": "Kirk Fletcher trio blues",
+              "detail": "Teatro del Gatto, Ascona",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261109/64586"
+            },
+            {
+              "label": "Foi et guerre - Exposition photographique",
+              "detail": "Centro pastorale S. Giuseppe, Lugano — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-09",
+              "url": "https://www.tio.ch/agenda/day/20261107/64618"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     }
   }
 }

@@ -84,6 +84,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.consiglio-soletta-rifiuta-trasparenza.title': 'Le Conseil de Soleure rejette le mandat sur la transparence des campagnes',
     'blog.article.consiglio-soletta-rifiuta-trasparenza.excerpt': 'Selon le compte rendu publié par Nau.ch, le Conseil cantonal de Soleure a rejeté mercredi l\'élaboration d\'une loi visant à accroître la transparence des campagnes de votation.',
     'blog.article.consiglio-soletta-rifiuta-trasparenza.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.polizia-cantonale-comunicazione-media.title': 'Service communication et médias de la police cantonale de Soleure',
+    'blog.article.polizia-cantonale-comunicazione-media.excerpt': 'Le service fonctionne 365 jours par an, gère X, Facebook et Instagram et interdit les drones dans un rayon de 300 m autour d’un événement.',
+    'blog.article.polizia-cantonale-comunicazione-media.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

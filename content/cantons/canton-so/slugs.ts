@@ -30,6 +30,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'kantonsrat-proroga-gav-due-anni': { it: 'kantonsrat-proroga-gav-due-anni', en: 'cantonal-parliament-extends-collective-agreement', de: 'kantonsrat-verlaengert-gav-zwei-jahre', fr: 'parlement-cantonal-prolonge-convention-collective' },
  'tasso-disoccupazione-ottobre-2026': { it: 'tasso-disoccupazione-ottobre-2026', en: 'unemployment-rate-october-2026', de: 'arbeitslosenquote-oktober-2026', fr: 'taux-chomage-octobre-2026' },
  'consiglio-soletta-rifiuta-trasparenza': { it: 'consiglio-soletta-rifiuta-trasparenza', en: 'solothurn-council-rejects-transparency', de: 'kantonsrat-solothurn-lehnt-transparenz', fr: 'conseil-soleure-rejette-transparence' },
+ 'polizia-cantonale-comunicazione-media': { it: 'polizia-cantonale-comunicazione-media', en: 'cantonal-police-communication-media', de: 'polizei-kantonal-kommunikation-media', fr: 'police-cantonale-communication-media' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

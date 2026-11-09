@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-08T01:29:55.978Z",
-  "contentHash": "efdcb55690ecafdd89b1dedbdb245d4629d29dd9533a4489b80c4670f5c8ee11",
+  "updatedAt": "2026-11-09T01:55:21.693Z",
+  "contentHash": "d507b20a1664bde09e204146b7dcf21b58bb917700390eaa92aeeb81ed8163ce",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T01:21:56.611Z",
+      "updatedAt": "2026-11-07T12:39:52.087Z",
       "keyFacts": 1
     }
   ],
@@ -32,12 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Arte e musica: Louis Christ, alias Louis de Saint-Gall",
-              "detail": "Haus zur Stickerei, Heiden",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/heiden/art-und-music-louis-christ-also-known-as-louis-de-saint-gall_AQYBd2s"
-            },
             {
               "label": "Giovedì conferenza Museo Heiden / Hüben und Drüben",
               "detail": "Museum Heiden, Heiden",
@@ -91,11 +85,17 @@
               "detail": "Gonten",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
+            },
+            {
+              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-11-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -143,12 +143,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Art & Music: Louis Christ, also known as Louis de Saint-Gall",
-              "detail": "Haus zur Stickerei, Heiden",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/heiden/art-und-music-louis-christ-also-known-as-louis-de-saint-gall_AQYBd2s"
-            },
             {
               "label": "Thursday lecture Museum Heiden / Hüben und Drüben",
               "detail": "Museum Heiden, Heiden",
@@ -202,11 +196,17 @@
               "detail": "Gonten",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
+            },
+            {
+              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-11-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -254,12 +254,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Kunst & Musik: Louis Christ alias Louis de Saint-Gall",
-              "detail": "Haus zur Stickerei, Heiden",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/heiden/art-und-music-louis-christ-also-known-as-louis-de-saint-gall_AQYBd2s"
-            },
             {
               "label": "Donnerstagsvortrag Museum Heiden / Hüben und Drüben",
               "detail": "Museum Heiden, Heiden",
@@ -313,11 +307,17 @@
               "detail": "Gonten",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
+            },
+            {
+              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-11-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -365,12 +365,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Art et musique : Louis Christ, alias Louis de Saint-Gall",
-              "detail": "Haus zur Stickerei, Heiden",
-              "date": "2026-11-08",
-              "url": "https://www.guidle.com/it/events/music/heiden/art-und-music-louis-christ-also-known-as-louis-de-saint-gall_AQYBd2s"
-            },
             {
               "label": "Conférence du jeudi au musée de Heiden / Hüben und Drüben",
               "detail": "Museum Heiden, Heiden",
@@ -424,11 +418,17 @@
               "detail": "Gonten",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
+            },
+            {
+              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-11-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-07T01:21:56.611Z"
+          "updatedAt": "2026-11-07T12:39:52.087Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-08T01:29:55.978Z"
+      "updatedAt": "2026-11-09T01:55:21.693Z"
     }
   }
 }
