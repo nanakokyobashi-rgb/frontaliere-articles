@@ -512,7 +512,9 @@
     },
     {
       "path": "scripts/ci/check-issue-already-resolved.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3731",
+      "reason": "Il pre-flight importa `scripts/ci/followup-resolution-match.mjs`, che nel corpus è `adapted` per il contratto locale dei follow-up. Anche se questo file oggi coincide byte per byte col sito, il trasporto isolato non può copiarlo senza la sua dipendenza adattata; resta quindi `adapted` finché quel confine non viene riconciliato.",
       "baseline": {
         "site": "2da3c777f9a172d9",
         "corpus": "2da3c777f9a172d9",
