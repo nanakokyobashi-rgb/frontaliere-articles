@@ -127,14 +127,43 @@ import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 const QUI = path.dirname(fileURLToPath(import.meta.url));
 const RADICE_DEFAULT = path.resolve(QUI, '..', '..');
 
-function writeFileAtomic(file, content) {
+/**
+ * @param {string} file
+ * @param {string|Buffer} content
+ * @param {{ allowDeclaredEscapedResiduals?: boolean }} [options]
+ */
+function writeFileAtomic(file, content, { allowDeclaredEscapedResiduals = false } = {}) {
   const source = Buffer.isBuffer(content) ? content.toString('utf8') : content;
   const clean = sanitizeText(source);
   reportStrippedControlChars(file, source, clean);
-  if (findEscapedControlChars(clean).length > 0) {
+  // La sola eccezione e' il giro parziale di questo script: le escape residue
+  // sono gia' state elencate da `riparaEscapate` e l'uscita resta 2. Nessun
+  // altro writer puo' saltare il report, e il chiamante deve dimostrare prima
+  // che non e' comparsa una spelling nuova.
+  if (findEscapedControlChars(clean).length > 0 && !allowDeclaredEscapedResiduals) {
     reportStrippedControlChars(file, decodeEscapedControlChars(clean), clean);
   }
   writeFileAtomicUnchecked(file, Buffer.isBuffer(content) ? Buffer.from(clean, 'utf8') : clean);
+}
+
+/**
+ * Una passata puo' applicare solo quattro riparazioni e lasciare le altre
+ * dichiarate per il giro successivo. Le sostituzioni di questo script possono
+ * solo rimuovere la spelling escapata scelta e inserire una lettera: se una
+ * spelling escapata resta, deve quindi essere una spelling gia' presente nel
+ * file d'ingresso, mai una nuova forma introdotta dalla riparazione.
+ */
+function escapedResidualsArePreexisting(before, after) {
+  const quota = new Map();
+  for (const { spelling } of findEscapedControlChars(before)) {
+    quota.set(spelling, (quota.get(spelling) || 0) + 1);
+  }
+  for (const { spelling } of findEscapedControlChars(after)) {
+    const remaining = quota.get(spelling) || 0;
+    if (remaining === 0) return false;
+    quota.set(spelling, remaining - 1);
+  }
+  return true;
 }
 
 /** I C0 che non compaiono mai legittimamente in un sorgente: TAB/LF/CR esclusi. */
@@ -1600,10 +1629,18 @@ function main() {
     // La spelling ESCAPATA, prima del residuo: una riparazione qui puo'
     // ripulire l'ancora di un residuo, e il residuo non ha ancora da restituire.
     const nEscapate = findEscapedControlChars(corrente).length;
+    let escapedResiduals = [];
+    let escapedWriteSafe = true;
     if (nEscapate > 0) {
       escapateOccorrenze += nEscapate;
       const esc = riparaEscapate(f.percorso, corrente, testimoni, cacheTestimoni);
       corrente = esc.testo;
+      escapedResiduals = findEscapedControlChars(corrente);
+      // `riparaEscapate` deve riportare ogni spelling che resta: senza questa
+      // controprova, un bug nel rapporto potrebbe permettere una write parziale
+      // con un marker sfuggito alla diagnosi.
+      escapedWriteSafe = escapedResiduals.length === esc.lasciate.length
+        && escapedResidualsArePreexisting(testo, corrente);
       escapateRiparate += esc.riparazioni.length;
       for (const rip of esc.riparazioni) {
         riparazioniElenco.push({
@@ -1635,12 +1672,16 @@ function main() {
     if (res.riparazioni.length || res.lasciate.length) {
       residuiPerFile.push({ file: f.percorso, riparati: res.riparazioni.length, lasciati: res.lasciate.length });
     }
-    // Le occorrenze escapate non riparate sono gia' nell'elenco diagnostico:
-    // non permettere che una riparazione riuscita nello stesso file le porti
-    // comunque oltre questo confine di pubblicazione.
-    if (opz.scrivi && corrente !== testo && findEscapedControlChars(corrente).length === 0) {
+    // Una riparazione parziale e' intenzionale: il tetto di quattro giri deve
+    // poter committare il progresso e lasciare le occorrenze gia' dichiarate
+    // per il giro successivo. Si scrive solo se nessuna spelling escapata nuova
+    // e' comparsa e ogni residuo e' entrato nel rapporto; l'uscita 2 resta il
+    // cancello che impedisce di considerare il file risolto.
+    if (opz.scrivi && corrente !== testo && escapedWriteSafe) {
       const dest = path.join(opz.radice, f.percorso);
-      writeFileAtomic(dest, Buffer.from(corrente, 'utf8'));
+      writeFileAtomic(dest, Buffer.from(corrente, 'utf8'), {
+        allowDeclaredEscapedResiduals: escapedResiduals.length > 0,
+      });
     }
   }
 
