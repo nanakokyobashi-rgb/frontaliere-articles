@@ -4,13 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-basilea::https://www.bs.ch/news/2026-vorauszahlung-der-kantonalen-steuern-2026": {
-      "section": "canton-basilea",
-      "ts": 1793964748510
-    },
     "canton-basilea::https://grenzgaengerzentrum.de/ratgeber/allgemein/grenzgaenger-kinder-schule-schweiz": {
       "section": "canton-basilea",
       "ts": 1794011180261
+    },
+    "canton-basilea::https://www.nau.ch/news/schweiz/jooh-dieser-welpe-soll-kunftig-am-zoll-drogen-erschnuffeln-67198327": {
+      "section": "canton-basilea",
+      "ts": 1794182946959
     }
   }
 }

@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ti::https://www.mattinonline.ch/it/article/60643/il-consiglio-federale-rinuncia-a-chiedere-il-rimborso-delle-cure-mediche-all-italia-e-giorgia-meloni-gioisce": {
-      "section": "canton-ti",
-      "ts": 1794008585674
-    },
     "canton-ti::https://www.laregione.ch/estero/confine/1954732/euro-ponte-interno-stata-bagagli": {
       "section": "canton-ti",
       "ts": 1794036378147
@@ -19,6 +15,10 @@
     "canton-ti::https://www.ilgiorno.it/como/cronaca/frontalieri-in-finanziaria-la-tassa-fdf34935": {
       "section": "canton-ti",
       "ts": 1794107491909
+    },
+    "canton-ti::https://www.laprovinciadicomo.it/stories/le-aziende-comunicazione/mendrisio-il-lato-easy-della-svizzera-o_3990873_11?int_campaign=sesaab.in-collaborazione-con-citta-di-mendrisio.native&int_content=3990873.homepage.mendrisio-il-lato-easy-della-svizzera-o_3990873_11&int_medium=ecodibergamo.homepage.native&int_source=la-provincia-di-como": {
+      "section": "canton-ti",
+      "ts": 1794183283427
     }
   }
 }
