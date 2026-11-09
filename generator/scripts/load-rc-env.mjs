@@ -354,6 +354,9 @@ export const RC_TO_ENV = {
   // mirrored to any VITE_* variable or client-visible bundle.
   DECISION_API_KEY:               ['DECISION_API_KEY'],
 
+  // Separate server-only OpenAI credential for workflow model requests.
+  WORKFLOW_API_KEY:               ['WORKFLOW_API_KEY'],
+
   // Feature flags
   ENABLE_JOB_ALERTS:              ['ENABLE_JOB_ALERTS'],
   // Opt-in rollout for the pre-spend topic gate. Missing/0 keeps the current
