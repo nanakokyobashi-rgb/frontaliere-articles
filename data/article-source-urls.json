@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1952377/franco-decisione-svizzera-franchi-dollaro": {
-    "articleId": "decisione-bns-cambio-franco-euro",
-    "ts": "2026-09-24T10:42:56.471Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/frontalieri-la-cgil-guarda-al-piemonte-la-regio-insubrica-aiuti-a-chiudere-la-partita-sulla-tassa-della-salute/2689075": {
     "articleId": "cgil-regio-insubrica-incontro-novembre",
     "ts": "2026-09-24T18:07:32.077Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/svizzera/svizzera/1961426/ogni-franco-che-va-nel-fondo-avs-e-il-piu-solidale-che-esista": {
     "articleId": "finanziamento-tredicesima-avs",
     "ts": "2026-11-09T10:37:12.607Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/luganese/1961385/via-libera-definitivo-alla-realizzazione-del-tram-treno": {
+    "articleId": "via-libera-tram-treno-luganese",
+    "ts": "2026-11-09T11:39:32.934Z",
     "keyForm": 2
   }
 }

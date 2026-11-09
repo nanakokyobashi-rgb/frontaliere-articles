@@ -13691,6 +13691,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.finanziamento-tredicesima-avs.title': 'Aumento Iva 0,4 punti percentuali per tredicesima AVS',
     'blog.article.finanziamento-tredicesima-avs.excerpt': 'La sua valutazione non sostituisce il dato: l’incremento indicato è di 0,4 punti percentuali.',
     'blog.article.finanziamento-tredicesima-avs.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.via-libera-tram-treno-luganese.title': 'Via libera definitivo alla realizzazione del Tram-treno',
+    'blog.article.via-libera-tram-treno-luganese.excerpt': 'Il Tribunale federale respinge il ricorso di tre privati. La causa riguarda la tappa prioritaria del Tram-treno.',
+    'blog.article.via-libera-tram-treno-luganese.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

@@ -48084,6 +48084,16 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'via-libera-tram-treno-luganese',
+ category: 'novita',
+ date: '2026-11-09T11:39:29.892Z',
+ image: '/images/blog/article-via-libera-tram-treno-luganese.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

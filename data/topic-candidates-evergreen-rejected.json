@@ -14313,10 +14313,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.quotidianopiu.it/dettaglio/14446047/niente-esenzione-per-lente-pubblico-svizzero-manca-la-reciprocita": {
-      "section": "svizzera",
-      "ts": 1793985457175
-    },
     "svizzera::https://www.rsi.ch/info/svizzera/l%e2%80%99ia-per-la-salute-la-usa-il-40-degli-svizzeri--4214271.html": {
       "section": "svizzera",
       "ts": 1794073363730
@@ -14332,6 +14328,10 @@
     "frontaliere::https://comozero.it/attualita/politica-trasporti-svizzera-limiti-80-tassa-auto-elettriche": {
       "section": "frontaliere",
       "ts": 1794135108109
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1960982/all-estero-dopo-la-pensione-in-svizzera-la-vita-costa-troppo-ma-c-e-chi-non-vuole-partire": {
+      "section": "frontaliere",
+      "ts": 1794222794553
     }
   }
 }

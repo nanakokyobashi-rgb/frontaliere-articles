@@ -13689,6 +13689,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.finanziamento-tredicesima-avs.title': 'Mehrwertsteuererhöhung 0,4 Prozentpunkte je 13. AHV',
     'blog.article.finanziamento-tredicesima-avs.excerpt': 'Das Interview konzentriert sich auf die Finanzierung der dreizehnten durch zwei Elemente, die die Quelle zusammenhält: die gefundene Lösung und das Szenario im Falle eines Nein.',
     'blog.article.finanziamento-tredicesima-avs.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.via-libera-tram-treno-luganese.title': 'Endgültiges grünes Licht für den Bau der Tram-Zug',
+    'blog.article.via-libera-tram-treno-luganese.excerpt': 'Das Bundesgericht weist die Klage von drei Privaten ab. Die Ursache liegt in der vorrangigen Etappe des Tram-Zuges.',
+    'blog.article.via-libera-tram-treno-luganese.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;
