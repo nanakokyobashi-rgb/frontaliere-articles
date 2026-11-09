@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-vivere-magreglio-lavorare-ticino.webp",
-      "sha256": "a8d55527002288bef24e6cc90930720f3391f689f167e88b6f6d4697288c034c"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-vivere-magreglio-lavorare-ticino-480w.webp",
-      "sha256": "37870327ecffc5ecadf0d264be1f41af00d651524e451690c6601475290d1033"
-    }
-  ]
+  "items": []
 }
