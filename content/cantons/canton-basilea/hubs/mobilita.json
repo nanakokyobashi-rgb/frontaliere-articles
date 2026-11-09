@@ -4,18 +4,13 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-11-09T10:40:40.618Z",
-  "contentHash": "cfa69a47209cecc80254133a1d5466f136e51269718666030e84b47d17beabfe",
+  "updatedAt": "2026-11-09T23:41:11.155Z",
+  "contentHash": "8523db513a8344b2ea5d4f0febf2f8285f3d27dc8a71e2a483d4c909d4f69ad4",
   "blocks": [
     {
       "id": "attese-valichi",
       "updatedAt": "2026-11-06T23:59:59.000Z",
       "keyFacts": 1
-    },
-    {
-      "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-07T22:20:59.233Z",
-      "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
@@ -34,16 +29,6 @@
           "label": "Valico più scorrevole della settimana",
           "value": "0,8 min",
           "note": "Riehen – Weil am Rhein, settimana conclusa: 6 novembre 2026"
-        },
-        {
-          "label": "Chiusure stradali in corso o imminenti",
-          "value": "16",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
-        },
-        {
-          "label": "Cantieri attivi o imminenti",
-          "value": "22",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -98,63 +83,6 @@
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Chiusure, cantieri e disagi",
-          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
-          "items": [
-            {
-              "label": "A2 Basel -> Luzern Svincolo autostradale Basel-Badischer Bahnhof Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.4 Aggiunta 1: limite temporaneo larghezza Larghezza…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 novembre 2026",
-              "date": "2025-03-31T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Basel -> Luzern tra Galleria Galleria Schwarzwald E Svincolo autostradale Basel-Wettstein Situazione: uscita chiusa cantiere, lunghezza [km] 0.2",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 novembre 2026",
-              "date": "2025-03-31T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Basel Svincolo autostradale Basel-Badischer Bahnhof Situazione: raccordo autostradale chiuso in entrata cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 novembre 2026",
-              "date": "2025-10-19T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Basel Svincolo autostradale Basel-Badischer Bahnhof Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.1 Aggiunta 1: limite temporaneo larghezza Larghezza…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 novembre 2026",
-              "date": "2025-10-19T19:00:00.000Z"
-            },
-            {
-              "label": "A18 Grellingen <-> Raccordo di Hagnau tra Galleria Galleria Schänzli E Svincolo autostradale Muttenz-Sud Situazione: chiusa cantiere, lunghezza [km] 1.7",
-              "value": "Chiusura",
-              "detail": "fine prevista: 11 novembre 2026",
-              "date": "2026-02-02T07:01:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea tra Svincolo autostradale Sissach E Svincolo autostradale Arisdorf Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 13 novembre 2026",
-              "date": "2026-02-02T07:14:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna <-> Basilea tra Svincolo autostradale Basilea-Rheinhafen E Svincolo autostradale Basilea-Badischer Bahnhof Situazione: chiusa cantiere, lunghezza [km] 2.2",
-              "value": "Chiusura",
-              "detail": "fine prevista: 18 novembre 2026",
-              "date": "2026-02-02T07:27:00.000Z"
-            },
-            {
-              "label": "A2 Basilea -> Lucerna tra Svincolo autostradale Sissach E Parcheggio Teufengraben Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 12 novembre 2026",
-              "date": "2026-02-02T07:39:00.000Z"
-            }
-          ],
-          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -276,7 +204,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-09T10:40:40.618Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -288,16 +216,6 @@
           "label": "Fastest crossing of the week",
           "value": "0.8 min",
           "note": "Riehen – Weil am Rhein, week ending 6 November 2026"
-        },
-        {
-          "label": "Road closures in force or imminent",
-          "value": "16",
-          "note": "reports as of 7 November 2026"
-        },
-        {
-          "label": "Roadworks active or imminent",
-          "value": "22",
-          "note": "reports as of 7 November 2026"
         }
       ],
       "dataBlocks": [
@@ -352,63 +270,6 @@
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Closures, roadworks and disruptions",
-          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
-          "items": [
-            {
-              "label": "A2 Basel -> Luzern Svincolo autostradale Basel-Badischer Bahnhof Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.4 Aggiunta 1: limite temporaneo larghezza Larghezza…",
-              "value": "Closure",
-              "detail": "until 30 November 2026",
-              "date": "2025-03-31T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Basel -> Luzern tra Galleria Galleria Schwarzwald E Svincolo autostradale Basel-Wettstein Situazione: uscita chiusa cantiere, lunghezza [km] 0.2",
-              "value": "Closure",
-              "detail": "until 30 November 2026",
-              "date": "2025-03-31T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Basel Svincolo autostradale Basel-Badischer Bahnhof Situazione: raccordo autostradale chiuso in entrata cantiere",
-              "value": "Closure",
-              "detail": "until 30 November 2026",
-              "date": "2025-10-19T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Basel Svincolo autostradale Basel-Badischer Bahnhof Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.1 Aggiunta 1: limite temporaneo larghezza Larghezza…",
-              "value": "Closure",
-              "detail": "until 30 November 2026",
-              "date": "2025-10-19T19:00:00.000Z"
-            },
-            {
-              "label": "A18 Grellingen <-> Raccordo di Hagnau tra Galleria Galleria Schänzli E Svincolo autostradale Muttenz-Sud Situazione: chiusa cantiere, lunghezza [km] 1.7",
-              "value": "Closure",
-              "detail": "until 11 November 2026",
-              "date": "2026-02-02T07:01:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea tra Svincolo autostradale Sissach E Svincolo autostradale Arisdorf Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 13 November 2026",
-              "date": "2026-02-02T07:14:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna <-> Basilea tra Svincolo autostradale Basilea-Rheinhafen E Svincolo autostradale Basilea-Badischer Bahnhof Situazione: chiusa cantiere, lunghezza [km] 2.2",
-              "value": "Closure",
-              "detail": "until 18 November 2026",
-              "date": "2026-02-02T07:27:00.000Z"
-            },
-            {
-              "label": "A2 Basilea -> Lucerna tra Svincolo autostradale Sissach E Parcheggio Teufengraben Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Closure",
-              "detail": "until 12 November 2026",
-              "date": "2026-02-02T07:39:00.000Z"
-            }
-          ],
-          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -530,7 +391,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-09T10:40:40.618Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -542,16 +403,6 @@
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0.8 Min.",
           "note": "Riehen – Weil am Rhein, Woche bis 6. November 2026"
-        },
-        {
-          "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "16",
-          "note": "Meldungen vom 7. November 2026"
-        },
-        {
-          "label": "Aktive oder bevorstehende Baustellen",
-          "value": "22",
-          "note": "Meldungen vom 7. November 2026"
         }
       ],
       "dataBlocks": [
@@ -606,63 +457,6 @@
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Sperrungen, Baustellen und Störungen",
-          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
-          "items": [
-            {
-              "label": "A2 Basel -> Luzern Anschluss Basel-Badischer Bahnhof Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.4 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 0.0",
-              "value": "Sperrung",
-              "detail": "bis 30. November 2026",
-              "date": "2025-03-31T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Basel -> Luzern zwischen Tunnel Schwarzwald-Tunnel und Anschluss Basel-Wettstein Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.2",
-              "value": "Sperrung",
-              "detail": "bis 30. November 2026",
-              "date": "2025-03-31T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Basel Anschluss Basel-Badischer Bahnhof Sachlage: Einfahrt gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 30. November 2026",
-              "date": "2025-10-19T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Basel Anschluss Basel-Badischer Bahnhof Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.1 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 0.0",
-              "value": "Sperrung",
-              "detail": "bis 30. November 2026",
-              "date": "2025-10-19T19:00:00.000Z"
-            },
-            {
-              "label": "A18 Grellingen <-> Verzweigung Hagnau zwischen Tunnel Schänzli-Tunnel und Anschluss Muttenz-Süd Sachlage: Strecke gesperrt Baustelle, Länge [km] 1.7",
-              "value": "Sperrung",
-              "detail": "bis 11. November 2026",
-              "date": "2026-02-02T07:01:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Basel zwischen Anschluss Sissach und Anschluss Arisdorf Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 13. November 2026",
-              "date": "2026-02-02T07:14:00.000Z"
-            },
-            {
-              "label": "A2 Luzern <-> Basel zwischen Anschluss Basel-Rheinhafen und Anschluss Basel-Badischer Bahnhof Sachlage: Strecke gesperrt Baustelle, Länge [km] 2.2",
-              "value": "Sperrung",
-              "detail": "bis 18. November 2026",
-              "date": "2026-02-02T07:27:00.000Z"
-            },
-            {
-              "label": "A2 Basel -> Luzern zwischen Anschluss Sissach und Parkplatz Teufengraben Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 12. November 2026",
-              "date": "2026-02-02T07:39:00.000Z"
-            }
-          ],
-          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -784,7 +578,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-09T10:40:40.618Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -796,16 +590,6 @@
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0,8 min",
           "note": "Riehen – Weil am Rhein, semaine jusqu’au 6 novembre 2026"
-        },
-        {
-          "label": "Fermetures de routes en cours ou imminentes",
-          "value": "16",
-          "note": "signalements au 7 novembre 2026"
-        },
-        {
-          "label": "Chantiers actifs ou imminents",
-          "value": "22",
-          "note": "signalements au 7 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -860,63 +644,6 @@
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Fermetures, chantiers et perturbations",
-          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
-          "items": [
-            {
-              "label": "A2 Bâle -> Lucerne Jonction autoroutière Bâle-Badischer Bahnhof Situation: entrée fermée travaux, longueur [km] 0.4 Complément 1: limitation temporaire de largeur largeur de la voie [m] 0.0",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 novembre 2026",
-              "date": "2025-03-31T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Bâle -> Lucerne entre Tunnel Tunnel du Schwarzwald et Jonction autoroutière Bâle-Wettstein Situation: sortie fermée travaux, longueur [km] 0.2",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 novembre 2026",
-              "date": "2025-03-31T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne -> Bâle Jonction autoroutière Bâle-Badischer Bahnhof Situation: entrée fermée travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 novembre 2026",
-              "date": "2025-10-19T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne -> Bâle Jonction autoroutière Bâle-Badischer Bahnhof Situation: entrée fermée travaux, longueur [km] 0.1 Complément 1: limitation temporaire de largeur largeur de la voie [m] 0.0",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 novembre 2026",
-              "date": "2025-10-19T19:00:00.000Z"
-            },
-            {
-              "label": "A18 Grellingen <-> Echangeur de Hagnau entre Tunnel Tunnel Schänzli et Jonction autoroutière Muttenz-Sud Situation: fermé travaux, longueur [km] 1.7",
-              "value": "Fermeture",
-              "detail": "jusqu’au 11 novembre 2026",
-              "date": "2026-02-02T07:01:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne -> Bâle entre Jonction autoroutière Sissach et Jonction autoroutière Arisdorf Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 13 novembre 2026",
-              "date": "2026-02-02T07:14:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne <-> Bâle entre Jonction autoroutière Bâle-Rheinhafen et Jonction autoroutière Bâle-Badischer Bahnhof Situation: fermé travaux, longueur [km] 2.2",
-              "value": "Fermeture",
-              "detail": "jusqu’au 18 novembre 2026",
-              "date": "2026-02-02T07:27:00.000Z"
-            },
-            {
-              "label": "A2 Bâle -> Lucerne entre Jonction autoroutière Sissach et Parking Teufengraben Situation: fermé travaux Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 12 novembre 2026",
-              "date": "2026-02-02T07:39:00.000Z"
-            }
-          ],
-          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1038,7 +765,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-09T10:40:40.618Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     }
   }
 }

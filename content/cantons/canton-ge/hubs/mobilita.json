@@ -4,17 +4,12 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "f3e2a1da0a2051a6f8eb15682f019c7d99d09a883564b13fe6e0d8af40a8ab13",
+  "updatedAt": "2026-11-09T23:41:11.155Z",
+  "contentHash": "92cc2d47fed0bc7a1201b674b6405b37060a27882bbfad79bcd2015a4fa85937",
   "blocks": [
     {
       "id": "attese-valichi",
       "updatedAt": "2026-11-06T23:59:59.000Z",
-      "keyFacts": 1
-    },
-    {
-      "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-07T22:20:59.233Z",
       "keyFacts": 1
     },
     {
@@ -34,11 +29,6 @@
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
           "note": "Hermance, settimana conclusa: 6 novembre 2026"
-        },
-        {
-          "label": "Cantieri attivi o imminenti",
-          "value": "3",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -99,45 +89,6 @@
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Chiusure, cantieri e disagi",
-          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
-          "items": [
-            {
-              "label": "Perturbations de la circulation - dimanche 1er novembre",
-              "value": "Traffico",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45382"
-            },
-            {
-              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
-              "value": "Traffico",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45418"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
-              "value": "Cantiere",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45273"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
-              "value": "Cantiere",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45356"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
-              "value": "Cantiere",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45397"
-            }
-          ],
-          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -235,7 +186,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "en": {
       "canton": "GE",
@@ -247,11 +198,6 @@
           "label": "Fastest crossing of the week",
           "value": "0 min",
           "note": "Hermance, week ending 6 November 2026"
-        },
-        {
-          "label": "Roadworks active or imminent",
-          "value": "3",
-          "note": "reports as of 7 November 2026"
         }
       ],
       "dataBlocks": [
@@ -312,45 +258,6 @@
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Closures, roadworks and disruptions",
-          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
-          "items": [
-            {
-              "label": "Perturbations de la circulation - dimanche 1er novembre",
-              "value": "Traffic",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45382"
-            },
-            {
-              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
-              "value": "Traffic",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45418"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
-              "value": "Roadworks",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45273"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
-              "value": "Roadworks",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45356"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
-              "value": "Roadworks",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45397"
-            }
-          ],
-          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -448,7 +355,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "de": {
       "canton": "GE",
@@ -460,11 +367,6 @@
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
           "note": "Hermance, Woche bis 6. November 2026"
-        },
-        {
-          "label": "Aktive oder bevorstehende Baustellen",
-          "value": "3",
-          "note": "Meldungen vom 7. November 2026"
         }
       ],
       "dataBlocks": [
@@ -525,45 +427,6 @@
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Sperrungen, Baustellen und Störungen",
-          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
-          "items": [
-            {
-              "label": "Perturbations de la circulation - dimanche 1er novembre",
-              "value": "Verkehr",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45382"
-            },
-            {
-              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
-              "value": "Verkehr",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45418"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
-              "value": "Baustelle",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45273"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
-              "value": "Baustelle",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45356"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
-              "value": "Baustelle",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45397"
-            }
-          ],
-          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -661,7 +524,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "fr": {
       "canton": "GE",
@@ -673,11 +536,6 @@
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
           "note": "Hermance, semaine jusqu’au 6 novembre 2026"
-        },
-        {
-          "label": "Chantiers actifs ou imminents",
-          "value": "3",
-          "note": "signalements au 7 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -738,45 +596,6 @@
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Fermetures, chantiers et perturbations",
-          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
-          "items": [
-            {
-              "label": "Perturbations de la circulation - dimanche 1er novembre",
-              "value": "Trafic",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45382"
-            },
-            {
-              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
-              "value": "Trafic",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45418"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
-              "value": "Chantier",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45273"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
-              "value": "Chantier",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45356"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
-              "value": "Chantier",
-              "date": "2026-11-07T22:20:59.233Z",
-              "url": "https://www.ge.ch/node/45397"
-            }
-          ],
-          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -874,7 +693,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     }
   }
 }
