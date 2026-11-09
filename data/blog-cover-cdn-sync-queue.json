@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-contro-aumento-iva-pesa-meno.webp",
+      "sha256": "203b60c70df3d4cfc8e2ad0ea045be4f76435f1713f244deebc237e05361cf42"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-contro-aumento-iva-pesa-meno-480w.webp",
+      "sha256": "362b457dfb1de5b4e692e25f6822c65142d4e5b796fca85ea4680fbda9ce7ae9"
+    }
+  ]
 }
