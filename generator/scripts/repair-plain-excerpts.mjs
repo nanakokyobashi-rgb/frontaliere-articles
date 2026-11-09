@@ -65,6 +65,14 @@ function atomicWrite(file, before, after) {
   writeFileSnapshotAtomically(file, before, clean);
 }
 
+function assertDecodedStructuredDataIsSafe(file, source) {
+  for (const match of source.matchAll(/^[ \t]*"description"(\s*:\s*")((?:[^"\\]|\\.)*)(")/gmu)) {
+    const decoded = decodeDoubleQuotedTS(match[2]);
+    const clean = sanitizeText(decoded);
+    reportStrippedControlChars(file, decoded, clean);
+  }
+}
+
 function sectionForMeta(file) {
   if (file.startsWith('blog-meta-canton-')) return 'cantonale';
   if (file.startsWith('blog-meta-ch-')) return 'svizzera';
@@ -326,7 +334,10 @@ function repairSeoFile(relativeFile, { writeMode = false, sourceMap } = {}) {
     return `${indent}"description"${prefix}${JSON.stringify(result.value).slice(1, -1)}${suffix}`;
   });
 
-  if (after !== before && writeMode) atomicWrite(file, before, after);
+  if (after !== before && writeMode) {
+    assertDecodedStructuredDataIsSafe(file, after);
+    atomicWrite(file, before, after);
+  }
   return { file: relativeFile, changed, details };
 }
 

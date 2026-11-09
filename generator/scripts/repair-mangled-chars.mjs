@@ -110,7 +110,8 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
-import { writeFileAtomic } from './lib/atomic-write-file.mjs';
+import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
+import { writeFileAtomic as writeFileAtomicUnchecked } from './lib/atomic-write-file.mjs';
 import { stripLasciaResiduo } from './lib/control-char-write-report.mjs';
 // L'oracolo della spelling escapata, non una seconda definizione: e' lo stesso
 // `ESCAPED_C0_RX` che conta le occorrenze in `find-dirty-content-ids.mjs`
@@ -118,9 +119,17 @@ import { stripLasciaResiduo } from './lib/control-char-write-report.mjs';
 // aggiunte dopo — questo riparatore la segue senza saperlo.  Riscriverla qui
 // sarebbe il modo esatto in cui le due spelling sono divergute la prima volta.
 import { findEscapedControlChars } from '../../scripts/find-dirty-content-ids.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
 const RADICE_DEFAULT = path.resolve(QUI, '..', '..');
+
+function writeFileAtomic(file, content) {
+  const source = Buffer.isBuffer(content) ? content.toString('utf8') : content;
+  const clean = sanitizeText(source);
+  reportStrippedControlChars(file, source, clean);
+  writeFileAtomicUnchecked(file, Buffer.isBuffer(content) ? Buffer.from(clean, 'utf8') : clean);
+}
 
 /** I C0 che non compaiono mai legittimamente in un sorgente: TAB/LF/CR esclusi. */
 const MARKER_CLASSE = '\\u0000-\\u0008\\u000B\\u000C\\u000E-\\u001F';

@@ -32,7 +32,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { LOCALES, SECTIONS, seoFilesFor } from '../../scripts/lib/article-surfaces.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
 import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
@@ -304,9 +306,11 @@ export function repairFile(source, filePlans) {
 let writeTmpSeq = 0;
 
 function writeAtomic(file, content) {
+  const clean = sanitizeText(content);
+  reportStrippedControlChars(file, content, clean);
   const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
   try {
-    fs.writeFileSync(tmp, content, 'utf8');
+    fs.writeFileSync(tmp, clean, 'utf8');
     fs.renameSync(tmp, file);
   } catch (error) {
     try { fs.unlinkSync(tmp); } catch { /* best-effort cleanup */ }

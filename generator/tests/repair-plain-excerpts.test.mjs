@@ -36,6 +36,18 @@ test('il repair SEO registra i C0 dalla sorgente subito prima dello snapshot', (
   );
 });
 
+test('il repair SEO controlla i C0 escapati dopo il decode di structuredData', () => {
+  const source = readFileSync(SCRIPT, 'utf8');
+  assert.match(
+    source,
+    /function assertDecodedStructuredDataIsSafe\(file, source\) \{[\s\S]*const decoded = decodeDoubleQuotedTS\(match\[2\]\);[\s\S]*const clean = sanitizeText\(decoded\);[\s\S]*reportStrippedControlChars\(file, decoded, clean\);/u,
+  );
+  assert.match(
+    source,
+    /assertDecodedStructuredDataIsSafe\(file, after\);\s*atomicWrite\(file, before, after\);/u,
+  );
+});
+
 test('il repair storico include i chunk SEO cantonali e conserva solo i casi c', () => {
   const result = spawnSync(process.execPath, [SCRIPT], {
     cwd: ROOT,
