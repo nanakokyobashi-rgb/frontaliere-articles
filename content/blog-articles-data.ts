@@ -48094,6 +48094,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'contro-aumento-iva-pesa-meno',
+ category: 'fiscale',
+ date: '2026-11-09T16:08:46.833Z',
+ image: '/images/blog/article-contro-aumento-iva-pesa-meno.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

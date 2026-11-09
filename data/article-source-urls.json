@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/frontalieri-la-cgil-guarda-al-piemonte-la-regio-insubrica-aiuti-a-chiudere-la-partita-sulla-tassa-della-salute/2689075": {
-    "articleId": "cgil-regio-insubrica-incontro-novembre",
-    "ts": "2026-09-24T18:07:32.077Z",
-    "keyForm": 2
-  },
   "https://www.fiscoetasse.com/new-rassegna-stampa/4552-pensione-pubblica-svizzera-niente-tassazione-in-italia.html": {
     "articleId": "pensione-pubblica-svizzera-non-tassata-italia",
     "ts": "2026-09-24T18:59:18.126Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/cantone/luganese/1961385/via-libera-definitivo-alla-realizzazione-del-tram-treno": {
     "articleId": "via-libera-tram-treno-luganese",
     "ts": "2026-11-09T11:39:32.934Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/politica/1961820/contro-un-imposta-che-pesa-piu-su-chi-ha-meno": {
+    "articleId": "contro-aumento-iva-pesa-meno",
+    "ts": "2026-11-09T16:08:49.474Z",
     "keyForm": 2
   }
 }
