@@ -4,13 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-zh::https://www.nzz.ch/zuerich/hochschul-rektor-ue50-gewinnen-durch-ki-tipps-fuer-erfolg-ld.10055042": {
-      "section": "canton-zh",
-      "ts": 1793973894026
-    },
     "canton-zh::https://grenzgaengerzentrum.de/ratgeber/allgemein/grenzgaenger-kinder-schule-schweiz": {
       "section": "canton-zh",
-      "ts": 1794005200129
+      "ts": 1794183171494
+    },
+    "canton-zh::https://www.suedkurier.de/kreis-konstanz/schwarzwaldbahn-faehrt-zwischen-singen-und-konstanz-nicht-pendler-und-seehas-betreiber-sind-frustriert-115639048": {
+      "section": "canton-zh",
+      "ts": 1794183184339
     }
   }
 }
