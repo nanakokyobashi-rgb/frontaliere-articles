@@ -4236,9 +4236,10 @@
       "mode": "adapted",
       "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest 4e12b102… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
       "baseline": {
-        "site": "18668c902915dd43",
-        "corpus": "02d366e3879d4a7a",
-        "alignedAt": "2026-11-05"
+        "site": "141382885e28264f",
+        "corpus": "6c61c6bf12afc98a",
+        "alignedAt": "2026-11-09",
+        "forcedAt": "2026-11-09T11:05:27.842Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",

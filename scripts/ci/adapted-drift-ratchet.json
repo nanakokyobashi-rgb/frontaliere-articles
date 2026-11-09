@@ -39,7 +39,6 @@
     "generator/tests/pr-autorebase-conflict-handoff.test.mjs",
     "generator/tests/pr-autorebase-reopen-breaker.test.mjs",
     "generator/tests/pr-collision-detector-drafts.test.mjs",
-    "host/constants.ts",
     "host/firebaseAuthPersistence.ts",
     "host/htmlTemplate.ts",
     "host/seoHubsData.ts",
