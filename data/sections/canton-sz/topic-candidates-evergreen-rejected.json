@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/alpnach-budgetdefizit-und-investitionen-praegen-das-jahr-2027-art-1730803": {
-      "section": "canton-sz",
-      "ts": 1794015212574
-    },
     "canton-sz::https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/8756-8757-8803-10391-10392/news/26435": {
       "section": "canton-sz",
       "ts": 1794040142708
@@ -107,6 +103,10 @@
     "canton-sz::https://www.einsiedleranzeiger.ch/2026/11/06/kinderparlament-diskutiert-ueber-kinderrechte": {
       "section": "canton-sz",
       "ts": 1794181577728
+    },
+    "canton-sz::https://www.hoefner.ch/tnad/12536cleverpensionierung-pl-20261108-2051-025799": {
+      "section": "canton-sz",
+      "ts": 1794194135022
     }
   }
 }
