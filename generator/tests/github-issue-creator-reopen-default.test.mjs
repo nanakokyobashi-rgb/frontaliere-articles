@@ -80,7 +80,14 @@ const FAKE_GH = `#!/usr/bin/env node
 'use strict';
 const fs = require('node:fs');
 const args = process.argv.slice(2);
-fs.appendFileSync(process.env.FAKE_GH_LOG, JSON.stringify(args) + '\\n');
+// The mock accepts both body forms. Normalize the file form in recorded argv
+// after reading it while the temporary file is still alive.
+const loggedArgs = [...args];
+const bodyFileIndex = loggedArgs.indexOf('--body-file');
+if (bodyFileIndex !== -1) {
+  loggedArgs.splice(bodyFileIndex, 2, '--body', fs.readFileSync(loggedArgs[bodyFileIndex + 1], 'utf8'));
+}
+fs.appendFileSync(process.env.FAKE_GH_LOG, JSON.stringify(loggedArgs) + '\\n');
 const sc = JSON.parse(fs.readFileSync(process.env.FAKE_GH_SCENARIO, 'utf8'));
 if (args[0] === 'issue' && args[1] === 'list') {
   process.stdout.write(JSON.stringify(sc[args[3]] || []));
