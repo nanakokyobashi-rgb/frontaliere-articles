@@ -5806,10 +5806,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-08T22:17:34.304Z",
-      "lastStrikeAt": "2026-11-09T02:15:10.744Z",
-      "expiresAt": "2026-12-09T02:15:10.744Z"
+      "lastStrikeAt": "2026-11-09T05:42:49.113Z",
+      "expiresAt": "2026-12-09T05:42:49.113Z"
     },
     {
       "keyword": "vivere a Arizzano e lavorare in Ticino da frontaliere",
@@ -5818,10 +5818,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-08T22:18:41.587Z",
-      "lastStrikeAt": "2026-11-09T02:15:19.632Z",
-      "expiresAt": "2026-12-09T02:15:19.632Z"
+      "lastStrikeAt": "2026-11-09T05:51:17.778Z",
+      "expiresAt": "2026-12-09T05:51:17.778Z"
     },
     {
       "keyword": "vivere a Bee e lavorare in Ticino da frontaliere",
@@ -5830,10 +5830,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-08T22:20:22.823Z",
-      "lastStrikeAt": "2026-11-09T02:15:32.247Z",
-      "expiresAt": "2026-12-09T02:15:32.247Z"
+      "lastStrikeAt": "2026-11-09T05:58:50.967Z",
+      "expiresAt": "2026-12-09T05:58:50.967Z"
     },
     {
       "keyword": "vivere a Re e lavorare in Ticino da frontaliere",
@@ -5878,10 +5878,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-09T02:16:24.119Z",
-      "lastStrikeAt": "2026-11-09T02:16:24.119Z",
-      "expiresAt": "2026-12-09T02:16:24.119Z"
+      "lastStrikeAt": "2026-11-09T06:06:10.387Z",
+      "expiresAt": "2026-12-09T06:06:10.387Z"
     },
     {
       "keyword": "vivere a Gazzada Schianno e lavorare in Ticino da frontaliere",
