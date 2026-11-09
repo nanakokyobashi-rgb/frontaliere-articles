@@ -115,6 +115,14 @@ test('the daily producer makes a fresh governed hero before either first registr
   assert.match(source, /imageAlt: data\.imageAlt\?\.\[locale\]/);
 });
 
+test('the daily Codex image lane has headroom beyond its observed generation time', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'generator/scripts/generate-daily-brief-article.mjs'), 'utf8');
+  const timeout = source.match(/DAILY_BRIEF_CODEX_TIMEOUT_MS\s*=\s*(\d+)_000/u);
+  assert.ok(timeout, 'daily Codex timeout must remain an explicit millisecond budget');
+  assert.ok(Number(timeout[1]) >= 60, 'the provider timeout must leave margin above the observed ~45-second generation');
+  assert.match(source, /deadlineAt:\s*Date\.now\(\) \+ 120_000/u);
+});
+
 test('the daily workflow stages and warms the governed article hero path', () => {
   const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/generate-daily-brief.yml'), 'utf8');
   const assetPrefix = `${articleImageAssetId('bollettino-frontaliere-')}-`;
