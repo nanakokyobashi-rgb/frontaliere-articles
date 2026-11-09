@@ -28,6 +28,10 @@ import {
   encodeStaticArticleFieldValue,
   scanStaticArticleFieldEntries,
 } from './lib/static-article-field-scanner.mjs';
+import {
+  decodeEscapedControlChars,
+  findEscapedControlChars,
+} from '../../scripts/find-dirty-content-ids.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import {
   assertLocalizedSlugMapUnique,
@@ -228,6 +232,9 @@ if (WRITE) {
   for (const [file, source] of rewrittenSources) {
     const clean = sanitizeText(source);
     reportStrippedControlChars(file, source, clean);
+    if (findEscapedControlChars(clean).length > 0) {
+      reportStrippedControlChars(file, decodeEscapedControlChars(clean), clean);
+    }
     const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
     try {
       writeFileSync(tmp, clean, 'utf8');

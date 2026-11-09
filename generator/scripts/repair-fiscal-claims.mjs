@@ -36,6 +36,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
+import {
+  decodeEscapedControlChars,
+  findEscapedControlChars,
+} from '../../scripts/find-dirty-content-ids.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 import { AMOUNT_7500, findFiscalClaims, findTaxHealthParameterErrors } from './lib/fiscal-claims-guard.mjs';
@@ -281,6 +285,9 @@ function main(argv) {
     if (!check) {
       const clean = sanitizeText(text);
       reportStrippedControlChars(file, text, clean);
+      if (findEscapedControlChars(clean).length > 0) {
+        reportStrippedControlChars(file, decodeEscapedControlChars(clean), clean);
+      }
       writeFileSnapshotAtomically(file, source, clean);
     }
   }
