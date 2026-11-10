@@ -4,12 +4,12 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "5b63fe571f1f5f65a5cc8284736d22c1dd87e883fbcf6c75e94bf70cb97cffa1",
+  "updatedAt": "2026-11-10T11:58:53.708Z",
+  "contentHash": "70a157a17cf15705712ebd81e4fe267773f7ec3f9deed6108747db7f0d67eb57",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-08T23:59:59.000Z",
+      "updatedAt": "2026-11-09T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "La Cure-Les Rousses, settimana conclusa: 8 novembre 2026"
+          "note": "La Cure-Les Rousses, settimana conclusa: 9 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,48 +50,48 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 2 novembre 2026 – 8 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 3 novembre 2026 – 9 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "La Cure-Les Rousses",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "49 rilevazioni",
               "url": "/traffico-dogane/la-cure-les-rousses/oggi/"
-            },
-            {
-              "label": "Chavannes-de-Bogis-Divonne",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/chavannes-de-bogis-divonne/oggi/"
-            },
-            {
-              "label": "Le Brassus-Bois-d'Amont",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/le-brassus-bois-d-amont/oggi/"
             },
             {
               "label": "Vallorbe-Jougne (La Ferrière)",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "49 rilevazioni",
               "url": "/traffico-dogane/vallorbe-jougne/oggi/"
+            },
+            {
+              "label": "Chavannes-de-Bogis-Divonne",
+              "value": "0 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/chavannes-de-bogis-divonne/oggi/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "49 rilevazioni",
               "url": "/traffico-dogane/crassier-divonne/oggi/"
+            },
+            {
+              "label": "Le Brassus-Bois-d'Amont",
+              "value": "0 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/le-brassus-bois-d-amont/oggi/"
             },
             {
               "label": "L'Auberson-Les Fourgs",
               "value": "0,1 min",
-              "detail": "48 rilevazioni",
+              "detail": "49 rilevazioni",
               "url": "/traffico-dogane/l-auberson-les-fourgs/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-08T23:59:59.000Z"
+          "updatedAt": "2026-11-09T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "en": {
       "canton": "VD",
@@ -281,7 +281,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "La Cure-Les Rousses, week ending 8 November 2026"
+          "note": "La Cure-Les Rousses, week ending 9 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -298,48 +298,48 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 2 November 2026 to 8 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 3 November 2026 to 9 November 2026, fastest first.",
           "items": [
             {
               "label": "La Cure-Les Rousses",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "49 readings",
               "url": "/en/border-wait/la-cure-les-rousses/today/"
-            },
-            {
-              "label": "Chavannes-de-Bogis-Divonne",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/chavannes-de-bogis-divonne/today/"
-            },
-            {
-              "label": "Le Brassus-Bois-d'Amont",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/le-brassus-bois-d-amont/today/"
             },
             {
               "label": "Vallorbe-Jougne (La Ferrière)",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "49 readings",
               "url": "/en/border-wait/vallorbe-jougne/today/"
+            },
+            {
+              "label": "Chavannes-de-Bogis-Divonne",
+              "value": "0 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/chavannes-de-bogis-divonne/today/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "49 readings",
               "url": "/en/border-wait/crassier-divonne/today/"
+            },
+            {
+              "label": "Le Brassus-Bois-d'Amont",
+              "value": "0 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/le-brassus-bois-d-amont/today/"
             },
             {
               "label": "L'Auberson-Les Fourgs",
               "value": "0.1 min",
-              "detail": "48 readings",
+              "detail": "49 readings",
               "url": "/en/border-wait/l-auberson-les-fourgs/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-08T23:59:59.000Z"
+          "updatedAt": "2026-11-09T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -517,7 +517,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "de": {
       "canton": "VD",
@@ -528,7 +528,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "La Cure-Les Rousses, Woche bis 8. November 2026"
+          "note": "La Cure-Les Rousses, Woche bis 9. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -545,48 +545,48 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 2. November 2026 bis 8. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 3. November 2026 bis 9. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "La Cure-Les Rousses",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/la-cure-les-rousses/heute/"
-            },
-            {
-              "label": "Chavannes-de-Bogis-Divonne",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/chavannes-de-bogis-divonne/heute/"
-            },
-            {
-              "label": "Le Brassus-Bois-d'Amont",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/le-brassus-bois-d-amont/heute/"
             },
             {
               "label": "Vallorbe-Jougne (La Ferrière)",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/vallorbe-jougne/heute/"
+            },
+            {
+              "label": "Chavannes-de-Bogis-Divonne",
+              "value": "0 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/chavannes-de-bogis-divonne/heute/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/crassier-divonne/heute/"
+            },
+            {
+              "label": "Le Brassus-Bois-d'Amont",
+              "value": "0 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/le-brassus-bois-d-amont/heute/"
             },
             {
               "label": "L'Auberson-Les Fourgs",
               "value": "0.1 Min.",
-              "detail": "48 Messungen",
+              "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/l-auberson-les-fourgs/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-08T23:59:59.000Z"
+          "updatedAt": "2026-11-09T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -764,7 +764,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "fr": {
       "canton": "VD",
@@ -775,7 +775,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "La Cure-Les Rousses, semaine jusqu’au 8 novembre 2026"
+          "note": "La Cure-Les Rousses, semaine jusqu’au 9 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -792,48 +792,48 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 2 novembre 2026 au 8 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 3 novembre 2026 au 9 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "La Cure-Les Rousses",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/la-cure-les-rousses/aujourd-hui/"
-            },
-            {
-              "label": "Chavannes-de-Bogis-Divonne",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/chavannes-de-bogis-divonne/aujourd-hui/"
-            },
-            {
-              "label": "Le Brassus-Bois-d'Amont",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/le-brassus-bois-d-amont/aujourd-hui/"
             },
             {
               "label": "Vallorbe-Jougne (La Ferrière)",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/vallorbe-jougne/aujourd-hui/"
+            },
+            {
+              "label": "Chavannes-de-Bogis-Divonne",
+              "value": "0 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/chavannes-de-bogis-divonne/aujourd-hui/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/crassier-divonne/aujourd-hui/"
+            },
+            {
+              "label": "Le Brassus-Bois-d'Amont",
+              "value": "0 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/le-brassus-bois-d-amont/aujourd-hui/"
             },
             {
               "label": "L'Auberson-Les Fourgs",
               "value": "0,1 min",
-              "detail": "48 relevés",
+              "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/l-auberson-les-fourgs/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-08T23:59:59.000Z"
+          "updatedAt": "2026-11-09T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -1012,7 +1012,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     }
   }
 }

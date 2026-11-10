@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "91fdc72c8d990e3a222bc403088b78acbf585c8afe93d9a755d3821d547471be",
+  "updatedAt": "2026-11-10T11:58:53.708Z",
+  "contentHash": "db2b7f7f51fc690998a6e16abdfbc2237e0e28b9f58258b9bc874867337d4e43",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Gewerbeverband raccomanda Jung e Ruprecht nel 2027",
+          "url": "/articoli-appenzello/governo-appenzello-candidati/",
+          "excerpt": "Il Gewerbeverband raccomanda Karin Jung (FDP) e Balz Ruprecht (EVP) per il seggio lasciato libero alle elezioni di fine febbraio 2027.",
+          "date": "2026-11-10T11:50:35.348Z"
+        },
+        {
           "title": "Consiglio comunale istituisce gruppo per il caldo a scuola",
           "url": "/articoli-appenzello/consiglio-gruppo-caldo-scuola/",
           "excerpt": "Il Consiglio comunale ha istituito la Arbeitsgruppe «Hitzeschutz und Begrünung»: aule e spazi esterni, con misure rapide per la protezione dal sole.",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/caldo-appenzello-esterno-2026/",
           "excerpt": "Il confronto degli anni dal 2022 al 2026 mostra che, nell'estate 2026, nei siti esaminati del Canton Appenzello Esterno sono stati registrati sia più giorni caldi sia più notti tropicali.",
           "date": "2026-11-03T08:54:47.590Z"
-        },
-        {
-          "title": "Decima fiera posti apprendistato Appenzell 7 novembre 2026",
-          "url": "/articoli-appenzello/decima-fiera-apprendistati-innerrhoden/",
-          "excerpt": "62 aziende dell'Innerrhoden presenteranno offerte di apprendistato sabato 7 novembre 2026 all'Aula Gringel, ingresso gratuito dalle 9.00 alle 15.00.",
-          "date": "2026-11-03T07:41:05.610Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Gewerbeverband recommends Jung and Ruprecht in 2027",
+          "url": "/en/appenzell-articles/appenzell-government-candidates/",
+          "excerpt": "The Gewerbeverband recommends Karin Jung (FDP) and Balz Ruprecht (EVP) for the seat left vacant in the elections at the end of February 2027.",
+          "date": "2026-11-10T11:50:35.348Z"
+        },
+        {
           "title": "City council establishes group to address heat at school",
           "url": "/en/appenzell-articles/council-school-heat-group/",
           "excerpt": "The City Council established the Arbeitsgruppe «Hitzeschutz und Begrünung»: classrooms and outdoor spaces, with rapid measures for protection from the sun.",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/heat-appenzell-ausserrhoden-2026/",
           "excerpt": "The comparison of the years from 2022 to 2026 shows that, in summer 2026, both more hot days and more tropical nights were recorded at the sites examined in the Canton of Appenzell Ausserrhoden.",
           "date": "2026-11-03T08:54:47.590Z"
-        },
-        {
-          "title": "Tenth Apprenticeship Positions Fair Appenzell November 7, 2026",
-          "url": "/en/appenzell-articles/tenth-apprenticeship-fair-innerrhoden/",
-          "excerpt": "62 companies from Innerrhoden will present apprenticeship opportunities on Saturday, 7 November 2026, at Aula Gringel, with free admission from 9.00 to 15.00.",
-          "date": "2026-11-03T07:41:05.610Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Gewerbeverband empfiehlt Jung und Ruprecht im Jahr 2027",
+          "url": "/de/appenzell-artikel/appenzell-regierungsrat-kandidaten/",
+          "excerpt": "Der Gewerbeverband empfiehlt Karin Jung (FDP) und Balz Ruprecht (EVP) für den bei den Wahlen Ende Februar 2027 frei werdenden Sitz.",
+          "date": "2026-11-10T11:50:35.348Z"
+        },
+        {
           "title": "Gemeinderat richtet Arbeitsgruppe gegen Hitze an Schulen ein",
           "url": "/de/appenzell-artikel/gemeinderat-hitzeschutz-schule/",
           "excerpt": "Der Gemeinderat hat die Arbeitsgruppe «Hitzeschutz und Begrünung» eingerichtet: Klassenräume und Außenbereiche, mit schnellen Maßnahmen zum Sonnenschutz.",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/hitzebelastung-appenzell-ausserrhoden-2026/",
           "excerpt": "Aus der Gegenüberstellung der Jahre 2022 bis 2026 geht hervor, dass die untersuchten Standorte im Kanton Appenzell Ausserrhoden im Sommer 2026 sowohl eine höhere Zahl heisser Tage als auch mehr Tropennächte aufwiesen.",
           "date": "2026-11-03T08:54:47.590Z"
-        },
-        {
-          "title": "Zehnte Lehrstellenmesse Appenzell 7. November 2026",
-          "url": "/de/appenzell-artikel/zehnte-lehrstellenmesse-innerrhoden/",
-          "excerpt": "Am Samstag, 7. November 2026 findet in der Aula Gringel die zehnte Lehrstellen-Tischmesse Appenzell statt.",
-          "date": "2026-11-03T07:41:05.610Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Gewerbeverband recommande Jung et Ruprecht en 2027",
+          "url": "/fr/articles-appenzell/candidats-gouvernement-appenzell/",
+          "excerpt": "Le Gewerbeverband recommande Karin Jung (FDP) et Balz Ruprecht (EVP) pour le siège laissé vacant lors des élections de fin février 2027.",
+          "date": "2026-11-10T11:50:35.348Z"
+        },
+        {
           "title": "Conseil municipal crée un groupe contre la chaleur à l’école",
           "url": "/fr/articles-appenzell/groupe-conseil-chaleur-ecole/",
           "excerpt": "Le conseil municipal a créé le groupe de travail « Hitzeschutz und Begrünung » : salles de classe et espaces extérieurs, avec des mesures rapides de protection contre le soleil.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/chaleur-appenzell-rhodes-exterieures-2026/",
           "excerpt": "La comparaison des années 2022 à 2026 montre qu'au cours de l'été 2026, à la fois davantage de jours chauds et davantage de nuits tropicales ont été enregistrés sur les sites examinés du canton d'Appenzell…",
           "date": "2026-11-03T08:54:47.590Z"
-        },
-        {
-          "title": "Dixième salon des places d'apprentissage d'Appenzell 7 novembre 2026",
-          "url": "/fr/articles-appenzell/dixieme-foire-apprentissage-innerrhoden/",
-          "excerpt": "62 entreprises de l'Innerrhoden présenteront des offres d'apprentissage le samedi 7 novembre 2026 à l'Aula Gringel, entrée gratuite de 9.00 à 15.00.",
-          "date": "2026-11-03T07:41:05.610Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     }
   }
 }

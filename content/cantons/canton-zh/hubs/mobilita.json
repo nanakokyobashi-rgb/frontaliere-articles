@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "dfc32ffe31f3b5327d893f600abdce1194ababf26fd33209bad83a7b94c89441",
+  "updatedAt": "2026-11-10T11:58:53.708Z",
+  "contentHash": "779d13e91e6acc25e739f46dd70fddf08fe5ae1aea0c2cbcb76801f9cb05215a",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-08T23:59:59.000Z",
+      "updatedAt": "2026-11-09T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Hohentengen am Hochrhein – Wasterkingen, settimana conclusa: 8 novembre 2026"
+          "note": "Hohentengen am Hochrhein – Wasterkingen, settimana conclusa: 9 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,60 +50,60 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 2 novembre 2026 – 8 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 3 novembre 2026 – 9 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Wasterkingen",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "49 rilevazioni",
               "url": "/traffico-dogane/hohentengen-am-hochrhein-wasterkingen/oggi/"
             },
             {
               "label": "Jestetten – Rheinau",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "49 rilevazioni",
               "url": "/traffico-dogane/jestetten-rheinau/oggi/"
-            },
-            {
-              "label": "Klettgau – Wil ZH",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/klettgau-wil-zh/oggi/"
-            },
-            {
-              "label": "Dettighofen – Rafz",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/dettighofen-rafz/oggi/"
             },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "49 rilevazioni",
               "url": "/traffico-dogane/dettighofen-wil-zh/oggi/"
+            },
+            {
+              "label": "Klettgau – Wil ZH",
+              "value": "0 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/klettgau-wil-zh/oggi/"
+            },
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0,1 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/dettighofen-rafz/oggi/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
               "value": "0,1 min",
-              "detail": "48 rilevazioni",
+              "detail": "49 rilevazioni",
               "url": "/traffico-dogane/jestetten-laufen-uhwiesen-dorfstrasse/oggi/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
               "value": "0,1 min",
-              "detail": "48 rilevazioni",
+              "detail": "49 rilevazioni",
               "url": "/traffico-dogane/jestetten-laufen-uhwiesen-grenzstrasse/oggi/"
             },
             {
               "label": "Lottstetten – Nack",
               "value": "0,1 min",
-              "detail": "48 rilevazioni",
+              "detail": "49 rilevazioni",
               "url": "/traffico-dogane/lottstetten-nack/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-08T23:59:59.000Z"
+          "updatedAt": "2026-11-09T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -282,7 +282,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "en": {
       "canton": "ZH",
@@ -293,7 +293,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Hohentengen am Hochrhein – Wasterkingen, week ending 8 November 2026"
+          "note": "Hohentengen am Hochrhein – Wasterkingen, week ending 9 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -310,60 +310,60 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 2 November 2026 to 8 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 3 November 2026 to 9 November 2026, fastest first.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Wasterkingen",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "49 readings",
               "url": "/en/border-wait/hohentengen-am-hochrhein-wasterkingen/today/"
             },
             {
               "label": "Jestetten – Rheinau",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "49 readings",
               "url": "/en/border-wait/jestetten-rheinau/today/"
-            },
-            {
-              "label": "Klettgau – Wil ZH",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/klettgau-wil-zh/today/"
-            },
-            {
-              "label": "Dettighofen – Rafz",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/dettighofen-rafz/today/"
             },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "49 readings",
               "url": "/en/border-wait/dettighofen-wil-zh/today/"
+            },
+            {
+              "label": "Klettgau – Wil ZH",
+              "value": "0 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/klettgau-wil-zh/today/"
+            },
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0.1 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/dettighofen-rafz/today/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
               "value": "0.1 min",
-              "detail": "48 readings",
+              "detail": "49 readings",
               "url": "/en/border-wait/jestetten-laufen-uhwiesen-dorfstrasse/today/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
               "value": "0.1 min",
-              "detail": "48 readings",
+              "detail": "49 readings",
               "url": "/en/border-wait/jestetten-laufen-uhwiesen-grenzstrasse/today/"
             },
             {
               "label": "Lottstetten – Nack",
               "value": "0.1 min",
-              "detail": "48 readings",
+              "detail": "49 readings",
               "url": "/en/border-wait/lottstetten-nack/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-08T23:59:59.000Z"
+          "updatedAt": "2026-11-09T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -542,7 +542,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "de": {
       "canton": "ZH",
@@ -553,7 +553,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Hohentengen am Hochrhein – Wasterkingen, Woche bis 8. November 2026"
+          "note": "Hohentengen am Hochrhein – Wasterkingen, Woche bis 9. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -570,60 +570,60 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 2. November 2026 bis 8. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 3. November 2026 bis 9. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Wasterkingen",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/hohentengen-am-hochrhein-wasterkingen/heute/"
             },
             {
               "label": "Jestetten – Rheinau",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/jestetten-rheinau/heute/"
-            },
-            {
-              "label": "Klettgau – Wil ZH",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/klettgau-wil-zh/heute/"
-            },
-            {
-              "label": "Dettighofen – Rafz",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/dettighofen-rafz/heute/"
             },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/dettighofen-wil-zh/heute/"
+            },
+            {
+              "label": "Klettgau – Wil ZH",
+              "value": "0 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/klettgau-wil-zh/heute/"
+            },
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0.1 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/dettighofen-rafz/heute/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
               "value": "0.1 Min.",
-              "detail": "48 Messungen",
+              "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/jestetten-laufen-uhwiesen-dorfstrasse/heute/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
               "value": "0.1 Min.",
-              "detail": "48 Messungen",
+              "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/jestetten-laufen-uhwiesen-grenzstrasse/heute/"
             },
             {
               "label": "Lottstetten – Nack",
               "value": "0.1 Min.",
-              "detail": "48 Messungen",
+              "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/lottstetten-nack/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-08T23:59:59.000Z"
+          "updatedAt": "2026-11-09T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -802,7 +802,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "fr": {
       "canton": "ZH",
@@ -813,7 +813,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Hohentengen am Hochrhein – Wasterkingen, semaine jusqu’au 8 novembre 2026"
+          "note": "Hohentengen am Hochrhein – Wasterkingen, semaine jusqu’au 9 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -830,60 +830,60 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 2 novembre 2026 au 8 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 3 novembre 2026 au 9 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Wasterkingen",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/hohentengen-am-hochrhein-wasterkingen/aujourd-hui/"
             },
             {
               "label": "Jestetten – Rheinau",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/jestetten-rheinau/aujourd-hui/"
-            },
-            {
-              "label": "Klettgau – Wil ZH",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/klettgau-wil-zh/aujourd-hui/"
-            },
-            {
-              "label": "Dettighofen – Rafz",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/dettighofen-rafz/aujourd-hui/"
             },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/dettighofen-wil-zh/aujourd-hui/"
+            },
+            {
+              "label": "Klettgau – Wil ZH",
+              "value": "0 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/klettgau-wil-zh/aujourd-hui/"
+            },
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0,1 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/dettighofen-rafz/aujourd-hui/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
               "value": "0,1 min",
-              "detail": "48 relevés",
+              "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/jestetten-laufen-uhwiesen-dorfstrasse/aujourd-hui/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
               "value": "0,1 min",
-              "detail": "48 relevés",
+              "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/jestetten-laufen-uhwiesen-grenzstrasse/aujourd-hui/"
             },
             {
               "label": "Lottstetten – Nack",
               "value": "0,1 min",
-              "detail": "48 relevés",
+              "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/lottstetten-nack/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-08T23:59:59.000Z"
+          "updatedAt": "2026-11-09T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -1062,7 +1062,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     }
   }
 }
