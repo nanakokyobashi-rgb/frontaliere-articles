@@ -10,7 +10,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { checkSemanticNearDuplicate } from '../scripts/lib/scoring/semanticDedup.mjs';
-import { isDailyBriefArticleId } from '../scripts/lib/daily-brief-content.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -46,6 +45,12 @@ const CANDIDATE = {
   content: { it: { title: 'Bollettino del Frontaliere', excerpt: 'Dati verificati del giorno.' } },
 };
 
+// The production path supplies the canonical daily-family predicate. This
+// test predicate deliberately names only the fixture row so the semantic gate
+// can be exercised without importing the content builder's TypeScript-backed
+// published-source scanner.
+const ignoreDailyFixture = (slug) => slug === DAILY.slug;
+
 test('semantic dedup ignores prior daily editions but still sees a real neighbour past them', async () => {
   const rows = [DAILY, ORDINARY];
   await assert.rejects(
@@ -55,7 +60,7 @@ test('semantic dedup ignores prior daily editions but still sees a real neighbou
       embedFn: async () => Float32Array.from([1, 0]),
       threshold: 0.9,
       k: 1,
-      ignoreNeighbor: isDailyBriefArticleId,
+      ignoreNeighbor: ignoreDailyFixture,
       log: () => {},
     }),
     /DUPLICATO SEMANTICO RILEVATO/,
@@ -69,7 +74,7 @@ test('semantic dedup does not block a new daily edition when only prior daily ed
       meta: embeddingMeta([DAILY]),
       embedFn: async () => Float32Array.from([1, 0]),
       threshold: 0.9,
-      ignoreNeighbor: isDailyBriefArticleId,
+      ignoreNeighbor: ignoreDailyFixture,
       log: () => {},
     }),
   );
