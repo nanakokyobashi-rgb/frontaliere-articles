@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "pensioni",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "5d4810766c9cdfffa663395483eb425892666dc8fcdf6c65490c6d402a2ac1b4",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "6ea7722c9832a0b4533b71f4219b77536dec3cef95bf35ffc76d81a104ff0a88",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Premier versement de la 13ème rente AVS en décembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.ecasfr.ch/fr/Actualites/Premier-versement-de-la-13eme-rente-AVS-en-decembre-2026.html"
+            },
+            {
               "label": "Améliorer l'accessibilité des courriers administratifs",
               "date": "2026-10-28",
               "url": "https://www.ecasfr.ch/fr/Actualites/Ameliorer-l-accessibilite-des-courriers-administratifs.html"
@@ -161,7 +166,7 @@
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -197,7 +202,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "FR",
@@ -306,6 +311,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Premier versement de la 13ème rente AVS en décembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.ecasfr.ch/fr/Actualites/Premier-versement-de-la-13eme-rente-AVS-en-decembre-2026.html"
+            },
+            {
               "label": "Améliorer l'accessibilité des courriers administratifs",
               "date": "2026-10-28",
               "url": "https://www.ecasfr.ch/fr/Actualites/Ameliorer-l-accessibilite-des-courriers-administratifs.html"
@@ -331,7 +341,7 @@
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -367,7 +377,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "FR",
@@ -476,6 +486,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Premier versement de la 13ème rente AVS en décembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.ecasfr.ch/fr/Actualites/Premier-versement-de-la-13eme-rente-AVS-en-decembre-2026.html"
+            },
+            {
               "label": "Améliorer l'accessibilité des courriers administratifs",
               "date": "2026-10-28",
               "url": "https://www.ecasfr.ch/fr/Actualites/Ameliorer-l-accessibilite-des-courriers-administratifs.html"
@@ -501,7 +516,7 @@
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -537,7 +552,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "FR",
@@ -646,6 +661,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Premier versement de la 13ème rente AVS en décembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.ecasfr.ch/fr/Actualites/Premier-versement-de-la-13eme-rente-AVS-en-decembre-2026.html"
+            },
+            {
               "label": "Améliorer l'accessibilité des courriers administratifs",
               "date": "2026-10-28",
               "url": "https://www.ecasfr.ch/fr/Actualites/Ameliorer-l-accessibilite-des-courriers-administratifs.html"
@@ -671,7 +691,7 @@
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -707,7 +727,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

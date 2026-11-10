@@ -65,6 +65,12 @@
  *               niente e si esce rossi lo stesso — stessa regola di
  *               `transport-identical-twins.mjs`.
  *
+ * La raggiungibilita' del `sourceCommit` e' un prerequisito diverso dai digest:
+ * un pin orfano puo' ancora servire byte via raw GitHub, ma non e' piu' una
+ * lineage osservabile dal `sourceRef`. Per questo il controllo e' fail-closed:
+ * un commit non raggiungibile e anche una risposta che non permette di
+ * verificarlo rendono il verdetto non certificato.
+ *
  * Uso:
  *   node scripts/ci/verify-crawler-contract-provenance.mjs           # report, exit 0
  *   node scripts/ci/verify-crawler-contract-provenance.mjs --strict  # exit 1 se rosso
@@ -1105,6 +1111,92 @@ const rawFetch = createRawFetcher({
   token: process.env.GH_TOKEN,
 });
 
+/**
+ * True when the pinned source commit is reachable from the declared source ref.
+ *
+ * `compare/<commit>...<ref>` returns `behind_by === 0` when the pinned commit
+ * is an ancestor of the source ref. A raw URL can still expose a dangling
+ * commit, so reading any file at that SHA is not enough to establish lineage.
+ * A 404 is a definitive negative; other transport/API failures are thrown so
+ * the caller cannot silently turn an unobserved reachability check into green.
+ *
+ * @param {{sourceRepository?: string, sourceRef?: string, sourceCommit?: string,
+ *   fetcher?: (url: string, options?: object) => Promise<Response>}} options
+ * @returns {Promise<boolean>}
+ */
+export async function sourceCommitReachable({
+  sourceRepository,
+  sourceRef = SITE_REF,
+  sourceCommit,
+  fetcher = rawFetch,
+} = {}) {
+  if (
+    typeof sourceRepository !== 'string'
+    || !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/u.test(sourceRepository)
+    || !SOURCE_REF_RE.test(String(sourceRef || ''))
+    || !SOURCE_COMMIT_RE.test(String(sourceCommit || ''))
+  ) {
+    return false;
+  }
+
+  const url =
+    `https://api.github.com/repos/${sourceRepository}/compare/` +
+    `${sourceCommit}...${encodeURIComponent(sourceRef)}?per_page=1`;
+  const res = await fetcher(url, { Accept: 'application/vnd.github+json' });
+  if (res.status === 404) return false;
+  if (!res.ok) {
+    throw new Error(`compare ${sourceCommit.slice(0, 12)}...${sourceRef} → HTTP ${res.status}`);
+  }
+  const payload = await res.json();
+  if (typeof payload?.behind_by !== 'number') {
+    throw new Error(
+      `compare ${sourceCommit.slice(0, 12)}...${sourceRef}: risposta senza behind_by`,
+    );
+  }
+  return payload.behind_by === 0;
+}
+
+/**
+ * Convert the reachability observation into a mergeable provenance verdict.
+ * This check is intentionally fail-closed even when all byte checks are green:
+ * without a reachable source commit, the pinned lineage has not been proven.
+ */
+export function sourceCommitReachabilityVerdict({
+  sourceRepository,
+  sourceRef = SITE_REF,
+  sourceCommit,
+  reachable,
+  error = null,
+} = {}) {
+  const ref = String(sourceRef || SITE_REF);
+  const commit = String(sourceCommit || '');
+  const endpoint = sourceRepository && commit
+    ? `https://api.github.com/repos/${sourceRepository}/compare/${commit}...${encodeURIComponent(ref)}?per_page=1`
+    : null;
+  const state = reachable === true ? 'verified' : reachable === false ? 'absent' : 'unobserved';
+  const detail = reachable === true
+    ? ''
+    : error
+      ? `la raggiungibilita' del source commit non e' osservabile: ${String(error.message || error).slice(0, 120)}`
+      : `il source commit \`${commit.slice(0, 12) || '—'}\` non e' raggiungibile da \`${ref}\``;
+  const result = {
+    field: 'contract#sourceCommitReachable',
+    sitePath: endpoint,
+    sitePathCandidates: endpoint ? [endpoint] : [],
+    expected: true,
+    observed: reachable ?? null,
+    state,
+    detail,
+  };
+  return {
+    results: [result],
+    counts: { [state]: 1 },
+    red: reachable !== true,
+    reason: reachable === true ? null : detail,
+    observationRef: ref,
+  };
+}
+
 /** Byte del file dal sito al ref dato; null su 404. */
 async function siteFile(rel, ref = SITE_REF) {
   const url = `https://raw.githubusercontent.com/${SITE_REPO}/${ref}/${rel}`;
@@ -1207,8 +1299,32 @@ async function main() {
     runtimeObserved.set(check.field, await observe(check.sitePath, observationRef));
   }
 
+  let sourceReachability;
+  try {
+    const reachable = await sourceCommitReachable({
+      sourceRepository: contract.sourceRepository,
+      sourceRef: contract.sourceRef,
+      sourceCommit: contract.sourceCommit,
+    });
+    sourceReachability = sourceCommitReachabilityVerdict({
+      sourceRepository: contract.sourceRepository,
+      sourceRef: contract.sourceRef,
+      sourceCommit: contract.sourceCommit,
+      reachable,
+    });
+  } catch (error) {
+    sourceReachability = sourceCommitReachabilityVerdict({
+      sourceRepository: contract.sourceRepository,
+      sourceRef: contract.sourceRef,
+      sourceCommit: contract.sourceCommit,
+      reachable: null,
+      error,
+    });
+  }
+
   const verdict = mergeVerdicts(
     evaluateProvenance(checks, observed),
+    sourceReachability,
     evaluateRuntimeFlagChecks(runtimeChecks, runtimeObserved, {
       runtimeDeclared: (contract.siteRuntimePaths || []).includes(CRAWLER_COMMIT_RUNTIME_PATH),
       unobservedArtifacts: unreadableArtifacts,

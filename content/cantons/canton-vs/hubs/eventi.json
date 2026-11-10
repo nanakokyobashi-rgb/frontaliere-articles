@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "86092e34ad9ef6c43f10e7f3394a4a52aab0c6cb919246a38ffcbbc1e6fee05a",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "6bf8c281328ccee4a74fa7d0105e06bd041c8d493252560c20dac811658be638",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "65",
+          "value": "69",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,10 +33,10 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+              "label": "Matineen Begegnungen",
+              "detail": "Maison des cultures - Le Cairn, Sierre",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/events/this-that/sierre/morning-meetings_AFEWdvk"
             },
             {
               "label": "UNI60+ : Introduction à l'utilisation de zoom",
@@ -45,10 +45,22 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/uni60-introduction-a-lutilisation-de-zoom/"
             },
             {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
               "label": "Martinimarkt Visp - 2026",
               "detail": "Kaufplatz Visp, Visp",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/martinimarkt-visp-2026/"
+            },
+            {
+              "label": "Yoga",
+              "detail": "Nend'Spirit, Nendaz",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/sports/siviez-nendaz/yoga_AtScMR4"
             },
             {
               "label": "LESUNG MIT MUHAMET AJETI",
@@ -79,23 +91,11 @@
               "detail": "VINEA, Sierre",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-glareyarde-der-praemierten-weine-2026/"
-            },
-            {
-              "label": "Nendaz Film Festival",
-              "detail": "Salle polyvalente, Nendaz",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/filmfestival-nendaz/"
-            },
-            {
-              "label": "RESTORE | Yin Yoga",
-              "detail": "Zermatt",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "VS",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "65",
+          "value": "69",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,10 +138,10 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+              "label": "Morning meetings",
+              "detail": "Maison des cultures - Le Cairn, Sierre",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/events/this-that/sierre/morning-meetings_AFEWdvk"
             },
             {
               "label": "UNI60+ : Introduction à l'utilisation de zoom",
@@ -150,10 +150,22 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/uni60-introduction-a-lutilisation-de-zoom/"
             },
             {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
               "label": "Martinimarkt Visp - 2026",
               "detail": "Kaufplatz Visp, Visp",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/martinimarkt-visp-2026/"
+            },
+            {
+              "label": "Yoga",
+              "detail": "Nend'Spirit, Nendaz",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/sports/siviez-nendaz/yoga_AtScMR4"
             },
             {
               "label": "LESUNG MIT MUHAMET AJETI",
@@ -184,23 +196,11 @@
               "detail": "VINEA, Sierre",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-glareyarde-der-praemierten-weine-2026/"
-            },
-            {
-              "label": "Nendaz Film Festival",
-              "detail": "Salle polyvalente, Nendaz",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/filmfestival-nendaz/"
-            },
-            {
-              "label": "RESTORE | Yin Yoga",
-              "detail": "Zermatt",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "VS",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "65",
+          "value": "69",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,10 +243,10 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+              "label": "Matineen Begegnungen",
+              "detail": "Maison des cultures - Le Cairn, Sierre",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/events/this-that/sierre/morning-meetings_AFEWdvk"
             },
             {
               "label": "UNI60+ : Introduction à l'utilisation de zoom",
@@ -255,10 +255,22 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/uni60-introduction-a-lutilisation-de-zoom/"
             },
             {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
               "label": "Martinimarkt Visp - 2026",
               "detail": "Kaufplatz Visp, Visp",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/martinimarkt-visp-2026/"
+            },
+            {
+              "label": "Yoga",
+              "detail": "Nend'Spirit, Nendaz",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/sports/siviez-nendaz/yoga_AtScMR4"
             },
             {
               "label": "LESUNG MIT MUHAMET AJETI",
@@ -289,23 +301,11 @@
               "detail": "VINEA, Sierre",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-glareyarde-der-praemierten-weine-2026/"
-            },
-            {
-              "label": "Filmfestival Nendaz",
-              "detail": "Salle polyvalente, Nendaz",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/filmfestival-nendaz/"
-            },
-            {
-              "label": "RESTORE | Yin Yoga",
-              "detail": "Zermatt",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "65",
+          "value": "69",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,10 +348,10 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+              "label": "Matinées Rencontres",
+              "detail": "Maison des cultures - Le Cairn, Sierre",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/events/this-that/sierre/morning-meetings_AFEWdvk"
             },
             {
               "label": "UNI60+ : Introduction à l'utilisation de zoom",
@@ -360,10 +360,22 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/uni60-introduction-a-lutilisation-de-zoom/"
             },
             {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
               "label": "Martinimarkt Visp - 2026",
               "detail": "Kaufplatz Visp, Visp",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/martinimarkt-visp-2026/"
+            },
+            {
+              "label": "Yoga",
+              "detail": "Nend'Spirit, Nendaz",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/sports/siviez-nendaz/yoga_AtScMR4"
             },
             {
               "label": "LESUNG MIT MUHAMET AJETI",
@@ -394,23 +406,11 @@
               "detail": "VINEA, Sierre",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-glareyarde-der-praemierten-weine-2026/"
-            },
-            {
-              "label": "Nendaz Film Festival",
-              "detail": "Salle polyvalente, Nendaz",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/filmfestival-nendaz/"
-            },
-            {
-              "label": "RESTORE | Yin Yoga",
-              "detail": "Zermatt",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

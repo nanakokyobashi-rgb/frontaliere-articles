@@ -4,17 +4,27 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-11-08T22:45:42.198Z",
-  "contentHash": "7119416a439d2fbea12d6a4687b4b1829b84d025511fe5a93e286feaf3db1615",
+  "updatedAt": "2026-11-10T11:58:53.708Z",
+  "contentHash": "3ffd0d2d59d3827f5c72f8da098956bc33a7b853cc63d79b60f73ecda97c1228",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-01T11:17:34.347Z",
+      "updatedAt": "2026-11-08T11:18:20.402Z",
       "keyFacts": 1
     },
     {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-09T22:22:33.694Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-10T02:51:12.262Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -30,6 +40,11 @@
           "value": "582,80 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "5",
+          "note": "offerta mediana 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -51,7 +66,52 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "VS406",
+              "value": "5000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947&locale=fr_CH"
+            },
+            {
+              "label": "VS89198",
+              "value": "950 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
+            },
+            {
+              "label": "VS517000",
+              "value": "200 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=950&locale=fr_CH"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "9 °C",
+              "detail": "oggi da 8 a 15 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -89,10 +149,16 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Grand Conseil accetta entrata in materia nuova legge scolastica vallesana",
+          "url": "/articoli-vallese/grand-conseil-nuova-legge-scuola/",
+          "excerpt": "All’inizio della sessione di novembre, il Grand Conseil ha accettato a maggioranza l’entrata in materia della nuova legge sulla scuola vallesana.",
+          "date": "2026-11-10T01:33:52.436Z"
+        },
         {
           "title": "Rapporto OVS: 83% vallesani in buona salute, obesità al 13% e rischi psicosociali al 44%",
           "url": "/articoli-vallese/salute-vallese-2026-ovs/",
@@ -134,12 +200,6 @@
           "url": "/articoli-svizzera/scuola-vallese-cicli-iscrizione/",
           "excerpt": "Cicli, età di iscrizione, calendario, lingue e passaggio alle scuole medie superiori nel sistema scolastico del Vallese.",
           "date": "2026-09-30T08:39:22.953Z"
-        },
-        {
-          "title": "Premi LAMal nel Vallese: fasce e riduzioni 2026",
-          "url": "/articoli-svizzera/premi-lamal-vallese-riduzione/",
-          "excerpt": "Guida ai premi obbligatori di cassa malati nel canton Vallese: franchigie disponibili, modelli assicurativi, riduzione premi e procedura per ottenere sussidi cantonali.",
-          "date": "2026-09-05T16:42:46.103Z"
         }
       ],
       "latestCantonArticles": [],
@@ -169,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "en": {
       "canton": "VS",
@@ -182,6 +242,11 @@
           "value": "582.80 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "5",
+          "note": "typical bid 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -203,7 +268,52 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "VS406",
+              "value": "5,000 CHF",
+              "detail": "current bid",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947&locale=fr_CH"
+            },
+            {
+              "label": "VS89198",
+              "value": "950 CHF",
+              "detail": "current bid",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
+            },
+            {
+              "label": "VS517000",
+              "value": "200 CHF",
+              "detail": "current bid",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=950&locale=fr_CH"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "9 °C",
+              "detail": "today from 8 to 15 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,10 +351,16 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Grand Council agrees to consider new Valais school law",
+          "url": "/en/valais-articles/grand-conseil-new-school-law/",
+          "excerpt": "At the beginning of the November session, the Grand Conseil accepted by a majority to proceed with consideration of the new Valais school law.",
+          "date": "2026-11-10T01:33:52.436Z"
+        },
         {
           "title": "OVS report: 83% of Valais residents in good health",
           "url": "/en/valais-articles/valais-health-2026-ovs/",
@@ -286,12 +402,6 @@
           "url": "/en/swiss-articles/valais-school-enrolment-cycles/",
           "excerpt": "Cycles, enrollment age, calendar, languages and transition to upper secondary schools in the school system of Valais.",
           "date": "2026-09-30T08:39:22.953Z"
-        },
-        {
-          "title": "LAMal awards in Valais: bands and reductions 2026",
-          "url": "/en/swiss-articles/valais-lamal-premiums-reduction/",
-          "excerpt": "Guide to compulsory sick pay premiums in the canton of Valais: deductibles available, insurance models, premium reduction and procedure for obtaining cantonal subsidies.",
-          "date": "2026-09-05T16:42:46.103Z"
         }
       ],
       "latestCantonArticles": [],
@@ -317,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "de": {
       "canton": "VS",
@@ -330,6 +440,11 @@
           "value": "582.80 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "5",
+          "note": "mittleres Gebot 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -351,7 +466,52 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "VS406",
+              "value": "5’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947&locale=fr_CH"
+            },
+            {
+              "label": "VS89198",
+              "value": "950 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
+            },
+            {
+              "label": "VS517000",
+              "value": "200 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=950&locale=fr_CH"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "9 °C",
+              "detail": "heute 8 bis 15 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -389,10 +549,16 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Grand Conseil nimmt neues Walliser Schulgesetz an",
+          "url": "/de/wallis-artikel/grand-conseil-neues-schulgesetz/",
+          "excerpt": "Zu Beginn der November-Sitzung hat der Grossrat die Aufnahme der Materie des neuen Walliser Schulgesetzes mit Mehrheit angenommen.",
+          "date": "2026-11-10T01:33:52.436Z"
+        },
         {
           "title": "OVS-Bericht: 83% Walliser fit, 13% adipös, 44% Psychorisiken",
           "url": "/de/wallis-artikel/wallis-gesundheit-2026-ovs/",
@@ -434,12 +600,6 @@
           "url": "/de/schweiz-artikel/walliser-schulsystem-anmeldung-zyklen/",
           "excerpt": "Zyklen, Einschreibungsalter, Kalender, Sprachen und Übergang in die Sekundarstufe II im Walliser Schulsystem.",
           "date": "2026-09-30T08:39:22.953Z"
-        },
-        {
-          "title": "KVG-Prämien im Wallis: Zeitabschnitte und Kürzungen 2026",
-          "url": "/de/schweiz-artikel/wallis-lamal-praemien-reduktion/",
-          "excerpt": "Leitfaden zu den obligatorischen Krankenkassenprämien im Kanton Wallis: verfügbare Franchisen, Versicherungsmodelle, Prämienverbilligung und Verfahren zur Erlangung kantonaler Beiträge.",
-          "date": "2026-09-05T16:42:46.103Z"
         }
       ],
       "latestCantonArticles": [],
@@ -465,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "fr": {
       "canton": "VS",
@@ -478,6 +638,11 @@
           "value": "582,80 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "5",
+          "note": "offre centrale 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -499,7 +664,52 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "VS406",
+              "value": "5 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947&locale=fr_CH"
+            },
+            {
+              "label": "VS89198",
+              "value": "950 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
+            },
+            {
+              "label": "VS517000",
+              "value": "200 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=950&locale=fr_CH"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "9 °C",
+              "detail": "aujourd’hui de 8 à 15 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -537,10 +747,16 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Grand Conseil accepte loi scolaire valaisanne",
+          "url": "/fr/articles-valais/grand-conseil-nouvelle-loi-ecole/",
+          "excerpt": "Le projet est présenté comme une loi destinée à remplacer celle de 1962.",
+          "date": "2026-11-10T01:33:52.436Z"
+        },
         {
           "title": "Rapport OVS : 83% des Valaisans en bonne santé, 13% obèses",
           "url": "/fr/articles-valais/valais-sante-2026-ovs/",
@@ -582,12 +798,6 @@
           "url": "/fr/articles-suisse/ecole-valais-inscription-cycles/",
           "excerpt": "Cycles, âge d'inscription, calendrier, langues et passage aux écoles du secondaire II dans le système scolaire du Valais.",
           "date": "2026-09-30T08:39:22.953Z"
-        },
-        {
-          "title": "Primes LAMal en Valais : fourchettes et réductions 2026",
-          "url": "/fr/articles-suisse/valais-lamal-cotisazioni-riduzione/",
-          "excerpt": "Guide des primes obligatoires d'assurance-maladie dans le canton du Valais : franchises disponibles, modèles d'assurance, réduction des primes et procédure d'obtention des allocations cantonales.",
-          "date": "2026-09-05T16:42:46.103Z"
         }
       ],
       "latestCantonArticles": [],
@@ -609,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     }
   }
 }

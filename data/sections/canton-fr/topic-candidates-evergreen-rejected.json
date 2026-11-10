@@ -4,25 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/303077/post-greift-swisscom-an-so-viel-kosten-die-neuen-internet-und-tvabos": {
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/304058/es-wird-dazu-kommen-baumeschneider-warnt-vor-ahvk%c3%bcrzungen": {
       "section": "canton-fr",
-      "ts": 1793911872156
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/302572/auf-die-13-ahv-verzichten-unm%c3%b6glich-und-alle-weiteren-fragen-zur-ersten-auszahlung": {
-      "section": "canton-fr",
-      "ts": 1793911873690
-    },
-    "canton-fr::https://www.frapp.ch/fr/articles/stories/cff-bacs-a-papier-supprimes-des-poubelles": {
-      "section": "canton-fr",
-      "ts": 1793964543322
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/303179/just-eat-macht-auf-uber-gr%c3%b6sste-ahvausgleichskasse-schl%c3%a4gt-alarm": {
-      "section": "canton-fr",
-      "ts": 1794076160331
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/303428/das-droht-arbeitnehmenden-bei-einem-nein-zur-ahvreform": {
-      "section": "canton-fr",
-      "ts": 1794076161509
+      "ts": 1794265907658
     }
   }
 }

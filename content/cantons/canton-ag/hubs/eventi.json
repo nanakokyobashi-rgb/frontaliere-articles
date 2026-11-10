@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "f010c90bfa172571c5a78086bb0703bb21acf4f887a11bc5d03db2ed54222baf",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "c788783e7d90a445a1ec975b9496104b48b6fef5fe9c3dae0ce2366420ef8b99",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "105",
+          "value": "107",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,34 +33,10 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "2. Infoveranstaltung Vereine Badenfahrt 2027",
-              "detail": "Kurtheater Baden, Baden",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/2-infoveranstaltung-vereine-badenfahrt-2027/"
-            },
-            {
-              "label": "Liederlich \"VARIETÉ\"",
-              "detail": "Bachmatten Bezirkschule",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/liederlich-variete_AccK6At"
-            },
-            {
-              "label": "muralim",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/muralim_Af3Qqjt"
-            },
-            {
-              "label": "TGS - Aufführung \"Hesch en Vogel\"",
-              "detail": "Spreitenbach — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
-            },
-            {
-              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
-              "detail": "Strohmuseum im Park — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+              "label": "Servizio di dattilografia",
+              "detail": "Stadtbibliothek Baden, Baden",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/baden/schreibdienst_AE55sfX"
             },
             {
               "label": "Räuchern mit heimischen Kräutern",
@@ -81,10 +57,34 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/aus-der-zeit-eine-spurensuche/"
             },
             {
+              "label": "Unentgeltliche Rechtsauskunft",
+              "detail": "Gemeindeverwaltung Spreitenbach, Spreitenbach — in corso, ultimo giorno: 7 dicembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/spreitenbach/unentgeltliche-rechtsauskunft_ACqjy2P"
+            },
+            {
+              "label": "TGS - Aufführung \"Hesch en Vogel\"",
+              "detail": "Spreitenbach — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
+            },
+            {
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — in corso, ultimo giorno: 28 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
               "label": "Martinimarkt",
               "detail": "Kloster Muri",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinimarkt-1/"
+            },
+            {
+              "label": "Laboratorio di cucito e rammendo",
+              "detail": "Baden",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/eventi/baden/laboratorio-di-cucito-e-rammendo_AXnWRC2"
             },
             {
               "label": "Energie-Apéros Aargau 2026/2027",
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "105",
+          "value": "107",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,34 +138,10 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "2. Infoveranstaltung Vereine Badenfahrt 2027",
-              "detail": "Kurtheater Baden, Baden",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/2-infoveranstaltung-vereine-badenfahrt-2027/"
-            },
-            {
-              "label": "Liederlich \"VARIETÉ\"",
-              "detail": "Bachmatten Bezirkschule",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/liederlich-variete_AccK6At"
-            },
-            {
-              "label": "muralim",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/muralim_Af3Qqjt"
-            },
-            {
-              "label": "TGS - Aufführung \"Hesch en Vogel\"",
-              "detail": "Spreitenbach — ongoing, last day: 14 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
-            },
-            {
-              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
-              "detail": "Strohmuseum im Park — ongoing, last day: 28 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+              "label": "Typing service",
+              "detail": "Stadtbibliothek Baden, Baden",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/baden/schreibdienst_AE55sfX"
             },
             {
               "label": "Räuchern mit heimischen Kräutern",
@@ -186,10 +162,34 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/aus-der-zeit-eine-spurensuche/"
             },
             {
+              "label": "Unentgeltliche Rechtsauskunft",
+              "detail": "Gemeindeverwaltung Spreitenbach, Spreitenbach — ongoing, last day: 7 December 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/spreitenbach/unentgeltliche-rechtsauskunft_ACqjy2P"
+            },
+            {
+              "label": "TGS - Aufführung \"Hesch en Vogel\"",
+              "detail": "Spreitenbach — ongoing, last day: 14 November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
+            },
+            {
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — ongoing, last day: 28 November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
               "label": "Martinimarkt",
               "detail": "Kloster Muri",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinimarkt-1/"
+            },
+            {
+              "label": "Sewing and mending workshop",
+              "detail": "Baden",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/eventi/baden/laboratorio-di-cucito-e-rammendo_AXnWRC2"
             },
             {
               "label": "Energie-Apéros Aargau 2026/2027",
@@ -200,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "105",
+          "value": "107",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,34 +243,10 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "2. Infoveranstaltung Vereine Badenfahrt 2027",
-              "detail": "Kurtheater Baden, Baden",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/2-infoveranstaltung-vereine-badenfahrt-2027/"
-            },
-            {
-              "label": "Liederlich \"VARIETÉ\"",
-              "detail": "Bachmatten Bezirkschule",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/liederlich-variete_AccK6At"
-            },
-            {
-              "label": "muralim",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/muralim_Af3Qqjt"
-            },
-            {
-              "label": "TGS - Aufführung \"Hesch en Vogel\"",
-              "detail": "Spreitenbach — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
-            },
-            {
-              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
-              "detail": "Strohmuseum im Park — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+              "label": "Schreibdienst",
+              "detail": "Stadtbibliothek Baden, Baden",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/baden/schreibdienst_AE55sfX"
             },
             {
               "label": "Räuchern mit heimischen Kräutern",
@@ -291,10 +267,34 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/aus-der-zeit-eine-spurensuche/"
             },
             {
+              "label": "Unentgeltliche Rechtsauskunft",
+              "detail": "Gemeindeverwaltung Spreitenbach, Spreitenbach — läuft, letzter Tag: 7. Dezember 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/spreitenbach/unentgeltliche-rechtsauskunft_ACqjy2P"
+            },
+            {
+              "label": "TGS - Aufführung \"Hesch en Vogel\"",
+              "detail": "Spreitenbach — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
+            },
+            {
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — läuft, letzter Tag: 28. November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
               "label": "Martinimarkt",
               "detail": "Kloster Muri",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinimarkt-1/"
+            },
+            {
+              "label": "Näh- und Flickatelier",
+              "detail": "Baden",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/eventi/baden/laboratorio-di-cucito-e-rammendo_AXnWRC2"
             },
             {
               "label": "Energie-Apéros Aargau 2026/2027",
@@ -305,7 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "105",
+          "value": "107",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,34 +348,10 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "2. Infoveranstaltung Vereine Badenfahrt 2027",
-              "detail": "Kurtheater Baden, Baden",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/2-infoveranstaltung-vereine-badenfahrt-2027/"
-            },
-            {
-              "label": "Liederlich \"VARIETÉ\"",
-              "detail": "Bachmatten Bezirkschule",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/liederlich-variete_AccK6At"
-            },
-            {
-              "label": "muralim",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/muralim_Af3Qqjt"
-            },
-            {
-              "label": "TGS - Aufführung \"Hesch en Vogel\"",
-              "detail": "Spreitenbach — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
-            },
-            {
-              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
-              "detail": "Strohmuseum im Park — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+              "label": "Service d'écriture",
+              "detail": "Stadtbibliothek Baden, Baden",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/baden/schreibdienst_AE55sfX"
             },
             {
               "label": "Räuchern mit heimischen Kräutern",
@@ -396,10 +372,34 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/aus-der-zeit-eine-spurensuche/"
             },
             {
+              "label": "Unentgeltliche Rechtsauskunft",
+              "detail": "Gemeindeverwaltung Spreitenbach, Spreitenbach — en cours, dernier jour : 7 décembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/spreitenbach/unentgeltliche-rechtsauskunft_ACqjy2P"
+            },
+            {
+              "label": "TGS - Aufführung \"Hesch en Vogel\"",
+              "detail": "Spreitenbach — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tgs-auffuehrung-hesch-en-vogel/"
+            },
+            {
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — en cours, dernier jour : 28 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
               "label": "Martinimarkt",
               "detail": "Kloster Muri",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinimarkt-1/"
+            },
+            {
+              "label": "Atelier de couture et de raccommodage",
+              "detail": "Baden",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/eventi/baden/laboratorio-di-cucito-e-rammendo_AXnWRC2"
             },
             {
               "label": "Energie-Apéros Aargau 2026/2027",
@@ -410,7 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

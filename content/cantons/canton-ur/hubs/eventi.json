@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "3d69577618f0d55314f564127716d4deffe9d67b08faecd00735932d843d1e56",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "47485c54b0306cd112b9e5980437100f0cf4c7426d83742e92a7d8a95ece24b0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "14",
+          "value": "13",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,18 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Digital sicher? - Wie wir uns vor Gefahren im Netz schützen",
-              "detail": "Altdorf",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/digital-sicher-wie-wir-uns-vor-gefahren-im-netz-schuetzen/"
-            },
-            {
-              "label": "Impulsabend - KI in der Vereinsarbeit",
-              "detail": "Working Point",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/impulsabend-ki-in-der-vereinsarbeit/"
-            },
             {
               "label": "Gaming am Mittwoch",
               "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
@@ -87,15 +75,27 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
             },
             {
+              "label": "Kreatives Geschichtenausdenken",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreatives-geschichtenausdenken/"
+            },
+            {
               "label": "Altdorfer Warenmarkt",
               "detail": "Altdorf",
               "date": "2026-11-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/warenmarkt-5/"
+            },
+            {
+              "label": "Gedächtnisfeier für unsere verstorbenen Mitglieder",
+              "detail": "Altdorf",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "14",
+          "value": "13",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,18 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Digital sicher? - Wie wir uns vor Gefahren im Netz schützen",
-              "detail": "Altdorf",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/digital-sicher-wie-wir-uns-vor-gefahren-im-netz-schuetzen/"
-            },
-            {
-              "label": "Impulsabend - KI in der Vereinsarbeit",
-              "detail": "Working Point",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/impulsabend-ki-in-der-vereinsarbeit/"
-            },
             {
               "label": "Gaming am Mittwoch",
               "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
@@ -192,15 +180,27 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
             },
             {
+              "label": "Kreatives Geschichtenausdenken",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreatives-geschichtenausdenken/"
+            },
+            {
               "label": "Altdorfer Warenmarkt",
               "detail": "Altdorf",
               "date": "2026-11-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/warenmarkt-5/"
+            },
+            {
+              "label": "Gedächtnisfeier für unsere verstorbenen Mitglieder",
+              "detail": "Altdorf",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "14",
+          "value": "13",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,18 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Digital sicher? - Wie wir uns vor Gefahren im Netz schützen",
-              "detail": "Altdorf",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/digital-sicher-wie-wir-uns-vor-gefahren-im-netz-schuetzen/"
-            },
-            {
-              "label": "Impulsabend - KI in der Vereinsarbeit",
-              "detail": "Working Point",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/impulsabend-ki-in-der-vereinsarbeit/"
-            },
             {
               "label": "Gaming am Mittwoch",
               "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
@@ -297,15 +285,27 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
             },
             {
+              "label": "Kreatives Geschichtenausdenken",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreatives-geschichtenausdenken/"
+            },
+            {
               "label": "Altdorfer Warenmarkt",
               "detail": "Altdorf",
               "date": "2026-11-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/warenmarkt-5/"
+            },
+            {
+              "label": "Gedächtnisfeier für unsere verstorbenen Mitglieder",
+              "detail": "Altdorf",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "14",
+          "value": "13",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,18 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Digital sicher? - Wie wir uns vor Gefahren im Netz schützen",
-              "detail": "Altdorf",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/digital-sicher-wie-wir-uns-vor-gefahren-im-netz-schuetzen/"
-            },
-            {
-              "label": "Impulsabend - KI in der Vereinsarbeit",
-              "detail": "Working Point",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/impulsabend-ki-in-der-vereinsarbeit/"
-            },
             {
               "label": "Gaming am Mittwoch",
               "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
@@ -402,15 +390,27 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
             },
             {
+              "label": "Kreatives Geschichtenausdenken",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreatives-geschichtenausdenken/"
+            },
+            {
               "label": "Warenmarkt",
               "detail": "Altdorf",
               "date": "2026-11-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/warenmarkt-5/"
+            },
+            {
+              "label": "Gedächtnisfeier für unsere verstorbenen Mitglieder",
+              "detail": "Altdorf",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

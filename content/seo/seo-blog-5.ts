@@ -114537,6 +114537,84 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tredicesima-avs-pensionati-italia': {
+    title: '13esima AVS per pensionati italiani da dicembre 2026',
+    description: 'I 225\'316 beneficiari AVS residenti in Italia riceveranno la tredicesima mensilità AVS da dicembre 2026, con un flusso annuo oltre 1,7 miliardi di franchi.',
+    keywords: 'AVS 13esima, pensionati Italia, frontaliere svizzera, rendita AVS, dicembre 2026, UFAS',
+    ogTitle: '13esima AVS pensionati italiani da dicembre 2026',
+    ogDescription: 'I 225\'316 beneficiari AVS residenti in Italia riceveranno la tredicesima mensilità AVS da dicembre 2026. Il flusso annuo supererà 1,7 miliardi di franchi, come confermato dall\'UFAS.',
+    canonicalPath: '/articoli-frontaliere/tredicesima-avs-pensionati-italia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "13esima AVS per pensionati italiani da dicembre 2026",
+      "description": "I 225'316 beneficiari AVS residenti in Italia riceveranno la tredicesima mensilità AVS da dicembre 2026, con un flusso annuo oltre 1,7 miliardi di franchi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tredicesima-avs-pensionati-italia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-09T23:37:16+00:00",
+      "dateModified": "2026-11-09T23:37:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tredicesima-avs-pensionati-italia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-frontalieri-svizzera-calo-ticino': {
+    title: 'Frontalieri: aumento in Svizzera, calo annuo in Ticino',
+    description: 'Nel terzo trimestre, la Svizzera registra 414’500 lavoratori con permesso G (+1,8% annuo), mentre in Ticino sono 79’400 persone (-0,3% sul 2025).',
+    keywords: 'frontalieri, permesso G, ticino, svizzera, terzo trimestre, statistica, lavoratori',
+    ogTitle: 'Frontalieri: aumento Svizzera, calo Ticino',
+    ogDescription: 'Dati del terzo trimestre: 414’500 lavoratori con permesso G in Svizzera (+1,8% annuo) contro 79’400 in Ticino (-0,3% sul 2025). Confronto federale e cantonale.',
+    canonicalPath: '/articoli-frontaliere/frontalieri-svizzera-calo-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: aumento in Svizzera, calo annuo in Ticino",
+      "description": "Nel terzo trimestre, la Svizzera registra 414’500 lavoratori con permesso G (+1,8% annuo), mentre in Ticino sono 79’400 persone (-0,3% sul 2025).",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontalieri-svizzera-calo-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-10T13:55:05+00:00",
+      "dateModified": "2026-11-10T13:55:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontalieri-svizzera-calo-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

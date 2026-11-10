@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-09T18:58:04.715Z",
-  "contentHash": "ac1ac0b2b917c8d390a0a3c12623a64cba1261eccb2f01b17e49aec9ee8232a1",
+  "updatedAt": "2026-11-10T11:58:53.708Z",
+  "contentHash": "9df3dfd537848edf65810c3709865fa617e3820633c44cdb9291decf8cbd50ee",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-07T22:20:59.233Z",
+      "updatedAt": "2026-11-09T22:46:21.435Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "16",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
+          "value": "15",
+          "note": "segnalazioni aggiornate: 9 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "8",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
+          "value": "9",
+          "note": "segnalazioni aggiornate: 9 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -92,13 +92,23 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Système de comptage routier par capteur optique",
+              "date": "2026-11-09T17:07:27.000Z",
+              "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/systeme-de-comptage-routier-par-capteur-optique"
+            },
+            {
+              "label": "Observatoire de la mobilité",
+              "date": "2026-11-09T15:55:21.000Z",
+              "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/observatoire-de-la-mobilite"
+            },
             {
               "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
               "date": "2026-11-06T09:03:15.000Z",
@@ -118,22 +128,18 @@
               "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
               "date": "2026-10-28T13:30:52.000Z",
               "url": "https://www.fr.ch/dime/actualites/mise-en-oeuvre-de-la-strategie-cantonale-de-developpement-durable-2021-2031-etat-davancement-2025"
-            },
-            {
-              "label": "- Inscriptions et horaires de fin d'année -",
-              "date": "2026-10-27T15:41:53.000Z",
-              "url": "https://www.fr.ch/deef/src/actualites/inscriptions-et-horaires-de-fin-dannee-2"
-            },
-            {
-              "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
-              "date": "2026-10-22T14:05:19.000Z",
-              "url": "https://www.fr.ch/dime/actualites/villars-sur-glane-debut-des-travaux-damelioration-du-marquage-et-de-la-signalisation-du-giratoire-de-belle-croix"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Friburgo: Consiglio di Stato rigetta linea ferroviaria diretta Friburgo-Bulle",
+          "url": "/articoli-friburgo/friburgo-no-linea-diretta/",
+          "excerpt": "Il Consiglio di Stato del Canton Friburgo non vuole una linea ferroviaria diretta tra Friburgo e Bulle.",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
         {
           "title": "Friburgo prepara 24 nuovi bus elettrici per dicembre",
           "url": "/articoli-friburgo/tpf-bus-elettrici-friburgo/",
@@ -145,12 +151,6 @@
           "url": "/articoli-friburgo/incidente-matran-friburgo/",
           "excerpt": "Un incidente con quattro veicoli ha bloccato per oltre tre ore l'autostrada tra Matran e Friburgo.",
           "date": "2026-10-27T01:51:04.787Z"
-        },
-        {
-          "title": "Friburgo: Consiglio di Stato rigetta linea ferroviaria diretta Friburgo-Bulle",
-          "url": "/articoli-friburgo/friburgo-no-linea-diretta/",
-          "excerpt": "Il Consiglio di Stato del Canton Friburgo non vuole una linea ferroviaria diretta tra Friburgo e Bulle.",
-          "date": "2026-10-26T15:03:53.947Z"
         },
         {
           "title": "24 nuovi autobus elettrici TPF per linee urbane e regionali",
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-09T18:58:04.715Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "en": {
       "canton": "FR",
@@ -204,13 +204,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "16",
-          "note": "reports as of 7 November 2026"
+          "value": "15",
+          "note": "reports as of 9 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "8",
-          "note": "reports as of 7 November 2026"
+          "value": "9",
+          "note": "reports as of 9 November 2026"
         }
       ],
       "dataBlocks": [
@@ -269,13 +269,23 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Système de comptage routier par capteur optique",
+              "date": "2026-11-09T17:07:27.000Z",
+              "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/systeme-de-comptage-routier-par-capteur-optique"
+            },
+            {
+              "label": "Observatoire de la mobilité",
+              "date": "2026-11-09T15:55:21.000Z",
+              "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/observatoire-de-la-mobilite"
+            },
             {
               "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
               "date": "2026-11-06T09:03:15.000Z",
@@ -295,22 +305,18 @@
               "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
               "date": "2026-10-28T13:30:52.000Z",
               "url": "https://www.fr.ch/dime/actualites/mise-en-oeuvre-de-la-strategie-cantonale-de-developpement-durable-2021-2031-etat-davancement-2025"
-            },
-            {
-              "label": "- Inscriptions et horaires de fin d'année -",
-              "date": "2026-10-27T15:41:53.000Z",
-              "url": "https://www.fr.ch/deef/src/actualites/inscriptions-et-horaires-de-fin-dannee-2"
-            },
-            {
-              "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
-              "date": "2026-10-22T14:05:19.000Z",
-              "url": "https://www.fr.ch/dime/actualites/villars-sur-glane-debut-des-travaux-damelioration-du-marquage-et-de-la-signalisation-du-giratoire-de-belle-croix"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fribourg: State Council rejects direct Fribourg-Bulle railway line",
+          "url": "/en/fribourg-articles/fribourg-no-direct-line/",
+          "excerpt": "The Council of State of the Canton of Fribourg does not want a direct railway line between Fribourg and Bulle.",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
         {
           "title": "Fribourg prepares 24 new electric buses for December",
           "url": "/en/fribourg-articles/fribourg-24-new-electric-buses/",
@@ -322,12 +328,6 @@
           "url": "/en/fribourg-articles/matran-fribourg-crash/",
           "excerpt": "An accident involving four vehicles blocked the highway between Matran and Fribourg for over three hours.",
           "date": "2026-10-27T01:51:04.787Z"
-        },
-        {
-          "title": "Fribourg: State Council rejects direct Fribourg-Bulle railway line",
-          "url": "/en/fribourg-articles/fribourg-no-direct-line/",
-          "excerpt": "The Council of State of the Canton of Fribourg does not want a direct railway line between Fribourg and Bulle.",
-          "date": "2026-10-26T15:03:53.947Z"
         },
         {
           "title": "24 new TPF electric buses for urban and regional routes",
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-09T18:58:04.715Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "de": {
       "canton": "FR",
@@ -381,13 +381,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "16",
-          "note": "Meldungen vom 7. November 2026"
+          "value": "15",
+          "note": "Meldungen vom 9. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "8",
-          "note": "Meldungen vom 7. November 2026"
+          "value": "9",
+          "note": "Meldungen vom 9. November 2026"
         }
       ],
       "dataBlocks": [
@@ -446,13 +446,23 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Système de comptage routier par capteur optique",
+              "date": "2026-11-09T17:07:27.000Z",
+              "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/systeme-de-comptage-routier-par-capteur-optique"
+            },
+            {
+              "label": "Observatoire de la mobilité",
+              "date": "2026-11-09T15:55:21.000Z",
+              "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/observatoire-de-la-mobilite"
+            },
             {
               "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
               "date": "2026-11-06T09:03:15.000Z",
@@ -472,22 +482,18 @@
               "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
               "date": "2026-10-28T13:30:52.000Z",
               "url": "https://www.fr.ch/dime/actualites/mise-en-oeuvre-de-la-strategie-cantonale-de-developpement-durable-2021-2031-etat-davancement-2025"
-            },
-            {
-              "label": "- Inscriptions et horaires de fin d'année -",
-              "date": "2026-10-27T15:41:53.000Z",
-              "url": "https://www.fr.ch/deef/src/actualites/inscriptions-et-horaires-de-fin-dannee-2"
-            },
-            {
-              "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
-              "date": "2026-10-22T14:05:19.000Z",
-              "url": "https://www.fr.ch/dime/actualites/villars-sur-glane-debut-des-travaux-damelioration-du-marquage-et-de-la-signalisation-du-giratoire-de-belle-croix"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Freiburg: Staatsrat lehnt direkte Bahnlinie Freiburg-Bulle ab",
+          "url": "/de/freiburg-artikel/friburg-keine-direktstrecke/",
+          "excerpt": "Freiburg will keine direkte Bahnlinie nach Bulle Das Postulat wurde im Mai 2022 angenommen: 87 Stimmen gegen 3 Das Projekt wird als kostspielig und technisch.",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
         {
           "title": "Freiburg bereitet 24 neue Elektrobusse für Dezember vor",
           "url": "/de/freiburg-artikel/freiburg-24-neue-elektrobusse/",
@@ -499,12 +505,6 @@
           "url": "/de/freiburg-artikel/unfall-matran-freiburg/",
           "excerpt": "Ein Unfall mit vier Fahrzeugen blockierte die Autobahn zwischen Matran und Freiburg für mehr als drei Stunden.",
           "date": "2026-10-27T01:51:04.787Z"
-        },
-        {
-          "title": "Freiburg: Staatsrat lehnt direkte Bahnlinie Freiburg-Bulle ab",
-          "url": "/de/freiburg-artikel/friburg-keine-direktstrecke/",
-          "excerpt": "Freiburg will keine direkte Bahnlinie nach Bulle Das Postulat wurde im Mai 2022 angenommen: 87 Stimmen gegen 3 Das Projekt wird als kostspielig und technisch.",
-          "date": "2026-10-26T15:03:53.947Z"
         },
         {
           "title": "24 neue TPF-Elektrobusse für städtische und regionale Linien",
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-09T18:58:04.715Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,13 +558,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "16",
-          "note": "signalements au 7 novembre 2026"
+          "value": "15",
+          "note": "signalements au 9 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "8",
-          "note": "signalements au 7 novembre 2026"
+          "value": "9",
+          "note": "signalements au 9 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -623,13 +623,23 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Système de comptage routier par capteur optique",
+              "date": "2026-11-09T17:07:27.000Z",
+              "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/systeme-de-comptage-routier-par-capteur-optique"
+            },
+            {
+              "label": "Observatoire de la mobilité",
+              "date": "2026-11-09T15:55:21.000Z",
+              "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/observatoire-de-la-mobilite"
+            },
             {
               "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
               "date": "2026-11-06T09:03:15.000Z",
@@ -649,22 +659,18 @@
               "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
               "date": "2026-10-28T13:30:52.000Z",
               "url": "https://www.fr.ch/dime/actualites/mise-en-oeuvre-de-la-strategie-cantonale-de-developpement-durable-2021-2031-etat-davancement-2025"
-            },
-            {
-              "label": "- Inscriptions et horaires de fin d'année -",
-              "date": "2026-10-27T15:41:53.000Z",
-              "url": "https://www.fr.ch/deef/src/actualites/inscriptions-et-horaires-de-fin-dannee-2"
-            },
-            {
-              "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
-              "date": "2026-10-22T14:05:19.000Z",
-              "url": "https://www.fr.ch/dime/actualites/villars-sur-glane-debut-des-travaux-damelioration-du-marquage-et-de-la-signalisation-du-giratoire-de-belle-croix"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fribourg : le Conseil d’État rejette la ligne ferroviaire directe Fribourg-Bulle",
+          "url": "/fr/articles-fribourg/fribourg-pas-de-liaison-directe/",
+          "excerpt": "Le Conseil d’État du canton de Fribourg ne souhaite pas de ligne ferroviaire directe entre Fribourg et Bulle.",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
         {
           "title": "Fribourg prépare 24 nouveaux bus électriques pour décembre",
           "url": "/fr/articles-fribourg/fribourg-24-nouveaux-bus-electriques/",
@@ -676,12 +682,6 @@
           "url": "/fr/articles-fribourg/accident-matran-fribourg/",
           "excerpt": "Un accident impliquant quatre véhicules a bloqué pendant plus de trois heures l'autoroute entre Matran et Fribourg.",
           "date": "2026-10-27T01:51:04.787Z"
-        },
-        {
-          "title": "Fribourg : le Conseil d’État rejette la ligne ferroviaire directe Fribourg-Bulle",
-          "url": "/fr/articles-fribourg/fribourg-pas-de-liaison-directe/",
-          "excerpt": "Le Conseil d’État du canton de Fribourg ne souhaite pas de ligne ferroviaire directe entre Fribourg et Bulle.",
-          "date": "2026-10-26T15:03:53.947Z"
         },
         {
           "title": "24 nouveaux autobus électriques TPF pour les lignes urbaines et régionales",
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-09T18:58:04.715Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     }
   }
 }

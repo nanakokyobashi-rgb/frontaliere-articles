@@ -4,17 +4,27 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-11-08T22:45:42.198Z",
-  "contentHash": "2ef4e0a028a868b05b1c1a94091ce91914da1e6146f8799b4cccf4708f0fba28",
+  "updatedAt": "2026-11-10T11:58:53.708Z",
+  "contentHash": "1d93a40971945372a3032be4a999c3122c3bc9d77b8a364d5432791fadeb725a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-01T11:17:34.347Z",
+      "updatedAt": "2026-11-08T11:18:20.402Z",
       "keyFacts": 1
     },
     {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-09T22:22:33.694Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-10T02:51:12.262Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -30,6 +40,11 @@
           "value": "577,10 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "10",
+          "note": "offerta mediana 560 CHF"
         }
       ],
       "dataBlocks": [
@@ -56,13 +71,63 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "SG3544",
+              "value": "4150 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6694"
+            },
+            {
+              "label": "SG10664",
+              "value": "1500 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6695"
+            },
+            {
+              "label": "SG333355",
+              "value": "750 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6702"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "8 °C",
+              "detail": "oggi da 8 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Dr. med. Timur Yurttas gewinnt den Clinical Research Grant 2026",
+              "date": "2026-11-09",
+              "url": "https://www.h-och.ch/ueber-uns/news/dr-med-timur-yurttas-gewinnt-den-clinical-research-grant-2026-2026-11-09/"
+            },
             {
               "label": "Regierung verabschiedet Bericht und Antrag zu einem umfassenden Reformpaket für das Gesundheitswesen",
               "date": "2026-11-03",
@@ -87,14 +152,9 @@
               "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
               "date": "2026-10-17",
               "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
-            },
-            {
-              "label": "Innovation für Menschen mit ALS und seltenen neuromuskulären Erkrankungen",
-              "date": "2026-10-16",
-              "url": "https://www.h-och.ch/ueber-uns/news/innovation-fuer-menschen-mit-als-und-seltenen-neuromuskulaeren-erkrankungen-2026-10-16/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -174,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "en": {
       "canton": "SG",
@@ -187,6 +247,11 @@
           "value": "577.10 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "10",
+          "note": "typical bid 560 CHF"
         }
       ],
       "dataBlocks": [
@@ -213,13 +278,63 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "SG3544",
+              "value": "4,150 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6694"
+            },
+            {
+              "label": "SG10664",
+              "value": "1,500 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6695"
+            },
+            {
+              "label": "SG333355",
+              "value": "750 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6702"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "8 °C",
+              "detail": "today from 8 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Dr. med. Timur Yurttas gewinnt den Clinical Research Grant 2026",
+              "date": "2026-11-09",
+              "url": "https://www.h-och.ch/ueber-uns/news/dr-med-timur-yurttas-gewinnt-den-clinical-research-grant-2026-2026-11-09/"
+            },
             {
               "label": "Regierung verabschiedet Bericht und Antrag zu einem umfassenden Reformpaket für das Gesundheitswesen",
               "date": "2026-11-03",
@@ -244,14 +359,9 @@
               "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
               "date": "2026-10-17",
               "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
-            },
-            {
-              "label": "Innovation für Menschen mit ALS und seltenen neuromuskulären Erkrankungen",
-              "date": "2026-10-16",
-              "url": "https://www.h-och.ch/ueber-uns/news/innovation-fuer-menschen-mit-als-und-seltenen-neuromuskulaeren-erkrankungen-2026-10-16/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "de": {
       "canton": "SG",
@@ -340,6 +450,11 @@
           "value": "577.10 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "10",
+          "note": "mittleres Gebot 560 CHF"
         }
       ],
       "dataBlocks": [
@@ -366,13 +481,63 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "SG3544",
+              "value": "4’150 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6694"
+            },
+            {
+              "label": "SG10664",
+              "value": "1’500 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6695"
+            },
+            {
+              "label": "SG333355",
+              "value": "750 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6702"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "8 °C",
+              "detail": "heute 8 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Dr. med. Timur Yurttas gewinnt den Clinical Research Grant 2026",
+              "date": "2026-11-09",
+              "url": "https://www.h-och.ch/ueber-uns/news/dr-med-timur-yurttas-gewinnt-den-clinical-research-grant-2026-2026-11-09/"
+            },
             {
               "label": "Regierung verabschiedet Bericht und Antrag zu einem umfassenden Reformpaket für das Gesundheitswesen",
               "date": "2026-11-03",
@@ -397,14 +562,9 @@
               "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
               "date": "2026-10-17",
               "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
-            },
-            {
-              "label": "Innovation für Menschen mit ALS und seltenen neuromuskulären Erkrankungen",
-              "date": "2026-10-16",
-              "url": "https://www.h-och.ch/ueber-uns/news/innovation-fuer-menschen-mit-als-und-seltenen-neuromuskulaeren-erkrankungen-2026-10-16/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "fr": {
       "canton": "SG",
@@ -493,6 +653,11 @@
           "value": "577,10 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "10",
+          "note": "offre centrale 560 CHF"
         }
       ],
       "dataBlocks": [
@@ -519,13 +684,63 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "SG3544",
+              "value": "4 150 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6694"
+            },
+            {
+              "label": "SG10664",
+              "value": "1 500 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6695"
+            },
+            {
+              "label": "SG333355",
+              "value": "750 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6702"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "8 °C",
+              "detail": "aujourd’hui de 8 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Dr. med. Timur Yurttas gewinnt den Clinical Research Grant 2026",
+              "date": "2026-11-09",
+              "url": "https://www.h-och.ch/ueber-uns/news/dr-med-timur-yurttas-gewinnt-den-clinical-research-grant-2026-2026-11-09/"
+            },
             {
               "label": "Regierung verabschiedet Bericht und Antrag zu einem umfassenden Reformpaket für das Gesundheitswesen",
               "date": "2026-11-03",
@@ -550,14 +765,9 @@
               "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
               "date": "2026-10-17",
               "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
-            },
-            {
-              "label": "Innovation für Menschen mit ALS und seltenen neuromuskulären Erkrankungen",
-              "date": "2026-10-16",
-              "url": "https://www.h-och.ch/ueber-uns/news/innovation-fuer-menschen-mit-als-und-seltenen-neuromuskulaeren-erkrankungen-2026-10-16/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -629,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     }
   }
 }

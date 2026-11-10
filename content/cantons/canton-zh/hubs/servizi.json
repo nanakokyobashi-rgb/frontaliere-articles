@@ -4,22 +4,32 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "482e43df77cc0ae5fecc11b37d3518311ec3d90467270d8def65a92bc43ff5ec",
+  "updatedAt": "2026-11-10T11:58:53.708Z",
+  "contentHash": "70bb752f1ee786935a2f648f85749ab91a8cc04ee66255de6095c1671412b326",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-01T11:17:34.347Z",
+      "updatedAt": "2026-11-08T11:18:20.402Z",
       "keyFacts": 1
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-08T00:17:50.046Z",
+      "updatedAt": "2026-11-10T02:39:23.611Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-09T22:22:33.694Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-10T02:51:12.262Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -35,6 +45,11 @@
           "value": "639,80 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "31",
+          "note": "offerta mediana 660 CHF"
         }
       ],
       "dataBlocks": [
@@ -61,18 +76,13 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Farmacie di turno",
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-08T23:00:00.000Z"
-            },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
@@ -97,17 +107,72 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-14T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-08T00:17:50.046Z"
+          "updatedAt": "2026-11-10T02:39:23.611Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "ZH839",
+              "value": "14.400 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
+            },
+            {
+              "label": "ZH5545",
+              "value": "11.200 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
+            },
+            {
+              "label": "ZH77786",
+              "value": "3020 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "9 °C",
+              "detail": "oggi da 8 a 15 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Männergesundheit: Kleine Schritte, grosse Wirkung",
+              "date": "2026-11-09T16:35:31.000Z",
+              "url": "https://www.usz.ch/maennergesundheit/"
+            },
             {
               "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
               "date": "2026-11-06T13:22:37.000Z",
@@ -132,14 +197,9 @@
               "label": "25 Jahre PET/CT am USZ: Von der Weltneuheit zum medizinischen Standard",
               "date": "2026-11-02T09:00:04.000Z",
               "url": "https://www.usz.ch/25-jahre-pet-ct-am-usz-von-der-weltneuheit-zum-medizinischen-standard/"
-            },
-            {
-              "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
-              "date": "2026-10-30T13:25:55.000Z",
-              "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -162,16 +222,16 @@
           "date": "2026-09-27T20:26:34.846Z"
         },
         {
-          "title": "Permesso di pesca Cantone Zurigo: verifica requisiti e competenza",
-          "url": "/articoli-svizzera/pesca-zurigo-servizi-regolati/",
-          "excerpt": "La pesca è un servizio regolato a livello cantonale; requisiti, scadenze e importi vanno verificati ufficialmente sulla fonte cantonale.",
-          "date": "2026-10-25T16:33:10.314Z"
-        },
-        {
           "title": "Zurigo: guida a targhe e immatricolazione",
           "url": "/articoli-svizzera/zurigo-targhe-immatricolazione-guida/",
           "excerpt": "Procedura per registrazione, documenti e cambio proprietario: verifica requisiti e costi presso l'ufficio della circolazione competente.",
           "date": "2026-10-14T02:15:21.680Z"
+        },
+        {
+          "title": "Permesso di pesca Cantone Zurigo: verifica requisiti e competenza",
+          "url": "/articoli-svizzera/pesca-zurigo-servizi-regolati/",
+          "excerpt": "La pesca è un servizio regolato a livello cantonale; requisiti, scadenze e importi vanno verificati ufficialmente sulla fonte cantonale.",
+          "date": "2026-10-25T16:33:10.314Z"
         },
         {
           "title": "Autorizzazione edilizia Canton Zurigo: requisiti e procedura",
@@ -219,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "en": {
       "canton": "ZH",
@@ -232,6 +292,11 @@
           "value": "639.80 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "31",
+          "note": "typical bid 660 CHF"
         }
       ],
       "dataBlocks": [
@@ -258,18 +323,13 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "On-duty pharmacies",
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-08T23:00:00.000Z"
-            },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
@@ -294,17 +354,72 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-14T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-08T00:17:50.046Z"
+          "updatedAt": "2026-11-10T02:39:23.611Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "ZH839",
+              "value": "14,400 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
+            },
+            {
+              "label": "ZH5545",
+              "value": "11,200 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
+            },
+            {
+              "label": "ZH77786",
+              "value": "3,020 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "9 °C",
+              "detail": "today from 8 to 15 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Männergesundheit: Kleine Schritte, grosse Wirkung",
+              "date": "2026-11-09T16:35:31.000Z",
+              "url": "https://www.usz.ch/maennergesundheit/"
+            },
             {
               "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
               "date": "2026-11-06T13:22:37.000Z",
@@ -329,14 +444,9 @@
               "label": "25 Jahre PET/CT am USZ: Von der Weltneuheit zum medizinischen Standard",
               "date": "2026-11-02T09:00:04.000Z",
               "url": "https://www.usz.ch/25-jahre-pet-ct-am-usz-von-der-weltneuheit-zum-medizinischen-standard/"
-            },
-            {
-              "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
-              "date": "2026-10-30T13:25:55.000Z",
-              "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -359,16 +469,16 @@
           "date": "2026-09-27T20:26:34.846Z"
         },
         {
-          "title": "Zurich Canton fishing permit: check requirements and jurisdiction",
-          "url": "/en/swiss-articles/zurich-fishing-regulated-services/",
-          "excerpt": "Fishing is a service regulated at the cantonal level; requirements, deadlines and amounts must be officially verified with the cantonal source.",
-          "date": "2026-10-25T16:33:10.314Z"
-        },
-        {
           "title": "Zurich: guide to license plates and registration",
           "url": "/en/swiss-articles/zurich-plates-registration-guide/",
           "excerpt": "Procedure for registration, documents, and change of ownership: verify the requirements and costs with the relevant motor vehicle office.",
           "date": "2026-10-14T02:15:21.680Z"
+        },
+        {
+          "title": "Zurich Canton fishing permit: check requirements and jurisdiction",
+          "url": "/en/swiss-articles/zurich-fishing-regulated-services/",
+          "excerpt": "Fishing is a service regulated at the cantonal level; requirements, deadlines and amounts must be officially verified with the cantonal source.",
+          "date": "2026-10-25T16:33:10.314Z"
         },
         {
           "title": "Building permit in the Canton of Zurich: requirements and procedure",
@@ -412,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "de": {
       "canton": "ZH",
@@ -425,6 +535,11 @@
           "value": "639.80 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "31",
+          "note": "mittleres Gebot 660 CHF"
         }
       ],
       "dataBlocks": [
@@ -451,18 +566,13 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Notfallapotheken",
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-08T23:00:00.000Z"
-            },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
@@ -487,17 +597,72 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-14T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-08T00:17:50.046Z"
+          "updatedAt": "2026-11-10T02:39:23.611Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "ZH839",
+              "value": "14’400 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
+            },
+            {
+              "label": "ZH5545",
+              "value": "11’200 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
+            },
+            {
+              "label": "ZH77786",
+              "value": "3’020 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "9 °C",
+              "detail": "heute 8 bis 15 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Männergesundheit: Kleine Schritte, grosse Wirkung",
+              "date": "2026-11-09T16:35:31.000Z",
+              "url": "https://www.usz.ch/maennergesundheit/"
+            },
             {
               "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
               "date": "2026-11-06T13:22:37.000Z",
@@ -522,14 +687,9 @@
               "label": "25 Jahre PET/CT am USZ: Von der Weltneuheit zum medizinischen Standard",
               "date": "2026-11-02T09:00:04.000Z",
               "url": "https://www.usz.ch/25-jahre-pet-ct-am-usz-von-der-weltneuheit-zum-medizinischen-standard/"
-            },
-            {
-              "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
-              "date": "2026-10-30T13:25:55.000Z",
-              "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -552,16 +712,16 @@
           "date": "2026-09-27T20:26:34.846Z"
         },
         {
-          "title": "Fischereibewilligung Zürich: Voraussetzungen prüfen",
-          "url": "/de/schweiz-artikel/fischen-zuerich-regulierte-dienste/",
-          "excerpt": "Die Fischerei ist eine auf kantonaler Ebene geregelte Dienstleistung; Voraussetzungen, Fristen und Beträge sind offiziell anhand der kantonalen Quelle zu überprüfen.",
-          "date": "2026-10-25T16:33:10.314Z"
-        },
-        {
           "title": "Zürich: Leitfaden zu Kontrollschildern und Zulassung",
           "url": "/de/schweiz-artikel/zuerich-kennzeichen-registrierung/",
           "excerpt": "Verfahren für Zulassung, Dokumente und Halterwechsel: Anforderungen und Kosten beim zuständigen Strassenverkehrsamt prüfen.",
           "date": "2026-10-14T02:15:21.680Z"
+        },
+        {
+          "title": "Fischereibewilligung Zürich: Voraussetzungen prüfen",
+          "url": "/de/schweiz-artikel/fischen-zuerich-regulierte-dienste/",
+          "excerpt": "Die Fischerei ist eine auf kantonaler Ebene geregelte Dienstleistung; Voraussetzungen, Fristen und Beträge sind offiziell anhand der kantonalen Quelle zu überprüfen.",
+          "date": "2026-10-25T16:33:10.314Z"
         },
         {
           "title": "Baubewilligung im Kanton Zürich: Anforderungen und Verfahren",
@@ -605,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "fr": {
       "canton": "ZH",
@@ -618,6 +778,11 @@
           "value": "639,80 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "31",
+          "note": "offre centrale 660 CHF"
         }
       ],
       "dataBlocks": [
@@ -644,18 +809,13 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Pharmacies de garde",
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-08T23:00:00.000Z"
-            },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
@@ -680,17 +840,72 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-14T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-08T00:17:50.046Z"
+          "updatedAt": "2026-11-10T02:39:23.611Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "ZH839",
+              "value": "14 400 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
+            },
+            {
+              "label": "ZH5545",
+              "value": "11 200 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
+            },
+            {
+              "label": "ZH77786",
+              "value": "3 020 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "9 °C",
+              "detail": "aujourd’hui de 8 à 15 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Männergesundheit: Kleine Schritte, grosse Wirkung",
+              "date": "2026-11-09T16:35:31.000Z",
+              "url": "https://www.usz.ch/maennergesundheit/"
+            },
             {
               "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
               "date": "2026-11-06T13:22:37.000Z",
@@ -715,14 +930,9 @@
               "label": "25 Jahre PET/CT am USZ: Von der Weltneuheit zum medizinischen Standard",
               "date": "2026-11-02T09:00:04.000Z",
               "url": "https://www.usz.ch/25-jahre-pet-ct-am-usz-von-der-weltneuheit-zum-medizinischen-standard/"
-            },
-            {
-              "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
-              "date": "2026-10-30T13:25:55.000Z",
-              "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -745,16 +955,16 @@
           "date": "2026-09-27T20:26:34.846Z"
         },
         {
-          "title": "Permis de pêche à Zurich : exigences et compétences",
-          "url": "/fr/articles-suisse/pesche-zurich-services-reglementes/",
-          "excerpt": "La pêche est un service réglementé au niveau cantonal ; les exigences, les délais et les montants doivent être vérifiés officiellement auprès de la source cantonale.",
-          "date": "2026-10-25T16:33:10.314Z"
-        },
-        {
           "title": "Zurich : guide des plaques et de l’immatriculation",
           "url": "/fr/articles-suisse/zurich-plaques-immatriculation/",
           "excerpt": "Procédure d’immatriculation, documents et changement de propriétaire : vérifiez les exigences et les coûts auprès de l’office de la circulation compétent.",
           "date": "2026-10-14T02:15:21.680Z"
+        },
+        {
+          "title": "Permis de pêche à Zurich : exigences et compétences",
+          "url": "/fr/articles-suisse/pesche-zurich-services-reglementes/",
+          "excerpt": "La pêche est un service réglementé au niveau cantonal ; les exigences, les délais et les montants doivent être vérifiés officiellement auprès de la source cantonale.",
+          "date": "2026-10-25T16:33:10.314Z"
         },
         {
           "title": "Autorisation de construire dans le canton de Zurich : exigences et procédure",
@@ -794,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     }
   }
 }

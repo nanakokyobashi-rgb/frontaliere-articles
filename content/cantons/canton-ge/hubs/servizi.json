@@ -4,22 +4,27 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "57ce4a4ff1876e5580f9cb083859af54994c1c9bd1ad78191c1f6ab8cae08d2d",
+  "updatedAt": "2026-11-10T11:58:53.708Z",
+  "contentHash": "ae6054c7a41986be89cf24f7c1a6ad1c9da532ef7ef67d589b435eb32a844caf",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-01T11:17:34.347Z",
+      "updatedAt": "2026-11-08T11:18:20.402Z",
       "keyFacts": 1
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-08T00:17:46.532Z",
+      "updatedAt": "2026-11-10T02:39:22.518Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-10T02:51:12.262Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -51,18 +56,13 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Farmacie di turno",
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
-              "date": "2026-11-08T23:00:00.000Z"
-            },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
@@ -87,17 +87,46 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-14T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-08T00:17:46.532Z"
+          "updatedAt": "2026-11-10T02:39:22.518Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "10 °C",
+              "detail": "oggi da 9 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Courrier de promotion de la vaccination des résidents de 65ans et plus",
+              "date": "2026-11-09",
+              "url": "https://www.ge.ch/node/45449"
+            },
+            {
+              "label": "Fin d'année 2026 : prolongation de l'ouverture des cafés, bars et restaurants",
+              "date": "2026-11-09",
+              "url": "https://www.ge.ch/node/45422"
+            },
             {
               "label": "Le chômage dans le canton de Genève en octobre 2026",
               "date": "2026-11-05T13:30:00.000Z",
@@ -117,19 +146,9 @@
               "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
               "date": "2026-11-03",
               "url": "https://www.ge.ch/node/45272"
-            },
-            {
-              "label": "La licence portail santé remplacera les PASS/LAS dès la rentrée 2027",
-              "date": "2026-11-03",
-              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18890"
-            },
-            {
-              "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
-              "date": "2026-11-02",
-              "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "en": {
       "canton": "GE",
@@ -238,18 +257,13 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "On-duty pharmacies",
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
-              "date": "2026-11-08T23:00:00.000Z"
-            },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
@@ -274,17 +288,46 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-14T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-08T00:17:46.532Z"
+          "updatedAt": "2026-11-10T02:39:22.518Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "10 °C",
+              "detail": "today from 9 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Courrier de promotion de la vaccination des résidents de 65ans et plus",
+              "date": "2026-11-09",
+              "url": "https://www.ge.ch/node/45449"
+            },
+            {
+              "label": "Fin d'année 2026 : prolongation de l'ouverture des cafés, bars et restaurants",
+              "date": "2026-11-09",
+              "url": "https://www.ge.ch/node/45422"
+            },
             {
               "label": "Le chômage dans le canton de Genève en octobre 2026",
               "date": "2026-11-05T13:30:00.000Z",
@@ -304,19 +347,9 @@
               "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
               "date": "2026-11-03",
               "url": "https://www.ge.ch/node/45272"
-            },
-            {
-              "label": "La licence portail santé remplacera les PASS/LAS dès la rentrée 2027",
-              "date": "2026-11-03",
-              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18890"
-            },
-            {
-              "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
-              "date": "2026-11-02",
-              "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "de": {
       "canton": "GE",
@@ -420,18 +453,13 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Notfallapotheken",
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
-              "date": "2026-11-08T23:00:00.000Z"
-            },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
@@ -456,17 +484,46 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-14T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-08T00:17:46.532Z"
+          "updatedAt": "2026-11-10T02:39:22.518Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "10 °C",
+              "detail": "heute 9 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Courrier de promotion de la vaccination des résidents de 65ans et plus",
+              "date": "2026-11-09",
+              "url": "https://www.ge.ch/node/45449"
+            },
+            {
+              "label": "Fin d'année 2026 : prolongation de l'ouverture des cafés, bars et restaurants",
+              "date": "2026-11-09",
+              "url": "https://www.ge.ch/node/45422"
+            },
             {
               "label": "Le chômage dans le canton de Genève en octobre 2026",
               "date": "2026-11-05T13:30:00.000Z",
@@ -486,19 +543,9 @@
               "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
               "date": "2026-11-03",
               "url": "https://www.ge.ch/node/45272"
-            },
-            {
-              "label": "La licence portail santé remplacera les PASS/LAS dès la rentrée 2027",
-              "date": "2026-11-03",
-              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18890"
-            },
-            {
-              "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
-              "date": "2026-11-02",
-              "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "fr": {
       "canton": "GE",
@@ -602,18 +649,13 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Pharmacies de garde",
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
-              "date": "2026-11-08T23:00:00.000Z"
-            },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
@@ -638,17 +680,46 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-14T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-08T00:17:46.532Z"
+          "updatedAt": "2026-11-10T02:39:22.518Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "10 °C",
+              "detail": "aujourd’hui de 9 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Courrier de promotion de la vaccination des résidents de 65ans et plus",
+              "date": "2026-11-09",
+              "url": "https://www.ge.ch/node/45449"
+            },
+            {
+              "label": "Fin d'année 2026 : prolongation de l'ouverture des cafés, bars et restaurants",
+              "date": "2026-11-09",
+              "url": "https://www.ge.ch/node/45422"
+            },
             {
               "label": "Le chômage dans le canton de Genève en octobre 2026",
               "date": "2026-11-05T13:30:00.000Z",
@@ -668,19 +739,9 @@
               "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
               "date": "2026-11-03",
               "url": "https://www.ge.ch/node/45272"
-            },
-            {
-              "label": "La licence portail santé remplacera les PASS/LAS dès la rentrée 2027",
-              "date": "2026-11-03",
-              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18890"
-            },
-            {
-              "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
-              "date": "2026-11-02",
-              "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -752,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     }
   }
 }

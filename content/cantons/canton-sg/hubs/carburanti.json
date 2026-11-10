@@ -4,14 +4,14 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "608bdce2151bbcf7a648c2853eee80ec4fb98e8bf93a231125b3bfd3aca151ef",
+  "updatedAt": "2026-11-10T14:00:19.925Z",
+  "contentHash": "7cb191c4bd86a705b9d4ee596dc7848c976915a51488e197ad0a2a40ae3b69fc",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-07T13:30:35.165Z",
+      "updatedAt": "2026-11-09T16:49:34.211Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-14T13:30:35.165Z"
+      "carryUntilAt": "2026-11-16T16:49:34.211Z"
     }
   ],
   "locales": {
@@ -54,35 +54,41 @@
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,156 EUR/l",
-              "detail": "media regionale: minimo 2,149 EUR/l, 3 stazioni rilevate",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2,116 EUR/l",
+              "detail": "media regionale: minimo 2,109 EUR/l, 3 stazioni rilevate",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,436 EUR/l",
-              "detail": "media regionale: minimo 2,429 EUR/l, 3 stazioni rilevate",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2,406 EUR/l",
+              "detail": "media regionale: minimo 2,399 EUR/l, 3 stazioni rilevate",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Benzina 95 — Austria",
-              "value": "1,637 EUR/l",
-              "detail": "media regionale: minimo 1,607 EUR/l, 11 stazioni rilevate",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "1,655 EUR/l",
+              "detail": "media regionale: minimo 1,647 EUR/l, 12 stazioni rilevate",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2,066 EUR/l",
-              "detail": "media regionale: minimo 2,023 EUR/l, 12 stazioni rilevate",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2,090 EUR/l",
+              "detail": "media regionale: minimo 2,082 EUR/l, 10 stazioni rilevate",
+              "date": "2026-11-09T16:49:34.211Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de); E-Control Spritpreisrechner",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-09T16:49:34.211Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Corsa Frauenfeld-Wil: disagi al traffico il 15 novembre 2026",
+          "url": "/articoli-san-gallo/corsa-frauenfeld-wil-2026/",
+          "excerpt": "La corsa collega Frauenfeld e Wil passando per Matzingen, Wängi, Eschlikon e Sirnach; la polizia chiuderà temporaneamente strade specifiche a Wil.",
+          "date": "2026-11-10T13:27:36.197Z"
+        },
         {
           "title": "Voto a Wil domenica 29 novembre 2026 su proposte comunali e federali",
           "url": "/articoli-san-gallo/voto-wil-29-novembre-2026/",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/wil-piano-finanziario-2027-2031/",
           "excerpt": "Il piano finanziario di Wil prevede un aumento del debito netto da 43 a 125 milioni di franchi entro il 2031, nonostante misure di risparmio.",
           "date": "2026-11-06T11:41:24.161Z"
-        },
-        {
-          "title": "Cambiamenti orari bus St.Gallen: interessate Rosenberg, Schuppis e Winkeln",
-          "url": "/articoli-san-gallo/cambiamento-orari-st-gallen/",
-          "excerpt": "Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln.",
-          "date": "2026-11-03T08:22:04.208Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-10T14:00:19.925Z"
     },
     "en": {
       "canton": "SG",
@@ -165,35 +165,41 @@
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.156 EUR/l",
-              "detail": "regional average: lowest 2.149 EUR/l, 3 stations surveyed",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2.116 EUR/l",
+              "detail": "regional average: lowest 2.109 EUR/l, 3 stations surveyed",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.436 EUR/l",
-              "detail": "regional average: lowest 2.429 EUR/l, 3 stations surveyed",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2.406 EUR/l",
+              "detail": "regional average: lowest 2.399 EUR/l, 3 stations surveyed",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Petrol 95 — Austria",
-              "value": "1.637 EUR/l",
-              "detail": "regional average: lowest 1.607 EUR/l, 11 stations surveyed",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "1.655 EUR/l",
+              "detail": "regional average: lowest 1.647 EUR/l, 12 stations surveyed",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2.066 EUR/l",
-              "detail": "regional average: lowest 2.023 EUR/l, 12 stations surveyed",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2.090 EUR/l",
+              "detail": "regional average: lowest 2.082 EUR/l, 10 stations surveyed",
+              "date": "2026-11-09T16:49:34.211Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de); E-Control Spritpreisrechner",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-09T16:49:34.211Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Frauenfeld-Wil race: traffic disruptions on November 15, 2026",
+          "url": "/en/st-gallen-articles/frauenfeld-wil-race-2026/",
+          "excerpt": "The race connects Frauenfeld and Wil via Matzingen, Wängi, Eschlikon and Sirnach; the police will temporarily close specific roads in Wil.",
+          "date": "2026-11-10T13:27:36.197Z"
+        },
         {
           "title": "Voting in Wil on Sunday, November 29, 2026, on municipal and federal proposals",
           "url": "/en/st-gallen-articles/wil-vote-november-29-2026/",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/wil-financial-plan-2027-2031/",
           "excerpt": "Wil's financial plan provides for an increase in net debt from 43 to 125 million francs by 2031, despite savings measures.",
           "date": "2026-11-06T11:41:24.161Z"
-        },
-        {
-          "title": "St.Gallen bus schedule changes: Rosenberg, Schuppis and Winkeln affected",
-          "url": "/en/st-gallen-articles/st-gallen-schedule-changes/",
-          "excerpt": "The project affects Rosenberg, Schuppis, Grossacker and Winkeln.",
-          "date": "2026-11-03T08:22:04.208Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-10T14:00:19.925Z"
     },
     "de": {
       "canton": "SG",
@@ -276,35 +276,41 @@
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.156 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.149 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2.116 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.109 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.436 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.429 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2.406 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.399 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Benzin 95 — Österreich",
-              "value": "1.637 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.607 EUR/l, 11 erfasste Tankstellen",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "1.655 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.647 EUR/l, 12 erfasste Tankstellen",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Diesel — Österreich",
-              "value": "2.066 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.023 EUR/l, 12 erfasste Tankstellen",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2.090 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.082 EUR/l, 10 erfasste Tankstellen",
+              "date": "2026-11-09T16:49:34.211Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de); E-Control Spritpreisrechner",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-09T16:49:34.211Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lauf Frauenfeld-Wil: Verkehrsbehinderungen am 15. November 2026",
+          "url": "/de/st-gallen-artikel/lauf-frauenfeld-wil-2026/",
+          "excerpt": "Der Lauf verbindet Frauenfeld und Wil und führt über Matzingen, Wängi, Eschlikon und Sirnach; die Polizei wird in Wil bestimmte Strassen vorübergehend sperren.",
+          "date": "2026-11-10T13:27:36.197Z"
+        },
         {
           "title": "Abstimmung in Wil am 29.11.: kommunale & eidg. Vorlagen",
           "url": "/de/st-gallen-artikel/wil-wahl-29-november-2026/",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/wil-finanzplan-2027-2031/",
           "excerpt": "Wils Finanzplan sieht eine Erhöhung der Nettoverschuldung von 43 auf 125 Millionen Francs bis 2031 vor, trotz Kostensparmaßnahmen.",
           "date": "2026-11-06T11:41:24.161Z"
-        },
-        {
-          "title": "Busfahrplan in St.Gallen: Änderungen in drei Quartieren",
-          "url": "/de/st-gallen-artikel/st-gallen-fahrplanwechsel/",
-          "excerpt": "Der Entwurf betrifft Rosenberg, Schuppis, Grossacker und Winkeln.",
-          "date": "2026-11-03T08:22:04.208Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-10T14:00:19.925Z"
     },
     "fr": {
       "canton": "SG",
@@ -387,35 +387,41 @@
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,156 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,149 EUR/l, 3 stations relevées",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2,116 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,109 EUR/l, 3 stations relevées",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,436 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,429 EUR/l, 3 stations relevées",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2,406 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,399 EUR/l, 3 stations relevées",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Essence 95 — Autriche",
-              "value": "1,637 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,607 EUR/l, 11 stations relevées",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "1,655 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,647 EUR/l, 12 stations relevées",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Diesel — Autriche",
-              "value": "2,066 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,023 EUR/l, 12 stations relevées",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2,090 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,082 EUR/l, 10 stations relevées",
+              "date": "2026-11-09T16:49:34.211Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de); E-Control Spritpreisrechner",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-09T16:49:34.211Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Course Frauenfeld-Wil : perturbations du trafic le 15 novembre 2026",
+          "url": "/fr/articles-saint-gall/course-frauenfeld-wil-2026/",
+          "excerpt": "La course relie Frauenfeld et Wil en passant par Matzingen, Wängi, Eschlikon et Sirnach ; la police fermera temporairement certaines routes à Wil.",
+          "date": "2026-11-10T13:27:36.197Z"
+        },
         {
           "title": "Vote à Wil le 29 novembre 2026 : communal et fédéral",
           "url": "/fr/articles-saint-gall/vote-wil-29-novembre-2026/",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/wil-plan-financier-2027-2031/",
           "excerpt": "Le plan financier de Wil prévoit une augmentation de la dette nette de 43 à 125 millions de francs d’ici 2031, malgré des mesures d’économie.",
           "date": "2026-11-06T11:41:24.161Z"
-        },
-        {
-          "title": "Horaires bus St.Gallen changés : Rosenberg/Schuppis/Winkeln",
-          "url": "/fr/articles-saint-gall/changements-horaires-st-gallen/",
-          "excerpt": "Le projet concerne Rosenberg, Schuppis, Grossacker et Winkeln.",
-          "date": "2026-11-03T08:22:04.208Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-10T14:00:19.925Z"
     }
   }
 }

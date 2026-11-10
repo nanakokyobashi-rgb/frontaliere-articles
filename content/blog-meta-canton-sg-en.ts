@@ -96,6 +96,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.voto-wil-29-novembre-2026.title': 'Voting in Wil on Sunday, November 29, 2026, on municipal and federal proposals',
     'blog.article.voto-wil-29-novembre-2026.excerpt': 'On Sunday, November 29, 2026, two municipal proposals will be put to a vote in Wil.',
     'blog.article.voto-wil-29-novembre-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.corsa-frauenfeld-wil-2026.title': 'Frauenfeld-Wil race: traffic disruptions on November 15, 2026',
+    'blog.article.corsa-frauenfeld-wil-2026.excerpt': 'The race connects Frauenfeld and Wil via Matzingen, Wängi, Eschlikon and Sirnach; the police will temporarily close specific roads in Wil.',
+    'blog.article.corsa-frauenfeld-wil-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

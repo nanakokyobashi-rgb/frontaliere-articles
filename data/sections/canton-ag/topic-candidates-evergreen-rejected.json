@@ -4,17 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ag::https://www.fricktal.info/news/ueberregionales/arbeitslosenquote-im-kanton-aargau-lag-im-oktober-bei-3-2-prozent.html": {
+    "canton-ag::https://www.fricktal.info/news/gemeinden/rheinfelden/rheinfelden-turnhalle-robersten-vorsorglich-gesperrt.html": {
       "section": "canton-ag",
-      "ts": 1793950997119
-    },
-    "canton-ag::https://www.fricktal.info/news/ueberregionales/pro-velo-aargau-sichere-velowege-sind-kein-luxus-sie-sind-eine-investition-in-die-zukunft.html": {
-      "section": "canton-ag",
-      "ts": 1793963106038
-    },
-    "canton-ag::https://www.fricktal.info/news/gemeinden/moehlin/militaerspiel-der-luftwaffe-in-moehlin-workshop-mit-schuelern-und-konzert-fuer-die-bevoelkerung.html": {
-      "section": "canton-ag",
-      "ts": 1794032257782
+      "ts": 1794264138685
     }
   }
 }

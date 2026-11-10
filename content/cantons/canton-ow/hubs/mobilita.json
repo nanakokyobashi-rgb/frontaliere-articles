@@ -4,17 +4,17 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "mobilita",
-  "updatedAt": "2026-11-09T18:58:04.715Z",
-  "contentHash": "3b0c1459be89c237dfa5e5b8e84d1968204ef6fca6db88589775b07a6cb9b8f8",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "459c5d596227faf17538a373a6b35f46ff433acec49183a1699235dddee124de",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-07T22:20:59.233Z",
+      "updatedAt": "2026-11-09T22:46:21.435Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "5",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
+          "note": "segnalazioni aggiornate: 9 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "2",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
+          "note": "segnalazioni aggiornate: 9 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -86,7 +86,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -109,7 +109,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -143,7 +143,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-09T18:58:04.715Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "OW",
@@ -154,12 +154,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "5",
-          "note": "reports as of 7 November 2026"
+          "note": "reports as of 9 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "2",
-          "note": "reports as of 7 November 2026"
+          "note": "reports as of 9 November 2026"
         }
       ],
       "dataBlocks": [
@@ -212,7 +212,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -235,7 +235,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -269,7 +269,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-09T18:58:04.715Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "OW",
@@ -280,12 +280,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "5",
-          "note": "Meldungen vom 7. November 2026"
+          "note": "Meldungen vom 9. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "2",
-          "note": "Meldungen vom 7. November 2026"
+          "note": "Meldungen vom 9. November 2026"
         }
       ],
       "dataBlocks": [
@@ -338,7 +338,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +361,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -395,7 +395,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-09T18:58:04.715Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "OW",
@@ -406,12 +406,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "5",
-          "note": "signalements au 7 novembre 2026"
+          "note": "signalements au 9 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "2",
-          "note": "signalements au 7 novembre 2026"
+          "note": "signalements au 9 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -464,7 +464,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -521,7 +521,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-09T18:58:04.715Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

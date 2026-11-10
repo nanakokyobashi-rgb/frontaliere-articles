@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "5e2cd7841ce88544acdc1f23b4b4a25ed240484f4256682ed1c8f410adf00d4d",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "de845e63c3055a1a1876e81f78f09eb83507744c2adb055bddd0530fa36edab3",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "26",
+          "value": "25",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,46 +33,40 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Tatort Internet – Was Eltern wissen sollten",
-              "detail": "Bibliothek Zug, Zug",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/tatort-internet-was-eltern-wissen-sollten_AyqX6sn"
-            },
-            {
-              "label": "AEGERI CONCERTS 26: Claire Huangci, Klavier & Felix Klieser, Horn",
-              "detail": "Aegerihalle, Unterägeri",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/unteraegeri/aegeri-concerts-26-claire-huangci-klavier-und-felix-klieser-horn_A9swtDr"
-            },
-            {
-              "label": "CONCERTI AEGERI 26: Aeneas Humm, baritono & Kit Armstrong, pianoforte",
-              "detail": "Unterägeri",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerti-aegeri-26-aeneas-humm-baritono-kit-armstrong-pianoforte-2/"
-            },
-            {
               "label": "Taschenlampenführung durch die Burg",
               "detail": "Zug — in corso, ultimo giorno: 13 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
             },
             {
               "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenführung für Erwachsene",
               "detail": "Museum Burg Zug, Zug — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — in corso, ultimo giorno: 10 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
+            },
+            {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Apart Restaurant Bar",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
             },
             {
               "label": "Brevi visite guidate all'ora di pranzo",
               "detail": "Zugo",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brevi-visite-guidate-allora-di-pranzo/"
+            },
+            {
+              "label": "Chinderhüeti Oberägeri",
+              "detail": "Oberägeri",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/suche/oberaegeri/chinderhueeti-oberaegeri_AwFJAcm"
             },
             {
               "label": "more than music cham.",
@@ -91,11 +85,17 @@
               "detail": "Jugendkulturzentrum Industrie45",
               "date": "2026-11-13",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/benefizkonzert_AreUZ5c"
+            },
+            {
+              "label": "Die Theatergruppe Oberägeri präsentiert \"Mordsfreundin\"",
+              "detail": "Oberägeri",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "ZG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "26",
+          "value": "25",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,46 +138,40 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Tatort Internet-El",
-              "detail": "Bibliothek Zug, Zug",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/tatort-internet-was-eltern-wissen-sollten_AyqX6sn"
-            },
-            {
-              "label": "AEGERI CONCERTS 26: Claire Huangci, Klavier & Feli K",
-              "detail": "Aegerihalle, Unterägeri",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/unteraegeri/aegeri-concerts-26-claire-huangci-klavier-und-felix-klieser-horn_A9swtDr"
-            },
-            {
-              "label": "AEGERI CONCERTS 26: Claire Huangci, Klavier & Felix Klieser, Horn",
-              "detail": "Unterägeri",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerti-aegeri-26-aeneas-humm-baritono-kit-armstrong-pianoforte-2/"
-            },
-            {
               "label": "Taschenlampenführung durch die Burg",
               "detail": "Zug — ongoing, last day: 13 November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
             },
             {
               "label": "Gallows, Wheel, and Pyre: A Flashlight Tour for Adults",
               "detail": "Museum Burg Zug, Zug — ongoing, last day: 27 November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — ongoing, last day: 10 November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
+            },
+            {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Apart Restaurant Bar",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
             },
             {
               "label": "Short guided tours over lunchtime",
               "detail": "Zugo",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brevi-visite-guidate-allora-di-pranzo/"
+            },
+            {
+              "label": "Chinderh Ob",
+              "detail": "Oberägeri",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/suche/oberaegeri/chinderhueeti-oberaegeri_AwFJAcm"
             },
             {
               "label": "more than music cham.",
@@ -196,11 +190,17 @@
               "detail": "Jugendkulturzentrum Industrie45",
               "date": "2026-11-13",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/benefizkonzert_AreUZ5c"
+            },
+            {
+              "label": "The Theater Group Oberägeri presents \"Mordsfreundin\"",
+              "detail": "Oberägeri",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "ZG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "26",
+          "value": "25",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,46 +243,40 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Tatort Internet-Enjoyas Eltern enjoyissens sollen",
-              "detail": "Bibliothek Zug, Zug",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/tatort-internet-was-eltern-wissen-sollten_AyqX6sn"
-            },
-            {
-              "label": "AEGERI-KONZERTE 26: Claire Huangci, Klavier & Felix Klieser, Horn",
-              "detail": "Aegerihalle, Unterägeri",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/unteraegeri/aegeri-concerts-26-claire-huangci-klavier-und-felix-klieser-horn_A9swtDr"
-            },
-            {
-              "label": "AEGERI CONCERTS 26: Claire Huangci, Klavier & Felix Klieser, Horn",
-              "detail": "Unterägeri",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerti-aegeri-26-aeneas-humm-baritono-kit-armstrong-pianoforte-2/"
-            },
-            {
               "label": "Taschenlampenführung durch die Burg",
               "detail": "Zug — läuft, letzter Tag: 13. November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
             },
             {
               "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenf Acrymmhrung f acrymmr er Acrymmachsene",
               "detail": "Museum Burg Zug, Zug — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — läuft, letzter Tag: 10. November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
+            },
+            {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Apart Restaurant Bar",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
             },
             {
               "label": "Kurzführungen über Mittag",
               "detail": "Zugo",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brevi-visite-guidate-allora-di-pranzo/"
+            },
+            {
+              "label": "Chinderh ⑤eti Ober ⑤geri",
+              "detail": "Oberägeri",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/suche/oberaegeri/chinderhueeti-oberaegeri_AwFJAcm"
             },
             {
               "label": "more than music cham.",
@@ -301,11 +295,17 @@
               "detail": "Jugendkulturzentrum Industrie45",
               "date": "2026-11-13",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/benefizkonzert_AreUZ5c"
+            },
+            {
+              "label": "Die Theatergruppe Oberägeri präsentiert „Mordsfreundin“",
+              "detail": "Oberägeri",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "ZG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "26",
+          "value": "25",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,46 +348,40 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Tatort Internet – Eltern wissen sollten",
-              "detail": "Bibliothek Zug, Zug",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/tatort-internet-was-eltern-wissen-sollten_AyqX6sn"
-            },
-            {
-              "label": "AEGERI CONCERTS 26 : Claire Huangci, Klavier & Felix Klieser, Horn",
-              "detail": "Aegerihalle, Unterägeri",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/unteraegeri/aegeri-concerts-26-claire-huangci-klavier-und-felix-klieser-horn_A9swtDr"
-            },
-            {
-              "label": "AEGERI CONCERTS 26 : Soirée de lied Aeneas Humm, baryton & Kit Armstrong, piano",
-              "detail": "Unterägeri",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerti-aegeri-26-aeneas-humm-baritono-kit-armstrong-pianoforte-2/"
-            },
-            {
               "label": "Taschenlampenführung durch die Burg",
               "detail": "Zug — en cours, dernier jour : 13 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
             },
             {
               "label": "La potence, la roue et le bûcher. La visite guidée à la lampe de poche pour adultes",
               "detail": "Museum Burg Zug, Zug — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — en cours, dernier jour : 10 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
+            },
+            {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Apart Restaurant Bar",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
             },
             {
               "label": "Courtes visites guidées à midi",
               "detail": "Zugo",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brevi-visite-guidate-allora-di-pranzo/"
+            },
+            {
+              "label": "Chinderh Ob",
+              "detail": "Oberägeri",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/suche/oberaegeri/chinderhueeti-oberaegeri_AwFJAcm"
             },
             {
               "label": "more than music cham.",
@@ -406,11 +400,17 @@
               "detail": "Jugendkulturzentrum Industrie45",
               "date": "2026-11-13",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/benefizkonzert_AreUZ5c"
+            },
+            {
+              "label": "Die Theatergruppe Oberägeri präsentiert « Mordsfreundin »",
+              "detail": "Oberägeri",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

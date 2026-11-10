@@ -4234,18 +4234,18 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest 5a23d59e… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
+      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest 39195beb… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
       "baseline": {
-        "site": "c49cac833ce03cd5",
-        "corpus": "79cc05d04ccbf64b",
+        "site": "141382885e28264f",
+        "corpus": "6c61c6bf12afc98a",
         "alignedAt": "2026-11-09",
-        "forcedAt": "2026-11-09T22:36:55.000Z"
+        "forcedAt": "2026-11-09T11:05:27.842Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 23,
-        "sha256": "5a23d59ecb51aa33bf372488a38a62f70b32811b6a183be52f5778bdacea7419"
+        "sha256": "39195bebcb8726c4b10d2acc89fed9ae5c0b3858f5cd68fe04ce86d5b2971052"
       }
     },
     {
@@ -4462,8 +4462,8 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
       "baseline": {
-        "site": "990ea5240fda0de7",
-        "corpus": "990ea5240fda0de7",
+        "site": "cace919981b8a649",
+        "corpus": "cace919981b8a649",
         "alignedAt": "2026-11-09"
       }
     },
@@ -5078,9 +5078,9 @@
       "mode": "identical",
       "reason": "La baseline registra lo stesso digest SHA-256 raw sui due lati; `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "92b6778ac4c5eb4e",
-        "corpus": "92b6778ac4c5eb4e",
-        "alignedAt": "2026-11-09"
+        "site": "71a557c1ff607c26",
+        "corpus": "71a557c1ff607c26",
+        "alignedAt": "2026-11-10"
       }
     },
     {
@@ -6018,9 +6018,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-24.yml",
       "mode": "identical",
       "baseline": {
-        "site": "12f195fb58299f17",
-        "corpus": "12f195fb58299f17",
-        "alignedAt": "2026-11-08"
+        "site": "b21f6b92990b4310",
+        "corpus": "b21f6b92990b4310",
+        "alignedAt": "2026-11-10"
       }
     },
     {
@@ -6937,32 +6937,32 @@
       "sitePath": ".github/corpus-workflows/crawler-group-25.yml",
       "mode": "identical",
       "baseline": {
-        "site": "23208cabe2b0add1",
-        "corpus": "23208cabe2b0add1",
-        "alignedAt": "2026-11-06"
+        "site": "41aa5dd305de20a6",
+        "corpus": "41aa5dd305de20a6",
+        "alignedAt": "2026-11-10"
       }
     },
     {
       "path": "host/third-party-shell-assets-fingerprint.json",
       "sitePath": "tests/third-party-shell-assets-fingerprint.json",
-      "mode": "identical",
-      "reason": "Fingerprint byte-exact dei producer site-support, AdSense, Partnerize, Meta Pixel e helper canonici; lega gli snapshot trasportati ai byte sorgente e ne verifica l’insieme prima della pubblicazione.",
+      "mode": "adapted",
+      "reason": "adattato al bundle host: il fingerprint byte-exact di site-support, AdSense, Partnerize, Meta Pixel e helper canonici viaggia insieme allo snapshot adattato host/third-party-shell-assets.json e alle versioni asset in host/constants.ts. Non trasportarlo da solo; verificare host/tests/host-shell-assets.test.mjs prima della pubblicazione.",
       "baseline": {
-        "site": "188be1aa098de2b5",
-        "corpus": "188be1aa098de2b5",
+        "site": "dc236b7de7fa65f7",
+        "corpus": "dc236b7de7fa65f7",
         "alignedAt": "2026-11-09"
-      }
+      },
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3078"
     },
     {
       "path": "host/third-party-shell-assets.json",
       "sitePath": "scripts/ci/export-third-party-shell-assets.ts",
       "mode": "adapted",
-      "reason": "Snapshot byte-exact di site-support, AdSense, Partnerize, Meta Pixel e guardia inline canonica, generato dall’exporter del sito. hostShellFiles verifica nomi e SHA senza import fra repository; i fingerprint identici e quello scalare del contratto bloccano la pubblicazione se gli asset divergono.",
+      "reason": "Snapshot byte-exact di site-support, AdSense, Partnerize, Meta Pixel e guardia inline canonica, generato dall'exporter del sito. hostShellFiles verifica nomi e SHA senza import fra repository; sincronizzarlo nella stessa PR di host/third-party-shell-assets-fingerprint.json e host/constants.ts per conservare i byte e i nomi content-addressed che la pubblicazione usa.",
       "baseline": {
         "site": "56aaef2cbbea74f8",
-        "corpus": "a415e5b8db784ce2",
-        "alignedAt": "2026-11-09",
-        "forcedAt": "2026-11-09T22:25:02.000Z"
+        "corpus": "3876c4b713add420",
+        "alignedAt": "2026-11-05"
       }
     },
     {

@@ -128,5 +128,15 @@
     "articleId": "ulmann-incarico-appenzello",
     "ts": "2026-11-03T15:45:25.424Z",
     "keyForm": 2
+  },
+  "https://appenzell24.ch/news/arbeitsgruppe-hitzeschutz-kuemmert-sich-um-schule": {
+    "articleId": "consiglio-gruppo-caldo-scuola",
+    "ts": "2026-11-10T02:51:13.564Z",
+    "keyForm": 2
+  },
+  "https://appenzell24.ch/news/gewerbeverband-empfiehlt-beide-neu-kandidierenden": {
+    "articleId": "governo-appenzello-candidati",
+    "ts": "2026-11-10T11:50:35.449Z",
+    "keyForm": 2
   }
 }

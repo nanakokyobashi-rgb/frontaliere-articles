@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "0d7395658acbf538eccfd0dfa069c0067a28ec33a6bc1bd6dffd167c7a495876",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "1a446774eab51dd1314d792a50fd58b62cdfd0853cd078baf59a8b1a209300ec",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "330",
+          "value": "351",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Precious Metals Summit Zurich",
-              "detail": "Park Hyatt Zürich Hotel, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/precious-metals-summit-zurich_AacKXSx"
+              "label": "Family Office Forum 2026",
+              "detail": "The Dolder Grand",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/family-office-forum-2026_AD6Kq4y"
             },
             {
-              "label": "CCCZ Oncology Symposium: Prostate Cancer",
-              "detail": "Universitätsspital Zürich, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/cccz-oncology-symposium-prostate-cancer_AM1ssPg"
+              "label": "Family Office Forum 2026",
+              "detail": "The Dolder Grand, Zürich",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/family-office-forum-2026/"
             },
             {
-              "label": "René Suter – Züritüütschi Mundartsongs für Gitarrä und Stimm",
-              "detail": "Theater Stok",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/rene-suter-zueritueuetschi-mundartsongs-fuer-gitarrae-und-stimm_An6NgUr"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Neue Reformierte Kirche, Urdorf",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-26/"
             },
             {
-              "label": "Mythos: Ragnarök",
-              "detail": "Volkshaus Zürich, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mythos-ragnaroek/"
+              "label": "Mütter- und Väterberatung",
+              "detail": "Schule Watt",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/muetter-und-vaeterberatung_AfJpPRV"
             },
             {
-              "label": "ABGESAGT: Bonnie Tyler - Jubilee - 2026",
-              "detail": "THE HALL, Dübendorf",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duebendorf/bonnie-tyler-jubilee-2026_AcFhRMt"
+              "label": "Generation Gold - Gespräche mit Herz",
+              "detail": "Restaurant Sale e Pepe, Kloten",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/generation-gold-gespraeche-mit-herz_ADhM88Z"
             },
             {
-              "label": "Der fliegende Teppich: Hawaii",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-fliegende-teppich-hawaii/"
+              "label": "Kafi-Treff für alle",
+              "detail": "Fällanden",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/faellanden/kafi-treff-fuer-alle_ABwnAMA"
             },
             {
-              "label": "Joe Jackson & Band",
-              "detail": "Kaufleuten",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/joe-jackson-und-band_ALcY4i7"
+              "label": "Mütter- und Väterberatung",
+              "detail": "kjz Pfäffikon, Pfäffikon",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_AC6VvGB"
             },
             {
-              "label": "Santiago Cruz - Sigo En Pie Tour 2026",
-              "detail": "Plaza Klub",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/santiago-cruz-sigo-en-pie-tour-2026_AC3fLSa"
+              "label": "TEREKTY - An Expedition into the Value of Glaciers",
+              "detail": "Kloten",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/terekty-an-expedition-into-the-value-of-glaciers/"
             },
             {
-              "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-1/"
+              "label": "The Importance of Being Earnest",
+              "detail": "Stadtgarten, Winterthur",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-importance-of-being-earnest/"
             },
             {
-              "label": "Turner-Chränzli TV Ried",
-              "detail": "Gibswil, Wald (ZH) — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turner-chraenzli-tv-ried/"
+              "label": "Treffpunkt Deutsch",
+              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/treffpunkt-deutsch_AmQhhh3"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "330",
+          "value": "351",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Precious Metals Summit Zurich",
-              "detail": "Park Hyatt Zürich Hotel, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/precious-metals-summit-zurich_AacKXSx"
+              "label": "Family Office Forum 2026",
+              "detail": "The Dolder Grand",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/family-office-forum-2026_AD6Kq4y"
             },
             {
-              "label": "CCCZ Oncology Symposium: Prostate Cancer",
-              "detail": "Universitätsspital Zürich, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/cccz-oncology-symposium-prostate-cancer_AM1ssPg"
+              "label": "Family Office Forum 2026",
+              "detail": "The Dolder Grand, Zürich",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/family-office-forum-2026/"
             },
             {
-              "label": "René Suter – Züritüütschi Mundartsongs für Gitarrä und Stimm",
-              "detail": "Theater Stok",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/rene-suter-zueritueuetschi-mundartsongs-fuer-gitarrae-und-stimm_An6NgUr"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Neue Reformierte Kirche, Urdorf",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-26/"
             },
             {
-              "label": "Mythos: Ragnarök",
-              "detail": "Volkshaus Zürich, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mythos-ragnaroek/"
+              "label": "Mütter- und Väterberatung",
+              "detail": "Schule Watt",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/muetter-und-vaeterberatung_AfJpPRV"
             },
             {
-              "label": "ABGESAGT: Bonnie Tyler - Jubilee - 2026",
-              "detail": "THE HALL, Dübendorf",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duebendorf/bonnie-tyler-jubilee-2026_AcFhRMt"
+              "label": "Generation Gold - Gespräche mit Herz",
+              "detail": "Restaurant Sale e Pepe, Kloten",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/generation-gold-gespraeche-mit-herz_ADhM88Z"
             },
             {
-              "label": "Der fliegende Teppich: Hawaii",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-fliegende-teppich-hawaii/"
+              "label": "Kafi-Treff für alle",
+              "detail": "Fällanden",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/faellanden/kafi-treff-fuer-alle_ABwnAMA"
             },
             {
-              "label": "Joe Jackson & Band",
-              "detail": "Kaufleuten",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/joe-jackson-und-band_ALcY4i7"
+              "label": "Mütter- und Väterberatung",
+              "detail": "kjz Pfäffikon, Pfäffikon",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_AC6VvGB"
             },
             {
-              "label": "Santiago Cruz - Sigo En Pie Tour 2026",
-              "detail": "Plaza Klub",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/santiago-cruz-sigo-en-pie-tour-2026_AC3fLSa"
+              "label": "TEREKTY - An Expedition into the Value of Glaciers",
+              "detail": "Kloten",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/terekty-an-expedition-into-the-value-of-glaciers/"
             },
             {
-              "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-1/"
+              "label": "The Importance of Being Earnest",
+              "detail": "Stadtgarten, Winterthur",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-importance-of-being-earnest/"
             },
             {
-              "label": "Turner-Chr TV",
-              "detail": "Gibswil, Wald (ZH) — ongoing, last day: 14 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turner-chraenzli-tv-ried/"
+              "label": "Treffpunkt Deutsch",
+              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/treffpunkt-deutsch_AmQhhh3"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "330",
+          "value": "351",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Precious Metals Summit Zurich",
-              "detail": "Park Hyatt Zürich Hotel, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/precious-metals-summit-zurich_AacKXSx"
+              "label": "Family Office Forum 2026",
+              "detail": "The Dolder Grand",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/family-office-forum-2026_AD6Kq4y"
             },
             {
-              "label": "CCCZ Oncology Symposium: Prostate Cancer",
-              "detail": "Universitätsspital Zürich, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/cccz-oncology-symposium-prostate-cancer_AM1ssPg"
+              "label": "Family Office Forum 2026",
+              "detail": "The Dolder Grand, Zürich",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/family-office-forum-2026/"
             },
             {
-              "label": "René Suter – Züritüütschi Mundartsongs für Gitarrä und Stimm",
-              "detail": "Theater Stok",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/rene-suter-zueritueuetschi-mundartsongs-fuer-gitarrae-und-stimm_An6NgUr"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Neue Reformierte Kirche, Urdorf",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-26/"
             },
             {
-              "label": "Mythos: Ragnarök",
-              "detail": "Volkshaus Zürich, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mythos-ragnaroek/"
+              "label": "Mütter- und Väterberatung",
+              "detail": "Schule Watt",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/muetter-und-vaeterberatung_AfJpPRV"
             },
             {
-              "label": "ABGESAGT: Bonnie Tyler - Jubilee - 2026",
-              "detail": "THE HALL, Dübendorf",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duebendorf/bonnie-tyler-jubilee-2026_AcFhRMt"
+              "label": "Generation Gold - Gespräche mit Herz",
+              "detail": "Restaurant Sale e Pepe, Kloten",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/generation-gold-gespraeche-mit-herz_ADhM88Z"
             },
             {
-              "label": "Der fliegende Teppich: Hawaii",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-fliegende-teppich-hawaii/"
+              "label": "Kafi-Treff für alle",
+              "detail": "Fällanden",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/faellanden/kafi-treff-fuer-alle_ABwnAMA"
             },
             {
-              "label": "Joe Jackson & Band",
-              "detail": "Kaufleuten",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/joe-jackson-und-band_ALcY4i7"
+              "label": "Mütter- und Väterberatung",
+              "detail": "kjz Pfäffikon, Pfäffikon",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_AC6VvGB"
             },
             {
-              "label": "Santiago Cruz - Sigo En Pie Tour 2026",
-              "detail": "Plaza Klub",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/santiago-cruz-sigo-en-pie-tour-2026_AC3fLSa"
+              "label": "TEREKTY - An Expedition into the Value of Glaciers",
+              "detail": "Kloten",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/terekty-an-expedition-into-the-value-of-glaciers/"
             },
             {
-              "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-1/"
+              "label": "The Importance of Being Earnest",
+              "detail": "Stadtgarten, Winterthur",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-importance-of-being-earnest/"
             },
             {
-              "label": "Turner-Chr ①nzli TV Ried",
-              "detail": "Gibswil, Wald (ZH) — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turner-chraenzli-tv-ried/"
+              "label": "Treffpunkt Deutsch",
+              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/treffpunkt-deutsch_AmQhhh3"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "330",
+          "value": "351",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Precious Metals Summit Zurich",
-              "detail": "Park Hyatt Zürich Hotel, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/precious-metals-summit-zurich_AacKXSx"
+              "label": "Family Office Forum 2026",
+              "detail": "The Dolder Grand",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/family-office-forum-2026_AD6Kq4y"
             },
             {
-              "label": "CCCZ Oncology Symposium: Prostate Cancer",
-              "detail": "Universitätsspital Zürich, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/cccz-oncology-symposium-prostate-cancer_AM1ssPg"
+              "label": "Family Office Forum 2026",
+              "detail": "The Dolder Grand, Zürich",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/family-office-forum-2026/"
             },
             {
-              "label": "René Suter – Züritüütschi Mundartsongs für Gitarrä und Stimm",
-              "detail": "Theater Stok",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/rene-suter-zueritueuetschi-mundartsongs-fuer-gitarrae-und-stimm_An6NgUr"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Neue Reformierte Kirche, Urdorf",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-26/"
             },
             {
-              "label": "Mythos: Ragnarök",
-              "detail": "Volkshaus Zürich, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mythos-ragnaroek/"
+              "label": "Mütter- und Väterberatung",
+              "detail": "Schule Watt",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/muetter-und-vaeterberatung_AfJpPRV"
             },
             {
-              "label": "ABGESAGT: Bonnie Tyler - Jubilee - 2026",
-              "detail": "THE HALL, Dübendorf",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duebendorf/bonnie-tyler-jubilee-2026_AcFhRMt"
+              "label": "Generation Gold - Gespräche mit Herz",
+              "detail": "Restaurant Sale e Pepe, Kloten",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/generation-gold-gespraeche-mit-herz_ADhM88Z"
             },
             {
-              "label": "Der fliegende Teppich: Hawaii",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-fliegende-teppich-hawaii/"
+              "label": "Kafi-Treff für alle",
+              "detail": "Fällanden",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/faellanden/kafi-treff-fuer-alle_ABwnAMA"
             },
             {
-              "label": "Joe Jackson & Band",
-              "detail": "Kaufleuten",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/joe-jackson-und-band_ALcY4i7"
+              "label": "Mütter- und Väterberatung",
+              "detail": "kjz Pfäffikon, Pfäffikon",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_AC6VvGB"
             },
             {
-              "label": "Santiago Cruz - Sigo En Pie Tour 2026",
-              "detail": "Plaza Klub",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/santiago-cruz-sigo-en-pie-tour-2026_AC3fLSa"
+              "label": "TEREKTY - An Expedition into the Value of Glaciers",
+              "detail": "Kloten",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/terekty-an-expedition-into-the-value-of-glaciers/"
             },
             {
-              "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-1/"
+              "label": "The Importance of Being Earnest",
+              "detail": "Stadtgarten, Winterthur",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-importance-of-being-earnest/"
             },
             {
-              "label": "Tourneur-Chr TV",
-              "detail": "Gibswil, Wald (ZH) — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turner-chraenzli-tv-ried/"
+              "label": "Treffpunkt Deutsch",
+              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/treffpunkt-deutsch_AmQhhh3"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

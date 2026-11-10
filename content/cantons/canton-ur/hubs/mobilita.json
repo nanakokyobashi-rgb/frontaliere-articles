@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-09T18:58:04.715Z",
-  "contentHash": "03293ccc17a3e611feabdc0f43cf04973d7831d42f76cb119e38e0cf946c77c2",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "4e8c31c07ac862fa071a82691a3ce3f007bc0fda92d99ef10397740839452840",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-07T22:20:59.233Z",
+      "updatedAt": "2026-11-09T22:46:21.435Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "2",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
+          "value": "1",
+          "note": "segnalazioni aggiornate: 9 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "11",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
+          "note": "segnalazioni aggiornate: 9 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -46,12 +46,6 @@
               "label": "A4 Altdorf <-> Brunnen tra Luogo Flüelen E Luogo Sisikon Situazione: chiusa Causa: per problemi tecnici",
               "value": "Chiusura",
               "date": "2026-09-09T07:08:00.000Z"
-            },
-            {
-              "label": "A4 Altdorf <-> Brunnen Galleria Galleria Flüelen Situazione: tunnel chiuso cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 10 novembre 2026",
-              "date": "2026-09-22T09:19:00.000Z"
             },
             {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
@@ -88,10 +82,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 12 novembre 2026",
               "date": "2026-10-27T13:00:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Luzern tra Area di servizio S. Gottardo E Raccordo autostradale Diramazione Altdorf Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del traffico: corsie…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 17 novembre 2026",
+              "date": "2026-10-27T13:01:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.ur.ch/_rte/information/138850"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -193,7 +193,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-09T18:58:04.715Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "UR",
@@ -203,13 +203,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "2",
-          "note": "reports as of 7 November 2026"
+          "value": "1",
+          "note": "reports as of 9 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "11",
-          "note": "reports as of 7 November 2026"
+          "note": "reports as of 9 November 2026"
         }
       ],
       "dataBlocks": [
@@ -222,12 +222,6 @@
               "label": "A4 Altdorf <-> Brunnen tra Luogo Flüelen E Luogo Sisikon Situazione: chiusa Causa: per problemi tecnici",
               "value": "Closure",
               "date": "2026-09-09T07:08:00.000Z"
-            },
-            {
-              "label": "A4 Altdorf <-> Brunnen Galleria Galleria Flüelen Situazione: tunnel chiuso cantiere",
-              "value": "Closure",
-              "detail": "until 10 November 2026",
-              "date": "2026-09-22T09:19:00.000Z"
             },
             {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
@@ -264,10 +258,16 @@
               "value": "Roadworks",
               "detail": "until 12 November 2026",
               "date": "2026-10-27T13:00:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Luzern tra Area di servizio S. Gottardo E Raccordo autostradale Diramazione Altdorf Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del traffico: corsie…",
+              "value": "Roadworks",
+              "detail": "until 17 November 2026",
+              "date": "2026-10-27T13:01:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -305,7 +305,7 @@
               "url": "https://www.ur.ch/_rte/information/138850"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -369,7 +369,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-09T18:58:04.715Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "UR",
@@ -379,13 +379,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "2",
-          "note": "Meldungen vom 7. November 2026"
+          "value": "1",
+          "note": "Meldungen vom 9. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "11",
-          "note": "Meldungen vom 7. November 2026"
+          "note": "Meldungen vom 9. November 2026"
         }
       ],
       "dataBlocks": [
@@ -398,12 +398,6 @@
               "label": "A4 Altdorf <-> Brunnen zwischen Ortschaft Flüelen und Ortschaft Sisikon Sachlage: Strecke gesperrt Ursache: Technische Probleme",
               "value": "Sperrung",
               "date": "2026-09-09T07:08:00.000Z"
-            },
-            {
-              "label": "A4 Altdorf <-> Brunnen Tunnel Flüelen-Tunnel Sachlage: Tunnel gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 10. November 2026",
-              "date": "2026-09-22T09:19:00.000Z"
             },
             {
               "label": "H2 Airolo <-> Göschenen zwischen Ortschaft Andermatt und Ortschaft Hospental Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
@@ -440,10 +434,16 @@
               "value": "Baustelle",
               "detail": "bis 12. November 2026",
               "date": "2026-10-27T13:00:00.000Z"
+            },
+            {
+              "label": "A2 Gotthard -> Luzern zwischen Raststätte Gotthard und Autobahndreieck Verzweigung Altdorf Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.15 Verkehrsführung: Fahrbahnverengung auf einen…",
+              "value": "Baustelle",
+              "detail": "bis 17. November 2026",
+              "date": "2026-10-27T13:01:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -481,7 +481,7 @@
               "url": "https://www.ur.ch/_rte/information/138850"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -545,7 +545,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-09T18:58:04.715Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "UR",
@@ -555,13 +555,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "2",
-          "note": "signalements au 7 novembre 2026"
+          "value": "1",
+          "note": "signalements au 9 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "11",
-          "note": "signalements au 7 novembre 2026"
+          "note": "signalements au 9 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -574,12 +574,6 @@
               "label": "A4 Altdorf <-> Brunnen entre Localité Flüelen et Localité Sisikon Situation: fermé Raison: en raison de problèmes techniques",
               "value": "Fermeture",
               "date": "2026-09-09T07:08:00.000Z"
-            },
-            {
-              "label": "A4 Altdorf <-> Brunnen Tunnel Tunnel de Flüelen Situation: tunnel fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 10 novembre 2026",
-              "date": "2026-09-22T09:19:00.000Z"
             },
             {
               "label": "H2 Airolo <-> Göschenen entre Localité Andermatt et Localité Hospental Situation: trafic perturbé travaux, longueur [km] 0.5 Complément 1: limitation temporaire de largeur largeur de la voie [m] 4.0…",
@@ -616,10 +610,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 12 novembre 2026",
               "date": "2026-10-27T13:00:00.000Z"
+            },
+            {
+              "label": "A2 St-Gothard -> Lucerne entre Aire de service St-Gothard et Echangeur Echangeur d'Altdorf Situation: trafic perturbé travaux, longueur [km] 0.15 Gestion du trafic: rétrécissement des voies sur une…",
+              "value": "Chantier",
+              "detail": "jusqu’au 17 novembre 2026",
+              "date": "2026-10-27T13:01:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -657,7 +657,7 @@
               "url": "https://www.ur.ch/_rte/information/138850"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -721,7 +721,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-09T18:58:04.715Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

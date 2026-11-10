@@ -84,6 +84,12 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.ulmann-incarico-appenzello.title': 'Appenzello, manuel ulmann assunto al bezirksbauamt',
     'blog.article.ulmann-incarico-appenzello.excerpt': 'Il Consiglio distrettuale di Appenzell ha assunto Manuel Ulmann al 100 per cento: inizierà al Bezirksbauamt all\'inizio di febbraio.',
     'blog.article.ulmann-incarico-appenzello.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.consiglio-gruppo-caldo-scuola.title': 'Consiglio comunale istituisce gruppo per il caldo a scuola',
+    'blog.article.consiglio-gruppo-caldo-scuola.excerpt': 'Il Consiglio comunale ha istituito la Arbeitsgruppe «Hitzeschutz und Begrünung»: aule e spazi esterni, con misure rapide per la protezione dal sole.',
+    'blog.article.consiglio-gruppo-caldo-scuola.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.governo-appenzello-candidati.title': 'Gewerbeverband raccomanda Jung e Ruprecht nel 2027',
+    'blog.article.governo-appenzello-candidati.excerpt': 'Il Gewerbeverband raccomanda Karin Jung (FDP) e Balz Ruprecht (EVP) per il seggio lasciato libero alle elezioni di fine febbraio 2027.',
+    'blog.article.governo-appenzello-candidati.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "25f92c6c1165a90363dcb5788462bf1adda90227d7f740e1f246b9f54fa8f9f4",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "f114df6ee69c9a3578f474da8e02592b287a0b838047387a6a5162ef900a8134",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "188",
+          "value": "201",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "detail": "Kandersteg",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+            },
+            {
+              "label": "Buch am Mittag - Open Science",
+              "detail": "Universitätsbibliothek Bern, Bern",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/buch-am-mittag-open-science/"
+            },
+            {
+              "label": "Führung: KP Heinrich",
+              "detail": "Festungswerk Hondrich - KP Heinrich",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/hondrich/fuehrung-kp-heinrich_A4ajEum"
+            },
+            {
+              "label": "Jahresvorspiel Musik Oberaargau",
+              "detail": "Stadttheater Langenthal, Langenthal",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/jahresvorspiel-musik-oberaargau_A8wVR9g"
+            },
+            {
+              "label": "Ciné-Doc : Nicole Nicole",
+              "detail": "Cinématographe-Royal, Tavannes",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cine-doc-nicole-nicole-1/"
+            },
+            {
+              "label": "KIRK FLETCHER RHYTHM & BLUES",
+              "detail": "Marians Jazzroom",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kirk-fletcher-rhythm-und-blues_AGPb18Z"
+            },
+            {
+              "label": "Supersuckers",
+              "detail": "OldCapitol, Langenthal",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/supersuckers_AvNaHdE"
+            },
+            {
+              "label": "VIVALDI - Die vier Jahreszeiten",
+              "detail": "Volkshaus - Maison du Peuple",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/biel-bienne/vivaldi-die-vier-jahreszeiten_AHQSbrP"
+            },
+            {
               "label": "moving moments",
               "detail": "Sporthalle Ebnit, Saanen — in corso, ultimo giorno: 29 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
               "label": "Lake Thun Play Ship",
               "detail": "Thunersee, Thun — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
-            },
-            {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
-            },
-            {
-              "label": "La torre magica",
-              "detail": "Thun — in corso, ultimo giorno: 26 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/der-magische-turm/"
-            },
-            {
-              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
-              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
-            },
-            {
-              "label": "Zaubermärchen im Tipi",
-              "detail": "Bolligen — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
-            },
-            {
-              "label": "Lake Thun Breakfast Special",
-              "detail": "Thunersee, Thun — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
-            },
-            {
-              "label": "Pflegeeinsatz Auried",
-              "detail": "Auried Naturschutzgebiet, Laupen — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
-            },
-            {
-              "label": "Afternoon Tea at Lake Thun",
-              "detail": "Thunersee, Thun — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
-            },
-            {
-              "label": "Zischtig Karaoke in der Gemmi Taverne",
-              "detail": "Kandersteg",
               "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "188",
+          "value": "201",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "detail": "Kandersteg",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+            },
+            {
+              "label": "Buch am Mittag - Open Science",
+              "detail": "Universitätsbibliothek Bern, Bern",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/buch-am-mittag-open-science/"
+            },
+            {
+              "label": "Führung: KP Heinrich",
+              "detail": "Festungswerk Hondrich - KP Heinrich",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/hondrich/fuehrung-kp-heinrich_A4ajEum"
+            },
+            {
+              "label": "Jahresvorspiel Musik Oberaargau",
+              "detail": "Stadttheater Langenthal, Langenthal",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/jahresvorspiel-musik-oberaargau_A8wVR9g"
+            },
+            {
+              "label": "Ciné-Doc : Nicole Nicole",
+              "detail": "Cinématographe-Royal, Tavannes",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cine-doc-nicole-nicole-1/"
+            },
+            {
+              "label": "KIRK FLETCHER RHYTHM & BLUES",
+              "detail": "Marians Jazzroom",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kirk-fletcher-rhythm-und-blues_AGPb18Z"
+            },
+            {
+              "label": "Supersuckers",
+              "detail": "OldCapitol, Langenthal",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/supersuckers_AvNaHdE"
+            },
+            {
+              "label": "VIVALDI - Die vier Jahreszeiten",
+              "detail": "Volkshaus - Maison du Peuple",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/biel-bienne/vivaldi-die-vier-jahreszeiten_AHQSbrP"
+            },
+            {
               "label": "moving moments",
               "detail": "Sporthalle Ebnit, Saanen — ongoing, last day: 29 November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
               "label": "Lake Thun Play Ship",
               "detail": "Thunersee, Thun — ongoing, last day: 14 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
-            },
-            {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne — ongoing, last day: 27 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
-            },
-            {
-              "label": "The magic tower",
-              "detail": "Thun — ongoing, last day: 26 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/der-magische-turm/"
-            },
-            {
-              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
-              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — ongoing, last day: 21 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
-            },
-            {
-              "label": "Zaubermärchen im Tipi",
-              "detail": "Bolligen — ongoing, last day: 15 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
-            },
-            {
-              "label": "Lake Thun Breakfast Special",
-              "detail": "Thunersee, Thun — ongoing, last day: 14 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
-            },
-            {
-              "label": "Pflegeeinsatz Auried",
-              "detail": "Auried Naturschutzgebiet, Laupen — ongoing, last day: 14 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
-            },
-            {
-              "label": "Afternoon Tea at Lake Thun",
-              "detail": "Thunersee, Thun — ongoing, last day: 12 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
-            },
-            {
-              "label": "Zischtig Karaoke in der Gemmi Taverne",
-              "detail": "Kandersteg",
               "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "188",
+          "value": "201",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "detail": "Kandersteg",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+            },
+            {
+              "label": "Buch am Mittag - Open Science",
+              "detail": "Universitätsbibliothek Bern, Bern",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/buch-am-mittag-open-science/"
+            },
+            {
+              "label": "Führung: KP Heinrich",
+              "detail": "Festungswerk Hondrich - KP Heinrich",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/hondrich/fuehrung-kp-heinrich_A4ajEum"
+            },
+            {
+              "label": "Jahresvorspiel Musik Oberaargau",
+              "detail": "Stadttheater Langenthal, Langenthal",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/jahresvorspiel-musik-oberaargau_A8wVR9g"
+            },
+            {
+              "label": "Ciné-Doc : Nicole Nicole",
+              "detail": "Cinématographe-Royal, Tavannes",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cine-doc-nicole-nicole-1/"
+            },
+            {
+              "label": "KIRK FLETCHER RHYTHM & BLUES",
+              "detail": "Marians Jazzroom",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kirk-fletcher-rhythm-und-blues_AGPb18Z"
+            },
+            {
+              "label": "Supersuckers",
+              "detail": "OldCapitol, Langenthal",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/supersuckers_AvNaHdE"
+            },
+            {
+              "label": "VIVALDI - Die vier Jahreszeiten",
+              "detail": "Volkshaus - Maison du Peuple",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/biel-bienne/vivaldi-die-vier-jahreszeiten_AHQSbrP"
+            },
+            {
               "label": "BeMo - Bewegte Momente",
               "detail": "Sporthalle Ebnit, Saanen — läuft, letzter Tag: 29. November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
               "label": "Spieleschiff Thunersee",
               "detail": "Thunersee, Thun — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
-            },
-            {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
-            },
-            {
-              "label": "Der magische Turm",
-              "detail": "Thun — läuft, letzter Tag: 26. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/der-magische-turm/"
-            },
-            {
-              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
-              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
-            },
-            {
-              "label": "Zaubermärchen im Tipi",
-              "detail": "Bolligen — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
-            },
-            {
-              "label": "Frühstücksspezial Thunersee",
-              "detail": "Thunersee, Thun — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
-            },
-            {
-              "label": "Pflegeeinsatz Auried",
-              "detail": "Auried Naturschutzgebiet, Laupen — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
-            },
-            {
-              "label": "Afternoon Tea Thunersee",
-              "detail": "Thunersee, Thun — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
-            },
-            {
-              "label": "Zischtig Karaoke in der Gemmi Taverne",
-              "detail": "Kandersteg",
               "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "188",
+          "value": "201",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "detail": "Kandersteg",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+            },
+            {
+              "label": "Buch am Mittag - Open Science",
+              "detail": "Universitätsbibliothek Bern, Bern",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/buch-am-mittag-open-science/"
+            },
+            {
+              "label": "Führung: KP Heinrich",
+              "detail": "Festungswerk Hondrich - KP Heinrich",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/hondrich/fuehrung-kp-heinrich_A4ajEum"
+            },
+            {
+              "label": "Jahresvorspiel Musik Oberaargau",
+              "detail": "Stadttheater Langenthal, Langenthal",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/jahresvorspiel-musik-oberaargau_A8wVR9g"
+            },
+            {
+              "label": "Ciné-Doc : Nicole Nicole",
+              "detail": "Cinématographe-Royal, Tavannes",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cine-doc-nicole-nicole-1/"
+            },
+            {
+              "label": "KIRK FLETCHER RHYTHM & BLUES",
+              "detail": "Marians Jazzroom",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kirk-fletcher-rhythm-und-blues_AGPb18Z"
+            },
+            {
+              "label": "Supersuckers",
+              "detail": "OldCapitol, Langenthal",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/supersuckers_AvNaHdE"
+            },
+            {
+              "label": "VIVALDI - Die vier Jahreszeiten",
+              "detail": "Volkshaus - Maison du Peuple",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/biel-bienne/vivaldi-die-vier-jahreszeiten_AHQSbrP"
+            },
+            {
               "label": "des moments mouvementés",
               "detail": "Sporthalle Ebnit, Saanen — en cours, dernier jour : 29 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
               "label": "Bateau ludique du lac de Thoune",
               "detail": "Thunersee, Thun — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
-            },
-            {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
-            },
-            {
-              "label": "La tour magique",
-              "detail": "Thun — en cours, dernier jour : 26 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/der-magische-turm/"
-            },
-            {
-              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
-              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
-            },
-            {
-              "label": "Zaubermärchen im Tipi",
-              "detail": "Bolligen — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
-            },
-            {
-              "label": "Spécial petit-déjeuner du lac de Thoune",
-              "detail": "Thunersee, Thun — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
-            },
-            {
-              "label": "Pflegeeinsatz Auried",
-              "detail": "Auried Naturschutzgebiet, Laupen — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
-            },
-            {
-              "label": "Thé de l'après-midi au lac de Thoune",
-              "detail": "Thunersee, Thun — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
-            },
-            {
-              "label": "Zischtig Karaoke in der Gemmi Taverne",
-              "detail": "Kandersteg",
               "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

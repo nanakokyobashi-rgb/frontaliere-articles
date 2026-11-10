@@ -4,14 +4,14 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-11-08T22:45:42.198Z",
-  "contentHash": "b0c1616487dbb11aca5f0703e22250466588f87a80f5c2f6c8101f1b6f4d7c2d",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "9f7f0ae6c24614907107de18f1a7f8719078c000581038cd25854fac8fe0c90c",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-07T13:30:35.165Z",
+      "updatedAt": "2026-11-09T16:49:34.211Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-14T10:15:00.000Z"
+      "carryUntilAt": "2026-11-16T14:15:29.000Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,082 EUR/l",
-              "detail": "media regionale: minimo 1,969 EUR/l, 103 stazioni rilevate",
-              "date": "2026-11-07T10:15:00.000Z"
+              "value": "2,069 EUR/l",
+              "detail": "media regionale: minimo 1,940 EUR/l, 99 stazioni rilevate",
+              "date": "2026-11-09T14:15:29.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,222 EUR/l",
-              "detail": "media regionale: minimo 2,054 EUR/l, 114 stazioni rilevate",
-              "date": "2026-11-07T10:15:00.000Z"
+              "value": "2,212 EUR/l",
+              "detail": "media regionale: minimo 2,054 EUR/l, 115 stazioni rilevate",
+              "date": "2026-11-09T14:15:29.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-09T16:49:34.211Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Grand Conseil accetta entrata in materia nuova legge scolastica vallesana",
+          "url": "/articoli-vallese/grand-conseil-nuova-legge-scuola/",
+          "excerpt": "All’inizio della sessione di novembre, il Grand Conseil ha accettato a maggioranza l’entrata in materia della nuova legge sulla scuola vallesana.",
+          "date": "2026-11-10T01:33:52.436Z"
+        },
         {
           "title": "Vallese, il tasso di disoccupazione tocca il 3,3 per cento",
           "url": "/articoli-vallese/vallese-tasso-disoccupazione-33/",
@@ -94,12 +100,6 @@
           "url": "/articoli-vallese/stato-vallese-intelligenza-artificiale/",
           "excerpt": "AVA è accessibile al personale dello Stato del Vallese da giovedì; il costo operativo è di circa CHF 2 al mese per utente attivo.",
           "date": "2026-11-06T11:13:23.591Z"
-        },
-        {
-          "title": "Aumento tasso disoccupazione ottobre in Canton Vallese",
-          "url": "/articoli-vallese/aumento-tasso-disoccupazione-ottobre/",
-          "excerpt": "Alla fine di ottobre, 6'082 disoccupati risultavano iscritti presso gli Uffici regionali di collocamento del Vallese, 327 in più rispetto al mese precedente.",
-          "date": "2026-11-05T14:49:33.548Z"
         }
       ],
       "links": [
@@ -128,7 +128,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "VS",
@@ -169,23 +169,29 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.082 EUR/l",
-              "detail": "regional average: lowest 1.969 EUR/l, 103 stations surveyed",
-              "date": "2026-11-07T10:15:00.000Z"
+              "value": "2.069 EUR/l",
+              "detail": "regional average: lowest 1.940 EUR/l, 99 stations surveyed",
+              "date": "2026-11-09T14:15:29.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.222 EUR/l",
-              "detail": "regional average: lowest 2.054 EUR/l, 114 stations surveyed",
-              "date": "2026-11-07T10:15:00.000Z"
+              "value": "2.212 EUR/l",
+              "detail": "regional average: lowest 2.054 EUR/l, 115 stations surveyed",
+              "date": "2026-11-09T14:15:29.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-09T16:49:34.211Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Grand Council agrees to consider new Valais school law",
+          "url": "/en/valais-articles/grand-conseil-new-school-law/",
+          "excerpt": "At the beginning of the November session, the Grand Conseil accepted by a majority to proceed with consideration of the new Valais school law.",
+          "date": "2026-11-10T01:33:52.436Z"
+        },
         {
           "title": "Valais, the unemployment rate reaches 3,3 percent",
           "url": "/en/valais-articles/valais-unemployment-rate-33/",
@@ -209,12 +215,6 @@
           "url": "/en/valais-articles/valais-state-artificial-intelligence/",
           "excerpt": "AVA has been accessible to staff of the State of Valais since Thursday; the operating cost is approximately CHF 2 per month per active user.",
           "date": "2026-11-06T11:13:23.591Z"
-        },
-        {
-          "title": "Increase in unemployment rate in October in the Canton of Valais",
-          "url": "/en/valais-articles/increase-unemployment-rate-october/",
-          "excerpt": "At the end of October, 6,082 unemployed people were registered with the Valais Regional Employment Offices, 327 more than in the previous month.",
-          "date": "2026-11-05T14:49:33.548Z"
         }
       ],
       "links": [
@@ -243,7 +243,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "VS",
@@ -284,23 +284,29 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.082 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.969 EUR/l, 103 erfasste Tankstellen",
-              "date": "2026-11-07T10:15:00.000Z"
+              "value": "2.069 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.940 EUR/l, 99 erfasste Tankstellen",
+              "date": "2026-11-09T14:15:29.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.222 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.054 EUR/l, 114 erfasste Tankstellen",
-              "date": "2026-11-07T10:15:00.000Z"
+              "value": "2.212 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.054 EUR/l, 115 erfasste Tankstellen",
+              "date": "2026-11-09T14:15:29.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-09T16:49:34.211Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Grand Conseil nimmt neues Walliser Schulgesetz an",
+          "url": "/de/wallis-artikel/grand-conseil-neues-schulgesetz/",
+          "excerpt": "Zu Beginn der November-Sitzung hat der Grossrat die Aufnahme der Materie des neuen Walliser Schulgesetzes mit Mehrheit angenommen.",
+          "date": "2026-11-10T01:33:52.436Z"
+        },
         {
           "title": "Wallis, die Arbeitslosenquote erreicht 3,3 Prozent",
           "url": "/de/wallis-artikel/wallis-arbeitslosenquote-33/",
@@ -324,12 +330,6 @@
           "url": "/de/wallis-artikel/staat-wallis-kunstliche-intelligenz/",
           "excerpt": "AVA ist dem Personal des Staates Wallis seit Donnerstag zugänglich; die Betriebskosten betragen etwa CHF 2 pro Monat und aktivem Nutzer.",
           "date": "2026-11-06T11:13:23.591Z"
-        },
-        {
-          "title": "Im Oktober steigt die Arbeitslosenquote im Kanton Wallis",
-          "url": "/de/wallis-artikel/tatsatz-arbeitslosigkeit-oktober/",
-          "excerpt": "Ende Oktober waren 6.082 Arbeitslose bei den Regionalen Arbeitsämtern des Wallis registriert, 327 mehr als im Vormonat.",
-          "date": "2026-11-05T14:49:33.548Z"
         }
       ],
       "links": [
@@ -354,7 +354,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "VS",
@@ -395,23 +395,29 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,082 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,969 EUR/l, 103 stations relevées",
-              "date": "2026-11-07T10:15:00.000Z"
+              "value": "2,069 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,940 EUR/l, 99 stations relevées",
+              "date": "2026-11-09T14:15:29.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,222 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,054 EUR/l, 114 stations relevées",
-              "date": "2026-11-07T10:15:00.000Z"
+              "value": "2,212 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,054 EUR/l, 115 stations relevées",
+              "date": "2026-11-09T14:15:29.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-09T16:49:34.211Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Grand Conseil accepte loi scolaire valaisanne",
+          "url": "/fr/articles-valais/grand-conseil-nouvelle-loi-ecole/",
+          "excerpt": "Le projet est présenté comme une loi destinée à remplacer celle de 1962.",
+          "date": "2026-11-10T01:33:52.436Z"
+        },
         {
           "title": "Valais, le taux de chômage atteint 3,3 pour cent",
           "url": "/fr/articles-valais/valais-taux-chomage-33/",
@@ -435,12 +441,6 @@
           "url": "/fr/articles-valais/etat-valais-intelligence-artificielle/",
           "excerpt": "AVA est accessible au personnel de l'État du Valais depuis jeudi ; le coût opérationnel s'élève à environ CHF 2 par mois et par utilisateur actif.",
           "date": "2026-11-06T11:13:23.591Z"
-        },
-        {
-          "title": "Hausse du taux de chômage en octobre dans le canton du Valais",
-          "url": "/fr/articles-valais/hausse-taux-chomage-octobre/",
-          "excerpt": "Fin octobre, 6 082 chômeurs étaient enregistrés auprès des Bureaux régionaux de l’emploi du Valais, soit 327 de plus que le mois précédent.",
-          "date": "2026-11-05T14:49:33.548Z"
         }
       ],
       "links": [
@@ -469,7 +469,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

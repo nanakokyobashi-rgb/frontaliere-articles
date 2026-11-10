@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "1a82ea564969e742a53330a9b674bea724d00b3f3dd3728e94a7bb6a6ee6493b",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "d8d6d497f885ac85d166d56d17172298293dd525bcdcb4f462fb049dbec1276e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "21",
+          "value": "30",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,16 +33,48 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Sprach-Café in der Buchhandlung Wortreich",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/glarus/sprach-cafe-in-der-buchhandlung-wortreich_A9ASWJe"
+            },
+            {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Caffè linguistico nella libreria Wortreich",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/glaris/cafe-linguistique-a-la-librairie-wortreich_AB8GMY5"
+            },
+            {
+              "label": "Träffpunkt - anschliessend Deutsch-Konversation",
+              "detail": "Jugendhaus",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/glarus/traeffpunkt-anschliessend-deutsch-konversation_APTi7AM"
+            },
+            {
+              "label": "träffpunktframi",
+              "detail": "Jugendhaus",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/suche/glarus/traeffpunktframi_AgU6H6i"
+            },
+            {
+              "label": "Muki Turnen Niederurnen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/alle/niederurnen/muki-turnen-niederurnen_AFUYWXP"
+            },
+            {
+              "label": "Caffè linguistico nella libreria Wortreich",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/events/this-that/glarus/language-cafe-in-the-wortreich-bookshop_ABchCRQ"
             },
             {
               "label": "Glatti Cheibe: Buuchweh-Tour",
@@ -51,51 +83,14 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/glatti-cheibe-buuchweh-tour/"
             },
             {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
-            {
-              "label": "Das Schweizer Sexpubquiz – Wissen, Lachen, Überraschungen",
-              "detail": "Glarus",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-schweizer-sexpubquiz-wissen-lachen-ueberraschungen/"
-            },
-            {
-              "label": "Fluch der Rabenmutter",
-              "detail": "Schwanden",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
-            },
-            {
-              "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
-              "detail": "Glarus",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-repair-cafe-reparieren-statt-wegwerfen/"
-            },
-            {
-              "label": "Chirezer Adventsmarkt",
-              "detail": "Filzbach (Kerenzerberg)",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
-            },
-            {
-              "label": "Stubete Gäng – Samichlaus Tour 2026 – Näfels, lintharena",
-              "detail": "Hotel Lintharena",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stubete-gaeng-samichlaus-tour-2026-naefels-lintharena/"
-            },
-            {
-              "label": "Herbstkonzert des Glarner Kammerorchesters",
-              "detail": "Glarona",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstkonzert-des-glarner-kammerorchesters/"
+              "label": "Player's Club",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/restaurants/all/glarus/players-club_AhDVZq1"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +112,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "GL",
@@ -127,7 +122,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "21",
+          "value": "30",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,16 +133,48 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Sprach-Café in der Buchhandlung Wortreich",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/glarus/sprach-cafe-in-der-buchhandlung-wortreich_A9ASWJe"
+            },
+            {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — ongoing, last day: 14 November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — ongoing, last day: 11 November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Language café in the Wortreich bookshop",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/glaris/cafe-linguistique-a-la-librairie-wortreich_AB8GMY5"
+            },
+            {
+              "label": "Träffpunkt - anschliessend Deutsch-Konversation",
+              "detail": "Jugendhaus",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/glarus/traeffpunkt-anschliessend-deutsch-konversation_APTi7AM"
+            },
+            {
+              "label": "träffpunktframi",
+              "detail": "Jugendhaus",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/suche/glarus/traeffpunktframi_AgU6H6i"
+            },
+            {
+              "label": "Muki Turnen Niederurnen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/alle/niederurnen/muki-turnen-niederurnen_AFUYWXP"
+            },
+            {
+              "label": "Language Café in the Wortreich bookshop",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/events/this-that/glarus/language-cafe-in-the-wortreich-bookshop_ABchCRQ"
             },
             {
               "label": "Glatti Cheibe: Buuchweh-Tour",
@@ -156,51 +183,14 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/glatti-cheibe-buuchweh-tour/"
             },
             {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
-            {
-              "label": "Das Schweizer Sexpubquiz – Wissen, Lachen, Überraschungen",
-              "detail": "Glarus",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-schweizer-sexpubquiz-wissen-lachen-ueberraschungen/"
-            },
-            {
-              "label": "Fluch der Rabenmutter",
-              "detail": "Schwanden",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
-            },
-            {
-              "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
-              "detail": "Glarus",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-repair-cafe-reparieren-statt-wegwerfen/"
-            },
-            {
-              "label": "Chirezer Adventsmarkt",
-              "detail": "Filzbach (Kerenzerberg)",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
-            },
-            {
-              "label": "Stubete Gäng – Samichlaus Tour 2026 – Näfels, lintharena",
-              "detail": "Hotel Lintharena",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stubete-gaeng-samichlaus-tour-2026-naefels-lintharena/"
-            },
-            {
-              "label": "Herbstkonzert des Glarner Kammerorchesters",
-              "detail": "Glarona",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstkonzert-des-glarner-kammerorchesters/"
+              "label": "Player's Club",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/restaurants/all/glarus/players-club_AhDVZq1"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +212,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "GL",
@@ -232,7 +222,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "21",
+          "value": "30",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,16 +233,48 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Sprach-Café in der Buchhandlung Wortreich",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/glarus/sprach-cafe-in-der-buchhandlung-wortreich_A9ASWJe"
+            },
+            {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Sprach-Café in der Buchhandlung Wortreich",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/glaris/cafe-linguistique-a-la-librairie-wortreich_AB8GMY5"
+            },
+            {
+              "label": "Träffpunkt - anschliessend Deutsch-Konversation",
+              "detail": "Jugendhaus",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/glarus/traeffpunkt-anschliessend-deutsch-konversation_APTi7AM"
+            },
+            {
+              "label": "träffpunktframi",
+              "detail": "Jugendhaus",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/suche/glarus/traeffpunktframi_AgU6H6i"
+            },
+            {
+              "label": "Muki Turnen Niederurnen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/alle/niederurnen/muki-turnen-niederurnen_AFUYWXP"
+            },
+            {
+              "label": "Sprach-Café in der Buchhandlung Wortreich",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/events/this-that/glarus/language-cafe-in-the-wortreich-bookshop_ABchCRQ"
             },
             {
               "label": "Glatti Cheibe: Buuchweh-Tour",
@@ -261,51 +283,14 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/glatti-cheibe-buuchweh-tour/"
             },
             {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
-            {
-              "label": "Das Schweizer Sexpubquiz – Wissen, Lachen, Überraschungen",
-              "detail": "Glarus",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-schweizer-sexpubquiz-wissen-lachen-ueberraschungen/"
-            },
-            {
-              "label": "Fluch der Rabenmutter",
-              "detail": "Schwanden",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
-            },
-            {
-              "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
-              "detail": "Glarus",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-repair-cafe-reparieren-statt-wegwerfen/"
-            },
-            {
-              "label": "Chirezer Adventsmarkt",
-              "detail": "Filzbach (Kerenzerberg)",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
-            },
-            {
-              "label": "Stubete Gäng – Samichlaus Tour 2026 – Näfels, lintharena",
-              "detail": "Hotel Lintharena",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stubete-gaeng-samichlaus-tour-2026-naefels-lintharena/"
-            },
-            {
-              "label": "Jubiläumskonzert des Glarner Kammerorchesters",
-              "detail": "Glarona",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstkonzert-des-glarner-kammerorchesters/"
+              "label": "Player's Club",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/restaurants/all/glarus/players-club_AhDVZq1"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +312,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "GL",
@@ -337,7 +322,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "21",
+          "value": "30",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,16 +333,48 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Sprach-Café in der Buchhandlung Wortreich",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/glarus/sprach-cafe-in-der-buchhandlung-wortreich_A9ASWJe"
+            },
+            {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Schnupperkurs de Balboa",
               "detail": "Ennenda, Glarus — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Café linguistique à la librairie Wortreich",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/glaris/cafe-linguistique-a-la-librairie-wortreich_AB8GMY5"
+            },
+            {
+              "label": "Träffpunkt - anschliessend Deutsch-Konversation",
+              "detail": "Jugendhaus",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/glarus/traeffpunkt-anschliessend-deutsch-konversation_APTi7AM"
+            },
+            {
+              "label": "träffpunktframi",
+              "detail": "Jugendhaus",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/suche/glarus/traeffpunktframi_AgU6H6i"
+            },
+            {
+              "label": "Muki Turnen Niederurnen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/alle/niederurnen/muki-turnen-niederurnen_AFUYWXP"
+            },
+            {
+              "label": "Café linguistique à la librairie Wortreich",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/events/this-that/glarus/language-cafe-in-the-wortreich-bookshop_ABchCRQ"
             },
             {
               "label": "Glatti Cheibe: Buuchweh-Tour",
@@ -366,51 +383,14 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/glatti-cheibe-buuchweh-tour/"
             },
             {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
-            {
-              "label": "Das Schweizer Sexpubquiz – Wissen, Lachen, Überraschungen",
-              "detail": "Glarus",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-schweizer-sexpubquiz-wissen-lachen-ueberraschungen/"
-            },
-            {
-              "label": "Fluch der Rabenmutter",
-              "detail": "Schwanden",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
-            },
-            {
-              "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
-              "detail": "Glarus",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-repair-cafe-reparieren-statt-wegwerfen/"
-            },
-            {
-              "label": "Chirezer Adventsmarkt",
-              "detail": "Filzbach (Kerenzerberg)",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
-            },
-            {
-              "label": "Stubete Gäng – Samichlaus Tour 2026 – Näfels, lintharena",
-              "detail": "Hotel Lintharena",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stubete-gaeng-samichlaus-tour-2026-naefels-lintharena/"
-            },
-            {
-              "label": "Herbstkonzert des Glarner Kammerorchesters",
-              "detail": "Glarona",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstkonzert-des-glarner-kammerorchesters/"
+              "label": "Player's Club",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/restaurants/all/glarus/players-club_AhDVZq1"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +412,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "pensioni",
-  "updatedAt": "2026-11-07T00:07:07.049Z",
-  "contentHash": "c470960cc448dbc9d02b58ddcae7394d2abd19d63bcd6d53dd9b27de67f7e7a5",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "3f4acb68746bbef5e7eb6135a34eadbfab1f8a7fe3686540f136462727cf8673",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Erste Auszahlung der 13. AHV-Rente im Dezember 2026",
+              "date": "2026-11-04",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Erste-Auszahlung-der-13-AHV-Rente-im-Dezember-2026.html"
+            },
+            {
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
@@ -146,7 +151,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -218,7 +223,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "BE",
@@ -327,6 +332,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Erste Auszahlung der 13. AHV-Rente im Dezember 2026",
+              "date": "2026-11-04",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Erste-Auszahlung-der-13-AHV-Rente-im-Dezember-2026.html"
+            },
+            {
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
@@ -337,7 +347,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -409,7 +419,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "BE",
@@ -518,6 +528,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Erste Auszahlung der 13. AHV-Rente im Dezember 2026",
+              "date": "2026-11-04",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Erste-Auszahlung-der-13-AHV-Rente-im-Dezember-2026.html"
+            },
+            {
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
@@ -528,7 +543,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -600,7 +615,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "BE",
@@ -709,6 +724,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Erste Auszahlung der 13. AHV-Rente im Dezember 2026",
+              "date": "2026-11-04",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Erste-Auszahlung-der-13-AHV-Rente-im-Dezember-2026.html"
+            },
+            {
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
@@ -719,7 +739,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -791,7 +811,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-07T00:07:07.049Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

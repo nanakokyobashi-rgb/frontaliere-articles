@@ -30232,6 +30232,36 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'peso-burocrazia-imprese-svizzera',
+    category: 'fiscale',
+    date: '2026-11-10T01:49:36.072Z',
+    image: '/images/blog/article-peso-burocrazia-imprese-svizzera.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
+   {
+    id: 'pamini-contributi-salari-svizzera',
+    category: 'pratico',
+    date: '2026-11-10T09:09:47.527Z',
+    image: '/images/blog/article-pamini-contributi-salari-svizzera.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'burocrazia-frena-investimenti-svizzera',
+    category: 'fiscale',
+    date: '2026-11-10T14:41:07.902Z',
+    image: '/images/blog/article-burocrazia-frena-investimenti-svizzera.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

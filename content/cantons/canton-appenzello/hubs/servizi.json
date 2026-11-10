@@ -4,17 +4,27 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-11-08T22:45:42.198Z",
-  "contentHash": "529e17199255454ed104f95f4a09f6e134229f506a00ed6e88b59be7a0f5561e",
+  "updatedAt": "2026-11-10T11:58:53.708Z",
+  "contentHash": "3968ac75a7c153dfbf585b05c26d6a80e11e8430e7796dc4e36ef8e7d0ab9f36",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-01T11:17:34.347Z",
+      "updatedAt": "2026-11-08T11:18:20.402Z",
       "keyFacts": 1
     },
     {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-09T22:22:33.694Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-10T02:51:12.262Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -30,6 +40,11 @@
           "value": "447,80 CHF",
           "note": "regione di premio 0, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "5",
+          "note": "offerta mediana 800 CHF"
         }
       ],
       "dataBlocks": [
@@ -51,7 +66,57 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "AR399",
+              "value": "4500 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
+            },
+            {
+              "label": "AR2490",
+              "value": "800 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1797"
+            },
+            {
+              "label": "AR4881",
+              "value": "800 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "8 °C",
+              "detail": "oggi da 8 a 13 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "9 °C",
+              "detail": "oggi da 8 a 13 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -84,7 +149,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -93,6 +158,12 @@
           "url": "/articoli-appenzello/costi-sanita-meno-entrate/",
           "excerpt": "Il preventivo 2027 prevede una perdita complessiva di 12,4 milioni di CHF, a causa di costi sanitari crescenti e minori entrate fiscali.",
           "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
+          "title": "Consiglio comunale istituisce gruppo per il caldo a scuola",
+          "url": "/articoli-appenzello/consiglio-gruppo-caldo-scuola/",
+          "excerpt": "Il Consiglio comunale ha istituito la Arbeitsgruppe «Hitzeschutz und Begrünung»: aule e spazi esterni, con misure rapide per la protezione dal sole.",
+          "date": "2026-11-10T02:51:13.479Z"
         },
         {
           "title": "Heiden aumenta la tassa base sui rifiuti",
@@ -129,12 +200,6 @@
           "url": "/articoli-svizzera/premi-lamal-appenzello-esterno-riduzione/",
           "excerpt": "Guida ai premi LAMal nel Cantone di Appenzello Esterno: franchigie, modelli assicurativi disponibili, sussidi cantonali e procedura per richiedere la riduzione basata su reddito.",
           "date": "2026-08-20T23:06:24.555Z"
-        },
-        {
-          "title": "Permesso L Appenzello Esterno: validità e rinnovo",
-          "url": "/articoli-svizzera/permesso-l-cantone-appenzello-validita/",
-          "excerpt": "Permesso L breve durata in Appenzello Esterno: durata 12 mesi, criteri di rinnovo, passaggio a permesso B, vincoli legati al datore di lavoro. Guida pratica.",
-          "date": "2026-08-21T01:01:59.189Z"
         }
       ],
       "latestCantonArticles": [],
@@ -172,7 +237,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -185,6 +250,11 @@
           "value": "447.80 CHF",
           "note": "premium region 0, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "5",
+          "note": "typical bid 800 CHF"
         }
       ],
       "dataBlocks": [
@@ -206,7 +276,57 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "AR399",
+              "value": "4,500 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
+            },
+            {
+              "label": "AR2490",
+              "value": "800 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1797"
+            },
+            {
+              "label": "AR4881",
+              "value": "800 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "8 °C",
+              "detail": "today from 8 to 13 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "9 °C",
+              "detail": "today from 8 to 13 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -239,7 +359,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -248,6 +368,12 @@
           "url": "/en/appenzell-articles/health-costs-less-revenue/",
           "excerpt": "The 2027 budget projects a total loss of 12,4 million CHF due to rising healthcare costs and lower tax revenues.",
           "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
+          "title": "City council establishes group to address heat at school",
+          "url": "/en/appenzell-articles/council-school-heat-group/",
+          "excerpt": "The City Council established the Arbeitsgruppe «Hitzeschutz und Begrünung»: classrooms and outdoor spaces, with rapid measures for protection from the sun.",
+          "date": "2026-11-10T02:51:13.479Z"
         },
         {
           "title": "Heiden increases the basic waste fee",
@@ -284,12 +410,6 @@
           "url": "/en/swiss-articles/lamal-premiums-appenzell-rhodes-reduction/",
           "excerpt": "Guide to LAMal premiums in the Canton of Appenzell Outer: deductibles, available insurance models, cantonal subsidies and procedure to apply for the income-based reduction.",
           "date": "2026-08-20T23:06:24.555Z"
-        },
-        {
-          "title": "Permit L External Appenzell: validity and renewal",
-          "url": "/en/swiss-articles/permit-l-short-term-appenzell-ausserrhoden-validity/",
-          "excerpt": "Permit L short duration in External Appenzell: duration 12 months, renewal criteria, transition to permit B, constraints related to the employer. Practical guide.",
-          "date": "2026-08-21T01:01:59.189Z"
         }
       ],
       "latestCantonArticles": [],
@@ -319,7 +439,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -332,6 +452,11 @@
           "value": "447.80 CHF",
           "note": "Prämienregion 0, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "5",
+          "note": "mittleres Gebot 800 CHF"
         }
       ],
       "dataBlocks": [
@@ -353,7 +478,57 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "AR399",
+              "value": "4’500 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
+            },
+            {
+              "label": "AR2490",
+              "value": "800 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1797"
+            },
+            {
+              "label": "AR4881",
+              "value": "800 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "8 °C",
+              "detail": "heute 8 bis 13 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "9 °C",
+              "detail": "heute 8 bis 13 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -386,7 +561,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -395,6 +570,12 @@
           "url": "/de/appenzell-artikel/kosten-sanita-weniger-einnahmen/",
           "excerpt": "Der Voranschlag 2027 sieht aufgrund steigender Gesundheitskosten und geringerer Steuereinnahmen einen Gesamtverlust von 12,4 Millionen CHF vor.",
           "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
+          "title": "Gemeinderat richtet Arbeitsgruppe gegen Hitze an Schulen ein",
+          "url": "/de/appenzell-artikel/gemeinderat-hitzeschutz-schule/",
+          "excerpt": "Der Gemeinderat hat die Arbeitsgruppe «Hitzeschutz und Begrünung» eingerichtet: Klassenräume und Außenbereiche, mit schnellen Maßnahmen zum Sonnenschutz.",
+          "date": "2026-11-10T02:51:13.479Z"
         },
         {
           "title": "Heiden erhöht die Kehrichtgrundgebühr",
@@ -431,12 +612,6 @@
           "url": "/de/schweiz-artikel/krankenkasse-appenzell-ausserrhoden-reduktion/",
           "excerpt": "Prämienleitfaden KVG im Kanton Appenzell Ausserrhoden: Franchisen, verfügbare Versicherungsmodelle, Kantonsbeiträge und Verfahren zur Beantragung der einkommensabhängigen Reduktion.",
           "date": "2026-08-20T23:06:24.555Z"
-        },
-        {
-          "title": "Genehmigung L Appenzell Ausserrhoden: Gültigkeit und Erneuerung",
-          "url": "/de/schweiz-artikel/kurzaufenthalt-appenzell-ausserrhoden-gultigkeit/",
-          "excerpt": "Kurzzeitbewilligung in Appenzell Ausserrhoden: Dauer 12 Monate, Verlängerungskriterien, Umstellung auf Bewilligung B, arbeitgeberbezogene Bindungen. Praxisleitfaden.",
-          "date": "2026-08-21T01:01:59.189Z"
         }
       ],
       "latestCantonArticles": [],
@@ -466,7 +641,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -479,6 +654,11 @@
           "value": "447,80 CHF",
           "note": "région de primes 0, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "5",
+          "note": "offre centrale 800 CHF"
         }
       ],
       "dataBlocks": [
@@ -500,7 +680,57 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "AR399",
+              "value": "4 500 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
+            },
+            {
+              "label": "AR2490",
+              "value": "800 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1797"
+            },
+            {
+              "label": "AR4881",
+              "value": "800 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "8 °C",
+              "detail": "aujourd’hui de 8 à 13 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "9 °C",
+              "detail": "aujourd’hui de 8 à 13 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -533,7 +763,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -542,6 +772,12 @@
           "url": "/fr/articles-appenzell/couts-sante-moins-revenus/",
           "excerpt": "Le budget 2027 prévoit une perte globale de 12,4 millions de CHF, en raison de la hausse des coûts de santé et de la baisse des recettes fiscales.",
           "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
+          "title": "Conseil municipal crée un groupe contre la chaleur à l’école",
+          "url": "/fr/articles-appenzell/groupe-conseil-chaleur-ecole/",
+          "excerpt": "Le conseil municipal a créé le groupe de travail « Hitzeschutz und Begrünung » : salles de classe et espaces extérieurs, avec des mesures rapides de protection contre le soleil.",
+          "date": "2026-11-10T02:51:13.479Z"
         },
         {
           "title": "Heiden augmente la taxe de base sur les déchets",
@@ -578,12 +814,6 @@
           "url": "/fr/articles-suisse/primes-lamal-appenzell-rhodes-reduction/",
           "excerpt": "Guide des primes LAMal dans le canton d'Appenzell Extérieur : franchises, modèles d'assurance disponibles, subventions cantonales et procédure de demande de réduction basée sur le revenu.",
           "date": "2026-08-20T23:06:24.555Z"
-        },
-        {
-          "title": "Permis L Appenzell Extérieur : validité et renouvellement",
-          "url": "/fr/articles-suisse/permis-l-appenzell-rhodes-exterieures-validite/",
-          "excerpt": "Permis L courte durée en Appenzell Extérieur : durée 12 mois, critères de renouvellement, passage au permis B, contraintes liées à l'employeur. Guide pratique.",
-          "date": "2026-08-21T01:01:59.189Z"
         }
       ],
       "latestCantonArticles": [],
@@ -605,7 +835,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     }
   }
 }

@@ -270,4 +270,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'friburgo-destra-tre-seggi',
+ category: 'novita',
+ date: '2026-11-09T23:41:45.105Z',
+ image: '/images/blog/article-friburgo-destra-tre-seggi.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['FR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

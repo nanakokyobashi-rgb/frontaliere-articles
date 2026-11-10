@@ -96,6 +96,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.voto-wil-29-novembre-2026.title': 'Voto a Wil domenica 29 novembre 2026 su proposte comunali e federali',
     'blog.article.voto-wil-29-novembre-2026.excerpt': 'Domenica 29 novembre 2026, a Wil saranno sottoposte al voto due proposte comunali.',
     'blog.article.voto-wil-29-novembre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.corsa-frauenfeld-wil-2026.title': 'Corsa Frauenfeld-Wil: disagi al traffico il 15 novembre 2026',
+    'blog.article.corsa-frauenfeld-wil-2026.excerpt': 'La corsa collega Frauenfeld e Wil passando per Matzingen, Wängi, Eschlikon e Sirnach; la polizia chiuderà temporaneamente strade specifiche a Wil.',
+    'blog.article.corsa-frauenfeld-wil-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

@@ -4,17 +4,27 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-11-08T12:07:40.615Z",
-  "contentHash": "e533b6925407c20236ae2cf754e24d046d3449bdeed664f381adb510b53decc1",
+  "updatedAt": "2026-11-10T11:58:53.708Z",
+  "contentHash": "a25228fb1d83abca86b6120b0d8ece4e4fadc19a1a0292a2d017259c80da77ce",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-01T11:17:34.347Z",
+      "updatedAt": "2026-11-08T11:18:20.402Z",
       "keyFacts": 1
     },
     {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-09T22:22:33.694Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-10T02:51:12.262Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -30,6 +40,11 @@
           "value": "698 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "15",
+          "note": "offerta mediana 2000 CHF"
         }
       ],
       "dataBlocks": [
@@ -51,7 +66,52 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "VD5505",
+              "value": "2100 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120745"
+            },
+            {
+              "label": "VD1102",
+              "value": "2000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120735"
+            },
+            {
+              "label": "VD2189",
+              "value": "2000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120736"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.encheres-vd.ch/fr/",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "11 °C",
+              "detail": "oggi da 11 a 15 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -89,7 +149,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -169,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-08T12:07:40.615Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "en": {
       "canton": "VD",
@@ -182,6 +242,11 @@
           "value": "698 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "15",
+          "note": "typical bid 2,000 CHF"
         }
       ],
       "dataBlocks": [
@@ -203,7 +268,52 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "VD5505",
+              "value": "2,100 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120745"
+            },
+            {
+              "label": "VD1102",
+              "value": "2,000 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120735"
+            },
+            {
+              "label": "VD2189",
+              "value": "2,000 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120736"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.encheres-vd.ch/fr/",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "11 °C",
+              "detail": "today from 11 to 15 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +351,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -317,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-08T12:07:40.615Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "de": {
       "canton": "VD",
@@ -330,6 +440,11 @@
           "value": "698 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "15",
+          "note": "mittleres Gebot 2’000 CHF"
         }
       ],
       "dataBlocks": [
@@ -351,7 +466,52 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "VD5505",
+              "value": "2’100 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120745"
+            },
+            {
+              "label": "VD1102",
+              "value": "2’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120735"
+            },
+            {
+              "label": "VD2189",
+              "value": "2’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120736"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.encheres-vd.ch/fr/",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "11 °C",
+              "detail": "heute 11 bis 15 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -389,7 +549,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-08T12:07:40.615Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     },
     "fr": {
       "canton": "VD",
@@ -478,6 +638,11 @@
           "value": "698 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "15",
+          "note": "offre centrale 2 000 CHF"
         }
       ],
       "dataBlocks": [
@@ -499,7 +664,52 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "VD5505",
+              "value": "2 100 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120745"
+            },
+            {
+              "label": "VD1102",
+              "value": "2 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120735"
+            },
+            {
+              "label": "VD2189",
+              "value": "2 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120736"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.encheres-vd.ch/fr/",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "11 °C",
+              "detail": "aujourd’hui de 11 à 15 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-10T02:51:12.262Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -537,7 +747,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -609,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-08T12:07:40.615Z"
+      "updatedAt": "2026-11-10T11:58:53.708Z"
     }
   }
 }

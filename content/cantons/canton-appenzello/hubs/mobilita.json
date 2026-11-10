@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-07T11:15:37.760Z",
-  "contentHash": "6c7331d5dbdf913a97edd6c647796cfeec872388a79a56d3d43769fda6ff33aa",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "b300535f072f8c89a135146ea54f03618e5f57743b982787d92b1d4c759d0b55",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-07T01:17:15.077Z",
+      "updatedAt": "2026-11-09T22:46:21.435Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-06T22:26:45.566Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -28,7 +28,7 @@
         {
           "label": "Cantieri attivi o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
+          "note": "segnalazioni aggiornate: 9 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -57,7 +57,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-07T01:17:15.077Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -95,7 +95,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -128,7 +128,7 @@
         {
           "label": "Roadworks active or imminent",
           "value": "3",
-          "note": "reports as of 7 November 2026"
+          "note": "reports as of 9 November 2026"
         }
       ],
       "dataBlocks": [
@@ -157,7 +157,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-07T01:17:15.077Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -195,7 +195,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -217,7 +217,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -228,7 +228,7 @@
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "3",
-          "note": "Meldungen vom 7. November 2026"
+          "note": "Meldungen vom 9. November 2026"
         }
       ],
       "dataBlocks": [
@@ -257,7 +257,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-07T01:17:15.077Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -295,7 +295,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -317,7 +317,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -328,7 +328,7 @@
         {
           "label": "Chantiers actifs ou imminents",
           "value": "3",
-          "note": "signalements au 7 novembre 2026"
+          "note": "signalements au 9 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -357,7 +357,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-07T01:17:15.077Z"
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -395,7 +395,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

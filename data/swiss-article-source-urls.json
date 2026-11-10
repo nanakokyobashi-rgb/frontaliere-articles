@@ -1,14 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1952448/allianz-svizzera-studio-rischi-prevenzione": {
-    "articleId": "canicola-danni-economici-2026",
-    "ts": "2026-09-25T06:41:56.848Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/zx9onk8tui-z": {
-    "articleId": "nuova-legge-cibersicurezza-lcib",
-    "ts": "2026-09-25T09:35:24.015Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/i41kaec0maca": {
     "articleId": "omologazione-fitosanitari-arretrato-2032",
     "ts": "2026-09-25T11:39:48.664Z",
@@ -2497,6 +2487,16 @@
   "https://www.filodiritto.com/imposta-sostitutiva-del-5-le-pensioni-svizzere": {
     "articleId": "imposta-sostitutiva-pensioni-svizzere",
     "ts": "2026-11-08T03:26:09.643Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cresce-il-peso-della-burocrazia-sulle-imprese-in-svizzera/92349489": {
+    "articleId": "peso-burocrazia-imprese-svizzera",
+    "ts": "2026-11-10T01:49:38.356Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4227656": {
+    "articleId": "burocrazia-frena-investimenti-svizzera",
+    "ts": "2026-11-10T14:41:10.363Z",
     "keyForm": 2
   }
 }
