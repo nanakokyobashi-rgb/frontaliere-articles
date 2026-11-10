@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sg::https://www.suedkurier.de/kreis-konstanz/schwarzwaldbahn-faehrt-zwischen-singen-und-konstanz-nicht-pendler-und-seehas-betreiber-sind-frustriert-115639048": {
-      "section": "canton-sg",
-      "ts": 1794167714062
-    },
     "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-nachhaltigkeit": {
       "section": "canton-sg",
       "ts": 1794182436619
@@ -23,6 +19,10 @@
     "canton-sg::https://www.stgallen24.ch/articles/417943-pu-ar-nominiert-metzger-einstimmig": {
       "section": "canton-sg",
       "ts": 1794318394573
+    },
+    "canton-sg::https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kriessern--17-jaehriger-bei-unfall-schwer-verletzt.html": {
+      "section": "canton-sg",
+      "ts": 1794349838694
     }
   }
 }
