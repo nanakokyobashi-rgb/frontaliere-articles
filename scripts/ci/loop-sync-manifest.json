@@ -4236,9 +4236,10 @@
       "mode": "adapted",
       "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest 39195beb… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
       "baseline": {
-        "site": "f78a43413c99b598",
-        "corpus": "15a4a0abe34912fa",
-        "alignedAt": "2026-11-09"
+        "site": "141382885e28264f",
+        "corpus": "6c61c6bf12afc98a",
+        "alignedAt": "2026-11-09",
+        "forcedAt": "2026-11-09T11:05:27.842Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
@@ -4462,8 +4463,8 @@
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3078",
       "reason": "adattato: la SiteShellContract scalar fingerprint va ri-registrata insieme ai valori adattati di host/constants.ts; il trasporto identical-twin la blocca correttamente quando arriverebbe da sola. Aggiornare entrambi nello stesso giro e verificare host/tests/shell-contract-fingerprint.test.mjs.",
       "baseline": {
-        "site": "cfbedfa01bcb1f9d",
-        "corpus": "cfbedfa01bcb1f9d",
+        "site": "cace919981b8a649",
+        "corpus": "cace919981b8a649",
         "alignedAt": "2026-11-09"
       }
     },
@@ -6948,8 +6949,8 @@
       "mode": "adapted",
       "reason": "adattato al bundle host: il fingerprint byte-exact di site-support, AdSense, Partnerize, Meta Pixel e helper canonici viaggia insieme allo snapshot adattato host/third-party-shell-assets.json e alle versioni asset in host/constants.ts. Non trasportarlo da solo; verificare host/tests/host-shell-assets.test.mjs prima della pubblicazione.",
       "baseline": {
-        "site": "0a7f617c58f2dac6",
-        "corpus": "0a7f617c58f2dac6",
+        "site": "dc236b7de7fa65f7",
+        "corpus": "dc236b7de7fa65f7",
         "alignedAt": "2026-11-09"
       },
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3078"
@@ -6960,9 +6961,9 @@
       "mode": "adapted",
       "reason": "Snapshot byte-exact di site-support, AdSense, Partnerize, Meta Pixel e guardia inline canonica, generato dall'exporter del sito. hostShellFiles verifica nomi e SHA senza import fra repository; sincronizzarlo nella stessa PR di host/third-party-shell-assets-fingerprint.json e host/constants.ts per conservare i byte e i nomi content-addressed che la pubblicazione usa.",
       "baseline": {
-        "site": "6e2092fcc0f1e3d8",
-        "corpus": "12297d0a702543c8",
-        "alignedAt": "2026-11-09"
+        "site": "56aaef2cbbea74f8",
+        "corpus": "3876c4b713add420",
+        "alignedAt": "2026-11-05"
       }
     },
     {
