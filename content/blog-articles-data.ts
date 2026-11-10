@@ -48104,6 +48104,16 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'tredicesima-avs-pensionati-italia',
+ category: 'pensione',
+ date: '2026-11-09T23:37:15.075Z',
+ image: '/images/blog/article-tredicesima-avs-pensionati-italia.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

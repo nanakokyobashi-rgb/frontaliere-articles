@@ -4,18 +4,13 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "27719ba630ba2e24e97cc8fe9d3bb7c9516ae959287788cc3fb36bd562f6fa14",
+  "updatedAt": "2026-11-09T23:41:11.155Z",
+  "contentHash": "81e2f1105d61cfaf4bbf724159afcadfad925393d78b7c40647bf9976e822b0a",
   "blocks": [
     {
       "id": "attese-valichi",
       "updatedAt": "2026-11-06T23:59:59.000Z",
       "keyFacts": 1
-    },
-    {
-      "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-07T22:20:59.233Z",
-      "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
@@ -34,16 +29,6 @@
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
           "note": "Sempione (Iselle-Gondo), settimana conclusa: 6 novembre 2026"
-        },
-        {
-          "label": "Chiusure stradali in corso o imminenti",
-          "value": "21",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
-        },
-        {
-          "label": "Cantieri attivi o imminenti",
-          "value": "13",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -86,59 +71,6 @@
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Chiusure, cantieri e disagi",
-          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
-          "items": [
-            {
-              "label": "Monthey <-> Champéry tra Luogo Troistorrents E Luogo Champéry Situazione: chiusa Causa: lavori di manutenzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 20 novembre 2026",
-              "date": "2026-08-31T05:00:00.000Z"
-            },
-            {
-              "label": "Epinassey, Saint-Maurice <-> La Rasse, Evionnaz Situazione: chiusa Causa: lavori di manutenzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 15 novembre 2026",
-              "date": "2026-08-31T05:00:00.000Z"
-            },
-            {
-              "label": "Epinassey, Saint-Maurice in tutte le direzioni Situazione: chiusa Causa: lavori di costruzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 18 dicembre 2026",
-              "date": "2026-09-28T06:00:00.000Z"
-            },
-            {
-              "label": "Ausserbinn, Ernen in tutte le direzioni Situazione: chiusa Causa: chiusura invernale",
-              "value": "Chiusura",
-              "date": "2026-10-21T05:22:00.000Z"
-            },
-            {
-              "label": "Zer Meiggeru, Saas-Almagell <-> Mattmark, Saas-Almagell Situazione: chiusa Causa: chiusura invernale",
-              "value": "Chiusura",
-              "date": "2026-10-23T09:44:00.000Z"
-            },
-            {
-              "label": "Morgins, Troistorrents <-> Restaurant d’alpage Tovassière, Route de Chésery, Morgins Situazione: chiusa Causa: chiusura invernale",
-              "value": "Chiusura",
-              "date": "2026-10-23T14:29:00.000Z"
-            },
-            {
-              "label": "A21 Diramazione Gran San Bernardo -> Martigny-Croix tra Svincolo autostradale Martigny-Expo E Svincolo autostradale Martigny-Croix Situazione: problemi di traffico cantiere, lunghezza [km] 0.6…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 11 novembre 2026",
-              "date": "2026-10-26T07:00:00.000Z"
-            },
-            {
-              "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Situazione: chiusa Causa: chiusura invernale",
-              "value": "Chiusura",
-              "date": "2026-10-27T12:15:00.000Z"
-            }
-          ],
-          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -246,7 +178,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "en": {
       "canton": "VS",
@@ -258,16 +190,6 @@
           "label": "Fastest crossing of the week",
           "value": "0 min",
           "note": "Sempione (Iselle-Gondo), week ending 6 November 2026"
-        },
-        {
-          "label": "Road closures in force or imminent",
-          "value": "21",
-          "note": "reports as of 7 November 2026"
-        },
-        {
-          "label": "Roadworks active or imminent",
-          "value": "13",
-          "note": "reports as of 7 November 2026"
         }
       ],
       "dataBlocks": [
@@ -310,59 +232,6 @@
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Closures, roadworks and disruptions",
-          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
-          "items": [
-            {
-              "label": "Monthey <-> Champéry tra Luogo Troistorrents E Luogo Champéry Situazione: chiusa Causa: lavori di manutenzione",
-              "value": "Closure",
-              "detail": "until 20 November 2026",
-              "date": "2026-08-31T05:00:00.000Z"
-            },
-            {
-              "label": "Epinassey, Saint-Maurice <-> La Rasse, Evionnaz Situazione: chiusa Causa: lavori di manutenzione",
-              "value": "Closure",
-              "detail": "until 15 November 2026",
-              "date": "2026-08-31T05:00:00.000Z"
-            },
-            {
-              "label": "Epinassey, Saint-Maurice in tutte le direzioni Situazione: chiusa Causa: lavori di costruzione",
-              "value": "Closure",
-              "detail": "until 18 December 2026",
-              "date": "2026-09-28T06:00:00.000Z"
-            },
-            {
-              "label": "Ausserbinn, Ernen in tutte le direzioni Situazione: chiusa Causa: chiusura invernale",
-              "value": "Closure",
-              "date": "2026-10-21T05:22:00.000Z"
-            },
-            {
-              "label": "Zer Meiggeru, Saas-Almagell <-> Mattmark, Saas-Almagell Situazione: chiusa Causa: chiusura invernale",
-              "value": "Closure",
-              "date": "2026-10-23T09:44:00.000Z"
-            },
-            {
-              "label": "Morgins, Troistorrents <-> Restaurant d’alpage Tovassière, Route de Chésery, Morgins Situazione: chiusa Causa: chiusura invernale",
-              "value": "Closure",
-              "date": "2026-10-23T14:29:00.000Z"
-            },
-            {
-              "label": "A21 Diramazione Gran San Bernardo -> Martigny-Croix tra Svincolo autostradale Martigny-Expo E Svincolo autostradale Martigny-Croix Situazione: problemi di traffico cantiere, lunghezza [km] 0.6…",
-              "value": "Closure",
-              "detail": "until 11 November 2026",
-              "date": "2026-10-26T07:00:00.000Z"
-            },
-            {
-              "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Situazione: chiusa Causa: chiusura invernale",
-              "value": "Closure",
-              "date": "2026-10-27T12:15:00.000Z"
-            }
-          ],
-          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -470,7 +339,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "de": {
       "canton": "VS",
@@ -482,16 +351,6 @@
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
           "note": "Sempione (Iselle-Gondo), Woche bis 6. November 2026"
-        },
-        {
-          "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "21",
-          "note": "Meldungen vom 7. November 2026"
-        },
-        {
-          "label": "Aktive oder bevorstehende Baustellen",
-          "value": "13",
-          "note": "Meldungen vom 7. November 2026"
         }
       ],
       "dataBlocks": [
@@ -534,59 +393,6 @@
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Sperrungen, Baustellen und Störungen",
-          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
-          "items": [
-            {
-              "label": "Monthey <-> Champéry zwischen Ortschaft Troistorrents und Ortschaft Champéry Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 20. November 2026",
-              "date": "2026-08-31T05:00:00.000Z"
-            },
-            {
-              "label": "Epinassey, Saint-Maurice <-> La Rasse, Evionnaz Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 15. November 2026",
-              "date": "2026-08-31T05:00:00.000Z"
-            },
-            {
-              "label": "Epinassey, Saint-Maurice in beide Richtungen Sachlage: Strecke gesperrt Ursache: Bauarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 18. Dezember 2026",
-              "date": "2026-09-28T06:00:00.000Z"
-            },
-            {
-              "label": "Ausserbinn, Ernen in beide Richtungen Sachlage: Strecke gesperrt Ursache: Wintersperre",
-              "value": "Sperrung",
-              "date": "2026-10-21T05:22:00.000Z"
-            },
-            {
-              "label": "Zer Meiggeru, Saas-Almagell <-> Mattmark, Saas-Almagell Sachlage: Strecke gesperrt Ursache: Wintersperre",
-              "value": "Sperrung",
-              "date": "2026-10-23T09:44:00.000Z"
-            },
-            {
-              "label": "Morgins, Troistorrents <-> Restaurant d’alpage Tovassière, Route de Chésery, Morgins Sachlage: Strecke gesperrt Ursache: Wintersperre",
-              "value": "Sperrung",
-              "date": "2026-10-23T14:29:00.000Z"
-            },
-            {
-              "label": "A21 Verzweigung Gd-St-Bernard -> Martigny-Croix zwischen Anschluss Martigny-Expo und Anschluss Martigny-Croix Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Verkehrsführung: Pannenstreifen…",
-              "value": "Sperrung",
-              "detail": "bis 11. November 2026",
-              "date": "2026-10-26T07:00:00.000Z"
-            },
-            {
-              "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Sachlage: Strecke gesperrt Ursache: Wintersperre",
-              "value": "Sperrung",
-              "date": "2026-10-27T12:15:00.000Z"
-            }
-          ],
-          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -694,7 +500,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "fr": {
       "canton": "VS",
@@ -706,16 +512,6 @@
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
           "note": "Sempione (Iselle-Gondo), semaine jusqu’au 6 novembre 2026"
-        },
-        {
-          "label": "Fermetures de routes en cours ou imminentes",
-          "value": "21",
-          "note": "signalements au 7 novembre 2026"
-        },
-        {
-          "label": "Chantiers actifs ou imminents",
-          "value": "13",
-          "note": "signalements au 7 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -758,59 +554,6 @@
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Fermetures, chantiers et perturbations",
-          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
-          "items": [
-            {
-              "label": "Monthey <-> Champéry entre Localité Troistorrents et Localité Champéry Situation: fermé Raison: travaux de maintenance",
-              "value": "Fermeture",
-              "detail": "jusqu’au 20 novembre 2026",
-              "date": "2026-08-31T05:00:00.000Z"
-            },
-            {
-              "label": "Epinassey, Saint-Maurice <-> La Rasse, Evionnaz Situation: fermé Raison: travaux de maintenance",
-              "value": "Fermeture",
-              "detail": "jusqu’au 15 novembre 2026",
-              "date": "2026-08-31T05:00:00.000Z"
-            },
-            {
-              "label": "Epinassey, Saint-Maurice dans les deux sens Situation: fermé Raison: travaux de construction",
-              "value": "Fermeture",
-              "detail": "jusqu’au 18 décembre 2026",
-              "date": "2026-09-28T06:00:00.000Z"
-            },
-            {
-              "label": "Ausserbinn, Ernen dans les deux sens Situation: fermé Raison: fermeture hivernale",
-              "value": "Fermeture",
-              "date": "2026-10-21T05:22:00.000Z"
-            },
-            {
-              "label": "Zer Meiggeru, Saas-Almagell <-> Mattmark, Saas-Almagell Situation: fermé Raison: fermeture hivernale",
-              "value": "Fermeture",
-              "date": "2026-10-23T09:44:00.000Z"
-            },
-            {
-              "label": "Morgins, Troistorrents <-> Restaurant d’alpage Tovassière, Route de Chésery, Morgins Situation: fermé Raison: fermeture hivernale",
-              "value": "Fermeture",
-              "date": "2026-10-23T14:29:00.000Z"
-            },
-            {
-              "label": "A21 Echangeur Gd-St-Bernard -> Martigny-Croix entre Jonction autoroutière Martigny-Expo et Jonction autoroutière Martigny-Croix Situation: trafic perturbé travaux, longueur [km] 0.6 Gestion du…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 11 novembre 2026",
-              "date": "2026-10-26T07:00:00.000Z"
-            },
-            {
-              "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Situation: fermé Raison: fermeture hivernale",
-              "value": "Fermeture",
-              "date": "2026-10-27T12:15:00.000Z"
-            }
-          ],
-          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -918,7 +661,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     }
   }
 }

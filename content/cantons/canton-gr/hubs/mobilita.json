@@ -4,18 +4,13 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "b6abd18db7d8c17d5a462ee0ce67a4769cb813269955fdaeb1dc1c8c204df670",
+  "updatedAt": "2026-11-09T23:41:11.155Z",
+  "contentHash": "019addf4b69e02d069ade7475dcf8674b14969ed5e3be2b218e9084d56785518",
   "blocks": [
     {
       "id": "attese-valichi",
       "updatedAt": "2026-11-06T23:59:59.000Z",
       "keyFacts": 1
-    },
-    {
-      "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-07T22:20:59.233Z",
-      "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
@@ -34,16 +29,6 @@
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
           "note": "Giogo di Santa Maria (Passo dell'Umbrail), settimana conclusa: 6 novembre 2026"
-        },
-        {
-          "label": "Chiusure stradali in corso o imminenti",
-          "value": "9",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
-        },
-        {
-          "label": "Cantieri attivi o imminenti",
-          "value": "8",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -104,63 +89,6 @@
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Chiusure, cantieri e disagi",
-          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
-          "items": [
-            {
-              "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Bonaduz E Svincolo autostradale Reichenau Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 13 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino Svincolo autostradale Grono Situazione: uscita chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 19 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 S. Bernardino -> Bellinzona tra Svincolo autostradale Lostallo E Svincolo autostradale Roveredo Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 18 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino tra Svincolo autostradale Roveredo E Svincolo autostradale Lostallo Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 19 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino tra Svincolo autostradale Roveredo E Svincolo autostradale Lostallo Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 17 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino Svincolo autostradale Grono Situazione: uscita chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 17 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona <-> S. Bernardino tra Svincolo autostradale Roveredo E Svincolo autostradale San Vittore Situazione: chiusa cantiere, lunghezza [km] 4.0",
-              "value": "Chiusura",
-              "detail": "fine prevista: 11 novembre 2026",
-              "date": "2026-10-19T07:15:00.000Z"
-            },
-            {
-              "label": "A28 Landquart <-> Klosters Ost / Vereina tra Incrocio Klosters West E Svincolo autostradale Klosters Ost / Vereina Situazione: chiusa cantiere, lunghezza [km] 4.2",
-              "value": "Chiusura",
-              "detail": "fine prevista: 12 novembre 2026",
-              "date": "2026-10-28T07:58:00.000Z"
-            }
-          ],
-          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -290,7 +218,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "en": {
       "canton": "GR",
@@ -302,16 +230,6 @@
           "label": "Fastest crossing of the week",
           "value": "0 min",
           "note": "Giogo di Santa Maria (Passo dell'Umbrail), week ending 6 November 2026"
-        },
-        {
-          "label": "Road closures in force or imminent",
-          "value": "9",
-          "note": "reports as of 7 November 2026"
-        },
-        {
-          "label": "Roadworks active or imminent",
-          "value": "8",
-          "note": "reports as of 7 November 2026"
         }
       ],
       "dataBlocks": [
@@ -372,63 +290,6 @@
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Closures, roadworks and disruptions",
-          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
-          "items": [
-            {
-              "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Bonaduz E Svincolo autostradale Reichenau Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 13 November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino Svincolo autostradale Grono Situazione: uscita chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 19 November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 S. Bernardino -> Bellinzona tra Svincolo autostradale Lostallo E Svincolo autostradale Roveredo Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Closure",
-              "detail": "until 18 November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino tra Svincolo autostradale Roveredo E Svincolo autostradale Lostallo Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 19 November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino tra Svincolo autostradale Roveredo E Svincolo autostradale Lostallo Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Closure",
-              "detail": "until 17 November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino Svincolo autostradale Grono Situazione: uscita chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Closure",
-              "detail": "until 17 November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona <-> S. Bernardino tra Svincolo autostradale Roveredo E Svincolo autostradale San Vittore Situazione: chiusa cantiere, lunghezza [km] 4.0",
-              "value": "Closure",
-              "detail": "until 11 November 2026",
-              "date": "2026-10-19T07:15:00.000Z"
-            },
-            {
-              "label": "A28 Landquart <-> Klosters Ost / Vereina tra Incrocio Klosters West E Svincolo autostradale Klosters Ost / Vereina Situazione: chiusa cantiere, lunghezza [km] 4.2",
-              "value": "Closure",
-              "detail": "until 12 November 2026",
-              "date": "2026-10-28T07:58:00.000Z"
-            }
-          ],
-          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -557,7 +418,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "de": {
       "canton": "GR",
@@ -569,16 +430,6 @@
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
           "note": "Giogo di Santa Maria (Passo dell'Umbrail), Woche bis 6. November 2026"
-        },
-        {
-          "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "9",
-          "note": "Meldungen vom 7. November 2026"
-        },
-        {
-          "label": "Aktive oder bevorstehende Baustellen",
-          "value": "8",
-          "note": "Meldungen vom 7. November 2026"
         }
       ],
       "dataBlocks": [
@@ -639,63 +490,6 @@
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Sperrungen, Baustellen und Störungen",
-          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
-          "items": [
-            {
-              "label": "A13 S. Bernardino <-> Chur zwischen Anschluss Bonaduz und Anschluss Reichenau Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 13. November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino Anschluss Grono Sachlage: Ausfahrt gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 19. November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 S. Bernardino -> Bellinzona zwischen Anschluss Lostallo und Anschluss Roveredo Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 18. November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino zwischen Anschluss Roveredo und Anschluss Lostallo Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 19. November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino zwischen Anschluss Roveredo und Anschluss Lostallo Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 17. November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino Anschluss Grono Sachlage: Ausfahrt gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 17. November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona <-> S. Bernardino zwischen Anschluss Roveredo und Anschluss San Vittore Sachlage: Strecke gesperrt Baustelle, Länge [km] 4.0",
-              "value": "Sperrung",
-              "detail": "bis 11. November 2026",
-              "date": "2026-10-19T07:15:00.000Z"
-            },
-            {
-              "label": "A28 Landquart <-> Klosters-Ost / Vereina zwischen Kreuzung Klosters-West und Anschluss Klosters-Ost / Vereina Sachlage: Strecke gesperrt Baustelle, Länge [km] 4.2",
-              "value": "Sperrung",
-              "detail": "bis 12. November 2026",
-              "date": "2026-10-28T07:58:00.000Z"
-            }
-          ],
-          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -825,7 +619,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "fr": {
       "canton": "GR",
@@ -837,16 +631,6 @@
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
           "note": "Giogo di Santa Maria (Passo dell'Umbrail), semaine jusqu’au 6 novembre 2026"
-        },
-        {
-          "label": "Fermetures de routes en cours ou imminentes",
-          "value": "9",
-          "note": "signalements au 7 novembre 2026"
-        },
-        {
-          "label": "Chantiers actifs ou imminents",
-          "value": "8",
-          "note": "signalements au 7 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -907,63 +691,6 @@
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Fermetures, chantiers et perturbations",
-          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
-          "items": [
-            {
-              "label": "A13 S. Bernardino <-> Coire entre Jonction autoroutière Bonaduz et Jonction autoroutière Reichenau Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 13 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzone -> S. Bernardino Jonction autoroutière Grono Situation: sortie fermée travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 19 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 S. Bernardino -> Bellinzone entre Jonction autoroutière Lostallo et Jonction autoroutière Roveredo Situation: fermé travaux Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 18 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzone -> S. Bernardino entre Jonction autoroutière Roveredo et Jonction autoroutière Lostallo Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 19 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzone -> S. Bernardino entre Jonction autoroutière Roveredo et Jonction autoroutière Lostallo Situation: fermé travaux Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 17 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzone -> S. Bernardino Jonction autoroutière Grono Situation: sortie fermée travaux Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 17 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzone <-> S. Bernardino entre Jonction autoroutière Roveredo et Jonction autoroutière San Vittore Situation: fermé travaux, longueur [km] 4.0",
-              "value": "Fermeture",
-              "detail": "jusqu’au 11 novembre 2026",
-              "date": "2026-10-19T07:15:00.000Z"
-            },
-            {
-              "label": "A28 Landquart <-> Klosters-Est / Vereina entre Carrefour Klosters-Ouest et Jonction autoroutière Klosters-Est / Vereina Situation: fermé travaux, longueur [km] 4.2",
-              "value": "Fermeture",
-              "detail": "jusqu’au 12 novembre 2026",
-              "date": "2026-10-28T07:58:00.000Z"
-            }
-          ],
-          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1093,7 +820,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     }
   }
 }

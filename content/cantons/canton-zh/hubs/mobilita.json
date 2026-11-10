@@ -4,18 +4,13 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-11-09T10:40:40.618Z",
-  "contentHash": "390868a7d40a6389376e0f9278ad7de4d8210419fd0a33c4667cb42b9e5ca1c2",
+  "updatedAt": "2026-11-09T23:41:11.155Z",
+  "contentHash": "81edfc9b8b83098d147dbca30b1b4bd7b8569560da16a82402326d60daa4174b",
   "blocks": [
     {
       "id": "attese-valichi",
       "updatedAt": "2026-11-06T23:59:59.000Z",
       "keyFacts": 1
-    },
-    {
-      "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-07T22:20:59.233Z",
-      "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
@@ -34,16 +29,6 @@
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
           "note": "Dettighofen – Rafz, settimana conclusa: 6 novembre 2026"
-        },
-        {
-          "label": "Chiusure stradali in corso o imminenti",
-          "value": "7",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
-        },
-        {
-          "label": "Cantieri attivi o imminenti",
-          "value": "16",
-          "note": "segnalazioni aggiornate: 7 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -104,62 +89,6 @@
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Chiusure, cantieri e disagi",
-          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
-          "items": [
-            {
-              "label": "A51 Aeroporto -> Zürich tra Svincolo autostradale Aeroporto E Svincolo autostradale Glattbrugg Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 13 novembre 2026",
-              "date": "2026-10-14T11:17:00.000Z"
-            },
-            {
-              "label": "A3 Zürich -> Chur Svincolo autostradale Horgen Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.1",
-              "value": "Chiusura",
-              "detail": "fine prevista: 27 novembre 2026",
-              "date": "2026-10-15T09:43:00.000Z"
-            },
-            {
-              "label": "A51 Zürich <-> Aeroporto tra Svincolo autostradale Opfikon E Svincolo autostradale Glattbrugg Situazione: chiusa cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsia chiusa Aggiunta 1…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 16 novembre 2026",
-              "date": "2026-10-21T14:13:00.000Z"
-            },
-            {
-              "label": "A1L Letten <-> Diramazione Zürich Ost tra Svincolo autostradale Unterstrass E Svincolo autostradale Aubrugg Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 11 dicembre 2026",
-              "date": "2026-10-27T17:01:00.000Z"
-            },
-            {
-              "label": "A1L Letten <-> Diramazione Zürich Ost tra Svincolo autostradale Unterstrass E Raccordo autostradale Diramazione Zürich Ost Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 16 dicembre 2026",
-              "date": "2026-10-27T17:05:00.000Z"
-            },
-            {
-              "label": "A1H Hardturm -> Diramazione Limmattal tra Parcheggio Oberengstringen E Raccordo autostradale Diramazione Limmattal Situazione: chiusa cantiere, lunghezza [km] 0.3 Limitazione del traffico: corsia…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 12 novembre 2026",
-              "date": "2026-11-04T11:40:00.000Z"
-            },
-            {
-              "label": "A4 Winterthur <-> Schaffhausen tra Raccordo autostradale Diramazione Mutzentäli E Svincolo autostradale Flurlingen Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 11 dicembre 2026",
-              "date": "2026-11-05T11:12:00.000Z"
-            },
-            {
-              "label": "A51 Bülach -> Aeroporto tra Svincolo autostradale Bülach Süd E Svincolo autostradale Kloten Nord Situazione: colonna Causa: incidente precedente",
-              "value": "Traffico",
-              "date": "2026-11-04T05:48:00.000Z"
-            }
-          ],
-          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -281,7 +210,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-09T10:40:40.618Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "en": {
       "canton": "ZH",
@@ -293,16 +222,6 @@
           "label": "Fastest crossing of the week",
           "value": "0 min",
           "note": "Dettighofen – Rafz, week ending 6 November 2026"
-        },
-        {
-          "label": "Road closures in force or imminent",
-          "value": "7",
-          "note": "reports as of 7 November 2026"
-        },
-        {
-          "label": "Roadworks active or imminent",
-          "value": "16",
-          "note": "reports as of 7 November 2026"
         }
       ],
       "dataBlocks": [
@@ -363,62 +282,6 @@
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Closures, roadworks and disruptions",
-          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
-          "items": [
-            {
-              "label": "A51 Aeroporto -> Zürich tra Svincolo autostradale Aeroporto E Svincolo autostradale Glattbrugg Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 13 November 2026",
-              "date": "2026-10-14T11:17:00.000Z"
-            },
-            {
-              "label": "A3 Zürich -> Chur Svincolo autostradale Horgen Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.1",
-              "value": "Closure",
-              "detail": "until 27 November 2026",
-              "date": "2026-10-15T09:43:00.000Z"
-            },
-            {
-              "label": "A51 Zürich <-> Aeroporto tra Svincolo autostradale Opfikon E Svincolo autostradale Glattbrugg Situazione: chiusa cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsia chiusa Aggiunta 1…",
-              "value": "Closure",
-              "detail": "until 16 November 2026",
-              "date": "2026-10-21T14:13:00.000Z"
-            },
-            {
-              "label": "A1L Letten <-> Diramazione Zürich Ost tra Svincolo autostradale Unterstrass E Svincolo autostradale Aubrugg Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Closure",
-              "detail": "until 11 December 2026",
-              "date": "2026-10-27T17:01:00.000Z"
-            },
-            {
-              "label": "A1L Letten <-> Diramazione Zürich Ost tra Svincolo autostradale Unterstrass E Raccordo autostradale Diramazione Zürich Ost Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Closure",
-              "detail": "until 16 December 2026",
-              "date": "2026-10-27T17:05:00.000Z"
-            },
-            {
-              "label": "A1H Hardturm -> Diramazione Limmattal tra Parcheggio Oberengstringen E Raccordo autostradale Diramazione Limmattal Situazione: chiusa cantiere, lunghezza [km] 0.3 Limitazione del traffico: corsia…",
-              "value": "Closure",
-              "detail": "until 12 November 2026",
-              "date": "2026-11-04T11:40:00.000Z"
-            },
-            {
-              "label": "A4 Winterthur <-> Schaffhausen tra Raccordo autostradale Diramazione Mutzentäli E Svincolo autostradale Flurlingen Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 11 December 2026",
-              "date": "2026-11-05T11:12:00.000Z"
-            },
-            {
-              "label": "A51 Bülach -> Aeroporto tra Svincolo autostradale Bülach Süd E Svincolo autostradale Kloten Nord Situazione: colonna Causa: incidente precedente",
-              "value": "Traffic",
-              "date": "2026-11-04T05:48:00.000Z"
-            }
-          ],
-          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -540,7 +403,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-09T10:40:40.618Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "de": {
       "canton": "ZH",
@@ -552,16 +415,6 @@
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
           "note": "Dettighofen – Rafz, Woche bis 6. November 2026"
-        },
-        {
-          "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "7",
-          "note": "Meldungen vom 7. November 2026"
-        },
-        {
-          "label": "Aktive oder bevorstehende Baustellen",
-          "value": "16",
-          "note": "Meldungen vom 7. November 2026"
         }
       ],
       "dataBlocks": [
@@ -622,62 +475,6 @@
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Sperrungen, Baustellen und Störungen",
-          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
-          "items": [
-            {
-              "label": "A51 Flughafen -> Zürich zwischen Anschluss Flughafen und Anschluss Glattbrugg Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 13. November 2026",
-              "date": "2026-10-14T11:17:00.000Z"
-            },
-            {
-              "label": "A3 Zürich -> Chur Anschluss Horgen Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.1",
-              "value": "Sperrung",
-              "detail": "bis 27. November 2026",
-              "date": "2026-10-15T09:43:00.000Z"
-            },
-            {
-              "label": "A51 Zürich <-> Flughafen zwischen Anschluss Opfikon und Anschluss Glattbrugg Sachlage: Strecke gesperrt Baustelle, Länge [km] 1.0 Verkehrsführung: Fahrstreifen gesperrt Zusatz 1: vorübergehende…",
-              "value": "Sperrung",
-              "detail": "bis 16. November 2026",
-              "date": "2026-10-21T14:13:00.000Z"
-            },
-            {
-              "label": "A1L Letten <-> Verzweigung Zürich-Ost zwischen Anschluss Unterstrass und Anschluss Aubrugg Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 11. Dezember 2026",
-              "date": "2026-10-27T17:01:00.000Z"
-            },
-            {
-              "label": "A1L Letten <-> Verzweigung Zürich-Ost zwischen Anschluss Unterstrass und Autobahndreieck Verzweigung Zürich-Ost Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 16. Dezember 2026",
-              "date": "2026-10-27T17:05:00.000Z"
-            },
-            {
-              "label": "A1H Hardturm -> Verzweigung Limmattal zwischen Parkplatz Oberengstringen und Autobahnkreuz Verzweigung Limmattal Sachlage: Strecke gesperrt Baustelle, Länge [km] 0.3 Verkehrsführung: Fahrstreifen…",
-              "value": "Sperrung",
-              "detail": "bis 12. November 2026",
-              "date": "2026-11-04T11:40:00.000Z"
-            },
-            {
-              "label": "A4 Winterthur <-> Schaffhausen zwischen Autobahndreieck Verzweigung Mutzentäli und Anschluss Flurlingen Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 11. Dezember 2026",
-              "date": "2026-11-05T11:12:00.000Z"
-            },
-            {
-              "label": "A51 Bülach -> Flughafen zwischen Anschluss Bülach-Süd und Anschluss Kloten-Nord Sachlage: Stau Ursache: vorausgegangener Unfall",
-              "value": "Verkehr",
-              "date": "2026-11-04T05:48:00.000Z"
-            }
-          ],
-          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -799,7 +596,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-09T10:40:40.618Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     },
     "fr": {
       "canton": "ZH",
@@ -811,16 +608,6 @@
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
           "note": "Dettighofen – Rafz, semaine jusqu’au 6 novembre 2026"
-        },
-        {
-          "label": "Fermetures de routes en cours ou imminentes",
-          "value": "7",
-          "note": "signalements au 7 novembre 2026"
-        },
-        {
-          "label": "Chantiers actifs ou imminents",
-          "value": "16",
-          "note": "signalements au 7 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -881,62 +668,6 @@
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
           "updatedAt": "2026-11-06T23:59:59.000Z"
-        },
-        {
-          "id": "chiusure-cantieri",
-          "title": "Fermetures, chantiers et perturbations",
-          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
-          "items": [
-            {
-              "label": "A51 Aéroport -> Zurich entre Jonction autoroutière Aéroport et Jonction autoroutière Glattbrugg Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 13 novembre 2026",
-              "date": "2026-10-14T11:17:00.000Z"
-            },
-            {
-              "label": "A3 Zurich -> Coire Jonction autoroutière Horgen Situation: entrée fermée travaux, longueur [km] 0.1",
-              "value": "Fermeture",
-              "detail": "jusqu’au 27 novembre 2026",
-              "date": "2026-10-15T09:43:00.000Z"
-            },
-            {
-              "label": "A51 Zurich <-> Aéroport entre Jonction autoroutière Opfikon et Jonction autoroutière Glattbrugg Situation: fermé travaux, longueur [km] 1.0 Gestion du trafic: voie fermée Complément 1: limitation…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 16 novembre 2026",
-              "date": "2026-10-21T14:13:00.000Z"
-            },
-            {
-              "label": "A1L Letten <-> Echangeur de Zurich-Est entre Jonction autoroutière Unterstrass et Jonction autoroutière Aubrugg Situation: fermé travaux Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 11 décembre 2026",
-              "date": "2026-10-27T17:01:00.000Z"
-            },
-            {
-              "label": "A1L Letten <-> Echangeur de Zurich-Est entre Jonction autoroutière Unterstrass et Echangeur Echangeur de Zurich-Est Situation: fermé travaux Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 16 décembre 2026",
-              "date": "2026-10-27T17:05:00.000Z"
-            },
-            {
-              "label": "A1H Hardturm -> Echangeur de Limmattal entre Parking Oberengstringen et Echangeur Echangeur de Limmattal Situation: fermé travaux, longueur [km] 0.3 Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 12 novembre 2026",
-              "date": "2026-11-04T11:40:00.000Z"
-            },
-            {
-              "label": "A4 Winterthur <-> Schaffhouse entre Echangeur Echangeur de Mutzentäli et Jonction autoroutière Flurlingen Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 11 décembre 2026",
-              "date": "2026-11-05T11:12:00.000Z"
-            },
-            {
-              "label": "A51 Bülach -> Aéroport entre Jonction autoroutière Bülach-Sud et Jonction autoroutière Kloten-Nord Situation: bouchon Raison: accident précédent",
-              "value": "Trafic",
-              "date": "2026-11-04T05:48:00.000Z"
-            }
-          ],
-          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-07T22:20:59.233Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1058,7 +789,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-09T10:40:40.618Z"
+      "updatedAt": "2026-11-09T23:41:11.155Z"
     }
   }
 }

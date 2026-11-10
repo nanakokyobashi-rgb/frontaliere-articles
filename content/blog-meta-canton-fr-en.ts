@@ -75,6 +75,9 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.neyruz-strada-cantonale-valtraloc.title': 'Neyruz: Valtraloc works, completion in autumn 2028',
     'blog.article.neyruz-strada-cantonale-valtraloc.excerpt': 'The cantonal road in Neyruz will undergo construction work. The Valtraloc project provides for the enhancement of the spaces, with completion expected in autumn 2028.',
     'blog.article.neyruz-strada-cantonale-valtraloc.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.friburgo-destra-tre-seggi.title': 'Elections in Fribourg: right wins three seats in the first round',
+    'blog.article.friburgo-destra-tre-seggi.excerpt': 'The title brings together three verifiable coordinates: the territory of Fribourg, the State Council body, and the outcome of three seats assigned to the right in the first round.',
+    'blog.article.friburgo-destra-tre-seggi.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonFrEn;
