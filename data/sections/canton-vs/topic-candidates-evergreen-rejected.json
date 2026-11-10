@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://vework-public.vs.ch/app/publication/fr/27-09-2026/1": {
-      "section": "canton-vs",
-      "ts": 1794106266886
-    },
-    "canton-vs::https://www.pomona.ch/story/824251/kanton-wallis-verweigert-mehreren-brand%c3%bcberlebenden-finanzielle-nothilfe": {
-      "section": "canton-vs",
-      "ts": 1794112177176
-    },
     "canton-vs::https://www.pomona.ch/story/822920/die-walliser-wirtschaft-angesichts-globaler-herausforderungen": {
       "section": "canton-vs",
       "ts": 1794175953123
@@ -43,6 +35,10 @@
     "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
       "section": "canton-vs",
       "ts": 1794277581973
+    },
+    "canton-vs::https://www.pomona.ch/story/825047/z%c3%a4hneknirschend-durchgewunken-walliser-parlament-kapituliert-vor-millionenmehrkosten": {
+      "section": "canton-vs",
+      "ts": 1794316525465
     }
   }
 }

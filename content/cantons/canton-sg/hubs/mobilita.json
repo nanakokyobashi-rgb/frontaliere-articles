@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-10T11:58:53.708Z",
-  "contentHash": "7dbd5e2e40f713798c8b6870a5b61eec1ade8d4d2a89e609e6371e4c105c11df",
+  "updatedAt": "2026-11-10T14:00:19.925Z",
+  "contentHash": "9e4dfd8c8b8657349c7093d1132892b8f6c782a6114116f0fda0e0d8562a972b",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -203,6 +203,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Corsa Frauenfeld-Wil: disagi al traffico il 15 novembre 2026",
+          "url": "/articoli-san-gallo/corsa-frauenfeld-wil-2026/",
+          "excerpt": "La corsa collega Frauenfeld e Wil passando per Matzingen, Wängi, Eschlikon e Sirnach; la polizia chiuderà temporaneamente strade specifiche a Wil.",
+          "date": "2026-11-10T13:27:36.197Z"
+        },
+        {
           "title": "Controllo traffico San Gallo: 105 violazioni accertate il 24 ottobre 2026",
           "url": "/articoli-san-gallo/controllo-traffico-san-gallo-ottobre/",
           "excerpt": "La Polizia cantonale di San Gallo ha condotto nella notte tra venerdì e sabato del 24 ottobre 2026 un controllo mirato nel traffico stradale, insieme al Bundesamt für Zoll und Grenzsicherheit, indicato con l'acronimo…",
@@ -243,12 +249,6 @@
           "url": "/articoli-san-gallo/voto-bahnhofplatz-wil-2026/",
           "excerpt": "Il 29 novembre 2026 i cittadini di Wil voteranno sul progetto per il nuovo terminale bus, la velostazione e la riqualificazione della stazione.",
           "date": "2026-10-19T12:16:44.327Z"
-        },
-        {
-          "title": "Lavori sulla Hauptstrasse a Wartau dal 19 ottobre 2026",
-          "url": "/articoli-san-gallo/lavori-strada-wartau-plattis/",
-          "excerpt": "A Wartau i lavori sulla Hauptstrasse iniziano il 19 ottobre 2026: nel tratto Plattis saranno rinnovate le condotte di drenaggio e il fondo stradale.",
-          "date": "2026-10-09T20:23:10.514Z"
         }
       ],
       "latestCantonArticles": [],
@@ -286,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-10T14:00:19.925Z"
     },
     "en": {
       "canton": "SG",
@@ -467,6 +467,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Frauenfeld-Wil race: traffic disruptions on November 15, 2026",
+          "url": "/en/st-gallen-articles/frauenfeld-wil-race-2026/",
+          "excerpt": "The race connects Frauenfeld and Wil via Matzingen, Wängi, Eschlikon and Sirnach; the police will temporarily close specific roads in Wil.",
+          "date": "2026-11-10T13:27:36.197Z"
+        },
+        {
           "title": "St. Gallen traffic check: 105 violations confirmed on October 24, 2026",
           "url": "/en/st-gallen-articles/st-gallen-traffic-control-october/",
           "excerpt": "105 violations recorded during the night of October 24 Approximately 150 vehicles and occupants checked 70 vehicles traveling at over 80 km/h on the A13.",
@@ -506,12 +512,6 @@
           "url": "/en/st-gallen-articles/wil-bahnhofplatz-vote-2026/",
           "excerpt": "On November 29, 2026, the citizens of Wil will vote on the project for the new bus terminal, bicycle station, and redevelopment of the station.",
           "date": "2026-10-19T12:16:44.327Z"
-        },
-        {
-          "title": "Roadworks on Hauptstrasse in Wartau from October 19, 2026",
-          "url": "/en/st-gallen-articles/roadworks-wartau-plattis/",
-          "excerpt": "In Wartau, work on Hauptstrasse will begin on October 19, 2026: in the Plattis section, the drainage pipes and road surface will be renewed.",
-          "date": "2026-10-09T20:23:10.514Z"
         }
       ],
       "latestCantonArticles": [],
@@ -549,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-10T14:00:19.925Z"
     },
     "de": {
       "canton": "SG",
@@ -730,6 +730,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lauf Frauenfeld-Wil: Verkehrsbehinderungen am 15. November 2026",
+          "url": "/de/st-gallen-artikel/lauf-frauenfeld-wil-2026/",
+          "excerpt": "Der Lauf verbindet Frauenfeld und Wil und führt über Matzingen, Wängi, Eschlikon und Sirnach; die Polizei wird in Wil bestimmte Strassen vorübergehend sperren.",
+          "date": "2026-11-10T13:27:36.197Z"
+        },
+        {
           "title": "Verkehrskontrolle St. Gallen: 105 Verstöße am 24. Oktober 2026 festgestellt",
           "url": "/de/st-gallen-artikel/verkehrskontrolle-st-gallen-oktober/",
           "excerpt": "Die Kantonspolizei St. Gallen führte in der Nacht von Freitag auf Samstag, 24. Oktober 2026, gemeinsam mit dem Bundesamt für Zoll und Grenzsicherheit, abgekürzt BAZG, und der Landespolizei des Fürstentums Liechtenstein…",
@@ -769,12 +775,6 @@
           "url": "/de/st-gallen-artikel/abstimmung-bahnhofplatz-wil-2026/",
           "excerpt": "Am 29. November 2026 stimmen die Bürgerinnen und Bürger von Wil über das Projekt für den neuen Busterminal, die Velostation und die Neugestaltung des Bahnhofs ab.",
           "date": "2026-10-19T12:16:44.327Z"
-        },
-        {
-          "title": "Arbeiten an der Hauptstrasse in Wartau ab dem 19. Oktober 2026",
-          "url": "/de/st-gallen-artikel/bauarbeiten-wartau-plattis/",
-          "excerpt": "Am Montag, dem 19. Oktober 2026, wird das kantonale Tiefbauamt die Arbeiten an der Hauptstrasse in Wartau, im Abschnitt Plattis, aufnehmen.",
-          "date": "2026-10-09T20:23:10.514Z"
         }
       ],
       "latestCantonArticles": [],
@@ -812,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-10T14:00:19.925Z"
     },
     "fr": {
       "canton": "SG",
@@ -993,6 +993,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Course Frauenfeld-Wil : perturbations du trafic le 15 novembre 2026",
+          "url": "/fr/articles-saint-gall/course-frauenfeld-wil-2026/",
+          "excerpt": "La course relie Frauenfeld et Wil en passant par Matzingen, Wängi, Eschlikon et Sirnach ; la police fermera temporairement certaines routes à Wil.",
+          "date": "2026-11-10T13:27:36.197Z"
+        },
+        {
           "title": "Contrôle du trafic à Saint-Gall : 105 infractions constatées le 24 octobre 2026",
           "url": "/fr/articles-saint-gall/controle-trafic-st-galle-octobre/",
           "excerpt": "La police cantonale de Saint-Gall a mené, dans la nuit de vendredi à samedi, le 24 octobre 2026, un contrôle ciblé du trafic routier, avec l'Office fédéral de la douane et de la sécurité des frontières, désigné par…",
@@ -1033,12 +1039,6 @@
           "url": "/fr/articles-saint-gall/vote-bahnhofplatz-wil-2026/",
           "excerpt": "Le 29 novembre 2026, les citoyens de Wil voteront sur le projet du nouveau terminal de bus, de la vélostation et de la requalification de la gare.",
           "date": "2026-10-19T12:16:44.327Z"
-        },
-        {
-          "title": "Travaux sur la Hauptstrasse à Wartau à partir du 19 octobre 2026",
-          "url": "/fr/articles-saint-gall/travaux-routiers-wartau-plattis/",
-          "excerpt": "À Wartau, les travaux sur la Hauptstrasse commencent le 19 octobre 2026 : sur le tronçon de Plattis, les conduites de drainage et la chaussée seront rénovées.",
-          "date": "2026-10-09T20:23:10.514Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1076,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-10T14:00:19.925Z"
     }
   }
 }

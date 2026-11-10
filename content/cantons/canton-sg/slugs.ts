@@ -34,6 +34,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'meno-cercatori-lavoro-ottobre': { it: 'meno-cercatori-lavoro-ottobre', en: 'fewer-job-seekers-october', de: 'weniger-stellensuchende-oktober', fr: 'moins-chercheurs-emploi-octobre' },
  'voto-regolamento-fondo-gas-wil': { it: 'voto-regolamento-fondo-gas-wil', en: 'vote-regulation-gas-fund-wil', de: 'abstimmung-reglement-fonds-gas-wil', fr: 'vote-reglement-fonds-gaz-wil' },
  'voto-wil-29-novembre-2026': { it: 'voto-wil-29-novembre-2026', en: 'wil-vote-november-29-2026', de: 'wil-wahl-29-november-2026', fr: 'vote-wil-29-novembre-2026' },
+ 'corsa-frauenfeld-wil-2026': { it: 'corsa-frauenfeld-wil-2026', en: 'frauenfeld-wil-race-2026', de: 'lauf-frauenfeld-wil-2026', fr: 'course-frauenfeld-wil-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
