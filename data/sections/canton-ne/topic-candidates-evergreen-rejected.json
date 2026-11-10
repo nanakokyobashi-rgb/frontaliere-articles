@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.estrepublicain.fr/culture-loisirs/2026/11/07/le-travail-frontalier-un-phenomene-certes-complexe-mais-qui-profite-aux-deux-pays": {
-      "section": "canton-ne",
-      "ts": 1794078968429
-    },
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261107-participation-record-au-festival-du-chocolat-a-neuchatel.html": {
       "section": "canton-ne",
       "ts": 1794130917401
@@ -23,6 +19,10 @@
     "canton-ne::https://www.rts.ch/info/regions/vaud/2026/article/vaud-et-neuchatel-lancent-un-numero-unique-pour-la-sante-29402837.html": {
       "section": "canton-ne",
       "ts": 1794167250647
+    },
+    "canton-ne::https://www.estrepublicain.fr/culture-loisirs/2026/11/07/le-travail-frontalier-un-phenomene-certes-complexe-mais-qui-profite-aux-deux-pays": {
+      "section": "canton-ne",
+      "ts": 1794277967837
     }
   }
 }
