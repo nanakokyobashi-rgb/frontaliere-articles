@@ -18,6 +18,8 @@ import {
   pickHeadline,
   pickDailyAuthor,
   dailyBriefSlugs,
+  excludeDailyBriefArticles,
+  isDailyBriefArticleId,
   selectRetiredDailyEditions,
   DAILY_EDITION_SITEMAP_KEEP,
   loadSnapshot,
@@ -87,6 +89,22 @@ const BRIEF = {
     },
   },
 };
+
+test('the recurring daily dedup policy excludes only prior dated editions', () => {
+  assert.equal(isDailyBriefArticleId('bollettino-frontaliere-2026-11-10'), true);
+  assert.equal(isDailyBriefArticleId('bollettino-frontaliere-not-a-date'), false);
+  assert.equal(isDailyBriefArticleId('daily-brief-2026-11-10'), false);
+
+  const existing = [
+    { id: 'bollettino-frontaliere-2026-11-09', title: 'Daily', excerpt: 'Daily' },
+    { id: 'ordinary-article', title: 'Ordinary', excerpt: 'Ordinary' },
+    { id: 'bollettino-frontaliere-not-a-date', title: 'Not daily', excerpt: 'Not daily' },
+  ];
+  assert.deepEqual(
+    excludeDailyBriefArticles(existing).map(({ id }) => id),
+    ['ordinary-article', 'bollettino-frontaliere-not-a-date'],
+  );
+});
 
 test('the title leads with the day’s proprietary number, in every locale', () => {
   const article = buildDailyBriefArticle(BRIEF);

@@ -51,6 +51,7 @@ export function buildDedupText(title, excerpt) {
  *   meta?: object,
  *   threshold?: number,
  *   k?: number,
+ *   ignoreNeighbor?: (slug: string|null) => boolean,
  *   log?: (msg: string) => void,
  * }} [opts]
  * @returns {Promise<object>} the same data object when not a duplicate
@@ -95,7 +96,16 @@ export async function checkSemanticNearDuplicate(data, opts = {}) {
   // actually answered (Mistral or its Cohere fallback). If that model differs
   // from the model the store was built with, findTopK degrades to a clean skip.
   const queryModel = opts.queryModel !== undefined ? opts.queryModel : lastUsedEmbeddingModel();
-  const topK = findTopK(vec, { store, meta, k, queryModel });
+  const ignoreNeighbor = typeof opts.ignoreNeighbor === 'function'
+    ? opts.ignoreNeighbor
+    : null;
+  // If the caller excludes a recurring family, search the complete store so
+  // several excluded editions cannot hide a real non-family duplicate just
+  // beyond the normal top-K window.
+  const searchK = ignoreNeighbor && Number.isInteger(store.count)
+    ? Math.max(k, store.count)
+    : k;
+  const topK = findTopK(vec, { store, meta, k: searchK, queryModel });
   if (topK.length === 0 && meta && typeof meta.model === 'string' && queryModel && meta.model !== queryModel) {
     log(`  ⏭️  Dedup semantico saltato (store model '${meta.model}' ≠ provider attivo '${queryModel}' — cosine cross-provider non valida)`);
     return data;
@@ -104,7 +114,12 @@ export async function checkSemanticNearDuplicate(data, opts = {}) {
   // The new article isn't in the store yet, but a re-publish could match
   // itself — exclude any neighbour that resolves to this same article.
   const selfSlug = data?.slugs?.it || data?.slug || data?.id;
-  const nearest = topK.find((t) => t.slug && t.slug !== selfSlug && t.slug !== data?.id);
+  const nearest = topK.find((t) => (
+    t.slug
+    && t.slug !== selfSlug
+    && t.slug !== data?.id
+    && !ignoreNeighbor?.(t.slug)
+  ));
 
   if (nearest && nearest.cosine >= threshold) {
     throw new Error(

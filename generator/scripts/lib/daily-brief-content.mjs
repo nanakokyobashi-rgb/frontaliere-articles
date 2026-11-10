@@ -29,6 +29,23 @@ export const DAILY_BRIEF_ID_PREFIX = 'bollettino-frontaliere-';
 export const DAILY_EDITION_SITEMAP_KEEP = 90;
 export const DAILY_EDITION_ID_RE = /^bollettino-frontaliere-\d{4}-\d{2}-\d{2}$/;
 
+/** True only for the dated article family intentionally published every day. */
+export function isDailyBriefArticleId(value) {
+  return DAILY_EDITION_ID_RE.test(String(value ?? ''));
+}
+
+/**
+ * Remove prior daily editions from a content-similarity corpus.
+ *
+ * The daily series has a stable editorial shape by design. Callers still run
+ * exact-id and localized-slug collision checks against the complete corpus;
+ * this helper is only for the near-duplicate comparisons of a new edition.
+ */
+export function excludeDailyBriefArticles(articles) {
+  return (Array.isArray(articles) ? articles : [])
+    .filter((article) => !isDailyBriefArticleId(article?.id));
+}
+
 const LOCALES = ['it', 'en', 'de', 'fr'];
 
 /** Real, named authors (host/authors.ts mirror) — deliberately no `redazione`:
