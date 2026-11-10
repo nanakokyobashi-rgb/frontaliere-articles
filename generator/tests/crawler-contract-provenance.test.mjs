@@ -49,6 +49,8 @@ import {
   resolveSiteCandidate,
   siteGeneratorPath,
   siteLogicDirs,
+  sourceCommitReachabilityVerdict,
+  sourceCommitReachable,
 } from '../../scripts/ci/verify-crawler-contract-provenance.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -123,6 +125,73 @@ const fixtureContractWithObserver = {
   observerCount: 1,
   observers: [{ target: observerTarget, sha256: HASH }],
 };
+
+test('sourceCommitReachable richiede un commit antenato del sourceRef', async () => {
+  const calls = [];
+  const commit = 'd'.repeat(40);
+  const reachable = await sourceCommitReachable({
+    sourceRepository: 'owner/source-repo',
+    sourceRef: 'main',
+    sourceCommit: commit,
+    fetcher: async (url, options) => {
+      calls.push({ url, options });
+      return {
+        status: 200,
+        ok: true,
+        json: async () => ({ behind_by: 0 }),
+      };
+    },
+  });
+  assert.equal(reachable, true);
+  assert.deepEqual(calls, [{
+    url: `https://api.github.com/repos/owner/source-repo/compare/${commit}...main?per_page=1`,
+    options: { Accept: 'application/vnd.github+json' },
+  }]);
+
+  const diverged = await sourceCommitReachable({
+    sourceRepository: 'owner/source-repo',
+    sourceRef: 'main',
+    sourceCommit: commit,
+    fetcher: async () => ({
+      status: 200,
+      ok: true,
+      json: async () => ({ behind_by: 1 }),
+    }),
+  });
+  assert.equal(diverged, false);
+});
+
+test('sourceCommitReachable tratta un pin irraggiungibile o una risposta incompleta come non verificabile', async () => {
+  const commit = 'e'.repeat(40);
+  const unreachable = await sourceCommitReachable({
+    sourceRepository: 'owner/source-repo',
+    sourceRef: 'main',
+    sourceCommit: commit,
+    fetcher: async () => ({ status: 404, ok: false }),
+  });
+  assert.equal(unreachable, false);
+
+  await assert.rejects(
+    sourceCommitReachable({
+      sourceRepository: 'owner/source-repo',
+      sourceRef: 'main',
+      sourceCommit: commit,
+      fetcher: async () => ({ status: 200, ok: true, json: async () => ({}) }),
+    }),
+    /senza behind_by/,
+  );
+
+  const failed = sourceCommitReachabilityVerdict({
+    sourceRepository: 'owner/source-repo',
+    sourceRef: 'main',
+    sourceCommit: commit,
+    reachable: null,
+    error: new Error('HTTP 503'),
+  });
+  assert.equal(failed.red, true);
+  assert.equal(failed.results[0].state, 'unobserved');
+  assert.match(failed.reason, /non e' osservabile/);
+});
 
 test('#1264 — il piano runtime raccoglie ogni flag invocata dagli artifact', () => {
   const contract = { siteRuntimePaths: [CRAWLER_COMMIT_RUNTIME_PATH] };
