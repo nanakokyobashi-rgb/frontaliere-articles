@@ -84,6 +84,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.ulmann-incarico-appenzello.title': 'Appenzell, Manuel Ulmann engagé au Bezirksbauamt',
     'blog.article.ulmann-incarico-appenzello.excerpt': 'Le Conseil de district d\'Appenzell a engagé Manuel Ulmann à 100 pour cent : il commencera au Bezirksbauamt au début de février.',
     'blog.article.ulmann-incarico-appenzello.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.consiglio-gruppo-caldo-scuola.title': 'Conseil municipal crée un groupe contre la chaleur à l’école',
+    'blog.article.consiglio-gruppo-caldo-scuola.excerpt': 'Le conseil municipal a créé le groupe de travail « Hitzeschutz und Begrünung » : salles de classe et espaces extérieurs, avec des mesures rapides de protection contre le soleil.',
+    'blog.article.consiglio-gruppo-caldo-scuola.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

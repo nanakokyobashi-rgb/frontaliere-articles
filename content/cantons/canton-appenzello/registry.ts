@@ -304,4 +304,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'consiglio-gruppo-caldo-scuola',
+ category: 'novita',
+ date: '2026-11-10T02:51:13.479Z',
+ image: '/images/blog/article-consiglio-gruppo-caldo-scuola.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
