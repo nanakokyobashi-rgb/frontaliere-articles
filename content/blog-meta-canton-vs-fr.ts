@@ -66,6 +66,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.vallese-tasso-disoccupazione-33.title': 'Valais, le taux de chômage atteint 3,3 pour cent',
     'blog.article.vallese-tasso-disoccupazione-33.excerpt': 'Dans le canton du Valais, en octobre, le taux de chômage a enregistré une hausse de 0,2 point de pourcentage, atteignant 3,3%.',
     'blog.article.vallese-tasso-disoccupazione-33.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.grand-conseil-nuova-legge-scuola.title': 'Grand Conseil accepte loi scolaire valaisanne',
+    'blog.article.grand-conseil-nuova-legge-scuola.excerpt': 'Le projet est présenté comme une loi destinée à remplacer celle de 1962.',
+    'blog.article.grand-conseil-nuova-legge-scuola.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVsFr;

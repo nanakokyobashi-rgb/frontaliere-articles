@@ -24,6 +24,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'lavoro-vallese-ottobre-2026': { it: 'lavoro-vallese-ottobre-2026', en: 'valais-labor-market-october-2026', de: 'walliser-arbeitsmarkt-oktober-2026', fr: 'marche-travail-valais-octobre-2026' },
  'ferie-sciare-concentrazione-2027': { it: 'ferie-sciare-concentrazione-2027', en: 'ski-holidays-concentration-2027', de: 'skiferien-konzentration-2027', fr: 'vacances-ski-concentration-2027' },
  'vallese-tasso-disoccupazione-33': { it: 'vallese-tasso-disoccupazione-33', en: 'valais-unemployment-rate-33', de: 'wallis-arbeitslosenquote-33', fr: 'valais-taux-chomage-33' },
+ 'grand-conseil-nuova-legge-scuola': { it: 'grand-conseil-nuova-legge-scuola', en: 'grand-conseil-new-school-law', de: 'grand-conseil-neues-schulgesetz', fr: 'grand-conseil-nouvelle-loi-ecole' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

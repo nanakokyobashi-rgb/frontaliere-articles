@@ -66,6 +66,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.vallese-tasso-disoccupazione-33.title': 'Vallese, il tasso di disoccupazione tocca il 3,3 per cento',
     'blog.article.vallese-tasso-disoccupazione-33.excerpt': 'Nel Canton Vallese, a ottobre, il tasso di disoccupazione ha registrato un incremento di 0,2 punti percentuali, portandosi al 3,3%.',
     'blog.article.vallese-tasso-disoccupazione-33.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.grand-conseil-nuova-legge-scuola.title': 'Grand Conseil accetta entrata in materia nuova legge scolastica vallesana',
+    'blog.article.grand-conseil-nuova-legge-scuola.excerpt': 'All’inizio della sessione di novembre, il Grand Conseil ha accettato a maggioranza l’entrata in materia della nuova legge sulla scuola vallesana.',
+    'blog.article.grand-conseil-nuova-legge-scuola.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVsIt;
