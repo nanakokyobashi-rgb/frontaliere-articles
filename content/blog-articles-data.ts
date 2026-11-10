@@ -48114,6 +48114,17 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'frontalieri-svizzera-calo-ticino',
+ category: 'novita',
+ date: '2026-11-10T13:55:04.383Z',
+ image: '/images/blog/article-frontalieri-svizzera-calo-ticino.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
