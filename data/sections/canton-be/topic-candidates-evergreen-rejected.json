@@ -4,66 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/706127/la-conseillre-municipale-socialiste-sandra-friedli-sexprime-sur-les-bouchons-de-la-route-de-berne": {
-      "section": "canton-be",
-      "ts": 1794088351086
-    },
-    "canton-be::https://ajour.ch/story/706070/sbb-planen-neue-direktz%c3%bcge-in-f%c3%bcnf-europ%c3%a4ische-st%c3%a4dte-london-bleibt-schwierig": {
-      "section": "canton-be",
-      "ts": 1794088352601
-    },
-    "canton-be::https://ajour.ch/story/706071/les-cff-prvoient-de-nouvelles-liaisons-directes-vers-cinq-villes-europennes-londres-reste-un-cas-difficile": {
-      "section": "canton-be",
-      "ts": 1794088354003
-    },
-    "canton-be::https://ajour.ch/story/705850/das-droht-arbeitnehmenden-bei-einem-nein-zur-ahvreform": {
-      "section": "canton-be",
-      "ts": 1794088363163
-    },
-    "canton-be::https://ajour.ch/story/705696/%c3%b6vunternehmen-spannen-bei-handyapp-zusammen": {
-      "section": "canton-be",
-      "ts": 1794088365111
-    },
-    "canton-be::https://ajour.ch/story/705611/post-greift-swisscom-an-so-viel-kosten-die-neuen-internet-und-tvabos": {
-      "section": "canton-be",
-      "ts": 1794088368476
-    },
-    "canton-be::https://ajour.ch/story/705911/warum-berns-wirtschaft-kleiner-ist-als-gedacht": {
-      "section": "canton-be",
-      "ts": 1794088369487
-    },
-    "canton-be::https://ajour.ch/story/705977/stau-auf-der-bernstrasse-verkehrsplanung-ohne-folgeplan": {
-      "section": "canton-be",
-      "ts": 1794104796757
-    },
-    "canton-be::https://ajour.ch/story/705630/le-chmage-augmente-lgrement-dans-le-canton-de-berne": {
-      "section": "canton-be",
-      "ts": 1794111203600
-    },
-    "canton-be::https://ajour.ch/story/705628/mehr-arbeitslose-im-kanton-bern%c2%a0-biel-bleibt-auf-hohem-niveau": {
-      "section": "canton-be",
-      "ts": 1794111205897
-    },
-    "canton-be::https://ajour.ch/story/705819/hackerattacken-auf-gewerbe-bund-begr%c3%bcsst-freiwillige-meldungen": {
-      "section": "canton-be",
-      "ts": 1794111207568
-    },
-    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/3977a909-8dc8-411d-adf1-12628293ccdb": {
-      "section": "canton-be",
-      "ts": 1794118319310
-    },
-    "canton-be::https://ajour.ch/story/705732/zwei-strassen-wegen-bauarbeiten-gesperrt": {
-      "section": "canton-be",
-      "ts": 1794118321398
-    },
-    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/b45ca2d3-2080-42c7-9a9a-b5416fe74e59": {
-      "section": "canton-be",
-      "ts": 1794118353937
-    },
-    "canton-be::https://ajour.ch/story/705646/stadt-thun-schaltet-digitale-karte-zur-w%c3%a4rmeversorgung-auf": {
-      "section": "canton-be",
-      "ts": 1794118355868
-    },
     "canton-be::https://www.nau.ch/news/schweiz/neues-tarifsystem-senkt-krankenkassenkosten-vorubergehend-67199476": {
       "section": "canton-be",
       "ts": 1794141599290
@@ -143,6 +83,10 @@
     "canton-be::https://www.be.ch/de/start.html?newsid=f81846f7-58d8-463d-8f45-7f2d129a40a1": {
       "section": "canton-be",
       "ts": 1794206858273
+    },
+    "canton-be::https://www.be.ch/de/start.html?newsid=0a0d974d-dd49-425b-aa35-c3489ea79b07": {
+      "section": "canton-be",
+      "ts": 1794295281502
     }
   }
 }
