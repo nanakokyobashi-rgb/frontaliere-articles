@@ -4459,9 +4459,8 @@
     {
       "path": "host/shell-contract-fingerprint.json",
       "sitePath": "tests/articles-shell-contract-fingerprint.json",
-      "mode": "adapted",
-      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3078",
-      "reason": "adattato: la SiteShellContract scalar fingerprint va ri-registrata insieme ai valori adattati di host/constants.ts; il trasporto identical-twin la blocca correttamente quando arriverebbe da sola. Aggiornare entrambi nello stesso giro e verificare host/tests/shell-contract-fingerprint.test.mjs.",
+      "mode": "identical",
+      "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
       "baseline": {
         "site": "cace919981b8a649",
         "corpus": "cace919981b8a649",
