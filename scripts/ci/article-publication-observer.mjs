@@ -867,12 +867,20 @@ export async function proveDeclaredImage({ rootDir, imagePath, fetchImpl = globa
   }
 }
 
-function ghRepoArgs() {
-  return process.env.GH_REPO ? ['--repo', process.env.GH_REPO] : [];
+/**
+ * Append the repository selector only to `gh` subcommands that support it.
+ * `gh api` takes an endpoint that already contains the repository and rejects
+ * the otherwise common `--repo` flag (the observer's dispatch reconciliation
+ * used to fail on that exact mismatch).
+ */
+export function buildGhCommandArgs(args, repo = process.env.GH_REPO) {
+  const commandArgs = [...args];
+  if (!repo || commandArgs[0] === 'api') return commandArgs;
+  return [...commandArgs, '--repo', repo];
 }
 
 function ghJson(args) {
-  const output = execFileSync('gh', [...args, ...ghRepoArgs()], { encoding: 'utf8' });
+  const output = execFileSync('gh', buildGhCommandArgs(args), { encoding: 'utf8' });
   return JSON.parse(output || 'null');
 }
 
@@ -933,7 +941,7 @@ function defaultGithubClient() {
     async editIssue(number, body) {
       execFileSync(
         'gh',
-        ['issue', 'edit', String(number), '--body-file', '-', ...ghRepoArgs()],
+        buildGhCommandArgs(['issue', 'edit', String(number), '--body-file', '-']),
         { encoding: 'utf8', input: String(body ?? '') },
       );
     },
@@ -969,9 +977,8 @@ function defaultGithubClient() {
         '-f', 'dry_run=false',
         '-f', `dispatch_nonce=${dispatchNonce}`,
         '--ref', 'main',
-        ...ghRepoArgs(),
       ];
-      execFileSync('gh', workflowArgs, { encoding: 'utf8' });
+      execFileSync('gh', buildGhCommandArgs(workflowArgs), { encoding: 'utf8' });
       // `gh workflow run` returns before the run is visible in Actions. The
       // unique run-name nonce is the identity fence; the pre-dispatch snapshot
       // prevents an old matching run from ever being selected. If Actions does
