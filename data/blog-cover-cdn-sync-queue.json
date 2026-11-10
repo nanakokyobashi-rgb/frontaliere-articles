@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-corsa-frauenfeld-wil-2026.webp",
-      "sha256": "a3f638db35328908fe236071203ba0ecf63b19e29ce41225d8778b429d863921"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-corsa-frauenfeld-wil-2026-480w.webp",
-      "sha256": "82f0a0eb7c64138950c0cd847517553338c5fd3ca33be2949bbf0beb75ac81ad"
-    }
-  ]
+  "items": []
 }
