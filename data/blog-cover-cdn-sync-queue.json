@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-friburgo-destra-tre-seggi.webp",
-      "sha256": "ca7d353c2b397dcca0a326b030b9defa714e2ff1d654e07b65c2edb1ead061d8"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-friburgo-destra-tre-seggi-480w.webp",
-      "sha256": "d5fd40ae55eb5adab82506ebbcde7ad28f81abb7c3e959dad611ea87b44118e5"
-    }
-  ]
+  "items": []
 }
