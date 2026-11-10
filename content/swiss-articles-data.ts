@@ -30252,6 +30252,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'burocrazia-frena-investimenti-svizzera',
+    category: 'fiscale',
+    date: '2026-11-10T14:41:07.902Z',
+    image: '/images/blog/article-burocrazia-frena-investimenti-svizzera.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
