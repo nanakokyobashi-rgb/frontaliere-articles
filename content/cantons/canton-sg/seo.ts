@@ -1206,6 +1206,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-corsa-frauenfeld-wil-2026': {
+    title: 'Corsa Frauenfeld-Wil: disagi al traffico il 15 novembre 2026',
+    description: 'La corsa Frauenfeld-Wil il 15 novembre 2026 causerà chiusure temporanee stradali a Wil; conoscere i due percorsi e le deviazioni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, corsa, frauenfeld-wil, disagi, traffico',
+    ogTitle: 'Corsa Frauenfeld-Wil: disagi traffico 15 novembre 2026',
+    ogDescription: 'La manifestazione collega Frauenfeld e Wil attraversando diversi comuni. La polizia gestirà chiusure temporanee e deviazioni lungo il percorso il 15 novembre 2026.',
+    canonicalPath: '/articoli-san-gallo/corsa-frauenfeld-wil-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Corsa Frauenfeld-Wil: disagi al traffico il 15 novembre 2026",
+      "description": "La corsa Frauenfeld-Wil il 15 novembre 2026 causerà chiusure temporanee stradali a Wil; conoscere i due percorsi e le deviazioni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-corsa-frauenfeld-wil-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-10T13:27:36+00:00",
+      "dateModified": "2026-11-10T13:27:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/corsa-frauenfeld-wil-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -96,6 +96,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.voto-wil-29-novembre-2026.title': 'Abstimmung in Wil am 29.11.: kommunale & eidg. Vorlagen',
     'blog.article.voto-wil-29-novembre-2026.excerpt': 'Am Sonntag, 29. November 2026, werden in Wil zwei kommunale Vorlagen zur Abstimmung vorgelegt.',
     'blog.article.voto-wil-29-novembre-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.corsa-frauenfeld-wil-2026.title': 'Lauf Frauenfeld-Wil: Verkehrsbehinderungen am 15. November 2026',
+    'blog.article.corsa-frauenfeld-wil-2026.excerpt': 'Der Lauf verbindet Frauenfeld und Wil und führt über Matzingen, Wängi, Eschlikon und Sirnach; die Polizei wird in Wil bestimmte Strassen vorübergehend sperren.',
+    'blog.article.corsa-frauenfeld-wil-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;
