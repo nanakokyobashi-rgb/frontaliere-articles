@@ -213,17 +213,14 @@ let finalOutputManifestFingerprint: string | null = null;
  * has a claimed file already made this path a directory, or vice versa?
  */
 const claimedOutputDescendants = new Map<string, string>();
-/**
- * Most pages are `<slug>/index.html`, so their parent directory is unique per
- * page. That directory is derived from the claimed index file instead of being
- * stored in `claimedOutputDescendants`, which otherwise pins one extra path
- * string per page for the whole build. A fixed 200,000-claim microbenchmark
- * using absolute `/tmp/bench/<i>/index.html` paths and `--expose-gc` measured a
- * retained heap delta of 75.3 MB before this optimization versus 62.2 MB after
- * it (~17.3% lower, Node v26.9.0); keep that baseline attached to this change.
- */
 const DIRECTORY_INDEX_BASENAME = 'index.html';
 const DIRECTORY_INDEX_SUFFIX = `${path.sep}${DIRECTORY_INDEX_BASENAME}`;
+/**
+ * Keep a concrete descendant path for each ancestor so path-shape errors can
+ * identify the blocking file. For `<dir>/index.html`, the direct parent is
+ * omitted: `claimedDirectoryIndex()` reconstructs that path from `pathHistory`
+ * when needed, without retaining a second full path per page.
+ */
 // Build emitters normally pass canonical absolute paths. Keep only normalized
 // aliases for the uncommon relative or non-normalized claim.
 const claimedOutputPathAliases = new Set<string>();
@@ -238,6 +235,15 @@ let buildGeneration = 0;
 function resolveRetainedPath(filePath: string): string {
   const resolved = path.resolve(filePath);
   return resolved === filePath ? filePath : resolved;
+}
+
+function claimedDirectoryIndex(dirPath: string): string | undefined {
+  const indexPath = dirPath.endsWith(path.sep)
+    ? `${dirPath}${DIRECTORY_INDEX_BASENAME}`
+    : `${dirPath}${DIRECTORY_INDEX_SUFFIX}`;
+  return pathHistory.has(indexPath) || claimedOutputPathAliases.has(indexPath)
+    ? indexPath
+    : undefined;
 }
 
 function asVersionList(history: StoredClaimHistory): readonly ClaimVersion[] {
@@ -276,15 +282,6 @@ const pathHistoryView: ReadonlyMap<string, readonly ClaimVersion[]> = {
   [Symbol.iterator]: pathHistoryEntries,
 };
 
-function claimedDirectoryIndex(dirPath: string): string | undefined {
-  const indexPath = dirPath.endsWith(path.sep)
-    ? `${dirPath}${DIRECTORY_INDEX_BASENAME}`
-    : `${dirPath}${DIRECTORY_INDEX_SUFFIX}`;
-  return pathHistory.has(indexPath) || claimedOutputPathAliases.has(indexPath)
-    ? indexPath
-    : undefined;
-}
-
 function assertOutputPathShapeAvailable(filePath: string): void {
   const resolved = resolveRetainedPath(filePath);
   let ancestor = path.dirname(resolved);
@@ -317,6 +314,9 @@ function rememberOutputPathShape(filePath: string): void {
   if (pathHistory.has(filePath)) return;
 
   let ancestor = path.dirname(resolved);
+  // The directory for the common `<page>/index.html` output is recoverable
+  // from the already retained pathHistory key. Do not keep a second full path
+  // value in claimedOutputDescendants for every page directory.
   if (resolved.endsWith(DIRECTORY_INDEX_SUFFIX)) ancestor = path.dirname(ancestor);
   while (ancestor !== resolved) {
     if (!claimedOutputDescendants.has(ancestor)) {
