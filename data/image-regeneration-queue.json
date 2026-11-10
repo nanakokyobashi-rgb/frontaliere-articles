@@ -5,11 +5,11 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (Codex broker timed out after 119901ms)",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Generic synthetic scene, but it contains a recognizable foreground person and does not clearly match Arianna di Claudio at the Rome Fi",
       "status": "failed",
-      "failureCount": 30,
+      "failureCount": 31,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-09T19:18:31.750Z"
+      "lastFailureAt": "2026-11-10T02:38:29.568Z"
     },
     {
       "articleId": "giovani-donne-stipendi-svizzera",
@@ -17,29 +17,29 @@
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
       "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 26,
+      "failureCount": 27,
       "requestedAt": "2026-10-19T03:17:12.439Z",
-      "lastFailureAt": "2026-11-09T19:20:32.110Z"
+      "lastFailureAt": "2026-11-10T02:40:29.885Z"
     },
     {
       "articleId": "sanitari-italiani-fuga-svizzera",
       "title": "Operatori sanitari frontalieri: Como boccheggia",
       "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
-      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial illustration relevant to healthcare cross-border commuting; a recognizable foreground person is vi",
+      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Generic synthetic commuter scene relevant to cross-border transit, but it includes a recognizable foreground person viewed fro",
       "status": "failed",
-      "failureCount": 25,
+      "failureCount": 26,
       "requestedAt": "2026-10-23T15:23:52.650Z",
-      "lastFailureAt": "2026-11-09T19:22:01.487Z"
+      "lastFailureAt": "2026-11-10T02:42:15.720Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino rail commuting, but a clearly recognizable foreground commuter is present",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 25,
+      "failureCount": 26,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-09T19:24:01.824Z"
+      "lastFailureAt": "2026-11-10T02:44:16.041Z"
     }
   ]
 }

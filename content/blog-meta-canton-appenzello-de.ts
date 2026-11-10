@@ -84,6 +84,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.ulmann-incarico-appenzello.title': 'Appenzell, Manuel Ulmann beim Bezirksbauamt angestellt',
     'blog.article.ulmann-incarico-appenzello.excerpt': 'Der Bezirksrat von Appenzell hat Manuel Ulmann mit einem Beschäftigungsgrad von 100 Prozent angestellt: Die Tätigkeit beim Bezirksbauamt beginnt Anfang Februar.',
     'blog.article.ulmann-incarico-appenzello.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.consiglio-gruppo-caldo-scuola.title': 'Gemeinderat richtet Arbeitsgruppe gegen Hitze an Schulen ein',
+    'blog.article.consiglio-gruppo-caldo-scuola.excerpt': 'Der Gemeinderat hat die Arbeitsgruppe «Hitzeschutz und Begrünung» eingerichtet: Klassenräume und Außenbereiche, mit schnellen Maßnahmen zum Sonnenschutz.',
+    'blog.article.consiglio-gruppo-caldo-scuola.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

@@ -66,6 +66,9 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.vallese-tasso-disoccupazione-33.title': 'Valais, the unemployment rate reaches 3,3 percent',
     'blog.article.vallese-tasso-disoccupazione-33.excerpt': 'In the Canton of Valais, in October, the unemployment rate increased by 0,2 percentage points, reaching 3,3%.',
     'blog.article.vallese-tasso-disoccupazione-33.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.grand-conseil-nuova-legge-scuola.title': 'Grand Council agrees to consider new Valais school law',
+    'blog.article.grand-conseil-nuova-legge-scuola.excerpt': 'At the beginning of the November session, the Grand Conseil accepted by a majority to proceed with consideration of the new Valais school law.',
+    'blog.article.grand-conseil-nuova-legge-scuola.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVsEn;

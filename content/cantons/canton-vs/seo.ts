@@ -811,6 +811,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-grand-conseil-nuova-legge-scuola': {
+    title: 'Grand Conseil accetta entrata in materia nuova legge scolastica vallesana',
+    description: 'Il Grand Conseil ha accettato a maggioranza l\'entrata in materia della nuova legge scolastica vallesana, che sostituirà quella del 1962, coprendo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, grand, conseil, accetta, entrata',
+    ogTitle: 'Grand Conseil: nuova legge scuola vallesana',
+    ogDescription: 'Il Grand Conseil ha accettato a maggioranza l\'entrata in materia della nuova legge scolastica vallesana, che sostituirà quella del 1962. L\'ambito va dalla primaria al secondario II.',
+    canonicalPath: '/articoli-vallese/grand-conseil-nuova-legge-scuola/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Grand Conseil accetta entrata in materia nuova legge scolastica vallesana",
+      "description": "Il Grand Conseil ha accettato a maggioranza l'entrata in materia della nuova legge scolastica vallesana, che sostituirà quella del 1962, coprendo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-grand-conseil-nuova-legge-scuola.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-10T01:33:52+00:00",
+      "dateModified": "2026-11-10T01:33:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/grand-conseil-nuova-legge-scuola/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

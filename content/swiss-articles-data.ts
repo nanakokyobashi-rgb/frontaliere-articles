@@ -30232,6 +30232,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'peso-burocrazia-imprese-svizzera',
+    category: 'fiscale',
+    date: '2026-11-10T01:49:36.072Z',
+    image: '/images/blog/article-peso-burocrazia-imprese-svizzera.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

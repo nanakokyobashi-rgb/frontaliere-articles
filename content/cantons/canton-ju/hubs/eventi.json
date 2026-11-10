@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "00591a0fa2562da644bacb6d78f4039c748ae9f1b34f817e3d0f5476a3989772",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "dd086630700e68192e987d6bab5055ecf4166f5d1c0a9ecfa35375445ad5ad8c",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -35,7 +35,7 @@
             {
               "label": "Résistance artistique",
               "detail": "Delémont — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -81,7 +81,7 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "JU",
@@ -104,7 +104,7 @@
             {
               "label": "Résistance artistique",
               "detail": "Delémont — ongoing, last day: 21 November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -150,7 +150,7 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "JU",
@@ -173,7 +173,7 @@
             {
               "label": "Résistance artistique",
               "detail": "Delémont — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -219,7 +219,7 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "JU",
@@ -242,7 +242,7 @@
             {
               "label": "Résistance artistique",
               "detail": "Delémont — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -288,7 +288,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }

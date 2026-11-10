@@ -66,6 +66,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.vallese-tasso-disoccupazione-33.title': 'Wallis, die Arbeitslosenquote erreicht 3,3 Prozent',
     'blog.article.vallese-tasso-disoccupazione-33.excerpt': 'Im Kanton Wallis verzeichnete die Arbeitslosenquote im Oktober einen Anstieg um 0,2 Prozentpunkte und erreichte 3,3%.',
     'blog.article.vallese-tasso-disoccupazione-33.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.grand-conseil-nuova-legge-scuola.title': 'Grand Conseil nimmt neues Walliser Schulgesetz an',
+    'blog.article.grand-conseil-nuova-legge-scuola.excerpt': 'Zu Beginn der November-Sitzung hat der Grossrat die Aufnahme der Materie des neuen Walliser Schulgesetzes mit Mehrheit angenommen.',
+    'blog.article.grand-conseil-nuova-legge-scuola.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVsDe;

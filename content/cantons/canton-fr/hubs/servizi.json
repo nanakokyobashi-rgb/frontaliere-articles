@@ -4,14 +4,9 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-11-08T22:45:42.198Z",
-  "contentHash": "f2aae0d4b846c9b0596bc13175a0dbbb7f5488c5b9f21674bac93babd3a6a568",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "fc7bf35d1e7410b7ab334e6766fa1fdeb984e850f55947ba929f60aadc854246",
   "blocks": [
-    {
-      "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-01T11:17:34.347Z",
-      "keyFacts": 1
-    },
     {
       "id": "avvisi-ufficiali",
       "updatedAt": "2026-11-07T21:07:56.550Z",
@@ -24,35 +19,8 @@
       "topic": "servizi",
       "locale": "it",
       "intro": "Nel Canton Friburgo, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in francese e tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [
-        {
-          "label": "Premio mediano adulto 2026",
-          "value": "606,90 CHF",
-          "note": "regione di premio 1, franchigia 300 CHF",
-          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Premi di cassa malati 2026",
-          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
-          "items": [
-            {
-              "label": "FR, regione di premio 1",
-              "value": "mediana 606,90 CHF al mese",
-              "detail": "da 577 a 672,70 CHF, 23 assicuratori"
-            },
-            {
-              "label": "FR, regione di premio 2",
-              "value": "mediana 558 CHF al mese",
-              "detail": "da 523,30 a 617,50 CHF, 23 assicuratori"
-            }
-          ],
-          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
@@ -118,16 +86,16 @@
           "date": "2026-09-01T17:14:48.698Z"
         },
         {
-          "title": "Permesso c canton Friburgo: requisiti e domanda",
-          "url": "/articoli-svizzera/permesso-c-friburgo-guida-requisiti/",
-          "excerpt": "Regole, tempistiche di residenza, criteri di integrazione e procedura per ottenere il permesso di domicilio C nel Cantone di Friburgo.",
-          "date": "2026-09-22T05:55:12.294Z"
-        },
-        {
           "title": "Permesso B Friburgo: requisiti e rinnovo",
           "url": "/articoli-svizzera/permesso-b-friburgo-rinnovo-procedura/",
           "excerpt": "Permesso B rinnovabile a Friburgo: requisiti, documenti e procedura presso l'ufficio cantonale della migrazione. Guida alla richiesta e rinnovo.",
           "date": "2026-08-23T23:28:41.725Z"
+        },
+        {
+          "title": "Permesso c canton Friburgo: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-c-friburgo-guida-requisiti/",
+          "excerpt": "Regole, tempistiche di residenza, criteri di integrazione e procedura per ottenere il permesso di domicilio C nel Cantone di Friburgo.",
+          "date": "2026-09-22T05:55:12.294Z"
         },
         {
           "title": "Patente di guida a Friburgo: conversione e requisiti",
@@ -169,42 +137,15 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "FR",
       "topic": "servizi",
       "locale": "en",
       "intro": "In the canton of Fribourg, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in French and German; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [
-        {
-          "label": "Typical adult premium 2026",
-          "value": "606.90 CHF",
-          "note": "premium region 1, CHF 300 deductible",
-          "sourceName": "Federal Office of Public Health (FOPH)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Health insurance premiums 2026",
-          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
-          "items": [
-            {
-              "label": "FR, premium region 1",
-              "value": "typical 606.90 CHF per month",
-              "detail": "from 577 to 672.70 CHF, 23 insurers"
-            },
-            {
-              "label": "FR, premium region 2",
-              "value": "typical 558 CHF per month",
-              "detail": "from 523.30 to 617.50 CHF, 23 insurers"
-            }
-          ],
-          "sourceName": "Federal Office of Public Health (FOPH)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
@@ -270,16 +211,16 @@
           "date": "2026-09-01T17:14:48.698Z"
         },
         {
-          "title": "Permit c canton Fribourg: requirements and application",
-          "url": "/en/swiss-articles/settlement-permit-c-fribourg-requirements-application/",
-          "excerpt": "Rules, residence times, integration criteria and procedure for obtaining residence permit C in the Canton of Fribourg.",
-          "date": "2026-09-22T05:55:12.294Z"
-        },
-        {
           "title": "Permit B Fribourg: Requirements and Renewal",
           "url": "/en/swiss-articles/residence-permit-b-fribourg-renewal-procedure/",
           "excerpt": "Renewable permit B in Fribourg: requirements, documents and procedure at the cantonal migration office. Application and renewal guide.",
           "date": "2026-08-23T23:28:41.725Z"
+        },
+        {
+          "title": "Permit c canton Fribourg: requirements and application",
+          "url": "/en/swiss-articles/settlement-permit-c-fribourg-requirements-application/",
+          "excerpt": "Rules, residence times, integration criteria and procedure for obtaining residence permit C in the Canton of Fribourg.",
+          "date": "2026-09-22T05:55:12.294Z"
         },
         {
           "title": "Driving licence in Fribourg: conversion and requirements",
@@ -317,42 +258,15 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "FR",
       "topic": "servizi",
       "locale": "de",
       "intro": "Im Kanton Freiburg laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Französisch und Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [
-        {
-          "label": "Mittlere Erwachsenenprämie 2026",
-          "value": "606.90 CHF",
-          "note": "Prämienregion 1, Franchise 300 CHF",
-          "sourceName": "Bundesamt für Gesundheit (BAG)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Krankenkassenprämien 2026",
-          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
-          "items": [
-            {
-              "label": "FR, Prämienregion 1",
-              "value": "Mittelwert 606.90 CHF pro Monat",
-              "detail": "von 577 bis 672.70 CHF, 23 Versicherer"
-            },
-            {
-              "label": "FR, Prämienregion 2",
-              "value": "Mittelwert 558 CHF pro Monat",
-              "detail": "von 523.30 bis 617.50 CHF, 23 Versicherer"
-            }
-          ],
-          "sourceName": "Bundesamt für Gesundheit (BAG)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
@@ -418,16 +332,16 @@
           "date": "2026-09-01T17:14:48.698Z"
         },
         {
-          "title": "Kantonsgenehmigung Freiburg: Voraussetzungen und Antrag",
-          "url": "/de/schweiz-artikel/niederlassungsbewilligung-c-freiburg-voraussetzungen-gesuch/",
-          "excerpt": "Regeln, Aufenthaltszeiten, Integrationskriterien und Verfahren zur Erlangung der Niederlassungsbewilligung C im Kanton Freiburg.",
-          "date": "2026-09-22T05:55:12.294Z"
-        },
-        {
           "title": "B-Bewilligung Freiburg: Voraussetzungen und Erneuerung",
           "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-freiburg-erneuerung-verfahren/",
           "excerpt": "Erneuerbare B-Bewilligung in Freiburg: Anforderungen, Dokumente und Verfahren beim kantonalen Migrationsamt. Leitfaden für die Beantragung und Erneuerung.",
           "date": "2026-08-23T23:28:41.725Z"
+        },
+        {
+          "title": "Kantonsgenehmigung Freiburg: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/niederlassungsbewilligung-c-freiburg-voraussetzungen-gesuch/",
+          "excerpt": "Regeln, Aufenthaltszeiten, Integrationskriterien und Verfahren zur Erlangung der Niederlassungsbewilligung C im Kanton Freiburg.",
+          "date": "2026-09-22T05:55:12.294Z"
         },
         {
           "title": "Führerschein in Freiburg: Umstellung und Voraussetzungen",
@@ -465,42 +379,15 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "FR",
       "topic": "servizi",
       "locale": "fr",
       "intro": "Dans le canton de Fribourg, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en français et allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [
-        {
-          "label": "Prime adulte centrale 2026",
-          "value": "606,90 CHF",
-          "note": "région de primes 1, franchise 300 CHF",
-          "sourceName": "Office fédéral de la santé publique (OFSP)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Primes d’assurance-maladie 2026",
-          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
-          "items": [
-            {
-              "label": "FR, région de primes 1",
-              "value": "valeur centrale 606,90 CHF par mois",
-              "detail": "de 577 à 672,70 CHF, 23 assureurs"
-            },
-            {
-              "label": "FR, région de primes 2",
-              "value": "valeur centrale 558 CHF par mois",
-              "detail": "de 523,30 à 617,50 CHF, 23 assureurs"
-            }
-          ],
-          "sourceName": "Office fédéral de la santé publique (OFSP)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
@@ -566,16 +453,16 @@
           "date": "2026-09-01T17:14:48.698Z"
         },
         {
-          "title": "Permis c canton de Fribourg : exigences et demande",
-          "url": "/fr/articles-suisse/permis-c-fribourg-conditions-demande/",
-          "excerpt": "Règles, temps de résidence, critères d'intégration et procédure d'obtention du permis de séjour C dans le canton de Fribourg.",
-          "date": "2026-09-22T05:55:12.294Z"
-        },
-        {
           "title": "Permis B Fribourg : exigences et renouvellement",
           "url": "/fr/articles-suisse/permis-sejour-b-fribourg-renouvellement-procedure/",
           "excerpt": "Permis B renouvelable à Fribourg : exigences, documents et procédure auprès de l'Office cantonal des migrations. Guide de la demande et du renouvellement.",
           "date": "2026-08-23T23:28:41.725Z"
+        },
+        {
+          "title": "Permis c canton de Fribourg : exigences et demande",
+          "url": "/fr/articles-suisse/permis-c-fribourg-conditions-demande/",
+          "excerpt": "Règles, temps de résidence, critères d'intégration et procédure d'obtention du permis de séjour C dans le canton de Fribourg.",
+          "date": "2026-09-22T05:55:12.294Z"
         },
         {
           "title": "Permis de conduire à Fribourg : conversion et exigences",
@@ -609,7 +496,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }

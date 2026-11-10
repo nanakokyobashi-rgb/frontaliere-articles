@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "e85f307a7b1531a103052a1f51c31a9de7effc0766518433b7cf503d124dfbbe",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "c5f6fcbba7e5c8a956fae0c1a83b908a520d3c6cd35f6999b8266d71584ceba2",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -37,12 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "L'année du livre suisse : Thierry Raboud",
-              "detail": "Fribourg",
-              "date": "2026-11-09",
-              "url": "https://www.fr.ch/bcu/evenements/lannee-du-livre-suisse-thierry-raboud"
-            },
             {
               "label": "Café-visite : Fascinants chiroptères",
               "detail": "Fribourg",
@@ -96,6 +90,12 @@
               "detail": "Fribourg",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
+            },
+            {
+              "label": "Journée Portes Ouvertes 2026",
+              "detail": "Fribourg",
+              "date": "2026-11-14",
+              "url": "https://www.fr.ch/eikon/evenements/journee-portes-ouvertes-2026"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -155,7 +155,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "FR",
@@ -175,12 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "L'année du livre suisse : Thierry Raboud",
-              "detail": "Fribourg",
-              "date": "2026-11-09",
-              "url": "https://www.fr.ch/bcu/evenements/lannee-du-livre-suisse-thierry-raboud"
-            },
             {
               "label": "Café-visite : Fascinants chiroptères",
               "detail": "Fribourg",
@@ -234,6 +228,12 @@
               "detail": "Fribourg",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
+            },
+            {
+              "label": "Journée Portes Ouvertes 2026",
+              "detail": "Fribourg",
+              "date": "2026-11-14",
+              "url": "https://www.fr.ch/eikon/evenements/journee-portes-ouvertes-2026"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -293,7 +293,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "FR",
@@ -313,12 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "L'année du livre suisse : Thierry Raboud",
-              "detail": "Fribourg",
-              "date": "2026-11-09",
-              "url": "https://www.fr.ch/bcu/evenements/lannee-du-livre-suisse-thierry-raboud"
-            },
             {
               "label": "Café-visite : Fascinants chiroptères",
               "detail": "Fribourg",
@@ -372,6 +366,12 @@
               "detail": "Fribourg",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
+            },
+            {
+              "label": "Journée Portes Ouvertes 2026",
+              "detail": "Fribourg",
+              "date": "2026-11-14",
+              "url": "https://www.fr.ch/eikon/evenements/journee-portes-ouvertes-2026"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "FR",
@@ -451,12 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "L'année du livre suisse : Thierry Raboud",
-              "detail": "Fribourg",
-              "date": "2026-11-09",
-              "url": "https://www.fr.ch/bcu/evenements/lannee-du-livre-suisse-thierry-raboud"
-            },
             {
               "label": "Café-visite : Fascinants chiroptères",
               "detail": "Fribourg",
@@ -510,6 +504,12 @@
               "detail": "Fribourg",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
+            },
+            {
+              "label": "Journée Portes Ouvertes 2026",
+              "detail": "Fribourg",
+              "date": "2026-11-14",
+              "url": "https://www.fr.ch/eikon/evenements/journee-portes-ouvertes-2026"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }

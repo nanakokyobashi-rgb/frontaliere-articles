@@ -238,4 +238,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'grand-conseil-nuova-legge-scuola',
+ category: 'novita',
+ date: '2026-11-10T01:33:52.436Z',
+ image: '/images/blog/article-grand-conseil-nuova-legge-scuola.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

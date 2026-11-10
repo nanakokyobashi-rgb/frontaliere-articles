@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/824271/walliser-staatspersonal-fordert-vollen-teuerungsausgleich-von-08-prozent": {
-      "section": "canton-vs",
-      "ts": 1794085662596
-    },
-    "canton-vs::https://www.pomona.ch/story/824255/klare-lohnforderungen-und-weichenstellungen-f%c3%bcr-die-zukunft": {
-      "section": "canton-vs",
-      "ts": 1794085663641
-    },
-    "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
-      "section": "canton-vs",
-      "ts": 1794102337700
-    },
     "canton-vs::https://vework-public.vs.ch/app/publication/fr/27-09-2026/1": {
       "section": "canton-vs",
       "ts": 1794106266886
@@ -43,6 +31,18 @@
     "canton-vs::https://www.pomona.ch/story/824007/der-kanton-wallis-bietet-teilzeitbezahlung-bei-vollzeitstelle": {
       "section": "canton-vs",
       "ts": 1794234804737
+    },
+    "canton-vs::https://www.pomona.ch/story/824271/walliser-staatspersonal-fordert-vollen-teuerungsausgleich-von-08-prozent": {
+      "section": "canton-vs",
+      "ts": 1794276966158
+    },
+    "canton-vs::https://www.pomona.ch/story/824255/klare-lohnforderungen-und-weichenstellungen-f%c3%bcr-die-zukunft": {
+      "section": "canton-vs",
+      "ts": 1794276967580
+    },
+    "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
+      "section": "canton-vs",
+      "ts": 1794277581973
     }
   }
 }

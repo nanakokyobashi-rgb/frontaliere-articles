@@ -4,14 +4,9 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "servizi",
-  "updatedAt": "2026-11-08T12:07:40.615Z",
-  "contentHash": "0f394e35a5a15a8c6bf77b697c903d0a58cdbcca248198779642b6c5658546f7",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "c41e7e8aa13c319153988f3913d00ed194313549474a542d4c8f7ea2555253b4",
   "blocks": [
-    {
-      "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-01T11:17:34.347Z",
-      "keyFacts": 1
-    },
     {
       "id": "avvisi-ufficiali",
       "updatedAt": "2026-11-07T21:07:56.550Z",
@@ -24,40 +19,8 @@
       "topic": "servizi",
       "locale": "it",
       "intro": "Nel Canton Lucerna, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [
-        {
-          "label": "Premio mediano adulto 2026",
-          "value": "563,30 CHF",
-          "note": "regione di premio 1, franchigia 300 CHF",
-          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Premi di cassa malati 2026",
-          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
-          "items": [
-            {
-              "label": "LU, regione di premio 1",
-              "value": "mediana 563,30 CHF al mese",
-              "detail": "da 502,55 a 640,60 CHF, 25 assicuratori"
-            },
-            {
-              "label": "LU, regione di premio 2",
-              "value": "mediana 526,50 CHF al mese",
-              "detail": "da 468,55 a 602,20 CHF, 25 assicuratori"
-            },
-            {
-              "label": "LU, regione di premio 3",
-              "value": "mediana 509 CHF al mese",
-              "detail": "da 452,80 a 595,80 CHF, 25 assicuratori"
-            }
-          ],
-          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
@@ -87,11 +50,6 @@
               "label": "Rémy Gasser ist neuer CEO der Luzerner Psychiatrie AG",
               "date": "2026-07-20",
               "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
-            },
-            {
-              "label": "Abschluss der Standorttour in St. Urban: Einblicke in Apotheke und Stationäre Dienste",
-              "date": "2026-07-13",
-              "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
             }
           ],
           "updatedAt": "2026-11-07T21:07:56.550Z"
@@ -174,47 +132,15 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-08T12:07:40.615Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "LU",
       "topic": "servizi",
       "locale": "en",
       "intro": "In the canton of Lucerne, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [
-        {
-          "label": "Typical adult premium 2026",
-          "value": "563.30 CHF",
-          "note": "premium region 1, CHF 300 deductible",
-          "sourceName": "Federal Office of Public Health (FOPH)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Health insurance premiums 2026",
-          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
-          "items": [
-            {
-              "label": "LU, premium region 1",
-              "value": "typical 563.30 CHF per month",
-              "detail": "from 502.55 to 640.60 CHF, 25 insurers"
-            },
-            {
-              "label": "LU, premium region 2",
-              "value": "typical 526.50 CHF per month",
-              "detail": "from 468.55 to 602.20 CHF, 25 insurers"
-            },
-            {
-              "label": "LU, premium region 3",
-              "value": "typical 509 CHF per month",
-              "detail": "from 452.80 to 595.80 CHF, 25 insurers"
-            }
-          ],
-          "sourceName": "Federal Office of Public Health (FOPH)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
@@ -244,11 +170,6 @@
               "label": "Rémy Gasser ist neuer CEO der Luzerner Psychiatrie AG",
               "date": "2026-07-20",
               "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
-            },
-            {
-              "label": "Abschluss der Standorttour in St. Urban: Einblicke in Apotheke und Stationäre Dienste",
-              "date": "2026-07-13",
-              "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
             }
           ],
           "updatedAt": "2026-11-07T21:07:56.550Z"
@@ -326,47 +247,15 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-08T12:07:40.615Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "LU",
       "topic": "servizi",
       "locale": "de",
       "intro": "Im Kanton Luzern laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [
-        {
-          "label": "Mittlere Erwachsenenprämie 2026",
-          "value": "563.30 CHF",
-          "note": "Prämienregion 1, Franchise 300 CHF",
-          "sourceName": "Bundesamt für Gesundheit (BAG)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Krankenkassenprämien 2026",
-          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
-          "items": [
-            {
-              "label": "LU, Prämienregion 1",
-              "value": "Mittelwert 563.30 CHF pro Monat",
-              "detail": "von 502.55 bis 640.60 CHF, 25 Versicherer"
-            },
-            {
-              "label": "LU, Prämienregion 2",
-              "value": "Mittelwert 526.50 CHF pro Monat",
-              "detail": "von 468.55 bis 602.20 CHF, 25 Versicherer"
-            },
-            {
-              "label": "LU, Prämienregion 3",
-              "value": "Mittelwert 509 CHF pro Monat",
-              "detail": "von 452.80 bis 595.80 CHF, 25 Versicherer"
-            }
-          ],
-          "sourceName": "Bundesamt für Gesundheit (BAG)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
@@ -396,11 +285,6 @@
               "label": "Rémy Gasser ist neuer CEO der Luzerner Psychiatrie AG",
               "date": "2026-07-20",
               "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
-            },
-            {
-              "label": "Abschluss der Standorttour in St. Urban: Einblicke in Apotheke und Stationäre Dienste",
-              "date": "2026-07-13",
-              "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
             }
           ],
           "updatedAt": "2026-11-07T21:07:56.550Z"
@@ -478,47 +362,15 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-08T12:07:40.615Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "LU",
       "topic": "servizi",
       "locale": "fr",
       "intro": "Dans le canton de Lucerne, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [
-        {
-          "label": "Prime adulte centrale 2026",
-          "value": "563,30 CHF",
-          "note": "région de primes 1, franchise 300 CHF",
-          "sourceName": "Office fédéral de la santé publique (OFSP)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Primes d’assurance-maladie 2026",
-          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
-          "items": [
-            {
-              "label": "LU, région de primes 1",
-              "value": "valeur centrale 563,30 CHF par mois",
-              "detail": "de 502,55 à 640,60 CHF, 25 assureurs"
-            },
-            {
-              "label": "LU, région de primes 2",
-              "value": "valeur centrale 526,50 CHF par mois",
-              "detail": "de 468,55 à 602,20 CHF, 25 assureurs"
-            },
-            {
-              "label": "LU, région de primes 3",
-              "value": "valeur centrale 509 CHF par mois",
-              "detail": "de 452,80 à 595,80 CHF, 25 assureurs"
-            }
-          ],
-          "sourceName": "Office fédéral de la santé publique (OFSP)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
@@ -548,11 +400,6 @@
               "label": "Rémy Gasser ist neuer CEO der Luzerner Psychiatrie AG",
               "date": "2026-07-20",
               "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
-            },
-            {
-              "label": "Abschluss der Standorttour in St. Urban: Einblicke in Apotheke und Stationäre Dienste",
-              "date": "2026-07-13",
-              "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
             }
           ],
           "updatedAt": "2026-11-07T21:07:56.550Z"
@@ -627,7 +474,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-08T12:07:40.615Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }

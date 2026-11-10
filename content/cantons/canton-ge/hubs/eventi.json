@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "d5e35b722027c8b7953f0880948db3e5b3aa74203d726f7da03d19792ed836a1",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "c3aa20e5ddae82f02f0028faa786f07d39bc4416e04b691caec3c44907c78bf8",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "325",
+          "value": "331",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "80e Concours de Genève – Demi-finale 3 de Direction d’orchestre – Orchestre de la Suisse Romande",
+              "label": "Café mortel",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/concours-geneve-demi-finale-3-direction-orchestre-orchestre-suisse-romande"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/cafe-mortel"
             },
             {
-              "label": "Action Lumières - Ville de Genève",
+              "label": "𝗖𝗔𝗥𝗠𝗘𝗡 - 𝗢𝗽𝗲́𝗿𝗮 𝗣𝗮𝘀𝘀𝗶𝗼𝗻",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/action-lumieres-ville-geneve"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/node/753557"
             },
             {
-              "label": "Masson/Duboule/Ruiz/Vandenbulck",
+              "label": "Cours Tango Argentin niv. debutant",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/massondubouleruizvandenbulck"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant"
             },
             {
-              "label": "Semaine des droits humains 2026: Pour une santé globale et durable",
+              "label": "Installation de l’œuvre de Bodil Manz",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/semaine-droits-humains-2026-sante-globale-durable"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/installation-oeuvre-bodil-manz"
             },
             {
-              "label": "Soirée PréPro : ARNO | SEBASTIAN",
+              "label": "Lumir Lapray - S'organiser",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/soiree-prepro-arno-sebastian"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/lumir-lapray-organiser"
             },
             {
-              "label": "80e Concours de Genève – Demi-finale 3 de Direction d'Orchestre - L'OSR",
-              "detail": "Geneva, Genève",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/80e-concours-de-geneve-demifinale-3-de-direction-dorchestre-losr/"
+              "label": "Méditer au MAH - La patience",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/mediter-mah-patience"
             },
             {
-              "label": "Atelier Créer sa propre lampe",
-              "detail": "Genève — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/atelier-creer-propre-lampe"
+              "label": "Midi recherche & Innovation santé : Récupération post-partum au cours du premier mois : déterminants et valeur…",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/midi-recherche-innovation-sante-recuperation-post-partum-cours-premier-mois-determinants-predictive"
             },
             {
-              "label": "Atelier-formation \"Apprendre à fabriquer ses cosmétiques naturels\"",
-              "detail": "Genève — in corso, ultimo giorno: 23 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/atelier-formation-apprendre-fabriquer-cosmetiques-naturels"
+              "label": "NESSI GOMES + Mike Rauss",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/nessi-gomes-mike-rauss"
             },
             {
-              "label": "Ateliers pour seniors | @ssistance PC, Mac et tablettes numériques",
-              "detail": "Genève — in corso, ultimo giorno: 20 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/ateliers-seniors-ssistance-tablettes-numeriques"
+              "label": "Œuvre installative de Bodil Manz",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/oeuvre-installative-bodil-manz"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
-              "detail": "Genève — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "label": "Olga de Soto, Une introduction (revisitée)",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/olga-soto-introduction-revisitee"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "325",
+          "value": "331",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,64 +161,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "80e Concours de Genève – Demi-finale 3 de Direction d’orchestre – Orchestre de la Suisse Romande",
+              "label": "Café mortel",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/concours-geneve-demi-finale-3-direction-orchestre-orchestre-suisse-romande"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/cafe-mortel"
             },
             {
-              "label": "Action Lumières - Ville de Genève",
+              "label": "𝗖𝗔𝗥𝗠𝗘𝗡 - 𝗢𝗽𝗲́𝗿𝗮 𝗣𝗮𝘀𝘀𝗶𝗼𝗻",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/action-lumieres-ville-geneve"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/node/753557"
             },
             {
-              "label": "Masson/Duboule/Ruiz/Vandenbulck",
+              "label": "Cours Tango Argentin niv. debutant",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/massondubouleruizvandenbulck"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant"
             },
             {
-              "label": "Semaine des droits humains 2026: Pour une santé globale et durable",
+              "label": "Installation de l’œuvre de Bodil Manz",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/semaine-droits-humains-2026-sante-globale-durable"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/installation-oeuvre-bodil-manz"
             },
             {
-              "label": "Soirée PréPro : ARNO | SEBASTIAN",
+              "label": "Lumir Lapray - S'organiser",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/soiree-prepro-arno-sebastian"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/lumir-lapray-organiser"
             },
             {
-              "label": "80e Concours de Genève – Demi-finale 3 de Direction d'Orchestre - L'OSR",
-              "detail": "Geneva, Genève",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/80e-concours-de-geneve-demifinale-3-de-direction-dorchestre-losr/"
+              "label": "Méditer au MAH - La patience",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/mediter-mah-patience"
             },
             {
-              "label": "Atelier Créer sa propre lampe",
-              "detail": "Genève — ongoing, last day: 21 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/atelier-creer-propre-lampe"
+              "label": "Midi recherche & Innovation santé : Récupération post-partum au cours du premier mois : déterminants et valeur…",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/midi-recherche-innovation-sante-recuperation-post-partum-cours-premier-mois-determinants-predictive"
             },
             {
-              "label": "Atelier-formation \"Apprendre à fabriquer ses cosmétiques naturels\"",
-              "detail": "Genève — ongoing, last day: 23 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/atelier-formation-apprendre-fabriquer-cosmetiques-naturels"
+              "label": "NESSI GOMES + Mike Rauss",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/nessi-gomes-mike-rauss"
             },
             {
-              "label": "Ateliers pour seniors | @ssistance PC, Mac et tablettes numériques",
-              "detail": "Genève — ongoing, last day: 20 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/ateliers-seniors-ssistance-tablettes-numeriques"
+              "label": "Œuvre installative de Bodil Manz",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/oeuvre-installative-bodil-manz"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
-              "detail": "Genève — ongoing, last day: 15 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "label": "Olga de Soto, Une introduction (revisitée)",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/olga-soto-introduction-revisitee"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "325",
+          "value": "331",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,64 +284,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "80e Concours de Genève – Demi-finale 3 de Direction d’orchestre – Orchestre de la Suisse Romande",
+              "label": "Café mortel",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/concours-geneve-demi-finale-3-direction-orchestre-orchestre-suisse-romande"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/cafe-mortel"
             },
             {
-              "label": "Action Lumières - Ville de Genève",
+              "label": "𝗖𝗔𝗥𝗠𝗘𝗡 - 𝗢𝗽𝗲́𝗿𝗮 𝗣𝗮𝘀𝘀𝗶𝗼𝗻",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/action-lumieres-ville-geneve"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/node/753557"
             },
             {
-              "label": "Masson/Duboule/Ruiz/Vandenbulck",
+              "label": "Cours Tango Argentin niv. debutant",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/massondubouleruizvandenbulck"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant"
             },
             {
-              "label": "Semaine des droits humains 2026: Pour une santé globale et durable",
+              "label": "Installation de l’œuvre de Bodil Manz",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/semaine-droits-humains-2026-sante-globale-durable"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/installation-oeuvre-bodil-manz"
             },
             {
-              "label": "Soirée PréPro : ARNO | SEBASTIAN",
+              "label": "Lumir Lapray - S'organiser",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/soiree-prepro-arno-sebastian"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/lumir-lapray-organiser"
             },
             {
-              "label": "80e Concours de Genève – Demi-finale 3 de Direction d'Orchestre - L'OSR",
-              "detail": "Geneva, Genève",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/80e-concours-de-geneve-demifinale-3-de-direction-dorchestre-losr/"
+              "label": "Méditer au MAH - La patience",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/mediter-mah-patience"
             },
             {
-              "label": "Atelier Créer sa propre lampe",
-              "detail": "Genève — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/atelier-creer-propre-lampe"
+              "label": "Midi recherche & Innovation santé : Récupération post-partum au cours du premier mois : déterminants et valeur…",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/midi-recherche-innovation-sante-recuperation-post-partum-cours-premier-mois-determinants-predictive"
             },
             {
-              "label": "Atelier-formation \"Apprendre à fabriquer ses cosmétiques naturels\"",
-              "detail": "Genève — läuft, letzter Tag: 23. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/atelier-formation-apprendre-fabriquer-cosmetiques-naturels"
+              "label": "NESSI GOMES + Mike Rauss",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/nessi-gomes-mike-rauss"
             },
             {
-              "label": "Ateliers pour seniors | @ssistance PC, Mac et tablettes numériques",
-              "detail": "Genève — läuft, letzter Tag: 20. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/ateliers-seniors-ssistance-tablettes-numeriques"
+              "label": "Œuvre installative de Bodil Manz",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/oeuvre-installative-bodil-manz"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
-              "detail": "Genève — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "label": "Olga de Soto, Une introduction (revisitée)",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/olga-soto-introduction-revisitee"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "325",
+          "value": "331",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,64 +407,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "80e Concours de Genève – Demi-finale 3 de Direction d’orchestre – Orchestre de la Suisse Romande",
+              "label": "Café mortel",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/concours-geneve-demi-finale-3-direction-orchestre-orchestre-suisse-romande"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/cafe-mortel"
             },
             {
-              "label": "Action Lumières - Ville de Genève",
+              "label": "𝗖𝗔𝗥𝗠𝗘𝗡 - 𝗢𝗽𝗲́𝗿𝗮 𝗣𝗮𝘀𝘀𝗶𝗼𝗻",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/action-lumieres-ville-geneve"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/node/753557"
             },
             {
-              "label": "Masson/Duboule/Ruiz/Vandenbulck",
+              "label": "Cours Tango Argentin niv. debutant",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/massondubouleruizvandenbulck"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant"
             },
             {
-              "label": "Semaine des droits humains 2026: Pour une santé globale et durable",
+              "label": "Installation de l’œuvre de Bodil Manz",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/semaine-droits-humains-2026-sante-globale-durable"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/installation-oeuvre-bodil-manz"
             },
             {
-              "label": "Soirée PréPro : ARNO | SEBASTIAN",
+              "label": "Lumir Lapray - S'organiser",
               "detail": "Genève",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/soiree-prepro-arno-sebastian"
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/lumir-lapray-organiser"
             },
             {
-              "label": "80e Concours de Genève – Demi-finale 3 de Direction d'Orchestre - L'OSR",
-              "detail": "Geneva, Genève",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/80e-concours-de-geneve-demifinale-3-de-direction-dorchestre-losr/"
+              "label": "Méditer au MAH - La patience",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/mediter-mah-patience"
             },
             {
-              "label": "Atelier Créer sa propre lampe",
-              "detail": "Genève — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/atelier-creer-propre-lampe"
+              "label": "Midi recherche & Innovation santé : Récupération post-partum au cours du premier mois : déterminants et valeur…",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/midi-recherche-innovation-sante-recuperation-post-partum-cours-premier-mois-determinants-predictive"
             },
             {
-              "label": "Atelier-formation \"Apprendre à fabriquer ses cosmétiques naturels\"",
-              "detail": "Genève — en cours, dernier jour : 23 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/atelier-formation-apprendre-fabriquer-cosmetiques-naturels"
+              "label": "NESSI GOMES + Mike Rauss",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/nessi-gomes-mike-rauss"
             },
             {
-              "label": "Ateliers pour seniors | @ssistance PC, Mac et tablettes numériques",
-              "detail": "Genève — en cours, dernier jour : 20 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/ateliers-seniors-ssistance-tablettes-numeriques"
+              "label": "Œuvre installative de Bodil Manz",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/oeuvre-installative-bodil-manz"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
-              "detail": "Genève — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "label": "Olga de Soto, Une introduction (revisitée)",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/olga-soto-introduction-revisitee"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }

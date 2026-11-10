@@ -4,14 +4,9 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-11-08T22:45:42.198Z",
-  "contentHash": "7119416a439d2fbea12d6a4687b4b1829b84d025511fe5a93e286feaf3db1615",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "988918989be3c146c2e8e26435f30338ab3312b716b891333ed6e87f2ec9616b",
   "blocks": [
-    {
-      "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-01T11:17:34.347Z",
-      "keyFacts": 1
-    },
     {
       "id": "avvisi-ufficiali",
       "updatedAt": "2026-11-07T21:07:56.550Z",
@@ -24,35 +19,8 @@
       "topic": "servizi",
       "locale": "it",
       "intro": "In Vallese, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con l’Italia e la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese e tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [
-        {
-          "label": "Premio mediano adulto 2026",
-          "value": "582,80 CHF",
-          "note": "regione di premio 1, franchigia 300 CHF",
-          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Premi di cassa malati 2026",
-          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
-          "items": [
-            {
-              "label": "VS, regione di premio 1",
-              "value": "mediana 582,80 CHF al mese",
-              "detail": "da 544,40 a 643,20 CHF, 26 assicuratori"
-            },
-            {
-              "label": "VS, regione di premio 2",
-              "value": "mediana 521,60 CHF al mese",
-              "detail": "da 470,90 a 597,90 CHF, 28 assicuratori"
-            }
-          ],
-          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
@@ -94,6 +62,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Grand Conseil accetta entrata in materia nuova legge scolastica vallesana",
+          "url": "/articoli-vallese/grand-conseil-nuova-legge-scuola/",
+          "excerpt": "All’inizio della sessione di novembre, il Grand Conseil ha accettato a maggioranza l’entrata in materia della nuova legge sulla scuola vallesana.",
+          "date": "2026-11-10T01:33:52.436Z"
+        },
+        {
           "title": "Rapporto OVS: 83% vallesani in buona salute, obesità al 13% e rischi psicosociali al 44%",
           "url": "/articoli-vallese/salute-vallese-2026-ovs/",
           "excerpt": "Nel 2022, l'83% degli adulti in Vallese dichiarava di essere in buona o ottima salute, contro l'85% in Svizzera.",
@@ -134,12 +108,6 @@
           "url": "/articoli-svizzera/scuola-vallese-cicli-iscrizione/",
           "excerpt": "Cicli, età di iscrizione, calendario, lingue e passaggio alle scuole medie superiori nel sistema scolastico del Vallese.",
           "date": "2026-09-30T08:39:22.953Z"
-        },
-        {
-          "title": "Premi LAMal nel Vallese: fasce e riduzioni 2026",
-          "url": "/articoli-svizzera/premi-lamal-vallese-riduzione/",
-          "excerpt": "Guida ai premi obbligatori di cassa malati nel canton Vallese: franchigie disponibili, modelli assicurativi, riduzione premi e procedura per ottenere sussidi cantonali.",
-          "date": "2026-09-05T16:42:46.103Z"
         }
       ],
       "latestCantonArticles": [],
@@ -169,42 +137,15 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "VS",
       "topic": "servizi",
       "locale": "en",
       "intro": "In Valais, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Italy and France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French and German; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [
-        {
-          "label": "Typical adult premium 2026",
-          "value": "582.80 CHF",
-          "note": "premium region 1, CHF 300 deductible",
-          "sourceName": "Federal Office of Public Health (FOPH)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Health insurance premiums 2026",
-          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
-          "items": [
-            {
-              "label": "VS, premium region 1",
-              "value": "typical 582.80 CHF per month",
-              "detail": "from 544.40 to 643.20 CHF, 26 insurers"
-            },
-            {
-              "label": "VS, premium region 2",
-              "value": "typical 521.60 CHF per month",
-              "detail": "from 470.90 to 597.90 CHF, 28 insurers"
-            }
-          ],
-          "sourceName": "Federal Office of Public Health (FOPH)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
@@ -246,6 +187,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Grand Council agrees to consider new Valais school law",
+          "url": "/en/valais-articles/grand-conseil-new-school-law/",
+          "excerpt": "At the beginning of the November session, the Grand Conseil accepted by a majority to proceed with consideration of the new Valais school law.",
+          "date": "2026-11-10T01:33:52.436Z"
+        },
+        {
           "title": "OVS report: 83% of Valais residents in good health",
           "url": "/en/valais-articles/valais-health-2026-ovs/",
           "excerpt": "In 2022, 83% of adults in Valais reported being in good or very good health, compared with 85% in Switzerland.",
@@ -286,12 +233,6 @@
           "url": "/en/swiss-articles/valais-school-enrolment-cycles/",
           "excerpt": "Cycles, enrollment age, calendar, languages and transition to upper secondary schools in the school system of Valais.",
           "date": "2026-09-30T08:39:22.953Z"
-        },
-        {
-          "title": "LAMal awards in Valais: bands and reductions 2026",
-          "url": "/en/swiss-articles/valais-lamal-premiums-reduction/",
-          "excerpt": "Guide to compulsory sick pay premiums in the canton of Valais: deductibles available, insurance models, premium reduction and procedure for obtaining cantonal subsidies.",
-          "date": "2026-09-05T16:42:46.103Z"
         }
       ],
       "latestCantonArticles": [],
@@ -317,42 +258,15 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "VS",
       "topic": "servizi",
       "locale": "de",
       "intro": "Im Wallis laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Italien und Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch und Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [
-        {
-          "label": "Mittlere Erwachsenenprämie 2026",
-          "value": "582.80 CHF",
-          "note": "Prämienregion 1, Franchise 300 CHF",
-          "sourceName": "Bundesamt für Gesundheit (BAG)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Krankenkassenprämien 2026",
-          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
-          "items": [
-            {
-              "label": "VS, Prämienregion 1",
-              "value": "Mittelwert 582.80 CHF pro Monat",
-              "detail": "von 544.40 bis 643.20 CHF, 26 Versicherer"
-            },
-            {
-              "label": "VS, Prämienregion 2",
-              "value": "Mittelwert 521.60 CHF pro Monat",
-              "detail": "von 470.90 bis 597.90 CHF, 28 Versicherer"
-            }
-          ],
-          "sourceName": "Bundesamt für Gesundheit (BAG)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
@@ -394,6 +308,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Grand Conseil nimmt neues Walliser Schulgesetz an",
+          "url": "/de/wallis-artikel/grand-conseil-neues-schulgesetz/",
+          "excerpt": "Zu Beginn der November-Sitzung hat der Grossrat die Aufnahme der Materie des neuen Walliser Schulgesetzes mit Mehrheit angenommen.",
+          "date": "2026-11-10T01:33:52.436Z"
+        },
+        {
           "title": "OVS-Bericht: 83% Walliser fit, 13% adipös, 44% Psychorisiken",
           "url": "/de/wallis-artikel/wallis-gesundheit-2026-ovs/",
           "excerpt": "Im Jahr 2022 gaben 83% der Erwachsenen im Wallis an, bei guter oder sehr guter Gesundheit zu sein, gegenüber 85% in der Schweiz.",
@@ -434,12 +354,6 @@
           "url": "/de/schweiz-artikel/walliser-schulsystem-anmeldung-zyklen/",
           "excerpt": "Zyklen, Einschreibungsalter, Kalender, Sprachen und Übergang in die Sekundarstufe II im Walliser Schulsystem.",
           "date": "2026-09-30T08:39:22.953Z"
-        },
-        {
-          "title": "KVG-Prämien im Wallis: Zeitabschnitte und Kürzungen 2026",
-          "url": "/de/schweiz-artikel/wallis-lamal-praemien-reduktion/",
-          "excerpt": "Leitfaden zu den obligatorischen Krankenkassenprämien im Kanton Wallis: verfügbare Franchisen, Versicherungsmodelle, Prämienverbilligung und Verfahren zur Erlangung kantonaler Beiträge.",
-          "date": "2026-09-05T16:42:46.103Z"
         }
       ],
       "latestCantonArticles": [],
@@ -465,42 +379,15 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "VS",
       "topic": "servizi",
       "locale": "fr",
       "intro": "En Valais, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Italie et la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français et allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [
-        {
-          "label": "Prime adulte centrale 2026",
-          "value": "582,80 CHF",
-          "note": "région de primes 1, franchise 300 CHF",
-          "sourceName": "Office fédéral de la santé publique (OFSP)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Primes d’assurance-maladie 2026",
-          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
-          "items": [
-            {
-              "label": "VS, région de primes 1",
-              "value": "valeur centrale 582,80 CHF par mois",
-              "detail": "de 544,40 à 643,20 CHF, 26 assureurs"
-            },
-            {
-              "label": "VS, région de primes 2",
-              "value": "valeur centrale 521,60 CHF par mois",
-              "detail": "de 470,90 à 597,90 CHF, 28 assureurs"
-            }
-          ],
-          "sourceName": "Office fédéral de la santé publique (OFSP)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
@@ -542,6 +429,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Grand Conseil accepte loi scolaire valaisanne",
+          "url": "/fr/articles-valais/grand-conseil-nouvelle-loi-ecole/",
+          "excerpt": "Le projet est présenté comme une loi destinée à remplacer celle de 1962.",
+          "date": "2026-11-10T01:33:52.436Z"
+        },
+        {
           "title": "Rapport OVS : 83% des Valaisans en bonne santé, 13% obèses",
           "url": "/fr/articles-valais/valais-sante-2026-ovs/",
           "excerpt": "En 2022, 83% des adultes en Valais déclaraient être en bonne ou excellente santé, contre 85% en Suisse.",
@@ -582,12 +475,6 @@
           "url": "/fr/articles-suisse/ecole-valais-inscription-cycles/",
           "excerpt": "Cycles, âge d'inscription, calendrier, langues et passage aux écoles du secondaire II dans le système scolaire du Valais.",
           "date": "2026-09-30T08:39:22.953Z"
-        },
-        {
-          "title": "Primes LAMal en Valais : fourchettes et réductions 2026",
-          "url": "/fr/articles-suisse/valais-lamal-cotisazioni-riduzione/",
-          "excerpt": "Guide des primes obligatoires d'assurance-maladie dans le canton du Valais : franchises disponibles, modèles d'assurance, réduction des primes et procédure d'obtention des allocations cantonales.",
-          "date": "2026-09-05T16:42:46.103Z"
         }
       ],
       "latestCantonArticles": [],
@@ -609,7 +496,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "b54d2ac3426c4c448fd83557cbc461adeae110933abb0e8e9f8ffa0d3c0b2f59",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "3473dd3175873fd364f9573420364324b3495db7f936deb885299b58d47f4b22",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Corpi in prestito",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/58243"
+              "label": "Soglie",
+              "detail": "B&B Fine Art, Paradiso",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64776"
             },
             {
-              "label": "Giovanni Anselmo",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/63802"
+              "label": "Mama & baby brunch creativo",
+              "detail": "Atelier Manoamano, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64884"
             },
             {
-              "label": "Donazione di sangue",
-              "detail": "Casa Anziani, Parco San Rocco, Coldrerio",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64841"
+              "label": "Masterclass a Jazz in Bess",
+              "detail": "Jazz in Bess, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64868"
             },
             {
-              "label": "Ugo Mulas, Pietro Consagra, Arnaldo Pomodoro",
-              "detail": "Cortesi Gallery, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/63724"
+              "label": "Masterclass interplay e accompagnamento nel jazz",
+              "detail": "Jazz in Bess, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64843"
             },
             {
-              "label": "Mr. Nobody against Putin",
-              "detail": "GranRex, Locarno",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64738"
+              "label": "Vie privee - Cinéclub Alliance française",
+              "detail": "Cinema Otello, Ascona",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64740"
             },
             {
-              "label": "Diario di un pazzo",
-              "detail": "Teatro Foce, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64026"
+              "label": "L’esperienza del dolore",
+              "detail": "Orizzonti filosofici, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64796"
             },
             {
-              "label": "Microplastiche e PFAS quali pericoli corriamo?",
-              "detail": "Casa di Lù, Bellinzona",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64886"
+              "label": "L'esperienza del dolore - Prof.ssa Lanfredini",
+              "detail": "Centro Leoni, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64490"
             },
             {
-              "label": "Francesco Garolfi - Spettacolo musicale",
-              "detail": "Cinema Lux, Massagno",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64438"
+              "label": "Speeddating Ticino",
+              "detail": "Bar Tesoro 25.75.14.41, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64753"
             },
             {
-              "label": "Kirk Fletcher blues trio",
-              "detail": "Teatro del Gatto, Ascona",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64586"
+              "label": "L’amore per se stessi si impara",
+              "detail": "Scuole Elementari, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64899"
             },
             {
-              "label": "Fede e guerra - Mostra fotografica",
-              "detail": "Centro pastorale S. Giuseppe, Lugano — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261107/64618"
+              "label": "Arlecchino muto per spavento, Stivalaccio Teatro / Marco Zoppello",
+              "detail": "Lac, Sala Teatro, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64636"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "TI",
@@ -184,64 +184,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Borrowed bodies",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/58243"
+              "label": "Thresholds",
+              "detail": "B&B Fine Art, Paradiso",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64776"
             },
             {
-              "label": "John Anselm",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/63802"
+              "label": "Mama & creative baby brunch",
+              "detail": "Atelier Manoamano, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64884"
             },
             {
-              "label": "Blood donation",
-              "detail": "Casa Anziani, Parco San Rocco, Coldrerio",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64841"
+              "label": "Masterclass at Jazz in Bess",
+              "detail": "Jazz in Bess, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64868"
             },
             {
-              "label": "Ugo Mulas, Pietro Consagra, Arnaldo Pomodoro",
-              "detail": "Cortesi Gallery, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/63724"
+              "label": "Interplay masterclass and accompaniment in jazz",
+              "detail": "Jazz in Bess, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64843"
             },
             {
-              "label": "Mr. Nobod ag",
-              "detail": "GranRex, Locarno",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64738"
+              "label": "Private streets - Cinéclub Alliance française",
+              "detail": "Cinema Otello, Ascona",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64740"
             },
             {
-              "label": "Diary of a Fool",
-              "detail": "Teatro Foce, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64026"
+              "label": "The Experience of Pain",
+              "detail": "Orizzonti filosofici, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64796"
             },
             {
-              "label": "Microplastics and PFAS: what dangers do we face?",
-              "detail": "Casa di Lù, Bellinzona",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64886"
+              "label": "The experience of pain - Prof. Lanfredini",
+              "detail": "Centro Leoni, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64490"
             },
             {
-              "label": "Francesco Garolfi - Musical show",
-              "detail": "Cinema Lux, Massagno",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64438"
+              "label": "Speeddating Ticino",
+              "detail": "Bar Tesoro 25.75.14.41, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64753"
             },
             {
-              "label": "Kirk Fletcher blues trio",
-              "detail": "Teatro del Gatto, Ascona",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64586"
+              "label": "Self-love is learned",
+              "detail": "Scuole Elementari, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64899"
             },
             {
-              "label": "Faith and War - Photo Exhibit",
-              "detail": "Centro pastorale S. Giuseppe, Lugano — ongoing, last day: 15 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261107/64618"
+              "label": "Mute harlequin for fear, Booty Theatre / Marco Zoppello",
+              "detail": "Lac, Sala Teatro, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64636"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "TI",
@@ -335,64 +335,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Leihkörper",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/58243"
+              "label": "Schwellenwerte",
+              "detail": "B&B Fine Art, Paradiso",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64776"
             },
             {
-              "label": "Johannes Anselm",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/63802"
+              "label": "Mama & kreativer Babybrunch",
+              "detail": "Atelier Manoamano, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64884"
             },
             {
-              "label": "Blutspende",
-              "detail": "Casa Anziani, Parco San Rocco, Coldrerio",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64841"
+              "label": "Masterclass bei Jazz in Bess",
+              "detail": "Jazz in Bess, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64868"
             },
             {
-              "label": "Ugo Mulas, Pietro Consagra, Arnaldo Pomodoro",
-              "detail": "Cortesi Gallery, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/63724"
+              "label": "Interplay-Meisterklasse und Begleitung im Jazz",
+              "detail": "Jazz in Bess, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64843"
             },
             {
-              "label": "Herr Niemand gegen Putin",
-              "detail": "GranRex, Locarno",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64738"
+              "label": "Privatstraßen - Cinéclub Alliance française",
+              "detail": "Cinema Otello, Ascona",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64740"
             },
             {
-              "label": "Tagebuch eines Verrückten",
-              "detail": "Teatro Foce, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64026"
+              "label": "Die Erfahrung des Schmerzes",
+              "detail": "Orizzonti filosofici, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64796"
             },
             {
-              "label": "Mikroplastik und PFAS: Welche Gefahren sind wir gegenüber?",
-              "detail": "Casa di Lù, Bellinzona",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64886"
+              "label": "Die Erfahrung des Schmerzes - Prof. Lanfredini",
+              "detail": "Centro Leoni, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64490"
             },
             {
-              "label": "Francesco Garolfi - Musikalische Darbietung",
-              "detail": "Cinema Lux, Massagno",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64438"
+              "label": "Speeddating Tessin",
+              "detail": "Bar Tesoro 25.75.14.41, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64753"
             },
             {
-              "label": "Kirk Fletcher Blues-Trio",
-              "detail": "Teatro del Gatto, Ascona",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64586"
+              "label": "Selbstliebe wird erlernt",
+              "detail": "Scuole Elementari, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64899"
             },
             {
-              "label": "Glaube und Krieg - Fotoausstellung",
-              "detail": "Centro pastorale S. Giuseppe, Lugano — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261107/64618"
+              "label": "Stummer Harlekin für Schrecken, Stiefeletten Theater / Marco Zoppello",
+              "detail": "Lac, Sala Teatro, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64636"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "TI",
@@ -486,64 +486,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Corps prêtés",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/58243"
+              "label": "Seuils",
+              "detail": "B&B Fine Art, Paradiso",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64776"
             },
             {
-              "label": "Giovanni Anselme",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/63802"
+              "label": "Brunch maman et bébé créatif",
+              "detail": "Atelier Manoamano, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64884"
             },
             {
-              "label": "Don de sang",
-              "detail": "Casa Anziani, Parco San Rocco, Coldrerio",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64841"
+              "label": "Masterclass à Jazz in Bess",
+              "detail": "Jazz in Bess, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64868"
             },
             {
-              "label": "Ugo Mulas, avec Pietro Consagra et Arnaldo Pomodoro",
-              "detail": "Cortesi Gallery, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/63724"
+              "label": "Masterclass d’interplay et accompagnement en jazz",
+              "detail": "Jazz in Bess, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64843"
             },
             {
-              "label": "Monsieur Personne contre Poutine",
-              "detail": "GranRex, Locarno",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64738"
+              "label": "Rues privées - Cinéclub Alliance française",
+              "detail": "Cinema Otello, Ascona",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64740"
             },
             {
-              "label": "Journal d'un fou",
-              "detail": "Teatro Foce, Lugano",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64026"
+              "label": "L'expérience de la douleur",
+              "detail": "Orizzonti filosofici, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64796"
             },
             {
-              "label": "Microplastiques et PFAS : quels dangers rencontrons-nous ?",
-              "detail": "Casa di Lù, Bellinzona",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64886"
+              "label": "L'expérience de la douleur - Prof. Lanfredini",
+              "detail": "Centro Leoni, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64490"
             },
             {
-              "label": "Francesco Garolfi - Spectacle musical",
-              "detail": "Cinema Lux, Massagno",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64438"
+              "label": "Speeddating Tessin",
+              "detail": "Bar Tesoro 25.75.14.41, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64753"
             },
             {
-              "label": "Kirk Fletcher trio blues",
-              "detail": "Teatro del Gatto, Ascona",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261109/64586"
+              "label": "L’amour de soi s’apprend",
+              "detail": "Scuole Elementari, Locarno",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64899"
             },
             {
-              "label": "Foi et guerre - Exposition photographique",
-              "detail": "Centro pastorale S. Giuseppe, Lugano — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.tio.ch/agenda/day/20261107/64618"
+              "label": "Arlequin muet par peur, Bottine Théâtre / Marco Zoppello",
+              "detail": "Lac, Sala Teatro, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64636"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }

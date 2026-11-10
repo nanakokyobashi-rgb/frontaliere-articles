@@ -4,19 +4,9 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-09T23:41:11.155Z",
-  "contentHash": "906b52d9bc7255d1189dd01dc4035ca95480a3a7bfb8691df58c42e3b0b5861c",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "387dc6b3e7183b062e187d036eb341c71de05787eb14cf5322fc43cac4535b72",
   "blocks": [
-    {
-      "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-01T11:17:34.347Z",
-      "keyFacts": 1
-    },
-    {
-      "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-08T00:17:50.046Z",
-      "keyFacts": 0
-    },
     {
       "id": "avvisi-ufficiali",
       "updatedAt": "2026-11-07T21:07:56.550Z",
@@ -29,80 +19,8 @@
       "topic": "servizi",
       "locale": "it",
       "intro": "Nel Canton Zurigo, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [
-        {
-          "label": "Premio mediano adulto 2026",
-          "value": "639,80 CHF",
-          "note": "regione di premio 1, franchigia 300 CHF",
-          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Premi di cassa malati 2026",
-          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
-          "items": [
-            {
-              "label": "ZH, regione di premio 1",
-              "value": "mediana 639,80 CHF al mese",
-              "detail": "da 605,20 a 724 CHF, 27 assicuratori"
-            },
-            {
-              "label": "ZH, regione di premio 2",
-              "value": "mediana 583,10 CHF al mese",
-              "detail": "da 535,60 a 637,70 CHF, 27 assicuratori"
-            },
-            {
-              "label": "ZH, regione di premio 3",
-              "value": "mediana 543,50 CHF al mese",
-              "detail": "da 488,50 a 617,80 CHF, 27 assicuratori"
-            }
-          ],
-          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Farmacie di turno",
-          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
-          "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-09T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-10T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-11T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-12T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-13T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-14T23:00:00.000Z"
-            }
-          ],
-          "sourceName": "Servizio ufficiale dei turni farmacia",
-          "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-08T00:17:50.046Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
@@ -162,16 +80,16 @@
           "date": "2026-09-27T20:26:34.846Z"
         },
         {
-          "title": "Permesso di pesca Cantone Zurigo: verifica requisiti e competenza",
-          "url": "/articoli-svizzera/pesca-zurigo-servizi-regolati/",
-          "excerpt": "La pesca è un servizio regolato a livello cantonale; requisiti, scadenze e importi vanno verificati ufficialmente sulla fonte cantonale.",
-          "date": "2026-10-25T16:33:10.314Z"
-        },
-        {
           "title": "Zurigo: guida a targhe e immatricolazione",
           "url": "/articoli-svizzera/zurigo-targhe-immatricolazione-guida/",
           "excerpt": "Procedura per registrazione, documenti e cambio proprietario: verifica requisiti e costi presso l'ufficio della circolazione competente.",
           "date": "2026-10-14T02:15:21.680Z"
+        },
+        {
+          "title": "Permesso di pesca Cantone Zurigo: verifica requisiti e competenza",
+          "url": "/articoli-svizzera/pesca-zurigo-servizi-regolati/",
+          "excerpt": "La pesca è un servizio regolato a livello cantonale; requisiti, scadenze e importi vanno verificati ufficialmente sulla fonte cantonale.",
+          "date": "2026-10-25T16:33:10.314Z"
         },
         {
           "title": "Autorizzazione edilizia Canton Zurigo: requisiti e procedura",
@@ -219,87 +137,15 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "ZH",
       "topic": "servizi",
       "locale": "en",
       "intro": "In the canton of Zurich, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [
-        {
-          "label": "Typical adult premium 2026",
-          "value": "639.80 CHF",
-          "note": "premium region 1, CHF 300 deductible",
-          "sourceName": "Federal Office of Public Health (FOPH)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Health insurance premiums 2026",
-          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
-          "items": [
-            {
-              "label": "ZH, premium region 1",
-              "value": "typical 639.80 CHF per month",
-              "detail": "from 605.20 to 724 CHF, 27 insurers"
-            },
-            {
-              "label": "ZH, premium region 2",
-              "value": "typical 583.10 CHF per month",
-              "detail": "from 535.60 to 637.70 CHF, 27 insurers"
-            },
-            {
-              "label": "ZH, premium region 3",
-              "value": "typical 543.50 CHF per month",
-              "detail": "from 488.50 to 617.80 CHF, 27 insurers"
-            }
-          ],
-          "sourceName": "Federal Office of Public Health (FOPH)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "On-duty pharmacies",
-          "description": "Upcoming duty shifts published by the canton’s official service.",
-          "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-09T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-10T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-11T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-12T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-13T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-14T23:00:00.000Z"
-            }
-          ],
-          "sourceName": "Official pharmacy duty service",
-          "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-08T00:17:50.046Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
@@ -359,16 +205,16 @@
           "date": "2026-09-27T20:26:34.846Z"
         },
         {
-          "title": "Zurich Canton fishing permit: check requirements and jurisdiction",
-          "url": "/en/swiss-articles/zurich-fishing-regulated-services/",
-          "excerpt": "Fishing is a service regulated at the cantonal level; requirements, deadlines and amounts must be officially verified with the cantonal source.",
-          "date": "2026-10-25T16:33:10.314Z"
-        },
-        {
           "title": "Zurich: guide to license plates and registration",
           "url": "/en/swiss-articles/zurich-plates-registration-guide/",
           "excerpt": "Procedure for registration, documents, and change of ownership: verify the requirements and costs with the relevant motor vehicle office.",
           "date": "2026-10-14T02:15:21.680Z"
+        },
+        {
+          "title": "Zurich Canton fishing permit: check requirements and jurisdiction",
+          "url": "/en/swiss-articles/zurich-fishing-regulated-services/",
+          "excerpt": "Fishing is a service regulated at the cantonal level; requirements, deadlines and amounts must be officially verified with the cantonal source.",
+          "date": "2026-10-25T16:33:10.314Z"
         },
         {
           "title": "Building permit in the Canton of Zurich: requirements and procedure",
@@ -412,87 +258,15 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "ZH",
       "topic": "servizi",
       "locale": "de",
       "intro": "Im Kanton Zürich laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [
-        {
-          "label": "Mittlere Erwachsenenprämie 2026",
-          "value": "639.80 CHF",
-          "note": "Prämienregion 1, Franchise 300 CHF",
-          "sourceName": "Bundesamt für Gesundheit (BAG)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Krankenkassenprämien 2026",
-          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
-          "items": [
-            {
-              "label": "ZH, Prämienregion 1",
-              "value": "Mittelwert 639.80 CHF pro Monat",
-              "detail": "von 605.20 bis 724 CHF, 27 Versicherer"
-            },
-            {
-              "label": "ZH, Prämienregion 2",
-              "value": "Mittelwert 583.10 CHF pro Monat",
-              "detail": "von 535.60 bis 637.70 CHF, 27 Versicherer"
-            },
-            {
-              "label": "ZH, Prämienregion 3",
-              "value": "Mittelwert 543.50 CHF pro Monat",
-              "detail": "von 488.50 bis 617.80 CHF, 27 Versicherer"
-            }
-          ],
-          "sourceName": "Bundesamt für Gesundheit (BAG)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Notfallapotheken",
-          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
-          "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-09T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-10T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-11T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-12T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-13T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-14T23:00:00.000Z"
-            }
-          ],
-          "sourceName": "Offizieller Apotheken-Notfalldienst",
-          "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-08T00:17:50.046Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
@@ -552,16 +326,16 @@
           "date": "2026-09-27T20:26:34.846Z"
         },
         {
-          "title": "Fischereibewilligung Zürich: Voraussetzungen prüfen",
-          "url": "/de/schweiz-artikel/fischen-zuerich-regulierte-dienste/",
-          "excerpt": "Die Fischerei ist eine auf kantonaler Ebene geregelte Dienstleistung; Voraussetzungen, Fristen und Beträge sind offiziell anhand der kantonalen Quelle zu überprüfen.",
-          "date": "2026-10-25T16:33:10.314Z"
-        },
-        {
           "title": "Zürich: Leitfaden zu Kontrollschildern und Zulassung",
           "url": "/de/schweiz-artikel/zuerich-kennzeichen-registrierung/",
           "excerpt": "Verfahren für Zulassung, Dokumente und Halterwechsel: Anforderungen und Kosten beim zuständigen Strassenverkehrsamt prüfen.",
           "date": "2026-10-14T02:15:21.680Z"
+        },
+        {
+          "title": "Fischereibewilligung Zürich: Voraussetzungen prüfen",
+          "url": "/de/schweiz-artikel/fischen-zuerich-regulierte-dienste/",
+          "excerpt": "Die Fischerei ist eine auf kantonaler Ebene geregelte Dienstleistung; Voraussetzungen, Fristen und Beträge sind offiziell anhand der kantonalen Quelle zu überprüfen.",
+          "date": "2026-10-25T16:33:10.314Z"
         },
         {
           "title": "Baubewilligung im Kanton Zürich: Anforderungen und Verfahren",
@@ -605,87 +379,15 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "ZH",
       "topic": "servizi",
       "locale": "fr",
       "intro": "Dans le canton de Zurich, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [
-        {
-          "label": "Prime adulte centrale 2026",
-          "value": "639,80 CHF",
-          "note": "région de primes 1, franchise 300 CHF",
-          "sourceName": "Office fédéral de la santé publique (OFSP)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Primes d’assurance-maladie 2026",
-          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
-          "items": [
-            {
-              "label": "ZH, région de primes 1",
-              "value": "valeur centrale 639,80 CHF par mois",
-              "detail": "de 605,20 à 724 CHF, 27 assureurs"
-            },
-            {
-              "label": "ZH, région de primes 2",
-              "value": "valeur centrale 583,10 CHF par mois",
-              "detail": "de 535,60 à 637,70 CHF, 27 assureurs"
-            },
-            {
-              "label": "ZH, région de primes 3",
-              "value": "valeur centrale 543,50 CHF par mois",
-              "detail": "de 488,50 à 617,80 CHF, 27 assureurs"
-            }
-          ],
-          "sourceName": "Office fédéral de la santé publique (OFSP)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Pharmacies de garde",
-          "description": "Prochaines gardes publiées par le service officiel du canton.",
-          "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-09T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-10T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-11T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-12T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-13T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-11-14T23:00:00.000Z"
-            }
-          ],
-          "sourceName": "Service officiel des pharmacies de garde",
-          "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-08T00:17:50.046Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
@@ -745,16 +447,16 @@
           "date": "2026-09-27T20:26:34.846Z"
         },
         {
-          "title": "Permis de pêche à Zurich : exigences et compétences",
-          "url": "/fr/articles-suisse/pesche-zurich-services-reglementes/",
-          "excerpt": "La pêche est un service réglementé au niveau cantonal ; les exigences, les délais et les montants doivent être vérifiés officiellement auprès de la source cantonale.",
-          "date": "2026-10-25T16:33:10.314Z"
-        },
-        {
           "title": "Zurich : guide des plaques et de l’immatriculation",
           "url": "/fr/articles-suisse/zurich-plaques-immatriculation/",
           "excerpt": "Procédure d’immatriculation, documents et changement de propriétaire : vérifiez les exigences et les coûts auprès de l’office de la circulation compétent.",
           "date": "2026-10-14T02:15:21.680Z"
+        },
+        {
+          "title": "Permis de pêche à Zurich : exigences et compétences",
+          "url": "/fr/articles-suisse/pesche-zurich-services-reglementes/",
+          "excerpt": "La pêche est un service réglementé au niveau cantonal ; les exigences, les délais et les montants doivent être vérifiés officiellement auprès de la source cantonale.",
+          "date": "2026-10-25T16:33:10.314Z"
         },
         {
           "title": "Autorisation de construire dans le canton de Zurich : exigences et procédure",
@@ -794,7 +496,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }

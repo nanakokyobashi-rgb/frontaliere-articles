@@ -4,14 +4,9 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-11-08T22:45:42.198Z",
-  "contentHash": "2ef4e0a028a868b05b1c1a94091ce91914da1e6146f8799b4cccf4708f0fba28",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "50b1275dced91f7fdb10ab8b363b8bc15c74c270ab0f95537411395b82ad356f",
   "blocks": [
-    {
-      "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-01T11:17:34.347Z",
-      "keyFacts": 1
-    },
     {
       "id": "avvisi-ufficiali",
       "updatedAt": "2026-11-07T21:07:56.550Z",
@@ -24,40 +19,8 @@
       "topic": "servizi",
       "locale": "it",
       "intro": "Nel Canton San Gallo, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con l’Austria, il Liechtenstein e la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [
-        {
-          "label": "Premio mediano adulto 2026",
-          "value": "577,10 CHF",
-          "note": "regione di premio 1, franchigia 300 CHF",
-          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Premi di cassa malati 2026",
-          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
-          "items": [
-            {
-              "label": "SG, regione di premio 1",
-              "value": "mediana 577,10 CHF al mese",
-              "detail": "da 536,40 a 665,90 CHF, 25 assicuratori"
-            },
-            {
-              "label": "SG, regione di premio 2",
-              "value": "mediana 537,90 CHF al mese",
-              "detail": "da 487,90 a 606 CHF, 25 assicuratori"
-            },
-            {
-              "label": "SG, regione di premio 3",
-              "value": "mediana 516 CHF al mese",
-              "detail": "da 467 a 599,40 CHF, 25 assicuratori"
-            }
-          ],
-          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
@@ -174,47 +137,15 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "SG",
       "topic": "servizi",
       "locale": "en",
       "intro": "In the canton of St. Gallen, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Austria, Liechtenstein and Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [
-        {
-          "label": "Typical adult premium 2026",
-          "value": "577.10 CHF",
-          "note": "premium region 1, CHF 300 deductible",
-          "sourceName": "Federal Office of Public Health (FOPH)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Health insurance premiums 2026",
-          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
-          "items": [
-            {
-              "label": "SG, premium region 1",
-              "value": "typical 577.10 CHF per month",
-              "detail": "from 536.40 to 665.90 CHF, 25 insurers"
-            },
-            {
-              "label": "SG, premium region 2",
-              "value": "typical 537.90 CHF per month",
-              "detail": "from 487.90 to 606 CHF, 25 insurers"
-            },
-            {
-              "label": "SG, premium region 3",
-              "value": "typical 516 CHF per month",
-              "detail": "from 467 to 599.40 CHF, 25 insurers"
-            }
-          ],
-          "sourceName": "Federal Office of Public Health (FOPH)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
@@ -327,47 +258,15 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "SG",
       "topic": "servizi",
       "locale": "de",
       "intro": "Im Kanton St. Gallen laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Österreich, Liechtenstein und Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [
-        {
-          "label": "Mittlere Erwachsenenprämie 2026",
-          "value": "577.10 CHF",
-          "note": "Prämienregion 1, Franchise 300 CHF",
-          "sourceName": "Bundesamt für Gesundheit (BAG)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Krankenkassenprämien 2026",
-          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
-          "items": [
-            {
-              "label": "SG, Prämienregion 1",
-              "value": "Mittelwert 577.10 CHF pro Monat",
-              "detail": "von 536.40 bis 665.90 CHF, 25 Versicherer"
-            },
-            {
-              "label": "SG, Prämienregion 2",
-              "value": "Mittelwert 537.90 CHF pro Monat",
-              "detail": "von 487.90 bis 606 CHF, 25 Versicherer"
-            },
-            {
-              "label": "SG, Prämienregion 3",
-              "value": "Mittelwert 516 CHF pro Monat",
-              "detail": "von 467 bis 599.40 CHF, 25 Versicherer"
-            }
-          ],
-          "sourceName": "Bundesamt für Gesundheit (BAG)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
@@ -480,47 +379,15 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "SG",
       "topic": "servizi",
       "locale": "fr",
       "intro": "Dans le canton de Saint-Gall, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Autriche, le Liechtenstein et l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [
-        {
-          "label": "Prime adulte centrale 2026",
-          "value": "577,10 CHF",
-          "note": "région de primes 1, franchise 300 CHF",
-          "sourceName": "Office fédéral de la santé publique (OFSP)"
-        }
-      ],
+      "keyFacts": [],
       "dataBlocks": [
-        {
-          "id": "premi-cassa-malati",
-          "title": "Primes d’assurance-maladie 2026",
-          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
-          "items": [
-            {
-              "label": "SG, région de primes 1",
-              "value": "valeur centrale 577,10 CHF par mois",
-              "detail": "de 536,40 à 665,90 CHF, 25 assureurs"
-            },
-            {
-              "label": "SG, région de primes 2",
-              "value": "valeur centrale 537,90 CHF par mois",
-              "detail": "de 487,90 à 606 CHF, 25 assureurs"
-            },
-            {
-              "label": "SG, région de primes 3",
-              "value": "valeur centrale 516 CHF par mois",
-              "detail": "de 467 à 599,40 CHF, 25 assureurs"
-            }
-          ],
-          "sourceName": "Office fédéral de la santé publique (OFSP)",
-          "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-01T11:17:34.347Z"
-        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
@@ -629,7 +496,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }

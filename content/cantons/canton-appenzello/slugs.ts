@@ -30,6 +30,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'caldo-appenzello-esterno-2026': { it: 'caldo-appenzello-esterno-2026', en: 'heat-appenzell-ausserrhoden-2026', de: 'hitzebelastung-appenzell-ausserrhoden-2026', fr: 'chaleur-appenzell-rhodes-exterieures-2026' },
  'tariffe-mediche-appenzello-2026': { it: 'tariffe-mediche-appenzello-2026', en: 'medical-tariffs-appenzell-2026', de: 'arzttarife-appenzell-2026', fr: 'tarifs-medicaux-appenzell-2026' },
  'ulmann-incarico-appenzello': { it: 'ulmann-incarico-appenzello', en: 'ulmann-appenzell-appointment', de: 'ulmann-anstellung-appenzell', fr: 'ulmann-nomination-appenzell' },
+ 'consiglio-gruppo-caldo-scuola': { it: 'consiglio-gruppo-caldo-scuola', en: 'council-school-heat-group', de: 'gemeinderat-hitzeschutz-schule', fr: 'groupe-conseil-chaleur-ecole' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

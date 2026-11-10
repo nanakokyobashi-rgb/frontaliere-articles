@@ -103,6 +103,10 @@
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/geschaefte-stauen-sich-im-luzerner-kantonsrat-art-1731092": {
       "section": "canton-sz",
       "ts": 1794227632605
+    },
+    "canton-sz::https://www.keystone-sda.ch/20261109145048753194158159026": {
+      "section": "canton-sz",
+      "ts": 1794271300286
     }
   }
 }
