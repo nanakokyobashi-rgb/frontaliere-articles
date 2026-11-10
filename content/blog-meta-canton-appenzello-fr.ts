@@ -87,6 +87,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.consiglio-gruppo-caldo-scuola.title': 'Conseil municipal crée un groupe contre la chaleur à l’école',
     'blog.article.consiglio-gruppo-caldo-scuola.excerpt': 'Le conseil municipal a créé le groupe de travail « Hitzeschutz und Begrünung » : salles de classe et espaces extérieurs, avec des mesures rapides de protection contre le soleil.',
     'blog.article.consiglio-gruppo-caldo-scuola.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.governo-appenzello-candidati.title': 'Gewerbeverband recommande Jung et Ruprecht en 2027',
+    'blog.article.governo-appenzello-candidati.excerpt': 'Le Gewerbeverband recommande Karin Jung (FDP) et Balz Ruprecht (EVP) pour le siège laissé vacant lors des élections de fin février 2027.',
+    'blog.article.governo-appenzello-candidati.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

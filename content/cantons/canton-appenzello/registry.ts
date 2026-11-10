@@ -315,4 +315,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'governo-appenzello-candidati',
+ category: 'novita',
+ date: '2026-11-10T11:50:35.348Z',
+ image: '/images/blog/article-governo-appenzello-candidati.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

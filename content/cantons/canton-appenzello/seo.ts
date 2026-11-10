@@ -1094,6 +1094,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-governo-appenzello-candidati': {
+    title: 'Gewerbeverband raccomanda Jung e Ruprecht nel 2027',
+    description: 'Il Gewerbeverband raccomanda Karin Jung (FDP) e Balz Ruprecht (EVP) per il seggio lasciato libero alle elezioni di fine febbraio 2027.',
+    keywords: 'frontalieri, ticino, svizzera, italia, gewerbeverband, raccomanda, jung, ruprecht',
+    ogTitle: 'Gewerbeverband raccomanda Jung e Ruprecht nel 2027',
+    ogDescription: 'Alle elezioni di rinnovo completo del governo cantonale, previste a fine febbraio 2027, Dölf Biasotto non si ricandida. Il Gewerbeverband raccomanda Karin Jung (FDP) e Balz Ruprecht (EVP) per il seggio vacante.',
+    canonicalPath: '/articoli-appenzello/governo-appenzello-candidati/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gewerbeverband raccomanda Jung e Ruprecht nel 2027",
+      "description": "Il Gewerbeverband raccomanda Karin Jung (FDP) e Balz Ruprecht (EVP) per il seggio lasciato libero alle elezioni di fine febbraio 2027.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-governo-appenzello-candidati.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-10T11:50:35+00:00",
+      "dateModified": "2026-11-10T11:50:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/governo-appenzello-candidati/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
