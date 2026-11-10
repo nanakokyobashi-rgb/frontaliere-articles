@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261106-les-cff-adaptent-leurs-stations-de-recyclage-le-papier-supprime.html": {
-      "section": "canton-ju",
-      "ts": 1794096366649
-    },
     "canton-ju::https://www.lejdj.ch/articles/ecole-a-journee-continue-neuchatel-trouve-le-bilan-tres-positif-105808": {
       "section": "canton-ju",
       "ts": 1794221575818
@@ -15,6 +11,14 @@
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261109-unicredit-nouveau-trimestre-record-en-termes-de-benefice.html": {
       "section": "canton-ju",
       "ts": 1794221588517
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/suisse/20261109-energie-les-entreprises-pourraient-se-defendre-contre-les-drones.html": {
+      "section": "canton-ju",
+      "ts": 1794269600121
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261109-succession-de-lagarde-a-la-bce-decision-attendue-avant-fin-2026.html": {
+      "section": "canton-ju",
+      "ts": 1794269611225
     }
   }
 }
