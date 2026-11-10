@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-burocrazia-frena-investimenti-svizzera.webp",
-      "sha256": "0093b4efa01ad23c8c4b71b55c2ead69f590e7a0577d6e0ff908c4ca1a28b381"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-burocrazia-frena-investimenti-svizzera-480w.webp",
-      "sha256": "67fd95ed8a9516b217c377afe93a83fc8b3c09bd529486d2353bc23df262b274"
-    }
-  ]
+  "items": []
 }
