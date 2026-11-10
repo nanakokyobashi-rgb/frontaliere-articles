@@ -6951,7 +6951,8 @@
         "site": "0a7f617c58f2dac6",
         "corpus": "0a7f617c58f2dac6",
         "alignedAt": "2026-11-09"
-      }
+      },
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3078"
     },
     {
       "path": "host/third-party-shell-assets.json",
