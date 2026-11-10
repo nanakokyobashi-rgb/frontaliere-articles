@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "04b9167133cb9ca0b42d83dc41f15ab3b299207eacac607623c4b4c9c6779c35",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "8a074a116742e2abad9d0d67a28c83f5b5720e7bc2faf7ac02404e95ce85bedc",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "63",
+          "value": "62",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,54 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Epicoop's Gourmet Saturday",
-              "detail": "Vevey — in corso, ultimo giorno: 5 dicembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
-            },
-            {
-              "label": "Payerne Fair",
-              "detail": "Comptoir de Payerne, Payerne — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
-            },
-            {
-              "label": "Lausanne Bach Festival",
-              "detail": "Divers lieux, Lausanne — in corso, ultimo giorno: 4 dicembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
-            },
-            {
-              "label": "Un monde éperdu - Thierry Romanens",
-              "detail": "Théâtre Boulimie — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
-            },
-            {
-              "label": "\"Dreamscapes\": Print Exhibition",
-              "detail": "Galerie-Atelier Arva, Vevey — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
-            },
-            {
-              "label": "Atelier de mosaïque",
-              "detail": "Renens — in corso, ultimo giorno: 19 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
-            },
-            {
-              "label": "Kombucha, Kefir, and Homemade Soda Workshop",
-              "detail": "Aubonne — in corso, ultimo giorno: 9 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
-            },
-            {
-              "label": "Reflections",
-              "detail": "Vevey — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
             {
               "label": "Archaeological Discoveries in Jerusalem",
               "detail": "Clarens, Montreux",
@@ -96,6 +48,54 @@
               "detail": "Lausanne",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rap-1ere-partie/"
+            },
+            {
+              "label": "Epicoop's Gourmet Saturday",
+              "detail": "Vevey — in corso, ultimo giorno: 5 dicembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
+            },
+            {
+              "label": "Payerne Fair",
+              "detail": "Comptoir de Payerne, Payerne — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
+            },
+            {
+              "label": "Lausanne Bach Festival",
+              "detail": "Divers lieux, Lausanne — in corso, ultimo giorno: 4 dicembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
+            },
+            {
+              "label": "Un monde éperdu - Thierry Romanens",
+              "detail": "Théâtre Boulimie — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
+            },
+            {
+              "label": "\"Dreamscapes\": Print Exhibition",
+              "detail": "Galerie-Atelier Arva, Vevey — in corso, ultimo giorno: 12 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
+            },
+            {
+              "label": "Atelier de mosaïque",
+              "detail": "Renens — in corso, ultimo giorno: 19 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+            },
+            {
+              "label": "Reflections",
+              "detail": "Vevey — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "It's a different story! small hand and BIG HAND",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cest-une-autre-histoire-petite-main-et-grande-main/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -145,7 +145,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "VD",
@@ -155,7 +155,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "63",
+          "value": "62",
           "note": "from the site’s events calendar"
         }
       ],
@@ -165,54 +165,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Epicoop's Gourmet Saturday",
-              "detail": "Vevey — ongoing, last day: 5 December 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
-            },
-            {
-              "label": "Payerne Fair",
-              "detail": "Comptoir de Payerne, Payerne — ongoing, last day: 15 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
-            },
-            {
-              "label": "Lausanne Bach Festival",
-              "detail": "Divers lieux, Lausanne — ongoing, last day: 4 December 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
-            },
-            {
-              "label": "Un monde éperdu - Thierry Romanens",
-              "detail": "Théâtre Boulimie — ongoing, last day: 14 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
-            },
-            {
-              "label": "\"Dreamscapes\": Print Exhibition",
-              "detail": "Galerie-Atelier Arva, Vevey — ongoing, last day: 12 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
-            },
-            {
-              "label": "Atelier de mosaïque",
-              "detail": "Renens — ongoing, last day: 19 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
-            },
-            {
-              "label": "Kombucha, Kefir, and Homemade Soda Workshop",
-              "detail": "Aubonne — ongoing, last day: 9 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
-            },
-            {
-              "label": "Reflections",
-              "detail": "Vevey — ongoing, last day: 15 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
             {
               "label": "Archaeological Discoveries in Jerusalem",
               "detail": "Clarens, Montreux",
@@ -224,6 +176,54 @@
               "detail": "Lausanne",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rap-1ere-partie/"
+            },
+            {
+              "label": "Epicoop's Gourmet Saturday",
+              "detail": "Vevey — ongoing, last day: 5 December 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
+            },
+            {
+              "label": "Payerne Fair",
+              "detail": "Comptoir de Payerne, Payerne — ongoing, last day: 15 November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
+            },
+            {
+              "label": "Lausanne Bach Festival",
+              "detail": "Divers lieux, Lausanne — ongoing, last day: 4 December 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
+            },
+            {
+              "label": "Un monde éperdu - Thierry Romanens",
+              "detail": "Théâtre Boulimie — ongoing, last day: 14 November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
+            },
+            {
+              "label": "\"Dreamscapes\": Print Exhibition",
+              "detail": "Galerie-Atelier Arva, Vevey — ongoing, last day: 12 November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
+            },
+            {
+              "label": "Atelier de mosaïque",
+              "detail": "Renens — ongoing, last day: 19 November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+            },
+            {
+              "label": "Reflections",
+              "detail": "Vevey — ongoing, last day: 15 November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "It's a different story! small hand and BIG HAND",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cest-une-autre-histoire-petite-main-et-grande-main/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -273,7 +273,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "VD",
@@ -283,7 +283,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "63",
+          "value": "62",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -293,54 +293,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Gourmet-Samstag von Epicoop",
-              "detail": "Vevey — läuft, letzter Tag: 5. Dezember 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
-            },
-            {
-              "label": "Gewerbeausstellung von Payerne",
-              "detail": "Comptoir de Payerne, Payerne — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
-            },
-            {
-              "label": "Bach-Festival Lausanne",
-              "detail": "Divers lieux, Lausanne — läuft, letzter Tag: 4. Dezember 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
-            },
-            {
-              "label": "Un monde éperdu - Thierry Romanens",
-              "detail": "Théâtre Boulimie — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
-            },
-            {
-              "label": "„Traumlandschaften“: Ausstellung mit Radierungen",
-              "detail": "Galerie-Atelier Arva, Vevey — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
-            },
-            {
-              "label": "Atelier de mosaïque",
-              "detail": "Renens — läuft, letzter Tag: 19. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
-            },
-            {
-              "label": "Workshop zu Kombucha, Kefir und hausgemachten Limonaden",
-              "detail": "Aubonne — läuft, letzter Tag: 9. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
-            },
-            {
-              "label": "Reflexionen",
-              "detail": "Vevey — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
             {
               "label": "Archäologische Funde in Jerusalem",
               "detail": "Clarens, Montreux",
@@ -352,6 +304,54 @@
               "detail": "Lausanne",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rap-1ere-partie/"
+            },
+            {
+              "label": "Gourmet-Samstag von Epicoop",
+              "detail": "Vevey — läuft, letzter Tag: 5. Dezember 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
+            },
+            {
+              "label": "Gewerbeausstellung von Payerne",
+              "detail": "Comptoir de Payerne, Payerne — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
+            },
+            {
+              "label": "Bach-Festival Lausanne",
+              "detail": "Divers lieux, Lausanne — läuft, letzter Tag: 4. Dezember 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
+            },
+            {
+              "label": "Un monde éperdu - Thierry Romanens",
+              "detail": "Théâtre Boulimie — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
+            },
+            {
+              "label": "„Traumlandschaften“: Ausstellung mit Radierungen",
+              "detail": "Galerie-Atelier Arva, Vevey — läuft, letzter Tag: 12. November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
+            },
+            {
+              "label": "Atelier de mosaïque",
+              "detail": "Renens — läuft, letzter Tag: 19. November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+            },
+            {
+              "label": "Reflexionen",
+              "detail": "Vevey — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "C'est une autre histoire! petite main et GRANDE MAIN",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cest-une-autre-histoire-petite-main-et-grande-main/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -401,7 +401,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "VD",
@@ -411,7 +411,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "63",
+          "value": "62",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -421,54 +421,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Samedi Gourmand d’Epicoop",
-              "detail": "Vevey — en cours, dernier jour : 5 décembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
-            },
-            {
-              "label": "Comptoir de Payerne",
-              "detail": "Comptoir de Payerne, Payerne — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
-            },
-            {
-              "label": "Festival Bach de Lausanne",
-              "detail": "Divers lieux, Lausanne — en cours, dernier jour : 4 décembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
-            },
-            {
-              "label": "Un monde éperdu - Thierry Romanens",
-              "detail": "Théâtre Boulimie — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
-            },
-            {
-              "label": "Paysages rêvés - Exposition de gravures",
-              "detail": "Galerie-Atelier Arva, Vevey — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
-            },
-            {
-              "label": "Atelier de mosaïque",
-              "detail": "Renens — en cours, dernier jour : 19 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
-            },
-            {
-              "label": "Atelier Kombucha, kéfir et sodas sauvages",
-              "detail": "Aubonne — en cours, dernier jour : 9 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
-            },
-            {
-              "label": "Reflets",
-              "detail": "Vevey — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
             {
               "label": "Découvertes archéologiques à Jérusalem",
               "detail": "Clarens, Montreux",
@@ -480,6 +432,54 @@
               "detail": "Lausanne",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rap-1ere-partie/"
+            },
+            {
+              "label": "Samedi Gourmand d’Epicoop",
+              "detail": "Vevey — en cours, dernier jour : 5 décembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
+            },
+            {
+              "label": "Comptoir de Payerne",
+              "detail": "Comptoir de Payerne, Payerne — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
+            },
+            {
+              "label": "Festival Bach de Lausanne",
+              "detail": "Divers lieux, Lausanne — en cours, dernier jour : 4 décembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/festival-bach-de-lausanne/"
+            },
+            {
+              "label": "Un monde éperdu - Thierry Romanens",
+              "detail": "Théâtre Boulimie — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/un-monde-eperdu-thierry-romanens_A6vLwmW"
+            },
+            {
+              "label": "Paysages rêvés - Exposition de gravures",
+              "detail": "Galerie-Atelier Arva, Vevey — en cours, dernier jour : 12 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
+            },
+            {
+              "label": "Atelier de mosaïque",
+              "detail": "Renens — en cours, dernier jour : 19 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+            },
+            {
+              "label": "Reflets",
+              "detail": "Vevey — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "C'est une autre histoire ! petite main et GRANDE MAIN",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cest-une-autre-histoire-petite-main-et-grande-main/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -529,7 +529,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }

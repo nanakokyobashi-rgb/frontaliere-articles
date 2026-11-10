@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-09T23:41:11.155Z",
-  "contentHash": "f0b5a2b902a65c7f6cc181978b651e0c5a416e543b60bc67432998c894a94577",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "0064fb7a60caf544307daa628d7b80e172b983e5496e5b5fb43aa787206e410c",
   "blocks": [
     {
       "id": "avvisi-ufficiali",
@@ -62,6 +62,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Friburgo: Consiglio di Stato rigetta linea ferroviaria diretta Friburgo-Bulle",
+          "url": "/articoli-friburgo/friburgo-no-linea-diretta/",
+          "excerpt": "Il Consiglio di Stato del Canton Friburgo non vuole una linea ferroviaria diretta tra Friburgo e Bulle.",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
           "title": "Friburgo prepara 24 nuovi bus elettrici per dicembre",
           "url": "/articoli-friburgo/tpf-bus-elettrici-friburgo/",
           "excerpt": "Ventiquattro nuovi autobus elettrici si apprestano a circolare sulla rete dei Transports publics fribourgeois (TPF) nel Canton Friburgo.",
@@ -72,12 +78,6 @@
           "url": "/articoli-friburgo/incidente-matran-friburgo/",
           "excerpt": "Un incidente con quattro veicoli ha bloccato per oltre tre ore l'autostrada tra Matran e Friburgo.",
           "date": "2026-10-27T01:51:04.787Z"
-        },
-        {
-          "title": "Friburgo: Consiglio di Stato rigetta linea ferroviaria diretta Friburgo-Bulle",
-          "url": "/articoli-friburgo/friburgo-no-linea-diretta/",
-          "excerpt": "Il Consiglio di Stato del Canton Friburgo non vuole una linea ferroviaria diretta tra Friburgo e Bulle.",
-          "date": "2026-10-26T15:03:53.947Z"
         },
         {
           "title": "24 nuovi autobus elettrici TPF per linee urbane e regionali",
@@ -121,7 +121,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "FR",
@@ -171,6 +171,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Fribourg: State Council rejects direct Fribourg-Bulle railway line",
+          "url": "/en/fribourg-articles/fribourg-no-direct-line/",
+          "excerpt": "The Council of State of the Canton of Fribourg does not want a direct railway line between Fribourg and Bulle.",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
           "title": "Fribourg prepares 24 new electric buses for December",
           "url": "/en/fribourg-articles/fribourg-24-new-electric-buses/",
           "excerpt": "Twenty-four new electric buses are set to operate on the network of the Transports publics fribourgeois (TPF) in the Canton of Fribourg.",
@@ -181,12 +187,6 @@
           "url": "/en/fribourg-articles/matran-fribourg-crash/",
           "excerpt": "An accident involving four vehicles blocked the highway between Matran and Fribourg for over three hours.",
           "date": "2026-10-27T01:51:04.787Z"
-        },
-        {
-          "title": "Fribourg: State Council rejects direct Fribourg-Bulle railway line",
-          "url": "/en/fribourg-articles/fribourg-no-direct-line/",
-          "excerpt": "The Council of State of the Canton of Fribourg does not want a direct railway line between Fribourg and Bulle.",
-          "date": "2026-10-26T15:03:53.947Z"
         },
         {
           "title": "24 new TPF electric buses for urban and regional routes",
@@ -230,7 +230,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "FR",
@@ -280,6 +280,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Freiburg: Staatsrat lehnt direkte Bahnlinie Freiburg-Bulle ab",
+          "url": "/de/freiburg-artikel/friburg-keine-direktstrecke/",
+          "excerpt": "Freiburg will keine direkte Bahnlinie nach Bulle Das Postulat wurde im Mai 2022 angenommen: 87 Stimmen gegen 3 Das Projekt wird als kostspielig und technisch.",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
           "title": "Freiburg bereitet 24 neue Elektrobusse für Dezember vor",
           "url": "/de/freiburg-artikel/freiburg-24-neue-elektrobusse/",
           "excerpt": "24 neue Elektrobusse für die TPF Investition: 20 Millionen Franken Sechs Busse mit einer Länge von 12 Metern, 18 Gelenkbusse mit einer Länge von 18 Metern Ab.",
@@ -290,12 +296,6 @@
           "url": "/de/freiburg-artikel/unfall-matran-freiburg/",
           "excerpt": "Ein Unfall mit vier Fahrzeugen blockierte die Autobahn zwischen Matran und Freiburg für mehr als drei Stunden.",
           "date": "2026-10-27T01:51:04.787Z"
-        },
-        {
-          "title": "Freiburg: Staatsrat lehnt direkte Bahnlinie Freiburg-Bulle ab",
-          "url": "/de/freiburg-artikel/friburg-keine-direktstrecke/",
-          "excerpt": "Freiburg will keine direkte Bahnlinie nach Bulle Das Postulat wurde im Mai 2022 angenommen: 87 Stimmen gegen 3 Das Projekt wird als kostspielig und technisch.",
-          "date": "2026-10-26T15:03:53.947Z"
         },
         {
           "title": "24 neue TPF-Elektrobusse für städtische und regionale Linien",
@@ -339,7 +339,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "FR",
@@ -389,6 +389,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Fribourg : le Conseil d’État rejette la ligne ferroviaire directe Fribourg-Bulle",
+          "url": "/fr/articles-fribourg/fribourg-pas-de-liaison-directe/",
+          "excerpt": "Le Conseil d’État du canton de Fribourg ne souhaite pas de ligne ferroviaire directe entre Fribourg et Bulle.",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
           "title": "Fribourg prépare 24 nouveaux bus électriques pour décembre",
           "url": "/fr/articles-fribourg/fribourg-24-nouveaux-bus-electriques/",
           "excerpt": "Vingt-quatre nouveaux autobus électriques s’apprêtent à circuler sur le réseau des Transports publics fribourgeois (TPF) dans le canton de Fribourg.",
@@ -399,12 +405,6 @@
           "url": "/fr/articles-fribourg/accident-matran-fribourg/",
           "excerpt": "Un accident impliquant quatre véhicules a bloqué pendant plus de trois heures l'autoroute entre Matran et Fribourg.",
           "date": "2026-10-27T01:51:04.787Z"
-        },
-        {
-          "title": "Fribourg : le Conseil d’État rejette la ligne ferroviaire directe Fribourg-Bulle",
-          "url": "/fr/articles-fribourg/fribourg-pas-de-liaison-directe/",
-          "excerpt": "Le Conseil d’État du canton de Fribourg ne souhaite pas de ligne ferroviaire directe entre Fribourg et Bulle.",
-          "date": "2026-10-26T15:03:53.947Z"
         },
         {
           "title": "24 nouveaux autobus électriques TPF pour les lignes urbaines et régionales",
@@ -448,7 +448,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }

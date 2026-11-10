@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "86092e34ad9ef6c43f10e7f3394a4a52aab0c6cb919246a38ffcbbc1e6fee05a",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "1ccbbc8179f858b5767c6266bfa1559e425a6978c1af9049d047d9fd0ef456a2",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "65",
+          "value": "66",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,16 +33,16 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
               "label": "UNI60+ : Introduction à l'utilisation de zoom",
               "detail": "Sion / Sitten, Sion",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/uni60-introduction-a-lutilisation-de-zoom/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
               "label": "Martinimarkt Visp - 2026",
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "VS",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "65",
+          "value": "66",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,16 +138,16 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
               "label": "UNI60+ : Introduction à l'utilisation de zoom",
               "detail": "Sion / Sitten, Sion",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/uni60-introduction-a-lutilisation-de-zoom/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
               "label": "Martinimarkt Visp - 2026",
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "VS",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "65",
+          "value": "66",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,16 +243,16 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
               "label": "UNI60+ : Introduction à l'utilisation de zoom",
               "detail": "Sion / Sitten, Sion",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/uni60-introduction-a-lutilisation-de-zoom/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
               "label": "Martinimarkt Visp - 2026",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "65",
+          "value": "66",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,16 +348,16 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
               "label": "UNI60+ : Introduction à l'utilisation de zoom",
               "detail": "Sion / Sitten, Sion",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/uni60-introduction-a-lutilisation-de-zoom/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
               "label": "Martinimarkt Visp - 2026",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }

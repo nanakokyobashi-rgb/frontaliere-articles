@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "1bb8496fefbbb03114cbc43711baa761cb5982ebf412d5c4f53929bcf7418cbd",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "a5144cc74ee5922ba29339d6c83cc900386d0dbd219d8de3e8c351ea6c28732c",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "70",
+          "value": "71",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -35,13 +35,13 @@
             {
               "label": "Wild-Buffet",
               "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
             },
             {
               "label": "Fokusmodul – Meisner-Workout",
               "detail": "Switzerland Innovation Park Ost — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             },
             {
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "70",
+          "value": "71",
           "note": "from the site’s events calendar"
         }
       ],
@@ -140,13 +140,13 @@
             {
               "label": "Wild-Buffet",
               "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — ongoing, last day: 21 November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
             },
             {
               "label": "Fokusmodul-Meisner -ork",
               "detail": "Switzerland Innovation Park Ost — ongoing, last day: 12 November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             },
             {
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "70",
+          "value": "71",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -245,13 +245,13 @@
             {
               "label": "Wild-Buffet",
               "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
             },
             {
               "label": "Fokusmodul-Meisner-Grafforkout",
               "detail": "Switzerland Innovation Park Ost — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             },
             {
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "70",
+          "value": "71",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -350,13 +350,13 @@
             {
               "label": "Wild-Buffet",
               "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
             },
             {
               "label": "Module d'alimentation-Meisner-ork",
               "detail": "Switzerland Innovation Park Ost — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             },
             {
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }

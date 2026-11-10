@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "05603daceaf741f48e4358c9205ff2dec14e149788f6793f96a508549d5c240c",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "93d83c8100584fc4466d02c20cd32353b5dbcf7abedba748e211e551f4c9bede",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "62",
+          "value": "63",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,18 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "d'Wärchi - ElKi Dienstagmorgen",
               "detail": "d'Wärchi, Stans, Stans",
@@ -67,6 +55,18 @@
               "detail": "Schulhaus Kniri, Stans, Stans",
               "date": "2026-11-10",
               "url": "https://www.nw.ch/anlaesseaktuelles/94447"
+            },
+            {
+              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
+              "detail": "Kulturraum, Buochs, Buochs — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+            },
+            {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
             },
             {
               "label": "d'Wärchi - Offenes Atelier Mittwochnachmittag",
@@ -117,7 +117,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "NW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "62",
+          "value": "63",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,18 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — ongoing, last day: 22 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — ongoing, last day: 14 November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "d'Wärchi - ElKi Dienstagmorgen",
               "detail": "d'Wärchi, Stans, Stans",
@@ -172,6 +160,18 @@
               "detail": "Schulhaus Kniri, Stans, Stans",
               "date": "2026-11-10",
               "url": "https://www.nw.ch/anlaesseaktuelles/94447"
+            },
+            {
+              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
+              "detail": "Kulturraum, Buochs, Buochs — ongoing, last day: 22 November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+            },
+            {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — ongoing, last day: 14 November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
             },
             {
               "label": "d'Wärchi - Offenes Atelier Mittwochnachmittag",
@@ -222,7 +222,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "NW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "62",
+          "value": "63",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,18 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "d'Wärchi - ElKi Dienstagmorgen",
               "detail": "d'Wärchi, Stans, Stans",
@@ -277,6 +265,18 @@
               "detail": "Schulhaus Kniri, Stans, Stans",
               "date": "2026-11-10",
               "url": "https://www.nw.ch/anlaesseaktuelles/94447"
+            },
+            {
+              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
+              "detail": "Kulturraum, Buochs, Buochs — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+            },
+            {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
             },
             {
               "label": "d'Wärchi - Offenes Atelier Mittwochnachmittag",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "NW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "62",
+          "value": "63",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,18 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "d'Wärchi - ElKi Dienstagmorgen",
               "detail": "d'Wärchi, Stans, Stans",
@@ -382,6 +370,18 @@
               "detail": "Schulhaus Kniri, Stans, Stans",
               "date": "2026-11-10",
               "url": "https://www.nw.ch/anlaesseaktuelles/94447"
+            },
+            {
+              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
+              "detail": "Kulturraum, Buochs, Buochs — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+            },
+            {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
             },
             {
               "label": "d'Wärchi - Offenes Atelier Mittwochnachmittag",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }

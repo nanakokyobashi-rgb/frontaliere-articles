@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "e7da3a9ba2b8888de0b017fe25018f6b73edaecdaf857f3f4b13d0379414cf5d",
+  "updatedAt": "2026-11-10T01:43:09.306Z",
+  "contentHash": "400fad359c4431fc6bb204029c745044f895f5bf6647186943cff9e3f8dabe86",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "20",
+          "value": "19",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,33 +38,27 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Cioccolato, domande esistenziali e scarpe comode…",
-              "detail": "Bibliomonde, Neuchâtel",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolat-questions-existentielles-et-bonnes-chaussures/"
-            },
-            {
               "label": "Secrets of the Abyss",
               "detail": "Secrets des Abysses, Neuchâtel — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
             },
             {
               "label": "Un parfum de Chocolat",
               "detail": "Boudry — in corso, ultimo giorno: 30 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
             },
             {
               "label": "Brunch + visite guidée",
               "detail": "Musée d'ethnographie, Neuchâtel — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
@@ -96,6 +90,12 @@
               "detail": "Le Landeron",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/quartetto-amoroso/"
+            },
+            {
+              "label": "Boulimy Comedy Mardy",
+              "detail": "Neuchâtel",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boulimy-comedy-mardy-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -150,7 +150,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "en": {
       "canton": "NE",
@@ -160,7 +160,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "20",
+          "value": "19",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,33 +171,27 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Chocolate, existential questions, and good shoes…",
-              "detail": "Bibliomonde, Neuchâtel",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolat-questions-existentielles-et-bonnes-chaussures/"
-            },
-            {
               "label": "Secrets of the Abyss",
               "detail": "Secrets des Abysses, Neuchâtel — ongoing, last day: 14 November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
             },
             {
               "label": "Un parfum de Chocolat",
               "detail": "Boudry — ongoing, last day: 30 November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
             },
             {
               "label": "Brunch + visite guidée",
               "detail": "Musée d'ethnographie, Neuchâtel — ongoing, last day: 15 November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — ongoing, last day: 28 November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
@@ -229,6 +223,12 @@
               "detail": "Le Landeron",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/quartetto-amoroso/"
+            },
+            {
+              "label": "Boulimy Comedy Mardy",
+              "detail": "Neuchâtel",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boulimy-comedy-mardy-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -283,7 +283,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "de": {
       "canton": "NE",
@@ -293,7 +293,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "20",
+          "value": "19",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -304,33 +304,27 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Schokolade, existenzielle Fragen und gute Schuhe…",
-              "detail": "Bibliomonde, Neuchâtel",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolat-questions-existentielles-et-bonnes-chaussures/"
-            },
-            {
               "label": "Geheimnisse der Tiefsee",
               "detail": "Secrets des Abysses, Neuchâtel — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
             },
             {
               "label": "Un parfum de Chocolat",
               "detail": "Boudry — läuft, letzter Tag: 30. November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
             },
             {
               "label": "Brunch + visite guidée",
               "detail": "Musée d'ethnographie, Neuchâtel — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
@@ -362,6 +356,12 @@
               "detail": "Le Landeron",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/quartetto-amoroso/"
+            },
+            {
+              "label": "Boulimy Comedy Mardy",
+              "detail": "Neuchâtel",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boulimy-comedy-mardy-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -416,7 +416,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     },
     "fr": {
       "canton": "NE",
@@ -426,7 +426,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "20",
+          "value": "19",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -437,33 +437,27 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Chocolat, questions existentielles et bonnes chaussures…",
-              "detail": "Bibliomonde, Neuchâtel",
-              "date": "2026-11-09",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolat-questions-existentielles-et-bonnes-chaussures/"
-            },
-            {
               "label": "Secrets des Abysses",
               "detail": "Secrets des Abysses, Neuchâtel — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
             },
             {
               "label": "Un parfum de Chocolat",
               "detail": "Boudry — en cours, dernier jour : 30 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
             },
             {
               "label": "Brunch + visite guidée",
               "detail": "Musée d'ethnographie, Neuchâtel — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-09",
+              "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
@@ -495,6 +489,12 @@
               "detail": "Le Landeron",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/quartetto-amoroso/"
+            },
+            {
+              "label": "Boulimy Comedy Mardy",
+              "detail": "Neuchâtel",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boulimy-comedy-mardy-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -549,7 +549,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T01:43:09.306Z"
     }
   }
 }
