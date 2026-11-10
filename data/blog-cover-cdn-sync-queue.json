@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-consiglio-gruppo-caldo-scuola.webp",
+      "sha256": "8659316978eee89a599e6fbc425c62cf4954a7011227889b0bed217f58ca6359"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-consiglio-gruppo-caldo-scuola-480w.webp",
+      "sha256": "35b65a8b33045ff718aa3edaee2f34eaf869e5054c403bbdfafd78747a1c2048"
+    }
+  ]
 }
