@@ -4451,9 +4451,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "d8faa490721dc7b4",
-        "corpus": "d8faa490721dc7b4",
-        "alignedAt": "2026-11-09"
+        "site": "2e1bd64843e17a32",
+        "corpus": "2e1bd64843e17a32",
+        "alignedAt": "2026-11-10"
       }
     },
     {
@@ -5971,9 +5971,9 @@
       "path": ".github/actions/claude-codex-fallback/git-bridge-server.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "ad75e2d381e99758",
-        "corpus": "ad75e2d381e99758",
-        "alignedAt": "2026-11-07"
+        "site": "db156d298e46c56a",
+        "corpus": "db156d298e46c56a",
+        "alignedAt": "2026-11-10"
       }
     },
     {
