@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "mobilita",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "27f9f704175e5373a29751bd298dc8c47c38b81129fe562b160fb67e669bd3e0",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "72968368545e77ab0d18e91d172cbc5774a96fe7f1c3b8dd00536447aff212da",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-06T23:59:59.000Z",
+      "updatedAt": "2026-11-08T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -28,14 +28,14 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, settimana conclusa: 6 novembre 2026"
+          "note": "Bargen SH – Tengen, settimana conclusa: 8 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 31 ottobre 2026 – 6 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 2 novembre 2026 – 8 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -80,15 +80,15 @@
               "url": "/traffico-dogane/dorflingen-gottmadingen-randegg/oggi/"
             },
             {
-              "label": "Eggingen – Hallau",
+              "label": "Gottmadingen – Thayngen, Ebringerstrasse",
               "value": "0 min",
               "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/eggingen-hallau/oggi/"
+              "url": "/traffico-dogane/gottmadingen-thayngen-ebringerstrasse/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-06T23:59:59.000Z"
+          "updatedAt": "2026-11-08T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -126,7 +126,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -198,7 +198,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "SH",
@@ -209,14 +209,14 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, week ending 6 November 2026"
+          "note": "Bargen SH – Tengen, week ending 8 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 31 October 2026 to 6 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 2 November 2026 to 8 November 2026, fastest first.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -261,15 +261,15 @@
               "url": "/en/border-wait/dorflingen-gottmadingen-randegg/today/"
             },
             {
-              "label": "Eggingen – Hallau",
+              "label": "Gottmadingen – Thayngen, Ebringerstrasse",
               "value": "0 min",
               "detail": "48 readings",
-              "url": "/en/border-wait/eggingen-hallau/today/"
+              "url": "/en/border-wait/gottmadingen-thayngen-ebringerstrasse/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-06T23:59:59.000Z"
+          "updatedAt": "2026-11-08T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -307,7 +307,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -379,7 +379,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "SH",
@@ -390,14 +390,14 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Bargen SH – Tengen, Woche bis 6. November 2026"
+          "note": "Bargen SH – Tengen, Woche bis 8. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 31. Oktober 2026 bis 6. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 2. November 2026 bis 8. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -442,15 +442,15 @@
               "url": "/de/wartezeit-grenze/dorflingen-gottmadingen-randegg/heute/"
             },
             {
-              "label": "Eggingen – Hallau",
+              "label": "Gottmadingen – Thayngen, Ebringerstrasse",
               "value": "0 Min.",
               "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/eggingen-hallau/heute/"
+              "url": "/de/wartezeit-grenze/gottmadingen-thayngen-ebringerstrasse/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-06T23:59:59.000Z"
+          "updatedAt": "2026-11-08T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -488,7 +488,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -560,7 +560,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "SH",
@@ -571,14 +571,14 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, semaine jusqu’au 6 novembre 2026"
+          "note": "Bargen SH – Tengen, semaine jusqu’au 8 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 31 octobre 2026 au 6 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 2 novembre 2026 au 8 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -623,15 +623,15 @@
               "url": "/fr/temps-attente-douane/dorflingen-gottmadingen-randegg/aujourd-hui/"
             },
             {
-              "label": "Eggingen – Hallau",
+              "label": "Gottmadingen – Thayngen, Ebringerstrasse",
               "value": "0 min",
               "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/eggingen-hallau/aujourd-hui/"
+              "url": "/fr/temps-attente-douane/gottmadingen-thayngen-ebringerstrasse/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-06T23:59:59.000Z"
+          "updatedAt": "2026-11-08T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -669,7 +669,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -741,7 +741,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

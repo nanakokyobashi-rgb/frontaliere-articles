@@ -4,12 +4,27 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "387dc6b3e7183b062e187d036eb341c71de05787eb14cf5322fc43cac4535b72",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "2fd4a91382a5b69a2916e2b5acab73a667fcdf696eecb36ad6a5b94023ad5d99",
   "blocks": [
     {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-11-08T11:18:20.402Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-11-09T19:55:53.005Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-09T22:22:33.694Z",
+      "keyFacts": 1
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -19,13 +34,126 @@
       "topic": "servizi",
       "locale": "it",
       "intro": "Nel Canton Zurigo, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "639,80 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "31",
+          "note": "offerta mediana 660 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "ZH, regione di premio 1",
+              "value": "mediana 639,80 CHF al mese",
+              "detail": "da 605,20 a 724 CHF, 27 assicuratori"
+            },
+            {
+              "label": "ZH, regione di premio 2",
+              "value": "mediana 583,10 CHF al mese",
+              "detail": "da 535,60 a 637,70 CHF, 27 assicuratori"
+            },
+            {
+              "label": "ZH, regione di premio 3",
+              "value": "mediana 543,50 CHF al mese",
+              "detail": "da 488,50 a 617,80 CHF, 27 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-09T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-10T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-11T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-12T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-14T23:00:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://www.avkz.ch/notfalldienst",
+          "updatedAt": "2026-11-09T19:55:53.005Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "ZH839",
+              "value": "14.400 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
+            },
+            {
+              "label": "ZH5545",
+              "value": "11.200 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
+            },
+            {
+              "label": "ZH77786",
+              "value": "3020 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Männergesundheit: Kleine Schritte, grosse Wirkung",
+              "date": "2026-11-09T16:35:31.000Z",
+              "url": "https://www.usz.ch/maennergesundheit/"
+            },
             {
               "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
               "date": "2026-11-06T13:22:37.000Z",
@@ -50,14 +178,9 @@
               "label": "25 Jahre PET/CT am USZ: Von der Weltneuheit zum medizinischen Standard",
               "date": "2026-11-02T09:00:04.000Z",
               "url": "https://www.usz.ch/25-jahre-pet-ct-am-usz-von-der-weltneuheit-zum-medizinischen-standard/"
-            },
-            {
-              "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
-              "date": "2026-10-30T13:25:55.000Z",
-              "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -137,20 +260,133 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "ZH",
       "topic": "servizi",
       "locale": "en",
       "intro": "In the canton of Zurich, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "639.80 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "31",
+          "note": "typical bid 660 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "ZH, premium region 1",
+              "value": "typical 639.80 CHF per month",
+              "detail": "from 605.20 to 724 CHF, 27 insurers"
+            },
+            {
+              "label": "ZH, premium region 2",
+              "value": "typical 583.10 CHF per month",
+              "detail": "from 535.60 to 637.70 CHF, 27 insurers"
+            },
+            {
+              "label": "ZH, premium region 3",
+              "value": "typical 543.50 CHF per month",
+              "detail": "from 488.50 to 617.80 CHF, 27 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-09T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-10T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-11T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-12T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-14T23:00:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://www.avkz.ch/notfalldienst",
+          "updatedAt": "2026-11-09T19:55:53.005Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "ZH839",
+              "value": "14,400 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
+            },
+            {
+              "label": "ZH5545",
+              "value": "11,200 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
+            },
+            {
+              "label": "ZH77786",
+              "value": "3,020 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Männergesundheit: Kleine Schritte, grosse Wirkung",
+              "date": "2026-11-09T16:35:31.000Z",
+              "url": "https://www.usz.ch/maennergesundheit/"
+            },
             {
               "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
               "date": "2026-11-06T13:22:37.000Z",
@@ -175,14 +411,9 @@
               "label": "25 Jahre PET/CT am USZ: Von der Weltneuheit zum medizinischen Standard",
               "date": "2026-11-02T09:00:04.000Z",
               "url": "https://www.usz.ch/25-jahre-pet-ct-am-usz-von-der-weltneuheit-zum-medizinischen-standard/"
-            },
-            {
-              "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
-              "date": "2026-10-30T13:25:55.000Z",
-              "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -258,20 +489,133 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "ZH",
       "topic": "servizi",
       "locale": "de",
       "intro": "Im Kanton Zürich laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "639.80 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "31",
+          "note": "mittleres Gebot 660 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "ZH, Prämienregion 1",
+              "value": "Mittelwert 639.80 CHF pro Monat",
+              "detail": "von 605.20 bis 724 CHF, 27 Versicherer"
+            },
+            {
+              "label": "ZH, Prämienregion 2",
+              "value": "Mittelwert 583.10 CHF pro Monat",
+              "detail": "von 535.60 bis 637.70 CHF, 27 Versicherer"
+            },
+            {
+              "label": "ZH, Prämienregion 3",
+              "value": "Mittelwert 543.50 CHF pro Monat",
+              "detail": "von 488.50 bis 617.80 CHF, 27 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-09T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-10T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-11T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-12T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-14T23:00:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://www.avkz.ch/notfalldienst",
+          "updatedAt": "2026-11-09T19:55:53.005Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "ZH839",
+              "value": "14’400 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
+            },
+            {
+              "label": "ZH5545",
+              "value": "11’200 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
+            },
+            {
+              "label": "ZH77786",
+              "value": "3’020 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Männergesundheit: Kleine Schritte, grosse Wirkung",
+              "date": "2026-11-09T16:35:31.000Z",
+              "url": "https://www.usz.ch/maennergesundheit/"
+            },
             {
               "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
               "date": "2026-11-06T13:22:37.000Z",
@@ -296,14 +640,9 @@
               "label": "25 Jahre PET/CT am USZ: Von der Weltneuheit zum medizinischen Standard",
               "date": "2026-11-02T09:00:04.000Z",
               "url": "https://www.usz.ch/25-jahre-pet-ct-am-usz-von-der-weltneuheit-zum-medizinischen-standard/"
-            },
-            {
-              "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
-              "date": "2026-10-30T13:25:55.000Z",
-              "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -379,20 +718,133 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "ZH",
       "topic": "servizi",
       "locale": "fr",
       "intro": "Dans le canton de Zurich, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "639,80 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "31",
+          "note": "offre centrale 660 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "ZH, région de primes 1",
+              "value": "valeur centrale 639,80 CHF par mois",
+              "detail": "de 605,20 à 724 CHF, 27 assureurs"
+            },
+            {
+              "label": "ZH, région de primes 2",
+              "value": "valeur centrale 583,10 CHF par mois",
+              "detail": "de 535,60 à 637,70 CHF, 27 assureurs"
+            },
+            {
+              "label": "ZH, région de primes 3",
+              "value": "valeur centrale 543,50 CHF par mois",
+              "detail": "de 488,50 à 617,80 CHF, 27 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-09T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-10T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-11T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-12T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-14T23:00:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://www.avkz.ch/notfalldienst",
+          "updatedAt": "2026-11-09T19:55:53.005Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "ZH839",
+              "value": "14 400 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43729"
+            },
+            {
+              "label": "ZH5545",
+              "value": "11 200 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43730"
+            },
+            {
+              "label": "ZH77786",
+              "value": "3 020 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43751"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Männergesundheit: Kleine Schritte, grosse Wirkung",
+              "date": "2026-11-09T16:35:31.000Z",
+              "url": "https://www.usz.ch/maennergesundheit/"
+            },
             {
               "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
               "date": "2026-11-06T13:22:37.000Z",
@@ -417,14 +869,9 @@
               "label": "25 Jahre PET/CT am USZ: Von der Weltneuheit zum medizinischen Standard",
               "date": "2026-11-02T09:00:04.000Z",
               "url": "https://www.usz.ch/25-jahre-pet-ct-am-usz-von-der-weltneuheit-zum-medizinischen-standard/"
-            },
-            {
-              "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
-              "date": "2026-10-30T13:25:55.000Z",
-              "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -496,7 +943,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

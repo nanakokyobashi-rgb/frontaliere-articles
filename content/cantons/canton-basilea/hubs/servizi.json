@@ -4,17 +4,142 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "fa053ab20cfbdd82234d2d55061e1714912e5fa2127ce6ca5e80b4592199b349",
-  "blocks": [],
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "6907cd41296e80f5695a0aac518b80ee45e53c89afac71b39dca5d6374ad5a33",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-11-08T11:18:20.402Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-11-09T19:55:53.005Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-09T22:22:33.694Z",
+      "keyFacts": 1
+    }
+  ],
   "locales": {
     "it": {
       "canton": "BASILEA",
       "topic": "servizi",
       "locale": "it",
       "intro": "Nella regione di Basilea, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Germania e la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco e francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "680,20 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "4",
+          "note": "offerta mediana 540 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "BL, regione di premio 1",
+              "value": "mediana 680,20 CHF al mese",
+              "detail": "da 630 a 768,80 CHF, 23 assicuratori"
+            },
+            {
+              "label": "BL, regione di premio 2",
+              "value": "mediana 634,70 CHF al mese",
+              "detail": "da 575,30 a 709,10 CHF, 23 assicuratori"
+            },
+            {
+              "label": "BS, regione di premio 0",
+              "value": "mediana 703,90 CHF al mese",
+              "detail": "da 673,70 a 809,70 CHF, 23 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-09T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-10T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-11T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-12T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-14T23:00:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
+          "updatedAt": "2026-11-09T19:55:53.005Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "BL2678",
+              "value": "920 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1172"
+            },
+            {
+              "label": "BL7263",
+              "value": "920 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1173"
+            },
+            {
+              "label": "BL12035",
+              "value": "160 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1170"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        }
+      ],
       "curatedArticles": [
         {
           "title": "BVB: rasatura in tram, intervento di pulizia documentato",
@@ -100,15 +225,124 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "BASILEA",
       "topic": "servizi",
       "locale": "en",
       "intro": "In the Basel region, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Germany and France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German and French; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "680.20 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "4",
+          "note": "typical bid 540 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "BL, premium region 1",
+              "value": "typical 680.20 CHF per month",
+              "detail": "from 630 to 768.80 CHF, 23 insurers"
+            },
+            {
+              "label": "BL, premium region 2",
+              "value": "typical 634.70 CHF per month",
+              "detail": "from 575.30 to 709.10 CHF, 23 insurers"
+            },
+            {
+              "label": "BS, premium region 0",
+              "value": "typical 703.90 CHF per month",
+              "detail": "from 673.70 to 809.70 CHF, 23 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-09T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-10T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-11T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-12T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-14T23:00:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
+          "updatedAt": "2026-11-09T19:55:53.005Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "BL2678",
+              "value": "920 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1172"
+            },
+            {
+              "label": "BL7263",
+              "value": "920 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1173"
+            },
+            {
+              "label": "BL12035",
+              "value": "160 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1170"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        }
+      ],
       "curatedArticles": [
         {
           "title": "BVB: mowing in trams, documented cleaning",
@@ -186,15 +420,124 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "BASILEA",
       "topic": "servizi",
       "locale": "de",
       "intro": "In der Region Basel laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Deutschland und Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch und Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "680.20 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "4",
+          "note": "mittleres Gebot 540 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "BL, Prämienregion 1",
+              "value": "Mittelwert 680.20 CHF pro Monat",
+              "detail": "von 630 bis 768.80 CHF, 23 Versicherer"
+            },
+            {
+              "label": "BL, Prämienregion 2",
+              "value": "Mittelwert 634.70 CHF pro Monat",
+              "detail": "von 575.30 bis 709.10 CHF, 23 Versicherer"
+            },
+            {
+              "label": "BS, Prämienregion 0",
+              "value": "Mittelwert 703.90 CHF pro Monat",
+              "detail": "von 673.70 bis 809.70 CHF, 23 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-09T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-10T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-11T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-12T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-14T23:00:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
+          "updatedAt": "2026-11-09T19:55:53.005Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "BL2678",
+              "value": "920 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1172"
+            },
+            {
+              "label": "BL7263",
+              "value": "920 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1173"
+            },
+            {
+              "label": "BL12035",
+              "value": "160 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1170"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        }
+      ],
       "curatedArticles": [
         {
           "title": "BVB: Mähen in Straßenbahnen, dokumentierte Reinigung",
@@ -272,15 +615,124 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "BASILEA",
       "topic": "servizi",
       "locale": "fr",
       "intro": "Dans la région bâloise, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Allemagne et la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand et français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "680,20 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "4",
+          "note": "offre centrale 540 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "BL, région de primes 1",
+              "value": "valeur centrale 680,20 CHF par mois",
+              "detail": "de 630 à 768,80 CHF, 23 assureurs"
+            },
+            {
+              "label": "BL, région de primes 2",
+              "value": "valeur centrale 634,70 CHF par mois",
+              "detail": "de 575,30 à 709,10 CHF, 23 assureurs"
+            },
+            {
+              "label": "BS, région de primes 0",
+              "value": "valeur centrale 703,90 CHF par mois",
+              "detail": "de 673,70 à 809,70 CHF, 23 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-09T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-10T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-11T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-12T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-13T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-11-14T23:00:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
+          "updatedAt": "2026-11-09T19:55:53.005Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "BL2678",
+              "value": "920 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1172"
+            },
+            {
+              "label": "BL7263",
+              "value": "920 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1173"
+            },
+            {
+              "label": "BL12035",
+              "value": "160 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1170"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        }
+      ],
       "curatedArticles": [
         {
           "title": "BVB : tonte dans les tramways, nettoyage documenté",
@@ -350,7 +802,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

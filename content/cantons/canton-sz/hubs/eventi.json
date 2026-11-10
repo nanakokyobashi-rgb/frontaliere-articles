@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "86077720ee628ef682569179cb9b6ab91d9d3cc8c5538146a3ac7696cdf8503d",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "295bfeea25bb2874d3afe77fa2daa38a6f878fb5d24279ce47dab3e59f277e3a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "10",
+          "value": "11",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -51,6 +51,11 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-siegel-kunst-und-handwerk/"
             },
             {
+              "label": "Spielclub Ludodendron",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/brunnen/spielclub-ludodendron_AwUveZx"
+            },
+            {
               "label": "Erzählnacht: Ein Spaziergang voller Geschichten durch Küssnacht",
               "detail": "Küssnacht am Rigi, Küssnacht (SZ)",
               "date": "2026-11-13",
@@ -85,17 +90,11 @@
               "detail": "Immensee",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/handwerker-und-adventsmarkt-winterzauber-hohle-gasse/"
-            },
-            {
-              "label": "Weihnachtsmarkt Arth",
-              "detail": "Schulhaus Hofmatt, Arth",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsmarkt-arth/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +116,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "SZ",
@@ -127,7 +126,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "10",
+          "value": "11",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,6 +155,11 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-siegel-kunst-und-handwerk/"
             },
             {
+              "label": "Spielclub Ludodendron",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/brunnen/spielclub-ludodendron_AwUveZx"
+            },
+            {
               "label": "Erzählnacht: Ein Spaziergang voller Geschichten durch Küssnacht",
               "detail": "Küssnacht am Rigi, Küssnacht (SZ)",
               "date": "2026-11-13",
@@ -190,17 +194,11 @@
               "detail": "Immensee",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/handwerker-und-adventsmarkt-winterzauber-hohle-gasse/"
-            },
-            {
-              "label": "Weihnachtsmarkt Arth",
-              "detail": "Schulhaus Hofmatt, Arth",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsmarkt-arth/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +220,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "SZ",
@@ -232,7 +230,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "10",
+          "value": "11",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -261,6 +259,11 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-siegel-kunst-und-handwerk/"
             },
             {
+              "label": "Spielclub Ludodendron",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/brunnen/spielclub-ludodendron_AwUveZx"
+            },
+            {
               "label": "Erzählnacht: Ein Spaziergang voller Geschichten durch Küssnacht",
               "detail": "Küssnacht am Rigi, Küssnacht (SZ)",
               "date": "2026-11-13",
@@ -295,17 +298,11 @@
               "detail": "Immensee",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/handwerker-und-adventsmarkt-winterzauber-hohle-gasse/"
-            },
-            {
-              "label": "Weihnachtsmarkt Arth",
-              "detail": "Schulhaus Hofmatt, Arth",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsmarkt-arth/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +324,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "SZ",
@@ -337,7 +334,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "10",
+          "value": "11",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,6 +363,11 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-siegel-kunst-und-handwerk/"
             },
             {
+              "label": "Spielclub Ludodendron",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/brunnen/spielclub-ludodendron_AwUveZx"
+            },
+            {
               "label": "Erzählnacht: Ein Spaziergang voller Geschichten durch Küssnacht",
               "detail": "Küssnacht am Rigi, Küssnacht (SZ)",
               "date": "2026-11-13",
@@ -400,17 +402,11 @@
               "detail": "Immensee",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/handwerker-und-adventsmarkt-winterzauber-hohle-gasse/"
-            },
-            {
-              "label": "Weihnachtsmarkt Arth",
-              "detail": "Schulhaus Hofmatt, Arth",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsmarkt-arth/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +428,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

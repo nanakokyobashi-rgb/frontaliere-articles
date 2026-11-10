@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "64fcdb499fa0856ad489db949e7bd2ae148f02543b19e3c6216e8e3ddf438697",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "d8d825a51d766089fc7bafff5ea60a27b49ca36e258372ef0115b20d41445dfe",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "54",
+          "value": "57",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -99,13 +99,23 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-11-09T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694116"
+            },
+            {
+              "label": "Preisverleihung Anerkennungspreis Quartierleben",
+              "date": "2026-11-09T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7399984"
+            },
             {
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-11-08T23:00:00.000Z",
@@ -125,19 +135,9 @@
               "label": "Salonkonzert",
               "date": "2026-11-05T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463716"
-            },
-            {
-              "label": "FUKA KIOSK - Kultur zum Abholen",
-              "date": "2026-11-04T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6363316"
-            },
-            {
-              "label": "Winter Qi Gong Inseli",
-              "date": "2026-11-02T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694113"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -171,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "LU",
@@ -181,7 +181,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "54",
+          "value": "57",
           "note": "from the site’s events calendar"
         }
       ],
@@ -253,13 +253,23 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-11-09T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694116"
+            },
+            {
+              "label": "Preisverleihung Anerkennungspreis Quartierleben",
+              "date": "2026-11-09T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7399984"
+            },
             {
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-11-08T23:00:00.000Z",
@@ -279,19 +289,9 @@
               "label": "Salonkonzert",
               "date": "2026-11-05T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463716"
-            },
-            {
-              "label": "FUKA KIOSK - Kultur zum Abholen",
-              "date": "2026-11-04T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6363316"
-            },
-            {
-              "label": "Winter Qi Gong Inseli",
-              "date": "2026-11-02T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694113"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -325,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "LU",
@@ -335,7 +335,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "54",
+          "value": "57",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -407,13 +407,23 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-11-09T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694116"
+            },
+            {
+              "label": "Preisverleihung Anerkennungspreis Quartierleben",
+              "date": "2026-11-09T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7399984"
+            },
             {
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-11-08T23:00:00.000Z",
@@ -433,19 +443,9 @@
               "label": "Salonkonzert",
               "date": "2026-11-05T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463716"
-            },
-            {
-              "label": "FUKA KIOSK - Kultur zum Abholen",
-              "date": "2026-11-04T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6363316"
-            },
-            {
-              "label": "Winter Qi Gong Inseli",
-              "date": "2026-11-02T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694113"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -479,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "LU",
@@ -489,7 +489,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "54",
+          "value": "57",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -561,13 +561,23 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-11-09T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694116"
+            },
+            {
+              "label": "Preisverleihung Anerkennungspreis Quartierleben",
+              "date": "2026-11-09T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7399984"
+            },
             {
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-11-08T23:00:00.000Z",
@@ -587,19 +597,9 @@
               "label": "Salonkonzert",
               "date": "2026-11-05T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463716"
-            },
-            {
-              "label": "FUKA KIOSK - Kultur zum Abholen",
-              "date": "2026-11-04T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6363316"
-            },
-            {
-              "label": "Winter Qi Gong Inseli",
-              "date": "2026-11-02T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694113"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -633,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

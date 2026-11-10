@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-09T01:55:21.693Z",
-  "contentHash": "d507b20a1664bde09e204146b7dcf21b58bb917700390eaa92aeeb81ed8163ce",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "57e51d7a828261b790d203f9ee86e1ab19ec5b03074f8bf120af01a1d694c40a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "10",
+          "value": "11",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,6 +32,12 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
+            {
+              "label": "Visita guidata e degustazione di Appenzeller Alpenbitter AG",
+              "detail": "Appenzeller Alpenbitter AG",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/appenzell/rondleiding-en-proeverij-van-appenzeller-alpenbitter-ag_AA7sSJj"
+            },
             {
               "label": "Giovedì conferenza Museo Heiden / Hüben und Drüben",
               "detail": "Museum Heiden, Heiden",
@@ -85,17 +91,11 @@
               "detail": "Gonten",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
-            },
-            {
-              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
-              "detail": "Kunsthalle Appenzell, Appenzell",
-              "date": "2026-11-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "10",
+          "value": "11",
           "note": "from the site’s events calendar"
         }
       ],
@@ -143,6 +143,12 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
+            {
+              "label": "Guided tour and tasting of Appenzeller Alpenbitter AG",
+              "detail": "Appenzeller Alpenbitter AG",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/appenzell/rondleiding-en-proeverij-van-appenzeller-alpenbitter-ag_AA7sSJj"
+            },
             {
               "label": "Thursday lecture Museum Heiden / Hüben und Drüben",
               "detail": "Museum Heiden, Heiden",
@@ -196,17 +202,11 @@
               "detail": "Gonten",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
-            },
-            {
-              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
-              "detail": "Kunsthalle Appenzell, Appenzell",
-              "date": "2026-11-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "10",
+          "value": "11",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -254,6 +254,12 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
+            {
+              "label": "Geführter Rundgang und Degustation der Appenzeller Alpenbitter AG",
+              "detail": "Appenzeller Alpenbitter AG",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/appenzell/rondleiding-en-proeverij-van-appenzeller-alpenbitter-ag_AA7sSJj"
+            },
             {
               "label": "Donnerstagsvortrag Museum Heiden / Hüben und Drüben",
               "detail": "Museum Heiden, Heiden",
@@ -307,17 +313,11 @@
               "detail": "Gonten",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
-            },
-            {
-              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
-              "detail": "Kunsthalle Appenzell, Appenzell",
-              "date": "2026-11-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "10",
+          "value": "11",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -365,6 +365,12 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
+            {
+              "label": "Visite guidée et dégustation de l'Appenzeller Alpenbitter AG",
+              "detail": "Appenzeller Alpenbitter AG",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/appenzell/rondleiding-en-proeverij-van-appenzeller-alpenbitter-ag_AA7sSJj"
+            },
             {
               "label": "Conférence du jeudi au musée de Heiden / Hüben und Drüben",
               "detail": "Museum Heiden, Heiden",
@@ -418,17 +424,11 @@
               "detail": "Gonten",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
-            },
-            {
-              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
-              "detail": "Kunsthalle Appenzell, Appenzell",
-              "date": "2026-11-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-09T01:55:21.693Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

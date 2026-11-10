@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "41653673797c9c70e8707a688f8e1dc77c3cde6706415b12477aefab924b9df3",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "1a446774eab51dd1314d792a50fd58b62cdfd0853cd078baf59a8b1a209300ec",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "328",
+          "value": "351",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -51,6 +51,30 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-26/"
             },
             {
+              "label": "Mütter- und Väterberatung",
+              "detail": "Schule Watt",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/muetter-und-vaeterberatung_AfJpPRV"
+            },
+            {
+              "label": "Generation Gold - Gespräche mit Herz",
+              "detail": "Restaurant Sale e Pepe, Kloten",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/generation-gold-gespraeche-mit-herz_ADhM88Z"
+            },
+            {
+              "label": "Kafi-Treff für alle",
+              "detail": "Fällanden",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/faellanden/kafi-treff-fuer-alle_ABwnAMA"
+            },
+            {
+              "label": "Mütter- und Väterberatung",
+              "detail": "kjz Pfäffikon, Pfäffikon",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_AC6VvGB"
+            },
+            {
               "label": "TEREKTY - An Expedition into the Value of Glaciers",
               "detail": "Kloten",
               "date": "2026-11-10",
@@ -63,39 +87,15 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-importance-of-being-earnest/"
             },
             {
-              "label": "Westside Cowboy",
-              "detail": "EXIL",
+              "label": "Treffpunkt Deutsch",
+              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
               "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/zuerich/westside-cowboy_AkYSKNL"
-            },
-            {
-              "label": "Bombino (NE)",
-              "detail": "Salzhaus, Winterthur",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/bombino-ne_ATLDwD4"
-            },
-            {
-              "label": "Alceu Valença",
-              "detail": "Kaufleuten",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/raiffeisen-memberplus/zuerich/alceu-valenca_ABjWKj8"
-            },
-            {
-              "label": "Alceu Valença",
-              "detail": "Kaufleuten, Zürich",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alceu-valenca/"
-            },
-            {
-              "label": "Gentleman",
-              "detail": "X-TRA",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/gentleman_AGi5FgT"
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/treffpunkt-deutsch_AmQhhh3"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "328",
+          "value": "351",
           "note": "from the site’s events calendar"
         }
       ],
@@ -162,6 +162,30 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-26/"
             },
             {
+              "label": "Mütter- und Väterberatung",
+              "detail": "Schule Watt",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/muetter-und-vaeterberatung_AfJpPRV"
+            },
+            {
+              "label": "Generation Gold - Gespräche mit Herz",
+              "detail": "Restaurant Sale e Pepe, Kloten",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/generation-gold-gespraeche-mit-herz_ADhM88Z"
+            },
+            {
+              "label": "Kafi-Treff für alle",
+              "detail": "Fällanden",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/faellanden/kafi-treff-fuer-alle_ABwnAMA"
+            },
+            {
+              "label": "Mütter- und Väterberatung",
+              "detail": "kjz Pfäffikon, Pfäffikon",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_AC6VvGB"
+            },
+            {
               "label": "TEREKTY - An Expedition into the Value of Glaciers",
               "detail": "Kloten",
               "date": "2026-11-10",
@@ -174,39 +198,15 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-importance-of-being-earnest/"
             },
             {
-              "label": "Westside Cowboy",
-              "detail": "EXIL",
+              "label": "Treffpunkt Deutsch",
+              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
               "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/zuerich/westside-cowboy_AkYSKNL"
-            },
-            {
-              "label": "Bombino (NE)",
-              "detail": "Salzhaus, Winterthur",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/bombino-ne_ATLDwD4"
-            },
-            {
-              "label": "Alceu Valença",
-              "detail": "Kaufleuten",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/raiffeisen-memberplus/zuerich/alceu-valenca_ABjWKj8"
-            },
-            {
-              "label": "Alceu Valença",
-              "detail": "Kaufleuten, Zürich",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alceu-valenca/"
-            },
-            {
-              "label": "Gentleman",
-              "detail": "X-TRA",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/gentleman_AGi5FgT"
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/treffpunkt-deutsch_AmQhhh3"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "328",
+          "value": "351",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -273,6 +273,30 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-26/"
             },
             {
+              "label": "Mütter- und Väterberatung",
+              "detail": "Schule Watt",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/muetter-und-vaeterberatung_AfJpPRV"
+            },
+            {
+              "label": "Generation Gold - Gespräche mit Herz",
+              "detail": "Restaurant Sale e Pepe, Kloten",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/generation-gold-gespraeche-mit-herz_ADhM88Z"
+            },
+            {
+              "label": "Kafi-Treff für alle",
+              "detail": "Fällanden",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/faellanden/kafi-treff-fuer-alle_ABwnAMA"
+            },
+            {
+              "label": "Mütter- und Väterberatung",
+              "detail": "kjz Pfäffikon, Pfäffikon",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_AC6VvGB"
+            },
+            {
               "label": "TEREKTY - An Expedition into the Value of Glaciers",
               "detail": "Kloten",
               "date": "2026-11-10",
@@ -285,39 +309,15 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-importance-of-being-earnest/"
             },
             {
-              "label": "Westside Cowboy",
-              "detail": "EXIL",
+              "label": "Treffpunkt Deutsch",
+              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
               "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/zuerich/westside-cowboy_AkYSKNL"
-            },
-            {
-              "label": "Bombino (NE)",
-              "detail": "Salzhaus, Winterthur",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/bombino-ne_ATLDwD4"
-            },
-            {
-              "label": "Alceu Valença",
-              "detail": "Kaufleuten",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/raiffeisen-memberplus/zuerich/alceu-valenca_ABjWKj8"
-            },
-            {
-              "label": "Alceu Valença",
-              "detail": "Kaufleuten, Zürich",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alceu-valenca/"
-            },
-            {
-              "label": "Gentleman",
-              "detail": "X-TRA",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/gentleman_AGi5FgT"
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/treffpunkt-deutsch_AmQhhh3"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "328",
+          "value": "351",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -384,6 +384,30 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-26/"
             },
             {
+              "label": "Mütter- und Väterberatung",
+              "detail": "Schule Watt",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/muetter-und-vaeterberatung_AfJpPRV"
+            },
+            {
+              "label": "Generation Gold - Gespräche mit Herz",
+              "detail": "Restaurant Sale e Pepe, Kloten",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/generation-gold-gespraeche-mit-herz_ADhM88Z"
+            },
+            {
+              "label": "Kafi-Treff für alle",
+              "detail": "Fällanden",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/faellanden/kafi-treff-fuer-alle_ABwnAMA"
+            },
+            {
+              "label": "Mütter- und Väterberatung",
+              "detail": "kjz Pfäffikon, Pfäffikon",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_AC6VvGB"
+            },
+            {
               "label": "TEREKTY - An Expedition into the Value of Glaciers",
               "detail": "Kloten",
               "date": "2026-11-10",
@@ -396,39 +420,15 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-importance-of-being-earnest/"
             },
             {
-              "label": "Westside Cowboy",
-              "detail": "EXIL",
+              "label": "Treffpunkt Deutsch",
+              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
               "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/zuerich/westside-cowboy_AkYSKNL"
-            },
-            {
-              "label": "Bombino (NE)",
-              "detail": "Salzhaus, Winterthur",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/bombino-ne_ATLDwD4"
-            },
-            {
-              "label": "Alceu Valença",
-              "detail": "Kaufleuten",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/raiffeisen-memberplus/zuerich/alceu-valenca_ABjWKj8"
-            },
-            {
-              "label": "Alceu Valença",
-              "detail": "Kaufleuten, Zürich",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alceu-valenca/"
-            },
-            {
-              "label": "Gentleman",
-              "detail": "X-TRA",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/gentleman_AGi5FgT"
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/treffpunkt-deutsch_AmQhhh3"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

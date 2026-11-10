@@ -4,17 +4,22 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-11-09T23:41:11.155Z",
-  "contentHash": "81e2f1105d61cfaf4bbf724159afcadfad925393d78b7c40647bf9976e822b0a",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "4e49d0c0cb48d390a6f7d0b225f84bd88afbb735dee06c99e14a03251d805e6c",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-06T23:59:59.000Z",
+      "updatedAt": "2026-11-08T23:59:59.000Z",
       "keyFacts": 1
     },
     {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-11-09T22:46:21.435Z",
+      "keyFacts": 2
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -27,25 +32,35 @@
       "keyFacts": [
         {
           "label": "Valico più scorrevole della settimana",
-          "value": "0 min",
-          "note": "Sempione (Iselle-Gondo), settimana conclusa: 6 novembre 2026"
+          "value": "0,2 min",
+          "note": "Sempione (Iselle-Gondo), settimana conclusa: 8 novembre 2026"
+        },
+        {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "22",
+          "note": "segnalazioni aggiornate: 9 novembre 2026"
+        },
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "14",
+          "note": "segnalazioni aggiornate: 9 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 31 ottobre 2026 – 6 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 2 novembre 2026 – 8 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "0 min",
+              "value": "0,2 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/sempione/oggi/"
             },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
-              "value": "0 min",
+              "value": "0,2 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/morgins-chatel/oggi/"
             },
@@ -63,14 +78,67 @@
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "1 min",
+              "value": "0,9 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/traforo-del-gran-san-bernardo/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-06T23:59:59.000Z"
+          "updatedAt": "2026-11-08T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "Monthey <-> Champéry tra Luogo Troistorrents E Luogo Champéry Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 20 novembre 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "Epinassey, Saint-Maurice <-> La Rasse, Evionnaz Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 15 novembre 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "Epinassey, Saint-Maurice in tutte le direzioni Situazione: chiusa Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 18 dicembre 2026",
+              "date": "2026-09-28T06:00:00.000Z"
+            },
+            {
+              "label": "Ausserbinn, Ernen in tutte le direzioni Situazione: chiusa Causa: chiusura invernale",
+              "value": "Chiusura",
+              "date": "2026-10-21T05:22:00.000Z"
+            },
+            {
+              "label": "Zer Meiggeru, Saas-Almagell <-> Mattmark, Saas-Almagell Situazione: chiusa Causa: chiusura invernale",
+              "value": "Chiusura",
+              "date": "2026-10-23T09:44:00.000Z"
+            },
+            {
+              "label": "Morgins, Troistorrents <-> Restaurant d’alpage Tovassière, Route de Chésery, Morgins Situazione: chiusa Causa: chiusura invernale",
+              "value": "Chiusura",
+              "date": "2026-10-23T14:29:00.000Z"
+            },
+            {
+              "label": "A21 Diramazione Gran San Bernardo -> Martigny-Croix tra Svincolo autostradale Martigny-Expo E Svincolo autostradale Martigny-Croix Situazione: problemi di traffico cantiere, lunghezza [km] 0.6…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 11 novembre 2026",
+              "date": "2026-10-26T07:00:00.000Z"
+            },
+            {
+              "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Situazione: chiusa Causa: chiusura invernale",
+              "value": "Chiusura",
+              "date": "2026-10-27T12:15:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -78,37 +146,37 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Sciopero dei treni a novembre, possibili disagi anche nel Vco: stop di 23 ore",
+              "date": "2026-11-09T15:30:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/sciopero-dei-treni-a-novembre-possibili-disagi-anche-nel-vco-stop-di-23-ore-1.html"
+            },
+            {
+              "label": "Autostrada A26, i cantieri attivi questa settimana",
+              "date": "2026-11-09T13:43:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-a9942450eb.html"
+            },
+            {
+              "label": "Valichi alpini, ogni anno transitano 200 milioni di tonnellate di merci: Unioncamere misura i rischi per l'economia italiana",
+              "date": "2026-11-09T11:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valichi-alpini-ogni-anno-transitano-200-milioni-di-tonnellate-di-merci-unioncamere-misura-i-rischi-1.html"
+            },
+            {
+              "label": "Controlli della velocità in Piemonte dal 9 al 15 novembre",
+              "date": "2026-11-09T09:00:40.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-piemonte-dal-9-al-15-novembre-2.html"
+            },
+            {
+              "label": "Radar in Ticino, i controlli della velocità dal 9 al 15 novembre: ecco tutte le località",
+              "date": "2026-11-09T08:08:31.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-9-al-15-novembre-ecco-tutte-le-localita.html"
+            },
+            {
               "label": "Anche Vco Trasporti aderisce allo sciopero generale del 20 novembre",
               "date": "2026-11-07T10:00:00.000Z",
               "url": "https://www.ossolanews.it/2026/11/07/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anche-vco-trasporti-aderisce-allo-sciopero-generale-del-20-novembre-1.html"
-            },
-            {
-              "label": "Statale 337 della Valle Vigezzo, ancora un senso unico alternato",
-              "date": "2026-11-06T16:10:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-ancora-un-senso-unico-alternato.html"
-            },
-            {
-              "label": "Svizzera, fermato un autotreno italiano: aveva il sistema di controllo delle emissioni manomesso",
-              "date": "2026-11-06T09:06:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/confine/articolo/svizzera-fermato-un-autotreno-italiano-aveva-il-sistema-di-controllo-delle-emissioni-manomesso.html"
-            },
-            {
-              "label": "Superstrada del Sempione, limitazioni e restringimenti in diversi tratti",
-              "date": "2026-11-06T08:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/superstrada-del-sempione-limitazioni-e-restringimenti-in-diversi-tratti-1.html"
-            },
-            {
-              "label": "SS 659, dieci giorni di senso unico alternato",
-              "date": "2026-11-04T14:55:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/04/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/ss-659-dieci-giorni-di-senso-unico-alternato-1.html"
-            },
-            {
-              "label": "Valle Antigorio, restringimento sulla statale 659: lavori fino al 13 novembre",
-              "date": "2026-11-02T14:43:56.000Z",
-              "url": "https://www.ossolanews.it/2026/11/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valle-antigorio-restringimento-sulla-statale-659-lavori-fino-al-13-novembre.html"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -178,7 +246,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "VS",
@@ -188,25 +256,35 @@
       "keyFacts": [
         {
           "label": "Fastest crossing of the week",
-          "value": "0 min",
-          "note": "Sempione (Iselle-Gondo), week ending 6 November 2026"
+          "value": "0.2 min",
+          "note": "Sempione (Iselle-Gondo), week ending 8 November 2026"
+        },
+        {
+          "label": "Road closures in force or imminent",
+          "value": "22",
+          "note": "reports as of 9 November 2026"
+        },
+        {
+          "label": "Roadworks active or imminent",
+          "value": "14",
+          "note": "reports as of 9 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 31 October 2026 to 6 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 2 November 2026 to 8 November 2026, fastest first.",
           "items": [
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "0 min",
+              "value": "0.2 min",
               "detail": "48 readings",
               "url": "/en/border-wait/sempione/today/"
             },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
-              "value": "0 min",
+              "value": "0.2 min",
               "detail": "48 readings",
               "url": "/en/border-wait/morgins-chatel/today/"
             },
@@ -224,14 +302,67 @@
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "1 min",
+              "value": "0.9 min",
               "detail": "48 readings",
               "url": "/en/border-wait/traforo-del-gran-san-bernardo/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-06T23:59:59.000Z"
+          "updatedAt": "2026-11-08T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "Monthey <-> Champéry tra Luogo Troistorrents E Luogo Champéry Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 20 November 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "Epinassey, Saint-Maurice <-> La Rasse, Evionnaz Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 15 November 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "Epinassey, Saint-Maurice in tutte le direzioni Situazione: chiusa Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 18 December 2026",
+              "date": "2026-09-28T06:00:00.000Z"
+            },
+            {
+              "label": "Ausserbinn, Ernen in tutte le direzioni Situazione: chiusa Causa: chiusura invernale",
+              "value": "Closure",
+              "date": "2026-10-21T05:22:00.000Z"
+            },
+            {
+              "label": "Zer Meiggeru, Saas-Almagell <-> Mattmark, Saas-Almagell Situazione: chiusa Causa: chiusura invernale",
+              "value": "Closure",
+              "date": "2026-10-23T09:44:00.000Z"
+            },
+            {
+              "label": "Morgins, Troistorrents <-> Restaurant d’alpage Tovassière, Route de Chésery, Morgins Situazione: chiusa Causa: chiusura invernale",
+              "value": "Closure",
+              "date": "2026-10-23T14:29:00.000Z"
+            },
+            {
+              "label": "A21 Diramazione Gran San Bernardo -> Martigny-Croix tra Svincolo autostradale Martigny-Expo E Svincolo autostradale Martigny-Croix Situazione: problemi di traffico cantiere, lunghezza [km] 0.6…",
+              "value": "Closure",
+              "detail": "until 11 November 2026",
+              "date": "2026-10-26T07:00:00.000Z"
+            },
+            {
+              "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Situazione: chiusa Causa: chiusura invernale",
+              "value": "Closure",
+              "date": "2026-10-27T12:15:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -239,37 +370,37 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Sciopero dei treni a novembre, possibili disagi anche nel Vco: stop di 23 ore",
+              "date": "2026-11-09T15:30:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/sciopero-dei-treni-a-novembre-possibili-disagi-anche-nel-vco-stop-di-23-ore-1.html"
+            },
+            {
+              "label": "Autostrada A26, i cantieri attivi questa settimana",
+              "date": "2026-11-09T13:43:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-a9942450eb.html"
+            },
+            {
+              "label": "Valichi alpini, ogni anno transitano 200 milioni di tonnellate di merci: Unioncamere misura i rischi per l'economia italiana",
+              "date": "2026-11-09T11:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valichi-alpini-ogni-anno-transitano-200-milioni-di-tonnellate-di-merci-unioncamere-misura-i-rischi-1.html"
+            },
+            {
+              "label": "Controlli della velocità in Piemonte dal 9 al 15 novembre",
+              "date": "2026-11-09T09:00:40.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-piemonte-dal-9-al-15-novembre-2.html"
+            },
+            {
+              "label": "Radar in Ticino, i controlli della velocità dal 9 al 15 novembre: ecco tutte le località",
+              "date": "2026-11-09T08:08:31.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-9-al-15-novembre-ecco-tutte-le-localita.html"
+            },
+            {
               "label": "Anche Vco Trasporti aderisce allo sciopero generale del 20 novembre",
               "date": "2026-11-07T10:00:00.000Z",
               "url": "https://www.ossolanews.it/2026/11/07/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anche-vco-trasporti-aderisce-allo-sciopero-generale-del-20-novembre-1.html"
-            },
-            {
-              "label": "Statale 337 della Valle Vigezzo, ancora un senso unico alternato",
-              "date": "2026-11-06T16:10:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-ancora-un-senso-unico-alternato.html"
-            },
-            {
-              "label": "Svizzera, fermato un autotreno italiano: aveva il sistema di controllo delle emissioni manomesso",
-              "date": "2026-11-06T09:06:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/confine/articolo/svizzera-fermato-un-autotreno-italiano-aveva-il-sistema-di-controllo-delle-emissioni-manomesso.html"
-            },
-            {
-              "label": "Superstrada del Sempione, limitazioni e restringimenti in diversi tratti",
-              "date": "2026-11-06T08:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/superstrada-del-sempione-limitazioni-e-restringimenti-in-diversi-tratti-1.html"
-            },
-            {
-              "label": "SS 659, dieci giorni di senso unico alternato",
-              "date": "2026-11-04T14:55:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/04/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/ss-659-dieci-giorni-di-senso-unico-alternato-1.html"
-            },
-            {
-              "label": "Valle Antigorio, restringimento sulla statale 659: lavori fino al 13 novembre",
-              "date": "2026-11-02T14:43:56.000Z",
-              "url": "https://www.ossolanews.it/2026/11/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valle-antigorio-restringimento-sulla-statale-659-lavori-fino-al-13-novembre.html"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -339,7 +470,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "VS",
@@ -349,25 +480,35 @@
       "keyFacts": [
         {
           "label": "Schnellster Grenzübergang der Woche",
-          "value": "0 Min.",
-          "note": "Sempione (Iselle-Gondo), Woche bis 6. November 2026"
+          "value": "0.2 Min.",
+          "note": "Sempione (Iselle-Gondo), Woche bis 8. November 2026"
+        },
+        {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "22",
+          "note": "Meldungen vom 9. November 2026"
+        },
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "14",
+          "note": "Meldungen vom 9. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 31. Oktober 2026 bis 6. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 2. November 2026 bis 8. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "0 Min.",
+              "value": "0.2 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/sempione/heute/"
             },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
-              "value": "0 Min.",
+              "value": "0.2 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/morgins-chatel/heute/"
             },
@@ -385,14 +526,67 @@
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "1 Min.",
+              "value": "0.9 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/traforo-del-gran-san-bernardo/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-06T23:59:59.000Z"
+          "updatedAt": "2026-11-08T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "Monthey <-> Champéry zwischen Ortschaft Troistorrents und Ortschaft Champéry Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 20. November 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "Epinassey, Saint-Maurice <-> La Rasse, Evionnaz Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 15. November 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "Epinassey, Saint-Maurice in beide Richtungen Sachlage: Strecke gesperrt Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 18. Dezember 2026",
+              "date": "2026-09-28T06:00:00.000Z"
+            },
+            {
+              "label": "Ausserbinn, Ernen in beide Richtungen Sachlage: Strecke gesperrt Ursache: Wintersperre",
+              "value": "Sperrung",
+              "date": "2026-10-21T05:22:00.000Z"
+            },
+            {
+              "label": "Zer Meiggeru, Saas-Almagell <-> Mattmark, Saas-Almagell Sachlage: Strecke gesperrt Ursache: Wintersperre",
+              "value": "Sperrung",
+              "date": "2026-10-23T09:44:00.000Z"
+            },
+            {
+              "label": "Morgins, Troistorrents <-> Restaurant d’alpage Tovassière, Route de Chésery, Morgins Sachlage: Strecke gesperrt Ursache: Wintersperre",
+              "value": "Sperrung",
+              "date": "2026-10-23T14:29:00.000Z"
+            },
+            {
+              "label": "A21 Verzweigung Gd-St-Bernard -> Martigny-Croix zwischen Anschluss Martigny-Expo und Anschluss Martigny-Croix Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Verkehrsführung: Pannenstreifen…",
+              "value": "Sperrung",
+              "detail": "bis 11. November 2026",
+              "date": "2026-10-26T07:00:00.000Z"
+            },
+            {
+              "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Sachlage: Strecke gesperrt Ursache: Wintersperre",
+              "value": "Sperrung",
+              "date": "2026-10-27T12:15:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -400,37 +594,37 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Sciopero dei treni a novembre, possibili disagi anche nel Vco: stop di 23 ore",
+              "date": "2026-11-09T15:30:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/sciopero-dei-treni-a-novembre-possibili-disagi-anche-nel-vco-stop-di-23-ore-1.html"
+            },
+            {
+              "label": "Autostrada A26, i cantieri attivi questa settimana",
+              "date": "2026-11-09T13:43:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-a9942450eb.html"
+            },
+            {
+              "label": "Valichi alpini, ogni anno transitano 200 milioni di tonnellate di merci: Unioncamere misura i rischi per l'economia italiana",
+              "date": "2026-11-09T11:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valichi-alpini-ogni-anno-transitano-200-milioni-di-tonnellate-di-merci-unioncamere-misura-i-rischi-1.html"
+            },
+            {
+              "label": "Controlli della velocità in Piemonte dal 9 al 15 novembre",
+              "date": "2026-11-09T09:00:40.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-piemonte-dal-9-al-15-novembre-2.html"
+            },
+            {
+              "label": "Radar in Ticino, i controlli della velocità dal 9 al 15 novembre: ecco tutte le località",
+              "date": "2026-11-09T08:08:31.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-9-al-15-novembre-ecco-tutte-le-localita.html"
+            },
+            {
               "label": "Anche Vco Trasporti aderisce allo sciopero generale del 20 novembre",
               "date": "2026-11-07T10:00:00.000Z",
               "url": "https://www.ossolanews.it/2026/11/07/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anche-vco-trasporti-aderisce-allo-sciopero-generale-del-20-novembre-1.html"
-            },
-            {
-              "label": "Statale 337 della Valle Vigezzo, ancora un senso unico alternato",
-              "date": "2026-11-06T16:10:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-ancora-un-senso-unico-alternato.html"
-            },
-            {
-              "label": "Svizzera, fermato un autotreno italiano: aveva il sistema di controllo delle emissioni manomesso",
-              "date": "2026-11-06T09:06:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/confine/articolo/svizzera-fermato-un-autotreno-italiano-aveva-il-sistema-di-controllo-delle-emissioni-manomesso.html"
-            },
-            {
-              "label": "Superstrada del Sempione, limitazioni e restringimenti in diversi tratti",
-              "date": "2026-11-06T08:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/superstrada-del-sempione-limitazioni-e-restringimenti-in-diversi-tratti-1.html"
-            },
-            {
-              "label": "SS 659, dieci giorni di senso unico alternato",
-              "date": "2026-11-04T14:55:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/04/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/ss-659-dieci-giorni-di-senso-unico-alternato-1.html"
-            },
-            {
-              "label": "Valle Antigorio, restringimento sulla statale 659: lavori fino al 13 novembre",
-              "date": "2026-11-02T14:43:56.000Z",
-              "url": "https://www.ossolanews.it/2026/11/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valle-antigorio-restringimento-sulla-statale-659-lavori-fino-al-13-novembre.html"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -500,7 +694,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "VS",
@@ -510,25 +704,35 @@
       "keyFacts": [
         {
           "label": "Poste-frontière le plus fluide de la semaine",
-          "value": "0 min",
-          "note": "Sempione (Iselle-Gondo), semaine jusqu’au 6 novembre 2026"
+          "value": "0,2 min",
+          "note": "Sempione (Iselle-Gondo), semaine jusqu’au 8 novembre 2026"
+        },
+        {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "22",
+          "note": "signalements au 9 novembre 2026"
+        },
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "14",
+          "note": "signalements au 9 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 31 octobre 2026 au 6 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 2 novembre 2026 au 8 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "0 min",
+              "value": "0,2 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/sempione/aujourd-hui/"
             },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
-              "value": "0 min",
+              "value": "0,2 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/morgins-chatel/aujourd-hui/"
             },
@@ -546,14 +750,67 @@
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "1 min",
+              "value": "0,9 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/traforo-del-gran-san-bernardo/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-06T23:59:59.000Z"
+          "updatedAt": "2026-11-08T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "Monthey <-> Champéry entre Localité Troistorrents et Localité Champéry Situation: fermé Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 20 novembre 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "Epinassey, Saint-Maurice <-> La Rasse, Evionnaz Situation: fermé Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 15 novembre 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "Epinassey, Saint-Maurice dans les deux sens Situation: fermé Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 18 décembre 2026",
+              "date": "2026-09-28T06:00:00.000Z"
+            },
+            {
+              "label": "Ausserbinn, Ernen dans les deux sens Situation: fermé Raison: fermeture hivernale",
+              "value": "Fermeture",
+              "date": "2026-10-21T05:22:00.000Z"
+            },
+            {
+              "label": "Zer Meiggeru, Saas-Almagell <-> Mattmark, Saas-Almagell Situation: fermé Raison: fermeture hivernale",
+              "value": "Fermeture",
+              "date": "2026-10-23T09:44:00.000Z"
+            },
+            {
+              "label": "Morgins, Troistorrents <-> Restaurant d’alpage Tovassière, Route de Chésery, Morgins Situation: fermé Raison: fermeture hivernale",
+              "value": "Fermeture",
+              "date": "2026-10-23T14:29:00.000Z"
+            },
+            {
+              "label": "A21 Echangeur Gd-St-Bernard -> Martigny-Croix entre Jonction autoroutière Martigny-Expo et Jonction autoroutière Martigny-Croix Situation: trafic perturbé travaux, longueur [km] 0.6 Gestion du…",
+              "value": "Fermeture",
+              "detail": "jusqu’au 11 novembre 2026",
+              "date": "2026-10-26T07:00:00.000Z"
+            },
+            {
+              "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Situation: fermé Raison: fermeture hivernale",
+              "value": "Fermeture",
+              "date": "2026-10-27T12:15:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -561,37 +818,37 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Sciopero dei treni a novembre, possibili disagi anche nel Vco: stop di 23 ore",
+              "date": "2026-11-09T15:30:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/sciopero-dei-treni-a-novembre-possibili-disagi-anche-nel-vco-stop-di-23-ore-1.html"
+            },
+            {
+              "label": "Autostrada A26, i cantieri attivi questa settimana",
+              "date": "2026-11-09T13:43:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-a9942450eb.html"
+            },
+            {
+              "label": "Valichi alpini, ogni anno transitano 200 milioni di tonnellate di merci: Unioncamere misura i rischi per l'economia italiana",
+              "date": "2026-11-09T11:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valichi-alpini-ogni-anno-transitano-200-milioni-di-tonnellate-di-merci-unioncamere-misura-i-rischi-1.html"
+            },
+            {
+              "label": "Controlli della velocità in Piemonte dal 9 al 15 novembre",
+              "date": "2026-11-09T09:00:40.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-piemonte-dal-9-al-15-novembre-2.html"
+            },
+            {
+              "label": "Radar in Ticino, i controlli della velocità dal 9 al 15 novembre: ecco tutte le località",
+              "date": "2026-11-09T08:08:31.000Z",
+              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-9-al-15-novembre-ecco-tutte-le-localita.html"
+            },
+            {
               "label": "Anche Vco Trasporti aderisce allo sciopero generale del 20 novembre",
               "date": "2026-11-07T10:00:00.000Z",
               "url": "https://www.ossolanews.it/2026/11/07/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anche-vco-trasporti-aderisce-allo-sciopero-generale-del-20-novembre-1.html"
-            },
-            {
-              "label": "Statale 337 della Valle Vigezzo, ancora un senso unico alternato",
-              "date": "2026-11-06T16:10:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-ancora-un-senso-unico-alternato.html"
-            },
-            {
-              "label": "Svizzera, fermato un autotreno italiano: aveva il sistema di controllo delle emissioni manomesso",
-              "date": "2026-11-06T09:06:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/confine/articolo/svizzera-fermato-un-autotreno-italiano-aveva-il-sistema-di-controllo-delle-emissioni-manomesso.html"
-            },
-            {
-              "label": "Superstrada del Sempione, limitazioni e restringimenti in diversi tratti",
-              "date": "2026-11-06T08:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/06/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/superstrada-del-sempione-limitazioni-e-restringimenti-in-diversi-tratti-1.html"
-            },
-            {
-              "label": "SS 659, dieci giorni di senso unico alternato",
-              "date": "2026-11-04T14:55:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/04/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/ss-659-dieci-giorni-di-senso-unico-alternato-1.html"
-            },
-            {
-              "label": "Valle Antigorio, restringimento sulla statale 659: lavori fino al 13 novembre",
-              "date": "2026-11-02T14:43:56.000Z",
-              "url": "https://www.ossolanews.it/2026/11/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valle-antigorio-restringimento-sulla-statale-659-lavori-fino-al-13-novembre.html"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -661,7 +918,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

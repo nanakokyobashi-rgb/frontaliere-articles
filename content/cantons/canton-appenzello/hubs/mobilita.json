@@ -4,12 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-09T23:41:11.155Z",
-  "contentHash": "7ce56411d6e4c99aee9f4a9a5bed1605b373a4311724163ab49ae978d152a973",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "b300535f072f8c89a135146ea54f03618e5f57743b982787d92b1d4c759d0b55",
   "blocks": [
     {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-11-09T22:46:21.435Z",
+      "keyFacts": 1
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -19,8 +24,41 @@
       "topic": "mobilita",
       "locale": "it",
       "intro": "In Appenzello, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "3",
+          "note": "segnalazioni aggiornate: 9 novembre 2026"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-10-05T06:20:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil -> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 15 febbraio 2027",
+              "date": "2026-11-05T20:33:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil <-> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 0.05 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite temporaneo…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-11-06T06:45:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-11-09T22:46:21.435Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
@@ -57,7 +95,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -79,15 +117,48 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "APPENZELLO",
       "topic": "mobilita",
       "locale": "en",
       "intro": "In Appenzell, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Roadworks active or imminent",
+          "value": "3",
+          "note": "reports as of 9 November 2026"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
+              "value": "Roadworks",
+              "detail": "until 13 November 2026",
+              "date": "2026-10-05T06:20:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil -> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza…",
+              "value": "Roadworks",
+              "detail": "until 15 February 2027",
+              "date": "2026-11-05T20:33:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil <-> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 0.05 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite temporaneo…",
+              "value": "Roadworks",
+              "detail": "until 13 November 2026",
+              "date": "2026-11-06T06:45:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-11-09T22:46:21.435Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
@@ -124,7 +195,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -146,15 +217,48 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "APPENZELLO",
       "topic": "mobilita",
       "locale": "de",
       "intro": "Im Appenzellerland bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "3",
+          "note": "Meldungen vom 9. November 2026"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "459 Waldstatt <-> Appenzell zwischen Ortschaft Waldstatt und Ortschaft Hundwil Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1…",
+              "value": "Baustelle",
+              "detail": "bis 13. November 2026",
+              "date": "2026-10-05T06:20:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil -> St. Gallen Ortschaft Herisau Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
+              "value": "Baustelle",
+              "detail": "bis 15. Februar 2027",
+              "date": "2026-11-05T20:33:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil <-> St. Gallen Ortschaft Herisau Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.05 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
+              "value": "Baustelle",
+              "detail": "bis 13. November 2026",
+              "date": "2026-11-06T06:45:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-11-09T22:46:21.435Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
@@ -191,7 +295,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -213,15 +317,48 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "APPENZELLO",
       "topic": "mobilita",
       "locale": "fr",
       "intro": "En Appenzell, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "3",
+          "note": "signalements au 9 novembre 2026"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "459 Waldstatt <-> Appenzell entre Localité Waldstatt et Localité Hundwil Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: circulation alternée à une voie Complément 1…",
+              "value": "Chantier",
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-10-05T06:20:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil -> St-Gall Localité Herisau Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de largeur largeur de…",
+              "value": "Chantier",
+              "detail": "jusqu’au 15 février 2027",
+              "date": "2026-11-05T20:33:00.000Z"
+            },
+            {
+              "label": "H8 Wattwil <-> St-Gall Localité Herisau Situation: trafic perturbé travaux, longueur [km] 0.05 Gestion du trafic: circulation alternée à une voie Complément 1: limitation temporaire de largeur…",
+              "value": "Chantier",
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-11-06T06:45:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-11-09T22:46:21.435Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
@@ -258,7 +395,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -280,7 +417,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

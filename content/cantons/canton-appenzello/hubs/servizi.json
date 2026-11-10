@@ -4,12 +4,22 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "cab12159e4e4b7a78feff01a2027e4e87f2269e1d9b3754c5bea4a7f9801518c",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "96dc35c7f2a528511c3e67ae82784db3c3b8d3c9070b38220c78dbf976c27c04",
   "blocks": [
     {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-11-08T11:18:20.402Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-09T22:22:33.694Z",
+      "keyFacts": 1
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -19,8 +29,71 @@
       "topic": "servizi",
       "locale": "it",
       "intro": "In Appenzello, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "447,80 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "5",
+          "note": "offerta mediana 800 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "AI, regione di premio 0",
+              "value": "mediana 447,80 CHF al mese",
+              "detail": "da 411 a 543 CHF, 23 assicuratori"
+            },
+            {
+              "label": "AR, regione di premio 0",
+              "value": "mediana 539,60 CHF al mese",
+              "detail": "da 479,40 a 652,20 CHF, 23 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "AR399",
+              "value": "4500 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
+            },
+            {
+              "label": "AR2490",
+              "value": "800 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1797"
+            },
+            {
+              "label": "AR4881",
+              "value": "800 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
@@ -52,7 +125,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -61,6 +134,12 @@
           "url": "/articoli-appenzello/costi-sanita-meno-entrate/",
           "excerpt": "Il preventivo 2027 prevede una perdita complessiva di 12,4 milioni di CHF, a causa di costi sanitari crescenti e minori entrate fiscali.",
           "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
+          "title": "Consiglio comunale istituisce gruppo per il caldo a scuola",
+          "url": "/articoli-appenzello/consiglio-gruppo-caldo-scuola/",
+          "excerpt": "Il Consiglio comunale ha istituito la Arbeitsgruppe «Hitzeschutz und Begrünung»: aule e spazi esterni, con misure rapide per la protezione dal sole.",
+          "date": "2026-11-10T02:51:13.479Z"
         },
         {
           "title": "Heiden aumenta la tassa base sui rifiuti",
@@ -97,12 +176,6 @@
           "url": "/articoli-svizzera/premi-lamal-appenzello-esterno-riduzione/",
           "excerpt": "Guida ai premi LAMal nel Cantone di Appenzello Esterno: franchigie, modelli assicurativi disponibili, sussidi cantonali e procedura per richiedere la riduzione basata su reddito.",
           "date": "2026-08-20T23:06:24.555Z"
-        },
-        {
-          "title": "Permesso L Appenzello Esterno: validità e rinnovo",
-          "url": "/articoli-svizzera/permesso-l-cantone-appenzello-validita/",
-          "excerpt": "Permesso L breve durata in Appenzello Esterno: durata 12 mesi, criteri di rinnovo, passaggio a permesso B, vincoli legati al datore di lavoro. Guida pratica.",
-          "date": "2026-08-21T01:01:59.189Z"
         }
       ],
       "latestCantonArticles": [],
@@ -140,15 +213,78 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "APPENZELLO",
       "topic": "servizi",
       "locale": "en",
       "intro": "In Appenzell, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "447.80 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "5",
+          "note": "typical bid 800 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "AI, premium region 0",
+              "value": "typical 447.80 CHF per month",
+              "detail": "from 411 to 543 CHF, 23 insurers"
+            },
+            {
+              "label": "AR, premium region 0",
+              "value": "typical 539.60 CHF per month",
+              "detail": "from 479.40 to 652.20 CHF, 23 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "AR399",
+              "value": "4,500 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
+            },
+            {
+              "label": "AR2490",
+              "value": "800 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1797"
+            },
+            {
+              "label": "AR4881",
+              "value": "800 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
@@ -180,7 +316,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -189,6 +325,12 @@
           "url": "/en/appenzell-articles/health-costs-less-revenue/",
           "excerpt": "The 2027 budget projects a total loss of 12,4 million CHF due to rising healthcare costs and lower tax revenues.",
           "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
+          "title": "City council establishes group to address heat at school",
+          "url": "/en/appenzell-articles/council-school-heat-group/",
+          "excerpt": "The City Council established the Arbeitsgruppe «Hitzeschutz und Begrünung»: classrooms and outdoor spaces, with rapid measures for protection from the sun.",
+          "date": "2026-11-10T02:51:13.479Z"
         },
         {
           "title": "Heiden increases the basic waste fee",
@@ -225,12 +367,6 @@
           "url": "/en/swiss-articles/lamal-premiums-appenzell-rhodes-reduction/",
           "excerpt": "Guide to LAMal premiums in the Canton of Appenzell Outer: deductibles, available insurance models, cantonal subsidies and procedure to apply for the income-based reduction.",
           "date": "2026-08-20T23:06:24.555Z"
-        },
-        {
-          "title": "Permit L External Appenzell: validity and renewal",
-          "url": "/en/swiss-articles/permit-l-short-term-appenzell-ausserrhoden-validity/",
-          "excerpt": "Permit L short duration in External Appenzell: duration 12 months, renewal criteria, transition to permit B, constraints related to the employer. Practical guide.",
-          "date": "2026-08-21T01:01:59.189Z"
         }
       ],
       "latestCantonArticles": [],
@@ -260,15 +396,78 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "APPENZELLO",
       "topic": "servizi",
       "locale": "de",
       "intro": "Im Appenzellerland laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "447.80 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "5",
+          "note": "mittleres Gebot 800 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "AI, Prämienregion 0",
+              "value": "Mittelwert 447.80 CHF pro Monat",
+              "detail": "von 411 bis 543 CHF, 23 Versicherer"
+            },
+            {
+              "label": "AR, Prämienregion 0",
+              "value": "Mittelwert 539.60 CHF pro Monat",
+              "detail": "von 479.40 bis 652.20 CHF, 23 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "AR399",
+              "value": "4’500 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
+            },
+            {
+              "label": "AR2490",
+              "value": "800 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1797"
+            },
+            {
+              "label": "AR4881",
+              "value": "800 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
@@ -300,7 +499,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -309,6 +508,12 @@
           "url": "/de/appenzell-artikel/kosten-sanita-weniger-einnahmen/",
           "excerpt": "Der Voranschlag 2027 sieht aufgrund steigender Gesundheitskosten und geringerer Steuereinnahmen einen Gesamtverlust von 12,4 Millionen CHF vor.",
           "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
+          "title": "Gemeinderat richtet Arbeitsgruppe gegen Hitze an Schulen ein",
+          "url": "/de/appenzell-artikel/gemeinderat-hitzeschutz-schule/",
+          "excerpt": "Der Gemeinderat hat die Arbeitsgruppe «Hitzeschutz und Begrünung» eingerichtet: Klassenräume und Außenbereiche, mit schnellen Maßnahmen zum Sonnenschutz.",
+          "date": "2026-11-10T02:51:13.479Z"
         },
         {
           "title": "Heiden erhöht die Kehrichtgrundgebühr",
@@ -345,12 +550,6 @@
           "url": "/de/schweiz-artikel/krankenkasse-appenzell-ausserrhoden-reduktion/",
           "excerpt": "Prämienleitfaden KVG im Kanton Appenzell Ausserrhoden: Franchisen, verfügbare Versicherungsmodelle, Kantonsbeiträge und Verfahren zur Beantragung der einkommensabhängigen Reduktion.",
           "date": "2026-08-20T23:06:24.555Z"
-        },
-        {
-          "title": "Genehmigung L Appenzell Ausserrhoden: Gültigkeit und Erneuerung",
-          "url": "/de/schweiz-artikel/kurzaufenthalt-appenzell-ausserrhoden-gultigkeit/",
-          "excerpt": "Kurzzeitbewilligung in Appenzell Ausserrhoden: Dauer 12 Monate, Verlängerungskriterien, Umstellung auf Bewilligung B, arbeitgeberbezogene Bindungen. Praxisleitfaden.",
-          "date": "2026-08-21T01:01:59.189Z"
         }
       ],
       "latestCantonArticles": [],
@@ -380,15 +579,78 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "APPENZELLO",
       "topic": "servizi",
       "locale": "fr",
       "intro": "En Appenzell, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "447,80 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "5",
+          "note": "offre centrale 800 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "AI, région de primes 0",
+              "value": "valeur centrale 447,80 CHF par mois",
+              "detail": "de 411 à 543 CHF, 23 assureurs"
+            },
+            {
+              "label": "AR, région de primes 0",
+              "value": "valeur centrale 539,60 CHF par mois",
+              "detail": "de 479,40 à 652,20 CHF, 23 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "AR399",
+              "value": "4 500 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
+            },
+            {
+              "label": "AR2490",
+              "value": "800 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1797"
+            },
+            {
+              "label": "AR4881",
+              "value": "800 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
@@ -420,7 +682,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -429,6 +691,12 @@
           "url": "/fr/articles-appenzell/couts-sante-moins-revenus/",
           "excerpt": "Le budget 2027 prévoit une perte globale de 12,4 millions de CHF, en raison de la hausse des coûts de santé et de la baisse des recettes fiscales.",
           "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
+          "title": "Conseil municipal crée un groupe contre la chaleur à l’école",
+          "url": "/fr/articles-appenzell/groupe-conseil-chaleur-ecole/",
+          "excerpt": "Le conseil municipal a créé le groupe de travail « Hitzeschutz und Begrünung » : salles de classe et espaces extérieurs, avec des mesures rapides de protection contre le soleil.",
+          "date": "2026-11-10T02:51:13.479Z"
         },
         {
           "title": "Heiden augmente la taxe de base sur les déchets",
@@ -465,12 +733,6 @@
           "url": "/fr/articles-suisse/primes-lamal-appenzell-rhodes-reduction/",
           "excerpt": "Guide des primes LAMal dans le canton d'Appenzell Extérieur : franchises, modèles d'assurance disponibles, subventions cantonales et procédure de demande de réduction basée sur le revenu.",
           "date": "2026-08-20T23:06:24.555Z"
-        },
-        {
-          "title": "Permis L Appenzell Extérieur : validité et renouvellement",
-          "url": "/fr/articles-suisse/permis-l-appenzell-rhodes-exterieures-validite/",
-          "excerpt": "Permis L courte durée en Appenzell Extérieur : durée 12 mois, critères de renouvellement, passage au permis B, contraintes liées à l'employeur. Guide pratique.",
-          "date": "2026-08-21T01:01:59.189Z"
         }
       ],
       "latestCantonArticles": [],
@@ -492,7 +754,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

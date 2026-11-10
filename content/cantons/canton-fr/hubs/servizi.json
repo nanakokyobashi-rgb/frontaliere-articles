@@ -4,12 +4,22 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "fc7bf35d1e7410b7ab334e6766fa1fdeb984e850f55947ba929f60aadc854246",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "73b12eff540afe6ea21f0cc0904e9730f25fe6c58156c37549c096ccfc46f189",
   "blocks": [
     {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-11-08T11:18:20.402Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-09T22:22:33.694Z",
+      "keyFacts": 1
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -19,8 +29,71 @@
       "topic": "servizi",
       "locale": "it",
       "intro": "Nel Canton Friburgo, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in francese e tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "606,90 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "14",
+          "note": "offerta mediana 250 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "FR, regione di premio 1",
+              "value": "mediana 606,90 CHF al mese",
+              "detail": "da 577 a 672,70 CHF, 23 assicuratori"
+            },
+            {
+              "label": "FR, regione di premio 2",
+              "value": "mediana 558 CHF al mese",
+              "detail": "da 523,30 a 617,50 CHF, 23 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "FR12035",
+              "value": "700 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7355&locale=fr_ch"
+            },
+            {
+              "label": "FR267000",
+              "value": "500 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7356&locale=fr_ch"
+            },
+            {
+              "label": "FR334000",
+              "value": "400 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7363&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
@@ -57,7 +130,7 @@
               "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/un-reglement-de-parking-plus-efficace-et-equitable"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -137,15 +210,78 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "FR",
       "topic": "servizi",
       "locale": "en",
       "intro": "In the canton of Fribourg, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in French and German; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "606.90 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "14",
+          "note": "typical bid 250 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "FR, premium region 1",
+              "value": "typical 606.90 CHF per month",
+              "detail": "from 577 to 672.70 CHF, 23 insurers"
+            },
+            {
+              "label": "FR, premium region 2",
+              "value": "typical 558 CHF per month",
+              "detail": "from 523.30 to 617.50 CHF, 23 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "FR12035",
+              "value": "700 CHF",
+              "detail": "current bid",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7355&locale=fr_ch"
+            },
+            {
+              "label": "FR267000",
+              "value": "500 CHF",
+              "detail": "current bid",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7356&locale=fr_ch"
+            },
+            {
+              "label": "FR334000",
+              "value": "400 CHF",
+              "detail": "current bid",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7363&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
@@ -182,7 +318,7 @@
               "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/un-reglement-de-parking-plus-efficace-et-equitable"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -258,15 +394,78 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "FR",
       "topic": "servizi",
       "locale": "de",
       "intro": "Im Kanton Freiburg laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Französisch und Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "606.90 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "14",
+          "note": "mittleres Gebot 250 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "FR, Prämienregion 1",
+              "value": "Mittelwert 606.90 CHF pro Monat",
+              "detail": "von 577 bis 672.70 CHF, 23 Versicherer"
+            },
+            {
+              "label": "FR, Prämienregion 2",
+              "value": "Mittelwert 558 CHF pro Monat",
+              "detail": "von 523.30 bis 617.50 CHF, 23 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "FR12035",
+              "value": "700 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7355&locale=fr_ch"
+            },
+            {
+              "label": "FR267000",
+              "value": "500 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7356&locale=fr_ch"
+            },
+            {
+              "label": "FR334000",
+              "value": "400 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7363&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
@@ -303,7 +502,7 @@
               "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/un-reglement-de-parking-plus-efficace-et-equitable"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -379,15 +578,78 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "FR",
       "topic": "servizi",
       "locale": "fr",
       "intro": "Dans le canton de Fribourg, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en français et allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "606,90 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "14",
+          "note": "offre centrale 250 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "FR, région de primes 1",
+              "value": "valeur centrale 606,90 CHF par mois",
+              "detail": "de 577 à 672,70 CHF, 23 assureurs"
+            },
+            {
+              "label": "FR, région de primes 2",
+              "value": "valeur centrale 558 CHF par mois",
+              "detail": "de 523,30 à 617,50 CHF, 23 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "FR12035",
+              "value": "700 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7355&locale=fr_ch"
+            },
+            {
+              "label": "FR267000",
+              "value": "500 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7356&locale=fr_ch"
+            },
+            {
+              "label": "FR334000",
+              "value": "400 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7363&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
@@ -424,7 +686,7 @@
               "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/un-reglement-de-parking-plus-efficace-et-equitable"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -496,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

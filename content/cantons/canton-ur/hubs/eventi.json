@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "15020678df8443a941908c3ce114431c990ebbe35d7a5bc4e3518db3d766ec09",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "47485c54b0306cd112b9e5980437100f0cf4c7426d83742e92a7d8a95ece24b0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "12",
+          "value": "13",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -75,6 +75,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
             },
             {
+              "label": "Kreatives Geschichtenausdenken",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreatives-geschichtenausdenken/"
+            },
+            {
               "label": "Altdorfer Warenmarkt",
               "detail": "Altdorf",
               "date": "2026-11-19",
@@ -85,17 +91,11 @@
               "detail": "Altdorf",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
-            },
-            {
-              "label": "Comeback Tell!",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comeback-tell/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "12",
+          "value": "13",
           "note": "from the site’s events calendar"
         }
       ],
@@ -180,6 +180,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
             },
             {
+              "label": "Kreatives Geschichtenausdenken",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreatives-geschichtenausdenken/"
+            },
+            {
               "label": "Altdorfer Warenmarkt",
               "detail": "Altdorf",
               "date": "2026-11-19",
@@ -190,17 +196,11 @@
               "detail": "Altdorf",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
-            },
-            {
-              "label": "Comeback Tell!",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comeback-tell/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "12",
+          "value": "13",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -285,6 +285,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
             },
             {
+              "label": "Kreatives Geschichtenausdenken",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreatives-geschichtenausdenken/"
+            },
+            {
               "label": "Altdorfer Warenmarkt",
               "detail": "Altdorf",
               "date": "2026-11-19",
@@ -295,17 +301,11 @@
               "detail": "Altdorf",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
-            },
-            {
-              "label": "Comeback Tell!",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comeback-tell/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "12",
+          "value": "13",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -390,6 +390,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
             },
             {
+              "label": "Kreatives Geschichtenausdenken",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreatives-geschichtenausdenken/"
+            },
+            {
               "label": "Warenmarkt",
               "detail": "Altdorf",
               "date": "2026-11-19",
@@ -400,17 +406,11 @@
               "detail": "Altdorf",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
-            },
-            {
-              "label": "Comeback Tell!",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comeback-tell/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

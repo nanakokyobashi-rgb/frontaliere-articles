@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "3473dd3175873fd364f9573420364324b3495db7f936deb885299b58d47f4b22",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "9b432b517f2f75b075457770b59270c7181b23a450fc53032948024724bdc4b1",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "235",
+          "value": "237",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,16 +33,52 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Jannis Kounellis: Io sono un pittore",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/63037"
+            },
+            {
               "label": "Soglie",
               "detail": "B&B Fine Art, Paradiso",
               "date": "2026-11-10",
               "url": "https://www.tio.ch/agenda/day/20261110/64776"
             },
             {
+              "label": "Bertille Bak. Voci dalla terra",
+              "detail": "Museo Vincenzo Vela, Mendrisio",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/62429"
+            },
+            {
+              "label": "Kaari Upson. Dollhouse – Una retrospettiva",
+              "detail": "MASI, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/63581"
+            },
+            {
               "label": "Mama & baby brunch creativo",
               "detail": "Atelier Manoamano, Lugano",
               "date": "2026-11-10",
               "url": "https://www.tio.ch/agenda/day/20261110/64884"
+            },
+            {
+              "label": "Schermo aperto. Opere video dalla collezione",
+              "detail": "Masi, sede Palazzo Reali, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64595"
+            },
+            {
+              "label": "Sentimento e osservazione",
+              "detail": "MASI, sede Lac, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/53980"
+            },
+            {
+              "label": "Umberto Boccioni",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/62804"
             },
             {
               "label": "Masterclass a Jazz in Bess",
@@ -55,47 +91,11 @@
               "detail": "Jazz in Bess, Lugano",
               "date": "2026-11-10",
               "url": "https://www.tio.ch/agenda/day/20261110/64843"
-            },
-            {
-              "label": "Vie privee - Cinéclub Alliance française",
-              "detail": "Cinema Otello, Ascona",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64740"
-            },
-            {
-              "label": "L’esperienza del dolore",
-              "detail": "Orizzonti filosofici, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64796"
-            },
-            {
-              "label": "L'esperienza del dolore - Prof.ssa Lanfredini",
-              "detail": "Centro Leoni, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64490"
-            },
-            {
-              "label": "Speeddating Ticino",
-              "detail": "Bar Tesoro 25.75.14.41, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64753"
-            },
-            {
-              "label": "L’amore per se stessi si impara",
-              "detail": "Scuole Elementari, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64899"
-            },
-            {
-              "label": "Arlecchino muto per spavento, Stivalaccio Teatro / Marco Zoppello",
-              "detail": "Lac, Sala Teatro, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64636"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "235",
+          "value": "237",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,16 +184,52 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Jannis Kounellis: I am a painter",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/63037"
+            },
+            {
               "label": "Thresholds",
               "detail": "B&B Fine Art, Paradiso",
               "date": "2026-11-10",
               "url": "https://www.tio.ch/agenda/day/20261110/64776"
             },
             {
+              "label": "Bertille Bak. Voices from the Earth",
+              "detail": "Museo Vincenzo Vela, Mendrisio",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/62429"
+            },
+            {
+              "label": "Kaari Upson. Dollhouse – A Retrospective",
+              "detail": "MASI, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/63581"
+            },
+            {
               "label": "Mama & creative baby brunch",
               "detail": "Atelier Manoamano, Lugano",
               "date": "2026-11-10",
               "url": "https://www.tio.ch/agenda/day/20261110/64884"
+            },
+            {
+              "label": "Open screen. Video works from the collection",
+              "detail": "Masi, sede Palazzo Reali, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64595"
+            },
+            {
+              "label": "Feeling and Observation",
+              "detail": "MASI, sede Lac, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/53980"
+            },
+            {
+              "label": "Umberto Boccioni",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/62804"
             },
             {
               "label": "Masterclass at Jazz in Bess",
@@ -206,47 +242,11 @@
               "detail": "Jazz in Bess, Lugano",
               "date": "2026-11-10",
               "url": "https://www.tio.ch/agenda/day/20261110/64843"
-            },
-            {
-              "label": "Private streets - Cinéclub Alliance française",
-              "detail": "Cinema Otello, Ascona",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64740"
-            },
-            {
-              "label": "The Experience of Pain",
-              "detail": "Orizzonti filosofici, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64796"
-            },
-            {
-              "label": "The experience of pain - Prof. Lanfredini",
-              "detail": "Centro Leoni, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64490"
-            },
-            {
-              "label": "Speeddating Ticino",
-              "detail": "Bar Tesoro 25.75.14.41, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64753"
-            },
-            {
-              "label": "Self-love is learned",
-              "detail": "Scuole Elementari, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64899"
-            },
-            {
-              "label": "Mute harlequin for fear, Booty Theatre / Marco Zoppello",
-              "detail": "Lac, Sala Teatro, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64636"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "235",
+          "value": "237",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,16 +335,52 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Jannis Kounellis: Ich bin Maler",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/63037"
+            },
+            {
               "label": "Schwellenwerte",
               "detail": "B&B Fine Art, Paradiso",
               "date": "2026-11-10",
               "url": "https://www.tio.ch/agenda/day/20261110/64776"
             },
             {
+              "label": "Bertille Bak. Stimmen aus der Erde",
+              "detail": "Museo Vincenzo Vela, Mendrisio",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/62429"
+            },
+            {
+              "label": "Kaari Upson. Dollhouse – Eine Retrospektive",
+              "detail": "MASI, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/63581"
+            },
+            {
               "label": "Mama & kreativer Babybrunch",
               "detail": "Atelier Manoamano, Lugano",
               "date": "2026-11-10",
               "url": "https://www.tio.ch/agenda/day/20261110/64884"
+            },
+            {
+              "label": "Offener Bildschirm. Videoarbeiten aus der Sammlung",
+              "detail": "Masi, sede Palazzo Reali, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64595"
+            },
+            {
+              "label": "Gefühl und Beobachtung",
+              "detail": "MASI, sede Lac, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/53980"
+            },
+            {
+              "label": "Umberto Boccioni",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/62804"
             },
             {
               "label": "Masterclass bei Jazz in Bess",
@@ -357,47 +393,11 @@
               "detail": "Jazz in Bess, Lugano",
               "date": "2026-11-10",
               "url": "https://www.tio.ch/agenda/day/20261110/64843"
-            },
-            {
-              "label": "Privatstraßen - Cinéclub Alliance française",
-              "detail": "Cinema Otello, Ascona",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64740"
-            },
-            {
-              "label": "Die Erfahrung des Schmerzes",
-              "detail": "Orizzonti filosofici, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64796"
-            },
-            {
-              "label": "Die Erfahrung des Schmerzes - Prof. Lanfredini",
-              "detail": "Centro Leoni, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64490"
-            },
-            {
-              "label": "Speeddating Tessin",
-              "detail": "Bar Tesoro 25.75.14.41, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64753"
-            },
-            {
-              "label": "Selbstliebe wird erlernt",
-              "detail": "Scuole Elementari, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64899"
-            },
-            {
-              "label": "Stummer Harlekin für Schrecken, Stiefeletten Theater / Marco Zoppello",
-              "detail": "Lac, Sala Teatro, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64636"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "235",
+          "value": "237",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,16 +486,52 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Jannis Kounellis : Je suis un peintre",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/63037"
+            },
+            {
               "label": "Seuils",
               "detail": "B&B Fine Art, Paradiso",
               "date": "2026-11-10",
               "url": "https://www.tio.ch/agenda/day/20261110/64776"
             },
             {
+              "label": "Bertille Bak. Des voix de la terre",
+              "detail": "Museo Vincenzo Vela, Mendrisio",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/62429"
+            },
+            {
+              "label": "Kaari Upson. Dollhouse – Une rétrospective",
+              "detail": "MASI, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/63581"
+            },
+            {
               "label": "Brunch maman et bébé créatif",
               "detail": "Atelier Manoamano, Lugano",
               "date": "2026-11-10",
               "url": "https://www.tio.ch/agenda/day/20261110/64884"
+            },
+            {
+              "label": "Écran ouvert. Œuvres vidéo de la collection",
+              "detail": "Masi, sede Palazzo Reali, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/64595"
+            },
+            {
+              "label": "Sentiment et observation",
+              "detail": "MASI, sede Lac, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/53980"
+            },
+            {
+              "label": "Umberto Boccioni a écrit:",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-11-10",
+              "url": "https://www.tio.ch/agenda/day/20261110/62804"
             },
             {
               "label": "Masterclass à Jazz in Bess",
@@ -508,47 +544,11 @@
               "detail": "Jazz in Bess, Lugano",
               "date": "2026-11-10",
               "url": "https://www.tio.ch/agenda/day/20261110/64843"
-            },
-            {
-              "label": "Rues privées - Cinéclub Alliance française",
-              "detail": "Cinema Otello, Ascona",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64740"
-            },
-            {
-              "label": "L'expérience de la douleur",
-              "detail": "Orizzonti filosofici, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64796"
-            },
-            {
-              "label": "L'expérience de la douleur - Prof. Lanfredini",
-              "detail": "Centro Leoni, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64490"
-            },
-            {
-              "label": "Speeddating Tessin",
-              "detail": "Bar Tesoro 25.75.14.41, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64753"
-            },
-            {
-              "label": "L’amour de soi s’apprend",
-              "detail": "Scuole Elementari, Locarno",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64899"
-            },
-            {
-              "label": "Arlequin muet par peur, Bottine Théâtre / Marco Zoppello",
-              "detail": "Lac, Sala Teatro, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64636"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }
