@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-peso-burocrazia-imprese-svizzera.webp",
+      "sha256": "eadac15bb1f8fd62f598c9d7dda6b0fadd56a92b1add88cee5080ed5b51b2d59"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-peso-burocrazia-imprese-svizzera-480w.webp",
+      "sha256": "f2d2ad0a8b3ce0d103373eaa911e027435c1c42651a20ac3073ae55fd607c798"
+    }
+  ]
 }
