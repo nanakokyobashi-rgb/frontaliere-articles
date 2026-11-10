@@ -4451,9 +4451,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "d8faa490721dc7b4",
-        "corpus": "d8faa490721dc7b4",
-        "alignedAt": "2026-11-09"
+        "site": "2e1bd64843e17a32",
+        "corpus": "2e1bd64843e17a32",
+        "alignedAt": "2026-11-10"
       }
     },
     {
@@ -5078,8 +5078,8 @@
       "mode": "identical",
       "reason": "La baseline registra lo stesso digest SHA-256 raw sui due lati; `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "7c6001cbda5c2632",
-        "corpus": "7c6001cbda5c2632",
+        "site": "2d746675478af925",
+        "corpus": "2d746675478af925",
         "alignedAt": "2026-11-10"
       }
     },
@@ -5971,9 +5971,9 @@
       "path": ".github/actions/claude-codex-fallback/git-bridge-server.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "ad75e2d381e99758",
-        "corpus": "ad75e2d381e99758",
-        "alignedAt": "2026-11-07"
+        "site": "db156d298e46c56a",
+        "corpus": "db156d298e46c56a",
+        "alignedAt": "2026-11-10"
       }
     },
     {
@@ -6948,9 +6948,9 @@
       "mode": "identical",
       "reason": "Fingerprint byte-exact dei producer site-support, AdSense, Partnerize, Meta Pixel e helper canonici; lega gli snapshot trasportati ai byte sorgente e ne verifica l’insieme prima della pubblicazione.",
       "baseline": {
-        "site": "dc236b7de7fa65f7",
-        "corpus": "dc236b7de7fa65f7",
-        "alignedAt": "2026-11-09"
+        "site": "6f6f7fdc5a6cc711",
+        "corpus": "6f6f7fdc5a6cc711",
+        "alignedAt": "2026-11-10"
       }
     },
     {
