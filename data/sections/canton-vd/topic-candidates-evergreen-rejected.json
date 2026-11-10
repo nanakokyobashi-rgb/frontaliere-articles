@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vd::https://www.chuv.ch/fr/actualites/actualite/news_actu_1193/mais-ou-est-passee-la-sante-publique": {
-      "section": "canton-vd",
-      "ts": 1794108914838
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-frontalier-6-au-13-novembre-2026": {
-      "section": "canton-vd",
-      "ts": 1794139073740
-    },
     "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
       "section": "canton-vd",
       "ts": 1794194314489
@@ -23,6 +15,14 @@
     "canton-vd::https://www.guidedufrontalier.com/actualites/retraite-frontalier-polypensionne": {
       "section": "canton-vd",
       "ts": 1794233220819
+    },
+    "canton-vd::https://www.vd.ch/actualites/actualite/news/26780-grandes-reformes-fiscales-administration-reorganisee": {
+      "section": "canton-vd",
+      "ts": 1794316769435
+    },
+    "canton-vd::https://www.rts.ch/info/regions/vaud/2026/article/canton-de-vaud-la-direction-de-la-fiscalite-se-reorganise-29410771.html?rts_source=rss_t": {
+      "section": "canton-vd",
+      "ts": 1794316916327
     }
   }
 }
