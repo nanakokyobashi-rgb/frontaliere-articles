@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "f4129417f3066a8e70850bcb89325e20512dafa54f2d412ad194cafa0fd76aee",
+  "updatedAt": "2026-11-10T14:00:19.925Z",
+  "contentHash": "7cb191c4bd86a705b9d4ee596dc7848c976915a51488e197ad0a2a40ae3b69fc",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Corsa Frauenfeld-Wil: disagi al traffico il 15 novembre 2026",
+          "url": "/articoli-san-gallo/corsa-frauenfeld-wil-2026/",
+          "excerpt": "La corsa collega Frauenfeld e Wil passando per Matzingen, Wängi, Eschlikon e Sirnach; la polizia chiuderà temporaneamente strade specifiche a Wil.",
+          "date": "2026-11-10T13:27:36.197Z"
+        },
+        {
           "title": "Voto a Wil domenica 29 novembre 2026 su proposte comunali e federali",
           "url": "/articoli-san-gallo/voto-wil-29-novembre-2026/",
           "excerpt": "Domenica 29 novembre 2026, a Wil saranno sottoposte al voto due proposte comunali.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/wil-piano-finanziario-2027-2031/",
           "excerpt": "Il piano finanziario di Wil prevede un aumento del debito netto da 43 a 125 milioni di franchi entro il 2031, nonostante misure di risparmio.",
           "date": "2026-11-06T11:41:24.161Z"
-        },
-        {
-          "title": "Cambiamenti orari bus St.Gallen: interessate Rosenberg, Schuppis e Winkeln",
-          "url": "/articoli-san-gallo/cambiamento-orari-st-gallen/",
-          "excerpt": "Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln.",
-          "date": "2026-11-03T08:22:04.208Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T14:00:19.925Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Frauenfeld-Wil race: traffic disruptions on November 15, 2026",
+          "url": "/en/st-gallen-articles/frauenfeld-wil-race-2026/",
+          "excerpt": "The race connects Frauenfeld and Wil via Matzingen, Wängi, Eschlikon and Sirnach; the police will temporarily close specific roads in Wil.",
+          "date": "2026-11-10T13:27:36.197Z"
+        },
+        {
           "title": "Voting in Wil on Sunday, November 29, 2026, on municipal and federal proposals",
           "url": "/en/st-gallen-articles/wil-vote-november-29-2026/",
           "excerpt": "On Sunday, November 29, 2026, two municipal proposals will be put to a vote in Wil.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/wil-financial-plan-2027-2031/",
           "excerpt": "Wil's financial plan provides for an increase in net debt from 43 to 125 million francs by 2031, despite savings measures.",
           "date": "2026-11-06T11:41:24.161Z"
-        },
-        {
-          "title": "St.Gallen bus schedule changes: Rosenberg, Schuppis and Winkeln affected",
-          "url": "/en/st-gallen-articles/st-gallen-schedule-changes/",
-          "excerpt": "The project affects Rosenberg, Schuppis, Grossacker and Winkeln.",
-          "date": "2026-11-03T08:22:04.208Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T14:00:19.925Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lauf Frauenfeld-Wil: Verkehrsbehinderungen am 15. November 2026",
+          "url": "/de/st-gallen-artikel/lauf-frauenfeld-wil-2026/",
+          "excerpt": "Der Lauf verbindet Frauenfeld und Wil und führt über Matzingen, Wängi, Eschlikon und Sirnach; die Polizei wird in Wil bestimmte Strassen vorübergehend sperren.",
+          "date": "2026-11-10T13:27:36.197Z"
+        },
+        {
           "title": "Abstimmung in Wil am 29.11.: kommunale & eidg. Vorlagen",
           "url": "/de/st-gallen-artikel/wil-wahl-29-november-2026/",
           "excerpt": "Am Sonntag, 29. November 2026, werden in Wil zwei kommunale Vorlagen zur Abstimmung vorgelegt.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/wil-finanzplan-2027-2031/",
           "excerpt": "Wils Finanzplan sieht eine Erhöhung der Nettoverschuldung von 43 auf 125 Millionen Francs bis 2031 vor, trotz Kostensparmaßnahmen.",
           "date": "2026-11-06T11:41:24.161Z"
-        },
-        {
-          "title": "Busfahrplan in St.Gallen: Änderungen in drei Quartieren",
-          "url": "/de/st-gallen-artikel/st-gallen-fahrplanwechsel/",
-          "excerpt": "Der Entwurf betrifft Rosenberg, Schuppis, Grossacker und Winkeln.",
-          "date": "2026-11-03T08:22:04.208Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T14:00:19.925Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Course Frauenfeld-Wil : perturbations du trafic le 15 novembre 2026",
+          "url": "/fr/articles-saint-gall/course-frauenfeld-wil-2026/",
+          "excerpt": "La course relie Frauenfeld et Wil en passant par Matzingen, Wängi, Eschlikon et Sirnach ; la police fermera temporairement certaines routes à Wil.",
+          "date": "2026-11-10T13:27:36.197Z"
+        },
+        {
           "title": "Vote à Wil le 29 novembre 2026 : communal et fédéral",
           "url": "/fr/articles-saint-gall/vote-wil-29-novembre-2026/",
           "excerpt": "Le dimanche 29 novembre 2026, deux propositions communales seront soumises au vote à Wil.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/wil-plan-financier-2027-2031/",
           "excerpt": "Le plan financier de Wil prévoit une augmentation de la dette nette de 43 à 125 millions de francs d’ici 2031, malgré des mesures d’économie.",
           "date": "2026-11-06T11:41:24.161Z"
-        },
-        {
-          "title": "Horaires bus St.Gallen changés : Rosenberg/Schuppis/Winkeln",
-          "url": "/fr/articles-saint-gall/changements-horaires-st-gallen/",
-          "excerpt": "Le projet concerne Rosenberg, Schuppis, Grossacker et Winkeln.",
-          "date": "2026-11-03T08:22:04.208Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-10T14:00:19.925Z"
     }
   }
 }
