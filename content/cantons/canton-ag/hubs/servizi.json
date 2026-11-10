@@ -4,12 +4,22 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "ae1c98214a2f9ad8ff2df4b21b6ad048aaa08fd4bcff8487a36f61c9ba6d7ac8",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "fd300e8866b0aef504aa5f1ec33f8bae12cb81d83548dbc39c6ff180983b716a",
   "blocks": [
     {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-11-08T11:18:20.402Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-09T22:22:33.694Z",
+      "keyFacts": 1
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -19,8 +29,66 @@
       "topic": "servizi",
       "locale": "it",
       "intro": "In Argovia, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "569,90 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "18",
+          "note": "offerta mediana 2120 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "AG, regione di premio 0",
+              "value": "mediana 569,90 CHF al mese",
+              "detail": "da 519,25 a 621,90 CHF, 27 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "AG7529",
+              "value": "5000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58808"
+            },
+            {
+              "label": "AG8843",
+              "value": "4800 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58809"
+            },
+            {
+              "label": "AG9184",
+              "value": "4200 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58810"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.auktion-ag.ch/de/",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
@@ -57,7 +125,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -137,15 +205,73 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "AG",
       "topic": "servizi",
       "locale": "en",
       "intro": "In Aargau, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "569.90 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "18",
+          "note": "typical bid 2,120 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "AG, premium region 0",
+              "value": "typical 569.90 CHF per month",
+              "detail": "from 519.25 to 621.90 CHF, 27 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "AG7529",
+              "value": "5,000 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58808"
+            },
+            {
+              "label": "AG8843",
+              "value": "4,800 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58809"
+            },
+            {
+              "label": "AG9184",
+              "value": "4,200 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58810"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.auktion-ag.ch/de/",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
@@ -182,7 +308,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -258,15 +384,73 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "AG",
       "topic": "servizi",
       "locale": "de",
       "intro": "Im Aargau laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "569.90 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "18",
+          "note": "mittleres Gebot 2’120 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "AG, Prämienregion 0",
+              "value": "Mittelwert 569.90 CHF pro Monat",
+              "detail": "von 519.25 bis 621.90 CHF, 27 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "AG7529",
+              "value": "5’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58808"
+            },
+            {
+              "label": "AG8843",
+              "value": "4’800 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58809"
+            },
+            {
+              "label": "AG9184",
+              "value": "4’200 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58810"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.auktion-ag.ch/de/",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
@@ -303,7 +487,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -379,15 +563,73 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "AG",
       "topic": "servizi",
       "locale": "fr",
       "intro": "En Argovie, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "569,90 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "18",
+          "note": "offre centrale 2 120 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "AG, région de primes 0",
+              "value": "valeur centrale 569,90 CHF par mois",
+              "detail": "de 519,25 à 621,90 CHF, 27 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "AG7529",
+              "value": "5 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58808"
+            },
+            {
+              "label": "AG8843",
+              "value": "4 800 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58809"
+            },
+            {
+              "label": "AG9184",
+              "value": "4 200 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58810"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.auktion-ag.ch/de/",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
@@ -424,7 +666,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -496,7 +738,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

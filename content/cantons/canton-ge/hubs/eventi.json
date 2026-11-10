@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "c3aa20e5ddae82f02f0028faa786f07d39bc4416e04b691caec3c44907c78bf8",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "55224b529a351435cc7b19f469c7f62801e25d91606e7115cc1ce5182ce63684",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "331",
+          "value": "342",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -56,6 +56,12 @@
               "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant"
             },
             {
+              "label": "Improvisation - Les grains de folie",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/improvisation-grains-folie"
+            },
+            {
               "label": "Installation de l’œuvre de Bodil Manz",
               "detail": "Genève",
               "date": "2026-11-10",
@@ -90,17 +96,11 @@
               "detail": "Genève",
               "date": "2026-11-10",
               "url": "https://www.geneve.ch/agenda/oeuvre-installative-bodil-manz"
-            },
-            {
-              "label": "Olga de Soto, Une introduction (revisitée)",
-              "detail": "Genève",
-              "date": "2026-11-10",
-              "url": "https://www.geneve.ch/agenda/olga-soto-introduction-revisitee"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "331",
+          "value": "342",
           "note": "from the site’s events calendar"
         }
       ],
@@ -179,6 +179,12 @@
               "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant"
             },
             {
+              "label": "Improvisation - Les grains de folie",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/improvisation-grains-folie"
+            },
+            {
               "label": "Installation de l’œuvre de Bodil Manz",
               "detail": "Genève",
               "date": "2026-11-10",
@@ -213,17 +219,11 @@
               "detail": "Genève",
               "date": "2026-11-10",
               "url": "https://www.geneve.ch/agenda/oeuvre-installative-bodil-manz"
-            },
-            {
-              "label": "Olga de Soto, Une introduction (revisitée)",
-              "detail": "Genève",
-              "date": "2026-11-10",
-              "url": "https://www.geneve.ch/agenda/olga-soto-introduction-revisitee"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "331",
+          "value": "342",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -302,6 +302,12 @@
               "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant"
             },
             {
+              "label": "Improvisation - Les grains de folie",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/improvisation-grains-folie"
+            },
+            {
               "label": "Installation de l’œuvre de Bodil Manz",
               "detail": "Genève",
               "date": "2026-11-10",
@@ -336,17 +342,11 @@
               "detail": "Genève",
               "date": "2026-11-10",
               "url": "https://www.geneve.ch/agenda/oeuvre-installative-bodil-manz"
-            },
-            {
-              "label": "Olga de Soto, Une introduction (revisitée)",
-              "detail": "Genève",
-              "date": "2026-11-10",
-              "url": "https://www.geneve.ch/agenda/olga-soto-introduction-revisitee"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "331",
+          "value": "342",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -425,6 +425,12 @@
               "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant"
             },
             {
+              "label": "Improvisation - Les grains de folie",
+              "detail": "Genève",
+              "date": "2026-11-10",
+              "url": "https://www.geneve.ch/agenda/improvisation-grains-folie"
+            },
+            {
               "label": "Installation de l’œuvre de Bodil Manz",
               "detail": "Genève",
               "date": "2026-11-10",
@@ -459,17 +465,11 @@
               "detail": "Genève",
               "date": "2026-11-10",
               "url": "https://www.geneve.ch/agenda/oeuvre-installative-bodil-manz"
-            },
-            {
-              "label": "Olga de Soto, Une introduction (revisitée)",
-              "detail": "Genève",
-              "date": "2026-11-10",
-              "url": "https://www.geneve.ch/agenda/olga-soto-introduction-revisitee"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

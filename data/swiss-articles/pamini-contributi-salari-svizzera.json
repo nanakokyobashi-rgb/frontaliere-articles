@@ -1,0 +1,19 @@
+{
+  "id": "pamini-contributi-salari-svizzera",
+  "slug": "pamini-contributi-salari-svizzera",
+  "publishedAt": "2026-11-10T09:09:51.567Z",
+  "cluster": null,
+  "_pool": "proven",
+  "_pool_source": "experimental",
+  "_discovery_attribution": null,
+  "_topic_candidate_attribution": {
+    "candidateId": "9df35e54",
+    "providers": [
+      "google-news-rss"
+    ],
+    "detectedAt": "2026-11-09T01:25:08.898Z",
+    "score": 0.333,
+    "redditPermalink": null
+  },
+  "_score_breakdown": null
+}

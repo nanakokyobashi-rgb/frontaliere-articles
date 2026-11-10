@@ -6,6 +6,7 @@ import path from 'node:path';
 import {
   OBSERVER_USER_AGENT,
   MAX_ISSUE_DESCRIPTION_BYTES,
+  buildGhCommandArgs,
   buildObserverTargets,
   compactIssueDescription,
   parseCoverageLedger,
@@ -553,6 +554,18 @@ test('il payload di creazione resta bounded quando il ledger viene aggiunto a un
   } finally {
     fs.rmSync(rootDir, { recursive: true, force: true });
   }
+});
+
+test('il wrapper gh non passa --repo a gh api', () => {
+  const repo = 'nanakokyobashi-rgb/frontaliere-articles';
+  assert.deepEqual(
+    buildGhCommandArgs(['api', 'repos/nanakokyobashi-rgb/frontaliere-articles/actions/runs/123'], repo),
+    ['api', 'repos/nanakokyobashi-rgb/frontaliere-articles/actions/runs/123'],
+  );
+  assert.deepEqual(
+    buildGhCommandArgs(['run', 'list'], repo),
+    ['run', 'list', '--repo', repo],
+  );
 });
 
 function observerRoot() {

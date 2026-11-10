@@ -4,14 +4,14 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-08T03:11:57.760Z",
-  "contentHash": "e180e85f8eb0ee5baa403184a0fb1badcead1bf5b0067196aee04535f874b559",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "91fdc72c8d990e3a222bc403088b78acbf585c8afe93d9a755d3821d547471be",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-07T13:30:35.165Z",
+      "updatedAt": "2026-11-09T16:49:34.211Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-14T13:30:35.165Z"
+      "carryUntilAt": "2026-11-16T16:49:34.211Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Austria",
-              "value": "1,637 EUR/l",
-              "detail": "media regionale: minimo 1,607 EUR/l, 11 stazioni rilevate",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "1,655 EUR/l",
+              "detail": "media regionale: minimo 1,647 EUR/l, 12 stazioni rilevate",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2,066 EUR/l",
-              "detail": "media regionale: minimo 2,023 EUR/l, 12 stazioni rilevate",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2,090 EUR/l",
+              "detail": "media regionale: minimo 2,082 EUR/l, 10 stazioni rilevate",
+              "date": "2026-11-09T16:49:34.211Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-09T16:49:34.211Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Consiglio comunale istituisce gruppo per il caldo a scuola",
+          "url": "/articoli-appenzello/consiglio-gruppo-caldo-scuola/",
+          "excerpt": "Il Consiglio comunale ha istituito la Arbeitsgruppe «Hitzeschutz und Begrünung»: aule e spazi esterni, con misure rapide per la protezione dal sole.",
+          "date": "2026-11-10T02:51:13.479Z"
+        },
         {
           "title": "Appenzello, manuel ulmann assunto al bezirksbauamt",
           "url": "/articoli-appenzello/ulmann-incarico-appenzello/",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/decima-fiera-apprendistati-innerrhoden/",
           "excerpt": "62 aziende dell'Innerrhoden presenteranno offerte di apprendistato sabato 7 novembre 2026 all'Aula Gringel, ingresso gratuito dalle 9.00 alle 15.00.",
           "date": "2026-11-03T07:41:05.610Z"
-        },
-        {
-          "title": "45 residenti chiedono misure contro il rumore sulla Langgasse",
-          "url": "/articoli-appenzello/45-residenti-richiesta-rumore/",
-          "excerpt": "45 residenti hanno depositato al comune il mercoledì 28 ottobre una richiesta per l'esame urgente di Tempo 30 e misure di moderazione del traffico.",
-          "date": "2026-10-31T13:30:50.111Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -153,23 +153,29 @@
             },
             {
               "label": "Petrol 95 — Austria",
-              "value": "1.637 EUR/l",
-              "detail": "regional average: lowest 1.607 EUR/l, 11 stations surveyed",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "1.655 EUR/l",
+              "detail": "regional average: lowest 1.647 EUR/l, 12 stations surveyed",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2.066 EUR/l",
-              "detail": "regional average: lowest 2.023 EUR/l, 12 stations surveyed",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2.090 EUR/l",
+              "detail": "regional average: lowest 2.082 EUR/l, 10 stations surveyed",
+              "date": "2026-11-09T16:49:34.211Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-09T16:49:34.211Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "City council establishes group to address heat at school",
+          "url": "/en/appenzell-articles/council-school-heat-group/",
+          "excerpt": "The City Council established the Arbeitsgruppe «Hitzeschutz und Begrünung»: classrooms and outdoor spaces, with rapid measures for protection from the sun.",
+          "date": "2026-11-10T02:51:13.479Z"
+        },
         {
           "title": "Appenzell, Manuel Ulmann hired at the Bezirksbauamt",
           "url": "/en/appenzell-articles/ulmann-appenzell-appointment/",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/tenth-apprenticeship-fair-innerrhoden/",
           "excerpt": "62 companies from Innerrhoden will present apprenticeship opportunities on Saturday, 7 November 2026, at Aula Gringel, with free admission from 9.00 to 15.00.",
           "date": "2026-11-03T07:41:05.610Z"
-        },
-        {
-          "title": "45 residents call for measures against noise on Langgasse",
-          "url": "/en/appenzell-articles/45-residents-noise-request/",
-          "excerpt": "45 residents filed a request with the municipality on Wednesday, October 28, for the urgent review of Tempo 30 and traffic-calming measures.",
-          "date": "2026-10-31T13:30:50.111Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -252,23 +252,29 @@
             },
             {
               "label": "Benzin 95 — Österreich",
-              "value": "1.637 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.607 EUR/l, 11 erfasste Tankstellen",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "1.655 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.647 EUR/l, 12 erfasste Tankstellen",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Diesel — Österreich",
-              "value": "2.066 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.023 EUR/l, 12 erfasste Tankstellen",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2.090 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.082 EUR/l, 10 erfasste Tankstellen",
+              "date": "2026-11-09T16:49:34.211Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-09T16:49:34.211Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Gemeinderat richtet Arbeitsgruppe gegen Hitze an Schulen ein",
+          "url": "/de/appenzell-artikel/gemeinderat-hitzeschutz-schule/",
+          "excerpt": "Der Gemeinderat hat die Arbeitsgruppe «Hitzeschutz und Begrünung» eingerichtet: Klassenräume und Außenbereiche, mit schnellen Maßnahmen zum Sonnenschutz.",
+          "date": "2026-11-10T02:51:13.479Z"
+        },
         {
           "title": "Appenzell, Manuel Ulmann beim Bezirksbauamt angestellt",
           "url": "/de/appenzell-artikel/ulmann-anstellung-appenzell/",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/zehnte-lehrstellenmesse-innerrhoden/",
           "excerpt": "Am Samstag, 7. November 2026 findet in der Aula Gringel die zehnte Lehrstellen-Tischmesse Appenzell statt.",
           "date": "2026-11-03T07:41:05.610Z"
-        },
-        {
-          "title": "45 Anwohner fordern Maßnahmen gegen den Lärm auf der Langgasse",
-          "url": "/de/appenzell-artikel/45-einwohner-laerm-forderung/",
-          "excerpt": "Am Mittwoch, 28. Oktober, haben 45 Anwohner bei der Gemeinde einen Antrag zum Verkehrslärm und zum Verkehr entlang der Langgasse eingereicht.",
-          "date": "2026-10-31T13:30:50.111Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -351,23 +351,29 @@
             },
             {
               "label": "Essence 95 — Autriche",
-              "value": "1,637 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,607 EUR/l, 11 stations relevées",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "1,655 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,647 EUR/l, 12 stations relevées",
+              "date": "2026-11-09T16:49:34.211Z"
             },
             {
               "label": "Diesel — Autriche",
-              "value": "2,066 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,023 EUR/l, 12 stations relevées",
-              "date": "2026-11-07T13:30:35.165Z"
+              "value": "2,090 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,082 EUR/l, 10 stations relevées",
+              "date": "2026-11-09T16:49:34.211Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-09T16:49:34.211Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Conseil municipal crée un groupe contre la chaleur à l’école",
+          "url": "/fr/articles-appenzell/groupe-conseil-chaleur-ecole/",
+          "excerpt": "Le conseil municipal a créé le groupe de travail « Hitzeschutz und Begrünung » : salles de classe et espaces extérieurs, avec des mesures rapides de protection contre le soleil.",
+          "date": "2026-11-10T02:51:13.479Z"
+        },
         {
           "title": "Appenzell, Manuel Ulmann engagé au Bezirksbauamt",
           "url": "/fr/articles-appenzell/ulmann-nomination-appenzell/",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/dixieme-foire-apprentissage-innerrhoden/",
           "excerpt": "62 entreprises de l'Innerrhoden présenteront des offres d'apprentissage le samedi 7 novembre 2026 à l'Aula Gringel, entrée gratuite de 9.00 à 15.00.",
           "date": "2026-11-03T07:41:05.610Z"
-        },
-        {
-          "title": "45 résidents demandent des mesures contre le bruit sur la Langgasse",
-          "url": "/fr/articles-appenzell/45-residents-demande-bruit/",
-          "excerpt": "45 résidents ont déposé auprès de la commune, le mercredi 28 octobre, une demande visant l’examen urgent de Tempo 30 et des mesures d’apaisement du trafic.",
-          "date": "2026-10-31T13:30:50.111Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-08T03:11:57.760Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

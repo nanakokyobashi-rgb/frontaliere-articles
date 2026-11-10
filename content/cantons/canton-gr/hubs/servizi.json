@@ -4,12 +4,22 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "68d61a1575a86c8a2da99d5ac0a2efdda4b0cf5ced84e93bd4639dcd4686728e",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "024109ca0455a34b6fc9dc8e254a182615430fc838df307fbeb7748ec904dd67",
   "blocks": [
     {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-11-08T11:18:20.402Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-09T22:22:33.694Z",
+      "keyFacts": 1
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -19,8 +29,76 @@
       "topic": "servizi",
       "locale": "it",
       "intro": "Nei Grigioni, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con l’Italia, l’Austria e il Liechtenstein: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco, italiano e romancio; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "573,45 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "5",
+          "note": "offerta mediana 500 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "GR, regione di premio 1",
+              "value": "mediana 573,45 CHF al mese",
+              "detail": "da 499 a 660,10 CHF, 24 assicuratori"
+            },
+            {
+              "label": "GR, regione di premio 2",
+              "value": "mediana 534,95 CHF al mese",
+              "detail": "da 464 a 613,90 CHF, 24 assicuratori"
+            },
+            {
+              "label": "GR, regione di premio 3",
+              "value": "mediana 509,70 CHF al mese",
+              "detail": "da 426 a 574,30 CHF, 24 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "GR16616",
+              "value": "550 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-22T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2265&locale=de_CH"
+            },
+            {
+              "label": "GR11948",
+              "value": "500 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-22T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2263&locale=de_CH"
+            },
+            {
+              "label": "GR14399",
+              "value": "500 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-22T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2264&locale=de_CH"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
@@ -57,7 +135,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -137,15 +215,83 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "GR",
       "topic": "servizi",
       "locale": "en",
       "intro": "In Graubünden, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Italy, Austria and Liechtenstein: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German, Italian and Romansh; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "573.45 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "5",
+          "note": "typical bid 500 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "GR, premium region 1",
+              "value": "typical 573.45 CHF per month",
+              "detail": "from 499 to 660.10 CHF, 24 insurers"
+            },
+            {
+              "label": "GR, premium region 2",
+              "value": "typical 534.95 CHF per month",
+              "detail": "from 464 to 613.90 CHF, 24 insurers"
+            },
+            {
+              "label": "GR, premium region 3",
+              "value": "typical 509.70 CHF per month",
+              "detail": "from 426 to 574.30 CHF, 24 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "GR16616",
+              "value": "550 CHF",
+              "detail": "current bid",
+              "date": "2026-11-22T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2265&locale=de_CH"
+            },
+            {
+              "label": "GR11948",
+              "value": "500 CHF",
+              "detail": "current bid",
+              "date": "2026-11-22T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2263&locale=de_CH"
+            },
+            {
+              "label": "GR14399",
+              "value": "500 CHF",
+              "detail": "current bid",
+              "date": "2026-11-22T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2264&locale=de_CH"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
@@ -182,7 +328,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -258,15 +404,83 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "GR",
       "topic": "servizi",
       "locale": "de",
       "intro": "In Graubünden laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Italien, Österreich und Liechtenstein: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch, Italienisch und Rätoromanisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "573.45 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "5",
+          "note": "mittleres Gebot 500 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "GR, Prämienregion 1",
+              "value": "Mittelwert 573.45 CHF pro Monat",
+              "detail": "von 499 bis 660.10 CHF, 24 Versicherer"
+            },
+            {
+              "label": "GR, Prämienregion 2",
+              "value": "Mittelwert 534.95 CHF pro Monat",
+              "detail": "von 464 bis 613.90 CHF, 24 Versicherer"
+            },
+            {
+              "label": "GR, Prämienregion 3",
+              "value": "Mittelwert 509.70 CHF pro Monat",
+              "detail": "von 426 bis 574.30 CHF, 24 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "GR16616",
+              "value": "550 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-22T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2265&locale=de_CH"
+            },
+            {
+              "label": "GR11948",
+              "value": "500 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-22T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2263&locale=de_CH"
+            },
+            {
+              "label": "GR14399",
+              "value": "500 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-22T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2264&locale=de_CH"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
@@ -303,7 +517,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -379,15 +593,83 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "GR",
       "topic": "servizi",
       "locale": "fr",
       "intro": "Aux Grisons, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Italie, l’Autriche et le Liechtenstein : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand, italien et romanche ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "573,45 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "5",
+          "note": "offre centrale 500 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "GR, région de primes 1",
+              "value": "valeur centrale 573,45 CHF par mois",
+              "detail": "de 499 à 660,10 CHF, 24 assureurs"
+            },
+            {
+              "label": "GR, région de primes 2",
+              "value": "valeur centrale 534,95 CHF par mois",
+              "detail": "de 464 à 613,90 CHF, 24 assureurs"
+            },
+            {
+              "label": "GR, région de primes 3",
+              "value": "valeur centrale 509,70 CHF par mois",
+              "detail": "de 426 à 574,30 CHF, 24 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "GR16616",
+              "value": "550 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-22T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2265&locale=de_CH"
+            },
+            {
+              "label": "GR11948",
+              "value": "500 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-22T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2263&locale=de_CH"
+            },
+            {
+              "label": "GR14399",
+              "value": "500 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-22T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2264&locale=de_CH"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
@@ -424,7 +706,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -496,7 +778,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

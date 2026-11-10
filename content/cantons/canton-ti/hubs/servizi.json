@@ -4,12 +4,27 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "ff58ecf421eb91d07c8c7afcdc9730a224739c6154fd76b8e37a932a989c5fb7",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "d9959b75f14643cf1139218d8887a48dcf3db827cd42dcdd8eb514713b6acc58",
   "blocks": [
     {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-11-08T11:18:20.402Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-11-09T19:55:01.733Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-09T22:22:33.694Z",
+      "keyFacts": 1
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -19,13 +34,114 @@
       "topic": "servizi",
       "locale": "it",
       "intro": "In Ticino, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con l’Italia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in italiano; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "740,20 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "2",
+          "note": "offerta mediana 8175 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "TI, regione di premio 1",
+              "value": "mediana 740,20 CHF al mese",
+              "detail": "da 679 a 826,50 CHF, 21 assicuratori"
+            },
+            {
+              "label": "TI, regione di premio 2",
+              "value": "mediana 683,30 CHF al mese",
+              "detail": "da 626,70 a 797,20 CHF, 21 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "Martinoli",
+              "detail": "Dongio, Biasca e Valli",
+              "date": "2026-11-06T17:00:00.000Z"
+            },
+            {
+              "label": "Camorino",
+              "detail": "Camorino, Bellinzonese",
+              "date": "2026-11-06T17:30:00.000Z"
+            },
+            {
+              "label": "Farmacia Stella",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "San Nicolao",
+              "detail": "Novazzano, Mendrisiotto",
+              "date": "2026-11-10T07:00:00.000Z"
+            },
+            {
+              "label": "Pharmantica",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-11-13T17:00:00.000Z"
+            },
+            {
+              "label": "S. Gottardo",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-11-13T17:30:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-11-09T19:55:01.733Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "TI735",
+              "value": "15.500 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+            },
+            {
+              "label": "TI12396",
+              "value": "850 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Proteggiamoci insieme dai virus respiratori",
+              "date": "2026-11-09",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/virus-respiratori.html"
+            },
             {
               "label": "Nuova nomina – Primario di Chirurgia pediatrica della Clinica di Chirurgia e Ortopedia pediatrica presso l’Istituto Pediatrico della Svizzera Italiana",
               "date": "2026-11-05",
@@ -37,6 +153,11 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/dot.html"
             },
             {
+              "label": "Chirurgia toracica di qualità",
+              "date": "2026-11-01",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
+            },
+            {
               "label": "Campagna Drive awake",
               "date": "2026-10-31",
               "url": "https://www.eoc.ch/media-e-news/news/2026/Campagna-Drive-awake-.html"
@@ -45,19 +166,9 @@
               "label": "Ottenuti importanti finanziamenti dall’Istituto di Ricerca Traslazionale USI-EOC",
               "date": "2026-10-25",
               "url": "https://www.eoc.ch/media-e-news/news/2026/finanziamenti-irt.html"
-            },
-            {
-              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
-              "date": "2026-10-24",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
-            },
-            {
-              "label": "IOSI in prima linea contro il tumore del pancreas",
-              "date": "2026-10-23",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/cs-pancreas.html"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -145,20 +256,121 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "TI",
       "topic": "servizi",
       "locale": "en",
       "intro": "In Ticino, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Italy: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in Italian; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "740.20 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "2",
+          "note": "typical bid 8,175 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "TI, premium region 1",
+              "value": "typical 740.20 CHF per month",
+              "detail": "from 679 to 826.50 CHF, 21 insurers"
+            },
+            {
+              "label": "TI, premium region 2",
+              "value": "typical 683.30 CHF per month",
+              "detail": "from 626.70 to 797.20 CHF, 21 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "Martinoli",
+              "detail": "Dongio, Biasca e Valli",
+              "date": "2026-11-06T17:00:00.000Z"
+            },
+            {
+              "label": "Camorino",
+              "detail": "Camorino, Bellinzonese",
+              "date": "2026-11-06T17:30:00.000Z"
+            },
+            {
+              "label": "Farmacia Stella",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "San Nicolao",
+              "detail": "Novazzano, Mendrisiotto",
+              "date": "2026-11-10T07:00:00.000Z"
+            },
+            {
+              "label": "Pharmantica",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-11-13T17:00:00.000Z"
+            },
+            {
+              "label": "S. Gottardo",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-11-13T17:30:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-11-09T19:55:01.733Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "TI735",
+              "value": "15,500 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+            },
+            {
+              "label": "TI12396",
+              "value": "850 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Proteggiamoci insieme dai virus respiratori",
+              "date": "2026-11-09",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/virus-respiratori.html"
+            },
             {
               "label": "Nuova nomina – Primario di Chirurgia pediatrica della Clinica di Chirurgia e Ortopedia pediatrica presso l’Istituto Pediatrico della Svizzera Italiana",
               "date": "2026-11-05",
@@ -170,6 +382,11 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/dot.html"
             },
             {
+              "label": "Chirurgia toracica di qualità",
+              "date": "2026-11-01",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
+            },
+            {
               "label": "Campagna Drive awake",
               "date": "2026-10-31",
               "url": "https://www.eoc.ch/media-e-news/news/2026/Campagna-Drive-awake-.html"
@@ -178,19 +395,9 @@
               "label": "Ottenuti importanti finanziamenti dall’Istituto di Ricerca Traslazionale USI-EOC",
               "date": "2026-10-25",
               "url": "https://www.eoc.ch/media-e-news/news/2026/finanziamenti-irt.html"
-            },
-            {
-              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
-              "date": "2026-10-24",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
-            },
-            {
-              "label": "IOSI in prima linea contro il tumore del pancreas",
-              "date": "2026-10-23",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/cs-pancreas.html"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -273,20 +480,121 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "TI",
       "topic": "servizi",
       "locale": "de",
       "intro": "Im Tessin laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Italien: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Italienisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "740.20 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "2",
+          "note": "mittleres Gebot 8’175 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "TI, Prämienregion 1",
+              "value": "Mittelwert 740.20 CHF pro Monat",
+              "detail": "von 679 bis 826.50 CHF, 21 Versicherer"
+            },
+            {
+              "label": "TI, Prämienregion 2",
+              "value": "Mittelwert 683.30 CHF pro Monat",
+              "detail": "von 626.70 bis 797.20 CHF, 21 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "Martinoli",
+              "detail": "Dongio, Biasca e Valli",
+              "date": "2026-11-06T17:00:00.000Z"
+            },
+            {
+              "label": "Camorino",
+              "detail": "Camorino, Bellinzonese",
+              "date": "2026-11-06T17:30:00.000Z"
+            },
+            {
+              "label": "Farmacia Stella",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "San Nicolao",
+              "detail": "Novazzano, Mendrisiotto",
+              "date": "2026-11-10T07:00:00.000Z"
+            },
+            {
+              "label": "Pharmantica",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-11-13T17:00:00.000Z"
+            },
+            {
+              "label": "S. Gottardo",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-11-13T17:30:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-11-09T19:55:01.733Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "TI735",
+              "value": "15’500 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+            },
+            {
+              "label": "TI12396",
+              "value": "850 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Proteggiamoci insieme dai virus respiratori",
+              "date": "2026-11-09",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/virus-respiratori.html"
+            },
             {
               "label": "Nuova nomina – Primario di Chirurgia pediatrica della Clinica di Chirurgia e Ortopedia pediatrica presso l’Istituto Pediatrico della Svizzera Italiana",
               "date": "2026-11-05",
@@ -298,6 +606,11 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/dot.html"
             },
             {
+              "label": "Chirurgia toracica di qualità",
+              "date": "2026-11-01",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
+            },
+            {
               "label": "Campagna Drive awake",
               "date": "2026-10-31",
               "url": "https://www.eoc.ch/media-e-news/news/2026/Campagna-Drive-awake-.html"
@@ -306,19 +619,9 @@
               "label": "Ottenuti importanti finanziamenti dall’Istituto di Ricerca Traslazionale USI-EOC",
               "date": "2026-10-25",
               "url": "https://www.eoc.ch/media-e-news/news/2026/finanziamenti-irt.html"
-            },
-            {
-              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
-              "date": "2026-10-24",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
-            },
-            {
-              "label": "IOSI in prima linea contro il tumore del pancreas",
-              "date": "2026-10-23",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/cs-pancreas.html"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -401,20 +704,121 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "TI",
       "topic": "servizi",
       "locale": "fr",
       "intro": "Au Tessin, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Italie : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en italien ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "740,20 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "2",
+          "note": "offre centrale 8 175 CHF"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "TI, région de primes 1",
+              "value": "valeur centrale 740,20 CHF par mois",
+              "detail": "de 679 à 826,50 CHF, 21 assureurs"
+            },
+            {
+              "label": "TI, région de primes 2",
+              "value": "valeur centrale 683,30 CHF par mois",
+              "detail": "de 626,70 à 797,20 CHF, 21 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "Martinoli",
+              "detail": "Dongio, Biasca e Valli",
+              "date": "2026-11-06T17:00:00.000Z"
+            },
+            {
+              "label": "Camorino",
+              "detail": "Camorino, Bellinzonese",
+              "date": "2026-11-06T17:30:00.000Z"
+            },
+            {
+              "label": "Farmacia Stella",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "San Nicolao",
+              "detail": "Novazzano, Mendrisiotto",
+              "date": "2026-11-10T07:00:00.000Z"
+            },
+            {
+              "label": "Pharmantica",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-11-13T17:00:00.000Z"
+            },
+            {
+              "label": "S. Gottardo",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-11-13T17:30:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-11-09T19:55:01.733Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "TI735",
+              "value": "15 500 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+            },
+            {
+              "label": "TI12396",
+              "value": "850 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-09T22:22:33.694Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Proteggiamoci insieme dai virus respiratori",
+              "date": "2026-11-09",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/virus-respiratori.html"
+            },
             {
               "label": "Nuova nomina – Primario di Chirurgia pediatrica della Clinica di Chirurgia e Ortopedia pediatrica presso l’Istituto Pediatrico della Svizzera Italiana",
               "date": "2026-11-05",
@@ -426,6 +830,11 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/dot.html"
             },
             {
+              "label": "Chirurgia toracica di qualità",
+              "date": "2026-11-01",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
+            },
+            {
               "label": "Campagna Drive awake",
               "date": "2026-10-31",
               "url": "https://www.eoc.ch/media-e-news/news/2026/Campagna-Drive-awake-.html"
@@ -434,19 +843,9 @@
               "label": "Ottenuti importanti finanziamenti dall’Istituto di Ricerca Traslazionale USI-EOC",
               "date": "2026-10-25",
               "url": "https://www.eoc.ch/media-e-news/news/2026/finanziamenti-irt.html"
-            },
-            {
-              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
-              "date": "2026-10-24",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
-            },
-            {
-              "label": "IOSI in prima linea contro il tumore del pancreas",
-              "date": "2026-10-23",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/cs-pancreas.html"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -526,7 +925,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "9347dbea3b370b5624abc9961c6bc9ae6994d3a74843bece366ff2c19849f34c",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "f114df6ee69c9a3578f474da8e02592b287a0b838047387a6a5162ef900a8134",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "192",
+          "value": "201",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -43,6 +43,12 @@
               "detail": "Universitätsbibliothek Bern, Bern",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/buch-am-mittag-open-science/"
+            },
+            {
+              "label": "Führung: KP Heinrich",
+              "detail": "Festungswerk Hondrich - KP Heinrich",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/hondrich/fuehrung-kp-heinrich_A4ajEum"
             },
             {
               "label": "Jahresvorspiel Musik Oberaargau",
@@ -85,17 +91,11 @@
               "detail": "Thunersee, Thun — in corso, ultimo giorno: 14 novembre 2026",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
-            },
-            {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "192",
+          "value": "201",
           "note": "from the site’s events calendar"
         }
       ],
@@ -166,6 +166,12 @@
               "detail": "Universitätsbibliothek Bern, Bern",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/buch-am-mittag-open-science/"
+            },
+            {
+              "label": "Führung: KP Heinrich",
+              "detail": "Festungswerk Hondrich - KP Heinrich",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/hondrich/fuehrung-kp-heinrich_A4ajEum"
             },
             {
               "label": "Jahresvorspiel Musik Oberaargau",
@@ -208,17 +214,11 @@
               "detail": "Thunersee, Thun — ongoing, last day: 14 November 2026",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
-            },
-            {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne — ongoing, last day: 27 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "192",
+          "value": "201",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -289,6 +289,12 @@
               "detail": "Universitätsbibliothek Bern, Bern",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/buch-am-mittag-open-science/"
+            },
+            {
+              "label": "Führung: KP Heinrich",
+              "detail": "Festungswerk Hondrich - KP Heinrich",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/hondrich/fuehrung-kp-heinrich_A4ajEum"
             },
             {
               "label": "Jahresvorspiel Musik Oberaargau",
@@ -331,17 +337,11 @@
               "detail": "Thunersee, Thun — läuft, letzter Tag: 14. November 2026",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
-            },
-            {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "192",
+          "value": "201",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -412,6 +412,12 @@
               "detail": "Universitätsbibliothek Bern, Bern",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/buch-am-mittag-open-science/"
+            },
+            {
+              "label": "Führung: KP Heinrich",
+              "detail": "Festungswerk Hondrich - KP Heinrich",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/hondrich/fuehrung-kp-heinrich_A4ajEum"
             },
             {
               "label": "Jahresvorspiel Musik Oberaargau",
@@ -454,17 +460,11 @@
               "detail": "Thunersee, Thun — en cours, dernier jour : 14 novembre 2026",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
-            },
-            {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

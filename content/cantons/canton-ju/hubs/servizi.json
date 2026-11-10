@@ -4,12 +4,22 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "4fa038e6e6dea98018fb57dd4ac992695881cdd89d38ef456d4bbda259a73ebf",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "b232492b68d0db2b7979e6788ca2450a2fa2061c72878cb22dd1e3eb67263f11",
   "blocks": [
     {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-11-08T11:18:20.402Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-11-09T19:55:53.005Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -19,8 +29,70 @@
       "topic": "servizi",
       "locale": "it",
       "intro": "Nel Canton Giura, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "678 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "JU, regione di premio 0",
+              "value": "mediana 678 CHF al mese",
+              "detail": "da 628,20 a 762,50 CHF, 21 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "Pharmacie Erard",
+              "detail": "Alle, Ajoie",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Voirol",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-10T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-11T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-12T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-13T17:30:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
+          "updatedAt": "2026-11-09T19:55:53.005Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
@@ -47,7 +119,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -97,15 +169,77 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "JU",
       "topic": "servizi",
       "locale": "en",
       "intro": "In the canton of Jura, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "678 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "JU, premium region 0",
+              "value": "typical 678 CHF per month",
+              "detail": "from 628.20 to 762.50 CHF, 21 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "Pharmacie Erard",
+              "detail": "Alle, Ajoie",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Voirol",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-10T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-11T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-12T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-13T17:30:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
+          "updatedAt": "2026-11-09T19:55:53.005Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
@@ -132,7 +266,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -178,15 +312,77 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "JU",
       "topic": "servizi",
       "locale": "de",
       "intro": "Im Kanton Jura laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "678 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "JU, Prämienregion 0",
+              "value": "Mittelwert 678 CHF pro Monat",
+              "detail": "von 628.20 bis 762.50 CHF, 21 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "Pharmacie Erard",
+              "detail": "Alle, Ajoie",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Voirol",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-10T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-11T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-12T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-13T17:30:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
+          "updatedAt": "2026-11-09T19:55:53.005Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
@@ -213,7 +409,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -259,15 +455,77 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "JU",
       "topic": "servizi",
       "locale": "fr",
       "intro": "Dans le canton du Jura, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [],
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "678 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        }
+      ],
       "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "JU, région de primes 0",
+              "value": "valeur centrale 678 CHF par mois",
+              "detail": "de 628,20 à 762,50 CHF, 21 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-11-08T11:18:20.402Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "Pharmacie Erard",
+              "detail": "Alle, Ajoie",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Voirol",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-07T07:00:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-10T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-11T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-12T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-13T17:30:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
+          "updatedAt": "2026-11-09T19:55:53.005Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
@@ -294,7 +552,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -336,7 +594,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

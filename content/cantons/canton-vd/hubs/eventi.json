@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "8a074a116742e2abad9d0d67a28c83f5b5720e7bc2faf7ac02404e95ce85bedc",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "ce2e7f854808527949192174a6bb38dad039b92efb1a180408c8c4ea51a4b476",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "62",
+          "value": "65",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -48,6 +48,12 @@
               "detail": "Lausanne",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rap-1ere-partie/"
+            },
+            {
+              "label": "Caccia al tesoro \"viaggio nel tempo\" - 100 anni di Tribù del Grand Lac",
+              "detail": "Tribu Du Grand Lac (TDGL), les scouts de Morges, Morges — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/tourismus/morges/chasse-au-tresor-le-voyage-temporel-100-ans-de-la-tribu-du-grand-lac_ASPaAYW"
             },
             {
               "label": "Epicoop's Gourmet Saturday",
@@ -90,17 +96,11 @@
               "detail": "Vevey — in corso, ultimo giorno: 15 novembre 2026",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "It's a different story! small hand and BIG HAND",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cest-une-autre-histoire-petite-main-et-grande-main/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -145,7 +145,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "VD",
@@ -155,7 +155,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "62",
+          "value": "65",
           "note": "from the site’s events calendar"
         }
       ],
@@ -176,6 +176,12 @@
               "detail": "Lausanne",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rap-1ere-partie/"
+            },
+            {
+              "label": "“Time Travel” Treasure Hunt – 100 Years of the Great Lake Tribe",
+              "detail": "Tribu Du Grand Lac (TDGL), les scouts de Morges, Morges — ongoing, last day: 15 November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/tourismus/morges/chasse-au-tresor-le-voyage-temporel-100-ans-de-la-tribu-du-grand-lac_ASPaAYW"
             },
             {
               "label": "Epicoop's Gourmet Saturday",
@@ -218,17 +224,11 @@
               "detail": "Vevey — ongoing, last day: 15 November 2026",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "It's a different story! small hand and BIG HAND",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cest-une-autre-histoire-petite-main-et-grande-main/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -251,7 +251,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -273,7 +273,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "VD",
@@ -283,7 +283,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "62",
+          "value": "65",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -304,6 +304,12 @@
               "detail": "Lausanne",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rap-1ere-partie/"
+            },
+            {
+              "label": "Schnitzeljagd „Die Zeitreise“ – 100 Jahre des Stammes vom Grossen See",
+              "detail": "Tribu Du Grand Lac (TDGL), les scouts de Morges, Morges — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/tourismus/morges/chasse-au-tresor-le-voyage-temporel-100-ans-de-la-tribu-du-grand-lac_ASPaAYW"
             },
             {
               "label": "Gourmet-Samstag von Epicoop",
@@ -346,17 +352,11 @@
               "detail": "Vevey — läuft, letzter Tag: 15. November 2026",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "C'est une autre histoire! petite main et GRANDE MAIN",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cest-une-autre-histoire-petite-main-et-grande-main/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -379,7 +379,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -401,7 +401,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "VD",
@@ -411,7 +411,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "62",
+          "value": "65",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -432,6 +432,12 @@
               "detail": "Lausanne",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rap-1ere-partie/"
+            },
+            {
+              "label": "Chasse au trésor \"Le voyage temporel\"-100 ans de la Tribu Du Grand Lac",
+              "detail": "Tribu Du Grand Lac (TDGL), les scouts de Morges, Morges — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/tourismus/morges/chasse-au-tresor-le-voyage-temporel-100-ans-de-la-tribu-du-grand-lac_ASPaAYW"
             },
             {
               "label": "Samedi Gourmand d’Epicoop",
@@ -474,17 +480,11 @@
               "detail": "Vevey — en cours, dernier jour : 15 novembre 2026",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "C'est une autre histoire ! petite main et GRANDE MAIN",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cest-une-autre-histoire-petite-main-et-grande-main/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -507,7 +507,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -529,7 +529,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

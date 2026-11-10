@@ -4,17 +4,22 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-09T23:41:11.155Z",
-  "contentHash": "c94ffa71e8b5e8e33ba8d6e104fa57a27addaf98c51aac466d73b5005d7e87b8",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "ade37c205fbb31a795915b253ff39e66b646adcc4a4482469a4b8ec9046782f9",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-06T23:59:59.000Z",
+      "updatedAt": "2026-11-08T23:59:59.000Z",
       "keyFacts": 1
     },
     {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-11-09T22:46:21.435Z",
+      "keyFacts": 2
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
       "keyFacts": 0
     }
   ],
@@ -28,14 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Biaufond, settimana conclusa: 6 novembre 2026"
+          "note": "Biaufond, settimana conclusa: 8 novembre 2026"
+        },
+        {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "2",
+          "note": "segnalazioni aggiornate: 9 novembre 2026"
+        },
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "5",
+          "note": "segnalazioni aggiornate: 9 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 31 ottobre 2026 – 6 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 2 novembre 2026 – 8 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Biaufond",
@@ -51,14 +66,71 @@
             },
             {
               "label": "Col-des-Roches (Col France)",
-              "value": "0,1 min",
+              "value": "0,2 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/col-des-roches/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-06T23:59:59.000Z"
+          "updatedAt": "2026-11-08T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "A5 Neuchâtel -> Yverdon tra Svincolo autostradale Neuchâtel-Serrières E Svincolo autostradale Auvernier Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-10-16T20:00:00.000Z"
+            },
+            {
+              "label": "A5 Bienne -> Yverdon tra Svincolo autostradale Neuchâtel-Maladière E Svincolo autostradale Neuchâtel-Serrières Situazione: chiusa cantiere, lunghezza [km] 4.5",
+              "value": "Chiusura",
+              "detail": "fine prevista: 20 novembre 2026",
+              "date": "2026-10-26T14:40:00.000Z"
+            },
+            {
+              "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
+              "value": "Traffico",
+              "date": "2026-11-09T22:46:21.435Z",
+              "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
+            },
+            {
+              "label": "H10 Pontarlier <-> Neuchâtel tra Luogo Noiraigue E Luogo Brot-Dessous Situazione: problemi di traffico cantiere",
+              "value": "Cantiere",
+              "detail": "fine prevista: 31 dicembre 2026",
+              "date": "2024-09-06T05:22:00.000Z"
+            },
+            {
+              "label": "H5 Neuchâtel <-> Bienne Luogo St-Blaise Situazione: problemi di traffico cantiere",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 aprile 2027",
+              "date": "2025-04-08T11:07:00.000Z"
+            },
+            {
+              "label": "A20 Diramazione Neuchâtel-Vauseyon <-> La Chaux-de-Fonds Svincolo autostradale Convers Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo peso lordo Peso…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 31 maggio 2027",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "Gare du Locle : une étape importante vers des transports publics accessibles à toutes et tous",
+              "value": "Cantiere",
+              "date": "2026-11-09T22:46:21.435Z",
+              "url": "https://www.ne.ch/communiques-de-presse/gare-du-locle-une-etape-importante-vers-des-transports-publics-accessibles-toutes-et-tous"
+            },
+            {
+              "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
+              "value": "Cantiere",
+              "date": "2026-11-09T22:46:21.435Z",
+              "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -81,7 +153,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +207,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "NE",
@@ -146,14 +218,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Biaufond, week ending 6 November 2026"
+          "note": "Biaufond, week ending 8 November 2026"
+        },
+        {
+          "label": "Road closures in force or imminent",
+          "value": "2",
+          "note": "reports as of 9 November 2026"
+        },
+        {
+          "label": "Roadworks active or imminent",
+          "value": "5",
+          "note": "reports as of 9 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 31 October 2026 to 6 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 2 November 2026 to 8 November 2026, fastest first.",
           "items": [
             {
               "label": "Biaufond",
@@ -169,14 +251,71 @@
             },
             {
               "label": "Col-des-Roches (Col France)",
-              "value": "0.1 min",
+              "value": "0.2 min",
               "detail": "48 readings",
               "url": "/en/border-wait/col-des-roches/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-06T23:59:59.000Z"
+          "updatedAt": "2026-11-08T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "A5 Neuchâtel -> Yverdon tra Svincolo autostradale Neuchâtel-Serrières E Svincolo autostradale Auvernier Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 13 November 2026",
+              "date": "2026-10-16T20:00:00.000Z"
+            },
+            {
+              "label": "A5 Bienne -> Yverdon tra Svincolo autostradale Neuchâtel-Maladière E Svincolo autostradale Neuchâtel-Serrières Situazione: chiusa cantiere, lunghezza [km] 4.5",
+              "value": "Closure",
+              "detail": "until 20 November 2026",
+              "date": "2026-10-26T14:40:00.000Z"
+            },
+            {
+              "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
+              "value": "Traffic",
+              "date": "2026-11-09T22:46:21.435Z",
+              "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
+            },
+            {
+              "label": "H10 Pontarlier <-> Neuchâtel tra Luogo Noiraigue E Luogo Brot-Dessous Situazione: problemi di traffico cantiere",
+              "value": "Roadworks",
+              "detail": "until 31 December 2026",
+              "date": "2024-09-06T05:22:00.000Z"
+            },
+            {
+              "label": "H5 Neuchâtel <-> Bienne Luogo St-Blaise Situazione: problemi di traffico cantiere",
+              "value": "Roadworks",
+              "detail": "until 30 April 2027",
+              "date": "2025-04-08T11:07:00.000Z"
+            },
+            {
+              "label": "A20 Diramazione Neuchâtel-Vauseyon <-> La Chaux-de-Fonds Svincolo autostradale Convers Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo peso lordo Peso…",
+              "value": "Roadworks",
+              "detail": "until 31 May 2027",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "Gare du Locle : une étape importante vers des transports publics accessibles à toutes et tous",
+              "value": "Roadworks",
+              "date": "2026-11-09T22:46:21.435Z",
+              "url": "https://www.ne.ch/communiques-de-presse/gare-du-locle-une-etape-importante-vers-des-transports-publics-accessibles-toutes-et-tous"
+            },
+            {
+              "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
+              "value": "Roadworks",
+              "date": "2026-11-09T22:46:21.435Z",
+              "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -199,7 +338,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +392,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "NE",
@@ -264,14 +403,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Biaufond, Woche bis 6. November 2026"
+          "note": "Biaufond, Woche bis 8. November 2026"
+        },
+        {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "2",
+          "note": "Meldungen vom 9. November 2026"
+        },
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "5",
+          "note": "Meldungen vom 9. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 31. Oktober 2026 bis 6. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 2. November 2026 bis 8. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Biaufond",
@@ -287,14 +436,71 @@
             },
             {
               "label": "Col-des-Roches (Col France)",
-              "value": "0.1 Min.",
+              "value": "0.2 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/col-des-roches/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-06T23:59:59.000Z"
+          "updatedAt": "2026-11-08T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "A5 Neuenburg -> Yverdon zwischen Anschluss Neuenburg-Serrières und Anschluss Auvernier Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 13. November 2026",
+              "date": "2026-10-16T20:00:00.000Z"
+            },
+            {
+              "label": "A5 Biel -> Yverdon zwischen Anschluss Neuenburg-Maladiére und Anschluss Neuenburg-Serrières Sachlage: Strecke gesperrt Baustelle, Länge [km] 4.5",
+              "value": "Sperrung",
+              "detail": "bis 20. November 2026",
+              "date": "2026-10-26T14:40:00.000Z"
+            },
+            {
+              "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
+              "value": "Verkehr",
+              "date": "2026-11-09T22:46:21.435Z",
+              "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
+            },
+            {
+              "label": "H10 Pontarlier <-> Neuenburg zwischen Ortschaft Noiraigue und Ortschaft Brot-Dessous Sachlage: Verkehrsbehinderung Baustelle",
+              "value": "Baustelle",
+              "detail": "bis 31. Dezember 2026",
+              "date": "2024-09-06T05:22:00.000Z"
+            },
+            {
+              "label": "H5 Neuenburg <-> Biel Ortschaft St-Blaise Sachlage: Verkehrsbehinderung Baustelle",
+              "value": "Baustelle",
+              "detail": "bis 30. April 2027",
+              "date": "2025-04-08T11:07:00.000Z"
+            },
+            {
+              "label": "A20 Verzweigung Neuenburg-Vauseyon <-> La Chaux-de-Fonds Anschluss Convers Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Zusatz 1: vorübergehende Beschränkung des zulässigen Gesamtgewichts…",
+              "value": "Baustelle",
+              "detail": "bis 31. Mai 2027",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "Gare du Locle : une étape importante vers des transports publics accessibles à toutes et tous",
+              "value": "Baustelle",
+              "date": "2026-11-09T22:46:21.435Z",
+              "url": "https://www.ne.ch/communiques-de-presse/gare-du-locle-une-etape-importante-vers-des-transports-publics-accessibles-toutes-et-tous"
+            },
+            {
+              "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
+              "value": "Baustelle",
+              "date": "2026-11-09T22:46:21.435Z",
+              "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -317,7 +523,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +577,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "NE",
@@ -382,14 +588,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Biaufond, semaine jusqu’au 6 novembre 2026"
+          "note": "Biaufond, semaine jusqu’au 8 novembre 2026"
+        },
+        {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "2",
+          "note": "signalements au 9 novembre 2026"
+        },
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "5",
+          "note": "signalements au 9 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 31 octobre 2026 au 6 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 2 novembre 2026 au 8 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Biaufond",
@@ -405,14 +621,71 @@
             },
             {
               "label": "Col-des-Roches (Col France)",
-              "value": "0,1 min",
+              "value": "0,2 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/col-des-roches/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-06T23:59:59.000Z"
+          "updatedAt": "2026-11-08T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "A5 Neuchâtel -> Yverdon entre Jonction autoroutière Neuchâtel-Serrières et Jonction autoroutière Auvernier Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-10-16T20:00:00.000Z"
+            },
+            {
+              "label": "A5 Bienne -> Yverdon entre Jonction autoroutière Neuchâtel-Maladière et Jonction autoroutière Neuchâtel-Serrières Situation: fermé travaux, longueur [km] 4.5",
+              "value": "Fermeture",
+              "detail": "jusqu’au 20 novembre 2026",
+              "date": "2026-10-26T14:40:00.000Z"
+            },
+            {
+              "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
+              "value": "Trafic",
+              "date": "2026-11-09T22:46:21.435Z",
+              "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
+            },
+            {
+              "label": "H10 Pontarlier <-> Neuchâtel entre Localité Noiraigue et Localité Brot-Dessous Situation: trafic perturbé travaux",
+              "value": "Chantier",
+              "detail": "jusqu’au 31 décembre 2026",
+              "date": "2024-09-06T05:22:00.000Z"
+            },
+            {
+              "label": "H5 Neuchâtel <-> Bienne Localité St-Blaise Situation: trafic perturbé travaux",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 avril 2027",
+              "date": "2025-04-08T11:07:00.000Z"
+            },
+            {
+              "label": "A20 Echangeur de Neuchâtel-Vauseyon <-> La Chaux-de-Fonds Jonction autoroutière Convers Situation: trafic perturbé travaux, longueur [km] 0.2 Complément 1: limite temporaire du poids total autorisé…",
+              "value": "Chantier",
+              "detail": "jusqu’au 31 mai 2027",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "Gare du Locle : une étape importante vers des transports publics accessibles à toutes et tous",
+              "value": "Chantier",
+              "date": "2026-11-09T22:46:21.435Z",
+              "url": "https://www.ne.ch/communiques-de-presse/gare-du-locle-une-etape-importante-vers-des-transports-publics-accessibles-toutes-et-tous"
+            },
+            {
+              "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
+              "value": "Chantier",
+              "date": "2026-11-09T22:46:21.435Z",
+              "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-11-09T22:46:21.435Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -435,7 +708,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +762,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-09T23:41:11.155Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

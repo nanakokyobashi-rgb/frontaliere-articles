@@ -4,13 +4,18 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "09da302dd67f6577cfa8164d4963c3f17f0030f3692493b3df0fe6bffd0d7ae6",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "b2620513f2265cf5c59ad82d6382a25dd6533a40cd76d32d6e891d819b25ca62",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -22,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "59",
+          "value": "70",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,6 +37,12 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
+            {
+              "label": "Morgengebet",
+              "detail": "Schiers",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/schiers/morgengebet_AkRAvd3"
+            },
             {
               "label": "Begegnungscafé",
               "detail": "Chur",
@@ -43,6 +54,18 @@
               "detail": "Arosa",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kids-treff-gemeinsam-kochen-und-essen/"
+            },
+            {
+              "label": "Roundabout",
+              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/schiers/roundabout_ALSRfV2"
+            },
+            {
+              "label": "Konfunterricht",
+              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schiers/konfunterricht-gruppe-2_AeEfFkF"
             },
             {
               "label": "EHC Arosa vs. EHC Visp",
@@ -57,6 +80,12 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zuoz-globe-plays-immersive-theater/"
             },
             {
+              "label": "Fitness- und Yogakurse",
+              "detail": "Hotel Schweizerhof — in corso, ultimo giorno: 30 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
+            },
+            {
               "label": "Peduzzis traditionelle Huus-Metzgete 2026",
               "detail": "Val Surses: Savognin, Surses — in corso, ultimo giorno: 14 novembre 2026",
               "date": "2026-11-10",
@@ -67,35 +96,24 @@
               "detail": "Cinema Staziun, Zernez — in corso, ultimo giorno: 14 novembre 2026",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
-            },
-            {
-              "label": "Tematizzare la Valle Riflessioni sulle forme di vita in Valposchiavo",
-              "detail": "Casa Torre, Poschiavo — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Caffè Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Rendez-vous am Mittag: Kulturpflanzen der Schweiz",
-              "detail": "B12 - Brandis 12, Chur",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-am-mittag-kulturpflanzen-der-schweiz/"
-            },
-            {
-              "label": "Sgarella-Auftakt",
-              "detail": "Dorfplatz, Domat/Ems",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sgarella-auftakt/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "«Integration von Frauen in den Arbeitsmarkt» als Schwerpunkt im KIP 4",
+              "date": "2026-11-09",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
+            }
+          ],
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -153,7 +171,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "GR",
@@ -163,7 +181,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "59",
+          "value": "70",
           "note": "from the site’s events calendar"
         }
       ],
@@ -173,6 +191,12 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
+            {
+              "label": "Morgengebet",
+              "detail": "Schiers",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/schiers/morgengebet_AkRAvd3"
+            },
             {
               "label": "Begegnungscafé",
               "detail": "Chur",
@@ -184,6 +208,18 @@
               "detail": "Arosa",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kids-treff-gemeinsam-kochen-und-essen/"
+            },
+            {
+              "label": "Roundabout",
+              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/schiers/roundabout_ALSRfV2"
+            },
+            {
+              "label": "Konfunterricht",
+              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schiers/konfunterricht-gruppe-2_AeEfFkF"
             },
             {
               "label": "EHC Arosa vs. EHC Visp",
@@ -198,6 +234,12 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zuoz-globe-plays-immersive-theater/"
             },
             {
+              "label": "Fitness and yoga classes",
+              "detail": "Hotel Schweizerhof — ongoing, last day: 30 November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
+            },
+            {
               "label": "Peduzzis traditionelle Huus-Metzgete 2026",
               "detail": "Val Surses: Savognin, Surses — ongoing, last day: 14 November 2026",
               "date": "2026-11-10",
@@ -208,35 +250,24 @@
               "detail": "Cinema Staziun, Zernez — ongoing, last day: 14 November 2026",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
-            },
-            {
-              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
-              "detail": "Casa Torre, Poschiavo — ongoing, last day: 14 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Café Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — ongoing, last day: 11 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Rendez-vous am Mittag: Kulturpflanzen der Schweiz",
-              "detail": "B12 - Brandis 12, Chur",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-am-mittag-kulturpflanzen-der-schweiz/"
-            },
-            {
-              "label": "Sgarella-Auftakt",
-              "detail": "Dorfplatz, Domat/Ems",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sgarella-auftakt/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "«Integration von Frauen in den Arbeitsmarkt» als Schwerpunkt im KIP 4",
+              "date": "2026-11-09",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
+            }
+          ],
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -294,7 +325,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "GR",
@@ -304,7 +335,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "59",
+          "value": "70",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -314,6 +345,12 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
+            {
+              "label": "Morgengebet",
+              "detail": "Schiers",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/schiers/morgengebet_AkRAvd3"
+            },
             {
               "label": "Begegnungscafé",
               "detail": "Chur",
@@ -325,6 +362,18 @@
               "detail": "Arosa",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kids-treff-gemeinsam-kochen-und-essen/"
+            },
+            {
+              "label": "Roundabout",
+              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/schiers/roundabout_ALSRfV2"
+            },
+            {
+              "label": "Konfunterricht",
+              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schiers/konfunterricht-gruppe-2_AeEfFkF"
             },
             {
               "label": "EHC Arosa vs. EHC Visp",
@@ -339,6 +388,12 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zuoz-globe-plays-immersive-theater/"
             },
             {
+              "label": "Fitness- und Yogakurse",
+              "detail": "Hotel Schweizerhof — läuft, letzter Tag: 30. November 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
+            },
+            {
               "label": "Peduzzis traditionelle Huus-Metzgete 2026",
               "detail": "Val Surses: Savognin, Surses — läuft, letzter Tag: 14. November 2026",
               "date": "2026-11-10",
@@ -349,35 +404,24 @@
               "detail": "Cinema Staziun, Zernez — läuft, letzter Tag: 14. November 2026",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
-            },
-            {
-              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
-              "detail": "Casa Torre, Poschiavo — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Cafè Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Rendez-vous am Mittag: Kulturpflanzen der Schweiz",
-              "detail": "B12 - Brandis 12, Chur",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-am-mittag-kulturpflanzen-der-schweiz/"
-            },
-            {
-              "label": "Sgarella-Auftakt",
-              "detail": "Dorfplatz, Domat/Ems",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sgarella-auftakt/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "«Integration von Frauen in den Arbeitsmarkt» als Schwerpunkt im KIP 4",
+              "date": "2026-11-09",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
+            }
+          ],
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -435,7 +479,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "GR",
@@ -445,7 +489,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "59",
+          "value": "70",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -455,6 +499,12 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
+            {
+              "label": "Morgengebet",
+              "detail": "Schiers",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/schiers/morgengebet_AkRAvd3"
+            },
             {
               "label": "Begegnungscafé",
               "detail": "Chur",
@@ -466,6 +516,18 @@
               "detail": "Arosa",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kids-treff-gemeinsam-kochen-und-essen/"
+            },
+            {
+              "label": "Roundabout",
+              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/schiers/roundabout_ALSRfV2"
+            },
+            {
+              "label": "Fonds de Konfunterricht",
+              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schiers/konfunterricht-gruppe-2_AeEfFkF"
             },
             {
               "label": "EHC Arosa vs. EHC Visp",
@@ -480,6 +542,12 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zuoz-globe-plays-immersive-theater/"
             },
             {
+              "label": "Fitness- und Yogakurse",
+              "detail": "Hotel Schweizerhof — en cours, dernier jour : 30 novembre 2026",
+              "date": "2026-11-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
+            },
+            {
               "label": "Peduzzis traditionelle Huus-Metzgete 2026",
               "detail": "Val Surses: Savognin, Surses — en cours, dernier jour : 14 novembre 2026",
               "date": "2026-11-10",
@@ -490,35 +558,24 @@
               "detail": "Cinema Staziun, Zernez — en cours, dernier jour : 14 novembre 2026",
               "date": "2026-11-10",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
-            },
-            {
-              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
-              "detail": "Casa Torre, Poschiavo — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Café Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Rendez-vous am Mittag: Kulturpflanzen der Schweiz",
-              "detail": "B12 - Brandis 12, Chur",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-am-mittag-kulturpflanzen-der-schweiz/"
-            },
-            {
-              "label": "Sgarella-Auftakt",
-              "detail": "Dorfplatz, Domat/Ems",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sgarella-auftakt/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "«Integration von Frauen in den Arbeitsmarkt» als Schwerpunkt im KIP 4",
+              "date": "2026-11-09",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
+            }
+          ],
+          "updatedAt": "2026-11-10T00:54:26.172Z"
         }
       ],
       "curatedArticles": [
@@ -576,7 +633,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }

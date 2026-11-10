@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "1037f0b4f812a26f97a56350d8af2fb981aa5354f46bfd6c679bb184dffa7318",
+  "updatedAt": "2026-11-10T09:14:11.946Z",
+  "contentHash": "de845e63c3055a1a1876e81f78f09eb83507744c2adb055bddd0530fa36edab3",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T01:31:51.087Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "23",
+          "value": "25",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -51,10 +51,22 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Apart Restaurant Bar",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
+            },
+            {
               "label": "Brevi visite guidate all'ora di pranzo",
               "detail": "Zugo",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brevi-visite-guidate-allora-di-pranzo/"
+            },
+            {
+              "label": "Chinderhüeti Oberägeri",
+              "detail": "Oberägeri",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/suche/oberaegeri/chinderhueeti-oberaegeri_AwFJAcm"
             },
             {
               "label": "more than music cham.",
@@ -79,23 +91,11 @@
               "detail": "Oberägeri",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
-            },
-            {
-              "label": "Miss Helvetia & Band",
-              "detail": "Lorzensaal Cham, Cham",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
-            },
-            {
-              "label": "Zuger Bläserquintett - LOS JETZT, NORDWÄRTS",
-              "detail": "Theater im Burgbachkeller",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/zuger-blaeserquintett-los-jetzt-nordwaerts_AEN2QQJ"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "en": {
       "canton": "ZG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "23",
+          "value": "25",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,10 +156,22 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Apart Restaurant Bar",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
+            },
+            {
               "label": "Short guided tours over lunchtime",
               "detail": "Zugo",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brevi-visite-guidate-allora-di-pranzo/"
+            },
+            {
+              "label": "Chinderh Ob",
+              "detail": "Oberägeri",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/suche/oberaegeri/chinderhueeti-oberaegeri_AwFJAcm"
             },
             {
               "label": "more than music cham.",
@@ -184,23 +196,11 @@
               "detail": "Oberägeri",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
-            },
-            {
-              "label": "Miss Helvetia & Band",
-              "detail": "Lorzensaal Cham, Cham",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
-            },
-            {
-              "label": "Zuger Bläserquintett - LOS JETZT, NORDWÄRTS",
-              "detail": "Theater im Burgbachkeller",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/zuger-blaeserquintett-los-jetzt-nordwaerts_AEN2QQJ"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "de": {
       "canton": "ZG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "23",
+          "value": "25",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -261,10 +261,22 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Apart Restaurant Bar",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
+            },
+            {
               "label": "Kurzführungen über Mittag",
               "detail": "Zugo",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brevi-visite-guidate-allora-di-pranzo/"
+            },
+            {
+              "label": "Chinderh ⑤eti Ober ⑤geri",
+              "detail": "Oberägeri",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/suche/oberaegeri/chinderhueeti-oberaegeri_AwFJAcm"
             },
             {
               "label": "more than music cham.",
@@ -289,23 +301,11 @@
               "detail": "Oberägeri",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
-            },
-            {
-              "label": "Miss Helvetia & Band",
-              "detail": "Lorzensaal Cham, Cham",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
-            },
-            {
-              "label": "Zuger Bläserquintett - LOS JETZT, NORDWÄRTS",
-              "detail": "Theater im Burgbachkeller",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/zuger-blaeserquintett-los-jetzt-nordwaerts_AEN2QQJ"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     },
     "fr": {
       "canton": "ZG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "23",
+          "value": "25",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,10 +366,22 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Apart Restaurant Bar",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
+            },
+            {
               "label": "Courtes visites guidées à midi",
               "detail": "Zugo",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brevi-visite-guidate-allora-di-pranzo/"
+            },
+            {
+              "label": "Chinderh Ob",
+              "detail": "Oberägeri",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/suche/oberaegeri/chinderhueeti-oberaegeri_AwFJAcm"
             },
             {
               "label": "more than music cham.",
@@ -394,23 +406,11 @@
               "detail": "Oberägeri",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
-            },
-            {
-              "label": "Miss Helvetia & Band",
-              "detail": "Lorzensaal Cham, Cham",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
-            },
-            {
-              "label": "Zuger Bläserquintett - LOS JETZT, NORDWÄRTS",
-              "detail": "Theater im Burgbachkeller",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/zuger-blaeserquintett-los-jetzt-nordwaerts_AEN2QQJ"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T01:31:51.087Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-10T09:14:11.946Z"
     }
   }
 }
