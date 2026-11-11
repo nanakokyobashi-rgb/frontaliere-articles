@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/824007/der-kanton-wallis-bietet-teilzeitbezahlung-bei-vollzeitstelle": {
-      "section": "canton-vs",
-      "ts": 1794234804737
-    },
     "canton-vs::https://www.pomona.ch/story/824271/walliser-staatspersonal-fordert-vollen-teuerungsausgleich-von-08-prozent": {
       "section": "canton-vs",
       "ts": 1794276966158
@@ -27,6 +23,34 @@
     "canton-vs::https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/attualita-26/articolo/frontalieri-del-vco-tante-questioni-ancora-aperte-locatelli-chiede-un-tavolo-provinciale-1.html": {
       "section": "canton-vs",
       "ts": 1794403102779
+    },
+    "canton-vs::https://www.pomona.ch/story/824648/es-wird-dazu-kommen-baumeschneider-warnt-vor-ahvk%c3%bcrzungen": {
+      "section": "canton-vs",
+      "ts": 1794436942119
+    },
+    "canton-vs::https://www.pomona.ch/story/807164/gemeinsam-f%c3%bcr-mehr-lebensqualit%c3%a4t-k%c3%b6rperliche-mentale-und-seelische-gesundheit-im-fokus": {
+      "section": "canton-vs",
+      "ts": 1794436943929
+    },
+    "canton-vs::https://www.pomona.ch/story/824686/webseite-des-kantons-wallis-war-stundenlang-offline-kein-hackerangriff": {
+      "section": "canton-vs",
+      "ts": 1794436951104
+    },
+    "canton-vs::https://www.pomona.ch/story/825518/budget-27-im-fokus-der-grossr%c3%a4te-am-zweiten-tag-der-novembersession": {
+      "section": "canton-vs",
+      "ts": 1794436952675
+    },
+    "canton-vs::https://www.pomona.ch/story/825079/sbb-sp%c3%bcren-dieselschock-auch-deshalb-setzt-die-bahn-auf-%c3%b6koalternativen": {
+      "section": "canton-vs",
+      "ts": 1794436954211
+    },
+    "canton-vs::https://www.pomona.ch/story/806119/gemeinsam-f%c3%bcr-mehr-lebensqualit%c3%a4t-k%c3%b6rperliche-mentale-und-seelische-gesundheit-im-fokus": {
+      "section": "canton-vs",
+      "ts": 1794436955758
+    },
+    "canton-vs::https://www.pomona.ch/story/826130/bringhen-group-gesamte-itinfrastruktur-nach-hackerattacke-lahmgelegt": {
+      "section": "canton-vs",
+      "ts": 1794436957563
     }
   }
 }
