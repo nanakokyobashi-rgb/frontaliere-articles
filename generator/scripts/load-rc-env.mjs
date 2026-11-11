@@ -79,6 +79,9 @@ export const RC_TO_ENV = {
   // Reddit candidates stay disabled in the corpus unless the owner explicitly
   // approves Data API use. The consumer requires the exact string "true".
   REDDIT_DATA_API_APPROVED:       ['REDDIT_DATA_API_APPROVED'],
+  // Safe site-only publishing switch. The consumer defaults to OFF when the
+  // RC parameter is absent; this adapted bridge lets the site workflow read it.
+  JOBS_FAST_PUBLISH_ENABLED:      ['JOBS_FAST_PUBLISH_ENABLED'],
   // Optional editorial switch. When absent, the guard's local default is the
   // targeted `repair` mode; `warn` remains an explicit rollback and `enforce`
   // an explicit strict setting.
@@ -633,6 +636,7 @@ export const EXPECTED_ABSENT_RC_KEYS = new Set([
   'SUMUP_ASSISTED_APPLICATION_WEBHOOK_URL',
   'SUMUP_GOOGLE_PAY_MERCHANT_ID',
   'EXPIRED_JOB_EDGE_SECTIONS',
+  'JOBS_FAST_PUBLISH_ENABLED',
 ]);
 
 export function rcValueState(value, rcKey) {
