@@ -47706,7 +47706,7 @@ const RAW_ARTICLES = [
  category: 'novita',
  date: '2026-10-23T15:23:51.432Z',
  updatedAt: '2026-10-31',
- image: '/images/blog/article-confusione-tassa-salute-frontalieri.webp',
+ image: '/images/blog/article-sanitari-italiani-fuga-svizzera.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',
