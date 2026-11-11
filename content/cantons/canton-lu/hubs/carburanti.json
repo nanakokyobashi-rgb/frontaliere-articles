@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-11-07T10:30:49.335Z",
-  "contentHash": "8e0eb5ff8bed54e66fc3827c44eb23db450557b4b2c4038c5119bb94f5edaf81",
+  "updatedAt": "2026-11-11T07:33:34.935Z",
+  "contentHash": "ec9623fdcb642d9eed4a57d92ebb264643255e72e6ccc98c658acf8e831541ed",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-06T14:35:31.386Z",
+      "updatedAt": "2026-11-10T15:13:39.066Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-06T14:35:31.386Z"
+          "updatedAt": "2026-11-10T15:13:39.066Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerna: il 13 dicembre 2026 cambia la rete bus",
+          "url": "/articoli-lucerna/cambio-orari-bus-lucerna/",
+          "excerpt": "Il 13 dicembre arriva il più grande cambio d'orario da tempo: la 4 diventa 5, la 12 diventa 3 e la 19 viene integrata nelle linee 8 e 9.",
+          "date": "2026-11-11T07:24:28.627Z"
+        },
         {
           "title": "Proroga NAV Kita fino al 30 giugno 2030 nel Canton Lucerna",
           "url": "/articoli-lucerna/nav-kita-proroga-fino-2030/",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/lucerna-scuole-certificati-medici/",
           "excerpt": "Durante la stagione influenzale, le direzioni scolastiche richiederanno il certificato medico solo in presenza di dubbi fondati sulle assenze degli alunni.",
           "date": "2026-11-03T01:05:01.707Z"
-        },
-        {
-          "title": "Votazione credito per nuovo centro di sicurezza a Rothenburg",
-          "url": "/articoli-lucerna/centro-sicurezza-rothenburg/",
-          "excerpt": "L'elettorato lucernese voterà alla fine del mese sul credito di 276 milioni di CHF per il centro di sicurezza.",
-          "date": "2026-11-03T00:11:08.711Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-07T10:30:49.335Z"
+      "updatedAt": "2026-11-11T07:33:34.935Z"
     },
     "en": {
       "canton": "LU",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-06T14:35:31.386Z"
+          "updatedAt": "2026-11-10T15:13:39.066Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerne: the bus network changes on December 13, 2026",
+          "url": "/en/lucerne-articles/lucerne-bus-timetable-change/",
+          "excerpt": "On December 13, the biggest schedule change in a long time arrives: the 4 becomes 5, the 12 becomes 3, and the 19 is integrated into lines 8 and 9.",
+          "date": "2026-11-11T07:24:28.627Z"
+        },
         {
           "title": "Extension of NAV Kita until June 30, 2030, in the Canton of Lucerne",
           "url": "/en/lucerne-articles/nav-kita-extension-until-2030/",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/lucerne-schools-medical-certificates/",
           "excerpt": "During flu season, school administrations will require a medical certificate only when there are well-founded doubts about students' absences.",
           "date": "2026-11-03T01:05:01.707Z"
-        },
-        {
-          "title": "Credit vote for new security center in Rothenburg",
-          "url": "/en/lucerne-articles/rothenburg-security-center/",
-          "excerpt": "The Lucerne electorate will vote at the end of the month on the CHF 276 million credit for the security centre.",
-          "date": "2026-11-03T00:11:08.711Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-07T10:30:49.335Z"
+      "updatedAt": "2026-11-11T07:33:34.935Z"
     },
     "de": {
       "canton": "LU",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-06T14:35:31.386Z"
+          "updatedAt": "2026-11-10T15:13:39.066Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Luzern: Am 13. Dezember 2026 ändert sich das Busnetz",
+          "url": "/de/luzern-artikel/luzern-fahrplanwechsel-bus/",
+          "excerpt": "Am 13. Dezember kommt der größte Fahrplanwechsel seit Langem: Die 4 wird zur 5, die 12 zur 3, und die 19 wird in die Linien 8 und 9 integriert.",
+          "date": "2026-11-11T07:24:28.627Z"
+        },
         {
           "title": "Verlängerung des NAV Kita bis zum 30. Juni 2030 im Kanton Luzern",
           "url": "/de/luzern-artikel/nav-kita-verlangerung-bis-2030/",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/luzern-schulen-arztzeugnisse/",
           "excerpt": "Während der Grippesaison werden die Schulleitungen ein ärztliches Attest nur verlangen, wenn begründete Zweifel an den Absenzen der Schülerinnen und Schüler bestehen.",
           "date": "2026-11-03T01:05:01.707Z"
-        },
-        {
-          "title": "Abstimmung über den Kredit für ein neues Sicherheitszentrum in Rothenburg",
-          "url": "/de/luzern-artikel/sicherheitszentrum-rothenburg/",
-          "excerpt": "Die Luzerner Stimmberechtigten werden Ende des Monats über den Kredit von 276 Millionen CHF für das Sicherheitszentrum abstimmen.",
-          "date": "2026-11-03T00:11:08.711Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-07T10:30:49.335Z"
+      "updatedAt": "2026-11-11T07:33:34.935Z"
     },
     "fr": {
       "canton": "LU",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-06T14:35:31.386Z"
+          "updatedAt": "2026-11-10T15:13:39.066Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerne : le 13 décembre 2026, le réseau de bus change",
+          "url": "/fr/articles-lucerne/lucerne-changement-horaires-bus/",
+          "excerpt": "Le 13 décembre, le plus grand changement d'horaire depuis longtemps arrive : la 4 devient la 5, la 12 devient la 3 et la 19 est intégrée aux lignes 8 et 9.",
+          "date": "2026-11-11T07:24:28.627Z"
+        },
         {
           "title": "Prolongation du NAV Kita jusqu'au 30 juin 2030 dans le canton de Lucerne",
           "url": "/fr/articles-lucerne/nav-kita-prolongation-jusqua-2030/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/lucerne-ecoles-certificats-medicaux/",
           "excerpt": "Durant la saison grippale, les directions des écoles ne demanderont un certificat médical qu'en présence de doutes fondés concernant les absences des élèves.",
           "date": "2026-11-03T01:05:01.707Z"
-        },
-        {
-          "title": "Votation sur le crédit pour le nouveau centre de sécurité à Rothenburg",
-          "url": "/fr/articles-lucerne/centre-securite-rothenburg/",
-          "excerpt": "L'électorat lucernois votera à la fin du mois sur le crédit de 276 millions de CHF pour le centre de sécurité.",
-          "date": "2026-11-03T00:11:08.711Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-07T10:30:49.335Z"
+      "updatedAt": "2026-11-11T07:33:34.935Z"
     }
   }
 }

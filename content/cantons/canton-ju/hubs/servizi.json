@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "b756cb0dbded906b47a496f6bae26de840a25e4fe470074e2d350a120954349e",
+  "updatedAt": "2026-11-11T07:33:34.935Z",
+  "contentHash": "bbb4306be3b2f39ffb202aa8dc1b84a6b1b2cdd5da57a10010bacce1fd81e357",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -76,11 +76,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-10T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-11T17:30:00.000Z"
             },
             {
@@ -92,6 +87,11 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-11-13T17:30:00.000Z"
+            },
+            {
+              "label": "Sun Store Milliet Gare",
+              "detail": "Porrentruy, Ajoie",
+              "date": "2026-11-14T07:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -188,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T07:33:34.935Z"
     },
     "en": {
       "canton": "JU",
@@ -237,11 +237,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-10T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-11T17:30:00.000Z"
             },
             {
@@ -253,6 +248,11 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-11-13T17:30:00.000Z"
+            },
+            {
+              "label": "Sun Store Milliet Gare",
+              "detail": "Porrentruy, Ajoie",
+              "date": "2026-11-14T07:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -345,7 +345,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T07:33:34.935Z"
     },
     "de": {
       "canton": "JU",
@@ -394,11 +394,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-10T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-11T17:30:00.000Z"
             },
             {
@@ -410,6 +405,11 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-11-13T17:30:00.000Z"
+            },
+            {
+              "label": "Sun Store Milliet Gare",
+              "detail": "Porrentruy, Ajoie",
+              "date": "2026-11-14T07:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -502,7 +502,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T07:33:34.935Z"
     },
     "fr": {
       "canton": "JU",
@@ -551,11 +551,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-10T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-11T17:30:00.000Z"
             },
             {
@@ -567,6 +562,11 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-11-13T17:30:00.000Z"
+            },
+            {
+              "label": "Sun Store Milliet Gare",
+              "detail": "Porrentruy, Ajoie",
+              "date": "2026-11-14T07:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -655,7 +655,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T07:33:34.935Z"
     }
   }
 }

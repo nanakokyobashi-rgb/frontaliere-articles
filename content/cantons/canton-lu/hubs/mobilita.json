@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "5c44f75da1b58ad1f92af9f73e1b6180addc6e23f9df6e0c29b67551a6859313",
+  "updatedAt": "2026-11-11T07:33:34.935Z",
+  "contentHash": "5731a9b13dd899990ded1bcbfb0c13f56bd693b246c6af5a41f4e292337f2573",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -138,6 +138,12 @@
           "date": "2026-10-31T11:51:39.474Z"
         },
         {
+          "title": "Lucerna: il 13 dicembre 2026 cambia la rete bus",
+          "url": "/articoli-lucerna/cambio-orari-bus-lucerna/",
+          "excerpt": "Il 13 dicembre arriva il più grande cambio d'orario da tempo: la 4 diventa 5, la 12 diventa 3 e la 19 viene integrata nelle linee 8 e 9.",
+          "date": "2026-11-11T07:24:28.627Z"
+        },
+        {
           "title": "Tifosi Lucerna a Lugano: strade chiuse e traffico",
           "url": "/articoli-frontaliere/tifosi-lucerna-lugano-traffico/",
           "excerpt": "Partita alle 18 allo stadio di Cornaredo.",
@@ -160,12 +166,6 @@
           "url": "/articoli-svizzera/sistema-scolastico-canton-lucerna-iscrizione-e-cicli/",
           "excerpt": "Informati sui cicli di scuola, età di iscrizione e calendario scolastico per il Cantone di Lucerna.",
           "date": "2026-08-14T02:37:30.479Z"
-        },
-        {
-          "title": "Lucerna supera Zugo: nuovo paradiso fiscale per le imprese",
-          "url": "/articoli-frontaliere/lucerna-paradiso-fiscale-frontalieri/",
-          "excerpt": "Lucerna riduce l'imposta sugli utili al 11,66%, superando Zugo. Impatto sui frontalieri e confronto con l'UE.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -179,7 +179,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T07:33:34.935Z"
     },
     "en": {
       "canton": "LU",
@@ -300,6 +300,12 @@
           "date": "2026-10-31T11:51:39.474Z"
         },
         {
+          "title": "Lucerne: the bus network changes on December 13, 2026",
+          "url": "/en/lucerne-articles/lucerne-bus-timetable-change/",
+          "excerpt": "On December 13, the biggest schedule change in a long time arrives: the 4 becomes 5, the 12 becomes 3, and the 19 is integrated into lines 8 and 9.",
+          "date": "2026-11-11T07:24:28.627Z"
+        },
+        {
           "title": "Lucerne fans in Lugano: roads closed and traffic",
           "url": "/en/cross-border-articles/lucerne-fans-in-lugano-roads-closed-and-traffic/",
           "date": "2026-10-08T11:31:48.408Z"
@@ -320,12 +326,6 @@
           "url": "/en/swiss-articles/lucerne-school-system-enrollment-and-cycles/",
           "excerpt": "Find out about the school cycles, enrolment age and school calendar for the Canton of Lucerne.",
           "date": "2026-08-14T02:37:30.479Z"
-        },
-        {
-          "title": "Lucerne overtakes Zug: new tax haven for businesses",
-          "url": "/en/cross-border-articles/lucerne-new-swiss-tax-haven/",
-          "excerpt": "Lucerne reduces corporate tax to 11.66%, surpassing Zug. Impact on cross-border workers and comparison with the EU.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -339,7 +339,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T07:33:34.935Z"
     },
     "de": {
       "canton": "LU",
@@ -460,6 +460,12 @@
           "date": "2026-10-31T11:51:39.474Z"
         },
         {
+          "title": "Luzern: Am 13. Dezember 2026 ändert sich das Busnetz",
+          "url": "/de/luzern-artikel/luzern-fahrplanwechsel-bus/",
+          "excerpt": "Am 13. Dezember kommt der größte Fahrplanwechsel seit Langem: Die 4 wird zur 5, die 12 zur 3, und die 19 wird in die Linien 8 und 9 integriert.",
+          "date": "2026-11-11T07:24:28.627Z"
+        },
+        {
           "title": "Luzern-Fans in Lugano: gesperrte Straßen und Verkehr",
           "url": "/de/grenzgaenger-artikel/luzern-fans-in-lugano-gesperrte-stra-en-und-verkehr/",
           "date": "2026-10-08T11:31:48.408Z"
@@ -480,12 +486,6 @@
           "url": "/de/schweiz-artikel/kantonales-schulsystem-luzern-einschreibung-und-zyklen/",
           "excerpt": "Informieren Sie sich über die Schulzyklen, das Einschreibealter und den Schulkalender für den Kanton Luzern.",
           "date": "2026-08-14T02:37:30.479Z"
-        },
-        {
-          "title": "Luzern überholt Zug: Neuer Steuerparadies für Unternehmen",
-          "url": "/de/grenzgaenger-artikel/luzern-neuer-steuerparadies-schweiz/",
-          "excerpt": "Luzern senkt die Gewinnsteuer auf 11,66%, überholt Zug. Auswirkungen auf Grenzgänger und Vergleich mit der EU.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -499,7 +499,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T07:33:34.935Z"
     },
     "fr": {
       "canton": "LU",
@@ -620,6 +620,12 @@
           "date": "2026-10-31T11:51:39.474Z"
         },
         {
+          "title": "Lucerne : le 13 décembre 2026, le réseau de bus change",
+          "url": "/fr/articles-lucerne/lucerne-changement-horaires-bus/",
+          "excerpt": "Le 13 décembre, le plus grand changement d'horaire depuis longtemps arrive : la 4 devient la 5, la 12 devient la 3 et la 19 est intégrée aux lignes 8 et 9.",
+          "date": "2026-11-11T07:24:28.627Z"
+        },
+        {
           "title": "Supporters de Lucerne à Lugano : routes fermées et trafic",
           "url": "/fr/articles-frontalier/supporters-de-lucerne-a-lugano-routes-fermees-et-trafic/",
           "excerpt": "Match à 18 h au stade de Cornaredo.",
@@ -642,12 +648,6 @@
           "url": "/fr/articles-suisse/systeme-scolaire-canton-lucerne-inscription-et-cycles/",
           "excerpt": "Renseignez-vous sur les cycles scolaires, l'âge d'inscription et le calendrier scolaire pour le canton de Lucerne.",
           "date": "2026-08-14T02:37:30.479Z"
-        },
-        {
-          "title": "Lucerne dépasse Zoug: nouveau paradis fiscal pour les entreprises",
-          "url": "/fr/articles-frontalier/lucerne-nouveau-paradis-fiscal-suisse/",
-          "excerpt": "Lucerne réduit l'impôt sur les bénéfices à 11,66%, dépassant Zoug. Impact sur les frontaliers et comparaison avec l'UE.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -661,7 +661,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T07:33:34.935Z"
     }
   }
 }
