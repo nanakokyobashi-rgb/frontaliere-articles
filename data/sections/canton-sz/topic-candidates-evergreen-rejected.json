@@ -4,86 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.nau.ch/politik/regional/schwyzer-parlamentskommission-will-steuersenkung-fur-unternehmen-67198912": {
-      "section": "canton-sz",
-      "ts": 1794136943335
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/glp-luzern-sagt-nein-zur-digitalisierungsinitiative-art-1730969": {
-      "section": "canton-sz",
-      "ts": 1794137148380
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/altdorf-gemeindeversammlung-mit-budget-2027-und-wahlen-art-1730713": {
-      "section": "canton-sz",
-      "ts": 1794142147207
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/villa-unterer-frauenstein-in-zug-die-wichtigsten-fragen-zur-abstimmung-art-1730907": {
-      "section": "canton-sz",
-      "ts": 1794142156541
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/schweizer-firmen-schlecht-auf-cyberangriffe-vorbereitet-art-1730921": {
-      "section": "canton-sz",
-      "ts": 1794142581362
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/nidwalden-sozialhilfe-fuer-schutzstatus-s-wird-erst-spaeter-geprueft-art-1730928": {
-      "section": "canton-sz",
-      "ts": 1794168532459
-    },
-    "canton-sz::https://www.nau.ch/ort/schwyz/kanton-schwyz-kein-geld-aus-grundstuckgewinnsteuer-fur-gunstigen-wohnraum-67197422": {
-      "section": "canton-sz",
-      "ts": 1794170306105
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/gruene-uri-unterstuetzen-erhoehung-der-verkehrssteuer-art-1730845": {
-      "section": "canton-sz",
-      "ts": 1794170337850
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/kitas-luzern-es-gibt-weiterhin-mindestlohn-verstoesse-art-1730743": {
-      "section": "canton-sz",
-      "ts": 1794170369079
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/urner-doerfer-eth-modell-zeigt-belastung-durch-verkehr-art-1730930": {
-      "section": "canton-sz",
-      "ts": 1794170401485
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/fdp-altdorf-fordert-prioritaeten-bei-budget-und-ausgaben-art-1730844": {
-      "section": "canton-sz",
-      "ts": 1794170440646
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/ckw-chef-martin-schwab-raet-bauern-zu-solarstrom-nur-fuer-eigenverbrauch-art-1730900": {
-      "section": "canton-sz",
-      "ts": 1794170503109
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/immobilien-trumps-niederlage-ist-gut-fuer-schweizer-hausbesitzer-art-1730925": {
-      "section": "canton-sz",
-      "ts": 1794170564341
-    },
-    "canton-sz::https://www.marchanzeiger.ch/tnad/welhome-immobilien": {
-      "section": "canton-sz",
-      "ts": 1794181533382
-    },
-    "canton-sz::https://www.hoefner.ch/tnad/welhome-immobilien": {
-      "section": "canton-sz",
-      "ts": 1794181557963
-    },
-    "canton-sz::https://www.einsiedleranzeiger.ch/2026/11/06/kinderparlament-diskutiert-ueber-kinderrechte": {
-      "section": "canton-sz",
-      "ts": 1794181577728
-    },
-    "canton-sz::https://www.hoefner.ch/tnad/12536cleverpensionierung-pl-20261108-2051-025799": {
-      "section": "canton-sz",
-      "ts": 1794194135022
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/unterschaechen-rene-schuler-uebernimmt-das-gemeindepraesidium-art-1730899": {
-      "section": "canton-sz",
-      "ts": 1794227613310
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/luzerner-pensionskasse-im-fokus-von-fdp-mitte-und-svp-art-1731080": {
-      "section": "canton-sz",
-      "ts": 1794227622897
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/geschaefte-stauen-sich-im-luzerner-kantonsrat-art-1731092": {
-      "section": "canton-sz",
-      "ts": 1794227632605
-    },
     "canton-sz::https://www.keystone-sda.ch/20261109145048753194158159026": {
       "section": "canton-sz",
       "ts": 1794271300286
@@ -91,6 +11,10 @@
     "canton-sz::https://www.bote.ch/nachrichten/schwyz/mitte-sorgt-sich-um-platz-fuer-steuerbeamte-im-neuen-verwaltungszentrum-art-1731168": {
       "section": "canton-sz",
       "ts": 1794308958215
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/uri-nino-arnold-verlangt-antworten-zum-wohnungsmarkt-art-1731623": {
+      "section": "canton-sz",
+      "ts": 1794417926000
     }
   }
 }
