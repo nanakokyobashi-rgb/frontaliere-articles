@@ -63,6 +63,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.fuoriuscita-acido-liestal.title': 'Fuoriuscita di 1000 litri di acido a Liestal',
     'blog.article.fuoriuscita-acido-liestal.excerpt': 'Circa 1.000 litri di acido cloridrico sono fuoriusciti presso Dragon Pharma nell\'area industriale Oristal a Liestal; l\'allarme è cessato intorno alle 15.45.',
     'blog.article.fuoriuscita-acido-liestal.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.gdk-premi-piu-bassi.title': 'GDK chiede premi più bassi per EFAS dal 2028',
+    'blog.article.gdk-premi-piu-bassi.excerpt': 'La GDK chiede un cambio EFAS a costo neutro: dal 2028 i Cantoni finanzieranno anche le prestazioni ambulatoriali; i premi dovrebbero calare o crescere meno.',
+    'blog.article.gdk-premi-piu-bassi.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;

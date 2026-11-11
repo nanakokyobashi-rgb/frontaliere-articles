@@ -63,6 +63,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.fuoriuscita-acido-liestal.title': 'Spillage of 1000 liters of acid in Liestal',
     'blog.article.fuoriuscita-acido-liestal.excerpt': 'Approximately 1.000 liters of hydrochloric acid leaked at Dragon Pharma in the Oristal industrial area in Liestal; the alarm ended around 15.45.',
     'blog.article.fuoriuscita-acido-liestal.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.gdk-premi-piu-bassi.title': 'GDK calls for lower EFAS premiums starting in 2028',
+    'blog.article.gdk-premi-piu-bassi.excerpt': 'The GDK is calling for a cost-neutral change to EFAS: from 2028, the cantons will also finance outpatient services; premiums should fall or rise less.',
+    'blog.article.gdk-premi-piu-bassi.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;

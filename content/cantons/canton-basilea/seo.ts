@@ -782,6 +782,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-gdk-premi-piu-bassi': {
+    title: 'GDK chiede premi più bassi per EFAS dal 2028 | Frontaliere Ticino',
+    description: 'EFAS a costo neutro: dal 2028 i Cantoni finanzieranno anche le prestazioni ambulatoriali; la GDK chiede premi più bassi o aumenti meno marcati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, chiede, premi, bassi, efas',
+    ogTitle: 'EFAS dal 2028: la richiesta della GDK sui premi',
+    ogDescription: 'Dal 2028 i Cantoni finanzieranno anche le prestazioni ambulatoriali. La GDK chiede un passaggio EFAS a costo neutro, con premi più bassi o aumenti meno marcati per chi paga imposte e premi; Lukas Engelberger chiede trasparenza.',
+    canonicalPath: '/articoli-basilea/gdk-premi-piu-bassi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "GDK chiede premi più bassi per EFAS dal 2028",
+      "description": "EFAS a costo neutro: dal 2028 i Cantoni finanzieranno anche le prestazioni ambulatoriali; la GDK chiede premi più bassi o aumenti meno marcati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-gdk-premi-piu-bassi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-11T08:13:12+00:00",
+      "dateModified": "2026-11-11T08:13:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/gdk-premi-piu-bassi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

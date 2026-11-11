@@ -63,6 +63,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.fuoriuscita-acido-liestal.title': 'Austritt von 1000 Litern Säure in Liestal',
     'blog.article.fuoriuscita-acido-liestal.excerpt': 'Etwa 1.000 Liter Salzsäure sind bei Dragon Pharma im Industriegebiet Oristal in Liestal ausgetreten; der Alarm endete gegen 15.45 Uhr.',
     'blog.article.fuoriuscita-acido-liestal.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.gdk-premi-piu-bassi.title': 'GDK fordert niedrigere Prämien für EFAS ab 2028',
+    'blog.article.gdk-premi-piu-bassi.excerpt': 'Die GDK fordert einen kostenneutralen EFAS-Wechsel: Ab 2028 werden die Kantone auch ambulante Leistungen finanzieren; die Prämien sollten sinken oder weniger stark steigen.',
+    'blog.article.gdk-premi-piu-bassi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;
