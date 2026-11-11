@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T16:22:46.747Z",
-  "contentHash": "ecc86d85e2149689d496915bcdfd18f53ea54293ed301700588a07c39ae97863",
+  "updatedAt": "2026-11-11T21:52:52.345Z",
+  "contentHash": "2c264b6c99a896c86dc7286e1c7e4d4a5f2aa76c8e2ef7d9185d5b020ed46ef0",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "8",
+          "value": "7",
           "note": "segnalazioni aggiornate: 10 novembre 2026"
         },
         {
@@ -147,10 +147,10 @@
               "date": "2026-11-09T13:24:00.000Z"
             },
             {
-              "label": "Marktstrasse, Muri <-> Nordklosterrain, Muri Situazione: chiusa Causa: evento importante fiera Limitazione del traffico: nuova viabilità",
-              "value": "Chiusura",
-              "detail": "fine prevista: 11 novembre 2026",
-              "date": "2026-11-11T02:00:00.000Z"
+              "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 aprile 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-11T21:52:52.345Z"
     },
     "en": {
       "canton": "AG",
@@ -285,7 +285,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "8",
+          "value": "7",
           "note": "reports as of 10 November 2026"
         },
         {
@@ -395,10 +395,10 @@
               "date": "2026-11-09T13:24:00.000Z"
             },
             {
-              "label": "Marktstrasse, Muri <-> Nordklosterrain, Muri Situazione: chiusa Causa: evento importante fiera Limitazione del traffico: nuova viabilità",
-              "value": "Closure",
-              "detail": "until 11 November 2026",
-              "date": "2026-11-11T02:00:00.000Z"
+              "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
+              "value": "Roadworks",
+              "detail": "until 30 April 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -518,7 +518,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-11T21:52:52.345Z"
     },
     "de": {
       "canton": "AG",
@@ -533,7 +533,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "8",
+          "value": "7",
           "note": "Meldungen vom 10. November 2026"
         },
         {
@@ -643,10 +643,10 @@
               "date": "2026-11-09T13:24:00.000Z"
             },
             {
-              "label": "Marktstrasse, Muri <-> Nordklosterrain, Muri Sachlage: Strecke gesperrt Ursache: Veranstaltung Messe Verkehrsführung: veränderte Verkehrsführung",
-              "value": "Sperrung",
-              "detail": "bis 11. November 2026",
-              "date": "2026-11-11T02:00:00.000Z"
+              "label": "Langenthal <-> Zofingen zwischen Ortschaft Strengelbach und Ortschaft St. Urban Sachlage: Gefahr Ursache: Bauarbeiten",
+              "value": "Baustelle",
+              "detail": "bis 30. April 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -766,7 +766,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-11T21:52:52.345Z"
     },
     "fr": {
       "canton": "AG",
@@ -781,7 +781,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "8",
+          "value": "7",
           "note": "signalements au 10 novembre 2026"
         },
         {
@@ -891,10 +891,10 @@
               "date": "2026-11-09T13:24:00.000Z"
             },
             {
-              "label": "Marktstrasse, Muri <-> Nordklosterrain, Muri Situation: fermé Raison: événement majeur foire commerciale Gestion du trafic: nouveau plan de circulation",
-              "value": "Fermeture",
-              "detail": "jusqu’au 11 novembre 2026",
-              "date": "2026-11-11T02:00:00.000Z"
+              "label": "Langenthal <-> Zofingen entre Localité Strengelbach et Localité St. Urban Situation: danger Raison: travaux de construction",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 avril 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -1014,7 +1014,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-11T21:52:52.345Z"
     }
   }
 }
