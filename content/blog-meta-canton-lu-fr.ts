@@ -87,6 +87,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.nav-kita-proroga-fino-2030.title': 'Prolongation du NAV Kita jusqu\'au 30 juin 2030 dans le canton de Lucerne',
     'blog.article.nav-kita-proroga-fino-2030.excerpt': 'Le contrat-type de travail pour les Kitas est prolongé jusqu\'au 30 juin 2030 afin de surveiller les violations des salaires minimaux, avec des contrôles en 2025 et 2026.',
     'blog.article.nav-kita-proroga-fino-2030.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.cambio-orari-bus-lucerna.title': 'Lucerne : le 13 décembre 2026, le réseau de bus change',
+    'blog.article.cambio-orari-bus-lucerna.excerpt': 'Le 13 décembre, le plus grand changement d\'horaire depuis longtemps arrive : la 4 devient la 5, la 12 devient la 3 et la 19 est intégrée aux lignes 8 et 9.',
+    'blog.article.cambio-orari-bus-lucerna.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

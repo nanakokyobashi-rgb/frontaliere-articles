@@ -1099,6 +1099,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cambio-orari-bus-lucerna': {
+    title: 'Lucerna: il 13 dicembre 2026 cambia la rete bus',
+    description: 'Il 13 dicembre 2026 Lucerna cambia il sistema degli autobus: nuove numerazioni e percorrenze, con molte modifiche anche intorno alla stazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lucerna, dicembre, cambia, rete',
+    ogTitle: 'Lucerna: il 13 dicembre cambia la rete bus',
+    ogDescription: 'Il 13 dicembre 2026 arriva a Lucerna il più grande cambio d\'orario da tempo: la linea 4 diventa 5, la 12 diventa 3 e la 19 viene integrata nelle linee 8 e 9. Cambiano anche le percorrenze e molte cose intorno alla stazione.',
+    canonicalPath: '/articoli-lucerna/cambio-orari-bus-lucerna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lucerna: il 13 dicembre 2026 cambia la rete bus",
+      "description": "Il 13 dicembre 2026 Lucerna cambia il sistema degli autobus: nuove numerazioni e percorrenze, con molte modifiche anche intorno alla stazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cambio-orari-bus-lucerna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-11T07:24:28+00:00",
+      "dateModified": "2026-11-11T07:24:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/cambio-orari-bus-lucerna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

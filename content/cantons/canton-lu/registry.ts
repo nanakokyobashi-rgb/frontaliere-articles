@@ -315,4 +315,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'cambio-orari-bus-lucerna',
+ category: 'pratico',
+ date: '2026-11-11T07:24:28.627Z',
+ image: '/images/blog/article-cambio-orari-bus-lucerna.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

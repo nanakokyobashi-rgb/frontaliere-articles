@@ -87,6 +87,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.nav-kita-proroga-fino-2030.title': 'Extension of NAV Kita until June 30, 2030, in the Canton of Lucerne',
     'blog.article.nav-kita-proroga-fino-2030.excerpt': 'The Normalarbeitsvertrag for childcare centers has been extended until June 30, 2030, to monitor violations of minimum wages, with checks in 2025 and 2026.',
     'blog.article.nav-kita-proroga-fino-2030.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cambio-orari-bus-lucerna.title': 'Lucerne: the bus network changes on December 13, 2026',
+    'blog.article.cambio-orari-bus-lucerna.excerpt': 'On December 13, the biggest schedule change in a long time arrives: the 4 becomes 5, the 12 becomes 3, and the 19 is integrated into lines 8 and 9.',
+    'blog.article.cambio-orari-bus-lucerna.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

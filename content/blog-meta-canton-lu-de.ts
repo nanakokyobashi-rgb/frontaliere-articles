@@ -87,6 +87,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.nav-kita-proroga-fino-2030.title': 'Verlängerung des NAV Kita bis zum 30. Juni 2030 im Kanton Luzern',
     'blog.article.nav-kita-proroga-fino-2030.excerpt': 'Der Normalarbeitsvertrag für Kitas wird bis zum 30. Juni 2030 verlängert, um Verstöße gegen die Mindestlohnvorschriften zu überwachen, mit Kontrollen in den Jahren 2025 und 2026.',
     'blog.article.nav-kita-proroga-fino-2030.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cambio-orari-bus-lucerna.title': 'Luzern: Am 13. Dezember 2026 ändert sich das Busnetz',
+    'blog.article.cambio-orari-bus-lucerna.excerpt': 'Am 13. Dezember kommt der größte Fahrplanwechsel seit Langem: Die 4 wird zur 5, die 12 zur 3, und die 19 wird in die Linien 8 und 9 integriert.',
+    'blog.article.cambio-orari-bus-lucerna.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;
