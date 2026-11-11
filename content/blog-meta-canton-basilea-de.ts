@@ -66,6 +66,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.gdk-premi-piu-bassi.title': 'GDK fordert niedrigere Prämien für EFAS ab 2028',
     'blog.article.gdk-premi-piu-bassi.excerpt': 'Die GDK fordert einen kostenneutralen EFAS-Wechsel: Ab 2028 werden die Kantone auch ambulante Leistungen finanzieren; die Prämien sollten sinken oder weniger stark steigen.',
     'blog.article.gdk-premi-piu-bassi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.basilea-mozioni-climatizzazione.title': 'Basler Grosser Rat: Motionen zur Vereinfachung der Bewilligungen für Klimaanlagen',
+    'blog.article.basilea-mozioni-climatizzazione.excerpt': 'Der Grosse Rat hat zwei Motionen an die Regierung überwiesen: eine zur Abschaffung der Bewilligungspflicht und die andere für einfachere Verfahren gegen die Hitze.',
+    'blog.article.basilea-mozioni-climatizzazione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;
