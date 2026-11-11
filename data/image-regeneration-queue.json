@@ -5,11 +5,11 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (image vision fallback deadline exceeded)",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Generic synthetic editorial scene with a clear foreground commuter; no readable text, logos, or recognizable face.); gemini (Gemini im",
       "status": "failed",
-      "failureCount": 34,
+      "failureCount": 35,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-11T02:22:51.028Z"
+      "lastFailureAt": "2026-11-11T10:07:12.048Z"
     },
     {
       "articleId": "giovani-donne-stipendi-svizzera",
@@ -17,9 +17,9 @@
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
       "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 30,
+      "failureCount": 31,
       "requestedAt": "2026-10-19T03:17:12.439Z",
-      "lastFailureAt": "2026-11-11T02:24:51.306Z"
+      "lastFailureAt": "2026-11-11T10:09:12.365Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
@@ -27,9 +27,9 @@
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
       "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 29,
+      "failureCount": 30,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-11T02:28:20.346Z"
+      "lastFailureAt": "2026-11-11T10:11:12.846Z"
     }
   ]
 }
