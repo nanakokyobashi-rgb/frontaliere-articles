@@ -246,7 +246,7 @@ async function main() {
 
   if (!exists) {
     console.log('📂 registering today’s edition across the blog system…');
-    await registerArticleFiles(data); // NOT skipNews: a dated edition IS news
+    await registerArticleFiles(data, { allowRecurringDailyEdition: true }); // NOT skipNews: a dated edition IS news
     console.log('✅ registered.');
     return;
   }

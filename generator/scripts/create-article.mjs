@@ -612,6 +612,10 @@ import { familySourceTransitionState } from '../../scripts/lib/section-registry.
 import { NEWS_SITEMAP_WHITELIST } from '../data/news-sitemap-whitelist.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
 import { findContentDuplicate } from './lib/article-content-duplicate.mjs';
+import {
+  excludeDailyBriefArticles,
+  isDailyBriefArticleId,
+} from './lib/daily-brief-content.mjs';
 // Issue #313 — la disposizione di una cascata svuotata (differire vs gridare).
 // Estratta in un modulo perche' questo file non e' importabile da un test; vedi
 // l'intestazione di lib/exhaustion-disposition.mjs per la misura.
@@ -17039,7 +17043,10 @@ function preFlightHeadlineCheck(headline) {
   return { duplicate: false };
 }
 
-function checkForDuplicates(data, { localizedSlugs = true } = {}) {
+function checkForDuplicates(data, {
+  localizedSlugs = true,
+  allowRecurringDailyEdition = false,
+} = {}) {
   // Read existing article titles AND excerpts across ALL sections (frontaliere
   // + svizzera). Cross-section coverage (was: active section only) so an
   // evergreen already published in the sibling section is caught — the
@@ -17050,12 +17057,20 @@ function checkForDuplicates(data, { localizedSlugs = true } = {}) {
   const excerptMatches = [...blogItSrc.matchAll(metaFieldRegex('excerpt'))];
   titleMatches.forEach((m) => { m[2] = unescapeTsValue(m[2]); });
   excerptMatches.forEach((m) => { m[2] = unescapeTsValue(m[2]); });
-  const existingArticles = titleMatches.map(m => {
+  let existingArticles = titleMatches.map(m => {
     const id = m[1];
     const title = m[2];
     const exMatch = excerptMatches.find(e => e[1] === id);
     return { id, title, excerpt: exMatch ? exMatch[2] : '' };
   });
+
+  // A dated daily edition is intentionally similar to prior editions. Keep
+  // every other article in the comparison corpus: the opt-in is valid only
+  // for this producer's dated family, and exact IDs/slugs below still inspect
+  // the complete corpus.
+  if (allowRecurringDailyEdition && isDailyBriefArticleId(data.id)) {
+    existingArticles = excludeDailyBriefArticles(existingArticles);
+  }
 
   // Also check IDs for exact match (all sections — shared id/SEO/i18n namespace)
   const existingIds = getAllArticleIds();
@@ -22515,7 +22530,7 @@ export function buildArticlePublishedUrls(data) {
  * re-derive final URLs with their own (drift-prone) locale-prefix logic.
  *
  * @param {object} data
- * @param {{ skipRss?: boolean, skipNews?: boolean }} [opts]
+ * @param {{ skipRss?: boolean, skipNews?: boolean, allowRecurringDailyEdition?: boolean }} [opts]
  * @returns {Promise<{ slugs: Record<string, string>, publishedUrls: Record<string, string> }>}
  */
 /**
@@ -22742,11 +22757,14 @@ export async function registerArticleFiles(data, opts = {}) {
   // Secondary producers do not pass the primary path's Step 3a.2. Recheck
   // lexical and semantic duplicates here against the final repaired excerpt,
   // before the shared writer touches any published file.
+  const allowRecurringDailyEdition = opts.allowRecurringDailyEdition === true
+    && isDailyBriefArticleId(data.id);
   console.error('🔍 Verifica duplicati post-riparazione nel writer condiviso:');
-  checkForDuplicates(data);
+  checkForDuplicates(data, { allowRecurringDailyEdition });
   await checkSemanticNearDuplicate(data, {
     store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
     meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
+    ignoreNeighbor: allowRecurringDailyEdition ? isDailyBriefArticleId : undefined,
   });
   // Stessa ragione, stesso percorso condiviso: i quattro produttori secondari
   // (daily-brief, events-digest, border-wait-ranking, journalist) importano
