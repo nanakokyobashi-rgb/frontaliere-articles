@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-11-08T05:30:51.381Z",
-  "contentHash": "e1b43a05baeb1002a17132b22875054bc415588a21b944cbf37bca65b8b8e6cb",
+  "updatedAt": "2026-11-11T23:34:02.011Z",
+  "contentHash": "45b9e76e836d8c983966349be003b23ecd95358de86edf06f9a079a65b1e6881",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-07T13:30:35.165Z",
+      "updatedAt": "2026-11-10T15:13:39.066Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-10T15:13:39.066Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Uri: Jürg Janett nuovo capo di protezione e militare",
+          "url": "/articoli-uri/janett-protezione-uri/",
+          "excerpt": "Il Consiglio di Stato di Uri ha scelto il colonnello Jürg Janett per l'Ufficio della protezione della popolazione e militare e lo Stato maggiore cantonale.",
+          "date": "2026-11-11T23:29:16.716Z"
+        },
         {
           "title": "Peter Schuler sarà il nuovo presidente di Spiringen",
           "url": "/articoli-uri/presidenza-spiringen-schuler/",
@@ -82,12 +88,6 @@
           "url": "/articoli-uri/uri-progetto-cultura-integrazione/",
           "excerpt": "Il progetto «Netzwerk Kultur und Integration» durerà tre anni, con avvio previsto il 1° dicembre 2026, per facilitare l'accesso delle persone migranti alle offerte culturali urane.",
           "date": "2026-11-06T08:38:58.092Z"
-        },
-        {
-          "title": "Andermatt, piano di quartiere per il toro Max l'Uristier",
-          "url": "/articoli-uri/andermatt-piano-max-uristier/",
-          "excerpt": "Il piano Nätschen West è in partecipazione fino al 7 dicembre: Max l'Uristier misura 36 metri di lunghezza e 20 di altezza.",
-          "date": "2026-11-06T08:13:38.091Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-08T05:30:51.381Z"
+      "updatedAt": "2026-11-11T23:34:02.011Z"
     },
     "en": {
       "canton": "UR",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-10T15:13:39.066Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Uri: Jürg Janett new head of civil protection and military affairs",
+          "url": "/en/uri-articles/janett-population-protection-uri/",
+          "excerpt": "The Council of State of Uri has chosen Colonel Jürg Janett for the Office of Population and Military Protection and the Cantonal Staff.",
+          "date": "2026-11-11T23:29:16.716Z"
+        },
         {
           "title": "Peter Schuler will be the new president of Spiringen",
           "url": "/en/uri-articles/spiringen-municipal-president-schuler/",
@@ -169,12 +175,6 @@
           "url": "/en/uri-articles/uri-culture-integration-project/",
           "excerpt": "The “Netzwerk Kultur und Integration” project will last three years, with a planned start date of December 1, 2026, to facilitate migrants’ access to urban cultural offerings.",
           "date": "2026-11-06T08:38:58.092Z"
-        },
-        {
-          "title": "Andermatt, neighborhood plan for the bull Max l'Uristier",
-          "url": "/en/uri-articles/andermatt-max-wooden-bull-plan/",
-          "excerpt": "The Nätschen West plan is open for public consultation until December 7: Max l'Uristier is 36 meters long and 20 meters high.",
-          "date": "2026-11-06T08:13:38.091Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-08T05:30:51.381Z"
+      "updatedAt": "2026-11-11T23:34:02.011Z"
     },
     "de": {
       "canton": "UR",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-10T15:13:39.066Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Uri: Jürg Janett neuer Chef für Schutz und Militär",
+          "url": "/de/uri-artikel/janett-bevoelkerungsschutz-uri/",
+          "excerpt": "Der Regierungsrat von Uri hat Oberst Jürg Janett für das Amt für Bevölkerungsschutz und Militär sowie für den Kantonsstab gewählt.",
+          "date": "2026-11-11T23:29:16.716Z"
+        },
         {
           "title": "Peter Schuler wird der neue Präsident von Spiringen",
           "url": "/de/uri-artikel/spiringen-gemeindepraesident-schuler/",
@@ -256,12 +262,6 @@
           "url": "/de/uri-artikel/uri-kultur-integrationsprojekt/",
           "excerpt": "Das Projekt \"Netzwerk Kultur und Integration\" wird drei Jahre dauern, beginnend am 1. Dezember 2026, um Migranten den Zugang zu den kulturellen Angeboten von Uri zu erleichtern.",
           "date": "2026-11-06T08:38:58.092Z"
-        },
-        {
-          "title": "Andermatt, Quartierplan für den Stier Max l'Uristier",
-          "url": "/de/uri-artikel/andermatt-plan-holzstier-max/",
-          "excerpt": "Der Plan Nätschen West liegt bis zum 7. Dezember zur Mitwirkung auf: Max l'Uristier ist 36 Meter lang und 20 Meter hoch.",
-          "date": "2026-11-06T08:13:38.091Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-08T05:30:51.381Z"
+      "updatedAt": "2026-11-11T23:34:02.011Z"
     },
     "fr": {
       "canton": "UR",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-07T13:30:35.165Z"
+          "updatedAt": "2026-11-10T15:13:39.066Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Uri : Jürg Janett, nouveau chef de la protection et des affaires militaires",
+          "url": "/fr/articles-uri/janett-protection-population-uri/",
+          "excerpt": "Le Conseil d'État d'Uri a choisi le colonel Jürg Janett pour diriger l'Office de la protection de la population et des affaires militaires ainsi que l'état-major cantonal.",
+          "date": "2026-11-11T23:29:16.716Z"
+        },
         {
           "title": "Peter Schuler sera le nouveau président de Spiringen",
           "url": "/fr/articles-uri/spiringen-president-communal-schuler/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-uri/uri-projet-culture-integration/",
           "excerpt": "Le projet «Netzwerk Kultur und Integration» durera trois ans, avec un démarrage prévu le 1er décembre 2026, afin de faciliter l’accès des personnes migrantes aux offres culturelles urbaines.",
           "date": "2026-11-06T08:38:58.092Z"
-        },
-        {
-          "title": "Andermatt, plan de quartier pour le taureau Max l'Uristier",
-          "url": "/fr/articles-uri/andermatt-plan-taureau-bois/",
-          "excerpt": "Le plan Nätschen West est en consultation jusqu'au 7 décembre : Max l'Uristier mesure 36 mètres de long et 20 de haut.",
-          "date": "2026-11-06T08:13:38.091Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-08T05:30:51.381Z"
+      "updatedAt": "2026-11-11T23:34:02.011Z"
     }
   }
 }

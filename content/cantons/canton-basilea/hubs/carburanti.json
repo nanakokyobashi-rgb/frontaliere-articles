@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "carburanti",
-  "updatedAt": "2026-11-11T08:31:31.304Z",
-  "contentHash": "57b98619c4f0c037a78a835f07d73aa1303ae73b9d1ba7774f1ad4ea44807421",
+  "updatedAt": "2026-11-11T23:34:02.011Z",
+  "contentHash": "6a8a99984b3c3688aefcc558366997c9ddc3bfea3606c693da6e4c72ea8c4ec1",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Gran Consiglio Basilea: mozioni per semplificare autorizzazioni climatizzatori",
+          "url": "/articoli-basilea/basilea-mozioni-climatizzazione/",
+          "excerpt": "Il Gran Consiglio ha trasmesso due mozioni al governo: una per abolire l'obbligo di autorizzazione e l'altra per procedure più semplici contro il caldo.",
+          "date": "2026-11-11T22:52:50.384Z"
+        },
+        {
           "title": "GDK chiede premi più bassi per EFAS dal 2028",
           "url": "/articoli-basilea/gdk-premi-piu-bassi/",
           "excerpt": "La GDK chiede un cambio EFAS a costo neutro: dal 2028 i Cantoni finanzieranno anche le prestazioni ambulatoriali; i premi dovrebbero calare o crescere meno.",
@@ -106,12 +112,6 @@
           "url": "/articoli-basilea/sussidi-premi-basel-2027/",
           "excerpt": "Il Governo di Basilea Città adegua i contributi ai premi: +4,4% adulti, +4,9% bambini, +3,6% giovani adulti e circa CHF 243 milioni di spesa.",
           "date": "2026-11-03T14:31:24.255Z"
-        },
-        {
-          "title": "Baselland: 750 maiali abbattuti per polmonite enzootica",
-          "url": "/articoli-basilea/baselland-maiali-enzootica/",
-          "excerpt": "In un allevamento da ingrasso di Baselland 750 maiali sono stati abbattuti.",
-          "date": "2026-11-03T08:17:35.802Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-11T08:31:31.304Z"
+      "updatedAt": "2026-11-11T23:34:02.011Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Basel Grand Council: motions to simplify air conditioner permits",
+          "url": "/en/basel-articles/basel-ac-authorization-motions/",
+          "excerpt": "The Grand Council has submitted two motions to the government: one to abolish the authorization requirement and the other for simpler procedures to combat the heat.",
+          "date": "2026-11-11T22:52:50.384Z"
+        },
+        {
           "title": "GDK calls for lower EFAS premiums starting in 2028",
           "url": "/en/basel-articles/gdk-lower-efas-premiums/",
           "excerpt": "The GDK is calling for a cost-neutral change to EFAS: from 2028, the cantons will also finance outpatient services; premiums should fall or rise less.",
@@ -217,12 +223,6 @@
           "url": "/en/basel-articles/basel-2027-health-premium-subsidies/",
           "excerpt": "The Government of Basel-Stadt adjusts premium subsidies: +4.4% for adults, +4.9% for children, +3.6% for young adults and approximately CHF 243 million in expenditure.",
           "date": "2026-11-03T14:31:24.255Z"
-        },
-        {
-          "title": "Baselland: 750 pigs culled due to enzootic pneumonia",
-          "url": "/en/basel-articles/basel-landschaft-750-pigs-pneumonia/",
-          "excerpt": "At a pig-fattening farm in Baselland, 750 pigs were culled.",
-          "date": "2026-11-03T08:17:35.802Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-11T08:31:31.304Z"
+      "updatedAt": "2026-11-11T23:34:02.011Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Basler Grosser Rat: Motionen zur Vereinfachung der Bewilligungen für Klimaanlagen",
+          "url": "/de/basel-artikel/basel-klimaanlagen-mozioni/",
+          "excerpt": "Der Grosse Rat hat zwei Motionen an die Regierung überwiesen: eine zur Abschaffung der Bewilligungspflicht und die andere für einfachere Verfahren gegen die Hitze.",
+          "date": "2026-11-11T22:52:50.384Z"
+        },
+        {
           "title": "GDK fordert niedrigere Prämien für EFAS ab 2028",
           "url": "/de/basel-artikel/gdk-tiefere-efas-praemien/",
           "excerpt": "Die GDK fordert einen kostenneutralen EFAS-Wechsel: Ab 2028 werden die Kantone auch ambulante Leistungen finanzieren; die Prämien sollten sinken oder weniger stark steigen.",
@@ -328,12 +334,6 @@
           "url": "/de/basel-artikel/basel-2027-praemienverbilligung/",
           "excerpt": "Die Regierung von Basel-Stadt passt die Prämienbeiträge an: +4,4% für Erwachsene, +4,9% für Kinder, +3,6% für junge Erwachsene und rund CHF 243 Millionen Ausgaben.",
           "date": "2026-11-03T14:31:24.255Z"
-        },
-        {
-          "title": "Baselland: 750 Schweine wegen enzootischer Pneumonie gekeult",
-          "url": "/de/basel-artikel/baselland-750-schweine-pneumonie/",
-          "excerpt": "In einem Mastbetrieb in Baselland wurden 750 Schweine gekeult.",
-          "date": "2026-11-03T08:17:35.802Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-11T08:31:31.304Z"
+      "updatedAt": "2026-11-11T23:34:02.011Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Grand Conseil de Bâle : simplifier les autorisations climatiseurs",
+          "url": "/fr/articles-bale/basle-motions-climatisation/",
+          "excerpt": "Le Grand Conseil a transmis deux motions au gouvernement : l’une pour abolir l’obligation d’autorisation et l’autre pour des procédures plus simples contre la chaleur.",
+          "date": "2026-11-11T22:52:50.384Z"
+        },
+        {
           "title": "La GDK demande des primes moins élevées pour l’EFAS à partir de 2028",
           "url": "/fr/articles-bale/gdk-baisse-primes-efas/",
           "excerpt": "La GDK demande un changement de l’EFAS à coût neutre : à partir de 2028, les cantons financeront également les prestations ambulatoires ; les primes devraient baisser ou augmenter moins.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-bale/bale-2027-reduction-primes-maladie/",
           "excerpt": "Le Gouvernement de Bâle-Ville adapte les contributions aux primes : +4,4% pour les adultes, +4,9% pour les enfants, +3,6% pour les jeunes adultes et environ CHF 243 millions de dépenses.",
           "date": "2026-11-03T14:31:24.255Z"
-        },
-        {
-          "title": "Baselland : 750 porcs abattus pour cause de pneumonie enzootique",
-          "url": "/fr/articles-bale/bale-campagne-750-porcs-pneumonie/",
-          "excerpt": "Dans un élevage d’engraissement de Baselland, 750 porcs ont été abattus.",
-          "date": "2026-11-03T08:17:35.802Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-11T08:31:31.304Z"
+      "updatedAt": "2026-11-11T23:34:02.011Z"
     }
   }
 }

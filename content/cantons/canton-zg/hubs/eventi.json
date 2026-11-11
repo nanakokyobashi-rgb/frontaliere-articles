@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "73b1a0b61de0433d869abf4f1f0d5852b0eaf5cb60c0e855ec55296ca8d9ea98",
+  "updatedAt": "2026-11-11T23:34:02.011Z",
+  "contentHash": "fd1114175a948225d17193e511b6c886883215bd131b75d8b350fa6c6a0028ee",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T23:36:45.009Z",
+      "updatedAt": "2026-11-11T04:25:04.802Z",
       "keyFacts": 1
     },
     {
@@ -100,13 +100,18 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Öffentlicher Informationsanlass zu den Bebauungsplänen Äussere Lorzenallmend",
+              "date": "2026-11-12",
+              "url": "https://stadtzug.ch/de/news/2026/oktober-2026/oeffentlicher-informationsanlass-zu-den-bebauungsplaenen-aeussere-lorzenallmend"
+            },
             {
               "label": "Veranstaltung «Demenz im Blick»: Wiederholung aufgrund grosser Nachfrage",
               "date": "2026-10-19",
@@ -135,7 +140,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T23:34:02.011Z"
     },
     "en": {
       "canton": "ZG",
@@ -218,13 +223,18 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Öffentlicher Informationsanlass zu den Bebauungsplänen Äussere Lorzenallmend",
+              "date": "2026-11-12",
+              "url": "https://stadtzug.ch/de/news/2026/oktober-2026/oeffentlicher-informationsanlass-zu-den-bebauungsplaenen-aeussere-lorzenallmend"
+            },
             {
               "label": "Veranstaltung «Demenz im Blick»: Wiederholung aufgrund grosser Nachfrage",
               "date": "2026-10-19",
@@ -253,7 +263,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T23:34:02.011Z"
     },
     "de": {
       "canton": "ZG",
@@ -336,13 +346,18 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Öffentlicher Informationsanlass zu den Bebauungsplänen Äussere Lorzenallmend",
+              "date": "2026-11-12",
+              "url": "https://stadtzug.ch/de/news/2026/oktober-2026/oeffentlicher-informationsanlass-zu-den-bebauungsplaenen-aeussere-lorzenallmend"
+            },
             {
               "label": "Veranstaltung «Demenz im Blick»: Wiederholung aufgrund grosser Nachfrage",
               "date": "2026-10-19",
@@ -371,7 +386,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T23:34:02.011Z"
     },
     "fr": {
       "canton": "ZG",
@@ -454,13 +469,18 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Öffentlicher Informationsanlass zu den Bebauungsplänen Äussere Lorzenallmend",
+              "date": "2026-11-12",
+              "url": "https://stadtzug.ch/de/news/2026/oktober-2026/oeffentlicher-informationsanlass-zu-den-bebauungsplaenen-aeussere-lorzenallmend"
+            },
             {
               "label": "Veranstaltung «Demenz im Blick»: Wiederholung aufgrund grosser Nachfrage",
               "date": "2026-10-19",
@@ -489,7 +509,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T23:34:02.011Z"
     }
   }
 }
