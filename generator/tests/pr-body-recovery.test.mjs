@@ -389,9 +389,13 @@ test('sandbox prerequisites have bounded apt and AppArmor commands', () => {
   for (const option of [
     'Acquire::http::Timeout=15',
     'Acquire::https::Timeout=15',
-    'Acquire::Retries=2',
     'DPkg::Lock::Timeout=10',
   ]) assert.match(setup, new RegExp(option.replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  const retryMatch = setup.match(/Acquire::Retries=(\d+)(?=\s|$)/u);
+  assert.ok(retryMatch, 'apt retries must be configured');
+  const retryCount = Number(retryMatch[1]);
+  // Il gemello può restare a 2 su main mentre il trasporto porta 3.
+  assert.ok(retryCount >= 2 && retryCount <= 3, `apt retries fuori dalla finestra bounded: ${retryCount}`);
   assert.match(setup, /run_retried 'apt-get update' 45/);
   assert.match(setup, /run_retried 'apt-get install' 120/);
   assert.match(setup, /run_retried 'apparmor_parser' 10/);
