@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-10T11:58:53.708Z",
-  "contentHash": "5bfc8c4af593e6113bf82f4b2e3b3499fe58da4355b800a95be603478f54efd8",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "4c9864db9d073643b26a2083079f5825db305c2f8647f5aa46837c227642f779",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-09T22:46:21.435Z",
-      "keyFacts": 1
+      "updatedAt": "2026-11-10T23:46:40.154Z",
+      "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -36,9 +36,14 @@
           "note": "Hermance, settimana conclusa: 9 novembre 2026"
         },
         {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "5",
+          "note": "segnalazioni aggiornate: 10 novembre 2026"
+        },
+        {
           "label": "Cantieri attivi o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 9 novembre 2026"
+          "note": "segnalazioni aggiornate: 10 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -106,38 +111,56 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
+              "label": "A1 Lausanne -> Genève Svincolo autostradale Versoix Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.1",
+              "value": "Chiusura",
+              "detail": "fine prevista: 4 dicembre 2026",
+              "date": "2026-11-10T15:06:00.000Z"
+            },
+            {
+              "label": "A1a Diramazione Perly -> Etoile Svincolo autostradale La Praille-Carouge Situazione: uscita chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 17 novembre 2026",
+              "date": "2026-11-10T21:00:00.000Z"
+            },
+            {
+              "label": "A1a Ginevra-Lago Lemano -> Diramazione Le Vengeron tra Svincolo autostradale Ginevra-Lago Lemano E Raccordo autostradale Diramazione Le Vengeron Situazione: raccordo autostradale chiuso in entrata…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 27 novembre 2026",
+              "date": "2026-11-10T21:15:00.000Z"
+            },
+            {
+              "label": "A1a Ginevra-Lago Lemano -> Diramazione Le Vengeron Svincolo autostradale Ginevra-Lago Lemano Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 4 dicembre 2026",
+              "date": "2026-11-10T21:30:00.000Z"
+            },
+            {
+              "label": "A1a Diramazione Le Vengeron -> Ginevra-Lago Lemano tra Raccordo autostradale Diramazione Le Vengeron E Svincolo autostradale Ginevra-Lago Lemano Situazione: uscita chiusa cantiere, lunghezza [km] 0.9",
+              "value": "Chiusura",
+              "detail": "fine prevista: 4 dicembre 2026",
+              "date": "2026-11-10T21:30:00.000Z"
+            },
+            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Traffico",
-              "date": "2026-11-09T22:46:21.435Z",
+              "date": "2026-11-10T23:46:40.154Z",
               "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
               "value": "Traffico",
-              "date": "2026-11-09T22:46:21.435Z",
+              "date": "2026-11-10T23:46:40.154Z",
               "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Cantiere",
-              "date": "2026-11-09T22:46:21.435Z",
+              "date": "2026-11-10T23:46:40.154Z",
               "url": "https://www.ge.ch/node/45273"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
-              "value": "Cantiere",
-              "date": "2026-11-09T22:46:21.435Z",
-              "url": "https://www.ge.ch/node/45356"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
-              "value": "Cantiere",
-              "date": "2026-11-09T22:46:21.435Z",
-              "url": "https://www.ge.ch/node/45397"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -175,7 +198,7 @@
               "url": "https://www.ge.ch/node/45391"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -235,7 +258,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "GE",
@@ -249,9 +272,14 @@
           "note": "Hermance, week ending 9 November 2026"
         },
         {
+          "label": "Road closures in force or imminent",
+          "value": "5",
+          "note": "reports as of 10 November 2026"
+        },
+        {
           "label": "Roadworks active or imminent",
           "value": "3",
-          "note": "reports as of 9 November 2026"
+          "note": "reports as of 10 November 2026"
         }
       ],
       "dataBlocks": [
@@ -319,38 +347,56 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
+              "label": "A1 Lausanne -> Genève Svincolo autostradale Versoix Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.1",
+              "value": "Closure",
+              "detail": "until 4 December 2026",
+              "date": "2026-11-10T15:06:00.000Z"
+            },
+            {
+              "label": "A1a Diramazione Perly -> Etoile Svincolo autostradale La Praille-Carouge Situazione: uscita chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 17 November 2026",
+              "date": "2026-11-10T21:00:00.000Z"
+            },
+            {
+              "label": "A1a Ginevra-Lago Lemano -> Diramazione Le Vengeron tra Svincolo autostradale Ginevra-Lago Lemano E Raccordo autostradale Diramazione Le Vengeron Situazione: raccordo autostradale chiuso in entrata…",
+              "value": "Closure",
+              "detail": "until 27 November 2026",
+              "date": "2026-11-10T21:15:00.000Z"
+            },
+            {
+              "label": "A1a Ginevra-Lago Lemano -> Diramazione Le Vengeron Svincolo autostradale Ginevra-Lago Lemano Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Closure",
+              "detail": "until 4 December 2026",
+              "date": "2026-11-10T21:30:00.000Z"
+            },
+            {
+              "label": "A1a Diramazione Le Vengeron -> Ginevra-Lago Lemano tra Raccordo autostradale Diramazione Le Vengeron E Svincolo autostradale Ginevra-Lago Lemano Situazione: uscita chiusa cantiere, lunghezza [km] 0.9",
+              "value": "Closure",
+              "detail": "until 4 December 2026",
+              "date": "2026-11-10T21:30:00.000Z"
+            },
+            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Traffic",
-              "date": "2026-11-09T22:46:21.435Z",
+              "date": "2026-11-10T23:46:40.154Z",
               "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
               "value": "Traffic",
-              "date": "2026-11-09T22:46:21.435Z",
+              "date": "2026-11-10T23:46:40.154Z",
               "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Roadworks",
-              "date": "2026-11-09T22:46:21.435Z",
+              "date": "2026-11-10T23:46:40.154Z",
               "url": "https://www.ge.ch/node/45273"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
-              "value": "Roadworks",
-              "date": "2026-11-09T22:46:21.435Z",
-              "url": "https://www.ge.ch/node/45356"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
-              "value": "Roadworks",
-              "date": "2026-11-09T22:46:21.435Z",
-              "url": "https://www.ge.ch/node/45397"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -388,7 +434,7 @@
               "url": "https://www.ge.ch/node/45391"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -448,7 +494,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "GE",
@@ -462,9 +508,14 @@
           "note": "Hermance, Woche bis 9. November 2026"
         },
         {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "5",
+          "note": "Meldungen vom 10. November 2026"
+        },
+        {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "3",
-          "note": "Meldungen vom 9. November 2026"
+          "note": "Meldungen vom 10. November 2026"
         }
       ],
       "dataBlocks": [
@@ -532,38 +583,56 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
+              "label": "A1 Lausanne -> Genf Anschluss Versoix Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.1",
+              "value": "Sperrung",
+              "detail": "bis 4. Dezember 2026",
+              "date": "2026-11-10T15:06:00.000Z"
+            },
+            {
+              "label": "A1a Verzweigung Perly -> Etoile Anschluss La Praille-Carouge Sachlage: Ausfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 17. November 2026",
+              "date": "2026-11-10T21:00:00.000Z"
+            },
+            {
+              "label": "A1a Genf-Lac -> Verzweigung le Vengeron zwischen Anschluss Genf-Lac und Autobahndreieck Verzweigung le Vengeron Sachlage: Einfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 27. November 2026",
+              "date": "2026-11-10T21:15:00.000Z"
+            },
+            {
+              "label": "A1a Genf-Lac -> Verzweigung le Vengeron Anschluss Genf-Lac Sachlage: Einfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 4. Dezember 2026",
+              "date": "2026-11-10T21:30:00.000Z"
+            },
+            {
+              "label": "A1a Verzweigung le Vengeron -> Genf-Lac zwischen Autobahndreieck Verzweigung le Vengeron und Anschluss Genf-Lac Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.9",
+              "value": "Sperrung",
+              "detail": "bis 4. Dezember 2026",
+              "date": "2026-11-10T21:30:00.000Z"
+            },
+            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Verkehr",
-              "date": "2026-11-09T22:46:21.435Z",
+              "date": "2026-11-10T23:46:40.154Z",
               "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
               "value": "Verkehr",
-              "date": "2026-11-09T22:46:21.435Z",
+              "date": "2026-11-10T23:46:40.154Z",
               "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Baustelle",
-              "date": "2026-11-09T22:46:21.435Z",
+              "date": "2026-11-10T23:46:40.154Z",
               "url": "https://www.ge.ch/node/45273"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
-              "value": "Baustelle",
-              "date": "2026-11-09T22:46:21.435Z",
-              "url": "https://www.ge.ch/node/45356"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
-              "value": "Baustelle",
-              "date": "2026-11-09T22:46:21.435Z",
-              "url": "https://www.ge.ch/node/45397"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -601,7 +670,7 @@
               "url": "https://www.ge.ch/node/45391"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -661,7 +730,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "GE",
@@ -675,9 +744,14 @@
           "note": "Hermance, semaine jusqu’au 9 novembre 2026"
         },
         {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "5",
+          "note": "signalements au 10 novembre 2026"
+        },
+        {
           "label": "Chantiers actifs ou imminents",
           "value": "3",
-          "note": "signalements au 9 novembre 2026"
+          "note": "signalements au 10 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -745,38 +819,56 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
+              "label": "A1 Lausanne -> Genève Jonction autoroutière Versoix Situation: entrée fermée travaux, longueur [km] 0.1",
+              "value": "Fermeture",
+              "detail": "jusqu’au 4 décembre 2026",
+              "date": "2026-11-10T15:06:00.000Z"
+            },
+            {
+              "label": "A1a Echangeur de Perly -> Etoile Jonction autoroutière La Praille-Carouge Situation: sortie fermée travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 17 novembre 2026",
+              "date": "2026-11-10T21:00:00.000Z"
+            },
+            {
+              "label": "A1a Genève-Lac -> Echangeur du Vengeron entre Jonction autoroutière Genève-Lac et Echangeur Echangeur du Vengeron Situation: entrée fermée travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 27 novembre 2026",
+              "date": "2026-11-10T21:15:00.000Z"
+            },
+            {
+              "label": "A1a Genève-Lac -> Echangeur du Vengeron Jonction autoroutière Genève-Lac Situation: entrée fermée travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 4 décembre 2026",
+              "date": "2026-11-10T21:30:00.000Z"
+            },
+            {
+              "label": "A1a Echangeur du Vengeron -> Genève-Lac entre Echangeur Echangeur du Vengeron et Jonction autoroutière Genève-Lac Situation: sortie fermée travaux, longueur [km] 0.9",
+              "value": "Fermeture",
+              "detail": "jusqu’au 4 décembre 2026",
+              "date": "2026-11-10T21:30:00.000Z"
+            },
+            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Trafic",
-              "date": "2026-11-09T22:46:21.435Z",
+              "date": "2026-11-10T23:46:40.154Z",
               "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
               "value": "Trafic",
-              "date": "2026-11-09T22:46:21.435Z",
+              "date": "2026-11-10T23:46:40.154Z",
               "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "value": "Chantier",
-              "date": "2026-11-09T22:46:21.435Z",
+              "date": "2026-11-10T23:46:40.154Z",
               "url": "https://www.ge.ch/node/45273"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
-              "value": "Chantier",
-              "date": "2026-11-09T22:46:21.435Z",
-              "url": "https://www.ge.ch/node/45356"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
-              "value": "Chantier",
-              "date": "2026-11-09T22:46:21.435Z",
-              "url": "https://www.ge.ch/node/45397"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -814,7 +906,7 @@
               "url": "https://www.ge.ch/node/45391"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -874,7 +966,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

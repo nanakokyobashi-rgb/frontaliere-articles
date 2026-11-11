@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "pensioni",
-  "updatedAt": "2026-11-06T02:42:42.127Z",
-  "contentHash": "0a61ebc063e76e188deb55e875d5c249a30c674df7b7af33d5fca42cf6cfefb5",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "5e77356830f68add510a2ac84dfce80d8dc6c61e9f8c49132dbdcf2786910f80",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T13:31:40.660Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Des nouvelles règles pour le cumul emploi-retraite à partir de 2027",
+              "date": "2026-11-10",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18914"
+            },
+            {
               "label": "Une couverture prévoyance obligatoire pour les agents territoriaux d’ici 2029",
               "date": "2026-11-05",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19126"
@@ -159,14 +164,9 @@
               "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
               "date": "2026-10-15",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
-            },
-            {
-              "label": "Cour de Vessy inaugurée en fête",
-              "date": "2026-10-09",
-              "url": "https://www.cpeg.ch/immobilier/cour-de-vessy-inauguree-en-fete/"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -208,7 +208,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "GE",
@@ -317,6 +317,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Des nouvelles règles pour le cumul emploi-retraite à partir de 2027",
+              "date": "2026-11-10",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18914"
+            },
+            {
               "label": "Une couverture prévoyance obligatoire pour les agents territoriaux d’ici 2029",
               "date": "2026-11-05",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19126"
@@ -340,14 +345,9 @@
               "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
               "date": "2026-10-15",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
-            },
-            {
-              "label": "Cour de Vessy inaugurée en fête",
-              "date": "2026-10-09",
-              "url": "https://www.cpeg.ch/immobilier/cour-de-vessy-inauguree-en-fete/"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -389,7 +389,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "GE",
@@ -498,6 +498,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Des nouvelles règles pour le cumul emploi-retraite à partir de 2027",
+              "date": "2026-11-10",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18914"
+            },
+            {
               "label": "Une couverture prévoyance obligatoire pour les agents territoriaux d’ici 2029",
               "date": "2026-11-05",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19126"
@@ -521,14 +526,9 @@
               "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
               "date": "2026-10-15",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
-            },
-            {
-              "label": "Cour de Vessy inaugurée en fête",
-              "date": "2026-10-09",
-              "url": "https://www.cpeg.ch/immobilier/cour-de-vessy-inauguree-en-fete/"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -570,7 +570,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "GE",
@@ -679,6 +679,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Des nouvelles règles pour le cumul emploi-retraite à partir de 2027",
+              "date": "2026-11-10",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18914"
+            },
+            {
               "label": "Une couverture prévoyance obligatoire pour les agents territoriaux d’ici 2029",
               "date": "2026-11-05",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19126"
@@ -702,14 +707,9 @@
               "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
               "date": "2026-10-15",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
-            },
-            {
-              "label": "Cour de Vessy inaugurée en fête",
-              "date": "2026-10-09",
-              "url": "https://www.cpeg.ch/immobilier/cour-de-vessy-inauguree-en-fete/"
             }
           ],
-          "updatedAt": "2026-11-05T13:31:40.660Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -751,7 +751,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-06T02:42:42.127Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

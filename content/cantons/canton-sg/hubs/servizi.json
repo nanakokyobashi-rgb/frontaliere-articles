@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T11:58:53.708Z",
-  "contentHash": "1d93a40971945372a3032be4a999c3122c3bc9d77b8a364d5432791fadeb725a",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "5c1cb45b020e8df000f6643b410b0031c6aa9ff55cf33c3467cc7038bd7d335f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-09T22:22:33.694Z",
+      "updatedAt": "2026-11-10T19:49:08.581Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-10T02:51:12.262Z",
+      "updatedAt": "2026-11-10T21:55:47.516Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -80,7 +80,7 @@
           "items": [
             {
               "label": "SG3544",
-              "value": "4150 CHF",
+              "value": "4550 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-11T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6694"
@@ -102,7 +102,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-09T22:22:33.694Z"
+          "updatedAt": "2026-11-10T19:49:08.581Z"
         },
         {
           "id": "meteo",
@@ -112,11 +112,11 @@
             {
               "label": "St. Gallen",
               "value": "8 °C",
-              "detail": "oggi da 8 a 12 °C"
+              "detail": "oggi da 8 a 10 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -154,7 +154,7 @@
               "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "SG",
@@ -287,7 +287,7 @@
           "items": [
             {
               "label": "SG3544",
-              "value": "4,150 CHF",
+              "value": "4,550 CHF",
               "detail": "current bid",
               "date": "2026-11-11T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6694"
@@ -309,7 +309,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-09T22:22:33.694Z"
+          "updatedAt": "2026-11-10T19:49:08.581Z"
         },
         {
           "id": "meteo",
@@ -319,11 +319,11 @@
             {
               "label": "St. Gallen",
               "value": "8 °C",
-              "detail": "today from 8 to 12 °C"
+              "detail": "today from 8 to 10 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +361,7 @@
               "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "SG",
@@ -490,7 +490,7 @@
           "items": [
             {
               "label": "SG3544",
-              "value": "4’150 CHF",
+              "value": "4’550 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-11T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6694"
@@ -512,7 +512,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-09T22:22:33.694Z"
+          "updatedAt": "2026-11-10T19:49:08.581Z"
         },
         {
           "id": "meteo",
@@ -522,11 +522,11 @@
             {
               "label": "St. Gallen",
               "value": "8 °C",
-              "detail": "heute 8 bis 12 °C"
+              "detail": "heute 8 bis 10 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -564,7 +564,7 @@
               "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "SG",
@@ -693,7 +693,7 @@
           "items": [
             {
               "label": "SG3544",
-              "value": "4 150 CHF",
+              "value": "4 550 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-11T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6694"
@@ -715,7 +715,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-09T22:22:33.694Z"
+          "updatedAt": "2026-11-10T19:49:08.581Z"
         },
         {
           "id": "meteo",
@@ -725,11 +725,11 @@
             {
               "label": "St. Gallen",
               "value": "8 °C",
-              "detail": "aujourd’hui de 8 à 12 °C"
+              "detail": "aujourd’hui de 8 à 10 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -767,7 +767,7 @@
               "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

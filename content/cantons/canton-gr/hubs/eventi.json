@@ -4,17 +4,17 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "b2620513f2265cf5c59ad82d6382a25dd6533a40cd76d32d6e891d819b25ca62",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "874de2df73ca5f1cedb0f4f831b3c7486dc0eeebdcbbd7a8e7874d9a162883dc",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T01:31:51.087Z",
+      "updatedAt": "2026-11-10T23:36:45.009Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Morgengebet",
-              "detail": "Schiers",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/schiers/morgengebet_AkRAvd3"
+              "label": "MÜNSTERTALER BIBLIOTHEK – DAS GEDÄCHTNIS DES TALS",
+              "detail": "Chasa Jaura",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/this-that/valchava/muenster-valley-library-the-memory-of-the-valley_AtHsMuh"
             },
             {
-              "label": "Begegnungscafé",
-              "detail": "Chur",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/begegnungscafe-9/"
+              "label": "Rendez-vous am Mittag: Kulturpflanzen der Schweiz",
+              "detail": "B12 - Brandis 12, Chur",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-am-mittag-kulturpflanzen-der-schweiz/"
             },
             {
-              "label": "Kids-Treff: Gemeinsam Kochen und Essen",
-              "detail": "Arosa",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kids-treff-gemeinsam-kochen-und-essen/"
+              "label": "Café im Pfarrhaus",
+              "detail": "Seletta Chesa da Pravenda, Bever",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/cafe-im-pfarrhaus_A1HwkTa"
             },
             {
-              "label": "Roundabout",
-              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/schiers/roundabout_ALSRfV2"
+              "label": "Jugendtreff",
+              "detail": "Jugendhaus Stadt Chur, Chur",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/coire/jugendtreff_AWekfU2"
             },
             {
-              "label": "Konfunterricht",
-              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schiers/konfunterricht-gruppe-2_AeEfFkF"
+              "label": "Sgarella-Auftakt",
+              "detail": "Dorfplatz, Domat/Ems",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sgarella-auftakt/"
             },
             {
-              "label": "EHC Arosa vs. EHC Visp",
-              "detail": "EHC Arosa, Arosa",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ehc-arosa-vs-ehc-visp/"
+              "label": "roundabout-Streetdance",
+              "detail": "Turnhalle der Primarschule, Bever",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/roundabout-streetdance_AQX5DC3"
+            },
+            {
+              "label": "Woche der Religionen - Interreligiöses Podium",
+              "detail": "KulturPunkt, Chur",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woche-der-religionen-interreligioeses-podium/"
+            },
+            {
+              "label": "Kino Tschlin, «Calendar Girls»",
+              "detail": "KINO Tschlin",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kino-tschlin-calendar-girls/"
             },
             {
               "label": "ZUOZ GLOBE PLAYS- IMMERSIVE THEATER",
               "detail": "Lyceum Alpinum Zuoz, Zuoz — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zuoz-globe-plays-immersive-theater/"
             },
             {
               "label": "Fitness- und Yogakurse",
               "detail": "Hotel Schweizerhof — in corso, ultimo giorno: 30 novembre 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
-            },
-            {
-              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
-              "detail": "Val Surses: Savognin, Surses — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
-            },
-            {
-              "label": "Cinema Staziun Lavin - LE CITTA DI PIANURA",
-              "detail": "Cinema Staziun, Zernez — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -171,7 +171,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "GR",
@@ -192,69 +192,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Morgengebet",
-              "detail": "Schiers",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/schiers/morgengebet_AkRAvd3"
+              "label": "MÜNSTER VALLEY LIBRARY - THE MEMORY OF THE VALLEY",
+              "detail": "Chasa Jaura",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/this-that/valchava/muenster-valley-library-the-memory-of-the-valley_AtHsMuh"
             },
             {
-              "label": "Begegnungscafé",
-              "detail": "Chur",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/begegnungscafe-9/"
+              "label": "Rendez-vous am Mittag: Kulturpflanzen der Schweiz",
+              "detail": "B12 - Brandis 12, Chur",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-am-mittag-kulturpflanzen-der-schweiz/"
             },
             {
-              "label": "Kids-Treff: Gemeinsam Kochen und Essen",
-              "detail": "Arosa",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kids-treff-gemeinsam-kochen-und-essen/"
+              "label": "Café im Pfarrhaus",
+              "detail": "Seletta Chesa da Pravenda, Bever",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/cafe-im-pfarrhaus_A1HwkTa"
             },
             {
-              "label": "Roundabout",
-              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/schiers/roundabout_ALSRfV2"
+              "label": "Jugendtreff",
+              "detail": "Jugendhaus Stadt Chur, Chur",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/coire/jugendtreff_AWekfU2"
             },
             {
-              "label": "Konfunterricht",
-              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schiers/konfunterricht-gruppe-2_AeEfFkF"
+              "label": "Sgarella-Auftakt",
+              "detail": "Dorfplatz, Domat/Ems",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sgarella-auftakt/"
             },
             {
-              "label": "EHC Arosa vs. EHC Visp",
-              "detail": "EHC Arosa, Arosa",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ehc-arosa-vs-ehc-visp/"
+              "label": "roundabout-Streetdance",
+              "detail": "Turnhalle der Primarschule, Bever",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/roundabout-streetdance_AQX5DC3"
+            },
+            {
+              "label": "Woche der Religionen - Interreligiöses Podium",
+              "detail": "KulturPunkt, Chur",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woche-der-religionen-interreligioeses-podium/"
+            },
+            {
+              "label": "Kino Tschlin, «Calendar Girls»",
+              "detail": "KINO Tschlin",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kino-tschlin-calendar-girls/"
             },
             {
               "label": "ZUOZ GLOBE PLAYS- IMMERSIVE THEATER",
               "detail": "Lyceum Alpinum Zuoz, Zuoz — ongoing, last day: 11 November 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zuoz-globe-plays-immersive-theater/"
             },
             {
               "label": "Fitness and yoga classes",
               "detail": "Hotel Schweizerhof — ongoing, last day: 30 November 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
-            },
-            {
-              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
-              "detail": "Val Surses: Savognin, Surses — ongoing, last day: 14 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
-            },
-            {
-              "label": "Cinema Staziun Lavin - LE CITTA DI PIANURA",
-              "detail": "Cinema Staziun, Zernez — ongoing, last day: 14 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -267,7 +267,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -325,7 +325,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "GR",
@@ -346,69 +346,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Morgengebet",
-              "detail": "Schiers",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/schiers/morgengebet_AkRAvd3"
+              "label": "MÜNSTERTALER BIBLIOTHEK – DAS GEDÄCHTNIS DES TALS",
+              "detail": "Chasa Jaura",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/this-that/valchava/muenster-valley-library-the-memory-of-the-valley_AtHsMuh"
             },
             {
-              "label": "Begegnungscafé",
-              "detail": "Chur",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/begegnungscafe-9/"
+              "label": "Rendez-vous am Mittag: Kulturpflanzen der Schweiz",
+              "detail": "B12 - Brandis 12, Chur",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-am-mittag-kulturpflanzen-der-schweiz/"
             },
             {
-              "label": "Kids-Treff: Gemeinsam Kochen und Essen",
-              "detail": "Arosa",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kids-treff-gemeinsam-kochen-und-essen/"
+              "label": "Café im Pfarrhaus",
+              "detail": "Seletta Chesa da Pravenda, Bever",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/cafe-im-pfarrhaus_A1HwkTa"
             },
             {
-              "label": "Roundabout",
-              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/schiers/roundabout_ALSRfV2"
+              "label": "Jugendtreff",
+              "detail": "Jugendhaus Stadt Chur, Chur",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/coire/jugendtreff_AWekfU2"
             },
             {
-              "label": "Konfunterricht",
-              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schiers/konfunterricht-gruppe-2_AeEfFkF"
+              "label": "Sgarella-Auftakt",
+              "detail": "Dorfplatz, Domat/Ems",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sgarella-auftakt/"
             },
             {
-              "label": "EHC Arosa vs. EHC Visp",
-              "detail": "EHC Arosa, Arosa",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ehc-arosa-vs-ehc-visp/"
+              "label": "roundabout-Streetdance",
+              "detail": "Turnhalle der Primarschule, Bever",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/roundabout-streetdance_AQX5DC3"
+            },
+            {
+              "label": "Woche der Religionen - Interreligiöses Podium",
+              "detail": "KulturPunkt, Chur",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woche-der-religionen-interreligioeses-podium/"
+            },
+            {
+              "label": "Kino Tschlin, «Calendar Girls»",
+              "detail": "KINO Tschlin",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kino-tschlin-calendar-girls/"
             },
             {
               "label": "ZUOZ GLOBE PLAYS- IMMERSIVE THEATER",
               "detail": "Lyceum Alpinum Zuoz, Zuoz — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zuoz-globe-plays-immersive-theater/"
             },
             {
               "label": "Fitness- und Yogakurse",
               "detail": "Hotel Schweizerhof — läuft, letzter Tag: 30. November 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
-            },
-            {
-              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
-              "detail": "Val Surses: Savognin, Surses — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
-            },
-            {
-              "label": "Cinema Staziun Lavin - LE CITTA DI PIANURA",
-              "detail": "Cinema Staziun, Zernez — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -421,7 +421,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -479,7 +479,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "GR",
@@ -500,69 +500,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Morgengebet",
-              "detail": "Schiers",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/schiers/morgengebet_AkRAvd3"
+              "label": "MÜNSTERTALER BIBLIOTHEK – DAS GEDÄCHTNIS DES TALS",
+              "detail": "Chasa Jaura",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/this-that/valchava/muenster-valley-library-the-memory-of-the-valley_AtHsMuh"
             },
             {
-              "label": "Begegnungscafé",
-              "detail": "Chur",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/begegnungscafe-9/"
+              "label": "Rendez-vous am Mittag: Kulturpflanzen der Schweiz",
+              "detail": "B12 - Brandis 12, Chur",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-am-mittag-kulturpflanzen-der-schweiz/"
             },
             {
-              "label": "Kids-Treff: Gemeinsam Kochen und Essen",
-              "detail": "Arosa",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kids-treff-gemeinsam-kochen-und-essen/"
+              "label": "Café im Pfarrhaus",
+              "detail": "Seletta Chesa da Pravenda, Bever",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/cafe-im-pfarrhaus_A1HwkTa"
             },
             {
-              "label": "Roundabout",
-              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/schiers/roundabout_ALSRfV2"
+              "label": "Jugendtreff",
+              "detail": "Jugendhaus Stadt Chur, Chur",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/coire/jugendtreff_AWekfU2"
             },
             {
-              "label": "Fonds de Konfunterricht",
-              "detail": "Evang.-ref. Kirchgemeindehaus Schiers, Schiers",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schiers/konfunterricht-gruppe-2_AeEfFkF"
+              "label": "Sgarella-Auftakt",
+              "detail": "Dorfplatz, Domat/Ems",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sgarella-auftakt/"
             },
             {
-              "label": "EHC Arosa vs. EHC Visp",
-              "detail": "EHC Arosa, Arosa",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ehc-arosa-vs-ehc-visp/"
+              "label": "roundabout-Streetdance",
+              "detail": "Turnhalle der Primarschule, Bever",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/roundabout-streetdance_AQX5DC3"
+            },
+            {
+              "label": "Woche der Religionen - Interreligiöses Podium",
+              "detail": "KulturPunkt, Chur",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woche-der-religionen-interreligioeses-podium/"
+            },
+            {
+              "label": "Kino Tschlin, «Calendar Girls»",
+              "detail": "KINO Tschlin",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kino-tschlin-calendar-girls/"
             },
             {
               "label": "ZUOZ GLOBE PLAYS- IMMERSIVE THEATER",
               "detail": "Lyceum Alpinum Zuoz, Zuoz — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/zuoz-globe-plays-immersive-theater/"
             },
             {
               "label": "Fitness- und Yogakurse",
               "detail": "Hotel Schweizerhof — en cours, dernier jour : 30 novembre 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
-            },
-            {
-              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
-              "detail": "Val Surses: Savognin, Surses — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
-            },
-            {
-              "label": "Cinema Staziun Lavin - LE CITTA DI PIANURA",
-              "detail": "Cinema Staziun, Zernez — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cinema-staziun-lavin-le-citta-di-pianura/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -575,7 +575,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -633,7 +633,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

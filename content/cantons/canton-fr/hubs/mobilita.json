@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-10T11:58:53.708Z",
-  "contentHash": "9df3dfd537848edf65810c3709865fa617e3820633c44cdb9291decf8cbd50ee",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "04275439bb8f84f796b079a87d323bc069ca348bc5be764a4519552d0cde55ae",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-09T22:46:21.435Z",
+      "updatedAt": "2026-11-10T23:46:40.154Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "15",
-          "note": "segnalazioni aggiornate: 9 novembre 2026"
+          "value": "16",
+          "note": "segnalazioni aggiornate: 10 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "9",
-          "note": "segnalazioni aggiornate: 9 novembre 2026"
+          "value": "8",
+          "note": "segnalazioni aggiornate: 10 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -92,13 +92,28 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Bossonnens : la route cantonale de Vevey réaménagée pour améliorer la sécurité des usagers",
+              "date": "2026-11-10T11:07:01.000Z",
+              "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
+            },
+            {
+              "label": "Bossonnens: Sanierungsarbeiten auf der Kantonsstrasse von Vevey für mehr Sicherheit der Verkehrsteilnehmenden",
+              "date": "2026-11-10T11:07:01.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/bossonnens-sanierungsarbeiten-auf-der-kantonsstrasse-von-vevey-fuer-mehr-sicherheit-der-verkehrsteilnehmenden"
+            },
+            {
+              "label": "Restrictions de circulation dues aux manifestations",
+              "date": "2026-11-10T03:27:00.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
+            },
             {
               "label": "Système de comptage routier par capteur optique",
               "date": "2026-11-09T17:07:27.000Z",
@@ -113,24 +128,9 @@
               "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
               "date": "2026-11-06T09:03:15.000Z",
               "url": "https://www.fr.ch/de/rimu/news/neyruz-beginn-der-arbeiten-zur-verbesserung-der-verkehrssicherheit-auf-der-kantonsstrasse-zwischen-der-einfahrt-und-dem-dorfplatz"
-            },
-            {
-              "label": "Neyruz : lancement des travaux d’amélioration de la sécurité sur la route cantonale entre l’entrée et la place du village",
-              "date": "2026-11-06T09:03:15.000Z",
-              "url": "https://www.fr.ch/dime/actualites/neyruz-lancement-des-travaux-damelioration-de-la-securite-sur-la-route-cantonale-entre-lentree-et-la-place-du-village"
-            },
-            {
-              "label": "Einige Zwischenfälle und mehrere Verkehrsunfälle",
-              "date": "2026-11-01T09:10:00.000Z",
-              "url": "https://www.fr.ch/de/sjsd/pol/news/einige-zwischenfaelle-und-mehrere-verkehrsunfaelle"
-            },
-            {
-              "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
-              "date": "2026-10-28T13:30:52.000Z",
-              "url": "https://www.fr.ch/dime/actualites/mise-en-oeuvre-de-la-strategie-cantonale-de-developpement-durable-2021-2031-etat-davancement-2025"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "FR",
@@ -204,13 +204,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "15",
-          "note": "reports as of 9 November 2026"
+          "value": "16",
+          "note": "reports as of 10 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "9",
-          "note": "reports as of 9 November 2026"
+          "value": "8",
+          "note": "reports as of 10 November 2026"
         }
       ],
       "dataBlocks": [
@@ -269,13 +269,28 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Bossonnens : la route cantonale de Vevey réaménagée pour améliorer la sécurité des usagers",
+              "date": "2026-11-10T11:07:01.000Z",
+              "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
+            },
+            {
+              "label": "Bossonnens: Sanierungsarbeiten auf der Kantonsstrasse von Vevey für mehr Sicherheit der Verkehrsteilnehmenden",
+              "date": "2026-11-10T11:07:01.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/bossonnens-sanierungsarbeiten-auf-der-kantonsstrasse-von-vevey-fuer-mehr-sicherheit-der-verkehrsteilnehmenden"
+            },
+            {
+              "label": "Restrictions de circulation dues aux manifestations",
+              "date": "2026-11-10T03:27:00.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
+            },
             {
               "label": "Système de comptage routier par capteur optique",
               "date": "2026-11-09T17:07:27.000Z",
@@ -290,24 +305,9 @@
               "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
               "date": "2026-11-06T09:03:15.000Z",
               "url": "https://www.fr.ch/de/rimu/news/neyruz-beginn-der-arbeiten-zur-verbesserung-der-verkehrssicherheit-auf-der-kantonsstrasse-zwischen-der-einfahrt-und-dem-dorfplatz"
-            },
-            {
-              "label": "Neyruz : lancement des travaux d’amélioration de la sécurité sur la route cantonale entre l’entrée et la place du village",
-              "date": "2026-11-06T09:03:15.000Z",
-              "url": "https://www.fr.ch/dime/actualites/neyruz-lancement-des-travaux-damelioration-de-la-securite-sur-la-route-cantonale-entre-lentree-et-la-place-du-village"
-            },
-            {
-              "label": "Einige Zwischenfälle und mehrere Verkehrsunfälle",
-              "date": "2026-11-01T09:10:00.000Z",
-              "url": "https://www.fr.ch/de/sjsd/pol/news/einige-zwischenfaelle-und-mehrere-verkehrsunfaelle"
-            },
-            {
-              "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
-              "date": "2026-10-28T13:30:52.000Z",
-              "url": "https://www.fr.ch/dime/actualites/mise-en-oeuvre-de-la-strategie-cantonale-de-developpement-durable-2021-2031-etat-davancement-2025"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "FR",
@@ -381,13 +381,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "15",
-          "note": "Meldungen vom 9. November 2026"
+          "value": "16",
+          "note": "Meldungen vom 10. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "9",
-          "note": "Meldungen vom 9. November 2026"
+          "value": "8",
+          "note": "Meldungen vom 10. November 2026"
         }
       ],
       "dataBlocks": [
@@ -446,13 +446,28 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Bossonnens : la route cantonale de Vevey réaménagée pour améliorer la sécurité des usagers",
+              "date": "2026-11-10T11:07:01.000Z",
+              "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
+            },
+            {
+              "label": "Bossonnens: Sanierungsarbeiten auf der Kantonsstrasse von Vevey für mehr Sicherheit der Verkehrsteilnehmenden",
+              "date": "2026-11-10T11:07:01.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/bossonnens-sanierungsarbeiten-auf-der-kantonsstrasse-von-vevey-fuer-mehr-sicherheit-der-verkehrsteilnehmenden"
+            },
+            {
+              "label": "Restrictions de circulation dues aux manifestations",
+              "date": "2026-11-10T03:27:00.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
+            },
             {
               "label": "Système de comptage routier par capteur optique",
               "date": "2026-11-09T17:07:27.000Z",
@@ -467,24 +482,9 @@
               "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
               "date": "2026-11-06T09:03:15.000Z",
               "url": "https://www.fr.ch/de/rimu/news/neyruz-beginn-der-arbeiten-zur-verbesserung-der-verkehrssicherheit-auf-der-kantonsstrasse-zwischen-der-einfahrt-und-dem-dorfplatz"
-            },
-            {
-              "label": "Neyruz : lancement des travaux d’amélioration de la sécurité sur la route cantonale entre l’entrée et la place du village",
-              "date": "2026-11-06T09:03:15.000Z",
-              "url": "https://www.fr.ch/dime/actualites/neyruz-lancement-des-travaux-damelioration-de-la-securite-sur-la-route-cantonale-entre-lentree-et-la-place-du-village"
-            },
-            {
-              "label": "Einige Zwischenfälle und mehrere Verkehrsunfälle",
-              "date": "2026-11-01T09:10:00.000Z",
-              "url": "https://www.fr.ch/de/sjsd/pol/news/einige-zwischenfaelle-und-mehrere-verkehrsunfaelle"
-            },
-            {
-              "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
-              "date": "2026-10-28T13:30:52.000Z",
-              "url": "https://www.fr.ch/dime/actualites/mise-en-oeuvre-de-la-strategie-cantonale-de-developpement-durable-2021-2031-etat-davancement-2025"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,13 +558,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "15",
-          "note": "signalements au 9 novembre 2026"
+          "value": "16",
+          "note": "signalements au 10 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "9",
-          "note": "signalements au 9 novembre 2026"
+          "value": "8",
+          "note": "signalements au 10 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -623,13 +623,28 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Bossonnens : la route cantonale de Vevey réaménagée pour améliorer la sécurité des usagers",
+              "date": "2026-11-10T11:07:01.000Z",
+              "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
+            },
+            {
+              "label": "Bossonnens: Sanierungsarbeiten auf der Kantonsstrasse von Vevey für mehr Sicherheit der Verkehrsteilnehmenden",
+              "date": "2026-11-10T11:07:01.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/bossonnens-sanierungsarbeiten-auf-der-kantonsstrasse-von-vevey-fuer-mehr-sicherheit-der-verkehrsteilnehmenden"
+            },
+            {
+              "label": "Restrictions de circulation dues aux manifestations",
+              "date": "2026-11-10T03:27:00.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
+            },
             {
               "label": "Système de comptage routier par capteur optique",
               "date": "2026-11-09T17:07:27.000Z",
@@ -644,24 +659,9 @@
               "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
               "date": "2026-11-06T09:03:15.000Z",
               "url": "https://www.fr.ch/de/rimu/news/neyruz-beginn-der-arbeiten-zur-verbesserung-der-verkehrssicherheit-auf-der-kantonsstrasse-zwischen-der-einfahrt-und-dem-dorfplatz"
-            },
-            {
-              "label": "Neyruz : lancement des travaux d’amélioration de la sécurité sur la route cantonale entre l’entrée et la place du village",
-              "date": "2026-11-06T09:03:15.000Z",
-              "url": "https://www.fr.ch/dime/actualites/neyruz-lancement-des-travaux-damelioration-de-la-securite-sur-la-route-cantonale-entre-lentree-et-la-place-du-village"
-            },
-            {
-              "label": "Einige Zwischenfälle und mehrere Verkehrsunfälle",
-              "date": "2026-11-01T09:10:00.000Z",
-              "url": "https://www.fr.ch/de/sjsd/pol/news/einige-zwischenfaelle-und-mehrere-verkehrsunfaelle"
-            },
-            {
-              "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
-              "date": "2026-10-28T13:30:52.000Z",
-              "url": "https://www.fr.ch/dime/actualites/mise-en-oeuvre-de-la-strategie-cantonale-de-developpement-durable-2021-2031-etat-davancement-2025"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

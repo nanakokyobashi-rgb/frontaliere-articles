@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "f114df6ee69c9a3578f474da8e02592b287a0b838047387a6a5162ef900a8134",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "9f05e98d7a8b89d1cda5245bf83440b0beb61ac01020d865f6482ac4caa9e49e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T01:31:51.087Z",
+      "updatedAt": "2026-11-10T23:36:45.009Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "201",
+          "value": "200",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "label": "Konzert Jake Manzi live & Pie Night",
               "detail": "Kandersteg",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzert-jake-manzi-live-pie-night/"
             },
             {
-              "label": "Buch am Mittag - Open Science",
-              "detail": "Universitätsbibliothek Bern, Bern",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/buch-am-mittag-open-science/"
+              "label": "Sound and Dine",
+              "detail": "3775 Lenk im Simmental, Lenk",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
             },
             {
-              "label": "Führung: KP Heinrich",
-              "detail": "Festungswerk Hondrich - KP Heinrich",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/hondrich/fuehrung-kp-heinrich_A4ajEum"
+              "label": "Midi musique et mots 1",
+              "detail": "Nebia",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/biel-bienne/midi-musique-et-mots-1_AauhVXp"
             },
             {
-              "label": "Jahresvorspiel Musik Oberaargau",
-              "detail": "Stadttheater Langenthal, Langenthal",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/jahresvorspiel-musik-oberaargau_A8wVR9g"
+              "label": "Nachmittag für Seniorinnen und Senioren",
+              "detail": "Ref. Kirchgemeinde Diemtigen, Diemtigen",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nachmittag-fuer-seniorinnen-und-senioren/"
             },
             {
-              "label": "Ciné-Doc : Nicole Nicole",
-              "detail": "Cinématographe-Royal, Tavannes",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cine-doc-nicole-nicole-1/"
+              "label": "\"Gut in Schuss\". Sport e storia. Pista di partecipazione \"Peng\"",
+              "detail": "Schweizer Schützenmuseum",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/gut-in-schuss-sport-und-geschichte-mitmachspur-peng_ArsWa4y"
             },
             {
-              "label": "KIRK FLETCHER RHYTHM & BLUES",
-              "detail": "Marians Jazzroom",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kirk-fletcher-rhythm-und-blues_AGPb18Z"
+              "label": "Jugendtreff Modi*hus Bienzguet",
+              "detail": "Modi*hus Bienzguet",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
             },
             {
-              "label": "Supersuckers",
-              "detail": "OldCapitol, Langenthal",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/supersuckers_AvNaHdE"
+              "label": "Jugendtreff G23",
+              "detail": "Jugendhaus G23",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
             },
             {
               "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "Volkshaus - Maison du Peuple",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/biel-bienne/vivaldi-die-vier-jahreszeiten_AHQSbrP"
+              "detail": "Casino Bern, Bern",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/vivaldi-die-vier-jahreszeiten_AvffXdT"
             },
             {
-              "label": "moving moments",
-              "detail": "Sporthalle Ebnit, Saanen — in corso, ultimo giorno: 29 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
+              "label": "Jazz mit «Blossoming Songs»",
+              "detail": "Restaurant LA VIE",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jazz-mit-blossoming-songs_AgKvH5J"
             },
             {
-              "label": "Lake Thun Play Ship",
-              "detail": "Thunersee, Thun — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
+              "label": "Fasnachtseröffnung",
+              "detail": "Dorfplatz - Seeterrasse",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fasnachtseroeffnung/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "201",
+          "value": "200",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "label": "Konzert Jake Manzi live & Pie Night",
               "detail": "Kandersteg",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzert-jake-manzi-live-pie-night/"
             },
             {
-              "label": "Buch am Mittag - Open Science",
-              "detail": "Universitätsbibliothek Bern, Bern",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/buch-am-mittag-open-science/"
+              "label": "Sound and Dine",
+              "detail": "3775 Lenk im Simmental, Lenk",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
             },
             {
-              "label": "Führung: KP Heinrich",
-              "detail": "Festungswerk Hondrich - KP Heinrich",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/hondrich/fuehrung-kp-heinrich_A4ajEum"
+              "label": "Midi musique et mots 1",
+              "detail": "Nebia",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/biel-bienne/midi-musique-et-mots-1_AauhVXp"
             },
             {
-              "label": "Jahresvorspiel Musik Oberaargau",
-              "detail": "Stadttheater Langenthal, Langenthal",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/jahresvorspiel-musik-oberaargau_A8wVR9g"
+              "label": "Nachmittag für Seniorinnen und Senioren",
+              "detail": "Ref. Kirchgemeinde Diemtigen, Diemtigen",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nachmittag-fuer-seniorinnen-und-senioren/"
             },
             {
-              "label": "Ciné-Doc : Nicole Nicole",
-              "detail": "Cinématographe-Royal, Tavannes",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cine-doc-nicole-nicole-1/"
+              "label": "\"Gut in Schuss\". Sport and history. Participation track \"Peng\"",
+              "detail": "Schweizer Schützenmuseum",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/gut-in-schuss-sport-und-geschichte-mitmachspur-peng_ArsWa4y"
             },
             {
-              "label": "KIRK FLETCHER RHYTHM & BLUES",
-              "detail": "Marians Jazzroom",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kirk-fletcher-rhythm-und-blues_AGPb18Z"
+              "label": "Jugendtreff Modi*hus Bienzguet",
+              "detail": "Modi*hus Bienzguet",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
             },
             {
-              "label": "Supersuckers",
-              "detail": "OldCapitol, Langenthal",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/supersuckers_AvNaHdE"
+              "label": "Jugendtreff G23",
+              "detail": "Jugendhaus G23",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
             },
             {
               "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "Volkshaus - Maison du Peuple",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/biel-bienne/vivaldi-die-vier-jahreszeiten_AHQSbrP"
+              "detail": "Casino Bern, Bern",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/vivaldi-die-vier-jahreszeiten_AvffXdT"
             },
             {
-              "label": "moving moments",
-              "detail": "Sporthalle Ebnit, Saanen — ongoing, last day: 29 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
+              "label": "Jazz mit «Blossoming Songs»",
+              "detail": "Restaurant LA VIE",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jazz-mit-blossoming-songs_AgKvH5J"
             },
             {
-              "label": "Lake Thun Play Ship",
-              "detail": "Thunersee, Thun — ongoing, last day: 14 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
+              "label": "Fasnachtseröffnung",
+              "detail": "Dorfplatz - Seeterrasse",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fasnachtseroeffnung/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "201",
+          "value": "200",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "label": "Konzert Jake Manzi live & Pie Night",
               "detail": "Kandersteg",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzert-jake-manzi-live-pie-night/"
             },
             {
-              "label": "Buch am Mittag - Open Science",
-              "detail": "Universitätsbibliothek Bern, Bern",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/buch-am-mittag-open-science/"
+              "label": "Sound and Dine",
+              "detail": "3775 Lenk im Simmental, Lenk",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
             },
             {
-              "label": "Führung: KP Heinrich",
-              "detail": "Festungswerk Hondrich - KP Heinrich",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/hondrich/fuehrung-kp-heinrich_A4ajEum"
+              "label": "Midi musique et mots 1",
+              "detail": "Nebia",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/biel-bienne/midi-musique-et-mots-1_AauhVXp"
             },
             {
-              "label": "Jahresvorspiel Musik Oberaargau",
-              "detail": "Stadttheater Langenthal, Langenthal",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/jahresvorspiel-musik-oberaargau_A8wVR9g"
+              "label": "Nachmittag für Seniorinnen und Senioren",
+              "detail": "Ref. Kirchgemeinde Diemtigen, Diemtigen",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nachmittag-fuer-seniorinnen-und-senioren/"
             },
             {
-              "label": "Ciné-Doc : Nicole Nicole",
-              "detail": "Cinématographe-Royal, Tavannes",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cine-doc-nicole-nicole-1/"
+              "label": "\"Gut in Schuss\". Sport und Geschichte. Mitmachspur \"Peng\"",
+              "detail": "Schweizer Schützenmuseum",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/gut-in-schuss-sport-und-geschichte-mitmachspur-peng_ArsWa4y"
             },
             {
-              "label": "KIRK FLETCHER RHYTHM & BLUES",
-              "detail": "Marians Jazzroom",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kirk-fletcher-rhythm-und-blues_AGPb18Z"
+              "label": "Jugendtreff Modi*hus Bienzguet",
+              "detail": "Modi*hus Bienzguet",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
             },
             {
-              "label": "Supersuckers",
-              "detail": "OldCapitol, Langenthal",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/supersuckers_AvNaHdE"
+              "label": "Jugendtreff G23",
+              "detail": "Jugendhaus G23",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
             },
             {
               "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "Volkshaus - Maison du Peuple",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/biel-bienne/vivaldi-die-vier-jahreszeiten_AHQSbrP"
+              "detail": "Casino Bern, Bern",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/vivaldi-die-vier-jahreszeiten_AvffXdT"
             },
             {
-              "label": "BeMo - Bewegte Momente",
-              "detail": "Sporthalle Ebnit, Saanen — läuft, letzter Tag: 29. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
+              "label": "Jazz mit «Blossoming Songs»",
+              "detail": "Restaurant LA VIE",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jazz-mit-blossoming-songs_AgKvH5J"
             },
             {
-              "label": "Spieleschiff Thunersee",
-              "detail": "Thunersee, Thun — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
+              "label": "Fasnachtseröffnung",
+              "detail": "Dorfplatz - Seeterrasse",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fasnachtseroeffnung/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "201",
+          "value": "200",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "label": "Konzert Jake Manzi live & Pie Night",
               "detail": "Kandersteg",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzert-jake-manzi-live-pie-night/"
             },
             {
-              "label": "Buch am Mittag - Open Science",
-              "detail": "Universitätsbibliothek Bern, Bern",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/buch-am-mittag-open-science/"
+              "label": "Sound and Dine",
+              "detail": "3775 Lenk im Simmental, Lenk",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
             },
             {
-              "label": "Führung: KP Heinrich",
-              "detail": "Festungswerk Hondrich - KP Heinrich",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/hondrich/fuehrung-kp-heinrich_A4ajEum"
+              "label": "Midi musique et mots 1",
+              "detail": "Nebia",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/biel-bienne/midi-musique-et-mots-1_AauhVXp"
             },
             {
-              "label": "Jahresvorspiel Musik Oberaargau",
-              "detail": "Stadttheater Langenthal, Langenthal",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/jahresvorspiel-musik-oberaargau_A8wVR9g"
+              "label": "Nachmittag für Seniorinnen und Senioren",
+              "detail": "Ref. Kirchgemeinde Diemtigen, Diemtigen",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nachmittag-fuer-seniorinnen-und-senioren/"
             },
             {
-              "label": "Ciné-Doc : Nicole Nicole",
-              "detail": "Cinématographe-Royal, Tavannes",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cine-doc-nicole-nicole-1/"
+              "label": "\"Gut in Schuss\". Sport et histoire. Piste participative \"Peng\".",
+              "detail": "Schweizer Schützenmuseum",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/gut-in-schuss-sport-und-geschichte-mitmachspur-peng_ArsWa4y"
             },
             {
-              "label": "KIRK FLETCHER RHYTHM & BLUES",
-              "detail": "Marians Jazzroom",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kirk-fletcher-rhythm-und-blues_AGPb18Z"
+              "label": "Jugendtreff Modi*hus Bienzguet",
+              "detail": "Modi*hus Bienzguet",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
             },
             {
-              "label": "Supersuckers",
-              "detail": "OldCapitol, Langenthal",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/supersuckers_AvNaHdE"
+              "label": "Jugendtreff G23",
+              "detail": "Jugendhaus G23",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
             },
             {
               "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "Volkshaus - Maison du Peuple",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/biel-bienne/vivaldi-die-vier-jahreszeiten_AHQSbrP"
+              "detail": "Casino Bern, Bern",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/vivaldi-die-vier-jahreszeiten_AvffXdT"
             },
             {
-              "label": "des moments mouvementés",
-              "detail": "Sporthalle Ebnit, Saanen — en cours, dernier jour : 29 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
+              "label": "Jazz mit «Blossoming Songs»",
+              "detail": "Restaurant LA VIE",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jazz-mit-blossoming-songs_AgKvH5J"
             },
             {
-              "label": "Bateau ludique du lac de Thoune",
-              "detail": "Thunersee, Thun — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
+              "label": "Fasnachtseröffnung",
+              "detail": "Dorfplatz - Seeterrasse",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fasnachtseroeffnung/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

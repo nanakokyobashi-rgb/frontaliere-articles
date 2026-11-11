@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "fisco",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "a4bff3e67d2ec49a48264b7d9337bef459ac214c6114f77c8e9e24cbbad35194",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "b9976090ae02ee766ef7cf9bc23a749af0d180b74b2f44751f3766b8765ba85e",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -150,12 +150,17 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Phishing-Mails - angeblicher Absender ESTV",
+              "date": "2026-11-10",
+              "url": "https://ar.ch/verwaltung/departement-finanzen/steuerverwaltung/news-aus-der-steuerverwaltung/detail/news/phishing-mails-angeblicher-absender-estv/"
+            },
+            {
               "label": "Steigende Gesundheitskosten und weniger Steuereinnahmen belasten Voranschlag",
               "date": "2026-10-28",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/steigende-gesundheitskosten-und-weniger-steuereinnahmen-belasten-voranschlag/"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -231,7 +236,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -359,12 +364,17 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Phishing-Mails - angeblicher Absender ESTV",
+              "date": "2026-11-10",
+              "url": "https://ar.ch/verwaltung/departement-finanzen/steuerverwaltung/news-aus-der-steuerverwaltung/detail/news/phishing-mails-angeblicher-absender-estv/"
+            },
+            {
               "label": "Steigende Gesundheitskosten und weniger Steuereinnahmen belasten Voranschlag",
               "date": "2026-10-28",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/steigende-gesundheitskosten-und-weniger-steuereinnahmen-belasten-voranschlag/"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -440,7 +450,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -568,12 +578,17 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Phishing-Mails - angeblicher Absender ESTV",
+              "date": "2026-11-10",
+              "url": "https://ar.ch/verwaltung/departement-finanzen/steuerverwaltung/news-aus-der-steuerverwaltung/detail/news/phishing-mails-angeblicher-absender-estv/"
+            },
+            {
               "label": "Steigende Gesundheitskosten und weniger Steuereinnahmen belasten Voranschlag",
               "date": "2026-10-28",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/steigende-gesundheitskosten-und-weniger-steuereinnahmen-belasten-voranschlag/"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -649,7 +664,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -777,12 +792,17 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Phishing-Mails - angeblicher Absender ESTV",
+              "date": "2026-11-10",
+              "url": "https://ar.ch/verwaltung/departement-finanzen/steuerverwaltung/news-aus-der-steuerverwaltung/detail/news/phishing-mails-angeblicher-absender-estv/"
+            },
+            {
               "label": "Steigende Gesundheitskosten und weniger Steuereinnahmen belasten Voranschlag",
               "date": "2026-10-28",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/steigende-gesundheitskosten-und-weniger-steuereinnahmen-belasten-voranschlag/"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -858,7 +878,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

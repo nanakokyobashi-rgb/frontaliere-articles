@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "400fad359c4431fc6bb204029c745044f895f5bf6647186943cff9e3f8dabe86",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "e10dfce7b45b4beacfcf21b9188d4542b74831bc34ec1e530e6bebfb2b72c84f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T23:36:45.009Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "19",
+          "value": "20",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,27 +38,33 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "750 Jahre der Stiftskirche",
+              "detail": "La Collégiale de Neuchâtel, Neuchâtel — in corso, ultimo giorno: 10 dicembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/this-that/neuchatel/750-years-of-the-collegiate-church_AfG33R1"
+            },
+            {
               "label": "Secrets of the Abyss",
               "detail": "Secrets des Abysses, Neuchâtel — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
             },
             {
               "label": "Un parfum de Chocolat",
               "detail": "Boudry — in corso, ultimo giorno: 30 novembre 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
             },
             {
               "label": "Brunch + visite guidée",
               "detail": "Musée d'ethnographie, Neuchâtel — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
@@ -90,17 +96,11 @@
               "detail": "Le Landeron",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/quartetto-amoroso/"
-            },
-            {
-              "label": "Boulimy Comedy Mardy",
-              "detail": "Neuchâtel",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boulimy-comedy-mardy-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/neuchatel/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -128,7 +128,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +150,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "NE",
@@ -160,7 +160,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "19",
+          "value": "20",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,27 +171,33 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "750 Years of the Collegiate Church",
+              "detail": "La Collégiale de Neuchâtel, Neuchâtel — ongoing, last day: 10 December 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/this-that/neuchatel/750-years-of-the-collegiate-church_AfG33R1"
+            },
+            {
               "label": "Secrets of the Abyss",
               "detail": "Secrets des Abysses, Neuchâtel — ongoing, last day: 14 November 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
             },
             {
               "label": "Un parfum de Chocolat",
               "detail": "Boudry — ongoing, last day: 30 November 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
             },
             {
               "label": "Brunch + visite guidée",
               "detail": "Musée d'ethnographie, Neuchâtel — ongoing, last day: 15 November 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — ongoing, last day: 28 November 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
@@ -223,17 +229,11 @@
               "detail": "Le Landeron",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/quartetto-amoroso/"
-            },
-            {
-              "label": "Boulimy Comedy Mardy",
-              "detail": "Neuchâtel",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boulimy-comedy-mardy-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/neuchatel/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -261,7 +261,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -283,7 +283,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "NE",
@@ -293,7 +293,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "19",
+          "value": "20",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -304,27 +304,33 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "750 Jahre der Stiftskirche",
+              "detail": "La Collégiale de Neuchâtel, Neuchâtel — läuft, letzter Tag: 10. Dezember 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/this-that/neuchatel/750-years-of-the-collegiate-church_AfG33R1"
+            },
+            {
               "label": "Geheimnisse der Tiefsee",
               "detail": "Secrets des Abysses, Neuchâtel — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
             },
             {
               "label": "Un parfum de Chocolat",
               "detail": "Boudry — läuft, letzter Tag: 30. November 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
             },
             {
               "label": "Brunch + visite guidée",
               "detail": "Musée d'ethnographie, Neuchâtel — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
@@ -356,17 +362,11 @@
               "detail": "Le Landeron",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/quartetto-amoroso/"
-            },
-            {
-              "label": "Boulimy Comedy Mardy",
-              "detail": "Neuchâtel",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boulimy-comedy-mardy-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/neuenburg/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -394,7 +394,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -416,7 +416,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "NE",
@@ -426,7 +426,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "19",
+          "value": "20",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -437,27 +437,33 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "750 ans de la Collégiale",
+              "detail": "La Collégiale de Neuchâtel, Neuchâtel — en cours, dernier jour : 10 décembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/this-that/neuchatel/750-years-of-the-collegiate-church_AfG33R1"
+            },
+            {
               "label": "Secrets des Abysses",
               "detail": "Secrets des Abysses, Neuchâtel — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
             },
             {
               "label": "Un parfum de Chocolat",
               "detail": "Boudry — en cours, dernier jour : 30 novembre 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
             },
             {
               "label": "Brunch + visite guidée",
               "detail": "Musée d'ethnographie, Neuchâtel — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
@@ -489,17 +495,11 @@
               "detail": "Le Landeron",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/quartetto-amoroso/"
-            },
-            {
-              "label": "Boulimy Comedy Mardy",
-              "detail": "Neuchâtel",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boulimy-comedy-mardy-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/neuchatel/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -527,7 +527,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

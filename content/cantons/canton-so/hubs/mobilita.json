@@ -4,17 +4,17 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "194d64cc1479bd4d2054300e9bb9655ca2ca097716186aae4248265f83ca23bc",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "d920d13dade78f95e817db03c96d79942cdcb68a9d46653d894148aabe957727",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-09T22:46:21.435Z",
+      "updatedAt": "2026-11-10T23:46:40.154Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "5",
-          "note": "segnalazioni aggiornate: 9 novembre 2026"
+          "note": "segnalazioni aggiornate: 10 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "11",
-          "note": "segnalazioni aggiornate: 9 novembre 2026"
+          "value": "10",
+          "note": "segnalazioni aggiornate: 10 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,7 +115,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -161,7 +161,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "SO",
@@ -172,12 +172,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "5",
-          "note": "reports as of 9 November 2026"
+          "note": "reports as of 10 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "11",
-          "note": "reports as of 9 November 2026"
+          "value": "10",
+          "note": "reports as of 10 November 2026"
         }
       ],
       "dataBlocks": [
@@ -236,7 +236,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -259,7 +259,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -304,7 +304,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "SO",
@@ -315,12 +315,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "5",
-          "note": "Meldungen vom 9. November 2026"
+          "note": "Meldungen vom 10. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "11",
-          "note": "Meldungen vom 9. November 2026"
+          "value": "10",
+          "note": "Meldungen vom 10. November 2026"
         }
       ],
       "dataBlocks": [
@@ -379,7 +379,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -402,7 +402,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -447,7 +447,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "SO",
@@ -458,12 +458,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "5",
-          "note": "signalements au 9 novembre 2026"
+          "note": "signalements au 10 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "11",
-          "note": "signalements au 9 novembre 2026"
+          "value": "10",
+          "note": "signalements au 10 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -522,7 +522,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -545,7 +545,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -591,7 +591,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "f068d3802bd46b7fa58f1ae5eafeb0b6b4404f576980c3b0f473a5f0dccfe7db",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "6178a011d586159e24e6ca6c1ddf3d2e63da3578162396ed7400b57dbfecf4f4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T01:31:51.087Z",
+      "updatedAt": "2026-11-10T23:36:45.009Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "61",
+          "value": "62",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,30 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Rolf Schmid - I mag eifach nüma",
-              "detail": "Weinfelden",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-eifach-nuema-4/"
-            },
-            {
-              "label": "Rolf Schmid - I mag einfach nüma",
-              "detail": "Weinfelden",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-einfach-nuema/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — in corso, ultimo giorno: 13 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Häslitreff",
               "detail": "Weinfelden",
@@ -96,11 +72,35 @@
               "detail": "Weinfelden",
               "date": "2026-11-11",
               "url": "https://www.guidle.com/it/veranstaltungen/weinfelden/offener-clubabend_APR6y2F"
+            },
+            {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — in corso, ultimo giorno: 13 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Fiirobig",
+              "detail": "Weinfelden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiirobig-2/"
+            },
+            {
+              "label": "Bäume fällen, Dämme bauen, Burgen graben: 60 Jahre Biber im Thurgau",
+              "detail": "Röm.-kath. Begegnungszentrum, Münsterlingen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muensterlingen/baeume-faellen-daemme-bauen-burgen-graben-60-jahre-biber-im-thurgau_ARutaww"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "61",
+          "value": "62",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,30 +171,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Rolf Schmid - I mag eifach nüma",
-              "detail": "Weinfelden",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-eifach-nuema-4/"
-            },
-            {
-              "label": "Rolf Schmid - I mag einfach nüma",
-              "detail": "Weinfelden",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-einfach-nuema/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — ongoing, last day: 13 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — ongoing, last day: 24 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Häslitreff",
               "detail": "Weinfelden",
@@ -230,11 +206,35 @@
               "detail": "Weinfelden",
               "date": "2026-11-11",
               "url": "https://www.guidle.com/it/veranstaltungen/weinfelden/offener-clubabend_APR6y2F"
+            },
+            {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — ongoing, last day: 13 November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — ongoing, last day: 24 November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Fiirobig",
+              "detail": "Weinfelden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiirobig-2/"
+            },
+            {
+              "label": "Bäume fällen, Dämme bauen, Burgen graben: 60 Jahre Biber im Thurgau",
+              "detail": "Röm.-kath. Begegnungszentrum, Münsterlingen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muensterlingen/baeume-faellen-daemme-bauen-burgen-graben-60-jahre-biber-im-thurgau_ARutaww"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "61",
+          "value": "62",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -305,30 +305,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Rolf Schmid - I mag eifach nüma",
-              "detail": "Weinfelden",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-eifach-nuema-4/"
-            },
-            {
-              "label": "Rolf Schmid - I mag einfach nüma",
-              "detail": "Weinfelden",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-einfach-nuema/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — läuft, letzter Tag: 13. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Häslitreff",
               "detail": "Weinfelden",
@@ -364,11 +340,35 @@
               "detail": "Weinfelden",
               "date": "2026-11-11",
               "url": "https://www.guidle.com/it/veranstaltungen/weinfelden/offener-clubabend_APR6y2F"
+            },
+            {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — läuft, letzter Tag: 13. November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Fiirobig",
+              "detail": "Weinfelden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiirobig-2/"
+            },
+            {
+              "label": "Bäume fällen, Dämme bauen, Burgen graben: 60 Jahre Biber im Thurgau",
+              "detail": "Röm.-kath. Begegnungszentrum, Münsterlingen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muensterlingen/baeume-faellen-daemme-bauen-burgen-graben-60-jahre-biber-im-thurgau_ARutaww"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "61",
+          "value": "62",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -439,30 +439,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Rolf Schmid - I mag eifach nüma",
-              "detail": "Weinfelden",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-eifach-nuema-4/"
-            },
-            {
-              "label": "Rolf Schmid - I mag einfach nüma",
-              "detail": "Weinfelden",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rolf-schmid-i-mag-einfach-nuema/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — en cours, dernier jour : 13 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Häslitreff",
               "detail": "Weinfelden",
@@ -498,11 +474,35 @@
               "detail": "Weinfelden",
               "date": "2026-11-11",
               "url": "https://www.guidle.com/it/veranstaltungen/weinfelden/offener-clubabend_APR6y2F"
+            },
+            {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — en cours, dernier jour : 13 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Fiirobig",
+              "detail": "Weinfelden",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiirobig-2/"
+            },
+            {
+              "label": "Bäume fällen, Dämme bauen, Burgen graben: 60 Jahre Biber im Thurgau",
+              "detail": "Röm.-kath. Begegnungszentrum, Münsterlingen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muensterlingen/baeume-faellen-daemme-bauen-burgen-graben-60-jahre-biber-im-thurgau_ARutaww"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

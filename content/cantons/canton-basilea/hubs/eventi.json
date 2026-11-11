@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "a2ceb822ac30aff29e2c90e21f92dc130c7e8d89272755faf1520d15f9613ef1",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "95dd0046a1d591159ee1598f8191498c62b775ccd9d86cfdc82cbda3badef2bc",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T01:31:51.087Z",
+      "updatedAt": "2026-11-10T23:36:45.009Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "75",
+          "value": "76",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,36 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Reeto von Gunten - 2052 - weiter vorgesorgt",
-              "detail": "Basel",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reeto-von-gunten-2052-weiter-vorgesorgt-2/"
-            },
-            {
-              "label": "Endstation",
-              "detail": "Basel — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
-            },
-            {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal — in corso, ultimo giorno: 2 dicembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
-              "detail": "Basilea, Basel — in corso, ultimo giorno: 25 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
             {
               "label": "Kreatives Töpfern für Kinder",
               "detail": "Riehen",
@@ -91,11 +61,41 @@
               "detail": "Basel",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythos-ragnaroek-2/"
+            },
+            {
+              "label": "Benedikt Meyer - Plusquamperfekt",
+              "detail": "Basel",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/benedikt-meyer-plusquamperfekt-3/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
+            },
+            {
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel — in corso, ultimo giorno: 18 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
+            },
+            {
+              "label": "Öffentliche Führungen im Hanro-Depot",
+              "detail": "Liestal — in corso, ultimo giorno: 2 dicembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
+              "detail": "Basilea, Basel — in corso, ultimo giorno: 25 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "75",
+          "value": "76",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,36 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Reeto von Gunten - 2052 - weiter vorgesorgt",
-              "detail": "Basel",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reeto-von-gunten-2052-weiter-vorgesorgt-2/"
-            },
-            {
-              "label": "Endstation",
-              "detail": "Basel — ongoing, last day: 15 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
-            },
-            {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel — ongoing, last day: 18 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal — ongoing, last day: 2 December 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — ongoing, last day: 25 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
             {
               "label": "Kreatives Töpfern für Kinder",
               "detail": "Riehen",
@@ -196,11 +166,41 @@
               "detail": "Basel",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythos-ragnaroek-2/"
+            },
+            {
+              "label": "Benedikt Meyer - Plusquamperfekt",
+              "detail": "Basel",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/benedikt-meyer-plusquamperfekt-3/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel — ongoing, last day: 15 November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
+            },
+            {
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel — ongoing, last day: 18 November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
+            },
+            {
+              "label": "Öffentliche Führungen im Hanro-Depot",
+              "detail": "Liestal — ongoing, last day: 2 December 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — ongoing, last day: 25 November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "75",
+          "value": "76",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,36 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Reeto von Gunten - 2052 - weiter vorgesorgt",
-              "detail": "Basel",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reeto-von-gunten-2052-weiter-vorgesorgt-2/"
-            },
-            {
-              "label": "Endstation",
-              "detail": "Basel — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
-            },
-            {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal — läuft, letzter Tag: 2. Dezember 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — läuft, letzter Tag: 25. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
             {
               "label": "Kreatives Töpfern für Kinder",
               "detail": "Riehen",
@@ -301,11 +271,41 @@
               "detail": "Basel",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythos-ragnaroek-2/"
+            },
+            {
+              "label": "Benedikt Meyer - Plusquamperfekt",
+              "detail": "Basel",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/benedikt-meyer-plusquamperfekt-3/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
+            },
+            {
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel — läuft, letzter Tag: 18. November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
+            },
+            {
+              "label": "Öffentliche Führungen im Hanro-Depot",
+              "detail": "Liestal — läuft, letzter Tag: 2. Dezember 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — läuft, letzter Tag: 25. November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "75",
+          "value": "76",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,36 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Reeto von Gunten - 2052 - weiter vorgesorgt",
-              "detail": "Basel",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reeto-von-gunten-2052-weiter-vorgesorgt-2/"
-            },
-            {
-              "label": "Endstation",
-              "detail": "Basel — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
-            },
-            {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal — en cours, dernier jour : 2 décembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — en cours, dernier jour : 25 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
             {
               "label": "Kreatives Töpfern für Kinder",
               "detail": "Riehen",
@@ -406,11 +376,41 @@
               "detail": "Basel",
               "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythos-ragnaroek-2/"
+            },
+            {
+              "label": "Benedikt Meyer - Plusquamperfekt",
+              "detail": "Basel",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/benedikt-meyer-plusquamperfekt-3/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
+            },
+            {
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel — en cours, dernier jour : 18 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
+            },
+            {
+              "label": "Öffentliche Führungen im Hanro-Depot",
+              "detail": "Liestal — en cours, dernier jour : 2 décembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — en cours, dernier jour : 25 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-11-10T11:58:53.708Z",
-  "contentHash": "0014e8e79ae80207ba997792eef174721806c550f804c0cd44729523ee58cfd7",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "17677f5621e324f088ab0c47dd52260d22a1fbcd74f6583600cb04c7b0e7a5bd",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-09T22:46:21.435Z",
+      "updatedAt": "2026-11-10T23:46:40.154Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -38,12 +38,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "22",
-          "note": "segnalazioni aggiornate: 9 novembre 2026"
+          "note": "segnalazioni aggiornate: 10 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "14",
-          "note": "segnalazioni aggiornate: 9 novembre 2026"
+          "note": "segnalazioni aggiornate: 10 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -138,13 +138,23 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Bognanco, chiusa per due giorni la strada provinciale",
+              "date": "2026-11-10T15:20:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/10/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/bognanco-chiusa-per-due-giorni-la-strada-provinciale.html"
+            },
+            {
+              "label": "Carico disperso tra Gravellona e Ornavasso: nessuna conseguenza",
+              "date": "2026-11-10T15:15:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/10/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/superstrada-carico-disperso-tra-gravellona-e-ornavasso-nessuna-conseguenza.html"
+            },
             {
               "label": "Sciopero dei treni a novembre, possibili disagi anche nel Vco: stop di 23 ore",
               "date": "2026-11-09T15:30:00.000Z",
@@ -164,19 +174,9 @@
               "label": "Controlli della velocità in Piemonte dal 9 al 15 novembre",
               "date": "2026-11-09T09:00:40.000Z",
               "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-piemonte-dal-9-al-15-novembre-2.html"
-            },
-            {
-              "label": "Radar in Ticino, i controlli della velocità dal 9 al 15 novembre: ecco tutte le località",
-              "date": "2026-11-09T08:08:31.000Z",
-              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-9-al-15-novembre-ecco-tutte-le-localita.html"
-            },
-            {
-              "label": "Anche Vco Trasporti aderisce allo sciopero generale del 20 novembre",
-              "date": "2026-11-07T10:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/07/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anche-vco-trasporti-aderisce-allo-sciopero-generale-del-20-novembre-1.html"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -246,7 +246,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "VS",
@@ -262,12 +262,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "22",
-          "note": "reports as of 9 November 2026"
+          "note": "reports as of 10 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "14",
-          "note": "reports as of 9 November 2026"
+          "note": "reports as of 10 November 2026"
         }
       ],
       "dataBlocks": [
@@ -362,13 +362,23 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Bognanco, chiusa per due giorni la strada provinciale",
+              "date": "2026-11-10T15:20:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/10/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/bognanco-chiusa-per-due-giorni-la-strada-provinciale.html"
+            },
+            {
+              "label": "Carico disperso tra Gravellona e Ornavasso: nessuna conseguenza",
+              "date": "2026-11-10T15:15:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/10/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/superstrada-carico-disperso-tra-gravellona-e-ornavasso-nessuna-conseguenza.html"
+            },
             {
               "label": "Sciopero dei treni a novembre, possibili disagi anche nel Vco: stop di 23 ore",
               "date": "2026-11-09T15:30:00.000Z",
@@ -388,19 +398,9 @@
               "label": "Controlli della velocità in Piemonte dal 9 al 15 novembre",
               "date": "2026-11-09T09:00:40.000Z",
               "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-piemonte-dal-9-al-15-novembre-2.html"
-            },
-            {
-              "label": "Radar in Ticino, i controlli della velocità dal 9 al 15 novembre: ecco tutte le località",
-              "date": "2026-11-09T08:08:31.000Z",
-              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-9-al-15-novembre-ecco-tutte-le-localita.html"
-            },
-            {
-              "label": "Anche Vco Trasporti aderisce allo sciopero generale del 20 novembre",
-              "date": "2026-11-07T10:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/07/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anche-vco-trasporti-aderisce-allo-sciopero-generale-del-20-novembre-1.html"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -470,7 +470,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "VS",
@@ -486,12 +486,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "22",
-          "note": "Meldungen vom 9. November 2026"
+          "note": "Meldungen vom 10. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "14",
-          "note": "Meldungen vom 9. November 2026"
+          "note": "Meldungen vom 10. November 2026"
         }
       ],
       "dataBlocks": [
@@ -586,13 +586,23 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Bognanco, chiusa per due giorni la strada provinciale",
+              "date": "2026-11-10T15:20:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/10/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/bognanco-chiusa-per-due-giorni-la-strada-provinciale.html"
+            },
+            {
+              "label": "Carico disperso tra Gravellona e Ornavasso: nessuna conseguenza",
+              "date": "2026-11-10T15:15:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/10/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/superstrada-carico-disperso-tra-gravellona-e-ornavasso-nessuna-conseguenza.html"
+            },
             {
               "label": "Sciopero dei treni a novembre, possibili disagi anche nel Vco: stop di 23 ore",
               "date": "2026-11-09T15:30:00.000Z",
@@ -612,19 +622,9 @@
               "label": "Controlli della velocità in Piemonte dal 9 al 15 novembre",
               "date": "2026-11-09T09:00:40.000Z",
               "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-piemonte-dal-9-al-15-novembre-2.html"
-            },
-            {
-              "label": "Radar in Ticino, i controlli della velocità dal 9 al 15 novembre: ecco tutte le località",
-              "date": "2026-11-09T08:08:31.000Z",
-              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-9-al-15-novembre-ecco-tutte-le-localita.html"
-            },
-            {
-              "label": "Anche Vco Trasporti aderisce allo sciopero generale del 20 novembre",
-              "date": "2026-11-07T10:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/07/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anche-vco-trasporti-aderisce-allo-sciopero-generale-del-20-novembre-1.html"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -694,7 +694,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "VS",
@@ -710,12 +710,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "22",
-          "note": "signalements au 9 novembre 2026"
+          "note": "signalements au 10 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "14",
-          "note": "signalements au 9 novembre 2026"
+          "note": "signalements au 10 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -810,13 +810,23 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Bognanco, chiusa per due giorni la strada provinciale",
+              "date": "2026-11-10T15:20:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/10/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/bognanco-chiusa-per-due-giorni-la-strada-provinciale.html"
+            },
+            {
+              "label": "Carico disperso tra Gravellona e Ornavasso: nessuna conseguenza",
+              "date": "2026-11-10T15:15:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/10/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/superstrada-carico-disperso-tra-gravellona-e-ornavasso-nessuna-conseguenza.html"
+            },
             {
               "label": "Sciopero dei treni a novembre, possibili disagi anche nel Vco: stop di 23 ore",
               "date": "2026-11-09T15:30:00.000Z",
@@ -836,19 +846,9 @@
               "label": "Controlli della velocità in Piemonte dal 9 al 15 novembre",
               "date": "2026-11-09T09:00:40.000Z",
               "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-piemonte-dal-9-al-15-novembre-2.html"
-            },
-            {
-              "label": "Radar in Ticino, i controlli della velocità dal 9 al 15 novembre: ecco tutte le località",
-              "date": "2026-11-09T08:08:31.000Z",
-              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-9-al-15-novembre-ecco-tutte-le-localita.html"
-            },
-            {
-              "label": "Anche Vco Trasporti aderisce allo sciopero generale del 20 novembre",
-              "date": "2026-11-07T10:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/07/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anche-vco-trasporti-aderisce-allo-sciopero-generale-del-20-novembre-1.html"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -918,7 +918,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

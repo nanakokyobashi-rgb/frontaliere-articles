@@ -4,13 +4,18 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "de845e63c3055a1a1876e81f78f09eb83507744c2adb055bddd0530fa36edab3",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "73b1a0b61de0433d869abf4f1f0d5852b0eaf5cb60c0e855ec55296ca8d9ea98",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T01:31:51.087Z",
+      "updatedAt": "2026-11-10T23:36:45.009Z",
       "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -33,28 +38,22 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Apart Restaurant Bar",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
+            },
+            {
               "label": "Taschenlampenführung durch die Burg",
               "detail": "Zug — in corso, ultimo giorno: 13 novembre 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
             },
             {
               "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenführung für Erwachsene",
               "detail": "Museum Burg Zug, Zug — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
-            {
-              "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug — in corso, ultimo giorno: 10 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
-              "label": "PERRON NORD: Seniorenstamm",
-              "detail": "Apart Restaurant Bar",
               "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Brevi visite guidate all'ora di pranzo",
@@ -91,11 +90,30 @@
               "detail": "Oberägeri",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
+            },
+            {
+              "label": "Miss Helvetia & Band",
+              "detail": "Lorzensaal Cham, Cham",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Veranstaltung «Demenz im Blick»: Wiederholung aufgrund grosser Nachfrage",
+              "date": "2026-10-19",
+              "url": "https://stadtzug.ch/de/news/2026/november-2026/veranstaltung-demenz-im-blick-wiederholung-aufgrund-grosser-nachfrage"
+            }
+          ],
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +135,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "ZG",
@@ -138,28 +156,22 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Apart Restaurant Bar",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
+            },
+            {
               "label": "Taschenlampenführung durch die Burg",
               "detail": "Zug — ongoing, last day: 13 November 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
             },
             {
               "label": "Gallows, Wheel, and Pyre: A Flashlight Tour for Adults",
               "detail": "Museum Burg Zug, Zug — ongoing, last day: 27 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
-            {
-              "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug — ongoing, last day: 10 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
-              "label": "PERRON NORD: Seniorenstamm",
-              "detail": "Apart Restaurant Bar",
               "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Short guided tours over lunchtime",
@@ -196,11 +208,30 @@
               "detail": "Oberägeri",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
+            },
+            {
+              "label": "Miss Helvetia & Band",
+              "detail": "Lorzensaal Cham, Cham",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Veranstaltung «Demenz im Blick»: Wiederholung aufgrund grosser Nachfrage",
+              "date": "2026-10-19",
+              "url": "https://stadtzug.ch/de/news/2026/november-2026/veranstaltung-demenz-im-blick-wiederholung-aufgrund-grosser-nachfrage"
+            }
+          ],
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +253,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "ZG",
@@ -243,28 +274,22 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Apart Restaurant Bar",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
+            },
+            {
               "label": "Taschenlampenführung durch die Burg",
               "detail": "Zug — läuft, letzter Tag: 13. November 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
             },
             {
               "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenf Acrymmhrung f acrymmr er Acrymmachsene",
               "detail": "Museum Burg Zug, Zug — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
-            {
-              "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug — läuft, letzter Tag: 10. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
-              "label": "PERRON NORD: Seniorenstamm",
-              "detail": "Apart Restaurant Bar",
               "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Kurzführungen über Mittag",
@@ -301,11 +326,30 @@
               "detail": "Oberägeri",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
+            },
+            {
+              "label": "Miss Helvetia & Band",
+              "detail": "Lorzensaal Cham, Cham",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Veranstaltung «Demenz im Blick»: Wiederholung aufgrund grosser Nachfrage",
+              "date": "2026-10-19",
+              "url": "https://stadtzug.ch/de/news/2026/november-2026/veranstaltung-demenz-im-blick-wiederholung-aufgrund-grosser-nachfrage"
+            }
+          ],
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +371,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "ZG",
@@ -348,28 +392,22 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Apart Restaurant Bar",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
+            },
+            {
               "label": "Taschenlampenführung durch die Burg",
               "detail": "Zug — en cours, dernier jour : 13 novembre 2026",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
             },
             {
               "label": "La potence, la roue et le bûcher. La visite guidée à la lampe de poche pour adultes",
               "detail": "Museum Burg Zug, Zug — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
-            {
-              "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug — en cours, dernier jour : 10 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
-              "label": "PERRON NORD: Seniorenstamm",
-              "detail": "Apart Restaurant Bar",
               "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Courtes visites guidées à midi",
@@ -406,11 +444,30 @@
               "detail": "Oberägeri",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
+            },
+            {
+              "label": "Miss Helvetia & Band",
+              "detail": "Lorzensaal Cham, Cham",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Veranstaltung «Demenz im Blick»: Wiederholung aufgrund grosser Nachfrage",
+              "date": "2026-10-19",
+              "url": "https://stadtzug.ch/de/news/2026/november-2026/veranstaltung-demenz-im-blick-wiederholung-aufgrund-grosser-nachfrage"
+            }
+          ],
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +489,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

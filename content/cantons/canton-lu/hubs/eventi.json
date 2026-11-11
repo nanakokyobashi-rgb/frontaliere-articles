@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "d8d825a51d766089fc7bafff5ea60a27b49ca36e258372ef0115b20d41445dfe",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "27b62b5317e2198dffb2707409d18c4606bcbce193bde5ac8469c8e680f34554",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T01:31:51.087Z",
+      "updatedAt": "2026-11-10T23:36:45.009Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "57",
+          "value": "59",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,74 +38,79 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Winter Qi Gong Inseli",
-              "detail": "Ebikon",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7694116"
-            },
-            {
-              "label": "Preisverleihung Anerkennungspreis Quartierleben",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7399984"
-            },
-            {
-              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
-              "detail": "Lucerne, Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
-            },
-            {
-              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
-              "detail": "Hotel Schweizerhof, Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
-            },
-            {
-              "label": "360° Milonga",
-              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 6 dicembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — in corso, ultimo giorno: 25 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+              "label": "Malkurse für Erwachsene",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/luzern/malkurse-fuer-erwachsene_AY792mQ"
             },
             {
               "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
               "detail": "Luzern",
               "date": "2026-11-11",
               "url": "https://www.stadtluzern.ch/sitzung/7629682"
+            },
+            {
+              "label": "Lord Kesseli & The Drums",
+              "detail": "Schüür",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/lord-kesseli-und-the-drums_AjgF8LH"
+            },
+            {
+              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
+              "detail": "Lucerne, Luzern — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
+            },
+            {
+              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
+              "detail": "Hotel Schweizerhof, Luzern — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
+            },
+            {
+              "label": "360° Milonga",
+              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 6 dicembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
+            },
+            {
+              "label": "Schweizer Wohntage: Luzern",
+              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+            },
+            {
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — in corso, ultimo giorno: 25 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
+              "date": "2026-11-10T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629682"
+            },
             {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-11-09T23:00:00.000Z",
@@ -130,14 +135,9 @@
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-11-05T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694302"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-11-05T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463716"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -171,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "LU",
@@ -181,7 +181,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "57",
+          "value": "59",
           "note": "from the site’s events calendar"
         }
       ],
@@ -192,74 +192,79 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Winter Qi Gong Inseli",
-              "detail": "Ebikon",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7694116"
-            },
-            {
-              "label": "Preisverleihung Anerkennungspreis Quartierleben",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7399984"
-            },
-            {
-              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
-              "detail": "Lucerne, Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
-            },
-            {
-              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
-              "detail": "Hotel Schweizerhof, Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
-            },
-            {
-              "label": "360° Milonga",
-              "detail": "Bourbaki Panorama — ongoing, last day: 6 December 2026",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "detail": "Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — ongoing, last day: 25 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+              "label": "Malkurse für Erwachsene",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/luzern/malkurse-fuer-erwachsene_AY792mQ"
             },
             {
               "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
               "detail": "Luzern",
               "date": "2026-11-11",
               "url": "https://www.stadtluzern.ch/sitzung/7629682"
+            },
+            {
+              "label": "Lord Kesseli & The Drums",
+              "detail": "Schüür",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/lord-kesseli-und-the-drums_AjgF8LH"
+            },
+            {
+              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
+              "detail": "Lucerne, Luzern — ongoing, last day: 15 November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
+            },
+            {
+              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
+              "detail": "Hotel Schweizerhof, Luzern — ongoing, last day: 15 November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
+            },
+            {
+              "label": "360° Milonga",
+              "detail": "Bourbaki Panorama — ongoing, last day: 6 December 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
+            },
+            {
+              "label": "Schweizer Wohntage: Luzern",
+              "detail": "Luzern — ongoing, last day: 15 November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — ongoing, last day: 15 November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+            },
+            {
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — ongoing, last day: 25 November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
+              "date": "2026-11-10T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629682"
+            },
             {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-11-09T23:00:00.000Z",
@@ -284,14 +289,9 @@
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-11-05T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694302"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-11-05T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463716"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -325,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "LU",
@@ -335,7 +335,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "57",
+          "value": "59",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -346,74 +346,79 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Winter Qi Gong Inseli",
-              "detail": "Ebikon",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7694116"
-            },
-            {
-              "label": "Preisverleihung Anerkennungspreis Quartierleben",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7399984"
-            },
-            {
-              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
-              "detail": "Lucerne, Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
-            },
-            {
-              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
-              "detail": "Hotel Schweizerhof, Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
-            },
-            {
-              "label": "360° Milonga",
-              "detail": "Bourbaki Panorama — läuft, letzter Tag: 6. Dezember 2026",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — läuft, letzter Tag: 25. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+              "label": "Malkurse für Erwachsene",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/luzern/malkurse-fuer-erwachsene_AY792mQ"
             },
             {
               "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
               "detail": "Luzern",
               "date": "2026-11-11",
               "url": "https://www.stadtluzern.ch/sitzung/7629682"
+            },
+            {
+              "label": "Lord Kesseli & The Drums",
+              "detail": "Schüür",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/lord-kesseli-und-the-drums_AjgF8LH"
+            },
+            {
+              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
+              "detail": "Lucerne, Luzern — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
+            },
+            {
+              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
+              "detail": "Hotel Schweizerhof, Luzern — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
+            },
+            {
+              "label": "360° Milonga",
+              "detail": "Bourbaki Panorama — läuft, letzter Tag: 6. Dezember 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
+            },
+            {
+              "label": "Schweizer Wohntage: Luzern",
+              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+            },
+            {
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — läuft, letzter Tag: 25. November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
+              "date": "2026-11-10T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629682"
+            },
             {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-11-09T23:00:00.000Z",
@@ -438,14 +443,9 @@
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-11-05T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694302"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-11-05T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463716"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -479,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "LU",
@@ -489,7 +489,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "57",
+          "value": "59",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -500,74 +500,79 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Winter Qi Gong Inseli",
-              "detail": "Ebikon",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7694116"
-            },
-            {
-              "label": "Preisverleihung Anerkennungspreis Quartierleben",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7399984"
-            },
-            {
-              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
-              "detail": "Lucerne, Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
-            },
-            {
-              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
-              "detail": "Hotel Schweizerhof, Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
-            },
-            {
-              "label": "360° Milonga",
-              "detail": "Bourbaki Panorama — en cours, dernier jour : 6 décembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — en cours, dernier jour : 25 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+              "label": "Malkurse für Erwachsene",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/luzern/malkurse-fuer-erwachsene_AY792mQ"
             },
             {
               "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
               "detail": "Luzern",
               "date": "2026-11-11",
               "url": "https://www.stadtluzern.ch/sitzung/7629682"
+            },
+            {
+              "label": "Lord Kesseli & The Drums",
+              "detail": "Schüür",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/lord-kesseli-und-the-drums_AjgF8LH"
+            },
+            {
+              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
+              "detail": "Lucerne, Luzern — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
+            },
+            {
+              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
+              "detail": "Hotel Schweizerhof, Luzern — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
+            },
+            {
+              "label": "360° Milonga",
+              "detail": "Bourbaki Panorama — en cours, dernier jour : 6 décembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
+            },
+            {
+              "label": "Schweizer Wohntage: Luzern",
+              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+            },
+            {
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — en cours, dernier jour : 25 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
+              "date": "2026-11-10T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629682"
+            },
             {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-11-09T23:00:00.000Z",
@@ -592,14 +597,9 @@
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-11-05T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694302"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-11-05T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463716"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -633,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-10T11:58:53.708Z",
-  "contentHash": "5a2ed5b03af75834d5f3893a476f112443c5ff1f32fa7932c623032eacad7584",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "167f17e4673fcee493e7130f46537c163c41fae959c6a10ccacc613492241747",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-09T22:46:21.435Z",
+      "updatedAt": "2026-11-10T23:46:40.154Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -37,13 +37,13 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "14",
-          "note": "segnalazioni aggiornate: 9 novembre 2026"
+          "value": "8",
+          "note": "segnalazioni aggiornate: 10 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "26",
-          "note": "segnalazioni aggiornate: 9 novembre 2026"
+          "value": "28",
+          "note": "segnalazioni aggiornate: 10 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -105,12 +105,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "A1 Zürich -> Bern tra Svincolo autostradale Lenzburg E Svincolo autostradale Aarau Ost Situazione: problemi di traffico cantiere Limitazione del traffico: corsia d'emergenza chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 10 novembre 2026",
-              "date": "2026-09-30T06:34:00.000Z"
-            },
-            {
               "label": "A1 Bern <-> Zürich tra Svincolo autostradale Aarau Ost E Svincolo autostradale Baden West Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Causa: lavori stradali sulla banchina…",
               "value": "Chiusura",
               "detail": "fine prevista: 30 novembre 2026",
@@ -119,14 +113,8 @@
             {
               "label": "A1 Bern <-> Zürich tra Svincolo autostradale Aarau Ost E Svincolo autostradale Rothrist Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia d'emergenza…",
               "value": "Chiusura",
-              "detail": "fine prevista: 20 novembre 2026",
+              "detail": "fine prevista: 2 dicembre 2026",
               "date": "2026-10-22T04:31:00.000Z"
-            },
-            {
-              "label": "A3 Zürich -> Basel tra Svincolo autostradale Eiken E Svincolo autostradale Rheinfelden Ost Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia d'emergenza…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 10 novembre 2026",
-              "date": "2026-10-22T11:10:00.000Z"
             },
             {
               "label": "A3 Basel <-> Zürich tra Raccordo autostradale Diramazione Rheinfelden E Parcheggio Mumpf Situazione: problemi di traffico cantiere Limitazione del traffico: corsia d'emergenza chiusa",
@@ -141,20 +129,32 @@
               "date": "2026-11-02T06:07:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern tra Svincolo autostradale Lenzburg E Svincolo autostradale Aarau Ost Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: corsia d'emergenza chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 10 novembre 2026",
-              "date": "2026-11-02T07:00:00.000Z"
-            },
-            {
               "label": "A1 Bern -> Zürich tra Galleria Galleria Baregg E Svincolo autostradale Neuenhof Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsia d'emergenza chiusa",
               "value": "Chiusura",
               "detail": "fine prevista: 19 novembre 2026",
               "date": "2026-11-03T14:30:00.000Z"
+            },
+            {
+              "label": "A1 Zürich -> Bern tra Svincolo autostradale Oftringen E Raccordo autostradale Diramazione Wiggertal Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsia…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 19 novembre 2026",
+              "date": "2026-11-03T15:00:00.000Z"
+            },
+            {
+              "label": "A1 Bern -> Zürich tra Parcheggio Lenzburg E Svincolo autostradale Lenzburg Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsia d'emergenza chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 11 dicembre 2026",
+              "date": "2026-11-09T13:24:00.000Z"
+            },
+            {
+              "label": "Marktstrasse, Muri <-> Nordklosterrain, Muri Situazione: chiusa Causa: evento importante fiera Limitazione del traffico: nuova viabilità",
+              "value": "Chiusura",
+              "detail": "fine prevista: 11 novembre 2026",
+              "date": "2026-11-11T02:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -192,7 +192,7 @@
               "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "AG",
@@ -285,13 +285,13 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "14",
-          "note": "reports as of 9 November 2026"
+          "value": "8",
+          "note": "reports as of 10 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "26",
-          "note": "reports as of 9 November 2026"
+          "value": "28",
+          "note": "reports as of 10 November 2026"
         }
       ],
       "dataBlocks": [
@@ -353,12 +353,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "A1 Zürich -> Bern tra Svincolo autostradale Lenzburg E Svincolo autostradale Aarau Ost Situazione: problemi di traffico cantiere Limitazione del traffico: corsia d'emergenza chiusa",
-              "value": "Closure",
-              "detail": "until 10 November 2026",
-              "date": "2026-09-30T06:34:00.000Z"
-            },
-            {
               "label": "A1 Bern <-> Zürich tra Svincolo autostradale Aarau Ost E Svincolo autostradale Baden West Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Causa: lavori stradali sulla banchina…",
               "value": "Closure",
               "detail": "until 30 November 2026",
@@ -367,14 +361,8 @@
             {
               "label": "A1 Bern <-> Zürich tra Svincolo autostradale Aarau Ost E Svincolo autostradale Rothrist Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia d'emergenza…",
               "value": "Closure",
-              "detail": "until 20 November 2026",
+              "detail": "until 2 December 2026",
               "date": "2026-10-22T04:31:00.000Z"
-            },
-            {
-              "label": "A3 Zürich -> Basel tra Svincolo autostradale Eiken E Svincolo autostradale Rheinfelden Ost Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia d'emergenza…",
-              "value": "Closure",
-              "detail": "until 10 November 2026",
-              "date": "2026-10-22T11:10:00.000Z"
             },
             {
               "label": "A3 Basel <-> Zürich tra Raccordo autostradale Diramazione Rheinfelden E Parcheggio Mumpf Situazione: problemi di traffico cantiere Limitazione del traffico: corsia d'emergenza chiusa",
@@ -389,20 +377,32 @@
               "date": "2026-11-02T06:07:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern tra Svincolo autostradale Lenzburg E Svincolo autostradale Aarau Ost Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: corsia d'emergenza chiusa",
-              "value": "Closure",
-              "detail": "until 10 November 2026",
-              "date": "2026-11-02T07:00:00.000Z"
-            },
-            {
               "label": "A1 Bern -> Zürich tra Galleria Galleria Baregg E Svincolo autostradale Neuenhof Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsia d'emergenza chiusa",
               "value": "Closure",
               "detail": "until 19 November 2026",
               "date": "2026-11-03T14:30:00.000Z"
+            },
+            {
+              "label": "A1 Zürich -> Bern tra Svincolo autostradale Oftringen E Raccordo autostradale Diramazione Wiggertal Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsia…",
+              "value": "Closure",
+              "detail": "until 19 November 2026",
+              "date": "2026-11-03T15:00:00.000Z"
+            },
+            {
+              "label": "A1 Bern -> Zürich tra Parcheggio Lenzburg E Svincolo autostradale Lenzburg Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsia d'emergenza chiusa",
+              "value": "Closure",
+              "detail": "until 11 December 2026",
+              "date": "2026-11-09T13:24:00.000Z"
+            },
+            {
+              "label": "Marktstrasse, Muri <-> Nordklosterrain, Muri Situazione: chiusa Causa: evento importante fiera Limitazione del traffico: nuova viabilità",
+              "value": "Closure",
+              "detail": "until 11 November 2026",
+              "date": "2026-11-11T02:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -440,7 +440,7 @@
               "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -518,7 +518,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "AG",
@@ -533,13 +533,13 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "14",
-          "note": "Meldungen vom 9. November 2026"
+          "value": "8",
+          "note": "Meldungen vom 10. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "26",
-          "note": "Meldungen vom 9. November 2026"
+          "value": "28",
+          "note": "Meldungen vom 10. November 2026"
         }
       ],
       "dataBlocks": [
@@ -601,12 +601,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "A1 Zürich -> Bern zwischen Anschluss Lenzburg und Anschluss Aarau-Ost Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Pannenstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 10. November 2026",
-              "date": "2026-09-30T06:34:00.000Z"
-            },
-            {
               "label": "A1 Bern <-> Zürich zwischen Anschluss Aarau-Ost und Anschluss Baden-West Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Ursache: Arbeiten am Pannenstreifen Verkehrsführung: Pannenstreifen…",
               "value": "Sperrung",
               "detail": "bis 30. November 2026",
@@ -615,14 +609,8 @@
             {
               "label": "A1 Bern <-> Zürich zwischen Anschluss Aarau-Ost und Anschluss Rothrist Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: Pannenstreifen gesperrt",
               "value": "Sperrung",
-              "detail": "bis 20. November 2026",
+              "detail": "bis 2. Dezember 2026",
               "date": "2026-10-22T04:31:00.000Z"
-            },
-            {
-              "label": "A3 Zürich -> Basel zwischen Anschluss Eiken und Anschluss Rheinfelden-Ost Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: Pannenstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 10. November 2026",
-              "date": "2026-10-22T11:10:00.000Z"
             },
             {
               "label": "A3 Basel <-> Zürich zwischen Autobahndreieck Verzweigung Rheinfelden und Parkplatz Mumpf Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Pannenstreifen gesperrt",
@@ -637,20 +625,32 @@
               "date": "2026-11-02T06:07:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern zwischen Anschluss Lenzburg und Anschluss Aarau-Ost Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: Pannenstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 10. November 2026",
-              "date": "2026-11-02T07:00:00.000Z"
-            },
-            {
               "label": "A1 Bern -> Zürich zwischen Tunnel Baregg-Tunnel und Anschluss Neuenhof Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.4 Verkehrsführung: Pannenstreifen gesperrt",
               "value": "Sperrung",
               "detail": "bis 19. November 2026",
               "date": "2026-11-03T14:30:00.000Z"
+            },
+            {
+              "label": "A1 Zürich -> Bern zwischen Anschluss Oftringen und Autobahndreieck Verzweigung Wiggertal Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.4 Verkehrsführung: Pannenstreifen gesperrt Zusatz 1…",
+              "value": "Sperrung",
+              "detail": "bis 19. November 2026",
+              "date": "2026-11-03T15:00:00.000Z"
+            },
+            {
+              "label": "A1 Bern -> Zürich zwischen Parkplatz Lenzburg und Anschluss Lenzburg Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.4 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 11. Dezember 2026",
+              "date": "2026-11-09T13:24:00.000Z"
+            },
+            {
+              "label": "Marktstrasse, Muri <-> Nordklosterrain, Muri Sachlage: Strecke gesperrt Ursache: Veranstaltung Messe Verkehrsführung: veränderte Verkehrsführung",
+              "value": "Sperrung",
+              "detail": "bis 11. November 2026",
+              "date": "2026-11-11T02:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -688,7 +688,7 @@
               "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -766,7 +766,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "AG",
@@ -781,13 +781,13 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "14",
-          "note": "signalements au 9 novembre 2026"
+          "value": "8",
+          "note": "signalements au 10 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "26",
-          "note": "signalements au 9 novembre 2026"
+          "value": "28",
+          "note": "signalements au 10 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -849,12 +849,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "A1 Zurich -> Berne entre Jonction autoroutière Lenzburg et Jonction autoroutière Aarau-Est Situation: trafic perturbé travaux Gestion du trafic: bande d'arrêt d'urgence fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 10 novembre 2026",
-              "date": "2026-09-30T06:34:00.000Z"
-            },
-            {
               "label": "A1 Berne <-> Zurich entre Jonction autoroutière Aarau-Est et Jonction autoroutière Baden-Ouest Situation: trafic perturbé travaux, longueur [km] 0.2 Raison: travaux sur la bande d'arrêt d'urgence…",
               "value": "Fermeture",
               "detail": "jusqu’au 30 novembre 2026",
@@ -863,14 +857,8 @@
             {
               "label": "A1 Berne <-> Zurich entre Jonction autoroutière Aarau-Est et Jonction autoroutière Rothrist Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: bande d'arrêt d'urgence fermée",
               "value": "Fermeture",
-              "detail": "jusqu’au 20 novembre 2026",
+              "detail": "jusqu’au 2 décembre 2026",
               "date": "2026-10-22T04:31:00.000Z"
-            },
-            {
-              "label": "A3 Zurich -> Bâle entre Jonction autoroutière Eiken et Jonction autoroutière Rheinfelden-Est Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: bande d'arrêt d'urgence fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 10 novembre 2026",
-              "date": "2026-10-22T11:10:00.000Z"
             },
             {
               "label": "A3 Bâle <-> Zurich entre Echangeur Echangeur de Rheinfelden et Parking Mumpf Situation: trafic perturbé travaux Gestion du trafic: bande d'arrêt d'urgence fermée",
@@ -885,20 +873,32 @@
               "date": "2026-11-02T06:07:00.000Z"
             },
             {
-              "label": "A1 Zurich -> Berne entre Jonction autoroutière Lenzburg et Jonction autoroutière Aarau-Est Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: bande d'arrêt d'urgence fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 10 novembre 2026",
-              "date": "2026-11-02T07:00:00.000Z"
-            },
-            {
               "label": "A1 Berne -> Zurich entre Tunnel Tunnel du Baregg et Jonction autoroutière Neuenhof Situation: trafic perturbé travaux, longueur [km] 0.4 Gestion du trafic: bande d'arrêt d'urgence fermée",
               "value": "Fermeture",
               "detail": "jusqu’au 19 novembre 2026",
               "date": "2026-11-03T14:30:00.000Z"
+            },
+            {
+              "label": "A1 Zurich -> Berne entre Jonction autoroutière Oftringen et Echangeur Echangeur de Wiggertal Situation: trafic perturbé travaux, longueur [km] 0.4 Gestion du trafic: bande d'arrêt d'urgence fermée…",
+              "value": "Fermeture",
+              "detail": "jusqu’au 19 novembre 2026",
+              "date": "2026-11-03T15:00:00.000Z"
+            },
+            {
+              "label": "A1 Berne -> Zurich entre Parking Lenzburg et Jonction autoroutière Lenzburg Situation: trafic perturbé travaux, longueur [km] 0.4 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 11 décembre 2026",
+              "date": "2026-11-09T13:24:00.000Z"
+            },
+            {
+              "label": "Marktstrasse, Muri <-> Nordklosterrain, Muri Situation: fermé Raison: événement majeur foire commerciale Gestion du trafic: nouveau plan de circulation",
+              "value": "Fermeture",
+              "detail": "jusqu’au 11 novembre 2026",
+              "date": "2026-11-11T02:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-09T22:46:21.435Z"
+          "updatedAt": "2026-11-10T23:46:40.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -936,7 +936,7 @@
               "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -1014,7 +1014,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

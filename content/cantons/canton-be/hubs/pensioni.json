@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "pensioni",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "3f4acb68746bbef5e7eb6135a34eadbfab1f8a7fe3686540f136462727cf8673",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "f751f46ca062291b9605f485d6470427429eccaf8968720c58f732ad2c6c8a28",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -141,17 +141,12 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Erste-Auszahlung-der-13-AHV-Rente-im-Dezember-2026.html"
             },
             {
-              "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
-              "date": "2026-09-03",
-              "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
-            },
-            {
               "label": "Information zur Rentenerhöhung ab 1. Januar 2027",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -223,7 +218,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "BE",
@@ -337,17 +332,12 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Erste-Auszahlung-der-13-AHV-Rente-im-Dezember-2026.html"
             },
             {
-              "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
-              "date": "2026-09-03",
-              "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
-            },
-            {
               "label": "Information zur Rentenerhöhung ab 1. Januar 2027",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +409,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "BE",
@@ -533,17 +523,12 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Erste-Auszahlung-der-13-AHV-Rente-im-Dezember-2026.html"
             },
             {
-              "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
-              "date": "2026-09-03",
-              "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
-            },
-            {
               "label": "Information zur Rentenerhöhung ab 1. Januar 2027",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -615,7 +600,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "BE",
@@ -729,17 +714,12 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Erste-Auszahlung-der-13-AHV-Rente-im-Dezember-2026.html"
             },
             {
-              "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
-              "date": "2026-09-03",
-              "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
-            },
-            {
               "label": "Information zur Rentenerhöhung ab 1. Januar 2027",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -811,7 +791,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

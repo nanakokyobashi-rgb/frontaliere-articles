@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "9b432b517f2f75b075457770b59270c7181b23a450fc53032948024724bdc4b1",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "fdbc249fcd00f34e9ef995b48886b9ac75150a749ee39188ca37a5bf96b66008",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T01:31:51.087Z",
+      "updatedAt": "2026-11-10T23:36:45.009Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "237",
+          "value": "229",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Jannis Kounellis: Io sono un pittore",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/63037"
+              "label": "Cinema in tasca: Hamnet - Nel Nome Di Figlio",
+              "detail": "Cinema Iride, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64480"
             },
             {
-              "label": "Soglie",
-              "detail": "B&B Fine Art, Paradiso",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64776"
+              "label": "Pierrette Bloch. Il gesto di scrivere",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64342"
             },
             {
-              "label": "Bertille Bak. Voci dalla terra",
-              "detail": "Museo Vincenzo Vela, Mendrisio",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/62429"
+              "label": "Un colpo di sterzo",
+              "detail": "Sala multiuso, Bellinzona",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64352"
             },
             {
-              "label": "Kaari Upson. Dollhouse – Una retrospettiva",
-              "detail": "MASI, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/63581"
+              "label": "Fiera di San Martino",
+              "detail": "San Martino, Mendrisio",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-di-san-martino/"
             },
             {
-              "label": "Mama & baby brunch creativo",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64884"
+              "label": "Baby atelier - “Badabùm”: il totem della pioggia",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64854"
             },
             {
-              "label": "Schermo aperto. Opere video dalla collezione",
-              "detail": "Masi, sede Palazzo Reali, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64595"
+              "label": "Ceramiche dell'antico Perù. Dal Pacifico alle Ande",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64065"
             },
             {
-              "label": "Sentimento e osservazione",
-              "detail": "MASI, sede Lac, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/53980"
+              "label": "Il futuro non aspetta",
+              "detail": "Centro Tesla, Cadenazzo",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64770"
             },
             {
-              "label": "Umberto Boccioni",
-              "detail": "Museo d’arte della Svizzera italiana, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/62804"
+              "label": "Al cinema con La Lanterna Magica!",
+              "detail": "Lux Art House, Massagno",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64547"
             },
             {
-              "label": "Masterclass a Jazz in Bess",
-              "detail": "Jazz in Bess, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64868"
+              "label": "MAP Open Lecture of Prof. Bence Nanay",
+              "detail": "Aula Multiuso, Facoltà di Teologia, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64873"
             },
             {
-              "label": "Masterclass interplay e accompagnamento nel jazz",
-              "detail": "Jazz in Bess, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64843"
+              "label": "Incontri PhD Scienze Religiose",
+              "detail": "Aula 1.3, Facoltà di Teologia, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64875"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "237",
+          "value": "229",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Jannis Kounellis: I am a painter",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/63037"
+              "label": "Cinema in your pocket: Hamnet - In the Name of your Son",
+              "detail": "Cinema Iride, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64480"
             },
             {
-              "label": "Thresholds",
-              "detail": "B&B Fine Art, Paradiso",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64776"
+              "label": "Pierrette Bloch. The gesture of writing",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64342"
             },
             {
-              "label": "Bertille Bak. Voices from the Earth",
-              "detail": "Museo Vincenzo Vela, Mendrisio",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/62429"
+              "label": "A steering stroke",
+              "detail": "Sala multiuso, Bellinzona",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64352"
             },
             {
-              "label": "Kaari Upson. Dollhouse – A Retrospective",
-              "detail": "MASI, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/63581"
+              "label": "Fiera di San Martino",
+              "detail": "San Martino, Mendrisio",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-di-san-martino/"
             },
             {
-              "label": "Mama & creative baby brunch",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64884"
+              "label": "Baby atelier - \"Badabùm\": the rain totem",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64854"
             },
             {
-              "label": "Open screen. Video works from the collection",
-              "detail": "Masi, sede Palazzo Reali, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64595"
+              "label": "Ceramics of ancient Peru. From the Pacific to the Andes",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64065"
             },
             {
-              "label": "Feeling and Observation",
-              "detail": "MASI, sede Lac, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/53980"
+              "label": "The future won't wait",
+              "detail": "Centro Tesla, Cadenazzo",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64770"
             },
             {
-              "label": "Umberto Boccioni",
-              "detail": "Museo d’arte della Svizzera italiana, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/62804"
+              "label": "To the cinema with The Magic Lantern!",
+              "detail": "Lux Art House, Massagno",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64547"
             },
             {
-              "label": "Masterclass at Jazz in Bess",
-              "detail": "Jazz in Bess, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64868"
+              "label": "MAP Open Lecture by Prof. Bence Nanay",
+              "detail": "Aula Multiuso, Facoltà di Teologia, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64873"
             },
             {
-              "label": "Interplay masterclass and accompaniment in jazz",
-              "detail": "Jazz in Bess, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64843"
+              "label": "PhD Meetings Religious Studies",
+              "detail": "Aula 1.3, Facoltà di Teologia, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64875"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "237",
+          "value": "229",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Jannis Kounellis: Ich bin Maler",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/63037"
+              "label": "Kino in der Tasche: Hamnet - Im Namen des Sohnes",
+              "detail": "Cinema Iride, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64480"
             },
             {
-              "label": "Schwellenwerte",
-              "detail": "B&B Fine Art, Paradiso",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64776"
+              "label": "Pierrette Bloch. Die Geste des Schreibens",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64342"
             },
             {
-              "label": "Bertille Bak. Stimmen aus der Erde",
-              "detail": "Museo Vincenzo Vela, Mendrisio",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/62429"
+              "label": "Ein Lenkeinschlag",
+              "detail": "Sala multiuso, Bellinzona",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64352"
             },
             {
-              "label": "Kaari Upson. Dollhouse – Eine Retrospektive",
-              "detail": "MASI, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/63581"
+              "label": "Fiera di San Martino",
+              "detail": "San Martino, Mendrisio",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-di-san-martino/"
             },
             {
-              "label": "Mama & kreativer Babybrunch",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64884"
+              "label": "Baby-Atelier – \"Badabùm\": das Regen-Totem",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64854"
             },
             {
-              "label": "Offener Bildschirm. Videoarbeiten aus der Sammlung",
-              "detail": "Masi, sede Palazzo Reali, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64595"
+              "label": "Keramik aus dem alten Peru. Vom Pazifik bis in die Anden",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64065"
             },
             {
-              "label": "Gefühl und Beobachtung",
-              "detail": "MASI, sede Lac, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/53980"
+              "label": "Die Zukunft wartet nicht",
+              "detail": "Centro Tesla, Cadenazzo",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64770"
             },
             {
-              "label": "Umberto Boccioni",
-              "detail": "Museo d’arte della Svizzera italiana, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/62804"
+              "label": "Im Kino mit der Zauberlaterne!",
+              "detail": "Lux Art House, Massagno",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64547"
             },
             {
-              "label": "Masterclass bei Jazz in Bess",
-              "detail": "Jazz in Bess, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64868"
+              "label": "MAP Open Lecture von Prof. Bence Nanay",
+              "detail": "Aula Multiuso, Facoltà di Teologia, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64873"
             },
             {
-              "label": "Interplay-Meisterklasse und Begleitung im Jazz",
-              "detail": "Jazz in Bess, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64843"
+              "label": "PhD-Treffen Religionswissenschaften",
+              "detail": "Aula 1.3, Facoltà di Teologia, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64875"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "237",
+          "value": "229",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Jannis Kounellis : Je suis un peintre",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/63037"
+              "label": "Cinéma dans la poche : Hamnet - Au Nom De Son Fils",
+              "detail": "Cinema Iride, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64480"
             },
             {
-              "label": "Seuils",
-              "detail": "B&B Fine Art, Paradiso",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64776"
+              "label": "Pierrette Bloch. Le geste d'écrire",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64342"
             },
             {
-              "label": "Bertille Bak. Des voix de la terre",
-              "detail": "Museo Vincenzo Vela, Mendrisio",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/62429"
+              "label": "Un coup de direction",
+              "detail": "Sala multiuso, Bellinzona",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64352"
             },
             {
-              "label": "Kaari Upson. Dollhouse – Une rétrospective",
-              "detail": "MASI, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/63581"
+              "label": "Fiera di San Martino",
+              "detail": "San Martino, Mendrisio",
+              "date": "2026-11-11",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-di-san-martino/"
             },
             {
-              "label": "Brunch maman et bébé créatif",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64884"
+              "label": "Atelier bébé - « Badabùm » : le totem de la pluie",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64854"
             },
             {
-              "label": "Écran ouvert. Œuvres vidéo de la collection",
-              "detail": "Masi, sede Palazzo Reali, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64595"
+              "label": "Céramiques de l'ancien Pérou. Du Pacifique aux Andes",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64065"
             },
             {
-              "label": "Sentiment et observation",
-              "detail": "MASI, sede Lac, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/53980"
+              "label": "L'avenir n'attend pas",
+              "detail": "Centro Tesla, Cadenazzo",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64770"
             },
             {
-              "label": "Umberto Boccioni a écrit:",
-              "detail": "Museo d’arte della Svizzera italiana, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/62804"
+              "label": "Au cinéma avec La Lanterne Magique !",
+              "detail": "Lux Art House, Massagno",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64547"
             },
             {
-              "label": "Masterclass à Jazz in Bess",
-              "detail": "Jazz in Bess, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64868"
+              "label": "Conférence ouverte MAP du Professeur Bence Nanay",
+              "detail": "Aula Multiuso, Facoltà di Teologia, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64873"
             },
             {
-              "label": "Masterclass d’interplay et accompagnement en jazz",
-              "detail": "Jazz in Bess, Lugano",
-              "date": "2026-11-10",
-              "url": "https://www.tio.ch/agenda/day/20261110/64843"
+              "label": "Réunions de doctorat Études religieuses",
+              "detail": "Aula 1.3, Facoltà di Teologia, Lugano",
+              "date": "2026-11-11",
+              "url": "https://www.tio.ch/agenda/day/20261111/64875"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

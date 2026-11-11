@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T11:58:53.708Z",
-  "contentHash": "c1db9c5987d507d87e584f2c0549d9296ac81a3e407e0c69487b3337d86c72bf",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "5c132ee877b43fe9965c51a232144dbdfceb172413c5d6b1d1e3e48218d4b7d7",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-10T02:51:12.262Z",
+      "updatedAt": "2026-11-10T21:55:47.516Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -70,12 +70,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "9 °C",
-              "detail": "oggi da 9 a 15 °C"
+              "value": "10 °C",
+              "detail": "oggi da 9 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,7 +108,7 @@
               "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -149,16 +149,16 @@
           "date": "2026-10-02T03:42:39.056Z"
         },
         {
-          "title": "Autorizzazione edilizia Canton Lucerna: requisiti, procedura",
-          "url": "/articoli-svizzera/permesso-edilizio-lucerna/",
-          "excerpt": "Nel Cantone di Lucerna contano autorizzazione, documenti, ruolo di comune e cantone, opposizioni o ricorsi e stop ai lavori senza permesso.",
-          "date": "2026-10-09T03:07:26.294Z"
-        },
-        {
           "title": "Patente guida Lucerna: conversione ed esami",
           "url": "/articoli-svizzera/patente-estera-lucerna-procedura/",
           "excerpt": "Procedura di conversione della patente estera nel Cantone Lucerna: esame teorico e pratico, corsi obbligatori, ufficio della circolazione.",
           "date": "2026-09-03T19:12:14.541Z"
+        },
+        {
+          "title": "Autorizzazione edilizia Canton Lucerna: requisiti, procedura",
+          "url": "/articoli-svizzera/permesso-edilizio-lucerna/",
+          "excerpt": "Nel Cantone di Lucerna contano autorizzazione, documenti, ruolo di comune e cantone, opposizioni o ricorsi e stop ai lavori senza permesso.",
+          "date": "2026-10-09T03:07:26.294Z"
         }
       ],
       "latestCantonArticles": [],
@@ -188,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "LU",
@@ -236,12 +236,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "9 °C",
-              "detail": "today from 9 to 15 °C"
+              "value": "10 °C",
+              "detail": "today from 9 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -274,7 +274,7 @@
               "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -314,16 +314,16 @@
           "date": "2026-10-02T03:42:39.056Z"
         },
         {
-          "title": "Building permit in the Canton of Lucerne: requirements, procedure",
-          "url": "/en/swiss-articles/lucerne-building-permit-guide/",
-          "excerpt": "In the Canton of Lucerne, authorization, documents, the roles of the municipality and canton, objections or appeals, and stopping work without a permit matter.",
-          "date": "2026-10-09T03:07:26.294Z"
-        },
-        {
           "title": "Lucerne driving licence: conversion and exams",
           "url": "/en/swiss-articles/driving-licence-lucerne-conversion-procedure/",
           "excerpt": "Procedure for converting the foreign licence in the Canton of Lucerne: theoretical and practical examination, compulsory courses, traffic office.",
           "date": "2026-09-03T19:12:14.541Z"
+        },
+        {
+          "title": "Building permit in the Canton of Lucerne: requirements, procedure",
+          "url": "/en/swiss-articles/lucerne-building-permit-guide/",
+          "excerpt": "In the Canton of Lucerne, authorization, documents, the roles of the municipality and canton, objections or appeals, and stopping work without a permit matter.",
+          "date": "2026-10-09T03:07:26.294Z"
         }
       ],
       "latestCantonArticles": [],
@@ -349,7 +349,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "LU",
@@ -397,12 +397,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "9 °C",
-              "detail": "heute 9 bis 15 °C"
+              "value": "10 °C",
+              "detail": "heute 9 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -435,7 +435,7 @@
               "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -475,16 +475,16 @@
           "date": "2026-10-02T03:42:39.056Z"
         },
         {
-          "title": "Baubewilligung im Kanton Luzern: Voraussetzungen, Verfahren",
-          "url": "/de/schweiz-artikel/baubewilligung-luzern-verfahren/",
-          "excerpt": "Im Kanton Luzern sind die Baubewilligung, die Unterlagen, die Rolle von Gemeinde und Kanton, Einsprachen oder Beschwerden sowie ein Baustopp bei Arbeiten ohne Bewilligung entscheidend.",
-          "date": "2026-10-09T03:07:26.294Z"
-        },
-        {
           "title": "Führerschein Luzern: Umbau und Prüfungen",
           "url": "/de/schweiz-artikel/fahrerausweis-luzern-umschreibung-verfahren/",
           "excerpt": "Umwandlungsverfahren des ausländischen Führerscheins im Kanton Luzern: Theorie- und Praxisprüfung, Pflichtkurse, Strassenverkehrsamt.",
           "date": "2026-09-03T19:12:14.541Z"
+        },
+        {
+          "title": "Baubewilligung im Kanton Luzern: Voraussetzungen, Verfahren",
+          "url": "/de/schweiz-artikel/baubewilligung-luzern-verfahren/",
+          "excerpt": "Im Kanton Luzern sind die Baubewilligung, die Unterlagen, die Rolle von Gemeinde und Kanton, Einsprachen oder Beschwerden sowie ein Baustopp bei Arbeiten ohne Bewilligung entscheidend.",
+          "date": "2026-10-09T03:07:26.294Z"
         }
       ],
       "latestCantonArticles": [],
@@ -510,7 +510,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "LU",
@@ -558,12 +558,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 9 à 15 °C"
+              "value": "10 °C",
+              "detail": "aujourd’hui de 9 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -596,7 +596,7 @@
               "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -637,16 +637,16 @@
           "date": "2026-10-02T03:42:39.056Z"
         },
         {
-          "title": "Autorisation de construire dans le canton de Lucerne : exigences, procédure",
-          "url": "/fr/articles-suisse/permis-construire-lucerne/",
-          "excerpt": "Dans le canton de Lucerne, l’autorisation, les documents, le rôle de la commune et du canton, les oppositions ou recours et l’arrêt des travaux sans permis sont importants.",
-          "date": "2026-10-09T03:07:26.294Z"
-        },
-        {
           "title": "Permis de conduire Lucerne : conversion et examens",
           "url": "/fr/articles-suisse/permis-lucerne-conversion-procedure/",
           "excerpt": "Procédure de conversion du permis étranger dans le canton de Lucerne : examen théorique et pratique, cours obligatoires, bureau de la circulation.",
           "date": "2026-09-03T19:12:14.541Z"
+        },
+        {
+          "title": "Autorisation de construire dans le canton de Lucerne : exigences, procédure",
+          "url": "/fr/articles-suisse/permis-construire-lucerne/",
+          "excerpt": "Dans le canton de Lucerne, l’autorisation, les documents, le rôle de la commune et du canton, les oppositions ou recours et l’arrêt des travaux sans permis sont importants.",
+          "date": "2026-10-09T03:07:26.294Z"
         }
       ],
       "latestCantonArticles": [],
@@ -668,7 +668,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

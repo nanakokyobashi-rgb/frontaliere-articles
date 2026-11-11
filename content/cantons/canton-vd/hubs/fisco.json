@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "fisco",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "cb49f30c5e0c8ce5ac277cf28f5e97e3fa35f4ca75f8fe402cdc28a2ffff530e",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "b84c5dcbc274383e92db411fdbb4ee5e4e9d657582b1d57277a6bef154961554",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -110,12 +110,17 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Grandes réformes fiscales: administration réorganisée",
+              "date": "2026-11-09T10:01:00.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26780-grandes-reformes-fiscales-administration-reorganisee"
+            },
+            {
               "label": "Le peuple se prononcera sur l’initiative populaire «Baisse d’impôts pour tous»",
               "date": "2026-08-26T16:00:54.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -195,7 +200,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "VD",
@@ -283,12 +288,17 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Grandes réformes fiscales: administration réorganisée",
+              "date": "2026-11-09T10:01:00.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26780-grandes-reformes-fiscales-administration-reorganisee"
+            },
+            {
               "label": "Le peuple se prononcera sur l’initiative populaire «Baisse d’impôts pour tous»",
               "date": "2026-08-26T16:00:54.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -367,7 +377,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "VD",
@@ -455,12 +465,17 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Grandes réformes fiscales: administration réorganisée",
+              "date": "2026-11-09T10:01:00.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26780-grandes-reformes-fiscales-administration-reorganisee"
+            },
+            {
               "label": "Le peuple se prononcera sur l’initiative populaire «Baisse d’impôts pour tous»",
               "date": "2026-08-26T16:00:54.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -539,7 +554,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "VD",
@@ -627,12 +642,17 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Grandes réformes fiscales: administration réorganisée",
+              "date": "2026-11-09T10:01:00.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26780-grandes-reformes-fiscales-administration-reorganisee"
+            },
+            {
               "label": "Le peuple se prononcera sur l’initiative populaire «Baisse d’impôts pour tous»",
               "date": "2026-08-26T16:00:54.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -712,7 +732,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

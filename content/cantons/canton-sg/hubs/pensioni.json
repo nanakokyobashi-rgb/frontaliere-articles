@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "pensioni",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "5694963be7698067e07207435758161002a97c2776b301dc5a2623ce42213d46",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "229f16efeefab5b794f28b1e47401ac4a49db9a133a2f901a3577f7f984127c3",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "AHVeasy schafft Voraussetzungen für einen papierlosen Datenaustausch",
+              "date": "2026-11-09",
+              "url": "https://www.svasg.ch/news/meldungen/20261109_ahveasy.php"
+            },
+            {
               "label": "Wartungsarbeiten auf der Webseite aufgrund Sicherheitsupdates",
               "date": "2026-11-03",
               "url": "https://www.svasg.ch/news/meldungen/wartungsarbeiten.php"
@@ -161,7 +166,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +214,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "SG",
@@ -318,6 +323,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "AHVeasy schafft Voraussetzungen für einen papierlosen Datenaustausch",
+              "date": "2026-11-09",
+              "url": "https://www.svasg.ch/news/meldungen/20261109_ahveasy.php"
+            },
+            {
               "label": "Wartungsarbeiten auf der Webseite aufgrund Sicherheitsupdates",
               "date": "2026-11-03",
               "url": "https://www.svasg.ch/news/meldungen/wartungsarbeiten.php"
@@ -343,7 +353,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +401,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "SG",
@@ -500,6 +510,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "AHVeasy schafft Voraussetzungen für einen papierlosen Datenaustausch",
+              "date": "2026-11-09",
+              "url": "https://www.svasg.ch/news/meldungen/20261109_ahveasy.php"
+            },
+            {
               "label": "Wartungsarbeiten auf der Webseite aufgrund Sicherheitsupdates",
               "date": "2026-11-03",
               "url": "https://www.svasg.ch/news/meldungen/wartungsarbeiten.php"
@@ -525,7 +540,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +588,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "SG",
@@ -682,6 +697,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "AHVeasy schafft Voraussetzungen für einen papierlosen Datenaustausch",
+              "date": "2026-11-09",
+              "url": "https://www.svasg.ch/news/meldungen/20261109_ahveasy.php"
+            },
+            {
               "label": "Wartungsarbeiten auf der Webseite aufgrund Sicherheitsupdates",
               "date": "2026-11-03",
               "url": "https://www.svasg.ch/news/meldungen/wartungsarbeiten.php"
@@ -707,7 +727,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -755,7 +775,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

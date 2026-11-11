@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T11:58:53.708Z",
-  "contentHash": "3e92d7d5eda310d680f2e6f4fe43f55b06863f73bac5251083d6109c8676bbc2",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "05feaa8bb3dd2ecde207687640bd58d7f4fb33a90ed7735d44d1d5d438f7c092",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-09T22:22:33.694Z",
+      "updatedAt": "2026-11-10T19:49:08.581Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-10T02:51:12.262Z",
+      "updatedAt": "2026-11-10T21:55:47.516Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -102,7 +102,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-09T22:22:33.694Z"
+          "updatedAt": "2026-11-10T19:49:08.581Z"
         },
         {
           "id": "meteo",
@@ -112,11 +112,11 @@
             {
               "label": "Chur",
               "value": "10 °C",
-              "detail": "oggi da 9 a 15 °C"
+              "detail": "oggi da 9 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -154,7 +154,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "GR",
@@ -309,7 +309,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-09T22:22:33.694Z"
+          "updatedAt": "2026-11-10T19:49:08.581Z"
         },
         {
           "id": "meteo",
@@ -319,11 +319,11 @@
             {
               "label": "Chur",
               "value": "10 °C",
-              "detail": "today from 9 to 15 °C"
+              "detail": "today from 9 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +361,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "GR",
@@ -512,7 +512,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-09T22:22:33.694Z"
+          "updatedAt": "2026-11-10T19:49:08.581Z"
         },
         {
           "id": "meteo",
@@ -522,11 +522,11 @@
             {
               "label": "Chur",
               "value": "10 °C",
-              "detail": "heute 9 bis 15 °C"
+              "detail": "heute 9 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -564,7 +564,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "GR",
@@ -715,7 +715,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-09T22:22:33.694Z"
+          "updatedAt": "2026-11-10T19:49:08.581Z"
         },
         {
           "id": "meteo",
@@ -725,11 +725,11 @@
             {
               "label": "Chur",
               "value": "10 °C",
-              "detail": "aujourd’hui de 9 à 15 °C"
+              "detail": "aujourd’hui de 9 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -767,7 +767,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

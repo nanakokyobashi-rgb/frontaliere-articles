@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "57e51d7a828261b790d203f9ee86e1ab19ec5b03074f8bf120af01a1d694c40a",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "9962256c2d80da01995d2138f9a75d45d03bc3cdbd0b0b3355653fccb608f315",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T01:31:51.087Z",
+      "updatedAt": "2026-11-10T23:36:45.009Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "11",
+          "value": "12",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,6 +37,12 @@
               "detail": "Appenzeller Alpenbitter AG",
               "date": "2026-11-11",
               "url": "https://www.guidle.com/it/veranstaltungen/appenzell/rondleiding-en-proeverij-van-appenzeller-alpenbitter-ag_AA7sSJj"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Giovedì conferenza Museo Heiden / Hüben und Drüben",
@@ -85,17 +91,11 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
-            },
-            {
-              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
-              "detail": "Gonten",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "11",
+          "value": "12",
           "note": "from the site’s events calendar"
         }
       ],
@@ -148,6 +148,12 @@
               "detail": "Appenzeller Alpenbitter AG",
               "date": "2026-11-11",
               "url": "https://www.guidle.com/it/veranstaltungen/appenzell/rondleiding-en-proeverij-van-appenzeller-alpenbitter-ag_AA7sSJj"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Thursday lecture Museum Heiden / Hüben und Drüben",
@@ -196,17 +202,11 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
-            },
-            {
-              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
-              "detail": "Gonten",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "11",
+          "value": "12",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -259,6 +259,12 @@
               "detail": "Appenzeller Alpenbitter AG",
               "date": "2026-11-11",
               "url": "https://www.guidle.com/it/veranstaltungen/appenzell/rondleiding-en-proeverij-van-appenzeller-alpenbitter-ag_AA7sSJj"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Donnerstagsvortrag Museum Heiden / Hüben und Drüben",
@@ -307,17 +313,11 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
-            },
-            {
-              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
-              "detail": "Gonten",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "11",
+          "value": "12",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -370,6 +370,12 @@
               "detail": "Appenzeller Alpenbitter AG",
               "date": "2026-11-11",
               "url": "https://www.guidle.com/it/veranstaltungen/appenzell/rondleiding-en-proeverij-van-appenzeller-alpenbitter-ag_AA7sSJj"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel",
+              "date": "2026-11-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Conférence du jeudi au musée de Heiden / Hüben und Drüben",
@@ -418,17 +424,11 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
-            },
-            {
-              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
-              "detail": "Gonten",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-10T01:31:51.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

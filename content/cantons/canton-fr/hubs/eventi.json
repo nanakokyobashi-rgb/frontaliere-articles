@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-10T01:43:09.306Z",
-  "contentHash": "c5f6fcbba7e5c8a956fae0c1a83b908a520d3c6cd35f6999b8266d71584ceba2",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "ece7fbfb7bb3039696b430280bdfd6e2f6ac6e186652bd7d40a8cea7001ff35b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-07T12:39:52.087Z",
+      "updatedAt": "2026-11-10T23:36:45.009Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "33",
+          "value": "29",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,36 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Café-visite : Fascinants chiroptères",
-              "detail": "Fribourg",
-              "date": "2026-11-10",
-              "url": "https://www.fr.ch/mhnf/evenements/cafe-visite-fascinants-chiropteres"
-            },
-            {
-              "label": "COMPLET | Café-visite : Fascinants chiroptères",
-              "detail": "Fribourg",
-              "date": "2026-11-10",
-              "url": "https://www.fr.ch/mhnf/evenements/complet-cafe-visite-fascinants-chiropteres"
-            },
-            {
-              "label": "Découverte du mardi: Vierge à l'enfant en gloire, 1470",
-              "detail": "Fribourg",
-              "date": "2026-11-10",
-              "url": "https://www.fr.ch/mahf/evenements/decouverte-du-mardi-vierge-a-lenfant-en-gloire-1470-0"
-            },
-            {
-              "label": "Balkan Spirits",
-              "detail": "Podium Düdingen, Düdingen",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/balkan-spirits_ALGK4L5"
-            },
-            {
-              "label": "ONE OWL SOUL & LUCIEN MULLENER | SOUND BATH",
-              "detail": "MIAM",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/evenements/musique/fribourg/one-owl-soul-und-lucien-mullener-sound-bath_AtH4VY2"
-            },
             {
               "label": "Marine Leonardi – Mauvaise graine",
               "detail": "Equilibre, Fribourg",
@@ -96,11 +66,41 @@
               "detail": "Fribourg",
               "date": "2026-11-14",
               "url": "https://www.fr.ch/eikon/evenements/journee-portes-ouvertes-2026"
+            },
+            {
+              "label": "The wedding fair",
+              "detail": "Salle polyvalente, Villaz",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/salon-du-mariage/"
+            },
+            {
+              "label": "Guided tour of Grangettes Church & tasting",
+              "detail": "Romont, Grangettes",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-grangettes-church-tasting/"
+            },
+            {
+              "label": "Concert Ensemble vocal féminin ELLES en C",
+              "detail": "Elles en C",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/raiffeisen-memberplus/romont-fr/concert-ensemble-vocal-feminin-elles-en-c_AXP237G"
+            },
+            {
+              "label": "FRESEdE – Séance d'information en présentiel",
+              "detail": "Posieux",
+              "date": "2026-11-16",
+              "url": "https://www.fr.ch/essg/evenements/fresede-seance-dinformation-en-presentiel"
+            },
+            {
+              "label": "CFC ASSC avec maturité intégrée - Présentation Online via Teams - 17 novembre 2026",
+              "detail": "Teams",
+              "date": "2026-11-17",
+              "url": "https://www.fr.ch/essg/evenements/cfc-assc-avec-maturite-integree-presentation-online-via-teams-17-novembre-2026"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "FR",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "33",
+          "value": "29",
           "note": "from the site’s events calendar"
         }
       ],
@@ -175,36 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Café-visite : Fascinants chiroptères",
-              "detail": "Fribourg",
-              "date": "2026-11-10",
-              "url": "https://www.fr.ch/mhnf/evenements/cafe-visite-fascinants-chiropteres"
-            },
-            {
-              "label": "COMPLET | Café-visite : Fascinants chiroptères",
-              "detail": "Fribourg",
-              "date": "2026-11-10",
-              "url": "https://www.fr.ch/mhnf/evenements/complet-cafe-visite-fascinants-chiropteres"
-            },
-            {
-              "label": "Découverte du mardi: Vierge à l'enfant en gloire, 1470",
-              "detail": "Fribourg",
-              "date": "2026-11-10",
-              "url": "https://www.fr.ch/mahf/evenements/decouverte-du-mardi-vierge-a-lenfant-en-gloire-1470-0"
-            },
-            {
-              "label": "Balkan Spirits",
-              "detail": "Podium Düdingen, Düdingen",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/balkan-spirits_ALGK4L5"
-            },
-            {
-              "label": "ONE OWL SOUL & LUCIEN MULLENER | SOUND BATH",
-              "detail": "MIAM",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/evenements/musique/fribourg/one-owl-soul-und-lucien-mullener-sound-bath_AtH4VY2"
-            },
             {
               "label": "Marine Leonardi – Mauvaise graine",
               "detail": "Equilibre, Fribourg",
@@ -234,11 +204,41 @@
               "detail": "Fribourg",
               "date": "2026-11-14",
               "url": "https://www.fr.ch/eikon/evenements/journee-portes-ouvertes-2026"
+            },
+            {
+              "label": "The wedding fair",
+              "detail": "Salle polyvalente, Villaz",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/salon-du-mariage/"
+            },
+            {
+              "label": "Guided tour of Grangettes Church & tasting",
+              "detail": "Romont, Grangettes",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-grangettes-church-tasting/"
+            },
+            {
+              "label": "Concert Ensemble vocal féminin ELLES en C",
+              "detail": "Elles en C",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/raiffeisen-memberplus/romont-fr/concert-ensemble-vocal-feminin-elles-en-c_AXP237G"
+            },
+            {
+              "label": "FRESEdE – Séance d'information en présentiel",
+              "detail": "Posieux",
+              "date": "2026-11-16",
+              "url": "https://www.fr.ch/essg/evenements/fresede-seance-dinformation-en-presentiel"
+            },
+            {
+              "label": "CFC ASSC avec maturité intégrée - Présentation Online via Teams - 17 novembre 2026",
+              "detail": "Teams",
+              "date": "2026-11-17",
+              "url": "https://www.fr.ch/essg/evenements/cfc-assc-avec-maturite-integree-presentation-online-via-teams-17-novembre-2026"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "FR",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "33",
+          "value": "29",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -313,36 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Café-visite : Fascinants chiroptères",
-              "detail": "Fribourg",
-              "date": "2026-11-10",
-              "url": "https://www.fr.ch/mhnf/evenements/cafe-visite-fascinants-chiropteres"
-            },
-            {
-              "label": "COMPLET | Café-visite : Fascinants chiroptères",
-              "detail": "Fribourg",
-              "date": "2026-11-10",
-              "url": "https://www.fr.ch/mhnf/evenements/complet-cafe-visite-fascinants-chiropteres"
-            },
-            {
-              "label": "Découverte du mardi: Vierge à l'enfant en gloire, 1470",
-              "detail": "Fribourg",
-              "date": "2026-11-10",
-              "url": "https://www.fr.ch/mahf/evenements/decouverte-du-mardi-vierge-a-lenfant-en-gloire-1470-0"
-            },
-            {
-              "label": "Balkan Spirits",
-              "detail": "Podium Düdingen, Düdingen",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/balkan-spirits_ALGK4L5"
-            },
-            {
-              "label": "ONE OWL SOUL & LUCIEN MULLENER | SOUND BATH",
-              "detail": "MIAM",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/evenements/musique/fribourg/one-owl-soul-und-lucien-mullener-sound-bath_AtH4VY2"
-            },
             {
               "label": "Marine Leonardi – Mauvaise graine",
               "detail": "Equilibre, Fribourg",
@@ -372,11 +342,41 @@
               "detail": "Fribourg",
               "date": "2026-11-14",
               "url": "https://www.fr.ch/eikon/evenements/journee-portes-ouvertes-2026"
+            },
+            {
+              "label": "Die Hochzeitsmesse",
+              "detail": "Salle polyvalente, Villaz",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/salon-du-mariage/"
+            },
+            {
+              "label": "Führung durch die Kirche von Grangettes & Verkostung",
+              "detail": "Romont, Grangettes",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-grangettes-church-tasting/"
+            },
+            {
+              "label": "Concert Ensemble vocal féminin ELLES en C",
+              "detail": "Elles en C",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/raiffeisen-memberplus/romont-fr/concert-ensemble-vocal-feminin-elles-en-c_AXP237G"
+            },
+            {
+              "label": "FRESEdE – Séance d'information en présentiel",
+              "detail": "Posieux",
+              "date": "2026-11-16",
+              "url": "https://www.fr.ch/essg/evenements/fresede-seance-dinformation-en-presentiel"
+            },
+            {
+              "label": "CFC ASSC avec maturité intégrée - Présentation Online via Teams - 17 novembre 2026",
+              "detail": "Teams",
+              "date": "2026-11-17",
+              "url": "https://www.fr.ch/essg/evenements/cfc-assc-avec-maturite-integree-presentation-online-via-teams-17-novembre-2026"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +409,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "FR",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "33",
+          "value": "29",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -451,36 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Café-visite : Fascinants chiroptères",
-              "detail": "Fribourg",
-              "date": "2026-11-10",
-              "url": "https://www.fr.ch/mhnf/evenements/cafe-visite-fascinants-chiropteres"
-            },
-            {
-              "label": "COMPLET | Café-visite : Fascinants chiroptères",
-              "detail": "Fribourg",
-              "date": "2026-11-10",
-              "url": "https://www.fr.ch/mhnf/evenements/complet-cafe-visite-fascinants-chiropteres"
-            },
-            {
-              "label": "Découverte du mardi: Vierge à l'enfant en gloire, 1470",
-              "detail": "Fribourg",
-              "date": "2026-11-10",
-              "url": "https://www.fr.ch/mahf/evenements/decouverte-du-mardi-vierge-a-lenfant-en-gloire-1470-0"
-            },
-            {
-              "label": "Balkan Spirits",
-              "detail": "Podium Düdingen, Düdingen",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/balkan-spirits_ALGK4L5"
-            },
-            {
-              "label": "ONE OWL SOUL & LUCIEN MULLENER | SOUND BATH",
-              "detail": "MIAM",
-              "date": "2026-11-10",
-              "url": "https://www.guidle.com/it/evenements/musique/fribourg/one-owl-soul-und-lucien-mullener-sound-bath_AtH4VY2"
-            },
             {
               "label": "Marine Leonardi – Mauvaise graine",
               "detail": "Equilibre, Fribourg",
@@ -510,11 +480,41 @@
               "detail": "Fribourg",
               "date": "2026-11-14",
               "url": "https://www.fr.ch/eikon/evenements/journee-portes-ouvertes-2026"
+            },
+            {
+              "label": "Salon du mariage",
+              "detail": "Salle polyvalente, Villaz",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/salon-du-mariage/"
+            },
+            {
+              "label": "Visite guidée de l’église de Grangettes & dégustation",
+              "detail": "Romont, Grangettes",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-grangettes-church-tasting/"
+            },
+            {
+              "label": "Concert Ensemble vocal féminin ELLES en C",
+              "detail": "Elles en C",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/raiffeisen-memberplus/romont-fr/concert-ensemble-vocal-feminin-elles-en-c_AXP237G"
+            },
+            {
+              "label": "FRESEdE – Séance d'information en présentiel",
+              "detail": "Posieux",
+              "date": "2026-11-16",
+              "url": "https://www.fr.ch/essg/evenements/fresede-seance-dinformation-en-presentiel"
+            },
+            {
+              "label": "CFC ASSC avec maturité intégrée - Présentation Online via Teams - 17 novembre 2026",
+              "detail": "Teams",
+              "date": "2026-11-17",
+              "url": "https://www.fr.ch/essg/evenements/cfc-assc-avec-maturite-integree-presentation-online-via-teams-17-novembre-2026"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-11-07T12:39:52.087Z"
+          "updatedAt": "2026-11-10T23:36:45.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +547,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-10T01:43:09.306Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

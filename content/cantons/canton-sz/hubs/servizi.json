@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T11:58:53.708Z",
-  "contentHash": "9df902e1d3a42f9155824e422d1585aca8f5009747073117469966e426967e06",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "375f282982855368d2b710a96905fea570754c6d938684bb452fad1e7e342a49",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,18 +13,13 @@
       "keyFacts": 1
     },
     {
-      "id": "aste-targhe",
-      "updatedAt": "2026-11-09T22:22:33.694Z",
-      "keyFacts": 1
-    },
-    {
       "id": "meteo",
-      "updatedAt": "2026-11-10T02:51:12.262Z",
+      "updatedAt": "2026-11-10T21:55:47.516Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -40,11 +35,6 @@
           "value": "521,20 CHF",
           "note": "regione di premio 0, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "11",
-          "note": "offerta mediana 650 CHF"
         }
       ],
       "dataBlocks": [
@@ -64,49 +54,18 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
-          "items": [
-            {
-              "label": "SZ4278",
-              "value": "3650 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-10T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1604"
-            },
-            {
-              "label": "SZ6810",
-              "value": "3210 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-10T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
-            },
-            {
-              "label": "SZ11830",
-              "value": "1100 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-10T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1606"
-            }
-          ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-09T22:22:33.694Z"
-        },
-        {
           "id": "meteo",
           "title": "Meteo",
           "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
           "items": [
             {
               "label": "Schwyz",
-              "value": "9 °C",
-              "detail": "oggi da 9 a 15 °C"
+              "value": "10 °C",
+              "detail": "oggi da 9 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +88,7 @@
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +168,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "SZ",
@@ -222,11 +181,6 @@
           "value": "521.20 CHF",
           "note": "premium region 0, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "11",
-          "note": "typical bid 650 CHF"
         }
       ],
       "dataBlocks": [
@@ -246,49 +200,18 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
-          "items": [
-            {
-              "label": "SZ4278",
-              "value": "3,650 CHF",
-              "detail": "current bid",
-              "date": "2026-11-10T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1604"
-            },
-            {
-              "label": "SZ6810",
-              "value": "3,210 CHF",
-              "detail": "current bid",
-              "date": "2026-11-10T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
-            },
-            {
-              "label": "SZ11830",
-              "value": "1,100 CHF",
-              "detail": "current bid",
-              "date": "2026-11-10T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1606"
-            }
-          ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-09T22:22:33.694Z"
-        },
-        {
           "id": "meteo",
           "title": "Weather",
           "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
           "items": [
             {
               "label": "Schwyz",
-              "value": "9 °C",
-              "detail": "today from 9 to 15 °C"
+              "value": "10 °C",
+              "detail": "today from 9 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -311,7 +234,7 @@
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -387,7 +310,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "SZ",
@@ -400,11 +323,6 @@
           "value": "521.20 CHF",
           "note": "Prämienregion 0, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "11",
-          "note": "mittleres Gebot 650 CHF"
         }
       ],
       "dataBlocks": [
@@ -424,49 +342,18 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
-          "items": [
-            {
-              "label": "SZ4278",
-              "value": "3’650 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-10T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1604"
-            },
-            {
-              "label": "SZ6810",
-              "value": "3’210 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-10T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
-            },
-            {
-              "label": "SZ11830",
-              "value": "1’100 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-10T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1606"
-            }
-          ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-09T22:22:33.694Z"
-        },
-        {
           "id": "meteo",
           "title": "Wetter",
           "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
           "items": [
             {
               "label": "Schwyz",
-              "value": "9 °C",
-              "detail": "heute 9 bis 15 °C"
+              "value": "10 °C",
+              "detail": "heute 9 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -489,7 +376,7 @@
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -565,7 +452,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "SZ",
@@ -578,11 +465,6 @@
           "value": "521,20 CHF",
           "note": "région de primes 0, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "11",
-          "note": "offre centrale 650 CHF"
         }
       ],
       "dataBlocks": [
@@ -602,49 +484,18 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
-          "items": [
-            {
-              "label": "SZ4278",
-              "value": "3 650 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-10T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1604"
-            },
-            {
-              "label": "SZ6810",
-              "value": "3 210 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-10T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
-            },
-            {
-              "label": "SZ11830",
-              "value": "1 100 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-10T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1606"
-            }
-          ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-09T22:22:33.694Z"
-        },
-        {
           "id": "meteo",
           "title": "Météo",
           "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
           "items": [
             {
               "label": "Schwyz",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 9 à 15 °C"
+              "value": "10 °C",
+              "detail": "aujourd’hui de 9 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -667,7 +518,7 @@
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -739,7 +590,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

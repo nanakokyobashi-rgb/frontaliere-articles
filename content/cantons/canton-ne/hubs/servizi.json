@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T11:58:53.708Z",
-  "contentHash": "e826417eeee7988dec4541a5997bcec7c8a06c8d7ac46e7e4e5608ff8b9f4fd6",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "23480d8f22037cc7e7adafbe5dd28b757c97fda20dc49e9d3437d6d5f9575e49",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-10T02:51:12.262Z",
+      "updatedAt": "2026-11-10T21:55:47.516Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Neuchâtel",
-              "value": "10 °C",
-              "detail": "oggi da 10 a 15 °C"
+              "value": "11 °C",
+              "detail": "oggi da 10 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -98,7 +98,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "NE",
@@ -198,12 +198,12 @@
           "items": [
             {
               "label": "Neuchâtel",
-              "value": "10 °C",
-              "detail": "today from 10 to 15 °C"
+              "value": "11 °C",
+              "detail": "today from 10 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -236,7 +236,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -294,7 +294,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "NE",
@@ -332,12 +332,12 @@
           "items": [
             {
               "label": "Neuchâtel",
-              "value": "10 °C",
-              "detail": "heute 10 bis 15 °C"
+              "value": "11 °C",
+              "detail": "heute 10 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -370,7 +370,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -428,7 +428,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "NE",
@@ -466,12 +466,12 @@
           "items": [
             {
               "label": "Neuchâtel",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 10 à 15 °C"
+              "value": "11 °C",
+              "detail": "aujourd’hui de 10 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -504,7 +504,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -558,7 +558,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

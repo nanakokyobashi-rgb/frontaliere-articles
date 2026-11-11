@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T11:58:53.708Z",
-  "contentHash": "ae6054c7a41986be89cf24f7c1a6ad1c9da532ef7ef67d589b435eb32a844caf",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "b17e779be6f7c8caff044e74343040c29bafe21271e1c02684f066e80e318391",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-10T02:39:22.518Z",
+      "updatedAt": "2026-11-10T23:27:22.878Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-10T02:51:12.262Z",
+      "updatedAt": "2026-11-10T21:55:47.516Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -66,11 +66,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-09T23:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-10T23:00:00.000Z"
             },
             {
@@ -92,11 +87,16 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-11-14T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-15T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-10T02:39:22.518Z"
+          "updatedAt": "2026-11-10T23:27:22.878Z"
         },
         {
           "id": "meteo",
@@ -105,18 +105,23 @@
           "items": [
             {
               "label": "Genève",
-              "value": "10 °C",
-              "detail": "oggi da 9 a 16 °C"
+              "value": "11 °C",
+              "detail": "oggi da 9 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "OCIRT-Formation 100-26 - Aménagement des locaux de travail : de la conception à la réalisation dans le respect des exigences légales en matière de santé et sécurité au travail",
+              "date": "2026-11-10",
+              "url": "https://www.ge.ch/node/45417"
+            },
             {
               "label": "Courrier de promotion de la vaccination des résidents de 65ans et plus",
               "date": "2026-11-09",
@@ -141,14 +146,9 @@
               "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
               "date": "2026-11-05",
               "url": "https://www.ge.ch/node/45404"
-            },
-            {
-              "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
-              "date": "2026-11-03",
-              "url": "https://www.ge.ch/node/45272"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "GE",
@@ -267,11 +267,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-09T23:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-10T23:00:00.000Z"
             },
             {
@@ -293,11 +288,16 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-11-14T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-15T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-10T02:39:22.518Z"
+          "updatedAt": "2026-11-10T23:27:22.878Z"
         },
         {
           "id": "meteo",
@@ -306,18 +306,23 @@
           "items": [
             {
               "label": "Genève",
-              "value": "10 °C",
-              "detail": "today from 9 to 16 °C"
+              "value": "11 °C",
+              "detail": "today from 9 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "OCIRT-Formation 100-26 - Aménagement des locaux de travail : de la conception à la réalisation dans le respect des exigences légales en matière de santé et sécurité au travail",
+              "date": "2026-11-10",
+              "url": "https://www.ge.ch/node/45417"
+            },
             {
               "label": "Courrier de promotion de la vaccination des résidents de 65ans et plus",
               "date": "2026-11-09",
@@ -342,14 +347,9 @@
               "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
               "date": "2026-11-05",
               "url": "https://www.ge.ch/node/45404"
-            },
-            {
-              "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
-              "date": "2026-11-03",
-              "url": "https://www.ge.ch/node/45272"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "GE",
@@ -463,11 +463,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-09T23:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-10T23:00:00.000Z"
             },
             {
@@ -489,11 +484,16 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-11-14T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-15T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-10T02:39:22.518Z"
+          "updatedAt": "2026-11-10T23:27:22.878Z"
         },
         {
           "id": "meteo",
@@ -502,18 +502,23 @@
           "items": [
             {
               "label": "Genève",
-              "value": "10 °C",
-              "detail": "heute 9 bis 16 °C"
+              "value": "11 °C",
+              "detail": "heute 9 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "OCIRT-Formation 100-26 - Aménagement des locaux de travail : de la conception à la réalisation dans le respect des exigences légales en matière de santé et sécurité au travail",
+              "date": "2026-11-10",
+              "url": "https://www.ge.ch/node/45417"
+            },
             {
               "label": "Courrier de promotion de la vaccination des résidents de 65ans et plus",
               "date": "2026-11-09",
@@ -538,14 +543,9 @@
               "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
               "date": "2026-11-05",
               "url": "https://www.ge.ch/node/45404"
-            },
-            {
-              "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
-              "date": "2026-11-03",
-              "url": "https://www.ge.ch/node/45272"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -620,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "GE",
@@ -659,11 +659,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-09T23:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-11-10T23:00:00.000Z"
             },
             {
@@ -685,11 +680,16 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-11-14T23:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-15T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-10T02:39:22.518Z"
+          "updatedAt": "2026-11-10T23:27:22.878Z"
         },
         {
           "id": "meteo",
@@ -698,18 +698,23 @@
           "items": [
             {
               "label": "Genève",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 9 à 16 °C"
+              "value": "11 °C",
+              "detail": "aujourd’hui de 9 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "OCIRT-Formation 100-26 - Aménagement des locaux de travail : de la conception à la réalisation dans le respect des exigences légales en matière de santé et sécurité au travail",
+              "date": "2026-11-10",
+              "url": "https://www.ge.ch/node/45417"
+            },
             {
               "label": "Courrier de promotion de la vaccination des résidents de 65ans et plus",
               "date": "2026-11-09",
@@ -734,14 +739,9 @@
               "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
               "date": "2026-11-05",
               "url": "https://www.ge.ch/node/45404"
-            },
-            {
-              "label": "Commerces : ouverture durant la période des fêtes de fin d'année 2026",
-              "date": "2026-11-03",
-              "url": "https://www.ge.ch/node/45272"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -813,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }

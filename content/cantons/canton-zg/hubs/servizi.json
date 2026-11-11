@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "servizi",
-  "updatedAt": "2026-11-10T11:58:53.708Z",
-  "contentHash": "463330e82dee30ec0a44801a0978185dc393ca6f436453a112336e3e2fb4d0f5",
+  "updatedAt": "2026-11-11T06:54:26.222Z",
+  "contentHash": "5947db1bff42e09ab17294d2d245586fd0e1bda3c73227615b8688c6ff8aaa98",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-10T02:51:12.262Z",
+      "updatedAt": "2026-11-10T21:55:47.516Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Zug",
-              "value": "9 °C",
-              "detail": "oggi da 8 a 15 °C"
+              "value": "10 °C",
+              "detail": "oggi da 8 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -103,7 +103,7 @@
               "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -183,7 +183,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "en": {
       "canton": "ZG",
@@ -221,12 +221,12 @@
           "items": [
             {
               "label": "Zug",
-              "value": "9 °C",
-              "detail": "today from 8 to 15 °C"
+              "value": "10 °C",
+              "detail": "today from 8 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -264,7 +264,7 @@
               "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -340,7 +340,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "de": {
       "canton": "ZG",
@@ -378,12 +378,12 @@
           "items": [
             {
               "label": "Zug",
-              "value": "9 °C",
-              "detail": "heute 8 bis 15 °C"
+              "value": "10 °C",
+              "detail": "heute 8 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -421,7 +421,7 @@
               "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -497,7 +497,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     },
     "fr": {
       "canton": "ZG",
@@ -535,12 +535,12 @@
           "items": [
             {
               "label": "Zug",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 8 à 15 °C"
+              "value": "10 °C",
+              "detail": "aujourd’hui de 8 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-10T02:51:12.262Z"
+          "updatedAt": "2026-11-10T21:55:47.516Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -578,7 +578,7 @@
               "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -650,7 +650,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-10T11:58:53.708Z"
+      "updatedAt": "2026-11-11T06:54:26.222Z"
     }
   }
 }
