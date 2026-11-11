@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T16:22:46.747Z",
-  "contentHash": "5c3c453ebe689a1bb24b204d0704c7cd7edaeb8bceb9619fc94d2399cde58b04",
+  "updatedAt": "2026-11-11T21:52:52.345Z",
+  "contentHash": "e6db38f82ff79cc8a69f9e8e33df45f713bc110e1b728c4e937b19a0c2bdf008",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "17",
+          "value": "16",
           "note": "segnalazioni aggiornate: 10 novembre 2026"
         },
         {
@@ -276,7 +276,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-11T21:52:52.345Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -291,7 +291,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "17",
+          "value": "16",
           "note": "reports as of 10 November 2026"
         },
         {
@@ -530,7 +530,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-11T21:52:52.345Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -545,7 +545,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "17",
+          "value": "16",
           "note": "Meldungen vom 10. November 2026"
         },
         {
@@ -784,7 +784,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-11T21:52:52.345Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -799,7 +799,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "17",
+          "value": "16",
           "note": "signalements au 10 novembre 2026"
         },
         {
@@ -1038,7 +1038,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-11T21:52:52.345Z"
     }
   }
 }

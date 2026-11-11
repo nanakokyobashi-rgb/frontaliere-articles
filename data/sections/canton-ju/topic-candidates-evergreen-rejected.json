@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.lejdj.ch/articles/ecole-a-journee-continue-neuchatel-trouve-le-bilan-tres-positif-105808": {
-      "section": "canton-ju",
-      "ts": 1794221575818
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261109-unicredit-nouveau-trimestre-record-en-termes-de-benefice.html": {
-      "section": "canton-ju",
-      "ts": 1794221588517
-    },
     "canton-ju::https://www.rfj.ch/rfj/actualite/suisse/20261109-energie-les-entreprises-pourraient-se-defendre-contre-les-drones.html": {
       "section": "canton-ju",
       "ts": 1794269600121
@@ -31,6 +23,14 @@
     "canton-ju::https://www.estrepublicain.fr/economie/2026/11/10/face-a-l-instabilite-sociale-en-france-la-devise-suisse-se-renforce-et-ca-profite-aux-frontaliers": {
       "section": "canton-ju",
       "ts": 1794350392141
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261111-avant-les-legislatives-l-espagne-en-greve-generale.html": {
+      "section": "canton-ju",
+      "ts": 1794434515003
+    },
+    "canton-ju::https://www.lejdj.ch/articles/ecole-a-journee-continue-neuchatel-trouve-le-bilan-tres-positif-105808": {
+      "section": "canton-ju",
+      "ts": 1794434544078
     }
   }
 }
