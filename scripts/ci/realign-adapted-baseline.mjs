@@ -31,12 +31,13 @@
  *
  *   1. ogni PR del sito dichiarata e' mergiata su `main`;
  *   2. TUTTI i commit del sito che cambiano il contenuto del file dopo la
- *      baseline registrata appartengono a PR dichiarate. La storia si legge
- *      dal piu' recente fino al commit il cui contenuto ha l'hash di
- *      `baseline.site`, per al massimo `REALIGN_SITE_HISTORY_CAP` commit: oltre
- *      il tetto, o senza ritrovare la baseline, non si scrive. La forma a
- *      ELENCO serve alle catene (piu' PR del sito sullo stesso file fra una
- *      baseline e l'altra);
+ *      baseline registrata appartengono a PR dichiarate. Il delta e' misurato
+ *      rispetto ai parent reali del commit (anche tutti i parent dei merge),
+ *      non all'elemento successivo nell'ordine API. La storia si legge dal piu'
+ *      recente fino al commit il cui contenuto ha l'hash di `baseline.site`,
+ *      per al massimo `REALIGN_SITE_HISTORY_CAP` commit: oltre il tetto, o
+ *      senza ritrovare la baseline, non si scrive. La forma a ELENCO serve alle
+ *      catene (piu' PR del sito sullo stesso file fra una baseline e l'altra);
  *   3. il file del corpus su `main` ha ancora l'hash che aveva al merge della
  *      PR dichiarante: nessuno l'ha mosso dopo.
  *
@@ -332,7 +333,8 @@ function sitePrHold(declaration, sitePrs) {
  * @param {object} a.siteCommits
  *        `commits`: i commit restituiti dalla storia del path DOPO la baseline,
  *        dal piu' recente, ciascuno con hash del contenuto (o `null` se il path
- *        non esiste) e `prs` (numeri delle PR mergiate su `main` a cui appartiene);
+ *        non esiste), `parentHashes` con l'hash del path per ogni parent reale
+ *        e `prs` (numeri delle PR mergiate su `main` a cui appartiene);
  *        `baselineFound`: la storia letta arriva al commit con l'hash di
  *        `baseline.site`; `headHash`: hash del file al commit piu' recente;
  *        `cap`: tetto di commit letti.
@@ -355,13 +357,13 @@ export function realignDecision({ entry, declaration, sitePrs, siteCommits, corp
   }
   if (!siteCommits.headHash) return hold('site-file-missing', 'il file non e\' leggibile sul `main` del sito');
 
-  // La storia API puo' includere commit che non cambiano il blob del path.
-  // Per l'avanzamento confrontiamo ogni commit con quello immediatamente piu'
-  // vecchio; l'ultimo della lista si confronta con la baseline dichiarata.
-  const contentChangingCommits = siteCommits.commits.filter((commit, index) => {
-    const olderCommit = siteCommits.commits[index + 1];
-    const olderHash = olderCommit ? olderCommit.hash : baseline.site;
-    return commit.hash === undefined || olderHash === undefined || commit.hash !== olderHash;
+  // La storia API e' un DAG: il commit successivo nell'elenco non e' per forza
+  // un suo parent. Un hash mancante o senza parent resta cambiamento per
+  // prudenza; nei merge basta che il blob differisca da un parent reale.
+  const contentChangingCommits = siteCommits.commits.filter((commit) => {
+    const parentHashes = commit.parentHashes;
+    if (!Array.isArray(parentHashes) || parentHashes.length === 0 || commit.hash === undefined) return true;
+    return parentHashes.some((parentHash) => parentHash === undefined || parentHash !== commit.hash);
   });
 
   if (!contentChangingCommits.length) {
@@ -463,20 +465,40 @@ export function initRunFailed({ childStatus, statuses }) {
 export async function gatherSiteCommits({ sitePath, baselineSite, cap, io }) {
   const history = await io.siteHistory(sitePath, cap);
   const after = [];
+  const hashCache = new Map();
+  const hashAt = async (sha) => {
+    if (!hashCache.has(sha)) hashCache.set(sha, await io.siteHashAt(sitePath, sha));
+    return hashCache.get(sha);
+  };
   let headHash = null;
   let baselineFound = false;
   for (let index = 0; index < history.length; index += 1) {
-    const hash = await io.siteHashAt(sitePath, history[index].sha);
+    const hash = await hashAt(history[index].sha);
     if (index === 0) headHash = hash;
     if (hash !== null && hash === baselineSite) {
       baselineFound = true;
       break;
     }
-    after.push({ sha: history[index].sha, hash });
+    after.push({ sha: history[index].sha, hash, parents: history[index].parents });
   }
   if (!baselineFound) return { commits: after, baselineFound, headHash, cap };
   const commits = [];
-  for (const commit of after) commits.push({ ...commit, prs: await io.commitPrs(commit.sha) });
+  for (const commit of after) {
+    const parentHashes = Array.isArray(commit.parents)
+      ? []
+      : null;
+    if (parentHashes) {
+      for (const parentSha of commit.parents) {
+        parentHashes.push(typeof parentSha === 'string' && parentSha ? await hashAt(parentSha) : undefined);
+      }
+    }
+    commits.push({
+      sha: commit.sha,
+      hash: commit.hash,
+      parentHashes,
+      prs: await io.commitPrs(commit.sha),
+    });
+  }
   return { commits, baselineFound, headHash, cap };
 }
 
@@ -530,7 +552,12 @@ export function createIo({
       const commits = await getJson(
         `https://api.github.com/repos/${siteRepo}/commits?path=${encodeURIComponent(sitePath)}&sha=${SITE_MAIN}&per_page=${Math.min(cap, SITE_HISTORY_MAX)}`,
       );
-      return commits.slice(0, cap).map((commit) => ({ sha: commit.sha }));
+      return commits.slice(0, cap).map((commit) => ({
+        sha: commit.sha,
+        parents: Array.isArray(commit.parents)
+          ? commit.parents.map((parent) => (typeof parent?.sha === 'string' ? parent.sha : null))
+          : null,
+      }));
     },
     async siteHashAt(sitePath, sha) {
       const bytes = await siteFile(sitePath, sha);
