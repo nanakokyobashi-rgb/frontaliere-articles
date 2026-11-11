@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-eteria-gioielleria-berta-serret.webp",
+      "sha256": "1a6b1aa91c159c2cc1484e70c30fbf8ec3a72f5f2e4ae6c2110517ca1c4d6acf"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-eteria-gioielleria-berta-serret-480w.webp",
+      "sha256": "48ec578293bff43e93b368039fe0881f8360125adf79ff6ea6843c30dabe4984"
+    }
+  ]
 }
