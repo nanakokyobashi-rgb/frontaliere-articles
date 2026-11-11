@@ -99,6 +99,16 @@ test('Application Concierge renewal rollout flags reach the environment loader',
   }
 });
 
+test('expired-job edge section rollout is optional and defaults off', () => {
+  const key = 'EXPIRED_JOB_EDGE_SECTIONS';
+  assert.deepEqual(RC_TO_ENV[key], [key]);
+  assert.equal(EXPECTED_ABSENT_RC_KEYS.has(key), true);
+  assert.equal(shouldExportRcValue('zurigo', key), true);
+  assert.equal(shouldExportRcValue(null, key), false);
+  assert.equal(shouldExportRcValue('', key), false);
+  assert.equal(rcValueState(null, key), 'expected-absent');
+});
+
 test('il loader corpus conserva il mapping della chiave Tankerkönig', () => {
   const source = fs.readFileSync(path.join(ROOT, 'scripts/load-rc-env.mjs'), 'utf8');
   assert.match(source, /TANKERKOENIG_API_KEY:\s+\['TANKERKOENIG_API_KEY'\]/);
