@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-nachhaltigkeit": {
-      "section": "canton-sg",
-      "ts": 1794182436619
-    },
     "canton-sg::https://www.unisg.ch/de/newsroom/ceos-to-campus-2026": {
       "section": "canton-sg",
       "ts": 1794318364934
@@ -23,6 +19,10 @@
     "canton-sg::https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kriessern--17-jaehriger-bei-unfall-schwer-verletzt.html": {
       "section": "canton-sg",
       "ts": 1794349838694
+    },
+    "canton-sg::https://www.stgallen24.ch/agenda/45938-digitale-angebote-e-books-und-hoerbuecher?date=256470": {
+      "section": "canton-sg",
+      "ts": 1794360275657
     }
   }
 }
