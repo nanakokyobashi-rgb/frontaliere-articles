@@ -45,6 +45,9 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.referendum-costruzione-alloggi-hbm.title': 'Referendum against law 13694 on the construction of HBM housing in Geneva',
     'blog.article.referendum-costruzione-alloggi-hbm.excerpt': 'HBM account for 5,2% of the cantonal housing stock. The referendum challenges law 13694.',
     'blog.article.referendum-costruzione-alloggi-hbm.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.oit-protesta-tagli-ginevra.title': 'ILO in Geneva: nearly 300 employees protest job cuts',
+    'blog.article.oit-protesta-tagli-ginevra.excerpt': 'On Tuesday, nearly 300 employees of the International Labour Organization (ILO) protested in Geneva against the planned elimination of 86 filled positions for the 2026-2027 period.',
+    'blog.article.oit-protesta-tagli-ginevra.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGeEn;

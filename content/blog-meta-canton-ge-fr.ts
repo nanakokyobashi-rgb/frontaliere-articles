@@ -45,6 +45,9 @@ const blogMetaCantonGeFr: Record<string, string> = {
     'blog.article.referendum-costruzione-alloggi-hbm.title': 'Référendum contre la loi 13694 sur la construction de logements HBM à Genève',
     'blog.article.referendum-costruzione-alloggi-hbm.excerpt': 'Les HBM représentent 5,2 % du parc de logements cantonal. Le référendum conteste la loi 13694.',
     'blog.article.referendum-costruzione-alloggi-hbm.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.oit-protesta-tagli-ginevra.title': 'OIT à Genève : près de 300 employés protestent contre des suppressions de postes',
+    'blog.article.oit-protesta-tagli-ginevra.excerpt': 'Mardi, près de 300 employés de l\'Organisation internationale du travail (OIT) ont protesté à Genève contre la suppression de 86 postes occupés prévue pour la période 2026-2027.',
+    'blog.article.oit-protesta-tagli-ginevra.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGeFr;

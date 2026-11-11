@@ -543,6 +543,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-oit-protesta-tagli-ginevra': {
+    title: 'OIT a Ginevra: quasi 300 dipendenti protestano contro tagli di posti',
+    description: 'Quasi 300 dipendenti OIT protestano a Ginevra contro i 86 tagli previsti per il 2026-2027. La Svizzera negozia un impegno decennale per la sede.',
+    keywords: 'frontalieri, ticino, svizzera, italia, ginevra, quasi, dipendenti, protestano',
+    ogTitle: 'OIT Ginevra: proteste contro tagli posti di lavoro 2026',
+    ogDescription: 'Quasi 300 dipendenti OIT protestano a Ginevra contro i 86 tagli previsti per il 2026-2027. La Svizzera negozia un impegno decennale per mantenere la sede.',
+    canonicalPath: '/articoli-ginevra/oit-protesta-tagli-ginevra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "OIT a Ginevra: quasi 300 dipendenti protestano contro tagli di posti",
+      "description": "Quasi 300 dipendenti OIT protestano a Ginevra contro i 86 tagli previsti per il 2026-2027. La Svizzera negozia un impegno decennale per la sede.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-oit-protesta-tagli-ginevra.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-11T08:27:02+00:00",
+      "dateModified": "2026-11-11T08:27:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ginevra/oit-protesta-tagli-ginevra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

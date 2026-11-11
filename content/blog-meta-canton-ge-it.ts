@@ -45,6 +45,9 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.referendum-costruzione-alloggi-hbm.title': 'Referendum contro legge 13694 sulla costruzione di alloggi HBM a Ginevra',
     'blog.article.referendum-costruzione-alloggi-hbm.excerpt': 'Gli HBM sono il 5,2% del parco abitativo cantonale. Il referendum contesta la legge 13694.',
     'blog.article.referendum-costruzione-alloggi-hbm.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.oit-protesta-tagli-ginevra.title': 'OIT a Ginevra: quasi 300 dipendenti protestano contro tagli di posti',
+    'blog.article.oit-protesta-tagli-ginevra.excerpt': 'Martedì quasi 300 dipendenti dell\'Organizzazione internazionale del lavoro (OIT) hanno protestato a Ginevra contro la soppressione di 86 posti occupati prevista per il periodo 2026-2027.',
+    'blog.article.oit-protesta-tagli-ginevra.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGeIt;

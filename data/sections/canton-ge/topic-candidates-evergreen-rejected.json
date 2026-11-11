@@ -11,6 +11,10 @@
     "canton-ge::https://lecourrier.ch/2026/11/10/hausse-des-loyers-apres-renovation-fronde-de-la-gauche": {
       "section": "canton-ge",
       "ts": 1794380564769
+    },
+    "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6078": {
+      "section": "canton-ge",
+      "ts": 1794384510937
     }
   }
 }

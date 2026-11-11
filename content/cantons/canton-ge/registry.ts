@@ -161,4 +161,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'oit-protesta-tagli-ginevra',
+ category: 'novita',
+ date: '2026-11-11T08:27:02.804Z',
+ image: '/images/blog/article-oit-protesta-tagli-ginevra.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
