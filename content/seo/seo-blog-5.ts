@@ -114658,7 +114658,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     title: 'Stipendi frontalieri 2027: aumento nominale 1% secondo UBS',
     description: 'Stima UBS 2027: aumento nominale 1% e reale 0,2% per i frontalieri. Dettagli settoriali e date contratti stagionali.',
     keywords: 'frontalieri, stipendi 2027, UBS, aumento salariale, inflazione, Ticino',
-    ogTitle: 'Stipendi frontalieri 2027: aumento nominale 1%',
+    ogTitle: 'Stipendi frontalieri 2027: aumento nominale 1% secondo UBS',
     ogDescription: 'L\'indagine UBS prevede un aumento nominale dell\'1% per i frontalieri nel 2027. La crescita reale è dello 0,2% a causa dell\'inflazione dello 0,8%.',
     canonicalPath: '/articoli-frontaliere/aumenti-stipendi-frontalieri-2027/',
     structuredData: {
