@@ -4,22 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/822920/die-walliser-wirtschaft-angesichts-globaler-herausforderungen": {
-      "section": "canton-vs",
-      "ts": 1794175953123
-    },
-    "canton-vs::https://www.pomona.ch/story/823765/der-ahvpoker-wer-zahlt-die-rechnung-wenn-das-volk-nein-sagt": {
-      "section": "canton-vs",
-      "ts": 1794179818324
-    },
-    "canton-vs::https://www.pomona.ch/story/824385/kamala-harris-im-interview-was-sie-zu-trumps-z%c3%b6llen-gegen-die-schweiz-sagt": {
-      "section": "canton-vs",
-      "ts": 1794179819545
-    },
-    "canton-vs::https://www.pomona.ch/story/824383/munition-f%c3%bcr-die-ukraine-granaten-in-den-sudan-was-ein-ja-bei-waffenexporten-%c3%a4ndert": {
-      "section": "canton-vs",
-      "ts": 1794179820819
-    },
     "canton-vs::https://www.pomona.ch/story/824007/der-kanton-wallis-bietet-teilzeitbezahlung-bei-vollzeitstelle": {
       "section": "canton-vs",
       "ts": 1794234804737
@@ -39,6 +23,10 @@
     "canton-vs::https://www.pomona.ch/story/825047/z%c3%a4hneknirschend-durchgewunken-walliser-parlament-kapituliert-vor-millionenmehrkosten": {
       "section": "canton-vs",
       "ts": 1794316525465
+    },
+    "canton-vs::https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/attualita-26/articolo/frontalieri-del-vco-tante-questioni-ancora-aperte-locatelli-chiede-un-tavolo-provinciale-1.html": {
+      "section": "canton-vs",
+      "ts": 1794403102779
     }
   }
 }
