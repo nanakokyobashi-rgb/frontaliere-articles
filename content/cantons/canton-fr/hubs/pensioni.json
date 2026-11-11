@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "pensioni",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "6ea7722c9832a0b4533b71f4219b77536dec3cef95bf35ffc76d81a104ff0a88",
+  "updatedAt": "2026-11-11T11:16:44.434Z",
+  "contentHash": "86d16a78fa3cf52b6106d0cbab470d5d6e7ee094f08b6899c428d11a07e08bd1",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-10T22:34:57.446Z",
       "keyFacts": 0
     }
   ],
@@ -159,14 +159,9 @@
               "label": "EMS : ajustement du prix de pension et répartition des surcoûts des journées d’attente",
               "date": "2026-07-20T08:43:01.000Z",
               "url": "https://www.fr.ch/dsas/actualites/ems-ajustement-du-prix-de-pension-et-repartition-des-surcouts-des-journees-dattente"
-            },
-            {
-              "label": "Foire aux questions du SPS",
-              "date": "2026-07-14T10:32:58.000Z",
-              "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -202,7 +197,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T11:16:44.434Z"
     },
     "en": {
       "canton": "FR",
@@ -334,14 +329,9 @@
               "label": "EMS : ajustement du prix de pension et répartition des surcoûts des journées d’attente",
               "date": "2026-07-20T08:43:01.000Z",
               "url": "https://www.fr.ch/dsas/actualites/ems-ajustement-du-prix-de-pension-et-repartition-des-surcouts-des-journees-dattente"
-            },
-            {
-              "label": "Foire aux questions du SPS",
-              "date": "2026-07-14T10:32:58.000Z",
-              "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -377,7 +367,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T11:16:44.434Z"
     },
     "de": {
       "canton": "FR",
@@ -509,14 +499,9 @@
               "label": "EMS : ajustement du prix de pension et répartition des surcoûts des journées d’attente",
               "date": "2026-07-20T08:43:01.000Z",
               "url": "https://www.fr.ch/dsas/actualites/ems-ajustement-du-prix-de-pension-et-repartition-des-surcouts-des-journees-dattente"
-            },
-            {
-              "label": "Foire aux questions du SPS",
-              "date": "2026-07-14T10:32:58.000Z",
-              "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -552,7 +537,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T11:16:44.434Z"
     },
     "fr": {
       "canton": "FR",
@@ -684,14 +669,9 @@
               "label": "EMS : ajustement du prix de pension et répartition des surcoûts des journées d’attente",
               "date": "2026-07-20T08:43:01.000Z",
               "url": "https://www.fr.ch/dsas/actualites/ems-ajustement-du-prix-de-pension-et-repartition-des-surcouts-des-journees-dattente"
-            },
-            {
-              "label": "Foire aux questions du SPS",
-              "date": "2026-07-14T10:32:58.000Z",
-              "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-10T22:34:57.446Z"
         }
       ],
       "curatedArticles": [
@@ -727,7 +707,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-11T11:16:44.434Z"
     }
   }
 }
