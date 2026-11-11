@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-sanitari-italiani-fuga-svizzera.webp",
+      "sha256": "02fff865e09c5ce300a6de8ba7a274988bbc440239e8b6bb6992b5e8dd21b4ea"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-sanitari-italiani-fuga-svizzera-480w.webp",
+      "sha256": "e961c095cc4091f77f6baba5d6ae716dfef24de33704ffa96bdfacede887591c"
+    }
+  ]
 }
