@@ -14328,6 +14328,10 @@
     "svizzera::https://www3.ti.ch/dfe/dr/ustat/allegati/digitale/mercato_lavoro/notiziario/2026q1": {
       "section": "svizzera",
       "ts": 1794407846815
+    },
+    "frontaliere::https://www.tio.ch/rubriche/ospite/1962408/avs-costo-misura-mano-iva-altra-da": {
+      "section": "frontaliere",
+      "ts": 1794431728681
     }
   }
 }
