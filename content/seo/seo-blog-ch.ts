@@ -110130,28 +110130,28 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
   'blog-eteria-gioielleria-berta-serret': {
-    title: 'ETERIA: Berta Serret lancia il nuovo lusso etico con diamanti da laboratorio e oro riciclato',
-    description: 'L’11 novembre 2026 debutta online ETERIA JEWELLERY: alta gioielleria sostenibile sotto il segno dello Smart Luxury, creata da Berta Serret con oro riciclato CoC e diamanti IGI.',
-    keywords: 'ETERIA, Berta Serret, Smart Luxury, gioielli oro riciclato, diamanti da laboratorio, Tracemark, Facet Barcelona, gioielleria sostenibile, acquisto gioielli online',
-    ogTitle: 'ETERIA: Berta Serret lancia il nuovo lusso etico con diamanti da laboratorio',
-    ogDescription: 'Debutto ufficiale online per ETERIA JEWELLERY: oro riciclato certificato CoC, diamanti lab-grown IGI e tracciabilità TRACEMARK con il nuovo modello Smart Luxury.',
+    title: 'ETERIA: Berta Serret lancia il nuovo lusso etico con diamanti di laboratorio e oro riciclato',
+    description: 'L’11 novembre 2026 debutta online ETERIA JEWELLERY: alta gioielleria e lusso etico sotto il segno dello Smart Luxury, creata da Berta Serret con oro riciclato CoC e diamanti di laboratorio IGI.',
+    keywords: 'ETERIA, Berta Serret, Smart Luxury, lusso etico, gioielli oro riciclato, diamanti di laboratorio, Tracemark, Facet Barcelona, gioielleria sostenibile, acquisto gioielli online',
+    ogTitle: 'ETERIA: Berta Serret lancia il nuovo lusso etico con diamanti di laboratorio',
+    ogDescription: 'Debutto ufficiale online per ETERIA JEWELLERY: oro riciclato certificato CoC, diamanti di laboratorio IGI e tracciabilità TRACEMARK con il modello di lusso etico Smart Luxury.',
     canonicalPath: '/articoli-svizzera/eteria-gioielleria-berta-serret/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "ETERIA: Berta Serret lancia il nuovo lusso etico con diamanti da laboratorio e oro riciclato",
-      "description": "L’11 novembre 2026 debutta online ETERIA JEWELLERY: alta gioielleria sostenibile sotto il segno dello Smart Luxury, creata da Berta Serret con oro riciclato CoC e diamanti IGI.",
+      "headline": "ETERIA: Berta Serret lancia il nuovo lusso etico con diamanti di laboratorio e oro riciclato",
+      "description": "L’11 novembre 2026 debutta online ETERIA JEWELLERY: alta gioielleria e lusso etico sotto il segno dello Smart Luxury, creata da Berta Serret con oro riciclato CoC e diamanti di laboratorio IGI.",
       "image": {
         "@type": "ImageObject",
-        "acquireLicensePage": "https://ai.google.dev/gemini-api/terms",
-        "copyrightNotice": "Generated media; provider terms apply.",
-        "license": "https://ai.google.dev/gemini-api/terms",
-        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
-        "creditText": "frontaliereticino.ch",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© Berta Serret / Instagram @bertaserret. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Person", "name": "Berta Serret", "url": "https://www.instagram.com/bertaserret/" },
+        "creditText": "Berta Serret",
         "url": `${BASE_URL}/images/blog/article-eteria-gioielleria-berta-serret.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Anello solitario con diamante brillante in oro riciclato firmato ETERIA"
+        "caption": "Berta Serret, fondatrice di ETERIA JEWELLERY"
       },
       "datePublished": "2026-11-11T10:30:00+00:00",
       "dateModified": "2026-11-11T10:30:00+00:00",
@@ -110164,6 +110164,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/eteria-gioielleria-berta-serret/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-regime-fiscale-rendite-elvetiche': {
+    title: 'Pensioni svizzere: via libera all\'imposizione sostitutiva',
+    description: 'QuotidianoPiù annuncia il via libera all\'imposizione sostitutiva sulle pensioni svizzere: il quadro fiscale e i limiti dei dati disponibili.',
+    keywords: 'frontalieri, ticino, svizzera, italia, pensioni, svizzere, libera, imposizione',
+    ogTitle: 'Pensioni svizzere e imposizione sostitutiva',
+    ogDescription: 'QuotidianoPiù annuncia il via libera all\'imposizione sostitutiva sulle pensioni svizzere. Il titolo non precisa autorità, decorrenza o importi; il sistema fiscale svizzero distingue imposta federale diretta, Cantoni e comuni.',
+    canonicalPath: '/articoli-svizzera/regime-fiscale-rendite-elvetiche/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pensioni svizzere: via libera all'imposizione sostitutiva",
+      "description": "QuotidianoPiù annuncia il via libera all'imposizione sostitutiva sulle pensioni svizzere: il quadro fiscale e i limiti dei dati disponibili.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-regime-fiscale-rendite-elvetiche.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-11T12:22:03+00:00",
+      "dateModified": "2026-11-11T12:22:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/regime-fiscale-rendite-elvetiche/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

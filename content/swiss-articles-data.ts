@@ -30272,6 +30272,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'regime-fiscale-rendite-elvetiche',
+    category: 'fiscale',
+    date: '2026-11-11T12:22:02.452Z',
+    image: '/images/blog/article-regime-fiscale-rendite-elvetiche.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
