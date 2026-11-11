@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "81f6d316f37ea0adb94e78fe7d245a531a86a5f6481c4cec5cd4dea6168efaca",
+  "updatedAt": "2026-11-11T16:22:46.747Z",
+  "contentHash": "b01b82e89d536f9fd5ee85d7a3295609e161516e269f6723faf32ea40db90903",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-09T23:59:59.000Z",
+      "updatedAt": "2026-11-10T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Montlingen-Koblach, settimana conclusa: 9 novembre 2026"
+          "note": "Montlingen-Koblach, settimana conclusa: 10 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,7 +50,7 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 3 novembre 2026 – 9 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 4 novembre 2026 – 10 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Montlingen-Koblach",
@@ -59,16 +59,16 @@
               "url": "/traffico-dogane/montlingen-koblach/oggi/"
             },
             {
-              "label": "Salez-Ruggell",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/salez-ruggell/oggi/"
-            },
-            {
               "label": "Rheineck-Gaißau",
               "value": "0 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/rheineck-gai-au/oggi/"
+            },
+            {
+              "label": "Salez-Ruggell",
+              "value": "0 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/salez-ruggell/oggi/"
             },
             {
               "label": "Sevelen-Vaduz",
@@ -77,16 +77,16 @@
               "url": "/traffico-dogane/sevelen-vaduz/oggi/"
             },
             {
-              "label": "Widnau-Lustenau (Wiesenrain)",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/widnau-lustenau/oggi/"
-            },
-            {
               "label": "Kriessern-Mäder",
               "value": "0 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/kriessern-mader/oggi/"
+            },
+            {
+              "label": "Widnau-Lustenau (Wiesenrain)",
+              "value": "0 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/widnau-lustenau/oggi/"
             },
             {
               "label": "Rüthi-Meiningen",
@@ -103,7 +103,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -286,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "en": {
       "canton": "SG",
@@ -297,7 +297,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Montlingen-Koblach, week ending 9 November 2026"
+          "note": "Montlingen-Koblach, week ending 10 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -314,7 +314,7 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 3 November 2026 to 9 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 4 November 2026 to 10 November 2026, fastest first.",
           "items": [
             {
               "label": "Montlingen-Koblach",
@@ -323,16 +323,16 @@
               "url": "/en/border-wait/montlingen-koblach/today/"
             },
             {
-              "label": "Salez-Ruggell",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/salez-ruggell/today/"
-            },
-            {
               "label": "Rheineck-Gaißau",
               "value": "0 min",
               "detail": "49 readings",
               "url": "/en/border-wait/rheineck-gai-au/today/"
+            },
+            {
+              "label": "Salez-Ruggell",
+              "value": "0 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/salez-ruggell/today/"
             },
             {
               "label": "Sevelen-Vaduz",
@@ -341,16 +341,16 @@
               "url": "/en/border-wait/sevelen-vaduz/today/"
             },
             {
-              "label": "Widnau-Lustenau (Wiesenrain)",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/widnau-lustenau/today/"
-            },
-            {
               "label": "Kriessern-Mäder",
               "value": "0 min",
               "detail": "49 readings",
               "url": "/en/border-wait/kriessern-mader/today/"
+            },
+            {
+              "label": "Widnau-Lustenau (Wiesenrain)",
+              "value": "0 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/widnau-lustenau/today/"
             },
             {
               "label": "Rüthi-Meiningen",
@@ -367,7 +367,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -549,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "de": {
       "canton": "SG",
@@ -560,7 +560,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Montlingen-Koblach, Woche bis 9. November 2026"
+          "note": "Montlingen-Koblach, Woche bis 10. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -577,7 +577,7 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 3. November 2026 bis 9. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 4. November 2026 bis 10. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Montlingen-Koblach",
@@ -586,16 +586,16 @@
               "url": "/de/wartezeit-grenze/montlingen-koblach/heute/"
             },
             {
-              "label": "Salez-Ruggell",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/salez-ruggell/heute/"
-            },
-            {
               "label": "Rheineck-Gaißau",
               "value": "0 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/rheineck-gai-au/heute/"
+            },
+            {
+              "label": "Salez-Ruggell",
+              "value": "0 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/salez-ruggell/heute/"
             },
             {
               "label": "Sevelen-Vaduz",
@@ -604,16 +604,16 @@
               "url": "/de/wartezeit-grenze/sevelen-vaduz/heute/"
             },
             {
-              "label": "Widnau-Lustenau (Wiesenrain)",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/widnau-lustenau/heute/"
-            },
-            {
               "label": "Kriessern-Mäder",
               "value": "0 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/kriessern-mader/heute/"
+            },
+            {
+              "label": "Widnau-Lustenau (Wiesenrain)",
+              "value": "0 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/widnau-lustenau/heute/"
             },
             {
               "label": "Rüthi-Meiningen",
@@ -630,7 +630,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -812,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "fr": {
       "canton": "SG",
@@ -823,7 +823,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Montlingen-Koblach, semaine jusqu’au 9 novembre 2026"
+          "note": "Montlingen-Koblach, semaine jusqu’au 10 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -840,7 +840,7 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 3 novembre 2026 au 9 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 4 novembre 2026 au 10 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Montlingen-Koblach",
@@ -849,16 +849,16 @@
               "url": "/fr/temps-attente-douane/montlingen-koblach/aujourd-hui/"
             },
             {
-              "label": "Salez-Ruggell",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/salez-ruggell/aujourd-hui/"
-            },
-            {
               "label": "Rheineck-Gaißau",
               "value": "0 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/rheineck-gai-au/aujourd-hui/"
+            },
+            {
+              "label": "Salez-Ruggell",
+              "value": "0 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/salez-ruggell/aujourd-hui/"
             },
             {
               "label": "Sevelen-Vaduz",
@@ -867,16 +867,16 @@
               "url": "/fr/temps-attente-douane/sevelen-vaduz/aujourd-hui/"
             },
             {
-              "label": "Widnau-Lustenau (Wiesenrain)",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/widnau-lustenau/aujourd-hui/"
-            },
-            {
               "label": "Kriessern-Mäder",
               "value": "0 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/kriessern-mader/aujourd-hui/"
+            },
+            {
+              "label": "Widnau-Lustenau (Wiesenrain)",
+              "value": "0 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/widnau-lustenau/aujourd-hui/"
             },
             {
               "label": "Rüthi-Meiningen",
@@ -893,7 +893,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -1076,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     }
   }
 }

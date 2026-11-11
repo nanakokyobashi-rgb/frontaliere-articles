@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "c149b63262e1aba5c96ef15db902619324f0f26ff0e76cf2dfd5e8f917a7581a",
+  "updatedAt": "2026-11-11T16:22:46.747Z",
+  "contentHash": "58fe53f2a045a08fb34aa5df14ca1f5a16213656ef520bd16e48285e15a8e795",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-09T23:59:59.000Z",
+      "updatedAt": "2026-11-10T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Drezzo-Pedrinate, settimana conclusa: 9 novembre 2026"
+          "note": "Drezzo-Pedrinate, settimana conclusa: 10 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,7 +50,7 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 3 novembre 2026 – 9 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 4 novembre 2026 – 10 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Drezzo-Pedrinate",
@@ -71,16 +71,16 @@
               "url": "/traffico-dogane/piaggio-valmara/oggi/"
             },
             {
-              "label": "Ronago-Novazzano",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/ronago-novazzano/oggi/"
-            },
-            {
               "label": "Zenna-Dirinella",
               "value": "0 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/zenna-dirinella/oggi/"
+            },
+            {
+              "label": "Ronago-Novazzano",
+              "value": "0,1 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/ronago-novazzano/oggi/"
             },
             {
               "label": "Biegno-Indemini",
@@ -89,21 +89,21 @@
               "url": "/traffico-dogane/biegno-indemini/oggi/"
             },
             {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0,1 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/cremenaga-ponte-cremenaga/oggi/"
-            },
-            {
               "label": "Campione d'Italia-Bissone",
               "value": "0,2 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/campione-d-italia-bissone/oggi/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0,2 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/cremenaga-ponte-cremenaga/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -292,7 +292,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "en": {
       "canton": "TI",
@@ -303,7 +303,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Drezzo-Pedrinate, week ending 9 November 2026"
+          "note": "Drezzo-Pedrinate, week ending 10 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -320,7 +320,7 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 3 November 2026 to 9 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 4 November 2026 to 10 November 2026, fastest first.",
           "items": [
             {
               "label": "Drezzo-Pedrinate",
@@ -341,16 +341,16 @@
               "url": "/en/border-wait/piaggio-valmara/today/"
             },
             {
-              "label": "Ronago-Novazzano",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/ronago-novazzano/today/"
-            },
-            {
               "label": "Zenna-Dirinella",
               "value": "0 min",
               "detail": "49 readings",
               "url": "/en/border-wait/zenna-dirinella/today/"
+            },
+            {
+              "label": "Ronago-Novazzano",
+              "value": "0.1 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/ronago-novazzano/today/"
             },
             {
               "label": "Biegno-Indemini",
@@ -359,21 +359,21 @@
               "url": "/en/border-wait/biegno-indemini/today/"
             },
             {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0.1 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/cremenaga-ponte-cremenaga/today/"
-            },
-            {
               "label": "Campione d'Italia-Bissone",
               "value": "0.2 min",
               "detail": "49 readings",
               "url": "/en/border-wait/campione-d-italia-bissone/today/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0.2 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/cremenaga-ponte-cremenaga/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -561,7 +561,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "de": {
       "canton": "TI",
@@ -572,7 +572,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Drezzo-Pedrinate, Woche bis 9. November 2026"
+          "note": "Drezzo-Pedrinate, Woche bis 10. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -589,7 +589,7 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 3. November 2026 bis 9. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 4. November 2026 bis 10. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Drezzo-Pedrinate",
@@ -610,16 +610,16 @@
               "url": "/de/wartezeit-grenze/piaggio-valmara/heute/"
             },
             {
-              "label": "Ronago-Novazzano",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/ronago-novazzano/heute/"
-            },
-            {
               "label": "Zenna-Dirinella",
               "value": "0 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/zenna-dirinella/heute/"
+            },
+            {
+              "label": "Ronago-Novazzano",
+              "value": "0.1 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/ronago-novazzano/heute/"
             },
             {
               "label": "Biegno-Indemini",
@@ -628,21 +628,21 @@
               "url": "/de/wartezeit-grenze/biegno-indemini/heute/"
             },
             {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0.1 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/cremenaga-ponte-cremenaga/heute/"
-            },
-            {
               "label": "Campione d'Italia-Bissone",
               "value": "0.2 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/campione-d-italia-bissone/heute/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0.2 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/cremenaga-ponte-cremenaga/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -830,7 +830,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "fr": {
       "canton": "TI",
@@ -841,7 +841,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Drezzo-Pedrinate, semaine jusqu’au 9 novembre 2026"
+          "note": "Drezzo-Pedrinate, semaine jusqu’au 10 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -858,7 +858,7 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 3 novembre 2026 au 9 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 4 novembre 2026 au 10 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Drezzo-Pedrinate",
@@ -879,16 +879,16 @@
               "url": "/fr/temps-attente-douane/piaggio-valmara/aujourd-hui/"
             },
             {
-              "label": "Ronago-Novazzano",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/ronago-novazzano/aujourd-hui/"
-            },
-            {
               "label": "Zenna-Dirinella",
               "value": "0 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/zenna-dirinella/aujourd-hui/"
+            },
+            {
+              "label": "Ronago-Novazzano",
+              "value": "0,1 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/ronago-novazzano/aujourd-hui/"
             },
             {
               "label": "Biegno-Indemini",
@@ -897,21 +897,21 @@
               "url": "/fr/temps-attente-douane/biegno-indemini/aujourd-hui/"
             },
             {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0,1 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/cremenaga-ponte-cremenaga/aujourd-hui/"
-            },
-            {
               "label": "Campione d'Italia-Bissone",
               "value": "0,2 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/campione-d-italia-bissone/aujourd-hui/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0,2 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/cremenaga-ponte-cremenaga/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -1100,7 +1100,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     }
   }
 }

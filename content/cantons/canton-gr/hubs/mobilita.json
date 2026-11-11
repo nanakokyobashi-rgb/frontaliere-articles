@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "8a47fdb39ac719cda62c7ebaa076e9d3d96cb5c85a38f564280e34568e5bf623",
+  "updatedAt": "2026-11-11T16:22:46.747Z",
+  "contentHash": "1c69ee3c8399e26e8980a75d74471b6be602ae4d078f44e44004970cc16ffa75",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-09T23:59:59.000Z",
+      "updatedAt": "2026-11-10T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Martina-Nauders (Finstermünz), settimana conclusa: 9 novembre 2026"
+          "note": "St. Luzisteig (Fläsch-Balzers), settimana conclusa: 10 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,14 +50,8 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 3 novembre 2026 – 9 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 4 novembre 2026 – 10 novembre 2026, dal più scorrevole al più lento.",
           "items": [
-            {
-              "label": "Martina-Nauders (Finstermünz)",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/martina-nauders/oggi/"
-            },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
               "value": "0 min",
@@ -71,14 +65,26 @@
               "url": "/traffico-dogane/tunnel-munt-la-schera/oggi/"
             },
             {
+              "label": "Martina-Nauders (Finstermünz)",
+              "value": "0 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/martina-nauders/oggi/"
+            },
+            {
               "label": "Samnaun-Spiss",
               "value": "0,1 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/samnaun-spiss/oggi/"
             },
             {
+              "label": "Forcola di Livigno",
+              "value": "0,2 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/forcola-di-livigno/oggi/"
+            },
+            {
               "label": "Campocologno-Tirano",
-              "value": "0,3 min",
+              "value": "0,2 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/campocologno-tirano/oggi/"
             },
@@ -89,12 +95,6 @@
               "url": "/traffico-dogane/castasegna-villa-di-chiavenna/oggi/"
             },
             {
-              "label": "Forcola di Livigno",
-              "value": "0,3 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/forcola-di-livigno/oggi/"
-            },
-            {
               "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
               "value": "0,3 min",
               "detail": "49 rilevazioni",
@@ -103,7 +103,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "en": {
       "canton": "GR",
@@ -301,7 +301,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Martina-Nauders (Finstermünz), week ending 9 November 2026"
+          "note": "St. Luzisteig (Fläsch-Balzers), week ending 10 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -318,14 +318,8 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 3 November 2026 to 9 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 4 November 2026 to 10 November 2026, fastest first.",
           "items": [
-            {
-              "label": "Martina-Nauders (Finstermünz)",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/martina-nauders/today/"
-            },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
               "value": "0 min",
@@ -339,14 +333,26 @@
               "url": "/en/border-wait/tunnel-munt-la-schera/today/"
             },
             {
+              "label": "Martina-Nauders (Finstermünz)",
+              "value": "0 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/martina-nauders/today/"
+            },
+            {
               "label": "Samnaun-Spiss",
               "value": "0.1 min",
               "detail": "49 readings",
               "url": "/en/border-wait/samnaun-spiss/today/"
             },
             {
+              "label": "Forcola di Livigno",
+              "value": "0.2 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/forcola-di-livigno/today/"
+            },
+            {
               "label": "Campocologno-Tirano",
-              "value": "0.3 min",
+              "value": "0.2 min",
               "detail": "49 readings",
               "url": "/en/border-wait/campocologno-tirano/today/"
             },
@@ -357,12 +363,6 @@
               "url": "/en/border-wait/castasegna-villa-di-chiavenna/today/"
             },
             {
-              "label": "Forcola di Livigno",
-              "value": "0.3 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/forcola-di-livigno/today/"
-            },
-            {
               "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
               "value": "0.3 min",
               "detail": "49 readings",
@@ -371,7 +371,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "de": {
       "canton": "GR",
@@ -568,7 +568,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Martina-Nauders (Finstermünz), Woche bis 9. November 2026"
+          "note": "St. Luzisteig (Fläsch-Balzers), Woche bis 10. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -585,14 +585,8 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 3. November 2026 bis 9. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 4. November 2026 bis 10. November 2026, vom schnellsten zum langsamsten.",
           "items": [
-            {
-              "label": "Martina-Nauders (Finstermünz)",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/martina-nauders/heute/"
-            },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
               "value": "0 Min.",
@@ -606,14 +600,26 @@
               "url": "/de/wartezeit-grenze/tunnel-munt-la-schera/heute/"
             },
             {
+              "label": "Martina-Nauders (Finstermünz)",
+              "value": "0 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/martina-nauders/heute/"
+            },
+            {
               "label": "Samnaun-Spiss",
               "value": "0.1 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/samnaun-spiss/heute/"
             },
             {
+              "label": "Forcola di Livigno",
+              "value": "0.2 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/forcola-di-livigno/heute/"
+            },
+            {
               "label": "Campocologno-Tirano",
-              "value": "0.3 Min.",
+              "value": "0.2 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/campocologno-tirano/heute/"
             },
@@ -624,12 +630,6 @@
               "url": "/de/wartezeit-grenze/castasegna-villa-di-chiavenna/heute/"
             },
             {
-              "label": "Forcola di Livigno",
-              "value": "0.3 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/forcola-di-livigno/heute/"
-            },
-            {
               "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
               "value": "0.3 Min.",
               "detail": "49 Messungen",
@@ -638,7 +638,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "fr": {
       "canton": "GR",
@@ -836,7 +836,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Martina-Nauders (Finstermünz), semaine jusqu’au 9 novembre 2026"
+          "note": "St. Luzisteig (Fläsch-Balzers), semaine jusqu’au 10 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -853,14 +853,8 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 3 novembre 2026 au 9 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 4 novembre 2026 au 10 novembre 2026, du plus fluide au plus lent.",
           "items": [
-            {
-              "label": "Martina-Nauders (Finstermünz)",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/martina-nauders/aujourd-hui/"
-            },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
               "value": "0 min",
@@ -874,14 +868,26 @@
               "url": "/fr/temps-attente-douane/tunnel-munt-la-schera/aujourd-hui/"
             },
             {
+              "label": "Martina-Nauders (Finstermünz)",
+              "value": "0 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/martina-nauders/aujourd-hui/"
+            },
+            {
               "label": "Samnaun-Spiss",
               "value": "0,1 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/samnaun-spiss/aujourd-hui/"
             },
             {
+              "label": "Forcola di Livigno",
+              "value": "0,2 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/forcola-di-livigno/aujourd-hui/"
+            },
+            {
               "label": "Campocologno-Tirano",
-              "value": "0,3 min",
+              "value": "0,2 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/campocologno-tirano/aujourd-hui/"
             },
@@ -892,12 +898,6 @@
               "url": "/fr/temps-attente-douane/castasegna-villa-di-chiavenna/aujourd-hui/"
             },
             {
-              "label": "Forcola di Livigno",
-              "value": "0,3 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/forcola-di-livigno/aujourd-hui/"
-            },
-            {
               "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
               "value": "0,3 min",
               "detail": "49 relevés",
@@ -906,7 +906,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     }
   }
 }

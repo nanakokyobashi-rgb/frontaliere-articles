@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-11-11T11:16:44.434Z",
-  "contentHash": "6dccb0c2bc3c91606f390f16449fe9a12f8f7f8eb0db445d8d89faebf66ec14b",
+  "updatedAt": "2026-11-11T16:22:46.747Z",
+  "contentHash": "7b9ce41f2139667694da94c9982f9428069a491e052dc5b9523835dcc042b6c5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,13 +14,8 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-10T23:27:24.233Z",
+      "updatedAt": "2026-11-11T03:01:22.987Z",
       "keyFacts": 0
-    },
-    {
-      "id": "aste-targhe",
-      "updatedAt": "2026-11-10T19:49:08.581Z",
-      "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
@@ -40,11 +35,6 @@
           "value": "606 CHF",
           "note": "regione di premio 0, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "6",
-          "note": "offerta mediana 1100 CHF"
         }
       ],
       "dataBlocks": [
@@ -86,38 +76,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-10T23:27:24.233Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
-          "items": [
-            {
-              "label": "SO2771",
-              "value": "1500 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-11T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3391&locale=de_CH"
-            },
-            {
-              "label": "SO2773",
-              "value": "1500 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-11T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3392&locale=de_CH"
-            },
-            {
-              "label": "SO9334",
-              "value": "1500 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-11T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3393&locale=de_CH"
-            }
-          ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-10T19:49:08.581Z"
+          "updatedAt": "2026-11-11T03:01:22.987Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -235,7 +194,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "en": {
       "canton": "SO",
@@ -248,11 +207,6 @@
           "value": "606 CHF",
           "note": "premium region 0, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "6",
-          "note": "typical bid 1,100 CHF"
         }
       ],
       "dataBlocks": [
@@ -294,38 +248,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-10T23:27:24.233Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
-          "items": [
-            {
-              "label": "SO2771",
-              "value": "1,500 CHF",
-              "detail": "current bid",
-              "date": "2026-11-11T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3391&locale=de_CH"
-            },
-            {
-              "label": "SO2773",
-              "value": "1,500 CHF",
-              "detail": "current bid",
-              "date": "2026-11-11T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3392&locale=de_CH"
-            },
-            {
-              "label": "SO9334",
-              "value": "1,500 CHF",
-              "detail": "current bid",
-              "date": "2026-11-11T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3393&locale=de_CH"
-            }
-          ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-10T19:49:08.581Z"
+          "updatedAt": "2026-11-11T03:01:22.987Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -439,7 +362,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "de": {
       "canton": "SO",
@@ -452,11 +375,6 @@
           "value": "606 CHF",
           "note": "Prämienregion 0, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "6",
-          "note": "mittleres Gebot 1’100 CHF"
         }
       ],
       "dataBlocks": [
@@ -498,38 +416,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-10T23:27:24.233Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
-          "items": [
-            {
-              "label": "SO2771",
-              "value": "1’500 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-11T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3391&locale=de_CH"
-            },
-            {
-              "label": "SO2773",
-              "value": "1’500 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-11T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3392&locale=de_CH"
-            },
-            {
-              "label": "SO9334",
-              "value": "1’500 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-11T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3393&locale=de_CH"
-            }
-          ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-10T19:49:08.581Z"
+          "updatedAt": "2026-11-11T03:01:22.987Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -643,7 +530,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "fr": {
       "canton": "SO",
@@ -656,11 +543,6 @@
           "value": "606 CHF",
           "note": "région de primes 0, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "6",
-          "note": "offre centrale 1 100 CHF"
         }
       ],
       "dataBlocks": [
@@ -702,38 +584,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-10T23:27:24.233Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
-          "items": [
-            {
-              "label": "SO2771",
-              "value": "1 500 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-11T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3391&locale=de_CH"
-            },
-            {
-              "label": "SO2773",
-              "value": "1 500 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-11T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3392&locale=de_CH"
-            },
-            {
-              "label": "SO9334",
-              "value": "1 500 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-11T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3393&locale=de_CH"
-            }
-          ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-10T19:49:08.581Z"
+          "updatedAt": "2026-11-11T03:01:22.987Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -843,7 +694,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     }
   }
 }

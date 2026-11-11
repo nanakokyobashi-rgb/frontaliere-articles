@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "04275439bb8f84f796b079a87d323bc069ca348bc5be764a4519552d0cde55ae",
+  "updatedAt": "2026-11-11T16:22:46.747Z",
+  "contentHash": "e8c479761106106336d178b4f4eda1dc356c59d075df39fb251df3b26e4888ed",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "8",
+          "value": "7",
           "note": "segnalazioni aggiornate: 10 novembre 2026"
         }
       ],
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "en": {
       "canton": "FR",
@@ -209,7 +209,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "8",
+          "value": "7",
           "note": "reports as of 10 November 2026"
         }
       ],
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "de": {
       "canton": "FR",
@@ -386,7 +386,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "8",
+          "value": "7",
           "note": "Meldungen vom 10. November 2026"
         }
       ],
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "fr": {
       "canton": "FR",
@@ -563,7 +563,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "8",
+          "value": "7",
           "note": "signalements au 10 novembre 2026"
         }
       ],
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     }
   }
 }

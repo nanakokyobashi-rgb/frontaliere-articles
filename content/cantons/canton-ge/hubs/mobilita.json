@@ -4,12 +4,12 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "4c9864db9d073643b26a2083079f5825db305c2f8647f5aa46837c227642f779",
+  "updatedAt": "2026-11-11T16:22:46.747Z",
+  "contentHash": "91315f5b952fbe5c76542aae8bea11c25a3ea4fffd076cc1f90d709a18089063",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-09T23:59:59.000Z",
+      "updatedAt": "2026-11-10T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Hermance, settimana conclusa: 9 novembre 2026"
+          "note": "Hermance, settimana conclusa: 10 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,7 +50,7 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 3 novembre 2026 – 9 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 4 novembre 2026 – 10 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Hermance",
@@ -59,51 +59,51 @@
               "url": "/traffico-dogane/hermance/oggi/"
             },
             {
-              "label": "Anières",
-              "value": "0,1 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/anieres/oggi/"
-            },
-            {
               "label": "Sauverny",
               "value": "0,1 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/sauverny/oggi/"
             },
             {
+              "label": "Anières",
+              "value": "0,1 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/anieres/oggi/"
+            },
+            {
               "label": "Landecy",
-              "value": "1,2 min",
+              "value": "1 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/landecy/oggi/"
             },
             {
               "label": "Meyrin / CERN",
-              "value": "1,4 min",
+              "value": "1,5 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/meyrin-cern/oggi/"
             },
             {
               "label": "Moillesulaz",
-              "value": "2,6 min",
+              "value": "2,3 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/moillesulaz/oggi/"
             },
             {
               "label": "Perly (Perly-Certoux)",
-              "value": "3,5 min",
+              "value": "3,2 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/perly/oggi/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "4,3 min",
+              "value": "3,9 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/thonex-vallard/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -258,7 +258,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "en": {
       "canton": "GE",
@@ -269,7 +269,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Hermance, week ending 9 November 2026"
+          "note": "Hermance, week ending 10 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -286,7 +286,7 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 3 November 2026 to 9 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 4 November 2026 to 10 November 2026, fastest first.",
           "items": [
             {
               "label": "Hermance",
@@ -295,51 +295,51 @@
               "url": "/en/border-wait/hermance/today/"
             },
             {
-              "label": "Anières",
-              "value": "0.1 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/anieres/today/"
-            },
-            {
               "label": "Sauverny",
               "value": "0.1 min",
               "detail": "49 readings",
               "url": "/en/border-wait/sauverny/today/"
             },
             {
+              "label": "Anières",
+              "value": "0.1 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/anieres/today/"
+            },
+            {
               "label": "Landecy",
-              "value": "1.2 min",
+              "value": "1 min",
               "detail": "49 readings",
               "url": "/en/border-wait/landecy/today/"
             },
             {
               "label": "Meyrin / CERN",
-              "value": "1.4 min",
+              "value": "1.5 min",
               "detail": "49 readings",
               "url": "/en/border-wait/meyrin-cern/today/"
             },
             {
               "label": "Moillesulaz",
-              "value": "2.6 min",
+              "value": "2.3 min",
               "detail": "49 readings",
               "url": "/en/border-wait/moillesulaz/today/"
             },
             {
               "label": "Perly (Perly-Certoux)",
-              "value": "3.5 min",
+              "value": "3.2 min",
               "detail": "49 readings",
               "url": "/en/border-wait/perly/today/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "4.3 min",
+              "value": "3.9 min",
               "detail": "49 readings",
               "url": "/en/border-wait/thonex-vallard/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -494,7 +494,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "de": {
       "canton": "GE",
@@ -505,7 +505,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Hermance, Woche bis 9. November 2026"
+          "note": "Hermance, Woche bis 10. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -522,7 +522,7 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 3. November 2026 bis 9. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 4. November 2026 bis 10. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Hermance",
@@ -531,51 +531,51 @@
               "url": "/de/wartezeit-grenze/hermance/heute/"
             },
             {
-              "label": "Anières",
-              "value": "0.1 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/anieres/heute/"
-            },
-            {
               "label": "Sauverny",
               "value": "0.1 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/sauverny/heute/"
             },
             {
+              "label": "Anières",
+              "value": "0.1 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/anieres/heute/"
+            },
+            {
               "label": "Landecy",
-              "value": "1.2 Min.",
+              "value": "1 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/landecy/heute/"
             },
             {
               "label": "Meyrin / CERN",
-              "value": "1.4 Min.",
+              "value": "1.5 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/meyrin-cern/heute/"
             },
             {
               "label": "Moillesulaz",
-              "value": "2.6 Min.",
+              "value": "2.3 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/moillesulaz/heute/"
             },
             {
               "label": "Perly (Perly-Certoux)",
-              "value": "3.5 Min.",
+              "value": "3.2 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/perly/heute/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "4.3 Min.",
+              "value": "3.9 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/thonex-vallard/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -730,7 +730,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "fr": {
       "canton": "GE",
@@ -741,7 +741,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Hermance, semaine jusqu’au 9 novembre 2026"
+          "note": "Hermance, semaine jusqu’au 10 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -758,7 +758,7 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 3 novembre 2026 au 9 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 4 novembre 2026 au 10 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Hermance",
@@ -767,51 +767,51 @@
               "url": "/fr/temps-attente-douane/hermance/aujourd-hui/"
             },
             {
-              "label": "Anières",
-              "value": "0,1 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/anieres/aujourd-hui/"
-            },
-            {
               "label": "Sauverny",
               "value": "0,1 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/sauverny/aujourd-hui/"
             },
             {
+              "label": "Anières",
+              "value": "0,1 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/anieres/aujourd-hui/"
+            },
+            {
               "label": "Landecy",
-              "value": "1,2 min",
+              "value": "1 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/landecy/aujourd-hui/"
             },
             {
               "label": "Meyrin / CERN",
-              "value": "1,4 min",
+              "value": "1,5 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/meyrin-cern/aujourd-hui/"
             },
             {
               "label": "Moillesulaz",
-              "value": "2,6 min",
+              "value": "2,3 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/moillesulaz/aujourd-hui/"
             },
             {
               "label": "Perly (Perly-Certoux)",
-              "value": "3,5 min",
+              "value": "3,2 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/perly/aujourd-hui/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "4,3 min",
+              "value": "3,9 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/thonex-vallard/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -966,7 +966,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     }
   }
 }

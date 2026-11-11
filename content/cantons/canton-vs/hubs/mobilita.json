@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "17677f5621e324f088ab0c47dd52260d22a1fbcd74f6583600cb04c7b0e7a5bd",
+  "updatedAt": "2026-11-11T16:22:46.747Z",
+  "contentHash": "261f1572fb3c869849237b3a97b4033cc160a220d798403d0d741a95f0f829d0",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-09T23:59:59.000Z",
+      "updatedAt": "2026-11-10T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,16 +33,16 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0,2 min",
-          "note": "Morgins-Châtel (Pas de Morgins), settimana conclusa: 9 novembre 2026"
+          "note": "Morgins-Châtel (Pas de Morgins), settimana conclusa: 10 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "22",
+          "value": "20",
           "note": "segnalazioni aggiornate: 10 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "14",
+          "value": "12",
           "note": "segnalazioni aggiornate: 10 novembre 2026"
         }
       ],
@@ -50,7 +50,7 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 3 novembre 2026 – 9 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 4 novembre 2026 – 10 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
@@ -72,20 +72,20 @@
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0,6 min",
+              "value": "0,3 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/traforo-del-gran-san-bernardo/oggi/"
             },
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "1 min",
+              "value": "1,7 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/sempione/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -126,15 +126,15 @@
               "date": "2026-10-23T14:29:00.000Z"
             },
             {
-              "label": "A21 Diramazione Gran San Bernardo -> Martigny-Croix tra Svincolo autostradale Martigny-Expo E Svincolo autostradale Martigny-Croix Situazione: problemi di traffico cantiere, lunghezza [km] 0.6…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 11 novembre 2026",
-              "date": "2026-10-26T07:00:00.000Z"
-            },
-            {
               "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Situazione: chiusa Causa: chiusura invernale",
               "value": "Chiusura",
               "date": "2026-10-27T12:15:00.000Z"
+            },
+            {
+              "label": "Leuk -> Jeizinen tra Luogo Leuk E Luogo Bratsch Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-11-02T10:24:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -246,7 +246,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "en": {
       "canton": "VS",
@@ -257,16 +257,16 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0.2 min",
-          "note": "Morgins-Châtel (Pas de Morgins), week ending 9 November 2026"
+          "note": "Morgins-Châtel (Pas de Morgins), week ending 10 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "22",
+          "value": "20",
           "note": "reports as of 10 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "14",
+          "value": "12",
           "note": "reports as of 10 November 2026"
         }
       ],
@@ -274,7 +274,7 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 3 November 2026 to 9 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 4 November 2026 to 10 November 2026, fastest first.",
           "items": [
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
@@ -296,20 +296,20 @@
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0.6 min",
+              "value": "0.3 min",
               "detail": "49 readings",
               "url": "/en/border-wait/traforo-del-gran-san-bernardo/today/"
             },
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "1 min",
+              "value": "1.7 min",
               "detail": "49 readings",
               "url": "/en/border-wait/sempione/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -350,15 +350,15 @@
               "date": "2026-10-23T14:29:00.000Z"
             },
             {
-              "label": "A21 Diramazione Gran San Bernardo -> Martigny-Croix tra Svincolo autostradale Martigny-Expo E Svincolo autostradale Martigny-Croix Situazione: problemi di traffico cantiere, lunghezza [km] 0.6…",
-              "value": "Closure",
-              "detail": "until 11 November 2026",
-              "date": "2026-10-26T07:00:00.000Z"
-            },
-            {
               "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Situazione: chiusa Causa: chiusura invernale",
               "value": "Closure",
               "date": "2026-10-27T12:15:00.000Z"
+            },
+            {
+              "label": "Leuk -> Jeizinen tra Luogo Leuk E Luogo Bratsch Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 13 November 2026",
+              "date": "2026-11-02T10:24:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -470,7 +470,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "de": {
       "canton": "VS",
@@ -481,16 +481,16 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0.2 Min.",
-          "note": "Morgins-Châtel (Pas de Morgins), Woche bis 9. November 2026"
+          "note": "Morgins-Châtel (Pas de Morgins), Woche bis 10. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "22",
+          "value": "20",
           "note": "Meldungen vom 10. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "14",
+          "value": "12",
           "note": "Meldungen vom 10. November 2026"
         }
       ],
@@ -498,7 +498,7 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 3. November 2026 bis 9. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 4. November 2026 bis 10. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
@@ -520,20 +520,20 @@
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0.6 Min.",
+              "value": "0.3 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/traforo-del-gran-san-bernardo/heute/"
             },
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "1 Min.",
+              "value": "1.7 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/sempione/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -574,15 +574,15 @@
               "date": "2026-10-23T14:29:00.000Z"
             },
             {
-              "label": "A21 Verzweigung Gd-St-Bernard -> Martigny-Croix zwischen Anschluss Martigny-Expo und Anschluss Martigny-Croix Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Verkehrsführung: Pannenstreifen…",
-              "value": "Sperrung",
-              "detail": "bis 11. November 2026",
-              "date": "2026-10-26T07:00:00.000Z"
-            },
-            {
               "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Sachlage: Strecke gesperrt Ursache: Wintersperre",
               "value": "Sperrung",
               "date": "2026-10-27T12:15:00.000Z"
+            },
+            {
+              "label": "Leuk -> Jeizinen zwischen Ortschaft Leuk und Ortschaft Bratsch Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 13. November 2026",
+              "date": "2026-11-02T10:24:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -694,7 +694,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "fr": {
       "canton": "VS",
@@ -705,16 +705,16 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0,2 min",
-          "note": "Morgins-Châtel (Pas de Morgins), semaine jusqu’au 9 novembre 2026"
+          "note": "Morgins-Châtel (Pas de Morgins), semaine jusqu’au 10 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "22",
+          "value": "20",
           "note": "signalements au 10 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "14",
+          "value": "12",
           "note": "signalements au 10 novembre 2026"
         }
       ],
@@ -722,7 +722,7 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 3 novembre 2026 au 9 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 4 novembre 2026 au 10 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
@@ -744,20 +744,20 @@
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0,6 min",
+              "value": "0,3 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/traforo-del-gran-san-bernardo/aujourd-hui/"
             },
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "1 min",
+              "value": "1,7 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/sempione/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -798,15 +798,15 @@
               "date": "2026-10-23T14:29:00.000Z"
             },
             {
-              "label": "A21 Echangeur Gd-St-Bernard -> Martigny-Croix entre Jonction autoroutière Martigny-Expo et Jonction autoroutière Martigny-Croix Situation: trafic perturbé travaux, longueur [km] 0.6 Gestion du…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 11 novembre 2026",
-              "date": "2026-10-26T07:00:00.000Z"
-            },
-            {
               "label": "Goppenstein, Ferden <-> Fafleralp, Blatten Situation: fermé Raison: fermeture hivernale",
               "value": "Fermeture",
               "date": "2026-10-27T12:15:00.000Z"
+            },
+            {
+              "label": "Loèche -> Jeizinen entre Localité Loèche et Localité Bratsch Situation: fermé Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-11-02T10:24:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -918,7 +918,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     }
   }
 }

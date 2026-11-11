@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "167f17e4673fcee493e7130f46537c163c41fae959c6a10ccacc613492241747",
+  "updatedAt": "2026-11-11T16:22:46.747Z",
+  "contentHash": "ecc86d85e2149689d496915bcdfd18f53ea54293ed301700588a07c39ae97863",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-09T23:59:59.000Z",
+      "updatedAt": "2026-11-10T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0,1 min",
-          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, settimana conclusa: 9 novembre 2026"
+          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, settimana conclusa: 10 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,7 +50,7 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 3 novembre 2026 – 9 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 4 novembre 2026 – 10 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Kaiserstuhl AG",
@@ -66,38 +66,38 @@
             },
             {
               "label": "Laufenburg (Baden) – Laufenburg AG",
-              "value": "1,5 min",
+              "value": "1,2 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/laufenburg-laufenburg-ag/oggi/"
             },
             {
-              "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
-              "value": "1,7 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/rheinfelden-rheinfelden-ag-alte-rheinbrucke/oggi/"
-            },
-            {
               "label": "Bad Säckingen – Stein AG",
-              "value": "1,8 min",
+              "value": "1,6 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/bad-sackingen-stein-ag/oggi/"
             },
             {
+              "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
+              "value": "1,9 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/rheinfelden-rheinfelden-ag-alte-rheinbrucke/oggi/"
+            },
+            {
               "label": "Waldshut-Tiengen – Koblenz AG",
-              "value": "2,6 min",
+              "value": "2,4 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/waldshut-tiengen-koblenz-ag/oggi/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
-              "value": "7 min",
+              "value": "5,7 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/rheinfelden-rheinfelden-ag-autostrada-a861-a3/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "en": {
       "canton": "AG",
@@ -281,7 +281,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0.1 min",
-          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, week ending 9 November 2026"
+          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, week ending 10 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -298,7 +298,7 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 3 November 2026 to 9 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 4 November 2026 to 10 November 2026, fastest first.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Kaiserstuhl AG",
@@ -314,38 +314,38 @@
             },
             {
               "label": "Laufenburg (Baden) – Laufenburg AG",
-              "value": "1.5 min",
+              "value": "1.2 min",
               "detail": "49 readings",
               "url": "/en/border-wait/laufenburg-laufenburg-ag/today/"
             },
             {
-              "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
-              "value": "1.7 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/rheinfelden-rheinfelden-ag-alte-rheinbrucke/today/"
-            },
-            {
               "label": "Bad Säckingen – Stein AG",
-              "value": "1.8 min",
+              "value": "1.6 min",
               "detail": "49 readings",
               "url": "/en/border-wait/bad-sackingen-stein-ag/today/"
             },
             {
+              "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
+              "value": "1.9 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/rheinfelden-rheinfelden-ag-alte-rheinbrucke/today/"
+            },
+            {
               "label": "Waldshut-Tiengen – Koblenz AG",
-              "value": "2.6 min",
+              "value": "2.4 min",
               "detail": "49 readings",
               "url": "/en/border-wait/waldshut-tiengen-koblenz-ag/today/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
-              "value": "7 min",
+              "value": "5.7 min",
               "detail": "49 readings",
               "url": "/en/border-wait/rheinfelden-rheinfelden-ag-autostrada-a861-a3/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -518,7 +518,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "de": {
       "canton": "AG",
@@ -529,7 +529,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0.1 Min.",
-          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, Woche bis 9. November 2026"
+          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, Woche bis 10. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -546,7 +546,7 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 3. November 2026 bis 9. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 4. November 2026 bis 10. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Kaiserstuhl AG",
@@ -562,38 +562,38 @@
             },
             {
               "label": "Laufenburg (Baden) – Laufenburg AG",
-              "value": "1.5 Min.",
+              "value": "1.2 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/laufenburg-laufenburg-ag/heute/"
             },
             {
-              "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
-              "value": "1.7 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/rheinfelden-rheinfelden-ag-alte-rheinbrucke/heute/"
-            },
-            {
               "label": "Bad Säckingen – Stein AG",
-              "value": "1.8 Min.",
+              "value": "1.6 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/bad-sackingen-stein-ag/heute/"
             },
             {
+              "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
+              "value": "1.9 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/rheinfelden-rheinfelden-ag-alte-rheinbrucke/heute/"
+            },
+            {
               "label": "Waldshut-Tiengen – Koblenz AG",
-              "value": "2.6 Min.",
+              "value": "2.4 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/waldshut-tiengen-koblenz-ag/heute/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
-              "value": "7 Min.",
+              "value": "5.7 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/rheinfelden-rheinfelden-ag-autostrada-a861-a3/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -766,7 +766,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "fr": {
       "canton": "AG",
@@ -777,7 +777,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0,1 min",
-          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, semaine jusqu’au 9 novembre 2026"
+          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, semaine jusqu’au 10 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -794,7 +794,7 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 3 novembre 2026 au 9 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 4 novembre 2026 au 10 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Kaiserstuhl AG",
@@ -810,38 +810,38 @@
             },
             {
               "label": "Laufenburg (Baden) – Laufenburg AG",
-              "value": "1,5 min",
+              "value": "1,2 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/laufenburg-laufenburg-ag/aujourd-hui/"
             },
             {
-              "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
-              "value": "1,7 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/rheinfelden-rheinfelden-ag-alte-rheinbrucke/aujourd-hui/"
-            },
-            {
               "label": "Bad Säckingen – Stein AG",
-              "value": "1,8 min",
+              "value": "1,6 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/bad-sackingen-stein-ag/aujourd-hui/"
             },
             {
+              "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
+              "value": "1,9 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/rheinfelden-rheinfelden-ag-alte-rheinbrucke/aujourd-hui/"
+            },
+            {
               "label": "Waldshut-Tiengen – Koblenz AG",
-              "value": "2,6 min",
+              "value": "2,4 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/waldshut-tiengen-koblenz-ag/aujourd-hui/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
-              "value": "7 min",
+              "value": "5,7 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/rheinfelden-rheinfelden-ag-autostrada-a861-a3/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-09T23:59:59.000Z"
+          "updatedAt": "2026-11-10T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -1014,7 +1014,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     }
   }
 }

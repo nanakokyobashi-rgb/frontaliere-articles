@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-11-11T11:16:44.434Z",
-  "contentHash": "e6357064cb68aa9db7a416a420fbcc49f9d27ce74fe0413f976edf2fdd1f2bdf",
+  "updatedAt": "2026-11-11T16:22:46.747Z",
+  "contentHash": "132b337b0d739e3a69b4adf01303f4c5c50e6e349c6b8f045d343c9f30b54535",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-10T19:49:08.581Z",
+      "updatedAt": "2026-11-11T06:13:21.567Z",
       "keyFacts": 1
     },
     {
@@ -38,7 +38,7 @@
         },
         {
           "label": "Aste di targhe in corso",
-          "value": "52",
+          "value": "69",
           "note": "offerta mediana 600 CHF"
         }
       ],
@@ -87,7 +87,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-10T19:49:08.581Z"
+          "updatedAt": "2026-11-11T06:13:21.567Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -205,7 +205,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "en": {
       "canton": "TG",
@@ -221,7 +221,7 @@
         },
         {
           "label": "Plate auctions running",
-          "value": "52",
+          "value": "69",
           "note": "typical bid 600 CHF"
         }
       ],
@@ -270,7 +270,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-10T19:49:08.581Z"
+          "updatedAt": "2026-11-11T06:13:21.567Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -384,7 +384,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "de": {
       "canton": "TG",
@@ -400,7 +400,7 @@
         },
         {
           "label": "Laufende Kontrollschild-Auktionen",
-          "value": "52",
+          "value": "69",
           "note": "mittleres Gebot 600 CHF"
         }
       ],
@@ -449,7 +449,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-10T19:49:08.581Z"
+          "updatedAt": "2026-11-11T06:13:21.567Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -563,7 +563,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     },
     "fr": {
       "canton": "TG",
@@ -579,7 +579,7 @@
         },
         {
           "label": "Enchères de plaques en cours",
-          "value": "52",
+          "value": "69",
           "note": "offre centrale 600 CHF"
         }
       ],
@@ -628,7 +628,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-10T19:49:08.581Z"
+          "updatedAt": "2026-11-11T06:13:21.567Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -738,7 +738,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-11T16:22:46.747Z"
     }
   }
 }
