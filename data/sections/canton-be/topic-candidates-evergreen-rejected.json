@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/706081/cybercriminalit-la-suisse-doit-renforcer-ses-moyens-de-dfense": {
-      "section": "canton-be",
-      "ts": 1794206844529
-    },
-    "canton-be::https://www.be.ch/de/start.html?newsid=f81846f7-58d8-463d-8f45-7f2d129a40a1": {
-      "section": "canton-be",
-      "ts": 1794206858273
-    },
     "canton-be::https://www.be.ch/de/start.html?newsid=0a0d974d-dd49-425b-aa35-c3489ea79b07": {
       "section": "canton-be",
       "ts": 1794295281502
@@ -55,6 +47,34 @@
     "canton-be::https://ajour.ch/story/706378/sbb-sp%c3%bcren-dieselschock-auch-deshalb-setzt-die-bahn-auf-%c3%b6koalternativen": {
       "section": "canton-be",
       "ts": 1794378117961
+    },
+    "canton-be::https://ajour.ch/story/706300/ventilatoren-und-sonnensegel-gegen-hitze-an-schulen": {
+      "section": "canton-be",
+      "ts": 1794414474422
+    },
+    "canton-be::https://ajour.ch/story/706464/angriff-auf-pensionskasse-des-bundes-hacker-fordern-offenbar-l%c3%b6segeld": {
+      "section": "canton-be",
+      "ts": 1794414475779
+    },
+    "canton-be::https://ajour.ch/story/706369/berner-regierung-will-badeverbote-zum-schutz-von-fischen-pr%c3%bcfen": {
+      "section": "canton-be",
+      "ts": 1794414477440
+    },
+    "canton-be::https://ajour.ch/story/706394/erstmals-seit-corona-weltweite-coemissionen-aus-fossilen-energien-sinken": {
+      "section": "canton-be",
+      "ts": 1794414478780
+    },
+    "canton-be::https://www.be.ch/de/start.html?newsid=d55a3b6e-cf26-4f3f-b7bb-15657bc46e6f": {
+      "section": "canton-be",
+      "ts": 1794415912863
+    },
+    "canton-be::https://ajour.ch/story/706255/kanton-bern-und-bauernverband-wollen-enger-zusammenarbeiten": {
+      "section": "canton-be",
+      "ts": 1794415915454
+    },
+    "canton-be::https://ajour.ch/story/706695/lentreprise-bernoise-ypsomed-relve-ses-ambitions-miparcours": {
+      "section": "canton-be",
+      "ts": 1794415916993
     }
   }
 }
