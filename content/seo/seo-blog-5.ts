@@ -114693,6 +114693,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-como-rinnovo-illuminazione-varese': {
+    title: 'Como rinnova illuminazione viale Varese progetto 80mila euro',
+    description: 'Il Comune di Como rinnova l\'illuminazione su due tratti di viale Varese con un progetto da 80mila euro, inclusa copertura di 50mila euro da fondi frontalieri.',
+    keywords: 'Como, viale Varese, illuminazione, fondi frontalieri, progetto 80mila euro, Comune di Como, primavera 2027',
+    ogTitle: 'Como rinnova illuminazione viale Varese progetto 80mila euro',
+    ogDescription: 'Il Comune di Como ha approvato il progetto da 80mila euro per il rinnovo dell\'illuminazione su due tratti di viale Varese, con 50mila euro coperti da fondi frontalieri.',
+    canonicalPath: '/articoli-frontaliere/como-rinnovo-illuminazione-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como rinnova illuminazione viale Varese progetto 80mila euro",
+      "description": "Il Comune di Como rinnova l'illuminazione su due tratti di viale Varese con un progetto da 80mila euro, inclusa copertura di 50mila euro da fondi frontalieri.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-como-rinnovo-illuminazione-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-11T21:48:04+00:00",
+      "dateModified": "2026-11-11T21:48:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/como-rinnovo-illuminazione-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

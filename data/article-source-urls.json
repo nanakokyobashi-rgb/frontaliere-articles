@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/info/economia/la-bns-lascia-il-tasso-guida-inalterato-allo-00--4107574.html": {
-    "articleId": "bns-decisione-tasso-invariato-2026",
-    "ts": "2026-09-25T04:30:31.434Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/ticino/1952253/ffs-cargo-le-prospettive-occupazionali-fanno-discutere": {
     "articleId": "riassetto-ferroviario-lavoratori",
     "ts": "2026-09-25T09:17:00.484Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/attualita/tipendi-svizzera-2027-aumenti-frontalieri-ubs": {
     "articleId": "aumenti-stipendi-frontalieri-2027",
     "ts": "2026-11-11T16:44:45.299Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/como-nuova-luce-sara-su-viale-varese-ok-al-progetto-da-80mila-euro-e-pagano-tanto-i-fondi-dei-frontalieri": {
+    "articleId": "como-rinnovo-illuminazione-varese",
+    "ts": "2026-11-11T21:48:06.008Z",
     "keyForm": 2
   }
 }
