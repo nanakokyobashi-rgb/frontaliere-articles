@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-svitto-seminario-wohnraum-rickenbach.webp",
-      "sha256": "1f017778e063d1fde5e666e5c8594f6862957a7d47c4edd476df18b6cfaa8cfe"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-svitto-seminario-wohnraum-rickenbach-480w.webp",
-      "sha256": "3fd6cbb330c9092991e4ada6a694af5ecd98596c771cee993e5ab05200e54ac0"
-    }
-  ]
+  "items": []
 }
