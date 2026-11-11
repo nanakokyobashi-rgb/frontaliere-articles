@@ -4,25 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261107-participation-record-au-festival-du-chocolat-a-neuchatel.html": {
-      "section": "canton-ne",
-      "ts": 1794130917401
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261106-amsterdam-chantier-d-un-centre-de-donnees-microsoft-occupe.html": {
-      "section": "canton-ne",
-      "ts": 1794130927626
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261106-tesla-va-cesser-la-production-du-cybertruck-vers-mi-2027.html": {
-      "section": "canton-ne",
-      "ts": 1794130938448
-    },
-    "canton-ne::https://www.rts.ch/info/regions/vaud/2026/article/vaud-et-neuchatel-lancent-un-numero-unique-pour-la-sante-29402837.html": {
-      "section": "canton-ne",
-      "ts": 1794167250647
-    },
     "canton-ne::https://www.estrepublicain.fr/culture-loisirs/2026/11/07/le-travail-frontalier-un-phenomene-certes-complexe-mais-qui-profite-aux-deux-pays": {
       "section": "canton-ne",
       "ts": 1794277967837
+    },
+    "canton-ne::https://www.estrepublicain.fr/economie/2026/11/10/face-a-l-instabilite-sociale-en-france-la-devise-suisse-se-renforce-et-ca-profite-aux-frontaliers": {
+      "section": "canton-ne",
+      "ts": 1794382243198
     }
   }
 }

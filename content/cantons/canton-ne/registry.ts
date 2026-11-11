@@ -272,4 +272,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'fiscalita-coppie-sposate-voto',
+ category: 'fiscale',
+ date: '2026-11-11T07:48:47.468Z',
+ image: '/images/blog/article-fiscalita-coppie-sposate-voto.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

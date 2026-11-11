@@ -75,6 +75,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.frontalieri-aumento-pausa-2023.title': 'Frontalieri: aumento in vent\'anni e pausa dalla dinamica dal 2023',
     'blog.article.frontalieri-aumento-pausa-2023.excerpt': 'L\'Osservatorio statistico dell\'Arc giurassiano (Ostaj) segnala che in vent\'anni i frontalieri sono più che triplicati, con quasi 75.000 al giorno, ma la dinamica è in pausa dal 2023.',
     'blog.article.frontalieri-aumento-pausa-2023.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.fiscalita-coppie-sposate-voto.title': 'Tassazione coppie sposate: voto il 29 novembre',
+    'blog.article.fiscalita-coppie-sposate-voto.excerpt': 'L\'8 marzo scorso, gli svizzeri hanno accettato con il 54% l\'imposizione individuale.',
+    'blog.article.fiscalita-coppie-sposate-voto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNeIt;

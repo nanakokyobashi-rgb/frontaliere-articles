@@ -75,6 +75,9 @@ const blogMetaCantonNeFr: Record<string, string> = {
     'blog.article.frontalieri-aumento-pausa-2023.title': 'Frontaliers : hausse en vingt ans et pause de la dynamique depuis 2023',
     'blog.article.frontalieri-aumento-pausa-2023.excerpt': 'L\'Observatoire statistique de l\'Arc jurassien (Ostaj) indique qu\'en vingt ans, le nombre de frontaliers a plus que triplé, avec près de 75.000 par jour, mais que la dynamique est en pause depuis 2023.',
     'blog.article.frontalieri-aumento-pausa-2023.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.fiscalita-coppie-sposate-voto.title': 'Imposition des couples mariés : vote le 29 novembre',
+    'blog.article.fiscalita-coppie-sposate-voto.excerpt': 'Le 8 mars dernier, les Suisses ont accepté l’imposition individuelle à 54 %.',
+    'blog.article.fiscalita-coppie-sposate-voto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNeFr;

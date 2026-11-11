@@ -928,6 +928,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fiscalita-coppie-sposate-voto': {
+    title: 'Tassazione coppie sposate: voto il 29 novembre',
+    description: 'Voto federale sul mantenimento della tassazione comune per coppie sposate il 29 novembre. Il 54% aveva approvato l\'imposizione individuale l\'8 marzo.',
+    keywords: 'tassazione coppie sposate, voto 29 novembre, imposizione individuale, Centro, gfs.bern',
+    ogTitle: 'Tassazione coppie sposate voto 29 novembre',
+    ogDescription: 'Il voto del 29 novembre riguarda l\'iniziativa del Centro sulla tassazione comune per coppie sposate. Il 54% aveva approvato l\'imposizione individuale l\'8 marzo. Consulta i dettagli.',
+    canonicalPath: '/articoli-neuchatel/fiscalita-coppie-sposate-voto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tassazione coppie sposate: voto il 29 novembre",
+      "description": "Voto federale sul mantenimento della tassazione comune per coppie sposate il 29 novembre. Il 54% aveva approvato l'imposizione individuale l'8 marzo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fiscalita-coppie-sposate-voto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-11T07:48:47+00:00",
+      "dateModified": "2026-11-11T07:48:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/fiscalita-coppie-sposate-voto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

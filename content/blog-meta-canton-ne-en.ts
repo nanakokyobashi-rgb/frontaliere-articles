@@ -75,6 +75,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.frontalieri-aumento-pausa-2023.title': 'Cross-border commuters: 20-year rise pauses since 2023',
     'blog.article.frontalieri-aumento-pausa-2023.excerpt': 'The Statistical Observatory of the Jura Arc (Ostaj) reports that over twenty years, cross-border workers have more than tripled, reaching nearly 75.000 per day, but the trend has been on hold since 2023.',
     'blog.article.frontalieri-aumento-pausa-2023.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.fiscalita-coppie-sposate-voto.title': 'Taxation of married couples: vote on November 29',
+    'blog.article.fiscalita-coppie-sposate-voto.excerpt': 'Last March 8, the Swiss approved individual taxation with 54%.',
+    'blog.article.fiscalita-coppie-sposate-voto.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;

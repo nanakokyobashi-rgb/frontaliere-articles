@@ -75,6 +75,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.frontalieri-aumento-pausa-2023.title': 'Grenzgänger: Zunahme in zwanzig Jahren und Pause bei der Entwicklung seit 2023',
     'blog.article.frontalieri-aumento-pausa-2023.excerpt': 'Das statistische Observatorium des Jurabogens (Ostaj) weist darauf hin, dass sich die Zahl der Grenzgänger in zwanzig Jahren mehr als verdreifacht hat und fast 75.000 von ihnen täglich die Grenze überqueren, die Entwicklung aber seit 2023 pausiert.',
     'blog.article.frontalieri-aumento-pausa-2023.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.fiscalita-coppie-sposate-voto.title': 'Besteuerung von Ehepaaren: Abstimmung am 29. November',
+    'blog.article.fiscalita-coppie-sposate-voto.excerpt': 'Am 8. März haben die Schweizer der Individualbesteuerung mit 54% zugestimmt.',
+    'blog.article.fiscalita-coppie-sposate-voto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;
