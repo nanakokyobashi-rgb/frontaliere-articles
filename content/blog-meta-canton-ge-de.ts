@@ -42,6 +42,9 @@ const blogMetaCantonGeDe: Record<string, string> = {
     'blog.article.a1-terza-corsia-ginevra.title': 'A1: Die Genfer Rechte fordert eine dritte Fahrspur',
     'blog.article.a1-terza-corsia-ginevra.excerpt': 'Die rechte Mehrheit des Genfer Grossen Rats hat gefordert, den Pannenstreifen auf der Autobahn A1 vorübergehend als dritte Fahrspur zu nutzen, und zwar auf dem Abschnitt zwischen Le Vengeron und Coppet (VD), also auf dem in der Motion präzisierten Korridor.',
     'blog.article.a1-terza-corsia-ginevra.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.referendum-costruzione-alloggi-hbm.title': 'Referendum gegen das Gesetz 13694 zum Bau von HBM-Wohnungen in Genf',
+    'blog.article.referendum-costruzione-alloggi-hbm.excerpt': 'HBM machen 5,2% des kantonalen Wohnungsbestands aus. Das Referendum richtet sich gegen das Gesetz 13694.',
+    'blog.article.referendum-costruzione-alloggi-hbm.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGeDe;

@@ -42,6 +42,9 @@ const blogMetaCantonGeFr: Record<string, string> = {
     'blog.article.a1-terza-corsia-ginevra.title': 'A1 : la droite genevoise demande une troisième voie',
     'blog.article.a1-terza-corsia-ginevra.excerpt': 'Le Grand Conseil genevois a approuvé la motion par 45 voix contre 38.',
     'blog.article.a1-terza-corsia-ginevra.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.referendum-costruzione-alloggi-hbm.title': 'Référendum contre la loi 13694 sur la construction de logements HBM à Genève',
+    'blog.article.referendum-costruzione-alloggi-hbm.excerpt': 'Les HBM représentent 5,2 % du parc de logements cantonal. Le référendum conteste la loi 13694.',
+    'blog.article.referendum-costruzione-alloggi-hbm.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGeFr;

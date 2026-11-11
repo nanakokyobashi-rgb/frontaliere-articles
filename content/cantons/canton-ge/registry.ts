@@ -150,4 +150,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'referendum-costruzione-alloggi-hbm',
+ category: 'novita',
+ date: '2026-11-11T07:28:07.329Z',
+ image: '/images/blog/article-referendum-costruzione-alloggi-hbm.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

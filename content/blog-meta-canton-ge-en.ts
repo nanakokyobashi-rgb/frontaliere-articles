@@ -42,6 +42,9 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.a1-terza-corsia-ginevra.title': 'A1: Geneva\'s right wing calls for a third lane',
     'blog.article.a1-terza-corsia-ginevra.excerpt': 'The right-wing majority of the Geneva Grand Council called for the emergency lane to be used temporarily as a third lane on the A1 motorway, on the section between Le Vengeron and Coppet (VD), that is, the corridor specified in the motion.',
     'blog.article.a1-terza-corsia-ginevra.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.referendum-costruzione-alloggi-hbm.title': 'Referendum against law 13694 on the construction of HBM housing in Geneva',
+    'blog.article.referendum-costruzione-alloggi-hbm.excerpt': 'HBM account for 5,2% of the cantonal housing stock. The referendum challenges law 13694.',
+    'blog.article.referendum-costruzione-alloggi-hbm.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGeEn;

@@ -42,6 +42,9 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.a1-terza-corsia-ginevra.title': 'A1: la destra ginevrina chiede una terza corsia',
     'blog.article.a1-terza-corsia-ginevra.excerpt': 'La maggioranza di destra del Grand Conseil genevois ha chiesto di usare temporaneamente la banda d\'arresto d\'emergenza come terza corsia sull\'autostrada A1, nel tratto compreso tra Le Vengeron e Coppet (VD), cioè il corridoio precisato nella mozione.',
     'blog.article.a1-terza-corsia-ginevra.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.referendum-costruzione-alloggi-hbm.title': 'Referendum contro legge 13694 sulla costruzione di alloggi HBM a Ginevra',
+    'blog.article.referendum-costruzione-alloggi-hbm.excerpt': 'Gli HBM sono il 5,2% del parco abitativo cantonale. Il referendum contesta la legge 13694.',
+    'blog.article.referendum-costruzione-alloggi-hbm.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGeIt;
