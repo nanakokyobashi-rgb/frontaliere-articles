@@ -16,6 +16,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'finanziamento-riarmo-esercito': { it: 'finanziamento-riarmo-esercito', en: 'army-rearmament-funding', de: 'finanzierung-aufruestung-armee', fr: 'financement-rearmement-armee' },
  'ricerca-fisco-aziende-svitto': { it: 'ricerca-fisco-aziende-svitto', en: 'schwyz-research-company-tax', de: 'schwyzer-firmen-forschung-steuern', fr: 'recherche-entreprises-fiscalite-schwyz' },
  'martinimarkt-principale-strada-chiusa': { it: 'martinimarkt-principale-strada-chiusa', en: 'martinimarkt-hauptstrasse-closed', de: 'martinimarkt-hauptstrasse-gesperrt', fr: 'martinimarkt-hauptstrasse-fermee' },
+ 'svitto-seminario-wohnraum-rickenbach': { it: 'svitto-seminario-wohnraum-rickenbach', en: 'schwyz-seminary-housing-rickenbach', de: 'schwyz-seminar-wohnraum-rickenbach', fr: 'schwyz-seminaire-logement-rickenbach' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

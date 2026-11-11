@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'svitto-seminario-wohnraum-rickenbach',
+ category: 'pratico',
+ date: '2026-11-11T16:54:58.624Z',
+ image: '/images/blog/article-svitto-seminario-wohnraum-rickenbach.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SZ'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -509,6 +509,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-svitto-seminario-wohnraum-rickenbach': {
+    title: 'Governo Svitto valuta ex seminario Rickenbach per abitazioni',
+    description: 'Il governo cantonale di Svitto valuta l\'ex seminario di Rickenbach per uso abitativo, basandosi su analisi del 2005.',
+    keywords: 'frontalieri, ticino, svizzera, italia, governo, svitto, valuta, seminario',
+    ogTitle: 'Ex seminario Rickenbach: uso abitativo Canton Svitto',
+    ogDescription: 'Il governo cantonale di Svitto valuta l\'ex seminario di Rickenbach per uso abitativo, basandosi su analisi del 2005. Il trasferimento degli uffici è previsto non prima del primo semestre 2030.',
+    canonicalPath: '/articoli-svitto/svitto-seminario-wohnraum-rickenbach/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Governo Svitto valuta ex seminario Rickenbach per abitazioni",
+      "description": "Il governo cantonale di Svitto valuta l'ex seminario di Rickenbach per uso abitativo, basandosi su analisi del 2005.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-svitto-seminario-wohnraum-rickenbach.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-11T16:54:58+00:00",
+      "dateModified": "2026-11-11T16:54:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svitto/svitto-seminario-wohnraum-rickenbach/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

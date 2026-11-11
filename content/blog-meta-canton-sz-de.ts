@@ -42,6 +42,9 @@ const blogMetaCantonSzDe: Record<string, string> = {
     'blog.article.martinimarkt-principale-strada-chiusa.title': 'Martinimarkt: Zu- und Wegfahrt auf der Hauptstrasse nicht möglich',
     'blog.article.martinimarkt-principale-strada-chiusa.excerpt': 'Während des gesamten Markttags von 6.00 bis 20.00 Uhr sind Zu- und Wegfahrt auf der Hauptstrasse zwischen Dorfplatz und Benzigerstrasse verboten.',
     'blog.article.martinimarkt-principale-strada-chiusa.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.svitto-seminario-wohnraum-rickenbach.title': 'Schwyzer Regierung prüft ehemaliges Seminar in Rickenbach für Wohnzwecke',
+    'blog.article.svitto-seminario-wohnraum-rickenbach.excerpt': 'Das ehemalige Lehrerseminar in Rickenbach wird für Wohnzwecke geprüft; die Verlegung der kantonalen Büros ist frühestens im ersten Halbjahr 2030 vorgesehen.',
+    'blog.article.svitto-seminario-wohnraum-rickenbach.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSzDe;

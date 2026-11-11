@@ -42,6 +42,9 @@ const blogMetaCantonSzFr: Record<string, string> = {
     'blog.article.martinimarkt-principale-strada-chiusa.title': 'Martinimarkt : accès et sortie impossibles sur Hauptstrasse',
     'blog.article.martinimarkt-principale-strada-chiusa.excerpt': 'De 6.00 à 20.00 pendant toute la journée du marché, l’accès et la sortie sont interdits sur Hauptstrasse entre Dorfplatz et Benzigerstrasse.',
     'blog.article.martinimarkt-principale-strada-chiusa.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.svitto-seminario-wohnraum-rickenbach.title': 'Schwyz évalue l’ex-séminaire de Rickenbach pour loger',
+    'blog.article.svitto-seminario-wohnraum-rickenbach.excerpt': 'L\'ancien séminaire d\'enseignants de Rickenbach est évalué en vue d\'un usage résidentiel ; le déménagement des offices cantonaux n\'est pas prévu avant le premier semestre 2030.',
+    'blog.article.svitto-seminario-wohnraum-rickenbach.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSzFr;
