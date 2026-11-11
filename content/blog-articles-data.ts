@@ -48135,6 +48135,16 @@ const RAW_ARTICLES = [
  authorSlug: 'samuele-valente',
  authorName: 'Samuele Valente',
  },
+ {
+ id: 'aumenti-stipendi-frontalieri-2027',
+ category: 'novita',
+ date: '2026-11-11T16:44:41.881Z',
+ image: '/images/blog/article-aumenti-stipendi-frontalieri-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
