@@ -15,6 +15,10 @@
     "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6078": {
       "section": "canton-ge",
       "ts": 1794384510937
+    },
+    "canton-ge::https://www.ge.ch/node/45417": {
+      "section": "canton-ge",
+      "ts": 1794386800947
     }
   }
 }
