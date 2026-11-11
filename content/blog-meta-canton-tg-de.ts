@@ -84,6 +84,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.domanda-edilizia-meisenweg.title': 'Bauantrag für Meisenweg 9 in Frauenfeld',
     'blog.article.domanda-edilizia-meisenweg.excerpt': 'Die Mitteilung betrifft Meisenweg 9 in Frauenfeld: Einfamilienhaus, Solaranlage und Außenbereich, mit Beratung vom 4. bis 23. November 2026.',
     'blog.article.domanda-edilizia-meisenweg.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.bad-egelsee-supplemento-sauna.title': 'Bad Egelsee: +5 CHF für die Sauna ab 2027',
+    'blog.article.bad-egelsee-supplemento-sauna.excerpt': 'Ab dem 1. Januar 2027 kostet das Ticket mit Sauna CHF 15 für Erwachsene und CHF 10 für Jugendliche, Lernende und Studierende.',
+    'blog.article.bad-egelsee-supplemento-sauna.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTgDe;

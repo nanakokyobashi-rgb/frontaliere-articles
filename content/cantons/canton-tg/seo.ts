@@ -1050,6 +1050,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bad-egelsee-supplemento-sauna': {
+    title: 'Bad Egelsee: +5 CHF per la sauna dal 2027 | Frontaliere Ticino',
+    description: 'Dal 1° gennaio 2027 il Bad Egelsee di Kreuzlingen aumenta il prezzo con sauna: CHF 15 per adulti e CHF 10 per giovani, apprendisti e studenti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, egelsee, sauna, gennaio, biglietto',
+    ogTitle: 'Bad Egelsee: +5 CHF per la sauna dal 2027',
+    ogDescription: 'La città di Kreuzlingen introduce un supplemento per sauna e area relax: il biglietto singolo salirà da CHF 10 a 15 per gli adulti e da CHF 6 a 10 per giovani, apprendisti e studenti. Gli abbonamenti annuali in corso restano validi.',
+    canonicalPath: '/articoli-turgovia/bad-egelsee-supplemento-sauna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bad Egelsee: +5 CHF per la sauna dal 2027",
+      "description": "Dal 1° gennaio 2027 il Bad Egelsee di Kreuzlingen aumenta il prezzo con sauna: CHF 15 per adulti e CHF 10 per giovani, apprendisti e studenti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-bad-egelsee-supplemento-sauna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-11T22:21:06+00:00",
+      "dateModified": "2026-11-11T22:21:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/bad-egelsee-supplemento-sauna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
