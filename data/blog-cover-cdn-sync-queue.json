@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-revisione-tardoc-2027.webp",
-      "sha256": "fa77287b914c0db74878509c355a71c8eb78b45b1972683b8d793a13e5d46ba1"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-revisione-tardoc-2027-480w.webp",
-      "sha256": "210533af6261e722dfc4c2bca5f675eff4afbafe3b5dffdb5f951fd0f143fec5"
-    }
-  ]
+  "items": []
 }
