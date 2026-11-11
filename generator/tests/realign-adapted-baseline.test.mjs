@@ -5,10 +5,10 @@
  * ## Perche' esiste
  *
  * Una baseline scritta in automatico afferma un allineamento cosciente. Senza
- * le tre prove — PR del sito mergiate, ogni commit del sito coperto da una PR
- * dichiarata, corpus fermo dal merge della dichiarante — il job seppellirebbe
- * un drift che nessuno ha letto: e' il difetto che `--init` senza `--force`
- * rifiuta gia' (issue #978), rifatto da un cron.
+ * le tre prove — PR del sito mergiate, ogni commit che cambia il contenuto del
+ * path coperto da una PR dichiarata, corpus fermo dal merge della dichiarante —
+ * il job seppellirebbe un drift che nessuno ha letto: e' il difetto che `--init`
+ * senza `--force` rifiuta gia' (issue #978), rifatto da un cron.
  *
  * Titolo dell'allarme se questo osservatore scatta in produzione:
  * «Mirror: gemello `adapted` con riallineamento dichiarato e mai avvenuto».
@@ -141,11 +141,23 @@ test('il lookup delle PR del commit usa lo stesso retry transient', async () => 
   assert.equal(calls, 2);
 });
 
+test('la storia del sito conserva i parent dei commit, inclusi quelli dei merge', async () => {
+  const io = createIo({
+    siteRepo: 'owner/site',
+    api: async () => response(200, [
+      { sha: 'merge-sha', parents: [{ sha: 'first-parent' }, { sha: 'second-parent' }] },
+    ]),
+  });
+  assert.deepEqual(await io.siteHistory('scripts/ci/esempio.mjs', 30), [
+    { sha: 'merge-sha', parents: ['first-parent', 'second-parent'] },
+  ]);
+});
+
 /**
  * Un mondo finto: `history` e' la storia del file sul sito dal piu' recente,
- * ogni commit col proprio hash e le PR a cui appartiene.
+ * ogni commit col proprio hash, i parent reali e le PR a cui appartiene.
  */
-function world({ history, sitePrs = {}, corpus = {}, calls = [] }) {
+function world({ history, sitePrs = {}, corpus = {}, calls = [], parentHashes = {} }) {
   return {
     calls,
     async sitePr(number) {
@@ -154,10 +166,14 @@ function world({ history, sitePrs = {}, corpus = {}, calls = [] }) {
     },
     async siteHistory(sitePath, cap) {
       calls.push(`siteHistory:${sitePath}`);
-      return history.slice(0, cap).map(({ sha }) => ({ sha }));
+      return history.slice(0, cap).map((commit, index) => ({
+        sha: commit.sha,
+        parents: commit.parents ?? (history[index + 1] ? [history[index + 1].sha] : []),
+      }));
     },
     async siteHashAt(_sitePath, sha) {
-      return history.find((commit) => commit.sha === sha).hash;
+      const commit = history.find((item) => item.sha === sha);
+      return commit ? commit.hash : parentHashes[sha] ?? null;
     },
     async commitPrs(sha) {
       return history.find((commit) => commit.sha === sha).prs || [];
@@ -311,6 +327,54 @@ test('un push diretto sul sito (commit senza PR) non e\' coperto da nessuna dich
     corpus: { merge50: 'corpus-new', HEAD: 'corpus-new' },
   });
   assert.equal((await evaluate(declaration([101]), io)).status, 'site-commit-uncovered');
+});
+
+test('un commit senza PR non viene nascosto da un commit indipendente con lo stesso blob', async () => {
+  const io = world({
+    history: [
+      { sha: 'merge', hash: 'site-new', parents: ['direct', 'declared'], prs: [101] },
+      { sha: 'direct', hash: 'site-new', parents: ['baseline'], prs: [] },
+      { sha: 'declared', hash: 'site-new', parents: ['baseline'], prs: [101] },
+      { sha: 'baseline', hash: 'site-base', parents: [], prs: [90] },
+    ],
+    sitePrs: { 101: merged(101) },
+    corpus: { merge50: 'corpus-new', HEAD: 'corpus-new' },
+  });
+  const decision = await evaluate(declaration([101]), io);
+  assert.equal(decision.realign, false);
+  assert.equal(decision.status, 'site-commit-uncovered');
+  assert.match(decision.reason, /direct/);
+});
+
+test('un merge che cambia il blob rispetto al parent principale resta da coprire', async () => {
+  const io = world({
+    history: [
+      { sha: 'merge', hash: 'site-new', parents: ['main-parent', 'branch-parent'], prs: [] },
+      { sha: 'main-parent', hash: 'site-base', parents: ['baseline'], prs: [90] },
+      { sha: 'branch-parent', hash: 'site-new', parents: ['baseline'], prs: [101] },
+      { sha: 'baseline', hash: 'site-base', parents: [], prs: [90] },
+    ],
+    sitePrs: { 101: merged(101) },
+    corpus: { merge50: 'corpus-new', HEAD: 'corpus-new' },
+  });
+  const decision = await evaluate(declaration([101]), io);
+  assert.equal(decision.realign, false);
+  assert.equal(decision.status, 'site-commit-uncovered');
+  assert.match(decision.reason, /merge/);
+});
+
+test('un commit senza delta rispetto al parent resta ignorabile se non ha PR', async () => {
+  const io = world({
+    history: [
+      { sha: 'empty', hash: 'site-new', parents: ['c1'], prs: [] },
+      { sha: 'c1', hash: 'site-new', parents: ['baseline'], prs: [101] },
+      { sha: 'baseline', hash: 'site-base', parents: [], prs: [90] },
+    ],
+    sitePrs: { 101: merged(101) },
+    corpus: { merge50: 'corpus-new', HEAD: 'corpus-new' },
+  });
+  const decision = await evaluate(declaration([101]), io);
+  assert.equal(decision.realign, true, decision.reason);
 });
 
 test('una delle PR non MERGED: nessuna scrittura, e la storia del sito non viene nemmeno letta', async () => {
