@@ -110131,16 +110131,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-eteria-gioielleria-berta-serret': {
     title: 'ETERIA: Berta Serret lancia il nuovo lusso etico con diamanti di laboratorio e oro riciclato',
-    description: 'L’11 novembre 2026 debutta online ETERIA JEWELLERY: alta gioielleria e lusso etico sotto il segno dello Smart Luxury, creata da Berta Serret con oro riciclato CoC e diamanti di laboratorio IGI.',
+    description: 'L’11 novembre 2026 debutta online ETERIA JEWELLERY, il brand di Berta Serret: oro riciclato certificato CoC e diamanti di laboratorio certificati IGI.',
     keywords: 'ETERIA, Berta Serret, Smart Luxury, lusso etico, gioielli oro riciclato, diamanti di laboratorio, Tracemark, Facet Barcelona, gioielleria sostenibile, acquisto gioielli online',
-    ogTitle: 'ETERIA: Berta Serret lancia il nuovo lusso etico con diamanti di laboratorio',
+    ogTitle: 'ETERIA: Berta Serret lancia il nuovo lusso etico con diamanti di laboratorio e oro riciclato',
     ogDescription: 'Debutto ufficiale online per ETERIA JEWELLERY: oro riciclato certificato CoC, diamanti di laboratorio IGI e tracciabilità TRACEMARK con il modello di lusso etico Smart Luxury.',
     canonicalPath: '/articoli-svizzera/eteria-gioielleria-berta-serret/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "ETERIA: Berta Serret lancia il nuovo lusso etico con diamanti di laboratorio e oro riciclato",
-      "description": "L’11 novembre 2026 debutta online ETERIA JEWELLERY: alta gioielleria e lusso etico sotto il segno dello Smart Luxury, creata da Berta Serret con oro riciclato CoC e diamanti di laboratorio IGI.",
+      "description": "L’11 novembre 2026 debutta online ETERIA JEWELLERY, il brand di Berta Serret: oro riciclato certificato CoC e diamanti di laboratorio certificati IGI.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
