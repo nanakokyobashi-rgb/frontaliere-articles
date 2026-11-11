@@ -23,19 +23,27 @@
  * is pushed, an emitter uploads the files the CDN does not have, from the
  * module it renders with, and stops when it cannot.
  *
- * It never changes the bytes behind a stable name. A content-addressed key
- * may be PUT again only when its cache metadata is stale; the producer bytes
- * are still the same content that the key names.
+ * Stable global shell aliases are checked against the digest of their current
+ * producer bytes, read from the CDN response body. ETags are only validators:
+ * a weak ETag cannot prove byte identity.
+ * Fast emitters never overwrite a mutable alias: they can run from an older
+ * inputs.sha and must never roll a newer script back. An alias that is absent
+ * from both the CDN and R2 is the bootstrap case after a new producer lands;
+ * it may be uploaded from the current producer, then purged and verified like
+ * every other asset. A stored or stale alias remains fail-closed until the
+ * full deploy repairs it. A content-addressed key may be PUT again only when
+ * its cache metadata is stale; the producer bytes are still the same content
+ * that the key names.
  *
  * An object on R2 is not yet a file the pages get. Each edge location keeps
  * the 404 it gave a browser while the object was missing (about three minutes
  * on this host: HIT at 112 s, EXPIRED at 218 s, measured 2026-10-07), in one
- * cache entry per `Origin`. The probe cannot see those entries: this host never
- * answers a HEAD from its cache (`cf-cache-status: DYNAMIC`). So the URL the
- * pages use is asked for every file, in both cache variants; what the probe did
- * not show, or what does not answer there, is purged at that URL and must then
- * be served before anything is published.
+ * cache entry per `Origin`. The probe uses a unique query to inspect the
+ * current object; stable aliases use GET so the producer digest can be checked.
+ * The exact URL the pages use is also fetched in both cache variants. Any
+ * stale or missing edge response there is purged before HTML is published.
  */
+import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -93,6 +101,41 @@ const variantLabel = (pageOrigin) => (pageOrigin ? `Origin ${pageOrigin}` : 'no 
 export const SHELL_ASSET_CACHE_CONTROL = 'public,max-age=600,must-revalidate';
 export const SHELL_ASSET_IMMUTABLE_CACHE_CONTROL = 'public,max-age=31536000,immutable';
 
+const GLOBAL_SHELL_ASSET_STEMS = [
+  'gtag-init',
+  'site-support',
+  'adsense-loader',
+  'partnerize-tag',
+  'meta-pixel-base-code',
+];
+
+const stableGlobalShellStem = (key) => {
+  const match = /^assets\/(gtag-init|site-support|adsense-loader|partnerize-tag|meta-pixel-base-code)\.js$/.exec(key);
+  return match?.[1];
+};
+
+function stableGlobalShellPairs(assets) {
+  const byKey = new Map(assets.map(({ key, content }) => [key, content]));
+  const pairs = [];
+  for (const stem of GLOBAL_SHELL_ASSET_STEMS) {
+    const stableKey = `assets/${stem}.js`;
+    if (!byKey.has(stableKey)) continue;
+    const versioned = assets.filter(({ key }) => new RegExp(`^assets/${stem}-[a-f0-9]{12}\\.js$`).test(key));
+    if (versioned.length !== 1) {
+      throw new Error(`${stableKey}: expected exactly one current content-addressed target before HTML can be published`);
+    }
+    if (byKey.get(stableKey) !== versioned[0].content) {
+      throw new Error(`${stableKey}: stable alias bytes differ from ${versioned[0].key} — HTML that references it must not be published`);
+    }
+    pairs.push({ stableKey, versionedKey: versioned[0].key, content: versioned[0].content });
+  }
+  return pairs;
+}
+
+const expectedStableShellMd5 = (key, content) => stableGlobalShellStem(key)
+  ? createHash('md5').update(content).digest('hex')
+  : undefined;
+
 const isContentAddressedShellAsset = (key) =>
   /(?:^|\/)(?:gtag-init|adsense-loader|partnerize-tag|site-support|meta-pixel-base-code)-[a-f0-9]{12}\.js$/.test(key);
 
@@ -101,6 +144,12 @@ const isContentAddressedShellAsset = (key) =>
 export function shellAssetCacheControl(key) {
   return isContentAddressedShellAsset(key) ? SHELL_ASSET_IMMUTABLE_CACHE_CONTROL : SHELL_ASSET_CACHE_CONTROL;
 }
+
+const expectedShellAssetCacheControl = (key) => {
+  if (isContentAddressedShellAsset(key)) return SHELL_ASSET_IMMUTABLE_CACHE_CONTROL;
+  if (stableGlobalShellStem(key)) return SHELL_ASSET_CACHE_CONTROL;
+  return undefined;
+};
 
 // fetch() sends no User-Agent of its own, and the zone challenges a request
 // without one: the probe would read every file as not served.
@@ -116,6 +165,13 @@ const EDGE_CONFIRMATION_WINDOW_MS = CONFIRM_DELAYS_MS.reduce((total, delay) => t
 // A 200 whose body is HTML is not a script or a stylesheet: an origin that
 // serves the SPA on any path answers that way for a file it does not have.
 const isHtml = (contentType) => /^\s*text\/html\b/i.test(String(contentType || ''));
+const discardResponseBody = (response) => {
+  try {
+    response.body?.cancel?.()?.catch?.(() => {});
+  } catch {
+    // nothing to drop
+  }
+};
 
 // upload-cdn-file.sh bounds each rclone call itself (R2_TIMEOUT_OBJECT_S, two
 // attempts on the upload) and may first download rclone; this is both the
@@ -168,7 +224,7 @@ export function shellAssetsFromStaticScripts(files) {
   return assets;
 }
 
-// 'present', 'stale' (the object is there with the wrong cache policy),
+// 'present', 'stale' (the object is there with the wrong cache policy or bytes),
 // 'absent' (the object is not there), or 'unknown' (anything that is not an
 // answer about the object — a challenge, a 5xx, a timeout).
 function answerOf(response) {
@@ -176,29 +232,86 @@ function answerOf(response) {
   return response.status === 404 || response.status === 410 ? 'absent' : 'unknown';
 }
 
-const normalizedCacheControl = (value) => String(value ?? '').toLowerCase().replace(/\s+/g, '');
+function cacheControlDirectives(value) {
+  const source = String(value ?? '');
+  const directives = [];
+  let quoted = false;
+  let escaped = false;
+  let start = 0;
 
-function answerWithExpectedCacheControl(response, expectedCacheControl) {
+  for (let index = 0; index < source.length; index += 1) {
+    const character = source[index];
+    if (escaped) {
+      escaped = false;
+      continue;
+    }
+    if (quoted && character === '\\') {
+      escaped = true;
+      continue;
+    }
+    if (character === '"') {
+      quoted = !quoted;
+      continue;
+    }
+    if (character === ',' && !quoted) {
+      directives.push(source.slice(start, index));
+      start = index + 1;
+    }
+  }
+
+  if (quoted || escaped) return [];
+  directives.push(source.slice(start));
+  const normalized = directives.map((directive) => directive.toLowerCase().replace(/\s+/g, ''));
+  return normalized.some((directive) => !directive) ? [] : normalized.sort();
+}
+
+const normalizedCacheControl = (value) => cacheControlDirectives(value).join(',');
+
+async function answerWithExpectedCacheControl(response, expectedCacheControl, expectedContentMd5) {
   const answer = answerOf(response);
-  if (answer !== 'present' || expectedCacheControl === undefined) return answer;
-  const actual = normalizedCacheControl(response.headers?.get?.('cache-control'));
-  const matchesImmutablePolicy = expectedCacheControl === SHELL_ASSET_IMMUTABLE_CACHE_CONTROL
-    && actual.includes('immutable')
-    && Number(actual.match(/(?:^|,)max-age=(\d+)(?:,|$)/)?.[1] ?? 0) >= 31536000;
-  return matchesImmutablePolicy || actual === normalizedCacheControl(expectedCacheControl)
-    ? 'present'
-    : 'stale';
+  if (answer !== 'present') {
+    discardResponseBody(response);
+    return answer;
+  }
+  if (expectedCacheControl !== undefined) {
+    const actualDirectives = cacheControlDirectives(response.headers?.get?.('cache-control'));
+    const actual = actualDirectives.join(',');
+    const maxAgeDirectives = actualDirectives
+      .map((directive) => /^max-age=(\d+)$/.exec(directive)?.[1])
+      .filter((maxAge) => maxAge !== undefined);
+    const matchesImmutablePolicy = expectedCacheControl === SHELL_ASSET_IMMUTABLE_CACHE_CONTROL
+      && actualDirectives.length === 3
+      && actualDirectives.includes('public')
+      && actualDirectives.includes('immutable')
+      && maxAgeDirectives.length === 1
+      && Number(maxAgeDirectives[0]) >= 31536000;
+    if (!(matchesImmutablePolicy || actual === normalizedCacheControl(expectedCacheControl))) {
+      discardResponseBody(response);
+      return 'stale';
+    }
+  }
+  if (expectedContentMd5 !== undefined) {
+    try {
+      const actualContentMd5 = createHash('md5').update(Buffer.from(await response.arrayBuffer())).digest('hex');
+      if (actualContentMd5 !== expectedContentMd5.toLowerCase()) return 'stale';
+    } catch {
+      discardResponseBody(response);
+      return 'unknown';
+    }
+  }
+  return 'present';
 }
 
 /**
  * Whether the object behind `key` can be read through the CDN: 'present',
  * 'stale', 'absent' or 'unknown'. A stale result means the object is there,
- * but its response does not carry the expected cache policy.
+ * but its response has the wrong cache policy or its body does not match the
+ * expected producer bytes.
  *
- * A HEAD, which this host passes to R2 every time, with a query string the
- * edge has never seen in case that changes: the answer is about the object,
- * never about a copy the edge kept. It creates no cache entry either, so
- * asking for a file that is not there leaves nothing behind.
+ * A HEAD for ordinary assets, or a GET when producer bytes must be checked,
+ * uses a query string the edge has never seen in case that changes. Any cache
+ * entry is scoped to that unique query, not the URL the pages use; a missing
+ * object cannot poison their URL.
  */
 export async function probeCdnAsset(key, {
   cdnOrigin = SHELL_ASSET_CDN_ORIGIN,
@@ -206,14 +319,15 @@ export async function probeCdnAsset(key, {
   now = Date.now,
   timeoutMs = PROBE_TIMEOUT_MS,
   expectedCacheControl,
+  expectedContentMd5,
 } = {}) {
   try {
     const response = await fetchImpl(`${cdnOrigin}/${key}?ensure=${now()}`, {
-      method: 'HEAD',
+      method: expectedContentMd5 === undefined ? 'HEAD' : 'GET',
       headers: { 'User-Agent': PROBE_USER_AGENT },
       signal: AbortSignal.timeout(timeoutMs),
     });
-    return answerWithExpectedCacheControl(response, expectedCacheControl);
+    return await answerWithExpectedCacheControl(response, expectedCacheControl, expectedContentMd5);
   } catch {
     return 'unknown';
   }
@@ -228,7 +342,7 @@ export async function probeCdnAsset(key, {
  * what makes the edge keep the 404.
  *
  * @param {string} key
- * @param {{ pageOrigin?: string, cdnOrigin?: string, fetchImpl?: typeof fetch, timeoutMs?: number }} [options]
+ * @param {{ pageOrigin?: string, cdnOrigin?: string, fetchImpl?: typeof fetch, timeoutMs?: number, expectedCacheControl?: string, expectedContentMd5?: string }} [options]
  * @returns {Promise<'present' | 'absent' | 'unknown'>}
  */
 export async function confirmCdnAsset(key, {
@@ -236,6 +350,8 @@ export async function confirmCdnAsset(key, {
   cdnOrigin = SHELL_ASSET_CDN_ORIGIN,
   fetchImpl = fetch,
   timeoutMs = PROBE_TIMEOUT_MS,
+  expectedCacheControl,
+  expectedContentMd5,
 } = {}) {
   try {
     const response = await fetchImpl(`${cdnOrigin}/${key}`, {
@@ -243,15 +359,11 @@ export async function confirmCdnAsset(key, {
       headers: { 'User-Agent': PROBE_USER_AGENT, ...(pageOrigin ? { Origin: pageOrigin } : {}) },
       signal: AbortSignal.timeout(timeoutMs),
     });
-    // The status and the type are the answer. The bytes are not read, and
-    // dropping them is not waited for: the time limit of the request ends with
-    // the headers, and a stream that never closes must not hold the step.
-    try {
-      response.body?.cancel?.()?.catch?.(() => {});
-    } catch {
-      // nothing to drop
+    const answer = await answerWithExpectedCacheControl(response, expectedCacheControl, expectedContentMd5);
+    if (expectedContentMd5 === undefined && answer === 'present') {
+      discardResponseBody(response);
     }
-    return answerOf(response);
+    return answer === 'stale' ? 'unknown' : answer;
   } catch {
     return 'unknown';
   }
@@ -287,17 +399,21 @@ export function checkStoredAsset(key, options) {
 }
 
 /**
- * Additive single-key PUT. upload-cdn-file.sh exits 0 on every runtime failure
- * by design; its "✅ uploaded" line is the signal.
+ * Additive single-key PUT. A stable alias can request the helper's atomic
+ * create-only mode; upload-cdn-file.sh exits 0 on every runtime failure by
+ * design, so its "✅ uploaded" or exact-byte reconciliation line is the signal.
  */
-export function uploadShellAsset(key, content, options) {
+export function uploadShellAsset(key, content, { createOnly = false, ...helperOptions } = {}) {
   const dir = mkdtempSync(path.join(tmpdir(), 'cdn-shell-asset-'));
   try {
     const file = path.join(dir, path.basename(key));
     writeFileSync(file, content, 'utf-8');
-    const output = runUploadHelper([file, key, shellAssetCacheControl(key)], options);
+    const args = createOnly
+      ? ['--create-if-absent', file, key, shellAssetCacheControl(key)]
+      : [file, key, shellAssetCacheControl(key)];
+    const output = runUploadHelper(args, helperOptions);
     process.stdout.write(output);
-    return output.includes('✅ uploaded');
+    return output.includes('✅ uploaded') || output.includes('✅ already present with matching bytes');
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -350,7 +466,8 @@ const waitFor = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 /**
  * Leaves every asset served at the URL the pages use, or throws.
  *
- * The CDN is asked first: one HEAD per file, no credentials, and in the normal
+ * The CDN is asked first: one HEAD for ordinary assets and one GET for stable
+ * aliases whose producer bytes must match, with no credentials. In the normal
  * run nothing else happens. R2 is read only for a file the CDN did not show,
  * and it is R2 — not the probe — that decides an upload: a runner the edge
  * challenges must not replace an object that is there.
@@ -366,12 +483,12 @@ const waitFor = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
  *
  * @param {{
  *   assets: Array<{ key: string, content: string }>,
- *   probe?: (key: string, options?: { expectedCacheControl?: string }) => Promise<'present' | 'stale' | 'absent' | 'unknown'>,
+ *   probe?: (key: string, options?: { expectedCacheControl?: string, expectedContentMd5?: string }) => Promise<'present' | 'stale' | 'absent' | 'unknown'>,
  *   checkStored?: (key: string) => 'exists' | 'missing' | 'indeterminate' | Promise<'exists' | 'missing' | 'indeterminate'>,
- *   upload?: (key: string, content: string) => boolean | Promise<boolean>,
+ *   upload?: (key: string, content: string, options?: { createOnly?: boolean, deadlineAt?: number, now?: () => number }) => boolean | Promise<boolean>,
  *   refreshCacheControl?: (key: string, content: string, options: { deadlineAt: number, now: () => number }) => boolean | Promise<boolean>,
  *   purge?: (keys: string[]) => boolean | Promise<boolean>,
- *   confirm?: (key: string, options: { pageOrigin?: string, timeoutMs?: number }) => Promise<'present' | 'absent' | 'unknown'>,
+ *   confirm?: (key: string, options: { pageOrigin?: string, timeoutMs?: number, expectedCacheControl?: string, expectedContentMd5?: string }) => Promise<'present' | 'absent' | 'unknown'>,
  *   wait?: (ms: number) => Promise<void>,
  *   now?: () => number,
  *   log?: (line: string) => void,
@@ -390,6 +507,8 @@ export async function ensureCdnShellAssets({
   now = monotonicNow,
   log = console.log,
 }) {
+  const stablePairs = stableGlobalShellPairs(assets);
+  const stablePairByKey = new Map(stablePairs.map((pair) => [pair.stableKey, pair]));
   let r2DeadlineAt;
   const withR2Deadline = async (key, phase, operation) => {
     if (r2DeadlineAt === undefined) r2DeadlineAt = r2UploadDeadline(now());
@@ -409,18 +528,30 @@ export async function ensureCdnShellAssets({
     return result;
   };
 
-  const probed = await Promise.all(assets.map(({ key }) => probe(key, {
-    expectedCacheControl: isContentAddressedShellAsset(key) ? SHELL_ASSET_IMMUTABLE_CACHE_CONTROL : undefined,
+  const probed = await Promise.all(assets.map(({ key, content }) => probe(key, {
+    expectedCacheControl: expectedShellAssetCacheControl(key),
+    expectedContentMd5: expectedStableShellMd5(key, content),
   })));
+  const probedByKey = new Map(assets.map(({ key }, index) => [key, probed[index]]));
   const results = [];
-  for (const [index, { key, content }] of assets.entries()) {
-    if (probed[index] === 'present') {
+  const priority = (key) => isContentAddressedShellAsset(key) ? 0 : stableGlobalShellStem(key) ? 2 : 1;
+  const orderedAssets = [...assets].sort((a, b) => priority(a.key) - priority(b.key));
+  for (const { key, content } of orderedAssets) {
+    const probeAnswer = probedByKey.get(key);
+    if (probeAnswer === 'present') {
       results.push({ key, outcome: 'served' });
       continue;
     }
+    if (stablePairByKey.has(key)) {
+      const { versionedKey } = stablePairByKey.get(key);
+      if (probeAnswer !== 'absent') {
+        throw new Error(`${key}: the CDN does not serve the current stable alias (probe: ${probeAnswer}); only the full deploy may publish it from ${versionedKey}, while a fast emitter can bootstrap only a confirmed absence — HTML that references it must not be published`);
+      }
+      log(`${key}: stable alias is absent; checking R2 before bootstrapping it from ${versionedKey}`);
+    }
     const stored = await withR2Deadline(key, 'lookup', (options) => checkStored(key, options));
     if (stored === 'exists') {
-      log(`${key}: on R2, not shown by the CDN (probe: ${probed[index]})`);
+      log(`${key}: on R2, but the CDN response is not current (probe: ${probeAnswer})`);
       if (isContentAddressedShellAsset(key)) {
         log(`${key}: refreshing immutable Cache-Control metadata on R2`);
         if (!(await withR2Deadline(key, 'cache-control refresh', (options) => refreshCacheControl(key, content, options)))) {
@@ -431,11 +562,16 @@ export async function ensureCdnShellAssets({
       continue;
     }
     if (stored !== 'missing') {
-      throw new Error(`${key}: the CDN did not serve it (probe: ${probed[index]}) and R2 could not be read — HTML that references it must not be published`);
+      throw new Error(`${key}: the CDN did not serve it (probe: ${probeAnswer}) and R2 could not be read — HTML that references it must not be published`);
     }
-    log(`${key}: not on the CDN — uploading it`);
-    if (!(await withR2Deadline(key, 'upload', (options) => upload(key, content, options)))) {
-      throw new Error(`${key}: not on the CDN and the upload failed — HTML that references it must not be published`);
+    const isStableAlias = stablePairByKey.has(key);
+    log(`${key}: not on the CDN — ${isStableAlias ? 'conditionally creating' : 'uploading'} it`);
+    if (!(await withR2Deadline(key, isStableAlias ? 'conditional create' : 'upload', (options) => upload(
+      key,
+      content,
+      isStableAlias ? { ...options, createOnly: true } : options,
+    )))) {
+      throw new Error(`${key}: not on the CDN and the ${isStableAlias ? 'conditional create' : 'upload'} failed — HTML that references it must not be published`);
     }
     results.push({ key, outcome: 'uploaded' });
   }
@@ -444,8 +580,13 @@ export async function ensureCdnShellAssets({
   // show what the edge kept: it cannot make it keep a 404.
   const unseen = results.filter((result) => result.outcome !== 'served').map((result) => result.key);
   const shown = results.filter((result) => result.outcome === 'served').map((result) => result.key);
+  const contentByKey = new Map(assets.map(({ key, content }) => [key, content]));
   const shownAnswers = await Promise.all(shown.map((key) => (
-    Promise.all(CACHE_VARIANTS.map((pageOrigin) => confirm(key, { pageOrigin })))
+    Promise.all(CACHE_VARIANTS.map((pageOrigin) => confirm(key, {
+      pageOrigin,
+      expectedCacheControl: expectedShellAssetCacheControl(key),
+      expectedContentMd5: expectedStableShellMd5(key, contentByKey.get(key)),
+    })))
   )));
   const kept = shown.filter((key, index) => {
     const unanswered = shownAnswers[index].findIndex((answer) => answer !== 'present');
@@ -475,6 +616,8 @@ export async function ensureCdnShellAssets({
           answer = await confirm(key, {
             pageOrigin,
             timeoutMs: Math.min(PROBE_TIMEOUT_MS, remainingForRequest),
+            expectedCacheControl: expectedShellAssetCacheControl(key),
+            expectedContentMd5: expectedStableShellMd5(key, contentByKey.get(key)),
           });
           if (answer === 'present' && now() <= deadlineAt) {
             confirmed = true;

@@ -238,4 +238,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'basilea-mozioni-climatizzazione',
+ category: 'pratico',
+ date: '2026-11-11T22:52:50.384Z',
+ image: '/images/blog/article-basilea-mozioni-climatizzazione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

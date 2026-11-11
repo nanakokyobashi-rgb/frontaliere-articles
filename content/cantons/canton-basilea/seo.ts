@@ -821,6 +821,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-basilea-mozioni-climatizzazione': {
+    title: 'Gran Consiglio Basilea: mozioni per semplificare autorizzazioni climatizzatori',
+    description: 'Il Gran Consiglio ha trasmesso due mozioni al governo: una per abolire l\'obbligo di autorizzazione e l\'altra per procedure più semplici contro.',
+    keywords: 'frontalieri, ticino, svizzera, italia, gran, consiglio, basilea, mozioni',
+    ogTitle: 'Gran Consiglio Basilea: mozioni per semplificare',
+    ogDescription: 'Il Gran Consiglio ha trasmesso due mozioni al governo: una per abolire l\'obbligo di autorizzazione e l\'altra per procedure più semplici contro il caldo.',
+    canonicalPath: '/articoli-basilea/basilea-mozioni-climatizzazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gran Consiglio Basilea: mozioni per semplificare autorizzazioni climatizzatori",
+      "description": "Il Gran Consiglio ha trasmesso due mozioni al governo: una per abolire l'obbligo di autorizzazione e l'altra per procedure più semplici contro.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-basilea-mozioni-climatizzazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-11T22:52:50+00:00",
+      "dateModified": "2026-11-11T22:52:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/basilea-mozioni-climatizzazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

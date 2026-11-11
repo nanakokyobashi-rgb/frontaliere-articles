@@ -66,6 +66,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.gdk-premi-piu-bassi.title': 'GDK calls for lower EFAS premiums starting in 2028',
     'blog.article.gdk-premi-piu-bassi.excerpt': 'The GDK is calling for a cost-neutral change to EFAS: from 2028, the cantons will also finance outpatient services; premiums should fall or rise less.',
     'blog.article.gdk-premi-piu-bassi.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.basilea-mozioni-climatizzazione.title': 'Basel Grand Council: motions to simplify air conditioner permits',
+    'blog.article.basilea-mozioni-climatizzazione.excerpt': 'The Grand Council has submitted two motions to the government: one to abolish the authorization requirement and the other for simpler procedures to combat the heat.',
+    'blog.article.basilea-mozioni-climatizzazione.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;

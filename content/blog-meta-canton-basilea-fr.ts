@@ -66,6 +66,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.gdk-premi-piu-bassi.title': 'La GDK demande des primes moins élevées pour l’EFAS à partir de 2028',
     'blog.article.gdk-premi-piu-bassi.excerpt': 'La GDK demande un changement de l’EFAS à coût neutre : à partir de 2028, les cantons financeront également les prestations ambulatoires ; les primes devraient baisser ou augmenter moins.',
     'blog.article.gdk-premi-piu-bassi.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.basilea-mozioni-climatizzazione.title': 'Grand Conseil de Bâle : simplifier les autorisations climatiseurs',
+    'blog.article.basilea-mozioni-climatizzazione.excerpt': 'Le Grand Conseil a transmis deux motions au gouvernement : l’une pour abolir l’obligation d’autorisation et l’autre pour des procédures plus simples contre la chaleur.',
+    'blog.article.basilea-mozioni-climatizzazione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;

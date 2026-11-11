@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "a82d23a6fd7febea00fdb10132bc9b58db1425963fd318a97ae2880a1fa0bc6d",
+  "updatedAt": "2026-11-11T22:48:24.629Z",
+  "contentHash": "5ef5890d087c2cbcdf3196d28dfe1364a15f18a71b2ad6b6a5fe36a5e0c1e61a",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bad Egelsee: +5 CHF per la sauna dal 2027",
+          "url": "/articoli-turgovia/bad-egelsee-supplemento-sauna/",
+          "excerpt": "Dal 1° gennaio 2027 il biglietto con sauna costerà CHF 15 per gli adulti e CHF 10 per giovani, apprendisti e studenti.",
+          "date": "2026-11-11T22:21:06.280Z"
+        },
+        {
           "title": "Domanda edilizia per Meisenweg 9 a Frauenfeld",
           "url": "/articoli-turgovia/domanda-edilizia-meisenweg/",
           "excerpt": "L'avviso riguarda Meisenweg 9 a Frauenfeld: casa unifamiliare, impianto solare e area esterna, con consultazione dal 4 al 23 novembre 2026.",
@@ -94,12 +100,6 @@
           "url": "/articoli-turgovia/supporto-datori-lavoro-turgovia/",
           "excerpt": "Le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen offrono assistenza per la ricerca di personale e la gestione delle posizioni vacanti.",
           "date": "2026-11-03T03:33:21.196Z"
-        },
-        {
-          "title": "Ufficio imposte Frauenfeld modifica orari dal 2 novembre 2026",
-          "url": "/articoli-turgovia/ufficio-imposte-frauenfeld-orari/",
-          "excerpt": "Dal 2 novembre 2026, l'Ufficio imposte della città di Frauenfeld chiuderà lunedì e mercoledì pomeriggio per elevato volume di lavoro.",
-          "date": "2026-10-31T13:22:10.345Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T22:48:24.629Z"
     },
     "en": {
       "canton": "TG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bad Egelsee: +5 CHF for the sauna starting in 2027",
+          "url": "/en/thurgau-articles/bad-egelsee-sauna-surcharge/",
+          "excerpt": "From January 1, 2027, the ticket with sauna will cost CHF 15 for adults and CHF 10 for young people, apprentices and students.",
+          "date": "2026-11-11T22:21:06.280Z"
+        },
+        {
           "title": "Building application for Meisenweg 9 in Frauenfeld",
           "url": "/en/thurgau-articles/building-permit-meisenweg/",
           "excerpt": "The notice concerns Meisenweg 9 in Frauenfeld: a single-family house, solar installation and outdoor area, with consultation from November 4 to 23, 2026.",
@@ -193,12 +199,6 @@
           "url": "/en/thurgau-articles/employer-support-thurgau/",
           "excerpt": "The RAV offices in Amriswil, Frauenfeld and Kreuzlingen offer assistance with staff recruitment and the management of vacant positions.",
           "date": "2026-11-03T03:33:21.196Z"
-        },
-        {
-          "title": "Frauenfeld Tax Office changes hours from November 2, 2026",
-          "url": "/en/thurgau-articles/frauenfeld-tax-office-hours/",
-          "excerpt": "From November 2, 2026, the Frauenfeld city tax office will be closed on Monday and Wednesday afternoons due to a high workload.",
-          "date": "2026-10-31T13:22:10.345Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T22:48:24.629Z"
     },
     "de": {
       "canton": "TG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bad Egelsee: +5 CHF für die Sauna ab 2027",
+          "url": "/de/thurgau-artikel/bad-egelsee-sauna-aufpreis/",
+          "excerpt": "Ab dem 1. Januar 2027 kostet das Ticket mit Sauna CHF 15 für Erwachsene und CHF 10 für Jugendliche, Lernende und Studierende.",
+          "date": "2026-11-11T22:21:06.280Z"
+        },
+        {
           "title": "Bauantrag für Meisenweg 9 in Frauenfeld",
           "url": "/de/thurgau-artikel/baugesuch-meisenweg/",
           "excerpt": "Die Mitteilung betrifft Meisenweg 9 in Frauenfeld: Einfamilienhaus, Solaranlage und Außenbereich, mit Beratung vom 4. bis 23. November 2026.",
@@ -292,12 +298,6 @@
           "url": "/de/thurgau-artikel/arbeitgeber-unterstuetzung-thurgau/",
           "excerpt": "Die RAV-Standorte in Amriswil, Frauenfeld und Kreuzlingen bieten Unterstützung bei der Personalsuche und der Verwaltung offener Stellen.",
           "date": "2026-11-03T03:33:21.196Z"
-        },
-        {
-          "title": "Steueramt Frauenfeld ändert die Öffnungszeiten ab dem 2. November 2026",
-          "url": "/de/thurgau-artikel/steueramt-frauenfeld-zeiten/",
-          "excerpt": "Ab dem 2. November 2026 schließt das Steueramt der Stadt Frauenfeld am Montagnachmittag und am Mittwochnachmittag wegen des hohen Arbeitsvolumens.",
-          "date": "2026-10-31T13:22:10.345Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T22:48:24.629Z"
     },
     "fr": {
       "canton": "TG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bad Egelsee : +5 CHF pour le sauna à partir de 2027",
+          "url": "/fr/articles-thurgovie/bad-egelsee-supplement-sauna/",
+          "excerpt": "À partir du 1er janvier 2027, le billet avec sauna coûtera CHF 15 pour les adultes et CHF 10 pour les jeunes, apprentis et étudiants.",
+          "date": "2026-11-11T22:21:06.280Z"
+        },
+        {
           "title": "Demande de permis de construire pour Meisenweg 9 à Frauenfeld",
           "url": "/fr/articles-thurgovie/permis-construire-meisenweg/",
           "excerpt": "L'avis concerne Meisenweg 9 à Frauenfeld : maison individuelle, installation solaire et aménagement des espaces extérieurs, avec consultation du 4 au 23 novembre 2026.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-thurgovie/soutien-employeurs-thurgovie/",
           "excerpt": "Les offices ORP d’Amriswil, Frauenfeld et Kreuzlingen offrent une assistance pour la recherche de personnel et la gestion des postes vacants.",
           "date": "2026-11-03T03:33:21.196Z"
-        },
-        {
-          "title": "Office des impôts : horaires modifiés à Frauenfeld dès 2/11",
-          "url": "/fr/articles-thurgovie/bureau-impots-frauenfeld-horaires/",
-          "excerpt": "À partir du 2 novembre 2026, l’Office des impôts de la ville de Frauenfeld sera fermé les lundis et mercredis après-midi en raison d’un volume de travail élevé.",
-          "date": "2026-10-31T13:22:10.345Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T22:48:24.629Z"
     }
   }
 }

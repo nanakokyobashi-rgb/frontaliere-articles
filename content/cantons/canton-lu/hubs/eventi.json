@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "27b62b5317e2198dffb2707409d18c4606bcbce193bde5ac8469c8e680f34554",
+  "updatedAt": "2026-11-11T22:48:24.629Z",
+  "contentHash": "56e7d2e3115890910696c76d25d0e55b164f4d0b88c2638cef4b06e1566e5250",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T23:36:45.009Z",
+      "updatedAt": "2026-11-11T04:25:04.802Z",
       "keyFacts": 1
     },
     {
@@ -99,13 +99,23 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
+              "date": "2026-11-11T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7287119"
+            },
+            {
+              "label": "29. Sitzung des Grossen Stadtrates von Luzern vom 12. November 2026",
+              "date": "2026-11-11T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7771576"
+            },
             {
               "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
               "date": "2026-11-10T23:00:00.000Z",
@@ -125,16 +135,6 @@
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-11-08T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7629616"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-08T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648414"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-11-05T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694302"
             }
           ],
           "updatedAt": "2026-11-10T22:34:57.446Z"
@@ -171,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T22:48:24.629Z"
     },
     "en": {
       "canton": "LU",
@@ -253,13 +253,23 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
+              "date": "2026-11-11T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7287119"
+            },
+            {
+              "label": "29. Sitzung des Grossen Stadtrates von Luzern vom 12. November 2026",
+              "date": "2026-11-11T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7771576"
+            },
             {
               "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
               "date": "2026-11-10T23:00:00.000Z",
@@ -279,16 +289,6 @@
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-11-08T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7629616"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-08T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648414"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-11-05T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694302"
             }
           ],
           "updatedAt": "2026-11-10T22:34:57.446Z"
@@ -325,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T22:48:24.629Z"
     },
     "de": {
       "canton": "LU",
@@ -407,13 +407,23 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
+              "date": "2026-11-11T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7287119"
+            },
+            {
+              "label": "29. Sitzung des Grossen Stadtrates von Luzern vom 12. November 2026",
+              "date": "2026-11-11T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7771576"
+            },
             {
               "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
               "date": "2026-11-10T23:00:00.000Z",
@@ -433,16 +443,6 @@
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-11-08T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7629616"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-08T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648414"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-11-05T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694302"
             }
           ],
           "updatedAt": "2026-11-10T22:34:57.446Z"
@@ -479,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T22:48:24.629Z"
     },
     "fr": {
       "canton": "LU",
@@ -561,13 +561,23 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
+              "date": "2026-11-11T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7287119"
+            },
+            {
+              "label": "29. Sitzung des Grossen Stadtrates von Luzern vom 12. November 2026",
+              "date": "2026-11-11T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7771576"
+            },
             {
               "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
               "date": "2026-11-10T23:00:00.000Z",
@@ -587,16 +597,6 @@
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-11-08T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7629616"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-08T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648414"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-11-05T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694302"
             }
           ],
           "updatedAt": "2026-11-10T22:34:57.446Z"
@@ -633,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T22:48:24.629Z"
     }
   }
 }

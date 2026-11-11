@@ -8,8 +8,10 @@
 # without touching an entire deploy stage dir).
 #
 # Reuses rclone (same tool deploy-it-pages-prep.sh already provisions in CI —
-# no new dependency introduced) with the identical on-the-fly S3-remote
-# invocation (`--s3-provider=Cloudflare`, no config file, creds via flags).
+# no new dependency introduced) for lookups and ordinary uploads, with the
+# identical on-the-fly S3-remote invocation (`--s3-provider=Cloudflare`, no
+# config file, creds via flags). Stable alias bootstraps use the S3 API through
+# AWS CLI so `If-None-Match` is included in the signed PutObject request.
 # The rclone-not-found auto-install block below is intentionally DUPLICATED
 # from _publish_cdn_r2 rather than extracted into a shared module: this repo's
 # established convention for this script family (push-section-shard.sh /
@@ -19,10 +21,14 @@
 # comment above _publish_cdn_r2.
 #
 # `copyto` (never `sync`) = additive, single-key PUT — cannot delete anything
-# else in the bucket. Always PUTs unconditionally (`--ignore-times`, see the
-# rclone invocation below) rather than trying to skip unchanged re-runs: see
-# that comment for why a content-hash skip is unsafe for the files this
-# script actually carries (issue #5497).
+# else in the bucket. Ordinary uploads always PUT unconditionally
+# (`--ignore-times`, see the rclone invocation below) rather than trying to skip
+# unchanged re-runs: see that comment for why a content-hash skip is unsafe for
+# the files this script actually carries (issue #5497). The explicit
+# `--create-if-absent` mode uses R2's atomic `If-None-Match: *` PutObject
+# condition for stable shell aliases, so a concurrent bootstrap cannot
+# overwrite the winner. If another publisher wins, its object is accepted only
+# when a byte-for-byte read-back matches this upload.
 #
 # Content-Type: rclone/Go's mime-type auto-detection is NOT reliable for
 # `.webp` on GitHub-hosted runners (depends on the runner's /etc/mime.types
@@ -41,11 +47,13 @@
 # image (and anything else this script is expected to carry) has a client-side
 # raw.githubusercontent.com fallback, so this script backs a best-effort CDN
 # warm rather than a hard publish gate.
-# A caller that wants to know whether the PUT actually happened should grep
-# this script's stdout for "✅ uploaded" rather than rely on the exit code.
+# A caller that wants to know whether the asset is present should grep this
+# script's stdout for "✅ uploaded" or "✅ already present with matching bytes"
+# rather than rely on the exit code.
 #
 # Usage:
 #   upload-cdn-file.sh <local_file> <cdn_key> [cache_control]
+#   upload-cdn-file.sh --create-if-absent <local_file> <cdn_key> [cache_control]
 #     <local_file>     path to the file to upload
 #     <cdn_key>        destination key inside R2_BUCKET, e.g.
 #                      images/articoli/some-slug/hero.webp (leading "/" is
@@ -83,15 +91,22 @@ if [ "$#" -eq 1 ] && [ "$1" = "--image-lease-protocol-version" ]; then
 fi
 
 check_mode=0
+create_only=0
 if [ "$#" -eq 2 ] && [ "$1" = "--check" ]; then
   check_mode=1
   cdn_key="${2#/}"
+elif [ "$#" -ge 3 ] && [ "$#" -le 4 ] && [ "$1" = "--create-if-absent" ]; then
+  create_only=1
+  local_file="$2"
+  cdn_key="${3#/}"
+  cache_control="${4:-public, max-age=86400}"
 elif [ "$#" -ge 2 ] && [ "$#" -le 3 ]; then
   local_file="$1"
   cdn_key="${2#/}"
   cache_control="${3:-public, max-age=86400}"
 else
   echo "Usage: upload-cdn-file.sh <local_file> <cdn_key> [cache_control]" >&2
+  echo "       upload-cdn-file.sh --create-if-absent <local_file> <cdn_key> [cache_control]" >&2
   echo "       upload-cdn-file.sh --check <cdn_key>" >&2
   exit 1
 fi
@@ -289,6 +304,7 @@ if [ "$check_mode" -eq 1 ]; then
 fi
 
 image_namespace=""
+create_only_tmp_dir=""
 case "$cdn_key" in
   images/blog/*) image_namespace="blog" ;;
   images/places/*) image_namespace="places" ;;
@@ -334,6 +350,10 @@ _image_lease_exit_cleanup() {
       && ! _r2_image_lease_stop_timeout; then
     _R2_IMAGE_LEASE_RELEASE_ALLOWED=0
     exit_code=1
+  fi
+  if [ -n "${create_only_tmp_dir:-}" ] && [ -z "${_R2_IMAGE_LEASE_TIMEOUT_PID:-}" ]; then
+    rm -rf -- "$create_only_tmp_dir" || true
+    create_only_tmp_dir=""
   fi
   if [ "${_R2_IMAGE_LEASE_RELEASE_ALLOWED:-1}" = 1 ] \
       && ! _release_image_namespace_lease; then
@@ -423,24 +443,87 @@ fi
 # the whole deploy prep step on a bare connection reset even though nothing
 # else was wrong. Still never fatal — see header "Failure posture".
 attempt_ok=0
-for try in 1 2; do
-  _r2_image_lease_wait_timeout timeout -k 10 "$r2_timeout_object_s" "${RC[@]}" copyto "$local_file" "$bkt/$cdn_key" \
-    --header-upload "Content-Type: $content_type" \
-    --header-upload "Cache-Control: $cache_control" \
-    --stats=0
-  if [ "$?" -eq 0 ]; then
-    attempt_ok=1
-    break
+already_present=0
+upload_kind="upload"
+if [ "$create_only" -eq 1 ]; then
+  upload_kind="conditional create"
+  if ! command -v aws >/dev/null 2>&1; then
+    echo "::warning::[cdn-upload] AWS CLI unavailable — skipping conditional create of $cdn_key"
+    exit 0
   fi
-  if [ "$try" -lt 2 ]; then
-    echo "::warning::[cdn-upload] upload attempt $try/2 failed for $cdn_key — retrying in 3s"
-    _r2_image_lease_wait_timeout timeout -k 1 3 sleep 3
-  fi
-done
+  create_only_tmp_dir="$(mktemp -d "$rtmp/cdn-create-only.XXXXXX")" || {
+    echo "::warning::[cdn-upload] could not create a read-back directory — skipping conditional create of $cdn_key"
+    exit 0
+  }
+  reconcile_file="$create_only_tmp_dir/remote-object"
+
+  for try in 1 2; do
+    aws_status=0
+    AWS_ACCESS_KEY_ID="$R2_ACCESS_KEY_ID" \
+    AWS_SECRET_ACCESS_KEY="$R2_SECRET_ACCESS_KEY" \
+    AWS_DEFAULT_REGION=auto \
+    AWS_REGION=auto \
+    AWS_EC2_METADATA_DISABLED=true \
+      _r2_image_lease_wait_timeout timeout -k 10 "$r2_timeout_object_s" \
+      aws --no-cli-pager --endpoint-url "$R2_S3_ENDPOINT" --region auto s3api put-object \
+        --bucket "$R2_BUCKET" \
+        --key "$cdn_key" \
+        --body "$local_file" \
+        --content-type "$content_type" \
+        --cache-control "$cache_control" \
+        --if-none-match '*' >/dev/null 2>&1 || aws_status=$?
+    if [ "$aws_status" -eq 0 ]; then
+      attempt_ok=1
+      break
+    fi
+
+    # A failed conditional PUT can mean another emitter created the alias, or
+    # that the response was lost after the write committed. Accept only exact
+    # bytes; a different object remains untouched and blocks this publication.
+    reconcile_status=0
+    rm -f -- "$reconcile_file"
+    _r2_image_lease_wait_timeout timeout -k 10 "$r2_timeout_object_s" \
+      "${RC[@]}" copyto "$bkt/$cdn_key" "$reconcile_file" --stats=0 \
+      >/dev/null 2>&1 || reconcile_status=$?
+    if [ "$reconcile_status" -eq 0 ]; then
+      if cmp -s "$local_file" "$reconcile_file"; then
+        attempt_ok=1
+        already_present=1
+        break
+      fi
+      echo "::warning::[cdn-upload] conditional create conflict for $cdn_key: existing R2 bytes differ — refusing to overwrite"
+      break
+    fi
+
+    if [ "$try" -lt 2 ]; then
+      echo "::warning::[cdn-upload] conditional create attempt $try/2 failed for $cdn_key — retrying in 3s"
+      _r2_image_lease_wait_timeout timeout -k 1 3 sleep 3
+    fi
+  done
+else
+  for try in 1 2; do
+    _r2_image_lease_wait_timeout timeout -k 10 "$r2_timeout_object_s" "${RC[@]}" copyto "$local_file" "$bkt/$cdn_key" \
+      --header-upload "Content-Type: $content_type" \
+      --header-upload "Cache-Control: $cache_control" \
+      --stats=0
+    if [ "$?" -eq 0 ]; then
+      attempt_ok=1
+      break
+    fi
+    if [ "$try" -lt 2 ]; then
+      echo "::warning::[cdn-upload] upload attempt $try/2 failed for $cdn_key — retrying in 3s"
+      _r2_image_lease_wait_timeout timeout -k 1 3 sleep 3
+    fi
+  done
+fi
 
 if [ "$attempt_ok" = 1 ]; then
-  echo "✅ uploaded $local_file -> $bkt/$cdn_key (Content-Type: $content_type)"
+  if [ "$already_present" -eq 1 ]; then
+    echo "✅ already present with matching bytes $local_file -> $bkt/$cdn_key (Content-Type: $content_type)"
+  else
+    echo "✅ uploaded $local_file -> $bkt/$cdn_key (Content-Type: $content_type)"
+  fi
 else
-  echo "::warning::[cdn-upload] upload failed for $cdn_key after 2 attempts — non-fatal (client-side fallback covers this)"
+  echo "::warning::[cdn-upload] $upload_kind failed for $cdn_key after 2 attempts — non-fatal (client-side fallback covers this)"
 fi
 exit 0

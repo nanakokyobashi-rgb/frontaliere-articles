@@ -24,6 +24,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'osttangente-riapertura-basilea': { it: 'osttangente-riapertura-basilea', en: 'osttangente-reopening-basel', de: 'osttangente-zugange-in-basel-am-16-november-2026-wiedereroffnet', fr: 'osttangente-reouverture-basle' },
  'fuoriuscita-acido-liestal': { it: 'fuoriuscita-acido-liestal', en: 'acid-leak-liestal-industrial', de: 'saeure-auslaufen-liestal', fr: 'fuite-acide-liestal' },
  'gdk-premi-piu-bassi': { it: 'gdk-premi-piu-bassi', en: 'gdk-lower-efas-premiums', de: 'gdk-tiefere-efas-praemien', fr: 'gdk-baisse-primes-efas' },
+ 'basilea-mozioni-climatizzazione': { it: 'basilea-mozioni-climatizzazione', en: 'basel-ac-authorization-motions', de: 'basel-klimaanlagen-mozioni', fr: 'basle-motions-climatisation' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
