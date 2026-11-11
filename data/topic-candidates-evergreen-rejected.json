@@ -14325,33 +14325,9 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.rsi.ch/info/svizzera/l%e2%80%99ia-per-la-salute-la-usa-il-40-degli-svizzeri--4214271.html": {
+    "svizzera::https://www3.ti.ch/dfe/dr/ustat/allegati/digitale/mercato_lavoro/notiziario/2026q1": {
       "section": "svizzera",
-      "ts": 1794073363730
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/gr%3a-accordo-frontalieri%2c-incontro-a-coira-per-discutere-l%27impatto/92340991": {
-      "section": "frontaliere",
-      "ts": 1794086108952
-    },
-    "frontaliere::https://www.rsi.ch/s/4224038": {
-      "section": "frontaliere",
-      "ts": 1794117641610
-    },
-    "frontaliere::https://comozero.it/attualita/politica-trasporti-svizzera-limiti-80-tassa-auto-elettriche": {
-      "section": "frontaliere",
-      "ts": 1794135108109
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1960982/all-estero-dopo-la-pensione-in-svizzera-la-vita-costa-troppo-ma-c-e-chi-non-vuole-partire": {
-      "section": "frontaliere",
-      "ts": 1794222794553
-    },
-    "frontaliere::https://www.tvsvizzera.it/tvs/just-eat-taglia-373-posti-di-lavoro-in-svizzera/92350760": {
-      "section": "frontaliere",
-      "ts": 1794226209307
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1961780/corrieri-lavoro-modello-posti-eat-just": {
-      "section": "frontaliere",
-      "ts": 1794230591080
+      "ts": 1794407846815
     }
   }
 }
