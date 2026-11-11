@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "carburanti",
-  "updatedAt": "2026-11-11T07:44:18.876Z",
-  "contentHash": "d64e480e46d55e144b29d1ce4eec692ff6029373a16c8d59eecbd63a605db569",
+  "updatedAt": "2026-11-11T08:31:31.304Z",
+  "contentHash": "2013d587f570c1de8197731f09702789f1cad305176b1a10862297f1dd0d85b7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "OIT a Ginevra: quasi 300 dipendenti protestano contro tagli di posti",
+          "url": "/articoli-ginevra/oit-protesta-tagli-ginevra/",
+          "excerpt": "Martedì quasi 300 dipendenti dell'Organizzazione internazionale del lavoro (OIT) hanno protestato a Ginevra contro la soppressione di 86 posti occupati prevista per il periodo 2026-2027.",
+          "date": "2026-11-11T08:27:02.804Z"
+        },
+        {
           "title": "Referendum contro legge 13694 sulla costruzione di alloggi HBM a Ginevra",
           "url": "/articoli-ginevra/referendum-costruzione-alloggi-hbm/",
           "excerpt": "Gli HBM sono il 5,2% del parco abitativo cantonale. Il referendum contesta la legge 13694.",
@@ -94,12 +100,6 @@
           "url": "/articoli-ginevra/hug-primo-ospedale-svizzero-2027/",
           "excerpt": "Il salto che caratterizza il risultato degli HUG è quantificato dalla stessa graduatoria: 37 posizioni guadagnate rispetto all’edizione 2026. Nel ranking 2027 di Newsweek e Statista, gli HUG occupano il 31° posto…",
           "date": "2026-10-23T22:19:10.680Z"
-        },
-        {
-          "title": "Guasto tecnico dimezza la capacità a Ginevra e Zurigo",
-          "url": "/articoli-ginevra/skyguide-ginevra-capacita-ottobre/",
-          "excerpt": "Skyguide ha ridotto del 50% la capacità dello spazio aereo svizzero.",
-          "date": "2026-10-20T18:26:56.192Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-11T07:44:18.876Z"
+      "updatedAt": "2026-11-11T08:31:31.304Z"
     },
     "en": {
       "canton": "GE",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "ILO in Geneva: nearly 300 employees protest job cuts",
+          "url": "/en/geneva-articles/oit-protest-geneva-cuts/",
+          "excerpt": "On Tuesday, nearly 300 employees of the International Labour Organization (ILO) protested in Geneva against the planned elimination of 86 filled positions for the 2026-2027 period.",
+          "date": "2026-11-11T08:27:02.804Z"
+        },
+        {
           "title": "Referendum against law 13694 on the construction of HBM housing in Geneva",
           "url": "/en/geneva-articles/referendum-housing-hbm-construction/",
           "excerpt": "HBM account for 5,2% of the cantonal housing stock. The referendum challenges law 13694.",
@@ -193,12 +199,6 @@
           "url": "/en/geneva-articles/hug-first-swiss-hospital-2027/",
           "excerpt": "The leap that characterizes HUG’s result is quantified by the same ranking: 37 places gained compared with the 2026 edition.",
           "date": "2026-10-23T22:19:10.680Z"
-        },
-        {
-          "title": "Technical failure halves capacity in Geneva and Zurich",
-          "url": "/en/geneva-articles/skyguide-geneva-airspace-cut/",
-          "excerpt": "Skyguide reduced Swiss airspace capacity by 50%.",
-          "date": "2026-10-20T18:26:56.192Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-11T07:44:18.876Z"
+      "updatedAt": "2026-11-11T08:31:31.304Z"
     },
     "de": {
       "canton": "GE",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "OIT in Genf: Fast 300 Beschäftigte protestieren gegen Stellenkürzungen",
+          "url": "/de/genf-artikel/oit-protest-streichungen-genf/",
+          "excerpt": "Am Dienstag protestierten fast 300 Beschäftigte der Internationalen Arbeitsorganisation (OIT) in Genf gegen die für den Zeitraum 2026-2027 vorgesehene Streichung von 86 besetzten Stellen.",
+          "date": "2026-11-11T08:27:02.804Z"
+        },
+        {
           "title": "Referendum gegen das Gesetz 13694 zum Bau von HBM-Wohnungen in Genf",
           "url": "/de/genf-artikel/referendum-wohnbau-hbm-genf/",
           "excerpt": "HBM machen 5,2% des kantonalen Wohnungsbestands aus. Das Referendum richtet sich gegen das Gesetz 13694.",
@@ -292,12 +298,6 @@
           "url": "/de/genf-artikel/hug-erster-schweizer-krankenhaus-2027/",
           "excerpt": "Im Ranking 2027 von Newsweek und Statista belegen die HUG weltweit den 31. Platz und sind damit das bestplatzierte Krankenhaus der Schweiz.",
           "date": "2026-10-23T22:19:10.680Z"
-        },
-        {
-          "title": "Technische Störung halbiert die Kapazität in Genf und Zürich",
-          "url": "/de/genf-artikel/skyguide-genf-luftraum-stoerung/",
-          "excerpt": "Skyguide hat die Kapazität des Schweizer Luftraums um 50% reduziert.",
-          "date": "2026-10-20T18:26:56.192Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-11T07:44:18.876Z"
+      "updatedAt": "2026-11-11T08:31:31.304Z"
     },
     "fr": {
       "canton": "GE",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "OIT à Genève : près de 300 employés protestent contre des suppressions de postes",
+          "url": "/fr/articles-geneve/oit-manifestation-geneve-suppressions/",
+          "excerpt": "Mardi, près de 300 employés de l'Organisation internationale du travail (OIT) ont protesté à Genève contre la suppression de 86 postes occupés prévue pour la période 2026-2027.",
+          "date": "2026-11-11T08:27:02.804Z"
+        },
+        {
           "title": "Référendum contre la loi 13694 sur la construction de logements HBM à Genève",
           "url": "/fr/articles-geneve/referendum-construction-logements-hbm/",
           "excerpt": "Les HBM représentent 5,2 % du parc de logements cantonal. Le référendum conteste la loi 13694.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-geneve/hug-premier-hopital-suisse-2027/",
           "excerpt": "Le bond qui caractérise le résultat des HUG est quantifié par le même classement : 37 places gagnées par rapport à l’édition 2026.",
           "date": "2026-10-23T22:19:10.680Z"
-        },
-        {
-          "title": "Une panne technique réduit de moitié la capacité à Genève et Zurich",
-          "url": "/fr/articles-geneve/skyguide-geneve-espace-aerien/",
-          "excerpt": "Skyguide a réduit de 50% la capacité de l'espace aérien suisse.",
-          "date": "2026-10-20T18:26:56.192Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-11T07:44:18.876Z"
+      "updatedAt": "2026-11-11T08:31:31.304Z"
     }
   }
 }

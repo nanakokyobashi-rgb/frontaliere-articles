@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "carburanti",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "868ccb0104309fdd6f4279201beae47a91dc1ece03fa22557b342bda17f0e92e",
+  "updatedAt": "2026-11-11T08:31:31.304Z",
+  "contentHash": "57b98619c4f0c037a78a835f07d73aa1303ae73b9d1ba7774f1ad4ea44807421",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "GDK chiede premi più bassi per EFAS dal 2028",
+          "url": "/articoli-basilea/gdk-premi-piu-bassi/",
+          "excerpt": "La GDK chiede un cambio EFAS a costo neutro: dal 2028 i Cantoni finanzieranno anche le prestazioni ambulatoriali; i premi dovrebbero calare o crescere meno.",
+          "date": "2026-11-11T08:13:12.113Z"
+        },
+        {
           "title": "Fuoriuscita di 1000 litri di acido a Liestal",
           "url": "/articoli-basilea/fuoriuscita-acido-liestal/",
           "excerpt": "Circa 1.000 litri di acido cloridrico sono fuoriusciti presso Dragon Pharma nell'area industriale Oristal a Liestal; l'allarme è cessato intorno alle 15.45.",
@@ -106,12 +112,6 @@
           "url": "/articoli-basilea/baselland-maiali-enzootica/",
           "excerpt": "In un allevamento da ingrasso di Baselland 750 maiali sono stati abbattuti.",
           "date": "2026-11-03T08:17:35.802Z"
-        },
-        {
-          "title": "Salario minimo Basilea Città sale a CHF 22,50 lordi/ora dal 2027",
-          "url": "/articoli-basilea/salario-minimo-basilea-aumento/",
-          "excerpt": "Dal 1° gennaio 2027, il minimo lordo orario a Basilea Città passerà da CHF 22,20 a CHF 22,50, in base all'indice misto svizzero.",
-          "date": "2026-10-31T13:24:22.926Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T08:31:31.304Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "GDK calls for lower EFAS premiums starting in 2028",
+          "url": "/en/basel-articles/gdk-lower-efas-premiums/",
+          "excerpt": "The GDK is calling for a cost-neutral change to EFAS: from 2028, the cantons will also finance outpatient services; premiums should fall or rise less.",
+          "date": "2026-11-11T08:13:12.113Z"
+        },
+        {
           "title": "Spillage of 1000 liters of acid in Liestal",
           "url": "/en/basel-articles/acid-leak-liestal-industrial/",
           "excerpt": "Approximately 1.000 liters of hydrochloric acid leaked at Dragon Pharma in the Oristal industrial area in Liestal; the alarm ended around 15.45.",
@@ -217,12 +223,6 @@
           "url": "/en/basel-articles/basel-landschaft-750-pigs-pneumonia/",
           "excerpt": "At a pig-fattening farm in Baselland, 750 pigs were culled.",
           "date": "2026-11-03T08:17:35.802Z"
-        },
-        {
-          "title": "Basel City minimum wage rises to CHF 22.50 gross per hour from 2027",
-          "url": "/en/basel-articles/basel-minimum-wage-increase/",
-          "excerpt": "From January 1, 2027, the gross hourly minimum wage in Basel-Stadt will increase from CHF 22,20 to CHF 22,50, based on the Swiss mixed index.",
-          "date": "2026-10-31T13:24:22.926Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T08:31:31.304Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "GDK fordert niedrigere Prämien für EFAS ab 2028",
+          "url": "/de/basel-artikel/gdk-tiefere-efas-praemien/",
+          "excerpt": "Die GDK fordert einen kostenneutralen EFAS-Wechsel: Ab 2028 werden die Kantone auch ambulante Leistungen finanzieren; die Prämien sollten sinken oder weniger stark steigen.",
+          "date": "2026-11-11T08:13:12.113Z"
+        },
+        {
           "title": "Austritt von 1000 Litern Säure in Liestal",
           "url": "/de/basel-artikel/saeure-auslaufen-liestal/",
           "excerpt": "Etwa 1.000 Liter Salzsäure sind bei Dragon Pharma im Industriegebiet Oristal in Liestal ausgetreten; der Alarm endete gegen 15.45 Uhr.",
@@ -328,12 +334,6 @@
           "url": "/de/basel-artikel/baselland-750-schweine-pneumonie/",
           "excerpt": "In einem Mastbetrieb in Baselland wurden 750 Schweine gekeult.",
           "date": "2026-11-03T08:17:35.802Z"
-        },
-        {
-          "title": "Mindestlohn in Basel-Stadt steigt ab 2027 auf CHF 22,50 brutto pro Stunde",
-          "url": "/de/basel-artikel/basel-mindestlohn-erhoehung/",
-          "excerpt": "Ab dem 1. Januar 2027 wird der Bruttomindestlohn pro Stunde in Basel-Stadt auf Grundlage des Schweizer Mischindexes von CHF 22,20 auf CHF 22,50 steigen.",
-          "date": "2026-10-31T13:24:22.926Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T08:31:31.304Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "La GDK demande des primes moins élevées pour l’EFAS à partir de 2028",
+          "url": "/fr/articles-bale/gdk-baisse-primes-efas/",
+          "excerpt": "La GDK demande un changement de l’EFAS à coût neutre : à partir de 2028, les cantons financeront également les prestations ambulatoires ; les primes devraient baisser ou augmenter moins.",
+          "date": "2026-11-11T08:13:12.113Z"
+        },
+        {
           "title": "Fuite de 1000 litres d’acide à Liestal",
           "url": "/fr/articles-bale/fuite-acide-liestal/",
           "excerpt": "Environ 1.000 litres d’acide chlorhydrique se sont échappés chez Dragon Pharma dans la zone industrielle Oristal à Liestal ; l’alerte a pris fin vers 15.45.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-bale/bale-campagne-750-porcs-pneumonie/",
           "excerpt": "Dans un élevage d’engraissement de Baselland, 750 porcs ont été abattus.",
           "date": "2026-11-03T08:17:35.802Z"
-        },
-        {
-          "title": "Le salaire minimum à Bâle-Ville passe à CHF 22,50 bruts/heure dès 2027",
-          "url": "/fr/articles-bale/augmentation-salaire-minimum-basle/",
-          "excerpt": "À partir du 1er janvier 2027, le minimum brut horaire à Bâle-Ville passera de CHF 22,20 à CHF 22,50, sur la base de l’indice mixte suisse.",
-          "date": "2026-10-31T13:24:22.926Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T08:31:31.304Z"
     }
   }
 }
