@@ -60,6 +60,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.osttangente-riapertura-basilea.title': 'Osttangente-Zugänge in Basel am 16. November 2026 wiedereröffnet',
     'blog.article.osttangente-riapertura-basilea.excerpt': 'Am 16. November 2026 enden die Schliessungen und Umleitungen im Zusammenhang mit der Sanierung der Osttangente im Wettsteinquartier in Basel.',
     'blog.article.osttangente-riapertura-basilea.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.fuoriuscita-acido-liestal.title': 'Austritt von 1000 Litern Säure in Liestal',
+    'blog.article.fuoriuscita-acido-liestal.excerpt': 'Etwa 1.000 Liter Salzsäure sind bei Dragon Pharma im Industriegebiet Oristal in Liestal ausgetreten; der Alarm endete gegen 15.45 Uhr.',
+    'blog.article.fuoriuscita-acido-liestal.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;

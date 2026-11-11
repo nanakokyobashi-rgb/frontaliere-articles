@@ -60,6 +60,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.osttangente-riapertura-basilea.title': 'Osttangente access points in Basel reopen on November 16, 2026',
     'blog.article.osttangente-riapertura-basilea.excerpt': 'On November 16, 2026, the Wettsteinallee exit and Riehenstrasse entrance will reopen; Schwarzwaldstrasse under the A2 will be passable.',
     'blog.article.osttangente-riapertura-basilea.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.fuoriuscita-acido-liestal.title': 'Spillage of 1000 liters of acid in Liestal',
+    'blog.article.fuoriuscita-acido-liestal.excerpt': 'Approximately 1.000 liters of hydrochloric acid leaked at Dragon Pharma in the Oristal industrial area in Liestal; the alarm ended around 15.45.',
+    'blog.article.fuoriuscita-acido-liestal.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;

@@ -60,6 +60,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.osttangente-riapertura-basilea.title': 'Riaprono accessi Osttangente a Basilea il 16 novembre 2026',
     'blog.article.osttangente-riapertura-basilea.excerpt': 'Il 16 novembre 2026 riaprono l\'uscita Wettsteinallee e l\'ingresso Riehenstrasse; la Schwarzwaldstrasse sotto l\'A2 sarà percorribile.',
     'blog.article.osttangente-riapertura-basilea.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.fuoriuscita-acido-liestal.title': 'Fuoriuscita di 1000 litri di acido a Liestal',
+    'blog.article.fuoriuscita-acido-liestal.excerpt': 'Circa 1.000 litri di acido cloridrico sono fuoriusciti presso Dragon Pharma nell\'area industriale Oristal a Liestal; l\'allarme è cessato intorno alle 15.45.',
+    'blog.article.fuoriuscita-acido-liestal.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;

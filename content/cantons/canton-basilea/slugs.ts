@@ -22,6 +22,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'baselland-maiali-enzootica': { it: 'baselland-maiali-enzootica', en: 'basel-landschaft-750-pigs-pneumonia', de: 'baselland-750-schweine-pneumonie', fr: 'bale-campagne-750-porcs-pneumonie' },
  'sussidi-premi-basel-2027': { it: 'sussidi-premi-basel-2027', en: 'basel-2027-health-premium-subsidies', de: 'basel-2027-praemienverbilligung', fr: 'bale-2027-reduction-primes-maladie' },
  'osttangente-riapertura-basilea': { it: 'osttangente-riapertura-basilea', en: 'osttangente-reopening-basel', de: 'osttangente-zugange-in-basel-am-16-november-2026-wiedereroffnet', fr: 'osttangente-reouverture-basle' },
+ 'fuoriuscita-acido-liestal': { it: 'fuoriuscita-acido-liestal', en: 'acid-leak-liestal-industrial', de: 'saeure-auslaufen-liestal', fr: 'fuite-acide-liestal' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
