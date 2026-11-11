@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "carburanti",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "e7303fb88a285f5b2ca344cd1089321308f87773418a10465d88daac43701e18",
+  "updatedAt": "2026-11-11T07:44:18.876Z",
+  "contentHash": "d64e480e46d55e144b29d1ce4eec692ff6029373a16c8d59eecbd63a605db569",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Referendum contro legge 13694 sulla costruzione di alloggi HBM a Ginevra",
+          "url": "/articoli-ginevra/referendum-costruzione-alloggi-hbm/",
+          "excerpt": "Gli HBM sono il 5,2% del parco abitativo cantonale. Il referendum contesta la legge 13694.",
+          "date": "2026-11-11T07:28:07.329Z"
+        },
+        {
           "title": "A1: la destra ginevrina chiede una terza corsia",
           "url": "/articoli-ginevra/a1-terza-corsia-ginevra/",
           "excerpt": "La maggioranza di destra del Grand Conseil genevois ha chiesto di usare temporaneamente la banda d'arresto d'emergenza come terza corsia sull'autostrada A1, nel tratto compreso tra Le Vengeron e Coppet (VD), cioè il…",
@@ -94,12 +100,6 @@
           "url": "/articoli-ginevra/skyguide-ginevra-capacita-ottobre/",
           "excerpt": "Skyguide ha ridotto del 50% la capacità dello spazio aereo svizzero.",
           "date": "2026-10-20T18:26:56.192Z"
-        },
-        {
-          "title": "Aeroporto di Ginevra: il TAF approva il regolamento",
-          "url": "/articoli-ginevra/taf-regolamento-aeroporto-ginevra/",
-          "excerpt": "Il Tribunale amministrativo federale ha dato il via libera al regolamento di esercizio dell’aeroporto di Ginevra.",
-          "date": "2026-10-19T06:20:16.297Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T07:44:18.876Z"
     },
     "en": {
       "canton": "GE",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Referendum against law 13694 on the construction of HBM housing in Geneva",
+          "url": "/en/geneva-articles/referendum-housing-hbm-construction/",
+          "excerpt": "HBM account for 5,2% of the cantonal housing stock. The referendum challenges law 13694.",
+          "date": "2026-11-11T07:28:07.329Z"
+        },
+        {
           "title": "A1: Geneva's right wing calls for a third lane",
           "url": "/en/geneva-articles/a1-geneva-third-lane/",
           "excerpt": "The right-wing majority of the Geneva Grand Council called for the emergency lane to be used temporarily as a third lane on the A1 motorway, on the section between Le Vengeron and Coppet (VD), that is, the corridor…",
@@ -193,12 +199,6 @@
           "url": "/en/geneva-articles/skyguide-geneva-airspace-cut/",
           "excerpt": "Skyguide reduced Swiss airspace capacity by 50%.",
           "date": "2026-10-20T18:26:56.192Z"
-        },
-        {
-          "title": "Geneva Airport: the TAF approves the regulation",
-          "url": "/en/geneva-articles/geneva-airport-taf-ruling/",
-          "excerpt": "The Federal Administrative Court has given the green light to Geneva Airport’s operating regulations.",
-          "date": "2026-10-19T06:20:16.297Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T07:44:18.876Z"
     },
     "de": {
       "canton": "GE",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Referendum gegen das Gesetz 13694 zum Bau von HBM-Wohnungen in Genf",
+          "url": "/de/genf-artikel/referendum-wohnbau-hbm-genf/",
+          "excerpt": "HBM machen 5,2% des kantonalen Wohnungsbestands aus. Das Referendum richtet sich gegen das Gesetz 13694.",
+          "date": "2026-11-11T07:28:07.329Z"
+        },
+        {
           "title": "A1: Die Genfer Rechte fordert eine dritte Fahrspur",
           "url": "/de/genf-artikel/a1-genf-dritte-spur/",
           "excerpt": "Die rechte Mehrheit des Genfer Grossen Rats hat gefordert, den Pannenstreifen auf der Autobahn A1 vorübergehend als dritte Fahrspur zu nutzen, und zwar auf dem Abschnitt zwischen Le Vengeron und Coppet (VD), also auf…",
@@ -292,12 +298,6 @@
           "url": "/de/genf-artikel/skyguide-genf-luftraum-stoerung/",
           "excerpt": "Skyguide hat die Kapazität des Schweizer Luftraums um 50% reduziert.",
           "date": "2026-10-20T18:26:56.192Z"
-        },
-        {
-          "title": "Flughafen Genf: Das TAF genehmigt das Betriebsreglement",
-          "url": "/de/genf-artikel/genfer-flughafen-taf-urteil/",
-          "excerpt": "Das Bundesverwaltungsgericht hat grünes Licht für das Betriebsreglement des Flughafens Genf gegeben.",
-          "date": "2026-10-19T06:20:16.297Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T07:44:18.876Z"
     },
     "fr": {
       "canton": "GE",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Référendum contre la loi 13694 sur la construction de logements HBM à Genève",
+          "url": "/fr/articles-geneve/referendum-construction-logements-hbm/",
+          "excerpt": "Les HBM représentent 5,2 % du parc de logements cantonal. Le référendum conteste la loi 13694.",
+          "date": "2026-11-11T07:28:07.329Z"
+        },
+        {
           "title": "A1 : la droite genevoise demande une troisième voie",
           "url": "/fr/articles-geneve/a1-geneve-troisieme-voie/",
           "excerpt": "Le Grand Conseil genevois a approuvé la motion par 45 voix contre 38.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-geneve/skyguide-geneve-espace-aerien/",
           "excerpt": "Skyguide a réduit de 50% la capacité de l'espace aérien suisse.",
           "date": "2026-10-20T18:26:56.192Z"
-        },
-        {
-          "title": "Aéroport de Genève : le TAF approuve le règlement",
-          "url": "/fr/articles-geneve/aeroport-geneve-arret-taf/",
-          "excerpt": "Le règlement d’exploitation de l’aéroport de Genève a été validé par le Tribunal administratif fédéral.",
-          "date": "2026-10-19T06:20:16.297Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-11T07:44:18.876Z"
     }
   }
 }
