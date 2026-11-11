@@ -30,12 +30,13 @@
  * ## Le tre prove (tutte, o nessuna scrittura)
  *
  *   1. ogni PR del sito dichiarata e' mergiata su `main`;
- *   2. TUTTI i commit del sito che toccano il file dopo la baseline registrata
- *      appartengono a PR dichiarate. La storia si legge dal piu' recente fino
- *      al commit il cui contenuto ha l'hash di `baseline.site`, per al massimo
- *      `REALIGN_SITE_HISTORY_CAP` commit: oltre il tetto, o senza ritrovare la
- *      baseline, non si scrive. La forma a ELENCO serve alle catene (piu' PR
- *      del sito sullo stesso file fra una baseline e l'altra);
+ *   2. TUTTI i commit del sito che cambiano il contenuto del file dopo la
+ *      baseline registrata appartengono a PR dichiarate. La storia si legge
+ *      dal piu' recente fino al commit il cui contenuto ha l'hash di
+ *      `baseline.site`, per al massimo `REALIGN_SITE_HISTORY_CAP` commit: oltre
+ *      il tetto, o senza ritrovare la baseline, non si scrive. La forma a
+ *      ELENCO serve alle catene (piu' PR del sito sullo stesso file fra una
+ *      baseline e l'altra);
  *   3. il file del corpus su `main` ha ancora l'hash che aveva al merge della
  *      PR dichiarante: nessuno l'ha mosso dopo.
  *
@@ -329,11 +330,12 @@ function sitePrHold(declaration, sitePrs) {
  * @param {{number: number, merged: boolean, baseRef: string|null}[]} a.sitePrs
  *        stato letto per ogni PR del sito dichiarata.
  * @param {object} a.siteCommits
- *        `commits`: i commit del sito che toccano il file DOPO la baseline, dal
- *        piu' recente, ciascuno con `prs` (numeri delle PR mergiate su `main`
- *        a cui appartiene); `baselineFound`: la storia letta arriva al commit
- *        con l'hash di `baseline.site`; `headHash`: hash del file al commit
- *        piu' recente; `cap`: tetto di commit letti.
+ *        `commits`: i commit restituiti dalla storia del path DOPO la baseline,
+ *        dal piu' recente, ciascuno con hash del contenuto (o `null` se il path
+ *        non esiste) e `prs` (numeri delle PR mergiate su `main` a cui appartiene);
+ *        `baselineFound`: la storia letta arriva al commit con l'hash di
+ *        `baseline.site`; `headHash`: hash del file al commit piu' recente;
+ *        `cap`: tetto di commit letti.
  * @param {string|null} a.corpusHashAtMerge hash del file del corpus al merge
  *        della dichiarante (o `baseline.corpus` senza meta' corpus).
  * @param {string|null} a.corpusHashNow     hash del file del corpus su `main`.
@@ -353,22 +355,31 @@ export function realignDecision({ entry, declaration, sitePrs, siteCommits, corp
   }
   if (!siteCommits.headHash) return hold('site-file-missing', 'il file non e\' leggibile sul `main` del sito');
 
-  if (!siteCommits.commits.length) {
+  // La storia API puo' includere commit che non cambiano il blob del path.
+  // Per l'avanzamento confrontiamo ogni commit con quello immediatamente piu'
+  // vecchio; l'ultimo della lista si confronta con la baseline dichiarata.
+  const contentChangingCommits = siteCommits.commits.filter((commit, index) => {
+    const olderCommit = siteCommits.commits[index + 1];
+    const olderHash = olderCommit ? olderCommit.hash : baseline.site;
+    return commit.hash === undefined || olderHash === undefined || commit.hash !== olderHash;
+  });
+
+  if (!contentChangingCommits.length) {
     if (corpusHashNow === baseline.corpus) {
       return { realign: false, held: false, status: 'already-aligned', reason: 'baseline gia\' allineata ai due lati' };
     }
     return hold(
       'site-not-moved',
-      'il sito non ha toccato il file dopo la baseline: le PR dichiarate non lo hanno modificato, riallineare seppellirebbe una modifica del solo corpus',
+      'il contenuto del file sul sito non e\' cambiato dopo la baseline: riallineare seppellirebbe una modifica del solo corpus',
     );
   }
 
   const declared = new Set(declaration.sitePrs);
-  const uncovered = siteCommits.commits.filter((commit) => !(commit.prs || []).some((number) => declared.has(number)));
+  const uncovered = contentChangingCommits.filter((commit) => !(commit.prs || []).some((number) => declared.has(number)));
   if (uncovered.length) {
     return hold(
       'site-commit-uncovered',
-      `commit del sito sul file non coperti da PR dichiarate: ${uncovered.map((commit) => String(commit.sha).slice(0, 12)).join(', ')}`,
+      `commit del sito che cambiano il contenuto del file e non sono coperti da PR dichiarate: ${uncovered.map((commit) => String(commit.sha).slice(0, 12)).join(', ')}`,
     );
   }
 
@@ -386,7 +397,7 @@ export function realignDecision({ entry, declaration, sitePrs, siteCommits, corp
     realign: true,
     held: false,
     status: 'realign',
-    reason: `${siteCommits.commits.length} commit del sito, tutti di PR dichiarate; corpus fermo a \`${corpusHashNow}\``,
+    reason: `${contentChangingCommits.length} commit del sito hanno cambiato il contenuto del file e tutti sono coperti da PR dichiarate; corpus fermo a \`${corpusHashNow}\``,
     expected: { site: siteCommits.headHash, corpus: corpusHashNow },
   };
 }
