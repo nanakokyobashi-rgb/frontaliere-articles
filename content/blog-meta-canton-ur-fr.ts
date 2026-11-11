@@ -69,6 +69,9 @@ const blogMetaCantonUrFr: Record<string, string> = {
     'blog.article.presidenza-spiringen-schuler.title': 'Peter Schuler sera le nouveau président de Spiringen',
     'blog.article.presidenza-spiringen-schuler.excerpt': 'Peter Schuler, vice-président en exercice, succédera à René Müller le 1er janvier ; le mandat indiqué est 2026/27.',
     'blog.article.presidenza-spiringen-schuler.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.janett-protezione-uri.title': 'Uri : Jürg Janett, nouveau chef de la protection et des affaires militaires',
+    'blog.article.janett-protezione-uri.excerpt': 'Le Conseil d\'État d\'Uri a choisi le colonel Jürg Janett pour diriger l\'Office de la protection de la population et des affaires militaires ainsi que l\'état-major cantonal.',
+    'blog.article.janett-protezione-uri.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonUrFr;

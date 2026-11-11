@@ -69,6 +69,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.presidenza-spiringen-schuler.title': 'Peter Schuler wird der neue Präsident von Spiringen',
     'blog.article.presidenza-spiringen-schuler.excerpt': 'Peter Schuler, der amtierende Vizepräsident, wird am 1. Januar die Nachfolge von René Müller antreten; die angegebene Amtsdauer lautet 2026/27.',
     'blog.article.presidenza-spiringen-schuler.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.janett-protezione-uri.title': 'Uri: Jürg Janett neuer Chef für Schutz und Militär',
+    'blog.article.janett-protezione-uri.excerpt': 'Der Regierungsrat von Uri hat Oberst Jürg Janett für das Amt für Bevölkerungsschutz und Militär sowie für den Kantonsstab gewählt.',
+    'blog.article.janett-protezione-uri.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;
