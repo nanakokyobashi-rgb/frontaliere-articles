@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4111117": {
-    "articleId": "fondi-integrazione-svizzera-2028",
-    "ts": "2026-09-25T13:29:00.234Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/politica/1952705/un-incentivo-fiscale-per-chi-compra-locale-la-proposta-del-centro": {
     "articleId": "incentivo-fiscale-acquisto-locale",
     "ts": "2026-09-25T14:19:43.522Z",
@@ -2497,6 +2492,11 @@
   "https://www.quotidianopiu.it/dettaglio/10919028/pensioni-svizzere-via-libera-allimposizione-sostitutiva": {
     "articleId": "regime-fiscale-rendite-elvetiche",
     "ts": "2026-11-11T12:22:04.557Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4233074": {
+    "articleId": "revisione-tardoc-2027",
+    "ts": "2026-11-11T18:29:24.939Z",
     "keyForm": 2
   }
 }

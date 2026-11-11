@@ -110207,6 +110207,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-revisione-tardoc-2027': {
+    title: 'Il Consiglio federale approva la revisione del TARDOC',
+    description: 'Prima revisione di TARDOC e forfait valida dal 2027: il Consiglio federale chiede correzioni su neutralità dei costi e medicina di base.',
+    keywords: 'TARDOC, Consiglio federale, tariffe ambulatoriali, importi forfettari, TARMED, pediatria, neutralità dei costi, medicina di base',
+    ogTitle: 'TARDOC: revisione federale valida dal 2027',
+    ogDescription: 'Dal 2027 TARDOC e forfait saranno aggiornati dopo oltre 500 richieste esaminate. Il Consiglio federale chiede un piano per il limite del 4%, la medicina di base e i criteri dei prossimi aggiornamenti previsti tra 2028 e 2029.',
+    canonicalPath: '/articoli-svizzera/revisione-tardoc-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il Consiglio federale approva la revisione del TARDOC",
+      "description": "Prima revisione di TARDOC e forfait valida dal 2027: il Consiglio federale chiede correzioni su neutralità dei costi e medicina di base.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-revisione-tardoc-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-11T18:29:23+00:00",
+      "dateModified": "2026-11-11T18:29:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/revisione-tardoc-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
