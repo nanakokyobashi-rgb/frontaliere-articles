@@ -4,46 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/705258/das-playbernfestival-als-digitale-spielewiese-kleine-spiele-sind-erz%c3%a4hlerisch-interessanter": {
-      "section": "canton-be",
-      "ts": 1794177429243
-    },
-    "canton-be::https://ajour.ch/story/702724/von-der-apotheke-in-den-supermarkt-die-geschichte-der-ovomaltine": {
-      "section": "canton-be",
-      "ts": 1794177430892
-    },
-    "canton-be::https://ajour.ch/story/705673/nidauer-gemeinder%c3%a4tin-zum-stau-auf-der-bernstrasse-vorerst-wird-es-so-bleiben-wie-es-ist": {
-      "section": "canton-be",
-      "ts": 1794194164751
-    },
-    "canton-be::https://ajour.ch/story/705991/galsstrasse-wird-f%c3%bcr-belagsarbeiten-gesperrt": {
-      "section": "canton-be",
-      "ts": 1794194166252
-    },
-    "canton-be::https://ajour.ch/story/705936/travaux-des-cff-aprs-laffaissement-dun-remblai-perles": {
-      "section": "canton-be",
-      "ts": 1794194167584
-    },
-    "canton-be::https://ajour.ch/story/705951/vernehmlassung-zur-teilrevision-des-personalgesetzes-er%c3%b6ffnet": {
-      "section": "canton-be",
-      "ts": 1794194169004
-    },
-    "canton-be::https://ajour.ch/story/705891/abgesackter-bahndamm-in-pieterlen-sbb-startet-mit-notfallsanierungsarbeiten": {
-      "section": "canton-be",
-      "ts": 1794194170345
-    },
-    "canton-be::https://ajour.ch/story/705949/strassensperrung-infolge-holzschlag-im-bl%c3%a4siwald-neuegglehn": {
-      "section": "canton-be",
-      "ts": 1794194171763
-    },
-    "canton-be::https://ajour.ch/story/705717/b%c3%a4renkreisel-in-aarberg-der-kanton-will-stau-so-gut-es-geht-verhindern": {
-      "section": "canton-be",
-      "ts": 1794194173312
-    },
-    "canton-be::https://www.nau.ch/politik/international/kamala-harris-nennt-trumps-zollpolitik-gegen-die-schweiz-rucksichtslos-67199420": {
-      "section": "canton-be",
-      "ts": 1794194192830
-    },
     "canton-be::https://ajour.ch/story/706081/cybercriminalit-la-suisse-doit-renforcer-ses-moyens-de-dfense": {
       "section": "canton-be",
       "ts": 1794206844529
@@ -79,6 +39,22 @@
     "canton-be::https://ajour.ch/story/706252/infoveranstaltung-zu-ahverg%c3%a4nzungsleistungen": {
       "section": "canton-be",
       "ts": 1794340921380
+    },
+    "canton-be::https://ajour.ch/story/706253/commission-du-grand-conseil-bernois-pour-des-mesures-daustrit": {
+      "section": "canton-be",
+      "ts": 1794378113756
+    },
+    "canton-be::https://ajour.ch/story/706247/fragen-zur-pensionierung-werden-vom-vz-verm%c3%b6genszentrum-jetzt-auch-in-biel-beantwortet": {
+      "section": "canton-be",
+      "ts": 1794378115145
+    },
+    "canton-be::https://ajour.ch/story/706206/es-wird-dazu-kommen-baumeschneider-warnt-vor-ahvk%c3%bcrzungen": {
+      "section": "canton-be",
+      "ts": 1794378116434
+    },
+    "canton-be::https://ajour.ch/story/706378/sbb-sp%c3%bcren-dieselschock-auch-deshalb-setzt-die-bahn-auf-%c3%b6koalternativen": {
+      "section": "canton-be",
+      "ts": 1794378117961
     }
   }
 }
