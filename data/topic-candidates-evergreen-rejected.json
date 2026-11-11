@@ -5352,6 +5352,18 @@
       "firstSeenAt": "2026-11-09T02:18:54.533Z",
       "lastValidatedAt": "2026-11-09T02:18:54.533Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "integrazione e corsi di lingua canton Zurigo contributi e requisiti",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-11T05:34:36.919Z",
+      "lastValidatedAt": "2026-11-11T05:34:36.919Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
