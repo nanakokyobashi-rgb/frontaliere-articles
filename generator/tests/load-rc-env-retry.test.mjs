@@ -109,6 +109,15 @@ test('expired-job edge section rollout is optional and defaults off', () => {
   assert.equal(rcValueState(null, key), 'expected-absent');
 });
 
+test('jobs fast-publish rollout reaches the site loader and defaults off when absent', () => {
+  const key = 'JOBS_FAST_PUBLISH_ENABLED';
+  assert.deepEqual(RC_TO_ENV[key], [key]);
+  assert.equal(EXPECTED_ABSENT_RC_KEYS.has(key), true);
+  assert.equal(shouldExportRcValue('true', key), true);
+  assert.equal(shouldExportRcValue(null, key), false);
+  assert.equal(rcValueState(null, key), 'expected-absent');
+});
+
 test('il loader corpus conserva il mapping della chiave Tankerkönig', () => {
   const source = fs.readFileSync(path.join(ROOT, 'scripts/load-rc-env.mjs'), 'utf8');
   assert.match(source, /TANKERKOENIG_API_KEY:\s+\['TANKERKOENIG_API_KEY'\]/);
