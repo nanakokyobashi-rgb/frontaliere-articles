@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-bad-egelsee-supplemento-sauna.webp",
-      "sha256": "ee8049c9c30bba98725dd69fe4454f686d11f6078d7a91d6bcb7f80e2c150ac2"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-bad-egelsee-supplemento-sauna-480w.webp",
-      "sha256": "7b90386741810b4b9782d58695594b0c0b92554871eafb89ad721344084d9e6c"
-    }
-  ]
+  "items": []
 }
