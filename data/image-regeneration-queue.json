@@ -5,31 +5,31 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (image vision verification deadline exceeded)",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Generic synthetic transit illustration, but it includes a recognizable foreground person and does not clearly match the stated Rome fi",
       "status": "failed",
-      "failureCount": 37,
+      "failureCount": 38,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-12T01:11:24.279Z"
+      "lastFailureAt": "2026-11-12T09:11:15.098Z"
     },
     {
       "articleId": "giovani-donne-stipendi-svizzera",
       "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (image vision fallback deadline exceeded)",
+      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Original synthetic editorial scene with no text, logo, or visible face; the prominent back-facing foreground woman triggers th",
       "status": "failed",
-      "failureCount": 33,
+      "failureCount": 34,
       "requestedAt": "2026-10-19T03:17:12.439Z",
-      "lastFailureAt": "2026-11-12T01:13:24.552Z"
+      "lastFailureAt": "2026-11-12T09:13:10.635Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (image vision fallback deadline exceeded)",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Synthetic editorial-style illustration of a foreground commuter at a train platform; no readable text, logos, or identifiable ",
       "status": "failed",
-      "failureCount": 32,
+      "failureCount": 33,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-12T01:15:24.807Z"
+      "lastFailureAt": "2026-11-12T09:14:28.426Z"
     }
   ]
 }
