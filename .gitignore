@@ -47,13 +47,15 @@ public/images/events/*
 # rimosso e ignorato qui.
 .git-commit-msg.txt
 
-# Worktree degli agenti (fast-worktree, EnterWorktree, Codex): non sono
+# Worktree degli agenti (fast-worktree, EnterWorktree, Codex, Gemini): non sono
 # contenuto del repo, e senza queste righe compaiono come non tracciati nel
 # checkout principale. Le stesse cartelle che lo sweep dei worktree
 # (scripts/prune-merged-worktrees.mjs del sito) pulisce.
 .wt/
 .worktrees/
 .claude/worktrees/
+.codex/worktrees/
+.gemini/worktrees/
 
 # Multi-file registration locks are runner-local evidence, not corpus state.
 # The legacy marker and every section-scoped marker (including canton-*) must
