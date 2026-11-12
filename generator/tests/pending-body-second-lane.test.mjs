@@ -12,11 +12,14 @@
  *     → `content/blog-body/de/contributo-sanitario-settembre.ts: chiave mancante body1`;
  *   - run 37153946271 (2026-10-03): `fr:body1`, `fr:body2` → due `missing-key`.
  * In entrambe la cascata free era esaurita e il tier Codex del free-MT si era
- * gia' fermato sul suo budget, mentre la corsia Codex del job era pronta.
+ * gia' fermato sul suo budget. La corsia del job preferisce Codex, ma deve
+ * poter usare anche la catena storica se il circuit breaker ha gia' escluso
+ * Codex prima del secondo tentativo.
  *
  * IL FIX. Prima della guardia, `translateArticle()` passa ogni body in attesa a
- * `retryPendingBodyTranslations` con la corsia Codex pinnata. La guardia resta
- * invariata: se anche Codex non traduce, il body resta in attesa.
+ * `retryPendingBodyTranslations`, preferendo la corsia Codex pinnata e usando
+ * la catena storica senza Codex quando la prima e' gia' indisponibile. La
+ * guardia resta invariata: se nessuna corsia traduce, il body resta in attesa.
  *
  * COME GIRA. La funzione di libreria e' importata davvero; il blocco di
  * `translateArticle()` che la chiama e' ritagliato VERBATIM dal sorgente ed
@@ -262,13 +265,15 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
 test('la corsia si arma solo nel percorso CLI: i producer importati (publish-journalist) non la interrogano', () => {
   const avail = src.slice(src.indexOf('function pendingBodySecondLaneAvailable() {'));
   assert.match(avail.slice(0, avail.indexOf('\n}\n')), /_pendingBodySecondLaneArmed && isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)/);
+  assert.match(src, /function pendingBodyRecoveryAvailable\(\) \{/);
+  assert.match(src, /legacyTranslationChain\(\)\.some\(\(model\) => isModelAvailable\(model\)\)/);
   assert.match(src, /^let _pendingBodySecondLaneArmed = false;$/m);
   const arms = [...src.matchAll(/_pendingBodySecondLaneArmed = true;/g)].map((m) => m.index);
   assert.equal(arms.length, 1);
   const installStart = src.indexOf('function installCodexTranslateProcessDeadline() {');
   assert.ok(arms[0] > installStart && arms[0] < src.indexOf('\n}\n', installStart), 'la corsia va armata solo da installCodexTranslateProcessDeadline (ramo CLI)');
   const { block } = extractSecondLaneBlock();
-  assert.match(block, /isLaneAvailable: \(\) => pendingBodySecondLaneAvailable\(\),/);
+  assert.match(block, /isLaneAvailable: \(\) => pendingBodyRecoveryAvailable\(\),/);
   assert.match(src, /pending_recovered=\$\{JSON\.stringify\(recovery\.pendingBodyRecovered \|\| \{\}\)\}/);
 });
 
@@ -279,18 +284,27 @@ function realTruncationSrc() {
   return src.slice(at, src.indexOf('\n}\n', at) + 2);
 }
 
-async function runSecondLaneBlock({ data, RUN_REPORT, translatePendingBodyWithCodex, codexAvailable = true }) {
+async function runSecondLaneBlock({
+  data,
+  RUN_REPORT,
+  translatePendingBodyWithCodex,
+  translatePendingBodyWithHistoricalChain = async () => '',
+  codexAvailable = true,
+  historicalAvailable = false,
+}) {
   const { block } = extractSecondLaneBlock();
   const AI_MODELS = { CODEX_CLI_PRIMARY: 'codex-cli/test' };
   const fn = new Function(
-    'data', 'RUN_REPORT', 'retryPendingBodyTranslations', 'AI_MODELS', 'pendingBodySecondLaneAvailable', 'pendingBodyLaneShouldStop',
-    'translatePendingBodyWithCodex', 'translatedStringOrNull', 'isSourcePassthrough', 'detectTruncation', 'sanitizeBodyText', 'console',
+    'data', 'RUN_REPORT', 'retryPendingBodyTranslations', 'AI_MODELS', 'pendingBodySecondLaneAvailable', 'pendingBodyRecoveryAvailable', 'pendingBodyLaneShouldStop',
+    'translatePendingBodyWithCodex', 'translatePendingBodyWithHistoricalChain', 'callWithRetry', 'translatedStringOrNull', 'isSourcePassthrough', 'detectTruncation', 'sanitizeBodyText', 'console',
     `${realTruncationSrc()}\nreturn (async () => { ${block} })();`,
   );
   const quiet = { error: () => {}, warn: () => {}, log: () => {} };
   await fn(
-    data, RUN_REPORT, retryPendingBodyTranslations, AI_MODELS, () => codexAvailable, () => false,
-    translatePendingBodyWithCodex, translatedStringOrNull, isSourcePassthrough, detectTruncation, sanitizeBodyText, quiet,
+    data, RUN_REPORT, retryPendingBodyTranslations, AI_MODELS, () => codexAvailable,
+    () => codexAvailable || historicalAvailable, () => false,
+    translatePendingBodyWithCodex, translatePendingBodyWithHistoricalChain, async () => ({}),
+    translatedStringOrNull, isSourcePassthrough, detectTruncation, sanitizeBodyText, quiet,
   );
 }
 
@@ -323,7 +337,7 @@ test('nel cablaggio vero l\'italiano ricopiato e il testo troncato restano in at
   }
 });
 
-test('senza corsia Codex disponibile il blocco non chiama nulla e il body resta in attesa', async () => {
+test('senza Codex né catena storica disponibile il blocco non chiama nulla e il body resta in attesa', async () => {
   const RUN_REPORT = { translation: createFreeMtRecoveryReport({ bodyFieldCount: 3 }) };
   const data = articleWithPendingDeBody1(RUN_REPORT.translation);
   let calls = 0;
@@ -336,4 +350,26 @@ test('senza corsia Codex disponibile il blocco non chiama nulla e il body resta 
   assert.equal(calls, 0);
   assert.deepEqual(missingKeys(data), ['de:body1']);
   assert.equal(RUN_REPORT.translation.pendingBodyRetry.stoppedBy, 'lane-unavailable');
+});
+
+test('con Codex indisponibile la catena storica recupera il body pending', async () => {
+  const RUN_REPORT = { translation: createFreeMtRecoveryReport({ bodyFieldCount: 3 }) };
+  const data = articleWithPendingDeBody1(RUN_REPORT.translation);
+  const asked = [];
+  await runSecondLaneBlock({
+    data,
+    RUN_REPORT,
+    codexAvailable: false,
+    historicalAvailable: true,
+    translatePendingBodyWithCodex: async () => { throw new Error('Codex non deve essere chiamato'); },
+    translatePendingBodyWithHistoricalChain: async (itValue, locale, field, { callWithRetry }) => {
+      asked.push({ itValue, locale, field, hasRetry: typeof callWithRetry === 'function' });
+      return DE_BODY.body1;
+    },
+  });
+  assert.deepEqual(asked, [{ itValue: IT_BODY.body1, locale: 'de', field: 'body1', hasRetry: true }]);
+  assert.deepEqual(missingKeys(data), []);
+  assert.equal(data.content.de.body1, sanitizeBodyText(DE_BODY.body1));
+  assert.deepEqual(RUN_REPORT.translation.pendingBodyFields, {});
+  assert.deepEqual(RUN_REPORT.translation.pendingBodyRecovered, { 'de:body1': 'historical-translation-chain' });
 });

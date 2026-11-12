@@ -14621,6 +14621,22 @@ Rispondi con un JSON object (no markdown, no code fences):
 {"${field}": "..."}`;
 }
 
+function buildPendingBodyRetranslationPrompt({ langName, field, itValue }) {
+  return `Traduci COMPLETAMENTE in ${langName} il seguente corpo dell'articolo per il sito Frontaliere Ticino.
+
+VINCOLI OBBLIGATORI:
+- non riassumere e non omettere frasi o paragrafi;
+- mantieni la stessa struttura Markdown, inclusi heading, elenchi, citazioni e interruzioni di riga;
+- mantieni invariati i nomi propri, i toponimi, le cifre e le destinazioni dei link nav: protette dai marcatori;
+- non aggiungere spiegazioni, prefissi o code fences.
+
+CONTENUTO ITALIANO DA TRADURRE:
+- ${field}: ${itValue}
+
+Rispondi con un JSON object (no markdown, no code fences):
+{"${field}": "..."}`;
+}
+
 /**
  * Un body rimasto in attesa (#1875), tradotto dalla corsia Codex del job.
  *
@@ -14657,6 +14673,17 @@ let _pendingBodySecondLaneArmed = false;
 
 function pendingBodySecondLaneAvailable() {
   return _pendingBodySecondLaneArmed && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY);
+}
+
+function legacyTranslationChain() {
+  return DEFAULT_CHAIN.filter((model) => model !== AI_MODELS.CODEX_CLI_PRIMARY);
+}
+
+function pendingBodyRecoveryAvailable() {
+  return _pendingBodySecondLaneArmed && (
+    isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY)
+    || legacyTranslationChain().some((model) => isModelAvailable(model))
+  );
 }
 
 async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCall = null } = {}) {
@@ -14740,6 +14767,57 @@ async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCa
   });
 }
 
+/**
+ * Recupera un body pending con la catena storica quando il circuit-breaker
+ * Codex ha spento la lane primaria. Passa comunque dal traduttore di campo,
+ * così i marker nav, la struttura Markdown, il passthrough e la completezza
+ * minima hanno lo stesso contratto della seconda corsia Codex.
+ */
+async function translatePendingBodyWithHistoricalChain(
+  itValue,
+  locale,
+  field,
+  { callWithRetry } = {},
+) {
+  if (typeof callWithRetry !== 'function') {
+    throw new TypeError('translatePendingBodyWithHistoricalChain: `callWithRetry` è richiesto');
+  }
+  const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
+  const rejected = [];
+  const text = await translateFieldFreeMt({
+    text: itValue,
+    sourceLang: 'it',
+    targetLang: locale,
+    fieldType: 'description',
+    fieldName: field,
+    translate: async ({ text: masked }) => {
+      const parsed = await callWithRetry(
+        buildPendingBodyRetranslationPrompt({
+          langName,
+          field,
+          itValue: masked,
+        }),
+        Math.max(5000, Math.ceil(countWords(itValue || '') * 5)),
+        `${locale}:${field}-pending-retry`,
+        { translation: true },
+      );
+      const translated = translatedStringOrNull(parsed?.[field], locale);
+      if (translated === null) {
+        rejected.push('non-string');
+        return '';
+      }
+      return translated;
+    },
+    balanceMarkdown: balanceMarkdownMarkers,
+    onWarn: (msg) => console.error(`  ⚠️  [seconda corsia storica] ${msg}`),
+    onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
+  });
+  if (!text && rejected.length > 0) {
+    console.error(`  ⚠️  ${locale}:${field} rifiutato dalla catena storica (${rejected.join(', ')})`);
+  }
+  return text;
+}
+
 /** La seconda corsia non avvia una chiamata dopo lo stop cooperativo o a ridosso della scadenza dichiarata. */
 function pendingBodyLaneShouldStop() {
   if (_sigtermStopRequested) return true;
@@ -14796,14 +14874,6 @@ async function translateArticle(data) {
   resetBodyTranslationPending(data);
   const cascadeStatsBeforeTranslation = getCascadeStats();
   let translationRecoveryCodexCalls = 0;
-
-  // A recovery call is a translation call only when it opts into the Codex
-  // model explicitly. The fallback remains the scored historical chain with
-  // Codex removed, so a missing/disabled broker cannot strand the legacy path
-  // and fact-checks or second opinions cannot inherit this preference.
-  function legacyTranslationChain() {
-    return DEFAULT_CHAIN.filter((model) => model !== AI_MODELS.CODEX_CLI_PRIMARY);
-  }
 
   function legacyTranslationOptions() {
     // I producer importati non dichiarano una scadenza di processo: non
@@ -15634,25 +15704,37 @@ ${localizedToponymInstruction(targetLang)}`;
   // viene committato: run 37220516797 (`de:body1`), 37153946271 (`fr:body1`,
   // `fr:body2`), entrambe con la cascata free esaurita e il tier Codex del
   // free-MT gia' fermo sul suo budget. Prima della guardia ogni body in attesa
-  // riceve UN tentativo sulla corsia Codex del job, pinnata (non la cascata
-  // free appena fallita) e con la scadenza che il processo ha dichiarato.
+  // riceve UN tentativo sulla corsia Codex del job, pinnata e con la scadenza
+  // che il processo ha dichiarato. Se il circuit-breaker ha gia' spento Codex,
+  // usa la catena storica senza Codex: il fallimento della lane primaria non
+  // deve trasformare una recovery ancora possibile in un missing-key certo.
   // L'uscita passa da `translateFieldFreeMt` come ogni body free-MT (nav-link,
-  // completezza, passthrough): vedi `translatePendingBodyWithCodex`. La guardia resta
+  // completezza, passthrough): vedi i due helper di recovery. La guardia resta
   // invariata: se anche Codex non traduce, il body resta in attesa e
   // l'articolo resta fuori da main. Vedi `retryPendingBodyTranslations`.
   // Sopra quel percorso, gli stessi predicati del retry di troncamento: testo
   // usabile nel locale, non l'italiano ricopiato, non troncato a meta' frase.
+  const initialPendingBodyLane = pendingBodySecondLaneAvailable()
+    ? AI_MODELS.CODEX_CLI_PRIMARY
+    : 'historical-translation-chain';
   await retryPendingBodyTranslations(data, {
     report: RUN_REPORT.translation,
-    lane: AI_MODELS.CODEX_CLI_PRIMARY,
-    isLaneAvailable: () => pendingBodySecondLaneAvailable(),
+    lane: initialPendingBodyLane,
+    isLaneAvailable: () => pendingBodyRecoveryAvailable(),
     shouldStop: () => pendingBodyLaneShouldStop(),
-    translate: ({ locale, field, itValue }) => translatePendingBodyWithCodex(
-      itValue,
-      locale,
-      field,
-      { onCodexCall: () => { translationRecoveryCodexCalls += 1; } },
-    ),
+    translate: ({ locale, field, itValue }) => pendingBodySecondLaneAvailable()
+      ? translatePendingBodyWithCodex(
+        itValue,
+        locale,
+        field,
+        { onCodexCall: () => { translationRecoveryCodexCalls += 1; } },
+      )
+      : translatePendingBodyWithHistoricalChain(
+        itValue,
+        locale,
+        field,
+        { callWithRetry },
+      ),
     rejectReason: ({ locale, field, itValue, text }) => {
       if (translatedStringOrNull(text, locale) === null) return 'testo non usabile';
       if (isSourcePassthrough(text, itValue)) return "identico all'italiano";
