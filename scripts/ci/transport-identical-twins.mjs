@@ -773,7 +773,11 @@ export function permanentBlock(entry, { outOfScopePrefixes = [], couplings = [],
 
 export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], couplings = [] } = {}) {
   const state = classify(entry, now, base).state;
-  const remote = remoteDigestPrecondition(entry, now);
+  // In `site-ahead` il digest remoto deve essere osservato, ma non puo' essere
+  // uguale al corpus: il punto del trasporto e' proprio copiare quel nuovo
+  // stato remoto sul lato ancora fermo alla baseline. `initWriteVerdict()`
+  // mantiene invece il confronto stretto quando registra la baseline.
+  const remote = remoteDigestPrecondition(entry, now, { requireCorpusMatch: state !== 'site-ahead' });
   if (!remote.ok) {
     return {
       transport: false,

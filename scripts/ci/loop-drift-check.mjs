@@ -374,16 +374,19 @@ const OPEN_DRIFT_STATES = new Set([
  * Precondizione machine-readable per le entry che non possono accettare o
  * riattestare una baseline senza osservare il gemello remoto. Il confronto è
  * sui digest correnti, non sulla baseline: una baseline nuova è lecita solo
- * quando i byte remoti e locali coincidono.
+ * quando i byte remoti e locali coincidono. Il trasporto di un `site-ahead`
+ * passa invece `requireCorpusMatch: false`: il digest remoto deve essere
+ * osservato, ma per definizione differisce dal corpus fermo sulla baseline.
  *
  * PURA: nessuna rete, nessun disco. E' condivisa da `--init` e dal trasporto
  * per evitare che i due consumer sviluppino guardie divergenti.
  *
  * @param {{path?: string, remoteDigestRequired?: boolean}} entry
  * @param {{site?: string|null, corpus?: string|null}} now
+ * @param {{requireCorpusMatch?: boolean}} [options]
  * @returns {{required: boolean, ok: boolean, reason: string}}
  */
-function remoteDigestPrecondition(entry, now) {
+function remoteDigestPrecondition(entry, now, { requireCorpusMatch = true } = {}) {
   if (entry?.remoteDigestRequired !== true) {
     return { required: false, ok: true, reason: '' };
   }
@@ -396,7 +399,7 @@ function remoteDigestPrecondition(entry, now) {
       reason: `digest remoto obbligatorio mancante per \`${pathName}\`: la baseline e il trasporto restano bloccati finche' il gemello del sito non e' osservabile.`,
     };
   }
-  if (typeof now?.corpus !== 'string' || now.corpus.length === 0 || now.site !== now.corpus) {
+  if (requireCorpusMatch && (typeof now?.corpus !== 'string' || now.corpus.length === 0 || now.site !== now.corpus)) {
     return {
       required: true,
       ok: false,

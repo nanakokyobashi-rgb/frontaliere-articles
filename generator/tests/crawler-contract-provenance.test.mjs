@@ -509,7 +509,7 @@ test(`il piano reale copre i digest correnti e la lineage del contratto committa
   }
 });
 
-test('la baseline del contratto richiede il digest remoto e non e\u2019 forceabile', () => {
+test('la baseline del contratto richiede il digest remoto, ma il trasporto accetta un `site-ahead` osservato', () => {
   const entry = MANIFEST.files.find(
     (candidate) => candidate.path === 'generator/data/crawler-cross-repo-contract.json',
   );
@@ -543,16 +543,25 @@ test('la baseline del contratto richiede il digest remoto e non e\u2019 forceabi
   );
   assert.equal(aligned.blocked, false);
 
-  for (const now of [
+  const missingTransport = transportVerdict(
+    entry,
     { site: null, corpus: entry.baseline.corpus },
+    entry.baseline,
+  );
+  assert.equal(missingTransport.transport, false);
+  assert.equal(missingTransport.realign, false);
+  assert.equal(missingTransport.permanent, false);
+  assert.match(missingTransport.reason, /digest remoto obbligatorio/);
+
+  const siteAheadTransport = transportVerdict(
+    entry,
     { site: 'remote-divergent', corpus: entry.baseline.corpus },
-  ]) {
-    const transport = transportVerdict(entry, now, entry.baseline);
-    assert.equal(transport.transport, false);
-    assert.equal(transport.realign, false);
-    assert.equal(transport.permanent, false);
-    assert.match(transport.reason, /digest remoto obbligatorio/);
-  }
+    entry.baseline,
+  );
+  assert.equal(siteAheadTransport.state, 'site-ahead');
+  assert.equal(siteAheadTransport.transport, true);
+  assert.equal(siteAheadTransport.realign, undefined);
+  assert.equal(siteAheadTransport.permanent, false);
 });
 
 test('FU-011 — roster corrente e observer divergenti diventano rossi', () => {
