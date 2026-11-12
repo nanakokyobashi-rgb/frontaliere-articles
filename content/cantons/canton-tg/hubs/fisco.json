@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "fisco",
-  "updatedAt": "2026-10-31T13:29:32.715Z",
-  "contentHash": "360063a70f83c231f7b81c7b32592b7ab2899c26b57812f37efdd89a2489cfd5",
+  "updatedAt": "2026-11-12T23:04:59.612Z",
+  "contentHash": "4b25ec0f262dabfa693db046539757cb11eaf16b1f08d111f87a800c4b16f746",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T21:45:03.956Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -125,7 +125,7 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -134,6 +134,12 @@
           "url": "/articoli-turgovia/ufficio-imposte-frauenfeld-orari/",
           "excerpt": "Dal 2 novembre 2026, l'Ufficio imposte della città di Frauenfeld chiuderà lunedì e mercoledì pomeriggio per elevato volume di lavoro.",
           "date": "2026-10-31T13:22:10.345Z"
+        },
+        {
+          "title": "Referendumspublikation budget 2027 frauenfeld",
+          "url": "/articoli-turgovia/referendum-budget-2027-frauenfeld/",
+          "excerpt": "Il documento è disponibile in formato PDF con dimensione di 87 KB; non contiene cifre né voci di spesa specifiche.",
+          "date": "2026-11-12T23:00:04.094Z"
         },
         {
           "title": "Comprare casa in Turgovia: tasse e mutuo ipotecario",
@@ -169,7 +175,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-31T13:29:32.715Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     },
     "en": {
       "canton": "TG",
@@ -272,7 +278,7 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -281,6 +287,12 @@
           "url": "/en/thurgau-articles/frauenfeld-tax-office-hours/",
           "excerpt": "From November 2, 2026, the Frauenfeld city tax office will be closed on Monday and Wednesday afternoons due to a high workload.",
           "date": "2026-10-31T13:22:10.345Z"
+        },
+        {
+          "title": "Referendum publication budget 2027 Frauenfeld",
+          "url": "/en/thurgau-articles/referendum-publication-budget-2027-frauenfeld/",
+          "excerpt": "The document is available in PDF format with a size of 87 KB; it contains neither figures nor specific expense items.",
+          "date": "2026-11-12T23:00:04.094Z"
         },
         {
           "title": "Buying a house in Thurgau: taxes and mortgage",
@@ -316,7 +328,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-31T13:29:32.715Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     },
     "de": {
       "canton": "TG",
@@ -419,7 +431,7 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -428,6 +440,12 @@
           "url": "/de/thurgau-artikel/steueramt-frauenfeld-zeiten/",
           "excerpt": "Ab dem 2. November 2026 schließt das Steueramt der Stadt Frauenfeld am Montagnachmittag und am Mittwochnachmittag wegen des hohen Arbeitsvolumens.",
           "date": "2026-10-31T13:22:10.345Z"
+        },
+        {
+          "title": "Referendums-Publikation Budget 2027 Frauenfeld",
+          "url": "/de/thurgau-artikel/referendums-publikation-budget-2027-frauenfeld/",
+          "excerpt": "Das Dokument ist als PDF mit einer Größe von 87 KB verfügbar; es enthält weder Zahlen noch spezifische Ausgabenposten.",
+          "date": "2026-11-12T23:00:04.094Z"
         },
         {
           "title": "Haus kaufen im Thurgau: Steuern und Hypothekendarlehen",
@@ -463,7 +481,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-31T13:29:32.715Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     },
     "fr": {
       "canton": "TG",
@@ -566,7 +584,7 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -575,6 +593,12 @@
           "url": "/fr/articles-thurgovie/bureau-impots-frauenfeld-horaires/",
           "excerpt": "À partir du 2 novembre 2026, l’Office des impôts de la ville de Frauenfeld sera fermé les lundis et mercredis après-midi en raison d’un volume de travail élevé.",
           "date": "2026-10-31T13:22:10.345Z"
+        },
+        {
+          "title": "Publication du référendum budget 2027 Frauenfeld",
+          "url": "/fr/articles-thurgovie/publication-du-referendum-budget-2027-frauenfeld/",
+          "excerpt": "Le document est disponible au format PDF et sa taille est de 87 KB ; il ne contient ni chiffres ni postes de dépenses spécifiques.",
+          "date": "2026-11-12T23:00:04.094Z"
         },
         {
           "title": "Acheter une maison en Thurgovie : taxes et hypothèque",
@@ -610,7 +634,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-31T13:29:32.715Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     }
   }
 }

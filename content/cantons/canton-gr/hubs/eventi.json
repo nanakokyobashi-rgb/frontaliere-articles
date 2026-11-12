@@ -4,17 +4,17 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T04:11:33.979Z",
-  "contentHash": "9feee4733f611811713955f6c0539d95dab026a1f8e2f66165ab25fef75c7670",
+  "updatedAt": "2026-11-12T22:45:08.796Z",
+  "contentHash": "ae79d138fc388aeb056b08c858cc56e33529aa11d2046b4d0e08bf41c7332e0f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-11T04:25:04.802Z",
+      "updatedAt": "2026-11-12T14:41:08.896Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "66",
+          "value": "70",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -171,7 +171,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "en": {
       "canton": "GR",
@@ -181,7 +181,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "66",
+          "value": "70",
           "note": "from the site’s events calendar"
         }
       ],
@@ -254,7 +254,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -267,7 +267,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -325,7 +325,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "de": {
       "canton": "GR",
@@ -335,7 +335,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "66",
+          "value": "70",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -408,7 +408,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -421,7 +421,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -479,7 +479,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "fr": {
       "canton": "GR",
@@ -489,7 +489,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "66",
+          "value": "70",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -562,7 +562,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -575,7 +575,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -633,7 +633,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     }
   }
 }

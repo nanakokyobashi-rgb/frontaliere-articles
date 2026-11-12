@@ -87,6 +87,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.bad-egelsee-supplemento-sauna.title': 'Bad Egelsee: +5 CHF per la sauna dal 2027',
     'blog.article.bad-egelsee-supplemento-sauna.excerpt': 'Dal 1° gennaio 2027 il biglietto con sauna costerà CHF 15 per gli adulti e CHF 10 per giovani, apprendisti e studenti.',
     'blog.article.bad-egelsee-supplemento-sauna.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.referendum-budget-2027-frauenfeld.title': 'Referendumspublikation budget 2027 frauenfeld',
+    'blog.article.referendum-budget-2027-frauenfeld.excerpt': 'Il documento è disponibile in formato PDF con dimensione di 87 KB; non contiene cifre né voci di spesa specifiche.',
+    'blog.article.referendum-budget-2027-frauenfeld.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;

@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-11-12T21:05:42.386Z",
-  "contentHash": "3ecec16f184c5e8d8b4bb898e6cd2dc145531a9d6d941a4d57f93f4fa9de8df2",
+  "updatedAt": "2026-11-12T22:45:08.796Z",
+  "contentHash": "2fa91c0ed7a205eac165d2f03b01417713fe0a51ed71231921116f9b3c39c15d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,8 +14,13 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-12T00:41:52.734Z",
+      "updatedAt": "2026-11-12T15:12:29.228Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-12T16:56:35.952Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -39,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "10",
-          "note": "offerta mediana 500 CHF"
+          "note": "offerta mediana 510 CHF"
         }
       ],
       "dataBlocks": [
@@ -75,21 +80,21 @@
           "items": [
             {
               "label": "SG6135",
-              "value": "2200 CHF",
+              "value": "3000 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-18T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6709"
             },
             {
-              "label": "SG41352",
-              "value": "600 CHF",
+              "label": "SG393333",
+              "value": "800 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-18T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6711"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6717"
             },
             {
               "label": "SG10906",
-              "value": "520 CHF",
+              "value": "700 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-18T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6710"
@@ -97,7 +102,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-12T00:41:52.734Z"
+          "updatedAt": "2026-11-12T15:12:29.228Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "9 °C",
+              "detail": "oggi da 4 a 9 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-12T16:56:35.952Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -215,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "en": {
       "canton": "SG",
@@ -232,7 +251,7 @@
         {
           "label": "Plate auctions running",
           "value": "10",
-          "note": "typical bid 500 CHF"
+          "note": "typical bid 510 CHF"
         }
       ],
       "dataBlocks": [
@@ -268,21 +287,21 @@
           "items": [
             {
               "label": "SG6135",
-              "value": "2,200 CHF",
+              "value": "3,000 CHF",
               "detail": "current bid",
               "date": "2026-11-18T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6709"
             },
             {
-              "label": "SG41352",
-              "value": "600 CHF",
+              "label": "SG393333",
+              "value": "800 CHF",
               "detail": "current bid",
               "date": "2026-11-18T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6711"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6717"
             },
             {
               "label": "SG10906",
-              "value": "520 CHF",
+              "value": "700 CHF",
               "detail": "current bid",
               "date": "2026-11-18T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6710"
@@ -290,7 +309,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-12T00:41:52.734Z"
+          "updatedAt": "2026-11-12T15:12:29.228Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "9 °C",
+              "detail": "today from 4 to 9 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-12T16:56:35.952Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -404,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "de": {
       "canton": "SG",
@@ -421,7 +454,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "10",
-          "note": "mittleres Gebot 500 CHF"
+          "note": "mittleres Gebot 510 CHF"
         }
       ],
       "dataBlocks": [
@@ -457,21 +490,21 @@
           "items": [
             {
               "label": "SG6135",
-              "value": "2’200 CHF",
+              "value": "3’000 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-18T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6709"
             },
             {
-              "label": "SG41352",
-              "value": "600 CHF",
+              "label": "SG393333",
+              "value": "800 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-18T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6711"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6717"
             },
             {
               "label": "SG10906",
-              "value": "520 CHF",
+              "value": "700 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-18T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6710"
@@ -479,7 +512,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-12T00:41:52.734Z"
+          "updatedAt": "2026-11-12T15:12:29.228Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "9 °C",
+              "detail": "heute 4 bis 9 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-12T16:56:35.952Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -593,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "fr": {
       "canton": "SG",
@@ -610,7 +657,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "10",
-          "note": "offre centrale 500 CHF"
+          "note": "offre centrale 510 CHF"
         }
       ],
       "dataBlocks": [
@@ -646,21 +693,21 @@
           "items": [
             {
               "label": "SG6135",
-              "value": "2 200 CHF",
+              "value": "3 000 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-18T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6709"
             },
             {
-              "label": "SG41352",
-              "value": "600 CHF",
+              "label": "SG393333",
+              "value": "800 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-18T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6711"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6717"
             },
             {
               "label": "SG10906",
-              "value": "520 CHF",
+              "value": "700 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-18T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6710"
@@ -668,7 +715,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-12T00:41:52.734Z"
+          "updatedAt": "2026-11-12T15:12:29.228Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "9 °C",
+              "detail": "aujourd’hui de 4 à 9 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-12T16:56:35.952Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -778,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     }
   }
 }

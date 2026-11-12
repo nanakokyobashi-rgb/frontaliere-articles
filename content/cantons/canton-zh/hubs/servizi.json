@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-12T21:05:42.386Z",
-  "contentHash": "d6f3a1325bb658a10659dbce7bbb9dac0d36f0d920909f4fd2a50fba693b4f58",
+  "updatedAt": "2026-11-12T23:04:59.612Z",
+  "contentHash": "91d91f9dfd6b58c6d9b246e45320eee34e7aaf54166284fe08dd35acde8c7c4d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-12T12:55:27.361Z",
+      "updatedAt": "2026-11-12T16:24:10.107Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-12T15:12:29.228Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-12T16:56:35.952Z",
       "keyFacts": 0
     },
     {
@@ -35,6 +45,11 @@
           "value": "639,80 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "31",
+          "note": "offerta mediana 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -71,11 +86,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-11T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-12T23:00:00.000Z"
             },
             {
@@ -97,11 +107,61 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-16T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-17T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-12T12:55:27.361Z"
+          "updatedAt": "2026-11-12T16:24:10.107Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "ZH906",
+              "value": "10.800 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/44022"
+            },
+            {
+              "label": "ZH5485",
+              "value": "2000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43765"
+            },
+            {
+              "label": "ZH51277",
+              "value": "900 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43779"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-12T15:12:29.228Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "11 °C",
+              "detail": "oggi da 6 a 11 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-12T16:56:35.952Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -219,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     },
     "en": {
       "canton": "ZH",
@@ -232,6 +292,11 @@
           "value": "639.80 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "31",
+          "note": "typical bid 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -268,11 +333,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-11T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-12T23:00:00.000Z"
             },
             {
@@ -294,11 +354,61 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-16T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-17T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-12T12:55:27.361Z"
+          "updatedAt": "2026-11-12T16:24:10.107Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "ZH906",
+              "value": "10,800 CHF",
+              "detail": "current bid",
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/44022"
+            },
+            {
+              "label": "ZH5485",
+              "value": "2,000 CHF",
+              "detail": "current bid",
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43765"
+            },
+            {
+              "label": "ZH51277",
+              "value": "900 CHF",
+              "detail": "current bid",
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43779"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-12T15:12:29.228Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "11 °C",
+              "detail": "today from 6 to 11 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-12T16:56:35.952Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -412,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     },
     "de": {
       "canton": "ZH",
@@ -425,6 +535,11 @@
           "value": "639.80 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "31",
+          "note": "mittleres Gebot 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -461,11 +576,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-11T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-12T23:00:00.000Z"
             },
             {
@@ -487,11 +597,61 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-16T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-17T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-12T12:55:27.361Z"
+          "updatedAt": "2026-11-12T16:24:10.107Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "ZH906",
+              "value": "10’800 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/44022"
+            },
+            {
+              "label": "ZH5485",
+              "value": "2’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43765"
+            },
+            {
+              "label": "ZH51277",
+              "value": "900 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43779"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-12T15:12:29.228Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "11 °C",
+              "detail": "heute 6 bis 11 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-12T16:56:35.952Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -605,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     },
     "fr": {
       "canton": "ZH",
@@ -618,6 +778,11 @@
           "value": "639,80 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "31",
+          "note": "offre centrale 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -654,11 +819,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-11T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-12T23:00:00.000Z"
             },
             {
@@ -680,11 +840,61 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-16T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-17T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-12T12:55:27.361Z"
+          "updatedAt": "2026-11-12T16:24:10.107Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "ZH906",
+              "value": "10 800 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/44022"
+            },
+            {
+              "label": "ZH5485",
+              "value": "2 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43765"
+            },
+            {
+              "label": "ZH51277",
+              "value": "900 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-18T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43779"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-11-12T15:12:29.228Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "11 °C",
+              "detail": "aujourd’hui de 6 à 11 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-12T16:56:35.952Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -794,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     }
   }
 }

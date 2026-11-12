@@ -4,12 +4,12 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T21:05:42.386Z",
-  "contentHash": "fccb6cb3607d3fd318094b8b05d603ee2793064858b8ea2d85f7c397ad7b056c",
+  "updatedAt": "2026-11-12T22:45:08.796Z",
+  "contentHash": "4733bf0209a2bfa06b0629b71bb90d85c8b4e96868033c366f991197397e2c02",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T12:24:28.563Z",
+      "updatedAt": "2026-11-12T14:41:08.896Z",
       "keyFacts": 1
     },
     {
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "30",
+          "value": "31",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -155,7 +155,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "en": {
       "canton": "FR",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "30",
+          "value": "31",
           "note": "from the site’s events calendar"
         }
       ],
@@ -238,7 +238,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -293,7 +293,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "de": {
       "canton": "FR",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "30",
+          "value": "31",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -376,7 +376,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "fr": {
       "canton": "FR",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "30",
+          "value": "31",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -514,7 +514,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     }
   }
 }

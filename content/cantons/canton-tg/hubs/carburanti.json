@@ -4,14 +4,14 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-12T21:05:42.386Z",
-  "contentHash": "6162a262236671f8f9c3bb652e6b1d4056c7b20a338ac203ae5b36821598e63f",
+  "updatedAt": "2026-11-12T23:04:59.612Z",
+  "contentHash": "66733f0da4973d7ed9b99fd1ef330fd594d572a116099549aeefed51fc3ec86a",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-11T14:42:18.156Z",
+      "updatedAt": "2026-11-12T15:33:55.080Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-18T14:42:18.156Z"
+      "carryUntilAt": "2026-11-19T15:33:55.080Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,066 EUR/l",
-              "detail": "media regionale: minimo 2,059 EUR/l, 3 stazioni rilevate",
-              "date": "2026-11-11T14:42:18.156Z"
+              "value": "2,076 EUR/l",
+              "detail": "media regionale: minimo 2,069 EUR/l, 3 stazioni rilevate",
+              "date": "2026-11-12T15:33:55.080Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,326 EUR/l",
-              "detail": "media regionale: minimo 2,319 EUR/l, 3 stazioni rilevate",
-              "date": "2026-11-11T14:42:18.156Z"
+              "value": "2,336 EUR/l",
+              "detail": "media regionale: minimo 2,329 EUR/l, 3 stazioni rilevate",
+              "date": "2026-11-12T15:33:55.080Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-11T14:42:18.156Z"
+          "updatedAt": "2026-11-12T15:33:55.080Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Referendumspublikation budget 2027 frauenfeld",
+          "url": "/articoli-turgovia/referendum-budget-2027-frauenfeld/",
+          "excerpt": "Il documento è disponibile in formato PDF con dimensione di 87 KB; non contiene cifre né voci di spesa specifiche.",
+          "date": "2026-11-12T23:00:04.094Z"
+        },
         {
           "title": "Bad Egelsee: +5 CHF per la sauna dal 2027",
           "url": "/articoli-turgovia/bad-egelsee-supplemento-sauna/",
@@ -94,12 +100,6 @@
           "url": "/articoli-turgovia/turgovia-piano-risparmio-60-milioni/",
           "excerpt": "Il Governo propone 37 misure per stabilizzare le finanze cantonali.",
           "date": "2026-11-03T03:53:14.620Z"
-        },
-        {
-          "title": "Supporto ai datori di lavoro: i servizi nel Turgovia",
-          "url": "/articoli-turgovia/supporto-datori-lavoro-turgovia/",
-          "excerpt": "Le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen offrono assistenza per la ricerca di personale e la gestione delle posizioni vacanti.",
-          "date": "2026-11-03T03:33:21.196Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     },
     "en": {
       "canton": "TG",
@@ -153,23 +153,29 @@
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.066 EUR/l",
-              "detail": "regional average: lowest 2.059 EUR/l, 3 stations surveyed",
-              "date": "2026-11-11T14:42:18.156Z"
+              "value": "2.076 EUR/l",
+              "detail": "regional average: lowest 2.069 EUR/l, 3 stations surveyed",
+              "date": "2026-11-12T15:33:55.080Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.326 EUR/l",
-              "detail": "regional average: lowest 2.319 EUR/l, 3 stations surveyed",
-              "date": "2026-11-11T14:42:18.156Z"
+              "value": "2.336 EUR/l",
+              "detail": "regional average: lowest 2.329 EUR/l, 3 stations surveyed",
+              "date": "2026-11-12T15:33:55.080Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-11T14:42:18.156Z"
+          "updatedAt": "2026-11-12T15:33:55.080Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Referendum publication budget 2027 Frauenfeld",
+          "url": "/en/thurgau-articles/referendum-publication-budget-2027-frauenfeld/",
+          "excerpt": "The document is available in PDF format with a size of 87 KB; it contains neither figures nor specific expense items.",
+          "date": "2026-11-12T23:00:04.094Z"
+        },
         {
           "title": "Bad Egelsee: +5 CHF for the sauna starting in 2027",
           "url": "/en/thurgau-articles/bad-egelsee-sauna-surcharge/",
@@ -193,12 +199,6 @@
           "url": "/en/thurgau-articles/thurgau-savings-plan-60-million/",
           "excerpt": "The Government proposes 37 measures to stabilize cantonal finances.",
           "date": "2026-11-03T03:53:14.620Z"
-        },
-        {
-          "title": "Support for employers: services in Thurgau",
-          "url": "/en/thurgau-articles/employer-support-thurgau/",
-          "excerpt": "The RAV offices in Amriswil, Frauenfeld and Kreuzlingen offer assistance with staff recruitment and the management of vacant positions.",
-          "date": "2026-11-03T03:33:21.196Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     },
     "de": {
       "canton": "TG",
@@ -252,23 +252,29 @@
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.066 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.059 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-11-11T14:42:18.156Z"
+              "value": "2.076 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.069 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-11-12T15:33:55.080Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.326 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.319 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-11-11T14:42:18.156Z"
+              "value": "2.336 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.329 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-11-12T15:33:55.080Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-11T14:42:18.156Z"
+          "updatedAt": "2026-11-12T15:33:55.080Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Referendums-Publikation Budget 2027 Frauenfeld",
+          "url": "/de/thurgau-artikel/referendums-publikation-budget-2027-frauenfeld/",
+          "excerpt": "Das Dokument ist als PDF mit einer Größe von 87 KB verfügbar; es enthält weder Zahlen noch spezifische Ausgabenposten.",
+          "date": "2026-11-12T23:00:04.094Z"
+        },
         {
           "title": "Bad Egelsee: +5 CHF für die Sauna ab 2027",
           "url": "/de/thurgau-artikel/bad-egelsee-sauna-aufpreis/",
@@ -292,12 +298,6 @@
           "url": "/de/thurgau-artikel/thurgau-sparpaket-60-millionen/",
           "excerpt": "Die Regierung schlägt 37 Massnahmen zur Stabilisierung der Kantonsfinanzen vor.",
           "date": "2026-11-03T03:53:14.620Z"
-        },
-        {
-          "title": "Unterstützung für Arbeitgeber: die Dienstleistungen im Thurgau",
-          "url": "/de/thurgau-artikel/arbeitgeber-unterstuetzung-thurgau/",
-          "excerpt": "Die RAV-Standorte in Amriswil, Frauenfeld und Kreuzlingen bieten Unterstützung bei der Personalsuche und der Verwaltung offener Stellen.",
-          "date": "2026-11-03T03:33:21.196Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     },
     "fr": {
       "canton": "TG",
@@ -351,23 +351,29 @@
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,066 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,059 EUR/l, 3 stations relevées",
-              "date": "2026-11-11T14:42:18.156Z"
+              "value": "2,076 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,069 EUR/l, 3 stations relevées",
+              "date": "2026-11-12T15:33:55.080Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,326 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,319 EUR/l, 3 stations relevées",
-              "date": "2026-11-11T14:42:18.156Z"
+              "value": "2,336 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,329 EUR/l, 3 stations relevées",
+              "date": "2026-11-12T15:33:55.080Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-11T14:42:18.156Z"
+          "updatedAt": "2026-11-12T15:33:55.080Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Publication du référendum budget 2027 Frauenfeld",
+          "url": "/fr/articles-thurgovie/publication-du-referendum-budget-2027-frauenfeld/",
+          "excerpt": "Le document est disponible au format PDF et sa taille est de 87 KB ; il ne contient ni chiffres ni postes de dépenses spécifiques.",
+          "date": "2026-11-12T23:00:04.094Z"
+        },
         {
           "title": "Bad Egelsee : +5 CHF pour le sauna à partir de 2027",
           "url": "/fr/articles-thurgovie/bad-egelsee-supplement-sauna/",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-thurgovie/thurgovie-plan-economies-60-millions/",
           "excerpt": "Le Gouvernement propose 37 mesures pour stabiliser les finances cantonales.",
           "date": "2026-11-03T03:53:14.620Z"
-        },
-        {
-          "title": "Soutien aux employeurs : les services en Thurgovie",
-          "url": "/fr/articles-thurgovie/soutien-employeurs-thurgovie/",
-          "excerpt": "Les offices ORP d’Amriswil, Frauenfeld et Kreuzlingen offrent une assistance pour la recherche de personnel et la gestion des postes vacants.",
-          "date": "2026-11-03T03:33:21.196Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     }
   }
 }
