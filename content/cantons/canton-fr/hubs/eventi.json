@@ -4,12 +4,12 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "ece7fbfb7bb3039696b430280bdfd6e2f6ac6e186652bd7d40a8cea7001ff35b",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "323a3fc753f6b5164e7a94629abcdb4d6feccbe64ac7fd67d87dc082d2715542",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T23:36:45.009Z",
+      "updatedAt": "2026-11-11T04:25:04.802Z",
       "keyFacts": 1
     },
     {
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "29",
+          "value": "28",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,18 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Marine Leonardi – Mauvaise graine",
-              "detail": "Equilibre, Fribourg",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/marine-leonardi-mauvaise-graine/"
-            },
-            {
-              "label": "Kiwi Club – Apprentis taxidermistes",
-              "detail": "Fribourg",
-              "date": "2026-11-11",
-              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes-0"
-            },
             {
               "label": "Les voix d’Armand Niquille",
               "detail": "Fribourg",
@@ -96,11 +84,23 @@
               "detail": "Teams",
               "date": "2026-11-17",
               "url": "https://www.fr.ch/essg/evenements/cfc-assc-avec-maturite-integree-presentation-online-via-teams-17-novembre-2026"
+            },
+            {
+              "label": "The Librarians : projection",
+              "detail": "Fribourg",
+              "date": "2026-11-17",
+              "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
+            },
+            {
+              "label": "AUBÉTOILE | SOUND BATH",
+              "detail": "MIAM",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -155,7 +155,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "FR",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "29",
+          "value": "28",
           "note": "from the site’s events calendar"
         }
       ],
@@ -175,18 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Marine Leonardi – Mauvaise graine",
-              "detail": "Equilibre, Fribourg",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/marine-leonardi-mauvaise-graine/"
-            },
-            {
-              "label": "Kiwi Club – Apprentis taxidermistes",
-              "detail": "Fribourg",
-              "date": "2026-11-11",
-              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes-0"
-            },
             {
               "label": "Les voix d’Armand Niquille",
               "detail": "Fribourg",
@@ -234,11 +222,23 @@
               "detail": "Teams",
               "date": "2026-11-17",
               "url": "https://www.fr.ch/essg/evenements/cfc-assc-avec-maturite-integree-presentation-online-via-teams-17-novembre-2026"
+            },
+            {
+              "label": "The Librarians : projection",
+              "detail": "Fribourg",
+              "date": "2026-11-17",
+              "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
+            },
+            {
+              "label": "AUBÉTOILE | SOUND BATH",
+              "detail": "MIAM",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -293,7 +293,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "FR",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "29",
+          "value": "28",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -313,18 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Marine Leonardi – Mauvaise graine",
-              "detail": "Equilibre, Fribourg",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/marine-leonardi-mauvaise-graine/"
-            },
-            {
-              "label": "Kiwi Club – Apprentis taxidermistes",
-              "detail": "Fribourg",
-              "date": "2026-11-11",
-              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes-0"
-            },
             {
               "label": "Les voix d’Armand Niquille",
               "detail": "Fribourg",
@@ -372,11 +360,23 @@
               "detail": "Teams",
               "date": "2026-11-17",
               "url": "https://www.fr.ch/essg/evenements/cfc-assc-avec-maturite-integree-presentation-online-via-teams-17-novembre-2026"
+            },
+            {
+              "label": "The Librarians : projection",
+              "detail": "Fribourg",
+              "date": "2026-11-17",
+              "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
+            },
+            {
+              "label": "AUBÉTOILE | SOUND BATH",
+              "detail": "MIAM",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "FR",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "29",
+          "value": "28",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -451,18 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Marine Leonardi – Mauvaise graine",
-              "detail": "Equilibre, Fribourg",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/marine-leonardi-mauvaise-graine/"
-            },
-            {
-              "label": "Kiwi Club – Apprentis taxidermistes",
-              "detail": "Fribourg",
-              "date": "2026-11-11",
-              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes-0"
-            },
             {
               "label": "Les voix d’Armand Niquille",
               "detail": "Fribourg",
@@ -510,11 +498,23 @@
               "detail": "Teams",
               "date": "2026-11-17",
               "url": "https://www.fr.ch/essg/evenements/cfc-assc-avec-maturite-integree-presentation-online-via-teams-17-novembre-2026"
+            },
+            {
+              "label": "The Librarians : projection",
+              "detail": "Fribourg",
+              "date": "2026-11-17",
+              "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
+            },
+            {
+              "label": "AUBÉTOILE | SOUND BATH",
+              "detail": "MIAM",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "af87634944d31485c4e696277133dcc2a249e7a6b7740149673fadcaad0f0fe9",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "cb8e24dc0321818b1278fb30a6eecf3aceccbf569f9d2c41a77d15effae0172e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T23:36:45.009Z",
+      "updatedAt": "2026-11-11T04:25:04.802Z",
       "keyFacts": 1
     },
     {
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "It's a different story! small hand and BIG HAND",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cest-une-autre-histoire-petite-main-et-grande-main/"
+              "label": "Di-Meh Live Band feat. thaHomey",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/events/music/lausanne/di-meh-live-band-feat-thahomey_AbixUsN"
+            },
+            {
+              "label": "Di-Meh Live Band feat. thaHomey",
+              "detail": "Jumeaux Jazz Club, Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/dimeh-live-band-feat-thahomey/"
+            },
+            {
+              "label": "De l'Europe au Japon: une histoire de l'archéologie",
+              "detail": "Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/de-leurope-au-japon-une-histoire-de-larcheologie/"
+            },
+            {
+              "label": "Visite commentée – Blanc-Gatti. Le peintre des sons",
+              "detail": "Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-blancgatti-le-peintre-des-sons/"
+            },
+            {
+              "label": "Jam Vocale Jazz",
+              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-vocale-jazz_AUKpgk3"
             },
             {
               "label": "Montreux Art Gallery",
-              "detail": "MAG – Montreux Art Gallery, Montreux",
-              "date": "2026-11-11",
+              "detail": "MAG – Montreux Art Gallery, Montreux — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-12",
               "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
             },
             {
               "label": "Montreux Comedy",
-              "detail": "Montreux Comedy Festival, Montreux",
-              "date": "2026-11-11",
+              "detail": "Montreux Comedy Festival, Montreux — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             },
             {
               "label": "Montreux Comedy Festival",
-              "detail": "Théâtre de Beaulieu, Lausanne",
-              "date": "2026-11-11",
+              "detail": "Théâtre de Beaulieu, Lausanne — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
-            },
-            {
-              "label": "Muséothérapie – Quand le musée fait du bien",
-              "detail": "Lausanne",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/museotherapie-quand-le-musee-fait-du-bien/"
-            },
-            {
-              "label": "Comme on quitte un imperméable - Thomas Fersen",
-              "detail": "Théâtre L'Octogonne, Pully",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/evenements/musique/pully/comme-on-quitte-un-impermeable-thomas-fersen_AwpZr5Z"
-            },
-            {
-              "label": "Jam Swing avec le Flying Feet Colletive",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-swing-avec-le-flying-feet-colletive_AZ5ELD4"
             },
             {
               "label": "Caccia al tesoro \"viaggio nel tempo\" - 100 anni di Tribù del Grand Lac",
               "detail": "Tribu Du Grand Lac (TDGL), les scouts de Morges, Morges — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.guidle.com/it/veranstaltungen/tourismus/morges/chasse-au-tresor-le-voyage-temporel-100-ans-de-la-tribu-du-grand-lac_ASPaAYW"
             },
             {
               "label": "Epicoop's Gourmet Saturday",
               "detail": "Vevey — in corso, ultimo giorno: 5 dicembre 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
-            },
-            {
-              "label": "Payerne Fair",
-              "detail": "Comptoir de Payerne, Payerne — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -145,7 +145,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "VD",
@@ -166,69 +166,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "It's a different story! small hand and BIG HAND",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cest-une-autre-histoire-petite-main-et-grande-main/"
+              "label": "Di-Meh Live Band feat. thaHomey",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/events/music/lausanne/di-meh-live-band-feat-thahomey_AbixUsN"
+            },
+            {
+              "label": "Di-Meh Live Band feat. thaHomey",
+              "detail": "Jumeaux Jazz Club, Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/dimeh-live-band-feat-thahomey/"
+            },
+            {
+              "label": "De l'Europe au Japon: une histoire de l'archéologie",
+              "detail": "Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/de-leurope-au-japon-une-histoire-de-larcheologie/"
+            },
+            {
+              "label": "Visite commentée – Blanc-Gatti. Le peintre des sons",
+              "detail": "Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-blancgatti-le-peintre-des-sons/"
+            },
+            {
+              "label": "Jam Vocale Jazz",
+              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-vocale-jazz_AUKpgk3"
             },
             {
               "label": "Montreux Art Gallery",
-              "detail": "MAG – Montreux Art Gallery, Montreux",
-              "date": "2026-11-11",
+              "detail": "MAG – Montreux Art Gallery, Montreux — ongoing, last day: 15 November 2026",
+              "date": "2026-11-12",
               "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
             },
             {
               "label": "Montreux Comedy",
-              "detail": "Montreux Comedy Festival, Montreux",
-              "date": "2026-11-11",
+              "detail": "Montreux Comedy Festival, Montreux — ongoing, last day: 22 November 2026",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             },
             {
               "label": "Montreux Comedy Festival",
-              "detail": "Théâtre de Beaulieu, Lausanne",
-              "date": "2026-11-11",
+              "detail": "Théâtre de Beaulieu, Lausanne — ongoing, last day: 22 November 2026",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
-            },
-            {
-              "label": "Muséothérapie – Quand le musée fait du bien",
-              "detail": "Lausanne",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/museotherapie-quand-le-musee-fait-du-bien/"
-            },
-            {
-              "label": "Comme on quitte un imperméable - Thomas Fersen",
-              "detail": "Théâtre L'Octogonne, Pully",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/evenements/musique/pully/comme-on-quitte-un-impermeable-thomas-fersen_AwpZr5Z"
-            },
-            {
-              "label": "Jam Swing avec le Flying Feet Colletive",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-swing-avec-le-flying-feet-colletive_AZ5ELD4"
             },
             {
               "label": "“Time Travel” Treasure Hunt – 100 Years of the Great Lake Tribe",
               "detail": "Tribu Du Grand Lac (TDGL), les scouts de Morges, Morges — ongoing, last day: 15 November 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.guidle.com/it/veranstaltungen/tourismus/morges/chasse-au-tresor-le-voyage-temporel-100-ans-de-la-tribu-du-grand-lac_ASPaAYW"
             },
             {
               "label": "Epicoop's Gourmet Saturday",
               "detail": "Vevey — ongoing, last day: 5 December 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
-            },
-            {
-              "label": "Payerne Fair",
-              "detail": "Comptoir de Payerne, Payerne — ongoing, last day: 15 November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -273,7 +273,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "VD",
@@ -294,69 +294,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "C'est une autre histoire! petite main et GRANDE MAIN",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cest-une-autre-histoire-petite-main-et-grande-main/"
+              "label": "Di-Meh Live Band feat. thaHomey",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/events/music/lausanne/di-meh-live-band-feat-thahomey_AbixUsN"
+            },
+            {
+              "label": "Di-Meh Live Band feat. thaHomey",
+              "detail": "Jumeaux Jazz Club, Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/dimeh-live-band-feat-thahomey/"
+            },
+            {
+              "label": "De l'Europe au Japon: une histoire de l'archéologie",
+              "detail": "Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/de-leurope-au-japon-une-histoire-de-larcheologie/"
+            },
+            {
+              "label": "Visite commentée – Blanc-Gatti. Le peintre des sons",
+              "detail": "Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-blancgatti-le-peintre-des-sons/"
+            },
+            {
+              "label": "Jam Vocale Jazz",
+              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-vocale-jazz_AUKpgk3"
             },
             {
               "label": "Montreux Art Gallery",
-              "detail": "MAG – Montreux Art Gallery, Montreux",
-              "date": "2026-11-11",
+              "detail": "MAG – Montreux Art Gallery, Montreux — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-12",
               "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
             },
             {
               "label": "Montreux Comedy",
-              "detail": "Montreux Comedy Festival, Montreux",
-              "date": "2026-11-11",
+              "detail": "Montreux Comedy Festival, Montreux — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             },
             {
               "label": "Montreux Comedy Festival",
-              "detail": "Théâtre de Beaulieu, Lausanne",
-              "date": "2026-11-11",
+              "detail": "Théâtre de Beaulieu, Lausanne — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
-            },
-            {
-              "label": "Muséothérapie – Quand le musée fait du bien",
-              "detail": "Lausanne",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/museotherapie-quand-le-musee-fait-du-bien/"
-            },
-            {
-              "label": "Comme on quitte un imperméable - Thomas Fersen",
-              "detail": "Théâtre L'Octogonne, Pully",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/evenements/musique/pully/comme-on-quitte-un-impermeable-thomas-fersen_AwpZr5Z"
-            },
-            {
-              "label": "Jam Swing avec le Flying Feet Colletive",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-swing-avec-le-flying-feet-colletive_AZ5ELD4"
             },
             {
               "label": "Schnitzeljagd „Die Zeitreise“ – 100 Jahre des Stammes vom Grossen See",
               "detail": "Tribu Du Grand Lac (TDGL), les scouts de Morges, Morges — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.guidle.com/it/veranstaltungen/tourismus/morges/chasse-au-tresor-le-voyage-temporel-100-ans-de-la-tribu-du-grand-lac_ASPaAYW"
             },
             {
               "label": "Gourmet-Samstag von Epicoop",
               "detail": "Vevey — läuft, letzter Tag: 5. Dezember 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
-            },
-            {
-              "label": "Gewerbeausstellung von Payerne",
-              "detail": "Comptoir de Payerne, Payerne — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -401,7 +401,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "VD",
@@ -422,69 +422,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "C'est une autre histoire ! petite main et GRANDE MAIN",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cest-une-autre-histoire-petite-main-et-grande-main/"
+              "label": "Di-Meh Live Band feat. thaHomey",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/events/music/lausanne/di-meh-live-band-feat-thahomey_AbixUsN"
+            },
+            {
+              "label": "Di-Meh Live Band feat. thaHomey",
+              "detail": "Jumeaux Jazz Club, Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/dimeh-live-band-feat-thahomey/"
+            },
+            {
+              "label": "De l'Europe au Japon: une histoire de l'archéologie",
+              "detail": "Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/de-leurope-au-japon-une-histoire-de-larcheologie/"
+            },
+            {
+              "label": "Visite commentée – Blanc-Gatti. Le peintre des sons",
+              "detail": "Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-blancgatti-le-peintre-des-sons/"
+            },
+            {
+              "label": "Jam Vocale Jazz",
+              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-vocale-jazz_AUKpgk3"
             },
             {
               "label": "Montreux Art Gallery",
-              "detail": "MAG – Montreux Art Gallery, Montreux",
-              "date": "2026-11-11",
+              "detail": "MAG – Montreux Art Gallery, Montreux — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-12",
               "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
             },
             {
               "label": "Montreux Comedy",
-              "detail": "Montreux Comedy Festival, Montreux",
-              "date": "2026-11-11",
+              "detail": "Montreux Comedy Festival, Montreux — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             },
             {
               "label": "Montreux Comedy Festival",
-              "detail": "Théâtre de Beaulieu, Lausanne",
-              "date": "2026-11-11",
+              "detail": "Théâtre de Beaulieu, Lausanne — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
-            },
-            {
-              "label": "Muséothérapie – Quand le musée fait du bien",
-              "detail": "Lausanne",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/museotherapie-quand-le-musee-fait-du-bien/"
-            },
-            {
-              "label": "Comme on quitte un imperméable - Thomas Fersen",
-              "detail": "Théâtre L'Octogonne, Pully",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/evenements/musique/pully/comme-on-quitte-un-impermeable-thomas-fersen_AwpZr5Z"
-            },
-            {
-              "label": "Jam Swing avec le Flying Feet Colletive",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-swing-avec-le-flying-feet-colletive_AZ5ELD4"
             },
             {
               "label": "Chasse au trésor \"Le voyage temporel\"-100 ans de la Tribu Du Grand Lac",
               "detail": "Tribu Du Grand Lac (TDGL), les scouts de Morges, Morges — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.guidle.com/it/veranstaltungen/tourismus/morges/chasse-au-tresor-le-voyage-temporel-100-ans-de-la-tribu-du-grand-lac_ASPaAYW"
             },
             {
               "label": "Samedi Gourmand d’Epicoop",
               "detail": "Vevey — en cours, dernier jour : 5 décembre 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/epicoops-gourmet-saturday-1/"
-            },
-            {
-              "label": "Comptoir de Payerne",
-              "detail": "Comptoir de Payerne, Payerne — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/payerne-fair/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -529,7 +529,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }

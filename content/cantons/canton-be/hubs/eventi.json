@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "9f05e98d7a8b89d1cda5245bf83440b0beb61ac01020d865f6482ac4caa9e49e",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "89f4d85e383829db84723322121ebe1b6c74222c17569e26b202b60bf9be366e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T23:36:45.009Z",
+      "updatedAt": "2026-11-11T04:25:04.802Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "200",
+          "value": "199",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Konzert Jake Manzi live & Pie Night",
-              "detail": "Kandersteg",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzert-jake-manzi-live-pie-night/"
+              "label": "La librairie est invitée à la Couronne, coeur du Grand Chasseral pour l'apéro d'automne",
+              "detail": "Tavannes",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-librairie-est-invitee-a-la-couronne-coeur-du-grand-chasseral-pour-lapero-dautomne/"
             },
             {
-              "label": "Sound and Dine",
-              "detail": "3775 Lenk im Simmental, Lenk",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
+              "label": "Infothek Bern West",
+              "detail": "Jugendhaus G23, Bern",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/infothek-bern-west_A5Cxn62"
             },
             {
-              "label": "Midi musique et mots 1",
-              "detail": "Nebia",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/biel-bienne/midi-musique-et-mots-1_AauhVXp"
+              "label": "Hülsenfrüchte Workshop",
+              "detail": "Pieterlen",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/huelsenfruechte-workshop/"
             },
             {
-              "label": "Nachmittag für Seniorinnen und Senioren",
-              "detail": "Ref. Kirchgemeinde Diemtigen, Diemtigen",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nachmittag-fuer-seniorinnen-und-senioren/"
+              "label": "Philosophisches Speed-Dating",
+              "detail": "Atomic Café, Biel/Bienne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/philosophisches-speed-dating/"
             },
             {
-              "label": "\"Gut in Schuss\". Sport e storia. Pista di partecipazione \"Peng\"",
-              "detail": "Schweizer Schützenmuseum",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/gut-in-schuss-sport-und-geschichte-mitmachspur-peng_ArsWa4y"
+              "label": "Kultur im Keller",
+              "detail": "MARKTGASSE18, Sumiswald",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sumiswald/kultur-im-keller_ANbqSiu"
             },
             {
-              "label": "Jugendtreff Modi*hus Bienzguet",
-              "detail": "Modi*hus Bienzguet",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
+              "label": "Rolf Schmid - I MAG EIFACH NÜMA",
+              "detail": "Kupferschmiede Langnau",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rolf-schmid-i-mag-eifach-nuema-6/"
             },
             {
-              "label": "Jugendtreff G23",
-              "detail": "Jugendhaus G23",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
+              "label": "Sonderanlass: Ursus Wehrli – «Eine Performative Tagebuch-Lesung mit Dingen»",
+              "detail": "Spiez",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonderanlass-ursus-wehrli-eine-performative-tagebuch-lesung-mit-dingen/"
             },
             {
-              "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "Casino Bern, Bern",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/vivaldi-die-vier-jahreszeiten_AvffXdT"
+              "label": "VeV Beratungstreff Bern",
+              "detail": "Kapitel Bollwerk, Bern",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/vev-beratungstreff-bern_AXhXKWP"
             },
             {
-              "label": "Jazz mit «Blossoming Songs»",
-              "detail": "Restaurant LA VIE",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jazz-mit-blossoming-songs_AgKvH5J"
+              "label": "Ritschi & Hunzi (Plüsch) - «Tagebuech»",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/ritschi-und-hunzi-pluesch-tagebuech_AFYBQya"
             },
             {
-              "label": "Fasnachtseröffnung",
-              "detail": "Dorfplatz - Seeterrasse",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fasnachtseroeffnung/"
+              "label": "Adrien Bordone: Juste avant la fin (CH 2026)",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adrien-bordone-juste-avant-la-fin-ch-2026/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "200",
+          "value": "199",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Konzert Jake Manzi live & Pie Night",
-              "detail": "Kandersteg",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzert-jake-manzi-live-pie-night/"
+              "label": "La librairie est invitée à la Couronne, coeur du Grand Chasseral pour l'apéro d'automne",
+              "detail": "Tavannes",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-librairie-est-invitee-a-la-couronne-coeur-du-grand-chasseral-pour-lapero-dautomne/"
             },
             {
-              "label": "Sound and Dine",
-              "detail": "3775 Lenk im Simmental, Lenk",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
+              "label": "Infothek Bern West",
+              "detail": "Jugendhaus G23, Bern",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/infothek-bern-west_A5Cxn62"
             },
             {
-              "label": "Midi musique et mots 1",
-              "detail": "Nebia",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/biel-bienne/midi-musique-et-mots-1_AauhVXp"
+              "label": "Hülsenfrüchte Workshop",
+              "detail": "Pieterlen",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/huelsenfruechte-workshop/"
             },
             {
-              "label": "Nachmittag für Seniorinnen und Senioren",
-              "detail": "Ref. Kirchgemeinde Diemtigen, Diemtigen",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nachmittag-fuer-seniorinnen-und-senioren/"
+              "label": "Philosophisches Speed-Dating",
+              "detail": "Atomic Café, Biel/Bienne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/philosophisches-speed-dating/"
             },
             {
-              "label": "\"Gut in Schuss\". Sport and history. Participation track \"Peng\"",
-              "detail": "Schweizer Schützenmuseum",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/gut-in-schuss-sport-und-geschichte-mitmachspur-peng_ArsWa4y"
+              "label": "Kultur im Keller",
+              "detail": "MARKTGASSE18, Sumiswald",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sumiswald/kultur-im-keller_ANbqSiu"
             },
             {
-              "label": "Jugendtreff Modi*hus Bienzguet",
-              "detail": "Modi*hus Bienzguet",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
+              "label": "Rolf Schmid - I MAG EIFACH NÜMA",
+              "detail": "Kupferschmiede Langnau",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rolf-schmid-i-mag-eifach-nuema-6/"
             },
             {
-              "label": "Jugendtreff G23",
-              "detail": "Jugendhaus G23",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
+              "label": "Sonderanlass: Ursus Wehrli – «Eine Performative Tagebuch-Lesung mit Dingen»",
+              "detail": "Spiez",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonderanlass-ursus-wehrli-eine-performative-tagebuch-lesung-mit-dingen/"
             },
             {
-              "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "Casino Bern, Bern",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/vivaldi-die-vier-jahreszeiten_AvffXdT"
+              "label": "VeV Beratungstreff Bern",
+              "detail": "Kapitel Bollwerk, Bern",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/vev-beratungstreff-bern_AXhXKWP"
             },
             {
-              "label": "Jazz mit «Blossoming Songs»",
-              "detail": "Restaurant LA VIE",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jazz-mit-blossoming-songs_AgKvH5J"
+              "label": "Ritschi & Hunzi (Plüsch) - «Tagebuech»",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/ritschi-und-hunzi-pluesch-tagebuech_AFYBQya"
             },
             {
-              "label": "Fasnachtseröffnung",
-              "detail": "Dorfplatz - Seeterrasse",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fasnachtseroeffnung/"
+              "label": "Adrien Bordone: Juste avant la fin (CH 2026)",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adrien-bordone-juste-avant-la-fin-ch-2026/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "200",
+          "value": "199",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Konzert Jake Manzi live & Pie Night",
-              "detail": "Kandersteg",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzert-jake-manzi-live-pie-night/"
+              "label": "La librairie est invitée à la Couronne, coeur du Grand Chasseral pour l'apéro d'automne",
+              "detail": "Tavannes",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-librairie-est-invitee-a-la-couronne-coeur-du-grand-chasseral-pour-lapero-dautomne/"
             },
             {
-              "label": "Sound and Dine",
-              "detail": "3775 Lenk im Simmental, Lenk",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
+              "label": "Infothek Bern West",
+              "detail": "Jugendhaus G23, Bern",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/infothek-bern-west_A5Cxn62"
             },
             {
-              "label": "Midi musique et mots 1",
-              "detail": "Nebia",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/biel-bienne/midi-musique-et-mots-1_AauhVXp"
+              "label": "Hülsenfrüchte Workshop",
+              "detail": "Pieterlen",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/huelsenfruechte-workshop/"
             },
             {
-              "label": "Nachmittag für Seniorinnen und Senioren",
-              "detail": "Ref. Kirchgemeinde Diemtigen, Diemtigen",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nachmittag-fuer-seniorinnen-und-senioren/"
+              "label": "Philosophisches Speed-Dating",
+              "detail": "Atomic Café, Biel/Bienne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/philosophisches-speed-dating/"
             },
             {
-              "label": "\"Gut in Schuss\". Sport und Geschichte. Mitmachspur \"Peng\"",
-              "detail": "Schweizer Schützenmuseum",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/gut-in-schuss-sport-und-geschichte-mitmachspur-peng_ArsWa4y"
+              "label": "Kultur im Keller",
+              "detail": "MARKTGASSE18, Sumiswald",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sumiswald/kultur-im-keller_ANbqSiu"
             },
             {
-              "label": "Jugendtreff Modi*hus Bienzguet",
-              "detail": "Modi*hus Bienzguet",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
+              "label": "Rolf Schmid - I MAG EIFACH NÜMA",
+              "detail": "Kupferschmiede Langnau",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rolf-schmid-i-mag-eifach-nuema-6/"
             },
             {
-              "label": "Jugendtreff G23",
-              "detail": "Jugendhaus G23",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
+              "label": "Sonderanlass: Ursus Wehrli – «Eine Performative Tagebuch-Lesung mit Dingen»",
+              "detail": "Spiez",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonderanlass-ursus-wehrli-eine-performative-tagebuch-lesung-mit-dingen/"
             },
             {
-              "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "Casino Bern, Bern",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/vivaldi-die-vier-jahreszeiten_AvffXdT"
+              "label": "VeV Beratungstreff Bern",
+              "detail": "Kapitel Bollwerk, Bern",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/vev-beratungstreff-bern_AXhXKWP"
             },
             {
-              "label": "Jazz mit «Blossoming Songs»",
-              "detail": "Restaurant LA VIE",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jazz-mit-blossoming-songs_AgKvH5J"
+              "label": "Ritschi & Hunzi (Plüsch) - «Tagebuech»",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/ritschi-und-hunzi-pluesch-tagebuech_AFYBQya"
             },
             {
-              "label": "Fasnachtseröffnung",
-              "detail": "Dorfplatz - Seeterrasse",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fasnachtseroeffnung/"
+              "label": "Adrien Bordone: Juste avant la fin (CH 2026)",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adrien-bordone-juste-avant-la-fin-ch-2026/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "200",
+          "value": "199",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Konzert Jake Manzi live & Pie Night",
-              "detail": "Kandersteg",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/konzert-jake-manzi-live-pie-night/"
+              "label": "La librairie est invitée à la Couronne, coeur du Grand Chasseral pour l'apéro d'automne",
+              "detail": "Tavannes",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-librairie-est-invitee-a-la-couronne-coeur-du-grand-chasseral-pour-lapero-dautomne/"
             },
             {
-              "label": "Sound and Dine",
-              "detail": "3775 Lenk im Simmental, Lenk",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
+              "label": "Infothek Bern West",
+              "detail": "Jugendhaus G23, Bern",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/infothek-bern-west_A5Cxn62"
             },
             {
-              "label": "Midi musique et mots 1",
-              "detail": "Nebia",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/biel-bienne/midi-musique-et-mots-1_AauhVXp"
+              "label": "Hülsenfrüchte Workshop",
+              "detail": "Pieterlen",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/huelsenfruechte-workshop/"
             },
             {
-              "label": "Nachmittag für Seniorinnen und Senioren",
-              "detail": "Ref. Kirchgemeinde Diemtigen, Diemtigen",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nachmittag-fuer-seniorinnen-und-senioren/"
+              "label": "Speed-dating philosophique",
+              "detail": "Atomic Café, Biel/Bienne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/philosophisches-speed-dating/"
             },
             {
-              "label": "\"Gut in Schuss\". Sport et histoire. Piste participative \"Peng\".",
-              "detail": "Schweizer Schützenmuseum",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/gut-in-schuss-sport-und-geschichte-mitmachspur-peng_ArsWa4y"
+              "label": "Kultur im Keller",
+              "detail": "MARKTGASSE18, Sumiswald",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sumiswald/kultur-im-keller_ANbqSiu"
             },
             {
-              "label": "Jugendtreff Modi*hus Bienzguet",
-              "detail": "Modi*hus Bienzguet",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
+              "label": "Rolf Schmid - I MAG EIFACH NÜMA",
+              "detail": "Kupferschmiede Langnau",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rolf-schmid-i-mag-eifach-nuema-6/"
             },
             {
-              "label": "Jugendtreff G23",
-              "detail": "Jugendhaus G23",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
+              "label": "Sonderanlass: Ursus Wehrli – «Eine Performative Tagebuch-Lesung mit Dingen»",
+              "detail": "Spiez",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonderanlass-ursus-wehrli-eine-performative-tagebuch-lesung-mit-dingen/"
             },
             {
-              "label": "VIVALDI - Die vier Jahreszeiten",
-              "detail": "Casino Bern, Bern",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/vivaldi-die-vier-jahreszeiten_AvffXdT"
+              "label": "VeV Beratungstreff Bern",
+              "detail": "Kapitel Bollwerk, Bern",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/vev-beratungstreff-bern_AXhXKWP"
             },
             {
-              "label": "Jazz mit «Blossoming Songs»",
-              "detail": "Restaurant LA VIE",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jazz-mit-blossoming-songs_AgKvH5J"
+              "label": "Ritschi & Hunzi (Plüsch) - «Tagebuech»",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/ritschi-und-hunzi-pluesch-tagebuech_AFYBQya"
             },
             {
-              "label": "Fasnachtseröffnung",
-              "detail": "Dorfplatz - Seeterrasse",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fasnachtseroeffnung/"
+              "label": "Adrien Bordone: Juste avant la fin (CH 2026)",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adrien-bordone-juste-avant-la-fin-ch-2026/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }

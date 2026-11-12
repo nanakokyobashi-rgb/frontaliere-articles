@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T16:22:46.747Z",
-  "contentHash": "a61e3d234227dd9ade0b3e69a03b2696b5197eebc1857338935dbe68fb41bb41",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "d46da31830a5f716270153cc07e874f8037bdcf9814ff6cce351d941e2a13b49",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "15",
+          "value": "14",
           "note": "segnalazioni aggiornate: 10 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "16",
+          "value": "15",
           "note": "segnalazioni aggiornate: 10 novembre 2026"
         }
       ],
@@ -141,12 +141,6 @@
               "date": "2026-10-27T17:05:00.000Z"
             },
             {
-              "label": "A1H Hardturm -> Diramazione Limmattal tra Parcheggio Oberengstringen E Raccordo autostradale Diramazione Limmattal Situazione: chiusa cantiere, lunghezza [km] 0.3 Limitazione del traffico: corsia…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 12 novembre 2026",
-              "date": "2026-11-04T11:40:00.000Z"
-            },
-            {
               "label": "A4 Winterthur <-> Schaffhausen tra Raccordo autostradale Diramazione Mutzentäli E Svincolo autostradale Flurlingen Situazione: chiusa cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 11 dicembre 2026",
@@ -157,6 +151,12 @@
               "value": "Chiusura",
               "detail": "fine prevista: 16 novembre 2026",
               "date": "2026-11-09T14:05:00.000Z"
+            },
+            {
+              "label": "A3 Basel -> Chur Svincolo autostradale Urdorf Nord Situazione: uscita chiusa cantiere, lunghezza [km] 0.6",
+              "value": "Chiusura",
+              "detail": "fine prevista: 19 novembre 2026",
+              "date": "2026-11-09T14:06:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -282,7 +282,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "ZH",
@@ -297,12 +297,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "15",
+          "value": "14",
           "note": "reports as of 10 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "16",
+          "value": "15",
           "note": "reports as of 10 November 2026"
         }
       ],
@@ -401,12 +401,6 @@
               "date": "2026-10-27T17:05:00.000Z"
             },
             {
-              "label": "A1H Hardturm -> Diramazione Limmattal tra Parcheggio Oberengstringen E Raccordo autostradale Diramazione Limmattal Situazione: chiusa cantiere, lunghezza [km] 0.3 Limitazione del traffico: corsia…",
-              "value": "Closure",
-              "detail": "until 12 November 2026",
-              "date": "2026-11-04T11:40:00.000Z"
-            },
-            {
               "label": "A4 Winterthur <-> Schaffhausen tra Raccordo autostradale Diramazione Mutzentäli E Svincolo autostradale Flurlingen Situazione: chiusa cantiere",
               "value": "Closure",
               "detail": "until 11 December 2026",
@@ -417,6 +411,12 @@
               "value": "Closure",
               "detail": "until 16 November 2026",
               "date": "2026-11-09T14:05:00.000Z"
+            },
+            {
+              "label": "A3 Basel -> Chur Svincolo autostradale Urdorf Nord Situazione: uscita chiusa cantiere, lunghezza [km] 0.6",
+              "value": "Closure",
+              "detail": "until 19 November 2026",
+              "date": "2026-11-09T14:06:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -542,7 +542,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "ZH",
@@ -557,12 +557,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "15",
+          "value": "14",
           "note": "Meldungen vom 10. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "16",
+          "value": "15",
           "note": "Meldungen vom 10. November 2026"
         }
       ],
@@ -661,12 +661,6 @@
               "date": "2026-10-27T17:05:00.000Z"
             },
             {
-              "label": "A1H Hardturm -> Verzweigung Limmattal zwischen Parkplatz Oberengstringen und Autobahnkreuz Verzweigung Limmattal Sachlage: Strecke gesperrt Baustelle, Länge [km] 0.3 Verkehrsführung: Fahrstreifen…",
-              "value": "Sperrung",
-              "detail": "bis 12. November 2026",
-              "date": "2026-11-04T11:40:00.000Z"
-            },
-            {
               "label": "A4 Winterthur <-> Schaffhausen zwischen Autobahndreieck Verzweigung Mutzentäli und Anschluss Flurlingen Sachlage: Strecke gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 11. Dezember 2026",
@@ -677,6 +671,12 @@
               "value": "Sperrung",
               "detail": "bis 16. November 2026",
               "date": "2026-11-09T14:05:00.000Z"
+            },
+            {
+              "label": "A3 Basel -> Chur Anschluss Urdorf-Nord Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.6",
+              "value": "Sperrung",
+              "detail": "bis 19. November 2026",
+              "date": "2026-11-09T14:06:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -802,7 +802,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "ZH",
@@ -817,12 +817,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "15",
+          "value": "14",
           "note": "signalements au 10 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "16",
+          "value": "15",
           "note": "signalements au 10 novembre 2026"
         }
       ],
@@ -921,12 +921,6 @@
               "date": "2026-10-27T17:05:00.000Z"
             },
             {
-              "label": "A1H Hardturm -> Echangeur de Limmattal entre Parking Oberengstringen et Echangeur Echangeur de Limmattal Situation: fermé travaux, longueur [km] 0.3 Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 12 novembre 2026",
-              "date": "2026-11-04T11:40:00.000Z"
-            },
-            {
               "label": "A4 Winterthur <-> Schaffhouse entre Echangeur Echangeur de Mutzentäli et Jonction autoroutière Flurlingen Situation: fermé travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 11 décembre 2026",
@@ -937,6 +931,12 @@
               "value": "Fermeture",
               "detail": "jusqu’au 16 novembre 2026",
               "date": "2026-11-09T14:05:00.000Z"
+            },
+            {
+              "label": "A3 Bâle -> Coire Jonction autoroutière Urdorf-Nord Situation: sortie fermée travaux, longueur [km] 0.6",
+              "value": "Fermeture",
+              "detail": "jusqu’au 19 novembre 2026",
+              "date": "2026-11-09T14:06:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -1062,7 +1062,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }

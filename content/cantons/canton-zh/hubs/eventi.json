@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "5f6d958e8e3a8e19552d7287c8733941ea0fd28903f76440803975ac844fbf93",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "98e7443528a4daf9714fee1ef4f0e820a7f69423c07b845cb8ff313d9fb4a68e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T23:36:45.009Z",
+      "updatedAt": "2026-11-11T04:25:04.802Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "349",
+          "value": "343",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,68 +33,68 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Kinderworkshop am Mittwoch",
+              "label": "Fondue Huus Sihlcity",
+              "detail": "Fondue Huus Sihlcity, Zürich",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fondue-huus-sihlcity/"
+            },
+            {
+              "label": "Kerzenziehen",
+              "detail": "Urdorf",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-3/"
+            },
+            {
+              "label": "move&groove - jonglieren",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/events/sports/naenikon/move-und-groove-jonglieren_AsWLqXn"
+            },
+            {
+              "label": "21st Annual Meeting of SFI",
+              "detail": "Lake Side",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/annual-meeting-of-sfi_ADNjYm2"
+            },
+            {
+              "label": "21st Annual Meeting of SFI",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kinderworkshop-am-mittwoch/"
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/annual-meeting-of-sfi/"
             },
             {
-              "label": "MODERNES HOCHSCHULMANAGEMENT",
-              "detail": "Careum",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/modernes-hochschulmanagement_A7dFNbQ"
+              "label": "Dritte Swiss AgeTech Konferenz 2026",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dritte-swiss-agetech-konferenz-2026/"
             },
             {
-              "label": "Truur-Kafi",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/gewerbe/rikon-im-toesstal/truur-kafi_AS9T2E1"
+              "label": "Mütter- und Väterberatung",
+              "detail": "Familienverein Pfäffikon, Pfäffikon",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_A9rrNDC"
             },
             {
-              "label": "Treff 8603",
-              "detail": "Bibliothek Schwerzenbach, Schwerzenbach",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schwerzenbach/treff-8603_A5YgvH4"
+              "label": "\"Darf ich bitten?\" Tanznachmittag für Alle",
+              "detail": "Freizeitanlage Winterthur Seen, Winterthur",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/darf-ich-bitten-tanznachmittag_AUHFnTN"
             },
             {
               "label": "Café International",
-              "detail": "Uitikon",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/uitikon-waldegg/cafe-international_AQNLVGL"
+              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/cafe-international_AWFZVmU"
             },
             {
-              "label": "Mittagstisch/Organisiert vom Frauenverein",
-              "detail": "Urdorf",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittagstischorganisiert-vom-frauenverein-8/"
-            },
-            {
-              "label": "Larjssa Terra mit allen Sinnen erLeben..",
-              "detail": "Kloten",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/kurse/kloten/larjssa-terra-mit-allen-sinnen-erleben_A946Sv7"
-            },
-            {
-              "label": "Tanznachmittag, Livemusik vom Duo Hall",
-              "detail": "Kloten",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanznachmittag-livemusik-vom-duo-hall/"
-            },
-            {
-              "label": "Aus dem Geschichtenkoffer",
-              "detail": "Mönchaltorf",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aus-dem-geschichtenkoffer/"
-            },
-            {
-              "label": "Bilderbuchgeschichten",
-              "detail": "Urdorf",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bilderbuchgeschichten-6/"
+              "label": "Räbeliechtliumzug Fehraltorf",
+              "detail": "Evang.-ref. Kirche Fehraltorf, Fehraltorf",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/raebeliechtliumzug-fehraltorf/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -122,7 +122,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "ZH",
@@ -132,7 +132,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "349",
+          "value": "343",
           "note": "from the site’s events calendar"
         }
       ],
@@ -143,68 +143,68 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Kinderworkshop am Mittwoch",
+              "label": "Fondue Huus Sihlcity",
+              "detail": "Fondue Huus Sihlcity, Zürich",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fondue-huus-sihlcity/"
+            },
+            {
+              "label": "Kerzenziehen",
+              "detail": "Urdorf",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-3/"
+            },
+            {
+              "label": "move&groove - jonglieren",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/events/sports/naenikon/move-und-groove-jonglieren_AsWLqXn"
+            },
+            {
+              "label": "21st Annual Meeting of SFI",
+              "detail": "Lake Side",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/annual-meeting-of-sfi_ADNjYm2"
+            },
+            {
+              "label": "21st Annual Meeting of SFI",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kinderworkshop-am-mittwoch/"
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/annual-meeting-of-sfi/"
             },
             {
-              "label": "MODERNES HOCHSCHULMANAGEMENT",
-              "detail": "Careum",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/modernes-hochschulmanagement_A7dFNbQ"
+              "label": "Dritte Swiss AgeTech Konferenz 2026",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dritte-swiss-agetech-konferenz-2026/"
             },
             {
-              "label": "Truur-Kafi",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/gewerbe/rikon-im-toesstal/truur-kafi_AS9T2E1"
+              "label": "Mütter- und Väterberatung",
+              "detail": "Familienverein Pfäffikon, Pfäffikon",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_A9rrNDC"
             },
             {
-              "label": "Treff 8603",
-              "detail": "Bibliothek Schwerzenbach, Schwerzenbach",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schwerzenbach/treff-8603_A5YgvH4"
+              "label": "\"Darf ich bitten?\" Tanznachmittag für Alle",
+              "detail": "Freizeitanlage Winterthur Seen, Winterthur",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/darf-ich-bitten-tanznachmittag_AUHFnTN"
             },
             {
-              "label": "Cafe International",
-              "detail": "Uitikon",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/uitikon-waldegg/cafe-international_AQNLVGL"
+              "label": "Café International",
+              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/cafe-international_AWFZVmU"
             },
             {
-              "label": "Mittagstisch/Organisiert vom Frauenverein",
-              "detail": "Urdorf",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittagstischorganisiert-vom-frauenverein-8/"
-            },
-            {
-              "label": "Larjssa Terra mit allen Sinnen erLeben..",
-              "detail": "Kloten",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/kurse/kloten/larjssa-terra-mit-allen-sinnen-erleben_A946Sv7"
-            },
-            {
-              "label": "Tanznachmittag, Livemusik vom Duo Hall",
-              "detail": "Kloten",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanznachmittag-livemusik-vom-duo-hall/"
-            },
-            {
-              "label": "Aus dem Geschichtenkoffer",
-              "detail": "Mönchaltorf",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aus-dem-geschichtenkoffer/"
-            },
-            {
-              "label": "Bilderbuchgeschichten",
-              "detail": "Urdorf",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bilderbuchgeschichten-6/"
+              "label": "Räbeliechtliumzug Fehraltorf",
+              "detail": "Evang.-ref. Kirche Fehraltorf, Fehraltorf",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/raebeliechtliumzug-fehraltorf/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -232,7 +232,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "ZH",
@@ -242,7 +242,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "349",
+          "value": "343",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -253,68 +253,68 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Kinderworkshop am Mittwoch",
+              "label": "Fondue Huus Sihlcity",
+              "detail": "Fondue Huus Sihlcity, Zürich",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fondue-huus-sihlcity/"
+            },
+            {
+              "label": "Kerzenziehen",
+              "detail": "Urdorf",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-3/"
+            },
+            {
+              "label": "move&groove - jonglieren",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/events/sports/naenikon/move-und-groove-jonglieren_AsWLqXn"
+            },
+            {
+              "label": "21st Annual Meeting of SFI",
+              "detail": "Lake Side",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/annual-meeting-of-sfi_ADNjYm2"
+            },
+            {
+              "label": "21st Annual Meeting of SFI",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kinderworkshop-am-mittwoch/"
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/annual-meeting-of-sfi/"
             },
             {
-              "label": "MODERNES HOCHSCHULMANAGEMENT",
-              "detail": "Careum",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/modernes-hochschulmanagement_A7dFNbQ"
+              "label": "Dritte Swiss AgeTech Konferenz 2026",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dritte-swiss-agetech-konferenz-2026/"
             },
             {
-              "label": "Truur-Kafi",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/gewerbe/rikon-im-toesstal/truur-kafi_AS9T2E1"
+              "label": "Mütter- und Väterberatung",
+              "detail": "Familienverein Pfäffikon, Pfäffikon",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_A9rrNDC"
             },
             {
-              "label": "Treff 8603",
-              "detail": "Bibliothek Schwerzenbach, Schwerzenbach",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schwerzenbach/treff-8603_A5YgvH4"
+              "label": "\"Darf ich bitten?\" Tanznachmittag für Alle",
+              "detail": "Freizeitanlage Winterthur Seen, Winterthur",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/darf-ich-bitten-tanznachmittag_AUHFnTN"
             },
             {
-              "label": "Cafe International",
-              "detail": "Uitikon",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/uitikon-waldegg/cafe-international_AQNLVGL"
+              "label": "Café International",
+              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/cafe-international_AWFZVmU"
             },
             {
-              "label": "Mittagstisch/Organisiert vom Frauenverein",
-              "detail": "Urdorf",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittagstischorganisiert-vom-frauenverein-8/"
-            },
-            {
-              "label": "Larjssa Terra mit allen Sinnen erLeben..",
-              "detail": "Kloten",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/kurse/kloten/larjssa-terra-mit-allen-sinnen-erleben_A946Sv7"
-            },
-            {
-              "label": "Tanznachmittag, Livemusik vom Duo Hall",
-              "detail": "Kloten",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanznachmittag-livemusik-vom-duo-hall/"
-            },
-            {
-              "label": "Aus dem Geschichtenkoffer",
-              "detail": "Mönchaltorf",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aus-dem-geschichtenkoffer/"
-            },
-            {
-              "label": "Bilderbuchgeschichten",
-              "detail": "Urdorf",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bilderbuchgeschichten-6/"
+              "label": "Räbeliechtliumzug Fehraltorf",
+              "detail": "Evang.-ref. Kirche Fehraltorf, Fehraltorf",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/raebeliechtliumzug-fehraltorf/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -342,7 +342,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "ZH",
@@ -352,7 +352,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "349",
+          "value": "343",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -363,68 +363,68 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Kinderworkshop am Mittwoch",
+              "label": "Fondue Huus Sihlcity",
+              "detail": "Fondue Huus Sihlcity, Zürich",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fondue-huus-sihlcity/"
+            },
+            {
+              "label": "Kerzenziehen",
+              "detail": "Urdorf",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-3/"
+            },
+            {
+              "label": "move&groove - jonglieren",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/events/sports/naenikon/move-und-groove-jonglieren_AsWLqXn"
+            },
+            {
+              "label": "21st Annual Meeting of SFI",
+              "detail": "Lake Side",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/annual-meeting-of-sfi_ADNjYm2"
+            },
+            {
+              "label": "21st Annual Meeting of SFI",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kinderworkshop-am-mittwoch/"
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/annual-meeting-of-sfi/"
             },
             {
-              "label": "MODERNES HOCHSCHULMANAGEMENT",
-              "detail": "Careum",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/modernes-hochschulmanagement_A7dFNbQ"
+              "label": "Dritte Swiss AgeTech Konferenz 2026",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dritte-swiss-agetech-konferenz-2026/"
             },
             {
-              "label": "Truur-Kafi",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/gewerbe/rikon-im-toesstal/truur-kafi_AS9T2E1"
+              "label": "Mütter- und Väterberatung",
+              "detail": "Familienverein Pfäffikon, Pfäffikon",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_A9rrNDC"
             },
             {
-              "label": "Modèle 8603",
-              "detail": "Bibliothek Schwerzenbach, Schwerzenbach",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schwerzenbach/treff-8603_A5YgvH4"
+              "label": "\"Darf ich bitten?\" Tanznachmittag für Alle",
+              "detail": "Freizeitanlage Winterthur Seen, Winterthur",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/darf-ich-bitten-tanznachmittag_AUHFnTN"
             },
             {
               "label": "Café International",
-              "detail": "Uitikon",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/uitikon-waldegg/cafe-international_AQNLVGL"
+              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/cafe-international_AWFZVmU"
             },
             {
-              "label": "Mittagstisch/Organisiert vom Frauenverein",
-              "detail": "Urdorf",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittagstischorganisiert-vom-frauenverein-8/"
-            },
-            {
-              "label": "Larjssa Terra mit allen Sinnen erLeben..",
-              "detail": "Kloten",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/kurse/kloten/larjssa-terra-mit-allen-sinnen-erleben_A946Sv7"
-            },
-            {
-              "label": "Tanznachmittag, Livemusik vom Duo Hall",
-              "detail": "Kloten",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanznachmittag-livemusik-vom-duo-hall/"
-            },
-            {
-              "label": "Aus dem Geschichtenkoffer",
-              "detail": "Mönchaltorf",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aus-dem-geschichtenkoffer/"
-            },
-            {
-              "label": "Bilderbuchgeschichten",
-              "detail": "Urdorf",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bilderbuchgeschichten-6/"
+              "label": "Räbeliechtliumzug Fehraltorf",
+              "detail": "Evang.-ref. Kirche Fehraltorf, Fehraltorf",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/raebeliechtliumzug-fehraltorf/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -452,7 +452,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }

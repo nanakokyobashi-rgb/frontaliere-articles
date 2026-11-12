@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T16:22:46.747Z",
-  "contentHash": "84aecb9e5f8b43e39cc3183d51d0bafeee9ddea85719940da85b5d1378090029",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "8a57bfbc29d86b617fd4dfdc3376692b203b8a0f0d6987cdd9a191ee2883f099",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "34",
+          "value": "32",
           "note": "segnalazioni aggiornate: 10 novembre 2026"
         }
       ],
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "VD",
@@ -290,7 +290,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "34",
+          "value": "32",
           "note": "reports as of 10 November 2026"
         }
       ],
@@ -517,7 +517,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "VD",
@@ -537,7 +537,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "34",
+          "value": "32",
           "note": "Meldungen vom 10. November 2026"
         }
       ],
@@ -764,7 +764,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "VD",
@@ -784,7 +784,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "34",
+          "value": "32",
           "note": "signalements au 10 novembre 2026"
         }
       ],
@@ -1012,7 +1012,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }

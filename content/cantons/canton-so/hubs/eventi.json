@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "c05ac4066e75396ba8f7eefa8bc81325c59b7df3501f51c970f9459e7c8d5e68",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "f83bf0558e9777c3f135c51736c7224575e35bc64e2b11e876113f1f9f3821ff",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T23:36:45.009Z",
+      "updatedAt": "2026-11-11T04:25:04.802Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "50",
+          "value": "53",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
-              "detail": "Olten",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
+              "label": "tunSolothurn.ch",
+              "detail": "Derendingen",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tunsolothurnch/"
             },
             {
-              "label": "Schweizer Landwirtschaft: Die Bedeutung von Viehzucht und Tierhaltung",
+              "label": "Film: Unschätzbare Wälder",
+              "detail": "Kino im Uferbau, Solothurn",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/film-unschaetzbare-waelder-3/"
+            },
+            {
+              "label": "«l'après-midi» Kino für Geniesser",
               "detail": "Solothurn",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schweizer-landwirtschaft-die-bedeutung-von-viehzucht-und-tierhaltung/"
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapresmidi-kino-fuer-geniesser-4/"
+            },
+            {
+              "label": "Öffentliche Führung Kraftwerk Ruppoldingen",
+              "detail": "Kraftwerk Ruppoldingen, Boningen",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oeffentliche-fuehrung-kraftwerk-ruppoldingen/"
+            },
+            {
+              "label": "Mental abschalten – besser schlafen – Wie Sie das abendliche Grübeln abschalten",
+              "detail": "Solothurn",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mental-abschalten-besser-schlafen-wie-sie-das-abendliche-gruebeln-abschalten/"
+            },
+            {
+              "label": "Union Duke (CAN) & James Harries (UK)",
+              "detail": "Altes Spital, Solothurn",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/union-duke-can-james-harries-uk/"
+            },
+            {
+              "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
+              "detail": "Olten — in corso, ultimo giorno: 21 novembre 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
             },
             {
               "label": "Geologie der Schweiz",
               "detail": "Solothurn — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/geologie-der-schweiz/"
             },
             {
               "label": "Offizieller Bahnkurs November 2026",
               "detail": "Grenchen — in corso, ultimo giorno: 23 novembre 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — in corso, ultimo giorno: 3 dicembre 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
-            },
-            {
-              "label": "Leben im Zeitalter der Dauerkrise",
-              "detail": "Solothurn — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
-            },
-            {
-              "label": "Kursreihe Schweizer Landwirtschaft",
-              "detail": "Solothurn — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
-            },
-            {
-              "label": "Vom Urknall zum Leben",
-              "detail": "Solothurn — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
-            },
-            {
-              "label": "Il Centro Italiano è ospite dell'Hotel Roten Ochsen di Soletta.",
-              "detail": "Hotel Roter Ochsen — in corso, ultimo giorno: 16 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/soletta/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "SO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "50",
+          "value": "53",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
-              "detail": "Olten",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
+              "label": "tunSolothurn.ch",
+              "detail": "Derendingen",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tunsolothurnch/"
             },
             {
-              "label": "Schweizer Landwirtschaft: Die Bedeutung von Viehzucht und Tierhaltung",
+              "label": "Film: Unschätzbare Wälder",
+              "detail": "Kino im Uferbau, Solothurn",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/film-unschaetzbare-waelder-3/"
+            },
+            {
+              "label": "«l'après-midi» Kino für Geniesser",
               "detail": "Solothurn",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schweizer-landwirtschaft-die-bedeutung-von-viehzucht-und-tierhaltung/"
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapresmidi-kino-fuer-geniesser-4/"
+            },
+            {
+              "label": "Öffentliche Führung Kraftwerk Ruppoldingen",
+              "detail": "Kraftwerk Ruppoldingen, Boningen",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oeffentliche-fuehrung-kraftwerk-ruppoldingen/"
+            },
+            {
+              "label": "Mental abschalten – besser schlafen – Wie Sie das abendliche Grübeln abschalten",
+              "detail": "Solothurn",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mental-abschalten-besser-schlafen-wie-sie-das-abendliche-gruebeln-abschalten/"
+            },
+            {
+              "label": "Union Duke (CAN) & James Harries (UK)",
+              "detail": "Altes Spital, Solothurn",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/union-duke-can-james-harries-uk/"
+            },
+            {
+              "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
+              "detail": "Olten — ongoing, last day: 21 November 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
             },
             {
               "label": "Geologie der Schweiz",
               "detail": "Solothurn — ongoing, last day: 24 November 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/geologie-der-schweiz/"
             },
             {
               "label": "Offizieller Bahnkurs November 2026",
               "detail": "Grenchen — ongoing, last day: 23 November 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — ongoing, last day: 3 December 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
-            },
-            {
-              "label": "Leben im Zeitalter der Dauerkrise",
-              "detail": "Solothurn — ongoing, last day: 12 November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
-            },
-            {
-              "label": "Kursreihe Schweizer Landwirtschaft",
-              "detail": "Solothurn — ongoing, last day: 18 November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — ongoing, last day: 24 November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
-            },
-            {
-              "label": "Vom Urknall zum Leben",
-              "detail": "Solothurn — ongoing, last day: 18 November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
-            },
-            {
-              "label": "Centro Italiano as guest at the Hotel Roten Ochsen, Solothurn",
-              "detail": "Hotel Roter Ochsen — ongoing, last day: 16 November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/solothurn/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "SO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "50",
+          "value": "53",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
-              "detail": "Olten",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
+              "label": "tunSolothurn.ch",
+              "detail": "Derendingen",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tunsolothurnch/"
             },
             {
-              "label": "Schweizer Landwirtschaft: Die Bedeutung von Viehzucht und Tierhaltung",
+              "label": "Film: Unschätzbare Wälder",
+              "detail": "Kino im Uferbau, Solothurn",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/film-unschaetzbare-waelder-3/"
+            },
+            {
+              "label": "«l'après-midi» Kino für Geniesser",
               "detail": "Solothurn",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schweizer-landwirtschaft-die-bedeutung-von-viehzucht-und-tierhaltung/"
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapresmidi-kino-fuer-geniesser-4/"
+            },
+            {
+              "label": "Öffentliche Führung Kraftwerk Ruppoldingen",
+              "detail": "Kraftwerk Ruppoldingen, Boningen",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oeffentliche-fuehrung-kraftwerk-ruppoldingen/"
+            },
+            {
+              "label": "Mental abschalten – besser schlafen – Wie Sie das abendliche Grübeln abschalten",
+              "detail": "Solothurn",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mental-abschalten-besser-schlafen-wie-sie-das-abendliche-gruebeln-abschalten/"
+            },
+            {
+              "label": "Union Duke (CAN) & James Harries (UK)",
+              "detail": "Altes Spital, Solothurn",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/union-duke-can-james-harries-uk/"
+            },
+            {
+              "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
+              "detail": "Olten — läuft, letzter Tag: 21. November 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
             },
             {
               "label": "Geologie der Schweiz",
               "detail": "Solothurn — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/geologie-der-schweiz/"
             },
             {
               "label": "Offizieller Bahnkurs November 2026",
               "detail": "Grenchen — läuft, letzter Tag: 23. November 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — läuft, letzter Tag: 3. Dezember 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
-            },
-            {
-              "label": "Leben im Zeitalter der Dauerkrise",
-              "detail": "Solothurn — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
-            },
-            {
-              "label": "Kursreihe Schweizer Landwirtschaft",
-              "detail": "Solothurn — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
-            },
-            {
-              "label": "Vom Urknall zum Leben",
-              "detail": "Solothurn — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
-            },
-            {
-              "label": "Centro Italiano zu Gast im Hotel Roten Ochsen, Solothurn",
-              "detail": "Hotel Roter Ochsen — läuft, letzter Tag: 16. November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/solothurn/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "SO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "50",
+          "value": "53",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
-              "detail": "Olten",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
+              "label": "tunSolothurn.ch",
+              "detail": "Derendingen",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tunsolothurnch/"
             },
             {
-              "label": "Schweizer Landwirtschaft: Die Bedeutung von Viehzucht und Tierhaltung",
+              "label": "Film: Unschätzbare Wälder",
+              "detail": "Kino im Uferbau, Solothurn",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/film-unschaetzbare-waelder-3/"
+            },
+            {
+              "label": "«l'après-midi» Kino für Geniesser",
               "detail": "Solothurn",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schweizer-landwirtschaft-die-bedeutung-von-viehzucht-und-tierhaltung/"
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapresmidi-kino-fuer-geniesser-4/"
+            },
+            {
+              "label": "Öffentliche Führung Kraftwerk Ruppoldingen",
+              "detail": "Kraftwerk Ruppoldingen, Boningen",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oeffentliche-fuehrung-kraftwerk-ruppoldingen/"
+            },
+            {
+              "label": "Mental abschalten – besser schlafen – Wie Sie das abendliche Grübeln abschalten",
+              "detail": "Solothurn",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mental-abschalten-besser-schlafen-wie-sie-das-abendliche-gruebeln-abschalten/"
+            },
+            {
+              "label": "Union Duke (CAN) & James Harries (UK)",
+              "detail": "Altes Spital, Solothurn",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/union-duke-can-james-harries-uk/"
+            },
+            {
+              "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
+              "detail": "Olten — en cours, dernier jour : 21 novembre 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
             },
             {
               "label": "Geologie der Schweiz",
               "detail": "Solothurn — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/geologie-der-schweiz/"
             },
             {
               "label": "Offizieller Bahnkurs November 2026",
               "detail": "Grenchen — en cours, dernier jour : 23 novembre 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — en cours, dernier jour : 3 décembre 2026",
-              "date": "2026-11-11",
+              "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
-            },
-            {
-              "label": "Leben im Zeitalter der Dauerkrise",
-              "detail": "Solothurn — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/leben-im-zeitalter-der-dauerkrise/"
-            },
-            {
-              "label": "Kursreihe Schweizer Landwirtschaft",
-              "detail": "Solothurn — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
-            },
-            {
-              "label": "Vom Urknall zum Leben",
-              "detail": "Solothurn — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
-            },
-            {
-              "label": "Le Centro Italiano invité à l'hôtel Roten Ochsen, Soleure",
-              "detail": "Hotel Roter Ochsen — en cours, dernier jour : 16 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/soleure/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }
