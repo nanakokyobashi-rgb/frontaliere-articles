@@ -371,43 +371,73 @@ const OPEN_DRIFT_STATES = new Set([
 ]);
 
 /**
+ * Precondizione machine-readable per le entry che non possono accettare o
+ * riattestare una baseline senza osservare il gemello remoto. Il confronto è
+ * sui digest correnti, non sulla baseline: una baseline nuova è lecita solo
+ * quando i byte remoti e locali coincidono. Il trasporto di un `site-ahead`
+ * passa invece `requireCorpusMatch: false`: il digest remoto deve essere
+ * osservato, ma per definizione differisce dal corpus fermo sulla baseline.
+ *
+ * PURA: nessuna rete, nessun disco. E' condivisa da `--init` e dal trasporto
+ * per evitare che i due consumer sviluppino guardie divergenti.
+ *
+ * @param {{path?: string, remoteDigestRequired?: boolean}} entry
+ * @param {{site?: string|null, corpus?: string|null}} now
+ * @param {{requireCorpusMatch?: boolean}} [options]
+ * @returns {{required: boolean, ok: boolean, reason: string}}
+ */
+function remoteDigestPrecondition(entry, now, { requireCorpusMatch = true } = {}) {
+  if (entry?.remoteDigestRequired !== true) {
+    return { required: false, ok: true, reason: '' };
+  }
+
+  const pathName = entry.path || 'questa entry';
+  if (typeof now?.site !== 'string' || now.site.length === 0) {
+    return {
+      required: true,
+      ok: false,
+      reason: `digest remoto obbligatorio mancante per \`${pathName}\`: la baseline e il trasporto restano bloccati finche' il gemello del sito non e' osservabile.`,
+    };
+  }
+  if (requireCorpusMatch && (typeof now?.corpus !== 'string' || now.corpus.length === 0 || now.site !== now.corpus)) {
+    return {
+      required: true,
+      ok: false,
+      reason:
+        `digest remoto obbligatorio non coincide per \`${pathName}\`: ` +
+        `sito=${now.site}, corpus=${now.corpus ?? 'mancante'}; la baseline e il trasporto restano bloccati finche' i byte non sono allineati.`,
+    };
+  }
+  return { required: true, ok: true, reason: '' };
+}
+
+/**
  * Se `--init` puo' riscrivere QUESTA voce, o se riscriverla seppellirebbe un
  * verdetto (issue #978).
  *
- * ## Il buco
- *
  * `--init` scrive `now` su entrambi i lati e `alignedAt` = oggi. Su una voce
  * gia' allineata e' una registrazione; su una voce in `site-ahead` o
- * `both-moved` e' la CHIUSURA di un drift che nessuno ha riconciliato: il file
- * non e' stato portato, ma il giorno dopo il report lo dice `stable`. Niente
- * nel codice distingueva i due atti, e `--only` — che esiste per abbassare la
- * frizione della registrazione singola — abbassa esattamente allo stesso modo
- * la frizione della sepoltura.
+ * `both-moved` e' la CHIUSURA di un drift che nessuno ha riconciliato. Il
+ * confronto remoto obbligatorio viene prima di questi guard e non è
+ * aggirabile con `--force`, perché non è una decisione sul drift: è una prova
+ * mancante.
  *
- * Stessa forma per il caso simmetrico che oggi usciva come un warning dentro
- * un comando verde: registrare `identical` con i due lati DIVERSI produce un
- * `undeclared-drift` alla passata successiva, e `transportVerdict()` non copia
- * un `undeclared-drift` — il gemello esce dal trasporto senza che niente
- * fallisca. Sono lo stesso bug in due tempi, quindi hanno lo stesso guard.
+ * Una entry appena aggiunta senza baseline passa se la precondizione remota è
+ * soddisfatta; questo conserva l'uso primario di `--only` senza tornare a
+ * scrivere hash a mano.
  *
- * ## Perche' una voce SENZA baseline passa
- *
- * Una entry appena aggiunta ha `baseline` a null su entrambi i lati: non c'e'
- * nessun verdetto da seppellire, perche' non ce n'e' mai stato uno. E' il caso
- * d'uso primario di `--only` (issue #653) e deve restare a frizione zero,
- * altrimenti la baseline torna a scriversi a mano — cioe' torna la classe
- * `ghost-baseline`. Per la stessa ragione un `adapted` nuovo, che ha i due
- * lati diversi PER COSTRUZIONE, non e' un caso bloccato.
- *
- * PURA: nessuna rete, nessun disco. E' cio' che la rende verificabile offline.
- *
- * @param {{mode: string}} entry
+ * @param {{mode: string, remoteDigestRequired?: boolean}} entry
  * @param {{site: string|null, corpus: string|null}} now
  * @param {{site: string|null, corpus: string|null}|null} base
  * @param {string} state  lo `state` di `classify()` PRIMA della riscrittura.
- * @returns {{blocked: boolean, why: string}}
+ * @returns {{blocked: boolean, forceable: boolean, why: string}}
  */
 function initWriteVerdict(entry, now, base, state) {
+  const remote = remoteDigestPrecondition(entry, now);
+  if (!remote.ok) {
+    return { blocked: true, forceable: false, why: remote.reason };
+  }
+
   const baseSite = base && base.site != null ? base.site : null;
   const baseCorpus = base && base.corpus != null ? base.corpus : null;
   const registered = baseSite !== null || baseCorpus !== null;
@@ -415,6 +445,7 @@ function initWriteVerdict(entry, now, base, state) {
   if (registered && OPEN_DRIFT_STATES.has(state)) {
     return {
       blocked: true,
+      forceable: true,
       why:
         `drift APERTO (\`${state}\`): riscrivere la baseline lo chiude senza che nessuno abbia ` +
         'riconciliato i due lati, e il verdetto sparisce dal report successivo. Porta il file (o ' +
@@ -426,6 +457,7 @@ function initWriteVerdict(entry, now, base, state) {
   if (entry.mode === 'identical' && now.site !== null && now.corpus !== null && now.site !== now.corpus) {
     return {
       blocked: true,
+      forceable: true,
       why:
         'registrerebbe `identical` con i due lati DIVERSI: la prossima passata lo leggera\' ' +
         '`undeclared-drift` e il trasporto smettera\' di copiarlo. Riallinea il file, marcalo ' +
@@ -433,7 +465,7 @@ function initWriteVerdict(entry, now, base, state) {
     };
   }
 
-  return { blocked: false, why: '' };
+  return { blocked: false, forceable: true, why: '' };
 }
 
 /**
@@ -2235,12 +2267,13 @@ async function main() {
       const guard = initWriteVerdict(entry, now, base, classify(entry, now, base).state);
       let forcedAt = null;
       if (guard.blocked) {
-        initBlocked.push({ path: rel, why: guard.why, forceable: true });
-        // Con `--force` si scrive lo stesso, ma il blocco resta stampato: la
-        // conferma esplicita non deve rendere l'atto silenzioso. Senza, si
-        // salta QUESTA voce e basta: la sua baseline resta quella di prima e
-        // le altre vengono registrate lo stesso.
-        if (!FORCE) continue;
+        initBlocked.push({ path: rel, why: guard.why, forceable: guard.forceable !== false });
+        // Con `--force` si scrive lo stesso solo per i blocchi forceable, ma il
+        // blocco resta stampato: la conferma esplicita non deve rendere
+        // l'atto silenzioso. Una precondizione remota non forceable si salta
+        // sempre; la sua baseline resta quella di prima e le altre vengono
+        // registrate lo stesso.
+        if (!FORCE || guard.forceable === false) continue;
         forcedAt = new Date().toISOString();
       }
 
@@ -2703,5 +2736,5 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, sitePathBlobInventory, initInventoryVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, resolveRelativeImport, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance, siteReusablePins, reusablePinVerdict, reusablePinResults, localWorkflowSources, REUSABLE_PIN_STATE, identicalSectionsVerdict, withIdenticalSections, SECTION_DRIFT_STATE, mapWithConcurrency };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, remoteDigestPrecondition, initAttestVerdict, sitePathBlobInventory, initInventoryVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, resolveRelativeImport, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance, siteReusablePins, reusablePinVerdict, reusablePinResults, localWorkflowSources, REUSABLE_PIN_STATE, identicalSectionsVerdict, withIdenticalSections, SECTION_DRIFT_STATE, mapWithConcurrency };
 export { countCheckFailedPins, noActionableSummary };
