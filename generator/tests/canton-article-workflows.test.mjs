@@ -183,6 +183,36 @@ function extractRun(workflow, stepName) {
 /** I nomi degli step di un workflow, nell'ordine in cui compaiono. */
 const stepNames = (workflow) => [...workflow.matchAll(/^ {6}- name: (.+)$/gm)].map((m) => m[1]);
 
+function workflowStepBlock(workflow, name) {
+  const lines = workflow.split('\n');
+  const at = lines.indexOf(`      - name: ${name}`);
+  assert.notEqual(at, -1, `step non trovato: ${name}`);
+  const next = lines.findIndex((l, i) => i > at && (/^ {6}- name: /.test(l) || /^ {2}[a-z_]+:$/.test(l)));
+  return lines.slice(at, next === -1 ? undefined : next).join('\n').replace(/\n+$/, '');
+}
+
+test('gli upload diagnostici non bloccano la generazione se il servizio artifact è indisponibile', () => {
+  const reportSteps = [
+    'Upload provider preflight report',
+    'Upload topic candidate feed report',
+    'Upload wedge diagnostics (stack, report, log del tentativo)',
+  ];
+  for (const workflow of [SOURCE, CORE]) {
+    for (const name of reportSteps) {
+      assert.match(
+        workflowStepBlock(workflow, name),
+        /\n        continue-on-error: true\n/,
+        `${name}: upload report deve essere best-effort`,
+      );
+    }
+    assert.doesNotMatch(
+      workflowStepBlock(workflow, 'Upload the unpushed article'),
+      /\n        continue-on-error:/,
+      'l\'artifact di recupero dell\'articolo non pushato deve restare fail-closed',
+    );
+  }
+});
+
 test('gli step che le sostituzioni non toccano sono identici alla sorgente, commenti a parte', () => {
   const sourceSteps = stepNames(SOURCE);
   const coreSteps = stepNames(CORE);
