@@ -68,6 +68,22 @@ set troncato è il caso peggiore proprio perché non fallisce.
    da portare. Non è igiene documentale, è un'asserzione falsa: aggiornala nello
    stesso commit, o cancellala.
 
+## Worktree per gli agenti
+
+- Le diagnosi in sola lettura possono usare i checkout esistenti. Prima di
+  modificare codice, lavora in un worktree dedicato creato da `origin/main`
+  aggiornato; non modificare né ripulire il checkout `main` condiviso.
+- Da qualunque checkout di questo repo crea il worktree con
+  `scripts/dev/fast-worktree.sh <nome> [--add <path>]...`. L'helper individua
+  il worktree principale, aggiorna `origin/main` con un fetch single-flight e
+  crea il nuovo percorso sotto `.claude/worktrees/`.
+- Il checkout è sparse: `content/`, `data/`, `dist/` e `public/` restano fuori.
+  Se servono, specifica i path con `--add` oppure esegui
+  `git sparse-checkout add <path>` nel worktree. I dati non tracciati del
+  checkout principale restano intatti.
+- Non usare `--depth` o `--filter` per ridurre un worktree e non avviare il
+  worktree completo nativo di un provider per questo repo.
+
 ## Build e test
 
 ```bash
