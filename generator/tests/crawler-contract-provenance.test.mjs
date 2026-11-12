@@ -52,6 +52,8 @@ import {
   sourceCommitReachabilityVerdict,
   sourceCommitReachable,
 } from '../../scripts/ci/verify-crawler-contract-provenance.mjs';
+import { initWriteVerdict } from '../../scripts/ci/loop-drift-check.mjs';
+import { transportVerdict } from '../../scripts/ci/transport-identical-twins.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const CONTRACT = JSON.parse(
@@ -504,6 +506,52 @@ test(`il piano reale copre i digest correnti e la lineage del contratto committa
     assert.equal(current.expected, observer.sha256, observer.target);
     assert.equal(local.expected, observer.sha256, observer.target);
     assert.equal(lineage.expected, observer.sha256, observer.target);
+  }
+});
+
+test('la baseline del contratto richiede il digest remoto e non e\u2019 forceabile', () => {
+  const entry = MANIFEST.files.find(
+    (candidate) => candidate.path === 'generator/data/crawler-cross-repo-contract.json',
+  );
+  assert.equal(entry.remoteDigestRequired, true);
+
+  const missing = initWriteVerdict(
+    entry,
+    { site: null, corpus: entry.baseline.corpus },
+    entry.baseline,
+    'stable',
+  );
+  assert.equal(missing.blocked, true);
+  assert.equal(missing.forceable, false);
+  assert.match(missing.why, /digest remoto obbligatorio mancante/);
+
+  const divergent = initWriteVerdict(
+    entry,
+    { site: 'remote-divergent', corpus: entry.baseline.corpus },
+    entry.baseline,
+    'site-ahead',
+  );
+  assert.equal(divergent.blocked, true);
+  assert.equal(divergent.forceable, false);
+  assert.match(divergent.why, /non coincide/);
+
+  const aligned = initWriteVerdict(
+    entry,
+    { site: entry.baseline.site, corpus: entry.baseline.corpus },
+    entry.baseline,
+    'stable',
+  );
+  assert.equal(aligned.blocked, false);
+
+  for (const now of [
+    { site: null, corpus: entry.baseline.corpus },
+    { site: 'remote-divergent', corpus: entry.baseline.corpus },
+  ]) {
+    const transport = transportVerdict(entry, now, entry.baseline);
+    assert.equal(transport.transport, false);
+    assert.equal(transport.realign, false);
+    assert.equal(transport.permanent, false);
+    assert.match(transport.reason, /digest remoto obbligatorio/);
   }
 });
 

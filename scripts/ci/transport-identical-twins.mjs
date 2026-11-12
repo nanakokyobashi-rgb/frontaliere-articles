@@ -125,6 +125,7 @@ import { fileURLToPath } from 'node:url';
 import {
   classify,
   gitBlobSha,
+  remoteDigestPrecondition,
   resolveRelativeImport,
   siteFile,
 } from './loop-drift-check.mjs';
@@ -772,6 +773,16 @@ export function permanentBlock(entry, { outOfScopePrefixes = [], couplings = [],
 
 export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], couplings = [] } = {}) {
   const state = classify(entry, now, base).state;
+  const remote = remoteDigestPrecondition(entry, now);
+  if (!remote.ok) {
+    return {
+      transport: false,
+      realign: false,
+      permanent: false,
+      state,
+      reason: remote.reason,
+    };
+  }
   // `both-moved-converged`: i due lati si sono mossi dalla baseline ma OGGI
   // coincidono byte per byte. Non c'è niente da copiare né da riconciliare,
   // solo una baseline da registrare: è l'`--init --only` che il drift check
