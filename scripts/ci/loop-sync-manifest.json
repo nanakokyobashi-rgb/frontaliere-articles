@@ -5078,8 +5078,8 @@
       "mode": "identical",
       "reason": "La baseline registra lo stesso digest SHA-256 raw sui due lati; `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "11e63ec3d1f111b3",
-        "corpus": "11e63ec3d1f111b3",
+        "site": "a5c84eeea5214216",
+        "corpus": "a5c84eeea5214216",
         "alignedAt": "2026-11-12"
       }
     },
