@@ -4,17 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-11-11T11:16:44.434Z",
-  "contentHash": "024109ca0455a34b6fc9dc8e254a182615430fc838df307fbeb7748ec904dd67",
+  "updatedAt": "2026-11-12T10:45:43.005Z",
+  "contentHash": "a648c45a16a7514bbd4da8c3706c5a1d4b031468f20ddaf2815239f790a83f61",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-11-08T11:18:20.402Z",
-      "keyFacts": 1
-    },
-    {
-      "id": "aste-targhe",
-      "updatedAt": "2026-11-10T19:49:08.581Z",
       "keyFacts": 1
     },
     {
@@ -35,11 +30,6 @@
           "value": "573,45 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "5",
-          "note": "offerta mediana 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -67,37 +57,6 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-08T11:18:20.402Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
-          "items": [
-            {
-              "label": "GR16616",
-              "value": "550 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-22T19:00:00.000Z",
-              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2265&locale=de_CH"
-            },
-            {
-              "label": "GR11948",
-              "value": "500 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-22T19:00:00.000Z",
-              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2263&locale=de_CH"
-            },
-            {
-              "label": "GR14399",
-              "value": "500 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-22T19:00:00.000Z",
-              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2264&locale=de_CH"
-            }
-          ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-10T19:49:08.581Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -215,7 +174,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     },
     "en": {
       "canton": "GR",
@@ -228,11 +187,6 @@
           "value": "573.45 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "5",
-          "note": "typical bid 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -260,37 +214,6 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-08T11:18:20.402Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
-          "items": [
-            {
-              "label": "GR16616",
-              "value": "550 CHF",
-              "detail": "current bid",
-              "date": "2026-11-22T19:00:00.000Z",
-              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2265&locale=de_CH"
-            },
-            {
-              "label": "GR11948",
-              "value": "500 CHF",
-              "detail": "current bid",
-              "date": "2026-11-22T19:00:00.000Z",
-              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2263&locale=de_CH"
-            },
-            {
-              "label": "GR14399",
-              "value": "500 CHF",
-              "detail": "current bid",
-              "date": "2026-11-22T19:00:00.000Z",
-              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2264&locale=de_CH"
-            }
-          ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-10T19:49:08.581Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -404,7 +327,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     },
     "de": {
       "canton": "GR",
@@ -417,11 +340,6 @@
           "value": "573.45 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "5",
-          "note": "mittleres Gebot 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -449,37 +367,6 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-08T11:18:20.402Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
-          "items": [
-            {
-              "label": "GR16616",
-              "value": "550 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-22T19:00:00.000Z",
-              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2265&locale=de_CH"
-            },
-            {
-              "label": "GR11948",
-              "value": "500 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-22T19:00:00.000Z",
-              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2263&locale=de_CH"
-            },
-            {
-              "label": "GR14399",
-              "value": "500 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-22T19:00:00.000Z",
-              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2264&locale=de_CH"
-            }
-          ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-10T19:49:08.581Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -593,7 +480,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     },
     "fr": {
       "canton": "GR",
@@ -606,11 +493,6 @@
           "value": "573,45 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "5",
-          "note": "offre centrale 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -638,37 +520,6 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-08T11:18:20.402Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
-          "items": [
-            {
-              "label": "GR16616",
-              "value": "550 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-22T19:00:00.000Z",
-              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2265&locale=de_CH"
-            },
-            {
-              "label": "GR11948",
-              "value": "500 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-22T19:00:00.000Z",
-              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2263&locale=de_CH"
-            },
-            {
-              "label": "GR14399",
-              "value": "500 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-22T19:00:00.000Z",
-              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2264&locale=de_CH"
-            }
-          ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-10T19:49:08.581Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -778,7 +629,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     }
   }
 }

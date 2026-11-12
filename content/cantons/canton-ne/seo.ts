@@ -967,6 +967,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-imprese-neuchateloise-rischio-supply-chain': {
+    title: 'Oltre il 71% delle imprese industriali vede vulnerabilità nella supply chain',
+    description: 'Oltre il 71% delle imprese industriali neocastellanesi vede la dipendenza da fornitori come vulnerabilità, secondo l\'indagine CNCI del 12 novembre.',
+    keywords: 'frontalieri, ticino, svizzera, italia, oltre, imprese, industriali, vede',
+    ogTitle: 'Oltre il 71% delle imprese industriali vede vulnerabilità nella supply chain',
+    ogDescription: 'L\'indagine CNCI del 12 novembre 2026 rivela che oltre il 71% delle imprese industriali del Canton Neuchâtel percepisce la dipendenza da alcuni fornitori come un rischio critico per la loro catena di approvvigionamento.',
+    canonicalPath: '/articoli-neuchatel/imprese-neuchateloise-rischio-supply-chain/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Oltre il 71% delle imprese industriali vede vulnerabilità nella supply chain",
+      "description": "Oltre il 71% delle imprese industriali neocastellanesi vede la dipendenza da fornitori come vulnerabilità, secondo l'indagine CNCI del 12 novembre.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-imprese-neuchateloise-rischio-supply-chain.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-12T10:41:49+00:00",
+      "dateModified": "2026-11-12T10:41:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/imprese-neuchateloise-rischio-supply-chain/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

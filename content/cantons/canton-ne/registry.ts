@@ -283,4 +283,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'imprese-neuchateloise-rischio-supply-chain',
+ category: 'novita',
+ date: '2026-11-12T10:41:49.182Z',
+ image: '/images/blog/article-imprese-neuchateloise-rischio-supply-chain.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

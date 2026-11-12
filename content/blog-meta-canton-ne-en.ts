@@ -78,6 +78,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.fiscalita-coppie-sposate-voto.title': 'Taxation of married couples: vote on November 29',
     'blog.article.fiscalita-coppie-sposate-voto.excerpt': 'Last March 8, the Swiss approved individual taxation with 54%.',
     'blog.article.fiscalita-coppie-sposate-voto.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.imprese-neuchateloise-rischio-supply-chain.title': 'Over 71% of industrial companies see vulnerabilities in the supply chain',
+    'blog.article.imprese-neuchateloise-rischio-supply-chain.excerpt': 'The CNCI survey of November 12, 2026 shows that over 71% of Neo-Castilian industrial companies perceive dependence on certain suppliers as a vulnerability.',
+    'blog.article.imprese-neuchateloise-rischio-supply-chain.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;

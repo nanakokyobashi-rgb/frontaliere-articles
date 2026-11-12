@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "pensioni",
-  "updatedAt": "2026-11-11T07:53:05.253Z",
-  "contentHash": "08127041fbba1d7615d9db664cd0e9e0b6eb4cccb970dcd0959dcfb714a6f34e",
+  "updatedAt": "2026-11-12T10:45:43.005Z",
+  "contentHash": "0340098085d5c8fa732adcbba17ead8cc38a4970fb24f1ed65355afcb2e70851",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -129,6 +129,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Oltre il 71% delle imprese industriali vede vulnerabilità nella supply chain",
+          "url": "/articoli-neuchatel/imprese-neuchateloise-rischio-supply-chain/",
+          "excerpt": "L'indagine della CNCI del 12 novembre 2026 mostra che oltre il 71% delle imprese industriali neocastellanesi percepisce la dipendenza da alcuni fornitori come una vulnerabilità.",
+          "date": "2026-11-12T10:41:49.182Z"
+        },
+        {
           "title": "Tassazione coppie sposate: voto il 29 novembre",
           "url": "/articoli-neuchatel/fiscalita-coppie-sposate-voto/",
           "excerpt": "L'8 marzo scorso, gli svizzeri hanno accettato con il 54% l'imposizione individuale.",
@@ -151,12 +157,6 @@
           "url": "/articoli-neuchatel/neuchatel-dossier-consiglio-stato/",
           "excerpt": "Il 2 novembre 2026 il Consiglio di Stato del Canton Neuchâtel ha diffuso le informazioni brevi relative alla sua seduta.",
           "date": "2026-11-06T03:22:02.144Z"
-        },
-        {
-          "title": "Economia neuchâteloise: dinamica ma volatile",
-          "url": "/articoli-neuchatel/economia-neuchateloise-incertezza/",
-          "excerpt": "Il rapporto 2026 sul PIL romando descrive la piazza economica di Neuchâtel come dinamica, ma volatile di fronte agli imprevisti geopolitici internazionali.",
-          "date": "2026-10-28T17:45:20.321Z"
         }
       ],
       "links": [
@@ -177,7 +177,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-11T07:53:05.253Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     },
     "en": {
       "canton": "NE",
@@ -284,6 +284,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Over 71% of industrial companies see vulnerabilities in the supply chain",
+          "url": "/en/neuchatel-articles/neuchatel-companies-supply-chain-risk/",
+          "excerpt": "The CNCI survey of November 12, 2026 shows that over 71% of Neo-Castilian industrial companies perceive dependence on certain suppliers as a vulnerability.",
+          "date": "2026-11-12T10:41:49.182Z"
+        },
+        {
           "title": "Taxation of married couples: vote on November 29",
           "url": "/en/neuchatel-articles/taxation-married-couples-vote/",
           "excerpt": "Last March 8, the Swiss approved individual taxation with 54%.",
@@ -306,12 +312,6 @@
           "url": "/en/neuchatel-articles/neuchatel-state-council-dossiers/",
           "excerpt": "On November 2, 2026, the Council of State of the Canton of Neuchâtel published brief information relating to its meeting.",
           "date": "2026-11-06T03:22:02.144Z"
-        },
-        {
-          "title": "Neuchâtel economy: dynamic but volatile",
-          "url": "/en/neuchatel-articles/neuchatel-economy-uncertainty/",
-          "excerpt": "The 2026 report on Roman GDP describes the economic square of Neuchâtel as dynamic, but volatile in the face of international geopolitical unforeseen events.",
-          "date": "2026-10-28T17:45:20.321Z"
         }
       ],
       "links": [
@@ -332,7 +332,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-11T07:53:05.253Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     },
     "de": {
       "canton": "NE",
@@ -439,6 +439,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Mehr als 71% der Industrieunternehmen sehen eine Anfälligkeit in der Lieferkette",
+          "url": "/de/neuenburg-artikel/neuenburg-unternehmen-lieferkettenrisiko/",
+          "excerpt": "Die Erhebung der CNCI vom 12. November 2026 zeigt, dass mehr als 71% der neuenburgischen Industrieunternehmen die Abhängigkeit von bestimmten Lieferanten als eine Anfälligkeit wahrnehmen.",
+          "date": "2026-11-12T10:41:49.182Z"
+        },
+        {
           "title": "Besteuerung von Ehepaaren: Abstimmung am 29. November",
           "url": "/de/neuenburg-artikel/besteuerung-verheirateter-paare-wahl/",
           "excerpt": "Am 8. März haben die Schweizer der Individualbesteuerung mit 54% zugestimmt.",
@@ -461,12 +467,6 @@
           "url": "/de/neuenburg-artikel/neuenburg-regierungsrat-dossiers/",
           "excerpt": "Der Staatsrat des Kantons Neuch hat am 2.November 2026 die Kurzinformationen zu seiner Sitzung veröffentlicht.",
           "date": "2026-11-06T03:22:02.144Z"
-        },
-        {
-          "title": "Neuenburger Wirtschaft: dynamisch, aber volatil",
-          "url": "/de/neuenburg-artikel/neuenburg-wirtschaft-unsicherheit/",
-          "excerpt": "BIP der Westschweiz geschätzt: 198 Milliarden Franken im Jahr 2025 Wachstum 2025: 2,2% gegenüber 1,8% in der Schweiz Prognosen: 1,9% im Jahr 2026 und 1,5%.",
-          "date": "2026-10-28T17:45:20.321Z"
         }
       ],
       "links": [
@@ -487,7 +487,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-11T07:53:05.253Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     },
     "fr": {
       "canton": "NE",
@@ -594,6 +594,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Plus de 71 % des industriels jugent la supply chain fragile",
+          "url": "/fr/articles-neuchatel/entreprises-neuchatel-defi-dependance/",
+          "excerpt": "L’enquête de la CNCI du 12 novembre 2026 montre que plus de 71 % des entreprises industrielles neuchâteloises considèrent la dépendance à certains fournisseurs comme une vulnérabilité.",
+          "date": "2026-11-12T10:41:49.182Z"
+        },
+        {
           "title": "Imposition des couples mariés : vote le 29 novembre",
           "url": "/fr/articles-neuchatel/fiscalite-couples-maries-vote/",
           "excerpt": "Le 8 mars dernier, les Suisses ont accepté l’imposition individuelle à 54 %.",
@@ -616,12 +622,6 @@
           "url": "/fr/articles-neuchatel/neuchatel-dossiers-conseil-etat/",
           "excerpt": "Le 2 novembre 2026, le Conseil d'État du canton de Neuchâtel a diffusé les informations succinctes relatives à sa séance.",
           "date": "2026-11-06T03:22:02.144Z"
-        },
-        {
-          "title": "Économie neuchâteloise : dynamique mais volatile",
-          "url": "/fr/articles-neuchatel/economie-neuchatel-incertitude/",
-          "excerpt": "Le rapport 2026 sur le PIB romand décrit la place économique de Neuchâtel comme dynamique, mais volatile face aux aléas géopolitiques internationaux.",
-          "date": "2026-10-28T17:45:20.321Z"
         }
       ],
       "links": [
@@ -642,7 +642,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-11T07:53:05.253Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     }
   }
 }

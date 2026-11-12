@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-11-11T11:16:44.434Z",
-  "contentHash": "2567bd04498d23de85fd9a04382fa9a5e2b7c3ddc68aaf0751a97a6e06236576",
+  "updatedAt": "2026-11-12T10:45:43.005Z",
+  "contentHash": "a493476ab72af637020feb00b649a15a4e35782b2583f7d24ee6ef6227ea3a4c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-10T23:27:24.233Z",
+      "updatedAt": "2026-11-11T03:01:22.987Z",
       "keyFacts": 0
     },
     {
@@ -71,11 +71,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-11T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-12T17:30:00.000Z"
             },
             {
@@ -87,11 +82,16 @@
               "label": "Sun Store Milliet Gare",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Tilleul",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-14T07:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-10T23:27:24.233Z"
+          "updatedAt": "2026-11-11T03:01:22.987Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -169,7 +169,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     },
     "en": {
       "canton": "JU",
@@ -218,11 +218,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-11T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-12T17:30:00.000Z"
             },
             {
@@ -234,11 +229,16 @@
               "label": "Sun Store Milliet Gare",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Tilleul",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-14T07:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-10T23:27:24.233Z"
+          "updatedAt": "2026-11-11T03:01:22.987Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -312,7 +312,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     },
     "de": {
       "canton": "JU",
@@ -361,11 +361,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-11T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-12T17:30:00.000Z"
             },
             {
@@ -377,11 +372,16 @@
               "label": "Sun Store Milliet Gare",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Tilleul",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-14T07:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-10T23:27:24.233Z"
+          "updatedAt": "2026-11-11T03:01:22.987Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -455,7 +455,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     },
     "fr": {
       "canton": "JU",
@@ -504,11 +504,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-11T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-12T17:30:00.000Z"
             },
             {
@@ -520,11 +515,16 @@
               "label": "Sun Store Milliet Gare",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Tilleul",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-14T07:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-10T23:27:24.233Z"
+          "updatedAt": "2026-11-11T03:01:22.987Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -594,7 +594,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     }
   }
 }
