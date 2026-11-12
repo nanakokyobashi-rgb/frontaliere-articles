@@ -14262,26 +14262,80 @@ function countWords(text = '') {
 // prompt, reproducing the same truncation it was retrying to fix).
 const TRANSLATION_CHUNK_THRESHOLD = 700;
 
-// Split body text into ~chunkTarget-word pieces at paragraph boundaries, for
-// translating oversized fields as parallel sub-chunks that stay under the
-// model's per-call output cap.
+// Split body text into ~chunkTarget-word pieces, keeping paragraph boundaries
+// where possible and cutting inside an oversized paragraph when necessary.
+// This is shared by the initial translation and both retry paths, so every
+// route keeps the same per-call output-cap safety net.
 function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
+  function splitOversizedParagraph(paragraph) {
+    // Keep the original whitespace inside each piece (including single line
+    // breaks used by Markdown). A split is inserted only at a whitespace
+    // boundary; the caller joins pieces with a paragraph break, which is the
+    // same separator already used between source paragraphs.
+    const tokens = String(paragraph).match(/\S+|\s+/g) || [];
+    const paragraphChunks = [];
+    let paragraphChunk = '';
+    let paragraphWords = 0;
+
+    const appendToken = (token) => {
+      if (/^\s+$/.test(token)) {
+        paragraphChunk += token;
+        return;
+      }
+      const tokenWords = countWords(token);
+      if (paragraphChunk && tokenWords > 0 && paragraphWords + tokenWords > chunkTarget) {
+        paragraphChunks.push(paragraphChunk.trimEnd());
+        paragraphChunk = '';
+        paragraphWords = 0;
+      }
+      paragraphChunk += token;
+      paragraphWords += tokenWords;
+    };
+
+    for (const token of tokens) {
+      // A normal non-whitespace token is one word for countWords(). The
+      // fallback keeps the invariant true for pathological tokens containing
+      // hundreds of Markdown separators without splitting ordinary URLs or
+      // hyphenated links at an arbitrary chunk boundary.
+      const tokenParts = countWords(token) > chunkTarget
+        ? token.split(/([#>*`_~\-]+)/).filter(Boolean)
+        : [token];
+      for (const part of tokenParts) appendToken(part);
+    }
+    if (paragraphChunk.trim()) paragraphChunks.push(paragraphChunk.trimEnd());
+    return paragraphChunks;
+  }
+
   const paragraphs = (bodyText || '').split(/\n\n+/);
   const chunks = [];
   let currentChunk = '';
   let currentWords = 0;
+  const flushCurrent = () => {
+    if (!currentChunk) return;
+    chunks.push(currentChunk);
+    currentChunk = '';
+    currentWords = 0;
+  };
+
   for (const p of paragraphs) {
-    const pWords = countWords(p);
-    if (currentWords + pWords > chunkTarget && currentChunk) {
-      chunks.push(currentChunk);
-      currentChunk = p;
-      currentWords = pWords;
-    } else {
-      currentChunk += (currentChunk ? '\n\n' : '') + p;
+    const paragraphChunks = countWords(p) > chunkTarget
+      ? splitOversizedParagraph(p)
+      : [p];
+
+    // Once a paragraph needs internal cuts, keep each resulting piece as its
+    // own model input. This avoids carrying a preceding paragraph into the
+    // first slice and makes the word cap obvious for every request.
+    if (paragraphChunks.length > 1) flushCurrent();
+
+    for (const paragraphChunk of paragraphChunks) {
+      const pWords = countWords(paragraphChunk);
+      if (currentWords + pWords > chunkTarget && currentChunk) flushCurrent();
+      currentChunk += (currentChunk ? '\n\n' : '') + paragraphChunk;
       currentWords += pWords;
+      if (paragraphChunks.length > 1) flushCurrent();
     }
   }
-  if (currentChunk) chunks.push(currentChunk);
+  flushCurrent();
   return chunks;
 }
 
@@ -15056,8 +15110,9 @@ async function translateArticle(data) {
     }
   }
 
-  // Sub-chunk an oversized field into ~500-word paragraph pieces, translate
-  // each chunk in parallel via callWithRetry, and join. Shared by
+  // Sub-chunk an oversized field into ~500-word pieces (at paragraph
+  // boundaries where possible, inside an oversized paragraph otherwise),
+  // translate each chunk in parallel via callWithRetry, and join. Shared by
   // translateBodyField's initial translation below and the truncation-retry
   // loop further down (#688): both send a field to the model as a single
   // prompt when it's short, and both need the same chunking safety net once
@@ -15172,7 +15227,8 @@ ${localizedToponymInstruction(targetLang)}`;
         return { [bodyKey]: sanitizeBodyText(text) };
       }
 
-      // Sub-chunk: split at paragraph boundaries into ~500-word pieces,
+      // Sub-chunk: split into ~500-word pieces, at paragraph boundaries where
+      // possible and inside an oversized paragraph otherwise,
       // translate each in parallel, and join. A chunk the model returned as
       // an object used to be stringified into the joined body as
       // "[object Object]" — one corrupted paragraph in the middle of

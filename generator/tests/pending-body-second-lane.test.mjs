@@ -49,6 +49,19 @@ import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const src = readFileSync(path.resolve(HERE, '../scripts/create-article.mjs'), 'utf-8');
 
+function extractFunctionSource(startMarker) {
+  const start = src.indexOf(startMarker);
+  assert.notEqual(start, -1, `${startMarker} non trovata in create-article.mjs`);
+  const end = src.indexOf('\n}\n', start);
+  assert.notEqual(end, -1, `fine di ${startMarker} non trovata in create-article.mjs`);
+  return src.slice(start, end + 2);
+}
+
+const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {");
+const SPLIT_TRANSLATION_CHUNKS_SRC = extractFunctionSource(
+  'function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {',
+);
+
 const IT_BODY = {
   body1: 'Il contributo sanitario di settembre cambia per i frontalieri del Ticino. La nuova aliquota vale da subito e riguarda chi lavora in Svizzera.',
   body2: 'Le regioni di confine applicano la quota con criteri diversi. Chi risiede a Como paga secondo le tabelle della propria regione.',
@@ -654,6 +667,20 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
   });
   assert.equal(wholeBodyCalls, 0);
   assert.equal(translated, expected);
+});
+
+test('il chunker spezza anche un singolo paragrafo oltre il limite di parole', () => {
+  const makeChunker = new Function(
+    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
+  );
+  const countWords = new Function(`${COUNT_WORDS_SRC}\nreturn countWords;`)();
+  const splitIntoTranslationChunks = makeChunker();
+  const source = Array.from({ length: 1_101 }, (_, index) => `parola${index}`).join(' ');
+  const chunks = splitIntoTranslationChunks(source, 500);
+
+  assert.deepEqual(chunks.map(countWords), [500, 500, 101]);
+  assert.ok(chunks.every((chunk) => countWords(chunk) <= 500));
+  assert.equal(chunks.join('\n\n').replace(/\s+/g, ' '), source);
 });
 
 test('se il circuit breaker apre Codex dopo la selezione, la lane passa alla catena storica', async () => {
