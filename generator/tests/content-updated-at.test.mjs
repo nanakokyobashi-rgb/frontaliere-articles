@@ -204,7 +204,7 @@ test('il log dello stamp espone solo conteggi e mai gli ID degli articoli', () =
   assert.doesNotMatch(script, /change\.id|change\.section|change\.updatedAt/u);
 });
 
-test('gli esempi della issue hanno il giorno dell’ultima modifica nel registry', () => {
+test('gli esempi editoriali della issue hanno il giorno dell’ultima modifica nel registry', () => {
   const files = [
     path.join(ROOT, 'content/blog-articles-data.ts'),
     path.join(ROOT, 'content/swiss-articles-data.ts'),
@@ -213,9 +213,12 @@ test('gli esempi della issue hanno il giorno dell’ultima modifica nel registry
   for (const file of files) {
     for (const record of scanTopLevelArticleRecords(readFileSync(file, 'utf8'))) rows.set(record.id, record);
   }
+  // Keep fixed-date examples on durable editorial refreshes. The weekend
+  // digest is regenerated repeatedly by a bot; pinning its old date would
+  // turn a valid content refresh into a false gate offender.
   for (const [id, day] of [
     ['vivere-svizzera-vs-italia-frontaliere', '2026-10-29'],
-    ['eventi-weekend-ticino', '2026-10-31'],
+    ['frontaliere-educatore-ticino-stipendio-requisiti', '2026-10-20'],
   ]) {
     assert.match(readTopLevelString(rows.get(id), 'updatedAt') ?? '', new RegExp(`^${day}`, 'u'), id);
   }
