@@ -49,17 +49,17 @@ test('FU-2026-09-29-003: il fallback senza setsid conserva figlio, PID, status e
       `${artifact.file}: PID del launcher non pubblicato`,
     );
     assert.equal(
-      occurrences(workflow, /kill -0 "\$pid"/g),
+      occurrences(workflow, /kill -0 "\$(?:pid|i)"/g),
       artifact.members.length,
       `${artifact.file}: il wait loop non osserva ogni figlio`,
     );
     assert.equal(
-      occurrences(workflow, /cat "\$log_file"/g),
+      occurrences(workflow, /cat "\$(?:log_file|l)"/g),
       artifact.members.length,
       `${artifact.file}: il wait loop non raccoglie ogni log`,
     );
     assert.equal(
-      occurrences(workflow, /while \[ ! -s "\$status_file" \]; do/g),
+      occurrences(workflow, /while \[ ! -s "\$(?:status_file|f)" \]; do/g),
       artifact.members.length,
       `${artifact.file}: il wait loop non attende ogni status`,
     );
