@@ -23,7 +23,10 @@ import {
   CANTON_WORKFLOW_PATH_RE,
   CORE_WORKFLOW_PATH,
   DEFAULT_MAX_PARALLEL,
+  ALL_RUN_STATUSES,
   IN_FLIGHT_STATUSES,
+  KNOWN_RUN_CONCLUSIONS,
+  RUNS_PER_PAGE,
   RC_SENTINEL_ENV,
   articleCommitSubject,
   countSectionArticles,
@@ -84,6 +87,11 @@ function decide(over = {}, r = readers()) {
 }
 
 const run = (id, file, createdAt) => ({ id, path: `.github/workflows/${file}`, created_at: createdAt });
+const apiRun = (id, file, createdAt, status = 'queued') => ({
+  ...run(id, file, createdAt),
+  status,
+  conclusion: null,
+});
 
 // ── 1. Il gate di Remote Config (D16) ────────────────────────────────────────
 
@@ -264,23 +272,52 @@ test('le run in coda sono in volo quanto quelle gia\' in esecuzione', () => {
   assert.equal(inFlight.some((candidate) => candidate.id === completed.id), false);
 });
 
-test('le run in volo uniscono tutte le pagine per stato', () => {
+test('le run in volo uniscono tutte le pagine per stato solo se complete e non ambigue', () => {
+  const firstPageRuns = Array.from({ length: 100 }, (_, index) => apiRun(
+    100 + index,
+    'generate-article-ti.yml',
+    '2026-10-05T10:00:10Z',
+  ));
+  const finalPageRuns = [apiRun(1, 'generate-article-gr.yml', '2026-10-05T09:00:00Z', 'in_progress')];
   const firstPage = {
     total_count: 101,
-    workflow_runs: [run(100, 'generate-article-ti.yml', '2026-10-05T10:00:10Z')],
+    workflow_runs: firstPageRuns,
   };
   const secondPage = {
     total_count: 101,
-    workflow_runs: [run(1, 'generate-article-gr.yml', '2026-10-05T09:00:00Z')],
+    workflow_runs: finalPageRuns,
   };
 
   assert.deepEqual(flattenPaginatedInFlightRuns([firstPage, secondPage]), [
-    ...firstPage.workflow_runs,
-    ...secondPage.workflow_runs,
+    ...firstPageRuns,
+    ...finalPageRuns,
   ]);
-  assert.deepEqual(flattenPaginatedInFlightRuns([]), []);
+  assert.deepEqual(flattenPaginatedInFlightRuns([{ total_count: 0, workflow_runs: [] }]), []);
+  assert.equal(flattenPaginatedInFlightRuns([]), null, 'nessuna pagina non prova una lista vuota');
   assert.equal(flattenPaginatedInFlightRuns([{ total_count: 1 }]), null);
   assert.equal(flattenPaginatedInFlightRuns(null), null);
+
+  assert.equal(flattenPaginatedInFlightRuns([
+    { total_count: 101, workflow_runs: firstPageRuns },
+    { total_count: 102, workflow_runs: finalPageRuns },
+  ]), null, 'total_count diversi fra pagine rendono la lettura instabile');
+  assert.equal(flattenPaginatedInFlightRuns([
+    { total_count: 101, workflow_runs: firstPageRuns },
+    { total_count: 101, workflow_runs: [] },
+  ]), null, 'un payload con cardinalita\' inferiore a total_count non e\' completo');
+  assert.equal(flattenPaginatedInFlightRuns([
+    { total_count: 2, workflow_runs: [apiRun(1, 'generate-article-ti.yml', '2026-10-05T10:00:10Z')] },
+    { total_count: 2, workflow_runs: [apiRun(1, 'generate-article-ti.yml', '2026-10-05T10:00:10Z')] },
+  ]), null, 'un id ripetuto puo\' nascondere una run mancante');
+  assert.equal(flattenPaginatedInFlightRuns([
+    { total_count: 1, workflow_runs: [{ ...apiRun(1, 'generate-article-ti.yml', '2026-10-05T10:00:10Z'), id: 0 }] },
+  ]), null, 'una run senza id positivo non puo\' provare completezza');
+  assert.equal(flattenPaginatedInFlightRuns([
+    { total_count: 1, workflow_runs: [apiRun(1, 'generate-article-ti.yml', '2026/10/05 10:00:10')] },
+  ]), null, 'una data parseable ma non ISO 8601 non prova l\'ordine temporale');
+  assert.equal(flattenPaginatedInFlightRuns([
+    { total_count: 1, workflow_runs: [apiRun(1, 'generate-article-ti.yml', '2026-02-30T10:00:10Z')] },
+  ]), null, 'una data ISO con giorno inesistente non e\' valida');
 });
 
 test('il lettore GitHub delle run cantonali pagina e appiattisce il payload completo', () => {
@@ -293,10 +330,17 @@ test('il lettore GitHub delle run cantonali pagina e appiattisce il payload comp
   assert.match(reader, /flattenPaginatedInFlightRuns\(JSON\.parse\(raw\)\)/);
 });
 
-test('il core e il gate cantonale condividono la stessa lista di stati in volo', () => {
-  const match = CORE.match(/IN_FLIGHT_STATUSES='(\[[^\n]+\])'/u);
-  assert.ok(match, 'il core deve dichiarare gli stati della concurrency in un solo punto testabile');
-  assert.deepEqual(JSON.parse(match[1]), [...IN_FLIGHT_STATUSES]);
+test('il gate e il core condividono stati, conclusioni e dimensione pagina', () => {
+  const inFlight = CORE.match(/IN_FLIGHT_STATUSES='(\[[^\n]+\])'/u);
+  const statuses = CORE.match(/ALL_RUN_STATUSES='(\[[^\n]+\])'/u);
+  const conclusions = CORE.match(/KNOWN_RUN_CONCLUSIONS='(\[[^\n]+\])'/u);
+  const pageSize = CORE.match(/actions\/workflows\/\$CALLER_WORKFLOW\/runs\?per_page=(\d+)&created=/u);
+  assert.ok(inFlight && statuses && conclusions && pageSize,
+    'il core deve dichiarare stati, conclusioni e dimensione pagina in un solo punto testabile');
+  assert.deepEqual(JSON.parse(inFlight[1]), [...IN_FLIGHT_STATUSES]);
+  assert.deepEqual(JSON.parse(statuses[1]), [...ALL_RUN_STATUSES]);
+  assert.deepEqual(JSON.parse(conclusions[1]), [...KNOWN_RUN_CONCLUSIONS]);
+  assert.equal(Number(pageSize[1]), RUNS_PER_PAGE);
 });
 
 test('tetto globale: due arrivi simultanei non si fermano a vicenda', () => {

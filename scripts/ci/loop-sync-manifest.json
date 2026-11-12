@@ -231,7 +231,7 @@
     {
       "path": "scripts/ci/canton-generation-admit.mjs",
       "mode": "corpus-only",
-      "reason": "Ammissione di una sezione cantonale alla generazione (P8 del piano sezioni cantonali, D15/D16/D19): gate Remote Config con controllo esplicito del caricamento, sezione attiva nel core, budget giornaliero sui commit delle ultime 24h, tetto globale sulle run non terminali dei chiamanti cantonali letto paginando ogni stato e deduplicando le run, cessione al beacon di quota. Lo esegue il job section_gate di generate-article-core.yml. Esiste solo qui perche' la generazione degli articoli vive solo nel corpus: il sito non ha ne' i chiamanti ne' il profilo canton-sections.json.",
+      "reason": "Ammissione di una sezione cantonale alla generazione (P8 del piano sezioni cantonali, D15/D16/D19): gate Remote Config con controllo esplicito del caricamento, sezione attiva nel core, budget giornaliero sui commit delle ultime 24h, tetto globale sulle run non terminali dei chiamanti cantonali letto paginando ogni stato e validando in modo fail-closed il totale, la cardinalita' completa, gli id univoci e la forma delle run (inclusi stato/conclusione e timestamp ISO) prima di deduplicarle, cessione al beacon di quota. Lo esegue il job section_gate di generate-article-core.yml. Esiste solo qui perche' la generazione degli articoli vive solo nel corpus: il sito non ha ne' i chiamanti ne' il profilo canton-sections.json.",
       "baseline": {
         "site": null,
         "corpus": "6c122bb4827e9470",

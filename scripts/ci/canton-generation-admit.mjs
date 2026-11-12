@@ -95,6 +95,32 @@ export const IN_FLIGHT_STATUSES = Object.freeze([
 ]);
 
 const IN_FLIGHT_STATUS_SET = new Set(IN_FLIGHT_STATUSES);
+export const ALL_RUN_STATUSES = Object.freeze([...IN_FLIGHT_STATUSES, 'completed']);
+const ALL_RUN_STATUS_SET = new Set(ALL_RUN_STATUSES);
+export const KNOWN_RUN_CONCLUSIONS = Object.freeze([
+  'success',
+  'failure',
+  'neutral',
+  'cancelled',
+  'skipped',
+  'timed_out',
+  'action_required',
+  'stale',
+  'startup_failure',
+]);
+const KNOWN_RUN_CONCLUSION_SET = new Set(KNOWN_RUN_CONCLUSIONS);
+export const RUNS_PER_PAGE = 100;
+const ISO_UTC_TIMESTAMP_RE = /^(\d{4})-(\d{2})-(\d{2})T([01]\d|2[0-3]):([0-5]\d):([0-5]\d)(?:\.\d+)?Z$/u;
+
+function isIsoUtcTimestamp(value) {
+  const match = ISO_UTC_TIMESTAMP_RE.exec(value);
+  if (!match) return false;
+  const date = new Date(value);
+  if (!Number.isFinite(date.getTime())) return false;
+  return date.toISOString().startsWith(
+    `${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}:${match[6]}`,
+  );
+}
 
 /** Conserva solo le run che possono ancora occupare uno slot di generazione. */
 export function filterInFlightRuns(runs) {
@@ -102,16 +128,38 @@ export function filterInFlightRuns(runs) {
     .filter((run) => run && IN_FLIGHT_STATUS_SET.has(run.status));
 }
 
-/** Appiattisce tutte le pagine di `gh api --paginate --slurp`. */
+/** Valida e appiattisce le pagine di `gh api --paginate --slurp`. */
 export function flattenPaginatedInFlightRuns(pages) {
-  if (!Array.isArray(pages)) return null;
+  if (!Array.isArray(pages) || pages.length === 0) return null;
   const runs = [];
+  const ids = new Set();
+  let totalCount = null;
   for (const page of pages) {
     if (!page || typeof page !== 'object' || Array.isArray(page)
-      || !Array.isArray(page.workflow_runs)) return null;
-    runs.push(...page.workflow_runs);
+      || !Array.isArray(page.workflow_runs)
+      || !Number.isSafeInteger(page.total_count)
+      || page.total_count < 0) return null;
+    if (totalCount === null) totalCount = page.total_count;
+    else if (page.total_count !== totalCount) return null;
+
+    for (const run of page.workflow_runs) {
+      if (!run || typeof run !== 'object' || Array.isArray(run)
+        || !Number.isSafeInteger(run.id) || run.id < 1
+        || typeof run.path !== 'string' || run.path.trim() === ''
+        || typeof run.created_at !== 'string' || !isIsoUtcTimestamp(run.created_at)
+        || typeof run.status !== 'string' || !ALL_RUN_STATUS_SET.has(run.status)
+        || !Object.prototype.hasOwnProperty.call(run, 'conclusion')) return null;
+
+      if (run.status === 'completed') {
+        if (typeof run.conclusion !== 'string' || !KNOWN_RUN_CONCLUSION_SET.has(run.conclusion)) return null;
+      } else if (run.conclusion !== null) return null;
+
+      if (ids.has(run.id)) return null;
+      ids.add(run.id);
+      runs.push(run);
+    }
   }
-  return runs;
+  return runs.length === totalCount ? runs : null;
 }
 
 /** Finestra del budget giornaliero. */
@@ -340,7 +388,7 @@ function readInFlightRunsFromGitHub(repo) {
   const byId = new Map();
   for (const status of IN_FLIGHT_STATUSES) {
     const raw = gh(['api', '--paginate', '--slurp',
-      `repos/${repo}/actions/runs?status=${status}&per_page=100`]);
+      `repos/${repo}/actions/runs?status=${status}&per_page=${RUNS_PER_PAGE}`]);
     if (raw === null) return null;
     try {
       const parsed = flattenPaginatedInFlightRuns(JSON.parse(raw));
