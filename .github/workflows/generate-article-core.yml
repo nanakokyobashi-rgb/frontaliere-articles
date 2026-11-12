@@ -662,6 +662,7 @@ jobs:
 
       - name: Upload provider preflight report
         if: always() && steps.mode.outputs.dry != 'true'
+        continue-on-error: true
         uses: actions/upload-artifact@v7
         with:
           name: provider-preflight-${{ github.run_id }}-${{ github.run_attempt }}
@@ -690,6 +691,7 @@ jobs:
 
       - name: Upload topic candidate feed report
         if: always() && steps.mode.outputs.dry != 'true'
+        continue-on-error: true
         uses: actions/upload-artifact@v7
         with:
           name: topic-candidate-feed-${{ github.run_id }}-${{ github.run_attempt }}
@@ -1225,6 +1227,7 @@ jobs:
 
       - name: Upload wedge diagnostics (stack, report, log del tentativo)
         if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v7
         with:
           name: generate-article-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}

@@ -1219,8 +1219,12 @@ jobs:
           PROVIDER_PREFLIGHT_OUTPUT: ${{ runner.temp }}/provider-preflight.json
         run: node generator/scripts/lib/provider-preflight.mjs
 
+      # These report uploads are best-effort telemetry. An artifact-service
+      # outage must not block an otherwise runnable generation; the recovery
+      # artifact for an unpushed article below remains fail-closed.
       - name: Upload provider preflight report
         if: always() && steps.mode.outputs.dry != 'true'
+        continue-on-error: true
         uses: actions/upload-artifact@v7
         with:
           name: provider-preflight-${{ github.run_id }}-${{ github.run_attempt }}
@@ -1254,6 +1258,7 @@ jobs:
 
       - name: Upload topic candidate feed report
         if: always() && steps.mode.outputs.dry != 'true'
+        continue-on-error: true
         uses: actions/upload-artifact@v7
         with:
           name: topic-candidate-feed-${{ github.run_id }}-${{ github.run_attempt }}
@@ -2265,6 +2270,7 @@ jobs:
       # per togliere.
       - name: Upload wedge diagnostics (stack, report, log del tentativo)
         if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v7
         with:
           name: generate-article-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
