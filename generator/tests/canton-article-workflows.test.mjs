@@ -213,6 +213,20 @@ test('gli upload diagnostici non bloccano la generazione se il servizio artifact
   }
 });
 
+test('il preflight FAQ è best-effort, ma l\'artifact dell\'articolo non pushato resta fail-closed', () => {
+  const faqWorkflow = readWorkflow('batch-faq-articles.yml');
+  assert.match(
+    workflowStepBlock(faqWorkflow, 'Upload provider preflight report'),
+    /\n        continue-on-error: true\n/,
+    'il report preflight non deve bloccare la generazione FAQ se il servizio artifact è indisponibile',
+  );
+  assert.doesNotMatch(
+    workflowStepBlock(faqWorkflow, 'Upload the unpushed article'),
+    /\n        continue-on-error:/,
+    'l\'artifact di recupero dell\'articolo FAQ non pushato deve restare fail-closed',
+  );
+});
+
 test('gli step che le sostituzioni non toccano sono identici alla sorgente, commenti a parte', () => {
   const sourceSteps = stepNames(SOURCE);
   const coreSteps = stepNames(CORE);
