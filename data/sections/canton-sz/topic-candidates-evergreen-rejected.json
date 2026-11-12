@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.keystone-sda.ch/20261109145048753194158159026": {
-      "section": "canton-sz",
-      "ts": 1794271300286
-    },
     "canton-sz::https://www.bote.ch/nachrichten/schwyz/mitte-sorgt-sich-um-platz-fuer-steuerbeamte-im-neuen-verwaltungszentrum-art-1731168": {
       "section": "canton-sz",
       "ts": 1794308958215
@@ -15,6 +11,10 @@
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/uri-nino-arnold-verlangt-antworten-zum-wohnungsmarkt-art-1731623": {
       "section": "canton-sz",
       "ts": 1794417926000
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schwyz/fairness-oder-steuer-wirrwarr-blunschy-und-goessi-kreuzen-die-klingen-zur-heiratsstrafe-art-1731405": {
+      "section": "canton-sz",
+      "ts": 1794458732205
     }
   }
 }
