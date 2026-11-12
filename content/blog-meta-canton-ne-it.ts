@@ -78,6 +78,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.fiscalita-coppie-sposate-voto.title': 'Tassazione coppie sposate: voto il 29 novembre',
     'blog.article.fiscalita-coppie-sposate-voto.excerpt': 'L\'8 marzo scorso, gli svizzeri hanno accettato con il 54% l\'imposizione individuale.',
     'blog.article.fiscalita-coppie-sposate-voto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.imprese-neuchateloise-rischio-supply-chain.title': 'Oltre il 71% delle imprese industriali vede vulnerabilità nella supply chain',
+    'blog.article.imprese-neuchateloise-rischio-supply-chain.excerpt': 'L\'indagine della CNCI del 12 novembre 2026 mostra che oltre il 71% delle imprese industriali neocastellanesi percepisce la dipendenza da alcuni fornitori come una vulnerabilità.',
+    'blog.article.imprese-neuchateloise-rischio-supply-chain.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNeIt;

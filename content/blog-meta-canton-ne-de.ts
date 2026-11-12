@@ -78,6 +78,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.fiscalita-coppie-sposate-voto.title': 'Besteuerung von Ehepaaren: Abstimmung am 29. November',
     'blog.article.fiscalita-coppie-sposate-voto.excerpt': 'Am 8. März haben die Schweizer der Individualbesteuerung mit 54% zugestimmt.',
     'blog.article.fiscalita-coppie-sposate-voto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.imprese-neuchateloise-rischio-supply-chain.title': 'Mehr als 71% der Industrieunternehmen sehen eine Anfälligkeit in der Lieferkette',
+    'blog.article.imprese-neuchateloise-rischio-supply-chain.excerpt': 'Die Erhebung der CNCI vom 12. November 2026 zeigt, dass mehr als 71% der neuenburgischen Industrieunternehmen die Abhängigkeit von bestimmten Lieferanten als eine Anfälligkeit wahrnehmen.',
+    'blog.article.imprese-neuchateloise-rischio-supply-chain.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;
