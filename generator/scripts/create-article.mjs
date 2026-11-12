@@ -14745,10 +14745,6 @@ async function translatePendingBodyWithCodex(
         fieldType: 'description',
         fieldName: field,
         translate: async ({ text: masked, sourceLang, targetLang, fieldType }) => {
-          // `admitCall` contabilizza il budget, ma la disponibilita' puo'
-          // cambiare mentre la richiesta aspetta in coda. Ricontrolla prima
-          // di riservare ogni chiamata fisica: il breaker aperto deve fermare
-          // la lane e lasciare partire il fallback storico.
           if (!isModelAvailable(codex)) {
             codexAdmissionStopped = true;
             throw new Error('modello Codex non disponibile prima della chiamata fisica');
@@ -14773,6 +14769,13 @@ async function translatePendingBodyWithCodex(
               fieldType,
               call: callForDeadline(callDeadlineMs),
             });
+          } catch (error) {
+            // Il breaker del modello può scattare tra il controllo per-segmento
+            // e il completamento del trasporto. In quel caso il wrapper di
+            // translateFieldFreeMt assorbe l'errore: ricordiamo lo stop per
+            // poter riprovare il body intero sulla catena storica.
+            if (!isModelAvailable(codex)) codexAdmissionStopped = true;
+            throw error;
           } finally {
             callAdmission.finish();
           }
