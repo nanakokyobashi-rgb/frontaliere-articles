@@ -14737,6 +14737,7 @@ async function translatePendingBodyWithCodex(
         ...codexDeadlineOptions(callDeadlineMs),
       });
       const rejected = [];
+      let codexAdmissionStopped = false;
       const text = await translateFieldFreeMt({
         text: itValue,
         sourceLang: 'it',
@@ -14746,6 +14747,7 @@ async function translatePendingBodyWithCodex(
         translate: async ({ text: masked, sourceLang, targetLang, fieldType }) => {
           const callAdmission = admitCall();
           if (!callAdmission) {
+            codexAdmissionStopped = true;
             throw new Error('budget Codex esaurito prima della chiamata fisica');
           }
           // La prima admission e' quella gia' concessa dalla lane. Le
@@ -14771,6 +14773,12 @@ async function translatePendingBodyWithCodex(
         onWarn: (msg) => console.error(`  ⚠️  [seconda corsia] ${msg}`),
         onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
       });
+      if (!text && codexAdmissionStopped && typeof callWithRetry === 'function') {
+        // `translateFieldFreeMt` cattura lo stop della cascata segmentata e
+        // restituisce un campo vuoto. Se la lane si e' fermata dopo una
+        // admission gia' concessa, riprova lo stesso body sulla catena storica.
+        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry });
+      }
       if (!text && rejected.length > 0) {
         console.error(`  ⚠️  [seconda corsia] ${locale}:${field} rifiutato da translateFieldFreeMt (${rejected.join(', ')})`);
       }

@@ -403,3 +403,68 @@ test('con Codex indisponibile la catena storica recupera il body pending', async
   assert.deepEqual(RUN_REPORT.translation.pendingBodyFields, {});
   assert.deepEqual(RUN_REPORT.translation.pendingBodyRecovered, { 'de:body1': 'historical-translation-chain' });
 });
+
+test('se la lane si arresta tra due segmenti, il body intero passa alla catena storica', async () => {
+  const at = src.indexOf('async function translatePendingBodyWithCodex(');
+  assert.notEqual(at, -1, 'translatePendingBodyWithCodex non trovata');
+  const end = src.indexOf('\n}\n', at) + 2;
+  const factory = new Function(
+    'AI_MODELS', '_pendingBodyCodexDeadlineMs', 'CODEX_TRANSLATE_TRANSPORT_RETRIES',
+    'withCodexTranslationLane', 'codexCallDeadlineMs', '_aiCallLLM', 'translateWithCodexEngine',
+    'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'console',
+    `${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
+  );
+  const processDeadlineMs = Date.now() + 300_000;
+  let admissionAttempts = 0;
+  const admission = { deadlineMs: processDeadlineMs, finish() {} };
+  const withCodexTranslationLane = ({ run }) => run({
+    deadlineMs: processDeadlineMs,
+    admission,
+    admitCall: () => {
+      admissionAttempts += 1;
+      return admissionAttempts === 1 ? admission : null;
+    },
+    reserveTransportRetry: () => false,
+  });
+  let codexCalls = 0;
+  let historicalCalls = 0;
+  const expected = 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.';
+  const translatePendingBodyWithHistoricalChain = async (itValue, locale, field, { callWithRetry }) => {
+    historicalCalls += 1;
+    assert.ok(itValue.includes('## In breve'));
+    assert.equal(locale, 'de');
+    assert.equal(field, 'body1');
+    assert.equal(typeof callWithRetry, 'function');
+    return expected;
+  };
+  const translatePendingBodyWithCodex = factory(
+    { CODEX_CLI_PRIMARY: 'codex-cli/test' },
+    processDeadlineMs,
+    2,
+    withCodexTranslationLane,
+    codexCallDeadlineMs,
+    () => { throw new Error('il test non deve arrivare al trasporto reale'); },
+    async () => {
+      codexCalls += 1;
+      return 'Der erste Absatz wurde erfolgreich übersetzt und bleibt in der richtigen Sprache.';
+    },
+    translateFieldFreeMt,
+    (text) => text,
+    translatePendingBodyWithHistoricalChain,
+    { error() {}, warn() {}, log() {} },
+  );
+  const source = [
+    'Il primo paragrafo contiene contesto sufficiente e viene tradotto prima che si esaurisca il budget Codex condiviso.',
+    '',
+    '## In breve',
+    '',
+    'Il secondo paragrafo resta da tradurre quando la nuova admission viene rifiutata dal circuit breaker.',
+  ].join('\n');
+
+  const translated = await translatePendingBodyWithCodex(source, 'de', 'body1', { callWithRetry: async () => ({}) });
+
+  assert.equal(translated, expected);
+  assert.equal(codexCalls, 1);
+  assert.equal(admissionAttempts, 2);
+  assert.equal(historicalCalls, 1);
+});
