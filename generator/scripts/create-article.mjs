@@ -14673,7 +14673,9 @@ let _pendingBodyCodexDeadlineMs = null;
 let _pendingBodySecondLaneArmed = false;
 
 function pendingBodySecondLaneAvailable() {
-  return _pendingBodySecondLaneArmed && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY);
+  return _pendingBodySecondLaneArmed
+    && !getCascadeStats().codexTranslation?.stopReason
+    && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY);
 }
 
 function legacyTranslationChain() {
@@ -14681,13 +14683,16 @@ function legacyTranslationChain() {
 }
 
 function pendingBodyRecoveryAvailable() {
-  return _pendingBodySecondLaneArmed && (
-    isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY)
-    || legacyTranslationChain().some((model) => isModelAvailable(model))
-  );
+  return pendingBodySecondLaneAvailable()
+    || (_pendingBodySecondLaneArmed && legacyTranslationChain().some((model) => isModelAvailable(model)));
 }
 
-async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCall = null } = {}) {
+async function translatePendingBodyWithCodex(
+  itValue,
+  locale,
+  field,
+  { onCodexCall = null, callWithRetry = null } = {},
+) {
   const codex = AI_MODELS.CODEX_CLI_PRIMARY;
   const codexDeadlineOptions = (deadlineMs) => ({
     deadlineMs,
@@ -14695,6 +14700,12 @@ async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCa
   return withCodexTranslationLane({
     processDeadlineMs: _pendingBodyCodexDeadlineMs,
     fallback: () => {
+      // La disponibilità può cambiare dopo la selezione della corsia: il
+      // circuit-breaker può fermare Codex mentre la richiesta aspetta in coda.
+      // Non lasciare il body pending se la catena storica è ancora utilizzabile.
+      if (typeof callWithRetry === 'function') {
+        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry });
+      }
       throw new Error('finestra residua troppo corta o lane Codex non disponibile');
     },
     run: async ({ deadlineMs: laneDeadlineMs, admission, admitCall, reserveTransportRetry }) => {
@@ -15728,7 +15739,10 @@ ${localizedToponymInstruction(targetLang)}`;
         itValue,
         locale,
         field,
-        { onCodexCall: () => { translationRecoveryCodexCalls += 1; } },
+        {
+          onCodexCall: () => { translationRecoveryCodexCalls += 1; },
+          callWithRetry,
+        },
       )
       : translatePendingBodyWithHistoricalChain(
         itValue,

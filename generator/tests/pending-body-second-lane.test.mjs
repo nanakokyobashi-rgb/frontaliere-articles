@@ -247,6 +247,7 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(body, /fieldName: field,/);
   assert.match(body, /chain: \[codex\]/);
   assert.match(body, /prefer: \[codex\]/);
+  assert.match(body, /fallback: \(\) => \{[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry \}\)/);
   // Nessun orologio di modulo: i producer che importano translateArticle()
   // (publish-journalist-article.mjs) non hanno CREATE_ARTICLE_MAX_WALL_MS.
   assert.doesNotMatch(body, /RUN_START_MS|RUN_WALL_BUDGET_MS/);
@@ -264,9 +265,11 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
 
 test('la corsia si arma solo nel percorso CLI: i producer importati (publish-journalist) non la interrogano', () => {
   const avail = src.slice(src.indexOf('function pendingBodySecondLaneAvailable() {'));
-  assert.match(avail.slice(0, avail.indexOf('\n}\n')), /_pendingBodySecondLaneArmed && isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)/);
+  assert.match(avail.slice(0, avail.indexOf('\n}\n')), /_pendingBodySecondLaneArmed/);
+  assert.match(avail.slice(0, avail.indexOf('\n}\n')), /getCascadeStats\(\)\.codexTranslation\?\.stopReason/);
+  assert.match(avail.slice(0, avail.indexOf('\n}\n')), /isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)/);
   assert.match(src, /function pendingBodyRecoveryAvailable\(\) \{/);
-  assert.match(src, /legacyTranslationChain\(\)\.some\(\(model\) => isModelAvailable\(model\)\)/);
+  assert.match(src, /pendingBodySecondLaneAvailable\(\)\n\s+\|\| \(_pendingBodySecondLaneArmed && legacyTranslationChain\(\)\.some\(\(model\) => isModelAvailable\(model\)\)\)/);
   assert.match(src, /^let _pendingBodySecondLaneArmed = false;$/m);
   const arms = [...src.matchAll(/_pendingBodySecondLaneArmed = true;/g)].map((m) => m.index);
   assert.equal(arms.length, 1);
@@ -274,7 +277,34 @@ test('la corsia si arma solo nel percorso CLI: i producer importati (publish-jou
   assert.ok(arms[0] > installStart && arms[0] < src.indexOf('\n}\n', installStart), 'la corsia va armata solo da installCodexTranslateProcessDeadline (ramo CLI)');
   const { block } = extractSecondLaneBlock();
   assert.match(block, /isLaneAvailable: \(\) => pendingBodyRecoveryAvailable\(\),/);
+  assert.match(src, /translatePendingBodyWithCodex\([\s\S]*callWithRetry,/);
   assert.match(src, /pending_recovered=\$\{JSON\.stringify\(recovery\.pendingBodyRecovered \|\| \{\}\)\}/);
+});
+
+test('lo stop della lane Codex non seleziona una corsia che poi fallirebbe', () => {
+  const at = src.indexOf('function pendingBodySecondLaneAvailable() {');
+  const end = src.indexOf('\n}\n', at) + 2;
+  const makeGuard = new Function(
+    'getCascadeStats',
+    'isModelAvailable',
+    'AI_MODELS',
+    '_pendingBodySecondLaneArmed',
+    `${src.slice(at, end)}\nreturn pendingBodySecondLaneAvailable;`,
+  );
+  const available = makeGuard(
+    () => ({ codexTranslation: { stopReason: '' } }),
+    () => true,
+    { CODEX_CLI_PRIMARY: 'codex-cli/test' },
+    true,
+  );
+  const stopped = makeGuard(
+    () => ({ codexTranslation: { stopReason: 'budget esaurito' } }),
+    () => true,
+    { CODEX_CLI_PRIMARY: 'codex-cli/test' },
+    true,
+  );
+  assert.equal(available(), true);
+  assert.equal(stopped(), false);
 });
 
 /** Il predicato condiviso col retry di troncamento, ritagliato verbatim dal sorgente. */
