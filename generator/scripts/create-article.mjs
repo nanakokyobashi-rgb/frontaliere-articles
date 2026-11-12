@@ -14331,7 +14331,7 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     return end;
   }
 
-  function readProtectedMarkdownEnd(text, start) {
+  function readCoreProtectedMarkdownEnd(text, start) {
     const codeEnd = readCodeSpanEnd(text, start);
     if (codeEnd !== null) return codeEnd;
     const linkEnd = readLinkEnd(text, start);
@@ -14347,13 +14347,47 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     return null;
   }
 
+  function isMarkdownPunctuation(char) {
+    return Boolean(char) && (/^[\p{P}\p{S}]$/u.test(char) || char === '`');
+  }
+
+  function isWrapperPunctuation(char) {
+    // Do not absorb the opener of a second adjacent Markdown atom (for
+    // example `[link](url)*another span*`) as if it closed the wrapper around
+    // the first one. The closing punctuation that can wrap a protected atom
+    // remains covered, including Unicode quotation marks.
+    return isMarkdownPunctuation(char) && !'`*_~[!'.includes(char);
+  }
+
+  function readProtectedMarkdownEnd(text, start) {
+    const directEnd = readCoreProtectedMarkdownEnd(text, start);
+    if (directEnd !== null) return directEnd;
+
+    // A valid protected atom can be wrapped in punctuation, e.g.
+    // `([label with many words](url))` or `(*a long phrase*)`. Search only
+    // through the contiguous punctuation prefix, then retain its closing
+    // punctuation with the protected atom so a chunk boundary cannot land
+    // inside the Markdown construct or its wrapper.
+    for (let candidate = start; candidate < text.length; candidate += 1) {
+      if (!isMarkdownPunctuation(text[candidate])) break;
+      const coreEnd = readCoreProtectedMarkdownEnd(text, candidate);
+      if (coreEnd === null) continue;
+      let end = coreEnd;
+      while (end < text.length && isWrapperPunctuation(text[end])) end += 1;
+      return end;
+    }
+    return null;
+  }
+
   function readMarkdownAtomEnd(text, start) {
     return readProtectedMarkdownEnd(text, start) ?? readPlainAtomEnd(text, start);
   }
 
   function readStructuredLineContentStart(text, start) {
     if (start > 0 && text[start - 1] !== '\n') return null;
-    const prefix = text.slice(start).match(/^(?: {0,3}(?:[-+*]|\d+[.)]|#{1,6}|>)[ \t]+)/);
+    const prefix = text
+      .slice(start)
+      .match(/^ {0,3}(?:(?:[-+*]|\d+[.)]|#{1,6}|>)[ \t]+)+/);
     return prefix ? start + prefix[0].length : null;
   }
 

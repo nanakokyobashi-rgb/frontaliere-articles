@@ -720,6 +720,18 @@ test('il chunker protegge link, code e prefissi di lista e conserva i separatori
   assert.ok(chunks.every((chunk) => !/(^|\n)\s*[-+*]\s*$/.test(chunk)), 'un marker di lista non deve restare orfano');
   assert.ok(chunks.separators.includes(' '), 'un taglio interno deve conservare lo spazio sorgente');
   assert.ok(chunks.separators.some((separator) => separator.includes('\n\n')), 'il confine di paragrafo deve restare distinto');
+
+  const wrappedLink = '([etichetta con molte parole](https://example.test))';
+  const wrappedEmphasis = '(*frase lunga*)';
+  const wrappedSource = `Prima ${wrappedLink} dopo ${wrappedEmphasis} fine.`;
+  const wrappedChunks = splitIntoTranslationChunks(wrappedSource, 4);
+  const wrappedRebuilt = wrappedChunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : wrappedChunks.separators[index - 1]) + chunk,
+    '',
+  );
+  assert.equal(wrappedRebuilt, wrappedSource, 'i wrapper di punteggiatura devono restare ricostruibili');
+  assert.ok(wrappedChunks.some((chunk) => chunk.includes(wrappedLink)), 'il link wrapped deve restare intero');
+  assert.ok(wrappedChunks.some((chunk) => chunk.includes(wrappedEmphasis)), 'l’enfasi wrapped deve restare intera');
 });
 
 test('il chunker protegge anche enfasi singole e rifiuta gli atomi protetti oversize prima dell’invio', () => {
@@ -742,11 +754,13 @@ test('il chunker protegge anche enfasi singole e rifiuta gli atomi protetti over
   for (const protectedSource of [
     `\`${longWords}\``,
     `[${longWords}](https://example.test)`,
+    `([${longWords}](https://example.test))`,
     `**${longWords}**`,
     `__${longWords}__`,
     `~~${longWords}~~`,
     `*${longWords}*`,
     `_${longWords}_`,
+    `(*${longWords}*)`,
   ]) {
     assert.throws(
       () => splitIntoTranslationChunks(protectedSource, 500),
@@ -764,6 +778,7 @@ test('il chunker mantiene indentazione, marker e primo atomo strutturale nello s
     'Introduzione breve',
     '  - prima voce elenco',
     '   > citazione breve',
+    '> - primo elemento annidato',
     ' # heading finale',
   ].join('\n');
   const chunks = splitIntoTranslationChunks(source, 2);
@@ -775,9 +790,10 @@ test('il chunker mantiene indentazione, marker e primo atomo strutturale nello s
   assert.equal(rebuilt, source);
   assert.ok(chunks.some((chunk) => chunk.includes('  - prima')));
   assert.ok(chunks.some((chunk) => chunk.includes('   > citazione')));
+  assert.ok(chunks.some((chunk) => chunk.includes('> - primo')));
   assert.ok(chunks.some((chunk) => chunk.includes(' # heading')));
   assert.ok(
-    chunks.every((chunk) => !/(^|\n)[ \t]{0,3}(?:[-+*]|\d+[.)]|#{1,6}|>)[ \t]*$/.test(chunk)),
+    chunks.every((chunk) => !/(^|\n)[ \t]{0,3}(?:[-+*]|\d+[.)]|#{1,6}|>)(?:[ \t]+(?:[-+*]|\d+[.)]|#{1,6}|>))*[ \t]*$/.test(chunk)),
     'nessun marker strutturale deve restare orfano a fine chunk',
   );
 });
