@@ -14428,13 +14428,15 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
   }
 
   function readNumericAtomEnd(text, start) {
+    const hasSign = ['+', '-', '−'].includes(text[start]);
+    const numberStart = hasSign ? start + 1 : start;
     const previous = text[start - 1];
     if (previous && /[\p{L}\p{N}_]/u.test(previous)) return null;
-    if (!/\d/u.test(text[start] || '')) return null;
+    if (!/\d/u.test(text[numberStart] || '')) return null;
 
     const isDigit = (char) => /\d/u.test(char || '');
     const isSeparator = (char) => /[.,'’\u00a0\u202f ]/u.test(char || '');
-    let end = start;
+    let end = numberStart;
     while (isDigit(text[end])) end += 1;
     while (isSeparator(text[end]) && isDigit(text[end + 1])) {
       end += 1;
@@ -15488,6 +15490,85 @@ async function translateArticle(data) {
     // source-owned routes and inline markers still look valid.
     if (!hasSameLineSkeleton(bodyText, joined)) return null;
 
+    // `hasSameLineSkeleton` deliberately compares only the first structural
+    // marker. That is enough for the shared line guard, but not for a composed
+    // body: `> - voce` and `> voce` are both `quote`, while a table's inner
+    // pipes are not part of its coarse `table` signature. Keep the complete
+    // nested prefix and every escaped/raw pipe in the source-owned contract.
+    const normalizeJoinLines = (text) => String(text ?? '')
+      .replace(/\u00a0/g, ' ')
+      .replace(/\r\n?/g, '\n')
+      .split('\n')
+      .map((line) => {
+        const indent = line.match(/^[ \t]*/u)?.[0] || '';
+        const content = line.slice(indent.length).replace(/[ \t]+/gu, ' ').trim();
+        return content ? `${indent}${content}` : '';
+      })
+      .join('\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .replace(/^\n+|\n+$/g, '')
+      .split('\n');
+    const fullStructuralPrefix = (line) => {
+      const value = String(line ?? '');
+      const structuralKinds = new Set(['heading', 'bullet', 'ordered', 'quote', 'table']);
+      let cursor = 0;
+      let prefixEnd = 0;
+      while (cursor < value.length) {
+        const beforePrefix = cursor;
+        while (cursor < value.length && /[ \t]/u.test(value[cursor])) cursor += 1;
+        const signature = lineStructuralSignature(value.slice(cursor));
+        if (!structuralKinds.has(signature.kind)) break;
+        if (signature.kind === 'heading') {
+          while (cursor < value.length && value[cursor] === '#') cursor += 1;
+        } else if (signature.kind === 'ordered') {
+          while (cursor < value.length && /\d/u.test(value[cursor])) cursor += 1;
+          if (value[cursor] === '.' || value[cursor] === ')') cursor += 1;
+        } else {
+          cursor += 1;
+        }
+        while (cursor < value.length && /[ \t]/u.test(value[cursor])) cursor += 1;
+        if (cursor <= beforePrefix) break;
+        prefixEnd = cursor;
+      }
+      return value.slice(0, prefixEnd);
+    };
+    const pipeSkeleton = (line) => {
+      const value = String(line ?? '');
+      const pipes = [];
+      for (let cursor = 0; cursor < value.length; cursor += 1) {
+        if (value[cursor] !== '|') continue;
+        let slashCount = 0;
+        for (let previous = cursor - 1; previous >= 0 && value[previous] === '\\'; previous -= 1) {
+          slashCount += 1;
+        }
+        pipes.push(slashCount % 2 === 1 ? 'escaped' : 'raw');
+      }
+      return pipes;
+    };
+    const isLocalizedOrdinalLine = (sourceLine, translatedLine) => {
+      const sourceOrdinal = String(sourceLine ?? '').match(/^(\s*)(\d{1,2})[°º]\s+/u);
+      const translatedOrdinal = String(translatedLine ?? '').match(/^(\s*)(\d{1,2})\.\s+/u);
+      return Boolean(
+        sourceOrdinal
+        && translatedOrdinal
+        && sourceOrdinal[1] === translatedOrdinal[1]
+        && sourceOrdinal[2] === translatedOrdinal[2],
+      );
+    };
+    const sourceStructureLines = normalizeJoinLines(bodyText);
+    const joinedStructureLines = normalizeJoinLines(joined);
+    if (sourceStructureLines.length !== joinedStructureLines.length) return null;
+    for (const [index, sourceLine] of sourceStructureLines.entries()) {
+      const joinedLine = joinedStructureLines[index];
+      if (fullStructuralPrefix(sourceLine) !== fullStructuralPrefix(joinedLine)
+        && !isLocalizedOrdinalLine(sourceLine, joinedLine)) {
+        return null;
+      }
+      if (JSON.stringify(pipeSkeleton(sourceLine)) !== JSON.stringify(pipeSkeleton(joinedLine))) {
+        return null;
+      }
+    }
+
     const readCodeSpanEnd = (value, start) => {
       if (value[start] !== '`') return null;
       let markerLength = 0;
@@ -15570,11 +15651,46 @@ async function translateArticle(data) {
 
       const definitions = [];
       const definitionKeys = new Set();
+      const readDefinitionLabelStart = (lineStart, lineEnd) => {
+        let cursor = lineStart;
+        let consumedPrefix = false;
+        while (cursor < lineEnd) {
+          while (cursor < lineEnd && /[ \t]/u.test(value[cursor])) cursor += 1;
+          const marker = value[cursor];
+          let next = cursor;
+          if (marker === '>') {
+            next += 1;
+          } else if (
+            ['-', '*', '+', '•'].includes(marker)
+            && (next + 1 >= lineEnd || /[ \t]/u.test(value[next + 1]))
+          ) {
+            next += 1;
+          } else {
+            const ordered = value.slice(cursor, lineEnd).match(/^\d+[.)](?:[ \t]+|$)/u);
+            if (!ordered) {
+              return {
+                labelStart: cursor,
+                consumedPrefix,
+                leadingIndent: cursor - lineStart,
+              };
+            }
+            next += ordered[0].length;
+          }
+          cursor = next;
+          consumedPrefix = true;
+        }
+        return {
+          labelStart: cursor,
+          consumedPrefix,
+          leadingIndent: cursor - lineStart,
+        };
+      };
       for (let lineStart = 0; lineStart < value.length;) {
-        let labelStart = lineStart;
-        while (labelStart < value.length && /[ \t]/u.test(value[labelStart])) labelStart += 1;
+        const nextLine = value.indexOf('\n', lineStart);
+        const lineEnd = nextLine === -1 ? value.length : nextLine;
+        const { labelStart, consumedPrefix, leadingIndent } = readDefinitionLabelStart(lineStart, lineEnd);
         const labelEnd = readBalancedBracketEnd(labelStart);
-        if (labelStart - lineStart <= 3 && labelEnd !== null && value[labelEnd + 1] === ':') {
+        if ((consumedPrefix || leadingIndent <= 3) && labelEnd !== null && value[labelEnd + 1] === ':') {
           const key = normalizeReference(value.slice(labelStart + 1, labelEnd));
           let targetStart = labelEnd + 2;
           while (/[ \t]/u.test(value[targetStart] || '')) targetStart += 1;
@@ -15591,12 +15707,11 @@ async function translateArticle(data) {
           } else {
             while (targetEnd < value.length && !/[ \t\n]/u.test(value[targetEnd])) targetEnd += 1;
           }
-          if (key && targetEnd > targetStart && !definitionKeys.has(key)) {
+          if (key && targetEnd > targetStart) {
             definitions.push({ key, target: value.slice(targetStart, targetEnd) });
             definitionKeys.add(key);
           }
         }
-        const nextLine = value.indexOf('\n', lineStart);
         if (nextLine === -1) break;
         lineStart = nextLine + 1;
       }
@@ -15733,15 +15848,17 @@ async function translateArticle(data) {
     }
 
     // Numeric values are source-owned too. Locale-specific grouping and
-    // decimal separators may change, but the ordered digit sequence (and a
-    // percent/degree unit) must remain identical after the join.
+    // decimal separators may change, but the sign, ordered digit sequence and
+    // percent/degree unit must remain identical after the join.
     const numericContract = (text) => {
       const value = String(text ?? '');
-      const numberPattern = /(?<![\p{L}\p{N}_])\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:\s*[%°º])?(?![\p{L}\p{N}_])/gu;
+      const numberPattern = /(?<![\p{L}\p{N}_])[+\-−]?\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:\s*[%°º])?(?![\p{L}\p{N}_])/gu;
       return [...value.matchAll(numberPattern)].map(([token]) => {
         const unit = token.match(/[%°º]$/u)?.[0] || '';
         const number = unit ? token.slice(0, -unit.length) : token;
-        return `${number.replace(/[.,'’\u00a0\u202f ]/gu, '')}:${unit}`;
+        const sign = number.match(/^[+\-−]/u)?.[0] || '';
+        const unsigned = sign ? number.slice(sign.length) : number;
+        return `${sign}${unsigned.replace(/[.,'’\u00a0\u202f ]/gu, '')}:${unit}`;
       });
     };
     if (JSON.stringify(numericContract(bodyText)) !== JSON.stringify(numericContract(joined))) {

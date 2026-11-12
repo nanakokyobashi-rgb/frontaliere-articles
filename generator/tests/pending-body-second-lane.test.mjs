@@ -950,6 +950,42 @@ test('il join della traduzione riusa i separatori sorgente invece di inventare p
   assert.equal(translated, source, 'un traduttore che conserva i chunk non deve cambiare la struttura Markdown');
 });
 
+test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', async () => {
+  const realChunker = buildChunker();
+  const makeTranslator = (mutate) => {
+    const translateInChunks = new Function(
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
+      `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+    )(
+      (bodyText) => realChunker(bodyText, 50),
+      async (prompt) => ({ body1: mutate(prompt) }),
+      (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+      translatedStringOrNull,
+      () => false,
+      balanceMarkdownMarkers,
+      hasSameLineSkeleton,
+      lineStructuralSignature,
+    );
+    return (bodyText) => translateInChunks(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
+  };
+  const source = [
+    '> - voce annidata con testo tradotto',
+    '| colonna | valore |',
+  ].join('\n');
+
+  assert.equal(await makeTranslator((chunk) => chunk)(source), source);
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('> - ', '> '))(source),
+    null,
+    'la perdita del bullet dentro il blockquote non deve passare il guard',
+  );
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('| valore', 'valore'))(source),
+    null,
+    'la perdita di una pipe interna alla tabella non deve passare il guard',
+  );
+});
+
 test('il joiner rifiuta un link Markdown alterato dopo la ricomposizione', async () => {
   const realChunker = buildChunker();
   const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
@@ -1018,6 +1054,43 @@ test('il joiner protegge reference link, definizioni e autolink', async () => {
   }
 });
 
+test('il joiner protegge anche le definizioni dentro prefissi Markdown', async () => {
+  const realChunker = buildChunker();
+  const makeTranslator = (mutate) => {
+    const translateInChunks = new Function(
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
+      `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+    )(
+      (bodyText) => realChunker(bodyText, 50),
+      async (prompt) => ({ body1: mutate(prompt) }),
+      (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+      translatedStringOrNull,
+      () => false,
+      balanceMarkdownMarkers,
+      hasSameLineSkeleton,
+      lineStructuralSignature,
+    );
+    return (bodyText) => translateInChunks(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
+  };
+  const source = [
+    '> [quote-ref]: https://example.test/quote',
+    '- [list-ref]: https://example.test/list',
+    'Usa [quote-ref] e [list-ref] nel testo.',
+  ].join('\n');
+
+  assert.equal(await makeTranslator((chunk) => chunk)(source), source);
+  for (const [label, target] of [
+    ['blockquote', 'https://example.test/quote'],
+    ['lista', 'https://example.test/list'],
+  ]) {
+    assert.equal(
+      await makeTranslator((chunk) => chunk.replace(target, 'https://evil.example/changed'))(source),
+      null,
+      `la definizione dentro ${label} non deve poter cambiare destinazione`,
+    );
+  }
+});
+
 test('il joiner protegge la sequenza numerica ma ammette i separatori locali', async () => {
   const realChunker = buildChunker();
   const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
@@ -1048,6 +1121,19 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     await makeTranslator((chunk) => chunk.replace('12 345', '12.346'))(source),
     null,
     'una cifra modificata non deve arrivare al sanitizer finale',
+  );
+
+  const signedSource = 'Prima -12% dopo altre parole da spezzare ancora oggi.';
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('-12%', '12%'))(signedSource),
+    null,
+    'un segno meno rimosso non deve arrivare al sanitizer finale',
+  );
+
+  const signedGroupedChunks = realChunker('Valore -12 345 dopo', 2);
+  assert.ok(
+    signedGroupedChunks.some((chunk) => chunk.includes('-12 345')),
+    'il token numerico con segno e separatore non deve essere spezzato tra richieste',
   );
 });
 
