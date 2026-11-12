@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "fisco",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "b84c5dcbc274383e92db411fdbb4ee5e4e9d657582b1d57277a6bef154961554",
+  "updatedAt": "2026-11-12T10:45:43.005Z",
+  "contentHash": "7e1657b9138958988add61f21e6a5c637af445b64129d46c9d912d8a2015584b",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -125,6 +125,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Vaud: budget dopo l'accettazione della riduzione d'imposta",
+          "url": "/articoli-vaud/quattro-temi-puntata-vaud/",
+          "excerpt": "La fonte presenta quattro domande sul Vaud: budget dopo la riduzione d'imposta, servizio civile, cemento dopo il Mormont e costo delle cure.",
+          "date": "2026-11-12T04:48:16.848Z"
+        },
+        {
           "title": "Fisco Vaud: imposte su indennità abusi, ricorso in vista",
           "url": "/articoli-vaud/fisco-vaud-indennita-abuso-imposte/",
           "excerpt": "La RTS riferisce che una vittima di abusi sessuali commessi a Pully deve pagare imposte su una parte dei CHF 220'000 versati dalla Chiesa cattolica.",
@@ -165,12 +171,6 @@
           "url": "/articoli-svizzera/vaud-riduzione-reddito-sostanza/",
           "excerpt": "Il Vaud approva una riduzione del 12% delle imposte cantonali su reddito e sostanza. Si parla di 272 milioni in meno dal prossimo 1° gennaio.",
           "date": "2026-09-28T21:32:07.062Z"
-        },
-        {
-          "title": "Vaud: sì al taglio del 12% delle imposte",
-          "url": "/articoli-svizzera/vaud-voto-taglio-fiscale/",
-          "excerpt": "Il 53,1% dei votanti nel canton Vaud approva un taglio del 12% alle imposte su reddito e sostanza; partecipazione al 50,0%.",
-          "date": "2026-09-27T13:05:48.387Z"
         }
       ],
       "latestCantonArticles": [],
@@ -200,7 +200,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     },
     "en": {
       "canton": "VD",
@@ -303,6 +303,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Vaud: budget after the tax reduction was approved",
+          "url": "/en/vaud-articles/vaud-budget-tax-cut-debate/",
+          "excerpt": "The source presents four questions about Vaud: the budget after the tax reduction, civilian service, cement after Mormont and the cost of care.",
+          "date": "2026-11-12T04:48:16.848Z"
+        },
+        {
           "title": "Vaud tax authorities: tax on abuse compensation, appeal in sight",
           "url": "/en/vaud-articles/vaud-tax-abuse-compensation-taxes/",
           "excerpt": "RTS reports that a victim of sexual abuse committed in Pully must pay taxes on a portion of the CHF 220,000 paid by the Catholic Church.",
@@ -342,12 +348,6 @@
           "url": "/en/swiss-articles/vaud-tax-cut-income-wealth/",
           "excerpt": "Vaud approves a 12% reduction in cantonal income and substance taxes. There is talk of 272 million less from next January 1.",
           "date": "2026-09-28T21:32:07.062Z"
-        },
-        {
-          "title": "Vaud: yes to a 12% cut in taxes",
-          "url": "/en/swiss-articles/vaud-vote-tax-cut/",
-          "excerpt": "53.1% of voters in the canton of Vaud approve a 12% cut to income and wealth taxes; turnout at 50.0%.",
-          "date": "2026-09-27T13:05:48.387Z"
         }
       ],
       "latestCantonArticles": [],
@@ -377,7 +377,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     },
     "de": {
       "canton": "VD",
@@ -480,6 +480,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Waadt: Budget nach der Annahme der Steuersenkung",
+          "url": "/de/waadt-artikel/waadt-budget-steuersenkung-debatte/",
+          "excerpt": "Die Quelle stellt vier Fragen zum Kanton Waadt vor: Budget nach der Steuersenkung, Zivildienst, Zement nach dem Mormont und Kosten der Gesundheitsversorgung.",
+          "date": "2026-11-12T04:48:16.848Z"
+        },
+        {
           "title": "Waadt: Steuern auf Missbrauchs-Entschädigung, Rekurs",
           "url": "/de/waadt-artikel/waadt-steuer-missbrauchsentschadigung-steuern/",
           "excerpt": "Die RTS berichtet, dass ein Opfer von sexuellem Missbrauch, der in Pully begangen wurde, auf einen Teil der von der katholischen Kirche gezahlten CHF 220'000 Steuern zahlen muss.",
@@ -519,12 +525,6 @@
           "url": "/de/schweiz-artikel/waadt-steuersenkung-einkommen-vermoegen/",
           "excerpt": "Das Waadtland genehmigt eine Senkung der kantonalen Einkommens- und Vermögenssteuern um 12%. Man spricht von 272 Millionen weniger ab dem 1. Januar.",
           "date": "2026-09-28T21:32:07.062Z"
-        },
-        {
-          "title": "Waadt: Ja zur Senkung der Steuern um 12%",
-          "url": "/de/schweiz-artikel/waadt-abstimmung-steuersenkung/",
-          "excerpt": "53,1% der Stimmberechtigten im Kanton Waadt befürworten eine Senkung der Einkommens- und Vermögenssteuern um 12%; Stimmbeteiligung bei 50,0%.",
-          "date": "2026-09-27T13:05:48.387Z"
         }
       ],
       "latestCantonArticles": [],
@@ -554,7 +554,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     },
     "fr": {
       "canton": "VD",
@@ -657,6 +657,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Vaud : budget après l'acceptation de la réduction d'impôt",
+          "url": "/fr/articles-vaud/vaud-budget-baisse-impot-debat/",
+          "excerpt": "La source présente quatre questions sur le Vaud : le budget après la réduction d'impôt, le service civil, le ciment après le Mormont et le coût des soins.",
+          "date": "2026-11-12T04:48:16.848Z"
+        },
+        {
           "title": "Fisc vaudois : impôts sur une indemnité pour abus, recours en vue",
           "url": "/fr/articles-vaud/fisc-vaud-indemnite-abus-impots/",
           "excerpt": "D'après la RTS, une personne victime d'abus sexuels à Pully est imposée sur une partie de l'indemnité de 220'000 francs versée par l'Eglise catholique.",
@@ -697,12 +703,6 @@
           "url": "/fr/articles-suisse/vaud-baisse-impots-revenu-fortune/",
           "excerpt": "Le Vaud approuve une réduction de 12% des impôts cantonaux sur le revenu et la fortune. On parle de 272 millions de moins à partir du 1er janvier prochain.",
           "date": "2026-09-28T21:32:07.062Z"
-        },
-        {
-          "title": "Vaud : oui à la réduction de 12% des impôts",
-          "url": "/fr/articles-suisse/vaud-vote-baisse-impots/",
-          "excerpt": "53,1% des votants dans le canton de Vaud approuvent une réduction de 12% des impôts sur le revenu et la fortune ; participation à 50,0%.",
-          "date": "2026-09-27T13:05:48.387Z"
         }
       ],
       "latestCantonArticles": [],
@@ -732,7 +732,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T10:45:43.005Z"
     }
   }
 }
