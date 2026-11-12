@@ -5902,10 +5902,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-09T02:16:32.577Z",
-      "lastStrikeAt": "2026-11-12T07:20:39.498Z",
-      "expiresAt": "2026-12-12T07:20:39.498Z"
+      "lastStrikeAt": "2026-11-12T08:03:18.028Z",
+      "expiresAt": "2026-12-12T08:03:18.028Z"
     },
     {
       "keyword": "vivere a Gemonio e lavorare in Ticino da frontaliere",
