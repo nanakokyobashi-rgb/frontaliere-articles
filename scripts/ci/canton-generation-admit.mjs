@@ -258,7 +258,7 @@ export function decideCantonAdmission({
     return {
       proceed: false,
       reason: 'parallel-unreadable',
-      detail: 'run in_progress non leggibili: il tetto globale non e\' verificabile, si salta lo slot',
+      detail: 'run in volo non leggibili: il tetto globale non e\' verificabile, si salta lo slot',
     };
   }
   const { older, total, selfSeen } = olderCantonRuns(runs, selfId);

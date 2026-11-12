@@ -419,7 +419,7 @@ test('il gate gira DOPO load-rc-env e PRIMA che il job generate esista', () => {
 test('il gate legge il token del runner, non un PAT interpolato dal contesto env', () => {
   const gate = jobBlock('section_gate');
   assert.match(gate, /GH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/);
-  assert.match(gate, /\n {6}actions: read\n/, 'senza actions: read le run in_progress non si leggono');
+  assert.match(gate, /\n {6}actions: read\n/, 'senza actions: read le run in volo non si leggono');
   assert.match(gate, /CANTON_GENERATION_MAX_PARALLEL: \$\{\{ vars\.CANTON_GENERATION_MAX_PARALLEL \}\}/);
   assert.match(gate, /CANTON_DAILY_BUDGET_CAP: \$\{\{ vars\.CANTON_DAILY_BUDGET_CAP \}\}/);
 });
