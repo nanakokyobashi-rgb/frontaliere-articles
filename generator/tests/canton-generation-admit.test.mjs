@@ -242,7 +242,8 @@ test('tetto globale: contano solo i chiamanti cantonali piu\' vecchi di questa r
     run(103, 'generate-article-lu.yml@refs/heads/main', '2026-10-05T09:30:00Z'), // path REST con ref
     run(80, 'generate-article.yml', '2026-10-05T09:00:00Z'), // frontaliere/svizzera: non e' un cantone
     run(81, 'generate-article-core.yml', '2026-10-05T09:00:00Z'), // il riusabile non ha run sue
-    run(82, 'publish-api.yml', '2026-10-05T09:00:00Z'),
+    run(82, 'generate-article-core.yml@refs/heads/main', '2026-10-05T09:00:00Z'), // anche il path REST del riusabile puo' avere un ref
+    run(83, 'publish-api.yml', '2026-10-05T09:00:00Z'),
   ];
   assert.deepEqual(olderCantonRuns(runs, 100), { older: 3, total: 5, selfSeen: true });
   assert.equal(CANTON_WORKFLOW_PATH_RE.test(CORE_WORKFLOW_PATH), true, 'la regex da sola prenderebbe anche il core: va escluso per nome');
