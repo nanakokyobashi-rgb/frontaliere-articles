@@ -249,4 +249,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'pfiffner-450-posti-pratteln',
+ category: 'novita',
+ date: '2026-11-12T23:48:39.437Z',
+ image: '/images/blog/article-pfiffner-450-posti-pratteln.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -69,6 +69,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.basilea-mozioni-climatizzazione.title': 'Basel Grand Council: motions to simplify air conditioner permits',
     'blog.article.basilea-mozioni-climatizzazione.excerpt': 'The Grand Council has submitted two motions to the government: one to abolish the authorization requirement and the other for simpler procedures to combat the heat.',
     'blog.article.basilea-mozioni-climatizzazione.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.pfiffner-450-posti-pratteln.title': 'Pfiffner Gruppe brings 450 jobs to Pratteln',
+    'blog.article.pfiffner-450-posti-pratteln.excerpt': '450 jobs are linked to Pratteln, with reference to the Industriepark Rheinkrone; the title mentions a change in Lehenmatt.',
+    'blog.article.pfiffner-450-posti-pratteln.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;

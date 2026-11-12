@@ -4,13 +4,17 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-basilea::https://grenzgaengerzentrum.de/ratgeber/altersvorsorge/welche-nachteile-hat-die-grenzgaenger-direktversicherung": {
-      "section": "canton-basilea",
-      "ts": 1794340068408
-    },
     "canton-basilea::https://grenzgaengerzentrum.de/ratgeber/lohn-gehalt/grenzgaenger-schweiz-wechselkurs": {
       "section": "canton-basilea",
       "ts": 1794436720828
+    },
+    "canton-basilea::https://grenzgaengerzentrum.de/ratgeber/altersvorsorge/welche-nachteile-hat-die-grenzgaenger-direktversicherung": {
+      "section": "canton-basilea",
+      "ts": 1794525290170
+    },
+    "canton-basilea::https://www.bazonline.ch/baselland-buergerliche-fordern-steuersenkung-ab-2027-284632326887": {
+      "section": "canton-basilea",
+      "ts": 1794526063587
     }
   }
 }

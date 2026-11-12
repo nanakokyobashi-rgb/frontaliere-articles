@@ -69,6 +69,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.basilea-mozioni-climatizzazione.title': 'Gran Consiglio Basilea: mozioni per semplificare autorizzazioni climatizzatori',
     'blog.article.basilea-mozioni-climatizzazione.excerpt': 'Il Gran Consiglio ha trasmesso due mozioni al governo: una per abolire l\'obbligo di autorizzazione e l\'altra per procedure più semplici contro il caldo.',
     'blog.article.basilea-mozioni-climatizzazione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.pfiffner-450-posti-pratteln.title': 'Pfiffner Gruppe porta 450 posti di lavoro a Pratteln',
+    'blog.article.pfiffner-450-posti-pratteln.excerpt': '450 posti di lavoro sono collegati a Pratteln, con riferimento all\'Industriepark Rheinkrone; il titolo menziona un cambiamento a Lehenmatt.',
+    'blog.article.pfiffner-450-posti-pratteln.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;
