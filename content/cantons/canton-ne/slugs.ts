@@ -28,6 +28,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'ostaj-stagnazione-frontalieri': { it: 'ostaj-stagnazione-frontalieri', en: 'ostaj-frontalier-stagnation', de: 'ostaj-frontalier-stagnation', fr: 'ostaj-stagnation-frontalier' },
  'frontalieri-aumento-pausa-2023': { it: 'frontalieri-aumento-pausa-2023', en: 'frontalieri-increase-pause-2023', de: 'frontalier-anstieg-pause-2023', fr: 'frontaliers-hausse-stabilisation-2023' },
  'fiscalita-coppie-sposate-voto': { it: 'fiscalita-coppie-sposate-voto', en: 'taxation-married-couples-vote', de: 'besteuerung-verheirateter-paare-wahl', fr: 'fiscalite-couples-maries-vote' },
+ 'imprese-neuchateloise-rischio-supply-chain': { it: 'imprese-neuchateloise-rischio-supply-chain', en: 'neuchatel-companies-supply-chain-risk', de: 'neuenburg-unternehmen-lieferkettenrisiko', fr: 'entreprises-neuchatel-defi-dependance' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
