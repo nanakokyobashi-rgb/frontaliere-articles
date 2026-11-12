@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T04:11:33.979Z",
-  "contentHash": "276bf5dfbb7414963a430e41124a12719991be1fb914f7c627bf412f2c9a1b90",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "1cc0d88dcafb60f06a24a30092000bb39bc2b5509e2fa31b87ef1133bcb01ed8",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-11T04:25:04.802Z",
+      "updatedAt": "2026-11-12T12:24:28.563Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "218",
+          "value": "245",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,6 +37,12 @@
               "detail": "Palazzo Franscini, Bellinzona",
               "date": "2026-11-12",
               "url": "https://www.tio.ch/agenda/day/20261112/64787"
+            },
+            {
+              "label": "La semina della speranza - Demetra e Persefone",
+              "detail": "Kosmos, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/64908"
             },
             {
               "label": "Park Eun Sun - Mario Botta",
@@ -85,17 +91,11 @@
               "detail": "Sala Carlo Cattaneo - Consolato Generale d'Italia, Lugano",
               "date": "2026-11-12",
               "url": "https://www.tio.ch/agenda/day/20261112/64880"
-            },
-            {
-              "label": "Aperitivo creativo",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64885"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "218",
+          "value": "245",
           "note": "from the site’s events calendar"
         }
       ],
@@ -188,6 +188,12 @@
               "detail": "Palazzo Franscini, Bellinzona",
               "date": "2026-11-12",
               "url": "https://www.tio.ch/agenda/day/20261112/64787"
+            },
+            {
+              "label": "The sowing of hope - Demeter and Persephone",
+              "detail": "Kosmos, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/64908"
             },
             {
               "label": "Park Eun Sun-Mario Botta",
@@ -236,17 +242,11 @@
               "detail": "Sala Carlo Cattaneo - Consolato Generale d'Italia, Lugano",
               "date": "2026-11-12",
               "url": "https://www.tio.ch/agenda/day/20261112/64880"
-            },
-            {
-              "label": "Creative aperitif",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64885"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "218",
+          "value": "245",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -339,6 +339,12 @@
               "detail": "Palazzo Franscini, Bellinzona",
               "date": "2026-11-12",
               "url": "https://www.tio.ch/agenda/day/20261112/64787"
+            },
+            {
+              "label": "Die Saat der Hoffnung - Demeter und Persephone",
+              "detail": "Kosmos, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/64908"
             },
             {
               "label": "Park Eun Sun – Mario Botta",
@@ -387,17 +393,11 @@
               "detail": "Sala Carlo Cattaneo - Consolato Generale d'Italia, Lugano",
               "date": "2026-11-12",
               "url": "https://www.tio.ch/agenda/day/20261112/64880"
-            },
-            {
-              "label": "Kreativer Aperitif",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64885"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "218",
+          "value": "245",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -490,6 +490,12 @@
               "detail": "Palazzo Franscini, Bellinzona",
               "date": "2026-11-12",
               "url": "https://www.tio.ch/agenda/day/20261112/64787"
+            },
+            {
+              "label": "La semence de l'espoir - Déméter et Perséphone",
+              "detail": "Kosmos, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/64908"
             },
             {
               "label": "Park Eun Sun-Mario Botta",
@@ -538,17 +544,11 @@
               "detail": "Sala Carlo Cattaneo - Consolato Generale d'Italia, Lugano",
               "date": "2026-11-12",
               "url": "https://www.tio.ch/agenda/day/20261112/64880"
-            },
-            {
-              "label": "Apéritif créatif",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64885"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

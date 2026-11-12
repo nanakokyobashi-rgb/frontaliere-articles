@@ -48,6 +48,9 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.oit-protesta-tagli-ginevra.title': 'ILO in Geneva: nearly 300 employees protest job cuts',
     'blog.article.oit-protesta-tagli-ginevra.excerpt': 'On Tuesday, nearly 300 employees of the International Labour Organization (ILO) protested in Geneva against the planned elimination of 86 filled positions for the 2026-2027 period.',
     'blog.article.oit-protesta-tagli-ginevra.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.tasso-vacanza-2027-ginevra.title': 'Housing vacancy rate 2027 Canton of Geneva',
+    'blog.article.tasso-vacanza-2027-ginevra.excerpt': 'The average vacancy rate for 2027 is 0,31%. The shortage concerns apartments with 1 to 7 rooms.',
+    'blog.article.tasso-vacanza-2027-ginevra.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGeEn;

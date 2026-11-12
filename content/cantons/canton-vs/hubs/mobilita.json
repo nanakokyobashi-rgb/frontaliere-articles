@@ -4,22 +4,22 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T21:52:52.345Z",
-  "contentHash": "4e9fa293269052af3ad3f4caffc0727aa598f818da0422cce6f300bf4371db28",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "84256cfe7fe211129b9d856538989aa7ed72469fd49869dba834a20642056fdf",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-10T23:59:59.000Z",
+      "updatedAt": "2026-11-11T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-10T23:46:40.154Z",
+      "updatedAt": "2026-11-12T11:55:14.710Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -32,31 +32,43 @@
       "keyFacts": [
         {
           "label": "Valico più scorrevole della settimana",
-          "value": "0,2 min",
-          "note": "Morgins-Châtel (Pas de Morgins), settimana conclusa: 10 novembre 2026"
+          "value": "0 min",
+          "note": "Traforo del Gran San Bernardo, settimana conclusa: 11 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "20",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "value": "19",
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "11",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 4 novembre 2026 – 10 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 5 novembre 2026 – 11 novembre 2026, dal più scorrevole al più lento.",
           "items": [
+            {
+              "label": "Traforo del Gran San Bernardo",
+              "value": "0 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/traforo-del-gran-san-bernardo/oggi/"
+            },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
               "value": "0,2 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/morgins-chatel/oggi/"
+            },
+            {
+              "label": "Saint-Gingolph",
+              "value": "0,2 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/saint-gingolph/oggi/"
             },
             {
               "label": "Le Châtelard-Vallorcine",
@@ -65,27 +77,15 @@
               "url": "/traffico-dogane/le-chatelard-vallorcine/oggi/"
             },
             {
-              "label": "Saint-Gingolph",
-              "value": "0,3 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/saint-gingolph/oggi/"
-            },
-            {
-              "label": "Traforo del Gran San Bernardo",
-              "value": "0,3 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/traforo-del-gran-san-bernardo/oggi/"
-            },
-            {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "1,7 min",
+              "value": "2,4 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/sempione/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -138,13 +138,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Anas vara il Piano Neve 2026-2027: oltre 2.400 mezzi pronti per affrontare l’inverno",
+              "date": "2026-11-11T06:43:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/11/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anas-vara-il-piano-neve-2026-2027-oltre-2400-mezzi-pronti-per-affrontare-linverno-2.html"
+            },
             {
               "label": "Bognanco, chiusa per due giorni la strada provinciale",
               "date": "2026-11-10T15:20:00.000Z",
@@ -169,14 +174,9 @@
               "label": "Valichi alpini, ogni anno transitano 200 milioni di tonnellate di merci: Unioncamere misura i rischi per l'economia italiana",
               "date": "2026-11-09T11:40:00.000Z",
               "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valichi-alpini-ogni-anno-transitano-200-milioni-di-tonnellate-di-merci-unioncamere-misura-i-rischi-1.html"
-            },
-            {
-              "label": "Controlli della velocità in Piemonte dal 9 al 15 novembre",
-              "date": "2026-11-09T09:00:40.000Z",
-              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-piemonte-dal-9-al-15-novembre-2.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -246,7 +246,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "VS",
@@ -256,31 +256,43 @@
       "keyFacts": [
         {
           "label": "Fastest crossing of the week",
-          "value": "0.2 min",
-          "note": "Morgins-Châtel (Pas de Morgins), week ending 10 November 2026"
+          "value": "0 min",
+          "note": "Traforo del Gran San Bernardo, week ending 11 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "20",
-          "note": "reports as of 10 November 2026"
+          "value": "19",
+          "note": "reports as of 12 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "11",
-          "note": "reports as of 10 November 2026"
+          "note": "reports as of 12 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 4 November 2026 to 10 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 5 November 2026 to 11 November 2026, fastest first.",
           "items": [
+            {
+              "label": "Traforo del Gran San Bernardo",
+              "value": "0 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/traforo-del-gran-san-bernardo/today/"
+            },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
               "value": "0.2 min",
               "detail": "49 readings",
               "url": "/en/border-wait/morgins-chatel/today/"
+            },
+            {
+              "label": "Saint-Gingolph",
+              "value": "0.2 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/saint-gingolph/today/"
             },
             {
               "label": "Le Châtelard-Vallorcine",
@@ -289,27 +301,15 @@
               "url": "/en/border-wait/le-chatelard-vallorcine/today/"
             },
             {
-              "label": "Saint-Gingolph",
-              "value": "0.3 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/saint-gingolph/today/"
-            },
-            {
-              "label": "Traforo del Gran San Bernardo",
-              "value": "0.3 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/traforo-del-gran-san-bernardo/today/"
-            },
-            {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "1.7 min",
+              "value": "2.4 min",
               "detail": "49 readings",
               "url": "/en/border-wait/sempione/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -362,13 +362,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Anas vara il Piano Neve 2026-2027: oltre 2.400 mezzi pronti per affrontare l’inverno",
+              "date": "2026-11-11T06:43:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/11/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anas-vara-il-piano-neve-2026-2027-oltre-2400-mezzi-pronti-per-affrontare-linverno-2.html"
+            },
             {
               "label": "Bognanco, chiusa per due giorni la strada provinciale",
               "date": "2026-11-10T15:20:00.000Z",
@@ -393,14 +398,9 @@
               "label": "Valichi alpini, ogni anno transitano 200 milioni di tonnellate di merci: Unioncamere misura i rischi per l'economia italiana",
               "date": "2026-11-09T11:40:00.000Z",
               "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valichi-alpini-ogni-anno-transitano-200-milioni-di-tonnellate-di-merci-unioncamere-misura-i-rischi-1.html"
-            },
-            {
-              "label": "Controlli della velocità in Piemonte dal 9 al 15 novembre",
-              "date": "2026-11-09T09:00:40.000Z",
-              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-piemonte-dal-9-al-15-novembre-2.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -470,7 +470,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "VS",
@@ -480,31 +480,43 @@
       "keyFacts": [
         {
           "label": "Schnellster Grenzübergang der Woche",
-          "value": "0.2 Min.",
-          "note": "Morgins-Châtel (Pas de Morgins), Woche bis 10. November 2026"
+          "value": "0 Min.",
+          "note": "Traforo del Gran San Bernardo, Woche bis 11. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "20",
-          "note": "Meldungen vom 10. November 2026"
+          "value": "19",
+          "note": "Meldungen vom 12. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "11",
-          "note": "Meldungen vom 10. November 2026"
+          "note": "Meldungen vom 12. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 4. November 2026 bis 10. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 5. November 2026 bis 11. November 2026, vom schnellsten zum langsamsten.",
           "items": [
+            {
+              "label": "Traforo del Gran San Bernardo",
+              "value": "0 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/traforo-del-gran-san-bernardo/heute/"
+            },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
               "value": "0.2 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/morgins-chatel/heute/"
+            },
+            {
+              "label": "Saint-Gingolph",
+              "value": "0.2 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/saint-gingolph/heute/"
             },
             {
               "label": "Le Châtelard-Vallorcine",
@@ -513,27 +525,15 @@
               "url": "/de/wartezeit-grenze/le-chatelard-vallorcine/heute/"
             },
             {
-              "label": "Saint-Gingolph",
-              "value": "0.3 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/saint-gingolph/heute/"
-            },
-            {
-              "label": "Traforo del Gran San Bernardo",
-              "value": "0.3 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/traforo-del-gran-san-bernardo/heute/"
-            },
-            {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "1.7 Min.",
+              "value": "2.4 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/sempione/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -586,13 +586,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Anas vara il Piano Neve 2026-2027: oltre 2.400 mezzi pronti per affrontare l’inverno",
+              "date": "2026-11-11T06:43:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/11/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anas-vara-il-piano-neve-2026-2027-oltre-2400-mezzi-pronti-per-affrontare-linverno-2.html"
+            },
             {
               "label": "Bognanco, chiusa per due giorni la strada provinciale",
               "date": "2026-11-10T15:20:00.000Z",
@@ -617,14 +622,9 @@
               "label": "Valichi alpini, ogni anno transitano 200 milioni di tonnellate di merci: Unioncamere misura i rischi per l'economia italiana",
               "date": "2026-11-09T11:40:00.000Z",
               "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valichi-alpini-ogni-anno-transitano-200-milioni-di-tonnellate-di-merci-unioncamere-misura-i-rischi-1.html"
-            },
-            {
-              "label": "Controlli della velocità in Piemonte dal 9 al 15 novembre",
-              "date": "2026-11-09T09:00:40.000Z",
-              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-piemonte-dal-9-al-15-novembre-2.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -694,7 +694,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "VS",
@@ -704,31 +704,43 @@
       "keyFacts": [
         {
           "label": "Poste-frontière le plus fluide de la semaine",
-          "value": "0,2 min",
-          "note": "Morgins-Châtel (Pas de Morgins), semaine jusqu’au 10 novembre 2026"
+          "value": "0 min",
+          "note": "Traforo del Gran San Bernardo, semaine jusqu’au 11 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "20",
-          "note": "signalements au 10 novembre 2026"
+          "value": "19",
+          "note": "signalements au 12 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "11",
-          "note": "signalements au 10 novembre 2026"
+          "note": "signalements au 12 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 4 novembre 2026 au 10 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 5 novembre 2026 au 11 novembre 2026, du plus fluide au plus lent.",
           "items": [
+            {
+              "label": "Traforo del Gran San Bernardo",
+              "value": "0 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/traforo-del-gran-san-bernardo/aujourd-hui/"
+            },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
               "value": "0,2 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/morgins-chatel/aujourd-hui/"
+            },
+            {
+              "label": "Saint-Gingolph",
+              "value": "0,2 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/saint-gingolph/aujourd-hui/"
             },
             {
               "label": "Le Châtelard-Vallorcine",
@@ -737,27 +749,15 @@
               "url": "/fr/temps-attente-douane/le-chatelard-vallorcine/aujourd-hui/"
             },
             {
-              "label": "Saint-Gingolph",
-              "value": "0,3 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/saint-gingolph/aujourd-hui/"
-            },
-            {
-              "label": "Traforo del Gran San Bernardo",
-              "value": "0,3 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/traforo-del-gran-san-bernardo/aujourd-hui/"
-            },
-            {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "1,7 min",
+              "value": "2,4 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/sempione/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -810,13 +810,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Anas vara il Piano Neve 2026-2027: oltre 2.400 mezzi pronti per affrontare l’inverno",
+              "date": "2026-11-11T06:43:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/11/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anas-vara-il-piano-neve-2026-2027-oltre-2400-mezzi-pronti-per-affrontare-linverno-2.html"
+            },
             {
               "label": "Bognanco, chiusa per due giorni la strada provinciale",
               "date": "2026-11-10T15:20:00.000Z",
@@ -841,14 +846,9 @@
               "label": "Valichi alpini, ogni anno transitano 200 milioni di tonnellate di merci: Unioncamere misura i rischi per l'economia italiana",
               "date": "2026-11-09T11:40:00.000Z",
               "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valichi-alpini-ogni-anno-transitano-200-milioni-di-tonnellate-di-merci-unioncamere-misura-i-rischi-1.html"
-            },
-            {
-              "label": "Controlli della velocità in Piemonte dal 9 al 15 novembre",
-              "date": "2026-11-09T09:00:40.000Z",
-              "url": "https://www.ossolanews.it/2026/11/09/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-piemonte-dal-9-al-15-novembre-2.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -918,7 +918,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

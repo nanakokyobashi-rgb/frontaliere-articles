@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "7a00e007a728c996c83e8014998f351f72f82769738bc0372874e0bf48cdf126",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "def4460796e935b1e8f23a912dd67334e60afabcb0364245660e694cd97048e5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T23:36:45.009Z",
+      "updatedAt": "2026-11-12T12:24:28.563Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "28",
+          "value": "29",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -68,6 +68,12 @@
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lunik-ch/"
             },
             {
+              "label": "Painting studio",
+              "detail": "Schaffhausen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-studio/"
+            },
+            {
               "label": "BAILARENA – 13 Years of Baila Conmigo",
               "detail": "Schaffhausen",
               "date": "2026-11-14",
@@ -90,17 +96,11 @@
               "detail": "Schaffhausen",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
-            },
-            {
-              "label": "Legenden und Sagen aus dem Tessin",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,7 +138,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/2_+philharmonische+konzert_+wenn+das+unerhoerte+irgendwann+vertraut+klingt"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "SH",
@@ -170,7 +170,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "28",
+          "value": "29",
           "note": "from the site’s events calendar"
         }
       ],
@@ -211,6 +211,12 @@
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lunik-ch/"
             },
             {
+              "label": "Painting studio",
+              "detail": "Schaffhausen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-studio/"
+            },
+            {
               "label": "BAILARENA – 13 Years of Baila Conmigo",
               "detail": "Schaffhausen",
               "date": "2026-11-14",
@@ -233,17 +239,11 @@
               "detail": "Schaffhausen",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
-            },
-            {
-              "label": "Legenden und Sagen aus dem Tessin",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -281,7 +281,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/2_+philharmonische+konzert_+wenn+das+unerhoerte+irgendwann+vertraut+klingt"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +303,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "SH",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "28",
+          "value": "29",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -354,6 +354,12 @@
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lunik-ch/"
             },
             {
+              "label": "Mal-Atelier",
+              "detail": "Schaffhausen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-studio/"
+            },
+            {
               "label": "BAILARENA – 13 Jahre Baila Conmigo",
               "detail": "Schaffhausen",
               "date": "2026-11-14",
@@ -376,17 +382,11 @@
               "detail": "Schaffhausen",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
-            },
-            {
-              "label": "Legenden und Sagen aus dem Tessin",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -424,7 +424,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/2_+philharmonische+konzert_+wenn+das+unerhoerte+irgendwann+vertraut+klingt"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -446,7 +446,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "SH",
@@ -456,7 +456,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "28",
+          "value": "29",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -497,6 +497,12 @@
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lunik-ch/"
             },
             {
+              "label": "Atelier de peinture",
+              "detail": "Schaffhausen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-studio/"
+            },
+            {
               "label": "BAILARENA – Les 13 ans de « Baila Conmigo »",
               "detail": "Schaffhausen",
               "date": "2026-11-14",
@@ -519,17 +525,11 @@
               "detail": "Schaffhausen",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
-            },
-            {
-              "label": "Legenden und Sagen aus dem Tessin",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -567,7 +567,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/2_+philharmonische+konzert_+wenn+das+unerhoerte+irgendwann+vertraut+klingt"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +589,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

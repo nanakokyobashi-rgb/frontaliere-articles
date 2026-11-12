@@ -4,14 +4,14 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "carburanti",
-  "updatedAt": "2026-11-11T08:31:31.304Z",
-  "contentHash": "2013d587f570c1de8197731f09702789f1cad305176b1a10862297f1dd0d85b7",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "9544b93f1ba1f89a8323e2d79089f29982550d3740b53db5c2fb25591765d922",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-10T15:13:39.066Z",
+      "updatedAt": "2026-11-11T14:42:18.156Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-17T14:43:46.000Z"
+      "carryUntilAt": "2026-11-18T10:32:00.000Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,050 EUR/l",
+              "value": "2,047 EUR/l",
               "detail": "media regionale: minimo 1,914 EUR/l, 213 stazioni rilevate",
-              "date": "2026-11-10T14:43:46.000Z"
+              "date": "2026-11-11T10:32:00.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,193 EUR/l",
-              "detail": "media regionale: minimo 2,048 EUR/l, 225 stazioni rilevate",
-              "date": "2026-11-10T14:43:46.000Z"
+              "value": "2,191 EUR/l",
+              "detail": "media regionale: minimo 2,048 EUR/l, 226 stazioni rilevate",
+              "date": "2026-11-11T10:32:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-11T14:42:18.156Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Tasso vacanza alloggi 2027 Canton Ginevra",
+          "url": "/articoli-ginevra/tasso-vacanza-2027-ginevra/",
+          "excerpt": "Il tasso medio di vacanza per il 2027 è dello 0,31%. La penuria riguarda gli appartamenti da 1 a 7 locali.",
+          "date": "2026-11-12T21:02:13.473Z"
+        },
         {
           "title": "OIT a Ginevra: quasi 300 dipendenti protestano contro tagli di posti",
           "url": "/articoli-ginevra/oit-protesta-tagli-ginevra/",
@@ -94,12 +100,6 @@
           "url": "/articoli-ginevra/furti-cantone-ginevra-2025/",
           "excerpt": "3'410 furti nel 2025, contro 3'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti.",
           "date": "2026-10-26T11:28:00.433Z"
-        },
-        {
-          "title": "HUG primo ospedale svizzero nel ranking Smart Hospitals 2027",
-          "url": "/articoli-ginevra/hug-primo-ospedale-svizzero-2027/",
-          "excerpt": "Il salto che caratterizza il risultato degli HUG è quantificato dalla stessa graduatoria: 37 posizioni guadagnate rispetto all’edizione 2026. Nel ranking 2027 di Newsweek e Statista, gli HUG occupano il 31° posto…",
-          "date": "2026-10-23T22:19:10.680Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-11T08:31:31.304Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "GE",
@@ -153,23 +153,29 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.050 EUR/l",
+              "value": "2.047 EUR/l",
               "detail": "regional average: lowest 1.914 EUR/l, 213 stations surveyed",
-              "date": "2026-11-10T14:43:46.000Z"
+              "date": "2026-11-11T10:32:00.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.193 EUR/l",
-              "detail": "regional average: lowest 2.048 EUR/l, 225 stations surveyed",
-              "date": "2026-11-10T14:43:46.000Z"
+              "value": "2.191 EUR/l",
+              "detail": "regional average: lowest 2.048 EUR/l, 226 stations surveyed",
+              "date": "2026-11-11T10:32:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-11T14:42:18.156Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Housing vacancy rate 2027 Canton of Geneva",
+          "url": "/en/geneva-articles/vacancy-rate-2027-geneva/",
+          "excerpt": "The average vacancy rate for 2027 is 0,31%. The shortage concerns apartments with 1 to 7 rooms.",
+          "date": "2026-11-12T21:02:13.473Z"
+        },
         {
           "title": "ILO in Geneva: nearly 300 employees protest job cuts",
           "url": "/en/geneva-articles/oit-protest-geneva-cuts/",
@@ -193,12 +199,6 @@
           "url": "/en/geneva-articles/geneva-canton-burglary-2025/",
           "excerpt": "3'410 thefts in 2025, compared with 3'196 in 2024 6,7% growth between 2024 and 2025 Police meetings: Wednesday, 28 October Term Value What Burglaries involving.",
           "date": "2026-10-26T11:28:00.433Z"
-        },
-        {
-          "title": "HUG first Swiss hospital in the Smart Hospitals 2027 ranking",
-          "url": "/en/geneva-articles/hug-first-swiss-hospital-2027/",
-          "excerpt": "The leap that characterizes HUG’s result is quantified by the same ranking: 37 places gained compared with the 2026 edition.",
-          "date": "2026-10-23T22:19:10.680Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-11T08:31:31.304Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "GE",
@@ -252,23 +252,29 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.050 EUR/l",
+              "value": "2.047 EUR/l",
               "detail": "regionaler Durchschnitt: tiefster Preis 1.914 EUR/l, 213 erfasste Tankstellen",
-              "date": "2026-11-10T14:43:46.000Z"
+              "date": "2026-11-11T10:32:00.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.193 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.048 EUR/l, 225 erfasste Tankstellen",
-              "date": "2026-11-10T14:43:46.000Z"
+              "value": "2.191 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.048 EUR/l, 226 erfasste Tankstellen",
+              "date": "2026-11-11T10:32:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-11T14:42:18.156Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Leerstandsquote Wohnungen 2027 Kanton Genf",
+          "url": "/de/genf-artikel/leerstandsrate-2027-genf/",
+          "excerpt": "Die durchschnittliche Leerstandsquote für 2027 beträgt 0,31 %.",
+          "date": "2026-11-12T21:02:13.473Z"
+        },
         {
           "title": "OIT in Genf: Fast 300 Beschäftigte protestieren gegen Stellenkürzungen",
           "url": "/de/genf-artikel/oit-protest-streichungen-genf/",
@@ -292,12 +298,6 @@
           "url": "/de/genf-artikel/einbrueche-kanton-genf-2025/",
           "excerpt": "Im Kanton Genf wurden 2025 3'410 Einbruch- oder Einschleichdiebstähle registriert. Insgesamt waren es 3'196 Fälle im Jahr 2024 und 2'986 im Jahr 2023.",
           "date": "2026-10-26T11:28:00.433Z"
-        },
-        {
-          "title": "HUG erstes Schweizer Spital im Ranking Smart Hospitals 2027",
-          "url": "/de/genf-artikel/hug-erster-schweizer-krankenhaus-2027/",
-          "excerpt": "Im Ranking 2027 von Newsweek und Statista belegen die HUG weltweit den 31. Platz und sind damit das bestplatzierte Krankenhaus der Schweiz.",
-          "date": "2026-10-23T22:19:10.680Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-11T08:31:31.304Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "GE",
@@ -351,23 +351,29 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,050 EUR/l",
+              "value": "2,047 EUR/l",
               "detail": "moyenne régionale : prix le plus bas 1,914 EUR/l, 213 stations relevées",
-              "date": "2026-11-10T14:43:46.000Z"
+              "date": "2026-11-11T10:32:00.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,193 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,048 EUR/l, 225 stations relevées",
-              "date": "2026-11-10T14:43:46.000Z"
+              "value": "2,191 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,048 EUR/l, 226 stations relevées",
+              "date": "2026-11-11T10:32:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-11T14:42:18.156Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Taux de vacance des logements 2027 Canton de Genève",
+          "url": "/fr/articles-geneve/taux-vacance-2027-geneve/",
+          "excerpt": "Le taux moyen de vacance pour 2027 est de 0,31 %. La pénurie concerne les appartements de 1 à 7 pièces.",
+          "date": "2026-11-12T21:02:13.473Z"
+        },
         {
           "title": "OIT à Genève : près de 300 employés protestent contre des suppressions de postes",
           "url": "/fr/articles-geneve/oit-manifestation-geneve-suppressions/",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-geneve/cambriolages-canton-geneve-2025/",
           "excerpt": "3'410 vols en 2025, contre 3'196 en 2024 Hausse de 6,7% entre 2024 et 2025 Rencontres de la police : mercredi 28 octobre Terme Valeur Quoi Vols avec effraction.",
           "date": "2026-10-26T11:28:00.433Z"
-        },
-        {
-          "title": "HUG, premier hôpital suisse du classement Smart Hospitals 2027",
-          "url": "/fr/articles-geneve/hug-premier-hopital-suisse-2027/",
-          "excerpt": "Le bond qui caractérise le résultat des HUG est quantifié par le même classement : 37 places gagnées par rapport à l’édition 2026.",
-          "date": "2026-10-23T22:19:10.680Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-11T08:31:31.304Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

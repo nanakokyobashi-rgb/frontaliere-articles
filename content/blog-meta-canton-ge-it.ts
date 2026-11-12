@@ -48,6 +48,9 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.oit-protesta-tagli-ginevra.title': 'OIT a Ginevra: quasi 300 dipendenti protestano contro tagli di posti',
     'blog.article.oit-protesta-tagli-ginevra.excerpt': 'Martedì quasi 300 dipendenti dell\'Organizzazione internazionale del lavoro (OIT) hanno protestato a Ginevra contro la soppressione di 86 posti occupati prevista per il periodo 2026-2027.',
     'blog.article.oit-protesta-tagli-ginevra.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.tasso-vacanza-2027-ginevra.title': 'Tasso vacanza alloggi 2027 Canton Ginevra',
+    'blog.article.tasso-vacanza-2027-ginevra.excerpt': 'Il tasso medio di vacanza per il 2027 è dello 0,31%. La penuria riguarda gli appartamenti da 1 a 7 locali.',
+    'blog.article.tasso-vacanza-2027-ginevra.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGeIt;

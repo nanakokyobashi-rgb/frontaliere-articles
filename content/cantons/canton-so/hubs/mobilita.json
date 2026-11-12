@@ -4,17 +4,17 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T16:22:46.747Z",
-  "contentHash": "e8972a58706c6934ec81085a2f67dc0bebee473b8edea4fdfcba021cc7012807",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "a8c4524ba0340cd4617ccc4d78c149782afdff78e547f090fc0909269f032670",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-10T23:46:40.154Z",
+      "updatedAt": "2026-11-12T11:55:14.710Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "5",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "9",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -42,12 +42,6 @@
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
-            {
-              "label": "A1 Bern <-> Zürich tra Raccordo autostradale Diramazione Härkingen E Svincolo autostradale Kriegstetten Situazione: problemi di traffico cantiere, lunghezza [km] 19.0 Limitazione del traffico…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 12 novembre 2026",
-              "date": "2026-10-02T04:18:00.000Z"
-            },
             {
               "label": "A2 Basel -> Luzern tra Parcheggio Teufengraben E Svincolo autostradale Egerkingen Situazione: problemi di traffico cantiere, lunghezza [km] 1.4 Limitazione del traffico: corsia d'emergenza chiusa",
               "value": "Chiusura",
@@ -65,6 +59,12 @@
               "value": "Chiusura",
               "detail": "fine prevista: 20 novembre 2026",
               "date": "2026-11-06T05:18:00.000Z"
+            },
+            {
+              "label": "A5 Bienne -> Solothurn Raccordo autostradale Diramazione Luterbach Situazione: chiusa cantiere, lunghezza [km] 0.2",
+              "value": "Chiusura",
+              "detail": "fine prevista: 23 novembre 2026",
+              "date": "2026-11-11T19:00:00.000Z"
             },
             {
               "label": "A5 Bienne -> Solothurn Raccordo autostradale Diramazione Luterbach Situazione: chiusa cantiere",
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,7 +115,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -161,7 +161,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "SO",
@@ -172,12 +172,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "5",
-          "note": "reports as of 10 November 2026"
+          "note": "reports as of 12 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "9",
-          "note": "reports as of 10 November 2026"
+          "note": "reports as of 12 November 2026"
         }
       ],
       "dataBlocks": [
@@ -186,12 +186,6 @@
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
-            {
-              "label": "A1 Bern <-> Zürich tra Raccordo autostradale Diramazione Härkingen E Svincolo autostradale Kriegstetten Situazione: problemi di traffico cantiere, lunghezza [km] 19.0 Limitazione del traffico…",
-              "value": "Closure",
-              "detail": "until 12 November 2026",
-              "date": "2026-10-02T04:18:00.000Z"
-            },
             {
               "label": "A2 Basel -> Luzern tra Parcheggio Teufengraben E Svincolo autostradale Egerkingen Situazione: problemi di traffico cantiere, lunghezza [km] 1.4 Limitazione del traffico: corsia d'emergenza chiusa",
               "value": "Closure",
@@ -209,6 +203,12 @@
               "value": "Closure",
               "detail": "until 20 November 2026",
               "date": "2026-11-06T05:18:00.000Z"
+            },
+            {
+              "label": "A5 Bienne -> Solothurn Raccordo autostradale Diramazione Luterbach Situazione: chiusa cantiere, lunghezza [km] 0.2",
+              "value": "Closure",
+              "detail": "until 23 November 2026",
+              "date": "2026-11-11T19:00:00.000Z"
             },
             {
               "label": "A5 Bienne -> Solothurn Raccordo autostradale Diramazione Luterbach Situazione: chiusa cantiere",
@@ -236,7 +236,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -259,7 +259,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -304,7 +304,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "SO",
@@ -315,12 +315,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "5",
-          "note": "Meldungen vom 10. November 2026"
+          "note": "Meldungen vom 12. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "9",
-          "note": "Meldungen vom 10. November 2026"
+          "note": "Meldungen vom 12. November 2026"
         }
       ],
       "dataBlocks": [
@@ -329,12 +329,6 @@
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
-            {
-              "label": "A1 Bern <-> Zürich zwischen Autobahndreieck Verzweigung Härkingen und Anschluss Kriegstetten Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 19.0 Verkehrsführung: Pannenstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 12. November 2026",
-              "date": "2026-10-02T04:18:00.000Z"
-            },
             {
               "label": "A2 Basel -> Luzern zwischen Parkplatz Teufengraben und Anschluss Egerkingen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.4 Verkehrsführung: Pannenstreifen gesperrt",
               "value": "Sperrung",
@@ -352,6 +346,12 @@
               "value": "Sperrung",
               "detail": "bis 20. November 2026",
               "date": "2026-11-06T05:18:00.000Z"
+            },
+            {
+              "label": "A5 Biel -> Solothurn Autobahndreieck Verzweigung Luterbach Sachlage: Strecke gesperrt Baustelle, Länge [km] 0.2",
+              "value": "Sperrung",
+              "detail": "bis 23. November 2026",
+              "date": "2026-11-11T19:00:00.000Z"
             },
             {
               "label": "A5 Biel -> Solothurn Autobahndreieck Verzweigung Luterbach Sachlage: Strecke gesperrt Baustelle",
@@ -379,7 +379,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -402,7 +402,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -447,7 +447,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "SO",
@@ -458,12 +458,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "5",
-          "note": "signalements au 10 novembre 2026"
+          "note": "signalements au 12 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "9",
-          "note": "signalements au 10 novembre 2026"
+          "note": "signalements au 12 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -472,12 +472,6 @@
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
-            {
-              "label": "A1 Berne <-> Zurich entre Echangeur Echangeur de Härkingen et Jonction autoroutière Kriegstetten Situation: trafic perturbé travaux, longueur [km] 19.0 Gestion du trafic: bande d'arrêt d'urgence…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 12 novembre 2026",
-              "date": "2026-10-02T04:18:00.000Z"
-            },
             {
               "label": "A2 Bâle -> Lucerne entre Parking Teufengraben et Jonction autoroutière Egerkingen Situation: trafic perturbé travaux, longueur [km] 1.4 Gestion du trafic: bande d'arrêt d'urgence fermée",
               "value": "Fermeture",
@@ -495,6 +489,12 @@
               "value": "Fermeture",
               "detail": "jusqu’au 20 novembre 2026",
               "date": "2026-11-06T05:18:00.000Z"
+            },
+            {
+              "label": "A5 Bienne -> Soleure Echangeur Echangeur de Luterbach Situation: fermé travaux, longueur [km] 0.2",
+              "value": "Fermeture",
+              "detail": "jusqu’au 23 novembre 2026",
+              "date": "2026-11-11T19:00:00.000Z"
             },
             {
               "label": "A5 Bienne -> Soleure Echangeur Echangeur de Luterbach Situation: fermé travaux",
@@ -522,7 +522,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -545,7 +545,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -591,7 +591,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

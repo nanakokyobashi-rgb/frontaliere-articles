@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T04:11:33.979Z",
-  "contentHash": "98e7443528a4daf9714fee1ef4f0e820a7f69423c07b845cb8ff313d9fb4a68e",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "00b06f446586854a4d756056497c793a3028ef27e8d6a58166ede993938c4459",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-11T04:25:04.802Z",
+      "updatedAt": "2026-11-12T12:24:28.563Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "343",
+          "value": "353",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -50,6 +50,12 @@
               "url": "https://www.guidle.com/it/events/sports/naenikon/move-und-groove-jonglieren_AsWLqXn"
             },
             {
+              "label": "Mütter- und Väterberatung in Volketswil",
+              "detail": "Familienzentrum Gries, Volketswil",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/volketswil/muetter-und-vaeterberatung-in-volketswil_A5t42Vs"
+            },
+            {
               "label": "21st Annual Meeting of SFI",
               "detail": "Lake Side",
               "date": "2026-11-12",
@@ -80,21 +86,15 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/darf-ich-bitten-tanznachmittag_AUHFnTN"
             },
             {
-              "label": "Café International",
-              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
+              "label": "Spielenachmittag 60+",
+              "detail": "Amthaus Rüti",
               "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/cafe-international_AWFZVmU"
-            },
-            {
-              "label": "Räbeliechtliumzug Fehraltorf",
-              "detail": "Evang.-ref. Kirche Fehraltorf, Fehraltorf",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/raebeliechtliumzug-fehraltorf/"
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/spielenachmittag-60_A3J3Pah"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         }
       ],
       "curatedArticles": [
@@ -122,7 +122,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "ZH",
@@ -132,7 +132,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "343",
+          "value": "353",
           "note": "from the site’s events calendar"
         }
       ],
@@ -160,6 +160,12 @@
               "url": "https://www.guidle.com/it/events/sports/naenikon/move-und-groove-jonglieren_AsWLqXn"
             },
             {
+              "label": "Mütter- und Väterberatung in Volketswil",
+              "detail": "Familienzentrum Gries, Volketswil",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/volketswil/muetter-und-vaeterberatung-in-volketswil_A5t42Vs"
+            },
+            {
               "label": "21st Annual Meeting of SFI",
               "detail": "Lake Side",
               "date": "2026-11-12",
@@ -190,21 +196,15 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/darf-ich-bitten-tanznachmittag_AUHFnTN"
             },
             {
-              "label": "Café International",
-              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
+              "label": "Spielenachmittag 60",
+              "detail": "Amthaus Rüti",
               "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/cafe-international_AWFZVmU"
-            },
-            {
-              "label": "Räbeliechtliumzug Fehraltorf",
-              "detail": "Evang.-ref. Kirche Fehraltorf, Fehraltorf",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/raebeliechtliumzug-fehraltorf/"
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/spielenachmittag-60_A3J3Pah"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         }
       ],
       "curatedArticles": [
@@ -232,7 +232,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "ZH",
@@ -242,7 +242,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "343",
+          "value": "353",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -270,6 +270,12 @@
               "url": "https://www.guidle.com/it/events/sports/naenikon/move-und-groove-jonglieren_AsWLqXn"
             },
             {
+              "label": "Mütter- und Väterberatung in Volketswil",
+              "detail": "Familienzentrum Gries, Volketswil",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/volketswil/muetter-und-vaeterberatung-in-volketswil_A5t42Vs"
+            },
+            {
               "label": "21st Annual Meeting of SFI",
               "detail": "Lake Side",
               "date": "2026-11-12",
@@ -300,21 +306,15 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/darf-ich-bitten-tanznachmittag_AUHFnTN"
             },
             {
-              "label": "Café International",
-              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
+              "label": "Spielnachmittag 60",
+              "detail": "Amthaus Rüti",
               "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/cafe-international_AWFZVmU"
-            },
-            {
-              "label": "Räbeliechtliumzug Fehraltorf",
-              "detail": "Evang.-ref. Kirche Fehraltorf, Fehraltorf",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/raebeliechtliumzug-fehraltorf/"
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/spielenachmittag-60_A3J3Pah"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         }
       ],
       "curatedArticles": [
@@ -342,7 +342,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "ZH",
@@ -352,7 +352,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "343",
+          "value": "353",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -378,6 +378,12 @@
               "label": "move&groove - jonglieren",
               "date": "2026-11-12",
               "url": "https://www.guidle.com/it/events/sports/naenikon/move-und-groove-jonglieren_AsWLqXn"
+            },
+            {
+              "label": "Mütter- und Väterberatung in Volketswil",
+              "detail": "Familienzentrum Gries, Volketswil",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/volketswil/muetter-und-vaeterberatung-in-volketswil_A5t42Vs"
             },
             {
               "label": "21st Annual Meeting of SFI",
@@ -410,21 +416,15 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/darf-ich-bitten-tanznachmittag_AUHFnTN"
             },
             {
-              "label": "Café International",
-              "detail": "Haus H7 - Ort der Begegnung, Pfäffikon",
+              "label": "Jeu de table 60",
+              "detail": "Amthaus Rüti",
               "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/pfaeffikon-zh/cafe-international_AWFZVmU"
-            },
-            {
-              "label": "Räbeliechtliumzug Fehraltorf",
-              "detail": "Evang.-ref. Kirche Fehraltorf, Fehraltorf",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/raebeliechtliumzug-fehraltorf/"
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/spielenachmittag-60_A3J3Pah"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         }
       ],
       "curatedArticles": [
@@ -452,7 +452,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

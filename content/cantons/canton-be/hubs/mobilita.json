@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-12T04:11:33.979Z",
-  "contentHash": "61fb139124e9a4ac359497920215466647af5b0eeab9c046c10a262c96a5b165",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "3ccb543aef79a8589d883bb2bd18a60803154edcc3fd73b27bbe1db092787dda",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-10T23:46:40.154Z",
+      "updatedAt": "2026-11-12T11:55:14.710Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "20",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "value": "21",
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "73",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "value": "74",
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -61,18 +61,6 @@
               "date": "2026-06-16T14:33:00.000Z"
             },
             {
-              "label": "A6W Diramazione Lattigen -> Port tra Raccordo autostradale Diramazione Lattigen E Svincolo autostradale Wimmis Situazione: uscita chiusa cantiere, lunghezza [km] 0.1",
-              "value": "Chiusura",
-              "detail": "fine prevista: 12 novembre 2026",
-              "date": "2026-07-27T05:05:00.000Z"
-            },
-            {
-              "label": "A6W Diramazione Lattigen -> Port Raccordo autostradale Diramazione Lattigen Situazione: uscita chiusa cantiere, lunghezza [km] 0.3",
-              "value": "Chiusura",
-              "detail": "fine prevista: 12 novembre 2026",
-              "date": "2026-08-28T15:09:00.000Z"
-            },
-            {
               "label": "Bühl -> Siselen tra Luogo Walperswil E Luogo Siselen Situazione: ponte chiuso Causa: lavori di costruzione Limitazione del traffico: corsia chiusa",
               "value": "Chiusura",
               "detail": "fine prevista: 30 giugno 2027",
@@ -89,16 +77,37 @@
               "value": "Chiusura",
               "detail": "fine prevista: 13 novembre 2026",
               "date": "2026-10-22T18:00:00.000Z"
+            },
+            {
+              "label": "Thun <-> Beatenberg Luogo Thun Situazione: chiusa cantiere Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 26 marzo 2027",
+              "date": "2026-10-26T05:00:00.000Z"
+            },
+            {
+              "label": "H6 Gletsch <-> Guttannen Passo Passo del Grimsel Situazione: chiusa",
+              "value": "Chiusura",
+              "date": "2026-10-27T08:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Bürenstrasse 12: Änderung der Überbauungsordnung liegt auf",
+              "date": "2026-11-12T09:30:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buerenstrasse-12-aenderung-der-ueberbauungsordnung-liegt-auf"
+            },
+            {
+              "label": "Stadt will parallel zu Fernwärmeausbau Strassenraum aufwerten",
+              "date": "2026-11-12T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/stadt-will-parallel-zu-fernwaermeausbau-strassenraum-aufwerten-1"
+            },
             {
               "label": "öV Plus App: Gemeinsam für den Stadt- und Regionalverkehr",
               "date": "2026-11-05",
@@ -118,19 +127,9 @@
               "label": "Neue Haltestellenanzeigen für Bern",
               "date": "2026-11-02",
               "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen-fuer-bern"
-            },
-            {
-              "label": "Neue Haltestellenanzeigen",
-              "date": "2026-11-02",
-              "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen"
-            },
-            {
-              "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
-              "date": "2026-10-30T10:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -182,7 +181,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "BE",
@@ -192,13 +191,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "20",
-          "note": "reports as of 10 November 2026"
+          "value": "21",
+          "note": "reports as of 12 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "73",
-          "note": "reports as of 10 November 2026"
+          "value": "74",
+          "note": "reports as of 12 November 2026"
         }
       ],
       "dataBlocks": [
@@ -226,18 +225,6 @@
               "date": "2026-06-16T14:33:00.000Z"
             },
             {
-              "label": "A6W Diramazione Lattigen -> Port tra Raccordo autostradale Diramazione Lattigen E Svincolo autostradale Wimmis Situazione: uscita chiusa cantiere, lunghezza [km] 0.1",
-              "value": "Closure",
-              "detail": "until 12 November 2026",
-              "date": "2026-07-27T05:05:00.000Z"
-            },
-            {
-              "label": "A6W Diramazione Lattigen -> Port Raccordo autostradale Diramazione Lattigen Situazione: uscita chiusa cantiere, lunghezza [km] 0.3",
-              "value": "Closure",
-              "detail": "until 12 November 2026",
-              "date": "2026-08-28T15:09:00.000Z"
-            },
-            {
               "label": "Bühl -> Siselen tra Luogo Walperswil E Luogo Siselen Situazione: ponte chiuso Causa: lavori di costruzione Limitazione del traffico: corsia chiusa",
               "value": "Closure",
               "detail": "until 30 June 2027",
@@ -254,16 +241,37 @@
               "value": "Closure",
               "detail": "until 13 November 2026",
               "date": "2026-10-22T18:00:00.000Z"
+            },
+            {
+              "label": "Thun <-> Beatenberg Luogo Thun Situazione: chiusa cantiere Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 26 March 2027",
+              "date": "2026-10-26T05:00:00.000Z"
+            },
+            {
+              "label": "H6 Gletsch <-> Guttannen Passo Passo del Grimsel Situazione: chiusa",
+              "value": "Closure",
+              "date": "2026-10-27T08:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Bürenstrasse 12: Änderung der Überbauungsordnung liegt auf",
+              "date": "2026-11-12T09:30:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buerenstrasse-12-aenderung-der-ueberbauungsordnung-liegt-auf"
+            },
+            {
+              "label": "Stadt will parallel zu Fernwärmeausbau Strassenraum aufwerten",
+              "date": "2026-11-12T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/stadt-will-parallel-zu-fernwaermeausbau-strassenraum-aufwerten-1"
+            },
             {
               "label": "öV Plus App: Gemeinsam für den Stadt- und Regionalverkehr",
               "date": "2026-11-05",
@@ -283,19 +291,9 @@
               "label": "Neue Haltestellenanzeigen für Bern",
               "date": "2026-11-02",
               "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen-fuer-bern"
-            },
-            {
-              "label": "Neue Haltestellenanzeigen",
-              "date": "2026-11-02",
-              "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen"
-            },
-            {
-              "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
-              "date": "2026-10-30T10:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -347,7 +345,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "BE",
@@ -357,13 +355,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "20",
-          "note": "Meldungen vom 10. November 2026"
+          "value": "21",
+          "note": "Meldungen vom 12. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "73",
-          "note": "Meldungen vom 10. November 2026"
+          "value": "74",
+          "note": "Meldungen vom 12. November 2026"
         }
       ],
       "dataBlocks": [
@@ -391,18 +389,6 @@
               "date": "2026-06-16T14:33:00.000Z"
             },
             {
-              "label": "A6W Verzweigung Lattigen -> Port zwischen Autobahndreieck Verzweigung Lattigen und Anschluss Wimmis Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.1",
-              "value": "Sperrung",
-              "detail": "bis 12. November 2026",
-              "date": "2026-07-27T05:05:00.000Z"
-            },
-            {
-              "label": "A6W Verzweigung Lattigen -> Port Autobahndreieck Verzweigung Lattigen Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.3",
-              "value": "Sperrung",
-              "detail": "bis 12. November 2026",
-              "date": "2026-08-28T15:09:00.000Z"
-            },
-            {
               "label": "Bühl -> Siselen zwischen Ortschaft Walperswil und Ortschaft Siselen Sachlage: Brücke gesperrt Ursache: Bauarbeiten Verkehrsführung: Fahrstreifen gesperrt",
               "value": "Sperrung",
               "detail": "bis 30. Juni 2027",
@@ -419,16 +405,37 @@
               "value": "Sperrung",
               "detail": "bis 13. November 2026",
               "date": "2026-10-22T18:00:00.000Z"
+            },
+            {
+              "label": "Thun <-> Beatenberg Ortschaft Thun Sachlage: Strecke gesperrt Baustelle Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 26. März 2027",
+              "date": "2026-10-26T05:00:00.000Z"
+            },
+            {
+              "label": "H6 Gletsch <-> Guttannen Pass Grimsel-Pass Sachlage: Strecke gesperrt",
+              "value": "Sperrung",
+              "date": "2026-10-27T08:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Bürenstrasse 12: Änderung der Überbauungsordnung liegt auf",
+              "date": "2026-11-12T09:30:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buerenstrasse-12-aenderung-der-ueberbauungsordnung-liegt-auf"
+            },
+            {
+              "label": "Stadt will parallel zu Fernwärmeausbau Strassenraum aufwerten",
+              "date": "2026-11-12T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/stadt-will-parallel-zu-fernwaermeausbau-strassenraum-aufwerten-1"
+            },
             {
               "label": "öV Plus App: Gemeinsam für den Stadt- und Regionalverkehr",
               "date": "2026-11-05",
@@ -448,19 +455,9 @@
               "label": "Neue Haltestellenanzeigen für Bern",
               "date": "2026-11-02",
               "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen-fuer-bern"
-            },
-            {
-              "label": "Neue Haltestellenanzeigen",
-              "date": "2026-11-02",
-              "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen"
-            },
-            {
-              "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
-              "date": "2026-10-30T10:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -512,7 +509,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "BE",
@@ -522,13 +519,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "20",
-          "note": "signalements au 10 novembre 2026"
+          "value": "21",
+          "note": "signalements au 12 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "73",
-          "note": "signalements au 10 novembre 2026"
+          "value": "74",
+          "note": "signalements au 12 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -556,18 +553,6 @@
               "date": "2026-06-16T14:33:00.000Z"
             },
             {
-              "label": "A6W Echangeur de Lattigen -> Port entre Echangeur Echangeur de Lattigen et Jonction autoroutière Wimmis Situation: sortie fermée travaux, longueur [km] 0.1",
-              "value": "Fermeture",
-              "detail": "jusqu’au 12 novembre 2026",
-              "date": "2026-07-27T05:05:00.000Z"
-            },
-            {
-              "label": "A6W Echangeur de Lattigen -> Port Echangeur Echangeur de Lattigen Situation: sortie fermée travaux, longueur [km] 0.3",
-              "value": "Fermeture",
-              "detail": "jusqu’au 12 novembre 2026",
-              "date": "2026-08-28T15:09:00.000Z"
-            },
-            {
               "label": "Bühl -> Siselen entre Localité Walperswil et Localité Siselen Situation: pont fermé Raison: travaux de construction Gestion du trafic: voie fermée",
               "value": "Fermeture",
               "detail": "jusqu’au 30 juin 2027",
@@ -584,16 +569,37 @@
               "value": "Fermeture",
               "detail": "jusqu’au 13 novembre 2026",
               "date": "2026-10-22T18:00:00.000Z"
+            },
+            {
+              "label": "Thoune <-> Beatenberg Localité Thoune Situation: fermé travaux Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 26 mars 2027",
+              "date": "2026-10-26T05:00:00.000Z"
+            },
+            {
+              "label": "H6 Gletsch <-> Guttannen Col Col du Grimsel Situation: fermé",
+              "value": "Fermeture",
+              "date": "2026-10-27T08:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Bürenstrasse 12: Änderung der Überbauungsordnung liegt auf",
+              "date": "2026-11-12T09:30:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buerenstrasse-12-aenderung-der-ueberbauungsordnung-liegt-auf"
+            },
+            {
+              "label": "Stadt will parallel zu Fernwärmeausbau Strassenraum aufwerten",
+              "date": "2026-11-12T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/stadt-will-parallel-zu-fernwaermeausbau-strassenraum-aufwerten-1"
+            },
             {
               "label": "öV Plus App: Gemeinsam für den Stadt- und Regionalverkehr",
               "date": "2026-11-05",
@@ -613,19 +619,9 @@
               "label": "Neue Haltestellenanzeigen für Bern",
               "date": "2026-11-02",
               "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen-fuer-bern"
-            },
-            {
-              "label": "Neue Haltestellenanzeigen",
-              "date": "2026-11-02",
-              "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen"
-            },
-            {
-              "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
-              "date": "2026-10-30T10:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -677,7 +673,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

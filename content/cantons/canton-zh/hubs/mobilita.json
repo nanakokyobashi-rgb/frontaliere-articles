@@ -4,22 +4,22 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-11-12T13:45:12.528Z",
-  "contentHash": "7177ac47a589324bdb2e0674f010b14a6c39586275f02531cf9d685338c6695c",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "7776a6bc5c4ea450376e610fe630890fc267a434ac82d91336c0a11a4a77adc8",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-10T23:59:59.000Z",
+      "updatedAt": "2026-11-11T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-10T23:46:40.154Z",
+      "updatedAt": "2026-11-12T11:55:14.710Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -33,31 +33,25 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Hohentengen am Hochrhein – Wasterkingen, settimana conclusa: 10 novembre 2026"
+          "note": "Jestetten – Rheinau, settimana conclusa: 11 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "14",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "value": "19",
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "14",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "value": "15",
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 4 novembre 2026 – 10 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 5 novembre 2026 – 11 novembre 2026, dal più scorrevole al più lento.",
           "items": [
-            {
-              "label": "Hohentengen am Hochrhein – Wasterkingen",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/hohentengen-am-hochrhein-wasterkingen/oggi/"
-            },
             {
               "label": "Jestetten – Rheinau",
               "value": "0 min",
@@ -65,22 +59,16 @@
               "url": "/traffico-dogane/jestetten-rheinau/oggi/"
             },
             {
+              "label": "Hohentengen am Hochrhein – Wasterkingen",
+              "value": "0 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/hohentengen-am-hochrhein-wasterkingen/oggi/"
+            },
+            {
               "label": "Dettighofen – Wil ZH",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/dettighofen-wil-zh/oggi/"
-            },
-            {
-              "label": "Klettgau – Wil ZH",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/klettgau-wil-zh/oggi/"
-            },
-            {
-              "label": "Dettighofen – Rafz",
               "value": "0,1 min",
               "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/dettighofen-rafz/oggi/"
+              "url": "/traffico-dogane/dettighofen-wil-zh/oggi/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
@@ -95,6 +83,18 @@
               "url": "/traffico-dogane/jestetten-laufen-uhwiesen-grenzstrasse/oggi/"
             },
             {
+              "label": "Klettgau – Wil ZH",
+              "value": "0,1 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/klettgau-wil-zh/oggi/"
+            },
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0,1 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/dettighofen-rafz/oggi/"
+            },
+            {
               "label": "Lottstetten – Nack",
               "value": "0,1 min",
               "detail": "49 rilevazioni",
@@ -103,7 +103,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -160,13 +160,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Beschwerden verteuern Bergstrasse in Samstagern",
+              "date": "2026-11-12",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/richterswil-beschwerden-verteuern-strassenprojekt-in-samstagern.html"
+            },
             {
               "label": "Velowinter im Magazin",
               "date": "2026-11-11",
@@ -191,14 +196,9 @@
               "label": "Sanierung von Strassen und Leitungen auf dem Werkareal der Abwasserreinigungsanlage",
               "date": "2026-10-21T10:00:00.000Z",
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/sanierung-von-strassen-und-leitungen-auf-dem-werkareal-der-abwasserreinigungsanlage.html"
-            },
-            {
-              "label": "Mann wirft Brandsatz im Bahnhof Oerlikon",
-              "date": "2026-10-20T16:29:18.000Z",
-              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/mann-wirft-brandsatz-im-bahnhof-oerlikon.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +282,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-12T13:45:12.528Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "ZH",
@@ -293,31 +293,25 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Hohentengen am Hochrhein – Wasterkingen, week ending 10 November 2026"
+          "note": "Jestetten – Rheinau, week ending 11 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "14",
-          "note": "reports as of 10 November 2026"
+          "value": "19",
+          "note": "reports as of 12 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "14",
-          "note": "reports as of 10 November 2026"
+          "value": "15",
+          "note": "reports as of 12 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 4 November 2026 to 10 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 5 November 2026 to 11 November 2026, fastest first.",
           "items": [
-            {
-              "label": "Hohentengen am Hochrhein – Wasterkingen",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/hohentengen-am-hochrhein-wasterkingen/today/"
-            },
             {
               "label": "Jestetten – Rheinau",
               "value": "0 min",
@@ -325,22 +319,16 @@
               "url": "/en/border-wait/jestetten-rheinau/today/"
             },
             {
+              "label": "Hohentengen am Hochrhein – Wasterkingen",
+              "value": "0 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/hohentengen-am-hochrhein-wasterkingen/today/"
+            },
+            {
               "label": "Dettighofen – Wil ZH",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/dettighofen-wil-zh/today/"
-            },
-            {
-              "label": "Klettgau – Wil ZH",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/klettgau-wil-zh/today/"
-            },
-            {
-              "label": "Dettighofen – Rafz",
               "value": "0.1 min",
               "detail": "49 readings",
-              "url": "/en/border-wait/dettighofen-rafz/today/"
+              "url": "/en/border-wait/dettighofen-wil-zh/today/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
@@ -355,6 +343,18 @@
               "url": "/en/border-wait/jestetten-laufen-uhwiesen-grenzstrasse/today/"
             },
             {
+              "label": "Klettgau – Wil ZH",
+              "value": "0.1 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/klettgau-wil-zh/today/"
+            },
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0.1 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/dettighofen-rafz/today/"
+            },
+            {
               "label": "Lottstetten – Nack",
               "value": "0.1 min",
               "detail": "49 readings",
@@ -363,7 +363,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -420,13 +420,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Beschwerden verteuern Bergstrasse in Samstagern",
+              "date": "2026-11-12",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/richterswil-beschwerden-verteuern-strassenprojekt-in-samstagern.html"
+            },
             {
               "label": "Velowinter im Magazin",
               "date": "2026-11-11",
@@ -451,14 +456,9 @@
               "label": "Sanierung von Strassen und Leitungen auf dem Werkareal der Abwasserreinigungsanlage",
               "date": "2026-10-21T10:00:00.000Z",
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/sanierung-von-strassen-und-leitungen-auf-dem-werkareal-der-abwasserreinigungsanlage.html"
-            },
-            {
-              "label": "Mann wirft Brandsatz im Bahnhof Oerlikon",
-              "date": "2026-10-20T16:29:18.000Z",
-              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/mann-wirft-brandsatz-im-bahnhof-oerlikon.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -542,7 +542,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-12T13:45:12.528Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "ZH",
@@ -553,31 +553,25 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Hohentengen am Hochrhein – Wasterkingen, Woche bis 10. November 2026"
+          "note": "Jestetten – Rheinau, Woche bis 11. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "14",
-          "note": "Meldungen vom 10. November 2026"
+          "value": "19",
+          "note": "Meldungen vom 12. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "14",
-          "note": "Meldungen vom 10. November 2026"
+          "value": "15",
+          "note": "Meldungen vom 12. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 4. November 2026 bis 10. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 5. November 2026 bis 11. November 2026, vom schnellsten zum langsamsten.",
           "items": [
-            {
-              "label": "Hohentengen am Hochrhein – Wasterkingen",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/hohentengen-am-hochrhein-wasterkingen/heute/"
-            },
             {
               "label": "Jestetten – Rheinau",
               "value": "0 Min.",
@@ -585,22 +579,16 @@
               "url": "/de/wartezeit-grenze/jestetten-rheinau/heute/"
             },
             {
+              "label": "Hohentengen am Hochrhein – Wasterkingen",
+              "value": "0 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/hohentengen-am-hochrhein-wasterkingen/heute/"
+            },
+            {
               "label": "Dettighofen – Wil ZH",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/dettighofen-wil-zh/heute/"
-            },
-            {
-              "label": "Klettgau – Wil ZH",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/klettgau-wil-zh/heute/"
-            },
-            {
-              "label": "Dettighofen – Rafz",
               "value": "0.1 Min.",
               "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/dettighofen-rafz/heute/"
+              "url": "/de/wartezeit-grenze/dettighofen-wil-zh/heute/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
@@ -615,6 +603,18 @@
               "url": "/de/wartezeit-grenze/jestetten-laufen-uhwiesen-grenzstrasse/heute/"
             },
             {
+              "label": "Klettgau – Wil ZH",
+              "value": "0.1 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/klettgau-wil-zh/heute/"
+            },
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0.1 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/dettighofen-rafz/heute/"
+            },
+            {
               "label": "Lottstetten – Nack",
               "value": "0.1 Min.",
               "detail": "49 Messungen",
@@ -623,7 +623,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -680,13 +680,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Beschwerden verteuern Bergstrasse in Samstagern",
+              "date": "2026-11-12",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/richterswil-beschwerden-verteuern-strassenprojekt-in-samstagern.html"
+            },
             {
               "label": "Velowinter im Magazin",
               "date": "2026-11-11",
@@ -711,14 +716,9 @@
               "label": "Sanierung von Strassen und Leitungen auf dem Werkareal der Abwasserreinigungsanlage",
               "date": "2026-10-21T10:00:00.000Z",
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/sanierung-von-strassen-und-leitungen-auf-dem-werkareal-der-abwasserreinigungsanlage.html"
-            },
-            {
-              "label": "Mann wirft Brandsatz im Bahnhof Oerlikon",
-              "date": "2026-10-20T16:29:18.000Z",
-              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/mann-wirft-brandsatz-im-bahnhof-oerlikon.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -802,7 +802,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-12T13:45:12.528Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "ZH",
@@ -813,31 +813,25 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Hohentengen am Hochrhein – Wasterkingen, semaine jusqu’au 10 novembre 2026"
+          "note": "Jestetten – Rheinau, semaine jusqu’au 11 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "14",
-          "note": "signalements au 10 novembre 2026"
+          "value": "19",
+          "note": "signalements au 12 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "14",
-          "note": "signalements au 10 novembre 2026"
+          "value": "15",
+          "note": "signalements au 12 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 4 novembre 2026 au 10 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 5 novembre 2026 au 11 novembre 2026, du plus fluide au plus lent.",
           "items": [
-            {
-              "label": "Hohentengen am Hochrhein – Wasterkingen",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/hohentengen-am-hochrhein-wasterkingen/aujourd-hui/"
-            },
             {
               "label": "Jestetten – Rheinau",
               "value": "0 min",
@@ -845,22 +839,16 @@
               "url": "/fr/temps-attente-douane/jestetten-rheinau/aujourd-hui/"
             },
             {
+              "label": "Hohentengen am Hochrhein – Wasterkingen",
+              "value": "0 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/hohentengen-am-hochrhein-wasterkingen/aujourd-hui/"
+            },
+            {
               "label": "Dettighofen – Wil ZH",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/dettighofen-wil-zh/aujourd-hui/"
-            },
-            {
-              "label": "Klettgau – Wil ZH",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/klettgau-wil-zh/aujourd-hui/"
-            },
-            {
-              "label": "Dettighofen – Rafz",
               "value": "0,1 min",
               "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/dettighofen-rafz/aujourd-hui/"
+              "url": "/fr/temps-attente-douane/dettighofen-wil-zh/aujourd-hui/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
@@ -875,6 +863,18 @@
               "url": "/fr/temps-attente-douane/jestetten-laufen-uhwiesen-grenzstrasse/aujourd-hui/"
             },
             {
+              "label": "Klettgau – Wil ZH",
+              "value": "0,1 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/klettgau-wil-zh/aujourd-hui/"
+            },
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0,1 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/dettighofen-rafz/aujourd-hui/"
+            },
+            {
               "label": "Lottstetten – Nack",
               "value": "0,1 min",
               "detail": "49 relevés",
@@ -883,7 +883,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -940,13 +940,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Beschwerden verteuern Bergstrasse in Samstagern",
+              "date": "2026-11-12",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/richterswil-beschwerden-verteuern-strassenprojekt-in-samstagern.html"
+            },
             {
               "label": "Velowinter im Magazin",
               "date": "2026-11-11",
@@ -971,14 +976,9 @@
               "label": "Sanierung von Strassen und Leitungen auf dem Werkareal der Abwasserreinigungsanlage",
               "date": "2026-10-21T10:00:00.000Z",
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/sanierung-von-strassen-und-leitungen-auf-dem-werkareal-der-abwasserreinigungsanlage.html"
-            },
-            {
-              "label": "Mann wirft Brandsatz im Bahnhof Oerlikon",
-              "date": "2026-10-20T16:29:18.000Z",
-              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/mann-wirft-brandsatz-im-bahnhof-oerlikon.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -1062,7 +1062,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-12T13:45:12.528Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

@@ -48,6 +48,9 @@ const blogMetaCantonGeFr: Record<string, string> = {
     'blog.article.oit-protesta-tagli-ginevra.title': 'OIT à Genève : près de 300 employés protestent contre des suppressions de postes',
     'blog.article.oit-protesta-tagli-ginevra.excerpt': 'Mardi, près de 300 employés de l\'Organisation internationale du travail (OIT) ont protesté à Genève contre la suppression de 86 postes occupés prévue pour la période 2026-2027.',
     'blog.article.oit-protesta-tagli-ginevra.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.tasso-vacanza-2027-ginevra.title': 'Taux de vacance des logements 2027 Canton de Genève',
+    'blog.article.tasso-vacanza-2027-ginevra.excerpt': 'Le taux moyen de vacance pour 2027 est de 0,31 %. La pénurie concerne les appartements de 1 à 7 pièces.',
+    'blog.article.tasso-vacanza-2027-ginevra.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGeFr;

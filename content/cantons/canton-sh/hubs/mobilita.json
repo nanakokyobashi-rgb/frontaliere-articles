@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T16:22:46.747Z",
-  "contentHash": "96a6b93455886e9303cfd9e1b28163d8d097df158c2fabdf55e7a68ce85bc0a5",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "f451f9f892ac148995fc5407ed45bd147bff687daf6409e9a5f36b8e692c889c",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-10T23:59:59.000Z",
+      "updatedAt": "2026-11-11T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -28,14 +28,14 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, settimana conclusa: 10 novembre 2026"
+          "note": "Bargen SH – Tengen, settimana conclusa: 11 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 4 novembre 2026 – 10 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 5 novembre 2026 – 11 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -54,12 +54,6 @@
               "value": "0 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/busingen-am-hochrhein-dorflingen-busingerstrasse/oggi/"
-            },
-            {
-              "label": "Büsingen am Hochrhein – Schaffhausen-Stemmer",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/busingen-am-hochrhein-schaffhausen-stemmer/oggi/"
             },
             {
               "label": "Dörflingen – Gailingen am Hochrhein, Hinterdorf",
@@ -84,17 +78,28 @@
               "value": "0 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/hilzingen-thayngen-schlattergasse/oggi/"
+            },
+            {
+              "label": "Merishausen – Tengen",
+              "value": "0 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/merishausen-tengen/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Zusätzlicher Parkplatz auf Klein Venedig während des Weihnachtsmarkts am See",
+              "date": "2026-11-11T12:30:10.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/zusaetzlicher+parkplatz+auf+klein+venedig+waehrend+des+weihnachtsmarkts+am+see"
+            },
             {
               "label": "Fahrradstraße Petershausen: Schild statt Poller sorgt für mehr Sicherheit",
               "date": "2026-11-03T08:07:43.000Z",
@@ -119,14 +124,9 @@
               "label": "Radverkehr in der Hafenstraße",
               "date": "2026-10-29T13:37:01.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/radverkehr+in+der+hafenstrasse"
-            },
-            {
-              "label": "Kanalerneuerung in der Kindlebildstraße",
-              "date": "2026-10-23T09:17:47.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -198,7 +198,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "SH",
@@ -209,14 +209,14 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, week ending 10 November 2026"
+          "note": "Bargen SH – Tengen, week ending 11 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 4 November 2026 to 10 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 5 November 2026 to 11 November 2026, fastest first.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -235,12 +235,6 @@
               "value": "0 min",
               "detail": "49 readings",
               "url": "/en/border-wait/busingen-am-hochrhein-dorflingen-busingerstrasse/today/"
-            },
-            {
-              "label": "Büsingen am Hochrhein – Schaffhausen-Stemmer",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/busingen-am-hochrhein-schaffhausen-stemmer/today/"
             },
             {
               "label": "Dörflingen – Gailingen am Hochrhein, Hinterdorf",
@@ -265,17 +259,28 @@
               "value": "0 min",
               "detail": "49 readings",
               "url": "/en/border-wait/hilzingen-thayngen-schlattergasse/today/"
+            },
+            {
+              "label": "Merishausen – Tengen",
+              "value": "0 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/merishausen-tengen/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Zusätzlicher Parkplatz auf Klein Venedig während des Weihnachtsmarkts am See",
+              "date": "2026-11-11T12:30:10.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/zusaetzlicher+parkplatz+auf+klein+venedig+waehrend+des+weihnachtsmarkts+am+see"
+            },
             {
               "label": "Fahrradstraße Petershausen: Schild statt Poller sorgt für mehr Sicherheit",
               "date": "2026-11-03T08:07:43.000Z",
@@ -300,14 +305,9 @@
               "label": "Radverkehr in der Hafenstraße",
               "date": "2026-10-29T13:37:01.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/radverkehr+in+der+hafenstrasse"
-            },
-            {
-              "label": "Kanalerneuerung in der Kindlebildstraße",
-              "date": "2026-10-23T09:17:47.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -379,7 +379,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "SH",
@@ -390,14 +390,14 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Bargen SH – Tengen, Woche bis 10. November 2026"
+          "note": "Bargen SH – Tengen, Woche bis 11. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 4. November 2026 bis 10. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 5. November 2026 bis 11. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -416,12 +416,6 @@
               "value": "0 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/busingen-am-hochrhein-dorflingen-busingerstrasse/heute/"
-            },
-            {
-              "label": "Büsingen am Hochrhein – Schaffhausen-Stemmer",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/busingen-am-hochrhein-schaffhausen-stemmer/heute/"
             },
             {
               "label": "Dörflingen – Gailingen am Hochrhein, Hinterdorf",
@@ -446,17 +440,28 @@
               "value": "0 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/hilzingen-thayngen-schlattergasse/heute/"
+            },
+            {
+              "label": "Merishausen – Tengen",
+              "value": "0 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/merishausen-tengen/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Zusätzlicher Parkplatz auf Klein Venedig während des Weihnachtsmarkts am See",
+              "date": "2026-11-11T12:30:10.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/zusaetzlicher+parkplatz+auf+klein+venedig+waehrend+des+weihnachtsmarkts+am+see"
+            },
             {
               "label": "Fahrradstraße Petershausen: Schild statt Poller sorgt für mehr Sicherheit",
               "date": "2026-11-03T08:07:43.000Z",
@@ -481,14 +486,9 @@
               "label": "Radverkehr in der Hafenstraße",
               "date": "2026-10-29T13:37:01.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/radverkehr+in+der+hafenstrasse"
-            },
-            {
-              "label": "Kanalerneuerung in der Kindlebildstraße",
-              "date": "2026-10-23T09:17:47.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -560,7 +560,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "SH",
@@ -571,14 +571,14 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, semaine jusqu’au 10 novembre 2026"
+          "note": "Bargen SH – Tengen, semaine jusqu’au 11 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 4 novembre 2026 au 10 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 5 novembre 2026 au 11 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -597,12 +597,6 @@
               "value": "0 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/busingen-am-hochrhein-dorflingen-busingerstrasse/aujourd-hui/"
-            },
-            {
-              "label": "Büsingen am Hochrhein – Schaffhausen-Stemmer",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/busingen-am-hochrhein-schaffhausen-stemmer/aujourd-hui/"
             },
             {
               "label": "Dörflingen – Gailingen am Hochrhein, Hinterdorf",
@@ -627,17 +621,28 @@
               "value": "0 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/hilzingen-thayngen-schlattergasse/aujourd-hui/"
+            },
+            {
+              "label": "Merishausen – Tengen",
+              "value": "0 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/merishausen-tengen/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Zusätzlicher Parkplatz auf Klein Venedig während des Weihnachtsmarkts am See",
+              "date": "2026-11-11T12:30:10.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/zusaetzlicher+parkplatz+auf+klein+venedig+waehrend+des+weihnachtsmarkts+am+see"
+            },
             {
               "label": "Fahrradstraße Petershausen: Schild statt Poller sorgt für mehr Sicherheit",
               "date": "2026-11-03T08:07:43.000Z",
@@ -662,14 +667,9 @@
               "label": "Radverkehr in der Hafenstraße",
               "date": "2026-10-29T13:37:01.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/radverkehr+in+der+hafenstrasse"
-            },
-            {
-              "label": "Kanalerneuerung in der Kindlebildstraße",
-              "date": "2026-10-23T09:17:47.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -741,7 +741,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }
