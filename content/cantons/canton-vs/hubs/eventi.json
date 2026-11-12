@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "ae45ef540db4f7e1d7316dd7d7e59fe069c9204e5cd9e54cd40f0e23959047a9",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "62dd2ea5ca1449961bc3ee1add751cb1567c08bc6a3d5a893a501235877ed77e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T23:36:45.009Z",
+      "updatedAt": "2026-11-11T04:25:04.802Z",
       "keyFacts": 1
     }
   ],
@@ -33,42 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Martinimarkt Visp - 2026",
-              "detail": "Kaufplatz Visp, Visp",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/martinimarkt-visp-2026/"
-            },
-            {
-              "label": "Strickworkshop",
-              "detail": "Hôtel des Mayens",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/this-that/vercorin/knitting-workshop_Am3Gmuf"
-            },
-            {
-              "label": "Yoga",
-              "detail": "Nend'Spirit, Nendaz",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/sports/siviez-nendaz/yoga_AtScMR4"
-            },
-            {
-              "label": "LESUNG MIT MUHAMET AJETI",
-              "detail": "Naters",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-mit-muhamet-ajeti-1/"
-            },
-            {
-              "label": "COCHON D'INDE",
-              "detail": "Savièse",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cochon-dinde/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
               "label": "Abusitz",
               "detail": "Zeughaus Kultur",
               "date": "2026-11-12",
@@ -81,6 +45,18 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/brigitte-rosset/"
             },
             {
+              "label": "COCHON D'INDE",
+              "detail": "Savièse — in corso, ultimo giorno: 12 novembre 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cochon-dinde/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
               "label": "La Glareyarde of award-winning wines 2026",
               "detail": "VINEA, Sierre",
               "date": "2026-11-13",
@@ -91,11 +67,35 @@
               "detail": "Salle polyvalente, Nendaz",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/filmfestival-nendaz/"
+            },
+            {
+              "label": "RESTORE | Yin Yoga",
+              "detail": "Zermatt",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
+            },
+            {
+              "label": "Tennisturnier: Burgener Sport Cup",
+              "detail": "Fiesch",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tennisturnier-burgener-sport-cup/"
+            },
+            {
+              "label": "Bernhard Betschart – Ganz nah",
+              "detail": "Hotel Glocke",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/events/music/reckingen-vs/bernhard-betschart-up-close_ABfGp56"
+            },
+            {
+              "label": "Bernhard Betschart – Up Close",
+              "detail": "Reckingen, Goms",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bernhard-betschart-ganz-nah-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "VS",
@@ -138,42 +138,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Martinimarkt Visp - 2026",
-              "detail": "Kaufplatz Visp, Visp",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/martinimarkt-visp-2026/"
-            },
-            {
-              "label": "Knitting workshop",
-              "detail": "Hôtel des Mayens",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/this-that/vercorin/knitting-workshop_Am3Gmuf"
-            },
-            {
-              "label": "Yoga",
-              "detail": "Nend'Spirit, Nendaz",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/sports/siviez-nendaz/yoga_AtScMR4"
-            },
-            {
-              "label": "LESUNG MIT MUHAMET AJETI",
-              "detail": "Naters",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-mit-muhamet-ajeti-1/"
-            },
-            {
-              "label": "COCHON D'INDE",
-              "detail": "Savièse",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cochon-dinde/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
               "label": "Abusitz",
               "detail": "Zeughaus Kultur",
               "date": "2026-11-12",
@@ -186,6 +150,18 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/brigitte-rosset/"
             },
             {
+              "label": "COCHON D'INDE",
+              "detail": "Savièse — ongoing, last day: 12 November 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cochon-dinde/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
               "label": "La Glareyarde of award-winning wines 2026",
               "detail": "VINEA, Sierre",
               "date": "2026-11-13",
@@ -196,11 +172,35 @@
               "detail": "Salle polyvalente, Nendaz",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/filmfestival-nendaz/"
+            },
+            {
+              "label": "RESTORE | Yin Yoga",
+              "detail": "Zermatt",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
+            },
+            {
+              "label": "Tennisturnier: Burgener Sport Cup",
+              "detail": "Fiesch",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tennisturnier-burgener-sport-cup/"
+            },
+            {
+              "label": "Bernhard Betschart – Up Close",
+              "detail": "Hotel Glocke",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/events/music/reckingen-vs/bernhard-betschart-up-close_ABfGp56"
+            },
+            {
+              "label": "Bernhard Betschart – Up Close",
+              "detail": "Reckingen, Goms",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bernhard-betschart-ganz-nah-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "VS",
@@ -243,42 +243,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Martinimarkt Visp - 2026",
-              "detail": "Kaufplatz Visp, Visp",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/martinimarkt-visp-2026/"
-            },
-            {
-              "label": "Strickworkshop",
-              "detail": "Hôtel des Mayens",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/this-that/vercorin/knitting-workshop_Am3Gmuf"
-            },
-            {
-              "label": "Yoga",
-              "detail": "Nend'Spirit, Nendaz",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/sports/siviez-nendaz/yoga_AtScMR4"
-            },
-            {
-              "label": "LESUNG MIT MUHAMET AJETI",
-              "detail": "Naters",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-mit-muhamet-ajeti-1/"
-            },
-            {
-              "label": "COCHON D'INDE",
-              "detail": "Savièse",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cochon-dinde/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
               "label": "Abusitz",
               "detail": "Zeughaus Kultur",
               "date": "2026-11-12",
@@ -291,6 +255,18 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/brigitte-rosset/"
             },
             {
+              "label": "COCHON D'INDE",
+              "detail": "Savièse — läuft, letzter Tag: 12. November 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cochon-dinde/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
               "label": "Die Glareyarde der prämierten Weine 2026",
               "detail": "VINEA, Sierre",
               "date": "2026-11-13",
@@ -301,11 +277,35 @@
               "detail": "Salle polyvalente, Nendaz",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/filmfestival-nendaz/"
+            },
+            {
+              "label": "RESTORE | Yin Yoga",
+              "detail": "Zermatt",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
+            },
+            {
+              "label": "Tennisturnier: Burgener Sport Cup",
+              "detail": "Fiesch",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tennisturnier-burgener-sport-cup/"
+            },
+            {
+              "label": "Bernhard Betschart – Ganz nah",
+              "detail": "Hotel Glocke",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/events/music/reckingen-vs/bernhard-betschart-up-close_ABfGp56"
+            },
+            {
+              "label": "Bernhard Betschart – Ganz nah",
+              "detail": "Reckingen, Goms",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bernhard-betschart-ganz-nah-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "VS",
@@ -348,42 +348,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Martinimarkt Visp - 2026",
-              "detail": "Kaufplatz Visp, Visp",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/martinimarkt-visp-2026/"
-            },
-            {
-              "label": "Atelier tricot",
-              "detail": "Hôtel des Mayens",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/this-that/vercorin/knitting-workshop_Am3Gmuf"
-            },
-            {
-              "label": "Yoga",
-              "detail": "Nend'Spirit, Nendaz",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/sports/siviez-nendaz/yoga_AtScMR4"
-            },
-            {
-              "label": "LESUNG MIT MUHAMET AJETI",
-              "detail": "Naters",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-mit-muhamet-ajeti-1/"
-            },
-            {
-              "label": "COCHON D'INDE",
-              "detail": "Savièse",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cochon-dinde/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
               "label": "Abusitz",
               "detail": "Zeughaus Kultur",
               "date": "2026-11-12",
@@ -396,6 +360,18 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/brigitte-rosset/"
             },
             {
+              "label": "COCHON D'INDE",
+              "detail": "Savièse — en cours, dernier jour : 12 novembre 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cochon-dinde/"
+            },
+            {
+              "label": "Helga Zumstein",
+              "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
+            },
+            {
               "label": "La Glareyarde des vins médaillés 2026",
               "detail": "VINEA, Sierre",
               "date": "2026-11-13",
@@ -406,11 +382,35 @@
               "detail": "Salle polyvalente, Nendaz",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/filmfestival-nendaz/"
+            },
+            {
+              "label": "RESTORE | Yin Yoga",
+              "detail": "Zermatt",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
+            },
+            {
+              "label": "Tennisturnier: Burgener Sport Cup",
+              "detail": "Fiesch",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tennisturnier-burgener-sport-cup/"
+            },
+            {
+              "label": "Bernhard Betschart – Ganz nah",
+              "detail": "Hotel Glocke",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/events/music/reckingen-vs/bernhard-betschart-up-close_ABfGp56"
+            },
+            {
+              "label": "Bernhard Betschart – Ganz nah",
+              "detail": "Reckingen, Goms",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bernhard-betschart-ganz-nah-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }

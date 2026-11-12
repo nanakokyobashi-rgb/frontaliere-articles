@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
-      "section": "canton-vd",
-      "ts": 1794194314489
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/declaration-dris-tou-couple-frontalier": {
-      "section": "canton-vd",
-      "ts": 1794194336542
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/retraite-frontalier-polypensionne": {
-      "section": "canton-vd",
-      "ts": 1794233220819
-    },
     "canton-vd::https://www.vd.ch/actualites/actualite/news/26780-grandes-reformes-fiscales-administration-reorganisee": {
       "section": "canton-vd",
       "ts": 1794316769435
@@ -23,6 +11,14 @@
     "canton-vd::https://www.rts.ch/info/regions/vaud/2026/article/canton-de-vaud-la-direction-de-la-fiscalite-se-reorganise-29410771.html?rts_source=rss_t": {
       "section": "canton-vd",
       "ts": 1794316916327
+    },
+    "canton-vd::https://www.estrepublicain.fr/economie/2026/11/10/face-a-l-instabilite-sociale-en-france-la-devise-suisse-se-renforce-et-ca-profite-aux-frontaliers": {
+      "section": "canton-vd",
+      "ts": 1794457507625
+    },
+    "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
+      "section": "canton-vd",
+      "ts": 1794457927610
     }
   }
 }

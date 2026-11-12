@@ -84,6 +84,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.consiglio-stato-approva-pratiche.title': 'Council of State approves AfA support, appointment and AFV revision',
     'blog.article.consiglio-stato-approva-pratiche.excerpt': 'The State Council approved CHF 360\'000 for AfA (2026-2028), the appointment of Sabine Dändliker (from April 1, 2027) and the partial revision of the Polizeigesetz (AFV).',
     'blog.article.consiglio-stato-approva-pratiche.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.bienne-corrieri-salariati-2026.title': 'Bienne: all salaried couriers eliminated',
+    'blog.article.bienne-corrieri-salariati-2026.excerpt': 'The headline published on November 11, 2026 at 05:55 announces in Biel the elimination of all salaried Just Eat couriers.',
+    'blog.article.bienne-corrieri-salariati-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;

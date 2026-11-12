@@ -303,4 +303,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bienne-corrieri-salariati-2026',
+ category: 'novita',
+ date: '2026-11-12T04:56:56.824Z',
+ image: '/images/blog/article-bienne-corrieri-salariati-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

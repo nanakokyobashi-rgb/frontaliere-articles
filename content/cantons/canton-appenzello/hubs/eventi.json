@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "9962256c2d80da01995d2138f9a75d45d03bc3cdbd0b0b3355653fccb608f315",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "9e235a671d54e039d13b5b941a738a72ccbb804b34565ff51eec4bd0a00d495f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T23:36:45.009Z",
+      "updatedAt": "2026-11-11T04:25:04.802Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "12",
+          "value": "11",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,22 +33,16 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Visita guidata e degustazione di Appenzeller Alpenbitter AG",
-              "detail": "Appenzeller Alpenbitter AG",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/appenzell/rondleiding-en-proeverij-van-appenzeller-alpenbitter-ag_AA7sSJj"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
-            {
               "label": "Giovedì conferenza Museo Heiden / Hüben und Drüben",
               "detail": "Museum Heiden, Heiden",
               "date": "2026-11-12",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-hueben-und-drueben_AyuRZ9j"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — in corso, ultimo giorno: 9 dicembre 2026",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Fiera \"A26",
@@ -91,11 +85,17 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
+            },
+            {
+              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
+              "detail": "Gonten",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "12",
+          "value": "11",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,22 +144,16 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Guided tour and tasting of Appenzeller Alpenbitter AG",
-              "detail": "Appenzeller Alpenbitter AG",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/appenzell/rondleiding-en-proeverij-van-appenzeller-alpenbitter-ag_AA7sSJj"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
-            {
               "label": "Thursday lecture Museum Heiden / Hüben und Drüben",
               "detail": "Museum Heiden, Heiden",
               "date": "2026-11-12",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-hueben-und-drueben_AyuRZ9j"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — ongoing, last day: 9 December 2026",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Trade fair \"A26\"",
@@ -202,11 +196,17 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
+            },
+            {
+              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
+              "detail": "Gonten",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "12",
+          "value": "11",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,22 +255,16 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Geführter Rundgang und Degustation der Appenzeller Alpenbitter AG",
-              "detail": "Appenzeller Alpenbitter AG",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/appenzell/rondleiding-en-proeverij-van-appenzeller-alpenbitter-ag_AA7sSJj"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
-            {
               "label": "Donnerstagsvortrag Museum Heiden / Hüben und Drüben",
               "detail": "Museum Heiden, Heiden",
               "date": "2026-11-12",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-hueben-und-drueben_AyuRZ9j"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — läuft, letzter Tag: 9. Dezember 2026",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Gewerbemesse «A26»",
@@ -313,11 +307,17 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
+            },
+            {
+              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
+              "detail": "Gonten",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "12",
+          "value": "11",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,22 +366,16 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Visite guidée et dégustation de l'Appenzeller Alpenbitter AG",
-              "detail": "Appenzeller Alpenbitter AG",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/appenzell/rondleiding-en-proeverij-van-appenzeller-alpenbitter-ag_AA7sSJj"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
-            {
               "label": "Conférence du jeudi au musée de Heiden / Hüben und Drüben",
               "detail": "Museum Heiden, Heiden",
               "date": "2026-11-12",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-hueben-und-drueben_AyuRZ9j"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — en cours, dernier jour : 9 décembre 2026",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Foire commerciale \"A26",
@@ -424,11 +418,17 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
+            },
+            {
+              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
+              "detail": "Gonten",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T22:48:24.629Z",
-  "contentHash": "20806fbd2da83116d784e6e0f48d383b60036bcafe3fbf622de8319c58bbc185",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "f2691a035872374cf6b011d69465ae940c91f48808f103d844e109787e07460a",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "7",
+          "value": "6",
           "note": "segnalazioni aggiornate: 10 novembre 2026"
         },
         {
@@ -141,12 +141,6 @@
               "date": "2026-09-17T20:00:00.000Z"
             },
             {
-              "label": "A28 Landquart <-> Klosters Ost / Vereina tra Incrocio Klosters West E Svincolo autostradale Klosters Ost / Vereina Situazione: chiusa cantiere, lunghezza [km] 4.2",
-              "value": "Chiusura",
-              "detail": "fine prevista: 12 novembre 2026",
-              "date": "2026-10-28T07:58:00.000Z"
-            },
-            {
               "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Rothenbrunnen E Svincolo autostradale Bonaduz Situazione: chiusa cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 5 dicembre 2026",
@@ -157,6 +151,12 @@
               "value": "Cantiere",
               "detail": "fine prevista: 31 agosto 2028",
               "date": "2026-06-01T03:00:00.000Z"
+            },
+            {
+              "label": "H3 Silvaplana <-> Savognin tra Luogo Bivio E Incrocio Silvaplana-Est Situazione: problemi di traffico cantiere Aggiunta 1: limite temporaneo altezza Altezza veicolo [m] 5.0",
+              "value": "Cantiere",
+              "detail": "fine prevista: 31 maggio 2027",
+              "date": "2026-06-23T22:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T22:48:24.629Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "GR",
@@ -305,7 +305,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "7",
+          "value": "6",
           "note": "reports as of 10 November 2026"
         },
         {
@@ -409,12 +409,6 @@
               "date": "2026-09-17T20:00:00.000Z"
             },
             {
-              "label": "A28 Landquart <-> Klosters Ost / Vereina tra Incrocio Klosters West E Svincolo autostradale Klosters Ost / Vereina Situazione: chiusa cantiere, lunghezza [km] 4.2",
-              "value": "Closure",
-              "detail": "until 12 November 2026",
-              "date": "2026-10-28T07:58:00.000Z"
-            },
-            {
               "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Rothenbrunnen E Svincolo autostradale Bonaduz Situazione: chiusa cantiere",
               "value": "Closure",
               "detail": "until 5 December 2026",
@@ -425,6 +419,12 @@
               "value": "Roadworks",
               "detail": "until 31 August 2028",
               "date": "2026-06-01T03:00:00.000Z"
+            },
+            {
+              "label": "H3 Silvaplana <-> Savognin tra Luogo Bivio E Incrocio Silvaplana-Est Situazione: problemi di traffico cantiere Aggiunta 1: limite temporaneo altezza Altezza veicolo [m] 5.0",
+              "value": "Roadworks",
+              "detail": "until 31 May 2027",
+              "date": "2026-06-23T22:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T22:48:24.629Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "GR",
@@ -572,7 +572,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "7",
+          "value": "6",
           "note": "Meldungen vom 10. November 2026"
         },
         {
@@ -676,12 +676,6 @@
               "date": "2026-09-17T20:00:00.000Z"
             },
             {
-              "label": "A28 Landquart <-> Klosters-Ost / Vereina zwischen Kreuzung Klosters-West und Anschluss Klosters-Ost / Vereina Sachlage: Strecke gesperrt Baustelle, Länge [km] 4.2",
-              "value": "Sperrung",
-              "detail": "bis 12. November 2026",
-              "date": "2026-10-28T07:58:00.000Z"
-            },
-            {
               "label": "A13 S. Bernardino <-> Chur zwischen Anschluss Rothenbrunnen und Anschluss Bonaduz Sachlage: Strecke gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 5. Dezember 2026",
@@ -692,6 +686,12 @@
               "value": "Baustelle",
               "detail": "bis 31. August 2028",
               "date": "2026-06-01T03:00:00.000Z"
+            },
+            {
+              "label": "H3 Silvaplana <-> Savognin zwischen Ortschaft Bivio und Kreuzung Silvaplana-Ost Sachlage: Verkehrsbehinderung Baustelle Zusatz 1: vorübergehende Beschränkung der Höhe Fahrzeughöhe [m] 5.0",
+              "value": "Baustelle",
+              "detail": "bis 31. Mai 2027",
+              "date": "2026-06-23T22:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T22:48:24.629Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "GR",
@@ -840,7 +840,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "7",
+          "value": "6",
           "note": "signalements au 10 novembre 2026"
         },
         {
@@ -944,12 +944,6 @@
               "date": "2026-09-17T20:00:00.000Z"
             },
             {
-              "label": "A28 Landquart <-> Klosters-Est / Vereina entre Carrefour Klosters-Ouest et Jonction autoroutière Klosters-Est / Vereina Situation: fermé travaux, longueur [km] 4.2",
-              "value": "Fermeture",
-              "detail": "jusqu’au 12 novembre 2026",
-              "date": "2026-10-28T07:58:00.000Z"
-            },
-            {
               "label": "A13 S. Bernardino <-> Coire entre Jonction autoroutière Rothenbrunnen et Jonction autoroutière Bonaduz Situation: fermé travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 5 décembre 2026",
@@ -960,6 +954,12 @@
               "value": "Chantier",
               "detail": "jusqu’au 31 août 2028",
               "date": "2026-06-01T03:00:00.000Z"
+            },
+            {
+              "label": "H3 Silvaplana <-> Savognin entre Localité Bivio et Carrefour Silvaplana-Est Situation: trafic perturbé travaux Complément 1: limitation temporaire de hauteur hauteur du véhicule [m] 5.0",
+              "value": "Chantier",
+              "detail": "jusqu’au 31 mai 2027",
+              "date": "2026-06-23T22:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T22:48:24.629Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }

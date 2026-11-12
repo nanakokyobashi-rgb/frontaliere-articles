@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "ffa0dc6fa2a8c9660d3d50f92196cfe83132c6a927353bc1ac5cdf4fcb4fd648",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "cc6aa493d31d8dde9dbd425d4e02c4cfb9046af7725429f1a90aec8aa744ff9e",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "9",
+          "value": "8",
           "note": "segnalazioni aggiornate: 10 novembre 2026"
         }
       ],
@@ -52,12 +52,6 @@
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2026",
               "date": "2026-01-09T11:00:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo -> Luzern Galleria Galleria Seelisberg Situazione: problemi di traffico cantiere, lunghezza [km] 9.5 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 12 novembre 2026",
-              "date": "2026-09-22T09:24:00.000Z"
             },
             {
               "label": "H2 Göschenen <-> Flüelen Svincolo autostradale Göschenen Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite…",
@@ -88,6 +82,12 @@
               "value": "Cantiere",
               "detail": "fine prevista: 12 novembre 2026",
               "date": "2026-11-04T06:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Area di servizio S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Limitazione del traffico: corsie…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 26 novembre 2026",
+              "date": "2026-11-04T10:45:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -193,7 +193,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "UR",
@@ -208,7 +208,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "9",
+          "value": "8",
           "note": "reports as of 10 November 2026"
         }
       ],
@@ -228,12 +228,6 @@
               "value": "Roadworks",
               "detail": "until 31 December 2026",
               "date": "2026-01-09T11:00:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo -> Luzern Galleria Galleria Seelisberg Situazione: problemi di traffico cantiere, lunghezza [km] 9.5 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza…",
-              "value": "Roadworks",
-              "detail": "until 12 November 2026",
-              "date": "2026-09-22T09:24:00.000Z"
             },
             {
               "label": "H2 Göschenen <-> Flüelen Svincolo autostradale Göschenen Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite…",
@@ -264,6 +258,12 @@
               "value": "Roadworks",
               "detail": "until 12 November 2026",
               "date": "2026-11-04T06:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Area di servizio S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Limitazione del traffico: corsie…",
+              "value": "Roadworks",
+              "detail": "until 26 November 2026",
+              "date": "2026-11-04T10:45:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -369,7 +369,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "UR",
@@ -384,7 +384,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "9",
+          "value": "8",
           "note": "Meldungen vom 10. November 2026"
         }
       ],
@@ -404,12 +404,6 @@
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2026",
               "date": "2026-01-09T11:00:00.000Z"
-            },
-            {
-              "label": "A2 Gotthard -> Luzern Tunnel Seelisberg-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 9.5 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
-              "value": "Baustelle",
-              "detail": "bis 12. November 2026",
-              "date": "2026-09-22T09:24:00.000Z"
             },
             {
               "label": "H2 Göschenen <-> Flüelen Anschluss Göschenen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
@@ -440,6 +434,12 @@
               "value": "Baustelle",
               "detail": "bis 12. November 2026",
               "date": "2026-11-04T06:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Gotthard zwischen Autobahndreieck Verzweigung Altdorf und Raststätte Gotthard Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Verkehrsführung: Fahrbahnverengung auf einen…",
+              "value": "Baustelle",
+              "detail": "bis 26. November 2026",
+              "date": "2026-11-04T10:45:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -545,7 +545,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "UR",
@@ -560,7 +560,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "9",
+          "value": "8",
           "note": "signalements au 10 novembre 2026"
         }
       ],
@@ -580,12 +580,6 @@
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2026",
               "date": "2026-01-09T11:00:00.000Z"
-            },
-            {
-              "label": "A2 St-Gothard -> Lucerne Tunnel Tunnel du Seelisberg Situation: trafic perturbé travaux, longueur [km] 9.5 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de…",
-              "value": "Chantier",
-              "detail": "jusqu’au 12 novembre 2026",
-              "date": "2026-09-22T09:24:00.000Z"
             },
             {
               "label": "H2 Göschenen <-> Flüelen Jonction autoroutière Göschenen Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: circulation alternée à une voie Complément 1: limitation temporaire…",
@@ -616,6 +610,12 @@
               "value": "Chantier",
               "detail": "jusqu’au 12 novembre 2026",
               "date": "2026-11-04T06:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> St-Gothard entre Echangeur Echangeur d'Altdorf et Aire de service St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.5 Gestion du trafic: rétrécissement des voies sur une…",
+              "value": "Chantier",
+              "detail": "jusqu’au 26 novembre 2026",
+              "date": "2026-11-04T10:45:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -721,7 +721,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }

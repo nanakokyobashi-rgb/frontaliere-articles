@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T21:52:52.345Z",
-  "contentHash": "e6db38f82ff79cc8a69f9e8e33df45f713bc110e1b728c4e937b19a0c2bdf008",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "17646bb5ae38e5b1db253d1d864912a802adbcfd5401af9c4e6ca379741030c3",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "16",
+          "value": "15",
           "note": "segnalazioni aggiornate: 10 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "16",
+          "value": "14",
           "note": "segnalazioni aggiornate: 10 novembre 2026"
         }
       ],
@@ -141,16 +141,16 @@
               "date": "2026-02-02T07:27:00.000Z"
             },
             {
-              "label": "A2 Basilea -> Lucerna tra Svincolo autostradale Sissach E Parcheggio Teufengraben Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 12 novembre 2026",
-              "date": "2026-02-02T07:39:00.000Z"
-            },
-            {
               "label": "A3 Basilea <-> Zurigo tra Svincolo autostradale Basel-EuroAirport E Raccordo autostradale Raccordo di Wiese Situazione: chiusa cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 20 novembre 2026",
               "date": "2026-02-02T20:00:00.000Z"
+            },
+            {
+              "label": "A2 Diramazione Hagnau -> Birsfelden tra Raccordo autostradale Diramazione Hagnau E Svincolo autostradale Birsfelden Hard Situazione: chiusa cantiere, lunghezza [km] 0.2",
+              "value": "Chiusura",
+              "detail": "fine prevista: 16 novembre 2026",
+              "date": "2026-10-08T10:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -276,7 +276,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -291,12 +291,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "16",
+          "value": "15",
           "note": "reports as of 10 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "16",
+          "value": "14",
           "note": "reports as of 10 November 2026"
         }
       ],
@@ -395,16 +395,16 @@
               "date": "2026-02-02T07:27:00.000Z"
             },
             {
-              "label": "A2 Basilea -> Lucerna tra Svincolo autostradale Sissach E Parcheggio Teufengraben Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Closure",
-              "detail": "until 12 November 2026",
-              "date": "2026-02-02T07:39:00.000Z"
-            },
-            {
               "label": "A3 Basilea <-> Zurigo tra Svincolo autostradale Basel-EuroAirport E Raccordo autostradale Raccordo di Wiese Situazione: chiusa cantiere",
               "value": "Closure",
               "detail": "until 20 November 2026",
               "date": "2026-02-02T20:00:00.000Z"
+            },
+            {
+              "label": "A2 Diramazione Hagnau -> Birsfelden tra Raccordo autostradale Diramazione Hagnau E Svincolo autostradale Birsfelden Hard Situazione: chiusa cantiere, lunghezza [km] 0.2",
+              "value": "Closure",
+              "detail": "until 16 November 2026",
+              "date": "2026-10-08T10:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -530,7 +530,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -545,12 +545,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "16",
+          "value": "15",
           "note": "Meldungen vom 10. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "16",
+          "value": "14",
           "note": "Meldungen vom 10. November 2026"
         }
       ],
@@ -649,16 +649,16 @@
               "date": "2026-02-02T07:27:00.000Z"
             },
             {
-              "label": "A2 Basel -> Luzern zwischen Anschluss Sissach und Parkplatz Teufengraben Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 12. November 2026",
-              "date": "2026-02-02T07:39:00.000Z"
-            },
-            {
               "label": "A3 Basel <-> Zürich zwischen Anschluss Basel-EuroAirport und Autobahndreieck Verzweigung Wiese Sachlage: Strecke gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 20. November 2026",
               "date": "2026-02-02T20:00:00.000Z"
+            },
+            {
+              "label": "A2 Verzweigung Hagnau -> Birsfelden zwischen Autobahndreieck Verzweigung Hagnau und Anschluss Birsfelden Hard Sachlage: Strecke gesperrt Baustelle, Länge [km] 0.2",
+              "value": "Sperrung",
+              "detail": "bis 16. November 2026",
+              "date": "2026-10-08T10:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -784,7 +784,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -799,12 +799,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "16",
+          "value": "15",
           "note": "signalements au 10 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "16",
+          "value": "14",
           "note": "signalements au 10 novembre 2026"
         }
       ],
@@ -903,16 +903,16 @@
               "date": "2026-02-02T07:27:00.000Z"
             },
             {
-              "label": "A2 Bâle -> Lucerne entre Jonction autoroutière Sissach et Parking Teufengraben Situation: fermé travaux Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 12 novembre 2026",
-              "date": "2026-02-02T07:39:00.000Z"
-            },
-            {
               "label": "A3 Bâle <-> Zurich entre Jonction autoroutière Basel-EuroAirport et Echangeur Echangeur de Wiese Situation: fermé travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 20 novembre 2026",
               "date": "2026-02-02T20:00:00.000Z"
+            },
+            {
+              "label": "A2 Echangeur de Hagnau -> Birsfelden entre Echangeur Echangeur de Hagnau et Jonction autoroutière Birsfelden Hard Situation: fermé travaux, longueur [km] 0.2",
+              "value": "Fermeture",
+              "detail": "jusqu’au 16 novembre 2026",
+              "date": "2026-10-08T10:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -1038,7 +1038,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }

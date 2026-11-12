@@ -90,6 +90,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.vaud-salari-pubblici-2027.title': 'Waadt, indexierte öffentliche Gehälter von 1,5% im Jahr 2027',
     'blog.article.vaud-salari-pubblici-2027.excerpt': 'Am Mittwoch kündigte der Waadtländer Staatsrat die vollständige Indexierung der Gehälter aller Staatsbediensteten für 2027 an.',
     'blog.article.vaud-salari-pubblici-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.quattro-temi-puntata-vaud.title': 'Waadt: Budget nach der Annahme der Steuersenkung',
+    'blog.article.quattro-temi-puntata-vaud.excerpt': 'Die Quelle stellt vier Fragen zum Kanton Waadt vor: Budget nach der Steuersenkung, Zivildienst, Zement nach dem Mormont und Kosten der Gesundheitsversorgung.',
+    'blog.article.quattro-temi-puntata-vaud.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;

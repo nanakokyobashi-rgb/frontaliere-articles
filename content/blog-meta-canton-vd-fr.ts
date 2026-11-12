@@ -90,6 +90,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.vaud-salari-pubblici-2027.title': 'Vaud, salaires publics indexés de 1,5% en 2027',
     'blog.article.vaud-salari-pubblici-2027.excerpt': 'Mercredi, le Conseil d\'Etat vaudois a annoncé la pleine indexation des salaires de l\'ensemble du personnel de l\'Etat pour 2027.',
     'blog.article.vaud-salari-pubblici-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.quattro-temi-puntata-vaud.title': 'Vaud : budget après l\'acceptation de la réduction d\'impôt',
+    'blog.article.quattro-temi-puntata-vaud.excerpt': 'La source présente quatre questions sur le Vaud : le budget après la réduction d\'impôt, le service civil, le ciment après le Mormont et le coût des soins.',
+    'blog.article.quattro-temi-puntata-vaud.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVdFr;

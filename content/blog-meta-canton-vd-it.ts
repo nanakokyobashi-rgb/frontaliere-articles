@@ -90,6 +90,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.vaud-salari-pubblici-2027.title': 'Vaud, stipendi pubblici indicizzati dell\'1,5% nel 2027',
     'blog.article.vaud-salari-pubblici-2027.excerpt': 'Mercoledì il Consiglio di Stato vodese ha annunciato la piena indicizzazione degli stipendi dell\'intero personale dello Stato per il 2027.',
     'blog.article.vaud-salari-pubblici-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.quattro-temi-puntata-vaud.title': 'Vaud: budget dopo l\'accettazione della riduzione d\'imposta',
+    'blog.article.quattro-temi-puntata-vaud.excerpt': 'La fonte presenta quattro domande sul Vaud: budget dopo la riduzione d\'imposta, servizio civile, cemento dopo il Mormont e costo delle cure.',
+    'blog.article.quattro-temi-puntata-vaud.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVdIt;

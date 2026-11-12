@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-11-11T23:34:02.011Z",
-  "contentHash": "fd1114175a948225d17193e511b6c886883215bd131b75d8b350fa6c6a0028ee",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "36fa8922f2d936daad2dbd0249f88d6c30def80261448af9f37f8b8a16e9e91f",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -38,24 +38,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "PERRON NORD: Seniorenstamm",
-              "detail": "Apart Restaurant Bar",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
-            },
-            {
-              "label": "Taschenlampenführung durch die Burg",
-              "detail": "Zug — in corso, ultimo giorno: 13 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
-            },
-            {
-              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenführung für Erwachsene",
-              "detail": "Museum Burg Zug, Zug — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
-            {
               "label": "Brevi visite guidate all'ora di pranzo",
               "detail": "Zugo",
               "date": "2026-11-12",
@@ -66,6 +48,18 @@
               "detail": "Oberägeri",
               "date": "2026-11-12",
               "url": "https://www.guidle.com/it/suche/oberaegeri/chinderhueeti-oberaegeri_AwFJAcm"
+            },
+            {
+              "label": "Taschenlampenführung durch die Burg",
+              "detail": "Zug — in corso, ultimo giorno: 13 novembre 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
+            },
+            {
+              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenführung für Erwachsene",
+              "detail": "Museum Burg Zug, Zug — in corso, ultimo giorno: 27 novembre 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "more than music cham.",
@@ -96,6 +90,12 @@
               "detail": "Lorzensaal Cham, Cham",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
+            },
+            {
+              "label": "Zuger Bläserquintett - LOS JETZT, NORDWÄRTS",
+              "detail": "Theater im Burgbachkeller",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/zuger-blaeserquintett-los-jetzt-nordwaerts_AEN2QQJ"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -140,7 +140,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "ZG",
@@ -161,24 +161,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "PERRON NORD: Seniorenstamm",
-              "detail": "Apart Restaurant Bar",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
-            },
-            {
-              "label": "Taschenlampenführung durch die Burg",
-              "detail": "Zug — ongoing, last day: 13 November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
-            },
-            {
-              "label": "Gallows, Wheel, and Pyre: A Flashlight Tour for Adults",
-              "detail": "Museum Burg Zug, Zug — ongoing, last day: 27 November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
-            {
               "label": "Short guided tours over lunchtime",
               "detail": "Zugo",
               "date": "2026-11-12",
@@ -189,6 +171,18 @@
               "detail": "Oberägeri",
               "date": "2026-11-12",
               "url": "https://www.guidle.com/it/suche/oberaegeri/chinderhueeti-oberaegeri_AwFJAcm"
+            },
+            {
+              "label": "Taschenlampenführung durch die Burg",
+              "detail": "Zug — ongoing, last day: 13 November 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
+            },
+            {
+              "label": "Gallows, Wheel, and Pyre: A Flashlight Tour for Adults",
+              "detail": "Museum Burg Zug, Zug — ongoing, last day: 27 November 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "more than music cham.",
@@ -219,6 +213,12 @@
               "detail": "Lorzensaal Cham, Cham",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
+            },
+            {
+              "label": "Zuger Bläserquintett - LOS JETZT, NORDWÄRTS",
+              "detail": "Theater im Burgbachkeller",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/zuger-blaeserquintett-los-jetzt-nordwaerts_AEN2QQJ"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -263,7 +263,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "ZG",
@@ -284,24 +284,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "PERRON NORD: Seniorenstamm",
-              "detail": "Apart Restaurant Bar",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
-            },
-            {
-              "label": "Taschenlampenführung durch die Burg",
-              "detail": "Zug — läuft, letzter Tag: 13. November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
-            },
-            {
-              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenf Acrymmhrung f acrymmr er Acrymmachsene",
-              "detail": "Museum Burg Zug, Zug — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
-            {
               "label": "Kurzführungen über Mittag",
               "detail": "Zugo",
               "date": "2026-11-12",
@@ -312,6 +294,18 @@
               "detail": "Oberägeri",
               "date": "2026-11-12",
               "url": "https://www.guidle.com/it/suche/oberaegeri/chinderhueeti-oberaegeri_AwFJAcm"
+            },
+            {
+              "label": "Taschenlampenführung durch die Burg",
+              "detail": "Zug — läuft, letzter Tag: 13. November 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
+            },
+            {
+              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenf Acrymmhrung f acrymmr er Acrymmachsene",
+              "detail": "Museum Burg Zug, Zug — läuft, letzter Tag: 27. November 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "more than music cham.",
@@ -342,6 +336,12 @@
               "detail": "Lorzensaal Cham, Cham",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
+            },
+            {
+              "label": "Zuger Bläserquintett - LOS JETZT, NORDWÄRTS",
+              "detail": "Theater im Burgbachkeller",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/zuger-blaeserquintett-los-jetzt-nordwaerts_AEN2QQJ"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "ZG",
@@ -407,24 +407,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "PERRON NORD: Seniorenstamm",
-              "detail": "Apart Restaurant Bar",
-              "date": "2026-11-11",
-              "url": "https://www.guidle.com/it/events/rotkreuz/culinary-art/apart-restaurant-bar-seniorenstamm_AQf18bD"
-            },
-            {
-              "label": "Taschenlampenführung durch die Burg",
-              "detail": "Zug — en cours, dernier jour : 13 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
-            },
-            {
-              "label": "La potence, la roue et le bûcher. La visite guidée à la lampe de poche pour adultes",
-              "detail": "Museum Burg Zug, Zug — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
-            {
               "label": "Courtes visites guidées à midi",
               "detail": "Zugo",
               "date": "2026-11-12",
@@ -435,6 +417,18 @@
               "detail": "Oberägeri",
               "date": "2026-11-12",
               "url": "https://www.guidle.com/it/suche/oberaegeri/chinderhueeti-oberaegeri_AwFJAcm"
+            },
+            {
+              "label": "Taschenlampenführung durch die Burg",
+              "detail": "Zug — en cours, dernier jour : 13 novembre 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
+            },
+            {
+              "label": "La potence, la roue et le bûcher. La visite guidée à la lampe de poche pour adultes",
+              "detail": "Museum Burg Zug, Zug — en cours, dernier jour : 27 novembre 2026",
+              "date": "2026-11-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "more than music cham.",
@@ -465,6 +459,12 @@
               "detail": "Lorzensaal Cham, Cham",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
+            },
+            {
+              "label": "Zuger Bläserquintett - LOS JETZT, NORDWÄRTS",
+              "detail": "Theater im Burgbachkeller",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/zuger-blaeserquintett-los-jetzt-nordwaerts_AEN2QQJ"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }

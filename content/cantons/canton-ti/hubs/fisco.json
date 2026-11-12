@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "fisco",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "65eefe9573fc49c478f25743abea72bd48ba01b574a2f5656db8e5a7ef8921f2",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "616015fa42f58e9ed617bf9187a6da135f8fbd2b60249eb9f348fb910885b119",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -114,16 +114,16 @@
           "date": "2026-10-15T10:45:34.670Z"
         },
         {
-          "title": "Frontalieri: tassa salute e decreto omnibus aggiornamento",
-          "url": "/articoli-ticino/tassa-salute-decreto-omnibus-scenari/",
-          "excerpt": "Nel dicembre 2025, il Decreto Ministeriale ha formalmente autorizzato le Regioni di confine a disciplinare l'applicazione della cosiddetta tassa sulla salute.",
-          "date": "2026-10-27T03:10:46.721Z"
-        },
-        {
           "title": "Frontalieri: tassa salute e decreto omnibus al 100%",
           "url": "/articoli-ticino/frontalieri-tassa-salute-omnibus-giugno-2026/",
           "excerpt": "Secondo quanto comunicato nel giugno 2026 da OCST, due dossier fiscali restano al centro dell'attenzione dei lavoratori frontalieri: la cosiddetta «tassa sulla salute» e il regime del Decreto Omnibus.",
           "date": "2026-10-16T03:10:47.550Z"
+        },
+        {
+          "title": "Frontalieri: tassa salute e decreto omnibus aggiornamento",
+          "url": "/articoli-ticino/tassa-salute-decreto-omnibus-scenari/",
+          "excerpt": "Nel dicembre 2025, il Decreto Ministeriale ha formalmente autorizzato le Regioni di confine a disciplinare l'applicazione della cosiddetta tassa sulla salute.",
+          "date": "2026-10-27T03:10:46.721Z"
         },
         {
           "title": "Mozione in Gran Consiglio contro la tassa sulla salute",
@@ -177,7 +177,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "TI",
@@ -273,16 +273,16 @@
           "date": "2026-10-15T10:45:34.670Z"
         },
         {
-          "title": "Cross-border workers: health tax and omnibus decree update",
-          "url": "/en/ticino-articles/health-tax-omnibus-scenarios/",
-          "excerpt": "In December 2025, the Ministerial Decree formally authorized the border regions to regulate the application of the so-called health tax.",
-          "date": "2026-10-27T03:10:46.721Z"
-        },
-        {
           "title": "Cross-border workers: health tax and omnibus decree at 100%",
           "url": "/en/ticino-articles/commuters-health-tax-omnibus-june-2026/",
           "excerpt": "According to information communicated by OCST in June 2026, two tax dossiers remain at the center of attention for cross-border workers: the so-called “health tax” and the Omnibus Decree regime.",
           "date": "2026-10-16T03:10:47.550Z"
+        },
+        {
+          "title": "Cross-border workers: health tax and omnibus decree update",
+          "url": "/en/ticino-articles/health-tax-omnibus-scenarios/",
+          "excerpt": "In December 2025, the Ministerial Decree formally authorized the border regions to regulate the application of the so-called health tax.",
+          "date": "2026-10-27T03:10:46.721Z"
         },
         {
           "title": "Motion in the Grand Council against the health tax",
@@ -335,7 +335,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "TI",
@@ -431,16 +431,16 @@
           "date": "2026-10-15T10:45:34.670Z"
         },
         {
-          "title": "Grenzgänger: Gesundheitssteuer und Omnibus-Dekret – Aktualisierung",
-          "url": "/de/tessin-artikel/krankenversicherungssteuer-omnibus-szenarien/",
-          "excerpt": "Die von OCST veröffentlichte Aktualisierung weist jedoch darauf hin, dass die entsprechenden regionalen Dekrete von der Lombardei, dem Piemont und dem Aostatal noch nicht erlassen worden sind.",
-          "date": "2026-10-27T03:10:46.721Z"
-        },
-        {
           "title": "Grenzgänger: Gesundheitssteuer und Omnibus-Dekret zu 100%",
           "url": "/de/tessin-artikel/grenzganger-gesundheit-steuer-omnibus-juni-2026/",
           "excerpt": "Nach Angaben des OCST im Juni 2026 stehen zwei Steuerdossiers weiterhin im Mittelpunkt der Aufmerksamkeit für Grenzgänger: die sogenannte „Gesundheitssteuer“ und das Omnibus-Dekret.",
           "date": "2026-10-16T03:10:47.550Z"
+        },
+        {
+          "title": "Grenzgänger: Gesundheitssteuer und Omnibus-Dekret – Aktualisierung",
+          "url": "/de/tessin-artikel/krankenversicherungssteuer-omnibus-szenarien/",
+          "excerpt": "Die von OCST veröffentlichte Aktualisierung weist jedoch darauf hin, dass die entsprechenden regionalen Dekrete von der Lombardei, dem Piemont und dem Aostatal noch nicht erlassen worden sind.",
+          "date": "2026-10-27T03:10:46.721Z"
         },
         {
           "title": "Motion im Grossen Rat gegen die Gesundheitssteuer",
@@ -493,7 +493,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "TI",
@@ -590,16 +590,16 @@
           "date": "2026-10-15T10:45:34.670Z"
         },
         {
-          "title": "Frontaliers : taxe santé et décret omnibus, mise à jour",
-          "url": "/fr/articles-tessin/taxe-sante-omnibus-scenarii/",
-          "excerpt": "En décembre 2025, le décret ministériel a formellement autorisé les régions frontalières à réglementer l'application de ce que l'on appelle la taxe sur la santé.",
-          "date": "2026-10-27T03:10:46.721Z"
-        },
-        {
           "title": "Frontaliers : taxe santé et décret omnibus à 100%",
           "url": "/fr/articles-tessin/frontaliers-taxe-sante-omnibus-juin-2026/",
           "excerpt": "Selon ce qui a été communiqué en juin 2026 par l'OCST, deux dossiers fiscaux restent au centre de l'attention des travailleurs frontaliers : la dite « taxe santé » et le régime du décret omnibus.",
           "date": "2026-10-16T03:10:47.550Z"
+        },
+        {
+          "title": "Frontaliers : taxe santé et décret omnibus, mise à jour",
+          "url": "/fr/articles-tessin/taxe-sante-omnibus-scenarii/",
+          "excerpt": "En décembre 2025, le décret ministériel a formellement autorisé les régions frontalières à réglementer l'application de ce que l'on appelle la taxe sur la santé.",
+          "date": "2026-10-27T03:10:46.721Z"
         },
         {
           "title": "Motion au Grand Conseil contre la taxe sur la santé",
@@ -653,7 +653,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }

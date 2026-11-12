@@ -150,4 +150,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'ospedale-giura-solidita-finanziaria',
+ category: 'novita',
+ date: '2026-11-12T04:54:59.665Z',
+ image: '/images/blog/article-ospedale-giura-solidita-finanziaria.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['JU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

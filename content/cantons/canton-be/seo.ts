@@ -1045,6 +1045,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bienne-corrieri-salariati-2026': {
+    title: 'Bienne: soppressi tutti i corrieri salariati | Frontaliere Ticino',
+    description: 'La fonte annuncia l\'11 novembre 2026 la soppressione di tutti i corrieri salariati di Just Eat a Bienne; il titolo non indica quanti siano.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bienne, soppressi, tutti, corrieri',
+    ogTitle: 'Bienne: soppressi tutti i corrieri salariati',
+    ogDescription: 'Il titolo pubblicato alle 05:55 colloca a Bienne la soppressione di tutti i corrieri salariati di Just Eat. La fonte pubblica è parziale: non sono disponibili numero degli interessati, motivazioni o data di efficacia.',
+    canonicalPath: '/articoli-berna/bienne-corrieri-salariati-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bienne: soppressi tutti i corrieri salariati",
+      "description": "La fonte annuncia l'11 novembre 2026 la soppressione di tutti i corrieri salariati di Just Eat a Bienne; il titolo non indica quanti siano.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-bienne-corrieri-salariati-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-12T04:56:56+00:00",
+      "dateModified": "2026-11-12T04:56:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/bienne-corrieri-salariati-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

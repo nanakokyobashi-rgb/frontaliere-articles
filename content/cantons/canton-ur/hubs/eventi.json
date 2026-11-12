@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "f7d964e3f449348e1e850cb4581a921be9d497df1972f9ec12146e23cd55ef42",
+  "updatedAt": "2026-11-12T04:11:33.979Z",
+  "contentHash": "93724b8d0a2f4ff983907d20d54eef9e5e4f94d6aebe55e083fc0821cad02f7f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-10T23:36:45.009Z",
+      "updatedAt": "2026-11-11T04:25:04.802Z",
       "keyFacts": 1
     }
   ],
@@ -33,18 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Gaming am Mittwoch",
-              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gaming-am-mittwoch-3/"
-            },
-            {
-              "label": "Handlettering",
-              "detail": "Berufs- und Weiterbildungszentrum Uri",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/handlettering/"
-            },
-            {
               "label": "TriffAltdorf - Verlag Bildfluss mit Christof Hirtler und Christian de Simoni",
               "detail": "Altdorf",
               "date": "2026-11-12",
@@ -91,11 +79,23 @@
               "detail": "Altdorf",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
+            },
+            {
+              "label": "Comeback Tell!",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comeback-tell/"
+            },
+            {
+              "label": "Orgelnacht",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orgelnacht/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "en": {
       "canton": "UR",
@@ -137,18 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Gaming am Mittwoch",
-              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gaming-am-mittwoch-3/"
-            },
-            {
-              "label": "Handlettering",
-              "detail": "Berufs- und Weiterbildungszentrum Uri",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/handlettering/"
-            },
             {
               "label": "TriffAltdorf - Verlag Bildfluss mit Christof Hirtler und Christian de Simoni",
               "detail": "Altdorf",
@@ -196,11 +184,23 @@
               "detail": "Altdorf",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
+            },
+            {
+              "label": "Comeback Tell!",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comeback-tell/"
+            },
+            {
+              "label": "Orgelnacht",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orgelnacht/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "de": {
       "canton": "UR",
@@ -242,18 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Gaming am Mittwoch",
-              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gaming-am-mittwoch-3/"
-            },
-            {
-              "label": "Handlettering",
-              "detail": "Berufs- und Weiterbildungszentrum Uri",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/handlettering/"
-            },
             {
               "label": "TriffAltdorf - Verlag Bildfluss mit Christof Hirtler und Christian de Simoni",
               "detail": "Altdorf",
@@ -301,11 +289,23 @@
               "detail": "Altdorf",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
+            },
+            {
+              "label": "Comeback Tell!",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comeback-tell/"
+            },
+            {
+              "label": "Orgelnacht",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orgelnacht/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     },
     "fr": {
       "canton": "UR",
@@ -347,18 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Gaming am Mittwoch",
-              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gaming-am-mittwoch-3/"
-            },
-            {
-              "label": "Handlettering",
-              "detail": "Berufs- und Weiterbildungszentrum Uri",
-              "date": "2026-11-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/handlettering/"
-            },
             {
               "label": "TriffAltdorf - Verlag Bildfluss mit Christof Hirtler und Christian de Simoni",
               "detail": "Altdorf",
@@ -406,11 +394,23 @@
               "detail": "Altdorf",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
+            },
+            {
+              "label": "Comeback Tell!",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comeback-tell/"
+            },
+            {
+              "label": "Orgelnacht",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orgelnacht/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-11-10T23:36:45.009Z"
+          "updatedAt": "2026-11-11T04:25:04.802Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T04:11:33.979Z"
     }
   }
 }

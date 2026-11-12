@@ -16,6 +16,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'cff-cargo-rinuncia-legno-alle': { it: 'cff-cargo-rinuncia-legno-alle', en: 'cff-cargo-renounces-wood-transport-alle', de: 'sbb-cargo-verzichtet-auf-holztransport-alle', fr: 'cff-cargo-renonce-transport-bois-alle' },
  'giura-regain-fiducia-imprese': { it: 'giura-regain-fiducia-imprese', en: 'jura-regain-business-confidence', de: 'regain-des-vertrauens-der-unternehmen-im-kanton-jura', fr: 'jura-regain-confiance-entreprises' },
  'porrentruy-imposta-budget-2027': { it: 'porrentruy-imposta-budget-2027', en: 'porrentruy-tax-budget-2027', de: 'porrentruy-steuer-budget-2027', fr: 'porrentruy-impot-budget-2027' },
+ 'ospedale-giura-solidita-finanziaria': { it: 'ospedale-giura-solidita-finanziaria', en: 'jura-hospital-financial-solidity', de: 'hopital-du-jura-bestatigt-finanzielle-soliditat-und-zentrale-rolle', fr: 'hopital-jurassien-solidite-financiere' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
