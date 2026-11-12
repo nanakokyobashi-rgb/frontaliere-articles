@@ -733,6 +733,22 @@ test('il chunker protegge Markdown adiacente al testo e numeri con separatori Un
   for (const number of numbers) {
     assert.equal(chunks.filter((chunk) => chunk.includes(number)).length, 1, `numero spezzato: ${number}`);
   }
+
+  const wrappedNumberSource = 'Prima (12 345) dopo altre parole da spezzare ancora oggi.';
+  const wrappedNumberChunks = splitIntoTranslationChunks(wrappedNumberSource, 3);
+  const wrappedNumberRebuilt = wrappedNumberChunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : wrappedNumberChunks.separators[index - 1]) + chunk,
+    '',
+  );
+  assert.equal(wrappedNumberRebuilt, wrappedNumberSource);
+  assert.ok(
+    wrappedNumberChunks.some((chunk) => chunk.includes('(12 345)')),
+    'un numero dopo una parentesi di apertura deve restare intero con il wrapper',
+  );
+  assert.ok(
+    wrappedNumberChunks.every((chunk) => !chunk.includes('(12') || chunk.includes('(12 345)')),
+    'un confine non deve cadere dentro un numero racchiuso tra parentesi',
+  );
 });
 
 test('il chunker protegge link, code e prefissi di lista e conserva i separatori Markdown', () => {
@@ -981,7 +997,7 @@ test('il joiner protegge reference link, definizioni e autolink', async () => {
     return (bodyText) => translate(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
   };
   const source = [
-    'Prima [link completo][destinazione] e [link collassato][] e <https://example.test/auto>.',
+    'Prima [link completo][destinazione] e [link collassato][] e <https://example.test/auto> e <a class="source" href="https://example.test/html">anchor</a>.',
     '',
     '[destinazione]: https://example.test/destinazione',
     '[link collassato]: https://example.test/collassato',
@@ -992,6 +1008,7 @@ test('il joiner protegge reference link, definizioni e autolink', async () => {
     ['reference', (chunk) => chunk.replaceAll('[destinazione]', '[altra-destinazione]')],
     ['definition', (chunk) => chunk.replace('https://example.test/destinazione', 'https://evil.example/destinazione')],
     ['autolink', (chunk) => chunk.replace('<https://example.test/auto>', '<https://evil.example/auto>')],
+    ['html anchor', (chunk) => chunk.replace('https://example.test/html', 'https://evil.example/html')],
   ]) {
     assert.equal(
       await makeTranslator(mutate)(source),
@@ -999,6 +1016,39 @@ test('il joiner protegge reference link, definizioni e autolink', async () => {
       `${label} alterato dopo il join non deve passare il guard`,
     );
   }
+});
+
+test('il joiner protegge la sequenza numerica ma ammette i separatori locali', async () => {
+  const realChunker = buildChunker();
+  const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
+  const makeTranslator = (mutate) => {
+    const translateInChunks = new Function(
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
+      `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+    )(
+      splitWithSmallTarget,
+      async (prompt) => ({ body1: mutate(prompt) }),
+      (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+      translatedStringOrNull,
+      () => false,
+      balanceMarkdownMarkers,
+      hasSameLineSkeleton,
+      lineStructuralSignature,
+    );
+    return (bodyText) => translateInChunks(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
+  };
+  const source = 'Prima (12 345) dopo altre parole da spezzare ancora oggi.';
+
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('12 345', '12.345'))(source),
+    source.replace('12 345', '12.345'),
+    'la localizzazione dei separatori numerici deve restare ammessa',
+  );
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('12 345', '12.346'))(source),
+    null,
+    'una cifra modificata non deve arrivare al sanitizer finale',
+  );
 });
 
 test('il joiner rifiuta immagini mutate, struttura Markdown alterata e code span variati', async () => {
@@ -1055,6 +1105,19 @@ test('il joiner rifiuta immagini mutate, struttura Markdown alterata e code span
     null,
     'un code span rimosso non deve passare il guard',
   );
+
+  for (const [label, sourceSpan, mutate] of [
+    ['enfasi con asterisco', '*frase protetta*', (chunk) => chunk.replace('*frase protetta*', 'frase protetta')],
+    ['enfasi con underscore', '_frase protetta_', (chunk) => chunk.replace('_frase protetta_', 'frase protetta')],
+    ['barrato', '~~frase protetta~~', (chunk) => chunk.replace('~~frase protetta~~', 'frase protetta')],
+  ]) {
+    const markerSource = `Prima ${sourceSpan} dopo altre parole da tradurre.`;
+    assert.equal(
+      await makeTranslator(mutate)(markerSource),
+      null,
+      `${label}: il provider non deve poter rimuovere i delimitatori Markdown`,
+    );
+  }
 });
 
 test('il recovery missing-field usa il chunker per un body oversized', async () => {
@@ -1071,7 +1134,7 @@ test('il recovery missing-field usa il chunker per un body oversized', async () 
   const calls = [];
   const callWithRetry = async (prompt, maxTokens, label) => {
     calls.push({ prompt, maxTokens, label });
-    return { body1: `Deutscher Chunk ${calls.length}` };
+    return { body1: `Deutscher Chunk ${String.fromCharCode(64 + calls.length)}` };
   };
   const translateInChunks = makeTranslator(
     splitIntoTranslationChunks,
@@ -1145,7 +1208,7 @@ test('il recovery missing-field usa il chunker per un body oversized', async () 
     ['de:body1-missing-retry-p1', 'de:body1-missing-retry-p2'],
   );
   assert.ok(calls.every(({ prompt }) => prompt.includes('parte 1 di 2') || prompt.includes('parte 2 di 2')));
-  assert.match(data.content.de.body1, /^Deutscher Chunk 1 Deutscher Chunk 2$/);
+  assert.match(data.content.de.body1, /^Deutscher Chunk A Deutscher Chunk B$/);
 });
 
 test('se il circuit breaker apre Codex dopo la selezione, la lane passa alla catena storica', async () => {

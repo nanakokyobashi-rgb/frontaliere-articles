@@ -14450,6 +14450,17 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     return end;
   }
 
+  function readNumericMarkdownAtomEnd(text, start) {
+    const numericEnd = readNumericAtomEnd(text, start);
+    if (numericEnd === null) return null;
+    let end = numericEnd;
+    // Keep punctuation wrapping the number with it. Otherwise `(12 345)` can
+    // still be cut between the space-separated digit groups and its closing
+    // parenthesis even though `readNumericAtomEnd` protected the number.
+    while (end < text.length && isWrapperPunctuation(text[end])) end += 1;
+    return end;
+  }
+
   function readCoreProtectedMarkdownEnd(text, start) {
     const codeEnd = readCodeSpanEnd(text, start);
     if (codeEnd !== null) return codeEnd;
@@ -14516,9 +14527,18 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
       if (protectedEnd !== null) {
         return { end: protectedEnd, protectedEnd };
       }
+      // A numeric atom may start after a punctuation wrapper. In particular,
+      // the first whitespace in `(12 345)` makes `plainEnd` stop at `(12`; scan
+      // its digit candidate before accepting that partial token as plain text.
+      if ([...text.slice(start, candidate)].every(isMarkdownPunctuation)) {
+        const numericEnd = readNumericMarkdownAtomEnd(text, candidate);
+        if (numericEnd !== null) {
+          return { end: numericEnd, protectedEnd: numericEnd };
+        }
+      }
     }
 
-    const numericEnd = readNumericAtomEnd(text, start);
+    const numericEnd = readNumericMarkdownAtomEnd(text, start);
     if (numericEnd !== null) {
       return { end: numericEnd, protectedEnd: numericEnd };
     }
@@ -15465,39 +15485,41 @@ async function translateArticle(data) {
     // replace a Markdown block marker. Compare the complete source/joined line
     // skeleton before accepting the recomposed body; otherwise a provider can
     // turn a list, heading or table line into a different structure while all
-    // link targets and bold markers still look valid.
+    // source-owned routes and inline markers still look valid.
     if (!hasSameLineSkeleton(bodyText, joined)) return null;
+
+    const readCodeSpanEnd = (value, start) => {
+      if (value[start] !== '`') return null;
+      let markerLength = 0;
+      while (value[start + markerLength] === '`') markerLength += 1;
+      let end = start + markerLength;
+      while (end < value.length) {
+        if (value[end] !== '`') {
+          end += 1;
+          continue;
+        }
+        let runEnd = end + 1;
+        while (value[runEnd] === '`') runEnd += 1;
+        if (runEnd - end === markerLength) return runEnd;
+        end = runEnd;
+      }
+      return null;
+    };
 
     // A chunk boundary must never make a Markdown link disappear or change
     // its destination after the provider responses are recombined. Compare
     // the complete link contract in source order: inline destinations,
     // full/collapsed/shortcut reference keys, reference definitions and
-    // autolink destinations. Visible labels remain translatable, but every
-    // source-owned route must stay byte-stable (reference keys are compared
-    // case-insensitively because Markdown resolves them that way).
+    // autolink destinations and HTML-anchor hrefs. Visible labels remain
+    // translatable, but every source-owned route must stay byte-stable
+    // (reference keys are compared case-insensitively because Markdown
+    // resolves them that way).
     const markdownLinkContract = (text) => {
       const value = String(text ?? '');
       const normalizeReference = (label) => String(label)
         .replace(/[ \t\n]+/gu, ' ')
         .trim()
         .toLowerCase();
-      const readCodeSpanEnd = (start) => {
-        if (value[start] !== '`') return null;
-        let markerLength = 0;
-        while (value[start + markerLength] === '`') markerLength += 1;
-        let end = start + markerLength;
-        while (end < value.length) {
-          if (value[end] !== '`') {
-            end += 1;
-            continue;
-          }
-          let runEnd = end + 1;
-          while (value[runEnd] === '`') runEnd += 1;
-          if (runEnd - end === markerLength) return runEnd;
-          end = runEnd;
-        }
-        return null;
-      };
       const readBalancedBracketEnd = (start) => {
         if (value[start] !== '[') return null;
         let depth = 0;
@@ -15506,7 +15528,7 @@ async function translateArticle(data) {
             index += 1;
             continue;
           }
-          const codeEnd = readCodeSpanEnd(index);
+          const codeEnd = readCodeSpanEnd(value, index);
           if (codeEnd !== null) {
             index = codeEnd - 1;
             continue;
@@ -15540,7 +15562,7 @@ async function translateArticle(data) {
       // is not hidden by the link parser below.
       const codeSpans = [];
       for (let cursor = 0; cursor < value.length; cursor += 1) {
-        const codeEnd = readCodeSpanEnd(cursor);
+        const codeEnd = readCodeSpanEnd(value, cursor);
         if (codeEnd === null) continue;
         codeSpans.push(value.slice(cursor, codeEnd));
         cursor = codeEnd - 1;
@@ -15580,6 +15602,23 @@ async function translateArticle(data) {
       }
 
       const links = [];
+      const htmlAnchors = [];
+      const readHtmlTagEnd = (start) => {
+        let quote = null;
+        for (let index = start + 1; index < value.length; index += 1) {
+          const char = value[index];
+          if (quote !== null) {
+            if (char === quote) quote = null;
+            continue;
+          }
+          if (char === '"' || char === "'") {
+            quote = char;
+          } else if (char === '>') {
+            return index + 1;
+          }
+        }
+        return null;
+      };
       const parseLinkAt = (start) => {
         const linkKind = value[start] === '!' ? 'image' : 'link';
         const labelStart = value[start] === '!' ? start + 1 : start;
@@ -15610,12 +15649,64 @@ async function translateArticle(data) {
       };
 
       for (let cursor = 0; cursor < value.length; cursor += 1) {
-        const codeEnd = readCodeSpanEnd(cursor);
+        const codeEnd = readCodeSpanEnd(value, cursor);
         if (codeEnd !== null) {
           cursor = codeEnd - 1;
           continue;
         }
         if (value[cursor] === '<') {
+          const tagEnd = readHtmlTagEnd(cursor);
+          if (tagEnd !== null) {
+            const tag = value.slice(cursor, tagEnd);
+            if (/^<a(?![\p{L}\p{N}_])/iu.test(tag)) {
+              const hrefs = [];
+              let attributeCursor = 2;
+              while (attributeCursor < tag.length - 1) {
+                while (/\s/u.test(tag[attributeCursor] || '')) attributeCursor += 1;
+                if (tag[attributeCursor] === '/' || tag[attributeCursor] === '>') {
+                  attributeCursor += 1;
+                  continue;
+                }
+                const attributeStart = attributeCursor;
+                while (
+                  attributeCursor < tag.length - 1
+                  && !/[\s=/>]/u.test(tag[attributeCursor])
+                ) attributeCursor += 1;
+                if (attributeCursor === attributeStart) {
+                  attributeCursor += 1;
+                  continue;
+                }
+                const attributeName = tag.slice(attributeStart, attributeCursor).toLowerCase();
+                const nameEnd = attributeCursor;
+                while (/\s/u.test(tag[attributeCursor] || '')) attributeCursor += 1;
+                let target = '';
+                if (tag[attributeCursor] === '=') {
+                  attributeCursor += 1;
+                  while (/\s/u.test(tag[attributeCursor] || '')) attributeCursor += 1;
+                  const quote = ['"', "'"].includes(tag[attributeCursor]) ? tag[attributeCursor] : '';
+                  if (quote) {
+                    const targetStart = attributeCursor + 1;
+                    const targetEnd = tag.indexOf(quote, targetStart);
+                    if (targetEnd < 0) break;
+                    target = tag.slice(targetStart, targetEnd);
+                    attributeCursor = targetEnd + 1;
+                  } else {
+                    const targetStart = attributeCursor;
+                    while (attributeCursor < tag.length - 1 && !/[\s>]/u.test(tag[attributeCursor])) {
+                      attributeCursor += 1;
+                    }
+                    target = tag.slice(targetStart, attributeCursor);
+                  }
+                } else {
+                  attributeCursor = nameEnd;
+                }
+                if (/(?:^|\W)href$/u.test(attributeName)) hrefs.push(target);
+              }
+              htmlAnchors.push(hrefs);
+              cursor = tagEnd - 1;
+              continue;
+            }
+          }
           const end = value.indexOf('>', cursor + 1);
           if (end !== -1) {
             const target = value.slice(cursor + 1, end);
@@ -15633,11 +15724,85 @@ async function translateArticle(data) {
           cursor = parsed.end - 1;
         }
       }
-      return { links, definitions, codeSpans };
+      return { links, definitions, codeSpans, htmlAnchors };
     };
     const sourceLinkContract = markdownLinkContract(bodyText);
     const joinedLinkContract = markdownLinkContract(joined);
     if (JSON.stringify(sourceLinkContract) !== JSON.stringify(joinedLinkContract)) {
+      return null;
+    }
+
+    // Numeric values are source-owned too. Locale-specific grouping and
+    // decimal separators may change, but the ordered digit sequence (and a
+    // percent/degree unit) must remain identical after the join.
+    const numericContract = (text) => {
+      const value = String(text ?? '');
+      const numberPattern = /(?<![\p{L}\p{N}_])\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:\s*[%°º])?(?![\p{L}\p{N}_])/gu;
+      return [...value.matchAll(numberPattern)].map(([token]) => {
+        const unit = token.match(/[%°º]$/u)?.[0] || '';
+        const number = unit ? token.slice(0, -unit.length) : token;
+        return `${number.replace(/[.,'’\u00a0\u202f ]/gu, '')}:${unit}`;
+      });
+    };
+    if (JSON.stringify(numericContract(bodyText)) !== JSON.stringify(numericContract(joined))) {
+      return null;
+    }
+
+    // `balanceMarkdownMarkers` only repairs/validates bold `**` and separator
+    // lines. Keep the full source-owned delimiter skeleton here as well, so a
+    // provider cannot silently turn `*testo*`, `_testo_` or `~~testo~~` into
+    // plain prose (or swap one delimiter family for another).
+    const markdownMarkerContract = (text) => {
+      const value = String(text ?? '');
+      const candidates = [];
+      const isWord = (char) => Boolean(char) && /[\p{L}\p{N}]/u.test(char);
+      const isEscaped = (start) => {
+        let slashCount = 0;
+        for (let index = start - 1; index >= 0 && value[index] === '\\'; index -= 1) {
+          slashCount += 1;
+        }
+        return slashCount % 2 === 1;
+      };
+
+      for (let cursor = 0; cursor < value.length; cursor += 1) {
+        const codeEnd = readCodeSpanEnd(value, cursor);
+        if (codeEnd !== null) {
+          cursor = codeEnd - 1;
+          continue;
+        }
+        if (!'*_~'.includes(value[cursor]) || isEscaped(cursor)) continue;
+        const marker = value[cursor];
+        let end = cursor + 1;
+        while (value[end] === marker) end += 1;
+        const run = value.slice(cursor, end);
+        if (marker === '~' && run.length < 2) {
+          cursor = end - 1;
+          continue;
+        }
+        // Intraword underscores are literal text, not emphasis delimiters.
+        if (marker === '_' && isWord(value[cursor - 1]) && isWord(value[end])) {
+          cursor = end - 1;
+          continue;
+        }
+        candidates.push(run);
+        cursor = end - 1;
+      }
+
+      const stack = [];
+      const matched = new Set();
+      candidates.forEach((marker, index) => {
+        const open = stack[stack.length - 1];
+        if (open !== undefined && candidates[open] === marker) {
+          matched.add(open);
+          matched.add(index);
+          stack.pop();
+        } else {
+          stack.push(index);
+        }
+      });
+      return candidates.filter((_, index) => matched.has(index));
+    };
+    if (JSON.stringify(markdownMarkerContract(bodyText)) !== JSON.stringify(markdownMarkerContract(joined))) {
       return null;
     }
 
