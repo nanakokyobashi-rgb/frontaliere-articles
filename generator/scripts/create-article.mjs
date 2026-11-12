@@ -14638,7 +14638,8 @@ Rispondi con un JSON object (no markdown, no code fences):
 }
 
 /**
- * Un body rimasto in attesa (#1875), tradotto dalla corsia Codex del job.
+ * Un body rimasto in attesa (#1875), recuperato dalla corsia Codex del job
+ * oppure dalla catena storica quando il circuit breaker ha escluso Codex.
  *
  * Il motore e' quello della bonifica dei body bloccanti
  * (`translateWithCodexEngine`, lib/free-translate.mjs), con il trasporto
