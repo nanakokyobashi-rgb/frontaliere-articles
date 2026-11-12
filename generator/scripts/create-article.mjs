@@ -14278,36 +14278,100 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     if (text[start] !== '`') return null;
     let markerLength = 0;
     while (text[start + markerLength] === '`') markerLength += 1;
-    const marker = '`'.repeat(markerLength);
-    const end = text.indexOf(marker, start + markerLength);
-    return end === -1 ? null : end + markerLength;
+
+    // A code span closes only on a backtick run with exactly the same length
+    // as its opener. `indexOf(marker)` would accept the first `markerLength`
+    // characters of a longer run, splitting a valid span such as
+    // ``codice ``` interno`` into two unrelated atoms.
+    let end = start + markerLength;
+    while (end < text.length) {
+      if (text[end] !== '`') {
+        end += 1;
+        continue;
+      }
+      let runEnd = end + 1;
+      while (text[runEnd] === '`') runEnd += 1;
+      if (runEnd - end === markerLength) return runEnd;
+      end = runEnd;
+    }
+    return null;
+  }
+
+  function readBalancedBracketEnd(text, start) {
+    if (text[start] !== '[') return null;
+    let depth = 0;
+    let index = start;
+    while (index < text.length) {
+      if (text[index] === '\\') {
+        index += 2;
+        continue;
+      }
+      // Brackets inside a code span are literal label text, not delimiters.
+      if (text[index] === '`') {
+        const codeEnd = readCodeSpanEnd(text, index);
+        if (codeEnd !== null) {
+          index = codeEnd;
+          continue;
+        }
+      }
+      if (text[index] === '[') {
+        depth += 1;
+      } else if (text[index] === ']') {
+        depth -= 1;
+        if (depth === 0) return index;
+      }
+      index += 1;
+    }
+    return null;
+  }
+
+  function readBalancedParenthesisEnd(text, start) {
+    if (text[start] !== '(') return null;
+    let depth = 0;
+    let index = start;
+    while (index < text.length) {
+      if (text[index] === '\\') {
+        index += 2;
+        continue;
+      }
+      if (text[index] === '(') {
+        depth += 1;
+      } else if (text[index] === ')') {
+        depth -= 1;
+        if (depth === 0) return index + 1;
+      }
+      index += 1;
+    }
+    return null;
   }
 
   function readLinkEnd(text, start) {
     const bracketStart = text[start] === '!' ? start + 1 : start;
     if (text[bracketStart] !== '[') return null;
-    let labelEnd = bracketStart + 1;
-    while (labelEnd < text.length) {
-      if (text[labelEnd] === '\\') {
-        labelEnd += 2;
-        continue;
-      }
-      if (text[labelEnd] === ']') break;
-      labelEnd += 1;
+
+    // Link labels may contain nested brackets; a first-`]` scan turns
+    // `[outer [inner] label](url)` into ordinary words and permits a chunk
+    // boundary inside the label.
+    const labelEnd = readBalancedBracketEnd(text, bracketStart);
+    if (labelEnd === null) return null;
+
+    const suffixStart = labelEnd + 1;
+    if (text[suffixStart] === '(') {
+      const inlineEnd = readBalancedParenthesisEnd(text, suffixStart);
+      return inlineEnd === null ? null : inlineEnd;
     }
-    if (text[labelEnd] !== ']' || text[labelEnd + 1] !== '(') return null;
-    let depth = 0;
-    for (let index = labelEnd + 1; index < text.length; index += 1) {
-      if (text[index] === '\\') {
-        index += 1;
-        continue;
-      }
-      if (text[index] === '(') depth += 1;
-      if (text[index] !== ')') continue;
-      depth -= 1;
-      if (depth === 0) return index + 1;
+
+    // Full and collapsed reference links use a second balanced label:
+    // `[label][reference]` and `[label][]` (images included).
+    if (text[suffixStart] === '[') {
+      const referenceEnd = readBalancedBracketEnd(text, suffixStart);
+      return referenceEnd === null ? null : referenceEnd + 1;
     }
-    return null;
+
+    // A shortcut reference link has no suffix. Without resolving definitions
+    // here, retaining every balanced label is the safe choice: it also keeps
+    // ordinary bracketed text intact instead of cutting through its label.
+    return labelEnd + 1;
   }
 
   function readDelimitedSpanEnd(text, start, marker) {

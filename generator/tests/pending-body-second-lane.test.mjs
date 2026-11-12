@@ -734,6 +734,27 @@ test('il chunker protegge link, code e prefissi di lista e conserva i separatori
   assert.ok(wrappedChunks.some((chunk) => chunk.includes(wrappedEmphasis)), 'l’enfasi wrapped deve restare intera');
 });
 
+test('il chunker bilancia run di backtick, label nidificate e link reference', () => {
+  const makeChunker = new Function(
+    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
+  );
+  const splitIntoTranslationChunks = makeChunker();
+  const code = '``codice ``` interno``';
+  const nestedLink = '[etichetta [nidificata]](https://example.test/percorso_(v2))';
+  const referenceLink = '[riferimento [nidificato]][destinazione]';
+  const source = `Prima parola ${code} dopo ${nestedLink} ancora ${referenceLink} fine.`;
+  const chunks = splitIntoTranslationChunks(source, 3);
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, source);
+  for (const atom of [code, nestedLink, referenceLink]) {
+    assert.ok(chunks.some((chunk) => chunk.includes(atom)), `atomo Markdown spezzato: ${atom}`);
+  }
+});
+
 test('il chunker protegge anche enfasi singole e rifiuta gli atomi protetti oversize prima dell’invio', () => {
   const makeChunker = new Function(
     `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
