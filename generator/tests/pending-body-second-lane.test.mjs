@@ -247,7 +247,7 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(body, /fieldName: field,/);
   assert.match(body, /chain: \[codex\]/);
   assert.match(body, /prefer: \[codex\]/);
-  assert.match(body, /fallback: \(\) => \{[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry \}\)/);
+  assert.match(body, /fallback: \(\) => \{[\s\S]*if \(!isModelAvailable\(codex\) && typeof callWithRetry === 'function'\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry \}\)/);
   // Nessun orologio di modulo: i producer che importano translateArticle()
   // (publish-journalist-article.mjs) non hanno CREATE_ARTICLE_MAX_WALL_MS.
   assert.doesNotMatch(body, /RUN_START_MS|RUN_WALL_BUDGET_MS/);
@@ -404,7 +404,12 @@ test('con Codex indisponibile la catena storica recupera il body pending', async
   assert.deepEqual(RUN_REPORT.translation.pendingBodyRecovered, { 'de:body1': 'historical-translation-chain' });
 });
 
-function createPendingBodyCodexTranslatorFixture({ isModelAvailable, admissionDecision, translateWithCodexEngine }) {
+function createPendingBodyCodexTranslatorFixture({
+  isModelAvailable,
+  admissionDecision,
+  translateWithCodexEngine,
+  laneStopsBeforeRun = false,
+}) {
   const at = src.indexOf('async function translatePendingBodyWithCodex(');
   assert.notEqual(at, -1, 'translatePendingBodyWithCodex non trovata');
   const end = src.indexOf('\n}\n', at) + 2;
@@ -419,15 +424,24 @@ function createPendingBodyCodexTranslatorFixture({ isModelAvailable, admissionDe
   let codexCalls = 0;
   let historicalCalls = 0;
   const admission = { deadlineMs: processDeadlineMs, finish() {} };
-  const withCodexTranslationLane = ({ run }) => run({
-    deadlineMs: processDeadlineMs,
-    admission,
-    admitCall: () => {
-      admissionAttempts += 1;
-      return admissionDecision(admissionAttempts, admission);
-    },
-    reserveTransportRetry: () => false,
-  });
+  const withCodexTranslationLane = ({ run, fallback }) => {
+    if (laneStopsBeforeRun) {
+      try {
+        return Promise.resolve(fallback());
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    }
+    return run({
+      deadlineMs: processDeadlineMs,
+      admission,
+      admitCall: () => {
+        admissionAttempts += 1;
+        return admissionDecision(admissionAttempts, admission);
+      },
+      reserveTransportRetry: () => false,
+    });
+  };
   const expected = 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.';
   const translatePendingBodyWithHistoricalChain = async (itValue, locale, field, { callWithRetry }) => {
     historicalCalls += 1;
@@ -461,13 +475,13 @@ function createPendingBodyCodexTranslatorFixture({ isModelAvailable, admissionDe
   };
 }
 
-test('il body ricade sulla catena storica solo se il budget o il breaker fermano Codex tra segmenti', async () => {
+test('il body ricade sulla catena storica solo quando il breaker prova indisponibilità tra segmenti', async () => {
   const source = [
     'Il primo paragrafo contiene contesto sufficiente e viene tradotto prima che si esaurisca il budget Codex condiviso.',
     '',
     '## In breve',
     '',
-    'Il secondo paragrafo resta da tradurre quando la nuova admission viene rifiutata dal circuit breaker.',
+    'Il secondo paragrafo resta da tradurre quando la nuova admission viene rifiutata per budget esaurito.',
   ].join('\n');
   const successfulSegment = async () => 'Der erste Absatz wurde erfolgreich übersetzt und bleibt in der richtigen Sprache.';
   const runScenario = async ({ modelAvailable, admissionDecision, translateWithCodexEngine = successfulSegment }) => {
@@ -488,9 +502,9 @@ test('il body ricade sulla catena storica solo se il budget o il breaker fermano
     modelAvailable: () => true,
     admissionDecision: (attempt, admission) => attempt === 1 ? admission : null,
   });
-  assert.equal(budgetStopped.translated, 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.');
-  assert.deepEqual(budgetStopped.counts, { admissionAttempts: 2, codexCalls: 1, historicalCalls: 1 });
-  assert.equal(budgetStopped.availabilityChecks, 2);
+  assert.equal(budgetStopped.translated, '');
+  assert.deepEqual(budgetStopped.counts, { admissionAttempts: 2, codexCalls: 1, historicalCalls: 0 });
+  assert.equal(budgetStopped.availabilityChecks, 3);
 
   const breakerStopped = await runScenario({
     modelAvailable: (check) => check === 1,
@@ -508,6 +522,33 @@ test('il body ricade sulla catena storica solo se il budget o il breaker fermano
   assert.equal(breakerStoppedAfterTransportFailure.translated, 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.');
   assert.deepEqual(breakerStoppedAfterTransportFailure.counts, { admissionAttempts: 1, codexCalls: 1, historicalCalls: 1 });
   assert.equal(breakerStoppedAfterTransportFailure.availabilityChecks, 2);
+});
+
+test('il callback di fallback della lane usa la catena storica solo se Codex è indisponibile', async () => {
+  const source = [
+    'Il primo paragrafo contiene contesto sufficiente per verificare il fallback della lane.',
+    '',
+    '## In breve',
+    '',
+    'Il secondo paragrafo completa il corpo usato dalla regressione.',
+  ].join('\n');
+  const stoppedWhileAvailable = createPendingBodyCodexTranslatorFixture({
+    isModelAvailable: () => true,
+    admissionDecision: (_attempt, admission) => admission,
+    translateWithCodexEngine: async () => '',
+    laneStopsBeforeRun: true,
+  });
+  await assert.rejects(stoppedWhileAvailable.translate(source), /lane Codex fermata senza prova di indisponibilità/);
+  assert.deepEqual(stoppedWhileAvailable.counts(), { admissionAttempts: 0, codexCalls: 0, historicalCalls: 0 });
+
+  const stoppedByBreaker = createPendingBodyCodexTranslatorFixture({
+    isModelAvailable: () => false,
+    admissionDecision: (_attempt, admission) => admission,
+    translateWithCodexEngine: async () => '',
+    laneStopsBeforeRun: true,
+  });
+  assert.equal(await stoppedByBreaker.translate(source), stoppedByBreaker.expected);
+  assert.deepEqual(stoppedByBreaker.counts(), { admissionAttempts: 0, codexCalls: 0, historicalCalls: 1 });
 });
 
 test('output non valido o errore non classificato come breaker non attiva la catena storica', async () => {

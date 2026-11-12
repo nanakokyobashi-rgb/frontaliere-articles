@@ -14702,11 +14702,11 @@ async function translatePendingBodyWithCodex(
     fallback: () => {
       // La disponibilità può cambiare dopo la selezione della corsia: il
       // circuit-breaker può fermare Codex mentre la richiesta aspetta in coda.
-      // Non lasciare il body pending se la catena storica è ancora utilizzabile.
-      if (typeof callWithRetry === 'function') {
+      // Il fallback storico è ammesso solo se il breaker prova l'indisponibilità.
+      if (!isModelAvailable(codex) && typeof callWithRetry === 'function') {
         return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry });
       }
-      throw new Error('finestra residua troppo corta o lane Codex non disponibile');
+      throw new Error('lane Codex fermata senza prova di indisponibilità del modello');
     },
     run: async ({ deadlineMs: laneDeadlineMs, admission, admitCall, reserveTransportRetry }) => {
       // Mantieni il guard esplicito del chiamante dopo l'ammissione: il
@@ -14737,7 +14737,7 @@ async function translatePendingBodyWithCodex(
         ...codexDeadlineOptions(callDeadlineMs),
       });
       const rejected = [];
-      let codexAdmissionStopped = false;
+      let codexModelUnavailable = false;
       const text = await translateFieldFreeMt({
         text: itValue,
         sourceLang: 'it',
@@ -14746,12 +14746,11 @@ async function translatePendingBodyWithCodex(
         fieldName: field,
         translate: async ({ text: masked, sourceLang, targetLang, fieldType }) => {
           if (!isModelAvailable(codex)) {
-            codexAdmissionStopped = true;
+            codexModelUnavailable = true;
             throw new Error('modello Codex non disponibile prima della chiamata fisica');
           }
           const callAdmission = admitCall();
           if (!callAdmission) {
-            codexAdmissionStopped = true;
             throw new Error('budget Codex esaurito prima della chiamata fisica');
           }
           // La prima admission e' quella gia' concessa dalla lane. Le
@@ -14774,7 +14773,7 @@ async function translatePendingBodyWithCodex(
             // e il completamento del trasporto. In quel caso il wrapper di
             // translateFieldFreeMt assorbe l'errore: ricordiamo lo stop per
             // poter riprovare il body intero sulla catena storica.
-            if (!isModelAvailable(codex)) codexAdmissionStopped = true;
+            if (!isModelAvailable(codex)) codexModelUnavailable = true;
             throw error;
           } finally {
             callAdmission.finish();
@@ -14785,12 +14784,11 @@ async function translatePendingBodyWithCodex(
         onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
       });
       if (!text
-        && (codexAdmissionStopped || !isModelAvailable(codex))
+        && (codexModelUnavailable || !isModelAvailable(codex))
         && typeof callWithRetry === 'function') {
         // `translateFieldFreeMt` cattura lo stop della cascata segmentata e
-        // restituisce un campo vuoto. Se la lane si e' fermata dopo una
-        // admission gia' concessa, oppure il breaker si e' aperto durante la
-        // chiamata fisica, riprova lo stesso body sulla catena storica.
+        // restituisce un campo vuoto. Riprova lo stesso body sulla catena
+        // storica solo se il breaker ha provato l'indisponibilità di Codex.
         return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry });
       }
       if (!text && rejected.length > 0) {

@@ -428,7 +428,7 @@ test('④ la seconda corsia ammette ogni segmento Codex fisico', () => {
   );
   assert.match(
     pending,
-    /const codexModelAvailable = isModelAvailable\(codex\);[\s\S]*const callAdmission = codexModelAvailable \? admitCall\(\) : null;/,
+    /if \(!isModelAvailable\(codex\)\) \{[\s\S]*const callAdmission = admitCall\(\);/,
     'ogni segmento deve rivalutare il breaker Codex prima di riservare budget',
   );
   assert.match(pending, /const callDeadlineMs = callAdmission === admission/);
