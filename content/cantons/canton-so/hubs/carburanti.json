@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "28a57a32c73fcbb8084891183c64d0d6aef336be9beb17724a93d31c43939b6d",
+  "updatedAt": "2026-11-12T12:44:05.242Z",
+  "contentHash": "f2f21a9f092134c4be8286e83337050bc03042b4d8ba226a6996b7279dbd161d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "JUKO sostiene all'unanimità aumento corpo polizia in Soletta",
+          "url": "/articoli-soletta/juko-supporto-aumento-corpo-polizia/",
+          "excerpt": "La Justizkommission del Consiglio cantonale ha approvato all'unanimità l'aumento di 51 posti per il periodo 2027-2029 e il Globalbudget.",
+          "date": "2026-11-12T12:38:57.405Z"
+        },
+        {
           "title": "Servizio comunicazione e media polizia cantonale di Soletta",
           "url": "/articoli-soletta/polizia-cantonale-comunicazione-media/",
           "excerpt": "Il servizio opera 365 giorni all'anno, gestisce X, Facebook e Instagram e vieta i droni entro 300 m da un evento.",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/kantonsrat-proroga-gav-due-anni/",
           "excerpt": "Il GAV per tutti i dipendenti di diritto pubblico del Cantone è prorogato per due anni, evitando l'assenza contrattuale dal 1° gennaio 2027.",
           "date": "2026-11-06T02:38:57.836Z"
-        },
-        {
-          "title": "Riduzione premi assicurativi 2027: CHF 221 milioni a Soletta",
-          "url": "/articoli-soletta/solothurn-riduzione-premi-2027/",
-          "excerpt": "Nel 2027 a Soletta sono previsti circa CHF 221 milioni.",
-          "date": "2026-11-03T11:10:06.361Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T12:44:05.242Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "JUKO unanimously supports increasing the police force in Solothurn",
+          "url": "/en/solothurn-articles/juko-police-force-increase-support/",
+          "excerpt": "The Justice Committee of the Cantonal Council unanimously approved the increase of 51 positions for the 2027–2029 period and the global budget.",
+          "date": "2026-11-12T12:38:57.405Z"
+        },
+        {
           "title": "Communications and Media Service of the Solothurn Cantonal Police",
           "url": "/en/solothurn-articles/cantonal-police-communication-media/",
           "excerpt": "The service operates 365 days a year, manages X, Facebook and Instagram, and prohibits drones within 300 m of an event.",
@@ -193,12 +199,6 @@
           "url": "/en/solothurn-articles/cantonal-parliament-extends-collective-agreement/",
           "excerpt": "The GAV for all public-law employees of the Canton has been extended for two years, avoiding a contractual gap from January 1, 2027.",
           "date": "2026-11-06T02:38:57.836Z"
-        },
-        {
-          "title": "Insurance premium reductions in 2027: CHF 221 million in Solothurn",
-          "url": "/en/solothurn-articles/solothurn-premium-reduction-2027/",
-          "excerpt": "In 2027, around CHF 221 million are planned for Solothurn.",
-          "date": "2026-11-03T11:10:06.361Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T12:44:05.242Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "JUKO unterstützt einstimmig die Aufstockung des Polizeikorps in Solothurn",
+          "url": "/de/solothurn-artikel/juko-polizeikraefteerhoehung-unterstuetzung/",
+          "excerpt": "Die Justizkommission des Kantonsrats hat die Aufstockung um 51 Stellen für den Zeitraum 2027–2029 sowie das Globalbudget einstimmig genehmigt.",
+          "date": "2026-11-12T12:38:57.405Z"
+        },
+        {
           "title": "Kommunikations- und Mediendienst der Kantonspolizei Solothurn",
           "url": "/de/solothurn-artikel/polizei-kantonal-kommunikation-media/",
           "excerpt": "Der Dienst ist 365 Tage im Jahr tätig, betreut X, Facebook und Instagram und verbietet Drohnen im Umkreis von 300 m um eine Veranstaltung.",
@@ -292,12 +298,6 @@
           "url": "/de/solothurn-artikel/kantonsrat-verlaengert-gav-zwei-jahre/",
           "excerpt": "Der GAV für alle öffentlich-rechtlichen Angestellten des Kantons wird um zwei Jahre verlängert, wodurch eine Vertragslücke ab dem 1. Januar 2027 vermieden wird.",
           "date": "2026-11-06T02:38:57.836Z"
-        },
-        {
-          "title": "Prämienverbilligung 2027: CHF 221 Millionen in Solothurn",
-          "url": "/de/solothurn-artikel/solothurn-pramienreduktion-2027/",
-          "excerpt": "2027 sind in Solothurn rund CHF 221 Millionen vorgesehen.",
-          "date": "2026-11-03T11:10:06.361Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T12:44:05.242Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "JUKO soutient à l'unanimité l'augmentation des effectifs de la police à Soleure",
+          "url": "/fr/articles-soleure/juko-soutien-augmentation-corps-police/",
+          "excerpt": "La commission de justice du Conseil cantonal a approuvé à l'unanimité l'augmentation de 51 postes pour la période 2027-2029 ainsi que le budget global.",
+          "date": "2026-11-12T12:38:57.405Z"
+        },
+        {
           "title": "Service communication et médias de la police cantonale de Soleure",
           "url": "/fr/articles-soleure/police-cantonale-communication-media/",
           "excerpt": "Le service fonctionne 365 jours par an, gère X, Facebook et Instagram et interdit les drones dans un rayon de 300 m autour d’un événement.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-soleure/parlement-cantonal-prolonge-convention-collective/",
           "excerpt": "La CCT pour tous les employés de droit public du canton est prolongée de deux ans, évitant ainsi un vide contractuel à compter du 1er janvier 2027.",
           "date": "2026-11-06T02:38:57.836Z"
-        },
-        {
-          "title": "Réduction des primes d'assurance 2027 : CHF 221 millions à Soleure",
-          "url": "/fr/articles-soleure/soleure-reduction-primes-2027/",
-          "excerpt": "En 2027, à Soleure, environ CHF 221 millions sont prévus.",
-          "date": "2026-11-03T11:10:06.361Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T12:44:05.242Z"
     }
   }
 }

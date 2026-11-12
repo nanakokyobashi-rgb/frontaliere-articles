@@ -87,6 +87,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.polizia-cantonale-comunicazione-media.title': 'Communications and Media Service of the Solothurn Cantonal Police',
     'blog.article.polizia-cantonale-comunicazione-media.excerpt': 'The service operates 365 days a year, manages X, Facebook and Instagram, and prohibits drones within 300 m of an event.',
     'blog.article.polizia-cantonale-comunicazione-media.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.juko-supporto-aumento-corpo-polizia.title': 'JUKO unanimously supports increasing the police force in Solothurn',
+    'blog.article.juko-supporto-aumento-corpo-polizia.excerpt': 'The Justice Committee of the Cantonal Council unanimously approved the increase of 51 positions for the 2027–2029 period and the global budget.',
+    'blog.article.juko-supporto-aumento-corpo-polizia.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

@@ -314,4 +314,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'juko-supporto-aumento-corpo-polizia',
+ category: 'novita',
+ date: '2026-11-12T12:38:57.405Z',
+ image: '/images/blog/article-juko-supporto-aumento-corpo-polizia.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
