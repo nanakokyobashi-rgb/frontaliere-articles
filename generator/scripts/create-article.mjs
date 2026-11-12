@@ -14263,8 +14263,10 @@ const TRANSLATION_CHUNK_THRESHOLD = 700;
 
 // Split body text into ~chunkTarget-word pieces, keeping paragraph boundaries
 // where possible and cutting inside an oversized paragraph when necessary.
-// This is shared by the initial translation and both retry paths, so every
-// route keeps the same per-call output-cap safety net.
+// Protected Markdown atoms are kept intact; an atom that cannot fit is
+// rejected before any provider call rather than being sent over the cap with
+// a structural split. This is shared by the initial translation and both retry
+// paths, so every route keeps the same per-call output-cap safety net.
 function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
   const chunks = [];
   const separators = [];
@@ -14310,8 +14312,17 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
 
   function readDelimitedSpanEnd(text, start, marker) {
     if (!text.startsWith(marker, start)) return null;
-    const end = text.indexOf(marker, start + marker.length);
-    return end === -1 ? null : end + marker.length;
+    let end = start + marker.length;
+    while (end < text.length) {
+      end = text.indexOf(marker, end);
+      if (end === -1) return null;
+      if (text[end - 1] === '\\') {
+        end += marker.length;
+        continue;
+      }
+      return end + marker.length;
+    }
+    return null;
   }
 
   function readPlainAtomEnd(text, start) {
@@ -14325,7 +14336,11 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     if (codeEnd !== null) return codeEnd;
     const linkEnd = readLinkEnd(text, start);
     if (linkEnd !== null) return linkEnd;
-    for (const marker of ['**', '__', '~~']) {
+    // Keep every complete emphasis span in one request. In particular, the
+    // single-marker forms are valid Markdown too; omitting them lets a cut
+    // land between `*...*` or `_..._` and leaves the joiner with no source
+    // boundary at which it can repair the pair.
+    for (const marker of ['**', '__', '~~', '*', '_']) {
       const delimitedEnd = readDelimitedSpanEnd(text, start, marker);
       if (delimitedEnd !== null) return delimitedEnd;
     }
@@ -14336,33 +14351,64 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     return readProtectedMarkdownEnd(text, start) ?? readPlainAtomEnd(text, start);
   }
 
-  function readStructuredLineAtomEnd(text, start) {
+  function readStructuredLineContentStart(text, start) {
     if (start > 0 && text[start - 1] !== '\n') return null;
     const prefix = text.slice(start).match(/^(?: {0,3}(?:[-+*]|\d+[.)]|#{1,6}|>)[ \t]+)/);
-    if (!prefix) return null;
-    const contentStart = start + prefix[0].length;
+    return prefix ? start + prefix[0].length : null;
+  }
+
+  function readStructuredLineAtomEnd(text, start) {
+    const contentStart = readStructuredLineContentStart(text, start);
+    if (contentStart === null) return null;
     if (contentStart >= text.length || /\s/.test(text[contentStart])) return contentStart;
     return readMarkdownAtomEnd(text, contentStart);
   }
 
   let index = 0;
   while (index < source.length) {
+    let atomStart;
+    let structuredEnd = null;
+    let protectedEnd = null;
     if (/\s/.test(source[index])) {
       const separatorStart = index;
       while (index < source.length && /\s/.test(source[index])) index += 1;
-      pendingSeparator += source.slice(separatorStart, index);
-      continue;
+      // Keep indentation with a list/quote/heading marker. The old loop
+      // consumed it into `pendingSeparator` first, so a chunk boundary at the
+      // next word could leave `  -` or `> ` at the end of a request.
+      const lineStart = source.lastIndexOf('\n', index - 1) + 1;
+      if (lineStart < separatorStart) {
+        pendingSeparator += source.slice(separatorStart, index);
+        continue;
+      }
+      structuredEnd = readStructuredLineAtomEnd(source, lineStart);
+      if (structuredEnd === null) {
+        pendingSeparator += source.slice(separatorStart, index);
+        continue;
+      }
+      pendingSeparator += source.slice(separatorStart, lineStart);
+      atomStart = lineStart;
+      const contentStart = readStructuredLineContentStart(source, atomStart);
+      protectedEnd = contentStart === null ? null : readProtectedMarkdownEnd(source, contentStart);
+      index = structuredEnd;
+    } else {
+      atomStart = index;
+      structuredEnd = readStructuredLineAtomEnd(source, index);
+      const contentStart = structuredEnd === null ? null : readStructuredLineContentStart(source, index);
+      protectedEnd = readProtectedMarkdownEnd(source, contentStart ?? index);
+      index = structuredEnd ?? readMarkdownAtomEnd(source, index);
     }
 
-    const atomStart = index;
-    const structuredEnd = readStructuredLineAtomEnd(source, index);
-    const protectedEnd = structuredEnd === null ? readProtectedMarkdownEnd(source, index) : null;
-    index = structuredEnd ?? readMarkdownAtomEnd(source, index);
     if (index <= atomStart) index = atomStart + 1;
     const atomText = source.slice(atomStart, index);
+    const atomWords = countWords(atomText);
+    if (protectedEnd !== null && atomWords > chunkTarget) {
+      throw new Error(
+        `protected Markdown atom exceeds translation chunk cap (${atomWords} > ${chunkTarget} words)`,
+      );
+    }
     const atomParts = !structuredEnd
       && protectedEnd === null
-      && countWords(atomText) > chunkTarget
+      && atomWords > chunkTarget
       ? atomText.split(/([#>*`_~\-]+)/).filter(Boolean)
       : [atomText];
     for (const [partIndex, part] of atomParts.entries()) {

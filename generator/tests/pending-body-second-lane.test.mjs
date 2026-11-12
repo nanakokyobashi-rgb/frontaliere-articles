@@ -722,6 +722,66 @@ test('il chunker protegge link, code e prefissi di lista e conserva i separatori
   assert.ok(chunks.separators.some((separator) => separator.includes('\n\n')), 'il confine di paragrafo deve restare distinto');
 });
 
+test('il chunker protegge anche enfasi singole e rifiuta gli atomi protetti oversize prima dell’invio', () => {
+  const makeChunker = new Function(
+    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
+  );
+  const splitIntoTranslationChunks = makeChunker();
+  const shortSource = 'Prima *frase breve* dopo _altra prova_.';
+  const shortChunks = splitIntoTranslationChunks(shortSource, 2);
+  const rebuilt = shortChunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : shortChunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, shortSource);
+  assert.ok(shortChunks.some((chunk) => chunk.includes('*frase breve*')));
+  assert.ok(shortChunks.some((chunk) => chunk.includes('_altra prova_')));
+
+  const longWords = Array.from({ length: 501 }, (_, index) => `parola${index}`).join(' ');
+  for (const protectedSource of [
+    `\`${longWords}\``,
+    `[${longWords}](https://example.test)`,
+    `**${longWords}**`,
+    `__${longWords}__`,
+    `~~${longWords}~~`,
+    `*${longWords}*`,
+    `_${longWords}_`,
+  ]) {
+    assert.throws(
+      () => splitIntoTranslationChunks(protectedSource, 500),
+      /protected Markdown atom exceeds translation chunk cap/,
+    );
+  }
+});
+
+test('il chunker mantiene indentazione, marker e primo atomo strutturale nello stesso chunk', () => {
+  const makeChunker = new Function(
+    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
+  );
+  const splitIntoTranslationChunks = makeChunker();
+  const source = [
+    'Introduzione breve',
+    '  - prima voce elenco',
+    '   > citazione breve',
+    ' # heading finale',
+  ].join('\n');
+  const chunks = splitIntoTranslationChunks(source, 2);
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, source);
+  assert.ok(chunks.some((chunk) => chunk.includes('  - prima')));
+  assert.ok(chunks.some((chunk) => chunk.includes('   > citazione')));
+  assert.ok(chunks.some((chunk) => chunk.includes(' # heading')));
+  assert.ok(
+    chunks.every((chunk) => !/(^|\n)[ \t]{0,3}(?:[-+*]|\d+[.)]|#{1,6}|>)[ \t]*$/.test(chunk)),
+    'nessun marker strutturale deve restare orfano a fine chunk',
+  );
+});
+
 test('il join della traduzione riusa i separatori sorgente invece di inventare paragrafi', async () => {
   const makeChunker = new Function(
     `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
