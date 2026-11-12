@@ -30,6 +30,7 @@ import {
   decideCantonAdmission,
   effectiveDailyBudget,
   filterInFlightRuns,
+  flattenPaginatedInFlightRuns,
   olderCantonRuns,
   parseQuotaBeaconOutput,
   positiveInt,
@@ -261,6 +262,35 @@ test('le run in coda sono in volo quanto quelle gia\' in esecuzione', () => {
   assert.equal(inFlight.length, IN_FLIGHT_STATUSES.length + 1);
   assert.equal(olderCantonRuns(inFlight, 100).older, IN_FLIGHT_STATUSES.length);
   assert.equal(inFlight.some((candidate) => candidate.id === completed.id), false);
+});
+
+test('le run in volo uniscono tutte le pagine per stato', () => {
+  const firstPage = {
+    total_count: 101,
+    workflow_runs: [run(100, 'generate-article-ti.yml', '2026-10-05T10:00:10Z')],
+  };
+  const secondPage = {
+    total_count: 101,
+    workflow_runs: [run(1, 'generate-article-gr.yml', '2026-10-05T09:00:00Z')],
+  };
+
+  assert.deepEqual(flattenPaginatedInFlightRuns([firstPage, secondPage]), [
+    ...firstPage.workflow_runs,
+    ...secondPage.workflow_runs,
+  ]);
+  assert.deepEqual(flattenPaginatedInFlightRuns([]), []);
+  assert.equal(flattenPaginatedInFlightRuns([{ total_count: 1 }]), null);
+  assert.equal(flattenPaginatedInFlightRuns(null), null);
+});
+
+test('il lettore GitHub delle run cantonali pagina e appiattisce il payload completo', () => {
+  const source = readFileSync(SCRIPT, 'utf8');
+  const start = source.indexOf('function readInFlightRunsFromGitHub');
+  const end = source.indexOf('\nfunction readQuotaBeaconFromScript', start);
+  assert.ok(start >= 0 && end > start, 'lettore delle run non trovato');
+  const reader = source.slice(start, end);
+  assert.match(reader, /gh\(\['api', '--paginate', '--slurp',/);
+  assert.match(reader, /flattenPaginatedInFlightRuns\(JSON\.parse\(raw\)\)/);
 });
 
 test('il core e il gate cantonale condividono la stessa lista di stati in volo', () => {

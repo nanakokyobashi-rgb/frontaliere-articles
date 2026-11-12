@@ -102,6 +102,18 @@ export function filterInFlightRuns(runs) {
     .filter((run) => run && IN_FLIGHT_STATUS_SET.has(run.status));
 }
 
+/** Appiattisce tutte le pagine di `gh api --paginate --slurp`. */
+export function flattenPaginatedInFlightRuns(pages) {
+  if (!Array.isArray(pages)) return null;
+  const runs = [];
+  for (const page of pages) {
+    if (!page || typeof page !== 'object' || Array.isArray(page)
+      || !Array.isArray(page.workflow_runs)) return null;
+    runs.push(...page.workflow_runs);
+  }
+  return runs;
+}
+
 /** Finestra del budget giornaliero. */
 export const BUDGET_WINDOW_HOURS = 24;
 
@@ -159,9 +171,9 @@ export function olderCantonRuns(runs, selfId) {
   const self = canton.find((r) => Number(r.id) === me);
   const others = canton.filter((r) => Number(r.id) !== me);
   if (!self) {
-    // Questa run non e' nell'elenco (pagina piena, o stato non ancora
-    // `in_progress`): non c'e' un istante con cui confrontare, quindi ogni
-    // altra run conta. E' il verso prudente.
+    // Questa run non e' nell'elenco (lo stato non e' ancora visibile): non
+    // c'e' un istante con cui confrontare, quindi ogni altra run conta. E' il
+    // verso prudente.
     return { older: others.length, total: others.length, selfSeen: false };
   }
   const older = others.filter((r) => r.created_at < self.created_at
@@ -327,12 +339,12 @@ function readArticleSubjectsFromGitHub(repo, ref) {
 function readInFlightRunsFromGitHub(repo) {
   const byId = new Map();
   for (const status of IN_FLIGHT_STATUSES) {
-    const raw = gh(['api', `repos/${repo}/actions/runs?status=${status}&per_page=100`,
-      '--jq', '[.workflow_runs[] | {id: .id, path: .path, created_at: .created_at, status: .status}]']);
+    const raw = gh(['api', '--paginate', '--slurp',
+      `repos/${repo}/actions/runs?status=${status}&per_page=100`]);
     if (raw === null) return null;
     try {
-      const parsed = JSON.parse(raw);
-      if (!Array.isArray(parsed)) return null;
+      const parsed = flattenPaginatedInFlightRuns(JSON.parse(raw));
+      if (!parsed) return null;
       for (const run of filterInFlightRuns(parsed)) {
         if (!byId.has(run.id)) byId.set(run.id, run);
       }
