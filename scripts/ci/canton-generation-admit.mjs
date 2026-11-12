@@ -169,7 +169,7 @@ export const BUDGET_WINDOW_HOURS = 24;
 export const CORE_WORKFLOW_PATH = '.github/workflows/generate-article-core.yml';
 
 /** I chiamanti cantonali: `generate-article-<codice-minuscolo>.yml`. */
-export const CANTON_WORKFLOW_PATH_RE = /^\.github\/workflows\/generate-article-[a-z0-9]+\.yml$/;
+export const CANTON_WORKFLOW_PATH_RE = /^\.github\/workflows\/generate-article-[a-z0-9]+\.yml(?:@.+)?$/;
 
 /** Remote Config e' stato caricato in questo job? */
 export function remoteConfigLoaded(env = process.env) {
