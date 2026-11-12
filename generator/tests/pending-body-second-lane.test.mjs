@@ -769,6 +769,31 @@ test('il chunker protegge anche enfasi singole e rifiuta gli atomi protetti over
   }
 });
 
+test('il chunker mantiene intere le enfasi singole con delimitatori doppi annidati', () => {
+  const makeChunker = new Function(
+    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
+  );
+  const splitIntoTranslationChunks = makeChunker();
+  const nestedSpans = [
+    '*prima **seconda** dopo*',
+    '_prima __seconda__ dopo_',
+  ];
+  const source = `Introduzione ${nestedSpans[0]} e ${nestedSpans[1]} conclusione.`;
+  const chunks = splitIntoTranslationChunks(source, 3);
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, source);
+  for (const span of nestedSpans) {
+    assert.ok(
+      chunks.some((chunk) => chunk.includes(span)),
+      `il delimitatore annidato deve restare intero: ${span}`,
+    );
+  }
+});
+
 test('il chunker mantiene indentazione, marker e primo atomo strutturale nello stesso chunk', () => {
   const makeChunker = new Function(
     `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,

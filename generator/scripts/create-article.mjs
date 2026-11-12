@@ -14312,6 +14312,10 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
 
   function readDelimitedSpanEnd(text, start, marker) {
     if (!text.startsWith(marker, start)) return null;
+    // A single-marker emphasis span can contain a nested double-marker span,
+    // e.g. `*prima **seconda** dopo*`. The first `*` of `**` is not the
+    // outer closer: skip the complete nested span before looking again.
+    const nestedMarker = marker.length === 1 ? marker.repeat(2) : null;
     let end = start + marker.length;
     while (end < text.length) {
       end = text.indexOf(marker, end);
@@ -14319,6 +14323,13 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
       if (text[end - 1] === '\\') {
         end += marker.length;
         continue;
+      }
+      if (nestedMarker && text.startsWith(nestedMarker, end)) {
+        const nestedEnd = readDelimitedSpanEnd(text, end, nestedMarker);
+        if (nestedEnd !== null) {
+          end = nestedEnd;
+          continue;
+        }
       }
       return end + marker.length;
     }
