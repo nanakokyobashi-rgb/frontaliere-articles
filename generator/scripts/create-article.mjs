@@ -367,6 +367,7 @@ function guardProviderInputCapForCall(promptCall, {
 import {
   freeTranslateWithRetry,
   balanceMarkdownMarkers,
+  hasSameLineSkeleton,
   lineStructuralSignature,
   setCodexTranslateProcessDeadline,
   translateWithCodexEngine,
@@ -15460,6 +15461,13 @@ async function translateArticle(data) {
       '',
     );
 
+    // A translated chunk may change visible prose, but it must not add, drop or
+    // replace a Markdown block marker. Compare the complete source/joined line
+    // skeleton before accepting the recomposed body; otherwise a provider can
+    // turn a list, heading or table line into a different structure while all
+    // link targets and bold markers still look valid.
+    if (!hasSameLineSkeleton(bodyText, joined)) return null;
+
     // A chunk boundary must never make a Markdown link disappear or change
     // its destination after the provider responses are recombined. Compare
     // the complete link contract in source order: inline destinations,
@@ -15527,6 +15535,17 @@ async function translateArticle(data) {
         }
         return null;
       };
+      // Code spans are source-owned, including their delimiter width and exact
+      // contents. Scan them independently so a code span nested in a link label
+      // is not hidden by the link parser below.
+      const codeSpans = [];
+      for (let cursor = 0; cursor < value.length; cursor += 1) {
+        const codeEnd = readCodeSpanEnd(cursor);
+        if (codeEnd === null) continue;
+        codeSpans.push(value.slice(cursor, codeEnd));
+        cursor = codeEnd - 1;
+      }
+
       const definitions = [];
       const definitionKeys = new Set();
       for (let lineStart = 0; lineStart < value.length;) {
@@ -15562,6 +15581,7 @@ async function translateArticle(data) {
 
       const links = [];
       const parseLinkAt = (start) => {
+        const linkKind = value[start] === '!' ? 'image' : 'link';
         const labelStart = value[start] === '!' ? start + 1 : start;
         if (value[labelStart] !== '[') return null;
         const labelEnd = readBalancedBracketEnd(labelStart);
@@ -15571,7 +15591,7 @@ async function translateArticle(data) {
         if (value[suffixStart] === '(') {
           const end = readBalancedParenthesisEnd(suffixStart);
           if (end === null) return null;
-          return { end, signature: `inline:${value.slice(suffixStart + 1, end - 1)}` };
+          return { end, signature: `${linkKind}:inline:${value.slice(suffixStart + 1, end - 1)}` };
         }
         if (value[suffixStart] === '[') {
           const referenceEnd = readBalancedBracketEnd(suffixStart);
@@ -15579,13 +15599,13 @@ async function translateArticle(data) {
           const reference = value.slice(suffixStart + 1, referenceEnd);
           return {
             end: referenceEnd + 1,
-            signature: `reference:${normalizeReference(reference || label)}`,
+            signature: `${linkKind}:reference:${normalizeReference(reference || label)}`,
           };
         }
         const key = normalizeReference(label);
         return {
           end: labelEnd + 1,
-          signature: definitionKeys.has(key) ? `reference:${key}` : null,
+          signature: definitionKeys.has(key) ? `${linkKind}:reference:${key}` : null,
         };
       };
 
@@ -15613,7 +15633,7 @@ async function translateArticle(data) {
           cursor = parsed.end - 1;
         }
       }
-      return { links, definitions };
+      return { links, definitions, codeSpans };
     };
     const sourceLinkContract = markdownLinkContract(bodyText);
     const joinedLinkContract = markdownLinkContract(joined);

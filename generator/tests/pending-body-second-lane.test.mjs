@@ -43,7 +43,7 @@ import {
 } from '../scripts/lib/free-mt-recovery.mjs';
 import { translatedStringOrNull, isSourcePassthrough, translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import { detectTruncation } from '../scripts/lib/article-factuality-gates.mjs';
-import { balanceMarkdownMarkers, codexCallDeadlineMs, lineStructuralSignature } from '../scripts/lib/free-translate.mjs';
+import { balanceMarkdownMarkers, codexCallDeadlineMs, hasSameLineSkeleton, lineStructuralSignature } from '../scripts/lib/free-translate.mjs';
 import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -909,7 +909,7 @@ test('il join della traduzione riusa i separatori sorgente invece di inventare p
   const realChunker = buildChunker();
   const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
   const makeTranslator = new Function(
-    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers',
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
     `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
   );
   const translateInChunks = makeTranslator(
@@ -919,6 +919,8 @@ test('il join della traduzione riusa i separatori sorgente invece di inventare p
     translatedStringOrNull,
     () => false,
     balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
   );
   const source = [
     '- prima voce [comparatore fiscale](nav:calculator) e `codice interno` resta nella lista',
@@ -936,7 +938,7 @@ test('il joiner rifiuta un link Markdown alterato dopo la ricomposizione', async
   const realChunker = buildChunker();
   const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
   const makeTranslator = new Function(
-    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers',
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
     `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
   );
   const translateInChunks = makeTranslator(
@@ -946,6 +948,8 @@ test('il joiner rifiuta un link Markdown alterato dopo la ricomposizione', async
     translatedStringOrNull,
     () => false,
     balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
   );
   const source = 'Prima [etichetta lunga](nav:calculator) dopo altre parole.';
 
@@ -961,7 +965,7 @@ test('il joiner protegge reference link, definizioni e autolink', async () => {
   const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
   const makeTranslator = (mutate) => {
     const translateInChunks = new Function(
-      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers',
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
       `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
     );
     const translate = translateInChunks(
@@ -971,6 +975,8 @@ test('il joiner protegge reference link, definizioni e autolink', async () => {
       translatedStringOrNull,
       () => false,
       balanceMarkdownMarkers,
+      hasSameLineSkeleton,
+      lineStructuralSignature,
     );
     return (bodyText) => translate(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
   };
@@ -995,11 +1001,67 @@ test('il joiner protegge reference link, definizioni e autolink', async () => {
   }
 });
 
+test('il joiner rifiuta immagini mutate, struttura Markdown alterata e code span variati', async () => {
+  const realChunker = buildChunker();
+  const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
+  const makeTranslator = (mutate) => {
+    const translateInChunks = new Function(
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
+      `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+    )(
+      splitWithSmallTarget,
+      async (prompt) => ({ body1: mutate(prompt) }),
+      (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+      translatedStringOrNull,
+      () => false,
+      balanceMarkdownMarkers,
+      hasSameLineSkeleton,
+      lineStructuralSignature,
+    );
+    return (bodyText) => translateInChunks(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
+  };
+
+  const imageSource = [
+    '- Prima ![icona](https://example.test/icon.png) e ![icona][icona-ref] nella lista.',
+    '',
+    '[icona-ref]: https://example.test/icon.png',
+  ].join('\n');
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replaceAll('![', '['))(imageSource),
+    null,
+    'un’immagine trasformata in link normale, anche reference, non deve passare',
+  );
+
+  const structuralSource = [
+    '- voce strutturata con altre parole da tradurre.',
+    '# titolo strutturato con altre parole da tradurre.',
+    '| colonna | valore |',
+  ].join('\n');
+  for (const [label, mutate] of [
+    ['lista trasformata in heading', (chunk) => chunk.replace('- ', '# ')],
+    ['heading senza marker', (chunk) => chunk.replace('# titolo', 'titolo')],
+    ['tabella senza marker', (chunk) => chunk.replace('| colonna', 'colonna')],
+  ]) {
+    assert.equal(
+      await makeTranslator(mutate)(structuralSource),
+      null,
+      `${label}: lo scheletro Markdown alterato non deve passare`,
+    );
+  }
+
+  const codeSource = 'Prima `comando --flag` dopo altre parole da tradurre.';
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('`comando --flag`', 'comando --flag'))(codeSource),
+    null,
+    'un code span rimosso non deve passare il guard',
+  );
+});
+
 test('il recovery missing-field usa il chunker per un body oversized', async () => {
   const countWords = new Function(`${COUNT_WORDS_SRC}\nreturn countWords;`)();
   const splitIntoTranslationChunks = buildChunker();
   const makeTranslator = new Function(
-    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers',
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
     `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
   );
   const longIt = Array.from(
@@ -1018,6 +1080,8 @@ test('il recovery missing-field usa il chunker per un body oversized', async () 
     translatedStringOrNull,
     isSourcePassthrough,
     balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
   );
   const buildPendingBodyRetranslationPrompt = new Function(
     `${BUILD_PENDING_BODY_PROMPT_SRC}\nreturn buildPendingBodyRetranslationPrompt;`,
