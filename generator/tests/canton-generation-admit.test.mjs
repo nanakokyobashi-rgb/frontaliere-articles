@@ -23,11 +23,13 @@ import {
   CANTON_WORKFLOW_PATH_RE,
   CORE_WORKFLOW_PATH,
   DEFAULT_MAX_PARALLEL,
+  IN_FLIGHT_STATUSES,
   RC_SENTINEL_ENV,
   articleCommitSubject,
   countSectionArticles,
   decideCantonAdmission,
   effectiveDailyBudget,
+  filterInFlightRuns,
   olderCantonRuns,
   parseQuotaBeaconOutput,
   positiveInt,
@@ -63,7 +65,7 @@ function readers({ subjects = [], runs = [], beacon = { active: false, resetsAt:
   return {
     calls,
     readArticleSubjects: () => { calls.subjects += 1; return subjects; },
-    readInProgressRuns: () => { calls.runs += 1; return runs; },
+    readInFlightRuns: () => { calls.runs += 1; return runs; },
     readQuotaBeacon: () => { calls.beacon += 1; return beacon; },
   };
 }
@@ -237,6 +239,34 @@ test('tetto globale: contano solo i chiamanti cantonali piu\' vecchi di questa r
   for (const c of PROFILES.cantons) {
     assert.match(`.github/workflows/${callerWorkflowFile(c.code)}`, CANTON_WORKFLOW_PATH_RE, c.code);
   }
+});
+
+test('le run in coda sono in volo quanto quelle gia\' in esecuzione', () => {
+  assert.deepEqual(IN_FLIGHT_STATUSES, [
+    'queued',
+    'in_progress',
+    'requested',
+    'waiting',
+    'pending',
+  ]);
+
+  const self = { ...run(100, 'generate-article-ti.yml', '2026-10-05T10:00:10Z'), status: 'in_progress' };
+  const older = IN_FLIGHT_STATUSES.map((status, index) => ({
+    ...run(10 + index, `generate-article-${['gr', 'be', 'zh', 'vd', 'ag'][index]}.yml`, '2026-10-05T09:00:00Z'),
+    status,
+  }));
+  const completed = { ...run(999, 'generate-article-lu.yml', '2026-10-05T09:00:00Z'), status: 'completed' };
+  const inFlight = filterInFlightRuns([self, ...older, completed]);
+
+  assert.equal(inFlight.length, IN_FLIGHT_STATUSES.length + 1);
+  assert.equal(olderCantonRuns(inFlight, 100).older, IN_FLIGHT_STATUSES.length);
+  assert.equal(inFlight.some((candidate) => candidate.id === completed.id), false);
+});
+
+test('il core e il gate cantonale condividono la stessa lista di stati in volo', () => {
+  const match = CORE.match(/IN_FLIGHT_STATUSES='(\[[^\n]+\])'/u);
+  assert.ok(match, 'il core deve dichiarare gli stati della concurrency in un solo punto testabile');
+  assert.deepEqual(JSON.parse(match[1]), [...IN_FLIGHT_STATUSES]);
 });
 
 test('tetto globale: due arrivi simultanei non si fermano a vicenda', () => {

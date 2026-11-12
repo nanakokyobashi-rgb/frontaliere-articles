@@ -32,9 +32,9 @@
  *      delle ultime 24 ore sul ramo di destinazione, contro `dailyBudget` del
  *      profilo (`generator/data/canton-sections.json`), eventualmente abbassato
  *      da `vars.CANTON_DAILY_BUDGET_CAP` (override di rollout che può solo ridurre il profilo).
- *   3. QUANTI CANTONI STANNO GIA' GENERANDO? Una sola lettura delle run
- *      `in_progress` del repo: quelle dei workflow `generate-article-<cantone>.yml`
- *      PIU' VECCHIE di questa non devono raggiungere
+ *   3. QUANTI CANTONI STANNO GIA' GENERANDO? Una lettura delle run in uno
+ *      degli stati di `IN_FLIGHT_STATUSES` del repo: quelle dei workflow
+ *      `generate-article-<cantone>.yml` PIU' VECCHIE di questa non devono raggiungere
  *      `vars.CANTON_GENERATION_MAX_PARALLEL` (default 8, cap allineato ai quattro caller/ora
  *      piu' un gruppo orario che può essere ancora attivo). Il confronto e'
  *      asimmetrico come in `admit`: fra due arrivi simultanei esattamente uno si
@@ -85,6 +85,23 @@ export const RC_SENTINEL_ENV = RC_LOADED_MARKER;
 /** Tetto globale di cantoni che generano insieme, se `vars` non lo imposta. */
 export const DEFAULT_MAX_PARALLEL = 8;
 
+/** Stati GitHub in cui una run puo' ancora occupare la concurrency del writer. */
+export const IN_FLIGHT_STATUSES = Object.freeze([
+  'queued',
+  'in_progress',
+  'requested',
+  'waiting',
+  'pending',
+]);
+
+const IN_FLIGHT_STATUS_SET = new Set(IN_FLIGHT_STATUSES);
+
+/** Conserva solo le run che possono ancora occupare uno slot di generazione. */
+export function filterInFlightRuns(runs) {
+  return (Array.isArray(runs) ? runs : [])
+    .filter((run) => run && IN_FLIGHT_STATUS_SET.has(run.status));
+}
+
 /** Finestra del budget giornaliero. */
 export const BUDGET_WINDOW_HOURS = 24;
 
@@ -131,7 +148,7 @@ export function countSectionArticles(subjects, section) {
 /**
  * Le run dei workflow cantonali in volo e PIU' VECCHIE di questa.
  *
- * @param {Array<{ id: number, path: string, created_at: string }>} runs run `in_progress` del repo
+ * @param {Array<{ id: number, path: string, created_at: string, status?: string }>} runs run in volo del repo
  * @param {number|string} selfId
  * @returns {{ older: number, total: number, selfSeen: boolean }}
  */
@@ -162,7 +179,7 @@ export function olderCantonRuns(runs, selfId) {
  *   activeSections?: Record<string, unknown>,
  *   profiles?: any,
  *   readArticleSubjects: () => string[] | null,
- *   readInProgressRuns: () => Array<{ id: number, path: string, created_at: string }> | null,
+ *   readInFlightRuns: () => Array<{ id: number, path: string, created_at: string, status?: string }> | null,
  *   readQuotaBeacon: () => { active: boolean, resetsAt?: number | null },
  *   selfId?: number | string,
  * }} input
@@ -175,7 +192,7 @@ export function decideCantonAdmission({
   activeSections = activeCorpusCoreMap(),
   profiles,
   readArticleSubjects,
-  readInProgressRuns,
+  readInFlightRuns,
   readQuotaBeacon,
   selfId = 0,
 }) {
@@ -236,7 +253,7 @@ export function decideCantonAdmission({
   }
 
   const cap = positiveInt(env?.CANTON_GENERATION_MAX_PARALLEL, DEFAULT_MAX_PARALLEL);
-  const runs = readInProgressRuns();
+  const runs = readInFlightRuns();
   if (!Array.isArray(runs)) {
     return {
       proceed: false,
@@ -307,16 +324,23 @@ function readArticleSubjectsFromGitHub(repo, ref) {
   return raw === null ? null : raw.split('\n').filter(Boolean);
 }
 
-function readInProgressRunsFromGitHub(repo) {
-  const raw = gh(['api', `repos/${repo}/actions/runs?status=in_progress&per_page=100`,
-    '--jq', '[.workflow_runs[] | {id: .id, path: .path, created_at: .created_at}]']);
-  if (raw === null) return null;
-  try {
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : null;
-  } catch {
-    return null;
+function readInFlightRunsFromGitHub(repo) {
+  const byId = new Map();
+  for (const status of IN_FLIGHT_STATUSES) {
+    const raw = gh(['api', `repos/${repo}/actions/runs?status=${status}&per_page=100`,
+      '--jq', '[.workflow_runs[] | {id: .id, path: .path, created_at: .created_at, status: .status}]']);
+    if (raw === null) return null;
+    try {
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return null;
+      for (const run of filterInFlightRuns(parsed)) {
+        if (!byId.has(run.id)) byId.set(run.id, run);
+      }
+    } catch {
+      return null;
+    }
   }
+  return [...byId.values()];
 }
 
 function readQuotaBeaconFromScript() {
@@ -358,7 +382,7 @@ if (isMain()) {
       eventName: process.env.EVENT_NAME || '',
       selfId: process.env.SELF_ID || 0,
       readArticleSubjects: () => (repo ? readArticleSubjectsFromGitHub(repo, ref) : null),
-      readInProgressRuns: () => (repo ? readInProgressRunsFromGitHub(repo) : null),
+      readInFlightRuns: () => (repo ? readInFlightRunsFromGitHub(repo) : null),
       readQuotaBeacon: readQuotaBeaconFromScript,
     });
   } catch (error) {
