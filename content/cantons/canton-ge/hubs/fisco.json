@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "fisco",
-  "updatedAt": "2026-11-10T09:14:11.946Z",
-  "contentHash": "01086061e79c54a28bef510a6df339d3434f3400921e0022fc0d482b92da96d4",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "91c3149bf8ab81d9d101b592961aeceb94388720026789f74cd9f56efa1741fd",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T00:54:26.172Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -140,10 +140,16 @@
               "url": "https://www.ge.ch/node/45263"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Tasso vacanza alloggi 2027 Canton Ginevra",
+          "url": "/articoli-ginevra/tasso-vacanza-2027-ginevra/",
+          "excerpt": "Il tasso medio di vacanza per il 2027 è dello 0,31%. La penuria riguarda gli appartamenti da 1 a 7 locali.",
+          "date": "2026-11-12T21:02:13.473Z"
+        },
         {
           "title": "Dichiarazione imposte Svizzera 2026: guida Ginevra",
           "url": "/articoli-svizzera/guida-fiscale-ginevra-2026/",
@@ -184,7 +190,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "GE",
@@ -302,10 +308,16 @@
               "url": "https://www.ge.ch/node/45263"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Housing vacancy rate 2027 Canton of Geneva",
+          "url": "/en/geneva-articles/vacancy-rate-2027-geneva/",
+          "excerpt": "The average vacancy rate for 2027 is 0,31%. The shortage concerns apartments with 1 to 7 rooms.",
+          "date": "2026-11-12T21:02:13.473Z"
+        },
         {
           "title": "Swiss Tax Return 2026: Geneva Guide",
           "url": "/en/swiss-articles/geneva-tax-return-guide-2026/",
@@ -346,7 +358,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "GE",
@@ -464,10 +476,16 @@
               "url": "https://www.ge.ch/node/45263"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Leerstandsquote Wohnungen 2027 Kanton Genf",
+          "url": "/de/genf-artikel/leerstandsrate-2027-genf/",
+          "excerpt": "Die durchschnittliche Leerstandsquote für 2027 beträgt 0,31 %.",
+          "date": "2026-11-12T21:02:13.473Z"
+        },
         {
           "title": "Steuererklärung Schweiz 2026: Leitfaden Genf",
           "url": "/de/schweiz-artikel/steuererklaerung-genf-leitfaden-2026/",
@@ -508,7 +526,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "GE",
@@ -626,10 +644,16 @@
               "url": "https://www.ge.ch/node/45263"
             }
           ],
-          "updatedAt": "2026-11-10T00:54:26.172Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Taux de vacance des logements 2027 Canton de Genève",
+          "url": "/fr/articles-geneve/taux-vacance-2027-geneve/",
+          "excerpt": "Le taux moyen de vacance pour 2027 est de 0,31 %. La pénurie concerne les appartements de 1 à 7 pièces.",
+          "date": "2026-11-12T21:02:13.473Z"
+        },
         {
           "title": "Déclaration d'impôts Suisse 2026 : guide Genève",
           "url": "/fr/articles-suisse/declaration-impots-geneve-guide-2026/",
@@ -670,7 +694,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-10T09:14:11.946Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

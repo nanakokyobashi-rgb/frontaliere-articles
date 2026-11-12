@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "pensioni",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "f751f46ca062291b9605f485d6470427429eccaf8968720c58f732ad2c6c8a28",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "a1d508c01b7b21ad1238546d3549e489ed3c505985b1896d990574b59e1d5277",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Die Zugänglichkeit von Verwaltungsschreiben verbessern",
+              "date": "2026-11-09",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Die-Zugaenglichkeit-von-Verwaltungsschreiben-verbessern.html"
+            },
+            {
               "label": "Erste Auszahlung der 13. AHV-Rente im Dezember 2026",
               "date": "2026-11-04",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Erste-Auszahlung-der-13-AHV-Rente-im-Dezember-2026.html"
@@ -146,7 +151,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -218,7 +223,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "BE",
@@ -327,6 +332,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Die Zugänglichkeit von Verwaltungsschreiben verbessern",
+              "date": "2026-11-09",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Die-Zugaenglichkeit-von-Verwaltungsschreiben-verbessern.html"
+            },
+            {
               "label": "Erste Auszahlung der 13. AHV-Rente im Dezember 2026",
               "date": "2026-11-04",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Erste-Auszahlung-der-13-AHV-Rente-im-Dezember-2026.html"
@@ -337,7 +347,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -409,7 +419,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "BE",
@@ -518,6 +528,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Die Zugänglichkeit von Verwaltungsschreiben verbessern",
+              "date": "2026-11-09",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Die-Zugaenglichkeit-von-Verwaltungsschreiben-verbessern.html"
+            },
+            {
               "label": "Erste Auszahlung der 13. AHV-Rente im Dezember 2026",
               "date": "2026-11-04",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Erste-Auszahlung-der-13-AHV-Rente-im-Dezember-2026.html"
@@ -528,7 +543,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -600,7 +615,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "BE",
@@ -709,6 +724,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Die Zugänglichkeit von Verwaltungsschreiben verbessern",
+              "date": "2026-11-09",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Die-Zugaenglichkeit-von-Verwaltungsschreiben-verbessern.html"
+            },
+            {
               "label": "Erste Auszahlung der 13. AHV-Rente im Dezember 2026",
               "date": "2026-11-04",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Erste-Auszahlung-der-13-AHV-Rente-im-Dezember-2026.html"
@@ -719,7 +739,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Information-zur-Rentenerhoehung-ab-1-Januar-2027.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -791,7 +811,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

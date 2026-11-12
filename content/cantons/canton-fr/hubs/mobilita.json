@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T16:22:46.747Z",
-  "contentHash": "e8c479761106106336d178b4f4eda1dc356c59d075df39fb251df3b26e4888ed",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "cfb0414b697cc86da5b4a91d45a36f5e2ca6d87cd8596810c4f5b1df2d65b594",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-10T23:46:40.154Z",
+      "updatedAt": "2026-11-12T11:55:14.710Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "16",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "value": "15",
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "7",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -76,7 +76,7 @@
               "label": "Route de la Molière, Estavayer-le-Lac in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Chiusura",
               "detail": "fine prevista: 27 novembre 2026",
-              "date": "2026-10-26T06:34:00.000Z"
+              "date": "2026-10-26T06:35:00.000Z"
             },
             {
               "label": "Amtmerswilweg, Wünnewil-Flamatt in tutte le direzioni Situazione: divieto di transito Causa: lavori di manutenzione",
@@ -92,13 +92,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Restriction de circulation - Pont du Milieu - Le 18 novembre 2026",
+              "date": "2026-11-11T09:49:50.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-pont-du-milieu-le-18-novembre-2026"
+            },
             {
               "label": "Bossonnens : la route cantonale de Vevey réaménagée pour améliorer la sécurité des usagers",
               "date": "2026-11-10T11:07:01.000Z",
@@ -123,14 +128,9 @@
               "label": "Observatoire de la mobilité",
               "date": "2026-11-09T15:55:21.000Z",
               "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/observatoire-de-la-mobilite"
-            },
-            {
-              "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
-              "date": "2026-11-06T09:03:15.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/neyruz-beginn-der-arbeiten-zur-verbesserung-der-verkehrssicherheit-auf-der-kantonsstrasse-zwischen-der-einfahrt-und-dem-dorfplatz"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "FR",
@@ -204,13 +204,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "16",
-          "note": "reports as of 10 November 2026"
+          "value": "15",
+          "note": "reports as of 12 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "7",
-          "note": "reports as of 10 November 2026"
+          "note": "reports as of 12 November 2026"
         }
       ],
       "dataBlocks": [
@@ -253,7 +253,7 @@
               "label": "Route de la Molière, Estavayer-le-Lac in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Closure",
               "detail": "until 27 November 2026",
-              "date": "2026-10-26T06:34:00.000Z"
+              "date": "2026-10-26T06:35:00.000Z"
             },
             {
               "label": "Amtmerswilweg, Wünnewil-Flamatt in tutte le direzioni Situazione: divieto di transito Causa: lavori di manutenzione",
@@ -269,13 +269,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Restriction de circulation - Pont du Milieu - Le 18 novembre 2026",
+              "date": "2026-11-11T09:49:50.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-pont-du-milieu-le-18-novembre-2026"
+            },
             {
               "label": "Bossonnens : la route cantonale de Vevey réaménagée pour améliorer la sécurité des usagers",
               "date": "2026-11-10T11:07:01.000Z",
@@ -300,14 +305,9 @@
               "label": "Observatoire de la mobilité",
               "date": "2026-11-09T15:55:21.000Z",
               "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/observatoire-de-la-mobilite"
-            },
-            {
-              "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
-              "date": "2026-11-06T09:03:15.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/neyruz-beginn-der-arbeiten-zur-verbesserung-der-verkehrssicherheit-auf-der-kantonsstrasse-zwischen-der-einfahrt-und-dem-dorfplatz"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "FR",
@@ -381,13 +381,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "16",
-          "note": "Meldungen vom 10. November 2026"
+          "value": "15",
+          "note": "Meldungen vom 12. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "7",
-          "note": "Meldungen vom 10. November 2026"
+          "note": "Meldungen vom 12. November 2026"
         }
       ],
       "dataBlocks": [
@@ -430,7 +430,7 @@
               "label": "Route de la Molière, Estavayer-le-Lac in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
               "value": "Sperrung",
               "detail": "bis 27. November 2026",
-              "date": "2026-10-26T06:34:00.000Z"
+              "date": "2026-10-26T06:35:00.000Z"
             },
             {
               "label": "Amtmerswilweg, Wünnewil-Flamatt in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Unterhaltsarbeiten",
@@ -446,13 +446,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Restriction de circulation - Pont du Milieu - Le 18 novembre 2026",
+              "date": "2026-11-11T09:49:50.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-pont-du-milieu-le-18-novembre-2026"
+            },
             {
               "label": "Bossonnens : la route cantonale de Vevey réaménagée pour améliorer la sécurité des usagers",
               "date": "2026-11-10T11:07:01.000Z",
@@ -477,14 +482,9 @@
               "label": "Observatoire de la mobilité",
               "date": "2026-11-09T15:55:21.000Z",
               "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/observatoire-de-la-mobilite"
-            },
-            {
-              "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
-              "date": "2026-11-06T09:03:15.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/neyruz-beginn-der-arbeiten-zur-verbesserung-der-verkehrssicherheit-auf-der-kantonsstrasse-zwischen-der-einfahrt-und-dem-dorfplatz"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,13 +558,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "16",
-          "note": "signalements au 10 novembre 2026"
+          "value": "15",
+          "note": "signalements au 12 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "7",
-          "note": "signalements au 10 novembre 2026"
+          "note": "signalements au 12 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -607,7 +607,7 @@
               "label": "Route de la Molière, Estavayer-le-Lac dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
               "value": "Fermeture",
               "detail": "jusqu’au 27 novembre 2026",
-              "date": "2026-10-26T06:34:00.000Z"
+              "date": "2026-10-26T06:35:00.000Z"
             },
             {
               "label": "Amtmerswilweg, Wünnewil-Flamatt dans les deux sens Situation: circulation de transit interdite Raison: travaux de maintenance",
@@ -623,13 +623,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Restriction de circulation - Pont du Milieu - Le 18 novembre 2026",
+              "date": "2026-11-11T09:49:50.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-pont-du-milieu-le-18-novembre-2026"
+            },
             {
               "label": "Bossonnens : la route cantonale de Vevey réaménagée pour améliorer la sécurité des usagers",
               "date": "2026-11-10T11:07:01.000Z",
@@ -654,14 +659,9 @@
               "label": "Observatoire de la mobilité",
               "date": "2026-11-09T15:55:21.000Z",
               "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/observatoire-de-la-mobilite"
-            },
-            {
-              "label": "Neyruz: Beginn der Arbeiten zur Verbesserung der Verkehrssicherheit auf der Kantonsstrasse zwischen der Einfahrt und dem Dorfplatz",
-              "date": "2026-11-06T09:03:15.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/neyruz-beginn-der-arbeiten-zur-verbesserung-der-verkehrssicherheit-auf-der-kantonsstrasse-zwischen-der-einfahrt-und-dem-dorfplatz"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T04:11:33.979Z",
-  "contentHash": "89f4d85e383829db84723322121ebe1b6c74222c17569e26b202b60bf9be366e",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "6cded8ec588b251e394e64ed5a3dc7b0ce35b6b1809e7c1c55fd745bc6501814",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-11T04:25:04.802Z",
+      "updatedAt": "2026-11-12T12:24:28.563Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "199",
+          "value": "200",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,6 +37,12 @@
               "detail": "Tavannes",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-librairie-est-invitee-a-la-couronne-coeur-du-grand-chasseral-pour-lapero-dautomne/"
+            },
+            {
+              "label": "Mütter- und Väterberatung in Nänikon",
+              "detail": "Klairs, Begegnung im Bühl, Bühl",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/naenikon/muetter-und-vaeterberatung-in-naenikon_ABndiTM"
             },
             {
               "label": "Infothek Bern West",
@@ -85,17 +91,11 @@
               "detail": "Mühle Hunziken, Rubigen",
               "date": "2026-11-12",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/ritschi-und-hunzi-pluesch-tagebuech_AFYBQya"
-            },
-            {
-              "label": "Adrien Bordone: Juste avant la fin (CH 2026)",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adrien-bordone-juste-avant-la-fin-ch-2026/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "199",
+          "value": "200",
           "note": "from the site’s events calendar"
         }
       ],
@@ -160,6 +160,12 @@
               "detail": "Tavannes",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-librairie-est-invitee-a-la-couronne-coeur-du-grand-chasseral-pour-lapero-dautomne/"
+            },
+            {
+              "label": "Mütter- und Väterberatung in Nänikon",
+              "detail": "Klairs, Begegnung im Bühl, Bühl",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/naenikon/muetter-und-vaeterberatung-in-naenikon_ABndiTM"
             },
             {
               "label": "Infothek Bern West",
@@ -208,17 +214,11 @@
               "detail": "Mühle Hunziken, Rubigen",
               "date": "2026-11-12",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/ritschi-und-hunzi-pluesch-tagebuech_AFYBQya"
-            },
-            {
-              "label": "Adrien Bordone: Juste avant la fin (CH 2026)",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adrien-bordone-juste-avant-la-fin-ch-2026/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "199",
+          "value": "200",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -283,6 +283,12 @@
               "detail": "Tavannes",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-librairie-est-invitee-a-la-couronne-coeur-du-grand-chasseral-pour-lapero-dautomne/"
+            },
+            {
+              "label": "Mütter- und Väterberatung in Nänikon",
+              "detail": "Klairs, Begegnung im Bühl, Bühl",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/naenikon/muetter-und-vaeterberatung-in-naenikon_ABndiTM"
             },
             {
               "label": "Infothek Bern West",
@@ -331,17 +337,11 @@
               "detail": "Mühle Hunziken, Rubigen",
               "date": "2026-11-12",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/ritschi-und-hunzi-pluesch-tagebuech_AFYBQya"
-            },
-            {
-              "label": "Adrien Bordone: Juste avant la fin (CH 2026)",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adrien-bordone-juste-avant-la-fin-ch-2026/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "199",
+          "value": "200",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -406,6 +406,12 @@
               "detail": "Tavannes",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-librairie-est-invitee-a-la-couronne-coeur-du-grand-chasseral-pour-lapero-dautomne/"
+            },
+            {
+              "label": "Mütter- und Väterberatung in Nänikon",
+              "detail": "Klairs, Begegnung im Bühl, Bühl",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/naenikon/muetter-und-vaeterberatung-in-naenikon_ABndiTM"
             },
             {
               "label": "Infothek Bern West",
@@ -454,17 +460,11 @@
               "detail": "Mühle Hunziken, Rubigen",
               "date": "2026-11-12",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/ritschi-und-hunzi-pluesch-tagebuech_AFYBQya"
-            },
-            {
-              "label": "Adrien Bordone: Juste avant la fin (CH 2026)",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adrien-bordone-juste-avant-la-fin-ch-2026/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

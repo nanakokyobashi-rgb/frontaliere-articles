@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-12T13:45:12.528Z",
-  "contentHash": "282a56ab13ba9a0adaf3ad8befdd9eaf650371fb423c7eb53494678ab0135d6a",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "6cfc888f3dc8ade14fc0f8ad4e7c052c854fb3961b82d8f566fb237df27aea2f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-10T23:46:40.154Z",
+      "updatedAt": "2026-11-12T11:55:14.710Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "2",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "value": "3",
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "23",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "value": "28",
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -49,10 +49,16 @@
               "date": "2026-11-04T13:05:00.000Z"
             },
             {
-              "label": "H10 Berna <-> Lucerna Luogo Schüpfheim Situazione: divieto di transito Causa: evento importante",
+              "label": "A2 Luzern <-> Basel tra Svincolo autostradale Reiden E Svincolo autostradale Sursee Situazione: si prevedono problemi di traffico cantiere, lunghezza [km] 16.0 Limitazione del traffico: corsia…",
               "value": "Chiusura",
-              "detail": "fine prevista: 12 novembre 2026",
-              "date": "2026-11-12T05:30:00.000Z"
+              "detail": "fine prevista: 16 novembre 2026",
+              "date": "2026-11-12T05:49:00.000Z"
+            },
+            {
+              "label": "A14 Luzern <-> Zug tra Raccordo autostradale Diramazione Rotsee E Svincolo autostradale Gisikon-Root Situazione: problemi di traffico cantiere, lunghezza [km] 10.0 Limitazione del traffico: corsia…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 19 novembre 2026",
+              "date": "2026-11-12T06:02:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -83,16 +89,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 13 novembre 2026",
               "date": "2026-02-02T07:35:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea tra Galleria Galleria Schweizerhalle E Raccordo autostradale Raccordo di Hagnau Situazione: problemi di traffico cantiere, lunghezza [km] 1.55 Limitazione del traffico: nuova…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 16 novembre 2026",
-              "date": "2026-02-19T07:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,7 +115,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -179,7 +179,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-12T13:45:12.528Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "LU",
@@ -189,13 +189,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "2",
-          "note": "reports as of 10 November 2026"
+          "value": "3",
+          "note": "reports as of 12 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "23",
-          "note": "reports as of 10 November 2026"
+          "value": "28",
+          "note": "reports as of 12 November 2026"
         }
       ],
       "dataBlocks": [
@@ -211,10 +211,16 @@
               "date": "2026-11-04T13:05:00.000Z"
             },
             {
-              "label": "H10 Berna <-> Lucerna Luogo Schüpfheim Situazione: divieto di transito Causa: evento importante",
+              "label": "A2 Luzern <-> Basel tra Svincolo autostradale Reiden E Svincolo autostradale Sursee Situazione: si prevedono problemi di traffico cantiere, lunghezza [km] 16.0 Limitazione del traffico: corsia…",
               "value": "Closure",
-              "detail": "until 12 November 2026",
-              "date": "2026-11-12T05:30:00.000Z"
+              "detail": "until 16 November 2026",
+              "date": "2026-11-12T05:49:00.000Z"
+            },
+            {
+              "label": "A14 Luzern <-> Zug tra Raccordo autostradale Diramazione Rotsee E Svincolo autostradale Gisikon-Root Situazione: problemi di traffico cantiere, lunghezza [km] 10.0 Limitazione del traffico: corsia…",
+              "value": "Closure",
+              "detail": "until 19 November 2026",
+              "date": "2026-11-12T06:02:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -245,16 +251,10 @@
               "value": "Roadworks",
               "detail": "until 13 November 2026",
               "date": "2026-02-02T07:35:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea tra Galleria Galleria Schweizerhalle E Raccordo autostradale Raccordo di Hagnau Situazione: problemi di traffico cantiere, lunghezza [km] 1.55 Limitazione del traffico: nuova…",
-              "value": "Roadworks",
-              "detail": "until 16 November 2026",
-              "date": "2026-02-19T07:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -277,7 +277,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -339,7 +339,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-12T13:45:12.528Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "LU",
@@ -349,13 +349,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "2",
-          "note": "Meldungen vom 10. November 2026"
+          "value": "3",
+          "note": "Meldungen vom 12. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "23",
-          "note": "Meldungen vom 10. November 2026"
+          "value": "28",
+          "note": "Meldungen vom 12. November 2026"
         }
       ],
       "dataBlocks": [
@@ -371,10 +371,16 @@
               "date": "2026-11-04T13:05:00.000Z"
             },
             {
-              "label": "H10 Bern <-> Luzern Ortschaft Schüpfheim Sachlage: gesperrt für Durchgangsverkehr Ursache: Veranstaltung",
+              "label": "A2 Luzern <-> Basel zwischen Anschluss Reiden und Anschluss Sursee Sachlage: Verkehrsbehinderung zu erwarten Baustelle, Länge [km] 16.0 Verkehrsführung: Pannenstreifen gesperrt",
               "value": "Sperrung",
-              "detail": "bis 12. November 2026",
-              "date": "2026-11-12T05:30:00.000Z"
+              "detail": "bis 16. November 2026",
+              "date": "2026-11-12T05:49:00.000Z"
+            },
+            {
+              "label": "A14 Luzern <-> Zug zwischen Autobahndreieck Verzweigung Rotsee und Anschluss Gisikon-Root Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 10.0 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 19. November 2026",
+              "date": "2026-11-12T06:02:00.000Z"
             },
             {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
@@ -405,16 +411,10 @@
               "value": "Baustelle",
               "detail": "bis 13. November 2026",
               "date": "2026-02-02T07:35:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Basel zwischen Tunnel Schweizerhalle-Tunnel und Autobahndreieck Verzweigung Hagnau Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.55 Verkehrsführung: veränderte Verkehrsführung",
-              "value": "Baustelle",
-              "detail": "bis 16. November 2026",
-              "date": "2026-02-19T07:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -437,7 +437,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -499,7 +499,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-12T13:45:12.528Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "LU",
@@ -509,13 +509,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "2",
-          "note": "signalements au 10 novembre 2026"
+          "value": "3",
+          "note": "signalements au 12 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "23",
-          "note": "signalements au 10 novembre 2026"
+          "value": "28",
+          "note": "signalements au 12 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -531,10 +531,16 @@
               "date": "2026-11-04T13:05:00.000Z"
             },
             {
-              "label": "H10 Berne <-> Lucerne Localité Schüpfheim Situation: circulation de transit interdite Raison: événement majeur",
+              "label": "A2 Lucerne <-> Bâle entre Jonction autoroutière Reiden et Jonction autoroutière Sursee Situation: ralentissements prévus travaux, longueur [km] 16.0 Gestion du trafic: bande d'arrêt d'urgence fermée",
               "value": "Fermeture",
-              "detail": "jusqu’au 12 novembre 2026",
-              "date": "2026-11-12T05:30:00.000Z"
+              "detail": "jusqu’au 16 novembre 2026",
+              "date": "2026-11-12T05:49:00.000Z"
+            },
+            {
+              "label": "A14 Lucerne <-> Zoug entre Echangeur Echangeur du Rotsee et Jonction autoroutière Gisikon-Root Situation: trafic perturbé travaux, longueur [km] 10.0 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 19 novembre 2026",
+              "date": "2026-11-12T06:02:00.000Z"
             },
             {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
@@ -565,16 +571,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 13 novembre 2026",
               "date": "2026-02-02T07:35:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne -> Bâle entre Tunnel Tunnel Schweizerhalle et Echangeur Echangeur de Hagnau Situation: trafic perturbé travaux, longueur [km] 1.55 Gestion du trafic: nouveau plan de circulation",
-              "value": "Chantier",
-              "detail": "jusqu’au 16 novembre 2026",
-              "date": "2026-02-19T07:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -597,7 +597,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -661,7 +661,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-12T13:45:12.528Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

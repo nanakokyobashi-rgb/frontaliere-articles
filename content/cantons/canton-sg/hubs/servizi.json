@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-11-11T21:52:52.345Z",
-  "contentHash": "e42e2f705d8f85d8f06b752d6b450d514e5f0e61d16ac05d56b24e01b3d60626",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "3ecec16f184c5e8d8b4bb898e6cd2dc145531a9d6d941a4d57f93f4fa9de8df2",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-12T00:41:52.734Z",
+      "keyFacts": 1
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -30,6 +35,11 @@
           "value": "577,10 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "10",
+          "note": "offerta mediana 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -59,10 +69,51 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "SG6135",
+              "value": "2200 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6709"
+            },
+            {
+              "label": "SG41352",
+              "value": "600 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6711"
+            },
+            {
+              "label": "SG10906",
+              "value": "520 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6710"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-12T00:41:52.734Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Donnerstag, 12.11.2026 Frauengesundheitstag 2026: Forschungsergebnisse wirksam in die Praxis bringen",
+              "date": "2026-11-12",
+              "url": "https://presse.vorarlberg.at/land/public/Frauengesundheitstag-2026-Forschungsergebnisse-wirksam-in-die-Praxis-bringen"
+            },
+            {
+              "label": "Gewinn Wissenschaftspreis 2026 in Mikrochirurgie",
+              "date": "2026-11-12",
+              "url": "https://www.h-och.ch/ueber-uns/news/gewinn-wissenschaftspreis-2026-in-mikrochirurgie-2026-11-12/"
+            },
             {
               "label": "Dr. med. Timur Yurttas gewinnt den Clinical Research Grant 2026",
               "date": "2026-11-09",
@@ -82,19 +133,9 @@
               "label": "Innovatives Ostschweizer Projekt für eine nahtlose Patientenversorgung",
               "date": "2026-10-23",
               "url": "https://www.h-och.ch/ueber-uns/news/innovatives-ostschweizer-projekt-fuer-eine-nahtlose-patientenversorgung-2026-10-23/"
-            },
-            {
-              "label": "Status S: Kommission für reduzierte Sozialhilfe",
-              "date": "2026-10-19",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/status-s--kommission-fuer-reduzierte-sozialhilfe.html"
-            },
-            {
-              "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
-              "date": "2026-10-17",
-              "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -174,7 +215,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "SG",
@@ -187,6 +228,11 @@
           "value": "577.10 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "10",
+          "note": "typical bid 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -216,10 +262,51 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "SG6135",
+              "value": "2,200 CHF",
+              "detail": "current bid",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6709"
+            },
+            {
+              "label": "SG41352",
+              "value": "600 CHF",
+              "detail": "current bid",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6711"
+            },
+            {
+              "label": "SG10906",
+              "value": "520 CHF",
+              "detail": "current bid",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6710"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-12T00:41:52.734Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Donnerstag, 12.11.2026 Frauengesundheitstag 2026: Forschungsergebnisse wirksam in die Praxis bringen",
+              "date": "2026-11-12",
+              "url": "https://presse.vorarlberg.at/land/public/Frauengesundheitstag-2026-Forschungsergebnisse-wirksam-in-die-Praxis-bringen"
+            },
+            {
+              "label": "Gewinn Wissenschaftspreis 2026 in Mikrochirurgie",
+              "date": "2026-11-12",
+              "url": "https://www.h-och.ch/ueber-uns/news/gewinn-wissenschaftspreis-2026-in-mikrochirurgie-2026-11-12/"
+            },
             {
               "label": "Dr. med. Timur Yurttas gewinnt den Clinical Research Grant 2026",
               "date": "2026-11-09",
@@ -239,19 +326,9 @@
               "label": "Innovatives Ostschweizer Projekt für eine nahtlose Patientenversorgung",
               "date": "2026-10-23",
               "url": "https://www.h-och.ch/ueber-uns/news/innovatives-ostschweizer-projekt-fuer-eine-nahtlose-patientenversorgung-2026-10-23/"
-            },
-            {
-              "label": "Status S: Kommission für reduzierte Sozialhilfe",
-              "date": "2026-10-19",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/status-s--kommission-fuer-reduzierte-sozialhilfe.html"
-            },
-            {
-              "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
-              "date": "2026-10-17",
-              "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +404,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "SG",
@@ -340,6 +417,11 @@
           "value": "577.10 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "10",
+          "note": "mittleres Gebot 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -369,10 +451,51 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "SG6135",
+              "value": "2’200 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6709"
+            },
+            {
+              "label": "SG41352",
+              "value": "600 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6711"
+            },
+            {
+              "label": "SG10906",
+              "value": "520 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6710"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-12T00:41:52.734Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Donnerstag, 12.11.2026 Frauengesundheitstag 2026: Forschungsergebnisse wirksam in die Praxis bringen",
+              "date": "2026-11-12",
+              "url": "https://presse.vorarlberg.at/land/public/Frauengesundheitstag-2026-Forschungsergebnisse-wirksam-in-die-Praxis-bringen"
+            },
+            {
+              "label": "Gewinn Wissenschaftspreis 2026 in Mikrochirurgie",
+              "date": "2026-11-12",
+              "url": "https://www.h-och.ch/ueber-uns/news/gewinn-wissenschaftspreis-2026-in-mikrochirurgie-2026-11-12/"
+            },
             {
               "label": "Dr. med. Timur Yurttas gewinnt den Clinical Research Grant 2026",
               "date": "2026-11-09",
@@ -392,19 +515,9 @@
               "label": "Innovatives Ostschweizer Projekt für eine nahtlose Patientenversorgung",
               "date": "2026-10-23",
               "url": "https://www.h-och.ch/ueber-uns/news/innovatives-ostschweizer-projekt-fuer-eine-nahtlose-patientenversorgung-2026-10-23/"
-            },
-            {
-              "label": "Status S: Kommission für reduzierte Sozialhilfe",
-              "date": "2026-10-19",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/status-s--kommission-fuer-reduzierte-sozialhilfe.html"
-            },
-            {
-              "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
-              "date": "2026-10-17",
-              "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +593,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "SG",
@@ -493,6 +606,11 @@
           "value": "577,10 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "10",
+          "note": "offre centrale 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -522,10 +640,51 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "SG6135",
+              "value": "2 200 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6709"
+            },
+            {
+              "label": "SG41352",
+              "value": "600 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6711"
+            },
+            {
+              "label": "SG10906",
+              "value": "520 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6710"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-12T00:41:52.734Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Donnerstag, 12.11.2026 Frauengesundheitstag 2026: Forschungsergebnisse wirksam in die Praxis bringen",
+              "date": "2026-11-12",
+              "url": "https://presse.vorarlberg.at/land/public/Frauengesundheitstag-2026-Forschungsergebnisse-wirksam-in-die-Praxis-bringen"
+            },
+            {
+              "label": "Gewinn Wissenschaftspreis 2026 in Mikrochirurgie",
+              "date": "2026-11-12",
+              "url": "https://www.h-och.ch/ueber-uns/news/gewinn-wissenschaftspreis-2026-in-mikrochirurgie-2026-11-12/"
+            },
             {
               "label": "Dr. med. Timur Yurttas gewinnt den Clinical Research Grant 2026",
               "date": "2026-11-09",
@@ -545,19 +704,9 @@
               "label": "Innovatives Ostschweizer Projekt für eine nahtlose Patientenversorgung",
               "date": "2026-10-23",
               "url": "https://www.h-och.ch/ueber-uns/news/innovatives-ostschweizer-projekt-fuer-eine-nahtlose-patientenversorgung-2026-10-23/"
-            },
-            {
-              "label": "Status S: Kommission für reduzierte Sozialhilfe",
-              "date": "2026-10-19",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/status-s--kommission-fuer-reduzierte-sozialhilfe.html"
-            },
-            {
-              "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
-              "date": "2026-10-17",
-              "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -629,7 +778,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

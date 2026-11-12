@@ -18,6 +18,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'a1-terza-corsia-ginevra': { it: 'a1-terza-corsia-ginevra', en: 'a1-geneva-third-lane', de: 'a1-genf-dritte-spur', fr: 'a1-geneve-troisieme-voie' },
  'referendum-costruzione-alloggi-hbm': { it: 'referendum-costruzione-alloggi-hbm', en: 'referendum-housing-hbm-construction', de: 'referendum-wohnbau-hbm-genf', fr: 'referendum-construction-logements-hbm' },
  'oit-protesta-tagli-ginevra': { it: 'oit-protesta-tagli-ginevra', en: 'oit-protest-geneva-cuts', de: 'oit-protest-streichungen-genf', fr: 'oit-manifestation-geneve-suppressions' },
+ 'tasso-vacanza-2027-ginevra': { it: 'tasso-vacanza-2027-ginevra', en: 'vacancy-rate-2027-geneva', de: 'leerstandsrate-2027-genf', fr: 'taux-vacance-2027-geneve' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

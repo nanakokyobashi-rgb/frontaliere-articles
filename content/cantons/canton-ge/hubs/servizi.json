@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-11T23:34:02.011Z",
-  "contentHash": "fd68c7ed8bd5866fe3552a2f3ae0e6d7393e21cd32552a128d6fc8149b3b4836",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "7b5d1c1f5220e7f953338b31bbf72ce38044b09dc845915c049015d1c1ed83c3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-11T03:01:21.749Z",
+      "updatedAt": "2026-11-12T12:55:26.142Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -91,13 +91,28 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-11T03:01:21.749Z"
+          "updatedAt": "2026-11-12T12:55:26.142Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "OCIRT-Formation 220-26 - Loi sur l’égalité : état des lieux, aspects juridiques et mise en œuvre",
+              "date": "2026-11-12",
+              "url": "https://www.ge.ch/node/44025"
+            },
+            {
+              "label": "Directive relative aux permissions d'exercer une activité professionnelle dans les eaux genevoises",
+              "date": "2026-11-12",
+              "url": "https://www.ge.ch/node/45491"
+            },
+            {
+              "label": "Sortie d'hospitalisation de la personne atteinte d'Ebola",
+              "date": "2026-11-11",
+              "url": "https://www.hug.ch/actualite/sortie-hospitalisation-personne-atteinte-ebola"
+            },
             {
               "label": "OCIRT-Formation 100-26 - Aménagement des locaux de travail : de la conception à la réalisation dans le respect des exigences légales en matière de santé et sécurité au travail",
               "date": "2026-11-10",
@@ -112,24 +127,9 @@
               "label": "Fin d'année 2026 : prolongation de l'ouverture des cafés, bars et restaurants",
               "date": "2026-11-09",
               "url": "https://www.ge.ch/node/45422"
-            },
-            {
-              "label": "Le chômage dans le canton de Genève en octobre 2026",
-              "date": "2026-11-05T13:30:00.000Z",
-              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10891&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6076"
-            },
-            {
-              "label": "Laurent Roth nommé directeur ad intérim de la Division privée des HUG dès le 1er janvier 2027",
-              "date": "2026-11-05",
-              "url": "https://www.hug.ch/actualite/laurent-roth-nomme-directeur-ad-interim-division-privee-hug-1er-janvier-2027"
-            },
-            {
-              "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
-              "date": "2026-11-05",
-              "url": "https://www.ge.ch/node/45404"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "GE",
@@ -278,13 +278,28 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-11T03:01:21.749Z"
+          "updatedAt": "2026-11-12T12:55:26.142Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "OCIRT-Formation 220-26 - Loi sur l’égalité : état des lieux, aspects juridiques et mise en œuvre",
+              "date": "2026-11-12",
+              "url": "https://www.ge.ch/node/44025"
+            },
+            {
+              "label": "Directive relative aux permissions d'exercer une activité professionnelle dans les eaux genevoises",
+              "date": "2026-11-12",
+              "url": "https://www.ge.ch/node/45491"
+            },
+            {
+              "label": "Sortie d'hospitalisation de la personne atteinte d'Ebola",
+              "date": "2026-11-11",
+              "url": "https://www.hug.ch/actualite/sortie-hospitalisation-personne-atteinte-ebola"
+            },
             {
               "label": "OCIRT-Formation 100-26 - Aménagement des locaux de travail : de la conception à la réalisation dans le respect des exigences légales en matière de santé et sécurité au travail",
               "date": "2026-11-10",
@@ -299,24 +314,9 @@
               "label": "Fin d'année 2026 : prolongation de l'ouverture des cafés, bars et restaurants",
               "date": "2026-11-09",
               "url": "https://www.ge.ch/node/45422"
-            },
-            {
-              "label": "Le chômage dans le canton de Genève en octobre 2026",
-              "date": "2026-11-05T13:30:00.000Z",
-              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10891&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6076"
-            },
-            {
-              "label": "Laurent Roth nommé directeur ad intérim de la Division privée des HUG dès le 1er janvier 2027",
-              "date": "2026-11-05",
-              "url": "https://www.hug.ch/actualite/laurent-roth-nomme-directeur-ad-interim-division-privee-hug-1er-janvier-2027"
-            },
-            {
-              "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
-              "date": "2026-11-05",
-              "url": "https://www.ge.ch/node/45404"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +391,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "GE",
@@ -460,13 +460,28 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-11T03:01:21.749Z"
+          "updatedAt": "2026-11-12T12:55:26.142Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "OCIRT-Formation 220-26 - Loi sur l’égalité : état des lieux, aspects juridiques et mise en œuvre",
+              "date": "2026-11-12",
+              "url": "https://www.ge.ch/node/44025"
+            },
+            {
+              "label": "Directive relative aux permissions d'exercer une activité professionnelle dans les eaux genevoises",
+              "date": "2026-11-12",
+              "url": "https://www.ge.ch/node/45491"
+            },
+            {
+              "label": "Sortie d'hospitalisation de la personne atteinte d'Ebola",
+              "date": "2026-11-11",
+              "url": "https://www.hug.ch/actualite/sortie-hospitalisation-personne-atteinte-ebola"
+            },
             {
               "label": "OCIRT-Formation 100-26 - Aménagement des locaux de travail : de la conception à la réalisation dans le respect des exigences légales en matière de santé et sécurité au travail",
               "date": "2026-11-10",
@@ -481,24 +496,9 @@
               "label": "Fin d'année 2026 : prolongation de l'ouverture des cafés, bars et restaurants",
               "date": "2026-11-09",
               "url": "https://www.ge.ch/node/45422"
-            },
-            {
-              "label": "Le chômage dans le canton de Genève en octobre 2026",
-              "date": "2026-11-05T13:30:00.000Z",
-              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10891&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6076"
-            },
-            {
-              "label": "Laurent Roth nommé directeur ad intérim de la Division privée des HUG dès le 1er janvier 2027",
-              "date": "2026-11-05",
-              "url": "https://www.hug.ch/actualite/laurent-roth-nomme-directeur-ad-interim-division-privee-hug-1er-janvier-2027"
-            },
-            {
-              "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
-              "date": "2026-11-05",
-              "url": "https://www.ge.ch/node/45404"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +573,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "GE",
@@ -642,13 +642,28 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-11T03:01:21.749Z"
+          "updatedAt": "2026-11-12T12:55:26.142Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "OCIRT-Formation 220-26 - Loi sur l’égalité : état des lieux, aspects juridiques et mise en œuvre",
+              "date": "2026-11-12",
+              "url": "https://www.ge.ch/node/44025"
+            },
+            {
+              "label": "Directive relative aux permissions d'exercer une activité professionnelle dans les eaux genevoises",
+              "date": "2026-11-12",
+              "url": "https://www.ge.ch/node/45491"
+            },
+            {
+              "label": "Sortie d'hospitalisation de la personne atteinte d'Ebola",
+              "date": "2026-11-11",
+              "url": "https://www.hug.ch/actualite/sortie-hospitalisation-personne-atteinte-ebola"
+            },
             {
               "label": "OCIRT-Formation 100-26 - Aménagement des locaux de travail : de la conception à la réalisation dans le respect des exigences légales en matière de santé et sécurité au travail",
               "date": "2026-11-10",
@@ -663,24 +678,9 @@
               "label": "Fin d'année 2026 : prolongation de l'ouverture des cafés, bars et restaurants",
               "date": "2026-11-09",
               "url": "https://www.ge.ch/node/45422"
-            },
-            {
-              "label": "Le chômage dans le canton de Genève en octobre 2026",
-              "date": "2026-11-05T13:30:00.000Z",
-              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10891&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6076"
-            },
-            {
-              "label": "Laurent Roth nommé directeur ad intérim de la Division privée des HUG dès le 1er janvier 2027",
-              "date": "2026-11-05",
-              "url": "https://www.hug.ch/actualite/laurent-roth-nomme-directeur-ad-interim-division-privee-hug-1er-janvier-2027"
-            },
-            {
-              "label": "EpiScope - novembre 2026 - virus hivernaux, évacuation Ebola, appel à projets santé mentale",
-              "date": "2026-11-05",
-              "url": "https://www.ge.ch/node/45404"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -752,7 +752,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

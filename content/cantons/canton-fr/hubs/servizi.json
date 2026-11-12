@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-11-12T10:45:43.005Z",
-  "contentHash": "308e71eac330bcc99860612d01c41373c204b455faa21fdf28bbfd9dfa434c96",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "5b246c1ec83e7a5a23abbab9465638cfa610418ed8fff885e9a8ac3c3921aa0a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-12T00:41:52.734Z",
+      "keyFacts": 1
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -30,6 +35,11 @@
           "value": "606,90 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "14",
+          "note": "offerta mediana 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -54,10 +64,61 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "FR12035",
+              "value": "700 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7355&locale=fr_ch"
+            },
+            {
+              "label": "FR267000",
+              "value": "500 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7356&locale=fr_ch"
+            },
+            {
+              "label": "FR334000",
+              "value": "400 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7363&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-11-12T00:41:52.734Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Digitalisierung der Baubewilligungsverfahren: Vollständig elektronische Bearbeitung ab Anfang 2027",
+              "date": "2026-11-12T09:12:52.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/digitalisierung-der-baubewilligungsverfahren-vollstaendig-elektronische-bearbeitung-ab-anfang-2027"
+            },
+            {
+              "label": "Numérisation des procédures de permis de construire : traitement entièrement électronique dès début 2027",
+              "date": "2026-11-12T09:12:52.000Z",
+              "url": "https://www.fr.ch/dime/actualites/numerisation-des-procedures-de-permis-de-construire-traitement-entierement-electronique-des-debut-2027"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-11T16:34:09.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-274"
+            },
+            {
+              "label": "Opération d’envergure en matière de lutte contre le travail au noir",
+              "date": "2026-11-11T10:44:04.000Z",
+              "url": "https://www.fr.ch/deef/spe/actualites/operation-denvergure-en-matiere-de-lutte-contre-le-travail-au-noir"
+            },
             {
               "label": "Der Staat Freiburg vergibt sechs Stipendien für künstlerische Forschungsaufenthalte im Jahr 2027",
               "date": "2026-11-06T11:15:14.000Z",
@@ -67,29 +128,9 @@
               "label": "Demandes de permis de construire et de démolir",
               "date": "2026-11-05T09:58:03.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-273"
-            },
-            {
-              "label": "Arbeitslosigkeit im Kanton Freiburg im Oktober 2026 unverändert bei 2,5 %",
-              "date": "2026-11-05T08:14:22.000Z",
-              "url": "https://www.fr.ch/de/vwbd/ama/news/arbeitslosigkeit-im-kanton-freiburg-im-oktober-2026-unveraendert-bei-25"
-            },
-            {
-              "label": "Chômage stable dans le canton de Fribourg en octobre 2026, à 2,5%",
-              "date": "2026-11-05T08:14:22.000Z",
-              "url": "https://www.fr.ch/deef/spe/actualites/chomage-stable-dans-le-canton-de-fribourg-en-octobre-2026-a-25"
-            },
-            {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-11-05T07:32:32.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-272"
-            },
-            {
-              "label": "Un règlement de parking plus efficace et équitable",
-              "date": "2026-11-04",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/un-reglement-de-parking-plus-efficace-et-equitable"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -169,7 +210,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "FR",
@@ -182,6 +223,11 @@
           "value": "606.90 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "14",
+          "note": "typical bid 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -206,10 +252,61 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "FR12035",
+              "value": "700 CHF",
+              "detail": "current bid",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7355&locale=fr_ch"
+            },
+            {
+              "label": "FR267000",
+              "value": "500 CHF",
+              "detail": "current bid",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7356&locale=fr_ch"
+            },
+            {
+              "label": "FR334000",
+              "value": "400 CHF",
+              "detail": "current bid",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7363&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-11-12T00:41:52.734Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Digitalisierung der Baubewilligungsverfahren: Vollständig elektronische Bearbeitung ab Anfang 2027",
+              "date": "2026-11-12T09:12:52.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/digitalisierung-der-baubewilligungsverfahren-vollstaendig-elektronische-bearbeitung-ab-anfang-2027"
+            },
+            {
+              "label": "Numérisation des procédures de permis de construire : traitement entièrement électronique dès début 2027",
+              "date": "2026-11-12T09:12:52.000Z",
+              "url": "https://www.fr.ch/dime/actualites/numerisation-des-procedures-de-permis-de-construire-traitement-entierement-electronique-des-debut-2027"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-11T16:34:09.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-274"
+            },
+            {
+              "label": "Opération d’envergure en matière de lutte contre le travail au noir",
+              "date": "2026-11-11T10:44:04.000Z",
+              "url": "https://www.fr.ch/deef/spe/actualites/operation-denvergure-en-matiere-de-lutte-contre-le-travail-au-noir"
+            },
             {
               "label": "Der Staat Freiburg vergibt sechs Stipendien für künstlerische Forschungsaufenthalte im Jahr 2027",
               "date": "2026-11-06T11:15:14.000Z",
@@ -219,29 +316,9 @@
               "label": "Demandes de permis de construire et de démolir",
               "date": "2026-11-05T09:58:03.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-273"
-            },
-            {
-              "label": "Arbeitslosigkeit im Kanton Freiburg im Oktober 2026 unverändert bei 2,5 %",
-              "date": "2026-11-05T08:14:22.000Z",
-              "url": "https://www.fr.ch/de/vwbd/ama/news/arbeitslosigkeit-im-kanton-freiburg-im-oktober-2026-unveraendert-bei-25"
-            },
-            {
-              "label": "Chômage stable dans le canton de Fribourg en octobre 2026, à 2,5%",
-              "date": "2026-11-05T08:14:22.000Z",
-              "url": "https://www.fr.ch/deef/spe/actualites/chomage-stable-dans-le-canton-de-fribourg-en-octobre-2026-a-25"
-            },
-            {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-11-05T07:32:32.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-272"
-            },
-            {
-              "label": "Un règlement de parking plus efficace et équitable",
-              "date": "2026-11-04",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/un-reglement-de-parking-plus-efficace-et-equitable"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -317,7 +394,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "FR",
@@ -330,6 +407,11 @@
           "value": "606.90 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "14",
+          "note": "mittleres Gebot 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -354,10 +436,61 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "FR12035",
+              "value": "700 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7355&locale=fr_ch"
+            },
+            {
+              "label": "FR267000",
+              "value": "500 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7356&locale=fr_ch"
+            },
+            {
+              "label": "FR334000",
+              "value": "400 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7363&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-11-12T00:41:52.734Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Digitalisierung der Baubewilligungsverfahren: Vollständig elektronische Bearbeitung ab Anfang 2027",
+              "date": "2026-11-12T09:12:52.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/digitalisierung-der-baubewilligungsverfahren-vollstaendig-elektronische-bearbeitung-ab-anfang-2027"
+            },
+            {
+              "label": "Numérisation des procédures de permis de construire : traitement entièrement électronique dès début 2027",
+              "date": "2026-11-12T09:12:52.000Z",
+              "url": "https://www.fr.ch/dime/actualites/numerisation-des-procedures-de-permis-de-construire-traitement-entierement-electronique-des-debut-2027"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-11T16:34:09.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-274"
+            },
+            {
+              "label": "Opération d’envergure en matière de lutte contre le travail au noir",
+              "date": "2026-11-11T10:44:04.000Z",
+              "url": "https://www.fr.ch/deef/spe/actualites/operation-denvergure-en-matiere-de-lutte-contre-le-travail-au-noir"
+            },
             {
               "label": "Der Staat Freiburg vergibt sechs Stipendien für künstlerische Forschungsaufenthalte im Jahr 2027",
               "date": "2026-11-06T11:15:14.000Z",
@@ -367,29 +500,9 @@
               "label": "Demandes de permis de construire et de démolir",
               "date": "2026-11-05T09:58:03.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-273"
-            },
-            {
-              "label": "Arbeitslosigkeit im Kanton Freiburg im Oktober 2026 unverändert bei 2,5 %",
-              "date": "2026-11-05T08:14:22.000Z",
-              "url": "https://www.fr.ch/de/vwbd/ama/news/arbeitslosigkeit-im-kanton-freiburg-im-oktober-2026-unveraendert-bei-25"
-            },
-            {
-              "label": "Chômage stable dans le canton de Fribourg en octobre 2026, à 2,5%",
-              "date": "2026-11-05T08:14:22.000Z",
-              "url": "https://www.fr.ch/deef/spe/actualites/chomage-stable-dans-le-canton-de-fribourg-en-octobre-2026-a-25"
-            },
-            {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-11-05T07:32:32.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-272"
-            },
-            {
-              "label": "Un règlement de parking plus efficace et équitable",
-              "date": "2026-11-04",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/un-reglement-de-parking-plus-efficace-et-equitable"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +578,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "FR",
@@ -478,6 +591,11 @@
           "value": "606,90 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "14",
+          "note": "offre centrale 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -502,10 +620,61 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "FR12035",
+              "value": "700 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7355&locale=fr_ch"
+            },
+            {
+              "label": "FR267000",
+              "value": "500 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7356&locale=fr_ch"
+            },
+            {
+              "label": "FR334000",
+              "value": "400 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-16T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7363&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-11-12T00:41:52.734Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Digitalisierung der Baubewilligungsverfahren: Vollständig elektronische Bearbeitung ab Anfang 2027",
+              "date": "2026-11-12T09:12:52.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/digitalisierung-der-baubewilligungsverfahren-vollstaendig-elektronische-bearbeitung-ab-anfang-2027"
+            },
+            {
+              "label": "Numérisation des procédures de permis de construire : traitement entièrement électronique dès début 2027",
+              "date": "2026-11-12T09:12:52.000Z",
+              "url": "https://www.fr.ch/dime/actualites/numerisation-des-procedures-de-permis-de-construire-traitement-entierement-electronique-des-debut-2027"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-11T16:34:09.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-274"
+            },
+            {
+              "label": "Opération d’envergure en matière de lutte contre le travail au noir",
+              "date": "2026-11-11T10:44:04.000Z",
+              "url": "https://www.fr.ch/deef/spe/actualites/operation-denvergure-en-matiere-de-lutte-contre-le-travail-au-noir"
+            },
             {
               "label": "Der Staat Freiburg vergibt sechs Stipendien für künstlerische Forschungsaufenthalte im Jahr 2027",
               "date": "2026-11-06T11:15:14.000Z",
@@ -515,29 +684,9 @@
               "label": "Demandes de permis de construire et de démolir",
               "date": "2026-11-05T09:58:03.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-273"
-            },
-            {
-              "label": "Arbeitslosigkeit im Kanton Freiburg im Oktober 2026 unverändert bei 2,5 %",
-              "date": "2026-11-05T08:14:22.000Z",
-              "url": "https://www.fr.ch/de/vwbd/ama/news/arbeitslosigkeit-im-kanton-freiburg-im-oktober-2026-unveraendert-bei-25"
-            },
-            {
-              "label": "Chômage stable dans le canton de Fribourg en octobre 2026, à 2,5%",
-              "date": "2026-11-05T08:14:22.000Z",
-              "url": "https://www.fr.ch/deef/spe/actualites/chomage-stable-dans-le-canton-de-fribourg-en-octobre-2026-a-25"
-            },
-            {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-11-05T07:32:32.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-272"
-            },
-            {
-              "label": "Un règlement de parking plus efficace et équitable",
-              "date": "2026-11-04",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/un-reglement-de-parking-plus-efficace-et-equitable"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -609,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

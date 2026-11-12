@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-11T23:34:02.011Z",
-  "contentHash": "565fee2ba728f33e79817cf7b3a16b84476dc4ab94637481fcdf38aa1515132e",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "d6f3a1325bb658a10659dbce7bbb9dac0d36f0d920909f4fd2a50fba693b4f58",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-11T03:01:22.987Z",
+      "updatedAt": "2026-11-12T12:55:27.361Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -101,13 +101,18 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-11T03:01:22.987Z"
+          "updatedAt": "2026-11-12T12:55:27.361Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "50 Jahre Stammzelltransplantation am USZ",
+              "date": "2026-11-12T08:22:02.000Z",
+              "url": "https://www.usz.ch/50-jahre-stammzelltransplantation-am-usz/"
+            },
             {
               "label": "Zwillingsschwangerschaft: Doppeltes Glück, besondere Betreuung",
               "date": "2026-11-10T10:35:09.000Z",
@@ -132,14 +137,9 @@
               "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
               "date": "2026-11-06T13:22:37.000Z",
               "url": "https://www.usz.ch/hpv-impfung-warum-sie-auch-fuer-jungen-und-maenner-wichtig-ist/"
-            },
-            {
-              "label": "Verhütung für Männer: Methoden, Sicherheit & Forschung",
-              "date": "2026-11-05T09:21:22.000Z",
-              "url": "https://www.usz.ch/verhuetung-fuer-maenner-methoden-sicherheit-forschung/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -219,7 +219,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "ZH",
@@ -298,13 +298,18 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-11T03:01:22.987Z"
+          "updatedAt": "2026-11-12T12:55:27.361Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "50 Jahre Stammzelltransplantation am USZ",
+              "date": "2026-11-12T08:22:02.000Z",
+              "url": "https://www.usz.ch/50-jahre-stammzelltransplantation-am-usz/"
+            },
             {
               "label": "Zwillingsschwangerschaft: Doppeltes Glück, besondere Betreuung",
               "date": "2026-11-10T10:35:09.000Z",
@@ -329,14 +334,9 @@
               "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
               "date": "2026-11-06T13:22:37.000Z",
               "url": "https://www.usz.ch/hpv-impfung-warum-sie-auch-fuer-jungen-und-maenner-wichtig-ist/"
-            },
-            {
-              "label": "Verhütung für Männer: Methoden, Sicherheit & Forschung",
-              "date": "2026-11-05T09:21:22.000Z",
-              "url": "https://www.usz.ch/verhuetung-fuer-maenner-methoden-sicherheit-forschung/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -412,7 +412,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "ZH",
@@ -491,13 +491,18 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-11T03:01:22.987Z"
+          "updatedAt": "2026-11-12T12:55:27.361Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "50 Jahre Stammzelltransplantation am USZ",
+              "date": "2026-11-12T08:22:02.000Z",
+              "url": "https://www.usz.ch/50-jahre-stammzelltransplantation-am-usz/"
+            },
             {
               "label": "Zwillingsschwangerschaft: Doppeltes Glück, besondere Betreuung",
               "date": "2026-11-10T10:35:09.000Z",
@@ -522,14 +527,9 @@
               "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
               "date": "2026-11-06T13:22:37.000Z",
               "url": "https://www.usz.ch/hpv-impfung-warum-sie-auch-fuer-jungen-und-maenner-wichtig-ist/"
-            },
-            {
-              "label": "Verhütung für Männer: Methoden, Sicherheit & Forschung",
-              "date": "2026-11-05T09:21:22.000Z",
-              "url": "https://www.usz.ch/verhuetung-fuer-maenner-methoden-sicherheit-forschung/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -605,7 +605,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "ZH",
@@ -684,13 +684,18 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-11T03:01:22.987Z"
+          "updatedAt": "2026-11-12T12:55:27.361Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "50 Jahre Stammzelltransplantation am USZ",
+              "date": "2026-11-12T08:22:02.000Z",
+              "url": "https://www.usz.ch/50-jahre-stammzelltransplantation-am-usz/"
+            },
             {
               "label": "Zwillingsschwangerschaft: Doppeltes Glück, besondere Betreuung",
               "date": "2026-11-10T10:35:09.000Z",
@@ -715,14 +720,9 @@
               "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
               "date": "2026-11-06T13:22:37.000Z",
               "url": "https://www.usz.ch/hpv-impfung-warum-sie-auch-fuer-jungen-und-maenner-wichtig-ist/"
-            },
-            {
-              "label": "Verhütung für Männer: Methoden, Sicherheit & Forschung",
-              "date": "2026-11-05T09:21:22.000Z",
-              "url": "https://www.usz.ch/verhuetung-fuer-maenner-methoden-sicherheit-forschung/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -794,7 +794,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }
