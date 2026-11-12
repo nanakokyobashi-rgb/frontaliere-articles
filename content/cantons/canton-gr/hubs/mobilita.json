@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-12T21:05:42.386Z",
-  "contentHash": "5add23909346495b90c7cc8f7719a17b3551950a473966e670d0758e4e947285",
+  "updatedAt": "2026-11-12T23:04:59.612Z",
+  "contentHash": "6b778f4178fd2ad3f21a0e5139e51fc0b28c29998f2dfa7cf383746119869bbe",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -168,6 +168,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Streckensperrung zwischen Thusis und Preda",
+              "date": "2026-11-13",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/streckensperrung-thusis-preda/"
+            },
+            {
               "label": "Ausweichverkehr: Verkehrsmanagement wird weiterentwickelt",
               "date": "2026-11-04",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110401.aspx"
@@ -191,11 +196,6 @@
               "label": "Der neue Bahnhof Chur West geht in Betrieb",
               "date": "2026-10-26",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
-            },
-            {
-              "label": "Umbau Bahnhof Versam-Safien",
-              "date": "2026-10-19",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
             }
           ],
           "updatedAt": "2026-11-12T14:02:55.343Z"
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     },
     "en": {
       "canton": "GR",
@@ -436,6 +436,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Streckensperrung zwischen Thusis und Preda",
+              "date": "2026-11-13",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/streckensperrung-thusis-preda/"
+            },
+            {
               "label": "Ausweichverkehr: Verkehrsmanagement wird weiterentwickelt",
               "date": "2026-11-04",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110401.aspx"
@@ -459,11 +464,6 @@
               "label": "Der neue Bahnhof Chur West geht in Betrieb",
               "date": "2026-10-26",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
-            },
-            {
-              "label": "Umbau Bahnhof Versam-Safien",
-              "date": "2026-10-19",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
             }
           ],
           "updatedAt": "2026-11-12T14:02:55.343Z"
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     },
     "de": {
       "canton": "GR",
@@ -703,6 +703,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Streckensperrung zwischen Thusis und Preda",
+              "date": "2026-11-13",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/streckensperrung-thusis-preda/"
+            },
+            {
               "label": "Ausweichverkehr: Verkehrsmanagement wird weiterentwickelt",
               "date": "2026-11-04",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110401.aspx"
@@ -726,11 +731,6 @@
               "label": "Der neue Bahnhof Chur West geht in Betrieb",
               "date": "2026-10-26",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
-            },
-            {
-              "label": "Umbau Bahnhof Versam-Safien",
-              "date": "2026-10-19",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
             }
           ],
           "updatedAt": "2026-11-12T14:02:55.343Z"
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     },
     "fr": {
       "canton": "GR",
@@ -971,6 +971,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Streckensperrung zwischen Thusis und Preda",
+              "date": "2026-11-13",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/streckensperrung-thusis-preda/"
+            },
+            {
               "label": "Ausweichverkehr: Verkehrsmanagement wird weiterentwickelt",
               "date": "2026-11-04",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110401.aspx"
@@ -994,11 +999,6 @@
               "label": "Der neue Bahnhof Chur West geht in Betrieb",
               "date": "2026-10-26",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
-            },
-            {
-              "label": "Umbau Bahnhof Versam-Safien",
-              "date": "2026-10-19",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
             }
           ],
           "updatedAt": "2026-11-12T14:02:55.343Z"
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T23:04:59.612Z"
     }
   }
 }
