@@ -23,11 +23,17 @@ import {
   CANTON_WORKFLOW_PATH_RE,
   CORE_WORKFLOW_PATH,
   DEFAULT_MAX_PARALLEL,
+  ALL_RUN_STATUSES,
+  IN_FLIGHT_STATUSES,
+  KNOWN_RUN_CONCLUSIONS,
+  RUNS_PER_PAGE,
   RC_SENTINEL_ENV,
   articleCommitSubject,
   countSectionArticles,
   decideCantonAdmission,
   effectiveDailyBudget,
+  filterInFlightRuns,
+  flattenPaginatedInFlightRuns,
   olderCantonRuns,
   parseQuotaBeaconOutput,
   positiveInt,
@@ -63,7 +69,7 @@ function readers({ subjects = [], runs = [], beacon = { active: false, resetsAt:
   return {
     calls,
     readArticleSubjects: () => { calls.subjects += 1; return subjects; },
-    readInProgressRuns: () => { calls.runs += 1; return runs; },
+    readInFlightRuns: () => { calls.runs += 1; return runs; },
     readQuotaBeacon: () => { calls.beacon += 1; return beacon; },
   };
 }
@@ -81,6 +87,11 @@ function decide(over = {}, r = readers()) {
 }
 
 const run = (id, file, createdAt) => ({ id, path: `.github/workflows/${file}`, created_at: createdAt });
+const apiRun = (id, file, createdAt, status = 'queued') => ({
+  ...run(id, file, createdAt),
+  status,
+  conclusion: null,
+});
 
 // ── 1. Il gate di Remote Config (D16) ────────────────────────────────────────
 
@@ -239,6 +250,99 @@ test('tetto globale: contano solo i chiamanti cantonali piu\' vecchi di questa r
   }
 });
 
+test('le run in coda sono in volo quanto quelle gia\' in esecuzione', () => {
+  assert.deepEqual(IN_FLIGHT_STATUSES, [
+    'queued',
+    'in_progress',
+    'requested',
+    'waiting',
+    'pending',
+  ]);
+
+  const self = { ...run(100, 'generate-article-ti.yml', '2026-10-05T10:00:10Z'), status: 'in_progress' };
+  const older = IN_FLIGHT_STATUSES.map((status, index) => ({
+    ...run(10 + index, `generate-article-${['gr', 'be', 'zh', 'vd', 'ag'][index]}.yml`, '2026-10-05T09:00:00Z'),
+    status,
+  }));
+  const completed = { ...run(999, 'generate-article-lu.yml', '2026-10-05T09:00:00Z'), status: 'completed' };
+  const inFlight = filterInFlightRuns([self, ...older, completed]);
+
+  assert.equal(inFlight.length, IN_FLIGHT_STATUSES.length + 1);
+  assert.equal(olderCantonRuns(inFlight, 100).older, IN_FLIGHT_STATUSES.length);
+  assert.equal(inFlight.some((candidate) => candidate.id === completed.id), false);
+});
+
+test('le run in volo uniscono tutte le pagine per stato solo se complete e non ambigue', () => {
+  const firstPageRuns = Array.from({ length: 100 }, (_, index) => apiRun(
+    100 + index,
+    'generate-article-ti.yml',
+    '2026-10-05T10:00:10Z',
+  ));
+  const finalPageRuns = [apiRun(1, 'generate-article-gr.yml', '2026-10-05T09:00:00Z', 'in_progress')];
+  const firstPage = {
+    total_count: 101,
+    workflow_runs: firstPageRuns,
+  };
+  const secondPage = {
+    total_count: 101,
+    workflow_runs: finalPageRuns,
+  };
+
+  assert.deepEqual(flattenPaginatedInFlightRuns([firstPage, secondPage]), [
+    ...firstPageRuns,
+    ...finalPageRuns,
+  ]);
+  assert.deepEqual(flattenPaginatedInFlightRuns([{ total_count: 0, workflow_runs: [] }]), []);
+  assert.equal(flattenPaginatedInFlightRuns([]), null, 'nessuna pagina non prova una lista vuota');
+  assert.equal(flattenPaginatedInFlightRuns([{ total_count: 1 }]), null);
+  assert.equal(flattenPaginatedInFlightRuns(null), null);
+
+  assert.equal(flattenPaginatedInFlightRuns([
+    { total_count: 101, workflow_runs: firstPageRuns },
+    { total_count: 102, workflow_runs: finalPageRuns },
+  ]), null, 'total_count diversi fra pagine rendono la lettura instabile');
+  assert.equal(flattenPaginatedInFlightRuns([
+    { total_count: 101, workflow_runs: firstPageRuns },
+    { total_count: 101, workflow_runs: [] },
+  ]), null, 'un payload con cardinalita\' inferiore a total_count non e\' completo');
+  assert.equal(flattenPaginatedInFlightRuns([
+    { total_count: 2, workflow_runs: [apiRun(1, 'generate-article-ti.yml', '2026-10-05T10:00:10Z')] },
+    { total_count: 2, workflow_runs: [apiRun(1, 'generate-article-ti.yml', '2026-10-05T10:00:10Z')] },
+  ]), null, 'un id ripetuto puo\' nascondere una run mancante');
+  assert.equal(flattenPaginatedInFlightRuns([
+    { total_count: 1, workflow_runs: [{ ...apiRun(1, 'generate-article-ti.yml', '2026-10-05T10:00:10Z'), id: 0 }] },
+  ]), null, 'una run senza id positivo non puo\' provare completezza');
+  assert.equal(flattenPaginatedInFlightRuns([
+    { total_count: 1, workflow_runs: [apiRun(1, 'generate-article-ti.yml', '2026/10/05 10:00:10')] },
+  ]), null, 'una data parseable ma non ISO 8601 non prova l\'ordine temporale');
+  assert.equal(flattenPaginatedInFlightRuns([
+    { total_count: 1, workflow_runs: [apiRun(1, 'generate-article-ti.yml', '2026-02-30T10:00:10Z')] },
+  ]), null, 'una data ISO con giorno inesistente non e\' valida');
+});
+
+test('il lettore GitHub delle run cantonali pagina e appiattisce il payload completo', () => {
+  const source = readFileSync(SCRIPT, 'utf8');
+  const start = source.indexOf('function readInFlightRunsFromGitHub');
+  const end = source.indexOf('\nfunction readQuotaBeaconFromScript', start);
+  assert.ok(start >= 0 && end > start, 'lettore delle run non trovato');
+  const reader = source.slice(start, end);
+  assert.match(reader, /gh\(\['api', '--paginate', '--slurp',/);
+  assert.match(reader, /flattenPaginatedInFlightRuns\(JSON\.parse\(raw\)\)/);
+});
+
+test('il gate e il core condividono stati, conclusioni e dimensione pagina', () => {
+  const inFlight = CORE.match(/IN_FLIGHT_STATUSES='(\[[^\n]+\])'/u);
+  const statuses = CORE.match(/ALL_RUN_STATUSES='(\[[^\n]+\])'/u);
+  const conclusions = CORE.match(/KNOWN_RUN_CONCLUSIONS='(\[[^\n]+\])'/u);
+  const pageSize = CORE.match(/actions\/workflows\/\$CALLER_WORKFLOW\/runs\?per_page=(\d+)&created=/u);
+  assert.ok(inFlight && statuses && conclusions && pageSize,
+    'il core deve dichiarare stati, conclusioni e dimensione pagina in un solo punto testabile');
+  assert.deepEqual(JSON.parse(inFlight[1]), [...IN_FLIGHT_STATUSES]);
+  assert.deepEqual(JSON.parse(statuses[1]), [...ALL_RUN_STATUSES]);
+  assert.deepEqual(JSON.parse(conclusions[1]), [...KNOWN_RUN_CONCLUSIONS]);
+  assert.equal(Number(pageSize[1]), RUNS_PER_PAGE);
+});
+
 test('tetto globale: due arrivi simultanei non si fermano a vicenda', () => {
   const a = run(100, 'generate-article-ti.yml', '2026-10-05T10:00:10Z');
   const b = run(101, 'generate-article-gr.yml', '2026-10-05T10:00:10Z');
@@ -389,7 +493,7 @@ test('il gate gira DOPO load-rc-env e PRIMA che il job generate esista', () => {
 test('il gate legge il token del runner, non un PAT interpolato dal contesto env', () => {
   const gate = jobBlock('section_gate');
   assert.match(gate, /GH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/);
-  assert.match(gate, /\n {6}actions: read\n/, 'senza actions: read le run in_progress non si leggono');
+  assert.match(gate, /\n {6}actions: read\n/, 'senza actions: read le run in volo non si leggono');
   assert.match(gate, /CANTON_GENERATION_MAX_PARALLEL: \$\{\{ vars\.CANTON_GENERATION_MAX_PARALLEL \}\}/);
   assert.match(gate, /CANTON_DAILY_BUDGET_CAP: \$\{\{ vars\.CANTON_DAILY_BUDGET_CAP \}\}/);
 });
