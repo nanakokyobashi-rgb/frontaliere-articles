@@ -4,12 +4,12 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T21:05:42.386Z",
-  "contentHash": "178df7c1f7d42884fa4dbb7f29f2fac8e2d9d46ca4b9eaf2d86cae6971f92971",
+  "updatedAt": "2026-11-12T22:45:08.796Z",
+  "contentHash": "b93aa0c5f80627d467b021578f485e80a94d2fc0d1fd215fe1ba7363f4f2c469",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T12:24:28.563Z",
+      "updatedAt": "2026-11-12T14:41:08.896Z",
       "keyFacts": 1
     },
     {
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "74",
+          "value": "79",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,6 +37,12 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
+            {
+              "label": "Des ateliers créatifs inédits à Vevey avec Miss G®",
+              "detail": "Centre Manor Vevey, Vevey",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/vevey/des-ateliers-creatifs-inedits-a-vevey-avec-miss-g_A4jPy3s"
+            },
             {
               "label": "Di-Meh Live Band feat. thaHomey",
               "detail": "Jumeaux Jazz Club",
@@ -62,6 +68,18 @@
               "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-ados_AHZt83v"
             },
             {
+              "label": "Cours hebdomadaires",
+              "detail": "Futurekids, Nyon",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/nyon/cours-hebdomadaires_AfRNJ6e"
+            },
+            {
+              "label": "Afterwork du jeudi",
+              "detail": "Etoile Blanche",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/afterwork-du-jeudi_AfSUcQH"
+            },
+            {
               "label": "Club de lecture de la Bibliothèque Montriond",
               "detail": "Lausanne",
               "date": "2026-11-12",
@@ -78,29 +96,11 @@
               "detail": "Lausanne",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-blancgatti-le-peintre-des-sons/"
-            },
-            {
-              "label": "Jam Vocale Jazz",
-              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-vocale-jazz_AUKpgk3"
-            },
-            {
-              "label": "Montreux Art Gallery",
-              "detail": "MAG – Montreux Art Gallery, Montreux — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
-            },
-            {
-              "label": "Montreux Comedy",
-              "detail": "Montreux Comedy Festival, Montreux — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -145,7 +145,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "en": {
       "canton": "VD",
@@ -155,7 +155,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "74",
+          "value": "79",
           "note": "from the site’s events calendar"
         }
       ],
@@ -165,6 +165,12 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
+            {
+              "label": "Des ateliers créatifs inédits à Vevey avec Miss G®",
+              "detail": "Centre Manor Vevey, Vevey",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/vevey/des-ateliers-creatifs-inedits-a-vevey-avec-miss-g_A4jPy3s"
+            },
             {
               "label": "Di-Meh Live Band feat. thaHomey",
               "detail": "Jumeaux Jazz Club",
@@ -190,6 +196,18 @@
               "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-ados_AHZt83v"
             },
             {
+              "label": "Cours hebdomadaires",
+              "detail": "Futurekids, Nyon",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/nyon/cours-hebdomadaires_AfRNJ6e"
+            },
+            {
+              "label": "Thursday after-work event",
+              "detail": "Etoile Blanche",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/afterwork-du-jeudi_AfSUcQH"
+            },
+            {
               "label": "Club de lecture de la Bibliothèque Montriond",
               "detail": "Lausanne",
               "date": "2026-11-12",
@@ -206,29 +224,11 @@
               "detail": "Lausanne",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-blancgatti-le-peintre-des-sons/"
-            },
-            {
-              "label": "Jam Vocale Jazz",
-              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-vocale-jazz_AUKpgk3"
-            },
-            {
-              "label": "Montreux Art Gallery",
-              "detail": "MAG – Montreux Art Gallery, Montreux — ongoing, last day: 15 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
-            },
-            {
-              "label": "Montreux Comedy",
-              "detail": "Montreux Comedy Festival, Montreux — ongoing, last day: 22 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -273,7 +273,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "de": {
       "canton": "VD",
@@ -283,7 +283,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "74",
+          "value": "79",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -293,6 +293,12 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
+            {
+              "label": "Des ateliers créatifs inédits à Vevey avec Miss G®",
+              "detail": "Centre Manor Vevey, Vevey",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/vevey/des-ateliers-creatifs-inedits-a-vevey-avec-miss-g_A4jPy3s"
+            },
             {
               "label": "Di-Meh Live Band feat. thaHomey",
               "detail": "Jumeaux Jazz Club",
@@ -318,6 +324,18 @@
               "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-ados_AHZt83v"
             },
             {
+              "label": "Cours hebdomadaires",
+              "detail": "Futurekids, Nyon",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/nyon/cours-hebdomadaires_AfRNJ6e"
+            },
+            {
+              "label": "Afterwork am Donnerstag",
+              "detail": "Etoile Blanche",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/afterwork-du-jeudi_AfSUcQH"
+            },
+            {
               "label": "Club de lecture de la Bibliothèque Montriond",
               "detail": "Lausanne",
               "date": "2026-11-12",
@@ -334,29 +352,11 @@
               "detail": "Lausanne",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-blancgatti-le-peintre-des-sons/"
-            },
-            {
-              "label": "Jam Vocale Jazz",
-              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-vocale-jazz_AUKpgk3"
-            },
-            {
-              "label": "Montreux Art Gallery",
-              "detail": "MAG – Montreux Art Gallery, Montreux — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
-            },
-            {
-              "label": "Montreux Comedy",
-              "detail": "Montreux Comedy Festival, Montreux — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -401,7 +401,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "fr": {
       "canton": "VD",
@@ -411,7 +411,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "74",
+          "value": "79",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -421,6 +421,12 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
+            {
+              "label": "Des ateliers créatifs inédits à Vevey avec Miss G®",
+              "detail": "Centre Manor Vevey, Vevey",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/vevey/des-ateliers-creatifs-inedits-a-vevey-avec-miss-g_A4jPy3s"
+            },
             {
               "label": "Di-Meh Live Band feat. thaHomey",
               "detail": "Jumeaux Jazz Club",
@@ -446,6 +452,18 @@
               "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-ados_AHZt83v"
             },
             {
+              "label": "Cours hebdomadaires de robotique, jeux vidéo et 3D • De 5 à 14 ans",
+              "detail": "Futurekids, Nyon",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/nyon/cours-hebdomadaires_AfRNJ6e"
+            },
+            {
+              "label": "Après",
+              "detail": "Etoile Blanche",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/afterwork-du-jeudi_AfSUcQH"
+            },
+            {
               "label": "Club de lecture de la Bibliothèque Montriond",
               "detail": "Lausanne",
               "date": "2026-11-12",
@@ -462,29 +480,11 @@
               "detail": "Lausanne",
               "date": "2026-11-12",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-blancgatti-le-peintre-des-sons/"
-            },
-            {
-              "label": "Jam Vocale Jazz",
-              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-vocale-jazz_AUKpgk3"
-            },
-            {
-              "label": "Montreux Art Gallery",
-              "detail": "MAG – Montreux Art Gallery, Montreux — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
-            },
-            {
-              "label": "Montreux Comedy",
-              "detail": "Montreux Comedy Festival, Montreux — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -529,7 +529,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     }
   }
 }
