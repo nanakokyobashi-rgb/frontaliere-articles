@@ -4,22 +4,22 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-11-12T04:11:33.979Z",
-  "contentHash": "f076797da5a0ffb386087d13003d882078370f38bf3ee16cd6eda1c409157aed",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "34c8c3f3396ff8f7c99d470b60c333aeaf8d8e60e3fea4ec70f344411ab6b3ab",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-10T23:59:59.000Z",
+      "updatedAt": "2026-11-11T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-10T23:46:40.154Z",
+      "updatedAt": "2026-11-12T11:55:14.710Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -33,31 +33,25 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Drezzo-Pedrinate, settimana conclusa: 10 novembre 2026"
+          "note": "Dumenza-Cassinone, settimana conclusa: 11 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "4",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "value": "6",
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "20",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "value": "19",
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 4 novembre 2026 – 10 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 5 novembre 2026 – 11 novembre 2026, dal più scorrevole al più lento.",
           "items": [
-            {
-              "label": "Drezzo-Pedrinate",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/drezzo-pedrinate/oggi/"
-            },
             {
               "label": "Dumenza-Cassinone",
               "value": "0 min",
@@ -77,6 +71,12 @@
               "url": "/traffico-dogane/zenna-dirinella/oggi/"
             },
             {
+              "label": "Drezzo-Pedrinate",
+              "value": "0 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/drezzo-pedrinate/oggi/"
+            },
+            {
               "label": "Ronago-Novazzano",
               "value": "0,1 min",
               "detail": "49 rilevazioni",
@@ -84,7 +84,7 @@
             },
             {
               "label": "Biegno-Indemini",
-              "value": "0,1 min",
+              "value": "0,2 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/biegno-indemini/oggi/"
             },
@@ -103,7 +103,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -133,32 +133,29 @@
               "date": "2026-11-09T09:54:00.000Z"
             },
             {
+              "label": "Via San Martino, Mendrisio in tutte le direzioni Situazione: chiusa Causa: manifestazione",
+              "value": "Chiusura",
+              "date": "2026-11-11T09:21:00.000Z"
+            },
+            {
+              "label": "Revocato: Via Sottobisio, Balerna in tutte le direzioni Situazione: chiusa Causa: incidente",
+              "value": "Chiusura",
+              "date": "2026-11-12T11:01:00.000Z"
+            },
+            {
+              "label": "Revocato: 406 Riazzino -> Cadenazzo tra Luogo Contone E Luogo Cadenazzo Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-11-12T09:33:00.000Z"
+            },
+            {
               "label": "Incidente della circolazione stradale in Valle Leventina",
               "value": "Traffico",
-              "date": "2026-11-10T23:46:40.154Z",
+              "date": "2026-11-12T11:55:14.710Z",
               "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261410"
-            },
-            {
-              "label": "Incidente della circolazione stradale nel Luganese",
-              "value": "Traffico",
-              "date": "2026-11-10T23:46:40.154Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261414"
-            },
-            {
-              "label": "Incidente della circolazione stradale nel Mendrisiotto",
-              "value": "Traffico",
-              "date": "2026-11-10T23:46:40.154Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261531"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
-              "value": "Cantiere",
-              "detail": "fine prevista: 29 dicembre 2028",
-              "date": "2021-06-25T03:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -196,7 +193,7 @@
               "url": "https://www.tilo.ch/avvisi/introduzione-ora-invernale.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -292,7 +289,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "TI",
@@ -303,31 +300,25 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Drezzo-Pedrinate, week ending 10 November 2026"
+          "note": "Dumenza-Cassinone, week ending 11 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "4",
-          "note": "reports as of 10 November 2026"
+          "value": "6",
+          "note": "reports as of 12 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "20",
-          "note": "reports as of 10 November 2026"
+          "value": "19",
+          "note": "reports as of 12 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 4 November 2026 to 10 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 5 November 2026 to 11 November 2026, fastest first.",
           "items": [
-            {
-              "label": "Drezzo-Pedrinate",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/drezzo-pedrinate/today/"
-            },
             {
               "label": "Dumenza-Cassinone",
               "value": "0 min",
@@ -347,6 +338,12 @@
               "url": "/en/border-wait/zenna-dirinella/today/"
             },
             {
+              "label": "Drezzo-Pedrinate",
+              "value": "0 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/drezzo-pedrinate/today/"
+            },
+            {
               "label": "Ronago-Novazzano",
               "value": "0.1 min",
               "detail": "49 readings",
@@ -354,7 +351,7 @@
             },
             {
               "label": "Biegno-Indemini",
-              "value": "0.1 min",
+              "value": "0.2 min",
               "detail": "49 readings",
               "url": "/en/border-wait/biegno-indemini/today/"
             },
@@ -373,7 +370,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -403,32 +400,29 @@
               "date": "2026-11-09T09:54:00.000Z"
             },
             {
+              "label": "Via San Martino, Mendrisio in tutte le direzioni Situazione: chiusa Causa: manifestazione",
+              "value": "Closure",
+              "date": "2026-11-11T09:21:00.000Z"
+            },
+            {
+              "label": "Revocato: Via Sottobisio, Balerna in tutte le direzioni Situazione: chiusa Causa: incidente",
+              "value": "Closure",
+              "date": "2026-11-12T11:01:00.000Z"
+            },
+            {
+              "label": "Revocato: 406 Riazzino -> Cadenazzo tra Luogo Contone E Luogo Cadenazzo Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-11-12T09:33:00.000Z"
+            },
+            {
               "label": "Incidente della circolazione stradale in Valle Leventina",
               "value": "Traffic",
-              "date": "2026-11-10T23:46:40.154Z",
+              "date": "2026-11-12T11:55:14.710Z",
               "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261410"
-            },
-            {
-              "label": "Incidente della circolazione stradale nel Luganese",
-              "value": "Traffic",
-              "date": "2026-11-10T23:46:40.154Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261414"
-            },
-            {
-              "label": "Incidente della circolazione stradale nel Mendrisiotto",
-              "value": "Traffic",
-              "date": "2026-11-10T23:46:40.154Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261531"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
-              "value": "Roadworks",
-              "detail": "until 29 December 2028",
-              "date": "2021-06-25T03:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -466,7 +460,7 @@
               "url": "https://www.tilo.ch/avvisi/introduzione-ora-invernale.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -561,7 +555,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "TI",
@@ -572,31 +566,25 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Drezzo-Pedrinate, Woche bis 10. November 2026"
+          "note": "Dumenza-Cassinone, Woche bis 11. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "4",
-          "note": "Meldungen vom 10. November 2026"
+          "value": "6",
+          "note": "Meldungen vom 12. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "20",
-          "note": "Meldungen vom 10. November 2026"
+          "value": "19",
+          "note": "Meldungen vom 12. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 4. November 2026 bis 10. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 5. November 2026 bis 11. November 2026, vom schnellsten zum langsamsten.",
           "items": [
-            {
-              "label": "Drezzo-Pedrinate",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/drezzo-pedrinate/heute/"
-            },
             {
               "label": "Dumenza-Cassinone",
               "value": "0 Min.",
@@ -616,6 +604,12 @@
               "url": "/de/wartezeit-grenze/zenna-dirinella/heute/"
             },
             {
+              "label": "Drezzo-Pedrinate",
+              "value": "0 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/drezzo-pedrinate/heute/"
+            },
+            {
               "label": "Ronago-Novazzano",
               "value": "0.1 Min.",
               "detail": "49 Messungen",
@@ -623,7 +617,7 @@
             },
             {
               "label": "Biegno-Indemini",
-              "value": "0.1 Min.",
+              "value": "0.2 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/biegno-indemini/heute/"
             },
@@ -642,7 +636,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -672,32 +666,29 @@
               "date": "2026-11-09T09:54:00.000Z"
             },
             {
+              "label": "Via San Martino, Mendrisio in beide Richtungen Sachlage: Strecke gesperrt Ursache: Demonstration",
+              "value": "Sperrung",
+              "date": "2026-11-11T09:21:00.000Z"
+            },
+            {
+              "label": "Aufgehoben: Via Sottobisio, Balerna in beide Richtungen Sachlage: Strecke gesperrt Ursache: Unfall",
+              "value": "Sperrung",
+              "date": "2026-11-12T11:01:00.000Z"
+            },
+            {
+              "label": "Aufgehoben: 406 Riazzino -> Cadenazzo zwischen Ortschaft Contone und Ortschaft Cadenazzo Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-11-12T09:33:00.000Z"
+            },
+            {
               "label": "Incidente della circolazione stradale in Valle Leventina",
               "value": "Verkehr",
-              "date": "2026-11-10T23:46:40.154Z",
+              "date": "2026-11-12T11:55:14.710Z",
               "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261410"
-            },
-            {
-              "label": "Incidente della circolazione stradale nel Luganese",
-              "value": "Verkehr",
-              "date": "2026-11-10T23:46:40.154Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261414"
-            },
-            {
-              "label": "Incidente della circolazione stradale nel Mendrisiotto",
-              "value": "Verkehr",
-              "date": "2026-11-10T23:46:40.154Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261531"
-            },
-            {
-              "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
-              "value": "Baustelle",
-              "detail": "bis 29. Dezember 2028",
-              "date": "2021-06-25T03:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -735,7 +726,7 @@
               "url": "https://www.tilo.ch/avvisi/introduzione-ora-invernale.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -830,7 +821,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "TI",
@@ -841,31 +832,25 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Drezzo-Pedrinate, semaine jusqu’au 10 novembre 2026"
+          "note": "Dumenza-Cassinone, semaine jusqu’au 11 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "4",
-          "note": "signalements au 10 novembre 2026"
+          "value": "6",
+          "note": "signalements au 12 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "20",
-          "note": "signalements au 10 novembre 2026"
+          "value": "19",
+          "note": "signalements au 12 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 4 novembre 2026 au 10 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 5 novembre 2026 au 11 novembre 2026, du plus fluide au plus lent.",
           "items": [
-            {
-              "label": "Drezzo-Pedrinate",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/drezzo-pedrinate/aujourd-hui/"
-            },
             {
               "label": "Dumenza-Cassinone",
               "value": "0 min",
@@ -885,6 +870,12 @@
               "url": "/fr/temps-attente-douane/zenna-dirinella/aujourd-hui/"
             },
             {
+              "label": "Drezzo-Pedrinate",
+              "value": "0 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/drezzo-pedrinate/aujourd-hui/"
+            },
+            {
               "label": "Ronago-Novazzano",
               "value": "0,1 min",
               "detail": "49 relevés",
@@ -892,7 +883,7 @@
             },
             {
               "label": "Biegno-Indemini",
-              "value": "0,1 min",
+              "value": "0,2 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/biegno-indemini/aujourd-hui/"
             },
@@ -911,7 +902,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -941,32 +932,29 @@
               "date": "2026-11-09T09:54:00.000Z"
             },
             {
+              "label": "Via San Martino, Mendrisio dans les deux sens Situation: fermé Raison: manifestation",
+              "value": "Fermeture",
+              "date": "2026-11-11T09:21:00.000Z"
+            },
+            {
+              "label": "Révoqué: Via Sottobisio, Balerna dans les deux sens Situation: fermé Raison: accident",
+              "value": "Fermeture",
+              "date": "2026-11-12T11:01:00.000Z"
+            },
+            {
+              "label": "Révoqué: 406 Riazzino -> Cadenazzo entre Localité Contone et Localité Cadenazzo Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-11-12T09:33:00.000Z"
+            },
+            {
               "label": "Incidente della circolazione stradale in Valle Leventina",
               "value": "Trafic",
-              "date": "2026-11-10T23:46:40.154Z",
+              "date": "2026-11-12T11:55:14.710Z",
               "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261410"
-            },
-            {
-              "label": "Incidente della circolazione stradale nel Luganese",
-              "value": "Trafic",
-              "date": "2026-11-10T23:46:40.154Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261414"
-            },
-            {
-              "label": "Incidente della circolazione stradale nel Mendrisiotto",
-              "value": "Trafic",
-              "date": "2026-11-10T23:46:40.154Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261531"
-            },
-            {
-              "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
-              "value": "Chantier",
-              "detail": "jusqu’au 29 décembre 2028",
-              "date": "2021-06-25T03:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1004,7 +992,7 @@
               "url": "https://www.tilo.ch/avvisi/introduzione-ora-invernale.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -1100,7 +1088,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

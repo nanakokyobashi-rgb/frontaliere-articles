@@ -4,22 +4,22 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-12T04:11:33.979Z",
-  "contentHash": "5f34590355d60ed1e0763643509486e7c90e9753b3dc39706913abcf04e968c5",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "6c475007c504bb907fbbab73d2171857638ce31337bccc985cdebc9b26da9f67",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-10T23:59:59.000Z",
+      "updatedAt": "2026-11-11T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-10T23:46:40.154Z",
+      "updatedAt": "2026-11-12T11:55:14.710Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0,1 min",
-          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, settimana conclusa: 10 novembre 2026"
+          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, settimana conclusa: 11 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "7",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "value": "8",
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "27",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "value": "28",
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 4 novembre 2026 – 10 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 5 novembre 2026 – 11 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Kaiserstuhl AG",
@@ -60,44 +60,44 @@
             },
             {
               "label": "Küssaberg – Bad Zurzach AG",
-              "value": "0,2 min",
+              "value": "0,1 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/kussaberg-bad-zurzach-ag/oggi/"
             },
             {
               "label": "Laufenburg (Baden) – Laufenburg AG",
-              "value": "1,2 min",
+              "value": "0,7 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/laufenburg-laufenburg-ag/oggi/"
             },
             {
               "label": "Bad Säckingen – Stein AG",
-              "value": "1,6 min",
+              "value": "1,4 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/bad-sackingen-stein-ag/oggi/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
-              "value": "1,9 min",
+              "value": "1,7 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/rheinfelden-rheinfelden-ag-alte-rheinbrucke/oggi/"
             },
             {
               "label": "Waldshut-Tiengen – Koblenz AG",
-              "value": "2,4 min",
+              "value": "1,9 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/waldshut-tiengen-koblenz-ag/oggi/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
-              "value": "5,7 min",
+              "value": "4,7 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/rheinfelden-rheinfelden-ag-autostrada-a861-a3/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -147,14 +147,14 @@
               "date": "2026-11-09T13:24:00.000Z"
             },
             {
-              "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
-              "value": "Cantiere",
-              "detail": "fine prevista: 30 aprile 2027",
-              "date": "2025-04-07T09:38:00.000Z"
+              "label": "A3 Basel <-> Zürich tra Svincolo autostradale Brugg E Raccordo autostradale Diramazione Birrfeld Situazione: problemi di traffico cantiere, lunghezza [km] 1.4 Limitazione del traffico: corsia…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 3 dicembre 2026",
+              "date": "2026-11-12T06:01:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -192,7 +192,7 @@
               "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "AG",
@@ -281,24 +281,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0.1 min",
-          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, week ending 10 November 2026"
+          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, week ending 11 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "7",
-          "note": "reports as of 10 November 2026"
+          "value": "8",
+          "note": "reports as of 12 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "27",
-          "note": "reports as of 10 November 2026"
+          "value": "28",
+          "note": "reports as of 12 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 4 November 2026 to 10 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 5 November 2026 to 11 November 2026, fastest first.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Kaiserstuhl AG",
@@ -308,44 +308,44 @@
             },
             {
               "label": "Küssaberg – Bad Zurzach AG",
-              "value": "0.2 min",
+              "value": "0.1 min",
               "detail": "49 readings",
               "url": "/en/border-wait/kussaberg-bad-zurzach-ag/today/"
             },
             {
               "label": "Laufenburg (Baden) – Laufenburg AG",
-              "value": "1.2 min",
+              "value": "0.7 min",
               "detail": "49 readings",
               "url": "/en/border-wait/laufenburg-laufenburg-ag/today/"
             },
             {
               "label": "Bad Säckingen – Stein AG",
-              "value": "1.6 min",
+              "value": "1.4 min",
               "detail": "49 readings",
               "url": "/en/border-wait/bad-sackingen-stein-ag/today/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
-              "value": "1.9 min",
+              "value": "1.7 min",
               "detail": "49 readings",
               "url": "/en/border-wait/rheinfelden-rheinfelden-ag-alte-rheinbrucke/today/"
             },
             {
               "label": "Waldshut-Tiengen – Koblenz AG",
-              "value": "2.4 min",
+              "value": "1.9 min",
               "detail": "49 readings",
               "url": "/en/border-wait/waldshut-tiengen-koblenz-ag/today/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
-              "value": "5.7 min",
+              "value": "4.7 min",
               "detail": "49 readings",
               "url": "/en/border-wait/rheinfelden-rheinfelden-ag-autostrada-a861-a3/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -395,14 +395,14 @@
               "date": "2026-11-09T13:24:00.000Z"
             },
             {
-              "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
-              "value": "Roadworks",
-              "detail": "until 30 April 2027",
-              "date": "2025-04-07T09:38:00.000Z"
+              "label": "A3 Basel <-> Zürich tra Svincolo autostradale Brugg E Raccordo autostradale Diramazione Birrfeld Situazione: problemi di traffico cantiere, lunghezza [km] 1.4 Limitazione del traffico: corsia…",
+              "value": "Closure",
+              "detail": "until 3 December 2026",
+              "date": "2026-11-12T06:01:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -440,7 +440,7 @@
               "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -518,7 +518,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "AG",
@@ -529,24 +529,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0.1 Min.",
-          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, Woche bis 10. November 2026"
+          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, Woche bis 11. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "7",
-          "note": "Meldungen vom 10. November 2026"
+          "value": "8",
+          "note": "Meldungen vom 12. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "27",
-          "note": "Meldungen vom 10. November 2026"
+          "value": "28",
+          "note": "Meldungen vom 12. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 4. November 2026 bis 10. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 5. November 2026 bis 11. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Kaiserstuhl AG",
@@ -556,44 +556,44 @@
             },
             {
               "label": "Küssaberg – Bad Zurzach AG",
-              "value": "0.2 Min.",
+              "value": "0.1 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/kussaberg-bad-zurzach-ag/heute/"
             },
             {
               "label": "Laufenburg (Baden) – Laufenburg AG",
-              "value": "1.2 Min.",
+              "value": "0.7 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/laufenburg-laufenburg-ag/heute/"
             },
             {
               "label": "Bad Säckingen – Stein AG",
-              "value": "1.6 Min.",
+              "value": "1.4 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/bad-sackingen-stein-ag/heute/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
-              "value": "1.9 Min.",
+              "value": "1.7 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/rheinfelden-rheinfelden-ag-alte-rheinbrucke/heute/"
             },
             {
               "label": "Waldshut-Tiengen – Koblenz AG",
-              "value": "2.4 Min.",
+              "value": "1.9 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/waldshut-tiengen-koblenz-ag/heute/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
-              "value": "5.7 Min.",
+              "value": "4.7 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/rheinfelden-rheinfelden-ag-autostrada-a861-a3/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -643,14 +643,14 @@
               "date": "2026-11-09T13:24:00.000Z"
             },
             {
-              "label": "Langenthal <-> Zofingen zwischen Ortschaft Strengelbach und Ortschaft St. Urban Sachlage: Gefahr Ursache: Bauarbeiten",
-              "value": "Baustelle",
-              "detail": "bis 30. April 2027",
-              "date": "2025-04-07T09:38:00.000Z"
+              "label": "A3 Basel <-> Zürich zwischen Anschluss Brugg und Autobahndreieck Verzweigung Birrfeld Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.4 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 3. Dezember 2026",
+              "date": "2026-11-12T06:01:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -688,7 +688,7 @@
               "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -766,7 +766,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "AG",
@@ -777,24 +777,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0,1 min",
-          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, semaine jusqu’au 10 novembre 2026"
+          "note": "Hohentengen am Hochrhein – Kaiserstuhl AG, semaine jusqu’au 11 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "7",
-          "note": "signalements au 10 novembre 2026"
+          "value": "8",
+          "note": "signalements au 12 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "27",
-          "note": "signalements au 10 novembre 2026"
+          "value": "28",
+          "note": "signalements au 12 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 4 novembre 2026 au 10 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 5 novembre 2026 au 11 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Kaiserstuhl AG",
@@ -804,44 +804,44 @@
             },
             {
               "label": "Küssaberg – Bad Zurzach AG",
-              "value": "0,2 min",
+              "value": "0,1 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/kussaberg-bad-zurzach-ag/aujourd-hui/"
             },
             {
               "label": "Laufenburg (Baden) – Laufenburg AG",
-              "value": "1,2 min",
+              "value": "0,7 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/laufenburg-laufenburg-ag/aujourd-hui/"
             },
             {
               "label": "Bad Säckingen – Stein AG",
-              "value": "1,6 min",
+              "value": "1,4 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/bad-sackingen-stein-ag/aujourd-hui/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
-              "value": "1,9 min",
+              "value": "1,7 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/rheinfelden-rheinfelden-ag-alte-rheinbrucke/aujourd-hui/"
             },
             {
               "label": "Waldshut-Tiengen – Koblenz AG",
-              "value": "2,4 min",
+              "value": "1,9 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/waldshut-tiengen-koblenz-ag/aujourd-hui/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
-              "value": "5,7 min",
+              "value": "4,7 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/rheinfelden-rheinfelden-ag-autostrada-a861-a3/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -891,14 +891,14 @@
               "date": "2026-11-09T13:24:00.000Z"
             },
             {
-              "label": "Langenthal <-> Zofingen entre Localité Strengelbach et Localité St. Urban Situation: danger Raison: travaux de construction",
-              "value": "Chantier",
-              "detail": "jusqu’au 30 avril 2027",
-              "date": "2025-04-07T09:38:00.000Z"
+              "label": "A3 Bâle <-> Zurich entre Jonction autoroutière Brugg et Echangeur Echangeur de Birrfeld Situation: trafic perturbé travaux, longueur [km] 1.4 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 3 décembre 2026",
+              "date": "2026-11-12T06:01:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -936,7 +936,7 @@
               "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -1014,7 +1014,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

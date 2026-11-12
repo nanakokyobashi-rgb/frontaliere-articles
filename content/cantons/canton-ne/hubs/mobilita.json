@@ -4,22 +4,22 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T16:22:46.747Z",
-  "contentHash": "10db1597c8b8e626f48eb5a001fda6bab2826123dcd994434cd711fa5052e3fb",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "4d85a4e8883d7f3cad2f1ac26752fcd1c7af6550a588d15615571cc86823b939",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-10T23:59:59.000Z",
+      "updatedAt": "2026-11-11T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-10T23:46:40.154Z",
+      "updatedAt": "2026-11-12T11:55:14.710Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0,1 min",
-          "note": "Biaufond, settimana conclusa: 10 novembre 2026"
+          "note": "Biaufond, settimana conclusa: 11 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "2",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "5",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "value": "4",
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 4 novembre 2026 – 10 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 5 novembre 2026 – 11 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Biaufond",
@@ -73,7 +73,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -95,7 +95,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffico",
-              "date": "2026-11-10T23:46:40.154Z",
+              "date": "2026-11-12T11:55:14.710Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -117,20 +117,14 @@
               "date": "2026-10-06T22:00:00.000Z"
             },
             {
-              "label": "Gare du Locle : une étape importante vers des transports publics accessibles à toutes et tous",
-              "value": "Cantiere",
-              "date": "2026-11-10T23:46:40.154Z",
-              "url": "https://www.ne.ch/communiques-de-presse/gare-du-locle-une-etape-importante-vers-des-transports-publics-accessibles-toutes-et-tous"
-            },
-            {
               "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
               "value": "Cantiere",
-              "date": "2026-11-10T23:46:40.154Z",
+              "date": "2026-11-12T11:55:14.710Z",
               "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -153,7 +147,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -207,7 +201,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "NE",
@@ -218,24 +212,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0.1 min",
-          "note": "Biaufond, week ending 10 November 2026"
+          "note": "Biaufond, week ending 11 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "2",
-          "note": "reports as of 10 November 2026"
+          "note": "reports as of 12 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "5",
-          "note": "reports as of 10 November 2026"
+          "value": "4",
+          "note": "reports as of 12 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 4 November 2026 to 10 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 5 November 2026 to 11 November 2026, fastest first.",
           "items": [
             {
               "label": "Biaufond",
@@ -258,7 +252,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -280,7 +274,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffic",
-              "date": "2026-11-10T23:46:40.154Z",
+              "date": "2026-11-12T11:55:14.710Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -302,20 +296,14 @@
               "date": "2026-10-06T22:00:00.000Z"
             },
             {
-              "label": "Gare du Locle : une étape importante vers des transports publics accessibles à toutes et tous",
-              "value": "Roadworks",
-              "date": "2026-11-10T23:46:40.154Z",
-              "url": "https://www.ne.ch/communiques-de-presse/gare-du-locle-une-etape-importante-vers-des-transports-publics-accessibles-toutes-et-tous"
-            },
-            {
               "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
               "value": "Roadworks",
-              "date": "2026-11-10T23:46:40.154Z",
+              "date": "2026-11-12T11:55:14.710Z",
               "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -338,7 +326,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -392,7 +380,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "NE",
@@ -403,24 +391,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0.1 Min.",
-          "note": "Biaufond, Woche bis 10. November 2026"
+          "note": "Biaufond, Woche bis 11. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "2",
-          "note": "Meldungen vom 10. November 2026"
+          "note": "Meldungen vom 12. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "5",
-          "note": "Meldungen vom 10. November 2026"
+          "value": "4",
+          "note": "Meldungen vom 12. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 4. November 2026 bis 10. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 5. November 2026 bis 11. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Biaufond",
@@ -443,7 +431,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -465,7 +453,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Verkehr",
-              "date": "2026-11-10T23:46:40.154Z",
+              "date": "2026-11-12T11:55:14.710Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -487,20 +475,14 @@
               "date": "2026-10-06T22:00:00.000Z"
             },
             {
-              "label": "Gare du Locle : une étape importante vers des transports publics accessibles à toutes et tous",
-              "value": "Baustelle",
-              "date": "2026-11-10T23:46:40.154Z",
-              "url": "https://www.ne.ch/communiques-de-presse/gare-du-locle-une-etape-importante-vers-des-transports-publics-accessibles-toutes-et-tous"
-            },
-            {
               "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
               "value": "Baustelle",
-              "date": "2026-11-10T23:46:40.154Z",
+              "date": "2026-11-12T11:55:14.710Z",
               "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -523,7 +505,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -577,7 +559,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "NE",
@@ -588,24 +570,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0,1 min",
-          "note": "Biaufond, semaine jusqu’au 10 novembre 2026"
+          "note": "Biaufond, semaine jusqu’au 11 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "2",
-          "note": "signalements au 10 novembre 2026"
+          "note": "signalements au 12 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "5",
-          "note": "signalements au 10 novembre 2026"
+          "value": "4",
+          "note": "signalements au 12 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 4 novembre 2026 au 10 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 5 novembre 2026 au 11 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Biaufond",
@@ -628,7 +610,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-10T23:59:59.000Z"
+          "updatedAt": "2026-11-11T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -650,7 +632,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Trafic",
-              "date": "2026-11-10T23:46:40.154Z",
+              "date": "2026-11-12T11:55:14.710Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -672,20 +654,14 @@
               "date": "2026-10-06T22:00:00.000Z"
             },
             {
-              "label": "Gare du Locle : une étape importante vers des transports publics accessibles à toutes et tous",
-              "value": "Chantier",
-              "date": "2026-11-10T23:46:40.154Z",
-              "url": "https://www.ne.ch/communiques-de-presse/gare-du-locle-une-etape-importante-vers-des-transports-publics-accessibles-toutes-et-tous"
-            },
-            {
               "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
               "value": "Chantier",
-              "date": "2026-11-10T23:46:40.154Z",
+              "date": "2026-11-12T11:55:14.710Z",
               "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -708,7 +684,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -762,7 +738,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-11T16:22:46.747Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

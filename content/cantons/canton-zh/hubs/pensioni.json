@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "pensioni",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "220680e3b8ace51a60dd3e8b94fe20c819e7d2b9df55de5d454a221fcb648d1e",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "07a0590313bdfcc3f6ee50374245f25e0b515129a58ec6e9a7635950b62ed7e0",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -137,7 +137,7 @@
           "items": [
             {
               "label": "Höhere AHV/IV-Renten und EO-Anmeldung am Smartphone",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/hoehere-ahv-iv-renten-und-eo-anmeldung-am-smartphone.html"
             },
             {
@@ -166,7 +166,7 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/anlaesse/eine-nomination-die-engagement-sichtbar-macht.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -238,7 +238,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "ZH",
@@ -348,7 +348,7 @@
           "items": [
             {
               "label": "Höhere AHV/IV-Renten und EO-Anmeldung am Smartphone",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/hoehere-ahv-iv-renten-und-eo-anmeldung-am-smartphone.html"
             },
             {
@@ -377,7 +377,7 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/anlaesse/eine-nomination-die-engagement-sichtbar-macht.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -449,7 +449,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "ZH",
@@ -559,7 +559,7 @@
           "items": [
             {
               "label": "Höhere AHV/IV-Renten und EO-Anmeldung am Smartphone",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/hoehere-ahv-iv-renten-und-eo-anmeldung-am-smartphone.html"
             },
             {
@@ -588,7 +588,7 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/anlaesse/eine-nomination-die-engagement-sichtbar-macht.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -660,7 +660,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "ZH",
@@ -770,7 +770,7 @@
           "items": [
             {
               "label": "Höhere AHV/IV-Renten und EO-Anmeldung am Smartphone",
-              "date": "2026-11-10",
+              "date": "2026-11-11",
               "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/hoehere-ahv-iv-renten-und-eo-anmeldung-am-smartphone.html"
             },
             {
@@ -799,7 +799,7 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/anlaesse/eine-nomination-die-engagement-sichtbar-macht.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -871,7 +871,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

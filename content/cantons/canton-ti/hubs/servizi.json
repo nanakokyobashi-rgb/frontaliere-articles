@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-11-12T10:45:43.005Z",
-  "contentHash": "338f1361110cad5caad9d1e2b47d3ccbc0ce5d8ee0b42b9a7e243fa0a9ba4dab",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "668a25921b5cc78878073dfb179b3f8be926dafcd1843e57f97933f22944f1c5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-11T03:00:34.742Z",
+      "updatedAt": "2026-11-12T12:54:38.777Z",
       "keyFacts": 0
     },
     {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-12T00:41:52.734Z",
+      "keyFacts": 1
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -35,6 +40,11 @@
           "value": "740,20 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "2",
+          "note": "offerta mediana 8450 CHF"
         }
       ],
       "dataBlocks": [
@@ -96,13 +106,42 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-11T03:00:34.742Z"
+          "updatedAt": "2026-11-12T12:54:38.777Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "TI735",
+              "value": "16.000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+            },
+            {
+              "label": "TI12396",
+              "value": "900 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-12T00:41:52.734Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Un nuovo spazio di gioco, sorrisi e condivisione all'Istituto Pediatrico della Svizzera Italiana",
+              "date": "2026-11-12",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/parco-giochi.html"
+            },
             {
               "label": "La fotobiomodulazione arriva all’Ospedale Italiano di Lugano per migliorare la qualità di vita durante la radioterapia",
               "date": "2026-11-10",
@@ -127,14 +166,9 @@
               "label": "Chirurgia toracica di qualità",
               "date": "2026-11-01",
               "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
-            },
-            {
-              "label": "Campagna Drive awake",
-              "date": "2026-10-31",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/Campagna-Drive-awake-.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +256,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "TI",
@@ -235,6 +269,11 @@
           "value": "740.20 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "2",
+          "note": "typical bid 8,450 CHF"
         }
       ],
       "dataBlocks": [
@@ -296,13 +335,42 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-11T03:00:34.742Z"
+          "updatedAt": "2026-11-12T12:54:38.777Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "TI735",
+              "value": "16,000 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+            },
+            {
+              "label": "TI12396",
+              "value": "900 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-12T00:41:52.734Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Un nuovo spazio di gioco, sorrisi e condivisione all'Istituto Pediatrico della Svizzera Italiana",
+              "date": "2026-11-12",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/parco-giochi.html"
+            },
             {
               "label": "La fotobiomodulazione arriva all’Ospedale Italiano di Lugano per migliorare la qualità di vita durante la radioterapia",
               "date": "2026-11-10",
@@ -327,14 +395,9 @@
               "label": "Chirurgia toracica di qualità",
               "date": "2026-11-01",
               "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
-            },
-            {
-              "label": "Campagna Drive awake",
-              "date": "2026-10-31",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/Campagna-Drive-awake-.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +480,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "TI",
@@ -430,6 +493,11 @@
           "value": "740.20 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "2",
+          "note": "mittleres Gebot 8’450 CHF"
         }
       ],
       "dataBlocks": [
@@ -491,13 +559,42 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-11T03:00:34.742Z"
+          "updatedAt": "2026-11-12T12:54:38.777Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "TI735",
+              "value": "16’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+            },
+            {
+              "label": "TI12396",
+              "value": "900 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-12T00:41:52.734Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Un nuovo spazio di gioco, sorrisi e condivisione all'Istituto Pediatrico della Svizzera Italiana",
+              "date": "2026-11-12",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/parco-giochi.html"
+            },
             {
               "label": "La fotobiomodulazione arriva all’Ospedale Italiano di Lugano per migliorare la qualità di vita durante la radioterapia",
               "date": "2026-11-10",
@@ -522,14 +619,9 @@
               "label": "Chirurgia toracica di qualità",
               "date": "2026-11-01",
               "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
-            },
-            {
-              "label": "Campagna Drive awake",
-              "date": "2026-10-31",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/Campagna-Drive-awake-.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -612,7 +704,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "TI",
@@ -625,6 +717,11 @@
           "value": "740,20 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "2",
+          "note": "offre centrale 8 450 CHF"
         }
       ],
       "dataBlocks": [
@@ -686,13 +783,42 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-11T03:00:34.742Z"
+          "updatedAt": "2026-11-12T12:54:38.777Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "TI735",
+              "value": "16 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+            },
+            {
+              "label": "TI12396",
+              "value": "900 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-12T00:41:52.734Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Un nuovo spazio di gioco, sorrisi e condivisione all'Istituto Pediatrico della Svizzera Italiana",
+              "date": "2026-11-12",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/parco-giochi.html"
+            },
             {
               "label": "La fotobiomodulazione arriva all’Ospedale Italiano di Lugano per migliorare la qualità di vita durante la radioterapia",
               "date": "2026-11-10",
@@ -717,14 +843,9 @@
               "label": "Chirurgia toracica di qualità",
               "date": "2026-11-01",
               "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
-            },
-            {
-              "label": "Campagna Drive awake",
-              "date": "2026-10-31",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/Campagna-Drive-awake-.html"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -804,7 +925,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

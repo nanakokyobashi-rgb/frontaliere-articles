@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "servizi",
-  "updatedAt": "2026-11-11T11:16:44.434Z",
-  "contentHash": "dacfa17c2b9a34d8813e9783767cb5d339d32a39419598cd67db63f89eba6ad0",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "6e9cef7abb1e5f9d952277cb68ace73b4e992d721dde0bfaa99c8fc1b9887c45",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -54,6 +54,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Präventionsanlass Psychische Gesundheit",
+              "date": "2026-11-12",
+              "url": "https://www.buochs.ch/_rte/information/3047347"
+            },
+            {
               "label": "Verkürzte Öffnungszeiten am 14.10.2026",
               "date": "2026-09-29",
               "url": "https://www.hergiswil.ch/_rte/information/2998528"
@@ -74,7 +79,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -154,7 +159,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "NW",
@@ -191,6 +196,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Präventionsanlass Psychische Gesundheit",
+              "date": "2026-11-12",
+              "url": "https://www.buochs.ch/_rte/information/3047347"
+            },
+            {
               "label": "Verkürzte Öffnungszeiten am 14.10.2026",
               "date": "2026-09-29",
               "url": "https://www.hergiswil.ch/_rte/information/2998528"
@@ -211,7 +221,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -287,7 +297,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "NW",
@@ -324,6 +334,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Präventionsanlass Psychische Gesundheit",
+              "date": "2026-11-12",
+              "url": "https://www.buochs.ch/_rte/information/3047347"
+            },
+            {
               "label": "Verkürzte Öffnungszeiten am 14.10.2026",
               "date": "2026-09-29",
               "url": "https://www.hergiswil.ch/_rte/information/2998528"
@@ -344,7 +359,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -420,7 +435,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "NW",
@@ -457,6 +472,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Präventionsanlass Psychische Gesundheit",
+              "date": "2026-11-12",
+              "url": "https://www.buochs.ch/_rte/information/3047347"
+            },
+            {
               "label": "Verkürzte Öffnungszeiten am 14.10.2026",
               "date": "2026-09-29",
               "url": "https://www.hergiswil.ch/_rte/information/2998528"
@@ -477,7 +497,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +569,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-11T11:16:44.434Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

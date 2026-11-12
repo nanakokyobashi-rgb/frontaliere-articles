@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T04:11:33.979Z",
-  "contentHash": "323a3fc753f6b5164e7a94629abcdb4d6feccbe64ac7fd67d87dc082d2715542",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "fccb6cb3607d3fd318094b8b05d603ee2793064858b8ea2d85f7c397ad7b056c",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-11T04:25:04.802Z",
+      "updatedAt": "2026-11-12T12:24:28.563Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "28",
+          "value": "30",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -48,6 +48,12 @@
               "detail": "Fribourg",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
+            },
+            {
+              "label": "Berufs-Info-Métiers 2026 : à la découverte de plus de 60 professions !",
+              "detail": "Fribourg",
+              "date": "2026-11-14",
+              "url": "https://www.fr.ch/dfac/evenements/berufs-info-metiers-2026-a-la-decouverte-de-plus-de-60-professions"
             },
             {
               "label": "Journée Portes Ouvertes 2026",
@@ -90,17 +96,11 @@
               "detail": "Fribourg",
               "date": "2026-11-17",
               "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
-            },
-            {
-              "label": "AUBÉTOILE | SOUND BATH",
-              "detail": "MIAM",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "FR",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "28",
+          "value": "30",
           "note": "from the site’s events calendar"
         }
       ],
@@ -186,6 +186,12 @@
               "detail": "Fribourg",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
+            },
+            {
+              "label": "Berufs-Info-Métiers 2026 : à la découverte de plus de 60 professions !",
+              "detail": "Fribourg",
+              "date": "2026-11-14",
+              "url": "https://www.fr.ch/dfac/evenements/berufs-info-metiers-2026-a-la-decouverte-de-plus-de-60-professions"
             },
             {
               "label": "Journée Portes Ouvertes 2026",
@@ -228,17 +234,11 @@
               "detail": "Fribourg",
               "date": "2026-11-17",
               "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
-            },
-            {
-              "label": "AUBÉTOILE | SOUND BATH",
-              "detail": "MIAM",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "FR",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "28",
+          "value": "30",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -324,6 +324,12 @@
               "detail": "Fribourg",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
+            },
+            {
+              "label": "Berufs-Info-Métiers 2026 : à la découverte de plus de 60 professions !",
+              "detail": "Fribourg",
+              "date": "2026-11-14",
+              "url": "https://www.fr.ch/dfac/evenements/berufs-info-metiers-2026-a-la-decouverte-de-plus-de-60-professions"
             },
             {
               "label": "Journée Portes Ouvertes 2026",
@@ -366,17 +372,11 @@
               "detail": "Fribourg",
               "date": "2026-11-17",
               "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
-            },
-            {
-              "label": "AUBÉTOILE | SOUND BATH",
-              "detail": "MIAM",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +409,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "FR",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "28",
+          "value": "30",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -462,6 +462,12 @@
               "detail": "Fribourg",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
+            },
+            {
+              "label": "Berufs-Info-Métiers 2026 : à la découverte de plus de 60 professions !",
+              "detail": "Fribourg",
+              "date": "2026-11-14",
+              "url": "https://www.fr.ch/dfac/evenements/berufs-info-metiers-2026-a-la-decouverte-de-plus-de-60-professions"
             },
             {
               "label": "Journée Portes Ouvertes 2026",
@@ -504,17 +510,11 @@
               "detail": "Fribourg",
               "date": "2026-11-17",
               "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
-            },
-            {
-              "label": "AUBÉTOILE | SOUND BATH",
-              "detail": "MIAM",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T12:24:28.563Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +547,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }

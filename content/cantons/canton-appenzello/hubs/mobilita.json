@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "ad33d98ee84a64025d6606ced13adb3601a54a61eaf645dc3b3c0d282c98fe7b",
+  "updatedAt": "2026-11-12T21:05:42.386Z",
+  "contentHash": "712a33ff19c1038c6f1506a47f951b45fcd92af2c661f1c723bcbaa3c370db4e",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-10T23:46:40.154Z",
+      "updatedAt": "2026-11-12T11:55:14.710Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -28,7 +28,7 @@
         {
           "label": "Cantieri attivi o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 10 novembre 2026"
+          "note": "segnalazioni aggiornate: 12 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -57,13 +57,23 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
+              "date": "2026-11-11",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
+            },
+            {
+              "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
+              "date": "2026-11-11",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
+            },
             {
               "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
               "date": "2026-11-03",
@@ -83,19 +93,9 @@
               "label": "Strassensperrung Gemeinde Urnäsch",
               "date": "2026-10-15",
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
-            },
-            {
-              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
-              "date": "2026-09-29",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
-            },
-            {
-              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
-              "date": "2026-09-29",
-              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -128,7 +128,7 @@
         {
           "label": "Roadworks active or imminent",
           "value": "3",
-          "note": "reports as of 10 November 2026"
+          "note": "reports as of 12 November 2026"
         }
       ],
       "dataBlocks": [
@@ -157,13 +157,23 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
+              "date": "2026-11-11",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
+            },
+            {
+              "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
+              "date": "2026-11-11",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
+            },
             {
               "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
               "date": "2026-11-03",
@@ -183,19 +193,9 @@
               "label": "Strassensperrung Gemeinde Urnäsch",
               "date": "2026-10-15",
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
-            },
-            {
-              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
-              "date": "2026-09-29",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
-            },
-            {
-              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
-              "date": "2026-09-29",
-              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -217,7 +217,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -228,7 +228,7 @@
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "3",
-          "note": "Meldungen vom 10. November 2026"
+          "note": "Meldungen vom 12. November 2026"
         }
       ],
       "dataBlocks": [
@@ -257,13 +257,23 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
+              "date": "2026-11-11",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
+            },
+            {
+              "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
+              "date": "2026-11-11",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
+            },
             {
               "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
               "date": "2026-11-03",
@@ -283,19 +293,9 @@
               "label": "Strassensperrung Gemeinde Urnäsch",
               "date": "2026-10-15",
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
-            },
-            {
-              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
-              "date": "2026-09-29",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
-            },
-            {
-              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
-              "date": "2026-09-29",
-              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -317,7 +317,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -328,7 +328,7 @@
         {
           "label": "Chantiers actifs ou imminents",
           "value": "3",
-          "note": "signalements au 10 novembre 2026"
+          "note": "signalements au 12 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -357,13 +357,23 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-10T23:46:40.154Z"
+          "updatedAt": "2026-11-12T11:55:14.710Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
+              "date": "2026-11-11",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
+            },
+            {
+              "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
+              "date": "2026-11-11",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
+            },
             {
               "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
               "date": "2026-11-03",
@@ -383,19 +393,9 @@
               "label": "Strassensperrung Gemeinde Urnäsch",
               "date": "2026-10-15",
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
-            },
-            {
-              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
-              "date": "2026-09-29",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
-            },
-            {
-              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
-              "date": "2026-09-29",
-              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-12T21:05:42.386Z"
     }
   }
 }
