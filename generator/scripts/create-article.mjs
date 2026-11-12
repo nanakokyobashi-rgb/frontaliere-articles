@@ -367,6 +367,7 @@ function guardProviderInputCapForCall(promptCall, {
 import {
   freeTranslateWithRetry,
   balanceMarkdownMarkers,
+  lineStructuralSignature,
   setCodexTranslateProcessDeadline,
   translateWithCodexEngine,
   withCodexTranslationLane,
@@ -14525,10 +14526,32 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
 
   function readStructuredLineContentStart(text, start) {
     if (start > 0 && text[start - 1] !== '\n') return null;
-    const prefix = text
-      .slice(start)
-      .match(/^ {0,3}(?:(?:[-+*]|\d+[.)]|#{1,6}|>)[ \t]+)+/);
-    return prefix ? start + prefix[0].length : null;
+    const lineEnd = text.indexOf('\n', start);
+    const end = lineEnd === -1 ? text.length : lineEnd;
+    let cursor = start;
+    let consumed = false;
+
+    // `lineStructuralSignature` is the shared Markdown grammar. Use its kind
+    // to admit every marker the normal translator accepts (including tabs,
+    // `•` and tables), then consume the original prefix without normalizing
+    // the source bytes that must be sent back through the joiner.
+    while (cursor < end) {
+      const signature = lineStructuralSignature(text.slice(cursor, end));
+      if (!['heading', 'bullet', 'ordered', 'quote', 'table'].includes(signature.kind)) break;
+
+      while (cursor < end && /[ \t]/u.test(text[cursor])) cursor += 1;
+      if (signature.kind === 'heading') {
+        while (cursor < end && text[cursor] === '#') cursor += 1;
+      } else if (signature.kind === 'ordered') {
+        while (cursor < end && /\d/u.test(text[cursor])) cursor += 1;
+        if (text[cursor] === '.' || text[cursor] === ')') cursor += 1;
+      } else {
+        cursor += 1;
+      }
+      while (cursor < end && /[ \t]/u.test(text[cursor])) cursor += 1;
+      consumed = true;
+    }
+    return consumed ? cursor : null;
   }
 
   function readStructuredLineAtom(text, start) {
@@ -15439,38 +15462,162 @@ async function translateArticle(data) {
 
     // A chunk boundary must never make a Markdown link disappear or change
     // its destination after the provider responses are recombined. Compare
-    // balanced `](...)` targets in source order; this covers nav actions and
-    // external URLs without constraining the translated visible label.
-    const linkTargets = (text) => {
-      const targets = [];
+    // the complete link contract in source order: inline destinations,
+    // full/collapsed/shortcut reference keys, reference definitions and
+    // autolink destinations. Visible labels remain translatable, but every
+    // source-owned route must stay byte-stable (reference keys are compared
+    // case-insensitively because Markdown resolves them that way).
+    const markdownLinkContract = (text) => {
       const value = String(text ?? '');
-      for (let cursor = 0; cursor < value.length - 1; cursor += 1) {
-        if (value[cursor] !== ']' || value[cursor + 1] !== '(') continue;
-        let depth = 0;
-        let end = cursor + 2;
-        for (; end < value.length; end += 1) {
-          if (value[end] === '\\') {
+      const normalizeReference = (label) => String(label)
+        .replace(/[ \t\n]+/gu, ' ')
+        .trim()
+        .toLowerCase();
+      const readCodeSpanEnd = (start) => {
+        if (value[start] !== '`') return null;
+        let markerLength = 0;
+        while (value[start + markerLength] === '`') markerLength += 1;
+        let end = start + markerLength;
+        while (end < value.length) {
+          if (value[end] !== '`') {
             end += 1;
             continue;
           }
-          if (value[end] === '(') {
-            depth += 1;
-          } else if (value[end] === ')') {
-            if (depth === 0) break;
+          let runEnd = end + 1;
+          while (value[runEnd] === '`') runEnd += 1;
+          if (runEnd - end === markerLength) return runEnd;
+          end = runEnd;
+        }
+        return null;
+      };
+      const readBalancedBracketEnd = (start) => {
+        if (value[start] !== '[') return null;
+        let depth = 0;
+        for (let index = start; index < value.length; index += 1) {
+          if (value[index] === '\\') {
+            index += 1;
+            continue;
+          }
+          const codeEnd = readCodeSpanEnd(index);
+          if (codeEnd !== null) {
+            index = codeEnd - 1;
+            continue;
+          }
+          if (value[index] === '[') depth += 1;
+          else if (value[index] === ']') {
             depth -= 1;
+            if (depth === 0) return index;
           }
         }
-        if (end < value.length) {
-          targets.push(value.slice(cursor + 2, end));
-          cursor = end;
+        return null;
+      };
+      const readBalancedParenthesisEnd = (start) => {
+        if (value[start] !== '(') return null;
+        let depth = 0;
+        for (let index = start; index < value.length; index += 1) {
+          if (value[index] === '\\') {
+            index += 1;
+            continue;
+          }
+          if (value[index] === '(') depth += 1;
+          else if (value[index] === ')') {
+            depth -= 1;
+            if (depth === 0) return index + 1;
+          }
+        }
+        return null;
+      };
+      const definitions = [];
+      const definitionKeys = new Set();
+      for (let lineStart = 0; lineStart < value.length;) {
+        let labelStart = lineStart;
+        while (labelStart < value.length && /[ \t]/u.test(value[labelStart])) labelStart += 1;
+        const labelEnd = readBalancedBracketEnd(labelStart);
+        if (labelStart - lineStart <= 3 && labelEnd !== null && value[labelEnd + 1] === ':') {
+          const key = normalizeReference(value.slice(labelStart + 1, labelEnd));
+          let targetStart = labelEnd + 2;
+          while (/[ \t]/u.test(value[targetStart] || '')) targetStart += 1;
+          let targetEnd = targetStart;
+          if (value[targetStart] === '<') {
+            targetEnd = targetStart + 1;
+            while (targetEnd < value.length && value[targetEnd] !== '>' && value[targetEnd] !== '\n') {
+              if (value[targetEnd] === '\\') targetEnd += 1;
+              targetEnd += 1;
+            }
+            if (value[targetEnd] === '>') targetEnd += 1;
+          } else if (value[targetStart] === '(') {
+            targetEnd = readBalancedParenthesisEnd(targetStart) ?? targetStart;
+          } else {
+            while (targetEnd < value.length && !/[ \t\n]/u.test(value[targetEnd])) targetEnd += 1;
+          }
+          if (key && targetEnd > targetStart && !definitionKeys.has(key)) {
+            definitions.push({ key, target: value.slice(targetStart, targetEnd) });
+            definitionKeys.add(key);
+          }
+        }
+        const nextLine = value.indexOf('\n', lineStart);
+        if (nextLine === -1) break;
+        lineStart = nextLine + 1;
+      }
+
+      const links = [];
+      const parseLinkAt = (start) => {
+        const labelStart = value[start] === '!' ? start + 1 : start;
+        if (value[labelStart] !== '[') return null;
+        const labelEnd = readBalancedBracketEnd(labelStart);
+        if (labelEnd === null) return null;
+        const label = value.slice(labelStart + 1, labelEnd);
+        const suffixStart = labelEnd + 1;
+        if (value[suffixStart] === '(') {
+          const end = readBalancedParenthesisEnd(suffixStart);
+          if (end === null) return null;
+          return { end, signature: `inline:${value.slice(suffixStart + 1, end - 1)}` };
+        }
+        if (value[suffixStart] === '[') {
+          const referenceEnd = readBalancedBracketEnd(suffixStart);
+          if (referenceEnd === null) return null;
+          const reference = value.slice(suffixStart + 1, referenceEnd);
+          return {
+            end: referenceEnd + 1,
+            signature: `reference:${normalizeReference(reference || label)}`,
+          };
+        }
+        const key = normalizeReference(label);
+        return {
+          end: labelEnd + 1,
+          signature: definitionKeys.has(key) ? `reference:${key}` : null,
+        };
+      };
+
+      for (let cursor = 0; cursor < value.length; cursor += 1) {
+        const codeEnd = readCodeSpanEnd(cursor);
+        if (codeEnd !== null) {
+          cursor = codeEnd - 1;
+          continue;
+        }
+        if (value[cursor] === '<') {
+          const end = value.indexOf('>', cursor + 1);
+          if (end !== -1) {
+            const target = value.slice(cursor + 1, end);
+            if (/^(?:[A-Za-z][A-Za-z0-9+.-]{1,31}:[^ <>]+|[^ <>@]+@[^ <>@]+)$/u.test(target)) {
+              links.push(`autolink:${target}`);
+              cursor = end;
+              continue;
+            }
+          }
+        }
+        if (value[cursor] !== '[' && value[cursor] !== '!') continue;
+        const parsed = parseLinkAt(cursor);
+        if (parsed !== null) {
+          if (parsed.signature !== null) links.push(parsed.signature);
+          cursor = parsed.end - 1;
         }
       }
-      return targets;
+      return { links, definitions };
     };
-    const sourceTargets = linkTargets(bodyText);
-    const joinedTargets = linkTargets(joined);
-    if (sourceTargets.length !== joinedTargets.length
-      || sourceTargets.some((target, index) => target !== joinedTargets[index])) {
+    const sourceLinkContract = markdownLinkContract(bodyText);
+    const joinedLinkContract = markdownLinkContract(joined);
+    if (JSON.stringify(sourceLinkContract) !== JSON.stringify(joinedLinkContract)) {
       return null;
     }
 

@@ -43,7 +43,7 @@ import {
 } from '../scripts/lib/free-mt-recovery.mjs';
 import { translatedStringOrNull, isSourcePassthrough, translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import { detectTruncation } from '../scripts/lib/article-factuality-gates.mjs';
-import { balanceMarkdownMarkers, codexCallDeadlineMs } from '../scripts/lib/free-translate.mjs';
+import { balanceMarkdownMarkers, codexCallDeadlineMs, lineStructuralSignature } from '../scripts/lib/free-translate.mjs';
 import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -61,6 +61,12 @@ const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {"
 const SPLIT_TRANSLATION_CHUNKS_SRC = extractFunctionSource(
   'function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {',
 );
+function buildChunker() {
+  return new Function(
+    'lineStructuralSignature',
+    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
+  )(lineStructuralSignature);
+}
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
   const start = src.indexOf('  async function translateInChunks(bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang) {');
   assert.notEqual(start, -1, 'translateInChunks non trovata in create-article.mjs');
@@ -697,11 +703,8 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
 });
 
 test('il chunker spezza anche un singolo paragrafo oltre il limite di parole', () => {
-  const makeChunker = new Function(
-    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
-  );
   const countWords = new Function(`${COUNT_WORDS_SRC}\nreturn countWords;`)();
-  const splitIntoTranslationChunks = makeChunker();
+  const splitIntoTranslationChunks = buildChunker();
   const source = Array.from({ length: 1_101 }, (_, index) => `parola${index}`).join(' ');
   const chunks = splitIntoTranslationChunks(source, 500);
 
@@ -715,10 +718,7 @@ test('il chunker spezza anche un singolo paragrafo oltre il limite di parole', (
 });
 
 test('il chunker protegge Markdown adiacente al testo e numeri con separatori Unicode', () => {
-  const makeChunker = new Function(
-    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
-  );
-  const splitIntoTranslationChunks = makeChunker();
+  const splitIntoTranslationChunks = buildChunker();
   const link = '[etichetta lunga](nav:calculator)';
   const numbers = ['12 345', '1\u202f234,56', "80'000"];
   const source = `testo${link} ${numbers[0]} lavoratori ${numbers[1]} euro e ${numbers[2]} franchi.`;
@@ -736,10 +736,7 @@ test('il chunker protegge Markdown adiacente al testo e numeri con separatori Un
 });
 
 test('il chunker protegge link, code e prefissi di lista e conserva i separatori Markdown', () => {
-  const makeChunker = new Function(
-    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
-  );
-  const splitIntoTranslationChunks = makeChunker();
+  const splitIntoTranslationChunks = buildChunker();
   const link = '[comparatore fiscale](nav:calculator)';
   const code = '`codice interno`';
   const source = [
@@ -788,10 +785,7 @@ test('il chunker protegge link, code e prefissi di lista e conserva i separatori
 });
 
 test('il chunker bilancia run di backtick, label nidificate e link reference', () => {
-  const makeChunker = new Function(
-    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
-  );
-  const splitIntoTranslationChunks = makeChunker();
+  const splitIntoTranslationChunks = buildChunker();
   const code = '``codice ``` interno``';
   const nestedLink = '[etichetta [nidificata]](https://example.test/percorso_(v2))';
   const referenceLink = '[riferimento [nidificato]][destinazione]';
@@ -809,10 +803,7 @@ test('il chunker bilancia run di backtick, label nidificate e link reference', (
 });
 
 test('il chunker protegge anche enfasi singole e rifiuta gli atomi protetti oversize prima dell’invio', () => {
-  const makeChunker = new Function(
-    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
-  );
-  const splitIntoTranslationChunks = makeChunker();
+  const splitIntoTranslationChunks = buildChunker();
   const shortSource = 'Prima *frase breve* dopo _altra prova_.';
   const shortChunks = splitIntoTranslationChunks(shortSource, 2);
   const rebuilt = shortChunks.reduce(
@@ -844,10 +835,7 @@ test('il chunker protegge anche enfasi singole e rifiuta gli atomi protetti over
 });
 
 test('il chunker mantiene intere le enfasi singole con delimitatori doppi annidati', () => {
-  const makeChunker = new Function(
-    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
-  );
-  const splitIntoTranslationChunks = makeChunker();
+  const splitIntoTranslationChunks = buildChunker();
   const nestedSpans = [
     '*prima **seconda** dopo*',
     '_prima __seconda__ dopo_',
@@ -869,10 +857,7 @@ test('il chunker mantiene intere le enfasi singole con delimitatori doppi annida
 });
 
 test('il chunker salta code span e link annidati prima di chiudere un’enfasi esterna', () => {
-  const makeChunker = new Function(
-    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
-  );
-  const splitIntoTranslationChunks = makeChunker();
+  const splitIntoTranslationChunks = buildChunker();
   const nestedSpan = '*testo `a * b` e [link *interno*](https://example.test) finale*';
   const source = `Prima ${nestedSpan} dopo.`;
   const chunks = splitIntoTranslationChunks(source, 8);
@@ -889,16 +874,16 @@ test('il chunker salta code span e link annidati prima di chiudere un’enfasi e
 });
 
 test('il chunker mantiene indentazione, marker e primo atomo strutturale nello stesso chunk', () => {
-  const makeChunker = new Function(
-    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
-  );
-  const splitIntoTranslationChunks = makeChunker();
+  const splitIntoTranslationChunks = buildChunker();
   const source = [
     'Introduzione breve',
     '  - prima voce elenco',
     '   > citazione breve',
     '> - primo elemento annidato',
     ' # heading finale',
+    '\t• prima voce tabulata',
+    '\t| prima cella tabulata',
+    '| prima cella tabella',
   ].join('\n');
   const chunks = splitIntoTranslationChunks(source, 2);
   const rebuilt = chunks.reduce(
@@ -911,17 +896,17 @@ test('il chunker mantiene indentazione, marker e primo atomo strutturale nello s
   assert.ok(chunks.some((chunk) => chunk.includes('   > citazione')));
   assert.ok(chunks.some((chunk) => chunk.includes('> - primo')));
   assert.ok(chunks.some((chunk) => chunk.includes(' # heading')));
+  assert.ok(chunks.some((chunk) => chunk.includes('\t• prima')));
+  assert.ok(chunks.some((chunk) => chunk.includes('\t| prima')));
+  assert.ok(chunks.some((chunk) => chunk.includes('| prima')));
   assert.ok(
-    chunks.every((chunk) => !/(^|\n)[ \t]{0,3}(?:[-+*]|\d+[.)]|#{1,6}|>)(?:[ \t]+(?:[-+*]|\d+[.)]|#{1,6}|>))*[ \t]*$/.test(chunk)),
+    chunks.every((chunk) => !/(^|\n)[ \t]{0,3}(?:[-+*•]|\d+[.)]|#{1,6}|>|\|)(?:[ \t]+(?:[-+*•]|\d+[.)]|#{1,6}|>|\|))*[ \t]*$/u.test(chunk)),
     'nessun marker strutturale deve restare orfano a fine chunk',
   );
 });
 
 test('il join della traduzione riusa i separatori sorgente invece di inventare paragrafi', async () => {
-  const makeChunker = new Function(
-    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
-  );
-  const realChunker = makeChunker();
+  const realChunker = buildChunker();
   const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
   const makeTranslator = new Function(
     'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers',
@@ -948,10 +933,7 @@ test('il join della traduzione riusa i separatori sorgente invece di inventare p
 });
 
 test('il joiner rifiuta un link Markdown alterato dopo la ricomposizione', async () => {
-  const makeChunker = new Function(
-    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
-  );
-  const realChunker = makeChunker();
+  const realChunker = buildChunker();
   const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
   const makeTranslator = new Function(
     'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers',
@@ -974,12 +956,48 @@ test('il joiner rifiuta un link Markdown alterato dopo la ricomposizione', async
   );
 });
 
+test('il joiner protegge reference link, definizioni e autolink', async () => {
+  const realChunker = buildChunker();
+  const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
+  const makeTranslator = (mutate) => {
+    const translateInChunks = new Function(
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers',
+      `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+    );
+    const translate = translateInChunks(
+      splitWithSmallTarget,
+      async (prompt) => ({ body1: mutate(prompt) }),
+      (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+      translatedStringOrNull,
+      () => false,
+      balanceMarkdownMarkers,
+    );
+    return (bodyText) => translate(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
+  };
+  const source = [
+    'Prima [link completo][destinazione] e [link collassato][] e <https://example.test/auto>.',
+    '',
+    '[destinazione]: https://example.test/destinazione',
+    '[link collassato]: https://example.test/collassato',
+  ].join('\n');
+
+  assert.equal(await makeTranslator((chunk) => chunk)(source), source);
+  for (const [label, mutate] of [
+    ['reference', (chunk) => chunk.replaceAll('[destinazione]', '[altra-destinazione]')],
+    ['definition', (chunk) => chunk.replace('https://example.test/destinazione', 'https://evil.example/destinazione')],
+    ['autolink', (chunk) => chunk.replace('<https://example.test/auto>', '<https://evil.example/auto>')],
+  ]) {
+    assert.equal(
+      await makeTranslator(mutate)(source),
+      null,
+      `${label} alterato dopo il join non deve passare il guard`,
+    );
+  }
+});
+
 test('il recovery missing-field usa il chunker per un body oversized', async () => {
-  const makeChunker = new Function(
-    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
-  );
   const countWords = new Function(`${COUNT_WORDS_SRC}\nreturn countWords;`)();
-  const splitIntoTranslationChunks = makeChunker();
+  const splitIntoTranslationChunks = buildChunker();
   const makeTranslator = new Function(
     'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers',
     `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
