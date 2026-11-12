@@ -2265,10 +2265,11 @@ async function main() {
       let forcedAt = null;
       if (guard.blocked) {
         initBlocked.push({ path: rel, why: guard.why, forceable: guard.forceable !== false });
-        // Con `--force` si scrive lo stesso, ma il blocco resta stampato: la
-        // conferma esplicita non deve rendere l'atto silenzioso. Senza, si
-        // salta QUESTA voce e basta: la sua baseline resta quella di prima e
-        // le altre vengono registrate lo stesso.
+        // Con `--force` si scrive lo stesso solo per i blocchi forceable, ma il
+        // blocco resta stampato: la conferma esplicita non deve rendere
+        // l'atto silenzioso. Una precondizione remota non forceable si salta
+        // sempre; la sua baseline resta quella di prima e le altre vengono
+        // registrate lo stesso.
         if (!FORCE || guard.forceable === false) continue;
         forcedAt = new Date().toISOString();
       }
