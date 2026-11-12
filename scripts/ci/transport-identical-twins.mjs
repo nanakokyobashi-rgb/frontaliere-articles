@@ -125,6 +125,7 @@ import { fileURLToPath } from 'node:url';
 import {
   classify,
   gitBlobSha,
+  remoteDigestPrecondition,
   resolveRelativeImport,
   siteFile,
 } from './loop-drift-check.mjs';
@@ -772,6 +773,20 @@ export function permanentBlock(entry, { outOfScopePrefixes = [], couplings = [],
 
 export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], couplings = [] } = {}) {
   const state = classify(entry, now, base).state;
+  // In `site-ahead` il digest remoto deve essere osservato, ma non puo' essere
+  // uguale al corpus: il punto del trasporto e' proprio copiare quel nuovo
+  // stato remoto sul lato ancora fermo alla baseline. `initWriteVerdict()`
+  // mantiene invece il confronto stretto quando registra la baseline.
+  const remote = remoteDigestPrecondition(entry, now, { requireCorpusMatch: state !== 'site-ahead' });
+  if (!remote.ok) {
+    return {
+      transport: false,
+      realign: false,
+      permanent: false,
+      state,
+      reason: remote.reason,
+    };
+  }
   // `both-moved-converged`: i due lati si sono mossi dalla baseline ma OGGI
   // coincidono byte per byte. Non c'è niente da copiare né da riconciliare,
   // solo una baseline da registrare: è l'`--init --only` che il drift check
