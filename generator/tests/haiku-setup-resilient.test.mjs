@@ -51,6 +51,27 @@ function callerStepBlock(src) {
   return next === -1 ? rest : rest.slice(0, next);
 }
 
+function namedStepBlock(src, name) {
+  const marker = `      - name: ${name}`;
+  const idx = src.indexOf(marker);
+  assert.ok(idx !== -1, `step non trovato: ${name}`);
+  const stepStart = src.lastIndexOf('\n      - name:', idx);
+  assert.ok(stepStart !== -1, `inizio dello step non trovato: ${name}`);
+  const next = src.indexOf('\n      - name:', idx + marker.length);
+  return src.slice(stepStart + 1, next === -1 ? undefined : next);
+}
+
+// `generate-article.yml` dichiara questi tre upload come telemetria best-effort:
+// ciascun blocco letto sopra ha una sola `continue-on-error: true`, mentre
+// l'artifact di recupero dell'articolo resta fail-closed. La lista resta
+// esplicita: aggiungere un altro assorbitore richiede una decisione e una nuova
+// asserzione, non passa in silenzio dal conteggio globale.
+const BEST_EFFORT_REPORT_STEPS = [
+  'Upload provider preflight report',
+  'Upload topic candidate feed report',
+  'Upload wedge diagnostics (stack, report, log del tentativo)',
+];
+
 test('generate-article: lo step che invoca setup-claude-haiku-fallback ha continue-on-error', () => {
   const step = callerStepBlock(GA);
   assert.match(
@@ -85,8 +106,9 @@ test('generate-article: continue-on-error non è finito, per errore, sull\'inter
   // Non basta cercare la chiave a colonna 0 (lì non può stare in un workflow):
   // un flag a livello di job vive a 4 spazi sotto `generate:` e renderebbe
   // verde il job anche su un fallimento reale della generazione. L'invariante
-  // vera è: le occorrenze stanno nello step Haiku oppure nel cleanup broker
-  // esplicitamente best-effort; nessun altro step può assorbire la generazione.
+  // vera è: le occorrenze stanno nello step Haiku, nel cleanup broker o nei
+  // tre upload diagnostici esplicitamente best-effort; nessun altro step può
+  // assorbire la generazione.
   const step = callerStepBlock(GA);
   const inStep = (step.match(/continue-on-error:/g) ?? []).length;
   const total = (GA.match(/continue-on-error:/g) ?? []).length;
@@ -94,13 +116,28 @@ test('generate-article: continue-on-error non è finito, per errore, sull\'inter
     /- name: Cleanup Codex auth broker[\s\S]*?(?=\n      - name:|$)/,
   )?.[0] ?? '';
   const inCleanup = (cleanup.match(/continue-on-error:/g) ?? []).length;
+  const inReports = BEST_EFFORT_REPORT_STEPS.reduce((count, name) => {
+    const reportStep = namedStepBlock(GA, name);
+    const occurrences = (reportStep.match(/continue-on-error:/g) ?? []).length;
+    assert.equal(
+      occurrences,
+      1,
+      `${name} deve avere esattamente un \`continue-on-error\` best-effort`,
+    );
+    assert.match(
+      reportStep,
+      /continue-on-error:\s*true/,
+      `${name} deve mantenere \`continue-on-error: true\``,
+    );
+    return count + occurrences;
+  }, 0);
   assert.equal(inStep, 1, 'lo step chiamante di Haiku deve avere esattamente un `continue-on-error`');
   assert.equal(inCleanup, 1, 'il cleanup broker deve essere best-effort esattamente una volta');
   assert.equal(
     total,
-    inStep + inCleanup,
-    'C\'è un `continue-on-error` fuori dagli step Haiku e cleanup broker (a livello di job, o su ' +
-      'un altro step): renderebbe verdi fallimenti reali. Se un altro step lo acquisisce di ' +
-      'proposito, aggiorna questo test dichiarandolo.',
+    inStep + inCleanup + inReports,
+    'C\'è un `continue-on-error` fuori dagli step Haiku, cleanup broker e upload diagnostici ' +
+      'approvati (a livello di job, o su un altro step): renderebbe verdi fallimenti reali. ' +
+      'Se un altro step lo acquisisce di proposito, aggiorna questo test dichiarandolo.',
   );
 });
