@@ -61,6 +61,13 @@ const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {"
 const SPLIT_TRANSLATION_CHUNKS_SRC = extractFunctionSource(
   'function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {',
 );
+const TRANSLATE_IN_CHUNKS_SRC = (() => {
+  const start = src.indexOf('  async function translateInChunks(bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang) {');
+  assert.notEqual(start, -1, 'translateInChunks non trovata in create-article.mjs');
+  const end = src.indexOf('\n  }\n', start);
+  assert.notEqual(end, -1, 'fine di translateInChunks non trovata in create-article.mjs');
+  return src.slice(start, end + 4);
+})();
 
 const IT_BODY = {
   body1: 'Il contributo sanitario di settembre cambia per i frontalieri del Ticino. La nuova aliquota vale da subito e riguarda chi lavora in Svizzera.',
@@ -680,7 +687,68 @@ test('il chunker spezza anche un singolo paragrafo oltre il limite di parole', (
 
   assert.deepEqual(chunks.map(countWords), [500, 500, 101]);
   assert.ok(chunks.every((chunk) => countWords(chunk) <= 500));
-  assert.equal(chunks.join('\n\n').replace(/\s+/g, ' '), source);
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+  assert.equal(rebuilt, source);
+});
+
+test('il chunker protegge link, code e prefissi di lista e conserva i separatori Markdown', () => {
+  const makeChunker = new Function(
+    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
+  );
+  const splitIntoTranslationChunks = makeChunker();
+  const link = '[comparatore fiscale](nav:calculator)';
+  const code = '`codice interno`';
+  const source = [
+    `- prima voce ${link} e ${code} resta nella lista`,
+    '- seconda voce con altre parole da spezzare ancora oggi',
+    '',
+    'Paragrafo finale con altre parole da spezzare.',
+  ].join('\n');
+  const chunks = splitIntoTranslationChunks(source, 3);
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, source, 'i separatori originali devono ricostruire la sorgente');
+  assert.ok(chunks.some((chunk) => chunk.includes(link)), 'il link deve restare intero in un solo chunk');
+  assert.ok(chunks.every((chunk) => !chunk.includes('[comparatore') || chunk.includes(link)));
+  assert.ok(chunks.some((chunk) => chunk.includes(code)), 'il code span deve restare intero in un solo chunk');
+  assert.ok(chunks.every((chunk) => !/(^|\n)\s*[-+*]\s*$/.test(chunk)), 'un marker di lista non deve restare orfano');
+  assert.ok(chunks.separators.includes(' '), 'un taglio interno deve conservare lo spazio sorgente');
+  assert.ok(chunks.separators.some((separator) => separator.includes('\n\n')), 'il confine di paragrafo deve restare distinto');
+});
+
+test('il join della traduzione riusa i separatori sorgente invece di inventare paragrafi', async () => {
+  const makeChunker = new Function(
+    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
+  );
+  const realChunker = makeChunker();
+  const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
+  const makeTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  );
+  const translateInChunks = makeTranslator(
+    splitWithSmallTarget,
+    async (prompt) => ({ body1: prompt }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+  );
+  const source = [
+    '- prima voce [comparatore fiscale](nav:calculator) e `codice interno` resta nella lista',
+    '- seconda voce con altre parole da spezzare ancora oggi',
+    '',
+    'Paragrafo finale con altre parole da spezzare.',
+  ].join('\n');
+
+  const translated = await translateInChunks(source, 'body1', (chunk) => chunk, 'test', 'de');
+
+  assert.equal(translated, source, 'un traduttore che conserva i chunk non deve cambiare la struttura Markdown');
 });
 
 test('se il circuit breaker apre Codex dopo la selezione, la lane passa alla catena storica', async () => {

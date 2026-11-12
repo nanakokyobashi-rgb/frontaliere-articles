@@ -378,7 +378,6 @@ import {
   translateFieldFreeMt,
   translatedStringOrNull,
   isSourcePassthrough,
-  joinTranslatedChunks,
   ensureMunicipalityNames,
 } from './lib/article-free-mt.mjs';
 import {
@@ -14267,47 +14266,115 @@ const TRANSLATION_CHUNK_THRESHOLD = 700;
 // This is shared by the initial translation and both retry paths, so every
 // route keeps the same per-call output-cap safety net.
 function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
-  function splitOversizedParagraph(paragraph) {
-    // Keep the original whitespace inside each piece (including single line
-    // breaks used by Markdown). A split is inserted only at a whitespace
-    // boundary; the caller joins pieces with a paragraph break, which is the
-    // same separator already used between source paragraphs.
-    const tokens = String(paragraph).match(/\S+|\s+/g) || [];
-    const paragraphChunks = [];
-    let paragraphChunk = '';
-    let paragraphWords = 0;
+  const chunks = [];
+  const separators = [];
+  const source = String(bodyText || '');
+  const pieces = [];
+  let pendingSeparator = '';
 
-    const appendToken = (token) => {
-      if (/^\s+$/.test(token)) {
-        paragraphChunk += token;
-        return;
-      }
-      const tokenWords = countWords(token);
-      if (paragraphChunk && tokenWords > 0 && paragraphWords + tokenWords > chunkTarget) {
-        paragraphChunks.push(paragraphChunk.trimEnd());
-        paragraphChunk = '';
-        paragraphWords = 0;
-      }
-      paragraphChunk += token;
-      paragraphWords += tokenWords;
-    };
-
-    for (const token of tokens) {
-      // A normal non-whitespace token is one word for countWords(). The
-      // fallback keeps the invariant true for pathological tokens containing
-      // hundreds of Markdown separators without splitting ordinary URLs or
-      // hyphenated links at an arbitrary chunk boundary.
-      const tokenParts = countWords(token) > chunkTarget
-        ? token.split(/([#>*`_~\-]+)/).filter(Boolean)
-        : [token];
-      for (const part of tokenParts) appendToken(part);
-    }
-    if (paragraphChunk.trim()) paragraphChunks.push(paragraphChunk.trimEnd());
-    return paragraphChunks;
+  function readCodeSpanEnd(text, start) {
+    if (text[start] !== '`') return null;
+    let markerLength = 0;
+    while (text[start + markerLength] === '`') markerLength += 1;
+    const marker = '`'.repeat(markerLength);
+    const end = text.indexOf(marker, start + markerLength);
+    return end === -1 ? null : end + markerLength;
   }
 
-  const paragraphs = (bodyText || '').split(/\n\n+/);
-  const chunks = [];
+  function readLinkEnd(text, start) {
+    const bracketStart = text[start] === '!' ? start + 1 : start;
+    if (text[bracketStart] !== '[') return null;
+    let labelEnd = bracketStart + 1;
+    while (labelEnd < text.length) {
+      if (text[labelEnd] === '\\') {
+        labelEnd += 2;
+        continue;
+      }
+      if (text[labelEnd] === ']') break;
+      labelEnd += 1;
+    }
+    if (text[labelEnd] !== ']' || text[labelEnd + 1] !== '(') return null;
+    let depth = 0;
+    for (let index = labelEnd + 1; index < text.length; index += 1) {
+      if (text[index] === '\\') {
+        index += 1;
+        continue;
+      }
+      if (text[index] === '(') depth += 1;
+      if (text[index] !== ')') continue;
+      depth -= 1;
+      if (depth === 0) return index + 1;
+    }
+    return null;
+  }
+
+  function readDelimitedSpanEnd(text, start, marker) {
+    if (!text.startsWith(marker, start)) return null;
+    const end = text.indexOf(marker, start + marker.length);
+    return end === -1 ? null : end + marker.length;
+  }
+
+  function readPlainAtomEnd(text, start) {
+    let end = start;
+    while (end < text.length && !/\s/.test(text[end])) end += 1;
+    return end;
+  }
+
+  function readProtectedMarkdownEnd(text, start) {
+    const codeEnd = readCodeSpanEnd(text, start);
+    if (codeEnd !== null) return codeEnd;
+    const linkEnd = readLinkEnd(text, start);
+    if (linkEnd !== null) return linkEnd;
+    for (const marker of ['**', '__', '~~']) {
+      const delimitedEnd = readDelimitedSpanEnd(text, start, marker);
+      if (delimitedEnd !== null) return delimitedEnd;
+    }
+    return null;
+  }
+
+  function readMarkdownAtomEnd(text, start) {
+    return readProtectedMarkdownEnd(text, start) ?? readPlainAtomEnd(text, start);
+  }
+
+  function readStructuredLineAtomEnd(text, start) {
+    if (start > 0 && text[start - 1] !== '\n') return null;
+    const prefix = text.slice(start).match(/^(?: {0,3}(?:[-+*]|\d+[.)]|#{1,6}|>)[ \t]+)/);
+    if (!prefix) return null;
+    const contentStart = start + prefix[0].length;
+    if (contentStart >= text.length || /\s/.test(text[contentStart])) return contentStart;
+    return readMarkdownAtomEnd(text, contentStart);
+  }
+
+  let index = 0;
+  while (index < source.length) {
+    if (/\s/.test(source[index])) {
+      const separatorStart = index;
+      while (index < source.length && /\s/.test(source[index])) index += 1;
+      pendingSeparator += source.slice(separatorStart, index);
+      continue;
+    }
+
+    const atomStart = index;
+    const structuredEnd = readStructuredLineAtomEnd(source, index);
+    const protectedEnd = structuredEnd === null ? readProtectedMarkdownEnd(source, index) : null;
+    index = structuredEnd ?? readMarkdownAtomEnd(source, index);
+    if (index <= atomStart) index = atomStart + 1;
+    const atomText = source.slice(atomStart, index);
+    const atomParts = !structuredEnd
+      && protectedEnd === null
+      && countWords(atomText) > chunkTarget
+      ? atomText.split(/([#>*`_~\-]+)/).filter(Boolean)
+      : [atomText];
+    for (const [partIndex, part] of atomParts.entries()) {
+      pieces.push({
+        text: part,
+        words: countWords(part),
+        separatorBefore: pieces.length === 0 || partIndex > 0 ? '' : pendingSeparator,
+      });
+    }
+    pendingSeparator = '';
+  }
+
   let currentChunk = '';
   let currentWords = 0;
   const flushCurrent = () => {
@@ -14317,25 +14384,20 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     currentWords = 0;
   };
 
-  for (const p of paragraphs) {
-    const paragraphChunks = countWords(p) > chunkTarget
-      ? splitOversizedParagraph(p)
-      : [p];
-
-    // Once a paragraph needs internal cuts, keep each resulting piece as its
-    // own model input. This avoids carrying a preceding paragraph into the
-    // first slice and makes the word cap obvious for every request.
-    if (paragraphChunks.length > 1) flushCurrent();
-
-    for (const paragraphChunk of paragraphChunks) {
-      const pWords = countWords(paragraphChunk);
-      if (currentWords + pWords > chunkTarget && currentChunk) flushCurrent();
-      currentChunk += (currentChunk ? '\n\n' : '') + paragraphChunk;
-      currentWords += pWords;
-      if (paragraphChunks.length > 1) flushCurrent();
+  for (const piece of pieces) {
+    if (currentChunk && currentWords + piece.words > chunkTarget) {
+      flushCurrent();
+      separators.push(piece.separatorBefore);
     }
+    currentChunk += (currentChunk ? piece.separatorBefore : '') + piece.text;
+    currentWords += piece.words;
   }
   flushCurrent();
+
+  // The array stays a string[] for every existing caller, while this metadata
+  // lets the joiner distinguish an internal word-boundary cut (' ') from an
+  // original Markdown paragraph/list break ('\n' or '\n\n').
+  Object.defineProperty(chunks, 'separators', { value: separators });
   return chunks;
 }
 
@@ -15132,8 +15194,20 @@ async function translateArticle(data) {
     );
     // `chunks` passati al join: un chunk tornato identico al suo italiano
     // rende nullo l'intero campo (`isSourcePassthrough`, #1875), come un chunk
-    // non-stringa.
-    return joinTranslatedChunks(translated, fieldKey, targetLang, chunks);
+    // non-stringa. I confini sono quelli della sorgente: una divisione dentro
+    // un paragrafo non deve diventare un nuovo paragrafo Markdown.
+    if (!Array.isArray(translated) || translated.length === 0) return null;
+    const parts = [];
+    for (const [index, result] of translated.entries()) {
+      const part = translatedStringOrNull(result?.[fieldKey], targetLang);
+      if (part === null || isSourcePassthrough(part, chunks[index])) return null;
+      parts.push(part);
+    }
+    const separators = chunks.separators || [];
+    return parts.reduce(
+      (joined, part, index) => joined + (index === 0 ? '' : separators[index - 1] ?? '\n\n') + part,
+      '',
+    );
   }
 
   async function translateContent(sourceLang, targetLang, targetLabel, sourceContent) {
