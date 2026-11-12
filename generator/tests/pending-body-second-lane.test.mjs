@@ -499,6 +499,15 @@ test('il body ricade sulla catena storica solo se il budget o il breaker fermano
   assert.equal(breakerStopped.translated, 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.');
   assert.deepEqual(breakerStopped.counts, { admissionAttempts: 1, codexCalls: 1, historicalCalls: 1 });
   assert.equal(breakerStopped.availabilityChecks, 2);
+
+  const breakerStoppedAfterTransportFailure = await runScenario({
+    modelAvailable: (check) => check === 1,
+    admissionDecision: (_attempt, admission) => admission,
+    translateWithCodexEngine: async () => { throw new Error('il trasporto apre il breaker Codex'); },
+  });
+  assert.equal(breakerStoppedAfterTransportFailure.translated, 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.');
+  assert.deepEqual(breakerStoppedAfterTransportFailure.counts, { admissionAttempts: 1, codexCalls: 1, historicalCalls: 1 });
+  assert.equal(breakerStoppedAfterTransportFailure.availabilityChecks, 2);
 });
 
 test('output non valido o errore non classificato come breaker non attiva la catena storica', async () => {

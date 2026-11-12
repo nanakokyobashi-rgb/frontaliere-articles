@@ -426,7 +426,11 @@ test('④ la seconda corsia ammette ogni segmento Codex fisico', () => {
     /run: async \(\{ deadlineMs: laneDeadlineMs, admission, admitCall, reserveTransportRetry \}\)/,
     'la recovery pending deve ricevere l ammettitore per le chiamate multiple',
   );
-  assert.match(pending, /const callAdmission = admitCall\(\);/);
+  assert.match(
+    pending,
+    /const codexModelAvailable = isModelAvailable\(codex\);[\s\S]*const callAdmission = codexModelAvailable \? admitCall\(\) : null;/,
+    'ogni segmento deve rivalutare il breaker Codex prima di riservare budget',
+  );
   assert.match(pending, /const callDeadlineMs = callAdmission === admission/);
   assert.match(pending, /call: callForDeadline\(callDeadlineMs\)/);
   assert.match(pending, /callAdmission\.finish\(\);/);
