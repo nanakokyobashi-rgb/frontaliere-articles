@@ -169,7 +169,13 @@ export const BUDGET_WINDOW_HOURS = 24;
 export const CORE_WORKFLOW_PATH = '.github/workflows/generate-article-core.yml';
 
 /** I chiamanti cantonali: `generate-article-<codice-minuscolo>.yml`. */
-export const CANTON_WORKFLOW_PATH_RE = /^\.github\/workflows\/generate-article-[a-z0-9]+\.yml$/;
+export const CANTON_WORKFLOW_PATH_RE = /^\.github\/workflows\/generate-article-[a-z0-9]+\.yml(?:@.+)?$/;
+
+/** Il path REST puo' avere un ref dopo `@`; il nome del workflow resta prima. */
+function workflowPathWithoutRef(path) {
+  const separator = path.indexOf('@');
+  return separator === -1 ? path : path.slice(0, separator);
+}
 
 /** Remote Config e' stato caricato in questo job? */
 export function remoteConfigLoaded(env = process.env) {
@@ -215,7 +221,7 @@ export function countSectionArticles(subjects, section) {
 export function olderCantonRuns(runs, selfId) {
   const me = Number(selfId);
   const canton = (runs || []).filter((r) => r && typeof r.path === 'string'
-    && r.path !== CORE_WORKFLOW_PATH && CANTON_WORKFLOW_PATH_RE.test(r.path));
+    && workflowPathWithoutRef(r.path) !== CORE_WORKFLOW_PATH && CANTON_WORKFLOW_PATH_RE.test(r.path));
   const self = canton.find((r) => Number(r.id) === me);
   const others = canton.filter((r) => Number(r.id) !== me);
   if (!self) {

@@ -239,12 +239,15 @@ test('tetto globale: contano solo i chiamanti cantonali piu\' vecchi di questa r
     run(91, 'generate-article-be.yml', '2026-10-05T10:00:10Z'), // stesso secondo, id minore
     run(101, 'generate-article-zh.yml', '2026-10-05T10:00:10Z'), // stesso secondo, id maggiore
     run(102, 'generate-article-vd.yml', '2026-10-05T10:00:20Z'), // piu' giovane
+    run(103, 'generate-article-lu.yml@refs/heads/main', '2026-10-05T09:30:00Z'), // path REST con ref
     run(80, 'generate-article.yml', '2026-10-05T09:00:00Z'), // frontaliere/svizzera: non e' un cantone
     run(81, 'generate-article-core.yml', '2026-10-05T09:00:00Z'), // il riusabile non ha run sue
-    run(82, 'publish-api.yml', '2026-10-05T09:00:00Z'),
+    run(82, 'generate-article-core.yml@refs/heads/main', '2026-10-05T09:00:00Z'), // anche il path REST del riusabile puo' avere un ref
+    run(83, 'publish-api.yml', '2026-10-05T09:00:00Z'),
   ];
-  assert.deepEqual(olderCantonRuns(runs, 100), { older: 2, total: 4, selfSeen: true });
+  assert.deepEqual(olderCantonRuns(runs, 100), { older: 3, total: 5, selfSeen: true });
   assert.equal(CANTON_WORKFLOW_PATH_RE.test(CORE_WORKFLOW_PATH), true, 'la regex da sola prenderebbe anche il core: va escluso per nome');
+  assert.match('.github/workflows/generate-article-ti.yml@refs/heads/main', CANTON_WORKFLOW_PATH_RE);
   for (const c of PROFILES.cantons) {
     assert.match(`.github/workflows/${callerWorkflowFile(c.code)}`, CANTON_WORKFLOW_PATH_RE, c.code);
   }
