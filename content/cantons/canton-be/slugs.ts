@@ -30,6 +30,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'procedure-impianti-solari-eolici': { it: 'procedure-impianti-solari-eolici', en: 'solar-wind-plant-procedures', de: 'verfahren-solare-windanlagen', fr: 'procedures-installations-solaires' },
  'revisione-legge-personale-berna': { it: 'revisione-legge-personale-berna', en: 'bern-personnel-law-consultation', de: 'bern-personalgesetz-vernehmlassung', fr: 'berne-loi-personnel-consultation' },
  'consiglio-stato-approva-pratiche': { it: 'consiglio-stato-approva-pratiche', en: 'cantonal-council-approves-measures', de: 'staatsrat-genehmigt-massnahmen', fr: 'conseil-etat-approuve-mesures' },
+ 'bienne-corrieri-salariati-2026': { it: 'bienne-corrieri-salariati-2026', en: 'biel-salaried-couriers-2026', de: 'biel-angestellte-kuriere-2026', fr: 'bienne-coursiers-salaries-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

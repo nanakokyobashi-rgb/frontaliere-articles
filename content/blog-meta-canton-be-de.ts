@@ -84,6 +84,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.consiglio-stato-approva-pratiche.title': 'Staatsrat genehmigt Unterstützung für AfA, Ernennung und Revision der AFV',
     'blog.article.consiglio-stato-approva-pratiche.excerpt': 'Der Staatsrat hat CHF 360\'000 für die AfA (2026-2028), die Ernennung von Sabine Dändliker (ab 1. April 2027) und die Teilrevision des Polizeigesetzes (AFV) genehmigt.',
     'blog.article.consiglio-stato-approva-pratiche.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.bienne-corrieri-salariati-2026.title': 'Biel: Alle angestellten Kuriere gestrichen',
+    'blog.article.bienne-corrieri-salariati-2026.excerpt': 'Die am 11. November 2026 um 05:55 Uhr veröffentlichte Schlagzeile kündigt in Biel die Streichung aller angestellten Kuriere von Just Eat an.',
+    'blog.article.bienne-corrieri-salariati-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;

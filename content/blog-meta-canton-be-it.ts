@@ -84,6 +84,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.consiglio-stato-approva-pratiche.title': 'Consiglio di Stato approva sostegno AfA, nomina e revisione AFV',
     'blog.article.consiglio-stato-approva-pratiche.excerpt': 'Il Consiglio di Stato ha approvato CHF 360\'000 per l\'AfA (2026-2028), la nomina di Sabine Dändliker (dal 1° aprile 2027) e la revisione parziale del Polizeigesetz (AFV).',
     'blog.article.consiglio-stato-approva-pratiche.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.bienne-corrieri-salariati-2026.title': 'Bienne: soppressi tutti i corrieri salariati',
+    'blog.article.bienne-corrieri-salariati-2026.excerpt': 'Il titolo pubblicato l\'11 novembre 2026 alle 05:55 annuncia a Bienne la soppressione di tutti i corrieri salariati di Just Eat.',
+    'blog.article.bienne-corrieri-salariati-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBeIt;
