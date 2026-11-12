@@ -14745,6 +14745,14 @@ async function translatePendingBodyWithCodex(
         fieldType: 'description',
         fieldName: field,
         translate: async ({ text: masked, sourceLang, targetLang, fieldType }) => {
+          // `admitCall` contabilizza il budget, ma la disponibilita' puo'
+          // cambiare mentre la richiesta aspetta in coda. Ricontrolla prima
+          // di riservare ogni chiamata fisica: il breaker aperto deve fermare
+          // la lane e lasciare partire il fallback storico.
+          if (!isModelAvailable(codex)) {
+            codexAdmissionStopped = true;
+            throw new Error('modello Codex non disponibile prima della chiamata fisica');
+          }
           const callAdmission = admitCall();
           if (!callAdmission) {
             codexAdmissionStopped = true;
@@ -14773,10 +14781,13 @@ async function translatePendingBodyWithCodex(
         onWarn: (msg) => console.error(`  ⚠️  [seconda corsia] ${msg}`),
         onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
       });
-      if (!text && codexAdmissionStopped && typeof callWithRetry === 'function') {
+      if (!text
+        && (codexAdmissionStopped || !isModelAvailable(codex))
+        && typeof callWithRetry === 'function') {
         // `translateFieldFreeMt` cattura lo stop della cascata segmentata e
         // restituisce un campo vuoto. Se la lane si e' fermata dopo una
-        // admission gia' concessa, riprova lo stesso body sulla catena storica.
+        // admission gia' concessa, oppure il breaker si e' aperto durante la
+        // chiamata fisica, riprova lo stesso body sulla catena storica.
         return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry });
       }
       if (!text && rejected.length > 0) {

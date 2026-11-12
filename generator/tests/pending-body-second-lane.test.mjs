@@ -411,7 +411,7 @@ test('se la lane si arresta tra due segmenti, il body intero passa alla catena s
   const factory = new Function(
     'AI_MODELS', '_pendingBodyCodexDeadlineMs', 'CODEX_TRANSLATE_TRANSPORT_RETRIES',
     'withCodexTranslationLane', 'codexCallDeadlineMs', '_aiCallLLM', 'translateWithCodexEngine',
-    'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'console',
+    'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'isModelAvailable', 'console',
     `${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
   );
   const processDeadlineMs = Date.now() + 300_000;
@@ -451,6 +451,7 @@ test('se la lane si arresta tra due segmenti, il body intero passa alla catena s
     translateFieldFreeMt,
     (text) => text,
     translatePendingBodyWithHistoricalChain,
+    () => true,
     { error() {}, warn() {}, log() {} },
   );
   const source = [
@@ -466,5 +467,71 @@ test('se la lane si arresta tra due segmenti, il body intero passa alla catena s
   assert.equal(translated, expected);
   assert.equal(codexCalls, 1);
   assert.equal(admissionAttempts, 2);
+  assert.equal(historicalCalls, 1);
+});
+
+test('se il circuit breaker apre Codex dopo la selezione, la lane passa alla catena storica', async () => {
+  const at = src.indexOf('async function translatePendingBodyWithCodex(');
+  assert.notEqual(at, -1, 'translatePendingBodyWithCodex non trovata');
+  const end = src.indexOf('\n}\n', at) + 2;
+  const factory = new Function(
+    'AI_MODELS', '_pendingBodyCodexDeadlineMs', 'CODEX_TRANSLATE_TRANSPORT_RETRIES',
+    'withCodexTranslationLane', 'codexCallDeadlineMs', '_aiCallLLM', 'translateWithCodexEngine',
+    'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'isModelAvailable', 'console',
+    `${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
+  );
+  const processDeadlineMs = Date.now() + 300_000;
+  const admission = { deadlineMs: processDeadlineMs, finish() {} };
+  let admissionAttempts = 0;
+  let codexCalls = 0;
+  let historicalCalls = 0;
+  const withCodexTranslationLane = ({ run }) => run({
+    deadlineMs: processDeadlineMs,
+    admission,
+    admitCall: () => {
+      admissionAttempts += 1;
+      return admission;
+    },
+    reserveTransportRetry: () => false,
+  });
+  const expected = 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.';
+  const translatePendingBodyWithHistoricalChain = async (itValue, locale, field, { callWithRetry }) => {
+    historicalCalls += 1;
+    assert.ok(itValue.includes('## In breve'));
+    assert.equal(locale, 'de');
+    assert.equal(field, 'body1');
+    assert.equal(typeof callWithRetry, 'function');
+    return expected;
+  };
+  const translatePendingBodyWithCodex = factory(
+    { CODEX_CLI_PRIMARY: 'codex-cli/test' },
+    processDeadlineMs,
+    2,
+    withCodexTranslationLane,
+    codexCallDeadlineMs,
+    () => { throw new Error('il test non deve arrivare al trasporto reale'); },
+    async () => {
+      codexCalls += 1;
+      throw new Error('circuit breaker Codex aperto dopo la selezione');
+    },
+    translateFieldFreeMt,
+    (text) => text,
+    translatePendingBodyWithHistoricalChain,
+    () => false,
+    { error() {}, warn() {}, log() {} },
+  );
+  const source = [
+    'Il primo paragrafo contiene contesto sufficiente e viene tradotto dopo la selezione della corsia Codex.',
+    '',
+    '## In breve',
+    '',
+    'Il breaker rende Codex indisponibile prima della chiamata fisica.',
+  ].join('\n');
+
+  const translated = await translatePendingBodyWithCodex(source, 'de', 'body1', { callWithRetry: async () => ({}) });
+
+  assert.equal(translated, expected);
+  assert.equal(admissionAttempts, 0);
+  assert.equal(codexCalls, 0);
   assert.equal(historicalCalls, 1);
 });
