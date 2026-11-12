@@ -14621,7 +14621,7 @@ Rispondi con un JSON object (no markdown, no code fences):
 {"${field}": "..."}`;
 }
 
-function buildPendingBodyRetranslationPrompt({ langName, field, itValue }) {
+function buildPendingBodyRetranslationPrompt({ langName, field, itValue, partLabel = '' }) {
   return `Traduci COMPLETAMENTE in ${langName} il seguente corpo dell'articolo per il sito Frontaliere Ticino.
 
 VINCOLI OBBLIGATORI:
@@ -14631,7 +14631,7 @@ VINCOLI OBBLIGATORI:
 - non aggiungere spiegazioni, prefissi o code fences.
 
 CONTENUTO ITALIANO DA TRADURRE:
-- ${field}: ${itValue}
+- ${field}${partLabel}: ${itValue}
 
 Rispondi con un JSON object (no markdown, no code fences):
 {"${field}": "..."}`;
@@ -14673,7 +14673,13 @@ let _pendingBodyCodexDeadlineMs = null;
 let _pendingBodySecondLaneArmed = false;
 
 function pendingBodySecondLaneAvailable() {
+  // `isModelAvailable` only proves that the Codex configuration is present;
+  // the lane wrapper also refuses a missing broker socket. Keep selection and
+  // wrapper fallback on the same physical precondition.
+  const brokerSocket = String(process.env.CODEX_AUTH_BROKER_SOCKET || '').trim();
   return _pendingBodySecondLaneArmed
+    && brokerSocket !== ''
+    && existsSync(brokerSocket)
     && !getCascadeStats().codexTranslation?.stopReason
     && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY);
 }
@@ -14691,7 +14697,7 @@ async function translatePendingBodyWithCodex(
   itValue,
   locale,
   field,
-  { onCodexCall = null, callWithRetry = null } = {},
+  { onCodexCall = null, callWithRetry = null, translateInChunks = null } = {},
 ) {
   const codex = AI_MODELS.CODEX_CLI_PRIMARY;
   const codexDeadlineOptions = (deadlineMs) => ({
@@ -14705,7 +14711,7 @@ async function translatePendingBodyWithCodex(
       // Il fallback storico è ammesso solo se il predicato condiviso prova che
       // la corsia è ferma, anche quando il modello risulta ancora disponibile.
       if (!pendingBodySecondLaneAvailable() && typeof callWithRetry === 'function') {
-        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry });
+        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks });
       }
       throw new Error('lane Codex fermata senza prova di indisponibilità del modello');
     },
@@ -14790,7 +14796,7 @@ async function translatePendingBodyWithCodex(
         // `translateFieldFreeMt` cattura lo stop della cascata segmentata e
         // restituisce un campo vuoto. Riprova lo stesso body sulla catena
         // storica solo se il breaker ha provato l'indisponibilità di Codex.
-        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry });
+        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks });
       }
       if (!text && rejected.length > 0) {
         console.error(`  ⚠️  [seconda corsia] ${locale}:${field} rifiutato da translateFieldFreeMt (${rejected.join(', ')})`);
@@ -14810,7 +14816,7 @@ async function translatePendingBodyWithHistoricalChain(
   itValue,
   locale,
   field,
-  { callWithRetry } = {},
+  { callWithRetry, translateInChunks = null } = {},
 ) {
   if (typeof callWithRetry !== 'function') {
     throw new TypeError('translatePendingBodyWithHistoricalChain: `callWithRetry` è richiesto');
@@ -14824,13 +14830,32 @@ async function translatePendingBodyWithHistoricalChain(
     fieldType: 'description',
     fieldName: field,
     translate: async ({ text: masked }) => {
+      if (typeof translateInChunks === 'function'
+        && countWords(masked || '') > TRANSLATION_CHUNK_THRESHOLD) {
+        // Reuse the same chunker as the legacy translation and truncation
+        // paths: the historical fallback must not send an oversized body in
+        // one request after Codex has stopped.
+        const chunked = await translateInChunks(
+          masked,
+          field,
+          (chunk, i, total) => buildPendingBodyRetranslationPrompt({
+            langName,
+            field,
+            itValue: chunk,
+            partLabel: total > 1 ? `, parte ${i + 1} di ${total}` : '',
+          }),
+          `${locale}:${field}-pending-retry`,
+          locale,
+        );
+        return chunked;
+      }
       const parsed = await callWithRetry(
         buildPendingBodyRetranslationPrompt({
           langName,
           field,
           itValue: masked,
         }),
-        Math.max(5000, Math.ceil(countWords(itValue || '') * 5)),
+        Math.max(5000, Math.ceil(countWords(masked || '') * 5)),
         `${locale}:${field}-pending-retry`,
         { translation: true },
       );
@@ -15763,13 +15788,14 @@ ${localizedToponymInstruction(targetLang)}`;
         {
           onCodexCall: () => { translationRecoveryCodexCalls += 1; },
           callWithRetry,
+          translateInChunks,
         },
       )
       : translatePendingBodyWithHistoricalChain(
         itValue,
         locale,
         field,
-        { callWithRetry },
+        { callWithRetry, translateInChunks },
       ),
     rejectReason: ({ locale, field, itValue, text }) => {
       if (translatedStringOrNull(text, locale) === null) return 'testo non usabile';

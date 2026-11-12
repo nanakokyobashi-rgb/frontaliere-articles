@@ -247,7 +247,7 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(body, /fieldName: field,/);
   assert.match(body, /chain: \[codex\]/);
   assert.match(body, /prefer: \[codex\]/);
-  assert.match(body, /fallback: \(\) => \{[\s\S]*if \(!pendingBodySecondLaneAvailable\(\) && typeof callWithRetry === 'function'\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry \}\)/);
+  assert.match(body, /fallback: \(\) => \{[\s\S]*if \(!pendingBodySecondLaneAvailable\(\) && typeof callWithRetry === 'function'\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry, translateInChunks \}\)/);
   assert.match(body, /if \(!text\n\s+&& \(codexModelUnavailable \|\| !pendingBodySecondLaneAvailable\(\)\)/);
   // Nessun orologio di modulo: i producer che importano translateArticle()
   // (publish-journalist-article.mjs) non hanno CREATE_ARTICLE_MAX_WALL_MS.
@@ -267,6 +267,8 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
 test('la corsia si arma solo nel percorso CLI: i producer importati (publish-journalist) non la interrogano', () => {
   const avail = src.slice(src.indexOf('function pendingBodySecondLaneAvailable() {'));
   assert.match(avail.slice(0, avail.indexOf('\n}\n')), /_pendingBodySecondLaneArmed/);
+  assert.match(avail.slice(0, avail.indexOf('\n}\n')), /CODEX_AUTH_BROKER_SOCKET/);
+  assert.match(avail.slice(0, avail.indexOf('\n}\n')), /existsSync\(brokerSocket\)/);
   assert.match(avail.slice(0, avail.indexOf('\n}\n')), /getCascadeStats\(\)\.codexTranslation\?\.stopReason/);
   assert.match(avail.slice(0, avail.indexOf('\n}\n')), /isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)/);
   assert.match(src, /function pendingBodyRecoveryAvailable\(\) \{/);
@@ -286,26 +288,41 @@ test('lo stop della lane Codex non seleziona una corsia che poi fallirebbe', () 
   const at = src.indexOf('function pendingBodySecondLaneAvailable() {');
   const end = src.indexOf('\n}\n', at) + 2;
   const makeGuard = new Function(
-    'getCascadeStats',
-    'isModelAvailable',
-    'AI_MODELS',
-    '_pendingBodySecondLaneArmed',
+    'getCascadeStats', 'isModelAvailable', 'AI_MODELS',
+    '_pendingBodySecondLaneArmed', 'existsSync',
     `${src.slice(at, end)}\nreturn pendingBodySecondLaneAvailable;`,
   );
-  const available = makeGuard(
-    () => ({ codexTranslation: { stopReason: '' } }),
-    () => true,
-    { CODEX_CLI_PRIMARY: 'codex-cli/test' },
-    true,
-  );
-  const stopped = makeGuard(
-    () => ({ codexTranslation: { stopReason: 'budget esaurito' } }),
-    () => true,
-    { CODEX_CLI_PRIMARY: 'codex-cli/test' },
-    true,
-  );
-  assert.equal(available(), true);
-  assert.equal(stopped(), false);
+  const previousSocket = process.env.CODEX_AUTH_BROKER_SOCKET;
+  process.env.CODEX_AUTH_BROKER_SOCKET = 'codex-broker.sock';
+  try {
+    const available = makeGuard(
+      () => ({ codexTranslation: { stopReason: '' } }),
+      () => true,
+      { CODEX_CLI_PRIMARY: 'codex-cli/test' },
+      true,
+      () => true,
+    );
+    const stopped = makeGuard(
+      () => ({ codexTranslation: { stopReason: 'budget esaurito' } }),
+      () => true,
+      { CODEX_CLI_PRIMARY: 'codex-cli/test' },
+      true,
+      () => true,
+    );
+    const brokerMissing = makeGuard(
+      () => ({ codexTranslation: { stopReason: '' } }),
+      () => true,
+      { CODEX_CLI_PRIMARY: 'codex-cli/test' },
+      true,
+      () => false,
+    );
+    assert.equal(available(), true);
+    assert.equal(stopped(), false);
+    assert.equal(brokerMissing(), false);
+  } finally {
+    if (previousSocket === undefined) delete process.env.CODEX_AUTH_BROKER_SOCKET;
+    else process.env.CODEX_AUTH_BROKER_SOCKET = previousSocket;
+  }
 });
 
 /** Il predicato condiviso col retry di troncamento, ritagliato verbatim dal sorgente. */
@@ -327,7 +344,7 @@ async function runSecondLaneBlock({
   const AI_MODELS = { CODEX_CLI_PRIMARY: 'codex-cli/test' };
   const fn = new Function(
     'data', 'RUN_REPORT', 'retryPendingBodyTranslations', 'AI_MODELS', 'pendingBodySecondLaneAvailable', 'pendingBodyRecoveryAvailable', 'pendingBodyLaneShouldStop',
-    'translatePendingBodyWithCodex', 'translatePendingBodyWithHistoricalChain', 'callWithRetry', 'translatedStringOrNull', 'isSourcePassthrough', 'detectTruncation', 'sanitizeBodyText', 'console',
+    'translatePendingBodyWithCodex', 'translatePendingBodyWithHistoricalChain', 'callWithRetry', 'translatedStringOrNull', 'isSourcePassthrough', 'detectTruncation', 'sanitizeBodyText', 'translateInChunks', 'console',
     `${realTruncationSrc()}\nreturn (async () => { ${block} })();`,
   );
   const quiet = { error: () => {}, warn: () => {}, log: () => {} };
@@ -335,7 +352,7 @@ async function runSecondLaneBlock({
     data, RUN_REPORT, retryPendingBodyTranslations, AI_MODELS, () => codexAvailable,
     () => codexAvailable || historicalAvailable, () => false,
     translatePendingBodyWithCodex, translatePendingBodyWithHistoricalChain, async () => ({}),
-    translatedStringOrNull, isSourcePassthrough, detectTruncation, sanitizeBodyText, quiet,
+    translatedStringOrNull, isSourcePassthrough, detectTruncation, sanitizeBodyText, null, quiet,
   );
 }
 
@@ -581,6 +598,62 @@ test('output non valido o errore non classificato come breaker non attiva la cat
     assert.equal(await fixture.translate(source), '');
     assert.deepEqual(fixture.counts(), { admissionAttempts: 1, codexCalls: 1, historicalCalls: 0 });
   }
+});
+
+test('la catena storica riusa il chunker per un body pending sopra soglia', async () => {
+  const at = src.indexOf('async function translatePendingBodyWithHistoricalChain(');
+  assert.notEqual(at, -1, 'translatePendingBodyWithHistoricalChain non trovata');
+  const end = src.indexOf('\n}\n', at) + 2;
+  const makeHistoricalTranslator = new Function(
+    'translateFieldFreeMt', 'translatedStringOrNull', 'balanceMarkdownMarkers',
+    'buildPendingBodyRetranslationPrompt', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD',
+    'console',
+    `${src.slice(at, end)}\nreturn translatePendingBodyWithHistoricalChain;`,
+  );
+  const longIt = Array.from({ length: 701 }, (_, i) => `parola${i}`).join(' ');
+  const expected = longIt.replaceAll('parola', 'Wort');
+  let chunkCall = null;
+  let wholeBodyCalls = 0;
+  const translateInChunks = async (bodyText, field, makePrompt, labelPrefix, targetLang) => {
+    chunkCall = {
+      bodyText,
+      field,
+      prompt: makePrompt('primo chunk', 0, 2),
+      labelPrefix,
+      targetLang,
+    };
+    return expected;
+  };
+  const callWithRetry = async () => {
+    wholeBodyCalls += 1;
+    throw new Error('il body oversized non deve entrare nella richiesta singola');
+  };
+  const translatePendingBodyWithHistoricalChain = makeHistoricalTranslator(
+    translateFieldFreeMt,
+    translatedStringOrNull,
+    (value) => value,
+    ({ field, itValue, partLabel = '' }) => `body ${field}${partLabel}: ${itValue}`,
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    700,
+    { error() {}, warn() {}, log() {} },
+  );
+
+  const translated = await translatePendingBodyWithHistoricalChain(
+    longIt,
+    'de',
+    'body1',
+    { callWithRetry, translateInChunks },
+  );
+
+  assert.deepEqual(chunkCall, {
+    bodyText: longIt,
+    field: 'body1',
+    prompt: 'body body1, parte 1 di 2: primo chunk',
+    labelPrefix: 'de:body1-pending-retry',
+    targetLang: 'de',
+  });
+  assert.equal(wholeBodyCalls, 0);
+  assert.equal(translated, expected);
 });
 
 test('se il circuit breaker apre Codex dopo la selezione, la lane passa alla catena storica', async () => {
