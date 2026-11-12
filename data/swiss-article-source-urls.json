@@ -1,9 +1,4 @@
 {
-  "https://www.seco.admin.ch/it/newnsb/kviax2aqippd": {
-    "articleId": "sanzioni-onu-ordinanze-2026",
-    "ts": "2026-09-25T17:20:41.087Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4107565": {
     "articleId": "francese-autonomia-cantoni",
     "ts": "2026-09-25T18:17:10.197Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1962303/franchi-apprendistato-svizzera-salario-salari-dibattito-partito": {
     "articleId": "dibattito-salario-minimo-5000",
     "ts": "2026-11-12T04:07:36.682Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4236035": {
+    "articleId": "tasso-ilo-terzo-trimestre",
+    "ts": "2026-11-12T22:40:25.225Z",
     "keyForm": 2
   }
 }
