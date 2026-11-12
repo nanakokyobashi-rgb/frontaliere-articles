@@ -582,6 +582,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tasso-vacanza-2027-ginevra': {
+    title: 'Tasso vacanza alloggi 2027 Canton Ginevra | Frontaliere Ticino',
+    description: 'Il tasso medio di vacanza per il 2027 è dello 0,31%. La penuria riguarda gli appartamenti da 1 a 7 locali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tasso, vacanza, alloggi, canton',
+    ogTitle: 'Tasso vacanza alloggi 2027 Ginevra',
+    ogDescription: 'Il tasso medio di vacanza per il 2027 è dello 0,31%. La penuria riguarda gli appartamenti da 1 a 7 locali.',
+    canonicalPath: '/articoli-ginevra/tasso-vacanza-2027-ginevra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tasso vacanza alloggi 2027 Canton Ginevra",
+      "description": "Il tasso medio di vacanza per il 2027 è dello 0,31%. La penuria riguarda gli appartamenti da 1 a 7 locali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tasso-vacanza-2027-ginevra.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-12T21:02:13+00:00",
+      "dateModified": "2026-11-12T21:02:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ginevra/tasso-vacanza-2027-ginevra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

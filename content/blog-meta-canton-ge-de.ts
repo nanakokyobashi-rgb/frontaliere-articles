@@ -48,6 +48,9 @@ const blogMetaCantonGeDe: Record<string, string> = {
     'blog.article.oit-protesta-tagli-ginevra.title': 'OIT in Genf: Fast 300 Beschäftigte protestieren gegen Stellenkürzungen',
     'blog.article.oit-protesta-tagli-ginevra.excerpt': 'Am Dienstag protestierten fast 300 Beschäftigte der Internationalen Arbeitsorganisation (OIT) in Genf gegen die für den Zeitraum 2026-2027 vorgesehene Streichung von 86 besetzten Stellen.',
     'blog.article.oit-protesta-tagli-ginevra.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.tasso-vacanza-2027-ginevra.title': 'Leerstandsquote Wohnungen 2027 Kanton Genf',
+    'blog.article.tasso-vacanza-2027-ginevra.excerpt': 'Die durchschnittliche Leerstandsquote für 2027 beträgt 0,31 %.',
+    'blog.article.tasso-vacanza-2027-ginevra.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGeDe;

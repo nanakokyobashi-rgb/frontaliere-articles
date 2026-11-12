@@ -172,4 +172,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tasso-vacanza-2027-ginevra',
+ category: 'pratico',
+ date: '2026-11-12T21:02:13.473Z',
+ image: '/images/blog/article-tasso-vacanza-2027-ginevra.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
