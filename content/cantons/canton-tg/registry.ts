@@ -316,4 +316,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'referendum-budget-2027-frauenfeld',
+ category: 'fiscale',
+ date: '2026-11-12T23:00:04.094Z',
+ image: '/images/blog/article-referendum-budget-2027-frauenfeld.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

@@ -31,6 +31,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'economia-imprese-cantone-turgovia': { it: 'economia-imprese-cantone-turgovia', en: 'thurgau-business-canton-economy', de: 'wirtschaft-firmen-kanton-thurgau', fr: 'economie-entreprises-canton-thurgovie' },
  'domanda-edilizia-meisenweg': { it: 'domanda-edilizia-meisenweg', en: 'building-permit-meisenweg', de: 'baugesuch-meisenweg', fr: 'permis-construire-meisenweg' },
  'bad-egelsee-supplemento-sauna': { it: 'bad-egelsee-supplemento-sauna', en: 'bad-egelsee-sauna-surcharge', de: 'bad-egelsee-sauna-aufpreis', fr: 'bad-egelsee-supplement-sauna' },
+ 'referendum-budget-2027-frauenfeld': { it: 'referendum-budget-2027-frauenfeld', en: 'referendum-publication-budget-2027-frauenfeld', de: 'referendums-publikation-budget-2027-frauenfeld', fr: 'publication-du-referendum-budget-2027-frauenfeld' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

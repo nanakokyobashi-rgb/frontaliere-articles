@@ -87,6 +87,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.bad-egelsee-supplemento-sauna.title': 'Bad Egelsee: +5 CHF for the sauna starting in 2027',
     'blog.article.bad-egelsee-supplemento-sauna.excerpt': 'From January 1, 2027, the ticket with sauna will cost CHF 15 for adults and CHF 10 for young people, apprentices and students.',
     'blog.article.bad-egelsee-supplemento-sauna.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.referendum-budget-2027-frauenfeld.title': 'Referendum publication budget 2027 Frauenfeld',
+    'blog.article.referendum-budget-2027-frauenfeld.excerpt': 'The document is available in PDF format with a size of 87 KB; it contains neither figures nor specific expense items.',
+    'blog.article.referendum-budget-2027-frauenfeld.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTgEn;
