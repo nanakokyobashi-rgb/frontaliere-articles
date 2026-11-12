@@ -90,6 +90,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.vaud-salari-pubblici-2027.title': 'Vaud, public-sector salaries indexed by 1,5% in 2027',
     'blog.article.vaud-salari-pubblici-2027.excerpt': 'On Wednesday, the State Council announced the full indexation of the salaries of all state personnel for 2027.',
     'blog.article.vaud-salari-pubblici-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.quattro-temi-puntata-vaud.title': 'Vaud: budget after the tax reduction was approved',
+    'blog.article.quattro-temi-puntata-vaud.excerpt': 'The source presents four questions about Vaud: the budget after the tax reduction, civilian service, cement after Mormont and the cost of care.',
+    'blog.article.quattro-temi-puntata-vaud.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVdEn;

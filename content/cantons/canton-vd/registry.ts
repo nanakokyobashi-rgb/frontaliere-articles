@@ -326,4 +326,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'quattro-temi-puntata-vaud',
+ category: 'fiscale',
+ date: '2026-11-12T04:48:16.848Z',
+ image: '/images/blog/article-quattro-temi-puntata-vaud.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
