@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-bienne-corrieri-salariati-2026.webp",
-      "sha256": "bc5672ed1a22e72adbae15be1ca7487abef684a6215bbd1d61677cb526c3443c"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-bienne-corrieri-salariati-2026-480w.webp",
-      "sha256": "2a33dbf6f4547070f6c0ca2765df423613bbf2b5291a2fb0271f64cc63032fce"
-    }
-  ]
+  "items": []
 }
