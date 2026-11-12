@@ -42,6 +42,9 @@ const blogMetaCantonJuEn: Record<string, string> = {
     'blog.article.porrentruy-imposta-budget-2027.title': 'Porrentruy forecasts a tax rate of 2 points in 2027',
     'blog.article.porrentruy-imposta-budget-2027.excerpt': 'The 2027 budget proposal sets Porrentruy’s tax rate at 2 points, with a reduction of 0,05 and a surplus of CHF 29\'898.',
     'blog.article.porrentruy-imposta-budget-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.ospedale-giura-solidita-finanziaria.title': 'Hôpital du Jura confirms financial solidity and central role',
+    'blog.article.ospedale-giura-solidita-finanziaria.excerpt': 'Hôpital du Jura closed the 2025 fiscal year with a profit of CHF 100,000.',
+    'blog.article.ospedale-giura-solidita-finanziaria.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonJuEn;

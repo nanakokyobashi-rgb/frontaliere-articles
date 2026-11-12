@@ -42,6 +42,9 @@ const blogMetaCantonJuIt: Record<string, string> = {
     'blog.article.porrentruy-imposta-budget-2027.title': 'Porrentruy prevede la quotità d\'imposta a 2 punti nel 2027',
     'blog.article.porrentruy-imposta-budget-2027.excerpt': 'Il progetto di budget 2027 prevede per Porrentruy una quotità d\'imposta a 2 punti, un taglio di 0,05 e un avanzo di CHF 29\'898.',
     'blog.article.porrentruy-imposta-budget-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.ospedale-giura-solidita-finanziaria.title': 'Hôpital du Jura conferma solidità finanziaria e ruolo centrale',
+    'blog.article.ospedale-giura-solidita-finanziaria.excerpt': 'L\'Hôpital du Jura ha chiuso l\'esercizio 2025 con un utile di CHF 100\'000.–.',
+    'blog.article.ospedale-giura-solidita-finanziaria.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonJuIt;

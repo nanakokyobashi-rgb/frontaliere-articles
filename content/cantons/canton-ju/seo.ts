@@ -504,6 +504,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ospedale-giura-solidita-finanziaria': {
+    title: 'Hôpital du Jura conferma solidità finanziaria e ruolo centrale',
+    description: 'L\'Hôpital du Jura conferma l\'utile di CHF 100\'000.– nel 2025, con un aumento del 10,7% del fatturato ambulatoriale. 2\'063 collaboratori.',
+    keywords: 'frontalieri, ticino, svizzera, italia, pital, jura, conferma, solidità',
+    ogTitle: 'Hôpital du Jura: utile 2025 e solidità finanziaria',
+    ogDescription: 'L\'Hôpital du Jura ha concluso l\'esercizio 2025 con un utile di CHF 100\'000.–, il quarto esercizio consecutivo in utile. Attività sostenuta con +10,7% fatturato ambulatoriale.',
+    canonicalPath: '/articoli-giura/ospedale-giura-solidita-finanziaria/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Hôpital du Jura conferma solidità finanziaria e ruolo centrale",
+      "description": "L'Hôpital du Jura conferma l'utile di CHF 100'000.– nel 2025, con un aumento del 10,7% del fatturato ambulatoriale. 2'063 collaboratori.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ospedale-giura-solidita-finanziaria.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-12T04:54:59+00:00",
+      "dateModified": "2026-11-12T04:54:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-giura/ospedale-giura-solidita-finanziaria/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
