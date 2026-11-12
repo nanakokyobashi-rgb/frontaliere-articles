@@ -14263,16 +14263,19 @@ const TRANSLATION_CHUNK_THRESHOLD = 700;
 
 // Split body text into ~chunkTarget-word pieces, keeping paragraph boundaries
 // where possible and cutting inside an oversized paragraph when necessary.
-// Protected Markdown atoms are kept intact; an atom that cannot fit is
-// rejected before any provider call rather than being sent over the cap with
-// a structural split. This is shared by the initial translation and both retry
-// paths, so every route keeps the same per-call output-cap safety net.
+// Protected Markdown and numeric atoms are kept intact; an atom that cannot
+// fit is rejected before any provider call rather than being sent over the cap
+// with a structural split. This is shared by the initial translation and both
+// retry paths, so every route keeps the same per-call output-cap safety net.
 function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
   const chunks = [];
   const separators = [];
   const source = String(bodyText || '');
   const pieces = [];
   let pendingSeparator = '';
+  // Keep the same numeric shapes atomic as the free-MT chunker: grouped and
+  // decimal numbers may use ASCII space, NBSP or narrow NBSP, in addition to
+  // dots, commas and Swiss apostrophes.
 
   function readCodeSpanEnd(text, start) {
     if (text[start] !== '`') return null;
@@ -14422,6 +14425,29 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     return end;
   }
 
+  function readNumericAtomEnd(text, start) {
+    const previous = text[start - 1];
+    if (previous && /[\p{L}\p{N}_]/u.test(previous)) return null;
+    if (!/\d/u.test(text[start] || '')) return null;
+
+    const isDigit = (char) => /\d/u.test(char || '');
+    const isSeparator = (char) => /[.,'’\u00a0\u202f ]/u.test(char || '');
+    let end = start;
+    while (isDigit(text[end])) end += 1;
+    while (isSeparator(text[end]) && isDigit(text[end + 1])) {
+      end += 1;
+      while (isDigit(text[end])) end += 1;
+    }
+
+    let unitStart = end;
+    while (/\s/u.test(text[unitStart] || '')) unitStart += 1;
+    if (['%', '°', 'º'].includes(text[unitStart])) end = unitStart + 1;
+
+    const next = text[end];
+    if (next && /[\p{L}\p{N}_]/u.test(next)) return null;
+    return end;
+  }
+
   function readCoreProtectedMarkdownEnd(text, start) {
     const codeEnd = readCodeSpanEnd(text, start);
     if (codeEnd !== null) return codeEnd;
@@ -14473,8 +14499,28 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     return null;
   }
 
-  function readMarkdownAtomEnd(text, start) {
-    return readProtectedMarkdownEnd(text, start) ?? readPlainAtomEnd(text, start);
+  function readMarkdownAtom(text, start) {
+    const directProtectedEnd = readProtectedMarkdownEnd(text, start);
+    if (directProtectedEnd !== null) {
+      return { end: directProtectedEnd, protectedEnd: directProtectedEnd };
+    }
+
+    // A plain token can run directly into a Markdown atom. Stop treating the
+    // first whitespace inside the atom as the boundary: `testo[etichetta
+    // lunga](nav:azione)` must travel as one protected piece.
+    const plainEnd = readPlainAtomEnd(text, start);
+    for (let candidate = start + 1; candidate < plainEnd; candidate += 1) {
+      const protectedEnd = readProtectedMarkdownEnd(text, candidate);
+      if (protectedEnd !== null) {
+        return { end: protectedEnd, protectedEnd };
+      }
+    }
+
+    const numericEnd = readNumericAtomEnd(text, start);
+    if (numericEnd !== null) {
+      return { end: numericEnd, protectedEnd: numericEnd };
+    }
+    return { end: plainEnd, protectedEnd: null };
   }
 
   function readStructuredLineContentStart(text, start) {
@@ -14485,11 +14531,13 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     return prefix ? start + prefix[0].length : null;
   }
 
-  function readStructuredLineAtomEnd(text, start) {
+  function readStructuredLineAtom(text, start) {
     const contentStart = readStructuredLineContentStart(text, start);
     if (contentStart === null) return null;
-    if (contentStart >= text.length || /\s/.test(text[contentStart])) return contentStart;
-    return readMarkdownAtomEnd(text, contentStart);
+    if (contentStart >= text.length || /\s/.test(text[contentStart])) {
+      return { end: contentStart, protectedEnd: null };
+    }
+    return readMarkdownAtom(text, contentStart);
   }
 
   let index = 0;
@@ -14508,22 +14556,28 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
         pendingSeparator += source.slice(separatorStart, index);
         continue;
       }
-      structuredEnd = readStructuredLineAtomEnd(source, lineStart);
-      if (structuredEnd === null) {
+      const structuredAtom = readStructuredLineAtom(source, lineStart);
+      if (structuredAtom === null) {
         pendingSeparator += source.slice(separatorStart, index);
         continue;
       }
       pendingSeparator += source.slice(separatorStart, lineStart);
       atomStart = lineStart;
-      const contentStart = readStructuredLineContentStart(source, atomStart);
-      protectedEnd = contentStart === null ? null : readProtectedMarkdownEnd(source, contentStart);
-      index = structuredEnd;
+      structuredEnd = structuredAtom.end;
+      protectedEnd = structuredAtom.protectedEnd;
+      index = structuredAtom.end;
     } else {
       atomStart = index;
-      structuredEnd = readStructuredLineAtomEnd(source, index);
-      const contentStart = structuredEnd === null ? null : readStructuredLineContentStart(source, index);
-      protectedEnd = readProtectedMarkdownEnd(source, contentStart ?? index);
-      index = structuredEnd ?? readMarkdownAtomEnd(source, index);
+      const structuredAtom = readStructuredLineAtom(source, index);
+      if (structuredAtom !== null) {
+        structuredEnd = structuredAtom.end;
+        protectedEnd = structuredAtom.protectedEnd;
+        index = structuredAtom.end;
+      } else {
+        const markdownAtom = readMarkdownAtom(source, index);
+        protectedEnd = markdownAtom.protectedEnd;
+        index = markdownAtom.end;
+      }
     }
 
     if (index <= atomStart) index = atomStart + 1;
@@ -14531,7 +14585,7 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     const atomWords = countWords(atomText);
     if (protectedEnd !== null && atomWords > chunkTarget) {
       throw new Error(
-        `protected Markdown atom exceeds translation chunk cap (${atomWords} > ${chunkTarget} words)`,
+        `protected translation atom exceeds translation chunk cap (${atomWords} > ${chunkTarget} words)`,
       );
     }
     const atomParts = !structuredEnd
@@ -15378,10 +15432,54 @@ async function translateArticle(data) {
       parts.push(part);
     }
     const separators = chunks.separators || [];
-    return parts.reduce(
+    const joined = parts.reduce(
       (joined, part, index) => joined + (index === 0 ? '' : separators[index - 1] ?? '\n\n') + part,
       '',
     );
+
+    // A chunk boundary must never make a Markdown link disappear or change
+    // its destination after the provider responses are recombined. Compare
+    // balanced `](...)` targets in source order; this covers nav actions and
+    // external URLs without constraining the translated visible label.
+    const linkTargets = (text) => {
+      const targets = [];
+      const value = String(text ?? '');
+      for (let cursor = 0; cursor < value.length - 1; cursor += 1) {
+        if (value[cursor] !== ']' || value[cursor + 1] !== '(') continue;
+        let depth = 0;
+        let end = cursor + 2;
+        for (; end < value.length; end += 1) {
+          if (value[end] === '\\') {
+            end += 1;
+            continue;
+          }
+          if (value[end] === '(') {
+            depth += 1;
+          } else if (value[end] === ')') {
+            if (depth === 0) break;
+            depth -= 1;
+          }
+        }
+        if (end < value.length) {
+          targets.push(value.slice(cursor + 2, end));
+          cursor = end;
+        }
+      }
+      return targets;
+    };
+    const sourceTargets = linkTargets(bodyText);
+    const joinedTargets = linkTargets(joined);
+    if (sourceTargets.length !== joinedTargets.length
+      || sourceTargets.some((target, index) => target !== joinedTargets[index])) {
+      return null;
+    }
+
+    // `balanceMarkdownMarkers` is intentionally used as a validator here:
+    // changing the joined text would mean the provider returned broken
+    // Markdown, not something the separator joiner can safely repair.
+    const balanced = balanceMarkdownMarkers(joined, { sourceText: bodyText });
+    if (balanced !== joined) return null;
+    return joined;
   }
 
   async function translateContent(sourceLang, targetLang, targetLabel, sourceContent) {

@@ -43,7 +43,7 @@ import {
 } from '../scripts/lib/free-mt-recovery.mjs';
 import { translatedStringOrNull, isSourcePassthrough, translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import { detectTruncation } from '../scripts/lib/article-factuality-gates.mjs';
-import { codexCallDeadlineMs } from '../scripts/lib/free-translate.mjs';
+import { balanceMarkdownMarkers, codexCallDeadlineMs } from '../scripts/lib/free-translate.mjs';
 import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -714,6 +714,27 @@ test('il chunker spezza anche un singolo paragrafo oltre il limite di parole', (
   assert.equal(rebuilt, source);
 });
 
+test('il chunker protegge Markdown adiacente al testo e numeri con separatori Unicode', () => {
+  const makeChunker = new Function(
+    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
+  );
+  const splitIntoTranslationChunks = makeChunker();
+  const link = '[etichetta lunga](nav:calculator)';
+  const numbers = ['12 345', '1\u202f234,56', "80'000"];
+  const source = `testo${link} ${numbers[0]} lavoratori ${numbers[1]} euro e ${numbers[2]} franchi.`;
+  const chunks = splitIntoTranslationChunks(source, 3);
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, source);
+  assert.equal(chunks.filter((chunk) => chunk.includes(link)).length, 1, 'il link adiacente al testo deve restare intero');
+  for (const number of numbers) {
+    assert.equal(chunks.filter((chunk) => chunk.includes(number)).length, 1, `numero spezzato: ${number}`);
+  }
+});
+
 test('il chunker protegge link, code e prefissi di lista e conserva i separatori Markdown', () => {
   const makeChunker = new Function(
     `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
@@ -817,7 +838,7 @@ test('il chunker protegge anche enfasi singole e rifiuta gli atomi protetti over
   ]) {
     assert.throws(
       () => splitIntoTranslationChunks(protectedSource, 500),
-      /protected Markdown atom exceeds translation chunk cap/,
+      /protected translation atom exceeds translation chunk cap/,
     );
   }
 });
@@ -903,7 +924,7 @@ test('il join della traduzione riusa i separatori sorgente invece di inventare p
   const realChunker = makeChunker();
   const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
   const makeTranslator = new Function(
-    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough',
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers',
     `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
   );
   const translateInChunks = makeTranslator(
@@ -912,6 +933,7 @@ test('il join della traduzione riusa i separatori sorgente invece di inventare p
     (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
     translatedStringOrNull,
     () => false,
+    balanceMarkdownMarkers,
   );
   const source = [
     '- prima voce [comparatore fiscale](nav:calculator) e `codice interno` resta nella lista',
@@ -925,6 +947,33 @@ test('il join della traduzione riusa i separatori sorgente invece di inventare p
   assert.equal(translated, source, 'un traduttore che conserva i chunk non deve cambiare la struttura Markdown');
 });
 
+test('il joiner rifiuta un link Markdown alterato dopo la ricomposizione', async () => {
+  const makeChunker = new Function(
+    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
+  );
+  const realChunker = makeChunker();
+  const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
+  const makeTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  );
+  const translateInChunks = makeTranslator(
+    splitWithSmallTarget,
+    async (prompt) => ({ body1: prompt.replace('nav:calculator', 'nav:exchange') }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+  );
+  const source = 'Prima [etichetta lunga](nav:calculator) dopo altre parole.';
+
+  assert.equal(
+    await translateInChunks(source, 'body1', (chunk) => chunk, 'test', 'de'),
+    null,
+    'un target nav modificato non deve arrivare al sanitizer finale',
+  );
+});
+
 test('il recovery missing-field usa il chunker per un body oversized', async () => {
   const makeChunker = new Function(
     `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
@@ -932,7 +981,7 @@ test('il recovery missing-field usa il chunker per un body oversized', async () 
   const countWords = new Function(`${COUNT_WORDS_SRC}\nreturn countWords;`)();
   const splitIntoTranslationChunks = makeChunker();
   const makeTranslator = new Function(
-    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough',
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers',
     `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
   );
   const longIt = Array.from(
@@ -950,6 +999,7 @@ test('il recovery missing-field usa il chunker per un body oversized', async () 
     countWords,
     translatedStringOrNull,
     isSourcePassthrough,
+    balanceMarkdownMarkers,
   );
   const buildPendingBodyRetranslationPrompt = new Function(
     `${BUILD_PENDING_BODY_PROMPT_SRC}\nreturn buildPendingBodyRetranslationPrompt;`,
