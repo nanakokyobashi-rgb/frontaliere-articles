@@ -404,30 +404,30 @@ test('con Codex indisponibile la catena storica recupera il body pending', async
   assert.deepEqual(RUN_REPORT.translation.pendingBodyRecovered, { 'de:body1': 'historical-translation-chain' });
 });
 
-test('se la lane si arresta tra due segmenti, il body intero passa alla catena storica', async () => {
+function createPendingBodyCodexTranslatorFixture({ isModelAvailable, admissionDecision, translateWithCodexEngine }) {
   const at = src.indexOf('async function translatePendingBodyWithCodex(');
   assert.notEqual(at, -1, 'translatePendingBodyWithCodex non trovata');
   const end = src.indexOf('\n}\n', at) + 2;
   const factory = new Function(
     'AI_MODELS', '_pendingBodyCodexDeadlineMs', 'CODEX_TRANSLATE_TRANSPORT_RETRIES',
-    'withCodexTranslationLane', 'codexCallDeadlineMs', '_aiCallLLM', 'translateWithCodexEngine',
+    'withCodexTranslationLane', 'codexCallDeadlineMs', '_aiCallLLM', 'translateWithCodexEngine', 'isModelAvailable',
     'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'console',
     `${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
   );
   const processDeadlineMs = Date.now() + 300_000;
   let admissionAttempts = 0;
+  let codexCalls = 0;
+  let historicalCalls = 0;
   const admission = { deadlineMs: processDeadlineMs, finish() {} };
   const withCodexTranslationLane = ({ run }) => run({
     deadlineMs: processDeadlineMs,
     admission,
     admitCall: () => {
       admissionAttempts += 1;
-      return admissionAttempts === 1 ? admission : null;
+      return admissionDecision(admissionAttempts, admission);
     },
     reserveTransportRetry: () => false,
   });
-  let codexCalls = 0;
-  let historicalCalls = 0;
   const expected = 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.';
   const translatePendingBodyWithHistoricalChain = async (itValue, locale, field, { callWithRetry }) => {
     historicalCalls += 1;
@@ -444,15 +444,24 @@ test('se la lane si arresta tra due segmenti, il body intero passa alla catena s
     withCodexTranslationLane,
     codexCallDeadlineMs,
     () => { throw new Error('il test non deve arrivare al trasporto reale'); },
-    async () => {
+    async (args) => {
       codexCalls += 1;
-      return 'Der erste Absatz wurde erfolgreich übersetzt und bleibt in der richtigen Sprache.';
+      return translateWithCodexEngine(args);
     },
+    isModelAvailable,
     translateFieldFreeMt,
     (text) => text,
     translatePendingBodyWithHistoricalChain,
     { error() {}, warn() {}, log() {} },
   );
+  return {
+    expected,
+    counts: () => ({ admissionAttempts, codexCalls, historicalCalls }),
+    translate: (text) => translatePendingBodyWithCodex(text, 'de', 'body1', { callWithRetry: async () => ({}) }),
+  };
+}
+
+test('il body ricade sulla catena storica solo se il budget o il breaker fermano Codex tra segmenti', async () => {
   const source = [
     'Il primo paragrafo contiene contesto sufficiente e viene tradotto prima che si esaurisca il budget Codex condiviso.',
     '',
@@ -460,11 +469,50 @@ test('se la lane si arresta tra due segmenti, il body intero passa alla catena s
     '',
     'Il secondo paragrafo resta da tradurre quando la nuova admission viene rifiutata dal circuit breaker.',
   ].join('\n');
+  const successfulSegment = async () => 'Der erste Absatz wurde erfolgreich übersetzt und bleibt in der richtigen Sprache.';
+  const runScenario = async ({ modelAvailable, admissionDecision, translateWithCodexEngine = successfulSegment }) => {
+    let availabilityChecks = 0;
+    const fixture = createPendingBodyCodexTranslatorFixture({
+      isModelAvailable: () => {
+        availabilityChecks += 1;
+        return modelAvailable(availabilityChecks);
+      },
+      admissionDecision,
+      translateWithCodexEngine,
+    });
+    const translated = await fixture.translate(source);
+    return { translated, counts: fixture.counts(), availabilityChecks };
+  };
 
-  const translated = await translatePendingBodyWithCodex(source, 'de', 'body1', { callWithRetry: async () => ({}) });
+  const budgetStopped = await runScenario({
+    modelAvailable: () => true,
+    admissionDecision: (attempt, admission) => attempt === 1 ? admission : null,
+  });
+  assert.equal(budgetStopped.translated, 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.');
+  assert.deepEqual(budgetStopped.counts, { admissionAttempts: 2, codexCalls: 1, historicalCalls: 1 });
+  assert.equal(budgetStopped.availabilityChecks, 2);
 
-  assert.equal(translated, expected);
-  assert.equal(codexCalls, 1);
-  assert.equal(admissionAttempts, 2);
-  assert.equal(historicalCalls, 1);
+  const breakerStopped = await runScenario({
+    modelAvailable: (check) => check === 1,
+    admissionDecision: (_attempt, admission) => admission,
+  });
+  assert.equal(breakerStopped.translated, 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.');
+  assert.deepEqual(breakerStopped.counts, { admissionAttempts: 1, codexCalls: 1, historicalCalls: 1 });
+  assert.equal(breakerStopped.availabilityChecks, 2);
+});
+
+test('output non valido o errore non classificato come breaker non attiva la catena storica', async () => {
+  const source = 'Questo corpo ha abbastanza testo per arrivare al traduttore senza un heading di template.';
+  for (const translateWithCodexEngine of [
+    async () => '',
+    async () => { throw new Error('errore di trasporto non classificato dal breaker'); },
+  ]) {
+    const fixture = createPendingBodyCodexTranslatorFixture({
+      isModelAvailable: () => true,
+      admissionDecision: (_attempt, admission) => admission,
+      translateWithCodexEngine,
+    });
+    assert.equal(await fixture.translate(source), '');
+    assert.deepEqual(fixture.counts(), { admissionAttempts: 1, codexCalls: 1, historicalCalls: 0 });
+  }
 });

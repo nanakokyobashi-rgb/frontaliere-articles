@@ -14745,10 +14745,13 @@ async function translatePendingBodyWithCodex(
         fieldType: 'description',
         fieldName: field,
         translate: async ({ text: masked, sourceLang, targetLang, fieldType }) => {
-          const callAdmission = admitCall();
+          const codexModelAvailable = isModelAvailable(codex);
+          const callAdmission = codexModelAvailable ? admitCall() : null;
           if (!callAdmission) {
             codexAdmissionStopped = true;
-            throw new Error('budget Codex esaurito prima della chiamata fisica');
+            throw new Error(codexModelAvailable
+              ? 'budget Codex esaurito prima della chiamata fisica'
+              : 'modello Codex non più disponibile prima della chiamata fisica');
           }
           // La prima admission e' quella gia' concessa dalla lane. Le
           // successive sono riservate qui, davanti a ogni segmento reale, e
@@ -14765,6 +14768,13 @@ async function translatePendingBodyWithCodex(
               fieldType,
               call: callForDeadline(callDeadlineMs),
             });
+          } catch (error) {
+            // Il breaker del modello può scattare tra il controllo per-segmento
+            // e il completamento del trasporto. In quel caso il wrapper di
+            // translateFieldFreeMt assorbe l'errore: ricordiamo lo stop per
+            // poter riprovare il body intero sulla catena storica.
+            if (!isModelAvailable(codex)) codexAdmissionStopped = true;
+            throw error;
           } finally {
             callAdmission.finish();
           }
