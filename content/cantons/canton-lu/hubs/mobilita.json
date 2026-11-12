@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-12T04:11:33.979Z",
-  "contentHash": "17c54113c2c67850785f36e997f0b2af42aaf384bebc3b1b885bbbb17ca1c490",
+  "updatedAt": "2026-11-12T13:45:12.528Z",
+  "contentHash": "282a56ab13ba9a0adaf3ad8befdd9eaf650371fb423c7eb53494678ab0135d6a",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "24",
+          "value": "23",
           "note": "segnalazioni aggiornate: 10 novembre 2026"
         }
       ],
@@ -179,7 +179,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T13:45:12.528Z"
     },
     "en": {
       "canton": "LU",
@@ -194,7 +194,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "24",
+          "value": "23",
           "note": "reports as of 10 November 2026"
         }
       ],
@@ -339,7 +339,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T13:45:12.528Z"
     },
     "de": {
       "canton": "LU",
@@ -354,7 +354,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "24",
+          "value": "23",
           "note": "Meldungen vom 10. November 2026"
         }
       ],
@@ -499,7 +499,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T13:45:12.528Z"
     },
     "fr": {
       "canton": "LU",
@@ -514,7 +514,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "24",
+          "value": "23",
           "note": "signalements au 10 novembre 2026"
         }
       ],
@@ -661,7 +661,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-12T13:45:12.528Z"
     }
   }
 }
