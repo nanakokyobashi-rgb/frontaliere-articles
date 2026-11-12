@@ -14378,14 +14378,29 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     if (!text.startsWith(marker, start)) return null;
     // A single-marker emphasis span can contain a nested double-marker span,
     // e.g. `*prima **seconda** dopo*`. The first `*` of `**` is not the
-    // outer closer: skip the complete nested span before looking again.
+    // outer closer: skip the complete nested span before looking again. The
+    // same scan must also skip complete code spans and links: their contents
+    // are literal Markdown text, so a marker inside either one cannot close
+    // this outer span.
     const nestedMarker = marker.length === 1 ? marker.repeat(2) : null;
     let end = start + marker.length;
     while (end < text.length) {
-      end = text.indexOf(marker, end);
-      if (end === -1) return null;
-      if (text[end - 1] === '\\') {
-        end += marker.length;
+      if (text[end] === '\\') {
+        // An escaped marker is literal. Consume a whole run so two
+        // backslashes before a marker retain their normal Markdown meaning.
+        const slashStart = end;
+        while (text[end] === '\\') end += 1;
+        if ((end - slashStart) % 2 === 1) end += 1;
+        continue;
+      }
+      const codeEnd = readCodeSpanEnd(text, end);
+      if (codeEnd !== null) {
+        end = codeEnd;
+        continue;
+      }
+      const linkEnd = readLinkEnd(text, end);
+      if (linkEnd !== null) {
+        end = linkEnd;
         continue;
       }
       if (nestedMarker && text.startsWith(nestedMarker, end)) {
@@ -14395,7 +14410,8 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
           continue;
         }
       }
-      return end + marker.length;
+      if (text.startsWith(marker, end)) return end + marker.length;
+      end += 1;
     }
     return null;
   }
@@ -14431,7 +14447,10 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     // example `[link](url)*another span*`) as if it closed the wrapper around
     // the first one. The closing punctuation that can wrap a protected atom
     // remains covered, including Unicode quotation marks.
-    return isMarkdownPunctuation(char) && !'`*_~[!'.includes(char);
+    const isOpeningDelimiter = /^[\p{Ps}\p{Pi}]$/u.test(char || '');
+    return isMarkdownPunctuation(char)
+      && !'`*_~[!'.includes(char)
+      && !isOpeningDelimiter;
   }
 
   function readProtectedMarkdownEnd(text, start) {
@@ -15821,17 +15840,42 @@ ${localizedToponymInstruction(targetLang)}`;
         try {
           // Reuse the in-scope callWithRetry (callLLM + JSON repair + truncation
           // back-off) for a focused single-field re-translation.
-          const parsed = await callWithRetry(
-            `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${itValue}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
-            1500,
-            `${locale}:${recoveryField}-missing-retry`,
-            { translation: true },
-          );
+          const oversizedBody = isBodyField
+            && typeof translateInChunks === 'function'
+            && countWords(itValue) > TRANSLATION_CHUNK_THRESHOLD;
+          let retried;
+          if (oversizedBody) {
+            // Keep the missing-field recovery under the same per-request cap
+            // as the initial and truncation-retry paths. Sending this body
+            // monolithically would bypass the guard exactly when the legacy
+            // route is asked to repair a missing field.
+            console.error(`    📦 ${locale}:${field} = ${countWords(itValue)} parole → sub-chunking missing-field retry...`);
+            const chunked = await translateInChunks(
+              itValue,
+              field,
+              (chunk, i, total) => buildPendingBodyRetranslationPrompt({
+                langName,
+                field,
+                itValue: chunk,
+                partLabel: total > 1 ? `, parte ${i + 1} di ${total}` : '',
+              }),
+              `${locale}:${recoveryField}-missing-retry`,
+              locale,
+            );
+            retried = translatedStringOrNull(chunked, locale);
+          } else {
+            const parsed = await callWithRetry(
+              `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${itValue}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
+              1500,
+              `${locale}:${recoveryField}-missing-retry`,
+              { translation: true },
+            );
+            retried = translatedStringOrNull(readRetryValue(parsed), locale);
+          }
           // `String(retried)` on an object yields "[object Object]" — truthy and
           // different from the IT value, so the old check ASSIGNED it. Require a
           // real string so a non-string retry falls through to the no-translation
           // outcome below (pending body, or IT fallback for title/excerpt/FAQ).
-          const retried = translatedStringOrNull(readRetryValue(parsed), locale);
           const retriedControlRejected = Boolean(
             faqPart && rejectRawFaqControlEscape(normalizeLocalizedToponymText(retried)),
           );
