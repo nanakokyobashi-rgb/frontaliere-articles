@@ -247,7 +247,8 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(body, /fieldName: field,/);
   assert.match(body, /chain: \[codex\]/);
   assert.match(body, /prefer: \[codex\]/);
-  assert.match(body, /fallback: \(\) => \{[\s\S]*if \(!isModelAvailable\(codex\) && typeof callWithRetry === 'function'\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry \}\)/);
+  assert.match(body, /fallback: \(\) => \{[\s\S]*if \(!pendingBodySecondLaneAvailable\(\) && typeof callWithRetry === 'function'\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry \}\)/);
+  assert.match(body, /if \(!text\n\s+&& \(codexModelUnavailable \|\| !pendingBodySecondLaneAvailable\(\)\)/);
   // Nessun orologio di modulo: i producer che importano translateArticle()
   // (publish-journalist-article.mjs) non hanno CREATE_ARTICLE_MAX_WALL_MS.
   assert.doesNotMatch(body, /RUN_START_MS|RUN_WALL_BUDGET_MS/);
@@ -409,6 +410,7 @@ function createPendingBodyCodexTranslatorFixture({
   admissionDecision,
   translateWithCodexEngine,
   laneStopsBeforeRun = false,
+  laneStopped = false,
 }) {
   const at = src.indexOf('async function translatePendingBodyWithCodex(');
   assert.notEqual(at, -1, 'translatePendingBodyWithCodex non trovata');
@@ -416,13 +418,14 @@ function createPendingBodyCodexTranslatorFixture({
   const factory = new Function(
     'AI_MODELS', '_pendingBodyCodexDeadlineMs', 'CODEX_TRANSLATE_TRANSPORT_RETRIES',
     'withCodexTranslationLane', 'codexCallDeadlineMs', '_aiCallLLM', 'translateWithCodexEngine', 'isModelAvailable',
-    'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'console',
+    'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'pendingBodySecondLaneAvailable', 'console',
     `${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
   );
   const processDeadlineMs = Date.now() + 300_000;
   let admissionAttempts = 0;
   let codexCalls = 0;
   let historicalCalls = 0;
+  let currentLaneStopped = laneStopped;
   const admission = { deadlineMs: processDeadlineMs, finish() {} };
   const withCodexTranslationLane = ({ run, fallback }) => {
     if (laneStopsBeforeRun) {
@@ -437,7 +440,9 @@ function createPendingBodyCodexTranslatorFixture({
       admission,
       admitCall: () => {
         admissionAttempts += 1;
-        return admissionDecision(admissionAttempts, admission);
+        const decision = admissionDecision(admissionAttempts, admission);
+        if (!decision) currentLaneStopped = true;
+        return decision;
       },
       reserveTransportRetry: () => false,
     });
@@ -466,6 +471,7 @@ function createPendingBodyCodexTranslatorFixture({
     translateFieldFreeMt,
     (text) => text,
     translatePendingBodyWithHistoricalChain,
+    () => !currentLaneStopped && isModelAvailable(),
     { error() {}, warn() {}, log() {} },
   );
   return {
@@ -502,9 +508,9 @@ test('il body ricade sulla catena storica solo quando il breaker prova indisponi
     modelAvailable: () => true,
     admissionDecision: (attempt, admission) => attempt === 1 ? admission : null,
   });
-  assert.equal(budgetStopped.translated, '');
-  assert.deepEqual(budgetStopped.counts, { admissionAttempts: 2, codexCalls: 1, historicalCalls: 0 });
-  assert.equal(budgetStopped.availabilityChecks, 3);
+  assert.equal(budgetStopped.translated, 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.');
+  assert.deepEqual(budgetStopped.counts, { admissionAttempts: 2, codexCalls: 1, historicalCalls: 1 });
+  assert.equal(budgetStopped.availabilityChecks, 2);
 
   const breakerStopped = await runScenario({
     modelAvailable: (check) => check === 1,
@@ -524,7 +530,7 @@ test('il body ricade sulla catena storica solo quando il breaker prova indisponi
   assert.equal(breakerStoppedAfterTransportFailure.availabilityChecks, 2);
 });
 
-test('il callback di fallback della lane usa la catena storica solo se Codex è indisponibile', async () => {
+test('il callback di fallback della lane usa la catena storica quando il breaker è aperto', async () => {
   const source = [
     'Il primo paragrafo contiene contesto sufficiente per verificare il fallback della lane.',
     '',
@@ -532,14 +538,24 @@ test('il callback di fallback della lane usa la catena storica solo se Codex è 
     '',
     'Il secondo paragrafo completa il corpo usato dalla regressione.',
   ].join('\n');
-  const stoppedWhileAvailable = createPendingBodyCodexTranslatorFixture({
+  const stoppedWithoutBreaker = createPendingBodyCodexTranslatorFixture({
     isModelAvailable: () => true,
     admissionDecision: (_attempt, admission) => admission,
     translateWithCodexEngine: async () => '',
     laneStopsBeforeRun: true,
   });
-  await assert.rejects(stoppedWhileAvailable.translate(source), /lane Codex fermata senza prova di indisponibilità/);
-  assert.deepEqual(stoppedWhileAvailable.counts(), { admissionAttempts: 0, codexCalls: 0, historicalCalls: 0 });
+  await assert.rejects(stoppedWithoutBreaker.translate(source), /lane Codex fermata senza prova di indisponibilità/);
+  assert.deepEqual(stoppedWithoutBreaker.counts(), { admissionAttempts: 0, codexCalls: 0, historicalCalls: 0 });
+
+  const stoppedByBudget = createPendingBodyCodexTranslatorFixture({
+    isModelAvailable: () => true,
+    admissionDecision: (_attempt, admission) => admission,
+    translateWithCodexEngine: async () => '',
+    laneStopsBeforeRun: true,
+    laneStopped: true,
+  });
+  assert.equal(await stoppedByBudget.translate(source), stoppedByBudget.expected);
+  assert.deepEqual(stoppedByBudget.counts(), { admissionAttempts: 0, codexCalls: 0, historicalCalls: 1 });
 
   const stoppedByBreaker = createPendingBodyCodexTranslatorFixture({
     isModelAvailable: () => false,

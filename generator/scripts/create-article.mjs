@@ -14702,8 +14702,9 @@ async function translatePendingBodyWithCodex(
     fallback: () => {
       // La disponibilità può cambiare dopo la selezione della corsia: il
       // circuit-breaker può fermare Codex mentre la richiesta aspetta in coda.
-      // Il fallback storico è ammesso solo se il breaker prova l'indisponibilità.
-      if (!isModelAvailable(codex) && typeof callWithRetry === 'function') {
+      // Il fallback storico è ammesso solo se il predicato condiviso prova che
+      // la corsia è ferma, anche quando il modello risulta ancora disponibile.
+      if (!pendingBodySecondLaneAvailable() && typeof callWithRetry === 'function') {
         return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry });
       }
       throw new Error('lane Codex fermata senza prova di indisponibilità del modello');
@@ -14784,7 +14785,7 @@ async function translatePendingBodyWithCodex(
         onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
       });
       if (!text
-        && (codexModelUnavailable || !isModelAvailable(codex))
+        && (codexModelUnavailable || !pendingBodySecondLaneAvailable())
         && typeof callWithRetry === 'function') {
         // `translateFieldFreeMt` cattura lo stop della cascata segmentata e
         // restituisce un campo vuoto. Riprova lo stesso body sulla catena
