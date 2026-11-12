@@ -87,6 +87,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.polizia-cantonale-comunicazione-media.title': 'Service communication et médias de la police cantonale de Soleure',
     'blog.article.polizia-cantonale-comunicazione-media.excerpt': 'Le service fonctionne 365 jours par an, gère X, Facebook et Instagram et interdit les drones dans un rayon de 300 m autour d’un événement.',
     'blog.article.polizia-cantonale-comunicazione-media.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.juko-supporto-aumento-corpo-polizia.title': 'JUKO soutient à l\'unanimité l\'augmentation des effectifs de la police à Soleure',
+    'blog.article.juko-supporto-aumento-corpo-polizia.excerpt': 'La commission de justice du Conseil cantonal a approuvé à l\'unanimité l\'augmentation de 51 postes pour la période 2027-2029 ainsi que le budget global.',
+    'blog.article.juko-supporto-aumento-corpo-polizia.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

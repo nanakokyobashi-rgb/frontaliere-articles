@@ -31,6 +31,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'tasso-disoccupazione-ottobre-2026': { it: 'tasso-disoccupazione-ottobre-2026', en: 'unemployment-rate-october-2026', de: 'arbeitslosenquote-oktober-2026', fr: 'taux-chomage-octobre-2026' },
  'consiglio-soletta-rifiuta-trasparenza': { it: 'consiglio-soletta-rifiuta-trasparenza', en: 'solothurn-council-rejects-transparency', de: 'kantonsrat-solothurn-lehnt-transparenz', fr: 'conseil-soleure-rejette-transparence' },
  'polizia-cantonale-comunicazione-media': { it: 'polizia-cantonale-comunicazione-media', en: 'cantonal-police-communication-media', de: 'polizei-kantonal-kommunikation-media', fr: 'police-cantonale-communication-media' },
+ 'juko-supporto-aumento-corpo-polizia': { it: 'juko-supporto-aumento-corpo-polizia', en: 'juko-police-force-increase-support', de: 'juko-polizeikraefteerhoehung-unterstuetzung', fr: 'juko-soutien-augmentation-corps-police' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

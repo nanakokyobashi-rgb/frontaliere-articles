@@ -87,6 +87,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.polizia-cantonale-comunicazione-media.title': 'Servizio comunicazione e media polizia cantonale di Soletta',
     'blog.article.polizia-cantonale-comunicazione-media.excerpt': 'Il servizio opera 365 giorni all\'anno, gestisce X, Facebook e Instagram e vieta i droni entro 300 m da un evento.',
     'blog.article.polizia-cantonale-comunicazione-media.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.juko-supporto-aumento-corpo-polizia.title': 'JUKO sostiene all\'unanimità aumento corpo polizia in Soletta',
+    'blog.article.juko-supporto-aumento-corpo-polizia.excerpt': 'La Justizkommission del Consiglio cantonale ha approvato all\'unanimità l\'aumento di 51 posti per il periodo 2027-2029 e il Globalbudget.',
+    'blog.article.juko-supporto-aumento-corpo-polizia.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;

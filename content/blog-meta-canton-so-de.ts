@@ -87,6 +87,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.polizia-cantonale-comunicazione-media.title': 'Kommunikations- und Mediendienst der Kantonspolizei Solothurn',
     'blog.article.polizia-cantonale-comunicazione-media.excerpt': 'Der Dienst ist 365 Tage im Jahr tätig, betreut X, Facebook und Instagram und verbietet Drohnen im Umkreis von 300 m um eine Veranstaltung.',
     'blog.article.polizia-cantonale-comunicazione-media.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.juko-supporto-aumento-corpo-polizia.title': 'JUKO unterstützt einstimmig die Aufstockung des Polizeikorps in Solothurn',
+    'blog.article.juko-supporto-aumento-corpo-polizia.excerpt': 'Die Justizkommission des Kantonsrats hat die Aufstockung um 51 Stellen für den Zeitraum 2027–2029 sowie das Globalbudget einstimmig genehmigt.',
+    'blog.article.juko-supporto-aumento-corpo-polizia.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;

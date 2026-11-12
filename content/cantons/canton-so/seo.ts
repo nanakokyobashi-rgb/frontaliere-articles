@@ -1089,6 +1089,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-juko-supporto-aumento-corpo-polizia': {
+    title: 'JUKO sostiene all\'unanimità aumento corpo polizia in Soletta',
+    description: 'La Justizkommission sostiene all\'unanimità l\'aumento di 51 posti per la polizia di Soletta nel periodo 2027-2029 e approva il Globalbudget.',
+    keywords: 'frontalieri, ticino, svizzera, italia, juko, sostiene, unanimità, aumento',
+    ogTitle: 'JUKO sostiene aumento corpo polizia Soletta 2027-2029',
+    ogDescription: 'La Justizkommission del Consiglio cantonale di Soletta ha approvato all\'unanimità l\'aumento di 51 posti per la polizia nel periodo 2027-2029 e il Globalbudget.',
+    canonicalPath: '/articoli-soletta/juko-supporto-aumento-corpo-polizia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "JUKO sostiene all'unanimità aumento corpo polizia in Soletta",
+      "description": "La Justizkommission sostiene all'unanimità l'aumento di 51 posti per la polizia di Soletta nel periodo 2027-2029 e approva il Globalbudget.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-juko-supporto-aumento-corpo-polizia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-12T12:38:57+00:00",
+      "dateModified": "2026-11-12T12:38:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/juko-supporto-aumento-corpo-polizia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
