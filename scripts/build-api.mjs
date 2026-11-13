@@ -134,7 +134,6 @@ import {
   ARCHIVE_ALL_SLUG,
   buildSitemap,
   buildFamilySectionSitemap,
-  isPaginationSitemapEligible,
   countSitemapEntries,
   publishedArticleLocales,
 } from './lib/build-sitemap.mjs';
@@ -970,6 +969,9 @@ if (familySitemapRows.length > 0) {
 // `ARCHIVE_ALL_SLUG` viene da build-sitemap.mjs, la stessa tabella che usa la
 // sitemap di famiglia.
 const { readArticleArchiveUnionSlugs } = await load('engine/shared/articleArchiveUnion.ts');
+// This script runs through tsx, so use the engine's policy-owned append helper
+// rather than keeping a second guard beside the sitemap mutation below.
+const { pushPaginationSitemapEntry } = await load('engine/shared/paginationIndexPolicy.ts');
 const { ARTICLE_SECTIONS } = await load('articleSections.ts');
 
 function archiveBase(section, locale) {
@@ -1007,7 +1009,6 @@ function buildArchiveSitemap() {
     archiveSources[section] = { total, floor, pages };
     for (const locale of LOCALES) {
       for (let page = 1; page <= pages; page++) {
-        if (!isPaginationSitemapEligible(page)) continue;
         const base = archiveBase(section, locale);
         const loc = page === 1 ? base : `${base.slice(0, -1)}/page-${page}/`;
         const parts = [`  <url>`, `    <loc>${SITE}${loc}</loc>`];
@@ -1027,7 +1028,7 @@ function buildArchiveSitemap() {
         parts.push(`    <changefreq>daily</changefreq>`);
         parts.push(`    <priority>${page === 1 ? '0.6' : '0.4'}</priority>`);
         parts.push(`  </url>`);
-        urls.push(parts.join('\n'));
+        pushPaginationSitemapEntry(urls, page, parts.join('\n'));
       }
     }
   }
