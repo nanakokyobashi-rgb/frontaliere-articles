@@ -767,6 +767,20 @@ function hasSameOpaqueSpans(sourceLine, translatedLine) {
     && source.every((span, index) => span === translated[index]);
 }
 
+function readMarkdownAutolinkEnd(text, start) {
+  if (text[start] !== '<') return null;
+  const end = text.indexOf('>', start + 1);
+  if (end === -1 || /[\r\n]/u.test(text.slice(start + 1, end))) return null;
+  const target = text.slice(start + 1, end);
+  // Keep XML/custom HTML names such as `<x:term>` on the HTML path. A URI
+  // autolink with a slash (`<https://...>`) cannot be a tag name, so it is
+  // unambiguous here; bare email autolinks are unambiguous for the same reason.
+  const looksLikeHtmlName = /^[A-Za-z][A-Za-z0-9:_-]*$/u.test(target);
+  const uri = !looksLikeHtmlName && /^[A-Za-z][A-Za-z0-9+.-]*:[^<>\s]+$/u.test(target);
+  const email = /^[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+$/u.test(target);
+  return uri || email ? end + 1 : null;
+}
+
 const HTML_VOID_TAGS = new Set([
   'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link',
   'meta', 'param', 'source', 'track', 'wbr',
@@ -802,6 +816,11 @@ function htmlStructureSignature(text) {
       continue;
     }
     if (value[cursor] !== '<') continue;
+    const autolinkEnd = readMarkdownAutolinkEnd(value, cursor);
+    if (autolinkEnd !== null) {
+      cursor = autolinkEnd - 1;
+      continue;
+    }
     const tag = readHtmlTagEnd(value, cursor);
     if (tag === null) {
       const possibleName = value.slice(cursor + 1).match(/^\/?([A-Za-z][A-Za-z0-9:_-]*)/u);
@@ -1226,6 +1245,13 @@ function sourceOwnedSpanRanges(text, { includeNumbers = false } = {}) {
   let segmentStart = 0;
   for (let cursor = 0; cursor < value.length; cursor += 1) {
     if (value[cursor] !== '<') continue;
+    const autolinkEnd = readMarkdownAutolinkEnd(value, cursor);
+    if (autolinkEnd !== null) {
+      ranges.push({ start: cursor + 1, end: autolinkEnd - 1 });
+      cursor = autolinkEnd - 1;
+      segmentStart = autolinkEnd;
+      continue;
+    }
     const tag = readHtmlTagEnd(value, cursor);
     if (tag === null) continue;
     ranges.push(...collectInlineOpaqueRanges(value, segmentStart, cursor));

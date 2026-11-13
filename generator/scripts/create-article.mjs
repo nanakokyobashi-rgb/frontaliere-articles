@@ -16304,10 +16304,13 @@ async function translateArticle(data) {
         }, span)
           .replace(/\s+/gu, ' ')
           .trim();
-        const anchors = [...withoutNumbers.matchAll(/(?<![\p{L}\p{N}_])[\p{Lu}][\p{L}\p{N}_’'-]*/gu)]
+        const anchorTokens = [...withoutNumbers.matchAll(/(?<![\p{L}\p{N}_])[\p{Lu}][\p{L}\p{N}_’'-]*/gu)]
           .map(([anchor]) => anchor.toLowerCase())
-          .join('|');
-        return { number, exactSpan: withoutNumbers.toLowerCase(), anchorSpan: anchors };
+        return {
+          number,
+          exactSpan: withoutNumbers.toLowerCase(),
+          anchorSpan: anchorTokens.join('|'),
+        };
       });
       return {
         values: numberEntries.map(({ value }) => value),
@@ -16319,16 +16322,47 @@ async function translateArticle(data) {
     if (JSON.stringify(sourceNumericContract.values) !== JSON.stringify(joinedNumericContract.values)) {
       return null;
     }
-    const compareNumericAssociations = (key) => {
+    // A capitalized token is only a candidate anchor. It becomes evidence of
+    // source ownership when the same normalized token survives in both full
+    // texts; a sentence starter such as `Il`/`The` must not bind a number to
+    // translated prose. Keep the association check for genuinely invariant
+    // labels/proper names, and fall back to the already-verified number order
+    // when translation has left no source-owned anchor to compare.
+    const anchorTokens = (contract) => new Set(
+      contract.associations.flatMap(({ anchorSpan }) => anchorSpan ? anchorSpan.split('|') : []),
+    );
+    const sourceAnchorTokens = anchorTokens(sourceNumericContract);
+    const joinedAnchorTokens = anchorTokens(joinedNumericContract);
+    const invariantAnchorTokens = new Set(
+      [...sourceAnchorTokens].filter((anchor) => joinedAnchorTokens.has(anchor)),
+    );
+    const withInvariantAnchors = (contract) => ({
+      ...contract,
+      associations: contract.associations.map((association) => ({
+        ...association,
+        anchorSpan: association.anchorSpan
+          .split('|')
+          .filter((anchor) => invariantAnchorTokens.has(anchor))
+          .join('|'),
+      })),
+    });
+    const sourceAnchoredNumericContract = withInvariantAnchors(sourceNumericContract);
+    const joinedAnchoredNumericContract = withInvariantAnchors(joinedNumericContract);
+
+    const compareNumericAssociations = (
+      key,
+      sourceContract = sourceNumericContract,
+      joinedContract = joinedNumericContract,
+    ) => {
       const sourceBySpan = new Map();
       const joinedBySpan = new Map();
-      for (const { number, ...association } of sourceNumericContract.associations) {
+      for (const { number, ...association } of sourceContract.associations) {
         const span = association[key];
         if (!span) continue;
         if (!sourceBySpan.has(span)) sourceBySpan.set(span, []);
         sourceBySpan.get(span).push(number);
       }
-      for (const { number, ...association } of joinedNumericContract.associations) {
+      for (const { number, ...association } of joinedContract.associations) {
         const span = association[key];
         if (!span) continue;
         if (!joinedBySpan.has(span)) joinedBySpan.set(span, []);
@@ -16340,15 +16374,22 @@ async function translateArticle(data) {
       return sourceKeys.every((span) => JSON.stringify(sourceBySpan.get(span)) === JSON.stringify(joinedBySpan.get(span)));
     };
     const exactAssociation = compareNumericAssociations('exactSpan');
-    const anchorAssociation = exactAssociation === null
-      ? compareNumericAssociations('anchorSpan')
+    const anchorAssociation = exactAssociation === null && invariantAnchorTokens.size > 0
+      ? compareNumericAssociations(
+        'anchorSpan',
+        sourceAnchoredNumericContract,
+        joinedAnchoredNumericContract,
+      )
       : null;
-    // A global digit sequence is not enough when a body has multiple facts.
-    // If numbers exist, at least one source-owned span/anchor must prove their
-    // association; an unalignable comparison is not evidence of correctness.
+    // A global digit sequence is not enough when comparable source-owned spans
+    // disagree: unchanged labels still reject a reassociation. If translation
+    // changes every surrounding label/prose token, there is no source-owned
+    // association left to compare, so the preserved ordered digit sequence is
+    // the only available proof and must remain admissible.
     if (sourceNumericContract.values.length > 0
       && exactAssociation !== true
-      && anchorAssociation !== true) return null;
+      && (exactAssociation === false
+        || (invariantAnchorTokens.size > 0 && anchorAssociation !== true))) return null;
 
     // A table can preserve its pipes and per-cell opaque atoms while still
     // swapping two cells made only of translatable prose. Such cells have no

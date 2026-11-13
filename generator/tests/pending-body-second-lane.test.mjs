@@ -1116,6 +1116,51 @@ test('la guardia distingue URL bare con apostrofi e chiusure HTML mancanti', () 
   assert.deepEqual(opaqueSpanSignature(html), ["https://example.test/O'Connor"]);
   assert.equal(hasSameLineStructure(html, html.replace('anchor', 'Anker')), true);
   assert.equal(hasSameLineStructure(html, html.replace('</a>', '')), false);
+
+  const autolinkUrl = 'Leggi <https://example.test/auto> per i dettagli.';
+  assert.deepEqual(opaqueSpanSignature(autolinkUrl), ['https://example.test/auto']);
+  assert.equal(
+    hasSameLineStructure(autolinkUrl, 'Read <https://example.test/auto> for details.'),
+    true,
+  );
+  assert.equal(
+    hasSameLineStructure(autolinkUrl, 'Read <https://evil.example/auto> for details.'),
+    false,
+  );
+
+  const autolinkEmail = 'Scrivi <mail@example.test> per i dettagli.';
+  assert.equal(
+    hasSameLineStructure(autolinkEmail, 'Write <mail@example.test> for details.'),
+    true,
+  );
+});
+
+test('il contratto numerico non usa la maiuscola della prosa come anchor', async () => {
+  const realChunker = buildChunker();
+  const makeTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  );
+  const source = 'Il progetto dura 12 mesi.';
+  const translated = 'The project lasts 12 months.';
+  const translateInChunks = makeTranslator(
+    (bodyText) => realChunker(bodyText, 50),
+    async () => ({ body1: translated }),
+    (text) => String(text).trim().split(/\s+/u).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+
+  assert.equal(
+    await translateInChunks(source, 'body1', (chunk) => chunk, 'test-prose-anchor', 'en'),
+    translated,
+    'la traduzione di una frase normale non deve essere scartata perché cambia la parola iniziale maiuscola',
+  );
 });
 
 test('il contratto numerico ignora URL e code span source-owned', async () => {
