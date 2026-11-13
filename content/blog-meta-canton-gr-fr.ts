@@ -63,6 +63,9 @@ const blogMetaCantonGrFr: Record<string, string> = {
     'blog.article.vallo-protezione-sorte-lostallo.title': 'Lostallo, le mur protecteur de Sorte est en cours',
     'blog.article.vallo-protezione-sorte-lostallo.excerpt': 'Dans les prochains jours, les travaux débuteront à Sorte sur le barrage de protection situé sur la rive droite du hameau de Lostallo.',
     'blog.article.vallo-protezione-sorte-lostallo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.imc-oberengadin-weekend.title': 'IMC Oberengadin fermée les week-ends en raison d’un manque de personnel',
+    'blog.article.imc-oberengadin-weekend.excerpt': 'L’Intermediate Care de Spital Oberengadin ne fonctionne pas les week-ends de novembre en raison d’un manque de personnel.',
+    'blog.article.imc-oberengadin-weekend.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGrFr;

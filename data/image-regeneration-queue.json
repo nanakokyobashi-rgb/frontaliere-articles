@@ -7,30 +7,19 @@
       "fallbackImage": "/images/places/lugano-view.webp",
       "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 40,
+      "failureCount": 41,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-13T00:01:08.243Z"
-    },
-    {
-      "articleId": "giovani-donne-stipendi-svizzera",
-      "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
-      "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Synthetic editorial illustration relevant to young Swiss women and education; two recognizable foreground people and backgroun",
-      "status": "failed",
-      "failureCount": 36,
-      "requestedAt": "2026-10-19T03:17:12.439Z",
-      "lastFailureAt": "2026-11-13T00:03:07.558Z",
-      "retryHint": "no-text"
+      "lastFailureAt": "2026-11-13T12:55:39.495Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic editorial scene of a commuter at a transit station; no text, logos, or visible face, but a recognizable fore",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 35,
+      "failureCount": 36,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-13T00:04:26.283Z"
+      "lastFailureAt": "2026-11-13T12:59:03.458Z"
     }
   ]
 }

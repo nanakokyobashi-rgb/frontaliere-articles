@@ -63,6 +63,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.vallo-protezione-sorte-lostallo.title': 'Lostallo, the protective wall in Sorte is underway',
     'blog.article.vallo-protezione-sorte-lostallo.excerpt': 'In the coming days, in Sorte, work will begin on the protective wall on the right bank of the hamlet of Lostallo.',
     'blog.article.vallo-protezione-sorte-lostallo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.imc-oberengadin-weekend.title': 'IMC Oberengadin closed on weekends due to staff shortage',
+    'blog.article.imc-oberengadin-weekend.excerpt': 'The Intermediate Care unit at Spital Oberengadin does not operate on weekends in November due to staff shortages.',
+    'blog.article.imc-oberengadin-weekend.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGrEn;

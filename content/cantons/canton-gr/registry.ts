@@ -227,4 +227,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'imc-oberengadin-weekend',
+ category: 'novita',
+ date: '2026-11-13T12:59:39.920Z',
+ image: '/images/blog/article-imc-oberengadin-weekend.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

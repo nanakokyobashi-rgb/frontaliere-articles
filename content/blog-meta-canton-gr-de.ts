@@ -63,6 +63,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.vallo-protezione-sorte-lostallo.title': 'Lostallo, die Schutzmauer in Sorte ist im Bau',
     'blog.article.vallo-protezione-sorte-lostallo.excerpt': 'In den kommenden Tagen wird in Sorte mit dem Bau der Schutzmauer am rechten Ufer des Weilers Lostallo begonnen.',
     'blog.article.vallo-protezione-sorte-lostallo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.imc-oberengadin-weekend.title': 'IMC Oberengadin an Wochenenden wegen Personalmangels geschlossen',
+    'blog.article.imc-oberengadin-weekend.excerpt': 'Die Intermediate Care des Spitals Oberengadin ist an den Wochenenden im November aufgrund von Personalmangel nicht in Betrieb.',
+    'blog.article.imc-oberengadin-weekend.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;
