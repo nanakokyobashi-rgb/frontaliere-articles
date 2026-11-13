@@ -369,6 +369,7 @@ import {
   balanceMarkdownMarkers,
   hasSameLineSkeleton,
   lineStructuralSignature,
+  opaqueSpanSignature,
   setCodexTranslateProcessDeadline,
   translateWithCodexEngine,
   withCodexTranslationLane,
@@ -15774,7 +15775,9 @@ async function translateArticle(data) {
     // autolink destinations and HTML-anchor hrefs. Visible labels remain
     // translatable, but every source-owned route must stay byte-stable
     // (reference keys are compared case-insensitively because Markdown
-    // resolves them that way).
+    // resolves them that way). The shared opaque-span guard below also covers
+    // bare URLs, email addresses, placeholders and translation sentinels that
+    // are not enclosed in link syntax.
     const markdownLinkContract = (text) => {
       const value = String(text ?? '');
       const normalizeReference = (label) => String(label)
@@ -16173,6 +16176,12 @@ async function translateArticle(data) {
     if (JSON.stringify(sourceLinkContract) !== JSON.stringify(joinedLinkContract)) {
       return null;
     }
+    const opaqueSpanContract = (text) => String(text ?? '')
+      .split(/\r\n?|\n/u)
+      .flatMap((line) => opaqueSpanSignature(line));
+    if (JSON.stringify(opaqueSpanContract(bodyText)) !== JSON.stringify(opaqueSpanContract(joined))) {
+      return null;
+    }
 
     // Numeric values are source-owned too. Locale-specific grouping and
     // decimal separators may change, but the sign, ordered digit sequence and
@@ -16253,7 +16262,12 @@ async function translateArticle(data) {
     const anchorAssociation = exactAssociation === null
       ? compareNumericAssociations('anchorSpan')
       : null;
-    if (exactAssociation === false || anchorAssociation === false) return null;
+    // A global digit sequence is not enough when a body has multiple facts.
+    // If numbers exist, at least one source-owned span/anchor must prove their
+    // association; an unalignable comparison is not evidence of correctness.
+    if (sourceNumericContract.values.length > 0
+      && exactAssociation !== true
+      && anchorAssociation !== true) return null;
 
     // `balanceMarkdownMarkers` only repairs/validates bold `**` and separator
     // lines. Keep the full source-owned delimiter skeleton here as well, so a
