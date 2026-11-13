@@ -1130,6 +1130,22 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'un segno meno rimosso non deve arrivare al sanitizer finale',
   );
 
+  for (const ordinalMarker of ['°', 'º']) {
+    const ordinalSource = `1${ordinalMarker} gennaio 2026 con altre parole da spezzare ancora oggi.`;
+    assert.equal(
+      await makeTranslator((chunk) => chunk.replace(`1${ordinalMarker}`, '1.'))(ordinalSource),
+      ordinalSource.replace(`1${ordinalMarker}`, '1.'),
+      `un ordinale italiano ${ordinalMarker} a inizio riga può diventare il punto ordinale della lingua target`,
+    );
+  }
+
+  const degreeSource = 'Temperatura misurata a 12° dopo altre parole da spezzare ancora oggi.';
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('12°', '12.'))(degreeSource),
+    null,
+    'il punto ordinale non deve allentare il controllo di una misura in gradi',
+  );
+
   const signedGroupedChunks = realChunker('Valore -12 345 dopo', 2);
   assert.ok(
     signedGroupedChunks.some((chunk) => chunk.includes('-12 345')),

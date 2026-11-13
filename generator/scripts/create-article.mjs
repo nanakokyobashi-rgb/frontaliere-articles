@@ -15849,16 +15849,24 @@ async function translateArticle(data) {
 
     // Numeric values are source-owned too. Locale-specific grouping and
     // decimal separators may change, but the sign, ordered digit sequence and
-    // percent/degree unit must remain identical after the join.
+    // percent/degree unit must remain identical after the join. The one
+    // locale-only exception is a line-leading ordinal: Italian `1°`/`1º` can
+    // become `1.` in a target locale, so both spellings normalize to `.`.
     const numericContract = (text) => {
       const value = String(text ?? '');
       const numberPattern = /(?<![\p{L}\p{N}_])[+\-−]?\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:\s*[%°º])?(?![\p{L}\p{N}_])/gu;
-      return [...value.matchAll(numberPattern)].map(([token]) => {
+      const isLineLeadingOrdinal = (index) => {
+        const lineStart = value.lastIndexOf('\n', index - 1) + 1;
+        return /^[ \t]*\d{1,2}(?:[°º]|\.)\s/u.test(value.slice(lineStart));
+      };
+      return [...value.matchAll(numberPattern)].map((match) => {
+        const [token] = match;
         const unit = token.match(/[%°º]$/u)?.[0] || '';
         const number = unit ? token.slice(0, -unit.length) : token;
         const sign = number.match(/^[+\-−]/u)?.[0] || '';
         const unsigned = sign ? number.slice(sign.length) : number;
-        return `${sign}${unsigned.replace(/[.,'’\u00a0\u202f ]/gu, '')}:${unit}`;
+        const normalizedUnit = isLineLeadingOrdinal(match.index) ? '.' : unit;
+        return `${sign}${unsigned.replace(/[.,'’\u00a0\u202f ]/gu, '')}:${normalizedUnit}`;
       });
     };
     if (JSON.stringify(numericContract(bodyText)) !== JSON.stringify(numericContract(joined))) {
