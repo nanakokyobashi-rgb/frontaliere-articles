@@ -15206,10 +15206,13 @@ async function translatePendingBodyWithHistoricalChain(
   itValue,
   locale,
   field,
-  { callWithRetry, translateInChunks = null } = {},
+  { callWithRetry, translateInChunks } = {},
 ) {
   if (typeof callWithRetry !== 'function') {
     throw new TypeError('translatePendingBodyWithHistoricalChain: `callWithRetry` è richiesto');
+  }
+  if (typeof translateInChunks !== 'function') {
+    throw new TypeError('translatePendingBodyWithHistoricalChain: `translateInChunks` è richiesto per il contratto strutturale');
   }
   const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
   const rejected = [];
@@ -15220,8 +15223,7 @@ async function translatePendingBodyWithHistoricalChain(
     fieldType: 'description',
     fieldName: field,
     translate: async ({ text: masked }) => {
-      if (typeof translateInChunks === 'function'
-        && countWords(masked || '') > TRANSLATION_CHUNK_THRESHOLD) {
+      if (countWords(masked || '') > TRANSLATION_CHUNK_THRESHOLD) {
         // Reuse the same chunker as the legacy translation and truncation
         // paths: the historical fallback must not send an oversized body in
         // one request after Codex has stopped.
@@ -15254,7 +15256,23 @@ async function translatePendingBodyWithHistoricalChain(
         rejected.push('non-string');
         return '';
       }
-      return translated;
+      // Reuse the exact same source-owned contract as the chunked path on the
+      // already translated short body. `pretranslatedResult` avoids a second
+      // provider call while still running skeleton, links, numbers, markers
+      // and completeness checks before `translateFieldFreeMt` can finalize it.
+      const validated = await translateInChunks(
+        masked,
+        field,
+        () => '',
+        `${locale}:${field}-pending-retry-validation`,
+        locale,
+        { pretranslatedResult: { [field]: translated } },
+      );
+      if (validated === null) {
+        rejected.push('structure');
+        return '';
+      }
+      return validated;
     },
     balanceMarkdown: balanceMarkdownMarkers,
     onWarn: (msg) => console.error(`  ⚠️  [seconda corsia storica] ${msg}`),
@@ -15454,18 +15472,29 @@ async function translateArticle(data) {
   // prompt when it's short, and both need the same chunking safety net once
   // it isn't, since a single oversized prompt can hit the model's per-call
   // output cap and come back truncated regardless of how many retries wrap it.
-  async function translateInChunks(bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang) {
-    const chunks = splitIntoTranslationChunks(bodyText);
-    const translated = await Promise.all(
-      chunks.map((chunk, i) =>
-        callWithRetry(
-          makeChunkPrompt(chunk, i, chunks.length),
-          Math.max(5000, Math.ceil(countWords(chunk) * 5)),
-          `${labelPrefix}-p${i + 1}`,
-          { translation: true },
+  async function translateInChunks(
+    bodyText,
+    fieldKey,
+    makeChunkPrompt,
+    labelPrefix,
+    targetLang,
+    { pretranslatedResult = null } = {},
+  ) {
+    const chunks = pretranslatedResult === null
+      ? splitIntoTranslationChunks(bodyText)
+      : [bodyText];
+    const translated = pretranslatedResult === null
+      ? await Promise.all(
+        chunks.map((chunk, i) =>
+          callWithRetry(
+            makeChunkPrompt(chunk, i, chunks.length),
+            Math.max(5000, Math.ceil(countWords(chunk) * 5)),
+            `${labelPrefix}-p${i + 1}`,
+            { translation: true },
+          ),
         ),
-      ),
-    );
+      )
+      : [pretranslatedResult];
     // `chunks` passati al join: un chunk tornato identico al suo italiano
     // rende nullo l'intero campo (`isSourcePassthrough`, #1875), come un chunk
     // non-stringa. I confini sono quelli della sorgente: una divisione dentro
@@ -15716,7 +15745,7 @@ async function translateArticle(data) {
         lineStart = nextLine + 1;
       }
 
-      const links = [];
+      const linkEntries = [];
       const htmlAnchors = [];
       const readHtmlTagEnd = (start) => {
         let quote = null;
@@ -15734,6 +15763,28 @@ async function translateArticle(data) {
         }
         return null;
       };
+      const readHtmlAnchorCloseEnd = (start) => {
+        let depth = 1;
+        for (let cursor = start; cursor < value.length; cursor += 1) {
+          const codeEnd = readCodeSpanEnd(value, cursor);
+          if (codeEnd !== null) {
+            cursor = codeEnd - 1;
+            continue;
+          }
+          if (value[cursor] !== '<') continue;
+          const tagEnd = readHtmlTagEnd(cursor);
+          if (tagEnd === null) continue;
+          const tag = value.slice(cursor, tagEnd);
+          if (/^<a(?![\p{L}\p{N}_])/iu.test(tag) && !/\/\s*>$/u.test(tag)) {
+            depth += 1;
+          } else if (/^<\/a\s*>$/iu.test(tag)) {
+            depth -= 1;
+            if (depth === 0) return tagEnd;
+          }
+          cursor = tagEnd - 1;
+        }
+        return null;
+      };
       const parseLinkAt = (start) => {
         const linkKind = value[start] === '!' ? 'image' : 'link';
         const labelStart = value[start] === '!' ? start + 1 : start;
@@ -15745,7 +15796,12 @@ async function translateArticle(data) {
         if (value[suffixStart] === '(') {
           const end = readBalancedParenthesisEnd(suffixStart);
           if (end === null) return null;
-          return { end, signature: `${linkKind}:inline:${value.slice(suffixStart + 1, end - 1)}` };
+          return {
+            end,
+            labelStart,
+            labelEnd,
+            signature: `${linkKind}:inline:${value.slice(suffixStart + 1, end - 1)}`,
+          };
         }
         if (value[suffixStart] === '[') {
           const referenceEnd = readBalancedBracketEnd(suffixStart);
@@ -15753,96 +15809,114 @@ async function translateArticle(data) {
           const reference = value.slice(suffixStart + 1, referenceEnd);
           return {
             end: referenceEnd + 1,
+            labelStart,
+            labelEnd,
             signature: `${linkKind}:reference:${normalizeReference(reference || label)}`,
           };
         }
         const key = normalizeReference(label);
         return {
           end: labelEnd + 1,
+          labelStart,
+          labelEnd,
           signature: definitionKeys.has(key) ? `${linkKind}:reference:${key}` : null,
         };
       };
 
-      for (let cursor = 0; cursor < value.length; cursor += 1) {
-        const codeEnd = readCodeSpanEnd(value, cursor);
-        if (codeEnd !== null) {
-          cursor = codeEnd - 1;
-          continue;
-        }
-        if (value[cursor] === '<') {
-          const tagEnd = readHtmlTagEnd(cursor);
-          if (tagEnd !== null) {
-            const tag = value.slice(cursor, tagEnd);
-            if (/^<a(?![\p{L}\p{N}_])/iu.test(tag)) {
-              const hrefs = [];
-              let attributeCursor = 2;
-              while (attributeCursor < tag.length - 1) {
-                while (/\s/u.test(tag[attributeCursor] || '')) attributeCursor += 1;
-                if (tag[attributeCursor] === '/' || tag[attributeCursor] === '>') {
-                  attributeCursor += 1;
-                  continue;
-                }
-                const attributeStart = attributeCursor;
-                while (
-                  attributeCursor < tag.length - 1
-                  && !/[\s=/>]/u.test(tag[attributeCursor])
-                ) attributeCursor += 1;
-                if (attributeCursor === attributeStart) {
-                  attributeCursor += 1;
-                  continue;
-                }
-                const attributeName = tag.slice(attributeStart, attributeCursor).toLowerCase();
-                const nameEnd = attributeCursor;
-                while (/\s/u.test(tag[attributeCursor] || '')) attributeCursor += 1;
-                let target = '';
-                if (tag[attributeCursor] === '=') {
-                  attributeCursor += 1;
+      const scanMarkdownLinks = (start, end) => {
+        for (let cursor = start; cursor < end; cursor += 1) {
+          const codeEnd = readCodeSpanEnd(value, cursor);
+          if (codeEnd !== null) {
+            cursor = codeEnd - 1;
+            continue;
+          }
+          if (value[cursor] === '<') {
+            const tagEnd = readHtmlTagEnd(cursor);
+            if (tagEnd !== null) {
+              const tag = value.slice(cursor, tagEnd);
+              if (/^<a(?![\p{L}\p{N}_])/iu.test(tag)) {
+                const hrefs = [];
+                let attributeCursor = 2;
+                while (attributeCursor < tag.length - 1) {
                   while (/\s/u.test(tag[attributeCursor] || '')) attributeCursor += 1;
-                  const quote = ['"', "'"].includes(tag[attributeCursor]) ? tag[attributeCursor] : '';
-                  if (quote) {
-                    const targetStart = attributeCursor + 1;
-                    const targetEnd = tag.indexOf(quote, targetStart);
-                    if (targetEnd < 0) break;
-                    target = tag.slice(targetStart, targetEnd);
-                    attributeCursor = targetEnd + 1;
-                  } else {
-                    const targetStart = attributeCursor;
-                    while (attributeCursor < tag.length - 1 && !/[\s>]/u.test(tag[attributeCursor])) {
-                      attributeCursor += 1;
-                    }
-                    target = tag.slice(targetStart, attributeCursor);
+                  if (tag[attributeCursor] === '/' || tag[attributeCursor] === '>') {
+                    attributeCursor += 1;
+                    continue;
                   }
-                } else {
-                  attributeCursor = nameEnd;
+                  const attributeStart = attributeCursor;
+                  while (
+                    attributeCursor < tag.length - 1
+                    && !/[\s=/>]/u.test(tag[attributeCursor])
+                  ) attributeCursor += 1;
+                  if (attributeCursor === attributeStart) {
+                    attributeCursor += 1;
+                    continue;
+                  }
+                  const attributeName = tag.slice(attributeStart, attributeCursor).toLowerCase();
+                  const nameEnd = attributeCursor;
+                  while (/\s/u.test(tag[attributeCursor] || '')) attributeCursor += 1;
+                  let target = '';
+                  if (tag[attributeCursor] === '=') {
+                    attributeCursor += 1;
+                    while (/\s/u.test(tag[attributeCursor] || '')) attributeCursor += 1;
+                    const quote = ['"', "'"].includes(tag[attributeCursor]) ? tag[attributeCursor] : '';
+                    if (quote) {
+                      const targetStart = attributeCursor + 1;
+                      const targetEnd = tag.indexOf(quote, targetStart);
+                      if (targetEnd < 0) break;
+                      target = tag.slice(targetStart, targetEnd);
+                      attributeCursor = targetEnd + 1;
+                    } else {
+                      const targetStart = attributeCursor;
+                      while (attributeCursor < tag.length - 1 && !/[\s>]/u.test(tag[attributeCursor])) {
+                        attributeCursor += 1;
+                      }
+                      target = tag.slice(targetStart, attributeCursor);
+                    }
+                  } else {
+                    attributeCursor = nameEnd;
+                  }
+                  if (/(?:^|\W)href$/u.test(attributeName)) hrefs.push(target);
                 }
-                if (/(?:^|\W)href$/u.test(attributeName)) hrefs.push(target);
+                htmlAnchors.push({ hrefs, closed: readHtmlAnchorCloseEnd(tagEnd) !== null });
+                cursor = tagEnd - 1;
+                continue;
               }
-              htmlAnchors.push(hrefs);
-              cursor = tagEnd - 1;
-              continue;
+            }
+            const endOfAutolink = value.indexOf('>', cursor + 1);
+            if (endOfAutolink !== -1 && endOfAutolink < end) {
+              const target = value.slice(cursor + 1, endOfAutolink);
+              if (/^(?:[A-Za-z][A-Za-z0-9+.-]{1,31}:[^ <>]+|[^ <>@]+@[^ <>@]+)$/u.test(target)) {
+                linkEntries.push({ index: cursor, signature: `autolink:${target}` });
+                cursor = endOfAutolink;
+                continue;
+              }
             }
           }
-          const end = value.indexOf('>', cursor + 1);
-          if (end !== -1) {
-            const target = value.slice(cursor + 1, end);
-            if (/^(?:[A-Za-z][A-Za-z0-9+.-]{1,31}:[^ <>]+|[^ <>@]+@[^ <>@]+)$/u.test(target)) {
-              links.push(`autolink:${target}`);
-              cursor = end;
-              continue;
-            }
+          if (value[cursor] !== '[' && value[cursor] !== '!') continue;
+          const parsed = parseLinkAt(cursor);
+          if (parsed === null || parsed.end > end) continue;
+          // A link label is itself Markdown. Scan it before skipping the outer
+          // link so an image or link nested in the label remains source-owned.
+          scanMarkdownLinks(parsed.labelStart + 1, parsed.labelEnd);
+          if (parsed.signature !== null) {
+            linkEntries.push({ index: cursor, signature: parsed.signature });
           }
-        }
-        if (value[cursor] !== '[' && value[cursor] !== '!') continue;
-        const parsed = parseLinkAt(cursor);
-        if (parsed !== null) {
-          if (parsed.signature !== null) links.push(parsed.signature);
           cursor = parsed.end - 1;
         }
-      }
+      };
+      scanMarkdownLinks(0, value.length);
+      const links = linkEntries
+        .sort((left, right) => left.index - right.index)
+        .map(({ signature }) => signature);
       return { links, definitions, codeSpans, htmlAnchors };
     };
     const sourceLinkContract = markdownLinkContract(bodyText);
     const joinedLinkContract = markdownLinkContract(joined);
+    if (sourceLinkContract.htmlAnchors.some(({ closed }) => !closed)
+      || joinedLinkContract.htmlAnchors.some(({ closed }) => !closed)) {
+      return null;
+    }
     if (JSON.stringify(sourceLinkContract) !== JSON.stringify(joinedLinkContract)) {
       return null;
     }

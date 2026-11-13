@@ -68,7 +68,7 @@ function buildChunker() {
   )(lineStructuralSignature);
 }
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
-  const start = src.indexOf('  async function translateInChunks(bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang) {');
+  const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null } = {},\n  ) {');
   assert.notEqual(start, -1, 'translateInChunks non trovata in create-article.mjs');
   const end = src.indexOf('\n  }\n', start);
   assert.notEqual(end, -1, 'fine di translateInChunks non trovata in create-article.mjs');
@@ -702,6 +702,82 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
   assert.equal(translated, expected);
 });
 
+test('il fallback storico corto applica il contratto strutturale prima del finalize', async () => {
+  const historicalAt = src.indexOf('async function translatePendingBodyWithHistoricalChain(');
+  assert.notEqual(historicalAt, -1, 'translatePendingBodyWithHistoricalChain non trovata');
+  const historicalEnd = src.indexOf('\n}\n', historicalAt) + 2;
+  const makeHistoricalTranslator = new Function(
+    'translateFieldFreeMt', 'translatedStringOrNull', 'balanceMarkdownMarkers',
+    'buildPendingBodyRetranslationPrompt', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD',
+    'console',
+    `${src.slice(historicalAt, historicalEnd)}\nreturn translatePendingBodyWithHistoricalChain;`,
+  );
+  const makeTranslateInChunks = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  );
+  const splitIntoTranslationChunks = buildChunker();
+  const countWords = (text) => String(text).trim().split(/\s+/u).filter(Boolean).length;
+  const source = 'Prima <a href="https://example.test/html">anchor</a> dopo altre parole.';
+  const historical = makeHistoricalTranslator(
+    translateFieldFreeMt,
+    translatedStringOrNull,
+    balanceMarkdownMarkers,
+    ({ field, itValue }) => `body ${field}: ${itValue}`,
+    countWords,
+    TRANSLATION_CHUNK_THRESHOLD,
+    { error() {}, warn() {}, log() {} },
+  );
+
+  let successfulProviderCalls = 0;
+  const successfulCallWithRetry = async () => {
+    successfulProviderCalls += 1;
+    return { body1: source.replace('Prima', 'Zuerst') };
+  };
+  const successfulTranslateInChunks = makeTranslateInChunks(
+    splitIntoTranslationChunks,
+    successfulCallWithRetry,
+    countWords,
+    translatedStringOrNull,
+    isSourcePassthrough,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+  );
+  assert.equal(
+    await historical(source, 'de', 'body1', {
+      callWithRetry: successfulCallWithRetry,
+      translateInChunks: successfulTranslateInChunks,
+    }),
+    source.replace('Prima', 'Zuerst'),
+  );
+  assert.equal(successfulProviderCalls, 1);
+
+  for (const [label, mutate] of [
+    ['href HTML alterato', (value) => value.replace('https://example.test/html', 'https://evil.example/html')],
+    ['anchor HTML senza chiusura', (value) => value.replace('</a>', '')],
+  ]) {
+    let providerCalls = 0;
+    const callWithRetry = async () => {
+      providerCalls += 1;
+      return { body1: mutate(source) };
+    };
+    const translateInChunks = makeTranslateInChunks(
+      splitIntoTranslationChunks,
+      callWithRetry,
+      countWords,
+      translatedStringOrNull,
+      isSourcePassthrough,
+      balanceMarkdownMarkers,
+      hasSameLineSkeleton,
+      lineStructuralSignature,
+    );
+    const translated = await historical(source, 'de', 'body1', { callWithRetry, translateInChunks });
+    assert.equal(translated, '', `${label}: il body deve restare non recuperato`);
+    assert.equal(providerCalls, 1, `${label}: la validazione non deve fare una seconda chiamata`);
+  }
+});
+
 test('il chunker spezza anche un singolo paragrafo oltre il limite di parole', () => {
   const countWords = new Function(`${COUNT_WORDS_SRC}\nreturn countWords;`)();
   const splitIntoTranslationChunks = buildChunker();
@@ -1045,6 +1121,7 @@ test('il joiner protegge reference link, definizioni e autolink', async () => {
     ['definition', (chunk) => chunk.replace('https://example.test/destinazione', 'https://evil.example/destinazione')],
     ['autolink', (chunk) => chunk.replace('<https://example.test/auto>', '<https://evil.example/auto>')],
     ['html anchor', (chunk) => chunk.replace('https://example.test/html', 'https://evil.example/html')],
+    ['html anchor senza chiusura', (chunk) => chunk.replace('</a>', '')],
   ]) {
     assert.equal(
       await makeTranslator(mutate)(source),
@@ -1052,6 +1129,14 @@ test('il joiner protegge reference link, definizioni e autolink', async () => {
       `${label} alterato dopo il join non deve passare il guard`,
     );
   }
+
+  const nestedImageSource = 'Prima [pagina ![icona](https://example.test/icon.png)](https://example.test/page) dopo altre parole.';
+  assert.equal(await makeTranslator((chunk) => chunk)(nestedImageSource), nestedImageSource);
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('https://example.test/icon.png', 'https://evil.example/icon.png'))(nestedImageSource),
+    null,
+    'un’immagine Markdown annidata nella label non deve essere nascosta dal link esterno',
+  );
 });
 
 test('il joiner protegge anche le definizioni dentro prefissi Markdown', async () => {
