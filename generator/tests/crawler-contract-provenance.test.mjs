@@ -500,11 +500,21 @@ test(`il piano reale copre i digest correnti e la lineage del contratto committa
     const current = checks.find((c) => c.field === `${observer.target}#sha256`);
     const local = checks.find((c) => c.field === `${observer.target}#sha256@local`);
     const lineage = checks.find((c) => c.field === `${observer.target}#sha256@sourceCommit`);
+    const adapted = MANIFEST.files.some((entry) => (
+      entry.path === observer.target && entry.mode === 'adapted'
+    ));
     assert.ok(current, `${observer.target}: digest currente fuori dal piano`);
     assert.ok(local, `${observer.target}: digest locale fuori dal piano`);
-    assert.ok(lineage, `${observer.target}: digest lineage fuori dal piano`);
     assert.equal(current.expected, observer.sha256, observer.target);
     assert.equal(local.expected, observer.sha256, observer.target);
+    assert.equal(Boolean(current.localOnly), adapted, `${observer.target}: localOnly incoerente col manifest`);
+    assert.equal(Boolean(current.adapted), adapted, `${observer.target}: adapted incoerente col manifest`);
+    if (adapted) {
+      assert.equal(current.sitePath, null, `${observer.target}: adapted deve omettere il path remoto`);
+      assert.equal(lineage, undefined, `${observer.target}: adapted non deve pianificare la lineage remota`);
+      continue;
+    }
+    assert.ok(lineage, `${observer.target}: digest lineage fuori dal piano`);
     assert.equal(lineage.expected, observer.sha256, observer.target);
   }
 });

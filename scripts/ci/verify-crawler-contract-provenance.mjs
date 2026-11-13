@@ -879,8 +879,10 @@ export function planProvenanceChecks(
 
   // Observers are generated/cross-repo files too. A contract that declares
   // their count and digests without scheduling them leaves the observer path
-  // itself outside the provenance guarantee. Each target is checked locally,
-  // at the current site ref, and at the pinned sourceCommit lineage ref.
+  // itself outside the provenance guarantee. Each target is checked locally;
+  // `identical` targets are also checked at the current site ref and at the
+  // pinned sourceCommit lineage ref, while `adapted` targets intentionally
+  // remain local-only because their remote bytes are allowed to differ.
   for (const observer of contract.observers || []) {
     const target = typeof observer?.target === 'string' && SOURCE_PATH_RE.test(observer.target)
       ? observer.target
