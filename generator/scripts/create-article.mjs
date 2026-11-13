@@ -16956,7 +16956,11 @@ ${localizedToponymInstruction(targetLang)}`;
       // copia identica ha gia' il suo retry dedicato piu' sotto.
       const bodyPassthrough = !faqPart && /^body\d+$/.test(field)
         && isSourcePassthrough(valoreTradotto, readField(itContent));
-      if (traduzioneUsabile && !floorMiss && !freeMtRejected && !bodyPassthrough && !faqControlRejected) continue;
+      // `unusableFields` records that an earlier free-MT response was rejected;
+      // a later retry may already have supplied a usable value for that same
+      // field. The current value decides whether recovery is needed; the
+      // historical rejection only scopes the fallback cap below.
+      if (traduzioneUsabile && !floorMiss && !bodyPassthrough && !faqControlRejected) continue;
       // ULTIMA RISORSA ASIMMETRICA. Un campo implausibile e' comunque prosa
       // NELLA LINGUA GIUSTA: se il retry non produce di meglio si tiene quello,
       // MAI il fallback IT, che pubblicherebbe italiano sotto `/de/` (#831).

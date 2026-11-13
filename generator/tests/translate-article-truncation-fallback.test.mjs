@@ -167,13 +167,13 @@ async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTrunc
     'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'wasFreeMtUnusable', 'maxFreeMtLlmFallbacksPerLocale', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN', 'MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE',
     'markBodyTranslationPending', 'isSourcePassthrough', 'rejectRawFaqControlEscape', 'normalizeLocalizedToponymText',
     'translateInChunks', 'validatePretranslatedBody',
-    'safeSignalDiagnosticTextForLog',
+    'safeSignalDiagnosticTextForLog', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD', 'buildPendingBodyRetranslationPrompt',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
   // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
   // IT, e un mock qui non proverebbe quel comportamento.
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, freeMt, claimFreeMtLlmFallback, wasFreeMtUnusable, maxFreeMtLlmFallbacksPerLocale, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, markBodyTranslationPending, isSourcePassthrough, rejectRawFaqControlEscape, normalizeLocalizedToponymText, chunkTranslator, validatePretranslatedBody, ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog);
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, freeMt, claimFreeMtLlmFallback, wasFreeMtUnusable, maxFreeMtLlmFallbacksPerLocale, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, markBodyTranslationPending, isSourcePassthrough, rejectRawFaqControlEscape, normalizeLocalizedToponymText, chunkTranslator, validatePretranslatedBody, ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog, REAL_COUNT_WORDS, TRANSLATION_CHUNK_THRESHOLD, REAL_BUILD_PENDING_BODY_RETRANSLATION_PROMPT);
   return RUN_REPORT;
 }
 
@@ -1423,6 +1423,9 @@ const TRANSLATE_IN_CHUNKS_SRC = (() => {
 })();
 const SPLIT_CHUNKS_SRC = extractFunctionSource('function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {');
 const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {");
+const BUILD_PENDING_BODY_PROMPT_SRC = extractFunctionSource("function buildPendingBodyRetranslationPrompt({ langName, field, itValue, partLabel = '' }) {");
+const REAL_COUNT_WORDS = new Function(`${COUNT_WORDS_SRC}\nreturn countWords;`)();
+const REAL_BUILD_PENDING_BODY_RETRANSLATION_PROMPT = new Function(`${BUILD_PENDING_BODY_PROMPT_SRC}\nreturn buildPendingBodyRetranslationPrompt;`)();
 
 async function runLegacyTranslateContent(sourceContent, callWithRetry) {
   const fn = new Function(
