@@ -63,6 +63,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.vallo-protezione-sorte-lostallo.title': 'Lostallo, al via il vallo di protezione a Sorte',
     'blog.article.vallo-protezione-sorte-lostallo.excerpt': 'Nei prossimi giorni, a Sorte, inizieranno i lavori per il vallo di protezione sulla sponda destra della frazione di Lostallo.',
     'blog.article.vallo-protezione-sorte-lostallo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.imc-oberengadin-weekend.title': 'IMC Oberengadin chiusa nei weekend per carenza di personale',
+    'blog.article.imc-oberengadin-weekend.excerpt': 'La Intermediate Care dello Spital Oberengadin non opera nei weekend di novembre per carenza di personale.',
+    'blog.article.imc-oberengadin-weekend.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGrIt;
