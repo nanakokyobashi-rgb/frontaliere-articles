@@ -93,6 +93,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.quattro-temi-puntata-vaud.title': 'Vaud: budget after the tax reduction was approved',
     'blog.article.quattro-temi-puntata-vaud.excerpt': 'The source presents four questions about Vaud: the budget after the tax reduction, civilian service, cement after Mormont and the cost of care.',
     'blog.article.quattro-temi-puntata-vaud.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.decisioni-grand-conseil-10-novembre.title': 'Decisions of the Grand Council: session of November 10, 2026',
+    'blog.article.decisioni-grand-conseil-10-novembre.excerpt': 'The minutes of the Grand Conseil session of November 10, 2026, record twelve numbered items from 2.1 to 2.12, followed by the November question period.',
+    'blog.article.decisioni-grand-conseil-10-novembre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVdEn;

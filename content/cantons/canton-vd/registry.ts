@@ -337,4 +337,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'decisioni-grand-conseil-10-novembre',
+ category: 'novita',
+ date: '2026-11-13T05:02:37.860Z',
+ image: '/images/blog/article-decisioni-grand-conseil-10-novembre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -33,6 +33,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'lausanna-credito-colonnine-2031': { it: 'lausanna-credito-colonnine-2031', en: 'lausanne-charging-stations-2031', de: 'lausanne-ladestationen-2031', fr: 'lausanne-bornes-2031' },
  'vaud-salari-pubblici-2027': { it: 'vaud-salari-pubblici-2027', en: 'vaud-public-salary-indexation-2027', de: 'waadt-staatsloehne-indexierung-2027', fr: 'vaud-indexation-salaires-2027' },
  'quattro-temi-puntata-vaud': { it: 'quattro-temi-puntata-vaud', en: 'vaud-budget-tax-cut-debate', de: 'waadt-budget-steuersenkung-debatte', fr: 'vaud-budget-baisse-impot-debat' },
+ 'decisioni-grand-conseil-10-novembre': { it: 'decisioni-grand-conseil-10-novembre', en: 'grand-council-decisions-november-10', de: 'grosser-rat-entscheidungen-10-november', fr: 'decisions-grand-conseil-10-novembre' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

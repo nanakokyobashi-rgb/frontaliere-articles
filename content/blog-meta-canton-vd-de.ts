@@ -93,6 +93,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.quattro-temi-puntata-vaud.title': 'Waadt: Budget nach der Annahme der Steuersenkung',
     'blog.article.quattro-temi-puntata-vaud.excerpt': 'Die Quelle stellt vier Fragen zum Kanton Waadt vor: Budget nach der Steuersenkung, Zivildienst, Zement nach dem Mormont und Kosten der Gesundheitsversorgung.',
     'blog.article.quattro-temi-puntata-vaud.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.decisioni-grand-conseil-10-novembre.title': 'Entscheidungen des Grand Conseil: Sitzung vom 10. November 2026',
+    'blog.article.decisioni-grand-conseil-10-novembre.excerpt': 'Das Protokoll der Sitzung des Grand Conseil vom 10. November 2026 hält zwölf nummerierte Punkte von 2.1 bis 2.12 fest, gefolgt von der Fragestunde des Monats November.',
+    'blog.article.decisioni-grand-conseil-10-novembre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;

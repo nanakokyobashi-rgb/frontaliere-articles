@@ -93,6 +93,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.quattro-temi-puntata-vaud.title': 'Vaud: budget dopo l\'accettazione della riduzione d\'imposta',
     'blog.article.quattro-temi-puntata-vaud.excerpt': 'La fonte presenta quattro domande sul Vaud: budget dopo la riduzione d\'imposta, servizio civile, cemento dopo il Mormont e costo delle cure.',
     'blog.article.quattro-temi-puntata-vaud.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.decisioni-grand-conseil-10-novembre.title': 'Decisioni del Grand Conseil: seduta del 10 novembre 2026',
+    'blog.article.decisioni-grand-conseil-10-novembre.excerpt': 'Il verbale della seduta del Grand Conseil del 10 novembre 2026 registra dodici punti numerati da 2.1 a 2.12, seguiti dall\'ora delle domande del mese di novembre.',
+    'blog.article.decisioni-grand-conseil-10-novembre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVdIt;
