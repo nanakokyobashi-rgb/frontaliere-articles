@@ -16956,11 +16956,18 @@ ${localizedToponymInstruction(targetLang)}`;
       // copia identica ha gia' il suo retry dedicato piu' sotto.
       const bodyPassthrough = !faqPart && /^body\d+$/.test(field)
         && isSourcePassthrough(valoreTradotto, readField(itContent));
+      // Una FAQ puo' essere rimasta nella copia italiana anche se il free-MT
+      // ha gia' registrato il rifiuto del campo indicizzato. In quel caso il
+      // valore e' materialmente usabile ma non e' una traduzione: riapri la
+      // recovery solo quando il report prova il rifiuto di quella precisa
+      // coppia, cosi' un fallback legacy legittimo non paga un retry spurio.
+      const faqPassthrough = faqPart && freeMtRejected
+        && isSourcePassthrough(valoreTradotto, readField(itContent));
       // `unusableFields` records that an earlier free-MT response was rejected;
       // a later retry may already have supplied a usable value for that same
       // field. The current value decides whether recovery is needed; the
       // historical rejection only scopes the fallback cap below.
-      if (traduzioneUsabile && !floorMiss && !bodyPassthrough && !faqControlRejected) continue;
+      if (traduzioneUsabile && !floorMiss && !bodyPassthrough && !faqPassthrough && !faqControlRejected) continue;
       // ULTIMA RISORSA ASIMMETRICA. Un campo implausibile e' comunque prosa
       // NELLA LINGUA GIUSTA: se il retry non produce di meglio si tiene quello,
       // MAI il fallback IT, che pubblicherebbe italiano sotto `/de/` (#831).
@@ -16996,7 +17003,7 @@ ${localizedToponymInstruction(targetLang)}`;
           ? `  ⚠️  Campo ${field} nella traduzione ${locale} contiene un carattere di controllo non pubblicabile — retry traduzione mirata...`
           : floorMiss
           ? `  ⚠️  Campo ${field} nella traduzione ${locale} troppo corto per essere un ${field} (${floorMiss}) — retry traduzione mirata...`
-          : bodyPassthrough
+          : bodyPassthrough || faqPassthrough
             ? `  ⚠️  Campo ${field} nella traduzione ${locale} identico all'italiano — retry traduzione mirata...`
             : `  ⚠️  Campo ${field} mancante nella traduzione ${locale} — retry traduzione mirata...`,
       );
