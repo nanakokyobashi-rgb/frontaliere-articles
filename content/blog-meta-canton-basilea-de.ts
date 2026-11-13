@@ -69,6 +69,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.basilea-mozioni-climatizzazione.title': 'Basler Grosser Rat: Motionen zur Vereinfachung der Bewilligungen für Klimaanlagen',
     'blog.article.basilea-mozioni-climatizzazione.excerpt': 'Der Grosse Rat hat zwei Motionen an die Regierung überwiesen: eine zur Abschaffung der Bewilligungspflicht und die andere für einfachere Verfahren gegen die Hitze.',
     'blog.article.basilea-mozioni-climatizzazione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.pfiffner-450-posti-pratteln.title': 'Pfiffner Gruppe bringt 450 Arbeitsplätze nach Pratteln',
+    'blog.article.pfiffner-450-posti-pratteln.excerpt': '450 Arbeitsplätze sind mit Pratteln verbunden, mit Bezug auf den Industriepark Rheinkrone; der Titel erwähnt eine Veränderung in Lehenmatt.',
+    'blog.article.pfiffner-450-posti-pratteln.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;

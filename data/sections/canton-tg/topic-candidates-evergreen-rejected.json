@@ -4,17 +4,21 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-tg::https://www.kreuzlingen.ch/aktuelles/steueramt-bleibt-am-9-november-vormittags-geschlossen": {
+    "canton-tg::https://grenzgaengerzentrum.de/ratgeber/lohn-gehalt/grenzgaenger-schweiz-wechselkurs": {
       "section": "canton-tg",
-      "ts": 1794012712249
+      "ts": 1794523353942
     },
-    "canton-tg::https://grenzgaengerzentrum.de/ratgeber/allgemein/grenzgaenger-kinder-schule-schweiz": {
+    "canton-tg::https://grenzgaengerzentrum.de/ratgeber/altersvorsorge/welche-nachteile-hat-die-grenzgaenger-direktversicherung": {
       "section": "canton-tg",
-      "ts": 1794183044650
+      "ts": 1794523356447
     },
-    "canton-tg::https://www.suedkurier.de/kreis-konstanz/schwarzwaldbahn-faehrt-zwischen-singen-und-konstanz-nicht-pendler-und-seehas-betreiber-sind-frustriert-115639048": {
+    "canton-tg::https://www.frauenfeld.ch/wohnen-mobilitaet/wohnen/bauen-und-umwelt/oeffentliche-auflagen.html/1009/news/12649": {
       "section": "canton-tg",
-      "ts": 1794183060706
+      "ts": 1794526698062
+    },
+    "canton-tg::https://www.20min.ch/story/kreuzlingen-lenker-erfasst-bub-und-bringt-ihn-zur-schule-polizei-sucht-mann-103666089": {
+      "section": "canton-tg",
+      "ts": 1794526716842
     }
   }
 }

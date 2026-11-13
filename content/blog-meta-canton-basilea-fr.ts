@@ -69,6 +69,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.basilea-mozioni-climatizzazione.title': 'Grand Conseil de Bâle : simplifier les autorisations climatiseurs',
     'blog.article.basilea-mozioni-climatizzazione.excerpt': 'Le Grand Conseil a transmis deux motions au gouvernement : l’une pour abolir l’obligation d’autorisation et l’autre pour des procédures plus simples contre la chaleur.',
     'blog.article.basilea-mozioni-climatizzazione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.pfiffner-450-posti-pratteln.title': 'Pfiffner Gruppe apporte 450 emplois à Pratteln',
+    'blog.article.pfiffner-450-posti-pratteln.excerpt': '450 emplois sont liés à Pratteln, en référence à l\'Industriepark Rheinkrone ; le titre mentionne un changement à Lehenmatt.',
+    'blog.article.pfiffner-450-posti-pratteln.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;

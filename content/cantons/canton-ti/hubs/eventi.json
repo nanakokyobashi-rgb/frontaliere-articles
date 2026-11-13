@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T21:05:42.386Z",
-  "contentHash": "1cc0d88dcafb60f06a24a30092000bb39bc2b5509e2fa31b87ef1133bcb01ed8",
+  "updatedAt": "2026-11-12T22:45:08.796Z",
+  "contentHash": "8f990ec8349772b220071f73b1151e91e7e8315aadcd923e8bd693355c45b41e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T12:24:28.563Z",
+      "updatedAt": "2026-11-12T14:41:08.896Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "245",
+          "value": "273",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,10 +33,34 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Corpi in prestito",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/58243"
+            },
+            {
               "label": "F. Reinhart. Il modello come strumento progettuale",
               "detail": "Palazzo Franscini, Bellinzona",
               "date": "2026-11-12",
               "url": "https://www.tio.ch/agenda/day/20261112/64787"
+            },
+            {
+              "label": "Fede e guerra - Mostra fotografica",
+              "detail": "Centro pastorale S. Giuseppe, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/64618"
+            },
+            {
+              "label": "Impressioni - Mostra di pittura di Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/64414"
+            },
+            {
+              "label": "Jannis Kounellis: Io sono un pittore",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/63037"
             },
             {
               "label": "La semina della speranza - Demetra e Persefone",
@@ -45,57 +69,33 @@
               "url": "https://www.tio.ch/agenda/day/20261112/64908"
             },
             {
-              "label": "Park Eun Sun - Mario Botta",
-              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "label": "Pierrette Bloch. Il gesto di scrivere",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63350"
+              "url": "https://www.tio.ch/agenda/day/20261112/64342"
             },
             {
-              "label": "Aziende, a che punto siete con il digitale?",
-              "detail": "Scuola Cantonale di Commercio, Bellinzona",
+              "label": "Soglie",
+              "detail": "B&B Fine Art, Paradiso",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64423"
+              "url": "https://www.tio.ch/agenda/day/20261112/64776"
             },
             {
-              "label": "Le allegre comari",
-              "detail": "Teatro del Gatto, Ascona",
+              "label": "Was America",
+              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64898"
+              "url": "https://www.tio.ch/agenda/day/20261112/63776"
             },
             {
-              "label": "Donazione di sangue",
-              "detail": "Casa Patriziale",
+              "label": "Giovanni Anselmo",
+              "detail": "Repetto Gallery, Lugano",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64842"
-            },
-            {
-              "label": "Anima Mundi - Esposizione di pittura e scultura",
-              "detail": "Tania Art Galerie, Locarno",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64750"
-            },
-            {
-              "label": "Incontro con Franco Brevini",
-              "detail": "Biblioteca cantonale, Locarno",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64628"
-            },
-            {
-              "label": "Mondi interconnessi",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64696"
-            },
-            {
-              "label": "Una donna sola",
-              "detail": "Sala Carlo Cattaneo - Consolato Generale d'Italia, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64880"
+              "url": "https://www.tio.ch/agenda/day/20261112/63802"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "245",
+          "value": "273",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,10 +184,34 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Borrowed bodies",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/58243"
+            },
+            {
               "label": "F. Reinhart. The Model as a Design Tool",
               "detail": "Palazzo Franscini, Bellinzona",
               "date": "2026-11-12",
               "url": "https://www.tio.ch/agenda/day/20261112/64787"
+            },
+            {
+              "label": "Faith and War - Photo Exhibit",
+              "detail": "Centro pastorale S. Giuseppe, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/64618"
+            },
+            {
+              "label": "Impressions - Painting exhibition by Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/64414"
+            },
+            {
+              "label": "Jannis Kounellis: I am a painter",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/63037"
             },
             {
               "label": "The sowing of hope - Demeter and Persephone",
@@ -196,57 +220,33 @@
               "url": "https://www.tio.ch/agenda/day/20261112/64908"
             },
             {
-              "label": "Park Eun Sun-Mario Botta",
-              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "label": "Pierrette Bloch. The gesture of writing",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63350"
+              "url": "https://www.tio.ch/agenda/day/20261112/64342"
             },
             {
-              "label": "Companies, where are you with digital?",
-              "detail": "Scuola Cantonale di Commercio, Bellinzona",
+              "label": "Thresholds",
+              "detail": "B&B Fine Art, Paradiso",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64423"
+              "url": "https://www.tio.ch/agenda/day/20261112/64776"
             },
             {
-              "label": "The Merry Wives",
-              "detail": "Teatro del Gatto, Ascona",
+              "label": "America W",
+              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64898"
+              "url": "https://www.tio.ch/agenda/day/20261112/63776"
             },
             {
-              "label": "Blood donation",
-              "detail": "Casa Patriziale",
+              "label": "John Anselm",
+              "detail": "Repetto Gallery, Lugano",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64842"
-            },
-            {
-              "label": "Anima Mundi - Painting and Sculpture Exhibition",
-              "detail": "Tania Art Galerie, Locarno",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64750"
-            },
-            {
-              "label": "Meeting with Franco Brevini",
-              "detail": "Biblioteca cantonale, Locarno",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64628"
-            },
-            {
-              "label": "Interconnected worlds",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64696"
-            },
-            {
-              "label": "A lonely woman",
-              "detail": "Sala Carlo Cattaneo - Consolato Generale d'Italia, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64880"
+              "url": "https://www.tio.ch/agenda/day/20261112/63802"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "245",
+          "value": "273",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,10 +335,34 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Leihkörper",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/58243"
+            },
+            {
               "label": "F. Reinhart. Das Modell als Planungsinstrument",
               "detail": "Palazzo Franscini, Bellinzona",
               "date": "2026-11-12",
               "url": "https://www.tio.ch/agenda/day/20261112/64787"
+            },
+            {
+              "label": "Glaube und Krieg - Fotoausstellung",
+              "detail": "Centro pastorale S. Giuseppe, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/64618"
+            },
+            {
+              "label": "Impressionen - Gemäldeausstellung von Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/64414"
+            },
+            {
+              "label": "Jannis Kounellis: Ich bin Maler",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/63037"
             },
             {
               "label": "Die Saat der Hoffnung - Demeter und Persephone",
@@ -347,57 +371,33 @@
               "url": "https://www.tio.ch/agenda/day/20261112/64908"
             },
             {
-              "label": "Park Eun Sun – Mario Botta",
-              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "label": "Pierrette Bloch. Die Geste des Schreibens",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63350"
+              "url": "https://www.tio.ch/agenda/day/20261112/64342"
             },
             {
-              "label": "Unternehmen, wie weit sind Sie mit dem Digitalen?",
-              "detail": "Scuola Cantonale di Commercio, Bellinzona",
+              "label": "Schwellenwerte",
+              "detail": "B&B Fine Art, Paradiso",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64423"
+              "url": "https://www.tio.ch/agenda/day/20261112/64776"
             },
             {
-              "label": "Die fröhlichen Frauen",
-              "detail": "Teatro del Gatto, Ascona",
+              "label": "War Amerika",
+              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64898"
+              "url": "https://www.tio.ch/agenda/day/20261112/63776"
             },
             {
-              "label": "Blutspende",
-              "detail": "Casa Patriziale",
+              "label": "Johannes Anselm",
+              "detail": "Repetto Gallery, Lugano",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64842"
-            },
-            {
-              "label": "Anima Mundi - Ausstellung von Gemälden und Skulpturen",
-              "detail": "Tania Art Galerie, Locarno",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64750"
-            },
-            {
-              "label": "Treffen mit Franco Brevini",
-              "detail": "Biblioteca cantonale, Locarno",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64628"
-            },
-            {
-              "label": "Verbundene Welten",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64696"
-            },
-            {
-              "label": "Eine einsame Frau",
-              "detail": "Sala Carlo Cattaneo - Consolato Generale d'Italia, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64880"
+              "url": "https://www.tio.ch/agenda/day/20261112/63802"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "245",
+          "value": "273",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,10 +486,34 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Corps prêtés",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/58243"
+            },
+            {
               "label": "F. Reinhart. La maquette comme outil de conception",
               "detail": "Palazzo Franscini, Bellinzona",
               "date": "2026-11-12",
               "url": "https://www.tio.ch/agenda/day/20261112/64787"
+            },
+            {
+              "label": "Foi et guerre - Exposition photographique",
+              "detail": "Centro pastorale S. Giuseppe, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/64618"
+            },
+            {
+              "label": "Impressions - Exposition de peinture de Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/64414"
+            },
+            {
+              "label": "Jannis Kounellis : Je suis un peintre",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-11-12",
+              "url": "https://www.tio.ch/agenda/day/20261112/63037"
             },
             {
               "label": "La semence de l'espoir - Déméter et Perséphone",
@@ -498,57 +522,33 @@
               "url": "https://www.tio.ch/agenda/day/20261112/64908"
             },
             {
-              "label": "Park Eun Sun-Mario Botta",
-              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "label": "Pierrette Bloch. Le geste d'écrire",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63350"
+              "url": "https://www.tio.ch/agenda/day/20261112/64342"
             },
             {
-              "label": "Entreprises, où en êtes-vous avec le numérique ?",
-              "detail": "Scuola Cantonale di Commercio, Bellinzona",
+              "label": "Seuils",
+              "detail": "B&B Fine Art, Paradiso",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64423"
+              "url": "https://www.tio.ch/agenda/day/20261112/64776"
             },
             {
-              "label": "Les Joyeuses Épouses",
-              "detail": "Teatro del Gatto, Ascona",
+              "label": "Était l'Amérique",
+              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64898"
+              "url": "https://www.tio.ch/agenda/day/20261112/63776"
             },
             {
-              "label": "Don de sang",
-              "detail": "Casa Patriziale",
+              "label": "Giovanni Anselme",
+              "detail": "Repetto Gallery, Lugano",
               "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64842"
-            },
-            {
-              "label": "Anima Mundi - Exposition de peinture et de sculpture",
-              "detail": "Tania Art Galerie, Locarno",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64750"
-            },
-            {
-              "label": "Rencontre avec Franco Brevini",
-              "detail": "Biblioteca cantonale, Locarno",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64628"
-            },
-            {
-              "label": "Mondes interconnectés",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64696"
-            },
-            {
-              "label": "Une femme solitaire",
-              "detail": "Sala Carlo Cattaneo - Consolato Generale d'Italia, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64880"
+              "url": "https://www.tio.ch/agenda/day/20261112/63802"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-12T22:45:08.796Z"
     }
   }
 }

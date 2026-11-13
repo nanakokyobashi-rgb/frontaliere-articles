@@ -208,14 +208,14 @@ const T = {
     excerpt: () => 'Eventi in Ticino ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
     imageAlt: 'Eventi del weekend in Ticino',
     h1: 'Cosa fare questo weekend in Ticino',
-    intro: (n, range) => `Questo weekend${range ? ` (${range})` : ''} in Ticino ci ${n === 1 ? "è un evento" : `sono ${n} eventi`} tra concerti, mostre, feste di paese e mercati. Qui sotto trovi l'agenda completa, comune per comune, con data e orario. La pagina viva e sempre aggiornata è [Eventi questo weekend in Ticino](${BASE_PATH.it}/${WEEKEND_SLUG.it}/).`,
+    intro: (n, range) => `Questo weekend${range ? ` (${range})` : ''} la selezione in Ticino raccoglie ${n === 1 ? 'un evento selezionato' : `${n} eventi selezionati`} tra concerti, mostre, feste di paese e mercati. Gli eventi selezionati sono elencati qui sotto, comune per comune, con data e orario. La pagina viva e sempre aggiornata è [Eventi questo weekend in Ticino](${BASE_PATH.it}/${WEEKEND_SLUG.it}/).`,
     none: `Questo weekend non risultano eventi pubblicati nelle agende che monitoriamo. Riprova tra qualche giorno: l'[agenda del weekend](${BASE_PATH.it}/${WEEKEND_SLUG.it}/) e quella [della settimana](${BASE_PATH.it}/${WEEK_SLUG.it}/) si aggiornano ogni giorno.`,
     byComuneH: 'Gli eventi, comune per comune',
     otherCantonsH: 'Eventi anche in altri cantoni',
     howH: 'Come usare questa agenda',
     how: `Questa agenda raccoglie gli eventi dalle agende ufficiali del territorio e si aggiorna ogni giorno. Per il quadro completo consulta [gli eventi di questo weekend](${BASE_PATH.it}/${WEEKEND_SLUG.it}/) o [tutta la settimana](${BASE_PATH.it}/${WEEK_SLUG.it}/). Se sei un frontaliere, dai un'occhiata anche ai [comuni di frontiera](/vivere-in-ticino/comuni-di-frontiera/) e alle [offerte di lavoro in Ticino](/cerca-lavoro-ticino/).`,
     faq: (n, range) => [
-      { q: 'Quali eventi ci sono questo weekend in Ticino?', a: `Questo weekend${range ? ` (${range})` : ''} in Ticino ci ${n === 1 ? 'è un evento' : `sono ${n} eventi`} tra concerti, mostre, feste e mercati, elencati qui sopra comune per comune e aggiornati ogni giorno.` },
+      { q: 'Quali eventi ci sono questo weekend in Ticino?', a: `Questo weekend${range ? ` (${range})` : ''} questa agenda elenca ${n === 1 ? 'un evento selezionato' : `${n} eventi selezionati`} in Ticino tra concerti, mostre, feste e mercati. Gli eventi sono indicati qui sopra comune per comune e aggiornati ogni giorno.` },
       { q: 'Con che frequenza viene aggiornata l’agenda?', a: 'Ogni giorno: i nuovi eventi pubblicati dalle agende ufficiali entrano automaticamente nell’agenda del weekend e della settimana.' },
     ],
   },
@@ -224,14 +224,14 @@ const T = {
     excerpt: () => 'Events in Ticino every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
     imageAlt: 'Weekend events in Ticino',
     h1: 'What to do this weekend in Ticino',
-    intro: (n, range) => `This weekend${range ? ` (${range})` : ''} there ${n === 1 ? 'is one event' : `are ${n} events`} across Ticino — concerts, exhibitions, village festivals and markets. The full agenda, municipality by municipality with date and time, is below. The always-current page is [Events this weekend in Ticino](${BASE_PATH.en}/${WEEKEND_SLUG.en}/).`,
+    intro: (n, range) => `This weekend${range ? ` (${range})` : ''} the Ticino selection includes ${n === 1 ? 'one selected event' : `${n} selected events`} — concerts, exhibitions, village festivals and markets. The selected events are listed below by municipality with dates and times. The always-current page is [Events this weekend in Ticino](${BASE_PATH.en}/${WEEKEND_SLUG.en}/).`,
     none: `No events are currently published for this weekend in the agendas we track. Check back in a few days: the [weekend agenda](${BASE_PATH.en}/${WEEKEND_SLUG.en}/) and the [week agenda](${BASE_PATH.en}/${WEEK_SLUG.en}/) refresh daily.`,
     byComuneH: 'Events, municipality by municipality',
     otherCantonsH: 'Events in other cantons too',
     howH: 'How to use this agenda',
     how: `This agenda gathers events from the territory's official agendas and refreshes daily. For the full picture see [this weekend's events](${BASE_PATH.en}/${WEEKEND_SLUG.en}/) or [the whole week](${BASE_PATH.en}/${WEEK_SLUG.en}/). If you are a cross-border worker, also check the [border municipalities](/en/living-in-ticino/border-municipalities/) and [jobs in Ticino](/en/find-jobs-ticino/).`,
     faq: (n, range) => [
-      { q: 'What events are on this weekend in Ticino?', a: `This weekend${range ? ` (${range})` : ''} there ${n === 1 ? 'is one event' : `are ${n} events`} across Ticino — concerts, exhibitions, festivals and markets, listed above municipality by municipality and refreshed daily.` },
+      { q: 'What events are on this weekend in Ticino?', a: `This weekend${range ? ` (${range})` : ''} this agenda lists ${n === 1 ? 'one selected event' : `${n} selected events`} in Ticino — concerts, exhibitions, festivals and markets. They are listed above by municipality and refreshed daily.` },
       { q: 'How often is the agenda updated?', a: 'Daily: new events published by the official agendas automatically flow into the weekend and week agendas.' },
     ],
   },
@@ -240,14 +240,14 @@ const T = {
     excerpt: () => 'Veranstaltungen im Tessin an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
     imageAlt: 'Veranstaltungen am Wochenende im Tessin',
     h1: 'Was am Wochenende im Tessin tun',
-    intro: (n, range) => `An diesem Wochenende${range ? ` (${range})` : ''} ${n === 1 ? 'gibt es eine Veranstaltung' : `gibt es ${n} Veranstaltungen`} im ganzen Tessin — Konzerte, Ausstellungen, Dorffeste und Märkte. Die vollständige Agenda, Gemeinde für Gemeinde mit Datum und Uhrzeit, steht unten. Die stets aktuelle Seite ist [Veranstaltungen am Wochenende im Tessin](${BASE_PATH.de}/${WEEKEND_SLUG.de}/).`,
+    intro: (n, range) => `An diesem Wochenende${range ? ` (${range})` : ''} umfasst die Auswahl im Tessin ${n === 1 ? 'eine ausgewählte Veranstaltung' : `${n} ausgewählte Veranstaltungen`} — Konzerte, Ausstellungen, Dorffeste und Märkte. Die ausgewählten Veranstaltungen stehen unten, Gemeinde für Gemeinde mit Datum und Uhrzeit. Die stets aktuelle Seite ist [Veranstaltungen am Wochenende im Tessin](${BASE_PATH.de}/${WEEKEND_SLUG.de}/).`,
     none: `Für dieses Wochenende sind in den von uns beobachteten Agenden derzeit keine Veranstaltungen veröffentlicht. Schauen Sie in ein paar Tagen wieder vorbei: Die [Wochenend-Agenda](${BASE_PATH.de}/${WEEKEND_SLUG.de}/) und die [Wochen-Agenda](${BASE_PATH.de}/${WEEK_SLUG.de}/) werden täglich aktualisiert.`,
     byComuneH: 'Veranstaltungen, Gemeinde für Gemeinde',
     otherCantonsH: 'Veranstaltungen auch in anderen Kantonen',
     howH: 'So nutzen Sie diese Agenda',
     how: `Diese Agenda sammelt Veranstaltungen aus den offiziellen Agenden der Region und wird täglich aktualisiert. Für den vollen Überblick siehe [die Veranstaltungen dieses Wochenendes](${BASE_PATH.de}/${WEEKEND_SLUG.de}/) oder [die ganze Woche](${BASE_PATH.de}/${WEEK_SLUG.de}/). Als Grenzgänger lohnt sich auch ein Blick auf die [Grenzgemeinden](/de/leben-im-tessin/grenzgemeinden/) und die [Stellen im Tessin](/de/jobs-im-tessin/).`,
     faq: (n, range) => [
-      { q: 'Welche Veranstaltungen gibt es am Wochenende im Tessin?', a: `An diesem Wochenende${range ? ` (${range})` : ''} ${n === 1 ? 'gibt es eine Veranstaltung' : `gibt es ${n} Veranstaltungen`} im Tessin — Konzerte, Ausstellungen, Feste und Märkte, oben Gemeinde für Gemeinde aufgelistet und täglich aktualisiert.` },
+      { q: 'Welche Veranstaltungen gibt es am Wochenende im Tessin?', a: `Diese Wochenend-Agenda listet ${n === 1 ? 'eine ausgewählte Veranstaltung' : `${n} ausgewählte Veranstaltungen`} im Tessin auf — Konzerte, Ausstellungen, Feste und Märkte. Die Auswahl ist oben Gemeinde für Gemeinde aufgeführt und wird täglich aktualisiert.` },
       { q: 'Wie oft wird die Agenda aktualisiert?', a: 'Täglich: neue von den offiziellen Agenden veröffentlichte Veranstaltungen fliessen automatisch in die Wochenend- und Wochen-Agenda ein.' },
     ],
   },
@@ -256,14 +256,14 @@ const T = {
     excerpt: () => 'Événements au Tessin chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
     imageAlt: 'Événements du week-end au Tessin',
     h1: 'Que faire ce week-end au Tessin',
-    intro: (n, range) => `Ce week-end${range ? ` (${range})` : ''}, il y a ${n === 1 ? 'un événement' : `${n} événements`} dans tout le Tessin — concerts, expositions, fêtes de village et marchés. L'agenda complet, commune par commune avec date et heure, est ci-dessous. La page toujours à jour est [Événements ce week-end au Tessin](${BASE_PATH.fr}/${WEEKEND_SLUG.fr}/).`,
+    intro: (n, range) => `Ce week-end${range ? ` (${range})` : ''}, la sélection au Tessin comprend ${n === 1 ? 'un événement sélectionné' : `${n} événements sélectionnés`} — concerts, expositions, fêtes de village et marchés. Les événements sélectionnés sont listés ci-dessous, commune par commune avec date et heure. La page toujours à jour est [Événements ce week-end au Tessin](${BASE_PATH.fr}/${WEEKEND_SLUG.fr}/).`,
     none: `Aucun événement n'est actuellement publié pour ce week-end dans les agendas que nous suivons. Revenez dans quelques jours : l'[agenda du week-end](${BASE_PATH.fr}/${WEEKEND_SLUG.fr}/) et celui [de la semaine](${BASE_PATH.fr}/${WEEK_SLUG.fr}/) sont mis à jour chaque jour.`,
     byComuneH: 'Les événements, commune par commune',
     otherCantonsH: 'Événements aussi dans d’autres cantons',
     howH: 'Comment utiliser cet agenda',
     how: `Cet agenda rassemble les événements depuis les agendas officiels du territoire et se met à jour chaque jour. Pour le panorama complet, voir [les événements de ce week-end](${BASE_PATH.fr}/${WEEKEND_SLUG.fr}/) ou [toute la semaine](${BASE_PATH.fr}/${WEEK_SLUG.fr}/). Si vous êtes frontalier, jetez aussi un œil aux [communes frontalières](/fr/vivre-au-tessin/communes-frontiere/) et aux [emplois au Tessin](/fr/trouver-emploi-tessin/).`,
     faq: (n, range) => [
-      { q: 'Quels événements ce week-end au Tessin ?', a: `Ce week-end${range ? ` (${range})` : ''}, il y a ${n === 1 ? 'un événement' : `${n} événements`} au Tessin — concerts, expositions, fêtes et marchés, listés ci-dessus commune par commune et mis à jour chaque jour.` },
+      { q: 'Quels événements ce week-end au Tessin ?', a: `Cet agenda présente ${n === 1 ? 'un événement sélectionné' : `${n} événements sélectionnés`} au Tessin — concerts, expositions, fêtes et marchés. Les événements sélectionnés sont listés ci-dessus, commune par commune et mis à jour chaque jour.` },
       { q: 'À quelle fréquence l’agenda est-il mis à jour ?', a: 'Chaque jour : les nouveaux événements publiés par les agendas officiels alimentent automatiquement l’agenda du week-end et de la semaine.' },
     ],
   },
@@ -285,14 +285,14 @@ function cantonCopy(locale, place, base) {
       excerpt: () => `Eventi ${place} ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.`,
       imageAlt: `Eventi del weekend ${place}`,
       h1: `Cosa fare questo weekend ${place}`,
-      intro: (n, range) => `Questo weekend${range ? ` (${range})` : ''} ${place} ci ${n === 1 ? 'è un evento' : `sono ${n} eventi`} tra concerti, mostre, feste e mercati. Qui sotto trovi l'agenda, comune per comune, con data e orario. La pagina viva e sempre aggiornata è [Eventi questo weekend ${place}](${weekend}).`,
+      intro: (n, range) => `Questo weekend${range ? ` (${range})` : ''} ${place} ci ${n === 1 ? 'è un evento selezionato' : `sono ${n} eventi selezionati`} tra concerti, mostre, feste e mercati. Gli eventi selezionati sono elencati qui sotto, comune per comune, con data e orario. La pagina viva e sempre aggiornata è [Eventi questo weekend ${place}](${weekend}).`,
       none: `Questo weekend non risultano eventi pubblicati ${place} nelle agende che monitoriamo. Riprova tra qualche giorno: l'[agenda del weekend](${weekend}) e quella [della settimana](${week}) si aggiornano ogni giorno.`,
       byComuneH: 'Gli eventi, comune per comune',
       otherCantonsH: 'Eventi anche in altri cantoni',
       howH: 'Come usare questa agenda',
       how: `Questa agenda raccoglie gli eventi dalle agende ufficiali e turistiche del territorio e si aggiorna ogni giorno. Per il quadro completo consulta [gli eventi di questo weekend](${weekend}) o [tutta la settimana](${week}).`,
       faq: (n, range) => [
-        { q: `Quali eventi ci sono questo weekend ${place}?`, a: `Questo weekend${range ? ` (${range})` : ''} ${place} ci ${n === 1 ? 'è un evento' : `sono ${n} eventi`} tra concerti, mostre, feste e mercati, elencati qui sopra comune per comune e aggiornati ogni giorno.` },
+        { q: `Quali eventi ci sono questo weekend ${place}?`, a: `Questa agenda elenca ${n === 1 ? 'un evento selezionato' : `${n} eventi selezionati`} ${place} tra concerti, mostre, feste e mercati. Gli eventi sono indicati qui sopra comune per comune e aggiornati ogni giorno.` },
         { q: 'Con che frequenza viene aggiornata l’agenda?', a: 'Ogni giorno: i nuovi eventi pubblicati dalle agende ufficiali entrano automaticamente nell’agenda del weekend e della settimana.' },
       ],
     },
@@ -301,14 +301,14 @@ function cantonCopy(locale, place, base) {
       excerpt: () => `Events ${place} every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.`,
       imageAlt: `Weekend events ${place}`,
       h1: `What to do this weekend ${place}`,
-      intro: (n, range) => `This weekend${range ? ` (${range})` : ''} there ${n === 1 ? 'is one event' : `are ${n} events`} ${place} — concerts, exhibitions, festivals and markets. The agenda, municipality by municipality with date and time, is below. The always-current page is [Events this weekend ${place}](${weekend}).`,
+      intro: (n, range) => `This weekend${range ? ` (${range})` : ''} there ${n === 1 ? 'is one selected event' : `are ${n} selected events`} ${place} — concerts, exhibitions, festivals and markets. The selected events are listed below by municipality with dates and times. The always-current page is [Events this weekend ${place}](${weekend}).`,
       none: `No events are currently published for this weekend ${place} in the agendas we track. Check back in a few days: the [weekend agenda](${weekend}) and the [week agenda](${week}) refresh daily.`,
       byComuneH: 'Events, municipality by municipality',
       otherCantonsH: 'Events in other cantons too',
       howH: 'How to use this agenda',
       how: `This agenda gathers events from the official and tourism agendas of the territory and refreshes daily. For the full picture see [this weekend's events](${weekend}) or [the whole week](${week}).`,
       faq: (n, range) => [
-        { q: `What events are on this weekend ${place}?`, a: `This weekend${range ? ` (${range})` : ''} there ${n === 1 ? 'is one event' : `are ${n} events`} ${place} — concerts, exhibitions, festivals and markets, listed above municipality by municipality and refreshed daily.` },
+        { q: `What events are on this weekend ${place}?`, a: `This agenda lists ${n === 1 ? 'one selected event' : `${n} selected events`} ${place} — concerts, exhibitions, festivals and markets. They are listed above by municipality and refreshed daily.` },
         { q: 'How often is the agenda updated?', a: 'Daily: new events published by the official agendas automatically flow into the weekend and week agendas.' },
       ],
     },
@@ -317,14 +317,14 @@ function cantonCopy(locale, place, base) {
       excerpt: () => `Veranstaltungen ${place} an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.`,
       imageAlt: `Veranstaltungen am Wochenende ${place}`,
       h1: `Was am Wochenende ${place} tun`,
-      intro: (n, range) => `An diesem Wochenende${range ? ` (${range})` : ''} ${n === 1 ? 'gibt es eine Veranstaltung' : `gibt es ${n} Veranstaltungen`} ${place} — Konzerte, Ausstellungen, Feste und Märkte. Die Agenda, Gemeinde für Gemeinde mit Datum und Uhrzeit, steht unten. Die stets aktuelle Seite ist [Veranstaltungen am Wochenende ${place}](${weekend}).`,
+      intro: (n, range) => `An diesem Wochenende${range ? ` (${range})` : ''} ${n === 1 ? 'gibt es eine ausgewählte Veranstaltung' : `gibt es ${n} ausgewählte Veranstaltungen`} ${place} — Konzerte, Ausstellungen, Feste und Märkte. Die ausgewählten Veranstaltungen stehen unten, Gemeinde für Gemeinde mit Datum und Uhrzeit. Die stets aktuelle Seite ist [Veranstaltungen am Wochenende ${place}](${weekend}).`,
       none: `Für dieses Wochenende sind ${place} in den von uns beobachteten Agenden derzeit keine Veranstaltungen veröffentlicht. Schauen Sie in ein paar Tagen wieder vorbei: Die [Wochenend-Agenda](${weekend}) und die [Wochen-Agenda](${week}) werden täglich aktualisiert.`,
       byComuneH: 'Veranstaltungen, Gemeinde für Gemeinde',
       otherCantonsH: 'Veranstaltungen auch in anderen Kantonen',
       howH: 'So nutzen Sie diese Agenda',
       how: `Diese Agenda sammelt Veranstaltungen aus den offiziellen und touristischen Agenden der Region und wird täglich aktualisiert. Für den vollen Überblick siehe [die Veranstaltungen dieses Wochenendes](${weekend}) oder [die ganze Woche](${week}).`,
       faq: (n, range) => [
-        { q: `Welche Veranstaltungen gibt es am Wochenende ${place}?`, a: `An diesem Wochenende${range ? ` (${range})` : ''} ${n === 1 ? 'gibt es eine Veranstaltung' : `gibt es ${n} Veranstaltungen`} ${place} — Konzerte, Ausstellungen, Feste und Märkte, oben Gemeinde für Gemeinde aufgelistet und täglich aktualisiert.` },
+        { q: `Welche Veranstaltungen gibt es am Wochenende ${place}?`, a: `Die Agenda listet ${n === 1 ? 'eine ausgewählte Veranstaltung' : `${n} ausgewählte Veranstaltungen`} ${place} auf — Konzerte, Ausstellungen, Feste und Märkte. Die Auswahl ist oben Gemeinde für Gemeinde aufgeführt und wird täglich aktualisiert.` },
         { q: 'Wie oft wird die Agenda aktualisiert?', a: 'Täglich: neue von den offiziellen Agenden veröffentlichte Veranstaltungen fliessen automatisch in die Wochenend- und Wochen-Agenda ein.' },
       ],
     },
@@ -333,19 +333,30 @@ function cantonCopy(locale, place, base) {
       excerpt: () => `Événements ${place} chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.`,
       imageAlt: `Événements du week-end ${place}`,
       h1: `Que faire ce week-end ${place}`,
-      intro: (n, range) => `Ce week-end${range ? ` (${range})` : ''}, il y a ${n === 1 ? 'un événement' : `${n} événements`} ${place} — concerts, expositions, fêtes et marchés. L'agenda, commune par commune avec date et heure, est ci-dessous. La page toujours à jour est [Événements ce week-end ${place}](${weekend}).`,
+      intro: (n, range) => `Ce week-end${range ? ` (${range})` : ''}, il y a ${n === 1 ? 'un événement sélectionné' : `${n} événements sélectionnés`} ${place} — concerts, expositions, fêtes et marchés. Les événements sélectionnés sont listés ci-dessous, commune par commune avec date et heure. La page toujours à jour est [Événements ce week-end ${place}](${weekend}).`,
       none: `Aucun événement n'est actuellement publié pour ce week-end ${place} dans les agendas que nous suivons. Revenez dans quelques jours : l'[agenda du week-end](${weekend}) et celui [de la semaine](${week}) sont mis à jour chaque jour.`,
       byComuneH: 'Les événements, commune par commune',
       otherCantonsH: 'Événements aussi dans d’autres cantons',
       howH: 'Comment utiliser cet agenda',
       how: `Cet agenda rassemble les événements depuis les agendas officiels et touristiques du territoire et se met à jour chaque jour. Pour le panorama complet, voir [les événements de ce week-end](${weekend}) ou [toute la semaine](${week}).`,
       faq: (n, range) => [
-        { q: `Quels événements ce week-end ${place} ?`, a: `Ce week-end${range ? ` (${range})` : ''}, il y a ${n === 1 ? 'un événement' : `${n} événements`} ${place} — concerts, expositions, fêtes et marchés, listés ci-dessus commune par commune et mis à jour chaque jour.` },
+        { q: `Quels événements ce week-end ${place} ?`, a: `Cet agenda présente ${n === 1 ? 'un événement sélectionné' : `${n} événements sélectionnés`} ${place} — concerts, expositions, fêtes et marchés. Les événements sélectionnés sont listés ci-dessus, commune par commune et mis à jour chaque jour.` },
         { q: 'À quelle fréquence l’agenda est-il mis à jour ?', a: 'Chaque jour : les nouveaux événements publiés par les agendas officiels alimentent automatiquement l’agenda du week-end et de la semaine.' },
       ],
     },
   };
   return copy[locale];
+}
+
+function displayedComuneEntries(byComune) {
+  return [...byComune.entries()]
+    .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))
+    .slice(0, MAX_COMUNI)
+    .map(([comune, events]) => [comune, events.slice(0, MAX_EVENTS_PER_COMUNE)]);
+}
+
+function countDisplayedEvents(byComune) {
+  return displayedComuneEntries(byComune).reduce((total, [, events]) => total + events.length, 0);
 }
 
 /**
@@ -356,14 +367,10 @@ function cantonCopy(locale, place, base) {
  * per-canton "other cantons" section below, §6, one loop, no copy-paste).
  */
 function renderComuneBlocks(byComune, locale, basePath, window) {
-  const comuni = [...byComune.entries()]
-    .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))
-    .slice(0, MAX_COMUNI);
+  const comuni = displayedComuneEntries(byComune);
   const blocks = comuni.map(([comune, evs]) => {
     const slug = slugifyComune(comune);
-    const lines = evs
-      .slice(0, MAX_EVENTS_PER_COMUNE)
-      .map((ev) => {
+    const lines = evs.map((ev) => {
         const localizedTitle = ev?.titleByLocale?.[locale];
         const title = hasUsableContentText(localizedTitle) ? localizedTitle : ev.title;
         const date = eventDateInWindow(ev, window);
@@ -418,7 +425,7 @@ function renderOtherCantons(otherWeekend, locale, window) {
  * `canton` (P9a) selects whose digest: omitted or `'TI'` is the original
  * Ticino article (id, slugs and copy unchanged); any other canton code or URL
  * group builds that group's digest from `CANTON_DIGEST_ARTICLES`, counting
- * only its own events (half-cantons included in their group) and listing the
+ * only its displayed events (half-cantons included in their group) and listing the
  * rest under "other cantons", exactly like the Ticino one does.
  * @param {{ events: Array<object>, todayIso?: string, canton?: string }} params
  */
@@ -427,8 +434,9 @@ export function buildWeekendDigestArticle({ events, todayIso, canton }) {
   if (groupKey !== 'TI') return buildCantonWeekendDigestArticle({ events, todayIso, groupKey });
   const { start, end } = weekendWindow(todayIso);
   const weekend = weekendEvents(events, todayIso);
-  // The article's headline/FAQ/count stay Ticino-scoped (its original, still
-  // primary, audience) — only Ticino events feed `n`/`byComune`. Non-TI
+  // The headline and FAQ stay Ticino-scoped. `n` and `byComune` use the same
+  // bounded, renderable Ticino entries, so missing-comune records and display
+  // caps cannot inflate the number shown in the copy. Non-TI
   // weekend events (nationwide sourcing, #3644/#3645) get their own "other
   // cantons" section below instead of silently inflating the Ticino count or
   // leaking non-TI comuni into the Ticino by-comune grouping (both were bugs
@@ -440,7 +448,7 @@ export function buildWeekendDigestArticle({ events, todayIso, canton }) {
   const tiWeekend = weekend.filter((e) => String(e?.canton || '').toUpperCase() === 'TI');
   const otherWeekend = weekend.filter((e) => String(e?.canton || '').toUpperCase() !== 'TI');
   const byComune = groupByComune(tiWeekend);
-  const n = tiWeekend.length;
+  const n = countDisplayedEvents(byComune);
 
   // Shaped to match create-article.mjs's registration `data` contract:
   //   content[locale] = { title, excerpt, body1, body2, body3, faq: Array<{q,a}> }
@@ -492,7 +500,7 @@ function buildCantonWeekendDigestArticle({ events, todayIso, groupKey }) {
   const cantonWeekend = weekend.filter(inCanton);
   const otherWeekend = weekend.filter((e) => !inCanton(e));
   const byComune = groupByComune(cantonWeekend);
-  const n = cantonWeekend.length;
+  const n = countDisplayedEvents(byComune);
 
   const content = {};
   const imageAlt = {};
