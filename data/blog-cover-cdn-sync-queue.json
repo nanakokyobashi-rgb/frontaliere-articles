@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-frontalieri-disoccupati-costi-aggiuntivi.webp",
-      "sha256": "ba3ca5679735dfd6c765d85c0de6ede6d04a3fb85907f96dc590c3dc1f17449e"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-frontalieri-disoccupati-costi-aggiuntivi-480w.webp",
-      "sha256": "0417de75b067c5315d44633c7711d91d38f082ea1d0b7f8d423af8727193bdc9"
-    }
-  ]
+  "items": []
 }
