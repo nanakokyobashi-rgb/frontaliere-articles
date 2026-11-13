@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-incidenti-a1-goldach-san-gallo.webp",
-      "sha256": "1d791e74d5b7b58f21e294fd0fcdd9b00d0f623d790458c85bd2a3c5565d5d07"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-incidenti-a1-goldach-san-gallo-480w.webp",
-      "sha256": "afc57428d2b5b922b42d3f300c721f60adfdfb82d74dbf32092377ad710998ae"
-    }
-  ]
+  "items": []
 }
