@@ -772,11 +772,10 @@ function readMarkdownAutolinkEnd(text, start) {
   const end = text.indexOf('>', start + 1);
   if (end === -1 || /[\r\n]/u.test(text.slice(start + 1, end))) return null;
   const target = text.slice(start + 1, end);
-  // Keep XML/custom HTML names such as `<x:term>` on the HTML path. A URI
-  // autolink with a slash (`<https://...>`) cannot be a tag name, so it is
-  // unambiguous here; bare email autolinks are unambiguous for the same reason.
-  const looksLikeHtmlName = /^[A-Za-z][A-Za-z0-9:_-]*$/u.test(target);
-  const uri = !looksLikeHtmlName && /^[A-Za-z][A-Za-z0-9+.-]*:[^<>\s]+$/u.test(target);
+  // Keep XML/custom HTML names such as `<x:term>` on the HTML path. Classify a
+  // valid URI scheme first: schemes such as `tel:` and `urn:` can otherwise
+  // look like namespaced tag names even though they are Markdown autolinks.
+  const uri = /^[A-Za-z][A-Za-z0-9+.-]*:[^<>\s]+$/u.test(target);
   const email = /^[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+$/u.test(target);
   return uri || email ? end + 1 : null;
 }

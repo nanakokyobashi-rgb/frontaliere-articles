@@ -16418,15 +16418,16 @@ async function translateArticle(data) {
       && sourceAnchoredNumericContract.associations.every(({ anchorSpan }) => Boolean(anchorSpan))
       && joinedAnchoredNumericContract.associations.every(({ anchorSpan }) => Boolean(anchorSpan))
       && anchorAssociation === true;
-    // A global digit sequence is enough for one numeric fact, but it cannot
-    // prove which subject owns each value when multiple facts have lost their
-    // source-owned spans. Reject that case fail-closed instead of publishing a
-    // possible reassociation after every surrounding label was translated.
-    if (sourceNumericContract.values.length > 0
-      && exactAssociation !== true
-      && (exactAssociation === false
-        || (sourceNumericContract.associations.length > 1 && !anchorAssociationCoversEveryFact)
-        || (invariantAnchorTokens.size > 0 && anchorAssociation !== true))) return null;
+    // A global digit sequence is enough when no source-owned anchor survives;
+    // there is no association evidence left to contradict the ordered facts.
+    // When invariant anchors remain, they must cover every fact so a possible
+    // reassociation cannot be published.
+    const hasInvariantAnchorEvidence = invariantAnchorTokens.size > 0;
+    const numericAssociationMismatch = exactAssociation === false
+      || (exactAssociation === null
+        && hasInvariantAnchorEvidence
+        && !anchorAssociationCoversEveryFact);
+    if (sourceNumericContract.values.length > 0 && numericAssociationMismatch) return null;
 
     // A table can preserve its pipes and per-cell opaque atoms while still
     // swapping two cells made only of translatable prose. Such cells have no

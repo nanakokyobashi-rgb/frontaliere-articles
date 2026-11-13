@@ -1164,6 +1164,21 @@ test('la guardia distingue URL bare con apostrofi e chiusure HTML mancanti', () 
     false,
   );
 
+  for (const target of ['tel:12345', 'urn:isbn:978-3-16-148410-0']) {
+    const autolinkUri = `Consulta <${target}> per i dettagli.`;
+    assert.deepEqual(opaqueSpanSignature(autolinkUri), [target], target);
+    assert.equal(
+      hasSameLineStructure(autolinkUri, `Read <${target}> for details.`),
+      true,
+      `${target} deve restare un autolink URI anche senza slash`,
+    );
+    assert.equal(
+      hasSameLineStructure(autolinkUri, `Read <${target}-changed> for details.`),
+      false,
+      `${target} alterato deve essere rifiutato`,
+    );
+  }
+
   const autolinkEmail = 'Scrivi <mail@example.test> per i dettagli.';
   assert.equal(
     hasSameLineStructure(autolinkEmail, 'Write <mail@example.test> for details.'),
@@ -1566,6 +1581,28 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     await translatedLabelsTranslator(translatedLabelsSource, 'body1', (chunk) => chunk, 'test', 'de'),
     null,
     'più numeri senza un’associazione source-owned devono essere rifiutati fail-closed',
+  );
+
+  const translatedLabelsPreserved = 'Gamma: 100, Delta: 200';
+  const translatedLabelsPreservedTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  )(
+    (bodyText) => realChunker(bodyText, 50),
+    async (prompt) => ({ body1: prompt.replace(translatedLabelsSource, translatedLabelsPreserved) }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+  assert.equal(
+    await translatedLabelsPreservedTranslator(translatedLabelsSource, 'body1', (chunk) => chunk, 'test', 'de'),
+    translatedLabelsPreserved,
+    'la sequenza numerica ordinata basta quando tutti i label sono stati localizzati',
   );
 });
 
