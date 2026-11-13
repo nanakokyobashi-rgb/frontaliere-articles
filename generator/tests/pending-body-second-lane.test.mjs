@@ -1171,16 +1171,16 @@ test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', 
   ].join('\n');
 
   assert.equal(await makeTranslator((chunk) => chunk)(source), source);
-  const tableSource = '| Regione | Aliquota |';
+  const tableSource = '| Regione | CHF |';
   assert.equal(
-    await makeTranslator((chunk) => chunk.replace('| Regione | Aliquota |', '| Aliquota | Regione |'))(tableSource),
+    await makeTranslator((chunk) => chunk.replace('| Regione | CHF |', '| CHF | Regione |'))(tableSource),
     null,
     'le colonne non devono poter essere scambiate quando il provider conserva i valori source-owned',
   );
   assert.equal(
-    await makeTranslator((chunk) => chunk.replace('| Regione | Aliquota |', '| Region | Tax rate |'))(tableSource),
-    '| Region | Tax rate |',
-    'il testo delle celle deve poter essere tradotto senza perdere l’ordine delle colonne',
+    await makeTranslator((chunk) => chunk.replace('| Regione | CHF |', '| Region | CHF |'))(tableSource),
+    '| Region | CHF |',
+    'il testo delle celle deve poter essere tradotto quando una prova source-owned dimostra l’ordine delle colonne',
   );
   assert.equal(
     await makeTranslator((chunk) => chunk.replace('> - ', '> '))(source),

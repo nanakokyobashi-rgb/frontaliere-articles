@@ -15712,6 +15712,9 @@ async function translateArticle(data) {
         // attached to that column. Keeping this identity per cell closes the
         // gap where a provider moves a URL, placeholder or other protected
         // value to a different column while preserving the number of cells.
+        // Rows whose cells have no such atom are checked again after the
+        // numeric contract below; more than one unproven cell is rejected
+        // because translated prose alone cannot prove its column identity.
         return {
           kind: 'content',
           opaque: opaqueSpanSignature(trimmed),
@@ -15767,21 +15770,6 @@ async function translateArticle(data) {
         : joinedPipe;
       if (JSON.stringify(sourcePipeShape) !== JSON.stringify(joinedPipeShape)) {
         return null;
-      }
-      if (sourcePipe?.rawCells && joinedPipe?.rawCells) {
-        const sourceCellPositions = new Map();
-        sourcePipe.rawCells.forEach((cell, cellIndex) => {
-          if (!sourceCellPositions.has(cell)) sourceCellPositions.set(cell, []);
-          sourceCellPositions.get(cell).push(cellIndex);
-        });
-        for (const [cellIndex, joinedCell] of joinedPipe.rawCells.entries()) {
-          const sourcePositions = sourceCellPositions.get(joinedCell);
-          // Exact source text is a source-owned identity only when the
-          // provider preserved it. If it did, an exact value must remain in
-          // its original column; translated prose is deliberately allowed to
-          // differ and is validated by the per-cell opaque contract above.
-          if (sourcePositions && !sourcePositions.includes(cellIndex)) return null;
-        }
       }
     }
 
@@ -16362,6 +16350,53 @@ async function translateArticle(data) {
       && exactAssociation !== true
       && anchorAssociation !== true) return null;
 
+    // A table can preserve its pipes and per-cell opaque atoms while still
+    // swapping two cells made only of translatable prose. Such cells have no
+    // source-owned identity after translation, so accept at most one unresolved
+    // cell per row (all other cells provide a unique association by position/proof).
+    // This is deliberately fail-closed: a table with two or more unresolved
+    // cells, or duplicate proofs on changed cells, cannot demonstrate that the
+    // provider kept the facts in their original columns.
+    const tableCellProof = (cell) => ({
+      opaque: opaqueSpanSignature(cell),
+      numeric: numericContract(cell).values,
+    });
+    for (const [index, sourceLine] of sourceStructureLines.entries()) {
+      const joinedLine = joinedStructureLines[index];
+      const sourcePipe = pipeSkeleton(sourceLine);
+      const joinedPipe = pipeSkeleton(joinedLine);
+      if (!sourcePipe?.rawCells || !joinedPipe?.rawCells) continue;
+      const cellEntries = sourcePipe.rawCells.map((sourceCell, cellIndex) => {
+        const joinedCell = joinedPipe.rawCells[cellIndex];
+        return {
+          sourceCell,
+          joinedCell,
+          sourceProof: tableCellProof(sourceCell),
+          joinedProof: tableCellProof(joinedCell),
+        };
+      });
+      const changedProofCounts = new Map();
+      for (const { sourceCell, joinedCell, sourceProof } of cellEntries) {
+        if (sourceCell === joinedCell) continue;
+        if (sourceProof.opaque.length === 0 && sourceProof.numeric.length === 0) continue;
+        const proofKey = JSON.stringify(sourceProof);
+        changedProofCounts.set(proofKey, (changedProofCounts.get(proofKey) || 0) + 1);
+      }
+      let unresolvedCells = 0;
+      for (const { sourceCell, joinedCell, sourceProof, joinedProof } of cellEntries) {
+        if (sourceCell === joinedCell) continue;
+        if (JSON.stringify(sourceProof) !== JSON.stringify(joinedProof)) return null;
+        const proofKey = JSON.stringify(sourceProof);
+        if (
+          (sourceProof.opaque.length === 0 && sourceProof.numeric.length === 0)
+          || changedProofCounts.get(proofKey) > 1
+        ) {
+          unresolvedCells += 1;
+        }
+      }
+      if (unresolvedCells > 1) return null;
+    }
+
     // `balanceMarkdownMarkers` only repairs/validates bold `**` and separator
     // lines. Keep the full source-owned delimiter skeleton here as well, so a
     // provider cannot silently turn `*testo*`, `_testo_` or `~~testo~~` into
@@ -16516,7 +16551,23 @@ ${localizedToponymInstruction(targetLang)}`;
           console.error(`  ⚠️  ${lang}:${bodyKey} identico all'italiano — campo scartato, recupero per-campo downstream`);
           return {};
         }
-        return { [bodyKey]: sanitizeBodyText(text) };
+        // The single-call path must use the same source-owned contracts as the
+        // chunked path. `pretranslatedResult` validates this response without
+        // issuing another provider request, so links, numbers, nested prefixes
+        // and table-cell associations cannot bypass the acceptance guard.
+        const validated = await translateInChunks(
+          bodyText,
+          bodyKey,
+          () => '',
+          `${lang}:${bodyKey.replace('body', 'b')}-validation`,
+          lang,
+          { pretranslatedResult: result },
+        );
+        if (validated === null) {
+          console.error(`  ⚠️  ${lang}:${bodyKey} — contratto strutturale/link/numerico non valido, campo scartato: recupero per-campo downstream`);
+          return {};
+        }
+        return { [bodyKey]: sanitizeBodyText(validated) };
       }
 
       // Sub-chunk: split into ~500-word pieces, at paragraph boundaries where

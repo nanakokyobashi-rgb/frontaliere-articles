@@ -49,7 +49,8 @@ import { decodeHtmlEntities } from '../scripts/lib/decode-html-entities.mjs';
 // esattamente la funzione che il loop ritagliato riceve in produzione, e una
 // copia locale nel test divergerebbe in silenzio dal fix (AGENTS.md #6).
 import { translatedStringOrNull, isSourcePassthrough, joinTranslatedChunks, translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
-import { hasSameLineSkeleton, lineStructuralSignature, opaqueSpanSignature } from '../scripts/lib/free-translate.mjs';
+import { balanceMarkdownMarkers, hasSameLineSkeleton, lineStructuralSignature, opaqueSpanSignature } from '../scripts/lib/free-translate.mjs';
+import { detectTruncation } from '../scripts/lib/article-factuality-gates.mjs';
 import { localizedToponymInstruction } from '../scripts/lib/localized-toponyms.mjs';
 import { hasUsableContentText, hasUsableTranslatedText, metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
 import { rejectRawFaqControlEscape } from '../../scripts/lib/faq-control-contract.mjs';
@@ -1329,13 +1330,13 @@ const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {"
 async function runLegacyTranslateContent(sourceContent, callWithRetry) {
   const fn = new Function(
     'sourceContent', 'callWithRetry', 'ARTICLE_TRANSLATE_FREE_MT', 'translateContentFreeMt', 'TRANSLATION_CHUNK_THRESHOLD',
-    'translatedStringOrNull', 'isSourcePassthrough', 'sanitizeBodyText', 'joinTranslatedChunks', 'localizedToponymInstruction', 'console', 'editorialHeadlineGuidance', 'hasSameLineSkeleton', 'lineStructuralSignature', 'opaqueSpanSignature',
+    'translatedStringOrNull', 'isSourcePassthrough', 'sanitizeBodyText', 'joinTranslatedChunks', 'localizedToponymInstruction', 'console', 'editorialHeadlineGuidance', 'hasSameLineSkeleton', 'lineStructuralSignature', 'opaqueSpanSignature', 'detectTruncation', 'balanceMarkdownMarkers',
     `${COLLECT_BODY_SECTIONS_SRC}\n${COUNT_WORDS_SRC}\n${SPLIT_CHUNKS_SRC}\n${TRANSLATE_IN_CHUNKS_SRC}\n${TRANSLATE_CONTENT_SRC}\n`
     + "return translateContent('it', 'fr', '4/5', sourceContent);",
   );
   return fn(
     sourceContent, callWithRetry, false, async () => { throw new Error('ramo free-MT non atteso'); }, TRANSLATION_CHUNK_THRESHOLD,
-    translatedStringOrNull, isSourcePassthrough, (v) => v, joinTranslatedChunks, localizedToponymInstruction, { error: () => {}, warn: () => {} }, editorialHeadlineGuidance, hasSameLineSkeleton, lineStructuralSignature, opaqueSpanSignature,
+    translatedStringOrNull, isSourcePassthrough, (v) => v, joinTranslatedChunks, localizedToponymInstruction, { error: () => {}, warn: () => {} }, editorialHeadlineGuidance, hasSameLineSkeleton, lineStructuralSignature, opaqueSpanSignature, detectTruncation, balanceMarkdownMarkers,
   );
 }
 
@@ -1351,6 +1352,41 @@ test('percorso legacy ARTICLE_TRANSLATE_FREE_MT=0, chiamata singola: un body ide
 
   assert.equal(Object.hasOwn(out, 'body1'), false, 'la copia italiana e\' scartata: il campo entra nella recovery');
   assert.equal(out.body2, 'Deuxième corps traduit.');
+});
+
+test('percorso legacy single-call: ogni contratto source-owned rifiuta l\'output alterato', async () => {
+  const sourceCases = [
+    {
+      label: 'destinazione Markdown relativa',
+      source: 'Prima [pagina](/vecchio-percorso) dopo altre parole.',
+      translated: 'Avant [page](/nouveau-parcours) après d’autres mots.',
+    },
+    {
+      label: 'numero e unita',
+      source: 'Aliquota 10% per i lavoratori frontalieri.',
+      translated: 'Taux 20% pour les travailleurs frontaliers.',
+    },
+    {
+      label: 'prefisso strutturale annidato',
+      source: '> - voce da mantenere nella citazione.',
+      translated: '> entrée à conserver dans la citation.',
+    },
+    {
+      label: 'associazione delle celle della tabella',
+      source: '| prima voce | seconda voce |',
+      translated: '| deuxième | première |',
+    },
+  ];
+  for (const { label, source, translated } of sourceCases) {
+    const out = await runLegacyTranslateContent(
+      { title: 'Titolo', excerpt: 'Riassunto', body1: source },
+      async (prompt) => {
+        if (prompt.includes('- title:')) return { title: 'Titre', excerpt: 'Résumé' };
+        return { body1: translated };
+      },
+    );
+    assert.equal(Object.hasOwn(out, 'body1'), false, `${label}: output alterato non deve passare il guard single-call`);
+  }
 });
 
 test('percorso legacy ARTICLE_TRANSLATE_FREE_MT=0, a chunk: un chunk identico al suo italiano scarta il campo', async () => {
