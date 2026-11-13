@@ -15,6 +15,10 @@
     "canton-basilea::https://www.bazonline.ch/baselland-buergerliche-fordern-steuersenkung-ab-2027-284632326887": {
       "section": "canton-basilea",
       "ts": 1794526063587
+    },
+    "canton-basilea::https://www.riehen.ch/aktuelles/meldungen/gemeinderatsbeschluss-betreffend-verguetungs-und-belastungszinssatz-auf-steuern-fuer-das-kalenderjahr-2027.php": {
+      "section": "canton-basilea",
+      "ts": 1794555684347
     }
   }
 }
