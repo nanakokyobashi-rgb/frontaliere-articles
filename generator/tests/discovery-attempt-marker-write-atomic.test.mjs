@@ -15,7 +15,9 @@ const source = fs.readFileSync(file, 'utf8');
 function extractFunctionBody(signature) {
   const start = source.indexOf(signature);
   assert.ok(start >= 0, `atteso di trovare "${signature}" in ${file}`);
-  const braceStart = source.indexOf('{', start);
+  const closeParameters = source.indexOf(') {', start);
+  assert.ok(closeParameters >= 0, `apertura del corpo non trovata per "${signature}"`);
+  const braceStart = closeParameters + 2;
   let depth = 0;
   for (let index = braceStart; index < source.length; index += 1) {
     if (source[index] === '{') depth += 1;
