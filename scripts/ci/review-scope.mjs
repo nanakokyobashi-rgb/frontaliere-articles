@@ -15,7 +15,11 @@ import { readFileSync } from 'node:fs';
 import { isManagedReview, REDFLAG_IMPORTANT_RE } from './lib/constants.mjs';
 import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 import { isTerminalReviewState } from './lib/review-states.mjs';
-import { isReviewTestPath, REVIEW_INPUT_REVISION_MARKER_RE } from './review-test-policy.mjs';
+import {
+  isNonRuntimeCodePath,
+  NON_RUNTIME_CODE_FINGERPRINT_RE,
+  REVIEW_INPUT_REVISION_MARKER_RE,
+} from './review-test-policy.mjs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { evaluateBodyContract } from '../lib/pr-body-contract-eval.mjs';
 import {
@@ -596,7 +600,9 @@ export function prContributionFingerprint(sha) {
 // `content/`), non scattava MAI sul caso per cui esiste: ogni rigenerazione
 // cambiava il fingerprint e faceva ripartire una review a vuoto. La stessa
 // lista, nella forma corpus, sta in `NONCODE_RE` dentro `tests.yml`.
-export const NON_REVIEWABLE_FINGERPRINT_RE = /^(content|data|dist|public)\//;
+// Compatibility export for callers that still consume the old matcher. The
+// path classification itself lives in review-test-policy.mjs.
+export const NON_REVIEWABLE_FINGERPRINT_RE = NON_RUNTIME_CODE_FINGERPRINT_RE;
 // I workflow crawler sono proiezioni generate dal sito: la compare API di
 // GitHub puo' elencarli senza `.patch` quando la PR contiene il batch completo.
 // Il generatore, il contratto e la logica restano code reviewabili; qui si
@@ -615,8 +621,9 @@ export function codeContributionFingerprint(files) {
   if (!Array.isArray(files)) return null;
   const parts = [];
   for (const f of files) {
-    if ((isReviewTestPath(f.filename) && (!f.previous_filename || isReviewTestPath(f.previous_filename)))
-      || NON_REVIEWABLE_FINGERPRINT_RE.test(f.filename || '')
+    const currentNonRuntime = isNonRuntimeCodePath(f.filename || '');
+    const previousNonRuntime = !f.previous_filename || isNonRuntimeCodePath(f.previous_filename);
+    if (currentNonRuntime && previousNonRuntime
       || GENERATED_CRAWLER_WORKFLOW_RE.test(f.filename || '')) continue; // dati/static/generated: non è contributo CODE
     // `patch` assente (binario/troppo grande) su un file CODE modificato -> bail.
     if (f.patch === undefined && f.status !== 'removed' && f.status !== 'added') return null;
