@@ -4,19 +4,19 @@
   "generatorSha256": "f60e5224337407ab6a062fc28dbd32a8d0a5b3f72ed299e85248866fb78c88f5",
   "sourceRepository": "valerielinc-ops/frontaliere-si-o-no",
   "sourceRef": "main",
-  "sourceCommit": "32fd11108cbd260c9a22d5bd4df9c9459cde3423",
+  "sourceCommit": "df6ed1c48b129ba88ced7ce825a43076beca4e99",
   "sourceCommitVerified": true,
   "artifactObservation": {
     "generatorSha256": "f60e5224337407ab6a062fc28dbd32a8d0a5b3f72ed299e85248866fb78c88f5",
     "sourceRef": "main",
-    "sourceCommit": "32fd11108cbd260c9a22d5bd4df9c9459cde3423"
+    "sourceCommit": "df6ed1c48b129ba88ced7ce825a43076beca4e99"
   },
   "groupCount": 25,
   "artifactCount": 26,
   "observerCount": 8,
   "crawlerCount": 703,
   "crawlerRosterCardinality": {
-    "sourceCommit": "32fd11108cbd260c9a22d5bd4df9c9459cde3423",
+    "sourceCommit": "df6ed1c48b129ba88ced7ce825a43076beca4e99",
     "groupCount": 25,
     "artifactCount": 26,
     "crawlerCount": 703
@@ -671,7 +671,7 @@
     {
       "source": "observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "target": "generator/tests/crawler-cross-repo-artifacts.test.mjs",
-      "sha256": "382670e473ce7f7aea645997295a43de2ccb8b393e587e1da7bc1560f2d4662f"
+      "sha256": "4a6968ab3d01e0381177e20e47e126ca28a4547f49b8798d875d78b9ba77ea40"
     },
     {
       "source": "observers/workflows/crawler-generation-observer-shadow.yml",
@@ -1662,7 +1662,7 @@
     {
       "file": "translate-pending.yml",
       "sourceLogic": "translate-pending-logic.yml",
-      "sourceSha256": "b39211a4cb540dad4b6447dd9854974c5e67c1331b8093b7de1bd9b04db76b2c",
+      "sourceSha256": "7049f36edd77acc0aa3471b1a44873dce5386999d35f427e04146ae8f8ceade3",
       "artifactSha256": "8ea983313f77c8335c1f9091613f2cdbda2d0b2a63520bc6e485dd48f8f75de4",
       "generatorSha256": "f60e5224337407ab6a062fc28dbd32a8d0a5b3f72ed299e85248866fb78c88f5",
       "members": []
