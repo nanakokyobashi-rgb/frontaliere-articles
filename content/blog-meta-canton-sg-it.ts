@@ -102,6 +102,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.incidenti-a1-goldach-san-gallo.title': 'Due incidenti sulla A1: code a Goldach e St.Gallen',
     'blog.article.incidenti-a1-goldach-san-gallo.excerpt': 'L\'11 novembre 2026 due incidenti sulla A1, a Goldach e St.Gallen, hanno causato forti rallentamenti e code nel traffico serale.',
     'blog.article.incidenti-a1-goldach-san-gallo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.votazione-fondo-rete-gas-wil.title': 'Referendum sul fondo per dismissione rete gas TBW a Wil',
+    'blog.article.votazione-fondo-rete-gas-wil.excerpt': 'Il 29 novembre 2026 si terrà la votazione popolare sul regolamento che istituisce il fondo per la dismissione e lo smantellamento della rete del gas delle aziende tecniche di Wil, le TBW.',
+    'blog.article.votazione-fondo-rete-gas-wil.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;
