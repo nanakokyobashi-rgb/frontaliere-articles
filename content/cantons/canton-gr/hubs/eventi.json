@@ -4,17 +4,17 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "61255c8f40e5e1aa4ee2b417dfc4e5ffd56277b8c5db7a6167ad68143320a013",
+  "updatedAt": "2026-11-13T13:04:15.100Z",
+  "contentHash": "596893b46032fa1e3e0defe100cfff2994b50f1ec9dfb68d07f9c3fb15ec082e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-12T22:54:56.926Z",
       "keyFacts": 0
     }
   ],
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,10 +113,16 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "IMC Oberengadin chiusa nei weekend per carenza di personale",
+          "url": "/articoli-grigioni/imc-oberengadin-weekend/",
+          "excerpt": "La Intermediate Care dello Spital Oberengadin non opera nei weekend di novembre per carenza di personale.",
+          "date": "2026-11-13T12:59:39.920Z"
+        },
         {
           "title": "Innhub La Punt: apertura rimandata all'estate 2029",
           "url": "/articoli-grigioni/innhub-la-punt-rinvio-apertura/",
@@ -171,7 +177,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T13:04:15.100Z"
     },
     "en": {
       "canton": "GR",
@@ -254,7 +260,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -267,10 +273,16 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "IMC Oberengadin closed on weekends due to staff shortage",
+          "url": "/en/graubunden-articles/oberengadin-imc-closed-weekends/",
+          "excerpt": "The Intermediate Care unit at Spital Oberengadin does not operate on weekends in November due to staff shortages.",
+          "date": "2026-11-13T12:59:39.920Z"
+        },
         {
           "title": "Innhub La Punt: opening postponed to summer 2029",
           "url": "/en/graubunden-articles/innhub-la-punt-opening-delay/",
@@ -325,7 +337,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T13:04:15.100Z"
     },
     "de": {
       "canton": "GR",
@@ -408,7 +420,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -421,10 +433,16 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "IMC Oberengadin an Wochenenden wegen Personalmangels geschlossen",
+          "url": "/de/graubunden-artikel/imc-oberengadin-wochenende-geschlossen/",
+          "excerpt": "Die Intermediate Care des Spitals Oberengadin ist an den Wochenenden im November aufgrund von Personalmangel nicht in Betrieb.",
+          "date": "2026-11-13T12:59:39.920Z"
+        },
         {
           "title": "Innhub La Punt: Eröffnung auf den Sommer 2029 verschoben",
           "url": "/de/graubunden-artikel/innhub-la-punt-eroeffnung-verschoben/",
@@ -479,7 +497,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T13:04:15.100Z"
     },
     "fr": {
       "canton": "GR",
@@ -562,7 +580,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -575,10 +593,16 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "IMC Oberengadin fermée les week-ends en raison d’un manque de personnel",
+          "url": "/fr/articles-grisons/imc-oberengadin-fermee-weekends/",
+          "excerpt": "L’Intermediate Care de Spital Oberengadin ne fonctionne pas les week-ends de novembre en raison d’un manque de personnel.",
+          "date": "2026-11-13T12:59:39.920Z"
+        },
         {
           "title": "Innhub La Punt : ouverture reportée à l’été 2029",
           "url": "/fr/articles-grisons/innhub-la-punt-report-ouverture/",
@@ -633,7 +657,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T13:04:15.100Z"
     }
   }
 }
