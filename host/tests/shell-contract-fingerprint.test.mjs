@@ -2,13 +2,14 @@
 //
 // host/ is a copy of the main repo's site chrome — the one place in this
 // migration where a second producer could not be avoided by re-exporting,
-// because the host values are what a host owns. The mitigation is that BOTH
-// repos assert the same fingerprint: main from
+// because the host values include content-addressed asset names owned by this
+// repo. Each repo records its own scalar fingerprint: main from
 // build-plugins/articlesSiteShellBootstrap.ts, this repo from
 // host/siteShellBootstrap.ts. Either side drifting fails its own test.
 //
-// If this fails after an intentional change on the main side, re-record the
-// digest in BOTH repos in the same change — never in one alone.
+// If this fails after an intentional shared-contract change, recalculate both
+// repo-local digests in the same change; their values can differ because the
+// corpus uses content-addressed asset names.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
