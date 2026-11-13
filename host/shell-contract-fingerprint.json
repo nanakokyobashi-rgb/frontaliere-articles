@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "note": "SHA-256 of this repo's adapted SiteShellContract scalars, including content-addressed static asset names; the site-side digest is computed separately.",
+  "note": "SHA-256 of SiteShellContract scalars, including the content-addressed Meta Pixel head snippet; both repos assert identical bytes.",
   "scalarFields": 23,
-  "sha256": "e87ec4c23b494636addea83a470640707fecddb64f980abfe2c3bf281b34e704"
+  "sha256": "39195bebcb8726c4b10d2acc89fed9ae5c0b3858f5cd68fe04ce86d5b2971052"
 }
