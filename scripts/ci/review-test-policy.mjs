@@ -57,6 +57,24 @@ export const TEST_DIFF_EXCLUSIONS = [
     ['test', 'spec'].map(kind => `:(glob,exclude)**/*.${kind}.${ext}`)),
 ];
 export const isReviewTestPath = path => typeof path === 'string' && TEST_PATH_RE.test(path);
+const NON_RUNTIME_CODE_DIRECTORY_RE = /^(?:content|data|dist|public)\//u;
+const NON_RUNTIME_CODE_ASSET_RE = /\.(?:snap|avif|bmp|jpe?g|png|webp|gif|svg|ico|tiff?|woff2?|xml|csv|tsv|jsonl|ndjson)$/u;
+export const NON_RUNTIME_CODE_FINGERPRINT_RE = new RegExp([
+  NON_RUNTIME_CODE_DIRECTORY_RE.source,
+  NON_RUNTIME_CODE_ASSET_RE.source,
+].join('|'), 'u');
+
+/**
+ * Files that are generated or static data do not contribute application code
+ * to the review fingerprint. Unknown paths remain reviewable by default.
+ */
+export function isNonRuntimeCodePath(path) {
+  if (typeof path !== 'string' || path.length === 0 || path.includes('\0')
+      || path.startsWith('/') || path.split('/').includes('..')) return false;
+  return NON_RUNTIME_CODE_FINGERPRINT_RE.test(path)
+    || isReviewTestPath(path);
+}
+
 export function isTestOnlySnapshot(snapshot) {
   return snapshot?.complete === true && Array.isArray(snapshot.files)
     && snapshot.files.length > 0 && snapshot.files.every(isReviewTestPath);

@@ -142,9 +142,10 @@ jobs:
       # Path NON-code: rigenerati o pubblicati, mai reviewabili riga-per-riga.
       # `content/` e' il corpus articoli (14.888 file), `dist/` la superficie
       # API generata da scripts/build-api.mjs, `data/` gli input, `public/` gli
-      # asset. Sorgente unica: re-review guard e tier-decision leggono questa
-      # var, mai una regex duplicata.
-      NONCODE_RE: '^(content/|data/|dist/|public/)|(^|/)(package-lock\.json)$|\.(snap|png|jpe?g|webp|gif|svg|ico|woff2?)$'
+      # asset. The canonical fingerprint predicate lives in
+      # scripts/ci/review-test-policy.mjs; this YAML mirror is only used by the
+      # tier/context shell filters and is covered by its path regression test.
+      NONCODE_RE: '^(content/|data/|dist/|public/)|(^|/)(package-lock\.json)$|\.(snap|avif|bmp|jpe?g|png|webp|gif|svg|ico|tiff?|woff2?|xml|csv|tsv|jsonl|ndjson)$'
       # I test realistici del floor seguono la stessa semantica dei gate:
       # `before` per push su main, base.sha per una PR; solo dispatch/locale
       # ricade sul fallback HEAD^ del modulo.
