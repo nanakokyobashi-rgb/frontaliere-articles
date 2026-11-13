@@ -4,9 +4,17 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ag::https://www.fricktal.info/news/gemeinden/rheinfelden/rheinfelden-turnhalle-robersten-vorsorglich-gesperrt.html": {
+    "canton-ag::https://www.fricktal.info/news/polizeimeldungen/rheinfelden-zoll-findet-elf-kilo-cannabis-im-kofferraum.html": {
       "section": "canton-ag",
-      "ts": 1794264138685
+      "ts": 1794541885085
+    },
+    "canton-ag::https://www.watson.ch/schweiz/polizeirapport/677086546-zoll-findet-in-rheinfelden-ag-11-kilo-cannabis-im-kofferraum": {
+      "section": "canton-ag",
+      "ts": 1794541900760
+    },
+    "canton-ag::https://www.baden.ch/de/home/wirtschaft/baden-40/wirtschafts-news-baden-40.html/3258/news/19718": {
+      "section": "canton-ag",
+      "ts": 1794541910965
     }
   }
 }
