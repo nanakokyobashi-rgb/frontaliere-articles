@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-pfiffner-450-posti-pratteln.webp",
-      "sha256": "841ae4cdc3bd094b91e1fb5b65f7296f27ec1e4576c49a9f5669e6c753fb11d5"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-pfiffner-450-posti-pratteln-480w.webp",
-      "sha256": "a54a5b41bfd4a2be156aebb4af3dba69e89d32f7652f82d68efc40a408da4509"
-    }
-  ]
+  "items": []
 }
