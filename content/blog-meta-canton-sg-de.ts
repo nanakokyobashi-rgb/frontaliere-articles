@@ -99,6 +99,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.corsa-frauenfeld-wil-2026.title': 'Lauf Frauenfeld-Wil: Verkehrsbehinderungen am 15. November 2026',
     'blog.article.corsa-frauenfeld-wil-2026.excerpt': 'Der Lauf verbindet Frauenfeld und Wil und führt über Matzingen, Wängi, Eschlikon und Sirnach; die Polizei wird in Wil bestimmte Strassen vorübergehend sperren.',
     'blog.article.corsa-frauenfeld-wil-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.incidenti-a1-goldach-san-gallo.title': 'Zwei Unfälle auf der A1: Staus in Goldach und St.Gallen',
+    'blog.article.incidenti-a1-goldach-san-gallo.excerpt': 'Am 11. November 2026 haben zwei Unfälle auf der A1 in Goldach und St.Gallen im Abendverkehr starke Verkehrsbehinderungen und Staus verursacht.',
+    'blog.article.incidenti-a1-goldach-san-gallo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

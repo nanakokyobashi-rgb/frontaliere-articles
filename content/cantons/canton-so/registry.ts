@@ -325,4 +325,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'cantonsrat-respinge-puk-soh',
+ category: 'novita',
+ date: '2026-11-13T12:05:22.358Z',
+ image: '/images/blog/article-cantonsrat-respinge-puk-soh.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

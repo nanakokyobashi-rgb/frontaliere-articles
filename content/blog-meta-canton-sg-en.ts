@@ -99,6 +99,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.corsa-frauenfeld-wil-2026.title': 'Frauenfeld-Wil race: traffic disruptions on November 15, 2026',
     'blog.article.corsa-frauenfeld-wil-2026.excerpt': 'The race connects Frauenfeld and Wil via Matzingen, Wängi, Eschlikon and Sirnach; the police will temporarily close specific roads in Wil.',
     'blog.article.corsa-frauenfeld-wil-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.incidenti-a1-goldach-san-gallo.title': 'Two accidents on the A1: traffic jams in Goldach and St.Gallen',
+    'blog.article.incidenti-a1-goldach-san-gallo.excerpt': 'On November 11, 2026, two accidents on the A1, in Goldach and St.Gallen, caused heavy delays and traffic queues during the evening commute.',
+    'blog.article.incidenti-a1-goldach-san-gallo.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

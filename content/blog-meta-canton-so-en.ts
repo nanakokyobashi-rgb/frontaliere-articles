@@ -90,6 +90,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.juko-supporto-aumento-corpo-polizia.title': 'JUKO unanimously supports increasing the police force in Solothurn',
     'blog.article.juko-supporto-aumento-corpo-polizia.excerpt': 'The Justice Committee of the Cantonal Council unanimously approved the increase of 51 positions for the 2027–2029 period and the global budget.',
     'blog.article.juko-supporto-aumento-corpo-polizia.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cantonsrat-respinge-puk-soh.title': 'Solothurn: Cantonsrat rejects PUK over SOH',
+    'blog.article.cantonsrat-respinge-puk-soh.excerpt': 'The cantonal parliament of Solothurn voted on Wednesday against establishing a parliamentary commission of inquiry into irregularities in personnel law at Solothurner Spitäler AG, referred to in the source by the acronym SOH.',
+    'blog.article.cantonsrat-respinge-puk-soh.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

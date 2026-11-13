@@ -358,4 +358,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'incidenti-a1-goldach-san-gallo',
+ category: 'pratico',
+ date: '2026-11-13T11:54:52.366Z',
+ image: '/images/blog/article-incidenti-a1-goldach-san-gallo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
