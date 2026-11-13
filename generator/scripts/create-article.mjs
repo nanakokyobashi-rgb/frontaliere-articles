@@ -83,6 +83,7 @@ import {
   BLOG_IMAGE_QUALITY_PASSES,
 } from './lib/blog-image-policy.mjs';
 import { decodeSyntheticSourceToken, isZeroSourceForGenerationBudget, markSyntheticSourceValidation } from './lib/synthetic-source-contract.mjs';
+import { writeJsonAtomic as _writeJsonAtomic } from './lib/atomic-write-json.mjs';
 import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 import {
   findHtmlRawTextClosingTag,
@@ -2729,19 +2730,22 @@ function persistDiscoveryAttemptOutcome(status) {
   );
 }
 
+function writeDiscoveryAttemptMarkerAtomically(markerPath, marker) {
+  _writeJsonAtomic(markerPath, marker, { compact: true });
+}
+
 function writeDiscoveryAttemptMarker({ section, poolKind, recoveryEligible, candidateAttempted = false, stage = null }) {
   const markerPath = process.env.DISCOVERY_ATTEMPT_MARKER;
   if (!markerPath || recoveryEligible !== true) return;
   try {
-    mkdirSync(path.dirname(markerPath), { recursive: true });
-    writeFileSync(markerPath, `${JSON.stringify({
+    writeDiscoveryAttemptMarkerAtomically(markerPath, {
       schemaVersion: 1,
       section,
       poolKind,
       recoveryEligible: true,
       candidateAttempted: candidateAttempted === true,
       stage: typeof stage === 'string' && stage ? stage : null,
-    })}\n`, 'utf8');
+    });
   } catch (err) {
     console.warn(`[discovery-attempt] selection marker write failed: ${err?.message || err}`);
   }
