@@ -5780,7 +5780,7 @@
     {
       "path": "scripts/ci/review-test-policy.mjs",
       "mode": "adapted",
-      "reason": "Il corpus aggiunge al contratto body-input condiviso il fast lane del ledger: sezioni/body predicate, registry contract, lifecycle ledger e percorsi `filter|only|check|post`; il sito conserva l'helper per la policy test-only e il proprio contratto PR/body. I consumer mantengono API e call-site locali, quindi questo file non è trasportabile come copia identica e non viene modificato funzionalmente in questa PR.",
+      "reason": "Il corpus aggiunge al contratto body-input condiviso il fast lane del ledger: sezioni/body predicate, registry contract, lifecycle ledger e percorsi `filter|only|check|post`; il sito conserva l'helper per la policy test-only e il proprio contratto PR/body. I consumer mantengono API e call-site locali, quindi questo file non è trasportabile come copia identica. La classificazione fail-closed dei dati generati/statici è però mantenuta su entrambi i lati: include il corpus di articoli generato, immagini, XML e formati dati espliciti, ma lascia reviewabile il codice non generato; la forma dei path e il fast lane del sito restano adattati al rispettivo repository.",
       "baseline": {
         "site": "961cae48e1176be3",
         "corpus": "eb10df6a0fe35ea0",
