@@ -818,6 +818,7 @@ function htmlStructureSignature(text) {
     if (value[cursor] !== '<') continue;
     const autolinkEnd = readMarkdownAutolinkEnd(value, cursor);
     if (autolinkEnd !== null) {
+      tokens.push(`autolink:${value.slice(cursor, autolinkEnd)}`);
       cursor = autolinkEnd - 1;
       continue;
     }
@@ -1248,6 +1249,7 @@ function sourceOwnedSpanRanges(text, { includeNumbers = false } = {}) {
     const autolinkEnd = readMarkdownAutolinkEnd(value, cursor);
     if (autolinkEnd !== null) {
       ranges.push({ start: cursor + 1, end: autolinkEnd - 1 });
+      ranges.push(...collectInlineOpaqueRanges(value, segmentStart, cursor));
       cursor = autolinkEnd - 1;
       segmentStart = autolinkEnd;
       continue;

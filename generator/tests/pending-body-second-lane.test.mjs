@@ -1133,6 +1133,31 @@ test('la guardia distingue URL bare con apostrofi e chiusure HTML mancanti', () 
     hasSameLineStructure(autolinkEmail, 'Write <mail@example.test> for details.'),
     true,
   );
+  assert.equal(
+    hasSameLineStructure(autolinkEmail, 'Write mail@example.test for details.'),
+    false,
+    'rimuovere i delimitatori di un autolink email deve essere rifiutato',
+  );
+
+  const interleavedOpaque = 'Prima https://example.test/before e <https://example.test/auto> e User@example.test tra <mail@example.test> e dopo.';
+  assert.deepEqual(
+    opaqueSpanSignature(interleavedOpaque),
+    [
+      'https://example.test/before',
+      'https://example.test/auto',
+      'User@example.test',
+      'mail@example.test',
+    ],
+    'URL ed email bare prima e fra autolink devono restare source-owned',
+  );
+  assert.equal(
+    hasSameLineStructure(
+      interleavedOpaque,
+      interleavedOpaque.replace('User@example.test', 'changed@example.test'),
+    ),
+    false,
+    'un’email bare fra autolink non deve poter essere alterata dal provider',
+  );
 });
 
 test('il contratto numerico non usa la maiuscola della prosa come anchor', async () => {
@@ -1483,6 +1508,28 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     await lowercaseAssociationTranslator(lowercaseAssociationSource, 'body1', (chunk) => chunk, 'test', 'de'),
     null,
     'un numero riassociato con label lowercase non allineabili deve essere rifiutato',
+  );
+
+  const translatedLabelsSource = 'Alpha: 100, Beta: 200';
+  const translatedLabelsTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  )(
+    (bodyText) => realChunker(bodyText, 50),
+    async (prompt) => ({ body1: prompt.replace(translatedLabelsSource, 'Gamma: 200, Delta: 100') }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+  assert.equal(
+    await translatedLabelsTranslator(translatedLabelsSource, 'body1', (chunk) => chunk, 'test', 'de'),
+    null,
+    'più numeri senza un’associazione source-owned devono essere rifiutati fail-closed',
   );
 });
 

@@ -16381,14 +16381,18 @@ async function translateArticle(data) {
         joinedAnchoredNumericContract,
       )
       : null;
-    // A global digit sequence is not enough when comparable source-owned spans
-    // disagree: unchanged labels still reject a reassociation. If translation
-    // changes every surrounding label/prose token, there is no source-owned
-    // association left to compare, so the preserved ordered digit sequence is
-    // the only available proof and must remain admissible.
+    const anchorAssociationCoversEveryFact = sourceNumericContract.associations.length > 0
+      && sourceAnchoredNumericContract.associations.every(({ anchorSpan }) => Boolean(anchorSpan))
+      && joinedAnchoredNumericContract.associations.every(({ anchorSpan }) => Boolean(anchorSpan))
+      && anchorAssociation === true;
+    // A global digit sequence is enough for one numeric fact, but it cannot
+    // prove which subject owns each value when multiple facts have lost their
+    // source-owned spans. Reject that case fail-closed instead of publishing a
+    // possible reassociation after every surrounding label was translated.
     if (sourceNumericContract.values.length > 0
       && exactAssociation !== true
       && (exactAssociation === false
+        || (sourceNumericContract.associations.length > 1 && !anchorAssociationCoversEveryFact)
         || (invariantAnchorTokens.size > 0 && anchorAssociation !== true))) return null;
 
     // A table can preserve its pipes and per-cell opaque atoms while still
