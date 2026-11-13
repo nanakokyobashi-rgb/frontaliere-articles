@@ -829,6 +829,30 @@ test('il chunker protegge Markdown adiacente al testo e numeri con separatori Un
   );
 });
 
+test('il chunker mantiene integri gli elementi HTML con attributi e testo interno', () => {
+  const splitIntoTranslationChunks = buildChunker();
+  const elements = [
+    '<span class="source-mark">testo</span>',
+    '<strong>in evidenza</strong>',
+    '<img src="https://example.test/icon.png" alt="icona">',
+  ];
+  const source = `Prima parola ${elements[0]} poi ${elements[1]} e ${elements[2]} fine da spezzare ancora oggi.`;
+  const chunks = splitIntoTranslationChunks(source, 6);
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, source);
+  for (const element of elements) {
+    assert.equal(
+      chunks.filter((chunk) => chunk.includes(element)).length,
+      1,
+      `elemento HTML spezzato: ${element}`,
+    );
+  }
+});
+
 test('il chunker protegge link, code e prefissi di lista e conserva i separatori Markdown', () => {
   const splitIntoTranslationChunks = buildChunker();
   const link = '[comparatore fiscale](nav:calculator)';
@@ -1131,7 +1155,7 @@ test('il joiner rifiuta un link Markdown alterato dopo la ricomposizione', async
 
 test('il joiner protegge reference link, definizioni e autolink', async () => {
   const realChunker = buildChunker();
-  const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
+  const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 10);
   const makeTranslator = (mutate) => {
     const translateInChunks = new Function(
       'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
@@ -1359,18 +1383,13 @@ test('il joiner rifiuta immagini mutate, struttura Markdown alterata e code span
   }
 });
 
-test('il joiner rifiuta un anchor HTML spostato su testo diverso', async () => {
+test('il joiner ammette label HTML tradotte ma rifiuta la topologia alterata', async () => {
   const realChunker = buildChunker();
-  const makeTranslator = new Function(
+  const source = 'Prima <a class="source" href="https://example.test/html">anchor</a> dopo altre parole.';
+  const makeTranslator = (translated) => new Function(
     'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
     `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
-  );
-  const source = 'Prima <a class="source" href="https://example.test/html">anchor</a> dopo altre parole.';
-  const translated = source.replace(
-    '<a class="source" href="https://example.test/html">anchor</a> dopo',
-    '<a class="source" href="https://example.test/html">anchor dopo</a>',
-  );
-  const translateInChunks = makeTranslator(
+  )(
     (bodyText) => realChunker(bodyText, 50),
     async () => ({ body1: translated }),
     (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
@@ -1383,10 +1402,55 @@ test('il joiner rifiuta un anchor HTML spostato su testo diverso', async () => {
   );
 
   assert.equal(
-    await translateInChunks(source, 'body1', (chunk) => chunk, 'test', 'de'),
-    null,
-    'un anchor chiuso ma con copertura testuale diversa non deve passare il contratto',
+    await makeTranslator(source.replace('anchor', 'Anker'))(source, 'body1', (chunk) => chunk, 'test', 'de'),
+    source.replace('anchor', 'Anker'),
+    'il testo visibile dell’anchor deve restare traducibile',
   );
+  const alteredTopology = source.replace(
+    'anchor</a>',
+    '<strong>anchor</strong></a>',
+  );
+  assert.equal(
+    await makeTranslator(alteredTopology)(source, 'body1', (chunk) => chunk, 'test', 'de'),
+    null,
+    'un elemento HTML aggiunto dentro l’anchor deve essere rifiutato',
+  );
+});
+
+test('il joiner valida anche gli elementi HTML generici e gli attributi source-owned', async () => {
+  const realChunker = buildChunker();
+  const source = 'Prima <span class="source-mark">testo</span> e <strong>evidenza</strong> con <img src="https://example.test/icon.png" alt="icona"> finale.';
+  const makeTranslator = (translated) => new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  )(
+    (bodyText) => realChunker(bodyText, 50),
+    async () => ({ body1: translated }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+  );
+
+  assert.equal(
+    await makeTranslator(source.replace('testo', 'Text').replace('evidenza', 'Hervorhebung'))(source, 'body1', (chunk) => chunk, 'test', 'de'),
+    source.replace('testo', 'Text').replace('evidenza', 'Hervorhebung'),
+    'il testo interno degli elementi HTML deve restare traducibile',
+  );
+  for (const [label, mutate] of [
+    ['attributo span', (text) => text.replace('source-mark', 'changed-mark')],
+    ['chiusura strong', (text) => text.replace('</strong>', '')],
+    ['destinazione img', (text) => text.replace('https://example.test/icon.png', 'https://evil.example/icon.png')],
+  ]) {
+    assert.equal(
+      await makeTranslator(mutate(source))(source, 'body1', (chunk) => chunk, 'test', 'de'),
+      null,
+      `${label}: l’HTML alterato non deve passare il contratto`,
+    );
+  }
 });
 
 test('il recovery missing-field usa il chunker per un body oversized', async () => {

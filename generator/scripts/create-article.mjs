@@ -14302,6 +14302,118 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     return null;
   }
 
+  const HTML_VOID_TAGS = new Set([
+    'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link',
+    'meta', 'param', 'source', 'track', 'wbr',
+  ]);
+
+  function readHtmlTag(text, start) {
+    if (text[start] !== '<') return null;
+    if (text.startsWith('<!--', start)) {
+      const commentEnd = text.indexOf('-->', start + 4);
+      return commentEnd === -1
+        ? null
+        : { end: commentEnd + 3, kind: 'comment' };
+    }
+    if (text[start + 1] === '/') {
+      const nameMatch = text.slice(start + 2).match(/^([A-Za-z][A-Za-z0-9:_-]*)/u);
+      if (!nameMatch) return null;
+      const nameEnd = start + 2 + nameMatch[0].length;
+      if (text[nameEnd] !== '>' && !/[\s]/u.test(text[nameEnd] || '')) return null;
+      if (text[nameEnd] === '>') {
+        return {
+          end: nameEnd + 1,
+          kind: 'tag',
+          name: nameMatch[1].toLowerCase(),
+          closing: true,
+          selfClosing: false,
+        };
+      }
+      let quote = null;
+      for (let end = nameEnd; end < text.length; end += 1) {
+        const char = text[end];
+        if (quote !== null) {
+          if (char === quote) quote = null;
+        } else if (char === '"' || char === "'") {
+          quote = char;
+        } else if (char === '>') {
+          return {
+            end: end + 1,
+            kind: 'tag',
+            name: nameMatch[1].toLowerCase(),
+            closing: true,
+            selfClosing: false,
+          };
+        }
+      }
+      return null;
+    }
+
+    const nameMatch = text.slice(start + 1).match(/^([A-Za-z][A-Za-z0-9:_-]*)/u);
+    if (!nameMatch) return null;
+    const nameEnd = start + 1 + nameMatch[0].length;
+    // `<https://...>` and other autolinks are not HTML tags. Requiring a
+    // delimiter after the tag name keeps them out of the raw-HTML scanner.
+    if (text[nameEnd] !== '>' && text[nameEnd] !== '/' && !/[\s]/u.test(text[nameEnd] || '')) {
+      return null;
+    }
+    let quote = null;
+    for (let end = nameEnd + 1; end < text.length; end += 1) {
+      const char = text[end];
+      if (quote !== null) {
+        if (char === quote) quote = null;
+      } else if (char === '"' || char === "'") {
+        quote = char;
+      } else if (char === '>') {
+        const raw = text.slice(start, end + 1);
+        if (text[nameEnd] === '/' && !/\/\s*>$/u.test(raw)) return null;
+        return {
+          end: end + 1,
+          kind: 'tag',
+          name: nameMatch[1].toLowerCase(),
+          closing: false,
+          selfClosing: /\/\s*>$/u.test(raw),
+        };
+      }
+    }
+    return null;
+  }
+
+  function readHtmlElementEnd(text, start) {
+    const opening = readHtmlTag(text, start);
+    if (opening === null || opening.kind !== 'tag' || opening.closing) return null;
+    if (opening.selfClosing || HTML_VOID_TAGS.has(opening.name)) return opening.end;
+
+    let depth = 1;
+    let cursor = opening.end;
+    while (cursor < text.length) {
+      const codeEnd = readCodeSpanEnd(text, cursor);
+      if (codeEnd !== null) {
+        cursor = codeEnd;
+        continue;
+      }
+      if (text[cursor] !== '<') {
+        cursor += 1;
+        continue;
+      }
+      const token = readHtmlTag(text, cursor);
+      if (token === null) {
+        cursor += 1;
+        continue;
+      }
+      if (token.kind === 'tag' && token.name === opening.name) {
+        if (token.closing) {
+          depth -= 1;
+          if (depth === 0) return token.end;
+        } else if (!token.selfClosing) {
+          depth += 1;
+        }
+      }
+      cursor = token.end;
+    }
+    return null;
+  }
+
   function readBalancedBracketEnd(text, start) {
     if (text[start] !== '[') return null;
     let depth = 0;
@@ -14466,6 +14578,8 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
   function readCoreProtectedMarkdownEnd(text, start) {
     const codeEnd = readCodeSpanEnd(text, start);
     if (codeEnd !== null) return codeEnd;
+    const htmlEnd = readHtmlElementEnd(text, start);
+    if (htmlEnd !== null) return htmlEnd;
     const linkEnd = readLinkEnd(text, start);
     if (linkEnd !== null) return linkEnd;
     // Keep every complete emphasis span in one request. In particular, the
@@ -15768,6 +15882,8 @@ async function translateArticle(data) {
 
       const linkEntries = [];
       const htmlAnchors = [];
+      const htmlTags = [];
+      const unbalancedHtml = [];
       const readHtmlTagEnd = (start) => {
         let quote = null;
         for (let index = start + 1; index < value.length; index += 1) {
@@ -15783,6 +15899,46 @@ async function translateArticle(data) {
           }
         }
         return null;
+      };
+      const HTML_VOID_TAGS = new Set([
+        'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link',
+        'meta', 'param', 'source', 'track', 'wbr',
+      ]);
+      const readHtmlToken = (start) => {
+        if (value[start] !== '<') return null;
+        if (value.startsWith('<!--', start)) {
+          const commentEnd = value.indexOf('-->', start + 4);
+          return commentEnd === -1
+            ? null
+            : {
+              end: commentEnd + 3,
+              kind: 'comment',
+              raw: value.slice(start, commentEnd + 3),
+            };
+        }
+        const closing = value[start + 1] === '/';
+        const nameStart = start + (closing ? 2 : 1);
+        const nameMatch = value.slice(nameStart).match(/^([A-Za-z][A-Za-z0-9:_-]*)/u);
+        if (!nameMatch) return null;
+        const nameEnd = nameStart + nameMatch[0].length;
+        // Do not mistake Markdown autolinks such as `<https://...>` for an
+        // unclosed HTML element. A real tag has whitespace, `/` or `>` after
+        // its name.
+        if (value[nameEnd] !== '>' && value[nameEnd] !== '/' && !/[\s]/u.test(value[nameEnd] || '')) {
+          return null;
+        }
+        const end = readHtmlTagEnd(start);
+        if (end === null) return null;
+        const raw = value.slice(start, end);
+        if (!closing && value[nameEnd] === '/' && !/\/\s*>$/u.test(raw)) return null;
+        return {
+          end,
+          kind: 'tag',
+          name: nameMatch[1].toLowerCase(),
+          closing,
+          selfClosing: !closing && /\/\s*>$/u.test(raw),
+          raw,
+        };
       };
       const readHtmlAnchorCloseEnd = (start) => {
         let depth = 1;
@@ -15806,6 +15962,33 @@ async function translateArticle(data) {
         }
         return null;
       };
+      const scanHtmlTags = () => {
+        const stack = [];
+        for (let cursor = 0; cursor < value.length; cursor += 1) {
+          const codeEnd = readCodeSpanEnd(value, cursor);
+          if (codeEnd !== null) {
+            cursor = codeEnd - 1;
+            continue;
+          }
+          const token = readHtmlToken(cursor);
+          if (token === null) continue;
+          htmlTags.push(`${token.kind}:${token.raw}`);
+          if (token.kind === 'tag') {
+            if (token.closing) {
+              if (stack.at(-1) !== token.name) {
+                unbalancedHtml.push(`unexpected-close:${token.name}`);
+              } else {
+                stack.pop();
+              }
+            } else if (!token.selfClosing && !HTML_VOID_TAGS.has(token.name)) {
+              stack.push(token.name);
+            }
+          }
+          cursor = token.end - 1;
+        }
+        for (const name of stack) unbalancedHtml.push(`unclosed:${name}`);
+      };
+      scanHtmlTags();
       const parseLinkAt = (start) => {
         const linkKind = value[start] === '!' ? 'image' : 'link';
         const labelStart = value[start] === '!' ? start + 1 : start;
@@ -15903,14 +16086,11 @@ async function translateArticle(data) {
                 htmlAnchors.push({
                   hrefs,
                   closed: closeEnd !== null,
-                  // Keep the complete source-owned anchor span in document
-                  // order. Hrefs alone allow a provider to move the opening
-                  // and closing tags onto different prose while retaining a
-                  // valid, closed anchor; the span skeleton makes that
-                  // topology change fail closed before publication.
-                  skeleton: closeEnd === null
-                    ? value.slice(cursor, tagEnd)
-                    : value.slice(cursor, closeEnd),
+                  // The label is translated, so it is deliberately excluded
+                  // from this source-owned signature. The complete HTML tag
+                  // sequence below still protects opening/closing topology,
+                  // while this entry keeps the anchor destinations ordered.
+                  skeleton: value.slice(cursor, tagEnd),
                 });
                 cursor = tagEnd - 1;
                 continue;
@@ -15942,7 +16122,15 @@ async function translateArticle(data) {
       const links = linkEntries
         .sort((left, right) => left.index - right.index)
         .map(({ signature }) => signature);
-      return { links, definitions, codeSpans, unbalancedCodeSpans, htmlAnchors };
+      return {
+        links,
+        definitions,
+        codeSpans,
+        unbalancedCodeSpans,
+        htmlAnchors,
+        htmlTags,
+        unbalancedHtml,
+      };
     };
     const sourceLinkContract = markdownLinkContract(bodyText);
     const joinedLinkContract = markdownLinkContract(joined);
@@ -15952,6 +16140,10 @@ async function translateArticle(data) {
     }
     if (sourceLinkContract.htmlAnchors.some(({ closed }) => !closed)
       || joinedLinkContract.htmlAnchors.some(({ closed }) => !closed)) {
+      return null;
+    }
+    if (sourceLinkContract.unbalancedHtml.length > 0
+      || joinedLinkContract.unbalancedHtml.length > 0) {
       return null;
     }
     if (JSON.stringify(sourceLinkContract) !== JSON.stringify(joinedLinkContract)) {
