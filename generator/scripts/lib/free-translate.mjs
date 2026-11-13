@@ -786,6 +786,54 @@ const HTML_VOID_TAGS = new Set([
   'meta', 'param', 'source', 'track', 'wbr',
 ]);
 
+// HTML tag names and nesting are not enough to prove that a source-owned
+// element stayed intact: `<img src="/a">` and `<img src="/b">` have the same
+// topology. Keep every opening-tag attribute in the structural signature,
+// including relative href/src values that are not URL/email opaque spans.
+function htmlAttributeSignature(raw) {
+  const value = String(raw ?? '');
+  if (!value.startsWith('<') || value.startsWith('</') || value.startsWith('<!--')) return [];
+  const nameMatch = value.slice(1).match(/^([A-Za-z][A-Za-z0-9:_-]*)/u);
+  if (!nameMatch) return [];
+  let cursor = 1 + nameMatch[0].length;
+  const attributes = [];
+  while (cursor < value.length) {
+    while (cursor < value.length && /\s/u.test(value[cursor])) cursor += 1;
+    if (cursor >= value.length || value[cursor] === '>') break;
+    if (value[cursor] === '/') {
+      cursor += 1;
+      continue;
+    }
+    const attributeMatch = value.slice(cursor).match(/^([A-Za-z_:][A-Za-z0-9:._-]*)/u);
+    if (!attributeMatch) {
+      cursor += 1;
+      continue;
+    }
+    const name = attributeMatch[1].toLowerCase();
+    cursor += attributeMatch[0].length;
+    while (cursor < value.length && /\s/u.test(value[cursor])) cursor += 1;
+    if (value[cursor] !== '=') {
+      attributes.push([name, true]);
+      continue;
+    }
+    cursor += 1;
+    while (cursor < value.length && /\s/u.test(value[cursor])) cursor += 1;
+    const quote = value[cursor] === '"' || value[cursor] === "'" ? value[cursor] : '';
+    if (quote) {
+      const start = cursor + 1;
+      cursor = start;
+      while (cursor < value.length && value[cursor] !== quote) cursor += 1;
+      attributes.push([name, value.slice(start, cursor)]);
+      if (cursor < value.length) cursor += 1;
+      continue;
+    }
+    const start = cursor;
+    while (cursor < value.length && !/[\s>]/u.test(value[cursor])) cursor += 1;
+    attributes.push([name, value.slice(start, cursor)]);
+  }
+  return attributes;
+}
+
 function htmlStructureSignature(text) {
   const value = String(text ?? '');
   const tokens = [];
@@ -835,7 +883,11 @@ function htmlStructureSignature(text) {
     const raw = value.slice(cursor, tag.end);
     const selfClosing = !tag.closing
       && (HTML_VOID_TAGS.has(tag.name) || /\/\s*>$/u.test(raw));
-    tokens.push(`${tag.closing ? 'close' : 'open'}:${tag.name}${selfClosing ? '/self' : ''}`);
+    const attributeSignature = tag.closing ? [] : htmlAttributeSignature(raw);
+    tokens.push(
+      `${tag.closing ? 'close' : 'open'}:${tag.name}${selfClosing ? '/self' : ''}`
+      + (attributeSignature.length > 0 ? `:${JSON.stringify(attributeSignature)}` : ''),
+    );
     if (tag.closing) {
       if (stack.at(-1) !== tag.name) errors.push(`unexpected-close:${tag.name}`);
       else stack.pop();

@@ -139,9 +139,26 @@ const MISSING_FIELD_LOOP_SRC = extractMissingFieldLoop();
  * passano esplicitamente non esercitano il ramo warning IT-esso-stesso-troncato
  * (#705). `warnings` raccoglie i messaggi di `console.warn` per assert.
  */
-async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [], translationReport, freeMt = true }) {
+async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [], translationReport, freeMt = true, translateInChunks = null }) {
   const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
   const RUN_REPORT = { translation: translationReport || createFreeMtRecoveryReport() };
+  const noopTranslateInChunks = async (bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang, { pretranslatedResult = null } = {}) => {
+    if (pretranslatedResult !== null) return translatedStringOrNull(pretranslatedResult?.[fieldKey], targetLang);
+    throw new Error('translateInChunks chiamato senza mock — il test non lo aspettava per un body oversized');
+  };
+  const chunkTranslator = translateInChunks || noopTranslateInChunks;
+  const validatePretranslatedBody = async (bodyText, fieldKey, translated, targetLang, labelPrefix) => {
+    const text = translatedStringOrNull(translated, targetLang);
+    if (text === null) return null;
+    return chunkTranslator(
+      bodyText,
+      fieldKey,
+      () => '',
+      labelPrefix,
+      targetLang,
+      { pretranslatedResult: { [fieldKey]: text } },
+    );
+  };
   // `markBodyTranslationPending` e' quello VERO (#1875): e' lui a decidere che
   // il body resta assente invece di ricevere l'italiano, e un mock qui non
   // proverebbe quel comportamento.
@@ -149,13 +166,14 @@ async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTrunc
     'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableTranslatedText', 'metaFieldPlausibilityMiss', 'detectTruncation', 'console',
     'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'wasFreeMtUnusable', 'maxFreeMtLlmFallbacksPerLocale', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN', 'MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE',
     'markBodyTranslationPending', 'isSourcePassthrough', 'rejectRawFaqControlEscape', 'normalizeLocalizedToponymText',
+    'translateInChunks', 'validatePretranslatedBody',
     'safeSignalDiagnosticTextForLog',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
   // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
   // IT, e un mock qui non proverebbe quel comportamento.
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, freeMt, claimFreeMtLlmFallback, wasFreeMtUnusable, maxFreeMtLlmFallbacksPerLocale, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, markBodyTranslationPending, isSourcePassthrough, rejectRawFaqControlEscape, normalizeLocalizedToponymText, ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog);
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, freeMt, claimFreeMtLlmFallback, wasFreeMtUnusable, maxFreeMtLlmFallbacksPerLocale, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, markBodyTranslationPending, isSourcePassthrough, rejectRawFaqControlEscape, normalizeLocalizedToponymText, chunkTranslator, validatePretranslatedBody, ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog);
   return RUN_REPORT;
 }
 
@@ -191,21 +209,35 @@ async function runTruncationRetryLoop({ data, itContent, detectTruncation, callW
   const sanitizeBodyText = (v) => v;
   const countWords = (s) => String(s).split(/\s+/).filter(Boolean).length;
   const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
-  const noopTranslateInChunks = async () => {
-    throw new Error('translateInChunks chiamato senza mock — il test non lo aspettava per un campo sotto soglia');
+  const noopTranslateInChunks = async (bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang, { pretranslatedResult = null } = {}) => {
+    if (pretranslatedResult !== null) return translatedStringOrNull(pretranslatedResult?.[fieldKey], targetLang);
+    throw new Error('translateInChunks chiamato senza mock — il test non lo aspettava per un body oversized');
+  };
+  const chunkTranslator = translateInChunks || noopTranslateInChunks;
+  const validatePretranslatedBody = async (bodyText, fieldKey, translated, targetLang, labelPrefix) => {
+    const text = translatedStringOrNull(translated, targetLang);
+    if (text === null) return null;
+    return chunkTranslator(
+      bodyText,
+      fieldKey,
+      () => '',
+      labelPrefix,
+      targetLang,
+      { pretranslatedResult: { [fieldKey]: text } },
+    );
   };
   const RUN_REPORT = { translation: translationReport || createFreeMtRecoveryReport() };
   const fn = new Function(
     'data', 'itContent', 'detectTruncation', 'callWithRetry', 'translateInChunks',
     'TRANSLATION_CHUNK_THRESHOLD', 'translatedStringOrNull', 'sanitizeBodyText', 'countWords', 'console',
-    'markBodyTranslationPending', 'RUN_REPORT', 'isSourcePassthrough',
+    'markBodyTranslationPending', 'RUN_REPORT', 'isSourcePassthrough', 'validatePretranslatedBody',
     'safeSignalDiagnosticTextForLog',
     `${REAL_TRUNCATION_SRC}\nreturn (async () => { ${LOOP_SRC} })();`,
   );
   await fn(
-    data, itContent, detectTruncation, callWithRetry, translateInChunks || noopTranslateInChunks,
+    data, itContent, detectTruncation, callWithRetry, chunkTranslator,
     TRANSLATION_CHUNK_THRESHOLD, translatedStringOrNull, sanitizeBodyText, countWords, capturingConsole,
-    markBodyTranslationPending, RUN_REPORT, isSourcePassthrough,
+    markBodyTranslationPending, RUN_REPORT, isSourcePassthrough, validatePretranslatedBody,
     ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog,
   );
   return RUN_REPORT;
@@ -284,6 +316,34 @@ test('itValue >700 parole: il retry usa il sub-chunking di translateBodyField in
   );
 });
 
+test('ramo truncation-retry breve: il risultato passa dal contratto prima della scrittura', async () => {
+  const data = { content: { en: { body1: 'The first translation is cut and' } } };
+  const itContent = { body1: 'La traduzione italiana completa contiene due fatti.' };
+  const calls = [];
+  const detectTruncation = (text) => (
+    text === 'The first translation is cut and' ? ['incomplete-ending'] : []
+  );
+  const callWithRetry = async () => ({ body1: 'B: 100, A: 200' });
+  const translateInChunks = async (bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang, options) => {
+    calls.push({ bodyText, fieldKey, labelPrefix, targetLang, options });
+    return null;
+  };
+
+  const report = await runTruncationRetryLoop({
+    data,
+    itContent,
+    detectTruncation,
+    callWithRetry,
+    translateInChunks,
+  });
+
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].fieldKey, 'body1');
+  assert.equal(calls[0].options.pretranslatedResult.body1, 'B: 100, A: 200');
+  assert.equal(Object.hasOwn(data.content.en, 'body1'), false);
+  assert.deepEqual(report.translation.pendingBodyFields, { 'en:body1': 'truncation-retry-structure' });
+});
+
 test('itValue whitespace-only: il body tradotto troncato NON viene sovrascritto (#691)', async () => {
   const data = { content: { en: { body1: 'This sentence never ends and' } } };
   // Un fallback fatto di soli spazi è truthy: senza `.trim()` bypassava il
@@ -312,6 +372,43 @@ test('ramo missing-field: itValue whitespace-only lancia l\'errore invece di pub
     () => runMissingFieldLoop({ data, itContent, callWithRetry }),
     (error) => error.qualityReject === true && /Campo body1 mancante nella traduzione en/.test(error.message),
   );
+});
+
+test('ramo missing-field breve: il risultato passa dal contratto prima della writeField', async () => {
+  const complete = { ...META_PLAUSIBILI, body2: 'B2', body3: 'B3' };
+  const data = {
+    content: {
+      en: { ...complete, body1: undefined },
+      de: { ...complete, body1: 'Deutscher Text.' },
+      fr: { ...complete, body1: 'Texte français.' },
+    },
+  };
+  const itContent = {
+    ...META_PLAUSIBILI,
+    body1: 'A: 100, B: 200',
+    body2: 'Secondo corpo italiano.',
+    body3: 'Terzo corpo italiano.',
+  };
+  const calls = [];
+  const callWithRetry = async () => ({ body1: 'B: 100, A: 200' });
+  const translateInChunks = async (bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang, options) => {
+    calls.push({ bodyText, fieldKey, labelPrefix, targetLang, options });
+    return null;
+  };
+
+  const report = await runMissingFieldLoop({
+    data,
+    itContent,
+    callWithRetry,
+    freeMt: false,
+    translateInChunks,
+  });
+
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].fieldKey, 'body1');
+  assert.equal(calls[0].options.pretranslatedResult.body1, 'B: 100, A: 200');
+  assert.equal(Object.hasOwn(data.content.en, 'body1'), false);
+  assert.deepEqual(report.translation.pendingBodyFields, { 'en:body1': 'retry-structure' });
 });
 
 test('excerpt tradotto senza sorgente valida è un quality reject dichiarato', async () => {

@@ -301,7 +301,8 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(body, /chain: \[codex\]/);
   assert.match(body, /prefer: \[codex\]/);
   assert.match(body, /fallback: \(\) => \{[\s\S]*if \(!pendingBodySecondLaneAvailable\(\) && typeof callWithRetry === 'function'\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry, translateInChunks \}\)/);
-  assert.match(body, /if \(!text\n\s+&& \(codexModelUnavailable \|\| !pendingBodySecondLaneAvailable\(\)\)/);
+  assert.match(body, /const validatedText = text && typeof translateInChunks === 'function'[\s\S]*pretranslatedResult/);
+  assert.match(body, /if \(!validatedText\n\s+&& \(codexModelUnavailable \|\| !pendingBodySecondLaneAvailable\(\)\)/);
   // Nessun orologio di modulo: i producer che importano translateArticle()
   // (publish-journalist-article.mjs) non hanno CREATE_ARTICLE_MAX_WALL_MS.
   assert.doesNotMatch(body, /RUN_START_MS|RUN_WALL_BUDGET_MS/);
@@ -315,6 +316,20 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(install.slice(0, install.indexOf('\n}\n')), /_pendingBodyCodexDeadlineMs = RUN_START_MS \+ RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS;/);
   const stop = src.slice(src.indexOf('function pendingBodyLaneShouldStop() {'));
   assert.doesNotMatch(stop.slice(0, stop.indexOf('\n}\n')), /RUN_START_MS|wallBudgetExceeded/);
+});
+
+test('il free-MT applica il contratto chunked ai body prima di conservarli', () => {
+  const freeMtStart = src.indexOf('async function translateContentFreeMt(');
+  assert.notEqual(freeMtStart, -1, 'translateContentFreeMt non trovata');
+  const freeMtEnd = src.indexOf('\n}\n', freeMtStart) + 2;
+  const freeMtBody = src.slice(freeMtStart, freeMtEnd);
+  assert.match(freeMtBody, /validateBody = null/);
+  assert.match(freeMtBody, /const validated = await validateBody\(/);
+  assert.match(freeMtBody, /contratto strutturale\/link\/numerico non valido nel free-MT/);
+  const translateContentStart = src.indexOf('async function translateContent(sourceLang, targetLang, targetLabel, sourceContent) {');
+  const translateContentBody = src.slice(translateContentStart, src.indexOf('\n  }\n\n  const itContent', translateContentStart));
+  assert.match(translateContentBody, /validateBody: \(\{ field, sourceText, translated \}\) => validatePretranslatedBody\(/);
+  assert.match(translateContentBody, /pretranslatedResult/);
 });
 
 test('la corsia si arma solo nel percorso CLI: i producer importati (publish-journalist) non la interrogano', () => {
@@ -1116,6 +1131,27 @@ test('la guardia distingue URL bare con apostrofi e chiusure HTML mancanti', () 
   assert.deepEqual(opaqueSpanSignature(html), ["https://example.test/O'Connor"]);
   assert.equal(hasSameLineStructure(html, html.replace('anchor', 'Anker')), true);
   assert.equal(hasSameLineStructure(html, html.replace('</a>', '')), false);
+
+  const relativeAttributes = 'Prima <a href="nav:calculator" data-source="article">anchor</a> <img src="/images/icon.png" alt="icona"> dopo.';
+  assert.equal(
+    hasSameLineStructure(relativeAttributes, relativeAttributes.replace('anchor', 'Anker')),
+    true,
+  );
+  assert.equal(
+    hasSameLineStructure(relativeAttributes, relativeAttributes.replace('nav:calculator', 'nav:exchange')),
+    false,
+    'un href relativo source-owned alterato deve essere rifiutato',
+  );
+  assert.equal(
+    hasSameLineStructure(relativeAttributes, relativeAttributes.replace('/images/icon.png', '/images/other.png')),
+    false,
+    'un src relativo source-owned alterato deve essere rifiutato',
+  );
+  assert.equal(
+    hasSameLineStructure(relativeAttributes, relativeAttributes.replace('data-source="article"', 'data-source="other"')),
+    false,
+    'un attributo source-owned alterato deve essere rifiutato anche senza URL',
+  );
 
   const autolinkUrl = 'Leggi <https://example.test/auto> per i dettagli.';
   assert.deepEqual(opaqueSpanSignature(autolinkUrl), ['https://example.test/auto']);

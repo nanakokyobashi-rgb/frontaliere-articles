@@ -15064,9 +15064,17 @@ function preserveMunicipalityNamesInMetadata(data) {
 // Free-MT replacement for translateContent: same return shape ({title, excerpt,
 // body1..bodyN, faq?}) but each field via the quota-free cascade. Missing/failed
 // fields are simply omitted → the existing missing-field recovery loop in
-// translateArticle re-translates them (LLM); if that fails, title/excerpt/FAQ
-// fall back to IT and a bodyN stays untranslated (#1875).
-async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourceContent) {
+// translateArticle re-translates them (LLM). Body outputs are additionally
+// passed through translateInChunks' source-owned contract before they return;
+// if that fails, title/excerpt/FAQ fall back to IT and a bodyN stays
+// untranslated (#1875).
+async function translateContentFreeMt(
+  sourceLang,
+  targetLang,
+  targetLabel,
+  sourceContent,
+  { validateBody = null } = {},
+) {
   console.error(`🌍 [${targetLabel}] Traduzione ${targetLang.toUpperCase()} via cascade MT gratuita (no quota LLM)...`);
   const bodyFields = Object.keys(collectBodySections(sourceContent));
   const [title, excerpt, ...bodyValues] = await Promise.all([
@@ -15079,7 +15087,20 @@ async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourc
       'excerpt',
       { preserveMunicipalityNames: true },
     ),
-    ...bodyFields.map((field) => freeMtField(sourceContent[field], sourceLang, targetLang, 'description', field)),
+    ...bodyFields.map(async (field) => {
+      const translated = await freeMtField(sourceContent[field], sourceLang, targetLang, 'description', field);
+      if (!translated || typeof validateBody !== 'function') return translated;
+      const validated = await validateBody({
+        field,
+        sourceText: sourceContent[field],
+        translated,
+      });
+      if (validated === null) {
+        console.error(`  ⚠️  ${targetLang}:${field} — contratto strutturale/link/numerico non valido nel free-MT, campo scartato: recupero per-campo downstream`);
+        return '';
+      }
+      return validated;
+    }),
   ]);
 
   let faq;
@@ -15161,7 +15182,9 @@ Rispondi con un JSON object (no markdown, no code fences):
  * pero' da `translateFieldFreeMt`, lo stesso percorso di ogni altro body
  * tradotto dal free-MT: link `nav:` mascherati e verificati, surrogati
  * isolati, completezza minima del body (`semantic-truncation`, un riassunto
- * di Codex con un finale valido non passa) e passthrough. Qualunque rifiuto,
+ * di Codex con un finale valido non passa) e passthrough. L'output non vuoto
+ * passa poi dal contratto source-owned di `translateInChunks`, che vincola
+ * anche numeri, celle e struttura prima dell'ammissione. Qualunque rifiuto,
  * o un errore di trasporto, torna come '' e il body resta in attesa. I
  * rifiuti NON finiscono in `recordFreeMtUnusableOutput`: i loop che usano
  * quel report per il cap sono gia' chiusi.
@@ -15304,7 +15327,18 @@ async function translatePendingBodyWithCodex(
         onWarn: (msg) => console.error(`  ⚠️  [seconda corsia] ${msg}`),
         onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
       });
-      if (!text
+      const validatedText = text && typeof translateInChunks === 'function'
+        ? await translateInChunks(
+          itValue,
+          field,
+          () => '',
+          `${locale}:${field}-pending-codex-validation`,
+          locale,
+          { pretranslatedResult: { [field]: text } },
+        )
+        : text;
+      if (text && validatedText === null) rejected.push('structure');
+      if (!validatedText
         && (codexModelUnavailable || !pendingBodySecondLaneAvailable())
         && typeof callWithRetry === 'function') {
         // `translateFieldFreeMt` cattura lo stop della cascata segmentata e
@@ -15312,10 +15346,10 @@ async function translatePendingBodyWithCodex(
         // storica solo se il breaker ha provato l'indisponibilità di Codex.
         return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks });
       }
-      if (!text && rejected.length > 0) {
+      if (!validatedText && rejected.length > 0) {
         console.error(`  ⚠️  [seconda corsia] ${locale}:${field} rifiutato da translateFieldFreeMt (${rejected.join(', ')})`);
       }
-      return text;
+      return validatedText;
     },
   });
 }
@@ -15591,11 +15625,10 @@ async function translateArticle(data) {
   // Sub-chunk an oversized field into ~500-word pieces (at paragraph
   // boundaries where possible, inside an oversized paragraph otherwise),
   // translate each chunk in parallel via callWithRetry, and join. Shared by
-  // translateBodyField's initial translation below and the truncation-retry
-  // loop further down (#688): both send a field to the model as a single
-  // prompt when it's short, and both need the same chunking safety net once
-  // it isn't, since a single oversized prompt can hit the model's per-call
-  // output cap and come back truncated regardless of how many retries wrap it.
+  // translateBodyField's initial translation below, the free-MT acceptance
+  // path, and the truncation-retry loop further down (#688): all three send a
+  // field to a provider as a single prompt when it's short, and all need the
+  // same source-owned contract before anything can be written.
   async function translateInChunks(
     bodyText,
     fieldKey,
@@ -16508,6 +16541,24 @@ async function translateArticle(data) {
     return joined;
   }
 
+  // Validate every already translated body through the same source-owned
+  // contract as the chunked legacy path. The free-MT route has its own
+  // line/opaque guard, but it cannot prove numeric associations or table-cell
+  // ownership; pretranslatedResult lets this validator run without a second
+  // provider call.
+  async function validatePretranslatedBody(bodyText, fieldKey, translated, targetLang, labelPrefix) {
+    const text = translatedStringOrNull(translated, targetLang);
+    if (text === null) return null;
+    return translateInChunks(
+      bodyText,
+      fieldKey,
+      () => '',
+      labelPrefix,
+      targetLang,
+      { pretranslatedResult: { [fieldKey]: text } },
+    );
+  }
+
   async function translateContent(sourceLang, targetLang, targetLabel, sourceContent) {
     // Quota-free path: route through the dedicated free MT cascade so the LLM
     // daily quota is reserved for generation. Per-field failures are omitted and
@@ -16515,7 +16566,15 @@ async function translateArticle(data) {
     // an untranslated body for bodyN — #1875), so this never degrades below the
     // legacy path's worst case. Opt-out via ARTICLE_TRANSLATE_FREE_MT=0.
     if (ARTICLE_TRANSLATE_FREE_MT) {
-      return translateContentFreeMt(sourceLang, targetLang, targetLabel, sourceContent);
+      return translateContentFreeMt(sourceLang, targetLang, targetLabel, sourceContent, {
+        validateBody: ({ field, sourceText, translated }) => validatePretranslatedBody(
+          sourceText,
+          field,
+          translated,
+          targetLang,
+          `${targetLang}:${field.replace('body', 'b')}-free-mt-validation`,
+        ),
+      });
     }
     // Use scored chain (no model pinning) — falls back through all models automatically
     const langName = targetLang === 'en' ? 'inglese' : targetLang === 'de' ? 'tedesco' : 'francese';
@@ -17010,7 +17069,23 @@ ${localizedToponymInstruction(targetLang)}`;
               `${locale}:${recoveryField}-missing-retry`,
               { translation: true },
             );
-            retried = translatedStringOrNull(readRetryValue(parsed), locale);
+            const rawRetried = translatedStringOrNull(readRetryValue(parsed), locale);
+            // Anche un retry breve e' una risposta body: non puo' saltare il
+            // contratto source-owned solo perche' non richiede sub-chunking.
+            retried = isBodyField
+              ? await validatePretranslatedBody(
+                itValue,
+                field,
+                rawRetried,
+                locale,
+                `${locale}:${recoveryField}-missing-validation`,
+              )
+              : rawRetried;
+            if (isBodyField && rawRetried !== null && retried === null) {
+              pendingReason = isSourcePassthrough(rawRetried, itValue)
+                ? 'retry-passthrough'
+                : 'retry-structure';
+            }
           }
           // `String(retried)` on an object yields "[object Object]" — truthy and
           // different from the IT value, so the old check ASSIGNED it. Require a
@@ -17114,6 +17189,7 @@ ${localizedToponymInstruction(targetLang)}`;
       };
       try {
         let retried;
+        let rawRetried = null;
         if (countWords(itValue || '') > TRANSLATION_CHUNK_THRESHOLD) {
           // A single-prompt retry on an oversized field can hit the model's
           // own output cap and come back truncated again — the exact failure
@@ -17135,13 +17211,27 @@ ${localizedToponymInstruction(targetLang)}`;
             `${locale}:${field}-truncation-retry`,
             { translation: true },
           );
-          retried = translatedStringOrNull(parsed?.[field], locale);
+          rawRetried = translatedStringOrNull(parsed?.[field], locale);
+          // Il retry breve non scrive mai il risultato raw: il contratto
+          // chunked deve vedere anche numeri, link, marker e celle qui.
+          retried = await validatePretranslatedBody(
+            itValue,
+            field,
+            rawRetried,
+            locale,
+            `${locale}:${field}-truncation-validation`,
+          );
+          if (rawRetried !== null && retried === null) {
+            pendingReason = isSourcePassthrough(rawRetried, itValue)
+              ? 'truncation-retry-passthrough'
+              : 'truncation-retry-structure';
+          }
         }
         // Il retry puo' restituire l'italiano completo: non troncato, quindi il
         // solo `detectTruncation` lo accettava e la copia italiana restava
         // pubblicata (#1875). Stesso predicato di ogni altro punto di
         // accettazione di un body tradotto.
-        const retriedPassthrough = isSourcePassthrough(retried, itValue);
+        const retriedPassthrough = isSourcePassthrough(rawRetried ?? retried, itValue);
         if (retriedPassthrough) pendingReason = 'truncation-retry-passthrough';
         if (retried && !retriedPassthrough && !isRealTranslationTruncation(detectTruncation(retried, truncationOpts))) {
           data.content[locale][field] = sanitizeBodyText(retried);
