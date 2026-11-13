@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "7612500bab0d41dff75aa0af8cc2525a36c0462135c15d021240c78c2721b417",
+  "updatedAt": "2026-11-13T12:13:48.902Z",
+  "contentHash": "05cb367707ded20e3a7d53aed8cde1beb4b963ebcd60a47211bfe86c4e3b484a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-12T16:24:10.107Z",
+      "updatedAt": "2026-11-13T02:54:02.035Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-12T16:56:35.952Z",
+      "updatedAt": "2026-11-13T01:17:34.993Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-12T22:54:56.926Z",
       "keyFacts": 0
     }
   ],
@@ -76,11 +76,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-12T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-13T17:30:00.000Z"
             },
             {
@@ -92,11 +87,16 @@
               "label": "Tilleul",
               "detail": "Delémont, Delémont",
               "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-14T17:30:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-12T16:24:10.107Z"
+          "updatedAt": "2026-11-13T02:54:02.035Z"
         },
         {
           "id": "meteo",
@@ -105,12 +105,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "10 °C",
-              "detail": "oggi da 5 a 11 °C"
+              "value": "5 °C",
+              "detail": "oggi da 1 a 7 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,7 +138,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -188,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "en": {
       "canton": "JU",
@@ -237,11 +237,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-12T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-13T17:30:00.000Z"
             },
             {
@@ -253,11 +248,16 @@
               "label": "Tilleul",
               "detail": "Delémont, Delémont",
               "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-14T17:30:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-12T16:24:10.107Z"
+          "updatedAt": "2026-11-13T02:54:02.035Z"
         },
         {
           "id": "meteo",
@@ -266,12 +266,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "10 °C",
-              "detail": "today from 5 to 11 °C"
+              "value": "5 °C",
+              "detail": "today from 1 to 7 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -299,7 +299,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "de": {
       "canton": "JU",
@@ -394,11 +394,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-12T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-13T17:30:00.000Z"
             },
             {
@@ -410,11 +405,16 @@
               "label": "Tilleul",
               "detail": "Delémont, Delémont",
               "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-14T17:30:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-12T16:24:10.107Z"
+          "updatedAt": "2026-11-13T02:54:02.035Z"
         },
         {
           "id": "meteo",
@@ -423,12 +423,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "10 °C",
-              "detail": "heute 5 bis 11 °C"
+              "value": "5 °C",
+              "detail": "heute 1 bis 7 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -456,7 +456,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -502,7 +502,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "fr": {
       "canton": "JU",
@@ -551,11 +551,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-12T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-13T17:30:00.000Z"
             },
             {
@@ -567,11 +562,16 @@
               "label": "Tilleul",
               "detail": "Delémont, Delémont",
               "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-14T17:30:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-12T16:24:10.107Z"
+          "updatedAt": "2026-11-13T02:54:02.035Z"
         },
         {
           "id": "meteo",
@@ -580,12 +580,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 5 à 11 °C"
+              "value": "5 °C",
+              "detail": "aujourd’hui de 1 à 7 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -613,7 +613,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -655,7 +655,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     }
   }
 }

@@ -90,6 +90,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.juko-supporto-aumento-corpo-polizia.title': 'JUKO unterstützt einstimmig die Aufstockung des Polizeikorps in Solothurn',
     'blog.article.juko-supporto-aumento-corpo-polizia.excerpt': 'Die Justizkommission des Kantonsrats hat die Aufstockung um 51 Stellen für den Zeitraum 2027–2029 sowie das Globalbudget einstimmig genehmigt.',
     'blog.article.juko-supporto-aumento-corpo-polizia.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cantonsrat-respinge-puk-soh.title': 'Solothurn: Kantonsrat lehnt PUK zur SOH ab',
+    'blog.article.cantonsrat-respinge-puk-soh.excerpt': 'Das Kantonsparlament von Solothurn hat am Mittwoch gegen die Einsetzung einer parlamentarischen Untersuchungskommission zu den Unregelmässigkeiten im Personalrecht bei der Solothurner Spitäler AG gestimmt, die in der Quelle mit dem Akronym SOH bezeichnet wird.',
+    'blog.article.cantonsrat-respinge-puk-soh.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;

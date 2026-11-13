@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "f6e24668fe416bf7213f89316539d3fa8f082f2f3d02f096cf4ae9a8850ae47b",
+  "updatedAt": "2026-11-13T12:13:48.902Z",
+  "contentHash": "a42247ef597879642022fe4a47f7fa92afac95eb646e9733d6709f9605e96625",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-12T15:12:29.228Z",
+      "updatedAt": "2026-11-12T23:38:44.682Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-12T16:56:35.952Z",
+      "updatedAt": "2026-11-13T01:17:34.993Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-12T22:54:56.926Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "5",
-          "note": "offerta mediana 200 CHF"
+          "note": "offerta mediana 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -88,16 +88,16 @@
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
             },
             {
-              "label": "VS517000",
-              "value": "200 CHF",
+              "label": "VS601111",
+              "value": "300 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=950&locale=fr_CH"
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=951&locale=fr_CH"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -106,12 +106,12 @@
           "items": [
             {
               "label": "Sion",
-              "value": "10 °C",
-              "detail": "oggi da 8 a 10 °C"
+              "value": "9 °C",
+              "detail": "oggi da 5 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -149,7 +149,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "en": {
       "canton": "VS",
@@ -246,7 +246,7 @@
         {
           "label": "Plate auctions running",
           "value": "5",
-          "note": "typical bid 200 CHF"
+          "note": "typical bid 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -290,16 +290,16 @@
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
             },
             {
-              "label": "VS517000",
-              "value": "200 CHF",
+              "label": "VS601111",
+              "value": "300 CHF",
               "detail": "current bid",
               "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=950&locale=fr_CH"
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=951&locale=fr_CH"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -308,12 +308,12 @@
           "items": [
             {
               "label": "Sion",
-              "value": "10 °C",
-              "detail": "today from 8 to 10 °C"
+              "value": "9 °C",
+              "detail": "today from 5 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -351,7 +351,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "de": {
       "canton": "VS",
@@ -444,7 +444,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "5",
-          "note": "mittleres Gebot 200 CHF"
+          "note": "mittleres Gebot 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -488,16 +488,16 @@
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
             },
             {
-              "label": "VS517000",
-              "value": "200 CHF",
+              "label": "VS601111",
+              "value": "300 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=950&locale=fr_CH"
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=951&locale=fr_CH"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -506,12 +506,12 @@
           "items": [
             {
               "label": "Sion",
-              "value": "10 °C",
-              "detail": "heute 8 bis 10 °C"
+              "value": "9 °C",
+              "detail": "heute 5 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -549,7 +549,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "fr": {
       "canton": "VS",
@@ -642,7 +642,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "5",
-          "note": "offre centrale 200 CHF"
+          "note": "offre centrale 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -686,16 +686,16 @@
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
             },
             {
-              "label": "VS517000",
-              "value": "200 CHF",
+              "label": "VS601111",
+              "value": "300 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=950&locale=fr_CH"
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=951&locale=fr_CH"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -704,12 +704,12 @@
           "items": [
             {
               "label": "Sion",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 8 à 10 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 5 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -747,7 +747,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     }
   }
 }

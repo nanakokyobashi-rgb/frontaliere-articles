@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "72f76528c64006e3fb93643039bae6a7446833bdae454d5b00142097c6721288",
+  "updatedAt": "2026-11-13T12:13:48.902Z",
+  "contentHash": "a1d9b2e25d14fe9bf46154257c5f2763ef60079a51f959ffedaa895266a0ec9e",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Soletta: il Cantonsrat respinge la PUK sulla SOH",
+          "url": "/articoli-soletta/cantonsrat-respinge-puk-soh/",
+          "excerpt": "Il Parlamento cantonale di Soletta ha votato mercoledì contro l'istituzione di una commissione parlamentare d'inchiesta sulle irregolarità in materia di diritto del personale presso la Solothurner Spitäler AG, indicata…",
+          "date": "2026-11-13T12:05:22.358Z"
+        },
+        {
           "title": "JUKO sostiene all'unanimità aumento corpo polizia in Soletta",
           "url": "/articoli-soletta/juko-supporto-aumento-corpo-polizia/",
           "excerpt": "La Justizkommission del Consiglio cantonale ha approvato all'unanimità l'aumento di 51 posti per il periodo 2027-2029 e il Globalbudget.",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/tasso-disoccupazione-ottobre-2026/",
           "excerpt": "In ottobre 2026 nel Canton Soletta risultavano 4'543 disoccupati registrati, in diminuzione di otto persone rispetto al mese precedente.",
           "date": "2026-11-06T03:29:06.353Z"
-        },
-        {
-          "title": "Cantone Soletta: proroga GAV per due anni per dipendenti pubblici",
-          "url": "/articoli-soletta/kantonsrat-proroga-gav-due-anni/",
-          "excerpt": "Il GAV per tutti i dipendenti di diritto pubblico del Cantone è prorogato per due anni, evitando l'assenza contrattuale dal 1° gennaio 2027.",
-          "date": "2026-11-06T02:38:57.836Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Solothurn: Cantonsrat rejects PUK over SOH",
+          "url": "/en/solothurn-articles/solothurn-cantonal-council-rejects-puk/",
+          "excerpt": "The cantonal parliament of Solothurn voted on Wednesday against establishing a parliamentary commission of inquiry into irregularities in personnel law at Solothurner Spitäler AG, referred to in the source by the…",
+          "date": "2026-11-13T12:05:22.358Z"
+        },
+        {
           "title": "JUKO unanimously supports increasing the police force in Solothurn",
           "url": "/en/solothurn-articles/juko-police-force-increase-support/",
           "excerpt": "The Justice Committee of the Cantonal Council unanimously approved the increase of 51 positions for the 2027–2029 period and the global budget.",
@@ -193,12 +199,6 @@
           "url": "/en/solothurn-articles/unemployment-rate-october-2026/",
           "excerpt": "In October 2026, 4'543 registered unemployed people were recorded in the Canton of Solothurn, a decrease of eight people compared with the previous month.",
           "date": "2026-11-06T03:29:06.353Z"
-        },
-        {
-          "title": "Canton of Solothurn: GAV extended for two years for public employees",
-          "url": "/en/solothurn-articles/cantonal-parliament-extends-collective-agreement/",
-          "excerpt": "The GAV for all public-law employees of the Canton has been extended for two years, avoiding a contractual gap from January 1, 2027.",
-          "date": "2026-11-06T02:38:57.836Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Solothurn: Kantonsrat lehnt PUK zur SOH ab",
+          "url": "/de/solothurn-artikel/solothurn-kantonsrat-lehnt-puk-ab/",
+          "excerpt": "Das Kantonsparlament von Solothurn hat am Mittwoch gegen die Einsetzung einer parlamentarischen Untersuchungskommission zu den Unregelmässigkeiten im Personalrecht bei der Solothurner Spitäler AG gestimmt, die in der…",
+          "date": "2026-11-13T12:05:22.358Z"
+        },
+        {
           "title": "JUKO unterstützt einstimmig die Aufstockung des Polizeikorps in Solothurn",
           "url": "/de/solothurn-artikel/juko-polizeikraefteerhoehung-unterstuetzung/",
           "excerpt": "Die Justizkommission des Kantonsrats hat die Aufstockung um 51 Stellen für den Zeitraum 2027–2029 sowie das Globalbudget einstimmig genehmigt.",
@@ -292,12 +298,6 @@
           "url": "/de/solothurn-artikel/arbeitslosenquote-oktober-2026/",
           "excerpt": "Im Oktober 2026 waren im Kanton Solothurn 4'543 Arbeitslose registriert, acht Personen weniger als im Vormonat.",
           "date": "2026-11-06T03:29:06.353Z"
-        },
-        {
-          "title": "Solothurn: GAV um 2 Jahre für öffentliche Angestellte verlängert",
-          "url": "/de/solothurn-artikel/kantonsrat-verlaengert-gav-zwei-jahre/",
-          "excerpt": "Der GAV für alle öffentlich-rechtlichen Angestellten des Kantons wird um zwei Jahre verlängert, wodurch eine Vertragslücke ab dem 1. Januar 2027 vermieden wird.",
-          "date": "2026-11-06T02:38:57.836Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Soleure : le Cantonsrat rejette la PUK sur la SOH",
+          "url": "/fr/articles-soleure/soleure-conseil-cantonal-refuse-puk/",
+          "excerpt": "Le Parlement cantonal de Soleure a voté mercredi contre l’institution d’une commission parlementaire d’enquête sur les irrégularités en matière de droit du personnel au sein de la Solothurner Spitäler AG, désignée dans…",
+          "date": "2026-11-13T12:05:22.358Z"
+        },
+        {
           "title": "JUKO soutient à l'unanimité l'augmentation des effectifs de la police à Soleure",
           "url": "/fr/articles-soleure/juko-soutien-augmentation-corps-police/",
           "excerpt": "La commission de justice du Conseil cantonal a approuvé à l'unanimité l'augmentation de 51 postes pour la période 2027-2029 ainsi que le budget global.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-soleure/taux-chomage-octobre-2026/",
           "excerpt": "En octobre 2026, 4'543 chômeurs étaient inscrits dans le canton de Soleure, soit huit personnes de moins que le mois précédent.",
           "date": "2026-11-06T03:29:06.353Z"
-        },
-        {
-          "title": "Soleure: proroga CCT de deux ans pour fonctionnaires",
-          "url": "/fr/articles-soleure/parlement-cantonal-prolonge-convention-collective/",
-          "excerpt": "La CCT pour tous les employés de droit public du canton est prolongée de deux ans, évitant ainsi un vide contractuel à compter du 1er janvier 2027.",
-          "date": "2026-11-06T02:38:57.836Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     }
   }
 }

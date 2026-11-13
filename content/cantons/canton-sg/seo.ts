@@ -1245,6 +1245,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-incidenti-a1-goldach-san-gallo': {
+    title: 'Due incidenti sulla A1: code a Goldach e St.Gallen',
+    description: 'Due incidenti sulla A1 a Goldach e St.Gallen l\'11 novembre 2026: nessun ferito, un\'auto rimorchiata e code nel traffico serale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidenti, sulla, code, goldach',
+    ogTitle: 'Incidenti sulla A1 a Goldach e St.Gallen: code',
+    ogDescription: 'Il primo incidente, poco prima delle 16.30 a Goldach, ha coinvolto un\'auto finita contro la barriera centrale. Poco prima delle 17.30, a St.Gallen, un tamponamento tra due auto ha lasciato un veicolo non più marciabile e ha provocato forti code.',
+    canonicalPath: '/articoli-san-gallo/incidenti-a1-goldach-san-gallo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Due incidenti sulla A1: code a Goldach e St.Gallen",
+      "description": "Due incidenti sulla A1 a Goldach e St.Gallen l'11 novembre 2026: nessun ferito, un'auto rimorchiata e code nel traffico serale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-incidenti-a1-goldach-san-gallo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-13T11:54:52+00:00",
+      "dateModified": "2026-11-13T11:54:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/incidenti-a1-goldach-san-gallo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-votazione-fondo-rete-gas-wil': {
+    title: 'Referendum sul fondo per dismissione rete gas TBW a Wil',
+    description: 'Referendum 29/11/2026 sul fondo per smantellare la rete gas TBW. Costi previsti circa 45,8 milioni di franchi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, referendum, fondo, dismissione, rete',
+    ogTitle: 'Votazione fondo dismissione rete gas Wil 2026',
+    ogDescription: 'Il referendum del 29 novembre 2026 riguarda il fondo per la dismissione e smantellamento della rete gas delle TBW. Costi stimati: circa 45,8 milioni di franchi.',
+    canonicalPath: '/articoli-san-gallo/votazione-fondo-rete-gas-wil/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Referendum sul fondo per dismissione rete gas TBW a Wil",
+      "description": "Referendum 29/11/2026 sul fondo per smantellare la rete gas TBW. Costi previsti circa 45,8 milioni di franchi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-votazione-fondo-rete-gas-wil.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-13T12:14:26+00:00",
+      "dateModified": "2026-11-13T12:14:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/votazione-fondo-rete-gas-wil/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -1,9 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/luganese/1952175/ridurre-sensibilmente-i-tempi-di-ripristino-della-viabilita-dopo-un-incidente": {
-    "articleId": "ridurre-tempi-ripristino-a2-mezzovico",
-    "ts": "2026-09-25T10:00:17.051Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/mendrisiotto/1952501/a-pasture-cambia-l-operatore-per-l-assistenza-posti-di-lavoro-a-rischio": {
     "articleId": "pasture-cambio-operatore",
     "ts": "2026-09-25T11:13:59.487Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/attualita/1962576/lavoro-transfrontaliero-nasce-l-osservatorio-permanente-tra-italia-e-svizzera": {
     "articleId": "lavoro-transfrontaliero-osservatorio",
     "ts": "2026-11-13T02:39:56.031Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/svizzera/frontalieri-disoccupati-si-temono-costi-aggiuntivi-per-centinaia-di-milioni-446558": {
+    "articleId": "frontalieri-disoccupati-costi-aggiuntivi",
+    "ts": "2026-11-13T11:43:31.571Z",
     "keyForm": 2
   }
 }
