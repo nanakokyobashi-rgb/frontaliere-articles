@@ -5376,6 +5376,18 @@
       "firstSeenAt": "2026-11-12T18:00:08.655Z",
       "lastValidatedAt": "2026-11-12T18:00:08.655Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "imposte cantonali canton Berna aliquote e deduzioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-13T14:26:47.232Z",
+      "lastValidatedAt": "2026-11-13T14:26:47.232Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
