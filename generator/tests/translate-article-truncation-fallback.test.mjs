@@ -1312,7 +1312,14 @@ const TRANSLATE_CONTENT_SRC = (() => {
   return src.slice(a, src.indexOf('\n  }\n', a) + 4);
 })();
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
-  const a = src.indexOf('  async function translateInChunks(bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang) {');
+  const a = src.indexOf(`  async function translateInChunks(
+    bodyText,
+    fieldKey,
+    makeChunkPrompt,
+    labelPrefix,
+    targetLang,
+    { pretranslatedResult = null } = {},
+  ) {`);
   assert.notEqual(a, -1, 'translateInChunks non trovata — aggiornare questo test');
   return src.slice(a, src.indexOf('\n  }\n', a) + 4);
 })();
