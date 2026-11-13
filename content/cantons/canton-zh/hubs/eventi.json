@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "5b8ad92be060bc0fb2779cc2cea99d70bf7be9c3689c9ffdbcd80988fdac569e",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "8e80802007f2f84a8b467a4f31c4ff6ca89a7115e3cc82074ede8dbfa5b5cb6c",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "358",
+          "value": "345",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,63 +33,63 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Fondue Huus Sihlcity",
-              "detail": "Fondue Huus Sihlcity, Zürich",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fondue-huus-sihlcity/"
+              "label": "Swiss Robotics Day 2026",
+              "detail": "StageOne Event & Convention Hall",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-robotics-day-2026_AnyLk2f"
             },
             {
-              "label": "Kerzenziehen",
-              "detail": "Urdorf",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-3/"
-            },
-            {
-              "label": "move&groove - jonglieren",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/sports/naenikon/move-und-groove-jonglieren_AsWLqXn"
-            },
-            {
-              "label": "Mütter- und Väterberatung in Volketswil",
-              "detail": "Familienzentrum Gries, Volketswil",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/volketswil/muetter-und-vaeterberatung-in-volketswil_A5t42Vs"
-            },
-            {
-              "label": "21st Annual Meeting of SFI",
-              "detail": "Lake Side",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/annual-meeting-of-sfi_ADNjYm2"
-            },
-            {
-              "label": "21st Annual Meeting of SFI",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/annual-meeting-of-sfi/"
-            },
-            {
-              "label": "Dritte Swiss AgeTech Konferenz 2026",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dritte-swiss-agetech-konferenz-2026/"
+              "label": "Agenti in movimento, workshop per ragazzi ed evento per genitori e accompagnatori",
+              "detail": "Amthaus",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/agents-on-the-move-workshop-for-boys-and-parents-event-for-caregivers/"
             },
             {
               "label": "Mütter- und Väterberatung",
-              "detail": "Familienverein Pfäffikon, Pfäffikon",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_A9rrNDC"
+              "detail": "Bibliothek, Russikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/fehraltorf/muetter-und-vaeterberatung_AWdT39u"
             },
             {
-              "label": "\"Darf ich bitten?\" Tanznachmittag für Alle",
-              "detail": "Freizeitanlage Winterthur Seen, Winterthur",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/darf-ich-bitten-tanznachmittag_AUHFnTN"
+              "label": "Ökumenischer Frauentreff - Darmgesundheit und darmfreundliche Ernährung",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/oekumenischer-frauentreff-darmgesundheit-und-darmfreundliche-ernaehrung_AJugDN4"
             },
             {
-              "label": "Spielenachmittag 60+",
-              "detail": "Amthaus Rüti",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/spielenachmittag-60_A3J3Pah"
+              "label": "«Gemeinsam statt einsam» - Mittagstisch",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/restaurants/alle/effretikon/gemeinsam-statt-einsam-mittagstisch_AqXuLRJ"
+            },
+            {
+              "label": "Fritigs-Jass Pro Senectute Illnau-Effretikon",
+              "detail": "Restaurant Villa Barone, Illnau-Effretikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/jass-gruppen_AMyxaA5"
+            },
+            {
+              "label": "Lernstube On Tour",
+              "detail": "Interkulturelles Forum Pfäffikon, Pfäffikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/pfaeffikon-zh/lernstube-on-tour_AukNdbc"
+            },
+            {
+              "label": "Friday Pyjama Party",
+              "detail": "Schlieren",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/friday-pyjama-party/"
+            },
+            {
+              "label": "Pigiama party del venerdì",
+              "detail": "Schlieren",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pigiama-party-del-venerdi/"
+            },
+            {
+              "label": "Schule machen – Das Bildungswesen im KI-Zeitalter",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schule-machen-das-bildungswesen-im-ki-zeitalter/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -122,7 +122,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "ZH",
@@ -132,7 +132,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "358",
+          "value": "345",
           "note": "from the site’s events calendar"
         }
       ],
@@ -143,63 +143,63 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Fondue Huus Sihlcity",
-              "detail": "Fondue Huus Sihlcity, Zürich",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fondue-huus-sihlcity/"
+              "label": "Swiss Robotics Day 2026",
+              "detail": "StageOne Event & Convention Hall",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-robotics-day-2026_AnyLk2f"
             },
             {
-              "label": "Kerzenziehen",
-              "detail": "Urdorf",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-3/"
-            },
-            {
-              "label": "move&groove - jonglieren",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/sports/naenikon/move-und-groove-jonglieren_AsWLqXn"
-            },
-            {
-              "label": "Mütter- und Väterberatung in Volketswil",
-              "detail": "Familienzentrum Gries, Volketswil",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/volketswil/muetter-und-vaeterberatung-in-volketswil_A5t42Vs"
-            },
-            {
-              "label": "21st Annual Meeting of SFI",
-              "detail": "Lake Side",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/annual-meeting-of-sfi_ADNjYm2"
-            },
-            {
-              "label": "21st Annual Meeting of SFI",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/annual-meeting-of-sfi/"
-            },
-            {
-              "label": "Dritte Swiss AgeTech Konferenz 2026",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dritte-swiss-agetech-konferenz-2026/"
+              "label": "Agents on the move, workshop for boys and parents' event for caregivers",
+              "detail": "Amthaus",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/agents-on-the-move-workshop-for-boys-and-parents-event-for-caregivers/"
             },
             {
               "label": "Mütter- und Väterberatung",
-              "detail": "Familienverein Pfäffikon, Pfäffikon",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_A9rrNDC"
+              "detail": "Bibliothek, Russikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/fehraltorf/muetter-und-vaeterberatung_AWdT39u"
             },
             {
-              "label": "\"Darf ich bitten?\" Tanznachmittag für Alle",
-              "detail": "Freizeitanlage Winterthur Seen, Winterthur",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/darf-ich-bitten-tanznachmittag_AUHFnTN"
+              "label": "Ökumenischer Frauentreff - Darmgesundheit und darmfreundliche Ernährung",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/oekumenischer-frauentreff-darmgesundheit-und-darmfreundliche-ernaehrung_AJugDN4"
             },
             {
-              "label": "Spielenachmittag 60",
-              "detail": "Amthaus Rüti",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/spielenachmittag-60_A3J3Pah"
+              "label": "«Gemeinsam statt einsam» - Mittagstisch",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/restaurants/alle/effretikon/gemeinsam-statt-einsam-mittagstisch_AqXuLRJ"
+            },
+            {
+              "label": "Fritigs-Jass Pro Senectute Illnau-Effretikon",
+              "detail": "Restaurant Villa Barone, Illnau-Effretikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/jass-gruppen_AMyxaA5"
+            },
+            {
+              "label": "Lernstube On Tour",
+              "detail": "Interkulturelles Forum Pfäffikon, Pfäffikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/pfaeffikon-zh/lernstube-on-tour_AukNdbc"
+            },
+            {
+              "label": "Friday Pyjama Party",
+              "detail": "Schlieren",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/friday-pyjama-party/"
+            },
+            {
+              "label": "Friday Pajama Party",
+              "detail": "Schlieren",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pigiama-party-del-venerdi/"
+            },
+            {
+              "label": "Schule machen – Das Bildungswesen im KI-Zeitalter",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schule-machen-das-bildungswesen-im-ki-zeitalter/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -232,7 +232,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "ZH",
@@ -242,7 +242,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "358",
+          "value": "345",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -253,63 +253,63 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Fondue Huus Sihlcity",
-              "detail": "Fondue Huus Sihlcity, Zürich",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fondue-huus-sihlcity/"
+              "label": "Swiss Robotics Day 2026",
+              "detail": "StageOne Event & Convention Hall",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-robotics-day-2026_AnyLk2f"
             },
             {
-              "label": "Kerzenziehen",
-              "detail": "Urdorf",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-3/"
-            },
-            {
-              "label": "move&groove - jonglieren",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/sports/naenikon/move-und-groove-jonglieren_AsWLqXn"
-            },
-            {
-              "label": "Mütter- und Väterberatung in Volketswil",
-              "detail": "Familienzentrum Gries, Volketswil",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/volketswil/muetter-und-vaeterberatung-in-volketswil_A5t42Vs"
-            },
-            {
-              "label": "21st Annual Meeting of SFI",
-              "detail": "Lake Side",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/annual-meeting-of-sfi_ADNjYm2"
-            },
-            {
-              "label": "21st Annual Meeting of SFI",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/annual-meeting-of-sfi/"
-            },
-            {
-              "label": "Dritte Swiss AgeTech Konferenz 2026",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dritte-swiss-agetech-konferenz-2026/"
+              "label": "Agenten auf dem Weg, Workshop für Jungs und Elternanlass für Bezugspersonen",
+              "detail": "Amthaus",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/agents-on-the-move-workshop-for-boys-and-parents-event-for-caregivers/"
             },
             {
               "label": "Mütter- und Väterberatung",
-              "detail": "Familienverein Pfäffikon, Pfäffikon",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_A9rrNDC"
+              "detail": "Bibliothek, Russikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/fehraltorf/muetter-und-vaeterberatung_AWdT39u"
             },
             {
-              "label": "\"Darf ich bitten?\" Tanznachmittag für Alle",
-              "detail": "Freizeitanlage Winterthur Seen, Winterthur",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/darf-ich-bitten-tanznachmittag_AUHFnTN"
+              "label": "Ökumenischer Frauentreff - Darmgesundheit und darmfreundliche Ernährung",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/oekumenischer-frauentreff-darmgesundheit-und-darmfreundliche-ernaehrung_AJugDN4"
             },
             {
-              "label": "Spielnachmittag 60",
-              "detail": "Amthaus Rüti",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/spielenachmittag-60_A3J3Pah"
+              "label": "«Gemeinsam statt einsam» - Mittagstisch",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/restaurants/alle/effretikon/gemeinsam-statt-einsam-mittagstisch_AqXuLRJ"
+            },
+            {
+              "label": "Fritigs-Jass Pro Senectute Illnau-Effretikon",
+              "detail": "Restaurant Villa Barone, Illnau-Effretikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/jass-gruppen_AMyxaA5"
+            },
+            {
+              "label": "Lernstube auf Tour",
+              "detail": "Interkulturelles Forum Pfäffikon, Pfäffikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/pfaeffikon-zh/lernstube-on-tour_AukNdbc"
+            },
+            {
+              "label": "Friday Pyjama Party",
+              "detail": "Schlieren",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/friday-pyjama-party/"
+            },
+            {
+              "label": "Friday Pyjama Party",
+              "detail": "Schlieren",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pigiama-party-del-venerdi/"
+            },
+            {
+              "label": "Schule machen – Das Bildungswesen im KI-Zeitalter",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schule-machen-das-bildungswesen-im-ki-zeitalter/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -342,7 +342,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "ZH",
@@ -352,7 +352,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "358",
+          "value": "345",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -363,63 +363,63 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Fondue Huus Sihlcity",
-              "detail": "Fondue Huus Sihlcity, Zürich",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fondue-huus-sihlcity/"
+              "label": "Swiss Robotics Day 2026",
+              "detail": "StageOne Event & Convention Hall",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-robotics-day-2026_AnyLk2f"
             },
             {
-              "label": "Kerzenziehen",
-              "detail": "Urdorf",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-3/"
-            },
-            {
-              "label": "move&groove - jonglieren",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/sports/naenikon/move-und-groove-jonglieren_AsWLqXn"
-            },
-            {
-              "label": "Mütter- und Väterberatung in Volketswil",
-              "detail": "Familienzentrum Gries, Volketswil",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/volketswil/muetter-und-vaeterberatung-in-volketswil_A5t42Vs"
-            },
-            {
-              "label": "21st Annual Meeting of SFI",
-              "detail": "Lake Side",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/annual-meeting-of-sfi_ADNjYm2"
-            },
-            {
-              "label": "21st Annual Meeting of SFI",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/annual-meeting-of-sfi/"
-            },
-            {
-              "label": "Dritte Swiss AgeTech Konferenz 2026",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dritte-swiss-agetech-konferenz-2026/"
+              "label": "Agents sur le chemin, atelier pour les garçons et événement parental pour les personnes de référence",
+              "detail": "Amthaus",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/agents-on-the-move-workshop-for-boys-and-parents-event-for-caregivers/"
             },
             {
               "label": "Mütter- und Väterberatung",
-              "detail": "Familienverein Pfäffikon, Pfäffikon",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/pfaeffikon-zh/muetter-und-vaeterberatung_A9rrNDC"
+              "detail": "Bibliothek, Russikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/fehraltorf/muetter-und-vaeterberatung_AWdT39u"
             },
             {
-              "label": "\"Darf ich bitten?\" Tanznachmittag für Alle",
-              "detail": "Freizeitanlage Winterthur Seen, Winterthur",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/darf-ich-bitten-tanznachmittag_AUHFnTN"
+              "label": "Ökumenischer Frauentreff - Darmgesundheit und darmfreundliche Ernährung",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/oekumenischer-frauentreff-darmgesundheit-und-darmfreundliche-ernaehrung_AJugDN4"
             },
             {
-              "label": "Jeu de table 60",
-              "detail": "Amthaus Rüti",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/spielenachmittag-60_A3J3Pah"
+              "label": "«Gemeinsam statt einsam» - Mittagstisch",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/restaurants/alle/effretikon/gemeinsam-statt-einsam-mittagstisch_AqXuLRJ"
+            },
+            {
+              "label": "Fritigs-Jass Pro Senectute Illnau-Effretikon",
+              "detail": "Restaurant Villa Barone, Illnau-Effretikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/jass-gruppen_AMyxaA5"
+            },
+            {
+              "label": "Lernstube en tournée",
+              "detail": "Interkulturelles Forum Pfäffikon, Pfäffikon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/pfaeffikon-zh/lernstube-on-tour_AukNdbc"
+            },
+            {
+              "label": "Friday Pyjama Party",
+              "detail": "Schlieren",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/friday-pyjama-party/"
+            },
+            {
+              "label": "Soirée pyjama du vendredi",
+              "detail": "Schlieren",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pigiama-party-del-venerdi/"
+            },
+            {
+              "label": "Schule machen – Das Bildungswesen im KI-Zeitalter",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schule-machen-das-bildungswesen-im-ki-zeitalter/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -452,7 +452,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

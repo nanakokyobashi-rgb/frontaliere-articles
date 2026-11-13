@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "013ff22f7896bd5367179260b963e99a16eaebb1b2742ecdeaa703f6413093e8",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "45cf45bddb68264676394195d0a7924d796a594222d0b63cb0aae24e1fc2f884",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "201",
+          "value": "193",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "La librairie est invitée à la Couronne, coeur du Grand Chasseral pour l'apéro d'automne",
-              "detail": "Tavannes",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-librairie-est-invitee-a-la-couronne-coeur-du-grand-chasseral-pour-lapero-dautomne/"
+              "label": "Tal und Sagenmuseum Veranstaltungen 2026",
+              "detail": "Tal & Sagen Museum, Lauterbrunnen",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lauterbrunnen/tal-und-sagenmuseum-veranstaltungen-2026_AaPRiG3"
             },
             {
-              "label": "Mütter- und Väterberatung in Nänikon",
-              "detail": "Klairs, Begegnung im Bühl, Bühl",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/naenikon/muetter-und-vaeterberatung-in-naenikon_ABndiTM"
+              "label": "Fondue Chinoise Boat on Lake Thun",
+              "detail": "Thun",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondue-chinoise-boat-on-lake-thun/"
             },
             {
-              "label": "Infothek Bern West",
-              "detail": "Jugendhaus G23, Bern",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/infothek-bern-west_A5Cxn62"
+              "label": "Lottomatch SV Meiringen",
+              "detail": "Meiringen-Hasliberg, Hasliberg",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lottomatch-sv-meiringen/"
             },
             {
-              "label": "Hülsenfrüchte Workshop",
-              "detail": "Pieterlen",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/huelsenfruechte-workshop/"
+              "label": "Loupe-Märit",
+              "detail": "Laupen",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loupe-maerit/"
             },
             {
-              "label": "Philosophisches Speed-Dating",
-              "detail": "Atomic Café, Biel/Bienne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/philosophisches-speed-dating/"
+              "label": "Evento natalizio",
+              "detail": "Rathausplatz, Thun",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/christmas-event/"
             },
             {
-              "label": "Kultur im Keller",
-              "detail": "MARKTGASSE18, Sumiswald",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sumiswald/kultur-im-keller_ANbqSiu"
+              "label": "Permaculture Planning with Sarah Daum",
+              "detail": "Alpine Permakultur Schweibenalp",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/planification-en-permaculture-avec-sarah-daum/"
             },
             {
-              "label": "Rolf Schmid - I MAG EIFACH NÜMA",
-              "detail": "Kupferschmiede Langnau",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rolf-schmid-i-mag-eifach-nuema-6/"
+              "label": "La mer pour horizon",
+              "detail": "Centre interrégional de perfectionnement (CIP), Tramelan",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-mer-pour-horizon/"
             },
             {
-              "label": "Sonderanlass: Ursus Wehrli – «Eine Performative Tagebuch-Lesung mit Dingen»",
-              "detail": "Spiez",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonderanlass-ursus-wehrli-eine-performative-tagebuch-lesung-mit-dingen/"
+              "label": "Prof. Bernhard Pörksen: „Die Kunst des Zuhörens. Über den Mut, sich der Welt zu öffnen“",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/prof-bernhard-poerksen-die-kunst-des-zuhoerens-ueber-den-mut-sich-der-welt-zu-oeffnen/"
             },
             {
-              "label": "VeV Beratungstreff Bern",
-              "detail": "Kapitel Bollwerk, Bern",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/vev-beratungstreff-bern_AXhXKWP"
+              "label": "Laurie Altman in concert",
+              "detail": "Hotel Eden Spiez, Spiez",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/laurie-altman-in-concert_A4RkNhU"
             },
             {
-              "label": "Ritschi & Hunzi (Plüsch) - «Tagebuech»",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/ritschi-und-hunzi-pluesch-tagebuech_AFYBQya"
+              "label": "Layāli und Amanés - Bern",
+              "detail": "Evang.-ref. Pauluskirche, Bern",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/layali-und-amanes-bern/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "201",
+          "value": "193",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,64 +156,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "La librairie est invitée à la Couronne, coeur du Grand Chasseral pour l'apéro d'automne",
-              "detail": "Tavannes",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-librairie-est-invitee-a-la-couronne-coeur-du-grand-chasseral-pour-lapero-dautomne/"
+              "label": "Tal und Sagenmuseum Veranstaltungen 2026",
+              "detail": "Tal & Sagen Museum, Lauterbrunnen",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lauterbrunnen/tal-und-sagenmuseum-veranstaltungen-2026_AaPRiG3"
             },
             {
-              "label": "Mütter- und Väterberatung in Nänikon",
-              "detail": "Klairs, Begegnung im Bühl, Bühl",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/naenikon/muetter-und-vaeterberatung-in-naenikon_ABndiTM"
+              "label": "Fondue Chinoise Boat on Lake Thun",
+              "detail": "Thun",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondue-chinoise-boat-on-lake-thun/"
             },
             {
-              "label": "Infothek Bern West",
-              "detail": "Jugendhaus G23, Bern",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/infothek-bern-west_A5Cxn62"
+              "label": "Lottomatch SV Meiringen",
+              "detail": "Meiringen-Hasliberg, Hasliberg",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lottomatch-sv-meiringen/"
             },
             {
-              "label": "Hülsenfrüchte Workshop",
-              "detail": "Pieterlen",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/huelsenfruechte-workshop/"
+              "label": "Loupe-Märit",
+              "detail": "Laupen",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loupe-maerit/"
             },
             {
-              "label": "Philosophisches Speed-Dating",
-              "detail": "Atomic Café, Biel/Bienne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/philosophisches-speed-dating/"
+              "label": "Christmas Event",
+              "detail": "Rathausplatz, Thun",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/christmas-event/"
             },
             {
-              "label": "Kultur im Keller",
-              "detail": "MARKTGASSE18, Sumiswald",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sumiswald/kultur-im-keller_ANbqSiu"
+              "label": "Permaculture Planning with Sarah Daum",
+              "detail": "Alpine Permakultur Schweibenalp",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/planification-en-permaculture-avec-sarah-daum/"
             },
             {
-              "label": "Rolf Schmid - I MAG EIFACH NÜMA",
-              "detail": "Kupferschmiede Langnau",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rolf-schmid-i-mag-eifach-nuema-6/"
+              "label": "La mer pour horizon",
+              "detail": "Centre interrégional de perfectionnement (CIP), Tramelan",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-mer-pour-horizon/"
             },
             {
-              "label": "Sonderanlass: Ursus Wehrli – «Eine Performative Tagebuch-Lesung mit Dingen»",
-              "detail": "Spiez",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonderanlass-ursus-wehrli-eine-performative-tagebuch-lesung-mit-dingen/"
+              "label": "Prof. Bernhard Pörksen: „Die Kunst des Zuhörens. Über den Mut, sich der Welt zu öffnen“",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/prof-bernhard-poerksen-die-kunst-des-zuhoerens-ueber-den-mut-sich-der-welt-zu-oeffnen/"
             },
             {
-              "label": "VeV Beratungstreff Bern",
-              "detail": "Kapitel Bollwerk, Bern",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/vev-beratungstreff-bern_AXhXKWP"
+              "label": "Laurie Altman in concert",
+              "detail": "Hotel Eden Spiez, Spiez",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/laurie-altman-in-concert_A4RkNhU"
             },
             {
-              "label": "Ritschi & Hunzi (Plüsch) - «Tagebuech»",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/ritschi-und-hunzi-pluesch-tagebuech_AFYBQya"
+              "label": "The Am",
+              "detail": "Evang.-ref. Pauluskirche, Bern",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/layali-und-amanes-bern/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "201",
+          "value": "193",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,64 +279,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "La librairie est invitée à la Couronne, coeur du Grand Chasseral pour l'apéro d'automne",
-              "detail": "Tavannes",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-librairie-est-invitee-a-la-couronne-coeur-du-grand-chasseral-pour-lapero-dautomne/"
+              "label": "Tal und Sagenmuseum Veranstaltungen 2026",
+              "detail": "Tal & Sagen Museum, Lauterbrunnen",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lauterbrunnen/tal-und-sagenmuseum-veranstaltungen-2026_AaPRiG3"
             },
             {
-              "label": "Mütter- und Väterberatung in Nänikon",
-              "detail": "Klairs, Begegnung im Bühl, Bühl",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/naenikon/muetter-und-vaeterberatung-in-naenikon_ABndiTM"
+              "label": "Fondue-Chinoise-Schiff Thunersee",
+              "detail": "Thun",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondue-chinoise-boat-on-lake-thun/"
             },
             {
-              "label": "Infothek Bern West",
-              "detail": "Jugendhaus G23, Bern",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/infothek-bern-west_A5Cxn62"
+              "label": "Lottomatch SV Meiringen",
+              "detail": "Meiringen-Hasliberg, Hasliberg",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lottomatch-sv-meiringen/"
             },
             {
-              "label": "Hülsenfrüchte Workshop",
-              "detail": "Pieterlen",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/huelsenfruechte-workshop/"
+              "label": "Loupe-Märit",
+              "detail": "Laupen",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loupe-maerit/"
             },
             {
-              "label": "Philosophisches Speed-Dating",
-              "detail": "Atomic Café, Biel/Bienne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/philosophisches-speed-dating/"
+              "label": "Christmas Event",
+              "detail": "Rathausplatz, Thun",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/christmas-event/"
             },
             {
-              "label": "Kultur im Keller",
-              "detail": "MARKTGASSE18, Sumiswald",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sumiswald/kultur-im-keller_ANbqSiu"
+              "label": "Permakulturplanung mit Sarah Daum",
+              "detail": "Alpine Permakultur Schweibenalp",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/planification-en-permaculture-avec-sarah-daum/"
             },
             {
-              "label": "Rolf Schmid - I MAG EIFACH NÜMA",
-              "detail": "Kupferschmiede Langnau",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rolf-schmid-i-mag-eifach-nuema-6/"
+              "label": "La mer pour horizon",
+              "detail": "Centre interrégional de perfectionnement (CIP), Tramelan",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-mer-pour-horizon/"
             },
             {
-              "label": "Sonderanlass: Ursus Wehrli – «Eine Performative Tagebuch-Lesung mit Dingen»",
-              "detail": "Spiez",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonderanlass-ursus-wehrli-eine-performative-tagebuch-lesung-mit-dingen/"
+              "label": "Prof. Bernhard Pörksen: „Die Kunst des Zuhörens. Über den Mut, sich der Welt zu öffnen“",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/prof-bernhard-poerksen-die-kunst-des-zuhoerens-ueber-den-mut-sich-der-welt-zu-oeffnen/"
             },
             {
-              "label": "VeV Beratungstreff Bern",
-              "detail": "Kapitel Bollwerk, Bern",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/vev-beratungstreff-bern_AXhXKWP"
+              "label": "Laurie Altman in concert",
+              "detail": "Hotel Eden Spiez, Spiez",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/laurie-altman-in-concert_A4RkNhU"
             },
             {
-              "label": "Ritschi & Hunzi (Plüsch) - «Tagebuech»",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/ritschi-und-hunzi-pluesch-tagebuech_AFYBQya"
+              "label": "Die andrli und amanes - Bern",
+              "detail": "Evang.-ref. Pauluskirche, Bern",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/layali-und-amanes-bern/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "201",
+          "value": "193",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,64 +402,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "La librairie est invitée à la Couronne, coeur du Grand Chasseral pour l'apéro d'automne",
-              "detail": "Tavannes",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-librairie-est-invitee-a-la-couronne-coeur-du-grand-chasseral-pour-lapero-dautomne/"
+              "label": "Tal und Sagenmuseum Veranstaltungen 2026",
+              "detail": "Tal & Sagen Museum, Lauterbrunnen",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lauterbrunnen/tal-und-sagenmuseum-veranstaltungen-2026_AaPRiG3"
             },
             {
-              "label": "Mütter- und Väterberatung in Nänikon",
-              "detail": "Klairs, Begegnung im Bühl, Bühl",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/naenikon/muetter-und-vaeterberatung-in-naenikon_ABndiTM"
+              "label": "Bateau de fondue chinoise sur le lac de Thoune",
+              "detail": "Thun",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondue-chinoise-boat-on-lake-thun/"
             },
             {
-              "label": "Infothek Bern West",
-              "detail": "Jugendhaus G23, Bern",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/infothek-bern-west_A5Cxn62"
+              "label": "Lottomatch SV Meiringen",
+              "detail": "Meiringen-Hasliberg, Hasliberg",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lottomatch-sv-meiringen/"
             },
             {
-              "label": "Hülsenfrüchte Workshop",
-              "detail": "Pieterlen",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/huelsenfruechte-workshop/"
+              "label": "Loupe-Märit",
+              "detail": "Laupen",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loupe-maerit/"
             },
             {
-              "label": "Speed-dating philosophique",
-              "detail": "Atomic Café, Biel/Bienne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/philosophisches-speed-dating/"
+              "label": "Événement de Noël",
+              "detail": "Rathausplatz, Thun",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/christmas-event/"
             },
             {
-              "label": "Kultur im Keller",
-              "detail": "MARKTGASSE18, Sumiswald",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sumiswald/kultur-im-keller_ANbqSiu"
+              "label": "Planification en permaculture avec Sarah Daum",
+              "detail": "Alpine Permakultur Schweibenalp",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/planification-en-permaculture-avec-sarah-daum/"
             },
             {
-              "label": "Rolf Schmid - I MAG EIFACH NÜMA",
-              "detail": "Kupferschmiede Langnau",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rolf-schmid-i-mag-eifach-nuema-6/"
+              "label": "La mer pour horizon",
+              "detail": "Centre interrégional de perfectionnement (CIP), Tramelan",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-mer-pour-horizon/"
             },
             {
-              "label": "Sonderanlass: Ursus Wehrli – «Eine Performative Tagebuch-Lesung mit Dingen»",
-              "detail": "Spiez",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonderanlass-ursus-wehrli-eine-performative-tagebuch-lesung-mit-dingen/"
+              "label": "Prof. Bernhard Pörksen: „Die Kunst des Zuhörens. Über den Mut, sich der Welt zu öffnen“",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/prof-bernhard-poerksen-die-kunst-des-zuhoerens-ueber-den-mut-sich-der-welt-zu-oeffnen/"
             },
             {
-              "label": "VeV Beratungstreff Bern",
-              "detail": "Kapitel Bollwerk, Bern",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/vev-beratungstreff-bern_AXhXKWP"
+              "label": "Laurie Altman in concert",
+              "detail": "Hotel Eden Spiez, Spiez",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/laurie-altman-in-concert_A4RkNhU"
             },
             {
-              "label": "Ritschi & Hunzi (Plüsch) - «Tagebuech»",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/ritschi-und-hunzi-pluesch-tagebuech_AFYBQya"
+              "label": "Layāli und Amanés - Berne",
+              "detail": "Evang.-ref. Pauluskirche, Bern",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/layali-und-amanes-bern/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

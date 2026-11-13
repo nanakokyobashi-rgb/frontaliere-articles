@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "b93aa0c5f80627d467b021578f485e80a94d2fc0d1fd215fe1ba7363f4f2c469",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "1aeed003ee6e3f7ebd523858192ae1c2d0f183d71660ad4a19fe40121bbc4987",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "79",
+          "value": "71",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Des ateliers créatifs inédits à Vevey avec Miss G®",
-              "detail": "Centre Manor Vevey, Vevey",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/vevey/des-ateliers-creatifs-inedits-a-vevey-avec-miss-g_A4jPy3s"
+              "label": "Candlelight concert: Quatuor Amoroso",
+              "detail": "Salavaux, Vully-les-Lacs",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/candlelight-concert-quatuor-amoroso/"
             },
             {
-              "label": "Di-Meh Live Band feat. thaHomey",
+              "label": "Jérémie Kisling",
+              "detail": "Chexbres",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jeremie-kisling-1/"
+            },
+            {
+              "label": "Le WEEKEND des PIRATES",
+              "detail": "Barberousse",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/le-weekend-des-pirates_AcaTff8"
+            },
+            {
+              "label": "La ferme des Pralies - Marché à la ferme",
+              "detail": "La Ferme des Pralies, Arnex-sur-Nyon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/culture-populaire/arnex-sur-nyon/la-ferme-des-pralies-marche-a-la-ferme_AW9mVmH"
+            },
+            {
+              "label": "Storytelling Night",
+              "detail": "Aigle",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/storytelling-night/"
+            },
+            {
+              "label": "Gala Stand Up - Montreux Comedy 2026",
+              "detail": "Théâtre de Beaulieu, Lausanne",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gala-stand-up-montreux-comedy-2026/"
+            },
+            {
+              "label": "Alfredo Rodriguez Trio",
               "detail": "Jumeaux Jazz Club",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/music/lausanne/di-meh-live-band-feat-thahomey_AbixUsN"
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/alfredo-rodriguez-trio_A5DGmBr"
             },
             {
-              "label": "Di-Meh Live Band feat. thaHomey",
-              "detail": "Jumeaux Jazz Club, Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/dimeh-live-band-feat-thahomey/"
+              "label": "Montreux Art Gallery",
+              "detail": "MAG – Montreux Art Gallery, Montreux — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
             },
             {
-              "label": "Activité physique post-partum",
-              "detail": "Parc de Milan",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/activite-physique-post-partum_ApKsNBS"
+              "label": "Montreux Comedy",
+              "detail": "Montreux Comedy Festival, Montreux — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             },
             {
-              "label": "Club de lecture ados",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-ados_AHZt83v"
-            },
-            {
-              "label": "Cours hebdomadaires",
-              "detail": "Futurekids, Nyon",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/nyon/cours-hebdomadaires_AfRNJ6e"
-            },
-            {
-              "label": "Afterwork du jeudi",
-              "detail": "Etoile Blanche",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/afterwork-du-jeudi_AfSUcQH"
-            },
-            {
-              "label": "Club de lecture de la Bibliothèque Montriond",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-de-la-bibliotheque-montriond_AkYCdNr"
-            },
-            {
-              "label": "De l'Europe au Japon: une histoire de l'archéologie",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/de-leurope-au-japon-une-histoire-de-larcheologie/"
-            },
-            {
-              "label": "Visite commentée – Blanc-Gatti. Le peintre des sons",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-blancgatti-le-peintre-des-sons/"
+              "label": "Montreux Comedy Festival",
+              "detail": "Théâtre de Beaulieu, Lausanne — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -145,7 +145,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "VD",
@@ -155,7 +155,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "79",
+          "value": "71",
           "note": "from the site’s events calendar"
         }
       ],
@@ -166,64 +166,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Des ateliers créatifs inédits à Vevey avec Miss G®",
-              "detail": "Centre Manor Vevey, Vevey",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/vevey/des-ateliers-creatifs-inedits-a-vevey-avec-miss-g_A4jPy3s"
+              "label": "Candlelight concert: Quatuor Amoroso",
+              "detail": "Salavaux, Vully-les-Lacs",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/candlelight-concert-quatuor-amoroso/"
             },
             {
-              "label": "Di-Meh Live Band feat. thaHomey",
+              "label": "Jérémie Kisling",
+              "detail": "Chexbres",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jeremie-kisling-1/"
+            },
+            {
+              "label": "The PIRATES WEEKEND",
+              "detail": "Barberousse",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/le-weekend-des-pirates_AcaTff8"
+            },
+            {
+              "label": "La ferme des Pralies - Marché à la ferme",
+              "detail": "La Ferme des Pralies, Arnex-sur-Nyon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/culture-populaire/arnex-sur-nyon/la-ferme-des-pralies-marche-a-la-ferme_AW9mVmH"
+            },
+            {
+              "label": "Storytelling Night",
+              "detail": "Aigle",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/storytelling-night/"
+            },
+            {
+              "label": "Gala Stand Up - Montreux Comedy 2026",
+              "detail": "Théâtre de Beaulieu, Lausanne",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gala-stand-up-montreux-comedy-2026/"
+            },
+            {
+              "label": "Alfredo Rodriguez Trio",
               "detail": "Jumeaux Jazz Club",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/music/lausanne/di-meh-live-band-feat-thahomey_AbixUsN"
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/alfredo-rodriguez-trio_A5DGmBr"
             },
             {
-              "label": "Di-Meh Live Band feat. thaHomey",
-              "detail": "Jumeaux Jazz Club, Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/dimeh-live-band-feat-thahomey/"
+              "label": "Montreux Art Gallery",
+              "detail": "MAG – Montreux Art Gallery, Montreux — ongoing, last day: 15 November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
             },
             {
-              "label": "Activité physique post-partum",
-              "detail": "Parc de Milan",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/activite-physique-post-partum_ApKsNBS"
+              "label": "Montreux Comedy",
+              "detail": "Montreux Comedy Festival, Montreux — ongoing, last day: 22 November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             },
             {
-              "label": "Club de lecture ados",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-ados_AHZt83v"
-            },
-            {
-              "label": "Cours hebdomadaires",
-              "detail": "Futurekids, Nyon",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/nyon/cours-hebdomadaires_AfRNJ6e"
-            },
-            {
-              "label": "Thursday after-work event",
-              "detail": "Etoile Blanche",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/afterwork-du-jeudi_AfSUcQH"
-            },
-            {
-              "label": "Club de lecture de la Bibliothèque Montriond",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-de-la-bibliotheque-montriond_AkYCdNr"
-            },
-            {
-              "label": "De l'Europe au Japon: une histoire de l'archéologie",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/de-leurope-au-japon-une-histoire-de-larcheologie/"
-            },
-            {
-              "label": "Visite commentée – Blanc-Gatti. Le peintre des sons",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-blancgatti-le-peintre-des-sons/"
+              "label": "Montreux Comedy Festival",
+              "detail": "Théâtre de Beaulieu, Lausanne — ongoing, last day: 22 November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -273,7 +273,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "VD",
@@ -283,7 +283,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "79",
+          "value": "71",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -294,64 +294,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Des ateliers créatifs inédits à Vevey avec Miss G®",
-              "detail": "Centre Manor Vevey, Vevey",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/vevey/des-ateliers-creatifs-inedits-a-vevey-avec-miss-g_A4jPy3s"
+              "label": "Kerzenlichtkonzert: Quatuor Amoroso",
+              "detail": "Salavaux, Vully-les-Lacs",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/candlelight-concert-quatuor-amoroso/"
             },
             {
-              "label": "Di-Meh Live Band feat. thaHomey",
+              "label": "Jérémie Kisling",
+              "detail": "Chexbres",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jeremie-kisling-1/"
+            },
+            {
+              "label": "Die WEEKENDS der PIRATEN",
+              "detail": "Barberousse",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/le-weekend-des-pirates_AcaTff8"
+            },
+            {
+              "label": "La ferme des Pralies - Marché à la ferme",
+              "detail": "La Ferme des Pralies, Arnex-sur-Nyon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/culture-populaire/arnex-sur-nyon/la-ferme-des-pralies-marche-a-la-ferme_AW9mVmH"
+            },
+            {
+              "label": "Erzählnacht 2024",
+              "detail": "Aigle",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/storytelling-night/"
+            },
+            {
+              "label": "Gala Stand Up - Montreux Comedy 2026",
+              "detail": "Théâtre de Beaulieu, Lausanne",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gala-stand-up-montreux-comedy-2026/"
+            },
+            {
+              "label": "Alfredo Rodriguez Trio",
               "detail": "Jumeaux Jazz Club",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/music/lausanne/di-meh-live-band-feat-thahomey_AbixUsN"
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/alfredo-rodriguez-trio_A5DGmBr"
             },
             {
-              "label": "Di-Meh Live Band feat. thaHomey",
-              "detail": "Jumeaux Jazz Club, Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/dimeh-live-band-feat-thahomey/"
+              "label": "Montreux Art Gallery",
+              "detail": "MAG – Montreux Art Gallery, Montreux — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
             },
             {
-              "label": "Activité physique post-partum",
-              "detail": "Parc de Milan",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/activite-physique-post-partum_ApKsNBS"
+              "label": "Montreux Comedy",
+              "detail": "Montreux Comedy Festival, Montreux — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             },
             {
-              "label": "Club de lecture ados",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-ados_AHZt83v"
-            },
-            {
-              "label": "Cours hebdomadaires",
-              "detail": "Futurekids, Nyon",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/nyon/cours-hebdomadaires_AfRNJ6e"
-            },
-            {
-              "label": "Afterwork am Donnerstag",
-              "detail": "Etoile Blanche",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/afterwork-du-jeudi_AfSUcQH"
-            },
-            {
-              "label": "Club de lecture de la Bibliothèque Montriond",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-de-la-bibliotheque-montriond_AkYCdNr"
-            },
-            {
-              "label": "De l'Europe au Japon: une histoire de l'archéologie",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/de-leurope-au-japon-une-histoire-de-larcheologie/"
-            },
-            {
-              "label": "Visite commentée – Blanc-Gatti. Le peintre des sons",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-blancgatti-le-peintre-des-sons/"
+              "label": "Montreux Comedy Festival",
+              "detail": "Théâtre de Beaulieu, Lausanne — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -401,7 +401,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "VD",
@@ -411,7 +411,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "79",
+          "value": "71",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -422,64 +422,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Des ateliers créatifs inédits à Vevey avec Miss G®",
-              "detail": "Centre Manor Vevey, Vevey",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/vevey/des-ateliers-creatifs-inedits-a-vevey-avec-miss-g_A4jPy3s"
+              "label": "Concert à la Bougie : Quatuor Amoroso",
+              "detail": "Salavaux, Vully-les-Lacs",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/candlelight-concert-quatuor-amoroso/"
             },
             {
-              "label": "Di-Meh Live Band feat. thaHomey",
+              "label": "Jérémie Kisling",
+              "detail": "Chexbres",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jeremie-kisling-1/"
+            },
+            {
+              "label": "Le WEEK-END des PIRATES",
+              "detail": "Barberousse",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/le-weekend-des-pirates_AcaTff8"
+            },
+            {
+              "label": "La ferme des Pralies - Marché à la ferme",
+              "detail": "La Ferme des Pralies, Arnex-sur-Nyon",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/culture-populaire/arnex-sur-nyon/la-ferme-des-pralies-marche-a-la-ferme_AW9mVmH"
+            },
+            {
+              "label": "Nuit du Conte",
+              "detail": "Aigle",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/storytelling-night/"
+            },
+            {
+              "label": "Gala Stand Up - Montreux Comedy 2026",
+              "detail": "Théâtre de Beaulieu, Lausanne",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gala-stand-up-montreux-comedy-2026/"
+            },
+            {
+              "label": "Alfredo Rodriguez Trio",
               "detail": "Jumeaux Jazz Club",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/music/lausanne/di-meh-live-band-feat-thahomey_AbixUsN"
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/alfredo-rodriguez-trio_A5DGmBr"
             },
             {
-              "label": "Di-Meh Live Band feat. thaHomey",
-              "detail": "Jumeaux Jazz Club, Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/dimeh-live-band-feat-thahomey/"
+              "label": "Montreux Art Gallery",
+              "detail": "MAG – Montreux Art Gallery, Montreux — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
             },
             {
-              "label": "Activité physique post-partum",
-              "detail": "Parc de Milan",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/activite-physique-post-partum_ApKsNBS"
+              "label": "Montreux Comedy",
+              "detail": "Montreux Comedy Festival, Montreux — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             },
             {
-              "label": "Club de lecture ados",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-ados_AHZt83v"
-            },
-            {
-              "label": "Cours hebdomadaires de robotique, jeux vidéo et 3D • De 5 à 14 ans",
-              "detail": "Futurekids, Nyon",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/nyon/cours-hebdomadaires_AfRNJ6e"
-            },
-            {
-              "label": "Après",
-              "detail": "Etoile Blanche",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/afterwork-du-jeudi_AfSUcQH"
-            },
-            {
-              "label": "Club de lecture de la Bibliothèque Montriond",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-de-la-bibliotheque-montriond_AkYCdNr"
-            },
-            {
-              "label": "De l'Europe au Japon: une histoire de l'archéologie",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/de-leurope-au-japon-une-histoire-de-larcheologie/"
-            },
-            {
-              "label": "Visite commentée – Blanc-Gatti. Le peintre des sons",
-              "detail": "Lausanne",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-blancgatti-le-peintre-des-sons/"
+              "label": "Montreux Comedy Festival",
+              "detail": "Théâtre de Beaulieu, Lausanne — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -529,7 +529,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

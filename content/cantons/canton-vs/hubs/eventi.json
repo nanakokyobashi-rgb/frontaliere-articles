@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "4a71ff6a5bdfb0e03589ab3d4a9eb0106fef5ca1f1dd4b5d99b174ef6c7ddb6e",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "b00156f6f6389960f8a24253f5920f2ceb287164289a775d7aa6688c9e1ae82e",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -32,30 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Abusitz",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/musique/glis/abusitz_AJK7x5H"
-            },
-            {
-              "label": "Brigitte Rosset",
-              "detail": "Monthey",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/brigitte-rosset/"
-            },
-            {
-              "label": "COCHON D'INDE",
-              "detail": "Savièse — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cochon-dinde/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
             {
               "label": "La Glareyarde of award-winning wines 2026",
               "detail": "VINEA, Sierre",
@@ -91,6 +67,30 @@
               "detail": "Reckingen, Goms",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/bernhard-betschart-ganz-nah-1/"
+            },
+            {
+              "label": "Storytelling Night",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nuit-du-conte/"
+            },
+            {
+              "label": "Dear Luigi, I hate You",
+              "detail": "Sierre",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dear-luigi-i-hate-you/"
+            },
+            {
+              "label": "BOODER \"AH...L'ÉCOLE!\"",
+              "detail": "Saint-Maurice",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/booder-ahlecole/"
+            },
+            {
+              "label": "Polar Mania",
+              "detail": "Jazz Chälli, Visp",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/polomanie-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "VS",
@@ -137,30 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Abusitz",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/musique/glis/abusitz_AJK7x5H"
-            },
-            {
-              "label": "Brigitte Rosset",
-              "detail": "Monthey",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/brigitte-rosset/"
-            },
-            {
-              "label": "COCHON D'INDE",
-              "detail": "Savièse — ongoing, last day: 12 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cochon-dinde/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
             {
               "label": "La Glareyarde of award-winning wines 2026",
               "detail": "VINEA, Sierre",
@@ -196,6 +172,30 @@
               "detail": "Reckingen, Goms",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/bernhard-betschart-ganz-nah-1/"
+            },
+            {
+              "label": "Storytelling Night",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nuit-du-conte/"
+            },
+            {
+              "label": "Dear Luigi, I hate You",
+              "detail": "Sierre",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dear-luigi-i-hate-you/"
+            },
+            {
+              "label": "BOODER \"AH...L'ÉCOLE!\"",
+              "detail": "Saint-Maurice",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/booder-ahlecole/"
+            },
+            {
+              "label": "Polar Mania",
+              "detail": "Jazz Chälli, Visp",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/polomanie-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "VS",
@@ -242,30 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Abusitz",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/musique/glis/abusitz_AJK7x5H"
-            },
-            {
-              "label": "Brigitte Rosset",
-              "detail": "Monthey",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/brigitte-rosset/"
-            },
-            {
-              "label": "COCHON D'INDE",
-              "detail": "Savièse — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cochon-dinde/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
             {
               "label": "Die Glareyarde der prämierten Weine 2026",
               "detail": "VINEA, Sierre",
@@ -301,6 +277,30 @@
               "detail": "Reckingen, Goms",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/bernhard-betschart-ganz-nah-1/"
+            },
+            {
+              "label": "Märchennacht",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nuit-du-conte/"
+            },
+            {
+              "label": "Dear Luigi, I hate You",
+              "detail": "Sierre",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dear-luigi-i-hate-you/"
+            },
+            {
+              "label": "BOODER \"AH...L'ÉCOLE!\"",
+              "detail": "Saint-Maurice",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/booder-ahlecole/"
+            },
+            {
+              "label": "Polarmanie",
+              "detail": "Jazz Chälli, Visp",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/polomanie-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "VS",
@@ -347,30 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Abusitz",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/musique/glis/abusitz_AJK7x5H"
-            },
-            {
-              "label": "Brigitte Rosset",
-              "detail": "Monthey",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/brigitte-rosset/"
-            },
-            {
-              "label": "COCHON D'INDE",
-              "detail": "Savièse — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cochon-dinde/"
-            },
-            {
-              "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
             {
               "label": "La Glareyarde des vins médaillés 2026",
               "detail": "VINEA, Sierre",
@@ -406,6 +382,30 @@
               "detail": "Reckingen, Goms",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/bernhard-betschart-ganz-nah-1/"
+            },
+            {
+              "label": "Nuit du conte",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nuit-du-conte/"
+            },
+            {
+              "label": "Dear Luigi, I hate You",
+              "detail": "Sierre",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dear-luigi-i-hate-you/"
+            },
+            {
+              "label": "BOODER \"AH...L'ÉCOLE!\"",
+              "detail": "Saint-Maurice",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/booder-ahlecole/"
+            },
+            {
+              "label": "La manie polaire",
+              "detail": "Jazz Chälli, Visp",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/polomanie-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

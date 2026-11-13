@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-12T21:05:42.386Z",
-  "contentHash": "6b2e1568edce339d89d2fd8ecd0d4ae9983adfac49fcddc97bd78e1133546056",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "386aba3eba30594ed0ffd8b45f047b769db817584bb9ff42ab3322f1bf438820",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-12T11:55:14.710Z",
+      "updatedAt": "2026-11-12T20:34:04.832Z",
       "keyFacts": 2
     },
     {
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "15",
+          "value": "16",
           "note": "segnalazioni aggiornate: 12 novembre 2026"
         }
       ],
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-12T20:34:04.832Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -286,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "SG",
@@ -306,7 +306,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "15",
+          "value": "16",
           "note": "reports as of 12 November 2026"
         }
       ],
@@ -424,7 +424,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-12T20:34:04.832Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -549,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "SG",
@@ -569,7 +569,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "15",
+          "value": "16",
           "note": "Meldungen vom 12. November 2026"
         }
       ],
@@ -687,7 +687,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-12T20:34:04.832Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -812,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "SG",
@@ -832,7 +832,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "15",
+          "value": "16",
           "note": "signalements au 12 novembre 2026"
         }
       ],
@@ -950,7 +950,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-12T20:34:04.832Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1076,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

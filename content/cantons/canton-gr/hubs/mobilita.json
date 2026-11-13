@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-12T23:04:59.612Z",
-  "contentHash": "6b778f4178fd2ad3f21a0e5139e51fc0b28c29998f2dfa7cf383746119869bbe",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "7ebf5506c947dbb5630d921ca1a7832ebe6a692985da8e2e79e2a1cc12e09720",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-12T11:55:14.710Z",
+      "updatedAt": "2026-11-12T20:34:04.832Z",
       "keyFacts": 2
     },
     {
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "6",
+          "value": "7",
           "note": "segnalazioni aggiornate: 12 novembre 2026"
         },
         {
@@ -147,20 +147,19 @@
               "date": "2026-11-06T21:00:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino <-> Coira tra Svincolo autostradale Splügen E Svincolo autostradale Sufers Situazione: problemi di traffico cantiere, lunghezza [km] 0.9 Aggiunta 1: limite temporaneo larghezza…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 31 agosto 2028",
-              "date": "2026-06-01T03:00:00.000Z"
+              "label": "A28 Landquart <-> Klosters Ost / Vereina tra Svincolo autostradale Landquart E Svincolo autostradale Waldau Situazione: chiusa cantiere, lunghezza [km] 0.9",
+              "value": "Chiusura",
+              "detail": "fine prevista: 1 dicembre 2026",
+              "date": "2026-11-12T12:07:00.000Z"
             },
             {
-              "label": "H3 Silvaplana <-> Savognin tra Luogo Bivio E Incrocio Silvaplana-Est Situazione: problemi di traffico cantiere Aggiunta 1: limite temporaneo altezza Altezza veicolo [m] 5.0",
-              "value": "Cantiere",
-              "detail": "fine prevista: 31 maggio 2027",
-              "date": "2026-06-23T22:00:00.000Z"
+              "label": "H3 Silvaplana <-> Savognin tra Incrocio Silvaplana-Est E Luogo Bivio Situazione: neve sulla strada",
+              "value": "Traffico",
+              "date": "2026-11-12T17:48:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-12T20:34:04.832Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -290,7 +289,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-12T23:04:59.612Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "GR",
@@ -305,7 +304,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "6",
+          "value": "7",
           "note": "reports as of 12 November 2026"
         },
         {
@@ -415,20 +414,19 @@
               "date": "2026-11-06T21:00:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino <-> Coira tra Svincolo autostradale Splügen E Svincolo autostradale Sufers Situazione: problemi di traffico cantiere, lunghezza [km] 0.9 Aggiunta 1: limite temporaneo larghezza…",
-              "value": "Roadworks",
-              "detail": "until 31 August 2028",
-              "date": "2026-06-01T03:00:00.000Z"
+              "label": "A28 Landquart <-> Klosters Ost / Vereina tra Svincolo autostradale Landquart E Svincolo autostradale Waldau Situazione: chiusa cantiere, lunghezza [km] 0.9",
+              "value": "Closure",
+              "detail": "until 1 December 2026",
+              "date": "2026-11-12T12:07:00.000Z"
             },
             {
-              "label": "H3 Silvaplana <-> Savognin tra Luogo Bivio E Incrocio Silvaplana-Est Situazione: problemi di traffico cantiere Aggiunta 1: limite temporaneo altezza Altezza veicolo [m] 5.0",
-              "value": "Roadworks",
-              "detail": "until 31 May 2027",
-              "date": "2026-06-23T22:00:00.000Z"
+              "label": "H3 Silvaplana <-> Savognin tra Incrocio Silvaplana-Est E Luogo Bivio Situazione: neve sulla strada",
+              "value": "Traffic",
+              "date": "2026-11-12T17:48:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-12T20:34:04.832Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -557,7 +555,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-12T23:04:59.612Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "GR",
@@ -572,7 +570,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "6",
+          "value": "7",
           "note": "Meldungen vom 12. November 2026"
         },
         {
@@ -682,20 +680,19 @@
               "date": "2026-11-06T21:00:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino <-> Chur zwischen Anschluss Splügen und Anschluss Sufers Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.9 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
-              "value": "Baustelle",
-              "detail": "bis 31. August 2028",
-              "date": "2026-06-01T03:00:00.000Z"
+              "label": "A28 Landquart <-> Klosters-Ost / Vereina zwischen Anschluss Landquart und Anschluss Waldau Sachlage: Strecke gesperrt Baustelle, Länge [km] 0.9",
+              "value": "Sperrung",
+              "detail": "bis 1. Dezember 2026",
+              "date": "2026-11-12T12:07:00.000Z"
             },
             {
-              "label": "H3 Silvaplana <-> Savognin zwischen Ortschaft Bivio und Kreuzung Silvaplana-Ost Sachlage: Verkehrsbehinderung Baustelle Zusatz 1: vorübergehende Beschränkung der Höhe Fahrzeughöhe [m] 5.0",
-              "value": "Baustelle",
-              "detail": "bis 31. Mai 2027",
-              "date": "2026-06-23T22:00:00.000Z"
+              "label": "H3 Silvaplana <-> Savognin zwischen Kreuzung Silvaplana-Ost und Ortschaft Bivio Sachlage: schneebedeckte Fahrbahn",
+              "value": "Verkehr",
+              "date": "2026-11-12T17:48:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-12T20:34:04.832Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -825,7 +822,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-12T23:04:59.612Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "GR",
@@ -840,7 +837,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "6",
+          "value": "7",
           "note": "signalements au 12 novembre 2026"
         },
         {
@@ -950,20 +947,19 @@
               "date": "2026-11-06T21:00:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino <-> Coire entre Jonction autoroutière Splügen et Jonction autoroutière Sufers Situation: trafic perturbé travaux, longueur [km] 0.9 Complément 1: limitation temporaire de largeur…",
-              "value": "Chantier",
-              "detail": "jusqu’au 31 août 2028",
-              "date": "2026-06-01T03:00:00.000Z"
+              "label": "A28 Landquart <-> Klosters-Est / Vereina entre Jonction autoroutière Landquart et Jonction autoroutière Waldau Situation: fermé travaux, longueur [km] 0.9",
+              "value": "Fermeture",
+              "detail": "jusqu’au 1er décembre 2026",
+              "date": "2026-11-12T12:07:00.000Z"
             },
             {
-              "label": "H3 Silvaplana <-> Savognin entre Localité Bivio et Carrefour Silvaplana-Est Situation: trafic perturbé travaux Complément 1: limitation temporaire de hauteur hauteur du véhicule [m] 5.0",
-              "value": "Chantier",
-              "detail": "jusqu’au 31 mai 2027",
-              "date": "2026-06-23T22:00:00.000Z"
+              "label": "H3 Silvaplana <-> Savognin entre Carrefour Silvaplana-Est et Localité Bivio Situation: route enneigée",
+              "value": "Trafic",
+              "date": "2026-11-12T17:48:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-12T20:34:04.832Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1093,7 +1089,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-12T23:04:59.612Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

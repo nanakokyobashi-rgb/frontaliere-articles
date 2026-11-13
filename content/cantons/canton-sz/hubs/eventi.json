@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T04:11:33.979Z",
-  "contentHash": "1c6f0b406f260d8a9110d489d6b583993194100ef4e3bd3d1e1616b0415b44a5",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "bfc240cae54ae0e748b440745afba3286651df5691a09b8e5e4bc9ac1c4b2fc4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-11T04:25:04.802Z",
+      "updatedAt": "2026-11-12T14:41:08.896Z",
       "keyFacts": 1
     }
   ],
@@ -33,16 +33,16 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
-            {
               "label": "Erzählnacht: Ein Spaziergang voller Geschichten durch Küssnacht",
               "detail": "Küssnacht am Rigi, Küssnacht (SZ)",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-ein-spaziergang-voller-geschichten-durch-kuessnacht/"
+            },
+            {
+              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
+              "detail": "Schwyz — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
             },
             {
               "label": "Workshop, Räuchern mit Heilpflanzen",
@@ -89,7 +89,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -111,7 +111,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "SZ",
@@ -132,16 +132,16 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz — ongoing, last day: 14 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
-            {
               "label": "Erzählnacht: Ein Spaziergang voller Geschichten durch Küssnacht",
               "detail": "Küssnacht am Rigi, Küssnacht (SZ)",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-ein-spaziergang-voller-geschichten-durch-kuessnacht/"
+            },
+            {
+              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
+              "detail": "Schwyz — ongoing, last day: 14 November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
             },
             {
               "label": "Workshop, Räuchern mit Heilpflanzen",
@@ -188,7 +188,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -210,7 +210,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "SZ",
@@ -231,16 +231,16 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
-            {
               "label": "Erzählnacht: Ein Spaziergang voller Geschichten durch Küssnacht",
               "detail": "Küssnacht am Rigi, Küssnacht (SZ)",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-ein-spaziergang-voller-geschichten-durch-kuessnacht/"
+            },
+            {
+              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
+              "detail": "Schwyz — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
             },
             {
               "label": "Workshop, Räuchern mit Heilpflanzen",
@@ -287,7 +287,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -309,7 +309,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "SZ",
@@ -330,16 +330,16 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
-            {
               "label": "Erzählnacht: Ein Spaziergang voller Geschichten durch Küssnacht",
               "detail": "Küssnacht am Rigi, Küssnacht (SZ)",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-ein-spaziergang-voller-geschichten-durch-kuessnacht/"
+            },
+            {
+              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
+              "detail": "Schwyz — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
             },
             {
               "label": "Workshop, Räuchern mit Heilpflanzen",
@@ -386,7 +386,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -408,7 +408,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

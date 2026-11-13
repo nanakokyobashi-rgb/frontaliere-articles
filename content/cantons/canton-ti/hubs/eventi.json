@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "8f990ec8349772b220071f73b1151e91e7e8315aadcd923e8bd693355c45b41e",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "56ce1448c6147f11db0ec07a5dd7f1d1f8a9ac9f6da679fbd3359664b46130a7",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "273",
+          "value": "265",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Corpi in prestito",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/58243"
+              "label": "Insieme InPista",
+              "detail": "Piazza Girasole, Massagno",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64994"
             },
             {
-              "label": "F. Reinhart. Il modello come strumento progettuale",
-              "detail": "Palazzo Franscini, Bellinzona",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64787"
+              "label": "L'épistolière",
+              "detail": "Centro Elisarion, Minusio",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/63970"
             },
             {
-              "label": "Fede e guerra - Mostra fotografica",
-              "detail": "Centro pastorale S. Giuseppe, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64618"
+              "label": "BLA Biennale - Le latitudini dell'arte",
+              "detail": "Villa Santa Lucia, Lugano",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/63945"
             },
             {
-              "label": "Impressioni - Mostra di pittura di Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64414"
+              "label": "Ticino. Sguardi laterali",
+              "detail": "SpazioReale, Bellinzona",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64633"
             },
             {
-              "label": "Jannis Kounellis: Io sono un pittore",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63037"
+              "label": "Notte del racconto 2026. Voci",
+              "detail": "Biblioteca cantonale, Lugano",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64464"
             },
             {
-              "label": "La semina della speranza - Demetra e Persefone",
-              "detail": "Kosmos, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64908"
+              "label": "Mastri birrai in festa",
+              "detail": "Birrificio RudBir, Gordola",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64888"
             },
             {
-              "label": "Pierrette Bloch. Il gesto di scrivere",
-              "detail": "Museo Villa dei Cedri, Bellinzona",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64342"
+              "label": "Commentare la poesia del Novecento",
+              "detail": "Biblioteca cantonale, Lugano",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64697"
             },
             {
-              "label": "Soglie",
-              "detail": "B&B Fine Art, Paradiso",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64776"
+              "label": "Dream Horse",
+              "detail": "Rialto il Cinema, Muralto",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64832"
             },
             {
-              "label": "Was America",
-              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63776"
+              "label": "L'Amministrazione cantonale nell'era digitale",
+              "detail": "Palexpo FEVI, Sala 2 (2° piano), Locarno",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64588"
             },
             {
-              "label": "Giovanni Anselmo",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63802"
+              "label": "Pieces of Mind - Mostra Martina Varini",
+              "detail": "Casa comunale, Bioggio",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64938"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -106,16 +106,16 @@
           "date": "2026-10-28T01:31:55.792Z"
         },
         {
-          "title": "Film festival diritti umani Lugano: il miglior film è promised spaces",
-          "url": "/articoli-frontaliere/film-festival-diritti-umani-lugano-2026/",
-          "excerpt": "Si è svolta la premiazione del Film Festival Diritti Umani Lugano, un appuntamento culturale di rilievo che ha visto trionfare pellicole impegnate sui temi sociali, geopolitici e ambientali.",
-          "date": "2026-10-17T03:41:57.400Z"
-        },
-        {
           "title": "Scacchi a Bissone: i vincitori del VI Festival",
           "url": "/articoli-frontaliere/bissone-torneo-scacchi/",
           "excerpt": "Domenica 11 ottobre Bissone ha ospitato la sesta edizione del Festival scacchistico, una giornata all'insegna degli scacchi con giovani promesse e giocatori esperti.",
           "date": "2026-10-13T08:19:26.782Z"
+        },
+        {
+          "title": "Film festival diritti umani Lugano: il miglior film è promised spaces",
+          "url": "/articoli-frontaliere/film-festival-diritti-umani-lugano-2026/",
+          "excerpt": "Si è svolta la premiazione del Film Festival Diritti Umani Lugano, un appuntamento culturale di rilievo che ha visto trionfare pellicole impegnate sui temi sociali, geopolitici e ambientali.",
+          "date": "2026-10-17T03:41:57.400Z"
         },
         {
           "title": "Museo storico a Palazzo Civico: mozione interpartitica a Lugano",
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "273",
+          "value": "265",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,64 +184,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Borrowed bodies",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/58243"
+              "label": "Together on the slopes",
+              "detail": "Piazza Girasole, Massagno",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64994"
             },
             {
-              "label": "F. Reinhart. The Model as a Design Tool",
-              "detail": "Palazzo Franscini, Bellinzona",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64787"
+              "label": "L 'épistolière",
+              "detail": "Centro Elisarion, Minusio",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/63970"
             },
             {
-              "label": "Faith and War - Photo Exhibit",
-              "detail": "Centro pastorale S. Giuseppe, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64618"
+              "label": "BLA Biennale - The latitudes of art",
+              "detail": "Villa Santa Lucia, Lugano",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/63945"
             },
             {
-              "label": "Impressions - Painting exhibition by Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64414"
+              "label": "Ticino. Side glances",
+              "detail": "SpazioReale, Bellinzona",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64633"
             },
             {
-              "label": "Jannis Kounellis: I am a painter",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63037"
+              "label": "Story Night 2026. Voices",
+              "detail": "Biblioteca cantonale, Lugano",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64464"
             },
             {
-              "label": "The sowing of hope - Demeter and Persephone",
-              "detail": "Kosmos, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64908"
+              "label": "Master brewers in celebration",
+              "detail": "Birrificio RudBir, Gordola",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64888"
             },
             {
-              "label": "Pierrette Bloch. The gesture of writing",
-              "detail": "Museo Villa dei Cedri, Bellinzona",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64342"
+              "label": "Commenting on the poetry of the twentieth century",
+              "detail": "Biblioteca cantonale, Lugano",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64697"
             },
             {
-              "label": "Thresholds",
-              "detail": "B&B Fine Art, Paradiso",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64776"
+              "label": "Dream Horse",
+              "detail": "Rialto il Cinema, Muralto",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64832"
             },
             {
-              "label": "America W",
-              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63776"
+              "label": "Cantonal administration in the digital age",
+              "detail": "Palexpo FEVI, Sala 2 (2° piano), Locarno",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64588"
             },
             {
-              "label": "John Anselm",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63802"
+              "label": "Pieces of Mind - Martina Varini Exhibition",
+              "detail": "Casa comunale, Bioggio",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64938"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -257,16 +257,16 @@
           "date": "2026-10-28T01:31:55.792Z"
         },
         {
-          "title": "Lugano human rights film festival: the best film is promised spaces",
-          "url": "/en/cross-border-articles/lugano-human-rights-film-festival-the-best-film-is-promised-spaces/",
-          "excerpt": "The award ceremony of the Human Rights Film Festival Lugano has taken place, a prominent cultural event that saw the triumph of films committed to social, geopolitical and environmental themes.",
-          "date": "2026-10-17T03:41:57.400Z"
-        },
-        {
           "title": "Chess in Bissone: the winners of the VI Festival",
           "url": "/en/cross-border-articles/bissone-chess-festival-winners/",
           "excerpt": "Sunday, October 11, Bissone hosted the sixth edition of the Chess Festival, a day of chess with young promises and experienced players.",
           "date": "2026-10-13T08:19:26.782Z"
+        },
+        {
+          "title": "Lugano human rights film festival: the best film is promised spaces",
+          "url": "/en/cross-border-articles/lugano-human-rights-film-festival-the-best-film-is-promised-spaces/",
+          "excerpt": "The award ceremony of the Human Rights Film Festival Lugano has taken place, a prominent cultural event that saw the triumph of films committed to social, geopolitical and environmental themes.",
+          "date": "2026-10-17T03:41:57.400Z"
         },
         {
           "title": "Historical Museum at Palazzo Civico: cross-party motion in Lugano",
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "273",
+          "value": "265",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,64 +335,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Leihkörper",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/58243"
+              "label": "Gemeinsam auf der Piste",
+              "detail": "Piazza Girasole, Massagno",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64994"
             },
             {
-              "label": "F. Reinhart. Das Modell als Planungsinstrument",
-              "detail": "Palazzo Franscini, Bellinzona",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64787"
+              "label": "L 'épistolière",
+              "detail": "Centro Elisarion, Minusio",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/63970"
             },
             {
-              "label": "Glaube und Krieg - Fotoausstellung",
-              "detail": "Centro pastorale S. Giuseppe, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64618"
+              "label": "BLA Biennale - Die Breitengrade der Kunst",
+              "detail": "Villa Santa Lucia, Lugano",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/63945"
             },
             {
-              "label": "Impressionen - Gemäldeausstellung von Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64414"
+              "label": "Tessin. Seitliche Blicke",
+              "detail": "SpazioReale, Bellinzona",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64633"
             },
             {
-              "label": "Jannis Kounellis: Ich bin Maler",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63037"
+              "label": "Erzählnacht 2026. Stimmen",
+              "detail": "Biblioteca cantonale, Lugano",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64464"
             },
             {
-              "label": "Die Saat der Hoffnung - Demeter und Persephone",
-              "detail": "Kosmos, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64908"
+              "label": "Meisterbrauer zur Feier",
+              "detail": "Birrificio RudBir, Gordola",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64888"
             },
             {
-              "label": "Pierrette Bloch. Die Geste des Schreibens",
-              "detail": "Museo Villa dei Cedri, Bellinzona",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64342"
+              "label": "Die Poesie des zwanzigsten Jahrhunderts kommentieren",
+              "detail": "Biblioteca cantonale, Lugano",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64697"
             },
             {
-              "label": "Schwellenwerte",
-              "detail": "B&B Fine Art, Paradiso",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64776"
+              "label": "Traumpferd",
+              "detail": "Rialto il Cinema, Muralto",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64832"
             },
             {
-              "label": "War Amerika",
-              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63776"
+              "label": "Die kantonale Verwaltung im digitalen Zeitalter",
+              "detail": "Palexpo FEVI, Sala 2 (2° piano), Locarno",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64588"
             },
             {
-              "label": "Johannes Anselm",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63802"
+              "label": "Pieces of Mind - Ausstellung Martina Varini",
+              "detail": "Casa comunale, Bioggio",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64938"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -408,16 +408,16 @@
           "date": "2026-10-28T01:31:55.792Z"
         },
         {
-          "title": "Filmfestival Menschenrechte Lugano: Der beste Film ist promised spaces",
-          "url": "/de/grenzgaenger-artikel/filmfestival-menschenrechte-lugano-der-beste-film-ist-promised-spaces/",
-          "excerpt": "Die Preisverleihung des Filmfestivals Menschenrechte Lugano hat stattgefunden, ein bedeutendes Kulturereignis, bei dem engagierte Filme zu sozialen, geopolitischen und ökologischen Themen triumphierten.",
-          "date": "2026-10-17T03:41:57.400Z"
-        },
-        {
           "title": "Schach in Bissone: die Gewinner des VI Festivals",
           "url": "/de/grenzgaenger-artikel/schachfestival-bissone-sieger/",
           "excerpt": "Am Sonntag, den 11. Oktober, fand in Bissone die sechste Ausgabe des Schachfestivals statt, ein Schachtag mit vielversprechenden jungen und erfahrenen Spielern.",
           "date": "2026-10-13T08:19:26.782Z"
+        },
+        {
+          "title": "Filmfestival Menschenrechte Lugano: Der beste Film ist promised spaces",
+          "url": "/de/grenzgaenger-artikel/filmfestival-menschenrechte-lugano-der-beste-film-ist-promised-spaces/",
+          "excerpt": "Die Preisverleihung des Filmfestivals Menschenrechte Lugano hat stattgefunden, ein bedeutendes Kulturereignis, bei dem engagierte Filme zu sozialen, geopolitischen und ökologischen Themen triumphierten.",
+          "date": "2026-10-17T03:41:57.400Z"
         },
         {
           "title": "Historisches Museum im Palazzo Civico: parteiübergreifender Antrag in Lugano",
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "273",
+          "value": "265",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,64 +486,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Corps prêtés",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/58243"
+              "label": "Ensemble sur les pistes",
+              "detail": "Piazza Girasole, Massagno",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64994"
             },
             {
-              "label": "F. Reinhart. La maquette comme outil de conception",
-              "detail": "Palazzo Franscini, Bellinzona",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64787"
+              "label": "L’épistolière",
+              "detail": "Centro Elisarion, Minusio",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/63970"
             },
             {
-              "label": "Foi et guerre - Exposition photographique",
-              "detail": "Centro pastorale S. Giuseppe, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64618"
+              "label": "BLA Biennale - Les latitudes de l'art",
+              "detail": "Villa Santa Lucia, Lugano",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/63945"
             },
             {
-              "label": "Impressions - Exposition de peinture de Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64414"
+              "label": "Tessin. Regards latéraux",
+              "detail": "SpazioReale, Bellinzona",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64633"
             },
             {
-              "label": "Jannis Kounellis : Je suis un peintre",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63037"
+              "label": "Nuit du conte 2026. Voix",
+              "detail": "Biblioteca cantonale, Lugano",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64464"
             },
             {
-              "label": "La semence de l'espoir - Déméter et Perséphone",
-              "detail": "Kosmos, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64908"
+              "label": "Maîtres brasseurs en célébration",
+              "detail": "Birrificio RudBir, Gordola",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64888"
             },
             {
-              "label": "Pierrette Bloch. Le geste d'écrire",
-              "detail": "Museo Villa dei Cedri, Bellinzona",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64342"
+              "label": "Commenter la poésie du XXe siècle",
+              "detail": "Biblioteca cantonale, Lugano",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64697"
             },
             {
-              "label": "Seuils",
-              "detail": "B&B Fine Art, Paradiso",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/64776"
+              "label": "Cheval de rêve",
+              "detail": "Rialto il Cinema, Muralto",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64832"
             },
             {
-              "label": "Était l'Amérique",
-              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63776"
+              "label": "L'administration cantonale à l'ère numérique",
+              "detail": "Palexpo FEVI, Sala 2 (2° piano), Locarno",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64588"
             },
             {
-              "label": "Giovanni Anselme",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-11-12",
-              "url": "https://www.tio.ch/agenda/day/20261112/63802"
+              "label": "Pieces of Mind - Afficher Martina Varini",
+              "detail": "Casa comunale, Bioggio",
+              "date": "2026-11-13",
+              "url": "https://www.tio.ch/agenda/day/20261113/64938"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -559,16 +559,16 @@
           "date": "2026-10-28T01:31:55.792Z"
         },
         {
-          "title": "Film festival droits humains Lugano : le meilleur film est promise spaces",
-          "url": "/fr/articles-frontalier/film-festival-droits-humains-lugano-le-meilleur-film-est-promise-spaces/",
-          "excerpt": "La cérémonie de remise des prix du Film Festival Diritti Umani Lugano a eu lieu, un événement culturel majeur qui a vu triompher des films engagés sur les thèmes sociaux, géopolitiques et environnementaux.",
-          "date": "2026-10-17T03:41:57.400Z"
-        },
-        {
           "title": "Échecs à Bissone : les vainqueurs du VI Festival",
           "url": "/fr/articles-frontalier/festival-echecs-bissone-gagnants/",
           "excerpt": "Dimanche 11 octobre, Bissone a accueilli la sixième édition du Festival d'échecs, une journée placée sous le signe des échecs avec de jeunes espoirs et des joueurs expérimentés.",
           "date": "2026-10-13T08:19:26.782Z"
+        },
+        {
+          "title": "Film festival droits humains Lugano : le meilleur film est promise spaces",
+          "url": "/fr/articles-frontalier/film-festival-droits-humains-lugano-le-meilleur-film-est-promise-spaces/",
+          "excerpt": "La cérémonie de remise des prix du Film Festival Diritti Umani Lugano a eu lieu, un événement culturel majeur qui a vu triompher des films engagés sur les thèmes sociaux, géopolitiques et environnementaux.",
+          "date": "2026-10-17T03:41:57.400Z"
         },
         {
           "title": "Musée historique au Palazzo Civico : motion interpartisane à Lugano",
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

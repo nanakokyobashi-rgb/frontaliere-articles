@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "fe9719bec87dbc682383a0bc125394eeac0eaabc6ad6d968185de9d27e4aa621",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "32003e38a79db36c8806b9a0dc32fd2ca2fbc01ceda7b76eb117d6631e753ee5",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "64",
+          "value": "63",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "29. Sitzung des Grossen Stadtrates von Luzern vom 12. November 2026",
-              "detail": "Luzern",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7771576"
-            },
-            {
-              "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
-              "detail": "Luzern",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7287119"
-            },
-            {
-              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
-              "detail": "Lucerne, Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
-            },
-            {
-              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
-              "detail": "Hotel Schweizerhof, Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
-            },
-            {
-              "label": "360° Milonga",
-              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 6 dicembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — in corso, ultimo giorno: 25 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
-            {
               "label": "Whiskey evening - In the Rischlistube",
               "detail": "Hotel Rischli",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/whiskey-evening-in-the-rischlistube/"
+            },
+            {
+              "label": "Traditional Farmers' Festival",
+              "detail": "Weggis",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-11-13",
+              "url": "https://www.stadtluzern.ch/sitzung/7694305"
+            },
+            {
+              "label": "Wissen am Mittag",
+              "detail": "Luzern",
+              "date": "2026-11-13",
+              "url": "https://www.stadtluzern.ch/sitzung/7660906"
+            },
+            {
+              "label": "Salonkonzert",
+              "detail": "Luzern",
+              "date": "2026-11-13",
+              "url": "https://www.stadtluzern.ch/sitzung/7463719"
+            },
+            {
+              "label": "Advent and Christmas Market at Wyher Castle",
+              "detail": "Ettiswil",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-und-weihnachtsmarkt-im-schloss-wyher/"
+            },
+            {
+              "label": "Chormusik von ukrainischen und europäischen Komponisten",
+              "detail": "Lucerne, Luzern",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chormusik-von-ukrainischen-und-europaeischen-komponisten/"
+            },
+            {
+              "label": "Spieleabend für Erwachsene in der Ludothek",
+              "detail": "Willisau",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spieleabend-fuer-erwachsene-in-der-ludothek-3/"
+            },
+            {
+              "label": "Frank Richter",
+              "detail": "Theater Duo Fischbach, Fischbach",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/frank-richter-2/"
+            },
+            {
+              "label": "To Athena",
+              "detail": "Schüür",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/to-athena_AEiuYPW"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "LU",
@@ -182,7 +182,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "64",
+          "value": "63",
           "note": "from the site’s events calendar"
         }
       ],
@@ -193,64 +193,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "29. Sitzung des Grossen Stadtrates von Luzern vom 12. November 2026",
-              "detail": "Luzern",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7771576"
-            },
-            {
-              "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
-              "detail": "Luzern",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7287119"
-            },
-            {
-              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
-              "detail": "Lucerne, Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
-            },
-            {
-              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
-              "detail": "Hotel Schweizerhof, Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
-            },
-            {
-              "label": "360° Milonga",
-              "detail": "Bourbaki Panorama — ongoing, last day: 6 December 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "detail": "Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — ongoing, last day: 25 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
-            {
               "label": "Whiskey evening - In the Rischlistube",
               "detail": "Hotel Rischli",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/whiskey-evening-in-the-rischlistube/"
+            },
+            {
+              "label": "Traditional Farmers' Festival",
+              "detail": "Weggis",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-11-13",
+              "url": "https://www.stadtluzern.ch/sitzung/7694305"
+            },
+            {
+              "label": "Wissen am Mittag",
+              "detail": "Luzern",
+              "date": "2026-11-13",
+              "url": "https://www.stadtluzern.ch/sitzung/7660906"
+            },
+            {
+              "label": "Salonkonzert",
+              "detail": "Luzern",
+              "date": "2026-11-13",
+              "url": "https://www.stadtluzern.ch/sitzung/7463719"
+            },
+            {
+              "label": "Advent and Christmas Market at Wyher Castle",
+              "detail": "Ettiswil",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-und-weihnachtsmarkt-im-schloss-wyher/"
+            },
+            {
+              "label": "Chormusik von ukrainischen und europäischen Komponisten",
+              "detail": "Lucerne, Luzern",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chormusik-von-ukrainischen-und-europaeischen-komponisten/"
+            },
+            {
+              "label": "Spieleabend für Erwachsene in der Ludothek",
+              "detail": "Willisau",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spieleabend-fuer-erwachsene-in-der-ludothek-3/"
+            },
+            {
+              "label": "Frank Richter",
+              "detail": "Theater Duo Fischbach, Fischbach",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/frank-richter-2/"
+            },
+            {
+              "label": "To Athena",
+              "detail": "Schüür",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/to-athena_AEiuYPW"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "LU",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "64",
+          "value": "63",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -348,64 +348,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "29. Sitzung des Grossen Stadtrates von Luzern vom 12. November 2026",
-              "detail": "Luzern",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7771576"
-            },
-            {
-              "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
-              "detail": "Luzern",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7287119"
-            },
-            {
-              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
-              "detail": "Lucerne, Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
-            },
-            {
-              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
-              "detail": "Hotel Schweizerhof, Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
-            },
-            {
-              "label": "360° Milonga",
-              "detail": "Bourbaki Panorama — läuft, letzter Tag: 6. Dezember 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — läuft, letzter Tag: 25. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
-            {
               "label": "Whiskey-Abend – In der Rischlistube",
               "detail": "Hotel Rischli",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/whiskey-evening-in-the-rischlistube/"
+            },
+            {
+              "label": "Sennenchilbi Weggis",
+              "detail": "Weggis",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-11-13",
+              "url": "https://www.stadtluzern.ch/sitzung/7694305"
+            },
+            {
+              "label": "Wissen am Mittag",
+              "detail": "Luzern",
+              "date": "2026-11-13",
+              "url": "https://www.stadtluzern.ch/sitzung/7660906"
+            },
+            {
+              "label": "Salonkonzert",
+              "detail": "Luzern",
+              "date": "2026-11-13",
+              "url": "https://www.stadtluzern.ch/sitzung/7463719"
+            },
+            {
+              "label": "Advents-und Weihnachtsmarkt im Schloss Wyher",
+              "detail": "Ettiswil",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-und-weihnachtsmarkt-im-schloss-wyher/"
+            },
+            {
+              "label": "Chormusik von ukrainischen und europäischen Komponisten",
+              "detail": "Lucerne, Luzern",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chormusik-von-ukrainischen-und-europaeischen-komponisten/"
+            },
+            {
+              "label": "Spieleabend für Erwachsene in der Ludothek",
+              "detail": "Willisau",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spieleabend-fuer-erwachsene-in-der-ludothek-3/"
+            },
+            {
+              "label": "Frank Richter",
+              "detail": "Theater Duo Fischbach, Fischbach",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/frank-richter-2/"
+            },
+            {
+              "label": "To Athena",
+              "detail": "Schüür",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/to-athena_AEiuYPW"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "LU",
@@ -492,7 +492,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "64",
+          "value": "63",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -503,64 +503,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "29. Sitzung des Grossen Stadtrates von Luzern vom 12. November 2026",
-              "detail": "Luzern",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7771576"
-            },
-            {
-              "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
-              "detail": "Luzern",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7287119"
-            },
-            {
-              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
-              "detail": "Lucerne, Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
-            },
-            {
-              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
-              "detail": "Hotel Schweizerhof, Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
-            },
-            {
-              "label": "360° Milonga",
-              "detail": "Bourbaki Panorama — en cours, dernier jour : 6 décembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
-            },
-            {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
-            },
-            {
-              "label": "Kunstausstellung Visarte",
-              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — en cours, dernier jour : 25 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
-            {
               "label": "Soirée whisky - Au Rischlistube",
               "detail": "Hotel Rischli",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/whiskey-evening-in-the-rischlistube/"
+            },
+            {
+              "label": "Bénichon de Weggis",
+              "detail": "Weggis",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-11-13",
+              "url": "https://www.stadtluzern.ch/sitzung/7694305"
+            },
+            {
+              "label": "Wissen am Mittag",
+              "detail": "Luzern",
+              "date": "2026-11-13",
+              "url": "https://www.stadtluzern.ch/sitzung/7660906"
+            },
+            {
+              "label": "Salonkonzert",
+              "detail": "Luzern",
+              "date": "2026-11-13",
+              "url": "https://www.stadtluzern.ch/sitzung/7463719"
+            },
+            {
+              "label": "Marché de l'Avent et de Noël au château de Wyher",
+              "detail": "Ettiswil",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-und-weihnachtsmarkt-im-schloss-wyher/"
+            },
+            {
+              "label": "Chormusik von ukrainischen und europäischen Komponisten",
+              "detail": "Lucerne, Luzern",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chormusik-von-ukrainischen-und-europaeischen-komponisten/"
+            },
+            {
+              "label": "Spieleabend für Erwachsene in der Ludothek",
+              "detail": "Willisau",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spieleabend-fuer-erwachsene-in-der-ludothek-3/"
+            },
+            {
+              "label": "Frank Richter",
+              "detail": "Theater Duo Fischbach, Fischbach",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/frank-richter-2/"
+            },
+            {
+              "label": "To Athena",
+              "detail": "Schüür",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/to-athena_AEiuYPW"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }
