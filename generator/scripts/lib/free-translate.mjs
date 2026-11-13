@@ -691,7 +691,7 @@ export function lineStructuralSignature(line) {
   return { kind: 'text', signature: `${signaturePrefix}text`, prefix: indent, text: candidate };
 }
 
-const INLINE_OPAQUE_RE = /(?:https?:\/\/\S+|www\.\S+|[\p{L}\p{N}._%+-]+@[\p{L}\p{N}.-]+\.[\p{L}]{2,})/giu;
+const INLINE_OPAQUE_RE = /(?:https?:\/\/[^\s<>"']+|www\.[^\s<>"']+|[\p{L}\p{N}._%+-]+@[\p{L}\p{N}.-]+\.[\p{L}]{2,})/giu;
 const PLACEHOLDER_RE = /(?:\{\{[^{}\n]*\}\}|\$\{[^{}\n]*\}|\[\[[^\[\]\n]*\]\]|\{[^{}\n]*\}|%[A-Za-z0-9_]+)/gu;
 function isWholeTranslationSentinel(span) {
   const matches = String(span).match(translationSentinelRegExp());

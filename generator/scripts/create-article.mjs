@@ -16196,9 +16196,13 @@ async function translateArticle(data) {
       const value = String(text ?? '');
       const numberPattern = /(?<![\p{L}\p{N}_])[+\-−]?\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:\s*[%°º])?(?![\p{L}\p{N}_])/gu;
       const spanBoundary = (char) => char === '\n' || ',;!?|'.includes(char);
-      const isLineLeadingOrdinal = (index) => {
-        const lineStart = value.lastIndexOf('\n', index - 1) + 1;
-        return /^[ \t]*\d{1,2}(?:[°º]|\.)\s/u.test(value.slice(lineStart));
+      const isLineLeadingOrdinal = (match, token) => {
+        const lineStart = value.lastIndexOf('\n', match.index - 1) + 1;
+        const leadingOrdinal = value.slice(lineStart).match(/^[ \t]*\d{1,2}(?:[°º]|\.)\s/u);
+        if (!leadingOrdinal) return false;
+        const indentLength = leadingOrdinal[0].match(/^[ \t]*/u)?.[0].length || 0;
+        return match.index === lineStart + indentLength
+          && (/[°º]$/u.test(token) || value[match.index + token.length] === '.');
       };
       const numberEntries = [...value.matchAll(numberPattern)].map((match) => {
         const [token] = match;
@@ -16206,21 +16210,30 @@ async function translateArticle(data) {
         const number = unit ? token.slice(0, -unit.length) : token;
         const sign = number.match(/^[+\-−]/u)?.[0] || '';
         const unsigned = sign ? number.slice(sign.length) : number;
-        const normalizedUnit = isLineLeadingOrdinal(match.index) ? '.' : unit;
+        const lineLeadingOrdinal = isLineLeadingOrdinal(match, token);
+        const normalizedUnit = lineLeadingOrdinal ? '.' : unit;
+        const tokenEnd = match.index + token.length
+          + (lineLeadingOrdinal && value[match.index + token.length] === '.' ? 1 : 0);
         return {
           value: `${sign}${unsigned.replace(/[.,'’\u00a0\u202f ]/gu, '')}:${normalizedUnit}`,
           index: match.index,
+          end: tokenEnd,
         };
       });
-      const numberPatternForSpan = new RegExp(numberPattern.source, numberPattern.flags);
       const associations = numberEntries.map(({ value: number, index }) => {
         let start = index;
         while (start > 0 && !spanBoundary(value[start - 1])) start -= 1;
         let end = index;
         while (end < value.length && !spanBoundary(value[end])) end += 1;
         const span = value.slice(start, end);
-        const withoutNumbers = span
-          .replace(numberPatternForSpan, '#')
+        const numberRanges = numberEntries
+          .filter((entry) => entry.index >= start && entry.end <= end)
+          .sort((left, right) => right.index - left.index);
+        const withoutNumbers = numberRanges.reduce((without, entry) => {
+          const relativeStart = entry.index - start;
+          const relativeEnd = entry.end - start;
+          return `${without.slice(0, relativeStart)}#${without.slice(relativeEnd)}`;
+        }, span)
           .replace(/\s+/gu, ' ')
           .trim();
         const anchors = [...withoutNumbers.matchAll(/(?<![\p{L}\p{N}_])[\p{Lu}][\p{L}\p{N}_’'-]*/gu)]
