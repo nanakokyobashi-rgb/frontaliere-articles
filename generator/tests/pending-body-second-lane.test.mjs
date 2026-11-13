@@ -1024,6 +1024,15 @@ test('il join della traduzione riusa i separatori sorgente invece di inventare p
   const translated = await translateInChunks(source, 'body1', (chunk) => chunk, 'test', 'de');
 
   assert.equal(translated, source, 'un traduttore che conserva i chunk non deve cambiare la struttura Markdown');
+
+  const adjacentSource = '([primo secondo terzo](url1))([link2](url2))';
+  const adjacentChunks = realChunker(adjacentSource, 3);
+  assert.deepEqual(adjacentChunks.separators, [''], 'il confine tra atomi adiacenti deve registrare il separatore vuoto');
+  assert.equal(
+    await translateInChunks(adjacentSource, 'body1', (chunk) => chunk, 'test-adjacent', 'de'),
+    adjacentSource,
+    'il joiner non deve inventare un nuovo paragrafo tra atomi adiacenti',
+  );
 });
 
 test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', async () => {

@@ -15508,7 +15508,7 @@ async function translateArticle(data) {
     }
     const separators = chunks.separators || [];
     const joined = parts.reduce(
-      (joined, part, index) => joined + (index === 0 ? '' : separators[index - 1] ?? '\n\n') + part,
+      (joined, part, index) => joined + (index === 0 ? '' : separators[index - 1] ?? '') + part,
       '',
     );
 
