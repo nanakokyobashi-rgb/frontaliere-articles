@@ -102,6 +102,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.incidenti-a1-goldach-san-gallo.title': 'Two accidents on the A1: traffic jams in Goldach and St.Gallen',
     'blog.article.incidenti-a1-goldach-san-gallo.excerpt': 'On November 11, 2026, two accidents on the A1, in Goldach and St.Gallen, caused heavy delays and traffic queues during the evening commute.',
     'blog.article.incidenti-a1-goldach-san-gallo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.votazione-fondo-rete-gas-wil.title': 'Referendum on the fund for decommissioning the TBW gas network in Wil',
+    'blog.article.votazione-fondo-rete-gas-wil.excerpt': 'On November 29, 2026, a popular vote will be held on the regulation establishing the fund for the decommissioning and dismantling of the gas network of Wil’s technical services, TBW.',
+    'blog.article.votazione-fondo-rete-gas-wil.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

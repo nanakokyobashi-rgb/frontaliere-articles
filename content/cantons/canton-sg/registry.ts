@@ -369,4 +369,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'votazione-fondo-rete-gas-wil',
+ category: 'pratico',
+ date: '2026-11-13T12:14:26.742Z',
+ image: '/images/blog/article-votazione-fondo-rete-gas-wil.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-11-12T21:05:42.386Z",
-  "contentHash": "88eb25b02c87671d17062673b8594f8cd99e4aed5d13ae6df0e4d785afa8a6a1",
+  "updatedAt": "2026-11-13T12:13:48.902Z",
+  "contentHash": "89dfc2be813f4c7b159e40d6b4cf011cab6a21c8dff78c4d32930d8a73dfcf21",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-12T11:55:14.710Z",
+      "updatedAt": "2026-11-13T02:11:53.904Z",
       "keyFacts": 1
     }
   ],
@@ -23,7 +23,7 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 12 novembre 2026"
+          "note": "segnalazioni aggiornate: 13 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -40,7 +40,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         }
       ],
       "curatedArticles": [
@@ -98,7 +98,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "en": {
       "canton": "GL",
@@ -109,7 +109,7 @@
         {
           "label": "Road closures in force or imminent",
           "value": "1",
-          "note": "reports as of 12 November 2026"
+          "note": "reports as of 13 November 2026"
         }
       ],
       "dataBlocks": [
@@ -126,7 +126,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         }
       ],
       "curatedArticles": [
@@ -184,7 +184,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "de": {
       "canton": "GL",
@@ -195,7 +195,7 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "1",
-          "note": "Meldungen vom 12. November 2026"
+          "note": "Meldungen vom 13. November 2026"
         }
       ],
       "dataBlocks": [
@@ -212,7 +212,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         }
       ],
       "curatedArticles": [
@@ -270,7 +270,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "fr": {
       "canton": "GL",
@@ -281,7 +281,7 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "1",
-          "note": "signalements au 12 novembre 2026"
+          "note": "signalements au 13 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -298,7 +298,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         }
       ],
       "curatedArticles": [
@@ -356,7 +356,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     }
   }
 }

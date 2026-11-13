@@ -4,22 +4,22 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "85f00611c2b8fc37d459bc60b9ce645d8f9573d93cddb09ad32a7ae7c2b539c7",
+  "updatedAt": "2026-11-13T12:13:48.902Z",
+  "contentHash": "8f5abf190e01c829fe74fc419d1b5c08601123d808c3817ea5251f715aea5b14",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-11T23:59:59.000Z",
+      "updatedAt": "2026-11-12T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-12T20:34:04.832Z",
+      "updatedAt": "2026-11-13T02:11:53.904Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-12T22:54:56.926Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Hermance, settimana conclusa: 11 novembre 2026"
+          "note": "Hermance, settimana conclusa: 12 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "5",
-          "note": "segnalazioni aggiornate: 12 novembre 2026"
+          "note": "segnalazioni aggiornate: 13 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 12 novembre 2026"
+          "note": "segnalazioni aggiornate: 13 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 5 novembre 2026 – 11 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 6 novembre 2026 – 12 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Hermance",
@@ -72,38 +72,38 @@
             },
             {
               "label": "Landecy",
-              "value": "0,7 min",
+              "value": "0,4 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/landecy/oggi/"
             },
             {
               "label": "Meyrin / CERN",
-              "value": "1,4 min",
+              "value": "1,2 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/meyrin-cern/oggi/"
             },
             {
               "label": "Moillesulaz",
-              "value": "2 min",
+              "value": "1,4 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/moillesulaz/oggi/"
             },
             {
               "label": "Perly (Perly-Certoux)",
-              "value": "2,5 min",
+              "value": "1,7 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/perly/oggi/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "3,3 min",
+              "value": "2,3 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/thonex-vallard/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-11T23:59:59.000Z"
+          "updatedAt": "2026-11-12T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -143,24 +143,24 @@
             {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Traffico",
-              "date": "2026-11-12T20:34:04.832Z",
+              "date": "2026-11-13T02:11:53.904Z",
               "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
               "value": "Traffico",
-              "date": "2026-11-12T20:34:04.832Z",
+              "date": "2026-11-13T02:11:53.904Z",
               "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "value": "Cantiere",
-              "date": "2026-11-12T20:34:04.832Z",
+              "date": "2026-11-13T02:11:53.904Z",
               "url": "https://www.ge.ch/node/45356"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-12T20:34:04.832Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +198,7 @@
               "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "en": {
       "canton": "GE",
@@ -269,24 +269,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Hermance, week ending 11 November 2026"
+          "note": "Hermance, week ending 12 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "5",
-          "note": "reports as of 12 November 2026"
+          "note": "reports as of 13 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "3",
-          "note": "reports as of 12 November 2026"
+          "note": "reports as of 13 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 5 November 2026 to 11 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 6 November 2026 to 12 November 2026, fastest first.",
           "items": [
             {
               "label": "Hermance",
@@ -308,38 +308,38 @@
             },
             {
               "label": "Landecy",
-              "value": "0.7 min",
+              "value": "0.4 min",
               "detail": "49 readings",
               "url": "/en/border-wait/landecy/today/"
             },
             {
               "label": "Meyrin / CERN",
-              "value": "1.4 min",
+              "value": "1.2 min",
               "detail": "49 readings",
               "url": "/en/border-wait/meyrin-cern/today/"
             },
             {
               "label": "Moillesulaz",
-              "value": "2 min",
+              "value": "1.4 min",
               "detail": "49 readings",
               "url": "/en/border-wait/moillesulaz/today/"
             },
             {
               "label": "Perly (Perly-Certoux)",
-              "value": "2.5 min",
+              "value": "1.7 min",
               "detail": "49 readings",
               "url": "/en/border-wait/perly/today/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "3.3 min",
+              "value": "2.3 min",
               "detail": "49 readings",
               "url": "/en/border-wait/thonex-vallard/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-11T23:59:59.000Z"
+          "updatedAt": "2026-11-12T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -379,24 +379,24 @@
             {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Traffic",
-              "date": "2026-11-12T20:34:04.832Z",
+              "date": "2026-11-13T02:11:53.904Z",
               "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
               "value": "Traffic",
-              "date": "2026-11-12T20:34:04.832Z",
+              "date": "2026-11-13T02:11:53.904Z",
               "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "value": "Roadworks",
-              "date": "2026-11-12T20:34:04.832Z",
+              "date": "2026-11-13T02:11:53.904Z",
               "url": "https://www.ge.ch/node/45356"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-12T20:34:04.832Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -434,7 +434,7 @@
               "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -494,7 +494,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "de": {
       "canton": "GE",
@@ -505,24 +505,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Hermance, Woche bis 11. November 2026"
+          "note": "Hermance, Woche bis 12. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "5",
-          "note": "Meldungen vom 12. November 2026"
+          "note": "Meldungen vom 13. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "3",
-          "note": "Meldungen vom 12. November 2026"
+          "note": "Meldungen vom 13. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 5. November 2026 bis 11. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 6. November 2026 bis 12. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Hermance",
@@ -544,38 +544,38 @@
             },
             {
               "label": "Landecy",
-              "value": "0.7 Min.",
+              "value": "0.4 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/landecy/heute/"
             },
             {
               "label": "Meyrin / CERN",
-              "value": "1.4 Min.",
+              "value": "1.2 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/meyrin-cern/heute/"
             },
             {
               "label": "Moillesulaz",
-              "value": "2 Min.",
+              "value": "1.4 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/moillesulaz/heute/"
             },
             {
               "label": "Perly (Perly-Certoux)",
-              "value": "2.5 Min.",
+              "value": "1.7 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/perly/heute/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "3.3 Min.",
+              "value": "2.3 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/thonex-vallard/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-11T23:59:59.000Z"
+          "updatedAt": "2026-11-12T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -615,24 +615,24 @@
             {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Verkehr",
-              "date": "2026-11-12T20:34:04.832Z",
+              "date": "2026-11-13T02:11:53.904Z",
               "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
               "value": "Verkehr",
-              "date": "2026-11-12T20:34:04.832Z",
+              "date": "2026-11-13T02:11:53.904Z",
               "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "value": "Baustelle",
-              "date": "2026-11-12T20:34:04.832Z",
+              "date": "2026-11-13T02:11:53.904Z",
               "url": "https://www.ge.ch/node/45356"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-12T20:34:04.832Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -670,7 +670,7 @@
               "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -730,7 +730,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "fr": {
       "canton": "GE",
@@ -741,24 +741,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Hermance, semaine jusqu’au 11 novembre 2026"
+          "note": "Hermance, semaine jusqu’au 12 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "5",
-          "note": "signalements au 12 novembre 2026"
+          "note": "signalements au 13 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "3",
-          "note": "signalements au 12 novembre 2026"
+          "note": "signalements au 13 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 5 novembre 2026 au 11 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 6 novembre 2026 au 12 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Hermance",
@@ -780,38 +780,38 @@
             },
             {
               "label": "Landecy",
-              "value": "0,7 min",
+              "value": "0,4 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/landecy/aujourd-hui/"
             },
             {
               "label": "Meyrin / CERN",
-              "value": "1,4 min",
+              "value": "1,2 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/meyrin-cern/aujourd-hui/"
             },
             {
               "label": "Moillesulaz",
-              "value": "2 min",
+              "value": "1,4 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/moillesulaz/aujourd-hui/"
             },
             {
               "label": "Perly (Perly-Certoux)",
-              "value": "2,5 min",
+              "value": "1,7 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/perly/aujourd-hui/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "3,3 min",
+              "value": "2,3 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/thonex-vallard/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-11T23:59:59.000Z"
+          "updatedAt": "2026-11-12T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -851,24 +851,24 @@
             {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "value": "Trafic",
-              "date": "2026-11-12T20:34:04.832Z",
+              "date": "2026-11-13T02:11:53.904Z",
               "url": "https://www.ge.ch/node/45382"
             },
             {
               "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
               "value": "Trafic",
-              "date": "2026-11-12T20:34:04.832Z",
+              "date": "2026-11-13T02:11:53.904Z",
               "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "value": "Chantier",
-              "date": "2026-11-12T20:34:04.832Z",
+              "date": "2026-11-13T02:11:53.904Z",
               "url": "https://www.ge.ch/node/45356"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-12T20:34:04.832Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -906,7 +906,7 @@
               "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -966,7 +966,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     }
   }
 }

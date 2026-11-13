@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "898241221c5720f0dd9dd1219f7042647bf0af565ef8a44e03591055eff07c5e",
+  "updatedAt": "2026-11-13T12:13:48.902Z",
+  "contentHash": "afd30f84a994b761dfd0c6736dbb6c6c246c1c32d7a94d4944ed7a314ee1ae10",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-12T22:54:56.926Z",
       "keyFacts": 0
     }
   ],
@@ -100,13 +100,28 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
+              "date": "2026-11-12T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/fasnaechtliche+fundstuecke+beim+museumsflohmarkt"
+            },
+            {
+              "label": "Veranstaltung für Kinder (4-6 Jahre) \"Das verschlafene Murmeltier\"",
+              "date": "2026-11-12T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/das+verschlafene+murmeltier"
+            },
+            {
+              "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
+              "date": "2026-11-12T16:00:00.000Z",
+              "url": "https://www.konstanz.de/798774"
+            },
             {
               "label": "Abendführung und Vorstellung der Ausstellungsbroschüre in der Wessenberg-Galerie",
               "date": "2026-11-08T16:00:00.000Z",
@@ -121,24 +136,9 @@
               "label": "Konzert mit jazzCube",
               "date": "2026-11-02T08:24:00.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/konzert+seze+jazzcube"
-            },
-            {
-              "label": "Veranstaltung für Kinder (4-6 Jahre) \"Super Sache: Sand\"",
-              "date": "2026-10-24T15:00:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/veranstaltung+fuer+kinder+_4-6+jahre_+_super+sache_+sand_"
-            },
-            {
-              "label": "Familienführung im Rahmen der Ausstellung „Lebensfreude und Rausch. Der Tanz in der Kunst“",
-              "date": "2026-10-22T15:00:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/familienfuehrung+im+rahmen+der+ausstellung+_lebensfreude+und+rausch_+der+tanz+in+der+kunst_"
-            },
-            {
-              "label": "2. Philharmonisches Konzert: Unter dem Titel „Skandalös“ stellt die Bodensee Philharmonie am 21. und 23. Oktober im Konzil Konstanz drei Werke nebeneinander, die Erwartungen auf unterschiedliche…",
-              "date": "2026-10-20T13:12:35.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/2_+philharmonische+konzert_+wenn+das+unerhoerte+irgendwann+vertraut+klingt"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "en": {
       "canton": "SH",
@@ -243,13 +243,28 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
+              "date": "2026-11-12T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/fasnaechtliche+fundstuecke+beim+museumsflohmarkt"
+            },
+            {
+              "label": "Veranstaltung für Kinder (4-6 Jahre) \"Das verschlafene Murmeltier\"",
+              "date": "2026-11-12T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/das+verschlafene+murmeltier"
+            },
+            {
+              "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
+              "date": "2026-11-12T16:00:00.000Z",
+              "url": "https://www.konstanz.de/798774"
+            },
             {
               "label": "Abendführung und Vorstellung der Ausstellungsbroschüre in der Wessenberg-Galerie",
               "date": "2026-11-08T16:00:00.000Z",
@@ -264,24 +279,9 @@
               "label": "Konzert mit jazzCube",
               "date": "2026-11-02T08:24:00.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/konzert+seze+jazzcube"
-            },
-            {
-              "label": "Veranstaltung für Kinder (4-6 Jahre) \"Super Sache: Sand\"",
-              "date": "2026-10-24T15:00:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/veranstaltung+fuer+kinder+_4-6+jahre_+_super+sache_+sand_"
-            },
-            {
-              "label": "Familienführung im Rahmen der Ausstellung „Lebensfreude und Rausch. Der Tanz in der Kunst“",
-              "date": "2026-10-22T15:00:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/familienfuehrung+im+rahmen+der+ausstellung+_lebensfreude+und+rausch_+der+tanz+in+der+kunst_"
-            },
-            {
-              "label": "2. Philharmonisches Konzert: Unter dem Titel „Skandalös“ stellt die Bodensee Philharmonie am 21. und 23. Oktober im Konzil Konstanz drei Werke nebeneinander, die Erwartungen auf unterschiedliche…",
-              "date": "2026-10-20T13:12:35.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/2_+philharmonische+konzert_+wenn+das+unerhoerte+irgendwann+vertraut+klingt"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +303,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "de": {
       "canton": "SH",
@@ -386,13 +386,28 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
+              "date": "2026-11-12T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/fasnaechtliche+fundstuecke+beim+museumsflohmarkt"
+            },
+            {
+              "label": "Veranstaltung für Kinder (4-6 Jahre) \"Das verschlafene Murmeltier\"",
+              "date": "2026-11-12T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/das+verschlafene+murmeltier"
+            },
+            {
+              "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
+              "date": "2026-11-12T16:00:00.000Z",
+              "url": "https://www.konstanz.de/798774"
+            },
             {
               "label": "Abendführung und Vorstellung der Ausstellungsbroschüre in der Wessenberg-Galerie",
               "date": "2026-11-08T16:00:00.000Z",
@@ -407,24 +422,9 @@
               "label": "Konzert mit jazzCube",
               "date": "2026-11-02T08:24:00.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/konzert+seze+jazzcube"
-            },
-            {
-              "label": "Veranstaltung für Kinder (4-6 Jahre) \"Super Sache: Sand\"",
-              "date": "2026-10-24T15:00:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/veranstaltung+fuer+kinder+_4-6+jahre_+_super+sache_+sand_"
-            },
-            {
-              "label": "Familienführung im Rahmen der Ausstellung „Lebensfreude und Rausch. Der Tanz in der Kunst“",
-              "date": "2026-10-22T15:00:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/familienfuehrung+im+rahmen+der+ausstellung+_lebensfreude+und+rausch_+der+tanz+in+der+kunst_"
-            },
-            {
-              "label": "2. Philharmonisches Konzert: Unter dem Titel „Skandalös“ stellt die Bodensee Philharmonie am 21. und 23. Oktober im Konzil Konstanz drei Werke nebeneinander, die Erwartungen auf unterschiedliche…",
-              "date": "2026-10-20T13:12:35.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/2_+philharmonische+konzert_+wenn+das+unerhoerte+irgendwann+vertraut+klingt"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -446,7 +446,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "fr": {
       "canton": "SH",
@@ -529,13 +529,28 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
+              "date": "2026-11-12T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/fasnaechtliche+fundstuecke+beim+museumsflohmarkt"
+            },
+            {
+              "label": "Veranstaltung für Kinder (4-6 Jahre) \"Das verschlafene Murmeltier\"",
+              "date": "2026-11-12T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/das+verschlafene+murmeltier"
+            },
+            {
+              "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
+              "date": "2026-11-12T16:00:00.000Z",
+              "url": "https://www.konstanz.de/798774"
+            },
             {
               "label": "Abendführung und Vorstellung der Ausstellungsbroschüre in der Wessenberg-Galerie",
               "date": "2026-11-08T16:00:00.000Z",
@@ -550,24 +565,9 @@
               "label": "Konzert mit jazzCube",
               "date": "2026-11-02T08:24:00.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/konzert+seze+jazzcube"
-            },
-            {
-              "label": "Veranstaltung für Kinder (4-6 Jahre) \"Super Sache: Sand\"",
-              "date": "2026-10-24T15:00:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/veranstaltung+fuer+kinder+_4-6+jahre_+_super+sache_+sand_"
-            },
-            {
-              "label": "Familienführung im Rahmen der Ausstellung „Lebensfreude und Rausch. Der Tanz in der Kunst“",
-              "date": "2026-10-22T15:00:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/familienfuehrung+im+rahmen+der+ausstellung+_lebensfreude+und+rausch_+der+tanz+in+der+kunst_"
-            },
-            {
-              "label": "2. Philharmonisches Konzert: Unter dem Titel „Skandalös“ stellt die Bodensee Philharmonie am 21. und 23. Oktober im Konzil Konstanz drei Werke nebeneinander, die Erwartungen auf unterschiedliche…",
-              "date": "2026-10-20T13:12:35.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/2_+philharmonische+konzert_+wenn+das+unerhoerte+irgendwann+vertraut+klingt"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +589,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "ed3da1b021764bc17f312c832265ca2c6884c01c9a7439e3b7f09deb81455d1f",
+  "updatedAt": "2026-11-13T12:13:48.902Z",
+  "contentHash": "13c536a394e5fec47c347a575bf1e51003f64a4406cdc66e19caa2b413e21eca",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-12T15:12:29.228Z",
+      "updatedAt": "2026-11-12T23:38:44.682Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-12T16:56:35.952Z",
+      "updatedAt": "2026-11-13T01:17:34.993Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-12T22:54:56.926Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "18",
-          "note": "offerta mediana 600 CHF"
+          "note": "offerta mediana 980 CHF"
         }
       ],
       "dataBlocks": [
@@ -70,7 +70,7 @@
           "items": [
             {
               "label": "AG9392",
-              "value": "5400 CHF",
+              "value": "6200 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-25T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58829"
@@ -83,16 +83,16 @@
               "url": "https://www.auktion-ag.ch/de/auction/58830"
             },
             {
-              "label": "AG7647",
-              "value": "2600 CHF",
+              "label": "AG8952",
+              "value": "3400 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-25T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58827"
+              "url": "https://www.auktion-ag.ch/de/auction/58828"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -101,12 +101,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "11 °C",
-              "detail": "oggi da 7 a 11 °C"
+              "value": "6 °C",
+              "detail": "oggi da 0 a 8 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -144,7 +144,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -224,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "en": {
       "canton": "AG",
@@ -241,7 +241,7 @@
         {
           "label": "Plate auctions running",
           "value": "18",
-          "note": "typical bid 600 CHF"
+          "note": "typical bid 980 CHF"
         }
       ],
       "dataBlocks": [
@@ -267,7 +267,7 @@
           "items": [
             {
               "label": "AG9392",
-              "value": "5,400 CHF",
+              "value": "6,200 CHF",
               "detail": "current bid",
               "date": "2026-11-25T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58829"
@@ -280,16 +280,16 @@
               "url": "https://www.auktion-ag.ch/de/auction/58830"
             },
             {
-              "label": "AG7647",
-              "value": "2,600 CHF",
+              "label": "AG8952",
+              "value": "3,400 CHF",
               "detail": "current bid",
               "date": "2026-11-25T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58827"
+              "url": "https://www.auktion-ag.ch/de/auction/58828"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -298,12 +298,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "11 °C",
-              "detail": "today from 7 to 11 °C"
+              "value": "6 °C",
+              "detail": "today from 0 to 8 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -341,7 +341,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "de": {
       "canton": "AG",
@@ -434,7 +434,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "18",
-          "note": "mittleres Gebot 600 CHF"
+          "note": "mittleres Gebot 980 CHF"
         }
       ],
       "dataBlocks": [
@@ -460,7 +460,7 @@
           "items": [
             {
               "label": "AG9392",
-              "value": "5’400 CHF",
+              "value": "6’200 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-25T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58829"
@@ -473,16 +473,16 @@
               "url": "https://www.auktion-ag.ch/de/auction/58830"
             },
             {
-              "label": "AG7647",
-              "value": "2’600 CHF",
+              "label": "AG8952",
+              "value": "3’400 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-25T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58827"
+              "url": "https://www.auktion-ag.ch/de/auction/58828"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -491,12 +491,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "11 °C",
-              "detail": "heute 7 bis 11 °C"
+              "value": "6 °C",
+              "detail": "heute 0 bis 8 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -534,7 +534,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -610,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "fr": {
       "canton": "AG",
@@ -627,7 +627,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "18",
-          "note": "offre centrale 600 CHF"
+          "note": "offre centrale 980 CHF"
         }
       ],
       "dataBlocks": [
@@ -653,7 +653,7 @@
           "items": [
             {
               "label": "AG9392",
-              "value": "5 400 CHF",
+              "value": "6 200 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-25T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58829"
@@ -666,16 +666,16 @@
               "url": "https://www.auktion-ag.ch/de/auction/58830"
             },
             {
-              "label": "AG7647",
-              "value": "2 600 CHF",
+              "label": "AG8952",
+              "value": "3 400 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-25T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58827"
+              "url": "https://www.auktion-ag.ch/de/auction/58828"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -684,12 +684,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 7 à 11 °C"
+              "value": "6 °C",
+              "detail": "aujourd’hui de 0 à 8 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -727,7 +727,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -799,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "2fa91c0ed7a205eac165d2f03b01417713fe0a51ed71231921116f9b3c39c15d",
+  "updatedAt": "2026-11-13T12:13:48.902Z",
+  "contentHash": "0d8886bab405747c32f30dd3082b98ae7e4fdac794614aded44e4a63f8f4b3ee",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-12T15:12:29.228Z",
+      "updatedAt": "2026-11-12T23:38:44.682Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-12T16:56:35.952Z",
+      "updatedAt": "2026-11-13T01:17:34.993Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-12T22:54:56.926Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "10",
-          "note": "offerta mediana 510 CHF"
+          "note": "offerta mediana 520 CHF"
         }
       ],
       "dataBlocks": [
@@ -102,7 +102,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "9 °C",
-              "detail": "oggi da 4 a 9 °C"
+              "value": "3 °C",
+              "detail": "oggi da -2 a 4 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -134,6 +134,11 @@
               "url": "https://www.h-och.ch/ueber-uns/news/gewinn-wissenschaftspreis-2026-in-mikrochirurgie-2026-11-12/"
             },
             {
+              "label": "Siebte Sport- und Gesundheitskonferenz",
+              "date": "2026-11-10",
+              "url": "https://www.regierung.li/medienportal-medium/16182/235077/0/medienmitteilung"
+            },
+            {
               "label": "Dr. med. Timur Yurttas gewinnt den Clinical Research Grant 2026",
               "date": "2026-11-09",
               "url": "https://www.h-och.ch/ueber-uns/news/dr-med-timur-yurttas-gewinnt-den-clinical-research-grant-2026-2026-11-09/"
@@ -147,14 +152,9 @@
               "label": "Runder Tisch Gesundheitswesen: Kostendämpfung und Versorgungssicherheit im Fokus",
               "date": "2026-10-23",
               "url": "https://www.regierung.li/medienportal-medium/16182/235011/0/medienmitteilung"
-            },
-            {
-              "label": "Innovatives Ostschweizer Projekt für eine nahtlose Patientenversorgung",
-              "date": "2026-10-23",
-              "url": "https://www.h-och.ch/ueber-uns/news/innovatives-ostschweizer-projekt-fuer-eine-nahtlose-patientenversorgung-2026-10-23/"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "en": {
       "canton": "SG",
@@ -251,7 +251,7 @@
         {
           "label": "Plate auctions running",
           "value": "10",
-          "note": "typical bid 510 CHF"
+          "note": "typical bid 520 CHF"
         }
       ],
       "dataBlocks": [
@@ -309,7 +309,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -318,12 +318,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "9 °C",
-              "detail": "today from 4 to 9 °C"
+              "value": "3 °C",
+              "detail": "today from -2 to 4 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -341,6 +341,11 @@
               "url": "https://www.h-och.ch/ueber-uns/news/gewinn-wissenschaftspreis-2026-in-mikrochirurgie-2026-11-12/"
             },
             {
+              "label": "Siebte Sport- und Gesundheitskonferenz",
+              "date": "2026-11-10",
+              "url": "https://www.regierung.li/medienportal-medium/16182/235077/0/medienmitteilung"
+            },
+            {
               "label": "Dr. med. Timur Yurttas gewinnt den Clinical Research Grant 2026",
               "date": "2026-11-09",
               "url": "https://www.h-och.ch/ueber-uns/news/dr-med-timur-yurttas-gewinnt-den-clinical-research-grant-2026-2026-11-09/"
@@ -354,14 +359,9 @@
               "label": "Runder Tisch Gesundheitswesen: Kostendämpfung und Versorgungssicherheit im Fokus",
               "date": "2026-10-23",
               "url": "https://www.regierung.li/medienportal-medium/16182/235011/0/medienmitteilung"
-            },
-            {
-              "label": "Innovatives Ostschweizer Projekt für eine nahtlose Patientenversorgung",
-              "date": "2026-10-23",
-              "url": "https://www.h-och.ch/ueber-uns/news/innovatives-ostschweizer-projekt-fuer-eine-nahtlose-patientenversorgung-2026-10-23/"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "de": {
       "canton": "SG",
@@ -454,7 +454,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "10",
-          "note": "mittleres Gebot 510 CHF"
+          "note": "mittleres Gebot 520 CHF"
         }
       ],
       "dataBlocks": [
@@ -512,7 +512,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -521,12 +521,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "9 °C",
-              "detail": "heute 4 bis 9 °C"
+              "value": "3 °C",
+              "detail": "heute -2 bis 4 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -544,6 +544,11 @@
               "url": "https://www.h-och.ch/ueber-uns/news/gewinn-wissenschaftspreis-2026-in-mikrochirurgie-2026-11-12/"
             },
             {
+              "label": "Siebte Sport- und Gesundheitskonferenz",
+              "date": "2026-11-10",
+              "url": "https://www.regierung.li/medienportal-medium/16182/235077/0/medienmitteilung"
+            },
+            {
               "label": "Dr. med. Timur Yurttas gewinnt den Clinical Research Grant 2026",
               "date": "2026-11-09",
               "url": "https://www.h-och.ch/ueber-uns/news/dr-med-timur-yurttas-gewinnt-den-clinical-research-grant-2026-2026-11-09/"
@@ -557,14 +562,9 @@
               "label": "Runder Tisch Gesundheitswesen: Kostendämpfung und Versorgungssicherheit im Fokus",
               "date": "2026-10-23",
               "url": "https://www.regierung.li/medienportal-medium/16182/235011/0/medienmitteilung"
-            },
-            {
-              "label": "Innovatives Ostschweizer Projekt für eine nahtlose Patientenversorgung",
-              "date": "2026-10-23",
-              "url": "https://www.h-och.ch/ueber-uns/news/innovatives-ostschweizer-projekt-fuer-eine-nahtlose-patientenversorgung-2026-10-23/"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "fr": {
       "canton": "SG",
@@ -657,7 +657,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "10",
-          "note": "offre centrale 510 CHF"
+          "note": "offre centrale 520 CHF"
         }
       ],
       "dataBlocks": [
@@ -715,7 +715,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -724,12 +724,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 4 à 9 °C"
+              "value": "3 °C",
+              "detail": "aujourd’hui de -2 à 4 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -747,6 +747,11 @@
               "url": "https://www.h-och.ch/ueber-uns/news/gewinn-wissenschaftspreis-2026-in-mikrochirurgie-2026-11-12/"
             },
             {
+              "label": "Siebte Sport- und Gesundheitskonferenz",
+              "date": "2026-11-10",
+              "url": "https://www.regierung.li/medienportal-medium/16182/235077/0/medienmitteilung"
+            },
+            {
               "label": "Dr. med. Timur Yurttas gewinnt den Clinical Research Grant 2026",
               "date": "2026-11-09",
               "url": "https://www.h-och.ch/ueber-uns/news/dr-med-timur-yurttas-gewinnt-den-clinical-research-grant-2026-2026-11-09/"
@@ -760,14 +765,9 @@
               "label": "Runder Tisch Gesundheitswesen: Kostendämpfung und Versorgungssicherheit im Fokus",
               "date": "2026-10-23",
               "url": "https://www.regierung.li/medienportal-medium/16182/235011/0/medienmitteilung"
-            },
-            {
-              "label": "Innovatives Ostschweizer Projekt für eine nahtlose Patientenversorgung",
-              "date": "2026-10-23",
-              "url": "https://www.h-och.ch/ueber-uns/news/innovatives-ostschweizer-projekt-fuer-eine-nahtlose-patientenversorgung-2026-10-23/"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     }
   }
 }

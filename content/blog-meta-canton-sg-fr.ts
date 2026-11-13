@@ -102,6 +102,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.incidenti-a1-goldach-san-gallo.title': 'Deux accidents sur l’A1 : des embouteillages à Goldach et St.Gallen',
     'blog.article.incidenti-a1-goldach-san-gallo.excerpt': 'Le 11 novembre 2026, deux accidents sur l’A1, à Goldach et St.Gallen, ont causé d’importants ralentissements et des embouteillages dans la circulation du soir.',
     'blog.article.incidenti-a1-goldach-san-gallo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.votazione-fondo-rete-gas-wil.title': 'Référendum sur le fonds pour le démantèlement du réseau de gaz TBW à Wil',
+    'blog.article.votazione-fondo-rete-gas-wil.excerpt': 'Le 29 novembre 2026 aura lieu la votation populaire sur le règlement instituant le fonds pour la mise hors service et le démantèlement du réseau de gaz des entreprises techniques de Wil, les TBW.',
+    'blog.article.votazione-fondo-rete-gas-wil.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;

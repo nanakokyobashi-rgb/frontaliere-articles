@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "b2eacde0aec087addadf18a10c3f28108a08757d620f4ea59396d89962706a24",
+  "updatedAt": "2026-11-13T12:13:48.902Z",
+  "contentHash": "754da4b1479eba14ff9f9b336e20d93b5b32080303be9594aaac83288f563bfc",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-12T15:12:29.228Z",
+      "updatedAt": "2026-11-12T23:38:44.682Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-12T16:56:35.952Z",
+      "updatedAt": "2026-11-13T01:17:34.993Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-12T22:54:56.926Z",
       "keyFacts": 0
     }
   ],
@@ -92,7 +92,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -101,12 +101,12 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "10 °C",
-              "detail": "oggi da 7 a 11 °C"
+              "value": "6 °C",
+              "detail": "oggi da 1 a 6 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "en": {
       "canton": "SZ",
@@ -274,7 +274,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -283,12 +283,12 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "10 °C",
-              "detail": "today from 7 to 11 °C"
+              "value": "6 °C",
+              "detail": "today from 1 to 6 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -311,7 +311,7 @@
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -387,7 +387,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "de": {
       "canton": "SZ",
@@ -452,7 +452,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -461,12 +461,12 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "10 °C",
-              "detail": "heute 7 bis 11 °C"
+              "value": "6 °C",
+              "detail": "heute 1 bis 6 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -489,7 +489,7 @@
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -565,7 +565,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "fr": {
       "canton": "SZ",
@@ -630,7 +630,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-12T15:12:29.228Z"
+          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "meteo",
@@ -639,12 +639,12 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 7 à 11 °C"
+              "value": "6 °C",
+              "detail": "aujourd’hui de 1 à 6 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-12T16:56:35.952Z"
+          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -667,7 +667,7 @@
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -739,7 +739,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     }
   }
 }
