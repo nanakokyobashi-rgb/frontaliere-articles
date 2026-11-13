@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-fiscalita-svizzera-tre-livelli.webp",
+      "sha256": "5531970c5ccbc05efcbe9b2a55891b308666ff02c78cc8e4456d1f79bd4964f8"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-fiscalita-svizzera-tre-livelli-480w.webp",
+      "sha256": "851c7e6c3c7e787878c28f67506fd49c431d5aab46bd995cf4c4ea03a3768311"
+    }
+  ]
 }
