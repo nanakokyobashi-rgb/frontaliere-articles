@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-13T12:13:48.902Z",
-  "contentHash": "8f4e2d049837b5357196749d6803ddd0085dfdd9d654cec724e47079647b402b",
+  "updatedAt": "2026-11-13T12:18:19.254Z",
+  "contentHash": "8fcf0b5b1d38d45046564f71130d52f4721cd6ec12a112829418426bc6a07fa4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Referendum sul fondo per dismissione rete gas TBW a Wil",
+          "url": "/articoli-san-gallo/votazione-fondo-rete-gas-wil/",
+          "excerpt": "Il 29 novembre 2026 si terrà la votazione popolare sul regolamento che istituisce il fondo per la dismissione e lo smantellamento della rete del gas delle aziende tecniche di Wil, le TBW.",
+          "date": "2026-11-13T12:14:26.742Z"
+        },
+        {
           "title": "Due incidenti sulla A1: code a Goldach e St.Gallen",
           "url": "/articoli-san-gallo/incidenti-a1-goldach-san-gallo/",
           "excerpt": "L'11 novembre 2026 due incidenti sulla A1, a Goldach e St.Gallen, hanno causato forti rallentamenti e code nel traffico serale.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/voto-regolamento-fondo-gas-wil/",
           "excerpt": "La votazione riguarda il regolamento per il fondo destinato alla dismissione della rete gas TBW, che misura circa 570 km.",
           "date": "2026-11-07T08:11:06.917Z"
-        },
-        {
-          "title": "11'341 persone in cerca di lavoro a fine ottobre 2026 nel Canton San Gallo",
-          "url": "/articoli-san-gallo/meno-cercatori-lavoro-ottobre/",
-          "excerpt": "A fine ottobre 2026, il RAV del Cantone San Gallo contava 11'341 persone in cerca di lavoro, di cui 5'784 disoccupate.",
-          "date": "2026-11-07T01:00:43.057Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T12:18:19.254Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Referendum on the fund for decommissioning the TBW gas network in Wil",
+          "url": "/en/st-gallen-articles/wil-gas-network-fund-vote/",
+          "excerpt": "On November 29, 2026, a popular vote will be held on the regulation establishing the fund for the decommissioning and dismantling of the gas network of Wil’s technical services, TBW.",
+          "date": "2026-11-13T12:14:26.742Z"
+        },
+        {
           "title": "Two accidents on the A1: traffic jams in Goldach and St.Gallen",
           "url": "/en/st-gallen-articles/a1-crashes-goldach-st-gallen/",
           "excerpt": "On November 11, 2026, two accidents on the A1, in Goldach and St.Gallen, caused heavy delays and traffic queues during the evening commute.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/vote-regulation-gas-fund-wil/",
           "excerpt": "The vote concerns the regulations for the fund intended for the decommissioning of the TBW gas network, which measures approximately 570 km.",
           "date": "2026-11-07T08:11:06.917Z"
-        },
-        {
-          "title": "11,341 people seeking work in St. Gallen, end-Oct 2026",
-          "url": "/en/st-gallen-articles/fewer-job-seekers-october/",
-          "excerpt": "At the end of October 2026, the RAV of the Canton of St. Gallen counted 11'341 jobseekers, of whom 5'784 were unemployed.",
-          "date": "2026-11-07T01:00:43.057Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T12:18:19.254Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Referendum über den Fonds für die Stilllegung des Gasnetzes der TBW in Wil",
+          "url": "/de/st-gallen-artikel/abstimmung-fonds-gasnetz-wil/",
+          "excerpt": "Am 29. November 2026 findet die Volksabstimmung über das Reglement statt, mit dem der Fonds für die Stilllegung und den Rückbau des Gasnetzes der Technischen Betriebe Wil (TBW) eingerichtet wird.",
+          "date": "2026-11-13T12:14:26.742Z"
+        },
+        {
           "title": "Zwei Unfälle auf der A1: Staus in Goldach und St.Gallen",
           "url": "/de/st-gallen-artikel/unfaelle-a1-goldach-st-gallen/",
           "excerpt": "Am 11. November 2026 haben zwei Unfälle auf der A1 in Goldach und St.Gallen im Abendverkehr starke Verkehrsbehinderungen und Staus verursacht.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/abstimmung-reglement-fonds-gas-wil/",
           "excerpt": "Bei der Abstimmung geht es um das Reglement für den Fonds zur Stilllegung des TBW-Gasnetzes, das rund 570 km lang ist.",
           "date": "2026-11-07T08:11:06.917Z"
-        },
-        {
-          "title": "11'341 Stellensuchende Ende Oktober 2026 im Kanton St. Gallen",
-          "url": "/de/st-gallen-artikel/weniger-stellensuchende-oktober/",
-          "excerpt": "Ende Oktober 2026 zählte das RAV des Kantons St. Gallen 11'341 Stellensuchende, davon 5'784 Arbeitslose.",
-          "date": "2026-11-07T01:00:43.057Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T12:18:19.254Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Référendum sur le fonds pour le démantèlement du réseau de gaz TBW à Wil",
+          "url": "/fr/articles-saint-gall/vote-fonds-reseau-gaz-wil/",
+          "excerpt": "Le 29 novembre 2026 aura lieu la votation populaire sur le règlement instituant le fonds pour la mise hors service et le démantèlement du réseau de gaz des entreprises techniques de Wil, les TBW.",
+          "date": "2026-11-13T12:14:26.742Z"
+        },
+        {
           "title": "Deux accidents sur l’A1 : des embouteillages à Goldach et St.Gallen",
           "url": "/fr/articles-saint-gall/accidents-a1-goldach-saint-gall/",
           "excerpt": "Le 11 novembre 2026, deux accidents sur l’A1, à Goldach et St.Gallen, ont causé d’importants ralentissements et des embouteillages dans la circulation du soir.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/vote-reglement-fonds-gaz-wil/",
           "excerpt": "Le vote porte sur le règlement du fonds destiné au démantèlement du réseau de gaz TBW, qui mesure environ 570 km.",
           "date": "2026-11-07T08:11:06.917Z"
-        },
-        {
-          "title": "11'341 demandeurs d'emploi à Saint-Gall fin oct. 2026",
-          "url": "/fr/articles-saint-gall/moins-chercheurs-emploi-octobre/",
-          "excerpt": "Fin octobre 2026, le RAV du canton de Saint-Gall comptait 11'341 personnes à la recherche d'un emploi, dont 5'784 chômeurs.",
-          "date": "2026-11-07T01:00:43.057Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T12:18:19.254Z"
     }
   }
 }
