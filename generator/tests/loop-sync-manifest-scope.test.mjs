@@ -249,6 +249,27 @@ test('check-issue-already-resolved: il coupling adattato non rientra nel traspor
   assert.match(entry.reason, /isolat/i);
 });
 
+test('crawler artifact test: il fixture con dipendenze corpus resta adapted (#3809)', () => {
+  const entry = byPath.get('generator/tests/crawler-cross-repo-artifacts.test.mjs');
+  const closer = byPath.get('scripts/ci/close-recovered-failure-issues.mjs');
+  const manifestEntry = byPath.get('scripts/ci/loop-sync-manifest.json');
+  assert.ok(entry, 'crawler-cross-repo-artifacts.test.mjs deve restare censito');
+  assert.ok(closer, 'close-recovered-failure-issues.mjs deve restare censito');
+  assert.ok(manifestEntry, 'loop-sync-manifest.json deve restare censito');
+  assert.equal(entry.mode, 'adapted');
+  assert.equal(
+    entry.adaptationIssue,
+    'https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3809',
+  );
+  assert.equal(closer.mode, 'adapted');
+  assert.equal(manifestEntry.mode, 'corpus-only');
+  assert.match(entry.reason, /data\/jobs\/by-crawler/);
+  assert.match(entry.reason, /close-recovered-failure-issues/);
+  assert.match(entry.reason, /corpus-only/);
+  assert.match(entry.reason, /isolat/i);
+  assert.equal('couplingSnapshot' in entry, false, 'uno snapshot di coupling non governa una voce adapted');
+});
+
 test('topic sources: i gemelli che importano gscOrphans non rientrano nel trasporto isolato (#3504)', () => {
   for (const rel of [
     'generator/scripts/lib/topic-sources/googleSuggest.mjs',
