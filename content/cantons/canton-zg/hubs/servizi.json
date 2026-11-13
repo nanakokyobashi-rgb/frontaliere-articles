@@ -4,18 +4,13 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "servizi",
-  "updatedAt": "2026-11-13T12:13:48.902Z",
-  "contentHash": "97e637fd4b1fd98843daead82afacfb4ddfb8ad8b2a1053e4f4047eb4eb40058",
+  "updatedAt": "2026-11-13T16:35:44.669Z",
+  "contentHash": "8f25554288c9b93fd38b832e3f09158f1aca8441a179e01d56d342fa432eeae2",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-11-08T11:18:20.402Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-11-13T01:17:34.993Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -52,20 +47,6 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-08T11:18:20.402Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Zug",
-              "value": "5 °C",
-              "detail": "oggi da 1 a 6 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -183,7 +164,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T16:35:44.669Z"
     },
     "en": {
       "canton": "ZG",
@@ -213,20 +194,6 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-08T11:18:20.402Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Zug",
-              "value": "5 °C",
-              "detail": "today from 1 to 6 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -340,7 +307,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T16:35:44.669Z"
     },
     "de": {
       "canton": "ZG",
@@ -370,20 +337,6 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-08T11:18:20.402Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Zug",
-              "value": "5 °C",
-              "detail": "heute 1 bis 6 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -497,7 +450,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T16:35:44.669Z"
     },
     "fr": {
       "canton": "ZG",
@@ -527,20 +480,6 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-08T11:18:20.402Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Zug",
-              "value": "5 °C",
-              "detail": "aujourd’hui de 1 à 6 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-13T01:17:34.993Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -650,7 +589,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T16:35:44.669Z"
     }
   }
 }

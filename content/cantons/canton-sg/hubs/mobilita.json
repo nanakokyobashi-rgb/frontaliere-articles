@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-13T12:13:48.902Z",
-  "contentHash": "fbf9be508b3b4a2bb1d52cebeac773efac8ba10cfb2070efec3a3c98dbe5832e",
+  "updatedAt": "2026-11-13T16:35:44.669Z",
+  "contentHash": "65b33570963e94de70f784f3c0010165cae88a5ff581806de8adfbd9b5b26fe5",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "16",
+          "value": "15",
           "note": "segnalazioni aggiornate: 13 novembre 2026"
         }
       ],
@@ -153,10 +153,10 @@
               "date": "2026-11-11T11:00:00.000Z"
             },
             {
-              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità…",
+              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Causa: veicoli di manutenzione lenti…",
               "value": "Cantiere",
-              "detail": "fine prevista: 13 novembre 2026",
-              "date": "2026-04-10T06:30:00.000Z"
+              "detail": "fine prevista: 8 dicembre 2026",
+              "date": "2026-04-10T08:24:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -286,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T16:35:44.669Z"
     },
     "en": {
       "canton": "SG",
@@ -306,7 +306,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "16",
+          "value": "15",
           "note": "reports as of 13 November 2026"
         }
       ],
@@ -417,10 +417,10 @@
               "date": "2026-11-11T11:00:00.000Z"
             },
             {
-              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità…",
+              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Causa: veicoli di manutenzione lenti…",
               "value": "Roadworks",
-              "detail": "until 13 November 2026",
-              "date": "2026-04-10T06:30:00.000Z"
+              "detail": "until 8 December 2026",
+              "date": "2026-04-10T08:24:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -549,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T16:35:44.669Z"
     },
     "de": {
       "canton": "SG",
@@ -569,7 +569,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "16",
+          "value": "15",
           "note": "Meldungen vom 13. November 2026"
         }
       ],
@@ -680,10 +680,10 @@
               "date": "2026-11-11T11:00:00.000Z"
             },
             {
-              "label": "A13 Sargans <-> St. Margrethen zwischen Anschluss Oberriet und Anschluss Haag Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: veränderte Verkehrsführung Zusatz 1…",
+              "label": "A13 Sargans <-> St. Margrethen zwischen Anschluss Oberriet und Anschluss Haag Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Ursache: Wanderbaustelle Verkehrsführung: Fahrbahnverengung auf…",
               "value": "Baustelle",
-              "detail": "bis 13. November 2026",
-              "date": "2026-04-10T06:30:00.000Z"
+              "detail": "bis 8. Dezember 2026",
+              "date": "2026-04-10T08:24:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -812,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T16:35:44.669Z"
     },
     "fr": {
       "canton": "SG",
@@ -832,7 +832,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "16",
+          "value": "15",
           "note": "signalements au 13 novembre 2026"
         }
       ],
@@ -943,10 +943,10 @@
               "date": "2026-11-11T11:00:00.000Z"
             },
             {
-              "label": "A13 Sargans <-> St. Margrethen entre Jonction autoroutière Oberriet et Jonction autoroutière Haag Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: nouveau plan de circulation…",
+              "label": "A13 Sargans <-> St. Margrethen entre Jonction autoroutière Oberriet et Jonction autoroutière Haag Situation: trafic perturbé travaux, longueur [km] 2.0 Raison: véhicules de maintenance lents Gestion…",
               "value": "Chantier",
-              "detail": "jusqu’au 13 novembre 2026",
-              "date": "2026-04-10T06:30:00.000Z"
+              "detail": "jusqu’au 8 décembre 2026",
+              "date": "2026-04-10T08:24:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -1076,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T16:35:44.669Z"
     }
   }
 }

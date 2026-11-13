@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-13T12:13:48.902Z",
-  "contentHash": "d03f193c7f5ddeaa9bd1f5d3668ffcc61d6c50c0f1e7749349b2835fc7b0408a",
+  "updatedAt": "2026-11-13T16:35:44.669Z",
+  "contentHash": "485c23dfc8efbd2d6a55d9ca48e6355bf53cfa62a08348f900214ba1dce9b102",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "2",
+          "value": "1",
           "note": "segnalazioni aggiornate: 13 novembre 2026"
         }
       ],
@@ -37,12 +37,6 @@
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
-            {
-              "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 13 novembre 2026",
-              "date": "2026-10-05T06:20:00.000Z"
-            },
             {
               "label": "H8 Wattwil -> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza…",
               "value": "Cantiere",
@@ -111,7 +105,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T16:35:44.669Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -121,7 +115,7 @@
       "keyFacts": [
         {
           "label": "Roadworks active or imminent",
-          "value": "2",
+          "value": "1",
           "note": "reports as of 13 November 2026"
         }
       ],
@@ -131,12 +125,6 @@
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
-            {
-              "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
-              "value": "Roadworks",
-              "detail": "until 13 November 2026",
-              "date": "2026-10-05T06:20:00.000Z"
-            },
             {
               "label": "H8 Wattwil -> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza…",
               "value": "Roadworks",
@@ -205,7 +193,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T16:35:44.669Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -215,7 +203,7 @@
       "keyFacts": [
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "2",
+          "value": "1",
           "note": "Meldungen vom 13. November 2026"
         }
       ],
@@ -225,12 +213,6 @@
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
-            {
-              "label": "459 Waldstatt <-> Appenzell zwischen Ortschaft Waldstatt und Ortschaft Hundwil Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1…",
-              "value": "Baustelle",
-              "detail": "bis 13. November 2026",
-              "date": "2026-10-05T06:20:00.000Z"
-            },
             {
               "label": "H8 Wattwil -> St. Gallen Ortschaft Herisau Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
               "value": "Baustelle",
@@ -299,7 +281,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T16:35:44.669Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -309,7 +291,7 @@
       "keyFacts": [
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "2",
+          "value": "1",
           "note": "signalements au 13 novembre 2026"
         }
       ],
@@ -319,12 +301,6 @@
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
-            {
-              "label": "459 Waldstatt <-> Appenzell entre Localité Waldstatt et Localité Hundwil Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: circulation alternée à une voie Complément 1…",
-              "value": "Chantier",
-              "detail": "jusqu’au 13 novembre 2026",
-              "date": "2026-10-05T06:20:00.000Z"
-            },
             {
               "label": "H8 Wattwil -> St-Gall Localité Herisau Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de largeur largeur de…",
               "value": "Chantier",
@@ -393,7 +369,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-13T16:35:44.669Z"
     }
   }
 }
